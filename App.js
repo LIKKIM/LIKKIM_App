@@ -15,23 +15,49 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 
 // 页面组件
 function WalletScreen() {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedAddress, setSelectedAddress] = useState("");
+
+  const cryptoAddresses = {
+    Bitcoin: "1BoatSLRHtKNngkdXEeobR76b53LETtpyT",
+    Ethereum: "0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe",
+    USDT: "1KAt6STtisWMMVo5XGdos9P7DBNNsFfjx7",
+  };
+
+  const handleCardPress = (cryptoName) => {
+    setSelectedAddress(cryptoAddresses[cryptoName]);
+    setModalVisible(true);
+  };
+
   return (
     <View style={styles.container}>
-      <View style={styles.card}>
-        <Text style={styles.cardText}>Bitcoin</Text>
-      </View>
-      <View style={styles.card}>
-        <Text style={styles.cardText}>Ethereum</Text>
-      </View>
-      <View style={styles.card}>
-        <Text style={styles.cardText}>USDT</Text>
-      </View>
-      <TouchableOpacity
-        style={styles.roundButton}
-        onPress={() => console.log("Add Account Pressed")}
+      {Object.entries(cryptoAddresses).map(([name, address]) => (
+        <View key={name} style={styles.card}>
+          <TouchableOpacity onPress={() => handleCardPress(name)}>
+            <Text style={styles.cardText}>{name}</Text>
+          </TouchableOpacity>
+        </View>
+      ))}
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}
       >
-        <Text style={styles.buttonText}>Add Account</Text>
-      </TouchableOpacity>
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalTitle}>Address:</Text>
+            <Text style={styles.modalText}>{selectedAddress}</Text>
+            <TouchableOpacity
+              style={styles.cancelButton}
+              onPress={() => setModalVisible(false)}
+            >
+              <Text style={styles.cancelButtonText}>Close</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }
