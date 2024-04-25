@@ -1,11 +1,12 @@
-import React from "react";
-import { StatusBar } from "expo-status-bar";
+import React, { useState } from "react";
 import {
+  Modal,
   Button,
   StyleSheet,
   Text,
   View,
   SafeAreaView,
+  StatusBar,
   TouchableOpacity,
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
@@ -35,6 +36,19 @@ function WalletScreen() {
   );
 }
 function TransactionsScreen() {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedCrypto, setSelectedCrypto] = useState("");
+
+  const handleReceivePress = () => {
+    setModalVisible(true);
+  };
+
+  const selectCrypto = (crypto) => {
+    console.log(`Receive ${crypto} Pressed`);
+    setSelectedCrypto(crypto);
+    setModalVisible(false);
+  };
+
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -45,10 +59,7 @@ function TransactionsScreen() {
         <Text style={styles.subButtonText}>Send crypto to another wallet</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity
-        style={styles.roundButton}
-        onPress={() => console.log("Receive Pressed")}
-      >
+      <TouchableOpacity style={styles.roundButton} onPress={handleReceivePress}>
         <Text style={styles.buttonText}>Receive</Text>
         <Text style={styles.subButtonText}>
           Receive crypto from another wallet
@@ -70,6 +81,38 @@ function TransactionsScreen() {
         <Text style={styles.buttonText}>Sell</Text>
         <Text style={styles.subButtonText}>Sell crypto securely for cash</Text>
       </TouchableOpacity>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>
+              Choose the cryptocurrency to receive:
+            </Text>
+            {["BTC", "ETH", "USDT"].map((crypto) => (
+              <TouchableOpacity
+                key={crypto}
+                style={styles.optionButton}
+                onPress={() => selectCrypto(crypto)}
+              >
+                <Text style={styles.optionButtonText}>{crypto}</Text>
+              </TouchableOpacity>
+            ))}
+            <TouchableOpacity
+              style={styles.cancelButton}
+              onPress={() => setModalVisible(false)}
+            >
+              <Text style={styles.cancelButtonText}>Cancel</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }
@@ -154,6 +197,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     padding: 20,
+    backgroundColor: "#121212", // Overall background for the page
   },
   safeArea: {
     flex: 1,
@@ -212,5 +256,52 @@ const styles = StyleSheet.create({
   button: {
     marginBottom: 20,
     alignItems: "center",
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.8)", // Semi-transparent dark overlay
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "#222222", // Darker gray for modal background
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  modalText: {
+    color: "#ffffff", // White text for contrast
+    marginBottom: 15,
+    textAlign: "center",
+  },
+  optionButton: {
+    backgroundColor: "#373737",
+    padding: 10,
+    width: 300,
+    marginBottom: 10,
+    alignItems: "center",
+    borderRadius: 20,
+  },
+  optionButtonText: {
+    color: "#e0e0e0",
+  },
+  cancelButton: {
+    backgroundColor: "#373737",
+    padding: 10,
+    width: 300,
+    alignItems: "center",
+    borderRadius: 20,
+  },
+  cancelButtonText: {
+    color: "#ffffff",
   },
 });
