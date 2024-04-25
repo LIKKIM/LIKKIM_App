@@ -118,15 +118,42 @@ function TransactionsScreen() {
 }
 
 function MyColdWalletScreen() {
+  const [modalVisible, setModalVisible] = useState(false);
+
   return (
     <View style={styles.container}>
       <Text style={styles.titleText}>Bluetooth</Text>
       <TouchableOpacity
         style={styles.roundButton}
-        onPress={() => console.log("Pairing with Bluetooth")}
+        onPress={() => setModalVisible(true)}
       >
         <Text style={styles.buttonText}>Pair with Bluetooth</Text>
       </TouchableOpacity>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalTitle}>LOOKING FOR DEVICES</Text>
+            <Text style={styles.modalSubtitle}>
+              Please make sure your Cold Wallet is unlocked and Bluetooth is
+              enabled.
+            </Text>
+            <TouchableOpacity
+              style={styles.cancelButton}
+              onPress={() => setModalVisible(false)}
+            >
+              <Text style={styles.cancelButtonText}>Cancel</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }
@@ -265,6 +292,7 @@ const styles = StyleSheet.create({
   },
   modalView: {
     margin: 20,
+    height: 500,
     backgroundColor: "#222222", // Darker gray for modal background
     borderRadius: 20,
     padding: 35,
@@ -277,6 +305,18 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+  },
+  modalTitle: {
+    color: "#ffffff",
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 15,
+  },
+  modalSubtitle: {
+    color: "#e0e0e0",
+    fontSize: 14,
+    marginBottom: 320,
+    textAlign: "center",
   },
   modalText: {
     color: "#ffffff", // White text for contrast
