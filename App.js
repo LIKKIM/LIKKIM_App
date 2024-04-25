@@ -39,6 +39,14 @@ function TransactionsScreen() {
     <View style={styles.container}>
       <TouchableOpacity
         style={styles.roundButton}
+        onPress={() => console.log("Send Pressed")}
+      >
+        <Text style={styles.buttonText}>Send</Text>
+        <Text style={styles.subButtonText}>Send crypto to another wallet</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.roundButton}
         onPress={() => console.log("Receive Pressed")}
       >
         <Text style={styles.buttonText}>Receive</Text>
