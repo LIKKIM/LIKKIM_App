@@ -61,18 +61,29 @@ function WalletScreen() {
     </View>
   );
 }
+
 function TransactionsScreen() {
   const [modalVisible, setModalVisible] = useState(false);
+  const [addressModalVisible, setAddressModalVisible] = useState(false);
   const [selectedCrypto, setSelectedCrypto] = useState("");
+  const [selectedAddress, setSelectedAddress] = useState("");
+
+  const cryptoAddresses = {
+    BTC: "BitcoinAddress",
+    ETH: "EthereumAddress",
+    USDT: "TetherAddress",
+  };
 
   const handleReceivePress = () => {
-    setModalVisible(true);
+    setModalVisible(true); // 打开接收加密货币的选择模态窗口
   };
 
   const selectCrypto = (crypto) => {
     console.log(`Receive ${crypto} Pressed`);
     setSelectedCrypto(crypto);
-    setModalVisible(false);
+    setSelectedAddress(cryptoAddresses[crypto]); // 设置所选加密货币的地址
+    setModalVisible(false); // 关闭选择模态窗口
+    setAddressModalVisible(true); // 打开地址显示模态窗口
   };
 
   return (
@@ -108,13 +119,12 @@ function TransactionsScreen() {
         <Text style={styles.subButtonText}>Sell crypto securely for cash</Text>
       </TouchableOpacity>
 
+      {/* 选择接收的加密货币模态窗口 */}
       <Modal
         animationType="slide"
         transparent={true}
         visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(!modalVisible);
-        }}
+        onRequestClose={() => setModalVisible(false)}
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
@@ -135,6 +145,27 @@ function TransactionsScreen() {
               onPress={() => setModalVisible(false)}
             >
               <Text style={styles.cancelButtonText}>Cancel</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+
+      {/* 显示选择的加密货币地址的模态窗口 */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={addressModalVisible}
+        onRequestClose={() => setAddressModalVisible(false)}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalTitle}>Address for {selectedCrypto}:</Text>
+            <Text style={styles.modalText}>{selectedAddress}</Text>
+            <TouchableOpacity
+              style={styles.cancelButton}
+              onPress={() => setAddressModalVisible(false)}
+            >
+              <Text style={styles.cancelButtonText}>Close</Text>
             </TouchableOpacity>
           </View>
         </View>
