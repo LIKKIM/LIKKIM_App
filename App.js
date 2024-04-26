@@ -19,9 +19,9 @@ function WalletScreen() {
   const [selectedAddress, setSelectedAddress] = useState("");
 
   const cryptoAddresses = {
-    Bitcoin: "1BoatSLRHtKNngkdXEeobR76b53LETtpyT",
-    Ethereum: "0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe",
-    USDT: "1KAt6STtisWMMVo5XGdos9P7DBNNsFfjx7",
+    Bitcoin: "10,000,00",
+    Ethereum: "10,000,00",
+    USDT: "10,000,00",
   };
 
   const handleCardPress = (cryptoName) => {
@@ -32,11 +32,11 @@ function WalletScreen() {
   return (
     <View style={styles.container}>
       {Object.entries(cryptoAddresses).map(([name, address]) => (
-        <View key={name} style={styles.card}>
-          <TouchableOpacity onPress={() => handleCardPress(name)}>
+        <TouchableOpacity key={name} onPress={() => handleCardPress(name)}>
+          <View style={styles.card}>
             <Text style={styles.cardText}>{name}</Text>
-          </TouchableOpacity>
-        </View>
+          </View>
+        </TouchableOpacity>
       ))}
 
       <Modal
@@ -47,7 +47,7 @@ function WalletScreen() {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalTitle}>Address:</Text>
+            <Text style={styles.modalTitle}>Value:</Text>
             <Text style={styles.modalText}>{selectedAddress}</Text>
             <TouchableOpacity
               style={styles.cancelButton}
@@ -69,9 +69,9 @@ function TransactionsScreen() {
   const [selectedAddress, setSelectedAddress] = useState("");
 
   const cryptoAddresses = {
-    BTC: "BitcoinAddress",
-    ETH: "EthereumAddress",
-    USDT: "TetherAddress",
+    BTC: "1BoatSLRHtKNngkdXEeobR76b53LETtpyT",
+    ETH: "0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe",
+    USDT: "1KAt6STtisWMMVo5XGdos9P7DBNNsFfjx7",
   };
 
   const handleReceivePress = () => {
@@ -382,7 +382,7 @@ const styles = StyleSheet.create({
   },
   modalText: {
     color: "#ffffff", // White text for contrast
-    marginBottom: 15,
+    marginBottom: 320,
     textAlign: "center",
   },
   optionButton: {
