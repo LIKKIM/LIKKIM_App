@@ -258,6 +258,15 @@ export default function App() {
             tabBarLabelStyle: {
               fontSize: 12,
             },
+            headerStyle: {
+              backgroundColor: "#121212", // 设置头部的背景颜色
+              borderBottomColor: "#424242", // 设置边框颜色为深灰色
+              borderBottomWidth: 1, // 确保边框宽度为1，如果原来没有边框需要添加这一行
+            },
+            headerTintColor: "#e0e0e0", // 设置头部标题和按钮的颜色
+            headerTitleStyle: {
+              fontWeight: "bold", // 设置头部标题的字体加粗
+            },
           })}
         >
           <Tab.Screen name="Wallet" component={WalletScreen} />
