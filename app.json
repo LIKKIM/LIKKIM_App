@@ -11,12 +11,11 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.anonymous.ColdWallet"
+      "bundleIdentifier": "com.anonymous.ColdWallet",
+      "icon": "./assets/icon.png"
     },
     "android": {
       "adaptiveIcon": {

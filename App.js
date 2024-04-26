@@ -226,13 +226,11 @@ export default function App() {
             tabBarIcon: ({ focused, color, size }) => {
               let iconName;
               if (route.name === "Wallet") {
-                iconName = focused
-                  ? "account-balance-wallet"
-                  : "account-balance-wallet";
+                iconName = "account-balance-wallet";
               } else if (route.name === "Transactions") {
-                iconName = focused ? "swap-horiz" : "swap-horiz";
+                iconName = "swap-horiz";
               } else if (route.name === "My Cold Wallet") {
-                iconName = focused ? "bluetooth" : "bluetooth";
+                iconName = "bluetooth";
               }
               return <Icon name={iconName} size={size} color={color} />;
             },
@@ -249,20 +247,18 @@ export default function App() {
                 </Text>
               );
             },
+            tabBarActiveTintColor: "#e0e0e0",
+            tabBarInactiveTintColor: "gray",
+            tabBarStyle: {
+              backgroundColor: "#121212",
+              borderTopColor: "#373737",
+              borderTopWidth: 1,
+              height: 60,
+            },
+            tabBarLabelStyle: {
+              fontSize: 12,
+            },
           })}
-          tabBarOptions={{
-            activeTintColor: "#e0e0e0", // 设置活动标签的文字颜色为浅灰色
-            inactiveTintColor: "gray", // 设置非活动标签的文字颜色为灰色
-            style: {
-              backgroundColor: "#121212", // 设置底部导航栏的背景颜色为深色
-              borderTopColor: "#373737", // 设置顶部边界颜色
-              borderTopWidth: 1, // 确保边界线可见
-              height: 60, // 可以调整tab栏的高度
-            },
-            labelStyle: {
-              fontSize: 12, // 设置标签字体大小
-            },
-          }}
         >
           <Tab.Screen name="Wallet" component={WalletScreen} />
           <Tab.Screen name="Transactions" component={TransactionsScreen} />
