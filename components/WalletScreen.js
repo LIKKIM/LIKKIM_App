@@ -1,91 +1,79 @@
-// WalletScreen.js
 import React, { useState, useEffect } from "react";
 import {
   ImageBackground,
-  Image,
   View,
   Text,
   Modal,
   TouchableOpacity,
+  FlatList,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import styles from "../styles"; // 确保路径正确
+import styles from "../styles";
 import { BlurView } from "expo-blur";
 
 function WalletScreen({ route }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState("");
   const [addCryptoVisible, setAddCryptoVisible] = useState(false);
+  const [cryptoCards, setCryptoCards] = useState([
+    {
+      name: "Bitcoin",
+      address: "10,000,00",
+      cardImage: require("../assets/Card3.png"),
+    },
+    {
+      name: "Ethereum",
+      address: "10,000,00",
+      cardImage: require("../assets/Card54.png"),
+    },
+    {
+      name: "USDT",
+      address: "10,000,00",
+      cardImage: require("../assets/Card43.png"),
+    },
+  ]);
 
-  // 监听从App.js传来的参数
   useEffect(() => {
-    console.log("Received params:", route.params);
     if (route.params?.showAddModal) {
       setAddCryptoVisible(true);
     }
   }, [route.params]);
 
-  const cryptoCard = {
-    Bitcoin: "10,000,00",
-    Ethereum: "10,000,00",
-    USDT: "10,000,00",
-  };
-
-  // 新货币选项，用户可以从中选择添加
   const additionalCryptos = [
     { name: "Litecoin", cardImage: require("../assets/Card1.png") },
     { name: "Ripple", cardImage: require("../assets/Card2.png") },
     { name: "Dash", cardImage: require("../assets/Card3.png") },
-    // 添加更多货币和卡片
   ];
 
-  const getImageForCrypto = (cryptoName) => {
-    switch (cryptoName) {
-      case "Bitcoin":
-        return require("../assets/Card3.png");
-      case "Ethereum":
-        return require("../assets/Card54.png");
-      case "USDT":
-        return require("../assets/Card43.png");
-      default:
-        return require("../assets/Card4.png"); // 默认图片，如果没有匹配
-    }
-  };
-
   const handleCardPress = (cryptoName) => {
-    setSelectedAddress(cryptoCard[cryptoName]);
+    const selectedCrypto = cryptoCards.find((card) => card.name === cryptoName);
+    setSelectedAddress(selectedCrypto ? selectedCrypto.address : "Unknown");
     setModalVisible(true);
   };
 
-  const handleAddPress = () => {
-    console.log("Add button pressed");
-    // 这里可以添加点击+号按钮后的逻辑
-  };
   const handleAddCrypto = (crypto) => {
-    console.log(`Adding ${crypto.name}`);
-    setAddCryptoVisible(false);
-    // 检查是否已经添加了这个货币
     if (!cryptoCards.find((card) => card.name === crypto.name)) {
-      const newCryptoCards = [...cryptoCards, { ...crypto, address: "0" }]; // 添加默认地址或其他信息
+      const newCryptoCards = [...cryptoCards, { ...crypto, address: "0" }];
       setCryptoCards(newCryptoCards);
-    } else {
-      console.log(`${crypto.name} is already added.`);
     }
+    setAddCryptoVisible(false);
   };
 
   return (
     <LinearGradient colors={["#24234C", "#101021"]} style={styles.container}>
       <View>
-        {Object.entries(cryptoCard).map(([name, address]) => (
-          <TouchableOpacity key={name} onPress={() => handleCardPress(name)}>
+        {cryptoCards.map((card) => (
+          <TouchableOpacity
+            key={card.name}
+            onPress={() => handleCardPress(card.name)}
+          >
             <ImageBackground
-              source={getImageForCrypto(name)}
+              source={card.cardImage}
               style={styles.card}
               imageStyle={{ borderRadius: 16 }}
             >
-              {/* 添加遮罩层 */}
               <View style={styles.overlay} />
-              <Text style={styles.cardText}>{name}</Text>
+              <Text style={styles.cardText}>{card.name}</Text>
             </ImageBackground>
           </TouchableOpacity>
         ))}
@@ -172,6 +160,7 @@ function WalletScreen({ route }) {
             </View>
           </BlurView>
         </Modal>
+
         <Modal
           animationType="slide"
           transparent={true}
@@ -181,16 +170,7 @@ function WalletScreen({ route }) {
           <BlurView intensity={10} style={styles.centeredView}>
             <View style={styles.modalView}>
               <Text style={styles.modalTitle}>Value:</Text>
-              <Text
-                style={{
-                  color: "#ffffff", // 白色文字
-                  textAlign: "center",
-                  fontSize: 44,
-                }}
-                Text
-              >
-                {selectedAddress}
-              </Text>
+              <Text style={styles.modalText}>{selectedAddress}</Text>
               <TouchableOpacity
                 style={styles.cancelButton}
                 onPress={() => setModalVisible(false)}
