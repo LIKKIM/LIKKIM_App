@@ -10,13 +10,11 @@ const styles = StyleSheet.create({
     justifyContent: "center", // 子元素沿着交叉轴（即水平轴）居中对齐
     padding: 20, // 内边距为20
   },
-
   // safeArea: 用于处理屏幕顶部安全区域
   safeArea: {
     flex: 1,
     backgroundColor: "#121212", // 保持背景色一致
   },
-
   // card: 定义了一个卡片样式
   card: {
     width: 300, // 宽度为300

@@ -31,6 +31,10 @@ function WalletScreen() {
     setModalVisible(true);
   };
 
+  const handleAddPress = () => {
+    console.log("Add button pressed");
+    // 这里可以添加点击+号按钮后的逻辑
+  };
   return (
     <LinearGradient colors={["#24234C", "#101021"]} style={styles.container}>
       <View>
@@ -291,7 +295,28 @@ export default function App() {
             },
           })}
         >
-          <Tab.Screen name="Wallet" component={WalletScreen} />
+          <Tab.Screen
+            name="Wallet"
+            component={WalletScreen}
+            options={{
+              headerRight: () => (
+                <TouchableOpacity
+                  onPress={() => console.log("Add new item")}
+                  style={{
+                    marginRight: 16, // 添加适当的外边距
+                    borderRadius: 14, // 设置圆形边框的半径
+                    width: 28, // 按钮宽度
+                    height: 28, // 按钮高度
+                    justifyContent: "center", // 垂直居中图标
+                    alignItems: "center", // 水平居中图标
+                    backgroundColor: "#24234C", // 按钮背景色
+                  }}
+                >
+                  <Icon name="add" size={24} color="#ffffff" />
+                </TouchableOpacity>
+              ),
+            }}
+          />
           <Tab.Screen name="Transactions" component={TransactionsScreen} />
           <Tab.Screen name="My Cold Wallet" component={MyColdWalletScreen} />
         </Tab.Navigator>
