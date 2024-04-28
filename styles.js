@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
   },
   settingsItem: {
     flexDirection: "row",
+    justifyContent: "flex-start",
     alignItems: "center",
     paddingVertical: 15,
     borderBottomWidth: 1,
@@ -67,6 +68,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10, // 垂直内边距为10
     paddingHorizontal: 20, // 水平内边距为20
     width: "100%",
+    height: 60,
     alignItems: "center", // 文本居中对齐
     justifyContent: "center", // 文本居中对齐
     marginBottom: 20, // 与下一个元素间距20

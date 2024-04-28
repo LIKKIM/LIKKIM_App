@@ -1,12 +1,20 @@
 // MyColdWalletScreen.js
 import React, { useState } from "react";
-import { View, Text, Modal, TouchableOpacity, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  Modal,
+  TouchableOpacity,
+  ScrollView,
+  Switch,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import styles from "../styles"; // 确保路径正确
 
 function MyColdWalletScreen() {
   const [modalVisible, setModalVisible] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   const settingsOptions = [
     { title: "Settings", icon: "settings", onPress: () => {} },
@@ -14,7 +22,20 @@ function MyColdWalletScreen() {
     { title: "Privacy & Data", icon: "privacy-tip", onPress: () => {} },
     { title: "About", icon: "info", onPress: () => {} },
     { title: "Language", icon: "language", onPress: () => {} },
-    { title: "Dark Mode", icon: "dark-mode", onPress: () => {} },
+    {
+      title: "Dark Mode",
+      icon: "dark-mode",
+      onPress: () => setIsDarkMode(!isDarkMode), // 用于切换暗黑模式状态
+      toggle: (
+        <Switch
+          trackColor={{ false: "#767577", true: "#81b0ff" }}
+          thumbColor={isDarkMode ? "#f5dd4b" : "#f4f3f4"}
+          ios_backgroundColor="#3e3e3e"
+          onValueChange={() => setIsDarkMode(!isDarkMode)}
+          value={isDarkMode}
+        />
+      ),
+    },
   ];
 
   return (
@@ -28,8 +49,22 @@ function MyColdWalletScreen() {
               style={styles.settingsItem}
               onPress={option.onPress}
             >
-              <Icon name={option.icon} size={24} color="#ffffff" />
-              <Text style={styles.settingsText}>{option.title}</Text>
+              {/* 显示图标和标题 */}
+              <View
+                style={{ flexDirection: "row", alignItems: "center", flex: 1 }}
+              >
+                <Icon name={option.icon} size={24} color="#ffffff" />
+                <Text
+                  style={[
+                    styles.settingsText,
+                    option.title === "Dark Mode" ? { flex: 1 } : null,
+                  ]}
+                >
+                  {option.title}
+                </Text>
+              </View>
+              {/* 对于Dark Mode选项，添加一个toggle按钮 */}
+              {option.title === "Dark Mode" && option.toggle}
             </TouchableOpacity>
           ))}
 
