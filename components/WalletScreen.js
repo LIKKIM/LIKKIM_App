@@ -5,7 +5,7 @@ import {
   Text,
   Modal,
   TouchableOpacity,
-  FlatList,
+  ScrollView,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import styles from "../styles";
@@ -61,9 +61,17 @@ function WalletScreen({ route }) {
 
   return (
     <LinearGradient colors={["#24234C", "#101021"]} style={styles.container}>
-      <View>
+      <ScrollView
+        style={{
+          width: "100%",
+          paddingHorizontal: 0,
+        }}
+      >
         {cryptoCards.map((card) => (
           <TouchableOpacity
+            style={{
+              alignItems: "center",
+            }}
             key={card.name}
             onPress={() => handleCardPress(card.name)}
           >
@@ -77,110 +85,108 @@ function WalletScreen({ route }) {
             </ImageBackground>
           </TouchableOpacity>
         ))}
-
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={addCryptoVisible}
-          onRequestClose={() => setAddCryptoVisible(false)}
-        >
-          <BlurView intensity={10} style={styles.centeredView}>
-            <View
-              style={{
-                margin: 20,
-                minHeight: 400, // 高度为500
-                width: "80%",
-                backgroundColor: "#24234C", // 深灰色背景
-                borderRadius: 20, // 圆角为20
-                padding: 35, // 内边距为35
-                alignItems: "center", // 内容居中对齐
-                shadowColor: "#000", // 阴影为黑色
-                shadowOffset: { width: 0, height: 2 }, // 阴影偏移
-                shadowOpacity: 0.25, // 阴影透明度
-                shadowRadius: 3.84, // 阴影扩散范围
-                elevation: 5, // 用于Android的材质阴影高度
-              }}
-            >
-              {additionalCryptos.map((crypto) => (
-                <TouchableOpacity
-                  key={crypto.name}
+      </ScrollView>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={addCryptoVisible}
+        onRequestClose={() => setAddCryptoVisible(false)}
+      >
+        <BlurView intensity={10} style={styles.centeredView}>
+          <View
+            style={{
+              margin: 20,
+              minHeight: 400, // 高度为500
+              width: "80%",
+              backgroundColor: "#24234C", // 深灰色背景
+              borderRadius: 20, // 圆角为20
+              padding: 35, // 内边距为35
+              alignItems: "center", // 内容居中对齐
+              shadowColor: "#000", // 阴影为黑色
+              shadowOffset: { width: 0, height: 2 }, // 阴影偏移
+              shadowOpacity: 0.25, // 阴影透明度
+              shadowRadius: 3.84, // 阴影扩散范围
+              elevation: 5, // 用于Android的材质阴影高度
+            }}
+          >
+            {additionalCryptos.map((crypto) => (
+              <TouchableOpacity
+                key={crypto.name}
+                style={{
+                  width: "100%",
+                  padding: 6,
+                  backgroundColor: "#1E1D3F",
+                  marginBottom: 6,
+                  borderRadius: 16,
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  flexDirection: "row",
+                }}
+                onPress={() => handleAddCrypto(crypto)}
+              >
+                <ImageBackground
+                  source={crypto.cardImage}
                   style={{
-                    width: "100%",
-                    padding: 6,
-                    backgroundColor: "#1E1D3F",
-                    marginBottom: 6,
-                    borderRadius: 16,
-                    display: "flex",
-                    justifyContent: "space-between",
+                    width: 100,
+                    height: 100,
+                    justifyContent: "center",
                     alignItems: "center",
-                    flexDirection: "row",
                   }}
-                  onPress={() => handleAddCrypto(crypto)}
+                  imageStyle={{ borderRadius: 12 }}
                 >
-                  <ImageBackground
-                    source={crypto.cardImage}
-                    style={{
-                      width: 100,
-                      height: 100,
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                    imageStyle={{ borderRadius: 12 }}
-                  >
-                    <Text style={{ color: "#FFF", fontWeight: "bold" }}>
-                      {crypto.name}
-                    </Text>
-                  </ImageBackground>
-                  <Text
-                    style={{
-                      color: "#FFF",
-                      fontWeight: "bold",
-                      paddingRight: "30px",
-                    }}
-                  >
+                  <Text style={{ color: "#FFF", fontWeight: "bold" }}>
                     {crypto.name}
                   </Text>
-                </TouchableOpacity>
-              ))}
-              <TouchableOpacity
-                style={{
-                  backgroundColor: "#6C6CF4",
-                  padding: 10,
-                  width: "100%",
-                  justifyContent: "center",
-                  borderRadius: 30,
-                  height: 60,
-                  alignItems: "center",
-                  marginTop: 20,
-                }}
-                onPress={() => setAddCryptoVisible(false)}
-              >
-                <Text style={styles.cancelButtonText}>Close</Text>
+                </ImageBackground>
+                <Text
+                  style={{
+                    color: "#FFF",
+                    fontWeight: "bold",
+                    paddingRight: "30px",
+                  }}
+                >
+                  {crypto.name}
+                </Text>
               </TouchableOpacity>
-            </View>
-          </BlurView>
-        </Modal>
-
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => setModalVisible(false)}
-        >
-          <BlurView intensity={10} style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <Text style={styles.modalTitle}>Value:</Text>
-              <Text style={styles.modalText}>{selectedAddress}</Text>
-              <TouchableOpacity
-                style={styles.cancelButton}
-                onPress={() => setModalVisible(false)}
-              >
-                <Text style={styles.cancelButtonText}>Close</Text>
-              </TouchableOpacity>
-            </View>
-          </BlurView>
-        </Modal>
-      </View>
+            ))}
+            <TouchableOpacity
+              style={{
+                backgroundColor: "#6C6CF4",
+                padding: 10,
+                width: "100%",
+                justifyContent: "center",
+                borderRadius: 30,
+                height: 60,
+                alignItems: "center",
+                marginTop: 20,
+              }}
+              onPress={() => setAddCryptoVisible(false)}
+            >
+              <Text style={styles.cancelButtonText}>Close</Text>
+            </TouchableOpacity>
+          </View>
+        </BlurView>
+      </Modal>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <BlurView intensity={10} style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalTitle}>Value:</Text>
+            <Text style={styles.modalText}>{selectedAddress}</Text>
+            <TouchableOpacity
+              style={styles.cancelButton}
+              onPress={() => setModalVisible(false)}
+            >
+              <Text style={styles.cancelButtonText}>Close</Text>
+            </TouchableOpacity>
+          </View>
+        </BlurView>
+      </Modal>
     </LinearGradient>
   );
 }
