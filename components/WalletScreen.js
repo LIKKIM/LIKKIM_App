@@ -175,11 +175,42 @@ function WalletScreen({ route }) {
         onRequestClose={() => setModalVisible(false)}
       >
         <BlurView intensity={10} style={styles.centeredView}>
-          <View style={styles.modalView}>
+          <View
+            style={{
+              margin: 20,
+              width: "80%",
+              backgroundColor: "#484692", // 深灰色背景
+              borderRadius: 20, // 圆角为20
+              padding: 35, // 内边距为35
+              alignItems: "center", // 内容居中对齐
+              shadowColor: "#000", // 阴影为黑色
+              shadowOffset: { width: 0, height: 2 }, // 阴影偏移
+              shadowOpacity: 0.25, // 阴影透明度
+              shadowRadius: 3.84, // 阴影扩散范围
+              elevation: 5, // 用于Android的材质阴影高度
+            }}
+          >
             <Text style={styles.modalTitle}>Value:</Text>
-            <Text style={styles.modalText}>{selectedAddress}</Text>
+            <Text
+              style={{
+                color: "#ffffff", // 白色文字
+                textAlign: "center", // 文本居中对齐
+                fontSize: 40,
+                marginBottom: 30, // 与下一个元素间距320
+              }}
+            >
+              {selectedAddress}
+            </Text>
             <TouchableOpacity
-              style={styles.cancelButton}
+              style={{
+                backgroundColor: "#6C6CF4",
+                padding: 10,
+                width: "80%",
+                justifyContent: "center",
+                borderRadius: 30,
+                height: 60,
+                alignItems: "center",
+              }}
               onPress={() => setModalVisible(false)}
             >
               <Text style={styles.cancelButtonText}>Close</Text>
