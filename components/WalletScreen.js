@@ -8,14 +8,14 @@ function WalletScreen() {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState("");
 
-  const cryptoAddresses = {
+  const cryptoCard = {
     Bitcoin: "10,000,00",
     Ethereum: "10,000,00",
     USDT: "10,000,00",
   };
 
   const handleCardPress = (cryptoName) => {
-    setSelectedAddress(cryptoAddresses[cryptoName]);
+    setSelectedAddress(cryptoCard[cryptoName]);
     setModalVisible(true);
   };
 
@@ -26,7 +26,7 @@ function WalletScreen() {
   return (
     <LinearGradient colors={["#24234C", "#101021"]} style={styles.container}>
       <View>
-        {Object.entries(cryptoAddresses).map(([name, address]) => (
+        {Object.entries(cryptoCard).map(([name, address]) => (
           <TouchableOpacity key={name} onPress={() => handleCardPress(name)}>
             <View style={styles.card}>
               <Text style={styles.cardText}>{name}</Text>
