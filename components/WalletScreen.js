@@ -31,6 +31,14 @@ function WalletScreen({ route }) {
     USDT: "10,000,00",
   };
 
+  // 新货币选项，用户可以从中选择添加
+  const additionalCryptos = [
+    { name: "Litecoin", cardImage: require("../assets/Card1.png") },
+    { name: "Ripple", cardImage: require("../assets/Card2.png") },
+    { name: "Dash", cardImage: require("../assets/Card3.png") },
+    // 添加更多货币和卡片
+  ];
+
   const getImageForCrypto = (cryptoName) => {
     switch (cryptoName) {
       case "Bitcoin":
@@ -53,6 +61,12 @@ function WalletScreen({ route }) {
     console.log("Add button pressed");
     // 这里可以添加点击+号按钮后的逻辑
   };
+  const handleAddCrypto = (crypto) => {
+    console.log(`Adding ${crypto.name}`);
+    setAddCryptoVisible(false);
+    // 在这里你可以添加逻辑来实际将选择的货币添加到用户的钱包中
+  };
+
   return (
     <LinearGradient colors={["#24234C", "#101021"]} style={styles.container}>
       <View>
@@ -70,6 +84,73 @@ function WalletScreen({ route }) {
           </TouchableOpacity>
         ))}
 
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={addCryptoVisible}
+          onRequestClose={() => setAddCryptoVisible(false)}
+        >
+          <BlurView intensity={10} style={styles.centeredView}>
+            <View
+              style={{
+                margin: 20,
+                minHeight: 400, // 高度为500
+                width: "80%",
+                backgroundColor: "#24234C", // 深灰色背景
+                borderRadius: 20, // 圆角为20
+                padding: 35, // 内边距为35
+                alignItems: "center", // 内容居中对齐
+                shadowColor: "#000", // 阴影为黑色
+                shadowOffset: { width: 0, height: 2 }, // 阴影偏移
+                shadowOpacity: 0.25, // 阴影透明度
+                shadowRadius: 3.84, // 阴影扩散范围
+                elevation: 5, // 用于Android的材质阴影高度
+              }}
+            >
+              {additionalCryptos.map((crypto) => (
+                <TouchableOpacity
+                  key={crypto.name}
+                  style={{
+                    width: "100%",
+                    padding: 6,
+                    backgroundColor: "#1E1D3F",
+                    marginBottom: 6,
+                    borderRadius: 16,
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    flexDirection: "row",
+                  }}
+                  onPress={() => handleAddCrypto(crypto)}
+                >
+                  <ImageBackground
+                    source={crypto.cardImage}
+                    style={{
+                      width: 100,
+                      height: 100,
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                    imageStyle={{ borderRadius: 12 }}
+                  >
+                    <Text style={{ color: "#FFF", fontWeight: "bold" }}>
+                      {crypto.name}
+                    </Text>
+                  </ImageBackground>
+                  <Text
+                    style={{
+                      color: "#FFF",
+                      fontWeight: "bold",
+                      paddingRight: "30px",
+                    }}
+                  >
+                    {crypto.name}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+          </BlurView>
+        </Modal>
         <Modal
           animationType="slide"
           transparent={true}
