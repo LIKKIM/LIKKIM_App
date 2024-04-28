@@ -43,7 +43,16 @@ function WalletScreen() {
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
               <Text style={styles.modalTitle}>Value:</Text>
-              <Text style={styles.modalText}>{selectedAddress}</Text>
+              <Text
+                style={{
+                  color: "#ffffff", // 白色文字
+                  textAlign: "center",
+                  fontSize: 44,
+                }}
+                Text
+              >
+                {selectedAddress}
+              </Text>
               <TouchableOpacity
                 style={styles.cancelButton}
                 onPress={() => setModalVisible(false)}

@@ -2,6 +2,24 @@ import { StyleSheet } from "react-native";
 
 // 使用StyleSheet创建并导出应用的样式
 const styles = StyleSheet.create({
+  scrollView: {
+    width: "100%",
+  },
+  contentContainer: {
+    flexGrow: 1,
+  },
+  settingsItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: "#404040",
+  },
+  settingsText: {
+    marginLeft: 10,
+    fontSize: 18,
+    color: "#fff",
+  },
   // container: 定义了应用的主容器样式
   container: {
     flex: 1,
@@ -82,7 +100,8 @@ const styles = StyleSheet.create({
   modalView: {
     margin: 20,
     height: 500, // 高度为500
-    backgroundColor: "#222222", // 深灰色背景
+    width: "80%",
+    backgroundColor: "#484692", // 深灰色背景
     borderRadius: 20, // 圆角为20
     padding: 35, // 内边距为35
     alignItems: "center", // 内容居中对齐
@@ -108,25 +127,34 @@ const styles = StyleSheet.create({
   },
   modalText: {
     color: "#ffffff", // 白色文字
-    marginBottom: 120, // 与下一个元素间距320
     textAlign: "center", // 文本居中对齐
+    marginBottom: 120, // 与下一个元素间距320
   },
 
+  optionButtonText: {
+    color: "#ffffff",
+  },
   // optionButton, cancelButton: 选项按钮和取消按钮的样式
   optionButton: {
-    backgroundColor: "#373737", // 按钮背景为灰色
-    padding: 10, // 内边距为10
-    width: 300, // 宽度为300
-    marginBottom: 10, // 与下一个元素间距10
-    alignItems: "center", // 文本居中对齐
-    borderRadius: 20, // 圆角为20
+    backgroundColor: "#6C6CF4",
+    padding: 10,
+    width: "80%",
+    justifyContent: "center",
+    borderRadius: 30,
+    height: 60,
+    alignItems: "center",
+    marginBottom: 10,
   },
   cancelButton: {
-    backgroundColor: "#373737", // 按钮背景为灰色
-    padding: 10, // 内边距为10
-    width: 300, // 宽度为300
-    alignItems: "center", // 文本居中对齐
-    borderRadius: 20, // 圆角为20
+    backgroundColor: "#6C6CF4",
+    padding: 10,
+    width: "80%",
+    justifyContent: "center",
+    borderRadius: 30,
+    height: 60,
+    alignItems: "center",
+    position: "absolute",
+    bottom: 60,
   },
   cancelButtonText: {
     color: "#ffffff", // 白色文字

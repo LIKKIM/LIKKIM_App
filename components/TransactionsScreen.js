@@ -93,7 +93,15 @@ function TransactionsScreen() {
                 </TouchableOpacity>
               ))}
               <TouchableOpacity
-                style={styles.cancelButton}
+                style={{
+                  backgroundColor: "#6C6CF4",
+                  padding: 10,
+                  width: "80%",
+                  justifyContent: "center",
+                  borderRadius: 30,
+                  height: 60,
+                  alignItems: "center",
+                }}
                 onPress={() => setModalVisible(false)}
               >
                 <Text style={styles.cancelButtonText}>Cancel</Text>
