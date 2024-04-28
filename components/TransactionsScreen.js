@@ -30,7 +30,7 @@ function TransactionsScreen() {
 
   return (
     <LinearGradient colors={["#24234C", "#101021"]} style={styles.container}>
-      <View>
+      <View className="w-[100%]">
         <TouchableOpacity
           style={styles.roundButton}
           onPress={() => console.log("Send Pressed")}

@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
     width: 300, // 宽度为300
     height: 170, // 高度为100
     borderRadius: 20, // 边角圆润程度为16
+    overflow: "hidden",
     justifyContent: "center", // 内容居中显示
     alignItems: "center", // 内容居中显示
     backgroundColor: "#484692", // 深灰色背景，比container稍浅
@@ -48,11 +49,15 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84, // 阴影扩散范围
     elevation: 5, // 用于Android的材质阴影高度
   },
-
+  overlay: {
+    ...StyleSheet.absoluteFillObject, // 使遮罩层填充整个父容器
+    backgroundColor: "rgba(108, 108, 244, 0.1)",
+  },
   // cardText: 卡片内的文字样式
   cardText: {
-    color: "white", // 白色文字
-    fontSize: 16, // 文字大小为16
+    color: "white",
+    fontSize: 18,
+    fontWeight: "bold",
   },
 
   // roundButton: 圆形按钮的样式
@@ -61,7 +66,7 @@ const styles = StyleSheet.create({
     borderRadius: 30, // 圆角为30
     paddingVertical: 10, // 垂直内边距为10
     paddingHorizontal: 20, // 水平内边距为20
-    width: 250, // 宽度为250
+    width: "100%",
     alignItems: "center", // 文本居中对齐
     justifyContent: "center", // 文本居中对齐
     marginBottom: 20, // 与下一个元素间距20

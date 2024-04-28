@@ -1,6 +1,13 @@
 // WalletScreen.js
 import React, { useState } from "react";
-import { View, Text, Modal, TouchableOpacity } from "react-native";
+import {
+  ImageBackground,
+  Image,
+  View,
+  Text,
+  Modal,
+  TouchableOpacity,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import styles from "../styles"; // 确保路径正确
 
@@ -12,6 +19,19 @@ function WalletScreen() {
     Bitcoin: "10,000,00",
     Ethereum: "10,000,00",
     USDT: "10,000,00",
+  };
+
+  const getImageForCrypto = (cryptoName) => {
+    switch (cryptoName) {
+      case "Bitcoin":
+        return require("../assets/Card3.png");
+      case "Ethereum":
+        return require("../assets/Card54.png");
+      case "USDT":
+        return require("../assets/Card43.png");
+      default:
+        return require("../assets/Card4.png"); // 默认图片，如果没有匹配
+    }
   };
 
   const handleCardPress = (cryptoName) => {
@@ -28,9 +48,15 @@ function WalletScreen() {
       <View>
         {Object.entries(cryptoCard).map(([name, address]) => (
           <TouchableOpacity key={name} onPress={() => handleCardPress(name)}>
-            <View style={styles.card}>
+            <ImageBackground
+              source={getImageForCrypto(name)}
+              style={styles.card}
+              imageStyle={{ borderRadius: 16 }}
+            >
+              {/* 添加遮罩层 */}
+              <View style={styles.overlay} />
               <Text style={styles.cardText}>{name}</Text>
-            </View>
+            </ImageBackground>
           </TouchableOpacity>
         ))}
 
