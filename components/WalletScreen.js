@@ -148,6 +148,21 @@ function WalletScreen({ route }) {
                   </Text>
                 </TouchableOpacity>
               ))}
+              <TouchableOpacity
+                style={{
+                  backgroundColor: "#6C6CF4",
+                  padding: 10,
+                  width: "100%",
+                  justifyContent: "center",
+                  borderRadius: 30,
+                  height: 60,
+                  alignItems: "center",
+                  marginTop: 20,
+                }}
+                onPress={() => setAddCryptoVisible(false)}
+              >
+                <Text style={styles.cancelButtonText}>Close</Text>
+              </TouchableOpacity>
             </View>
           </BlurView>
         </Modal>
