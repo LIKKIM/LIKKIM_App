@@ -11,6 +11,7 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import styles from "../styles"; // 确保路径正确
+import { BlurView } from "expo-blur";
 
 function MyColdWalletScreen() {
   const [modalVisible, setModalVisible] = useState(false);
@@ -87,7 +88,7 @@ function MyColdWalletScreen() {
                 setModalVisible(!modalVisible);
               }}
             >
-              <View style={styles.centeredView}>
+              <BlurView intensity={10} style={styles.centeredView}>
                 <View style={styles.modalView}>
                   <Text style={styles.modalTitle}>LOOKING FOR DEVICES</Text>
                   <Text style={styles.modalSubtitle}>
@@ -101,7 +102,7 @@ function MyColdWalletScreen() {
                     <Text style={styles.cancelButtonText}>Cancel</Text>
                   </TouchableOpacity>
                 </View>
-              </View>
+              </BlurView>
             </Modal>
           </View>
         </View>

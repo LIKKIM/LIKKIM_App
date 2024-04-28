@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { View, Text, Modal, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import styles from "../styles"; // 确保路径正确
+import { BlurView } from "expo-blur";
 
 function TransactionsScreen() {
   const [modalVisible, setModalVisible] = useState(false);
@@ -78,7 +79,7 @@ function TransactionsScreen() {
           visible={modalVisible}
           onRequestClose={() => setModalVisible(false)}
         >
-          <View style={styles.centeredView}>
+          <BlurView intensity={10} style={styles.centeredView}>
             <View style={styles.modalView}>
               <Text style={styles.modalText}>
                 Choose the cryptocurrency to receive:
@@ -107,7 +108,7 @@ function TransactionsScreen() {
                 <Text style={styles.cancelButtonText}>Cancel</Text>
               </TouchableOpacity>
             </View>
-          </View>
+          </BlurView>
         </Modal>
 
         {/* 显示选择的加密货币地址的模态窗口 */}
