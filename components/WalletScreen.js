@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import styles from "../styles"; // 确保路径正确
+import { BlurView } from "expo-blur";
 
 function WalletScreen({ route }) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -75,7 +76,7 @@ function WalletScreen({ route }) {
           visible={modalVisible}
           onRequestClose={() => setModalVisible(false)}
         >
-          <View style={styles.centeredView}>
+          <BlurView intensity={10} style={styles.centeredView}>
             <View style={styles.modalView}>
               <Text style={styles.modalTitle}>Value:</Text>
               <Text
@@ -95,7 +96,7 @@ function WalletScreen({ route }) {
                 <Text style={styles.cancelButtonText}>Close</Text>
               </TouchableOpacity>
             </View>
-          </View>
+          </BlurView>
         </Modal>
       </View>
     </LinearGradient>
