@@ -1,5 +1,5 @@
 // WalletScreen.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   ImageBackground,
   Image,
@@ -11,9 +11,18 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import styles from "../styles"; // 确保路径正确
 
-function WalletScreen() {
+function WalletScreen({ route }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState("");
+  const [addCryptoVisible, setAddCryptoVisible] = useState(false);
+
+  // 监听从App.js传来的参数
+  useEffect(() => {
+    console.log("Received params:", route.params);
+    if (route.params?.showAddModal) {
+      setAddCryptoVisible(true);
+    }
+  }, [route.params]);
 
   const cryptoCard = {
     Bitcoin: "10,000,00",

@@ -80,24 +80,26 @@ export default function App() {
           <Tab.Screen
             name="Wallet"
             component={WalletScreen}
-            options={{
+            options={({ navigation }) => ({
               headerRight: () => (
                 <TouchableOpacity
-                  onPress={() => console.log("Add new item")}
+                  onPress={() =>
+                    navigation.navigate("Wallet", { showAddModal: true })
+                  }
                   style={{
-                    marginRight: 16, // 添加适当的外边距
-                    borderRadius: 14, // 设置圆形边框的半径
-                    width: 28, // 按钮宽度
-                    height: 28, // 按钮高度
-                    justifyContent: "center", // 垂直居中图标
-                    alignItems: "center", // 水平居中图标
-                    backgroundColor: "#24234C", // 按钮背景色
+                    marginRight: 16,
+                    borderRadius: 14,
+                    width: 28,
+                    height: 28,
+                    justifyContent: "center",
+                    alignItems: "center",
+                    backgroundColor: "#24234C",
                   }}
                 >
                   <Icon name="add" size={24} color="#ffffff" />
                 </TouchableOpacity>
               ),
-            }}
+            })}
           />
           <Tab.Screen name="Transactions" component={TransactionsScreen} />
           <Tab.Screen name="My Cold Wallet" component={MyColdWalletScreen} />
