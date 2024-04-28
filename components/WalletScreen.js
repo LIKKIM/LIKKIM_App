@@ -64,7 +64,13 @@ function WalletScreen({ route }) {
   const handleAddCrypto = (crypto) => {
     console.log(`Adding ${crypto.name}`);
     setAddCryptoVisible(false);
-    // 在这里你可以添加逻辑来实际将选择的货币添加到用户的钱包中
+    // 检查是否已经添加了这个货币
+    if (!cryptoCards.find((card) => card.name === crypto.name)) {
+      const newCryptoCards = [...cryptoCards, { ...crypto, address: "0" }]; // 添加默认地址或其他信息
+      setCryptoCards(newCryptoCards);
+    } else {
+      console.log(`${crypto.name} is already added.`);
+    }
   };
 
   return (
