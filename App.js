@@ -13,7 +13,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import styles from "./styles";
-
+import { LinearGradient } from "expo-linear-gradient";
+import { BlurView } from "expo-blur";
 // 页面组件
 function WalletScreen() {
   const [modalVisible, setModalVisible] = useState(false);
@@ -31,35 +32,37 @@ function WalletScreen() {
   };
 
   return (
-    <View style={styles.container}>
-      {Object.entries(cryptoAddresses).map(([name, address]) => (
-        <TouchableOpacity key={name} onPress={() => handleCardPress(name)}>
-          <View style={styles.card}>
-            <Text style={styles.cardText}>{name}</Text>
-          </View>
-        </TouchableOpacity>
-      ))}
+    <LinearGradient colors={["#24234C", "#101021"]} style={styles.container}>
+      <View>
+        {Object.entries(cryptoAddresses).map(([name, address]) => (
+          <TouchableOpacity key={name} onPress={() => handleCardPress(name)}>
+            <View style={styles.card}>
+              <Text style={styles.cardText}>{name}</Text>
+            </View>
+          </TouchableOpacity>
+        ))}
 
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)}
-      >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalTitle}>Value:</Text>
-            <Text style={styles.modalText}>{selectedAddress}</Text>
-            <TouchableOpacity
-              style={styles.cancelButton}
-              onPress={() => setModalVisible(false)}
-            >
-              <Text style={styles.cancelButtonText}>Close</Text>
-            </TouchableOpacity>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => setModalVisible(false)}
+        >
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Text style={styles.modalTitle}>Value:</Text>
+              <Text style={styles.modalText}>{selectedAddress}</Text>
+              <TouchableOpacity
+                style={styles.cancelButton}
+                onPress={() => setModalVisible(false)}
+              >
+                <Text style={styles.cancelButtonText}>Close</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
-      </Modal>
-    </View>
+        </Modal>
+      </View>
+    </LinearGradient>
   );
 }
 
@@ -251,18 +254,21 @@ export default function App() {
             tabBarActiveTintColor: "#e0e0e0",
             tabBarInactiveTintColor: "gray",
             tabBarStyle: {
-              backgroundColor: "#121212",
-              borderTopColor: "#373737",
-              borderTopWidth: 1,
+              // backgroundColor: "transparent",
+              backgroundColor: "#23224D",
+              //  borderTopColor: "#373737",
+              borderTopWidth: 0,
               height: 60,
+              borderTopLeftRadius: 22, // 设置左上角圆角
+              borderTopRightRadius: 22, // 设置右上角圆角
             },
             tabBarLabelStyle: {
               fontSize: 12,
             },
             headerStyle: {
-              backgroundColor: "#121212", // 设置头部的背景颜色
+              backgroundColor: "#24234C", // 设置头部的背景颜色
               borderBottomColor: "#424242", // 设置边框颜色为深灰色
-              borderBottomWidth: 1, // 确保边框宽度为1，如果原来没有边框需要添加这一行
+              borderBottomWidth: 0, // 确保边框宽度为1，如果原来没有边框需要添加这一行
             },
             headerTintColor: "#e0e0e0", // 设置头部标题和按钮的颜色
             headerTitleStyle: {

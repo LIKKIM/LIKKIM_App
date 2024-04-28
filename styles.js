@@ -20,11 +20,11 @@ const styles = StyleSheet.create({
   // card: 定义了一个卡片样式
   card: {
     width: 300, // 宽度为300
-    height: 100, // 高度为100
-    borderRadius: 16, // 边角圆润程度为16
+    height: 170, // 高度为100
+    borderRadius: 20, // 边角圆润程度为16
     justifyContent: "center", // 内容居中显示
     alignItems: "center", // 内容居中显示
-    backgroundColor: "#1e1e1e", // 深灰色背景，比container稍浅
+    backgroundColor: "#484692", // 深灰色背景，比container稍浅
     marginBottom: 20, // 与下一个元素间距20
     shadowColor: "#000", // 阴影颜色为黑色
     shadowOffset: { width: 0, height: 2 }, // 阴影偏移
