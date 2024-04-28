@@ -91,90 +91,103 @@ function TransactionsScreen() {
   };
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.roundButton}
-        onPress={() => console.log("Send Pressed")}
-      >
-        <Text style={styles.buttonText}>Send</Text>
-        <Text style={styles.subButtonText}>Send crypto to another wallet</Text>
-      </TouchableOpacity>
+    <LinearGradient colors={["#24234C", "#101021"]} style={styles.container}>
+      <View>
+        <TouchableOpacity
+          style={styles.roundButton}
+          onPress={() => console.log("Send Pressed")}
+        >
+          <Text style={styles.buttonText}>Send</Text>
+          <Text style={styles.subButtonText}>
+            Send crypto to another wallet
+          </Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity style={styles.roundButton} onPress={handleReceivePress}>
-        <Text style={styles.buttonText}>Receive</Text>
-        <Text style={styles.subButtonText}>
-          Receive crypto from another wallet
-        </Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.roundButton}
+          onPress={handleReceivePress}
+        >
+          <Text style={styles.buttonText}>Receive</Text>
+          <Text style={styles.subButtonText}>
+            Receive crypto from another wallet
+          </Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity
-        style={styles.roundButton}
-        onPress={() => console.log("Buy Pressed")}
-      >
-        <Text style={styles.buttonText}>Buy</Text>
-        <Text style={styles.subButtonText}>Buy crypto securely with cash</Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.roundButton}
+          onPress={() => console.log("Buy Pressed")}
+        >
+          <Text style={styles.buttonText}>Buy</Text>
+          <Text style={styles.subButtonText}>
+            Buy crypto securely with cash
+          </Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity
-        style={styles.roundButton}
-        onPress={() => console.log("Sell Pressed")}
-      >
-        <Text style={styles.buttonText}>Sell</Text>
-        <Text style={styles.subButtonText}>Sell crypto securely for cash</Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.roundButton}
+          onPress={() => console.log("Sell Pressed")}
+        >
+          <Text style={styles.buttonText}>Sell</Text>
+          <Text style={styles.subButtonText}>
+            Sell crypto securely for cash
+          </Text>
+        </TouchableOpacity>
 
-      {/* 选择接收的加密货币模态窗口 */}
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)}
-      >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>
-              Choose the cryptocurrency to receive:
-            </Text>
-            {["BTC", "ETH", "USDT"].map((crypto) => (
+        {/* 选择接收的加密货币模态窗口 */}
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => setModalVisible(false)}
+        >
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Text style={styles.modalText}>
+                Choose the cryptocurrency to receive:
+              </Text>
+              {["BTC", "ETH", "USDT"].map((crypto) => (
+                <TouchableOpacity
+                  key={crypto}
+                  style={styles.optionButton}
+                  onPress={() => selectCrypto(crypto)}
+                >
+                  <Text style={styles.optionButtonText}>{crypto}</Text>
+                </TouchableOpacity>
+              ))}
               <TouchableOpacity
-                key={crypto}
-                style={styles.optionButton}
-                onPress={() => selectCrypto(crypto)}
+                style={styles.cancelButton}
+                onPress={() => setModalVisible(false)}
               >
-                <Text style={styles.optionButtonText}>{crypto}</Text>
+                <Text style={styles.cancelButtonText}>Cancel</Text>
               </TouchableOpacity>
-            ))}
-            <TouchableOpacity
-              style={styles.cancelButton}
-              onPress={() => setModalVisible(false)}
-            >
-              <Text style={styles.cancelButtonText}>Cancel</Text>
-            </TouchableOpacity>
+            </View>
           </View>
-        </View>
-      </Modal>
+        </Modal>
 
-      {/* 显示选择的加密货币地址的模态窗口 */}
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={addressModalVisible}
-        onRequestClose={() => setAddressModalVisible(false)}
-      >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalTitle}>Address for {selectedCrypto}:</Text>
-            <Text style={styles.modalText}>{selectedAddress}</Text>
-            <TouchableOpacity
-              style={styles.cancelButton}
-              onPress={() => setAddressModalVisible(false)}
-            >
-              <Text style={styles.cancelButtonText}>Close</Text>
-            </TouchableOpacity>
+        {/* 显示选择的加密货币地址的模态窗口 */}
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={addressModalVisible}
+          onRequestClose={() => setAddressModalVisible(false)}
+        >
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Text style={styles.modalTitle}>
+                Address for {selectedCrypto}:
+              </Text>
+              <Text style={styles.modalText}>{selectedAddress}</Text>
+              <TouchableOpacity
+                style={styles.cancelButton}
+                onPress={() => setAddressModalVisible(false)}
+              >
+                <Text style={styles.cancelButtonText}>Close</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
-      </Modal>
-    </View>
+        </Modal>
+      </View>
+    </LinearGradient>
   );
 }
 
@@ -182,40 +195,42 @@ function MyColdWalletScreen() {
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.titleText}>Bluetooth</Text>
-      <TouchableOpacity
-        style={styles.roundButton}
-        onPress={() => setModalVisible(true)}
-      >
-        <Text style={styles.buttonText}>Pair with Bluetooth</Text>
-      </TouchableOpacity>
+    <LinearGradient colors={["#24234C", "#101021"]} style={styles.container}>
+      <View>
+        <Text style={styles.titleText}>Bluetooth</Text>
+        <TouchableOpacity
+          style={styles.roundButton}
+          onPress={() => setModalVisible(true)}
+        >
+          <Text style={styles.buttonText}>Pair with Bluetooth</Text>
+        </TouchableOpacity>
 
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(!modalVisible);
-        }}
-      >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalTitle}>LOOKING FOR DEVICES</Text>
-            <Text style={styles.modalSubtitle}>
-              Please make sure your Cold Wallet is unlocked and Bluetooth is
-              enabled.
-            </Text>
-            <TouchableOpacity
-              style={styles.cancelButton}
-              onPress={() => setModalVisible(false)}
-            >
-              <Text style={styles.cancelButtonText}>Cancel</Text>
-            </TouchableOpacity>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            setModalVisible(!modalVisible);
+          }}
+        >
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Text style={styles.modalTitle}>LOOKING FOR DEVICES</Text>
+              <Text style={styles.modalSubtitle}>
+                Please make sure your Cold Wallet is unlocked and Bluetooth is
+                enabled.
+              </Text>
+              <TouchableOpacity
+                style={styles.cancelButton}
+                onPress={() => setModalVisible(false)}
+              >
+                <Text style={styles.cancelButtonText}>Cancel</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
-      </Modal>
-    </View>
+        </Modal>
+      </View>
+    </LinearGradient>
   );
 }
 
@@ -246,13 +261,13 @@ export default function App() {
                   ? "Transactions"
                   : "My Cold Wallet";
               return (
-                <Text style={{ color: focused ? "#e0e0e0" : "gray" }}>
+                <Text style={{ color: focused ? "#ffffff" : "#ffffff50" }}>
                   {label}
                 </Text>
               );
             },
-            tabBarActiveTintColor: "#e0e0e0",
-            tabBarInactiveTintColor: "gray",
+            tabBarActiveTintColor: "#ffffff",
+            tabBarInactiveTintColor: "#ffffff50",
             tabBarStyle: {
               // backgroundColor: "transparent",
               backgroundColor: "#23224D",

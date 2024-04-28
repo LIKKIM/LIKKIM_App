@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
 
   // roundButton: 圆形按钮的样式
   roundButton: {
-    backgroundColor: "#373737", // 按钮背景为灰色
+    backgroundColor: "#484692", // 按钮背景为灰色
     borderRadius: 30, // 圆角为30
     paddingVertical: 10, // 垂直内边距为10
     paddingHorizontal: 20, // 水平内边距为20
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
   },
   modalText: {
     color: "#ffffff", // 白色文字
-    marginBottom: 320, // 与下一个元素间距320
+    marginBottom: 120, // 与下一个元素间距320
     textAlign: "center", // 文本居中对齐
   },
 
