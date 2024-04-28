@@ -24,7 +24,7 @@ const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <View style={styles.safeArea}>
       <NavigationContainer>
         <Tab.Navigator
           screenOptions={({ route }) => ({
@@ -59,7 +59,8 @@ export default function App() {
               backgroundColor: "#23224D",
               //  borderTopColor: "#373737",
               borderTopWidth: 0,
-              height: 60,
+              height: 100,
+              paddingBottom: 30,
               borderTopLeftRadius: 22, // 设置左上角圆角
               borderTopRightRadius: 22, // 设置右上角圆角
             },
@@ -106,6 +107,6 @@ export default function App() {
         </Tab.Navigator>
       </NavigationContainer>
       <StatusBar style="light" />
-    </SafeAreaView>
+    </View>
   );
 }
