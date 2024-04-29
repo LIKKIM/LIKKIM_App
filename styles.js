@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
   // container: 定义了应用的主容器样式
   container: {
     flex: 1,
+
     backgroundColor: "#121212", // 深灰色背景，适用于暗模式
     alignItems: "center", // 子元素沿着主轴（即垂直轴）居中对齐
     justifyContent: "center", // 子元素沿着交叉轴（即水平轴）居中对齐

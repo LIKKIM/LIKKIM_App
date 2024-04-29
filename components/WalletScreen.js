@@ -143,7 +143,7 @@ function WalletScreen({ route }) {
                   style={{
                     color: "#FFF",
                     fontWeight: "bold",
-                    paddingRight: "30px",
+                    marginRight: 30,
                   }}
                 >
                   {crypto.name}
