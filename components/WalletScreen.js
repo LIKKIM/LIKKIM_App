@@ -82,7 +82,15 @@ function WalletScreen({ route }) {
   };
 
   return (
-    <LinearGradient colors={["#24234C", "#101021"]} style={styles.container}>
+    <LinearGradient
+      colors={["#24234C", "#101021"]}
+      style={{
+        flex: 1,
+        backgroundColor: "#121212", // 深灰色背景，适用于暗模式
+        alignItems: "center", // 子元素沿着主轴（即垂直轴）居中对齐
+        justifyContent: "center", // 子元素沿着交叉轴（即水平轴）居中对齐
+      }}
+    >
       <ScrollView
         ref={scrollViewRef}
         contentContainerStyle={{ paddingBottom: 20 }}
