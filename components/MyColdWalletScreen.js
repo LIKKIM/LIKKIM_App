@@ -1,6 +1,6 @@
 // MyColdWalletScreen.js
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   View,
   Text,
@@ -21,6 +21,7 @@ function MyColdWalletScreen() {
   const [modalVisible, setModalVisible] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [devices, setDevices] = useState([]);
+  const isScanningRef = useRef(false); // 使用 useRef 来跟踪扫描状态
   const [isScanning, setIsScanning] = useState(false);
 
   // 判断当前平台，如果不是Web，则初始化和使用蓝牙相关功能
@@ -50,6 +51,7 @@ function MyColdWalletScreen() {
 
   const scanDevices = () => {
     if (Platform.OS !== "web" && !isScanning) {
+      console.log("Scanning started");
       setIsScanning(true);
       const scanOptions = { allowDuplicates: true };
       const scanFilter = null;
@@ -61,7 +63,6 @@ function MyColdWalletScreen() {
           return;
         }
         setDevices((prevDevices) => {
-          // 可能需要根据实际情况调整逻辑，确保设备列表正确更新
           if (!prevDevices.find((d) => d.id === device.id)) {
             return [...prevDevices, device];
           }
@@ -70,9 +71,12 @@ function MyColdWalletScreen() {
       });
 
       setTimeout(() => {
+        console.log("Scanning stopped");
         bleManager.stopDeviceScan();
         setIsScanning(false);
-      }, 30000);
+      }, 10000);
+    } else {
+      console.log("Attempt to scan while already scanning");
     }
   };
 
