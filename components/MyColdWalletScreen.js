@@ -1,22 +1,68 @@
 // MyColdWalletScreen.js
-import React, { useState } from "react";
+
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
   Modal,
+  FlatList,
   TouchableOpacity,
   ScrollView,
+  Platform,
   Switch,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import styles from "../styles"; // 确保路径正确
 import { BlurView } from "expo-blur";
+import { BleManager } from "react-native-ble-plx";
 
 function MyColdWalletScreen() {
   const [modalVisible, setModalVisible] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [devices, setDevices] = useState([]);
+  const [isScanning, setIsScanning] = useState(false);
 
+  // 判断当前平台，如果不是Web，则初始化和使用蓝牙相关功能
+  let bleManager;
+  if (Platform.OS !== "web") {
+    bleManager = new BleManager();
+  }
+
+  useEffect(() => {
+    if (Platform.OS !== "web") {
+      const subscription = bleManager.onStateChange((state) => {
+        if (state === "PoweredOn") {
+          scanDevices();
+          subscription.remove();
+        }
+      }, true);
+      return () => bleManager.destroy();
+    }
+  }, [bleManager]);
+
+  const scanDevices = () => {
+    if (Platform.OS !== "web") {
+      setIsScanning(true);
+      bleManager.startDeviceScan(null, null, (error, device) => {
+        if (error) {
+          console.error(error);
+          return;
+        }
+        setDevices((prevDevices) => {
+          if (prevDevices.every((d) => d.id !== device.id)) {
+            return [...prevDevices, device];
+          }
+          return prevDevices;
+        });
+      });
+
+      setTimeout(() => {
+        bleManager.stopDeviceScan();
+        setIsScanning(false);
+      }, 10000); // Stop scanning after 10 seconds
+    }
+  };
   const settingsOptions = [
     { title: "Settings", icon: "settings", onPress: () => {} },
     { title: "Help & Support", icon: "help-outline", onPress: () => {} },
@@ -71,7 +117,7 @@ function MyColdWalletScreen() {
           ))}
 
           {/* Bluetooth Btn */}
-          <View className="mt-10">
+          <View style={{ marginTop: 40 }}>
             <Text style={styles.titleText}>Bluetooth</Text>
             <View style={{ alignItems: "center" }}>
               <TouchableOpacity
@@ -92,6 +138,19 @@ function MyColdWalletScreen() {
               <BlurView intensity={10} style={styles.centeredView}>
                 <View style={styles.modalView}>
                   <Text style={styles.modalTitle}>LOOKING FOR DEVICES</Text>
+                  {isScanning ? (
+                    <Text style={styles.modalSubtitle}>Scanning...</Text>
+                  ) : (
+                    <FlatList
+                      data={devices}
+                      keyExtractor={(item) => item.id}
+                      renderItem={({ item }) => (
+                        <Text style={styles.modalSubtitle}>
+                          {item.name || "Unknown Device"}
+                        </Text>
+                      )}
+                    />
+                  )}
                   <Text style={styles.modalSubtitle}>
                     Please make sure your Cold Wallet is unlocked and Bluetooth
                     is enabled.
