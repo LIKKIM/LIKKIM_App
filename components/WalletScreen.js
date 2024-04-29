@@ -46,6 +46,11 @@ function WalletScreen({ route }) {
     { name: "Litecoin", cardImage: require("../assets/Card1.png") },
     { name: "Ripple", cardImage: require("../assets/Card2.png") },
     { name: "Dash", cardImage: require("../assets/Card3.png") },
+    { name: "Cardano", cardImage: require("../assets/Card5.png") },
+    { name: "Polkadot", cardImage: require("../assets/Card6.png") },
+    { name: "Chainlink", cardImage: require("../assets/Card7.png") },
+    { name: "Stellar", cardImage: require("../assets/Card8.png") },
+    { name: "Dogecoin", cardImage: require("../assets/Card9.png") },
   ];
 
   const handleCardPress = (cryptoName, index) => {
@@ -129,47 +134,54 @@ function WalletScreen({ route }) {
               elevation: 5, // 用于Android的材质阴影高度
             }}
           >
-            {additionalCryptos.map((crypto) => (
-              <TouchableOpacity
-                key={crypto.name}
-                style={{
-                  width: "100%",
-                  padding: 6,
-                  backgroundColor: "#1E1D3F",
-                  marginBottom: 6,
-                  borderRadius: 16,
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  flexDirection: "row",
-                }}
-                onPress={() => handleAddCrypto(crypto)}
-              >
-                <ImageBackground
-                  source={crypto.cardImage}
+            <ScrollView
+              style={{
+                width: "100%",
+                height: 380,
+              }}
+            >
+              {additionalCryptos.map((crypto) => (
+                <TouchableOpacity
+                  key={crypto.name}
                   style={{
-                    width: 100,
-                    height: 100,
-                    justifyContent: "center",
+                    width: "100%",
+                    padding: 6,
+                    backgroundColor: "#1E1D3F",
+                    marginBottom: 6,
+                    borderRadius: 16,
+                    display: "flex",
+                    justifyContent: "space-between",
                     alignItems: "center",
+                    flexDirection: "row",
                   }}
-                  imageStyle={{ borderRadius: 12 }}
+                  onPress={() => handleAddCrypto(crypto)}
                 >
-                  <Text style={{ color: "#FFF", fontWeight: "bold" }}>
+                  <ImageBackground
+                    source={crypto.cardImage}
+                    style={{
+                      width: 100,
+                      height: 100,
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                    imageStyle={{ borderRadius: 12 }}
+                  >
+                    <Text style={{ color: "#FFF", fontWeight: "bold" }}>
+                      {crypto.name}
+                    </Text>
+                  </ImageBackground>
+                  <Text
+                    style={{
+                      color: "#FFF",
+                      fontWeight: "bold",
+                      marginRight: 30,
+                    }}
+                  >
                     {crypto.name}
                   </Text>
-                </ImageBackground>
-                <Text
-                  style={{
-                    color: "#FFF",
-                    fontWeight: "bold",
-                    marginRight: 30,
-                  }}
-                >
-                  {crypto.name}
-                </Text>
-              </TouchableOpacity>
-            ))}
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
             <TouchableOpacity
               style={{
                 backgroundColor: "#6C6CF4",
