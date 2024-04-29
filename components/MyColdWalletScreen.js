@@ -34,8 +34,11 @@ function MyColdWalletScreen() {
       const subscription = bleManager.onStateChange((state) => {
         if (state === "PoweredOn") {
           scanDevices();
-          subscription.remove();
+        } else if (state === "Unknown") {
+          console.warn("Bluetooth state is unknown");
         }
+        // Optionally remove the listener if you no longer need it
+        return () => subscription.remove();
       }, true);
       return () => bleManager.destroy();
     }
@@ -44,9 +47,13 @@ function MyColdWalletScreen() {
   const scanDevices = () => {
     if (Platform.OS !== "web") {
       setIsScanning(true);
-      bleManager.startDeviceScan(null, null, (error, device) => {
+      const scanOptions = { allowDuplicates: false };
+      const scanFilter = null;
+
+      bleManager.startDeviceScan(scanFilter, scanOptions, (error, device) => {
         if (error) {
           console.error(error);
+          setIsScanning(false);
           return;
         }
         setDevices((prevDevices) => {
@@ -63,6 +70,7 @@ function MyColdWalletScreen() {
       }, 10000); // Stop scanning after 10 seconds
     }
   };
+
   const settingsOptions = [
     { title: "Settings", icon: "settings", onPress: () => {} },
     { title: "Help & Support", icon: "help-outline", onPress: () => {} },
@@ -141,20 +149,24 @@ function MyColdWalletScreen() {
                   {isScanning ? (
                     <Text style={styles.modalSubtitle}>Scanning...</Text>
                   ) : (
-                    <FlatList
-                      data={devices}
-                      keyExtractor={(item) => item.id}
-                      renderItem={({ item }) => (
-                        <Text style={styles.modalSubtitle}>
-                          {item.name || "Unknown Device"}
-                        </Text>
-                      )}
-                    />
+                    devices.length > 0 && (
+                      <FlatList
+                        data={devices}
+                        keyExtractor={(item) => item.id}
+                        renderItem={({ item }) => (
+                          <Text style={styles.modalSubtitle}>
+                            {item.name || "Unknown Device"}
+                          </Text>
+                        )}
+                      />
+                    )
                   )}
-                  <Text style={styles.modalSubtitle}>
-                    Please make sure your Cold Wallet is unlocked and Bluetooth
-                    is enabled.
-                  </Text>
+                  {!isScanning && devices.length === 0 && (
+                    <Text style={styles.modalSubtitle}>
+                      Please make sure your Cold Wallet is unlocked and
+                      Bluetooth is enabled.
+                    </Text>
+                  )}
                   <TouchableOpacity
                     style={styles.cancelButton}
                     onPress={() => setModalVisible(false)}
