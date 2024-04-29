@@ -30,22 +30,26 @@ function MyColdWalletScreen() {
   }
 
   useEffect(() => {
+    let subscription;
     if (Platform.OS !== "web") {
-      const subscription = bleManager.onStateChange((state) => {
+      subscription = bleManager.onStateChange((state) => {
         if (state === "PoweredOn") {
           scanDevices();
         } else if (state === "Unknown") {
           console.warn("Bluetooth state is unknown");
         }
-        // Optionally remove the listener if you no longer need it
-        return () => subscription.remove();
       }, true);
-      return () => bleManager.destroy();
     }
+    return () => {
+      if (subscription) {
+        subscription.remove();
+      }
+      bleManager.destroy();
+    };
   }, [bleManager]);
 
   const scanDevices = () => {
-    if (Platform.OS !== "web") {
+    if (Platform.OS !== "web" && !isScanning) {
       setIsScanning(true);
       const scanOptions = { allowDuplicates: false };
       const scanFilter = null;
