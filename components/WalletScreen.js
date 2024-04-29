@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   ImageBackground,
   View,
@@ -15,6 +15,9 @@ function WalletScreen({ route }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState("");
   const [addCryptoVisible, setAddCryptoVisible] = useState(false);
+  const [selectedCardName, setSelectedCardName] = useState(null);
+  const scrollViewRef = useRef(); // 创建ScrollView的引用
+
   const [cryptoCards, setCryptoCards] = useState([
     {
       name: "Bitcoin",
@@ -45,10 +48,24 @@ function WalletScreen({ route }) {
     { name: "Dash", cardImage: require("../assets/Card3.png") },
   ];
 
-  const handleCardPress = (cryptoName) => {
-    const selectedCrypto = cryptoCards.find((card) => card.name === cryptoName);
-    setSelectedAddress(selectedCrypto ? selectedCrypto.address : "Unknown");
-    setModalVisible(true);
+  const handleCardPress = (cryptoName, index) => {
+    if (selectedCardName === cryptoName) {
+      // 如果当前卡片已选中，显示模态窗口
+      setModalVisible(true);
+    } else {
+      // 如果当前卡片未选中，更新选中状态，并滚动到该卡片
+      setSelectedAddress(
+        cryptoCards.find((card) => card.name === cryptoName)?.address ||
+          "Unknown"
+      );
+      setSelectedCardName(cryptoName);
+
+      // 卡片高度180px
+      const cardHeight = 180; // 每张卡片的实际高度
+      const topOffset = 160; // 屏幕顶部到卡片顶部的距离
+      const yOffset = Math.max(0, cardHeight * index - topOffset); // 计算滚动的偏移量，使得卡片顶部对齐至屏幕顶部180px
+      scrollViewRef.current.scrollTo({ y: yOffset, animated: true });
+    }
   };
 
   const handleAddCrypto = (crypto) => {
@@ -62,18 +79,21 @@ function WalletScreen({ route }) {
   return (
     <LinearGradient colors={["#24234C", "#101021"]} style={styles.container}>
       <ScrollView
+        ref={scrollViewRef}
+        contentContainerStyle={{ paddingBottom: 20 }}
         style={{
           width: "100%",
           paddingHorizontal: 0,
         }}
       >
-        {cryptoCards.map((card) => (
+        {cryptoCards.map((card, index) => (
           <TouchableOpacity
             style={{
               alignItems: "center",
+              marginBottom: selectedCardName === card.name ? 10 : -60,
             }}
             key={card.name}
-            onPress={() => handleCardPress(card.name)}
+            onPress={() => handleCardPress(card.name, index)}
           >
             <ImageBackground
               source={card.cardImage}
