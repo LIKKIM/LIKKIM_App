@@ -53,7 +53,7 @@ function MyColdWalletScreen() {
       bleManager.destroy();
     };
   }, [bleManager]);
-
+  //扫描蓝牙设备的函数
   const scanDevices = () => {
     if (Platform.OS !== "web" && !isScanning) {
       console.log("Scanning started");
