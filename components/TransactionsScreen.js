@@ -52,7 +52,7 @@ function TransactionsScreen() {
           </Text>
         </TouchableOpacity>
 
-        <TouchableOpacity
+        {/*         <TouchableOpacity
           style={styles.roundButton}
           onPress={() => console.log("Buy Pressed")}
         >
@@ -71,7 +71,7 @@ function TransactionsScreen() {
             Sell crypto securely for cash
           </Text>
         </TouchableOpacity>
-
+ */}
         {/* 选择接收的加密货币模态窗口 */}
         <Modal
           animationType="slide"
