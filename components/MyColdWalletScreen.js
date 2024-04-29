@@ -51,17 +51,18 @@ function MyColdWalletScreen() {
   const scanDevices = () => {
     if (Platform.OS !== "web" && !isScanning) {
       setIsScanning(true);
-      const scanOptions = { allowDuplicates: false };
+      const scanOptions = { allowDuplicates: true };
       const scanFilter = null;
 
       bleManager.startDeviceScan(scanFilter, scanOptions, (error, device) => {
         if (error) {
-          console.error(error);
+          console.error("BleManager scanning error:", error);
           setIsScanning(false);
           return;
         }
         setDevices((prevDevices) => {
-          if (prevDevices.every((d) => d.id !== device.id)) {
+          // 可能需要根据实际情况调整逻辑，确保设备列表正确更新
+          if (!prevDevices.find((d) => d.id === device.id)) {
             return [...prevDevices, device];
           }
           return prevDevices;
@@ -71,7 +72,7 @@ function MyColdWalletScreen() {
       setTimeout(() => {
         bleManager.stopDeviceScan();
         setIsScanning(false);
-      }, 10000); // Stop scanning after 10 seconds
+      }, 30000);
     }
   };
 
