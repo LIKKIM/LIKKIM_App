@@ -73,6 +73,8 @@ function MyColdWalletScreen() {
           }
           return prevDevices;
         });
+        // 在这里添加打印语句
+        console.log("Scanned device:", device);
       });
 
       setTimeout(() => {
