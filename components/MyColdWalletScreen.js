@@ -16,6 +16,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import styles from "../styles"; // 确保路径正确
 import { BlurView } from "expo-blur";
 import { BleManager } from "react-native-ble-plx";
+import Constants from "expo-constants";
 
 function MyColdWalletScreen() {
   const [modalVisible, setModalVisible] = useState(false);
@@ -24,10 +25,13 @@ function MyColdWalletScreen() {
   const isScanningRef = useRef(false); // 使用 useRef 来跟踪扫描状态
   const [isScanning, setIsScanning] = useState(false);
 
+  const restoreIdentifier = Constants.installationId;
+
   // 判断当前平台，如果不是Web，则初始化和使用蓝牙相关功能
+
   let bleManager;
   if (Platform.OS !== "web") {
-    bleManager = new BleManager();
+    bleManager = new BleManager({ restoreStateIdentifier: restoreIdentifier }); // 提供恢复标识符
   }
 
   const handleBluetoothPairing = () => {
