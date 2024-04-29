@@ -30,6 +30,11 @@ function MyColdWalletScreen() {
     bleManager = new BleManager();
   }
 
+  const handleBluetoothPairing = () => {
+    setModalVisible(true); // 打开模态窗口
+    scanDevices(); // 开始扫描蓝牙设备
+  };
+
   useEffect(() => {
     let subscription;
     if (Platform.OS !== "web") {
@@ -74,7 +79,7 @@ function MyColdWalletScreen() {
         console.log("Scanning stopped");
         bleManager.stopDeviceScan();
         setIsScanning(false);
-      }, 10000);
+      }, 90000);
     } else {
       console.log("Attempt to scan while already scanning");
     }
@@ -139,7 +144,7 @@ function MyColdWalletScreen() {
             <View style={{ alignItems: "center" }}>
               <TouchableOpacity
                 style={styles.roundButton}
-                onPress={() => setModalVisible(true)}
+                onPress={handleBluetoothPairing} // 修改为调用新的处理函数
               >
                 <Text style={styles.buttonText}>Pair with Bluetooth</Text>
               </TouchableOpacity>
