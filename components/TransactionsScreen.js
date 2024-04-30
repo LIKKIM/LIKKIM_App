@@ -81,7 +81,13 @@ function TransactionsScreen() {
         >
           <BlurView intensity={10} style={styles.centeredView}>
             <View style={styles.modalView}>
-              <Text style={styles.modalText}>
+              <Text
+                style={{
+                  color: "#ffffff", // 白色文字
+                  textAlign: "center", // 文本居中对齐
+                  marginBottom: 60, // 与下一个元素间距320
+                }}
+              >
                 Choose the cryptocurrency to receive:
               </Text>
               {["BTC", "ETH", "USDT"].map((crypto) => (

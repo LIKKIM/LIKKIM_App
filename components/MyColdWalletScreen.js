@@ -1,6 +1,6 @@
 // MyColdWalletScreen.js
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   View,
   Text,
@@ -13,61 +13,83 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import styles from "../styles"; // 确保路径正确
+import styles, { lightTheme, darkTheme } from "../styles";
 import { BlurView } from "expo-blur";
 import { BleManager } from "react-native-ble-plx";
+import Constants from "expo-constants";
 
 function MyColdWalletScreen() {
   const [modalVisible, setModalVisible] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true);
+  const theme = isDarkMode ? darkTheme : lightTheme; // 根据 isDarkMode 决定使用哪个主题
   const [devices, setDevices] = useState([]);
+  const isScanningRef = useRef(false); // 使用 useRef 来跟踪扫描状态
   const [isScanning, setIsScanning] = useState(false);
-
+  const restoreIdentifier = Constants.installationId;
+  const iconColor = isDarkMode ? "#ffffff" : "#24234C";
+  const darkColors = ["#24234C", "#101021"]; // 暗黑模式颜色
+  const lightColors = ["#FFFFFF", "#E0E0E0"]; // 明亮模式颜色
   // 判断当前平台，如果不是Web，则初始化和使用蓝牙相关功能
+
   let bleManager;
   if (Platform.OS !== "web") {
-    bleManager = new BleManager();
+    bleManager = new BleManager({ restoreStateIdentifier: restoreIdentifier }); // 提供恢复标识符
   }
 
+  const handleBluetoothPairing = () => {
+    setModalVisible(true); // 打开模态窗口
+    scanDevices(); // 开始扫描蓝牙设备
+  };
+
   useEffect(() => {
+    let subscription;
     if (Platform.OS !== "web") {
-      const subscription = bleManager.onStateChange((state) => {
+      subscription = bleManager.onStateChange((state) => {
         if (state === "PoweredOn") {
           scanDevices();
         } else if (state === "Unknown") {
           console.warn("Bluetooth state is unknown");
         }
-        // Optionally remove the listener if you no longer need it
-        return () => subscription.remove();
       }, true);
-      return () => bleManager.destroy();
     }
+    return () => {
+      if (subscription) {
+        subscription.remove();
+      }
+      bleManager.destroy();
+    };
   }, [bleManager]);
-
+  //扫描蓝牙设备的函数
   const scanDevices = () => {
-    if (Platform.OS !== "web") {
+    if (Platform.OS !== "web" && !isScanning) {
+      console.log("Scanning started");
       setIsScanning(true);
-      const scanOptions = { allowDuplicates: false };
+      const scanOptions = { allowDuplicates: true };
       const scanFilter = null;
 
       bleManager.startDeviceScan(scanFilter, scanOptions, (error, device) => {
         if (error) {
-          console.error(error);
+          console.error("BleManager scanning error:", error);
           setIsScanning(false);
           return;
         }
         setDevices((prevDevices) => {
-          if (prevDevices.every((d) => d.id !== device.id)) {
+          if (!prevDevices.find((d) => d.id === device.id)) {
             return [...prevDevices, device];
           }
           return prevDevices;
         });
+        // 在这里添加打印语句
+        console.log("Scanned device:", device);
       });
 
       setTimeout(() => {
+        console.log("Scanning stopped");
         bleManager.stopDeviceScan();
         setIsScanning(false);
-      }, 10000); // Stop scanning after 10 seconds
+      }, 90000);
+    } else {
+      console.log("Attempt to scan while already scanning");
     }
   };
 
@@ -95,7 +117,10 @@ function MyColdWalletScreen() {
   ];
 
   return (
-    <LinearGradient colors={["#24234C", "#101021"]} style={styles.container}>
+    <LinearGradient
+      colors={isDarkMode ? darkColors : lightColors}
+      style={styles.container}
+    >
       <ScrollView style={styles.scrollView}>
         <View style={styles.contentContainer}>
           {/* Settings Options */}
@@ -109,10 +134,10 @@ function MyColdWalletScreen() {
               <View
                 style={{ flexDirection: "row", alignItems: "center", flex: 1 }}
               >
-                <Icon name={option.icon} size={24} color="#ffffff" />
+                <Icon name={option.icon} size={24} color={iconColor} />
                 <Text
                   style={[
-                    styles.settingsText,
+                    theme.settingsText,
                     option.title === "Dark Mode" ? { flex: 1 } : null,
                   ]}
                 >
@@ -126,11 +151,11 @@ function MyColdWalletScreen() {
 
           {/* Bluetooth Btn */}
           <View style={{ marginTop: 40 }}>
-            <Text style={styles.titleText}>Bluetooth</Text>
+            <Text style={theme.titleText}>Bluetooth</Text>
             <View style={{ alignItems: "center" }}>
               <TouchableOpacity
                 style={styles.roundButton}
-                onPress={() => setModalVisible(true)}
+                onPress={handleBluetoothPairing} // 修改为调用新的处理函数
               >
                 <Text style={styles.buttonText}>Pair with Bluetooth</Text>
               </TouchableOpacity>
