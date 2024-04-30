@@ -8,7 +8,7 @@ import {
   ScrollView,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import styles from "../styles";
+import styles, { lightTheme, darkTheme } from "../styles";
 import { BlurView } from "expo-blur";
 
 function WalletScreen({ route }) {
@@ -17,7 +17,10 @@ function WalletScreen({ route }) {
   const [addCryptoVisible, setAddCryptoVisible] = useState(false);
   const [selectedCardName, setSelectedCardName] = useState(null);
   const scrollViewRef = useRef(); // 创建ScrollView的引用
-
+  const [isDarkMode, setIsDarkMode] = useState(true);
+  const iconColor = isDarkMode ? "#ffffff" : "#24234C";
+  const darkColors = ["#24234C", "#101021"]; // 暗黑模式颜色
+  const lightColors = ["#FFFFFF", "#E0E0E0"]; // 明亮模式颜色
   const [cryptoCards, setCryptoCards] = useState([
     {
       name: "Bitcoin",
@@ -83,7 +86,7 @@ function WalletScreen({ route }) {
 
   return (
     <LinearGradient
-      colors={["#24234C", "#101021"]}
+      colors={isDarkMode ? darkColors : lightColors}
       style={{
         flex: 1,
         paddingTop: 20,

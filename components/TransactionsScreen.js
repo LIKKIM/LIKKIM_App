@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { View, Text, Modal, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import styles from "../styles"; // 确保路径正确
+import styles, { lightTheme, darkTheme } from "../styles";
 import { BlurView } from "expo-blur";
 
 function TransactionsScreen() {
@@ -10,7 +10,10 @@ function TransactionsScreen() {
   const [addressModalVisible, setAddressModalVisible] = useState(false);
   const [selectedCrypto, setSelectedCrypto] = useState("");
   const [selectedAddress, setSelectedAddress] = useState("");
-
+  const [isDarkMode, setIsDarkMode] = useState(true);
+  const iconColor = isDarkMode ? "#ffffff" : "#24234C";
+  const darkColors = ["#24234C", "#101021"]; // 暗黑模式颜色
+  const lightColors = ["#FFFFFF", "#E0E0E0"]; // 明亮模式颜色
   const cryptoAddresses = {
     BTC: "1BoatSLRHtKNngkdXEeobR76b53LETtpyT",
     ETH: "0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe",
@@ -30,7 +33,10 @@ function TransactionsScreen() {
   };
 
   return (
-    <LinearGradient colors={["#24234C", "#101021"]} style={styles.container}>
+    <LinearGradient
+      colors={isDarkMode ? darkColors : lightColors}
+      style={styles.container}
+    >
       <View className="w-[100%]">
         <TouchableOpacity
           style={styles.roundButton}

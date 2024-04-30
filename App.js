@@ -12,7 +12,7 @@ import {
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import styles from "./styles";
+import styles, { lightTheme, darkTheme } from "./styles";
 import WalletScreen from "./components/WalletScreen";
 import TransactionsScreen from "./components/TransactionsScreen";
 import MyColdWalletScreen from "./components/MyColdWalletScreen";
