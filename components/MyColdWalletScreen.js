@@ -13,20 +13,22 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import styles from "../styles"; // 确保路径正确
+import styles, { lightTheme, darkTheme } from "../styles";
 import { BlurView } from "expo-blur";
 import { BleManager } from "react-native-ble-plx";
 import Constants from "expo-constants";
 
 function MyColdWalletScreen() {
   const [modalVisible, setModalVisible] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true);
+  const theme = isDarkMode ? darkTheme : lightTheme; // 根据 isDarkMode 决定使用哪个主题
   const [devices, setDevices] = useState([]);
   const isScanningRef = useRef(false); // 使用 useRef 来跟踪扫描状态
   const [isScanning, setIsScanning] = useState(false);
-
   const restoreIdentifier = Constants.installationId;
-
+  const iconColor = isDarkMode ? "#ffffff" : "#24234C";
+  const darkColors = ["#24234C", "#101021"]; // 暗黑模式颜色
+  const lightColors = ["#FFFFFF", "#E0E0E0"]; // 明亮模式颜色
   // 判断当前平台，如果不是Web，则初始化和使用蓝牙相关功能
 
   let bleManager;
@@ -115,7 +117,10 @@ function MyColdWalletScreen() {
   ];
 
   return (
-    <LinearGradient colors={["#24234C", "#101021"]} style={styles.container}>
+    <LinearGradient
+      colors={isDarkMode ? darkColors : lightColors}
+      style={styles.container}
+    >
       <ScrollView style={styles.scrollView}>
         <View style={styles.contentContainer}>
           {/* Settings Options */}
@@ -129,10 +134,10 @@ function MyColdWalletScreen() {
               <View
                 style={{ flexDirection: "row", alignItems: "center", flex: 1 }}
               >
-                <Icon name={option.icon} size={24} color="#ffffff" />
+                <Icon name={option.icon} size={24} color={iconColor} />
                 <Text
                   style={[
-                    styles.settingsText,
+                    theme.settingsText,
                     option.title === "Dark Mode" ? { flex: 1 } : null,
                   ]}
                 >
@@ -146,7 +151,7 @@ function MyColdWalletScreen() {
 
           {/* Bluetooth Btn */}
           <View style={{ marginTop: 40 }}>
-            <Text style={styles.titleText}>Bluetooth</Text>
+            <Text style={theme.titleText}>Bluetooth</Text>
             <View style={{ alignItems: "center" }}>
               <TouchableOpacity
                 style={styles.roundButton}

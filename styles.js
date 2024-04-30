@@ -1,5 +1,37 @@
 import { StyleSheet } from "react-native";
 
+export const lightTheme = StyleSheet.create({
+  settingsText: {
+    marginLeft: 10,
+    fontSize: 18,
+    color: "#24234C",
+  },
+  titleText: {
+    color: "#24234C",
+    fontSize: 24, // 字体大小为24
+    fontWeight: "bold", // 字体加粗
+    marginBottom: 20, // 与下一个元素间距20
+  },
+
+  // 更多的样式定义...
+});
+
+export const darkTheme = StyleSheet.create({
+  settingsText: {
+    marginLeft: 10,
+    fontSize: 18,
+    color: "#fff",
+  },
+  titleText: {
+    color: "#fff",
+    fontSize: 24, // 字体大小为24
+    fontWeight: "bold", // 字体加粗
+    marginBottom: 20, // 与下一个元素间距20
+  },
+
+  // 更多的样式定义...
+});
+
 // 使用StyleSheet创建并导出应用的样式
 const styles = StyleSheet.create({
   scrollView: {
@@ -24,7 +56,6 @@ const styles = StyleSheet.create({
   // container: 定义了应用的主容器样式
   container: {
     flex: 1,
-
     backgroundColor: "#121212", // 深灰色背景，适用于暗模式
     alignItems: "center", // 子元素沿着主轴（即垂直轴）居中对齐
     justifyContent: "center", // 子元素沿着交叉轴（即水平轴）居中对齐
@@ -82,7 +113,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold", // 文字加粗
   },
 
-  // titleText: 标题文字样式
   titleText: {
     color: "white", // 白色文字
     fontSize: 24, // 字体大小为24
