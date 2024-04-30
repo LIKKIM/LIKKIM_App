@@ -8,12 +8,13 @@ import { BlurView } from "expo-blur";
 function TransactionsScreen() {
   const [modalVisible, setModalVisible] = useState(false);
   const [addressModalVisible, setAddressModalVisible] = useState(false);
+  const [operationType, setOperationType] = useState("");
   const [selectedCrypto, setSelectedCrypto] = useState("");
   const [selectedAddress, setSelectedAddress] = useState("");
   const [isDarkMode, setIsDarkMode] = useState(true);
   const iconColor = isDarkMode ? "#ffffff" : "#24234C";
-  const darkColors = ["#24234C", "#101021"]; // 暗黑模式颜色
-  const lightColors = ["#FFFFFF", "#E0E0E0"]; // 明亮模式颜色
+  const darkColors = ["#24234C", "#101021"];
+  const lightColors = ["#FFFFFF", "#E0E0E0"];
   const cryptoAddresses = {
     BTC: "1BoatSLRHtKNngkdXEeobR76b53LETtpyT",
     ETH: "0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe",
@@ -21,27 +22,39 @@ function TransactionsScreen() {
   };
 
   const handleReceivePress = () => {
-    setModalVisible(true); // 打开接收加密货币的选择模态窗口
+    setOperationType("receive");
+    setModalVisible(true);
+  };
+  const handleSendPress = () => {
+    setOperationType("send");
+    setModalVisible(true);
   };
 
-  const selectCrypto = (crypto) => {
+  /*   const selectCrypto = (crypto) => {
     console.log(`Receive ${crypto} Pressed`);
     setSelectedCrypto(crypto);
     setSelectedAddress(cryptoAddresses[crypto]); // 设置所选加密货币的地址
     setModalVisible(false); // 关闭选择模态窗口
     setAddressModalVisible(true); // 打开地址显示模态窗口
+  }; */
+  const selectCrypto = (crypto) => {
+    setSelectedCrypto(crypto);
+    setSelectedAddress(cryptoAddresses[crypto]);
+    setModalVisible(false);
+    if (operationType === "receive") {
+      setAddressModalVisible(true); // 显示地址的Modal
+    } else if (operationType === "send") {
+      console.log("Open interface for user to input address.");
+      // 用户输入地址的界面逻辑处理
+    }
   };
-
   return (
     <LinearGradient
       colors={isDarkMode ? darkColors : lightColors}
       style={styles.container}
     >
       <View className="w-[100%]">
-        <TouchableOpacity
-          style={styles.roundButton}
-          onPress={() => console.log("Send Pressed")}
-        >
+        <TouchableOpacity style={styles.roundButton} onPress={handleSendPress}>
           <Text style={styles.buttonText}>Send</Text>
           <Text style={styles.subButtonText}>
             Send crypto to another wallet
@@ -94,7 +107,9 @@ function TransactionsScreen() {
                   marginBottom: 60, // 与下一个元素间距320
                 }}
               >
-                Choose the cryptocurrency to receive:
+                {operationType === "send"
+                  ? "Choose the cryptocurrency to send:"
+                  : "Choose the cryptocurrency to receive:"}
               </Text>
               {["BTC", "ETH", "USDT"].map((crypto) => (
                 <TouchableOpacity
