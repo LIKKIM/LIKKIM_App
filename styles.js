@@ -183,6 +183,25 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 10,
   },
+  input: {
+    backgroundColor: "#6C6CF4",
+    padding: 10,
+    marginTop: 30,
+    marginBottom: 60,
+    justifyContent: "center",
+    borderRadius: 10,
+    height: 60,
+    alignItems: "center",
+  },
+  submitButton: {
+    backgroundColor: "#6C6CF4",
+    padding: 10,
+    width: "80%",
+    justifyContent: "center",
+    borderRadius: 30,
+    height: 60,
+    alignItems: "center",
+  },
   cancelButton: {
     backgroundColor: "#6C6CF4",
     padding: 10,
@@ -193,6 +212,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     position: "absolute",
     bottom: 60,
+  },
+
+  submitButtonText: {
+    color: "#ffffff", // 白色文字
   },
   cancelButtonText: {
     color: "#ffffff", // 白色文字

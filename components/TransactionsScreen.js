@@ -1,6 +1,6 @@
 // TransactionsScreen.js
 import React, { useState } from "react";
-import { View, Text, Modal, TouchableOpacity } from "react-native";
+import { View, Text, Modal, TouchableOpacity, TextInput } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import styles, { lightTheme, darkTheme } from "../styles";
 import { BlurView } from "expo-blur";
@@ -15,6 +15,10 @@ function TransactionsScreen() {
   const iconColor = isDarkMode ? "#ffffff" : "#24234C";
   const darkColors = ["#24234C", "#101021"];
   const lightColors = ["#FFFFFF", "#E0E0E0"];
+  const [inputAddress, setInputAddress] = useState("");
+  const [inputAddressModalVisible, setInputAddressModalVisible] =
+    useState(false);
+
   const cryptoAddresses = {
     BTC: "1BoatSLRHtKNngkdXEeobR76b53LETtpyT",
     ETH: "0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe",
@@ -42,10 +46,11 @@ function TransactionsScreen() {
     setSelectedAddress(cryptoAddresses[crypto]);
     setModalVisible(false);
     if (operationType === "receive") {
-      setAddressModalVisible(true); // 显示地址的Modal
+      setAddressModalVisible(true);
     } else if (operationType === "send") {
-      console.log("Open interface for user to input address.");
-      // 用户输入地址的界面逻辑处理
+      setAddressModalVisible(false); // 隐藏地址模态窗口
+      setInputAddress(""); // 清除先前的输入地址
+      setInputAddressModalVisible(true); // 显示输入地址模态窗口
     }
   };
   return (
@@ -91,6 +96,83 @@ function TransactionsScreen() {
           </Text>
         </TouchableOpacity>
  */}
+
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={inputAddressModalVisible}
+          onRequestClose={() => setInputAddressModalVisible(false)}
+        >
+          <BlurView intensity={10} style={styles.centeredView}>
+            <View
+              style={{
+                margin: 20,
+                height: 450,
+                display: "flex",
+                backgroundColor: "#484692",
+                borderRadius: 20,
+                padding: 35,
+                alignItems: "center",
+                shadowColor: "#000",
+                shadowOffset: { width: 0, height: 2 },
+                shadowOpacity: 0.25,
+                shadowRadius: 3.84,
+                elevation: 5,
+              }}
+            >
+              <Text style={styles.modalTitle}>
+                Enter the recipient's address:
+              </Text>
+
+              <View
+                style={{
+                  width: "100%",
+                }}
+              >
+                <TextInput
+                  style={[styles.input, { color: "#ffffff" }]}
+                  placeholder="Address"
+                  placeholderTextColor="#ffffff"
+                  onChangeText={(text) => setInputAddress(text)}
+                  value={inputAddress}
+                />
+                <TouchableOpacity
+                  style={{
+                    backgroundColor: "#6C6CF4",
+                    padding: 10,
+                    marginBottom: 10,
+                    justifyContent: "center",
+                    borderRadius: 30,
+                    height: 60,
+                    alignItems: "center",
+                  }}
+                  onPress={() => {
+                    console.log(`Sending ${selectedCrypto} to ${inputAddress}`);
+                    setInputAddressModalVisible(false);
+                    // Implement the logic to send crypto to the input address
+                  }}
+                >
+                  <Text style={styles.submitButtonText}>Submit</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={{
+                    backgroundColor: "#6C6CF4",
+                    padding: 10,
+
+                    justifyContent: "center",
+                    borderRadius: 30,
+                    height: 60,
+                    alignItems: "center",
+                  }}
+                  onPress={() => setInputAddressModalVisible(false)}
+                >
+                  <Text style={styles.cancelButtonText}>Cancel</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </BlurView>
+        </Modal>
+
         {/* 选择接收的加密货币模态窗口 */}
         <Modal
           animationType="slide"
