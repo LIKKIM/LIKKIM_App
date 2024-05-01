@@ -232,7 +232,25 @@ function TransactionsScreen() {
               <Text style={styles.modalTitle}>
                 Address for {selectedCrypto}:
               </Text>
-              <Text style={styles.modalText}>{selectedAddress}</Text>
+              {/* 下面的Text标签是数字货币冷钱包的地址 */}
+              <Text
+                style={{
+                  color: "#ffffff",
+                  textAlign: "center",
+                  marginBottom: 60,
+                }}
+              >
+                {selectedAddress}
+              </Text>
+              {/* 下面的View标签是QRcode图片模块 */}
+              <View
+                style={{
+                  backgroundColor: "#EEEEEE",
+                  height: 200,
+                  width: 200,
+                  borderRadius: 12,
+                }}
+              ></View>
               <TouchableOpacity
                 style={styles.cancelButton}
                 onPress={() => setAddressModalVisible(false)}
