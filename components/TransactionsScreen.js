@@ -4,7 +4,7 @@ import { View, Text, Modal, TouchableOpacity, TextInput } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import styles, { lightTheme, darkTheme } from "../styles";
 import { BlurView } from "expo-blur";
-
+import QRCode from "react-native-qrcode-svg"; // 导入 QRCode 组件
 function TransactionsScreen() {
   const [modalVisible, setModalVisible] = useState(false);
   const [addressModalVisible, setAddressModalVisible] = useState(false);
@@ -245,12 +245,17 @@ function TransactionsScreen() {
               {/* 下面的View标签是QRcode图片模块 */}
               <View
                 style={{
-                  backgroundColor: "#EEEEEE",
-                  height: 200,
-                  width: 200,
+                  backgroundColor: "#fff",
+                  height: 220,
+                  width: 220,
+                  justifyContent: "center",
+                  alignItems: "center",
                   borderRadius: 12,
                 }}
-              ></View>
+              >
+                <QRCode value={selectedAddress} size={200} />
+              </View>
+              {/* 在此处生成QR码 */}
               <TouchableOpacity
                 style={styles.cancelButton}
                 onPress={() => setAddressModalVisible(false)}
