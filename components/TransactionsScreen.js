@@ -112,6 +112,7 @@ function TransactionsScreen() {
                 backgroundColor: "#484692",
                 borderRadius: 20,
                 padding: 35,
+                width: "80%",
                 alignItems: "center",
                 shadowColor: "#000",
                 shadowOffset: { width: 0, height: 2 },
@@ -131,7 +132,7 @@ function TransactionsScreen() {
               >
                 <TextInput
                   style={[styles.input, { color: "#ffffff" }]}
-                  placeholder="Address"
+                  placeholder="Enter Address"
                   placeholderTextColor="#ffffff"
                   onChangeText={(text) => setInputAddress(text)}
                   value={inputAddress}
