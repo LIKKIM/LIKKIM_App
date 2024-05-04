@@ -249,6 +249,8 @@ ColdWallet 应用是一个基于 ESP32 开发的数字货币冷钱包应用，�
 3. **请求钱包地址：** 通过安全通道，从 ESP32 冷钱包设备请求获取钱包地址。
 4. **显示钱包地址：** 在 React Native 应用的用户界面中清晰地显示接收到的钱包地址。
 
+# 屏幕适配 https://www.youtube.com/watch?v=_hgsAlPTGXY
+
 编译问题：如果链接正确但问题依然存在，尝试清除项目缓存并重新编译：
 bash
 Copy code
