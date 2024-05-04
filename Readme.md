@@ -248,3 +248,48 @@ ColdWallet 应用是一个基于 ESP32 开发的数字货币冷钱包应用，�
 2. **建立安全通信：** 使用 Diffie-Hellman 协议进行公钥密钥交换，并建立加密通信通道。
 3. **请求钱包地址：** 通过安全通道，从 ESP32 冷钱包设备请求获取钱包地址。
 4. **显示钱包地址：** 在 React Native 应用的用户界面中清晰地显示接收到的钱包地址。
+
+# 屏幕适配 https://www.youtube.com/watch?v=_hgsAlPTGXY
+
+编译问题：如果链接正确但问题依然存在，尝试清除项目缓存并重新编译：
+bash
+Copy code
+react-native start --reset-cache
+react-native run-android
+或者对于 iOS：
+bash
+Copy code
+cd ios
+pod install
+cd ..
+react-native run-ios
+
+您遇到的错误信息表明应用程序在尝试使用蓝牙功能时因为未正确配置背景模式而导致异常。错误信息是："State restoration of CBCentralManager is only allowed for applications that have specified the 'bluetooth-central' background mode"。这意味着您的应用试图在恢复蓝牙中心管理器（CBCentralManager）的状态时，未在应用的 Info.plist 中声明使用蓝牙中心背景模式。
+
+为了解决这个问题，您需要在您的 iOS 应用的 Info.plist 文件中添加必要的背景模式配置。具体步骤如下：
+
+1. **打开您的项目的 `Info.plist` 文件**：这通常位于 Xcode 项目的根目录下。
+
+2. **添加蓝牙背景模式**：
+
+   - 在 Xcode 中，选择您的项目设置，进入 "Capabilities" 标签页。
+   - 找到 "Background Modes" 选项并打开它。
+   - 勾选 "Uses Bluetooth LE accessories" 选项。这将允许您的应用在后台使用蓝牙低功耗设备。
+   - 同时确保勾选 "Acts as a Bluetooth LE accessory" 如果您的应用需要这样的功能。
+
+3. **确保 `Info.plist` 包含正确的键值**：
+
+   - 如果手动编辑 `Info.plist`，您需要确保包含以下键：
+     ```
+     <key>UIBackgroundModes</key>
+     <array>
+         <string>bluetooth-central</string>
+     </array>
+     ```
+   - 这样配置后，您的应用将被授权在后台进行蓝牙通信。
+
+4. **重新编译并运行您的应用**：
+   - 在 Xcode 中重新编译您的应用确保所有设置生效。
+   - 运行您的应用并检查是否还会出现相同的错误。
+
+通过上述步骤，您应该能够解决因未正确设置背景模式导致的 CBCentralManager 状态恢复问题。如果问题依然存在，可能需要检查您的代码中是否有其他配置错误或进行进一步的调试。
