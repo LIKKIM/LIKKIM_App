@@ -248,3 +248,16 @@ ColdWallet 应用是一个基于 ESP32 开发的数字货币冷钱包应用，�
 2. **建立安全通信：** 使用 Diffie-Hellman 协议进行公钥密钥交换，并建立加密通信通道。
 3. **请求钱包地址：** 通过安全通道，从 ESP32 冷钱包设备请求获取钱包地址。
 4. **显示钱包地址：** 在 React Native 应用的用户界面中清晰地显示接收到的钱包地址。
+
+编译问题：如果链接正确但问题依然存在，尝试清除项目缓存并重新编译：
+bash
+Copy code
+react-native start --reset-cache
+react-native run-android
+或者对于 iOS：
+bash
+Copy code
+cd ios
+pod install
+cd ..
+react-native run-ios
