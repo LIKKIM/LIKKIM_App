@@ -238,7 +238,7 @@ function TransactionsScreen() {
                 style={{
                   color: "#ffffff",
                   textAlign: "center",
-                  marginBottom: 60,
+                  marginBottom: 30,
                 }}
               >
                 {selectedAddress}
