@@ -163,6 +163,34 @@ const styles = StyleSheet.create({
     marginBottom: 320, // 与下一个元素间距320
     textAlign: "center", // 文本居中对齐
   },
+  languageModalTitle: {
+    color: "#ffffff", // 白色文字
+    fontSize: 20, // 增加字体大小为20
+    fontWeight: "bold", // 字体加粗
+    marginBottom: 15, // 与下一个元素间距15
+  },
+  languageModalText: {
+    color: "#ffffff", // 白色文字
+    fontSize: 16, // 增加字体大小为16
+    marginBottom: 10, // 调整间距
+    textAlign: "center", // 文本居中对齐
+  },
+  languageList: {
+    maxHeight: 320, // 限制最大高度，根据实际需求调整
+    width: 280,
+  },
+  languageCancelButton: {
+    backgroundColor: "#6C6CF4",
+    padding: 10,
+    width: "80%",
+    justifyContent: "center",
+    borderRadius: 30,
+    height: 60,
+    alignItems: "center",
+    position: "absolute",
+    bottom: 30,
+  },
+
   modalText: {
     color: "#ffffff", // 白色文字
     textAlign: "center", // 文本居中对齐

@@ -133,7 +133,7 @@ function MyColdWalletScreen() {
       title: "Language",
       icon: "language",
       onPress: () => setLanguageModalVisible(true),
-      extraIcon: "arrow-drop-down", // 添加向下的箭头图标
+      extraIcon: "arrow-drop-down",
     },
     {
       title: "Dark Mode",
@@ -189,21 +189,22 @@ function MyColdWalletScreen() {
           >
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
-                <Text style={styles.modalTitle}>Select Language</Text>
-                {languages.map((language) => (
-                  <TouchableOpacity
-                    key={language}
-                    style={styles.languageItem}
-                    onPress={() => {
-                      console.log("Selected language:", language);
-                      setLanguageModalVisible(false);
-                    }}
-                  >
-                    <Text style={styles.languageText}>{language}</Text>
-                  </TouchableOpacity>
-                ))}
+                <Text style={styles.languageModalTitle}>Select Language</Text>
+                <ScrollView style={styles.languageList}>
+                  {languages.map((language) => (
+                    <TouchableOpacity
+                      key={language}
+                      onPress={() => {
+                        console.log("Selected language:", language);
+                        setLanguageModalVisible(false);
+                      }}
+                    >
+                      <Text style={styles.languageModalText}>{language}</Text>
+                    </TouchableOpacity>
+                  ))}
+                </ScrollView>
                 <TouchableOpacity
-                  style={styles.cancelButton}
+                  style={styles.languageCancelButton}
                   onPress={() => setLanguageModalVisible(false)}
                 >
                   <Text style={styles.cancelButtonText}>Cancel</Text>
