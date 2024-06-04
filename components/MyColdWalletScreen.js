@@ -21,6 +21,7 @@ import Constants from "expo-constants";
 function MyColdWalletScreen() {
   const [modalVisible, setModalVisible] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
+  const [languageModalVisible, setLanguageModalVisible] = useState(false);
   const theme = isDarkMode ? darkTheme : lightTheme; // 根据 isDarkMode 决定使用哪个主题
   const [devices, setDevices] = useState([]);
   const isScanningRef = useRef(false); // 使用 useRef 来跟踪扫描状态
@@ -29,6 +30,20 @@ function MyColdWalletScreen() {
   const iconColor = isDarkMode ? "#ffffff" : "#24234C";
   const darkColors = ["#24234C", "#101021"]; // 暗黑模式颜色
   const lightColors = ["#FFFFFF", "#E0E0E0"]; // 明亮模式颜色
+  const languages = [
+    "English",
+    "中文",
+    "Français",
+    "Español",
+    "العربية",
+    "日本語",
+    "Русский",
+    "한국어",
+    "Português",
+    "Italiano",
+    "Deutsch",
+  ];
+
   // 判断当前平台，如果不是Web，则初始化和使用蓝牙相关功能
 
   let bleManager;
@@ -94,19 +109,39 @@ function MyColdWalletScreen() {
   };
 
   const settingsOptions = [
-    { title: "Settings", icon: "settings", onPress: () => {} },
-    { title: "Help & Support", icon: "help-outline", onPress: () => {} },
-    { title: "Privacy & Data", icon: "privacy-tip", onPress: () => {} },
-    { title: "About", icon: "info", onPress: () => {} },
-    { title: "Language", icon: "language", onPress: () => {} },
+    {
+      title: "Settings",
+      icon: "settings",
+      onPress: () => {},
+    },
+    {
+      title: "Help & Support",
+      icon: "help-outline",
+      onPress: () => {},
+    },
+    {
+      title: "Privacy & Data",
+      icon: "privacy-tip",
+      onPress: () => {},
+    },
+    {
+      title: "About",
+      icon: "info",
+      onPress: () => {},
+    },
+    {
+      title: "Language",
+      icon: "language",
+      onPress: () => setLanguageModalVisible(true),
+      extraIcon: "arrow-drop-down", // 添加向下的箭头图标
+    },
     {
       title: "Dark Mode",
       icon: "dark-mode",
-      onPress: () => setIsDarkMode(!isDarkMode), // 用于切换暗黑模式状态
+      onPress: () => setIsDarkMode(!isDarkMode),
       toggle: (
         <Switch
           trackColor={{ false: "#767577", true: "#81b0ff" }}
-          //thumbColor={isDarkMode ? "#f5dd4b" : "#f4f3f4"}
           thumbColor={isDarkMode ? "#fff" : "#f4f3f4"}
           ios_backgroundColor="#3e3e3e"
           onValueChange={() => setIsDarkMode(!isDarkMode)}
@@ -130,25 +165,52 @@ function MyColdWalletScreen() {
               style={styles.settingsItem}
               onPress={option.onPress}
             >
-              {/* 显示图标和标题 */}
               <View
                 style={{ flexDirection: "row", alignItems: "center", flex: 1 }}
               >
                 <Icon name={option.icon} size={24} color={iconColor} />
-                <Text
-                  style={[
-                    theme.settingsText,
-                    option.title === "Dark Mode" ? { flex: 1 } : null,
-                  ]}
-                >
+                <Text style={[theme.settingsText, { flex: 1 }]}>
                   {option.title}
                 </Text>
+                {/* 条件渲染额外的图标 */}
+                {option.extraIcon && (
+                  <Icon name={option.extraIcon} size={24} color={iconColor} />
+                )}
               </View>
-              {/* 对于Dark Mode选项，添加一个toggle按钮 */}
-              {option.title === "Dark Mode" && option.toggle}
+              {option.toggle}
             </TouchableOpacity>
           ))}
-
+          {/* 语言选择 Modal */}
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={languageModalVisible}
+            onRequestClose={() => setLanguageModalVisible(false)}
+          >
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <Text style={styles.modalTitle}>Select Language</Text>
+                {languages.map((language) => (
+                  <TouchableOpacity
+                    key={language}
+                    style={styles.languageItem}
+                    onPress={() => {
+                      console.log("Selected language:", language);
+                      setLanguageModalVisible(false);
+                    }}
+                  >
+                    <Text style={styles.languageText}>{language}</Text>
+                  </TouchableOpacity>
+                ))}
+                <TouchableOpacity
+                  style={styles.cancelButton}
+                  onPress={() => setLanguageModalVisible(false)}
+                >
+                  <Text style={styles.cancelButtonText}>Cancel</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </Modal>
           {/* Bluetooth Btn */}
           <View style={{ marginTop: 40 }}>
             <Text style={theme.titleText}>Bluetooth</Text>
