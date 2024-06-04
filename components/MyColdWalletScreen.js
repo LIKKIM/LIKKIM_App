@@ -110,9 +110,21 @@ function MyColdWalletScreen() {
 
   const settingsOptions = [
     {
-      title: "Settings",
-      icon: "settings",
-      onPress: () => {},
+      title: "Change Password",
+      icon: "lock-outline", // 使用 MaterialIcons 的锁图标
+      onPress: () => {
+        // 添加处理修改密码的逻辑或导航
+        console.log("Change Password Pressed");
+      },
+    },
+    {
+      title: "Default Currency",
+      icon: "attach-money", // 使用 MaterialIcons 的货币图标
+      onPress: () => {
+        // 添加处理选择默认货币的逻辑或导航
+        console.log("Default Currency Pressed");
+      },
+      extraIcon: "arrow-drop-down",
     },
     {
       title: "Help & Support",

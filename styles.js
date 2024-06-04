@@ -183,14 +183,40 @@ const styles = StyleSheet.create({
     backgroundColor: "#6C6CF4",
     padding: 10,
     width: "80%",
-    justifyContent: "center",
     borderRadius: 30,
     height: 60,
     alignItems: "center",
+    justifyContent: "center",
     position: "absolute",
     bottom: 30,
   },
-
+  historyContainer: {
+    marginTop: 20,
+    padding: 20,
+    backgroundColor: "#24234C", // 深灰色背景
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 10,
+    height: 360,
+  },
+  historyTitle: {
+    fontSize: 18,
+    color: "#ffffff", // 白色文字
+  },
+  noHistoryText: {
+    fontSize: 16,
+    color: "#ffffff", // 白色文字
+    textAlign: "center",
+  },
+  historyItem: {
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: "#ccc", // 根据你的主题调整
+  },
+  historyItemText: {
+    fontSize: 16,
+    color: "#000", // 根据你的主题调整
+  },
   modalText: {
     color: "#ffffff", // 白色文字
     textAlign: "center", // 文本居中对齐

@@ -16,6 +16,7 @@ function TransactionsScreen() {
   const darkColors = ["#24234C", "#101021"];
   const lightColors = ["#FFFFFF", "#E0E0E0"];
   const [inputAddress, setInputAddress] = useState("");
+  const [transactionHistory, setTransactionHistory] = useState([]);
   const [inputAddressModalVisible, setInputAddressModalVisible] =
     useState(false);
 
@@ -75,7 +76,18 @@ function TransactionsScreen() {
             Receive crypto from another wallet
           </Text>
         </TouchableOpacity>
-
+        <View style={styles.historyContainer}>
+          <Text style={styles.historyTitle}>Transaction History</Text>
+          {transactionHistory.length === 0 ? (
+            <Text style={styles.noHistoryText}>No Histories</Text>
+          ) : (
+            transactionHistory.map((transaction, index) => (
+              <View key={index} style={styles.historyItem}>
+                <Text style={styles.historyItemText}>{transaction.detail}</Text>
+              </View>
+            ))
+          )}
+        </View>
         {/*         <TouchableOpacity
           style={styles.roundButton}
           onPress={() => console.log("Buy Pressed")}
