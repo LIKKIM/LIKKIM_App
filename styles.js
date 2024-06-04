@@ -200,6 +200,9 @@ const styles = StyleSheet.create({
     height: 360,
   },
   historyTitle: {
+    position: "absolute",
+    left: 20,
+    top: 20,
     fontSize: 18,
     color: "#ffffff", // 白色文字
   },
