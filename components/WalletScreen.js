@@ -14,6 +14,7 @@ import { BlurView } from "expo-blur";
 
 function WalletScreen({ route }) {
   const [modalVisible, setModalVisible] = useState(false);
+  const [dropdownVisible, setDropdownVisible] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState("");
   const [addCryptoVisible, setAddCryptoVisible] = useState(false);
   const [selectedCardName, setSelectedCardName] = useState(null);
@@ -22,6 +23,14 @@ function WalletScreen({ route }) {
   const iconColor = isDarkMode ? "#ffffff" : "#24234C";
   const darkColors = ["#24234C", "#101021"]; // 暗黑模式颜色
   const lightColors = ["#FFFFFF", "#E0E0E0"]; // 明亮模式颜色
+  const handleDeleteCard = () => {
+    setCryptoCards(
+      cryptoCards.filter((card) => card.name !== selectedCardName)
+    );
+    setDropdownVisible(false); // Close the dropdown after action
+    setModalVisible(false); // Optionally close the modal as well
+  };
+
   const [cryptoCards, setCryptoCards] = useState([
     {
       name: "Bitcoin",
@@ -224,9 +233,9 @@ function WalletScreen({ route }) {
             style={{
               margin: 20,
               width: "80%",
-              backgroundColor: "#484692", // Dark background
+              backgroundColor: "#484692", // Consistent dark background
               borderRadius: 20,
-              padding: 20, // Adjust padding as necessary
+              padding: 35,
               alignItems: "center",
               shadowColor: "#000",
               shadowOffset: { width: 0, height: 2 },
@@ -245,14 +254,33 @@ function WalletScreen({ route }) {
             >
               <Text style={styles.modalTitle}>Value:</Text>
               <TouchableOpacity
-                onPress={() => {
-                  // Handle settings press
-                  console.log("Settings icon pressed");
-                }}
+                onPress={() => setDropdownVisible(!dropdownVisible)}
               >
                 <Icon name="settings" size={24} color="#FFF" />
               </TouchableOpacity>
             </View>
+            {dropdownVisible && (
+              <View
+                style={{
+                  position: "absolute",
+                  right: 10,
+                  top: 40, // Adjusted to show above the content
+                  backgroundColor: "#24234C",
+                  borderRadius: 5,
+                  padding: 10,
+                  zIndex: 1, // Ensure it overlays other content
+                }}
+              >
+                <TouchableOpacity
+                  onPress={handleDeleteCard}
+                  style={{ padding: 10 }}
+                >
+                  <Text style={{ color: "#FFF", fontSize: 16 }}>
+                    Delete Card
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            )}
             <Text
               style={{
                 color: "#ffffff",
