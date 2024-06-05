@@ -8,6 +8,7 @@ import {
   ScrollView,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import Icon from "react-native-vector-icons/MaterialIcons";
 import styles, { lightTheme, darkTheme } from "../styles";
 import { BlurView } from "expo-blur";
 
@@ -223,24 +224,41 @@ function WalletScreen({ route }) {
             style={{
               margin: 20,
               width: "80%",
-              backgroundColor: "#484692", // 深灰色背景
-              borderRadius: 20, // 圆角为20
-              padding: 35, // 内边距为35
-              alignItems: "center", // 内容居中对齐
-              shadowColor: "#000", // 阴影为黑色
-              shadowOffset: { width: 0, height: 2 }, // 阴影偏移
-              shadowOpacity: 0.25, // 阴影透明度
-              shadowRadius: 3.84, // 阴影扩散范围
-              elevation: 5, // 用于Android的材质阴影高度
+              backgroundColor: "#484692", // Dark background
+              borderRadius: 20,
+              padding: 20, // Adjust padding as necessary
+              alignItems: "center",
+              shadowColor: "#000",
+              shadowOffset: { width: 0, height: 2 },
+              shadowOpacity: 0.25,
+              shadowRadius: 3.84,
+              elevation: 5,
             }}
           >
-            <Text style={styles.modalTitle}>Value:</Text>
+            <View
+              style={{
+                width: "100%",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <Text style={styles.modalTitle}>Value:</Text>
+              <TouchableOpacity
+                onPress={() => {
+                  // Handle settings press
+                  console.log("Settings icon pressed");
+                }}
+              >
+                <Icon name="settings" size={24} color="#FFF" />
+              </TouchableOpacity>
+            </View>
             <Text
               style={{
-                color: "#ffffff", // 白色文字
-                textAlign: "center", // 文本居中对齐
+                color: "#ffffff",
+                textAlign: "center",
                 fontSize: 40,
-                marginBottom: 30, // 与下一个元素间距320
+                marginBottom: 30,
               }}
             >
               {selectedAddress}
