@@ -128,11 +128,10 @@ function WalletScreen({ route }) {
       >
         {cryptoCards.length === 0 && (
           <ImageBackground
-            source={require("../assets/Card3.png")}
+            source={require("../assets/AddWallet.png")}
             style={{
               width: 300,
               height: 170,
-
               borderRadius: 20,
               overflow: "hidden",
               justifyContent: "center",
@@ -155,7 +154,9 @@ function WalletScreen({ route }) {
                 alignItems: "center",
               }}
             >
-              <Text style={{ color: "#FFF", fontSize: 18 }}>Add Wallet</Text>
+              <Text style={{ color: "#FFF", fontSize: 18, fontWeight: "bold" }}>
+                Add Wallet
+              </Text>
             </TouchableOpacity>
           </ImageBackground>
         )}
@@ -202,9 +203,9 @@ function WalletScreen({ route }) {
               elevation: 5, // 用于Android的材质阴影高度
             }}
           >
-            <Text style={{ color: "#FFF", fontSize: 18, marginBottom: 20 }}>
+            {/*       <Text style={{ color: "#FFF", fontSize: 18, marginBottom: 20 }}>
               Choose an option
-            </Text>
+            </Text> */}
             <TouchableOpacity
               style={{
                 backgroundColor: "#6C6CF4",
