@@ -10,6 +10,7 @@ import {
   ScrollView,
   Platform,
   Switch,
+  PermissionsAndroid,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/MaterialIcons";
