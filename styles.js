@@ -173,6 +173,12 @@ const styles = StyleSheet.create({
     color: "#ffffff", // 白色文字
     fontSize: 16, // 增加字体大小为16
     marginBottom: 10, // 调整间距
+    textAlign: "center", // 文本居中对齐
+  },
+  passwordModalText: {
+    color: "#ffffff", // 白色文字
+    fontSize: 16, // 增加字体大小为16
+    marginBottom: 10, // 调整间距
     textAlign: "left", // 文本居中对齐
   },
   languageList: {

@@ -294,7 +294,7 @@ function MyColdWalletScreen() {
                   Only you can unlock your wallet
                 </Text>
                 <View style={{ marginVertical: 10, width: 200 }}>
-                  <Text style={styles.languageModalText}>Password</Text>
+                  <Text style={styles.passwordModalText}>Password</Text>
                   <View
                     style={[
                       {
@@ -332,7 +332,7 @@ function MyColdWalletScreen() {
                   </View>
                 </View>
                 <View style={{ marginVertical: 10, width: 200 }}>
-                  <Text style={styles.languageModalText}>Confirm Password</Text>
+                  <Text style={styles.passwordModalText}>Confirm Password</Text>
                   <View
                     style={[
                       {
