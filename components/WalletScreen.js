@@ -127,26 +127,37 @@ function WalletScreen({ route }) {
         }}
       >
         {cryptoCards.length === 0 && (
-          <TouchableOpacity
-            onPress={() => setAddWalletModalVisible(true)}
+          <ImageBackground
+            source={require("../assets/Card3.png")}
             style={{
-              width: 300, // 宽度为300
-              height: 170, // 高度为100
-              borderRadius: 20, // 边角圆润程度为16
+              width: 300,
+              height: 170,
+
+              borderRadius: 20,
               overflow: "hidden",
-              justifyContent: "center", // 内容居中显示
-              alignItems: "center", // 内容居中显示
-              backgroundColor: "#484692", // 深灰色背景，比container稍浅
-              marginBottom: 20, // 与下一个元素间距20
-              shadowColor: "#000", // 阴影颜色为黑色
-              shadowOffset: { width: 0, height: 2 }, // 阴影偏移
-              shadowOpacity: 0.25, // 阴影透明度
-              shadowRadius: 3.84, // 阴影扩散范围
-              elevation: 5, // 用于Android的材质阴影高度
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: "#484692",
+              shadowColor: "#000",
+              shadowOffset: { width: 0, height: 2 },
+              shadowOpacity: 0.25,
+              shadowRadius: 3.84,
+              elevation: 5,
             }}
+            imageStyle={{ borderRadius: 20 }}
           >
-            <Text style={{ color: "#ffffff" }}>Add Wallet</Text>
-          </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => setAddWalletModalVisible(true)}
+              style={{
+                width: "100%",
+                height: "100%",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Text style={{ color: "#FFF", fontSize: 18 }}>Add Wallet</Text>
+            </TouchableOpacity>
+          </ImageBackground>
         )}
         {cryptoCards.map((card, index) => (
           <TouchableOpacity
