@@ -1,4 +1,3 @@
-//MyColdWalletScreen.js
 import React, { useState, useEffect, useRef } from "react";
 import {
   View,
@@ -17,7 +16,6 @@ import styles, { lightTheme, darkTheme } from "../styles";
 import { BlurView } from "expo-blur";
 import { BleManager } from "react-native-ble-plx";
 import Constants from "expo-constants";
-import { useNavigation } from "@react-navigation/native"; // 导入 useNavigation
 
 let PermissionsAndroid;
 if (Platform.OS === "android") {
@@ -25,9 +23,8 @@ if (Platform.OS === "android") {
 }
 
 function MyColdWalletScreen() {
-  const navigation = useNavigation(); // 使用 navigation
   const [currencyModalVisible, setCurrencyModalVisible] = useState(false);
-  const [passwordModalVisible, setPasswordModalVisible] = useState(false);
+  const [passwordModalVisible, setPasswordModalVisible] = useState(false); // 添加密码模态框的状态
   const currencies = [
     "USD",
     "EUR",
@@ -43,14 +40,14 @@ function MyColdWalletScreen() {
   const [modalVisible, setModalVisible] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [languageModalVisible, setLanguageModalVisible] = useState(false);
-  const theme = isDarkMode ? darkTheme : lightTheme;
+  const theme = isDarkMode ? darkTheme : lightTheme; // 根据 isDarkMode 决定使用哪个主题
   const [devices, setDevices] = useState([]);
-  const isScanningRef = useRef(false);
+  const isScanningRef = useRef(false); // 使用 useRef 来跟踪扫描状态
   const [isScanning, setIsScanning] = useState(false);
   const restoreIdentifier = Constants.installationId;
   const iconColor = isDarkMode ? "#ffffff" : "#24234C";
-  const darkColors = ["#24234C", "#101021"];
-  const lightColors = ["#FFFFFF", "#E0E0E0"];
+  const darkColors = ["#24234C", "#101021"]; // 暗黑模式颜色
+  const lightColors = ["#FFFFFF", "#E0E0E0"]; // 明亮模式颜色
   const languages = [
     "English",
     "中文",
@@ -65,14 +62,16 @@ function MyColdWalletScreen() {
     "Deutsch",
   ];
 
+  // 判断当前平台，如果不是Web，则初始化和使用蓝牙相关功能
+
   let bleManager;
   if (Platform.OS !== "web") {
-    bleManager = new BleManager({ restoreStateIdentifier: restoreIdentifier });
+    bleManager = new BleManager({ restoreStateIdentifier: restoreIdentifier }); // 提供恢复标识符
   }
 
   const handleBluetoothPairing = () => {
-    setModalVisible(true);
-    scanDevices();
+    setModalVisible(true); // 打开模态窗口
+    scanDevices(); // 开始扫描蓝牙设备
   };
 
   useEffect(() => {
@@ -94,6 +93,7 @@ function MyColdWalletScreen() {
     };
   }, [bleManager]);
 
+  //扫描蓝牙设备的函数
   const scanDevices = () => {
     if (Platform.OS !== "web" && !isScanning) {
       console.log("Scanning started");
@@ -126,38 +126,34 @@ function MyColdWalletScreen() {
     }
   };
 
-  const openWebPage = (url) => {
-    navigation.navigate("WebPage", { url });
-  };
-
   const settingsOptions = [
     {
       title: "Change Password",
-      icon: "lock-outline",
+      icon: "lock-outline", // 使用 MaterialIcons 的锁图标
       onPress: () => {
         setPasswordModalVisible(true);
       },
     },
     {
       title: "Default Currency",
-      icon: "attach-money",
+      icon: "attach-money", // 使用 MaterialIcons 的货币图标
       onPress: () => setCurrencyModalVisible(true),
       extraIcon: "arrow-drop-down",
     },
     {
       title: "Help & Support",
       icon: "help-outline",
-      onPress: () => openWebPage("https://www.likkim.com/"),
+      onPress: () => {},
     },
     {
       title: "Privacy & Data",
       icon: "privacy-tip",
-      onPress: () => openWebPage("https://www.likkim.com/"),
+      onPress: () => {},
     },
     {
       title: "About",
       icon: "info",
-      onPress: () => openWebPage("https://www.likkim.com/"),
+      onPress: () => {},
     },
     {
       title: "Language",
@@ -196,6 +192,7 @@ function MyColdWalletScreen() {
     >
       <ScrollView style={styles.scrollView}>
         <View style={styles.contentContainer}>
+          {/* Settings Options */}
           {settingsOptions.map((option) => (
             <TouchableOpacity
               key={option.title}
@@ -310,7 +307,7 @@ function MyColdWalletScreen() {
                       isPasswordFocused && {
                         borderColor: "blue",
                         borderWidth: 1,
-                      },
+                      }, // 聚焦时边框高亮
                     ]}
                   >
                     <TextInput
@@ -348,7 +345,7 @@ function MyColdWalletScreen() {
                       isConfirmPasswordFocused && {
                         borderColor: "blue",
                         borderWidth: 1,
-                      },
+                      }, // 聚焦时边框高亮
                     ]}
                   >
                     <TextInput
@@ -392,7 +389,7 @@ function MyColdWalletScreen() {
             <View style={{ alignItems: "center" }}>
               <TouchableOpacity
                 style={styles.roundButton}
-                onPress={handleBluetoothPairing}
+                onPress={handleBluetoothPairing} // 修改为调用新的处理函数
               >
                 <Text style={styles.buttonText}>Pair with Bluetooth</Text>
               </TouchableOpacity>
