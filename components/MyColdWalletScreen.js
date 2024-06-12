@@ -10,7 +10,7 @@ import {
   ScrollView,
   Platform,
   Switch,
-  PermissionsAndroid,
+  TextInput,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -19,7 +19,26 @@ import { BlurView } from "expo-blur";
 import { BleManager } from "react-native-ble-plx";
 import Constants from "expo-constants";
 
+let PermissionsAndroid;
+if (Platform.OS === "android") {
+  PermissionsAndroid = require("react-native").PermissionsAndroid;
+}
+
 function MyColdWalletScreen() {
+  const [currencyModalVisible, setCurrencyModalVisible] = useState(false);
+  const [passwordModalVisible, setPasswordModalVisible] = useState(false); // 添加密码模态框的状态
+  const currencies = [
+    "USD",
+    "EUR",
+    "JPY",
+    "GBP",
+    "AUD",
+    "CAD",
+    "CHF",
+    "CNY",
+    "SEK",
+    "NZD",
+  ];
   const [modalVisible, setModalVisible] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [languageModalVisible, setLanguageModalVisible] = useState(false);
@@ -121,10 +140,7 @@ function MyColdWalletScreen() {
     {
       title: "Default Currency",
       icon: "attach-money", // 使用 MaterialIcons 的货币图标
-      onPress: () => {
-        // 添加处理选择默认货币的逻辑或导航
-        console.log("Default Currency Pressed");
-      },
+      onPress: () => setCurrencyModalVisible(true),
       extraIcon: "arrow-drop-down",
     },
     {
@@ -163,6 +179,11 @@ function MyColdWalletScreen() {
       ),
     },
   ];
+
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [isPasswordHidden, setIsPasswordHidden] = useState(true);
+  const [isConfirmPasswordHidden, setIsConfirmPasswordHidden] = useState(true);
 
   return (
     <LinearGradient
@@ -219,6 +240,124 @@ function MyColdWalletScreen() {
                 <TouchableOpacity
                   style={styles.languageCancelButton}
                   onPress={() => setLanguageModalVisible(false)}
+                >
+                  <Text style={styles.cancelButtonText}>Cancel</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </Modal>
+          {/* Currency Modal */}
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={currencyModalVisible}
+            onRequestClose={() => setCurrencyModalVisible(false)}
+          >
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <Text style={styles.languageModalTitle}>Select Currency</Text>
+                <ScrollView style={styles.languageList}>
+                  {currencies.map((currency) => (
+                    <TouchableOpacity
+                      key={currency}
+                      onPress={() => {
+                        console.log("Selected currency:", currency);
+                        setCurrencyModalVisible(false);
+                      }}
+                    >
+                      <Text style={styles.languageModalText}>{currency}</Text>
+                    </TouchableOpacity>
+                  ))}
+                </ScrollView>
+                <TouchableOpacity
+                  style={styles.languageCancelButton}
+                  onPress={() => setCurrencyModalVisible(false)}
+                >
+                  <Text style={styles.cancelButtonText}>Cancel</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </Modal>
+          {/* Change Password Modal */}
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={passwordModalVisible}
+            onRequestClose={() => setPasswordModalVisible(false)}
+          >
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <Text style={styles.languageModalTitle}>Set Password</Text>
+                <Text style={styles.languageModalText}>
+                  Only you can unlock your wallet
+                </Text>
+                <View style={{ marginVertical: 10 }}>
+                  <Text style={styles.languageModalText}>Password</Text>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      alignItems: "center",
+                      backgroundColor: "#1A1A37",
+                      borderRadius: 10,
+                      padding: 10,
+                    }}
+                  >
+                    <TextInput
+                      style={{ flex: 1, color: "#fff" }}
+                      secureTextEntry={isPasswordHidden}
+                      value={password}
+                      onChangeText={setPassword}
+                    />
+                    <TouchableOpacity
+                      onPress={() => setIsPasswordHidden(!isPasswordHidden)}
+                    >
+                      <Icon
+                        name={
+                          isPasswordHidden ? "visibility-off" : "visibility"
+                        }
+                        size={24}
+                        color="#fff"
+                      />
+                    </TouchableOpacity>
+                  </View>
+                </View>
+                <View style={{ marginVertical: 10 }}>
+                  <Text style={styles.languageModalText}>Confirm Password</Text>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      alignItems: "center",
+                      backgroundColor: "#1A1A37",
+                      borderRadius: 10,
+                      padding: 10,
+                    }}
+                  >
+                    <TextInput
+                      style={{ flex: 1, color: "#fff" }}
+                      secureTextEntry={isConfirmPasswordHidden}
+                      value={confirmPassword}
+                      onChangeText={setConfirmPassword}
+                    />
+                    <TouchableOpacity
+                      onPress={() =>
+                        setIsConfirmPasswordHidden(!isConfirmPasswordHidden)
+                      }
+                    >
+                      <Icon
+                        name={
+                          isConfirmPasswordHidden
+                            ? "visibility-off"
+                            : "visibility"
+                        }
+                        size={24}
+                        color="#fff"
+                      />
+                    </TouchableOpacity>
+                  </View>
+                </View>
+                <TouchableOpacity
+                  style={styles.languageCancelButton}
+                  onPress={() => setPasswordModalVisible(false)}
                 >
                   <Text style={styles.cancelButtonText}>Cancel</Text>
                 </TouchableOpacity>
