@@ -181,6 +181,9 @@ function MyColdWalletScreen() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isPasswordHidden, setIsPasswordHidden] = useState(true);
   const [isConfirmPasswordHidden, setIsConfirmPasswordHidden] = useState(true);
+  const [isPasswordFocused, setIsPasswordFocused] = useState(false);
+  const [isConfirmPasswordFocused, setIsConfirmPasswordFocused] =
+    useState(false);
 
   return (
     <LinearGradient
@@ -293,19 +296,27 @@ function MyColdWalletScreen() {
                 <View style={{ marginVertical: 10 }}>
                   <Text style={styles.languageModalText}>Password</Text>
                   <View
-                    style={{
-                      flexDirection: "row",
-                      alignItems: "center",
-                      backgroundColor: "#1A1A37",
-                      borderRadius: 10,
-                      padding: 10,
-                    }}
+                    style={[
+                      {
+                        flexDirection: "row",
+                        alignItems: "center",
+                        backgroundColor: "#1A1A37",
+                        borderRadius: 10,
+                        padding: 10,
+                      },
+                      isPasswordFocused && {
+                        borderColor: "blue",
+                        borderWidth: 1,
+                      }, // 聚焦时边框高亮
+                    ]}
                   >
                     <TextInput
                       style={{ flex: 1, color: "#fff" }}
                       secureTextEntry={isPasswordHidden}
                       value={password}
                       onChangeText={setPassword}
+                      onFocus={() => setIsPasswordFocused(true)}
+                      onBlur={() => setIsPasswordFocused(false)}
                     />
                     <TouchableOpacity
                       onPress={() => setIsPasswordHidden(!isPasswordHidden)}
@@ -323,19 +334,27 @@ function MyColdWalletScreen() {
                 <View style={{ marginVertical: 10 }}>
                   <Text style={styles.languageModalText}>Confirm Password</Text>
                   <View
-                    style={{
-                      flexDirection: "row",
-                      alignItems: "center",
-                      backgroundColor: "#1A1A37",
-                      borderRadius: 10,
-                      padding: 10,
-                    }}
+                    style={[
+                      {
+                        flexDirection: "row",
+                        alignItems: "center",
+                        backgroundColor: "#1A1A37",
+                        borderRadius: 10,
+                        padding: 10,
+                      },
+                      isConfirmPasswordFocused && {
+                        borderColor: "blue",
+                        borderWidth: 1,
+                      }, // 聚焦时边框高亮
+                    ]}
                   >
                     <TextInput
                       style={{ flex: 1, color: "#fff" }}
                       secureTextEntry={isConfirmPasswordHidden}
                       value={confirmPassword}
                       onChangeText={setConfirmPassword}
+                      onFocus={() => setIsConfirmPasswordFocused(true)}
+                      onBlur={() => setIsConfirmPasswordFocused(false)}
                     />
                     <TouchableOpacity
                       onPress={() =>
