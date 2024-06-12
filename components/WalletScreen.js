@@ -31,23 +31,7 @@ function WalletScreen({ route }) {
     setModalVisible(false); // Optionally close the modal as well
   };
 
-  const [cryptoCards, setCryptoCards] = useState([
-    {
-      name: "Bitcoin",
-      address: "10,000,00",
-      cardImage: require("../assets/Card3.png"),
-    },
-    {
-      name: "Ethereum",
-      address: "10,000,00",
-      cardImage: require("../assets/Card54.png"),
-    },
-    {
-      name: "USDT",
-      address: "10,000,00",
-      cardImage: require("../assets/Card43.png"),
-    },
-  ]);
+  const [cryptoCards, setCryptoCards] = useState([]);
 
   useEffect(() => {
     if (route.params?.showAddModal) {
@@ -56,6 +40,9 @@ function WalletScreen({ route }) {
   }, [route.params]);
 
   const additionalCryptos = [
+    { name: "Bitcoin", cardImage: require("../assets/Card3.png") },
+    { name: "Ethereum", cardImage: require("../assets/Card54.png") },
+    { name: "USDT", cardImage: require("../assets/Card43.png") },
     { name: "Litecoin", cardImage: require("../assets/Card1.png") },
     { name: "Ripple", cardImage: require("../assets/Card2.png") },
     { name: "Dash", cardImage: require("../assets/Card3.png") },
