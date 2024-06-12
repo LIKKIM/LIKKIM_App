@@ -1,5 +1,4 @@
-//WalletScreen.js
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import {
   ImageBackground,
   View,
@@ -12,6 +11,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import styles, { lightTheme, darkTheme } from "../styles";
 import { BlurView } from "expo-blur";
+import { CryptoContext } from "./CryptoContext"; // 导入 CryptoContext
 
 function WalletScreen({ route }) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -23,15 +23,18 @@ function WalletScreen({ route }) {
   const [addWalletModalVisible, setAddWalletModalVisible] = useState(false); // 新增钱包弹窗状态
   const scrollViewRef = useRef(); // 创建ScrollView的引用
   const [isDarkMode, setIsDarkMode] = useState(true);
+  const { cryptoCount, setCryptoCount } = useContext(CryptoContext); // 使用 CryptoContext
   const iconColor = isDarkMode ? "#ffffff" : "#24234C";
   const darkColors = ["#24234C", "#101021"]; // 暗黑模式颜色
   const lightColors = ["#FFFFFF", "#E0E0E0"]; // 明亮模式颜色
+
   const handleDeleteCard = () => {
     setCryptoCards(
       cryptoCards.filter((card) => card.name !== selectedCardName)
     );
     setDropdownVisible(false); // Close the dropdown after action
     setModalVisible(false); // Optionally close the modal as well
+    setCryptoCount(cryptoCards.length - 1); // 更新 cryptoCount
   };
 
   const [cryptoCards, setCryptoCards] = useState([]);
@@ -44,6 +47,10 @@ function WalletScreen({ route }) {
       setAddIconModalVisible(true);
     }
   }, [route.params]);
+
+  useEffect(() => {
+    setCryptoCount(cryptoCards.length); // 初始化时设置 cryptoCount
+  }, [cryptoCards.length]);
 
   const additionalCryptos = [
     { name: "Bitcoin", cardImage: require("../assets/Card3.png") },
@@ -79,6 +86,7 @@ function WalletScreen({ route }) {
     if (!cryptoCards.find((card) => card.name === crypto.name)) {
       const newCryptoCards = [...cryptoCards, { ...crypto, address: "0" }];
       setCryptoCards(newCryptoCards);
+      setCryptoCount(newCryptoCards.length); // 更新 cryptoCount
     }
     setAddCryptoVisible(false);
   };
@@ -110,13 +118,11 @@ function WalletScreen({ route }) {
         ref={scrollViewRef}
         contentContainerStyle={{
           paddingBottom: 20,
-          height: "100%",
           justifyContent: "center",
           alignItems: "center",
         }}
         style={{
           width: "100%",
-
           paddingHorizontal: 0,
         }}
       >
@@ -124,18 +130,22 @@ function WalletScreen({ route }) {
           <TouchableOpacity
             onPress={() => setAddWalletModalVisible(true)}
             style={{
-              backgroundColor: "#6C6CF4",
-              padding: 10,
-              width: "80%",
-              justifyContent: "center",
-              alignItems: "center",
-              borderRadius: 30,
-              height: 60,
-
-              marginTop: 20,
+              width: 300, // 宽度为300
+              height: 170, // 高度为100
+              borderRadius: 20, // 边角圆润程度为16
+              overflow: "hidden",
+              justifyContent: "center", // 内容居中显示
+              alignItems: "center", // 内容居中显示
+              backgroundColor: "#484692", // 深灰色背景，比container稍浅
+              marginBottom: 20, // 与下一个元素间距20
+              shadowColor: "#000", // 阴影颜色为黑色
+              shadowOffset: { width: 0, height: 2 }, // 阴影偏移
+              shadowOpacity: 0.25, // 阴影透明度
+              shadowRadius: 3.84, // 阴影扩散范围
+              elevation: 5, // 用于Android的材质阴影高度
             }}
           >
-            <Text style={styles.cancelButtonText}>Add Wallet</Text>
+            <Text style={{ color: "#ffffff" }}>Add Wallet</Text>
           </TouchableOpacity>
         )}
         {cryptoCards.map((card, index) => (
