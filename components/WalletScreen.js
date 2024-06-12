@@ -18,6 +18,7 @@ function WalletScreen({ route }) {
   const [selectedAddress, setSelectedAddress] = useState("");
   const [addCryptoVisible, setAddCryptoVisible] = useState(false);
   const [selectedCardName, setSelectedCardName] = useState(null);
+  const [addIconModalVisible, setAddIconModalVisible] = useState(false); // 新增的弹窗状态
   const scrollViewRef = useRef(); // 创建ScrollView的引用
   const [isDarkMode, setIsDarkMode] = useState(true);
   const iconColor = isDarkMode ? "#ffffff" : "#24234C";
@@ -37,6 +38,9 @@ function WalletScreen({ route }) {
     if (route.params?.showAddModal) {
       setAddCryptoVisible(true);
     }
+    if (route.params?.showAddIconModal) {
+      setAddIconModalVisible(true);
+    }
   }, [route.params]);
 
   const additionalCryptos = [
@@ -55,24 +59,20 @@ function WalletScreen({ route }) {
 
   const handleCardPress = (cryptoName, index) => {
     if (selectedCardName === cryptoName) {
-      // 如果当前卡片已选中，显示模态窗口
       setModalVisible(true);
     } else {
-      // 如果当前卡片未选中，更新选中状态，并滚动到该卡片
       setSelectedAddress(
         cryptoCards.find((card) => card.name === cryptoName)?.address ||
           "Unknown"
       );
       setSelectedCardName(cryptoName);
 
-      // 卡片高度180px
-      const cardHeight = 180; // 每张卡片的实际高度
-      const topOffset = 160; // 屏幕顶部到卡片顶部的距离
-      const yOffset = Math.max(0, cardHeight * index - topOffset); // 计算滚动的偏移量，使得卡片顶部对齐至屏幕顶部180px
+      const cardHeight = 180;
+      const topOffset = 160;
+      const yOffset = Math.max(0, cardHeight * index - topOffset);
       scrollViewRef.current.scrollTo({ y: yOffset, animated: true });
     }
   };
-
   const handleAddCrypto = (crypto) => {
     if (!cryptoCards.find((card) => card.name === crypto.name)) {
       const newCryptoCards = [...cryptoCards, { ...crypto, address: "0" }];
