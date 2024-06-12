@@ -83,7 +83,7 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace 'com.anonymous.ColdWallet'
+    namespace "com.coldwallet"
     defaultConfig {
         applicationId 'com.anonymous.ColdWallet'
         minSdkVersion rootProject.ext.minSdkVersion
