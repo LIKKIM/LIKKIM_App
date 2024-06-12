@@ -1,3 +1,4 @@
+//WalletScreen.js
 import React, { useState, useEffect, useRef } from "react";
 import {
   ImageBackground,
@@ -19,6 +20,7 @@ function WalletScreen({ route }) {
   const [addCryptoVisible, setAddCryptoVisible] = useState(false);
   const [selectedCardName, setSelectedCardName] = useState(null);
   const [addIconModalVisible, setAddIconModalVisible] = useState(false); // 新增的弹窗状态
+  const [addWalletModalVisible, setAddWalletModalVisible] = useState(false); // 新增钱包弹窗状态
   const scrollViewRef = useRef(); // 创建ScrollView的引用
   const [isDarkMode, setIsDarkMode] = useState(true);
   const iconColor = isDarkMode ? "#ffffff" : "#24234C";
@@ -81,6 +83,18 @@ function WalletScreen({ route }) {
     setAddCryptoVisible(false);
   };
 
+  const handleCreateWallet = () => {
+    // 处理创建钱包逻辑
+    setAddCryptoVisible(true); // 直接打开添加数字货币卡片的弹窗
+    setAddWalletModalVisible(false); // 关闭选择创建或导入的弹窗
+  };
+
+  const handleImportWallet = () => {
+    // 处理导入钱包逻辑
+    setAddCryptoVisible(true); // 直接打开添加数字货币卡片的弹窗
+    setAddWalletModalVisible(false); // 关闭选择创建或导入的弹窗
+  };
+
   return (
     <LinearGradient
       colors={isDarkMode ? darkColors : lightColors}
@@ -94,12 +108,36 @@ function WalletScreen({ route }) {
     >
       <ScrollView
         ref={scrollViewRef}
-        contentContainerStyle={{ paddingBottom: 20 }}
+        contentContainerStyle={{
+          paddingBottom: 20,
+          height: "100%",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
         style={{
           width: "100%",
+
           paddingHorizontal: 0,
         }}
       >
+        {cryptoCards.length === 0 && (
+          <TouchableOpacity
+            onPress={() => setAddWalletModalVisible(true)}
+            style={{
+              backgroundColor: "#6C6CF4",
+              padding: 10,
+              width: "80%",
+              justifyContent: "center",
+              alignItems: "center",
+              borderRadius: 30,
+              height: 60,
+
+              marginTop: 20,
+            }}
+          >
+            <Text style={styles.cancelButtonText}>Add Wallet</Text>
+          </TouchableOpacity>
+        )}
         {cryptoCards.map((card, index) => (
           <TouchableOpacity
             style={{
@@ -120,6 +158,80 @@ function WalletScreen({ route }) {
           </TouchableOpacity>
         ))}
       </ScrollView>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={addWalletModalVisible}
+        onRequestClose={() => setAddWalletModalVisible(false)}
+      >
+        <BlurView intensity={10} style={styles.centeredView}>
+          <View
+            style={{
+              margin: 20,
+              width: "80%",
+              backgroundColor: "#24234C", // 深灰色背景
+              borderRadius: 20, // 圆角为20
+              padding: 35, // 内边距为35
+              alignItems: "center", // 内容居中对齐
+              shadowColor: "#000", // 阴影为黑色
+              shadowOffset: { width: 0, height: 2 }, // 阴影偏移
+              shadowOpacity: 0.25, // 阴影透明度
+              shadowRadius: 3.84, // 阴影扩散范围
+              elevation: 5, // 用于Android的材质阴影高度
+            }}
+          >
+            <Text style={{ color: "#FFF", fontSize: 18, marginBottom: 20 }}>
+              Choose an option
+            </Text>
+            <TouchableOpacity
+              style={{
+                backgroundColor: "#6C6CF4",
+                padding: 10,
+                width: "100%",
+                justifyContent: "center",
+                borderRadius: 30,
+                height: 60,
+                alignItems: "center",
+                marginBottom: 20,
+              }}
+              onPress={handleCreateWallet}
+            >
+              <Text style={styles.cancelButtonText}>Create Wallet</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                backgroundColor: "#6C6CF4",
+                padding: 10,
+                width: "100%",
+                justifyContent: "center",
+                borderRadius: 30,
+                height: 60,
+                alignItems: "center",
+              }}
+              onPress={handleImportWallet}
+            >
+              <Text style={styles.cancelButtonText}>Import Wallet</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                backgroundColor: "#6C6CF4",
+                padding: 10,
+                width: "100%",
+                justifyContent: "center",
+                borderRadius: 30,
+                height: 60,
+                alignItems: "center",
+                marginTop: 20,
+              }}
+              onPress={() => setAddWalletModalVisible(false)}
+            >
+              <Text style={styles.cancelButtonText}>Close</Text>
+            </TouchableOpacity>
+          </View>
+        </BlurView>
+      </Modal>
+
       <Modal
         animationType="slide"
         transparent={true}
@@ -209,6 +321,7 @@ function WalletScreen({ route }) {
           </View>
         </BlurView>
       </Modal>
+
       <Modal
         animationType="slide"
         transparent={true}
