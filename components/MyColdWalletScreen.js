@@ -1,5 +1,3 @@
-// MyColdWalletScreen.js
-
 import React, { useState, useEffect, useRef } from "react";
 import {
   View,
@@ -94,6 +92,7 @@ function MyColdWalletScreen() {
       bleManager.destroy();
     };
   }, [bleManager]);
+
   //扫描蓝牙设备的函数
   const scanDevices = () => {
     if (Platform.OS !== "web" && !isScanning) {
@@ -114,7 +113,6 @@ function MyColdWalletScreen() {
           }
           return prevDevices;
         });
-        // 在这里添加打印语句
         console.log("Scanned device:", device);
       });
 
@@ -133,8 +131,7 @@ function MyColdWalletScreen() {
       title: "Change Password",
       icon: "lock-outline", // 使用 MaterialIcons 的锁图标
       onPress: () => {
-        // 添加处理修改密码的逻辑或导航
-        console.log("Change Password Pressed");
+        setPasswordModalVisible(true);
       },
     },
     {
@@ -206,7 +203,6 @@ function MyColdWalletScreen() {
                 <Text style={[theme.settingsText, { flex: 1 }]}>
                   {option.title}
                 </Text>
-                {/* 条件渲染额外的图标 */}
                 {option.extraIcon && (
                   <Icon name={option.extraIcon} size={24} color={iconColor} />
                 )}
@@ -214,7 +210,8 @@ function MyColdWalletScreen() {
               {option.toggle}
             </TouchableOpacity>
           ))}
-          {/* 语言选择 Modal */}
+
+          {/* Language Modal */}
           <Modal
             animationType="slide"
             transparent={true}
@@ -246,6 +243,7 @@ function MyColdWalletScreen() {
               </View>
             </View>
           </Modal>
+
           {/* Currency Modal */}
           <Modal
             animationType="slide"
@@ -278,6 +276,7 @@ function MyColdWalletScreen() {
               </View>
             </View>
           </Modal>
+
           {/* Change Password Modal */}
           <Modal
             animationType="slide"
@@ -364,6 +363,7 @@ function MyColdWalletScreen() {
               </View>
             </View>
           </Modal>
+
           {/* Bluetooth Btn */}
           <View style={{ marginTop: 40 }}>
             <Text style={theme.titleText}>Bluetooth</Text>
