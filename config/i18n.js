@@ -264,23 +264,22 @@ i18n
           "Scanning...": "جارٍ المسح...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "يرجى التأكد من أن محفظتك الباردة غير مقفلة وتم تمكين البلوتوث.",
-          Send: "Enviar",
           "Send crypto to another wallet":
-            "Enviar criptomonedas a otro monedero",
-          Receive: "Recibir",
+            "إرسال العملات الرقمية إلى محفظة أخرى",
+          Receive: "استلام",
           "Receive crypto from another wallet":
-            "Recibir criptomonedas de otro monedero",
-          "Transaction History": "Historial de transacciones",
-          "No Histories": "No hay historiales",
-          "Enter the recipient's address:":
-            "Ingrese la dirección del destinatario:",
-          "Enter Address": "Ingrese la dirección",
-          Submit: "Enviar",
-          "Choose the cryptocurrency to send:":
-            "Elija la criptomoneda para enviar:",
+            "استلام العملات الرقمية من محفظة أخرى",
+          "Transaction History": "سجل المعاملات",
+          "No Histories": "لا يوجد سجلات",
+          "Enter the recipient's address:": "أدخل عنوان المستلم:",
+          "Enter Address": "أدخل العنوان",
+          Submit: "إرسال",
+          Cancel: "إلغاء",
+          "Choose the cryptocurrency to send:": "اختر العملة الرقمية لإرسالها:",
           "Choose the cryptocurrency to receive:":
-            "Elija la criptomoneda para recibir:",
-          "Address for": "Dirección para",
+            "اختر العملة الرقمية للاستلام:",
+          "Address for": "العنوان لـ",
+          Close: "إغلاق",
         },
       },
       ja: {
@@ -408,6 +407,19 @@ i18n
           "Scanning...": "스캔 중...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "콜드 월렛이 잠금 해제되고 Bluetooth가 활성화되어 있는지 확인하십시오.",
+          Send: "보내다",
+          "Send crypto to another wallet": "다른 지갑으로 암호화폐 보내기",
+          Receive: "받다",
+          "Receive crypto from another wallet": "다른 지갑에서 암호화폐 받기",
+          "Transaction History": "거래 내역",
+          "No Histories": "기록 없음",
+          "Enter the recipient's address:": "수신자의 주소를 입력하십시오:",
+          "Enter Address": "주소를 입력하십시오",
+          Submit: "제출",
+          "Choose the cryptocurrency to send:": "보낼 암호화폐를 선택하십시오:",
+          "Choose the cryptocurrency to receive:":
+            "받을 암호화폐를 선택하십시오:",
+          "Address for": "주소",
         },
       },
       pt: {
@@ -439,6 +451,23 @@ i18n
           "Scanning...": "Digitalizando...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "Certifique-se de que sua Cold Wallet esteja desbloqueada e o Bluetooth esteja ativado.",
+          Send: "Enviar",
+          "Send crypto to another wallet":
+            "Enviar criptomoeda para outra carteira",
+          Receive: "Receber",
+          "Receive crypto from another wallet":
+            "Receber criptomoeda de outra carteira",
+          "Transaction History": "Histórico de transações",
+          "No Histories": "Sem históricos",
+          "Enter the recipient's address:":
+            "Insira o endereço do destinatário:",
+          "Enter Address": "Insira o endereço",
+          Submit: "Enviar",
+          "Choose the cryptocurrency to send:":
+            "Escolha a criptomoeda para enviar:",
+          "Choose the cryptocurrency to receive:":
+            "Escolha a criptomoeda para receber:",
+          "Address for": "Endereço para",
         },
       },
       "pt-BR": {
