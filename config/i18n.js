@@ -6,27 +6,6 @@ i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    /*     "en", // English
-    "zh", // Simplified Chinese
-    "zh-TW", // Traditional Chinese
-    "fr", // French
-    "es", // Spanish
-    "ar", // Arabic
-    "ja", // Japanese
-    "ru", // Russian
-    "ko", // Korean
-    "pt", // Portuguese
-    "pt-BR", // Brazilian Portuguese
-    "it", // Italian
-    "de", // German
-    "hi", // Hindi
-    "mn", // Mongolian
-    "th", // Thai
-    "uk", // Ukrainian
-    "vi", // Vietnamese
-    "id", // Indonesian
-    "tl", // Filipino
-    "bn", // Bengali */
     resources: {
       en: {
         translation: {
@@ -56,6 +35,23 @@ i18n
           "Scanning...": "Scanning...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.",
+          Send: "Send",
+          "Send crypto to another wallet": "Send crypto to another wallet",
+          Receive: "Receive",
+          "Receive crypto from another wallet":
+            "Receive crypto from another wallet",
+          "Transaction History": "Transaction History",
+          "No Histories": "No Histories",
+          "Enter the recipient's address:": "Enter the recipient's address:",
+          "Enter Address": "Enter Address",
+          Submit: "Submit",
+          Cancel: "Cancel",
+          "Choose the cryptocurrency to send:":
+            "Choose the cryptocurrency to send:",
+          "Choose the cryptocurrency to receive:":
+            "Choose the cryptocurrency to receive:",
+          "Address for": "Address for",
+          Close: "Close",
         },
       },
       zh: {
@@ -86,6 +82,20 @@ i18n
           "Scanning...": "扫描中...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "请确保你的冷钱包已解锁并启用蓝牙。",
+          Send: "发送",
+          "Send crypto to another wallet": "发送加密货币到其他钱包",
+          Receive: "接收",
+          "Receive crypto from another wallet": "从其他钱包接收加密货币",
+          "Transaction History": "交易记录",
+          "No Histories": "没有记录",
+          "Enter the recipient's address:": "输入接收者的地址:",
+          "Enter Address": "输入地址",
+          Submit: "提交",
+          Cancel: "取消",
+          "Choose the cryptocurrency to send:": "选择要发送的加密货币:",
+          "Choose the cryptocurrency to receive:": "选择要接收的加密货币:",
+          "Address for": "地址为",
+          Close: "关闭",
         },
       },
       "zh-TW": {
@@ -116,6 +126,18 @@ i18n
           "Scanning...": "掃描中...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "請確保你的冷錢包已解鎖並啟用藍牙。",
+          Send: "發送",
+          "Send crypto to another wallet": "發送加密貨幣到其他錢包",
+          Receive: "接收",
+          "Receive crypto from another wallet": "從其他錢包接收加密貨幣",
+          "Transaction History": "交易記錄",
+          "No Histories": "沒有記錄",
+          "Enter the recipient's address:": "輸入接收者的地址:",
+          "Enter Address": "輸入地址",
+          Submit: "提交",
+          "Choose the cryptocurrency to send:": "選擇要發送的加密貨幣:",
+          "Choose the cryptocurrency to receive:": "選擇要接收的加密貨幣:",
+          "Address for": "地址為",
         },
       },
       fr: {
@@ -147,6 +169,23 @@ i18n
           "Scanning...": "Balayage...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "Veuillez vous assurer que votre portefeuille froid est déverrouillé et que le Bluetooth est activé.",
+          Send: "Envoyer",
+          "Send crypto to another wallet":
+            "Envoyer des crypto-monnaies à un autre portefeuille",
+          Receive: "Recevoir",
+          "Receive crypto from another wallet":
+            "Recevoir des crypto-monnaies d'un autre portefeuille",
+          "Transaction History": "Historique des transactions",
+          "No Histories": "Aucun historique",
+          "Enter the recipient's address:":
+            "Entrez l'adresse du destinataire :",
+          "Enter Address": "Entrer l'adresse",
+          Submit: "Soumettre",
+          "Choose the cryptocurrency to send:":
+            "Choisissez la crypto-monnaie à envoyer :",
+          "Choose the cryptocurrency to receive:":
+            "Choisissez la crypto-monnaie à recevoir :",
+          "Address for": "Adresse pour",
         },
       },
       es: {
@@ -178,6 +217,23 @@ i18n
           "Scanning...": "Escaneando...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "Por favor, asegúrate de que tu billetera fría esté desbloqueada y el Bluetooth esté activado.",
+          Send: "Enviar",
+          "Send crypto to another wallet":
+            "Enviar criptomonedas a otro monedero",
+          Receive: "Recibir",
+          "Receive crypto from another wallet":
+            "Recibir criptomonedas de otro monedero",
+          "Transaction History": "Historial de transacciones",
+          "No Histories": "No hay historiales",
+          "Enter the recipient's address:":
+            "Ingrese la dirección del destinatario:",
+          "Enter Address": "Ingrese la dirección",
+          Submit: "Enviar",
+          "Choose the cryptocurrency to send:":
+            "Elija la criptomoneda para enviar:",
+          "Choose the cryptocurrency to receive:":
+            "Elija la criptomoneda para recibir:",
+          "Address for": "Dirección para",
         },
       },
       ar: {
@@ -208,6 +264,23 @@ i18n
           "Scanning...": "جارٍ المسح...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "يرجى التأكد من أن محفظتك الباردة غير مقفلة وتم تمكين البلوتوث.",
+          Send: "Enviar",
+          "Send crypto to another wallet":
+            "Enviar criptomonedas a otro monedero",
+          Receive: "Recibir",
+          "Receive crypto from another wallet":
+            "Recibir criptomonedas de otro monedero",
+          "Transaction History": "Historial de transacciones",
+          "No Histories": "No hay historiales",
+          "Enter the recipient's address:":
+            "Ingrese la dirección del destinatario:",
+          "Enter Address": "Ingrese la dirección",
+          Submit: "Enviar",
+          "Choose the cryptocurrency to send:":
+            "Elija la criptomoneda para enviar:",
+          "Choose the cryptocurrency to receive:":
+            "Elija la criptomoneda para recibir:",
+          "Address for": "Dirección para",
         },
       },
       ja: {
@@ -239,6 +312,23 @@ i18n
           "Scanning...": "スキャン中...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "コールドウォレットがロック解除され、Bluetoothが有効になっていることを確認してください。",
+          Send: "Enviar",
+          "Send crypto to another wallet":
+            "Enviar criptomonedas a otro monedero",
+          Receive: "Recibir",
+          "Receive crypto from another wallet":
+            "Recibir criptomonedas de otro monedero",
+          "Transaction History": "Historial de transacciones",
+          "No Histories": "No hay historiales",
+          "Enter the recipient's address:":
+            "Ingrese la dirección del destinatario:",
+          "Enter Address": "Ingrese la dirección",
+          Submit: "Enviar",
+          "Choose the cryptocurrency to send:":
+            "Elija la criptomoneda para enviar:",
+          "Choose the cryptocurrency to receive:":
+            "Elija la criptomoneda para recibir:",
+          "Address for": "Dirección para",
         },
       },
       ru: {
@@ -270,6 +360,23 @@ i18n
           "Scanning...": "Сканирование...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "Пожалуйста, убедитесь, что ваш Cold Wallet разблокирован и Bluetooth включен.",
+          Send: "Enviar",
+          "Send crypto to another wallet":
+            "Enviar criptomonedas a otro monedero",
+          Receive: "Recibir",
+          "Receive crypto from another wallet":
+            "Recibir criptomonedas de otro monedero",
+          "Transaction History": "Historial de transacciones",
+          "No Histories": "No hay historiales",
+          "Enter the recipient's address:":
+            "Ingrese la dirección del destinatario:",
+          "Enter Address": "Ingrese la dirección",
+          Submit: "Enviar",
+          "Choose the cryptocurrency to send:":
+            "Elija la criptomoneda para enviar:",
+          "Choose the cryptocurrency to receive:":
+            "Elija la criptomoneda para recibir:",
+          "Address for": "Dirección para",
         },
       },
       ko: {

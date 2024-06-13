@@ -5,7 +5,10 @@ import { LinearGradient } from "expo-linear-gradient";
 import styles, { lightTheme, darkTheme } from "../styles";
 import { BlurView } from "expo-blur";
 import QRCode from "react-native-qrcode-svg"; // 导入 QRCode 组件
+import { useTranslation } from "react-i18next";
+
 function TransactionsScreen() {
+  const { t } = useTranslation();
   const [modalVisible, setModalVisible] = useState(false);
   const [addressModalVisible, setAddressModalVisible] = useState(false);
   const [operationType, setOperationType] = useState("");
@@ -35,13 +38,6 @@ function TransactionsScreen() {
     setModalVisible(true);
   };
 
-  /*   const selectCrypto = (crypto) => {
-    console.log(`Receive ${crypto} Pressed`);
-    setSelectedCrypto(crypto);
-    setSelectedAddress(cryptoAddresses[crypto]); // 设置所选加密货币的地址
-    setModalVisible(false); // 关闭选择模态窗口
-    setAddressModalVisible(true); // 打开地址显示模态窗口
-  }; */
   const selectCrypto = (crypto) => {
     setSelectedCrypto(crypto);
     setSelectedAddress(cryptoAddresses[crypto]);
@@ -54,6 +50,7 @@ function TransactionsScreen() {
       setInputAddressModalVisible(true); // 显示输入地址模态窗口
     }
   };
+
   return (
     <LinearGradient
       colors={isDarkMode ? darkColors : lightColors}
@@ -61,9 +58,9 @@ function TransactionsScreen() {
     >
       <View className="w-[100%]">
         <TouchableOpacity style={styles.roundButton} onPress={handleSendPress}>
-          <Text style={styles.buttonText}>Send</Text>
+          <Text style={styles.buttonText}>{t("Send")}</Text>
           <Text style={styles.subButtonText}>
-            Send crypto to another wallet
+            {t("Send crypto to another wallet")}
           </Text>
         </TouchableOpacity>
 
@@ -71,15 +68,15 @@ function TransactionsScreen() {
           style={styles.roundButton}
           onPress={handleReceivePress}
         >
-          <Text style={styles.buttonText}>Receive</Text>
+          <Text style={styles.buttonText}>{t("Receive")}</Text>
           <Text style={styles.subButtonText}>
-            Receive crypto from another wallet
+            {t("Receive crypto from another wallet")}
           </Text>
         </TouchableOpacity>
         <View style={styles.historyContainer}>
-          <Text style={styles.historyTitle}>Transaction History</Text>
+          <Text style={styles.historyTitle}>{t("Transaction History")}</Text>
           {transactionHistory.length === 0 ? (
-            <Text style={styles.noHistoryText}>No Histories</Text>
+            <Text style={styles.noHistoryText}>{t("No Histories")}</Text>
           ) : (
             transactionHistory.map((transaction, index) => (
               <View key={index} style={styles.historyItem}>
@@ -88,26 +85,6 @@ function TransactionsScreen() {
             ))
           )}
         </View>
-        {/*         <TouchableOpacity
-          style={styles.roundButton}
-          onPress={() => console.log("Buy Pressed")}
-        >
-          <Text style={styles.buttonText}>Buy</Text>
-          <Text style={styles.subButtonText}>
-            Buy crypto securely with cash
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.roundButton}
-          onPress={() => console.log("Sell Pressed")}
-        >
-          <Text style={styles.buttonText}>Sell</Text>
-          <Text style={styles.subButtonText}>
-            Sell crypto securely for cash
-          </Text>
-        </TouchableOpacity>
- */}
 
         <Modal
           animationType="slide"
@@ -134,7 +111,7 @@ function TransactionsScreen() {
               }}
             >
               <Text style={styles.modalTitle}>
-                Enter the recipient's address:
+                {t("Enter the recipient's address:")}
               </Text>
 
               <View
@@ -144,7 +121,7 @@ function TransactionsScreen() {
               >
                 <TextInput
                   style={[styles.input, { color: "#ffffff" }]}
-                  placeholder="Enter Address"
+                  placeholder={t("Enter Address")}
                   placeholderTextColor="#ffffff"
                   onChangeText={(text) => setInputAddress(text)}
                   value={inputAddress}
@@ -165,7 +142,7 @@ function TransactionsScreen() {
                     // Implement the logic to send crypto to the input address
                   }}
                 >
-                  <Text style={styles.submitButtonText}>Submit</Text>
+                  <Text style={styles.submitButtonText}>{t("Submit")}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={{
@@ -179,7 +156,7 @@ function TransactionsScreen() {
                   }}
                   onPress={() => setInputAddressModalVisible(false)}
                 >
-                  <Text style={styles.cancelButtonText}>Cancel</Text>
+                  <Text style={styles.cancelButtonText}>{t("Cancel")}</Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -199,12 +176,12 @@ function TransactionsScreen() {
                 style={{
                   color: "#ffffff", // 白色文字
                   textAlign: "center", // 文本居中对齐
-                  marginBottom: 60, // 与下一个元素间距320
+                  marginBottom: 60, // 与下一个元素间距
                 }}
               >
                 {operationType === "send"
-                  ? "Choose the cryptocurrency to send:"
-                  : "Choose the cryptocurrency to receive:"}
+                  ? t("Choose the cryptocurrency to send:")
+                  : t("Choose the cryptocurrency to receive:")}
               </Text>
               {["BTC", "ETH", "USDT"].map((crypto) => (
                 <TouchableOpacity
@@ -227,7 +204,7 @@ function TransactionsScreen() {
                 }}
                 onPress={() => setModalVisible(false)}
               >
-                <Text style={styles.cancelButtonText}>Cancel</Text>
+                <Text style={styles.cancelButtonText}>{t("Cancel")}</Text>
               </TouchableOpacity>
             </View>
           </BlurView>
@@ -243,9 +220,8 @@ function TransactionsScreen() {
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
               <Text style={styles.modalTitle}>
-                Address for {selectedCrypto}:
+                {t("Address for")} {selectedCrypto}:
               </Text>
-              {/* 下面的Text标签是数字货币冷钱包的地址 */}
               <Text
                 style={{
                   color: "#ffffff",
@@ -255,7 +231,6 @@ function TransactionsScreen() {
               >
                 {selectedAddress}
               </Text>
-              {/* 下面的View标签是QRcode图片模块 */}
               <View
                 style={{
                   backgroundColor: "#fff",
@@ -268,12 +243,11 @@ function TransactionsScreen() {
               >
                 <QRCode value={selectedAddress} size={200} />
               </View>
-              {/* 在此处生成QR码 */}
               <TouchableOpacity
                 style={styles.cancelButton}
                 onPress={() => setAddressModalVisible(false)}
               >
-                <Text style={styles.cancelButtonText}>Close</Text>
+                <Text style={styles.cancelButtonText}>{t("Close")}</Text>
               </TouchableOpacity>
             </View>
           </View>
