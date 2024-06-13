@@ -11,6 +11,7 @@ import {
   Switch,
   TextInput,
   Linking,
+  Button,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -19,6 +20,8 @@ import { BlurView } from "expo-blur";
 import { BleManager } from "react-native-ble-plx";
 import Constants from "expo-constants";
 import { useNavigation } from "@react-navigation/native";
+import { useTranslation } from "react-i18next";
+import i18n from "../config/i18n"; // 导入 i18n
 
 let PermissionsAndroid;
 if (Platform.OS === "android") {
@@ -235,6 +238,7 @@ function MyColdWalletScreen() {
                       key={language}
                       onPress={() => {
                         console.log("Selected language:", language);
+                        i18n.changeLanguage(language); // 切换语言
                         setLanguageModalVisible(false);
                       }}
                     >

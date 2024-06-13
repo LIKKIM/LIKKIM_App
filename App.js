@@ -8,7 +8,7 @@ import WalletScreen from "./components/WalletScreen";
 import TransactionsScreen from "./components/TransactionsScreen";
 import MyColdWalletScreen from "./components/MyColdWalletScreen";
 import { CryptoProvider, CryptoContext } from "./components/CryptoContext"; // 导入 CryptoContext
-
+import i18n from "./config/i18n";
 const Tab = createBottomTabNavigator();
 
 export default function App() {

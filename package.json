@@ -14,13 +14,17 @@
     "@react-navigation/native": "^6.1.17",
     "expo": "~50.0.14",
     "expo-blur": "~12.9.2",
+    "expo-dev-client": "~3.3.12",
     "expo-linear-gradient": "~12.7.2",
     "expo-localization": "~14.8.4",
     "expo-status-bar": "~1.11.1",
     "i18n-js": "^4.4.3",
+    "i18next": "^23.11.5",
+    "i18next-react-native-language-detector": "^1.0.2",
     "nativewind": "^2.0.11",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-i18next": "^14.1.2",
     "react-native": "0.73.6",
     "react-native-ble-plx": "^3.1.2",
     "react-native-qrcode-svg": "^6.3.1",
@@ -31,8 +35,7 @@
     "react-native-svg": "^15.2.0",
     "react-native-vector-icons": "^10.0.3",
     "react-native-web": "~0.19.6",
-    "uuid": "^9.0.1",
-    "expo-dev-client": "~3.3.12"
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
