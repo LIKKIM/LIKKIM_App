@@ -17,7 +17,6 @@ import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import styles, { lightTheme, darkTheme } from "../styles";
 import { BlurView } from "expo-blur";
-import FastImage from "react-native-fast-image";
 import { BleManager } from "react-native-ble-plx";
 import Constants from "expo-constants";
 import { useNavigation } from "@react-navigation/native";

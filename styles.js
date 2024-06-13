@@ -34,11 +34,6 @@ export const darkTheme = StyleSheet.create({
 
 // 使用StyleSheet创建并导出应用的样式
 const styles = StyleSheet.create({
-  gifImage: {
-    width: 100,
-    height: 100,
-    marginBottom: 15,
-  },
   scrollView: {
     width: "100%",
   },
