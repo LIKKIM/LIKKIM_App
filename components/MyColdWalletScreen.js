@@ -134,47 +134,47 @@ function MyColdWalletScreen() {
 
   const settingsOptions = [
     {
-      title: "Change Password",
+      title: t("Change Password"),
       icon: "lock-outline",
       onPress: () => {
         setPasswordModalVisible(true);
       },
     },
     {
-      title: "Default Currency",
+      title: t("Default Currency"),
       icon: "attach-money",
       onPress: () => setCurrencyModalVisible(true),
       extraIcon: "arrow-drop-down",
     },
     {
-      title: "Help & Support",
+      title: t("Help & Support"),
       icon: "help-outline",
       onPress: () => {
         Linking.openURL("https://www.likkim.com");
       },
     },
     {
-      title: "Privacy & Data",
+      title: t("Privacy & Data"),
       icon: "privacy-tip",
       onPress: () => {
         Linking.openURL("https://www.likkim.com");
       },
     },
     {
-      title: "About",
+      title: t("About"),
       icon: "info",
       onPress: () => {
         Linking.openURL("https://www.likkim.com");
       },
     },
     {
-      title: "Language",
+      title: t("Language"),
       icon: "language",
       onPress: () => setLanguageModalVisible(true),
       extraIcon: "arrow-drop-down",
     },
     {
-      title: "Dark Mode",
+      title: t("Dark Mode"),
       icon: "dark-mode",
       onPress: () => setIsDarkMode(!isDarkMode),
       toggle: (
@@ -243,7 +243,7 @@ function MyColdWalletScreen() {
                       key={language.code}
                       onPress={() => {
                         console.log("Selected language:", language.name);
-                        i18n.changeLanguage(language.code); // 使用语言代码切换语言
+                        i18n.changeLanguage(language.code);
                         setLanguageModalVisible(false);
                       }}
                     >
@@ -273,7 +273,9 @@ function MyColdWalletScreen() {
           >
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
-                <Text style={styles.languageModalTitle}>Select Currency</Text>
+                <Text style={styles.languageModalTitle}>
+                  {t("Select Currency")}
+                </Text>
                 <ScrollView style={styles.languageList}>
                   {currencies.map((currency) => (
                     <TouchableOpacity
@@ -291,7 +293,7 @@ function MyColdWalletScreen() {
                   style={styles.languageCancelButton}
                   onPress={() => setCurrencyModalVisible(false)}
                 >
-                  <Text style={styles.cancelButtonText}>Cancel</Text>
+                  <Text style={styles.cancelButtonText}>{t("Cancel")}</Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -306,12 +308,14 @@ function MyColdWalletScreen() {
           >
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
-                <Text style={styles.languageModalTitle}>Set Password</Text>
+                <Text style={styles.languageModalTitle}>
+                  {t("Set Password")}
+                </Text>
                 <Text style={styles.languageModalText}>
-                  Only you can unlock your wallet
+                  {t("Only you can unlock your wallet")}
                 </Text>
                 <View style={{ marginVertical: 10, width: 200 }}>
-                  <Text style={styles.passwordModalText}>Password</Text>
+                  <Text style={styles.passwordModalText}>{t("Password")}</Text>
                   <View
                     style={[
                       {
@@ -349,7 +353,9 @@ function MyColdWalletScreen() {
                   </View>
                 </View>
                 <View style={{ marginVertical: 10, width: 200 }}>
-                  <Text style={styles.passwordModalText}>Confirm Password</Text>
+                  <Text style={styles.passwordModalText}>
+                    {t("Confirm Password")}
+                  </Text>
                   <View
                     style={[
                       {
@@ -394,7 +400,7 @@ function MyColdWalletScreen() {
                   style={styles.languageCancelButton}
                   onPress={() => setPasswordModalVisible(false)}
                 >
-                  <Text style={styles.cancelButtonText}>Cancel</Text>
+                  <Text style={styles.cancelButtonText}>{t("Cancel")}</Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -402,16 +408,18 @@ function MyColdWalletScreen() {
 
           {/* Bluetooth Btn */}
           <View style={{ marginTop: 40 }}>
-            <Text style={theme.titleText}>Bluetooth</Text>
+            <Text style={theme.titleText}>{t("Bluetooth")}</Text>
             <View style={{ alignItems: "center" }}>
               <TouchableOpacity
                 style={styles.roundButton}
                 onPress={handleBluetoothPairing}
               >
-                <Text style={styles.buttonText}>Pair with Bluetooth</Text>
+                <Text style={styles.buttonText}>
+                  {t("Pair with Bluetooth")}
+                </Text>
               </TouchableOpacity>
             </View>
-            {/* Bluetooth model */}
+            {/* Bluetooth modal */}
             <Modal
               animationType="slide"
               transparent={true}
@@ -422,7 +430,9 @@ function MyColdWalletScreen() {
             >
               <BlurView intensity={10} style={styles.centeredView}>
                 <View style={styles.modalView}>
-                  <Text style={styles.modalTitle}>LOOKING FOR DEVICES</Text>
+                  <Text style={styles.modalTitle}>
+                    {t("LOOKING FOR DEVICES")}
+                  </Text>
                   {isScanning ? (
                     <View
                       style={{
@@ -436,7 +446,9 @@ function MyColdWalletScreen() {
                           height: 100,
                         }}
                       />
-                      <Text style={styles.modalSubtitle}>Scanning...</Text>
+                      <Text style={styles.modalSubtitle}>
+                        {t("Scanning...")}
+                      </Text>
                     </View>
                   ) : (
                     devices.length > 0 && (
@@ -445,7 +457,7 @@ function MyColdWalletScreen() {
                         keyExtractor={(item) => item.id}
                         renderItem={({ item }) => (
                           <Text style={styles.modalSubtitle}>
-                            {item.name || "Unknown Device"}
+                            {item.name || t("Unknown Device")}
                           </Text>
                         )}
                       />
@@ -453,15 +465,16 @@ function MyColdWalletScreen() {
                   )}
                   {!isScanning && devices.length === 0 && (
                     <Text style={styles.modalSubtitle}>
-                      Please make sure your Cold Wallet is unlocked and
-                      Bluetooth is enabled.
+                      {t(
+                        "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled."
+                      )}
                     </Text>
                   )}
                   <TouchableOpacity
                     style={styles.cancelButton}
                     onPress={() => setModalVisible(false)}
                   >
-                    <Text style={styles.cancelButtonText}>Cancel</Text>
+                    <Text style={styles.cancelButtonText}>{t("Cancel")}</Text>
                   </TouchableOpacity>
                 </View>
               </BlurView>
