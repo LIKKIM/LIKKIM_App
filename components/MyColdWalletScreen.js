@@ -29,7 +29,7 @@ if (Platform.OS === "android") {
 }
 
 function MyColdWalletScreen() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const [currencyModalVisible, setCurrencyModalVisible] = useState(false);
   const [passwordModalVisible, setPasswordModalVisible] = useState(false);
@@ -57,17 +57,17 @@ function MyColdWalletScreen() {
   const darkColors = ["#24234C", "#101021"];
   const lightColors = ["#FFFFFF", "#E0E0E0"];
   const languages = [
-    "English",
-    "中文",
-    "Français",
-    "Español",
-    "العربية",
-    "日本語",
-    "Русский",
-    "한국어",
-    "Português",
-    "Italiano",
-    "Deutsch",
+    { code: "en", name: "English" },
+    { code: "zh", name: "中文" },
+    { code: "fr", name: "Français" },
+    { code: "es", name: "Español" },
+    { code: "ar", name: "العربية" },
+    { code: "ja", name: "日本語" },
+    { code: "ru", name: "Русский" },
+    { code: "ko", name: "한국어" },
+    { code: "pt", name: "Português" },
+    { code: "it", name: "Italiano" },
+    { code: "de", name: "Deutsch" },
   ];
 
   let bleManager;
@@ -235,31 +235,29 @@ function MyColdWalletScreen() {
               <View style={styles.modalView}>
                 <Text style={styles.languageModalTitle}>
                   {t("Select Language")}
-                </Text>{" "}
-                {/* 使用 t 函数获取翻译 */}
+                </Text>
                 <ScrollView style={styles.languageList}>
                   {languages.map((language) => (
                     <TouchableOpacity
-                      key={language}
+                      key={language.code}
                       onPress={() => {
-                        console.log("Selected language:", language);
-                        i18n.changeLanguage(language); // 切换语言
+                        console.log("Selected language:", language.name);
+                        i18n.changeLanguage(language.code); // 使用语言代码切换语言
                         setLanguageModalVisible(false);
                       }}
                     >
                       <Text style={styles.languageModalText}>
-                        {t(language)}
-                      </Text>{" "}
-                      {/* 使用 t 函数获取翻译 */}
+                        {language.name}
+                      </Text>
                     </TouchableOpacity>
                   ))}
                 </ScrollView>
+
                 <TouchableOpacity
                   style={styles.languageCancelButton}
                   onPress={() => setLanguageModalVisible(false)}
                 >
-                  <Text style={styles.cancelButtonText}>{t("Cancel")}</Text>{" "}
-                  {/* 使用 t 函数获取翻译 */}
+                  <Text style={styles.cancelButtonText}>{t("Cancel")}</Text>
                 </TouchableOpacity>
               </View>
             </View>
