@@ -264,6 +264,7 @@ i18n
           "Scanning...": "جارٍ المسح...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "يرجى التأكد من أن محفظتك الباردة غير مقفلة وتم تمكين البلوتوث.",
+          Send: "إرسال",
           "Send crypto to another wallet":
             "إرسال العملات الرقمية إلى محفظة أخرى",
           Receive: "استلام",
@@ -499,6 +500,25 @@ i18n
           "Scanning...": "Digitalizando...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "Certifique-se de que sua Cold Wallet esteja desbloqueada e o Bluetooth esteja ativado.",
+          Send: "Enviar",
+          "Send crypto to another wallet":
+            "Enviar criptomoeda para outra carteira",
+          Receive: "Receber",
+          "Receive crypto from another wallet":
+            "Receber criptomoeda de outra carteira",
+          "Transaction History": "Histórico de transações",
+          "No Histories": "Nenhum histórico",
+          "Enter the recipient's address:":
+            "Digite o endereço do destinatário:",
+          "Enter Address": "Digite o endereço",
+          Submit: "Enviar",
+          Cancel: "Cancelar",
+          "Choose the cryptocurrency to send:":
+            "Escolha a criptomoeda para enviar:",
+          "Choose the cryptocurrency to receive:":
+            "Escolha a criptomoeda para receber:",
+          "Address for": "Endereço para",
+          Close: "Fechar",
         },
       },
       it: {
@@ -530,6 +550,25 @@ i18n
           "Scanning...": "Scansione...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "Assicurati che il tuo Cold Wallet sia sbloccato e che il Bluetooth sia abilitato.",
+          Send: "Inviare",
+          "Send crypto to another wallet":
+            "Invia criptovaluta a un altro portafoglio",
+          Receive: "Ricevere",
+          "Receive crypto from another wallet":
+            "Ricevi criptovaluta da un altro portafoglio",
+          "Transaction History": "Cronologia delle transazioni",
+          "No Histories": "Nessuna cronologia",
+          "Enter the recipient's address:":
+            "Inserisci l'indirizzo del destinatario:",
+          "Enter Address": "Inserisci l'indirizzo",
+          Submit: "Invia",
+          Cancel: "Annulla",
+          "Choose the cryptocurrency to send:":
+            "Scegli la criptovaluta da inviare:",
+          "Choose the cryptocurrency to receive:":
+            "Scegli la criptovaluta da ricevere:",
+          "Address for": "Indirizzo per",
+          Close: "Chiudi",
         },
       },
       de: {
@@ -561,6 +600,25 @@ i18n
           "Scanning...": "Scannen...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "Bitte stellen Sie sicher, dass Ihre Cold Wallet entsperrt und Bluetooth aktiviert ist.",
+          Send: "Senden",
+          "Send crypto to another wallet":
+            "Kryptowährung an eine andere Brieftasche senden",
+          Receive: "Empfangen",
+          "Receive crypto from another wallet":
+            "Kryptowährung von einer anderen Brieftasche empfangen",
+          "Transaction History": "Transaktionsverlauf",
+          "No Histories": "Keine Verlaufsdaten",
+          "Enter the recipient's address:":
+            "Geben Sie die Adresse des Empfängers ein:",
+          "Enter Address": "Adresse eingeben",
+          Submit: "Einreichen",
+          Cancel: "Abbrechen",
+          "Choose the cryptocurrency to send:":
+            "Wählen Sie die zu sendende Kryptowährung:",
+          "Choose the cryptocurrency to receive:":
+            "Wählen Sie die zu empfangende Kryptowährung:",
+          "Address for": "Adresse für",
+          Close: "Schließen",
         },
       },
       hi: {
@@ -592,6 +650,23 @@ i18n
           "Scanning...": "स्कैनिंग...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "कृपया सुनिश्चित करें कि आपका कोल्ड वॉलेट अनलॉक है और ब्लूटूथ सक्षम है।",
+          Send: "भेजें",
+          "Send crypto to another wallet": "दूसरे वॉलेट में क्रिप्टो भेजें",
+          Receive: "प्राप्त करें",
+          "Receive crypto from another wallet":
+            "दूसरे वॉलेट से क्रिप्टो प्राप्त करें",
+          "Transaction History": "लेन-देन का इतिहास",
+          "No Histories": "कोई इतिहास नहीं",
+          "Enter the recipient's address:": "प्राप्तकर्ता का पता दर्ज करें:",
+          "Enter Address": "पता दर्ज करें",
+          Submit: "जमा करें",
+          Cancel: "रद्द करें",
+          "Choose the cryptocurrency to send:":
+            "भेजने के लिए क्रिप्टोकरेंसी चुनें:",
+          "Choose the cryptocurrency to receive:":
+            "प्राप्त करने के लिए क्रिप्टोकरेंसी चुनें:",
+          "Address for": "के लिए पता",
+          Close: "बंद करें",
         },
       },
       mn: {
@@ -623,6 +698,25 @@ i18n
           "Scanning...": "Сканнердах...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "Таны хүйтэн хэтэвч тайлагдсан, Bluetooth асаалттай байгаа эсэхийг шалгана уу.",
+          Send: "Илгээх",
+          "Send crypto to another wallet":
+            "Криптовалютыг өөр түрийвчинд илгээх",
+          Receive: "Хүлээн авах",
+          "Receive crypto from another wallet":
+            "Криптовалютыг өөр түрийвчээс хүлээн авах",
+          "Transaction History": "Гүйлгээний түүх",
+          "No Histories": "Түүх байхгүй",
+          "Enter the recipient's address:":
+            "Хүлээн авагчийн хаягийг оруулна уу:",
+          "Enter Address": "Хаяг оруулах",
+          Submit: "Илгээх",
+          Cancel: "Цуцлах",
+          "Choose the cryptocurrency to send:":
+            "Илгээх криптовалютыг сонгоно уу:",
+          "Choose the cryptocurrency to receive:":
+            "Хүлээн авах криптовалютыг сонгоно уу:",
+          "Address for": "Хаяг",
+          Close: "Хаах",
         },
       },
       th: {
@@ -654,6 +748,21 @@ i18n
           "Scanning...": "กำลังสแกน...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "โปรดตรวจสอบให้แน่ใจว่ากระเป๋าเงินเย็นของคุณถูกปลดล็อกและเปิดใช้งาน Bluetooth แล้ว",
+          Send: "ส่ง",
+          "Send crypto to another wallet": "ส่งคริปโตไปยังวอลเล็ตอื่น",
+          Receive: "รับ",
+          "Receive crypto from another wallet": "รับคริปโตจากวอลเล็ตอื่น",
+          "Transaction History": "ประวัติการทำธุรกรรม",
+          "No Histories": "ไม่มีประวัติ",
+          "Enter the recipient's address:": "ป้อนที่อยู่ผู้รับ:",
+          "Enter Address": "ป้อนที่อยู่",
+          Submit: "ส่ง",
+          Cancel: "ยกเลิก",
+          "Choose the cryptocurrency to send:": "เลือกสกุลเงินคริปโตที่จะส่ง:",
+          "Choose the cryptocurrency to receive:":
+            "เลือกสกุลเงินคริปโตที่จะรับ:",
+          "Address for": "ที่อยู่สำหรับ",
+          Close: "ปิด",
         },
       },
       uk: {
@@ -685,6 +794,24 @@ i18n
           "Scanning...": "Сканування...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "Будь ласка, переконайтеся, що ваш холодний гаманець розблокований і Bluetooth увімкнено.",
+          Send: "Відправити",
+          "Send crypto to another wallet":
+            "Відправити криптовалюту на інший гаманець",
+          Receive: "Отримати",
+          "Receive crypto from another wallet":
+            "Отримати криптовалюту з іншого гаманця",
+          "Transaction History": "Історія транзакцій",
+          "No Histories": "Немає історії",
+          "Enter the recipient's address:": "Введіть адресу одержувача:",
+          "Enter Address": "Введіть адресу",
+          Submit: "Відправити",
+          Cancel: "Скасувати",
+          "Choose the cryptocurrency to send:":
+            "Виберіть криптовалюту для відправки:",
+          "Choose the cryptocurrency to receive:":
+            "Виберіть криптовалюту для отримання:",
+          "Address for": "Адреса для",
+          Close: "Закрити",
         },
       },
       vi: {
