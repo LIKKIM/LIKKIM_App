@@ -59,7 +59,8 @@ function MyColdWalletScreen() {
   const lightColors = ["#FFFFFF", "#E0E0E0"];
   const languages = [
     { code: "en", name: "English" },
-    { code: "zh", name: "中文" },
+    { code: "zh", name: "简体中文" }, // Simplified Chinese
+    { code: "zh-TW", name: "繁體中文" }, // Traditional Chinese
     { code: "fr", name: "Français" },
     { code: "es", name: "Español" },
     { code: "ar", name: "العربية" },
@@ -67,10 +68,18 @@ function MyColdWalletScreen() {
     { code: "ru", name: "Русский" },
     { code: "ko", name: "한국어" },
     { code: "pt", name: "Português" },
+    { code: "pt-BR", name: "Português (Brasil)" },
     { code: "it", name: "Italiano" },
     { code: "de", name: "Deutsch" },
+    { code: "hi", name: "हिन्दी" }, // Hindi
+    { code: "mn", name: "Монгол хэл" }, // Mongolian
+    { code: "th", name: "ไทย" }, // Thai
+    { code: "uk", name: "Українська" }, // Ukrainian
+    { code: "vi", name: "Tiếng Việt" }, // Vietnamese
+    { code: "id", name: "Bahasa Indonesia" }, // Indonesian
+    { code: "tl", name: "Filipino" }, // Filipino
+    { code: "bn", name: "বাংলা" }, // Bengali
   ];
-
   let bleManager;
   if (Platform.OS !== "web") {
     bleManager = new BleManager({ restoreStateIdentifier: restoreIdentifier });

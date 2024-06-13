@@ -6,6 +6,27 @@ i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
+    /*     "en", // English
+    "zh", // Simplified Chinese
+    "zh-TW", // Traditional Chinese
+    "fr", // French
+    "es", // Spanish
+    "ar", // Arabic
+    "ja", // Japanese
+    "ru", // Russian
+    "ko", // Korean
+    "pt", // Portuguese
+    "pt-BR", // Brazilian Portuguese
+    "it", // Italian
+    "de", // German
+    "hi", // Hindi
+    "mn", // Mongolian
+    "th", // Thai
+    "uk", // Ukrainian
+    "vi", // Vietnamese
+    "id", // Indonesian
+    "tl", // Filipino
+    "bn", // Bengali */
     resources: {
       en: {
         translation: {
@@ -65,6 +86,36 @@ i18n
           "Scanning...": "扫描中...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "请确保你的冷钱包已解锁并启用蓝牙。",
+        },
+      },
+      "zh-TW": {
+        translation: {
+          "Add Wallet": "添加錢包",
+          "Create Wallet": "創建錢包",
+          "Import Wallet": "導入錢包",
+          Close: "關閉",
+          "Value:": "值:",
+          "Delete Card": "刪除卡片",
+          "Select Language": "選擇語言",
+          Cancel: "取消",
+          "Select Currency": "選擇貨幣",
+          "Set Password": "設置密碼",
+          "Only you can unlock your wallet": "只有你可以解鎖你的錢包",
+          Password: "密碼",
+          "Confirm Password": "確認密碼",
+          "Change Password": "更改密碼",
+          "Default Currency": "默認貨幣",
+          "Help & Support": "幫助與支持",
+          "Privacy & Data": "隱私與數據",
+          About: "關於",
+          Language: "語言",
+          "Dark Mode": "黑暗模式",
+          Bluetooth: "藍牙",
+          "Pair with Bluetooth": "與藍牙配對",
+          "LOOKING FOR DEVICES": "尋找設備",
+          "Scanning...": "掃描中...",
+          "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
+            "請確保你的冷錢包已解鎖並啟用藍牙。",
         },
       },
       fr: {
@@ -283,6 +334,37 @@ i18n
             "Certifique-se de que sua Cold Wallet esteja desbloqueada e o Bluetooth esteja ativado.",
         },
       },
+      "pt-BR": {
+        translation: {
+          "Add Wallet": "Adicionar carteira",
+          "Create Wallet": "Criar carteira",
+          "Import Wallet": "Importar carteira",
+          Close: "Fechar",
+          "Value:": "Valor:",
+          "Delete Card": "Excluir cartão",
+          "Select Language": "Selecionar idioma",
+          Cancel: "Cancelar",
+          "Select Currency": "Selecionar moeda",
+          "Set Password": "Definir senha",
+          "Only you can unlock your wallet":
+            "Somente você pode desbloquear sua carteira",
+          Password: "Senha",
+          "Confirm Password": "Confirmar senha",
+          "Change Password": "Alterar senha",
+          "Default Currency": "Moeda padrão",
+          "Help & Support": "Ajuda e suporte",
+          "Privacy & Data": "Privacidade e dados",
+          About: "Sobre",
+          Language: "Idioma",
+          "Dark Mode": "Modo escuro",
+          Bluetooth: "Bluetooth",
+          "Pair with Bluetooth": "Emparelhar com Bluetooth",
+          "LOOKING FOR DEVICES": "PROCURANDO DISPOSITIVOS",
+          "Scanning...": "Digitalizando...",
+          "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
+            "Certifique-se de que sua Cold Wallet esteja desbloqueada e o Bluetooth esteja ativado.",
+        },
+      },
       it: {
         translation: {
           "Add Wallet": "Aggiungi portafoglio",
@@ -343,6 +425,131 @@ i18n
           "Scanning...": "Scannen...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "Bitte stellen Sie sicher, dass Ihre Cold Wallet entsperrt und Bluetooth aktiviert ist.",
+        },
+      },
+
+      hi: {
+        translation: {
+          "Add Wallet": "वॉलेट जोड़ें",
+          "Create Wallet": "वॉलेट बनाएँ",
+          "Import Wallet": "वॉलेट आयात करें",
+          Close: "बंद करें",
+          "Value:": "मूल्य:",
+          "Delete Card": "कार्ड हटाएं",
+          "Select Language": "भाषा चुनें",
+          Cancel: "रद्द करें",
+          "Select Currency": "मुद्रा चुनें",
+          "Set Password": "पासवर्ड सेट करें",
+          "Only you can unlock your wallet":
+            "केवल आप ही अपने वॉलेट को अनलॉक कर सकते हैं",
+          Password: "पासवर्ड",
+          "Confirm Password": "पासवर्ड की पुष्टि करें",
+          "Change Password": "पासवर्ड बदलें",
+          "Default Currency": "डिफ़ॉल्ट मुद्रा",
+          "Help & Support": "सहायता और समर्थन",
+          "Privacy & Data": "गोपनीयता और डेटा",
+          About: "के बारे में",
+          Language: "भाषा",
+          "Dark Mode": "डार्क मोड",
+          Bluetooth: "ब्लूटूथ",
+          "Pair with Bluetooth": "ब्लूटूथ के साथ पेयर करें",
+          "LOOKING FOR DEVICES": "डिवाइस खोज रहे हैं",
+          "Scanning...": "स्कैनिंग...",
+          "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
+            "कृपया सुनिश्चित करें कि आपका कोल्ड वॉलेट अनलॉक है और ब्लूटूथ सक्षम है।",
+        },
+      },
+      mn: {
+        translation: {
+          "Add Wallet": "Хэтэвч нэмэх",
+          "Create Wallet": "Хэтэвч үүсгэх",
+          "Import Wallet": "Хэтэвч импортлох",
+          Close: "Хаах",
+          "Value:": "Үнэ цэнэ:",
+          "Delete Card": "Карт устгах",
+          "Select Language": "Хэл сонгох",
+          Cancel: "Цуцлах",
+          "Select Currency": "Валют сонгох",
+          "Set Password": "Нууц үг тохируулах",
+          "Only you can unlock your wallet":
+            "Таны хэтэвчийг зөвхөн та л тайлна",
+          Password: "Нууц үг",
+          "Confirm Password": "Нууц үг батлах",
+          "Change Password": "Нууц үг солих",
+          "Default Currency": "Үндсэн валют",
+          "Help & Support": "Тусламж ба дэмжлэг",
+          "Privacy & Data": "Нууцлал ба мэдээлэл",
+          About: "Тухай",
+          Language: "Хэл",
+          "Dark Mode": "Харанхуй горим",
+          Bluetooth: "Bluetooth",
+          "Pair with Bluetooth": "Bluetooth-тэй хослуулах",
+          "LOOKING FOR DEVICES": "Төхөөрөмж хайж байна",
+          "Scanning...": "Сканнердах...",
+          "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
+            "Таны хүйтэн хэтэвч тайлагдсан, Bluetooth асаалттай байгаа эсэхийг шалгана уу.",
+        },
+      },
+      th: {
+        translation: {
+          "Add Wallet": "เพิ่มกระเป๋าเงิน",
+          "Create Wallet": "สร้างกระเป๋าเงิน",
+          "Import Wallet": "นำเข้ากระเป๋าเงิน",
+          Close: "ปิด",
+          "Value:": "มูลค่า:",
+          "Delete Card": "ลบการ์ด",
+          "Select Language": "เลือกภาษา",
+          Cancel: "ยกเลิก",
+          "Select Currency": "เลือกสกุลเงิน",
+          "Set Password": "ตั้งรหัสผ่าน",
+          "Only you can unlock your wallet":
+            "มีเพียงคุณเท่านั้นที่สามารถปลดล็อคกระเป๋าเงินของคุณได้",
+          Password: "รหัสผ่าน",
+          "Confirm Password": "ยืนยันรหัสผ่าน",
+          "Change Password": "เปลี่ยนรหัสผ่าน",
+          "Default Currency": "สกุลเงินเริ่มต้น",
+          "Help & Support": "ช่วยเหลือและสนับสนุน",
+          "Privacy & Data": "ความเป็นส่วนตัวและข้อมูล",
+          About: "เกี่ยวกับ",
+          Language: "ภาษา",
+          "Dark Mode": "โหมดมืด",
+          Bluetooth: "Bluetooth",
+          "Pair with Bluetooth": "จับคู่กับ Bluetooth",
+          "LOOKING FOR DEVICES": "กำลังมองหาอุปกรณ์",
+          "Scanning...": "กำลังสแกน...",
+          "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
+            "โปรดตรวจสอบให้แน่ใจว่ากระเป๋าเงินเย็นของคุณถูกปลดล็อกและเปิดใช้งาน Bluetooth แล้ว",
+        },
+      },
+      uk: {
+        translation: {
+          "Add Wallet": "Додати гаманець",
+          "Create Wallet": "Створити гаманець",
+          "Import Wallet": "Імпортувати гаманець",
+          Close: "Закрити",
+          "Value:": "Значення:",
+          "Delete Card": "Видалити картку",
+          "Select Language": "Вибрати мову",
+          Cancel: "Скасувати",
+          "Select Currency": "Вибрати валюту",
+          "Set Password": "Встановити пароль",
+          "Only you can unlock your wallet":
+            "Тільки ви можете розблокувати свій гаманець",
+          Password: "Пароль",
+          "Confirm Password": "Підтвердити пароль",
+          "Change Password": "Змінити пароль",
+          "Default Currency": "Валюта за замовчуванням",
+          "Help & Support": "Допомога та підтримка",
+          "Privacy & Data": "Конфіденційність та дані",
+          About: "Про",
+          Language: "Мова",
+          "Dark Mode": "Темний режим",
+          Bluetooth: "Bluetooth",
+          "Pair with Bluetooth": "З'єднати з Bluetooth",
+          "LOOKING FOR DEVICES": "ПОШУК ПРИСТРОЇВ",
+          "Scanning...": "Сканування...",
+          "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
+            "Будь ласка, переконайтеся, що ваш холодний гаманець розблокований і Bluetooth увімкнено.",
         },
       },
     },
