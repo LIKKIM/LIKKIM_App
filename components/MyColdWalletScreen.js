@@ -4,6 +4,7 @@ import {
   View,
   Text,
   Modal,
+  Image,
   FlatList,
   TouchableOpacity,
   ScrollView,
@@ -423,7 +424,20 @@ function MyColdWalletScreen() {
                 <View style={styles.modalView}>
                   <Text style={styles.modalTitle}>LOOKING FOR DEVICES</Text>
                   {isScanning ? (
-                    <Text style={styles.modalSubtitle}>Scanning...</Text>
+                    <View
+                      style={{
+                        alignItems: "center",
+                      }}
+                    >
+                      <Image
+                        source={require("../assets/Bluetooth.gif")}
+                        style={{
+                          width: 100,
+                          height: 100,
+                        }}
+                      />
+                      <Text style={styles.modalSubtitle}>Scanning...</Text>
+                    </View>
                   ) : (
                     devices.length > 0 && (
                       <FlatList
