@@ -843,6 +843,22 @@ i18n
           "Scanning...": "Quét...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "Hãy đảm bảo rằng Ví Lạnh của bạn đã được mở khóa và Bluetooth được kích hoạt.",
+          Send: "Gửi",
+          "Send crypto to another wallet": "Gửi tiền điện tử đến ví khác",
+          Receive: "Nhận",
+          "Receive crypto from another wallet": "Nhận tiền điện tử từ ví khác",
+          "Transaction History": "Lịch sử giao dịch",
+          "No Histories": "Không có lịch sử",
+          "Enter the recipient's address:": "Nhập địa chỉ người nhận:",
+          "Enter Address": "Nhập địa chỉ",
+          Submit: "Gửi đi",
+          Cancel: "Hủy bỏ",
+          "Choose the cryptocurrency to send:":
+            "Chọn loại tiền điện tử để gửi:",
+          "Choose the cryptocurrency to receive:":
+            "Chọn loại tiền điện tử để nhận:",
+          "Address for": "Địa chỉ cho",
+          Close: "Đóng",
         },
       },
       id: {
@@ -874,6 +890,23 @@ i18n
           "Scanning...": "Memindai...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "Pastikan Dompet Dingin Anda tidak terkunci dan Bluetooth diaktifkan.",
+          Send: "Kirim",
+          "Send crypto to another wallet": "Kirim kripto ke dompet lain",
+          Receive: "Terima",
+          "Receive crypto from another wallet":
+            "Terima kripto dari dompet lain",
+          "Transaction History": "Riwayat Transaksi",
+          "No Histories": "Tidak ada riwayat",
+          "Enter the recipient's address:": "Masukkan alamat penerima:",
+          "Enter Address": "Masukkan alamat",
+          Submit: "Kirim",
+          Cancel: "Batalkan",
+          "Choose the cryptocurrency to send:":
+            "Pilih cryptocurrency untuk dikirim:",
+          "Choose the cryptocurrency to receive:":
+            "Pilih cryptocurrency untuk diterima:",
+          "Address for": "Alamat untuk",
+          Close: "Tutup",
         },
       },
       tl: {
@@ -905,6 +938,24 @@ i18n
           "Scanning...": "Pag-scan...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "Mangyaring tiyakin na ang iyong Cold Wallet ay naka-unlock at naka-enable ang Bluetooth.",
+          Send: "Magpadala",
+          "Send crypto to another wallet":
+            "Magpadala ng crypto sa ibang wallet",
+          Receive: "Tumanggap",
+          "Receive crypto from another wallet":
+            "Tumanggap ng crypto mula sa ibang wallet",
+          "Transaction History": "Kasaysayan ng Transaksyon",
+          "No Histories": "Walang Kasaysayan",
+          "Enter the recipient's address:": "Ilagay ang address ng tatanggap:",
+          "Enter Address": "Ilagay ang Address",
+          Submit: "Ipasa",
+          Cancel: "Kanselahin",
+          "Choose the cryptocurrency to send:":
+            "Piliin ang cryptocurrency na ipapadala:",
+          "Choose the cryptocurrency to receive:":
+            "Piliin ang cryptocurrency na tatanggapin:",
+          "Address for": "Address para sa",
+          Close: "Isara",
         },
       },
       bn: {
@@ -936,6 +987,23 @@ i18n
           "Scanning...": "স্ক্যান করা হচ্ছে...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "অনুগ্রহ করে নিশ্চিত করুন যে আপনার ঠান্ডা ওয়ালেট আনলক করা হয়েছে এবং ব্লুটুথ সক্রিয় করা হয়েছে।",
+          Send: "পাঠান",
+          "Send crypto to another wallet": "অন্য ওয়ালেটে ক্রিপ্টো পাঠান",
+          Receive: "গ্রহণ করুন",
+          "Receive crypto from another wallet":
+            "অন্য ওয়ালেট থেকে ক্রিপ্টো গ্রহণ করুন",
+          "Transaction History": "লেনদেনের ইতিহাস",
+          "No Histories": "কোনো ইতিহাস নেই",
+          "Enter the recipient's address:": "প্রাপকের ঠিকানা লিখুন:",
+          "Enter Address": "ঠিকানা লিখুন",
+          Submit: "জমা দিন",
+          Cancel: "বাতিল করুন",
+          "Choose the cryptocurrency to send:":
+            "পাঠানোর জন্য ক্রিপ্টোকারেন্সি নির্বাচন করুন:",
+          "Choose the cryptocurrency to receive:":
+            "গ্রহণের জন্য ক্রিপ্টোকারেন্সি নির্বাচন করুন:",
+          "Address for": "এর জন্য ঠিকানা",
+          Close: "বন্ধ করুন",
         },
       },
     },
