@@ -411,7 +411,6 @@ function MyColdWalletScreen() {
                 <Text style={styles.buttonText}>Pair with Bluetooth</Text>
               </TouchableOpacity>
             </View>
-            {/* Bluetooth Model */}
             <Modal
               animationType="slide"
               transparent={true}
@@ -439,17 +438,10 @@ function MyColdWalletScreen() {
                     )
                   )}
                   {!isScanning && devices.length === 0 && (
-                    <>
-                      <FastImage
-                        style={styles.gifImage}
-                        source={require("../assets/Bluetooth.gif")}
-                        resizeMode={FastImage.resizeMode.contain}
-                      />
-                      <Text style={styles.modalSubtitle}>
-                        Please make sure your Cold Wallet is unlocked and
-                        Bluetooth is enabled.
-                      </Text>
-                    </>
+                    <Text style={styles.modalSubtitle}>
+                      Please make sure your Cold Wallet is unlocked and
+                      Bluetooth is enabled.
+                    </Text>
                   )}
                   <TouchableOpacity
                     style={styles.cancelButton}
