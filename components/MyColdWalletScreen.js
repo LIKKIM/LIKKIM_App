@@ -29,6 +29,8 @@ if (Platform.OS === "android") {
 }
 
 function MyColdWalletScreen() {
+  const { t } = useTranslation();
+
   const [currencyModalVisible, setCurrencyModalVisible] = useState(false);
   const [passwordModalVisible, setPasswordModalVisible] = useState(false);
   const currencies = [
@@ -231,7 +233,10 @@ function MyColdWalletScreen() {
           >
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
-                <Text style={styles.languageModalTitle}>Select Language</Text>
+                <Text style={styles.languageModalTitle}>
+                  {t("Select Language")}
+                </Text>{" "}
+                {/* 使用 t 函数获取翻译 */}
                 <ScrollView style={styles.languageList}>
                   {languages.map((language) => (
                     <TouchableOpacity
@@ -242,7 +247,10 @@ function MyColdWalletScreen() {
                         setLanguageModalVisible(false);
                       }}
                     >
-                      <Text style={styles.languageModalText}>{language}</Text>
+                      <Text style={styles.languageModalText}>
+                        {t(language)}
+                      </Text>{" "}
+                      {/* 使用 t 函数获取翻译 */}
                     </TouchableOpacity>
                   ))}
                 </ScrollView>
@@ -250,7 +258,8 @@ function MyColdWalletScreen() {
                   style={styles.languageCancelButton}
                   onPress={() => setLanguageModalVisible(false)}
                 >
-                  <Text style={styles.cancelButtonText}>Cancel</Text>
+                  <Text style={styles.cancelButtonText}>{t("Cancel")}</Text>{" "}
+                  {/* 使用 t 函数获取翻译 */}
                 </TouchableOpacity>
               </View>
             </View>

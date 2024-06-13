@@ -9,9 +9,12 @@ import TransactionsScreen from "./components/TransactionsScreen";
 import MyColdWalletScreen from "./components/MyColdWalletScreen";
 import { CryptoProvider, CryptoContext } from "./components/CryptoContext"; // 导入 CryptoContext
 import i18n from "./config/i18n";
+import { useTranslation } from "react-i18next";
+
 const Tab = createBottomTabNavigator();
 
 export default function App() {
+  const { t } = useTranslation();
   return (
     <CryptoProvider>
       <View style={styles.safeArea}>

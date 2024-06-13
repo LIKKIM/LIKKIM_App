@@ -1,3 +1,4 @@
+// WalletScreen.js
 import React, { useState, useEffect, useRef, useContext } from "react";
 import {
   ImageBackground,
@@ -12,8 +13,10 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import styles, { lightTheme, darkTheme } from "../styles";
 import { BlurView } from "expo-blur";
 import { CryptoContext } from "./CryptoContext"; // 导入 CryptoContext
+import { useTranslation } from "react-i18next"; // 导入 useTranslation
 
 function WalletScreen({ route }) {
+  const { t } = useTranslation(); // 使用 useTranslation 钩子
   const [modalVisible, setModalVisible] = useState(false);
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState("");
@@ -155,7 +158,7 @@ function WalletScreen({ route }) {
               }}
             >
               <Text style={{ color: "#FFF", fontSize: 18, fontWeight: "bold" }}>
-                Add Wallet
+                {t("Add Wallet")}
               </Text>
             </TouchableOpacity>
           </ImageBackground>
@@ -219,7 +222,7 @@ function WalletScreen({ route }) {
               }}
               onPress={handleCreateWallet}
             >
-              <Text style={styles.cancelButtonText}>Create Wallet</Text>
+              <Text style={styles.cancelButtonText}>{t("Create Wallet")}</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={{
@@ -233,7 +236,7 @@ function WalletScreen({ route }) {
               }}
               onPress={handleImportWallet}
             >
-              <Text style={styles.cancelButtonText}>Import Wallet</Text>
+              <Text style={styles.cancelButtonText}>{t("Import Wallet")}</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={{
@@ -248,7 +251,7 @@ function WalletScreen({ route }) {
               }}
               onPress={() => setAddWalletModalVisible(false)}
             >
-              <Text style={styles.cancelButtonText}>Close</Text>
+              <Text style={styles.cancelButtonText}>{t("Close")}</Text>
             </TouchableOpacity>
           </View>
         </BlurView>
@@ -338,7 +341,7 @@ function WalletScreen({ route }) {
               }}
               onPress={() => setAddCryptoVisible(false)}
             >
-              <Text style={styles.cancelButtonText}>Close</Text>
+              <Text style={styles.cancelButtonText}>{t("Close")}</Text>
             </TouchableOpacity>
           </View>
         </BlurView>
@@ -374,7 +377,7 @@ function WalletScreen({ route }) {
                 alignItems: "center",
               }}
             >
-              <Text style={styles.modalTitle}>Value:</Text>
+              <Text style={styles.modalTitle}>{t("Value:")}</Text>
               <TouchableOpacity
                 onPress={() => setDropdownVisible(!dropdownVisible)}
               >
@@ -398,7 +401,7 @@ function WalletScreen({ route }) {
                   style={{ padding: 10 }}
                 >
                   <Text style={{ color: "#FFF", fontSize: 16 }}>
-                    Delete Card
+                    {t("Delete Card")}
                   </Text>
                 </TouchableOpacity>
               </View>
@@ -425,7 +428,7 @@ function WalletScreen({ route }) {
               }}
               onPress={() => setModalVisible(false)}
             >
-              <Text style={styles.cancelButtonText}>Close</Text>
+              <Text style={styles.cancelButtonText}>{t("Close")}</Text>
             </TouchableOpacity>
           </View>
         </BlurView>
