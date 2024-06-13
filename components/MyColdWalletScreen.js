@@ -410,6 +410,7 @@ function MyColdWalletScreen() {
                 <Text style={styles.buttonText}>Pair with Bluetooth</Text>
               </TouchableOpacity>
             </View>
+            {/* Bluetooth model */}
             <Modal
               animationType="slide"
               transparent={true}
