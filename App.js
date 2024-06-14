@@ -33,12 +33,14 @@ export default function App() {
                 return <Icon name={iconName} size={size} color={color} />;
               },
               tabBarLabel: ({ focused }) => {
-                const label =
-                  route.name === "Wallet"
-                    ? "Wallet"
-                    : route.name === "Transactions"
-                    ? "Transactions"
-                    : "My Cold Wallet";
+                let label;
+                if (route.name === "Wallet") {
+                  label = t("Wallet");
+                } else if (route.name === "Transactions") {
+                  label = t("Transactions");
+                } else if (route.name === "My Cold Wallet") {
+                  label = t("My Cold Wallet");
+                }
                 return (
                   <Text style={{ color: focused ? "#ffffff" : "#ffffff50" }}>
                     {label}
