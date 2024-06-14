@@ -12,7 +12,18 @@ export const lightTheme = StyleSheet.create({
     fontWeight: "bold", // 字体加粗
     marginBottom: 20, // 与下一个元素间距20
   },
-
+  container: {
+    backgroundColor: "#FFFFFF",
+  },
+  tabBarStyle: {
+    backgroundColor: "#FFFFFF",
+  },
+  headerStyle: {
+    backgroundColor: "#FFFFFF",
+  },
+  headerRight: {
+    backgroundColor: "#F0F0F0",
+  },
   // 更多的样式定义...
 });
 
@@ -28,7 +39,18 @@ export const darkTheme = StyleSheet.create({
     fontWeight: "bold", // 字体加粗
     marginBottom: 20, // 与下一个元素间距20
   },
-
+  container: {
+    backgroundColor: "#121212",
+  },
+  tabBarStyle: {
+    backgroundColor: "#23224D",
+  },
+  headerStyle: {
+    backgroundColor: "#24234C",
+  },
+  headerRight: {
+    backgroundColor: "#24234C",
+  },
   // 更多的样式定义...
 });
 
