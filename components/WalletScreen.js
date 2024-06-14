@@ -26,8 +26,8 @@ function WalletScreen({ route }) {
   const [addIconModalVisible, setAddIconModalVisible] = useState(false); // 新增的弹窗状态
   const [addWalletModalVisible, setAddWalletModalVisible] = useState(false); // 新增钱包弹窗状态
   const scrollViewRef = useRef(); // 创建ScrollView的引用
-  const { cryptoCount, setCryptoCount, isDarkMode, setIsDarkMode } =
-    useContext(CryptoContext); // 使用 CryptoContext
+  const [isDarkMode, setIsDarkMode] = useState(true);
+  const { cryptoCount, setCryptoCount } = useContext(CryptoContext); // 使用 CryptoContext
   const iconColor = isDarkMode ? "#ffffff" : "#24234C";
   const darkColors = ["#24234C", "#101021"]; // 暗黑模式颜色
   const lightColors = ["#FFFFFF", "#E0E0E0"]; // 明亮模式颜色
@@ -113,7 +113,7 @@ function WalletScreen({ route }) {
       style={{
         flex: 1,
         paddingTop: 20,
-        backgroundColor: isDarkMode ? "#121212" : "#FFFFFF", // 根据模式设置背景颜色
+        backgroundColor: "#121212", // 深灰色背景，适用于暗模式
         alignItems: "center", // 子元素沿着主轴（即垂直轴）居中对齐
         justifyContent: "center", // 子元素沿着交叉轴（即水平轴）居中对齐
       }}
@@ -208,8 +208,8 @@ function WalletScreen({ route }) {
             }}
           >
             {/*       <Text style={{ color: "#FFF", fontSize: 18, marginBottom: 20 }}>
-             Choose an option
-           </Text> */}
+              Choose an option
+            </Text> */}
             <TouchableOpacity
               style={{
                 backgroundColor: "#6C6CF4",
@@ -411,4 +411,5 @@ function WalletScreen({ route }) {
     </LinearGradient>
   );
 }
+
 export default WalletScreen;
