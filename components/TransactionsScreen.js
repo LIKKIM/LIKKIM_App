@@ -1,20 +1,21 @@
 // TransactionsScreen.js
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { View, Text, Modal, TouchableOpacity, TextInput } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import styles, { lightTheme, darkTheme } from "../styles";
 import { BlurView } from "expo-blur";
 import QRCode from "react-native-qrcode-svg"; // 导入 QRCode 组件
 import { useTranslation } from "react-i18next";
+import { DarkModeContext } from "./CryptoContext";
 
 function TransactionsScreen() {
   const { t } = useTranslation();
+  const { isDarkMode } = useContext(DarkModeContext);
   const [modalVisible, setModalVisible] = useState(false);
   const [addressModalVisible, setAddressModalVisible] = useState(false);
   const [operationType, setOperationType] = useState("");
   const [selectedCrypto, setSelectedCrypto] = useState("");
   const [selectedAddress, setSelectedAddress] = useState("");
-  const [isDarkMode, setIsDarkMode] = useState(true);
   const iconColor = isDarkMode ? "#ffffff" : "#24234C";
   const darkColors = ["#24234C", "#101021"];
   const lightColors = ["#FFFFFF", "#E0E0E0"];
