@@ -16,9 +16,7 @@ export const lightTheme = StyleSheet.create({
   container: {
     backgroundColor: "#ddd",
   },
-  tabBarStyle: {
-    backgroundColor: "#ddd",
-  },
+
   headerStyle: {
     backgroundColor: "#ddd",
   },
@@ -44,9 +42,7 @@ export const darkTheme = StyleSheet.create({
   container: {
     backgroundColor: "#121212",
   },
-  tabBarStyle: {
-    backgroundColor: "#23224D",
-  },
+
   headerStyle: {
     backgroundColor: "#24234C",
   },

@@ -33,6 +33,7 @@ export default function App() {
                 ? "#ffffff50"
                 : "#666666";
               const headerTitleColor = isDarkMode ? "#ffffff" : "#333333"; // 根据模式设置标题颜色
+              const tabBarBackgroundColor = isDarkMode ? "#23224D" : "#ddd"; // 根据模式设置底部tab栏背景颜色
 
               return (
                 <Tab.Navigator
@@ -79,8 +80,10 @@ export default function App() {
                         </Text>
                       );
                     },
+                    tabBarActiveTintColor: tabBarActiveTintColor,
+                    tabBarInactiveTintColor: tabBarInactiveTintColor,
                     tabBarStyle: {
-                      backgroundColor: theme.tabBarStyle.backgroundColor,
+                      backgroundColor: tabBarBackgroundColor,
                       borderTopWidth: 0,
                       height: 100,
                       paddingBottom: 30,
