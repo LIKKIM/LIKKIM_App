@@ -12,7 +12,7 @@ import {
   CryptoProvider,
   CryptoContext,
   DarkModeContext,
-} from "./components/CryptoContext";
+} from "./components/CryptoContext"; // 导入 DarkModeContext
 import i18n from "./config/i18n";
 import { useTranslation } from "react-i18next";
 
@@ -32,7 +32,7 @@ export default function App() {
               const tabBarInactiveTintColor = isDarkMode
                 ? "#ffffff50"
                 : "#666666";
-              const headerTitleColor = isDarkMode ? "#000000" : "#333333";
+              const headerTitleColor = isDarkMode ? "#ffffff" : "#333333"; // 根据模式设置标题颜色
 
               return (
                 <Tab.Navigator
@@ -95,9 +95,10 @@ export default function App() {
                       borderBottomColor: theme.headerStyle.borderBottomColor,
                       borderBottomWidth: 0,
                     },
-                    headerTintColor: headerTitleColor,
+                    headerTintColor: theme.headerTintColor,
                     headerTitleStyle: {
                       fontWeight: "bold",
+                      color: headerTitleColor, // 动态设置标题颜色
                     },
                     headerTitle: t(route.name),
                   })}
