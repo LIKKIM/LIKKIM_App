@@ -22,7 +22,7 @@ import { BleManager } from "react-native-ble-plx";
 import Constants from "expo-constants";
 import { useNavigation } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
-import i18n from "../config/i18n"; // 导入 i18n
+import i18n from "../config/i18n";
 import { DarkModeContext } from "./CryptoContext";
 
 let PermissionsAndroid;
