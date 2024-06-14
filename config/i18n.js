@@ -426,7 +426,7 @@ i18n
           About: "정보",
           Language: "언어",
           "Dark Mode": "다크 모드",
-          Bluetooth: "Bluetooth",
+          Bluetooth: "블루투스",
           "Pair with Bluetooth": "Bluetooth와 페어링",
           "LOOKING FOR DEVICES": "장치 찾기",
           "Scanning...": "스캔 중...",
