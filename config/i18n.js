@@ -54,7 +54,7 @@ i18n
           Close: "Close",
           Wallet: "Wallet",
           Transactions: "Transactions",
-          MyColdWallet: "My Cold Wallet",
+          "My Cold Wallet": "My Cold Wallet",
         },
       },
       zh: {
@@ -101,7 +101,7 @@ i18n
           Close: "关闭",
           Wallet: "钱包",
           Transactions: "交易",
-          MyColdWallet: "我的冷钱包",
+          "My Cold Wallet": "我的冷钱包",
         },
       },
       "zh-TW": {
@@ -146,7 +146,7 @@ i18n
           "Address for": "地址為",
           Wallet: "錢包",
           Transactions: "交易",
-          MyColdWallet: "我的冷錢包",
+          "My Cold Wallet": "我的冷錢包",
         },
       },
       fr: {
@@ -197,7 +197,7 @@ i18n
           "Address for": "Adresse pour",
           Wallet: "Portefeuille",
           Transactions: "Transactions",
-          MyColdWallet: "Mon portefeuille froid",
+          "My Cold Wallet": "Mon portefeuille froid",
         },
       },
       es: {
@@ -248,7 +248,7 @@ i18n
           "Address for": "Dirección para",
           Wallet: "Cartera",
           Transactions: "Transacciones",
-          MyColdWallet: "Mi billetera fría",
+          "My Cold Wallet": "Mi billetera fría",
         },
       },
       ar: {
@@ -298,7 +298,7 @@ i18n
           Close: "إغلاق",
           Wallet: "محفظة",
           Transactions: "المعاملات",
-          MyColdWallet: "محفظتي الباردة",
+          "My Cold Wallet": "محفظتي الباردة",
         },
       },
       ja: {
@@ -349,7 +349,7 @@ i18n
           "Address for": "Dirección para",
           Wallet: "ウォレット",
           Transactions: "トランザクション",
-          MyColdWallet: "私のコールドウォレット",
+          "My Cold Wallet": "私のコールドウォレット",
         },
       },
       ru: {
@@ -400,7 +400,7 @@ i18n
           "Address for": "Dirección para",
           Wallet: "Кошелек",
           Transactions: "Транзакции",
-          MyColdWallet: "Мой холодный кошелек",
+          "My Cold Wallet": "Мой холодный кошелек",
         },
       },
       ko: {
@@ -447,7 +447,7 @@ i18n
           "Address for": "주소",
           Wallet: "지갑",
           Transactions: "거래",
-          MyColdWallet: "내 콜드 월렛",
+          "My Cold Wallet": "내 콜드 월렛",
         },
       },
       pt: {
@@ -498,7 +498,7 @@ i18n
           "Address for": "Endereço para",
           Wallet: "Carteira",
           Transactions: "Transações",
-          MyColdWallet: "Minha carteira fria",
+          "My Cold Wallet": "Minha carteira fria",
         },
       },
       "pt-BR": {
@@ -551,7 +551,7 @@ i18n
           Close: "Fechar",
           Wallet: "Carteira",
           Transactions: "Transações",
-          MyColdWallet: "Minha carteira fria",
+          "My Cold Wallet": "Minha carteira fria",
         },
       },
       it: {
@@ -604,7 +604,7 @@ i18n
           Close: "Chiudi",
           Wallet: "Portafoglio",
           Transactions: "Transazioni",
-          MyColdWallet: "Il mio portafoglio freddo",
+          "My Cold Wallet": "Il mio portafoglio freddo",
         },
       },
       de: {
@@ -657,7 +657,7 @@ i18n
           Close: "Schließen",
           Wallet: "Brieftasche",
           Transactions: "Transaktionen",
-          MyColdWallet: "Meine kalte Brieftasche",
+          "My Cold Wallet": "Meine kalte Brieftasche",
         },
       },
       hi: {
@@ -708,7 +708,7 @@ i18n
           Close: "बंद करें",
           Wallet: "बटुआ",
           Transactions: "लेनदेन",
-          MyColdWallet: "मेरा ठंडा बटुआ",
+          "My Cold Wallet": "मेरा ठंडा बटुआ",
         },
       },
       mn: {
@@ -761,7 +761,7 @@ i18n
           Close: "Хаах",
           Wallet: "Хэтэвч",
           Transactions: "Гүйлгээ",
-          MyColdWallet: "Миний хүйтэн хэтэвч",
+          "My Cold Wallet": "Миний хүйтэн хэтэвч",
         },
       },
       th: {
@@ -810,7 +810,7 @@ i18n
           Close: "ปิด",
           Wallet: "กระเป๋าสตางค์",
           Transactions: "ธุรกรรม",
-          MyColdWallet: "กระเป๋าเงินเย็นของฉัน",
+          "My Cold Wallet": "กระเป๋าเงินเย็นของฉัน",
         },
       },
       uk: {
@@ -862,7 +862,7 @@ i18n
           Close: "Закрити",
           Wallet: "Гаманець",
           Transactions: "Транзакції",
-          MyColdWallet: "Мій холодний гаманець",
+          "My Cold Wallet": "Мій холодний гаманець",
         },
       },
       vi: {
@@ -912,7 +912,7 @@ i18n
           Close: "Đóng",
           Wallet: "Ví",
           Transactions: "Giao dịch",
-          MyColdWallet: "Ví lạnh của tôi",
+          "My Cold Wallet": "Ví lạnh của tôi",
         },
       },
       id: {
@@ -963,7 +963,7 @@ i18n
           Close: "Tutup",
           Wallet: "Dompet",
           Transactions: "Transaksi",
-          MyColdWallet: "Dompet dingin saya",
+          "My Cold Wallet": "Dompet dingin saya",
         },
       },
       tl: {
@@ -1015,7 +1015,7 @@ i18n
           Close: "Isara",
           Wallet: "Pitaka",
           Transactions: "Mga transaksyon",
-          MyColdWallet: "Aking malamig na pitaka",
+          "My Cold Wallet": "Aking malamig na pitaka",
         },
       },
       bn: {
@@ -1066,7 +1066,7 @@ i18n
           Close: "বন্ধ করুন",
           Wallet: "ওয়ালেট",
           Transactions: "লেনদেন",
-          MyColdWallet: "আমার ঠান্ডা ওয়ালেট",
+          "My Cold Wallet": "আমার ঠান্ডা ওয়ালেট",
         },
       },
     },

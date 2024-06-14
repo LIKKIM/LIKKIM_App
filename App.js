@@ -39,7 +39,7 @@ export default function App() {
                 } else if (route.name === "Transactions") {
                   label = t("Transactions");
                 } else if (route.name === "My Cold Wallet") {
-                  label = t("MyColdWallet");
+                  label = t("My Cold Wallet");
                 }
                 return (
                   <Text style={{ color: focused ? "#ffffff" : "#ffffff50" }}>
@@ -69,6 +69,7 @@ export default function App() {
               headerTitleStyle: {
                 fontWeight: "bold",
               },
+              headerTitle: t(route.name),
             })}
           >
             <Tab.Screen
