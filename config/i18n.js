@@ -1,7 +1,7 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-react-native-language-detector";
-
+//en zh zh-TW fr es ar ja ru ko pt pt-BR it de hi mn th uk vi id tl bn
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
