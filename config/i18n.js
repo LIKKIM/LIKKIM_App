@@ -52,6 +52,9 @@ i18n
             "Choose the cryptocurrency to receive:",
           "Address for": "Address for",
           Close: "Close",
+          Wallet: "Wallet",
+          Transactions: "Transactions",
+          MyColdWallet: "My Cold Wallet",
         },
       },
       zh: {
@@ -96,6 +99,9 @@ i18n
           "Choose the cryptocurrency to receive:": "选择要接收的加密货币:",
           "Address for": "地址为",
           Close: "关闭",
+          Wallet: "钱包",
+          Transactions: "交易",
+          MyColdWallet: "我的冷钱包",
         },
       },
       "zh-TW": {
@@ -138,6 +144,9 @@ i18n
           "Choose the cryptocurrency to send:": "選擇要發送的加密貨幣:",
           "Choose the cryptocurrency to receive:": "選擇要接收的加密貨幣:",
           "Address for": "地址為",
+          Wallet: "錢包",
+          Transactions: "交易",
+          MyColdWallet: "我的冷錢包",
         },
       },
       fr: {
@@ -186,6 +195,9 @@ i18n
           "Choose the cryptocurrency to receive:":
             "Choisissez la crypto-monnaie à recevoir :",
           "Address for": "Adresse pour",
+          Wallet: "Portefeuille",
+          Transactions: "Transactions",
+          MyColdWallet: "Mon portefeuille froid",
         },
       },
       es: {
@@ -234,6 +246,9 @@ i18n
           "Choose the cryptocurrency to receive:":
             "Elija la criptomoneda para recibir:",
           "Address for": "Dirección para",
+          Wallet: "Cartera",
+          Transactions: "Transacciones",
+          MyColdWallet: "Mi billetera fría",
         },
       },
       ar: {
@@ -281,6 +296,9 @@ i18n
             "اختر العملة الرقمية للاستلام:",
           "Address for": "العنوان لـ",
           Close: "إغلاق",
+          Wallet: "محفظة",
+          Transactions: "المعاملات",
+          MyColdWallet: "محفظتي الباردة",
         },
       },
       ja: {
@@ -329,6 +347,9 @@ i18n
           "Choose the cryptocurrency to receive:":
             "Elija la criptomoneda para recibir:",
           "Address for": "Dirección para",
+          Wallet: "ウォレット",
+          Transactions: "トランザクション",
+          MyColdWallet: "私のコールドウォレット",
         },
       },
       ru: {
@@ -377,6 +398,9 @@ i18n
           "Choose the cryptocurrency to receive:":
             "Elija la criptomoneda para recibir:",
           "Address for": "Dirección para",
+          Wallet: "Кошелек",
+          Transactions: "Транзакции",
+          MyColdWallet: "Мой холодный кошелек",
         },
       },
       ko: {
@@ -421,6 +445,9 @@ i18n
           "Choose the cryptocurrency to receive:":
             "받을 암호화폐를 선택하십시오:",
           "Address for": "주소",
+          Wallet: "지갑",
+          Transactions: "거래",
+          MyColdWallet: "내 콜드 월렛",
         },
       },
       pt: {
@@ -469,6 +496,9 @@ i18n
           "Choose the cryptocurrency to receive:":
             "Escolha a criptomoeda para receber:",
           "Address for": "Endereço para",
+          Wallet: "Carteira",
+          Transactions: "Transações",
+          MyColdWallet: "Minha carteira fria",
         },
       },
       "pt-BR": {
@@ -519,6 +549,9 @@ i18n
             "Escolha a criptomoeda para receber:",
           "Address for": "Endereço para",
           Close: "Fechar",
+          Wallet: "Carteira",
+          Transactions: "Transações",
+          MyColdWallet: "Minha carteira fria",
         },
       },
       it: {
@@ -569,6 +602,9 @@ i18n
             "Scegli la criptovaluta da ricevere:",
           "Address for": "Indirizzo per",
           Close: "Chiudi",
+          Wallet: "Portafoglio",
+          Transactions: "Transazioni",
+          MyColdWallet: "Il mio portafoglio freddo",
         },
       },
       de: {
@@ -619,6 +655,9 @@ i18n
             "Wählen Sie die zu empfangende Kryptowährung:",
           "Address for": "Adresse für",
           Close: "Schließen",
+          Wallet: "Brieftasche",
+          Transactions: "Transaktionen",
+          MyColdWallet: "Meine kalte Brieftasche",
         },
       },
       hi: {
@@ -667,6 +706,9 @@ i18n
             "प्राप्त करने के लिए क्रिप्टोकरेंसी चुनें:",
           "Address for": "के लिए पता",
           Close: "बंद करें",
+          Wallet: "बटुआ",
+          Transactions: "लेनदेन",
+          MyColdWallet: "मेरा ठंडा बटुआ",
         },
       },
       mn: {
@@ -717,6 +759,9 @@ i18n
             "Хүлээн авах криптовалютыг сонгоно уу:",
           "Address for": "Хаяг",
           Close: "Хаах",
+          Wallet: "Хэтэвч",
+          Transactions: "Гүйлгээ",
+          MyColdWallet: "Миний хүйтэн хэтэвч",
         },
       },
       th: {
@@ -763,6 +808,9 @@ i18n
             "เลือกสกุลเงินคริปโตที่จะรับ:",
           "Address for": "ที่อยู่สำหรับ",
           Close: "ปิด",
+          Wallet: "กระเป๋าสตางค์",
+          Transactions: "ธุรกรรม",
+          MyColdWallet: "กระเป๋าเงินเย็นของฉัน",
         },
       },
       uk: {
@@ -812,6 +860,9 @@ i18n
             "Виберіть криптовалюту для отримання:",
           "Address for": "Адреса для",
           Close: "Закрити",
+          Wallet: "Гаманець",
+          Transactions: "Транзакції",
+          MyColdWallet: "Мій холодний гаманець",
         },
       },
       vi: {
@@ -859,6 +910,9 @@ i18n
             "Chọn loại tiền điện tử để nhận:",
           "Address for": "Địa chỉ cho",
           Close: "Đóng",
+          Wallet: "Ví",
+          Transactions: "Giao dịch",
+          MyColdWallet: "Ví lạnh của tôi",
         },
       },
       id: {
@@ -907,6 +961,9 @@ i18n
             "Pilih cryptocurrency untuk diterima:",
           "Address for": "Alamat untuk",
           Close: "Tutup",
+          Wallet: "Dompet",
+          Transactions: "Transaksi",
+          MyColdWallet: "Dompet dingin saya",
         },
       },
       tl: {
@@ -956,6 +1013,9 @@ i18n
             "Piliin ang cryptocurrency na tatanggapin:",
           "Address for": "Address para sa",
           Close: "Isara",
+          Wallet: "Pitaka",
+          Transactions: "Mga transaksyon",
+          MyColdWallet: "Aking malamig na pitaka",
         },
       },
       bn: {
@@ -1004,6 +1064,9 @@ i18n
             "গ্রহণের জন্য ক্রিপ্টোকারেন্সি নির্বাচন করুন:",
           "Address for": "এর জন্য ঠিকানা",
           Close: "বন্ধ করুন",
+          Wallet: "ওয়ালেট",
+          Transactions: "লেনদেন",
+          MyColdWallet: "আমার ঠান্ডা ওয়ালেট",
         },
       },
     },
