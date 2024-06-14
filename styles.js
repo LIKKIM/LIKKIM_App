@@ -14,16 +14,16 @@ export const lightTheme = StyleSheet.create({
     marginBottom: 20, // 与下一个元素间距20
   },
   container: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#ddd",
   },
   tabBarStyle: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#ddd",
   },
   headerStyle: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#ddd",
   },
   headerRight: {
-    backgroundColor: "#F0F0F0",
+    backgroundColor: "#ddd",
   },
   // 更多的样式定义...
 });
