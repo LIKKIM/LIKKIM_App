@@ -241,13 +241,13 @@ function MyColdWalletScreen() {
                 <Text style={[theme.settingsText, { flex: 1 }]}>
                   {option.title}
                 </Text>
-                {option.extraIcon && (
-                  <Icon name={option.extraIcon} size={24} color={iconColor} />
-                )}
                 {option.selectedOption && (
-                  <Text style={[theme.settingsText, { marginLeft: 8 }]}>
+                  <Text style={[theme.settingsText, { marginRight: 8 }]}>
                     {option.selectedOption}
                   </Text>
+                )}
+                {option.extraIcon && (
+                  <Icon name={option.extraIcon} size={24} color={iconColor} />
                 )}
               </View>
               {option.toggle}
