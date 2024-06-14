@@ -39,7 +39,7 @@ export default function App() {
                 } else if (route.name === "Transactions") {
                   label = t("Transactions");
                 } else if (route.name === "My Cold Wallet") {
-                  label = t("My Cold Wallet");
+                  label = t("MyColdWallet");
                 }
                 return (
                   <Text style={{ color: focused ? "#ffffff" : "#ffffff50" }}>
