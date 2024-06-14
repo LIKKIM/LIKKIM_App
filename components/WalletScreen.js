@@ -11,6 +11,7 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import styles, { lightTheme, darkTheme } from "../styles";
+import WalletScreenStyle from "../styles/WalletScreenStyle";
 import { BlurView } from "expo-blur";
 import { CryptoContext } from "./CryptoContext"; // 导入 CryptoContext
 import { useTranslation } from "react-i18next"; // 导入 useTranslation
