@@ -25,6 +25,7 @@ export const lightTheme = StyleSheet.create({
   headerRight: {
     backgroundColor: "#ddd",
   },
+
   // 更多的样式定义...
 });
 
@@ -52,6 +53,7 @@ export const darkTheme = StyleSheet.create({
   headerRight: {
     backgroundColor: "#24234C",
   },
+
   // 更多的样式定义...
 });
 
