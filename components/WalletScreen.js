@@ -11,12 +11,15 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import styles, { lightTheme, darkTheme } from "../styles";
+import { DarkModeContext } from "./CryptoContext";
 import WalletScreenStyle from "../styles/WalletScreenStyle";
 import { BlurView } from "expo-blur";
 import { CryptoContext } from "./CryptoContext"; // 导入 CryptoContext
 import { useTranslation } from "react-i18next"; // 导入 useTranslation
 
 function WalletScreen({ route }) {
+  const { isDarkMode } = useContext(DarkModeContext);
+  const theme = isDarkMode ? darkTheme : lightTheme;
   const { t } = useTranslation(); // 使用 useTranslation 钩子
   const [modalVisible, setModalVisible] = useState(false);
   const [dropdownVisible, setDropdownVisible] = useState(false);
@@ -26,7 +29,6 @@ function WalletScreen({ route }) {
   const [addIconModalVisible, setAddIconModalVisible] = useState(false); // 新增的弹窗状态
   const [addWalletModalVisible, setAddWalletModalVisible] = useState(false); // 新增钱包弹窗状态
   const scrollViewRef = useRef(); // 创建ScrollView的引用
-  const [isDarkMode, setIsDarkMode] = useState(true);
   const { cryptoCount, setCryptoCount } = useContext(CryptoContext); // 使用 CryptoContext
   const iconColor = isDarkMode ? "#ffffff" : "#24234C";
   const darkColors = ["#24234C", "#101021"]; // 暗黑模式颜色

@@ -1,5 +1,5 @@
 // MyColdWalletScreen.js
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import {
   View,
   Text,
@@ -23,6 +23,7 @@ import Constants from "expo-constants";
 import { useNavigation } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 import i18n from "../config/i18n"; // 导入 i18n
+import { DarkModeContext } from "./CryptoContext";
 
 let PermissionsAndroid;
 if (Platform.OS === "android") {
@@ -32,7 +33,8 @@ if (Platform.OS === "android") {
 function MyColdWalletScreen() {
   const { t } = useTranslation();
   const navigation = useNavigation();
-
+  const { isDarkMode, setIsDarkMode } = useContext(DarkModeContext);
+  const theme = isDarkMode ? darkTheme : lightTheme;
   const [currencyModalVisible, setCurrencyModalVisible] = useState(false);
   const [passwordModalVisible, setPasswordModalVisible] = useState(false);
   const [selectedCurrency, setSelectedCurrency] = useState("USD");
@@ -50,9 +52,9 @@ function MyColdWalletScreen() {
     "NZD",
   ];
   const [modalVisible, setModalVisible] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(true);
+
   const [languageModalVisible, setLanguageModalVisible] = useState(false);
-  const theme = isDarkMode ? darkTheme : lightTheme;
+
   const [devices, setDevices] = useState([]);
   const isScanningRef = useRef(false);
   const [isScanning, setIsScanning] = useState(false);
