@@ -1,4 +1,4 @@
-//MyColdWalletScreen.js
+// MyColdWalletScreen.js
 import React, { useState, useEffect, useRef } from "react";
 import {
   View,
@@ -30,10 +30,13 @@ if (Platform.OS === "android") {
 }
 
 function MyColdWalletScreen() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
+  const navigation = useNavigation();
 
   const [currencyModalVisible, setCurrencyModalVisible] = useState(false);
   const [passwordModalVisible, setPasswordModalVisible] = useState(false);
+  const [selectedCurrency, setSelectedCurrency] = useState("USD");
+  const [selectedLanguage, setSelectedLanguage] = useState(i18n.language);
   const currencies = [
     "USD",
     "EUR",
@@ -80,6 +83,7 @@ function MyColdWalletScreen() {
     { code: "tl", name: "Filipino" }, // Filipino
     { code: "bn", name: "বাংলা" }, // Bengali
   ];
+
   let bleManager;
   if (Platform.OS !== "web") {
     bleManager = new BleManager({ restoreStateIdentifier: restoreIdentifier });
@@ -89,6 +93,14 @@ function MyColdWalletScreen() {
     setModalVisible(true);
     scanDevices();
   };
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerTitle: `${t("MyColdWallet")} - ${selectedCurrency} - ${
+        languages.find((lang) => lang.code === selectedLanguage).name
+      }`,
+    });
+  }, [selectedCurrency, selectedLanguage, t, navigation]);
 
   useEffect(() => {
     let subscription;
@@ -154,6 +166,7 @@ function MyColdWalletScreen() {
       icon: "attach-money",
       onPress: () => setCurrencyModalVisible(true),
       extraIcon: "arrow-drop-down",
+      selectedOption: selectedCurrency,
     },
     {
       title: t("Help & Support"),
@@ -181,6 +194,8 @@ function MyColdWalletScreen() {
       icon: "language",
       onPress: () => setLanguageModalVisible(true),
       extraIcon: "arrow-drop-down",
+      selectedOption: languages.find((lang) => lang.code === selectedLanguage)
+        .name,
     },
     {
       title: t("Dark Mode"),
@@ -229,6 +244,11 @@ function MyColdWalletScreen() {
                 {option.extraIcon && (
                   <Icon name={option.extraIcon} size={24} color={iconColor} />
                 )}
+                {option.selectedOption && (
+                  <Text style={[theme.settingsText, { marginLeft: 8 }]}>
+                    {option.selectedOption}
+                  </Text>
+                )}
               </View>
               {option.toggle}
             </TouchableOpacity>
@@ -252,6 +272,7 @@ function MyColdWalletScreen() {
                       key={language.code}
                       onPress={() => {
                         console.log("Selected language:", language.name);
+                        setSelectedLanguage(language.code);
                         i18n.changeLanguage(language.code);
                         setLanguageModalVisible(false);
                       }}
@@ -262,7 +283,6 @@ function MyColdWalletScreen() {
                     </TouchableOpacity>
                   ))}
                 </ScrollView>
-
                 <TouchableOpacity
                   style={styles.languageCancelButton}
                   onPress={() => setLanguageModalVisible(false)}
@@ -291,6 +311,7 @@ function MyColdWalletScreen() {
                       key={currency}
                       onPress={() => {
                         console.log("Selected currency:", currency);
+                        setSelectedCurrency(currency);
                         setCurrencyModalVisible(false);
                       }}
                     >
