@@ -96,11 +96,9 @@ function MyColdWalletScreen() {
 
   useEffect(() => {
     navigation.setOptions({
-      headerTitle: `${t("MyColdWallet")} - ${selectedCurrency} - ${
-        languages.find((lang) => lang.code === selectedLanguage).name
-      }`,
+      headerTitle: t("My Cold Wallet"),
     });
-  }, [selectedCurrency, selectedLanguage, t, navigation]);
+  }, [t, navigation]);
 
   useEffect(() => {
     let subscription;
