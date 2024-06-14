@@ -240,16 +240,7 @@ function WalletScreen({ route }) {
               <Text style={styles.cancelButtonText}>{t("Import Wallet")}</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={{
-                backgroundColor: "#6C6CF4",
-                padding: 10,
-                width: "100%",
-                justifyContent: "center",
-                borderRadius: 30,
-                height: 60,
-                alignItems: "center",
-                marginTop: 20,
-              }}
+              style={WalletScreenStyle.cancelButton}
               onPress={() => setAddWalletModalVisible(false)}
             >
               <Text style={styles.cancelButtonText}>{t("Close")}</Text>
@@ -330,16 +321,7 @@ function WalletScreen({ route }) {
               ))}
             </ScrollView>
             <TouchableOpacity
-              style={{
-                backgroundColor: "#6C6CF4",
-                padding: 10,
-                width: "100%",
-                justifyContent: "center",
-                borderRadius: 30,
-                height: 60,
-                alignItems: "center",
-                marginTop: 20,
-              }}
+              style={WalletScreenStyle.cancelButton}
               onPress={() => setAddCryptoVisible(false)}
             >
               <Text style={styles.cancelButtonText}>{t("Close")}</Text>
@@ -418,15 +400,7 @@ function WalletScreen({ route }) {
               {selectedAddress}
             </Text>
             <TouchableOpacity
-              style={{
-                backgroundColor: "#6C6CF4",
-                padding: 10,
-                width: "80%",
-                justifyContent: "center",
-                borderRadius: 30,
-                height: 60,
-                alignItems: "center",
-              }}
+              style={WalletScreenStyle.cancelButton}
               onPress={() => setModalVisible(false)}
             >
               <Text style={styles.cancelButtonText}>{t("Close")}</Text>
