@@ -30,7 +30,7 @@ const currencies = [
   { name: "Norwegian Krone", shortName: "NOK" },
   { name: "Pakistani Rupee", shortName: "PKR" },
   { name: "Philippine Peso", shortName: "PHP" },
-  { name: "Polish Ztoty", shortName: "PLN" },
+  { name: "Polish Zloty", shortName: "PLN" },
   { name: "Russian Rouble", shortName: "RUB" },
   { name: "Singapore Dollar", shortName: "SGD" },
   { name: "South African Rand", shortName: "ZAR" },
@@ -137,14 +137,13 @@ const initialAdditionalCryptos = [
 ];
 
 export const CryptoProvider = ({ children }) => {
-  const [cryptoCount, setCryptoCount] = useState(
-    initialAdditionalCryptos.length
-  );
+  const [cryptoCount, setCryptoCount] = useState(0); // 初始为0
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [currencyUnit, setCurrencyUnit] = useState("USD");
   const [additionalCryptos, setAdditionalCryptos] = useState(
     initialAdditionalCryptos
   );
+  const [addedCryptos, setAddedCryptos] = useState([]); // 用于跟踪已添加的加密货币
 
   return (
     <CryptoContext.Provider
@@ -156,6 +155,8 @@ export const CryptoProvider = ({ children }) => {
         currencies,
         additionalCryptos,
         setAdditionalCryptos,
+        addedCryptos, // 确保提供 addedCryptos
+        setAddedCryptos, // 确保提供修改 addedCryptos 的方法
       }}
     >
       <DarkModeContext.Provider value={{ isDarkMode, setIsDarkMode }}>
