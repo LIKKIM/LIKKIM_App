@@ -45,15 +45,7 @@ function WalletScreen({ route }) {
     setCryptoCount(cryptoCards.length - 1);
   };
 
-  const [cryptoCards, setCryptoCards] = useState([
-    {
-      name: "Total Balance",
-      shortName: "TOTAL",
-      balance: "0.0",
-      icon: null, // No icon for Total Balance card
-      cardImage: require("../assets/Card86.png"), // Placeholder card image
-    },
-  ]);
+  const [cryptoCards, setCryptoCards] = useState([]);
 
   useEffect(() => {
     if (route.params?.showAddModal) {
