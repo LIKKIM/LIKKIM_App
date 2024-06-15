@@ -186,7 +186,7 @@ function WalletScreen({ route }) {
       colors={isDarkMode ? darkColors : lightColors}
       style={{
         flex: 1,
-        paddingTop: 20,
+
         backgroundColor: "#121212",
         alignItems: "center",
         justifyContent: "center",
@@ -195,7 +195,7 @@ function WalletScreen({ route }) {
       <ScrollView
         ref={scrollViewRef}
         contentContainerStyle={{
-          paddingBottom: 20,
+          paddingTop: 20,
           justifyContent: "center",
           alignItems: "center",
         }}
