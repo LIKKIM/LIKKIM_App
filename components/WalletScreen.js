@@ -175,6 +175,12 @@ function WalletScreen({ route }) {
     setAddWalletModalVisible(false);
   };
 
+  const calculateTotalBalance = () => {
+    return cryptoCards
+      .reduce((total, card) => total + parseFloat(card.balance), 0)
+      .toFixed(2);
+  };
+
   return (
     <LinearGradient
       colors={isDarkMode ? darkColors : lightColors}
@@ -198,6 +204,44 @@ function WalletScreen({ route }) {
           paddingHorizontal: 0,
         }}
       >
+        {cryptoCards.length > 0 && (
+          <View
+            style={{
+              width: 300,
+              marginBottom: 40,
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 18,
+                marginVertical: 10,
+                color: "#fff",
+                textAlign: "left", // Ensure left alignment
+              }}
+            >
+              {t("Total balance")}
+            </Text>
+            <Text
+              style={{
+                fontSize: 36,
+                fontWeight: "bold",
+                color: "#fff",
+                textAlign: "left", // Ensure left alignment
+              }}
+            >
+              {`${calculateTotalBalance()} `}
+              <Text
+                style={{
+                  fontSize: 18, // Smaller font size for the unit
+                  textAlign: "left", // Ensure left alignment
+                }}
+              >
+                {currencyUnit}
+              </Text>
+            </Text>
+          </View>
+        )}
+
         {cryptoCards.length === 0 && (
           <ImageBackground
             source={require("../assets/AddWallet.png")}
