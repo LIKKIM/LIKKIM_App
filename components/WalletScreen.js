@@ -18,11 +18,12 @@ import { CryptoContext, DarkModeContext } from "./CryptoContext";
 import { useTranslation } from "react-i18next";
 
 function WalletScreen({ route }) {
+  const { additionalCryptos, cryptoCount, setCryptoCount, currencyUnit } =
+    useContext(CryptoContext);
   const { isDarkMode } = useContext(DarkModeContext);
   const WalletScreenStyle = WalletScreenStyles(isDarkMode);
   const theme = isDarkMode ? darkTheme : lightTheme;
   const { t } = useTranslation();
-  const { currencyUnit } = useContext(CryptoContext);
   const [modalVisible, setModalVisible] = useState(false);
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState("");
@@ -31,7 +32,6 @@ function WalletScreen({ route }) {
   const [addIconModalVisible, setAddIconModalVisible] = useState(false);
   const [addWalletModalVisible, setAddWalletModalVisible] = useState(false);
   const scrollViewRef = useRef();
-  const { cryptoCount, setCryptoCount } = useContext(CryptoContext);
   const iconColor = isDarkMode ? "#ffffff" : "#24234C";
   const darkColors = ["#24234C", "#101021"];
   const lightColors = ["#FFFFFF", "#E0E0E0"];
@@ -60,86 +60,6 @@ function WalletScreen({ route }) {
     setCryptoCount(cryptoCards.length);
   }, [cryptoCards.length]);
 
-  const additionalCryptos = [
-    {
-      name: "Bitcoin",
-      shortName: "BTC",
-      balance: "0.0",
-      icon: require("../assets/BitcoinIcon.png"),
-      cardImage: require("../assets/Card3.png"),
-    },
-    {
-      name: "Ethereum",
-      shortName: "ETH",
-      balance: "0.0",
-      icon: require("../assets/EthereumIcon.png"),
-      cardImage: require("../assets/Card54.png"),
-    },
-    {
-      name: "USDT",
-      shortName: "USDT",
-      balance: "0.0",
-      icon: require("../assets/USDTIcon.png"),
-      cardImage: require("../assets/Card43.png"),
-    },
-    {
-      name: "Litecoin",
-      shortName: "LTC",
-      balance: "0.0",
-      icon: require("../assets/LitecoinIcon.png"),
-      cardImage: require("../assets/Card1.png"),
-    },
-    {
-      name: "Bitcoin Cash",
-      shortName: "BCH",
-      balance: "0.0",
-      icon: require("../assets/BitcoinCashIcon.png"),
-      cardImage: require("../assets/Card2.png"),
-    },
-    {
-      name: "Dash",
-      shortName: "DASH",
-      balance: "0.0",
-      icon: require("../assets/DashIcon.png"),
-      cardImage: require("../assets/Card3.png"),
-    },
-    {
-      name: "Cardano",
-      shortName: "ADA",
-      balance: "0.0",
-      icon: require("../assets/CardanoIcon.png"),
-      cardImage: require("../assets/Card5.png"),
-    },
-    {
-      name: "Polkadot",
-      shortName: "DOT",
-      balance: "0.0",
-      icon: require("../assets/PolkadotIcon.png"),
-      cardImage: require("../assets/Card6.png"),
-    },
-    {
-      name: "Chainlink",
-      shortName: "LINK",
-      balance: "0.0",
-      icon: require("../assets/ChainlinkIcon.png"),
-      cardImage: require("../assets/Card7.png"),
-    },
-    {
-      name: "Stellar",
-      shortName: "XLM",
-      balance: "0.0",
-      icon: require("../assets/StellarIcon.png"),
-      cardImage: require("../assets/Card8.png"),
-    },
-    {
-      name: "Dogecoin",
-      shortName: "DOGE",
-      balance: "0.0",
-      icon: require("../assets/DogecoinIcon.png"),
-      cardImage: require("../assets/Card9.png"),
-    },
-  ];
-
   const handleCardPress = (cryptoName, index) => {
     if (selectedCardName === cryptoName) {
       setModalVisible(true);
@@ -156,10 +76,12 @@ function WalletScreen({ route }) {
       scrollViewRef.current.scrollTo({ y: yOffset, animated: true });
     }
   };
-
   const handleAddCrypto = (crypto) => {
     if (!cryptoCards.find((card) => card.name === crypto.name)) {
-      const newCryptoCards = [...cryptoCards, { ...crypto, address: "0" }];
+      const newCryptoCards = [
+        ...cryptoCards,
+        { ...crypto, balance: "0.0", address: "0" },
+      ];
       setCryptoCards(newCryptoCards);
       setCryptoCount(newCryptoCards.length);
     }
