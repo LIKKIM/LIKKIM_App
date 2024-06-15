@@ -29,11 +29,10 @@ const WalletScreenStyle = StyleSheet.create({
   },
   cardShortName: {
     position: "absolute",
-    top: 10,
-    left: 180,
+    top: 30,
+    left: 50,
     color: "#fff",
-    fontSize: 16,
-    fontWeight: "bold",
+    fontSize: 14,
   },
   cardBalance: {
     position: "absolute",
