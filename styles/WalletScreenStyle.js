@@ -45,18 +45,27 @@ const WalletScreenStyle = StyleSheet.create({
   },
   card: {
     width: 300, // 宽度为300
-    height: 170, // 高度为100
-    borderRadius: 20, // 边角圆润程度为16
+    height: 170, // 高度为170
+    borderRadius: 20, // 边角圆润程度为20
     overflow: "hidden",
     justifyContent: "center", // 内容居中显示
     alignItems: "center", // 内容居中显示
     backgroundColor: "#484692", // 深灰色背景，比container稍浅
     marginBottom: 20, // 与下一个元素间距20
-    shadowColor: "#000", // 阴影颜色为黑色
-    shadowOffset: { width: 0, height: 2 }, // 阴影偏移
-    shadowOpacity: 0.25, // 阴影透明度
-    shadowRadius: 3.84, // 阴影扩散范围
-    elevation: 5, // 用于Android的材质阴影高度
+  },
+  cardFirst: {
+    shadowOffset: { width: 0, height: 0 }, // 第一张卡片的阴影偏移
+    shadowColor: "#101021", // 阴影颜色为黑色
+    shadowOpacity: 0.3, // 增加阴影透明度
+    shadowRadius: 30, // 增大阴影扩散范围使阴影更加宽
+    elevation: 20, // 增加用于Android的材质阴影高度
+  },
+  cardOthers: {
+    shadowOffset: { width: 0, height: -10 }, // 其他卡片向上偏移阴影
+    shadowColor: "#101021", // 阴影颜色为黑色
+    shadowOpacity: 0.8, // 增加阴影透明度
+    shadowRadius: 30, // 增大阴影扩散范围使阴影更加宽
+    elevation: 20, // 增加用于Android的材质阴影高度
   },
 });
 

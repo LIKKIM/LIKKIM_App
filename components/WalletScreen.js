@@ -256,11 +256,11 @@ function WalletScreen({ route }) {
               justifyContent: "center",
               alignItems: "center",
               backgroundColor: "#484692",
-              shadowColor: "#000",
-              shadowOffset: { width: 0, height: 2 },
-              shadowOpacity: 0.25,
-              shadowRadius: 3.84,
-              elevation: 5,
+              shadowOffset: { width: 0, height: 0 }, // 第一张卡片的阴影偏移
+              shadowColor: "#101021", // 阴影颜色为黑色
+              shadowOpacity: 0.3, // 增加阴影透明度
+              shadowRadius: 30, // 增大阴影扩散范围使阴影更加宽
+              elevation: 20, // 增加用于Android的材质阴影高度
             }}
             imageStyle={{ borderRadius: 20 }}
           >
@@ -290,7 +290,12 @@ function WalletScreen({ route }) {
           >
             <ImageBackground
               source={card.cardImage}
-              style={WalletScreenStyle.card}
+              style={[
+                WalletScreenStyle.card,
+                index === 0
+                  ? WalletScreenStyle.cardFirst
+                  : WalletScreenStyle.cardOthers,
+              ]}
               imageStyle={{ borderRadius: 16 }}
             >
               <View style={styles.overlay} />
