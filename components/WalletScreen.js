@@ -443,9 +443,11 @@ function WalletScreen({ route }) {
             )}
             <View
               style={{
+                position: "absolute",
+                top: 35,
+                left: 35,
                 flexDirection: "row",
                 alignItems: "center",
-                marginBottom: 10,
               }}
             >
               <Image
@@ -467,6 +469,7 @@ function WalletScreen({ route }) {
                 color: "#ffffff",
                 textAlign: "center",
                 fontSize: 18,
+                marginTop: 40,
                 marginBottom: 10,
               }}
             >
