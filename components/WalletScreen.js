@@ -27,6 +27,7 @@ function WalletScreen({ route }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState("");
+  const [selectedCrypto, setSelectedCrypto] = useState(null); // 添加此行
   const [addCryptoVisible, setAddCryptoVisible] = useState(false);
   const [selectedCardName, setSelectedCardName] = useState(null);
   const [addIconModalVisible, setAddIconModalVisible] = useState(false);
@@ -61,14 +62,14 @@ function WalletScreen({ route }) {
   }, [cryptoCards.length]);
 
   const handleCardPress = (cryptoName, index) => {
+    const crypto = cryptoCards.find((card) => card.name === cryptoName);
     if (selectedCardName === cryptoName) {
+      setSelectedCrypto(crypto); // 添加此行
       setModalVisible(true);
     } else {
-      setSelectedAddress(
-        cryptoCards.find((card) => card.name === cryptoName)?.address ||
-          "Unknown"
-      );
+      setSelectedAddress(crypto?.address || "Unknown");
       setSelectedCardName(cryptoName);
+      setSelectedCrypto(crypto); // 添加此行
 
       const cardHeight = 180;
       const topOffset = 160;
@@ -76,6 +77,7 @@ function WalletScreen({ route }) {
       scrollViewRef.current.scrollTo({ y: yOffset, animated: true });
     }
   };
+
   const handleAddCrypto = (crypto) => {
     if (!cryptoCards.find((card) => card.name === crypto.name)) {
       const newCryptoCards = [
@@ -453,7 +455,7 @@ function WalletScreen({ route }) {
                 marginBottom: 30,
               }}
             >
-              {selectedAddress}
+              {selectedCrypto?.balance || "0.0"} {currencyUnit}
             </Text>
             <TouchableOpacity
               style={WalletScreenStyle.cancelButton}

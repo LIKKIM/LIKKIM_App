@@ -57,7 +57,7 @@ const initialAdditionalCryptos = [
   {
     name: "Ethereum",
     shortName: "ETH",
-    balance: "0.0",
+    balance: "1.0",
     icon: require("../assets/EthereumIcon.png"),
     cardImage: require("../assets/Card54.png"),
     address: "0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe",
@@ -65,7 +65,7 @@ const initialAdditionalCryptos = [
   {
     name: "USDT",
     shortName: "USDT",
-    balance: "0.0",
+    balance: "2.0",
     icon: require("../assets/USDTIcon.png"),
     cardImage: require("../assets/Card43.png"),
     address: "1KAt6STtisWMMVo5XGdos9P7DBNNsFfjx7",
