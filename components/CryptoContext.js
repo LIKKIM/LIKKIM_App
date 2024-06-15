@@ -52,7 +52,7 @@ const initialAdditionalCryptos = [
     balance: "0.0",
     icon: require("../assets/BitcoinIcon.png"),
     cardImage: require("../assets/Card3.png"),
-    address: "1BoatSLRHtKNngkdXEeobR76b53LETtpyT",
+    address: "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
   },
   {
     name: "Ethereum",
@@ -76,7 +76,7 @@ const initialAdditionalCryptos = [
     balance: "0.0",
     icon: require("../assets/LitecoinIcon.png"),
     cardImage: require("../assets/Card1.png"),
-    address: "",
+    address: "LcHKdCbbtGxDsN7BHyebDTrVKT4w3KpU5Z",
   },
   {
     name: "Bitcoin Cash",
@@ -84,7 +84,7 @@ const initialAdditionalCryptos = [
     balance: "0.0",
     icon: require("../assets/BitcoinCashIcon.png"),
     cardImage: require("../assets/Card2.png"),
-    address: "",
+    address: "qpm2qsznhks23z7629mms6s4cwef74vcwvy22gdx6a",
   },
   {
     name: "Dash",
@@ -92,7 +92,7 @@ const initialAdditionalCryptos = [
     balance: "0.0",
     icon: require("../assets/DashIcon.png"),
     cardImage: require("../assets/Card3.png"),
-    address: "",
+    address: "Xr3ar5bWQ5Me6EF1scu6P5tA7L5mje9XDL",
   },
   {
     name: "Cardano",
@@ -100,7 +100,7 @@ const initialAdditionalCryptos = [
     balance: "0.0",
     icon: require("../assets/CardanoIcon.png"),
     cardImage: require("../assets/Card5.png"),
-    address: "",
+    address: "DdzFFzCqrhsusgjmXKG9VeSvfhRUHqNNNLiFYB8HHR7",
   },
   {
     name: "Polkadot",
@@ -108,7 +108,7 @@ const initialAdditionalCryptos = [
     balance: "0.0",
     icon: require("../assets/PolkadotIcon.png"),
     cardImage: require("../assets/Card6.png"),
-    address: "",
+    address: "14VSS98ov7KjJtyepigS65atjPjj73Fw4c8TyRjCnbhG",
   },
   {
     name: "Chainlink",
@@ -116,7 +116,7 @@ const initialAdditionalCryptos = [
     balance: "0.0",
     icon: require("../assets/ChainlinkIcon.png"),
     cardImage: require("../assets/Card7.png"),
-    address: "",
+    address: "0x514910771af9ca656af840dff83e8264ecf986ca",
   },
   {
     name: "Stellar",
@@ -124,7 +124,7 @@ const initialAdditionalCryptos = [
     balance: "0.0",
     icon: require("../assets/StellarIcon.png"),
     cardImage: require("../assets/Card8.png"),
-    address: "",
+    address: "GAHPDQD4MGHVZFJYZN46EZB2XB4LGIOHBTVHQRJ7MF2PL4EY7I7U77CC",
   },
   {
     name: "Dogecoin",
@@ -132,7 +132,7 @@ const initialAdditionalCryptos = [
     balance: "0.0",
     icon: require("../assets/DogecoinIcon.png"),
     cardImage: require("../assets/Card9.png"),
-    address: "",
+    address: "D7Y55N4sFCw4KceCczPS3KhNWZ6o7pTPkd",
   },
 ];
 
