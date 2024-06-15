@@ -180,7 +180,7 @@ function TransactionsScreen() {
                 style={{
                   color: "#ffffff", // 白色文字
                   textAlign: "center", // 文本居中对齐
-                  marginBottom: 20, // 与下一个元素间距
+                  marginBottom: 30, // 与下一个元素间距
                 }}
               >
                 {operationType === "send"
@@ -192,7 +192,7 @@ function TransactionsScreen() {
                   style={{
                     justifyContent: "center",
                     alignItems: "center",
-                    height: 320,
+                    height: 280,
                   }}
                 >
                   <Text style={{ color: "#ffffff", textAlign: "center" }}>
