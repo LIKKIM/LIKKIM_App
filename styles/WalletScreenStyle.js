@@ -12,6 +12,37 @@ const WalletScreenStyle = StyleSheet.create({
     alignItems: "center",
     marginTop: 20,
   },
+  cardIcon: {
+    position: "absolute",
+    top: 10,
+    left: 10,
+    width: 30,
+    height: 30,
+  },
+  cardName: {
+    position: "absolute",
+    top: 10,
+    left: 50,
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  cardShortName: {
+    position: "absolute",
+    top: 10,
+    left: 180,
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  cardBalance: {
+    position: "absolute",
+    top: 10,
+    right: 10,
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
 });
 
 export default WalletScreenStyle;
