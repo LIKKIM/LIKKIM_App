@@ -17,8 +17,14 @@ import { CryptoContext, DarkModeContext } from "./CryptoContext";
 import { useTranslation } from "react-i18next";
 
 function WalletScreen({ route }) {
-  const { additionalCryptos, cryptoCount, setCryptoCount, currencyUnit } =
-    useContext(CryptoContext);
+  const {
+    additionalCryptos,
+    cryptoCount,
+    setCryptoCount,
+    currencyUnit,
+    addedCryptos,
+    setAddedCryptos,
+  } = useContext(CryptoContext);
   const { isDarkMode } = useContext(DarkModeContext);
   const WalletScreenStyle = WalletScreenStyles(isDarkMode);
   const theme = isDarkMode ? darkTheme : lightTheme;
@@ -81,6 +87,7 @@ function WalletScreen({ route }) {
       const newCryptoCards = [...cryptoCards, crypto];
       setCryptoCards(newCryptoCards);
       setCryptoCount(newCryptoCards.length);
+      setAddedCryptos(newCryptoCards); // 更新已添加的加密货币
     }
     setAddCryptoVisible(false);
   };

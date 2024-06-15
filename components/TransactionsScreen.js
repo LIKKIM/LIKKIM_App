@@ -18,7 +18,7 @@ import { CryptoContext, DarkModeContext } from "./CryptoContext";
 function TransactionsScreen() {
   const { t } = useTranslation();
   const { isDarkMode } = useContext(DarkModeContext);
-  const { additionalCryptos } = useContext(CryptoContext);
+  const { addedCryptos } = useContext(CryptoContext);
   const [modalVisible, setModalVisible] = useState(false);
   const [addressModalVisible, setAddressModalVisible] = useState(false);
   const [operationType, setOperationType] = useState("");
@@ -187,7 +187,7 @@ function TransactionsScreen() {
                   ? t("Choose the cryptocurrency to send:")
                   : t("Choose the cryptocurrency to receive:")}
               </Text>
-              {additionalCryptos.length === 0 ? (
+              {addedCryptos.length === 0 ? ( // 使用 addedCryptos 而不是 additionalCryptos
                 <Text style={{ color: "#ffffff", textAlign: "center" }}>
                   {t("No cryptocurrencies available. Please add some first.")}
                 </Text>
@@ -196,7 +196,7 @@ function TransactionsScreen() {
                   contentContainerStyle={{ alignItems: "center" }}
                   style={{ maxHeight: 400, width: 280 }} // 限制弹窗的最大高度
                 >
-                  {additionalCryptos.map((crypto) => (
+                  {addedCryptos.map((crypto) => (
                     <TouchableOpacity
                       key={crypto.shortName}
                       style={styles.optionButton}
