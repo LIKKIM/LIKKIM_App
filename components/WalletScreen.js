@@ -13,16 +13,15 @@ import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import styles, { lightTheme, darkTheme } from "../styles";
 import WalletScreenStyle from "../styles/WalletScreenStyle";
-import { DarkModeContext } from "./CryptoContext";
 import { BlurView } from "expo-blur";
-import { CryptoContext } from "./CryptoContext";
+import { DarkModeContext, CryptoContext } from "./CryptoContext";
 import { useTranslation } from "react-i18next";
 
 function WalletScreen({ route }) {
   const { isDarkMode } = useContext(DarkModeContext);
   const theme = isDarkMode ? darkTheme : lightTheme;
   const { t } = useTranslation();
-
+  const { currencyUnit } = useContext(CryptoContext);
   const [modalVisible, setModalVisible] = useState(false);
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState("");
@@ -253,7 +252,9 @@ function WalletScreen({ route }) {
               <Text style={WalletScreenStyle.cardShortName}>
                 {card.shortName}
               </Text>
-              <Text style={WalletScreenStyle.cardBalance}>{card.balance}</Text>
+              <Text
+                style={WalletScreenStyle.cardBalance}
+              >{`${currencyUnit} ${card.balance}`}</Text>
             </ImageBackground>
           </TouchableOpacity>
         ))}

@@ -33,7 +33,7 @@ if (Platform.OS === "android") {
 function MyColdWalletScreen() {
   const { t } = useTranslation();
   const navigation = useNavigation();
-  const { currencyUnit, setCurrencyUnit } = useContext(CryptoContext); // 使用 CryptoContext
+  const { currencyUnit, setCurrencyUnit } = useContext(CryptoContext);
 
   const [currencyModalVisible, setCurrencyModalVisible] = useState(false);
   const [passwordModalVisible, setPasswordModalVisible] = useState(false);
@@ -51,6 +51,7 @@ function MyColdWalletScreen() {
     "SEK",
     "NZD",
   ];
+
   const [modalVisible, setModalVisible] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [languageModalVisible, setLanguageModalVisible] = useState(false);
@@ -96,6 +97,12 @@ function MyColdWalletScreen() {
     scanDevices();
   };
 
+  const handleCurrencyChange = (currency) => {
+    console.log("Selected currency:", currency);
+    setSelectedCurrency(currency);
+    setCurrencyUnit(currency); // 更新 CryptoContext 中的货币单位
+    setCurrencyModalVisible(false);
+  };
   useEffect(() => {
     navigation.setOptions({
       headerTitle: t("My Cold Wallet"),
@@ -309,11 +316,7 @@ function MyColdWalletScreen() {
                   {currencies.map((currency) => (
                     <TouchableOpacity
                       key={currency}
-                      onPress={() => {
-                        console.log("Selected currency:", currency);
-                        setSelectedCurrency(currency);
-                        setCurrencyModalVisible(false);
-                      }}
+                      onPress={() => handleCurrencyChange(currency)}
                     >
                       <Text style={styles.languageModalText}>{currency}</Text>
                     </TouchableOpacity>
