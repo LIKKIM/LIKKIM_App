@@ -219,7 +219,7 @@ function WalletScreen({ route }) {
                 textAlign: "left", // Ensure left alignment
               }}
             >
-              {t("Total balance")}
+              {t("Total Balance")}
             </Text>
             <Text
               style={{
@@ -229,11 +229,14 @@ function WalletScreen({ route }) {
                 textAlign: "left", // Ensure left alignment
               }}
             >
-              {`${calculateTotalBalance()} `}
+              {`${calculateTotalBalance()}`}
               <Text
                 style={{
+                  marginLeft: 20, // Adds space between the value and the unit
                   fontSize: 18, // Smaller font size for the unit
                   textAlign: "left", // Ensure left alignment
+                  color: "#ccc",
+                  fontWeight: "normal",
                 }}
               >
                 {currencyUnit}
