@@ -1,16 +1,24 @@
 // TransactionsScreen.js
 import React, { useContext, useState } from "react";
-import { View, Text, Modal, TouchableOpacity, TextInput } from "react-native";
+import {
+  View,
+  Text,
+  Modal,
+  TouchableOpacity,
+  TextInput,
+  ScrollView,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import styles, { lightTheme, darkTheme } from "../styles";
 import { BlurView } from "expo-blur";
-import QRCode from "react-native-qrcode-svg"; // 导入 QRCode 组件
+import QRCode from "react-native-qrcode-svg";
 import { useTranslation } from "react-i18next";
-import { DarkModeContext } from "./CryptoContext";
+import { CryptoContext, DarkModeContext } from "./CryptoContext";
 
 function TransactionsScreen() {
   const { t } = useTranslation();
   const { isDarkMode } = useContext(DarkModeContext);
+  const { additionalCryptos } = useContext(CryptoContext);
   const [modalVisible, setModalVisible] = useState(false);
   const [addressModalVisible, setAddressModalVisible] = useState(false);
   const [operationType, setOperationType] = useState("");
@@ -24,24 +32,19 @@ function TransactionsScreen() {
   const [inputAddressModalVisible, setInputAddressModalVisible] =
     useState(false);
 
-  const cryptoAddresses = {
-    BTC: "1BoatSLRHtKNngkdXEeobR76b53LETtpyT",
-    ETH: "0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe",
-    USDT: "1KAt6STtisWMMVo5XGdos9P7DBNNsFfjx7",
-  };
-
   const handleReceivePress = () => {
     setOperationType("receive");
     setModalVisible(true);
   };
+
   const handleSendPress = () => {
     setOperationType("send");
     setModalVisible(true);
   };
 
   const selectCrypto = (crypto) => {
-    setSelectedCrypto(crypto);
-    setSelectedAddress(cryptoAddresses[crypto]);
+    setSelectedCrypto(crypto.shortName);
+    setSelectedAddress(crypto.address);
     setModalVisible(false);
     if (operationType === "receive") {
       setAddressModalVisible(true);
@@ -177,22 +180,35 @@ function TransactionsScreen() {
                 style={{
                   color: "#ffffff", // 白色文字
                   textAlign: "center", // 文本居中对齐
-                  marginBottom: 60, // 与下一个元素间距
+                  marginBottom: 20, // 与下一个元素间距
                 }}
               >
                 {operationType === "send"
                   ? t("Choose the cryptocurrency to send:")
                   : t("Choose the cryptocurrency to receive:")}
               </Text>
-              {["BTC", "ETH", "USDT"].map((crypto) => (
-                <TouchableOpacity
-                  key={crypto}
-                  style={styles.optionButton}
-                  onPress={() => selectCrypto(crypto)}
+              {additionalCryptos.length === 0 ? (
+                <Text style={{ color: "#ffffff", textAlign: "center" }}>
+                  {t("No cryptocurrencies available. Please add some first.")}
+                </Text>
+              ) : (
+                <ScrollView
+                  contentContainerStyle={{ alignItems: "center" }}
+                  style={{ maxHeight: 400, width: 280 }} // 限制弹窗的最大高度
                 >
-                  <Text style={styles.optionButtonText}>{crypto}</Text>
-                </TouchableOpacity>
-              ))}
+                  {additionalCryptos.map((crypto) => (
+                    <TouchableOpacity
+                      key={crypto.shortName}
+                      style={styles.optionButton}
+                      onPress={() => selectCrypto(crypto)}
+                    >
+                      <Text style={styles.optionButtonText}>
+                        {crypto.shortName}
+                      </Text>
+                    </TouchableOpacity>
+                  ))}
+                </ScrollView>
+              )}
               <TouchableOpacity
                 style={{
                   backgroundColor: "#6C6CF4",
@@ -202,6 +218,7 @@ function TransactionsScreen() {
                   borderRadius: 30,
                   height: 60,
                   alignItems: "center",
+                  marginTop: 20, // 与上一个元素间距
                 }}
                 onPress={() => setModalVisible(false)}
               >
