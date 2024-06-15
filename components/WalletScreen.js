@@ -441,6 +441,27 @@ function WalletScreen({ route }) {
                 </TouchableOpacity>
               </View>
             )}
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                marginBottom: 10,
+              }}
+            >
+              <Image
+                source={selectedCrypto?.icon}
+                style={{ width: 24, height: 24, marginRight: 8 }}
+              />
+              <Text
+                style={{
+                  color: "#ffffff",
+                  textAlign: "center",
+                  fontSize: 18,
+                }}
+              >
+                {selectedCrypto?.name}
+              </Text>
+            </View>
             <Text
               style={{
                 color: "#ffffff",
