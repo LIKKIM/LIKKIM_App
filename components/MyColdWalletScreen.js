@@ -23,7 +23,7 @@ import Constants from "expo-constants";
 import { useNavigation } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 import i18n from "../config/i18n";
-import { DarkModeContext, CryptoContext } from "./CryptoContext"; // 确保导入 CryptoContext
+import { CryptoContext, DarkModeContext } from "./CryptoContext";
 
 let PermissionsAndroid;
 if (Platform.OS === "android") {
@@ -33,24 +33,12 @@ if (Platform.OS === "android") {
 function MyColdWalletScreen() {
   const { t } = useTranslation();
   const navigation = useNavigation();
-  const { currencyUnit, setCurrencyUnit } = useContext(CryptoContext);
+  const { currencies, currencyUnit, setCurrencyUnit } =
+    useContext(CryptoContext);
   const [currencyModalVisible, setCurrencyModalVisible] = useState(false);
   const [passwordModalVisible, setPasswordModalVisible] = useState(false);
   const [selectedCurrency, setSelectedCurrency] = useState(currencyUnit); // 使用 currencyUnit 初始化
   const [selectedLanguage, setSelectedLanguage] = useState(i18n.language);
-  const currencies = [
-    "USD",
-    "EUR",
-    "JPY",
-    "GBP",
-    "AUD",
-    "CAD",
-    "CHF",
-    "CNY",
-    "SEK",
-    "NZD",
-  ];
-
   const [modalVisible, setModalVisible] = useState(false);
   const { isDarkMode, setIsDarkMode } = useContext(DarkModeContext);
   const [languageModalVisible, setLanguageModalVisible] = useState(false);
@@ -98,10 +86,11 @@ function MyColdWalletScreen() {
 
   const handleCurrencyChange = (currency) => {
     console.log("Selected currency:", currency);
-    setSelectedCurrency(currency);
-    setCurrencyUnit(currency); // 更新 CryptoContext 中的货币单位
+    setSelectedCurrency(currency.shortName);
+    setCurrencyUnit(currency.shortName); // 确保使用 currency.shortName
     setCurrencyModalVisible(false);
   };
+
   useEffect(() => {
     navigation.setOptions({
       headerTitle: t("My Cold Wallet"),
@@ -172,7 +161,7 @@ function MyColdWalletScreen() {
       icon: "attach-money",
       onPress: () => setCurrencyModalVisible(true),
       extraIcon: "arrow-drop-down",
-      selectedOption: selectedCurrency,
+      selectedOption: selectedCurrency, // 更新选中货币
     },
     {
       title: t("Help & Support"),
@@ -314,10 +303,13 @@ function MyColdWalletScreen() {
                 <ScrollView style={styles.languageList}>
                   {currencies.map((currency) => (
                     <TouchableOpacity
-                      key={currency}
+                      key={currency.shortName}
+                      style={styles.currencyOption}
                       onPress={() => handleCurrencyChange(currency)}
                     >
-                      <Text style={styles.languageModalText}>{currency}</Text>
+                      <Text style={styles.languageModalText}>
+                        {currency.name} - {currency.shortName}
+                      </Text>
                     </TouchableOpacity>
                   ))}
                 </ScrollView>
