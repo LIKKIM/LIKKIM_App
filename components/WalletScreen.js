@@ -24,6 +24,8 @@ function WalletScreen({ route }) {
     cryptoCount,
     setCryptoCount,
     currencyUnit,
+    setSelectedCrypto,
+    setSelectedCryptoAddress,
   } = useContext(CryptoContext);
   const { isDarkMode } = useContext(DarkModeContext);
   const WalletScreenStyle = WalletScreenStyles(isDarkMode);
@@ -71,11 +73,10 @@ function WalletScreen({ route }) {
     if (selectedCardName === cryptoName) {
       setModalVisible(true);
     } else {
-      setSelectedAddress(
-        cryptoCards.find((card) => card.name === cryptoName)?.address ||
-          "Unknown"
-      );
+      const selectedCard = cryptoCards.find((card) => card.name === cryptoName);
       setSelectedCardName(cryptoName);
+      setSelectedCrypto(cryptoName);
+      setSelectedCryptoAddress(selectedCard ? selectedCard.address : "Unknown");
 
       const cardHeight = 180;
       const topOffset = 160;
@@ -111,7 +112,6 @@ function WalletScreen({ route }) {
       .reduce((total, card) => total + parseFloat(card.balance), 0)
       .toFixed(2);
   };
-
   return (
     <LinearGradient
       colors={isDarkMode ? darkColors : lightColors}
@@ -241,7 +241,6 @@ function WalletScreen({ route }) {
           </TouchableOpacity>
         ))}
       </ScrollView>
-
       <Modal
         animationType="slide"
         transparent={true}
