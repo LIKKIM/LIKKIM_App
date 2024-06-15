@@ -375,7 +375,7 @@ function WalletScreen({ route }) {
           </View>
         </BlurView>
       </Modal>
-
+      {/* 查看余额 */}
       <Modal
         animationType="slide"
         transparent={true}
@@ -435,6 +435,16 @@ function WalletScreen({ route }) {
                 </TouchableOpacity>
               </View>
             )}
+            <Text
+              style={{
+                color: "#ffffff",
+                textAlign: "center",
+                fontSize: 18,
+                marginBottom: 10,
+              }}
+            >
+              {t("Balance")}
+            </Text>
             <Text
               style={{
                 color: "#ffffff",
