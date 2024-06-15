@@ -7,6 +7,7 @@ import {
   Modal,
   TouchableOpacity,
   ScrollView,
+  Image,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -59,17 +60,83 @@ function WalletScreen({ route }) {
   }, [cryptoCards.length]);
 
   const additionalCryptos = [
-    { name: "Bitcoin", cardImage: require("../assets/Card3.png") },
-    { name: "Ethereum", cardImage: require("../assets/Card54.png") },
-    { name: "USDT", cardImage: require("../assets/Card43.png") },
-    { name: "Litecoin", cardImage: require("../assets/Card1.png") },
-    { name: "Ripple", cardImage: require("../assets/Card2.png") },
-    { name: "Dash", cardImage: require("../assets/Card3.png") },
-    { name: "Cardano", cardImage: require("../assets/Card5.png") },
-    { name: "Polkadot", cardImage: require("../assets/Card6.png") },
-    { name: "Chainlink", cardImage: require("../assets/Card7.png") },
-    { name: "Stellar", cardImage: require("../assets/Card8.png") },
-    { name: "Dogecoin", cardImage: require("../assets/Card9.png") },
+    {
+      name: "Bitcoin",
+      shortName: "BTC",
+      balance: "0.0",
+      icon: require("../assets/BitcoinIcon.png"),
+      cardImage: require("../assets/Card3.png"),
+    },
+    {
+      name: "Ethereum",
+      shortName: "ETH",
+      balance: "0.0",
+      icon: require("../assets/EthereumIcon.png"),
+      cardImage: require("../assets/Card54.png"),
+    },
+    {
+      name: "USDT",
+      shortName: "USDT",
+      balance: "0.0",
+      icon: require("../assets/USDTIcon.png"),
+      cardImage: require("../assets/Card43.png"),
+    },
+    {
+      name: "Litecoin",
+      shortName: "LTC",
+      balance: "0.0",
+      icon: require("../assets/LitecoinIcon.png"),
+      cardImage: require("../assets/Card1.png"),
+    },
+    {
+      name: "Bitcoin Cash",
+      shortName: "BCH",
+      balance: "0.0",
+      icon: require("../assets/BitcoinCashIcon.png"),
+      cardImage: require("../assets/Card2.png"),
+    },
+    {
+      name: "Dash",
+      shortName: "DASH",
+      balance: "0.0",
+      icon: require("../assets/DashIcon.png"),
+      cardImage: require("../assets/Card3.png"),
+    },
+    {
+      name: "Cardano",
+      shortName: "ADA",
+      balance: "0.0",
+      icon: require("../assets/CardanoIcon.png"),
+      cardImage: require("../assets/Card5.png"),
+    },
+    {
+      name: "Polkadot",
+      shortName: "DOT",
+      balance: "0.0",
+      icon: require("../assets/PolkadotIcon.png"),
+      cardImage: require("../assets/Card6.png"),
+    },
+    {
+      name: "Chainlink",
+      shortName: "LINK",
+      balance: "0.0",
+      icon: require("../assets/ChainlinkIcon.png"),
+      cardImage: require("../assets/Card7.png"),
+    },
+    {
+      name: "Stellar",
+      shortName: "XLM",
+      balance: "0.0",
+      icon: require("../assets/StellarIcon.png"),
+      cardImage: require("../assets/Card8.png"),
+    },
+    {
+      name: "Dogecoin",
+      shortName: "DOGE",
+      balance: "0.0",
+      icon: require("../assets/DogecoinIcon.png"),
+      cardImage: require("../assets/Card9.png"),
+    },
   ];
 
   const handleCardPress = (cryptoName, index) => {
@@ -88,6 +155,7 @@ function WalletScreen({ route }) {
       scrollViewRef.current.scrollTo({ y: yOffset, animated: true });
     }
   };
+
   const handleAddCrypto = (crypto) => {
     if (!cryptoCards.find((card) => card.name === crypto.name)) {
       const newCryptoCards = [...cryptoCards, { ...crypto, address: "0" }];
@@ -210,8 +278,8 @@ function WalletScreen({ route }) {
             }}
           >
             {/*       <Text style={{ color: "#FFF", fontSize: 18, marginBottom: 20 }}>
-              Choose an option
-            </Text> */}
+          Choose an option
+        </Text> */}
             <TouchableOpacity
               style={{
                 backgroundColor: "#6C6CF4",
