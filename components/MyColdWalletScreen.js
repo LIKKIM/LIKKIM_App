@@ -1,5 +1,5 @@
 // MyColdWalletScreen.js
-import React, { useState, useContext, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import {
   View,
   Text,
@@ -23,7 +23,7 @@ import Constants from "expo-constants";
 import { useNavigation } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 import i18n from "../config/i18n";
-import { DarkModeContext } from "./CryptoContext";
+import { DarkModeContext, CryptoContext } from "./CryptoContext"; // 确保导入 CryptoContext
 
 let PermissionsAndroid;
 if (Platform.OS === "android") {
@@ -33,11 +33,11 @@ if (Platform.OS === "android") {
 function MyColdWalletScreen() {
   const { t } = useTranslation();
   const navigation = useNavigation();
-  const { isDarkMode, setIsDarkMode } = useContext(DarkModeContext);
-  const theme = isDarkMode ? darkTheme : lightTheme;
+  const { currencyUnit, setCurrencyUnit } = useContext(CryptoContext); // 使用 CryptoContext
+
   const [currencyModalVisible, setCurrencyModalVisible] = useState(false);
   const [passwordModalVisible, setPasswordModalVisible] = useState(false);
-  const [selectedCurrency, setSelectedCurrency] = useState("USD");
+  const [selectedCurrency, setSelectedCurrency] = useState(currencyUnit); // 使用 currencyUnit 初始化
   const [selectedLanguage, setSelectedLanguage] = useState(i18n.language);
   const currencies = [
     "USD",
@@ -52,9 +52,9 @@ function MyColdWalletScreen() {
     "NZD",
   ];
   const [modalVisible, setModalVisible] = useState(false);
-
+  const [isDarkMode, setIsDarkMode] = useState(true);
   const [languageModalVisible, setLanguageModalVisible] = useState(false);
-
+  const theme = isDarkMode ? darkTheme : lightTheme;
   const [devices, setDevices] = useState([]);
   const isScanningRef = useRef(false);
   const [isScanning, setIsScanning] = useState(false);
@@ -64,8 +64,8 @@ function MyColdWalletScreen() {
   const lightColors = ["#FFFFFF", "#E0E0E0"];
   const languages = [
     { code: "en", name: "English" },
-    { code: "zh", name: "简体中文" }, // Simplified Chinese
-    { code: "zh-TW", name: "繁體中文" }, // Traditional Chinese
+    { code: "zh", name: "简体中文" },
+    { code: "zh-TW", name: "繁體中文" },
     { code: "fr", name: "Français" },
     { code: "es", name: "Español" },
     { code: "ar", name: "العربية" },
@@ -76,14 +76,14 @@ function MyColdWalletScreen() {
     { code: "pt-BR", name: "Português (Brasil)" },
     { code: "it", name: "Italiano" },
     { code: "de", name: "Deutsch" },
-    { code: "hi", name: "हिन्दी" }, // Hindi
-    { code: "mn", name: "Монгол хэл" }, // Mongolian
-    { code: "th", name: "ไทย" }, // Thai
-    { code: "uk", name: "Українська" }, // Ukrainian
-    { code: "vi", name: "Tiếng Việt" }, // Vietnamese
-    { code: "id", name: "Bahasa Indonesia" }, // Indonesian
-    { code: "tl", name: "Filipino" }, // Filipino
-    { code: "bn", name: "বাংলা" }, // Bengali
+    { code: "hi", name: "हिन्दी" },
+    { code: "mn", name: "Монгол хэл" },
+    { code: "th", name: "ไทย" },
+    { code: "uk", name: "Українська" },
+    { code: "vi", name: "Tiếng Việt" },
+    { code: "id", name: "Bahasa Indonesia" },
+    { code: "tl", name: "Filipino" },
+    { code: "bn", name: "বাংলা" },
   ];
 
   let bleManager;
