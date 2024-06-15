@@ -12,13 +12,14 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import styles, { lightTheme, darkTheme } from "../styles";
-import WalletScreenStyle from "../styles/WalletScreenStyle";
+import WalletScreenStyles from "../styles/WalletScreenStyle";
 import { BlurView } from "expo-blur";
 import { CryptoContext, DarkModeContext } from "./CryptoContext";
 import { useTranslation } from "react-i18next";
 
 function WalletScreen({ route }) {
   const { isDarkMode } = useContext(DarkModeContext);
+  const WalletScreenStyle = WalletScreenStyles(isDarkMode);
   const theme = isDarkMode ? darkTheme : lightTheme;
   const { t } = useTranslation();
   const { currencyUnit } = useContext(CryptoContext);
@@ -186,7 +187,6 @@ function WalletScreen({ route }) {
       colors={isDarkMode ? darkColors : lightColors}
       style={{
         flex: 1,
-
         backgroundColor: "#121212",
         alignItems: "center",
         justifyContent: "center",
@@ -215,8 +215,8 @@ function WalletScreen({ route }) {
               style={{
                 fontSize: 18,
                 marginVertical: 10,
-                color: "#fff",
-                textAlign: "left", // Ensure left alignment
+                color: isDarkMode ? "#fff" : "#000",
+                textAlign: "left",
               }}
             >
               {t("Total Balance")}
@@ -225,16 +225,16 @@ function WalletScreen({ route }) {
               style={{
                 fontSize: 36,
                 fontWeight: "bold",
-                color: "#fff",
-                textAlign: "left", // Ensure left alignment
+                color: isDarkMode ? "#fff" : "#000",
+                textAlign: "left",
               }}
             >
               {`${calculateTotalBalance()}`}
               <Text
                 style={{
-                  marginLeft: 20, // Adds space between the value and the unit
-                  fontSize: 18, // Smaller font size for the unit
-                  textAlign: "left", // Ensure left alignment
+                  marginLeft: 20,
+                  fontSize: 18,
+                  textAlign: "left",
                   color: "#ccc",
                   fontWeight: "normal",
                 }}
@@ -256,11 +256,11 @@ function WalletScreen({ route }) {
               justifyContent: "center",
               alignItems: "center",
               backgroundColor: "#484692",
-              shadowOffset: { width: 0, height: 0 }, // 第一张卡片的阴影偏移
-              shadowColor: "#101021", // 阴影颜色为黑色
-              shadowOpacity: 0.3, // 增加阴影透明度
-              shadowRadius: 30, // 增大阴影扩散范围使阴影更加宽
-              elevation: 20, // 增加用于Android的材质阴影高度
+              shadowOffset: { width: 0, height: 0 },
+              shadowColor: "#101021",
+              shadowOpacity: 0.3,
+              shadowRadius: 30,
+              elevation: 20,
             }}
             imageStyle={{ borderRadius: 20 }}
           >
