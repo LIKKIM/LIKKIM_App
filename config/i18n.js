@@ -56,7 +56,7 @@ i18n
           Transactions: "Transactions",
           "My Cold Wallet": "My Cold Wallet",
           "Total Balance": "Total Balance",
-          en: "Balance",
+          Balance: "Balance",
         },
       },
       zh: {
@@ -105,7 +105,7 @@ i18n
           Transactions: "交易",
           "My Cold Wallet": "我的冷钱包",
           "Total Balance": "总余额",
-          zh: "余额",
+          Balance: "余额",
         },
       },
       "zh-TW": {
@@ -152,7 +152,7 @@ i18n
           Transactions: "交易",
           "My Cold Wallet": "我的冷錢包",
           "Total Balance": "總餘額",
-          "zh-TW": "餘額",
+          Balance: "餘額",
         },
       },
       fr: {
@@ -205,7 +205,7 @@ i18n
           Transactions: "Transactions",
           "My Cold Wallet": "Mon portefeuille froid",
           "Total Balance": "Solde Total",
-          fr: "Solde",
+          Balance: "Solde",
         },
       },
       es: {
@@ -258,7 +258,7 @@ i18n
           Transactions: "Transacciones",
           "My Cold Wallet": "Mi billetera fría",
           "Total Balance": "Saldo Total",
-          es: "Saldo",
+          Balance: "Saldo",
         },
       },
       ar: {
@@ -310,7 +310,7 @@ i18n
           Transactions: "المعاملات",
           "My Cold Wallet": "محفظتي الباردة",
           "Total Balance": "الرصيد الإجمالي",
-          ar: "الرصيد",
+          Balance: "الرصيد",
         },
       },
       ja: {
@@ -363,7 +363,7 @@ i18n
           Transactions: "トランザクション",
           "My Cold Wallet": "私のコールドウォレット",
           "Total Balance": "総残高",
-          ja: "残高",
+          Balance: "残高",
         },
       },
       ru: {
@@ -416,7 +416,7 @@ i18n
           Transactions: "Транзакции",
           "My Cold Wallet": "Мой холодный кошелек",
           "Total Balance": "Общий баланс",
-          ru: "Баланс",
+          Balance: "Баланс",
         },
       },
       ko: {
@@ -465,7 +465,7 @@ i18n
           Transactions: "거래",
           "My Cold Wallet": "내 콜드 월렛",
           "Total Balance": "총 잔액",
-          ko: "잔액",
+          Balance: "잔액",
         },
       },
       pt: {
@@ -518,7 +518,7 @@ i18n
           Transactions: "Transações",
           "My Cold Wallet": "Minha carteira fria",
           "Total Balance": "Saldo Total",
-          pt: "Saldo",
+          Balance: "Saldo",
         },
       },
       "pt-BR": {
@@ -573,7 +573,7 @@ i18n
           Transactions: "Transações",
           "My Cold Wallet": "Minha carteira fria",
           "Total Balance": "Saldo Total",
-          "pt-BR": "Saldo",
+          Balance: "Saldo",
         },
       },
       it: {
@@ -628,7 +628,7 @@ i18n
           Transactions: "Transazioni",
           "My Cold Wallet": "Il mio portafoglio freddo",
           "Total Balance": "Saldo Totale",
-          it: "Saldo",
+          Balance: "Saldo",
         },
       },
       de: {
@@ -683,7 +683,7 @@ i18n
           Transactions: "Transaktionen",
           "My Cold Wallet": "Meine kalte Brieftasche",
           "Total Balance": "Gesamtsaldo",
-          de: "Guthaben",
+          Balance: "Guthaben",
         },
       },
       hi: {
@@ -736,7 +736,7 @@ i18n
           Transactions: "लेनदेन",
           "My Cold Wallet": "मेरा ठंडा बटुआ",
           "Total Balance": "कुल शेष राशि",
-          hi: "शेष",
+          Balance: "शेष",
         },
       },
       mn: {
@@ -791,7 +791,7 @@ i18n
           Transactions: "Гүйлгээ",
           "My Cold Wallet": "Миний хүйтэн хэтэвч",
           "Total Balance": "Нийт үлдэгдэл",
-          mn: "Үлдэгдэл",
+          Balance: "Үлдэгдэл",
         },
       },
       th: {
@@ -842,7 +842,7 @@ i18n
           Transactions: "ธุรกรรม",
           "My Cold Wallet": "กระเป๋าเงินเย็นของฉัน",
           "Total Balance": "ยอดเงินรวม",
-          th: "ยอดเงินคงเหลือ",
+          Balance: "ยอดเงินคงเหลือ",
         },
       },
       uk: {
@@ -896,7 +896,7 @@ i18n
           Transactions: "Транзакції",
           "My Cold Wallet": "Мій холодний гаманець",
           "Total Balance": "Загальний баланс",
-          uk: "Баланс",
+          Balance: "Баланс",
         },
       },
       vi: {
@@ -948,7 +948,7 @@ i18n
           Transactions: "Giao dịch",
           "My Cold Wallet": "Ví lạnh của tôi",
           "Total Balance": "Tổng Số Dư",
-          vi: "Số dư",
+          Balance: "Số dư",
         },
       },
       id: {
@@ -1001,7 +1001,7 @@ i18n
           Transactions: "Transaksi",
           "My Cold Wallet": "Dompet dingin saya",
           "Total Balance": "Saldo Total",
-          id: "Saldo",
+          Balance: "Saldo",
         },
       },
       tl: {
@@ -1055,7 +1055,7 @@ i18n
           Transactions: "Mga transaksyon",
           "My Cold Wallet": "Aking malamig na pitaka",
           "Total Balance": "Kabuuang Balanse",
-          tl: "Balanse",
+          Balance: "Balanse",
         },
       },
       bn: {
@@ -1108,7 +1108,7 @@ i18n
           Transactions: "লেনদেন",
           "My Cold Wallet": "আমার ঠান্ডা ওয়ালেট",
           "Total Balance": "মোট ব্যালেন্স",
-          bn: "ব্যালেন্স",
+          Balance: "ব্যালেন্স",
         },
       },
     },
