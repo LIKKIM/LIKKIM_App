@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
     color: "#ffffff", // 白色文字
     fontSize: 20, // 增加字体大小为20
     fontWeight: "bold", // 字体加粗
-    marginBottom: 15, // 与下一个元素间距15
+    marginBottom: 30, // 与下一个元素间距15
   },
   languageModalText: {
     color: "#ffffff", // 白色文字
