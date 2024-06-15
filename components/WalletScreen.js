@@ -1,4 +1,3 @@
-// WalletScreen.js
 import React, { useState, useEffect, useRef, useContext } from "react";
 import {
   View,
@@ -27,11 +26,12 @@ function WalletScreen({ route }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState("");
-  const [selectedCrypto, setSelectedCrypto] = useState(null); // 添加此行
+  const [selectedCrypto, setSelectedCrypto] = useState(null);
   const [addCryptoVisible, setAddCryptoVisible] = useState(false);
   const [selectedCardName, setSelectedCardName] = useState(null);
   const [addIconModalVisible, setAddIconModalVisible] = useState(false);
   const [addWalletModalVisible, setAddWalletModalVisible] = useState(false);
+  const [cryptoCards, setCryptoCards] = useState([]); // 初始化为空数组
   const scrollViewRef = useRef();
   const iconColor = isDarkMode ? "#ffffff" : "#24234C";
   const darkColors = ["#24234C", "#101021"];
@@ -45,8 +45,6 @@ function WalletScreen({ route }) {
     setModalVisible(false);
     setCryptoCount(cryptoCards.length - 1);
   };
-
-  const [cryptoCards, setCryptoCards] = useState([]);
 
   useEffect(() => {
     if (route.params?.showAddModal) {
@@ -64,12 +62,12 @@ function WalletScreen({ route }) {
   const handleCardPress = (cryptoName, index) => {
     const crypto = cryptoCards.find((card) => card.name === cryptoName);
     if (selectedCardName === cryptoName) {
-      setSelectedCrypto(crypto); // 添加此行
+      setSelectedCrypto(crypto);
       setModalVisible(true);
     } else {
       setSelectedAddress(crypto?.address || "Unknown");
       setSelectedCardName(cryptoName);
-      setSelectedCrypto(crypto); // 添加此行
+      setSelectedCrypto(crypto);
 
       const cardHeight = 180;
       const topOffset = 160;
@@ -80,10 +78,7 @@ function WalletScreen({ route }) {
 
   const handleAddCrypto = (crypto) => {
     if (!cryptoCards.find((card) => card.name === crypto.name)) {
-      const newCryptoCards = [
-        ...cryptoCards,
-        { ...crypto, balance: "0.0", address: "0" },
-      ];
+      const newCryptoCards = [...cryptoCards, crypto];
       setCryptoCards(newCryptoCards);
       setCryptoCount(newCryptoCards.length);
     }
