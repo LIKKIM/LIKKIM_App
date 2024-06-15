@@ -44,12 +44,14 @@ function WalletScreen({ route }) {
   const lightColors = ["#FFFFFF", "#E0E0E0"];
 
   const handleDeleteCard = () => {
-    setCryptoCards(
-      cryptoCards.filter((card) => card.name !== selectedCardName)
+    const updatedCards = cryptoCards.filter(
+      (card) => card.name !== selectedCardName
     );
+    setCryptoCards(updatedCards);
+    setCryptoCount(updatedCards.length);
+    setAddedCryptos(updatedCards); // 同步更新 addedCryptos
     setDropdownVisible(false);
     setModalVisible(false);
-    setCryptoCount(cryptoCards.length - 1);
   };
 
   useEffect(() => {

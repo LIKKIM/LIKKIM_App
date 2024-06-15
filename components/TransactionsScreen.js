@@ -187,10 +187,20 @@ function TransactionsScreen() {
                   ? t("Choose the cryptocurrency to send:")
                   : t("Choose the cryptocurrency to receive:")}
               </Text>
-              {addedCryptos.length === 0 ? ( // 使用 addedCryptos 而不是 additionalCryptos
-                <Text style={{ color: "#ffffff", textAlign: "center" }}>
-                  {t("No cryptocurrencies available. Please add some first.")}
-                </Text>
+              {addedCryptos.length === 0 ? (
+                <View
+                  style={{
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: 320,
+                  }}
+                >
+                  <Text style={{ color: "#ffffff", textAlign: "center" }}>
+                    {t(
+                      "No cryptocurrencies available. Please add wallet first."
+                    )}
+                  </Text>
+                </View>
               ) : (
                 <ScrollView
                   contentContainerStyle={{ alignItems: "center" }}

@@ -57,6 +57,8 @@ i18n
           "My Cold Wallet": "My Cold Wallet",
           "Total Balance": "Total Balance",
           Balance: "Balance",
+          "No cryptocurrencies available. Please add wallet first.":
+            "No cryptocurrencies available. Please add wallet first.",
         },
       },
       zh: {
@@ -106,6 +108,8 @@ i18n
           "My Cold Wallet": "我的冷钱包",
           "Total Balance": "总余额",
           Balance: "余额",
+          "No cryptocurrencies available. Please add wallet first.":
+            "没有可用的加密货币。请先添加钱包。",
         },
       },
       "zh-TW": {
@@ -153,6 +157,8 @@ i18n
           "My Cold Wallet": "我的冷錢包",
           "Total Balance": "總餘額",
           Balance: "餘額",
+          "No cryptocurrencies available. Please add wallet first.":
+            "沒有可用的加密貨幣。請先添加錢包。",
         },
       },
       fr: {
@@ -206,6 +212,8 @@ i18n
           "My Cold Wallet": "Mon portefeuille froid",
           "Total Balance": "Solde Total",
           Balance: "Solde",
+          "No cryptocurrencies available. Please add wallet first.":
+            "Aucune cryptomonnaie disponible. Veuillez d'abord ajouter un portefeuille.",
         },
       },
       es: {
@@ -259,6 +267,8 @@ i18n
           "My Cold Wallet": "Mi billetera fría",
           "Total Balance": "Saldo Total",
           Balance: "Saldo",
+          "No cryptocurrencies available. Please add wallet first.":
+            "No hay criptomonedas disponibles. Por favor, agregue una billetera primero.",
         },
       },
       ar: {
@@ -311,6 +321,8 @@ i18n
           "My Cold Wallet": "محفظتي الباردة",
           "Total Balance": "الرصيد الإجمالي",
           Balance: "الرصيد",
+          "No cryptocurrencies available. Please add wallet first.":
+            "لا توجد عملات مشفرة متاحة. يرجى إضافة المحفظة أولاً.",
         },
       },
       ja: {
@@ -364,6 +376,8 @@ i18n
           "My Cold Wallet": "私のコールドウォレット",
           "Total Balance": "総残高",
           Balance: "残高",
+          "No cryptocurrencies available. Please add wallet first.":
+            "利用可能な暗号通貨はありません。まずウォレットを追加してください。",
         },
       },
       ru: {
@@ -417,6 +431,8 @@ i18n
           "My Cold Wallet": "Мой холодный кошелек",
           "Total Balance": "Общий баланс",
           Balance: "Баланс",
+          "No cryptocurrencies available. Please add wallet first.":
+            "Нет доступных криптовалют. Пожалуйста, сначала добавьте кошелек.",
         },
       },
       ko: {
@@ -466,6 +482,8 @@ i18n
           "My Cold Wallet": "내 콜드 월렛",
           "Total Balance": "총 잔액",
           Balance: "잔액",
+          "No cryptocurrencies available. Please add wallet first.":
+            "사용 가능한 암호화폐가 없습니다. 먼저 지갑을 추가하십시오.",
         },
       },
       pt: {
@@ -519,6 +537,8 @@ i18n
           "My Cold Wallet": "Minha carteira fria",
           "Total Balance": "Saldo Total",
           Balance: "Saldo",
+          "No cryptocurrencies available. Please add wallet first.":
+            "Não há criptomoedas disponíveis. Por favor, adicione uma carteira primeiro.",
         },
       },
       "pt-BR": {
@@ -574,6 +594,8 @@ i18n
           "My Cold Wallet": "Minha carteira fria",
           "Total Balance": "Saldo Total",
           Balance: "Saldo",
+          "No cryptocurrencies available. Please add wallet first.":
+            "Não há criptomoedas disponíveis. Por favor, adicione uma carteira primeiro.",
         },
       },
       it: {
@@ -629,6 +651,8 @@ i18n
           "My Cold Wallet": "Il mio portafoglio freddo",
           "Total Balance": "Saldo Totale",
           Balance: "Saldo",
+          "No cryptocurrencies available. Please add wallet first.":
+            "Nessuna criptovaluta disponibile. Si prega di aggiungere prima un portafoglio.",
         },
       },
       de: {
@@ -684,6 +708,8 @@ i18n
           "My Cold Wallet": "Meine kalte Brieftasche",
           "Total Balance": "Gesamtsaldo",
           Balance: "Guthaben",
+          "No cryptocurrencies available. Please add wallet first.":
+            "Keine Kryptowährungen verfügbar. Bitte fügen Sie zuerst eine Brieftasche hinzu.",
         },
       },
       hi: {
@@ -737,6 +763,8 @@ i18n
           "My Cold Wallet": "मेरा ठंडा बटुआ",
           "Total Balance": "कुल शेष राशि",
           Balance: "शेष",
+          "No cryptocurrencies available. Please add wallet first.":
+            "कोई क्रिप्टोकरेंसी उपलब्ध नहीं है। कृपया पहले वॉलेट जोड़ें।",
         },
       },
       mn: {
@@ -792,6 +820,8 @@ i18n
           "My Cold Wallet": "Миний хүйтэн хэтэвч",
           "Total Balance": "Нийт үлдэгдэл",
           Balance: "Үлдэгдэл",
+          "No cryptocurrencies available. Please add wallet first.":
+            "Криптовалют байхгүй байна. Эхлээд түрийвч нэмнэ үү.",
         },
       },
       th: {
@@ -843,6 +873,8 @@ i18n
           "My Cold Wallet": "กระเป๋าเงินเย็นของฉัน",
           "Total Balance": "ยอดเงินรวม",
           Balance: "ยอดเงินคงเหลือ",
+          "No cryptocurrencies available. Please add wallet first.":
+            "ไม่มีสกุลเงินดิจิทัลที่พร้อมใช้งาน โปรดเพิ่มกระเป๋าเงินก่อน",
         },
       },
       uk: {
@@ -897,6 +929,8 @@ i18n
           "My Cold Wallet": "Мій холодний гаманець",
           "Total Balance": "Загальний баланс",
           Balance: "Баланс",
+          "No cryptocurrencies available. Please add wallet first.":
+            "Немає доступних криптовалют. Будь ласка, спочатку додайте гаманець.",
         },
       },
       vi: {
@@ -949,6 +983,8 @@ i18n
           "My Cold Wallet": "Ví lạnh của tôi",
           "Total Balance": "Tổng Số Dư",
           Balance: "Số dư",
+          "No cryptocurrencies available. Please add wallet first.":
+            "Không có tiền điện tử nào khả dụng. Vui lòng thêm ví trước.",
         },
       },
       id: {
@@ -1002,6 +1038,8 @@ i18n
           "My Cold Wallet": "Dompet dingin saya",
           "Total Balance": "Saldo Total",
           Balance: "Saldo",
+          "No cryptocurrencies available. Please add wallet first.":
+            "Tidak ada cryptocurrency yang tersedia. Harap tambahkan dompet terlebih dahulu.",
         },
       },
       tl: {
@@ -1056,6 +1094,8 @@ i18n
           "My Cold Wallet": "Aking malamig na pitaka",
           "Total Balance": "Kabuuang Balanse",
           Balance: "Balanse",
+          "No cryptocurrencies available. Please add wallet first.":
+            "Walang magagamit na mga cryptocurrency. Mangyaring magdagdag muna ng pitaka.",
         },
       },
       bn: {
@@ -1109,6 +1149,8 @@ i18n
           "My Cold Wallet": "আমার ঠান্ডা ওয়ালেট",
           "Total Balance": "মোট ব্যালেন্স",
           Balance: "ব্যালেন্স",
+          "No cryptocurrencies available. Please add wallet first.":
+            "কোনও ক্রিপ্টোকারেন্সি উপলব্ধ নেই। প্রথমে একটি ওয়ালেট যোগ করুন।",
         },
       },
     },
