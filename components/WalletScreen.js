@@ -18,13 +18,8 @@ import { CryptoContext, DarkModeContext } from "./CryptoContext";
 import { useTranslation } from "react-i18next";
 
 function WalletScreen({ route }) {
-  const {
-    additionalCryptos,
-    setAdditionalCryptos,
-    cryptoCount,
-    setCryptoCount,
-    currencyUnit,
-  } = useContext(CryptoContext);
+  const { additionalCryptos, cryptoCount, setCryptoCount, currencyUnit } =
+    useContext(CryptoContext);
   const { isDarkMode } = useContext(DarkModeContext);
   const WalletScreenStyle = WalletScreenStyles(isDarkMode);
   const theme = isDarkMode ? darkTheme : lightTheme;
@@ -42,14 +37,12 @@ function WalletScreen({ route }) {
   const lightColors = ["#FFFFFF", "#E0E0E0"];
 
   const handleDeleteCard = () => {
-    const newCryptoCards = cryptoCards.filter(
-      (card) => card.name !== selectedCardName
+    setCryptoCards(
+      cryptoCards.filter((card) => card.name !== selectedCardName)
     );
-    setCryptoCards(newCryptoCards);
-    setAdditionalCryptos(newCryptoCards); // 更新上下文中的加密货币列表
     setDropdownVisible(false);
     setModalVisible(false);
-    setCryptoCount(newCryptoCards.length);
+    setCryptoCount(cryptoCards.length - 1);
   };
 
   const [cryptoCards, setCryptoCards] = useState([]);
@@ -83,7 +76,6 @@ function WalletScreen({ route }) {
       scrollViewRef.current.scrollTo({ y: yOffset, animated: true });
     }
   };
-
   const handleAddCrypto = (crypto) => {
     if (!cryptoCards.find((card) => card.name === crypto.name)) {
       const newCryptoCards = [
