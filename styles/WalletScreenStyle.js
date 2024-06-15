@@ -43,6 +43,21 @@ const WalletScreenStyle = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
   },
+  card: {
+    width: 300, // 宽度为300
+    height: 170, // 高度为100
+    borderRadius: 20, // 边角圆润程度为16
+    overflow: "hidden",
+    justifyContent: "center", // 内容居中显示
+    alignItems: "center", // 内容居中显示
+    backgroundColor: "#484692", // 深灰色背景，比container稍浅
+    marginBottom: 20, // 与下一个元素间距20
+    shadowColor: "#000", // 阴影颜色为黑色
+    shadowOffset: { width: 0, height: 2 }, // 阴影偏移
+    shadowOpacity: 0.25, // 阴影透明度
+    shadowRadius: 3.84, // 阴影扩散范围
+    elevation: 5, // 用于Android的材质阴影高度
+  },
 });
 
 export default WalletScreenStyle;

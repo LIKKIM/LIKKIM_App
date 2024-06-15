@@ -290,7 +290,7 @@ function WalletScreen({ route }) {
           >
             <ImageBackground
               source={card.cardImage}
-              style={styles.card}
+              style={WalletScreenStyle.card}
               imageStyle={{ borderRadius: 16 }}
             >
               <View style={styles.overlay} />
