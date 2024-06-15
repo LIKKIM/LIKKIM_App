@@ -1,47 +1,48 @@
 // WalletScreen.js
 import React, { useState, useEffect, useRef, useContext } from "react";
 import {
-  ImageBackground,
   View,
   Text,
-  Modal,
+  Image,
   TouchableOpacity,
   ScrollView,
-  Image,
+  Modal,
+  ImageBackground,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import styles, { lightTheme, darkTheme } from "../styles";
-import { DarkModeContext } from "./CryptoContext";
 import WalletScreenStyle from "../styles/WalletScreenStyle";
+import { DarkModeContext } from "./CryptoContext";
 import { BlurView } from "expo-blur";
-import { CryptoContext } from "./CryptoContext"; // 导入 CryptoContext
-import { useTranslation } from "react-i18next"; // 导入 useTranslation
+import { CryptoContext } from "./CryptoContext";
+import { useTranslation } from "react-i18next";
 
 function WalletScreen({ route }) {
   const { isDarkMode } = useContext(DarkModeContext);
   const theme = isDarkMode ? darkTheme : lightTheme;
-  const { t } = useTranslation(); // 使用 useTranslation 钩子
+  const { t } = useTranslation();
+
   const [modalVisible, setModalVisible] = useState(false);
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState("");
   const [addCryptoVisible, setAddCryptoVisible] = useState(false);
   const [selectedCardName, setSelectedCardName] = useState(null);
-  const [addIconModalVisible, setAddIconModalVisible] = useState(false); // 新增的弹窗状态
-  const [addWalletModalVisible, setAddWalletModalVisible] = useState(false); // 新增钱包弹窗状态
-  const scrollViewRef = useRef(); // 创建ScrollView的引用
-  const { cryptoCount, setCryptoCount } = useContext(CryptoContext); // 使用 CryptoContext
+  const [addIconModalVisible, setAddIconModalVisible] = useState(false);
+  const [addWalletModalVisible, setAddWalletModalVisible] = useState(false);
+  const scrollViewRef = useRef();
+  const { cryptoCount, setCryptoCount } = useContext(CryptoContext);
   const iconColor = isDarkMode ? "#ffffff" : "#24234C";
-  const darkColors = ["#24234C", "#101021"]; // 暗黑模式颜色
-  const lightColors = ["#FFFFFF", "#E0E0E0"]; // 明亮模式颜色
+  const darkColors = ["#24234C", "#101021"];
+  const lightColors = ["#FFFFFF", "#E0E0E0"];
 
   const handleDeleteCard = () => {
     setCryptoCards(
       cryptoCards.filter((card) => card.name !== selectedCardName)
     );
-    setDropdownVisible(false); // Close the dropdown after action
-    setModalVisible(false); // Optionally close the modal as well
-    setCryptoCount(cryptoCards.length - 1); // 更新 cryptoCount
+    setDropdownVisible(false);
+    setModalVisible(false);
+    setCryptoCount(cryptoCards.length - 1);
   };
 
   const [cryptoCards, setCryptoCards] = useState([]);
@@ -56,7 +57,7 @@ function WalletScreen({ route }) {
   }, [route.params]);
 
   useEffect(() => {
-    setCryptoCount(cryptoCards.length); // 初始化时设置 cryptoCount
+    setCryptoCount(cryptoCards.length);
   }, [cryptoCards.length]);
 
   const additionalCryptos = [
@@ -160,21 +161,19 @@ function WalletScreen({ route }) {
     if (!cryptoCards.find((card) => card.name === crypto.name)) {
       const newCryptoCards = [...cryptoCards, { ...crypto, address: "0" }];
       setCryptoCards(newCryptoCards);
-      setCryptoCount(newCryptoCards.length); // 更新 cryptoCount
+      setCryptoCount(newCryptoCards.length);
     }
     setAddCryptoVisible(false);
   };
 
   const handleCreateWallet = () => {
-    // 处理创建钱包逻辑
-    setAddCryptoVisible(true); // 直接打开添加数字货币卡片的弹窗
-    setAddWalletModalVisible(false); // 关闭选择创建或导入的弹窗
+    setAddCryptoVisible(true);
+    setAddWalletModalVisible(false);
   };
 
   const handleImportWallet = () => {
-    // 处理导入钱包逻辑
-    setAddCryptoVisible(true); // 直接打开添加数字货币卡片的弹窗
-    setAddWalletModalVisible(false); // 关闭选择创建或导入的弹窗
+    setAddCryptoVisible(true);
+    setAddWalletModalVisible(false);
   };
 
   return (
@@ -183,9 +182,9 @@ function WalletScreen({ route }) {
       style={{
         flex: 1,
         paddingTop: 20,
-        backgroundColor: "#121212", // 深灰色背景，适用于暗模式
-        alignItems: "center", // 子元素沿着主轴（即垂直轴）居中对齐
-        justifyContent: "center", // 子元素沿着交叉轴（即水平轴）居中对齐
+        backgroundColor: "#121212",
+        alignItems: "center",
+        justifyContent: "center",
       }}
     >
       <ScrollView
@@ -249,7 +248,12 @@ function WalletScreen({ route }) {
               imageStyle={{ borderRadius: 16 }}
             >
               <View style={styles.overlay} />
-              <Text style={styles.cardText}>{card.name}</Text>
+              <Image source={card.icon} style={WalletScreenStyle.cardIcon} />
+              <Text style={WalletScreenStyle.cardName}>{card.name}</Text>
+              <Text style={WalletScreenStyle.cardShortName}>
+                {card.shortName}
+              </Text>
+              <Text style={WalletScreenStyle.cardBalance}>{card.balance}</Text>
             </ImageBackground>
           </TouchableOpacity>
         ))}
@@ -266,20 +270,17 @@ function WalletScreen({ route }) {
             style={{
               margin: 20,
               width: "80%",
-              backgroundColor: "#24234C", // 深灰色背景
-              borderRadius: 20, // 圆角为20
-              padding: 35, // 内边距为35
-              alignItems: "center", // 内容居中对齐
-              shadowColor: "#000", // 阴影为黑色
-              shadowOffset: { width: 0, height: 2 }, // 阴影偏移
-              shadowOpacity: 0.25, // 阴影透明度
-              shadowRadius: 3.84, // 阴影扩散范围
-              elevation: 5, // 用于Android的材质阴影高度
+              backgroundColor: "#24234C",
+              borderRadius: 20,
+              padding: 35,
+              alignItems: "center",
+              shadowColor: "#000",
+              shadowOffset: { width: 0, height: 2 },
+              shadowOpacity: 0.25,
+              shadowRadius: 3.84,
+              elevation: 5,
             }}
           >
-            {/*       <Text style={{ color: "#FFF", fontSize: 18, marginBottom: 20 }}>
-          Choose an option
-        </Text> */}
             <TouchableOpacity
               style={{
                 backgroundColor: "#6C6CF4",
@@ -329,17 +330,17 @@ function WalletScreen({ route }) {
           <View
             style={{
               margin: 20,
-              minHeight: 400, // 高度为500
+              minHeight: 400,
               width: "80%",
-              backgroundColor: "#24234C", // 深灰色背景
-              borderRadius: 20, // 圆角为20
-              padding: 35, // 内边距为35
-              alignItems: "center", // 内容居中对齐
-              shadowColor: "#000", // 阴影为黑色
-              shadowOffset: { width: 0, height: 2 }, // 阴影偏移
-              shadowOpacity: 0.25, // 阴影透明度
-              shadowRadius: 3.84, // 阴影扩散范围
-              elevation: 5, // 用于Android的材质阴影高度
+              backgroundColor: "#24234C",
+              borderRadius: 20,
+              padding: 35,
+              alignItems: "center",
+              shadowColor: "#000",
+              shadowOffset: { width: 0, height: 2 },
+              shadowOpacity: 0.25,
+              shadowRadius: 3.84,
+              elevation: 5,
             }}
           >
             <ScrollView
@@ -411,7 +412,7 @@ function WalletScreen({ route }) {
             style={{
               margin: 20,
               width: "80%",
-              backgroundColor: "#484692", // Consistent dark background
+              backgroundColor: "#484692",
               borderRadius: 20,
               padding: 35,
               alignItems: "center",
@@ -442,11 +443,11 @@ function WalletScreen({ route }) {
                 style={{
                   position: "absolute",
                   right: 10,
-                  top: 40, // Adjusted to show above the content
+                  top: 40,
                   backgroundColor: "#24234C",
                   borderRadius: 5,
                   padding: 10,
-                  zIndex: 1, // Ensure it overlays other content
+                  zIndex: 1,
                 }}
               >
                 <TouchableOpacity
