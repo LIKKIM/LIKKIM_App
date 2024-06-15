@@ -14,8 +14,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import styles, { lightTheme, darkTheme } from "../styles";
 import WalletScreenStyle from "../styles/WalletScreenStyle";
 import { BlurView } from "expo-blur";
-import { CryptoContext } from "./CryptoContext";
-import { DarkModeContext } from "./CryptoContext";
+import { CryptoContext, DarkModeContext } from "./CryptoContext";
 import { useTranslation } from "react-i18next";
 
 function WalletScreen({ route }) {
