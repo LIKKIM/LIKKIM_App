@@ -34,7 +34,6 @@ function MyColdWalletScreen() {
   const { t } = useTranslation();
   const navigation = useNavigation();
   const { currencyUnit, setCurrencyUnit } = useContext(CryptoContext);
-
   const [currencyModalVisible, setCurrencyModalVisible] = useState(false);
   const [passwordModalVisible, setPasswordModalVisible] = useState(false);
   const [selectedCurrency, setSelectedCurrency] = useState(currencyUnit); // 使用 currencyUnit 初始化
@@ -53,7 +52,7 @@ function MyColdWalletScreen() {
   ];
 
   const [modalVisible, setModalVisible] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const { isDarkMode, setIsDarkMode } = useContext(DarkModeContext);
   const [languageModalVisible, setLanguageModalVisible] = useState(false);
   const theme = isDarkMode ? darkTheme : lightTheme;
   const [devices, setDevices] = useState([]);

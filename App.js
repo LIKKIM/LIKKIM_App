@@ -32,7 +32,7 @@ export default function App() {
               ? "#ffffff50"
               : "#666666";
             const headerTitleColor = isDarkMode ? "#ffffff" : "#333333"; // 根据模式设置标题颜色
-            const tabBarBackgroundColor = isDarkMode ? "#23224D" : "#ddd"; // 根据模式设置底部tab栏背景颜色
+            const tabBarBackgroundColor = isDarkMode ? "#23224D" : "#ccc"; // 根据模式设置底部tab栏背景颜色
             const bottomBackgroundColor = isDarkMode ? "#101021" : "#E0E0E0"; // 底部背景颜色根据模式变化
 
             return (
