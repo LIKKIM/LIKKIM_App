@@ -16,7 +16,6 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import styles, { lightTheme, darkTheme } from "../styles";
 import { BlurView } from "expo-blur";
 import { BleManager } from "react-native-ble-plx";
 import Constants from "expo-constants";
@@ -32,19 +31,19 @@ if (Platform.OS === "android") {
 }
 
 function MyColdWalletScreen() {
-  const MyColdWalletScreenStyle = MyColdWalletScreenStyles(isDarkMode);
   const { t } = useTranslation();
   const navigation = useNavigation();
   const { currencies, currencyUnit, setCurrencyUnit } =
     useContext(CryptoContext);
+  const { isDarkMode, setIsDarkMode } = useContext(DarkModeContext);
+  const MyColdWalletScreenStyle = MyColdWalletScreenStyles(isDarkMode);
+
   const [currencyModalVisible, setCurrencyModalVisible] = useState(false);
   const [passwordModalVisible, setPasswordModalVisible] = useState(false);
   const [selectedCurrency, setSelectedCurrency] = useState(currencyUnit); // 使用 currencyUnit 初始化
   const [selectedLanguage, setSelectedLanguage] = useState(i18n.language);
   const [modalVisible, setModalVisible] = useState(false);
-  const { isDarkMode, setIsDarkMode } = useContext(DarkModeContext);
   const [languageModalVisible, setLanguageModalVisible] = useState(false);
-  const theme = isDarkMode ? darkTheme : lightTheme;
   const [devices, setDevices] = useState([]);
   const isScanningRef = useRef(false);
   const [isScanning, setIsScanning] = useState(false);
@@ -235,11 +234,16 @@ function MyColdWalletScreen() {
                 style={{ flexDirection: "row", alignItems: "center", flex: 1 }}
               >
                 <Icon name={option.icon} size={24} color={iconColor} />
-                <Text style={[theme.settingsText, { flex: 1 }]}>
+                <Text style={[MyColdWalletScreenStyle.buttonText, { flex: 1 }]}>
                   {option.title}
                 </Text>
                 {option.selectedOption && (
-                  <Text style={[theme.settingsText, { marginRight: 8 }]}>
+                  <Text
+                    style={[
+                      MyColdWalletScreenStyle.buttonText,
+                      { marginRight: 8 },
+                    ]}
+                  >
                     {option.selectedOption}
                   </Text>
                 )}
@@ -343,7 +347,6 @@ function MyColdWalletScreen() {
             onRequestClose={() => setPasswordModalVisible(false)}
           >
             <BlurView
-              BlurView
               intensity={10}
               style={MyColdWalletScreenStyle.centeredView}
             >
@@ -452,7 +455,9 @@ function MyColdWalletScreen() {
 
           {/* Bluetooth Btn */}
           <View style={{ marginTop: 40 }}>
-            <Text style={theme.titleText}>{t("Bluetooth")}</Text>
+            <Text style={MyColdWalletScreenStyle.languageModalTitle}>
+              {t("Bluetooth")}
+            </Text>
             <View style={{ alignItems: "center" }}>
               <TouchableOpacity
                 style={MyColdWalletScreenStyle.roundButton}

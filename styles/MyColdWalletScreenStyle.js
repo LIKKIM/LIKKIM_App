@@ -10,7 +10,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
 
   return StyleSheet.create({
     cancelButtonText: {
-      color: "#ffffff",
+      color: textColor,
     },
     modalSubtitle: {
       color: "#e0e0e0",
@@ -19,7 +19,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       textAlign: "center",
     },
     modalTitle: {
-      color: "#ffffff",
+      color: textColor,
       fontSize: 18,
       fontWeight: "bold",
       marginBottom: 15,
@@ -72,19 +72,19 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       bottom: 30,
     },
     passwordModalText: {
-      color: "#ffffff",
+      color: textColor,
       fontSize: 16,
       marginBottom: 10,
       textAlign: "left",
     },
     languageModalText: {
-      color: "#ffffff",
+      color: textColor,
       fontSize: 16,
       marginBottom: 10,
       textAlign: "center",
     },
     languageModalTitle: {
-      color: "#ffffff",
+      color: textColor,
       fontSize: 20,
       fontWeight: "bold",
       marginBottom: 30,
