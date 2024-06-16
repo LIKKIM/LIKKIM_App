@@ -258,7 +258,7 @@ function MyColdWalletScreen() {
             visible={languageModalVisible}
             onRequestClose={() => setLanguageModalVisible(false)}
           >
-            <View style={styles.centeredView}>
+            <BlurView intensity={10} style={styles.centeredView}>
               <View style={styles.modalView}>
                 <Text style={styles.languageModalTitle}>
                   {t("Select Language")}
@@ -287,7 +287,7 @@ function MyColdWalletScreen() {
                   <Text style={styles.cancelButtonText}>{t("Cancel")}</Text>
                 </TouchableOpacity>
               </View>
-            </View>
+            </BlurView>
           </Modal>
 
           {/* Currency Modal */}
@@ -297,7 +297,7 @@ function MyColdWalletScreen() {
             visible={currencyModalVisible}
             onRequestClose={() => setCurrencyModalVisible(false)}
           >
-            <View style={styles.centeredView}>
+            <BlurView intensity={10} style={styles.centeredView}>
               <View style={styles.modalView}>
                 <Text style={styles.languageModalTitle}>
                   {t("Select Currency")}
@@ -322,7 +322,7 @@ function MyColdWalletScreen() {
                   <Text style={styles.cancelButtonText}>{t("Cancel")}</Text>
                 </TouchableOpacity>
               </View>
-            </View>
+            </BlurView>
           </Modal>
 
           {/* Change Password Modal */}
