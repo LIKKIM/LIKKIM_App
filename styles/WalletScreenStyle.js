@@ -228,7 +228,7 @@ const WalletScreenStyles = (isDarkMode) => {
       position: "absolute",
       right: 10,
       top: 40,
-      backgroundColor: "#24234C",
+      backgroundColor: "#484692",
       borderRadius: 5,
       padding: 10,
       zIndex: 1,
