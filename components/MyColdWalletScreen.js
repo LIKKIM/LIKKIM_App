@@ -332,7 +332,7 @@ function MyColdWalletScreen() {
             visible={passwordModalVisible}
             onRequestClose={() => setPasswordModalVisible(false)}
           >
-            <View style={styles.centeredView}>
+            <BlurView BlurView intensity={10} style={styles.centeredView}>
               <View style={styles.modalView}>
                 <Text style={styles.languageModalTitle}>
                   {t("Set Password")}
@@ -429,7 +429,7 @@ function MyColdWalletScreen() {
                   <Text style={styles.cancelButtonText}>{t("Cancel")}</Text>
                 </TouchableOpacity>
               </View>
-            </View>
+            </BlurView>
           </Modal>
 
           {/* Bluetooth Btn */}
