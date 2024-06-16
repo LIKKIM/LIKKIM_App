@@ -37,7 +37,7 @@ function WalletScreen({ route }) {
   const [selectedCardName, setSelectedCardName] = useState(null);
   const [addIconModalVisible, setAddIconModalVisible] = useState(false);
   const [addWalletModalVisible, setAddWalletModalVisible] = useState(false);
-  const [cryptoCards, setCryptoCards] = useState([]); // 初始化为空数组
+  const [cryptoCards, setCryptoCards] = useState([]);
   const scrollViewRef = useRef();
   const iconColor = isDarkMode ? "#ffffff" : "#24234C";
   const darkColors = ["#24234C", "#101021"];
@@ -49,7 +49,7 @@ function WalletScreen({ route }) {
     );
     setCryptoCards(updatedCards);
     setCryptoCount(updatedCards.length);
-    setAddedCryptos(updatedCards); // 同步更新 addedCryptos
+    setAddedCryptos(updatedCards);
     setDropdownVisible(false);
     setModalVisible(false);
   };
@@ -89,7 +89,7 @@ function WalletScreen({ route }) {
       const newCryptoCards = [...cryptoCards, crypto];
       setCryptoCards(newCryptoCards);
       setCryptoCount(newCryptoCards.length);
-      setAddedCryptos(newCryptoCards); // 更新已添加的加密货币
+      setAddedCryptos(newCryptoCards);
     }
     setAddCryptoVisible(false);
   };
@@ -113,62 +113,21 @@ function WalletScreen({ route }) {
   return (
     <LinearGradient
       colors={isDarkMode ? darkColors : lightColors}
-      style={{
-        flex: 1,
-        backgroundColor: "#121212",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
+      style={WalletScreenStyle.linearGradient}
     >
       <ScrollView
         ref={scrollViewRef}
-        contentContainerStyle={{
-          paddingTop: 20,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-        style={{
-          width: "100%",
-          paddingHorizontal: 0,
-        }}
+        contentContainerStyle={WalletScreenStyle.scrollViewContent}
+        style={WalletScreenStyle.scrollView}
       >
         {cryptoCards.length > 0 && (
-          <View
-            style={{
-              width: 300,
-              marginBottom: 40,
-            }}
-          >
-            <Text
-              style={{
-                fontSize: 18,
-                marginVertical: 10,
-                color: isDarkMode ? "#fff" : "#000",
-                textAlign: "left",
-              }}
-            >
+          <View style={WalletScreenStyle.totalBalanceContainer}>
+            <Text style={WalletScreenStyle.totalBalanceText}>
               {t("Total Balance")}
             </Text>
-            <Text
-              style={{
-                fontSize: 36,
-                fontWeight: "bold",
-                color: isDarkMode ? "#fff" : "#000",
-                textAlign: "left",
-              }}
-            >
+            <Text style={WalletScreenStyle.totalBalanceAmount}>
               {`${calculateTotalBalance()}`}
-              <Text
-                style={{
-                  marginLeft: 20,
-                  fontSize: 18,
-                  textAlign: "left",
-                  color: "#ccc",
-                  fontWeight: "normal",
-                }}
-              >
-                {currencyUnit}
-              </Text>
+              <Text style={WalletScreenStyle.currencyUnit}>{currencyUnit}</Text>
             </Text>
           </View>
         )}
@@ -176,32 +135,14 @@ function WalletScreen({ route }) {
         {cryptoCards.length === 0 && (
           <ImageBackground
             source={require("../assets/AddWallet.png")}
-            style={{
-              width: 300,
-              height: 170,
-              borderRadius: 20,
-              overflow: "hidden",
-              justifyContent: "center",
-              alignItems: "center",
-              backgroundColor: "#484692",
-              shadowOffset: { width: 0, height: 0 },
-              shadowColor: "#101021",
-              shadowOpacity: 0.3,
-              shadowRadius: 30,
-              elevation: 20,
-            }}
-            imageStyle={{ borderRadius: 20 }}
+            style={WalletScreenStyle.addWalletImage}
+            imageStyle={WalletScreenStyle.addWalletImageBorder}
           >
             <TouchableOpacity
               onPress={() => setAddWalletModalVisible(true)}
-              style={{
-                width: "100%",
-                height: "100%",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
+              style={WalletScreenStyle.addWalletButton}
             >
-              <Text style={{ color: "#FFF", fontSize: 18, fontWeight: "bold" }}>
+              <Text style={WalletScreenStyle.addWalletButtonText}>
                 {t("Add Wallet")}
               </Text>
             </TouchableOpacity>
@@ -226,7 +167,7 @@ function WalletScreen({ route }) {
               ]}
               imageStyle={{ borderRadius: 16 }}
             >
-              <View style={styles.overlay} />
+              <View style={WalletScreenStyle.overlay} />
               <Image source={card.icon} style={WalletScreenStyle.cardIcon} />
               <Text style={WalletScreenStyle.cardName}>{card.name}</Text>
               <Text style={WalletScreenStyle.cardShortName}>
@@ -246,56 +187,31 @@ function WalletScreen({ route }) {
         visible={addWalletModalVisible}
         onRequestClose={() => setAddWalletModalVisible(false)}
       >
-        <BlurView intensity={10} style={styles.centeredView}>
-          <View
-            style={{
-              margin: 20,
-              width: "80%",
-              backgroundColor: "#24234C",
-              borderRadius: 20,
-              padding: 35,
-              alignItems: "center",
-              shadowColor: "#000",
-              shadowOffset: { width: 0, height: 2 },
-              shadowOpacity: 0.25,
-              shadowRadius: 3.84,
-              elevation: 5,
-            }}
-          >
+        <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
+          <View style={WalletScreenStyle.modalView}>
             <TouchableOpacity
-              style={{
-                backgroundColor: "#6C6CF4",
-                padding: 10,
-                width: "100%",
-                justifyContent: "center",
-                borderRadius: 30,
-                height: 60,
-                alignItems: "center",
-                marginBottom: 20,
-              }}
+              style={WalletScreenStyle.modalButton}
               onPress={handleCreateWallet}
             >
-              <Text style={styles.cancelButtonText}>{t("Create Wallet")}</Text>
+              <Text style={WalletScreenStyle.cancelButtonText}>
+                {t("Create Wallet")}
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={{
-                backgroundColor: "#6C6CF4",
-                padding: 10,
-                width: "100%",
-                justifyContent: "center",
-                borderRadius: 30,
-                height: 60,
-                alignItems: "center",
-              }}
+              style={WalletScreenStyle.modalButton}
               onPress={handleImportWallet}
             >
-              <Text style={styles.cancelButtonText}>{t("Import Wallet")}</Text>
+              <Text style={WalletScreenStyle.cancelButtonText}>
+                {t("Import Wallet")}
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={WalletScreenStyle.cancelButton}
               onPress={() => setAddWalletModalVisible(false)}
             >
-              <Text style={styles.cancelButtonText}>{t("Close")}</Text>
+              <Text style={WalletScreenStyle.cancelButtonText}>
+                {t("Close")}
+              </Text>
             </TouchableOpacity>
           </View>
         </BlurView>
@@ -307,66 +223,25 @@ function WalletScreen({ route }) {
         visible={addCryptoVisible}
         onRequestClose={() => setAddCryptoVisible(false)}
       >
-        <BlurView intensity={10} style={styles.centeredView}>
-          <View
-            style={{
-              margin: 20,
-              minHeight: 400,
-              width: "80%",
-              backgroundColor: "#24234C",
-              borderRadius: 20,
-              padding: 35,
-              alignItems: "center",
-              shadowColor: "#000",
-              shadowOffset: { width: 0, height: 2 },
-              shadowOpacity: 0.25,
-              shadowRadius: 3.84,
-              elevation: 5,
-            }}
-          >
-            <ScrollView
-              style={{
-                width: "100%",
-                height: 380,
-              }}
-            >
+        <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
+          <View style={WalletScreenStyle.addCryptoModalView}>
+            <ScrollView style={WalletScreenStyle.addCryptoScrollView}>
               {additionalCryptos.map((crypto) => (
                 <TouchableOpacity
                   key={crypto.name}
-                  style={{
-                    width: "100%",
-                    padding: 6,
-                    backgroundColor: "#1E1D3F",
-                    marginBottom: 6,
-                    borderRadius: 16,
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    flexDirection: "row",
-                  }}
+                  style={WalletScreenStyle.addCryptoButton}
                   onPress={() => handleAddCrypto(crypto)}
                 >
                   <ImageBackground
                     source={crypto.cardImage}
-                    style={{
-                      width: 100,
-                      height: 100,
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
+                    style={WalletScreenStyle.addCryptoImage}
                     imageStyle={{ borderRadius: 12 }}
                   >
-                    <Text style={{ color: "#FFF", fontWeight: "bold" }}>
+                    <Text style={WalletScreenStyle.addCryptoImageText}>
                       {crypto.name}
                     </Text>
                   </ImageBackground>
-                  <Text
-                    style={{
-                      color: "#FFF",
-                      fontWeight: "bold",
-                      marginRight: 30,
-                    }}
-                  >
+                  <Text style={WalletScreenStyle.addCryptoText}>
                     {crypto.name}
                   </Text>
                 </TouchableOpacity>
@@ -376,43 +251,24 @@ function WalletScreen({ route }) {
               style={WalletScreenStyle.cancelButton}
               onPress={() => setAddCryptoVisible(false)}
             >
-              <Text style={styles.cancelButtonText}>{t("Close")}</Text>
+              <Text style={WalletScreenStyle.cancelButtonText}>
+                {t("Close")}
+              </Text>
             </TouchableOpacity>
           </View>
         </BlurView>
       </Modal>
-      {/* 查看余额 */}
+
       <Modal
         animationType="slide"
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => setModalVisible(false)}
       >
-        <BlurView intensity={10} style={styles.centeredView}>
-          <View
-            style={{
-              margin: 20,
-              width: "80%",
-              backgroundColor: "#484692",
-              borderRadius: 20,
-              padding: 35,
-              alignItems: "center",
-              shadowColor: "#000",
-              shadowOffset: { width: 0, height: 2 },
-              shadowOpacity: 0.25,
-              shadowRadius: 3.84,
-              elevation: 5,
-            }}
-          >
-            <View
-              style={{
-                width: "100%",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              <Text style={styles.modalTitle}>{t("Value:")}</Text>
+        <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
+          <View style={WalletScreenStyle.modalView}>
+            <View style={WalletScreenStyle.modalHeader}>
+              <Text style={WalletScreenStyle.modalTitle}>{t("Value:")}</Text>
               <TouchableOpacity
                 onPress={() => setDropdownVisible(!dropdownVisible)}
               >
@@ -420,76 +276,39 @@ function WalletScreen({ route }) {
               </TouchableOpacity>
             </View>
             {dropdownVisible && (
-              <View
-                style={{
-                  position: "absolute",
-                  right: 10,
-                  top: 40,
-                  backgroundColor: "#24234C",
-                  borderRadius: 5,
-                  padding: 10,
-                  zIndex: 1,
-                }}
-              >
+              <View style={WalletScreenStyle.dropdown}>
                 <TouchableOpacity
                   onPress={handleDeleteCard}
-                  style={{ padding: 10 }}
+                  style={WalletScreenStyle.dropdownButton}
                 >
-                  <Text style={{ color: "#FFF", fontSize: 16 }}>
+                  <Text style={WalletScreenStyle.dropdownButtonText}>
                     {t("Delete Card")}
                   </Text>
                 </TouchableOpacity>
               </View>
             )}
-            <View
-              style={{
-                position: "absolute",
-                top: 35,
-                left: 35,
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-            >
+            <View style={WalletScreenStyle.modalIconContainer}>
               <Image
                 source={selectedCrypto?.icon}
-                style={{ width: 24, height: 24, marginRight: 8 }}
+                style={WalletScreenStyle.modalIcon}
               />
-              <Text
-                style={{
-                  color: "#ffffff",
-                  textAlign: "center",
-                  fontSize: 18,
-                }}
-              >
+              <Text style={WalletScreenStyle.modalCryptoName}>
                 {selectedCrypto?.name}
               </Text>
             </View>
-            <Text
-              style={{
-                color: "#ffffff",
-                textAlign: "center",
-                fontSize: 18,
-                marginTop: 40,
-                marginBottom: 10,
-              }}
-            >
+            <Text style={WalletScreenStyle.modalBalanceLabel}>
               {t("Balance")}
             </Text>
-            <Text
-              style={{
-                color: "#ffffff",
-                textAlign: "center",
-                fontSize: 40,
-                marginBottom: 30,
-              }}
-            >
+            <Text style={WalletScreenStyle.modalBalance}>
               {selectedCrypto?.balance || "0.0"} {currencyUnit}
             </Text>
             <TouchableOpacity
               style={WalletScreenStyle.cancelButton}
               onPress={() => setModalVisible(false)}
             >
-              <Text style={styles.cancelButtonText}>{t("Close")}</Text>
+              <Text style={WalletScreenStyle.cancelButtonText}>
+                {t("Close")}
+              </Text>
             </TouchableOpacity>
           </View>
         </BlurView>
