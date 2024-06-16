@@ -165,7 +165,7 @@ function TransactionsScreen() {
                   style={{
                     justifyContent: "center",
                     alignItems: "center",
-                    height: 280,
+                    height: 300,
                   }}
                 >
                   <Text style={TransactionsScreenStyle.modalText}>
