@@ -5,15 +5,71 @@ const WalletScreenStyles = (isDarkMode) => {
   const textColor = isDarkMode ? "#fff" : "#000";
 
   return StyleSheet.create({
-    cancelButton: {
-      backgroundColor: "#6C6CF4",
-      padding: 10,
-      width: "100%",
-      justifyContent: "center",
-      borderRadius: 30,
-      height: 60,
+    linearGradient: {
+      flex: 1,
+      backgroundColor: "#121212",
       alignItems: "center",
-      marginTop: 20,
+      justifyContent: "center",
+    },
+    scrollViewContent: {
+      paddingTop: 20,
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    scrollView: {
+      width: "100%",
+      paddingHorizontal: 0,
+    },
+    totalBalanceContainer: {
+      width: 300,
+      marginBottom: 40,
+    },
+    totalBalanceText: {
+      fontSize: 18,
+      marginVertical: 10,
+      color: textColor,
+      textAlign: "left",
+    },
+    totalBalanceAmount: {
+      fontSize: 36,
+      fontWeight: "bold",
+      color: textColor,
+      textAlign: "left",
+    },
+    currencyUnit: {
+      marginLeft: 20,
+      fontSize: 18,
+      textAlign: "left",
+      color: "#ccc",
+      fontWeight: "normal",
+    },
+    addWalletImage: {
+      width: 300,
+      height: 170,
+      borderRadius: 20,
+      overflow: "hidden",
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: "#484692",
+      shadowOffset: { width: 0, height: 0 },
+      shadowColor: "#101021",
+      shadowOpacity: 0.3,
+      shadowRadius: 30,
+      elevation: 20,
+    },
+    addWalletImageBorder: {
+      borderRadius: 20,
+    },
+    addWalletButton: {
+      width: "100%",
+      height: "100%",
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    addWalletButtonText: {
+      color: "#FFF",
+      fontSize: 18,
+      fontWeight: "bold",
     },
     cardIcon: {
       position: "absolute",
@@ -46,28 +102,173 @@ const WalletScreenStyles = (isDarkMode) => {
       fontWeight: "bold",
     },
     card: {
-      width: 300, // 宽度为300
-      height: 170, // 高度为170
-      borderRadius: 20, // 边角圆润程度为20
+      width: 300,
+      height: 170,
+      borderRadius: 20,
       overflow: "hidden",
-      justifyContent: "center", // 内容居中显示
-      alignItems: "center", // 内容居中显示
-      backgroundColor: "#484692", // 深灰色背景，比container稍浅
-      marginBottom: 20, // 与下一个元素间距20
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: "#484692",
+      marginBottom: 20,
     },
     cardFirst: {
-      shadowOffset: { width: 0, height: 0 }, // 第一张卡片的阴影偏移
-      shadowColor: "#101021", // 阴影颜色为黑色
-      shadowOpacity: 0.3, // 增加阴影透明度
-      shadowRadius: 30, // 增大阴影扩散范围使阴影更加宽
-      elevation: 20, // 增加用于Android的材质阴影高度
+      shadowOffset: { width: 0, height: 0 },
+      shadowColor: "#101021",
+      shadowOpacity: 0.3,
+      shadowRadius: 30,
+      elevation: 20,
     },
     cardOthers: {
-      shadowOffset: { width: 0, height: -10 }, // 其他卡片向上偏移阴影
-      shadowColor: "#101021", // 阴影颜色为黑色
-      shadowOpacity: 0.8, // 增加阴影透明度
-      shadowRadius: 30, // 增大阴影扩散范围使阴影更加宽
-      elevation: 20, // 增加用于Android的材质阴影高度
+      shadowOffset: { width: 0, height: -10 },
+      shadowColor: "#101021",
+      shadowOpacity: 0.8,
+      shadowRadius: 30,
+      elevation: 20,
+    },
+    cancelButton: {
+      backgroundColor: "#6C6CF4",
+      padding: 10,
+      width: "100%",
+      justifyContent: "center",
+      borderRadius: 30,
+      height: 60,
+      alignItems: "center",
+      marginTop: 20,
+    },
+    centeredView: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: "rgba(0, 0, 0, 0.5)",
+    },
+    modalView: {
+      margin: 20,
+      width: "80%",
+      backgroundColor: "#24234C",
+      borderRadius: 20,
+      padding: 35,
+      alignItems: "center",
+      shadowColor: "#000",
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.25,
+      shadowRadius: 3.84,
+      elevation: 5,
+    },
+    modalButton: {
+      backgroundColor: "#6C6CF4",
+      padding: 10,
+      width: "100%",
+      justifyContent: "center",
+      borderRadius: 30,
+      height: 60,
+      alignItems: "center",
+      marginBottom: 20,
+    },
+    cancelButtonText: {
+      color: "#FFF",
+      fontSize: 18,
+      fontWeight: "bold",
+    },
+    addCryptoModalView: {
+      margin: 20,
+      minHeight: 400,
+      width: "80%",
+      backgroundColor: "#24234C",
+      borderRadius: 20,
+      padding: 35,
+      alignItems: "center",
+      shadowColor: "#000",
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.25,
+      shadowRadius: 3.84,
+      elevation: 5,
+    },
+    addCryptoScrollView: {
+      width: "100%",
+      height: 380,
+    },
+    addCryptoButton: {
+      width: "100%",
+      padding: 6,
+      backgroundColor: "#1E1D3F",
+      marginBottom: 6,
+      borderRadius: 16,
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      flexDirection: "row",
+    },
+    addCryptoImage: {
+      width: 100,
+      height: 100,
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    addCryptoImageText: {
+      color: "#FFF",
+      fontWeight: "bold",
+    },
+    addCryptoText: {
+      color: "#FFF",
+      fontWeight: "bold",
+      marginRight: 30,
+    },
+    modalHeader: {
+      width: "100%",
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+    },
+    modalTitle: {
+      color: "#FFF",
+      fontSize: 18,
+      fontWeight: "bold",
+    },
+    dropdown: {
+      position: "absolute",
+      right: 10,
+      top: 40,
+      backgroundColor: "#24234C",
+      borderRadius: 5,
+      padding: 10,
+      zIndex: 1,
+    },
+    dropdownButton: {
+      padding: 10,
+    },
+    dropdownButtonText: {
+      color: "#FFF",
+      fontSize: 16,
+    },
+    modalIconContainer: {
+      position: "absolute",
+      top: 35,
+      left: 35,
+      flexDirection: "row",
+      alignItems: "center",
+    },
+    modalIcon: {
+      width: 24,
+      height: 24,
+      marginRight: 8,
+    },
+    modalCryptoName: {
+      color: "#ffffff",
+      textAlign: "center",
+      fontSize: 18,
+    },
+    modalBalanceLabel: {
+      color: "#ffffff",
+      textAlign: "center",
+      fontSize: 18,
+      marginTop: 40,
+      marginBottom: 10,
+    },
+    modalBalance: {
+      color: "#ffffff",
+      textAlign: "center",
+      fontSize: 40,
+      marginBottom: 30,
     },
   });
 };
