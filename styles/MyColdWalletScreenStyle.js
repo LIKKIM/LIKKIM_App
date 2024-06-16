@@ -13,7 +13,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       color: textColor,
     },
     modalSubtitle: {
-      color: "#e0e0e0",
+      color: textColor,
       fontSize: 14,
       marginBottom: 320,
       textAlign: "center",
@@ -45,7 +45,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       backgroundColor: "rgba(0, 0, 0, 0.5)",
     },
     buttonText: {
-      color: "#e0e0e0",
+      color: textColor,
       fontSize: 16,
       fontWeight: "bold",
     },

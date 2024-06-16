@@ -5,7 +5,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
   const textColor = isDarkMode ? "#fff" : "#000";
   const backgroundColor = isDarkMode ? "#121212" : "#f5f5f5";
   const modalBackgroundColor = isDarkMode ? "#484692" : "#ddd";
-  const buttonBackgroundColor = isDarkMode ? "#6C6CF4" : "#9081F2";
+  const buttonBackgroundColor = isDarkMode ? "#6C6CF4" : "#bbb";
   const inputBackgroundColor = isDarkMode ? "#1A1A37" : "#e0e0e0";
   const historyItemBorderColor = isDarkMode ? "#ccc" : "#999";
   const historyContainerBackgroundColor = isDarkMode ? "#24234C" : "#e0e0e0";
