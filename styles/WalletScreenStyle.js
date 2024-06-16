@@ -3,11 +3,18 @@ import { StyleSheet } from "react-native";
 
 const WalletScreenStyles = (isDarkMode) => {
   const textColor = isDarkMode ? "#fff" : "#000";
+  const backgroundColor = isDarkMode ? "#121212" : "#f5f5f5";
+  const modalBackgroundColor = isDarkMode ? "#24234C" : "#ffffff";
+  const buttonBackgroundColor = isDarkMode ? "#6C6CF4" : "#ccc";
+  const shadowColor = isDarkMode ? "#101021" : "#000";
+  const cardBackgroundColor = isDarkMode ? "#484692" : "#e0e0e0";
+  const currencyUnitColor = isDarkMode ? "#ccc" : "#666";
+  const addCryptoButtonBackgroundColor = isDarkMode ? "#1E1D3F" : "#e0e0e0";
 
   return StyleSheet.create({
     linearGradient: {
       flex: 1,
-      backgroundColor: "#121212",
+      backgroundColor: backgroundColor,
       alignItems: "center",
       justifyContent: "center",
     },
@@ -40,7 +47,7 @@ const WalletScreenStyles = (isDarkMode) => {
       marginLeft: 20,
       fontSize: 18,
       textAlign: "left",
-      color: "#ccc",
+      color: currencyUnitColor,
       fontWeight: "normal",
     },
     addWalletImage: {
@@ -50,9 +57,9 @@ const WalletScreenStyles = (isDarkMode) => {
       overflow: "hidden",
       justifyContent: "center",
       alignItems: "center",
-      backgroundColor: "#484692",
+      backgroundColor: cardBackgroundColor,
       shadowOffset: { width: 0, height: 0 },
-      shadowColor: "#101021",
+      shadowColor: shadowColor,
       shadowOpacity: 0.3,
       shadowRadius: 30,
       elevation: 20,
@@ -67,7 +74,7 @@ const WalletScreenStyles = (isDarkMode) => {
       alignItems: "center",
     },
     addWalletButtonText: {
-      color: "#FFF",
+      color: textColor,
       fontSize: 18,
       fontWeight: "bold",
     },
@@ -108,25 +115,25 @@ const WalletScreenStyles = (isDarkMode) => {
       overflow: "hidden",
       justifyContent: "center",
       alignItems: "center",
-      backgroundColor: "#484692",
+      backgroundColor: cardBackgroundColor,
       marginBottom: 20,
     },
     cardFirst: {
       shadowOffset: { width: 0, height: 0 },
-      shadowColor: "#101021",
+      shadowColor: shadowColor,
       shadowOpacity: 0.3,
       shadowRadius: 30,
       elevation: 20,
     },
     cardOthers: {
       shadowOffset: { width: 0, height: -10 },
-      shadowColor: "#101021",
+      shadowColor: shadowColor,
       shadowOpacity: 0.8,
       shadowRadius: 30,
       elevation: 20,
     },
     cancelButton: {
-      backgroundColor: "#6C6CF4",
+      backgroundColor: buttonBackgroundColor,
       padding: 10,
       width: "100%",
       justifyContent: "center",
@@ -144,7 +151,7 @@ const WalletScreenStyles = (isDarkMode) => {
     modalView: {
       margin: 20,
       width: "80%",
-      backgroundColor: "#24234C",
+      backgroundColor: modalBackgroundColor,
       borderRadius: 20,
       padding: 35,
       alignItems: "center",
@@ -155,7 +162,7 @@ const WalletScreenStyles = (isDarkMode) => {
       elevation: 5,
     },
     modalButton: {
-      backgroundColor: "#6C6CF4",
+      backgroundColor: buttonBackgroundColor,
       padding: 10,
       width: "100%",
       justifyContent: "center",
@@ -165,7 +172,7 @@ const WalletScreenStyles = (isDarkMode) => {
       marginBottom: 20,
     },
     cancelButtonText: {
-      color: "#FFF",
+      color: textColor,
       fontSize: 18,
       fontWeight: "bold",
     },
@@ -173,7 +180,7 @@ const WalletScreenStyles = (isDarkMode) => {
       margin: 20,
       minHeight: 400,
       width: "80%",
-      backgroundColor: "#24234C",
+      backgroundColor: modalBackgroundColor,
       borderRadius: 20,
       padding: 35,
       alignItems: "center",
@@ -190,7 +197,7 @@ const WalletScreenStyles = (isDarkMode) => {
     addCryptoButton: {
       width: "100%",
       padding: 6,
-      backgroundColor: "#1E1D3F",
+      backgroundColor: addCryptoButtonBackgroundColor,
       marginBottom: 6,
       borderRadius: 16,
       display: "flex",
@@ -205,11 +212,11 @@ const WalletScreenStyles = (isDarkMode) => {
       alignItems: "center",
     },
     addCryptoImageText: {
-      color: "#FFF",
+      color: textColor,
       fontWeight: "bold",
     },
     addCryptoText: {
-      color: "#FFF",
+      color: textColor,
       fontWeight: "bold",
       marginRight: 30,
     },
@@ -220,7 +227,7 @@ const WalletScreenStyles = (isDarkMode) => {
       alignItems: "center",
     },
     modalTitle: {
-      color: "#FFF",
+      color: textColor,
       fontSize: 18,
       fontWeight: "bold",
     },
@@ -228,7 +235,7 @@ const WalletScreenStyles = (isDarkMode) => {
       position: "absolute",
       right: 10,
       top: 40,
-      backgroundColor: "#484692",
+      backgroundColor: cardBackgroundColor,
       borderRadius: 5,
       padding: 10,
       zIndex: 1,
@@ -237,7 +244,7 @@ const WalletScreenStyles = (isDarkMode) => {
       padding: 10,
     },
     dropdownButtonText: {
-      color: "#FFF",
+      color: textColor,
       fontSize: 16,
     },
     modalIconContainer: {
@@ -253,19 +260,19 @@ const WalletScreenStyles = (isDarkMode) => {
       marginRight: 8,
     },
     modalCryptoName: {
-      color: "#ffffff",
+      color: textColor,
       textAlign: "center",
       fontSize: 18,
     },
     modalBalanceLabel: {
-      color: "#ffffff",
+      color: textColor,
       textAlign: "center",
       fontSize: 18,
       marginTop: 40,
       marginBottom: 10,
     },
     modalBalance: {
-      color: "#ffffff",
+      color: textColor,
       textAlign: "center",
       fontSize: 40,
       marginBottom: 30,
