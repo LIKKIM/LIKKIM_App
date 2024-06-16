@@ -134,7 +134,11 @@ function WalletScreen({ route }) {
 
         {cryptoCards.length === 0 && (
           <ImageBackground
-            source={require("../assets/AddWallet.png")}
+            source={
+              isDarkMode
+                ? require("../assets/AddWallet.png")
+                : require("../assets/Card33.png")
+            }
             style={WalletScreenStyle.addWalletImage}
             imageStyle={WalletScreenStyle.addWalletImageBorder}
           >
