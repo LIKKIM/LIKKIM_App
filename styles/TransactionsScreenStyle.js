@@ -1,5 +1,8 @@
+// styles/TransactionsScreenStyle.js
 import { StyleSheet } from "react-native";
 
-export const TransactionsScreenStyle = StyleSheet.create({
-  // 更多的样式定义...
-});
+const TransactionsScreenStyles = (isDarkMode) => {
+  return StyleSheet.create({});
+};
+
+export default TransactionsScreenStyles;

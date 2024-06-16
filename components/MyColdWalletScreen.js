@@ -24,6 +24,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 import i18n from "../config/i18n";
 import { CryptoContext, DarkModeContext } from "./CryptoContext";
+import MyColdWalletScreenStyles from "../styles/MyColdWalletScreenStyle";
 
 let PermissionsAndroid;
 if (Platform.OS === "android") {
@@ -31,6 +32,7 @@ if (Platform.OS === "android") {
 }
 
 function MyColdWalletScreen() {
+  const MyColdWalletScreenStyle = MyColdWalletScreenStyles(isDarkMode);
   const { t } = useTranslation();
   const navigation = useNavigation();
   const { currencies, currencyUnit, setCurrencyUnit } =

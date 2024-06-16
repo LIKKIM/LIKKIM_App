@@ -14,8 +14,10 @@ import { BlurView } from "expo-blur";
 import QRCode from "react-native-qrcode-svg";
 import { useTranslation } from "react-i18next";
 import { CryptoContext, DarkModeContext } from "./CryptoContext";
+import TransactionsScreenStyles from "../styles/TransactionsScreenStyle";
 
 function TransactionsScreen() {
+  const TransactionsScreenStyle = TransactionsScreenStyles(isDarkMode);
   const { t } = useTranslation();
   const { isDarkMode } = useContext(DarkModeContext);
   const { addedCryptos } = useContext(CryptoContext);

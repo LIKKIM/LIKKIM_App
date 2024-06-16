@@ -1,5 +1,8 @@
+// styles/MyColdWalletScreenStyle.js
 import { StyleSheet } from "react-native";
 
-export const MyColdWalletScreenStyle = StyleSheet.create({
-  // 更多的样式定义...
-});
+const MyColdWalletScreenStyles = (isDarkMode) => {
+  return StyleSheet.create({});
+};
+
+export default MyColdWalletScreenStyles;
