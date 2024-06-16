@@ -125,6 +125,9 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       position: "absolute",
       bottom: 60,
     },
+    Icon: {
+      marginRight: 10,
+    },
   });
 };
 

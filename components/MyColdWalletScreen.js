@@ -233,7 +233,12 @@ function MyColdWalletScreen() {
               <View
                 style={{ flexDirection: "row", alignItems: "center", flex: 1 }}
               >
-                <Icon name={option.icon} size={24} color={iconColor} />
+                <Icon
+                  name={option.icon}
+                  size={24}
+                  color={iconColor}
+                  style={MyColdWalletScreenStyle.Icon}
+                />
                 <Text style={[MyColdWalletScreenStyle.buttonText, { flex: 1 }]}>
                   {option.title}
                 </Text>
