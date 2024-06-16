@@ -221,14 +221,14 @@ function MyColdWalletScreen() {
   return (
     <LinearGradient
       colors={isDarkMode ? darkColors : lightColors}
-      style={styles.container}
+      style={MyColdWalletScreenStyle.container}
     >
-      <ScrollView style={styles.scrollView}>
-        <View style={styles.contentContainer}>
+      <ScrollView style={MyColdWalletScreenStyle.scrollView}>
+        <View style={MyColdWalletScreenStyle.contentContainer}>
           {settingsOptions.map((option) => (
             <TouchableOpacity
               key={option.title}
-              style={styles.settingsItem}
+              style={MyColdWalletScreenStyle.settingsItem}
               onPress={option.onPress}
             >
               <View
@@ -258,12 +258,15 @@ function MyColdWalletScreen() {
             visible={languageModalVisible}
             onRequestClose={() => setLanguageModalVisible(false)}
           >
-            <BlurView intensity={10} style={styles.centeredView}>
-              <View style={styles.modalView}>
-                <Text style={styles.languageModalTitle}>
+            <BlurView
+              intensity={10}
+              style={MyColdWalletScreenStyle.centeredView}
+            >
+              <View style={MyColdWalletScreenStyle.modalView}>
+                <Text style={MyColdWalletScreenStyle.languageModalTitle}>
                   {t("Select Language")}
                 </Text>
-                <ScrollView style={styles.languageList}>
+                <ScrollView style={MyColdWalletScreenStyle.languageList}>
                   {languages.map((language) => (
                     <TouchableOpacity
                       key={language.code}
@@ -274,17 +277,19 @@ function MyColdWalletScreen() {
                         setLanguageModalVisible(false);
                       }}
                     >
-                      <Text style={styles.languageModalText}>
+                      <Text style={MyColdWalletScreenStyle.languageModalText}>
                         {language.name}
                       </Text>
                     </TouchableOpacity>
                   ))}
                 </ScrollView>
                 <TouchableOpacity
-                  style={styles.languageCancelButton}
+                  style={MyColdWalletScreenStyle.languageCancelButton}
                   onPress={() => setLanguageModalVisible(false)}
                 >
-                  <Text style={styles.cancelButtonText}>{t("Cancel")}</Text>
+                  <Text style={MyColdWalletScreenStyle.cancelButtonText}>
+                    {t("Cancel")}
+                  </Text>
                 </TouchableOpacity>
               </View>
             </BlurView>
@@ -297,29 +302,34 @@ function MyColdWalletScreen() {
             visible={currencyModalVisible}
             onRequestClose={() => setCurrencyModalVisible(false)}
           >
-            <BlurView intensity={10} style={styles.centeredView}>
-              <View style={styles.modalView}>
-                <Text style={styles.languageModalTitle}>
+            <BlurView
+              intensity={10}
+              style={MyColdWalletScreenStyle.centeredView}
+            >
+              <View style={MyColdWalletScreenStyle.modalView}>
+                <Text style={MyColdWalletScreenStyle.languageModalTitle}>
                   {t("Select Currency")}
                 </Text>
-                <ScrollView style={styles.languageList}>
+                <ScrollView style={MyColdWalletScreenStyle.languageList}>
                   {currencies.map((currency) => (
                     <TouchableOpacity
                       key={currency.shortName}
-                      style={styles.currencyOption}
+                      style={MyColdWalletScreenStyle.currencyOption}
                       onPress={() => handleCurrencyChange(currency)}
                     >
-                      <Text style={styles.languageModalText}>
+                      <Text style={MyColdWalletScreenStyle.languageModalText}>
                         {currency.name} - {currency.shortName}
                       </Text>
                     </TouchableOpacity>
                   ))}
                 </ScrollView>
                 <TouchableOpacity
-                  style={styles.languageCancelButton}
+                  style={MyColdWalletScreenStyle.languageCancelButton}
                   onPress={() => setCurrencyModalVisible(false)}
                 >
-                  <Text style={styles.cancelButtonText}>{t("Cancel")}</Text>
+                  <Text style={MyColdWalletScreenStyle.cancelButtonText}>
+                    {t("Cancel")}
+                  </Text>
                 </TouchableOpacity>
               </View>
             </BlurView>
@@ -332,16 +342,22 @@ function MyColdWalletScreen() {
             visible={passwordModalVisible}
             onRequestClose={() => setPasswordModalVisible(false)}
           >
-            <BlurView BlurView intensity={10} style={styles.centeredView}>
-              <View style={styles.modalView}>
-                <Text style={styles.languageModalTitle}>
+            <BlurView
+              BlurView
+              intensity={10}
+              style={MyColdWalletScreenStyle.centeredView}
+            >
+              <View style={MyColdWalletScreenStyle.modalView}>
+                <Text style={MyColdWalletScreenStyle.languageModalTitle}>
                   {t("Set Password")}
                 </Text>
-                <Text style={styles.languageModalText}>
+                <Text style={MyColdWalletScreenStyle.languageModalText}>
                   {t("Only you can unlock your wallet")}
                 </Text>
                 <View style={{ marginVertical: 10, width: 200 }}>
-                  <Text style={styles.passwordModalText}>{t("Password")}</Text>
+                  <Text style={MyColdWalletScreenStyle.passwordModalText}>
+                    {t("Password")}
+                  </Text>
                   <View
                     style={[
                       {
@@ -379,7 +395,7 @@ function MyColdWalletScreen() {
                   </View>
                 </View>
                 <View style={{ marginVertical: 10, width: 200 }}>
-                  <Text style={styles.passwordModalText}>
+                  <Text style={MyColdWalletScreenStyle.passwordModalText}>
                     {t("Confirm Password")}
                   </Text>
                   <View
@@ -423,10 +439,12 @@ function MyColdWalletScreen() {
                   </View>
                 </View>
                 <TouchableOpacity
-                  style={styles.languageCancelButton}
+                  style={MyColdWalletScreenStyle.languageCancelButton}
                   onPress={() => setPasswordModalVisible(false)}
                 >
-                  <Text style={styles.cancelButtonText}>{t("Cancel")}</Text>
+                  <Text style={MyColdWalletScreenStyle.cancelButtonText}>
+                    {t("Cancel")}
+                  </Text>
                 </TouchableOpacity>
               </View>
             </BlurView>
@@ -437,10 +455,10 @@ function MyColdWalletScreen() {
             <Text style={theme.titleText}>{t("Bluetooth")}</Text>
             <View style={{ alignItems: "center" }}>
               <TouchableOpacity
-                style={styles.roundButton}
+                style={MyColdWalletScreenStyle.roundButton}
                 onPress={handleBluetoothPairing}
               >
-                <Text style={styles.buttonText}>
+                <Text style={MyColdWalletScreenStyle.buttonText}>
                   {t("Pair with Bluetooth")}
                 </Text>
               </TouchableOpacity>
@@ -454,9 +472,12 @@ function MyColdWalletScreen() {
                 setModalVisible(!modalVisible);
               }}
             >
-              <BlurView intensity={10} style={styles.centeredView}>
-                <View style={styles.modalView}>
-                  <Text style={styles.modalTitle}>
+              <BlurView
+                intensity={10}
+                style={MyColdWalletScreenStyle.centeredView}
+              >
+                <View style={MyColdWalletScreenStyle.modalView}>
+                  <Text style={MyColdWalletScreenStyle.modalTitle}>
                     {t("LOOKING FOR DEVICES")}
                   </Text>
                   {isScanning ? (
@@ -472,7 +493,7 @@ function MyColdWalletScreen() {
                           height: 100,
                         }}
                       />
-                      <Text style={styles.modalSubtitle}>
+                      <Text style={MyColdWalletScreenStyle.modalSubtitle}>
                         {t("Scanning...")}
                       </Text>
                     </View>
@@ -482,7 +503,7 @@ function MyColdWalletScreen() {
                         data={devices}
                         keyExtractor={(item) => item.id}
                         renderItem={({ item }) => (
-                          <Text style={styles.modalSubtitle}>
+                          <Text style={MyColdWalletScreenStyle.modalSubtitle}>
                             {item.name || t("Unknown Device")}
                           </Text>
                         )}
@@ -490,17 +511,19 @@ function MyColdWalletScreen() {
                     )
                   )}
                   {!isScanning && devices.length === 0 && (
-                    <Text style={styles.modalSubtitle}>
+                    <Text style={MyColdWalletScreenStyle.modalSubtitle}>
                       {t(
                         "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled."
                       )}
                     </Text>
                   )}
                   <TouchableOpacity
-                    style={styles.cancelButton}
+                    style={MyColdWalletScreenStyle.cancelButton}
                     onPress={() => setModalVisible(false)}
                   >
-                    <Text style={styles.cancelButtonText}>{t("Cancel")}</Text>
+                    <Text style={MyColdWalletScreenStyle.cancelButtonText}>
+                      {t("Cancel")}
+                    </Text>
                   </TouchableOpacity>
                 </View>
               </BlurView>
