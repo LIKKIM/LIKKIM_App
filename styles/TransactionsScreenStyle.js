@@ -34,7 +34,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
     modalView: {
       margin: 20,
       height: 500,
-      width: "80%",
+      //  width: "80%",
       backgroundColor: modalBackgroundColor,
       borderRadius: 20,
       padding: 35,
@@ -57,7 +57,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
     optionButton: {
       backgroundColor: buttonBackgroundColor,
       padding: 10,
-      width: "80%",
+      width: "100%",
       justifyContent: "center",
       borderRadius: 30,
       height: 60,
