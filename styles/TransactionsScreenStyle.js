@@ -2,6 +2,7 @@
 import { StyleSheet } from "react-native";
 
 const TransactionsScreenStyles = (isDarkMode) => {
+  const textColor = isDarkMode ? "#fff" : "#000";
   return StyleSheet.create({
     cancelButtonText: {
       color: "#ffffff", // 白色文字
