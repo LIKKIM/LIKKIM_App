@@ -270,6 +270,10 @@ const WalletScreenStyles = (isDarkMode) => {
       fontSize: 40,
       marginBottom: 30,
     },
+    overlay: {
+      ...StyleSheet.absoluteFillObject,
+      backgroundColor: "rgba(108, 108, 244, 0.1)",
+    },
   });
 };
 
