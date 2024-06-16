@@ -155,13 +155,7 @@ function TransactionsScreen() {
         >
           <BlurView intensity={10} style={TransactionsScreenStyle.centeredView}>
             <View style={TransactionsScreenStyle.modalView}>
-              <Text
-                style={{
-                  color: "#ffffff",
-                  textAlign: "center",
-                  marginBottom: 30,
-                }}
-              >
+              <Text style={TransactionsScreenStyle.TransactionModalTitle}>
                 {operationType === "send"
                   ? t("Choose the cryptocurrency to send:")
                   : t("Choose the cryptocurrency to receive:")}
@@ -174,7 +168,7 @@ function TransactionsScreen() {
                     height: 280,
                   }}
                 >
-                  <Text style={{ color: "#ffffff", textAlign: "center" }}>
+                  <Text style={TransactionsScreenStyle.modalText}>
                     {t(
                       "No cryptocurrencies available. Please add wallet first."
                     )}

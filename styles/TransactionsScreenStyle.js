@@ -4,15 +4,15 @@ import { StyleSheet } from "react-native";
 const TransactionsScreenStyles = (isDarkMode) => {
   const textColor = isDarkMode ? "#fff" : "#000";
   const backgroundColor = isDarkMode ? "#121212" : "#f5f5f5";
-  const modalBackgroundColor = isDarkMode ? "#484692" : "#ccc";
-  const buttonBackgroundColor = isDarkMode ? "#6C6CF4" : "#007bff";
+  const modalBackgroundColor = isDarkMode ? "#484692" : "#ddd";
+  const buttonBackgroundColor = isDarkMode ? "#6C6CF4" : "#9081F2";
   const inputBackgroundColor = isDarkMode ? "#1A1A37" : "#e0e0e0";
   const historyItemBorderColor = isDarkMode ? "#ccc" : "#999";
   const historyContainerBackgroundColor = isDarkMode ? "#24234C" : "#e0e0e0";
 
   return StyleSheet.create({
     cancelButtonText: {
-      color: "#ffffff", // 白色文字
+      color: textColor, // 白色文字
     },
     cancelButton: {
       backgroundColor: buttonBackgroundColor,
@@ -52,7 +52,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       backgroundColor: "rgba(0, 0, 0, 0.5)",
     },
     optionButtonText: {
-      color: "#ffffff",
+      color: textColor,
     },
     optionButton: {
       backgroundColor: buttonBackgroundColor,
@@ -65,7 +65,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       marginBottom: 10,
     },
     submitButtonText: {
-      color: "#ffffff",
+      color: textColor,
     },
     input: {
       backgroundColor: inputBackgroundColor,
@@ -88,7 +88,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
     },
     noHistoryText: {
       fontSize: 16,
-      color: "#ffffff",
+      color: textColor,
       textAlign: "center",
     },
     historyTitle: {
@@ -96,7 +96,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       left: 20,
       top: 20,
       fontSize: 18,
-      color: "#ffffff",
+      color: textColor,
     },
     historyContainer: {
       marginTop: 20,
@@ -108,11 +108,11 @@ const TransactionsScreenStyles = (isDarkMode) => {
       height: 360,
     },
     subButtonText: {
-      color: "#e0e0e0",
+      color: textColor,
       fontSize: 12,
     },
     buttonText: {
-      color: "#e0e0e0",
+      color: textColor,
       fontSize: 16,
       fontWeight: "bold",
     },
@@ -133,6 +133,12 @@ const TransactionsScreenStyles = (isDarkMode) => {
       alignItems: "center",
       justifyContent: "center",
       padding: 20,
+    },
+    modalText: { color: textColor, textAlign: "center" },
+    TransactionModalTitle: {
+      color: textColor,
+      textAlign: "center",
+      marginBottom: 30,
     },
   });
 };
