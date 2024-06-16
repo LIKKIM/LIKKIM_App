@@ -3,12 +3,19 @@ import { StyleSheet } from "react-native";
 
 const TransactionsScreenStyles = (isDarkMode) => {
   const textColor = isDarkMode ? "#fff" : "#000";
+  const backgroundColor = isDarkMode ? "#121212" : "#f5f5f5";
+  const modalBackgroundColor = isDarkMode ? "#484692" : "#ccc";
+  const buttonBackgroundColor = isDarkMode ? "#6C6CF4" : "#007bff";
+  const inputBackgroundColor = isDarkMode ? "#1A1A37" : "#e0e0e0";
+  const historyItemBorderColor = isDarkMode ? "#ccc" : "#999";
+  const historyContainerBackgroundColor = isDarkMode ? "#24234C" : "#e0e0e0";
+
   return StyleSheet.create({
     cancelButtonText: {
       color: "#ffffff", // 白色文字
     },
     cancelButton: {
-      backgroundColor: "#6C6CF4",
+      backgroundColor: buttonBackgroundColor,
       padding: 10,
       width: "80%",
       justifyContent: "center",
@@ -19,36 +26,36 @@ const TransactionsScreenStyles = (isDarkMode) => {
       bottom: 60,
     },
     modalTitle: {
-      color: "#ffffff", // 白色文字
-      fontSize: 18, // 字体大小为18
-      fontWeight: "bold", // 字体加粗
-      marginBottom: 15, // 与下一个元素间距15
+      color: textColor,
+      fontSize: 18,
+      fontWeight: "bold",
+      marginBottom: 15,
     },
     modalView: {
       margin: 20,
-      height: 500, // 高度为500
+      height: 500,
       width: "80%",
-      backgroundColor: "#484692", // 深灰色背景
-      borderRadius: 20, // 圆角为20
-      padding: 35, // 内边距为35
-      alignItems: "center", // 内容居中对齐
-      shadowColor: "#000", // 阴影为黑色
-      shadowOffset: { width: 0, height: 2 }, // 阴影偏移
-      shadowOpacity: 0.25, // 阴影透明度
-      shadowRadius: 3.84, // 阴影扩散范围
-      elevation: 5, // 用于Android的材质阴影高度
+      backgroundColor: modalBackgroundColor,
+      borderRadius: 20,
+      padding: 35,
+      alignItems: "center",
+      shadowColor: "#000",
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.25,
+      shadowRadius: 3.84,
+      elevation: 5,
     },
     centeredView: {
       flex: 1,
-      justifyContent: "center", // 内容居中
-      alignItems: "center", // 内容居中
-      backgroundColor: "rgba(0, 0, 0, 0.5)", // 半透明背景
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: "rgba(0, 0, 0, 0.5)",
     },
     optionButtonText: {
       color: "#ffffff",
     },
     optionButton: {
-      backgroundColor: "#6C6CF4",
+      backgroundColor: buttonBackgroundColor,
       padding: 10,
       width: "80%",
       justifyContent: "center",
@@ -57,17 +64,11 @@ const TransactionsScreenStyles = (isDarkMode) => {
       alignItems: "center",
       marginBottom: 10,
     },
-    centeredView: {
-      flex: 1,
-      justifyContent: "center", // 内容居中
-      alignItems: "center", // 内容居中
-      backgroundColor: "rgba(0, 0, 0, 0.5)", // 半透明背景
-    },
     submitButtonText: {
-      color: "#ffffff", // 白色文字
+      color: "#ffffff",
     },
     input: {
-      backgroundColor: "#1A1A37",
+      backgroundColor: inputBackgroundColor,
       padding: 10,
       marginTop: 30,
       marginBottom: 60,
@@ -76,30 +77,18 @@ const TransactionsScreenStyles = (isDarkMode) => {
       height: 60,
       alignItems: "center",
     },
-    modalTitle: {
-      color: "#ffffff", // 白色文字
-      fontSize: 18, // 字体大小为18
-      fontWeight: "bold", // 字体加粗
-      marginBottom: 15, // 与下一个元素间距15
-    },
-    centeredView: {
-      flex: 1,
-      justifyContent: "center", // 内容居中
-      alignItems: "center", // 内容居中
-      backgroundColor: "rgba(0, 0, 0, 0.5)", // 半透明背景
-    },
     historyItemText: {
       fontSize: 16,
-      color: "#000", // 根据你的主题调整
+      color: textColor,
     },
     historyItem: {
       padding: 10,
       borderBottomWidth: 1,
-      borderBottomColor: "#ccc", // 根据你的主题调整
+      borderBottomColor: historyItemBorderColor,
     },
     noHistoryText: {
       fontSize: 16,
-      color: "#ffffff", // 白色文字
+      color: "#ffffff",
       textAlign: "center",
     },
     historyTitle: {
@@ -107,43 +96,43 @@ const TransactionsScreenStyles = (isDarkMode) => {
       left: 20,
       top: 20,
       fontSize: 18,
-      color: "#ffffff", // 白色文字
+      color: "#ffffff",
     },
     historyContainer: {
       marginTop: 20,
       padding: 20,
-      backgroundColor: "#24234C", // 深灰色背景
+      backgroundColor: historyContainerBackgroundColor,
       alignItems: "center",
       justifyContent: "center",
       borderRadius: 10,
       height: 360,
     },
     subButtonText: {
-      color: "#e0e0e0", // 浅灰色文字
-      fontSize: 12, // 字体大小为12
+      color: "#e0e0e0",
+      fontSize: 12,
     },
     buttonText: {
-      color: "#e0e0e0", // 浅灰色文字
-      fontSize: 16, // 文字大小为16
-      fontWeight: "bold", // 文字加粗
+      color: "#e0e0e0",
+      fontSize: 16,
+      fontWeight: "bold",
     },
     roundButton: {
-      backgroundColor: "#484692", // 按钮背景为灰色
-      borderRadius: 30, // 圆角为30
-      paddingVertical: 10, // 垂直内边距为10
-      paddingHorizontal: 20, // 水平内边距为20
+      backgroundColor: modalBackgroundColor,
+      borderRadius: 30,
+      paddingVertical: 10,
+      paddingHorizontal: 20,
       width: "100%",
       height: 60,
-      alignItems: "center", // 文本居中对齐
-      justifyContent: "center", // 文本居中对齐
-      marginBottom: 20, // 与下一个元素间距20
+      alignItems: "center",
+      justifyContent: "center",
+      marginBottom: 20,
     },
     container: {
       flex: 1,
-      backgroundColor: "#121212", // 深灰色背景，适用于暗模式
-      alignItems: "center", // 子元素沿着主轴（即垂直轴）居中对齐
-      justifyContent: "center", // 子元素沿着交叉轴（即水平轴）居中对齐
-      padding: 20, // 内边距为20
+      backgroundColor: backgroundColor,
+      alignItems: "center",
+      justifyContent: "center",
+      padding: 20,
     },
   });
 };

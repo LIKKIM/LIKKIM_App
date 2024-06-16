@@ -9,7 +9,6 @@ import {
   ScrollView,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import styles, { lightTheme, darkTheme } from "../styles";
 import { BlurView } from "expo-blur";
 import QRCode from "react-native-qrcode-svg";
 import { useTranslation } from "react-i18next";
@@ -17,10 +16,11 @@ import { CryptoContext, DarkModeContext } from "./CryptoContext";
 import TransactionsScreenStyles from "../styles/TransactionsScreenStyle";
 
 function TransactionsScreen() {
-  const TransactionsScreenStyle = TransactionsScreenStyles(isDarkMode);
   const { t } = useTranslation();
   const { isDarkMode } = useContext(DarkModeContext);
   const { addedCryptos } = useContext(CryptoContext);
+  const TransactionsScreenStyle = TransactionsScreenStyles(isDarkMode);
+
   const [modalVisible, setModalVisible] = useState(false);
   const [addressModalVisible, setAddressModalVisible] = useState(false);
   const [operationType, setOperationType] = useState("");
@@ -60,33 +60,42 @@ function TransactionsScreen() {
   return (
     <LinearGradient
       colors={isDarkMode ? darkColors : lightColors}
-      style={styles.container}
+      style={TransactionsScreenStyle.container}
     >
       <View className="w-[100%]">
-        <TouchableOpacity style={styles.roundButton} onPress={handleSendPress}>
-          <Text style={styles.buttonText}>{t("Send")}</Text>
-          <Text style={styles.subButtonText}>
+        <TouchableOpacity
+          style={TransactionsScreenStyle.roundButton}
+          onPress={handleSendPress}
+        >
+          <Text style={TransactionsScreenStyle.buttonText}>{t("Send")}</Text>
+          <Text style={TransactionsScreenStyle.subButtonText}>
             {t("Send crypto to another wallet")}
           </Text>
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={styles.roundButton}
+          style={TransactionsScreenStyle.roundButton}
           onPress={handleReceivePress}
         >
-          <Text style={styles.buttonText}>{t("Receive")}</Text>
-          <Text style={styles.subButtonText}>
+          <Text style={TransactionsScreenStyle.buttonText}>{t("Receive")}</Text>
+          <Text style={TransactionsScreenStyle.subButtonText}>
             {t("Receive crypto from another wallet")}
           </Text>
         </TouchableOpacity>
-        <View style={styles.historyContainer}>
-          <Text style={styles.historyTitle}>{t("Transaction History")}</Text>
+        <View style={TransactionsScreenStyle.historyContainer}>
+          <Text style={TransactionsScreenStyle.historyTitle}>
+            {t("Transaction History")}
+          </Text>
           {transactionHistory.length === 0 ? (
-            <Text style={styles.noHistoryText}>{t("No Histories")}</Text>
+            <Text style={TransactionsScreenStyle.noHistoryText}>
+              {t("No Histories")}
+            </Text>
           ) : (
             transactionHistory.map((transaction, index) => (
-              <View key={index} style={styles.historyItem}>
-                <Text style={styles.historyItemText}>{transaction.detail}</Text>
+              <View key={index} style={TransactionsScreenStyle.historyItem}>
+                <Text style={TransactionsScreenStyle.historyItemText}>
+                  {transaction.detail}
+                </Text>
               </View>
             ))
           )}
@@ -98,71 +107,39 @@ function TransactionsScreen() {
           visible={inputAddressModalVisible}
           onRequestClose={() => setInputAddressModalVisible(false)}
         >
-          <BlurView intensity={10} style={styles.centeredView}>
-            <View
-              style={{
-                margin: 20,
-                height: 450,
-                display: "flex",
-                backgroundColor: "#484692",
-                borderRadius: 20,
-                padding: 35,
-                width: "80%",
-                alignItems: "center",
-                shadowColor: "#000",
-                shadowOffset: { width: 0, height: 2 },
-                shadowOpacity: 0.25,
-                shadowRadius: 3.84,
-                elevation: 5,
-              }}
-            >
-              <Text style={styles.modalTitle}>
+          <BlurView intensity={10} style={TransactionsScreenStyle.centeredView}>
+            <View style={TransactionsScreenStyle.modalView}>
+              <Text style={TransactionsScreenStyle.modalTitle}>
                 {t("Enter the recipient's address:")}
               </Text>
 
-              <View
-                style={{
-                  width: "100%",
-                }}
-              >
+              <View style={{ width: "100%" }}>
                 <TextInput
-                  style={[styles.input, { color: "#ffffff" }]}
+                  style={[TransactionsScreenStyle.input, { color: "#ffffff" }]}
                   placeholder={t("Enter Address")}
                   placeholderTextColor="#ffffff"
                   onChangeText={(text) => setInputAddress(text)}
                   value={inputAddress}
                 />
                 <TouchableOpacity
-                  style={{
-                    backgroundColor: "#6C6CF4",
-                    padding: 10,
-                    marginBottom: 10,
-                    justifyContent: "center",
-                    borderRadius: 30,
-                    height: 60,
-                    alignItems: "center",
-                  }}
+                  style={TransactionsScreenStyle.optionButton}
                   onPress={() => {
                     console.log(`Sending ${selectedCrypto} to ${inputAddress}`);
                     setInputAddressModalVisible(false);
                     // Implement the logic to send crypto to the input address
                   }}
                 >
-                  <Text style={styles.submitButtonText}>{t("Submit")}</Text>
+                  <Text style={TransactionsScreenStyle.submitButtonText}>
+                    {t("Submit")}
+                  </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  style={{
-                    backgroundColor: "#6C6CF4",
-                    padding: 10,
-
-                    justifyContent: "center",
-                    borderRadius: 30,
-                    height: 60,
-                    alignItems: "center",
-                  }}
+                  style={TransactionsScreenStyle.optionButton}
                   onPress={() => setInputAddressModalVisible(false)}
                 >
-                  <Text style={styles.cancelButtonText}>{t("Cancel")}</Text>
+                  <Text style={TransactionsScreenStyle.cancelButtonText}>
+                    {t("Cancel")}
+                  </Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -176,13 +153,13 @@ function TransactionsScreen() {
           visible={modalVisible}
           onRequestClose={() => setModalVisible(false)}
         >
-          <BlurView intensity={10} style={styles.centeredView}>
-            <View style={styles.modalView}>
+          <BlurView intensity={10} style={TransactionsScreenStyle.centeredView}>
+            <View style={TransactionsScreenStyle.modalView}>
               <Text
                 style={{
-                  color: "#ffffff", // 白色文字
-                  textAlign: "center", // 文本居中对齐
-                  marginBottom: 30, // 与下一个元素间距
+                  color: "#ffffff",
+                  textAlign: "center",
+                  marginBottom: 30,
                 }}
               >
                 {operationType === "send"
@@ -206,15 +183,15 @@ function TransactionsScreen() {
               ) : (
                 <ScrollView
                   contentContainerStyle={{ alignItems: "center" }}
-                  style={{ maxHeight: 400, width: 280 }} // 限制弹窗的最大高度
+                  style={{ maxHeight: 400, width: 280 }}
                 >
                   {addedCryptos.map((crypto) => (
                     <TouchableOpacity
                       key={crypto.shortName}
-                      style={styles.optionButton}
+                      style={TransactionsScreenStyle.optionButton}
                       onPress={() => selectCrypto(crypto)}
                     >
-                      <Text style={styles.optionButtonText}>
+                      <Text style={TransactionsScreenStyle.optionButtonText}>
                         {crypto.shortName}
                       </Text>
                     </TouchableOpacity>
@@ -222,19 +199,12 @@ function TransactionsScreen() {
                 </ScrollView>
               )}
               <TouchableOpacity
-                style={{
-                  backgroundColor: "#6C6CF4",
-                  padding: 10,
-                  width: "80%",
-                  justifyContent: "center",
-                  borderRadius: 30,
-                  height: 60,
-                  alignItems: "center",
-                  marginTop: 20, // 与上一个元素间距
-                }}
+                style={TransactionsScreenStyle.optionButton}
                 onPress={() => setModalVisible(false)}
               >
-                <Text style={styles.cancelButtonText}>{t("Cancel")}</Text>
+                <Text style={TransactionsScreenStyle.cancelButtonText}>
+                  {t("Cancel")}
+                </Text>
               </TouchableOpacity>
             </View>
           </BlurView>
@@ -247,9 +217,9 @@ function TransactionsScreen() {
           visible={addressModalVisible}
           onRequestClose={() => setAddressModalVisible(false)}
         >
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <Text style={styles.modalTitle}>
+          <View style={TransactionsScreenStyle.centeredView}>
+            <View style={TransactionsScreenStyle.modalView}>
+              <Text style={TransactionsScreenStyle.modalTitle}>
                 {t("Address for")} {selectedCrypto}:
               </Text>
               <Text
@@ -274,10 +244,12 @@ function TransactionsScreen() {
                 <QRCode value={selectedAddress} size={200} />
               </View>
               <TouchableOpacity
-                style={styles.cancelButton}
+                style={TransactionsScreenStyle.cancelButton}
                 onPress={() => setAddressModalVisible(false)}
               >
-                <Text style={styles.cancelButtonText}>{t("Close")}</Text>
+                <Text style={TransactionsScreenStyle.cancelButtonText}>
+                  {t("Close")}
+                </Text>
               </TouchableOpacity>
             </View>
           </View>
