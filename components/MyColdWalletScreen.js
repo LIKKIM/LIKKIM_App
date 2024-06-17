@@ -239,7 +239,7 @@ function MyColdWalletScreen() {
                   color={iconColor}
                   style={MyColdWalletScreenStyle.Icon}
                 />
-                <Text style={[MyColdWalletScreenStyle.buttonText, { flex: 1 }]}>
+                <Text style={[MyColdWalletScreenStyle.Text, { flex: 1 }]}>
                   {option.title}
                 </Text>
                 {option.selectedOption && (

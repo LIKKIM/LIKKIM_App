@@ -18,7 +18,7 @@ export const lightTheme = StyleSheet.create({
   },
 
   headerStyle: {
-    backgroundColor: "#ddd",
+    backgroundColor: "#fff",
   },
   headerRight: {
     backgroundColor: "#ddd",

@@ -4,8 +4,8 @@ import { StyleSheet } from "react-native";
 const TransactionsScreenStyles = (isDarkMode) => {
   const textColor = isDarkMode ? "#fff" : "#000";
   const backgroundColor = isDarkMode ? "#121212" : "#f5f5f5";
-  const modalBackgroundColor = isDarkMode ? "#484692" : "#ddd";
-  const buttonBackgroundColor = isDarkMode ? "#6C6CF4" : "#bbb";
+  const modalBackgroundColor = isDarkMode ? "#484692" : "#fff";
+  const buttonBackgroundColor = isDarkMode ? "#6C6CF4" : "#E5E1E9";
   const inputBackgroundColor = isDarkMode ? "#1A1A37" : "#e0e0e0";
   const historyItemBorderColor = isDarkMode ? "#ccc" : "#999";
   const historyContainerBackgroundColor = isDarkMode ? "#24234C" : "#e0e0e0";
@@ -39,11 +39,6 @@ const TransactionsScreenStyles = (isDarkMode) => {
       borderRadius: 20,
       padding: 35,
       alignItems: "center",
-      shadowColor: "#000",
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.25,
-      shadowRadius: 3.84,
-      elevation: 5,
     },
     centeredView: {
       flex: 1,
@@ -117,7 +112,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       fontWeight: "bold",
     },
     roundButton: {
-      backgroundColor: modalBackgroundColor,
+      backgroundColor: buttonBackgroundColor,
       borderRadius: 30,
       paddingVertical: 10,
       paddingHorizontal: 20,

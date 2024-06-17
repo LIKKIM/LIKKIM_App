@@ -28,7 +28,7 @@ function TransactionsScreen() {
   const [selectedAddress, setSelectedAddress] = useState("");
   const iconColor = isDarkMode ? "#ffffff" : "#24234C";
   const darkColors = ["#24234C", "#101021"];
-  const lightColors = ["#FFFFFF", "#E0E0E0"];
+  const lightColors = ["#FFFFFF", "#EDEBEF"];
   const [inputAddress, setInputAddress] = useState("");
   const [transactionHistory, setTransactionHistory] = useState([]);
   const [inputAddressModalVisible, setInputAddressModalVisible] =

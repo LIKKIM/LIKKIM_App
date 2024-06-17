@@ -138,7 +138,7 @@ const initialAdditionalCryptos = [
 
 export const CryptoProvider = ({ children }) => {
   const [cryptoCount, setCryptoCount] = useState(0); // 初始为0
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const [currencyUnit, setCurrencyUnit] = useState("USD");
   const [additionalCryptos, setAdditionalCryptos] = useState(
     initialAdditionalCryptos
