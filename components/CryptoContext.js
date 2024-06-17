@@ -135,7 +135,14 @@ const initialAdditionalCryptos = [
     address: "D7Y55N4sFCw4KceCczPS3KhNWZ6o7pTPkd",
   },
 ];
-
+export const usdtCrypto = {
+  name: "USDT",
+  shortName: "USDT",
+  balance: "2.0",
+  icon: require("../assets/USDTIcon.png"),
+  cardImage: require("../assets/Card43.png"),
+  address: "1KAt6STtisWMMVo5XGdos9P7DBNNsFfjx7",
+};
 export const CryptoProvider = ({ children }) => {
   const [cryptoCount, setCryptoCount] = useState(0); // 初始为0
   const [isDarkMode, setIsDarkMode] = useState(false);

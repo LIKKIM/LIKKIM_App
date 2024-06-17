@@ -13,7 +13,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import styles, { lightTheme, darkTheme } from "../styles";
 import WalletScreenStyles from "../styles/WalletScreenStyle";
 import { BlurView } from "expo-blur";
-import { CryptoContext, DarkModeContext } from "./CryptoContext";
+import { CryptoContext, DarkModeContext, usdtCrypto } from "./CryptoContext";
 import { useTranslation } from "react-i18next";
 
 function WalletScreen({ route }) {
@@ -44,6 +44,12 @@ function WalletScreen({ route }) {
   const iconColor = isDarkMode ? "#ffffff" : "#24234C";
   const darkColors = ["#24234C", "#101021"];
   const lightColors = ["#FFFFFF", "#EDEBEF"];
+
+  const addDefaultUSDT = () => {
+    if (cryptoCards.length === 0) {
+      handleAddCrypto(usdtCrypto);
+    }
+  };
 
   const handleDeleteCard = () => {
     const updatedCards = cryptoCards.filter(
@@ -350,7 +356,10 @@ function WalletScreen({ route }) {
         animationType="slide"
         transparent={true}
         visible={addCryptoVisible}
-        onRequestClose={() => setAddCryptoVisible(false)}
+        onRequestClose={() => {
+          setAddCryptoVisible(false);
+          addDefaultUSDT();
+        }}
       >
         <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
           <View style={WalletScreenStyle.addCryptoModalView}>
@@ -385,7 +394,10 @@ function WalletScreen({ route }) {
             </ScrollView>
             <TouchableOpacity
               style={WalletScreenStyle.cancelButton}
-              onPress={() => setAddCryptoVisible(false)}
+              onPress={() => {
+                setAddCryptoVisible(false);
+                addDefaultUSDT();
+              }}
             >
               <Text style={WalletScreenStyle.cancelButtonText}>
                 {t("Close")}
