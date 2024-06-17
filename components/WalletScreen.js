@@ -281,11 +281,26 @@ function WalletScreen({ route }) {
       >
         <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
           <View style={WalletScreenStyle.modalView}>
-            <Text style={WalletScreenStyle.ButtonText}>
-              {t("This is a tip message.")}
+            <Text style={WalletScreenStyle.alertModalTitle}>
+              {t("Recovery Phrase")}
+            </Text>
+            <Text style={WalletScreenStyle.alertModalSubtitle}>
+              {t("Read the following, then save the phrase securely.")}
+            </Text>
+            <Text style={WalletScreenStyle.alertModalContent}>
+              {`🔑  ${t(
+                "The recovery phrase alone gives you full access to your wallets and funds."
+              )}\n\n`}
+              {`🔒  ${t(
+                "If you forget your password, you can use the recovery phrase to get back into your wallet."
+              )}\n\n`}
+              {`🚫  ${t(
+                "LIKKIM will never ask for your recovery phrase."
+              )}\n\n`}
+              {`🤫  ${t("Never share it with anyone.")}`}
             </Text>
             <TouchableOpacity
-              style={WalletScreenStyle.modalButton}
+              style={WalletScreenStyle.alertModalButton}
               onPress={handleContinue}
             >
               <Text style={WalletScreenStyle.ButtonText}>{t("Continue")}</Text>

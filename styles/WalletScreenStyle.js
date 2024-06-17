@@ -172,7 +172,7 @@ const WalletScreenStyles = (isDarkMode) => {
     processModalView: {
       margin: 20,
       width: "80%",
-      height: 300,
+      height: 400,
       backgroundColor: modalBackgroundColor,
       borderRadius: 20,
       padding: 35,
@@ -188,6 +188,16 @@ const WalletScreenStyles = (isDarkMode) => {
       alignItems: "center",
       marginBottom: 20,
     },
+    alertModalButton: {
+      backgroundColor: buttonBackgroundColor,
+      padding: 10,
+      width: "100%",
+      justifyContent: "center",
+      borderRadius: 30,
+      height: 60,
+      alignItems: "center",
+      marginTop: 20,
+    },
     ButtonText: {
       color: textColor,
       fontSize: 18,
@@ -195,7 +205,7 @@ const WalletScreenStyles = (isDarkMode) => {
     processButtonText: {
       color: secondTextColor,
       fontSize: 18,
-      marginBottom: 20,
+      marginBottom: 45,
       fontWeight: "bold",
     },
     cancelButtonText: {
@@ -268,6 +278,22 @@ const WalletScreenStyles = (isDarkMode) => {
     modalTitle: {
       color: textColor,
       fontSize: 18,
+      fontWeight: "bold",
+    },
+    alertModalTitle: {
+      color: textColor,
+      fontSize: 18,
+      fontWeight: "bold",
+      marginBottom: 10,
+    },
+    alertModalSubtitle: {
+      color: secondTextColor,
+      fontSize: 14,
+      marginBottom: 20,
+    },
+    alertModalContent: {
+      color: secondTextColor,
+      fontSize: 16,
       fontWeight: "bold",
     },
     dropdown: {
