@@ -3,12 +3,14 @@ import { StyleSheet } from "react-native";
 
 const WalletScreenStyles = (isDarkMode) => {
   const textColor = isDarkMode ? "#fff" : "#000";
+  const secondTextColor = isDarkMode ? "#ddd" : "#676776";
+  const secondCardTextColor = isDarkMode ? "#ddd" : "#ddd";
   const backgroundColor = isDarkMode ? "#121212" : "#f5f5f5";
   const modalBackgroundColor = isDarkMode ? "#24234C" : "#ffffff";
   const buttonBackgroundColor = isDarkMode ? "#6C6CF4" : "#E5E1E9";
   const shadowColor = isDarkMode ? "#101021" : "#000";
   const cardBackgroundColor = isDarkMode ? "#484692" : "#E5E1E9";
-  const currencyUnitColor = isDarkMode ? "#ccc" : "#666";
+  const currencyUnitColor = isDarkMode ? "#ddd" : "#666";
   const addCryptoButtonBackgroundColor = isDarkMode ? "#1E1D3F" : "#E5E1E9";
 
   return StyleSheet.create({
@@ -34,7 +36,7 @@ const WalletScreenStyles = (isDarkMode) => {
     totalBalanceText: {
       fontSize: 18,
       marginVertical: 10,
-      color: textColor,
+      color: secondTextColor,
       textAlign: "left",
     },
     totalBalanceAmount: {
@@ -97,7 +99,7 @@ const WalletScreenStyles = (isDarkMode) => {
       position: "absolute",
       top: 60,
       left: 60,
-      color: "#fff",
+      color: secondCardTextColor,
       fontSize: 14,
     },
     cardBalance: {

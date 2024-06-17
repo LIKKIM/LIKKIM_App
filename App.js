@@ -34,6 +34,10 @@ export default function App() {
             const headerTitleColor = isDarkMode ? "#ffffff" : "#333333"; // 根据模式设置标题颜色
             const tabBarBackgroundColor = isDarkMode ? "#23224D" : "#fff"; // 根据模式设置底部tab栏背景颜色
             const bottomBackgroundColor = isDarkMode ? "#101021" : "#E0E0E0"; // 底部背景颜色根据模式变化
+            const iconColor = isDarkMode ? "#ffffff" : "#000000";
+            const addIconButtonStyle = isDarkMode
+              ? [styles.addIconButtonCommon, styles.addIconButton]
+              : [styles.addIconButtonCommon, styles.addIconButton];
 
             return (
               <View style={{ flex: 1, backgroundColor: bottomBackgroundColor }}>
@@ -121,17 +125,9 @@ export default function App() {
                                   showAddModal: true,
                                 })
                               }
-                              style={{
-                                marginRight: 16,
-                                borderRadius: 14,
-                                width: 28,
-                                height: 28,
-                                justifyContent: "center",
-                                alignItems: "center",
-                                backgroundColor: "#24234C",
-                              }}
+                              style={addIconButtonStyle}
                             >
-                              <Icon name="add" size={24} color="#ffffff" />
+                              <Icon name="add" size={24} color={iconColor} />
                             </TouchableOpacity>
                           ) : null;
                         },

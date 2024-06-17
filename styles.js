@@ -23,7 +23,9 @@ export const lightTheme = StyleSheet.create({
   headerRight: {
     backgroundColor: "#ddd",
   },
-
+  addIconButton: {
+    backgroundColor: "#fff",
+  },
   // 更多的样式定义...
 });
 
@@ -49,12 +51,22 @@ export const darkTheme = StyleSheet.create({
   headerRight: {
     backgroundColor: "#24234C",
   },
-
+  addIconButton: {
+    backgroundColor: "#24234C",
+  },
   // 更多的样式定义...
 });
 
 // 使用StyleSheet创建并导出应用的样式
 const styles = StyleSheet.create({
+  addIconButtonCommon: {
+    marginRight: 16,
+    borderRadius: 14,
+    width: 28,
+    height: 28,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   scrollView: {
     width: "100%",
   },

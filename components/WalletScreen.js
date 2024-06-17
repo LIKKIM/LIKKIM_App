@@ -137,7 +137,7 @@ function WalletScreen({ route }) {
             source={
               isDarkMode
                 ? require("../assets/AddWallet.png")
-                : require("../assets/Card48.png")
+                : require("../assets/Card22.png")
             }
             style={WalletScreenStyle.addWalletImage}
             imageStyle={WalletScreenStyle.addWalletImageBorder}

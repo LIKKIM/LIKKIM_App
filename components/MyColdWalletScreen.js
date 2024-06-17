@@ -48,7 +48,7 @@ function MyColdWalletScreen() {
   const isScanningRef = useRef(false);
   const [isScanning, setIsScanning] = useState(false);
   const restoreIdentifier = Constants.installationId;
-  const iconColor = isDarkMode ? "#ffffff" : "#24234C";
+  const iconColor = isDarkMode ? "#ffffff" : "#676776";
   const darkColors = ["#24234C", "#101021"];
   const lightColors = ["#FFFFFF", "#EDEBEF"];
   const languages = [
@@ -468,7 +468,7 @@ function MyColdWalletScreen() {
                 style={MyColdWalletScreenStyle.roundButton}
                 onPress={handleBluetoothPairing}
               >
-                <Text style={MyColdWalletScreenStyle.buttonText}>
+                <Text style={MyColdWalletScreenStyle.BluetoothBtnText}>
                   {t("Pair with Bluetooth")}
                 </Text>
               </TouchableOpacity>

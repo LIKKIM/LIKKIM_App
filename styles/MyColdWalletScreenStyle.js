@@ -7,6 +7,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
   const modalBackgroundColor = isDarkMode ? "#484692" : "#ffffff";
   const buttonBackgroundColor = isDarkMode ? "#6C6CF4" : "#E5E1E9";
   const borderColor = isDarkMode ? "#404040" : "#ccc";
+  const BluetoothBtnColor = isDarkMode ? "#484692" : "#8E80F0";
 
   return StyleSheet.create({
     cancelButtonText: {
@@ -47,8 +48,12 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       color: textColor,
       fontSize: 16,
     },
+    BluetoothBtnText: {
+      color: "#fff",
+      fontSize: 16,
+    },
     roundButton: {
-      backgroundColor: modalBackgroundColor,
+      backgroundColor: BluetoothBtnColor,
       borderRadius: 30,
       paddingVertical: 10,
       paddingHorizontal: 20,

@@ -9,7 +9,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
   const inputBackgroundColor = isDarkMode ? "#1A1A37" : "#e0e0e0";
   const historyItemBorderColor = isDarkMode ? "#ccc" : "#999";
   const historyContainerBackgroundColor = isDarkMode ? "#24234C" : "#FFF";
-
+  const secondTextColor = isDarkMode ? "#ddd" : "#676776";
   return StyleSheet.create({
     cancelButtonText: {
       color: textColor, // 白色文字
@@ -83,7 +83,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
     },
     noHistoryText: {
       fontSize: 16,
-      color: textColor,
+      color: secondTextColor,
       textAlign: "center",
     },
     historyTitle: {
@@ -104,13 +104,14 @@ const TransactionsScreenStyles = (isDarkMode) => {
       height: 360,
     },
     subButtonText: {
-      color: textColor,
+      color: secondTextColor,
       fontSize: 12,
     },
     buttonText: {
       color: textColor,
       fontSize: 16,
       fontWeight: "bold",
+      marginBottom: 2,
     },
     roundButton: {
       backgroundColor: buttonBackgroundColor,
@@ -130,8 +131,9 @@ const TransactionsScreenStyles = (isDarkMode) => {
       justifyContent: "center",
       padding: 20,
     },
-    modalText: { color: textColor, textAlign: "center" },
+    modalText: { color: secondTextColor, textAlign: "center" },
     TransactionModalTitle: {
+      fontSize: 18,
       color: textColor,
       textAlign: "center",
       marginBottom: 30,
