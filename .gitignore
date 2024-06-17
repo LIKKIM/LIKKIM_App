@@ -74,3 +74,9 @@ yarn-error.*
 *.tsbuildinfo
 
 # @end expo-cli
+
+
+
+# 同步构建后的安装文件
+/android/app/build/
+/android/app/release/
