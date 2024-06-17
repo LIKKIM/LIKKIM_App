@@ -169,6 +169,15 @@ const WalletScreenStyles = (isDarkMode) => {
       padding: 35,
       alignItems: "center",
     },
+    processModalView: {
+      margin: 20,
+      width: "80%",
+      height: 300,
+      backgroundColor: modalBackgroundColor,
+      borderRadius: 20,
+      padding: 35,
+      alignItems: "center",
+    },
     modalButton: {
       backgroundColor: buttonBackgroundColor,
       padding: 10,
@@ -182,6 +191,12 @@ const WalletScreenStyles = (isDarkMode) => {
     ButtonText: {
       color: textColor,
       fontSize: 18,
+    },
+    processButtonText: {
+      color: secondTextColor,
+      fontSize: 18,
+      marginBottom: 20,
+      fontWeight: "bold",
     },
     cancelButtonText: {
       color: secondTextColor,

@@ -37,6 +37,7 @@ function WalletScreen({ route }) {
   const [selectedCardName, setSelectedCardName] = useState(null);
   const [addIconModalVisible, setAddIconModalVisible] = useState(false);
   const [addWalletModalVisible, setAddWalletModalVisible] = useState(false);
+  const [processModalVisible, setProcessModalVisible] = useState(false);
   const [cryptoCards, setCryptoCards] = useState([]);
   const scrollViewRef = useRef();
   const iconColor = isDarkMode ? "#ffffff" : "#24234C";
@@ -95,13 +96,18 @@ function WalletScreen({ route }) {
   };
 
   const handleCreateWallet = () => {
-    setAddCryptoVisible(true);
-    setAddWalletModalVisible(false);
+    setAddWalletModalVisible(false); // 关闭 addWalletModal
+    setProcessModalVisible(true); // 显示 processModal
   };
 
   const handleImportWallet = () => {
-    setAddCryptoVisible(true);
-    setAddWalletModalVisible(false);
+    setAddWalletModalVisible(false); // 关闭 addWalletModal
+    setProcessModalVisible(true); // 显示 processModal
+  };
+
+  const handleLetsGo = () => {
+    setProcessModalVisible(false);
+    setAddCryptoVisible(true); // 显示 addCryptoModal
   };
 
   const calculateTotalBalance = () => {
@@ -109,6 +115,44 @@ function WalletScreen({ route }) {
       .reduce((total, card) => total + parseFloat(card.balance), 0)
       .toFixed(2);
   };
+
+  // 处理Process Modal的消息显示逻辑
+  const [processMessages, setProcessMessages] = useState([]);
+  const [showLetsGoButton, setShowLetsGoButton] = useState(false);
+
+  useEffect(() => {
+    if (processModalVisible) {
+      setShowLetsGoButton(false);
+      setProcessMessages([t("Creating your wallet")]);
+      const timer1 = setTimeout(() => {
+        setProcessMessages((prevMessages) => [
+          ...prevMessages,
+          t("Generating your accounts"),
+        ]);
+      }, 1000);
+      const timer2 = setTimeout(() => {
+        setProcessMessages((prevMessages) => [
+          ...prevMessages,
+          t("Encrypting your data"),
+        ]);
+      }, 2000);
+      const timer3 = setTimeout(() => {
+        setProcessMessages((prevMessages) => [
+          ...prevMessages,
+          t("Your wallet is now ready"),
+        ]);
+      }, 3000);
+      const timer4 = setTimeout(() => {
+        setShowLetsGoButton(true);
+      }, 4000);
+      return () => {
+        clearTimeout(timer1);
+        clearTimeout(timer2);
+        clearTimeout(timer3);
+        clearTimeout(timer4);
+      };
+    }
+  }, [processModalVisible, t]);
 
   return (
     <LinearGradient
@@ -143,7 +187,7 @@ function WalletScreen({ route }) {
             imageStyle={WalletScreenStyle.addWalletImageBorder}
           >
             <TouchableOpacity
-              onPress={() => setAddWalletModalVisible(true)}
+              onPress={() => setAddWalletModalVisible(true)} // 显示 addWalletModal
               style={WalletScreenStyle.addWalletButton}
             >
               <Text style={WalletScreenStyle.addWalletButtonText}>
@@ -185,6 +229,7 @@ function WalletScreen({ route }) {
         ))}
       </ScrollView>
 
+      {/* Add Wallet Modal */}
       <Modal
         animationType="slide"
         transparent={true}
@@ -221,6 +266,35 @@ function WalletScreen({ route }) {
         </BlurView>
       </Modal>
 
+      {/* Process Modal */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={processModalVisible}
+        onRequestClose={() => setProcessModalVisible(false)}
+      >
+        <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
+          <View style={WalletScreenStyle.processModalView}>
+            {processMessages.map((message, index) => (
+              <Text key={index} style={WalletScreenStyle.processButtonText}>
+                {message}
+              </Text>
+            ))}
+            {showLetsGoButton && (
+              <TouchableOpacity
+                style={WalletScreenStyle.modalButton}
+                onPress={handleLetsGo}
+              >
+                <Text style={WalletScreenStyle.ButtonText}>
+                  {t("Let's Go")}
+                </Text>
+              </TouchableOpacity>
+            )}
+          </View>
+        </BlurView>
+      </Modal>
+
+      {/* Add Crypto Modal */}
       <Modal
         animationType="slide"
         transparent={true}
