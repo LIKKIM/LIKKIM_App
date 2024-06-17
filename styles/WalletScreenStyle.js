@@ -7,9 +7,9 @@ const WalletScreenStyles = (isDarkMode) => {
   const modalBackgroundColor = isDarkMode ? "#24234C" : "#ffffff";
   const buttonBackgroundColor = isDarkMode ? "#6C6CF4" : "#E5E1E9";
   const shadowColor = isDarkMode ? "#101021" : "#000";
-  const cardBackgroundColor = isDarkMode ? "#484692" : "#e0e0e0";
+  const cardBackgroundColor = isDarkMode ? "#484692" : "#E5E1E9";
   const currencyUnitColor = isDarkMode ? "#ccc" : "#666";
-  const addCryptoButtonBackgroundColor = isDarkMode ? "#1E1D3F" : "#e0e0e0";
+  const addCryptoButtonBackgroundColor = isDarkMode ? "#1E1D3F" : "#E5E1E9";
 
   return StyleSheet.create({
     linearGradient: {
@@ -206,7 +206,7 @@ const WalletScreenStyles = (isDarkMode) => {
       alignItems: "center",
     },
     addCryptoImageText: {
-      color: textColor,
+      color: "#fff",
       fontWeight: "bold",
     },
     addCryptoText: {
