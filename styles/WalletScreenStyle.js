@@ -221,6 +221,15 @@ const WalletScreenStyles = (isDarkMode) => {
       width: 30, // adjust size as needed
       height: 30, // adjust size as needed
     },
+    overlay: {
+      ...StyleSheet.absoluteFillObject,
+      backgroundColor: "rgba(108, 108, 244, 0.1)",
+    },
+    addCryptoOverlay: {
+      ...StyleSheet.absoluteFillObject,
+      backgroundColor: "rgba(0, 0, 0, 0.15)", // 黑色半透明
+      borderRadius: 12, // 确保与ImageBackground的borderRadius一致
+    },
     addCryptoImageText: {
       marginLeft: 4, // adjust spacing as needed
       color: "#fff",
@@ -291,10 +300,6 @@ const WalletScreenStyles = (isDarkMode) => {
       textAlign: "center",
       fontSize: 40,
       marginBottom: 30,
-    },
-    overlay: {
-      ...StyleSheet.absoluteFillObject,
-      backgroundColor: "rgba(108, 108, 244, 0.1)",
     },
   });
 };

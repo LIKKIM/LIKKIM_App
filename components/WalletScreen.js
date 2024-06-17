@@ -241,6 +241,7 @@ function WalletScreen({ route }) {
                     style={WalletScreenStyle.addCryptoImage}
                     imageStyle={{ borderRadius: 12 }}
                   >
+                    <View style={WalletScreenStyle.addCryptoOverlay} />
                     <View style={WalletScreenStyle.iconAndTextContainer}>
                       <Image
                         source={crypto.icon}
