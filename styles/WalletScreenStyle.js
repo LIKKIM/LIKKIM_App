@@ -11,7 +11,7 @@ const WalletScreenStyles = (isDarkMode) => {
   const shadowColor = isDarkMode ? "#101021" : "#000";
   const cardBackgroundColor = isDarkMode ? "#484692" : "#E5E1E9";
   const currencyUnitColor = isDarkMode ? "#ddd" : "#666";
-  const addCryptoButtonBackgroundColor = isDarkMode ? "#1E1D3F" : "#E5E1E9";
+  const addCryptoButtonBackgroundColor = isDarkMode ? "#1E1D3F" : "#F8F6FE";
 
   return StyleSheet.create({
     linearGradient: {
@@ -134,7 +134,7 @@ const WalletScreenStyles = (isDarkMode) => {
       shadowRadius: 30,
       elevation: 20,
     },
-    cancelButton: {
+    Button: {
       backgroundColor: buttonBackgroundColor,
       padding: 10,
       width: "100%",
@@ -144,6 +144,17 @@ const WalletScreenStyles = (isDarkMode) => {
       alignItems: "center",
       marginTop: 20,
     },
+    cancelButton: {
+      border: `3px solid ${buttonBackgroundColor}`,
+      padding: 10,
+      width: "100%",
+      justifyContent: "center",
+      borderRadius: 30,
+      height: 60,
+      alignItems: "center",
+      marginTop: 20,
+    },
+
     centeredView: {
       flex: 1,
       justifyContent: "center",
@@ -168,8 +179,12 @@ const WalletScreenStyles = (isDarkMode) => {
       alignItems: "center",
       marginBottom: 20,
     },
-    cancelButtonText: {
+    ButtonText: {
       color: textColor,
+      fontSize: 18,
+    },
+    cancelButtonText: {
+      color: secondTextColor,
       fontSize: 18,
     },
     addCryptoModalView: {
@@ -202,12 +217,21 @@ const WalletScreenStyles = (isDarkMode) => {
       justifyContent: "center",
       alignItems: "center",
     },
+    addCardIcon: {
+      width: 30, // adjust size as needed
+      height: 30, // adjust size as needed
+    },
     addCryptoImageText: {
+      marginLeft: 4, // adjust spacing as needed
       color: "#fff",
       fontWeight: "bold",
     },
+    iconAndTextContainer: {
+      flexDirection: "row",
+      alignItems: "center",
+    },
     addCryptoText: {
-      color: textColor,
+      color: secondTextColor,
       fontWeight: "bold",
       marginRight: 30,
     },

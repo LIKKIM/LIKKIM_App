@@ -12,7 +12,8 @@ const TransactionsScreenStyles = (isDarkMode) => {
   const secondTextColor = isDarkMode ? "#ddd" : "#676776";
   return StyleSheet.create({
     cancelButtonText: {
-      color: textColor, // 白色文字
+      color: secondTextColor,
+      fontSize: 18,
     },
     cancelButton: {
       backgroundColor: buttonBackgroundColor,
@@ -51,6 +52,16 @@ const TransactionsScreenStyles = (isDarkMode) => {
     },
     optionButton: {
       backgroundColor: buttonBackgroundColor,
+      padding: 10,
+      width: "100%",
+      justifyContent: "center",
+      borderRadius: 30,
+      height: 60,
+      alignItems: "center",
+      marginBottom: 10,
+    },
+    CancelButton: {
+      border: `3px solid ${buttonBackgroundColor}`,
       padding: 10,
       width: "100%",
       justifyContent: "center",

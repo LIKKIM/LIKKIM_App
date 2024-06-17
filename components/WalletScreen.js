@@ -197,7 +197,7 @@ function WalletScreen({ route }) {
               style={WalletScreenStyle.modalButton}
               onPress={handleCreateWallet}
             >
-              <Text style={WalletScreenStyle.cancelButtonText}>
+              <Text style={WalletScreenStyle.ButtonText}>
                 {t("Create Wallet")}
               </Text>
             </TouchableOpacity>
@@ -205,7 +205,7 @@ function WalletScreen({ route }) {
               style={WalletScreenStyle.modalButton}
               onPress={handleImportWallet}
             >
-              <Text style={WalletScreenStyle.cancelButtonText}>
+              <Text style={WalletScreenStyle.ButtonText}>
                 {t("Import Wallet")}
               </Text>
             </TouchableOpacity>
@@ -241,9 +241,15 @@ function WalletScreen({ route }) {
                     style={WalletScreenStyle.addCryptoImage}
                     imageStyle={{ borderRadius: 12 }}
                   >
-                    <Text style={WalletScreenStyle.addCryptoImageText}>
-                      {crypto.name}
-                    </Text>
+                    <View style={WalletScreenStyle.iconAndTextContainer}>
+                      <Image
+                        source={crypto.icon}
+                        style={WalletScreenStyle.addCardIcon}
+                      />
+                      <Text style={WalletScreenStyle.addCryptoImageText}>
+                        {crypto.shortName}
+                      </Text>
+                    </View>
                   </ImageBackground>
                   <Text style={WalletScreenStyle.addCryptoText}>
                     {crypto.name}
