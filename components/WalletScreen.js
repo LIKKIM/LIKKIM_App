@@ -13,7 +13,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import styles, { lightTheme, darkTheme } from "../styles";
 import WalletScreenStyles from "../styles/WalletScreenStyle";
 import { BlurView } from "expo-blur";
-import { CryptoContext, DarkModeContext } from "./CryptoContext";
+import { CryptoContext, DarkModeContext, usdtCrypto } from "./CryptoContext";
 import { useTranslation } from "react-i18next";
 
 function WalletScreen({ route }) {
@@ -42,8 +42,15 @@ function WalletScreen({ route }) {
   const [cryptoCards, setCryptoCards] = useState([]);
   const scrollViewRef = useRef();
   const iconColor = isDarkMode ? "#ffffff" : "#24234C";
+  const modalIconColor = isDarkMode ? "#ffffff" : "#676776"; // 确定 modal 中 icon 的颜色
   const darkColors = ["#24234C", "#101021"];
   const lightColors = ["#FFFFFF", "#EDEBEF"];
+
+  const addDefaultUSDT = () => {
+    if (cryptoCards.length === 0) {
+      handleAddCrypto(usdtCrypto);
+    }
+  };
 
   const handleDeleteCard = () => {
     const updatedCards = cryptoCards.filter(
@@ -350,7 +357,10 @@ function WalletScreen({ route }) {
         animationType="slide"
         transparent={true}
         visible={addCryptoVisible}
-        onRequestClose={() => setAddCryptoVisible(false)}
+        onRequestClose={() => {
+          setAddCryptoVisible(false);
+          addDefaultUSDT();
+        }}
       >
         <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
           <View style={WalletScreenStyle.addCryptoModalView}>
@@ -385,7 +395,10 @@ function WalletScreen({ route }) {
             </ScrollView>
             <TouchableOpacity
               style={WalletScreenStyle.cancelButton}
-              onPress={() => setAddCryptoVisible(false)}
+              onPress={() => {
+                setAddCryptoVisible(false);
+                addDefaultUSDT();
+              }}
             >
               <Text style={WalletScreenStyle.cancelButtonText}>
                 {t("Close")}
@@ -408,7 +421,8 @@ function WalletScreen({ route }) {
               <TouchableOpacity
                 onPress={() => setDropdownVisible(!dropdownVisible)}
               >
-                <Icon name="settings" size={24} color="#FFF" />
+                <Icon name="settings" size={24} color={modalIconColor} />{" "}
+                {/* 动态设置颜色 */}
               </TouchableOpacity>
             </View>
             {dropdownVisible && (
