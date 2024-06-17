@@ -46,7 +46,6 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
     buttonText: {
       color: textColor,
       fontSize: 16,
-      fontWeight: "bold",
     },
     roundButton: {
       backgroundColor: modalBackgroundColor,
