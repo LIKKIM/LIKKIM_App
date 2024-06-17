@@ -8,7 +8,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
   const buttonBackgroundColor = isDarkMode ? "#6C6CF4" : "#E5E1E9";
   const inputBackgroundColor = isDarkMode ? "#1A1A37" : "#e0e0e0";
   const historyItemBorderColor = isDarkMode ? "#ccc" : "#999";
-  const historyContainerBackgroundColor = isDarkMode ? "#24234C" : "#e0e0e0";
+  const historyContainerBackgroundColor = isDarkMode ? "#24234C" : "#FFF";
 
   return StyleSheet.create({
     cancelButtonText: {
@@ -92,6 +92,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       top: 20,
       fontSize: 18,
       color: textColor,
+      fontWeight: "bold",
     },
     historyContainer: {
       marginTop: 20,
