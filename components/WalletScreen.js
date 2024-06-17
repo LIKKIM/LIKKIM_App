@@ -42,6 +42,7 @@ function WalletScreen({ route }) {
   const [cryptoCards, setCryptoCards] = useState([]);
   const scrollViewRef = useRef();
   const iconColor = isDarkMode ? "#ffffff" : "#24234C";
+  const modalIconColor = isDarkMode ? "#ffffff" : "#676776"; // 确定 modal 中 icon 的颜色
   const darkColors = ["#24234C", "#101021"];
   const lightColors = ["#FFFFFF", "#EDEBEF"];
 
@@ -420,7 +421,8 @@ function WalletScreen({ route }) {
               <TouchableOpacity
                 onPress={() => setDropdownVisible(!dropdownVisible)}
               >
-                <Icon name="settings" size={24} color="#FFF" />
+                <Icon name="settings" size={24} color={modalIconColor} />{" "}
+                {/* 动态设置颜色 */}
               </TouchableOpacity>
             </View>
             {dropdownVisible && (

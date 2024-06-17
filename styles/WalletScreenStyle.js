@@ -130,7 +130,7 @@ const WalletScreenStyles = (isDarkMode) => {
     cardOthers: {
       shadowOffset: { width: 0, height: -10 },
       shadowColor: shadowColor,
-      shadowOpacity: 0.8,
+      shadowOpacity: 0.5,
       shadowRadius: 30,
       elevation: 20,
     },
