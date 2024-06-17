@@ -11,7 +11,7 @@ const WalletScreenStyles = (isDarkMode) => {
   const shadowColor = isDarkMode ? "#101021" : "#000";
   const cardBackgroundColor = isDarkMode ? "#484692" : "#E5E1E9";
   const currencyUnitColor = isDarkMode ? "#ddd" : "#666";
-  const addCryptoButtonBackgroundColor = isDarkMode ? "#1E1D3F" : "#E5E1E9";
+  const addCryptoButtonBackgroundColor = isDarkMode ? "#1E1D3F" : "#F8F6FE";
 
   return StyleSheet.create({
     linearGradient: {
@@ -134,7 +134,7 @@ const WalletScreenStyles = (isDarkMode) => {
       shadowRadius: 30,
       elevation: 20,
     },
-    cancelButton: {
+    Button: {
       backgroundColor: buttonBackgroundColor,
       padding: 10,
       width: "100%",
@@ -144,6 +144,17 @@ const WalletScreenStyles = (isDarkMode) => {
       alignItems: "center",
       marginTop: 20,
     },
+    cancelButton: {
+      border: `3px solid ${buttonBackgroundColor}`,
+      padding: 10,
+      width: "100%",
+      justifyContent: "center",
+      borderRadius: 30,
+      height: 60,
+      alignItems: "center",
+      marginTop: 20,
+    },
+
     centeredView: {
       flex: 1,
       justifyContent: "center",
@@ -153,6 +164,15 @@ const WalletScreenStyles = (isDarkMode) => {
     modalView: {
       margin: 20,
       width: "80%",
+      backgroundColor: modalBackgroundColor,
+      borderRadius: 20,
+      padding: 35,
+      alignItems: "center",
+    },
+    processModalView: {
+      margin: 20,
+      width: "80%",
+      height: 400,
       backgroundColor: modalBackgroundColor,
       borderRadius: 20,
       padding: 35,
@@ -168,8 +188,28 @@ const WalletScreenStyles = (isDarkMode) => {
       alignItems: "center",
       marginBottom: 20,
     },
-    cancelButtonText: {
+    alertModalButton: {
+      backgroundColor: buttonBackgroundColor,
+      padding: 10,
+      width: "100%",
+      justifyContent: "center",
+      borderRadius: 30,
+      height: 60,
+      alignItems: "center",
+      marginTop: 20,
+    },
+    ButtonText: {
       color: textColor,
+      fontSize: 18,
+    },
+    processButtonText: {
+      color: secondTextColor,
+      fontSize: 18,
+      marginBottom: 45,
+      fontWeight: "bold",
+    },
+    cancelButtonText: {
+      color: secondTextColor,
       fontSize: 18,
     },
     addCryptoModalView: {
@@ -202,12 +242,30 @@ const WalletScreenStyles = (isDarkMode) => {
       justifyContent: "center",
       alignItems: "center",
     },
+    addCardIcon: {
+      width: 30, // adjust size as needed
+      height: 30, // adjust size as needed
+    },
+    overlay: {
+      ...StyleSheet.absoluteFillObject,
+      backgroundColor: "rgba(108, 108, 244, 0.1)",
+    },
+    addCryptoOverlay: {
+      ...StyleSheet.absoluteFillObject,
+      backgroundColor: "rgba(0, 0, 0, 0.15)", // 黑色半透明
+      borderRadius: 12, // 确保与ImageBackground的borderRadius一致
+    },
     addCryptoImageText: {
+      marginLeft: 4, // adjust spacing as needed
       color: "#fff",
       fontWeight: "bold",
     },
+    iconAndTextContainer: {
+      flexDirection: "row",
+      alignItems: "center",
+    },
     addCryptoText: {
-      color: textColor,
+      color: secondTextColor,
       fontWeight: "bold",
       marginRight: 30,
     },
@@ -220,6 +278,22 @@ const WalletScreenStyles = (isDarkMode) => {
     modalTitle: {
       color: textColor,
       fontSize: 18,
+      fontWeight: "bold",
+    },
+    alertModalTitle: {
+      color: textColor,
+      fontSize: 18,
+      fontWeight: "bold",
+      marginBottom: 10,
+    },
+    alertModalSubtitle: {
+      color: secondTextColor,
+      fontSize: 14,
+      marginBottom: 20,
+    },
+    alertModalContent: {
+      color: secondTextColor,
+      fontSize: 16,
       fontWeight: "bold",
     },
     dropdown: {
@@ -267,10 +341,6 @@ const WalletScreenStyles = (isDarkMode) => {
       textAlign: "center",
       fontSize: 40,
       marginBottom: 30,
-    },
-    overlay: {
-      ...StyleSheet.absoluteFillObject,
-      backgroundColor: "rgba(108, 108, 244, 0.1)",
     },
   });
 };

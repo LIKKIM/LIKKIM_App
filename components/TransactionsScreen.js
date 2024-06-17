@@ -193,7 +193,7 @@ function TransactionsScreen() {
                 </ScrollView>
               )}
               <TouchableOpacity
-                style={TransactionsScreenStyle.optionButton}
+                style={TransactionsScreenStyle.CancelButton}
                 onPress={() => setModalVisible(false)}
               >
                 <Text style={TransactionsScreenStyle.cancelButtonText}>

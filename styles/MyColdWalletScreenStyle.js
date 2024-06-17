@@ -8,13 +8,14 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
   const buttonBackgroundColor = isDarkMode ? "#6C6CF4" : "#E5E1E9";
   const borderColor = isDarkMode ? "#404040" : "#ccc";
   const BluetoothBtnColor = isDarkMode ? "#484692" : "#8E80F0";
-
+  const secondTextColor = isDarkMode ? "#ddd" : "#676776";
   return StyleSheet.create({
     cancelButtonText: {
-      color: textColor,
+      color: secondTextColor,
+      fontSize: 18,
     },
     modalSubtitle: {
-      color: textColor,
+      color: secondTextColor,
       fontSize: 14,
       marginBottom: 320,
       textAlign: "center",
@@ -64,7 +65,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       marginBottom: 20,
     },
     languageCancelButton: {
-      backgroundColor: buttonBackgroundColor,
+      border: `3px solid ${buttonBackgroundColor}`,
       padding: 10,
       width: "80%",
       borderRadius: 30,
@@ -73,6 +74,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       justifyContent: "center",
       position: "absolute",
       bottom: 30,
+      marginTop: 20,
     },
     passwordModalText: {
       color: textColor,
@@ -93,7 +95,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       marginBottom: 30,
     },
     languageList: {
-      maxHeight: 320,
+      maxHeight: 300,
       width: 280,
     },
     contentContainer: {
@@ -118,7 +120,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       padding: 20,
     },
     cancelButton: {
-      backgroundColor: buttonBackgroundColor,
+      border: `3px solid ${buttonBackgroundColor}`,
       padding: 10,
       width: "80%",
       justifyContent: "center",
