@@ -37,6 +37,7 @@ function WalletScreen({ route }) {
   const [selectedCardName, setSelectedCardName] = useState(null);
   const [addIconModalVisible, setAddIconModalVisible] = useState(false);
   const [addWalletModalVisible, setAddWalletModalVisible] = useState(false);
+  const [tipModalVisible, setTipModalVisible] = useState(false); // 新增提示 modal 状态
   const [processModalVisible, setProcessModalVisible] = useState(false);
   const [cryptoCards, setCryptoCards] = useState([]);
   const scrollViewRef = useRef();
@@ -97,11 +98,16 @@ function WalletScreen({ route }) {
 
   const handleCreateWallet = () => {
     setAddWalletModalVisible(false); // 关闭 addWalletModal
-    setProcessModalVisible(true); // 显示 processModal
+    setTipModalVisible(true); // 显示提示 modal
   };
 
   const handleImportWallet = () => {
     setAddWalletModalVisible(false); // 关闭 addWalletModal
+    setTipModalVisible(true); // 显示提示 modal
+  };
+
+  const handleContinue = () => {
+    setTipModalVisible(false); // 关闭提示 modal
     setProcessModalVisible(true); // 显示 processModal
   };
 
@@ -257,6 +263,36 @@ function WalletScreen({ route }) {
             <TouchableOpacity
               style={WalletScreenStyle.cancelButton}
               onPress={() => setAddWalletModalVisible(false)}
+            >
+              <Text style={WalletScreenStyle.cancelButtonText}>
+                {t("Close")}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </BlurView>
+      </Modal>
+
+      {/* 提示 Modal */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={tipModalVisible}
+        onRequestClose={() => setTipModalVisible(false)}
+      >
+        <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
+          <View style={WalletScreenStyle.modalView}>
+            <Text style={WalletScreenStyle.ButtonText}>
+              {t("This is a tip message.")}
+            </Text>
+            <TouchableOpacity
+              style={WalletScreenStyle.modalButton}
+              onPress={handleContinue}
+            >
+              <Text style={WalletScreenStyle.ButtonText}>{t("Continue")}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={WalletScreenStyle.cancelButton}
+              onPress={() => setTipModalVisible(false)}
             >
               <Text style={WalletScreenStyle.cancelButtonText}>
                 {t("Close")}
