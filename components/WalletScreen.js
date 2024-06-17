@@ -41,7 +41,7 @@ function WalletScreen({ route }) {
   const scrollViewRef = useRef();
   const iconColor = isDarkMode ? "#ffffff" : "#24234C";
   const darkColors = ["#24234C", "#101021"];
-  const lightColors = ["#FFFFFF", "#E0E0E0"];
+  const lightColors = ["#FFFFFF", "#EDEBEF"];
 
   const handleDeleteCard = () => {
     const updatedCards = cryptoCards.filter(

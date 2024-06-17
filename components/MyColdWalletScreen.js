@@ -50,7 +50,7 @@ function MyColdWalletScreen() {
   const restoreIdentifier = Constants.installationId;
   const iconColor = isDarkMode ? "#ffffff" : "#24234C";
   const darkColors = ["#24234C", "#101021"];
-  const lightColors = ["#FFFFFF", "#E0E0E0"];
+  const lightColors = ["#FFFFFF", "#EDEBEF"];
   const languages = [
     { code: "en", name: "English" },
     { code: "zh", name: "简体中文" },
