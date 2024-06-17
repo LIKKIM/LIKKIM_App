@@ -21,6 +21,8 @@ const Tab = createBottomTabNavigator();
 export default function App() {
   const { t } = useTranslation();
 
+
+
   return (
     <CryptoProvider>
       <View style={styles.safeArea}>
