@@ -149,6 +149,11 @@ const TransactionsScreenStyles = (isDarkMode) => {
       textAlign: "center",
       marginBottom: 30,
     },
+    addressText: {
+      color: secondTextColor,
+      textAlign: "center",
+      marginRight: 10,
+    },
   });
 };
 
