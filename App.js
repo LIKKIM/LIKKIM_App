@@ -21,8 +21,6 @@ const Tab = createBottomTabNavigator();
 export default function App() {
   const { t } = useTranslation();
 
-
-
   return (
     <CryptoProvider>
       <View style={styles.safeArea}>
@@ -145,7 +143,8 @@ export default function App() {
                     />
                   </Tab.Navigator>
                 </NavigationContainer>
-                <StatusBar style="light" />
+                <StatusBar style={isDarkMode ? "light" : "dark"} />
+                {/* 动态设置状态栏文字颜色 */}
               </View>
             );
           }}
