@@ -359,101 +359,62 @@ function MyColdWalletScreen() {
                 <Text style={MyColdWalletScreenStyle.languageModalTitle}>
                   {t("Set Password")}
                 </Text>
-                <Text style={MyColdWalletScreenStyle.languageModalText}>
-                  {t("Only you can unlock your wallet")}
-                </Text>
-                <View style={{ marginVertical: 10, width: 200 }}>
+
+                <View style={{ marginVertical: 10, width: "100%" }}>
                   <Text style={MyColdWalletScreenStyle.passwordModalText}>
                     {t("Password")}
                   </Text>
-                  <View
+                  <TextInput
                     style={[
-                      {
-                        flexDirection: "row",
-                        alignItems: "center",
-                        backgroundColor: "#1A1A37",
-                        borderRadius: 10,
-                        padding: 10,
-                      },
-                      isPasswordFocused && {
-                        borderColor: "blue",
-                        borderWidth: 1,
-                      },
+                      MyColdWalletScreenStyle.passwordInput,
+                      isPasswordFocused && MyColdWalletScreenStyle.focusedInput,
                     ]}
-                  >
-                    <TextInput
-                      style={{ flex: 1, color: "#fff" }}
-                      secureTextEntry={isPasswordHidden}
-                      value={password}
-                      onChangeText={setPassword}
-                      onFocus={() => setIsPasswordFocused(true)}
-                      onBlur={() => setIsPasswordFocused(false)}
-                    />
-                    <TouchableOpacity
-                      onPress={() => setIsPasswordHidden(!isPasswordHidden)}
-                    >
-                      <Icon
-                        name={
-                          isPasswordHidden ? "visibility-off" : "visibility"
-                        }
-                        size={24}
-                        color="#fff"
-                      />
-                    </TouchableOpacity>
-                  </View>
+                    placeholder={t("Enter new password")}
+                    placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
+                    secureTextEntry
+                    onChangeText={setPassword}
+                    onFocus={() => setIsPasswordFocused(true)}
+                    onBlur={() => setIsPasswordFocused(false)}
+                    value={password}
+                  />
                 </View>
-                <View style={{ marginVertical: 10, width: 200 }}>
+                <View style={{ marginVertical: 10, width: "100%" }}>
                   <Text style={MyColdWalletScreenStyle.passwordModalText}>
                     {t("Confirm Password")}
                   </Text>
-                  <View
+                  <TextInput
                     style={[
-                      {
-                        flexDirection: "row",
-                        alignItems: "center",
-                        backgroundColor: "#1A1A37",
-                        borderRadius: 10,
-                        padding: 10,
-                      },
-                      isConfirmPasswordFocused && {
-                        borderColor: "blue",
-                        borderWidth: 1,
-                      },
+                      MyColdWalletScreenStyle.passwordInput,
+                      isConfirmPasswordFocused &&
+                        MyColdWalletScreenStyle.focusedInput,
                     ]}
-                  >
-                    <TextInput
-                      style={{ flex: 1, color: "#fff" }}
-                      secureTextEntry={isConfirmPasswordHidden}
-                      value={confirmPassword}
-                      onChangeText={setConfirmPassword}
-                      onFocus={() => setIsConfirmPasswordFocused(true)}
-                      onBlur={() => setIsConfirmPasswordFocused(false)}
-                    />
-                    <TouchableOpacity
-                      onPress={() =>
-                        setIsConfirmPasswordHidden(!isConfirmPasswordHidden)
-                      }
-                    >
-                      <Icon
-                        name={
-                          isConfirmPasswordHidden
-                            ? "visibility-off"
-                            : "visibility"
-                        }
-                        size={24}
-                        color="#fff"
-                      />
-                    </TouchableOpacity>
-                  </View>
+                    placeholder={t("Confirm new password")}
+                    placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
+                    secureTextEntry
+                    onChangeText={setConfirmPassword}
+                    onFocus={() => setIsConfirmPasswordFocused(true)}
+                    onBlur={() => setIsConfirmPasswordFocused(false)}
+                    value={confirmPassword}
+                  />
                 </View>
-                <TouchableOpacity
-                  style={MyColdWalletScreenStyle.languageCancelButton}
-                  onPress={() => setPasswordModalVisible(false)}
-                >
-                  <Text style={MyColdWalletScreenStyle.cancelButtonText}>
-                    {t("Cancel")}
-                  </Text>
-                </TouchableOpacity>
+                <View style={MyColdWalletScreenStyle.buttonContainer}>
+                  <TouchableOpacity
+                    style={MyColdWalletScreenStyle.submitButton}
+                    onPress={() => setPasswordModalVisible(false)}
+                  >
+                    <Text style={MyColdWalletScreenStyle.submitButtonText}>
+                      {t("Submit")}
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={MyColdWalletScreenStyle.cancelButton}
+                    onPress={() => setPasswordModalVisible(false)}
+                  >
+                    <Text style={MyColdWalletScreenStyle.cancelButtonText}>
+                      {t("Cancel")}
+                    </Text>
+                  </TouchableOpacity>
+                </View>
               </View>
             </BlurView>
           </Modal>

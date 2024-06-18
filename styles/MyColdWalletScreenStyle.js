@@ -9,6 +9,9 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
   const borderColor = isDarkMode ? "#404040" : "#ccc";
   const BluetoothBtnColor = isDarkMode ? "#484692" : "#8E80F0";
   const secondTextColor = isDarkMode ? "#ddd" : "#676776";
+  const inputBackgroundColor = isDarkMode ? "#1A1A37" : "#e0e0e0";
+  const focusedBorderColor = isDarkMode ? "#6C6CF4" : "#007AFF";
+
   return StyleSheet.create({
     cancelButtonText: {
       color: secondTextColor,
@@ -65,7 +68,8 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       marginBottom: 20,
     },
     languageCancelButton: {
-      border: `3px solid ${buttonBackgroundColor}`,
+      borderColor: buttonBackgroundColor,
+      borderWidth: 3,
       padding: 10,
       width: "80%",
       borderRadius: 30,
@@ -120,18 +124,53 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       padding: 20,
     },
     cancelButton: {
-      border: `3px solid ${buttonBackgroundColor}`,
+      borderColor: buttonBackgroundColor,
+      borderWidth: 3,
       padding: 10,
-      width: "80%",
+      width: "100%",
       justifyContent: "center",
       borderRadius: 30,
       height: 60,
       alignItems: "center",
-      position: "absolute",
-      bottom: 60,
+      //   marginTop: 20,
     },
     Icon: {
       marginRight: 10,
+    },
+    passwordInput: {
+      backgroundColor: inputBackgroundColor,
+      borderColor: borderColor,
+      borderWidth: 1,
+      paddingHorizontal: 15,
+      paddingVertical: 10,
+      borderRadius: 10,
+      height: 50,
+      marginBottom: 20,
+      width: "100%",
+      color: textColor,
+    },
+    focusedInput: {
+      borderColor: focusedBorderColor,
+      borderWidth: 2,
+    },
+    submitButton: {
+      backgroundColor: buttonBackgroundColor,
+      padding: 10,
+      width: "100%",
+      justifyContent: "center",
+      borderRadius: 30,
+      height: 60,
+      alignItems: "center",
+      marginBottom: 20,
+    },
+    submitButtonText: {
+      color: textColor,
+      fontSize: 16,
+    },
+    buttonContainer: {
+      flexDirection: "column",
+      alignItems: "center",
+      width: "100%",
     },
   });
 };
