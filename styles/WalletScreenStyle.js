@@ -380,7 +380,8 @@ const WalletScreenStyles = (isDarkMode) => {
       textAlign: "center",
     },
     walletInfoContainer: {
-      marginTop: 10,
+      height: 400,
+      justifyContent: "center",
       paddingHorizontal: 20,
     },
     securityTitle: {
