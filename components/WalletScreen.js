@@ -417,7 +417,7 @@ function WalletScreen({ route }) {
                 "Please write down the recovery phrase displayed on the LIKKIM hardware wallet screen. Please save the recovery phrase securely."
               )}
             </Text>
-            <ScrollView style={{ width: "100%", height: 400 }}>
+            <ScrollView style={{ width: "100%", height: 300 }}>
               {mnemonic.map((words, index) => (
                 <View
                   key={index}
