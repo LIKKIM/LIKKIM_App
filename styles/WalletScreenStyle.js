@@ -369,9 +369,6 @@ const WalletScreenStyles = (isDarkMode) => {
       fontSize: 40,
       marginBottom: 30,
     },
-    addWalletContainer: {
-      alignItems: "center",
-    },
     addWalletButtonText: {
       color: "#fff",
       fontSize: 18,
@@ -385,6 +382,18 @@ const WalletScreenStyles = (isDarkMode) => {
     walletInfoContainer: {
       marginTop: 10,
       paddingHorizontal: 20,
+    },
+    securityTitle: {
+      color: textColor,
+      fontSize: 22,
+      textAlign: "center",
+      marginBottom: 10,
+    },
+    centeredContent: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      paddingVertical: 20,
     },
   });
 };

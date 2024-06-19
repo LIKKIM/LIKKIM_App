@@ -196,7 +196,7 @@ function WalletScreen({ route }) {
         )}
 
         {cryptoCards.length === 0 && (
-          <View style={WalletScreenStyle.addWalletContainer}>
+          <View style={WalletScreenStyle.centeredContent}>
             <ImageBackground
               source={
                 isDarkMode
@@ -216,6 +216,9 @@ function WalletScreen({ route }) {
               </TouchableOpacity>
             </ImageBackground>
             <View style={WalletScreenStyle.walletInfoContainer}>
+              <Text style={WalletScreenStyle.securityTitle}>
+                {t("Security in your hands")}
+              </Text>
               <Text style={WalletScreenStyle.walletInfoText}>
                 {t(
                   "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies."
