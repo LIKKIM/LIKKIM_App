@@ -22,6 +22,7 @@ import Constants from "expo-constants";
 import { useNavigation } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 import i18n from "../config/i18n";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CryptoContext, DarkModeContext } from "./CryptoContext";
 import MyColdWalletScreenStyles from "../styles/MyColdWalletScreenStyle";
 
@@ -85,11 +86,25 @@ function MyColdWalletScreen() {
     scanDevices();
   };
 
-  const handleCurrencyChange = (currency) => {
+  const handleCurrencyChange = async (currency) => {
     console.log("Selected currency:", currency);
     setSelectedCurrency(currency.shortName);
     setCurrencyUnit(currency.shortName);
+    await AsyncStorage.setItem("currencyUnit", currency.shortName);
     setCurrencyModalVisible(false);
+  };
+
+  const handleLanguageChange = async (language) => {
+    console.log("Selected language:", language.name);
+    setSelectedLanguage(language.code);
+    i18n.changeLanguage(language.code);
+    await AsyncStorage.setItem("language", language.code);
+    setLanguageModalVisible(false);
+  };
+
+  const handleDarkModeChange = async (value) => {
+    setIsDarkMode(value);
+    await AsyncStorage.setItem("darkMode", JSON.stringify(value));
   };
 
   useEffect(() => {
@@ -196,13 +211,13 @@ function MyColdWalletScreen() {
     {
       title: t("Dark Mode"),
       icon: "dark-mode",
-      onPress: () => setIsDarkMode(!isDarkMode),
+      onPress: () => handleDarkModeChange(!isDarkMode),
       toggle: (
         <Switch
           trackColor={{ false: "#767577", true: "#81b0ff" }}
           thumbColor={isDarkMode ? "#fff" : "#f4f3f4"}
           ios_backgroundColor="#3e3e3e"
-          onValueChange={() => setIsDarkMode(!isDarkMode)}
+          onValueChange={() => handleDarkModeChange(!isDarkMode)}
           value={isDarkMode}
         />
       ),
@@ -295,12 +310,7 @@ function MyColdWalletScreen() {
                   {languages.map((language) => (
                     <TouchableOpacity
                       key={language.code}
-                      onPress={() => {
-                        console.log("Selected language:", language.name);
-                        setSelectedLanguage(language.code);
-                        i18n.changeLanguage(language.code);
-                        setLanguageModalVisible(false);
-                      }}
+                      onPress={() => handleLanguageChange(language)}
                     >
                       <Text style={MyColdWalletScreenStyle.languageModalText}>
                         {language.name}
