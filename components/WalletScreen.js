@@ -119,7 +119,19 @@ function WalletScreen({ route }) {
   };
 
   const handleConfirmDelete = () => {
-    setDeleteConfirmVisible(true);
+    // 关闭所有其他可能打开的 Modal
+    setModalVisible(false);
+    setTipModalVisible(false);
+    setProcessModalVisible(false);
+    setRecoveryPhraseModalVisible(false);
+    setAddWalletModalVisible(false);
+    setAddIconModalVisible(false);
+    setAddCryptoVisible(false);
+
+    // 确保状态更新后再显示新的 Modal
+    setTimeout(() => {
+      setDeleteConfirmVisible(true);
+    }, 300);
   };
 
   useEffect(() => {
