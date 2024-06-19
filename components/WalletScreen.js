@@ -421,7 +421,7 @@ function WalletScreen({ route }) {
               <TouchableOpacity
                 onPress={() => setDropdownVisible(!dropdownVisible)}
               >
-                <Icon name="settings" size={24} color={modalIconColor} />{" "}
+                <Icon name="settings" size={24} color={modalIconColor} />
                 {/* 动态设置颜色 */}
               </TouchableOpacity>
             </View>
