@@ -407,14 +407,14 @@ function WalletScreen({ route }) {
         onRequestClose={() => setRecoveryPhraseModalVisible(false)}
       >
         <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
-          <View style={WalletScreenStyle.modalView}>
+          <View style={WalletScreenStyle.phraseModalView}>
             <Text style={WalletScreenStyle.alertModalTitle}>
               {t("Never share the recovery phrase.")}
             </Text>
             <Text style={WalletScreenStyle.alertModalSubtitle}>
               {t("Please save the recovery phrase securely.")}
             </Text>
-            <ScrollView style={{ width: "100%" }}>
+            <ScrollView style={{ width: "100%", height: 400 }}>
               {mnemonic.map((words, index) => (
                 <View
                   key={index}

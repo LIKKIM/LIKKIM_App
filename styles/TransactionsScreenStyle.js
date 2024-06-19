@@ -18,7 +18,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
     cancelButton: {
       backgroundColor: buttonBackgroundColor,
       padding: 10,
-      width: "80%",
+      width: "90%",
       justifyContent: "center",
       borderRadius: 30,
       height: 60,
@@ -36,7 +36,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       margin: 20,
       height: 500,
 
-      width: "80%",
+      width: "90%",
       backgroundColor: modalBackgroundColor,
       borderRadius: 20,
       padding: 35,

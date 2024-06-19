@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
   modalView: {
     margin: 20,
     height: 500, // 高度为500
-    width: "80%",
+    width: "90%",
     backgroundColor: "#484692", // 深灰色背景
     borderRadius: 20, // 圆角为20
     padding: 35, // 内边距为35
@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
   languageCancelButton: {
     backgroundColor: "#6C6CF4",
     padding: 10,
-    width: "80%",
+    width: "90%",
     borderRadius: 30,
     height: 60,
     alignItems: "center",
@@ -272,7 +272,7 @@ const styles = StyleSheet.create({
   optionButton: {
     backgroundColor: "#6C6CF4",
     padding: 10,
-    width: "80%",
+    width: "90%",
     justifyContent: "center",
     borderRadius: 30,
     height: 60,
@@ -292,7 +292,7 @@ const styles = StyleSheet.create({
   submitButton: {
     backgroundColor: "#6C6CF4",
     padding: 10,
-    width: "80%",
+    width: "90%",
     justifyContent: "center",
     borderRadius: 30,
     height: 60,
@@ -301,7 +301,7 @@ const styles = StyleSheet.create({
   cancelButton: {
     backgroundColor: "#6C6CF4",
     padding: 10,
-    width: "80%",
+    width: "90%",
     justifyContent: "center",
     borderRadius: 30,
     height: 60,

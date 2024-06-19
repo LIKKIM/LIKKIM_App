@@ -38,7 +38,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
     modalView: {
       margin: 20,
       height: 500,
-      width: "80%",
+      width: "90%",
       backgroundColor: modalBackgroundColor,
       borderRadius: 20,
       padding: 35,
@@ -77,7 +77,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       borderColor: buttonBackgroundColor,
       borderWidth: 3,
       padding: 10,
-      width: "80%",
+      width: "90%",
       borderRadius: 30,
       height: 60,
       alignItems: "center",

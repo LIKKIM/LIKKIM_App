@@ -175,7 +175,15 @@ const WalletScreenStyles = (isDarkMode) => {
     },
     modalView: {
       margin: 20,
-      width: "80%",
+      width: "90%",
+      backgroundColor: modalBackgroundColor,
+      borderRadius: 20,
+      padding: 35,
+      alignItems: "center",
+    },
+    phraseModalView: {
+      margin: 20,
+      width: "90%",
       backgroundColor: modalBackgroundColor,
       borderRadius: 20,
       padding: 35,
@@ -183,7 +191,7 @@ const WalletScreenStyles = (isDarkMode) => {
     },
     processModalView: {
       margin: 20,
-      width: "80%",
+      width: "90%",
       height: 400,
       backgroundColor: modalBackgroundColor,
       borderRadius: 20,
@@ -236,7 +244,7 @@ const WalletScreenStyles = (isDarkMode) => {
     addCryptoModalView: {
       margin: 20,
       minHeight: 400,
-      width: "80%",
+      width: "90%",
       backgroundColor: modalBackgroundColor,
       borderRadius: 20,
       padding: 35,
