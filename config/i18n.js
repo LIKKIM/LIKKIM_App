@@ -63,6 +63,9 @@ i18n
             "This chain account will be removed",
           "Remove Chain Account": "Remove Chain Account",
           Remove: "Remove",
+          "Security in your hands": "Security in your hands",
+          "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies.":
+            "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies.",
         },
       },
       zh: {
@@ -117,6 +120,9 @@ i18n
           "This chain account will be removed": "此链账户将被移除",
           "Remove Chain Account": "移除链账户",
           Remove: "移除",
+          "Security in your hands": "安全尽在掌握",
+          "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies.":
+            "LIKKIM 支持 27 条区块链和超过 10,000 种加密货币。",
         },
       },
       "zh-TW": {
@@ -169,6 +175,9 @@ i18n
           "This chain account will be removed": "此鏈賬戶將被移除",
           "Remove Chain Account": "移除鏈賬戶",
           Remove: "移除",
+          "Security in your hands": "安全盡在掌握",
+          "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies.":
+            "LIKKIM 支持 27 條區塊鏈和超過 10,000 種加密貨幣。",
         },
       },
       fr: {
@@ -228,6 +237,9 @@ i18n
             "Ce compte de chaîne sera supprimé",
           "Remove Chain Account": "Supprimer le compte de chaîne",
           Remove: "Supprimer",
+          "Security in your hands": "Sécurité entre vos mains",
+          "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies.":
+            "LIKKIM prend en charge 27 blockchains et plus de 10 000 crypto-monnaies.",
         },
       },
       es: {
@@ -287,6 +299,9 @@ i18n
             "Esta cuenta de cadena será eliminada",
           "Remove Chain Account": "Eliminar cuenta de cadena",
           Remove: "Eliminar",
+          "Security in your hands": "Seguridad en tus manos",
+          "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies.":
+            "LIKKIM admite 27 cadenas de bloques y más de 10,000 criptomonedas.",
         },
       },
       ar: {
@@ -344,6 +359,9 @@ i18n
           "This chain account will be removed": "سيتم إزالة حساب السلسلة هذا",
           "Remove Chain Account": "إزالة حساب السلسلة",
           Remove: "إزالة",
+          "Security in your hands": "الأمان بين يديك",
+          "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies.":
+            "يدعم LIKKIM 27 سلسلة كتل وأكثر من 10,000 عملة مشفرة.",
         },
       },
       ja: {
@@ -403,6 +421,9 @@ i18n
             "このチェーンアカウントは削除されます",
           "Remove Chain Account": "チェーンアカウントを削除",
           Remove: "削除",
+          "Security in your hands": "安全はあなたの手に",
+          "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies.":
+            "LIKKIMは27のブロックチェーンと10,000以上の暗号通貨をサポートしています。",
         },
       },
       ru: {
@@ -462,6 +483,9 @@ i18n
             "Этот учетная запись цепочки будет удалена",
           "Remove Chain Account": "Удалить учетную запись цепочки",
           Remove: "Удалить",
+          "Security in your hands": "Безопасность в ваших руках",
+          "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies.":
+            "LIKKIM поддерживает 27 блокчейнов и более 10 000 криптовалют.",
         },
       },
       ko: {
@@ -516,6 +540,9 @@ i18n
           "This chain account will be removed": "이 체인 계정이 제거됩니다",
           "Remove Chain Account": "체인 계정 제거",
           Remove: "제거",
+          "Security in your hands": "안전은 당신의 손안에 있습니다",
+          "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies.":
+            "LIKKIM은 27개의 블록체인과 10,000개 이상의 암호화폐를 지원합니다.",
         },
       },
       pt: {
@@ -575,6 +602,9 @@ i18n
             "Esta conta de cadeia será removida",
           "Remove Chain Account": "Remover conta de cadeia",
           Remove: "Remover",
+          "Security in your hands": "Segurança em suas mãos",
+          "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies.":
+            "A LIKKIM suporta 27 blockchains e mais de 10.000 criptomoedas.",
         },
       },
       "pt-BR": {
@@ -636,6 +666,9 @@ i18n
             "Esta conta de cadeia será removida",
           "Remove Chain Account": "Remover conta de cadeia",
           Remove: "Remover",
+          "Security in your hands": "Segurança em suas mãos",
+          "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies.":
+            "A LIKKIM suporta 27 blockchains e mais de 10.000 criptomoedas.",
         },
       },
       it: {
@@ -697,6 +730,9 @@ i18n
             "Questo account di catena verrà rimosso",
           "Remove Chain Account": "Rimuovere account di catena",
           Remove: "Rimuovere",
+          "Security in your hands": "Sicurezza nelle tue mani",
+          "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies.":
+            "LIKKIM supporta 27 blockchain e oltre 10.000 criptovalute.",
         },
       },
       de: {
@@ -758,6 +794,9 @@ i18n
             "Dieses Kettenkonto wird entfernt",
           "Remove Chain Account": "Kettenkonto entfernen",
           Remove: "Entfernen",
+          "Security in your hands": "Sicherheit in Ihren Händen",
+          "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies.":
+            "LIKKIM unterstützt 27 Blockchains und über 10.000 Kryptowährungen.",
         },
       },
       hi: {
@@ -817,6 +856,9 @@ i18n
             "यह श्रृंखला खाता हटा दिया जाएगा",
           "Remove Chain Account": "श्रृंखला खाता हटाएं",
           Remove: "हटाएं",
+          "Security in your hands": "सुरक्षा आपके हाथ में",
+          "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies.":
+            "LIKKIM 27 ब्लॉकचेन और 10,000 से अधिक क्रिप्टोकरेंसी का समर्थन करता है।",
         },
       },
       mn: {
@@ -877,6 +919,9 @@ i18n
           "This chain account will be removed": "Энэ гинжний дансыг устгана",
           "Remove Chain Account": "Гинжний дансыг устгах",
           Remove: "Устгах",
+          "Security in your hands": "Аюулгүй байдал таны гарт",
+          "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies.":
+            "LIKKIM 27 блокчэйн болон 10,000 гаруй криптовалютыг дэмждэг.",
         },
       },
       th: {
@@ -933,6 +978,9 @@ i18n
           "This chain account will be removed": "บัญชีเครือนี้จะถูกลบ",
           "Remove Chain Account": "ลบบัญชีเครือ",
           Remove: "ลบ",
+          "Security in your hands": "ความปลอดภัยอยู่ในมือคุณ",
+          "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies.":
+            "LIKKIM รองรับ 27 บล็อกเชนและมากกว่า 10,000 สกุลเงินดิจิทัล",
         },
       },
       uk: {
@@ -993,6 +1041,9 @@ i18n
             "Цей ланцюговий акаунт буде видалено",
           "Remove Chain Account": "Видалити ланцюговий акаунт",
           Remove: "Видалити",
+          "Security in your hands": "Безпека у ваших руках",
+          "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies.":
+            "LIKKIM підтримує 27 блокчейнів і понад 10 000 криптовалют.",
         },
       },
       vi: {
@@ -1050,6 +1101,9 @@ i18n
           "This chain account will be removed": "Tài khoản chuỗi này sẽ bị xóa",
           "Remove Chain Account": "Xóa tài khoản chuỗi",
           Remove: "Xóa",
+          "Security in your hands": "Bảo mật trong tay bạn",
+          "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies.":
+            "LIKKIM hỗ trợ 27 blockchain và hơn 10.000 loại tiền điện tử.",
         },
       },
       id: {
@@ -1108,6 +1162,9 @@ i18n
           "This chain account will be removed": "Akun rantai ini akan dihapus",
           "Remove Chain Account": "Hapus akun rantai",
           Remove: "Hapus",
+          "Security in your hands": "Keamanan di tangan Anda",
+          "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies.":
+            "LIKKIM mendukung 27 blockchain dan lebih dari 10.000 cryptocurrency.",
         },
       },
       tl: {
@@ -1168,6 +1225,9 @@ i18n
             "Ang chain account na ito ay aalisin",
           "Remove Chain Account": "Alisin ang chain account",
           Remove: "Alisin",
+          "Security in your hands": "Seguridad sa iyong mga kamay",
+          "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies.":
+            "Sinusuportahan ng LIKKIM ang 27 blockchains at higit sa 10,000 cryptocurrencies.",
         },
       },
       bn: {
@@ -1227,6 +1287,9 @@ i18n
             "এই চেইন অ্যাকাউন্টটি সরানো হবে",
           "Remove Chain Account": "চেইন অ্যাকাউন্ট সরান",
           Remove: "সরান",
+          "Security in your hands": "নিরাপত্তা আপনার হাতে",
+          "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies.":
+            "LIKKIM 27 টি ব্লকচেইন এবং 10,000 টিরও বেশি ক্রিপ্টোকারেন্সি সমর্থন করে।",
         },
       },
     },
