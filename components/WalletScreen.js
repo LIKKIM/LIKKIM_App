@@ -433,9 +433,9 @@ function WalletScreen({ route }) {
                       key={word}
                       style={{
                         padding: 10,
-                        borderWidth: selectedWords[index] === word ? 2 : 1,
+                        borderWidth: 2,
                         borderColor:
-                          selectedWords[index] === word ? "blue" : "grey",
+                          selectedWords[index] === word ? "#6C6CF4" : "grey",
                         borderRadius: 5,
                         marginHorizontal: 5,
                       }}
