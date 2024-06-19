@@ -35,7 +35,8 @@ const TransactionsScreenStyles = (isDarkMode) => {
     modalView: {
       margin: 20,
       height: 500,
-      //  width: "80%",
+
+      width: "80%",
       backgroundColor: modalBackgroundColor,
       borderRadius: 20,
       padding: 35,
@@ -59,6 +60,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       height: 60,
       alignItems: "center",
       marginBottom: 10,
+      flex: 1,
     },
     CancelButton: {
       borderWidth: 3, // 设置边框宽度
