@@ -1,4 +1,4 @@
-//WalletScreen.js
+// WalletScreen.js
 import React, { useState, useEffect, useRef, useContext } from "react";
 import {
   View,
@@ -14,6 +14,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import styles, { lightTheme, darkTheme } from "../styles";
 import WalletScreenStyles from "../styles/WalletScreenStyle";
 import { BlurView } from "expo-blur";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CryptoContext, DarkModeContext, usdtCrypto } from "./CryptoContext";
 import { useTranslation } from "react-i18next";
 
@@ -38,14 +39,41 @@ function WalletScreen({ route }) {
   const [selectedCardName, setSelectedCardName] = useState(null);
   const [addIconModalVisible, setAddIconModalVisible] = useState(false);
   const [addWalletModalVisible, setAddWalletModalVisible] = useState(false);
-  const [tipModalVisible, setTipModalVisible] = useState(false); // 新增提示 modal 状态
+  const [tipModalVisible, setTipModalVisible] = useState(false);
   const [processModalVisible, setProcessModalVisible] = useState(false);
-  const [deleteConfirmVisible, setDeleteConfirmVisible] = useState(false); // 二次确认弹窗状态
+  const [deleteConfirmVisible, setDeleteConfirmVisible] = useState(false);
   const [cryptoCards, setCryptoCards] = useState([]);
   const scrollViewRef = useRef();
   const iconColor = isDarkMode ? "#ffffff" : "#24234C";
   const darkColors = ["#24234C", "#101021"];
   const lightColors = ["#FFFFFF", "#EDEBEF"];
+
+  // 加载卡片数据
+  useEffect(() => {
+    const loadCryptoCards = async () => {
+      try {
+        const storedCards = await AsyncStorage.getItem("cryptoCards");
+        if (storedCards !== null) {
+          setCryptoCards(JSON.parse(storedCards));
+        }
+      } catch (error) {
+        console.error("Error loading crypto cards:", error);
+      }
+    };
+    loadCryptoCards();
+  }, []);
+
+  // 保存卡片数据
+  useEffect(() => {
+    const saveCryptoCards = async () => {
+      try {
+        await AsyncStorage.setItem("cryptoCards", JSON.stringify(cryptoCards));
+      } catch (error) {
+        console.error("Error saving crypto cards:", error);
+      }
+    };
+    saveCryptoCards();
+  }, [cryptoCards]);
 
   const addDefaultUSDT = () => {
     if (cryptoCards.length === 0) {
@@ -62,11 +90,11 @@ function WalletScreen({ route }) {
     setAddedCryptos(updatedCards);
     setDropdownVisible(false);
     setModalVisible(false);
-    setDeleteConfirmVisible(false); // 关闭二次确认弹窗
+    setDeleteConfirmVisible(false);
   };
 
   const handleConfirmDelete = () => {
-    setDeleteConfirmVisible(true); // 显示二次确认弹窗
+    setDeleteConfirmVisible(true);
   };
 
   useEffect(() => {
@@ -110,23 +138,23 @@ function WalletScreen({ route }) {
   };
 
   const handleCreateWallet = () => {
-    setAddWalletModalVisible(false); // 关闭 addWalletModal
-    setTipModalVisible(true); // 显示提示 modal
+    setAddWalletModalVisible(false);
+    setTipModalVisible(true);
   };
 
   const handleImportWallet = () => {
-    setAddWalletModalVisible(false); // 关闭 addWalletModal
-    setTipModalVisible(true); // 显示提示 modal
+    setAddWalletModalVisible(false);
+    setTipModalVisible(true);
   };
 
   const handleContinue = () => {
-    setTipModalVisible(false); // 关闭提示 modal
-    setProcessModalVisible(true); // 显示 processModal
+    setTipModalVisible(false);
+    setProcessModalVisible(true);
   };
 
   const handleLetsGo = () => {
     setProcessModalVisible(false);
-    setAddCryptoVisible(true); // 显示 addCryptoModal
+    setAddCryptoVisible(true);
   };
 
   const calculateTotalBalance = () => {
@@ -207,7 +235,7 @@ function WalletScreen({ route }) {
               imageStyle={WalletScreenStyle.addWalletImageBorder}
             >
               <TouchableOpacity
-                onPress={() => setAddWalletModalVisible(true)} // 显示 addWalletModal
+                onPress={() => setAddWalletModalVisible(true)}
                 style={WalletScreenStyle.addWalletButton}
               >
                 <Text style={WalletScreenStyle.addWalletButtonText}>
@@ -427,6 +455,7 @@ function WalletScreen({ route }) {
         </BlurView>
       </Modal>
 
+      {/* 其他 Modal 保留 */}
       <Modal
         animationType="slide"
         transparent={true}
