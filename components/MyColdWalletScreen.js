@@ -40,7 +40,7 @@ function MyColdWalletScreen() {
 
   const [currencyModalVisible, setCurrencyModalVisible] = useState(false);
   const [passwordModalVisible, setPasswordModalVisible] = useState(false);
-  const [selectedCurrency, setSelectedCurrency] = useState(currencyUnit); // 使用 currencyUnit 初始化
+  const [selectedCurrency, setSelectedCurrency] = useState(currencyUnit);
   const [selectedLanguage, setSelectedLanguage] = useState(i18n.language);
   const [modalVisible, setModalVisible] = useState(false);
   const [languageModalVisible, setLanguageModalVisible] = useState(false);
@@ -88,7 +88,7 @@ function MyColdWalletScreen() {
   const handleCurrencyChange = (currency) => {
     console.log("Selected currency:", currency);
     setSelectedCurrency(currency.shortName);
-    setCurrencyUnit(currency.shortName); // 确保使用 currency.shortName
+    setCurrencyUnit(currency.shortName);
     setCurrencyModalVisible(false);
   };
 
@@ -162,7 +162,7 @@ function MyColdWalletScreen() {
       icon: "attach-money",
       onPress: () => setCurrencyModalVisible(true),
       extraIcon: "arrow-drop-down",
-      selectedOption: selectedCurrency, // 更新选中货币
+      selectedOption: selectedCurrency,
     },
     {
       title: t("Help & Support"),
@@ -206,6 +206,14 @@ function MyColdWalletScreen() {
           value={isDarkMode}
         />
       ),
+    },
+    {
+      title: t("Version"),
+      icon: "info-outline",
+      version: Constants.manifest.version, // Add version property
+      onPress: () => {
+        // You can keep this if you want an alert on press
+      },
     },
   ];
 
@@ -254,6 +262,16 @@ function MyColdWalletScreen() {
                 )}
                 {option.extraIcon && (
                   <Icon name={option.extraIcon} size={24} color={iconColor} />
+                )}
+                {option.version && (
+                  <Text
+                    style={[
+                      MyColdWalletScreenStyle.buttonText,
+                      { marginRight: 8 },
+                    ]}
+                  >
+                    {option.version}
+                  </Text>
                 )}
               </View>
               {option.toggle}
