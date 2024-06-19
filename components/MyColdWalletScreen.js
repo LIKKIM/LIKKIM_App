@@ -210,10 +210,8 @@ function MyColdWalletScreen() {
     {
       title: t("Version"),
       icon: "info-outline",
-      version: Constants.manifest.version, // Add version property
-      onPress: () => {
-        // You can keep this if you want an alert on press
-      },
+      version: Constants.expoConfig.version, // Updated to use expoConfig
+      onPress: () => {},
     },
   ];
 
