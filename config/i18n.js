@@ -54,7 +54,7 @@ i18n
           Close: "Close",
           Wallet: "Wallet",
           Transactions: "Transactions",
-          "My Cold Wallet": "My Cold Wallet",
+          "My Cold Wallet": "My LIKKIM",
           "Total Balance": "Total Balance",
           Balance: "Balance",
           "No cryptocurrencies available. Please add wallet first.":
@@ -105,7 +105,7 @@ i18n
           Close: "关闭",
           Wallet: "钱包",
           Transactions: "交易",
-          "My Cold Wallet": "我的冷钱包",
+          "My Cold Wallet": "我的LIKKIM",
           "Total Balance": "总余额",
           Balance: "余额",
           "No cryptocurrencies available. Please add wallet first.":
@@ -154,7 +154,7 @@ i18n
           "Address for": "地址為",
           Wallet: "錢包",
           Transactions: "交易",
-          "My Cold Wallet": "我的冷錢包",
+          "My Cold Wallet": "我的LIKKIM",
           "Total Balance": "總餘額",
           Balance: "餘額",
           "No cryptocurrencies available. Please add wallet first.":
@@ -209,7 +209,7 @@ i18n
           "Address for": "Adresse pour",
           Wallet: "Portefeuille",
           Transactions: "Transactions",
-          "My Cold Wallet": "Mon portefeuille froid",
+          "My Cold Wallet": "Mon LIKKIM",
           "Total Balance": "Solde Total",
           Balance: "Solde",
           "No cryptocurrencies available. Please add wallet first.":
@@ -264,7 +264,7 @@ i18n
           "Address for": "Dirección para",
           Wallet: "Cartera",
           Transactions: "Transacciones",
-          "My Cold Wallet": "Mi billetera fría",
+          "My Cold Wallet": "Mi LIKKIM",
           "Total Balance": "Saldo Total",
           Balance: "Saldo",
           "No cryptocurrencies available. Please add wallet first.":
@@ -318,7 +318,7 @@ i18n
           Close: "إغلاق",
           Wallet: "محفظة",
           Transactions: "المعاملات",
-          "My Cold Wallet": "محفظتي الباردة",
+          "My Cold Wallet": "LIKKIM الخاص بي",
           "Total Balance": "الرصيد الإجمالي",
           Balance: "الرصيد",
           "No cryptocurrencies available. Please add wallet first.":
@@ -373,7 +373,7 @@ i18n
           "Address for": "Dirección para",
           Wallet: "ウォレット",
           Transactions: "トランザクション",
-          "My Cold Wallet": "私のコールドウォレット",
+          "My Cold Wallet": "私のLIKKIM",
           "Total Balance": "総残高",
           Balance: "残高",
           "No cryptocurrencies available. Please add wallet first.":
@@ -428,7 +428,7 @@ i18n
           "Address for": "Dirección para",
           Wallet: "Кошелек",
           Transactions: "Транзакции",
-          "My Cold Wallet": "Мой холодный кошелек",
+          "My Cold Wallet": "Мой LIKKIM",
           "Total Balance": "Общий баланс",
           Balance: "Баланс",
           "No cryptocurrencies available. Please add wallet first.":
@@ -479,7 +479,7 @@ i18n
           "Address for": "주소",
           Wallet: "지갑",
           Transactions: "거래",
-          "My Cold Wallet": "내 콜드 월렛",
+          "My Cold Wallet": "내 LIKKIM",
           "Total Balance": "총 잔액",
           Balance: "잔액",
           "No cryptocurrencies available. Please add wallet first.":
@@ -534,7 +534,7 @@ i18n
           "Address for": "Endereço para",
           Wallet: "Carteira",
           Transactions: "Transações",
-          "My Cold Wallet": "Minha carteira fria",
+          "My Cold Wallet": "Meu LIKKIM",
           "Total Balance": "Saldo Total",
           Balance: "Saldo",
           "No cryptocurrencies available. Please add wallet first.":
@@ -591,7 +591,7 @@ i18n
           Close: "Fechar",
           Wallet: "Carteira",
           Transactions: "Transações",
-          "My Cold Wallet": "Minha carteira fria",
+          "My Cold Wallet": "Meu LIKKIM",
           "Total Balance": "Saldo Total",
           Balance: "Saldo",
           "No cryptocurrencies available. Please add wallet first.":
@@ -648,7 +648,7 @@ i18n
           Close: "Chiudi",
           Wallet: "Portafoglio",
           Transactions: "Transazioni",
-          "My Cold Wallet": "Il mio portafoglio freddo",
+          "My Cold Wallet": "Il mio LIKKIM",
           "Total Balance": "Saldo Totale",
           Balance: "Saldo",
           "No cryptocurrencies available. Please add wallet first.":
@@ -705,7 +705,7 @@ i18n
           Close: "Schließen",
           Wallet: "Brieftasche",
           Transactions: "Transaktionen",
-          "My Cold Wallet": "Meine kalte Brieftasche",
+          "My Cold Wallet": "Mein LIKKIM",
           "Total Balance": "Gesamtsaldo",
           Balance: "Guthaben",
           "No cryptocurrencies available. Please add wallet first.":
@@ -760,7 +760,7 @@ i18n
           Close: "बंद करें",
           Wallet: "बटुआ",
           Transactions: "लेनदेन",
-          "My Cold Wallet": "मेरा ठंडा बटुआ",
+          "My Cold Wallet": "मेरा LIKKIM",
           "Total Balance": "कुल शेष राशि",
           Balance: "शेष",
           "No cryptocurrencies available. Please add wallet first.":
@@ -817,7 +817,7 @@ i18n
           Close: "Хаах",
           Wallet: "Хэтэвч",
           Transactions: "Гүйлгээ",
-          "My Cold Wallet": "Миний хүйтэн хэтэвч",
+          "My Cold Wallet": "Миний LIKKIM",
           "Total Balance": "Нийт үлдэгдэл",
           Balance: "Үлдэгдэл",
           "No cryptocurrencies available. Please add wallet first.":
@@ -870,7 +870,7 @@ i18n
           Close: "ปิด",
           Wallet: "กระเป๋าสตางค์",
           Transactions: "ธุรกรรม",
-          "My Cold Wallet": "กระเป๋าเงินเย็นของฉัน",
+          "My Cold Wallet": "LIKKIM ของฉัน",
           "Total Balance": "ยอดเงินรวม",
           Balance: "ยอดเงินคงเหลือ",
           "No cryptocurrencies available. Please add wallet first.":
@@ -926,7 +926,7 @@ i18n
           Close: "Закрити",
           Wallet: "Гаманець",
           Transactions: "Транзакції",
-          "My Cold Wallet": "Мій холодний гаманець",
+          "My Cold Wallet": "Мій LIKKIM",
           "Total Balance": "Загальний баланс",
           Balance: "Баланс",
           "No cryptocurrencies available. Please add wallet first.":
@@ -980,7 +980,7 @@ i18n
           Close: "Đóng",
           Wallet: "Ví",
           Transactions: "Giao dịch",
-          "My Cold Wallet": "Ví lạnh của tôi",
+          "My Cold Wallet": "LIKKIM của tôi",
           "Total Balance": "Tổng Số Dư",
           Balance: "Số dư",
           "No cryptocurrencies available. Please add wallet first.":
@@ -1035,7 +1035,7 @@ i18n
           Close: "Tutup",
           Wallet: "Dompet",
           Transactions: "Transaksi",
-          "My Cold Wallet": "Dompet dingin saya",
+          "My Cold Wallet": "LIKKIM Saya",
           "Total Balance": "Saldo Total",
           Balance: "Saldo",
           "No cryptocurrencies available. Please add wallet first.":
@@ -1091,7 +1091,7 @@ i18n
           Close: "Isara",
           Wallet: "Pitaka",
           Transactions: "Mga transaksyon",
-          "My Cold Wallet": "Aking malamig na pitaka",
+          "My Cold Wallet": "Aking LIKKIM",
           "Total Balance": "Kabuuang Balanse",
           Balance: "Balanse",
           "No cryptocurrencies available. Please add wallet first.":
@@ -1146,7 +1146,7 @@ i18n
           Close: "বন্ধ করুন",
           Wallet: "ওয়ালেট",
           Transactions: "লেনদেন",
-          "My Cold Wallet": "আমার ঠান্ডা ওয়ালেট",
+          "My Cold Wallet": "আমার LIKKIM",
           "Total Balance": "মোট ব্যালেন্স",
           Balance: "ব্যালেন্স",
           "No cryptocurrencies available. Please add wallet first.":
