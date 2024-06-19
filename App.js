@@ -143,7 +143,10 @@ export default function App() {
                     />
                   </Tab.Navigator>
                 </NavigationContainer>
-                <StatusBar style={isDarkMode ? "light" : "dark"} />
+                <StatusBar
+                  backgroundColor={isDarkMode ? "#101021" : "#FFFFFF"}
+                  style={isDarkMode ? "light" : "dark"}
+                />
                 {/* 动态设置状态栏文字颜色 */}
               </View>
             );
