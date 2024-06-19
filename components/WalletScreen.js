@@ -413,7 +413,9 @@ function WalletScreen({ route }) {
               {t("Never share the recovery phrase.")}
             </Text>
             <Text style={WalletScreenStyle.alertModalSubtitle}>
-              {t("Please save the recovery phrase securely.")}
+              {t(
+                "Please write down the recovery phrase displayed on the LIKKIM hardware wallet screen. Please save the recovery phrase securely."
+              )}
             </Text>
             <ScrollView style={{ width: "100%", height: 400 }}>
               {mnemonic.map((words, index) => (
@@ -447,6 +449,13 @@ function WalletScreen({ route }) {
                 </View>
               ))}
             </ScrollView>
+            {!allWordsSelected && (
+              <Text
+                style={[WalletScreenStyle.highlightText, { marginTop: 10 }]}
+              >
+                {t("You must select all 12 words before you can proceed.")}
+              </Text>
+            )}
             <TouchableOpacity
               style={[
                 WalletScreenStyle.alertModalButton,
@@ -470,6 +479,7 @@ function WalletScreen({ route }) {
           </View>
         </BlurView>
       </Modal>
+
       {/* Process Modal */}
       <Modal
         animationType="slide"

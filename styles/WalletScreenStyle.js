@@ -316,15 +316,17 @@ const WalletScreenStyles = (isDarkMode) => {
     },
     alertModalTitle: {
       color: textColor,
-      fontSize: 18,
+      fontSize: 16,
       fontWeight: "bold",
       marginBottom: 10,
+      textAlign: "center",
     },
 
     alertModalSubtitle: {
       color: secondTextColor,
       fontSize: 14,
       marginBottom: 20,
+      lineHeight: 20,
     },
     alertModalContent: {
       color: secondTextColor,
@@ -404,6 +406,11 @@ const WalletScreenStyles = (isDarkMode) => {
       justifyContent: "center",
       alignItems: "center",
       paddingVertical: 20,
+    },
+    highlightText: {
+      color: "#FF6347", // 红色作为高亮颜色
+      fontSize: 14,
+      textAlign: "left",
     },
   });
 };
