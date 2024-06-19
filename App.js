@@ -1,6 +1,12 @@
 // App.js
 import React, { useContext } from "react";
-import { View, Text, TouchableOpacity, StatusBar } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StatusBar,
+  SafeAreaView,
+} from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -40,7 +46,9 @@ export default function App() {
               : [styles.addIconButtonCommon, styles.addIconButton];
 
             return (
-              <View style={{ flex: 1, backgroundColor: bottomBackgroundColor }}>
+              <SafeAreaView
+                style={{ flex: 1, backgroundColor: tabBarBackgroundColor }}
+              >
                 <NavigationContainer>
                   <Tab.Navigator
                     screenOptions={({ route }) => ({
@@ -147,8 +155,7 @@ export default function App() {
                   backgroundColor={isDarkMode ? "#101021" : "#FFFFFF"}
                   style={isDarkMode ? "light" : "dark"}
                 />
-                {/* 动态设置状态栏文字颜色 */}
-              </View>
+              </SafeAreaView>
             );
           }}
         </DarkModeContext.Consumer>
