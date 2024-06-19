@@ -155,6 +155,17 @@ const WalletScreenStyles = (isDarkMode) => {
       alignItems: "center",
       marginTop: 20,
     },
+    removeCancelButton: {
+      borderWidth: 3, // 设置边框宽度
+      borderColor: buttonBackgroundColor, // 设置边框颜色
+      padding: 10,
+      width: "100%",
+      justifyContent: "center",
+      borderRadius: 30,
+      height: 60,
+      alignItems: "center",
+      marginTop: 20,
+    },
 
     centeredView: {
       flex: 1,
@@ -188,6 +199,15 @@ const WalletScreenStyles = (isDarkMode) => {
       height: 60,
       alignItems: "center",
       marginBottom: 20,
+    },
+    removeModalButton: {
+      backgroundColor: buttonBackgroundColor,
+      padding: 10,
+      width: "100%",
+      justifyContent: "center",
+      borderRadius: 30,
+      height: 60,
+      alignItems: "center",
     },
     alertModalButton: {
       backgroundColor: buttonBackgroundColor,
@@ -281,12 +301,18 @@ const WalletScreenStyles = (isDarkMode) => {
       fontSize: 18,
       fontWeight: "bold",
     },
+    modalSubtitle: {
+      color: secondTextColor,
+      fontSize: 14,
+      marginBottom: 20,
+    },
     alertModalTitle: {
       color: textColor,
       fontSize: 18,
       fontWeight: "bold",
       marginBottom: 10,
     },
+
     alertModalSubtitle: {
       color: secondTextColor,
       fontSize: 14,

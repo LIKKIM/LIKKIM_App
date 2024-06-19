@@ -39,10 +39,10 @@ function WalletScreen({ route }) {
   const [addWalletModalVisible, setAddWalletModalVisible] = useState(false);
   const [tipModalVisible, setTipModalVisible] = useState(false); // 新增提示 modal 状态
   const [processModalVisible, setProcessModalVisible] = useState(false);
+  const [deleteConfirmVisible, setDeleteConfirmVisible] = useState(false); // 二次确认弹窗状态
   const [cryptoCards, setCryptoCards] = useState([]);
   const scrollViewRef = useRef();
   const iconColor = isDarkMode ? "#ffffff" : "#24234C";
-  const modalIconColor = isDarkMode ? "#ffffff" : "#676776"; // 确定 modal 中 icon 的颜色
   const darkColors = ["#24234C", "#101021"];
   const lightColors = ["#FFFFFF", "#EDEBEF"];
 
@@ -61,6 +61,11 @@ function WalletScreen({ route }) {
     setAddedCryptos(updatedCards);
     setDropdownVisible(false);
     setModalVisible(false);
+    setDeleteConfirmVisible(false); // 关闭二次确认弹窗
+  };
+
+  const handleConfirmDelete = () => {
+    setDeleteConfirmVisible(true); // 显示二次确认弹窗
   };
 
   useEffect(() => {
@@ -421,14 +426,13 @@ function WalletScreen({ route }) {
               <TouchableOpacity
                 onPress={() => setDropdownVisible(!dropdownVisible)}
               >
-                <Icon name="settings" size={24} color={modalIconColor} />
-                {/* 动态设置颜色 */}
+                <Icon name="settings" size={24} color={iconColor} />
               </TouchableOpacity>
             </View>
             {dropdownVisible && (
               <View style={WalletScreenStyle.dropdown}>
                 <TouchableOpacity
-                  onPress={handleDeleteCard}
+                  onPress={handleConfirmDelete}
                   style={WalletScreenStyle.dropdownButton}
                 >
                   <Text style={WalletScreenStyle.dropdownButtonText}>
@@ -458,6 +462,39 @@ function WalletScreen({ route }) {
             >
               <Text style={WalletScreenStyle.cancelButtonText}>
                 {t("Close")}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </BlurView>
+      </Modal>
+
+      {/* Delete Confirmation Modal */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={deleteConfirmVisible}
+        onRequestClose={() => setDeleteConfirmVisible(false)}
+      >
+        <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
+          <View style={WalletScreenStyle.modalView}>
+            <Text style={WalletScreenStyle.alertModalTitle}>
+              {t("Remove Chain Account")}
+            </Text>
+            <Text style={WalletScreenStyle.modalSubtitle}>
+              {t("This chain account will be removed")}
+            </Text>
+            <TouchableOpacity
+              style={WalletScreenStyle.removeModalButton}
+              onPress={handleDeleteCard}
+            >
+              <Text style={WalletScreenStyle.ButtonText}>{t("Remove")}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={WalletScreenStyle.removeCancelButton}
+              onPress={() => setDeleteConfirmVisible(false)}
+            >
+              <Text style={WalletScreenStyle.cancelButtonText}>
+                {t("Cancel")}
               </Text>
             </TouchableOpacity>
           </View>
