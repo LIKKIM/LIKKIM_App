@@ -33,6 +33,7 @@
     "react-native-locale-detector": "^1.0.1",
     "react-native-qrcode-svg": "^6.3.1",
     "react-native-quick-base64": "^2.1.2",
+    "react-native-radio-buttons-group": "^3.1.0",
     "react-native-reanimated": "~3.6.2",
     "react-native-safe-area-context": "4.8.2",
     "react-native-screens": "~3.29.0",

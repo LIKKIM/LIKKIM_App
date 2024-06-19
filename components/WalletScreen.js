@@ -41,14 +41,39 @@ function WalletScreen({ route }) {
   const [addWalletModalVisible, setAddWalletModalVisible] = useState(false);
   const [tipModalVisible, setTipModalVisible] = useState(false);
   const [processModalVisible, setProcessModalVisible] = useState(false);
+  const [recoveryPhraseModalVisible, setRecoveryPhraseModalVisible] =
+    useState(false);
   const [deleteConfirmVisible, setDeleteConfirmVisible] = useState(false);
   const [cryptoCards, setCryptoCards] = useState([]);
   const scrollViewRef = useRef();
   const iconColor = isDarkMode ? "#ffffff" : "#24234C";
   const darkColors = ["#24234C", "#101021"];
   const lightColors = ["#FFFFFF", "#EDEBEF"];
+  const [selectedWords, setSelectedWords] = useState(Array(12).fill(null));
 
-  // 加载卡片数据
+  const mnemonic = [
+    ["apple", "banana", "cherry"],
+    ["dog", "elephant", "frog"],
+    ["grape", "honey", "ice"],
+    ["jack", "kite", "lemon"],
+    ["mango", "nest", "orange"],
+    ["peach", "queen", "rabbit"],
+    ["sun", "tiger", "umbrella"],
+    ["vase", "wolf", "xray"],
+    ["yellow", "zebra", "alpha"],
+    ["bravo", "charlie", "delta"],
+    ["echo", "foxtrot", "golf"],
+    ["hotel", "india", "juliet"],
+  ];
+
+  const handleWordSelect = (index, word) => {
+    const newSelectedWords = [...selectedWords];
+    newSelectedWords[index] = word;
+    setSelectedWords(newSelectedWords);
+  };
+
+  const allWordsSelected = selectedWords.every((word) => word !== null);
+
   useEffect(() => {
     const loadCryptoCards = async () => {
       try {
@@ -63,7 +88,6 @@ function WalletScreen({ route }) {
     loadCryptoCards();
   }, []);
 
-  // 保存卡片数据
   useEffect(() => {
     const saveCryptoCards = async () => {
       try {
@@ -149,6 +173,11 @@ function WalletScreen({ route }) {
 
   const handleContinue = () => {
     setTipModalVisible(false);
+    setRecoveryPhraseModalVisible(true);
+  };
+
+  const handlePhraseSaved = () => {
+    setRecoveryPhraseModalVisible(false);
     setProcessModalVisible(true);
   };
 
@@ -163,7 +192,6 @@ function WalletScreen({ route }) {
       .toFixed(2);
   };
 
-  // 处理Process Modal的消息显示逻辑
   const [processMessages, setProcessMessages] = useState([]);
   const [showLetsGoButton, setShowLetsGoButton] = useState(false);
 
@@ -362,6 +390,75 @@ function WalletScreen({ route }) {
             <TouchableOpacity
               style={WalletScreenStyle.cancelButton}
               onPress={() => setTipModalVisible(false)}
+            >
+              <Text style={WalletScreenStyle.cancelButtonText}>
+                {t("Close")}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </BlurView>
+      </Modal>
+
+      {/* Phrase Modal */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={recoveryPhraseModalVisible}
+        onRequestClose={() => setRecoveryPhraseModalVisible(false)}
+      >
+        <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
+          <View style={WalletScreenStyle.modalView}>
+            <Text style={WalletScreenStyle.alertModalTitle}>
+              {t("Never share the recovery phrase.")}
+            </Text>
+            <Text style={WalletScreenStyle.alertModalSubtitle}>
+              {t("Please save the recovery phrase securely.")}
+            </Text>
+            <ScrollView style={{ width: "100%" }}>
+              {mnemonic.map((words, index) => (
+                <View
+                  key={index}
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    marginBottom: 10,
+                  }}
+                >
+                  <Text style={{ marginRight: 10 }}>{index + 1}.</Text>
+                  {words.map((word) => (
+                    <TouchableOpacity
+                      key={word}
+                      style={{
+                        padding: 10,
+                        borderWidth: selectedWords[index] === word ? 2 : 1,
+                        borderColor:
+                          selectedWords[index] === word ? "blue" : "grey",
+                        borderRadius: 5,
+                        marginHorizontal: 5,
+                      }}
+                      onPress={() => handleWordSelect(index, word)}
+                    >
+                      <Text>{word}</Text>
+                    </TouchableOpacity>
+                  ))}
+                </View>
+              ))}
+            </ScrollView>
+            <TouchableOpacity
+              style={[
+                WalletScreenStyle.alertModalButton,
+                { opacity: allWordsSelected ? 1 : 0.5 },
+              ]}
+              onPress={handlePhraseSaved}
+              disabled={!allWordsSelected}
+            >
+              <Text style={WalletScreenStyle.ButtonText}>
+                {t("Verify and I've Saved the Phrase")}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={WalletScreenStyle.cancelButton}
+              onPress={() => setRecoveryPhraseModalVisible(false)}
             >
               <Text style={WalletScreenStyle.cancelButtonText}>
                 {t("Close")}
