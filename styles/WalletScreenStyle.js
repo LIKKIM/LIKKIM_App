@@ -145,7 +145,8 @@ const WalletScreenStyles = (isDarkMode) => {
       marginTop: 20,
     },
     cancelButton: {
-      border: `3px solid ${buttonBackgroundColor}`,
+      borderWidth: 3, // 设置边框宽度
+      borderColor: buttonBackgroundColor, // 设置边框颜色
       padding: 10,
       width: "100%",
       justifyContent: "center",
