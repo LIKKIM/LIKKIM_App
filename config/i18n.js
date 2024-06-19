@@ -59,6 +59,10 @@ i18n
           Balance: "Balance",
           "No cryptocurrencies available. Please add wallet first.":
             "No cryptocurrencies available. Please add wallet first.",
+          "This chain account will be removed":
+            "This chain account will be removed",
+          "Remove Chain Account": "Remove Chain Account",
+          Remove: "Remove",
         },
       },
       zh: {
@@ -110,6 +114,9 @@ i18n
           Balance: "余额",
           "No cryptocurrencies available. Please add wallet first.":
             "没有可用的加密货币。请先添加钱包。",
+          "This chain account will be removed": "此链账户将被移除",
+          "Remove Chain Account": "移除链账户",
+          Remove: "移除",
         },
       },
       "zh-TW": {
@@ -159,6 +166,9 @@ i18n
           Balance: "餘額",
           "No cryptocurrencies available. Please add wallet first.":
             "沒有可用的加密貨幣。請先添加錢包。",
+          "This chain account will be removed": "此鏈賬戶將被移除",
+          "Remove Chain Account": "移除鏈賬戶",
+          Remove: "移除",
         },
       },
       fr: {
@@ -214,6 +224,10 @@ i18n
           Balance: "Solde",
           "No cryptocurrencies available. Please add wallet first.":
             "Aucune cryptomonnaie disponible. Veuillez d'abord ajouter un portefeuille.",
+          "This chain account will be removed":
+            "Ce compte de chaîne sera supprimé",
+          "Remove Chain Account": "Supprimer le compte de chaîne",
+          Remove: "Supprimer",
         },
       },
       es: {
@@ -269,6 +283,10 @@ i18n
           Balance: "Saldo",
           "No cryptocurrencies available. Please add wallet first.":
             "No hay criptomonedas disponibles. Por favor, agregue una billetera primero.",
+          "This chain account will be removed":
+            "Esta cuenta de cadena será eliminada",
+          "Remove Chain Account": "Eliminar cuenta de cadena",
+          Remove: "Eliminar",
         },
       },
       ar: {
@@ -323,6 +341,9 @@ i18n
           Balance: "الرصيد",
           "No cryptocurrencies available. Please add wallet first.":
             "لا توجد عملات مشفرة متاحة. يرجى إضافة المحفظة أولاً.",
+          "This chain account will be removed": "سيتم إزالة حساب السلسلة هذا",
+          "Remove Chain Account": "إزالة حساب السلسلة",
+          Remove: "إزالة",
         },
       },
       ja: {
@@ -378,6 +399,10 @@ i18n
           Balance: "残高",
           "No cryptocurrencies available. Please add wallet first.":
             "利用可能な暗号通貨はありません。まずウォレットを追加してください。",
+          "This chain account will be removed":
+            "このチェーンアカウントは削除されます",
+          "Remove Chain Account": "チェーンアカウントを削除",
+          Remove: "削除",
         },
       },
       ru: {
@@ -433,6 +458,10 @@ i18n
           Balance: "Баланс",
           "No cryptocurrencies available. Please add wallet first.":
             "Нет доступных криптовалют. Пожалуйста, сначала добавьте кошелек.",
+          "This chain account will be removed":
+            "Этот учетная запись цепочки будет удалена",
+          "Remove Chain Account": "Удалить учетную запись цепочки",
+          Remove: "Удалить",
         },
       },
       ko: {
@@ -484,6 +513,9 @@ i18n
           Balance: "잔액",
           "No cryptocurrencies available. Please add wallet first.":
             "사용 가능한 암호화폐가 없습니다. 먼저 지갑을 추가하십시오.",
+          "This chain account will be removed": "이 체인 계정이 제거됩니다",
+          "Remove Chain Account": "체인 계정 제거",
+          Remove: "제거",
         },
       },
       pt: {
@@ -539,6 +571,10 @@ i18n
           Balance: "Saldo",
           "No cryptocurrencies available. Please add wallet first.":
             "Não há criptomoedas disponíveis. Por favor, adicione uma carteira primeiro.",
+          "This chain account will be removed":
+            "Esta conta de cadeia será removida",
+          "Remove Chain Account": "Remover conta de cadeia",
+          Remove: "Remover",
         },
       },
       "pt-BR": {
@@ -596,6 +632,10 @@ i18n
           Balance: "Saldo",
           "No cryptocurrencies available. Please add wallet first.":
             "Não há criptomoedas disponíveis. Por favor, adicione uma carteira primeiro.",
+          "This chain account will be removed":
+            "Esta conta de cadeia será removida",
+          "Remove Chain Account": "Remover conta de cadeia",
+          Remove: "Remover",
         },
       },
       it: {
@@ -653,6 +693,10 @@ i18n
           Balance: "Saldo",
           "No cryptocurrencies available. Please add wallet first.":
             "Nessuna criptovaluta disponibile. Si prega di aggiungere prima un portafoglio.",
+          "This chain account will be removed":
+            "Questo account di catena verrà rimosso",
+          "Remove Chain Account": "Rimuovere account di catena",
+          Remove: "Rimuovere",
         },
       },
       de: {
@@ -710,6 +754,10 @@ i18n
           Balance: "Guthaben",
           "No cryptocurrencies available. Please add wallet first.":
             "Keine Kryptowährungen verfügbar. Bitte fügen Sie zuerst eine Brieftasche hinzu.",
+          "This chain account will be removed":
+            "Dieses Kettenkonto wird entfernt",
+          "Remove Chain Account": "Kettenkonto entfernen",
+          Remove: "Entfernen",
         },
       },
       hi: {
@@ -765,6 +813,10 @@ i18n
           Balance: "शेष",
           "No cryptocurrencies available. Please add wallet first.":
             "कोई क्रिप्टोकरेंसी उपलब्ध नहीं है। कृपया पहले वॉलेट जोड़ें।",
+          "This chain account will be removed":
+            "यह श्रृंखला खाता हटा दिया जाएगा",
+          "Remove Chain Account": "श्रृंखला खाता हटाएं",
+          Remove: "हटाएं",
         },
       },
       mn: {
@@ -822,6 +874,9 @@ i18n
           Balance: "Үлдэгдэл",
           "No cryptocurrencies available. Please add wallet first.":
             "Криптовалют байхгүй байна. Эхлээд түрийвч нэмнэ үү.",
+          "This chain account will be removed": "Энэ гинжний дансыг устгана",
+          "Remove Chain Account": "Гинжний дансыг устгах",
+          Remove: "Устгах",
         },
       },
       th: {
@@ -875,6 +930,9 @@ i18n
           Balance: "ยอดเงินคงเหลือ",
           "No cryptocurrencies available. Please add wallet first.":
             "ไม่มีสกุลเงินดิจิทัลที่พร้อมใช้งาน โปรดเพิ่มกระเป๋าเงินก่อน",
+          "This chain account will be removed": "บัญชีเครือนี้จะถูกลบ",
+          "Remove Chain Account": "ลบบัญชีเครือ",
+          Remove: "ลบ",
         },
       },
       uk: {
@@ -931,6 +989,10 @@ i18n
           Balance: "Баланс",
           "No cryptocurrencies available. Please add wallet first.":
             "Немає доступних криптовалют. Будь ласка, спочатку додайте гаманець.",
+          "This chain account will be removed":
+            "Цей ланцюговий акаунт буде видалено",
+          "Remove Chain Account": "Видалити ланцюговий акаунт",
+          Remove: "Видалити",
         },
       },
       vi: {
@@ -985,6 +1047,9 @@ i18n
           Balance: "Số dư",
           "No cryptocurrencies available. Please add wallet first.":
             "Không có tiền điện tử nào khả dụng. Vui lòng thêm ví trước.",
+          "This chain account will be removed": "Tài khoản chuỗi này sẽ bị xóa",
+          "Remove Chain Account": "Xóa tài khoản chuỗi",
+          Remove: "Xóa",
         },
       },
       id: {
@@ -1040,6 +1105,9 @@ i18n
           Balance: "Saldo",
           "No cryptocurrencies available. Please add wallet first.":
             "Tidak ada cryptocurrency yang tersedia. Harap tambahkan dompet terlebih dahulu.",
+          "This chain account will be removed": "Akun rantai ini akan dihapus",
+          "Remove Chain Account": "Hapus akun rantai",
+          Remove: "Hapus",
         },
       },
       tl: {
@@ -1096,6 +1164,10 @@ i18n
           Balance: "Balanse",
           "No cryptocurrencies available. Please add wallet first.":
             "Walang magagamit na mga cryptocurrency. Mangyaring magdagdag muna ng pitaka.",
+          "This chain account will be removed":
+            "Ang chain account na ito ay aalisin",
+          "Remove Chain Account": "Alisin ang chain account",
+          Remove: "Alisin",
         },
       },
       bn: {
@@ -1151,6 +1223,10 @@ i18n
           Balance: "ব্যালেন্স",
           "No cryptocurrencies available. Please add wallet first.":
             "কোনও ক্রিপ্টোকারেন্সি উপলব্ধ নেই। প্রথমে একটি ওয়ালেট যোগ করুন।",
+          "This chain account will be removed":
+            "এই চেইন অ্যাকাউন্টটি সরানো হবে",
+          "Remove Chain Account": "চেইন অ্যাকাউন্ট সরান",
+          Remove: "সরান",
         },
       },
     },
