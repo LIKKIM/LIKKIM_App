@@ -1,4 +1,5 @@
 // App.js
+import "intl-pluralrules";
 import React, { useContext } from "react";
 import { View, Text, TouchableOpacity, StatusBar } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
