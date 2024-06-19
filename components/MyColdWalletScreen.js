@@ -464,7 +464,7 @@ function MyColdWalletScreen() {
                           height: 100,
                         }}
                       />
-                      <Text style={MyColdWalletScreenStyle.modalSubtitle}>
+                      <Text style={MyColdWalletScreenStyle.scanModalSubtitle}>
                         {t("Scanning...")}
                       </Text>
                     </View>
