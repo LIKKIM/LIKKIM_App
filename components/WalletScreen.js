@@ -49,6 +49,7 @@ function WalletScreen({ route }) {
   const iconColor = isDarkMode ? "#ffffff" : "#24234C";
   const darkColors = ["#24234C", "#101021"];
   const lightColors = ["#FFFFFF", "#EDEBEF"];
+  const secondTextColor = isDarkMode ? "#ddd" : "#676776";
   const [selectedWords, setSelectedWords] = useState(Array(12).fill(null));
 
   const mnemonic = [
@@ -424,7 +425,9 @@ function WalletScreen({ route }) {
                     marginBottom: 10,
                   }}
                 >
-                  <Text style={{ marginRight: 10 }}>{index + 1}.</Text>
+                  <Text style={{ marginRight: 10, color: secondTextColor }}>
+                    {index + 1}.
+                  </Text>
                   {words.map((word) => (
                     <TouchableOpacity
                       key={word}
@@ -438,7 +441,7 @@ function WalletScreen({ route }) {
                       }}
                       onPress={() => handleWordSelect(index, word)}
                     >
-                      <Text>{word}</Text>
+                      <Text style={{ color: secondTextColor }}>{word}</Text>
                     </TouchableOpacity>
                   ))}
                 </View>
@@ -467,7 +470,6 @@ function WalletScreen({ route }) {
           </View>
         </BlurView>
       </Modal>
-
       {/* Process Modal */}
       <Modal
         animationType="slide"
