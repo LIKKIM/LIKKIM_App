@@ -375,9 +375,10 @@ const WalletScreenStyles = (isDarkMode) => {
       fontWeight: "bold",
     },
     walletInfoText: {
-      color: secondTextColor,
+      color: "#676776",
       fontSize: 16,
       textAlign: "center",
+      lineHeight: 22,
     },
     walletInfoContainer: {
       height: 400,
@@ -385,10 +386,10 @@ const WalletScreenStyles = (isDarkMode) => {
       paddingHorizontal: 20,
     },
     securityTitle: {
-      color: textColor,
+      color: secondTextColor,
       fontSize: 22,
       textAlign: "center",
-      marginBottom: 10,
+      marginBottom: 18,
     },
     centeredContent: {
       flex: 1,
