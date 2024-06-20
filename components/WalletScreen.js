@@ -8,6 +8,7 @@ import {
   ScrollView,
   Modal,
   ImageBackground,
+  TextInput,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -51,6 +52,9 @@ function WalletScreen({ route }) {
   const lightColors = ["#FFFFFF", "#EDEBEF"];
   const secondTextColor = isDarkMode ? "#ddd" : "#676776";
   const [selectedWords, setSelectedWords] = useState(Array(12).fill(null));
+  const [importPhraseModalVisible, setImportPhraseModalVisible] =
+    useState(false);
+  const [phrase, setPhrase] = useState("");
 
   const mnemonic = [
     ["apple", "banana", "cherry"],
@@ -181,7 +185,13 @@ function WalletScreen({ route }) {
 
   const handleImportWallet = () => {
     setAddWalletModalVisible(false);
-    setTipModalVisible(true);
+    setImportPhraseModalVisible(true);
+  };
+
+  const handleImport = (phrase) => {
+    // 处理导入逻辑
+    setImportPhraseModalVisible(false);
+    setProcessModalVisible(true);
   };
 
   const handleContinue = () => {
@@ -358,6 +368,45 @@ function WalletScreen({ route }) {
             <TouchableOpacity
               style={WalletScreenStyle.cancelButton}
               onPress={() => setAddWalletModalVisible(false)}
+            >
+              <Text style={WalletScreenStyle.cancelButtonText}>
+                {t("Close")}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </BlurView>
+      </Modal>
+
+      {/* Import Phrase Modal */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={importPhraseModalVisible}
+        onRequestClose={() => setImportPhraseModalVisible(false)}
+      >
+        <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
+          <View style={WalletScreenStyle.modalView}>
+            <Text style={WalletScreenStyle.alertModalTitle}>
+              {t("Import Recovery Phrase")}
+            </Text>
+            <TextInput
+              style={WalletScreenStyle.textInput}
+              value={phrase}
+              onChangeText={setPhrase}
+              placeholder={t("Enter your recovery phrase")}
+              multiline
+            />
+            <TouchableOpacity
+              style={WalletScreenStyle.alertModalButton}
+              onPress={() => handleImport(phrase)}
+            >
+              <Text style={WalletScreenStyle.ButtonText}>
+                {t("Import Wallet")}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={WalletScreenStyle.cancelButton}
+              onPress={() => setImportPhraseModalVisible(false)}
             >
               <Text style={WalletScreenStyle.cancelButtonText}>
                 {t("Close")}
