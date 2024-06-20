@@ -12,6 +12,7 @@ const WalletScreenStyles = (isDarkMode) => {
   const cardBackgroundColor = isDarkMode ? "#484692" : "#E5E1E9";
   const currencyUnitColor = isDarkMode ? "#ddd" : "#666";
   const addCryptoButtonBackgroundColor = isDarkMode ? "#1E1D3F" : "#F8F6FE";
+  const borderColor = isDarkMode ? "#555" : "#ccc";
 
   return StyleSheet.create({
     linearGradient: {
@@ -145,7 +146,8 @@ const WalletScreenStyles = (isDarkMode) => {
       marginTop: 20,
     },
     cancelButton: {
-      border: `3px solid ${buttonBackgroundColor}`,
+      borderWidth: 3, // 设置边框宽度
+      borderColor: buttonBackgroundColor, // 设置边框颜色
       padding: 10,
       width: "100%",
       justifyContent: "center",
@@ -154,7 +156,17 @@ const WalletScreenStyles = (isDarkMode) => {
       alignItems: "center",
       marginTop: 20,
     },
-
+    removeCancelButton: {
+      borderWidth: 3, // 设置边框宽度
+      borderColor: buttonBackgroundColor, // 设置边框颜色
+      padding: 10,
+      width: "100%",
+      justifyContent: "center",
+      borderRadius: 30,
+      height: 60,
+      alignItems: "center",
+      marginTop: 20,
+    },
     centeredView: {
       flex: 1,
       justifyContent: "center",
@@ -163,7 +175,15 @@ const WalletScreenStyles = (isDarkMode) => {
     },
     modalView: {
       margin: 20,
-      width: "80%",
+      width: "90%",
+      backgroundColor: modalBackgroundColor,
+      borderRadius: 20,
+      padding: 35,
+      alignItems: "center",
+    },
+    phraseModalView: {
+      margin: 20,
+      width: "90%",
       backgroundColor: modalBackgroundColor,
       borderRadius: 20,
       padding: 35,
@@ -171,7 +191,7 @@ const WalletScreenStyles = (isDarkMode) => {
     },
     processModalView: {
       margin: 20,
-      width: "80%",
+      width: "90%",
       height: 400,
       backgroundColor: modalBackgroundColor,
       borderRadius: 20,
@@ -187,6 +207,15 @@ const WalletScreenStyles = (isDarkMode) => {
       height: 60,
       alignItems: "center",
       marginBottom: 20,
+    },
+    removeModalButton: {
+      backgroundColor: buttonBackgroundColor,
+      padding: 10,
+      width: "100%",
+      justifyContent: "center",
+      borderRadius: 30,
+      height: 60,
+      alignItems: "center",
     },
     alertModalButton: {
       backgroundColor: buttonBackgroundColor,
@@ -215,7 +244,7 @@ const WalletScreenStyles = (isDarkMode) => {
     addCryptoModalView: {
       margin: 20,
       minHeight: 400,
-      width: "80%",
+      width: "90%",
       backgroundColor: modalBackgroundColor,
       borderRadius: 20,
       padding: 35,
@@ -280,16 +309,24 @@ const WalletScreenStyles = (isDarkMode) => {
       fontSize: 18,
       fontWeight: "bold",
     },
-    alertModalTitle: {
-      color: textColor,
-      fontSize: 18,
-      fontWeight: "bold",
-      marginBottom: 10,
-    },
-    alertModalSubtitle: {
+    modalSubtitle: {
       color: secondTextColor,
       fontSize: 14,
       marginBottom: 20,
+    },
+    alertModalTitle: {
+      color: textColor,
+      fontSize: 16,
+      fontWeight: "bold",
+      marginBottom: 10,
+      textAlign: "center",
+    },
+    alertModalSubtitle: {
+      width: "100%",
+      color: secondTextColor,
+      fontSize: 14,
+      marginBottom: 10,
+      lineHeight: 20,
     },
     alertModalContent: {
       color: secondTextColor,
@@ -341,6 +378,50 @@ const WalletScreenStyles = (isDarkMode) => {
       textAlign: "center",
       fontSize: 40,
       marginBottom: 30,
+    },
+    addWalletButtonText: {
+      color: "#fff",
+      fontSize: 18,
+      fontWeight: "bold",
+    },
+    walletInfoText: {
+      color: "#676776",
+      fontSize: 16,
+      textAlign: "center",
+      lineHeight: 22,
+    },
+    walletInfoContainer: {
+      height: 400,
+      justifyContent: "center",
+      paddingHorizontal: 20,
+    },
+    securityTitle: {
+      color: secondTextColor,
+      fontSize: 22,
+      textAlign: "center",
+      marginBottom: 18,
+    },
+    centeredContent: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      paddingVertical: 20,
+    },
+    highlightText: {
+      color: "#FF6347", // 红色作为高亮颜色
+      fontSize: 14,
+      textAlign: "left",
+    },
+    textInput: {
+      width: "100%",
+      height: 300,
+      borderColor: borderColor,
+      borderWidth: 1,
+      marginTop: 20,
+      padding: 10,
+      borderRadius: 5,
+      color: textColor,
+      backgroundColor: isDarkMode ? "#24234C" : "#E5E1E9",
     },
   });
 };

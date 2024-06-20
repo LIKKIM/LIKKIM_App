@@ -1,5 +1,7 @@
 // CryptoContext.js
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState, useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import i18n from "../config/i18n"; // 确保导入 i18n
 
 export const CryptoContext = createContext();
 export const DarkModeContext = createContext();
@@ -135,6 +137,7 @@ const initialAdditionalCryptos = [
     address: "D7Y55N4sFCw4KceCczPS3KhNWZ6o7pTPkd",
   },
 ];
+
 export const usdtCrypto = {
   name: "USDT",
   shortName: "USDT",
@@ -143,14 +146,46 @@ export const usdtCrypto = {
   cardImage: require("../assets/Card43.png"),
   address: "1KAt6STtisWMMVo5XGdos9P7DBNNsFfjx7",
 };
+
 export const CryptoProvider = ({ children }) => {
-  const [cryptoCount, setCryptoCount] = useState(0); // 初始为0
+  const [cryptoCount, setCryptoCount] = useState(0);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [currencyUnit, setCurrencyUnit] = useState("USD");
   const [additionalCryptos, setAdditionalCryptos] = useState(
     initialAdditionalCryptos
   );
-  const [addedCryptos, setAddedCryptos] = useState([]); // 用于跟踪已添加的加密货币
+  const [addedCryptos, setAddedCryptos] = useState([]);
+
+  useEffect(() => {
+    const loadSettings = async () => {
+      try {
+        const darkModeValue = await AsyncStorage.getItem("darkMode");
+        if (darkModeValue !== null) setIsDarkMode(JSON.parse(darkModeValue));
+
+        const currencyValue = await AsyncStorage.getItem("currencyUnit");
+        if (currencyValue !== null) setCurrencyUnit(currencyValue);
+
+        const languageValue = await AsyncStorage.getItem("language");
+        if (languageValue !== null) i18n.changeLanguage(languageValue);
+      } catch (error) {
+        console.error("Error loading settings: ", error);
+      }
+    };
+    loadSettings();
+  }, []);
+
+  useEffect(() => {
+    const saveSettings = async () => {
+      try {
+        await AsyncStorage.setItem("darkMode", JSON.stringify(isDarkMode));
+        await AsyncStorage.setItem("currencyUnit", currencyUnit);
+        await AsyncStorage.setItem("language", i18n.language);
+      } catch (error) {
+        console.error("Error saving settings: ", error);
+      }
+    };
+    saveSettings();
+  }, [isDarkMode, currencyUnit, i18n.language]);
 
   return (
     <CryptoContext.Provider
@@ -162,8 +197,8 @@ export const CryptoProvider = ({ children }) => {
         currencies,
         additionalCryptos,
         setAdditionalCryptos,
-        addedCryptos, // 确保提供 addedCryptos
-        setAddedCryptos, // 确保提供修改 addedCryptos 的方法
+        addedCryptos,
+        setAddedCryptos,
       }}
     >
       <DarkModeContext.Provider value={{ isDarkMode, setIsDarkMode }}>

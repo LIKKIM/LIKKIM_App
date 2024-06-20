@@ -1,4 +1,4 @@
-package com.anonymous.ColdWallet
+package com.anonymous.LIKKIM
 
 import android.os.Build
 import android.os.Bundle

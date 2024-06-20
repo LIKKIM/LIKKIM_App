@@ -14,13 +14,15 @@ import QRCode from "react-native-qrcode-svg";
 import { useTranslation } from "react-i18next";
 import { CryptoContext, DarkModeContext } from "./CryptoContext";
 import TransactionsScreenStyles from "../styles/TransactionsScreenStyle";
+import Clipboard from "@react-native-clipboard/clipboard"; // 引入 Clipboard 模块
+import Icon from "react-native-vector-icons/MaterialIcons"; // 引入 Icon 模块
 
 function TransactionsScreen() {
   const { t } = useTranslation();
   const { isDarkMode } = useContext(DarkModeContext);
   const { addedCryptos } = useContext(CryptoContext);
   const TransactionsScreenStyle = TransactionsScreenStyles(isDarkMode);
-
+  const addressIcon = isDarkMode ? "#ffffff" : "#676776"; // 设置图标颜色
   const [modalVisible, setModalVisible] = useState(false);
   const [addressModalVisible, setAddressModalVisible] = useState(false);
   const [operationType, setOperationType] = useState("");
@@ -55,6 +57,11 @@ function TransactionsScreen() {
       setInputAddress(""); // 清除先前的输入地址
       setInputAddressModalVisible(true); // 显示输入地址模态窗口
     }
+  };
+
+  const copyToClipboard = (address) => {
+    Clipboard.setString(address);
+    alert(t("Address copied to clipboard!"));
   };
 
   return (
@@ -216,15 +223,23 @@ function TransactionsScreen() {
               <Text style={TransactionsScreenStyle.modalTitle}>
                 {t("Address for")} {selectedCrypto}:
               </Text>
-              <Text
+              <View
                 style={{
-                  color: "#ffffff",
-                  textAlign: "center",
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  alignItems: "center",
                   marginBottom: 30,
                 }}
               >
-                {selectedAddress}
-              </Text>
+                <Text style={TransactionsScreenStyle.addressText}>
+                  {selectedAddress}
+                </Text>
+                <TouchableOpacity
+                  onPress={() => copyToClipboard(selectedAddress)}
+                >
+                  <Icon name="content-copy" size={24} color={addressIcon} />
+                </TouchableOpacity>
+              </View>
               <View
                 style={{
                   backgroundColor: "#fff",

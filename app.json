@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "ColdWallet",
-    "slug": "ColdWallet",
+    "name": "LIKKIM",
+    "slug": "LIKKIM",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -14,7 +14,7 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.anonymous.ColdWallet",
+      "bundleIdentifier": "com.anonymous.LIKKIM",
       "icon": "./assets/icon.png"
     },
     "android": {
@@ -22,11 +22,16 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.anonymous.ColdWallet"
+      "package": "com.anonymous.LIKKIM"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": ["expo-localization"]
+    "plugins": ["expo-localization"],
+    "extra": {
+      "eas": {
+        "projectId": "82d6fac0-ca1f-4f0a-b4f2-916153cefb49"
+      }
+    }
   }
 }

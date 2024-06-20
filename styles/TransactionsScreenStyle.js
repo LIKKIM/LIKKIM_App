@@ -18,7 +18,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
     cancelButton: {
       backgroundColor: buttonBackgroundColor,
       padding: 10,
-      width: "80%",
+      width: "90%",
       justifyContent: "center",
       borderRadius: 30,
       height: 60,
@@ -35,7 +35,8 @@ const TransactionsScreenStyles = (isDarkMode) => {
     modalView: {
       margin: 20,
       height: 500,
-      //  width: "80%",
+
+      width: "90%",
       backgroundColor: modalBackgroundColor,
       borderRadius: 20,
       padding: 35,
@@ -59,9 +60,11 @@ const TransactionsScreenStyles = (isDarkMode) => {
       height: 60,
       alignItems: "center",
       marginBottom: 10,
+      flex: 1,
     },
     CancelButton: {
-      border: `3px solid ${buttonBackgroundColor}`,
+      borderWidth: 3, // 设置边框宽度
+      borderColor: buttonBackgroundColor, // 设置边框颜色
       padding: 10,
       width: "100%",
       justifyContent: "center",
@@ -148,6 +151,11 @@ const TransactionsScreenStyles = (isDarkMode) => {
       color: textColor,
       textAlign: "center",
       marginBottom: 30,
+    },
+    addressText: {
+      color: secondTextColor,
+      textAlign: "center",
+      marginRight: 10,
     },
   });
 };
