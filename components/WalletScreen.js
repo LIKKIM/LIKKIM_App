@@ -478,6 +478,23 @@ function WalletScreen({ route }) {
                 "Please write down the recovery phrase displayed on the LIKKIM hardware wallet screen. Please save the recovery phrase securely."
               )}
             </Text>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
+                marginBottom: 10,
+              }}
+            >
+              <Icon
+                name="keyboard-arrow-down"
+                size={30}
+                color={secondTextColor}
+              />
+              <Text style={{ color: secondTextColor, marginLeft: 5 }}>
+                {t("Scroll down to view all words")}
+              </Text>
+            </View>
             <ScrollView style={{ width: "100%", height: 300 }}>
               {mnemonic.map((words, index) => (
                 <View

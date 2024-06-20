@@ -322,9 +322,10 @@ const WalletScreenStyles = (isDarkMode) => {
       textAlign: "center",
     },
     alertModalSubtitle: {
+      width: "100%",
       color: secondTextColor,
       fontSize: 14,
-      marginBottom: 20,
+      marginBottom: 10,
       lineHeight: 20,
     },
     alertModalContent: {
