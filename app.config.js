@@ -25,10 +25,11 @@ export default {
   "ios": {
     "infoPlist": {
       "ITSAppUsesNonExemptEncryption": false,
-      "NSBluetoothAlwaysUsageDescription": "获取蓝牙权限连接钱包设备"
+      "NSBluetoothAlwaysUsageDescription": "获取蓝牙权限连接钱包设备",
+      "UIBackgroundModes": ["bluetooth-central", "bluetooth-peripheral"]
     },
     "supportsTablet": true,
-    "buildNumber": "3",
+    "buildNumber": "5",
     "bundleIdentifier": "RN.LKKIM",
     "icon": "./assets/icon.png"
   },
