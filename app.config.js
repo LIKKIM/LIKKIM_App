@@ -1,0 +1,56 @@
+
+
+
+/**
+ * LIKKIM 动态Config
+ * @param {*} param0 
+ * @returns 
+ */
+
+export default {
+
+  "owner": "likkimteam",
+  "name": "LIKKIM",
+  "slug": "likkim",
+  "version": "1.0.0",
+  "orientation": "portrait",
+  "icon": "./assets/icon.png",
+  "userInterfaceStyle": "automatic",
+  "splash": {
+    "image": "./assets/splash.png",
+    "resizeMode": "contain",
+    "backgroundColor": "#ffffff"
+  },
+  "assetBundlePatterns": ["**/*"],
+  "ios": {
+    "infoPlist": {
+      "ITSAppUsesNonExemptEncryption": false
+    },
+    "supportsTablet": true,
+    "buildNumber": "1",
+    "bundleIdentifier": "com.anonymous.likkim",
+    "icon": "./assets/icon.png"
+  },
+  "android": {
+    "adaptiveIcon": {
+      "foregroundImage": "./assets/adaptive-icon.png",
+      "backgroundColor": "#ffffff",
+      "versionCode": 1,
+    },
+
+    "package": "com.anonymous.likkim"
+  },
+  "web": {
+    "favicon": "./assets/favicon.png"
+  },
+  "plugins": ["expo-localization"],
+  "extra": {
+    "eas": {
+      "projectId": "fdfad2e7-7bed-4bcd-ae6d-ca6c74643d63"
+    }
+  }
+
+}
+
+
+

@@ -3,14 +3,31 @@
     "version": ">= 10.0.2"
   },
   "build": {
+    //build dev client app | use native module eg:bluetooth module,path:android/debug/.
     "development": {
       "developmentClient": true,
       "distribution": "internal"
     },
+    "apk": {
+      //build release app | use apk.
+      "android": {
+        "buildType": "apk"
+      },
+      "env": {
+        //开发环境API
+        "API_URL": ""
+      }
+    },
     "preview": {
       "distribution": "internal"
     },
-    "production": {}
+    //build release app | android use aab
+    "production": {
+      "env": {
+        //生产环境API
+        "API_URL": ""
+      }
+    }
   },
   "submit": {
     "production": {}
