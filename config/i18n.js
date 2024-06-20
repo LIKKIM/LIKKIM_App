@@ -82,6 +82,18 @@ i18n
           "LIKKIM will never ask for your recovery phrase.":
             "LIKKIM will never ask for your recovery phrase.",
           "Never share it with anyone.": "Never share it with anyone.",
+          "You must select all 12 words before you can proceed.":
+            "You must select all 12 words before you can proceed.",
+          "Verify and I've Saved the Phrase":
+            "Verify and I've Saved the Phrase",
+          "Creating your wallet": "Creating your wallet",
+          "Generating your accounts": "Generating your accounts",
+          "Encrypting your data": "Encrypting your data",
+          "Your wallet is now ready": "Your wallet is now ready",
+          "Let's Go": "Let's Go",
+          "Use spaces between words": "Use spaces between words",
+          "Import Recovery Phrase": "Import Recovery Phrase",
+          Version: "Version",
         },
       },
       zh: {
@@ -154,6 +166,17 @@ i18n
           "LIKKIM will never ask for your recovery phrase.":
             "LIKKIM 永远不会要求您的恢复短语。",
           "Never share it with anyone.": "永远不要与任何人分享。",
+          "You must select all 12 words before you can proceed.":
+            "你必须选择所有12个单词才能继续。",
+          "Verify and I've Saved the Phrase": "验证并且我已保存短语",
+          "Creating your wallet": "创建你的钱包",
+          "Generating your accounts": "生成你的账户",
+          "Encrypting your data": "加密你的数据",
+          "Your wallet is now ready": "你的钱包已准备就绪",
+          "Let's Go": "开始吧",
+          "Use spaces between words": "单词之间用空格分隔",
+          "Import Recovery Phrase": "导入恢复短语",
+          Version: "版本",
         },
       },
       "zh-TW": {
@@ -224,6 +247,17 @@ i18n
           "LIKKIM will never ask for your recovery phrase.":
             "LIKKIM 永遠不會要求您的恢復短語。",
           "Never share it with anyone.": "永遠不要與任何人分享。",
+          "You must select all 12 words before you can proceed.":
+            "你必須選擇所有12個單詞才能繼續。",
+          "Verify and I've Saved the Phrase": "驗證並且我已保存短語",
+          "Creating your wallet": "創建你的錢包",
+          "Generating your accounts": "生成你的帳戶",
+          "Encrypting your data": "加密你的數據",
+          "Your wallet is now ready": "你的錢包已準備就緒",
+          "Let's Go": "開始吧",
+          "Use spaces between words": "單詞之間用空格分隔",
+          "Import Recovery Phrase": "導入恢復短語",
+          Version: "版本",
         },
       },
       fr: {
@@ -303,6 +337,18 @@ i18n
           "LIKKIM will never ask for your recovery phrase.":
             "LIKKIM ne vous demandera jamais votre phrase de récupération.",
           "Never share it with anyone.": "Ne la partagez jamais avec personne.",
+          "You must select all 12 words before you can proceed.":
+            "Vous devez sélectionner les 12 mots avant de pouvoir continuer.",
+          "Verify and I've Saved the Phrase":
+            "Vérifiez et j'ai sauvegardé la phrase",
+          "Creating your wallet": "Création de votre portefeuille",
+          "Generating your accounts": "Génération de vos comptes",
+          "Encrypting your data": "Cryptage de vos données",
+          "Your wallet is now ready": "Votre portefeuille est prêt",
+          "Let's Go": "Allons-y",
+          "Use spaces between words": "Utilisez des espaces entre les mots",
+          "Import Recovery Phrase": "Importer la phrase de récupération",
+          Version: "Version",
         },
       },
       es: {
@@ -382,6 +428,18 @@ i18n
           "LIKKIM will never ask for your recovery phrase.":
             "LIKKIM nunca le pedirá su frase de recuperación.",
           "Never share it with anyone.": "Nunca la comparta con nadie.",
+          "You must select all 12 words before you can proceed.":
+            "Debe seleccionar las 12 palabras antes de poder continuar.",
+          "Verify and I've Saved the Phrase":
+            "Verificar y he guardado la frase",
+          "Creating your wallet": "Creando tu billetera",
+          "Generating your accounts": "Generando tus cuentas",
+          "Encrypting your data": "Encriptando tus datos",
+          "Your wallet is now ready": "Tu billetera está lista",
+          "Let's Go": "Vamos",
+          "Use spaces between words": "Usa espacios entre las palabras",
+          "Import Recovery Phrase": "Importar frase de recuperación",
+          Version: "Versión",
         },
       },
       ar: {
@@ -458,6 +516,17 @@ i18n
           "LIKKIM will never ask for your recovery phrase.":
             "لن يطلب منك LIKKIM أبدًا عبارة الاسترداد الخاصة بك.",
           "Never share it with anyone.": "لا تشاركها أبدًا مع أي شخص.",
+          "You must select all 12 words before you can proceed.":
+            "يجب عليك تحديد جميع الكلمات الـ 12 قبل المتابعة.",
+          "Verify and I've Saved the Phrase": "تحقق وقد قمت بحفظ العبارة",
+          "Creating your wallet": "إنشاء محفظتك",
+          "Generating your accounts": "إنشاء حساباتك",
+          "Encrypting your data": "تشفير بياناتك",
+          "Your wallet is now ready": "محفظتك جاهزة الآن",
+          "Let's Go": "هيا بنا",
+          "Use spaces between words": "استخدم مسافات بين الكلمات",
+          "Import Recovery Phrase": "استيراد عبارة الاسترداد",
+          Version: "الإصدار",
         },
       },
       ja: {
@@ -537,6 +606,17 @@ i18n
           "LIKKIM will never ask for your recovery phrase.":
             "LIKKIM がリカバリーフレーズを尋ねることはありません。",
           "Never share it with anyone.": "誰とも共有しないでください。",
+          "You must select all 12 words before you can proceed.":
+            "続行するには12個の単語すべてを選択する必要があります。",
+          "Verify and I've Saved the Phrase": "確認してフレーズを保存しました",
+          "Creating your wallet": "ウォレットを作成中",
+          "Generating your accounts": "アカウントを生成中",
+          "Encrypting your data": "データを暗号化中",
+          "Your wallet is now ready": "ウォレットの準備が整いました",
+          "Let's Go": "始めましょう",
+          "Use spaces between words": "単語の間にスペースを使用",
+          "Import Recovery Phrase": "リカバリーフレーズをインポート",
+          Version: "バージョン",
         },
       },
       ru: {
@@ -616,6 +696,17 @@ i18n
           "LIKKIM will never ask for your recovery phrase.":
             "LIKKIM никогда не попросит вашу фразу восстановления.",
           "Never share it with anyone.": "Никогда не делитесь этим ни с кем.",
+          "You must select all 12 words before you can proceed.":
+            "Вы должны выбрать все 12 слов, прежде чем продолжить.",
+          "Verify and I've Saved the Phrase": "Проверить и я сохранил фразу",
+          "Creating your wallet": "Создание вашего кошелька",
+          "Generating your accounts": "Создание ваших аккаунтов",
+          "Encrypting your data": "Шифрование ваших данных",
+          "Your wallet is now ready": "Ваш кошелек готов",
+          "Let's Go": "Поехали",
+          "Use spaces between words": "Используйте пробелы между словами",
+          "Import Recovery Phrase": "Импортировать фразу восстановления",
+          Version: "Версия",
         },
       },
       ko: {
@@ -690,6 +781,17 @@ i18n
           "LIKKIM will never ask for your recovery phrase.":
             "LIKKIM은 복구 구문을 묻지 않습니다.",
           "Never share it with anyone.": "절대 다른 사람과 공유하지 마십시오.",
+          "You must select all 12 words before you can proceed.":
+            "계속하려면 12개의 단어를 모두 선택해야 합니다.",
+          "Verify and I've Saved the Phrase": "확인하고 구문을 저장했습니다",
+          "Creating your wallet": "지갑 생성 중",
+          "Generating your accounts": "계정 생성 중",
+          "Encrypting your data": "데이터 암호화 중",
+          "Your wallet is now ready": "지갑이 준비되었습니다",
+          "Let's Go": "시작합시다",
+          "Use spaces between words": "단어 사이에 공백 사용",
+          "Import Recovery Phrase": "복구 구문 가져오기",
+          Version: "버전",
         },
       },
       pt: {
@@ -769,6 +871,17 @@ i18n
           "LIKKIM will never ask for your recovery phrase.":
             "A LIKKIM nunca pedirá sua frase de recuperação.",
           "Never share it with anyone.": "Nunca compartilhe com ninguém.",
+          "You must select all 12 words before you can proceed.":
+            "Você deve selecionar todas as 12 palavras antes de prosseguir.",
+          "Verify and I've Saved the Phrase": "Verifique e eu salvei a frase",
+          "Creating your wallet": "Criando sua carteira",
+          "Generating your accounts": "Gerando suas contas",
+          "Encrypting your data": "Criptografando seus dados",
+          "Your wallet is now ready": "Sua carteira está pronta",
+          "Let's Go": "Vamos lá",
+          "Use spaces between words": "Use espaços entre as palavras",
+          "Import Recovery Phrase": "Importar Frase de Recuperação",
+          Version: "Versão",
         },
       },
       "pt-BR": {
@@ -850,6 +963,17 @@ i18n
           "LIKKIM will never ask for your recovery phrase.":
             "A LIKKIM nunca pedirá sua frase de recuperação.",
           "Never share it with anyone.": "Nunca compartilhe com ninguém.",
+          "You must select all 12 words before you can proceed.":
+            "Você deve selecionar todas as 12 palavras antes de prosseguir.",
+          "Verify and I've Saved the Phrase": "Verifique e eu salvei a frase",
+          "Creating your wallet": "Criando sua carteira",
+          "Generating your accounts": "Gerando suas contas",
+          "Encrypting your data": "Criptografando seus dados",
+          "Your wallet is now ready": "Sua carteira está pronta",
+          "Let's Go": "Vamos lá",
+          "Use spaces between words": "Use espaços entre as palavras",
+          "Import Recovery Phrase": "Importar Frase de Recuperação",
+          Version: "Versão",
         },
       },
       it: {
@@ -931,6 +1055,17 @@ i18n
           "LIKKIM will never ask for your recovery phrase.":
             "LIKKIM non chiederà mai la tua frase di recupero.",
           "Never share it with anyone.": "Non condividerlo mai con nessuno.",
+          "You must select all 12 words before you can proceed.":
+            "Devi selezionare tutte le 12 parole prima di procedere.",
+          "Verify and I've Saved the Phrase": "Verifica e ho salvato la frase",
+          "Creating your wallet": "Creazione del tuo portafoglio",
+          "Generating your accounts": "Generazione dei tuoi account",
+          "Encrypting your data": "Criptazione dei tuoi dati",
+          "Your wallet is now ready": "Il tuo portafoglio è pronto",
+          "Let's Go": "Andiamo",
+          "Use spaces between words": "Usa spazi tra le parole",
+          "Import Recovery Phrase": "Importa Frase di Recupero",
+          Version: "Versione",
         },
       },
       de: {
@@ -1012,6 +1147,19 @@ i18n
           "LIKKIM will never ask for your recovery phrase.":
             "LIKKIM wird niemals nach Ihrer Wiederherstellungsphrase fragen.",
           "Never share it with anyone.": "Teilen Sie es niemals mit jemandem.",
+          "You must select all 12 words before you can proceed.":
+            "Sie müssen alle 12 Wörter auswählen, bevor Sie fortfahren können.",
+          "Verify and I've Saved the Phrase":
+            "Überprüfen und ich habe die Phrase gespeichert",
+          "Creating your wallet": "Erstellen Ihrer Brieftasche",
+          "Generating your accounts": "Erstellen Ihrer Konten",
+          "Encrypting your data": "Verschlüsseln Ihrer Daten",
+          "Your wallet is now ready": "Ihre Brieftasche ist jetzt bereit",
+          "Let's Go": "Los geht's",
+          "Use spaces between words":
+            "Verwenden Sie Leerzeichen zwischen den Wörtern",
+          "Import Recovery Phrase": "Wiederherstellungsphrase importieren",
+          Version: "Version",
         },
       },
       hi: {
@@ -1091,6 +1239,18 @@ i18n
           "LIKKIM will never ask for your recovery phrase.":
             "LIKKIM कभी भी आपसे आपका रिकवरी वाक्यांश नहीं पूछेगा।",
           "Never share it with anyone.": "इसे कभी भी किसी के साथ साझा न करें।",
+          "You must select all 12 words before you can proceed.":
+            "आगे बढ़ने से पहले आपको सभी 12 शब्दों का चयन करना होगा।",
+          "Verify and I've Saved the Phrase":
+            "सत्यापित करें और मैंने वाक्यांश सहेज लिया है",
+          "Creating your wallet": "आपका वॉलेट बना रहा है",
+          "Generating your accounts": "आपके खाते बना रहा है",
+          "Encrypting your data": "आपका डेटा एन्क्रिप्ट कर रहा है",
+          "Your wallet is now ready": "आपका वॉलेट अब तैयार है",
+          "Let's Go": "चलिए चलते हैं",
+          "Use spaces between words": "शब्दों के बीच स्पेस का उपयोग करें",
+          "Import Recovery Phrase": "रिकवरी वाक्यांश आयात करें",
+          Version: "संस्करण",
         },
       },
       mn: {
@@ -1171,6 +1331,18 @@ i18n
           "LIKKIM will never ask for your recovery phrase.":
             "LIKKIM таны сэргээх үгийг хэзээ ч асуухгүй.",
           "Never share it with anyone.": "Хэнтэй ч битгий хуваалцаарай.",
+          "You must select all 12 words before you can proceed.":
+            "Та үргэлжлүүлэхийн өмнө бүх 12 үгийг сонгох ёстой.",
+          "Verify and I've Saved the Phrase":
+            "Баталгаажуулж, би үгийг хадгалсан",
+          "Creating your wallet": "Таны түрийвчийг үүсгэж байна",
+          "Generating your accounts": "Таны акаунтуудыг үүсгэж байна",
+          "Encrypting your data": "Таны өгөгдлийг шифрлэж байна",
+          "Your wallet is now ready": "Таны түрийвч одоо бэлэн боллоо",
+          "Let's Go": "Эхэлцгээе",
+          "Use spaces between words": "Үгсийн хооронд зай ашигла",
+          "Import Recovery Phrase": "Сэргээх үгийг импортлох",
+          Version: "Хувилбар",
         },
       },
       th: {
@@ -1245,6 +1417,17 @@ i18n
           "LIKKIM will never ask for your recovery phrase.":
             "LIKKIM จะไม่ขอวลีการกู้คืนของคุณ",
           "Never share it with anyone.": "อย่าแชร์กับใครก็ตาม",
+          "You must select all 12 words before you can proceed.":
+            "คุณต้องเลือกทั้ง 12 คำก่อนจึงจะดำเนินการต่อได้",
+          "Verify and I've Saved the Phrase": "ตรวจสอบและฉันได้บันทึกวลีแล้ว",
+          "Creating your wallet": "กำลังสร้างกระเป๋าเงินของคุณ",
+          "Generating your accounts": "กำลังสร้างบัญชีของคุณ",
+          "Encrypting your data": "กำลังเข้ารหัสข้อมูลของคุณ",
+          "Your wallet is now ready": "กระเป๋าเงินของคุณพร้อมแล้ว",
+          "Let's Go": "ไปกันเถอะ",
+          "Use spaces between words": "ใช้ช่องว่างระหว่างคำ",
+          "Import Recovery Phrase": "นำเข้าวลีการกู้คืน",
+          Version: "เวอร์ชัน",
         },
       },
       uk: {
@@ -1325,6 +1508,14 @@ i18n
           "LIKKIM will never ask for your recovery phrase.":
             "LIKKIM ніколи не попросить вашу фразу відновлення.",
           "Never share it with anyone.": "Ніколи не діліться нею ні з ким.",
+          "You must select all 12 words before you can proceed.":
+            "Ви повинні вибрати всі 12 слів, перш ніж продовжити.",
+          "Verify and I've Saved the Phrase": "Підтвердьте, і я зберіг фразу",
+          "Creating your wallet": "Створення вашого гаманця",
+          "Generating your accounts": "Створення ваших облікових записів",
+          "Encrypting your data": "Шифрування ваших даних",
+          "Your wallet is now ready": "Ваш гаманець готовий",
+          "Let's Go": "Почнемо",
         },
       },
       vi: {
@@ -1402,6 +1593,17 @@ i18n
             "LIKKIM sẽ không bao giờ yêu cầu cụm từ khôi phục của bạn.",
           "Never share it with anyone.":
             "Đừng bao giờ chia sẻ nó với bất kỳ ai.",
+          "You must select all 12 words before you can proceed.":
+            "Bạn phải chọn đủ 12 từ trước khi tiếp tục.",
+          "Verify and I've Saved the Phrase": "Xác nhận và tôi đã lưu cụm từ",
+          "Creating your wallet": "Đang tạo ví của bạn",
+          "Generating your accounts": "Đang tạo tài khoản của bạn",
+          "Encrypting your data": "Đang mã hóa dữ liệu của bạn",
+          "Your wallet is now ready": "Ví của bạn đã sẵn sàng",
+          "Let's Go": "Bắt đầu",
+          "Use spaces between words": "Sử dụng khoảng trắng giữa các từ",
+          "Import Recovery Phrase": "Nhập cụm từ khôi phục",
+          Version: "Phiên bản",
         },
       },
       id: {
@@ -1481,6 +1683,18 @@ i18n
             "LIKKIM tidak akan pernah meminta frasa pemulihan Anda.",
           "Never share it with anyone.":
             "Jangan pernah membagikannya dengan siapa pun.",
+          "You must select all 12 words before you can proceed.":
+            "Anda harus memilih semua 12 kata sebelum Anda dapat melanjutkan.",
+          "Verify and I've Saved the Phrase":
+            "Verifikasi dan saya telah menyimpan frasa",
+          "Creating your wallet": "Membuat dompet Anda",
+          "Generating your accounts": "Membuat akun Anda",
+          "Encrypting your data": "Mengenkripsi data Anda",
+          "Your wallet is now ready": "Dompet Anda sekarang siap",
+          "Let's Go": "Ayo pergi",
+          "Use spaces between words": "Gunakan spasi di antara kata-kata",
+          "Import Recovery Phrase": "Impor Frasa Pemulihan",
+          Version: "Versi",
         },
       },
       tl: {
@@ -1562,6 +1776,19 @@ i18n
             "Hindi hihilingin ng LIKKIM ang iyong parirala ng pagbawi.",
           "Never share it with anyone.":
             "Huwag kailanman ibahagi ito sa sinuman.",
+          "You must select all 12 words before you can proceed.":
+            "Dapat mong piliin ang lahat ng 12 salita bago ka magpatuloy.",
+          "Verify and I've Saved the Phrase":
+            "I-verify at nai-save ko ang parirala",
+          "Creating your wallet": "Gumagawa ng iyong wallet",
+          "Generating your accounts": "Gumagawa ng iyong mga account",
+          "Encrypting your data": "Ini-encrypt ang iyong data",
+          "Your wallet is now ready": "Handa na ang iyong wallet",
+          "Let's Go": "Tara na",
+          "Use spaces between words":
+            "Gumamit ng mga espasyo sa pagitan ng mga salita",
+          "Import Recovery Phrase": "I-import ang Parirala ng Pagbawi",
+          Version: "Bersyon",
         },
       },
       bn: {
@@ -1640,6 +1867,18 @@ i18n
           "LIKKIM will never ask for your recovery phrase.":
             "LIKKIM কখনই আপনার পুনরুদ্ধার বাক্যাংশ চাইবে না।",
           "Never share it with anyone.": "এটি কখনই কারও সাথে ভাগ করবেন না।",
+          "You must select all 12 words before you can proceed.":
+            "আপনাকে অব্যাহত রাখার আগে সমস্ত 12টি শব্দ নির্বাচন করতে হবে।",
+          "Verify and I've Saved the Phrase":
+            "যাচাই করুন এবং আমি বাক্যাংশটি সংরক্ষণ করেছি",
+          "Creating your wallet": "আপনার ওয়ালেট তৈরি করা হচ্ছে",
+          "Generating your accounts": "আপনার অ্যাকাউন্ট তৈরি করা হচ্ছে",
+          "Encrypting your data": "আপনার ডেটা এনক্রিপ্ট করা হচ্ছে",
+          "Your wallet is now ready": "আপনার ওয়ালেট এখন প্রস্তুত",
+          "Let's Go": "চলুন",
+          "Use spaces between words": "শব্দের মধ্যে স্পেস ব্যবহার করুন",
+          "Import Recovery Phrase": "পুনরুদ্ধার বাক্যাংশ আমদানি করুন",
+          Version: "সংস্করণ",
         },
       },
     },
