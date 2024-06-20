@@ -393,7 +393,7 @@ function WalletScreen({ route }) {
               style={WalletScreenStyle.textInput}
               value={phrase}
               onChangeText={setPhrase}
-              placeholder={t("Enter your recovery phrase")}
+              placeholder={t("Use spaces between words")}
               multiline
             />
             <TouchableOpacity

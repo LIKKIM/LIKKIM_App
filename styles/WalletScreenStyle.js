@@ -12,6 +12,7 @@ const WalletScreenStyles = (isDarkMode) => {
   const cardBackgroundColor = isDarkMode ? "#484692" : "#E5E1E9";
   const currencyUnitColor = isDarkMode ? "#ddd" : "#666";
   const addCryptoButtonBackgroundColor = isDarkMode ? "#1E1D3F" : "#F8F6FE";
+  const borderColor = isDarkMode ? "#555" : "#ccc";
 
   return StyleSheet.create({
     linearGradient: {
@@ -166,7 +167,6 @@ const WalletScreenStyles = (isDarkMode) => {
       alignItems: "center",
       marginTop: 20,
     },
-
     centeredView: {
       flex: 1,
       justifyContent: "center",
@@ -321,7 +321,6 @@ const WalletScreenStyles = (isDarkMode) => {
       marginBottom: 10,
       textAlign: "center",
     },
-
     alertModalSubtitle: {
       color: secondTextColor,
       fontSize: 14,
@@ -411,6 +410,17 @@ const WalletScreenStyles = (isDarkMode) => {
       color: "#FF6347", // 红色作为高亮颜色
       fontSize: 14,
       textAlign: "left",
+    },
+    textInput: {
+      width: "100%",
+      height: 300,
+      borderColor: borderColor,
+      borderWidth: 1,
+      marginTop: 20,
+      padding: 10,
+      borderRadius: 5,
+      color: textColor,
+      backgroundColor: isDarkMode ? "#24234C" : "#E5E1E9",
     },
   });
 };
