@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   TextInput,
   ScrollView,
+  Clipboard
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { BlurView } from "expo-blur";
@@ -14,7 +15,7 @@ import QRCode from "react-native-qrcode-svg";
 import { useTranslation } from "react-i18next";
 import { CryptoContext, DarkModeContext } from "./CryptoContext";
 import TransactionsScreenStyles from "../styles/TransactionsScreenStyle";
-import Clipboard from "@react-native-clipboard/clipboard"; // 引入 Clipboard 模块
+// import Clipboard from "@react-native-clipboard/clipboard"; // 引入 Clipboard 模块
 import Icon from "react-native-vector-icons/MaterialIcons"; // 引入 Icon 模块
 
 function TransactionsScreen() {

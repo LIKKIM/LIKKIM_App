@@ -24,11 +24,12 @@ export default {
   "assetBundlePatterns": ["**/*"],
   "ios": {
     "infoPlist": {
-      "ITSAppUsesNonExemptEncryption": false
+      "ITSAppUsesNonExemptEncryption": false,
+      "NSBluetoothAlwaysUsageDescription": "获取蓝牙权限连接钱包设备"
     },
     "supportsTablet": true,
-    "buildNumber": "1",
-    "bundleIdentifier": "com.anonymous.likkim",
+    "buildNumber": "3",
+    "bundleIdentifier": "RN.LKKIM",
     "icon": "./assets/icon.png"
   },
   "android": {

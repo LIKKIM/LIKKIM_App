@@ -205,8 +205,7 @@ function MyColdWalletScreen() {
       icon: "language",
       onPress: () => setLanguageModalVisible(true),
       extraIcon: "arrow-drop-down",
-      selectedOption: languages.find((lang) => lang.code === selectedLanguage)
-        .name,
+      selectedOption: (languages.find((lang) => lang.code === selectedLanguage) || languages.find((lang) => lang.code === 'en')).name,
     },
     {
       title: t("Dark Mode"),
@@ -226,7 +225,7 @@ function MyColdWalletScreen() {
       title: t("Version"),
       icon: "info-outline",
       version: Constants.expoConfig.version, // Updated to use expoConfig
-      onPress: () => {},
+      onPress: () => { },
     },
   ];
 
@@ -412,7 +411,7 @@ function MyColdWalletScreen() {
                     style={[
                       MyColdWalletScreenStyle.passwordInput,
                       isConfirmPasswordFocused &&
-                        MyColdWalletScreenStyle.focusedInput,
+                      MyColdWalletScreenStyle.focusedInput,
                     ]}
                     placeholder={t("Confirm new password")}
                     placeholderTextColor={isDarkMode ? "#ccc" : "#666"}

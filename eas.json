@@ -6,6 +6,9 @@
     //build dev client app | use native module eg:bluetooth module,path:android/debug/.
     "development": {
       "developmentClient": true,
+      "android": {
+        "buildType": "apk"
+      },
       "distribution": "internal"
     },
     "apk": {
@@ -15,7 +18,7 @@
       },
       "env": {
         //开发环境API
-        "API_URL": ""
+        "API_URL": "http://localhost"
       }
     },
     "preview": {
@@ -25,7 +28,7 @@
     "production": {
       "env": {
         //生产环境API
-        "API_URL": ""
+        "API_URL": "http://localhost"
       }
     }
   },

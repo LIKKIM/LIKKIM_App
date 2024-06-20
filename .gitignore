@@ -37,3 +37,7 @@ yarn-error.*
 
 /android/app/build/
 /android/app/debug/
+/android/app/release/
+
+/android
+/ios

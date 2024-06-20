@@ -83,9 +83,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace 'com.anonymous.LIKKIM'
+    namespace 'com.anonymous.likkim'
     defaultConfig {
-        applicationId 'com.anonymous.LIKKIM'
+        applicationId 'com.anonymous.likkim'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
