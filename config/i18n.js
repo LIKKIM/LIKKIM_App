@@ -72,6 +72,16 @@ i18n
           "Please save the recovery phrase displayed on the LIKKIM hardware wallet screen.":
             "Please save the recovery phrase displayed on the LIKKIM hardware wallet screen.",
           "Scroll down to view all words": "Scroll down to view all words",
+          "Recovery Phrase": "Recovery Phrase",
+          "Read the following, then save the phrase securely.":
+            "Read the following, then save the phrase securely.",
+          "The recovery phrase alone gives you full access to your wallets and funds.":
+            "The recovery phrase alone gives you full access to your wallets and funds.",
+          "If you forget your password, you can use the recovery phrase to get back into your wallet.":
+            "If you forget your password, you can use the recovery phrase to get back into your wallet.",
+          "LIKKIM will never ask for your recovery phrase.":
+            "LIKKIM will never ask for your recovery phrase.",
+          "Never share it with anyone.": "Never share it with anyone.",
         },
       },
       zh: {
@@ -134,6 +144,16 @@ i18n
           "Please save the recovery phrase displayed on the LIKKIM hardware wallet screen.":
             "请保存 LIKKIM 硬件钱包屏幕上显示的恢复短语。",
           "Scroll down to view all words": "向下滚动查看所有单词",
+          "Recovery Phrase": "恢复短语",
+          "Read the following, then save the phrase securely.":
+            "请阅读以下内容，然后安全地保存恢复短语。",
+          "The recovery phrase alone gives you full access to your wallets and funds.":
+            "恢复短语可完全访问您的钱包和资金。",
+          "If you forget your password, you can use the recovery phrase to get back into your wallet.":
+            "如果您忘记密码，可以使用恢复短语重新进入您的钱包。",
+          "LIKKIM will never ask for your recovery phrase.":
+            "LIKKIM 永远不会要求您的恢复短语。",
+          "Never share it with anyone.": "永远不要与任何人分享。",
         },
       },
       "zh-TW": {
@@ -194,6 +214,16 @@ i18n
           "Please save the recovery phrase displayed on the LIKKIM hardware wallet screen.":
             "請保存 LIKKIM 硬體錢包螢幕上顯示的恢復短語。",
           "Scroll down to view all words": "向下滾動查看所有單詞",
+          "Recovery Phrase": "恢復短語",
+          "Read the following, then save the phrase securely.":
+            "請閱讀以下內容，然後安全地保存恢復短語。",
+          "The recovery phrase alone gives you full access to your wallets and funds.":
+            "恢復短語可完全訪問您的錢包和資金。",
+          "If you forget your password, you can use the recovery phrase to get back into your wallet.":
+            "如果您忘記密碼，可以使用恢復短語重新進入您的錢包。",
+          "LIKKIM will never ask for your recovery phrase.":
+            "LIKKIM 永遠不會要求您的恢復短語。",
+          "Never share it with anyone.": "永遠不要與任何人分享。",
         },
       },
       fr: {
@@ -263,6 +293,16 @@ i18n
             "Veuillez enregistrer la phrase de récupération affichée sur l'écran du portefeuille matériel LIKKIM.",
           "Scroll down to view all words":
             "Faites défiler vers le bas pour voir tous les mots",
+          "Recovery Phrase": "Phrase de récupération",
+          "Read the following, then save the phrase securely.":
+            "Lisez ce qui suit, puis enregistrez la phrase en toute sécurité.",
+          "The recovery phrase alone gives you full access to your wallets and funds.":
+            "La phrase de récupération seule vous donne un accès complet à vos portefeuilles et fonds.",
+          "If you forget your password, you can use the recovery phrase to get back into your wallet.":
+            "Si vous oubliez votre mot de passe, vous pouvez utiliser la phrase de récupération pour revenir dans votre portefeuille.",
+          "LIKKIM will never ask for your recovery phrase.":
+            "LIKKIM ne vous demandera jamais votre phrase de récupération.",
+          "Never share it with anyone.": "Ne la partagez jamais avec personne.",
         },
       },
       es: {
@@ -332,6 +372,16 @@ i18n
             "Por favor, guarda la frase de recuperación que aparece en la pantalla del monedero de hardware LIKKIM.",
           "Scroll down to view all words":
             "Desplázate hacia abajo para ver todas las palabras",
+          "Recovery Phrase": "Frase de recuperación",
+          "Read the following, then save the phrase securely.":
+            "Lea lo siguiente, luego guarde la frase de forma segura.",
+          "The recovery phrase alone gives you full access to your wallets and funds.":
+            "La frase de recuperación sola le da acceso completo a sus billeteras y fondos.",
+          "If you forget your password, you can use the recovery phrase to get back into your wallet.":
+            "Si olvida su contraseña, puede usar la frase de recuperación para volver a entrar en su billetera.",
+          "LIKKIM will never ask for your recovery phrase.":
+            "LIKKIM nunca le pedirá su frase de recuperación.",
+          "Never share it with anyone.": "Nunca la comparta con nadie.",
         },
       },
       ar: {
@@ -398,6 +448,16 @@ i18n
             "يرجى حفظ عبارة الاسترداد المعروضة على شاشة محفظة الأجهزة LIKKIM.",
           "Scroll down to view all words":
             "قم بالتمرير لأسفل لعرض جميع الكلمات",
+          "Recovery Phrase": "عبارة الاسترداد",
+          "Read the following, then save the phrase securely.":
+            "اقرأ ما يلي ، ثم احفظ العبارة بأمان.",
+          "The recovery phrase alone gives you full access to your wallets and funds.":
+            "تمنحك عبارة الاسترداد وحدها الوصول الكامل إلى محافظك وأموالك.",
+          "If you forget your password, you can use the recovery phrase to get back into your wallet.":
+            "إذا نسيت كلمة المرور الخاصة بك ، يمكنك استخدام عبارة الاسترداد للعودة إلى محفظتك.",
+          "LIKKIM will never ask for your recovery phrase.":
+            "لن يطلب منك LIKKIM أبدًا عبارة الاسترداد الخاصة بك.",
+          "Never share it with anyone.": "لا تشاركها أبدًا مع أي شخص.",
         },
       },
       ja: {
@@ -467,6 +527,16 @@ i18n
             "LIKKIMハードウェアウォレットの画面に表示されるリカバリーフレーズを保存してください。",
           "Scroll down to view all words":
             "すべての単語を見るには下にスクロールしてください",
+          "Recovery Phrase": "リカバリーフレーズ",
+          "Read the following, then save the phrase securely.":
+            "以下を読んでからフレーズを安全に保存してください。",
+          "The recovery phrase alone gives you full access to your wallets and funds.":
+            "リカバリーフレーズだけであなたのウォレットと資金に完全にアクセスできます。",
+          "If you forget your password, you can use the recovery phrase to get back into your wallet.":
+            "パスワードを忘れた場合は、リカバリーフレーズを使用してウォレットに戻ることができます。",
+          "LIKKIM will never ask for your recovery phrase.":
+            "LIKKIM がリカバリーフレーズを尋ねることはありません。",
+          "Never share it with anyone.": "誰とも共有しないでください。",
         },
       },
       ru: {
@@ -536,6 +606,16 @@ i18n
             "Пожалуйста, сохраните фразу восстановления, отображаемую на экране аппаратного кошелька LIKKIM.",
           "Scroll down to view all words":
             "Прокрутите вниз, чтобы увидеть все слова",
+          "Recovery Phrase": "Фраза восстановления",
+          "Read the following, then save the phrase securely.":
+            "Прочитайте следующее, затем сохраните фразу надежно.",
+          "The recovery phrase alone gives you full access to your wallets and funds.":
+            "Фраза восстановления дает полный доступ к вашим кошелькам и средствам.",
+          "If you forget your password, you can use the recovery phrase to get back into your wallet.":
+            "Если вы забудете свой пароль, вы можете использовать фразу восстановления для доступа к своему кошельку.",
+          "LIKKIM will never ask for your recovery phrase.":
+            "LIKKIM никогда не попросит вашу фразу восстановления.",
+          "Never share it with anyone.": "Никогда не делитесь этим ни с кем.",
         },
       },
       ko: {
@@ -600,6 +680,16 @@ i18n
             "LIKKIM 하드웨어 지갑 화면에 표시된 복구 구문을 저장하세요.",
           "Scroll down to view all words":
             "모든 단어를 보려면 아래로 스크롤하세요",
+          "Recovery Phrase": "복구 구문",
+          "Read the following, then save the phrase securely.":
+            "다음을 읽고 구문을 안전하게 저장하세요.",
+          "The recovery phrase alone gives you full access to your wallets and funds.":
+            "복구 구문만으로도 지갑과 자금에 완전히 액세스할 수 있습니다.",
+          "If you forget your password, you can use the recovery phrase to get back into your wallet.":
+            "비밀번호를 잊어버린 경우 복구 구문을 사용하여 지갑에 다시 액세스할 수 있습니다.",
+          "LIKKIM will never ask for your recovery phrase.":
+            "LIKKIM은 복구 구문을 묻지 않습니다.",
+          "Never share it with anyone.": "절대 다른 사람과 공유하지 마십시오.",
         },
       },
       pt: {
@@ -669,6 +759,16 @@ i18n
             "Por favor, salve a frase de recuperação exibida na tela da carteira de hardware LIKKIM.",
           "Scroll down to view all words":
             "Role para baixo para ver todas as palavras",
+          "Recovery Phrase": "Frase de recuperação",
+          "Read the following, then save the phrase securely.":
+            "Leia o seguinte e salve a frase com segurança.",
+          "The recovery phrase alone gives you full access to your wallets and funds.":
+            "A frase de recuperação sozinha dá-lhe acesso total às suas carteiras e fundos.",
+          "If you forget your password, you can use the recovery phrase to get back into your wallet.":
+            "Se você esquecer sua senha, pode usar a frase de recuperação para voltar à sua carteira.",
+          "LIKKIM will never ask for your recovery phrase.":
+            "A LIKKIM nunca pedirá sua frase de recuperação.",
+          "Never share it with anyone.": "Nunca compartilhe com ninguém.",
         },
       },
       "pt-BR": {
@@ -740,6 +840,16 @@ i18n
             "Por favor, salve a frase de recuperação exibida na tela da carteira de hardware LIKKIM.",
           "Scroll down to view all words":
             "Role para baixo para ver todas as palavras",
+          "Recovery Phrase": "Frase de recuperação",
+          "Read the following, then save the phrase securely.":
+            "Leia o seguinte e salve a frase com segurança.",
+          "The recovery phrase alone gives you full access to your wallets and funds.":
+            "A frase de recuperação sozinha dá-lhe acesso total às suas carteiras e fundos.",
+          "If you forget your password, you can use the recovery phrase to get back into your wallet.":
+            "Se você esquecer sua senha, pode usar a frase de recuperação para voltar à sua carteira.",
+          "LIKKIM will never ask for your recovery phrase.":
+            "A LIKKIM nunca pedirá sua frase de recuperação.",
+          "Never share it with anyone.": "Nunca compartilhe com ninguém.",
         },
       },
       it: {
@@ -811,6 +921,16 @@ i18n
             "Si prega di salvare la frase di recupero visualizzata sullo schermo del portafoglio hardware LIKKIM.",
           "Scroll down to view all words":
             "Scorri verso il basso per visualizzare tutte le parole",
+          "Recovery Phrase": "Frase di recupero",
+          "Read the following, then save the phrase securely.":
+            "Leggi quanto segue, quindi salva la frase in modo sicuro.",
+          "The recovery phrase alone gives you full access to your wallets and funds.":
+            "La frase di recupero da sola ti dà pieno accesso ai tuoi portafogli e fondi.",
+          "If you forget your password, you can use the recovery phrase to get back into your wallet.":
+            "Se dimentichi la tua password, puoi utilizzare la frase di recupero per rientrare nel tuo portafoglio.",
+          "LIKKIM will never ask for your recovery phrase.":
+            "LIKKIM non chiederà mai la tua frase di recupero.",
+          "Never share it with anyone.": "Non condividerlo mai con nessuno.",
         },
       },
       de: {
@@ -882,6 +1002,16 @@ i18n
             "Bitte speichern Sie die Wiederherstellungsphrase, die auf dem Bildschirm der LIKKIM-Hardware-Wallet angezeigt wird.",
           "Scroll down to view all words":
             "Scrollen Sie nach unten, um alle Wörter zu sehen",
+          "Recovery Phrase": "Wiederherstellungsphrase",
+          "Read the following, then save the phrase securely.":
+            "Lesen Sie das Folgende und speichern Sie die Phrase sicher.",
+          "The recovery phrase alone gives you full access to your wallets and funds.":
+            "Die Wiederherstellungsphrase allein gibt Ihnen vollen Zugriff auf Ihre Wallets und Gelder.",
+          "If you forget your password, you can use the recovery phrase to get back into your wallet.":
+            "Wenn Sie Ihr Passwort vergessen, können Sie die Wiederherstellungsphrase verwenden, um wieder auf Ihre Wallet zuzugreifen.",
+          "LIKKIM will never ask for your recovery phrase.":
+            "LIKKIM wird niemals nach Ihrer Wiederherstellungsphrase fragen.",
+          "Never share it with anyone.": "Teilen Sie es niemals mit jemandem.",
         },
       },
       hi: {
@@ -951,6 +1081,16 @@ i18n
             "कृपया LIKKIM हार्डवेयर वॉलेट स्क्रीन पर प्रदर्शित रिकवरी वाक्यांश को सहेजें।",
           "Scroll down to view all words":
             "सभी शब्दों को देखने के लिए नीचे स्क्रॉल करें",
+          "Recovery Phrase": "रिकवरी वाक्यांश",
+          "Read the following, then save the phrase securely.":
+            "निम्नलिखित पढ़ें, फिर वाक्यांश को सुरक्षित रूप से सहेजें।",
+          "The recovery phrase alone gives you full access to your wallets and funds.":
+            "रिकवरी वाक्यांश अकेले आपको आपके वॉलेट और फंड तक पूरी पहुंच प्रदान करता है।",
+          "If you forget your password, you can use the recovery phrase to get back into your wallet.":
+            "यदि आप अपना पासवर्ड भूल जाते हैं, तो आप अपने वॉलेट में वापस आने के लिए रिकवरी वाक्यांश का उपयोग कर सकते हैं।",
+          "LIKKIM will never ask for your recovery phrase.":
+            "LIKKIM कभी भी आपसे आपका रिकवरी वाक्यांश नहीं पूछेगा।",
+          "Never share it with anyone.": "इसे कभी भी किसी के साथ साझा न करें।",
         },
       },
       mn: {
@@ -1021,6 +1161,16 @@ i18n
             "LIKKIM техник хангамжийн түрийвчний дэлгэц дээрх сэргээх үгийг хадгалаарай.",
           "Scroll down to view all words":
             "Бүх үгийг харахын тулд доош гүйлгэнэ үү",
+          "Recovery Phrase": "Сэргээх үг",
+          "Read the following, then save the phrase securely.":
+            "Дараахыг уншаад үгээ аюулгүй хадгална уу.",
+          "The recovery phrase alone gives you full access to your wallets and funds.":
+            "Сэргээх үг дангаараа таны түрийвч болон хөрөнгөд бүрэн нэвтрэх боломжийг олгоно.",
+          "If you forget your password, you can use the recovery phrase to get back into your wallet.":
+            "Хэрэв та нууц үгээ мартсан бол сэргээх үгийг ашиглан түрийвчээ дахин ашиглаж болно.",
+          "LIKKIM will never ask for your recovery phrase.":
+            "LIKKIM таны сэргээх үгийг хэзээ ч асуухгүй.",
+          "Never share it with anyone.": "Хэнтэй ч битгий хуваалцаарай.",
         },
       },
       th: {
@@ -1085,6 +1235,16 @@ i18n
           "Please save the recovery phrase displayed on the LIKKIM hardware wallet screen.":
             "โปรดบันทึกวลีการกู้คืนที่แสดงบนหน้าจอกระเป๋าเงินฮาร์ดแวร์ LIKKIM",
           "Scroll down to view all words": "เลื่อนลงเพื่อดูคำทั้งหมด",
+          "Recovery Phrase": "วลีการกู้คืน",
+          "Read the following, then save the phrase securely.":
+            "อ่านข้อความต่อไปนี้ จากนั้นบันทึกวลีไว้อย่างปลอดภัย",
+          "The recovery phrase alone gives you full access to your wallets and funds.":
+            "วลีการกู้คืนจะทำให้คุณสามารถเข้าถึงกระเป๋าเงินและเงินทุนของคุณได้อย่างสมบูรณ์",
+          "If you forget your password, you can use the recovery phrase to get back into your wallet.":
+            "หากคุณลืมรหัสผ่าน คุณสามารถใช้วลีการกู้คืนเพื่อกลับเข้าสู่กระเป๋าเงินของคุณได้",
+          "LIKKIM will never ask for your recovery phrase.":
+            "LIKKIM จะไม่ขอวลีการกู้คืนของคุณ",
+          "Never share it with anyone.": "อย่าแชร์กับใครก็ตาม",
         },
       },
       uk: {
@@ -1155,6 +1315,16 @@ i18n
             "Будь ласка, збережіть фразу відновлення, що відображається на екрані апаратного гаманця LIKKIM.",
           "Scroll down to view all words":
             "Прокрутіть вниз, щоб побачити всі слова",
+          "Recovery Phrase": "Фраза відновлення",
+          "Read the following, then save the phrase securely.":
+            "Прочитайте наступне, а потім надійно збережіть фразу.",
+          "The recovery phrase alone gives you full access to your wallets and funds.":
+            "Фраза відновлення надає вам повний доступ до ваших гаманців та коштів.",
+          "If you forget your password, you can use the recovery phrase to get back into your wallet.":
+            "Якщо ви забудете свій пароль, ви можете скористатися фразою відновлення, щоб повернутися до свого гаманця.",
+          "LIKKIM will never ask for your recovery phrase.":
+            "LIKKIM ніколи не попросить вашу фразу відновлення.",
+          "Never share it with anyone.": "Ніколи не діліться нею ні з ким.",
         },
       },
       vi: {
@@ -1221,6 +1391,17 @@ i18n
           "Please save the recovery phrase displayed on the LIKKIM hardware wallet screen.":
             "Vui lòng lưu cụm từ khôi phục hiển thị trên màn hình ví phần cứng LIKKIM.",
           "Scroll down to view all words": "Cuộn xuống để xem tất cả các từ",
+          "Recovery Phrase": "Cụm từ khôi phục",
+          "Read the following, then save the phrase securely.":
+            "Đọc phần sau, sau đó lưu cụm từ một cách an toàn.",
+          "The recovery phrase alone gives you full access to your wallets and funds.":
+            "Cụm từ khôi phục duy nhất cho phép bạn truy cập đầy đủ vào ví và tiền của mình.",
+          "If you forget your password, you can use the recovery phrase to get back into your wallet.":
+            "Nếu bạn quên mật khẩu, bạn có thể sử dụng cụm từ khôi phục để quay lại ví của mình.",
+          "LIKKIM will never ask for your recovery phrase.":
+            "LIKKIM sẽ không bao giờ yêu cầu cụm từ khôi phục của bạn.",
+          "Never share it with anyone.":
+            "Đừng bao giờ chia sẻ nó với bất kỳ ai.",
         },
       },
       id: {
@@ -1289,6 +1470,17 @@ i18n
             "Silakan simpan frasa pemulihan yang ditampilkan di layar dompet perangkat keras LIKKIM.",
           "Scroll down to view all words":
             "Gulir ke bawah untuk melihat semua kata",
+          "Recovery Phrase": "Frasa pemulihan",
+          "Read the following, then save the phrase securely.":
+            "Baca yang berikut, lalu simpan frasa dengan aman.",
+          "The recovery phrase alone gives you full access to your wallets and funds.":
+            "Frasa pemulihan saja memberi Anda akses penuh ke dompet dan dana Anda.",
+          "If you forget your password, you can use the recovery phrase to get back into your wallet.":
+            "Jika Anda lupa kata sandi, Anda dapat menggunakan frasa pemulihan untuk kembali ke dompet Anda.",
+          "LIKKIM will never ask for your recovery phrase.":
+            "LIKKIM tidak akan pernah meminta frasa pemulihan Anda.",
+          "Never share it with anyone.":
+            "Jangan pernah membagikannya dengan siapa pun.",
         },
       },
       tl: {
@@ -1359,6 +1551,17 @@ i18n
             "Paki-save ang parirala ng pagbawi na ipinapakita sa screen ng LIKKIM hardware wallet.",
           "Scroll down to view all words":
             "Mag-scroll pababa upang makita ang lahat ng mga salita",
+          "Recovery Phrase": "Parirala ng pagbawi",
+          "Read the following, then save the phrase securely.":
+            "Basahin ang sumusunod, pagkatapos ay i-save ang parirala nang ligtas.",
+          "The recovery phrase alone gives you full access to your wallets and funds.":
+            "Ang parirala ng pagbawi lamang ay nagbibigay sa iyo ng buong access sa iyong mga wallet at pondo.",
+          "If you forget your password, you can use the recovery phrase to get back into your wallet.":
+            "Kung nakalimutan mo ang iyong password, maaari mong gamitin ang parirala ng pagbawi upang makabalik sa iyong wallet.",
+          "LIKKIM will never ask for your recovery phrase.":
+            "Hindi hihilingin ng LIKKIM ang iyong parirala ng pagbawi.",
+          "Never share it with anyone.":
+            "Huwag kailanman ibahagi ito sa sinuman.",
         },
       },
       bn: {
@@ -1427,6 +1630,16 @@ i18n
           "Please save the recovery phrase displayed on the LIKKIM hardware wallet screen.":
             "দয়া করে LIKKIM হার্ডওয়্যার ওয়ালেট স্ক্রিনে প্রদর্শিত পুনরুদ্ধার বাক্যাংশটি সংরক্ষণ করুন।",
           "Scroll down to view all words": "সমস্ত শব্দ দেখতে নীচে স্ক্রোল করুন",
+          "Recovery Phrase": "পুনরুদ্ধার বাক্যাংশ",
+          "Read the following, then save the phrase securely.":
+            "নীচেরটি পড়ুন, তারপরে বাক্যাংশটি নিরাপদে সংরক্ষণ করুন।",
+          "The recovery phrase alone gives you full access to your wallets and funds.":
+            "পুনরুদ্ধার বাক্যাংশ আপনাকে আপনার ওয়ালেট এবং তহবিলে সম্পূর্ণ অ্যাক্সেস দেয়।",
+          "If you forget your password, you can use the recovery phrase to get back into your wallet.":
+            "আপনি যদি আপনার পাসওয়ার্ড ভুলে যান, আপনি আপনার ওয়ালেটে ফিরে যেতে পুনরুদ্ধার বাক্যাংশ ব্যবহার করতে পারেন।",
+          "LIKKIM will never ask for your recovery phrase.":
+            "LIKKIM কখনই আপনার পুনরুদ্ধার বাক্যাংশ চাইবে না।",
+          "Never share it with anyone.": "এটি কখনই কারও সাথে ভাগ করবেন না।",
         },
       },
     },
