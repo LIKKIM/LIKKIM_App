@@ -76,12 +76,46 @@ function MyColdWalletScreen() {
     { code: "bn", name: "বাংলা" },
   ];
 
-  let bleManager;
-  if (Platform.OS !== "web") {
-    bleManager = new BleManager({ restoreStateIdentifier: restoreIdentifier });
-  }
+  const bleManagerRef = useRef(null);
 
-  const handleBluetoothPairing = () => {
+  useEffect(() => {
+    if (Platform.OS !== "web") {
+      bleManagerRef.current = new BleManager({
+        restoreStateIdentifier: restoreIdentifier,
+      });
+
+      const subscription = bleManagerRef.current.onStateChange((state) => {
+        if (state === "PoweredOn") {
+          scanDevices();
+        }
+      }, true);
+
+      return () => {
+        subscription.remove();
+        bleManagerRef.current.destroy();
+      };
+    }
+  }, []);
+
+  const handleBluetoothPairing = async () => {
+    if (Platform.OS === "android") {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        {
+          title: t("Location Permission"),
+          message: t("We need access to your location to use Bluetooth."),
+          buttonNeutral: t("Ask Me Later"),
+          buttonNegative: t("Cancel"),
+          buttonPositive: t("OK"),
+        }
+      );
+
+      if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
+        console.warn("Location permission denied");
+        return;
+      }
+    }
+
     setModalVisible(true);
     scanDevices();
   };
@@ -113,25 +147,6 @@ function MyColdWalletScreen() {
     });
   }, [t, navigation]);
 
-  useEffect(() => {
-    let subscription;
-    if (Platform.OS !== "web") {
-      subscription = bleManager.onStateChange((state) => {
-        if (state === "PoweredOn") {
-          scanDevices();
-        } else if (state === "Unknown") {
-          console.warn("Bluetooth state is unknown");
-        }
-      }, true);
-    }
-    return () => {
-      if (subscription) {
-        subscription.remove();
-      }
-      bleManager.destroy();
-    };
-  }, [bleManager]);
-
   const scanDevices = () => {
     if (Platform.OS !== "web" && !isScanning) {
       console.log("Scanning started");
@@ -139,24 +154,28 @@ function MyColdWalletScreen() {
       const scanOptions = { allowDuplicates: true };
       const scanFilter = null;
 
-      bleManager.startDeviceScan(scanFilter, scanOptions, (error, device) => {
-        if (error) {
-          console.error("BleManager scanning error:", error);
-          setIsScanning(false);
-          return;
-        }
-        setDevices((prevDevices) => {
-          if (!prevDevices.find((d) => d.id === device.id)) {
-            return [...prevDevices, device];
+      bleManagerRef.current.startDeviceScan(
+        scanFilter,
+        scanOptions,
+        (error, device) => {
+          if (error) {
+            console.error("BleManager scanning error:", error);
+            setIsScanning(false);
+            return;
           }
-          return prevDevices;
-        });
-        console.log("Scanned device:", device);
-      });
+          setDevices((prevDevices) => {
+            if (!prevDevices.find((d) => d.id === device.id)) {
+              return [...prevDevices, device];
+            }
+            return prevDevices;
+          });
+          console.log("Scanned device:", device);
+        }
+      );
 
       setTimeout(() => {
         console.log("Scanning stopped");
-        bleManager.stopDeviceScan();
+        bleManagerRef.current.stopDeviceScan();
         setIsScanning(false);
       }, 90000);
     } else {
@@ -205,7 +224,10 @@ function MyColdWalletScreen() {
       icon: "language",
       onPress: () => setLanguageModalVisible(true),
       extraIcon: "arrow-drop-down",
-      selectedOption: (languages.find((lang) => lang.code === selectedLanguage) || languages.find((lang) => lang.code === 'en')).name,
+      selectedOption: (
+        languages.find((lang) => lang.code === selectedLanguage) ||
+        languages.find((lang) => lang.code === "en")
+      ).name,
     },
     {
       title: t("Dark Mode"),
@@ -225,7 +247,7 @@ function MyColdWalletScreen() {
       title: t("Version"),
       icon: "info-outline",
       version: Constants.expoConfig.version, // Updated to use expoConfig
-      onPress: () => { },
+      onPress: () => {},
     },
   ];
 
@@ -411,7 +433,7 @@ function MyColdWalletScreen() {
                     style={[
                       MyColdWalletScreenStyle.passwordInput,
                       isConfirmPasswordFocused &&
-                      MyColdWalletScreenStyle.focusedInput,
+                        MyColdWalletScreenStyle.focusedInput,
                     ]}
                     placeholder={t("Confirm new password")}
                     placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
