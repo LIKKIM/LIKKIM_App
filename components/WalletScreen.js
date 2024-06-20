@@ -475,7 +475,7 @@ function WalletScreen({ route }) {
             </Text>
             <Text style={WalletScreenStyle.alertModalSubtitle}>
               {t(
-                "Please write down the recovery phrase displayed on the LIKKIM hardware wallet screen. Please save the recovery phrase securely."
+                "Please save the recovery phrase displayed on the LIKKIM hardware wallet screen."
               )}
             </Text>
             <View
@@ -486,14 +486,10 @@ function WalletScreen({ route }) {
                 marginBottom: 10,
               }}
             >
-              <Icon
-                name="keyboard-arrow-down"
-                size={30}
-                color={secondTextColor}
-              />
-              <Text style={{ color: secondTextColor, marginLeft: 5 }}>
+              <Text style={{ color: secondTextColor, marginRight: 10 }}>
                 {t("Scroll down to view all words")}
               </Text>
+              <Icon name="swipe-vertical" size={26} color={secondTextColor} />
             </View>
             <ScrollView style={{ width: "100%", height: 300 }}>
               {mnemonic.map((words, index) => (
