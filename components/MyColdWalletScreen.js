@@ -17,7 +17,7 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { BlurView } from "expo-blur";
-import { BleManager, BleErrorCode } from "react-native-ble-plx";
+import { BleManager } from "react-native-ble-plx";
 import Constants from "expo-constants";
 import { useNavigation } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
@@ -160,20 +160,16 @@ function MyColdWalletScreen() {
         (error, device) => {
           if (error) {
             console.error("BleManager scanning error:", error);
-            if (error.errorCode === BleErrorCode.BluetoothUnsupported) {
-              console.error("Bluetooth LE is unsupported on this device");
-              setIsScanning(false);
-              return;
-            }
-          } else {
-            setDevices((prevDevices) => {
-              if (!prevDevices.find((d) => d.id === device.id)) {
-                return [...prevDevices, device];
-              }
-              return prevDevices;
-            });
-            console.log("Scanned device:", device);
+            setIsScanning(false);
+            return;
           }
+          setDevices((prevDevices) => {
+            if (!prevDevices.find((d) => d.id === device.id)) {
+              return [...prevDevices, device];
+            }
+            return prevDevices;
+          });
+          console.log("Scanned device:", device);
         }
       );
 
