@@ -262,7 +262,10 @@ function WalletScreen({ route }) {
     >
       <ScrollView
         ref={scrollViewRef}
-        contentContainerStyle={WalletScreenStyle.scrollViewContent}
+        contentContainerStyle={[
+          WalletScreenStyle.scrollViewContent,
+          { paddingBottom: 80 },
+        ]}
         style={WalletScreenStyle.scrollView}
       >
         {cryptoCards.length > 0 && (
