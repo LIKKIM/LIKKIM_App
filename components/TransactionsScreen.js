@@ -15,15 +15,15 @@ import QRCode from "react-native-qrcode-svg";
 import { useTranslation } from "react-i18next";
 import { CryptoContext, DarkModeContext } from "./CryptoContext";
 import TransactionsScreenStyles from "../styles/TransactionsScreenStyle";
-import Icon from "react-native-vector-icons/MaterialIcons"; // 引入 Icon 模块
-import AsyncStorage from "@react-native-async-storage/async-storage"; // Ensure AsyncStorage is imported
+import Icon from "react-native-vector-icons/MaterialIcons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function TransactionsScreen() {
   const { t } = useTranslation();
   const { isDarkMode } = useContext(DarkModeContext);
   const { addedCryptos, setAddedCryptos } = useContext(CryptoContext);
   const TransactionsScreenStyle = TransactionsScreenStyles(isDarkMode);
-  const addressIcon = isDarkMode ? "#ffffff" : "#676776"; // 设置图标颜色
+  const addressIcon = isDarkMode ? "#ffffff" : "#676776";
   const [modalVisible, setModalVisible] = useState(false);
   const [addressModalVisible, setAddressModalVisible] = useState(false);
   const [operationType, setOperationType] = useState("");
@@ -63,16 +63,16 @@ function TransactionsScreen() {
     setModalVisible(true);
   };
 
-  const selectCrypto = (crypto) => {
+  const selectCrypto = async (crypto) => {
     setSelectedCrypto(crypto.shortName);
     setSelectedAddress(crypto.address);
     setModalVisible(false);
     if (operationType === "receive") {
       setAddressModalVisible(true);
     } else if (operationType === "send") {
-      setAddressModalVisible(false); // 隐藏地址模态窗口
-      setInputAddress(""); // 清除先前的输入地址
-      setInputAddressModalVisible(true); // 显示输入地址模态窗口
+      setAddressModalVisible(false);
+      setInputAddress("");
+      setInputAddressModalVisible(true);
     }
   };
 
