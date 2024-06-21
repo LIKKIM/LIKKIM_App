@@ -24,7 +24,7 @@ export default {
       NSBluetoothAlwaysUsageDescription: "获取蓝牙权限连接钱包设备",
     },
     supportsTablet: true,
-    buildNumber: "4",
+    buildNumber: "6",
     bundleIdentifier: "RN.LKKIM",
     icon: "./assets/icon.png",
   },
