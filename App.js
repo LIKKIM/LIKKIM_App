@@ -111,6 +111,7 @@ export default function App() {
                         color: headerTitleColor, // 动态设置标题颜色
                       },
                       headerTitle: t(route.name),
+                      headerShadowVisible: false, // 隐藏顶部栏下方的阴影
                     })}
                   >
                     <Tab.Screen
