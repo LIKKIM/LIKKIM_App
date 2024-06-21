@@ -31,6 +31,7 @@ function TransactionsScreen() {
   const iconColor = isDarkMode ? "#ffffff" : "#24234C";
   const darkColors = ["#24234C", "#101021"];
   const lightColors = ["#FFFFFF", "#EDEBEF"];
+  const placeholderColor = isDarkMode ? "#ffffff" : "#24234C";
   const [inputAddress, setInputAddress] = useState("");
   const [transactionHistory, setTransactionHistory] = useState([]);
   const [inputAddressModalVisible, setInputAddressModalVisible] =
@@ -139,7 +140,7 @@ function TransactionsScreen() {
                 <TextInput
                   style={[TransactionsScreenStyle.input, { color: "#ffffff" }]}
                   placeholder={t("Enter Address")}
-                  placeholderTextColor="#ffffff"
+                  placeholderTextColor={placeholderColor}
                   onChangeText={(text) => setInputAddress(text)}
                   value={inputAddress}
                 />
