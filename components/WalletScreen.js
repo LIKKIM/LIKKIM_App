@@ -51,6 +51,7 @@ function WalletScreen({ route }) {
   const darkColors = ["#24234C", "#101021"];
   const lightColors = ["#FFFFFF", "#EDEBEF"];
   const secondTextColor = isDarkMode ? "#ddd" : "#676776";
+  const placeholderColor = isDarkMode ? "#ffffff" : "#24234C";
   const [selectedWords, setSelectedWords] = useState(Array(12).fill(null));
   const [importPhraseModalVisible, setImportPhraseModalVisible] =
     useState(false);
@@ -396,6 +397,7 @@ function WalletScreen({ route }) {
               value={phrase}
               onChangeText={setPhrase}
               placeholder={t("Use spaces between words")}
+              placeholderTextColor={placeholderColor}
               multiline
             />
             <TouchableOpacity
