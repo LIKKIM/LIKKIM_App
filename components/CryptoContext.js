@@ -167,6 +167,12 @@ export const CryptoProvider = ({ children }) => {
 
         const languageValue = await AsyncStorage.getItem("language");
         if (languageValue !== null) i18n.changeLanguage(languageValue);
+
+        const savedCryptos = await AsyncStorage.getItem("addedCryptos");
+        if (savedCryptos !== null) {
+          setAddedCryptos(JSON.parse(savedCryptos));
+          setCryptoCount(JSON.parse(savedCryptos).length);
+        }
       } catch (error) {
         console.error("Error loading settings: ", error);
       }
@@ -180,12 +186,16 @@ export const CryptoProvider = ({ children }) => {
         await AsyncStorage.setItem("darkMode", JSON.stringify(isDarkMode));
         await AsyncStorage.setItem("currencyUnit", currencyUnit);
         await AsyncStorage.setItem("language", i18n.language);
+        await AsyncStorage.setItem(
+          "addedCryptos",
+          JSON.stringify(addedCryptos)
+        );
       } catch (error) {
         console.error("Error saving settings: ", error);
       }
     };
     saveSettings();
-  }, [isDarkMode, currencyUnit, i18n.language]);
+  }, [isDarkMode, currencyUnit, i18n.language, addedCryptos]);
 
   return (
     <CryptoContext.Provider

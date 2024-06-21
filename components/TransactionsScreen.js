@@ -1,5 +1,5 @@
 // TransactionsScreen.js
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -15,13 +15,12 @@ import QRCode from "react-native-qrcode-svg";
 import { useTranslation } from "react-i18next";
 import { CryptoContext, DarkModeContext } from "./CryptoContext";
 import TransactionsScreenStyles from "../styles/TransactionsScreenStyle";
-// import Clipboard from "@react-native-clipboard/clipboard"; // 引入 Clipboard 模块
 import Icon from "react-native-vector-icons/MaterialIcons"; // 引入 Icon 模块
 
 function TransactionsScreen() {
   const { t } = useTranslation();
   const { isDarkMode } = useContext(DarkModeContext);
-  const { addedCryptos } = useContext(CryptoContext);
+  const { addedCryptos, setAddedCryptos } = useContext(CryptoContext);
   const TransactionsScreenStyle = TransactionsScreenStyles(isDarkMode);
   const addressIcon = isDarkMode ? "#ffffff" : "#676776"; // 设置图标颜色
   const [modalVisible, setModalVisible] = useState(false);
@@ -36,6 +35,21 @@ function TransactionsScreen() {
   const [transactionHistory, setTransactionHistory] = useState([]);
   const [inputAddressModalVisible, setInputAddressModalVisible] =
     useState(false);
+
+  useEffect(() => {
+    // 从 AsyncStorage 加载 addedCryptos 数据
+    const loadAddedCryptos = async () => {
+      try {
+        const savedCryptos = await AsyncStorage.getItem("addedCryptos");
+        if (savedCryptos !== null) {
+          setAddedCryptos(JSON.parse(savedCryptos));
+        }
+      } catch (error) {
+        console.error("Error loading addedCryptos: ", error);
+      }
+    };
+    loadAddedCryptos();
+  }, []);
 
   const handleReceivePress = () => {
     setOperationType("receive");

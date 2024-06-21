@@ -85,6 +85,7 @@ function WalletScreen({ route }) {
         const storedCards = await AsyncStorage.getItem("cryptoCards");
         if (storedCards !== null) {
           setCryptoCards(JSON.parse(storedCards));
+          setAddedCryptos(JSON.parse(storedCards)); // 加载时同步 addedCryptos
         }
       } catch (error) {
         console.error("Error loading crypto cards:", error);
@@ -97,6 +98,7 @@ function WalletScreen({ route }) {
     const saveCryptoCards = async () => {
       try {
         await AsyncStorage.setItem("cryptoCards", JSON.stringify(cryptoCards));
+        await AsyncStorage.setItem("addedCryptos", JSON.stringify(cryptoCards)); // 保存时同步 addedCryptos
       } catch (error) {
         console.error("Error saving crypto cards:", error);
       }
