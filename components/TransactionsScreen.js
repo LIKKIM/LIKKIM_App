@@ -16,6 +16,7 @@ import { useTranslation } from "react-i18next";
 import { CryptoContext, DarkModeContext } from "./CryptoContext";
 import TransactionsScreenStyles from "../styles/TransactionsScreenStyle";
 import Icon from "react-native-vector-icons/MaterialIcons"; // 引入 Icon 模块
+import AsyncStorage from "@react-native-async-storage/async-storage"; // Ensure AsyncStorage is imported
 
 function TransactionsScreen() {
   const { t } = useTranslation();
