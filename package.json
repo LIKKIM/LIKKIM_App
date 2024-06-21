@@ -24,6 +24,7 @@
     "i18next": "^23.11.5",
     "i18next-react-native-language-detector": "^1.0.2",
     "intl-pluralrules": "^2.0.1",
+    "metro-cache": "^0.80.9",
     "nativewind": "^2.0.11",
     "patch-package": "^8.0.0",
     "postinstall-postinstall": "^2.1.0",

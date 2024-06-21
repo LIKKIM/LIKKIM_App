@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   TextInput,
   ScrollView,
-  Clipboard
+  Clipboard,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { BlurView } from "expo-blur";
@@ -201,7 +201,7 @@ function TransactionsScreen() {
                 </ScrollView>
               )}
               <TouchableOpacity
-                style={TransactionsScreenStyle.CancelButton}
+                style={TransactionsScreenStyle.cancelButton}
                 onPress={() => setModalVisible(false)}
               >
                 <Text style={TransactionsScreenStyle.cancelButtonText}>
