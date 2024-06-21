@@ -6,7 +6,11 @@
     "android": "expo run:android",
     "ios": "expo run:ios",
     "web": "expo start --web",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package",
+    "getApk": "eas build --profile apk --platform android",
+    "getTF": "eas build --auto-submit --platform ios",
+    "pushPlayStore": "eas build --auto-submit --platform android",
+    "updateNative": "expo prebuild"
   },
   "dependencies": {
     "@babel/plugin-proposal-export-namespace-from": "^7.18.9",

@@ -1,57 +1,49 @@
-
-
-
 /**
  * LIKKIM 动态Config
- * @param {*} param0 
- * @returns 
+ * @param {*} param0
+ * @returns
  */
 
 export default {
-
-  "owner": "likkimteam",
-  "name": "LIKKIM",
-  "slug": "likkim",
-  "version": "1.0.0",
-  "orientation": "portrait",
-  "icon": "./assets/icon.png",
-  "userInterfaceStyle": "automatic",
-  "splash": {
-    "image": "./assets/splash.png",
-    "resizeMode": "contain",
-    "backgroundColor": "#ffffff"
+  owner: "likkimteam",
+  name: "LIKKIM",
+  slug: "likkim",
+  version: "1.0.0",
+  orientation: "portrait",
+  icon: "./assets/icon.png",
+  userInterfaceStyle: "automatic",
+  splash: {
+    image: "./assets/splash.png",
+    resizeMode: "contain",
+    backgroundColor: "#ffffff",
   },
-  "assetBundlePatterns": ["**/*"],
-  "ios": {
-    "infoPlist": {
-      "ITSAppUsesNonExemptEncryption": false,
-      "NSBluetoothAlwaysUsageDescription": "获取蓝牙权限连接钱包设备"
+  assetBundlePatterns: ["**/*"],
+  ios: {
+    infoPlist: {
+      ITSAppUsesNonExemptEncryption: false,
+      NSBluetoothAlwaysUsageDescription: "获取蓝牙权限连接钱包设备",
     },
-    "supportsTablet": true,
-    "buildNumber": "3",
-    "bundleIdentifier": "RN.LKKIM",
-    "icon": "./assets/icon.png"
+    supportsTablet: true,
+    buildNumber: "4",
+    bundleIdentifier: "RN.LKKIM",
+    icon: "./assets/icon.png",
   },
-  "android": {
-    "adaptiveIcon": {
-      "foregroundImage": "./assets/adaptive-icon.png",
-      "backgroundColor": "#ffffff",
-      "versionCode": 1,
+  android: {
+    adaptiveIcon: {
+      foregroundImage: "./assets/adaptive-icon.png",
+      backgroundColor: "#ffffff",
+      versionCode: 1,
     },
 
-    "package": "com.anonymous.likkim"
+    package: "com.anonymous.likkim",
   },
-  "web": {
-    "favicon": "./assets/favicon.png"
+  web: {
+    favicon: "./assets/favicon.png",
   },
-  "plugins": ["expo-localization"],
-  "extra": {
-    "eas": {
-      "projectId": "fdfad2e7-7bed-4bcd-ae6d-ca6c74643d63"
-    }
-  }
-
-}
-
-
-
+  plugins: ["expo-localization"],
+  extra: {
+    eas: {
+      projectId: "fdfad2e7-7bed-4bcd-ae6d-ca6c74643d63",
+    },
+  },
+};
