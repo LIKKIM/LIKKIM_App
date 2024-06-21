@@ -62,19 +62,10 @@ const TransactionsScreenStyles = (isDarkMode) => {
       marginBottom: 10,
       flex: 1,
     },
-    CancelButton: {
-      borderWidth: 3, // 设置边框宽度
-      borderColor: buttonBackgroundColor, // 设置边框颜色
-      padding: 10,
-      width: "100%",
-      justifyContent: "center",
-      borderRadius: 30,
-      height: 60,
-      alignItems: "center",
-      marginBottom: 10,
-    },
+
     submitButtonText: {
       color: textColor,
+      fontSize: 18,
     },
     input: {
       backgroundColor: inputBackgroundColor,

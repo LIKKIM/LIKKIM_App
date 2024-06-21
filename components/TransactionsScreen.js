@@ -1,5 +1,5 @@
 // TransactionsScreen.js
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   TextInput,
   ScrollView,
-  Clipboard
+  Clipboard,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { BlurView } from "expo-blur";
@@ -15,15 +15,15 @@ import QRCode from "react-native-qrcode-svg";
 import { useTranslation } from "react-i18next";
 import { CryptoContext, DarkModeContext } from "./CryptoContext";
 import TransactionsScreenStyles from "../styles/TransactionsScreenStyle";
-// import Clipboard from "@react-native-clipboard/clipboard"; // 引入 Clipboard 模块
-import Icon from "react-native-vector-icons/MaterialIcons"; // 引入 Icon 模块
+import Icon from "react-native-vector-icons/MaterialIcons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function TransactionsScreen() {
   const { t } = useTranslation();
   const { isDarkMode } = useContext(DarkModeContext);
-  const { addedCryptos } = useContext(CryptoContext);
+  const { addedCryptos, setAddedCryptos } = useContext(CryptoContext);
   const TransactionsScreenStyle = TransactionsScreenStyles(isDarkMode);
-  const addressIcon = isDarkMode ? "#ffffff" : "#676776"; // 设置图标颜色
+  const addressIcon = isDarkMode ? "#ffffff" : "#676776";
   const [modalVisible, setModalVisible] = useState(false);
   const [addressModalVisible, setAddressModalVisible] = useState(false);
   const [operationType, setOperationType] = useState("");
@@ -32,10 +32,26 @@ function TransactionsScreen() {
   const iconColor = isDarkMode ? "#ffffff" : "#24234C";
   const darkColors = ["#24234C", "#101021"];
   const lightColors = ["#FFFFFF", "#EDEBEF"];
+  const placeholderColor = isDarkMode ? "#ffffff" : "#24234C";
   const [inputAddress, setInputAddress] = useState("");
   const [transactionHistory, setTransactionHistory] = useState([]);
   const [inputAddressModalVisible, setInputAddressModalVisible] =
     useState(false);
+
+  useEffect(() => {
+    // 从 AsyncStorage 加载 addedCryptos 数据
+    const loadAddedCryptos = async () => {
+      try {
+        const savedCryptos = await AsyncStorage.getItem("addedCryptos");
+        if (savedCryptos !== null) {
+          setAddedCryptos(JSON.parse(savedCryptos));
+        }
+      } catch (error) {
+        console.error("Error loading addedCryptos: ", error);
+      }
+    };
+    loadAddedCryptos();
+  }, []);
 
   const handleReceivePress = () => {
     setOperationType("receive");
@@ -47,16 +63,16 @@ function TransactionsScreen() {
     setModalVisible(true);
   };
 
-  const selectCrypto = (crypto) => {
+  const selectCrypto = async (crypto) => {
     setSelectedCrypto(crypto.shortName);
     setSelectedAddress(crypto.address);
     setModalVisible(false);
     if (operationType === "receive") {
       setAddressModalVisible(true);
     } else if (operationType === "send") {
-      setAddressModalVisible(false); // 隐藏地址模态窗口
-      setInputAddress(""); // 清除先前的输入地址
-      setInputAddressModalVisible(true); // 显示输入地址模态窗口
+      setAddressModalVisible(false);
+      setInputAddress("");
+      setInputAddressModalVisible(true);
     }
   };
 
@@ -120,36 +136,35 @@ function TransactionsScreen() {
               <Text style={TransactionsScreenStyle.modalTitle}>
                 {t("Enter the recipient's address:")}
               </Text>
-
               <View style={{ width: "100%" }}>
                 <TextInput
                   style={[TransactionsScreenStyle.input, { color: "#ffffff" }]}
                   placeholder={t("Enter Address")}
-                  placeholderTextColor="#ffffff"
+                  placeholderTextColor={placeholderColor}
                   onChangeText={(text) => setInputAddress(text)}
                   value={inputAddress}
                 />
-                <TouchableOpacity
-                  style={TransactionsScreenStyle.optionButton}
-                  onPress={() => {
-                    console.log(`Sending ${selectedCrypto} to ${inputAddress}`);
-                    setInputAddressModalVisible(false);
-                    // Implement the logic to send crypto to the input address
-                  }}
-                >
-                  <Text style={TransactionsScreenStyle.submitButtonText}>
-                    {t("Submit")}
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={TransactionsScreenStyle.optionButton}
-                  onPress={() => setInputAddressModalVisible(false)}
-                >
-                  <Text style={TransactionsScreenStyle.cancelButtonText}>
-                    {t("Cancel")}
-                  </Text>
-                </TouchableOpacity>
               </View>
+              <TouchableOpacity
+                style={TransactionsScreenStyle.optionButton}
+                onPress={() => {
+                  console.log(`Sending ${selectedCrypto} to ${inputAddress}`);
+                  setInputAddressModalVisible(false);
+                  // Implement the logic to send crypto to the input address
+                }}
+              >
+                <Text style={TransactionsScreenStyle.submitButtonText}>
+                  {t("Submit")}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={TransactionsScreenStyle.optionButton}
+                onPress={() => setInputAddressModalVisible(false)}
+              >
+                <Text style={TransactionsScreenStyle.cancelButtonText}>
+                  {t("Cancel")}
+                </Text>
+              </TouchableOpacity>
             </View>
           </BlurView>
         </Modal>
@@ -201,7 +216,7 @@ function TransactionsScreen() {
                 </ScrollView>
               )}
               <TouchableOpacity
-                style={TransactionsScreenStyle.CancelButton}
+                style={TransactionsScreenStyle.cancelButton}
                 onPress={() => setModalVisible(false)}
               >
                 <Text style={TransactionsScreenStyle.cancelButtonText}>

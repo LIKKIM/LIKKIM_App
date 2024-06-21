@@ -51,6 +51,7 @@ function WalletScreen({ route }) {
   const darkColors = ["#24234C", "#101021"];
   const lightColors = ["#FFFFFF", "#EDEBEF"];
   const secondTextColor = isDarkMode ? "#ddd" : "#676776";
+  const placeholderColor = isDarkMode ? "#ffffff" : "#24234C";
   const [selectedWords, setSelectedWords] = useState(Array(12).fill(null));
   const [importPhraseModalVisible, setImportPhraseModalVisible] =
     useState(false);
@@ -85,6 +86,7 @@ function WalletScreen({ route }) {
         const storedCards = await AsyncStorage.getItem("cryptoCards");
         if (storedCards !== null) {
           setCryptoCards(JSON.parse(storedCards));
+          setAddedCryptos(JSON.parse(storedCards)); // 加载时同步 addedCryptos
         }
       } catch (error) {
         console.error("Error loading crypto cards:", error);
@@ -97,6 +99,7 @@ function WalletScreen({ route }) {
     const saveCryptoCards = async () => {
       try {
         await AsyncStorage.setItem("cryptoCards", JSON.stringify(cryptoCards));
+        await AsyncStorage.setItem("addedCryptos", JSON.stringify(cryptoCards)); // 保存时同步 addedCryptos
       } catch (error) {
         console.error("Error saving crypto cards:", error);
       }
@@ -259,7 +262,10 @@ function WalletScreen({ route }) {
     >
       <ScrollView
         ref={scrollViewRef}
-        contentContainerStyle={WalletScreenStyle.scrollViewContent}
+        contentContainerStyle={[
+          WalletScreenStyle.scrollViewContent,
+          { paddingBottom: 80 },
+        ]}
         style={WalletScreenStyle.scrollView}
       >
         {cryptoCards.length > 0 && (
@@ -394,6 +400,7 @@ function WalletScreen({ route }) {
               value={phrase}
               onChangeText={setPhrase}
               placeholder={t("Use spaces between words")}
+              placeholderTextColor={placeholderColor}
               multiline
             />
             <TouchableOpacity
