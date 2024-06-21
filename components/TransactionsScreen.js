@@ -135,7 +135,6 @@ function TransactionsScreen() {
               <Text style={TransactionsScreenStyle.modalTitle}>
                 {t("Enter the recipient's address:")}
               </Text>
-
               <View style={{ width: "100%" }}>
                 <TextInput
                   style={[TransactionsScreenStyle.input, { color: "#ffffff" }]}
@@ -144,27 +143,27 @@ function TransactionsScreen() {
                   onChangeText={(text) => setInputAddress(text)}
                   value={inputAddress}
                 />
-                <TouchableOpacity
-                  style={TransactionsScreenStyle.optionButton}
-                  onPress={() => {
-                    console.log(`Sending ${selectedCrypto} to ${inputAddress}`);
-                    setInputAddressModalVisible(false);
-                    // Implement the logic to send crypto to the input address
-                  }}
-                >
-                  <Text style={TransactionsScreenStyle.submitButtonText}>
-                    {t("Submit")}
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={TransactionsScreenStyle.optionButton}
-                  onPress={() => setInputAddressModalVisible(false)}
-                >
-                  <Text style={TransactionsScreenStyle.cancelButtonText}>
-                    {t("Cancel")}
-                  </Text>
-                </TouchableOpacity>
               </View>
+              <TouchableOpacity
+                style={TransactionsScreenStyle.optionButton}
+                onPress={() => {
+                  console.log(`Sending ${selectedCrypto} to ${inputAddress}`);
+                  setInputAddressModalVisible(false);
+                  // Implement the logic to send crypto to the input address
+                }}
+              >
+                <Text style={TransactionsScreenStyle.submitButtonText}>
+                  {t("Submit")}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={TransactionsScreenStyle.optionButton}
+                onPress={() => setInputAddressModalVisible(false)}
+              >
+                <Text style={TransactionsScreenStyle.cancelButtonText}>
+                  {t("Cancel")}
+                </Text>
+              </TouchableOpacity>
             </View>
           </BlurView>
         </Modal>
