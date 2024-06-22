@@ -35,7 +35,7 @@ const WalletScreenStyles = (isDarkMode) => {
       marginBottom: 40,
     },
     totalBalanceText: {
-      fontSize: 18,
+      fontSize: 16,
       marginVertical: 10,
       color: secondTextColor,
       textAlign: "left",
@@ -48,7 +48,7 @@ const WalletScreenStyles = (isDarkMode) => {
     },
     currencyUnit: {
       marginLeft: 20,
-      fontSize: 18,
+      fontSize: 16,
       textAlign: "left",
       color: currencyUnitColor,
       fontWeight: "normal",
@@ -78,7 +78,7 @@ const WalletScreenStyles = (isDarkMode) => {
     },
     addWalletButtonText: {
       color: "#fff",
-      fontSize: 18,
+      fontSize: 16,
       fontWeight: "bold",
     },
     cardIcon: {
@@ -93,7 +93,7 @@ const WalletScreenStyles = (isDarkMode) => {
       top: 25,
       left: 60,
       color: "#fff",
-      fontSize: 18,
+      fontSize: 16,
       fontWeight: "bold",
     },
     cardShortName: {
@@ -108,7 +108,7 @@ const WalletScreenStyles = (isDarkMode) => {
       top: 25,
       right: 15,
       color: "#fff",
-      fontSize: 18,
+      fontSize: 16,
       fontWeight: "bold",
     },
     card: {
@@ -229,17 +229,17 @@ const WalletScreenStyles = (isDarkMode) => {
     },
     ButtonText: {
       color: textColor,
-      fontSize: 18,
+      fontSize: 16,
     },
     processButtonText: {
       color: secondTextColor,
-      fontSize: 18,
+      fontSize: 16,
       marginBottom: 45,
       fontWeight: "bold",
     },
     cancelButtonText: {
       color: secondTextColor,
-      fontSize: 18,
+      fontSize: 16,
     },
     addCryptoModalView: {
       margin: 20,
@@ -306,7 +306,7 @@ const WalletScreenStyles = (isDarkMode) => {
     },
     modalTitle: {
       color: textColor,
-      fontSize: 18,
+      fontSize: 16,
       fontWeight: "bold",
     },
     modalSubtitle: {
@@ -364,12 +364,12 @@ const WalletScreenStyles = (isDarkMode) => {
     modalCryptoName: {
       color: textColor,
       textAlign: "center",
-      fontSize: 18,
+      fontSize: 16,
     },
     modalBalanceLabel: {
       color: textColor,
       textAlign: "center",
-      fontSize: 18,
+      fontSize: 16,
       marginTop: 40,
       marginBottom: 10,
     },

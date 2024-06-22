@@ -15,14 +15,15 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
   return StyleSheet.create({
     cancelButtonText: {
       color: secondTextColor,
-      fontSize: 18,
+      fontSize: 16,
     },
     modalSubtitle: {
       color: secondTextColor,
       fontSize: 14,
-      marginBottom: 300,
+      marginBottom: 20,
       textAlign: "center",
     },
+
     scanModalSubtitle: {
       color: secondTextColor,
       fontSize: 14,
@@ -31,7 +32,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
     },
     modalTitle: {
       color: textColor,
-      fontSize: 18,
+      fontSize: 16,
       fontWeight: "bold",
       marginBottom: 15,
     },
@@ -42,10 +43,12 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       backgroundColor: modalBackgroundColor,
       borderRadius: 20,
       padding: 35,
+      justifyContent: "space-between",
       alignItems: "center",
     },
     centeredView: {
       flex: 1,
+
       justifyContent: "center",
       alignItems: "center",
       backgroundColor: "rgba(0, 0, 0, 0.5)",
@@ -102,7 +105,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       color: textColor,
       fontSize: 20,
       fontWeight: "bold",
-      marginBottom: 30,
+      marginBottom: 10,
     },
     languageList: {
       maxHeight: 300,

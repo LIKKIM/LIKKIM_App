@@ -13,7 +13,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
   return StyleSheet.create({
     cancelButtonText: {
       color: secondTextColor,
-      fontSize: 18,
+      fontSize: 16,
     },
     cancelButton: {
       borderWidth: 3,
@@ -27,7 +27,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
     },
     modalTitle: {
       color: textColor,
-      fontSize: 18,
+      fontSize: 16,
       fontWeight: "bold",
       marginBottom: 15,
     },
@@ -63,7 +63,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
 
     submitButtonText: {
       color: textColor,
-      fontSize: 18,
+      fontSize: 16,
     },
     input: {
       backgroundColor: inputBackgroundColor,
@@ -93,7 +93,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       position: "absolute",
       left: 20,
       top: 20,
-      fontSize: 18,
+      fontSize: 16,
       color: textColor,
       fontWeight: "bold",
     },
@@ -136,7 +136,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
     },
     modalText: { color: secondTextColor, textAlign: "center" },
     TransactionModalTitle: {
-      fontSize: 18,
+      fontSize: 16,
       color: textColor,
       textAlign: "center",
       marginBottom: 30,

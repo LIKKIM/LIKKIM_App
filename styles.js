@@ -4,7 +4,7 @@ import { StyleSheet } from "react-native";
 export const lightTheme = StyleSheet.create({
   settingsText: {
     marginLeft: 10,
-    fontSize: 18,
+    fontSize: 16,
     color: "#24234C",
   },
   titleText: {
@@ -32,7 +32,7 @@ export const lightTheme = StyleSheet.create({
 export const darkTheme = StyleSheet.create({
   settingsText: {
     marginLeft: 10,
-    fontSize: 18,
+    fontSize: 16,
     color: "#fff",
   },
   titleText: {
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   },
   settingsText: {
     marginLeft: 10,
-    fontSize: 18,
+    fontSize: 16,
     color: "#fff",
   },
   // container: 定义了应用的主容器样式
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
   // cardText: 卡片内的文字样式
   cardText: {
     color: "white",
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: "bold",
   },
 
@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
   // modalTitle, modalSubtitle, modalText: 模态窗口内的标题、副标题和文本样式
   modalTitle: {
     color: "#ffffff", // 白色文字
-    fontSize: 18, // 字体大小为18
+    fontSize: 16, // 字体大小为18
     fontWeight: "bold", // 字体加粗
     marginBottom: 15, // 与下一个元素间距15
   },
@@ -242,7 +242,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     left: 20,
     top: 20,
-    fontSize: 18,
+    fontSize: 16,
     color: "#ffffff", // 白色文字
   },
   noHistoryText: {

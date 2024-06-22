@@ -1,4 +1,3 @@
-// MyColdWalletScreen.js
 import React, { useState, useEffect, useRef, useContext } from "react";
 import {
   View,
@@ -408,7 +407,10 @@ function MyColdWalletScreen() {
                 <Text style={MyColdWalletScreenStyle.languageModalTitle}>
                   {t("Set Password")}
                 </Text>
-
+                <Text style={MyColdWalletScreenStyle.modalSubtitle}>
+                  {t("Only you can unlock your wallet")}
+                </Text>
+                {/* 添加副标题 */}
                 <View style={{ marginVertical: 10, width: "100%" }}>
                   <Text style={MyColdWalletScreenStyle.passwordModalText}>
                     {t("Password")}
