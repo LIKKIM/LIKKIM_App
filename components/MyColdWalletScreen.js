@@ -153,10 +153,9 @@ function MyColdWalletScreen() {
       setDevices([]); // 清空 devices 状态以避免重复显示
 
       const scanOptions = { allowDuplicates: true };
-      const scanFilter = null;
 
       bleManagerRef.current.startDeviceScan(
-        scanFilter,
+        null, // scanFilter
         scanOptions,
         (error, device) => {
           if (error) {
@@ -164,13 +163,15 @@ function MyColdWalletScreen() {
             setIsScanning(false);
             return;
           }
+
+          console.log("Scanned device:", device);
+
           setDevices((prevDevices) => {
             if (!prevDevices.find((d) => d.id === device.id)) {
               return [...prevDevices, device];
             }
             return prevDevices;
           });
-          console.log("Scanned device:", device);
         }
       );
 
