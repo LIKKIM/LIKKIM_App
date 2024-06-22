@@ -422,6 +422,7 @@ const WalletScreenStyles = (isDarkMode) => {
       borderRadius: 5,
       color: textColor,
       backgroundColor: isDarkMode ? "#24234C" : "#E5E1E9",
+      textAlignVertical: "top",
     },
   });
 };
