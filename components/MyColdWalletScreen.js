@@ -151,6 +151,8 @@ function MyColdWalletScreen() {
     if (Platform.OS !== "web" && !isScanning) {
       console.log("Scanning started");
       setIsScanning(true);
+      setDevices([]); // 清空 devices 状态以避免重复显示
+
       const scanOptions = { allowDuplicates: true };
       const scanFilter = null;
 
