@@ -158,7 +158,7 @@ function TransactionsScreen() {
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity
-                style={TransactionsScreenStyle.optionButton}
+                style={TransactionsScreenStyle.cancelButton}
                 onPress={() => setInputAddressModalVisible(false)}
               >
                 <Text style={TransactionsScreenStyle.cancelButtonText}>

@@ -16,15 +16,14 @@ const TransactionsScreenStyles = (isDarkMode) => {
       fontSize: 18,
     },
     cancelButton: {
-      backgroundColor: buttonBackgroundColor,
+      borderWidth: 3,
+      borderColor: buttonBackgroundColor,
       padding: 10,
       width: "90%",
       justifyContent: "center",
       borderRadius: 30,
       height: 60,
       alignItems: "center",
-      position: "absolute",
-      bottom: 60,
     },
     modalTitle: {
       color: textColor,
@@ -54,13 +53,12 @@ const TransactionsScreenStyles = (isDarkMode) => {
     optionButton: {
       backgroundColor: buttonBackgroundColor,
       padding: 10,
-      width: "100%",
+      width: "90%",
       justifyContent: "center",
       borderRadius: 30,
       height: 60,
       alignItems: "center",
       marginBottom: 10,
-      flex: 1,
     },
 
     submitButtonText: {
