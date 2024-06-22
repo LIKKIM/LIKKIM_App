@@ -1,3 +1,4 @@
+// MyColdWalletScreen.js
 import React, { useState, useEffect, useRef, useContext } from "react";
 import {
   View,
@@ -75,10 +76,14 @@ function MyColdWalletScreen() {
     { code: "bn", name: "বাংলা" },
   ];
 
-  const bleManagerRef = useRef(new BleManager());
+  const bleManagerRef = useRef(null);
 
   useEffect(() => {
     if (Platform.OS !== "web") {
+      bleManagerRef.current = new BleManager({
+        restoreStateIdentifier: restoreIdentifier,
+      });
+
       const subscription = bleManagerRef.current.onStateChange((state) => {
         if (state === "PoweredOn") {
           scanDevices();
@@ -146,12 +151,11 @@ function MyColdWalletScreen() {
     if (Platform.OS !== "web" && !isScanning) {
       console.log("Scanning started");
       setIsScanning(true);
-      setDevices([]); // 清空 devices 状态以避免重复显示
-
       const scanOptions = { allowDuplicates: true };
+      const scanFilter = null;
 
       bleManagerRef.current.startDeviceScan(
-        null, // scanFilter
+        scanFilter,
         scanOptions,
         (error, device) => {
           if (error) {
@@ -159,15 +163,13 @@ function MyColdWalletScreen() {
             setIsScanning(false);
             return;
           }
-
-          console.log("Scanned device:", device);
-
           setDevices((prevDevices) => {
             if (!prevDevices.find((d) => d.id === device.id)) {
               return [...prevDevices, device];
             }
             return prevDevices;
           });
+          console.log("Scanned device:", device);
         }
       );
 
