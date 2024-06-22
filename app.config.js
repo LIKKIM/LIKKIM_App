@@ -22,6 +22,8 @@ export default {
     infoPlist: {
       ITSAppUsesNonExemptEncryption: false,
       NSBluetoothAlwaysUsageDescription: "获取蓝牙权限连接钱包设备",
+      NSBluetoothPeripheralUsageDescription: "获取蓝牙权限连接钱包设备",
+      NSLocationWhenInUseUsageDescription: "获取定位权限以进行蓝牙扫描",
       UIBackgroundModes: ["bluetooth-central", "bluetooth-peripheral"],
     },
     supportsTablet: true,
@@ -33,9 +35,8 @@ export default {
     adaptiveIcon: {
       foregroundImage: "./assets/adaptive-icon.png",
       backgroundColor: "#ffffff",
-      versionCode: 1,
     },
-
+    versionCode: 1,
     package: "com.anonymous.likkim",
   },
   web: {
