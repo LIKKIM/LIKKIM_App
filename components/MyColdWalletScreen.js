@@ -403,7 +403,7 @@ function MyColdWalletScreen() {
               style={MyColdWalletScreenStyle.centeredView}
             >
               <View style={MyColdWalletScreenStyle.modalView}>
-                <Text style={MyColdWalletScreenStyle.languageModalTitle}>
+                <Text style={MyColdWalletScreenStyle.passwordModalTitle}>
                   {t("Set Password")}
                 </Text>
                 <Text style={MyColdWalletScreenStyle.modalSubtitle}>
@@ -497,8 +497,8 @@ function MyColdWalletScreen() {
                 intensity={10}
                 style={MyColdWalletScreenStyle.centeredView}
               >
-                <View style={MyColdWalletScreenStyle.modalView}>
-                  <Text style={MyColdWalletScreenStyle.modalTitle}>
+                <View style={MyColdWalletScreenStyle.bluetoothModalView}>
+                  <Text style={MyColdWalletScreenStyle.bluetoothModalTitle}>
                     {t("LOOKING FOR DEVICES")}
                   </Text>
                   {isScanning ? (

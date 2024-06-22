@@ -36,7 +36,23 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       fontWeight: "bold",
       marginBottom: 15,
     },
+    bluetoothModalTitle: {
+      color: textColor,
+      fontSize: 20,
+      fontWeight: "bold",
+      marginBottom: 10,
+    },
     modalView: {
+      margin: 20,
+      height: 500,
+      width: "90%",
+      backgroundColor: modalBackgroundColor,
+      borderRadius: 20,
+      padding: 35,
+
+      alignItems: "center",
+    },
+    bluetoothModalView: {
       margin: 20,
       height: 500,
       width: "90%",
@@ -105,6 +121,12 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       color: textColor,
       fontSize: 20,
       fontWeight: "bold",
+      marginBottom: 30,
+    },
+    passwordModalTitle: {
+      color: textColor,
+      fontSize: 20,
+      fontWeight: "bold",
       marginBottom: 10,
     },
     languageList: {
@@ -154,7 +176,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       paddingVertical: 10,
       borderRadius: 10,
       height: 50,
-      marginBottom: 20,
+      marginBottom: 10,
       width: "100%",
       color: textColor,
     },
