@@ -94,6 +94,7 @@ i18n
           "Use spaces between words": "Use spaces between words",
           "Import Recovery Phrase": "Import Recovery Phrase",
           Version: "Version",
+          "Only you can unlock your wallet": "Only you can unlock your wallet",
         },
       },
       zh: {
@@ -177,6 +178,7 @@ i18n
           "Use spaces between words": "单词之间用空格分隔",
           "Import Recovery Phrase": "导入恢复短语",
           Version: "版本",
+          "Only you can unlock your wallet": "只有你可以解锁你的钱包",
         },
       },
       "zh-TW": {
@@ -258,6 +260,7 @@ i18n
           "Use spaces between words": "單詞之間用空格分隔",
           "Import Recovery Phrase": "導入恢復短語",
           Version: "版本",
+          "Only you can unlock your wallet": "只有你可以解鎖你的錢包",
         },
       },
       fr: {
@@ -349,6 +352,8 @@ i18n
           "Use spaces between words": "Utilisez des espaces entre les mots",
           "Import Recovery Phrase": "Importer la phrase de récupération",
           Version: "Version",
+          "Only you can unlock your wallet":
+            "Seul vous pouvez déverrouiller votre portefeuille",
         },
       },
       es: {
@@ -440,6 +445,8 @@ i18n
           "Use spaces between words": "Usa espacios entre las palabras",
           "Import Recovery Phrase": "Importar frase de recuperación",
           Version: "Versión",
+          "Only you can unlock your wallet":
+            "Solo tú puedes desbloquear tu billetera",
         },
       },
       ar: {
@@ -527,6 +534,7 @@ i18n
           "Use spaces between words": "استخدم مسافات بين الكلمات",
           "Import Recovery Phrase": "استيراد عبارة الاسترداد",
           Version: "الإصدار",
+          "Only you can unlock your wallet": "فقط يمكنك فتح محفظتك",
         },
       },
       ja: {
@@ -617,6 +625,8 @@ i18n
           "Use spaces between words": "単語の間にスペースを使用",
           "Import Recovery Phrase": "リカバリーフレーズをインポート",
           Version: "バージョン",
+          "Only you can unlock your wallet":
+            "あなたのみがウォレットを解除できます",
         },
       },
       ru: {
@@ -707,6 +717,8 @@ i18n
           "Use spaces between words": "Используйте пробелы между словами",
           "Import Recovery Phrase": "Импортировать фразу восстановления",
           Version: "Версия",
+          "Only you can unlock your wallet":
+            "Только вы можете разблокировать свой кошелек",
         },
       },
       ko: {
@@ -792,6 +804,8 @@ i18n
           "Use spaces between words": "단어 사이에 공백 사용",
           "Import Recovery Phrase": "복구 구문 가져오기",
           Version: "버전",
+          "Only you can unlock your wallet":
+            "지갑을 잠금 해제할 수 있는 사람은 당신뿐입니다",
         },
       },
       pt: {
@@ -882,6 +896,8 @@ i18n
           "Use spaces between words": "Use espaços entre as palavras",
           "Import Recovery Phrase": "Importar Frase de Recuperação",
           Version: "Versão",
+          "Only you can unlock your wallet":
+            "Apenas você pode desbloquear sua carteira",
         },
       },
       "pt-BR": {
@@ -974,6 +990,8 @@ i18n
           "Use spaces between words": "Use espaços entre as palavras",
           "Import Recovery Phrase": "Importar Frase de Recuperação",
           Version: "Versão",
+          "Only you can unlock your wallet":
+            "Apenas você pode desbloquear sua carteira",
         },
       },
       it: {
@@ -1066,6 +1084,8 @@ i18n
           "Use spaces between words": "Usa spazi tra le parole",
           "Import Recovery Phrase": "Importa Frase di Recupero",
           Version: "Versione",
+          "Only you can unlock your wallet":
+            "Solo tu puoi sbloccare il tuo portafoglio",
         },
       },
       de: {
@@ -1160,6 +1180,8 @@ i18n
             "Verwenden Sie Leerzeichen zwischen den Wörtern",
           "Import Recovery Phrase": "Wiederherstellungsphrase importieren",
           Version: "Version",
+          "Only you can unlock your wallet":
+            "Nur du kannst dein Wallet entsperren",
         },
       },
       hi: {
@@ -1251,6 +1273,8 @@ i18n
           "Use spaces between words": "शब्दों के बीच स्पेस का उपयोग करें",
           "Import Recovery Phrase": "रिकवरी वाक्यांश आयात करें",
           Version: "संस्करण",
+          "Only you can unlock your wallet":
+            "केवल आप ही अपना बटुआ अनलॉक कर सकते हैं",
         },
       },
       mn: {
@@ -1343,6 +1367,8 @@ i18n
           "Use spaces between words": "Үгсийн хооронд зай ашигла",
           "Import Recovery Phrase": "Сэргээх үгийг импортлох",
           Version: "Хувилбар",
+          "Only you can unlock your wallet":
+            "Зөвхөн та өөрийн түрийвчээ онгойлгож чадна",
         },
       },
       th: {
@@ -1428,6 +1454,8 @@ i18n
           "Use spaces between words": "ใช้ช่องว่างระหว่างคำ",
           "Import Recovery Phrase": "นำเข้าวลีการกู้คืน",
           Version: "เวอร์ชัน",
+          "Only you can unlock your wallet":
+            "มีเพียงคุณเท่านั้นที่สามารถปลดล็อกกระเป๋าเงินของคุณได้",
         },
       },
       uk: {
@@ -1516,6 +1544,8 @@ i18n
           "Encrypting your data": "Шифрування ваших даних",
           "Your wallet is now ready": "Ваш гаманець готовий",
           "Let's Go": "Почнемо",
+          "Only you can unlock your wallet":
+            "Тільки ви можете розблокувати свій гаманець",
         },
       },
       vi: {
@@ -1604,6 +1634,8 @@ i18n
           "Use spaces between words": "Sử dụng khoảng trắng giữa các từ",
           "Import Recovery Phrase": "Nhập cụm từ khôi phục",
           Version: "Phiên bản",
+          "Only you can unlock your wallet":
+            "Chỉ bạn mới có thể mở khóa ví của mình",
         },
       },
       id: {
@@ -1695,6 +1727,8 @@ i18n
           "Use spaces between words": "Gunakan spasi di antara kata-kata",
           "Import Recovery Phrase": "Impor Frasa Pemulihan",
           Version: "Versi",
+          "Only you can unlock your wallet":
+            "Hanya Anda yang bisa membuka dompet Anda",
         },
       },
       tl: {
@@ -1789,6 +1823,8 @@ i18n
             "Gumamit ng mga espasyo sa pagitan ng mga salita",
           "Import Recovery Phrase": "I-import ang Parirala ng Pagbawi",
           Version: "Bersyon",
+          "Only you can unlock your wallet":
+            "Ikaw lang ang makakapagbukas ng iyong pitaka",
         },
       },
       bn: {
@@ -1879,6 +1915,8 @@ i18n
           "Use spaces between words": "শব্দের মধ্যে স্পেস ব্যবহার করুন",
           "Import Recovery Phrase": "পুনরুদ্ধার বাক্যাংশ আমদানি করুন",
           Version: "সংস্করণ",
+          "Only you can unlock your wallet":
+            "শুধু আপনিই আপনার ওয়ালেট আনলক করতে পারবেন",
         },
       },
     },
