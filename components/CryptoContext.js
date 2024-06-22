@@ -59,7 +59,7 @@ const initialAdditionalCryptos = [
   {
     name: "Ethereum",
     shortName: "ETH",
-    balance: "1.0",
+    balance: "0.0",
     icon: require("../assets/EthereumIcon.png"),
     cardImage: require("../assets/Card54.png"),
     address: "0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe",
@@ -67,7 +67,7 @@ const initialAdditionalCryptos = [
   {
     name: "USDT",
     shortName: "USDT",
-    balance: "2.0",
+    balance: "0.0",
     icon: require("../assets/USDTIcon.png"),
     cardImage: require("../assets/Card43.png"),
     address: "1KAt6STtisWMMVo5XGdos9P7DBNNsFfjx7",
@@ -123,7 +123,7 @@ const initialAdditionalCryptos = [
   {
     name: "Stellar",
     shortName: "XLM",
-    balance: "0.0",
+    balance: "2.0",
     icon: require("../assets/StellarIcon.png"),
     cardImage: require("../assets/Card8.png"),
     address: "GAHPDQD4MGHVZFJYZN46EZB2XB4LGIOHBTVHQRJ7MF2PL4EY7I7U77CC",
@@ -131,7 +131,7 @@ const initialAdditionalCryptos = [
   {
     name: "Dogecoin",
     shortName: "DOGE",
-    balance: "0.0",
+    balance: "1.0",
     icon: require("../assets/DogecoinIcon.png"),
     cardImage: require("../assets/Card9.png"),
     address: "D7Y55N4sFCw4KceCczPS3KhNWZ6o7pTPkd",
