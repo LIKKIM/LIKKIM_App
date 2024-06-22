@@ -75,14 +75,10 @@ function MyColdWalletScreen() {
     { code: "bn", name: "বাংলা" },
   ];
 
-  const bleManagerRef = useRef(null);
+  const bleManagerRef = useRef(new BleManager());
 
   useEffect(() => {
     if (Platform.OS !== "web") {
-      bleManagerRef.current = new BleManager({
-        restoreStateIdentifier: restoreIdentifier,
-      });
-
       const subscription = bleManagerRef.current.onStateChange((state) => {
         if (state === "PoweredOn") {
           scanDevices();
