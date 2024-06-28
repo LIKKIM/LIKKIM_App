@@ -51,7 +51,7 @@ const initialAdditionalCryptos = [
   {
     name: "Bitcoin",
     shortName: "BTC",
-    balance: "0.0",
+    balance: "100.0",
     icon: require("../assets/BitcoinIcon.png"),
     cardImage: require("../assets/Card3.png"),
     address: "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
