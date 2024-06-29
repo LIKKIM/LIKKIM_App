@@ -177,7 +177,7 @@ function MyColdWalletScreen() {
         console.log("Scanning stopped");
         bleManagerRef.current.stopDeviceScan();
         setIsScanning(false);
-      }, 90000);
+      }, 3000);
     } else {
       console.log("Attempt to scan while already scanning");
     }
@@ -525,7 +525,7 @@ function MyColdWalletScreen() {
                         keyExtractor={(item) => item.id}
                         renderItem={({ item }) => (
                           <Text style={MyColdWalletScreenStyle.modalSubtitle}>
-                            {item.name || t("Unknown Device")}
+                            {item.name || item.id}
                           </Text>
                         )}
                       />
