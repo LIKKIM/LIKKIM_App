@@ -41,6 +41,16 @@ const TransactionsScreenStyles = (isDarkMode) => {
       padding: 35,
       alignItems: "center",
     },
+    receiveModalView: {
+      margin: 20,
+      height: 500,
+      width: "90%",
+      backgroundColor: modalBackgroundColor,
+      borderRadius: 20,
+      padding: 35,
+      justifyContent: "space-between",
+      alignItems: "center",
+    },
     centeredView: {
       flex: 1,
       justifyContent: "center",

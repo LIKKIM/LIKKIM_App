@@ -235,7 +235,7 @@ function TransactionsScreen() {
           onRequestClose={() => setAddressModalVisible(false)}
         >
           <View style={TransactionsScreenStyle.centeredView}>
-            <View style={TransactionsScreenStyle.modalView}>
+            <View style={TransactionsScreenStyle.receiveModalView}>
               <Text style={TransactionsScreenStyle.modalTitle}>
                 {t("Address for")} {selectedCrypto}:
               </Text>
@@ -244,7 +244,6 @@ function TransactionsScreen() {
                   flexDirection: "row",
                   justifyContent: "center",
                   alignItems: "center",
-                  marginBottom: 30,
                 }}
               >
                 <Text style={TransactionsScreenStyle.addressText}>
