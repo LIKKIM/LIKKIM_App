@@ -17,7 +17,7 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { BlurView } from "expo-blur";
-import { BleManager } from "react-native-ble-plx";
+import { BleManager, BleErrorCode } from "react-native-ble-plx";
 import Constants from "expo-constants";
 import { useNavigation } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
@@ -48,6 +48,9 @@ function MyColdWalletScreen() {
   const [devices, setDevices] = useState([]);
   const isScanningRef = useRef(false);
   const [isScanning, setIsScanning] = useState(false);
+  const [pinModalVisible, setPinModalVisible] = useState(false);
+  const [selectedDevice, setSelectedDevice] = useState(null);
+  const [pinCode, setPinCode] = useState("");
   const restoreIdentifier = Constants.installationId;
   const iconColor = isDarkMode ? "#ffffff" : "#676776";
   const darkColors = ["#24234C", "#101021"];
@@ -160,27 +163,50 @@ function MyColdWalletScreen() {
         (error, device) => {
           if (error) {
             console.error("BleManager scanning error:", error);
-            setIsScanning(false);
-            return;
-          }
-          setDevices((prevDevices) => {
-            if (!prevDevices.find((d) => d.id === device.id)) {
-              return [...prevDevices, device];
+            if (error.errorCode === BleErrorCode.BluetoothUnsupported) {
+              console.error("Bluetooth LE is unsupported on this device");
+              setIsScanning(false);
+              return;
             }
-            return prevDevices;
-          });
-          console.log("Scanned device:", device);
+          } else {
+            setDevices((prevDevices) => {
+              if (!prevDevices.find((d) => d.id === device.id)) {
+                return [...prevDevices, device];
+              }
+              return prevDevices;
+            });
+            console.log("Scanned device:", device);
+          }
         }
       );
 
+      // 设置3秒的定时器停止扫描
       setTimeout(() => {
         console.log("Scanning stopped");
         bleManagerRef.current.stopDeviceScan();
         setIsScanning(false);
-      }, 3000);
+      }, 3000); // 3000 毫秒 = 3 秒
     } else {
       console.log("Attempt to scan while already scanning");
     }
+  };
+
+  const handleDevicePress = (device) => {
+    setSelectedDevice(device);
+    setPinModalVisible(true);
+  };
+
+  const handlePinSubmit = (device, pinCode) => {
+    // 假设有一个 connectToDevice 方法处理设备连接和PIN码
+    connectToDevice(device, pinCode);
+    setPinModalVisible(false);
+    setPinCode("");
+  };
+
+  // 示例 connectToDevice 方法
+  const connectToDevice = (device, pinCode) => {
+    // 在这里实现设备连接和PIN码验证逻辑
+    console.log(`Connecting to device ${device.id} with PIN ${pinCode}`);
   };
 
   const settingsOptions = [
@@ -524,9 +550,13 @@ function MyColdWalletScreen() {
                         data={devices}
                         keyExtractor={(item) => item.id}
                         renderItem={({ item }) => (
-                          <Text style={MyColdWalletScreenStyle.modalSubtitle}>
-                            {item.name || item.id}
-                          </Text>
+                          <TouchableOpacity
+                            onPress={() => handleDevicePress(item)}
+                          >
+                            <Text style={MyColdWalletScreenStyle.modalSubtitle}>
+                              {item.name || item.id}
+                            </Text>
+                          </TouchableOpacity>
                         )}
                       />
                     )
@@ -552,6 +582,49 @@ function MyColdWalletScreen() {
           </View>
         </View>
       </ScrollView>
+
+      {/* PIN码输入模态窗口 */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={pinModalVisible}
+        onRequestClose={() => setPinModalVisible(false)}
+      >
+        <BlurView intensity={10} style={MyColdWalletScreenStyle.centeredView}>
+          <View style={MyColdWalletScreenStyle.pinModalView}>
+            <Text style={MyColdWalletScreenStyle.modalTitle}>
+              {t("Enter PIN Code")}
+            </Text>
+            <TextInput
+              style={MyColdWalletScreenStyle.passwordInput}
+              placeholder={t("Enter PIN")}
+              placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
+              keyboardType="numeric"
+              secureTextEntry
+              onChangeText={setPinCode}
+              value={pinCode}
+            />
+            <View style={{ width: "100%" }}>
+              <TouchableOpacity
+                style={MyColdWalletScreenStyle.submitButton}
+                onPress={() => handlePinSubmit(selectedDevice, pinCode)}
+              >
+                <Text style={MyColdWalletScreenStyle.submitButtonText}>
+                  {t("Submit")}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={MyColdWalletScreenStyle.cancelButton}
+                onPress={() => setPinModalVisible(false)}
+              >
+                <Text style={MyColdWalletScreenStyle.cancelButtonText}>
+                  {t("Cancel")}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </BlurView>
+      </Modal>
     </LinearGradient>
   );
 }

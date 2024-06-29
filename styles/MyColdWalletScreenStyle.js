@@ -49,7 +49,16 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       backgroundColor: modalBackgroundColor,
       borderRadius: 20,
       padding: 35,
-
+      alignItems: "center",
+    },
+    pinModalView: {
+      margin: 20,
+      height: 500,
+      width: "90%",
+      backgroundColor: modalBackgroundColor,
+      borderRadius: 20,
+      padding: 35,
+      justifyContent: "space-between",
       alignItems: "center",
     },
     bluetoothModalView: {
