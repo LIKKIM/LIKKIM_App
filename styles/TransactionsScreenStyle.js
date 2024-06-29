@@ -155,6 +155,8 @@ const TransactionsScreenStyles = (isDarkMode) => {
       color: secondTextColor,
       textAlign: "center",
       marginRight: 10,
+      flexWrap: "wrap",
+      width: 280,
     },
   });
 };
