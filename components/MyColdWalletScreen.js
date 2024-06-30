@@ -179,17 +179,40 @@ function MyColdWalletScreen() {
     setModalVisible(false); // Close Bluetooth modal
   };
 
-  const handlePinSubmit = (device, pinCode) => {
-    // 假设有一个 connectToDevice 方法处理设备连接和PIN码
-    connectToDevice(device, pinCode);
-    setPinModalVisible(false);
-    setPinCode("");
+  const handlePinSubmit = async (device, pinCode) => {
+    try {
+      await connectToDevice(device, pinCode);
+      console.log(`PIN code sent successfully to device ${device.id}`);
+    } catch (error) {
+      console.error(`Failed to connect and send PIN: ${error.message}`);
+    } finally {
+      setPinModalVisible(false);
+      setPinCode("");
+    }
   };
 
   // 示例 connectToDevice 方法
-  const connectToDevice = (device, pinCode) => {
-    // 在这里实现设备连接和PIN码验证逻辑
-    console.log(`Connecting to device ${device.id} with PIN ${pinCode}`);
+  const connectToDevice = async (device, pinCode) => {
+    const serviceUUID = "your-service-uuid";
+    const characteristicUUID = "your-characteristic-uuid";
+
+    try {
+      await device.connect();
+      await device.discoverAllServicesAndCharacteristics();
+      const services = await device.services();
+      const service = services.find((svc) => svc.uuid === serviceUUID);
+      if (!service) throw new Error("Service not found");
+
+      const characteristics = await service.characteristics();
+      const characteristic = characteristics.find(
+        (char) => char.uuid === characteristicUUID
+      );
+      if (!characteristic) throw new Error("Characteristic not found");
+
+      await characteristic.writeWithResponse(pinCode);
+    } catch (error) {
+      throw new Error(`Failed to connect to device: ${error.message}`);
+    }
   };
 
   const settingsOptions = [
@@ -569,11 +592,7 @@ function MyColdWalletScreen() {
       >
         <BlurView intensity={10} style={MyColdWalletScreenStyle.centeredView}>
           <View style={MyColdWalletScreenStyle.pinModalView}>
-            <View
-              style={{
-                width: "100%",
-              }}
-            >
+            <View style={{ alignItems: "center" }}>
               <Text style={MyColdWalletScreenStyle.pinModalTitle}>
                 {t("Enter PIN to Connect")}
               </Text>
