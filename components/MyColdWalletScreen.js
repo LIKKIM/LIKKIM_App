@@ -194,7 +194,11 @@ function MyColdWalletScreen() {
   const connectToDevice = async (device, pinCode) => {
     try {
       await device.connect();
+      console.log(`Connected to device: ${device.id}`);
       await device.discoverAllServicesAndCharacteristics();
+      console.log(
+        `Discovered services and characteristics for device: ${device.id}`
+      );
       const services = await device.services();
       for (const service of services) {
         const characteristics = await service.characteristics();

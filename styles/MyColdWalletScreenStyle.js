@@ -28,7 +28,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
     scanModalSubtitle: {
       color: secondTextColor,
       fontSize: 14,
-      marginBottom: 170,
+      marginBottom: 140,
       textAlign: "center",
     },
     modalTitle: {
