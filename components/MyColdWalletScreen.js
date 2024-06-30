@@ -191,25 +191,24 @@ function MyColdWalletScreen() {
     }
   };
 
-  // 示例 connectToDevice 方法
   const connectToDevice = async (device, pinCode) => {
-    const serviceUUID = "your-service-uuid";
-    const characteristicUUID = "your-characteristic-uuid";
-
     try {
       await device.connect();
       await device.discoverAllServicesAndCharacteristics();
       const services = await device.services();
-      const service = services.find((svc) => svc.uuid === serviceUUID);
-      if (!service) throw new Error("Service not found");
-
-      const characteristics = await service.characteristics();
-      const characteristic = characteristics.find(
-        (char) => char.uuid === characteristicUUID
-      );
-      if (!characteristic) throw new Error("Characteristic not found");
-
-      await characteristic.writeWithResponse(pinCode);
+      for (const service of services) {
+        const characteristics = await service.characteristics();
+        for (const characteristic of characteristics) {
+          console.log(
+            `Service UUID: ${service.uuid}, Characteristic UUID: ${characteristic.uuid}`
+          );
+          if (characteristic.isWritableWithResponse) {
+            await characteristic.writeWithResponse(pinCode);
+            console.log(`PIN code sent: ${pinCode}`);
+            return;
+          }
+        }
+      }
     } catch (error) {
       throw new Error(`Failed to connect to device: ${error.message}`);
     }
