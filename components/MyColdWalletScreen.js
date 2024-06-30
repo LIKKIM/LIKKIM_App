@@ -25,6 +25,7 @@ import i18n from "../config/i18n";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CryptoContext, DarkModeContext } from "./CryptoContext";
 import MyColdWalletScreenStyles from "../styles/MyColdWalletScreenStyle";
+import { languages } from "../config/languages"; // 导入 languages
 
 let PermissionsAndroid;
 if (Platform.OS === "android") {
@@ -54,29 +55,6 @@ function MyColdWalletScreen() {
   const iconColor = isDarkMode ? "#ffffff" : "#676776";
   const darkColors = ["#24234C", "#101021"];
   const lightColors = ["#FFFFFF", "#EDEBEF"];
-  const languages = [
-    { code: "en", name: "English" },
-    { code: "zh", name: "简体中文" },
-    { code: "zh-TW", name: "繁體中文" },
-    { code: "fr", name: "Français" },
-    { code: "es", name: "Español" },
-    { code: "ar", name: "العربية" },
-    { code: "ja", name: "日本語" },
-    { code: "ru", name: "Русский" },
-    { code: "ko", name: "한국어" },
-    { code: "pt", name: "Português" },
-    { code: "pt-BR", name: "Português (Brasil)" },
-    { code: "it", name: "Italiano" },
-    { code: "de", name: "Deutsch" },
-    { code: "hi", name: "हिन्दी" },
-    { code: "mn", name: "Монгол хэл" },
-    { code: "th", name: "ไทย" },
-    { code: "uk", name: "Українська" },
-    { code: "vi", name: "Tiếng Việt" },
-    { code: "id", name: "Bahasa Indonesia" },
-    { code: "tl", name: "Filipino" },
-    { code: "bn", name: "বাংলা" },
-  ];
 
   const bleManagerRef = useRef(null);
 
@@ -184,7 +162,7 @@ function MyColdWalletScreen() {
         console.log("Scanning stopped");
         bleManagerRef.current.stopDeviceScan();
         setIsScanning(false);
-      }, 3000); // 3000 毫秒 = 3 秒
+      }, 2000);
     } else {
       console.log("Attempt to scan while already scanning");
     }
@@ -303,9 +281,7 @@ function MyColdWalletScreen() {
               style={MyColdWalletScreenStyle.settingsItem}
               onPress={option.onPress}
             >
-              <View
-                style={{ flexDirection: "row", alignItems: "center", flex: 1 }}
-              >
+              <View style={MyColdWalletScreenStyle.listContainer}>
                 <Icon
                   name={option.icon}
                   size={24}
@@ -594,7 +570,7 @@ function MyColdWalletScreen() {
       >
         <BlurView intensity={10} style={MyColdWalletScreenStyle.centeredView}>
           <View style={MyColdWalletScreenStyle.pinModalView}>
-            <Text style={MyColdWalletScreenStyle.modalTitle}>
+            <Text style={MyColdWalletScreenStyle.pinModalTitle}>
               {t("Enter PIN Code")}
             </Text>
             <TextInput

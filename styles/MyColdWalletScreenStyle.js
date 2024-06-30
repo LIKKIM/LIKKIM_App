@@ -13,6 +13,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
   const focusedBorderColor = isDarkMode ? "#6C6CF4" : "#007AFF";
 
   return StyleSheet.create({
+    listContainer: { flexDirection: "row", alignItems: "center", flex: 1 },
     cancelButtonText: {
       color: secondTextColor,
       fontSize: 16,
@@ -33,6 +34,12 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
     modalTitle: {
       color: textColor,
       fontSize: 16,
+      fontWeight: "bold",
+      marginBottom: 15,
+    },
+    pinModalTitle: {
+      color: textColor,
+      fontSize: 20,
       fontWeight: "bold",
       marginBottom: 15,
     },
