@@ -12,6 +12,7 @@ import {
   Switch,
   TextInput,
   Linking,
+  Alert,
   Button,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
@@ -27,6 +28,7 @@ import { CryptoContext, DarkModeContext } from "./CryptoContext";
 import MyColdWalletScreenStyles from "../styles/MyColdWalletScreenStyle";
 import { languages } from "../config/languages";
 import base64 from "base64-js";
+import { Buffer } from "buffer";
 
 let PermissionsAndroid;
 if (Platform.OS === "android") {
@@ -193,7 +195,7 @@ function MyColdWalletScreen() {
   };
 
   const connectToDevice = async (device, pinCode) => {
-    //开发版本使用生产版本要避免安全隐患
+    // 开发版本使用生产版本要避免安全隐患
     const serviceUUID = "0000FFE0-0000-1000-8000-00805F9B34FB";
     const writeCharacteristicUUID = "0000FFE2-0000-1000-8000-00805F9B34FB";
     const notifyCharacteristicUUID = "0000FFE1-0000-1000-8000-00805F9B34FB";
@@ -215,7 +217,11 @@ function MyColdWalletScreen() {
             console.error("Error subscribing to notifications:", error.message);
             return;
           }
-          console.log("Notification received:", characteristic.value);
+          // 处理接收到的通知数据
+          const receivedData = Buffer.from(characteristic.value, "base64");
+          const decodedData = receivedData.toString("utf-8");
+          console.log("Notification received:", decodedData);
+          Alert.alert("Notification", `Received data: ${decodedData}`);
         }
       );
 
@@ -558,11 +564,7 @@ function MyColdWalletScreen() {
                     {t("LOOKING FOR DEVICES")}
                   </Text>
                   {isScanning ? (
-                    <View
-                      style={{
-                        alignItems: "center",
-                      }}
-                    >
+                    <View style={{ alignItems: "center" }}>
                       <Image
                         source={require("../assets/Bluetooth.gif")}
                         style={MyColdWalletScreenStyle.bluetoothImg}
