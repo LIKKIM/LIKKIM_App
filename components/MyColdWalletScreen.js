@@ -569,14 +569,20 @@ function MyColdWalletScreen() {
       >
         <BlurView intensity={10} style={MyColdWalletScreenStyle.centeredView}>
           <View style={MyColdWalletScreenStyle.pinModalView}>
-            <Text style={MyColdWalletScreenStyle.pinModalTitle}>
-              {t("Enter PIN to Connect")}
-            </Text>
-            <Text style={MyColdWalletScreenStyle.modalSubtitle}>
-              {t(
-                "Use the PIN code to establish a secure connection with your LIKKIM hardware."
-              )}
-            </Text>
+            <View
+              style={{
+                width: "100%",
+              }}
+            >
+              <Text style={MyColdWalletScreenStyle.pinModalTitle}>
+                {t("Enter PIN to Connect")}
+              </Text>
+              <Text style={MyColdWalletScreenStyle.modalSubtitle}>
+                {t(
+                  "Use the PIN code to establish a secure connection with your LIKKIM hardware."
+                )}
+              </Text>
+            </View>
             <TextInput
               style={MyColdWalletScreenStyle.passwordInput}
               placeholder={t("Enter PIN")}
