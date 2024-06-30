@@ -495,7 +495,7 @@ function MyColdWalletScreen() {
             </BlurView>
           </Modal>
 
-          {/* Bluetooth Btn */}
+          {/* Bluetooth Btn modal*/}
           <View style={{ marginTop: 40 }}>
             <Text style={MyColdWalletScreenStyle.languageModalTitle}>
               {t("Bluetooth")}
@@ -583,7 +583,7 @@ function MyColdWalletScreen() {
         </View>
       </ScrollView>
 
-      {/* PIN码输入模态窗口 */}
+      {/* PIN码输入modal窗口 */}
       <Modal
         animationType="slide"
         transparent={true}
