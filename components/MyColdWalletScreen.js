@@ -137,7 +137,7 @@ function MyColdWalletScreen() {
       bleManagerRef.current.startDeviceScan(
         scanFilter,
         scanOptions,
-        async (error, device) => {
+        (error, device) => {
           if (error) {
             console.error("BleManager scanning error:", error);
             if (error.errorCode === BleErrorCode.BluetoothUnsupported) {
@@ -146,50 +146,23 @@ function MyColdWalletScreen() {
               return;
             }
           } else {
-            try {
-              await device.connect();
-              await device.discoverAllServicesAndCharacteristics();
-              const services = await device.services();
-
-              for (const service of services) {
-                const characteristics = await service.characteristics();
-                for (const characteristic of characteristics) {
-                  // 将服务 UUID 和特征 UUID 添加到设备对象
-                  if (
-                    characteristic.isWritableWithResponse ||
-                    characteristic.isWritableWithoutResponse
-                  ) {
-                    device.serviceUUID = service.uuid;
-                    device.characteristicUUID = characteristic.uuid;
-                    break;
-                  }
-                }
+            setDevices((prevDevices) => {
+              if (!prevDevices.find((d) => d.id === device.id)) {
+                return [...prevDevices, device];
               }
-              await device.cancelConnection();
-
-              setDevices((prevDevices) => {
-                if (!prevDevices.find((d) => d.id === device.id)) {
-                  return [...prevDevices, device];
-                }
-                return prevDevices;
-              });
-
-              console.log("Scanned device:", device);
-            } catch (connectError) {
-              console.error(
-                "Failed to connect and discover services:",
-                connectError
-              );
-            }
+              return prevDevices;
+            });
+            console.log("Scanned device:", device);
           }
         }
       );
 
+      // 设置3秒的定时器停止扫描
       setTimeout(() => {
         console.log("Scanning stopped");
         bleManagerRef.current.stopDeviceScan();
         setIsScanning(false);
-      }, 3000);
+      }, 2000);
     } else {
       console.log("Attempt to scan while already scanning");
     }
@@ -206,42 +179,17 @@ function MyColdWalletScreen() {
     setModalVisible(false); // Close Bluetooth modal
   };
 
-  const handlePinSubmit = () => {
-    connectToDevice(selectedDevice, pinCode);
+  const handlePinSubmit = (device, pinCode) => {
+    // 假设有一个 connectToDevice 方法处理设备连接和PIN码
+    connectToDevice(device, pinCode);
     setPinModalVisible(false);
     setPinCode("");
   };
 
-  const connectToDevice = async (device, pinCode) => {
-    try {
-      await device.connect();
-      console.log(`Connected to device ${device.id}`);
-
-      const serviceUUID = device.serviceUUID;
-      const characteristicUUID = device.characteristicUUID;
-
-      if (serviceUUID && characteristicUUID) {
-        await device.discoverAllServicesAndCharacteristics();
-        const characteristics = await device.characteristicsForService(
-          serviceUUID
-        );
-        const pinCharacteristic = characteristics.find(
-          (c) => c.uuid === characteristicUUID
-        );
-        if (pinCharacteristic) {
-          await pinCharacteristic.writeWithResponse(pinCode);
-          console.log(`PIN code ${pinCode} sent to device ${device.id}`);
-        } else {
-          console.error("PIN characteristic not found");
-        }
-      } else {
-        console.error("Service UUID or Characteristic UUID not found");
-      }
-    } catch (error) {
-      console.error("Failed to connect to device or send PIN code:", error);
-    } finally {
-      await device.cancelConnection();
-    }
+  // 示例 connectToDevice 方法
+  const connectToDevice = (device, pinCode) => {
+    // 在这里实现设备连接和PIN码验证逻辑
+    console.log(`Connecting to device ${device.id} with PIN ${pinCode}`);
   };
 
   const settingsOptions = [
@@ -547,7 +495,9 @@ function MyColdWalletScreen() {
               animationType="slide"
               transparent={true}
               visible={modalVisible}
-              onRequestClose={() => setModalVisible(!modalVisible)}
+              onRequestClose={() => {
+                setModalVisible(!modalVisible);
+              }}
             >
               <BlurView
                 intensity={10}
@@ -558,7 +508,11 @@ function MyColdWalletScreen() {
                     {t("LOOKING FOR DEVICES")}
                   </Text>
                   {isScanning ? (
-                    <View style={{ alignItems: "center" }}>
+                    <View
+                      style={{
+                        alignItems: "center",
+                      }}
+                    >
                       <Image
                         source={require("../assets/Bluetooth.gif")}
                         style={MyColdWalletScreenStyle.bluetoothImg}
@@ -570,14 +524,14 @@ function MyColdWalletScreen() {
                   ) : (
                     devices.length > 0 && (
                       <FlatList
-                        data={devices.filter((item) => item.name)} // 仅显示具有名称的设备
+                        data={devices}
                         keyExtractor={(item) => item.id}
                         renderItem={({ item }) => (
                           <TouchableOpacity
                             onPress={() => handleDevicePress(item)}
                           >
                             <Text style={MyColdWalletScreenStyle.modalSubtitle}>
-                              {item.name}
+                              {item.name || item.id}
                             </Text>
                           </TouchableOpacity>
                         )}
@@ -635,7 +589,7 @@ function MyColdWalletScreen() {
             <View style={{ width: "100%" }}>
               <TouchableOpacity
                 style={MyColdWalletScreenStyle.submitButton}
-                onPress={handlePinSubmit}
+                onPress={() => handlePinSubmit(selectedDevice, pinCode)}
               >
                 <Text style={MyColdWalletScreenStyle.submitButtonText}>
                   {t("Submit")}
