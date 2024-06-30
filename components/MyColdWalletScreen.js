@@ -146,14 +146,40 @@ function MyColdWalletScreen() {
               return;
             }
           } else {
-            if (device.name) {
+            try {
+              await device.connect();
+              await device.discoverAllServicesAndCharacteristics();
+              const services = await device.services();
+
+              for (const service of services) {
+                const characteristics = await service.characteristics();
+                for (const characteristic of characteristics) {
+                  // 将服务 UUID 和特征 UUID 添加到设备对象
+                  if (
+                    characteristic.isWritableWithResponse ||
+                    characteristic.isWritableWithoutResponse
+                  ) {
+                    device.serviceUUID = service.uuid;
+                    device.characteristicUUID = characteristic.uuid;
+                    break;
+                  }
+                }
+              }
+              await device.cancelConnection();
+
               setDevices((prevDevices) => {
                 if (!prevDevices.find((d) => d.id === device.id)) {
                   return [...prevDevices, device];
                 }
                 return prevDevices;
               });
+
               console.log("Scanned device:", device);
+            } catch (connectError) {
+              console.error(
+                "Failed to connect and discover services:",
+                connectError
+              );
             }
           }
         }
@@ -163,7 +189,7 @@ function MyColdWalletScreen() {
         console.log("Scanning stopped");
         bleManagerRef.current.stopDeviceScan();
         setIsScanning(false);
-      }, 2000);
+      }, 3000);
     } else {
       console.log("Attempt to scan while already scanning");
     }
@@ -180,14 +206,42 @@ function MyColdWalletScreen() {
     setModalVisible(false); // Close Bluetooth modal
   };
 
-  const handlePinSubmit = (device, pinCode) => {
-    connectToDevice(device, pinCode);
+  const handlePinSubmit = () => {
+    connectToDevice(selectedDevice, pinCode);
     setPinModalVisible(false);
     setPinCode("");
   };
 
-  const connectToDevice = (device, pinCode) => {
-    console.log(`Connecting to device ${device.id} with PIN ${pinCode}`);
+  const connectToDevice = async (device, pinCode) => {
+    try {
+      await device.connect();
+      console.log(`Connected to device ${device.id}`);
+
+      const serviceUUID = device.serviceUUID;
+      const characteristicUUID = device.characteristicUUID;
+
+      if (serviceUUID && characteristicUUID) {
+        await device.discoverAllServicesAndCharacteristics();
+        const characteristics = await device.characteristicsForService(
+          serviceUUID
+        );
+        const pinCharacteristic = characteristics.find(
+          (c) => c.uuid === characteristicUUID
+        );
+        if (pinCharacteristic) {
+          await pinCharacteristic.writeWithResponse(pinCode);
+          console.log(`PIN code ${pinCode} sent to device ${device.id}`);
+        } else {
+          console.error("PIN characteristic not found");
+        }
+      } else {
+        console.error("Service UUID or Characteristic UUID not found");
+      }
+    } catch (error) {
+      console.error("Failed to connect to device or send PIN code:", error);
+    } finally {
+      await device.cancelConnection();
+    }
   };
 
   const settingsOptions = [
@@ -581,7 +635,7 @@ function MyColdWalletScreen() {
             <View style={{ width: "100%" }}>
               <TouchableOpacity
                 style={MyColdWalletScreenStyle.submitButton}
-                onPress={() => handlePinSubmit(selectedDevice, pinCode)}
+                onPress={handlePinSubmit}
               >
                 <Text style={MyColdWalletScreenStyle.submitButtonText}>
                   {t("Submit")}
