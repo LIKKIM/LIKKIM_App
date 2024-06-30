@@ -39,6 +39,7 @@
     "react-dom": "18.2.0",
     "react-i18next": "^14.1.2",
     "react-native": "0.73.6",
+    "react-native-app-intro-slider": "^4.0.4",
     "react-native-ble-plx": "^3.1.2",
     "react-native-locale-detector": "^1.0.1",
     "react-native-qrcode-svg": "^6.3.1",
