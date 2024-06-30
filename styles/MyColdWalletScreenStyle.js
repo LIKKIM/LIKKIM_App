@@ -71,6 +71,10 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       justifyContent: "space-between",
       alignItems: "center",
     },
+    bluetoothImg: {
+      width: 100,
+      height: 100,
+    },
     centeredView: {
       flex: 1,
 

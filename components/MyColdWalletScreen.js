@@ -190,10 +190,15 @@ function MyColdWalletScreen() {
     }
   };
 
+  useEffect(() => {
+    if (!modalVisible && selectedDevice) {
+      setPinModalVisible(true);
+    }
+  }, [modalVisible, selectedDevice]);
+
   const handleDevicePress = (device) => {
     setSelectedDevice(device);
-    setPinModalVisible(true);
-    setModalVisible(false);
+    setModalVisible(false); // Close Bluetooth modal
   };
 
   const handlePinSubmit = (device, pinCode) => {
@@ -535,10 +540,7 @@ function MyColdWalletScreen() {
                     >
                       <Image
                         source={require("../assets/Bluetooth.gif")}
-                        style={{
-                          width: 100,
-                          height: 100,
-                        }}
+                        style={MyColdWalletScreenStyle.bluetoothImg}
                       />
                       <Text style={MyColdWalletScreenStyle.scanModalSubtitle}>
                         {t("Scanning...")}
