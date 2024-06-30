@@ -38,7 +38,6 @@ function MyColdWalletScreen() {
     useContext(CryptoContext);
   const { isDarkMode, setIsDarkMode } = useContext(DarkModeContext);
   const MyColdWalletScreenStyle = MyColdWalletScreenStyles(isDarkMode);
-
   const [currencyModalVisible, setCurrencyModalVisible] = useState(false);
   const [passwordModalVisible, setPasswordModalVisible] = useState(false);
   const [selectedCurrency, setSelectedCurrency] = useState(currencyUnit);
