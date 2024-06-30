@@ -25,7 +25,8 @@ import i18n from "../config/i18n";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CryptoContext, DarkModeContext } from "./CryptoContext";
 import MyColdWalletScreenStyles from "../styles/MyColdWalletScreenStyle";
-import { languages } from "../config/languages"; // 导入 languages
+import { languages } from "../config/languages";
+import base64 from "base64-js";
 
 let PermissionsAndroid;
 if (Platform.OS === "android") {
@@ -192,6 +193,11 @@ function MyColdWalletScreen() {
   };
 
   const connectToDevice = async (device, pinCode) => {
+    //开发版本使用生产版本要避免安全隐患
+    const serviceUUID = "0000FFE0-0000-1000-8000-00805F9B34FB";
+    const writeCharacteristicUUID = "0000FFE2-0000-1000-8000-00805F9B34FB";
+    const notifyCharacteristicUUID = "0000FFE1-0000-1000-8000-00805F9B34FB";
+
     try {
       await device.connect();
       console.log(`Connected to device: ${device.id}`);
@@ -199,22 +205,29 @@ function MyColdWalletScreen() {
       console.log(
         `Discovered services and characteristics for device: ${device.id}`
       );
-      const services = await device.services();
-      for (const service of services) {
-        const characteristics = await service.characteristics();
-        for (const characteristic of characteristics) {
-          console.log(
-            `Service UUID: ${service.uuid}, Characteristic UUID: ${characteristic.uuid}`
-          );
-          if (characteristic.isWritableWithResponse) {
-            // 转换PIN码为字节数组
-            const pinCodeBytes = stringToBytes(pinCode);
-            await characteristic.writeWithResponse(pinCodeBytes);
-            console.log(`PIN code sent: ${pinCode}`);
+
+      // 订阅通知特征
+      await device.monitorCharacteristicForService(
+        serviceUUID,
+        notifyCharacteristicUUID,
+        (error, characteristic) => {
+          if (error) {
+            console.error("Error subscribing to notifications:", error.message);
             return;
           }
+          console.log("Notification received:", characteristic.value);
         }
-      }
+      );
+
+      // 写入PIN码到特征
+      const pinCodeBytes = stringToBytes(pinCode);
+      const base64PinCode = base64.fromByteArray(pinCodeBytes);
+      await device.writeCharacteristicWithResponseForService(
+        serviceUUID,
+        writeCharacteristicUUID,
+        base64PinCode
+      );
+      console.log(`PIN code sent: ${pinCode}`);
     } catch (error) {
       throw new Error(`Failed to connect to device: ${error.message}`);
     }
@@ -292,7 +305,7 @@ function MyColdWalletScreen() {
     {
       title: t("Version"),
       icon: "info-outline",
-      version: Constants.expoConfig.version, // Updated to use expoConfig
+      version: Constants.expoConfig.version,
       onPress: () => {},
     },
   ];
