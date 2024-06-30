@@ -194,6 +194,7 @@ function MyColdWalletScreen() {
   const handleDevicePress = (device) => {
     setSelectedDevice(device);
     setPinModalVisible(true);
+    setModalVisible(false);
   };
 
   const handlePinSubmit = (device, pinCode) => {
