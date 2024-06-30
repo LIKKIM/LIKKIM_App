@@ -137,7 +137,7 @@ function MyColdWalletScreen() {
       bleManagerRef.current.startDeviceScan(
         scanFilter,
         scanOptions,
-        (error, device) => {
+        async (error, device) => {
           if (error) {
             console.error("BleManager scanning error:", error);
             if (error.errorCode === BleErrorCode.BluetoothUnsupported) {
@@ -146,18 +146,19 @@ function MyColdWalletScreen() {
               return;
             }
           } else {
-            setDevices((prevDevices) => {
-              if (!prevDevices.find((d) => d.id === device.id)) {
-                return [...prevDevices, device];
-              }
-              return prevDevices;
-            });
-            console.log("Scanned device:", device);
+            if (device.name) {
+              setDevices((prevDevices) => {
+                if (!prevDevices.find((d) => d.id === device.id)) {
+                  return [...prevDevices, device];
+                }
+                return prevDevices;
+              });
+              console.log("Scanned device:", device);
+            }
           }
         }
       );
 
-      // 设置3秒的定时器停止扫描
       setTimeout(() => {
         console.log("Scanning stopped");
         bleManagerRef.current.stopDeviceScan();
@@ -180,15 +181,12 @@ function MyColdWalletScreen() {
   };
 
   const handlePinSubmit = (device, pinCode) => {
-    // 假设有一个 connectToDevice 方法处理设备连接和PIN码
     connectToDevice(device, pinCode);
     setPinModalVisible(false);
     setPinCode("");
   };
 
-  // 示例 connectToDevice 方法
   const connectToDevice = (device, pinCode) => {
-    // 在这里实现设备连接和PIN码验证逻辑
     console.log(`Connecting to device ${device.id} with PIN ${pinCode}`);
   };
 
@@ -495,9 +493,7 @@ function MyColdWalletScreen() {
               animationType="slide"
               transparent={true}
               visible={modalVisible}
-              onRequestClose={() => {
-                setModalVisible(!modalVisible);
-              }}
+              onRequestClose={() => setModalVisible(!modalVisible)}
             >
               <BlurView
                 intensity={10}
@@ -508,11 +504,7 @@ function MyColdWalletScreen() {
                     {t("LOOKING FOR DEVICES")}
                   </Text>
                   {isScanning ? (
-                    <View
-                      style={{
-                        alignItems: "center",
-                      }}
-                    >
+                    <View style={{ alignItems: "center" }}>
                       <Image
                         source={require("../assets/Bluetooth.gif")}
                         style={MyColdWalletScreenStyle.bluetoothImg}
@@ -524,14 +516,14 @@ function MyColdWalletScreen() {
                   ) : (
                     devices.length > 0 && (
                       <FlatList
-                        data={devices}
+                        data={devices.filter((item) => item.name)} // 仅显示具有名称的设备
                         keyExtractor={(item) => item.id}
                         renderItem={({ item }) => (
                           <TouchableOpacity
                             onPress={() => handleDevicePress(item)}
                           >
                             <Text style={MyColdWalletScreenStyle.modalSubtitle}>
-                              {item.name || item.id}
+                              {item.name}
                             </Text>
                           </TouchableOpacity>
                         )}
