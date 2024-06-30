@@ -416,7 +416,6 @@ function MyColdWalletScreen() {
                 <Text style={MyColdWalletScreenStyle.modalSubtitle}>
                   {t("Only you can unlock your wallet")}
                 </Text>
-                {/* 添加副标题 */}
                 <View style={{ marginVertical: 10, width: "100%" }}>
                   <Text style={MyColdWalletScreenStyle.passwordModalText}>
                     {t("Password")}
@@ -571,7 +570,12 @@ function MyColdWalletScreen() {
         <BlurView intensity={10} style={MyColdWalletScreenStyle.centeredView}>
           <View style={MyColdWalletScreenStyle.pinModalView}>
             <Text style={MyColdWalletScreenStyle.pinModalTitle}>
-              {t("Enter PIN Code")}
+              {t("Enter PIN to Connect")}
+            </Text>
+            <Text style={MyColdWalletScreenStyle.modalSubtitle}>
+              {t(
+                "Use the PIN code to establish a secure connection with your LIKKIM hardware."
+              )}
             </Text>
             <TextInput
               style={MyColdWalletScreenStyle.passwordInput}
