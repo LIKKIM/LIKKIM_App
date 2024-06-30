@@ -203,7 +203,9 @@ function MyColdWalletScreen() {
             `Service UUID: ${service.uuid}, Characteristic UUID: ${characteristic.uuid}`
           );
           if (characteristic.isWritableWithResponse) {
-            await characteristic.writeWithResponse(pinCode);
+            // 转换PIN码为字节数组
+            const pinCodeBytes = stringToBytes(pinCode);
+            await characteristic.writeWithResponse(pinCodeBytes);
             console.log(`PIN code sent: ${pinCode}`);
             return;
           }
@@ -212,6 +214,15 @@ function MyColdWalletScreen() {
     } catch (error) {
       throw new Error(`Failed to connect to device: ${error.message}`);
     }
+  };
+
+  // 辅助函数：将字符串转换为字节数组
+  const stringToBytes = (str) => {
+    const bytes = [];
+    for (let i = 0; i < str.length; i++) {
+      bytes.push(str.charCodeAt(i));
+    }
+    return bytes;
   };
 
   const settingsOptions = [
