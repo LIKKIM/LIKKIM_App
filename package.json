@@ -11,7 +11,8 @@
     "getTF": "eas build  --auto-submit --platform ios",
     "pushPlayStore": "eas build --auto-submit --platform android",
     "updateNative": "expo prebuild",
-    "expoGo": "expo start"
+    "expoGo": "expo start",
+    "buildDev": "eas build --profile development"
   },
   "dependencies": {
     "@babel/plugin-proposal-export-namespace-from": "^7.18.9",
@@ -19,6 +20,7 @@
     "@react-native-async-storage/async-storage": "^1.23.1",
     "@react-navigation/bottom-tabs": "^6.5.20",
     "@react-navigation/native": "^6.1.17",
+    "base64-js": "^1.5.1",
     "expo": "~50.0.14",
     "expo-blur": "~12.9.2",
     "expo-dev-client": "~3.3.12",

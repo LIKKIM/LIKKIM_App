@@ -12,6 +12,7 @@ import {
   Switch,
   TextInput,
   Linking,
+  Alert,
   Button,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
@@ -25,7 +26,9 @@ import i18n from "../config/i18n";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CryptoContext, DarkModeContext } from "./CryptoContext";
 import MyColdWalletScreenStyles from "../styles/MyColdWalletScreenStyle";
-import { languages } from "../config/languages"; // 导入 languages
+import { languages } from "../config/languages";
+import base64 from "base64-js";
+import { Buffer } from "buffer";
 
 let PermissionsAndroid;
 if (Platform.OS === "android") {
@@ -179,17 +182,70 @@ function MyColdWalletScreen() {
     setModalVisible(false); // Close Bluetooth modal
   };
 
-  const handlePinSubmit = (device, pinCode) => {
-    // 假设有一个 connectToDevice 方法处理设备连接和PIN码
-    connectToDevice(device, pinCode);
-    setPinModalVisible(false);
-    setPinCode("");
+  const handlePinSubmit = async (device, pinCode) => {
+    try {
+      await connectToDevice(device, pinCode);
+      console.log(`PIN code sent successfully to device ${device.id}`);
+    } catch (error) {
+      console.error(`Failed to connect and send PIN: ${error.message}`);
+    } finally {
+      setPinModalVisible(false);
+      setPinCode("");
+    }
   };
 
-  // 示例 connectToDevice 方法
-  const connectToDevice = (device, pinCode) => {
-    // 在这里实现设备连接和PIN码验证逻辑
-    console.log(`Connecting to device ${device.id} with PIN ${pinCode}`);
+  const connectToDevice = async (device, pinCode) => {
+    // 开发版本使用生产版本要避免安全隐患
+    const serviceUUID = "0000FFE0-0000-1000-8000-00805F9B34FB";
+    const writeCharacteristicUUID = "0000FFE2-0000-1000-8000-00805F9B34FB";
+    const notifyCharacteristicUUID = "0000FFE1-0000-1000-8000-00805F9B34FB";
+
+    try {
+      await device.connect();
+      console.log(`Connected to device: ${device.id}`);
+      await device.discoverAllServicesAndCharacteristics();
+      console.log(
+        `Discovered services and characteristics for device: ${device.id}`
+      );
+
+      // 订阅通知特征
+      await device.monitorCharacteristicForService(
+        serviceUUID,
+        notifyCharacteristicUUID,
+        (error, characteristic) => {
+          if (error) {
+            console.error("Error subscribing to notifications:", error.message);
+            return;
+          }
+          // 处理接收到的通知数据
+          const receivedData = Buffer.from(characteristic.value, "base64");
+          const decodedData = receivedData.toString("utf-8");
+          console.log("Notification received:", decodedData);
+          Alert.alert("Notification", `Received data: ${decodedData}`);
+        }
+      );
+
+      // 写入PIN码到特征
+      const pinCodeBytes = stringToBytes(pinCode);
+      const base64PinCode = base64.fromByteArray(pinCodeBytes);
+      await device.writeCharacteristicWithResponseForService(
+        serviceUUID,
+        writeCharacteristicUUID,
+        base64PinCode
+      );
+      console.log(`PIN code sent: ${pinCode}`);
+    } catch (error) {
+      throw new Error(`Failed to connect to device: ${error.message}`);
+    }
+  };
+
+  // 辅助函数：将字符串转换为字节数组
+  const stringToBytes = (str) => {
+    const bytes = [];
+    for (let i = 0; i < str.length; i++) {
+      bytes.push(str.charCodeAt(i));
+    }
+    return bytes;
   };
 
   const settingsOptions = [
@@ -255,7 +311,7 @@ function MyColdWalletScreen() {
     {
       title: t("Version"),
       icon: "info-outline",
-      version: Constants.expoConfig.version, // Updated to use expoConfig
+      version: Constants.expoConfig.version,
       onPress: () => {},
     },
   ];
@@ -508,11 +564,7 @@ function MyColdWalletScreen() {
                     {t("LOOKING FOR DEVICES")}
                   </Text>
                   {isScanning ? (
-                    <View
-                      style={{
-                        alignItems: "center",
-                      }}
-                    >
+                    <View style={{ alignItems: "center" }}>
                       <Image
                         source={require("../assets/Bluetooth.gif")}
                         style={MyColdWalletScreenStyle.bluetoothImg}
@@ -569,11 +621,7 @@ function MyColdWalletScreen() {
       >
         <BlurView intensity={10} style={MyColdWalletScreenStyle.centeredView}>
           <View style={MyColdWalletScreenStyle.pinModalView}>
-            <View
-              style={{
-                width: "100%",
-              }}
-            >
+            <View style={{ alignItems: "center" }}>
               <Text style={MyColdWalletScreenStyle.pinModalTitle}>
                 {t("Enter PIN to Connect")}
               </Text>

@@ -28,7 +28,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
     scanModalSubtitle: {
       color: secondTextColor,
       fontSize: 14,
-      marginBottom: 200,
+      marginBottom: 140,
       textAlign: "center",
     },
     modalTitle: {
@@ -81,7 +81,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
     bluetoothImg: {
       width: 150,
       height: 150,
-      marginBottom: 20,
+      marginBottom: 30,
     },
     centeredView: {
       flex: 1,
