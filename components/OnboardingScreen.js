@@ -37,9 +37,15 @@ const slides = [
 const OnboardingScreen = ({ onDone }) => {
   const _renderItem = ({ item }) => (
     <LinearGradient colors={["#24234C", "#101021"]} style={styles.slide}>
-      <Text style={styles.title}>{item.title}</Text>
-      <Image source={item.image} style={styles.image} />
-      <Text style={styles.text}>{item.text}</Text>
+      <View
+        style={{
+          top: 100,
+        }}
+      >
+        <Image source={item.image} style={styles.image} />
+        <Text style={styles.title}>{item.title}</Text>
+        <Text style={styles.text}>{item.text}</Text>
+      </View>
     </LinearGradient>
   );
 
@@ -51,20 +57,21 @@ const OnboardingScreen = ({ onDone }) => {
 
   return (
     <AppIntroSlider
+      bottomButton
       renderItem={_renderItem}
       data={slides}
       onDone={onDone}
       renderSkipButton={_renderSkipButton}
       showSkipButton
+      showPrevButton
     />
   );
 };
 
 const styles = StyleSheet.create({
   slide: {
-    flex: 1,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "start",
     width: width,
     height: height,
   },
@@ -76,24 +83,29 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 16,
-    color: "#fff",
+    color: "#8B8B96",
     textAlign: "center",
     paddingHorizontal: 16,
   },
   image: {
-    width: width * 0.8,
-    height: height * 0.5,
+    width: 300,
+    height: 300,
     resizeMode: "contain",
     marginVertical: 32,
   },
   button: {
+    alignItems: "center",
+    justifyContent: "center",
+    height: 60,
+    borderRadius: 30,
     marginTop: 20,
     padding: 10,
-    backgroundColor: "#fff",
-    borderRadius: 5,
+    borderColor: "#6C6CF4",
+    borderWidth: 3,
+    marginBottom: 60,
   },
   buttonText: {
-    color: "#000",
+    color: "#fff",
     fontSize: 16,
   },
 });
