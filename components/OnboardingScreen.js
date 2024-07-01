@@ -1,6 +1,13 @@
 // components/OnboardingScreen.js
 import React from "react";
-import { View, Text, Image, StyleSheet, Dimensions } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  Dimensions,
+  TouchableOpacity,
+} from "react-native";
 import AppIntroSlider from "react-native-app-intro-slider";
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -36,8 +43,20 @@ const OnboardingScreen = ({ onDone }) => {
     </LinearGradient>
   );
 
+  const _renderSkipButton = () => (
+    <TouchableOpacity style={styles.button} onPress={onDone}>
+      <Text style={styles.buttonText}>Skip</Text>
+    </TouchableOpacity>
+  );
+
   return (
-    <AppIntroSlider renderItem={_renderItem} data={slides} onDone={onDone} />
+    <AppIntroSlider
+      renderItem={_renderItem}
+      data={slides}
+      onDone={onDone}
+      renderSkipButton={_renderSkipButton}
+      showSkipButton
+    />
   );
 };
 
@@ -46,6 +65,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    width: width,
+    height: height,
   },
   title: {
     fontSize: 22,
@@ -64,6 +85,16 @@ const styles = StyleSheet.create({
     height: height * 0.5,
     resizeMode: "contain",
     marginVertical: 32,
+  },
+  button: {
+    marginTop: 20,
+    padding: 10,
+    backgroundColor: "#fff",
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: "#000",
+    fontSize: 16,
   },
 });
 
