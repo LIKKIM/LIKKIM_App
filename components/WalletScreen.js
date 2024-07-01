@@ -709,13 +709,19 @@ function WalletScreen({ route }) {
         onRequestClose={() => setDeleteConfirmVisible(false)}
       >
         <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
-          <View style={WalletScreenStyle.modalView}>
+          <View style={WalletScreenStyle.deleteModalView}>
             <Text style={WalletScreenStyle.alertModalTitle}>
               {t("Remove Chain Account")}
             </Text>
             <Text style={WalletScreenStyle.modalSubtitle}>
               {t("This chain account will be removed")}
             </Text>
+            <View style={{ alignItems: "center", justifyContent: "center" }}>
+              <Image
+                source={require("../assets/modal/Delete.png")}
+                style={WalletScreenStyle.deleteImg}
+              />
+            </View>
             <TouchableOpacity
               style={WalletScreenStyle.removeModalButton}
               onPress={handleDeleteCard}

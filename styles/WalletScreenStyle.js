@@ -181,6 +181,15 @@ const WalletScreenStyles = (isDarkMode) => {
       padding: 35,
       alignItems: "center",
     },
+    deleteModalView: {
+      margin: 20,
+      width: "90%",
+
+      backgroundColor: modalBackgroundColor,
+      borderRadius: 20,
+      padding: 35,
+      alignItems: "center",
+    },
     phraseModalView: {
       margin: 20,
       width: "90%",
@@ -208,6 +217,13 @@ const WalletScreenStyles = (isDarkMode) => {
       alignItems: "center",
       marginBottom: 20,
     },
+    deleteImg: {
+      width: 130,
+      height: 130, // 设置固定高度
+      resizeMode: "contain", // 确保图片在其容器内完整显示
+      marginBottom: 40,
+    },
+
     removeModalButton: {
       backgroundColor: buttonBackgroundColor,
       padding: 10,
