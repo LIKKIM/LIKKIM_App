@@ -37,11 +37,7 @@ const slides = [
 const OnboardingScreen = ({ onDone }) => {
   const _renderItem = ({ item }) => (
     <LinearGradient colors={["#24234C", "#101021"]} style={styles.slide}>
-      <View
-        style={{
-          top: 100,
-        }}
-      >
+      <View style={styles.content}>
         <Image source={item.image} style={styles.image} />
         <Text style={styles.title}>{item.title}</Text>
         <Text style={styles.text}>{item.text}</Text>
@@ -55,6 +51,24 @@ const OnboardingScreen = ({ onDone }) => {
     </TouchableOpacity>
   );
 
+  const _renderNextButton = () => (
+    <TouchableOpacity style={styles.button}>
+      <Text style={styles.buttonText}>Next</Text>
+    </TouchableOpacity>
+  );
+
+  const _renderPrevButton = () => (
+    <TouchableOpacity style={styles.button}>
+      <Text style={styles.buttonText}>Back</Text>
+    </TouchableOpacity>
+  );
+
+  const _renderDoneButton = () => (
+    <TouchableOpacity style={styles.button} onPress={onDone}>
+      <Text style={styles.buttonText}>Done</Text>
+    </TouchableOpacity>
+  );
+
   return (
     <AppIntroSlider
       bottomButton
@@ -62,6 +76,9 @@ const OnboardingScreen = ({ onDone }) => {
       data={slides}
       onDone={onDone}
       renderSkipButton={_renderSkipButton}
+      renderNextButton={_renderNextButton}
+      renderPrevButton={_renderPrevButton}
+      renderDoneButton={_renderDoneButton}
       showSkipButton
       showPrevButton
     />
@@ -74,6 +91,11 @@ const styles = StyleSheet.create({
     justifyContent: "start",
     width: width,
     height: height,
+  },
+  content: {
+    alignItems: "center",
+    justifyContent: "center",
+    paddingTop: 100,
   },
   title: {
     fontSize: 22,
@@ -102,7 +124,6 @@ const styles = StyleSheet.create({
     padding: 10,
     borderColor: "#6C6CF4",
     borderWidth: 3,
-    marginBottom: 60,
   },
   buttonText: {
     color: "#fff",
