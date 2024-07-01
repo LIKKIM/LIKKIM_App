@@ -45,27 +45,27 @@ const OnboardingScreen = ({ onDone }) => {
     </LinearGradient>
   );
 
-  const _renderSkipButton = () => (
-    <TouchableOpacity style={styles.button} onPress={onDone}>
-      <Text style={styles.buttonText}>Skip</Text>
-    </TouchableOpacity>
-  );
-
   const _renderNextButton = () => (
-    <TouchableOpacity style={styles.nextButton}>
+    <View style={styles.nextButton}>
       <Text style={styles.buttonText}>Next</Text>
-    </TouchableOpacity>
+    </View>
   );
 
   const _renderPrevButton = () => (
-    <TouchableOpacity style={styles.button}>
+    <View style={styles.button}>
       <Text style={styles.buttonText}>Back</Text>
-    </TouchableOpacity>
+    </View>
   );
 
   const _renderDoneButton = () => (
-    <TouchableOpacity style={styles.doneButton} onPress={onDone}>
+    <View style={styles.doneButton}>
       <Text style={styles.buttonText}>Done</Text>
+    </View>
+  );
+
+  const _renderSkipButton = () => (
+    <TouchableOpacity style={styles.button} onPress={onDone}>
+      <Text style={styles.buttonText}>Skip</Text>
     </TouchableOpacity>
   );
 
@@ -117,6 +117,7 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
     marginVertical: 32,
   },
+
   button: {
     alignItems: "center",
     justifyContent: "center",
@@ -129,22 +130,22 @@ const styles = StyleSheet.create({
     marginBottom: 60,
   },
   nextButton: {
-    backgroundColor: "#6C6CF4",
     alignItems: "center",
     justifyContent: "center",
     height: 60,
     borderRadius: 30,
     marginTop: 20,
     padding: 10,
+    backgroundColor: "#6C6CF4",
   },
   doneButton: {
-    backgroundColor: "#6C6CF4",
     alignItems: "center",
     justifyContent: "center",
     height: 60,
     borderRadius: 30,
     marginTop: 20,
     padding: 10,
+    backgroundColor: "#6C6CF4",
   },
   buttonText: {
     color: "#fff",
@@ -154,7 +155,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#8B8B96",
   },
   activeDot: {
-    backgroundColor: "#6C6CF4", // 选中的点的颜色
+    backgroundColor: "#6C6CF4",
     width: 24,
     height: 8,
     borderRadius: 4,
