@@ -352,7 +352,7 @@ const WalletScreenStyles = (isDarkMode) => {
     dropdown: {
       position: "absolute",
       right: 10,
-      top: 40,
+      top: 66,
       backgroundColor: cardBackgroundColor,
       borderRadius: 5,
       padding: 10,
