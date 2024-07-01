@@ -1,14 +1,16 @@
 // App.js
 import "intl-pluralrules";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, StatusBar } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import styles, { darkTheme, lightTheme } from "./styles";
 import WalletScreen from "./components/WalletScreen";
 import TransactionsScreen from "./components/TransactionsScreen";
 import MyColdWalletScreen from "./components/MyColdWalletScreen";
+import OnboardingScreen from "./components/OnboardingScreen";
 import {
   CryptoProvider,
   CryptoContext,
@@ -21,6 +23,28 @@ const Tab = createBottomTabNavigator();
 
 export default function App() {
   const { t } = useTranslation();
+  const [isFirstLaunch, setIsFirstLaunch] = useState(null);
+
+  useEffect(() => {
+    AsyncStorage.getItem("alreadyLaunched").then((value) => {
+      if (value == null) {
+        AsyncStorage.setItem("alreadyLaunched", "true"); // No need to wait for `setItem` to finish, although you might want to handle errors
+        setIsFirstLaunch(true);
+      } else {
+        setIsFirstLaunch(false);
+      }
+    }); // Add some error handling, also you can simply do setIsFirstLaunch(!value) if you want to play safe
+  }, []);
+
+  const handleOnboardingDone = () => {
+    setIsFirstLaunch(false);
+  };
+
+  if (isFirstLaunch === null) {
+    return null; // Render nothing until the state is set
+  } else if (isFirstLaunch === true) {
+    return <OnboardingScreen onDone={handleOnboardingDone} />;
+  }
 
   return (
     <CryptoProvider>
