@@ -79,6 +79,8 @@ const OnboardingScreen = ({ onDone }) => {
       renderNextButton={_renderNextButton}
       renderPrevButton={_renderPrevButton}
       renderDoneButton={_renderDoneButton}
+      dotStyle={styles.dot}
+      activeDotStyle={styles.activeDot}
       showSkipButton
       showPrevButton
     />
@@ -147,6 +149,16 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "#fff",
     fontSize: 16,
+  },
+  dot: {
+    backgroundColor: "#8B8B96",
+  },
+  activeDot: {
+    backgroundColor: "#6C6CF4", // 选中的点的颜色
+    width: 24,
+    height: 8,
+    borderRadius: 4,
+    marginHorizontal: 4,
   },
 });
 
