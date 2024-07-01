@@ -11,6 +11,17 @@
       },
       "distribution": "internal"
     },
+    //构建 iOS版本的dev-client，调试原生模块
+    "simulator": {
+      "developmentClient": true,
+      "ios": {
+        "simulator": true
+      },
+      "android": {
+        "buildType": "apk"
+      },
+      "distribution": "internal"
+    },
     "apk": {
       //build release app | use apk.
       "android": {
