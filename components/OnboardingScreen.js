@@ -52,7 +52,7 @@ const OnboardingScreen = ({ onDone }) => {
   );
 
   const _renderNextButton = () => (
-    <TouchableOpacity style={styles.button}>
+    <TouchableOpacity style={styles.nextButton}>
       <Text style={styles.buttonText}>Next</Text>
     </TouchableOpacity>
   );
@@ -64,7 +64,7 @@ const OnboardingScreen = ({ onDone }) => {
   );
 
   const _renderDoneButton = () => (
-    <TouchableOpacity style={styles.button} onPress={onDone}>
+    <TouchableOpacity style={styles.doneButton} onPress={onDone}>
       <Text style={styles.buttonText}>Done</Text>
     </TouchableOpacity>
   );
@@ -124,6 +124,25 @@ const styles = StyleSheet.create({
     padding: 10,
     borderColor: "#6C6CF4",
     borderWidth: 3,
+    marginBottom: 60,
+  },
+  nextButton: {
+    backgroundColor: "#6C6CF4",
+    alignItems: "center",
+    justifyContent: "center",
+    height: 60,
+    borderRadius: 30,
+    marginTop: 20,
+    padding: 10,
+  },
+  doneButton: {
+    backgroundColor: "#6C6CF4",
+    alignItems: "center",
+    justifyContent: "center",
+    height: 60,
+    borderRadius: 30,
+    marginTop: 20,
+    padding: 10,
   },
   buttonText: {
     color: "#fff",
