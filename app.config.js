@@ -32,10 +32,6 @@ export default {
     icon: "./assets/icon.png",
   },
   android: {
-    adaptiveIcon: {
-      foregroundImage: "./assets/adaptive-icon.png",
-      backgroundColor: "#ffffff",
-    },
     versionCode: 1,
     package: "com.anonymous.likkim",
   },

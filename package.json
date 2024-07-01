@@ -2,6 +2,7 @@
   "name": "LIKKIM",
   "version": "1.0.0",
   "scripts": {
+    "buildDev": "eas build --profile development",
     "start": "expo start --dev-client",
     "android": "expo run:android",
     "ios": "expo run:ios",
@@ -11,8 +12,7 @@
     "getTF": "eas build  --auto-submit --platform ios",
     "pushPlayStore": "eas build --auto-submit --platform android",
     "updateNative": "expo prebuild",
-    "expoGo": "expo start",
-    "buildDev": "eas build --profile development"
+    "expoGo": "expo start"
   },
   "dependencies": {
     "@babel/plugin-proposal-export-namespace-from": "^7.18.9",
