@@ -29,7 +29,7 @@ const slides = [
 
 const OnboardingScreen = ({ onDone }) => {
   const _renderItem = ({ item }) => (
-    <LinearGradient colors={["#121212", "#1E1D3F"]} style={styles.slide}>
+    <LinearGradient colors={["#24234C", "#101021"]} style={styles.slide}>
       <Text style={styles.title}>{item.title}</Text>
       <Image source={item.image} style={styles.image} />
       <Text style={styles.text}>{item.text}</Text>
