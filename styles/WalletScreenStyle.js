@@ -97,7 +97,7 @@ const WalletScreenStyles = (isDarkMode) => {
       fontWeight: "bold",
       textShadowColor: "rgba(0, 0, 0, 0.5)",
       textShadowOffset: { width: 1, height: 1 },
-      textShadowRadius: 4,
+      textShadowRadius: 6,
     },
     cardShortName: {
       position: "absolute",
@@ -107,7 +107,7 @@ const WalletScreenStyles = (isDarkMode) => {
       fontSize: 14,
       textShadowColor: "rgba(0, 0, 0, 0.5)",
       textShadowOffset: { width: 1, height: 1 },
-      textShadowRadius: 4,
+      textShadowRadius: 6,
     },
     cardBalance: {
       position: "absolute",
@@ -118,7 +118,7 @@ const WalletScreenStyles = (isDarkMode) => {
       fontWeight: "bold",
       textShadowColor: "rgba(0, 0, 0, 0.5)",
       textShadowOffset: { width: 1, height: 1 },
-      textShadowRadius: 4,
+      textShadowRadius: 6,
     },
 
     card: {

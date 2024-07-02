@@ -264,27 +264,6 @@ function MyColdWalletScreen() {
       selectedOption: selectedCurrency,
     },
     {
-      title: t("Help & Support"),
-      icon: "help-outline",
-      onPress: () => {
-        Linking.openURL("https://www.likkim.com");
-      },
-    },
-    {
-      title: t("Privacy & Data"),
-      icon: "privacy-tip",
-      onPress: () => {
-        Linking.openURL("https://www.likkim.com");
-      },
-    },
-    {
-      title: t("About"),
-      icon: "info",
-      onPress: () => {
-        Linking.openURL("https://www.likkim.com");
-      },
-    },
-    {
       title: t("Language"),
       icon: "language",
       onPress: () => setLanguageModalVisible(true),
@@ -307,6 +286,28 @@ function MyColdWalletScreen() {
           value={isDarkMode}
         />
       ),
+    },
+    {
+      title: t("Help & Support"),
+      icon: "help-outline",
+      onPress: () => {
+        Linking.openURL("https://www.likkim.com");
+      },
+    },
+    {
+      title: t("Privacy & Data"),
+      icon: "privacy-tip",
+      onPress: () => {
+        Linking.openURL("https://www.likkim.com");
+      },
+    },
+
+    {
+      title: t("About"),
+      icon: "info",
+      onPress: () => {
+        Linking.openURL("https://www.likkim.com");
+      },
     },
     {
       title: t("Version"),
