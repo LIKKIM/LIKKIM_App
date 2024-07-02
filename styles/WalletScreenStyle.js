@@ -109,6 +109,16 @@ const WalletScreenStyles = (isDarkMode) => {
       textShadowOffset: { width: 1, height: 1 },
       textShadowRadius: 6,
     },
+    balanceShortName: {
+      position: "absolute",
+      top: 60,
+      right: 20,
+      color: secondCardTextColor,
+      fontSize: 14,
+      textShadowColor: "rgba(0, 0, 0, 0.5)",
+      textShadowOffset: { width: 1, height: 1 },
+      textShadowRadius: 6,
+    },
     cardBalance: {
       position: "absolute",
       top: 25,

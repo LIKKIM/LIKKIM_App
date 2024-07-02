@@ -340,7 +340,10 @@ function WalletScreen({ route }) {
               </Text>
               <Text
                 style={WalletScreenStyle.cardBalance}
-              >{`${currencyUnit} ${card.balance}`}</Text>
+              >{`${card.balance} ${currencyUnit} `}</Text>
+              <Text style={WalletScreenStyle.balanceShortName}>
+                {`${card.balance} ${card.shortName}`}
+              </Text>
             </ImageBackground>
           </TouchableOpacity>
         ))}
