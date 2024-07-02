@@ -101,7 +101,7 @@ const WalletScreenStyles = (isDarkMode) => {
     },
     cardShortName: {
       position: "absolute",
-      top: 60,
+      top: 56,
       left: 60,
       color: secondCardTextColor,
       fontSize: 14,
@@ -111,7 +111,7 @@ const WalletScreenStyles = (isDarkMode) => {
     },
     balanceShortName: {
       position: "absolute",
-      top: 60,
+      top: 56,
       right: 20,
       color: secondCardTextColor,
       fontSize: 14,
