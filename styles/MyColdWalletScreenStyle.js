@@ -7,7 +7,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
   const modalBackgroundColor = isDarkMode ? "#484692" : "#ffffff";
   const buttonBackgroundColor = isDarkMode ? "#6C6CF4" : "#E5E1E9";
   const borderColor = isDarkMode ? "#404040" : "#ccc";
-  const BluetoothBtnColor = isDarkMode ? "#484692" : "#8E80F0";
+  const BluetoothBtnColor = isDarkMode ? "#6C6CF4" : "#8E80F0";
   const secondTextColor = isDarkMode ? "#ddd" : "#676776";
   const inputBackgroundColor = isDarkMode ? "#1A1A37" : "#e0e0e0";
   const focusedBorderColor = isDarkMode ? "#6C6CF4" : "#007AFF";
