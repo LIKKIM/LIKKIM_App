@@ -2,16 +2,18 @@
 import { StyleSheet } from "react-native";
 
 const TransactionsScreenStyles = (isDarkMode) => {
-  const textColor = isDarkMode ? "#fff" : "#000";
+  const textColor = isDarkMode ? "#fff" : "#fff";
+  const textBtnColor = isDarkMode ? "#fff" : "#fff";
   const backgroundColor = isDarkMode ? "#121212" : "#f5f5f5";
   const modalBackgroundColor = isDarkMode ? "#484692" : "#fff";
-  const buttonBackgroundColor = isDarkMode ? "#6C6CF4" : "#E5E1E9";
+  const buttonBackgroundColor = isDarkMode ? "#6C6CF4" : "#8E80F0";
   const inputBackgroundColor = isDarkMode ? "#1A1A37" : "#e0e0e0";
   const historyItemBorderColor = isDarkMode ? "#ccc" : "#999";
   const historyContainerBackgroundColor = isDarkMode
     ? "#24234C80"
     : "#FFFFFF80";
   const secondTextColor = isDarkMode ? "#ddd" : "#676776";
+  const secondBtnTextColor = isDarkMode ? "#ddd" : "#e0e0e0";
   return StyleSheet.create({
     cancelButtonText: {
       color: secondTextColor,
@@ -127,11 +129,11 @@ const TransactionsScreenStyles = (isDarkMode) => {
       borderRadius: 10,
     },
     subButtonText: {
-      color: secondTextColor,
+      color: secondBtnTextColor,
       fontSize: 12,
     },
     buttonText: {
-      color: textColor,
+      color: textBtnColor,
       fontSize: 16,
       fontWeight: "bold",
       marginBottom: 2,
