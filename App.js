@@ -113,6 +113,7 @@ export default function App() {
                       },
                       tabBarActiveTintColor: tabBarActiveTintColor,
                       tabBarInactiveTintColor: tabBarInactiveTintColor,
+                      // 底部tab
                       tabBarStyle: {
                         backgroundColor: tabBarBackgroundColor,
                         borderTopWidth: 0,
@@ -129,6 +130,7 @@ export default function App() {
                         borderBottomColor: theme.headerStyle.borderBottomColor,
                         borderBottomWidth: 0,
                       },
+                      headerTransparent: true, // Make the header transparent and let the screen extend under it
                       headerTintColor: theme.headerTintColor,
                       headerTitleStyle: {
                         fontWeight: "bold",

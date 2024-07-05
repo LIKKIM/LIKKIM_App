@@ -31,6 +31,7 @@ const WalletScreenStyles = (isDarkMode) => {
       paddingHorizontal: 0,
     },
     totalBalanceContainer: {
+      marginTop: 64,
       width: 300,
       marginBottom: 40,
     },
@@ -243,7 +244,15 @@ const WalletScreenStyles = (isDarkMode) => {
       resizeMode: "contain", // 确保图片在其容器内完整显示
       marginBottom: 40,
     },
-
+    blurImg: {
+      zIndex: -1,
+      width: 600,
+      height: 600,
+      resizeMode: "contain", // 确保图片在其容器内完整显示
+      position: "absolute",
+      bottom: 390,
+      right: -150,
+    },
     removeModalButton: {
       backgroundColor: buttonBackgroundColor,
       padding: 10,
@@ -438,6 +447,7 @@ const WalletScreenStyles = (isDarkMode) => {
       marginBottom: 18,
     },
     centeredContent: {
+      marginTop: 64,
       flex: 1,
       justifyContent: "center",
       alignItems: "center",

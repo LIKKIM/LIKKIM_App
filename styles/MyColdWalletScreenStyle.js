@@ -24,7 +24,15 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       marginBottom: 20,
       textAlign: "center",
     },
-
+    blurImg: {
+      zIndex: -1,
+      width: 600,
+      height: 600,
+      resizeMode: "contain", // 确保图片在其容器内完整显示
+      position: "absolute",
+      bottom: 460,
+      right: -160,
+    },
     scanModalSubtitle: {
       color: secondTextColor,
       fontSize: 14,
@@ -158,6 +166,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       flexGrow: 1,
     },
     scrollView: {
+      marginTop: 64,
       width: "100%",
     },
     settingsItem: {

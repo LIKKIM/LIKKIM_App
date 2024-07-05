@@ -742,6 +742,10 @@ function WalletScreen({ route }) {
           </View>
         </BlurView>
       </Modal>
+      <Image
+        source={require("../assets/blur.png")}
+        style={WalletScreenStyle.blurImg}
+      />
     </LinearGradient>
   );
 }

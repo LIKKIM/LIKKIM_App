@@ -8,6 +8,7 @@ import {
   TextInput,
   ScrollView,
   Clipboard,
+  Image,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { BlurView } from "expo-blur";
@@ -84,9 +85,9 @@ function TransactionsScreen() {
   return (
     <LinearGradient
       colors={isDarkMode ? darkColors : lightColors}
-      style={TransactionsScreenStyle.container}
+      style={TransactionsScreenStyle.bgContainer}
     >
-      <View className="w-[100%]">
+      <View className="w-[100%]" style={TransactionsScreenStyle.container}>
         <TouchableOpacity
           style={TransactionsScreenStyle.roundButton}
           onPress={handleSendPress}
@@ -96,7 +97,6 @@ function TransactionsScreen() {
             {t("Send crypto to another wallet")}
           </Text>
         </TouchableOpacity>
-
         <TouchableOpacity
           style={TransactionsScreenStyle.roundButton}
           onPress={handleReceivePress}
@@ -124,7 +124,6 @@ function TransactionsScreen() {
             ))
           )}
         </View>
-
         <Modal
           animationType="slide"
           transparent={true}
@@ -168,7 +167,6 @@ function TransactionsScreen() {
             </View>
           </BlurView>
         </Modal>
-
         {/* 选择接收的加密货币模态窗口 */}
         <Modal
           animationType="slide"
@@ -226,7 +224,6 @@ function TransactionsScreen() {
             </View>
           </BlurView>
         </Modal>
-
         {/* 显示选择的加密货币地址的模态窗口 */}
         <Modal
           animationType="slide"
@@ -279,6 +276,10 @@ function TransactionsScreen() {
           </View>
         </Modal>
       </View>
+      <Image
+        source={require("../assets/blur.png")}
+        style={TransactionsScreenStyle.blurImg}
+      />
     </LinearGradient>
   );
 }

@@ -8,7 +8,9 @@ const TransactionsScreenStyles = (isDarkMode) => {
   const buttonBackgroundColor = isDarkMode ? "#6C6CF4" : "#E5E1E9";
   const inputBackgroundColor = isDarkMode ? "#1A1A37" : "#e0e0e0";
   const historyItemBorderColor = isDarkMode ? "#ccc" : "#999";
-  const historyContainerBackgroundColor = isDarkMode ? "#24234C" : "#FFF";
+  const historyContainerBackgroundColor = isDarkMode
+    ? "#24234C50"
+    : "#FFFFFF50";
   const secondTextColor = isDarkMode ? "#ddd" : "#676776";
   return StyleSheet.create({
     cancelButtonText: {
@@ -116,6 +118,14 @@ const TransactionsScreenStyles = (isDarkMode) => {
       borderRadius: 10,
       height: 360,
     },
+    blurView: {
+      position: "absolute",
+      top: 0,
+      left: 0,
+      bottom: 0,
+      right: 0,
+      borderRadius: 10,
+    },
     subButtonText: {
       color: secondTextColor,
       fontSize: 12,
@@ -137,12 +147,24 @@ const TransactionsScreenStyles = (isDarkMode) => {
       justifyContent: "center",
       marginBottom: 20,
     },
-    container: {
+    blurImg: {
+      zIndex: -1,
+      width: 600,
+      height: 600,
+      resizeMode: "contain", // 确保图片在其容器内完整显示
+      position: "absolute",
+      bottom: -80,
+      right: -150,
+    },
+    bgContainer: {
       flex: 1,
       backgroundColor: backgroundColor,
       alignItems: "center",
       justifyContent: "center",
       padding: 20,
+    },
+    container: {
+      marginTop: 64,
     },
     modalText: { color: secondTextColor, textAlign: "center" },
     TransactionModalTitle: {
