@@ -107,6 +107,7 @@ function TransactionsScreen() {
           </Text>
         </TouchableOpacity>
         <View style={TransactionsScreenStyle.historyContainer}>
+          {/*       <BlurView intensity={3} style={TransactionsScreenStyle.blurView} /> */}
           <Text style={TransactionsScreenStyle.historyTitle}>
             {t("Transaction History")}
           </Text>
