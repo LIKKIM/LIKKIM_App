@@ -277,10 +277,6 @@ function TransactionsScreen() {
           </View>
         </Modal>
       </View>
-      <Image
-        source={require("../assets/blur.png")}
-        style={TransactionsScreenStyle.blurImg}
-      />
     </LinearGradient>
   );
 }

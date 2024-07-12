@@ -149,15 +149,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       justifyContent: "center",
       marginBottom: 20,
     },
-    blurImg: {
-      zIndex: -1,
-      width: 600,
-      height: 600,
-      resizeMode: "contain", // 确保图片在其容器内完整显示
-      position: "absolute",
-      bottom: -80,
-      right: -150,
-    },
+
     bgContainer: {
       flex: 1,
       backgroundColor: backgroundColor,
@@ -165,9 +157,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       justifyContent: "center",
       padding: 20,
     },
-    container: {
-      marginTop: 64,
-    },
+    container: {},
     modalText: { color: secondTextColor, textAlign: "center" },
     TransactionModalTitle: {
       fontSize: 16,

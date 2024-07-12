@@ -130,7 +130,7 @@ export default function App() {
                         borderBottomColor: theme.headerStyle.borderBottomColor,
                         borderBottomWidth: 0,
                       },
-                      headerTransparent: true, // Make the header transparent and let the screen extend under it
+                      //  headerTransparent: true, Make the header transparent and let the screen extend under it
                       headerTintColor: theme.headerTintColor,
                       headerTitleStyle: {
                         fontWeight: "bold",

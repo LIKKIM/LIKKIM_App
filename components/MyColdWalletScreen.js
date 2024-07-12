@@ -662,10 +662,6 @@ function MyColdWalletScreen() {
           </View>
         </BlurView>
       </Modal>
-      <Image
-        source={require("../assets/blur.png")}
-        style={MyColdWalletScreenStyle.blurImg}
-      />
     </LinearGradient>
   );
 }
