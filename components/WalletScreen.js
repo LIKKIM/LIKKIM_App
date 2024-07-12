@@ -332,7 +332,7 @@ function WalletScreen({ route }) {
               ]}
               imageStyle={{ borderRadius: 16 }}
             >
-              <View style={WalletScreenStyle.overlay} />
+              {/*            <View style={WalletScreenStyle.overlay} /> */}
               <Image source={card.icon} style={WalletScreenStyle.cardIcon} />
               <Text style={WalletScreenStyle.cardName}>{card.name}</Text>
               <Text style={WalletScreenStyle.cardShortName}>

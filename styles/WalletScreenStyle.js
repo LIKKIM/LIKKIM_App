@@ -4,11 +4,11 @@ import { StyleSheet } from "react-native";
 const WalletScreenStyles = (isDarkMode) => {
   const textColor = isDarkMode ? "#fff" : "#000";
   const secondTextColor = isDarkMode ? "#ddd" : "#676776";
-  const secondCardTextColor = isDarkMode ? "#ddd" : "#ddd";
+  const secondCardTextColor = isDarkMode ? "#fff" : "#fff";
   const backgroundColor = isDarkMode ? "#121212" : "#f5f5f5";
   const modalBackgroundColor = isDarkMode ? "#24234C" : "#ffffff";
   const buttonBackgroundColor = isDarkMode ? "#6C6CF4" : "#E5E1E9";
-  const shadowColor = isDarkMode ? "#101021" : "#000";
+  const shadowColor = isDarkMode ? "#101021" : "#101021";
   const cardBackgroundColor = isDarkMode ? "#484692" : "#E5E1E9";
   const currencyUnitColor = isDarkMode ? "#ddd" : "#666";
   const addCryptoButtonBackgroundColor = isDarkMode ? "#1E1D3F" : "#F8F6FE";
@@ -95,9 +95,9 @@ const WalletScreenStyles = (isDarkMode) => {
       color: "#fff",
       fontSize: 16,
       fontWeight: "bold",
-      textShadowColor: "rgba(0, 0, 0, 0.5)",
-      textShadowOffset: { width: 1, height: 1 },
-      textShadowRadius: 6,
+      textShadowColor: "rgba(0, 0, 0, 0.8)",
+      textShadowOffset: { width: 0, height: 1 },
+      textShadowRadius: 3,
     },
     cardShortName: {
       position: "absolute",
@@ -105,9 +105,9 @@ const WalletScreenStyles = (isDarkMode) => {
       left: 60,
       color: secondCardTextColor,
       fontSize: 14,
-      textShadowColor: "rgba(0, 0, 0, 0.5)",
-      textShadowOffset: { width: 1, height: 1 },
-      textShadowRadius: 6,
+      textShadowColor: "rgba(0, 0, 0, 0.8)",
+      textShadowOffset: { width: 0, height: 1 },
+      textShadowRadius: 3,
     },
     balanceShortName: {
       position: "absolute",
@@ -115,9 +115,9 @@ const WalletScreenStyles = (isDarkMode) => {
       right: 20,
       color: secondCardTextColor,
       fontSize: 14,
-      textShadowColor: "rgba(0, 0, 0, 0.5)",
-      textShadowOffset: { width: 1, height: 1 },
-      textShadowRadius: 6,
+      textShadowColor: "rgba(0, 0, 0, 0.8)",
+      textShadowOffset: { width: 0, height: 2 },
+      textShadowRadius: 3,
     },
     cardBalance: {
       position: "absolute",
@@ -126,9 +126,9 @@ const WalletScreenStyles = (isDarkMode) => {
       color: "#fff",
       fontSize: 16,
       fontWeight: "bold",
-      textShadowColor: "rgba(0, 0, 0, 0.5)",
-      textShadowOffset: { width: 1, height: 1 },
-      textShadowRadius: 6,
+      textShadowColor: "rgba(0, 0, 0, 0.8)",
+      textShadowOffset: { width: 0, height: 2 },
+      textShadowRadius: 3,
     },
 
     card: {
@@ -144,14 +144,14 @@ const WalletScreenStyles = (isDarkMode) => {
     cardFirst: {
       shadowOffset: { width: 0, height: 0 },
       shadowColor: shadowColor,
-      shadowOpacity: 0.3,
+      shadowOpacity: 0.2,
       shadowRadius: 20,
       elevation: 10,
     },
     cardOthers: {
       shadowOffset: { width: 0, height: -10 },
       shadowColor: shadowColor,
-      shadowOpacity: 0.5,
+      shadowOpacity: 0.2,
       shadowRadius: 30,
       elevation: 20,
     },
@@ -317,13 +317,16 @@ const WalletScreenStyles = (isDarkMode) => {
     },
     addCryptoOverlay: {
       ...StyleSheet.absoluteFillObject,
-      backgroundColor: "rgba(0, 0, 0, 0.15)", // 黑色半透明
+      backgroundColor: "rgba(0, 0, 0, 0)", // 黑色半透明
       borderRadius: 12, // 确保与ImageBackground的borderRadius一致
     },
     addCryptoImageText: {
       marginLeft: 4, // adjust spacing as needed
       color: "#fff",
       fontWeight: "bold",
+      textShadowColor: "rgba(0, 0, 0, 0.8)",
+      textShadowOffset: { width: 1, height: 1 },
+      textShadowRadius: 3,
     },
     iconAndTextContainer: {
       flexDirection: "row",

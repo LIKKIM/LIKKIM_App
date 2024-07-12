@@ -93,7 +93,7 @@ const initialAdditionalCryptos = [
     shortName: "DASH",
     balance: "0.0",
     icon: require("../assets/DashIcon.png"),
-    cardImage: require("../assets/Card22.png"),
+    cardImage: require("../assets/Card70.png"),
     address: "Xr3ar5bWQ5Me6EF1scu6P5tA7L5mje9XDL",
   },
   {
