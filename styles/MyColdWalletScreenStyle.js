@@ -215,10 +215,11 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
     passwordInputContainer: {
       flexDirection: "row",
       alignItems: "center",
+      position: "relative",
     },
     eyeIcon: {
-      marginLeft: -30,
-      padding: 10,
+      position: "absolute",
+      right: 10,
     },
     focusedInput: {
       borderColor: focusedBorderColor,
