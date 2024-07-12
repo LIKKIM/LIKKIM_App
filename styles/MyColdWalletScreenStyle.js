@@ -13,7 +13,11 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
   const focusedBorderColor = isDarkMode ? "#6C6CF4" : "#007AFF";
 
   return StyleSheet.create({
-    listContainer: { flexDirection: "row", alignItems: "center", flex: 1 },
+    listContainer: {
+      flexDirection: "row",
+      alignItems: "center",
+      flex: 1,
+    },
     cancelButtonText: {
       color: secondTextColor,
       fontSize: 16,
@@ -24,7 +28,6 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       marginBottom: 20,
       textAlign: "center",
     },
-
     scanModalSubtitle: {
       color: secondTextColor,
       fontSize: 14,
@@ -95,7 +98,6 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
     },
     centeredView: {
       flex: 1,
-
       justifyContent: "center",
       alignItems: "center",
       backgroundColor: "rgba(0, 0, 0, 0.5)",
@@ -194,7 +196,6 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       borderRadius: 30,
       height: 60,
       alignItems: "center",
-      //   marginTop: 20,
     },
     Icon: {
       marginRight: 10,
@@ -210,6 +211,14 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       marginBottom: 10,
       width: "100%",
       color: textColor,
+    },
+    passwordInputContainer: {
+      flexDirection: "row",
+      alignItems: "center",
+    },
+    eyeIcon: {
+      marginLeft: -30,
+      padding: 10,
     },
     focusedInput: {
       borderColor: focusedBorderColor,
