@@ -44,6 +44,8 @@ function MyColdWalletScreen() {
   const MyColdWalletScreenStyle = MyColdWalletScreenStyles(isDarkMode);
   const [currencyModalVisible, setCurrencyModalVisible] = useState(false);
   const [passwordModalVisible, setPasswordModalVisible] = useState(false);
+  const [enterPasswordModalVisible, setEnterPasswordModalVisible] =
+    useState(false); // 新增状态
   const [selectedCurrency, setSelectedCurrency] = useState(currencyUnit);
   const [selectedLanguage, setSelectedLanguage] = useState(i18n.language);
   const [modalVisible, setModalVisible] = useState(false);
@@ -54,6 +56,7 @@ function MyColdWalletScreen() {
   const [pinModalVisible, setPinModalVisible] = useState(false);
   const [selectedDevice, setSelectedDevice] = useState(null);
   const [pinCode, setPinCode] = useState("");
+  const [currentPassword, setCurrentPassword] = useState(""); // 当前密码状态
   const restoreIdentifier = Constants.installationId;
   const iconColor = isDarkMode ? "#ffffff" : "#676776";
   const darkColors = ["#24234C", "#101021"];
@@ -252,9 +255,7 @@ function MyColdWalletScreen() {
     {
       title: t("Change Password"),
       icon: "lock-outline",
-      onPress: () => {
-        setPasswordModalVisible(true);
-      },
+      onPress: () => setEnterPasswordModalVisible(true), // 改变为显示 Enter Password 模态框
     },
     {
       title: t("Default Currency"),
@@ -451,6 +452,64 @@ function MyColdWalletScreen() {
                     {t("Cancel")}
                   </Text>
                 </TouchableOpacity>
+              </View>
+            </BlurView>
+          </Modal>
+
+          {/* Enter Password Modal */}
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={enterPasswordModalVisible}
+            onRequestClose={() => setEnterPasswordModalVisible(false)}
+          >
+            <BlurView
+              intensity={10}
+              style={MyColdWalletScreenStyle.centeredView}
+            >
+              <View style={MyColdWalletScreenStyle.EnterPasswordModalView}>
+                <Text style={MyColdWalletScreenStyle.passwordModalTitle}>
+                  {t("Enter Password")}
+                </Text>
+                <Text style={MyColdWalletScreenStyle.modalSubtitle}>
+                  {t("Enter current password before resetting it")}
+                </Text>
+                <View style={{ marginVertical: 10, width: "100%" }}>
+                  <TextInput
+                    style={[
+                      MyColdWalletScreenStyle.passwordInput,
+                      isPasswordFocused && MyColdWalletScreenStyle.focusedInput,
+                    ]}
+                    placeholder={t("Enter current password")}
+                    placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
+                    secureTextEntry
+                    onChangeText={setCurrentPassword}
+                    onFocus={() => setIsPasswordFocused(true)}
+                    onBlur={() => setIsPasswordFocused(false)}
+                    value={currentPassword}
+                  />
+                </View>
+                <View style={MyColdWalletScreenStyle.buttonContainer}>
+                  <TouchableOpacity
+                    style={MyColdWalletScreenStyle.submitButton}
+                    onPress={() => {
+                      setEnterPasswordModalVisible(false);
+                      setPasswordModalVisible(true);
+                    }}
+                  >
+                    <Text style={MyColdWalletScreenStyle.submitButtonText}>
+                      {t("Continue")}
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={MyColdWalletScreenStyle.cancelButton}
+                    onPress={() => setEnterPasswordModalVisible(false)}
+                  >
+                    <Text style={MyColdWalletScreenStyle.cancelButtonText}>
+                      {t("Cancel")}
+                    </Text>
+                  </TouchableOpacity>
+                </View>
               </View>
             </BlurView>
           </Modal>
