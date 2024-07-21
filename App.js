@@ -75,6 +75,7 @@ function AppContent({
     useContext(CryptoContext);
   const { isDarkMode } = useContext(DarkModeContext);
   const navigation = useNavigation();
+  const [walletModalVisible, setWalletModalVisible] = useState(false);
 
   const handleConfirmDelete = () => {
     setHeaderDropdownVisible(false);
@@ -88,6 +89,20 @@ function AppContent({
   const tabBarBackgroundColor = isDarkMode ? "#23224D" : "#fff";
   const bottomBackgroundColor = isDarkMode ? "#101021" : "#EDEBEF";
   const iconColor = isDarkMode ? "#ffffff" : "#000000";
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("state", (e) => {
+      if (e.data.state) {
+        const currentRoute = e.data.state.routes.find(
+          (route) => route.name === "Wallet"
+        );
+        if (currentRoute?.params?.isModalVisible !== undefined) {
+          setWalletModalVisible(currentRoute.params.isModalVisible);
+        }
+      }
+    });
+    return unsubscribe;
+  }, [navigation]);
 
   return (
     <View style={{ flex: 1, backgroundColor: bottomBackgroundColor }}>
@@ -138,10 +153,11 @@ function AppContent({
           tabBarStyle: {
             backgroundColor: tabBarBackgroundColor,
             borderTopWidth: 0,
-            height: 100,
-            paddingBottom: 30,
+            height: walletModalVisible ? 0 : 100, // 根据 walletModalVisible 控制 tabBar 的高度
+            paddingBottom: walletModalVisible ? 0 : 30,
             borderTopLeftRadius: 22,
             borderTopRightRadius: 22,
+            display: walletModalVisible ? "none" : "flex", // 根据 walletModalVisible 显示或隐藏 tabBar
           },
           tabBarLabelStyle: { fontSize: 12 },
           headerStyle: {

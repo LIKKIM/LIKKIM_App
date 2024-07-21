@@ -60,6 +60,7 @@ function WalletScreen({ route, navigation }) {
   const [selectedCardIndex, setSelectedCardIndex] = useState(null);
   const cardRefs = useRef([]);
   const cardStartPositions = useRef([]);
+  const scrollYOffset = useRef(0);
 
   const mnemonic = [
     ["apple", "banana", "cherry"],
@@ -166,7 +167,7 @@ function WalletScreen({ route, navigation }) {
     setSelectedCardIndex(index);
     cardRefs.current[index]?.measure((fx, fy, width, height, px, py) => {
       cardStartPositions.current[index] = py; // 记录每个卡片的初始位置
-      const endPosition = 180; // 固定的动画结束位置
+      const endPosition = 180 - scrollYOffset.current; // 考虑 scrollTo 的 Y 偏移量
 
       Animated.timing(animation, {
         toValue: 1,
@@ -197,7 +198,11 @@ function WalletScreen({ route, navigation }) {
     setSelectedCardName(cryptoName);
     setSelectedCrypto(crypto);
 
-    animateCard(index);
+    scrollViewRef.current.scrollTo({ y: 0, animated: true });
+    setTimeout(() => {
+      scrollYOffset.current = 0;
+      animateCard(index);
+    }, 300); // 确保在滚动完成后再设置偏移量并开始动画
   };
 
   const handleAddCrypto = (crypto) => {
@@ -286,7 +291,7 @@ function WalletScreen({ route, navigation }) {
 
   const animatedCardStyle = (index) => {
     const cardStartPosition = cardStartPositions.current[index];
-    const endPosition = 100; // 固定的动画结束位置
+    const endPosition = 100 - scrollYOffset.current; // 考虑 scrollTo 的 Y 偏移量
     const translateY = animation.interpolate({
       inputRange: [0, 1],
       outputRange: [0, endPosition - cardStartPosition],
@@ -297,6 +302,15 @@ function WalletScreen({ route, navigation }) {
       zIndex: 9999,
     };
   };
+
+  useEffect(() => {
+    if (modalVisible) {
+      scrollViewRef.current.scrollTo({ y: 0, animated: true });
+      setTimeout(() => {
+        scrollYOffset.current = 0;
+      }, 300); // 确保在滚动完成后再设置偏移量
+    }
+  }, [modalVisible]);
 
   return (
     <LinearGradient
@@ -309,7 +323,16 @@ function WalletScreen({ route, navigation }) {
           WalletScreenStyle.scrollViewContent,
           { paddingBottom: 80 },
         ]}
-        style={WalletScreenStyle.scrollView}
+        style={[
+          WalletScreenStyle.scrollView,
+          modalVisible && { overflow: "hidden" },
+        ]}
+        onScroll={(event) => {
+          if (!modalVisible) {
+            scrollYOffset.current = event.nativeEvent.contentOffset.y;
+          }
+        }}
+        scrollEventThrottle={16} // 滚动事件节流，以确保 onScroll 事件不会频繁触发
       >
         {cryptoCards.length > 0 && (
           <View style={WalletScreenStyle.totalBalanceContainer}>
