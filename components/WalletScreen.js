@@ -317,7 +317,7 @@ function WalletScreen({ route, navigation }) {
 
     return {
       transform: [{ translateY }],
-      zIndex: 9999,
+      zIndex: 9,
     };
   };
 
@@ -469,7 +469,7 @@ function WalletScreen({ route, navigation }) {
               style={[WalletScreenStyle.cardModalView]}
             >
               <TouchableOpacity
-                style={[WalletScreenStyle.cancelButton, { zIndex: 10000 }]}
+                style={[WalletScreenStyle.cancelButton, { zIndex: 10 }]}
                 onPress={closeModal}
               >
                 <Text style={WalletScreenStyle.cancelButtonText}>
