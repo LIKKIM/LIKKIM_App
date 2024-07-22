@@ -190,13 +190,13 @@ function WalletScreen({ route, navigation }) {
         restSpeedThreshold: 0.01,
       }).start(() => {
         Animated.timing(cardAnimations.current[index], {
-          toValue: 48,
+          toValue: 24,
           duration: 300,
           easing: Easing.ease,
           useNativeDriver: false, // 字体动画不支持 useNativeDriver
         }).start();
         Animated.timing(textAnimations.current[index], {
-          toValue: { x: -110, y: 60 },
+          toValue: { x: -110, y: 50 },
           duration: 300,
           easing: Easing.ease,
           useNativeDriver: true,
@@ -473,11 +473,13 @@ function WalletScreen({ route, navigation }) {
                     },
                   ]}
                 >
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      alignItems: "baseline",
-                    }}
+                  <Animated.View
+                    style={[
+                      WalletScreenStyle.cardBalanceContainer,
+                      {
+                        fontSize: cardAnimations.current[index],
+                      },
+                    ]}
                   >
                     <Animated.Text
                       style={[
@@ -487,14 +489,11 @@ function WalletScreen({ route, navigation }) {
                         },
                       ]}
                     >
-                      {`${card.balance}`}
-                      <Text
-                        style={[WalletScreenStyle.cardUnit, { marginLeft: 2 }]}
-                      >
-                        {`${card.shortName}`}
-                      </Text>
+                      {`${card.balance} `}
+                      {`${card.shortName}`}
                     </Animated.Text>
-                  </View>
+                  </Animated.View>
+
                   <Text style={[WalletScreenStyle.balanceShortName]}>
                     {`${card.balance} ${currencyUnit}`}
                   </Text>
