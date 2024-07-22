@@ -185,7 +185,7 @@ function WalletScreen({ route, navigation }) {
         restSpeedThreshold: 0.01,
       }).start(() => {
         Animated.timing(cardAnimations.current[index], {
-          toValue: 24, // 放大到24
+          toValue: 48, // 放大到24
           duration: 300,
           easing: Easing.ease,
           useNativeDriver: false, // 字体动画不支持 useNativeDriver
