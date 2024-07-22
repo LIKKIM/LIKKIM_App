@@ -59,6 +59,7 @@ function WalletScreen({ route, navigation }) {
   const [animation] = useState(new Animated.Value(0));
   const [fadeAnim] = useState(new Animated.Value(0));
   const cardAnimations = useRef([]);
+  const textAnimations = useRef([]); // 新增文本动画值
   const [selectedCardIndex, setSelectedCardIndex] = useState(null);
   const cardRefs = useRef([]);
   const cardStartPositions = useRef([]);
@@ -92,10 +93,14 @@ function WalletScreen({ route, navigation }) {
       try {
         const storedCards = await AsyncStorage.getItem("cryptoCards");
         if (storedCards !== null) {
-          setCryptoCards(JSON.parse(storedCards));
-          setAddedCryptos(JSON.parse(storedCards)); // 加载时同步 addedCryptos
-          cardAnimations.current = JSON.parse(storedCards).map(
+          const parsedCards = JSON.parse(storedCards);
+          setCryptoCards(parsedCards);
+          setAddedCryptos(parsedCards); // 加载时同步 addedCryptos
+          cardAnimations.current = parsedCards.map(
             () => new Animated.Value(16)
+          );
+          textAnimations.current = parsedCards.map(
+            () => new Animated.ValueXY({ x: 0, y: 0 })
           );
         }
       } catch (error) {
@@ -185,10 +190,16 @@ function WalletScreen({ route, navigation }) {
         restSpeedThreshold: 0.01,
       }).start(() => {
         Animated.timing(cardAnimations.current[index], {
-          toValue: 48, // 放大到24
+          toValue: 24, // 放大到24
           duration: 300,
           easing: Easing.ease,
           useNativeDriver: false, // 字体动画不支持 useNativeDriver
+        }).start();
+        Animated.timing(textAnimations.current[index], {
+          toValue: { x: -100, y: 60 },
+          duration: 300,
+          easing: Easing.ease,
+          useNativeDriver: true,
         }).start();
         setModalVisible(true);
       });
@@ -212,6 +223,12 @@ function WalletScreen({ route, navigation }) {
           duration: 300,
           easing: Easing.ease,
           useNativeDriver: false,
+        }).start();
+        Animated.timing(textAnimations.current[selectedCardIndex], {
+          toValue: { x: 0, y: 0 },
+          duration: 300,
+          easing: Easing.ease,
+          useNativeDriver: true,
         }).start();
       }
       setModalVisible(false);
@@ -248,6 +265,7 @@ function WalletScreen({ route, navigation }) {
       setCryptoCount(newCryptoCards.length);
       setAddedCryptos(newCryptoCards);
       cardAnimations.current.push(new Animated.Value(16)); // 为新卡片添加动画值
+      textAnimations.current.push(new Animated.ValueXY({ x: 0, y: 0 }));
     }
     setAddCryptoVisible(false);
   };
@@ -454,9 +472,17 @@ function WalletScreen({ route, navigation }) {
                 >
                   {`${card.balance} ${card.shortName}`}
                 </Animated.Text>
-                <Text style={WalletScreenStyle.balanceShortName}>
+                <Animated.Text
+                  style={[
+                    WalletScreenStyle.balanceShortName,
+                    {
+                      transform:
+                        textAnimations.current[index].getTranslateTransform(),
+                    },
+                  ]}
+                >
                   {`${card.balance} ${currencyUnit}`}
-                </Text>
+                </Animated.Text>
               </ImageBackground>
             </Animated.View>
           </TouchableOpacity>
