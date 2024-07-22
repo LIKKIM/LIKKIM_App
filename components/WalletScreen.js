@@ -457,14 +457,6 @@ function WalletScreen({ route, navigation }) {
               colors={isDarkMode ? darkColors : lightColors}
               style={[WalletScreenStyle.cardModalView]}
             >
-              <View style={WalletScreenStyle.BalanceView}>
-                <Text style={WalletScreenStyle.modalBalanceLabel}>
-                  {t("Balance")}
-                </Text>
-                <Text style={WalletScreenStyle.modalBalance}>
-                  {selectedCrypto?.balance || "0.0"} {currencyUnit}
-                </Text>
-              </View>
               <TouchableOpacity
                 style={[WalletScreenStyle.cancelButton, { zIndex: 10000 }]}
                 onPress={closeModal}
