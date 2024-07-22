@@ -418,7 +418,7 @@ const WalletScreenStyles = (isDarkMode) => {
       fontSize: 16,
     },
     BalanceView: {
-      paddingVertical: 100,
+      paddingBottom: 200,
     },
 
     modalBalanceLabel: {
