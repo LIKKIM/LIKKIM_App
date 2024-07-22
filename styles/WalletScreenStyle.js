@@ -31,7 +31,7 @@ const WalletScreenStyles = (isDarkMode) => {
       paddingHorizontal: 0,
     },
     totalBalanceContainer: {
-      width: 300,
+      width: 326,
       marginBottom: 40,
     },
     totalBalanceText: {
@@ -83,7 +83,7 @@ const WalletScreenStyles = (isDarkMode) => {
     },
     cardContainer: {
       position: "relative",
-      marginBottom: -60, // 重叠效果
+      marginBottom: -130, // 重叠效果
     },
     cardIcon: {
       position: "absolute",
@@ -136,8 +136,8 @@ const WalletScreenStyles = (isDarkMode) => {
     },
 
     card: {
-      width: 300,
-      height: 170,
+      width: 326,
+      height: 206,
       borderRadius: 20,
       overflow: "hidden",
       justifyContent: "center",

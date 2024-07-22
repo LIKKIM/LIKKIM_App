@@ -57,6 +57,7 @@ function WalletScreen({ route, navigation }) {
     useState(false);
   const [phrase, setPhrase] = useState("");
   const [animation] = useState(new Animated.Value(0));
+  const [fadeAnim] = useState(new Animated.Value(0));
   const [selectedCardIndex, setSelectedCardIndex] = useState(null);
   const cardRefs = useRef([]);
   const cardStartPositions = useRef([]);
@@ -199,6 +200,15 @@ function WalletScreen({ route, navigation }) {
       setSelectedCardIndex(null);
     });
   };
+
+  useEffect(() => {
+    Animated.timing(fadeAnim, {
+      toValue: modalVisible ? 1 : 0,
+      duration: 300,
+      easing: Easing.ease,
+      useNativeDriver: true,
+    }).start();
+  }, [modalVisible, fadeAnim]);
 
   const handleCardPress = (cryptoName, index) => {
     const crypto = cryptoCards.find((card) => card.name === cryptoName);
@@ -434,27 +444,31 @@ function WalletScreen({ route, navigation }) {
 
         {/* 数字货币弹窗view */}
         {modalVisible && (
-          <LinearGradient
-            colors={isDarkMode ? darkColors : lightColors}
-            style={[WalletScreenStyle.cardModalView]}
+          <Animated.View
+            style={[WalletScreenStyle.cardModalView, { opacity: fadeAnim }]}
           >
-            <View style={WalletScreenStyle.BalanceView}>
-              <Text style={WalletScreenStyle.modalBalanceLabel}>
-                {t("Balance")}
-              </Text>
-              <Text style={WalletScreenStyle.modalBalance}>
-                {selectedCrypto?.balance || "0.0"} {currencyUnit}
-              </Text>
-            </View>
-            <TouchableOpacity
-              style={[WalletScreenStyle.cancelButton, { zIndex: 10000 }]}
-              onPress={closeModal}
+            <LinearGradient
+              colors={isDarkMode ? darkColors : lightColors}
+              style={[WalletScreenStyle.cardModalView]}
             >
-              <Text style={WalletScreenStyle.cancelButtonText}>
-                {t("Close")}
-              </Text>
-            </TouchableOpacity>
-          </LinearGradient>
+              <View style={WalletScreenStyle.BalanceView}>
+                <Text style={WalletScreenStyle.modalBalanceLabel}>
+                  {t("Balance")}
+                </Text>
+                <Text style={WalletScreenStyle.modalBalance}>
+                  {selectedCrypto?.balance || "0.0"} {currencyUnit}
+                </Text>
+              </View>
+              <TouchableOpacity
+                style={[WalletScreenStyle.cancelButton, { zIndex: 10000 }]}
+                onPress={closeModal}
+              >
+                <Text style={WalletScreenStyle.cancelButtonText}>
+                  {t("Close")}
+                </Text>
+              </TouchableOpacity>
+            </LinearGradient>
+          </Animated.View>
         )}
       </ScrollView>
 
