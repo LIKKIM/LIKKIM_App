@@ -188,12 +188,12 @@ const WalletScreenStyles = (isDarkMode) => {
       borderWidth: 3, // 设置边框宽度
       borderColor: buttonBackgroundColor, // 设置边框颜色
       padding: 10,
-      width: "100%",
+      width: 326,
       justifyContent: "center",
       borderRadius: 30,
       height: 60,
       alignItems: "center",
-      marginTop: 20,
+      marginBottom: 30,
     },
     removeCancelButton: {
       borderWidth: 3, // 设置边框宽度
@@ -216,7 +216,7 @@ const WalletScreenStyles = (isDarkMode) => {
     cardModalView: {
       height: "100%",
       width: "100%",
-      padding: 35,
+
       justifyContent: "flex-end",
       alignItems: "center",
       position: "absolute",
