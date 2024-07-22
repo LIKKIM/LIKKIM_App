@@ -464,25 +464,42 @@ function WalletScreen({ route, navigation }) {
                 <Text style={WalletScreenStyle.cardShortName}>
                   {card.shortName}
                 </Text>
-                <Animated.Text
+                <Animated.View
                   style={[
-                    WalletScreenStyle.cardBalance,
-                    { fontSize: cardAnimations.current[index] },
-                  ]}
-                >
-                  {`${card.balance} ${card.shortName}`}
-                </Animated.Text>
-                <Animated.Text
-                  style={[
-                    WalletScreenStyle.balanceShortName,
+                    WalletScreenStyle.CardTextView,
                     {
                       transform:
                         textAnimations.current[index].getTranslateTransform(),
                     },
                   ]}
                 >
-                  {`${card.balance} ${currencyUnit}`}
-                </Animated.Text>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      alignItems: "baseline",
+                    }}
+                  >
+                    <Animated.Text
+                      style={[
+                        WalletScreenStyle.cardBalance,
+                        {
+                          fontSize: cardAnimations.current[index],
+                        }, // 添加 lineHeight 确保文本底部对齐
+                      ]}
+                    >
+                      {`${card.balance}`}
+                    </Animated.Text>
+                    <Text
+                      style={[WalletScreenStyle.cardUnit, { marginLeft: 2 }]}
+                    >
+                      {`${card.shortName}`}
+                    </Text>
+                  </View>
+
+                  <Text style={[WalletScreenStyle.balanceShortName]}>
+                    {`${card.balance} ${currencyUnit}`}
+                  </Text>
+                </Animated.View>
               </ImageBackground>
             </Animated.View>
           </TouchableOpacity>
