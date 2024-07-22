@@ -124,22 +124,26 @@ const WalletScreenStyles = (isDarkMode) => {
       textShadowOffset: { width: 0, height: 2 },
       textShadowRadius: 3,
     },
-    cardUnit: {
-      position: "absolute",
-      top: 25,
-      right: 15,
-      color: "#fff",
-      fontSize: 16,
-      fontWeight: "bold",
-      textShadowColor: "rgba(0, 0, 0, 0.8)",
-      textShadowOffset: { width: 0, height: 2 },
-      textShadowRadius: 3,
-      marginLeft: 2,
-    },
     balanceShortName: {
       position: "absolute",
       top: 56,
       right: 20,
+      color: secondCardTextColor,
+      fontSize: 14,
+      textShadowColor: "rgba(0, 0, 0, 0.8)",
+      textShadowOffset: { width: 0, height: 2 },
+      textShadowRadius: 3,
+    },
+    cardBalanceCenter: {
+      color: "#fff",
+      fontSize: 28,
+      fontWeight: "bold",
+      textShadowColor: "rgba(0, 0, 0, 0.8)",
+      textShadowOffset: { width: 0, height: 2 },
+      textShadowRadius: 3,
+      marginBottom: 8,
+    },
+    balanceShortNameCenter: {
       color: secondCardTextColor,
       fontSize: 14,
       textShadowColor: "rgba(0, 0, 0, 0.8)",
@@ -431,7 +435,7 @@ const WalletScreenStyles = (isDarkMode) => {
     BalanceView: {
       paddingBottom: 200,
     },
-    CardTextView: {},
+
     modalBalanceLabel: {
       color: textColor,
       textAlign: "center",

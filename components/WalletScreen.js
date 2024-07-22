@@ -58,8 +58,6 @@ function WalletScreen({ route, navigation }) {
   const [phrase, setPhrase] = useState("");
   const [animation] = useState(new Animated.Value(0));
   const [fadeAnim] = useState(new Animated.Value(0));
-  const cardAnimations = useRef([]);
-  const textAnimations = useRef([]); // 新增文本动画值
   const [selectedCardIndex, setSelectedCardIndex] = useState(null);
   const cardRefs = useRef([]);
   const cardStartPositions = useRef([]);
@@ -93,15 +91,8 @@ function WalletScreen({ route, navigation }) {
       try {
         const storedCards = await AsyncStorage.getItem("cryptoCards");
         if (storedCards !== null) {
-          const parsedCards = JSON.parse(storedCards);
-          setCryptoCards(parsedCards);
-          setAddedCryptos(parsedCards); // 加载时同步 addedCryptos
-          cardAnimations.current = parsedCards.map(
-            () => new Animated.Value(16)
-          );
-          textAnimations.current = parsedCards.map(
-            () => new Animated.ValueXY({ x: 0, y: 0 })
-          );
+          setCryptoCards(JSON.parse(storedCards));
+          setAddedCryptos(JSON.parse(storedCards)); // 加载时同步 addedCryptos
         }
       } catch (error) {
         console.error("Error loading crypto cards:", error);
@@ -189,18 +180,6 @@ function WalletScreen({ route, navigation }) {
         restDisplacementThreshold: 0.01,
         restSpeedThreshold: 0.01,
       }).start(() => {
-        Animated.timing(cardAnimations.current[index], {
-          toValue: 24,
-          duration: 300,
-          easing: Easing.ease,
-          useNativeDriver: false, // 字体动画不支持 useNativeDriver
-        }).start();
-        Animated.timing(textAnimations.current[index], {
-          toValue: { x: -110, y: 50 },
-          duration: 300,
-          easing: Easing.ease,
-          useNativeDriver: true,
-        }).start();
         setModalVisible(true);
       });
     });
@@ -217,20 +196,6 @@ function WalletScreen({ route, navigation }) {
       restDisplacementThreshold: 0.01,
       restSpeedThreshold: 0.01,
     }).start(() => {
-      if (selectedCardIndex !== null) {
-        Animated.timing(cardAnimations.current[selectedCardIndex], {
-          toValue: 16, // 缩小到16
-          duration: 300,
-          easing: Easing.ease,
-          useNativeDriver: false,
-        }).start();
-        Animated.timing(textAnimations.current[selectedCardIndex], {
-          toValue: { x: 0, y: 0 },
-          duration: 300,
-          easing: Easing.ease,
-          useNativeDriver: true,
-        }).start();
-      }
       setModalVisible(false);
       setSelectedCardIndex(null);
     });
@@ -264,8 +229,6 @@ function WalletScreen({ route, navigation }) {
       setCryptoCards(newCryptoCards);
       setCryptoCount(newCryptoCards.length);
       setAddedCryptos(newCryptoCards);
-      cardAnimations.current.push(new Animated.Value(16)); // 为新卡片添加动画值
-      textAnimations.current.push(new Animated.ValueXY({ x: 0, y: 0 }));
     }
     setAddCryptoVisible(false);
   };
@@ -464,41 +427,33 @@ function WalletScreen({ route, navigation }) {
                 <Text style={WalletScreenStyle.cardShortName}>
                   {card.shortName}
                 </Text>
-                <Animated.View
-                  style={[
-                    WalletScreenStyle.CardTextView,
-
-                    {
-                      transform:
-                        textAnimations.current[index].getTranslateTransform(),
-                    },
-                  ]}
-                >
-                  <Animated.View
-                    style={[
-                      WalletScreenStyle.cardBalanceContainer,
-                      {
-                        fontSize: cardAnimations.current[index],
-                      },
-                    ]}
+                {!modalVisible && (
+                  <>
+                    <Text style={WalletScreenStyle.cardBalance}>
+                      {`${card.balance} ${card.shortName}`}
+                    </Text>
+                    <Text style={WalletScreenStyle.balanceShortName}>
+                      {`${card.balance} ${currencyUnit}`}
+                    </Text>
+                  </>
+                )}
+                {modalVisible && (
+                  <View
+                    style={{
+                      width: 326,
+                      height: 206,
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
                   >
-                    <Animated.Text
-                      style={[
-                        WalletScreenStyle.cardBalance,
-                        {
-                          fontSize: cardAnimations.current[index],
-                        },
-                      ]}
-                    >
-                      {`${card.balance} `}
-                      {`${card.shortName}`}
-                    </Animated.Text>
-                  </Animated.View>
-
-                  <Text style={[WalletScreenStyle.balanceShortName]}>
-                    {`${card.balance} ${currencyUnit}`}
-                  </Text>
-                </Animated.View>
+                    <Text style={WalletScreenStyle.cardBalanceCenter}>
+                      {`${card.balance} ${card.shortName}`}
+                    </Text>
+                    <Text style={WalletScreenStyle.balanceShortNameCenter}>
+                      {`${card.balance} ${currencyUnit}`}
+                    </Text>
+                  </View>
+                )}
               </ImageBackground>
             </Animated.View>
           </TouchableOpacity>
