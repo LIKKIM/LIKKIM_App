@@ -484,18 +484,17 @@ function WalletScreen({ route, navigation }) {
                         WalletScreenStyle.cardBalance,
                         {
                           fontSize: cardAnimations.current[index],
-                        }, // 添加 lineHeight 确保文本底部对齐
+                        },
                       ]}
                     >
                       {`${card.balance}`}
+                      <Text
+                        style={[WalletScreenStyle.cardUnit, { marginLeft: 2 }]}
+                      >
+                        {`${card.shortName}`}
+                      </Text>
                     </Animated.Text>
-                    <Text
-                      style={[WalletScreenStyle.cardUnit, { marginLeft: 2 }]}
-                    >
-                      {`${card.shortName}`}
-                    </Text>
                   </View>
-
                   <Text style={[WalletScreenStyle.balanceShortName]}>
                     {`${card.balance} ${currencyUnit}`}
                   </Text>
