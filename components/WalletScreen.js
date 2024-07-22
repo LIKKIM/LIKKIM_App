@@ -467,6 +467,7 @@ function WalletScreen({ route, navigation }) {
                 <Animated.View
                   style={[
                     WalletScreenStyle.CardTextView,
+
                     {
                       transform:
                         textAnimations.current[index].getTranslateTransform(),
