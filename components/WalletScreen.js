@@ -169,11 +169,15 @@ function WalletScreen({ route, navigation }) {
       cardStartPositions.current[index] = py; // 记录每个卡片的初始位置
       const endPosition = 180 - scrollYOffset.current; // 考虑 scrollTo 的 Y 偏移量
 
-      Animated.timing(animation, {
+      Animated.spring(animation, {
         toValue: 1,
-        duration: 300,
-        easing: Easing.inOut(Easing.ease),
         useNativeDriver: true,
+        stiffness: 200, // 刚度
+        damping: 15, // 阻尼
+        mass: 1, // 质量
+        overshootClamping: false, // 允许超出目标值
+        restDisplacementThreshold: 0.01,
+        restSpeedThreshold: 0.01,
       }).start(() => {
         setModalVisible(true);
       });
@@ -181,11 +185,15 @@ function WalletScreen({ route, navigation }) {
   };
 
   const closeModal = () => {
-    Animated.timing(animation, {
+    Animated.spring(animation, {
       toValue: 0,
-      duration: 300,
-      easing: Easing.inOut(Easing.ease),
       useNativeDriver: true,
+      stiffness: 200,
+      damping: 15,
+      mass: 1,
+      overshootClamping: false,
+      restDisplacementThreshold: 0.01,
+      restSpeedThreshold: 0.01,
     }).start(() => {
       setModalVisible(false);
       setSelectedCardIndex(null);
