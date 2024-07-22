@@ -196,7 +196,7 @@ function WalletScreen({ route, navigation }) {
           useNativeDriver: false, // 字体动画不支持 useNativeDriver
         }).start();
         Animated.timing(textAnimations.current[index], {
-          toValue: { x: -100, y: 60 },
+          toValue: { x: -110, y: 60 },
           duration: 300,
           easing: Easing.ease,
           useNativeDriver: true,
