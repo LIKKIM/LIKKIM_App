@@ -50,6 +50,8 @@ function WalletScreen({ route, navigation }) {
   const iconColor = isDarkMode ? "#ffffff" : "#24234C";
   const darkColors = ["#24234C", "#101021"];
   const lightColors = ["#FFFFFF", "#EDEBEF"];
+  const darkColorsDown = ["#212146", "#101021"];
+  const lightColorsDown = ["#FDFCFD", "#EDEBEF"];
   const secondTextColor = isDarkMode ? "#ddd" : "#676776";
   const placeholderColor = isDarkMode ? "#ffffff" : "#24234C";
   const [selectedWords, setSelectedWords] = useState(Array(12).fill(null));
@@ -168,7 +170,16 @@ function WalletScreen({ route, navigation }) {
     setSelectedCardIndex(index);
     cardRefs.current[index]?.measure((fx, fy, width, height, px, py) => {
       cardStartPositions.current[index] = py; // 记录每个卡片的初始位置
-      const endPosition = 120 - scrollYOffset.current; // 考虑 scrollTo 的 Y 偏移量
+      const endPosition = 120 - (scrollYOffset.current || 0); // 考虑 scrollTo 的 Y 偏移量
+
+      // 确保 start 和 end 位置都是有效的数值
+      if (isNaN(cardStartPositions.current[index]) || isNaN(endPosition)) {
+        console.error("Invalid position values", {
+          startPosition: cardStartPositions.current[index],
+          endPosition: endPosition,
+        });
+        return;
+      }
 
       Animated.spring(animation, {
         toValue: 1,
@@ -308,8 +319,8 @@ function WalletScreen({ route, navigation }) {
   }, [processModalVisible, t]);
 
   const animatedCardStyle = (index) => {
-    const cardStartPosition = cardStartPositions.current[index];
-    const endPosition = 120 - scrollYOffset.current; // 考虑 scrollTo 的 Y 偏移量
+    const cardStartPosition = cardStartPositions.current[index] || 0;
+    const endPosition = 120 - (scrollYOffset.current || 0); // 考虑 scrollTo 的 Y 偏移量
     const translateY = animation.interpolate({
       inputRange: [0, 1],
       outputRange: [0, endPosition - cardStartPosition],
@@ -352,17 +363,21 @@ function WalletScreen({ route, navigation }) {
         }}
         scrollEventThrottle={16} // 滚动事件节流，以确保 onScroll 事件不会频繁触发
       >
-        {cryptoCards.length > 0 && (
-          <View style={WalletScreenStyle.totalBalanceContainer}>
-            <Text style={WalletScreenStyle.totalBalanceText}>
-              {t("Total Balance")}
-            </Text>
-            <Text style={WalletScreenStyle.totalBalanceAmount}>
-              {`${calculateTotalBalance()}`}
-              <Text style={WalletScreenStyle.currencyUnit}>{currencyUnit}</Text>
-            </Text>
-          </View>
-        )}
+        <View style={WalletScreenStyle.totalBalanceContainer}>
+          {cryptoCards.length > 0 && !modalVisible && (
+            <>
+              <Text style={WalletScreenStyle.totalBalanceText}>
+                {t("Total Balance")}
+              </Text>
+              <Text style={WalletScreenStyle.totalBalanceAmount}>
+                {`${calculateTotalBalance()}`}
+                <Text style={WalletScreenStyle.currencyUnit}>
+                  {currencyUnit}
+                </Text>
+              </Text>
+            </>
+          )}
+        </View>
 
         {cryptoCards.length === 0 && (
           <View style={WalletScreenStyle.centeredContent}>
@@ -465,7 +480,7 @@ function WalletScreen({ route, navigation }) {
             style={[WalletScreenStyle.cardModalView, { opacity: fadeAnim }]}
           >
             <LinearGradient
-              colors={isDarkMode ? darkColors : lightColors}
+              colors={isDarkMode ? darkColorsDown : lightColorsDown}
               style={[WalletScreenStyle.cardModalView]}
             >
               <TouchableOpacity

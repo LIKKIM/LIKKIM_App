@@ -31,6 +31,7 @@ const WalletScreenStyles = (isDarkMode) => {
       paddingHorizontal: 0,
     },
     totalBalanceContainer: {
+      height: 82,
       width: 326,
       marginBottom: 40,
     },
