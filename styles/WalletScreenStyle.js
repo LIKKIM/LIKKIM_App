@@ -216,12 +216,11 @@ const WalletScreenStyles = (isDarkMode) => {
     cardModalView: {
       height: "100%",
       width: "100%",
-
       justifyContent: "flex-end",
       alignItems: "center",
       position: "absolute",
       bottom: 0,
-      zIndex: 1,
+      zIndex: 2,
     },
 
     modalView: {
@@ -409,7 +408,7 @@ const WalletScreenStyles = (isDarkMode) => {
       backgroundColor: cardBackgroundColor,
       borderRadius: 5,
       padding: 10,
-      zIndex: 1,
+      zIndex: 3,
     },
     dropdownButton: {
       padding: 10,
