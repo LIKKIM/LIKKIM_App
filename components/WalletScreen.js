@@ -167,13 +167,13 @@ function WalletScreen({ route, navigation }) {
     setSelectedCardIndex(index);
     cardRefs.current[index]?.measure((fx, fy, width, height, px, py) => {
       cardStartPositions.current[index] = py; // 记录每个卡片的初始位置
-      const endPosition = 180 - scrollYOffset.current; // 考虑 scrollTo 的 Y 偏移量
+      const endPosition = 120 - scrollYOffset.current; // 考虑 scrollTo 的 Y 偏移量
 
       Animated.spring(animation, {
         toValue: 1,
         useNativeDriver: true,
-        stiffness: 200, // 刚度
-        damping: 15, // 阻尼
+        stiffness: 300, // 增加刚度
+        damping: 30, // 增加阻尼
         mass: 1, // 质量
         overshootClamping: false, // 允许超出目标值
         restDisplacementThreshold: 0.01,
@@ -299,7 +299,7 @@ function WalletScreen({ route, navigation }) {
 
   const animatedCardStyle = (index) => {
     const cardStartPosition = cardStartPositions.current[index];
-    const endPosition = 100 - scrollYOffset.current; // 考虑 scrollTo 的 Y 偏移量
+    const endPosition = 120 - scrollYOffset.current; // 考虑 scrollTo 的 Y 偏移量
     const translateY = animation.interpolate({
       inputRange: [0, 1],
       outputRange: [0, endPosition - cardStartPosition],
