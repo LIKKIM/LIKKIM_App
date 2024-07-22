@@ -58,6 +58,7 @@ function WalletScreen({ route, navigation }) {
   const [phrase, setPhrase] = useState("");
   const [animation] = useState(new Animated.Value(0));
   const [fadeAnim] = useState(new Animated.Value(0));
+  const [fontSizeAnim] = useState(new Animated.Value(16));
   const [selectedCardIndex, setSelectedCardIndex] = useState(null);
   const cardRefs = useRef([]);
   const cardStartPositions = useRef([]);
@@ -209,6 +210,15 @@ function WalletScreen({ route, navigation }) {
       useNativeDriver: true,
     }).start();
   }, [modalVisible, fadeAnim]);
+
+  useEffect(() => {
+    Animated.timing(fontSizeAnim, {
+      toValue: modalVisible ? 24 : 16, // modalVisible 为 true 时字体放大到 24
+      duration: 300,
+      easing: Easing.ease,
+      useNativeDriver: false, // 字体动画不支持 useNativeDriver
+    }).start();
+  }, [modalVisible]);
 
   const handleCardPress = (cryptoName, index) => {
     const crypto = cryptoCards.find((card) => card.name === cryptoName);
@@ -427,16 +437,12 @@ function WalletScreen({ route, navigation }) {
                 <Text style={WalletScreenStyle.cardShortName}>
                   {card.shortName}
                 </Text>
-                {!modalVisible && (
-                  <>
-                    <Text style={WalletScreenStyle.cardBalance}>
-                      {`${card.balance} ${currencyUnit}`}
-                    </Text>
-                    <Text style={WalletScreenStyle.balanceShortName}>
-                      {`${card.balance} ${card.shortName}`}
-                    </Text>
-                  </>
-                )}
+                <Text style={WalletScreenStyle.cardBalance}>
+                  {`${card.balance} ${card.shortName}`}
+                </Text>
+                <Text style={WalletScreenStyle.balanceShortName}>
+                  {`${card.balance} ${currencyUnit}`}
+                </Text>
               </ImageBackground>
             </Animated.View>
           </TouchableOpacity>
