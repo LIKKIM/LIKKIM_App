@@ -24,7 +24,7 @@ const WalletScreenStyles = (isDarkMode) => {
     },
     activeTabButton: {
       paddingBottom: 20,
-      borderBottomWidth: 1,
+      borderBottomWidth: 2,
       borderBottomColor: "#6C6CF4",
       marginHorizontal: 60,
     },
