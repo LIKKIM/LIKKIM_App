@@ -17,6 +17,29 @@ const WalletScreenStyles = (isDarkMode) => {
     ? "#24234C80"
     : "#FFFFFF80";
   return StyleSheet.create({
+    addressText: {
+      color: secondTextColor,
+      textAlign: "center",
+      marginRight: 10,
+      flexWrap: "wrap",
+      width: 280,
+    },
+    cancelButtonText: {
+      color: secondTextColor,
+      fontSize: 16,
+    },
+
+    receiveModalView: {
+      margin: 20,
+      height: 500,
+      width: "90%",
+      backgroundColor: modalBackgroundColor,
+      borderRadius: 20,
+      padding: 35,
+      justifyContent: "space-between",
+      alignItems: "center",
+    },
+
     tabButton: {
       padding: 20,
       marginHorizontal: 60,
@@ -366,10 +389,7 @@ const WalletScreenStyles = (isDarkMode) => {
       marginBottom: 45,
       fontWeight: "bold",
     },
-    cancelButtonText: {
-      color: secondTextColor,
-      fontSize: 16,
-    },
+
     addCryptoModalView: {
       margin: 20,
       minHeight: 400,

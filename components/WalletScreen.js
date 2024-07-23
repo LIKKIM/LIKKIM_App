@@ -11,6 +11,7 @@ import {
   Animated,
   Easing,
   ScrollView,
+  Clipboard,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -19,6 +20,7 @@ import { BlurView } from "expo-blur";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CryptoContext, DarkModeContext, usdtCrypto } from "./CryptoContext";
 import { useTranslation } from "react-i18next";
+import QRCode from "react-native-qrcode-svg"; // 确保导入 QRCode 模块
 
 function WalletScreen({ route, navigation }) {
   const {
@@ -34,7 +36,7 @@ function WalletScreen({ route, navigation }) {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState("History");
   const [modalVisible, setModalVisible] = useState(false);
-  const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [addressModalVisible, setAddressModalVisible] = useState(false); // 新增地址模态窗口的状态
   const [selectedAddress, setSelectedAddress] = useState("");
   const [selectedCrypto, setSelectedCrypto] = useState(null);
   const [addCryptoVisible, setAddCryptoVisible] = useState(false);
@@ -67,6 +69,8 @@ function WalletScreen({ route, navigation }) {
   const cardStartPositions = useRef([]);
   const scrollYOffset = useRef(0);
   const [transactionHistory, setTransactionHistory] = useState([]);
+  const [processMessages, setProcessMessages] = useState([]);
+  const [showLetsGoButton, setShowLetsGoButton] = useState(false);
   const mnemonic = [
     ["apple", "banana", "cherry"],
     ["dog", "elephant", "frog"],
@@ -89,6 +93,12 @@ function WalletScreen({ route, navigation }) {
   };
 
   const allWordsSelected = selectedWords.every((word) => word !== null);
+  // 点击 QR 代码图片时显示地址模态窗口
+  const handleQRCodePress = (crypto) => {
+    setSelectedCrypto(crypto.shortName);
+    setSelectedAddress(crypto.address);
+    setAddressModalVisible(true);
+  };
 
   useEffect(() => {
     // 根据条件触发动画
@@ -156,10 +166,12 @@ function WalletScreen({ route, navigation }) {
     animation.setValue(0); // 重置动画
     navigation.setParams({ showDeleteConfirmModal: false });
   };
+
   const handleConfirmDelete = () => {
     setDeleteConfirmVisible(true);
     setDropdownVisible(false);
   };
+
   useEffect(() => {
     if (route.params?.showAddModal) {
       setAddCryptoVisible(true);
@@ -299,9 +311,6 @@ function WalletScreen({ route, navigation }) {
       .reduce((total, card) => total + parseFloat(card.balance), 0)
       .toFixed(2);
   };
-
-  const [processMessages, setProcessMessages] = useState([]);
-  const [showLetsGoButton, setShowLetsGoButton] = useState(false);
 
   useEffect(() => {
     if (processModalVisible) {
@@ -519,10 +528,12 @@ function WalletScreen({ route, navigation }) {
                       alignItems: "center",
                     }}
                   >
-                    <Image
-                      source={require("../assets/icon/QR.png")}
-                      style={WalletScreenStyle.QRImg}
-                    />
+                    <TouchableOpacity onPress={() => handleQRCodePress(card)}>
+                      <Image
+                        source={require("../assets/icon/QR.png")}
+                        style={WalletScreenStyle.QRImg}
+                      />
+                    </TouchableOpacity>
                     <Text style={WalletScreenStyle.cardBalanceCenter}>
                       {`${card.balance} ${card.shortName}`}
                     </Text>
@@ -595,6 +606,62 @@ function WalletScreen({ route, navigation }) {
           </Animated.View>
         )}
       </ScrollView>
+
+      {/* 显示选择的加密货币地址的模态窗口 */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={addressModalVisible}
+        onRequestClose={() => setAddressModalVisible(false)}
+      >
+        <View style={WalletScreenStyle.centeredView}>
+          <View style={WalletScreenStyle.receiveModalView}>
+            <Text style={WalletScreenStyle.modalTitle}>
+              {t("Address for")} {selectedCrypto}:
+            </Text>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Text style={WalletScreenStyle.addressText}>
+                {selectedAddress}
+              </Text>
+              <TouchableOpacity
+                onPress={() => Clipboard.setString(selectedAddress)}
+              >
+                <Icon
+                  name="content-copy"
+                  size={24}
+                  color={isDarkMode ? "#ffffff" : "#676776"}
+                />
+              </TouchableOpacity>
+            </View>
+            <View
+              style={{
+                backgroundColor: "#fff",
+                height: 220,
+                width: 220,
+                justifyContent: "center",
+                alignItems: "center",
+                borderRadius: 12,
+              }}
+            >
+              <QRCode value={selectedAddress} size={200} />
+            </View>
+            <TouchableOpacity
+              style={WalletScreenStyle.cancelButton}
+              onPress={() => setAddressModalVisible(false)}
+            >
+              <Text style={WalletScreenStyle.cancelButtonText}>
+                {t("Close")}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
 
       {/* Add Wallet Modal */}
       <Modal

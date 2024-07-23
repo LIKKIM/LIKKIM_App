@@ -30,12 +30,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       height: 60,
       alignItems: "center",
     },
-    modalTitle: {
-      color: titleColor,
-      fontSize: 16,
-      fontWeight: "bold",
-      marginBottom: 15,
-    },
+
     modalView: {
       margin: 20,
       height: 500,
@@ -45,6 +40,23 @@ const TransactionsScreenStyles = (isDarkMode) => {
       borderRadius: 20,
       padding: 35,
       alignItems: "center",
+    },
+    addressText: {
+      color: secondTextColor,
+      textAlign: "center",
+      marginRight: 10,
+      flexWrap: "wrap",
+      width: 280,
+    },
+    cancelButtonText: {
+      color: secondTextColor,
+      fontSize: 16,
+    },
+    modalTitle: {
+      color: titleColor,
+      fontSize: 16,
+      fontWeight: "bold",
+      marginBottom: 15,
     },
     receiveModalView: {
       margin: 20,
@@ -167,13 +179,6 @@ const TransactionsScreenStyles = (isDarkMode) => {
       color: textColor,
       textAlign: "center",
       marginBottom: 30,
-    },
-    addressText: {
-      color: secondTextColor,
-      textAlign: "center",
-      marginRight: 10,
-      flexWrap: "wrap",
-      width: 280,
     },
   });
 };
