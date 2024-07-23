@@ -271,6 +271,17 @@ const WalletScreenStyles = (isDarkMode) => {
       alignItems: "center",
       marginTop: 20,
     },
+    cancelAddressButton: {
+      borderWidth: 3, // 设置边框宽度
+      borderColor: buttonBackgroundColor, // 设置边框颜色
+      padding: 10,
+      width: 326,
+      justifyContent: "center",
+      borderRadius: 30,
+      height: 60,
+      alignItems: "center",
+      marginTop: 30,
+    },
     cancelButton: {
       borderWidth: 3, // 设置边框宽度
       borderColor: buttonBackgroundColor, // 设置边框颜色
@@ -282,6 +293,7 @@ const WalletScreenStyles = (isDarkMode) => {
       alignItems: "center",
       marginBottom: 30,
     },
+
     removeCancelButton: {
       borderWidth: 3, // 设置边框宽度
       borderColor: buttonBackgroundColor, // 设置边框颜色

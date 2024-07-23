@@ -65,6 +65,7 @@ function WalletScreen({ route, navigation }) {
   const [fadeAnim] = useState(new Animated.Value(0));
   const opacityAnim = useRef(new Animated.Value(0)).current;
   const [selectedCardIndex, setSelectedCardIndex] = useState(null);
+  const [selectedCryptoIcon, setSelectedCryptoIcon] = useState(null);
   const cardRefs = useRef([]);
   const cardStartPositions = useRef([]);
   const scrollYOffset = useRef(0);
@@ -97,6 +98,7 @@ function WalletScreen({ route, navigation }) {
   const handleQRCodePress = (crypto) => {
     setSelectedCrypto(crypto.shortName);
     setSelectedAddress(crypto.address);
+    setSelectedCryptoIcon(crypto.icon);
     setAddressModalVisible(true);
   };
 
@@ -624,9 +626,25 @@ function WalletScreen({ route, navigation }) {
       >
         <View style={WalletScreenStyle.centeredView}>
           <View style={WalletScreenStyle.receiveModalView}>
-            <Text style={WalletScreenStyle.modalTitle}>
-              {t("Address for")} {selectedCrypto}:
-            </Text>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Text style={WalletScreenStyle.modalTitle}>
+                {t("Address for")}{" "}
+              </Text>
+              {selectedCryptoIcon && (
+                <Image
+                  source={selectedCryptoIcon}
+                  style={{
+                    width: 24,
+                    height: 24,
+                    marginLeft: 5,
+                    marginRight: 5,
+                  }}
+                />
+              )}
+              <Text style={WalletScreenStyle.modalTitle}>
+                {selectedCrypto}:
+              </Text>
+            </View>
             <Text style={WalletScreenStyle.subtitleText}>
               {t("  Assets can only be sent within the same chain.")}
             </Text>
@@ -663,7 +681,7 @@ function WalletScreen({ route, navigation }) {
               <QRCode value={selectedAddress} size={200} />
             </View>
             <TouchableOpacity
-              style={WalletScreenStyle.cancelButton}
+              style={WalletScreenStyle.cancelAddressButton}
               onPress={() => setAddressModalVisible(false)}
             >
               <Text style={WalletScreenStyle.cancelButtonText}>
