@@ -93,18 +93,16 @@ function WalletScreen({ route, navigation }) {
   useEffect(() => {
     // 根据条件触发动画
     if (cryptoCards.length > 0 && !modalVisible) {
-      setTimeout(() => {
-        Animated.timing(opacityAnim, {
-          toValue: 1,
-          duration: 200,
-          easing: Easing.ease,
-          useNativeDriver: true,
-        }).start();
-      }, 100);
+      Animated.timing(opacityAnim, {
+        toValue: 1,
+        duration: 200,
+        easing: Easing.ease,
+        useNativeDriver: true,
+      }).start();
     } else {
       Animated.timing(opacityAnim, {
         toValue: 0,
-        duration: 300,
+        duration: 200,
         easing: Easing.ease,
         useNativeDriver: true,
       }).start();
@@ -236,7 +234,7 @@ function WalletScreen({ route, navigation }) {
   useEffect(() => {
     Animated.timing(fadeAnim, {
       toValue: modalVisible ? 1 : 0,
-      duration: 0,
+      duration: 300,
       easing: Easing.ease,
       useNativeDriver: true,
     }).start();

@@ -20,6 +20,7 @@ const WalletScreenStyles = (isDarkMode) => {
     tabButton: {
       paddingBottom: 20,
       marginHorizontal: 60,
+      zIndex: 11,
     },
     activeTabButton: {
       paddingBottom: 20,
