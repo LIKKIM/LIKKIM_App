@@ -280,7 +280,7 @@ const WalletScreenStyles = (isDarkMode) => {
       borderRadius: 30,
       height: 60,
       alignItems: "center",
-      marginTop: 30,
+      marginTop: 20,
     },
     cancelButton: {
       borderWidth: 3, // 设置边框宽度
