@@ -60,11 +60,12 @@ function WalletScreen({ route, navigation }) {
   const [phrase, setPhrase] = useState("");
   const [animation] = useState(new Animated.Value(0));
   const [fadeAnim] = useState(new Animated.Value(0));
+  const opacityAnim = useRef(new Animated.Value(0)).current;
   const [selectedCardIndex, setSelectedCardIndex] = useState(null);
   const cardRefs = useRef([]);
   const cardStartPositions = useRef([]);
   const scrollYOffset = useRef(0);
-
+  const [transactionHistory, setTransactionHistory] = useState([]);
   const mnemonic = [
     ["apple", "banana", "cherry"],
     ["dog", "elephant", "frog"],
@@ -87,6 +88,27 @@ function WalletScreen({ route, navigation }) {
   };
 
   const allWordsSelected = selectedWords.every((word) => word !== null);
+
+  useEffect(() => {
+    // 根据条件触发动画
+    if (cryptoCards.length > 0 && !modalVisible) {
+      setTimeout(() => {
+        Animated.timing(opacityAnim, {
+          toValue: 1,
+          duration: 200,
+          easing: Easing.ease,
+          useNativeDriver: true,
+        }).start();
+      }, 100);
+    } else {
+      Animated.timing(opacityAnim, {
+        toValue: 0,
+        duration: 300,
+        easing: Easing.ease,
+        useNativeDriver: true,
+      }).start();
+    }
+  }, [cryptoCards.length, modalVisible, opacityAnim]);
 
   useEffect(() => {
     const loadCryptoCards = async () => {
@@ -363,7 +385,12 @@ function WalletScreen({ route, navigation }) {
         }}
         scrollEventThrottle={16} // 滚动事件节流，以确保 onScroll 事件不会频繁触发
       >
-        <View style={WalletScreenStyle.totalBalanceContainer}>
+        <Animated.View
+          style={[
+            WalletScreenStyle.totalBalanceContainer,
+            { opacity: opacityAnim },
+          ]}
+        >
           {cryptoCards.length > 0 && !modalVisible && (
             <>
               <Text style={WalletScreenStyle.totalBalanceText}>
@@ -377,7 +404,7 @@ function WalletScreen({ route, navigation }) {
               </Text>
             </>
           )}
-        </View>
+        </Animated.View>
 
         {cryptoCards.length === 0 && (
           <View style={WalletScreenStyle.centeredContent}>
@@ -483,6 +510,24 @@ function WalletScreen({ route, navigation }) {
               colors={isDarkMode ? darkColorsDown : lightColorsDown}
               style={[WalletScreenStyle.cardModalView]}
             >
+              <View style={WalletScreenStyle.historyContainer}>
+                <Text style={WalletScreenStyle.historyTitle}>
+                  {t("Transaction History")}
+                </Text>
+                {transactionHistory.length === 0 ? (
+                  <Text style={WalletScreenStyle.noHistoryText}>
+                    {t("No Histories")}
+                  </Text>
+                ) : (
+                  transactionHistory.map((transaction, index) => (
+                    <View key={index} style={WalletScreenStyle.historyItem}>
+                      <Text style={WalletScreenStyle.historyItemText}>
+                        {transaction.detail}
+                      </Text>
+                    </View>
+                  ))
+                )}
+              </View>
               <TouchableOpacity
                 style={[WalletScreenStyle.cancelButton, { zIndex: 10 }]}
                 onPress={closeModal}

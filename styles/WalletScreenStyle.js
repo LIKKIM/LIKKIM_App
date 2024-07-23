@@ -12,8 +12,44 @@ const WalletScreenStyles = (isDarkMode) => {
   const currencyUnitColor = isDarkMode ? "#ddd" : "#666";
   const addCryptoButtonBackgroundColor = isDarkMode ? "#1E1D3F" : "#F8F6FE";
   const borderColor = isDarkMode ? "#555" : "#ccc";
-
+  const historyItemBorderColor = isDarkMode ? "#ccc" : "#999";
+  const historyContainerBackgroundColor = isDarkMode
+    ? "#24234C80"
+    : "#FFFFFF80";
   return StyleSheet.create({
+    historyItemText: {
+      fontSize: 16,
+      color: textColor,
+    },
+    historyItem: {
+      padding: 10,
+      borderBottomWidth: 1,
+      borderBottomColor: historyItemBorderColor,
+    },
+    noHistoryText: {
+      fontSize: 16,
+      color: secondTextColor,
+      textAlign: "center",
+    },
+    historyTitle: {
+      position: "absolute",
+      left: 20,
+      top: 20,
+      fontSize: 16,
+      color: textColor,
+      fontWeight: "bold",
+    },
+    historyContainer: {
+      width: 326,
+      marginBottom: 40,
+      marginTop: 40,
+      padding: 20,
+      backgroundColor: historyContainerBackgroundColor,
+      alignItems: "center",
+      justifyContent: "center",
+      borderRadius: 10,
+      height: 300,
+    },
     linearGradient: {
       flex: 1,
       backgroundColor: backgroundColor,
