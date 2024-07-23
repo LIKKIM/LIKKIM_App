@@ -215,7 +215,7 @@ function WalletScreen({ route, navigation }) {
   useEffect(() => {
     Animated.timing(fadeAnim, {
       toValue: modalVisible ? 1 : 0,
-      duration: 300,
+      duration: 0,
       easing: Easing.ease,
       useNativeDriver: true,
     }).start();
