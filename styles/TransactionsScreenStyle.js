@@ -2,6 +2,7 @@
 import { StyleSheet } from "react-native";
 
 const TransactionsScreenStyles = (isDarkMode) => {
+  const titleColor = isDarkMode ? "#fff" : "#000";
   const textColor = isDarkMode ? "#fff" : "#fff";
   const textBtnColor = isDarkMode ? "#fff" : "#fff";
   const backgroundColor = isDarkMode ? "#121212" : "#f5f5f5";
@@ -30,7 +31,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       alignItems: "center",
     },
     modalTitle: {
-      color: textColor,
+      color: titleColor,
       fontSize: 16,
       fontWeight: "bold",
       marginBottom: 15,

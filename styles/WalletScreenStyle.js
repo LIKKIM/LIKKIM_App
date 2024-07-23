@@ -328,7 +328,15 @@ const WalletScreenStyles = (isDarkMode) => {
       resizeMode: "contain", // 确保图片在其容器内完整显示
       marginBottom: 40,
     },
-
+    QRImg: {
+      width: 25,
+      height: 25, // 设置固定高度
+      resizeMode: "contain", // 确保图片在其容器内完整显示
+      position: "absolute",
+      right: 0,
+      top: 0,
+      margin: 25,
+    },
     removeModalButton: {
       backgroundColor: buttonBackgroundColor,
       padding: 10,

@@ -519,6 +519,10 @@ function WalletScreen({ route, navigation }) {
                       alignItems: "center",
                     }}
                   >
+                    <Image
+                      source={require("../assets/icon/QR.png")}
+                      style={WalletScreenStyle.QRImg}
+                    />
                     <Text style={WalletScreenStyle.cardBalanceCenter}>
                       {`${card.balance} ${card.shortName}`}
                     </Text>
