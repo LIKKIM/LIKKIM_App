@@ -89,6 +89,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       height: 60,
       alignItems: "center",
     },
+    /*  History */
     historyItemText: {
       fontSize: 16,
       color: textColor,
@@ -120,6 +121,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       borderRadius: 10,
       height: 360,
     },
+    /*  blurView */
     blurView: {
       position: "absolute",
       top: 0,
