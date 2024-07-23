@@ -18,12 +18,12 @@ const WalletScreenStyles = (isDarkMode) => {
     : "#FFFFFF80";
   return StyleSheet.create({
     tabButton: {
-      paddingBottom: 20,
+      padding: 20,
       marginHorizontal: 60,
       zIndex: 11,
     },
     activeTabButton: {
-      paddingBottom: 20,
+      padding: 20,
       borderBottomWidth: 2,
       borderBottomColor: "#6C6CF4",
       marginHorizontal: 60,
