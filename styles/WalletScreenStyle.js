@@ -18,7 +18,7 @@ const WalletScreenStyles = (isDarkMode) => {
     : "#FFFFFF80";
   return StyleSheet.create({
     subtitleText: {
-      fontSize: 12,
+      fontSize: 14,
       color: secondTextColor,
       textAlign: "center",
       marginBottom: 20,

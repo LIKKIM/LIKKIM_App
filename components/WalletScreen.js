@@ -627,7 +627,7 @@ function WalletScreen({ route, navigation }) {
             <Text style={WalletScreenStyle.modalTitle}>
               {t("Address for")} {selectedCrypto}:
             </Text>
-            <Text style={WalletScreenStyle.addressText}>
+            <Text style={WalletScreenStyle.subtitleText}>
               {t("  Assets can only be sent within the same chain.")}
             </Text>
             <View
