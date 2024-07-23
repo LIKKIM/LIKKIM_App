@@ -526,9 +526,17 @@ function WalletScreen({ route, navigation }) {
                       height: 206,
                       justifyContent: "center",
                       alignItems: "center",
+                      position: "relative",
                     }}
                   >
-                    <TouchableOpacity onPress={() => handleQRCodePress(card)}>
+                    <TouchableOpacity
+                      onPress={() => handleQRCodePress(card)}
+                      style={{
+                        position: "absolute",
+                        right: 0,
+                        top: 0,
+                      }}
+                    >
                       <Image
                         source={require("../assets/icon/QR.png")}
                         style={WalletScreenStyle.QRImg}

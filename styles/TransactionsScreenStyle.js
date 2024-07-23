@@ -176,7 +176,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
     modalText: { color: secondTextColor, textAlign: "center" },
     TransactionModalTitle: {
       fontSize: 16,
-      color: textColor,
+      color: titleColor,
       textAlign: "center",
       marginBottom: 30,
     },
