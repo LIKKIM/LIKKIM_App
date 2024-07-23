@@ -32,6 +32,7 @@ function WalletScreen({ route, navigation }) {
   const { isDarkMode } = useContext(DarkModeContext);
   const WalletScreenStyle = WalletScreenStyles(isDarkMode);
   const { t } = useTranslation();
+  const [activeTab, setActiveTab] = useState("History");
   const [modalVisible, setModalVisible] = useState(false);
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState("");
@@ -157,12 +158,10 @@ function WalletScreen({ route, navigation }) {
     animation.setValue(0); // 重置动画
     navigation.setParams({ showDeleteConfirmModal: false });
   };
-
   const handleConfirmDelete = () => {
     setDeleteConfirmVisible(true);
     setDropdownVisible(false);
   };
-
   useEffect(() => {
     if (route.params?.showAddModal) {
       setAddCryptoVisible(true);
@@ -363,6 +362,40 @@ function WalletScreen({ route, navigation }) {
     }
   }, [modalVisible]);
 
+  const renderTabContent = () => {
+    switch (activeTab) {
+      case "History":
+        return (
+          <View style={WalletScreenStyle.historyContainer}>
+            <Text style={WalletScreenStyle.historyTitle}>
+              {t("Transaction History")}
+            </Text>
+            {transactionHistory.length === 0 ? (
+              <Text style={WalletScreenStyle.noHistoryText}>
+                {t("No Histories")}
+              </Text>
+            ) : (
+              transactionHistory.map((transaction, index) => (
+                <View key={index} style={WalletScreenStyle.historyItem}>
+                  <Text style={WalletScreenStyle.historyItemText}>
+                    {transaction.detail}
+                  </Text>
+                </View>
+              ))
+            )}
+          </View>
+        );
+      case "Prices":
+        return (
+          <View style={WalletScreenStyle.historyContainer}>
+            <Text style={WalletScreenStyle.historyTitle}></Text>
+          </View>
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <LinearGradient
       colors={isDarkMode ? darkColors : lightColors}
@@ -510,24 +543,44 @@ function WalletScreen({ route, navigation }) {
               colors={isDarkMode ? darkColorsDown : lightColorsDown}
               style={[WalletScreenStyle.cardModalView]}
             >
-              <View style={WalletScreenStyle.historyContainer}>
-                <Text style={WalletScreenStyle.historyTitle}>
-                  {t("Transaction History")}
-                </Text>
-                {transactionHistory.length === 0 ? (
-                  <Text style={WalletScreenStyle.noHistoryText}>
-                    {t("No Histories")}
+              <View style={{ flexDirection: "row", justifyContent: "center" }}>
+                <TouchableOpacity
+                  style={[
+                    WalletScreenStyle.tabButton,
+                    activeTab === "History" &&
+                      WalletScreenStyle.activeTabButton,
+                  ]}
+                  onPress={() => setActiveTab("History")}
+                >
+                  <Text
+                    style={[
+                      WalletScreenStyle.tabButtonText,
+                      activeTab === "History" &&
+                        WalletScreenStyle.activeTabButtonText,
+                    ]}
+                  >
+                    {t("History")}
                   </Text>
-                ) : (
-                  transactionHistory.map((transaction, index) => (
-                    <View key={index} style={WalletScreenStyle.historyItem}>
-                      <Text style={WalletScreenStyle.historyItemText}>
-                        {transaction.detail}
-                      </Text>
-                    </View>
-                  ))
-                )}
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={[
+                    WalletScreenStyle.tabButton,
+                    activeTab === "Prices" && WalletScreenStyle.activeTabButton,
+                  ]}
+                  onPress={() => setActiveTab("Prices")}
+                >
+                  <Text
+                    style={[
+                      WalletScreenStyle.tabButtonText,
+                      activeTab === "Prices" &&
+                        WalletScreenStyle.activeTabButtonText,
+                    ]}
+                  >
+                    {t("Prices")}
+                  </Text>
+                </TouchableOpacity>
               </View>
+              {renderTabContent()}
               <TouchableOpacity
                 style={[WalletScreenStyle.cancelButton, { zIndex: 10 }]}
                 onPress={closeModal}

@@ -17,6 +17,24 @@ const WalletScreenStyles = (isDarkMode) => {
     ? "#24234C80"
     : "#FFFFFF80";
   return StyleSheet.create({
+    tabButton: {
+      paddingBottom: 20,
+      marginHorizontal: 60,
+    },
+    activeTabButton: {
+      paddingBottom: 20,
+      borderBottomWidth: 1,
+      borderBottomColor: "#6C6CF4",
+      marginHorizontal: 60,
+    },
+    activeTabButtonText: {
+      fontSize: 16,
+      color: textColor,
+    },
+    tabButtonText: {
+      fontSize: 16,
+      color: secondTextColor,
+    },
     historyItemText: {
       fontSize: 16,
       color: textColor,
@@ -42,7 +60,7 @@ const WalletScreenStyles = (isDarkMode) => {
     historyContainer: {
       width: 326,
       marginBottom: 40,
-      marginTop: 40,
+      marginTop: 20,
       padding: 20,
       backgroundColor: historyContainerBackgroundColor,
       alignItems: "center",
