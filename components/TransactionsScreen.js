@@ -30,6 +30,7 @@ function TransactionsScreen() {
   const [operationType, setOperationType] = useState("");
   const [selectedCrypto, setSelectedCrypto] = useState("");
   const [selectedAddress, setSelectedAddress] = useState("");
+  const [selectedCryptoIcon, setSelectedCryptoIcon] = useState(null);
   const iconColor = isDarkMode ? "#ffffff" : "#24234C";
   const darkColors = ["#24234C", "#101021"];
   const lightColors = ["#FFFFFF", "#EDEBEF"];
@@ -108,7 +109,6 @@ function TransactionsScreen() {
           </Text>
         </TouchableOpacity>
         <View style={TransactionsScreenStyle.historyContainer}>
-          {/*       <BlurView intensity={3} style={TransactionsScreenStyle.blurView} /> */}
           <Text style={TransactionsScreenStyle.historyTitle}>
             {t("Transaction History")}
           </Text>

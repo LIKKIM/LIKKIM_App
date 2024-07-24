@@ -275,7 +275,7 @@ const WalletScreenStyles = (isDarkMode) => {
       borderWidth: 3, // 设置边框宽度
       borderColor: buttonBackgroundColor, // 设置边框颜色
       padding: 10,
-      width: 326,
+      width: "90%",
       justifyContent: "center",
       borderRadius: 30,
       height: 60,

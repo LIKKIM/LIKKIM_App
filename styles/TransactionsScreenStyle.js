@@ -70,7 +70,6 @@ const TransactionsScreenStyles = (isDarkMode) => {
       color: titleColor,
       fontSize: 16,
       fontWeight: "bold",
-      marginBottom: 15,
     },
     receiveModalView: {
       margin: 20,
