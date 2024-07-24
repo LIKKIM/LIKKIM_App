@@ -255,7 +255,7 @@ function TransactionsScreen() {
                 </Text>
               </View>
               <Text style={TransactionsScreenStyle.subtitleText}>
-                {t("  Assets can only be sent within the same chain.")}
+                {t("Assets can only be sent within the same chain.")}
               </Text>
               <View
                 style={{

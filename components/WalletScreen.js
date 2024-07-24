@@ -650,7 +650,7 @@ function WalletScreen({ route, navigation }) {
               </Text>
             </View>
             <Text style={WalletScreenStyle.subtitleText}>
-              {t("  Assets can only be sent within the same chain.")}
+              {t("Assets can only be sent within the same chain.")}
             </Text>
             <View
               style={{
