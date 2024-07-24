@@ -587,7 +587,7 @@ function WalletScreen({ route, navigation }) {
         {modalVisible && (
           <Animated.View
             style={{
-              flexDirection: "col",
+              flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
               position: "absolute",
