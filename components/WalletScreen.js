@@ -558,8 +558,55 @@ function WalletScreen({ route, navigation }) {
             </Animated.View>
           </TouchableOpacity>
         ))}
-
-        {/* 数字货币弹窗view */}
+        {/* 数字货币弹窗表面层view */}
+        {modalVisible && (
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "center",
+              position: "absolute",
+              backgroundColor: "FFF000",
+              zIndex: 10,
+              top: 210,
+            }}
+          >
+            <TouchableOpacity
+              style={[
+                WalletScreenStyle.tabButton,
+                activeTab === "History" && WalletScreenStyle.activeTabButton,
+              ]}
+              onPress={() => setActiveTab("History")}
+            >
+              <Text
+                style={[
+                  WalletScreenStyle.tabButtonText,
+                  activeTab === "History" &&
+                    WalletScreenStyle.activeTabButtonText,
+                ]}
+              >
+                {t("History")}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[
+                WalletScreenStyle.tabButton,
+                activeTab === "Prices" && WalletScreenStyle.activeTabButton,
+              ]}
+              onPress={() => setActiveTab("Prices")}
+            >
+              <Text
+                style={[
+                  WalletScreenStyle.tabButtonText,
+                  activeTab === "Prices" &&
+                    WalletScreenStyle.activeTabButtonText,
+                ]}
+              >
+                {t("Prices")}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        )}
+        {/* 数字货币弹窗背景层view */}
         {modalVisible && (
           <Animated.View
             style={[WalletScreenStyle.cardModalView, { opacity: fadeAnim }]}
@@ -568,43 +615,6 @@ function WalletScreen({ route, navigation }) {
               colors={isDarkMode ? darkColorsDown : lightColorsDown}
               style={[WalletScreenStyle.cardModalView]}
             >
-              <View style={{ flexDirection: "row", justifyContent: "center" }}>
-                <TouchableOpacity
-                  style={[
-                    WalletScreenStyle.tabButton,
-                    activeTab === "History" &&
-                      WalletScreenStyle.activeTabButton,
-                  ]}
-                  onPress={() => setActiveTab("History")}
-                >
-                  <Text
-                    style={[
-                      WalletScreenStyle.tabButtonText,
-                      activeTab === "History" &&
-                        WalletScreenStyle.activeTabButtonText,
-                    ]}
-                  >
-                    {t("History")}
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={[
-                    WalletScreenStyle.tabButton,
-                    activeTab === "Prices" && WalletScreenStyle.activeTabButton,
-                  ]}
-                  onPress={() => setActiveTab("Prices")}
-                >
-                  <Text
-                    style={[
-                      WalletScreenStyle.tabButtonText,
-                      activeTab === "Prices" &&
-                        WalletScreenStyle.activeTabButtonText,
-                    ]}
-                  >
-                    {t("Prices")}
-                  </Text>
-                </TouchableOpacity>
-              </View>
               {renderTabContent()}
               <TouchableOpacity
                 style={[
