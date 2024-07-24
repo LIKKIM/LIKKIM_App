@@ -82,22 +82,21 @@ const WalletScreenStyles = (isDarkMode) => {
       textAlign: "center",
     },
     historyTitle: {
-      position: "absolute",
-      left: 20,
-      top: 20,
+      width: 326,
+
       fontSize: 16,
       color: textColor,
       fontWeight: "bold",
     },
     historyContainer: {
-      width: 326,
+      width: "100%",
       marginBottom: 20,
       marginTop: 20,
       padding: 20,
-      backgroundColor: historyContainerBackgroundColor,
+
       alignItems: "center",
       justifyContent: "center",
-      borderRadius: 10,
+
       height: 300,
     },
     linearGradient: {
