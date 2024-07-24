@@ -636,6 +636,14 @@ function WalletScreen({ route, navigation }) {
             </View>
 
             {renderTabContent()}
+            <TouchableOpacity
+              style={[WalletScreenStyle.cancelButtonCryptoCard, { zIndex: 10 }]}
+              onPress={closeModal}
+            >
+              <Text style={WalletScreenStyle.cancelButtonText}>
+                {t("Close")}
+              </Text>
+            </TouchableOpacity>
           </Animated.View>
         )}
 
@@ -647,19 +655,7 @@ function WalletScreen({ route, navigation }) {
             <LinearGradient
               colors={isDarkMode ? darkColorsDown : lightColorsDown}
               style={[WalletScreenStyle.cardModalView]}
-            >
-              <TouchableOpacity
-                style={[
-                  WalletScreenStyle.cancelButtonCryptoCard,
-                  { zIndex: 10 },
-                ]}
-                onPress={closeModal}
-              >
-                <Text style={WalletScreenStyle.cancelButtonText}>
-                  {t("Close")}
-                </Text>
-              </TouchableOpacity>
-            </LinearGradient>
+            ></LinearGradient>
           </Animated.View>
         )}
       </ScrollView>

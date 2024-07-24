@@ -91,7 +91,7 @@ const WalletScreenStyles = (isDarkMode) => {
     },
     historyContainer: {
       width: 326,
-      marginBottom: 40,
+      marginBottom: 20,
       marginTop: 20,
       padding: 20,
       backgroundColor: historyContainerBackgroundColor,
