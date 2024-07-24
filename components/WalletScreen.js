@@ -628,7 +628,7 @@ function WalletScreen({ route, navigation }) {
           <View style={WalletScreenStyle.receiveModalView}>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <Text style={WalletScreenStyle.modalTitle}>
-                {t("Address for")}{" "}
+                {t("Address for")}
               </Text>
               {selectedCryptoIcon && (
                 <Image
