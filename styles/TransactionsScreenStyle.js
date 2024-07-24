@@ -16,6 +16,14 @@ const TransactionsScreenStyles = (isDarkMode) => {
   const secondTextColor = isDarkMode ? "#ddd" : "#676776";
   const secondBtnTextColor = isDarkMode ? "#ddd" : "#e0e0e0";
   return StyleSheet.create({
+    subtitleText: {
+      fontSize: 14,
+      color: secondTextColor,
+      textAlign: "center",
+      marginBottom: 20,
+      flexWrap: "wrap",
+      width: 326,
+    },
     cancelButtonText: {
       color: secondTextColor,
       fontSize: 16,
@@ -53,6 +61,12 @@ const TransactionsScreenStyles = (isDarkMode) => {
       fontSize: 16,
     },
     modalTitle: {
+      color: titleColor,
+      fontSize: 16,
+      fontWeight: "bold",
+      marginBottom: 15,
+    },
+    modalReceiveTitle: {
       color: titleColor,
       fontSize: 16,
       fontWeight: "bold",

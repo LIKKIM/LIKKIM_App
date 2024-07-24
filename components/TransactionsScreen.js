@@ -67,6 +67,7 @@ function TransactionsScreen() {
   const selectCrypto = async (crypto) => {
     setSelectedCrypto(crypto.shortName);
     setSelectedAddress(crypto.address);
+    setSelectedCryptoIcon(crypto.icon);
     setModalVisible(false);
     if (operationType === "receive") {
       setAddressModalVisible(true);
@@ -234,8 +235,27 @@ function TransactionsScreen() {
         >
           <View style={TransactionsScreenStyle.centeredView}>
             <View style={TransactionsScreenStyle.receiveModalView}>
-              <Text style={TransactionsScreenStyle.modalTitle}>
-                {t("Address for")} {selectedCrypto}:
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <Text style={TransactionsScreenStyle.modalReceiveTitle}>
+                  {t("Address for")}
+                </Text>
+                {selectedCryptoIcon && (
+                  <Image
+                    source={selectedCryptoIcon}
+                    style={{
+                      width: 24,
+                      height: 24,
+                      marginLeft: 5,
+                      marginRight: 5,
+                    }}
+                  />
+                )}
+                <Text style={TransactionsScreenStyle.modalReceiveTitle}>
+                  {selectedCrypto}:
+                </Text>
+              </View>
+              <Text style={TransactionsScreenStyle.subtitleText}>
+                {t("  Assets can only be sent within the same chain.")}
               </Text>
               <View
                 style={{
