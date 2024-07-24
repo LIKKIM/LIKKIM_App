@@ -97,7 +97,7 @@ const WalletScreenStyles = (isDarkMode) => {
       padding: 20,
       alignItems: "center",
       justifyContent: "center",
-      height: 320,
+      height: 300,
     },
     linearGradient: {
       flex: 1,
