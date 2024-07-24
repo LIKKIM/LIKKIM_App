@@ -140,7 +140,7 @@ const WalletScreenStyles = (isDarkMode) => {
       fontWeight: "normal",
     },
     addWalletImage: {
-      marginTop: -80,
+      marginTop: -110,
       width: 300,
       height: 170,
       borderRadius: 20,
