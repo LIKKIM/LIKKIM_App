@@ -204,7 +204,7 @@ function WalletScreen({ route, navigation }) {
     setSelectedCardIndex(index);
     cardRefs.current[index]?.measure((fx, fy, width, height, px, py) => {
       cardStartPositions.current[index] = py; // 记录每个卡片的初始位置
-      const endPosition = 180 - (scrollYOffset.current || 0); // 考虑 scrollTo 的 Y 偏移量
+      const endPosition = 100 - (scrollYOffset.current || 0); // 考虑 scrollTo 的 Y 偏移量
 
       // 确保 start 和 end 位置都是有效的数值
       if (isNaN(cardStartPositions.current[index]) || isNaN(endPosition)) {
@@ -351,7 +351,7 @@ function WalletScreen({ route, navigation }) {
 
   const animatedCardStyle = (index) => {
     const cardStartPosition = cardStartPositions.current[index] || 0;
-    const endPosition = 180 - (scrollYOffset.current || 0); // 考虑 scrollTo 的 Y 偏移量
+    const endPosition = 100 - (scrollYOffset.current || 0); // 考虑 scrollTo 的 Y 偏移量
     const translateY = animation.interpolate({
       inputRange: [0, 1],
       outputRange: [0, endPosition - cardStartPosition],

@@ -118,6 +118,7 @@ const WalletScreenStyles = (isDarkMode) => {
     },
     totalBalanceContainer: {
       width: 326,
+      height: 80,
       marginBottom: 20,
     },
     totalBalanceText: {
@@ -140,6 +141,7 @@ const WalletScreenStyles = (isDarkMode) => {
       fontWeight: "normal",
     },
     addWalletImage: {
+      marginTop: -80,
       width: 300,
       height: 170,
       borderRadius: 20,
