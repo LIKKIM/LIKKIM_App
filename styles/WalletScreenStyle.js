@@ -107,7 +107,6 @@ const WalletScreenStyles = (isDarkMode) => {
       justifyContent: "center",
     },
     scrollViewContent: {
-      height: "100%",
       paddingTop: 20,
       justifyContent: "start",
       alignItems: "center",
