@@ -74,6 +74,7 @@ function WalletScreen({ route, navigation }) {
   const [processMessages, setProcessMessages] = useState([]);
   const [showLetsGoButton, setShowLetsGoButton] = useState(false);
   const [tabOpacity] = useState(new Animated.Value(1));
+  const [cardInfoVisible, setCardInfoVisible] = useState(false); // 控制卡片信息显示
   const mnemonic = [
     ["apple", "banana", "cherry"],
     ["dog", "elephant", "frog"],
@@ -238,6 +239,9 @@ function WalletScreen({ route, navigation }) {
         restSpeedThreshold: 0.01,
       }).start(() => {
         setModalVisible(true);
+        setTimeout(() => {
+          setCardInfoVisible(true); // 延迟显示卡片信息
+        }, 300); // 根据需求调整延迟时间
       });
     });
   };
@@ -261,6 +265,7 @@ function WalletScreen({ route, navigation }) {
         restSpeedThreshold: 0.01,
       }).start(() => {
         setModalVisible(false);
+        setCardInfoVisible(false);
         setSelectedCardIndex(null);
       });
     });
@@ -543,7 +548,7 @@ function WalletScreen({ route, navigation }) {
                     </Text>
                   </>
                 )}
-                {modalVisible && (
+                {modalVisible && cardInfoVisible && (
                   <View
                     style={{
                       width: 326,
@@ -595,7 +600,6 @@ function WalletScreen({ route, navigation }) {
               style={{
                 flexDirection: "row",
                 justifyContent: "center",
-
                 zIndex: 10,
               }}
             >
