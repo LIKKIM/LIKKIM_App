@@ -216,7 +216,7 @@ function WalletScreen({ route, navigation }) {
     setSelectedCardIndex(index);
     cardRefs.current[index]?.measure((fx, fy, width, height, px, py) => {
       cardStartPositions.current[index] = py; // 记录每个卡片的初始位置
-      const endPosition = 100 - (scrollYOffset.current || 0); // 考虑 scrollTo 的 Y 偏移量
+      const endPosition = 120 - (scrollYOffset.current || 0); // 考虑 scrollTo 的 Y 偏移量
 
       // 确保 start 和 end 位置都是有效的数值
       if (isNaN(cardStartPositions.current[index]) || isNaN(endPosition)) {
@@ -371,7 +371,7 @@ function WalletScreen({ route, navigation }) {
 
   const animatedCardStyle = (index) => {
     const cardStartPosition = cardStartPositions.current[index] || 0;
-    const endPosition = 100 - (scrollYOffset.current || 0); // 考虑 scrollTo 的 Y 偏移量
+    const endPosition = 120 - (scrollYOffset.current || 0); // 考虑 scrollTo 的 Y 偏移量
     const translateY = animation.interpolate({
       inputRange: [0, 1],
       outputRange: [0, endPosition - cardStartPosition],
@@ -582,48 +582,60 @@ function WalletScreen({ route, navigation }) {
         {modalVisible && (
           <Animated.View
             style={{
-              flexDirection: "row",
+              flexDirection: "col",
               justifyContent: "center",
+              alignItems: "center",
               position: "absolute",
               zIndex: 10,
-              top: 210,
+              top: 236,
               opacity: tabOpacity, // 使用 tabOpacity 控制透明度
             }}
           >
-            <TouchableOpacity
-              style={[
-                WalletScreenStyle.tabButton,
-                activeTab === "History" && WalletScreenStyle.activeTabButton,
-              ]}
-              onPress={() => setActiveTab("History")}
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "center",
+
+                zIndex: 10,
+              }}
             >
-              <Text
+              <TouchableOpacity
                 style={[
-                  WalletScreenStyle.tabButtonText,
-                  activeTab === "History" &&
-                    WalletScreenStyle.activeTabButtonText,
+                  WalletScreenStyle.tabButton,
+                  activeTab === "History" && WalletScreenStyle.activeTabButton,
                 ]}
+                onPress={() => setActiveTab("History")}
               >
-                {t("History")}
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[
-                WalletScreenStyle.tabButton,
-                activeTab === "Prices" && WalletScreenStyle.activeTabButton,
-              ]}
-              onPress={() => setActiveTab("Prices")}
-            >
-              <Text
+                <Text
+                  style={[
+                    WalletScreenStyle.tabButtonText,
+                    activeTab === "History" &&
+                      WalletScreenStyle.activeTabButtonText,
+                  ]}
+                >
+                  {t("History")}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
                 style={[
-                  WalletScreenStyle.tabButtonText,
-                  activeTab === "Prices" &&
-                    WalletScreenStyle.activeTabButtonText,
+                  WalletScreenStyle.tabButton,
+                  activeTab === "Prices" && WalletScreenStyle.activeTabButton,
                 ]}
+                onPress={() => setActiveTab("Prices")}
               >
-                {t("Prices")}
-              </Text>
-            </TouchableOpacity>
+                <Text
+                  style={[
+                    WalletScreenStyle.tabButtonText,
+                    activeTab === "Prices" &&
+                      WalletScreenStyle.activeTabButtonText,
+                  ]}
+                >
+                  {t("Prices")}
+                </Text>
+              </TouchableOpacity>
+            </View>
+
+            {renderTabContent()}
           </Animated.View>
         )}
 
@@ -636,7 +648,6 @@ function WalletScreen({ route, navigation }) {
               colors={isDarkMode ? darkColorsDown : lightColorsDown}
               style={[WalletScreenStyle.cardModalView]}
             >
-              {renderTabContent()}
               <TouchableOpacity
                 style={[
                   WalletScreenStyle.cancelButtonCryptoCard,
