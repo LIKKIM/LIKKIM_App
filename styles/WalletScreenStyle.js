@@ -117,9 +117,8 @@ const WalletScreenStyles = (isDarkMode) => {
       paddingHorizontal: 0,
     },
     totalBalanceContainer: {
-      height: 82,
       width: 326,
-      marginBottom: 40,
+      marginBottom: 20,
     },
     totalBalanceText: {
       fontSize: 16,
@@ -275,14 +274,14 @@ const WalletScreenStyles = (isDarkMode) => {
       borderWidth: 3, // 设置边框宽度
       borderColor: buttonBackgroundColor, // 设置边框颜色
       padding: 10,
-      width: "90%",
+      width: "100%",
       justifyContent: "center",
       borderRadius: 30,
       height: 60,
       alignItems: "center",
       marginTop: 20,
     },
-    cancelButton: {
+    cancelButtonCryptoCard: {
       borderWidth: 3, // 设置边框宽度
       borderColor: buttonBackgroundColor, // 设置边框颜色
       padding: 10,
@@ -291,7 +290,18 @@ const WalletScreenStyles = (isDarkMode) => {
       borderRadius: 30,
       height: 60,
       alignItems: "center",
-      marginBottom: 30,
+      marginBottom: 60,
+    },
+    cancelButton: {
+      borderWidth: 3, // 设置边框宽度
+      borderColor: buttonBackgroundColor, // 设置边框颜色
+      padding: 10,
+      width: "100%",
+      justifyContent: "center",
+      borderRadius: 30,
+      height: 60,
+      alignItems: "center",
+      marginTop: 20,
     },
 
     removeCancelButton: {

@@ -1,14 +1,7 @@
 // App.js
 import "intl-pluralrules";
 import React, { useContext, useEffect, useState } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StatusBar,
-  Modal,
-  StyleSheet,
-} from "react-native";
+import { View, Text, TouchableOpacity, StatusBar, Modal } from "react-native";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -93,6 +86,7 @@ function AppContent({
   const tabBarActiveTintColor = isDarkMode ? "#ffffff" : "#8E80F0";
   const tabBarInactiveTintColor = isDarkMode ? "#ffffff50" : "#676776";
   const headerTitleColor = isDarkMode ? "#ffffff" : "#333333";
+  const tabBarBackgroundColor = isDarkMode ? "#23224D" : "#fff";
   const bottomBackgroundColor = isDarkMode ? "#101021" : "#EDEBEF";
   const iconColor = isDarkMode ? "#ffffff" : "#000000";
 
@@ -157,31 +151,15 @@ function AppContent({
           tabBarActiveTintColor: tabBarActiveTintColor,
           tabBarInactiveTintColor: tabBarInactiveTintColor,
           tabBarStyle: {
-            position: "absolute",
-            borderTopLeftRadius: 20,
-            borderTopRightRadius: 20,
-            height: walletModalVisible ? 0 : 100,
+            backgroundColor: tabBarBackgroundColor,
+            borderTopWidth: 0,
+            height: walletModalVisible ? 0 : 100, // 根据 walletModalVisible 控制 tabBar 的高度
             paddingBottom: walletModalVisible ? 0 : 30,
-            display: walletModalVisible ? "none" : "flex",
-            borderTopWidth: 0, // 移除边框
+            borderTopLeftRadius: 22,
+            borderTopRightRadius: 22,
+            display: walletModalVisible ? "none" : "flex", // 根据 walletModalVisible 显示或隐藏 tabBar
           },
-          tabBarBackground: () => (
-            <BlurView
-              intensity={80}
-              tint={isDarkMode ? "dark" : "light"}
-              style={{
-                position: "absolute",
-                left: 0,
-                right: 0,
-                bottom: 0,
-                top: 0,
-                borderTopLeftRadius: 20,
-                borderTopRightRadius: 20,
-                overflow: "hidden",
-                backgroundColor: "transparent",
-              }}
-            />
-          ),
+          tabBarLabelStyle: { fontSize: 12 },
           headerStyle: {
             backgroundColor: theme.headerStyle.backgroundColor,
             borderBottomColor: theme.headerStyle.borderBottomColor,
