@@ -490,7 +490,7 @@ function WalletScreen({ route, navigation }) {
             ref={(el) => (cardRefs.current[index] = el)}
             style={[
               WalletScreenStyle.cardContainer,
-              selectedCardIndex === index && { zIndex: 9999 },
+              selectedCardIndex === index && { zIndex: 3 },
             ]}
             disabled={modalVisible} // 禁用卡片点击
           >
