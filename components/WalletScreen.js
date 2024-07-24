@@ -231,8 +231,8 @@ function WalletScreen({ route, navigation }) {
       Animated.spring(animation, {
         toValue: 1,
         useNativeDriver: true,
-        stiffness: 300, // 增加刚度
-        damping: 30, // 增加阻尼
+        stiffness: 250, // 增加刚度
+        damping: 25, // 增加阻尼
         mass: 1, // 质量
         overshootClamping: false, // 允许超出目标值
         restDisplacementThreshold: 0.01,
@@ -257,9 +257,9 @@ function WalletScreen({ route, navigation }) {
       Animated.spring(animation, {
         toValue: 0,
         useNativeDriver: true,
-        stiffness: 200,
-        damping: 15,
-        mass: 1,
+        stiffness: 250, // 增加刚度
+        damping: 25, // 增加阻尼
+        mass: 1, // 质量
         overshootClamping: false,
         restDisplacementThreshold: 0.01,
         restSpeedThreshold: 0.01,
