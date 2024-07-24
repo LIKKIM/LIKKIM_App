@@ -38,7 +38,17 @@ const TransactionsScreenStyles = (isDarkMode) => {
       height: 60,
       alignItems: "center",
     },
-
+    cancelButtonReceive: {
+      borderWidth: 3,
+      borderColor: buttonBackgroundColor,
+      padding: 10,
+      width: "90%",
+      justifyContent: "center",
+      borderRadius: 30,
+      height: 60,
+      alignItems: "center",
+      marginTop: 20,
+    },
     modalView: {
       margin: 20,
       height: 500,
