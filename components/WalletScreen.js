@@ -73,6 +73,7 @@ function WalletScreen({ route, navigation }) {
   const [transactionHistory, setTransactionHistory] = useState([]);
   const [processMessages, setProcessMessages] = useState([]);
   const [showLetsGoButton, setShowLetsGoButton] = useState(false);
+  const [tabOpacity] = useState(new Animated.Value(1));
   const mnemonic = [
     ["apple", "banana", "cherry"],
     ["dog", "elephant", "frog"],
@@ -102,6 +103,17 @@ function WalletScreen({ route, navigation }) {
     setSelectedCryptoIcon(crypto.icon);
     setAddressModalVisible(true);
   };
+
+  useEffect(() => {
+    if (modalVisible) {
+      // 重置 tabOpacity 为 1
+      Animated.timing(tabOpacity, {
+        toValue: 1,
+        duration: 200,
+        useNativeDriver: true,
+      }).start();
+    }
+  }, [modalVisible]);
 
   useEffect(() => {
     // 根据条件触发动画
@@ -231,18 +243,26 @@ function WalletScreen({ route, navigation }) {
   };
 
   const closeModal = () => {
-    Animated.spring(animation, {
-      toValue: 0,
+    // 动画隐藏顶部标签
+    Animated.timing(tabOpacity, {
+      toValue: 0, // 透明
+      duration: 200,
       useNativeDriver: true,
-      stiffness: 200,
-      damping: 15,
-      mass: 1,
-      overshootClamping: false,
-      restDisplacementThreshold: 0.01,
-      restSpeedThreshold: 0.01,
     }).start(() => {
-      setModalVisible(false);
-      setSelectedCardIndex(null);
+      // 在顶部标签隐藏完成后，执行卡片位置还原动画
+      Animated.spring(animation, {
+        toValue: 0,
+        useNativeDriver: true,
+        stiffness: 200,
+        damping: 15,
+        mass: 1,
+        overshootClamping: false,
+        restDisplacementThreshold: 0.01,
+        restSpeedThreshold: 0.01,
+      }).start(() => {
+        setModalVisible(false);
+        setSelectedCardIndex(null);
+      });
     });
   };
 
@@ -560,14 +580,14 @@ function WalletScreen({ route, navigation }) {
         ))}
         {/* 数字货币弹窗表面层view */}
         {modalVisible && (
-          <View
+          <Animated.View
             style={{
               flexDirection: "row",
               justifyContent: "center",
               position: "absolute",
-              backgroundColor: "FFF000",
               zIndex: 10,
               top: 210,
+              opacity: tabOpacity, // 使用 tabOpacity 控制透明度
             }}
           >
             <TouchableOpacity
@@ -604,8 +624,9 @@ function WalletScreen({ route, navigation }) {
                 {t("Prices")}
               </Text>
             </TouchableOpacity>
-          </View>
+          </Animated.View>
         )}
+
         {/* 数字货币弹窗背景层view */}
         {modalVisible && (
           <Animated.View
