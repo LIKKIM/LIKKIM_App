@@ -416,6 +416,7 @@ function WalletScreen({ route, navigation }) {
         contentContainerStyle={[
           WalletScreenStyle.scrollViewContent,
           modalVisible && { overflow: "hidden", height: "100%" },
+          !modalVisible && { paddingBottom: 130 },
         ]}
         style={[
           WalletScreenStyle.scrollView,
