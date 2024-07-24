@@ -118,6 +118,7 @@ const WalletScreenStyles = (isDarkMode) => {
     },
     totalBalanceContainer: {
       width: 326,
+      height: 80,
       marginBottom: 20,
     },
     totalBalanceText: {
