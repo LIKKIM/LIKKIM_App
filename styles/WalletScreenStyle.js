@@ -82,22 +82,22 @@ const WalletScreenStyles = (isDarkMode) => {
       textAlign: "center",
     },
     historyTitle: {
+      height: 60,
+      textAlign: "left",
+      textAlignVertical: "center", // 文本垂直居中（仅在Android有效）
+      lineHeight: 60, // 使文本行高等于容器高度以实现垂直居中
       width: 326,
-
       fontSize: 16,
       color: textColor,
       fontWeight: "bold",
     },
+
     historyContainer: {
       width: "100%",
-      marginBottom: 20,
-      marginTop: 20,
       padding: 20,
-
       alignItems: "center",
       justifyContent: "center",
-
-      height: 300,
+      height: 320,
     },
     linearGradient: {
       flex: 1,
@@ -282,6 +282,7 @@ const WalletScreenStyles = (isDarkMode) => {
       marginTop: 20,
     },
     cancelButtonCryptoCard: {
+      zIndex: 10,
       borderWidth: 3, // 设置边框宽度
       borderColor: buttonBackgroundColor, // 设置边框颜色
       padding: 10,

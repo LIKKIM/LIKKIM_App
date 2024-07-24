@@ -401,30 +401,33 @@ function WalletScreen({ route, navigation }) {
     switch (activeTab) {
       case "History":
         return (
-          <View style={WalletScreenStyle.historyContainer}>
+          <>
             <Text style={WalletScreenStyle.historyTitle}>
               {t("Transaction History")}
             </Text>
-            {transactionHistory.length === 0 ? (
-              <Text style={WalletScreenStyle.noHistoryText}>
-                {t("No Histories")}
-              </Text>
-            ) : (
-              transactionHistory.map((transaction, index) => (
-                <View key={index} style={WalletScreenStyle.historyItem}>
-                  <Text style={WalletScreenStyle.historyItemText}>
-                    {transaction.detail}
-                  </Text>
-                </View>
-              ))
-            )}
-          </View>
+            <View style={WalletScreenStyle.historyContainer}>
+              {transactionHistory.length === 0 ? (
+                <Text style={WalletScreenStyle.noHistoryText}>
+                  {t("No Histories")}
+                </Text>
+              ) : (
+                transactionHistory.map((transaction, index) => (
+                  <View key={index} style={WalletScreenStyle.historyItem}>
+                    <Text style={WalletScreenStyle.historyItemText}>
+                      {transaction.detail}
+                    </Text>
+                  </View>
+                ))
+              )}
+            </View>
+          </>
         );
       case "Prices":
         return (
-          <View style={WalletScreenStyle.historyContainer}>
+          <>
             <Text style={WalletScreenStyle.historyTitle}></Text>
-          </View>
+            <View style={WalletScreenStyle.historyContainer}></View>
+          </>
         );
       default:
         return null;
@@ -641,7 +644,7 @@ function WalletScreen({ route, navigation }) {
 
             {renderTabContent()}
             <TouchableOpacity
-              style={[WalletScreenStyle.cancelButtonCryptoCard, { zIndex: 10 }]}
+              style={WalletScreenStyle.cancelButtonCryptoCard}
               onPress={closeModal}
             >
               <Text style={WalletScreenStyle.cancelButtonText}>
