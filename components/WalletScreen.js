@@ -36,6 +36,7 @@ function WalletScreen({ route, navigation }) {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState("History");
   const [modalVisible, setModalVisible] = useState(false);
+  const [dropdownVisible, setDropdownVisible] = useState(false);
   const [addressModalVisible, setAddressModalVisible] = useState(false); // 新增地址模态窗口的状态
   const [selectedAddress, setSelectedAddress] = useState("");
   const [selectedCrypto, setSelectedCrypto] = useState(null);
