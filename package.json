@@ -51,6 +51,7 @@
     "react-native-svg": "14.1.0",
     "react-native-vector-icons": "^10.0.3",
     "react-native-web": "~0.19.6",
+    "reactotron-react-native": "^5.1.7",
     "uuid": "^9.0.1"
   },
   "devDependencies": {

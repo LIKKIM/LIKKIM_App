@@ -254,8 +254,10 @@ function WalletScreen({ route, navigation }) {
       useNativeDriver: true,
     }).start(() => {
       // 在顶部标签隐藏完成后，执行卡片位置还原动画
+      cardStartPositions.current[selectedCardIndex] = 0;
       Animated.spring(animation, {
         toValue: 0,
+        duration: 200,
         useNativeDriver: true,
         stiffness: 250, // 增加刚度
         damping: 25, // 增加阻尼
@@ -617,7 +619,7 @@ function WalletScreen({ route, navigation }) {
                   style={[
                     WalletScreenStyle.tabButtonText,
                     activeTab === "History" &&
-                      WalletScreenStyle.activeTabButtonText,
+                    WalletScreenStyle.activeTabButtonText,
                   ]}
                 >
                   {t("History")}
@@ -634,7 +636,7 @@ function WalletScreen({ route, navigation }) {
                   style={[
                     WalletScreenStyle.tabButtonText,
                     activeTab === "Prices" &&
-                      WalletScreenStyle.activeTabButtonText,
+                    WalletScreenStyle.activeTabButtonText,
                   ]}
                 >
                   {t("Prices")}

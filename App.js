@@ -20,6 +20,10 @@ import i18n from "./config/i18n";
 import { useTranslation } from "react-i18next";
 import { BlurView } from "expo-blur";
 
+if (__DEV__) {
+  import("./ReactotronConfig").then(() => console.log("Reactotron Configured"));
+}
+
 const Tab = createBottomTabNavigator();
 
 export default function App() {
