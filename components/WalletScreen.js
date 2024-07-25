@@ -282,6 +282,8 @@ function WalletScreen({ route, navigation }) {
     }).start();
   }, [modalVisible, fadeAnim]);
 
+
+
   const handleCardPress = (cryptoName, index) => {
     const crypto = cryptoCards.find((card) => card.name === cryptoName);
     setSelectedAddress(crypto?.address || "Unknown");
@@ -390,6 +392,8 @@ function WalletScreen({ route, navigation }) {
     };
   };
 
+
+
   useEffect(() => {
     if (modalVisible) {
       scrollViewRef.current.scrollTo({ y: 0, animated: true });
@@ -398,6 +402,13 @@ function WalletScreen({ route, navigation }) {
       }, 300); // 确保在滚动完成后再设置偏移量
     }
   }, [modalVisible]);
+
+
+
+  //fix card 初始化紀錄位置
+  const initCardPosition = (_ref, _index) => _ref?.measure((fx, fy, width, height, px, py) => (cardStartPositions.current[_index] = py));
+
+
 
   const renderTabContent = () => {
     switch (activeTab) {
@@ -517,7 +528,10 @@ function WalletScreen({ route, navigation }) {
           <TouchableOpacity
             key={card.name}
             onPress={() => handleCardPress(card.name, index)}
-            ref={(el) => (cardRefs.current[index] = el)}
+            ref={(el) => {
+              cardRefs.current[index] = el;
+              initCardPosition(el, index);
+            }}
             style={[
               WalletScreenStyle.cardContainer,
               selectedCardIndex === index && { zIndex: 3 },
