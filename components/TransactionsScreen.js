@@ -90,24 +90,37 @@ function TransactionsScreen() {
       style={TransactionsScreenStyle.bgContainer}
     >
       <View className="w-[100%]" style={TransactionsScreenStyle.container}>
-        <TouchableOpacity
-          style={TransactionsScreenStyle.roundButton}
-          onPress={handleSendPress}
+        <View
+          style={{
+            width: 360,
+            height: 165,
+            flexDirection: "row",
+            gap: 20,
+          }}
         >
-          <Text style={TransactionsScreenStyle.buttonText}>{t("Send")}</Text>
-          <Text style={TransactionsScreenStyle.subButtonText}>
-            {t("Send crypto to another wallet")}
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={TransactionsScreenStyle.roundButton}
-          onPress={handleReceivePress}
-        >
-          <Text style={TransactionsScreenStyle.buttonText}>{t("Receive")}</Text>
-          <Text style={TransactionsScreenStyle.subButtonText}>
-            {t("Receive crypto from another wallet")}
-          </Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            style={TransactionsScreenStyle.roundButton}
+            onPress={handleSendPress}
+          >
+            <Text style={TransactionsScreenStyle.mainButtonText}>
+              {t("Send")}
+            </Text>
+            <Text style={TransactionsScreenStyle.mainSubButtonText}>
+              {t("Send crypto to another wallet")}
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={TransactionsScreenStyle.roundButton}
+            onPress={handleReceivePress}
+          >
+            <Text style={TransactionsScreenStyle.mainButtonText}>
+              {t("Receive")}
+            </Text>
+            <Text style={TransactionsScreenStyle.mainSubButtonText}>
+              {t("Receive crypto from another wallet")}
+            </Text>
+          </TouchableOpacity>
+        </View>
         <View style={TransactionsScreenStyle.historyContainer}>
           <Text style={TransactionsScreenStyle.historyTitle}>
             {t("Transaction History")}
