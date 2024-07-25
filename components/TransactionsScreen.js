@@ -93,8 +93,9 @@ function TransactionsScreen() {
         <View
           style={{
             width: 360,
-            height: 165,
+            height: 170,
             flexDirection: "row",
+
             gap: 20,
           }}
         >
