@@ -711,7 +711,7 @@ function MyColdWalletScreen() {
                     </Text>
                   )}
                   <TouchableOpacity
-                    style={MyColdWalletScreenStyle.cancelButton}
+                    style={MyColdWalletScreenStyle.cancelButtonLookingFor}
                     onPress={() => setModalVisible(false)}
                   >
                     <Text style={MyColdWalletScreenStyle.cancelButtonText}>

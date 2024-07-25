@@ -95,6 +95,8 @@ i18n
           "Import Recovery Phrase": "Import Recovery Phrase",
           Version: "Version",
           "Only you can unlock your wallet": "Only you can unlock your wallet",
+          "Assets can only be sent within the same chain.":
+            "Assets can only be sent within the same chain.",
         },
       },
       zh: {
@@ -179,6 +181,8 @@ i18n
           "Import Recovery Phrase": "导入恢复短语",
           Version: "版本",
           "Only you can unlock your wallet": "只有你可以解锁你的钱包",
+          "Assets can only be sent within the same chain.":
+            "资产只能在同一链内发送。",
         },
       },
       "zh-TW": {
@@ -261,6 +265,8 @@ i18n
           "Import Recovery Phrase": "導入恢復短語",
           Version: "版本",
           "Only you can unlock your wallet": "只有你可以解鎖你的錢包",
+          "Assets can only be sent within the same chain.":
+            "資產只能在同一鏈內發送。",
         },
       },
       fr: {
@@ -354,6 +360,8 @@ i18n
           Version: "Version",
           "Only you can unlock your wallet":
             "Seul vous pouvez déverrouiller votre portefeuille",
+          "Assets can only be sent within the same chain.":
+            "Les actifs ne peuvent être envoyés que sur la même chaîne.",
         },
       },
       es: {
@@ -447,6 +455,8 @@ i18n
           Version: "Versión",
           "Only you can unlock your wallet":
             "Solo tú puedes desbloquear tu billetera",
+          "Assets can only be sent within the same chain.":
+            "Los activos solo se pueden enviar dentro de la misma cadena.",
         },
       },
       ar: {
@@ -535,6 +545,8 @@ i18n
           "Import Recovery Phrase": "استيراد عبارة الاسترداد",
           Version: "الإصدار",
           "Only you can unlock your wallet": "فقط يمكنك فتح محفظتك",
+          "Assets can only be sent within the same chain.":
+            "يمكن إرسال الأصول فقط ضمن نفس السلسلة.",
         },
       },
       ja: {
@@ -627,6 +639,8 @@ i18n
           Version: "バージョン",
           "Only you can unlock your wallet":
             "あなたのみがウォレットを解除できます",
+          "Assets can only be sent within the same chain.":
+            "資産は同じチェーン内でのみ送信できます。",
         },
       },
       ru: {
@@ -719,6 +733,8 @@ i18n
           Version: "Версия",
           "Only you can unlock your wallet":
             "Только вы можете разблокировать свой кошелек",
+          "Assets can only be sent within the same chain.":
+            "Активы могут быть отправлены только в пределах одной цепочки.",
         },
       },
       ko: {
@@ -806,6 +822,8 @@ i18n
           Version: "버전",
           "Only you can unlock your wallet":
             "지갑을 잠금 해제할 수 있는 사람은 당신뿐입니다",
+          "Assets can only be sent within the same chain.":
+            "자산은 동일한 체인 내에서만 전송할 수 있습니다.",
         },
       },
       pt: {
@@ -898,6 +916,8 @@ i18n
           Version: "Versão",
           "Only you can unlock your wallet":
             "Apenas você pode desbloquear sua carteira",
+          "Assets can only be sent within the same chain.":
+            "Os ativos só podem ser enviados dentro da mesma cadeia.",
         },
       },
       "pt-BR": {
@@ -992,6 +1012,8 @@ i18n
           Version: "Versão",
           "Only you can unlock your wallet":
             "Apenas você pode desbloquear sua carteira",
+          "Assets can only be sent within the same chain.":
+            "Os ativos só podem ser enviados dentro da mesma cadeia.",
         },
       },
       it: {
@@ -1086,6 +1108,8 @@ i18n
           Version: "Versione",
           "Only you can unlock your wallet":
             "Solo tu puoi sbloccare il tuo portafoglio",
+          "Assets can only be sent within the same chain.":
+            "Gli asset possono essere inviati solo all'interno della stessa catena.",
         },
       },
       de: {
@@ -1182,6 +1206,8 @@ i18n
           Version: "Version",
           "Only you can unlock your wallet":
             "Nur du kannst dein Wallet entsperren",
+          "Assets can only be sent within the same chain.":
+            "Vermögenswerte können nur innerhalb derselben Kette gesendet werden.",
         },
       },
       hi: {
@@ -1275,6 +1301,8 @@ i18n
           Version: "संस्करण",
           "Only you can unlock your wallet":
             "केवल आप ही अपना बटुआ अनलॉक कर सकते हैं",
+          "Assets can only be sent within the same chain.":
+            "संपत्तियां केवल उसी श्रृंखला के भीतर भेजी जा सकती हैं।",
         },
       },
       mn: {
@@ -1369,6 +1397,8 @@ i18n
           Version: "Хувилбар",
           "Only you can unlock your wallet":
             "Зөвхөн та өөрийн түрийвчээ онгойлгож чадна",
+          "Assets can only be sent within the same chain.":
+            "Хөрөнгийг зөвхөн нэг гинжин дотор л илгээх боломжтой.",
         },
       },
       th: {
@@ -1456,6 +1486,8 @@ i18n
           Version: "เวอร์ชัน",
           "Only you can unlock your wallet":
             "มีเพียงคุณเท่านั้นที่สามารถปลดล็อกกระเป๋าเงินของคุณได้",
+          "Assets can only be sent within the same chain.":
+            "สินทรัพย์สามารถส่งได้เฉพาะภายในโซ่เดียวกันเท่านั้น",
         },
       },
       uk: {
@@ -1546,6 +1578,8 @@ i18n
           "Let's Go": "Почнемо",
           "Only you can unlock your wallet":
             "Тільки ви можете розблокувати свій гаманець",
+          "Assets can only be sent within the same chain.":
+            "Активи можна надсилати лише в межах одного ланцюга.",
         },
       },
       vi: {
@@ -1636,6 +1670,8 @@ i18n
           Version: "Phiên bản",
           "Only you can unlock your wallet":
             "Chỉ bạn mới có thể mở khóa ví của mình",
+          "Assets can only be sent within the same chain.":
+            "Tài sản chỉ có thể được gửi trong cùng một chuỗi.",
         },
       },
       id: {
@@ -1729,6 +1765,8 @@ i18n
           Version: "Versi",
           "Only you can unlock your wallet":
             "Hanya Anda yang bisa membuka dompet Anda",
+          "Assets can only be sent within the same chain.":
+            "Aset hanya dapat dikirim dalam rantai yang sama.",
         },
       },
       tl: {
@@ -1825,6 +1863,8 @@ i18n
           Version: "Bersyon",
           "Only you can unlock your wallet":
             "Ikaw lang ang makakapagbukas ng iyong pitaka",
+          "Assets can only be sent within the same chain.":
+            "Ang mga ari-arian ay maaari lamang ipadala sa loob ng parehong kadena.",
         },
       },
       bn: {
@@ -1917,6 +1957,8 @@ i18n
           Version: "সংস্করণ",
           "Only you can unlock your wallet":
             "শুধু আপনিই আপনার ওয়ালেট আনলক করতে পারবেন",
+          "Assets can only be sent within the same chain.":
+            "সম্পদগুলি কেবল একই শৃঙ্খলে পাঠানো যেতে পারে।",
         },
       },
     },

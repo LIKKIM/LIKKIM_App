@@ -11,6 +11,7 @@ import {
   Animated,
   Easing,
   ScrollView,
+  Clipboard,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -19,6 +20,7 @@ import { BlurView } from "expo-blur";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CryptoContext, DarkModeContext, usdtCrypto } from "./CryptoContext";
 import { useTranslation } from "react-i18next";
+import QRCode from "react-native-qrcode-svg"; // 确保导入 QRCode 模块
 
 function WalletScreen({ route, navigation }) {
   const {
@@ -32,8 +34,10 @@ function WalletScreen({ route, navigation }) {
   const { isDarkMode } = useContext(DarkModeContext);
   const WalletScreenStyle = WalletScreenStyles(isDarkMode);
   const { t } = useTranslation();
+  const [activeTab, setActiveTab] = useState("History");
   const [modalVisible, setModalVisible] = useState(false);
   const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [addressModalVisible, setAddressModalVisible] = useState(false); // 新增地址模态窗口的状态
   const [selectedAddress, setSelectedAddress] = useState("");
   const [selectedCrypto, setSelectedCrypto] = useState(null);
   const [addCryptoVisible, setAddCryptoVisible] = useState(false);
@@ -50,6 +54,8 @@ function WalletScreen({ route, navigation }) {
   const iconColor = isDarkMode ? "#ffffff" : "#24234C";
   const darkColors = ["#24234C", "#101021"];
   const lightColors = ["#FFFFFF", "#EDEBEF"];
+  const darkColorsDown = ["#212146", "#101021"];
+  const lightColorsDown = ["#FDFCFD", "#EDEBEF"];
   const secondTextColor = isDarkMode ? "#ddd" : "#676776";
   const placeholderColor = isDarkMode ? "#ffffff" : "#24234C";
   const [selectedWords, setSelectedWords] = useState(Array(12).fill(null));
@@ -57,11 +63,18 @@ function WalletScreen({ route, navigation }) {
     useState(false);
   const [phrase, setPhrase] = useState("");
   const [animation] = useState(new Animated.Value(0));
+  const [fadeAnim] = useState(new Animated.Value(0));
+  const opacityAnim = useRef(new Animated.Value(0)).current;
   const [selectedCardIndex, setSelectedCardIndex] = useState(null);
+  const [selectedCryptoIcon, setSelectedCryptoIcon] = useState(null);
   const cardRefs = useRef([]);
   const cardStartPositions = useRef([]);
   const scrollYOffset = useRef(0);
-
+  const [transactionHistory, setTransactionHistory] = useState([]);
+  const [processMessages, setProcessMessages] = useState([]);
+  const [showLetsGoButton, setShowLetsGoButton] = useState(false);
+  const [tabOpacity] = useState(new Animated.Value(1));
+  const [cardInfoVisible, setCardInfoVisible] = useState(false); // 控制卡片信息显示
   const mnemonic = [
     ["apple", "banana", "cherry"],
     ["dog", "elephant", "frog"],
@@ -84,6 +97,43 @@ function WalletScreen({ route, navigation }) {
   };
 
   const allWordsSelected = selectedWords.every((word) => word !== null);
+  // 点击 QR 代码图片时显示地址模态窗口
+  const handleQRCodePress = (crypto) => {
+    setSelectedCrypto(crypto.shortName);
+    setSelectedAddress(crypto.address);
+    setSelectedCryptoIcon(crypto.icon);
+    setAddressModalVisible(true);
+  };
+
+  useEffect(() => {
+    if (modalVisible) {
+      // 重置 tabOpacity 为 1
+      Animated.timing(tabOpacity, {
+        toValue: 1,
+        duration: 200,
+        useNativeDriver: true,
+      }).start();
+    }
+  }, [modalVisible]);
+
+  useEffect(() => {
+    // 根据条件触发动画
+    if (cryptoCards.length > 0 && !modalVisible) {
+      Animated.timing(opacityAnim, {
+        toValue: 1,
+        duration: 200,
+        easing: Easing.ease,
+        useNativeDriver: true,
+      }).start();
+    } else {
+      Animated.timing(opacityAnim, {
+        toValue: 0,
+        duration: 200,
+        easing: Easing.ease,
+        useNativeDriver: true,
+      }).start();
+    }
+  }, [cryptoCards.length, modalVisible, opacityAnim]);
 
   useEffect(() => {
     const loadCryptoCards = async () => {
@@ -167,30 +217,68 @@ function WalletScreen({ route, navigation }) {
     setSelectedCardIndex(index);
     cardRefs.current[index]?.measure((fx, fy, width, height, px, py) => {
       cardStartPositions.current[index] = py; // 记录每个卡片的初始位置
-      const endPosition = 180 - scrollYOffset.current; // 考虑 scrollTo 的 Y 偏移量
+      const endPosition = 120 - (scrollYOffset.current || 0); // 考虑 scrollTo 的 Y 偏移量
 
-      Animated.timing(animation, {
+      // 确保 start 和 end 位置都是有效的数值
+      if (isNaN(cardStartPositions.current[index]) || isNaN(endPosition)) {
+        console.error("Invalid position values", {
+          startPosition: cardStartPositions.current[index],
+          endPosition: endPosition,
+        });
+        return;
+      }
+
+      Animated.spring(animation, {
         toValue: 1,
-        duration: 300,
-        easing: Easing.inOut(Easing.ease),
         useNativeDriver: true,
+        stiffness: 250, // 增加刚度
+        damping: 25, // 增加阻尼
+        mass: 1, // 质量
+        overshootClamping: false, // 允许超出目标值
+        restDisplacementThreshold: 0.01,
+        restSpeedThreshold: 0.01,
       }).start(() => {
         setModalVisible(true);
+        setTimeout(() => {
+          setCardInfoVisible(true); // 延迟显示卡片信息
+        }, 300); // 根据需求调整延迟时间
       });
     });
   };
 
   const closeModal = () => {
-    Animated.timing(animation, {
-      toValue: 0,
-      duration: 300,
-      easing: Easing.inOut(Easing.ease),
+    // 动画隐藏顶部标签
+    Animated.timing(tabOpacity, {
+      toValue: 0, // 透明
+      duration: 200,
       useNativeDriver: true,
     }).start(() => {
-      setModalVisible(false);
-      setSelectedCardIndex(null);
+      // 在顶部标签隐藏完成后，执行卡片位置还原动画
+      Animated.spring(animation, {
+        toValue: 0,
+        useNativeDriver: true,
+        stiffness: 250, // 增加刚度
+        damping: 25, // 增加阻尼
+        mass: 1, // 质量
+        overshootClamping: false,
+        restDisplacementThreshold: 0.01,
+        restSpeedThreshold: 0.01,
+      }).start(() => {
+        setModalVisible(false);
+        setCardInfoVisible(false);
+        setSelectedCardIndex(null);
+      });
     });
   };
+
+  useEffect(() => {
+    Animated.timing(fadeAnim, {
+      toValue: modalVisible ? 1 : 0,
+      duration: 300,
+      easing: Easing.ease,
+      useNativeDriver: true,
+    }).start();
+  }, [modalVisible, fadeAnim]);
 
   const handleCardPress = (cryptoName, index) => {
     const crypto = cryptoCards.find((card) => card.name === cryptoName);
@@ -252,9 +340,6 @@ function WalletScreen({ route, navigation }) {
       .toFixed(2);
   };
 
-  const [processMessages, setProcessMessages] = useState([]);
-  const [showLetsGoButton, setShowLetsGoButton] = useState(false);
-
   useEffect(() => {
     if (processModalVisible) {
       setShowLetsGoButton(false);
@@ -290,8 +375,8 @@ function WalletScreen({ route, navigation }) {
   }, [processModalVisible, t]);
 
   const animatedCardStyle = (index) => {
-    const cardStartPosition = cardStartPositions.current[index];
-    const endPosition = 100 - scrollYOffset.current; // 考虑 scrollTo 的 Y 偏移量
+    const cardStartPosition = cardStartPositions.current[index] || 0;
+    const endPosition = 120 - (scrollYOffset.current || 0); // 考虑 scrollTo 的 Y 偏移量
     const translateY = animation.interpolate({
       inputRange: [0, 1],
       outputRange: [0, endPosition - cardStartPosition],
@@ -299,7 +384,7 @@ function WalletScreen({ route, navigation }) {
 
     return {
       transform: [{ translateY }],
-      zIndex: 9999,
+      zIndex: 9,
     };
   };
 
@@ -312,6 +397,43 @@ function WalletScreen({ route, navigation }) {
     }
   }, [modalVisible]);
 
+  const renderTabContent = () => {
+    switch (activeTab) {
+      case "History":
+        return (
+          <>
+            <Text style={WalletScreenStyle.historyTitle}>
+              {t("Transaction History")}
+            </Text>
+            <View style={WalletScreenStyle.historyContainer}>
+              {transactionHistory.length === 0 ? (
+                <Text style={WalletScreenStyle.noHistoryText}>
+                  {t("No Histories")}
+                </Text>
+              ) : (
+                transactionHistory.map((transaction, index) => (
+                  <View key={index} style={WalletScreenStyle.historyItem}>
+                    <Text style={WalletScreenStyle.historyItemText}>
+                      {transaction.detail}
+                    </Text>
+                  </View>
+                ))
+              )}
+            </View>
+          </>
+        );
+      case "Prices":
+        return (
+          <>
+            <Text style={WalletScreenStyle.historyTitle}></Text>
+            <View style={WalletScreenStyle.historyContainer}></View>
+          </>
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <LinearGradient
       colors={isDarkMode ? darkColors : lightColors}
@@ -321,7 +443,8 @@ function WalletScreen({ route, navigation }) {
         ref={scrollViewRef}
         contentContainerStyle={[
           WalletScreenStyle.scrollViewContent,
-          { paddingBottom: 80 },
+          modalVisible && { overflow: "hidden", height: "100%" },
+          cryptoCards.length !== 0 && !modalVisible && { paddingBottom: 130 },
         ]}
         style={[
           WalletScreenStyle.scrollView,
@@ -334,17 +457,26 @@ function WalletScreen({ route, navigation }) {
         }}
         scrollEventThrottle={16} // 滚动事件节流，以确保 onScroll 事件不会频繁触发
       >
-        {cryptoCards.length > 0 && (
-          <View style={WalletScreenStyle.totalBalanceContainer}>
-            <Text style={WalletScreenStyle.totalBalanceText}>
-              {t("Total Balance")}
-            </Text>
-            <Text style={WalletScreenStyle.totalBalanceAmount}>
-              {`${calculateTotalBalance()}`}
-              <Text style={WalletScreenStyle.currencyUnit}>{currencyUnit}</Text>
-            </Text>
-          </View>
-        )}
+        <Animated.View
+          style={[
+            WalletScreenStyle.totalBalanceContainer,
+            { opacity: opacityAnim },
+          ]}
+        >
+          {cryptoCards.length > 0 && !modalVisible && (
+            <>
+              <Text style={WalletScreenStyle.totalBalanceText}>
+                {t("Total Balance")}
+              </Text>
+              <Text style={WalletScreenStyle.totalBalanceAmount}>
+                {`${calculateTotalBalance()}`}
+                <Text style={WalletScreenStyle.currencyUnit}>
+                  {currencyUnit}
+                </Text>
+              </Text>
+            </>
+          )}
+        </Animated.View>
 
         {cryptoCards.length === 0 && (
           <View style={WalletScreenStyle.centeredContent}>
@@ -386,7 +518,7 @@ function WalletScreen({ route, navigation }) {
             ref={(el) => (cardRefs.current[index] = el)}
             style={[
               WalletScreenStyle.cardContainer,
-              selectedCardIndex === index && { zIndex: 9999 },
+              selectedCardIndex === index && { zIndex: 3 },
             ]}
             disabled={modalVisible} // 禁用卡片点击
           >
@@ -412,43 +544,203 @@ function WalletScreen({ route, navigation }) {
                 {!modalVisible && (
                   <>
                     <Text style={WalletScreenStyle.cardBalance}>
-                      {`${card.balance} ${currencyUnit}`}
-                    </Text>
-                    <Text style={WalletScreenStyle.balanceShortName}>
                       {`${card.balance} ${card.shortName}`}
                     </Text>
+                    <Text style={WalletScreenStyle.balanceShortName}>
+                      {`${card.balance} ${currencyUnit}`}
+                    </Text>
                   </>
+                )}
+                {modalVisible && cardInfoVisible && (
+                  <View
+                    style={{
+                      width: 326,
+                      height: 206,
+                      justifyContent: "center",
+                      alignItems: "center",
+                      position: "relative",
+                    }}
+                  >
+                    <TouchableOpacity
+                      onPress={() => handleQRCodePress(card)}
+                      style={{
+                        position: "absolute",
+                        right: 0,
+                        top: 0,
+                      }}
+                    >
+                      <Image
+                        source={require("../assets/icon/QR.png")}
+                        style={WalletScreenStyle.QRImg}
+                      />
+                    </TouchableOpacity>
+                    <Text style={WalletScreenStyle.cardBalanceCenter}>
+                      {`${card.balance} ${card.shortName}`}
+                    </Text>
+                    <Text style={WalletScreenStyle.balanceShortNameCenter}>
+                      {`${card.balance} ${currencyUnit}`}
+                    </Text>
+                  </View>
                 )}
               </ImageBackground>
             </Animated.View>
           </TouchableOpacity>
         ))}
-
-        {/* 数字货币弹窗view */}
+        {/* 数字货币弹窗表面层view */}
         {modalVisible && (
-          <LinearGradient
-            colors={isDarkMode ? darkColors : lightColors}
-            style={[WalletScreenStyle.cardModalView]}
+          <Animated.View
+            style={{
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              position: "absolute",
+              zIndex: 10,
+              top: 236,
+              opacity: tabOpacity, // 使用 tabOpacity 控制透明度
+            }}
           >
-            <View style={WalletScreenStyle.BalanceView}>
-              <Text style={WalletScreenStyle.modalBalanceLabel}>
-                {t("Balance")}
-              </Text>
-              <Text style={WalletScreenStyle.modalBalance}>
-                {selectedCrypto?.balance || "0.0"} {currencyUnit}
-              </Text>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "center",
+                zIndex: 10,
+              }}
+            >
+              <TouchableOpacity
+                style={[
+                  WalletScreenStyle.tabButton,
+                  activeTab === "History" && WalletScreenStyle.activeTabButton,
+                ]}
+                onPress={() => setActiveTab("History")}
+              >
+                <Text
+                  style={[
+                    WalletScreenStyle.tabButtonText,
+                    activeTab === "History" &&
+                      WalletScreenStyle.activeTabButtonText,
+                  ]}
+                >
+                  {t("History")}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[
+                  WalletScreenStyle.tabButton,
+                  activeTab === "Prices" && WalletScreenStyle.activeTabButton,
+                ]}
+                onPress={() => setActiveTab("Prices")}
+              >
+                <Text
+                  style={[
+                    WalletScreenStyle.tabButtonText,
+                    activeTab === "Prices" &&
+                      WalletScreenStyle.activeTabButtonText,
+                  ]}
+                >
+                  {t("Prices")}
+                </Text>
+              </TouchableOpacity>
             </View>
+
+            {renderTabContent()}
             <TouchableOpacity
-              style={[WalletScreenStyle.cancelButton, { zIndex: 10000 }]}
+              style={WalletScreenStyle.cancelButtonCryptoCard}
               onPress={closeModal}
             >
               <Text style={WalletScreenStyle.cancelButtonText}>
                 {t("Close")}
               </Text>
             </TouchableOpacity>
-          </LinearGradient>
+          </Animated.View>
+        )}
+
+        {/* 数字货币弹窗背景层view */}
+        {modalVisible && (
+          <Animated.View
+            style={[WalletScreenStyle.cardModalView, { opacity: fadeAnim }]}
+          >
+            <LinearGradient
+              colors={isDarkMode ? darkColorsDown : lightColorsDown}
+              style={[WalletScreenStyle.cardModalView]}
+            ></LinearGradient>
+          </Animated.View>
         )}
       </ScrollView>
+
+      {/* 显示选择的加密货币地址的模态窗口 */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={addressModalVisible}
+        onRequestClose={() => setAddressModalVisible(false)}
+      >
+        <View style={WalletScreenStyle.centeredView}>
+          <View style={WalletScreenStyle.receiveModalView}>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Text style={WalletScreenStyle.modalTitle}>
+                {t("Address for")}
+              </Text>
+              {selectedCryptoIcon && (
+                <Image
+                  source={selectedCryptoIcon}
+                  style={{
+                    width: 24,
+                    height: 24,
+                    marginLeft: 5,
+                    marginRight: 5,
+                  }}
+                />
+              )}
+              <Text style={WalletScreenStyle.modalTitle}>
+                {selectedCrypto}:
+              </Text>
+            </View>
+            <Text style={WalletScreenStyle.subtitleText}>
+              {t("Assets can only be sent within the same chain.")}
+            </Text>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Text style={WalletScreenStyle.addressText}>
+                {selectedAddress}
+              </Text>
+              <TouchableOpacity
+                onPress={() => Clipboard.setString(selectedAddress)}
+              >
+                <Icon
+                  name="content-copy"
+                  size={24}
+                  color={isDarkMode ? "#ffffff" : "#676776"}
+                />
+              </TouchableOpacity>
+            </View>
+            <View
+              style={{
+                backgroundColor: "#fff",
+                height: 220,
+                width: 220,
+                justifyContent: "center",
+                alignItems: "center",
+                borderRadius: 12,
+              }}
+            >
+              <QRCode value={selectedAddress} size={200} />
+            </View>
+            <TouchableOpacity
+              style={WalletScreenStyle.cancelAddressButton}
+              onPress={() => setAddressModalVisible(false)}
+            >
+              <Text style={WalletScreenStyle.cancelButtonText}>
+                {t("Close")}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
 
       {/* Add Wallet Modal */}
       <Modal

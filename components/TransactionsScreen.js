@@ -30,6 +30,7 @@ function TransactionsScreen() {
   const [operationType, setOperationType] = useState("");
   const [selectedCrypto, setSelectedCrypto] = useState("");
   const [selectedAddress, setSelectedAddress] = useState("");
+  const [selectedCryptoIcon, setSelectedCryptoIcon] = useState(null);
   const iconColor = isDarkMode ? "#ffffff" : "#24234C";
   const darkColors = ["#24234C", "#101021"];
   const lightColors = ["#FFFFFF", "#EDEBEF"];
@@ -67,6 +68,7 @@ function TransactionsScreen() {
   const selectCrypto = async (crypto) => {
     setSelectedCrypto(crypto.shortName);
     setSelectedAddress(crypto.address);
+    setSelectedCryptoIcon(crypto.icon);
     setModalVisible(false);
     if (operationType === "receive") {
       setAddressModalVisible(true);
@@ -107,7 +109,6 @@ function TransactionsScreen() {
           </Text>
         </TouchableOpacity>
         <View style={TransactionsScreenStyle.historyContainer}>
-          {/*       <BlurView intensity={3} style={TransactionsScreenStyle.blurView} /> */}
           <Text style={TransactionsScreenStyle.historyTitle}>
             {t("Transaction History")}
           </Text>
@@ -215,7 +216,7 @@ function TransactionsScreen() {
                 </ScrollView>
               )}
               <TouchableOpacity
-                style={TransactionsScreenStyle.cancelButton}
+                style={TransactionsScreenStyle.cancelButtonReceive}
                 onPress={() => setModalVisible(false)}
               >
                 <Text style={TransactionsScreenStyle.cancelButtonText}>
@@ -234,8 +235,27 @@ function TransactionsScreen() {
         >
           <View style={TransactionsScreenStyle.centeredView}>
             <View style={TransactionsScreenStyle.receiveModalView}>
-              <Text style={TransactionsScreenStyle.modalTitle}>
-                {t("Address for")} {selectedCrypto}:
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <Text style={TransactionsScreenStyle.modalReceiveTitle}>
+                  {t("Address for")}
+                </Text>
+                {selectedCryptoIcon && (
+                  <Image
+                    source={selectedCryptoIcon}
+                    style={{
+                      width: 24,
+                      height: 24,
+                      marginLeft: 5,
+                      marginRight: 5,
+                    }}
+                  />
+                )}
+                <Text style={TransactionsScreenStyle.modalReceiveTitle}>
+                  {selectedCrypto}:
+                </Text>
+              </View>
+              <Text style={TransactionsScreenStyle.subtitleText}>
+                {t("Assets can only be sent within the same chain.")}
               </Text>
               <View
                 style={{

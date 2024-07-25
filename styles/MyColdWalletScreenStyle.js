@@ -197,6 +197,17 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       height: 60,
       alignItems: "center",
     },
+    cancelButtonLookingFor: {
+      borderColor: buttonBackgroundColor,
+      borderWidth: 3,
+      padding: 10,
+      width: "100%",
+      justifyContent: "center",
+      borderRadius: 30,
+      height: 60,
+      alignItems: "center",
+      marginTop: 20,
+    },
     Icon: {
       marginRight: 10,
     },

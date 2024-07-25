@@ -2,6 +2,7 @@
 import { StyleSheet } from "react-native";
 
 const TransactionsScreenStyles = (isDarkMode) => {
+  const titleColor = isDarkMode ? "#fff" : "#000";
   const textColor = isDarkMode ? "#fff" : "#fff";
   const textBtnColor = isDarkMode ? "#fff" : "#fff";
   const backgroundColor = isDarkMode ? "#121212" : "#f5f5f5";
@@ -15,6 +16,14 @@ const TransactionsScreenStyles = (isDarkMode) => {
   const secondTextColor = isDarkMode ? "#ddd" : "#676776";
   const secondBtnTextColor = isDarkMode ? "#ddd" : "#e0e0e0";
   return StyleSheet.create({
+    subtitleText: {
+      fontSize: 14,
+      color: secondTextColor,
+      textAlign: "center",
+      marginBottom: 20,
+      flexWrap: "wrap",
+      width: 326,
+    },
     cancelButtonText: {
       color: secondTextColor,
       fontSize: 16,
@@ -29,11 +38,16 @@ const TransactionsScreenStyles = (isDarkMode) => {
       height: 60,
       alignItems: "center",
     },
-    modalTitle: {
-      color: textColor,
-      fontSize: 16,
-      fontWeight: "bold",
-      marginBottom: 15,
+    cancelButtonReceive: {
+      borderWidth: 3,
+      borderColor: buttonBackgroundColor,
+      padding: 10,
+      width: "90%",
+      justifyContent: "center",
+      borderRadius: 30,
+      height: 60,
+      alignItems: "center",
+      marginTop: 20,
     },
     modalView: {
       margin: 20,
@@ -44,6 +58,28 @@ const TransactionsScreenStyles = (isDarkMode) => {
       borderRadius: 20,
       padding: 35,
       alignItems: "center",
+    },
+    addressText: {
+      color: secondTextColor,
+      textAlign: "center",
+      marginRight: 10,
+      flexWrap: "wrap",
+      width: 280,
+    },
+    cancelButtonText: {
+      color: secondTextColor,
+      fontSize: 16,
+    },
+    modalTitle: {
+      color: titleColor,
+      fontSize: 16,
+      fontWeight: "bold",
+      marginBottom: 15,
+    },
+    modalReceiveTitle: {
+      color: titleColor,
+      fontSize: 16,
+      fontWeight: "bold",
     },
     receiveModalView: {
       margin: 20,
@@ -89,6 +125,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       height: 60,
       alignItems: "center",
     },
+    /*  History */
     historyItemText: {
       fontSize: 16,
       color: textColor,
@@ -120,6 +157,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       borderRadius: 10,
       height: 360,
     },
+    /*  blurView */
     blurView: {
       position: "absolute",
       top: 0,
@@ -161,16 +199,9 @@ const TransactionsScreenStyles = (isDarkMode) => {
     modalText: { color: secondTextColor, textAlign: "center" },
     TransactionModalTitle: {
       fontSize: 16,
-      color: textColor,
+      color: titleColor,
       textAlign: "center",
       marginBottom: 30,
-    },
-    addressText: {
-      color: secondTextColor,
-      textAlign: "center",
-      marginRight: 10,
-      flexWrap: "wrap",
-      width: 280,
     },
   });
 };

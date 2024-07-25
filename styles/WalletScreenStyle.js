@@ -12,8 +12,93 @@ const WalletScreenStyles = (isDarkMode) => {
   const currencyUnitColor = isDarkMode ? "#ddd" : "#666";
   const addCryptoButtonBackgroundColor = isDarkMode ? "#1E1D3F" : "#F8F6FE";
   const borderColor = isDarkMode ? "#555" : "#ccc";
-
+  const historyItemBorderColor = isDarkMode ? "#ccc" : "#999";
+  const historyContainerBackgroundColor = isDarkMode
+    ? "#24234C80"
+    : "#FFFFFF80";
   return StyleSheet.create({
+    subtitleText: {
+      fontSize: 14,
+      color: secondTextColor,
+      textAlign: "center",
+      marginBottom: 20,
+      flexWrap: "wrap",
+      width: 326,
+    },
+    addressText: {
+      color: secondTextColor,
+      textAlign: "center",
+      marginRight: 10,
+      flexWrap: "wrap",
+      width: 280,
+    },
+    cancelButtonText: {
+      color: secondTextColor,
+      fontSize: 16,
+    },
+
+    receiveModalView: {
+      margin: 20,
+      height: 500,
+      width: "90%",
+      backgroundColor: modalBackgroundColor,
+      borderRadius: 20,
+      padding: 35,
+      justifyContent: "space-between",
+      alignItems: "center",
+    },
+
+    tabButton: {
+      padding: 20,
+      marginHorizontal: 60,
+      zIndex: 11,
+    },
+    activeTabButton: {
+      padding: 20,
+      borderBottomWidth: 2,
+      borderBottomColor: "#6C6CF4",
+      marginHorizontal: 60,
+    },
+    activeTabButtonText: {
+      fontSize: 16,
+      color: textColor,
+    },
+    tabButtonText: {
+      fontSize: 16,
+      color: secondTextColor,
+    },
+    historyItemText: {
+      fontSize: 16,
+      color: textColor,
+    },
+    historyItem: {
+      padding: 10,
+      borderBottomWidth: 1,
+      borderBottomColor: historyItemBorderColor,
+    },
+    noHistoryText: {
+      fontSize: 16,
+      color: secondTextColor,
+      textAlign: "center",
+    },
+    historyTitle: {
+      height: 60,
+      textAlign: "left",
+      textAlignVertical: "center", // 文本垂直居中（仅在Android有效）
+      lineHeight: 60, // 使文本行高等于容器高度以实现垂直居中
+      width: 326,
+      fontSize: 16,
+      color: textColor,
+      fontWeight: "bold",
+    },
+
+    historyContainer: {
+      width: "100%",
+      padding: 20,
+      alignItems: "center",
+      justifyContent: "center",
+      height: 300,
+    },
     linearGradient: {
       flex: 1,
       backgroundColor: backgroundColor,
@@ -21,7 +106,6 @@ const WalletScreenStyles = (isDarkMode) => {
       justifyContent: "center",
     },
     scrollViewContent: {
-      height: "100%",
       paddingTop: 20,
       justifyContent: "start",
       alignItems: "center",
@@ -31,8 +115,9 @@ const WalletScreenStyles = (isDarkMode) => {
       paddingHorizontal: 0,
     },
     totalBalanceContainer: {
-      width: 300,
-      marginBottom: 40,
+      width: 326,
+      height: 80,
+      marginBottom: 20,
     },
     totalBalanceText: {
       fontSize: 16,
@@ -54,6 +139,7 @@ const WalletScreenStyles = (isDarkMode) => {
       fontWeight: "normal",
     },
     addWalletImage: {
+      marginTop: -110,
       width: 300,
       height: 170,
       borderRadius: 20,
@@ -83,7 +169,7 @@ const WalletScreenStyles = (isDarkMode) => {
     },
     cardContainer: {
       position: "relative",
-      marginBottom: -60, // 重叠效果
+      marginBottom: -130, // 重叠效果
     },
     cardIcon: {
       position: "absolute",
@@ -113,16 +199,6 @@ const WalletScreenStyles = (isDarkMode) => {
       textShadowOffset: { width: 0, height: 1 },
       textShadowRadius: 3,
     },
-    balanceShortName: {
-      position: "absolute",
-      top: 56,
-      right: 20,
-      color: secondCardTextColor,
-      fontSize: 14,
-      textShadowColor: "rgba(0, 0, 0, 0.8)",
-      textShadowOffset: { width: 0, height: 2 },
-      textShadowRadius: 3,
-    },
     cardBalance: {
       position: "absolute",
       top: 25,
@@ -134,10 +210,35 @@ const WalletScreenStyles = (isDarkMode) => {
       textShadowOffset: { width: 0, height: 2 },
       textShadowRadius: 3,
     },
-
+    balanceShortName: {
+      position: "absolute",
+      top: 56,
+      right: 20,
+      color: secondCardTextColor,
+      fontSize: 14,
+      textShadowColor: "rgba(0, 0, 0, 0.8)",
+      textShadowOffset: { width: 0, height: 2 },
+      textShadowRadius: 3,
+    },
+    cardBalanceCenter: {
+      color: "#fff",
+      fontSize: 28,
+      fontWeight: "bold",
+      textShadowColor: "rgba(0, 0, 0, 0.8)",
+      textShadowOffset: { width: 0, height: 2 },
+      textShadowRadius: 3,
+      marginBottom: 8,
+    },
+    balanceShortNameCenter: {
+      color: secondCardTextColor,
+      fontSize: 14,
+      textShadowColor: "rgba(0, 0, 0, 0.8)",
+      textShadowOffset: { width: 0, height: 2 },
+      textShadowRadius: 3,
+    },
     card: {
-      width: 300,
-      height: 170,
+      width: 326,
+      height: 206,
       borderRadius: 20,
       overflow: "hidden",
       justifyContent: "center",
@@ -169,6 +270,29 @@ const WalletScreenStyles = (isDarkMode) => {
       alignItems: "center",
       marginTop: 20,
     },
+    cancelAddressButton: {
+      borderWidth: 3, // 设置边框宽度
+      borderColor: buttonBackgroundColor, // 设置边框颜色
+      padding: 10,
+      width: "100%",
+      justifyContent: "center",
+      borderRadius: 30,
+      height: 60,
+      alignItems: "center",
+      marginTop: 20,
+    },
+    cancelButtonCryptoCard: {
+      zIndex: 10,
+      borderWidth: 3, // 设置边框宽度
+      borderColor: buttonBackgroundColor, // 设置边框颜色
+      padding: 10,
+      width: 326,
+      justifyContent: "center",
+      borderRadius: 30,
+      height: 60,
+      alignItems: "center",
+      marginBottom: 60,
+    },
     cancelButton: {
       borderWidth: 3, // 设置边框宽度
       borderColor: buttonBackgroundColor, // 设置边框颜色
@@ -180,6 +304,7 @@ const WalletScreenStyles = (isDarkMode) => {
       alignItems: "center",
       marginTop: 20,
     },
+
     removeCancelButton: {
       borderWidth: 3, // 设置边框宽度
       borderColor: buttonBackgroundColor, // 设置边框颜色
@@ -201,12 +326,11 @@ const WalletScreenStyles = (isDarkMode) => {
     cardModalView: {
       height: "100%",
       width: "100%",
-      padding: 35,
       justifyContent: "flex-end",
       alignItems: "center",
       position: "absolute",
       bottom: 0,
-      zIndex: 1,
+      zIndex: 2,
     },
 
     modalView: {
@@ -258,7 +382,15 @@ const WalletScreenStyles = (isDarkMode) => {
       resizeMode: "contain", // 确保图片在其容器内完整显示
       marginBottom: 40,
     },
-
+    QRImg: {
+      width: 25,
+      height: 25, // 设置固定高度
+      resizeMode: "contain", // 确保图片在其容器内完整显示
+      position: "absolute",
+      right: 0,
+      top: 0,
+      margin: 25,
+    },
     removeModalButton: {
       backgroundColor: buttonBackgroundColor,
       padding: 10,
@@ -288,10 +420,7 @@ const WalletScreenStyles = (isDarkMode) => {
       marginBottom: 45,
       fontWeight: "bold",
     },
-    cancelButtonText: {
-      color: secondTextColor,
-      fontSize: 16,
-    },
+
     addCryptoModalView: {
       margin: 20,
       minHeight: 400,
@@ -394,7 +523,7 @@ const WalletScreenStyles = (isDarkMode) => {
       backgroundColor: cardBackgroundColor,
       borderRadius: 5,
       padding: 10,
-      zIndex: 1,
+      zIndex: 3,
     },
     dropdownButton: {
       padding: 10,
@@ -418,7 +547,7 @@ const WalletScreenStyles = (isDarkMode) => {
       fontSize: 16,
     },
     BalanceView: {
-      paddingVertical: 100,
+      paddingBottom: 200,
     },
 
     modalBalanceLabel: {
