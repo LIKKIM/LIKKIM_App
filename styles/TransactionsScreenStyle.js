@@ -155,6 +155,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       alignItems: "center",
       justifyContent: "center",
       borderRadius: 10,
+      width: 360,
       height: 360,
     },
     /*  blurView */
@@ -192,8 +193,8 @@ const TransactionsScreenStyles = (isDarkMode) => {
       borderColor: buttonBackgroundColor,
       paddingVertical: 10,
       paddingHorizontal: 20,
-      width: 165,
-      height: 165,
+      width: 170,
+      height: 170,
       borderRadius: 20,
       alignItems: "center",
       justifyContent: "center",
@@ -207,7 +208,9 @@ const TransactionsScreenStyles = (isDarkMode) => {
       justifyContent: "center",
       padding: 20,
     },
-    container: {},
+    container: {
+      alignItems: "center",
+    },
     modalText: { color: secondTextColor, textAlign: "center" },
     TransactionModalTitle: {
       fontSize: 16,
