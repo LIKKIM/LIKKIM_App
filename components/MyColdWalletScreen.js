@@ -332,7 +332,11 @@ function MyColdWalletScreen() {
       colors={isDarkMode ? darkColors : lightColors}
       style={MyColdWalletScreenStyle.container}
     >
-      <ScrollView style={MyColdWalletScreenStyle.scrollView}>
+      <ScrollView
+        style={MyColdWalletScreenStyle.scrollView}
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
+      >
         <View style={MyColdWalletScreenStyle.contentContainer}>
           {settingsOptions.map((option) => (
             <TouchableOpacity

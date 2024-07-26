@@ -449,6 +449,8 @@ function WalletScreen({ route, navigation }) {
       style={WalletScreenStyle.linearGradient}
     >
       <ScrollView
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
         ref={scrollViewRef}
         contentContainerStyle={[
           WalletScreenStyle.scrollViewContent,
@@ -1058,7 +1060,11 @@ function WalletScreen({ route, navigation }) {
       >
         <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
           <View style={WalletScreenStyle.addCryptoModalView}>
-            <ScrollView style={WalletScreenStyle.addCryptoScrollView}>
+            <ScrollView
+              style={WalletScreenStyle.addCryptoScrollView}
+              showsVerticalScrollIndicator={false}
+              showsHorizontalScrollIndicator={false}
+            >
               {additionalCryptos.map((crypto) => (
                 <TouchableOpacity
                   key={crypto.name}
