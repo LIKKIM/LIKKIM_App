@@ -59,7 +59,7 @@ const OnboardingScreen = ({ onDone }) => {
 
   const _renderDoneButton = () => (
     <View style={styles.doneButton}>
-      <Text style={styles.buttonText}>Done</Text>
+      <Text style={styles.buttonText}>Start Exploring</Text>
     </View>
   );
 
