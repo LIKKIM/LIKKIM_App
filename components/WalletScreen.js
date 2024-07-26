@@ -737,7 +737,7 @@ function WalletScreen({ route, navigation }) {
         visible={addressModalVisible}
         onRequestClose={() => setAddressModalVisible(false)}
       >
-        <View style={WalletScreenStyle.centeredView}>
+        <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
           <View style={WalletScreenStyle.receiveModalView}>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <Text style={WalletScreenStyle.modalTitle}>
@@ -802,7 +802,7 @@ function WalletScreen({ route, navigation }) {
               </Text>
             </TouchableOpacity>
           </View>
-        </View>
+        </BlurView>
       </Modal>
 
       {/* Add Wallet Modal */}

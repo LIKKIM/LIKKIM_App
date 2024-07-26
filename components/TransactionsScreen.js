@@ -250,7 +250,7 @@ function TransactionsScreen() {
           visible={addressModalVisible}
           onRequestClose={() => setAddressModalVisible(false)}
         >
-          <View style={TransactionsScreenStyle.centeredView}>
+          <BlurView intensity={10} style={TransactionsScreenStyle.centeredView}>
             <View style={TransactionsScreenStyle.receiveModalView}>
               <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <Text style={TransactionsScreenStyle.modalReceiveTitle}>
@@ -311,7 +311,7 @@ function TransactionsScreen() {
                 </Text>
               </TouchableOpacity>
             </View>
-          </View>
+          </BlurView>
         </Modal>
       </View>
     </LinearGradient>
