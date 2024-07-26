@@ -186,7 +186,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       color: titleColor,
       fontSize: 16,
       fontWeight: "bold",
-      marginBottom: 6,
+      marginVertical: 10,
     },
     roundButton: {
       borderWidth: 2,
