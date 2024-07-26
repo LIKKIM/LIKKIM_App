@@ -282,8 +282,6 @@ function WalletScreen({ route, navigation }) {
     }).start();
   }, [modalVisible, fadeAnim]);
 
-
-
   const handleCardPress = (cryptoName, index) => {
     const crypto = cryptoCards.find((card) => card.name === cryptoName);
     setSelectedAddress(crypto?.address || "Unknown");
@@ -392,8 +390,6 @@ function WalletScreen({ route, navigation }) {
     };
   };
 
-
-
   useEffect(() => {
     if (modalVisible) {
       scrollViewRef.current.scrollTo({ y: 0, animated: true });
@@ -403,12 +399,12 @@ function WalletScreen({ route, navigation }) {
     }
   }, [modalVisible]);
 
-
-
   //fix card 初始化紀錄位置
-  const initCardPosition = (_ref, _index) => _ref?.measure((fx, fy, width, height, px, py) => (cardStartPositions.current[_index] = py));
-
-
+  const initCardPosition = (_ref, _index) =>
+    _ref?.measure(
+      (fx, fy, width, height, px, py) =>
+        (cardStartPositions.current[_index] = py)
+    );
 
   const renderTabContent = () => {
     switch (activeTab) {
@@ -633,7 +629,7 @@ function WalletScreen({ route, navigation }) {
                   style={[
                     WalletScreenStyle.tabButtonText,
                     activeTab === "History" &&
-                    WalletScreenStyle.activeTabButtonText,
+                      WalletScreenStyle.activeTabButtonText,
                   ]}
                 >
                   {t("History")}
@@ -650,7 +646,7 @@ function WalletScreen({ route, navigation }) {
                   style={[
                     WalletScreenStyle.tabButtonText,
                     activeTab === "Prices" &&
-                    WalletScreenStyle.activeTabButtonText,
+                      WalletScreenStyle.activeTabButtonText,
                   ]}
                 >
                   {t("Prices")}
