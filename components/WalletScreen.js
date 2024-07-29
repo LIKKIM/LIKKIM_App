@@ -286,8 +286,6 @@ function WalletScreen({ route, navigation }) {
     }).start();
   }, [modalVisible, fadeAnim]);
 
-
-
   const handleCardPress = (cryptoName, index) => {
     const crypto = cryptoCards.find((card) => card.name === cryptoName);
     setSelectedAddress(crypto?.address || "Unknown");
@@ -396,8 +394,6 @@ function WalletScreen({ route, navigation }) {
     };
   };
 
-
-
   useEffect(() => {
     if (modalVisible) {
       scrollViewRef.current.scrollTo({ y: 0, animated: true });
@@ -407,12 +403,12 @@ function WalletScreen({ route, navigation }) {
     }
   }, [modalVisible]);
 
-
-
   //fix card 初始化紀錄位置
-  const initCardPosition = (_ref, _index) => _ref?.measure((fx, fy, width, height, px, py) => (cardStartPositions.current[_index] = py));
-
-
+  const initCardPosition = (_ref, _index) =>
+    _ref?.measure(
+      (fx, fy, width, height, px, py) =>
+        (cardStartPositions.current[_index] = py)
+    );
 
 
 
@@ -461,6 +457,8 @@ function WalletScreen({ route, navigation }) {
       style={WalletScreenStyle.linearGradient}
     >
       <ScrollView
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
         ref={scrollViewRef}
         contentContainerStyle={[
           WalletScreenStyle.scrollViewContent,
@@ -537,84 +535,133 @@ function WalletScreen({ route, navigation }) {
           </View>
         )}
 
-        {cryptoCards.map((card, index) => (
-          <TouchableOpacity
-            key={card.name}
-            onPress={() => handleCardPress(card.name, index)}
-            ref={(el) => {
-              cardRefs.current[index] = el;
-              initCardPosition(el, index);
-            }}
-            style={[
-              WalletScreenStyle.cardContainer,
-              selectedCardIndex === index && { zIndex: 3 },
-            ]}
-            disabled={modalVisible} // 禁用卡片点击
-          >
-            <Animated.View
+        {cryptoCards.map((card, index) => {
+          const isBlackText =
+            card.shortName === "BTC" ||
+            card.shortName === "USDT" ||
+            card.shortName === "BCH" ||
+            card.shortName === "DOT" ||
+            card.shortName === "DOGE";
+          return (
+            <TouchableOpacity
+              key={card.name}
+              onPress={() => handleCardPress(card.name, index)}
+              ref={(el) => {
+                cardRefs.current[index] = el;
+                initCardPosition(el, index);
+              }}
               style={[
-                WalletScreenStyle.card,
-                index === 0
-                  ? WalletScreenStyle.cardFirst
-                  : WalletScreenStyle.cardOthers,
-                selectedCardIndex === index && animatedCardStyle(index),
+                WalletScreenStyle.cardContainer,
+                selectedCardIndex === index && { zIndex: 3 },
               ]}
+              disabled={modalVisible} // 禁用卡片点击
             >
-              <ImageBackground
-                source={card.cardImage}
-                style={{ width: "100%", height: "100%" }}
-                imageStyle={{ borderRadius: 16 }}
+              <Animated.View
+                style={[
+                  WalletScreenStyle.card,
+                  index === 0
+                    ? WalletScreenStyle.cardFirst
+                    : WalletScreenStyle.cardOthers,
+                  selectedCardIndex === index && animatedCardStyle(index),
+                ]}
               >
-                <Image source={card.icon} style={WalletScreenStyle.cardIcon} />
-                <Text style={WalletScreenStyle.cardName}>{card.name}</Text>
-                <Text style={WalletScreenStyle.cardShortName}>
-                  {card.shortName}
-                </Text>
-                {!modalVisible && (
-                  <>
-                    <Text style={WalletScreenStyle.cardBalance}>
-                      {`${card.balance} ${card.shortName}`}
-                    </Text>
-                    <Text style={WalletScreenStyle.balanceShortName}>
-                      {`${card.balance} ${currencyUnit}`}
-                    </Text>
-                  </>
-                )}
-                {modalVisible && cardInfoVisible && (
-                  <View
-                    style={{
-                      width: 326,
-                      height: 206,
-                      justifyContent: "center",
-                      alignItems: "center",
-                      position: "relative",
-                    }}
+                <ImageBackground
+                  source={card.cardImage}
+                  style={{ width: "100%", height: "100%" }}
+                  imageStyle={{ borderRadius: 16 }}
+                >
+                  <Image
+                    source={card.icon}
+                    style={WalletScreenStyle.cardIcon}
+                  />
+                  <Text
+                    style={[
+                      WalletScreenStyle.cardName,
+                      isBlackText && { color: "#121518" },
+                    ]}
                   >
-                    <TouchableOpacity
-                      onPress={() => handleQRCodePress(card)}
+                    {card.name}
+                  </Text>
+                  <Text
+                    style={[
+                      WalletScreenStyle.cardShortName,
+                      //  isBlackText && { color: "#676776" },
+                      isBlackText && { color: "#121518" },
+                    ]}
+                  >
+                    {card.shortName}
+                  </Text>
+                  {!modalVisible && (
+                    <>
+                      <Text
+                        style={[
+                          WalletScreenStyle.cardBalance,
+                          isBlackText && { color: "#121518" },
+                        ]}
+                      >
+                        {`${card.balance} ${card.shortName}`}
+                      </Text>
+                      <Text
+                        style={[
+                          WalletScreenStyle.balanceShortName,
+                          //  isBlackText && { color: "#676776" },
+                          isBlackText && { color: "#121518" },
+                        ]}
+                      >
+                        {`${card.balance} ${currencyUnit}`}
+                      </Text>
+                    </>
+                  )}
+                  {modalVisible && cardInfoVisible && (
+                    <View
                       style={{
-                        position: "absolute",
-                        right: 0,
-                        top: 0,
+                        width: 326,
+                        height: 206,
+                        justifyContent: "center",
+                        alignItems: "center",
+                        position: "relative",
                       }}
                     >
-                      <Image
-                        source={require("../assets/icon/QR.png")}
-                        style={WalletScreenStyle.QRImg}
-                      />
-                    </TouchableOpacity>
-                    <Text style={WalletScreenStyle.cardBalanceCenter}>
-                      {`${card.balance} ${card.shortName}`}
-                    </Text>
-                    <Text style={WalletScreenStyle.balanceShortNameCenter}>
-                      {`${card.balance} ${currencyUnit}`}
-                    </Text>
-                  </View>
-                )}
-              </ImageBackground>
-            </Animated.View>
-          </TouchableOpacity>
-        ))}
+                      <TouchableOpacity
+                        onPress={() => handleQRCodePress(card)}
+                        style={{
+                          position: "absolute",
+                          right: 0,
+                          top: 0,
+                        }}
+                      >
+                        <Image
+                          source={require("../assets/icon/QR.png")}
+                          style={[
+                            WalletScreenStyle.QRImg,
+                            isBlackText && { tintColor: "#121518" },
+                          ]}
+                        />
+                      </TouchableOpacity>
+                      <Text
+                        style={[
+                          WalletScreenStyle.cardBalanceCenter,
+                          isBlackText && { color: "#121518" },
+                        ]}
+                      >
+                        {`${card.balance} ${card.shortName}`}
+                      </Text>
+                      <Text
+                        style={[
+                          WalletScreenStyle.balanceShortNameCenter,
+                          //  isBlackText && { color: "#676776" },
+                          isBlackText && { color: "#121518" },
+                        ]}
+                      >
+                        {`${card.balance} ${currencyUnit}`}
+                      </Text>
+                    </View>
+                  )}
+                </ImageBackground>
+              </Animated.View>
+            </TouchableOpacity>
+          );
+        })}
         {/* 数字货币弹窗表面层view */}
         {modalVisible && (
           <Animated.View
@@ -646,7 +693,7 @@ function WalletScreen({ route, navigation }) {
                   style={[
                     WalletScreenStyle.tabButtonText,
                     activeTab === "History" &&
-                    WalletScreenStyle.activeTabButtonText,
+                      WalletScreenStyle.activeTabButtonText,
                   ]}
                 >
                   {t("History")}
@@ -663,7 +710,7 @@ function WalletScreen({ route, navigation }) {
                   style={[
                     WalletScreenStyle.tabButtonText,
                     activeTab === "Prices" &&
-                    WalletScreenStyle.activeTabButtonText,
+                      WalletScreenStyle.activeTabButtonText,
                   ]}
                 >
                   {t("Prices")}
@@ -703,7 +750,7 @@ function WalletScreen({ route, navigation }) {
         visible={addressModalVisible}
         onRequestClose={() => setAddressModalVisible(false)}
       >
-        <View style={WalletScreenStyle.centeredView}>
+        <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
           <View style={WalletScreenStyle.receiveModalView}>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <Text style={WalletScreenStyle.modalTitle}>
@@ -768,7 +815,7 @@ function WalletScreen({ route, navigation }) {
               </Text>
             </TouchableOpacity>
           </View>
-        </View>
+        </BlurView>
       </Modal>
 
       {/* Add Wallet Modal */}
@@ -1026,7 +1073,11 @@ function WalletScreen({ route, navigation }) {
       >
         <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
           <View style={WalletScreenStyle.addCryptoModalView}>
-            <ScrollView style={WalletScreenStyle.addCryptoScrollView}>
+            <ScrollView
+              style={WalletScreenStyle.addCryptoScrollView}
+              showsVerticalScrollIndicator={false}
+              showsHorizontalScrollIndicator={false}
+            >
               {additionalCryptos.map((crypto) => (
                 <TouchableOpacity
                   key={crypto.name}

@@ -97,6 +97,9 @@ i18n
           "Only you can unlock your wallet": "Only you can unlock your wallet",
           "Assets can only be sent within the same chain.":
             "Assets can only be sent within the same chain.",
+          "Firmware Update": "Firmware Update",
+          "Sync balances to LIKKIM coldwallet":
+            "Sync balances to LIKKIM coldwallet",
         },
       },
       zh: {
@@ -139,7 +142,7 @@ i18n
           Cancel: "取消",
           "Choose the cryptocurrency to send:": "选择要发送的加密货币:",
           "Choose the cryptocurrency to receive:": "选择要接收的加密货币:",
-          "Address for": "地址为",
+          "Address for": "地址",
           Close: "关闭",
           Wallet: "钱包",
           Transactions: "交易",
@@ -183,6 +186,8 @@ i18n
           "Only you can unlock your wallet": "只有你可以解锁你的钱包",
           "Assets can only be sent within the same chain.":
             "资产只能在同一链内发送。",
+          "Firmware Update": "固件更新",
+          "Sync balances to LIKKIM coldwallet": "同步余额到 LIKKIM 冷钱包",
         },
       },
       "zh-TW": {
@@ -224,7 +229,7 @@ i18n
           Submit: "提交",
           "Choose the cryptocurrency to send:": "選擇要發送的加密貨幣:",
           "Choose the cryptocurrency to receive:": "選擇要接收的加密貨幣:",
-          "Address for": "地址為",
+          "Address for": "地址",
           Wallet: "錢包",
           Transactions: "交易",
           "My Cold Wallet": "我的LIKKIM",
@@ -267,6 +272,8 @@ i18n
           "Only you can unlock your wallet": "只有你可以解鎖你的錢包",
           "Assets can only be sent within the same chain.":
             "資產只能在同一鏈內發送。",
+          "Firmware Update": "固件更新",
+          "Sync balances to LIKKIM coldwallet": "同步餘額到 LIKKIM 冷錢包",
         },
       },
       fr: {
@@ -362,6 +369,9 @@ i18n
             "Seul vous pouvez déverrouiller votre portefeuille",
           "Assets can only be sent within the same chain.":
             "Les actifs ne peuvent être envoyés que sur la même chaîne.",
+          "Firmware Update": "Mise à jour du firmware",
+          "Sync balances to LIKKIM coldwallet":
+            "Synchroniser les soldes avec le portefeuille froid LIKKIM",
         },
       },
       es: {
@@ -457,6 +467,9 @@ i18n
             "Solo tú puedes desbloquear tu billetera",
           "Assets can only be sent within the same chain.":
             "Los activos solo se pueden enviar dentro de la misma cadena.",
+          "Firmware Update": "Actualización de firmware",
+          "Sync balances to LIKKIM coldwallet":
+            "Sincronizar saldos con la billetera fría LIKKIM",
         },
       },
       ar: {
@@ -547,6 +560,9 @@ i18n
           "Only you can unlock your wallet": "فقط يمكنك فتح محفظتك",
           "Assets can only be sent within the same chain.":
             "يمكن إرسال الأصول فقط ضمن نفس السلسلة.",
+          "Firmware Update": "تحديث البرنامج الثابت",
+          "Sync balances to LIKKIM coldwallet":
+            "مزامنة الأرصدة مع محفظة LIKKIM الباردة",
         },
       },
       ja: {
@@ -641,6 +657,9 @@ i18n
             "あなたのみがウォレットを解除できます",
           "Assets can only be sent within the same chain.":
             "資産は同じチェーン内でのみ送信できます。",
+          "Firmware Update": "تحديث البرنامج الثابت",
+          "Sync balances to LIKKIM coldwallet":
+            "مزامنة الأرصدة مع محفظة LIKKIM الباردة",
         },
       },
       ru: {
@@ -735,6 +754,9 @@ i18n
             "Только вы можете разблокировать свой кошелек",
           "Assets can only be sent within the same chain.":
             "Активы могут быть отправлены только в пределах одной цепочки.",
+          "Firmware Update": "Обновление прошивки",
+          "Sync balances to LIKKIM coldwallet":
+            "Синхронизировать балансы с холодным кошельком LIKKIM",
         },
       },
       ko: {
@@ -824,6 +846,9 @@ i18n
             "지갑을 잠금 해제할 수 있는 사람은 당신뿐입니다",
           "Assets can only be sent within the same chain.":
             "자산은 동일한 체인 내에서만 전송할 수 있습니다.",
+          "Firmware Update": "펌웨어 업데이트",
+          "Sync balances to LIKKIM coldwallet":
+            "LIKKIM 콜드 월렛으로 잔액 동기화",
         },
       },
       pt: {
@@ -918,6 +943,9 @@ i18n
             "Apenas você pode desbloquear sua carteira",
           "Assets can only be sent within the same chain.":
             "Os ativos só podem ser enviados dentro da mesma cadeia.",
+          "Firmware Update": "Atualização de firmware",
+          "Sync balances to LIKKIM coldwallet":
+            "Sincronizar saldos com a carteira fria LIKKIM",
         },
       },
       "pt-BR": {
@@ -1014,6 +1042,9 @@ i18n
             "Apenas você pode desbloquear sua carteira",
           "Assets can only be sent within the same chain.":
             "Os ativos só podem ser enviados dentro da mesma cadeia.",
+          "Firmware Update": "Atualização de firmware",
+          "Sync balances to LIKKIM coldwallet":
+            "Sincronizar saldos com a carteira fria LIKKIM",
         },
       },
       it: {
@@ -1110,6 +1141,9 @@ i18n
             "Solo tu puoi sbloccare il tuo portafoglio",
           "Assets can only be sent within the same chain.":
             "Gli asset possono essere inviati solo all'interno della stessa catena.",
+          "Firmware Update": "Aggiornamento firmware",
+          "Sync balances to LIKKIM coldwallet":
+            "Sincronizza saldi con il portafoglio freddo LIKKIM",
         },
       },
       de: {
@@ -1208,6 +1242,9 @@ i18n
             "Nur du kannst dein Wallet entsperren",
           "Assets can only be sent within the same chain.":
             "Vermögenswerte können nur innerhalb derselben Kette gesendet werden.",
+          "Firmware Update": "Firmware-Aktualisierung",
+          "Sync balances to LIKKIM coldwallet":
+            "Salden mit LIKKIM Cold Wallet synchronisieren",
         },
       },
       hi: {
@@ -1303,6 +1340,9 @@ i18n
             "केवल आप ही अपना बटुआ अनलॉक कर सकते हैं",
           "Assets can only be sent within the same chain.":
             "संपत्तियां केवल उसी श्रृंखला के भीतर भेजी जा सकती हैं।",
+          "Firmware Update": "फर्मवेयर अपडेट",
+          "Sync balances to LIKKIM coldwallet":
+            "LIKKIM कोल्डवॉलेट में बैलेंस सिंक करें",
         },
       },
       mn: {
@@ -1399,6 +1439,9 @@ i18n
             "Зөвхөн та өөрийн түрийвчээ онгойлгож чадна",
           "Assets can only be sent within the same chain.":
             "Хөрөнгийг зөвхөн нэг гинжин дотор л илгээх боломжтой.",
+          "Firmware Update": "Фирмвэр шинэчлэх",
+          "Sync balances to LIKKIM coldwallet":
+            "LIKKIM хүйтэн түрийвчтэй тэнцвэрийг синк хийх",
         },
       },
       th: {
@@ -1488,6 +1531,9 @@ i18n
             "มีเพียงคุณเท่านั้นที่สามารถปลดล็อกกระเป๋าเงินของคุณได้",
           "Assets can only be sent within the same chain.":
             "สินทรัพย์สามารถส่งได้เฉพาะภายในโซ่เดียวกันเท่านั้น",
+          "Firmware Update": "อัปเดตเฟิร์มแวร์",
+          "Sync balances to LIKKIM coldwallet":
+            "ซิงค์ยอดคงเหลือกับกระเป๋าเงินเย็น LIKKIM",
         },
       },
       uk: {
@@ -1580,6 +1626,9 @@ i18n
             "Тільки ви можете розблокувати свій гаманець",
           "Assets can only be sent within the same chain.":
             "Активи можна надсилати лише в межах одного ланцюга.",
+          "Firmware Update": "Оновлення прошивки",
+          "Sync balances to LIKKIM coldwallet":
+            "Синхронізація балансів із холодним гаманцем LIKKIM",
         },
       },
       vi: {
@@ -1672,6 +1721,9 @@ i18n
             "Chỉ bạn mới có thể mở khóa ví của mình",
           "Assets can only be sent within the same chain.":
             "Tài sản chỉ có thể được gửi trong cùng một chuỗi.",
+          "Firmware Update": "Cập nhật firmware",
+          "Sync balances to LIKKIM coldwallet":
+            "Đồng bộ số dư với ví lạnh LIKKIM",
         },
       },
       id: {
@@ -1767,6 +1819,9 @@ i18n
             "Hanya Anda yang bisa membuka dompet Anda",
           "Assets can only be sent within the same chain.":
             "Aset hanya dapat dikirim dalam rantai yang sama.",
+          "Firmware Update": "Pembaruan firmware",
+          "Sync balances to LIKKIM coldwallet":
+            "Sinkronkan saldo ke dompet dingin LIKKIM",
         },
       },
       tl: {
@@ -1865,6 +1920,9 @@ i18n
             "Ikaw lang ang makakapagbukas ng iyong pitaka",
           "Assets can only be sent within the same chain.":
             "Ang mga ari-arian ay maaari lamang ipadala sa loob ng parehong kadena.",
+          "Firmware Update": "Pag-update ng firmware",
+          "Sync balances to LIKKIM coldwallet":
+            "I-sync ang mga balanse sa LIKKIM coldwallet",
         },
       },
       bn: {
@@ -1959,6 +2017,9 @@ i18n
             "শুধু আপনিই আপনার ওয়ালেট আনলক করতে পারবেন",
           "Assets can only be sent within the same chain.":
             "সম্পদগুলি কেবল একই শৃঙ্খলে পাঠানো যেতে পারে।",
+          "Firmware Update": "ফার্মওয়্যার আপডেট",
+          "Sync balances to LIKKIM coldwallet":
+            "LIKKIM ঠান্ডা ওয়ালেটে ব্যালেন্স সিঙ্ক করুন",
         },
       },
     },

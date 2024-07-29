@@ -29,6 +29,7 @@ import MyColdWalletScreenStyles from "../styles/MyColdWalletScreenStyle";
 import { languages } from "../config/languages";
 import base64 from "base64-js";
 import { Buffer } from "buffer";
+import appConfig from "../app.config";
 
 let PermissionsAndroid;
 if (Platform.OS === "android") {
@@ -252,6 +253,19 @@ function MyColdWalletScreen() {
     return bytes;
   };
 
+  // New handlers for the buttons
+  const handleSyncBalances = () => {
+    console.log("Sync balances to LIKKIM coldwallet clicked");
+    // Add your sync logic here
+  };
+
+  const handleFirmwareUpdate = () => {
+    console.log("Firmware Update clicked");
+    // Add your firmware update logic here
+  };
+
+  const buildNumber = appConfig.ios.buildNumber;
+
   const settingsOptions = [
     {
       title: t("Change Password"),
@@ -290,6 +304,16 @@ function MyColdWalletScreen() {
       ),
     },
     {
+      title: t("Sync balances to LIKKIM coldwallet"),
+      icon: "sync",
+      onPress: handleSyncBalances,
+    },
+    {
+      title: t("Firmware Update"),
+      icon: "downloading",
+      onPress: handleFirmwareUpdate,
+    },
+    {
       title: t("Help & Support"),
       icon: "help-outline",
       onPress: () => {
@@ -298,7 +322,7 @@ function MyColdWalletScreen() {
     },
     {
       title: t("Privacy & Data"),
-      icon: "privacy-tip",
+      icon: "gpp-good",
       onPress: () => {
         Linking.openURL("https://www.likkim.com");
       },
@@ -306,15 +330,16 @@ function MyColdWalletScreen() {
 
     {
       title: t("About"),
-      icon: "info",
+      icon: "info-outline",
       onPress: () => {
         Linking.openURL("https://www.likkim.com");
       },
     },
     {
       title: t("Version"),
-      icon: "info-outline",
-      version: Constants.expoConfig.version,
+      icon: "update",
+      version: buildNumber, // 使用导入的 buildNumber
+
       onPress: () => {},
     },
   ];
@@ -332,7 +357,11 @@ function MyColdWalletScreen() {
       colors={isDarkMode ? darkColors : lightColors}
       style={MyColdWalletScreenStyle.container}
     >
-      <ScrollView style={MyColdWalletScreenStyle.scrollView}>
+      <ScrollView
+        style={MyColdWalletScreenStyle.scrollView}
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
+      >
         <View style={MyColdWalletScreenStyle.contentContainer}>
           {settingsOptions.map((option) => (
             <TouchableOpacity
@@ -646,9 +675,9 @@ function MyColdWalletScreen() {
 
           {/* Bluetooth Btn modal*/}
           <View style={{ marginTop: 40 }}>
-            <Text style={MyColdWalletScreenStyle.languageModalTitle}>
+            {/* <Text style={MyColdWalletScreenStyle.languageModalTitle}>
               {t("Bluetooth")}
-            </Text>
+            </Text> */}
             <View style={{ alignItems: "center" }}>
               <TouchableOpacity
                 style={MyColdWalletScreenStyle.roundButton}

@@ -17,6 +17,7 @@ import { useTranslation } from "react-i18next";
 import { CryptoContext, DarkModeContext } from "./CryptoContext";
 import TransactionsScreenStyles from "../styles/TransactionsScreenStyle";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import Feather from "react-native-vector-icons/Feather";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function TransactionsScreen() {
@@ -103,6 +104,7 @@ function TransactionsScreen() {
             style={TransactionsScreenStyle.roundButton}
             onPress={handleSendPress}
           >
+            <Feather name="send" size={24} color={iconColor} />
             <Text style={TransactionsScreenStyle.mainButtonText}>
               {t("Send")}
             </Text>
@@ -114,6 +116,7 @@ function TransactionsScreen() {
             style={TransactionsScreenStyle.roundButton}
             onPress={handleReceivePress}
           >
+            <Icon name="vertical-align-bottom" size={24} color={iconColor} />
             <Text style={TransactionsScreenStyle.mainButtonText}>
               {t("Receive")}
             </Text>
@@ -247,7 +250,7 @@ function TransactionsScreen() {
           visible={addressModalVisible}
           onRequestClose={() => setAddressModalVisible(false)}
         >
-          <View style={TransactionsScreenStyle.centeredView}>
+          <BlurView intensity={10} style={TransactionsScreenStyle.centeredView}>
             <View style={TransactionsScreenStyle.receiveModalView}>
               <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <Text style={TransactionsScreenStyle.modalReceiveTitle}>
@@ -308,7 +311,7 @@ function TransactionsScreen() {
                 </Text>
               </TouchableOpacity>
             </View>
-          </View>
+          </BlurView>
         </Modal>
       </View>
     </LinearGradient>
