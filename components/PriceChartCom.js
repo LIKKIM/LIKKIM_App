@@ -2,28 +2,32 @@
 import { useState, useRef, useEffect } from "react";
 import { View, Dimensions, Text, Pressable, PanResponder } from "react-native"
 import { LineChart } from "react-native-chart-kit";
-// import * as Haptics from 'expo-haptics';
+import * as Haptics from 'expo-haptics';
 
 
 /**
- * 折线图组件,接收instId，上级ScrollViewRef。
+ * 
+ * 2024/07/29 
+ * @author 2winter
+ * @description 折线图组件,接收instId，上级ScrollViewRef。
  * @param {object} param0 
  * @returns 
  */
 export default function PriceChartCom({ instId = 'BTC-USD', parentScrollviewRef }) {
 
 
-    const load = useState(0);//TODO
+    const screenWidth = Dimensions.get('window').width;
+    const load = useState(0);//TODO 优化使用
     //選擇的數據點
     const _selectPointData = useState();
     //选择的索引
     const _selectIndex = useState(0);
     //圖表數據
     const _chartData = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+    //图表原始数据
     const _sourceData = useState([]);
     //最低和最高收盘
     const maxAndMin = useState([]);
-
     //涨幅
     const priceIncrease = useState([0, 0]);
 
@@ -41,7 +45,7 @@ export default function PriceChartCom({ instId = 'BTC-USD', parentScrollviewRef 
     }
 
 
-    //刷新手势点
+    //TODO 刷新手势点,待优化
     const updatePanResponder = (_sdata) => {
         panResponder[1](PanResponder.create({
             onStartShouldSetPanResponder: () => true,
@@ -63,10 +67,11 @@ export default function PriceChartCom({ instId = 'BTC-USD', parentScrollviewRef 
             },
         }))
     }
+
+
+
     //计算涨幅
     const calcPointPrice = (_index, is_default = true, _dataPoints = null) => {
-
-
 
         let perStr = '';//涨幅百分比
         let priceStr = '';//涨幅价格
@@ -75,14 +80,12 @@ export default function PriceChartCom({ instId = 'BTC-USD', parentScrollviewRef 
             //图表默认：收盘-开盘
             priceStr = parseFloat(_dataPoints.last[4] - _dataPoints.start[1]).toFixed(2);
             perStr = parseFloat(priceStr / _dataPoints.start[1]).toFixed(2);
-
         } else {
             //根据当前选择的数据：收盘-开盘
             priceStr = parseFloat(_sourceData[0][_index][4] - _sourceData[0][_index][1]).toFixed(2);
             perStr = parseFloat(priceStr / _sourceData[0][0][1]).toFixed(2);
-
         }
-        console.log(priceStr, perStr, _dataPoints)
+        // console.log(priceStr, perStr, _dataPoints)
         //更新涨幅数据
         priceIncrease[1]([priceStr, perStr]);
 
@@ -173,8 +176,8 @@ export default function PriceChartCom({ instId = 'BTC-USD', parentScrollviewRef 
 
             </View>
             <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 5 }}>
-                {/* TODO */}
-                <Text style={{ color: 'green', fontWeight: 'bold', color: priceIncrease[0][0] > 0 ? 'red' : 'green' }}>{`${priceIncrease[0][0] > 0 ? '+' : ''}${priceIncrease[0][0]}`}({priceIncrease[0][1]}%)</Text>
+
+                <Text style={{ color: 'green', fontWeight: 'bold', color: priceIncrease[0][0] > 0 ? 'red' : 'green' }}>{`${priceIncrease[0][0] > 0 ? '+' : ''}${priceIncrease[0][0]}`}({priceIncrease[0][1] > 0 ? '+' : ''}{priceIncrease[0][1]}%)</Text>
                 <Text style={{ marginLeft: 5, color: "gray" }}>
 
                     {_selectPointData[0] && new Date(parseFloat(_selectPointData[0][0])).toDateString() + ',' + new Date(parseFloat(_selectPointData[0][0])).toLocaleTimeString()}
@@ -205,13 +208,22 @@ export default function PriceChartCom({ instId = 'BTC-USD', parentScrollviewRef 
                 }}
                 decorator={() => {
                     if (!maxAndMin[0][0]) return null;
+
+
+                    const screenCenter = screenWidth / 2;
+                    const chartDataLength = _chartData[0].length;
+                    const minLeft = ((screenWidth / chartDataLength) * maxAndMin[0][3]) > screenCenter ? (screenWidth / chartDataLength) * maxAndMin[0][3] - 32 : (screenWidth / chartDataLength) * maxAndMin[0][3] + 32;
+                    const maxLeft = ((screenWidth / chartDataLength) * maxAndMin[0][2]) > screenCenter ? (screenWidth / chartDataLength) * maxAndMin[0][2] - 32 : (screenWidth / chartDataLength) * maxAndMin[0][2] + 32;
+                    // console.log('min:', (screenWidth / chartDataLength) * maxAndMin[0][3])
+                    // console.log('max', (screenWidth / chartDataLength) * maxAndMin[0][2])
+
                     return <>
                         {/* 最大值 */}
-                        <View key={'maxPoint'} style={{ position: 'absolute', top: 0, left: (Dimensions.get('window').width / _chartData[0].length) * maxAndMin[0][2] + 30 }}>
+                        <View key={'maxPoint'} style={{ position: 'absolute', top: 0, left: maxLeft }}>
                             <Text style={{ color: 'green' }}>${maxAndMin[0][0]}</Text>
                         </View>
                         {/* 最低值 */}
-                        <View key={'minPoint'} style={{ position: 'absolute', top: 185, left: (Dimensions.get('window').width / _chartData[0].length) * maxAndMin[0][3] + 30, }}  >
+                        <View key={'minPoint'} style={{ position: 'absolute', top: 188, left: minLeft }}  >
                             <Text style={{ color: 'green' }}>${maxAndMin[0][1]}</Text>
                         </View>
 
@@ -224,7 +236,7 @@ export default function PriceChartCom({ instId = 'BTC-USD', parentScrollviewRef 
                 withOuterLines={false}
                 onDataPointClick={({ value, data, color, index }) => {
                     //触摸反馈
-                    // Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+                    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
                     _selectPointData[1](_sourceData[0][index]);
                     _selectIndex[1](index);
                     calcPointPrice(index);
@@ -242,8 +254,6 @@ export default function PriceChartCom({ instId = 'BTC-USD', parentScrollviewRef 
                     backgroundGradientTo: "#fff",
                     decimalPlaces: 2, // optional, defaults to 2dp
                     color: () => `rgb(80,168.63)`,
-
-
                 }}
 
                 style={{ marginTop: 20, marginLeft: -32 }}
