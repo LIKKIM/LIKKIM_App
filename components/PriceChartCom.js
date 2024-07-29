@@ -9,11 +9,11 @@ import * as Haptics from 'expo-haptics';
  * 
  * 2024/07/29 
  * @author 2winter
- * @description 折线图组件,接收instId，上级ScrollViewRef。
+ * @description 折线图组件,接收instId，上级ScrollViewRef,priceFla 货币符号
  * @param {object} param0 
  * @returns 
  */
-export default function PriceChartCom({ instId = 'BTC-USD', parentScrollviewRef }) {
+export default function PriceChartCom({ instId = 'BTC-USD', parentScrollviewRef, priceFla = '$' }) {
 
 
     const screenWidth = Dimensions.get('window').width;
@@ -30,6 +30,8 @@ export default function PriceChartCom({ instId = 'BTC-USD', parentScrollviewRef 
     const maxAndMin = useState([]);
     //涨幅
     const priceIncrease = useState([0, 0]);
+    //单位
+    const priceFlag = priceFla;
 
 
     //取出最高，最低的開盤價格
@@ -79,11 +81,11 @@ export default function PriceChartCom({ instId = 'BTC-USD', parentScrollviewRef 
         if (is_default && _dataPoints) {
             //图表默认：收盘-开盘
             priceStr = parseFloat(_dataPoints.last[4] - _dataPoints.start[1]).toFixed(2);
-            perStr = parseFloat(priceStr / _dataPoints.start[1]).toFixed(2);
+            perStr = parseFloat(priceStr / _dataPoints.start[1] * 100).toFixed(2);
         } else {
             //根据当前选择的数据：收盘-开盘
-            priceStr = parseFloat(_sourceData[0][_index][4] - _sourceData[0][_index][1]).toFixed(2);
-            perStr = parseFloat(priceStr / _sourceData[0][0][1]).toFixed(2);
+            priceStr = parseFloat(_sourceData[0][_index][4] - _sourceData[0][0][1]).toFixed(2);
+            perStr = parseFloat(priceStr / _sourceData[0][0][1] * 100).toFixed(2);
         }
         // console.log(priceStr, perStr, _dataPoints)
         //更新涨幅数据
@@ -172,18 +174,15 @@ export default function PriceChartCom({ instId = 'BTC-USD', parentScrollviewRef 
         <View style={{ marginLeft: 20 }} >
 
             <View>
-                <Text style={{ fontWeight: 'bold', fontSize: 30 }}>${_selectPointData[0] ? _selectPointData[0][4] : (_chartData[0] ? _chartData[0][0] : '')}</Text>
+                <Text style={{ fontWeight: 'bold', fontSize: 30 }}>{priceFlag}{_selectPointData[0] ? _selectPointData[0][4] : (_chartData[0] ? _chartData[0][0] : '')}</Text>
 
             </View>
             <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 5 }}>
 
                 <Text style={{ color: 'green', fontWeight: 'bold', color: priceIncrease[0][0] > 0 ? 'red' : 'green' }}>{`${priceIncrease[0][0] > 0 ? '+' : ''}${priceIncrease[0][0]}`}({priceIncrease[0][1] > 0 ? '+' : ''}{priceIncrease[0][1]}%)</Text>
                 <Text style={{ marginLeft: 5, color: "gray" }}>
-
                     {_selectPointData[0] && new Date(parseFloat(_selectPointData[0][0])).toDateString() + ',' + new Date(parseFloat(_selectPointData[0][0])).toLocaleTimeString()}
-                    {
-                        !_selectPointData[0] && (selectDate[0] == '30m' ? 'past 1 day' : selectDate[0] == '1H' ? 'past 7 days' : selectDate[0] == '1W' ? 'past 1 year' : selectDate[0] == '1D' ? 'past 30 days' : '')
-                    }
+                    {!_selectPointData[0] && (selectDate[0] == '30m' ? 'past 1 day' : selectDate[0] == '1H' ? 'past 7 days' : selectDate[0] == '1W' ? 'past 1 year' : selectDate[0] == '1D' ? 'past 30 days' : '')}
 
                 </Text>
             </View>
@@ -208,8 +207,6 @@ export default function PriceChartCom({ instId = 'BTC-USD', parentScrollviewRef 
                 }}
                 decorator={() => {
                     if (!maxAndMin[0][0]) return null;
-
-
                     const screenCenter = screenWidth / 2;
                     const chartDataLength = _chartData[0].length;
                     const minLeft = ((screenWidth / chartDataLength) * maxAndMin[0][3]) > screenCenter ? (screenWidth / chartDataLength) * maxAndMin[0][3] - 32 : (screenWidth / chartDataLength) * maxAndMin[0][3] + 32;
@@ -220,11 +217,11 @@ export default function PriceChartCom({ instId = 'BTC-USD', parentScrollviewRef 
                     return <>
                         {/* 最大值 */}
                         <View key={'maxPoint'} style={{ position: 'absolute', top: 0, left: maxLeft }}>
-                            <Text style={{ color: 'green' }}>${maxAndMin[0][0]}</Text>
+                            <Text style={{ color: 'green' }}>{priceFlag}{maxAndMin[0][0]}</Text>
                         </View>
                         {/* 最低值 */}
                         <View key={'minPoint'} style={{ position: 'absolute', top: 188, left: minLeft }}  >
-                            <Text style={{ color: 'green' }}>${maxAndMin[0][1]}</Text>
+                            <Text style={{ color: 'green' }}>{priceFlag}{maxAndMin[0][1]}</Text>
                         </View>
 
                     </>
