@@ -185,7 +185,9 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       backgroundColor: backgroundColor,
       alignItems: "center",
       justifyContent: "center",
-      padding: 20,
+      paddingTop: 20, // 顶部 padding
+      paddingLeft: 20, // 左侧 padding
+      paddingRight: 20, // 右侧 padding
     },
     cancelButton: {
       borderColor: buttonBackgroundColor,

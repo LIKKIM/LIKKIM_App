@@ -671,9 +671,9 @@ function MyColdWalletScreen() {
 
           {/* Bluetooth Btn modal*/}
           <View style={{ marginTop: 40 }}>
-            <Text style={MyColdWalletScreenStyle.languageModalTitle}>
+            {/* <Text style={MyColdWalletScreenStyle.languageModalTitle}>
               {t("Bluetooth")}
-            </Text>
+            </Text> */}
             <View style={{ alignItems: "center" }}>
               <TouchableOpacity
                 style={MyColdWalletScreenStyle.roundButton}
