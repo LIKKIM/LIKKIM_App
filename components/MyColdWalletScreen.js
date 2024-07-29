@@ -29,6 +29,7 @@ import MyColdWalletScreenStyles from "../styles/MyColdWalletScreenStyle";
 import { languages } from "../config/languages";
 import base64 from "base64-js";
 import { Buffer } from "buffer";
+import appConfig from "../app.config";
 
 let PermissionsAndroid;
 if (Platform.OS === "android") {
@@ -263,6 +264,8 @@ function MyColdWalletScreen() {
     // Add your firmware update logic here
   };
 
+  const buildNumber = appConfig.ios.buildNumber;
+
   const settingsOptions = [
     {
       title: t("Change Password"),
@@ -335,7 +338,8 @@ function MyColdWalletScreen() {
     {
       title: t("Version"),
       icon: "update",
-      version: Constants.expoConfig.version,
+      version: buildNumber, // 使用导入的 buildNumber
+
       onPress: () => {},
     },
   ];
