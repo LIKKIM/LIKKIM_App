@@ -21,6 +21,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CryptoContext, DarkModeContext, usdtCrypto } from "./CryptoContext";
 import { useTranslation } from "react-i18next";
 import QRCode from "react-native-qrcode-svg"; // 确保导入 QRCode 模块
+import PriceChartCom from "./PriceChartCom";
 
 function WalletScreen({ route, navigation }) {
   const {
@@ -247,6 +248,9 @@ function WalletScreen({ route, navigation }) {
   };
 
   const closeModal = () => {
+
+    scrollViewRef?.current.setNativeProps({ scrollEnabled: true });
+
     // 动画隐藏顶部标签
     Animated.timing(tabOpacity, {
       toValue: 0, // 透明
@@ -410,6 +414,8 @@ function WalletScreen({ route, navigation }) {
 
 
 
+
+
   const renderTabContent = () => {
     switch (activeTab) {
       case "History":
@@ -438,8 +444,10 @@ function WalletScreen({ route, navigation }) {
       case "Prices":
         return (
           <>
-            <Text style={WalletScreenStyle.historyTitle}></Text>
-            <View style={WalletScreenStyle.historyContainer}></View>
+            {/* <Text style={WalletScreenStyle.historyTitle}></Text> */}
+            <View style={WalletScreenStyle.historyContainer}>
+              <PriceChartCom parentScrollviewRef={scrollViewRef} />
+            </View>
           </>
         );
       default:
@@ -470,6 +478,11 @@ function WalletScreen({ route, navigation }) {
         }}
         scrollEventThrottle={16} // 滚动事件节流，以确保 onScroll 事件不会频繁触发
       >
+
+
+
+
+
         <Animated.View
           style={[
             WalletScreenStyle.totalBalanceContainer,
