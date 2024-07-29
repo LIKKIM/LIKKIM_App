@@ -1,6 +1,6 @@
 
 import { useState, useRef, useEffect } from "react";
-import { View, Dimensions, Text, Pressable, PanResponder } from "react-native"
+import { View, Dimensions, Text, Pressable, PanResponder, ActivityIndicator } from "react-native"
 import { LineChart } from "react-native-chart-kit";
 import * as Haptics from 'expo-haptics';
 
@@ -17,7 +17,7 @@ export default function PriceChartCom({ instId = 'BTC-USD', parentScrollviewRef,
 
 
     const screenWidth = Dimensions.get('window').width;
-    const load = useState(0);//TODO 优化使用
+    const load = useState(false);//TODO 优化使用
     //選擇的數據點
     const _selectPointData = useState();
     //选择的索引
@@ -43,9 +43,11 @@ export default function PriceChartCom({ instId = 'BTC-USD', parentScrollviewRef,
         const maxIndex = values.indexOf(max);
         const minIndex = values.indexOf(min);
         maxAndMin[1]([max, min, maxIndex, minIndex]);
-        console.log('最大值&最小:', max, min);
+        // console.log('最大值&最小:', max, min);
     }
 
+    //实现横向触摸刷新点,初始化
+    const panResponder = useState(PanResponder.create());
 
     //TODO 刷新手势点,待优化
     const updatePanResponder = (_sdata) => {
@@ -55,16 +57,19 @@ export default function PriceChartCom({ instId = 'BTC-USD', parentScrollviewRef,
             onMoveShouldSetPanResponderCapture: (e, gestureState) => (Math.abs(gestureState.dx > 5) || Math.abs(gestureState.dy > 5)) ? true : false,
             onPanResponderMove: (evt, gestureState) => {
 
-                console.log('触摸点:');
-                // console.log(gestureState)
-
+                console.log('触摸点UP:');
+                console.log(gestureState.moveX)
+                // console.log(_sdata);
                 const chartWidth = Dimensions.get('window').width;
-                const numPoints = _chartData.length;
+                const numPoints = _sdata.length;
+                const singlePointWidth = chartWidth / _sdata.length;
                 const xPosition = gestureState.moveX;
-                const index = Math.floor((xPosition / chartWidth) * numPoints);
-                if (index >= 0 && index < numPoints) {
+                const index = Math.floor(xPosition / singlePointWidth);
+                console.log('触摸点的索引', index, numPoints);
+                if (index >= 0 && index <= numPoints) {
                     _selectPointData[1](_sdata[index])
                     _selectIndex[1](index);
+                    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
                 }
             },
         }))
@@ -77,7 +82,6 @@ export default function PriceChartCom({ instId = 'BTC-USD', parentScrollviewRef,
 
         let perStr = '';//涨幅百分比
         let priceStr = '';//涨幅价格
-
         if (is_default && _dataPoints) {
             //图表默认：收盘-开盘
             priceStr = parseFloat(_dataPoints.last[4] - _dataPoints.start[1]).toFixed(2);
@@ -95,22 +99,21 @@ export default function PriceChartCom({ instId = 'BTC-USD', parentScrollviewRef,
 
 
 
-
-
     //獲取API數據
     const _getData = async (_nd = '30m') => {
 
-        console.log('get Data');
+        // console.log('get Data');
+        load[1](true);
         let _rd = await fetch(`https://df.likkim.com/api/market/index-candles?instId=${instId}&bar=${_nd}`).then((res) => res.json()).catch((er) => {
-            console.error('獲取價格失敗：');
-            console.error(er instanceof Error ? er.message : er);
+            // console.error('獲取價格失敗：');
+            // console.error(er instanceof Error ? er.message : er);
         });
+        load[1](false);
         if (!_rd) return;
         const _cdata = _rd.data.map((r) => parseInt(r[4]));
         _getMaxAndMinPrice(_rd.data);
         _chartData[1](_cdata);
         _sourceData[1](_rd.data)
-        // _selectPointData[1](_rd.data[0]);
         updatePanResponder(_rd.data);
         calcPointPrice(0, true, { start: _rd.data[0], last: _rd.data[_rd.data.length - 1] });
 
@@ -135,39 +138,6 @@ export default function PriceChartCom({ instId = 'BTC-USD', parentScrollviewRef,
         _getData(_nd);
     }
 
-    //切换点
-
-
-
-
-
-
-    //实现横向触摸刷新点,初始化
-    const panResponder = useState(PanResponder.create({
-        onStartShouldSetPanResponderCapture: () => true,
-        onStartShouldSetPanResponderCapture: () => false,
-        onMoveShouldSetPanResponderCapture: (e, gestureState) => (Math.abs(gestureState.dx > 5) || Math.abs(gestureState.dy > 5)) ? true : false,
-        onPanResponderMove: (evt, gestureState) => {
-
-            console.log('触摸点:');
-            // console.log(gestureState)
-
-
-            const chartWidth = Dimensions.get('window').width - 32;
-            const numPoints = _chartData.length;
-            const xPosition = gestureState.moveX;
-            const index = Math.floor((xPosition / chartWidth) * numPoints);
-            if (index >= 0 && index < numPoints) {
-                _selectPointData[1](_sourceData[0][index]);
-                _selectIndex[1](index);
-            }
-        },
-    })
-    );
-
-
-
-
 
     return <View style={{ marginVertical: 10 }}>
 
@@ -175,7 +145,6 @@ export default function PriceChartCom({ instId = 'BTC-USD', parentScrollviewRef,
 
             <View>
                 <Text style={{ fontWeight: 'bold', fontSize: 30 }}>{priceFlag}{_selectPointData[0] ? _selectPointData[0][4] : (_chartData[0] ? _chartData[0][0] : '')}</Text>
-
             </View>
             <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 5 }}>
 
@@ -202,15 +171,15 @@ export default function PriceChartCom({ instId = 'BTC-USD', parentScrollviewRef,
                 renderDotContent={({ x, y, indexData, index }) => {
 
                     if (!_selectPointData[0]) return null;
-                    return indexData == Math.floor(_selectPointData[0][4]) ? <View style={{ width: 40, height: 40, backgroundColor: 'rgba(80,208,63,0.1)', borderRadius: 50, position: 'absolute', top: y - 20, left: x - 20 }}></View> : null;
+                    return indexData == Math.floor(_selectPointData[0][4]) ? <View key={index} style={{ width: 40, height: 40, backgroundColor: 'rgba(80,208,63,0.1)', borderRadius: 50, position: 'absolute', top: y - 20, left: x - 20 }}></View> : null;
 
                 }}
                 decorator={() => {
                     if (!maxAndMin[0][0]) return null;
                     const screenCenter = screenWidth / 2;
                     const chartDataLength = _chartData[0].length;
-                    const minLeft = ((screenWidth / chartDataLength) * maxAndMin[0][3]) > screenCenter ? (screenWidth / chartDataLength) * maxAndMin[0][3] - 32 : (screenWidth / chartDataLength) * maxAndMin[0][3] + 32;
-                    const maxLeft = ((screenWidth / chartDataLength) * maxAndMin[0][2]) > screenCenter ? (screenWidth / chartDataLength) * maxAndMin[0][2] - 32 : (screenWidth / chartDataLength) * maxAndMin[0][2] + 32;
+                    const minLeft = ((screenWidth / chartDataLength) * maxAndMin[0][3]) > screenCenter ? (screenWidth / chartDataLength) * maxAndMin[0][3] - 45 : (screenWidth / chartDataLength) * maxAndMin[0][3] + 32;
+                    const maxLeft = ((screenWidth / chartDataLength) * maxAndMin[0][2]) > screenCenter ? (screenWidth / chartDataLength) * maxAndMin[0][2] - 45 : (screenWidth / chartDataLength) * maxAndMin[0][2] + 32;
                     // console.log('min:', (screenWidth / chartDataLength) * maxAndMin[0][3])
                     // console.log('max', (screenWidth / chartDataLength) * maxAndMin[0][2])
 
@@ -223,6 +192,12 @@ export default function PriceChartCom({ instId = 'BTC-USD', parentScrollviewRef,
                         <View key={'minPoint'} style={{ position: 'absolute', top: 188, left: minLeft }}  >
                             <Text style={{ color: 'green' }}>{priceFlag}{maxAndMin[0][1]}</Text>
                         </View>
+
+                        {
+                            load[0] && <View style={{ justifyContent: 'center' }}>
+                                <ActivityIndicator style={{ alignSelf: 'center', margin: 10 }} />
+                            </View>
+                        }
 
                     </>
                 }}
