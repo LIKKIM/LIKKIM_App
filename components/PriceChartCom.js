@@ -46,6 +46,7 @@ export default function PriceChartCom({
   const textColor = isDarkMode ? "#fff" : "#000";
   const textTabColor = isDarkMode ? "#6E6E7F" : "#8C8C9C";
   const activeBackgroundColor = isDarkMode ? "#1E1E2A" : "#fff";
+  const inactiveBackgroundColor = "transparent";
   //取出最高，最低的開盤價格
   const _getMaxAndMinPrice = (data) => {
     const values = data.map((item) => parseFloat(item[4]));
@@ -325,7 +326,9 @@ export default function PriceChartCom({
         <View
           style={{
             backgroundColor:
-              selectDate[0] == "30m" ? activeBackgroundColor : "transparent",
+              selectDate[0] === "30m"
+                ? activeBackgroundColor
+                : inactiveBackgroundColor,
             paddingHorizontal: 10,
             paddingVertical: 5,
             borderRadius: 8,
@@ -337,9 +340,13 @@ export default function PriceChartCom({
             <Text style={{ textAlign: "center", color: textColor }}>1D</Text>
           </Pressable>
         </View>
+
         <View
           style={{
-            backgroundColor: selectDate[0] == "1H" ? "#fff" : "transparent",
+            backgroundColor:
+              selectDate[0] === "1H"
+                ? activeBackgroundColor
+                : inactiveBackgroundColor,
             paddingHorizontal: 10,
             paddingVertical: 5,
             borderRadius: 8,
@@ -351,9 +358,13 @@ export default function PriceChartCom({
             <Text style={{ textAlign: "center", color: textColor }}>1W</Text>
           </Pressable>
         </View>
+
         <View
           style={{
-            backgroundColor: selectDate[0] == "1D" ? "#fff" : "transparent",
+            backgroundColor:
+              selectDate[0] === "1D"
+                ? activeBackgroundColor
+                : inactiveBackgroundColor,
             paddingHorizontal: 10,
             paddingVertical: 5,
             borderRadius: 8,
@@ -365,9 +376,13 @@ export default function PriceChartCom({
             <Text style={{ textAlign: "center", color: textColor }}>1M</Text>
           </Pressable>
         </View>
+
         <View
           style={{
-            backgroundColor: selectDate[0] == "1W" ? "#fff" : "transparent",
+            backgroundColor:
+              selectDate[0] === "1W"
+                ? activeBackgroundColor
+                : inactiveBackgroundColor,
             paddingHorizontal: 10,
             paddingVertical: 5,
             borderRadius: 8,
