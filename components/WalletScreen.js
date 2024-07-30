@@ -249,7 +249,6 @@ function WalletScreen({ route, navigation }) {
   };
 
   const closeModal = () => {
-
     scrollViewRef?.current.setNativeProps({ scrollEnabled: true });
 
     // 动画隐藏顶部标签
@@ -411,8 +410,6 @@ function WalletScreen({ route, navigation }) {
         (cardStartPositions.current[_index] = py)
     );
 
-
-
   const renderTabContent = () => {
     switch (activeTab) {
       case "History":
@@ -442,9 +439,14 @@ function WalletScreen({ route, navigation }) {
         return (
           <>
             {/* TODO K线图表组件 */}
-            <View style={WalletScreenStyle.historyContainer}>
+
+            <View style={WalletScreenStyle.priceContainer}>
               {/* 传入指定的instId&货币符号 */}
-              <PriceChartCom instId='BTC-USD' priceFla='$' parentScrollviewRef={scrollViewRef} />
+              <PriceChartCom
+                instId="BTC-USD"
+                priceFla="$"
+                parentScrollviewRef={scrollViewRef}
+              />
             </View>
           </>
         );
@@ -478,11 +480,6 @@ function WalletScreen({ route, navigation }) {
         }}
         scrollEventThrottle={16} // 滚动事件节流，以确保 onScroll 事件不会频繁触发
       >
-
-
-
-
-
         <Animated.View
           style={[
             WalletScreenStyle.totalBalanceContainer,
@@ -695,7 +692,7 @@ function WalletScreen({ route, navigation }) {
                   style={[
                     WalletScreenStyle.tabButtonText,
                     activeTab === "History" &&
-                    WalletScreenStyle.activeTabButtonText,
+                      WalletScreenStyle.activeTabButtonText,
                   ]}
                 >
                   {t("History")}
@@ -712,7 +709,7 @@ function WalletScreen({ route, navigation }) {
                   style={[
                     WalletScreenStyle.tabButtonText,
                     activeTab === "Prices" &&
-                    WalletScreenStyle.activeTabButtonText,
+                      WalletScreenStyle.activeTabButtonText,
                   ]}
                 >
                   {t("Prices")}
