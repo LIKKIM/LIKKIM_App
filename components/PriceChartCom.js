@@ -45,7 +45,7 @@ export default function PriceChartCom({
   // 根据 isDarkMode 设置 textColor
   const textColor = isDarkMode ? "#fff" : "#000";
   const textTabColor = isDarkMode ? "#6E6E7F" : "#8C8C9C";
-  const activeBackgroundColor = isDarkMode ? "#1E1E2A" : "#fff";
+  const activeBackgroundColor = isDarkMode ? "#24234C" : "#fff";
   const inactiveBackgroundColor = "transparent";
   //取出最高，最低的開盤價格
   const _getMaxAndMinPrice = (data) => {
@@ -176,9 +176,9 @@ export default function PriceChartCom({
         >
           <Text
             style={{
-              color: "green",
+              color: "#2A9737",
               fontWeight: "bold",
-              color: priceIncrease[0][0] > 0 ? "red" : "green",
+              color: priceIncrease[0][0] > 0 ? "#47B480" : "#D2464B",
             }}
           >
             {`${priceIncrease[0][0] > 0 ? "+" : ""}${priceIncrease[0][0]}`}(
@@ -254,9 +254,9 @@ export default function PriceChartCom({
                 {/* 最大值 */}
                 <View
                   key={"maxPoint"}
-                  style={{ position: "absolute", top: 0, left: maxLeft }}
+                  style={{ position: "absolute", top: -10, left: maxLeft }}
                 >
-                  <Text style={{ color: "green" }}>
+                  <Text style={{ color: "#2A9737" }}>
                     {priceFlag}
                     {maxAndMin[0][0]}
                   </Text>
@@ -266,7 +266,7 @@ export default function PriceChartCom({
                   key={"minPoint"}
                   style={{ position: "absolute", top: 188, left: minLeft }}
                 >
-                  <Text style={{ color: "green" }}>
+                  <Text style={{ color: "#2A9737" }}>
                     {priceFlag}
                     {maxAndMin[0][1]}
                   </Text>
