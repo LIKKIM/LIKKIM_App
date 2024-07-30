@@ -1,4 +1,5 @@
-import { useState, useRef, useEffect } from "react";
+// PriceChartCom.js
+import React, { useState, useEffect, useRef, useContext } from "react";
 import {
   View,
   Dimensions,
@@ -9,7 +10,7 @@ import {
 } from "react-native";
 import { LineChart } from "react-native-chart-kit";
 import * as Haptics from "expo-haptics";
-
+import { DarkModeContext } from "./CryptoContext";
 /**
  *
  * 2024/07/29
@@ -39,7 +40,10 @@ export default function PriceChartCom({
   const priceIncrease = useState([0, 0]);
   //单位
   const priceFlag = priceFla;
-
+  // 从上下文获取 isDarkMode 状态
+  const { isDarkMode } = useContext(DarkModeContext);
+  // 根据 isDarkMode 设置 textColor
+  const textColor = isDarkMode ? "#fff" : "#000";
   //取出最高，最低的開盤價格
   const _getMaxAndMinPrice = (data) => {
     const values = data.map((item) => parseFloat(item[4]));
@@ -155,7 +159,7 @@ export default function PriceChartCom({
     <View style={{ marginVertical: 10 }}>
       <View style={{ marginLeft: 20 }}>
         <View>
-          <Text style={{ fontWeight: "bold", fontSize: 30 }}>
+          <Text style={{ fontWeight: "bold", fontSize: 30, color: textColor }}>
             {priceFlag}
             {_selectPointData[0]
               ? _selectPointData[0][4]
