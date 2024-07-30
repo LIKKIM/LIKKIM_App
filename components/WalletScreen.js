@@ -684,23 +684,6 @@ function WalletScreen({ route, navigation }) {
               <TouchableOpacity
                 style={[
                   WalletScreenStyle.tabButton,
-                  activeTab === "History" && WalletScreenStyle.activeTabButton,
-                ]}
-                onPress={() => setActiveTab("History")}
-              >
-                <Text
-                  style={[
-                    WalletScreenStyle.tabButtonText,
-                    activeTab === "History" &&
-                      WalletScreenStyle.activeTabButtonText,
-                  ]}
-                >
-                  {t("History")}
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={[
-                  WalletScreenStyle.tabButton,
                   activeTab === "Prices" && WalletScreenStyle.activeTabButton,
                 ]}
                 onPress={() => setActiveTab("Prices")}
@@ -713,6 +696,23 @@ function WalletScreen({ route, navigation }) {
                   ]}
                 >
                   {t("Prices")}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[
+                  WalletScreenStyle.tabButton,
+                  activeTab === "History" && WalletScreenStyle.activeTabButton,
+                ]}
+                onPress={() => setActiveTab("History")}
+              >
+                <Text
+                  style={[
+                    WalletScreenStyle.tabButtonText,
+                    activeTab === "History" &&
+                      WalletScreenStyle.activeTabButtonText,
+                  ]}
+                >
+                  {t("History")}
                 </Text>
               </TouchableOpacity>
             </View>
