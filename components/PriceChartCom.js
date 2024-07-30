@@ -44,6 +44,8 @@ export default function PriceChartCom({
   const { isDarkMode } = useContext(DarkModeContext);
   // 根据 isDarkMode 设置 textColor
   const textColor = isDarkMode ? "#fff" : "#000";
+  const textTabColor = isDarkMode ? "#6E6E7F" : "#8C8C9C";
+  const activeBackgroundColor = isDarkMode ? "#1E1E2A" : "#fff";
   //取出最高，最低的開盤價格
   const _getMaxAndMinPrice = (data) => {
     const values = data.map((item) => parseFloat(item[4]));
@@ -312,7 +314,7 @@ export default function PriceChartCom({
         style={{
           flexDirection: "row",
           justifyContent: "space-around",
-          backgroundColor: "rgba(0,0,0,0.1)",
+          backgroundColor: isDarkMode ? "#484692" : "#DEDEE1",
           padding: 2,
           borderRadius: 8,
           marginTop: "0%",
@@ -322,7 +324,8 @@ export default function PriceChartCom({
       >
         <View
           style={{
-            backgroundColor: selectDate[0] == "30m" ? "#fff" : "transparent",
+            backgroundColor:
+              selectDate[0] == "30m" ? activeBackgroundColor : "transparent",
             paddingHorizontal: 10,
             paddingVertical: 5,
             borderRadius: 8,
@@ -331,7 +334,7 @@ export default function PriceChartCom({
           }}
         >
           <Pressable onPress={() => changeDate("30m")}>
-            <Text style={{ textAlign: "center" }}>1D</Text>
+            <Text style={{ textAlign: "center", color: textColor }}>1D</Text>
           </Pressable>
         </View>
         <View
@@ -345,7 +348,7 @@ export default function PriceChartCom({
           }}
         >
           <Pressable onPress={() => changeDate("1H")}>
-            <Text style={{ textAlign: "center" }}>1W</Text>
+            <Text style={{ textAlign: "center", color: textColor }}>1W</Text>
           </Pressable>
         </View>
         <View
@@ -359,7 +362,7 @@ export default function PriceChartCom({
           }}
         >
           <Pressable onPress={() => changeDate("1D")}>
-            <Text style={{ textAlign: "center" }}>1M</Text>
+            <Text style={{ textAlign: "center", color: textColor }}>1M</Text>
           </Pressable>
         </View>
         <View
@@ -372,7 +375,7 @@ export default function PriceChartCom({
           }}
         >
           <Pressable onPress={() => changeDate("1W")}>
-            <Text style={{ textAlign: "center" }}>1Y</Text>
+            <Text style={{ textAlign: "center", color: textColor }}>1Y</Text>
           </Pressable>
         </View>
       </View>
