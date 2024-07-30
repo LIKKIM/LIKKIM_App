@@ -291,7 +291,7 @@ function WalletScreen({ route, navigation }) {
     setSelectedAddress(crypto?.address || "Unknown");
     setSelectedCardName(cryptoName);
     setSelectedCrypto(crypto);
-
+    setActiveTab("Prices");
     scrollViewRef.current.scrollTo({ y: 0, animated: true });
     setTimeout(() => {
       scrollYOffset.current = 0;
