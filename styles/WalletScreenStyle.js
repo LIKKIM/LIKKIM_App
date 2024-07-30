@@ -99,6 +99,11 @@ const WalletScreenStyles = (isDarkMode) => {
       justifyContent: "center",
       height: 300,
     },
+    priceContainer: {
+      width: "100%",
+      paddingHorizontal: 20,
+      height: 360,
+    },
     linearGradient: {
       flex: 1,
       backgroundColor: backgroundColor,
@@ -291,8 +296,7 @@ const WalletScreenStyles = (isDarkMode) => {
       borderRadius: 30,
       height: 60,
       alignItems: "center",
-      marginBottom: 60,
-      marginTop: 30
+      bottom: 0,
     },
     cancelButton: {
       borderWidth: 3, // 设置边框宽度

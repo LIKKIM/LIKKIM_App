@@ -1174,7 +1174,7 @@ PODS:
     - React-Core
   - RNSVG (15.4.0):
     - React-Core
-  - RNVectorIcons (10.0.3):
+  - RNVectorIcons (10.1.0):
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
@@ -1489,11 +1489,11 @@ SPEC CHECKSUMS:
   RNCAsyncStorage: 826b603ae9c0f88b5ac4e956801f755109fa4d5c
   RNReanimated: f6b02d8f5eaa2830296411d4ec3b8ef5442dd13d
   RNScreens: 17e2f657f1b09a71ec3c821368a04acbb7ebcb46
-  RNSVG: 3001c6aa5fbcf5383f98c2d61bf8b91b9ebda75c
-  RNVectorIcons: 73ab573085f65a572d3b6233e68996d4707fd505
+  RNSVG: cb24fb322de8c1ebf59904e7aca0447bb8dbed5a
+  RNVectorIcons: 96e8c5c45609932bb2f8347e1c709bcca0e95654
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: 805bf71192903b20fc14babe48080582fee65a80
 
 PODFILE CHECKSUM: 5d7b44bec76aa82cc06ffe0e8f0a3c991ac9b619
 
-COCOAPODS: 1.12.0
+COCOAPODS: 1.15.2
