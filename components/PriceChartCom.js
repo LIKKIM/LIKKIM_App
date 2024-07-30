@@ -17,7 +17,7 @@ export default function PriceChartCom({ instId = 'BTC-USD', parentScrollviewRef,
 
 
     const screenWidth = Dimensions.get('window').width;
-    const load = useState(false);//TODO 优化使用
+    const load = useState(true);
     //選擇的數據點
     const _selectPointData = useState();
     //选择的索引
@@ -46,39 +46,9 @@ export default function PriceChartCom({ instId = 'BTC-USD', parentScrollviewRef,
         // console.log('最大值&最小:', max, min);
     }
 
-    //实现横向触摸刷新点,初始化
-    const panResponder = useState(PanResponder.create());
-
-    //TODO 刷新手势点,待优化
-    const updatePanResponder = (_sdata) => {
-        panResponder[1](PanResponder.create({
-            onStartShouldSetPanResponder: () => true,
-            onStartShouldSetPanResponderCapture: () => false,
-            onMoveShouldSetPanResponderCapture: (e, gestureState) => (Math.abs(gestureState.dx > 5) || Math.abs(gestureState.dy > 5)) ? true : false,
-            onPanResponderMove: (evt, gestureState) => {
-
-                console.log('触摸点UP:');
-                console.log(gestureState.moveX)
-                // console.log(_sdata);
-                const chartWidth = Dimensions.get('window').width;
-                const numPoints = _sdata.length;
-                const singlePointWidth = chartWidth / _sdata.length;
-                const xPosition = gestureState.moveX;
-                const index = Math.floor(xPosition / singlePointWidth);
-                console.log('触摸点的索引', index, numPoints);
-                if (index >= 0 && index <= numPoints) {
-                    _selectPointData[1](_sdata[index])
-                    _selectIndex[1](index);
-                    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                }
-            },
-        }))
-    }
-
-
 
     //计算涨幅
-    const calcPointPrice = (_index, is_default = true, _dataPoints = null) => {
+    const calcPointPrice = (_index, is_default = true, _dataPoints = null, _dataSource = null) => {
 
         let perStr = '';//涨幅百分比
         let priceStr = '';//涨幅价格
@@ -87,15 +57,46 @@ export default function PriceChartCom({ instId = 'BTC-USD', parentScrollviewRef,
             priceStr = parseFloat(_dataPoints.last[4] - _dataPoints.start[1]).toFixed(2);
             perStr = parseFloat(priceStr / _dataPoints.start[1] * 100).toFixed(2);
         } else {
+
             //根据当前选择的数据：收盘-开盘
-            priceStr = parseFloat(_sourceData[0][_index][4] - _sourceData[0][0][1]).toFixed(2);
-            perStr = parseFloat(priceStr / _sourceData[0][0][1] * 100).toFixed(2);
+
+            if (!_sourceData[0][_index] && !_dataSource) return;
+            const _parseData = _dataSource ?? _sourceData[0];
+            priceStr = parseFloat(_parseData[_index][4] - _parseData[0][1]).toFixed(2);
+            perStr = parseFloat(priceStr / _parseData[0][1] * 100).toFixed(2);
         }
-        // console.log(priceStr, perStr, _dataPoints)
         //更新涨幅数据
         priceIncrease[1]([priceStr, perStr]);
 
     }
+
+    //实现横向触摸刷新点,初始化
+    const panResponder = useState(PanResponder.create());
+
+    //刷新手势点,待优化
+    const updatePanResponder = (_sdata) => {
+        panResponder[1](PanResponder.create({
+            onStartShouldSetPanResponder: () => true,
+            onStartShouldSetPanResponderCapture: () => false,
+            onMoveShouldSetPanResponderCapture: (e, gestureState) => (Math.abs(gestureState.dx > 5) || Math.abs(gestureState.dy > 5)) ? true : false,
+            onPanResponderMove: (evt, gestureState) => {
+                const chartWidth = screenWidth;
+                const numPoints = _sdata.length;
+                const singlePointWidth = chartWidth / _sdata.length;
+                const xPosition = gestureState.moveX;
+                const index = Math.floor(xPosition / singlePointWidth);
+                if (index >= 0 && index <= numPoints) {
+                    _selectPointData[1](_sdata[index])
+                    _selectIndex[1](index);
+                    calcPointPrice(index, false, null, _sdata);
+                    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                }
+            },
+        }))
+    }
+
+
+
 
 
 
@@ -108,12 +109,13 @@ export default function PriceChartCom({ instId = 'BTC-USD', parentScrollviewRef,
             // console.error('獲取價格失敗：');
             // console.error(er instanceof Error ? er.message : er);
         });
-        load[1](false);
+
         if (!_rd) return;
         const _cdata = _rd.data.map((r) => parseInt(r[4]));
         _getMaxAndMinPrice(_rd.data);
         _chartData[1](_cdata);
-        _sourceData[1](_rd.data)
+        _sourceData[1](_rd.data);
+        load[1](false);
         updatePanResponder(_rd.data);
         calcPointPrice(0, true, { start: _rd.data[0], last: _rd.data[_rd.data.length - 1] });
 
@@ -124,6 +126,7 @@ export default function PriceChartCom({ instId = 'BTC-USD', parentScrollviewRef,
 
     //切換數據
     const selectDate = useState(() => {
+
         _getData().catch((er) => null);
         parentScrollviewRef?.current.setNativeProps({ scrollEnabled: false });
         return '30m';

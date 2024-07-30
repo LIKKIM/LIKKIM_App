@@ -140,6 +140,7 @@ function WalletScreen({ route, navigation }) {
     const loadCryptoCards = async () => {
       try {
         const storedCards = await AsyncStorage.getItem("cryptoCards");
+        console.log(storedCards);
         if (storedCards !== null) {
           setCryptoCards(JSON.parse(storedCards));
           setAddedCryptos(JSON.parse(storedCards)); // 加载时同步 addedCryptos
@@ -440,9 +441,10 @@ function WalletScreen({ route, navigation }) {
       case "Prices":
         return (
           <>
-            {/* <Text style={WalletScreenStyle.historyTitle}></Text> */}
+            {/* TODO K线图表组件 */}
             <View style={WalletScreenStyle.historyContainer}>
-              <PriceChartCom parentScrollviewRef={scrollViewRef} />
+              {/* 传入指定的instId&货币符号 */}
+              <PriceChartCom instId='BTC-USD' priceFla='$' parentScrollviewRef={scrollViewRef} />
             </View>
           </>
         );
@@ -693,7 +695,7 @@ function WalletScreen({ route, navigation }) {
                   style={[
                     WalletScreenStyle.tabButtonText,
                     activeTab === "History" &&
-                      WalletScreenStyle.activeTabButtonText,
+                    WalletScreenStyle.activeTabButtonText,
                   ]}
                 >
                   {t("History")}
@@ -710,7 +712,7 @@ function WalletScreen({ route, navigation }) {
                   style={[
                     WalletScreenStyle.tabButtonText,
                     activeTab === "Prices" &&
-                      WalletScreenStyle.activeTabButtonText,
+                    WalletScreenStyle.activeTabButtonText,
                   ]}
                 >
                   {t("Prices")}
