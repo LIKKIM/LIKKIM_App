@@ -146,7 +146,13 @@ export default function PriceChartCom({
   //切換數據
   const selectDate = useState(() => {
     _getData().catch((er) => null);
-    parentScrollviewRef?.current.setNativeProps({ scrollEnabled: false });
+    // 确保 parentScrollviewRef.current 不为空且支持 setNativeProps
+    if (
+      parentScrollviewRef.current &&
+      typeof parentScrollviewRef.current.setNativeProps === "function"
+    ) {
+      parentScrollviewRef.current.setNativeProps({ scrollEnabled: false });
+    }
     return "30m";
   });
 
