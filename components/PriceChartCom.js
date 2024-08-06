@@ -200,7 +200,7 @@ export default function PriceChartCom({
                 ).toLocaleTimeString()}
             {!_selectPointData[0] &&
               (selectDate[0] == "30m"
-                ? "past 1 day"
+                ? "past 24 hours"
                 : selectDate[0] == "1H"
                 ? "past 7 days"
                 : selectDate[0] == "1W"
