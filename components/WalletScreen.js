@@ -642,7 +642,9 @@ function WalletScreen({ route, navigation }) {
                             color: priceChange > 0 ? "#47B480" : "#D2464B",
                           }}
                         >
-                          {`${priceChange > 0 ? "+" : ""}${priceChange}%`}
+                          {`${
+                            percentageChange > 0 ? "+" : ""
+                          }${percentageChange}%`}
                         </Text>
                         <Text
                           style={[
