@@ -474,7 +474,7 @@ function WalletScreen({ route, navigation }) {
             <View style={WalletScreenStyle.priceContainer}>
               {/* 传入指定的instId&货币符号 */}
               <PriceChartCom
-                instId="BTC-USD"
+                instId={`${selectedCrypto?.shortName}-USD`}
                 priceFla="$"
                 parentScrollviewRef={scrollViewRef}
               />
