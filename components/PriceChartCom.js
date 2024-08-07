@@ -75,7 +75,6 @@ export default function PriceChartCom({
       perStr = parseFloat((priceStr / _dataPoints.start[1]) * 100).toFixed(2);
     } else {
       //根据当前选择的数据：收盘-开盘
-
       if (!_sourceData[0][_index] && !_dataSource) return;
       const _parseData = _dataSource ?? _sourceData[0];
       priceStr = parseFloat(_parseData[_index][4] - _parseData[0][1]).toFixed(
@@ -131,7 +130,7 @@ export default function PriceChartCom({
       });
 
     if (!_rd) return;
-    const _cdata = _rd.data.map((r) => parseInt(r[4]));
+    const _cdata = _rd.data.map((r) => parseFloat(r[4]));
     _getMaxAndMinPrice(_rd.data);
     _chartData[1](_cdata);
     _sourceData[1](_rd.data);
@@ -158,7 +157,7 @@ export default function PriceChartCom({
 
   //更新API查询范围
   const changeDate = (_nd) => {
-    _selectIndex[1](0);
+    _selectIndex;
     _selectPointData[1](null);
     selectDate[1](_nd);
     _getData(_nd);
@@ -300,7 +299,7 @@ export default function PriceChartCom({
             _selectIndex[1](index);
             calcPointPrice(index);
           }}
-          yAxisInterval={1}
+          yAxisInterval={(maxAndMin[0][0] - maxAndMin[0][1]) / 5}
           chartConfig={{
             fillShadowGradientFrom: "#fff",
             fillShadowGradientToOpacity: 0,
