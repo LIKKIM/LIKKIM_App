@@ -100,6 +100,7 @@ i18n
           "Firmware Update": "Firmware Update",
           "Sync balances to LIKKIM coldwallet":
             "Sync balances to LIKKIM coldwallet",
+          "No data available": "No data available",
         },
       },
       zh: {
@@ -188,6 +189,7 @@ i18n
             "资产只能在同一链内发送。",
           "Firmware Update": "固件更新",
           "Sync balances to LIKKIM coldwallet": "同步余额到 LIKKIM 冷钱包",
+          "No data available": "暂无数据",
         },
       },
       "zh-TW": {
@@ -274,6 +276,7 @@ i18n
             "資產只能在同一鏈內發送。",
           "Firmware Update": "固件更新",
           "Sync balances to LIKKIM coldwallet": "同步餘額到 LIKKIM 冷錢包",
+          "No data available": "暫無數據",
         },
       },
       fr: {
@@ -372,6 +375,7 @@ i18n
           "Firmware Update": "Mise à jour du firmware",
           "Sync balances to LIKKIM coldwallet":
             "Synchroniser les soldes avec le portefeuille froid LIKKIM",
+          "No data available": "Aucune donnée disponible",
         },
       },
       es: {
@@ -470,6 +474,7 @@ i18n
           "Firmware Update": "Actualización de firmware",
           "Sync balances to LIKKIM coldwallet":
             "Sincronizar saldos con la billetera fría LIKKIM",
+          "No data available": "No hay datos disponibles",
         },
       },
       ar: {
@@ -563,6 +568,7 @@ i18n
           "Firmware Update": "تحديث البرنامج الثابت",
           "Sync balances to LIKKIM coldwallet":
             "مزامنة الأرصدة مع محفظة LIKKIM الباردة",
+          "No data available": "لا توجد بيانات متاحة",
         },
       },
       ja: {
@@ -660,6 +666,7 @@ i18n
           "Firmware Update": "تحديث البرنامج الثابت",
           "Sync balances to LIKKIM coldwallet":
             "مزامنة الأرصدة مع محفظة LIKKIM الباردة",
+          "No data available": "データがありません",
         },
       },
       ru: {
@@ -757,6 +764,7 @@ i18n
           "Firmware Update": "Обновление прошивки",
           "Sync balances to LIKKIM coldwallet":
             "Синхронизировать балансы с холодным кошельком LIKKIM",
+          "No data available": "Данные недоступны",
         },
       },
       ko: {
@@ -849,6 +857,7 @@ i18n
           "Firmware Update": "펌웨어 업데이트",
           "Sync balances to LIKKIM coldwallet":
             "LIKKIM 콜드 월렛으로 잔액 동기화",
+          "No data available": "데이터가 없습니다",
         },
       },
       pt: {
@@ -946,6 +955,7 @@ i18n
           "Firmware Update": "Atualização de firmware",
           "Sync balances to LIKKIM coldwallet":
             "Sincronizar saldos com a carteira fria LIKKIM",
+          "No data available": "Nenhum dado disponível",
         },
       },
       "pt-BR": {
@@ -1045,6 +1055,7 @@ i18n
           "Firmware Update": "Atualização de firmware",
           "Sync balances to LIKKIM coldwallet":
             "Sincronizar saldos com a carteira fria LIKKIM",
+          "No data available": "Nenhum dado disponível",
         },
       },
       it: {
@@ -1144,6 +1155,7 @@ i18n
           "Firmware Update": "Aggiornamento firmware",
           "Sync balances to LIKKIM coldwallet":
             "Sincronizza saldi con il portafoglio freddo LIKKIM",
+          "No data available": "Nessun dato disponibile",
         },
       },
       de: {
@@ -1245,6 +1257,7 @@ i18n
           "Firmware Update": "Firmware-Aktualisierung",
           "Sync balances to LIKKIM coldwallet":
             "Salden mit LIKKIM Cold Wallet synchronisieren",
+          "No data available": "Keine Daten verfügbar",
         },
       },
       hi: {
@@ -1343,6 +1356,7 @@ i18n
           "Firmware Update": "फर्मवेयर अपडेट",
           "Sync balances to LIKKIM coldwallet":
             "LIKKIM कोल्डवॉलेट में बैलेंस सिंक करें",
+          "No data available": "कोई डेटा उपलब्ध नहीं है",
         },
       },
       mn: {
@@ -1442,6 +1456,7 @@ i18n
           "Firmware Update": "Фирмвэр шинэчлэх",
           "Sync balances to LIKKIM coldwallet":
             "LIKKIM хүйтэн түрийвчтэй тэнцвэрийг синк хийх",
+          "No data available": "Мэдээлэл байхгүй",
         },
       },
       th: {
@@ -1534,6 +1549,7 @@ i18n
           "Firmware Update": "อัปเดตเฟิร์มแวร์",
           "Sync balances to LIKKIM coldwallet":
             "ซิงค์ยอดคงเหลือกับกระเป๋าเงินเย็น LIKKIM",
+          "No data available": "ไม่มีข้อมูล",
         },
       },
       uk: {
@@ -1629,6 +1645,7 @@ i18n
           "Firmware Update": "Оновлення прошивки",
           "Sync balances to LIKKIM coldwallet":
             "Синхронізація балансів із холодним гаманцем LIKKIM",
+          "No data available": "Дані недоступні",
         },
       },
       vi: {
@@ -1724,6 +1741,7 @@ i18n
           "Firmware Update": "Cập nhật firmware",
           "Sync balances to LIKKIM coldwallet":
             "Đồng bộ số dư với ví lạnh LIKKIM",
+          "No data available": "Không có dữ liệu",
         },
       },
       id: {
@@ -1822,6 +1840,7 @@ i18n
           "Firmware Update": "Pembaruan firmware",
           "Sync balances to LIKKIM coldwallet":
             "Sinkronkan saldo ke dompet dingin LIKKIM",
+          "No data available": "Tidak ada data",
         },
       },
       tl: {
@@ -1923,6 +1942,7 @@ i18n
           "Firmware Update": "Pag-update ng firmware",
           "Sync balances to LIKKIM coldwallet":
             "I-sync ang mga balanse sa LIKKIM coldwallet",
+          "No data available": "Walang magagamit na data",
         },
       },
       bn: {
@@ -2020,6 +2040,7 @@ i18n
           "Firmware Update": "ফার্মওয়্যার আপডেট",
           "Sync balances to LIKKIM coldwallet":
             "LIKKIM ঠান্ডা ওয়ালেটে ব্যালেন্স সিঙ্ক করুন",
+          "No data available": "কোনো তথ্য উপলব্ধ নেই",
         },
       },
     },
