@@ -131,7 +131,7 @@ export default function PriceChartCom({
       });
 
     if (!_rd) return;
-    const _cdata = _rd.data.map((r) => parseFloat(r[4]));
+    const _cdata = _rd.data.map((r) => parseInt(r[4]));
     _getMaxAndMinPrice(_rd.data);
     _chartData[1](_cdata);
     _sourceData[1](_rd.data);
@@ -300,7 +300,7 @@ export default function PriceChartCom({
             _selectIndex[1](index);
             calcPointPrice(index);
           }}
-          yAxisInterval={(maxAndMin[0][0] - maxAndMin[0][1]) / 5}
+          yAxisInterval={1}
           chartConfig={{
             fillShadowGradientFrom: "#fff",
             fillShadowGradientToOpacity: 0,
