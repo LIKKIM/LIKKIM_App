@@ -12,6 +12,7 @@ import { LineChart } from "react-native-chart-kit";
 import * as Haptics from "expo-haptics";
 import { DarkModeContext } from "./CryptoContext";
 import { useTranslation } from "react-i18next";
+
 /**
  *
  * 2024/07/29
@@ -49,6 +50,7 @@ export default function PriceChartCom({
   const textTabColor = isDarkMode ? "#6E6E7F" : "#8C8C9C";
   const activeBackgroundColor = isDarkMode ? "#24234C" : "#fff";
   const inactiveBackgroundColor = "transparent";
+
   //取出最高，最低的開盤價格
   const _getMaxAndMinPrice = (data) => {
     const values = data.map((item) => parseFloat(item[4]));
@@ -213,122 +215,126 @@ export default function PriceChartCom({
         </View>
       </View>
 
-      {load[0] ? (
-        <View
-          style={{
-            justifyContent: "center",
-            alignItems: "center",
-            height: 220,
-          }}
-        >
-          <ActivityIndicator />
-        </View>
-      ) : _chartData[0].length > 0 ? (
-        <View {...panResponder[0]?.panHandlers} pointerEvents="box-none">
-          <LineChart
-            data={{ datasets: [{ data: _chartData[0] }] }}
-            width={Dimensions.get("window").width}
-            height={220}
-            getDotColor={(data, index) => {
-              if (!_selectPointData[0]) return "transparent";
-              return data == Math.floor(_selectPointData[0][4])
-                ? "green"
-                : "transparent";
+      <View style={{ height: 220 }}>
+        {load[0] ? (
+          <View
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100%",
             }}
-            renderDotContent={({ x, y, indexData, index }) => {
-              if (!_selectPointData[0]) return null;
-              return indexData == Math.floor(_selectPointData[0][4]) ? (
-                <View
-                  key={index}
-                  style={{
-                    width: 40,
-                    height: 40,
-                    backgroundColor: "rgba(80,208,63,0.1)",
-                    borderRadius: 50,
-                    position: "absolute",
-                    top: y - 20,
-                    left: x - 20,
-                  }}
-                ></View>
-              ) : null;
-            }}
-            decorator={() => {
-              if (!maxAndMin[0][0]) return null;
-              const screenCenter = screenWidth / 2;
-              const chartDataLength = _chartData[0].length;
-              const minLeft =
-                (screenWidth / chartDataLength) * maxAndMin[0][3] > screenCenter
-                  ? (screenWidth / chartDataLength) * maxAndMin[0][3] - 45
-                  : (screenWidth / chartDataLength) * maxAndMin[0][3] + 32;
-              const maxLeft =
-                (screenWidth / chartDataLength) * maxAndMin[0][2] > screenCenter
-                  ? (screenWidth / chartDataLength) * maxAndMin[0][2] - 45
-                  : (screenWidth / chartDataLength) * maxAndMin[0][2] + 32;
+          >
+            <ActivityIndicator />
+          </View>
+        ) : _chartData[0].length > 0 ? (
+          <View {...panResponder[0]?.panHandlers} pointerEvents="box-none">
+            <LineChart
+              data={{ datasets: [{ data: _chartData[0] }] }}
+              width={Dimensions.get("window").width}
+              height={220}
+              getDotColor={(data, index) => {
+                if (!_selectPointData[0]) return "transparent";
+                return data == Math.floor(_selectPointData[0][4])
+                  ? "green"
+                  : "transparent";
+              }}
+              renderDotContent={({ x, y, indexData, index }) => {
+                if (!_selectPointData[0]) return null;
+                return indexData == Math.floor(_selectPointData[0][4]) ? (
+                  <View
+                    key={index}
+                    style={{
+                      width: 40,
+                      height: 40,
+                      backgroundColor: "rgba(80,208,63,0.1)",
+                      borderRadius: 50,
+                      position: "absolute",
+                      top: y - 20,
+                      left: x - 20,
+                    }}
+                  ></View>
+                ) : null;
+              }}
+              decorator={() => {
+                if (!maxAndMin[0][0]) return null;
+                const screenCenter = screenWidth / 2;
+                const chartDataLength = _chartData[0].length;
+                const minLeft =
+                  (screenWidth / chartDataLength) * maxAndMin[0][3] >
+                  screenCenter
+                    ? (screenWidth / chartDataLength) * maxAndMin[0][3] - 45
+                    : (screenWidth / chartDataLength) * maxAndMin[0][3] + 32;
+                const maxLeft =
+                  (screenWidth / chartDataLength) * maxAndMin[0][2] >
+                  screenCenter
+                    ? (screenWidth / chartDataLength) * maxAndMin[0][2] - 45
+                    : (screenWidth / chartDataLength) * maxAndMin[0][2] + 32;
 
-              return (
-                <>
-                  {/* 最大值 */}
-                  <View
-                    key={"maxPoint"}
-                    style={{ position: "absolute", top: -10, left: maxLeft }}
-                  >
-                    <Text style={{ color: "#2A9737" }}>
-                      {priceFlag}
-                      {maxAndMin[0][0]}
-                    </Text>
-                  </View>
-                  {/* 最低值 */}
-                  <View
-                    key={"minPoint"}
-                    style={{ position: "absolute", top: 188, left: minLeft }}
-                  >
-                    <Text style={{ color: "#2A9737" }}>
-                      {priceFlag}
-                      {maxAndMin[0][1]}
-                    </Text>
-                  </View>
-                </>
-              );
+                return (
+                  <>
+                    {/* 最大值 */}
+                    <View
+                      key={"maxPoint"}
+                      style={{ position: "absolute", top: -10, left: maxLeft }}
+                    >
+                      <Text style={{ color: "#2A9737" }}>
+                        {priceFlag}
+                        {maxAndMin[0][0]}
+                      </Text>
+                    </View>
+                    {/* 最低值 */}
+                    <View
+                      key={"minPoint"}
+                      style={{ position: "absolute", top: 188, left: minLeft }}
+                    >
+                      <Text style={{ color: "#2A9737" }}>
+                        {priceFlag}
+                        {maxAndMin[0][1]}
+                      </Text>
+                    </View>
+                  </>
+                );
+              }}
+              withInnerLines={false}
+              bezier
+              withVerticalLabels={false}
+              withHorizontalLabels={false}
+              withOuterLines={false}
+              onDataPointClick={({ value, data, color, index }) => {
+                //触摸反馈
+                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                _selectPointData[1](_sourceData[0][index]);
+                _selectIndex[1](index);
+                calcPointPrice(index);
+              }}
+              yAxisInterval={(maxAndMin[0][0] - maxAndMin[0][1]) / 5}
+              chartConfig={{
+                fillShadowGradientFrom: "#fff",
+                fillShadowGradientToOpacity: 0,
+                backgroundGradientFrom: "#fff",
+                fillShadowGradientOpacity: 0, // 透明度设为0
+                useShadowColorFromDataset: false,
+                backgroundGradientFromOpacity: 0,
+                backgroundGradientToOpacity: 0,
+                backgroundGradientTo: "#fff",
+                decimalPlaces: 2, // optional, defaults to 2dp
+                color: () => `rgb(80,168.63)`,
+              }}
+              style={{ marginTop: 20, marginLeft: -32 }}
+            />
+          </View>
+        ) : (
+          <View
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100%",
             }}
-            withInnerLines={false}
-            bezier
-            withVerticalLabels={false}
-            withHorizontalLabels={false}
-            withOuterLines={false}
-            onDataPointClick={({ value, data, color, index }) => {
-              //触摸反馈
-              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-              _selectPointData[1](_sourceData[0][index]);
-              _selectIndex[1](index);
-              calcPointPrice(index);
-            }}
-            yAxisInterval={(maxAndMin[0][0] - maxAndMin[0][1]) / 5}
-            chartConfig={{
-              fillShadowGradientFrom: "#fff",
-              fillShadowGradientToOpacity: 0,
-              backgroundGradientFrom: "#fff",
-              fillShadowGradientOpacity: 0, // 透明度设为0
-              useShadowColorFromDataset: false,
-              backgroundGradientFromOpacity: 0,
-              backgroundGradientToOpacity: 0,
-              backgroundGradientTo: "#fff",
-              decimalPlaces: 2, // optional, defaults to 2dp
-              color: () => `rgb(80,168.63)`,
-            }}
-            style={{ marginTop: 20, marginLeft: -32 }}
-          />
-        </View>
-      ) : (
-        <View
-          style={{
-            justifyContent: "center",
-            alignItems: "center",
-            height: 220,
-          }}
-        >
-          <Text style={{ color: textColor }}>{t("No data available")}</Text>
-        </View>
-      )}
+          >
+            <Text style={{ color: textColor }}>{t("No data available")}</Text>
+          </View>
+        )}
+      </View>
 
       <View
         style={{
@@ -356,7 +362,9 @@ export default function PriceChartCom({
           }}
         >
           <Pressable onPress={() => changeDate("30m")}>
-            <Text style={{ textAlign: "center", color: textColor }}>1D</Text>
+            <Text style={{ textAlign: "center", color: textColor }}>
+              {t("1D")}
+            </Text>
           </Pressable>
         </View>
 
@@ -374,7 +382,9 @@ export default function PriceChartCom({
           }}
         >
           <Pressable onPress={() => changeDate("1H")}>
-            <Text style={{ textAlign: "center", color: textColor }}>1W</Text>
+            <Text style={{ textAlign: "center", color: textColor }}>
+              {t("1W")}
+            </Text>
           </Pressable>
         </View>
 
@@ -392,7 +402,9 @@ export default function PriceChartCom({
           }}
         >
           <Pressable onPress={() => changeDate("1D")}>
-            <Text style={{ textAlign: "center", color: textColor }}>1M</Text>
+            <Text style={{ textAlign: "center", color: textColor }}>
+              {t("1M")}
+            </Text>
           </Pressable>
         </View>
 
@@ -409,7 +421,9 @@ export default function PriceChartCom({
           }}
         >
           <Pressable onPress={() => changeDate("1W")}>
-            <Text style={{ textAlign: "center", color: textColor }}>1Y</Text>
+            <Text style={{ textAlign: "center", color: textColor }}>
+              {t("1Y")}
+            </Text>
           </Pressable>
         </View>
       </View>
