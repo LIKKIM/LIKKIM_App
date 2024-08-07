@@ -171,9 +171,9 @@ export default function PriceChartCom({
           <Text style={{ fontWeight: "bold", fontSize: 30, color: textColor }}>
             {priceFlag}
             {_selectPointData[0]
-              ? _selectPointData[0][4]
+              ? parseFloat(_selectPointData[0][4]).toFixed(2)
               : _chartData[0]
-              ? _chartData[0][0]
+              ? parseFloat(_chartData[0][0]).toFixed(2)
               : ""}
           </Text>
         </View>
