@@ -1,5 +1,5 @@
 // PriceChartCom.js
-import React, { useState, useEffect, useRef, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   View,
   Dimensions,
@@ -55,7 +55,6 @@ export default function PriceChartCom({
     const maxIndex = values.indexOf(max);
     const minIndex = values.indexOf(min);
     maxAndMin[1]([max, min, maxIndex, minIndex]);
-    // console.log('最大值&最小:', max, min);
   };
 
   //计算涨幅
@@ -68,13 +67,11 @@ export default function PriceChartCom({
     let perStr = ""; //涨幅百分比
     let priceStr = ""; //涨幅价格
     if (is_default && _dataPoints) {
-      //图表默认：收盘-开盘
       priceStr = parseFloat(_dataPoints.last[4] - _dataPoints.start[1]).toFixed(
         2
       );
       perStr = parseFloat((priceStr / _dataPoints.start[1]) * 100).toFixed(2);
     } else {
-      //根据当前选择的数据：收盘-开盘
       if (!_sourceData[0][_index] && !_dataSource) return;
       const _parseData = _dataSource ?? _sourceData[0];
       priceStr = parseFloat(_parseData[_index][4] - _parseData[0][1]).toFixed(
@@ -82,7 +79,6 @@ export default function PriceChartCom({
       );
       perStr = parseFloat((priceStr / _parseData[0][1]) * 100).toFixed(2);
     }
-    //更新涨幅数据
     priceIncrease[1]([priceStr, perStr]);
   };
 
@@ -118,18 +114,20 @@ export default function PriceChartCom({
 
   //獲取API數據
   const _getData = async (_nd = "30m") => {
-    // console.log('get Data');
     load[1](true);
     let _rd = await fetch(
       `https://df.likkim.com/api/market/index-candles?instId=${instId}&bar=${_nd}`
     )
       .then((res) => res.json())
       .catch((er) => {
-        // console.error('獲取價格失敗：');
-        // console.error(er instanceof Error ? er.message : er);
+        console.error("獲取價格失敗：", er);
       });
 
-    if (!_rd) return;
+    if (!_rd || !_rd.data) {
+      load[1](false);
+      return;
+    }
+
     const _cdata = _rd.data.map((r) => parseFloat(r[4]));
     _getMaxAndMinPrice(_rd.data);
     _chartData[1](_cdata);
@@ -145,7 +143,6 @@ export default function PriceChartCom({
   //切換數據
   const selectDate = useState(() => {
     _getData().catch((er) => null);
-    // 确保 parentScrollviewRef.current 不为空且支持 setNativeProps
     if (
       parentScrollviewRef.current &&
       typeof parentScrollviewRef.current.setNativeProps === "function"
@@ -181,7 +178,6 @@ export default function PriceChartCom({
         >
           <Text
             style={{
-              color: "#2A9737",
               fontWeight: "bold",
               color: priceIncrease[0][0] > 0 ? "#47B480" : "#D2464B",
             }}
@@ -211,110 +207,130 @@ export default function PriceChartCom({
         </View>
       </View>
 
-      <View {...panResponder[0]?.panHandlers} pointerEvents="box-none">
-        <LineChart
-          data={{ datasets: [{ data: _chartData[0] }] }}
-          width={Dimensions.get("window").width}
-          height={220}
-          getDotColor={(data, index) => {
-            if (!_selectPointData[0]) return "transparent";
-            return data == Math.floor(_selectPointData[0][4])
-              ? "green"
-              : "transparent";
+      {load[0] ? (
+        <View
+          style={{
+            justifyContent: "center",
+            alignItems: "center",
+            height: 220,
           }}
-          renderDotContent={({ x, y, indexData, index }) => {
-            if (!_selectPointData[0]) return null;
-            return indexData == Math.floor(_selectPointData[0][4]) ? (
-              <View
-                key={index}
-                style={{
-                  width: 40,
-                  height: 40,
-                  backgroundColor: "rgba(80,208,63,0.1)",
-                  borderRadius: 50,
-                  position: "absolute",
-                  top: y - 20,
-                  left: x - 20,
-                }}
-              ></View>
-            ) : null;
-          }}
-          decorator={() => {
-            if (!maxAndMin[0][0]) return null;
-            const screenCenter = screenWidth / 2;
-            const chartDataLength = _chartData[0].length;
-            const minLeft =
-              (screenWidth / chartDataLength) * maxAndMin[0][3] > screenCenter
-                ? (screenWidth / chartDataLength) * maxAndMin[0][3] - 45
-                : (screenWidth / chartDataLength) * maxAndMin[0][3] + 32;
-            const maxLeft =
-              (screenWidth / chartDataLength) * maxAndMin[0][2] > screenCenter
-                ? (screenWidth / chartDataLength) * maxAndMin[0][2] - 45
-                : (screenWidth / chartDataLength) * maxAndMin[0][2] + 32;
-            // console.log('min:', (screenWidth / chartDataLength) * maxAndMin[0][3])
-            // console.log('max', (screenWidth / chartDataLength) * maxAndMin[0][2])
-
-            return (
-              <>
-                {/* 最大值 */}
+        >
+          <ActivityIndicator />
+        </View>
+      ) : _chartData[0].length > 0 ? (
+        <View {...panResponder[0]?.panHandlers} pointerEvents="box-none">
+          <LineChart
+            data={{ datasets: [{ data: _chartData[0] }] }}
+            width={Dimensions.get("window").width}
+            height={220}
+            getDotColor={(data, index) => {
+              if (!_selectPointData[0]) return "transparent";
+              return data == Math.floor(_selectPointData[0][4])
+                ? "green"
+                : "transparent";
+            }}
+            renderDotContent={({ x, y, indexData, index }) => {
+              if (!_selectPointData[0]) return null;
+              return indexData == Math.floor(_selectPointData[0][4]) ? (
                 <View
-                  key={"maxPoint"}
-                  style={{ position: "absolute", top: -10, left: maxLeft }}
-                >
-                  <Text style={{ color: "#2A9737" }}>
-                    {priceFlag}
-                    {maxAndMin[0][0]}
-                  </Text>
-                </View>
-                {/* 最低值 */}
-                <View
-                  key={"minPoint"}
-                  style={{ position: "absolute", top: 188, left: minLeft }}
-                >
-                  <Text style={{ color: "#2A9737" }}>
-                    {priceFlag}
-                    {maxAndMin[0][1]}
-                  </Text>
-                </View>
+                  key={index}
+                  style={{
+                    width: 40,
+                    height: 40,
+                    backgroundColor: "rgba(80,208,63,0.1)",
+                    borderRadius: 50,
+                    position: "absolute",
+                    top: y - 20,
+                    left: x - 20,
+                  }}
+                ></View>
+              ) : null;
+            }}
+            decorator={() => {
+              if (!maxAndMin[0][0]) return null;
+              const screenCenter = screenWidth / 2;
+              const chartDataLength = _chartData[0].length;
+              const minLeft =
+                (screenWidth / chartDataLength) * maxAndMin[0][3] > screenCenter
+                  ? (screenWidth / chartDataLength) * maxAndMin[0][3] - 45
+                  : (screenWidth / chartDataLength) * maxAndMin[0][3] + 32;
+              const maxLeft =
+                (screenWidth / chartDataLength) * maxAndMin[0][2] > screenCenter
+                  ? (screenWidth / chartDataLength) * maxAndMin[0][2] - 45
+                  : (screenWidth / chartDataLength) * maxAndMin[0][2] + 32;
 
-                {load[0] && (
-                  <View style={{ justifyContent: "center" }}>
-                    <ActivityIndicator
-                      style={{ alignSelf: "center", margin: 10 }}
-                    />
+              return (
+                <>
+                  {/* 最大值 */}
+                  <View
+                    key={"maxPoint"}
+                    style={{ position: "absolute", top: -10, left: maxLeft }}
+                  >
+                    <Text style={{ color: "#2A9737" }}>
+                      {priceFlag}
+                      {maxAndMin[0][0]}
+                    </Text>
                   </View>
-                )}
-              </>
-            );
+                  {/* 最低值 */}
+                  <View
+                    key={"minPoint"}
+                    style={{ position: "absolute", top: 188, left: minLeft }}
+                  >
+                    <Text style={{ color: "#2A9737" }}>
+                      {priceFlag}
+                      {maxAndMin[0][1]}
+                    </Text>
+                  </View>
+
+                  {load[0] && (
+                    <View style={{ justifyContent: "center" }}>
+                      <ActivityIndicator
+                        style={{ alignSelf: "center", margin: 10 }}
+                      />
+                    </View>
+                  )}
+                </>
+              );
+            }}
+            withInnerLines={false}
+            bezier
+            withVerticalLabels={false}
+            withHorizontalLabels={false}
+            withOuterLines={false}
+            onDataPointClick={({ value, data, color, index }) => {
+              //触摸反馈
+              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+              _selectPointData[1](_sourceData[0][index]);
+              _selectIndex[1](index);
+              calcPointPrice(index);
+            }}
+            yAxisInterval={(maxAndMin[0][0] - maxAndMin[0][1]) / 5}
+            chartConfig={{
+              fillShadowGradientFrom: "#fff",
+              fillShadowGradientToOpacity: 0,
+              backgroundGradientFrom: "#fff",
+              fillShadowGradientOpacity: 0, // 透明度设为0
+              useShadowColorFromDataset: false,
+              backgroundGradientFromOpacity: 0,
+              backgroundGradientToOpacity: 0,
+              backgroundGradientTo: "#fff",
+              decimalPlaces: 2, // optional, defaults to 2dp
+              color: () => `rgb(80,168.63)`,
+            }}
+            style={{ marginTop: 20, marginLeft: -32 }}
+          />
+        </View>
+      ) : (
+        <View
+          style={{
+            justifyContent: "center",
+            alignItems: "center",
+            height: 220,
           }}
-          withInnerLines={false}
-          bezier
-          withVerticalLabels={false}
-          withHorizontalLabels={false}
-          withOuterLines={false}
-          onDataPointClick={({ value, data, color, index }) => {
-            //触摸反馈
-            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-            _selectPointData[1](_sourceData[0][index]);
-            _selectIndex[1](index);
-            calcPointPrice(index);
-          }}
-          yAxisInterval={(maxAndMin[0][0] - maxAndMin[0][1]) / 5}
-          chartConfig={{
-            fillShadowGradientFrom: "#fff",
-            fillShadowGradientToOpacity: 0,
-            backgroundGradientFrom: "#fff",
-            fillShadowGradientOpacity: 0, // 透明度设为0
-            useShadowColorFromDataset: false,
-            backgroundGradientFromOpacity: 0,
-            backgroundGradientToOpacity: 0,
-            backgroundGradientTo: "#fff",
-            decimalPlaces: 2, // optional, defaults to 2dp
-            color: () => `rgb(80,168.63)`,
-          }}
-          style={{ marginTop: 20, marginLeft: -32 }}
-        />
-      </View>
+        >
+          <Text style={{ color: textColor }}>暂无数据</Text>
+        </View>
+      )}
 
       <View
         style={{
