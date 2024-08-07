@@ -316,7 +316,14 @@ export default function PriceChartCom({
                     </View>
 
                     {load[0] && (
-                      <View style={{ justifyContent: "center" }}>
+                      <View
+                        style={{
+                          justifyContent: "center",
+                          alignItems: "center",
+                          width: 430,
+                          height: 200,
+                        }}
+                      >
                         <ActivityIndicator
                           style={{ alignSelf: "center", margin: 10 }}
                         />
