@@ -11,6 +11,7 @@ import {
 import { LineChart } from "react-native-chart-kit";
 import * as Haptics from "expo-haptics";
 import { DarkModeContext } from "./CryptoContext";
+import { useTranslation } from "react-i18next";
 /**
  *
  * 2024/07/29
@@ -24,6 +25,7 @@ export default function PriceChartCom({
   parentScrollviewRef,
   priceFla = "$",
 }) {
+  const { t } = useTranslation();
   const screenWidth = Dimensions.get("window").width;
   const load = useState(true);
   //選擇的數據點
@@ -55,6 +57,7 @@ export default function PriceChartCom({
     const maxIndex = values.indexOf(max);
     const minIndex = values.indexOf(min);
     maxAndMin[1]([max, min, maxIndex, minIndex]);
+    // console.log('最大值&最小:', max, min);
   };
 
   //计算涨幅
@@ -67,11 +70,13 @@ export default function PriceChartCom({
     let perStr = ""; //涨幅百分比
     let priceStr = ""; //涨幅价格
     if (is_default && _dataPoints) {
+      //图表默认：收盘-开盘
       priceStr = parseFloat(_dataPoints.last[4] - _dataPoints.start[1]).toFixed(
         2
       );
       perStr = parseFloat((priceStr / _dataPoints.start[1]) * 100).toFixed(2);
     } else {
+      //根据当前选择的数据：收盘-开盘
       if (!_sourceData[0][_index] && !_dataSource) return;
       const _parseData = _dataSource ?? _sourceData[0];
       priceStr = parseFloat(_parseData[_index][4] - _parseData[0][1]).toFixed(
@@ -79,6 +84,7 @@ export default function PriceChartCom({
       );
       perStr = parseFloat((priceStr / _parseData[0][1]) * 100).toFixed(2);
     }
+    //更新涨幅数据
     priceIncrease[1]([priceStr, perStr]);
   };
 
@@ -168,9 +174,9 @@ export default function PriceChartCom({
             {priceFlag}
             {_selectPointData[0]
               ? parseFloat(_selectPointData[0][4]).toFixed(2)
-              : _chartData[0]
+              : _chartData[0] && _chartData[0][0] !== 0
               ? parseFloat(_chartData[0][0]).toFixed(2)
-              : ""}
+              : "0.00"}
           </Text>
         </View>
         <View
@@ -195,13 +201,13 @@ export default function PriceChartCom({
                 ).toLocaleTimeString()}
             {!_selectPointData[0] &&
               (selectDate[0] == "30m"
-                ? "past 24 hours"
+                ? t("past 24 hours")
                 : selectDate[0] == "1H"
-                ? "past 7 days"
+                ? t("past 7 days")
                 : selectDate[0] == "1W"
-                ? "past 1 year"
+                ? t("past 1 year")
                 : selectDate[0] == "1D"
-                ? "past 30 days"
+                ? t("past 30 days")
                 : "")}
           </Text>
         </View>
@@ -281,14 +287,6 @@ export default function PriceChartCom({
                       {maxAndMin[0][1]}
                     </Text>
                   </View>
-
-                  {load[0] && (
-                    <View style={{ justifyContent: "center" }}>
-                      <ActivityIndicator
-                        style={{ alignSelf: "center", margin: 10 }}
-                      />
-                    </View>
-                  )}
                 </>
               );
             }}
@@ -328,7 +326,7 @@ export default function PriceChartCom({
             height: 220,
           }}
         >
-          <Text style={{ color: textColor }}>暂无数据</Text>
+          <Text style={{ color: textColor }}>{t("No data available")}</Text>
         </View>
       )}
 
