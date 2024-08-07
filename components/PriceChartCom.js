@@ -219,13 +219,13 @@ export default function PriceChartCom({
           height={220}
           getDotColor={(data, index) => {
             if (!_selectPointData[0]) return "transparent";
-            return data == Math.floor(_selectPointData[0][4])
+            return data === parseFloat(_selectPointData[0][4])
               ? "green"
               : "transparent";
           }}
           renderDotContent={({ x, y, indexData, index }) => {
             if (!_selectPointData[0]) return null;
-            return indexData == Math.floor(_selectPointData[0][4]) ? (
+            return indexData === parseFloat(_selectPointData[0][4]) ? (
               <View
                 key={index}
                 style={{
