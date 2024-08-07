@@ -639,7 +639,7 @@ function WalletScreen({ route, navigation }) {
                           style={{
                             color: "#2A9737",
                             fontWeight: "bold",
-                            color: priceChange > 0 ? "#47B480" : "#D2464B",
+                            color: priceChange > 0 ? "#6FFFB0" : "#FF6F61",
                           }}
                         >
                           {`${
