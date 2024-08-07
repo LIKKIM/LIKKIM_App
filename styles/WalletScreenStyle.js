@@ -216,7 +216,17 @@ const WalletScreenStyles = (isDarkMode) => {
       //  textShadowRadius: 3,
     },
     balanceShortName: {
+      color: secondCardTextColor,
+      fontSize: 14,
+      //  textShadowColor: "rgba(0, 0, 0, 0.8)",
+      //  textShadowOffset: { width: 0, height: 2 },
+      //  textShadowRadius: 3,
+    },
+    priceChangeView: {
       position: "absolute",
+      display: "flex",
+      flexDirection: "row",
+      gap: 10,
       top: 56,
       right: 20,
       color: secondCardTextColor,

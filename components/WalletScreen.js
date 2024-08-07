@@ -51,6 +51,7 @@ function WalletScreen({ route, navigation }) {
     useState(false);
   const [deleteConfirmVisible, setDeleteConfirmVisible] = useState(false);
   const [cryptoCards, setCryptoCards] = useState([]);
+  const [priceChanges, setPriceChanges] = useState({});
   const scrollViewRef = useRef();
   const iconColor = isDarkMode ? "#ffffff" : "#24234C";
   const darkColors = ["#24234C", "#101021"];
@@ -162,6 +163,36 @@ function WalletScreen({ route, navigation }) {
       }
     };
     saveCryptoCards();
+  }, [cryptoCards]);
+
+  useEffect(() => {
+    const fetchPriceChanges = async () => {
+      const changes = {};
+      for (const card of cryptoCards) {
+        try {
+          const response = await fetch(
+            `https://df.likkim.com/api/market/index-candles?instId=${card.shortName}-USD&bar=30m`
+          );
+          const data = await response.json();
+          const startPrice = parseFloat(data.data[0][1]);
+          const endPrice = parseFloat(data.data[data.data.length - 1][4]);
+          const priceChange = (endPrice - startPrice).toFixed(2);
+          const percentageChange = ((priceChange / startPrice) * 100).toFixed(
+            2
+          );
+          changes[card.shortName] = { priceChange, percentageChange };
+        } catch (error) {
+          console.error(
+            `Error fetching price change for ${card.shortName}:`,
+            error
+          );
+        }
+      }
+      setPriceChanges(changes);
+    };
+    if (cryptoCards.length > 0) {
+      fetchPriceChanges();
+    }
   }, [cryptoCards]);
 
   const addDefaultUSDT = () => {
@@ -443,7 +474,7 @@ function WalletScreen({ route, navigation }) {
             <View style={WalletScreenStyle.priceContainer}>
               {/* 传入指定的instId&货币符号 */}
               <PriceChartCom
-                instId="BTC-USD"
+                instId={`${selectedCrypto?.shortName}-USD`}
                 priceFla="$"
                 parentScrollviewRef={scrollViewRef}
               />
@@ -541,6 +572,9 @@ function WalletScreen({ route, navigation }) {
             card.shortName === "BCH" ||
             card.shortName === "DOT" ||
             card.shortName === "DOGE";
+          const priceChange = priceChanges[card.shortName]?.priceChange || "0";
+          const percentageChange =
+            priceChanges[card.shortName]?.percentageChange || "0";
           return (
             <TouchableOpacity
               key={card.name}
@@ -600,15 +634,28 @@ function WalletScreen({ route, navigation }) {
                       >
                         {`${card.balance} ${card.shortName}`}
                       </Text>
-                      <Text
-                        style={[
-                          WalletScreenStyle.balanceShortName,
-                          //  isBlackText && { color: "#676776" },
-                          isBlackText && { color: "#121518" },
-                        ]}
-                      >
-                        {`${card.balance} ${currencyUnit}`}
-                      </Text>
+                      <View style={WalletScreenStyle.priceChangeView}>
+                        <Text
+                          style={{
+                            color: "#2A9737",
+                            fontWeight: "bold",
+                            color: priceChange > 0 ? "#47B480" : "#D2464B",
+                          }}
+                        >
+                          {`${
+                            percentageChange > 0 ? "+" : ""
+                          }${percentageChange}%`}
+                        </Text>
+                        <Text
+                          style={[
+                            WalletScreenStyle.balanceShortName,
+                            //  isBlackText && { color: "#676776" },
+                            isBlackText && { color: "#121518" },
+                          ]}
+                        >
+                          {`${card.balance} ${currencyUnit}`}
+                        </Text>
+                      </View>
                     </>
                   )}
                   {modalVisible && cardInfoVisible && (
