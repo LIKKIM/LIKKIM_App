@@ -35,7 +35,7 @@ export default function PriceChartCom({
   //选择的索引
   const _selectIndex = useState(0);
   //圖表數據
-  const _chartData = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+  const _chartData = useState([0]);
   //图表原始数据
   const _sourceData = useState([]);
   //最低和最高收盘
@@ -267,13 +267,13 @@ export default function PriceChartCom({
                   <View
                     key={index}
                     style={{
-                      width: 40,
-                      height: 40,
+                      width: 80,
+                      height: 80,
                       backgroundColor: "rgba(80,208,63,0.1)",
                       borderRadius: 50,
                       position: "absolute",
-                      top: y - 20,
-                      left: x - 20,
+                      top: y - 40,
+                      left: x - 40,
                     }}
                   ></View>
                 ) : null;
