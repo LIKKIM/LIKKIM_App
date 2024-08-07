@@ -12,6 +12,7 @@ import { LineChart } from "react-native-chart-kit";
 import * as Haptics from "expo-haptics";
 import { DarkModeContext } from "./CryptoContext";
 import { useTranslation } from "react-i18next";
+import WalletScreenStyles from "../styles/WalletScreenStyle";
 /**
  *
  * 2024/07/29
@@ -26,6 +27,7 @@ export default function PriceChartCom({
   priceFla = "$",
 }) {
   const { t } = useTranslation();
+  const WalletScreenStyle = WalletScreenStyles(isDarkMode);
   const screenWidth = Dimensions.get("window").width;
   const load = useState(true);
   // 添加状态变量
@@ -186,12 +188,7 @@ export default function PriceChartCom({
               textAlign: "center",
             }}
           >
-            <Text
-              style={{
-                textAlign: "center",
-                color: textColor,
-              }}
-            >
+            <Text style={WalletScreenStyle.modalSubtitle}>
               {t("No data available")}
             </Text>
           </View>
