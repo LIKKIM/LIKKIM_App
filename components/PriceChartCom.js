@@ -34,7 +34,7 @@ export default function PriceChartCom({
   //选择的索引
   const _selectIndex = useState(0);
   //圖表數據
-  const _chartData = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+  const _chartData = useState([]);
   //图表原始数据
   const _sourceData = useState([]);
   //最低和最高收盘
@@ -176,7 +176,9 @@ export default function PriceChartCom({
             {priceFlag}
             {_selectPointData[0]
               ? parseFloat(_selectPointData[0][4]).toFixed(2)
-              : _chartData[0] && _chartData[0][0] !== 0
+              : _chartData[0] &&
+                _chartData[0].length > 0 &&
+                _chartData[0][0] !== 0
               ? parseFloat(_chartData[0][0]).toFixed(2)
               : "0.00"}
           </Text>
@@ -217,14 +219,8 @@ export default function PriceChartCom({
 
       <View style={{ height: 220 }}>
         {load[0] ? (
-          <View
-            style={{
-              justifyContent: "center",
-              alignItems: "center",
-              height: "100%",
-            }}
-          >
-            <ActivityIndicator />
+          <View style={{ justifyContent: "center", height: 220 }}>
+            <ActivityIndicator style={{ alignSelf: "center" }} />
           </View>
         ) : _chartData[0].length > 0 ? (
           <View {...panResponder[0]?.panHandlers} pointerEvents="box-none">
@@ -343,7 +339,7 @@ export default function PriceChartCom({
           backgroundColor: isDarkMode ? "#484692" : "#DEDEE1",
           padding: 2,
           borderRadius: 8,
-          marginTop: "0%",
+          marginTop: 20, // 增加顶部间距以移动tab栏
           width: "90%",
           marginHorizontal: "5%",
         }}
