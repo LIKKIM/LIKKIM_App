@@ -26,6 +26,8 @@ export default function PriceChartCom({
 }) {
   const screenWidth = Dimensions.get("window").width;
   const load = useState(true);
+  // 添加状态变量
+  const [hasData, setHasData] = useState(true);
   //選擇的數據點
   const _selectPointData = useState();
   //选择的索引
@@ -130,7 +132,12 @@ export default function PriceChartCom({
         // console.error(er instanceof Error ? er.message : er);
       });
 
-    if (!_rd) return;
+    if (!_rd || _rd.data.length === 0) {
+      setHasData(false); // 设置为无数据状态
+      load[1](false);
+      return;
+    }
+    setHasData(true); // 设置为有数据状态
     const _cdata = _rd.data.map((r) => parseFloat(r[4]));
     _getMaxAndMinPrice(_rd.data);
     _chartData[1](_cdata);
@@ -166,240 +173,266 @@ export default function PriceChartCom({
 
   return (
     <View style={{ marginVertical: 10 }}>
-      <View style={{ marginLeft: 20 }}>
-        <View>
-          <Text style={{ fontWeight: "bold", fontSize: 30, color: textColor }}>
-            {priceFlag}
-            {_selectPointData[0]
-              ? parseFloat(_selectPointData[0][4]).toFixed(2)
-              : _chartData[0]
-              ? parseFloat(_chartData[0][0]).toFixed(2)
-              : ""}
+      {!hasData &&
+        !load[0] && ( // 当没有数据且不在加载状态时显示提示信息
+          <Text style={{ textAlign: "center", color: textColor }}>
+            暂无数据
           </Text>
-        </View>
-        <View
-          style={{ flexDirection: "row", alignItems: "center", marginTop: 5 }}
-        >
-          <Text
+        )}
+      {hasData && (
+        <>
+          <View style={{ marginLeft: 20 }}>
+            <View>
+              <Text
+                style={{ fontWeight: "bold", fontSize: 30, color: textColor }}
+              >
+                {priceFlag}
+                {_selectPointData[0]
+                  ? parseFloat(_selectPointData[0][4]).toFixed(2)
+                  : _chartData[0]
+                  ? parseFloat(_chartData[0][0]).toFixed(2)
+                  : ""}
+              </Text>
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                marginTop: 5,
+              }}
+            >
+              <Text
+                style={{
+                  color: "#2A9737",
+                  fontWeight: "bold",
+                  color: priceIncrease[0][0] > 0 ? "#47B480" : "#D2464B",
+                }}
+              >
+                {`${priceIncrease[0][0] > 0 ? "+" : ""}${priceIncrease[0][0]}`}(
+                {priceIncrease[0][1] > 0 ? "+" : ""}
+                {priceIncrease[0][1]}%)
+              </Text>
+              <Text style={{ marginLeft: 5, color: "gray" }}>
+                {_selectPointData[0] &&
+                  new Date(parseFloat(_selectPointData[0][0])).toDateString() +
+                    "," +
+                    new Date(
+                      parseFloat(_selectPointData[0][0])
+                    ).toLocaleTimeString()}
+                {!_selectPointData[0] &&
+                  (selectDate[0] == "30m"
+                    ? "past 24 hours"
+                    : selectDate[0] == "1H"
+                    ? "past 7 days"
+                    : selectDate[0] == "1W"
+                    ? "past 1 year"
+                    : selectDate[0] == "1D"
+                    ? "past 30 days"
+                    : "")}
+              </Text>
+            </View>
+          </View>
+
+          <View {...panResponder[0]?.panHandlers} pointerEvents="box-none">
+            <LineChart
+              data={{ datasets: [{ data: _chartData[0] }] }}
+              width={Dimensions.get("window").width}
+              height={220}
+              getDotColor={(data, index) => {
+                if (!_selectPointData[0]) return "transparent";
+                return data === parseFloat(_selectPointData[0][4])
+                  ? "green"
+                  : "transparent";
+              }}
+              renderDotContent={({ x, y, indexData, index }) => {
+                if (!_selectPointData[0]) return null;
+                return indexData === parseFloat(_selectPointData[0][4]) ? (
+                  <View
+                    key={index}
+                    style={{
+                      width: 40,
+                      height: 40,
+                      backgroundColor: "rgba(80,208,63,0.1)",
+                      borderRadius: 50,
+                      position: "absolute",
+                      top: y - 20,
+                      left: x - 20,
+                    }}
+                  ></View>
+                ) : null;
+              }}
+              decorator={() => {
+                if (!maxAndMin[0][0]) return null;
+                const screenCenter = screenWidth / 2;
+                const chartDataLength = _chartData[0].length;
+                const minLeft =
+                  (screenWidth / chartDataLength) * maxAndMin[0][3] >
+                  screenCenter
+                    ? (screenWidth / chartDataLength) * maxAndMin[0][3] - 45
+                    : (screenWidth / chartDataLength) * maxAndMin[0][3] + 32;
+                const maxLeft =
+                  (screenWidth / chartDataLength) * maxAndMin[0][2] >
+                  screenCenter
+                    ? (screenWidth / chartDataLength) * maxAndMin[0][2] - 45
+                    : (screenWidth / chartDataLength) * maxAndMin[0][2] + 32;
+                // console.log('min:', (screenWidth / chartDataLength) * maxAndMin[0][3])
+                // console.log('max', (screenWidth / chartDataLength) * maxAndMin[0][2])
+
+                return (
+                  <>
+                    {/* 最大值 */}
+                    <View
+                      key={"maxPoint"}
+                      style={{ position: "absolute", top: -10, left: maxLeft }}
+                    >
+                      <Text style={{ color: "#2A9737" }}>
+                        {priceFlag}
+                        {maxAndMin[0][0]}
+                      </Text>
+                    </View>
+                    {/* 最低值 */}
+                    <View
+                      key={"minPoint"}
+                      style={{ position: "absolute", top: 188, left: minLeft }}
+                    >
+                      <Text style={{ color: "#2A9737" }}>
+                        {priceFlag}
+                        {maxAndMin[0][1]}
+                      </Text>
+                    </View>
+
+                    {load[0] && (
+                      <View style={{ justifyContent: "center" }}>
+                        <ActivityIndicator
+                          style={{ alignSelf: "center", margin: 10 }}
+                        />
+                      </View>
+                    )}
+                  </>
+                );
+              }}
+              withInnerLines={false}
+              bezier
+              withVerticalLabels={false}
+              withHorizontalLabels={false}
+              withOuterLines={false}
+              onDataPointClick={({ value, data, color, index }) => {
+                //触摸反馈
+                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                _selectPointData[1](_sourceData[0][index]);
+                _selectIndex[1](index);
+                calcPointPrice(index);
+              }}
+              yAxisInterval={1}
+              chartConfig={{
+                fillShadowGradientFrom: "#fff",
+                fillShadowGradientToOpacity: 0,
+                backgroundGradientFrom: "#fff",
+                fillShadowGradientOpacity: 0, // 透明度设为0
+                useShadowColorFromDataset: false,
+                backgroundGradientFromOpacity: 0,
+                backgroundGradientToOpacity: 0,
+                backgroundGradientTo: "#fff",
+                decimalPlaces: 2, // optional, defaults to 2dp
+                color: () => `rgb(80,168.63)`,
+              }}
+              style={{ marginTop: 20, marginLeft: -32 }}
+            />
+          </View>
+
+          <View
             style={{
-              color: "#2A9737",
-              fontWeight: "bold",
-              color: priceIncrease[0][0] > 0 ? "#47B480" : "#D2464B",
+              flexDirection: "row",
+              justifyContent: "space-around",
+              backgroundColor: isDarkMode ? "#484692" : "#DEDEE1",
+              padding: 2,
+              borderRadius: 8,
+              marginTop: "0%",
+              width: "90%",
+              marginHorizontal: "5%",
             }}
           >
-            {`${priceIncrease[0][0] > 0 ? "+" : ""}${priceIncrease[0][0]}`}(
-            {priceIncrease[0][1] > 0 ? "+" : ""}
-            {priceIncrease[0][1]}%)
-          </Text>
-          <Text style={{ marginLeft: 5, color: "gray" }}>
-            {_selectPointData[0] &&
-              new Date(parseFloat(_selectPointData[0][0])).toDateString() +
-                "," +
-                new Date(
-                  parseFloat(_selectPointData[0][0])
-                ).toLocaleTimeString()}
-            {!_selectPointData[0] &&
-              (selectDate[0] == "30m"
-                ? "past 24 hours"
-                : selectDate[0] == "1H"
-                ? "past 7 days"
-                : selectDate[0] == "1W"
-                ? "past 1 year"
-                : selectDate[0] == "1D"
-                ? "past 30 days"
-                : "")}
-          </Text>
-        </View>
-      </View>
+            <View
+              style={{
+                backgroundColor:
+                  selectDate[0] === "30m"
+                    ? activeBackgroundColor
+                    : inactiveBackgroundColor,
+                paddingHorizontal: 10,
+                paddingVertical: 5,
+                borderRadius: 8,
+                flex: 1,
+                marginRight: 5,
+              }}
+            >
+              <Pressable onPress={() => changeDate("30m")}>
+                <Text style={{ textAlign: "center", color: textColor }}>
+                  1D
+                </Text>
+              </Pressable>
+            </View>
 
-      <View {...panResponder[0]?.panHandlers} pointerEvents="box-none">
-        <LineChart
-          data={{ datasets: [{ data: _chartData[0] }] }}
-          width={Dimensions.get("window").width}
-          height={220}
-          getDotColor={(data, index) => {
-            if (!_selectPointData[0]) return "transparent";
-            return data === parseFloat(_selectPointData[0][4])
-              ? "green"
-              : "transparent";
-          }}
-          renderDotContent={({ x, y, indexData, index }) => {
-            if (!_selectPointData[0]) return null;
-            return indexData === parseFloat(_selectPointData[0][4]) ? (
-              <View
-                key={index}
-                style={{
-                  width: 40,
-                  height: 40,
-                  backgroundColor: "rgba(80,208,63,0.1)",
-                  borderRadius: 50,
-                  position: "absolute",
-                  top: y - 20,
-                  left: x - 20,
-                }}
-              ></View>
-            ) : null;
-          }}
-          decorator={() => {
-            if (!maxAndMin[0][0]) return null;
-            const screenCenter = screenWidth / 2;
-            const chartDataLength = _chartData[0].length;
-            const minLeft =
-              (screenWidth / chartDataLength) * maxAndMin[0][3] > screenCenter
-                ? (screenWidth / chartDataLength) * maxAndMin[0][3] - 45
-                : (screenWidth / chartDataLength) * maxAndMin[0][3] + 32;
-            const maxLeft =
-              (screenWidth / chartDataLength) * maxAndMin[0][2] > screenCenter
-                ? (screenWidth / chartDataLength) * maxAndMin[0][2] - 45
-                : (screenWidth / chartDataLength) * maxAndMin[0][2] + 32;
-            // console.log('min:', (screenWidth / chartDataLength) * maxAndMin[0][3])
-            // console.log('max', (screenWidth / chartDataLength) * maxAndMin[0][2])
+            <View
+              style={{
+                backgroundColor:
+                  selectDate[0] === "1H"
+                    ? activeBackgroundColor
+                    : inactiveBackgroundColor,
+                paddingHorizontal: 10,
+                paddingVertical: 5,
+                borderRadius: 8,
+                flex: 1,
+                marginRight: 5,
+              }}
+            >
+              <Pressable onPress={() => changeDate("1H")}>
+                <Text style={{ textAlign: "center", color: textColor }}>
+                  1W
+                </Text>
+              </Pressable>
+            </View>
 
-            return (
-              <>
-                {/* 最大值 */}
-                <View
-                  key={"maxPoint"}
-                  style={{ position: "absolute", top: -10, left: maxLeft }}
-                >
-                  <Text style={{ color: "#2A9737" }}>
-                    {priceFlag}
-                    {maxAndMin[0][0]}
-                  </Text>
-                </View>
-                {/* 最低值 */}
-                <View
-                  key={"minPoint"}
-                  style={{ position: "absolute", top: 188, left: minLeft }}
-                >
-                  <Text style={{ color: "#2A9737" }}>
-                    {priceFlag}
-                    {maxAndMin[0][1]}
-                  </Text>
-                </View>
+            <View
+              style={{
+                backgroundColor:
+                  selectDate[0] === "1D"
+                    ? activeBackgroundColor
+                    : inactiveBackgroundColor,
+                paddingHorizontal: 10,
+                paddingVertical: 5,
+                borderRadius: 8,
+                flex: 1,
+                marginRight: 5,
+              }}
+            >
+              <Pressable onPress={() => changeDate("1D")}>
+                <Text style={{ textAlign: "center", color: textColor }}>
+                  1M
+                </Text>
+              </Pressable>
+            </View>
 
-                {load[0] && (
-                  <View style={{ justifyContent: "center" }}>
-                    <ActivityIndicator
-                      style={{ alignSelf: "center", margin: 10 }}
-                    />
-                  </View>
-                )}
-              </>
-            );
-          }}
-          withInnerLines={false}
-          bezier
-          withVerticalLabels={false}
-          withHorizontalLabels={false}
-          withOuterLines={false}
-          onDataPointClick={({ value, data, color, index }) => {
-            //触摸反馈
-            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-            _selectPointData[1](_sourceData[0][index]);
-            _selectIndex[1](index);
-            calcPointPrice(index);
-          }}
-          yAxisInterval={1}
-          chartConfig={{
-            fillShadowGradientFrom: "#fff",
-            fillShadowGradientToOpacity: 0,
-            backgroundGradientFrom: "#fff",
-            fillShadowGradientOpacity: 0, // 透明度设为0
-            useShadowColorFromDataset: false,
-            backgroundGradientFromOpacity: 0,
-            backgroundGradientToOpacity: 0,
-            backgroundGradientTo: "#fff",
-            decimalPlaces: 2, // optional, defaults to 2dp
-            color: () => `rgb(80,168.63)`,
-          }}
-          style={{ marginTop: 20, marginLeft: -32 }}
-        />
-      </View>
-
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-around",
-          backgroundColor: isDarkMode ? "#484692" : "#DEDEE1",
-          padding: 2,
-          borderRadius: 8,
-          marginTop: "0%",
-          width: "90%",
-          marginHorizontal: "5%",
-        }}
-      >
-        <View
-          style={{
-            backgroundColor:
-              selectDate[0] === "30m"
-                ? activeBackgroundColor
-                : inactiveBackgroundColor,
-            paddingHorizontal: 10,
-            paddingVertical: 5,
-            borderRadius: 8,
-            flex: 1,
-            marginRight: 5,
-          }}
-        >
-          <Pressable onPress={() => changeDate("30m")}>
-            <Text style={{ textAlign: "center", color: textColor }}>1D</Text>
-          </Pressable>
-        </View>
-
-        <View
-          style={{
-            backgroundColor:
-              selectDate[0] === "1H"
-                ? activeBackgroundColor
-                : inactiveBackgroundColor,
-            paddingHorizontal: 10,
-            paddingVertical: 5,
-            borderRadius: 8,
-            flex: 1,
-            marginRight: 5,
-          }}
-        >
-          <Pressable onPress={() => changeDate("1H")}>
-            <Text style={{ textAlign: "center", color: textColor }}>1W</Text>
-          </Pressable>
-        </View>
-
-        <View
-          style={{
-            backgroundColor:
-              selectDate[0] === "1D"
-                ? activeBackgroundColor
-                : inactiveBackgroundColor,
-            paddingHorizontal: 10,
-            paddingVertical: 5,
-            borderRadius: 8,
-            flex: 1,
-            marginRight: 5,
-          }}
-        >
-          <Pressable onPress={() => changeDate("1D")}>
-            <Text style={{ textAlign: "center", color: textColor }}>1M</Text>
-          </Pressable>
-        </View>
-
-        <View
-          style={{
-            backgroundColor:
-              selectDate[0] === "1W"
-                ? activeBackgroundColor
-                : inactiveBackgroundColor,
-            paddingHorizontal: 10,
-            paddingVertical: 5,
-            borderRadius: 8,
-            flex: 1,
-          }}
-        >
-          <Pressable onPress={() => changeDate("1W")}>
-            <Text style={{ textAlign: "center", color: textColor }}>1Y</Text>
-          </Pressable>
-        </View>
-      </View>
+            <View
+              style={{
+                backgroundColor:
+                  selectDate[0] === "1W"
+                    ? activeBackgroundColor
+                    : inactiveBackgroundColor,
+                paddingHorizontal: 10,
+                paddingVertical: 5,
+                borderRadius: 8,
+                flex: 1,
+              }}
+            >
+              <Pressable onPress={() => changeDate("1W")}>
+                <Text style={{ textAlign: "center", color: textColor }}>
+                  1Y
+                </Text>
+              </Pressable>
+            </View>
+          </View>
+        </>
+      )}
     </View>
   );
 }
