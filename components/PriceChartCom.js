@@ -94,10 +94,16 @@ export default function PriceChartCom({
   };
 
   //实现横向触摸刷新点,初始化
-  const panResponder = useState(PanResponder.create());
+  const panResponder = useState(PanResponder.create({
+    onStartShouldSetPanResponder: () => true,
+    onStartShouldSetPanResponderCapture: () => false
+  }));
 
   //刷新手势点,待优化
   const updatePanResponder = (_sdata) => {
+
+
+
     panResponder[1](
       PanResponder.create({
         onStartShouldSetPanResponder: () => true,
@@ -275,6 +281,7 @@ export default function PriceChartCom({
                   ></View>
                 ) : null;
               }}
+
               decorator={() => {
                 if (!maxAndMin[0][0]) return null;
                 const screenCenter = screenWidth / 2;
