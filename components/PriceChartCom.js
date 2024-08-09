@@ -204,8 +204,8 @@ export default function PriceChartCom({
                 {_selectPointData[0]
                   ? parseFloat(_selectPointData[0][4]).toFixed(2)
                   : _chartData[0]
-                  ? parseFloat(_chartData[0][0]).toFixed(2)
-                  : ""}
+                    ? parseFloat(_chartData[0][0]).toFixed(2)
+                    : ""}
               </Text>
             </View>
             <View
@@ -229,20 +229,20 @@ export default function PriceChartCom({
               <Text style={{ marginLeft: 5, color: "gray" }}>
                 {_selectPointData[0] &&
                   new Date(parseFloat(_selectPointData[0][0])).toDateString() +
-                    "," +
-                    new Date(
-                      parseFloat(_selectPointData[0][0])
-                    ).toLocaleTimeString()}
+                  "," +
+                  new Date(
+                    parseFloat(_selectPointData[0][0])
+                  ).toLocaleTimeString()}
                 {!_selectPointData[0] &&
                   (selectDate[0] == "30m"
                     ? "past 24 hours"
                     : selectDate[0] == "1H"
-                    ? "past 7 days"
-                    : selectDate[0] == "1W"
-                    ? "past 1 year"
-                    : selectDate[0] == "1D"
-                    ? "past 30 days"
-                    : "")}
+                      ? "past 7 days"
+                      : selectDate[0] == "1W"
+                        ? "past 1 year"
+                        : selectDate[0] == "1D"
+                          ? "past 30 days"
+                          : "")}
               </Text>
             </View>
           </View>
@@ -254,13 +254,13 @@ export default function PriceChartCom({
               height={220}
               getDotColor={(data, index) => {
                 if (!_selectPointData[0]) return "transparent";
-                return data === parseFloat(_selectPointData[0][4])
+                return (data === parseFloat(_selectPointData[0][4]) && index === _selectIndex[0])
                   ? "green"
                   : "transparent";
               }}
               renderDotContent={({ x, y, indexData, index }) => {
                 if (!_selectPointData[0]) return null;
-                return indexData === parseFloat(_selectPointData[0][4]) ? (
+                return (indexData === parseFloat(_selectPointData[0][4]) && index === _selectIndex[0]) ? (
                   <View
                     key={index}
                     style={{
@@ -281,12 +281,12 @@ export default function PriceChartCom({
                 const chartDataLength = _chartData[0].length;
                 const minLeft =
                   (screenWidth / chartDataLength) * maxAndMin[0][3] >
-                  screenCenter
+                    screenCenter
                     ? (screenWidth / chartDataLength) * maxAndMin[0][3] - 45
                     : (screenWidth / chartDataLength) * maxAndMin[0][3] + 32;
                 const maxLeft =
                   (screenWidth / chartDataLength) * maxAndMin[0][2] >
-                  screenCenter
+                    screenCenter
                     ? (screenWidth / chartDataLength) * maxAndMin[0][2] - 45
                     : (screenWidth / chartDataLength) * maxAndMin[0][2] + 32;
                 // console.log('min:', (screenWidth / chartDataLength) * maxAndMin[0][3])
