@@ -89,14 +89,6 @@ const initialAdditionalCryptos = [
     address: "qpm2qsznhks23z7629mms6s4cwef74vcwvy22gdx6a",
   },
   {
-    name: "Dash",
-    shortName: "DASH",
-    balance: "0.0",
-    icon: require("../assets/DashIcon.png"),
-    cardImage: require("../assets/Card70.png"),
-    address: "Xr3ar5bWQ5Me6EF1scu6P5tA7L5mje9XDL",
-  },
-  {
     name: "Cardano",
     shortName: "ADA",
     balance: "0.0",
