@@ -171,16 +171,15 @@ function WalletScreen({ route, navigation }) {
       for (const card of cryptoCards) {
         try {
           const response = await fetch(
-            `https://df.likkim.com/api/market/index-candles?instId=${card.shortName}-USD&bar=30m`
+            `https://df.likkim.com/api/market/index-tickers?instId=${card.shortName}-USD`
           );
           const data = await response.json();
-          const startPrice = parseFloat(data.data[0][1]);
-          const endPrice = parseFloat(data.data[data.data.length - 1][4]);
-          const priceChange = (endPrice - startPrice).toFixed(2);
-          const percentageChange = ((priceChange / startPrice) * 100).toFixed(
-            2
-          );
-          changes[card.shortName] = { priceChange, percentageChange };
+          if (data.code === 0 && data.data) {
+            changes[card.shortName] = {
+              priceChange: data.data.last, // 保存最新价格
+              percentageChange: data.data.changePercent, // 直接使用API返回的百分比变化
+            };
+          }
         } catch (error) {
           console.error(
             `Error fetching price change for ${card.shortName}:`,
@@ -637,14 +636,14 @@ function WalletScreen({ route, navigation }) {
                       <View style={WalletScreenStyle.priceChangeView}>
                         <Text
                           style={{
-                            color: "#2A9737",
-                            fontWeight: "bold",
                             color: priceChange > 0 ? "#6FFFB0" : "#FF6F61",
+                            fontWeight: "bold",
                           }}
                         >
-                          {`${
-                            percentageChange > 0 ? "+" : ""
-                          }${percentageChange}%`}
+                          {priceChanges[card.shortName]?.percentageChange > 0
+                            ? "+"
+                            : ""}
+                          {priceChanges[card.shortName]?.percentageChange}%
                         </Text>
                         <Text
                           style={[
