@@ -571,6 +571,17 @@ function WalletScreen({ route, navigation }) {
             card.shortName === "BCH" ||
             card.shortName === "DOT" ||
             card.shortName === "DOGE";
+
+          // 根据卡牌类型设置文字颜色
+          const textColor =
+            priceChange > 0
+              ? isBlackText
+                ? "#22AA94" // 浅色背景下的绿色
+                : "#0C9981" // 深色背景下的绿色
+              : isBlackText
+              ? "#FF5252"
+              : "#F23645";
+
           const priceChange = priceChanges[card.shortName]?.priceChange || "0";
           const percentageChange =
             priceChanges[card.shortName]?.percentageChange || "0";
@@ -636,7 +647,7 @@ function WalletScreen({ route, navigation }) {
                       <View style={WalletScreenStyle.priceChangeView}>
                         <Text
                           style={{
-                            color: priceChange > 0 ? "#6FFFB0" : "#FF6F61",
+                            color: textColor,
                             fontWeight: "bold",
                           }}
                         >
