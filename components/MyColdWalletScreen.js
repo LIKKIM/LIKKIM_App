@@ -834,38 +834,52 @@ function MyColdWalletScreen() {
         animationType="slide"
         transparent={true}
         visible={verificationSuccessModalVisible}
-        onRequestClose={() => {
-          setVerificationSuccessModalVisible(false);
-        }}
+        onRequestClose={() => setVerificationSuccessModalVisible(false)}
       >
-        <View style={MyColdWalletScreenStyle.centeredView}>
-          <View style={MyColdWalletScreenStyle.modalView}>
-            <Text>验证成功！您现在可以安全使用设备。</Text>
-            <Button
-              title="关闭"
+        <BlurView intensity={10} style={MyColdWalletScreenStyle.centeredView}>
+          <View style={MyColdWalletScreenStyle.pinModalView}>
+            <Text style={MyColdWalletScreenStyle.modalTitle}>
+              {t("Verification successful!")}
+            </Text>
+            <Text style={MyColdWalletScreenStyle.modalSubtitle}>
+              {t("You can now safely use the device.")}
+            </Text>
+            <TouchableOpacity
+              style={MyColdWalletScreenStyle.submitButton}
               onPress={() => setVerificationSuccessModalVisible(false)}
-            />
+            >
+              <Text style={MyColdWalletScreenStyle.submitButtonText}>
+                {t("Close")}
+              </Text>
+            </TouchableOpacity>
           </View>
-        </View>
+        </BlurView>
       </Modal>
 
       <Modal
         animationType="slide"
         transparent={true}
         visible={verificationFailModalVisible}
-        onRequestClose={() => {
-          setVerificationFailModalVisible(false);
-        }}
+        onRequestClose={() => setVerificationFailModalVisible(false)}
       >
-        <View style={MyColdWalletScreenStyle.centeredView}>
-          <View style={MyColdWalletScreenStyle.modalView}>
-            <Text>验证失败！请重新尝试连接。</Text>
-            <Button
-              title="关闭"
+        <BlurView intensity={10} style={MyColdWalletScreenStyle.centeredView}>
+          <View style={MyColdWalletScreenStyle.pinModalView}>
+            <Text style={MyColdWalletScreenStyle.modalTitle}>
+              {t("Verification failed!")}
+            </Text>
+            <Text style={MyColdWalletScreenStyle.modalSubtitle}>
+              {t("Please try to connect again.")}
+            </Text>
+            <TouchableOpacity
+              style={MyColdWalletScreenStyle.submitButton}
               onPress={() => setVerificationFailModalVisible(false)}
-            />
+            >
+              <Text style={MyColdWalletScreenStyle.submitButtonText}>
+                {t("Close")}
+              </Text>
+            </TouchableOpacity>
           </View>
-        </View>
+        </BlurView>
       </Modal>
     </LinearGradient>
   );
