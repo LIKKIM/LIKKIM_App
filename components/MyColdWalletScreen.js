@@ -724,9 +724,25 @@ function MyColdWalletScreen() {
                           <TouchableOpacity
                             onPress={() => handleDevicePress(item)}
                           >
-                            <Text style={MyColdWalletScreenStyle.modalSubtitle}>
-                              {item.name || item.id}
-                            </Text>
+                            <View
+                              style={
+                                MyColdWalletScreenStyle.deviceItemContainer
+                              }
+                            >
+                              {item.name && item.name.includes("LIKKIM") && (
+                                <Icon
+                                  name="smartphone" // 确保使用了正确的图标名称
+                                  size={24}
+                                  color={iconColor}
+                                  style={MyColdWalletScreenStyle.deviceIcon}
+                                />
+                              )}
+                              <Text
+                                style={MyColdWalletScreenStyle.modalSubtitle}
+                              >
+                                {item.name || item.id}
+                              </Text>
+                            </View>
                           </TouchableOpacity>
                         )}
                       />
