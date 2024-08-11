@@ -36,6 +36,9 @@ if (Platform.OS === "android") {
   PermissionsAndroid = require("react-native").PermissionsAndroid;
 }
 
+const serviceUUID = "0000FFE0-0000-1000-8000-00805F9B34FB";
+const writeCharacteristicUUID = "0000FFE2-0000-1000-8000-00805F9B34FB";
+
 function MyColdWalletScreen() {
   const { t } = useTranslation();
   const navigation = useNavigation();
@@ -194,9 +197,44 @@ function MyColdWalletScreen() {
     }
   }, [modalVisible, selectedDevice]);
 
-  const handleDevicePress = (device) => {
+  // 发送启动命令的函数
+  const sendStartCommand = async (device) => {
+    const command = new Uint8Array([
+      0xf1, 0x01, 0x00, 0x02,
+      // 计算的CRC高字节,
+      // 计算的CRC低字节,
+      0x0d, 0x0a,
+    ]);
+    const base64Command = base64.fromByteArray(command);
+
+    try {
+      await device.writeCharacteristicWithResponseForService(
+        serviceUUID, // BLE服务的UUID
+        writeCharacteristicUUID, // 可写特性的UUID
+        base64Command // 命令数据的Base64编码
+      );
+      console.log("启动验证命令已发送");
+    } catch (error) {
+      console.error("发送启动命令失败", error);
+    }
+  };
+
+  // 设备选择和显示弹窗的处理函数
+  const handleDevicePress = async (device) => {
     setSelectedDevice(device);
-    setModalVisible(false); // Close Bluetooth modal
+    setModalVisible(false);
+
+    // 连接设备并发送启动命令（可以根据需要加入连接逻辑）
+    try {
+      await device.connect();
+      await device.discoverAllServicesAndCharacteristics();
+      console.log("设备已连接并发现所有服务和特性");
+
+      // 发送启动命令
+      await sendStartCommand(device);
+    } catch (error) {
+      console.error("设备连接或命令发送错误:", error);
+    }
   };
 
   const handlePinSubmit = async (device, pinCode) => {
