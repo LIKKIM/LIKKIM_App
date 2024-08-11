@@ -81,8 +81,10 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       alignItems: "center",
     },
     pinModalView: {
+      position: "absolute",
+      top: 50,
       margin: 20,
-      height: 500,
+      height: 400,
       width: "90%",
       backgroundColor: modalBackgroundColor,
       borderRadius: 20,
