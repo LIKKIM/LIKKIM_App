@@ -153,7 +153,7 @@ function MyColdWalletScreen() {
               setIsScanning(false);
               return;
             }
-          } else {
+          } else if (device.name && device.name.includes("LIKKIM")) {
             setDevices((prevDevices) => {
               if (!prevDevices.find((d) => d.id === device.id)) {
                 return [...prevDevices, device];
@@ -165,7 +165,6 @@ function MyColdWalletScreen() {
         }
       );
 
-      // 设置3秒的定时器停止扫描
       setTimeout(() => {
         console.log("Scanning stopped");
         bleManagerRef.current.stopDeviceScan();
@@ -729,14 +728,12 @@ function MyColdWalletScreen() {
                                 MyColdWalletScreenStyle.deviceItemContainer
                               }
                             >
-                              {item.name && item.name.includes("LIKKIM") && (
-                                <Icon
-                                  name="smartphone" // 确保使用了正确的图标名称
-                                  size={24}
-                                  color={iconColor}
-                                  style={MyColdWalletScreenStyle.deviceIcon}
-                                />
-                              )}
+                              <Icon
+                                name="smartphone"
+                                size={24}
+                                color={iconColor}
+                                style={MyColdWalletScreenStyle.deviceIcon}
+                              />
                               <Text
                                 style={MyColdWalletScreenStyle.modalSubtitle}
                               >

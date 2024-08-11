@@ -17,7 +17,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       flexDirection: "row", // 横向排列
       alignItems: "center", // 垂直居中
       justifyContent: "center",
-      marginBottom: 20,
+      marginTop: 20,
     },
     deviceIcon: {
       paddingRight: 4,
