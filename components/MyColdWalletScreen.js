@@ -63,6 +63,19 @@ function MyColdWalletScreen() {
   const iconColor = isDarkMode ? "#ffffff" : "#676776";
   const darkColors = ["#24234C", "#101021"];
   const lightColors = ["#FFFFFF", "#EDEBEF"];
+  const [verificationSuccessModalVisible, setVerificationSuccessModalVisible] =
+    useState(false);
+  const [verificationFailModalVisible, setVerificationFailModalVisible] =
+    useState(false);
+  const verifyCode = (userInputCode, deviceCode) => {
+    if (userInputCode === deviceCode) {
+      // 验证成功
+      setVerificationSuccessModalVisible(true);
+    } else {
+      // 验证失败
+      setVerificationFailModalVisible(true);
+    }
+  };
 
   const bleManagerRef = useRef(null);
 
@@ -815,6 +828,44 @@ function MyColdWalletScreen() {
             </View>
           </View>
         </BlurView>
+      </Modal>
+      {/* PIN码匹配modal */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={verificationSuccessModalVisible}
+        onRequestClose={() => {
+          setVerificationSuccessModalVisible(false);
+        }}
+      >
+        <View style={MyColdWalletScreenStyle.centeredView}>
+          <View style={MyColdWalletScreenStyle.modalView}>
+            <Text>验证成功！您现在可以安全使用设备。</Text>
+            <Button
+              title="关闭"
+              onPress={() => setVerificationSuccessModalVisible(false)}
+            />
+          </View>
+        </View>
+      </Modal>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={verificationFailModalVisible}
+        onRequestClose={() => {
+          setVerificationFailModalVisible(false);
+        }}
+      >
+        <View style={MyColdWalletScreenStyle.centeredView}>
+          <View style={MyColdWalletScreenStyle.modalView}>
+            <Text>验证失败！请重新尝试连接。</Text>
+            <Button
+              title="关闭"
+              onPress={() => setVerificationFailModalVisible(false)}
+            />
+          </View>
+        </View>
       </Modal>
     </LinearGradient>
   );
