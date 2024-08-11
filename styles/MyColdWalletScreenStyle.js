@@ -13,6 +13,15 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
   const focusedBorderColor = isDarkMode ? "#6C6CF4" : "#007AFF";
 
   return StyleSheet.create({
+    deviceItemContainer: {
+      flexDirection: "row", // 横向排列
+      alignItems: "center", // 垂直居中
+      justifyContent: "center",
+      marginBottom: 20,
+    },
+    deviceIcon: {
+      paddingRight: 4,
+    },
     listContainer: {
       flexDirection: "row",
       alignItems: "center",
@@ -25,7 +34,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
     modalSubtitle: {
       color: secondTextColor,
       fontSize: 14,
-      marginBottom: 20,
+
       textAlign: "center",
     },
     scanModalSubtitle: {
