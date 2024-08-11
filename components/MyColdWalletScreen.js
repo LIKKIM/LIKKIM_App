@@ -197,7 +197,7 @@ function MyColdWalletScreen() {
     }
   }, [modalVisible, selectedDevice]);
 
-  // 发送启动命令的函数
+  // 发送启动嵌入式验证码生成命令的函数
   const sendStartCommand = async (device) => {
     const command = new Uint8Array([
       0xf1, 0x01, 0x00, 0x02,
