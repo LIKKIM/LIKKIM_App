@@ -197,36 +197,38 @@ function MyColdWalletScreen() {
     }
   }, [modalVisible, selectedDevice]);
 
-  function crc16Ccitt(arr) {
-    let crc = 0xffff;
+  function crc16Modbus(arr) {
+    let crc = 0xffff; // 初始值为0xFFFF
     for (let byte of arr) {
-      crc ^= byte << 8;
+      crc ^= byte; // 按位异或
       for (let i = 0; i < 8; i++) {
-        if (crc & 0x8000) {
-          crc = (crc << 1) ^ 0x1021;
+        // 处理每一个字节的8位
+        if (crc & 0x0001) {
+          crc = (crc >> 1) ^ 0xa001; // 多项式为0xA001
         } else {
-          crc = crc << 1;
+          crc = crc >> 1;
         }
       }
     }
-    return crc & 0xffff;
+    return crc & 0xffff; // 确保CRC值是16位
   }
 
-  // 发送启动嵌入式验证码生成命令的函数
   const sendStartCommand = async (device) => {
-    // 命令数据（未包含 CRC 校验码）
+    // 原始命令数据（未包含 CRC 校验码）
     const commandWithoutCrc = new Uint8Array([0xf1, 0x01, 0x02]);
 
-    // 计算 CRC 校验码
-    const crc = crc16Ccitt(commandWithoutCrc);
+    // 使用 CRC-16-Modbus 算法计算命令数据的 CRC 校验码
+    const crc = crc16Modbus(commandWithoutCrc);
+
+    // 将 CRC 校验码转换为高位在前，低位在后的格式
     const crcBytes = new Uint8Array([(crc >> 8) & 0xff, crc & 0xff]);
 
-    // 将 CRC 校验码附加到命令数据
+    // 将 CRC 校验码附加到命令数据中
     const command = new Uint8Array([
       ...commandWithoutCrc,
       ...crcBytes,
-      0x0d,
-      0x0a,
+      0x0d, // 结束符
+      0x0a, // 结束符
     ]);
 
     // 将命令转换为 Base64 编码
