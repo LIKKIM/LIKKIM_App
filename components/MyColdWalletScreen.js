@@ -223,25 +223,23 @@ function MyColdWalletScreen() {
     // 将CRC校验码转换为高位在前，低位在后的格式
     const crcBytes = new Uint8Array([(crc >> 8) & 0xff, crc & 0xff]);
 
-    // 将CRC校验码附加到命令数据中，但不包括结束符
-    const command = new Uint8Array([...commandWithoutCrc, ...crcBytes]);
-
-    // 将命令转换为Base64编码
-    const base64Command = base64.fromByteArray(command);
-
-    // 添加结束符
-    const commandWithEndMarkers = new Uint8Array([
-      ...command,
+    // 将CRC校验码附加到命令数据中
+    const command = new Uint8Array([
+      ...commandWithoutCrc,
+      ...crcBytes,
       0x0d, // 结束符
       0x0a, // 结束符
     ]);
+
+    // 将命令转换为Base64编码
+    const base64Command = base64.fromByteArray(command);
 
     // 打印计算的CRC和最终的命令数据（十六进制表示）
     console.log(
       `Calculated CRC: ${crcBytes[0].toString(16)} ${crcBytes[1].toString(16)}`
     );
     console.log(
-      `Final command with end markers: ${Array.from(commandWithEndMarkers)
+      `Final command: ${Array.from(command)
         .map((byte) => byte.toString(16).padStart(2, "0"))
         .join(" ")}`
     );
