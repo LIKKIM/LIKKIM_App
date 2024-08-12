@@ -800,7 +800,10 @@ function MyColdWalletScreen() {
                   )}
                   <TouchableOpacity
                     style={MyColdWalletScreenStyle.cancelButtonLookingFor}
-                    onPress={() => setModalVisible(false)}
+                    onPress={() => {
+                      setModalVisible(false);
+                      setSelectedDevice(null); // 重置 selectedDevice 状态
+                    }}
                   >
                     <Text style={MyColdWalletScreenStyle.cancelButtonText}>
                       {t("Cancel")}
