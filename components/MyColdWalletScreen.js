@@ -199,7 +199,7 @@ function MyColdWalletScreen() {
 
   // 发送启动嵌入式验证码生成命令的函数
   const sendStartCommand = async (device) => {
-    const command = new Uint8Array([0xf1, 0x01, 0x00, 0x02, 0x0d, 0x0a]);
+    const command = new Uint8Array([0xf1, 0x01, 0x02, 0x0d, 0x0a]);
     const base64Command = base64.fromByteArray(command);
 
     try {
