@@ -197,10 +197,50 @@ function MyColdWalletScreen() {
     }
   }, [modalVisible, selectedDevice]);
 
+  function crc16Ccitt(arr) {
+    let crc = 0xffff;
+    for (let byte of arr) {
+      crc ^= byte << 8;
+      for (let i = 0; i < 8; i++) {
+        if (crc & 0x8000) {
+          crc = (crc << 1) ^ 0x1021;
+        } else {
+          crc = crc << 1;
+        }
+      }
+    }
+    return crc & 0xffff;
+  }
+
   // 发送启动嵌入式验证码生成命令的函数
   const sendStartCommand = async (device) => {
-    const command = new Uint8Array([0xf1, 0x01, 0x02, 0x0d, 0x0a]);
+    // 命令数据（未包含 CRC 校验码）
+    const commandWithoutCrc = new Uint8Array([0xf1, 0x01, 0x02]);
+
+    // 计算 CRC 校验码
+    const crc = crc16Ccitt(commandWithoutCrc);
+    const crcBytes = new Uint8Array([(crc >> 8) & 0xff, crc & 0xff]);
+
+    // 将 CRC 校验码附加到命令数据
+    const command = new Uint8Array([
+      ...commandWithoutCrc,
+      ...crcBytes,
+      0x0d,
+      0x0a,
+    ]);
+
+    // 将命令转换为 Base64 编码
     const base64Command = base64.fromByteArray(command);
+
+    // 打印计算的 CRC 和最终的命令数据（十六进制）
+    console.log(
+      `Calculated CRC: ${crcBytes[0].toString(16)} ${crcBytes[1].toString(16)}`
+    );
+    console.log(
+      `Final command: ${Array.from(command)
+        .map((byte) => byte.toString(16).padStart(2, "0"))
+        .join(" ")}`
+    );
 
     try {
       await device.writeCharacteristicWithResponseForService(
