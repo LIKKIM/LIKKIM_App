@@ -197,20 +197,20 @@ function MyColdWalletScreen() {
     }
   }, [modalVisible, selectedDevice]);
 
-  function crc16Modbus(arr) {
+  function crc16Modbus(data) {
     let crc = 0xffff; // 初始值为0xFFFF
-    for (let byte of arr) {
-      crc ^= byte; // 按位异或
+    for (let byte of data) {
+      crc ^= byte; // 将数据字节与CRC寄存器进行异或
       for (let i = 0; i < 8; i++) {
-        // 处理每一个字节的8位
+        // 循环处理每个位
         if (crc & 0x0001) {
-          crc = (crc >> 1) ^ 0xa001; // 多项式为0xA001
+          crc = (crc >> 1) ^ 0xa001; // 如果LSB为1，右移并与多项式进行异或
         } else {
-          crc = crc >> 1;
+          crc = crc >> 1; // 否则只进行右移
         }
       }
     }
-    return crc & 0xffff; // 确保CRC值是16位
+    return crc; // 返回计算得到的CRC值
   }
 
   const sendStartCommand = async (device) => {
