@@ -344,6 +344,13 @@ function MyColdWalletScreen() {
   };
 
   const handlePinSubmit = () => {
+    // 首先关闭 "Enter PIN to Connect" 的模态框
+    setPinModalVisible(false);
+
+    // 关闭所有其他可能打开的模态框
+    setVerificationSuccessModalVisible(false);
+    setVerificationFailModalVisible(false);
+
     // 将用户输入的 PIN 转换为数字
     const pinCodeValue = parseInt(pinCode, 10); // 将 "1234" 转换为数字 1234
 
@@ -359,10 +366,10 @@ function MyColdWalletScreen() {
     // 将输入的 PIN 与接收到的验证码进行比较
     if (pinCodeValue === verificationCodeValue) {
       console.log("PIN 验证成功");
-      setVerificationSuccessModalVisible(true);
+      setVerificationSuccessModalVisible(true); // 显示成功提示
     } else {
       console.log("PIN 验证失败");
-      setVerificationFailModalVisible(true);
+      setVerificationFailModalVisible(true); // 显示失败提示
     }
 
     // 清空 PIN 输入框
@@ -1030,6 +1037,61 @@ function MyColdWalletScreen() {
             </Text>
             <Text style={MyColdWalletScreenStyle.modalSubtitle}>
               {t("Please try to connect again.")}
+            </Text>
+            <TouchableOpacity
+              style={MyColdWalletScreenStyle.submitButton}
+              onPress={() => setVerificationFailModalVisible(false)}
+            >
+              <Text style={MyColdWalletScreenStyle.submitButtonText}>
+                {t("Close")}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </BlurView>
+      </Modal>
+
+      {/*  成功验证模态框 */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={verificationSuccessModalVisible}
+        onRequestClose={() => setVerificationSuccessModalVisible(false)}
+      >
+        <BlurView intensity={10} style={MyColdWalletScreenStyle.centeredView}>
+          <View style={MyColdWalletScreenStyle.pinModalView}>
+            <Text style={MyColdWalletScreenStyle.modalTitle}>
+              {t("Verification successful!")}
+            </Text>
+            <Text style={MyColdWalletScreenStyle.modalSubtitle}>
+              {t("You can now safely use the device.")}
+            </Text>
+            <TouchableOpacity
+              style={MyColdWalletScreenStyle.submitButton}
+              onPress={() => setVerificationSuccessModalVisible(false)}
+            >
+              <Text style={MyColdWalletScreenStyle.submitButtonText}>
+                {t("Close")}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </BlurView>
+      </Modal>
+      {/*  失败验证模态框 */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={verificationFailModalVisible}
+        onRequestClose={() => setVerificationFailModalVisible(false)}
+      >
+        <BlurView intensity={10} style={MyColdWalletScreenStyle.centeredView}>
+          <View style={MyColdWalletScreenStyle.pinModalView}>
+            <Text style={MyColdWalletScreenStyle.modalTitle}>
+              {t("Verification failed!")}
+            </Text>
+            <Text style={MyColdWalletScreenStyle.modalSubtitle}>
+              {t(
+                "The verification code you entered is incorrect. Please try again."
+              )}
             </Text>
             <TouchableOpacity
               style={MyColdWalletScreenStyle.submitButton}
