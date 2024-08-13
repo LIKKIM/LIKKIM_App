@@ -256,19 +256,28 @@ function MyColdWalletScreen() {
     }
   };
 
+  let monitorSubscription;
+
   const monitorVerificationCode = (device) => {
     const notifyCharacteristicUUID = "0000FFE1-0000-1000-8000-00805F9B34FB";
 
-    device.monitorCharacteristicForService(
+    monitorSubscription = device.monitorCharacteristicForService(
       serviceUUID,
       notifyCharacteristicUUID,
       (error, characteristic) => {
         if (error) {
-          console.error("监听验证码时出错:", error.message);
+          if (
+            error.message.includes("was disconnected") ||
+            error.message.includes("Operation was cancelled")
+          ) {
+            console.log("设备断开连接或操作已取消，停止监听。");
+          } else {
+            console.error("监听验证码时出错:", error.message);
+          }
           return;
         }
 
-        // 将接收到的 Base64 编码的数据转换为 Uint8Array
+        // 将接收到的 Base64 编码的数据转换为字符串
         const receivedDataString = Buffer.from(
           characteristic.value,
           "base64"
@@ -297,6 +306,18 @@ function MyColdWalletScreen() {
         }
       }
     );
+  };
+
+  const stopMonitoringVerificationCode = () => {
+    if (monitorSubscription) {
+      try {
+        monitorSubscription.remove();
+        monitorSubscription = null;
+        console.log("验证码监听已停止");
+      } catch (error) {
+        console.error("停止监听时发生错误:", error);
+      }
+    }
   };
 
   // 设备选择和显示弹窗的处理函数
@@ -368,6 +389,16 @@ function MyColdWalletScreen() {
       setVerificationSuccessModalVisible(true); // 显示成功提示
     } else {
       console.log("PIN 验证失败");
+
+      // 停止监听验证码
+      if (monitorSubscription) {
+        try {
+          monitorSubscription.remove();
+          console.log("验证码监听已停止");
+        } catch (error) {
+          console.error("停止监听时发生错误:", error);
+        }
+      }
 
       // 主动断开与嵌入式设备的连接
       if (selectedDevice) {
