@@ -66,6 +66,7 @@ function MyColdWalletScreen() {
   const iconColor = isDarkMode ? "#ffffff" : "#676776";
   const darkColors = ["#24234C", "#101021"];
   const lightColors = ["#FFFFFF", "#EDEBEF"];
+  const [receivedVerificationCode, setReceivedVerificationCode] = useState("");
   const [verificationSuccessModalVisible, setVerificationSuccessModalVisible] =
     useState(false);
   const [verificationFailModalVisible, setVerificationFailModalVisible] =
@@ -288,6 +289,9 @@ function MyColdWalletScreen() {
             .map((byte) => byte.toString(16).padStart(2, "0"))
             .join(" ");
           console.log("接收到的验证码:", codeHex);
+
+          // 将验证码存储到状态中
+          setReceivedVerificationCode(codeHex);
         } else {
           console.warn("接收到的不是预期的验证码数据");
         }
@@ -339,16 +343,30 @@ function MyColdWalletScreen() {
     }
   };
 
-  const handlePinSubmit = async (device, pinCode) => {
-    try {
-      await connectToDevice(device, pinCode);
-      console.log(`PIN code sent successfully to device ${device.id}`);
-    } catch (error) {
-      console.error(`Failed to connect and send PIN: ${error.message}`);
-    } finally {
-      setPinModalVisible(false);
-      setPinCode("");
+  const handlePinSubmit = () => {
+    // 将用户输入的 PIN 转换为数字
+    const pinCodeValue = parseInt(pinCode, 10); // 将 "1234" 转换为数字 1234
+
+    // 将接收到的验证码转换为数字
+    const verificationCodeValue = parseInt(
+      receivedVerificationCode.replace(" ", ""),
+      16
+    );
+
+    console.log(`用户输入的 PIN 数值: ${pinCodeValue}`);
+    console.log(`接收到的验证码数值: ${verificationCodeValue}`);
+
+    // 将输入的 PIN 与接收到的验证码进行比较
+    if (pinCodeValue === verificationCodeValue) {
+      console.log("PIN 验证成功");
+      setVerificationSuccessModalVisible(true);
+    } else {
+      console.log("PIN 验证失败");
+      setVerificationFailModalVisible(true);
     }
+
+    // 清空 PIN 输入框
+    setPinCode("");
   };
 
   const connectToDevice = async (device, pinCode) => {
