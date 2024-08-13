@@ -256,12 +256,10 @@ function MyColdWalletScreen() {
     }
   };
 
-  let monitorSubscription;
-
   const monitorVerificationCode = (device) => {
     const notifyCharacteristicUUID = "0000FFE1-0000-1000-8000-00805F9B34FB";
 
-    monitorSubscription = device.monitorCharacteristicForService(
+    device.monitorCharacteristicForService(
       serviceUUID,
       notifyCharacteristicUUID,
       (error, characteristic) => {
@@ -270,7 +268,7 @@ function MyColdWalletScreen() {
           return;
         }
 
-        // 将接收到的 Base64 编码的数据转换为字符串
+        // 将接收到的 Base64 编码的数据转换为 Uint8Array
         const receivedDataString = Buffer.from(
           characteristic.value,
           "base64"
@@ -370,12 +368,6 @@ function MyColdWalletScreen() {
       setVerificationSuccessModalVisible(true); // 显示成功提示
     } else {
       console.log("PIN 验证失败");
-
-      // 先停止监听
-      if (monitorSubscription) {
-        monitorSubscription.remove(); // 停止监听
-        monitorSubscription = null;
-      }
 
       // 主动断开与嵌入式设备的连接
       if (selectedDevice) {
