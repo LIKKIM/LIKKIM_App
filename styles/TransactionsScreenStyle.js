@@ -43,7 +43,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       borderWidth: 3,
       borderColor: buttonBackgroundColor,
       padding: 10,
-      width: "90%",
+      width: "100%",
       justifyContent: "center",
       borderRadius: 30,
       height: 60,
@@ -104,7 +104,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
     optionButton: {
       backgroundColor: buttonBackgroundColor,
       padding: 10,
-      width: "90%",
+      width: "100%",
       justifyContent: "center",
       borderRadius: 30,
       height: 60,

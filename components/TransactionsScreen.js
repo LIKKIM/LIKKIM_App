@@ -172,7 +172,7 @@ function TransactionsScreen() {
                 }}
               >
                 <Text style={TransactionsScreenStyle.submitButtonText}>
-                  {t("Submit")}
+                  {t("Next")}
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity
