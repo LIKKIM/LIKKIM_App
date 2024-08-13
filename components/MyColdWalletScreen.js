@@ -343,7 +343,7 @@ function MyColdWalletScreen() {
     }
   };
 
-  const handlePinSubmit = () => {
+  const handlePinSubmit = async () => {
     // 首先关闭 "Enter PIN to Connect" 的模态框
     setPinModalVisible(false);
 
@@ -363,12 +363,22 @@ function MyColdWalletScreen() {
     console.log(`用户输入的 PIN 数值: ${pinCodeValue}`);
     console.log(`接收到的验证码数值: ${verificationCodeValue}`);
 
-    // 将输入的 PIN 与接收到的验证码进行比较
     if (pinCodeValue === verificationCodeValue) {
       console.log("PIN 验证成功");
       setVerificationSuccessModalVisible(true); // 显示成功提示
     } else {
       console.log("PIN 验证失败");
+
+      // 主动断开与嵌入式设备的连接
+      if (selectedDevice) {
+        try {
+          await selectedDevice.cancelConnection();
+          console.log("已断开与设备的连接");
+        } catch (error) {
+          console.error("断开连接时发生错误:", error);
+        }
+      }
+
       setVerificationFailModalVisible(true); // 显示失败提示
     }
 
