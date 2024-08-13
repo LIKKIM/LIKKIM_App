@@ -39,7 +39,7 @@ const WalletScreenStyles = (isDarkMode) => {
 
     receiveModalView: {
       margin: 20,
-      height: 500,
+      height: 600,
       width: "90%",
       backgroundColor: modalBackgroundColor,
       borderRadius: 20,

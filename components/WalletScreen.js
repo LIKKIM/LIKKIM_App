@@ -862,14 +862,31 @@ function WalletScreen({ route, navigation }) {
             >
               <QRCode value={selectedAddress} size={200} />
             </View>
-            <TouchableOpacity
-              style={WalletScreenStyle.cancelAddressButton}
-              onPress={() => setAddressModalVisible(false)}
+            <View
+              style={{
+                flexDirection: "col",
+                width: "100%",
+                justifyContent: "space-between",
+                marginTop: 20,
+              }}
             >
-              <Text style={WalletScreenStyle.cancelButtonText}>
-                {t("Close")}
-              </Text>
-            </TouchableOpacity>
+              <TouchableOpacity
+                style={WalletScreenStyle.cancelAddressButton}
+                onPress={() => verifyAddress()} // 这应当是一个你定义的函数来处理地址验证
+              >
+                <Text style={WalletScreenStyle.cancelButtonText}>
+                  {t("Verify Address")}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={WalletScreenStyle.cancelAddressButton}
+                onPress={() => setAddressModalVisible(false)}
+              >
+                <Text style={WalletScreenStyle.cancelButtonText}>
+                  {t("Close")}
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </BlurView>
       </Modal>
