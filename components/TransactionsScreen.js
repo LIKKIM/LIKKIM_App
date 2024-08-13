@@ -487,7 +487,7 @@ function TransactionsScreen() {
                   marginTop: 20,
                 }}
               >
-                <TouchableOpacity style={TransactionsScreenStyle.cancelButton}>
+                <TouchableOpacity style={TransactionsScreenStyle.optionButton}>
                   <Text style={TransactionsScreenStyle.cancelButtonText}>
                     {t("Verify Address")}
                   </Text>
