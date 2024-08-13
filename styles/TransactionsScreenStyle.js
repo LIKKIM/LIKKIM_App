@@ -53,13 +53,13 @@ const TransactionsScreenStyles = (isDarkMode) => {
     modalView: {
       margin: 20,
       height: 500,
-
       width: "90%",
       backgroundColor: modalBackgroundColor,
       borderRadius: 20,
       padding: 35,
       alignItems: "center",
     },
+
     addressText: {
       color: secondTextColor,
       textAlign: "center",
@@ -124,6 +124,27 @@ const TransactionsScreenStyles = (isDarkMode) => {
       justifyContent: "center",
       borderRadius: 10,
       height: 60,
+      alignItems: "center",
+    },
+    amountInput: {
+      backgroundColor: inputBackgroundColor,
+      padding: 10,
+      marginTop: 30,
+      marginBottom: 20,
+      justifyContent: "center",
+      borderRadius: 10,
+      height: 60,
+      alignItems: "center",
+    },
+    amountModalView: {
+      position: "absolute",
+      top: 100,
+      margin: 20,
+      height: 360,
+      width: "90%",
+      backgroundColor: modalBackgroundColor,
+      borderRadius: 20,
+      padding: 35,
       alignItems: "center",
     },
     /*  History */

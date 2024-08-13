@@ -40,7 +40,8 @@ function TransactionsScreen() {
   const [transactionHistory, setTransactionHistory] = useState([]);
   const [inputAddressModalVisible, setInputAddressModalVisible] =
     useState(false);
-
+  const [amountModalVisible, setAmountModalVisible] = useState(false); // 新增状态
+  const [amount, setAmount] = useState(""); // 保存输入的金额
   useEffect(() => {
     // 从 AsyncStorage 加载 addedCryptos 数据
     const loadAddedCryptos = async () => {
@@ -79,7 +80,10 @@ function TransactionsScreen() {
       setInputAddressModalVisible(true);
     }
   };
-
+  const handleNextAfterAddress = () => {
+    setInputAddressModalVisible(false);
+    setAmountModalVisible(true);
+  };
   const copyToClipboard = (address) => {
     Clipboard.setString(address);
     alert(t("Address copied to clipboard!"));
@@ -156,20 +160,19 @@ function TransactionsScreen() {
               </Text>
               <View style={{ width: "100%" }}>
                 <TextInput
-                  style={[TransactionsScreenStyle.input, { color: "#ffffff" }]}
+                  style={[
+                    TransactionsScreenStyle.input,
+                    { color: isDarkMode ? "#ffffff" : "#000000" },
+                  ]}
                   placeholder={t("Enter Address")}
-                  placeholderTextColor={placeholderColor}
+                  placeholderTextColor={isDarkMode ? "#ffffff" : "#24234C"}
                   onChangeText={(text) => setInputAddress(text)}
                   value={inputAddress}
                 />
               </View>
               <TouchableOpacity
                 style={TransactionsScreenStyle.optionButton}
-                onPress={() => {
-                  console.log(`Sending ${selectedCrypto} to ${inputAddress}`);
-                  setInputAddressModalVisible(false);
-                  // Implement the logic to send crypto to the input address
-                }}
+                onPress={handleNextAfterAddress}
               >
                 <Text style={TransactionsScreenStyle.submitButtonText}>
                   {t("Next")}
@@ -183,6 +186,69 @@ function TransactionsScreen() {
                   {t("Cancel")}
                 </Text>
               </TouchableOpacity>
+            </View>
+          </BlurView>
+        </Modal>
+
+        {/* 新的输入金额的Modal */}
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={amountModalVisible}
+          onRequestClose={() => setAmountModalVisible(false)}
+        >
+          <BlurView intensity={10} style={TransactionsScreenStyle.centeredView}>
+            <View style={TransactionsScreenStyle.amountModalView}>
+              <Text style={TransactionsScreenStyle.modalTitle}>
+                {t("Enter the amount to send:")}
+              </Text>
+              <View style={{ width: "100%" }}>
+                <TextInput
+                  style={[
+                    TransactionsScreenStyle.amountInput,
+                    { color: isDarkMode ? "#ffffff" : "#000000" },
+                  ]}
+                  placeholder={t("Enter Amount")}
+                  placeholderTextColor={isDarkMode ? "#ffffff" : "#24234C"}
+                  keyboardType="numeric"
+                  onChangeText={(text) => setAmount(text)}
+                  value={amount}
+                />
+              </View>
+              <View
+                style={{
+                  flexDirection: "col",
+                  justifyContent: "space-between",
+                  width: "100%",
+                }}
+              >
+                <TouchableOpacity
+                  style={TransactionsScreenStyle.optionButton}
+                  onPress={() => {
+                    console.log(
+                      `Sending ${amount} ${selectedCrypto} to ${inputAddress}`
+                    );
+                    setAmountModalVisible(false);
+                    // Implement the logic to send crypto with the input amount
+                  }}
+                >
+                  <Text style={TransactionsScreenStyle.submitButtonText}>
+                    {t("Next")}
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={TransactionsScreenStyle.optionButton}
+                  onPress={() => {
+                    // 返回到输入地址的 modal
+                    setAmountModalVisible(false); // 关闭金额输入的 modal
+                    setInputAddressModalVisible(true); // 打开地址输入的 modal
+                  }}
+                >
+                  <Text style={TransactionsScreenStyle.submitButtonText}>
+                    {t("Back")}
+                  </Text>
+                </TouchableOpacity>
+              </View>
             </View>
           </BlurView>
         </Modal>
