@@ -69,16 +69,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       padding: 35,
       alignItems: "center",
     },
-    pinModalView: {
-      margin: 20,
-      height: 500,
-      width: "90%",
-      backgroundColor: modalBackgroundColor,
-      borderRadius: 20,
-      padding: 35,
-      alignItems: "center",
-      justifyContent: "space-between",
-    },
+
     EnterPasswordModalView: {
       justifyContent: "space-evenly",
       margin: 20,
@@ -89,7 +80,10 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       padding: 35,
       alignItems: "center",
     },
+
     pinModalView: {
+      position: "absolute",
+      top: 100,
       margin: 20,
       height: 400,
       width: "90%",
