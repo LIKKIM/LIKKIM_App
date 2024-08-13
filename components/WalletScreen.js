@@ -871,8 +871,8 @@ function WalletScreen({ route, navigation }) {
               }}
             >
               <TouchableOpacity
-                style={WalletScreenStyle.cancelAddressButton}
-                onPress={() => verifyAddress()} // 这应当是一个你定义的函数来处理地址验证
+                style={WalletScreenStyle.verifyAddressButton}
+                onPress={() => setAddressModalVisible(false)}
               >
                 <Text style={WalletScreenStyle.cancelButtonText}>
                   {t("Verify Address")}

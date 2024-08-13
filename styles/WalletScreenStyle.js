@@ -296,6 +296,16 @@ const WalletScreenStyles = (isDarkMode) => {
       alignItems: "center",
       marginTop: 20,
     },
+    verifyAddressButton: {
+      backgroundColor: buttonBackgroundColor, // 设置边框颜色
+      padding: 10,
+      width: "100%",
+      justifyContent: "center",
+      borderRadius: 30,
+      height: 60,
+      alignItems: "center",
+      marginTop: 20,
+    },
     cancelButtonCryptoCard: {
       zIndex: 10,
       borderWidth: 3, // 设置边框宽度

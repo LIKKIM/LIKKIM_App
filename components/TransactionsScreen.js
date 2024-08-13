@@ -258,6 +258,7 @@ function TransactionsScreen() {
                   keyboardType="numeric"
                   onChangeText={(text) => setAmount(text)}
                   value={amount}
+                  autoFocus={true}
                 />
               </View>
               <View
