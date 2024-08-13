@@ -37,11 +37,14 @@ function TransactionsScreen() {
   const lightColors = ["#FFFFFF", "#EDEBEF"];
   const placeholderColor = isDarkMode ? "#ffffff" : "#24234C";
   const [inputAddress, setInputAddress] = useState("");
+  const [amountModalVisible, setAmountModalVisible] = useState(false); // 新增状态
+  const [amount, setAmount] = useState(""); // 保存输入的金额
+  const [confirmModalVisible, setConfirmModalVisible] = useState(false); // 新增交易确认modal状态
+  const [transactionFee, setTransactionFee] = useState("0.001"); // 示例交易手续费
   const [transactionHistory, setTransactionHistory] = useState([]);
   const [inputAddressModalVisible, setInputAddressModalVisible] =
     useState(false);
-  const [amountModalVisible, setAmountModalVisible] = useState(false); // 新增状态
-  const [amount, setAmount] = useState(""); // 保存输入的金额
+
   useEffect(() => {
     // 从 AsyncStorage 加载 addedCryptos 数据
     const loadAddedCryptos = async () => {
@@ -83,6 +86,11 @@ function TransactionsScreen() {
   const handleNextAfterAddress = () => {
     setInputAddressModalVisible(false);
     setAmountModalVisible(true);
+  };
+
+  const handleNextAfterAmount = () => {
+    setAmountModalVisible(false);
+    setConfirmModalVisible(true);
   };
   const copyToClipboard = (address) => {
     Clipboard.setString(address);
@@ -147,6 +155,8 @@ function TransactionsScreen() {
             ))
           )}
         </View>
+
+        {/* 输入地址的 Modal */}
         <Modal
           animationType="slide"
           transparent={true}
@@ -155,6 +165,23 @@ function TransactionsScreen() {
         >
           <BlurView intensity={10} style={TransactionsScreenStyle.centeredView}>
             <View style={TransactionsScreenStyle.modalView}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  marginBottom: 10,
+                }}
+              >
+                {selectedCryptoIcon && (
+                  <Image
+                    source={selectedCryptoIcon}
+                    style={{ width: 24, height: 24, marginRight: 8 }}
+                  />
+                )}
+                <Text style={TransactionsScreenStyle.modalTitle}>
+                  {selectedCrypto}
+                </Text>
+              </View>
               <Text style={TransactionsScreenStyle.modalTitle}>
                 {t("Enter the recipient's address:")}
               </Text>
@@ -190,7 +217,7 @@ function TransactionsScreen() {
           </BlurView>
         </Modal>
 
-        {/* 新的输入金额的Modal */}
+        {/* 输入金额的 Modal */}
         <Modal
           animationType="slide"
           transparent={true}
@@ -199,6 +226,23 @@ function TransactionsScreen() {
         >
           <BlurView intensity={10} style={TransactionsScreenStyle.centeredView}>
             <View style={TransactionsScreenStyle.amountModalView}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  marginBottom: 10,
+                }}
+              >
+                {selectedCryptoIcon && (
+                  <Image
+                    source={selectedCryptoIcon}
+                    style={{ width: 24, height: 24, marginRight: 8 }}
+                  />
+                )}
+                <Text style={TransactionsScreenStyle.modalTitle}>
+                  {selectedCrypto}
+                </Text>
+              </View>
               <Text style={TransactionsScreenStyle.modalTitle}>
                 {t("Enter the amount to send:")}
               </Text>
@@ -224,13 +268,7 @@ function TransactionsScreen() {
               >
                 <TouchableOpacity
                   style={TransactionsScreenStyle.optionButton}
-                  onPress={() => {
-                    console.log(
-                      `Sending ${amount} ${selectedCrypto} to ${inputAddress}`
-                    );
-                    setAmountModalVisible(false);
-                    // Implement the logic to send crypto with the input amount
-                  }}
+                  onPress={handleNextAfterAmount}
                 >
                   <Text style={TransactionsScreenStyle.submitButtonText}>
                     {t("Next")}
@@ -239,9 +277,8 @@ function TransactionsScreen() {
                 <TouchableOpacity
                   style={TransactionsScreenStyle.optionButton}
                   onPress={() => {
-                    // 返回到输入地址的 modal
-                    setAmountModalVisible(false); // 关闭金额输入的 modal
-                    setInputAddressModalVisible(true); // 打开地址输入的 modal
+                    setAmountModalVisible(false);
+                    setInputAddressModalVisible(true);
                   }}
                 >
                   <Text style={TransactionsScreenStyle.submitButtonText}>
@@ -252,6 +289,68 @@ function TransactionsScreen() {
             </View>
           </BlurView>
         </Modal>
+
+        {/* 交易确认的 Modal */}
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={confirmModalVisible}
+          onRequestClose={() => setConfirmModalVisible(false)}
+        >
+          <BlurView intensity={10} style={TransactionsScreenStyle.centeredView}>
+            <View style={TransactionsScreenStyle.confirmModalView}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  marginBottom: 10,
+                }}
+              >
+                {selectedCryptoIcon && (
+                  <Image
+                    source={selectedCryptoIcon}
+                    style={{ width: 24, height: 24, marginRight: 8 }}
+                  />
+                )}
+                <Text style={TransactionsScreenStyle.modalTitle}>
+                  {selectedCrypto}
+                </Text>
+              </View>
+              <Text style={TransactionsScreenStyle.cancelButtonText}>
+                {t("Amount:")} {amount} {selectedCrypto}
+              </Text>
+              <Text style={TransactionsScreenStyle.cancelButtonText}>
+                {t("Recipient Address:")} {inputAddress}
+              </Text>
+              <Text style={TransactionsScreenStyle.cancelButtonText}>
+                {t("Transaction Fee:")} {transactionFee} {selectedCrypto}
+              </Text>
+              <View style={{ marginTop: 20, width: "100%" }}>
+                <TouchableOpacity
+                  style={TransactionsScreenStyle.cancelButton}
+                  onPress={() => {
+                    // 实现确认交易的逻辑
+                    console.log("Transaction Confirmed");
+                    setConfirmModalVisible(false);
+                  }}
+                >
+                  <Text style={TransactionsScreenStyle.cancelButtonText}>
+                    {t("Confirm")}
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={TransactionsScreenStyle.cancelButton}
+                  onPress={() => setConfirmModalVisible(false)}
+                >
+                  <Text style={TransactionsScreenStyle.cancelButtonText}>
+                    {t("Cancel")}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </BlurView>
+        </Modal>
+
         {/* 选择接收的加密货币模态窗口 */}
         <Modal
           animationType="slide"

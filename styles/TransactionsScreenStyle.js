@@ -60,6 +60,17 @@ const TransactionsScreenStyles = (isDarkMode) => {
       alignItems: "center",
     },
 
+    confirmModalView: {
+      margin: 20,
+      height: 500,
+      width: "90%",
+      backgroundColor: modalBackgroundColor,
+      borderRadius: 20,
+      padding: 35,
+      alignItems: "center",
+      justifyContent: "space-between",
+    },
+
     addressText: {
       color: secondTextColor,
       textAlign: "center",
@@ -75,7 +86,6 @@ const TransactionsScreenStyles = (isDarkMode) => {
       color: titleColor,
       fontSize: 16,
       fontWeight: "bold",
-      marginBottom: 15,
     },
     modalReceiveTitle: {
       color: titleColor,
