@@ -726,6 +726,7 @@ function MyColdWalletScreen() {
                       onFocus={() => setIsPasswordFocused(true)}
                       onBlur={() => setIsPasswordFocused(false)}
                       value={currentPassword}
+                      autoFocus={true}
                     />
                     <TouchableOpacity
                       onPress={() =>
@@ -781,7 +782,7 @@ function MyColdWalletScreen() {
               intensity={10}
               style={MyColdWalletScreenStyle.centeredView}
             >
-              <View style={MyColdWalletScreenStyle.modalView}>
+              <View style={MyColdWalletScreenStyle.setPasswordModalView}>
                 <Text style={MyColdWalletScreenStyle.passwordModalTitle}>
                   {t("Set Password")}
                 </Text>
@@ -806,6 +807,7 @@ function MyColdWalletScreen() {
                       onFocus={() => setIsPasswordFocused(true)}
                       onBlur={() => setIsPasswordFocused(false)}
                       value={password}
+                      autoFocus={true}
                     />
                     <TouchableOpacity
                       onPress={() => setIsPasswordHidden(!isPasswordHidden)}
