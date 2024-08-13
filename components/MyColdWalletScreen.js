@@ -255,6 +255,46 @@ function MyColdWalletScreen() {
     }
   };
 
+  const monitorVerificationCode = (device) => {
+    const notifyCharacteristicUUID = "0000FFE1-0000-1000-8000-00805F9B34FB";
+
+    device.monitorCharacteristicForService(
+      serviceUUID,
+      notifyCharacteristicUUID,
+      (error, characteristic) => {
+        if (error) {
+          console.error("监听验证码时出错:", error.message);
+          return;
+        }
+
+        // 将接收到的 Base64 编码的数据转换为 Uint8Array
+        const receivedDataString = Buffer.from(
+          characteristic.value,
+          "base64"
+        ).toString("ascii");
+        console.log("接收到的原始数据字符串:", receivedDataString);
+
+        // 将接收到的字符串解析为字节数组
+        const receivedData = receivedDataString
+          .split(" ")
+          .map((hex) => parseInt(hex, 16));
+        console.log("解析后的字节数组:", receivedData);
+
+        // 检查头帧数据是否为 0xA1
+        if (receivedData[0] === 0xa1) {
+          // 提取验证码数据
+          const verificationCode = receivedData.slice(1, 3); // 获取 `0x04 0xD2` 部分
+          const codeHex = Array.from(verificationCode)
+            .map((byte) => byte.toString(16).padStart(2, "0"))
+            .join(" ");
+          console.log("接收到的验证码:", codeHex);
+        } else {
+          console.warn("接收到的不是预期的验证码数据");
+        }
+      }
+    );
+  };
+
   // 设备选择和显示弹窗的处理函数
   const handleDevicePress = async (device) => {
     setSelectedDevice(device);
@@ -268,29 +308,20 @@ function MyColdWalletScreen() {
 
       // 发送蓝牙连接命令
       const connectionCommandData = new Uint8Array([0xf0, 0x01, 0x03]);
-
-      // 计算CRC校验码
       const connectionCrc = crc16Modbus(connectionCommandData);
-
-      // 转换为高位在前，低位在后的格式
       const connectionCrcHighByte = (connectionCrc >> 8) & 0xff;
       const connectionCrcLowByte = connectionCrc & 0xff;
-
-      // 构造最终的连接命令
       const finalConnectionCommand = new Uint8Array([
         ...connectionCommandData,
         connectionCrcHighByte,
         connectionCrcLowByte,
-        0x0d, // 结束符
-        0x0a, // 结束符
+        0x0d,
+        0x0a,
       ]);
-
-      // 转换为Base64编码
       const base64ConnectionCommand = base64.fromByteArray(
         finalConnectionCommand
       );
 
-      // 发送蓝牙连接命令
       await device.writeCharacteristicWithResponseForService(
         serviceUUID,
         writeCharacteristicUUID,
@@ -300,6 +331,9 @@ function MyColdWalletScreen() {
 
       // 如果蓝牙连接命令发送成功，继续发送启动验证命令
       await sendStartCommand(device);
+
+      // 开始监听嵌入式设备的返回信息
+      monitorVerificationCode(device);
     } catch (error) {
       console.error("设备连接或命令发送错误:", error);
     }
