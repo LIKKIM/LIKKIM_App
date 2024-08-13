@@ -164,7 +164,7 @@ function TransactionsScreen() {
           onRequestClose={() => setInputAddressModalVisible(false)}
         >
           <BlurView intensity={10} style={TransactionsScreenStyle.centeredView}>
-            <View style={TransactionsScreenStyle.modalView}>
+            <View style={TransactionsScreenStyle.inputModelView}>
               <View
                 style={{
                   flexDirection: "row",
@@ -390,9 +390,19 @@ function TransactionsScreen() {
                       style={TransactionsScreenStyle.optionButton}
                       onPress={() => selectCrypto(crypto)}
                     >
-                      <Text style={TransactionsScreenStyle.optionButtonText}>
-                        {crypto.shortName}
-                      </Text>
+                      <View
+                        style={{ flexDirection: "row", alignItems: "center" }}
+                      >
+                        {crypto.icon && (
+                          <Image
+                            source={crypto.icon}
+                            style={{ width: 24, height: 24, marginRight: 8 }}
+                          />
+                        )}
+                        <Text style={TransactionsScreenStyle.optionButtonText}>
+                          {crypto.shortName}
+                        </Text>
+                      </View>
                     </TouchableOpacity>
                   ))}
                 </ScrollView>
@@ -408,6 +418,7 @@ function TransactionsScreen() {
             </View>
           </BlurView>
         </Modal>
+
         {/* 显示选择的加密货币地址的模态窗口 */}
         <Modal
           animationType="slide"

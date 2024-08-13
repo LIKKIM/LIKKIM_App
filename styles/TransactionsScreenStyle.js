@@ -37,7 +37,6 @@ const TransactionsScreenStyles = (isDarkMode) => {
       borderRadius: 30,
       height: 60,
       alignItems: "center",
-      marginTop: 20,
     },
     cancelButtonReceive: {
       borderWidth: 3,
@@ -53,6 +52,17 @@ const TransactionsScreenStyles = (isDarkMode) => {
     modalView: {
       margin: 20,
       height: 500,
+      width: "90%",
+      backgroundColor: modalBackgroundColor,
+      borderRadius: 20,
+      padding: 35,
+      alignItems: "center",
+    },
+    inputModelView: {
+      position: "absolute",
+      top: 100,
+      margin: 20,
+      height: 360,
       width: "90%",
       backgroundColor: modalBackgroundColor,
       borderRadius: 20,
@@ -119,7 +129,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       borderRadius: 30,
       height: 60,
       alignItems: "center",
-      marginBottom: 10,
+      marginBottom: 20,
     },
 
     submitButtonText: {
@@ -129,8 +139,8 @@ const TransactionsScreenStyles = (isDarkMode) => {
     input: {
       backgroundColor: inputBackgroundColor,
       padding: 10,
-      marginTop: 30,
-      marginBottom: 160,
+      marginTop: 20,
+      marginBottom: 20,
       justifyContent: "center",
       borderRadius: 10,
       height: 60,
