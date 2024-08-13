@@ -260,13 +260,45 @@ function MyColdWalletScreen() {
     setSelectedDevice(device);
     setModalVisible(false);
 
-    // 连接设备并发送启动命令（可以根据需要加入连接逻辑）
     try {
+      // 连接设备
       await device.connect();
       await device.discoverAllServicesAndCharacteristics();
       console.log("设备已连接并发现所有服务和特性");
 
-      // 发送启动命令
+      // 发送蓝牙连接命令
+      const connectionCommandData = new Uint8Array([0xf0, 0x01, 0x03]);
+
+      // 计算CRC校验码
+      const connectionCrc = crc16Modbus(connectionCommandData);
+
+      // 转换为高位在前，低位在后的格式
+      const connectionCrcHighByte = (connectionCrc >> 8) & 0xff;
+      const connectionCrcLowByte = connectionCrc & 0xff;
+
+      // 构造最终的连接命令
+      const finalConnectionCommand = new Uint8Array([
+        ...connectionCommandData,
+        connectionCrcHighByte,
+        connectionCrcLowByte,
+        0x0d, // 结束符
+        0x0a, // 结束符
+      ]);
+
+      // 转换为Base64编码
+      const base64ConnectionCommand = base64.fromByteArray(
+        finalConnectionCommand
+      );
+
+      // 发送蓝牙连接命令
+      await device.writeCharacteristicWithResponseForService(
+        serviceUUID,
+        writeCharacteristicUUID,
+        base64ConnectionCommand
+      );
+      console.log("蓝牙连接命令已发送");
+
+      // 如果蓝牙连接命令发送成功，继续发送启动验证命令
       await sendStartCommand(device);
     } catch (error) {
       console.error("设备连接或命令发送错误:", error);
