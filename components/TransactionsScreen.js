@@ -283,7 +283,7 @@ function TransactionsScreen() {
                     setInputAddressModalVisible(true);
                   }}
                 >
-                  <Text style={TransactionsScreenStyle.submitButtonText}>
+                  <Text style={TransactionsScreenStyle.cancelButtonText}>
                     {t("Back")}
                   </Text>
                 </TouchableOpacity>
@@ -336,7 +336,7 @@ function TransactionsScreen() {
                     setConfirmModalVisible(false);
                   }}
                 >
-                  <Text style={TransactionsScreenStyle.cancelButtonText}>
+                  <Text style={TransactionsScreenStyle.submitButtonText}>
                     {t("Confirm")}
                   </Text>
                 </TouchableOpacity>
@@ -489,7 +489,7 @@ function TransactionsScreen() {
                 }}
               >
                 <TouchableOpacity style={TransactionsScreenStyle.optionButton}>
-                  <Text style={TransactionsScreenStyle.cancelButtonText}>
+                  <Text style={TransactionsScreenStyle.submitButtonText}>
                     {t("Verify Address")}
                   </Text>
                 </TouchableOpacity>
