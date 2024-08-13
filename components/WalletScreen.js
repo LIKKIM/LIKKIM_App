@@ -77,6 +77,13 @@ function WalletScreen({ route, navigation }) {
   const [showLetsGoButton, setShowLetsGoButton] = useState(false);
   const [tabOpacity] = useState(new Animated.Value(1));
   const [cardInfoVisible, setCardInfoVisible] = useState(false); // 控制卡片信息显示
+  const [searchQuery, setSearchQuery] = useState("");
+  const filteredCryptos = additionalCryptos.filter(
+    (crypto) =>
+      crypto.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      crypto.shortName.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   const mnemonic = [
     ["apple", "banana", "cherry"],
     ["dog", "elephant", "frog"],
@@ -1135,6 +1142,7 @@ function WalletScreen({ route, navigation }) {
       </Modal>
 
       {/* Add Crypto Modal */}
+
       <Modal
         animationType="slide"
         transparent={true}
@@ -1146,12 +1154,29 @@ function WalletScreen({ route, navigation }) {
       >
         <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
           <View style={WalletScreenStyle.addCryptoModalView}>
+            {/* 搜索输入框 */}
+            <View style={WalletScreenStyle.searchContainer}>
+              <Icon
+                name="search"
+                size={20}
+                style={WalletScreenStyle.searchIcon}
+              />
+              <TextInput
+                style={WalletScreenStyle.searchInput}
+                placeholder={t("Search Cryptocurrency")}
+                placeholderTextColor={isDarkMode ? "#ffffff" : "#24234C"}
+                onChangeText={(text) => setSearchQuery(text)}
+                value={searchQuery}
+              />
+            </View>
+
             <ScrollView
               style={WalletScreenStyle.addCryptoScrollView}
               showsVerticalScrollIndicator={false}
               showsHorizontalScrollIndicator={false}
             >
-              {additionalCryptos.map((crypto) => (
+              {/* 使用搜索关键字过滤后的加密货币列表 */}
+              {filteredCryptos.map((crypto) => (
                 <TouchableOpacity
                   key={crypto.name}
                   style={WalletScreenStyle.addCryptoButton}

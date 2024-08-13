@@ -104,6 +104,28 @@ const WalletScreenStyles = (isDarkMode) => {
       paddingHorizontal: 20,
       height: 360,
     },
+
+    searchContainer: {
+      flexDirection: "row",
+      alignItems: "center",
+      borderRadius: 10,
+      width: "100%",
+      backgroundColor: isDarkMode ? "#1E1D3F" : "#E5E1E9", // Dark mode and light mode background color
+      marginBottom: 20,
+    },
+
+    searchInput: {
+      width: "100%",
+      padding: 10,
+      borderRadius: 10,
+      color: textColor, // Dark mode and light mode text color
+    },
+
+    searchIcon: {
+      paddingLeft: 10,
+      color: textColor,
+    },
+
     linearGradient: {
       flex: 1,
       backgroundColor: backgroundColor,
