@@ -195,6 +195,7 @@ function TransactionsScreen() {
                   placeholderTextColor={isDarkMode ? "#ffffff" : "#24234C"}
                   onChangeText={(text) => setInputAddress(text)}
                   value={inputAddress}
+                  autoFocus={true}
                 />
               </View>
               <TouchableOpacity
@@ -275,7 +276,7 @@ function TransactionsScreen() {
                   </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  style={TransactionsScreenStyle.optionButton}
+                  style={TransactionsScreenStyle.cancelButton}
                   onPress={() => {
                     setAmountModalVisible(false);
                     setInputAddressModalVisible(true);
@@ -327,7 +328,7 @@ function TransactionsScreen() {
               </Text>
               <View style={{ marginTop: 20, width: "100%" }}>
                 <TouchableOpacity
-                  style={TransactionsScreenStyle.cancelButton}
+                  style={TransactionsScreenStyle.optionButton}
                   onPress={() => {
                     // 实现确认交易的逻辑
                     console.log("Transaction Confirmed");

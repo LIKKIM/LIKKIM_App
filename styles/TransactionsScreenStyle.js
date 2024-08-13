@@ -149,7 +149,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
     amountInput: {
       backgroundColor: inputBackgroundColor,
       padding: 10,
-      marginTop: 30,
+      marginTop: 20,
       marginBottom: 20,
       justifyContent: "center",
       borderRadius: 10,
