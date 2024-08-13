@@ -317,7 +317,7 @@ function MyColdWalletScreen() {
       await device.discoverAllServicesAndCharacteristics();
       console.log("设备已连接并发现所有服务和特性");
 
-      // 发送蓝牙连接命令
+      // 发送第一条命令 F0 01 03
       const connectionCommandData = new Uint8Array([0xf0, 0x01, 0x03]);
       const connectionCrc = crc16Modbus(connectionCommandData);
       const connectionCrcHighByte = (connectionCrc >> 8) & 0xff;
@@ -338,9 +338,12 @@ function MyColdWalletScreen() {
         writeCharacteristicUUID,
         base64ConnectionCommand
       );
-      console.log("蓝牙连接命令已发送");
+      console.log("第一条蓝牙连接命令已发送: F0 01 03");
 
-      // 如果蓝牙连接命令发送成功，继续发送启动验证命令
+      // 延迟5毫秒
+      await new Promise((resolve) => setTimeout(resolve, 5));
+
+      // 发送第二条命令 F1 01 02
       await sendStartCommand(device);
 
       // 开始监听嵌入式设备的返回信息

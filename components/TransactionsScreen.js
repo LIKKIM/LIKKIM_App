@@ -302,14 +302,29 @@ function TransactionsScreen() {
               >
                 <QRCode value={selectedAddress} size={200} />
               </View>
-              <TouchableOpacity
-                style={TransactionsScreenStyle.cancelButton}
-                onPress={() => setAddressModalVisible(false)}
+              <View
+                style={{
+                  flexDirection: "col",
+                  width: "100%",
+                  justifyContent: "space-between",
+                  marginTop: 20,
+                }}
               >
-                <Text style={TransactionsScreenStyle.cancelButtonText}>
-                  {t("Close")}
-                </Text>
-              </TouchableOpacity>
+                <TouchableOpacity style={TransactionsScreenStyle.cancelButton}>
+                  <Text style={TransactionsScreenStyle.cancelButtonText}>
+                    {t("Verify Address")}
+                  </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  style={TransactionsScreenStyle.cancelButton}
+                  onPress={() => setAddressModalVisible(false)}
+                >
+                  <Text style={TransactionsScreenStyle.cancelButtonText}>
+                    {t("Close")}
+                  </Text>
+                </TouchableOpacity>
+              </View>
             </View>
           </BlurView>
         </Modal>

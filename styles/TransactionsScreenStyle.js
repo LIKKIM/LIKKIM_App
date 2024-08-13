@@ -29,14 +29,15 @@ const TransactionsScreenStyles = (isDarkMode) => {
       fontSize: 16,
     },
     cancelButton: {
-      borderWidth: 3,
-      borderColor: buttonBackgroundColor,
+      borderWidth: 3, // 设置边框宽度
+      borderColor: buttonBackgroundColor, // 设置边框颜色
       padding: 10,
-      width: "90%",
+      width: "100%",
       justifyContent: "center",
       borderRadius: 30,
       height: 60,
       alignItems: "center",
+      marginTop: 20,
     },
     cancelButtonReceive: {
       borderWidth: 3,
@@ -83,7 +84,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
     },
     receiveModalView: {
       margin: 20,
-      height: 500,
+      height: 600,
       width: "90%",
       backgroundColor: modalBackgroundColor,
       borderRadius: 20,
