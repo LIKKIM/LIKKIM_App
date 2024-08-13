@@ -30,6 +30,8 @@ import { languages } from "../config/languages";
 import base64 from "base64-js";
 import { Buffer } from "buffer";
 import appConfig from "../app.config";
+import successImage from "../assets/success.png";
+import failImage from "../assets/fail.png";
 
 let PermissionsAndroid;
 if (Platform.OS === "android") {
@@ -266,41 +268,25 @@ function MyColdWalletScreen() {
       notifyCharacteristicUUID,
       (error, characteristic) => {
         if (error) {
-          if (
-            error.message.includes("was disconnected") ||
-            error.message.includes("Operation was cancelled")
-          ) {
-            console.log("设备断开连接或操作已取消，停止监听。");
-          } else {
-            console.error("监听验证码时出错:", error.message);
-          }
+          console.error("监听验证码时出错:", error.message);
           return;
         }
 
-        // 将接收到的 Base64 编码的数据转换为字符串
-        const receivedDataString = Buffer.from(
-          characteristic.value,
-          "base64"
-        ).toString("ascii");
-        console.log("接收到的原始数据字符串:", receivedDataString);
+        // Base64解码接收到的数据
+        const receivedData = Buffer.from(characteristic.value, "base64");
 
-        // 将接收到的字符串解析为字节数组
-        const receivedData = receivedDataString
-          .split(" ")
-          .map((hex) => parseInt(hex, 16));
-        console.log("解析后的字节数组:", receivedData);
+        // 将接收到的数据解析为16进制字符串
+        const receivedDataHex = receivedData.toString("hex");
+        console.log("接收到的16进制数据字符串:", receivedDataHex);
 
-        // 检查头帧数据是否为 0xA1
-        if (receivedData[0] === 0xa1) {
-          // 提取验证码数据
-          const verificationCode = receivedData.slice(1, 3); // 获取 `0x04 0xD2` 部分
-          const codeHex = Array.from(verificationCode)
-            .map((byte) => byte.toString(16).padStart(2, "0"))
-            .join(" ");
-          console.log("接收到的验证码:", codeHex);
+        // 示例：检查接收到的数据的前缀是否正确（例如，预期为 "a1"）
+        if (receivedDataHex.startsWith("a1")) {
+          // 提取接收到的验证码（根据你的协议调整具体的截取方式）
+          const verificationCode = receivedDataHex.substring(2, 6); // 获取从第2个字符开始的4个字符（例如 "a1 04 D2" 中的 "04D2"）
+          console.log("接收到的验证码:", verificationCode);
 
-          // 将验证码存储到状态中
-          setReceivedVerificationCode(codeHex);
+          // 将验证码存储到状态中，或进行进一步的处理
+          setReceivedVerificationCode(verificationCode);
         } else {
           console.warn("接收到的不是预期的验证码数据");
         }
@@ -1091,7 +1077,7 @@ function MyColdWalletScreen() {
         </BlurView>
       </Modal>
 
-      {/*  成功验证模态框 */}
+      {/* 成功验证模态框 */}
       <Modal
         animationType="slide"
         transparent={true}
@@ -1100,6 +1086,10 @@ function MyColdWalletScreen() {
       >
         <BlurView intensity={10} style={MyColdWalletScreenStyle.centeredView}>
           <View style={MyColdWalletScreenStyle.pinModalView}>
+            <Image
+              source={successImage}
+              style={{ width: 100, height: 100, marginBottom: 20 }}
+            />
             <Text style={MyColdWalletScreenStyle.modalTitle}>
               {t("Verification successful!")}
             </Text>
@@ -1117,7 +1107,8 @@ function MyColdWalletScreen() {
           </View>
         </BlurView>
       </Modal>
-      {/*  失败验证模态框 */}
+
+      {/* 失败验证模态框 */}
       <Modal
         animationType="slide"
         transparent={true}
@@ -1126,6 +1117,10 @@ function MyColdWalletScreen() {
       >
         <BlurView intensity={10} style={MyColdWalletScreenStyle.centeredView}>
           <View style={MyColdWalletScreenStyle.pinModalView}>
+            <Image
+              source={failImage}
+              style={{ width: 100, height: 100, marginBottom: 20 }}
+            />
             <Text style={MyColdWalletScreenStyle.modalTitle}>
               {t("Verification failed!")}
             </Text>
