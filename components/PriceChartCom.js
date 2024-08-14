@@ -94,16 +94,15 @@ export default function PriceChartCom({
   };
 
   //实现横向触摸刷新点,初始化
-  const panResponder = useState(PanResponder.create({
-    onStartShouldSetPanResponder: () => true,
-    onStartShouldSetPanResponderCapture: () => false
-  }));
+  const panResponder = useState(
+    PanResponder.create({
+      onStartShouldSetPanResponder: () => true,
+      onStartShouldSetPanResponderCapture: () => false,
+    })
+  );
 
   //刷新手势点,待优化
   const updatePanResponder = (_sdata) => {
-
-
-
     panResponder[1](
       PanResponder.create({
         onStartShouldSetPanResponder: () => true,
@@ -199,6 +198,7 @@ export default function PriceChartCom({
             </Text>
           </View>
         )}
+
       {hasData && (
         <>
           <View style={{ marginLeft: 20 }}>
@@ -210,8 +210,8 @@ export default function PriceChartCom({
                 {_selectPointData[0]
                   ? parseFloat(_selectPointData[0][4]).toFixed(2)
                   : _chartData[0]
-                    ? parseFloat(_chartData[0][0]).toFixed(2)
-                    : ""}
+                  ? parseFloat(_chartData[0][0]).toFixed(2)
+                  : ""}
               </Text>
             </View>
             <View
@@ -235,20 +235,20 @@ export default function PriceChartCom({
               <Text style={{ marginLeft: 5, color: "gray" }}>
                 {_selectPointData[0] &&
                   new Date(parseFloat(_selectPointData[0][0])).toDateString() +
-                  "," +
-                  new Date(
-                    parseFloat(_selectPointData[0][0])
-                  ).toLocaleTimeString()}
+                    "," +
+                    new Date(
+                      parseFloat(_selectPointData[0][0])
+                    ).toLocaleTimeString()}
                 {!_selectPointData[0] &&
                   (selectDate[0] == "30m"
                     ? "past 24 hours"
                     : selectDate[0] == "1H"
-                      ? "past 7 days"
-                      : selectDate[0] == "1W"
-                        ? "past 1 year"
-                        : selectDate[0] == "1D"
-                          ? "past 30 days"
-                          : "")}
+                    ? "past 7 days"
+                    : selectDate[0] == "1W"
+                    ? "past 1 year"
+                    : selectDate[0] == "1D"
+                    ? "past 30 days"
+                    : "")}
               </Text>
             </View>
           </View>
@@ -260,13 +260,15 @@ export default function PriceChartCom({
               height={220}
               getDotColor={(data, index) => {
                 if (!_selectPointData[0]) return "transparent";
-                return (data === parseFloat(_selectPointData[0][4]) && index === _selectIndex[0])
+                return data === parseFloat(_selectPointData[0][4]) &&
+                  index === _selectIndex[0]
                   ? "green"
                   : "transparent";
               }}
               renderDotContent={({ x, y, indexData, index }) => {
                 if (!_selectPointData[0]) return null;
-                return (indexData === parseFloat(_selectPointData[0][4]) && index === _selectIndex[0]) ? (
+                return indexData === parseFloat(_selectPointData[0][4]) &&
+                  index === _selectIndex[0] ? (
                   <View
                     key={index}
                     style={{
@@ -281,19 +283,18 @@ export default function PriceChartCom({
                   ></View>
                 ) : null;
               }}
-
               decorator={() => {
                 if (!maxAndMin[0][0]) return null;
                 const screenCenter = screenWidth / 2;
                 const chartDataLength = _chartData[0].length;
                 const minLeft =
                   (screenWidth / chartDataLength) * maxAndMin[0][3] >
-                    screenCenter
+                  screenCenter
                     ? (screenWidth / chartDataLength) * maxAndMin[0][3] - 45
                     : (screenWidth / chartDataLength) * maxAndMin[0][3] + 32;
                 const maxLeft =
                   (screenWidth / chartDataLength) * maxAndMin[0][2] >
-                    screenCenter
+                  screenCenter
                     ? (screenWidth / chartDataLength) * maxAndMin[0][2] - 45
                     : (screenWidth / chartDataLength) * maxAndMin[0][2] + 32;
                 // console.log('min:', (screenWidth / chartDataLength) * maxAndMin[0][3])
@@ -367,100 +368,93 @@ export default function PriceChartCom({
               style={{ marginTop: 20, marginLeft: -32 }}
             />
           </View>
-
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-around",
-              backgroundColor: isDarkMode ? "#484692" : "#DEDEE1",
-              padding: 2,
-              borderRadius: 8,
-              marginTop: "0%",
-              width: "90%",
-              marginHorizontal: "5%",
-            }}
-          >
-            <View
-              style={{
-                backgroundColor:
-                  selectDate[0] === "30m"
-                    ? activeBackgroundColor
-                    : inactiveBackgroundColor,
-                paddingHorizontal: 10,
-                paddingVertical: 5,
-                borderRadius: 8,
-                flex: 1,
-                marginRight: 5,
-              }}
-            >
-              <Pressable onPress={() => changeDate("30m")}>
-                <Text style={{ textAlign: "center", color: textColor }}>
-                  1D
-                </Text>
-              </Pressable>
-            </View>
-
-            <View
-              style={{
-                backgroundColor:
-                  selectDate[0] === "1H"
-                    ? activeBackgroundColor
-                    : inactiveBackgroundColor,
-                paddingHorizontal: 10,
-                paddingVertical: 5,
-                borderRadius: 8,
-                flex: 1,
-                marginRight: 5,
-              }}
-            >
-              <Pressable onPress={() => changeDate("1H")}>
-                <Text style={{ textAlign: "center", color: textColor }}>
-                  1W
-                </Text>
-              </Pressable>
-            </View>
-
-            <View
-              style={{
-                backgroundColor:
-                  selectDate[0] === "1D"
-                    ? activeBackgroundColor
-                    : inactiveBackgroundColor,
-                paddingHorizontal: 10,
-                paddingVertical: 5,
-                borderRadius: 8,
-                flex: 1,
-                marginRight: 5,
-              }}
-            >
-              <Pressable onPress={() => changeDate("1D")}>
-                <Text style={{ textAlign: "center", color: textColor }}>
-                  1M
-                </Text>
-              </Pressable>
-            </View>
-
-            <View
-              style={{
-                backgroundColor:
-                  selectDate[0] === "1W"
-                    ? activeBackgroundColor
-                    : inactiveBackgroundColor,
-                paddingHorizontal: 10,
-                paddingVertical: 5,
-                borderRadius: 8,
-                flex: 1,
-              }}
-            >
-              <Pressable onPress={() => changeDate("1W")}>
-                <Text style={{ textAlign: "center", color: textColor }}>
-                  1Y
-                </Text>
-              </Pressable>
-            </View>
-          </View>
         </>
       )}
+
+      {/* Always show the tab bar */}
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-around",
+          backgroundColor: isDarkMode ? "#484692" : "#DEDEE1",
+          padding: 2,
+          borderRadius: 8,
+          marginTop: "0%",
+          width: "90%",
+          marginHorizontal: "5%",
+        }}
+      >
+        <View
+          style={{
+            backgroundColor:
+              selectDate[0] === "30m"
+                ? activeBackgroundColor
+                : inactiveBackgroundColor,
+            paddingHorizontal: 10,
+            paddingVertical: 5,
+            borderRadius: 8,
+            flex: 1,
+            marginRight: 5,
+          }}
+        >
+          <Pressable onPress={() => changeDate("30m")}>
+            <Text style={{ textAlign: "center", color: textColor }}>1D</Text>
+          </Pressable>
+        </View>
+
+        <View
+          style={{
+            backgroundColor:
+              selectDate[0] === "1H"
+                ? activeBackgroundColor
+                : inactiveBackgroundColor,
+            paddingHorizontal: 10,
+            paddingVertical: 5,
+            borderRadius: 8,
+            flex: 1,
+            marginRight: 5,
+          }}
+        >
+          <Pressable onPress={() => changeDate("1H")}>
+            <Text style={{ textAlign: "center", color: textColor }}>1W</Text>
+          </Pressable>
+        </View>
+
+        <View
+          style={{
+            backgroundColor:
+              selectDate[0] === "1D"
+                ? activeBackgroundColor
+                : inactiveBackgroundColor,
+            paddingHorizontal: 10,
+            paddingVertical: 5,
+            borderRadius: 8,
+            flex: 1,
+            marginRight: 5,
+          }}
+        >
+          <Pressable onPress={() => changeDate("1D")}>
+            <Text style={{ textAlign: "center", color: textColor }}>1M</Text>
+          </Pressable>
+        </View>
+
+        <View
+          style={{
+            backgroundColor:
+              selectDate[0] === "1W"
+                ? activeBackgroundColor
+                : inactiveBackgroundColor,
+            paddingHorizontal: 10,
+            paddingVertical: 5,
+            borderRadius: 8,
+            flex: 1,
+          }}
+        >
+          <Pressable onPress={() => changeDate("1W")}>
+            <Text style={{ textAlign: "center", color: textColor }}>1Y</Text>
+          </Pressable>
+        </View>
+      </View>
     </View>
   );
 }
