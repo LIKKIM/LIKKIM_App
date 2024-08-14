@@ -743,9 +743,9 @@ function MyColdWalletScreen() {
               intensity={10}
               style={MyColdWalletScreenStyle.centeredView}
             >
-              <View style={MyColdWalletScreenStyle.setPasswordModalView}>
+              <View style={MyColdWalletScreenStyle.enableLockModalView}>
                 <Text style={MyColdWalletScreenStyle.passwordModalTitle}>
-                  {t("Set Password")}
+                  {t("Enable Screen Lock")}
                 </Text>
                 <View style={{ marginVertical: 10, width: "100%" }}>
                   <TextInput
@@ -755,6 +755,7 @@ function MyColdWalletScreen() {
                     secureTextEntry={true}
                     onChangeText={setPassword}
                     value={password}
+                    autoFocus={true}
                   />
                   <TextInput
                     style={MyColdWalletScreenStyle.passwordInput}
@@ -787,7 +788,7 @@ function MyColdWalletScreen() {
             </BlurView>
           </Modal>
 
-          {/* 输入密码模态框 */}
+          {/*Disable Lock Screen modal */}
           <Modal
             animationType="slide"
             transparent={true}
@@ -798,9 +799,9 @@ function MyColdWalletScreen() {
               intensity={10}
               style={MyColdWalletScreenStyle.centeredView}
             >
-              <View style={MyColdWalletScreenStyle.setPasswordModalView}>
+              <View style={MyColdWalletScreenStyle.disableLockModalView}>
                 <Text style={MyColdWalletScreenStyle.passwordModalTitle}>
-                  {t("Enter Password")}
+                  {t("Disable Lock Screen")}
                 </Text>
                 <View style={{ marginVertical: 10, width: "100%" }}>
                   <TextInput
@@ -810,6 +811,7 @@ function MyColdWalletScreen() {
                     secureTextEntry={true}
                     onChangeText={setCurrentPassword}
                     value={currentPassword}
+                    autoFocus={true}
                   />
                 </View>
                 <View style={MyColdWalletScreenStyle.buttonContainer}>
