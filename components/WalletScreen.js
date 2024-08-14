@@ -28,6 +28,8 @@ import { BleManager, BleErrorCode } from "react-native-ble-plx";
 import Constants from "expo-constants";
 import base64 from "base64-js";
 import { Buffer } from "buffer";
+import successImage from "../assets/success.png";
+import failImage from "../assets/fail.png";
 
 const serviceUUID = "0000FFE0-0000-1000-8000-00805F9B34FB";
 const writeCharacteristicUUID = "0000FFE2-0000-1000-8000-00805F9B34FB";
@@ -73,6 +75,7 @@ function WalletScreen({ route, navigation }) {
   const [selectedWords, setSelectedWords] = useState(Array(12).fill(null));
   const [importPhraseModalVisible, setImportPhraseModalVisible] =
     useState(false);
+  const [pinModalVisible, setPinModalVisible] = useState(false);
   const [phrase, setPhrase] = useState("");
   const [animation] = useState(new Animated.Value(0));
   const [fadeAnim] = useState(new Animated.Value(0));
@@ -92,8 +95,12 @@ function WalletScreen({ route, navigation }) {
   const [isScanning, setIsScanning] = useState(false);
   const [devices, setDevices] = useState([]);
   const [selectedDevice, setSelectedDevice] = useState(null);
+  const [verificationSuccessModalVisible, setVerificationSuccessModalVisible] =
+    useState(false);
+  const [verificationFailModalVisible, setVerificationFailModalVisible] =
+    useState(false);
   const restoreIdentifier = Constants.installationId;
-
+  const [pinCode, setPinCode] = useState("");
   const filteredCryptos = additionalCryptos.filter(
     (crypto) =>
       crypto.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -144,6 +151,11 @@ function WalletScreen({ route, navigation }) {
 
   const [bleVisible, setBleVisible] = useState(false); // New state for Bluetooth modal
 
+  useEffect(() => {
+    if (!bleVisible && selectedDevice) {
+      setPinModalVisible(true);
+    }
+  }, [bleVisible, selectedDevice]);
   // Update Bluetooth modal visibility management
   useEffect(() => {
     if (Platform.OS !== "web") {
@@ -402,6 +414,59 @@ function WalletScreen({ route, navigation }) {
     if (cryptoCards.length === 0) {
       handleAddCrypto(usdtCrypto);
     }
+  };
+
+  const handlePinSubmit = async () => {
+    // 首先关闭 "Enter PIN to Connect" 的模态框
+    setPinModalVisible(false);
+
+    // 关闭所有其他可能打开的模态框
+    setVerificationSuccessModalVisible(false);
+    setVerificationFailModalVisible(false);
+
+    // 将用户输入的 PIN 转换为数字
+    const pinCodeValue = parseInt(pinCode, 10); // 将 "1234" 转换为数字 1234
+
+    // 将接收到的验证码转换为数字
+    const verificationCodeValue = parseInt(
+      receivedVerificationCode.replace(" ", ""),
+      16
+    );
+
+    console.log(`用户输入的 PIN 数值: ${pinCodeValue}`);
+    console.log(`接收到的验证码数值: ${verificationCodeValue}`);
+
+    if (pinCodeValue === verificationCodeValue) {
+      console.log("PIN 验证成功");
+      setVerificationSuccessModalVisible(true); // 显示成功提示
+    } else {
+      console.log("PIN 验证失败");
+
+      // 停止监听验证码
+      if (monitorSubscription) {
+        try {
+          monitorSubscription.remove();
+          console.log("验证码监听已停止");
+        } catch (error) {
+          console.error("停止监听时发生错误:", error);
+        }
+      }
+
+      // 主动断开与嵌入式设备的连接
+      if (selectedDevice) {
+        try {
+          await selectedDevice.cancelConnection();
+          console.log("已断开与设备的连接");
+        } catch (error) {
+          console.error("断开连接时发生错误:", error);
+        }
+      }
+
+      setVerificationFailModalVisible(true); // 显示失败提示
+    }
+
+    // 清空 PIN 输入框
+    setPinCode("");
   };
 
   const handleDeleteCard = () => {
@@ -1467,6 +1532,120 @@ function WalletScreen({ route, navigation }) {
             >
               <Text style={WalletScreenStyle.cancelButtonText}>
                 {t("Cancel")}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </BlurView>
+      </Modal>
+
+      {/* PIN码输入modal窗口 */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={pinModalVisible}
+        onRequestClose={() => setPinModalVisible(false)}
+      >
+        <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
+          <View style={WalletScreenStyle.pinModalView}>
+            <View style={{ alignItems: "center" }}>
+              <Text style={WalletScreenStyle.pinModalTitle}>
+                {t("Enter PIN to Connect")}
+              </Text>
+              <Text style={WalletScreenStyle.modalSubtitle}>
+                {t(
+                  "Use the PIN code to establish a secure connection with your LIKKIM hardware."
+                )}
+              </Text>
+            </View>
+            <TextInput
+              style={WalletScreenStyle.passwordInput}
+              placeholder={t("Enter PIN")}
+              placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
+              keyboardType="numeric"
+              secureTextEntry
+              onChangeText={setPinCode}
+              value={pinCode}
+            />
+            <View style={{ width: "100%" }}>
+              <TouchableOpacity
+                style={WalletScreenStyle.submitButton}
+                onPress={() => handlePinSubmit(selectedDevice, pinCode)}
+              >
+                <Text style={WalletScreenStyle.submitButtonText}>
+                  {t("Submit")}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={WalletScreenStyle.cancelButton}
+                onPress={() => setPinModalVisible(false)}
+              >
+                <Text style={WalletScreenStyle.cancelButtonText}>
+                  {t("Cancel")}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </BlurView>
+      </Modal>
+
+      {/* 成功验证模态框 */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={verificationSuccessModalVisible}
+        onRequestClose={() => setVerificationSuccessModalVisible(false)}
+      >
+        <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
+          <View style={WalletScreenStyle.pinModalView}>
+            <Image
+              source={successImage}
+              style={{ width: 60, height: 60, marginTop: 20 }}
+            />
+            <Text style={WalletScreenStyle.modalTitle}>
+              {t("Verification successful!")}
+            </Text>
+            <Text style={WalletScreenStyle.modalSubtitle}>
+              {t("You can now safely use the device.")}
+            </Text>
+            <TouchableOpacity
+              style={WalletScreenStyle.submitButton}
+              onPress={() => setVerificationSuccessModalVisible(false)}
+            >
+              <Text style={WalletScreenStyle.submitButtonText}>
+                {t("Close")}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </BlurView>
+      </Modal>
+
+      {/* 失败验证模态框 */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={verificationFailModalVisible}
+        onRequestClose={() => setVerificationFailModalVisible(false)}
+      >
+        <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
+          <View style={WalletScreenStyle.pinModalView}>
+            <Image
+              source={failImage}
+              style={{ width: 60, height: 60, marginTop: 20 }}
+            />
+            <Text style={WalletScreenStyle.modalTitle}>
+              {t("Verification failed!")}
+            </Text>
+            <Text style={WalletScreenStyle.modalSubtitle}>
+              {t(
+                "The verification code you entered is incorrect. Please try again."
+              )}
+            </Text>
+            <TouchableOpacity
+              style={WalletScreenStyle.submitButton}
+              onPress={() => setVerificationFailModalVisible(false)}
+            >
+              <Text style={WalletScreenStyle.submitButtonText}>
+                {t("Close")}
               </Text>
             </TouchableOpacity>
           </View>

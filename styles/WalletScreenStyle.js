@@ -15,10 +15,54 @@ const WalletScreenStyles = (isDarkMode) => {
   const addCryptoButtonBackgroundColor = isDarkMode ? "#1E1D3F" : "#F8F6FE";
   const borderColor = isDarkMode ? "#555" : "#ccc";
   const historyItemBorderColor = isDarkMode ? "#ccc" : "#999";
+  const inputBackgroundColor = isDarkMode ? "#1A1A37" : "#e0e0e0";
   const historyContainerBackgroundColor = isDarkMode
     ? "#24234C80"
     : "#FFFFFF80";
   return StyleSheet.create({
+    submitButton: {
+      backgroundColor: buttonBackgroundColor,
+      padding: 10,
+      width: "100%",
+      justifyContent: "center",
+      borderRadius: 30,
+      height: 60,
+      alignItems: "center",
+    },
+    submitButtonText: {
+      color: textColor,
+      fontSize: 16,
+    },
+    pinModalTitle: {
+      color: textColor,
+      fontSize: 20,
+      fontWeight: "bold",
+      marginBottom: 15,
+    },
+
+    pinModalView: {
+      position: "absolute",
+      top: 100,
+      margin: 20,
+      height: 400,
+      width: "90%",
+      backgroundColor: modalBackgroundColor,
+      borderRadius: 20,
+      padding: 35,
+      justifyContent: "space-between",
+      alignItems: "center",
+    },
+    passwordInput: {
+      backgroundColor: inputBackgroundColor,
+      borderColor: borderColor,
+      borderWidth: 1,
+      paddingHorizontal: 15,
+      paddingVertical: 10,
+      borderRadius: 10,
+      height: 50,
+      width: "100%",
+      color: textColor,
+    },
     deviceItemContainer: {
       flexDirection: "row", // 横向排列
       alignItems: "center", // 垂直居中
