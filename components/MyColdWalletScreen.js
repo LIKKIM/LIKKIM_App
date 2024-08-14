@@ -199,11 +199,6 @@ function MyColdWalletScreen() {
       currency.name.toLowerCase().includes(searchCurrency.toLowerCase()) ||
       currency.shortName.toLowerCase().includes(searchCurrency.toLowerCase())
   );
-
-  /*   const handleScreenLockToggle = async (value) => {
-    setIsScreenLockEnabled(value);
-    await AsyncStorage.setItem("screenLockEnabled", JSON.stringify(value));
-  }; */
   const verifyCode = (userInputCode, deviceCode) => {
     if (userInputCode === deviceCode) {
       // 验证成功
