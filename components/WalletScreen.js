@@ -330,10 +330,32 @@ function WalletScreen({ route, navigation }) {
     setSelectedCrypto(crypto);
     setActiveTab("Prices");
     scrollViewRef.current.scrollTo({ y: 0, animated: true });
-    setTimeout(() => {
+
+    // 设置两个动画的持续时间相同
+    const animationDuration = 200; // 动画持续时间为200ms
+
+    // 同时启动淡出余额部分和淡入背景层动画
+    Animated.parallel([
+      Animated.timing(opacityAnim, {
+        toValue: 0, // 总余额部分完全透明
+        duration: animationDuration,
+        easing: Easing.ease,
+        useNativeDriver: true,
+      }),
+      Animated.timing(fadeAnim, {
+        toValue: 1, // 弹窗背景完全可见
+        duration: animationDuration,
+        easing: Easing.ease,
+        useNativeDriver: true,
+      }),
+    ]).start(() => {
+      // 等待动画完成后再启动卡片动画
       scrollYOffset.current = 0;
       animateCard(index);
-    }, 300); // 确保在滚动完成后再设置偏移量并开始动画
+    });
+
+    // 同时设置 modalVisible 为 true，确保背景层可见
+    setModalVisible(true);
   };
 
   const handleAddCrypto = (crypto) => {
@@ -520,7 +542,7 @@ function WalletScreen({ route, navigation }) {
         <Animated.View
           style={[
             WalletScreenStyle.totalBalanceContainer,
-            { opacity: opacityAnim },
+            { opacity: opacityAnim }, // 使用动画控制透明度
           ]}
         >
           {cryptoCards.length > 0 && !modalVisible && (
@@ -538,6 +560,27 @@ function WalletScreen({ route, navigation }) {
           )}
         </Animated.View>
 
+        {modalVisible && (
+          <Animated.View
+            style={[WalletScreenStyle.cardModalView, { opacity: fadeAnim }]}
+          >
+            <LinearGradient
+              colors={isDarkMode ? darkColorsDown : lightColorsDown}
+              style={[WalletScreenStyle.cardModalView]}
+            ></LinearGradient>
+          </Animated.View>
+        )}
+
+        {modalVisible && (
+          <Animated.View
+            style={[WalletScreenStyle.cardModalView, { opacity: fadeAnim }]}
+          >
+            <LinearGradient
+              colors={isDarkMode ? darkColorsDown : lightColorsDown}
+              style={[WalletScreenStyle.cardModalView]}
+            ></LinearGradient>
+          </Animated.View>
+        )}
         {cryptoCards.length === 0 && (
           <View style={WalletScreenStyle.centeredContent}>
             <ImageBackground
@@ -570,7 +613,6 @@ function WalletScreen({ route, navigation }) {
             </View>
           </View>
         )}
-
         {cryptoCards.map((card, index) => {
           const isBlackText =
             card.shortName === "BTC" ||
@@ -792,7 +834,6 @@ function WalletScreen({ route, navigation }) {
             </TouchableOpacity>
           </Animated.View>
         )}
-
         {/* 数字货币弹窗背景层view */}
         {modalVisible && (
           <Animated.View
