@@ -493,48 +493,93 @@ function MyColdWalletScreen() {
 
   // 设备选择和显示弹窗的处理函数
   const handleDevicePress = async (device) => {
-    setSelectedDevice(device);
-    setModalVisible(false);
+    const isVerified = verifiedDevices.includes(device.id);
 
-    try {
-      // 连接设备
-      await device.connect();
-      await device.discoverAllServicesAndCharacteristics();
-      console.log("设备已连接并发现所有服务和特性");
+    if (isVerified) {
+      // 如果设备已连接，断开连接并给出提示
+      try {
+        const connectionStatus = await device.isConnected();
 
-      // 发送第一条命令 F0 01 02
-      const connectionCommandData = new Uint8Array([0xf0, 0x01, 0x02]);
-      const connectionCrc = crc16Modbus(connectionCommandData);
-      const connectionCrcHighByte = (connectionCrc >> 8) & 0xff;
-      const connectionCrcLowByte = connectionCrc & 0xff;
-      const finalConnectionCommand = new Uint8Array([
-        ...connectionCommandData,
-        connectionCrcLowByte,
-        connectionCrcHighByte,
-        0x0d,
-        0x0a,
-      ]);
-      const base64ConnectionCommand = base64.fromByteArray(
-        finalConnectionCommand
-      );
+        if (connectionStatus) {
+          await device.cancelConnection();
+          console.log(`Device ${device.id} has been disconnected`);
 
-      await device.writeCharacteristicWithResponseForService(
-        serviceUUID,
-        writeCharacteristicUUID,
-        base64ConnectionCommand
-      );
-      console.log("第一条蓝牙连接命令已发送: F0 01 02");
+          // 从 verifiedDevices 状态中移除断开连接的设备
+          const updatedDevices = verifiedDevices.filter(
+            (id) => id !== device.id
+          );
+          setVerifiedDevices(updatedDevices);
 
-      // 延迟5毫秒
-      await new Promise((resolve) => setTimeout(resolve, 5));
+          // 更新本地存储
+          await AsyncStorage.setItem(
+            "verifiedDevices",
+            JSON.stringify(updatedDevices)
+          );
 
-      // 发送第二条命令 F1 01 02
-      await sendStartCommand(device);
+          Alert.alert(
+            t("Disconnected"),
+            t("The device has been disconnected successfully.")
+          );
+        } else {
+          console.log(`Device ${device.id} was already disconnected`);
+        }
+      } catch (error) {
+        if (error.message.includes("Operation was cancelled")) {
+          console.warn(
+            "Device was already disconnected or operation was cancelled"
+          );
+        } else {
+          console.error("Failed to disconnect device:", error);
+          Alert.alert(
+            t("Error"),
+            t("Failed to disconnect the device. Please try again.")
+          );
+        }
+      }
+    } else {
+      setSelectedDevice(device);
+      setModalVisible(false);
 
-      // 开始监听嵌入式设备的返回信息
-      monitorVerificationCode(device);
-    } catch (error) {
-      console.error("设备连接或命令发送错误:", error);
+      try {
+        // 连接设备
+        await device.connect();
+        await device.discoverAllServicesAndCharacteristics();
+        console.log("设备已连接并发现所有服务和特性");
+
+        // 发送第一条命令 F0 01 02
+        const connectionCommandData = new Uint8Array([0xf0, 0x01, 0x02]);
+        const connectionCrc = crc16Modbus(connectionCommandData);
+        const connectionCrcHighByte = (connectionCrc >> 8) & 0xff;
+        const connectionCrcLowByte = connectionCrc & 0xff;
+        const finalConnectionCommand = new Uint8Array([
+          ...connectionCommandData,
+          connectionCrcLowByte,
+          connectionCrcHighByte,
+          0x0d,
+          0x0a,
+        ]);
+        const base64ConnectionCommand = base64.fromByteArray(
+          finalConnectionCommand
+        );
+
+        await device.writeCharacteristicWithResponseForService(
+          serviceUUID,
+          writeCharacteristicUUID,
+          base64ConnectionCommand
+        );
+        console.log("第一条蓝牙连接命令已发送: F0 01 02");
+
+        // 延迟5毫秒
+        await new Promise((resolve) => setTimeout(resolve, 5));
+
+        // 发送第二条命令 F1 01 02
+        await sendStartCommand(device);
+
+        // 开始监听嵌入式设备的返回信息
+        monitorVerificationCode(device);
+      } catch (error) {
+        console.error("设备连接或命令发送错误:", error);
+      }
     }
   };
 
