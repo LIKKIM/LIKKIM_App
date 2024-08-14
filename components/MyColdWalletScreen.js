@@ -88,7 +88,15 @@ function MyColdWalletScreen() {
 
   const [confirmPasswordModalVisible, setConfirmPasswordModalVisible] =
     useState(false);
-
+  const verifyCode = (userInputCode, deviceCode) => {
+    if (userInputCode === deviceCode) {
+      // 验证成功
+      setVerificationSuccessModalVisible(true);
+    } else {
+      // 验证失败
+      setVerificationFailModalVisible(true);
+    }
+  };
   const [storedPassword, setStoredPassword] = useState(""); // 存储已设置的密码
   // 关闭设置密码模态框并清空输入
   const closePasswordModal = () => {
@@ -199,15 +207,6 @@ function MyColdWalletScreen() {
       currency.name.toLowerCase().includes(searchCurrency.toLowerCase()) ||
       currency.shortName.toLowerCase().includes(searchCurrency.toLowerCase())
   );
-  const verifyCode = (userInputCode, deviceCode) => {
-    if (userInputCode === deviceCode) {
-      // 验证成功
-      setVerificationSuccessModalVisible(true);
-    } else {
-      // 验证失败
-      setVerificationFailModalVisible(true);
-    }
-  };
 
   const bleManagerRef = useRef(null);
 
