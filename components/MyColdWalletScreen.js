@@ -99,23 +99,28 @@ function MyColdWalletScreen() {
     setCurrentPassword("");
   };
 
-  // 读取屏幕锁定状态
+  // 读取屏幕锁定状态和密码
   useEffect(() => {
-    const loadScreenLockStatus = async () => {
+    const loadScreenLockData = async () => {
       try {
         const savedStatus = await AsyncStorage.getItem("screenLockEnabled");
+        const savedPassword = await AsyncStorage.getItem("screenLockPassword");
+
         if (savedStatus !== null) {
           setIsScreenLockEnabled(JSON.parse(savedStatus));
         }
+        if (savedPassword !== null) {
+          setStoredPassword(savedPassword);
+        }
       } catch (error) {
-        console.error("Failed to load screen lock status", error);
+        console.error("Failed to load screen lock data", error);
       }
     };
 
-    loadScreenLockStatus();
+    loadScreenLockData();
   }, []);
 
-  // 修改 handleScreenLockToggle 函数，保存状态到 AsyncStorage
+  // 修改 handleScreenLockToggle 函数
   const handleScreenLockToggle = async (value) => {
     if (value) {
       // 如果用户想启用屏幕锁定
@@ -135,10 +140,14 @@ function MyColdWalletScreen() {
   // 设置密码模态框的提交处理函数
   const handleSetPassword = async () => {
     if (password === confirmPassword) {
-      await AsyncStorage.setItem("screenLockPassword", password);
-      setStoredPassword(password); // 存储设置的密码
-      setIsScreenLockEnabled(true); // 启用屏幕锁定
-      setPasswordModalVisible(false);
+      try {
+        await AsyncStorage.setItem("screenLockPassword", password);
+        setStoredPassword(password); // 存储设置的密码
+        setIsScreenLockEnabled(true); // 启用屏幕锁定
+        setPasswordModalVisible(false);
+      } catch (error) {
+        console.error("Failed to save password", error);
+      }
     } else {
       Alert.alert(t("Error"), t("Passwords do not match"));
     }
@@ -154,6 +163,7 @@ function MyColdWalletScreen() {
       Alert.alert(t("Error"), t("Incorrect password"));
     }
   };
+
   const filteredCurrencies = currencies.filter(
     (currency) =>
       currency.name.toLowerCase().includes(searchCurrency.toLowerCase()) ||
