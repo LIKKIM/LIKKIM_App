@@ -27,11 +27,13 @@ import PriceChartCom from "./PriceChartCom";
 import { BleManager, BleErrorCode } from "react-native-ble-plx";
 import Constants from "expo-constants";
 import base64 from "base64-js";
+import { Buffer } from "buffer";
 
 const serviceUUID = "0000FFE0-0000-1000-8000-00805F9B34FB";
 const writeCharacteristicUUID = "0000FFE2-0000-1000-8000-00805F9B34FB";
 
 function WalletScreen({ route, navigation }) {
+  const [receivedVerificationCode, setReceivedVerificationCode] = useState("");
   const {
     additionalCryptos,
     cryptoCount,
