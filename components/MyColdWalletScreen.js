@@ -101,6 +101,9 @@ function MyColdWalletScreen() {
   // 关闭设置密码模态框并清空输入
   const closePasswordModal = () => {
     setPasswordModalVisible(false);
+    if (!storedPassword) {
+      setIsScreenLockEnabled(false); // 如果用户关闭弹窗但没有设置密码，不启用屏幕锁定
+    }
     setPassword("");
     setConfirmPassword("");
   };
@@ -181,7 +184,8 @@ function MyColdWalletScreen() {
       try {
         await AsyncStorage.setItem("screenLockPassword", password);
         setStoredPassword(password); // 存储设置的密码
-        setIsScreenLockEnabled(true); // 启用屏幕锁定
+        setIsScreenLockEnabled(true); // 在密码设置成功后启用屏幕锁定
+        await AsyncStorage.setItem("screenLockEnabled", JSON.stringify(true));
         setPasswordModalVisible(false);
       } catch (error) {
         console.error("Failed to save password", error);
@@ -190,7 +194,6 @@ function MyColdWalletScreen() {
       Alert.alert(t("Error"), t("Passwords do not match"));
     }
   };
-
   // 输入密码模态框的提交处理函数
   const handleConfirmPassword = async () => {
     if (currentPassword === storedPassword) {
@@ -761,7 +764,7 @@ function MyColdWalletScreen() {
             animationType="slide"
             transparent={true}
             visible={passwordModalVisible}
-            onRequestClose={() => setPasswordModalVisible(false)}
+            onRequestClose={closePasswordModal}
           >
             <BlurView
               intensity={10}
