@@ -73,6 +73,19 @@ function MyColdWalletScreen() {
     useState(false);
   const [verificationFailModalVisible, setVerificationFailModalVisible] =
     useState(false);
+  const [searchLanguage, setSearchLanguage] = useState("");
+  const [searchCurrency, setSearchCurrency] = useState("");
+
+  const filteredLanguages = languages.filter((language) =>
+    language.name.toLowerCase().includes(searchLanguage.toLowerCase())
+  );
+
+  const filteredCurrencies = currencies.filter(
+    (currency) =>
+      currency.name.toLowerCase().includes(searchCurrency.toLowerCase()) ||
+      currency.shortName.toLowerCase().includes(searchCurrency.toLowerCase())
+  );
+
   const verifyCode = (userInputCode, deviceCode) => {
     if (userInputCode === deviceCode) {
       // 验证成功
@@ -625,12 +638,29 @@ function MyColdWalletScreen() {
               intensity={10}
               style={MyColdWalletScreenStyle.centeredView}
             >
-              <View style={MyColdWalletScreenStyle.modalView}>
+              <View style={MyColdWalletScreenStyle.languageModalView}>
                 <Text style={MyColdWalletScreenStyle.languageModalTitle}>
                   {t("Select Language")}
                 </Text>
+
+                {/* Search Box */}
+                <View style={MyColdWalletScreenStyle.searchContainer}>
+                  <Icon
+                    name="search"
+                    size={20}
+                    style={MyColdWalletScreenStyle.searchIcon}
+                  />
+                  <TextInput
+                    style={MyColdWalletScreenStyle.searchInput}
+                    placeholder={t("Search Language")}
+                    placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
+                    onChangeText={(text) => setSearchLanguage(text)}
+                    value={searchLanguage}
+                  />
+                </View>
+
                 <ScrollView style={MyColdWalletScreenStyle.languageList}>
-                  {languages.map((language) => (
+                  {filteredLanguages.map((language) => (
                     <TouchableOpacity
                       key={language.code}
                       onPress={() => handleLanguageChange(language)}
@@ -664,12 +694,29 @@ function MyColdWalletScreen() {
               intensity={10}
               style={MyColdWalletScreenStyle.centeredView}
             >
-              <View style={MyColdWalletScreenStyle.modalView}>
+              <View style={MyColdWalletScreenStyle.currencyModalView}>
                 <Text style={MyColdWalletScreenStyle.languageModalTitle}>
                   {t("Select Currency")}
                 </Text>
+
+                {/* Search Box */}
+                <View style={MyColdWalletScreenStyle.searchContainer}>
+                  <Icon
+                    name="search"
+                    size={20}
+                    style={MyColdWalletScreenStyle.searchIcon}
+                  />
+                  <TextInput
+                    style={MyColdWalletScreenStyle.searchInput}
+                    placeholder={t("Search Currency")}
+                    placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
+                    onChangeText={(text) => setSearchCurrency(text)}
+                    value={searchCurrency}
+                  />
+                </View>
+
                 <ScrollView style={MyColdWalletScreenStyle.languageList}>
-                  {currencies.map((currency) => (
+                  {filteredCurrencies.map((currency) => (
                     <TouchableOpacity
                       key={currency.shortName}
                       style={MyColdWalletScreenStyle.currencyOption}
@@ -692,7 +739,6 @@ function MyColdWalletScreen() {
               </View>
             </BlurView>
           </Modal>
-
           {/* Enter Password Modal */}
           <Modal
             animationType="slide"

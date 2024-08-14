@@ -69,6 +69,24 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       padding: 35,
       alignItems: "center",
     },
+    currencyModalView: {
+      margin: 20,
+      height: 560,
+      width: "90%",
+      backgroundColor: modalBackgroundColor,
+      borderRadius: 20,
+      padding: 35,
+      alignItems: "center",
+    },
+    languageModalView: {
+      margin: 20,
+      height: 560,
+      width: "90%",
+      backgroundColor: modalBackgroundColor,
+      borderRadius: 20,
+      padding: 35,
+      alignItems: "center",
+    },
     setPasswordModalView: {
       position: "absolute",
       top: 60,
@@ -283,6 +301,26 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       flexDirection: "column",
       alignItems: "center",
       width: "100%",
+    },
+    searchContainer: {
+      flexDirection: "row",
+      alignItems: "center",
+      borderRadius: 10,
+      width: "100%",
+      backgroundColor: isDarkMode ? "#1E1D3F" : "#E5E1E9", // Dark mode and light mode background color
+      marginBottom: 20,
+    },
+
+    searchInput: {
+      width: "100%",
+      padding: 10,
+      borderRadius: 10,
+      color: textColor, // Dark mode and light mode text color
+    },
+
+    searchIcon: {
+      paddingLeft: 10,
+      color: textColor,
     },
   });
 };
