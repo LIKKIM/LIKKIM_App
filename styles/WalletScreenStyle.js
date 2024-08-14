@@ -2,10 +2,12 @@
 import { StyleSheet } from "react-native";
 const WalletScreenStyles = (isDarkMode) => {
   const textColor = isDarkMode ? "#fff" : "#000";
+  const modalBackgroundColor = isDarkMode ? "#484692" : "#ffffff";
+  const BluetoothBtnColor = isDarkMode ? "#6C6CF4" : "#8E80F0";
   const secondTextColor = isDarkMode ? "#ddd" : "#676776";
   const secondCardTextColor = isDarkMode ? "#fff" : "#fff";
   const backgroundColor = isDarkMode ? "#121212" : "#f5f5f5";
-  const modalBackgroundColor = isDarkMode ? "#24234C" : "#ffffff";
+  // const modalBackgroundColor = isDarkMode ? "#24234C" : "#ffffff";
   const buttonBackgroundColor = isDarkMode ? "#6C6CF4" : "#E5E1E9";
   const shadowColor = isDarkMode ? "#101021" : "#101021";
   const cardBackgroundColor = isDarkMode ? "#484692" : "#E5E1E9";
@@ -17,6 +19,49 @@ const WalletScreenStyles = (isDarkMode) => {
     ? "#24234C80"
     : "#FFFFFF80";
   return StyleSheet.create({
+    deviceItemContainer: {
+      flexDirection: "row", // 横向排列
+      alignItems: "center", // 垂直居中
+      justifyContent: "center",
+      marginTop: 20,
+    },
+    cancelButtonLookingFor: {
+      borderColor: buttonBackgroundColor,
+      borderWidth: 3,
+      padding: 10,
+      width: "100%",
+      justifyContent: "center",
+      borderRadius: 30,
+      height: 60,
+      alignItems: "center",
+      marginTop: 20,
+    },
+    bluetoothModalView: {
+      margin: 20,
+      height: 500,
+      width: "90%",
+      backgroundColor: modalBackgroundColor,
+      borderRadius: 20,
+      padding: 35,
+      justifyContent: "space-between",
+      alignItems: "center",
+    },
+    bluetoothImg: {
+      width: 150,
+      height: 150,
+      marginBottom: 30,
+    },
+    BluetoothBtnText: {
+      color: "#fff",
+      fontSize: 16,
+    },
+    bluetoothModalTitle: {
+      color: textColor,
+      fontSize: 20,
+      fontWeight: "bold",
+      marginBottom: 10,
+    },
+
     subtitleText: {
       fontSize: 14,
       color: secondTextColor,
@@ -543,6 +588,10 @@ const WalletScreenStyles = (isDarkMode) => {
       color: secondTextColor,
       fontSize: 14,
       marginBottom: 20,
+    },
+    scanModalSubtitle: {
+      color: secondTextColor,
+      fontSize: 14,
     },
     alertModalTitle: {
       color: textColor,

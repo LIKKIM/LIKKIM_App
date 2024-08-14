@@ -13,6 +13,32 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
   const focusedBorderColor = isDarkMode ? "#6C6CF4" : "#007AFF";
 
   return StyleSheet.create({
+    bluetoothModalView: {
+      margin: 20,
+      height: 500,
+      width: "90%",
+      backgroundColor: modalBackgroundColor,
+      borderRadius: 20,
+      padding: 35,
+      justifyContent: "space-between",
+      alignItems: "center",
+    },
+    bluetoothImg: {
+      width: 150,
+      height: 150,
+      marginBottom: 30,
+    },
+    BluetoothBtnText: {
+      color: "#fff",
+      fontSize: 16,
+    },
+    bluetoothModalTitle: {
+      color: textColor,
+      fontSize: 20,
+      fontWeight: "bold",
+      marginBottom: 10,
+    },
+
     deviceItemContainer: {
       flexDirection: "row", // 横向排列
       alignItems: "center", // 垂直居中
@@ -54,12 +80,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       fontWeight: "bold",
       marginBottom: 15,
     },
-    bluetoothModalTitle: {
-      color: textColor,
-      fontSize: 20,
-      fontWeight: "bold",
-      marginBottom: 10,
-    },
+
     modalView: {
       margin: 20,
       height: 500,
@@ -160,21 +181,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       justifyContent: "space-between",
       alignItems: "center",
     },
-    bluetoothModalView: {
-      margin: 20,
-      height: 500,
-      width: "90%",
-      backgroundColor: modalBackgroundColor,
-      borderRadius: 20,
-      padding: 35,
-      justifyContent: "space-between",
-      alignItems: "center",
-    },
-    bluetoothImg: {
-      width: 150,
-      height: 150,
-      marginBottom: 30,
-    },
+
     centeredView: {
       flex: 1,
       justifyContent: "center",
@@ -189,10 +196,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       color: textColor,
       fontSize: 16,
     },
-    BluetoothBtnText: {
-      color: "#fff",
-      fontSize: 16,
-    },
+
     roundButton: {
       backgroundColor: BluetoothBtnColor,
       borderRadius: 30,

@@ -10,6 +10,8 @@ import {
   TextInput,
   Animated,
   Easing,
+  FlatList,
+  Platform,
   ScrollView,
   Clipboard,
 } from "react-native";
@@ -22,7 +24,8 @@ import { CryptoContext, DarkModeContext, usdtCrypto } from "./CryptoContext";
 import { useTranslation } from "react-i18next";
 import QRCode from "react-native-qrcode-svg"; // 确保导入 QRCode 模块
 import PriceChartCom from "./PriceChartCom";
-
+import { BleManager, BleErrorCode } from "react-native-ble-plx";
+import Constants from "expo-constants";
 function WalletScreen({ route, navigation }) {
   const {
     additionalCryptos,
@@ -78,6 +81,12 @@ function WalletScreen({ route, navigation }) {
   const [tabOpacity] = useState(new Animated.Value(1));
   const [cardInfoVisible, setCardInfoVisible] = useState(false); // 控制卡片信息显示
   const [searchQuery, setSearchQuery] = useState("");
+  const isScanningRef = useRef(false);
+  const [isScanning, setIsScanning] = useState(false);
+  const [devices, setDevices] = useState([]);
+  const [selectedDevice, setSelectedDevice] = useState(null);
+  const restoreIdentifier = Constants.installationId;
+
   const filteredCryptos = additionalCryptos.filter(
     (crypto) =>
       crypto.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -99,10 +108,175 @@ function WalletScreen({ route, navigation }) {
     ["hotel", "india", "juliet"],
   ];
 
+  const bleManagerRef = useRef(null);
+
+  const scanDevices = () => {
+    if (Platform.OS !== "web" && !isScanning) {
+      console.log("Scanning started");
+      setIsScanning(true);
+      const scanOptions = { allowDuplicates: true };
+      const scanFilter = null;
+
+      bleManagerRef.current.startDeviceScan(
+        scanFilter,
+        scanOptions,
+        (error, device) => {
+          if (error) {
+            console.error("BleManager scanning error:", error);
+            if (error.errorCode === BleErrorCode.BluetoothUnsupported) {
+              console.error("Bluetooth LE is unsupported on this device");
+              setIsScanning(false);
+              return;
+            }
+          } else if (device.name && device.name.includes("LIKKIM")) {
+            setDevices((prevDevices) => {
+              if (!prevDevices.find((d) => d.id === device.id)) {
+                return [...prevDevices, device];
+              }
+              return prevDevices;
+            });
+            console.log("Scanned device:", device);
+          }
+        }
+      );
+
+      setTimeout(() => {
+        console.log("Scanning stopped");
+        bleManagerRef.current.stopDeviceScan();
+        setIsScanning(false);
+      }, 2000);
+    } else {
+      console.log("Attempt to scan while already scanning");
+    }
+  };
+
+  useEffect(() => {
+    if (Platform.OS !== "web") {
+      bleManagerRef.current = new BleManager({
+        restoreStateIdentifier: restoreIdentifier,
+      });
+
+      const subscription = bleManagerRef.current.onStateChange((state) => {
+        if (state === "PoweredOn") {
+          scanDevices();
+        }
+      }, true);
+
+      return () => {
+        subscription.remove();
+        bleManagerRef.current.destroy();
+      };
+    }
+  }, []);
+
   const handleWordSelect = (index, word) => {
     const newSelectedWords = [...selectedWords];
     newSelectedWords[index] = word;
     setSelectedWords(newSelectedWords);
+  };
+
+  const handleDevicePress = async (device) => {
+    setSelectedDevice(device);
+    setModalVisible(false);
+
+    try {
+      // 连接设备
+      await device.connect();
+      await device.discoverAllServicesAndCharacteristics();
+      console.log("设备已连接并发现所有服务和特性");
+
+      // 发送第一条命令 F0 01 02
+      const connectionCommandData = new Uint8Array([0xf0, 0x01, 0x02]);
+      const connectionCrc = crc16Modbus(connectionCommandData);
+      const connectionCrcHighByte = (connectionCrc >> 8) & 0xff;
+      const connectionCrcLowByte = connectionCrc & 0xff;
+      const finalConnectionCommand = new Uint8Array([
+        ...connectionCommandData,
+        connectionCrcLowByte,
+        connectionCrcHighByte,
+        0x0d,
+        0x0a,
+      ]);
+      const base64ConnectionCommand = base64.fromByteArray(
+        finalConnectionCommand
+      );
+
+      await device.writeCharacteristicWithResponseForService(
+        serviceUUID,
+        writeCharacteristicUUID,
+        base64ConnectionCommand
+      );
+      console.log("第一条蓝牙连接命令已发送: F0 01 02");
+
+      // 延迟5毫秒
+      await new Promise((resolve) => setTimeout(resolve, 5));
+
+      // 发送第二条命令 F1 01 02
+      await sendStartCommand(device);
+
+      // 开始监听嵌入式设备的返回信息
+      monitorVerificationCode(device);
+    } catch (error) {
+      console.error("设备连接或命令发送错误:", error);
+    }
+  };
+
+  function crc16Modbus(arr) {
+    let crc = 0xffff; // 初始值为0xFFFF
+    for (let byte of arr) {
+      crc ^= byte; // 按位异或
+      for (let i = 0; i < 8; i++) {
+        // 处理每一个字节的8位
+        if (crc & 0x0001) {
+          crc = (crc >> 1) ^ 0xa001; // 多项式为0xA001
+        } else {
+          crc = crc >> 1;
+        }
+      }
+    }
+    return crc & 0xffff; // 确保CRC值是16位
+  }
+
+  const sendStartCommand = async (device) => {
+    // 命令数据，未包含CRC校验码
+    const commandData = new Uint8Array([0xf1, 0x01, 0x02]);
+
+    // 使用CRC-16-Modbus算法计算CRC校验码
+    const crc = crc16Modbus(commandData);
+
+    // 将CRC校验码转换为高位在前，低位在后的格式
+    const crcHighByte = (crc >> 8) & 0xff;
+    const crcLowByte = crc & 0xff;
+
+    // 将原始命令数据、CRC校验码以及结束符组合成最终的命令
+    const finalCommand = new Uint8Array([
+      ...commandData,
+      crcLowByte,
+      crcHighByte,
+      0x0d, // 结束符
+      0x0a, // 结束符
+    ]);
+
+    // 将最终的命令转换为Base64编码
+    const base64Command = base64.fromByteArray(finalCommand);
+
+    // 打印最终的命令数据（十六进制表示）
+    console.log(
+      `Final command: ${Array.from(finalCommand)
+        .map((byte) => byte.toString(16).padStart(2, "0"))
+        .join(" ")}`
+    );
+
+    try {
+      await device.writeCharacteristicWithResponseForService(
+        serviceUUID, // BLE服务的UUID
+        writeCharacteristicUUID, // 可写特性的UUID
+        base64Command // 最终的命令数据的Base64编码
+      );
+      console.log("启动验证命令已发送");
+    } catch (error) {
+      console.error("发送启动命令失败", error);
+    }
   };
 
   const allWordsSelected = selectedWords.every((word) => word !== null);
@@ -386,7 +560,10 @@ function WalletScreen({ route, navigation }) {
 
   const handleContinue = () => {
     setTipModalVisible(false);
-    setRecoveryPhraseModalVisible(true);
+    setRecoveryPhraseModalVisible(false);
+
+    // 显示 Bluetooth 模态框
+    setModalVisible(true);
   };
 
   const handlePhraseSaved = () => {
@@ -1294,6 +1471,75 @@ function WalletScreen({ route, navigation }) {
               onPress={() => {
                 setDeleteConfirmVisible(false);
                 navigation.setParams({ showDeleteConfirmModal: false }); // 重置参数
+              }}
+            >
+              <Text style={WalletScreenStyle.cancelButtonText}>
+                {t("Cancel")}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </BlurView>
+      </Modal>
+
+      {/* Bluetooth modal */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
+          <View style={WalletScreenStyle.bluetoothModalView}>
+            <Text style={WalletScreenStyle.bluetoothModalTitle}>
+              {t("LOOKING FOR DEVICES")}
+            </Text>
+            {isScanning ? (
+              <View style={{ alignItems: "center" }}>
+                <Image
+                  source={require("../assets/Bluetooth.gif")}
+                  style={WalletScreenStyle.bluetoothImg}
+                />
+                <Text style={WalletScreenStyle.scanModalSubtitle}>
+                  {t("Scanning...")}
+                </Text>
+              </View>
+            ) : (
+              devices.length > 0 && (
+                <FlatList
+                  data={devices}
+                  keyExtractor={(item) => item.id}
+                  renderItem={({ item }) => (
+                    <TouchableOpacity onPress={() => handleDevicePress(item)}>
+                      <View style={WalletScreenStyle.deviceItemContainer}>
+                        <Icon
+                          name="smartphone"
+                          size={24}
+                          color={iconColor}
+                          style={WalletScreenStyle.deviceIcon}
+                        />
+                        <Text style={WalletScreenStyle.scanModalSubtitle}>
+                          {item.name || item.id}
+                        </Text>
+                      </View>
+                    </TouchableOpacity>
+                  )}
+                />
+              )
+            )}
+            {!isScanning && devices.length === 0 && (
+              <Text style={WalletScreenStyle.modalSubtitle}>
+                {t(
+                  "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled."
+                )}
+              </Text>
+            )}
+            <TouchableOpacity
+              style={WalletScreenStyle.cancelButtonLookingFor}
+              onPress={() => {
+                setModalVisible(false);
+                setSelectedDevice(null); // 重置 selectedDevice 状态
               }}
             >
               <Text style={WalletScreenStyle.cancelButtonText}>
