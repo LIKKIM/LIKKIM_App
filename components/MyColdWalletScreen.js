@@ -123,7 +123,7 @@ function MyColdWalletScreen() {
       Alert.alert(t("Error"), t("Incorrect current password"));
     }
   };
-  // 持久化已连接设备（保留现有的代码）
+  // 持久化已连接设备
   useEffect(() => {
     const loadVerifiedDevices = async () => {
       try {
@@ -138,49 +138,6 @@ function MyColdWalletScreen() {
 
     loadVerifiedDevices();
   }, []);
-
-  // 添加处理设备断开连接的逻辑
-  useEffect(() => {
-    const handleDisconnect = async (device) => {
-      console.log(`Device ${device.id} disconnected`);
-
-      // 从 verifiedDevices 状态中移除断开连接的设备
-      const updatedDevices = verifiedDevices.filter((id) => id !== device.id);
-      setVerifiedDevices(updatedDevices);
-
-      // 更新本地存储
-      await AsyncStorage.setItem(
-        "verifiedDevices",
-        JSON.stringify(updatedDevices)
-      );
-    };
-
-    // 监听设备断开连接的事件
-    const setupDisconnectListener = async (device) => {
-      try {
-        device.onDisconnected((error, disconnectedDevice) => {
-          if (error) {
-            console.error("Device disconnect error:", error);
-          } else {
-            handleDisconnect(disconnectedDevice);
-          }
-        });
-      } catch (error) {
-        console.error("Failed to setup disconnect listener", error);
-      }
-    };
-
-    // 在用户连接设备后设置监听器
-    if (selectedDevice) {
-      setupDisconnectListener(selectedDevice);
-    }
-
-    return () => {
-      if (selectedDevice) {
-        selectedDevice.cancelConnection();
-      }
-    };
-  }, [selectedDevice, verifiedDevices]);
 
   // 读取屏幕锁定状态和密码
   useEffect(() => {
