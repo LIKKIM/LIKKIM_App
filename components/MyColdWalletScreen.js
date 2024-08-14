@@ -51,7 +51,7 @@ function MyColdWalletScreen() {
   const [currencyModalVisible, setCurrencyModalVisible] = useState(false);
   const [passwordModalVisible, setPasswordModalVisible] = useState(false);
   const [enterPasswordModalVisible, setEnterPasswordModalVisible] =
-    useState(false); // 新增状态
+    useState(false);
   const [selectedCurrency, setSelectedCurrency] = useState(currencyUnit);
   const [selectedLanguage, setSelectedLanguage] = useState(i18n.language);
   const [modalVisible, setModalVisible] = useState(false);
@@ -62,14 +62,15 @@ function MyColdWalletScreen() {
   const [pinModalVisible, setPinModalVisible] = useState(false);
   const [selectedDevice, setSelectedDevice] = useState(null);
   const [pinCode, setPinCode] = useState("");
-  const [currentPassword, setCurrentPassword] = useState(""); // 当前密码状态
-  const [isCurrentPasswordHidden, setIsCurrentPasswordHidden] = useState(true); // 控制当前密码的显示或隐藏
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [isCurrentPasswordHidden, setIsCurrentPasswordHidden] = useState(true);
   const restoreIdentifier = Constants.installationId;
   const iconColor = isDarkMode ? "#ffffff" : "#676776";
   const darkColors = ["#24234C", "#101021"];
   const lightColors = ["#FFFFFF", "#EDEBEF"];
   const [receivedVerificationCode, setReceivedVerificationCode] = useState("");
   const [newPasswordModalVisible, setNewPasswordModalVisible] = useState(false);
+
   const [verifiedDevices, setVerifiedDevices] = useState([]);
   const [verificationSuccessModalVisible, setVerificationSuccessModalVisible] =
     useState(false);
@@ -83,9 +84,7 @@ function MyColdWalletScreen() {
   const filteredLanguages = languages.filter((language) =>
     language.name.toLowerCase().includes(searchLanguage.toLowerCase())
   );
-  // 状态定义
   const [isScreenLockEnabled, setIsScreenLockEnabled] = useState(false);
-
   const [confirmPasswordModalVisible, setConfirmPasswordModalVisible] =
     useState(false);
   const verifyCode = (userInputCode, deviceCode) => {
@@ -124,6 +123,21 @@ function MyColdWalletScreen() {
       Alert.alert(t("Error"), t("Incorrect current password"));
     }
   };
+  // 持久化已连接设备
+  useEffect(() => {
+    const loadVerifiedDevices = async () => {
+      try {
+        const savedDevices = await AsyncStorage.getItem("verifiedDevices");
+        if (savedDevices !== null) {
+          setVerifiedDevices(JSON.parse(savedDevices));
+        }
+      } catch (error) {
+        console.error("Failed to load verified devices", error);
+      }
+    };
+
+    loadVerifiedDevices();
+  }, []);
 
   // 读取屏幕锁定状态和密码
   useEffect(() => {
@@ -496,8 +510,13 @@ function MyColdWalletScreen() {
       console.log("PIN 验证成功");
       setVerificationSuccessModalVisible(true);
 
-      // 将已验证的设备ID添加到verifiedDevices状态中
-      setVerifiedDevices((prev) => [...prev, selectedDevice.id]);
+      // 将已验证的设备ID添加到verifiedDevices状态中并持久化到本地存储
+      const newVerifiedDevices = [...verifiedDevices, selectedDevice.id];
+      setVerifiedDevices(newVerifiedDevices);
+      await AsyncStorage.setItem(
+        "verifiedDevices",
+        JSON.stringify(newVerifiedDevices)
+      );
     } else {
       console.log("PIN 验证失败");
       stopMonitoringVerificationCode();
@@ -1205,92 +1224,82 @@ function MyColdWalletScreen() {
                 </Text>
               </TouchableOpacity>
             </View>
-            {/* Bluetooth modal */}
-            <Modal
-              animationType="slide"
-              transparent={true}
-              visible={modalVisible}
-              onRequestClose={() => {
-                setModalVisible(!modalVisible);
-              }}
-            >
-              <BlurView
-                intensity={10}
-                style={MyColdWalletScreenStyle.centeredView}
-              >
-                <View style={MyColdWalletScreenStyle.bluetoothModalView}>
-                  <Text style={MyColdWalletScreenStyle.bluetoothModalTitle}>
-                    {t("LOOKING FOR DEVICES")}
-                  </Text>
-                  {isScanning ? (
-                    <View style={{ alignItems: "center" }}>
-                      <Image
-                        source={require("../assets/Bluetooth.gif")}
-                        style={MyColdWalletScreenStyle.bluetoothImg}
-                      />
-                      <Text style={MyColdWalletScreenStyle.scanModalSubtitle}>
-                        {t("Scanning...")}
-                      </Text>
-                    </View>
-                  ) : (
-                    devices.length > 0 && (
-                      <FlatList
-                        data={devices}
-                        keyExtractor={(item) => item.id}
-                        renderItem={({ item }) => {
-                          const isVerified = verifiedDevices.includes(item.id);
-                          return (
-                            <TouchableOpacity
-                              onPress={() => handleDevicePress(item)}
-                            >
-                              <View
-                                style={
-                                  MyColdWalletScreenStyle.deviceItemContainer
-                                }
-                              >
-                                <Icon
-                                  name="smartphone"
-                                  size={24}
-                                  color={isVerified ? "green" : iconColor} // 如果已验证则颜色为绿色
-                                  style={MyColdWalletScreenStyle.deviceIcon}
-                                />
-                                <Text
-                                  style={MyColdWalletScreenStyle.modalSubtitle}
-                                >
-                                  {item.name || item.id}
-                                </Text>
-                              </View>
-                            </TouchableOpacity>
-                          );
-                        }}
-                      />
-                    )
-                  )}
-                  {!isScanning && devices.length === 0 && (
-                    <Text style={MyColdWalletScreenStyle.modalSubtitle}>
-                      {t(
-                        "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled."
-                      )}
-                    </Text>
-                  )}
-                  <TouchableOpacity
-                    style={MyColdWalletScreenStyle.cancelButtonLookingFor}
-                    onPress={() => {
-                      setModalVisible(false);
-                      setSelectedDevice(null); // 重置 selectedDevice 状态
-                    }}
-                  >
-                    <Text style={MyColdWalletScreenStyle.cancelButtonText}>
-                      {t("Cancel")}
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-              </BlurView>
-            </Modal>
           </View>
         </View>
       </ScrollView>
-
+      {/* Bluetooth modal */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <BlurView intensity={10} style={MyColdWalletScreenStyle.centeredView}>
+          <View style={MyColdWalletScreenStyle.bluetoothModalView}>
+            <Text style={MyColdWalletScreenStyle.bluetoothModalTitle}>
+              {t("LOOKING FOR DEVICES")}
+            </Text>
+            {!verifiedDevices.length && isScanning ? (
+              <View style={{ alignItems: "center" }}>
+                <Image
+                  source={require("../assets/Bluetooth.gif")}
+                  style={MyColdWalletScreenStyle.bluetoothImg}
+                />
+                <Text style={MyColdWalletScreenStyle.scanModalSubtitle}>
+                  {t("Scanning...")}
+                </Text>
+              </View>
+            ) : (
+              devices.length > 0 && (
+                <FlatList
+                  data={devices}
+                  keyExtractor={(item) => item.id}
+                  renderItem={({ item }) => {
+                    const isVerified = verifiedDevices.includes(item.id);
+                    return (
+                      <TouchableOpacity onPress={() => handleDevicePress(item)}>
+                        <View
+                          style={MyColdWalletScreenStyle.deviceItemContainer}
+                        >
+                          <Icon
+                            name="smartphone"
+                            size={24}
+                            color={isVerified ? "green" : iconColor} // 如果已验证则颜色为绿色
+                            style={MyColdWalletScreenStyle.deviceIcon}
+                          />
+                          <Text style={MyColdWalletScreenStyle.modalSubtitle}>
+                            {item.name || item.id}
+                          </Text>
+                        </View>
+                      </TouchableOpacity>
+                    );
+                  }}
+                />
+              )
+            )}
+            {!isScanning && devices.length === 0 && (
+              <Text style={MyColdWalletScreenStyle.modalSubtitle}>
+                {t(
+                  "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled."
+                )}
+              </Text>
+            )}
+            <TouchableOpacity
+              style={MyColdWalletScreenStyle.cancelButtonLookingFor}
+              onPress={() => {
+                setModalVisible(false);
+                setSelectedDevice(null);
+              }}
+            >
+              <Text style={MyColdWalletScreenStyle.cancelButtonText}>
+                {t("Cancel")}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </BlurView>
+      </Modal>
       {/* PIN码输入modal窗口 */}
       <Modal
         animationType="slide"
