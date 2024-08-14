@@ -70,7 +70,7 @@ function MyColdWalletScreen() {
   const lightColors = ["#FFFFFF", "#EDEBEF"];
   const [receivedVerificationCode, setReceivedVerificationCode] = useState("");
   const [newPasswordModalVisible, setNewPasswordModalVisible] = useState(false);
-
+  const [verifiedDevices, setVerifiedDevices] = useState([]);
   const [verificationSuccessModalVisible, setVerificationSuccessModalVisible] =
     useState(false);
   const [verificationFailModalVisible, setVerificationFailModalVisible] =
@@ -482,55 +482,29 @@ function MyColdWalletScreen() {
   };
 
   const handlePinSubmit = async () => {
-    // 首先关闭 "Enter PIN to Connect" 的模态框
     setPinModalVisible(false);
-
-    // 关闭所有其他可能打开的模态框
     setVerificationSuccessModalVisible(false);
     setVerificationFailModalVisible(false);
 
-    // 将用户输入的 PIN 转换为数字
-    const pinCodeValue = parseInt(pinCode, 10); // 将 "1234" 转换为数字 1234
-
-    // 将接收到的验证码转换为数字
+    const pinCodeValue = parseInt(pinCode, 10);
     const verificationCodeValue = parseInt(
       receivedVerificationCode.replace(" ", ""),
       16
     );
 
-    console.log(`用户输入的 PIN 数值: ${pinCodeValue}`);
-    console.log(`接收到的验证码数值: ${verificationCodeValue}`);
-
     if (pinCodeValue === verificationCodeValue) {
       console.log("PIN 验证成功");
-      setVerificationSuccessModalVisible(true); // 显示成功提示
+      setVerificationSuccessModalVisible(true);
+
+      // 将已验证的设备ID添加到verifiedDevices状态中
+      setVerifiedDevices((prev) => [...prev, selectedDevice.id]);
     } else {
       console.log("PIN 验证失败");
-
-      // 停止监听验证码
-      if (monitorSubscription) {
-        try {
-          monitorSubscription.remove();
-          console.log("验证码监听已停止");
-        } catch (error) {
-          console.error("停止监听时发生错误:", error);
-        }
-      }
-
-      // 主动断开与嵌入式设备的连接
-      if (selectedDevice) {
-        try {
-          await selectedDevice.cancelConnection();
-          console.log("已断开与设备的连接");
-        } catch (error) {
-          console.error("断开连接时发生错误:", error);
-        }
-      }
-
-      setVerificationFailModalVisible(true); // 显示失败提示
+      stopMonitoringVerificationCode();
+      await selectedDevice.cancelConnection();
+      setVerificationFailModalVisible(true);
     }
 
-    // 清空 PIN 输入框
     setPinCode("");
   };
 
@@ -1263,29 +1237,32 @@ function MyColdWalletScreen() {
                       <FlatList
                         data={devices}
                         keyExtractor={(item) => item.id}
-                        renderItem={({ item }) => (
-                          <TouchableOpacity
-                            onPress={() => handleDevicePress(item)}
-                          >
-                            <View
-                              style={
-                                MyColdWalletScreenStyle.deviceItemContainer
-                              }
+                        renderItem={({ item }) => {
+                          const isVerified = verifiedDevices.includes(item.id);
+                          return (
+                            <TouchableOpacity
+                              onPress={() => handleDevicePress(item)}
                             >
-                              <Icon
-                                name="smartphone"
-                                size={24}
-                                color={iconColor}
-                                style={MyColdWalletScreenStyle.deviceIcon}
-                              />
-                              <Text
-                                style={MyColdWalletScreenStyle.modalSubtitle}
+                              <View
+                                style={
+                                  MyColdWalletScreenStyle.deviceItemContainer
+                                }
                               >
-                                {item.name || item.id}
-                              </Text>
-                            </View>
-                          </TouchableOpacity>
-                        )}
+                                <Icon
+                                  name="smartphone"
+                                  size={24}
+                                  color={isVerified ? "green" : iconColor} // 如果已验证则颜色为绿色
+                                  style={MyColdWalletScreenStyle.deviceIcon}
+                                />
+                                <Text
+                                  style={MyColdWalletScreenStyle.modalSubtitle}
+                                >
+                                  {item.name || item.id}
+                                </Text>
+                              </View>
+                            </TouchableOpacity>
+                          );
+                        }}
                       />
                     )
                   )}
