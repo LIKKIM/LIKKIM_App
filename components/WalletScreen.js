@@ -26,6 +26,7 @@ import QRCode from "react-native-qrcode-svg"; // 确保导入 QRCode 模块
 import PriceChartCom from "./PriceChartCom";
 import { BleManager, BleErrorCode } from "react-native-ble-plx";
 import Constants from "expo-constants";
+import base64 from "base64-js";
 function WalletScreen({ route, navigation }) {
   const {
     additionalCryptos,
@@ -150,6 +151,9 @@ function WalletScreen({ route, navigation }) {
     }
   };
 
+  const [bleVisible, setBleVisible] = useState(false); // New state for Bluetooth modal
+
+  // Update Bluetooth modal visibility management
   useEffect(() => {
     if (Platform.OS !== "web") {
       bleManagerRef.current = new BleManager({
@@ -177,7 +181,7 @@ function WalletScreen({ route, navigation }) {
 
   const handleDevicePress = async (device) => {
     setSelectedDevice(device);
-    setModalVisible(false);
+    setBleVisible(false); // Close the Bluetooth modal
 
     try {
       // 连接设备
@@ -563,7 +567,7 @@ function WalletScreen({ route, navigation }) {
     setRecoveryPhraseModalVisible(false);
 
     // 显示 Bluetooth 模态框
-    setModalVisible(true);
+    setBleVisible(true);
   };
 
   const handlePhraseSaved = () => {
@@ -1022,7 +1026,6 @@ function WalletScreen({ route, navigation }) {
           </Animated.View>
         )}
       </ScrollView>
-
       {/* 显示选择的加密货币地址的模态窗口 */}
       <Modal
         animationType="slide"
@@ -1114,7 +1117,6 @@ function WalletScreen({ route, navigation }) {
           </View>
         </BlurView>
       </Modal>
-
       {/* Add Wallet Modal */}
       <Modal
         animationType="slide"
@@ -1151,7 +1153,6 @@ function WalletScreen({ route, navigation }) {
           </View>
         </BlurView>
       </Modal>
-
       {/* Import Phrase Modal */}
       <Modal
         animationType="slide"
@@ -1191,7 +1192,6 @@ function WalletScreen({ route, navigation }) {
           </View>
         </BlurView>
       </Modal>
-
       {/* 提示 Modal */}
       <Modal
         animationType="slide"
@@ -1236,7 +1236,6 @@ function WalletScreen({ route, navigation }) {
           </View>
         </BlurView>
       </Modal>
-
       {/* Phrase Modal */}
       <Modal
         animationType="slide"
@@ -1329,7 +1328,6 @@ function WalletScreen({ route, navigation }) {
           </View>
         </BlurView>
       </Modal>
-
       {/* Process Modal */}
       <Modal
         animationType="slide"
@@ -1357,9 +1355,7 @@ function WalletScreen({ route, navigation }) {
           </View>
         </BlurView>
       </Modal>
-
       {/* Add Crypto Modal */}
-
       <Modal
         animationType="slide"
         transparent={true}
@@ -1435,7 +1431,6 @@ function WalletScreen({ route, navigation }) {
           </View>
         </BlurView>
       </Modal>
-
       {/* Delete Confirmation Modal */}
       <Modal
         animationType="slide"
@@ -1480,14 +1475,14 @@ function WalletScreen({ route, navigation }) {
           </View>
         </BlurView>
       </Modal>
-
       {/* Bluetooth modal */}
+
       <Modal
         animationType="slide"
         transparent={true}
-        visible={modalVisible}
+        visible={bleVisible} // Use bleVisible to control this modal
         onRequestClose={() => {
-          setModalVisible(!modalVisible);
+          setBleVisible(!bleVisible); // Toggle visibility
         }}
       >
         <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
@@ -1538,8 +1533,8 @@ function WalletScreen({ route, navigation }) {
             <TouchableOpacity
               style={WalletScreenStyle.cancelButtonLookingFor}
               onPress={() => {
-                setModalVisible(false);
-                setSelectedDevice(null); // 重置 selectedDevice 状态
+                setBleVisible(false); // Close Bluetooth modal
+                setSelectedDevice(null); // Reset selected device state
               }}
             >
               <Text style={WalletScreenStyle.cancelButtonText}>
