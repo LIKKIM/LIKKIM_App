@@ -85,7 +85,12 @@ function MyColdWalletScreen() {
       currency.name.toLowerCase().includes(searchCurrency.toLowerCase()) ||
       currency.shortName.toLowerCase().includes(searchCurrency.toLowerCase())
   );
+  const [isScreenLockEnabled, setIsScreenLockEnabled] = useState(false); // 新增屏幕锁定状态
 
+  const handleScreenLockToggle = async (value) => {
+    setIsScreenLockEnabled(value);
+    await AsyncStorage.setItem("screenLockEnabled", JSON.stringify(value));
+  };
   const verifyCode = (userInputCode, deviceCode) => {
     if (userInputCode === deviceCode) {
       // 验证成功
@@ -488,10 +493,28 @@ function MyColdWalletScreen() {
 
   const settingsOptions = [
     {
-      title: t("Change App Screen Lock Password"),
+      title: t("Enable Screen Lock"),
       icon: "lock-outline",
-      onPress: () => setEnterPasswordModalVisible(true), // 改变为显示 Enter Password 模态框
+      onPress: () => handleScreenLockToggle(!isScreenLockEnabled),
+      toggle: (
+        <Switch
+          trackColor={{ false: "#767577", true: "#81b0ff" }}
+          thumbColor={isScreenLockEnabled ? "#fff" : "#f4f3f4"}
+          ios_backgroundColor="#3e3e3e"
+          onValueChange={() => handleScreenLockToggle(!isScreenLockEnabled)}
+          value={isScreenLockEnabled}
+        />
+      ),
     },
+    ...(isScreenLockEnabled
+      ? [
+          {
+            title: t("Change App Screen Lock Password"),
+            icon: "lock-outline",
+            onPress: () => setEnterPasswordModalVisible(true), // 显示 Enter Password 模态框
+          },
+        ]
+      : []),
     {
       title: t("Default Currency"),
       icon: "attach-money",
