@@ -625,12 +625,11 @@ function WalletScreen({ route, navigation }) {
           const textColor =
             priceChange > 0
               ? isBlackText
-                ? "#22AA94" // 浅色背景下的绿色
-                : "#0C9981" // 深色背景下的绿色
+                ? "#FF5252"
+                : "#F23645"
               : isBlackText
-              ? "#FF5252"
-              : "#F23645";
-
+              ? "#22AA94"
+              : "#0C9981";
           const priceChange = priceChanges[card.shortName]?.priceChange || "0";
           const percentageChange =
             priceChanges[card.shortName]?.percentageChange || "0";
