@@ -186,7 +186,7 @@ export default function PriceChartCom({
         !load[0] && ( // 当没有数据且不在加载状态时显示提示信息
           <View
             style={{
-              height: 300,
+              height: 298,
               justifyContent: "center",
               alignItems: "center",
               display: "flex",
