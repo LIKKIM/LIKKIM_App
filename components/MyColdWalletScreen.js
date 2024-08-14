@@ -732,7 +732,7 @@ function MyColdWalletScreen() {
               {option.toggle}
             </TouchableOpacity>
           ))}
-          {/* 设置密码模态框 */}
+          {/* enable screen lock modal */}
           <Modal
             animationType="slide"
             transparent={true}
@@ -747,25 +747,25 @@ function MyColdWalletScreen() {
                 <Text style={MyColdWalletScreenStyle.passwordModalTitle}>
                   {t("Enable Screen Lock")}
                 </Text>
-                <View style={{ marginVertical: 10, width: "100%" }}>
-                  <TextInput
-                    style={MyColdWalletScreenStyle.passwordInput}
-                    placeholder={t("Enter new password")}
-                    placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
-                    secureTextEntry={true}
-                    onChangeText={setPassword}
-                    value={password}
-                    autoFocus={true}
-                  />
-                  <TextInput
-                    style={MyColdWalletScreenStyle.passwordInput}
-                    placeholder={t("Confirm new password")}
-                    placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
-                    secureTextEntry={true}
-                    onChangeText={setConfirmPassword}
-                    value={confirmPassword}
-                  />
-                </View>
+
+                <TextInput
+                  style={MyColdWalletScreenStyle.passwordInput}
+                  placeholder={t("Enter new password")}
+                  placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
+                  secureTextEntry={true}
+                  onChangeText={setPassword}
+                  value={password}
+                  autoFocus={true}
+                />
+                <TextInput
+                  style={MyColdWalletScreenStyle.passwordInput}
+                  placeholder={t("Confirm new password")}
+                  placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
+                  secureTextEntry={true}
+                  onChangeText={setConfirmPassword}
+                  value={confirmPassword}
+                />
+
                 <View style={MyColdWalletScreenStyle.buttonContainer}>
                   <TouchableOpacity
                     style={MyColdWalletScreenStyle.submitButton}
