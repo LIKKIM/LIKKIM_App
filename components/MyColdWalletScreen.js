@@ -488,7 +488,7 @@ function MyColdWalletScreen() {
 
   const settingsOptions = [
     {
-      title: t("Change Password"),
+      title: t("Change App Screen Lock Password"),
       icon: "lock-outline",
       onPress: () => setEnterPasswordModalVisible(true), // 改变为显示 Enter Password 模态框
     },
