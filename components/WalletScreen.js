@@ -27,6 +27,10 @@ import PriceChartCom from "./PriceChartCom";
 import { BleManager, BleErrorCode } from "react-native-ble-plx";
 import Constants from "expo-constants";
 import base64 from "base64-js";
+
+const serviceUUID = "0000FFE0-0000-1000-8000-00805F9B34FB";
+const writeCharacteristicUUID = "0000FFE2-0000-1000-8000-00805F9B34FB";
+
 function WalletScreen({ route, navigation }) {
   const {
     additionalCryptos,
@@ -94,21 +98,6 @@ function WalletScreen({ route, navigation }) {
       crypto.shortName.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const mnemonic = [
-    ["apple", "banana", "cherry"],
-    ["dog", "elephant", "frog"],
-    ["grape", "honey", "ice"],
-    ["jack", "kite", "lemon"],
-    ["mango", "nest", "orange"],
-    ["peach", "queen", "rabbit"],
-    ["sun", "tiger", "umbrella"],
-    ["vase", "wolf", "xray"],
-    ["yellow", "zebra", "alpha"],
-    ["bravo", "charlie", "delta"],
-    ["echo", "foxtrot", "golf"],
-    ["hotel", "india", "juliet"],
-  ];
-
   const bleManagerRef = useRef(null);
 
   const scanDevices = () => {
@@ -172,12 +161,6 @@ function WalletScreen({ route, navigation }) {
       };
     }
   }, []);
-
-  const handleWordSelect = (index, word) => {
-    const newSelectedWords = [...selectedWords];
-    newSelectedWords[index] = word;
-    setSelectedWords(newSelectedWords);
-  };
 
   const handleDevicePress = async (device) => {
     setSelectedDevice(device);
@@ -291,7 +274,41 @@ function WalletScreen({ route, navigation }) {
     setSelectedCryptoIcon(crypto.icon);
     setAddressModalVisible(true);
   };
+  let monitorSubscription;
 
+  const monitorVerificationCode = (device) => {
+    const notifyCharacteristicUUID = "0000FFE1-0000-1000-8000-00805F9B34FB";
+
+    monitorSubscription = device.monitorCharacteristicForService(
+      serviceUUID,
+      notifyCharacteristicUUID,
+      (error, characteristic) => {
+        if (error) {
+          console.error("监听验证码时出错:", error.message);
+          return;
+        }
+
+        // Base64解码接收到的数据
+        const receivedData = Buffer.from(characteristic.value, "base64");
+
+        // 将接收到的数据解析为16进制字符串
+        const receivedDataHex = receivedData.toString("hex");
+        console.log("接收到的16进制数据字符串:", receivedDataHex);
+
+        // 示例：检查接收到的数据的前缀是否正确（例如，预期为 "a1"）
+        if (receivedDataHex.startsWith("a1")) {
+          // 提取接收到的验证码（根据你的协议调整具体的截取方式）
+          const verificationCode = receivedDataHex.substring(2, 6); // 获取从第2个字符开始的4个字符（例如 "a1 04 D2" 中的 "04D2"）
+          console.log("接收到的验证码:", verificationCode);
+
+          // 将验证码存储到状态中，或进行进一步的处理
+          setReceivedVerificationCode(verificationCode);
+        } else {
+          console.warn("接收到的不是预期的验证码数据");
+        }
+      }
+    );
+  };
   useEffect(() => {
     if (modalVisible) {
       // 重置 tabOpacity 为 1
@@ -1236,98 +1253,7 @@ function WalletScreen({ route, navigation }) {
           </View>
         </BlurView>
       </Modal>
-      {/* Phrase Modal */}
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={recoveryPhraseModalVisible}
-        onRequestClose={() => setRecoveryPhraseModalVisible(false)}
-      >
-        <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
-          <View style={WalletScreenStyle.phraseModalView}>
-            <Text style={WalletScreenStyle.alertModalTitle}>
-              {t("Never share the recovery phrase.")}
-            </Text>
-            <Text style={WalletScreenStyle.alertModalSubtitle}>
-              {t(
-                "Please save the recovery phrase displayed on the LIKKIM hardware wallet screen."
-              )}
-            </Text>
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "center",
-                marginBottom: 10,
-              }}
-            >
-              <Text style={{ color: secondTextColor, marginRight: 10 }}>
-                {t("Scroll down to view all words")}
-              </Text>
-              <Icon name="swipe-vertical" size={26} color={secondTextColor} />
-            </View>
-            <ScrollView style={{ width: "100%", height: 300 }}>
-              {mnemonic.map((words, index) => (
-                <View
-                  key={index}
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    marginBottom: 10,
-                  }}
-                >
-                  <Text style={{ marginRight: 10, color: secondTextColor }}>
-                    {index + 1}.
-                  </Text>
-                  {words.map((word) => (
-                    <TouchableOpacity
-                      key={word}
-                      style={{
-                        padding: 10,
-                        borderWidth: 2,
-                        borderColor:
-                          selectedWords[index] === word ? "#6C6CF4" : "grey",
-                        borderRadius: 5,
-                        marginHorizontal: 5,
-                      }}
-                      onPress={() => handleWordSelect(index, word)}
-                    >
-                      <Text style={{ color: secondTextColor }}>{word}</Text>
-                    </TouchableOpacity>
-                  ))}
-                </View>
-              ))}
-            </ScrollView>
-            {!allWordsSelected && (
-              <Text
-                style={[WalletScreenStyle.highlightText, { marginTop: 10 }]}
-              >
-                {t("You must select all 12 words before you can proceed.")}
-              </Text>
-            )}
-            <TouchableOpacity
-              style={[
-                WalletScreenStyle.alertModalButton,
-                { opacity: allWordsSelected ? 1 : 0.5 },
-              ]}
-              onPress={handlePhraseSaved}
-              disabled={!allWordsSelected}
-            >
-              <Text style={WalletScreenStyle.ButtonText}>
-                {t("Verify and I've Saved the Phrase")}
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={WalletScreenStyle.cancelButton}
-              onPress={() => setRecoveryPhraseModalVisible(false)}
-            >
-              <Text style={WalletScreenStyle.cancelButtonText}>
-                {t("Close")}
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </BlurView>
-      </Modal>
+
       {/* Process Modal */}
       <Modal
         animationType="slide"
