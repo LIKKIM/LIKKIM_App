@@ -99,6 +99,18 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       padding: 35,
       alignItems: "center",
     },
+
+    changePasswordModalView: {
+      position: "absolute",
+      top: 60,
+      margin: 20,
+      height: 360,
+      width: "90%",
+      backgroundColor: modalBackgroundColor,
+      borderRadius: 20,
+      padding: 35,
+      alignItems: "center",
+    },
     enableLockModalView: {
       position: "absolute",
       top: 60,
