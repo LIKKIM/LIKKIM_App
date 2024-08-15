@@ -1310,7 +1310,7 @@ function MyColdWalletScreen() {
                                   MyColdWalletScreenStyle.disconnectButtonText
                                 }
                               >
-                                Disconnect
+                                {t("Disconnect")}
                               </Text>
                             </TouchableOpacity>
                           )}
