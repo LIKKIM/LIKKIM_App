@@ -321,36 +321,68 @@ function WalletScreen({ route, navigation }) {
   };
 
   const sendCreateWalletCommand = async (device) => {
-    // 命令数据，未包含CRC校验码
-    const commandData = new Uint8Array([0xf4, 0x01, 0x0c, 0x01]); // 0xF4: 帧头，0x01: 创建钱包请求，0x0C: 助记词长度12，0x01: 数据长度
-
-    // 使用CRC-16-Modbus算法计算CRC校验码
-    const crc = crc16Modbus(commandData);
-
-    // 将CRC校验码转换为高位在前，低位在后的格式
-    const crcHighByte = (crc >> 8) & 0xff;
-    const crcLowByte = crc & 0xff;
-
-    // 将原始命令数据、CRC校验码以及结束符组合成最终的命令
-    const finalCommand = new Uint8Array([
-      ...commandData,
-      crcLowByte,
-      crcHighByte,
-      0x0d, // 结束符
-      0x0a, // 结束符
-    ]);
-
-    // 将最终的命令转换为Base64编码
-    const base64Command = base64.fromByteArray(finalCommand);
-
-    // 打印最终的命令数据（十六进制表示）
-    console.log(
-      `Final command: ${Array.from(finalCommand)
-        .map((byte) => byte.toString(16).padStart(2, "0"))
-        .join(" ")}`
-    );
-
     try {
+      // 确保 device 是一个设备对象，而不仅仅是设备 ID
+      if (typeof device === "string") {
+        console.error("设备是一个字符串（可能是设备ID），而不是设备对象。");
+        return;
+      }
+
+      console.log("发送创建钱包命令之前的设备对象:", device);
+
+      // 检查设备是否已连接
+      if (!device.isConnected || typeof device.isConnected !== "function") {
+        console.log("设备对象不是已连接的设备，或 isConnected 方法不可用。");
+        return;
+      }
+
+      if (!device.isConnected()) {
+        console.log("设备未连接，正在尝试重新连接...");
+        await device.connect();
+        await device.discoverAllServicesAndCharacteristics();
+        console.log("设备已重新连接并发现所有服务。");
+      } else {
+        console.log("设备已连接。");
+      }
+
+      if (
+        typeof device.writeCharacteristicWithResponseForService !== "function"
+      ) {
+        console.error(
+          "设备没有 writeCharacteristicWithResponseForService 方法。"
+        );
+        return;
+      }
+
+      // 构建命令数据，未包含CRC校验码
+      const commandData = new Uint8Array([0xf4, 0x01, 0x0c, 0x01]);
+
+      // 使用CRC-16-Modbus算法计算CRC校验码
+      const crc = crc16Modbus(commandData);
+
+      // 将CRC校验码转换为高位在前，低位在后的格式
+      const crcHighByte = (crc >> 8) & 0xff;
+      const crcLowByte = crc & 0xff;
+
+      // 将原始命令数据、CRC校验码以及结束符组合成最终的命令
+      const finalCommand = new Uint8Array([
+        ...commandData,
+        crcLowByte,
+        crcHighByte,
+        0x0d, // 结束符
+        0x0a, // 结束符
+      ]);
+
+      // 将最终的命令转换为Base64编码
+      const base64Command = base64.fromByteArray(finalCommand);
+
+      console.log(
+        `最终命令: ${Array.from(finalCommand)
+          .map((byte) => byte.toString(16).padStart(2, "0"))
+          .join(" ")}`
+      );
+
+      // 发送创建钱包命令
       await device.writeCharacteristicWithResponseForService(
         serviceUUID, // BLE服务的UUID
         writeCharacteristicUUID, // 可写特性的UUID
