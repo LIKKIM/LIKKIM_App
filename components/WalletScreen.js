@@ -120,24 +120,21 @@ function WalletScreen({ route, navigation }) {
     if (Platform.OS !== "web" && !isScanning) {
       console.log("Scanning started");
       setIsScanning(true);
-      const scanOptions = { allowDuplicates: true };
-      const scanFilter = null;
 
       bleManagerRef.current.startDeviceScan(
-        scanFilter,
-        scanOptions,
+        null,
+        { allowDuplicates: true },
         (error, device) => {
           if (error) {
             console.error("BleManager scanning error:", error);
-            if (error.errorCode === BleErrorCode.BluetoothUnsupported) {
-              console.error("Bluetooth LE is unsupported on this device");
-              setIsScanning(false);
-              return;
-            }
-          } else if (device.name && device.name.includes("LIKKIM")) {
+            setIsScanning(false);
+            return;
+          }
+
+          if (device.name && device.name.includes("LIKKIM")) {
             setDevices((prevDevices) => {
               if (!prevDevices.find((d) => d.id === device.id)) {
-                return [...prevDevices, device];
+                return [...prevDevices, device]; // 这里 device 是完整的设备对象
               }
               return prevDevices;
             });
@@ -184,7 +181,7 @@ function WalletScreen({ route, navigation }) {
   }, []);
 
   const handleDevicePress = async (device) => {
-    // 确保传递的 device 对象是有效的
+    // 检查是否传递了有效的设备对象
     if (typeof device !== "object" || typeof device.connect !== "function") {
       console.error("无效的设备对象，无法连接设备:", device);
       return;
@@ -779,13 +776,19 @@ function WalletScreen({ route, navigation }) {
     setRecoveryPhraseModalVisible(false);
 
     if (verifiedDevices.length > 0) {
-      // 向嵌入式设备发送创建钱包命令
-      sendCreateWalletCommand(verifiedDevices[0]); // 假设第一个设备是目标设备
-      setCreatePendingModalVisible(true);
+      // 发送创建钱包命令时，确保传递的是设备对象
+      const device = devices.find((d) => d.id === verifiedDevices[0]);
+      if (device) {
+        sendCreateWalletCommand(device); // 确保这里传递的是完整的设备对象
+        setCreatePendingModalVisible(true);
+      } else {
+        console.error("未找到与该ID匹配的设备对象");
+      }
     } else {
       setBleVisible(true);
     }
   };
+
   const handlePhraseSaved = () => {
     setRecoveryPhraseModalVisible(false);
     setProcessModalVisible(true);
@@ -1631,13 +1634,13 @@ function WalletScreen({ route, navigation }) {
                   data={devices}
                   keyExtractor={(item) => item.id}
                   renderItem={({ item }) => {
-                    const isVerified = verifiedDevices.includes(item.id); // 判断设备是否已验证
+                    const isVerified = verifiedDevices.includes(item.id);
 
                     return (
                       <TouchableOpacity
                         onPress={() => {
                           if (!isVerified) {
-                            handleDevicePress(item); // 仅当设备未验证时才执行操作
+                            handleDevicePress(item); // 确保这里传递的是完整的设备对象
                           }
                         }}
                       >
@@ -1645,7 +1648,7 @@ function WalletScreen({ route, navigation }) {
                           <Icon
                             name={isVerified ? "phonelink-ring" : "smartphone"}
                             size={24}
-                            color={isVerified ? "#3CDA84" : iconColor} // 如果已验证则颜色为绿色
+                            color={isVerified ? "#3CDA84" : iconColor}
                             style={WalletScreenStyle.deviceIcon}
                           />
                           <Text style={WalletScreenStyle.scanModalSubtitle}>
@@ -1653,7 +1656,7 @@ function WalletScreen({ route, navigation }) {
                           </Text>
                           {isVerified && (
                             <TouchableOpacity
-                              style={WalletScreenStyle.disconnectButton} // 定义一个样式用于按钮
+                              style={WalletScreenStyle.disconnectButton}
                               onPress={() => handleDisconnectDevice(item)}
                             >
                               <Text
