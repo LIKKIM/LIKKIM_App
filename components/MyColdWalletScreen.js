@@ -49,7 +49,9 @@ function MyColdWalletScreen() {
     currencyUnit,
     setCurrencyUnit,
     setIsVerificationSuccessful,
-  } = useContext(CryptoContext); // 从 CryptoContext 中获取 setIsVerificationSuccessful
+    verifiedDevices,
+    setVerifiedDevices,
+  } = useContext(CryptoContext); // 从 CryptoContext 中获取 setIsVerificationSuccessful 和 verifiedDevices
   const { isDarkMode, setIsDarkMode } = useContext(DarkModeContext);
   const MyColdWalletScreenStyle = MyColdWalletScreenStyles(isDarkMode);
   const [currencyModalVisible, setCurrencyModalVisible] = useState(false);
@@ -74,7 +76,6 @@ function MyColdWalletScreen() {
   const lightColors = ["#FFFFFF", "#EDEBEF"];
   const [receivedVerificationCode, setReceivedVerificationCode] = useState("");
   const [newPasswordModalVisible, setNewPasswordModalVisible] = useState(false);
-  const [verifiedDevices, setVerifiedDevices] = useState([]);
   const [verificationSuccessModalVisible, setVerificationSuccessModalVisible] =
     useState(false);
   const [verificationFailModalVisible, setVerificationFailModalVisible] =
@@ -835,7 +836,7 @@ function MyColdWalletScreen() {
                     autoFocus={true}
                   />
                 </View>
-                <View style={MyColdWalletScreenStyle.buttonContainer}>
+                <View className={MyColdWalletScreenStyle.buttonContainer}>
                   <TouchableOpacity
                     style={MyColdWalletScreenStyle.submitButton}
                     onPress={handleConfirmPassword}
