@@ -762,109 +762,7 @@ function MyColdWalletScreen() {
               {option.toggle}
             </TouchableOpacity>
           ))}
-          {/* enable screen lock modal */}
-          <Modal
-            animationType="slide"
-            transparent={true}
-            visible={passwordModalVisible}
-            onRequestClose={closePasswordModal}
-          >
-            <BlurView
-              intensity={10}
-              style={MyColdWalletScreenStyle.centeredView}
-            >
-              <View style={MyColdWalletScreenStyle.enableLockModalView}>
-                <Text style={MyColdWalletScreenStyle.passwordModalTitle}>
-                  {t("Enable Screen Lock")}
-                </Text>
 
-                <TextInput
-                  style={MyColdWalletScreenStyle.passwordInput}
-                  placeholder={t("Enter new password")}
-                  placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
-                  secureTextEntry={true}
-                  onChangeText={setPassword}
-                  value={password}
-                  autoFocus={true}
-                />
-                <TextInput
-                  style={MyColdWalletScreenStyle.passwordInput}
-                  placeholder={t("Confirm new password")}
-                  placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
-                  secureTextEntry={true}
-                  onChangeText={setConfirmPassword}
-                  value={confirmPassword}
-                />
-
-                <View style={MyColdWalletScreenStyle.buttonContainer}>
-                  <TouchableOpacity
-                    style={MyColdWalletScreenStyle.submitButton}
-                    onPress={handleSetPassword}
-                  >
-                    <Text style={MyColdWalletScreenStyle.submitButtonText}>
-                      {t("Submit")}
-                    </Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    style={MyColdWalletScreenStyle.cancelButton}
-                    onPress={() => setPasswordModalVisible(false)}
-                  >
-                    <Text style={MyColdWalletScreenStyle.cancelButtonText}>
-                      {t("Cancel")}
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
-            </BlurView>
-          </Modal>
-
-          {/*Disable Lock Screen modal */}
-          <Modal
-            animationType="slide"
-            transparent={true}
-            visible={enterPasswordModalVisible}
-            onRequestClose={() => setEnterPasswordModalVisible(false)}
-          >
-            <BlurView
-              intensity={10}
-              style={MyColdWalletScreenStyle.centeredView}
-            >
-              <View style={MyColdWalletScreenStyle.disableLockModalView}>
-                <Text style={MyColdWalletScreenStyle.passwordModalTitle}>
-                  {t("Disable Lock Screen")}
-                </Text>
-                <View style={{ marginVertical: 10, width: "100%" }}>
-                  <TextInput
-                    style={MyColdWalletScreenStyle.passwordInput}
-                    placeholder={t("Enter your password")}
-                    placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
-                    secureTextEntry={true}
-                    onChangeText={setCurrentPassword}
-                    value={currentPassword}
-                    autoFocus={true}
-                  />
-                </View>
-                <View style={MyColdWalletScreenStyle.buttonContainer}>
-                  <TouchableOpacity
-                    style={MyColdWalletScreenStyle.submitButton}
-                    onPress={handleConfirmPassword}
-                  >
-                    <Text style={MyColdWalletScreenStyle.submitButtonText}>
-                      {t("Submit")}
-                    </Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    style={MyColdWalletScreenStyle.cancelButton}
-                    onPress={() => setEnterPasswordModalVisible(false)}
-                  >
-                    <Text style={MyColdWalletScreenStyle.cancelButtonText}>
-                      {t("Cancel")}
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
-            </BlurView>
-          </Modal>
           {/* Language Modal */}
           <Modal
             animationType="slide"
@@ -974,6 +872,109 @@ function MyColdWalletScreen() {
                     {t("Cancel")}
                   </Text>
                 </TouchableOpacity>
+              </View>
+            </BlurView>
+          </Modal>
+          {/* enable screen lock modal */}
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={passwordModalVisible}
+            onRequestClose={closePasswordModal}
+          >
+            <BlurView
+              intensity={10}
+              style={MyColdWalletScreenStyle.centeredView}
+            >
+              <View style={MyColdWalletScreenStyle.enableLockModalView}>
+                <Text style={MyColdWalletScreenStyle.passwordModalTitle}>
+                  {t("Enable Screen Lock")}
+                </Text>
+
+                <TextInput
+                  style={MyColdWalletScreenStyle.passwordInput}
+                  placeholder={t("Enter new password")}
+                  placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
+                  secureTextEntry={true}
+                  onChangeText={setPassword}
+                  value={password}
+                  autoFocus={true}
+                />
+                <TextInput
+                  style={MyColdWalletScreenStyle.passwordInput}
+                  placeholder={t("Confirm new password")}
+                  placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
+                  secureTextEntry={true}
+                  onChangeText={setConfirmPassword}
+                  value={confirmPassword}
+                />
+
+                <View style={MyColdWalletScreenStyle.buttonContainer}>
+                  <TouchableOpacity
+                    style={MyColdWalletScreenStyle.submitButton}
+                    onPress={handleSetPassword}
+                  >
+                    <Text style={MyColdWalletScreenStyle.submitButtonText}>
+                      {t("Submit")}
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={MyColdWalletScreenStyle.cancelButton}
+                    onPress={() => setPasswordModalVisible(false)}
+                  >
+                    <Text style={MyColdWalletScreenStyle.cancelButtonText}>
+                      {t("Cancel")}
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </BlurView>
+          </Modal>
+
+          {/*Disable Lock Screen modal */}
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={enterPasswordModalVisible}
+            onRequestClose={() => setEnterPasswordModalVisible(false)}
+          >
+            <BlurView
+              intensity={10}
+              style={MyColdWalletScreenStyle.centeredView}
+            >
+              <View style={MyColdWalletScreenStyle.disableLockModalView}>
+                <Text style={MyColdWalletScreenStyle.passwordModalTitle}>
+                  {t("Disable Lock Screen")}
+                </Text>
+                <View style={{ marginVertical: 10, width: "100%" }}>
+                  <TextInput
+                    style={MyColdWalletScreenStyle.passwordInput}
+                    placeholder={t("Enter your password")}
+                    placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
+                    secureTextEntry={true}
+                    onChangeText={setCurrentPassword}
+                    value={currentPassword}
+                    autoFocus={true}
+                  />
+                </View>
+                <View style={MyColdWalletScreenStyle.buttonContainer}>
+                  <TouchableOpacity
+                    style={MyColdWalletScreenStyle.submitButton}
+                    onPress={handleConfirmPassword}
+                  >
+                    <Text style={MyColdWalletScreenStyle.submitButtonText}>
+                      {t("Submit")}
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={MyColdWalletScreenStyle.cancelButton}
+                    onPress={() => setEnterPasswordModalVisible(false)}
+                  >
+                    <Text style={MyColdWalletScreenStyle.cancelButtonText}>
+                      {t("Cancel")}
+                    </Text>
+                  </TouchableOpacity>
+                </View>
               </View>
             </BlurView>
           </Modal>
