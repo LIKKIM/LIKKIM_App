@@ -333,15 +333,10 @@ function WalletScreen({ route, navigation }) {
 
       console.log("发送创建钱包命令之前的设备对象:", device);
 
-      // 检查设备是否已连接
-      if (!device.isConnected()) {
-        console.log("设备未连接，正在尝试重新连接...");
-        await device.connect();
-        await device.discoverAllServicesAndCharacteristics();
-        console.log("设备已重新连接并发现所有服务。");
-      } else {
-        console.log("设备已连接。");
-      }
+      // 无论设备是否连接，均重新连接并发现服务和特性
+      await device.connect();
+      await device.discoverAllServicesAndCharacteristics();
+      console.log("设备已连接并发现所有服务。");
 
       if (
         typeof device.writeCharacteristicWithResponseForService !== "function"
