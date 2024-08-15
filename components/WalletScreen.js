@@ -690,10 +690,11 @@ function WalletScreen({ route, navigation }) {
     setTipModalVisible(false);
     setRecoveryPhraseModalVisible(false);
 
+    // 这里假设 selectedDevice 是当前选中的设备，您需要确保它的 ID 可用
     const selectedDeviceId = selectedDevice ? selectedDevice.id : null;
 
     if (selectedDeviceId && verifiedDevices.includes(selectedDeviceId)) {
-      // 如果设备ID已在 verifiedDevices 列表中，显示 createPending 模态框
+      // 如果设备ID已在 verifiedDevices 列表中，显示 create pending 模态框
       setCreatePendingModalVisible(true);
     } else {
       // 如果设备ID未验证，显示 Bluetooth 模态框
