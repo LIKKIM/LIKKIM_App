@@ -478,7 +478,20 @@ function WalletScreen({ route, navigation }) {
 
     if (pinCodeValue === verificationCodeValue) {
       console.log("PIN 验证成功");
-      setVerificationSuccessModalVisible(true); // 显示成功提示
+      console.log("PIN 验证成功");
+      setVerificationSuccessModalVisible(true);
+
+      // 更新全局状态为成功，并在终端打印消息
+      setIsVerificationSuccessful(true);
+      console.log("验证成功！验证状态已更新。");
+
+      // 将已验证的设备ID添加到verifiedDevices状态中并持久化到本地存储
+      const newVerifiedDevices = [...verifiedDevices, selectedDevice.id];
+      setVerifiedDevices(newVerifiedDevices);
+      await AsyncStorage.setItem(
+        "verifiedDevices",
+        JSON.stringify(newVerifiedDevices)
+      );
     } else {
       console.log("PIN 验证失败");
 
