@@ -51,6 +51,10 @@ function MyColdWalletScreen() {
     setIsVerificationSuccessful,
     verifiedDevices,
     setVerifiedDevices,
+    isScreenLockEnabled,
+    screenLockPassword,
+    toggleScreenLock,
+    changeScreenLockPassword,
   } = useContext(CryptoContext); // 从 CryptoContext 中获取 setIsVerificationSuccessful 和 verifiedDevices
   const { isDarkMode, setIsDarkMode } = useContext(DarkModeContext);
   const MyColdWalletScreenStyle = MyColdWalletScreenStyles(isDarkMode);
@@ -88,7 +92,6 @@ function MyColdWalletScreen() {
   const filteredLanguages = languages.filter((language) =>
     language.name.toLowerCase().includes(searchLanguage.toLowerCase())
   );
-  const [isScreenLockEnabled, setIsScreenLockEnabled] = useState(false);
   const [confirmPasswordModalVisible, setConfirmPasswordModalVisible] =
     useState(false);
   const [storedPassword, setStoredPassword] = useState(""); // 存储已设置的密码
@@ -109,17 +112,6 @@ function MyColdWalletScreen() {
     setCurrentPassword("");
   };
 
-  const handleNextForChangePassword = () => {
-    if (currentPassword === storedPassword) {
-      setIsCurrentPasswordValid(true);
-      setChangePasswordModalVisible(false); // 关闭当前模态框
-      setNewPasswordModalVisible(true); // 打开设置新密码的模态框
-      setCurrentPassword(""); // 清空当前密码的输入框
-    } else {
-      Alert.alert(t("Error"), t("Incorrect current password"));
-    }
-  };
-
   // 持久化已连接设备
   useEffect(() => {
     const loadVerifiedDevices = async () => {
@@ -136,34 +128,31 @@ function MyColdWalletScreen() {
     loadVerifiedDevices();
   }, []);
 
-  // 读取屏幕锁定状态和密码
-  useEffect(() => {
-    const loadScreenLockData = async () => {
-      try {
-        const savedStatus = await AsyncStorage.getItem("screenLockEnabled");
-        const savedPassword = await AsyncStorage.getItem("screenLockPassword");
+  const handleScreenLockToggle = async (value) => {
+    if (value) {
+      setPasswordModalVisible(true); // 启用锁屏时打开设置密码的模态框
+    } else {
+      setEnterPasswordModalVisible(true); // 禁用锁屏时打开输入密码的模态框
+    }
+  };
 
-        if (savedStatus !== null) {
-          setIsScreenLockEnabled(JSON.parse(savedStatus));
-        }
-        if (savedPassword !== null) {
-          setStoredPassword(savedPassword);
-        }
-      } catch (error) {
-        console.error("Failed to load screen lock data", error);
-      }
-    };
-
-    loadScreenLockData();
-  }, []);
+  const handleNextForChangePassword = () => {
+    if (currentPassword === screenLockPassword) {
+      setIsCurrentPasswordValid(true);
+      setChangePasswordModalVisible(false); // 关闭当前模态框
+      setNewPasswordModalVisible(true); // 打开设置新密码的模态框
+      setCurrentPassword(""); // 清空当前密码的输入框
+    } else {
+      Alert.alert(t("Error"), t("Incorrect current password"));
+    }
+  };
 
   const handleChangePassword = async () => {
     if (password === confirmPassword) {
       try {
-        await AsyncStorage.setItem("screenLockPassword", password);
-        setStoredPassword(password);
+        await changeScreenLockPassword(password);
         setNewPasswordModalVisible(false); // 关闭设置新密码的模态框
-        setIsCurrentPasswordValid(false); // 重置状态
+        Alert.alert(t("Success"), t("Password changed successfully"));
       } catch (error) {
         console.error("Failed to change password", error);
       }
@@ -172,32 +161,14 @@ function MyColdWalletScreen() {
     }
   };
 
-  // 修改 handleScreenLockToggle 函数
-  const handleScreenLockToggle = async (value) => {
-    if (value) {
-      // 如果用户想启用屏幕锁定
-      setPasswordModalVisible(true); // 打开设置密码的模态框
-    } else {
-      // 如果用户想禁用屏幕锁定
-      setEnterPasswordModalVisible(true); // 打开输入密码的模态框
-    }
-    try {
-      setIsScreenLockEnabled(value); // 更新状态
-      await AsyncStorage.setItem("screenLockEnabled", JSON.stringify(value)); // 保存状态到本地存储
-    } catch (error) {
-      console.error("Failed to save screen lock status", error);
-    }
-  };
-
   // 设置密码模态框的提交处理函数
   const handleSetPassword = async () => {
     if (password === confirmPassword) {
       try {
-        await AsyncStorage.setItem("screenLockPassword", password);
-        setStoredPassword(password); // 存储设置的密码
-        setIsScreenLockEnabled(true); // 在密码设置成功后启用屏幕锁定
-        await AsyncStorage.setItem("screenLockEnabled", JSON.stringify(true));
+        await changeScreenLockPassword(password);
+        toggleScreenLock(true); // 启用屏幕锁定
         setPasswordModalVisible(false);
+        Alert.alert(t("Success"), t("Screen lock enabled successfully"));
       } catch (error) {
         console.error("Failed to save password", error);
       }
@@ -208,10 +179,10 @@ function MyColdWalletScreen() {
 
   // 输入密码模态框的提交处理函数
   const handleConfirmPassword = async () => {
-    if (currentPassword === storedPassword) {
-      setIsScreenLockEnabled(false); // 禁用屏幕锁定
-      await AsyncStorage.setItem("screenLockEnabled", JSON.stringify(false));
+    if (currentPassword === screenLockPassword) {
+      toggleScreenLock(false); // 禁用屏幕锁定
       setEnterPasswordModalVisible(false);
+      Alert.alert(t("Success"), t("Screen lock disabled successfully"));
     } else {
       Alert.alert(t("Error"), t("Incorrect password"));
     }
@@ -653,7 +624,7 @@ function MyColdWalletScreen() {
           {
             title: t("Change App Screen Lock Password"),
             icon: "lock-outline",
-            onPress: () => setChangePasswordModalVisible(true),
+            onPress: () => setChangePasswordModalVisible(true), // 打开验证当前密码的模态框
           },
         ]
       : []),
@@ -1083,59 +1054,6 @@ function MyColdWalletScreen() {
               </View>
             </BlurView>
           </Modal>
-          {/* Change Password Modal */}
-          <Modal
-            animationType="slide"
-            transparent={true}
-            visible={changePasswordModalVisible}
-            onRequestClose={() => setChangePasswordModalVisible(false)}
-          >
-            <BlurView
-              intensity={10}
-              style={MyColdWalletScreenStyle.centeredView}
-            >
-              <View style={MyColdWalletScreenStyle.changePasswordModalView}>
-                <Text style={MyColdWalletScreenStyle.passwordModalTitle}>
-                  {t("Change Password")}
-                </Text>
-                <View style={{ marginVertical: 10, width: "100%" }}>
-                  <Text style={MyColdWalletScreenStyle.passwordModalText}>
-                    {t("Current Password")}
-                  </Text>
-                  <TextInput
-                    style={[
-                      MyColdWalletScreenStyle.passwordInput,
-                      isPasswordFocused && MyColdWalletScreenStyle.focusedInput,
-                    ]}
-                    placeholder={t("Enter current password")}
-                    placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
-                    secureTextEntry={true}
-                    onChangeText={setCurrentPassword}
-                    value={currentPassword}
-                    autoFocus={true}
-                  />
-                </View>
-                <View style={MyColdWalletScreenStyle.buttonContainer}>
-                  <TouchableOpacity
-                    style={MyColdWalletScreenStyle.submitButton}
-                    onPress={handleNextForChangePassword} // 触发函数
-                  >
-                    <Text style={MyColdWalletScreenStyle.submitButtonText}>
-                      {t("Next")}
-                    </Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    style={MyColdWalletScreenStyle.cancelButton}
-                    onPress={() => setChangePasswordModalVisible(false)}
-                  >
-                    <Text style={MyColdWalletScreenStyle.cancelButtonText}>
-                      {t("Cancel")}
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
-            </BlurView>
-          </Modal>
 
           {/* New Password Modal */}
           <Modal
@@ -1154,82 +1072,38 @@ function MyColdWalletScreen() {
                 </Text>
 
                 <View style={{ marginVertical: 10, width: "100%" }}>
-                  <Text style={MyColdWalletScreenStyle.passwordModalText}>
-                    {t("New Password")}
-                  </Text>
-                  <View style={MyColdWalletScreenStyle.passwordInputContainer}>
-                    <TextInput
-                      style={[
-                        MyColdWalletScreenStyle.passwordInput,
-                        isPasswordFocused &&
-                          MyColdWalletScreenStyle.focusedInput,
-                      ]}
-                      placeholder={t("Enter new password")}
-                      placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
-                      secureTextEntry={isPasswordHidden}
-                      onChangeText={setPassword}
-                      onFocus={() => setIsPasswordFocused(true)}
-                      onBlur={() => setIsPasswordFocused(false)}
-                      value={password}
-                      autoFocus={true}
-                    />
-                    <TouchableOpacity
-                      onPress={() => setIsPasswordHidden(!isPasswordHidden)}
-                      style={MyColdWalletScreenStyle.eyeIcon}
-                    >
-                      <Icon
-                        name={
-                          isPasswordHidden ? "visibility-off" : "visibility"
-                        }
-                        size={24}
-                        color={isDarkMode ? "#ccc" : "#666"}
-                      />
-                    </TouchableOpacity>
-                  </View>
+                  <TextInput
+                    style={[
+                      MyColdWalletScreenStyle.passwordInput,
+                      MyColdWalletScreenStyle.focusedInput,
+                    ]}
+                    placeholder={t("Enter new password")}
+                    placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
+                    secureTextEntry={isPasswordHidden}
+                    onChangeText={setPassword}
+                    value={password}
+                    autoFocus={true}
+                  />
                 </View>
 
                 <View style={{ marginVertical: 10, width: "100%" }}>
-                  <Text style={MyColdWalletScreenStyle.passwordModalText}>
-                    {t("Confirm New Password")}
-                  </Text>
-                  <View style={MyColdWalletScreenStyle.passwordInputContainer}>
-                    <TextInput
-                      style={[
-                        MyColdWalletScreenStyle.passwordInput,
-                        isConfirmPasswordFocused &&
-                          MyColdWalletScreenStyle.focusedInput,
-                      ]}
-                      placeholder={t("Confirm new password")}
-                      placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
-                      secureTextEntry={isConfirmPasswordHidden}
-                      onChangeText={setConfirmPassword}
-                      onFocus={() => setIsConfirmPasswordFocused(true)}
-                      onBlur={() => setIsConfirmPasswordFocused(false)}
-                      value={confirmPassword}
-                    />
-                    <TouchableOpacity
-                      onPress={() =>
-                        setIsConfirmPasswordHidden(!isConfirmPasswordHidden)
-                      }
-                      style={MyColdWalletScreenStyle.eyeIcon}
-                    >
-                      <Icon
-                        name={
-                          isConfirmPasswordHidden
-                            ? "visibility-off"
-                            : "visibility"
-                        }
-                        size={24}
-                        color={isDarkMode ? "#ccc" : "#666"}
-                      />
-                    </TouchableOpacity>
-                  </View>
+                  <TextInput
+                    style={[
+                      MyColdWalletScreenStyle.passwordInput,
+                      MyColdWalletScreenStyle.focusedInput,
+                    ]}
+                    placeholder={t("Confirm new password")}
+                    placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
+                    secureTextEntry={isConfirmPasswordHidden}
+                    onChangeText={setConfirmPassword}
+                    value={confirmPassword}
+                  />
                 </View>
 
                 <View style={MyColdWalletScreenStyle.buttonContainer}>
                   <TouchableOpacity
                     style={MyColdWalletScreenStyle.submitButton}
-                    onPress={handleChangePassword}
+                    onPress={handleChangePassword} // 保存新密码
                   >
                     <Text style={MyColdWalletScreenStyle.submitButtonText}>
                       {t("Submit")}
@@ -1238,6 +1112,57 @@ function MyColdWalletScreen() {
                   <TouchableOpacity
                     style={MyColdWalletScreenStyle.cancelButton}
                     onPress={() => setNewPasswordModalVisible(false)}
+                  >
+                    <Text style={MyColdWalletScreenStyle.cancelButtonText}>
+                      {t("Cancel")}
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </BlurView>
+          </Modal>
+
+          {/* Change Password Modal */}
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={changePasswordModalVisible}
+            onRequestClose={() => setChangePasswordModalVisible(false)}
+          >
+            <BlurView
+              intensity={10}
+              style={MyColdWalletScreenStyle.centeredView}
+            >
+              <View style={MyColdWalletScreenStyle.changePasswordModalView}>
+                <Text style={MyColdWalletScreenStyle.passwordModalTitle}>
+                  {t("Change Password")}
+                </Text>
+                <View style={{ marginVertical: 10, width: "100%" }}>
+                  <TextInput
+                    style={[
+                      MyColdWalletScreenStyle.passwordInput,
+                      MyColdWalletScreenStyle.focusedInput,
+                    ]}
+                    placeholder={t("Enter current password")}
+                    placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
+                    secureTextEntry={isCurrentPasswordHidden}
+                    onChangeText={setCurrentPassword}
+                    value={currentPassword}
+                    autoFocus={true}
+                  />
+                </View>
+                <View style={MyColdWalletScreenStyle.buttonContainer}>
+                  <TouchableOpacity
+                    style={MyColdWalletScreenStyle.submitButton}
+                    onPress={handleNextForChangePassword} // 验证并进入新密码设置页面
+                  >
+                    <Text style={MyColdWalletScreenStyle.submitButtonText}>
+                      {t("Next")}
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={MyColdWalletScreenStyle.cancelButton}
+                    onPress={() => setChangePasswordModalVisible(false)}
                   >
                     <Text style={MyColdWalletScreenStyle.cancelButtonText}>
                       {t("Cancel")}
