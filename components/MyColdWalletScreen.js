@@ -44,8 +44,12 @@ const writeCharacteristicUUID = "0000FFE2-0000-1000-8000-00805F9B34FB";
 function MyColdWalletScreen() {
   const { t } = useTranslation();
   const navigation = useNavigation();
-  const { currencies, currencyUnit, setCurrencyUnit } =
-    useContext(CryptoContext);
+  const {
+    currencies,
+    currencyUnit,
+    setCurrencyUnit,
+    setIsVerificationSuccessful,
+  } = useContext(CryptoContext); // 从 CryptoContext 中获取 setIsVerificationSuccessful
   const { isDarkMode, setIsDarkMode } = useContext(DarkModeContext);
   const MyColdWalletScreenStyle = MyColdWalletScreenStyles(isDarkMode);
   const [currencyModalVisible, setCurrencyModalVisible] = useState(false);
@@ -86,16 +90,19 @@ function MyColdWalletScreen() {
   const [isScreenLockEnabled, setIsScreenLockEnabled] = useState(false);
   const [confirmPasswordModalVisible, setConfirmPasswordModalVisible] =
     useState(false);
+  const [storedPassword, setStoredPassword] = useState(""); // 存储已设置的密码
+
   const verifyCode = (userInputCode, deviceCode) => {
     if (userInputCode === deviceCode) {
       // 验证码验证成功
       setVerificationSuccessModalVisible(true);
+      setIsVerificationSuccessful(true); // 更新全局状态为成功
     } else {
       // 验证码验证失败
       setVerificationFailModalVisible(true);
     }
   };
-  const [storedPassword, setStoredPassword] = useState(""); // 存储已设置的密码
+
   // 关闭设置密码模态框并清空输入
   const closePasswordModal = () => {
     setPasswordModalVisible(false);
@@ -122,6 +129,7 @@ function MyColdWalletScreen() {
       Alert.alert(t("Error"), t("Incorrect current password"));
     }
   };
+
   // 持久化已连接设备
   useEffect(() => {
     const loadVerifiedDevices = async () => {
@@ -207,6 +215,7 @@ function MyColdWalletScreen() {
       Alert.alert(t("Error"), t("Passwords do not match"));
     }
   };
+
   // 输入密码模态框的提交处理函数
   const handleConfirmPassword = async () => {
     if (currentPassword === storedPassword) {
