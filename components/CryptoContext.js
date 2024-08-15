@@ -140,6 +140,8 @@ export const usdtCrypto = {
 };
 
 export const CryptoProvider = ({ children }) => {
+  const [isScreenLockEnabled, setIsScreenLockEnabled] = useState(false);
+  const [screenLockPassword, setScreenLockPassword] = useState("");
   const [cryptoCount, setCryptoCount] = useState(0);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [currencyUnit, setCurrencyUnit] = useState("USD");
@@ -180,6 +182,16 @@ export const CryptoProvider = ({ children }) => {
         if (savedDevices !== null) {
           setVerifiedDevices(JSON.parse(savedDevices));
         }
+        const screenLockEnabled = await AsyncStorage.getItem(
+          "screenLockEnabled"
+        );
+        const screenLockPassword = await AsyncStorage.getItem(
+          "screenLockPassword"
+        );
+        if (screenLockEnabled !== null)
+          setIsScreenLockEnabled(JSON.parse(screenLockEnabled));
+        if (screenLockPassword !== null)
+          setScreenLockPassword(screenLockPassword);
       } catch (error) {
         console.error("Error loading settings: ", error);
       }
@@ -205,6 +217,11 @@ export const CryptoProvider = ({ children }) => {
           "verifiedDevices",
           JSON.stringify(verifiedDevices)
         );
+        await AsyncStorage.setItem(
+          "screenLockEnabled",
+          JSON.stringify(isScreenLockEnabled)
+        );
+        await AsyncStorage.setItem("screenLockPassword", screenLockPassword);
       } catch (error) {
         console.error("Error saving settings: ", error);
       }
@@ -217,7 +234,21 @@ export const CryptoProvider = ({ children }) => {
     addedCryptos,
     isVerificationSuccessful,
     verifiedDevices,
+    isScreenLockEnabled,
+    screenLockPassword,
   ]);
+
+  // 切换锁屏状态
+  const toggleScreenLock = async (enabled) => {
+    setIsScreenLockEnabled(enabled);
+    await AsyncStorage.setItem("screenLockEnabled", JSON.stringify(enabled));
+  };
+
+  // 更改锁屏密码
+  const changeScreenLockPassword = async (newPassword) => {
+    setScreenLockPassword(newPassword);
+    await AsyncStorage.setItem("screenLockPassword", newPassword);
+  };
 
   return (
     <CryptoContext.Provider
@@ -235,6 +266,10 @@ export const CryptoProvider = ({ children }) => {
         setIsVerificationSuccessful,
         verifiedDevices,
         setVerifiedDevices,
+        isScreenLockEnabled,
+        toggleScreenLock,
+        screenLockPassword,
+        changeScreenLockPassword,
       }}
     >
       <DarkModeContext.Provider value={{ isDarkMode, setIsDarkMode }}>
