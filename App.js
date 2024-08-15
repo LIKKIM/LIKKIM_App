@@ -75,11 +75,21 @@ function AppContent({
   selectedCardName,
   setSelectedCardName,
 }) {
-  const { cryptoCount, setCryptoCount, addedCryptos, setAddedCryptos } =
-    useContext(CryptoContext);
+  const {
+    cryptoCount,
+    setCryptoCount,
+    addedCryptos,
+    setAddedCryptos,
+    isScreenLockEnabled,
+  } = useContext(CryptoContext);
   const { isDarkMode } = useContext(DarkModeContext);
   const navigation = useNavigation();
   const [walletModalVisible, setWalletModalVisible] = useState(false);
+
+  // 在这里打印 isScreenLockEnabled 的值
+  useEffect(() => {
+    console.log("isScreenLockEnabled:", isScreenLockEnabled);
+  }, [isScreenLockEnabled]); // 当 isScreenLockEnabled 改变时，打印新值
 
   const handleConfirmDelete = () => {
     setHeaderDropdownVisible(false);
