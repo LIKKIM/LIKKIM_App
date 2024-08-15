@@ -20,6 +20,19 @@ const WalletScreenStyles = (isDarkMode) => {
     ? "#24234C80"
     : "#FFFFFF80";
   return StyleSheet.create({
+    disconnectButton: {
+      marginLeft: 10,
+      paddingVertical: 5,
+      paddingHorizontal: 10,
+      backgroundColor: "#6C6CF4",
+      borderRadius: 5,
+    },
+
+    disconnectButtonText: {
+      color: "#FFFFFF",
+      fontWeight: "bold",
+    },
+
     submitButton: {
       backgroundColor: buttonBackgroundColor,
       padding: 10,
