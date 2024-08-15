@@ -533,7 +533,7 @@ function MyColdWalletScreen() {
   const handleDisconnectDevice = async (device) => {
     try {
       // 停止监听验证码，避免因断开连接导致的错误
-      stopMonitoringVerificationCode();
+      //   stopMonitoringVerificationCode();
 
       await device.cancelConnection(); // 断开设备连接
       console.log(`设备 ${device.id} 已断开连接`);
@@ -1290,7 +1290,13 @@ function MyColdWalletScreen() {
                     const isVerified = verifiedDevices.includes(item.id); // 判断设备是否已验证
 
                     return (
-                      <TouchableOpacity onPress={() => handleDevicePress(item)}>
+                      <TouchableOpacity
+                        onPress={() => {
+                          if (!isVerified) {
+                            handleDevicePress(item); // 仅当设备未验证时才执行操作
+                          }
+                        }}
+                      >
                         <View
                           style={MyColdWalletScreenStyle.deviceItemContainer}
                         >
