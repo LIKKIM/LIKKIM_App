@@ -1739,29 +1739,24 @@ function WalletScreen({ route, navigation }) {
         transparent={true}
         animationType="slide"
       >
-        <View
-          style={{
-            flex: 1,
-            justifyContent: "center",
-            alignItems: "center",
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
-          }}
-        >
-          <View
-            style={{
-              width: 300,
-              padding: 20,
-              backgroundColor: "white",
-              borderRadius: 10,
-            }}
-          >
-            <Text style={{ marginBottom: 20 }}>
-              Your device is already verified.
+        <View style={WalletScreenStyle.centeredView}>
+          <View style={WalletScreenStyle.pendingModalView}>
+            <Text style={WalletScreenStyle.modalTitle}>
+              {t("Creating on LIKKIM Hardware...")}
             </Text>
-            <Button
-              title="Close"
+            <Text
+              style={[WalletScreenStyle.modalSubtitle, { marginBottom: 20 }]}
+            >
+              {t("Your device is already verified.")}
+            </Text>
+            <TouchableOpacity
+              style={WalletScreenStyle.submitButton}
               onPress={() => setCreatePendingModalVisible(false)}
-            />
+            >
+              <Text style={WalletScreenStyle.submitButtonText}>
+                {t("Close")}
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
       </Modal>

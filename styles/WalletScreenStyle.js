@@ -490,6 +490,16 @@ const WalletScreenStyles = (isDarkMode) => {
       padding: 35,
       alignItems: "center",
     },
+    pendingModalView: {
+      margin: 20,
+      width: "90%",
+      height: 300,
+      backgroundColor: modalBackgroundColor,
+      borderRadius: 20,
+      padding: 35,
+      alignItems: "center",
+      justifyContent: "space-between",
+    },
     deleteModalView: {
       margin: 20,
       width: "90%",
