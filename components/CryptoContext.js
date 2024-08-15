@@ -2,6 +2,7 @@
 import React, { createContext, useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import i18n from "../config/i18n";
+
 export const CryptoContext = createContext();
 export const DarkModeContext = createContext();
 
@@ -148,6 +149,7 @@ export const CryptoProvider = ({ children }) => {
   const [addedCryptos, setAddedCryptos] = useState([]);
   const [isVerificationSuccessful, setIsVerificationSuccessful] =
     useState(false);
+  const [verifiedDevices, setVerifiedDevices] = useState([]);
 
   useEffect(() => {
     const loadSettings = async () => {
@@ -173,6 +175,11 @@ export const CryptoProvider = ({ children }) => {
         if (storedStatus !== null) {
           setIsVerificationSuccessful(JSON.parse(storedStatus));
         }
+
+        const savedDevices = await AsyncStorage.getItem("verifiedDevices");
+        if (savedDevices !== null) {
+          setVerifiedDevices(JSON.parse(savedDevices));
+        }
       } catch (error) {
         console.error("Error loading settings: ", error);
       }
@@ -194,6 +201,10 @@ export const CryptoProvider = ({ children }) => {
           "isVerificationSuccessful",
           JSON.stringify(isVerificationSuccessful)
         );
+        await AsyncStorage.setItem(
+          "verifiedDevices",
+          JSON.stringify(verifiedDevices)
+        );
       } catch (error) {
         console.error("Error saving settings: ", error);
       }
@@ -205,6 +216,7 @@ export const CryptoProvider = ({ children }) => {
     i18n.language,
     addedCryptos,
     isVerificationSuccessful,
+    verifiedDevices,
   ]);
 
   return (
@@ -221,6 +233,8 @@ export const CryptoProvider = ({ children }) => {
         setAddedCryptos,
         isVerificationSuccessful,
         setIsVerificationSuccessful,
+        verifiedDevices,
+        setVerifiedDevices,
       }}
     >
       <DarkModeContext.Provider value={{ isDarkMode, setIsDarkMode }}>
