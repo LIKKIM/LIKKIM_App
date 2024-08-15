@@ -224,10 +224,17 @@ function WalletScreen({ route, navigation }) {
 
       // 开始监听嵌入式设备的返回信息
       monitorVerificationCode(device);
+
+      // 关闭设备扫描模态框
+      setBleVisible(false);
+
+      // 显示 PIN 码输入模态框
+      setPinModalVisible(true);
     } catch (error) {
       console.error("设备连接或命令发送错误:", error);
     }
   };
+
   // 处理断开连接的逻辑
   const handleDisconnectDevice = async (device) => {
     try {
