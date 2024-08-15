@@ -1,8 +1,7 @@
 // CryptoContext.js
 import React, { createContext, useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import i18n from "../config/i18n"; // 确保导入 i18n
-
+import i18n from "../config/i18n";
 export const CryptoContext = createContext();
 export const DarkModeContext = createContext();
 
@@ -147,6 +146,8 @@ export const CryptoProvider = ({ children }) => {
     initialAdditionalCryptos
   );
   const [addedCryptos, setAddedCryptos] = useState([]);
+  const [isVerificationSuccessful, setIsVerificationSuccessful] =
+    useState(false);
 
   useEffect(() => {
     const loadSettings = async () => {
@@ -165,6 +166,13 @@ export const CryptoProvider = ({ children }) => {
           setAddedCryptos(JSON.parse(savedCryptos));
           setCryptoCount(JSON.parse(savedCryptos).length);
         }
+
+        const storedStatus = await AsyncStorage.getItem(
+          "isVerificationSuccessful"
+        );
+        if (storedStatus !== null) {
+          setIsVerificationSuccessful(JSON.parse(storedStatus));
+        }
       } catch (error) {
         console.error("Error loading settings: ", error);
       }
@@ -182,12 +190,22 @@ export const CryptoProvider = ({ children }) => {
           "addedCryptos",
           JSON.stringify(addedCryptos)
         );
+        await AsyncStorage.setItem(
+          "isVerificationSuccessful",
+          JSON.stringify(isVerificationSuccessful)
+        );
       } catch (error) {
         console.error("Error saving settings: ", error);
       }
     };
     saveSettings();
-  }, [isDarkMode, currencyUnit, i18n.language, addedCryptos]);
+  }, [
+    isDarkMode,
+    currencyUnit,
+    i18n.language,
+    addedCryptos,
+    isVerificationSuccessful,
+  ]);
 
   return (
     <CryptoContext.Provider
@@ -201,6 +219,8 @@ export const CryptoProvider = ({ children }) => {
         setAdditionalCryptos,
         addedCryptos,
         setAddedCryptos,
+        isVerificationSuccessful,
+        setIsVerificationSuccessful,
       }}
     >
       <DarkModeContext.Provider value={{ isDarkMode, setIsDarkMode }}>
