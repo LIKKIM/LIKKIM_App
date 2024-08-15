@@ -1266,9 +1266,9 @@ function MyColdWalletScreen() {
                           style={MyColdWalletScreenStyle.deviceItemContainer}
                         >
                           <Icon
-                            name="smartphone"
+                            name={isVerified ? "phonelink-ring" : "smartphone"}
                             size={24}
-                            color={isVerified ? "green" : iconColor} // 如果已验证则颜色为绿色
+                            color={isVerified ? "#3CDA84" : iconColor} // 如果已验证则颜色为绿色
                             style={MyColdWalletScreenStyle.deviceIcon}
                           />
                           <Text style={MyColdWalletScreenStyle.modalSubtitle}>
