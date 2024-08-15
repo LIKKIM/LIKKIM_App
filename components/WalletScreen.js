@@ -349,7 +349,7 @@ function WalletScreen({ route, navigation }) {
 
       // 构建命令数据，未包含CRC校验码
       const commandData = new Uint8Array([0xf4, 0x01, 0x0c, 0x04]);
-
+      //这是导入钱包的启动命令   const commandData = new Uint8Array([0xf4, 0x02, 0x0c, 0x04]);
       // 使用CRC-16-Modbus算法计算CRC校验码
       const crc = crc16Modbus(commandData);
 
