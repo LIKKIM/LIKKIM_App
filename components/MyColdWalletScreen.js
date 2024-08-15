@@ -532,13 +532,15 @@ function MyColdWalletScreen() {
   // 处理断开连接的逻辑
   const handleDisconnectDevice = async (device) => {
     try {
-      // 停止监听验证码，避免因断开连接导致的错误
-      // stopMonitoringVerificationCode();
+      const isConnected = await device.isConnected();
+      if (!isConnected) {
+        console.warn(`设备 ${device.id} 已经断开连接`);
+      } else {
+        await device.cancelConnection(); // 断开设备连接
+        console.log(`设备 ${device.id} 已断开连接`);
+      }
 
-      await device.cancelConnection(); // 断开设备连接
-      console.log(`设备 ${device.id} 已断开连接`);
-
-      // 移除已验证设备的ID
+      // 更新已验证设备列表
       const updatedVerifiedDevices = verifiedDevices.filter(
         (id) => id !== device.id
       );
@@ -553,7 +555,14 @@ function MyColdWalletScreen() {
       setIsVerificationSuccessful(false);
       console.log("验证状态已更新为 false。");
     } catch (error) {
-      console.error("断开设备连接失败:", error);
+      if (
+        error instanceof BleError &&
+        error.errorCode === BleErrorCode.OperationCancelled
+      ) {
+        console.warn(`设备 ${device.id} 断开操作被取消`);
+      } else {
+        console.error("断开设备连接失败:", error);
+      }
     }
   };
 
