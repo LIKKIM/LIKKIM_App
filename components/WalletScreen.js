@@ -320,6 +320,48 @@ function WalletScreen({ route, navigation }) {
     }
   };
 
+  const sendCreateWalletCommand = async (device) => {
+    // 命令数据，未包含CRC校验码
+    const commandData = new Uint8Array([0xf4, 0x01, 0x0c, 0x01]); // 0xF4: 帧头，0x01: 创建钱包请求，0x0C: 助记词长度12，0x01: 数据长度
+
+    // 使用CRC-16-Modbus算法计算CRC校验码
+    const crc = crc16Modbus(commandData);
+
+    // 将CRC校验码转换为高位在前，低位在后的格式
+    const crcHighByte = (crc >> 8) & 0xff;
+    const crcLowByte = crc & 0xff;
+
+    // 将原始命令数据、CRC校验码以及结束符组合成最终的命令
+    const finalCommand = new Uint8Array([
+      ...commandData,
+      crcLowByte,
+      crcHighByte,
+      0x0d, // 结束符
+      0x0a, // 结束符
+    ]);
+
+    // 将最终的命令转换为Base64编码
+    const base64Command = base64.fromByteArray(finalCommand);
+
+    // 打印最终的命令数据（十六进制表示）
+    console.log(
+      `Final command: ${Array.from(finalCommand)
+        .map((byte) => byte.toString(16).padStart(2, "0"))
+        .join(" ")}`
+    );
+
+    try {
+      await device.writeCharacteristicWithResponseForService(
+        serviceUUID, // BLE服务的UUID
+        writeCharacteristicUUID, // 可写特性的UUID
+        base64Command // 最终的命令数据的Base64编码
+      );
+      console.log("创建钱包命令已发送");
+    } catch (error) {
+      console.error("发送创建钱包命令失败:", error);
+    }
+  };
+
   const allWordsSelected = selectedWords.every((word) => word !== null);
   // 点击 QR 代码图片时显示地址模态窗口
   const handleQRCodePress = (crypto) => {
@@ -703,16 +745,14 @@ function WalletScreen({ route, navigation }) {
     setTipModalVisible(false);
     setRecoveryPhraseModalVisible(false);
 
-    // 检查verifiedDevices是否包含任何ID
     if (verifiedDevices.length > 0) {
-      // 如果列表中有设备ID，显示创建挂起的模态框
+      // 向嵌入式设备发送创建钱包命令
+      sendCreateWalletCommand(verifiedDevices[0]); // 假设第一个设备是目标设备
       setCreatePendingModalVisible(true);
     } else {
-      // 如果列表中没有设备ID，显示 Bluetooth 模态框
       setBleVisible(true);
     }
   };
-
   const handlePhraseSaved = () => {
     setRecoveryPhraseModalVisible(false);
     setProcessModalVisible(true);
