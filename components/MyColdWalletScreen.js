@@ -836,7 +836,7 @@ function MyColdWalletScreen() {
                     autoFocus={true}
                   />
                 </View>
-                <View className={MyColdWalletScreenStyle.buttonContainer}>
+                <View style={MyColdWalletScreenStyle.buttonContainer}>
                   <TouchableOpacity
                     style={MyColdWalletScreenStyle.submitButton}
                     onPress={handleConfirmPassword}
