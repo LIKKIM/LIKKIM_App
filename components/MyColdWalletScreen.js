@@ -70,7 +70,6 @@ function MyColdWalletScreen() {
   const lightColors = ["#FFFFFF", "#EDEBEF"];
   const [receivedVerificationCode, setReceivedVerificationCode] = useState("");
   const [newPasswordModalVisible, setNewPasswordModalVisible] = useState(false);
-
   const [verifiedDevices, setVerifiedDevices] = useState([]);
   const [verificationSuccessModalVisible, setVerificationSuccessModalVisible] =
     useState(false);
@@ -89,10 +88,10 @@ function MyColdWalletScreen() {
     useState(false);
   const verifyCode = (userInputCode, deviceCode) => {
     if (userInputCode === deviceCode) {
-      // 验证成功
+      // 验证码验证成功
       setVerificationSuccessModalVisible(true);
     } else {
-      // 验证失败
+      // 验证码验证失败
       setVerificationFailModalVisible(true);
     }
   };
