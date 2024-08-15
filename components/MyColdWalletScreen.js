@@ -92,17 +92,6 @@ function MyColdWalletScreen() {
     useState(false);
   const [storedPassword, setStoredPassword] = useState(""); // 存储已设置的密码
 
-  const verifyCode = (userInputCode, deviceCode) => {
-    if (userInputCode === deviceCode) {
-      // 验证码验证成功
-      setVerificationSuccessModalVisible(true);
-      setIsVerificationSuccessful(true); // 更新全局状态为成功
-    } else {
-      // 验证码验证失败
-      setVerificationFailModalVisible(true);
-    }
-  };
-
   // 关闭设置密码模态框并清空输入
   const closePasswordModal = () => {
     setPasswordModalVisible(false);
@@ -517,6 +506,10 @@ function MyColdWalletScreen() {
     if (pinCodeValue === verificationCodeValue) {
       console.log("PIN 验证成功");
       setVerificationSuccessModalVisible(true);
+
+      // 更新全局状态为成功，并在终端打印消息
+      setIsVerificationSuccessful(true);
+      console.log("验证成功！验证状态已更新。");
 
       // 将已验证的设备ID添加到verifiedDevices状态中并持久化到本地存储
       const newVerifiedDevices = [...verifiedDevices, selectedDevice.id];
