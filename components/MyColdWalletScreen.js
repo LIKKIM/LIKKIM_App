@@ -1296,13 +1296,13 @@ function MyColdWalletScreen() {
                   data={devices}
                   keyExtractor={(item) => item.id}
                   renderItem={({ item }) => {
-                    const isVerified = verifiedDevices.includes(item.id); // 判断设备是否已验证
+                    const isVerified = verifiedDevices.includes(item.id);
 
                     return (
                       <TouchableOpacity
                         onPress={() => {
                           if (!isVerified) {
-                            handleDevicePress(item); // 仅当设备未验证时才执行操作
+                            handleDevicePress(item); // 传递完整的设备对象
                           }
                         }}
                       >
@@ -1312,7 +1312,7 @@ function MyColdWalletScreen() {
                           <Icon
                             name={isVerified ? "phonelink-ring" : "smartphone"}
                             size={24}
-                            color={isVerified ? "#3CDA84" : iconColor} // 如果已验证则颜色为绿色
+                            color={isVerified ? "#3CDA84" : iconColor}
                             style={MyColdWalletScreenStyle.deviceIcon}
                           />
                           <Text style={MyColdWalletScreenStyle.modalSubtitle}>
@@ -1320,8 +1320,8 @@ function MyColdWalletScreen() {
                           </Text>
                           {isVerified && (
                             <TouchableOpacity
-                              style={MyColdWalletScreenStyle.disconnectButton} // 定义一个样式用于按钮
-                              onPress={() => handleDisconnectDevice(item)}
+                              style={MyColdWalletScreenStyle.disconnectButton}
+                              onPress={() => handleDisconnectDevice(item)} // 这里也要传递完整设备对象
                             >
                               <Text
                                 style={
