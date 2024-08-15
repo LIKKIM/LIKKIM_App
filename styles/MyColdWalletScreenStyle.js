@@ -296,6 +296,19 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
     Icon: {
       marginRight: 10,
     },
+    disconnectButton: {
+      marginLeft: 10,
+      paddingVertical: 5,
+      paddingHorizontal: 10,
+      backgroundColor: "#6C6CF4",
+      borderRadius: 5,
+    },
+
+    disconnectButtonText: {
+      color: "#FFFFFF",
+      fontWeight: "bold",
+    },
+
     passwordInput: {
       backgroundColor: inputBackgroundColor,
       borderColor: borderColor,

@@ -529,6 +529,27 @@ function MyColdWalletScreen() {
     setPinCode("");
   };
 
+  // 处理断开连接的逻辑
+  const handleDisconnectDevice = async (device) => {
+    try {
+      await device.cancelConnection(); // 断开设备连接
+      console.log(`Device ${device.id} disconnected`);
+
+      // 移除已验证设备的ID
+      const updatedVerifiedDevices = verifiedDevices.filter(
+        (id) => id !== device.id
+      );
+      setVerifiedDevices(updatedVerifiedDevices);
+      await AsyncStorage.setItem(
+        "verifiedDevices",
+        JSON.stringify(updatedVerifiedDevices)
+      );
+      console.log(`Device ${device.id} removed from verified devices`);
+    } catch (error) {
+      console.error("Failed to disconnect device:", error);
+    }
+  };
+
   const connectToDevice = async (device, pinCode) => {
     // 开发版本使用生产版本要避免安全隐患
     const serviceUUID = "0000FFE0-0000-1000-8000-00805F9B34FB";
@@ -1259,7 +1280,8 @@ function MyColdWalletScreen() {
                   data={devices}
                   keyExtractor={(item) => item.id}
                   renderItem={({ item }) => {
-                    const isVerified = verifiedDevices.includes(item.id);
+                    const isVerified = verifiedDevices.includes(item.id); // 判断设备是否已验证
+
                     return (
                       <TouchableOpacity onPress={() => handleDevicePress(item)}>
                         <View
@@ -1274,6 +1296,20 @@ function MyColdWalletScreen() {
                           <Text style={MyColdWalletScreenStyle.modalSubtitle}>
                             {item.name || item.id}
                           </Text>
+                          {isVerified && (
+                            <TouchableOpacity
+                              style={MyColdWalletScreenStyle.disconnectButton} // 定义一个样式用于按钮
+                              onPress={() => handleDisconnectDevice(item)}
+                            >
+                              <Text
+                                style={
+                                  MyColdWalletScreenStyle.disconnectButtonText
+                                }
+                              >
+                                Disconnect
+                              </Text>
+                            </TouchableOpacity>
+                          )}
                         </View>
                       </TouchableOpacity>
                     );
