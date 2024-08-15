@@ -533,7 +533,7 @@ function MyColdWalletScreen() {
   const handleDisconnectDevice = async (device) => {
     try {
       await device.cancelConnection(); // 断开设备连接
-      console.log(`Device ${device.id} disconnected`);
+      console.log(`设备 ${device.id} 已断开连接`);
 
       // 移除已验证设备的ID
       const updatedVerifiedDevices = verifiedDevices.filter(
@@ -544,9 +544,13 @@ function MyColdWalletScreen() {
         "verifiedDevices",
         JSON.stringify(updatedVerifiedDevices)
       );
-      console.log(`Device ${device.id} removed from verified devices`);
+      console.log(`设备 ${device.id} 已从已验证设备中移除`);
+
+      // 更新全局状态，表示设备已不再验证成功
+      setIsVerificationSuccessful(false);
+      console.log("验证状态已更新为 false。");
     } catch (error) {
-      console.error("Failed to disconnect device:", error);
+      console.error("断开设备连接失败:", error);
     }
   };
 
