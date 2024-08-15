@@ -532,6 +532,9 @@ function MyColdWalletScreen() {
   // 处理断开连接的逻辑
   const handleDisconnectDevice = async (device) => {
     try {
+      // 停止监听验证码，避免因断开连接导致的错误
+      stopMonitoringVerificationCode();
+
       await device.cancelConnection(); // 断开设备连接
       console.log(`设备 ${device.id} 已断开连接`);
 
