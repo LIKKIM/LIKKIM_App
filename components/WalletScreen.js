@@ -13,6 +13,7 @@ import {
   FlatList,
   Platform,
   ScrollView,
+  Button,
   Clipboard,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
@@ -103,6 +104,8 @@ function WalletScreen({ route, navigation }) {
     useState(false);
   const [verificationFailModalVisible, setVerificationFailModalVisible] =
     useState(false);
+  const [createPendingModalVisible, setCreatePendingModalVisible] =
+    useState(false);
   const restoreIdentifier = Constants.installationId;
   const [pinCode, setPinCode] = useState("");
   const filteredCryptos = additionalCryptos.filter(
@@ -182,7 +185,7 @@ function WalletScreen({ route, navigation }) {
 
   const handleDevicePress = async (device) => {
     setSelectedDevice(device);
-    setBleVisible(false); // Close the Bluetooth modal
+    setModalVisible(false);
 
     try {
       // 连接设备
@@ -225,7 +228,33 @@ function WalletScreen({ route, navigation }) {
       console.error("设备连接或命令发送错误:", error);
     }
   };
+  // 处理断开连接的逻辑
+  const handleDisconnectDevice = async (device) => {
+    try {
+      // 停止监听验证码，避免因断开连接导致的错误
+      // stopMonitoringVerificationCode();
 
+      await device.cancelConnection(); // 断开设备连接
+      console.log(`设备 ${device.id} 已断开连接`);
+
+      // 移除已验证设备的ID
+      const updatedVerifiedDevices = verifiedDevices.filter(
+        (id) => id !== device.id
+      );
+      setVerifiedDevices(updatedVerifiedDevices);
+      await AsyncStorage.setItem(
+        "verifiedDevices",
+        JSON.stringify(updatedVerifiedDevices)
+      );
+      console.log(`设备 ${device.id} 已从已验证设备中移除`);
+
+      // 更新全局状态，表示设备已不再验证成功
+      setIsVerificationSuccessful(false);
+      console.log("验证状态已更新为 false。");
+    } catch (error) {
+      console.error("断开设备连接失败:", error);
+    }
+  };
   function crc16Modbus(arr) {
     let crc = 0xffff; // 初始值为0xFFFF
     for (let byte of arr) {
@@ -654,8 +683,16 @@ function WalletScreen({ route, navigation }) {
     setTipModalVisible(false);
     setRecoveryPhraseModalVisible(false);
 
-    // 显示 Bluetooth 模态框
-    setBleVisible(true);
+    // 这里假设 selectedDevice 是当前选中的设备，您需要确保它的 ID 可用
+    const selectedDeviceId = selectedDevice ? selectedDevice.id : null;
+
+    if (selectedDeviceId && verifiedDevices.includes(selectedDeviceId)) {
+      // 如果设备ID已在 verifiedDevices 列表中，显示 create pending 模态框
+      setCreatePendingModalVisible(true);
+    } else {
+      // 如果设备ID未验证，显示 Bluetooth 模态框
+      setBleVisible(true);
+    }
   };
 
   const handlePhraseSaved = () => {
@@ -1502,21 +1539,43 @@ function WalletScreen({ route, navigation }) {
                 <FlatList
                   data={devices}
                   keyExtractor={(item) => item.id}
-                  renderItem={({ item }) => (
-                    <TouchableOpacity onPress={() => handleDevicePress(item)}>
-                      <View style={WalletScreenStyle.deviceItemContainer}>
-                        <Icon
-                          name="smartphone"
-                          size={24}
-                          color={iconColor}
-                          style={WalletScreenStyle.deviceIcon}
-                        />
-                        <Text style={WalletScreenStyle.scanModalSubtitle}>
-                          {item.name || item.id}
-                        </Text>
-                      </View>
-                    </TouchableOpacity>
-                  )}
+                  renderItem={({ item }) => {
+                    const isVerified = verifiedDevices.includes(item.id); // 判断设备是否已验证
+
+                    return (
+                      <TouchableOpacity
+                        onPress={() => {
+                          if (!isVerified) {
+                            handleDevicePress(item); // 仅当设备未验证时才执行操作
+                          }
+                        }}
+                      >
+                        <View style={WalletScreenStyle.deviceItemContainer}>
+                          <Icon
+                            name={isVerified ? "phonelink-ring" : "smartphone"}
+                            size={24}
+                            color={isVerified ? "#3CDA84" : iconColor} // 如果已验证则颜色为绿色
+                            style={WalletScreenStyle.deviceIcon}
+                          />
+                          <Text style={WalletScreenStyle.scanModalSubtitle}>
+                            {item.name || item.id}
+                          </Text>
+                          {isVerified && (
+                            <TouchableOpacity
+                              style={WalletScreenStyle.disconnectButton} // 定义一个样式用于按钮
+                              onPress={() => handleDisconnectDevice(item)}
+                            >
+                              <Text
+                                style={WalletScreenStyle.disconnectButtonText}
+                              >
+                                {t("Disconnect")}
+                              </Text>
+                            </TouchableOpacity>
+                          )}
+                        </View>
+                      </TouchableOpacity>
+                    );
+                  }}
                 />
               )
             )}
@@ -1654,6 +1713,39 @@ function WalletScreen({ route, navigation }) {
             </TouchableOpacity>
           </View>
         </BlurView>
+      </Modal>
+      {/* 创建新的 createPendingModal 模态框 */}
+      <Modal
+        visible={createPendingModalVisible}
+        onRequestClose={() => setCreatePendingModalVisible(false)}
+        transparent={true}
+        animationType="slide"
+      >
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+          }}
+        >
+          <View
+            style={{
+              width: 300,
+              padding: 20,
+              backgroundColor: "white",
+              borderRadius: 10,
+            }}
+          >
+            <Text style={{ marginBottom: 20 }}>
+              Your device is already verified.
+            </Text>
+            <Button
+              title="Close"
+              onPress={() => setCreatePendingModalVisible(false)}
+            />
+          </View>
+        </View>
       </Modal>
     </LinearGradient>
   );
