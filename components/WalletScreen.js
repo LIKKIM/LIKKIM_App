@@ -43,6 +43,10 @@ function WalletScreen({ route, navigation }) {
     currencyUnit,
     addedCryptos,
     setAddedCryptos,
+    isVerificationSuccessful,
+    setIsVerificationSuccessful,
+    verifiedDevices,
+    setVerifiedDevices,
   } = useContext(CryptoContext);
   const { isDarkMode } = useContext(DarkModeContext);
   const WalletScreenStyle = WalletScreenStyles(isDarkMode);
