@@ -184,6 +184,12 @@ function WalletScreen({ route, navigation }) {
   }, []);
 
   const handleDevicePress = async (device) => {
+    // 确保传递的 device 对象是有效的
+    if (typeof device !== "object" || typeof device.connect !== "function") {
+      console.error("无效的设备对象，无法连接设备:", device);
+      return;
+    }
+
     setSelectedDevice(device);
     setModalVisible(false);
 
@@ -202,8 +208,8 @@ function WalletScreen({ route, navigation }) {
         ...connectionCommandData,
         connectionCrcLowByte,
         connectionCrcHighByte,
-        0x0d,
-        0x0a,
+        0x0d, // 结束符
+        0x0a, // 结束符
       ]);
       const base64ConnectionCommand = base64.fromByteArray(
         finalConnectionCommand
@@ -216,7 +222,7 @@ function WalletScreen({ route, navigation }) {
       );
       console.log("第一条蓝牙连接命令已发送: F0 01 02");
 
-      // 延迟5毫秒
+      // 延迟 5 毫秒
       await new Promise((resolve) => setTimeout(resolve, 5));
 
       // 发送第二条命令 F1 01 02
@@ -322,20 +328,15 @@ function WalletScreen({ route, navigation }) {
 
   const sendCreateWalletCommand = async (device) => {
     try {
-      // 确保 device 是一个设备对象，而不仅仅是设备 ID
-      if (typeof device === "string") {
-        console.error("设备是一个字符串（可能是设备ID），而不是设备对象。");
+      // 检查 device 是否为一个有效的设备对象
+      if (typeof device !== "object" || !device.isConnected) {
+        console.error("无效的设备对象：", device);
         return;
       }
 
       console.log("发送创建钱包命令之前的设备对象:", device);
 
       // 检查设备是否已连接
-      if (!device.isConnected || typeof device.isConnected !== "function") {
-        console.log("设备对象不是已连接的设备，或 isConnected 方法不可用。");
-        return;
-      }
-
       if (!device.isConnected()) {
         console.log("设备未连接，正在尝试重新连接...");
         await device.connect();
