@@ -1,4 +1,3 @@
-// components/ScreenLock.js
 import React, { useState, useContext } from "react";
 import { View, Text, TextInput, Button, Alert, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
@@ -11,7 +10,7 @@ const ScreenLock = () => {
 
   const handleUnlock = () => {
     if (inputPassword === screenLockPassword) {
-      navigation.goBack(); // 返回到上一个页面，解锁成功
+      navigation.navigate("Wallet"); // 使用 navigate 导航
     } else {
       Alert.alert("Incorrect Password", "Please try again.");
     }
@@ -38,13 +37,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
-    backgroundColor: "#f5f5f5", // 背景颜色
+    backgroundColor: "#f5f5f5",
   },
   title: {
     fontSize: 24,
     marginBottom: 20,
     fontWeight: "bold",
-    color: "#333", // 标题颜色
+    color: "#333",
   },
   input: {
     width: "100%",
@@ -55,7 +54,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     marginBottom: 20,
     fontSize: 18,
-    backgroundColor: "#fff", // 输入框背景颜色
+    backgroundColor: "#fff",
   },
 });
 

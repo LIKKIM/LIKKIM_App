@@ -11,6 +11,7 @@ import WalletScreen from "./components/WalletScreen";
 import TransactionsScreen from "./components/TransactionsScreen";
 import MyColdWalletScreen from "./components/MyColdWalletScreen";
 import OnboardingScreen from "./components/OnboardingScreen";
+import ScreenLock from "./components/ScreenLock";
 import {
   CryptoProvider,
   CryptoContext,
@@ -120,6 +121,9 @@ function AppContent({
 
   return (
     <View style={{ flex: 1, backgroundColor: bottomBackgroundColor }}>
+      {/*      {isScreenLockEnabled ? (
+        <ScreenLock /> // 条件渲染 ScreenLock 页面
+      ) : ( */}
       <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
@@ -222,6 +226,8 @@ function AppContent({
         <Tab.Screen name="Transactions" component={TransactionsScreen} />
         <Tab.Screen name="My Cold Wallet" component={MyColdWalletScreen} />
       </Tab.Navigator>
+      {/*     )} */}
+
       <StatusBar
         backgroundColor={isDarkMode ? "#101021" : "#FFFFFF"}
         style={isDarkMode ? "light" : "dark"}
