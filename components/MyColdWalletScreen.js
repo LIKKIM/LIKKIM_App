@@ -967,7 +967,7 @@ function MyColdWalletScreen() {
             animationType="slide"
             transparent={true}
             visible={enterPasswordModalVisible}
-            onRequestClose={closeEnterPasswordModal}
+            onRequestClose={closeEnterPasswordModal} // 使用关闭函数
           >
             <BlurView
               intensity={10}
