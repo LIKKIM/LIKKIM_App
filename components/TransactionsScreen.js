@@ -457,30 +457,36 @@ function TransactionsScreen() {
                   {t("Crypto:")} {selectedCrypto}
                 </Text>
               </View>
-
-              <Text style={TransactionsScreenStyle.cancelButtonText}>
-                <Text style={{ fontWeight: "bold" }}>{t("Amount")}:</Text>
-                {` ${amount} ${selectedCrypto}`}
-              </Text>
-              <Text style={TransactionsScreenStyle.cancelButtonText}>
-                <Text style={{ fontWeight: "bold" }}>
-                  {t("Recipient Address")}:
+              <View
+                style={{
+                  width: 280,
+                  height: 200,
+                  justifyContent: "space-between",
+                }}
+              >
+                <Text style={TransactionsScreenStyle.cancelButtonText}>
+                  <Text style={{ fontWeight: "bold" }}>{t("Amount")}:</Text>
+                  {` ${amount} ${selectedCrypto}`}
                 </Text>
-                {` ${inputAddress}`}
-              </Text>
-              <Text style={TransactionsScreenStyle.cancelButtonText}>
-                <Text style={{ fontWeight: "bold" }}>
-                  {t("Detected Network")}:
+                <Text style={TransactionsScreenStyle.cancelButtonText}>
+                  <Text style={{ fontWeight: "bold" }}>
+                    {t("Recipient Address")}:
+                  </Text>
+                  {` ${inputAddress}`}
                 </Text>
-                {` ${detectedNetwork}`}
-              </Text>
-              <Text style={TransactionsScreenStyle.cancelButtonText}>
-                <Text style={{ fontWeight: "bold" }}>
-                  {t("Transaction Fee")}:
+                <Text style={TransactionsScreenStyle.cancelButtonText}>
+                  <Text style={{ fontWeight: "bold" }}>
+                    {t("Detected Network")}:
+                  </Text>
+                  {` ${detectedNetwork}`}
                 </Text>
-                {` ${transactionFee} ${selectedCrypto}`}
-              </Text>
-
+                <Text style={TransactionsScreenStyle.cancelButtonText}>
+                  <Text style={{ fontWeight: "bold" }}>
+                    {t("Transaction Fee")}:
+                  </Text>
+                  {` ${transactionFee} ${selectedCrypto}`}
+                </Text>
+              </View>
               <View style={{ marginTop: 20, width: "100%" }}>
                 <TouchableOpacity
                   style={TransactionsScreenStyle.optionButton}
