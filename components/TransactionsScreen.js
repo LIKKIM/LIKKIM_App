@@ -141,23 +141,14 @@ function TransactionsScreen() {
     loadAddedCryptos();
   }, []);
 
-  const handleModalClose = () => {
-    setInputAddress("");
-    setDetectedNetwork("");
-    setInputAddressModalVisible(false);
-  };
   const handleReceivePress = () => {
-    setInputAddress("");
-    setDetectedNetwork("");
     setOperationType("receive");
-    setInputAddressModalVisible(true);
+    setModalVisible(true);
   };
 
   const handleSendPress = () => {
-    setInputAddress("");
-    setDetectedNetwork("");
     setOperationType("send");
-    setInputAddressModalVisible(true);
+    setModalVisible(true);
   };
 
   const selectCrypto = async (crypto) => {
