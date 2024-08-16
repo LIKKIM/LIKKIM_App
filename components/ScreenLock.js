@@ -105,13 +105,14 @@ const lightStyles = StyleSheet.create({
     color: "#999",
   },
   container: {
-    backgroundColor: "#f5f5f5",
+    backgroundColor: "#fff",
   },
   title: {
     color: "#333",
   },
   input: {
-    backgroundColor: "#fff",
+    color: "#000",
+    backgroundColor: "#f1f1f1",
   },
   placeholder: {
     color: "#999",
@@ -137,6 +138,7 @@ const darkStyles = StyleSheet.create({
     color: "#f5f5f5",
   },
   input: {
+    color: "#fff",
     backgroundColor: "#1A1A37",
   },
   placeholder: {
