@@ -62,7 +62,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       position: "absolute",
       top: 100,
       margin: 20,
-      height: 360,
+      height: 400,
       width: "90%",
       backgroundColor: modalBackgroundColor,
       borderRadius: 20,

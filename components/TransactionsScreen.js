@@ -59,7 +59,7 @@ function TransactionsScreen() {
     useState(false);
   const [inputAddressModalVisible, setInputAddressModalVisible] =
     useState(false);
-
+  const [detectedNetwork, setDetectedNetwork] = useState("");
   const bleManagerRef = useRef(null);
 
   const scanDevices = () => {
@@ -141,14 +141,23 @@ function TransactionsScreen() {
     loadAddedCryptos();
   }, []);
 
+  const handleModalClose = () => {
+    setInputAddress("");
+    setDetectedNetwork("");
+    setInputAddressModalVisible(false);
+  };
   const handleReceivePress = () => {
+    setInputAddress("");
+    setDetectedNetwork("");
     setOperationType("receive");
-    setModalVisible(true);
+    setInputAddressModalVisible(true);
   };
 
   const handleSendPress = () => {
+    setInputAddress("");
+    setDetectedNetwork("");
     setOperationType("send");
-    setModalVisible(true);
+    setInputAddressModalVisible(true);
   };
 
   const selectCrypto = async (crypto) => {
@@ -176,6 +185,54 @@ function TransactionsScreen() {
   const copyToClipboard = (address) => {
     Clipboard.setString(address);
     alert(t("Address copied to clipboard!"));
+  };
+
+  const detectNetwork = (address) => {
+    if (/^(1|3|bc1)/.test(address)) {
+      return "Bitcoin (BTC)";
+    } else if (/^0x/.test(address)) {
+      return "Ethereum (ETH) / Binance Smart Chain (BSC) / Chainlink (LINK) / VeChain (VET) / Arbitrum (ARB) / Polygon (MATIC)";
+    } else if (/^T/.test(address)) {
+      return "Tron (TRX)";
+    } else if (/^r/.test(address)) {
+      return "Ripple (XRP)";
+    } else if (/^(A|D)/.test(address)) {
+      return "Cardano (ADA)";
+    } else if (/^(1|3|k)/.test(address)) {
+      return "Polkadot (DOT)";
+    } else if (/^(L|M|ltc1)/.test(address)) {
+      return "Litecoin (LTC)";
+    } else if (/^G/.test(address)) {
+      return "Stellar (XLM)";
+    } else if (/^(q|p|bitcoincash:)/.test(address)) {
+      return "Bitcoin Cash (BCH)";
+    } else if (/^(D|A)/.test(address)) {
+      return "Dogecoin (DOGE)";
+    } else if (/^tz[1-3]/.test(address)) {
+      return "Tezos (XTZ)";
+    } else if (/^[a-zA-Z0-9]{12}$/.test(address)) {
+      return "EOS (EOS)";
+    } else if (/^(4|8)/.test(address)) {
+      return "Monero (XMR)";
+    } else if (/^X/.test(address)) {
+      return "Dash (DASH)";
+    } else if (/^(t1|t3|zs)/.test(address)) {
+      return "Zcash (ZEC)";
+    } else if (/^A/.test(address)) {
+      return "NEO (NEO)";
+    } else if (address.length === 90) {
+      return "IOTA (MIOTA)";
+    } else if (/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(address)) {
+      return "Solana (SOL)";
+    } else {
+      return "Unknown Network";
+    }
+  };
+
+  const handleAddressChange = (text) => {
+    setInputAddress(text);
+    const network = detectNetwork(text);
+    setDetectedNetwork(network);
   };
 
   return (
@@ -266,7 +323,7 @@ function TransactionsScreen() {
               <Text style={TransactionsScreenStyle.modalTitle}>
                 {t("Enter the recipient's address:")}
               </Text>
-              <View style={{ width: "100%" }}>
+              <View style={{ width: "100%", marginBottom: 10 }}>
                 <TextInput
                   style={[
                     TransactionsScreenStyle.input,
@@ -274,11 +331,23 @@ function TransactionsScreen() {
                   ]}
                   placeholder={t("Enter Address")}
                   placeholderTextColor={isDarkMode ? "#ffffff" : "#24234C"}
-                  onChangeText={(text) => setInputAddress(text)}
+                  onChangeText={handleAddressChange}
                   value={inputAddress}
                   autoFocus={true}
                 />
+                <Text
+                  style={{
+                    color: isDarkMode ? "#ccc" : "#666",
+                    marginTop: 5,
+                    minHeight: 20,
+                  }}
+                >
+                  {detectedNetwork
+                    ? `Detected Network: ${detectedNetwork}`
+                    : ""}
+                </Text>
               </View>
+
               <TouchableOpacity
                 style={TransactionsScreenStyle.optionButton}
                 onPress={handleNextAfterAddress}
