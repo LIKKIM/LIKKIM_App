@@ -37,10 +37,16 @@ const ScreenLock = () => {
     >
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <View style={[styles.container, themeStyles.container]}>
-          <Text style={[styles.title, themeStyles.title]}>{t("LIKKIM")}</Text>
-          <Text style={[styles.subTitle, themeStyles.subTitle]}>
-            {t("Enter Password to Unlock")}
-          </Text>
+          <View
+            style={{
+              alignItems: "center",
+            }}
+          >
+            <Text style={[styles.title, themeStyles.title]}>{t("LIKKIM")}</Text>
+            <Text style={[styles.subTitle, themeStyles.subTitle]}>
+              {t("Enter Password to Unlock")}
+            </Text>
+          </View>
           <TextInput
             style={[styles.input, themeStyles.input]}
             secureTextEntry
