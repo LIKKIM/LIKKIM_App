@@ -459,24 +459,24 @@ function TransactionsScreen() {
               </View>
 
               <Text style={TransactionsScreenStyle.cancelButtonText}>
-                <Text style={{ fontWeight: "bold" }}>{t("Amount:")}</Text>
+                <Text style={{ fontWeight: "bold" }}>{t("Amount")}:</Text>
                 {` ${amount} ${selectedCrypto}`}
               </Text>
               <Text style={TransactionsScreenStyle.cancelButtonText}>
                 <Text style={{ fontWeight: "bold" }}>
-                  {t("Recipient Address:")}
+                  {t("Recipient Address")}:
                 </Text>
                 {` ${inputAddress}`}
               </Text>
               <Text style={TransactionsScreenStyle.cancelButtonText}>
                 <Text style={{ fontWeight: "bold" }}>
-                  {t("Detected Network:")}
+                  {t("Detected Network")}:
                 </Text>
                 {` ${detectedNetwork}`}
               </Text>
               <Text style={TransactionsScreenStyle.cancelButtonText}>
                 <Text style={{ fontWeight: "bold" }}>
-                  {t("Transaction Fee:")}
+                  {t("Transaction Fee")}:
                 </Text>
                 {` ${transactionFee} ${selectedCrypto}`}
               </Text>
