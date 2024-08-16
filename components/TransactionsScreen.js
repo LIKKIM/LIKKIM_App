@@ -1,5 +1,5 @@
 // TransactionsScreen.js
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useRef, useEffect } from "react";
 import {
   View,
   Text,
@@ -8,6 +8,7 @@ import {
   TextInput,
   ScrollView,
   Clipboard,
+  Platform,
   Image,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
@@ -19,7 +20,10 @@ import TransactionsScreenStyles from "../styles/TransactionsScreenStyle";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Feather from "react-native-vector-icons/Feather";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import successImage from "../assets/success.png";
+import failImage from "../assets/fail.png";
+import Constants from "expo-constants";
+import { BleManager, BleErrorCode } from "react-native-ble-plx";
 function TransactionsScreen() {
   const { t } = useTranslation();
   const { isDarkMode } = useContext(DarkModeContext);
@@ -42,8 +46,85 @@ function TransactionsScreen() {
   const [confirmModalVisible, setConfirmModalVisible] = useState(false); // 新增交易确认modal状态
   const [transactionFee, setTransactionFee] = useState("0.001"); // 示例交易手续费
   const [transactionHistory, setTransactionHistory] = useState([]);
+  const [selectedDevice, setSelectedDevice] = useState(null);
+  const isScanningRef = useRef(false);
+  const [isScanning, setIsScanning] = useState(false);
+  const [devices, setDevices] = useState([]);
+  const [pinModalVisible, setPinModalVisible] = useState(false);
+  const [pinCode, setPinCode] = useState("");
+  const restoreIdentifier = Constants.installationId;
+  const [verificationSuccessModalVisible, setVerificationSuccessModalVisible] =
+    useState(false);
+  const [verificationFailModalVisible, setVerificationFailModalVisible] =
+    useState(false);
   const [inputAddressModalVisible, setInputAddressModalVisible] =
     useState(false);
+
+  const bleManagerRef = useRef(null);
+
+  const scanDevices = () => {
+    if (Platform.OS !== "web" && !isScanning) {
+      console.log("Scanning started");
+      setIsScanning(true);
+
+      bleManagerRef.current.startDeviceScan(
+        null,
+        { allowDuplicates: true },
+        (error, device) => {
+          if (error) {
+            console.error("BleManager scanning error:", error);
+            setIsScanning(false);
+            return;
+          }
+
+          if (device.name && device.name.includes("LIKKIM")) {
+            setDevices((prevDevices) => {
+              if (!prevDevices.find((d) => d.id === device.id)) {
+                return [...prevDevices, device]; // 这里 device 是完整的设备对象
+              }
+              return prevDevices;
+            });
+            console.log("Scanned device:", device);
+          }
+        }
+      );
+
+      setTimeout(() => {
+        console.log("Scanning stopped");
+        bleManagerRef.current.stopDeviceScan();
+        setIsScanning(false);
+      }, 2000);
+    } else {
+      console.log("Attempt to scan while already scanning");
+    }
+  };
+
+  const [bleVisible, setBleVisible] = useState(false); // New state for Bluetooth modal
+
+  useEffect(() => {
+    if (!bleVisible && selectedDevice) {
+      setPinModalVisible(true);
+    }
+  }, [bleVisible, selectedDevice]);
+  // Update Bluetooth modal visibility management
+  useEffect(() => {
+    if (Platform.OS !== "web") {
+      bleManagerRef.current = new BleManager({
+        restoreStateIdentifier: restoreIdentifier,
+      });
+
+      const subscription = bleManagerRef.current.onStateChange((state) => {
+        if (state === "PoweredOn") {
+          scanDevices();
+        }
+      }, true);
+
+      return () => {
+        subscription.remove();
+        bleManagerRef.current.destroy();
+      };
+    }
+  }, []);
 
   useEffect(() => {
     // 从 AsyncStorage 加载 addedCryptos 数据
@@ -503,6 +584,219 @@ function TransactionsScreen() {
                   </Text>
                 </TouchableOpacity>
               </View>
+            </View>
+          </BlurView>
+        </Modal>
+
+        {/* Bluetooth modal */}
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={bleVisible} // Use bleVisible to control this modal
+          onRequestClose={() => {
+            setBleVisible(!bleVisible); // Toggle visibility
+          }}
+        >
+          <BlurView intensity={10} style={TransactionsScreenStyle.centeredView}>
+            <View style={TransactionsScreenStyle.bluetoothModalView}>
+              <Text style={TransactionsScreenStyle.bluetoothModalTitle}>
+                {t("LOOKING FOR DEVICES")}
+              </Text>
+              {isScanning ? (
+                <View style={{ alignItems: "center" }}>
+                  <Image
+                    source={require("../assets/Bluetooth.gif")}
+                    style={TransactionsScreenStyle.bluetoothImg}
+                  />
+                  <Text style={TransactionsScreenStyle.scanModalSubtitle}>
+                    {t("Scanning...")}
+                  </Text>
+                </View>
+              ) : (
+                devices.length > 0 && (
+                  <FlatList
+                    data={devices}
+                    keyExtractor={(item) => item.id}
+                    renderItem={({ item }) => {
+                      const isVerified = verifiedDevices.includes(item.id);
+
+                      return (
+                        <TouchableOpacity
+                          onPress={() => {
+                            if (!isVerified) {
+                              handleDevicePress(item); // 确保这里传递的是完整的设备对象
+                            }
+                          }}
+                        >
+                          <View
+                            style={TransactionsScreenStyle.deviceItemContainer}
+                          >
+                            <Icon
+                              name={
+                                isVerified ? "phonelink-ring" : "smartphone"
+                              }
+                              size={24}
+                              color={isVerified ? "#3CDA84" : iconColor}
+                              style={TransactionsScreenStyle.deviceIcon}
+                            />
+                            <Text
+                              style={TransactionsScreenStyle.scanModalSubtitle}
+                            >
+                              {item.name || item.id}
+                            </Text>
+                            {isVerified && (
+                              <TouchableOpacity
+                                style={TransactionsScreenStyle.disconnectButton}
+                                onPress={() => handleDisconnectDevice(item)}
+                              >
+                                <Text
+                                  style={
+                                    TransactionsScreenStyle.disconnectButtonText
+                                  }
+                                >
+                                  {t("Disconnect")}
+                                </Text>
+                              </TouchableOpacity>
+                            )}
+                          </View>
+                        </TouchableOpacity>
+                      );
+                    }}
+                  />
+                )
+              )}
+              {!isScanning && devices.length === 0 && (
+                <Text style={TransactionsScreenStyle.modalSubtitle}>
+                  {t(
+                    "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled."
+                  )}
+                </Text>
+              )}
+              <TouchableOpacity
+                style={TransactionsScreenStyle.cancelButtonLookingFor}
+                onPress={() => {
+                  setBleVisible(false); // Close Bluetooth modal
+                  setSelectedDevice(null); // Reset selected device state
+                }}
+              >
+                <Text style={TransactionsScreenStyle.cancelButtonText}>
+                  {t("Cancel")}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </BlurView>
+        </Modal>
+
+        {/* PIN码输入modal窗口 */}
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={pinModalVisible}
+          onRequestClose={() => setPinModalVisible(false)}
+        >
+          <BlurView intensity={10} style={TransactionsScreenStyle.centeredView}>
+            <View style={TransactionsScreenStyle.pinModalView}>
+              <View style={{ alignItems: "center" }}>
+                <Text style={TransactionsScreenStyle.pinModalTitle}>
+                  {t("Enter PIN to Connect")}
+                </Text>
+                <Text style={TransactionsScreenStyle.modalSubtitle}>
+                  {t(
+                    "Use the PIN code to establish a secure connection with your LIKKIM hardware."
+                  )}
+                </Text>
+              </View>
+              <TextInput
+                style={TransactionsScreenStyle.passwordInput}
+                placeholder={t("Enter PIN")}
+                placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
+                keyboardType="numeric"
+                secureTextEntry
+                onChangeText={setPinCode}
+                value={pinCode}
+              />
+              <View style={{ width: "100%" }}>
+                <TouchableOpacity
+                  style={TransactionsScreenStyle.submitButton}
+                  onPress={() => handlePinSubmit(selectedDevice, pinCode)}
+                >
+                  <Text style={TransactionsScreenStyle.submitButtonText}>
+                    {t("Submit")}
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={TransactionsScreenStyle.cancelButton}
+                  onPress={() => setPinModalVisible(false)}
+                >
+                  <Text style={TransactionsScreenStyle.cancelButtonText}>
+                    {t("Cancel")}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </BlurView>
+        </Modal>
+
+        {/* 成功验证模态框 */}
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={verificationSuccessModalVisible}
+          onRequestClose={() => setVerificationSuccessModalVisible(false)}
+        >
+          <BlurView intensity={10} style={TransactionsScreenStyle.centeredView}>
+            <View style={TransactionsScreenStyle.pinModalView}>
+              <Image
+                source={successImage}
+                style={{ width: 60, height: 60, marginTop: 20 }}
+              />
+              <Text style={TransactionsScreenStyle.modalTitle}>
+                {t("Verification successful!")}
+              </Text>
+              <Text style={TransactionsScreenStyle.modalSubtitle}>
+                {t("You can now safely use the device.")}
+              </Text>
+              <TouchableOpacity
+                style={TransactionsScreenStyle.submitButton}
+                onPress={() => setVerificationSuccessModalVisible(false)}
+              >
+                <Text style={TransactionsScreenStyle.submitButtonText}>
+                  {t("Close")}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </BlurView>
+        </Modal>
+
+        {/* 失败验证模态框 */}
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={verificationFailModalVisible}
+          onRequestClose={() => setVerificationFailModalVisible(false)}
+        >
+          <BlurView intensity={10} style={TransactionsScreenStyle.centeredView}>
+            <View style={TransactionsScreenStyle.pinModalView}>
+              <Image
+                source={failImage}
+                style={{ width: 60, height: 60, marginTop: 20 }}
+              />
+              <Text style={TransactionsScreenStyle.modalTitle}>
+                {t("Verification failed!")}
+              </Text>
+              <Text style={TransactionsScreenStyle.modalSubtitle}>
+                {t(
+                  "The verification code you entered is incorrect. Please try again."
+                )}
+              </Text>
+              <TouchableOpacity
+                style={TransactionsScreenStyle.submitButton}
+                onPress={() => setVerificationFailModalVisible(false)}
+              >
+                <Text style={TransactionsScreenStyle.submitButtonText}>
+                  {t("Close")}
+                </Text>
+              </TouchableOpacity>
             </View>
           </BlurView>
         </Modal>

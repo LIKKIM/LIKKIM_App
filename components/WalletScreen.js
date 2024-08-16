@@ -1599,7 +1599,6 @@ function WalletScreen({ route, navigation }) {
         </BlurView>
       </Modal>
       {/* Bluetooth modal */}
-
       <Modal
         animationType="slide"
         transparent={true}
