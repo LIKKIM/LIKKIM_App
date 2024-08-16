@@ -121,112 +121,112 @@ function AppContent({
 
   return (
     <View style={{ flex: 1, backgroundColor: bottomBackgroundColor }}>
-      {/*      {isScreenLockEnabled ? (
+      {isScreenLockEnabled ? (
         <ScreenLock /> // 条件渲染 ScreenLock 页面
-      ) : ( */}
-      <Tab.Navigator
-        screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) => {
-            let iconName;
-            if (route.name === "Wallet") {
-              iconName = "account-balance-wallet";
-            } else if (route.name === "Transactions") {
-              iconName = "swap-horiz";
-            } else if (route.name === "My Cold Wallet") {
-              iconName = "bluetooth";
-            }
-            return (
-              <Icon
-                name={iconName}
-                size={size}
-                color={
-                  focused ? tabBarActiveTintColor : tabBarInactiveTintColor
-                }
-              />
-            );
-          },
-          tabBarLabel: ({ focused }) => {
-            let label;
-            if (route.name === "Wallet") {
-              label = t("Wallet");
-            } else if (route.name === "Transactions") {
-              label = t("Transactions");
-            } else if (route.name === "My Cold Wallet") {
-              label = t("My Cold Wallet");
-            }
-            return (
-              <Text
-                style={{
-                  color: focused
-                    ? tabBarActiveTintColor
-                    : tabBarInactiveTintColor,
-                }}
-              >
-                {label}
-              </Text>
-            );
-          },
-          tabBarActiveTintColor: tabBarActiveTintColor,
-          tabBarInactiveTintColor: tabBarInactiveTintColor,
-          tabBarStyle: {
-            backgroundColor: tabBarBackgroundColor,
-            borderTopWidth: 0,
-            height: walletModalVisible ? 0 : 100, // 根据 walletModalVisible 控制 tabBar 的高度
-            paddingBottom: walletModalVisible ? 0 : 30,
-            borderTopLeftRadius: 22,
-            borderTopRightRadius: 22,
-            display: walletModalVisible ? "none" : "flex", // 根据 walletModalVisible 显示或隐藏 tabBar
-          },
-          tabBarLabelStyle: { fontSize: 12 },
-          headerStyle: {
-            backgroundColor: theme.headerStyle.backgroundColor,
-            borderBottomColor: theme.headerStyle.borderBottomColor,
-            borderBottomWidth: 0,
-          },
-          headerTintColor: theme.headerTintColor,
-          headerTitleStyle: { fontWeight: "bold", color: headerTitleColor },
-          headerTitle: t(route.name),
-          headerShadowVisible: false,
-        })}
-      >
-        <Tab.Screen
-          name="Wallet"
-          component={WalletScreen}
-          options={({ route, navigation }) => ({
-            headerRight: () => {
-              const isModalVisible = route.params?.isModalVisible;
-              const showAddModal = route.params?.showAddModal;
+      ) : (
+        <Tab.Navigator
+          screenOptions={({ route }) => ({
+            tabBarIcon: ({ focused, color, size }) => {
+              let iconName;
+              if (route.name === "Wallet") {
+                iconName = "account-balance-wallet";
+              } else if (route.name === "Transactions") {
+                iconName = "swap-horiz";
+              } else if (route.name === "My Cold Wallet") {
+                iconName = "bluetooth";
+              }
               return (
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
-                  {isModalVisible ? (
-                    <TouchableOpacity
-                      style={{ paddingRight: 20 }}
-                      onPress={() => {
-                        setHeaderDropdownVisible(true);
-                        setSelectedCardName(route.params?.selectedCardName);
-                      }}
-                    >
-                      <Icon name="settings" size={24} color={iconColor} />
-                    </TouchableOpacity>
-                  ) : (
-                    <TouchableOpacity
-                      onPress={() =>
-                        navigation.navigate("Wallet", { showAddModal: true })
-                      }
-                      style={{ paddingRight: 20 }}
-                    >
-                      <Icon name="add" size={24} color={iconColor} />
-                    </TouchableOpacity>
-                  )}
-                </View>
+                <Icon
+                  name={iconName}
+                  size={size}
+                  color={
+                    focused ? tabBarActiveTintColor : tabBarInactiveTintColor
+                  }
+                />
               );
             },
+            tabBarLabel: ({ focused }) => {
+              let label;
+              if (route.name === "Wallet") {
+                label = t("Wallet");
+              } else if (route.name === "Transactions") {
+                label = t("Transactions");
+              } else if (route.name === "My Cold Wallet") {
+                label = t("My Cold Wallet");
+              }
+              return (
+                <Text
+                  style={{
+                    color: focused
+                      ? tabBarActiveTintColor
+                      : tabBarInactiveTintColor,
+                  }}
+                >
+                  {label}
+                </Text>
+              );
+            },
+            tabBarActiveTintColor: tabBarActiveTintColor,
+            tabBarInactiveTintColor: tabBarInactiveTintColor,
+            tabBarStyle: {
+              backgroundColor: tabBarBackgroundColor,
+              borderTopWidth: 0,
+              height: walletModalVisible ? 0 : 100, // 根据 walletModalVisible 控制 tabBar 的高度
+              paddingBottom: walletModalVisible ? 0 : 30,
+              borderTopLeftRadius: 22,
+              borderTopRightRadius: 22,
+              display: walletModalVisible ? "none" : "flex", // 根据 walletModalVisible 显示或隐藏 tabBar
+            },
+            tabBarLabelStyle: { fontSize: 12 },
+            headerStyle: {
+              backgroundColor: theme.headerStyle.backgroundColor,
+              borderBottomColor: theme.headerStyle.borderBottomColor,
+              borderBottomWidth: 0,
+            },
+            headerTintColor: theme.headerTintColor,
+            headerTitleStyle: { fontWeight: "bold", color: headerTitleColor },
+            headerTitle: t(route.name),
+            headerShadowVisible: false,
           })}
-        />
-        <Tab.Screen name="Transactions" component={TransactionsScreen} />
-        <Tab.Screen name="My Cold Wallet" component={MyColdWalletScreen} />
-      </Tab.Navigator>
-      {/*     )} */}
+        >
+          <Tab.Screen
+            name="Wallet"
+            component={WalletScreen}
+            options={({ route, navigation }) => ({
+              headerRight: () => {
+                const isModalVisible = route.params?.isModalVisible;
+                const showAddModal = route.params?.showAddModal;
+                return (
+                  <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    {isModalVisible ? (
+                      <TouchableOpacity
+                        style={{ paddingRight: 20 }}
+                        onPress={() => {
+                          setHeaderDropdownVisible(true);
+                          setSelectedCardName(route.params?.selectedCardName);
+                        }}
+                      >
+                        <Icon name="settings" size={24} color={iconColor} />
+                      </TouchableOpacity>
+                    ) : (
+                      <TouchableOpacity
+                        onPress={() =>
+                          navigation.navigate("Wallet", { showAddModal: true })
+                        }
+                        style={{ paddingRight: 20 }}
+                      >
+                        <Icon name="add" size={24} color={iconColor} />
+                      </TouchableOpacity>
+                    )}
+                  </View>
+                );
+              },
+            })}
+          />
+          <Tab.Screen name="Transactions" component={TransactionsScreen} />
+          <Tab.Screen name="My Cold Wallet" component={MyColdWalletScreen} />
+        </Tab.Navigator>
+      )}
 
       <StatusBar
         backgroundColor={isDarkMode ? "#101021" : "#FFFFFF"}

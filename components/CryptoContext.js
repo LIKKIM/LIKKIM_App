@@ -267,6 +267,7 @@ export const CryptoProvider = ({ children }) => {
         verifiedDevices,
         setVerifiedDevices,
         isScreenLockEnabled,
+        setIsScreenLockEnabled,
         toggleScreenLock,
         screenLockPassword,
         changeScreenLockPassword,

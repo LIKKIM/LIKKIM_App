@@ -1,44 +1,63 @@
 import React, { useState, useContext } from "react";
-import { View, Text, TextInput, Button, Alert, StyleSheet } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Alert,
+  StyleSheet,
+  KeyboardAvoidingView,
+  ScrollView,
+  Platform,
+} from "react-native";
 import { CryptoContext, DarkModeContext } from "./CryptoContext";
+import { useTranslation } from "react-i18next"; // 导入国际化库
 
 const ScreenLock = () => {
-  const { screenLockPassword } = useContext(CryptoContext);
-  const { isDarkMode } = useContext(DarkModeContext); // 获取当前主题模式
+  const { screenLockPassword, setIsScreenLockEnabled } =
+    useContext(CryptoContext);
+  const { isDarkMode } = useContext(DarkModeContext);
   const [inputPassword, setInputPassword] = useState("");
-  const navigation = useNavigation();
+  const { t } = useTranslation(); // 使用国际化 hook
 
   const handleUnlock = () => {
     if (inputPassword === screenLockPassword) {
-      setIsScreenLocked(false); // 解锁后设置 isScreenLocked 为 false
+      setIsScreenLockEnabled(false); // 解锁后设置 isScreenLocked 为 false
     } else {
-      Alert.alert("Incorrect Password", "Please try again.");
+      Alert.alert(t("Incorrect Password"), t("Please try again.")); // 国际化提示
     }
   };
 
-  // 根据主题模式选择样式
   const themeStyles = isDarkMode ? darkStyles : lightStyles;
 
   return (
-    <View style={[styles.container, themeStyles.container]}>
-      <Text style={[styles.title, themeStyles.title]}>
-        Enter Password to Unlock
-      </Text>
-      <TextInput
-        style={[styles.input, themeStyles.input]}
-        secureTextEntry
-        value={inputPassword}
-        onChangeText={setInputPassword}
-        placeholder="Enter Password"
-        placeholderTextColor={themeStyles.placeholder.color}
-      />
-      <Button
-        title="Unlock"
-        onPress={handleUnlock}
-        color={themeStyles.button.backgroundColor}
-      />
-    </View>
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <View style={[styles.container, themeStyles.container]}>
+          <Text style={[styles.title, themeStyles.title]}>{t("LIKKIM")}</Text>
+          <Text style={[styles.subTitle, themeStyles.subTitle]}>
+            {t("Enter Password to Unlock")}
+          </Text>
+          <TextInput
+            style={[styles.input, themeStyles.input]}
+            secureTextEntry
+            value={inputPassword}
+            onChangeText={setInputPassword}
+            placeholder={t("Enter Password")}
+            placeholderTextColor={themeStyles.placeholder.color}
+          />
+          <TouchableOpacity
+            style={[styles.button, themeStyles.button]} // 圆角按钮样式
+            onPress={handleUnlock}
+          >
+            <Text style={themeStyles.buttonText}>{t("Unlock")}</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -54,18 +73,31 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     fontWeight: "bold",
   },
+  subTitle: {
+    fontSize: 16,
+    marginBottom: 20,
+  },
   input: {
     width: "100%",
     height: 50,
-    borderWidth: 1,
     borderRadius: 8,
     paddingHorizontal: 15,
     marginBottom: 20,
     fontSize: 18,
   },
+  button: {
+    width: "100%",
+    height: 50,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 25, // 设置圆角
+  },
 });
 
 const lightStyles = StyleSheet.create({
+  subTitle: {
+    color: "#999",
+  },
   container: {
     backgroundColor: "#f5f5f5",
   },
@@ -73,33 +105,44 @@ const lightStyles = StyleSheet.create({
     color: "#333",
   },
   input: {
-    borderColor: "#ccc",
     backgroundColor: "#fff",
   },
   placeholder: {
     color: "#999",
   },
   button: {
-    backgroundColor: "#007bff", // 这里可以根据需要设置按钮颜色
+    backgroundColor: "#8E80F0",
+  },
+  buttonText: {
+    color: "#fff",
+    fontSize: 18,
+    fontWeight: "bold",
   },
 });
 
 const darkStyles = StyleSheet.create({
+  subTitle: {
+    color: "#ccc",
+  },
   container: {
-    backgroundColor: "#1c1c1c",
+    backgroundColor: "#24234C",
   },
   title: {
     color: "#f5f5f5",
   },
   input: {
-    borderColor: "#555",
-    backgroundColor: "#333",
+    backgroundColor: "#1A1A37",
   },
   placeholder: {
-    color: "#ccc",
+    color: "#999",
   },
   button: {
-    backgroundColor: "#1c74ff", // 这里可以根据需要设置按钮颜色
+    backgroundColor: "#6C6CF4",
+  },
+  buttonText: {
+    color: "#fff",
+    fontSize: 18,
+    fontWeight: "bold",
   },
 });
 
