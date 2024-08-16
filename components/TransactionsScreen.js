@@ -454,7 +454,7 @@ function TransactionsScreen() {
                   />
                 )}
                 <Text style={TransactionsScreenStyle.modalTitle}>
-                  {selectedCrypto}
+                  {t("Crypto:")} {selectedCrypto}
                 </Text>
               </View>
               <Text style={TransactionsScreenStyle.cancelButtonText}>
