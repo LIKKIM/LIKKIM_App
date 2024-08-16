@@ -464,6 +464,10 @@ function TransactionsScreen() {
                 {t("Recipient Address:")} {inputAddress}
               </Text>
               <Text style={TransactionsScreenStyle.cancelButtonText}>
+                {t("Detected Network:")} {detectedNetwork}{" "}
+                {/* 显示查询出来的网络 */}
+              </Text>
+              <Text style={TransactionsScreenStyle.cancelButtonText}>
                 {t("Transaction Fee:")} {transactionFee} {selectedCrypto}
               </Text>
               <View style={{ marginTop: 20, width: "100%" }}>
