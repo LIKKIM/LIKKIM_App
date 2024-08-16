@@ -457,19 +457,30 @@ function TransactionsScreen() {
                   {t("Crypto:")} {selectedCrypto}
                 </Text>
               </View>
+
               <Text style={TransactionsScreenStyle.cancelButtonText}>
-                {t("Amount:")} {amount} {selectedCrypto}
+                <Text style={{ fontWeight: "bold" }}>{t("Amount:")}</Text>
+                {` ${amount} ${selectedCrypto}`}
               </Text>
               <Text style={TransactionsScreenStyle.cancelButtonText}>
-                {t("Recipient Address:")} {inputAddress}
+                <Text style={{ fontWeight: "bold" }}>
+                  {t("Recipient Address:")}
+                </Text>
+                {` ${inputAddress}`}
               </Text>
               <Text style={TransactionsScreenStyle.cancelButtonText}>
-                {t("Detected Network:")} {detectedNetwork}{" "}
-                {/* 显示查询出来的网络 */}
+                <Text style={{ fontWeight: "bold" }}>
+                  {t("Detected Network:")}
+                </Text>
+                {` ${detectedNetwork}`}
               </Text>
               <Text style={TransactionsScreenStyle.cancelButtonText}>
-                {t("Transaction Fee:")} {transactionFee} {selectedCrypto}
+                <Text style={{ fontWeight: "bold" }}>
+                  {t("Transaction Fee:")}
+                </Text>
+                {` ${transactionFee} ${selectedCrypto}`}
               </Text>
+
               <View style={{ marginTop: 20, width: "100%" }}>
                 <TouchableOpacity
                   style={TransactionsScreenStyle.optionButton}
