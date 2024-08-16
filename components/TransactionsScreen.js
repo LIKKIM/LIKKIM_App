@@ -61,6 +61,7 @@ function TransactionsScreen() {
     useState(false);
   const [detectedNetwork, setDetectedNetwork] = useState("");
   const bleManagerRef = useRef(null);
+  const [paymentAddress, setPaymentAddress] = useState("Your Payment Address");
 
   const scanDevices = () => {
     if (Platform.OS !== "web" && !isScanning) {
@@ -460,13 +461,19 @@ function TransactionsScreen() {
               <View
                 style={{
                   width: 280,
-                  height: 200,
+                  height: 220, // 将高度增加以容纳新字段
                   justifyContent: "space-between",
                 }}
               >
                 <Text style={TransactionsScreenStyle.cancelButtonText}>
                   <Text style={{ fontWeight: "bold" }}>{t("Amount")}:</Text>
                   {` ${amount} ${selectedCrypto}`}
+                </Text>
+                <Text style={TransactionsScreenStyle.cancelButtonText}>
+                  <Text style={{ fontWeight: "bold" }}>
+                    {t("Payment Address")}:
+                  </Text>
+                  {` ${paymentAddress}`}
                 </Text>
                 <Text style={TransactionsScreenStyle.cancelButtonText}>
                   <Text style={{ fontWeight: "bold" }}>
@@ -487,6 +494,7 @@ function TransactionsScreen() {
                   {` ${transactionFee} ${selectedCrypto}`}
                 </Text>
               </View>
+
               <View style={{ marginTop: 20, width: "100%" }}>
                 <TouchableOpacity
                   style={TransactionsScreenStyle.optionButton}
