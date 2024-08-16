@@ -333,9 +333,7 @@ function TransactionsScreen() {
                     minHeight: 20,
                   }}
                 >
-                  {detectedNetwork
-                    ? `Detected Network: ${detectedNetwork}`
-                    : ""}
+                  {inputAddress ? `Detected Network: ${detectedNetwork}` : ""}
                 </Text>
               </View>
 
