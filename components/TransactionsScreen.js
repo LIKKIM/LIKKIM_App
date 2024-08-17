@@ -35,6 +35,7 @@ function TransactionsScreen() {
   const [addressModalVisible, setAddressModalVisible] = useState(false);
   const [operationType, setOperationType] = useState("");
   const [selectedCrypto, setSelectedCrypto] = useState("");
+  const [selectedCryptoChain, setSelectedCryptoChain] = useState("");
   const [selectedAddress, setSelectedAddress] = useState("");
   const [selectedCryptoIcon, setSelectedCryptoIcon] = useState(null);
   const iconColor = isDarkMode ? "#ffffff" : "#24234C";
@@ -155,6 +156,7 @@ function TransactionsScreen() {
 
   const selectCrypto = async (crypto) => {
     setSelectedCrypto(crypto.shortName);
+    setSelectedCryptoChain(crypto.chain);
     setSelectedAddress(crypto.address);
     setSelectedCryptoIcon(crypto.icon);
     setModalVisible(false);
@@ -310,7 +312,7 @@ function TransactionsScreen() {
                   />
                 )}
                 <Text style={TransactionsScreenStyle.modalTitle}>
-                  {selectedCrypto}
+                  {selectedCrypto} ({selectedCryptoChain})
                 </Text>
               </View>
               <Text style={TransactionsScreenStyle.modalTitle}>
@@ -571,7 +573,7 @@ function TransactionsScreen() {
                           />
                         )}
                         <Text style={TransactionsScreenStyle.optionButtonText}>
-                          {crypto.shortName}
+                          {crypto.shortName} ({crypto.chain})
                         </Text>
                       </View>
                     </TouchableOpacity>
