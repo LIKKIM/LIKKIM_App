@@ -1660,7 +1660,7 @@ function WalletScreen({ route, navigation }) {
                       >
                         <View style={WalletScreenStyle.deviceItemContainer}>
                           <Icon
-                            name={isVerified ? "phonelink-ring" : "smartphone"}
+                            name={isVerified ? "mobile-friendly" : "smartphone"}
                             size={24}
                             color={isVerified ? "#3CDA84" : iconColor}
                             style={WalletScreenStyle.deviceIcon}

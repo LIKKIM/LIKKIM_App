@@ -133,7 +133,7 @@ function AppContent({
               } else if (route.name === "Transactions") {
                 iconName = "swap-horiz";
               } else if (route.name === "My Cold Wallet") {
-                iconName = "bluetooth";
+                iconName = "smartphone";
               }
               return (
                 <Icon

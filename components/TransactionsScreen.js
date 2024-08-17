@@ -721,7 +721,7 @@ function TransactionsScreen() {
                           >
                             <Icon
                               name={
-                                isVerified ? "phonelink-ring" : "smartphone"
+                                isVerified ? "mobile-friendly" : "smartphone"
                               }
                               size={24}
                               color={isVerified ? "#3CDA84" : iconColor}

@@ -1366,7 +1366,7 @@ function MyColdWalletScreen() {
                           style={MyColdWalletScreenStyle.deviceItemContainer}
                         >
                           <Icon
-                            name={isVerified ? "phonelink-ring" : "smartphone"}
+                            name={isVerified ? "mobile-friendly" : "smartphone"}
                             size={24}
                             color={isVerified ? "#3CDA84" : iconColor}
                             style={MyColdWalletScreenStyle.deviceIcon}
