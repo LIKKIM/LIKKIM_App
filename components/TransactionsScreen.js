@@ -481,7 +481,8 @@ function TransactionsScreen() {
       if (device) {
         showAddressCommand(device); // 确保这里传递的是完整的设备对象
       } else {
-        console.error("未找到与该ID匹配的设备对象");
+        setAddressModalVisible(false); // 关闭当前的 "Address for" 模态框
+        setBleVisible(true);
       }
     } else {
       setAddressModalVisible(false); // 关闭当前的 "Address for" 模态框
@@ -503,7 +504,10 @@ function TransactionsScreen() {
 
       const subscription = bleManagerRef.current.onStateChange((state) => {
         if (state === "PoweredOn") {
-          scanDevices();
+          // 添加短暂延迟以确保蓝牙模块完全准备好
+          setTimeout(() => {
+            scanDevices();
+          }, 500); // 1秒延迟
         }
       }, true);
 
@@ -513,7 +517,6 @@ function TransactionsScreen() {
       };
     }
   }, []);
-
   useEffect(() => {
     // 从 AsyncStorage 加载 addedCryptos 数据
     const loadAddedCryptos = async () => {
