@@ -60,6 +60,8 @@ function TransactionsScreen() {
   const darkColors = ["#24234C", "#101021"];
   const lightColors = ["#FFFFFF", "#EDEBEF"];
   const placeholderColor = isDarkMode ? "#ffffff" : "#24234C";
+  const buttonBackgroundColor = isDarkMode ? "#6C6CF4" : "#8E80F0";
+  const disabledButtonBackgroundColor = isDarkMode ? "#6c6c6c" : "#ccc"; // 根据 isDarkMode 设置不同的灰色
   const [inputAddress, setInputAddress] = useState("");
   const [amountModalVisible, setAmountModalVisible] = useState(false); // 新增状态
   const [amount, setAmount] = useState(""); // 保存输入的金额
@@ -74,7 +76,7 @@ function TransactionsScreen() {
   const [pinModalVisible, setPinModalVisible] = useState(false);
   const [pinCode, setPinCode] = useState("");
   const restoreIdentifier = Constants.installationId;
-
+  const [isAddressValid, setIsAddressValid] = useState(false);
   const [verificationSuccessModalVisible, setVerificationSuccessModalVisible] =
     useState(false);
   const [verificationFailModalVisible, setVerificationFailModalVisible] =
@@ -617,6 +619,7 @@ function TransactionsScreen() {
     setInputAddress(text);
     const network = detectNetwork(text);
     setDetectedNetwork(network);
+    setIsAddressValid(network !== "Unknown Network"); // Update address validity
   };
 
   return (
@@ -749,13 +752,22 @@ function TransactionsScreen() {
               </View>
 
               <TouchableOpacity
-                style={TransactionsScreenStyle.optionButton}
+                style={[
+                  TransactionsScreenStyle.optionButton,
+                  {
+                    backgroundColor: isAddressValid
+                      ? buttonBackgroundColor
+                      : disabledButtonBackgroundColor, // 动态设置按钮颜色
+                  },
+                ]}
                 onPress={handleNextAfterAddress}
+                disabled={!isAddressValid}
               >
                 <Text style={TransactionsScreenStyle.submitButtonText}>
                   {t("Next")}
                 </Text>
               </TouchableOpacity>
+
               <TouchableOpacity
                 style={TransactionsScreenStyle.cancelButton}
                 onPress={() => setInputAddressModalVisible(false)}

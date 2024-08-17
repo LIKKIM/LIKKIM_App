@@ -3,14 +3,15 @@ import { StyleSheet } from "react-native";
 
 const TransactionsScreenStyles = (isDarkMode) => {
   const titleColor = isDarkMode ? "#fff" : "#000";
-  const textColor = isDarkMode ? "#fff" : "#fff";
+  const textColor = isDarkMode ? "#fff" : "#000";
   const textBtnColor = isDarkMode ? "#fff" : "#fff";
   const backgroundColor = isDarkMode ? "#121212" : "#f5f5f5";
   const modalBackgroundColor = isDarkMode ? "#484692" : "#fff";
-  const buttonBackgroundColor = isDarkMode ? "#6C6CF4" : "#8E80F0";
+  const btnBorderColor = isDarkMode ? "#6C6CF4" : "#8E80F0";
+  const btnColor = isDarkMode ? "#6C6CF4" : "#8E80F0";
+  const buttonBackgroundColor = isDarkMode ? "#6C6CF4" : "#E5E1E9";
   const inputBackgroundColor = isDarkMode ? "#1A1A37" : "#e0e0e0";
   const historyItemBorderColor = isDarkMode ? "#ccc" : "#999";
-  const borderColor = isDarkMode ? "#555" : "#ccc";
   const historyContainerBackgroundColor = isDarkMode
     ? "#24234C80"
     : "#FFFFFF80";
@@ -257,10 +258,10 @@ const TransactionsScreenStyles = (isDarkMode) => {
       backgroundColor: "rgba(0, 0, 0, 0.5)",
     },
     optionButtonText: {
-      color: textColor,
+      color: textBtnColor,
     },
     optionButton: {
-      backgroundColor: buttonBackgroundColor,
+      backgroundColor: btnColor,
       padding: 10,
       width: "100%",
       justifyContent: "center",
@@ -368,7 +369,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
     },
     roundButton: {
       borderWidth: 2,
-      borderColor: buttonBackgroundColor,
+      borderColor: btnBorderColor,
       paddingVertical: 10,
       paddingHorizontal: 20,
       width: 170,
