@@ -31,9 +31,21 @@ const serviceUUID = "0000FFE0-0000-1000-8000-00805F9B34FB";
 const writeCharacteristicUUID = "0000FFE2-0000-1000-8000-00805F9B34FB";
 
 function TransactionsScreen() {
+  const [receivedVerificationCode, setReceivedVerificationCode] = useState("");
   const { t } = useTranslation();
   const { isDarkMode } = useContext(DarkModeContext);
-  const { addedCryptos, setAddedCryptos } = useContext(CryptoContext);
+  const {
+    additionalCryptos,
+    cryptoCount,
+    setCryptoCount,
+    currencyUnit,
+    addedCryptos,
+    setAddedCryptos,
+    isVerificationSuccessful,
+    setIsVerificationSuccessful,
+    verifiedDevices,
+    setVerifiedDevices,
+  } = useContext(CryptoContext);
   const TransactionsScreenStyle = TransactionsScreenStyles(isDarkMode);
   const addressIcon = isDarkMode ? "#ffffff" : "#676776";
   const [modalVisible, setModalVisible] = useState(false);
@@ -54,7 +66,6 @@ function TransactionsScreen() {
   const [transactionFee, setTransactionFee] = useState("0.001"); // 示例交易手续费
   const [transactionHistory, setTransactionHistory] = useState([]);
   const [selectedDevice, setSelectedDevice] = useState(null);
-  const [verifiedDevices, setVerifiedDevices] = useState([]);
   const [bleVisible, setBleVisible] = useState(false); // New state for Bluetooth modal
   const isScanningRef = useRef(false);
   const [isScanning, setIsScanning] = useState(false);
@@ -212,6 +223,33 @@ function TransactionsScreen() {
       setPinModalVisible(true);
     } catch (error) {
       console.error("设备连接或命令发送错误:", error);
+    }
+  };
+  // 处理断开连接的逻辑
+  const handleDisconnectDevice = async (device) => {
+    try {
+      // 停止监听验证码，避免因断开连接导致的错误
+      // stopMonitoringVerificationCode();
+
+      await device.cancelConnection(); // 断开设备连接
+      console.log(`设备 ${device.id} 已断开连接`);
+
+      // 移除已验证设备的ID
+      const updatedVerifiedDevices = verifiedDevices.filter(
+        (id) => id !== device.id
+      );
+      setVerifiedDevices(updatedVerifiedDevices);
+      await AsyncStorage.setItem(
+        "verifiedDevices",
+        JSON.stringify(updatedVerifiedDevices)
+      );
+      console.log(`设备 ${device.id} 已从已验证设备中移除`);
+
+      // 更新全局状态，表示设备已不再验证成功
+      setIsVerificationSuccessful(false);
+      console.log("验证状态已更新为 false。");
+    } catch (error) {
+      console.error("断开设备连接失败:", error);
     }
   };
   function crc16Modbus(arr) {
