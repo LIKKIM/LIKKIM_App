@@ -172,7 +172,7 @@ function WalletScreen({ route, navigation }) {
           // 添加短暂延迟以确保蓝牙模块完全准备好
           setTimeout(() => {
             scanDevices();
-          }, 500); // 1秒延迟
+          }, 1000); // 1秒延迟
         }
       }, true);
 
