@@ -17,6 +17,16 @@ const TransactionsScreenStyles = (isDarkMode) => {
   const secondTextColor = isDarkMode ? "#ddd" : "#676776";
   const secondBtnTextColor = isDarkMode ? "#ddd" : "#e0e0e0";
   return StyleSheet.create({
+    pendingModalView: {
+      margin: 20,
+      width: "90%",
+      height: 300,
+      backgroundColor: modalBackgroundColor,
+      borderRadius: 20,
+      padding: 35,
+      alignItems: "center",
+      justifyContent: "space-between",
+    },
     disconnectButton: {
       marginLeft: 10,
       paddingVertical: 5,

@@ -73,6 +73,8 @@ function TransactionsScreen() {
   const [pinModalVisible, setPinModalVisible] = useState(false);
   const [pinCode, setPinCode] = useState("");
   const restoreIdentifier = Constants.installationId;
+  const [createPendingModalVisible, setCreatePendingModalVisible] =
+    useState(false);
   const [verificationSuccessModalVisible, setVerificationSuccessModalVisible] =
     useState(false);
   const [verificationFailModalVisible, setVerificationFailModalVisible] =
@@ -375,11 +377,93 @@ function TransactionsScreen() {
     // 清空 PIN 输入框
     setPinCode("");
   };
+
+  const showAddressCommand = async (device) => {
+    try {
+      // 检查 device 是否为一个有效的设备对象
+      if (typeof device !== "object" || !device.isConnected) {
+        console.error("无效的设备对象：", device);
+        return;
+      }
+
+      console.log("发送创建钱包命令之前的设备对象:", device);
+
+      // 无论设备是否连接，均重新连接并发现服务和特性
+      await device.connect();
+      await device.discoverAllServicesAndCharacteristics();
+      console.log("设备已连接并发现所有服务。");
+
+      if (
+        typeof device.writeCharacteristicWithResponseForService !== "function"
+      ) {
+        console.error(
+          "设备没有 writeCharacteristicWithResponseForService 方法。"
+        );
+        return;
+      }
+
+      // 构建命令数据，未包含CRC校验码
+      const commandData = new Uint8Array([0xf4, 0x01, 0x0c, 0x04]);
+      //这是导入钱包的启动命令   const commandData = new Uint8Array([0xf4, 0x02, 0x0c, 0x04]);
+      // 使用CRC-16-Modbus算法计算CRC校验码
+      const crc = crc16Modbus(commandData);
+
+      // 将CRC校验码转换为高位在前，低位在后的格式
+      const crcHighByte = (crc >> 8) & 0xff;
+      const crcLowByte = crc & 0xff;
+
+      // 将原始命令数据、CRC校验码以及结束符组合成最终的命令
+      const finalCommand = new Uint8Array([
+        ...commandData,
+        crcLowByte,
+        crcHighByte,
+        0x0d, // 结束符
+        0x0a, // 结束符
+      ]);
+
+      // 将最终的命令转换为Base64编码
+      const base64Command = base64.fromByteArray(finalCommand);
+
+      console.log(
+        `最终命令: ${Array.from(finalCommand)
+          .map((byte) => byte.toString(16).padStart(2, "0"))
+          .join(" ")}`
+      );
+
+      // 发送创建钱包命令
+      await device.writeCharacteristicWithResponseForService(
+        serviceUUID, // BLE服务的UUID
+        writeCharacteristicUUID, // 可写特性的UUID
+        base64Command // 最终的命令数据的Base64编码
+      );
+      console.log("创建钱包命令已发送");
+    } catch (error) {
+      console.error("发送创建钱包命令失败:", error);
+    }
+  };
+
+  const handleVerifyAddress = () => {
+    setAddressModalVisible(false);
+
+    if (verifiedDevices.length > 0) {
+      // 发送创建钱包命令时，确保传递的是设备对象
+      const device = devices.find((d) => d.id === verifiedDevices[0]);
+      if (device) {
+        showAddressCommand(device); // 确保这里传递的是完整的设备对象
+        setCreatePendingModalVisible(true);
+      } else {
+        console.error("未找到与该ID匹配的设备对象");
+      }
+    } else {
+      setBleVisible(true);
+    }
+  };
   useEffect(() => {
     if (!bleVisible && selectedDevice) {
-      setPinModalVisible(true);
+      setBleVisible(true);
     }
   }, [bleVisible, selectedDevice]);
+
   // Update Bluetooth modal visibility management
   useEffect(() => {
     if (Platform.OS !== "web") {
@@ -931,15 +1015,7 @@ function TransactionsScreen() {
                 }}
               >
                 <TouchableOpacity
-                  onPress={() => {
-                    // 先关闭地址模态窗口
-                    setAddressModalVisible(false);
-
-                    // 确保地址模态窗口关闭后，再打开蓝牙模态窗口
-                    setTimeout(() => {
-                      setBleVisible(true);
-                    }, 5); // 延迟 300ms，确保动画完成
-                  }}
+                  onPress={handleVerifyAddress}
                   style={TransactionsScreenStyle.optionButton}
                 >
                   <Text style={TransactionsScreenStyle.submitButtonText}>
@@ -1171,6 +1247,37 @@ function TransactionsScreen() {
               </TouchableOpacity>
             </View>
           </BlurView>
+        </Modal>
+        {/* 创建新的 createPendingModal 模态框 */}
+        <Modal
+          visible={createPendingModalVisible}
+          onRequestClose={() => setCreatePendingModalVisible(false)}
+          transparent={true}
+          animationType="slide"
+        >
+          <View style={TransactionsScreenStyle.centeredView}>
+            <View style={TransactionsScreenStyle.pendingModalView}>
+              <Text style={TransactionsScreenStyle.modalTitle}>
+                {t("Creating on LIKKIM Hardware...")}
+              </Text>
+              <Text
+                style={[
+                  TransactionsScreenStyle.modalSubtitle,
+                  { marginBottom: 20 },
+                ]}
+              >
+                {t("Your device is already verified.")}
+              </Text>
+              <TouchableOpacity
+                style={TransactionsScreenStyle.submitButton}
+                onPress={() => setCreatePendingModalVisible(false)}
+              >
+                <Text style={TransactionsScreenStyle.submitButtonText}>
+                  {t("Close")}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
         </Modal>
       </View>
     </LinearGradient>
