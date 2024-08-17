@@ -10,12 +10,53 @@ const TransactionsScreenStyles = (isDarkMode) => {
   const buttonBackgroundColor = isDarkMode ? "#6C6CF4" : "#8E80F0";
   const inputBackgroundColor = isDarkMode ? "#1A1A37" : "#e0e0e0";
   const historyItemBorderColor = isDarkMode ? "#ccc" : "#999";
+  const borderColor = isDarkMode ? "#555" : "#ccc";
   const historyContainerBackgroundColor = isDarkMode
     ? "#24234C80"
     : "#FFFFFF80";
   const secondTextColor = isDarkMode ? "#ddd" : "#676776";
   const secondBtnTextColor = isDarkMode ? "#ddd" : "#e0e0e0";
   return StyleSheet.create({
+    submitButtonText: {
+      color: textColor,
+      fontSize: 16,
+    },
+    pinModalTitle: {
+      color: textColor,
+      fontSize: 20,
+      fontWeight: "bold",
+      marginBottom: 15,
+    },
+
+    pinModalView: {
+      position: "absolute",
+      top: 100,
+      margin: 20,
+      height: 400,
+      width: "90%",
+      backgroundColor: modalBackgroundColor,
+      borderRadius: 20,
+      padding: 35,
+      justifyContent: "space-between",
+      alignItems: "center",
+    },
+    passwordInput: {
+      backgroundColor: inputBackgroundColor,
+      borderColor: borderColor,
+      borderWidth: 1,
+      paddingHorizontal: 15,
+      paddingVertical: 10,
+      borderRadius: 10,
+      height: 50,
+      width: "100%",
+      color: textColor,
+    },
+    deviceItemContainer: {
+      flexDirection: "row", // 横向排列
+      alignItems: "center", // 垂直居中
+      justifyContent: "center",
+      marginTop: 20,
+    },
     modalSubtitle: {
       color: secondTextColor,
       fontSize: 14,

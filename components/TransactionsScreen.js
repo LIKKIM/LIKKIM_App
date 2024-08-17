@@ -70,12 +70,15 @@ function TransactionsScreen() {
   // 扫描蓝牙设备的函数
   const scanDevices = () => {
     if (Platform.OS !== "web" && !isScanning) {
+      console.log("Scanning started");
       setIsScanning(true);
+
       bleManagerRef.current.startDeviceScan(
         null,
         { allowDuplicates: true },
         (error, device) => {
           if (error) {
+            console.error("BleManager scanning error:", error);
             setIsScanning(false);
             return;
           }
@@ -83,21 +86,24 @@ function TransactionsScreen() {
           if (device.name && device.name.includes("LIKKIM")) {
             setDevices((prevDevices) => {
               if (!prevDevices.find((d) => d.id === device.id)) {
-                return [...prevDevices, device];
+                return [...prevDevices, device]; // 这里 device 是完整的设备对象
               }
               return prevDevices;
             });
+            console.log("Scanned device:", device);
           }
         }
       );
 
       setTimeout(() => {
+        console.log("Scanning stopped");
         bleManagerRef.current.stopDeviceScan();
         setIsScanning(false);
       }, 2000);
+    } else {
+      console.log("Attempt to scan while already scanning");
     }
   };
-
   // 当蓝牙模态框打开时，开始扫描设备
   useEffect(() => {
     if (bleVisible) {
