@@ -147,6 +147,7 @@ export const usdtCrypto = {
   icon: require("../assets/USDTIcon.png"),
   cardImage: require("../assets/Card43.png"),
   address: "1KAt6STtisWMMVo5XGdos9P7DBNNsFfjx7",
+  chain: "Bitcoin",
 };
 
 export const CryptoProvider = ({ children }) => {

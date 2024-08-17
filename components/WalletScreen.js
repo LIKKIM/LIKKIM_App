@@ -1066,7 +1066,7 @@ function WalletScreen({ route, navigation }) {
                       isBlackText && { color: "#121518" },
                     ]}
                   >
-                    {card.name}
+                    {card.name} ({card.chain})
                   </Text>
                   <Text
                     style={[
@@ -1540,7 +1540,6 @@ function WalletScreen({ route, navigation }) {
                       flex: 1, // 使 View 占据父容器的剩余宽度
                       flexWrap: "wrap", // 允许子元素在需要时换行
                       justifyContent: "center",
-
                       alignItems: "center",
                     }}
                   >
