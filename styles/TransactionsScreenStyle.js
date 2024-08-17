@@ -17,6 +17,23 @@ const TransactionsScreenStyles = (isDarkMode) => {
   const secondTextColor = isDarkMode ? "#ddd" : "#676776";
   const secondBtnTextColor = isDarkMode ? "#ddd" : "#e0e0e0";
   return StyleSheet.create({
+    blurBackground: {
+      position: "absolute",
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      borderRadius: 10,
+    },
+
+    cardContainer: {
+      backgroundColor: modalBackgroundColor,
+      borderRadius: 20,
+      padding: 35,
+      alignItems: "center",
+      width: "90%",
+    },
+
     pendingModalView: {
       margin: 20,
       width: "90%",
@@ -182,8 +199,6 @@ const TransactionsScreenStyles = (isDarkMode) => {
       alignItems: "center",
     },
     inputModelView: {
-      position: "absolute",
-      top: 100,
       margin: 20,
       height: 400,
       width: "90%",
@@ -263,7 +278,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       backgroundColor: inputBackgroundColor,
       padding: 10,
       marginTop: 20,
-      marginBottom: 20,
+
       justifyContent: "center",
       borderRadius: 10,
       height: 60,
@@ -280,8 +295,6 @@ const TransactionsScreenStyles = (isDarkMode) => {
       alignItems: "center",
     },
     amountModalView: {
-      position: "absolute",
-      top: 100,
       margin: 20,
       height: 360,
       width: "90%",

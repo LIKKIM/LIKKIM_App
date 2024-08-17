@@ -9,6 +9,7 @@ import {
   ScrollView,
   FlatList,
   Clipboard,
+  KeyboardAvoidingView,
   Platform,
   Image,
 } from "react-native";
@@ -684,8 +685,18 @@ function TransactionsScreen() {
           visible={inputAddressModalVisible}
           onRequestClose={() => setInputAddressModalVisible(false)}
         >
-          <BlurView intensity={10} style={TransactionsScreenStyle.centeredView}>
-            <View style={TransactionsScreenStyle.inputModelView}>
+          <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            style={TransactionsScreenStyle.centeredView}
+          >
+            {/* BlurView as the background */}
+            <BlurView
+              intensity={10}
+              style={TransactionsScreenStyle.blurBackground}
+            />
+
+            {/* Card container on top */}
+            <View style={TransactionsScreenStyle.cardContainer}>
               <View
                 style={{
                   flexDirection: "row",
@@ -706,7 +717,7 @@ function TransactionsScreen() {
               <Text style={TransactionsScreenStyle.modalTitle}>
                 {t("Enter the recipient's address:")}
               </Text>
-              <View style={{ width: "100%", marginBottom: 10 }}>
+              <View style={{ width: "100%" }}>
                 <TextInput
                   style={[
                     TransactionsScreenStyle.input,
@@ -720,12 +731,20 @@ function TransactionsScreen() {
                 />
                 <Text
                   style={{
-                    color: isDarkMode ? "#ccc" : "#666",
-                    marginTop: 5,
-                    minHeight: 20,
+                    color:
+                      detectedNetwork === "Unknown Network"
+                        ? "#FF5252"
+                        : "#22AA94",
+                    minHeight: 36,
+                    lineHeight: 36, // 设置与 minHeight 相同的 lineHeight 以实现垂直居中
+                    textAlignVertical: "center", // 适用于 Android 的文本垂直居中
                   }}
                 >
-                  {inputAddress ? `Detected Network: ${detectedNetwork}` : ""}
+                  {inputAddress
+                    ? detectedNetwork === "Unknown Network"
+                      ? t("Invalid address")
+                      : `${t("Detected Network")}: ${detectedNetwork}`
+                    : ""}
                 </Text>
               </View>
 
@@ -746,7 +765,7 @@ function TransactionsScreen() {
                 </Text>
               </TouchableOpacity>
             </View>
-          </BlurView>
+          </KeyboardAvoidingView>
         </Modal>
 
         {/* 输入金额的 Modal */}
@@ -756,7 +775,14 @@ function TransactionsScreen() {
           visible={amountModalVisible}
           onRequestClose={() => setAmountModalVisible(false)}
         >
-          <BlurView intensity={10} style={TransactionsScreenStyle.centeredView}>
+          <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            style={TransactionsScreenStyle.centeredView}
+          >
+            <BlurView
+              intensity={10}
+              style={TransactionsScreenStyle.blurBackground}
+            />
             <View style={TransactionsScreenStyle.amountModalView}>
               <View
                 style={{
@@ -772,7 +798,7 @@ function TransactionsScreen() {
                   />
                 )}
                 <Text style={TransactionsScreenStyle.modalTitle}>
-                  {selectedCrypto}
+                  {selectedCrypto} ({selectedCryptoChain})
                 </Text>
               </View>
               <Text style={TransactionsScreenStyle.modalTitle}>
@@ -794,7 +820,7 @@ function TransactionsScreen() {
               </View>
               <View
                 style={{
-                  flexDirection: "col",
+                  flexDirection: "column", // 使用 column 代替 col
                   justifyContent: "space-between",
                   width: "100%",
                 }}
@@ -820,7 +846,7 @@ function TransactionsScreen() {
                 </TouchableOpacity>
               </View>
             </View>
-          </BlurView>
+          </KeyboardAvoidingView>
         </Modal>
 
         {/* 交易确认的 Modal */}
