@@ -73,8 +73,7 @@ function TransactionsScreen() {
   const [pinModalVisible, setPinModalVisible] = useState(false);
   const [pinCode, setPinCode] = useState("");
   const restoreIdentifier = Constants.installationId;
-  const [createPendingModalVisible, setCreatePendingModalVisible] =
-    useState(false);
+
   const [verificationSuccessModalVisible, setVerificationSuccessModalVisible] =
     useState(false);
   const [verificationFailModalVisible, setVerificationFailModalVisible] =
@@ -404,7 +403,6 @@ function TransactionsScreen() {
 
       // 构建命令数据，未包含CRC校验码
       const commandData = new Uint8Array([0xf4, 0x01, 0x0c, 0x04]);
-      //这是导入钱包的启动命令   const commandData = new Uint8Array([0xf4, 0x02, 0x0c, 0x04]);
       // 使用CRC-16-Modbus算法计算CRC校验码
       const crc = crc16Modbus(commandData);
 
@@ -437,6 +435,12 @@ function TransactionsScreen() {
         base64Command // 最终的命令数据的Base64编码
       );
       console.log("显示地址命令已发送");
+
+      // 更新状态，表明命令已发送
+      //  setIsAddressCommandSent(true);
+
+      // 提示用户在 LIKKIM 设备上核对地址
+      alert("Please verify the address on your LIKKIM device.");
     } catch (error) {
       console.error("发送显示地址命令失败:", error);
     }
