@@ -49,6 +49,7 @@ function TransactionsScreen() {
   const [transactionFee, setTransactionFee] = useState("0.001"); // 示例交易手续费
   const [transactionHistory, setTransactionHistory] = useState([]);
   const [selectedDevice, setSelectedDevice] = useState(null);
+  const [verifiedDevices, setVerifiedDevices] = useState([]);
   const [bleVisible, setBleVisible] = useState(false); // New state for Bluetooth modal
   const isScanningRef = useRef(false);
   const [isScanning, setIsScanning] = useState(false);
@@ -110,7 +111,11 @@ function TransactionsScreen() {
       bleManagerRef.current.destroy();
     };
   }, []);
-
+  const handleDevicePress = async (device) => {
+    setSelectedDevice(device);
+    setBleVisible(false);
+    // 在这里添加其他的设备连接逻辑
+  };
   useEffect(() => {
     if (!bleVisible && selectedDevice) {
       setPinModalVisible(true);
@@ -666,7 +671,18 @@ function TransactionsScreen() {
                   marginTop: 20,
                 }}
               >
-                <TouchableOpacity style={TransactionsScreenStyle.optionButton}>
+                <TouchableOpacity
+                  onPress={() => {
+                    // 先关闭地址模态窗口
+                    setAddressModalVisible(false);
+
+                    // 确保地址模态窗口关闭后，再打开蓝牙模态窗口
+                    setTimeout(() => {
+                      setBleVisible(true);
+                    }, 5); // 延迟 300ms，确保动画完成
+                  }}
+                  style={TransactionsScreenStyle.optionButton}
+                >
                   <Text style={TransactionsScreenStyle.submitButtonText}>
                     {t("Verify Address")}
                   </Text>

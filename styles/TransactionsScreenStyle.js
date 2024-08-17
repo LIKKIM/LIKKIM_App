@@ -16,6 +16,30 @@ const TransactionsScreenStyles = (isDarkMode) => {
   const secondTextColor = isDarkMode ? "#ddd" : "#676776";
   const secondBtnTextColor = isDarkMode ? "#ddd" : "#e0e0e0";
   return StyleSheet.create({
+    modalSubtitle: {
+      color: secondTextColor,
+      fontSize: 14,
+      marginBottom: 20,
+    },
+    cancelButtonLookingFor: {
+      borderColor: buttonBackgroundColor,
+      borderWidth: 3,
+      padding: 10,
+      width: "100%",
+      justifyContent: "center",
+      borderRadius: 30,
+      height: 60,
+      alignItems: "center",
+      marginTop: 20,
+    },
+    cancelButtonText: {
+      color: secondTextColor,
+      fontSize: 16,
+    },
+    scanModalSubtitle: {
+      color: secondTextColor,
+      fontSize: 14,
+    },
     bluetoothModalView: {
       margin: 20,
       height: 500,
