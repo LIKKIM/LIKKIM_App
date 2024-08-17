@@ -60,11 +60,11 @@ function TransactionsScreen() {
   const darkColors = ["#24234C", "#101021"];
   const lightColors = ["#FFFFFF", "#EDEBEF"];
   const placeholderColor = isDarkMode ? "#ffffff" : "#24234C";
+  const [amount, setAmount] = useState("");
   const buttonBackgroundColor = isDarkMode ? "#6C6CF4" : "#8E80F0";
   const disabledButtonBackgroundColor = isDarkMode ? "#6c6c6c" : "#ccc"; // 根据 isDarkMode 设置不同的灰色
   const [inputAddress, setInputAddress] = useState("");
   const [amountModalVisible, setAmountModalVisible] = useState(false); // 新增状态
-  const [amount, setAmount] = useState(""); // 保存输入的金额
   const [confirmModalVisible, setConfirmModalVisible] = useState(false); // 新增交易确认modal状态
   const [transactionFee, setTransactionFee] = useState("0.001"); // 示例交易手续费
   const [transactionHistory, setTransactionHistory] = useState([]);
@@ -724,7 +724,7 @@ function TransactionsScreen() {
                 <TextInput
                   style={[
                     TransactionsScreenStyle.input,
-                    { color: isDarkMode ? "#ffffff" : "#000000" },
+                    { color: isDarkMode ? "#ffffff" : "#000" },
                   ]}
                   placeholder={t("Enter Address")}
                   placeholderTextColor={isDarkMode ? "#ffffff" : "#24234C"}
@@ -820,14 +820,21 @@ function TransactionsScreen() {
                 <TextInput
                   style={[
                     TransactionsScreenStyle.amountInput,
-                    { color: isDarkMode ? "#ffffff" : "#000000" },
+                    {
+                      color: isDarkMode ? "#ffffff" : "#000000", // 字体颜色
+                      backgroundColor: "transparent", // 去掉背景颜色
+                      fontSize: 30, // 设置大字号
+                      textAlign: "center", // 输入的文本居中
+                      fontWeight: "bold", // 设置粗体字
+                    },
                   ]}
                   placeholder={t("Enter Amount")}
-                  placeholderTextColor={isDarkMode ? "#ffffff" : "#24234C"}
+                  placeholderTextColor={isDarkMode ? "#808080" : "#808080"} // 占位符颜色为灰色
                   keyboardType="numeric"
-                  onChangeText={(text) => setAmount(text)}
+                  onChangeText={(text) => setAmount(text)} // 保持输入框不为空，若为空则设为 "0"
                   value={amount}
                   autoFocus={true}
+                  caretHidden={true} // 隐藏光标
                 />
               </View>
               <View
@@ -884,7 +891,7 @@ function TransactionsScreen() {
                   />
                 )}
                 <Text style={TransactionsScreenStyle.modalTitle}>
-                  {t("Crypto:")} {selectedCrypto}
+                  {selectedCrypto}
                 </Text>
               </View>
               <View

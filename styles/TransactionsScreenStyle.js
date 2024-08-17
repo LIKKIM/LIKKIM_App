@@ -272,7 +272,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
     },
 
     submitButtonText: {
-      color: textColor,
+      color: textBtnColor,
       fontSize: 16,
     },
     input: {
