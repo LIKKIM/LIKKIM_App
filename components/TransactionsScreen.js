@@ -386,7 +386,7 @@ function TransactionsScreen() {
         return;
       }
 
-      console.log("发送创建钱包命令之前的设备对象:", device);
+      console.log("发送显示地址命令之前的设备对象:", device);
 
       // 无论设备是否连接，均重新连接并发现服务和特性
       await device.connect();
@@ -430,27 +430,24 @@ function TransactionsScreen() {
           .join(" ")}`
       );
 
-      // 发送创建钱包命令
+      // 发送显示地址命令
       await device.writeCharacteristicWithResponseForService(
         serviceUUID, // BLE服务的UUID
         writeCharacteristicUUID, // 可写特性的UUID
         base64Command // 最终的命令数据的Base64编码
       );
-      console.log("创建钱包命令已发送");
+      console.log("显示地址命令已发送");
     } catch (error) {
-      console.error("发送创建钱包命令失败:", error);
+      console.error("发送显示地址命令失败:", error);
     }
   };
 
   const handleVerifyAddress = () => {
-    setAddressModalVisible(false);
-
     if (verifiedDevices.length > 0) {
-      // 发送创建钱包命令时，确保传递的是设备对象
+      // 发送显示地址命令时，确保传递的是设备对象
       const device = devices.find((d) => d.id === verifiedDevices[0]);
       if (device) {
         showAddressCommand(device); // 确保这里传递的是完整的设备对象
-        setCreatePendingModalVisible(true);
       } else {
         console.error("未找到与该ID匹配的设备对象");
       }
@@ -1247,37 +1244,6 @@ function TransactionsScreen() {
               </TouchableOpacity>
             </View>
           </BlurView>
-        </Modal>
-        {/* 创建新的 createPendingModal 模态框 */}
-        <Modal
-          visible={createPendingModalVisible}
-          onRequestClose={() => setCreatePendingModalVisible(false)}
-          transparent={true}
-          animationType="slide"
-        >
-          <View style={TransactionsScreenStyle.centeredView}>
-            <View style={TransactionsScreenStyle.pendingModalView}>
-              <Text style={TransactionsScreenStyle.modalTitle}>
-                {t("Creating on LIKKIM Hardware...")}
-              </Text>
-              <Text
-                style={[
-                  TransactionsScreenStyle.modalSubtitle,
-                  { marginBottom: 20 },
-                ]}
-              >
-                {t("Your device is already verified.")}
-              </Text>
-              <TouchableOpacity
-                style={TransactionsScreenStyle.submitButton}
-                onPress={() => setCreatePendingModalVisible(false)}
-              >
-                <Text style={TransactionsScreenStyle.submitButtonText}>
-                  {t("Close")}
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </View>
         </Modal>
       </View>
     </LinearGradient>
