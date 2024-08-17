@@ -16,7 +16,13 @@ import { LinearGradient } from "expo-linear-gradient";
 import { BlurView } from "expo-blur";
 import QRCode from "react-native-qrcode-svg";
 import { useTranslation } from "react-i18next";
-import { CryptoContext, DarkModeContext } from "./CryptoContext";
+import {
+  additionalCryptos,
+  CryptoContext,
+  DarkModeContext,
+  verifiedDevices,
+  setVerifiedDevices,
+} from "./CryptoContext";
 import TransactionsScreenStyles from "../styles/TransactionsScreenStyle";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Feather from "react-native-vector-icons/Feather";
@@ -64,7 +70,11 @@ function TransactionsScreen() {
   const [detectedNetwork, setDetectedNetwork] = useState("");
   const bleManagerRef = useRef(null);
   const [paymentAddress, setPaymentAddress] = useState("Your Payment Address");
-
+  const filteredCryptos = additionalCryptos.filter(
+    (crypto) =>
+      crypto.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      crypto.shortName.toLowerCase().includes(searchQuery.toLowerCase())
+  );
   const scanDevices = () => {
     if (Platform.OS !== "web" && !isScanning) {
       console.log("Scanning started");
@@ -617,7 +627,7 @@ function TransactionsScreen() {
                   />
                 )}
                 <Text style={TransactionsScreenStyle.modalReceiveTitle}>
-                  {selectedCrypto}:
+                  {selectedCrypto} ({selectedCryptoChain}):
                 </Text>
               </View>
               <Text style={TransactionsScreenStyle.subtitleText}>
@@ -659,7 +669,18 @@ function TransactionsScreen() {
                   marginTop: 20,
                 }}
               >
-                <TouchableOpacity style={TransactionsScreenStyle.optionButton}>
+                <TouchableOpacity
+                  style={TransactionsScreenStyle.optionButton}
+                  onPress={() => {
+                    // 关闭当前的模态窗口
+                    setAddressModalVisible(false);
+
+                    // 使用 setTimeout 确保当前模态窗口关闭后再打开 Bluetooth 模态窗口
+                    setTimeout(() => {
+                      setBleVisible(true); // 打开 Bluetooth modal
+                    }, 5); // 你可以根据需要调整延迟时间
+                  }}
+                >
                   <Text style={TransactionsScreenStyle.submitButtonText}>
                     {t("Verify Address")}
                   </Text>
