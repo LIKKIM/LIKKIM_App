@@ -253,6 +253,94 @@ function TransactionsScreen() {
       console.error("断开设备连接失败:", error);
     }
   };
+  const showAddressCommand = async (device) => {
+    try {
+      // 检查 device 是否为一个有效的设备对象
+      if (typeof device !== "object" || !device.isConnected) {
+        console.error("无效的设备对象：", device);
+        return;
+      }
+
+      console.log("发送显示地址命令之前的设备对象:", device);
+
+      // 无论设备是否连接，均重新连接并发现服务和特性
+      await device.connect();
+      await device.discoverAllServicesAndCharacteristics();
+      console.log("设备已连接并发现所有服务。");
+
+      if (
+        typeof device.writeCharacteristicWithResponseForService !== "function"
+      ) {
+        console.error(
+          "设备没有 writeCharacteristicWithResponseForService 方法。"
+        );
+        return;
+      }
+
+      // TRX 和路径的字符串
+      const coinType = "TRX";
+      const derivationPath = "m/44'/195'/0'/0/0";
+
+      // 转换字符串为16进制格式
+      const coinTypeHex = Buffer.from(coinType, "utf-8").toString("hex");
+      const derivationPathHex = Buffer.from(derivationPath, "utf-8").toString(
+        "hex"
+      );
+
+      console.log(`Coin Type Hex: ${coinTypeHex}`);
+      console.log(`Derivation Path Hex: ${derivationPathHex}`);
+
+      // 构建命令数据，包含16进制的TRX和路径
+      const commandData = new Uint8Array([
+        0xf9, // Command identifier
+        0x01, // Command version
+        0x0c, // Command length (adjust based on actual data length)
+        0x04, // Other command-specific byte
+        ...Buffer.from(coinTypeHex, "hex"), // TRX in hex
+        ...Buffer.from(derivationPathHex, "hex"), // Path in hex
+      ]);
+
+      // 使用CRC-16-Modbus算法计算CRC校验码
+      const crc = crc16Modbus(commandData);
+
+      // 将CRC校验码转换为高位在前，低位在后的格式
+      const crcHighByte = (crc >> 8) & 0xff;
+      const crcLowByte = crc & 0xff;
+
+      // 将原始命令数据、CRC校验码以及结束符组合成最终的命令
+      const finalCommand = new Uint8Array([
+        ...commandData,
+        crcLowByte,
+        crcHighByte,
+        0x0d, // 结束符
+        0x0a, // 结束符
+      ]);
+
+      // 将最终的命令转换为Base64编码
+      const base64Command = base64.fromByteArray(finalCommand);
+
+      console.log(
+        `最终命令: ${Array.from(finalCommand)
+          .map((byte) => byte.toString(16).padStart(2, "0"))
+          .join(" ")}`
+      );
+
+      // 发送显示地址命令
+      await device.writeCharacteristicWithResponseForService(
+        serviceUUID, // BLE服务的UUID
+        writeCharacteristicUUID, // 可写特性的UUID
+        base64Command // 最终的命令数据的Base64编码
+      );
+      console.log("显示地址命令已发送");
+
+      // 提示用户在 LIKKIM 设备上核对地址
+      alert("Please verify the address on your LIKKIM device.");
+    } catch (error) {
+      console.error("发送显示地址命令失败:", error);
+    }
+  };
+
+  // 计算CRC-16-Modbus校验码的函数
   function crc16Modbus(arr) {
     let crc = 0xffff; // 初始值为0xFFFF
     for (let byte of arr) {
@@ -375,75 +463,6 @@ function TransactionsScreen() {
 
     // 清空 PIN 输入框
     setPinCode("");
-  };
-
-  const showAddressCommand = async (device) => {
-    try {
-      // 检查 device 是否为一个有效的设备对象
-      if (typeof device !== "object" || !device.isConnected) {
-        console.error("无效的设备对象：", device);
-        return;
-      }
-
-      console.log("发送显示地址命令之前的设备对象:", device);
-
-      // 无论设备是否连接，均重新连接并发现服务和特性
-      await device.connect();
-      await device.discoverAllServicesAndCharacteristics();
-      console.log("设备已连接并发现所有服务。");
-
-      if (
-        typeof device.writeCharacteristicWithResponseForService !== "function"
-      ) {
-        console.error(
-          "设备没有 writeCharacteristicWithResponseForService 方法。"
-        );
-        return;
-      }
-
-      // 构建命令数据，未包含CRC校验码
-      const commandData = new Uint8Array([0xf4, 0x01, 0x0c, 0x04]);
-      // 使用CRC-16-Modbus算法计算CRC校验码
-      const crc = crc16Modbus(commandData);
-
-      // 将CRC校验码转换为高位在前，低位在后的格式
-      const crcHighByte = (crc >> 8) & 0xff;
-      const crcLowByte = crc & 0xff;
-
-      // 将原始命令数据、CRC校验码以及结束符组合成最终的命令
-      const finalCommand = new Uint8Array([
-        ...commandData,
-        crcLowByte,
-        crcHighByte,
-        0x0d, // 结束符
-        0x0a, // 结束符
-      ]);
-
-      // 将最终的命令转换为Base64编码
-      const base64Command = base64.fromByteArray(finalCommand);
-
-      console.log(
-        `最终命令: ${Array.from(finalCommand)
-          .map((byte) => byte.toString(16).padStart(2, "0"))
-          .join(" ")}`
-      );
-
-      // 发送显示地址命令
-      await device.writeCharacteristicWithResponseForService(
-        serviceUUID, // BLE服务的UUID
-        writeCharacteristicUUID, // 可写特性的UUID
-        base64Command // 最终的命令数据的Base64编码
-      );
-      console.log("显示地址命令已发送");
-
-      // 更新状态，表明命令已发送
-      //  setIsAddressCommandSent(true);
-
-      // 提示用户在 LIKKIM 设备上核对地址
-      alert("Please verify the address on your LIKKIM device.");
-    } catch (error) {
-      console.error("发送显示地址命令失败:", error);
-    }
   };
 
   const handleVerifyAddress = () => {
