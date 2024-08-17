@@ -1534,9 +1534,29 @@ function WalletScreen({ route, navigation }) {
                       </Text>
                     </View>
                   </ImageBackground>
-                  <Text style={WalletScreenStyle.addCryptoText}>
-                    {crypto.name}
-                  </Text>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      flex: 1, // This ensures the view takes up the full remaining width
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Text style={WalletScreenStyle.addCryptoText}>
+                      {crypto.name}
+                    </Text>
+                    <View
+                      style={{
+                        height: "auto",
+                        paddingVertical: 2,
+                        paddingHorizontal: 4,
+                        borderRadius: 4,
+                        width: "auto",
+                        backgroundColor: "#eee",
+                      }}
+                    >
+                      <Text style={{ fontSize: 12 }}>{crypto.chain}</Text>
+                    </View>
+                  </View>
                 </TouchableOpacity>
               ))}
             </ScrollView>

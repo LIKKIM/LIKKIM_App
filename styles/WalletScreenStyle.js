@@ -600,7 +600,7 @@ const WalletScreenStyles = (isDarkMode) => {
       marginBottom: 6,
       borderRadius: 16,
       display: "flex",
-      justifyContent: "space-between",
+      //  justifyContent: "space-between",
       alignItems: "center",
       flexDirection: "row",
     },
@@ -638,7 +638,8 @@ const WalletScreenStyles = (isDarkMode) => {
     addCryptoText: {
       color: secondTextColor,
       fontWeight: "bold",
-      marginRight: 30,
+      marginRight: 6,
+      textAlign: "center",
     },
     modalHeader: {
       width: "100%",
