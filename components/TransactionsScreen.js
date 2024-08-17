@@ -49,6 +49,7 @@ function TransactionsScreen() {
   const [transactionFee, setTransactionFee] = useState("0.001"); // 示例交易手续费
   const [transactionHistory, setTransactionHistory] = useState([]);
   const [selectedDevice, setSelectedDevice] = useState(null);
+  const [bleVisible, setBleVisible] = useState(false); // New state for Bluetooth modal
   const isScanningRef = useRef(false);
   const [isScanning, setIsScanning] = useState(false);
   const [devices, setDevices] = useState([]);
@@ -65,17 +66,15 @@ function TransactionsScreen() {
   const bleManagerRef = useRef(null);
   const [paymentAddress, setPaymentAddress] = useState("Your Payment Address");
 
+  // 扫描蓝牙设备的函数
   const scanDevices = () => {
     if (Platform.OS !== "web" && !isScanning) {
-      console.log("Scanning started");
       setIsScanning(true);
-
       bleManagerRef.current.startDeviceScan(
         null,
         { allowDuplicates: true },
         (error, device) => {
           if (error) {
-            console.error("BleManager scanning error:", error);
             setIsScanning(false);
             return;
           }
@@ -83,26 +82,34 @@ function TransactionsScreen() {
           if (device.name && device.name.includes("LIKKIM")) {
             setDevices((prevDevices) => {
               if (!prevDevices.find((d) => d.id === device.id)) {
-                return [...prevDevices, device]; // 这里 device 是完整的设备对象
+                return [...prevDevices, device];
               }
               return prevDevices;
             });
-            console.log("Scanned device:", device);
           }
         }
       );
 
       setTimeout(() => {
-        console.log("Scanning stopped");
         bleManagerRef.current.stopDeviceScan();
         setIsScanning(false);
       }, 2000);
-    } else {
-      console.log("Attempt to scan while already scanning");
     }
   };
 
-  const [bleVisible, setBleVisible] = useState(false); // New state for Bluetooth modal
+  // 当蓝牙模态框打开时，开始扫描设备
+  useEffect(() => {
+    if (bleVisible) {
+      scanDevices();
+    }
+  }, [bleVisible]);
+
+  // 清理蓝牙管理器
+  useEffect(() => {
+    return () => {
+      bleManagerRef.current.destroy();
+    };
+  }, []);
 
   useEffect(() => {
     if (!bleVisible && selectedDevice) {
