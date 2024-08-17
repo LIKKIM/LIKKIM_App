@@ -24,7 +24,12 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import successImage from "../assets/success.png";
 import failImage from "../assets/fail.png";
 import Constants from "expo-constants";
+import base64 from "base64-js";
+import { Buffer } from "buffer";
 import { BleManager, BleErrorCode } from "react-native-ble-plx";
+const serviceUUID = "0000FFE0-0000-1000-8000-00805F9B34FB";
+const writeCharacteristicUUID = "0000FFE2-0000-1000-8000-00805F9B34FB";
+
 function TransactionsScreen() {
   const { t } = useTranslation();
   const { isDarkMode } = useContext(DarkModeContext);
@@ -117,10 +122,220 @@ function TransactionsScreen() {
       bleManagerRef.current.destroy();
     };
   }, []);
+
+  const monitorVerificationCode = (device) => {
+    const notifyCharacteristicUUID = "0000FFE1-0000-1000-8000-00805F9B34FB";
+
+    monitorSubscription = device.monitorCharacteristicForService(
+      serviceUUID,
+      notifyCharacteristicUUID,
+      (error, characteristic) => {
+        if (error) {
+          console.error("监听验证码时出错:", error.message);
+          return;
+        }
+
+        // Base64解码接收到的数据
+        const receivedData = Buffer.from(characteristic.value, "base64");
+
+        // 将接收到的数据解析为16进制字符串
+        const receivedDataHex = receivedData.toString("hex");
+        console.log("接收到的16进制数据字符串:", receivedDataHex);
+
+        // 示例：检查接收到的数据的前缀是否正确（例如，预期为 "a1"）
+        if (receivedDataHex.startsWith("a1")) {
+          // 提取接收到的验证码（根据你的协议调整具体的截取方式）
+          const verificationCode = receivedDataHex.substring(2, 6); // 获取从第2个字符开始的4个字符（例如 "a1 04 D2" 中的 "04D2"）
+          console.log("接收到的验证码:", verificationCode);
+
+          // 将验证码存储到状态中，或进行进一步的处理
+          setReceivedVerificationCode(verificationCode);
+        } else {
+          console.warn("接收到的不是预期的验证码数据");
+        }
+      }
+    );
+  };
+
   const handleDevicePress = async (device) => {
+    // 检查是否传递了有效的设备对象
+    if (typeof device !== "object" || typeof device.connect !== "function") {
+      console.error("无效的设备对象，无法连接设备:", device);
+      return;
+    }
+
     setSelectedDevice(device);
-    setBleVisible(false);
-    // 在这里添加其他的设备连接逻辑
+    setModalVisible(false);
+
+    try {
+      // 连接设备
+      await device.connect();
+      await device.discoverAllServicesAndCharacteristics();
+      console.log("设备已连接并发现所有服务和特性");
+
+      // 发送第一条命令 F0 01 02
+      const connectionCommandData = new Uint8Array([0xf0, 0x01, 0x02]);
+      const connectionCrc = crc16Modbus(connectionCommandData);
+      const connectionCrcHighByte = (connectionCrc >> 8) & 0xff;
+      const connectionCrcLowByte = connectionCrc & 0xff;
+      const finalConnectionCommand = new Uint8Array([
+        ...connectionCommandData,
+        connectionCrcLowByte,
+        connectionCrcHighByte,
+        0x0d, // 结束符
+        0x0a, // 结束符
+      ]);
+      const base64ConnectionCommand = base64.fromByteArray(
+        finalConnectionCommand
+      );
+
+      await device.writeCharacteristicWithResponseForService(
+        serviceUUID,
+        writeCharacteristicUUID,
+        base64ConnectionCommand
+      );
+      console.log("第一条蓝牙连接命令已发送: F0 01 02");
+
+      // 延迟 5 毫秒
+      await new Promise((resolve) => setTimeout(resolve, 5));
+
+      // 发送第二条命令 F1 01 02
+      await sendStartCommand(device);
+
+      // 开始监听嵌入式设备的返回信息
+      monitorVerificationCode(device);
+
+      // 关闭设备扫描模态框
+      setBleVisible(false);
+
+      // 显示 PIN 码输入模态框
+      setPinModalVisible(true);
+    } catch (error) {
+      console.error("设备连接或命令发送错误:", error);
+    }
+  };
+  function crc16Modbus(arr) {
+    let crc = 0xffff; // 初始值为0xFFFF
+    for (let byte of arr) {
+      crc ^= byte; // 按位异或
+      for (let i = 0; i < 8; i++) {
+        // 处理每一个字节的8位
+        if (crc & 0x0001) {
+          crc = (crc >> 1) ^ 0xa001; // 多项式为0xA001
+        } else {
+          crc = crc >> 1;
+        }
+      }
+    }
+    return crc & 0xffff; // 确保CRC值是16位
+  }
+
+  const sendStartCommand = async (device) => {
+    // 命令数据，未包含CRC校验码
+    const commandData = new Uint8Array([0xf1, 0x01, 0x02]);
+
+    // 使用CRC-16-Modbus算法计算CRC校验码
+    const crc = crc16Modbus(commandData);
+
+    // 将CRC校验码转换为高位在前，低位在后的格式
+    const crcHighByte = (crc >> 8) & 0xff;
+    const crcLowByte = crc & 0xff;
+
+    // 将原始命令数据、CRC校验码以及结束符组合成最终的命令
+    const finalCommand = new Uint8Array([
+      ...commandData,
+      crcLowByte,
+      crcHighByte,
+      0x0d, // 结束符
+      0x0a, // 结束符
+    ]);
+
+    // 将最终的命令转换为Base64编码
+    const base64Command = base64.fromByteArray(finalCommand);
+
+    // 打印最终的命令数据（十六进制表示）
+    console.log(
+      `Final command: ${Array.from(finalCommand)
+        .map((byte) => byte.toString(16).padStart(2, "0"))
+        .join(" ")}`
+    );
+
+    try {
+      await device.writeCharacteristicWithResponseForService(
+        serviceUUID, // BLE服务的UUID
+        writeCharacteristicUUID, // 可写特性的UUID
+        base64Command // 最终的命令数据的Base64编码
+      );
+      console.log("启动验证命令已发送");
+    } catch (error) {
+      console.error("发送启动命令失败", error);
+    }
+  };
+
+  const handlePinSubmit = async () => {
+    // 首先关闭 "Enter PIN to Connect" 的模态框
+    setPinModalVisible(false);
+
+    // 关闭所有其他可能打开的模态框
+    setVerificationSuccessModalVisible(false);
+    setVerificationFailModalVisible(false);
+
+    // 将用户输入的 PIN 转换为数字
+    const pinCodeValue = parseInt(pinCode, 10); // 将 "1234" 转换为数字 1234
+
+    // 将接收到的验证码转换为数字
+    const verificationCodeValue = parseInt(
+      receivedVerificationCode.replace(" ", ""),
+      16
+    );
+
+    console.log(`用户输入的 PIN 数值: ${pinCodeValue}`);
+    console.log(`接收到的验证码数值: ${verificationCodeValue}`);
+
+    if (pinCodeValue === verificationCodeValue) {
+      console.log("PIN 验证成功");
+      console.log("PIN 验证成功");
+      setVerificationSuccessModalVisible(true);
+
+      // 更新全局状态为成功，并在终端打印消息
+      setIsVerificationSuccessful(true);
+      console.log("验证成功！验证状态已更新。");
+
+      // 将已验证的设备ID添加到verifiedDevices状态中并持久化到本地存储
+      const newVerifiedDevices = [...verifiedDevices, selectedDevice.id];
+      setVerifiedDevices(newVerifiedDevices);
+      await AsyncStorage.setItem(
+        "verifiedDevices",
+        JSON.stringify(newVerifiedDevices)
+      );
+    } else {
+      console.log("PIN 验证失败");
+
+      // 停止监听验证码
+      if (monitorSubscription) {
+        try {
+          monitorSubscription.remove();
+          console.log("验证码监听已停止");
+        } catch (error) {
+          console.error("停止监听时发生错误:", error);
+        }
+      }
+
+      // 主动断开与嵌入式设备的连接
+      if (selectedDevice) {
+        try {
+          await selectedDevice.cancelConnection();
+          console.log("已断开与设备的连接");
+        } catch (error) {
+          console.error("断开连接时发生错误:", error);
+        }
+      }
+
+      setVerificationFailModalVisible(true); // 显示失败提示
+    }
+
+    // 清空 PIN 输入框
+    setPinCode("");
   };
   useEffect(() => {
     if (!bleVisible && selectedDevice) {

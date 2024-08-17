@@ -41,6 +41,7 @@ const WalletScreenStyles = (isDarkMode) => {
       borderRadius: 30,
       height: 60,
       alignItems: "center",
+      marginBottom: 20,
     },
     submitButtonText: {
       color: textColor,

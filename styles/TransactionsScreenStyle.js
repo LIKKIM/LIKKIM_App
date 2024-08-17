@@ -17,10 +17,21 @@ const TransactionsScreenStyles = (isDarkMode) => {
   const secondTextColor = isDarkMode ? "#ddd" : "#676776";
   const secondBtnTextColor = isDarkMode ? "#ddd" : "#e0e0e0";
   return StyleSheet.create({
+    submitButton: {
+      backgroundColor: buttonBackgroundColor,
+      padding: 10,
+      width: "100%",
+      justifyContent: "center",
+      borderRadius: 30,
+      height: 60,
+      alignItems: "center",
+      marginBottom: 20,
+    },
     submitButtonText: {
       color: textColor,
       fontSize: 16,
     },
+
     pinModalTitle: {
       color: textColor,
       fontSize: 20,
