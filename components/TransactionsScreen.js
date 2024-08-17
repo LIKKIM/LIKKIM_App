@@ -942,16 +942,43 @@ function TransactionsScreen() {
               <View style={{ marginTop: 20, width: "100%" }}>
                 <TouchableOpacity
                   style={TransactionsScreenStyle.optionButton}
-                  onPress={() => {
-                    // 实现确认交易的逻辑
-                    console.log("Transaction Confirmed");
-                    setConfirmModalVisible(false);
+                  onPress={async () => {
+                    try {
+                      // 使用 fetch 发送 POST 请求
+                      const response = await fetch(
+                        "https://bt.likkim.com/meridian/address/queryBlockList",
+                        {
+                          method: "POST",
+                          headers: {
+                            "Content-Type": "application/json",
+                          },
+                          body: JSON.stringify({
+                            chainShortName: "TRON",
+                          }),
+                        }
+                      );
+
+                      // 解析响应的 JSON 数据
+                      const data = await response.json();
+
+                      // 立即打印结果
+                      console.log("Transaction Confirmed", data);
+
+                      // 关闭 Modal
+                      setConfirmModalVisible(false);
+                    } catch (error) {
+                      console.error(
+                        "Error during transaction confirmation:",
+                        error
+                      );
+                    }
                   }}
                 >
                   <Text style={TransactionsScreenStyle.submitButtonText}>
                     {t("Confirm")}
                   </Text>
                 </TouchableOpacity>
+
                 <TouchableOpacity
                   style={TransactionsScreenStyle.cancelButton}
                   onPress={() => setConfirmModalVisible(false)}
