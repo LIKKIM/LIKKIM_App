@@ -73,7 +73,7 @@ const initialAdditionalCryptos = [
     icon: require("../assets/USDTIcon.png"),
     cardImage: require("../assets/Card43.png"),
     address: "1KAt6STtisWMMVo5XGdos9P7DBNNsFfjx7",
-    chain: "Bitcoin",
+    chain: "Tron",
   },
   {
     name: "Litecoin",
@@ -143,11 +143,11 @@ const initialAdditionalCryptos = [
 export const usdtCrypto = {
   name: "USDT",
   shortName: "USDT",
-  balance: "2.0",
+  balance: "0.0",
   icon: require("../assets/USDTIcon.png"),
   cardImage: require("../assets/Card43.png"),
   address: "1KAt6STtisWMMVo5XGdos9P7DBNNsFfjx7",
-  chain: "Bitcoin",
+  chain: "Tron",
 };
 
 export const CryptoProvider = ({ children }) => {
