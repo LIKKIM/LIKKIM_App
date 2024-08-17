@@ -568,7 +568,7 @@ function TransactionsScreen() {
   };
   useEffect(() => {
     if (!bleVisible && selectedDevice) {
-      setBleVisible(true);
+      setPinModalVisible(true);
     }
   }, [bleVisible, selectedDevice]);
 
