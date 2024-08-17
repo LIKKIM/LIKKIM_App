@@ -55,6 +55,7 @@ const initialAdditionalCryptos = [
     icon: require("../assets/BitcoinIcon.png"),
     cardImage: require("../assets/Card3.png"),
     address: "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
+    chain: "Bitcoin",
   },
   {
     name: "Ethereum",
@@ -63,6 +64,7 @@ const initialAdditionalCryptos = [
     icon: require("../assets/EthereumIcon.png"),
     cardImage: require("../assets/Card54.png"),
     address: "0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe",
+    chain: "Ethereum",
   },
   {
     name: "USDT",
@@ -71,6 +73,7 @@ const initialAdditionalCryptos = [
     icon: require("../assets/USDTIcon.png"),
     cardImage: require("../assets/Card43.png"),
     address: "1KAt6STtisWMMVo5XGdos9P7DBNNsFfjx7",
+    chain: "Bitcoin",
   },
   {
     name: "Litecoin",
@@ -79,6 +82,7 @@ const initialAdditionalCryptos = [
     icon: require("../assets/LitecoinIcon.png"),
     cardImage: require("../assets/Card1.png"),
     address: "LcHKdCbbtGxDsN7BHyebDTrVKT4w3KpU5Z",
+    chain: "Litecoin",
   },
   {
     name: "Bitcoin Cash",
@@ -87,6 +91,7 @@ const initialAdditionalCryptos = [
     icon: require("../assets/BitcoinCashIcon.png"),
     cardImage: require("../assets/Card2.png"),
     address: "qpm2qsznhks23z7629mms6s4cwef74vcwvy22gdx6a",
+    chain: "Bitcoin Cash",
   },
   {
     name: "Cardano",
@@ -95,6 +100,7 @@ const initialAdditionalCryptos = [
     icon: require("../assets/CardanoIcon.png"),
     cardImage: require("../assets/Card5.png"),
     address: "DdzFFzCqrhsusgjmXKG9VeSvfhRUHqNNNLiFYB8HHR7",
+    chain: "Cardano",
   },
   {
     name: "Polkadot",
@@ -103,6 +109,7 @@ const initialAdditionalCryptos = [
     icon: require("../assets/PolkadotIcon.png"),
     cardImage: require("../assets/Card6.png"),
     address: "14VSS98ov7KjJtyepigS65atjPjj73Fw4c8TyRjCnbhG",
+    chain: "Polkadot",
   },
   {
     name: "Chainlink",
@@ -111,6 +118,7 @@ const initialAdditionalCryptos = [
     icon: require("../assets/ChainlinkIcon.png"),
     cardImage: require("../assets/Card7.png"),
     address: "0x514910771af9ca656af840dff83e8264ecf986ca",
+    chain: "Ethereum",
   },
   {
     name: "Stellar",
@@ -119,6 +127,7 @@ const initialAdditionalCryptos = [
     icon: require("../assets/StellarIcon.png"),
     cardImage: require("../assets/Card8.png"),
     address: "GAHPDQD4MGHVZFJYZN46EZB2XB4LGIOHBTVHQRJ7MF2PL4EY7I7U77CC",
+    chain: "Stellar",
   },
   {
     name: "Dogecoin",
@@ -127,6 +136,7 @@ const initialAdditionalCryptos = [
     icon: require("../assets/DogecoinIcon.png"),
     cardImage: require("../assets/Card9.png"),
     address: "D7Y55N4sFCw4KceCczPS3KhNWZ6o7pTPkd",
+    chain: "Dogecoin",
   },
 ];
 
