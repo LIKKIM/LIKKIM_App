@@ -291,14 +291,102 @@ function TransactionsScreen() {
       console.log(`Derivation Path Hex: ${derivationPathHex}`);
 
       // 构建命令数据，包含16进制的TRX和路径
-      const commandData = new Uint8Array([
-        0xf9, // Command identifier
-        0x01, // Command version
-        0x0c, // Command length (adjust based on actual data length)
-        0x04, // Other command-specific byte
-        ...Buffer.from(coinTypeHex, "hex"), // TRX in hex
-        ...Buffer.from(derivationPathHex, "hex"), // Path in hex
-      ]);
+      const showAddressCommand = async (device) => {
+        try {
+          // 检查 device 是否为一个有效的设备对象
+          if (typeof device !== "object" || !device.isConnected) {
+            console.error("无效的设备对象：", device);
+            return;
+          }
+
+          console.log("发送显示地址命令之前的设备对象:", device);
+
+          // 无论设备是否连接，均重新连接并发现服务和特性
+          await device.connect();
+          await device.discoverAllServicesAndCharacteristics();
+          console.log("设备已连接并发现所有服务。");
+
+          if (
+            typeof device.writeCharacteristicWithResponseForService !==
+            "function"
+          ) {
+            console.error(
+              "设备没有 writeCharacteristicWithResponseForService 方法。"
+            );
+            return;
+          }
+
+          // TRX 和路径的字符串
+          const coinType = "TRX";
+          const derivationPath = "m/44'/195'/0'/0/0";
+
+          // 转换字符串为16进制格式
+          const coinTypeHex = Buffer.from(coinType, "utf-8").toString("hex");
+          const derivationPathHex = Buffer.from(
+            derivationPath,
+            "utf-8"
+          ).toString("hex");
+
+          // 计算长度
+          const coinTypeLength = coinTypeHex.length / 2; // 字节长度
+          const derivationPathLength = derivationPathHex.length / 2; // 字节长度
+
+          // 总长度（包括命令标识符、TRX 长度、TRX 数据、路径长度、路径数据）
+          const totalLength = 1 + 1 + coinTypeLength + 1 + derivationPathLength;
+
+          console.log(`Coin Type Hex: ${coinTypeHex}`);
+          console.log(`Derivation Path Hex: ${derivationPathHex}`);
+          console.log(`Total Length: ${totalLength}`);
+
+          // 构建命令数据
+          const commandData = new Uint8Array([
+            0xf9, // 命令标识符
+            coinTypeLength, // TRX 的长度
+            ...Buffer.from(coinTypeHex, "hex"), // TRX 的16进制表示
+            derivationPathLength, // 路径的长度
+            ...Buffer.from(derivationPathHex, "hex"), // 路径的16进制表示
+            totalLength, // 总长度，包括命令、TRX和路径
+          ]);
+
+          // 使用CRC-16-Modbus算法计算CRC校验码
+          const crc = crc16Modbus(commandData);
+
+          // 将CRC校验码转换为高位在前，低位在后的格式
+          const crcHighByte = (crc >> 8) & 0xff;
+          const crcLowByte = crc & 0xff;
+
+          // 将原始命令数据、CRC校验码以及结束符组合成最终的命令
+          const finalCommand = new Uint8Array([
+            ...commandData,
+            crcLowByte,
+            crcHighByte,
+            0x0d, // 结束符
+            0x0a, // 结束符
+          ]);
+
+          // 将最终的命令转换为Base64编码
+          const base64Command = base64.fromByteArray(finalCommand);
+
+          console.log(
+            `最终命令: ${Array.from(finalCommand)
+              .map((byte) => byte.toString(16).padStart(2, "0"))
+              .join(" ")}`
+          );
+
+          // 发送显示地址命令
+          await device.writeCharacteristicWithResponseForService(
+            serviceUUID, // BLE服务的UUID
+            writeCharacteristicUUID, // 可写特性的UUID
+            base64Command // 最终的命令数据的Base64编码
+          );
+          console.log("显示地址命令已发送");
+
+          // 提示用户在 LIKKIM 设备上核对地址
+          alert("Please verify the address on your LIKKIM device.");
+        } catch (error) {
+          console.error("发送显示地址命令失败:", error);
+        }
+      };
 
       // 使用CRC-16-Modbus算法计算CRC校验码
       const crc = crc16Modbus(commandData);
