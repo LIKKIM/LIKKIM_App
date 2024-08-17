@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   TextInput,
   ScrollView,
+  FlatList,
   Clipboard,
   Platform,
   Image,
