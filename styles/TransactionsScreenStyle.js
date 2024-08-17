@@ -268,7 +268,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       borderRadius: 30,
       height: 60,
       alignItems: "center",
-      marginBottom: 20,
+      marginBottom: 16,
     },
 
     submitButtonText: {

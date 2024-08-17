@@ -829,7 +829,7 @@ function TransactionsScreen() {
                     },
                   ]}
                   placeholder={t("Enter Amount")}
-                  placeholderTextColor={isDarkMode ? "#808080" : "#808080"} // 占位符颜色为灰色
+                  placeholderTextColor={isDarkMode ? "#808080" : "#cccccc"}
                   keyboardType="numeric"
                   onChangeText={(text) => setAmount(text)} // 保持输入框不为空，若为空则设为 "0"
                   value={amount}
@@ -877,11 +877,17 @@ function TransactionsScreen() {
         >
           <BlurView intensity={10} style={TransactionsScreenStyle.centeredView}>
             <View style={TransactionsScreenStyle.confirmModalView}>
+              {/* 添加国际化标题 */}
+              <Text style={TransactionsScreenStyle.modalTitle}>
+                {t("Transaction Confirmation")}
+              </Text>
+
               <View
                 style={{
                   flexDirection: "row",
                   alignItems: "center",
-                  marginBottom: 10,
+                  marginTop: 6,
+                  marginBottom: 16,
                 }}
               >
                 {selectedCryptoIcon && (
@@ -891,9 +897,11 @@ function TransactionsScreen() {
                   />
                 )}
                 <Text style={TransactionsScreenStyle.modalTitle}>
-                  {selectedCrypto}
+                  {`${selectedCrypto} (${selectedCryptoChain})`}{" "}
+                  {/* 添加链名称 */}
                 </Text>
               </View>
+
               <View
                 style={{
                   width: 280,
