@@ -638,7 +638,6 @@ const WalletScreenStyles = (isDarkMode) => {
     addCryptoText: {
       color: secondTextColor,
       fontWeight: "bold",
-      marginRight: 6,
       textAlign: "center",
     },
     modalHeader: {

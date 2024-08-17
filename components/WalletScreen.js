@@ -1537,8 +1537,11 @@ function WalletScreen({ route, navigation }) {
                   <View
                     style={{
                       flexDirection: "row",
-                      flex: 1, // This ensures the view takes up the full remaining width
+                      flex: 1, // 使 View 占据父容器的剩余宽度
+                      flexWrap: "wrap", // 允许子元素在需要时换行
                       justifyContent: "center",
+
+                      alignItems: "center",
                     }}
                   >
                     <Text style={WalletScreenStyle.addCryptoText}>
@@ -1552,6 +1555,7 @@ function WalletScreen({ route, navigation }) {
                         borderRadius: 4,
                         width: "auto",
                         backgroundColor: "#eee",
+                        margin: 8, // 增加文本与标签之间的间距
                       }}
                     >
                       <Text style={{ fontSize: 12 }}>{crypto.chain}</Text>
