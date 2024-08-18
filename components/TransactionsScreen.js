@@ -352,8 +352,15 @@ function TransactionsScreen() {
     }
   };
 
-  // 更新后的函数名称为 signTransaction
-  const signTransaction = async (verifiedDevices, hash, height, blockTime) => {
+  // 签名 signTransaction
+  const signTransaction = async (
+    verifiedDevices,
+    hash,
+    height,
+    blockTime,
+    amount,
+    userAddress
+  ) => {
     try {
       if (verifiedDevices.length === 0) {
         console.error("未找到已验证的设备");
@@ -369,27 +376,104 @@ function TransactionsScreen() {
         await device.discoverAllServicesAndCharacteristics();
       }
 
-      // 将数据转换为16进制格式
+      // 获取CryptoContext.js中的USDT数据
+      const usdt = {
+        name: "USDT",
+        shortName: "USDT",
+        balance: "0.0",
+        icon: require("../assets/USDTIcon.png"),
+        cardImage: require("../assets/Card43.png"),
+        address: "1KAt6STtisWMMVo5XGdos9P7DBNNsFfjx7", // USDT地址
+        chain: "Tron",
+      };
+
+      // 转换地址和输入数据为十六进制
+      const contractAddress = "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t";
+      const contractAddressHex = Buffer.from(contractAddress, "utf-8").toString(
+        "hex"
+      );
+      const usdtAddressHex = Buffer.from(usdt.address, "utf-8").toString("hex");
+      const userAddressHex = Buffer.from(userAddress, "utf-8").toString("hex");
+      const amountHex = Buffer.from(amount.toString(), "utf-8").toString("hex");
       const hashHex = Buffer.from(hash, "utf-8").toString("hex");
       const heightHex = parseInt(height, 10).toString(16).padStart(8, "0");
       const blockTimeHex = parseInt(blockTime, 10)
         .toString(16)
         .padStart(16, "0");
 
-      const commandDataHex = `${hashHex}${heightHex}${blockTimeHex}`;
-      const commandData = Buffer.from(commandDataHex, "hex");
+      // 计算各部分长度
+      const contractAddressLengthHex = contractAddress.length
+        .toString(16)
+        .padStart(2, "0");
+      const usdtAddressLengthHex = usdt.address.length
+        .toString(16)
+        .padStart(2, "0");
+      const userAddressLengthHex = userAddress.length
+        .toString(16)
+        .padStart(2, "0");
+      const amountLengthHex = amountHex.length.toString(16).padStart(2, "0");
+      const hashLengthHex = hashHex.length.toString(16).padStart(2, "0");
+      const heightLengthHex = heightHex.length.toString(16).padStart(2, "0");
+      const blockTimeLengthHex = blockTimeHex.length
+        .toString(16)
+        .padStart(2, "0");
 
+      // 构建 commandDataHex
+      const commandDataHex = [
+        "f8", // 头顺数据0xF8
+        contractAddressLengthHex, // Contract Address Length
+        contractAddressHex, // Contract Address
+        usdtAddressLengthHex, // USDT Address Length
+        usdtAddressHex, // USDT Address
+        userAddressLengthHex, // User Address Length
+        userAddressHex, // User Address
+        amountLengthHex, // Amount Length
+        amountHex, // Amount
+        hashLengthHex, // Hash Length
+        hashHex, // Hash
+        heightLengthHex, // Height Length
+        heightHex, // Height
+        blockTimeLengthHex, // Block Time Length
+        blockTimeHex, // Block Time
+      ].join("");
+
+      // 打印构建过程中的各个部分
+      console.log(`LOG  Contract Address Hex: ${contractAddressHex}`);
+      console.log(`LOG  USDT Address Hex: ${usdtAddressHex}`);
+      console.log(`LOG  User Address Hex: ${userAddressHex}`);
+      console.log(`LOG  Amount Hex: ${amountHex}`);
+      console.log(`LOG  Hash Hex: ${hashHex}`);
+      console.log(`LOG  Height Hex: ${heightHex}`);
+      console.log(`LOG  Block Time Hex: ${blockTimeHex}`);
+      console.log(`LOG  Command Data Length: ${commandDataHex.length / 2}`);
+      console.log(`LOG  Command Data Hex: ${commandDataHex}`);
+
+      const commandData = Uint8Array.from(Buffer.from(commandDataHex, "hex"));
+
+      // 计算CRC并添加到命令末尾
       const crc = crc16Modbus(commandData);
       const crcHighByte = (crc >> 8) & 0xff;
       const crcLowByte = crc & 0xff;
 
-      const finalCommand = Buffer.concat([
-        commandData,
-        Buffer.from([crcLowByte, crcHighByte, 0x0d, 0x0a]),
+      // 构建最终命令
+      const finalCommand = new Uint8Array([
+        ...commandData,
+        crcLowByte,
+        crcHighByte,
+        0x0d, // 结束符
+        0x0a, // 结束符
       ]);
+
+      // 打印最终的命令
+      console.log(
+        `LOG  最终命令: ${Array.from(finalCommand)
+          .map((byte) => byte.toString(16).padStart(2, "0"))
+          .join(" ")}`
+      );
 
       const base64Command = base64.fromByteArray(finalCommand);
 
+      // 发送命令到设备
       await device.writeCharacteristicWithResponseForService(
         serviceUUID,
         writeCharacteristicUUID,
