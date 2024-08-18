@@ -421,26 +421,19 @@ function TransactionsScreen() {
         return;
       }
 
-      // 转换为十六进制格式
-      const contractAddressHex = Buffer.from(contractAddress, "utf-8").toString(
-        "hex"
-      );
-      const cryptoAddressHex = Buffer.from(crypto.address, "utf-8").toString(
-        "hex"
-      );
-      const userAddressHex = Buffer.from(userAddress, "utf-8").toString("hex");
-      const amountHex = Buffer.from(amount.toString(), "utf-8").toString("hex");
-      const hashHex = Buffer.from(hash, "utf-8").toString("hex");
-      const heightHex = parseInt(height, 10).toString(16).padStart(8, "0");
-      const blockTimeHex = parseInt(blockTime, 10)
-        .toString(16)
-        .padStart(16, "0");
+      // 转换为二进制格式的 Buffer
+      const contractAddressBuffer = Buffer.from(contractAddress, "utf-8");
+      const cryptoAddressBuffer = Buffer.from(crypto.address, "utf-8");
+      const userAddressBuffer = Buffer.from(userAddress, "utf-8");
+      const amountBuffer = Buffer.from(amount.toString(), "utf-8");
+      const hashBuffer = Buffer.from(hash, "utf-8");
+      const heightBuffer = Buffer.alloc(4);
+      const blockTimeBuffer = Buffer.alloc(8);
 
-      // 新增派生路径的十六进制格式和长度
-      const derivationPathHex = Buffer.from(derivationPath, "utf-8").toString(
-        "hex"
-      );
-      const derivationPathLength = derivationPathHex.length / 2;
+      heightBuffer.writeUInt32BE(parseInt(height, 10));
+      blockTimeBuffer.writeBigUInt64BE(BigInt(blockTime));
+
+      const derivationPathBuffer = Buffer.from(derivationPath, "utf-8");
 
       // 打印原始值
       console.log(`Contract Address: ${contractAddress}`);
@@ -453,24 +446,28 @@ function TransactionsScreen() {
       console.log(`Derivation Path: ${derivationPath}`);
 
       // 打印十六进制值
-      console.log(`Contract Address Hex: ${contractAddressHex}`);
-      console.log(`Crypto Address Hex: ${cryptoAddressHex}`);
-      console.log(`User Address Hex: ${userAddressHex}`);
-      console.log(`Amount Hex: ${amountHex}`);
-      console.log(`Hash Hex: ${hashHex}`);
-      console.log(`Height Hex: ${heightHex}`);
-      console.log(`Block Time Hex: ${blockTimeHex}`);
-      console.log(`Derivation Path Hex: ${derivationPathHex}`);
+      console.log(
+        `Contract Address Hex: ${contractAddressBuffer.toString("hex")}`
+      );
+      console.log(`Crypto Address Hex: ${cryptoAddressBuffer.toString("hex")}`);
+      console.log(`User Address Hex: ${userAddressBuffer.toString("hex")}`);
+      console.log(`Amount Hex: ${amountBuffer.toString("hex")}`);
+      console.log(`Hash Hex: ${hashBuffer.toString("hex")}`);
+      console.log(`Height Hex: ${heightBuffer.toString("hex")}`);
+      console.log(`Block Time Hex: ${blockTimeBuffer.toString("hex")}`);
+      console.log(
+        `Derivation Path Hex: ${derivationPathBuffer.toString("hex")}`
+      );
 
       // 计算并打印各部分长度
-      const contractAddressLength = contractAddress.length;
-      const cryptoAddressLength = crypto.address.length;
-      const userAddressLength = userAddress.length;
-      const amountLength = amountHex.length / 2;
-      const hashLength = hashHex.length / 2;
-      const heightLength = heightHex.length / 2;
-      const blockTimeLength = blockTimeHex.length / 2;
-      const derivationPathLengthHex = derivationPath.length;
+      const contractAddressLength = contractAddressBuffer.length;
+      const cryptoAddressLength = cryptoAddressBuffer.length;
+      const userAddressLength = userAddressBuffer.length;
+      const amountLength = amountBuffer.length;
+      const hashLength = hashBuffer.length;
+      const heightLength = heightBuffer.length;
+      const blockTimeLength = blockTimeBuffer.length;
+      const derivationPathLength = derivationPathBuffer.length;
 
       console.log(`Contract Address Length: ${contractAddressLength}`);
       console.log(`Crypto Address Length: ${cryptoAddressLength}`);
@@ -479,54 +476,50 @@ function TransactionsScreen() {
       console.log(`Hash Length: ${hashLength}`);
       console.log(`Height Length: ${heightLength}`);
       console.log(`Block Time Length: ${blockTimeLength}`);
-      console.log(`Derivation Path Length: ${derivationPathLengthHex}`);
+      console.log(`Derivation Path Length: ${derivationPathLength}`);
 
       // 计算总数据长度（包括所有部分的字节长度）
       const totalDataLength =
         1 + // 固定的 0xf8 头字节
         1 +
-        contractAddressHex.length / 2 + // contractAddressLength 和合约地址的字节长度
+        contractAddressBuffer.length + // contractAddressLength 和合约地址的字节长度
         1 +
-        cryptoAddressHex.length / 2 + // cryptoAddressLength 和加密货币地址的字节长度
+        cryptoAddressBuffer.length + // cryptoAddressLength 和加密货币地址的字节长度
         1 +
-        userAddressHex.length / 2 + // userAddressLength 和用户地址的字节长度
+        userAddressBuffer.length + // userAddressLength 和用户地址的字节长度
         1 +
-        amountHex.length / 2 + // amountLength 和金额的字节长度
+        amountBuffer.length + // amountLength 和金额的字节长度
         1 +
-        hashHex.length / 2 + // hashLength 和哈希值的字节长度
-        1 +
-        heightHex.length / 2 + // heightLength 和高度的字节长度
-        1 +
-        blockTimeHex.length / 2 + // blockTimeLength 和区块时间的字节长度
-        1 +
-        derivationPathLength; // derivationPathLength 和派生路径的字节长度
+        hashBuffer.length + // hashLength 和哈希值的字节长度
+        heightBuffer.length + // heightLength 和高度的字节长度
+        blockTimeBuffer.length + // blockTimeLength 和区块时间的字节长度
+        derivationPathBuffer.length; // derivationPathLength 和派生路径的字节长度
 
-      const commandData = new Uint8Array([
-        0xf8, // 头顺数据0xF8
-
-        contractAddressLength,
-        ...Buffer.from(contractAddressHex, "hex"),
-        cryptoAddressLength,
-        ...Buffer.from(cryptoAddressHex, "hex"),
-        userAddressLength,
-        ...Buffer.from(userAddressHex, "hex"),
-        amountLength,
-        ...Buffer.from(amountHex, "hex"),
-        hashLength,
-        ...Buffer.from(hashHex, "hex"),
-        heightLength,
-        ...Buffer.from(heightHex, "hex"),
-        blockTimeLength,
-        ...Buffer.from(blockTimeHex, "hex"),
-        derivationPathLength, // 路径的长度
-        ...Buffer.from(derivationPathHex, "hex"), // 路径的16进制表示
-        totalDataLength, // 总数据长度
+      // 构建命令数据
+      const commandData = Buffer.concat([
+        Buffer.from([0xf8]), // 头字节
+        Buffer.from([contractAddressBuffer.length]),
+        contractAddressBuffer,
+        Buffer.from([cryptoAddressBuffer.length]),
+        cryptoAddressBuffer,
+        Buffer.from([userAddressBuffer.length]),
+        userAddressBuffer,
+        Buffer.from([amountBuffer.length]),
+        amountBuffer,
+        Buffer.from([hashBuffer.length]),
+        hashBuffer,
+        heightBuffer,
+        blockTimeBuffer,
+        Buffer.from([derivationPathBuffer.length]),
+        derivationPathBuffer,
+        Buffer.from([totalDataLength]),
       ]);
 
       // 打印命令数据
       console.log(
-        `Command Data (bytes): ${Array.from(commandData)
-          .map((byte) => byte.toString(16).padStart(2, "0"))
+        `Command Data (bytes): ${commandData
+          .toString("hex")
+          .match(/.{1,2}/g)
           .join(" ")}`
       );
 
@@ -536,30 +529,29 @@ function TransactionsScreen() {
       const crcLowByte = crc & 0xff;
 
       // 构建最终命令
-      const finalCommand = new Uint8Array([
-        ...commandData,
-        crcLowByte,
-        crcHighByte,
-        0x0d, // 结束符
-        0x0a, // 结束符
+      const finalCommand = Buffer.concat([
+        commandData,
+        Buffer.from([crcLowByte, crcHighByte, 0x0d, 0x0a]), // CRC 和结束符
       ]);
 
       // 打印最终的命令数据（十六进制表示）
       console.log(
-        `Final Command (hex): ${Array.from(finalCommand)
-          .map((byte) => byte.toString(16).padStart(2, "0"))
+        `Final Command (hex): ${finalCommand
+          .toString("hex")
+          .match(/.{1,2}/g)
           .join(" ")}`
       );
 
-      // 将命令转换为Base64编码并发送
-      const base64Command = Buffer.from(finalCommand).toString("base64");
-      // 发送十六进制命令到设备
+      // 将最终命令转换为Base64编码
+      const base64Command = finalCommand.toString("base64");
+
+      // 发送 Base64 编码的命令到设备
       await device.writeCharacteristicWithResponseForService(
         serviceUUID,
         writeCharacteristicUUID,
         base64Command
       );
-      console.log("数据已成功发送到设备:", finalCommand);
+
       console.log("数据已成功发送到设备:", base64Command);
     } catch (error) {
       console.error("发送数据到 BLE 设备时出错:", error);
