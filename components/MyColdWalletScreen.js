@@ -410,7 +410,7 @@ function MyColdWalletScreen() {
       (error, characteristic) => {
         if (error) {
           console.error("监听验证码时出错:", error.message);
-          //   return;
+          return;
         }
 
         // Base64解码接收到的数据
