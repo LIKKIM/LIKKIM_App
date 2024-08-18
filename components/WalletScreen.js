@@ -127,8 +127,7 @@ function WalletScreen({ route, navigation }) {
         (error, device) => {
           if (error) {
             console.error("BleManager scanning error:", error);
-
-            //      return;
+            return;
           }
 
           if (device.name && device.name.includes("LIKKIM")) {
