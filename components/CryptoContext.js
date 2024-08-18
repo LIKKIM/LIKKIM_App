@@ -269,6 +269,8 @@ export const CryptoProvider = ({ children }) => {
         currencyUnit,
         setCurrencyUnit,
         currencies,
+        usdtCrypto,
+        initialAdditionalCryptos,
         additionalCryptos,
         setAdditionalCryptos,
         addedCryptos,

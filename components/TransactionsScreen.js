@@ -17,12 +17,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { BlurView } from "expo-blur";
 import QRCode from "react-native-qrcode-svg";
 import { useTranslation } from "react-i18next";
-import {
-  CryptoContext,
-  DarkModeContext,
-  initialAdditionalCryptos,
-  usdtCrypto,
-} from "./CryptoContext";
+import { CryptoContext, DarkModeContext } from "./CryptoContext";
 import TransactionsScreenStyles from "../styles/TransactionsScreenStyle";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Feather from "react-native-vector-icons/Feather";
@@ -41,6 +36,8 @@ function TransactionsScreen() {
   const { t } = useTranslation();
   const { isDarkMode } = useContext(DarkModeContext);
   const {
+    usdtCrypto,
+    initialAdditionalCryptos,
     additionalCryptos,
     cryptoCount,
     setCryptoCount,
@@ -52,8 +49,7 @@ function TransactionsScreen() {
     verifiedDevices,
     setVerifiedDevices,
   } = useContext(CryptoContext);
-  console.log("initialAdditionalCryptos:", initialAdditionalCryptos);
-  console.log("additionalCryptos:", additionalCryptos);
+  console.log("usdtCrypto:", usdtCrypto);
 
   const TransactionsScreenStyle = TransactionsScreenStyles(isDarkMode);
   const addressIcon = isDarkMode ? "#ffffff" : "#676776";
