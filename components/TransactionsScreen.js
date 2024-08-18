@@ -470,6 +470,7 @@ function TransactionsScreen() {
       const hashLength = hashHex.length / 2;
       const heightLength = heightHex.length / 2;
       const blockTimeLength = blockTimeHex.length / 2;
+      const derivationPathLengthHex = derivationPath.length;
 
       console.log(`Contract Address Length: ${contractAddressLength}`);
       console.log(`Crypto Address Length: ${cryptoAddressLength}`);
@@ -478,11 +479,31 @@ function TransactionsScreen() {
       console.log(`Hash Length: ${hashLength}`);
       console.log(`Height Length: ${heightLength}`);
       console.log(`Block Time Length: ${blockTimeLength}`);
-      console.log(`Derivation Path Length: ${derivationPathLength}`);
+      console.log(`Derivation Path Length: ${derivationPathLengthHex}`);
 
-      // 构建命令数据
+      // 计算总数据长度（包括所有部分的字节长度）
+      const totalDataLength =
+        1 + // 固定的 0xf8 头字节
+        1 +
+        contractAddressHex.length / 2 + // contractAddressLength 和合约地址的字节长度
+        1 +
+        cryptoAddressHex.length / 2 + // cryptoAddressLength 和加密货币地址的字节长度
+        1 +
+        userAddressHex.length / 2 + // userAddressLength 和用户地址的字节长度
+        1 +
+        amountHex.length / 2 + // amountLength 和金额的字节长度
+        1 +
+        hashHex.length / 2 + // hashLength 和哈希值的字节长度
+        1 +
+        heightHex.length / 2 + // heightLength 和高度的字节长度
+        1 +
+        blockTimeHex.length / 2 + // blockTimeLength 和区块时间的字节长度
+        1 +
+        derivationPathLength; // derivationPathLength 和派生路径的字节长度
+
       const commandData = new Uint8Array([
         0xf8, // 头顺数据0xF8
+
         contractAddressLength,
         ...Buffer.from(contractAddressHex, "hex"),
         cryptoAddressLength,
@@ -499,6 +520,7 @@ function TransactionsScreen() {
         ...Buffer.from(blockTimeHex, "hex"),
         derivationPathLength, // 路径的长度
         ...Buffer.from(derivationPathHex, "hex"), // 路径的16进制表示
+        totalDataLength, // 总数据长度
       ]);
 
       // 打印命令数据
@@ -522,20 +544,21 @@ function TransactionsScreen() {
         0x0a, // 结束符
       ]);
 
-      // 将命令转换为Base64编码
-      const base64Command = base64.fromByteArray(finalCommand);
+      // 打印最终的命令数据（十六进制表示）
+      console.log(
+        `Final Command (hex): ${Array.from(finalCommand)
+          .map((byte) => byte.toString(16).padStart(2, "0"))
+          .join(" ")}`
+      );
 
-      // 打印最终的Base64编码命令
-      console.log(`Base64 Command: ${base64Command}`);
-
-      // 发送命令到设备
+      // 发送十六进制命令到设备
       await device.writeCharacteristicWithResponseForService(
         serviceUUID,
         writeCharacteristicUUID,
-        base64Command
+        Buffer.from(finalCommand).toString("hex") // 将 Uint8Array 转换为十六进制字符串
       );
 
-      console.log("数据已成功发送到设备:", base64Command);
+      console.log("数据已成功发送到设备:", finalCommand);
     } catch (error) {
       console.error("发送数据到 BLE 设备时出错:", error);
     }
