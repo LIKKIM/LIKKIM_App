@@ -962,13 +962,16 @@ function TransactionsScreen() {
                       const data = await response.json();
 
                       // 打印结果
-                      console.log("Transaction Confirmed", data);
+                      //  console.log("Transaction Confirmed", data);
 
-                      // 显示 blockList 数组的内容
+                      // 检查并提取 blockList 中的 hash, height, blockTime
                       if (data.code === "0" && Array.isArray(data.data)) {
                         const blockList = data.data[0].blockList;
-                        blockList.forEach((block, index) => {
-                          console.log(`Block ${index + 1}:`, block);
+                        blockList.forEach((block) => {
+                          const { hash, height, blockTime } = block;
+                          console.log(`Hash: ${hash}`);
+                          console.log(`Height: ${height}`);
+                          console.log(`Block Time: ${blockTime}`);
                         });
                       }
 
