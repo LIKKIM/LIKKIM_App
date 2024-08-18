@@ -1481,6 +1481,7 @@ function TransactionsScreen() {
                 secureTextEntry
                 onChangeText={setPinCode}
                 value={pinCode}
+                autoFocus={true}
               />
               <View style={{ width: "100%" }}>
                 <TouchableOpacity
