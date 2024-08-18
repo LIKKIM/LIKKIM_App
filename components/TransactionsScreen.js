@@ -17,7 +17,11 @@ import { LinearGradient } from "expo-linear-gradient";
 import { BlurView } from "expo-blur";
 import QRCode from "react-native-qrcode-svg";
 import { useTranslation } from "react-i18next";
-import { CryptoContext, DarkModeContext } from "./CryptoContext";
+import {
+  CryptoContext,
+  DarkModeContext,
+  initialAdditionalCryptos,
+} from "./CryptoContext";
 import TransactionsScreenStyles from "../styles/TransactionsScreenStyle";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Feather from "react-native-vector-icons/Feather";
@@ -359,7 +363,8 @@ function TransactionsScreen() {
     height,
     blockTime,
     amount,
-    userAddress
+    userAddress,
+    cryptoName = "USDT" // 通过参数选择特定的加密货币
   ) => {
     try {
       if (verifiedDevices.length === 0) {
@@ -376,23 +381,23 @@ function TransactionsScreen() {
         await device.discoverAllServicesAndCharacteristics();
       }
 
-      // 获取CryptoContext.js中的USDT数据
-      const usdt = {
-        name: "USDT",
-        shortName: "USDT",
-        balance: "0.0",
-        icon: require("../assets/USDTIcon.png"),
-        cardImage: require("../assets/Card43.png"),
-        address: "1KAt6STtisWMMVo5XGdos9P7DBNNsFfjx7", // USDT地址
-        chain: "Tron",
-      };
+      // 动态查找加密货币信息
+      const crypto = initialAdditionalCryptos.find(
+        (c) => c.name === cryptoName || c.shortName === cryptoName
+      );
 
-      // 转换地址和输入数据为十六进制
-      const contractAddress = "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t";
+      if (!crypto) {
+        console.error(`未找到加密货币: ${cryptoName}`);
+        return;
+      }
+
+      const contractAddress = "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"; // 合约地址，可以根据需求动态化
       const contractAddressHex = Buffer.from(contractAddress, "utf-8").toString(
         "hex"
       );
-      const usdtAddressHex = Buffer.from(usdt.address, "utf-8").toString("hex");
+      const cryptoAddressHex = Buffer.from(crypto.address, "utf-8").toString(
+        "hex"
+      );
       const userAddressHex = Buffer.from(userAddress, "utf-8").toString("hex");
       const amountHex = Buffer.from(amount.toString(), "utf-8").toString("hex");
       const hashHex = Buffer.from(hash, "utf-8").toString("hex");
@@ -402,53 +407,47 @@ function TransactionsScreen() {
         .padStart(16, "0");
 
       // 计算各部分长度
-      const contractAddressLengthHex = contractAddress.length
-        .toString(16)
-        .padStart(2, "0");
-      const usdtAddressLengthHex = usdt.address.length
-        .toString(16)
-        .padStart(2, "0");
-      const userAddressLengthHex = userAddress.length
-        .toString(16)
-        .padStart(2, "0");
-      const amountLengthHex = amountHex.length.toString(16).padStart(2, "0");
-      const hashLengthHex = hashHex.length.toString(16).padStart(2, "0");
-      const heightLengthHex = heightHex.length.toString(16).padStart(2, "0");
-      const blockTimeLengthHex = blockTimeHex.length
-        .toString(16)
-        .padStart(2, "0");
+      const contractAddressLength = contractAddress.length;
+      const cryptoAddressLength = crypto.address.length;
+      const userAddressLength = userAddress.length;
+      const amountLength = amountHex.length / 2;
+      const hashLength = hashHex.length / 2;
+      const heightLength = heightHex.length / 2;
+      const blockTimeLength = blockTimeHex.length / 2;
 
-      // 构建 commandDataHex
-      const commandDataHex = [
-        "f8", // 头顺数据0xF8
-        contractAddressLengthHex, // Contract Address Length
-        contractAddressHex, // Contract Address
-        usdtAddressLengthHex, // USDT Address Length
-        usdtAddressHex, // USDT Address
-        userAddressLengthHex, // User Address Length
-        userAddressHex, // User Address
-        amountLengthHex, // Amount Length
-        amountHex, // Amount
-        hashLengthHex, // Hash Length
-        hashHex, // Hash
-        heightLengthHex, // Height Length
-        heightHex, // Height
-        blockTimeLengthHex, // Block Time Length
-        blockTimeHex, // Block Time
-      ].join("");
+      // 构建 commandData
+      const commandData = new Uint8Array([
+        0xf8, // 头顺数据0xF8
+        contractAddressLength, // Contract Address Length
+        ...Buffer.from(contractAddressHex, "hex"), // Contract Address
+        cryptoAddressLength, // Crypto Address Length
+        ...Buffer.from(cryptoAddressHex, "hex"), // Crypto Address
+        userAddressLength, // User Address Length
+        ...Buffer.from(userAddressHex, "hex"), // User Address
+        amountLength, // Amount Length
+        ...Buffer.from(amountHex, "hex"), // Amount
+        hashLength, // Hash Length
+        ...Buffer.from(hashHex, "hex"), // Hash
+        heightLength, // Height Length
+        ...Buffer.from(heightHex, "hex"), // Height
+        blockTimeLength, // Block Time Length
+        ...Buffer.from(blockTimeHex, "hex"), // Block Time
+      ]);
 
       // 打印构建过程中的各个部分
       console.log(`LOG  Contract Address Hex: ${contractAddressHex}`);
-      console.log(`LOG  USDT Address Hex: ${usdtAddressHex}`);
+      console.log(`LOG  Crypto Address Hex: ${cryptoAddressHex}`);
       console.log(`LOG  User Address Hex: ${userAddressHex}`);
       console.log(`LOG  Amount Hex: ${amountHex}`);
       console.log(`LOG  Hash Hex: ${hashHex}`);
       console.log(`LOG  Height Hex: ${heightHex}`);
       console.log(`LOG  Block Time Hex: ${blockTimeHex}`);
-      console.log(`LOG  Command Data Length: ${commandDataHex.length / 2}`);
-      console.log(`LOG  Command Data Hex: ${commandDataHex}`);
-
-      const commandData = Uint8Array.from(Buffer.from(commandDataHex, "hex"));
+      console.log(`LOG  Command Data Length: ${commandData.length}`);
+      console.log(
+        `LOG  Command Data Hex: ${Array.from(commandData)
+          .map((byte) => byte.toString(16).padStart(2, "0"))
+          .join(" ")}`
+      );
 
       // 计算CRC并添加到命令末尾
       const crc = crc16Modbus(commandData);
