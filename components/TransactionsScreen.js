@@ -393,10 +393,10 @@ function TransactionsScreen() {
         return;
       }
 
-      // 在这里初始化 contractAddress
+      // 初始化 contractAddress
       const contractAddress = "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t";
 
-      // 现在再检查所有必要的变量
+      // 检查所有必要的变量
       if (
         !contractAddress ||
         !crypto.address ||
@@ -418,6 +418,16 @@ function TransactionsScreen() {
         return;
       }
 
+      // 打印原始值
+      console.log(`Contract Address: ${contractAddress}`);
+      console.log(`Crypto Address: ${crypto.address}`);
+      console.log(`User Address: ${userAddress}`);
+      console.log(`Amount: ${amount}`);
+      console.log(`Hash: ${hash}`);
+      console.log(`Height: ${height}`);
+      console.log(`Block Time: ${blockTime}`);
+
+      // 转换为十六进制格式
       const contractAddressHex = Buffer.from(contractAddress, "utf-8").toString(
         "hex"
       );
@@ -432,7 +442,16 @@ function TransactionsScreen() {
         .toString(16)
         .padStart(16, "0");
 
-      // 计算各部分长度
+      // 打印十六进制值
+      console.log(`Contract Address Hex: ${contractAddressHex}`);
+      console.log(`Crypto Address Hex: ${cryptoAddressHex}`);
+      console.log(`User Address Hex: ${userAddressHex}`);
+      console.log(`Amount Hex: ${amountHex}`);
+      console.log(`Hash Hex: ${hashHex}`);
+      console.log(`Height Hex: ${heightHex}`);
+      console.log(`Block Time Hex: ${blockTimeHex}`);
+
+      // 计算并打印各部分长度
       const contractAddressLength = contractAddress.length;
       const cryptoAddressLength = crypto.address.length;
       const userAddressLength = userAddress.length;
@@ -440,6 +459,14 @@ function TransactionsScreen() {
       const hashLength = hashHex.length / 2;
       const heightLength = heightHex.length / 2;
       const blockTimeLength = blockTimeHex.length / 2;
+
+      console.log(`Contract Address Length: ${contractAddressLength}`);
+      console.log(`Crypto Address Length: ${cryptoAddressLength}`);
+      console.log(`User Address Length: ${userAddressLength}`);
+      console.log(`Amount Length: ${amountLength}`);
+      console.log(`Hash Length: ${hashLength}`);
+      console.log(`Height Length: ${heightLength}`);
+      console.log(`Block Time Length: ${blockTimeLength}`);
 
       // 构建命令数据
       const commandData = new Uint8Array([
@@ -462,7 +489,7 @@ function TransactionsScreen() {
 
       // 打印命令数据
       console.log(
-        `Command Data: ${Array.from(commandData)
+        `Command Data (bytes): ${Array.from(commandData)
           .map((byte) => byte.toString(16).padStart(2, "0"))
           .join(" ")}`
       );
@@ -483,6 +510,9 @@ function TransactionsScreen() {
 
       // 将命令转换为Base64编码
       const base64Command = base64.fromByteArray(finalCommand);
+
+      // 打印最终的Base64编码命令
+      console.log(`Base64 Command: ${base64Command}`);
 
       // 发送命令到设备
       await device.writeCharacteristicWithResponseForService(
