@@ -49,7 +49,6 @@ function TransactionsScreen() {
     verifiedDevices,
     setVerifiedDevices,
   } = useContext(CryptoContext);
-  console.log("usdtCrypto:", usdtCrypto);
 
   const TransactionsScreenStyle = TransactionsScreenStyles(isDarkMode);
   const addressIcon = isDarkMode ? "#ffffff" : "#676776";
@@ -1111,7 +1110,9 @@ function TransactionsScreen() {
                           verifiedDevices,
                           hash,
                           height,
-                          blockTime
+                          blockTime,
+                          amount,
+                          inputAddress
                         );
                       }
 
