@@ -961,8 +961,16 @@ function TransactionsScreen() {
                       // 解析响应的 JSON 数据
                       const data = await response.json();
 
-                      // 立即打印结果
+                      // 打印结果
                       console.log("Transaction Confirmed", data);
+
+                      // 显示 blockList 数组的内容
+                      if (data.code === "0" && Array.isArray(data.data)) {
+                        const blockList = data.data[0].blockList;
+                        blockList.forEach((block, index) => {
+                          console.log(`Block ${index + 1}:`, block);
+                        });
+                      }
 
                       // 关闭 Modal
                       setConfirmModalVisible(false);
