@@ -394,7 +394,10 @@ function TransactionsScreen() {
         return;
       }
 
-      // 检查所有必要的变量
+      // 在这里初始化 contractAddress
+      const contractAddress = "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t";
+
+      // 现在再检查所有必要的变量
       if (
         !contractAddress ||
         !crypto.address ||
