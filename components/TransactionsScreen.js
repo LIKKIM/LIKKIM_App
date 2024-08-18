@@ -99,8 +99,8 @@ function TransactionsScreen() {
         (error, device) => {
           if (error) {
             console.error("BleManager scanning error:", error);
-            setIsScanning(false);
-            return;
+
+            // return;
           }
 
           if (device.name && device.name.includes("LIKKIM")) {
@@ -352,22 +352,55 @@ function TransactionsScreen() {
     }
   };
 
-  // 计算CRC-16-Modbus校验码的函数
-  function crc16Modbus(arr) {
-    let crc = 0xffff; // 初始值为0xFFFF
-    for (let byte of arr) {
-      crc ^= byte; // 按位异或
-      for (let i = 0; i < 8; i++) {
-        // 处理每一个字节的8位
-        if (crc & 0x0001) {
-          crc = (crc >> 1) ^ 0xa001; // 多项式为0xA001
-        } else {
-          crc = crc >> 1;
-        }
+  // 更新后的函数名称为 signTransaction
+  const signTransaction = async (verifiedDevices, hash, height, blockTime) => {
+    try {
+      if (verifiedDevices.length === 0) {
+        console.error("未找到已验证的设备");
+        return;
       }
+
+      const deviceID = verifiedDevices[0];
+      const device = await bleManagerRef.current.connectToDevice(deviceID);
+
+      // 确保设备已连接并发现所有服务和特性
+      if (!(await device.isConnected())) {
+        await device.connect();
+        await device.discoverAllServicesAndCharacteristics();
+      }
+
+      // 将数据转换为16进制格式
+      const hashHex = Buffer.from(hash, "utf-8").toString("hex");
+      const heightHex = parseInt(height, 10).toString(16).padStart(8, "0");
+      const blockTimeHex = parseInt(blockTime, 10)
+        .toString(16)
+        .padStart(16, "0");
+
+      const commandDataHex = `${hashHex}${heightHex}${blockTimeHex}`;
+      const commandData = Buffer.from(commandDataHex, "hex");
+
+      const crc = crc16Modbus(commandData);
+      const crcHighByte = (crc >> 8) & 0xff;
+      const crcLowByte = crc & 0xff;
+
+      const finalCommand = Buffer.concat([
+        commandData,
+        Buffer.from([crcLowByte, crcHighByte, 0x0d, 0x0a]),
+      ]);
+
+      const base64Command = base64.fromByteArray(finalCommand);
+
+      await device.writeCharacteristicWithResponseForService(
+        serviceUUID,
+        writeCharacteristicUUID,
+        base64Command
+      );
+
+      console.log("数据已成功发送到设备:", base64Command);
+    } catch (error) {
+      console.error("发送数据到 BLE 设备时出错:", error);
     }
-    return crc & 0xffff; // 确保CRC值是16位
-  }
+  };
 
   const sendStartCommand = async (device) => {
     // 命令数据，未包含CRC校验码
@@ -492,6 +525,24 @@ function TransactionsScreen() {
       setBleVisible(true);
     }
   };
+
+  // 计算CRC-16-Modbus校验码的函数
+  function crc16Modbus(arr) {
+    let crc = 0xffff; // 初始值为0xFFFF
+    for (let byte of arr) {
+      crc ^= byte; // 按位异或
+      for (let i = 0; i < 8; i++) {
+        // 处理每一个字节的8位
+        if (crc & 0x0001) {
+          crc = (crc >> 1) ^ 0xa001; // 多项式为0xA001
+        } else {
+          crc = crc >> 1;
+        }
+      }
+    }
+    return crc & 0xffff; // 确保CRC值是16位
+  }
+
   useEffect(() => {
     if (!bleVisible && selectedDevice) {
       setPinModalVisible(true);
@@ -940,48 +991,37 @@ function TransactionsScreen() {
               </View>
 
               <View style={{ marginTop: 20, width: "100%" }}>
+                {/* 确认交易按钮 */}
                 <TouchableOpacity
                   style={TransactionsScreenStyle.optionButton}
                   onPress={async () => {
                     try {
-                      // 使用 fetch 发送 POST 请求
                       const response = await fetch(
                         "https://bt.likkim.com/meridian/address/queryBlockList",
                         {
                           method: "POST",
-                          headers: {
-                            "Content-Type": "application/json",
-                          },
-                          body: JSON.stringify({
-                            chainShortName: "TRON",
-                          }),
+                          headers: { "Content-Type": "application/json" },
+                          body: JSON.stringify({ chainShortName: "TRON" }),
                         }
                       );
-
-                      // 解析响应的 JSON 数据
                       const data = await response.json();
 
-                      // 打印结果
-                      //  console.log("Transaction Confirmed", data);
-
-                      // 检查并提取 blockList 中的 hash, height, blockTime
                       if (data.code === "0" && Array.isArray(data.data)) {
-                        const blockList = data.data[0].blockList;
-                        blockList.forEach((block) => {
-                          const { hash, height, blockTime } = block;
-                          console.log(`Hash: ${hash}`);
-                          console.log(`Height: ${height}`);
-                          console.log(`Block Time: ${blockTime}`);
-                        });
+                        const block = data.data[0].blockList[0];
+                        const { hash, height, blockTime } = block;
+
+                        // 执行签名
+                        await signTransaction(
+                          verifiedDevices,
+                          hash,
+                          height,
+                          blockTime
+                        );
                       }
 
-                      // 关闭 Modal
                       setConfirmModalVisible(false);
                     } catch (error) {
-                      console.error(
-                        "Error during transaction confirmation:",
-                        error
-                      );
+                      console.error("确认交易时出错:", error);
                     }
                   }}
                 >

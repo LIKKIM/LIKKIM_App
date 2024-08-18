@@ -311,8 +311,8 @@ function MyColdWalletScreen() {
             console.error("BleManager scanning error:", error);
             if (error.errorCode === BleErrorCode.BluetoothUnsupported) {
               console.error("Bluetooth LE is unsupported on this device");
-              setIsScanning(false);
-              return;
+
+              //  return;
             }
           } else if (device.name && device.name.includes("LIKKIM")) {
             setDevices((prevDevices) => {
