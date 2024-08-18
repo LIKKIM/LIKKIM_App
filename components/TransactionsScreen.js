@@ -391,13 +391,9 @@ function TransactionsScreen() {
         return;
       }
 
-      // 初始化 contractAddress
       const contractAddress = "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t";
-
-      // 添加派生路径
       const derivationPath = "m/44'/195'/0'/0/0";
 
-      // 检查所有必要的变量
       if (
         !contractAddress ||
         !crypto.address ||
@@ -406,7 +402,7 @@ function TransactionsScreen() {
         !hash ||
         !height ||
         !blockTime ||
-        !derivationPath // 确保派生路径不为空
+        !derivationPath
       ) {
         console.error("参数缺失：", {
           contractAddress,
@@ -421,17 +417,21 @@ function TransactionsScreen() {
         return;
       }
 
-      // 转换为二进制格式的 Buffer
       const contractAddressBuffer = Buffer.from(contractAddress, "utf-8");
       const cryptoAddressBuffer = Buffer.from(crypto.address, "utf-8");
       const userAddressBuffer = Buffer.from(userAddress, "utf-8");
       const amountBuffer = Buffer.from(amount.toString(), "utf-8");
       const hashBuffer = Buffer.from(hash, "utf-8");
       const heightBuffer = Buffer.alloc(4);
+
+      // 处理 blockTime 时间戳，拆分为高 32 位和低 32 位
+      const blockTimeHigh = Math.floor(blockTime / 0x100000000); // 高 32 位
+      const blockTimeLow = blockTime & 0xffffffff; // 低 32 位
       const blockTimeBuffer = Buffer.alloc(8);
+      blockTimeBuffer.writeUInt32BE(blockTimeHigh, 0); // 写入高 32 位
+      blockTimeBuffer.writeUInt32BE(blockTimeLow, 4); // 写入低 32 位
 
       heightBuffer.writeUInt32BE(parseInt(height, 10));
-      blockTimeBuffer.writeBigUInt64BE(BigInt(blockTime));
 
       const derivationPathBuffer = Buffer.from(derivationPath, "utf-8");
 
@@ -478,26 +478,24 @@ function TransactionsScreen() {
       console.log(`Block Time Length: ${blockTimeLength}`);
       console.log(`Derivation Path Length: ${derivationPathLength}`);
 
-      // 计算总数据长度（包括所有部分的字节长度）
+      // 计算总数据长度
       const totalDataLength =
-        1 + // 固定的 0xf8 头字节
         1 +
-        contractAddressBuffer.length + // contractAddressLength 和合约地址的字节长度
+        contractAddressBuffer.length +
         1 +
-        cryptoAddressBuffer.length + // cryptoAddressLength 和加密货币地址的字节长度
+        cryptoAddressBuffer.length +
         1 +
-        userAddressBuffer.length + // userAddressLength 和用户地址的字节长度
+        userAddressBuffer.length +
         1 +
-        amountBuffer.length + // amountLength 和金额的字节长度
+        amountBuffer.length +
         1 +
-        hashBuffer.length + // hashLength 和哈希值的字节长度
-        heightBuffer.length + // heightLength 和高度的字节长度
-        blockTimeBuffer.length + // blockTimeLength 和区块时间的字节长度
-        derivationPathBuffer.length; // derivationPathLength 和派生路径的字节长度
+        hashBuffer.length +
+        heightBuffer.length +
+        blockTimeBuffer.length +
+        derivationPathBuffer.length;
 
-      // 构建命令数据
       const commandData = Buffer.concat([
-        Buffer.from([0xf8]), // 头字节
+        Buffer.from([0xf8]),
         Buffer.from([contractAddressBuffer.length]),
         contractAddressBuffer,
         Buffer.from([cryptoAddressBuffer.length]),
@@ -515,7 +513,6 @@ function TransactionsScreen() {
         Buffer.from([totalDataLength]),
       ]);
 
-      // 打印命令数据
       console.log(
         `Command Data (bytes): ${commandData
           .toString("hex")
@@ -523,18 +520,15 @@ function TransactionsScreen() {
           .join(" ")}`
       );
 
-      // 计算CRC并添加到命令末尾
       const crc = crc16Modbus(commandData);
       const crcHighByte = (crc >> 8) & 0xff;
       const crcLowByte = crc & 0xff;
 
-      // 构建最终命令
       const finalCommand = Buffer.concat([
         commandData,
-        Buffer.from([crcLowByte, crcHighByte, 0x0d, 0x0a]), // CRC 和结束符
+        Buffer.from([crcLowByte, crcHighByte, 0x0d, 0x0a]),
       ]);
 
-      // 打印最终的命令数据（十六进制表示）
       console.log(
         `Final Command (hex): ${finalCommand
           .toString("hex")
@@ -542,10 +536,8 @@ function TransactionsScreen() {
           .join(" ")}`
       );
 
-      // 将最终命令转换为Base64编码
       const base64Command = finalCommand.toString("base64");
 
-      // 发送 Base64 编码的命令到设备
       await device.writeCharacteristicWithResponseForService(
         serviceUUID,
         writeCharacteristicUUID,
