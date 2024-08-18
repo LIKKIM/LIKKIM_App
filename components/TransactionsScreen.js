@@ -734,21 +734,35 @@ function TransactionsScreen() {
     setOperationType("send");
     setModalVisible(true);
   };
-
   const selectCrypto = async (crypto) => {
     setSelectedCrypto(crypto.shortName);
     setSelectedCryptoChain(crypto.chain);
     setSelectedAddress(crypto.address);
     setSelectedCryptoIcon(crypto.icon);
     setModalVisible(false);
+
     if (operationType === "receive") {
+      // 直接启动地址模态框，不检查设备 ID
       setAddressModalVisible(true);
     } else if (operationType === "send") {
-      setAddressModalVisible(false);
-      setInputAddress("");
-      setInputAddressModalVisible(true);
+      // 检查 verifiedDevices 是否包含有效设备
+      if (verifiedDevices.length > 0) {
+        const device = devices.find((d) => d.id === verifiedDevices[0]);
+        if (device) {
+          setAddressModalVisible(false);
+          setInputAddress("");
+          setInputAddressModalVisible(true);
+        } else {
+          setBleVisible(true); // 设备不正确时显示蓝牙模态框
+          setModalVisible(false); // 关闭当前的模态框
+        }
+      } else {
+        setBleVisible(true); // 没有已验证设备时显示蓝牙模态框
+        setModalVisible(false); // 关闭当前的模态框
+      }
     }
   };
+
   const handleNextAfterAddress = () => {
     setInputAddressModalVisible(false);
     setAmountModalVisible(true);

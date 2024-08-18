@@ -59,7 +59,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
     },
 
     submitButton: {
-      backgroundColor: buttonBackgroundColor,
+      backgroundColor: btnColor,
       padding: 10,
       width: "100%",
       justifyContent: "center",
