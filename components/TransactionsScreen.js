@@ -258,6 +258,7 @@ function TransactionsScreen() {
       console.error("断开设备连接失败:", error);
     }
   };
+  // 显示地址函数
   const showAddressCommand = async (device) => {
     try {
       // 检查 device 是否为一个有效的设备对象
@@ -354,7 +355,7 @@ function TransactionsScreen() {
     }
   };
 
-  // 签名 signTransaction
+  // 签名函数
   const signTransaction = async (
     verifiedDevices,
     hash,
