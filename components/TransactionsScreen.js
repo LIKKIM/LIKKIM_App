@@ -149,7 +149,7 @@ function TransactionsScreen() {
       (error, characteristic) => {
         if (error) {
           console.error("监听验证码时出错:", error.message);
-          return;
+          // return;
         }
 
         // Base64解码接收到的数据
@@ -376,6 +376,9 @@ function TransactionsScreen() {
       await device.connect();
       await device.discoverAllServicesAndCharacteristics();
 
+      // 确保设备完全连接后，延迟一小段时间再发送命令
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
       let crypto = initialAdditionalCryptos.find(
         (c) => c.name === cryptoName || c.shortName === cryptoName
       );
@@ -386,8 +389,6 @@ function TransactionsScreen() {
 
       if (!crypto || !crypto.address) {
         console.error("未找到有效的加密货币或地址缺失");
-        console.error("crypto:", crypto);
-        console.error("userAddress:", userAddress);
         return;
       }
 
@@ -480,6 +481,7 @@ function TransactionsScreen() {
 
       // 计算总数据长度
       const totalDataLength =
+        1 + // 头字节
         1 +
         contractAddressBuffer.length +
         1 +
