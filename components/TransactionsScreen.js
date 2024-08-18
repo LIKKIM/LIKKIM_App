@@ -21,6 +21,7 @@ import {
   CryptoContext,
   DarkModeContext,
   initialAdditionalCryptos,
+  usdtCrypto,
 } from "./CryptoContext";
 import TransactionsScreenStyles from "../styles/TransactionsScreenStyle";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -36,6 +37,9 @@ const serviceUUID = "0000FFE0-0000-1000-8000-00805F9B34FB";
 const writeCharacteristicUUID = "0000FFE2-0000-1000-8000-00805F9B34FB";
 
 function TransactionsScreen() {
+  console.log("initialAdditionalCryptos:", initialAdditionalCryptos);
+  console.log("additionalCryptos:", additionalCryptos);
+
   const [receivedVerificationCode, setReceivedVerificationCode] = useState("");
   const { t } = useTranslation();
   const { isDarkMode } = useContext(DarkModeContext);
