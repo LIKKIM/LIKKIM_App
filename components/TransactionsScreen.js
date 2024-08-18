@@ -363,7 +363,7 @@ function TransactionsScreen() {
     blockTime,
     amount,
     userAddress,
-    cryptoName = "USDT" // 通过参数选择特定的加密货币
+    cryptoName = "USDT"
   ) => {
     try {
       if (verifiedDevices.length === 0) {
@@ -374,28 +374,48 @@ function TransactionsScreen() {
       const deviceID = verifiedDevices[0];
       const device = await bleManagerRef.current.connectToDevice(deviceID);
 
-      // 确保设备已连接并发现所有服务和特性
       if (!(await device.isConnected())) {
         await device.connect();
         await device.discoverAllServicesAndCharacteristics();
       }
 
-      // 动态查找加密货币信息
       let crypto = initialAdditionalCryptos.find(
         (c) => c.name === cryptoName || c.shortName === cryptoName
       );
 
-      // 如果 initialAdditionalCryptos 中未找到，加在 usdtCrypto 中查找
       if (!crypto && usdtCrypto.shortName === cryptoName) {
         crypto = usdtCrypto;
       }
 
-      if (!crypto) {
-        console.error(`未找到加密货币: ${cryptoName}`);
+      if (!crypto || !crypto.address) {
+        console.error("未找到有效的加密货币或地址缺失");
+        console.error("crypto:", crypto);
+        console.error("userAddress:", userAddress);
         return;
       }
 
-      const contractAddress = "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"; // 合约地址，可以根据需求动态化
+      // 检查所有必要的变量
+      if (
+        !contractAddress ||
+        !crypto.address ||
+        !userAddress ||
+        !amount ||
+        !hash ||
+        !height ||
+        !blockTime
+      ) {
+        console.error("参数缺失：", {
+          contractAddress,
+          cryptoAddress: crypto.address,
+          userAddress,
+          amount,
+          hash,
+          height,
+          blockTime,
+        });
+        return;
+      }
+
       const contractAddressHex = Buffer.from(contractAddress, "utf-8").toString(
         "hex"
       );
@@ -419,36 +439,28 @@ function TransactionsScreen() {
       const heightLength = heightHex.length / 2;
       const blockTimeLength = blockTimeHex.length / 2;
 
-      // 构建 commandData
+      // 构建命令数据
       const commandData = new Uint8Array([
         0xf8, // 头顺数据0xF8
-        contractAddressLength, // Contract Address Length
-        ...Buffer.from(contractAddressHex, "hex"), // Contract Address
-        cryptoAddressLength, // Crypto Address Length
-        ...Buffer.from(cryptoAddressHex, "hex"), // Crypto Address
-        userAddressLength, // User Address Length
-        ...Buffer.from(userAddressHex, "hex"), // User Address
-        amountLength, // Amount Length
-        ...Buffer.from(amountHex, "hex"), // Amount
-        hashLength, // Hash Length
-        ...Buffer.from(hashHex, "hex"), // Hash
-        heightLength, // Height Length
-        ...Buffer.from(heightHex, "hex"), // Height
-        blockTimeLength, // Block Time Length
-        ...Buffer.from(blockTimeHex, "hex"), // Block Time
+        contractAddressLength,
+        ...Buffer.from(contractAddressHex, "hex"),
+        cryptoAddressLength,
+        ...Buffer.from(cryptoAddressHex, "hex"),
+        userAddressLength,
+        ...Buffer.from(userAddressHex, "hex"),
+        amountLength,
+        ...Buffer.from(amountHex, "hex"),
+        hashLength,
+        ...Buffer.from(hashHex, "hex"),
+        heightLength,
+        ...Buffer.from(heightHex, "hex"),
+        blockTimeLength,
+        ...Buffer.from(blockTimeHex, "hex"),
       ]);
 
-      // 打印构建过程中的各个部分
-      console.log(`LOG  Contract Address Hex: ${contractAddressHex}`);
-      console.log(`LOG  Crypto Address Hex: ${cryptoAddressHex}`);
-      console.log(`LOG  User Address Hex: ${userAddressHex}`);
-      console.log(`LOG  Amount Hex: ${amountHex}`);
-      console.log(`LOG  Hash Hex: ${hashHex}`);
-      console.log(`LOG  Height Hex: ${heightHex}`);
-      console.log(`LOG  Block Time Hex: ${blockTimeHex}`);
-      console.log(`LOG  Command Data Length: ${commandData.length}`);
+      // 打印命令数据
       console.log(
-        `LOG  Command Data Hex: ${Array.from(commandData)
+        `Command Data: ${Array.from(commandData)
           .map((byte) => byte.toString(16).padStart(2, "0"))
           .join(" ")}`
       );
@@ -467,13 +479,7 @@ function TransactionsScreen() {
         0x0a, // 结束符
       ]);
 
-      // 打印最终的命令
-      console.log(
-        `LOG  最终命令: ${Array.from(finalCommand)
-          .map((byte) => byte.toString(16).padStart(2, "0"))
-          .join(" ")}`
-      );
-
+      // 将命令转换为Base64编码
       const base64Command = base64.fromByteArray(finalCommand);
 
       // 发送命令到设备
