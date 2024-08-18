@@ -373,10 +373,15 @@ function TransactionsScreen() {
       const deviceID = verifiedDevices[0];
       const device = await bleManagerRef.current.connectToDevice(deviceID);
 
+      // 确保设备已连接并发现所有服务和特性
       await device.connect();
       await device.discoverAllServicesAndCharacteristics();
+      if (!device.isConnected) {
+        console.error("设备未连接，无法发送交易命令");
+        return;
+      }
 
-      // 确保设备完全连接后，延迟一小段时间再发送命令
+      // 让设备准备好
       await new Promise((resolve) => setTimeout(resolve, 500));
 
       let crypto = initialAdditionalCryptos.find(
@@ -389,6 +394,8 @@ function TransactionsScreen() {
 
       if (!crypto || !crypto.address) {
         console.error("未找到有效的加密货币或地址缺失");
+        console.error("crypto:", crypto);
+        console.error("userAddress:", userAddress);
         return;
       }
 
@@ -418,23 +425,23 @@ function TransactionsScreen() {
         return;
       }
 
-      const contractAddressBuffer = Buffer.from(contractAddress, "utf-8");
-      const cryptoAddressBuffer = Buffer.from(crypto.address, "utf-8");
-      const userAddressBuffer = Buffer.from(userAddress, "utf-8");
-      const amountBuffer = Buffer.from(amount.toString(), "utf-8");
-      const hashBuffer = Buffer.from(hash, "utf-8");
-      const heightBuffer = Buffer.alloc(4);
-
-      // 处理 blockTime 时间戳，拆分为高 32 位和低 32 位
-      const blockTimeHigh = Math.floor(blockTime / 0x100000000); // 高 32 位
-      const blockTimeLow = blockTime & 0xffffffff; // 低 32 位
-      const blockTimeBuffer = Buffer.alloc(8);
-      blockTimeBuffer.writeUInt32BE(blockTimeHigh, 0); // 写入高 32 位
-      blockTimeBuffer.writeUInt32BE(blockTimeLow, 4); // 写入低 32 位
-
-      heightBuffer.writeUInt32BE(parseInt(height, 10));
-
-      const derivationPathBuffer = Buffer.from(derivationPath, "utf-8");
+      const contractAddressHex = Buffer.from(contractAddress, "utf-8").toString(
+        "hex"
+      );
+      const cryptoAddressHex = Buffer.from(crypto.address, "utf-8").toString(
+        "hex"
+      );
+      const userAddressHex = Buffer.from(userAddress, "utf-8").toString("hex");
+      const amountHex = Buffer.from(amount.toString(), "utf-8").toString("hex");
+      const hashHex = Buffer.from(hash, "utf-8").toString("hex");
+      const heightHex = parseInt(height, 10).toString(16).padStart(8, "0");
+      const blockTimeHex = parseInt(blockTime, 10)
+        .toString(16)
+        .padStart(16, "0");
+      const derivationPathHex = Buffer.from(derivationPath, "utf-8").toString(
+        "hex"
+      );
+      const derivationPathLength = derivationPathHex.length / 2;
 
       // 打印原始值
       console.log(`Contract Address: ${contractAddress}`);
@@ -447,28 +454,23 @@ function TransactionsScreen() {
       console.log(`Derivation Path: ${derivationPath}`);
 
       // 打印十六进制值
-      console.log(
-        `Contract Address Hex: ${contractAddressBuffer.toString("hex")}`
-      );
-      console.log(`Crypto Address Hex: ${cryptoAddressBuffer.toString("hex")}`);
-      console.log(`User Address Hex: ${userAddressBuffer.toString("hex")}`);
-      console.log(`Amount Hex: ${amountBuffer.toString("hex")}`);
-      console.log(`Hash Hex: ${hashBuffer.toString("hex")}`);
-      console.log(`Height Hex: ${heightBuffer.toString("hex")}`);
-      console.log(`Block Time Hex: ${blockTimeBuffer.toString("hex")}`);
-      console.log(
-        `Derivation Path Hex: ${derivationPathBuffer.toString("hex")}`
-      );
+      console.log(`Contract Address Hex: ${contractAddressHex}`);
+      console.log(`Crypto Address Hex: ${cryptoAddressHex}`);
+      console.log(`User Address Hex: ${userAddressHex}`);
+      console.log(`Amount Hex: ${amountHex}`);
+      console.log(`Hash Hex: ${hashHex}`);
+      console.log(`Height Hex: ${heightHex}`);
+      console.log(`Block Time Hex: ${blockTimeHex}`);
+      console.log(`Derivation Path Hex: ${derivationPathHex}`);
 
       // 计算并打印各部分长度
-      const contractAddressLength = contractAddressBuffer.length;
-      const cryptoAddressLength = cryptoAddressBuffer.length;
-      const userAddressLength = userAddressBuffer.length;
-      const amountLength = amountBuffer.length;
-      const hashLength = hashBuffer.length;
-      const heightLength = heightBuffer.length;
-      const blockTimeLength = blockTimeBuffer.length;
-      const derivationPathLength = derivationPathBuffer.length;
+      const contractAddressLength = contractAddress.length;
+      const cryptoAddressLength = crypto.address.length;
+      const userAddressLength = userAddress.length;
+      const amountLength = amountHex.length / 2;
+      const hashLength = hashHex.length / 2;
+      const heightLength = heightHex.length / 2;
+      const blockTimeLength = blockTimeHex.length / 2;
 
       console.log(`Contract Address Length: ${contractAddressLength}`);
       console.log(`Crypto Address Length: ${cryptoAddressLength}`);
@@ -479,49 +481,35 @@ function TransactionsScreen() {
       console.log(`Block Time Length: ${blockTimeLength}`);
       console.log(`Derivation Path Length: ${derivationPathLength}`);
 
-      // 计算总数据长度
-      const totalDataLength =
-        1 + // 头字节
-        1 +
-        contractAddressBuffer.length +
-        1 +
-        cryptoAddressBuffer.length +
-        1 +
-        userAddressBuffer.length +
-        1 +
-        amountBuffer.length +
-        1 +
-        hashBuffer.length +
-        heightBuffer.length +
-        blockTimeBuffer.length +
-        derivationPathBuffer.length;
-
-      const commandData = Buffer.concat([
-        Buffer.from([0xf8]),
-        Buffer.from([contractAddressBuffer.length]),
-        contractAddressBuffer,
-        Buffer.from([cryptoAddressBuffer.length]),
-        cryptoAddressBuffer,
-        Buffer.from([userAddressBuffer.length]),
-        userAddressBuffer,
-        Buffer.from([amountBuffer.length]),
-        amountBuffer,
-        Buffer.from([hashBuffer.length]),
-        hashBuffer,
-        heightBuffer,
-        blockTimeBuffer,
-        Buffer.from([derivationPathBuffer.length]),
-        derivationPathBuffer,
-        Buffer.from([totalDataLength]),
+      // 构建命令数据
+      const commandData = new Uint8Array([
+        0xf8, // 头字节
+        contractAddressLength,
+        ...Buffer.from(contractAddressHex, "hex"),
+        cryptoAddressLength,
+        ...Buffer.from(cryptoAddressHex, "hex"),
+        userAddressLength,
+        ...Buffer.from(userAddressHex, "hex"),
+        amountLength,
+        ...Buffer.from(amountHex, "hex"),
+        hashLength,
+        ...Buffer.from(hashHex, "hex"),
+        heightLength,
+        ...Buffer.from(heightHex, "hex"),
+        blockTimeLength,
+        ...Buffer.from(blockTimeHex, "hex"),
+        derivationPathLength,
+        ...Buffer.from(derivationPathHex, "hex"),
       ]);
 
+      // 打印命令数据
       console.log(
-        `Command Data (bytes): ${commandData
-          .toString("hex")
-          .match(/.{1,2}/g)
+        `Command Data (bytes): ${Array.from(commandData)
+          .map((byte) => byte.toString(16).padStart(2, "0"))
           .join(" ")}`
       );
 
+      // 计算CRC并添加到命令末尾
       const crc = crc16Modbus(commandData);
       const crcHighByte = (crc >> 8) & 0xff;
       const crcLowByte = crc & 0xff;
@@ -538,17 +526,17 @@ function TransactionsScreen() {
           .join(" ")}`
       );
 
+      // 发送命令
       const base64Command = base64.fromByteArray(finalCommand);
-
       await device.writeCharacteristicWithResponseForService(
         serviceUUID,
         writeCharacteristicUUID,
         base64Command
       );
 
-      console.log("数据已成功发送到设备:", base64Command);
+      console.log("签名交易命令已成功发送到设备:", base64Command);
     } catch (error) {
-      console.error("发送数据到 BLE 设备时出错:", error);
+      console.error("发送交易数据到 BLE 设备时出错:", error);
     }
   };
 
