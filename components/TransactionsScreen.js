@@ -551,14 +551,16 @@ function TransactionsScreen() {
           .join(" ")}`
       );
 
+      // 将命令转换为Base64编码并发送
+      const base64Command = Buffer.from(finalCommand).toString("base64");
       // 发送十六进制命令到设备
       await device.writeCharacteristicWithResponseForService(
         serviceUUID,
         writeCharacteristicUUID,
-        Buffer.from(finalCommand).toString("hex") // 将 Uint8Array 转换为十六进制字符串
+        base64Command
       );
-
       console.log("数据已成功发送到设备:", finalCommand);
+      console.log("数据已成功发送到设备:", base64Command);
     } catch (error) {
       console.error("发送数据到 BLE 设备时出错:", error);
     }
