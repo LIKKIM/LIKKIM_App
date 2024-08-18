@@ -482,25 +482,43 @@ function TransactionsScreen() {
       console.log(`Block Time Length: ${blockTimeLength}`);
       console.log(`Derivation Path Length: ${derivationPathLength}`);
 
+      // 计算总数据长度
+      const totalDataLength =
+        1 + // 头字节
+        1 +
+        contractAddressHex.length / 2 +
+        1 +
+        cryptoAddressHex.length / 2 +
+        1 +
+        userAddressHex.length / 2 +
+        1 +
+        amountHex.length / 2 +
+        hashHex.length / 2 +
+        heightHex.length / 2 +
+        blockTimeHex.length / 2 +
+        1 +
+        derivationPathLength;
+
+      console.log(`Total Data Length: ${totalDataLength}`);
+
       // 构建命令数据
       const commandData = new Uint8Array([
         0xf8, // 头字节
-        contractAddressLength,
+        contractAddressHex.length / 2,
         ...Buffer.from(contractAddressHex, "hex"),
-        cryptoAddressLength,
+        cryptoAddressHex.length / 2,
         ...Buffer.from(cryptoAddressHex, "hex"),
-        userAddressLength,
+        userAddressHex.length / 2,
         ...Buffer.from(userAddressHex, "hex"),
-        amountLength,
+        amountHex.length / 2,
         ...Buffer.from(amountHex, "hex"),
-        hashLength,
+        hashHex.length / 2,
         ...Buffer.from(hashHex, "hex"),
-        heightLength,
         ...Buffer.from(heightHex, "hex"),
-        blockTimeLength,
         ...Buffer.from(blockTimeHex, "hex"),
         derivationPathLength,
         ...Buffer.from(derivationPathHex, "hex"),
+        totalDataLength, // 总长度
       ]);
 
       // 打印命令数据
@@ -529,6 +547,8 @@ function TransactionsScreen() {
 
       // 发送命令
       const base64Command = base64.fromByteArray(finalCommand);
+      console.log(`Base64 Command: ${base64Command}`);
+
       await device.writeCharacteristicWithResponseForService(
         serviceUUID,
         writeCharacteristicUUID,
@@ -538,6 +558,11 @@ function TransactionsScreen() {
       console.log("签名交易命令已成功发送到设备:", base64Command);
     } catch (error) {
       console.error("发送交易数据到 BLE 设备时出错:", error);
+
+      // 检查是否设备断开连接或其他问题
+      if (error.message.includes("is not connected")) {
+        console.error("设备可能已断开连接，或未正确连接。");
+      }
     }
   };
 
