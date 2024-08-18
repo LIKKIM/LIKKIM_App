@@ -37,9 +37,6 @@ const serviceUUID = "0000FFE0-0000-1000-8000-00805F9B34FB";
 const writeCharacteristicUUID = "0000FFE2-0000-1000-8000-00805F9B34FB";
 
 function TransactionsScreen() {
-  console.log("initialAdditionalCryptos:", initialAdditionalCryptos);
-  console.log("additionalCryptos:", additionalCryptos);
-
   const [receivedVerificationCode, setReceivedVerificationCode] = useState("");
   const { t } = useTranslation();
   const { isDarkMode } = useContext(DarkModeContext);
@@ -55,6 +52,9 @@ function TransactionsScreen() {
     verifiedDevices,
     setVerifiedDevices,
   } = useContext(CryptoContext);
+  console.log("initialAdditionalCryptos:", initialAdditionalCryptos);
+  console.log("additionalCryptos:", additionalCryptos);
+
   const TransactionsScreenStyle = TransactionsScreenStyles(isDarkMode);
   const addressIcon = isDarkMode ? "#ffffff" : "#676776";
   const [modalVisible, setModalVisible] = useState(false);
@@ -385,9 +385,14 @@ function TransactionsScreen() {
       }
 
       // 动态查找加密货币信息
-      const crypto = initialAdditionalCryptos.find(
+      let crypto = initialAdditionalCryptos.find(
         (c) => c.name === cryptoName || c.shortName === cryptoName
       );
+
+      // 如果 initialAdditionalCryptos 中未找到，加在 usdtCrypto 中查找
+      if (!crypto && usdtCrypto.shortName === cryptoName) {
+        crypto = usdtCrypto;
+      }
 
       if (!crypto) {
         console.error(`未找到加密货币: ${cryptoName}`);

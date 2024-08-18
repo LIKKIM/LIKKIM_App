@@ -16,6 +16,8 @@ import {
   CryptoProvider,
   CryptoContext,
   DarkModeContext,
+  initialAdditionalCryptos,
+  usdtCrypto,
 } from "./components/CryptoContext";
 import i18n from "./config/i18n";
 import { useTranslation } from "react-i18next";
