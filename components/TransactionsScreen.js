@@ -373,10 +373,8 @@ function TransactionsScreen() {
       const deviceID = verifiedDevices[0];
       const device = await bleManagerRef.current.connectToDevice(deviceID);
 
-      if (!(await device.isConnected())) {
-        await device.connect();
-        await device.discoverAllServicesAndCharacteristics();
-      }
+      await device.connect();
+      await device.discoverAllServicesAndCharacteristics();
 
       let crypto = initialAdditionalCryptos.find(
         (c) => c.name === cryptoName || c.shortName === cryptoName
