@@ -538,7 +538,7 @@ function TransactionsScreen() {
           .join(" ")}`
       );
 
-      const base64Command = finalCommand.toString("base64");
+      const base64Command = base64.fromByteArray(finalCommand);
 
       await device.writeCharacteristicWithResponseForService(
         serviceUUID,
