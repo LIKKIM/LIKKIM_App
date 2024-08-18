@@ -394,6 +394,9 @@ function TransactionsScreen() {
       // 初始化 contractAddress
       const contractAddress = "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t";
 
+      // 添加派生路径
+      const derivationPath = "m/44'/195'/0'/0/0";
+
       // 检查所有必要的变量
       if (
         !contractAddress ||
@@ -402,7 +405,8 @@ function TransactionsScreen() {
         !amount ||
         !hash ||
         !height ||
-        !blockTime
+        !blockTime ||
+        !derivationPath // 确保派生路径不为空
       ) {
         console.error("参数缺失：", {
           contractAddress,
@@ -412,18 +416,10 @@ function TransactionsScreen() {
           hash,
           height,
           blockTime,
+          derivationPath,
         });
         return;
       }
-
-      // 打印原始值
-      console.log(`Contract Address: ${contractAddress}`);
-      console.log(`Crypto Address: ${crypto.address}`);
-      console.log(`User Address: ${userAddress}`);
-      console.log(`Amount: ${amount}`);
-      console.log(`Hash: ${hash}`);
-      console.log(`Height: ${height}`);
-      console.log(`Block Time: ${blockTime}`);
 
       // 转换为十六进制格式
       const contractAddressHex = Buffer.from(contractAddress, "utf-8").toString(
@@ -440,6 +436,22 @@ function TransactionsScreen() {
         .toString(16)
         .padStart(16, "0");
 
+      // 新增派生路径的十六进制格式和长度
+      const derivationPathHex = Buffer.from(derivationPath, "utf-8").toString(
+        "hex"
+      );
+      const derivationPathLength = derivationPathHex.length / 2;
+
+      // 打印原始值
+      console.log(`Contract Address: ${contractAddress}`);
+      console.log(`Crypto Address: ${crypto.address}`);
+      console.log(`User Address: ${userAddress}`);
+      console.log(`Amount: ${amount}`);
+      console.log(`Hash: ${hash}`);
+      console.log(`Height: ${height}`);
+      console.log(`Block Time: ${blockTime}`);
+      console.log(`Derivation Path: ${derivationPath}`);
+
       // 打印十六进制值
       console.log(`Contract Address Hex: ${contractAddressHex}`);
       console.log(`Crypto Address Hex: ${cryptoAddressHex}`);
@@ -448,6 +460,7 @@ function TransactionsScreen() {
       console.log(`Hash Hex: ${hashHex}`);
       console.log(`Height Hex: ${heightHex}`);
       console.log(`Block Time Hex: ${blockTimeHex}`);
+      console.log(`Derivation Path Hex: ${derivationPathHex}`);
 
       // 计算并打印各部分长度
       const contractAddressLength = contractAddress.length;
@@ -465,6 +478,7 @@ function TransactionsScreen() {
       console.log(`Hash Length: ${hashLength}`);
       console.log(`Height Length: ${heightLength}`);
       console.log(`Block Time Length: ${blockTimeLength}`);
+      console.log(`Derivation Path Length: ${derivationPathLength}`);
 
       // 构建命令数据
       const commandData = new Uint8Array([
@@ -483,6 +497,8 @@ function TransactionsScreen() {
         ...Buffer.from(heightHex, "hex"),
         blockTimeLength,
         ...Buffer.from(blockTimeHex, "hex"),
+        derivationPathLength, // 路径的长度
+        ...Buffer.from(derivationPathHex, "hex"), // 路径的16进制表示
       ]);
 
       // 打印命令数据
