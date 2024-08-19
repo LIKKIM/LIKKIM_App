@@ -189,7 +189,7 @@ function AppContent({
           name="Wallet"
           component={WalletScreen}
           options={({ route, navigation }) => {
-            const cryptoCards = route.params?.cryptoCards || []; // 获取 cryptoCards
+            const cryptoCards = route.params?.cryptoCards || [{}];
 
             return {
               headerRight: () => {
