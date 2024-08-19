@@ -45,13 +45,13 @@ i18n
           "Enter the recipient's address:": "Enter the recipient's address:",
           "Enter Address": "Enter Address",
           Submit: "Submit",
-          Cancel: "Cancel",
+
           "Choose the cryptocurrency to send:":
             "Choose the cryptocurrency to send:",
           "Choose the cryptocurrency to receive:":
             "Choose the cryptocurrency to receive:",
           "Address for": "Address for",
-          Close: "Close",
+
           Wallet: "Wallet",
           Transactions: "Transactions",
           "My Cold Wallet": "My LIKKIM",
@@ -94,7 +94,6 @@ i18n
           "Use spaces between words": "Use spaces between words",
           "Import Recovery Phrase": "Import Recovery Phrase",
           Version: "Version",
-          "Only you can unlock your wallet": "Only you can unlock your wallet",
           "Assets can only be sent within the same chain.":
             "Assets can only be sent within the same chain.",
           "Firmware Update": "Firmware Update",
@@ -157,7 +156,7 @@ i18n
           "Enter the recipient's address:": "输入接收者的地址:",
           "Enter Address": "输入地址",
           Submit: "提交",
-          Cancel: "取消",
+
           "Choose the cryptocurrency to send:": "选择要发送的加密货币:",
           "Choose the cryptocurrency to receive:": "选择要接收的加密货币:",
           "Address for": "地址",
@@ -611,7 +610,7 @@ i18n
           "Enter the recipient's address:": "أدخل عنوان المستلم:",
           "Enter Address": "أدخل العنوان",
           Submit: "إرسال",
-          Cancel: "إلغاء",
+
           "Choose the cryptocurrency to send:": "اختر العملة الرقمية لإرسالها:",
           "Choose the cryptocurrency to receive:":
             "اختر العملة الرقمية للاستلام:",
@@ -1183,7 +1182,7 @@ i18n
             "Digite o endereço do destinatário:",
           "Enter Address": "Digite o endereço",
           Submit: "Enviar",
-          Cancel: "Cancelar",
+
           "Choose the cryptocurrency to send:":
             "Escolha a criptomoeda para enviar:",
           "Choose the cryptocurrency to receive:":
@@ -1301,7 +1300,7 @@ i18n
             "Inserisci l'indirizzo del destinatario:",
           "Enter Address": "Inserisci l'indirizzo",
           Submit: "Invia",
-          Cancel: "Annulla",
+
           "Choose the cryptocurrency to send:":
             "Scegli la criptovaluta da inviare:",
           "Choose the cryptocurrency to receive:":
@@ -1419,7 +1418,7 @@ i18n
             "Geben Sie die Adresse des Empfängers ein:",
           "Enter Address": "Adresse eingeben",
           Submit: "Einreichen",
-          Cancel: "Abbrechen",
+
           "Choose the cryptocurrency to send:":
             "Wählen Sie die zu sendende Kryptowährung:",
           "Choose the cryptocurrency to receive:":
@@ -1537,7 +1536,7 @@ i18n
           "Enter the recipient's address:": "प्राप्तकर्ता का पता दर्ज करें:",
           "Enter Address": "पता दर्ज करें",
           Submit: "जमा करें",
-          Cancel: "रद्द करें",
+
           "Choose the cryptocurrency to send:":
             "भेजने के लिए क्रिप्टोकरेंसी चुनें:",
           "Choose the cryptocurrency to receive:":
@@ -1655,7 +1654,7 @@ i18n
             "Хүлээн авагчийн хаягийг оруулна уу:",
           "Enter Address": "Хаяг оруулах",
           Submit: "Илгээх",
-          Cancel: "Цуцлах",
+
           "Choose the cryptocurrency to send:":
             "Илгээх криптовалютыг сонгоно уу:",
           "Choose the cryptocurrency to receive:":
@@ -1770,7 +1769,7 @@ i18n
           "Enter the recipient's address:": "ป้อนที่อยู่ผู้รับ:",
           "Enter Address": "ป้อนที่อยู่",
           Submit: "ส่ง",
-          Cancel: "ยกเลิก",
+
           "Choose the cryptocurrency to send:": "เลือกสกุลเงินคริปโตที่จะส่ง:",
           "Choose the cryptocurrency to receive:":
             "เลือกสกุลเงินคริปโตที่จะรับ:",
@@ -1883,7 +1882,7 @@ i18n
           "Enter the recipient's address:": "Введіть адресу одержувача:",
           "Enter Address": "Введіть адресу",
           Submit: "Відправити",
-          Cancel: "Скасувати",
+
           "Choose the cryptocurrency to send:":
             "Виберіть криптовалюту для відправки:",
           "Choose the cryptocurrency to receive:":
@@ -1995,7 +1994,7 @@ i18n
           "Enter the recipient's address:": "Nhập địa chỉ người nhận:",
           "Enter Address": "Nhập địa chỉ",
           Submit: "Gửi đi",
-          Cancel: "Hủy bỏ",
+
           "Choose the cryptocurrency to send:":
             "Chọn loại tiền điện tử để gửi:",
           "Choose the cryptocurrency to receive:":
@@ -2110,7 +2109,7 @@ i18n
           "Enter the recipient's address:": "Masukkan alamat penerima:",
           "Enter Address": "Masukkan alamat",
           Submit: "Kirim",
-          Cancel: "Batalkan",
+
           "Choose the cryptocurrency to send:":
             "Pilih cryptocurrency untuk dikirim:",
           "Choose the cryptocurrency to receive:":
@@ -2228,7 +2227,7 @@ i18n
           "Enter the recipient's address:": "Ilagay ang address ng tatanggap:",
           "Enter Address": "Ilagay ang Address",
           Submit: "Ipasa",
-          Cancel: "Kanselahin",
+
           "Choose the cryptocurrency to send:":
             "Piliin ang cryptocurrency na ipapadala:",
           "Choose the cryptocurrency to receive:":
@@ -2347,7 +2346,7 @@ i18n
           "Enter the recipient's address:": "প্রাপকের ঠিকানা লিখুন:",
           "Enter Address": "ঠিকানা লিখুন",
           Submit: "জমা দিন",
-          Cancel: "বাতিল করুন",
+
           "Choose the cryptocurrency to send:":
             "পাঠানোর জন্য ক্রিপ্টোকারেন্সি নির্বাচন করুন:",
           "Choose the cryptocurrency to receive:":
