@@ -8,7 +8,7 @@ const WalletScreenStyles = (isDarkMode) => {
   const secondCardTextColor = isDarkMode ? "#fff" : "#fff";
   const backgroundColor = isDarkMode ? "#121212" : "#f5f5f5";
 
-  const tagColor = isDarkMode ? "##8E80F040" : "##8E80F040";
+  const tagColor = isDarkMode ? "#8E80F040" : "#8E80F040";
   const buttonBackgroundColor = isDarkMode ? "#6C6CF4" : "#E5E1E9";
   const shadowColor = isDarkMode ? "#101021" : "#101021";
   const cardBackgroundColor = isDarkMode ? "#484692" : "#E5E1E9";
