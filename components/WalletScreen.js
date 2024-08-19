@@ -154,6 +154,51 @@ function WalletScreen({ route, navigation }) {
   };
 
   const [bleVisible, setBleVisible] = useState(false); // New state for Bluetooth modal
+  /*   useEffect(() => {
+    const postTest = async () => {
+      try {
+        const response = await fetch(
+          "https://bt.likkim.com/meridian/address/queryTokenBalance",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              chainShortName: "TRON",
+              address: "TGjheziueGkgHrVhfXyVtBwsjFBp2NyZAq",
+              protocolType: "token_20",
+            }),
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log("Response Data:", data);
+
+        // 展开并打印 tokenList 数组的内容
+        if (
+          data &&
+          data.data &&
+          data.data.length > 0 &&
+          data.data[0].tokenList
+        ) {
+          const tokenList = data.data[0].tokenList;
+          console.log("Token List:", tokenList);
+        } else {
+          console.log("No tokenList found in response data.");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    // 调用 postTest 函数进行测试
+    postTest();
+  }, []); */
 
   useEffect(() => {
     if (!bleVisible && selectedDevice) {
