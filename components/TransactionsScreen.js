@@ -395,8 +395,6 @@ function TransactionsScreen() {
 
       if (!crypto || !crypto.address) {
         console.error("未找到有效的加密货币或地址缺失");
-        console.error("crypto:", crypto);
-        console.error("userAddress:", userAddress);
         return;
       }
 
@@ -547,17 +545,26 @@ function TransactionsScreen() {
           .join(" ")}`
       );
 
-      // 发送命令
-      const base64Command = base64.fromByteArray(finalCommand);
-      console.log(`Base64 Command: ${base64Command}`);
+      // 分割命令到多个小包
+      const chunkSize = 20; // 20 字节是常见的 BLE 数据包大小限制
+      for (let i = 0; i < finalCommand.length; i += chunkSize) {
+        const chunk = finalCommand.slice(i, i + chunkSize);
+        const base64Chunk = base64.fromByteArray(chunk);
 
-      await device.writeCharacteristicWithResponseForService(
-        serviceUUID,
-        writeCharacteristicUUID,
-        base64Command
-      );
+        console.log(`Sending chunk (base64): ${base64Chunk}`);
 
-      console.log("签名交易命令已成功发送到设备:", base64Command);
+        // 逐个发送每个包
+        await device.writeCharacteristicWithResponseForService(
+          serviceUUID,
+          writeCharacteristicUUID,
+          base64Chunk
+        );
+
+        // 让设备有时间处理每个包
+        await new Promise((resolve) => setTimeout(resolve, 100));
+      }
+
+      console.log("签名交易命令已成功发送到设备");
     } catch (error) {
       console.error("发送交易数据到 BLE 设备时出错:", error);
 
