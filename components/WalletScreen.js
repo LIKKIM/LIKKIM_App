@@ -181,6 +181,10 @@ function WalletScreen({ route, navigation }) {
       };
     }
   }, []);
+  useEffect(() => {
+    // 当 cryptoCards 状态变化时，更新 route.params
+    navigation.setParams({ cryptoCards });
+  }, [cryptoCards]);
 
   const handleDevicePress = async (device) => {
     // 检查是否传递了有效的设备对象

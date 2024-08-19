@@ -194,36 +194,49 @@ function AppContent({
           <Tab.Screen
             name="Wallet"
             component={WalletScreen}
-            options={({ route, navigation }) => ({
-              headerRight: () => {
-                const isModalVisible = route.params?.isModalVisible;
-                const showAddModal = route.params?.showAddModal;
-                return (
-                  <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    {isModalVisible ? (
-                      <TouchableOpacity
-                        style={{ paddingRight: 20 }}
-                        onPress={() => {
-                          setHeaderDropdownVisible(true);
-                          setSelectedCardName(route.params?.selectedCardName);
-                        }}
-                      >
-                        <Icon name="settings" size={24} color={iconColor} />
-                      </TouchableOpacity>
-                    ) : (
-                      <TouchableOpacity
-                        onPress={() =>
-                          navigation.navigate("Wallet", { showAddModal: true })
-                        }
-                        style={{ paddingRight: 20 }}
-                      >
-                        <Icon name="add" size={24} color={iconColor} />
-                      </TouchableOpacity>
-                    )}
-                  </View>
-                );
-              },
-            })}
+            options={({ route, navigation }) => {
+              const cryptoCards = route.params?.cryptoCards || []; // 获取 cryptoCards
+
+              return {
+                headerRight: () => {
+                  const isModalVisible = route.params?.isModalVisible;
+
+                  // 判断是否显示 "+" 图标：当有数字货币卡片时显示
+                  const showAddIcon = cryptoCards.length > 0;
+
+                  return (
+                    <View
+                      style={{ flexDirection: "row", alignItems: "center" }}
+                    >
+                      {isModalVisible ? (
+                        <TouchableOpacity
+                          style={{ paddingRight: 20 }}
+                          onPress={() => {
+                            setHeaderDropdownVisible(true);
+                            setSelectedCardName(route.params?.selectedCardName);
+                          }}
+                        >
+                          <Icon name="settings" size={24} color={iconColor} />
+                        </TouchableOpacity>
+                      ) : (
+                        showAddIcon && (
+                          <TouchableOpacity
+                            onPress={() =>
+                              navigation.navigate("Wallet", {
+                                showAddModal: true,
+                              })
+                            }
+                            style={{ paddingRight: 20 }}
+                          >
+                            <Icon name="add" size={24} color={iconColor} />
+                          </TouchableOpacity>
+                        )
+                      )}
+                    </View>
+                  );
+                },
+              };
+            }}
           />
           <Tab.Screen name="Transactions" component={TransactionsScreen} />
           <Tab.Screen name="My Cold Wallet" component={MyColdWalletScreen} />
