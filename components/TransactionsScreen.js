@@ -563,7 +563,8 @@ function TransactionsScreen() {
         // 让设备有时间处理每个包
         await new Promise((resolve) => setTimeout(resolve, 100));
       }
-
+      // 提示用户在 LIKKIM 设备上确认交易签名
+      alert("Please confirm the transaction on your LIKKIM device.");
       console.log("签名交易命令已成功发送到设备");
     } catch (error) {
       console.error("发送交易数据到 BLE 设备时出错:", error);
