@@ -7,7 +7,8 @@ const WalletScreenStyles = (isDarkMode) => {
   const secondTextColor = isDarkMode ? "#ddd" : "#676776";
   const secondCardTextColor = isDarkMode ? "#fff" : "#fff";
   const backgroundColor = isDarkMode ? "#121212" : "#f5f5f5";
-  // const modalBackgroundColor = isDarkMode ? "#24234C" : "#ffffff";
+
+  const tagColor = isDarkMode ? "##8E80F040" : "##8E80F040";
   const buttonBackgroundColor = isDarkMode ? "#6C6CF4" : "#E5E1E9";
   const shadowColor = isDarkMode ? "#101021" : "#101021";
   const cardBackgroundColor = isDarkMode ? "#484692" : "#E5E1E9";
@@ -20,6 +21,25 @@ const WalletScreenStyles = (isDarkMode) => {
     ? "#24234C80"
     : "#FFFFFF80";
   return StyleSheet.create({
+    cardName: {
+      fontSize: 16,
+      fontWeight: "bold",
+    },
+
+    chainContainer: {
+      backgroundColor: tagColor,
+      alignSelf: "flex-start", // 自动适应内容宽度
+      paddingHorizontal: 6, // 内边距，增加按钮左右的间距
+      paddingVertical: 2, // 内边距，增加按钮上下的间距
+      borderRadius: 6, // 圆角边框，使其看起来像按钮
+      marginLeft: 4,
+    },
+
+    chainText: {
+      fontSize: 12, // 字体大小与 cardName 一致
+      fontWeight: "bold", // 字体粗细与 cardName 一致
+    },
+
     disconnectButton: {
       marginLeft: 10,
       paddingVertical: 5,
@@ -308,17 +328,7 @@ const WalletScreenStyles = (isDarkMode) => {
       width: 30,
       height: 30,
     },
-    cardName: {
-      position: "absolute",
-      top: 25,
-      left: 60,
-      color: "#fff",
-      fontSize: 16,
-      fontWeight: "bold",
-      //   textShadowColor: "rgba(0, 0, 0, 0.8)",
-      //   textShadowOffset: { width: 0, height: 1 },
-      //  textShadowRadius: 3,
-    },
+
     cardShortName: {
       position: "absolute",
       top: 56,

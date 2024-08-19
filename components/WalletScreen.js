@@ -1190,14 +1190,35 @@ function WalletScreen({ route, navigation }) {
                     source={card.icon}
                     style={WalletScreenStyle.cardIcon}
                   />
-                  <Text
-                    style={[
-                      WalletScreenStyle.cardName,
-                      isBlackText && { color: "#121518" },
-                    ]}
+                  <View
+                    style={{
+                      position: "absolute",
+                      top: 25,
+                      left: 60,
+                      flexDirection: "row",
+                      alignItems: "center",
+                    }}
                   >
-                    {card.name} ({card.chain})
-                  </Text>
+                    <Text
+                      style={[
+                        WalletScreenStyle.cardName,
+                        isBlackText ? { color: "#333" } : { color: "#eee" }, // 根据 isBlackText 动态设置颜色
+                      ]}
+                    >
+                      {card.name}
+                    </Text>
+                    <View style={WalletScreenStyle.chainContainer}>
+                      <Text
+                        style={[
+                          WalletScreenStyle.chainText,
+                          isBlackText ? { color: "#333" } : { color: "#eee" }, // 根据 isBlackText 动态设置颜色
+                        ]}
+                      >
+                        {card.chain}
+                      </Text>
+                    </View>
+                  </View>
+
                   <Text
                     style={[
                       WalletScreenStyle.cardShortName,
