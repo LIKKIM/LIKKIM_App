@@ -256,8 +256,12 @@ export const CryptoProvider = ({ children }) => {
 
   // 切换锁屏状态
   const toggleScreenLock = async (enabled) => {
+    setIsAppLaunching(false); // 先设置 isAppLaunching 为 false
     setIsScreenLockEnabled(enabled);
-    await AsyncStorage.setItem("screenLockEnabled", JSON.stringify(enabled));
+    await AsyncStorage.multiSet([
+      ["screenLockEnabled", JSON.stringify(enabled)],
+      ["isAppLaunching", JSON.stringify(false)], // 持久化 isAppLaunching 状态
+    ]);
   };
 
   // 更改锁屏密码

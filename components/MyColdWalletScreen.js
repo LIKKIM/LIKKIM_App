@@ -636,7 +636,7 @@ function MyColdWalletScreen() {
 
   const settingsOptions = [
     {
-      title: t("Enable Screen Lock 此功能开发中"),
+      title: t("Enable Screen Lock"),
       icon: "lock-outline",
       onPress: () => handleScreenLockToggle(!isScreenLockEnabled),
       toggle: (
