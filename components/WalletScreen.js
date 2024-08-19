@@ -329,7 +329,7 @@ function WalletScreen({ route, navigation }) {
       console.error("发送启动命令失败", error);
     }
   };
-
+  // 创建钱包命令
   const sendCreateWalletCommand = async (device) => {
     try {
       // 检查 device 是否为一个有效的设备对象
@@ -393,8 +393,71 @@ function WalletScreen({ route, navigation }) {
       console.error("发送创建钱包命令失败:", error);
     }
   };
+  // 导入钱包命令
+  const sendImportWalletCommand = async (device) => {
+    try {
+      // 检查 device 是否为一个有效的设备对象
+      if (typeof device !== "object" || !device.isConnected) {
+        console.error("无效的设备对象：", device);
+        return;
+      }
 
-  const allWordsSelected = selectedWords.every((word) => word !== null);
+      console.log("发送导入钱包命令之前的设备对象:", device);
+
+      // 无论设备是否连接，均重新连接并发现服务和特性
+      await device.connect();
+      await device.discoverAllServicesAndCharacteristics();
+      console.log("设备已连接并发现所有服务。");
+
+      if (
+        typeof device.writeCharacteristicWithResponseForService !== "function"
+      ) {
+        console.error(
+          "设备没有 writeCharacteristicWithResponseForService 方法。"
+        );
+        return;
+      }
+
+      // 构建命令数据，未包含CRC校验码
+      const commandData = new Uint8Array([0xf4, 0x02, 0x0c, 0x04]);
+
+      // 使用CRC-16-Modbus算法计算CRC校验码
+      const crc = crc16Modbus(commandData);
+
+      // 将CRC校验码转换为高位在前，低位在后的格式
+      const crcHighByte = (crc >> 8) & 0xff;
+      const crcLowByte = crc & 0xff;
+
+      // 将原始命令数据、CRC校验码以及结束符组合成最终的命令
+      const finalCommand = new Uint8Array([
+        ...commandData,
+        crcLowByte,
+        crcHighByte,
+        0x0d, // 结束符
+        0x0a, // 结束符
+      ]);
+
+      // 将最终的命令转换为Base64编码
+      const base64Command = base64.fromByteArray(finalCommand);
+
+      console.log(
+        `最终命令: ${Array.from(finalCommand)
+          .map((byte) => byte.toString(16).padStart(2, "0"))
+          .join(" ")}`
+      );
+
+      // 发送导入钱包命令
+      await device.writeCharacteristicWithResponseForService(
+        serviceUUID, // BLE服务的UUID
+        writeCharacteristicUUID, // 可写特性的UUID
+        base64Command // 最终的命令数据的Base64编码
+      );
+      console.log("导入钱包命令已发送");
+    } catch (error) {
+      console.error("发送导入钱包命令失败:", error);
+    }
+  };
+
   // 点击 QR 代码图片时显示地址模态窗口
   const handleQRCodePress = (crypto) => {
     setSelectedCrypto(crypto.shortName);
@@ -764,8 +827,20 @@ function WalletScreen({ route, navigation }) {
 
   const handleImportWallet = () => {
     setAddWalletModalVisible(false);
-    setImportPhraseModalVisible(true);
+
+    if (verifiedDevices.length > 0) {
+      // 如果有已验证的设备，找到设备并显示导入模态框
+      const device = devices.find((d) => d.id === verifiedDevices[0]);
+      if (device) {
+        sendImportWalletCommand(device);
+        setImportingModalVisible(true);
+      }
+    } else {
+      // 如果没有已验证的设备，显示蓝牙模态框
+      setBleVisible(true);
+    }
   };
+
   const handleWalletTest = () => {
     setAddWalletModalVisible(false);
     setProcessModalVisible(true);
