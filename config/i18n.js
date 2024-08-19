@@ -117,6 +117,32 @@ i18n
           Prices: "Prices",
           History: "History",
           Unlock: "Unlock",
+          "Enter Password": "Enter Password",
+          "Enter current password": "Enter current password",
+          Next: "Next",
+          "Set New Password": "Set New Password",
+          "Verify Address": "Verify Address",
+          "Enter PIN to Connect": "Enter PIN to Connect",
+          "Use the PIN code to establish a secure connection with your LIKKIM hardware.":
+            "Use the PIN code to establish a secure connection with your LIKKIM hardware.",
+          "Enter PIN": "Enter PIN",
+          "Verification successful!": "Verification successful!",
+          "You can now safely use the device.":
+            "You can now safely use the device.",
+          "Verification failed!": "Verification failed!",
+          "The verification code you entered is incorrect. Please try again.":
+            "The verification code you entered is incorrect. Please try again.",
+          "Invalid address": "Invalid address",
+          "Detected Network": "Detected Network",
+          "Enter Amount": "Enter Amount",
+          "Enter the amount to send:": "Enter the amount to send:",
+          Back: "Back",
+          Amount: "Amount",
+          "Payment Address": "Payment Address",
+          "Recipient Address": "Recipient Address",
+          "Transaction Fee": "Transaction Fee",
+          Confirm: "Confirm",
+          "Transaction Confirmation": "Transaction Confirmation",
         },
       },
       zh: {
@@ -223,6 +249,31 @@ i18n
           Prices: "价格",
           History: "历史",
           Unlock: "解锁",
+          "Enter Password": "输入密码",
+          "Enter current password": "输入当前密码",
+          Next: "下一步",
+          "Set New Password": "设置新密码",
+          "Verify Address": "验证地址",
+          "Enter PIN to Connect": "输入PIN码以连接",
+          "Use the PIN code to establish a secure connection with your LIKKIM hardware.":
+            "使用PIN码与您的LIKKIM硬件建立安全连接。",
+          "Enter PIN": "输入PIN码",
+          "Verification successful!": "验证成功！",
+          "You can now safely use the device.": "您现在可以安全地使用设备。",
+          "Verification failed!": "验证失败！",
+          "The verification code you entered is incorrect. Please try again.":
+            "您输入的验证码不正确，请重试。",
+          "Invalid address": "地址无效",
+          "Detected Network": "检测到的网络",
+          "Enter Amount": "输入金额",
+          "Enter the amount to send:": "输入发送金额：",
+          Back: "返回",
+          Amount: "金额",
+          "Payment Address": "付款地址",
+          "Recipient Address": "收款人地址",
+          "Transaction Fee": "交易费",
+          Confirm: "确认",
+          "Transaction Confirmation": "交易确认",
         },
       },
       "zh-TW": {
@@ -333,6 +384,31 @@ i18n
           Prices: "價格",
           History: "歷史",
           Unlock: "解鎖",
+          "Enter Password": "輸入密碼",
+          "Enter current password": "輸入當前密碼",
+          Next: "下一步",
+          "Set New Password": "設置新密碼",
+          "Verify Address": "驗證地址",
+          "Enter PIN to Connect": "輸入PIN碼以連接",
+          "Use the PIN code to establish a secure connection with your LIKKIM hardware.":
+            "使用PIN碼與您的LIKKIM硬件建立安全連接。",
+          "Enter PIN": "輸入PIN碼",
+          "Verification successful!": "驗證成功！",
+          "You can now safely use the device.": "您現在可以安全地使用設備。",
+          "Verification failed!": "驗證失敗！",
+          "The verification code you entered is incorrect. Please try again.":
+            "您輸入的驗證碼不正確，請重試。",
+          "Invalid address": "地址無效",
+          "Detected Network": "檢測到的網絡",
+          "Enter Amount": "輸入金額",
+          "Enter the amount to send:": "輸入發送金額：",
+          Back: "返回",
+          Amount: "金額",
+          "Payment Address": "付款地址",
+          "Recipient Address": "收款人地址",
+          "Transaction Fee": "交易費",
+          Confirm: "確認",
+          "Transaction Confirmation": "交易確認",
         },
       },
       fr: {
@@ -450,6 +526,32 @@ i18n
           Prices: "Prix",
           History: "Historique",
           Unlock: "Déverrouiller",
+          "Enter Password": "Entrez le mot de passe",
+          "Enter current password": "Entrez le mot de passe actuel",
+          Next: "Suivant",
+          "Set New Password": "Définir un nouveau mot de passe",
+          "Verify Address": "Vérifier l'adresse",
+          "Enter PIN to Connect": "Entrez le PIN pour se connecter",
+          "Use the PIN code to establish a secure connection with your LIKKIM hardware.":
+            "Utilisez le code PIN pour établir une connexion sécurisée avec votre matériel LIKKIM.",
+          "Enter PIN": "Entrez le PIN",
+          "Verification successful!": "Vérification réussie !",
+          "You can now safely use the device.":
+            "Vous pouvez désormais utiliser l'appareil en toute sécurité.",
+          "Verification failed!": "La vérification a échoué !",
+          "The verification code you entered is incorrect. Please try again.":
+            "Le code de vérification que vous avez saisi est incorrect. Veuillez réessayer.",
+          "Invalid address": "Adresse invalide",
+          "Detected Network": "Réseau détecté",
+          "Enter Amount": "Entrez le montant",
+          "Enter the amount to send:": "Entrez le montant à envoyer :",
+          Back: "Retour",
+          Amount: "Montant",
+          "Payment Address": "Adresse de paiement",
+          "Recipient Address": "Adresse du destinataire",
+          "Transaction Fee": "Frais de transaction",
+          Confirm: "Confirmer",
+          "Transaction Confirmation": "Confirmation de transaction",
         },
       },
       es: {
@@ -566,6 +668,32 @@ i18n
           Prices: "Precios",
           History: "Historial",
           Unlock: "Desbloquear",
+          "Enter Password": "Ingrese la contraseña",
+          "Enter current password": "Ingrese la contraseña actual",
+          Next: "Siguiente",
+          "Set New Password": "Establecer nueva contraseña",
+          "Verify Address": "Verificar dirección",
+          "Enter PIN to Connect": "Ingrese el PIN para conectar",
+          "Use the PIN code to establish a secure connection with your LIKKIM hardware.":
+            "Utilice el código PIN para establecer una conexión segura con su hardware LIKKIM.",
+          "Enter PIN": "Ingrese el PIN",
+          "Verification successful!": "¡Verificación exitosa!",
+          "You can now safely use the device.":
+            "Ahora puede usar el dispositivo de manera segura.",
+          "Verification failed!": "¡La verificación falló!",
+          "The verification code you entered is incorrect. Please try again.":
+            "El código de verificación que ingresó es incorrecto. Inténtelo de nuevo.",
+          "Invalid address": "Dirección inválida",
+          "Detected Network": "Red detectada",
+          "Enter Amount": "Ingrese el monto",
+          "Enter the amount to send:": "Ingrese la cantidad a enviar:",
+          Back: "Atrás",
+          Amount: "Cantidad",
+          "Payment Address": "Dirección de pago",
+          "Recipient Address": "Dirección del destinatario",
+          "Transaction Fee": "Tarifa de transacción",
+          Confirm: "Confirmar",
+          "Transaction Confirmation": "Confirmación de transacción",
         },
       },
       ar: {
@@ -677,6 +805,32 @@ i18n
           Prices: "الأسعار",
           History: "التاريخ",
           Unlock: "افتح",
+          "Enter Password": "أدخل كلمة المرور",
+          "Enter current password": "أدخل كلمة المرور الحالية",
+          Next: "التالي",
+          "Set New Password": "تعيين كلمة مرور جديدة",
+          "Verify Address": "تحقق من العنوان",
+          "Enter PIN to Connect": "أدخل رقم التعريف الشخصي للاتصال",
+          "Use the PIN code to establish a secure connection with your LIKKIM hardware.":
+            "استخدم رمز PIN لإنشاء اتصال آمن بجهاز LIKKIM الخاص بك.",
+          "Enter PIN": "أدخل رقم التعريف الشخصي",
+          "Verification successful!": "تم التحقق بنجاح!",
+          "You can now safely use the device.":
+            "يمكنك الآن استخدام الجهاز بأمان.",
+          "Verification failed!": "فشلت عملية التحقق!",
+          "The verification code you entered is incorrect. Please try again.":
+            "رمز التحقق الذي أدخلته غير صحيح. حاول مرة اخرى.",
+          "Invalid address": "عنوان غير صالح",
+          "Detected Network": "تم اكتشاف الشبكة",
+          "Enter Amount": "أدخل المبلغ",
+          "Enter the amount to send:": "أدخل المبلغ المراد إرساله:",
+          Back: "رجوع",
+          Amount: "المبلغ",
+          "Payment Address": "عنوان الدفع",
+          "Recipient Address": "عنوان المستلم",
+          "Transaction Fee": "رسوم التحويل",
+          Confirm: "تأكيد",
+          "Transaction Confirmation": "تأكيد المعاملة",
         },
       },
       ja: {
@@ -793,6 +947,32 @@ i18n
           Prices: "価格",
           History: "履歴",
           Unlock: "アンロック",
+          "Enter Password": "パスワードを入力",
+          "Enter current password": "現在のパスワードを入力",
+          Next: "次へ",
+          "Set New Password": "新しいパスワードを設定",
+          "Verify Address": "アドレスを確認",
+          "Enter PIN to Connect": "接続するにはPINを入力してください",
+          "Use the PIN code to establish a secure connection with your LIKKIM hardware.":
+            "PINコードを使用して、LIKKIMハードウェアとの安全な接続を確立します。",
+          "Enter PIN": "PINを入力",
+          "Verification successful!": "確認に成功しました！",
+          "You can now safely use the device.":
+            "これでデバイスを安全に使用できます。",
+          "Verification failed!": "検証に失敗しました！",
+          "The verification code you entered is incorrect. Please try again.":
+            "入力した確認コードが間違っています。もう一度やり直してください。",
+          "Invalid address": "無効なアドレス",
+          "Detected Network": "検出されたネットワーク",
+          "Enter Amount": "金額を入力",
+          "Enter the amount to send:": "送信する金額を入力してください：",
+          Back: "戻る",
+          Amount: "金額",
+          "Payment Address": "支払いアドレス",
+          "Recipient Address": "受信者のアドレス",
+          "Transaction Fee": "取引手数料",
+          Confirm: "確認",
+          "Transaction Confirmation": "トランザクションの確認",
         },
       },
       ru: {
@@ -883,7 +1063,6 @@ i18n
           "Use spaces between words": "Используйте пробелы между словами",
           "Import Recovery Phrase": "Импортировать фразу восстановления",
           Version: "Версия",
-
           "Assets can only be sent within the same chain.":
             "Активы могут быть отправлены только в пределах одной цепочки.",
           "Firmware Update": "Обновление прошивки",
@@ -908,6 +1087,32 @@ i18n
           Prices: "Цены",
           History: "История",
           Unlock: "Разблокировать",
+          "Enter Password": "Введите пароль",
+          "Enter current password": "Введите текущий пароль",
+          Next: "Далее",
+          "Set New Password": "Установить новый пароль",
+          "Verify Address": "Проверить адрес",
+          "Enter PIN to Connect": "Введите PIN для подключения",
+          "Use the PIN code to establish a secure connection with your LIKKIM hardware.":
+            "Используйте PIN-код для установления безопасного соединения с вашим оборудованием LIKKIM.",
+          "Enter PIN": "Введите PIN",
+          "Verification successful!": "Проверка успешна!",
+          "You can now safely use the device.":
+            "Теперь вы можете безопасно использовать устройство.",
+          "Verification failed!": "Ошибка проверки!",
+          "The verification code you entered is incorrect. Please try again.":
+            "Введенный вами код проверки неверен. Попробуйте снова.",
+          "Invalid address": "Неверный адрес",
+          "Detected Network": "Обнаруженная сеть",
+          "Enter Amount": "Введите сумму",
+          "Enter the amount to send:": "Введите сумму для отправки:",
+          Back: "Назад",
+          Amount: "Сумма",
+          "Payment Address": "Платежный адрес",
+          "Recipient Address": "Адрес получателя",
+          "Transaction Fee": "Комиссия за транзакцию",
+          Confirm: "Подтвердить",
+          "Transaction Confirmation": "Подтверждение транзакции",
         },
       },
       ko: {
@@ -993,7 +1198,6 @@ i18n
           "Use spaces between words": "단어 사이에 공백 사용",
           "Import Recovery Phrase": "복구 구문 가져오기",
           Version: "버전",
-
           "Assets can only be sent within the same chain.":
             "자산은 동일한 체인 내에서만 전송할 수 있습니다.",
           "Firmware Update": "펌웨어 업데이트",
@@ -1017,6 +1221,32 @@ i18n
           Prices: "가격",
           History: "역사",
           Unlock: "잠금 해제",
+          "Enter Password": "비밀번호 입력",
+          "Enter current password": "현재 비밀번호 입력",
+          Next: "다음",
+          "Set New Password": "새 비밀번호 설정",
+          "Verify Address": "주소 확인",
+          "Enter PIN to Connect": "연결할 PIN 입력",
+          "Use the PIN code to establish a secure connection with your LIKKIM hardware.":
+            "PIN 코드를 사용하여 LIKKIM 하드웨어와의 안전한 연결을 설정합니다.",
+          "Enter PIN": "PIN 입력",
+          "Verification successful!": "검증 성공!",
+          "You can now safely use the device.":
+            "이제 장치를 안전하게 사용할 수 있습니다.",
+          "Verification failed!": "검증 실패!",
+          "The verification code you entered is incorrect. Please try again.":
+            "입력한 확인 코드가 올바르지 않습니다. 다시 시도해 주세요.",
+          "Invalid address": "잘못된 주소",
+          "Detected Network": "감지된 네트워크",
+          "Enter Amount": "금액 입력",
+          "Enter the amount to send:": "보낼 금액을 입력하세요:",
+          Back: "뒤로",
+          Amount: "금액",
+          "Payment Address": "결제 주소",
+          "Recipient Address": "수취인 주소",
+          "Transaction Fee": "거래 수수료",
+          Confirm: "확인",
+          "Transaction Confirmation": "거래 확인",
         },
       },
       pt: {
@@ -1107,7 +1337,6 @@ i18n
           "Use spaces between words": "Use espaços entre as palavras",
           "Import Recovery Phrase": "Importar Frase de Recuperação",
           Version: "Versão",
-
           "Assets can only be sent within the same chain.":
             "Os ativos só podem ser enviados dentro da mesma cadeia.",
           "Firmware Update": "Atualização de firmware",
@@ -1132,6 +1361,32 @@ i18n
           Prices: "Preços",
           History: "Histórico",
           Unlock: "Desbloquear",
+          "Enter Password": "Digite a senha",
+          "Enter current password": "Digite a senha atual",
+          Next: "Próximo",
+          "Set New Password": "Definir nova senha",
+          "Verify Address": "Verificar endereço",
+          "Enter PIN to Connect": "Digite o PIN para conectar",
+          "Use the PIN code to establish a secure connection with your LIKKIM hardware.":
+            "Use o código PIN para estabelecer uma conexão segura com seu hardware LIKKIM.",
+          "Enter PIN": "Digite o PIN",
+          "Verification successful!": "Verificação bem-sucedida!",
+          "You can now safely use the device.":
+            "Agora você pode usar o dispositivo com segurança.",
+          "Verification failed!": "Falha na verificação!",
+          "The verification code you entered is incorrect. Please try again.":
+            "O código de verificação inserido está incorreto. Tente novamente.",
+          "Invalid address": "Endereço inválido",
+          "Detected Network": "Rede detectada",
+          "Enter Amount": "Digite o valor",
+          "Enter the amount to send:": "Digite o valor a ser enviado:",
+          Back: "Voltar",
+          Amount: "Quantidade",
+          "Payment Address": "Endereço de pagamento",
+          "Recipient Address": "Endereço do destinatário",
+          "Transaction Fee": "Taxa de transação",
+          Confirm: "Confirmar",
+          "Transaction Confirmation": "Confirmação de transação",
         },
       },
       "pt-BR": {
@@ -1175,7 +1430,6 @@ i18n
             "Digite o endereço do destinatário:",
           "Enter Address": "Digite o endereço",
           Submit: "Enviar",
-
           "Choose the cryptocurrency to send:":
             "Escolha a criptomoeda para enviar:",
           "Choose the cryptocurrency to receive:":
@@ -1224,7 +1478,6 @@ i18n
           "Use spaces between words": "Use espaços entre as palavras",
           "Import Recovery Phrase": "Importar Frase de Recuperação",
           Version: "Versão",
-
           "Assets can only be sent within the same chain.":
             "Os ativos só podem ser enviados dentro da mesma cadeia.",
           "Firmware Update": "Atualização de firmware",
@@ -1249,6 +1502,32 @@ i18n
           Prices: "Preços",
           History: "Histórico",
           Unlock: "Desbloquear",
+          "Enter Password": "Digite a senha",
+          "Enter current password": "Digite a senha atual",
+          Next: "Próximo",
+          "Set New Password": "Definir nova senha",
+          "Verify Address": "Verificar endereço",
+          "Enter PIN to Connect": "Digite o PIN para conectar",
+          "Use the PIN code to establish a secure connection with your LIKKIM hardware.":
+            "Use o código PIN para estabelecer uma conexão segura com seu hardware LIKKIM.",
+          "Enter PIN": "Digite o PIN",
+          "Verification successful!": "Verificação bem-sucedida!",
+          "You can now safely use the device.":
+            "Agora você pode usar o dispositivo com segurança.",
+          "Verification failed!": "Falha na verificação!",
+          "The verification code you entered is incorrect. Please try again.":
+            "O código de verificação inserido está incorreto. Tente novamente.",
+          "Invalid address": "Endereço inválido",
+          "Detected Network": "Rede detectada",
+          "Enter Amount": "Digite o valor",
+          "Enter the amount to send:": "Digite o valor a ser enviado:",
+          Back: "Voltar",
+          Amount: "Quantidade",
+          "Payment Address": "Endereço de pagamento",
+          "Recipient Address": "Endereço do destinatário",
+          "Transaction Fee": "Taxa de transação",
+          Confirm: "Confirmar",
+          "Transaction Confirmation": "Confirmação de transação",
         },
       },
       it: {
@@ -1292,7 +1571,6 @@ i18n
             "Inserisci l'indirizzo del destinatario:",
           "Enter Address": "Inserisci l'indirizzo",
           Submit: "Invia",
-
           "Choose the cryptocurrency to send:":
             "Scegli la criptovaluta da inviare:",
           "Choose the cryptocurrency to receive:":
@@ -1341,7 +1619,6 @@ i18n
           "Use spaces between words": "Usa spazi tra le parole",
           "Import Recovery Phrase": "Importa Frase di Recupero",
           Version: "Versione",
-
           "Assets can only be sent within the same chain.":
             "Gli asset possono essere inviati solo all'interno della stessa catena.",
           "Firmware Update": "Aggiornamento firmware",
@@ -1366,6 +1643,32 @@ i18n
           Prices: "Prezzi",
           History: "Storia",
           Unlock: "Sblocca",
+          "Enter Password": "Inserisci la password",
+          "Enter current password": "Inserisci la password attuale",
+          Next: "Avanti",
+          "Set New Password": "Imposta una nuova password",
+          "Verify Address": "Verifica indirizzo",
+          "Enter PIN to Connect": "Inserisci il PIN per connetterti",
+          "Use the PIN code to establish a secure connection with your LIKKIM hardware.":
+            "Utilizzare il codice PIN per stabilire una connessione sicura con l'hardware LIKKIM.",
+          "Enter PIN": "Inserisci PIN",
+          "Verification successful!": "Verifica riuscita!",
+          "You can now safely use the device.":
+            "Ora puoi utilizzare il dispositivo in sicurezza.",
+          "Verification failed!": "Verifica fallita!",
+          "The verification code you entered is incorrect. Please try again.":
+            "Il codice di verifica inserito non è corretto. Per favore riprova.",
+          "Invalid address": "Indirizzo non valido",
+          "Detected Network": "Rete rilevata",
+          "Enter Amount": "Inserisci l'importo",
+          "Enter the amount to send:": "Inserisci l'importo da inviare:",
+          Back: "Indietro",
+          Amount: "Importo",
+          "Payment Address": "Indirizzo di pagamento",
+          "Recipient Address": "Indirizzo del destinatario",
+          "Transaction Fee": "Commissione di transazione",
+          Confirm: "Confermare",
+          "Transaction Confirmation": "Conferma della transazione",
         },
       },
       de: {
@@ -1409,7 +1712,6 @@ i18n
             "Geben Sie die Adresse des Empfängers ein:",
           "Enter Address": "Adresse eingeben",
           Submit: "Einreichen",
-
           "Choose the cryptocurrency to send:":
             "Wählen Sie die zu sendende Kryptowährung:",
           "Choose the cryptocurrency to receive:":
@@ -1460,7 +1762,6 @@ i18n
             "Verwenden Sie Leerzeichen zwischen den Wörtern",
           "Import Recovery Phrase": "Wiederherstellungsphrase importieren",
           Version: "Version",
-
           "Assets can only be sent within the same chain.":
             "Vermögenswerte können nur innerhalb derselben Kette gesendet werden.",
           "Firmware Update": "Firmware-Aktualisierung",
@@ -1485,6 +1786,32 @@ i18n
           Prices: "Preise",
           History: "Verlauf",
           Unlock: "Freischalten",
+          "Enter Password": "Passwort eingeben",
+          "Enter current password": "Aktuelles Passwort eingeben",
+          Next: "Weiter",
+          "Set New Password": "Neues Passwort festlegen",
+          "Verify Address": "Adresse überprüfen",
+          "Enter PIN to Connect": "PIN eingeben, um sich zu verbinden",
+          "Use the PIN code to establish a secure connection with your LIKKIM hardware.":
+            "Verwenden Sie den PIN-Code, um eine sichere Verbindung mit Ihrer LIKKIM-Hardware herzustellen.",
+          "Enter PIN": "PIN eingeben",
+          "Verification successful!": "Verifizierung erfolgreich!",
+          "You can now safely use the device.":
+            "Sie können das Gerät jetzt sicher verwenden.",
+          "Verification failed!": "Verifizierung fehlgeschlagen!",
+          "The verification code you entered is incorrect. Please try again.":
+            "Der von Ihnen eingegebene Verifizierungscode ist falsch. Bitte versuchen Sie es erneut.",
+          "Invalid address": "Ungültige Adresse",
+          "Detected Network": "Erkanntes Netzwerk",
+          "Enter Amount": "Betrag eingeben",
+          "Enter the amount to send:": "Betrag zum Senden eingeben:",
+          Back: "Zurück",
+          Amount: "Betrag",
+          "Payment Address": "Zahlungsadresse",
+          "Recipient Address": "Empfängeradresse",
+          "Transaction Fee": "Transaktionsgebühr",
+          Confirm: "Bestätigen",
+          "Transaction Confirmation": "Transaktionsbestätigung",
         },
       },
       hi: {
@@ -1526,7 +1853,6 @@ i18n
           "Enter the recipient's address:": "प्राप्तकर्ता का पता दर्ज करें:",
           "Enter Address": "पता दर्ज करें",
           Submit: "जमा करें",
-
           "Choose the cryptocurrency to send:":
             "भेजने के लिए क्रिप्टोकरेंसी चुनें:",
           "Choose the cryptocurrency to receive:":
@@ -1576,7 +1902,6 @@ i18n
           "Use spaces between words": "शब्दों के बीच स्पेस का उपयोग करें",
           "Import Recovery Phrase": "रिकवरी वाक्यांश आयात करें",
           Version: "संस्करण",
-
           "Assets can only be sent within the same chain.":
             "संपत्तियां केवल उसी श्रृंखला के भीतर भेजी जा सकती हैं।",
           "Firmware Update": "फर्मवेयर अपडेट",
@@ -1600,6 +1925,32 @@ i18n
           Prices: "मूल्य",
           History: "इतिहास",
           Unlock: "अनलॉक करें",
+          "Enter Password": "पासवर्ड दर्ज करें",
+          "Enter current password": "वर्तमान पासवर्ड दर्ज करें",
+          Next: "अगला",
+          "Set New Password": "नया पासवर्ड सेट करें",
+          "Verify Address": "पता सत्यापित करें",
+          "Enter PIN to Connect": "कनेक्ट करने के लिए पिन दर्ज करें",
+          "Use the PIN code to establish a secure connection with your LIKKIM hardware.":
+            "अपने LIKKIM हार्डवेयर के साथ सुरक्षित कनेक्शन स्थापित करने के लिए पिन कोड का उपयोग करें।",
+          "Enter PIN": "पिन दर्ज करें",
+          "Verification successful!": "सत्यापन सफल!",
+          "You can now safely use the device.":
+            "अब आप डिवाइस का सुरक्षित रूप से उपयोग कर सकते हैं।",
+          "Verification failed!": "सत्यापन विफल!",
+          "The verification code you entered is incorrect. Please try again.":
+            "आपके द्वारा दर्ज किया गया सत्यापन कोड गलत है। कृपया पुनः प्रयास करें।",
+          "Invalid address": "अमान्य पता",
+          "Detected Network": "पता चला नेटवर्क",
+          "Enter Amount": "राशि दर्ज करें",
+          "Enter the amount to send:": "भेजने के लिए राशि दर्ज करें:",
+          Back: "वापस",
+          Amount: "राशि",
+          "Payment Address": "भुगतान पता",
+          "Recipient Address": "प्राप्तकर्ता का पता",
+          "Transaction Fee": "लेन-देन शुल्क",
+          Confirm: "पुष्टि करें",
+          "Transaction Confirmation": "लेन-देन की पुष्टि",
         },
       },
       mn: {
@@ -1643,7 +1994,6 @@ i18n
             "Хүлээн авагчийн хаягийг оруулна уу:",
           "Enter Address": "Хаяг оруулах",
           Submit: "Илгээх",
-
           "Choose the cryptocurrency to send:":
             "Илгээх криптовалютыг сонгоно уу:",
           "Choose the cryptocurrency to receive:":
@@ -1692,7 +2042,6 @@ i18n
           "Use spaces between words": "Үгсийн хооронд зай ашигла",
           "Import Recovery Phrase": "Сэргээх үгийг импортлох",
           Version: "Хувилбар",
-
           "Assets can only be sent within the same chain.":
             "Хөрөнгийг зөвхөн нэг гинжин дотор л илгээх боломжтой.",
           "Firmware Update": "Фирмвэр шинэчлэх",
@@ -1717,6 +2066,32 @@ i18n
           Prices: "Үнийн санал",
           History: "Түүх",
           Unlock: "Нээх",
+          "Enter Password": "Нууц үг оруулна уу",
+          "Enter current password": "Одоогийн нууц үгийг оруулна уу",
+          Next: "Дараагийн",
+          "Set New Password": "Шинэ нууц үг тохируулах",
+          "Verify Address": "Хаягийг баталгаажуулах",
+          "Enter PIN to Connect": "Холбох PIN код оруулна уу",
+          "Use the PIN code to establish a secure connection with your LIKKIM hardware.":
+            "LIKKIM техник хангамжтай аюулгүй холболт үүсгэхийн тулд PIN кодыг ашиглана уу.",
+          "Enter PIN": "PIN код оруулна уу",
+          "Verification successful!": "Баталгаажуулалт амжилттай боллоо!",
+          "You can now safely use the device.":
+            "Та одоо төхөөрөмжийг аюулгүйгээр ашиглаж болно.",
+          "Verification failed!": "Баталгаажуулалт амжилтгүй боллоо!",
+          "The verification code you entered is incorrect. Please try again.":
+            "Таны оруулсан баталгаажуулах код буруу байна. Дахин оролдоно уу.",
+          "Invalid address": "Буруу хаяг",
+          "Detected Network": "Илэрсэн сүлжээ",
+          "Enter Amount": "Мөнгөн дүн оруулна уу",
+          "Enter the amount to send:": "Илгээх мөнгөн дүнг оруулна уу:",
+          Back: "Буцах",
+          Amount: "Дүн",
+          "Payment Address": "Төлбөрийн хаяг",
+          "Recipient Address": "Хүлээн авагчийн хаяг",
+          "Transaction Fee": "Гүйлгээний хураамж",
+          Confirm: "Баталгаажуулах",
+          "Transaction Confirmation": "Гүйлгээ баталгаажуулалт",
         },
       },
       th: {
@@ -1757,7 +2132,6 @@ i18n
           "Enter the recipient's address:": "ป้อนที่อยู่ผู้รับ:",
           "Enter Address": "ป้อนที่อยู่",
           Submit: "ส่ง",
-
           "Choose the cryptocurrency to send:": "เลือกสกุลเงินคริปโตที่จะส่ง:",
           "Choose the cryptocurrency to receive:":
             "เลือกสกุลเงินคริปโตที่จะรับ:",
@@ -1802,7 +2176,6 @@ i18n
           "Use spaces between words": "ใช้ช่องว่างระหว่างคำ",
           "Import Recovery Phrase": "นำเข้าวลีการกู้คืน",
           Version: "เวอร์ชัน",
-
           "Assets can only be sent within the same chain.":
             "สินทรัพย์สามารถส่งได้เฉพาะภายในโซ่เดียวกันเท่านั้น",
           "Firmware Update": "อัปเดตเฟิร์มแวร์",
@@ -1827,6 +2200,32 @@ i18n
           Prices: "ราคา",
           History: "ประวัติ",
           Unlock: "ปลดล็อก",
+          "Enter Password": "ใส่รหัสผ่าน",
+          "Enter current password": "ใส่รหัสผ่านปัจจุบัน",
+          Next: "ถัดไป",
+          "Set New Password": "ตั้งรหัสผ่านใหม่",
+          "Verify Address": "ยืนยันที่อยู่",
+          "Enter PIN to Connect": "ใส่ PIN เพื่อเชื่อมต่อ",
+          "Use the PIN code to establish a secure connection with your LIKKIM hardware.":
+            "ใช้รหัส PIN เพื่อสร้างการเชื่อมต่อที่ปลอดภัยกับฮาร์ดแวร์ LIKKIM ของคุณ",
+          "Enter PIN": "ใส่ PIN",
+          "Verification successful!": "ยืนยันสำเร็จ!",
+          "You can now safely use the device.":
+            "ตอนนี้คุณสามารถใช้เครื่องได้อย่างปลอดภัย",
+          "Verification failed!": "การยืนยันล้มเหลว!",
+          "The verification code you entered is incorrect. Please try again.":
+            "รหัสยืนยันที่คุณป้อนไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง",
+          "Invalid address": "ที่อยู่ไม่ถูกต้อง",
+          "Detected Network": "ตรวจพบเครือข่าย",
+          "Enter Amount": "ใส่จำนวนเงิน",
+          "Enter the amount to send:": "ใส่จำนวนเงินที่จะส่ง:",
+          Back: "กลับ",
+          Amount: "จำนวนเงิน",
+          "Payment Address": "ที่อยู่การชำระเงิน",
+          "Recipient Address": "ที่อยู่ผู้รับ",
+          "Transaction Fee": "ค่าธรรมเนียมการทำธุรกรรม",
+          Confirm: "ยืนยัน",
+          "Transaction Confirmation": "ยืนยันการทำธุรกรรม",
         },
       },
       uk: {
@@ -1869,7 +2268,6 @@ i18n
           "Enter the recipient's address:": "Введіть адресу одержувача:",
           "Enter Address": "Введіть адресу",
           Submit: "Відправити",
-
           "Choose the cryptocurrency to send:":
             "Виберіть криптовалюту для відправки:",
           "Choose the cryptocurrency to receive:":
@@ -1915,7 +2313,6 @@ i18n
           "Encrypting your data": "Шифрування ваших даних",
           "Your wallet is now ready": "Ваш гаманець готовий",
           "Let's Go": "Почнемо",
-
           "Assets can only be sent within the same chain.":
             "Активи можна надсилати лише в межах одного ланцюга.",
           "Firmware Update": "Оновлення прошивки",
@@ -1940,6 +2337,32 @@ i18n
           Prices: "Ціни",
           History: "Історія",
           Unlock: "Розблокувати",
+          "Enter Password": "Введіть пароль",
+          "Enter current password": "Введіть поточний пароль",
+          Next: "Далі",
+          "Set New Password": "Встановити новий пароль",
+          "Verify Address": "Перевірте адресу",
+          "Enter PIN to Connect": "Введіть PIN для підключення",
+          "Use the PIN code to establish a secure connection with your LIKKIM hardware.":
+            "Використовуйте PIN-код для встановлення безпечного з'єднання з вашим обладнанням LIKKIM.",
+          "Enter PIN": "Введіть PIN-код",
+          "Verification successful!": "Перевірка успішна!",
+          "You can now safely use the device.":
+            "Тепер ви можете безпечно використовувати пристрій.",
+          "Verification failed!": "Перевірка не вдалася!",
+          "The verification code you entered is incorrect. Please try again.":
+            "Введений вами код перевірки неправильний. Будь ласка спробуйте ще раз.",
+          "Invalid address": "Неправильна адреса",
+          "Detected Network": "Виявлена мережа",
+          "Enter Amount": "Введіть суму",
+          "Enter the amount to send:": "Введіть суму для відправки:",
+          Back: "Назад",
+          Amount: "Сума",
+          "Payment Address": "Платіжна адреса",
+          "Recipient Address": "Адреса одержувача",
+          "Transaction Fee": "Комісія за транзакцію",
+          Confirm: "Підтвердити",
+          "Transaction Confirmation": "Підтвердження транзакції",
         },
       },
       vi: {
@@ -1980,7 +2403,6 @@ i18n
           "Enter the recipient's address:": "Nhập địa chỉ người nhận:",
           "Enter Address": "Nhập địa chỉ",
           Submit: "Gửi đi",
-
           "Choose the cryptocurrency to send:":
             "Chọn loại tiền điện tử để gửi:",
           "Choose the cryptocurrency to receive:":
@@ -2028,7 +2450,6 @@ i18n
           "Use spaces between words": "Sử dụng khoảng trắng giữa các từ",
           "Import Recovery Phrase": "Nhập cụm từ khôi phục",
           Version: "Phiên bản",
-
           "Assets can only be sent within the same chain.":
             "Tài sản chỉ có thể được gửi trong cùng một chuỗi.",
           "Firmware Update": "Cập nhật firmware",
@@ -2053,6 +2474,32 @@ i18n
           Prices: "Giá cả",
           History: "Lịch sử",
           Unlock: "Mở khóa",
+          "Enter Password": "Nhập mật khẩu",
+          "Enter current password": "Nhập mật khẩu hiện tại",
+          Next: "Tiếp theo",
+          "Set New Password": "Đặt mật khẩu mới",
+          "Verify Address": "Xác minh địa chỉ",
+          "Enter PIN to Connect": "Nhập PIN để kết nối",
+          "Use the PIN code to establish a secure connection with your LIKKIM hardware.":
+            "Sử dụng mã PIN để thiết lập kết nối an toàn với phần cứng LIKKIM của bạn.",
+          "Enter PIN": "Nhập mã PIN",
+          "Verification successful!": "Xác minh thành công!",
+          "You can now safely use the device.":
+            "Bây giờ bạn có thể sử dụng thiết bị một cách an toàn.",
+          "Verification failed!": "Xác minh thất bại!",
+          "The verification code you entered is incorrect. Please try again.":
+            "Mã xác minh bạn đã nhập không chính xác. Vui lòng thử lại.",
+          "Invalid address": "Địa chỉ không hợp lệ",
+          "Detected Network": "Mạng được phát hiện",
+          "Enter Amount": "Nhập số tiền",
+          "Enter the amount to send:": "Nhập số tiền cần gửi:",
+          Back: "Quay lại",
+          Amount: "Số tiền",
+          "Payment Address": "Địa chỉ thanh toán",
+          "Recipient Address": "Địa chỉ người nhận",
+          "Transaction Fee": "Phí giao dịch",
+          Confirm: "Xác nhận",
+          "Transaction Confirmation": "Xác nhận giao dịch",
         },
       },
       id: {
@@ -2094,7 +2541,6 @@ i18n
           "Enter the recipient's address:": "Masukkan alamat penerima:",
           "Enter Address": "Masukkan alamat",
           Submit: "Kirim",
-
           "Choose the cryptocurrency to send:":
             "Pilih cryptocurrency untuk dikirim:",
           "Choose the cryptocurrency to receive:":
@@ -2144,7 +2590,6 @@ i18n
           "Use spaces between words": "Gunakan spasi di antara kata-kata",
           "Import Recovery Phrase": "Impor Frasa Pemulihan",
           Version: "Versi",
-
           "Assets can only be sent within the same chain.":
             "Aset hanya dapat dikirim dalam rantai yang sama.",
           "Firmware Update": "Pembaruan firmware",
@@ -2169,6 +2614,32 @@ i18n
           Prices: "Harga",
           History: "Riwayat",
           Unlock: "Buka kunci",
+          "Enter Password": "Masukkan kata sandi",
+          "Enter current password": "Masukkan kata sandi saat ini",
+          Next: "Berikutnya",
+          "Set New Password": "Tetapkan Kata Sandi Baru",
+          "Verify Address": "Verifikasi Alamat",
+          "Enter PIN to Connect": "Masukkan PIN untuk Terhubung",
+          "Use the PIN code to establish a secure connection with your LIKKIM hardware.":
+            "Gunakan kode PIN untuk membangun koneksi yang aman dengan perangkat keras LIKKIM Anda.",
+          "Enter PIN": "Masukkan PIN",
+          "Verification successful!": "Verifikasi berhasil!",
+          "You can now safely use the device.":
+            "Sekarang Anda dapat menggunakan perangkat dengan aman.",
+          "Verification failed!": "Verifikasi gagal!",
+          "The verification code you entered is incorrect. Please try again.":
+            "Kode verifikasi yang Anda masukkan salah. Silakan coba lagi.",
+          "Invalid address": "Alamat tidak valid",
+          "Detected Network": "Jaringan Terdeteksi",
+          "Enter Amount": "Masukkan jumlah",
+          "Enter the amount to send:": "Masukkan jumlah yang akan dikirim:",
+          Back: "Kembali",
+          Amount: "Jumlah",
+          "Payment Address": "Alamat Pembayaran",
+          "Recipient Address": "Alamat Penerima",
+          "Transaction Fee": "Biaya Transaksi",
+          Confirm: "Konfirmasi",
+          "Transaction Confirmation": "Konfirmasi Transaksi",
         },
       },
       tl: {
@@ -2209,7 +2680,6 @@ i18n
           "Enter the recipient's address:": "Ilagay ang address ng tatanggap:",
           "Enter Address": "Ilagay ang Address",
           Submit: "Ipasa",
-
           "Choose the cryptocurrency to send:":
             "Piliin ang cryptocurrency na ipapadala:",
           "Choose the cryptocurrency to receive:":
@@ -2287,6 +2757,32 @@ i18n
           Prices: "Mga presyo",
           History: "Kasaysayan",
           Unlock: "I-unlock",
+          "Enter Password": "Ipasok ang Password",
+          "Enter current password": "Ipasok ang kasalukuyang password",
+          Next: "Susunod",
+          "Set New Password": "Itakda ang Bagong Password",
+          "Verify Address": "I-verify ang Address",
+          "Enter PIN to Connect": "Ipasok ang PIN para Kumonekta",
+          "Use the PIN code to establish a secure connection with your LIKKIM hardware.":
+            "Gamitin ang PIN code upang magtatag ng secure na koneksyon sa iyong LIKKIM hardware.",
+          "Enter PIN": "Ipasok ang PIN",
+          "Verification successful!": "Matagumpay ang pag-verify!",
+          "You can now safely use the device.":
+            "Maaari mo nang ligtas na gamitin ang device.",
+          "Verification failed!": "Nabigo ang pag-verify!",
+          "The verification code you entered is incorrect. Please try again.":
+            "Ang verification code na iyong ipinasok ay hindi tama. Pakiulit ulit.",
+          "Invalid address": "Di-wastong address",
+          "Detected Network": "Nadetect na Network",
+          "Enter Amount": "Ipasok ang Halaga",
+          "Enter the amount to send:": "Ipasok ang halaga na ipapadala:",
+          Back: "Bumalik",
+          Amount: "Halaga",
+          "Payment Address": "Address ng Pagbabayad",
+          "Recipient Address": "Address ng Tatanggap",
+          "Transaction Fee": "Bayad sa Transaksyon",
+          Confirm: "Kumpirmahin",
+          "Transaction Confirmation": "Kumpirmasyon ng Transaksyon",
         },
       },
       bn: {
@@ -2328,7 +2824,6 @@ i18n
           "Enter the recipient's address:": "প্রাপকের ঠিকানা লিখুন:",
           "Enter Address": "ঠিকানা লিখুন",
           Submit: "জমা দিন",
-
           "Choose the cryptocurrency to send:":
             "পাঠানোর জন্য ক্রিপ্টোকারেন্সি নির্বাচন করুন:",
           "Choose the cryptocurrency to receive:":
@@ -2403,6 +2898,32 @@ i18n
           Prices: "মূল্য",
           History: "ইতিহাস",
           Unlock: "আনলক করুন",
+          "Enter Password": "পাসওয়ার্ড লিখুন",
+          "Enter current password": "বর্তমান পাসওয়ার্ড লিখুন",
+          Next: "পরবর্তী",
+          "Set New Password": "নতুন পাসওয়ার্ড সেট করুন",
+          "Verify Address": "ঠিকানা যাচাই করুন",
+          "Enter PIN to Connect": "সংযোগ করতে পিন লিখুন",
+          "Use the PIN code to establish a secure connection with your LIKKIM hardware.":
+            "আপনার LIKKIM হার্ডওয়্যারের সাথে একটি নিরাপদ সংযোগ স্থাপন করতে পিন কোড ব্যবহার করুন।",
+          "Enter PIN": "পিন লিখুন",
+          "Verification successful!": "যাচাই সফল হয়েছে!",
+          "You can now safely use the device.":
+            "এখন আপনি নিরাপদে ডিভাইসটি ব্যবহার করতে পারেন।",
+          "Verification failed!": "যাচাইকরণ ব্যর্থ হয়েছে!",
+          "The verification code you entered is incorrect. Please try again.":
+            "আপনি যে যাচাইকরণ কোডটি প্রবেশ করেছেন তা সঠিক নয়। আবার চেষ্টা করুন.",
+          "Invalid address": "অবৈধ ঠিকানা",
+          "Detected Network": "সনাক্ত করা নেটওয়ার্ক",
+          "Enter Amount": "পরিমাণ লিখুন",
+          "Enter the amount to send:": "প্রেরণের পরিমাণ লিখুন:",
+          Back: "ফিরে",
+          Amount: "পরিমাণ",
+          "Payment Address": "পেমেন্ট ঠিকানা",
+          "Recipient Address": "প্রাপক ঠিকানা",
+          "Transaction Fee": "লেনদেন ফি",
+          Confirm: "নিশ্চিত করুন",
+          "Transaction Confirmation": "লেনদেনের নিশ্চিতকরণ",
         },
       },
     },
