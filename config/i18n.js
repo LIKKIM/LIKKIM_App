@@ -200,7 +200,7 @@ i18n
           "Use spaces between words": "单词之间用空格分隔",
           "Import Recovery Phrase": "导入恢复短语",
           Version: "版本",
-          "Only you can unlock your wallet": "只有你可以解锁你的钱包",
+
           "Assets can only be sent within the same chain.":
             "资产只能在同一链内发送。",
           "Firmware Update": "固件更新",
@@ -304,7 +304,7 @@ i18n
           "Use spaces between words": "單詞之間用空格分隔",
           "Import Recovery Phrase": "導入恢復短語",
           Version: "版本",
-          "Only you can unlock your wallet": "只有你可以解鎖你的錢包",
+
           "Assets can only be sent within the same chain.":
             "資產只能在同一鏈內發送。",
           "Firmware Update": "固件更新",
@@ -425,8 +425,7 @@ i18n
           "Use spaces between words": "Utilisez des espaces entre les mots",
           "Import Recovery Phrase": "Importer la phrase de récupération",
           Version: "Version",
-          "Only you can unlock your wallet":
-            "Seul vous pouvez déverrouiller votre portefeuille",
+
           "Assets can only be sent within the same chain.":
             "Les actifs ne peuvent être envoyés que sur la même chaîne.",
           "Firmware Update": "Mise à jour du firmware",
@@ -543,8 +542,7 @@ i18n
           "Use spaces between words": "Usa espacios entre las palabras",
           "Import Recovery Phrase": "Importar frase de recuperación",
           Version: "Versión",
-          "Only you can unlock your wallet":
-            "Solo tú puedes desbloquear tu billetera",
+
           "Assets can only be sent within the same chain.":
             "Los activos solo se pueden enviar dentro de la misma cadena.",
           "Firmware Update": "Actualización de firmware",
@@ -656,7 +654,7 @@ i18n
           "Use spaces between words": "استخدم مسافات بين الكلمات",
           "Import Recovery Phrase": "استيراد عبارة الاسترداد",
           Version: "الإصدار",
-          "Only you can unlock your wallet": "فقط يمكنك فتح محفظتك",
+
           "Assets can only be sent within the same chain.":
             "يمكن إرسال الأصول فقط ضمن نفس السلسلة.",
           "Firmware Update": "تحديث البرنامج الثابت",
@@ -770,8 +768,7 @@ i18n
           "Use spaces between words": "単語の間にスペースを使用",
           "Import Recovery Phrase": "リカバリーフレーズをインポート",
           Version: "バージョン",
-          "Only you can unlock your wallet":
-            "あなたのみがウォレットを解除できます",
+
           "Assets can only be sent within the same chain.":
             "資産は同じチェーン内でのみ送信できます。",
           "Firmware Update": "تحديث البرنامج الثابت",
@@ -887,8 +884,7 @@ i18n
           "Use spaces between words": "Используйте пробелы между словами",
           "Import Recovery Phrase": "Импортировать фразу восстановления",
           Version: "Версия",
-          "Only you can unlock your wallet":
-            "Только вы можете разблокировать свой кошелек",
+
           "Assets can only be sent within the same chain.":
             "Активы могут быть отправлены только в пределах одной цепочки.",
           "Firmware Update": "Обновление прошивки",
@@ -998,8 +994,7 @@ i18n
           "Use spaces between words": "단어 사이에 공백 사용",
           "Import Recovery Phrase": "복구 구문 가져오기",
           Version: "버전",
-          "Only you can unlock your wallet":
-            "지갑을 잠금 해제할 수 있는 사람은 당신뿐입니다",
+
           "Assets can only be sent within the same chain.":
             "자산은 동일한 체인 내에서만 전송할 수 있습니다.",
           "Firmware Update": "펌웨어 업데이트",
@@ -1113,8 +1108,7 @@ i18n
           "Use spaces between words": "Use espaços entre as palavras",
           "Import Recovery Phrase": "Importar Frase de Recuperação",
           Version: "Versão",
-          "Only you can unlock your wallet":
-            "Apenas você pode desbloquear sua carteira",
+
           "Assets can only be sent within the same chain.":
             "Os ativos só podem ser enviados dentro da mesma cadeia.",
           "Firmware Update": "Atualização de firmware",
@@ -1231,8 +1225,7 @@ i18n
           "Use spaces between words": "Use espaços entre as palavras",
           "Import Recovery Phrase": "Importar Frase de Recuperação",
           Version: "Versão",
-          "Only you can unlock your wallet":
-            "Apenas você pode desbloquear sua carteira",
+
           "Assets can only be sent within the same chain.":
             "Os ativos só podem ser enviados dentro da mesma cadeia.",
           "Firmware Update": "Atualização de firmware",
@@ -1349,8 +1342,7 @@ i18n
           "Use spaces between words": "Usa spazi tra le parole",
           "Import Recovery Phrase": "Importa Frase di Recupero",
           Version: "Versione",
-          "Only you can unlock your wallet":
-            "Solo tu puoi sbloccare il tuo portafoglio",
+
           "Assets can only be sent within the same chain.":
             "Gli asset possono essere inviati solo all'interno della stessa catena.",
           "Firmware Update": "Aggiornamento firmware",
@@ -1469,8 +1461,7 @@ i18n
             "Verwenden Sie Leerzeichen zwischen den Wörtern",
           "Import Recovery Phrase": "Wiederherstellungsphrase importieren",
           Version: "Version",
-          "Only you can unlock your wallet":
-            "Nur du kannst dein Wallet entsperren",
+
           "Assets can only be sent within the same chain.":
             "Vermögenswerte können nur innerhalb derselben Kette gesendet werden.",
           "Firmware Update": "Firmware-Aktualisierung",
@@ -1586,8 +1577,7 @@ i18n
           "Use spaces between words": "शब्दों के बीच स्पेस का उपयोग करें",
           "Import Recovery Phrase": "रिकवरी वाक्यांश आयात करें",
           Version: "संस्करण",
-          "Only you can unlock your wallet":
-            "केवल आप ही अपना बटुआ अनलॉक कर सकते हैं",
+
           "Assets can only be sent within the same chain.":
             "संपत्तियां केवल उसी श्रृंखला के भीतर भेजी जा सकती हैं।",
           "Firmware Update": "फर्मवेयर अपडेट",
@@ -1703,8 +1693,7 @@ i18n
           "Use spaces between words": "Үгсийн хооронд зай ашигла",
           "Import Recovery Phrase": "Сэргээх үгийг импортлох",
           Version: "Хувилбар",
-          "Only you can unlock your wallet":
-            "Зөвхөн та өөрийн түрийвчээ онгойлгож чадна",
+
           "Assets can only be sent within the same chain.":
             "Хөрөнгийг зөвхөн нэг гинжин дотор л илгээх боломжтой.",
           "Firmware Update": "Фирмвэр шинэчлэх",
@@ -1814,8 +1803,7 @@ i18n
           "Use spaces between words": "ใช้ช่องว่างระหว่างคำ",
           "Import Recovery Phrase": "นำเข้าวลีการกู้คืน",
           Version: "เวอร์ชัน",
-          "Only you can unlock your wallet":
-            "มีเพียงคุณเท่านั้นที่สามารถปลดล็อกกระเป๋าเงินของคุณได้",
+
           "Assets can only be sent within the same chain.":
             "สินทรัพย์สามารถส่งได้เฉพาะภายในโซ่เดียวกันเท่านั้น",
           "Firmware Update": "อัปเดตเฟิร์มแวร์",
@@ -1928,8 +1916,7 @@ i18n
           "Encrypting your data": "Шифрування ваших даних",
           "Your wallet is now ready": "Ваш гаманець готовий",
           "Let's Go": "Почнемо",
-          "Only you can unlock your wallet":
-            "Тільки ви можете розблокувати свій гаманець",
+
           "Assets can only be sent within the same chain.":
             "Активи можна надсилати лише в межах одного ланцюга.",
           "Firmware Update": "Оновлення прошивки",
@@ -2042,8 +2029,7 @@ i18n
           "Use spaces between words": "Sử dụng khoảng trắng giữa các từ",
           "Import Recovery Phrase": "Nhập cụm từ khôi phục",
           Version: "Phiên bản",
-          "Only you can unlock your wallet":
-            "Chỉ bạn mới có thể mở khóa ví của mình",
+
           "Assets can only be sent within the same chain.":
             "Tài sản chỉ có thể được gửi trong cùng một chuỗi.",
           "Firmware Update": "Cập nhật firmware",
@@ -2159,8 +2145,7 @@ i18n
           "Use spaces between words": "Gunakan spasi di antara kata-kata",
           "Import Recovery Phrase": "Impor Frasa Pemulihan",
           Version: "Versi",
-          "Only you can unlock your wallet":
-            "Hanya Anda yang bisa membuka dompet Anda",
+
           "Assets can only be sent within the same chain.":
             "Aset hanya dapat dikirim dalam rantai yang sama.",
           "Firmware Update": "Pembaruan firmware",
@@ -2199,8 +2184,6 @@ i18n
           Cancel: "Kanselahin",
           "Select Currency": "Piliin ang Pera",
           "Set Password": "Itakda ang Password",
-          "Only you can unlock your wallet":
-            "Ikaw lang ang makakapagbukas ng iyong wallet",
           Password: "Password",
           "Confirm Password": "Kumpirmahin ang Password",
           "Change Password": "Palitan ang Password",
