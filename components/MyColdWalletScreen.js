@@ -653,7 +653,7 @@ function MyColdWalletScreen() {
       ? [
           {
             title: t("Change App Screen Lock Password"),
-            icon: "lock-outline",
+            icon: "password",
             onPress: openChangePasswordModal, // 调用函数打开模态框
           },
         ]

@@ -1076,7 +1076,7 @@ function WalletScreen({ route, navigation }) {
                 {t("Total Balance")}
               </Text>
               <Text style={WalletScreenStyle.totalBalanceAmount}>
-                {`${calculateTotalBalance()}`}
+                {`${calculateTotalBalance()} `}
                 <Text style={WalletScreenStyle.currencyUnit}>
                   {currencyUnit}
                 </Text>
