@@ -166,7 +166,7 @@ function WalletScreen({ route, navigation }) {
             },
             body: JSON.stringify({
               chainShortName: "TRON",
-              address: "TNXoiAJ3dct8Fjg4M9fkLFh9S2v9TXc32G",
+              address: "TXJHEnySTFpn8vLDzo42VP6f7mizpPZbyW",
               protocolType: "token_20",
             }),
           }
@@ -198,8 +198,8 @@ function WalletScreen({ route, navigation }) {
 
     // 调用 postTest 函数进行测试
     postTest();
-  }, []); */
-
+  }, []);
+ */
   useEffect(() => {
     if (!bleVisible && selectedDevice) {
       setPinModalVisible(true);

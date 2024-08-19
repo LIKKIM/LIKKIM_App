@@ -1,3 +1,4 @@
+// ScreenLock.js
 import React, { useState, useContext } from "react";
 import {
   View,
@@ -14,15 +15,14 @@ import { CryptoContext, DarkModeContext } from "./CryptoContext";
 import { useTranslation } from "react-i18next"; // 导入国际化库
 
 const ScreenLock = () => {
-  const { screenLockPassword, setIsScreenLockEnabled } =
-    useContext(CryptoContext);
+  const { screenLockPassword, setIsAppLaunching } = useContext(CryptoContext); // 使用 setIsAppLaunching
   const { isDarkMode } = useContext(DarkModeContext);
   const [inputPassword, setInputPassword] = useState("");
   const { t } = useTranslation(); // 使用国际化 hook
 
   const handleUnlock = () => {
     if (inputPassword === screenLockPassword) {
-      setIsScreenLockEnabled(false); // 解锁后设置 isScreenLocked 为 false
+      setIsAppLaunching(false); // 解锁后设置 isAppLaunching 为 false
     } else {
       Alert.alert(t("Incorrect Password"), t("Please try again.")); // 国际化提示
     }

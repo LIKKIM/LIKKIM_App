@@ -164,6 +164,9 @@ export const CryptoProvider = ({ children }) => {
     useState(false);
   const [verifiedDevices, setVerifiedDevices] = useState([]);
 
+  // 新增的状态，用于追踪应用启动状态
+  const [isAppLaunching, setIsAppLaunching] = useState(true);
+
   useEffect(() => {
     const loadSettings = async () => {
       try {
@@ -205,6 +208,8 @@ export const CryptoProvider = ({ children }) => {
           setScreenLockPassword(screenLockPassword);
       } catch (error) {
         console.error("Error loading settings: ", error);
+      } finally {
+        setIsAppLaunching(true);
       }
     };
     loadSettings();
@@ -284,6 +289,8 @@ export const CryptoProvider = ({ children }) => {
         toggleScreenLock,
         screenLockPassword,
         changeScreenLockPassword,
+        isAppLaunching, // 提供 isAppLaunching
+        setIsAppLaunching, // 提供 setIsAppLaunching
       }}
     >
       <DarkModeContext.Provider value={{ isDarkMode, setIsDarkMode }}>
