@@ -765,7 +765,10 @@ function WalletScreen({ route, navigation }) {
     setAddWalletModalVisible(false);
     setImportPhraseModalVisible(true);
   };
-
+  const handleWalletTest = () => {
+    setAddWalletModalVisible(false);
+    setProcessModalVisible(true);
+  };
   const handleImport = (phrase) => {
     // 处理导入逻辑
     setImportPhraseModalVisible(false);
@@ -1360,6 +1363,14 @@ function WalletScreen({ route, navigation }) {
             >
               <Text style={WalletScreenStyle.ButtonText}>
                 {t("Import Wallet")}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={WalletScreenStyle.modalButton}
+              onPress={handleWalletTest}
+            >
+              <Text style={WalletScreenStyle.ButtonText}>
+                {t("直接创建钱包用于测试")}
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
