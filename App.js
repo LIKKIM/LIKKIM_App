@@ -1,7 +1,14 @@
 // App.js
 import "intl-pluralrules";
 import React, { useContext, useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, StatusBar, Modal } from "react-native";
+import {
+  Vibration,
+  View,
+  Text,
+  TouchableOpacity,
+  StatusBar,
+  Modal,
+} from "react-native";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -122,6 +129,18 @@ function AppContent({
     <View style={{ flex: 1, backgroundColor: bottomBackgroundColor }}>
       <Tab.Navigator
         screenOptions={({ route }) => ({
+          tabBarButton: (props) => (
+            <TouchableOpacity
+              {...props}
+              onPress={() => {
+                Vibration.vibrate();
+
+                props.onPress();
+              }}
+            >
+              {props.children}
+            </TouchableOpacity>
+          ),
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
             if (route.name === "Wallet") {
