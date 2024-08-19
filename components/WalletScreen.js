@@ -106,6 +106,7 @@ function WalletScreen({ route, navigation }) {
     useState(false);
   const [createPendingModalVisible, setCreatePendingModalVisible] =
     useState(false);
+  const [importingModalVisible, setImportingModalVisible] = useState(false);
   const restoreIdentifier = Constants.installationId;
   const [pinCode, setPinCode] = useState("");
   const filteredCryptos = additionalCryptos.filter(
@@ -1862,6 +1863,34 @@ function WalletScreen({ route, navigation }) {
             <TouchableOpacity
               style={WalletScreenStyle.submitButton}
               onPress={() => setCreatePendingModalVisible(false)}
+            >
+              <Text style={WalletScreenStyle.submitButtonText}>
+                {t("Close")}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+      {/* 创建新的 importingModal 模态框 */}
+      <Modal
+        visible={importingModalVisible}
+        onRequestClose={() => setImportingModalVisible(false)}
+        transparent={true}
+        animationType="slide"
+      >
+        <View style={WalletScreenStyle.centeredView}>
+          <View style={WalletScreenStyle.pendingModalView}>
+            <Text style={WalletScreenStyle.modalTitle}>
+              {t("Importing Wallet on LIKKIM Hardware...")}
+            </Text>
+            <Text
+              style={[WalletScreenStyle.modalSubtitle, { marginBottom: 20 }]}
+            >
+              {t("Your device is already verified.")}
+            </Text>
+            <TouchableOpacity
+              style={WalletScreenStyle.submitButton}
+              onPress={() => setImportingModalVisible(false)}
             >
               <Text style={WalletScreenStyle.submitButtonText}>
                 {t("Close")}
