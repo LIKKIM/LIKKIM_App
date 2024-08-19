@@ -156,7 +156,7 @@ const WalletScreenStyles = (isDarkMode) => {
       width: 280,
     },
     cancelButtonText: {
-      color: secondTextColor,
+      color: textColor,
       fontSize: 16,
     },
 

@@ -304,7 +304,6 @@ i18n
           "Use spaces between words": "單詞之間用空格分隔",
           "Import Recovery Phrase": "導入恢復短語",
           Version: "版本",
-
           "Assets can only be sent within the same chain.":
             "資產只能在同一鏈內發送。",
           "Firmware Update": "固件更新",
