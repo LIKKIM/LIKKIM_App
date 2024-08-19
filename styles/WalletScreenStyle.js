@@ -61,7 +61,7 @@ const WalletScreenStyles = (isDarkMode) => {
       borderRadius: 30,
       height: 60,
       alignItems: "center",
-      marginBottom: 20,
+      marginTop: 20,
     },
     submitButtonText: {
       color: textColor,
@@ -88,8 +88,6 @@ const WalletScreenStyles = (isDarkMode) => {
     },
     passwordInput: {
       backgroundColor: inputBackgroundColor,
-      borderColor: borderColor,
-      borderWidth: 1,
       paddingHorizontal: 15,
       paddingVertical: 10,
       borderRadius: 10,
