@@ -241,13 +241,13 @@ export default function PriceChartCom({
                     ).toLocaleTimeString()}
                 {!_selectPointData[0] &&
                   (selectDate[0] == "30m"
-                    ? "past 24 hours"
+                    ? t("past 24 hours")
                     : selectDate[0] == "1H"
-                    ? "past 7 days"
+                    ? t("past 7 days")
                     : selectDate[0] == "1W"
-                    ? "past 1 year"
+                    ? t("past 1 year")
                     : selectDate[0] == "1D"
-                    ? "past 30 days"
+                    ? t("past 30 days")
                     : "")}
               </Text>
             </View>
