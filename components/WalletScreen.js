@@ -166,7 +166,7 @@ function WalletScreen({ route, navigation }) {
             },
             body: JSON.stringify({
               chainShortName: "TRON",
-              address: "TGjheziueGkgHrVhfXyVtBwsjFBp2NyZAq",
+              address: "TNXoiAJ3dct8Fjg4M9fkLFh9S2v9TXc32G",
               protocolType: "token_20",
             }),
           }
