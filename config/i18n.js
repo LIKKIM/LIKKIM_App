@@ -101,6 +101,16 @@ i18n
           "Sync balances to LIKKIM coldwallet":
             "Sync balances to LIKKIM coldwallet",
           "No data available": "No data available",
+          "Search Currency": "Search Currency",
+          "Search Cryptocurrency": "Search Cryptocurrency",
+          "Select Currency": "Select Currency",
+          "Enable Screen Lock": "Enable Screen Lock",
+          "Enter new password": "Enter new password",
+          "Confirm new password": "Confirm new password",
+          "Change App Screen Lock Password": "Change App Screen Lock Password",
+          "Disable Lock Screen": "Disable Lock Screen",
+          "Enter your password": "Enter your password",
+          "Enter Password to Unlock": "Enter Password to Unlock",
         },
       },
       zh: {
@@ -190,6 +200,16 @@ i18n
           "Firmware Update": "固件更新",
           "Sync balances to LIKKIM coldwallet": "同步余额到 LIKKIM 冷钱包",
           "No data available": "暂无数据",
+          "Search Currency": "搜索货币",
+          "Search Cryptocurrency": "搜索加密货币",
+          "Select Currency": "选择货币",
+          "Enable Screen Lock": "启用屏幕锁定",
+          "Enter new password": "输入新密码",
+          "Confirm new password": "确认新密码",
+          "Change App Screen Lock Password": "更改应用屏幕锁密码",
+          "Disable Lock Screen": "禁用屏幕锁定",
+          "Enter your password": "输入您的密码",
+          "Enter Password to Unlock": "输入密码以解锁",
         },
       },
       "zh-TW": {
@@ -277,6 +297,16 @@ i18n
           "Firmware Update": "固件更新",
           "Sync balances to LIKKIM coldwallet": "同步餘額到 LIKKIM 冷錢包",
           "No data available": "暫無數據",
+          "Search Currency": "搜尋貨幣",
+          "Search Cryptocurrency": "搜尋加密貨幣",
+          "Select Currency": "選擇貨幣",
+          "Enable Screen Lock": "啟用螢幕鎖定",
+          "Enter new password": "輸入新密碼",
+          "Confirm new password": "確認新密碼",
+          "Change App Screen Lock Password": "更改應用程式螢幕鎖密碼",
+          "Disable Lock Screen": "禁用螢幕鎖定",
+          "Enter your password": "輸入您的密碼",
+          "Enter Password to Unlock": "輸入密碼以解鎖",
         },
       },
       fr: {
@@ -376,6 +406,18 @@ i18n
           "Sync balances to LIKKIM coldwallet":
             "Synchroniser les soldes avec le portefeuille froid LIKKIM",
           "No data available": "Aucune donnée disponible",
+          "Search Currency": "Rechercher une devise",
+          "Search Cryptocurrency": "Rechercher une cryptomonnaie",
+          "Select Currency": "Sélectionner une devise",
+          "Enable Screen Lock": "Activer le verrouillage de l'écran",
+          "Enter new password": "Entrez un nouveau mot de passe",
+          "Confirm new password": "Confirmez le nouveau mot de passe",
+          "Change App Screen Lock Password":
+            "Changer le mot de passe de verrouillage de l'application",
+          "Disable Lock Screen": "Désactiver le verrouillage de l'écran",
+          "Enter your password": "Entrez votre mot de passe",
+          "Enter Password to Unlock":
+            "Entrez le mot de passe pour déverrouiller",
         },
       },
       es: {
@@ -475,6 +517,17 @@ i18n
           "Sync balances to LIKKIM coldwallet":
             "Sincronizar saldos con la billetera fría LIKKIM",
           "No data available": "No hay datos disponibles",
+          "Search Currency": "Buscar moneda",
+          "Search Cryptocurrency": "Buscar criptomoneda",
+          "Select Currency": "Seleccionar moneda",
+          "Enable Screen Lock": "Habilitar bloqueo de pantalla",
+          "Enter new password": "Ingrese nueva contraseña",
+          "Confirm new password": "Confirmar nueva contraseña",
+          "Change App Screen Lock Password":
+            "Cambiar contraseña de bloqueo de pantalla de la aplicación",
+          "Disable Lock Screen": "Desactivar bloqueo de pantalla",
+          "Enter your password": "Ingrese su contraseña",
+          "Enter Password to Unlock": "Ingrese la contraseña para desbloquear",
         },
       },
       ar: {
@@ -569,6 +622,16 @@ i18n
           "Sync balances to LIKKIM coldwallet":
             "مزامنة الأرصدة مع محفظة LIKKIM الباردة",
           "No data available": "لا توجد بيانات متاحة",
+          "Search Currency": "البحث عن عملة",
+          "Search Cryptocurrency": "البحث عن عملة مشفرة",
+          "Select Currency": "اختر العملة",
+          "Enable Screen Lock": "تفعيل قفل الشاشة",
+          "Enter new password": "أدخل كلمة مرور جديدة",
+          "Confirm new password": "تأكيد كلمة المرور الجديدة",
+          "Change App Screen Lock Password": "تغيير كلمة مرور قفل الشاشة",
+          "Disable Lock Screen": "تعطيل قفل الشاشة",
+          "Enter your password": "أدخل كلمة المرور الخاصة بك",
+          "Enter Password to Unlock": "أدخل كلمة المرور لفتح القفل",
         },
       },
       ja: {
@@ -667,6 +730,18 @@ i18n
           "Sync balances to LIKKIM coldwallet":
             "مزامنة الأرصدة مع محفظة LIKKIM الباردة",
           "No data available": "データがありません",
+          "Search Currency": "通貨を検索",
+          "Search Cryptocurrency": "暗号通貨を検索",
+          "Select Currency": "通貨を選択",
+          "Enable Screen Lock": "画面ロックを有効にする",
+          "Enter new password": "新しいパスワードを入力してください",
+          "Confirm new password": "新しいパスワードを確認する",
+          "Change App Screen Lock Password":
+            "アプリの画面ロックパスワードを変更する",
+          "Disable Lock Screen": "画面ロックを無効にする",
+          "Enter your password": "パスワードを入力してください",
+          "Enter Password to Unlock":
+            "ロックを解除するにはパスワードを入力してください",
         },
       },
       ru: {
@@ -765,6 +840,17 @@ i18n
           "Sync balances to LIKKIM coldwallet":
             "Синхронизировать балансы с холодным кошельком LIKKIM",
           "No data available": "Данные недоступны",
+          "Search Currency": "Поиск валюты",
+          "Search Cryptocurrency": "Поиск криптовалюты",
+          "Select Currency": "Выбрать валюту",
+          "Enable Screen Lock": "Включить блокировку экрана",
+          "Enter new password": "Введите новый пароль",
+          "Confirm new password": "Подтвердите новый пароль",
+          "Change App Screen Lock Password":
+            "Изменить пароль блокировки экрана приложения",
+          "Disable Lock Screen": "Отключить блокировку экрана",
+          "Enter your password": "Введите ваш пароль",
+          "Enter Password to Unlock": "Введите пароль для разблокировки",
         },
       },
       ko: {
@@ -858,6 +944,16 @@ i18n
           "Sync balances to LIKKIM coldwallet":
             "LIKKIM 콜드 월렛으로 잔액 동기화",
           "No data available": "데이터가 없습니다",
+          "Search Currency": "통화 검색",
+          "Search Cryptocurrency": "암호화폐 검색",
+          "Select Currency": "통화 선택",
+          "Enable Screen Lock": "화면 잠금 활성화",
+          "Enter new password": "새 비밀번호 입력",
+          "Confirm new password": "새 비밀번호 확인",
+          "Change App Screen Lock Password": "앱 화면 잠금 비밀번호 변경",
+          "Disable Lock Screen": "화면 잠금 해제",
+          "Enter your password": "비밀번호를 입력하세요",
+          "Enter Password to Unlock": "잠금을 해제하려면 비밀번호를 입력하세요",
         },
       },
       pt: {
@@ -956,6 +1052,17 @@ i18n
           "Sync balances to LIKKIM coldwallet":
             "Sincronizar saldos com a carteira fria LIKKIM",
           "No data available": "Nenhum dado disponível",
+          "Search Currency": "Pesquisar moeda",
+          "Search Cryptocurrency": "Pesquisar criptomoeda",
+          "Select Currency": "Selecionar moeda",
+          "Enable Screen Lock": "Ativar bloqueio de tela",
+          "Enter new password": "Digite a nova senha",
+          "Confirm new password": "Confirme a nova senha",
+          "Change App Screen Lock Password":
+            "Alterar senha de bloqueio de tela do aplicativo",
+          "Disable Lock Screen": "Desativar bloqueio de tela",
+          "Enter your password": "Digite sua senha",
+          "Enter Password to Unlock": "Digite a senha para desbloquear",
         },
       },
       "pt-BR": {
@@ -1056,6 +1163,17 @@ i18n
           "Sync balances to LIKKIM coldwallet":
             "Sincronizar saldos com a carteira fria LIKKIM",
           "No data available": "Nenhum dado disponível",
+          "Search Currency": "Pesquisar moeda",
+          "Search Cryptocurrency": "Pesquisar criptomoeda",
+          "Select Currency": "Selecionar moeda",
+          "Enable Screen Lock": "Ativar bloqueio de tela",
+          "Enter new password": "Digite a nova senha",
+          "Confirm new password": "Confirme a nova senha",
+          "Change App Screen Lock Password":
+            "Alterar senha de bloqueio de tela do aplicativo",
+          "Disable Lock Screen": "Desativar bloqueio de tela",
+          "Enter your password": "Digite sua senha",
+          "Enter Password to Unlock": "Digite a senha para desbloquear",
         },
       },
       it: {
@@ -1156,6 +1274,17 @@ i18n
           "Sync balances to LIKKIM coldwallet":
             "Sincronizza saldi con il portafoglio freddo LIKKIM",
           "No data available": "Nessun dato disponibile",
+          "Search Currency": "Cerca valuta",
+          "Search Cryptocurrency": "Cerca criptovaluta",
+          "Select Currency": "Seleziona valuta",
+          "Enable Screen Lock": "Abilita blocco schermo",
+          "Enter new password": "Inserisci nuova password",
+          "Confirm new password": "Conferma nuova password",
+          "Change App Screen Lock Password":
+            "Cambia la password del blocco schermo dell'app",
+          "Disable Lock Screen": "Disabilita blocco schermo",
+          "Enter your password": "Inserisci la tua password",
+          "Enter Password to Unlock": "Inserisci la password per sbloccare",
         },
       },
       de: {
@@ -1258,6 +1387,17 @@ i18n
           "Sync balances to LIKKIM coldwallet":
             "Salden mit LIKKIM Cold Wallet synchronisieren",
           "No data available": "Keine Daten verfügbar",
+          "Search Currency": "Währung suchen",
+          "Search Cryptocurrency": "Kryptowährung suchen",
+          "Select Currency": "Währung auswählen",
+          "Enable Screen Lock": "Bildschirmsperre aktivieren",
+          "Enter new password": "Neues Passwort eingeben",
+          "Confirm new password": "Neues Passwort bestätigen",
+          "Change App Screen Lock Password":
+            "App-Bildschirmsperren-Passwort ändern",
+          "Disable Lock Screen": "Bildschirmsperre deaktivieren",
+          "Enter your password": "Geben Sie Ihr Passwort ein",
+          "Enter Password to Unlock": "Passwort eingeben, um zu entsperren",
         },
       },
       hi: {
@@ -1357,6 +1497,16 @@ i18n
           "Sync balances to LIKKIM coldwallet":
             "LIKKIM कोल्डवॉलेट में बैलेंस सिंक करें",
           "No data available": "कोई डेटा उपलब्ध नहीं है",
+          "Search Currency": "मुद्रा खोजें",
+          "Search Cryptocurrency": "क्रिप्टोकरेंसी खोजें",
+          "Select Currency": "मुद्रा चुनें",
+          "Enable Screen Lock": "स्क्रीन लॉक सक्षम करें",
+          "Enter new password": "नया पासवर्ड दर्ज करें",
+          "Confirm new password": "नया पासवर्ड पुष्टि करें",
+          "Change App Screen Lock Password": "ऐप स्क्रीन लॉक पासवर्ड बदलें",
+          "Disable Lock Screen": "स्क्रीन लॉक अक्षम करें",
+          "Enter your password": "अपना पासवर्ड दर्ज करें",
+          "Enter Password to Unlock": "अनलॉक करने के लिए पासवर्ड दर्ज करें",
         },
       },
       mn: {
@@ -1457,6 +1607,17 @@ i18n
           "Sync balances to LIKKIM coldwallet":
             "LIKKIM хүйтэн түрийвчтэй тэнцвэрийг синк хийх",
           "No data available": "Мэдээлэл байхгүй",
+          "Search Currency": "Валют хайх",
+          "Search Cryptocurrency": "Криптовалют хайх",
+          "Select Currency": "Валют сонгох",
+          "Enable Screen Lock": "Дэлгэцийн түгжээг идэвхжүүлэх",
+          "Enter new password": "Шинэ нууц үгээ оруулна уу",
+          "Confirm new password": "Шинэ нууц үгээ баталгаажуулна уу",
+          "Change App Screen Lock Password": "Аппын дэлгэцийн түгжээг өөрчлөх",
+          "Disable Lock Screen": "Дэлгэцийн түгжээг идэвхгүй болгох",
+          "Enter your password": "Нууц үгээ оруулна уу",
+          "Enter Password to Unlock":
+            "Түгжээг тайлахын тулд нууц үгээ оруулна уу",
         },
       },
       th: {
@@ -1550,6 +1711,17 @@ i18n
           "Sync balances to LIKKIM coldwallet":
             "ซิงค์ยอดคงเหลือกับกระเป๋าเงินเย็น LIKKIM",
           "No data available": "ไม่มีข้อมูล",
+          "Search Currency": "ค้นหาสกุลเงิน",
+          "Search Cryptocurrency": "ค้นหาสกุลเงินดิจิทัล",
+          "Select Currency": "เลือกสกุลเงิน",
+          "Enable Screen Lock": "เปิดใช้งานการล็อคหน้าจอ",
+          "Enter new password": "กรอกรหัสผ่านใหม่",
+          "Confirm new password": "ยืนยันรหัสผ่านใหม่",
+          "Change App Screen Lock Password":
+            "เปลี่ยนรหัสผ่านการล็อคหน้าจอของแอป",
+          "Disable Lock Screen": "ปิดใช้งานการล็อคหน้าจอ",
+          "Enter your password": "กรอกรหัสผ่านของคุณ",
+          "Enter Password to Unlock": "กรอกรหัสผ่านเพื่อปลดล็อค",
         },
       },
       uk: {
@@ -1646,6 +1818,17 @@ i18n
           "Sync balances to LIKKIM coldwallet":
             "Синхронізація балансів із холодним гаманцем LIKKIM",
           "No data available": "Дані недоступні",
+          "Search Currency": "Шукати валюту",
+          "Search Cryptocurrency": "Шукати криптовалюту",
+          "Select Currency": "Вибрати валюту",
+          "Enable Screen Lock": "Увімкнути блокування екрана",
+          "Enter new password": "Введіть новий пароль",
+          "Confirm new password": "Підтвердьте новий пароль",
+          "Change App Screen Lock Password":
+            "Змінити пароль блокування екрана програми",
+          "Disable Lock Screen": "Вимкнути блокування екрана",
+          "Enter your password": "Введіть свій пароль",
+          "Enter Password to Unlock": "Введіть пароль для розблокування",
         },
       },
       vi: {
@@ -1742,6 +1925,17 @@ i18n
           "Sync balances to LIKKIM coldwallet":
             "Đồng bộ số dư với ví lạnh LIKKIM",
           "No data available": "Không có dữ liệu",
+          "Search Currency": "Tìm kiếm tiền tệ",
+          "Search Cryptocurrency": "Tìm kiếm tiền điện tử",
+          "Select Currency": "Chọn tiền tệ",
+          "Enable Screen Lock": "Bật khóa màn hình",
+          "Enter new password": "Nhập mật khẩu mới",
+          "Confirm new password": "Xác nhận mật khẩu mới",
+          "Change App Screen Lock Password":
+            "Đổi mật khẩu khóa màn hình ứng dụng",
+          "Disable Lock Screen": "Tắt khóa màn hình",
+          "Enter your password": "Nhập mật khẩu của bạn",
+          "Enter Password to Unlock": "Nhập mật khẩu để mở khóa",
         },
       },
       id: {
@@ -1841,6 +2035,17 @@ i18n
           "Sync balances to LIKKIM coldwallet":
             "Sinkronkan saldo ke dompet dingin LIKKIM",
           "No data available": "Tidak ada data",
+          "Search Currency": "Cari mata uang",
+          "Search Cryptocurrency": "Cari mata uang kripto",
+          "Select Currency": "Pilih mata uang",
+          "Enable Screen Lock": "Aktifkan kunci layar",
+          "Enter new password": "Masukkan kata sandi baru",
+          "Confirm new password": "Konfirmasi kata sandi baru",
+          "Change App Screen Lock Password":
+            "Ubah kata sandi kunci layar aplikasi",
+          "Disable Lock Screen": "Nonaktifkan kunci layar",
+          "Enter your password": "Masukkan kata sandi Anda",
+          "Enter Password to Unlock": "Masukkan kata sandi untuk membuka kunci",
         },
       },
       tl: {
@@ -1943,6 +2148,17 @@ i18n
           "Sync balances to LIKKIM coldwallet":
             "I-sync ang mga balanse sa LIKKIM coldwallet",
           "No data available": "Walang magagamit na data",
+          "Search Currency": "Maghanap ng Pera",
+          "Search Cryptocurrency": "Maghanap ng Cryptocurrency",
+          "Select Currency": "Piliin ang Pera",
+          "Enable Screen Lock": "I-enable ang Screen Lock",
+          "Enter new password": "Ilagay ang bagong password",
+          "Confirm new password": "Kumpirmahin ang bagong password",
+          "Change App Screen Lock Password":
+            "Palitan ang Password ng Screen Lock ng App",
+          "Disable Lock Screen": "I-disable ang Screen Lock",
+          "Enter your password": "Ilagay ang iyong password",
+          "Enter Password to Unlock": "Ilagay ang Password upang I-unlock",
         },
       },
       bn: {
@@ -2041,6 +2257,17 @@ i18n
           "Sync balances to LIKKIM coldwallet":
             "LIKKIM ঠান্ডা ওয়ালেটে ব্যালেন্স সিঙ্ক করুন",
           "No data available": "কোনো তথ্য উপলব্ধ নেই",
+          "Search Currency": "মুদ্রা খুঁজুন",
+          "Search Cryptocurrency": "ক্রিপ্টোকারেন্সি খুঁজুন",
+          "Select Currency": "মুদ্রা নির্বাচন করুন",
+          "Enable Screen Lock": "স্ক্রিন লক সক্রিয় করুন",
+          "Enter new password": "নতুন পাসওয়ার্ড লিখুন",
+          "Confirm new password": "নতুন পাসওয়ার্ড নিশ্চিত করুন",
+          "Change App Screen Lock Password":
+            "অ্যাপ স্ক্রিন লক পাসওয়ার্ড পরিবর্তন করুন",
+          "Disable Lock Screen": "লক স্ক্রিন অক্ষম করুন",
+          "Enter your password": "আপনার পাসওয়ার্ড লিখুন",
+          "Enter Password to Unlock": "আনলক করতে পাসওয়ার্ড লিখুন",
         },
       },
     },
