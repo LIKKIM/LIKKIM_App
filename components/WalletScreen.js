@@ -1570,7 +1570,6 @@ function WalletScreen({ route, navigation }) {
                 flexDirection: "col",
                 width: "100%",
                 justifyContent: "space-between",
-                marginTop: 20,
               }}
             >
               <TouchableOpacity
