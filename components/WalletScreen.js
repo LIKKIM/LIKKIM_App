@@ -116,51 +116,7 @@ function WalletScreen({ route, navigation }) {
   );
 
   const bleManagerRef = useRef(null);
-  /*   const fetchTokenBalance = async (chainShortName, address) => {
-    try {
-      const response = await fetch(
-        "https://bt.likkim.com/meridian/address/queryTokenBalance",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            chainShortName,
-            address,
-          }),
-        }
-      );
 
-      const data = await response.json();
-
-      if (data && data.balance) {
-        return data.balance;
-      } else {
-        console.error("Invalid response format:", data);
-        return "0"; // 返回默认值
-      }
-    } catch (error) {
-      console.error("Error fetching token balance:", error);
-      return "0"; // 返回默认值
-    }
-  };
-  useEffect(() => {
-    const updateBalances = async () => {
-      const updatedCards = await Promise.all(
-        cryptoCards.map(async (card) => {
-          const balance = await fetchTokenBalance(card.shortName, card.address);
-          return { ...card, balance }; // 更新 balance
-        })
-      );
-
-      setCryptoCards(updatedCards);
-    };
-
-    if (cryptoCards.length > 0) {
-      updateBalances();
-    }
-  }, [cryptoCards]); */
   const scanDevices = () => {
     if (Platform.OS !== "web" && !isScanning) {
       console.log("Scanning started");
@@ -182,7 +138,7 @@ function WalletScreen({ route, navigation }) {
               }
               return prevDevices;
             });
-            console.log("Scanned device:", device);
+            //  console.log("Scanned device:", device);
           }
         }
       );
@@ -578,7 +534,7 @@ function WalletScreen({ route, navigation }) {
     const loadCryptoCards = async () => {
       try {
         const storedCards = await AsyncStorage.getItem("cryptoCards");
-        console.log(storedCards);
+        //  console.log(storedCards);
         if (storedCards !== null) {
           setCryptoCards(JSON.parse(storedCards));
           setAddedCryptos(JSON.parse(storedCards)); // 加载时同步 addedCryptos

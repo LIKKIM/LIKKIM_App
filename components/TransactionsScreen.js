@@ -112,7 +112,7 @@ function TransactionsScreen() {
               }
               return prevDevices;
             });
-            console.log("Scanned device:", device);
+            //  console.log("Scanned device:", device);
           }
         }
       );
