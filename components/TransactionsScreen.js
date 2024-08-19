@@ -609,7 +609,7 @@ function TransactionsScreen() {
       console.error("发送启动命令失败", error);
     }
   };
-
+  // 提交验证码
   const handlePinSubmit = async () => {
     // 首先关闭 "Enter PIN to Connect" 的模态框
     setPinModalVisible(false);
@@ -1062,7 +1062,7 @@ function TransactionsScreen() {
                   placeholder={t("Enter Amount")}
                   placeholderTextColor={isDarkMode ? "#808080" : "#cccccc"}
                   keyboardType="numeric"
-                  onChangeText={(text) => setAmount(text)} // 保持输入框不为空，若为空则设为 "0"
+                  onChangeText={(text) => setAmount(text)}
                   value={amount}
                   autoFocus={true}
                   caretHidden={true} // 隐藏光标
@@ -1070,14 +1070,23 @@ function TransactionsScreen() {
               </View>
               <View
                 style={{
-                  flexDirection: "column", // 使用 column 代替 col
+                  flexDirection: "column",
                   justifyContent: "space-between",
                   width: "100%",
                 }}
               >
                 <TouchableOpacity
-                  style={TransactionsScreenStyle.optionButton}
+                  style={[
+                    TransactionsScreenStyle.optionButton,
+                    {
+                      backgroundColor:
+                        amount && parseFloat(amount) > 0
+                          ? buttonBackgroundColor
+                          : disabledButtonBackgroundColor, // 动态设置按钮颜色
+                    },
+                  ]}
                   onPress={handleNextAfterAmount}
+                  disabled={!amount || parseFloat(amount) === 0} // 若金额无效，则按钮禁用
                 >
                   <Text style={TransactionsScreenStyle.submitButtonText}>
                     {t("Next")}
