@@ -332,6 +332,18 @@ function WalletScreen({ route, navigation }) {
     return crc & 0xffff; // 确保CRC值是16位
   }
 
+  // 停止监听验证码;
+  const stopMonitoringVerificationCode = () => {
+    if (monitorSubscription) {
+      try {
+        monitorSubscription.remove();
+        monitorSubscription = null;
+        console.log("验证码监听已停止");
+      } catch (error) {
+        console.error("停止监听时发生错误:", error);
+      }
+    }
+  };
   const handleVerifyAddress = () => {
     if (verifiedDevices.length > 0) {
       // 发送显示地址命令时，确保传递的是设备对象
@@ -834,6 +846,13 @@ function WalletScreen({ route, navigation }) {
     setDeleteConfirmVisible(true);
     setDropdownVisible(false);
   };
+
+  // 停止监听
+  useEffect(() => {
+    if (!pinModalVisible) {
+      stopMonitoringVerificationCode();
+    }
+  }, [pinModalVisible]);
 
   useEffect(() => {
     if (route.params?.showAddModal) {

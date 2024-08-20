@@ -156,6 +156,13 @@ function MyColdWalletScreen() {
     loadVerifiedDevices();
   }, []);
 
+  // 停止监听
+  useEffect(() => {
+    if (!pinModalVisible) {
+      stopMonitoringVerificationCode();
+    }
+  }, [pinModalVisible]);
+
   const handleScreenLockToggle = async (value) => {
     if (value) {
       openPasswordModal(); // 启用锁屏时打开设置密码的模态框
@@ -551,7 +558,7 @@ function MyColdWalletScreen() {
         JSON.stringify(updatedVerifiedDevices)
       );
       console.log(`设备 ${device.id} 已从已验证设备中移除`);
-
+      stopMonitoringVerificationCode();
       // 更新全局状态，表示设备已不再验证成功
       setIsVerificationSuccessful(false);
       console.log("验证状态已更新为 false。");
