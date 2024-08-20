@@ -353,7 +353,7 @@ function TransactionsScreen() {
       const base64Command = base64.fromByteArray(finalCommand);
 
       console.log(
-        `最终命令: ${Array.from(finalCommand)
+        `显示地址命令: ${Array.from(finalCommand)
           .map((byte) => byte.toString(16).padStart(2, "0"))
           .join(" ")}`
       );
@@ -557,7 +557,7 @@ function TransactionsScreen() {
       ]);
 
       console.log(
-        `Final Command (hex): ${finalCommand
+        `签名交易命令: ${finalCommand
           .toString("hex")
           .match(/.{1,2}/g)
           .join(" ")}`

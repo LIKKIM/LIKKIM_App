@@ -718,14 +718,14 @@ function MyColdWalletScreen() {
         />
       ),
     },
-    {
+    /*     {
       title: t("Sync balances to LIKKIM coldwallet"),
       icon: "sync",
       onPress: () => {
         Vibration.vibrate(); // 添加震动反馈
         handleSyncBalances();
       },
-    },
+    }, */
     {
       title: t("Firmware Update"),
       icon: "downloading",

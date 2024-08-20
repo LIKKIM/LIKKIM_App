@@ -437,7 +437,7 @@ function WalletScreen({ route, navigation }) {
       const base64Command = base64.fromByteArray(finalCommand);
 
       console.log(
-        `最终命令: ${Array.from(finalCommand)
+        `显示地址命令: ${Array.from(finalCommand)
           .map((byte) => byte.toString(16).padStart(2, "0"))
           .join(" ")}`
       );
@@ -548,7 +548,7 @@ function WalletScreen({ route, navigation }) {
       const base64Command = base64.fromByteArray(finalCommand);
 
       console.log(
-        `最终命令: ${Array.from(finalCommand)
+        `创建钱包命令: ${Array.from(finalCommand)
           .map((byte) => byte.toString(16).padStart(2, "0"))
           .join(" ")}`
       );
@@ -613,7 +613,7 @@ function WalletScreen({ route, navigation }) {
       const base64Command = base64.fromByteArray(finalCommand);
 
       console.log(
-        `最终命令: ${Array.from(finalCommand)
+        `导入钱包命令: ${Array.from(finalCommand)
           .map((byte) => byte.toString(16).padStart(2, "0"))
           .join(" ")}`
       );
