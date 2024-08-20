@@ -1,6 +1,7 @@
 // MyColdWalletScreen.js
 import React, { useState, useEffect, useRef, useContext } from "react";
 import {
+  Vibration,
   View,
   Text,
   Modal,
@@ -645,13 +646,19 @@ function MyColdWalletScreen() {
     {
       title: t("Enable Screen Lock"),
       icon: "lock-outline",
-      onPress: () => handleScreenLockToggle(!isScreenLockEnabled),
+      onPress: () => {
+        Vibration.vibrate(); // 添加震动反馈
+        handleScreenLockToggle(!isScreenLockEnabled);
+      },
       toggle: (
         <Switch
           trackColor={{ false: "#767577", true: "#81b0ff" }}
           thumbColor={isScreenLockEnabled ? "#fff" : "#f4f3f4"}
           ios_backgroundColor="#3e3e3e"
-          onValueChange={() => handleScreenLockToggle(!isScreenLockEnabled)}
+          onValueChange={() => {
+            Vibration.vibrate(); // 添加震动反馈
+            handleScreenLockToggle(!isScreenLockEnabled);
+          }}
           value={isScreenLockEnabled}
         />
       ),
@@ -661,21 +668,30 @@ function MyColdWalletScreen() {
           {
             title: t("Change App Screen Lock Password"),
             icon: "password",
-            onPress: openChangePasswordModal, // 调用函数打开模态框
+            onPress: () => {
+              Vibration.vibrate(); // 添加震动反馈
+              openChangePasswordModal();
+            },
           },
         ]
       : []),
     {
       title: t("Default Currency"),
       icon: "attach-money",
-      onPress: () => setCurrencyModalVisible(true),
+      onPress: () => {
+        Vibration.vibrate(); // 添加震动反馈
+        setCurrencyModalVisible(true);
+      },
       extraIcon: "arrow-drop-down",
       selectedOption: selectedCurrency,
     },
     {
       title: t("Language"),
       icon: "language",
-      onPress: () => setLanguageModalVisible(true),
+      onPress: () => {
+        Vibration.vibrate(); // 添加震动反馈
+        setLanguageModalVisible(true);
+      },
       extraIcon: "arrow-drop-down",
       selectedOption: (
         languages.find((lang) => lang.code === selectedLanguage) ||
@@ -685,13 +701,19 @@ function MyColdWalletScreen() {
     {
       title: t("Dark Mode"),
       icon: "dark-mode",
-      onPress: () => handleDarkModeChange(!isDarkMode),
+      onPress: () => {
+        Vibration.vibrate(); // 添加震动反馈
+        handleDarkModeChange(!isDarkMode);
+      },
       toggle: (
         <Switch
           trackColor={{ false: "#767577", true: "#81b0ff" }}
           thumbColor={isDarkMode ? "#fff" : "#f4f3f4"}
           ios_backgroundColor="#3e3e3e"
-          onValueChange={() => handleDarkModeChange(!isDarkMode)}
+          onValueChange={() => {
+            Vibration.vibrate(); // 添加震动反馈
+            handleDarkModeChange(!isDarkMode);
+          }}
           value={isDarkMode}
         />
       ),
@@ -699,17 +721,24 @@ function MyColdWalletScreen() {
     {
       title: t("Sync balances to LIKKIM coldwallet"),
       icon: "sync",
-      onPress: handleSyncBalances,
+      onPress: () => {
+        Vibration.vibrate(); // 添加震动反馈
+        handleSyncBalances();
+      },
     },
     {
       title: t("Firmware Update"),
       icon: "downloading",
-      onPress: handleFirmwareUpdate,
+      onPress: () => {
+        Vibration.vibrate(); // 添加震动反馈
+        handleFirmwareUpdate();
+      },
     },
     {
       title: t("Help & Support"),
       icon: "help-outline",
       onPress: () => {
+        Vibration.vibrate(); // 添加震动反馈
         Linking.openURL("https://www.likkim.com");
       },
     },
@@ -717,14 +746,15 @@ function MyColdWalletScreen() {
       title: t("Privacy & Data"),
       icon: "gpp-good",
       onPress: () => {
+        Vibration.vibrate(); // 添加震动反馈
         Linking.openURL("https://www.likkim.com");
       },
     },
-
     {
       title: t("About"),
       icon: "info-outline",
       onPress: () => {
+        Vibration.vibrate(); // 添加震动反馈
         Linking.openURL("https://www.likkim.com");
       },
     },
@@ -732,8 +762,9 @@ function MyColdWalletScreen() {
       title: t("Version"),
       icon: "update",
       version: buildNumber, // 使用导入的 buildNumber
-
-      onPress: () => {},
+      onPress: () => {
+        Vibration.vibrate(); // 添加震动反馈
+      },
     },
   ];
 
