@@ -139,7 +139,7 @@ function TransactionsScreen() {
       bleManagerRef.current.destroy();
     };
   }, []);
-
+  let monitorSubscription;
   const monitorVerificationCode = (device) => {
     const notifyCharacteristicUUID = "0000FFE1-0000-1000-8000-00805F9B34FB";
 

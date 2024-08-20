@@ -344,6 +344,7 @@ function WalletScreen({ route, navigation }) {
       }
     }
   };
+
   const handleVerifyAddress = () => {
     if (verifiedDevices.length > 0) {
       // 发送显示地址命令时，确保传递的是设备对象
@@ -663,11 +664,104 @@ function WalletScreen({ route, navigation }) {
           // 将验证码存储到状态中，或进行进一步的处理
           setReceivedVerificationCode(verificationCode);
         } else {
-          console.warn("接收到的不是预期的验证码数据");
+          console.log("验证码模块接收到的数据:", receivedDataHex);
         }
       }
     );
   };
+
+  // 监听钱包地址的函数
+  const monitorWalletAddress = (device) => {
+    const notifyCharacteristicUUID = "0000FFE1-0000-1000-8000-00805F9B34FB";
+
+    monitorSubscription = device.monitorCharacteristicForService(
+      serviceUUID,
+      notifyCharacteristicUUID,
+      (error, characteristic) => {
+        if (error) {
+          console.error("监听钱包地址时出错:", error.message);
+          return;
+        }
+
+        // Base64解码接收到的数据
+        const receivedData = Buffer.from(characteristic.value, "base64");
+
+        // 将接收到的数据解析为十六进制字符串
+        const receivedDataHex = receivedData.toString("hex");
+        console.log("接收到的16进制数据字符串:", receivedDataHex);
+
+        // 检查头部标志位是否为 A3
+        if (receivedDataHex.startsWith("a3")) {
+          // 解析地址长度
+          const addressLength = parseInt(receivedDataHex.substring(2, 4), 16);
+
+          // 解析钱包地址
+          const addressStartIndex = 4;
+          const addressEndIndex = addressStartIndex + addressLength * 2; // 每个字符占2个16进制位
+          const walletAddressHex = receivedDataHex.substring(
+            addressStartIndex,
+            addressEndIndex
+          );
+
+          // 将地址从16进制转换为字符串
+          const walletAddress = Buffer.from(walletAddressHex, "hex").toString(
+            "utf-8"
+          );
+          console.log("提取的钱包地址:", walletAddress);
+
+          // 解析CRC校验码（顺序：低字节在前，高字节在后）
+          const crcStartIndex = addressEndIndex + 2; // 过掉 dataLength 的部分
+          const receivedCrcLowByte = receivedDataHex.substring(
+            crcStartIndex,
+            crcStartIndex + 2
+          );
+          const receivedCrcHighByte = receivedDataHex.substring(
+            crcStartIndex + 2,
+            crcStartIndex + 4
+          );
+          const receivedCrc = receivedCrcLowByte + receivedCrcHighByte; // 低字节在前
+
+          // 提取所有用于CRC校验的数据（不包括 CRC 和结尾标志位）
+          const dataToVerifyHex = receivedDataHex.substring(0, crcStartIndex);
+          const dataToVerify = Buffer.from(dataToVerifyHex, "hex");
+
+          // 计算CRC校验码
+          let calculatedCrc = crc16Modbus(dataToVerify)
+            .toString(16)
+            .padStart(4, "0");
+
+          // 将计算的 CRC 码转换为低字节在前的格式
+          calculatedCrc = calculatedCrc.slice(2) + calculatedCrc.slice(0, 2);
+
+          // 比较接收到的CRC和计算的CRC是否匹配
+          if (calculatedCrc.toLowerCase() === receivedCrc.toLowerCase()) {
+            console.log("CRC校验通过，钱包地址有效:", walletAddress);
+            // 可以在此处触发后续操作，如更新状态或UI
+          } else {
+            console.error(
+              `CRC校验失败，钱包地址可能无效。Received: ${receivedCrc}, Calculated: ${calculatedCrc}`
+            );
+          }
+        } else {
+          console.error("收到的数据头部不正确，期望A3");
+        }
+      }
+    );
+  };
+
+  // 停止监听钱包地址
+  const stopMonitoringWalletAddress = () => {
+    if (monitorSubscription) {
+      try {
+        monitorSubscription.remove();
+        monitorSubscription = null;
+        console.log("钱包地址监听已停止");
+      } catch (error) {
+        console.error("停止监听时发生错误:", error);
+      }
+    }
+  };
+
   useEffect(() => {
     if (modalVisible) {
       // 重置 tabOpacity 为 1
@@ -1034,6 +1128,8 @@ function WalletScreen({ route, navigation }) {
       // 发送创建钱包命令时，确保传递的是设备对象
       const device = devices.find((d) => d.id === verifiedDevices[0]);
       if (device) {
+        // 调用监听钱包地址的函数
+        monitorWalletAddress(device);
         sendCreateWalletCommand(device); // 确保这里传递的是完整的设备对象
         setCreatePendingModalVisible(true);
       } else {
