@@ -1608,8 +1608,8 @@ function TransactionsScreen() {
           <BlurView intensity={10} style={TransactionsScreenStyle.centeredView}>
             <View style={TransactionsScreenStyle.pinModalView}>
               <Image
-                source={failImage}
-                style={{ width: 60, height: 60, marginTop: 20 }}
+                source={require("../assets/gif/Fail.gif")}
+                style={{ width: 120, height: 120, marginTop: 20 }}
               />
               <Text style={TransactionsScreenStyle.modalTitle}>
                 {t("Verification failed!")}

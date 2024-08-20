@@ -2211,8 +2211,8 @@ function WalletScreen({ route, navigation }) {
         <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
           <View style={WalletScreenStyle.pinModalView}>
             <Image
-              source={failImage}
-              style={{ width: 60, height: 60, marginTop: 20 }}
+              source={require("../assets/gif/Fail.gif")}
+              style={{ width: 120, height: 120, marginTop: 20 }}
             />
             <Text style={WalletScreenStyle.modalTitle}>
               {t("Verification failed!")}
@@ -2248,6 +2248,10 @@ function WalletScreen({ route, navigation }) {
             <Text style={WalletScreenStyle.modalTitle}>
               {t("Creating on LIKKIM Hardware...")}
             </Text>
+            <Image
+              source={require("../assets/gif/Pending.gif")}
+              style={{ width: 120, height: 120 }}
+            />
             <Text
               style={[WalletScreenStyle.modalSubtitle, { marginBottom: 20 }]}
             >
@@ -2274,8 +2278,12 @@ function WalletScreen({ route, navigation }) {
         <View style={WalletScreenStyle.centeredView}>
           <View style={WalletScreenStyle.pendingModalView}>
             <Text style={WalletScreenStyle.modalTitle}>
-              {t("Importing Wallet on LIKKIM Hardware...")}
+              {t("Importing on LIKKIM Hardware...")}
             </Text>
+            <Image
+              source={require("../assets/gif/Pending.gif")}
+              style={{ width: 120, height: 120 }}
+            />
             <Text
               style={[WalletScreenStyle.modalSubtitle, { marginBottom: 20 }]}
             >

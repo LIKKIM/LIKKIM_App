@@ -1483,6 +1483,7 @@ function MyColdWalletScreen() {
               secureTextEntry
               onChangeText={setPinCode}
               value={pinCode}
+              autoFocus={true}
             />
             <View style={{ width: "100%" }}>
               <TouchableOpacity
@@ -1547,9 +1548,10 @@ function MyColdWalletScreen() {
         <BlurView intensity={10} style={MyColdWalletScreenStyle.centeredView}>
           <View style={MyColdWalletScreenStyle.pinModalView}>
             <Image
-              source={failImage}
-              style={{ width: 60, height: 60, marginTop: 20 }}
+              source={require("../assets/gif/Fail.gif")}
+              style={{ width: 120, height: 120, marginTop: 20 }}
             />
+
             <Text style={MyColdWalletScreenStyle.modalTitle}>
               {t("Verification failed!")}
             </Text>
