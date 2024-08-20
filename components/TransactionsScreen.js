@@ -1277,7 +1277,9 @@ function TransactionsScreen() {
           <BlurView intensity={10} style={TransactionsScreenStyle.centeredView}>
             <View style={TransactionsScreenStyle.modalView}>
               <Text style={TransactionsScreenStyle.TransactionModalTitle}>
-                {operationType === "send"
+                {addedCryptos.length === 0
+                  ? t("No cryptocurrencies available. Please add wallet first.")
+                  : operationType === "send"
                   ? t("Choose the cryptocurrency to send:")
                   : t("Choose the cryptocurrency to receive:")}
               </Text>
@@ -1286,18 +1288,13 @@ function TransactionsScreen() {
                   style={{
                     justifyContent: "center",
                     alignItems: "center",
-                    height: 300,
+                    height: 260,
                   }}
                 >
                   <Image
                     source={require("../assets/gif/Empty.gif")}
                     style={{ width: 200, height: 200, marginBottom: 40 }}
                   />
-                  <Text style={TransactionsScreenStyle.modalText}>
-                    {t(
-                      "No cryptocurrencies available. Please add wallet first."
-                    )}
-                  </Text>
                 </View>
               ) : (
                 <ScrollView

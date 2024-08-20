@@ -395,7 +395,8 @@ const TransactionsScreenStyles = (isDarkMode) => {
       fontSize: 16,
       color: titleColor,
       textAlign: "center",
-      marginBottom: 30,
+      marginBottom: 20,
+      lineHeight: 30,
     },
   });
 };
