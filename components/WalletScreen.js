@@ -523,6 +523,8 @@ function WalletScreen({ route, navigation }) {
         return;
       }
 
+      // 创建钱包命令发送后，立即开始监听钱包地址
+      monitorWalletAddress(device);
       // 构建命令数据，未包含CRC校验码
       const commandData = new Uint8Array([0xf4, 0x01, 0x0c, 0x04]);
 
@@ -558,9 +560,6 @@ function WalletScreen({ route, navigation }) {
         base64Command // 最终的命令数据的Base64编码
       );
       console.log("创建钱包命令已发送");
-
-      // 创建钱包命令发送后，立即开始监听钱包地址
-      monitorWalletAddress(device);
     } catch (error) {
       console.error("发送创建钱包命令失败:", error);
     }
