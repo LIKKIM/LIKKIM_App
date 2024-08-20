@@ -712,6 +712,25 @@ function WalletScreen({ route, navigation }) {
           );
           console.log("提取的钱包地址:", walletAddress);
 
+          // 判断链名称
+          let chainName = "Unknown Chain";
+
+          if (/^1|3|bc1/.test(walletAddress)) {
+            chainName = "Bitcoin (BTC)";
+          } else if (/^0x/.test(walletAddress) && walletAddress.length === 42) {
+            chainName = "Ethereum (ETH)";
+          } else if (/^L/.test(walletAddress) || /^M/.test(walletAddress)) {
+            chainName = "Litecoin (LTC)";
+          } else if (/^r/.test(walletAddress)) {
+            chainName = "Ripple (XRP)";
+          } else if (/^T/.test(walletAddress)) {
+            chainName = "TRON (TRX)";
+          } else if (/^D/.test(walletAddress)) {
+            chainName = "Dogecoin (DOGE)";
+          }
+
+          console.log("该钱包地址属于链:", chainName);
+
           // 解析CRC校验码（顺序：低字节在前，高字节在后）
           const crcStartIndex = addressEndIndex + 2; // 过掉 dataLength 的部分
           const receivedCrcLowByte = receivedDataHex.substring(
