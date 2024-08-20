@@ -525,7 +525,7 @@ function WalletScreen({ route, navigation }) {
 
       // 构建命令数据，未包含CRC校验码
       const commandData = new Uint8Array([0xf4, 0x01, 0x0c, 0x04]);
-      //这是导入钱包的启动命令   const commandData = new Uint8Array([0xf4, 0x02, 0x0c, 0x04]);
+
       // 使用CRC-16-Modbus算法计算CRC校验码
       const crc = crc16Modbus(commandData);
 
@@ -558,10 +558,14 @@ function WalletScreen({ route, navigation }) {
         base64Command // 最终的命令数据的Base64编码
       );
       console.log("创建钱包命令已发送");
+
+      // 创建钱包命令发送后，立即开始监听钱包地址
+      monitorWalletAddress(device);
     } catch (error) {
       console.error("发送创建钱包命令失败:", error);
     }
   };
+
   // 导入钱包命令
   const sendImportWalletCommand = async (device) => {
     try {
@@ -670,7 +674,7 @@ function WalletScreen({ route, navigation }) {
     );
   };
 
-  // 监听钱包地址的函数
+  // 监听地址监听钱包地址的函数
   const monitorWalletAddress = (device) => {
     const notifyCharacteristicUUID = "0000FFE1-0000-1000-8000-00805F9B34FB";
 
@@ -1129,8 +1133,9 @@ function WalletScreen({ route, navigation }) {
       const device = devices.find((d) => d.id === verifiedDevices[0]);
       if (device) {
         // 调用监听钱包地址的函数
-        monitorWalletAddress(device);
+
         sendCreateWalletCommand(device); // 确保这里传递的是完整的设备对象
+
         setCreatePendingModalVisible(true);
       } else {
         console.error("未找到与该ID匹配的设备对象");
