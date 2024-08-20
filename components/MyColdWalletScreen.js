@@ -1376,7 +1376,7 @@ function MyColdWalletScreen() {
             <Text style={MyColdWalletScreenStyle.bluetoothModalTitle}>
               {t("LOOKING FOR DEVICES")}
             </Text>
-            {!verifiedDevices.length && isScanning ? (
+            {isScanning ? (
               <View style={{ alignItems: "center" }}>
                 <Image
                   source={require("../assets/Bluetooth.gif")}
