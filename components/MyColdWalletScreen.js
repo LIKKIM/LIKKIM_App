@@ -1478,8 +1478,8 @@ function MyColdWalletScreen() {
         <BlurView intensity={10} style={MyColdWalletScreenStyle.centeredView}>
           <View style={MyColdWalletScreenStyle.pinModalView}>
             <Image
-              source={successImage}
-              style={{ width: 60, height: 60, marginTop: 20 }}
+              source={require("../assets/gif/Success.gif")}
+              style={{ width: 120, height: 120, marginTop: 20 }}
             />
             <Text style={MyColdWalletScreenStyle.modalTitle}>
               {t("Verification successful!")}
