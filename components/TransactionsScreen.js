@@ -1289,6 +1289,10 @@ function TransactionsScreen() {
                     height: 300,
                   }}
                 >
+                  <Image
+                    source={require("../assets/gif/Empty.gif")}
+                    style={{ width: 200, height: 200, marginBottom: 40 }}
+                  />
                   <Text style={TransactionsScreenStyle.modalText}>
                     {t(
                       "No cryptocurrencies available. Please add wallet first."
