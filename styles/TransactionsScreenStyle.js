@@ -38,7 +38,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
     pendingModalView: {
       margin: 20,
       width: "90%",
-      height: 300,
+      height: 340,
       backgroundColor: modalBackgroundColor,
       borderRadius: 20,
       padding: 35,

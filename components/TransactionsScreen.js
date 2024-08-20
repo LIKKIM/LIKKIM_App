@@ -50,6 +50,10 @@ function TransactionsScreen() {
     setVerifiedDevices,
   } = useContext(CryptoContext);
 
+  const [
+    confirmingTransactionModalVisible,
+    setConfirmingTransactionModalVisible,
+  ] = useState(false);
   const TransactionsScreenStyle = TransactionsScreenStyles(isDarkMode);
   const addressIcon = isDarkMode ? "#ffffff" : "#676776";
   const [modalVisible, setModalVisible] = useState(false);
@@ -81,6 +85,8 @@ function TransactionsScreen() {
   const restoreIdentifier = Constants.installationId;
   const [isAddressValid, setIsAddressValid] = useState(false);
   const [verificationSuccessModalVisible, setVerificationSuccessModalVisible] =
+    useState(false);
+  const [verifyingAddressModalVisible, setVerifyingAddressModalVisible] =
     useState(false);
   const [verificationFailModalVisible, setVerificationFailModalVisible] =
     useState(false);
@@ -358,10 +364,10 @@ function TransactionsScreen() {
         writeCharacteristicUUID, // 可写特性的UUID
         base64Command // 最终的命令数据的Base64编码
       );
+      // Close the address modal and open the verifying address modal
+      setAddressModalVisible(false);
+      setVerifyingAddressModalVisible(true);
       console.log("显示地址命令已发送");
-
-      // 提示用户在 LIKKIM 设备上核对地址
-      alert("Please verify the address on your LIKKIM device.");
     } catch (error) {
       console.error("发送显示地址命令失败:", error);
     }
@@ -556,7 +562,9 @@ function TransactionsScreen() {
           .match(/.{1,2}/g)
           .join(" ")}`
       );
-
+      // 提示用户在 LIKKIM 设备上确认交易签名
+      setConfirmModalVisible(false);
+      setConfirmingTransactionModalVisible(true);
       // 分割命令到多个小包
       const chunkSize = 20; // 20 字节是常见的 BLE 数据包大小限制
       for (let i = 0; i < finalCommand.length; i += chunkSize) {
@@ -575,8 +583,7 @@ function TransactionsScreen() {
         // 让设备有时间处理每个包
         await new Promise((resolve) => setTimeout(resolve, 100));
       }
-      // 提示用户在 LIKKIM 设备上确认交易签名
-      alert("Please confirm the transaction on your LIKKIM device.");
+
       console.log("签名交易命令已成功发送到设备");
     } catch (error) {
       console.error("发送交易数据到 BLE 设备时出错:", error);
@@ -1629,6 +1636,76 @@ function TransactionsScreen() {
               </TouchableOpacity>
             </View>
           </BlurView>
+        </Modal>
+        {/* Confirming Transaction Modal */}
+        <Modal
+          visible={confirmingTransactionModalVisible}
+          onRequestClose={() => setConfirmingTransactionModalVisible(false)}
+          transparent={true}
+          animationType="slide"
+        >
+          <View style={TransactionsScreenStyle.centeredView}>
+            <View style={TransactionsScreenStyle.pendingModalView}>
+              <Text style={TransactionsScreenStyle.modalTitle}>
+                {t("Confirming Transaction on LIKKIM Device...")}
+              </Text>
+              <Image
+                source={require("../assets/gif/Pending.gif")}
+                style={{ width: 120, height: 120 }}
+              />
+              <Text
+                style={[
+                  TransactionsScreenStyle.modalSubtitle,
+                  { marginBottom: 20 },
+                ]}
+              >
+                {t("Please confirm the transaction on your LIKKIM device.")}
+              </Text>
+              <TouchableOpacity
+                style={TransactionsScreenStyle.submitButton}
+                onPress={() => setConfirmingTransactionModalVisible(false)}
+              >
+                <Text style={TransactionsScreenStyle.submitButtonText}>
+                  {t("Close")}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
+        {/* Verifying Address Modal */}
+        <Modal
+          visible={verifyingAddressModalVisible}
+          onRequestClose={() => setVerifyingAddressModalVisible(false)}
+          transparent={true}
+          animationType="slide"
+        >
+          <View style={TransactionsScreenStyle.centeredView}>
+            <View style={TransactionsScreenStyle.pendingModalView}>
+              <Text style={TransactionsScreenStyle.modalTitle}>
+                {t("Verifying Address on LIKKIM Device...")}
+              </Text>
+              <Image
+                source={require("../assets/gif/Pending.gif")}
+                style={{ width: 120, height: 120 }}
+              />
+              <Text
+                style={[
+                  TransactionsScreenStyle.modalSubtitle,
+                  { marginBottom: 20 },
+                ]}
+              >
+                {t("Please verify the address on your LIKKIM device.")}
+              </Text>
+              <TouchableOpacity
+                style={TransactionsScreenStyle.submitButton}
+                onPress={() => setVerifyingAddressModalVisible(false)}
+              >
+                <Text style={TransactionsScreenStyle.submitButtonText}>
+                  {t("Close")}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
         </Modal>
       </View>
     </LinearGradient>
