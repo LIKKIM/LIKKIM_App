@@ -2213,7 +2213,10 @@ function WalletScreen({ route, navigation }) {
       {/* 创建新的 createPendingModal 模态框 */}
       <Modal
         visible={createPendingModalVisible}
-        onRequestClose={() => setCreatePendingModalVisible(false)}
+        onRequestClose={() => {
+          setCreatePendingModalVisible(false);
+          stopMonitoringWalletAddress(); // 在关闭模态框时停止监听钱包地址
+        }}
         transparent={true}
         animationType="slide"
       >
