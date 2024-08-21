@@ -1379,7 +1379,7 @@ function MyColdWalletScreen() {
             {isScanning ? (
               <View style={{ alignItems: "center" }}>
                 <Image
-                  source={require("../assets/Bluetooth.gif")}
+                  source={require("../assets/gif/Bluetooth.gif")}
                   style={MyColdWalletScreenStyle.bluetoothImg}
                 />
                 <Text style={MyColdWalletScreenStyle.scanModalSubtitle}>

@@ -1535,7 +1535,7 @@ function TransactionsScreen() {
               {isScanning ? (
                 <View style={{ alignItems: "center" }}>
                   <Image
-                    source={require("../assets/Bluetooth.gif")}
+                    source={require("../assets/gif/Bluetooth.gif")}
                     style={TransactionsScreenStyle.bluetoothImg}
                   />
                   <Text style={TransactionsScreenStyle.scanModalSubtitle}>

@@ -2087,7 +2087,7 @@ function WalletScreen({ route, navigation }) {
             {isScanning ? (
               <View style={{ alignItems: "center" }}>
                 <Image
-                  source={require("../assets/Bluetooth.gif")}
+                  source={require("../assets/gif/Bluetooth.gif")}
                   style={WalletScreenStyle.bluetoothImg}
                 />
                 <Text style={WalletScreenStyle.scanModalSubtitle}>
