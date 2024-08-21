@@ -184,7 +184,7 @@ function TransactionsScreen() {
   const monitorTransactionResponse = (device) => {
     const notifyCharacteristicUUID = "0000FFE1-0000-1000-8000-00805F9B34FB";
 
-    device.monitorCharacteristicForService(
+    transactionMonitorSubscription = device.monitorCharacteristicForService(
       serviceUUID,
       notifyCharacteristicUUID,
       (error, characteristic) => {
@@ -200,17 +200,17 @@ function TransactionsScreen() {
         const receivedDataHex = receivedData.toString("hex").toUpperCase();
         console.log("接收到的16进制数据字符串:", receivedDataHex);
 
-        // 检查收到的数据是否为同意签名
-        if (receivedDataHex === "FA000230D00D0A") {
-          console.log("同意签名");
-          setConfirmingTransactionModalVisible(false);
-          setVerificationSuccessModalVisible(true);
-        }
         // 检查收到的数据是否为拒绝签名
-        else if (receivedDataHex === "FA0102A0D10D0A") {
+        if (receivedDataHex === "FA000230D00D0A") {
           console.log("拒绝签名");
-          setConfirmingTransactionModalVisible(false);
-          setVerificationFailModalVisible(true);
+          //  setConfirmingTransactionModalVisible(false);
+          //  setVerificationFailModalVisible(true);
+        }
+        // 检查收到的数据是否为同意签名
+        else if (receivedDataHex === "FA0102A0D10D0A") {
+          console.log("同意签名");
+          //    setConfirmingTransactionModalVisible(false);
+          //   setVerificationSuccessModalVisible(true);
         } else {
           console.warn("接收到的不是预期的交易反馈数据");
         }
@@ -774,6 +774,26 @@ function TransactionsScreen() {
     }
     return crc & 0xffff; // 确保CRC值是16位
   }
+  // 监听设备数量
+  useEffect(() => {
+    const loadVerifiedDevices = async () => {
+      try {
+        // 从 AsyncStorage 加载已验证的设备列表
+        const savedDevices = await AsyncStorage.getItem("verifiedDevices");
+        if (savedDevices !== null) {
+          setVerifiedDevices(JSON.parse(savedDevices));
+        }
+      } catch (error) {
+        console.error("Error loading verified devices: ", error);
+      }
+    };
+
+    loadVerifiedDevices();
+  }, []); // 这个依赖空数组确保该代码只在组件挂载时执行一次
+  // 打印设备数量
+  useEffect(() => {
+    console.log("Verified Devices Count:", verifiedDevices.length);
+  }, [verifiedDevices]);
 
   // 停止监听
   useEffect(() => {
@@ -781,6 +801,23 @@ function TransactionsScreen() {
       stopMonitoringVerificationCode();
     }
   }, [pinModalVisible]);
+
+  let transactionMonitorSubscription;
+  // 停止监听交易反馈
+  const stopMonitoringTransactionResponse = () => {
+    if (transactionMonitorSubscription) {
+      transactionMonitorSubscription.remove();
+      transactionMonitorSubscription = null;
+      console.log("交易反馈监听已停止");
+    }
+  };
+
+  // 使用 useEffect 监听模态窗口的变化
+  useEffect(() => {
+    if (!confirmingTransactionModalVisible) {
+      stopMonitoringTransactionResponse();
+    }
+  }, [confirmingTransactionModalVisible]);
 
   useEffect(() => {
     if (!bleVisible && selectedDevice) {
