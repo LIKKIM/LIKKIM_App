@@ -587,8 +587,7 @@ function TransactionsScreen() {
         1 + // blockTimeHex 长度
         blockTimeHex.length / 2 +
         1 + // derivationPath 长度
-        derivationPathLength +
-        1;
+        derivationPathLength;
 
       console.log(`Total Data Length: ${totalDataLength}`);
 
