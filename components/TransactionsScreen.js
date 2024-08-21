@@ -186,6 +186,7 @@ function TransactionsScreen() {
       }
     );
   };
+
   // 监听交易反馈函数
   const monitorTransactionResponse = (device) => {
     const notifyCharacteristicUUID = "0000FFE1-0000-1000-8000-00805F9B34FB";
@@ -206,17 +207,39 @@ function TransactionsScreen() {
         const receivedDataHex = receivedData.toString("hex").toUpperCase();
         console.log("接收到的16进制数据字符串:", receivedDataHex);
 
+        // 检查接收到的头部字节是否为签名数据 (例如: A3)
+        if (receivedDataHex.startsWith("A3")) {
+          const signatureLength = parseInt(receivedDataHex.substr(2, 2), 16);
+          const signatureData = receivedDataHex.substr(4, signatureLength * 2);
+
+          console.log("接收到的签名数据:", signatureData);
+
+          // CRC校验部分
+          const totalLength = parseInt(receivedDataHex.substr(-6, 2), 16);
+          const crcReceived = receivedDataHex.substr(-4, 4);
+          const expectedCrc = crc16Modbus(
+            Buffer.from(receivedDataHex.slice(0, -4), "hex")
+          );
+
+          console.log("数据总长度:", totalLength);
+          console.log("接收到的CRC:", crcReceived);
+          console.log("计算的CRC:", expectedCrc.toString(16).toUpperCase());
+
+          if (
+            crcReceived.toUpperCase() === expectedCrc.toString(16).toUpperCase()
+          ) {
+            console.log("CRC校验通过");
+          } else {
+            console.error("CRC校验失败");
+          }
+        }
         // 检查收到的数据是否为拒绝签名
-        if (receivedDataHex === "FA000230D00D0A") {
+        else if (receivedDataHex === "FA000230D00D0A") {
           console.log("拒绝签名");
-          //  setConfirmingTransactionModalVisible(false);
-          //  setVerificationFailModalVisible(true);
         }
         // 检查收到的数据是否为同意签名
         else if (receivedDataHex === "FA0102A0D10D0A") {
           console.log("同意签名");
-          //    setConfirmingTransactionModalVisible(false);
-          //   setVerificationSuccessModalVisible(true);
         } else {
           console.warn("接收到的不是预期的交易反馈数据");
         }
