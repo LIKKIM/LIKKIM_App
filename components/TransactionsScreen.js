@@ -21,6 +21,7 @@ import { CryptoContext, DarkModeContext } from "./CryptoContext";
 import TransactionsScreenStyles from "../styles/TransactionsScreenStyle";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Feather from "react-native-vector-icons/Feather";
+import { detectNetwork } from "../config/networkUtils";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import successImage from "../assets/success.png";
 import failImage from "../assets/fail.png";
@@ -493,6 +494,7 @@ function TransactionsScreen() {
       const userAddressHex = Buffer.from(userAddress, "utf-8").toString("hex");
       const amountHex = Buffer.from(amount.toString(), "utf-8").toString("hex");
       const hashHex = Buffer.from(hash, "utf-8").toString("hex");
+      // 将高度转换为16进制，并确保8位
       const heightHex = parseInt(height, 10).toString(16).padStart(8, "0");
       const blockTimeHex = parseInt(blockTime, 10)
         .toString(16)
@@ -915,48 +917,6 @@ function TransactionsScreen() {
   const copyToClipboard = (address) => {
     Clipboard.setString(address);
     alert(t("Address copied to clipboard!"));
-  };
-
-  const detectNetwork = (address) => {
-    if (/^(1|3|bc1)/.test(address)) {
-      return "Bitcoin (BTC)";
-    } else if (/^0x/.test(address)) {
-      return "Ethereum (ETH) / Binance Smart Chain (BSC) / Chainlink (LINK) / VeChain (VET) / Arbitrum (ARB) / Polygon (MATIC)";
-    } else if (/^T/.test(address)) {
-      return "Tron (TRX)";
-    } else if (/^r/.test(address)) {
-      return "Ripple (XRP)";
-    } else if (/^(A|D)/.test(address)) {
-      return "Cardano (ADA)";
-    } else if (/^(1|3|k)/.test(address)) {
-      return "Polkadot (DOT)";
-    } else if (/^(L|M|ltc1)/.test(address)) {
-      return "Litecoin (LTC)";
-    } else if (/^G/.test(address)) {
-      return "Stellar (XLM)";
-    } else if (/^(q|p|bitcoincash:)/.test(address)) {
-      return "Bitcoin Cash (BCH)";
-    } else if (/^(D|A)/.test(address)) {
-      return "Dogecoin (DOGE)";
-    } else if (/^tz[1-3]/.test(address)) {
-      return "Tezos (XTZ)";
-    } else if (/^[a-zA-Z0-9]{12}$/.test(address)) {
-      return "EOS (EOS)";
-    } else if (/^(4|8)/.test(address)) {
-      return "Monero (XMR)";
-    } else if (/^X/.test(address)) {
-      return "Dash (DASH)";
-    } else if (/^(t1|t3|zs)/.test(address)) {
-      return "Zcash (ZEC)";
-    } else if (/^A/.test(address)) {
-      return "NEO (NEO)";
-    } else if (address.length === 90) {
-      return "IOTA (MIOTA)";
-    } else if (/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(address)) {
-      return "Solana (SOL)";
-    } else {
-      return "Unknown Network";
-    }
   };
 
   const handleAddressChange = (text) => {
