@@ -197,7 +197,7 @@ function TransactionsScreen() {
     transactionMonitorSubscription = device.monitorCharacteristicForService(
       serviceUUID,
       notifyCharacteristicUUID,
-      (error, characteristic) => {
+      async (error, characteristic) => {
         if (error) {
           console.error("监听交易反馈时出错:", error.message);
           return;
@@ -229,7 +229,7 @@ function TransactionsScreen() {
             const signatureData = dataBuffer.substr(6, signatureDataLength * 2);
             console.log("接收到的签名数据:", signatureData);
 
-            // 假设总长度在倒数第6个字节和倒数第5个字节
+            // 解析总长度（假设在倒数第6个字节和倒数第5个字节）
             const totalLengthHex = dataBuffer.substr(-12, 4); // 调整偏移量以提取 `011F`
             const totalLength = parseInt(totalLengthHex, 16);
 
@@ -237,6 +237,7 @@ function TransactionsScreen() {
             console.log(`数据总长度 (HEX): ${totalLengthHex}`);
             console.log(`数据总长度 (Decimal): ${totalLength}`);
 
+            // 提取CRC (倒数第五和倒数第四个字节)
             const crcReceived = dataBuffer.substr(-8, 4);
             console.log("接收到的CRC:", crcReceived);
 
@@ -245,7 +246,7 @@ function TransactionsScreen() {
               Buffer.from(dataBuffer.slice(0, -8), "hex")
             );
 
-            // 处理字节顺序确保与crcReceived顺序一致
+            // 处理字节顺序确保与 crcReceived 顺序一致
             const expectedCrcHex = expectedCrc
               .toString(16)
               .toUpperCase()
@@ -257,16 +258,35 @@ function TransactionsScreen() {
             // CRC校验
             if (crcReceived.toUpperCase() === swappedExpectedCrc) {
               console.log("CRC校验通过");
+
+              // CRC校验通过后，发送签名数据到指定的URL
+              const url =
+                "https://bt.likkim.com/meridian/transaction/publishTx";
+              const requestBody = {
+                signedTx: signatureData,
+                chainShortName: "TRON",
+              };
+
+              try {
+                const response = await fetch(url, {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify(requestBody),
+                });
+
+                const result = await response.json();
+                console.log("请求结果:", result);
+              } catch (error) {
+                console.error("发送签名数据时出错:", error);
+              }
             } else {
               console.error("CRC校验失败");
             }
-          }
-          // 检查收到的数据是否为拒绝签名
-          else if (dataBuffer === "FA000230D00D0A") {
+          } else if (dataBuffer === "FA000230D00D0A") {
             console.log("拒绝签名");
-          }
-          // 检查收到的数据是否为同意签名
-          else if (dataBuffer === "FA0102A0D10D0A") {
+          } else if (dataBuffer === "FA0102A0D10D0A") {
             console.log("同意签名");
           } else {
             console.warn("接收到的不是预期的交易反馈数据");
