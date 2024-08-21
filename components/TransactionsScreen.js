@@ -507,6 +507,10 @@ function TransactionsScreen() {
         });
         return;
       }
+      // 将字符串转换为 ASCII 码的十六进制表示
+      function toAsciiHex(str) {
+        return Buffer.from(str, "ascii").toString("hex");
+      }
 
       const contractAddressHex = Buffer.from(contractAddress, "utf-8").toString(
         "hex"
@@ -517,11 +521,11 @@ function TransactionsScreen() {
       const userAddressHex = Buffer.from(userAddress, "utf-8").toString("hex");
       const amountHex = Buffer.from(amount.toString(), "utf-8").toString("hex");
       const hashHex = Buffer.from(hash, "utf-8").toString("hex");
-      // 将高度转换为16进制，并确保8位
-      const heightHex = parseInt(height, 10).toString(16).padStart(8, "0");
-      const blockTimeHex = parseInt(blockTime, 10)
-        .toString(16)
-        .padStart(16, "0");
+      // 将高度转换为 ASCII 码的十六进制表示，并确保8位
+      const heightHex = toAsciiHex(height.toString()).padStart(8, "0");
+
+      // 将区块时间转换为 ASCII 码的十六进制表示，并确保16位
+      const blockTimeHex = toAsciiHex(blockTime.toString()).padStart(16, "0");
       const derivationPathHex = Buffer.from(derivationPath, "utf-8").toString(
         "hex"
       );
