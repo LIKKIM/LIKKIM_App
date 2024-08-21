@@ -191,6 +191,9 @@ function TransactionsScreen() {
   const monitorTransactionResponse = (device) => {
     const notifyCharacteristicUUID = "0000FFE1-0000-1000-8000-00805F9B34FB";
 
+    // 用于存储拼接的完整数据
+    let dataBuffer = "";
+
     transactionMonitorSubscription = device.monitorCharacteristicForService(
       serviceUUID,
       notifyCharacteristicUUID,
@@ -207,41 +210,62 @@ function TransactionsScreen() {
         const receivedDataHex = receivedData.toString("hex").toUpperCase();
         console.log("接收到的16进制数据字符串:", receivedDataHex);
 
-        // 检查接收到的头部字节是否为签名数据 (例如: A3)
-        if (receivedDataHex.startsWith("A3")) {
-          const signatureLength = parseInt(receivedDataHex.substr(2, 2), 16);
-          const signatureData = receivedDataHex.substr(4, signatureLength * 2);
+        // 将接收到的分段数据拼接到数据缓冲区
+        dataBuffer += receivedDataHex;
 
-          console.log("接收到的签名数据:", signatureData);
+        // 检查数据缓冲区是否包含结束符 (0D0A)
+        if (dataBuffer.endsWith("0D0A")) {
+          console.log("拼接后的完整数据:", dataBuffer);
 
-          // CRC校验部分
-          const totalLength = parseInt(receivedDataHex.substr(-6, 2), 16);
-          const crcReceived = receivedDataHex.substr(-4, 4);
-          const expectedCrc = crc16Modbus(
-            Buffer.from(receivedDataHex.slice(0, -4), "hex")
-          );
+          // 此时，dataBuffer 包含了完整的签名数据，开始处理
 
-          console.log("数据总长度:", totalLength);
-          console.log("接收到的CRC:", crcReceived);
-          console.log("计算的CRC:", expectedCrc.toString(16).toUpperCase());
+          // 检查接收到的头部字节是否为签名数据 (例如: A3)
+          if (dataBuffer.startsWith("A3")) {
+            // 解析签名数据的长度 (第二和第三个字节，高位在前低位在后)
+            const signatureDataLength = parseInt(dataBuffer.substr(2, 4), 16);
+            console.log("解析出的签名数据长度:", signatureDataLength);
 
-          if (
-            crcReceived.toUpperCase() === expectedCrc.toString(16).toUpperCase()
-          ) {
-            console.log("CRC校验通过");
-          } else {
-            console.error("CRC校验失败");
+            // 提取签名数据内容
+            const signatureData = dataBuffer.substr(6, signatureDataLength * 2);
+            console.log("接收到的签名数据:", signatureData);
+
+            // 解析总数据长度（倒数第四和第五个字节，高位在前低位在后）
+            const totalLength = parseInt(dataBuffer.substr(-8, 4), 16);
+            console.log("数据总长度:", totalLength);
+
+            // 提取CRC (倒数第三和第二个字节)
+            const crcReceived = dataBuffer.substr(-6, 4);
+            console.log("接收到的CRC:", crcReceived);
+
+            // 计算预期的CRC
+            const expectedCrc = crc16Modbus(
+              Buffer.from(dataBuffer.slice(0, -6), "hex")
+            );
+            console.log("计算的CRC:", expectedCrc.toString(16).toUpperCase());
+
+            // CRC校验
+            if (
+              crcReceived.toUpperCase() ===
+              expectedCrc.toString(16).toUpperCase()
+            ) {
+              console.log("CRC校验通过");
+            } else {
+              console.error("CRC校验失败");
+            }
           }
-        }
-        // 检查收到的数据是否为拒绝签名
-        else if (receivedDataHex === "FA000230D00D0A") {
-          console.log("拒绝签名");
-        }
-        // 检查收到的数据是否为同意签名
-        else if (receivedDataHex === "FA0102A0D10D0A") {
-          console.log("同意签名");
-        } else {
-          console.warn("接收到的不是预期的交易反馈数据");
+          // 检查收到的数据是否为拒绝签名
+          else if (dataBuffer === "FA000230D00D0A") {
+            console.log("拒绝签名");
+          }
+          // 检查收到的数据是否为同意签名
+          else if (dataBuffer === "FA0102A0D10D0A") {
+            console.log("同意签名");
+          } else {
+            console.warn("接收到的不是预期的交易反馈数据");
+          }
+
+          // 处理完成后清空缓冲区
+          dataBuffer = "";
         }
       }
     );
