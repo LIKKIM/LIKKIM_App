@@ -527,8 +527,7 @@ function TransactionsScreen() {
       );
       const derivationPathLength = derivationPathHex.length / 2;
       // 打印原始值
-      console.log(`Little Endian Height Hex: ${heightHexLE}`);
-      console.log(`Little Endian Block Time Hex: ${blockTimeHexLE}`);
+
       console.log(`Contract Address: ${contractAddress}`);
       console.log(`Crypto Address: ${crypto.address}`);
       console.log(`User Address: ${userAddress}`);
@@ -596,12 +595,12 @@ function TransactionsScreen() {
         ...Buffer.from(userAddressHex, "hex"),
         amountHex.length / 2,
         ...Buffer.from(amountHex, "hex"),
+        hashHex.length / 2,
+        ...Buffer.from(hashHex, "hex"),
         heightHex.length / 2,
         ...Buffer.from(heightHex, "hex"),
         blockTimeHex.length / 2,
         ...Buffer.from(blockTimeHex, "hex"),
-        blockTimeHexLE.length / 2, // 使用小端字节序的区块时间
-        ...Buffer.from(blockTimeHexLE, "hex"), // 使用小端字节序的区块时间
         derivationPathLength,
         ...Buffer.from(derivationPathHex, "hex"),
         totalDataLength, // 总长度
