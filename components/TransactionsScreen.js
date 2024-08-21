@@ -277,7 +277,20 @@ function TransactionsScreen() {
                 });
 
                 const result = await response.json();
-                console.log("广播请求结果返回:", result);
+
+                // 打印返回结果的结构
+                console.log("请求结果:");
+                console.log(`Code: ${result.code}`);
+                console.log(`Message: ${result.msg}`);
+
+                if (Array.isArray(result.data)) {
+                  result.data.forEach((item, index) => {
+                    console.log(`Item ${index + 1}:`);
+                    console.log(`Chain Full Name: ${item.chainFullName}`);
+                    console.log(`Chain Short Name: ${item.chainShortName}`);
+                    console.log(`TxID: ${item.txid}`);
+                  });
+                }
               } catch (error) {
                 console.error("发送签名数据时出错:", error);
               }
