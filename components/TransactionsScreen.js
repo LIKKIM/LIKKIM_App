@@ -572,19 +572,23 @@ function TransactionsScreen() {
       // 计算总数据长度
       const totalDataLength =
         1 + // 头字节
-        1 +
+        1 + // contractAddress 长度
         contractAddressHex.length / 2 +
-        1 +
+        1 + // cryptoAddress 长度
         cryptoAddressHex.length / 2 +
-        1 +
+        1 + // userAddress 长度
         userAddressHex.length / 2 +
-        1 +
+        1 + // amount 长度
         amountHex.length / 2 +
+        1 + // hashHex 长度
         hashHex.length / 2 +
+        1 + // heightHex 长度
         heightHex.length / 2 +
+        1 + // blockTimeHex 长度
         blockTimeHex.length / 2 +
-        1 +
-        derivationPathLength;
+        1 + // derivationPath 长度
+        derivationPathLength +
+        1;
 
       console.log(`Total Data Length: ${totalDataLength}`);
 
