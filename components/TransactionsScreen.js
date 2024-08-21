@@ -1288,29 +1288,29 @@ function TransactionsScreen() {
                 style={{ maxHeight: 320 }} // 设置最大高度，当内容超过时启用滚动
                 contentContainerStyle={{ paddingHorizontal: 16 }}
               >
-                <Text style={TransactionsScreenStyle.cancelButtonText}>
+                <Text style={TransactionsScreenStyle.transactionText}>
                   <Text style={{ fontWeight: "bold" }}>{t("Amount")}:</Text>
                   {` ${amount} ${selectedCrypto}`}
                 </Text>
-                <Text style={TransactionsScreenStyle.cancelButtonText}>
+                <Text style={TransactionsScreenStyle.transactionText}>
                   <Text style={{ fontWeight: "bold" }}>
                     {t("Payment Address")}:
                   </Text>
                   {` ${paymentAddress}`}
                 </Text>
-                <Text style={TransactionsScreenStyle.cancelButtonText}>
+                <Text style={TransactionsScreenStyle.transactionText}>
                   <Text style={{ fontWeight: "bold" }}>
                     {t("Recipient Address")}:
                   </Text>
                   {` ${inputAddress}`}
                 </Text>
-                <Text style={TransactionsScreenStyle.cancelButtonText}>
+                <Text style={TransactionsScreenStyle.transactionText}>
                   <Text style={{ fontWeight: "bold" }}>
                     {t("Detected Network")}:
                   </Text>
                   {` ${detectedNetwork}`}
                 </Text>
-                <Text style={TransactionsScreenStyle.cancelButtonText}>
+                <Text style={TransactionsScreenStyle.transactionText}>
                   <Text style={{ fontWeight: "bold" }}>
                     {t("Transaction Fee")}:
                   </Text>

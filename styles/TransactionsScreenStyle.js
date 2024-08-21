@@ -251,6 +251,11 @@ const TransactionsScreenStyles = (isDarkMode) => {
       color: secondTextColor,
       fontSize: 16,
     },
+    transactionText: {
+      color: secondTextColor,
+      fontSize: 16,
+      marginBottom: 10,
+    },
     modalTitle: {
       color: titleColor,
       fontSize: 16,
