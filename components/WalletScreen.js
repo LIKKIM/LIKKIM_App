@@ -106,6 +106,8 @@ function WalletScreen({ route, navigation }) {
     useState(false);
   const [createPendingModalVisible, setCreatePendingModalVisible] =
     useState(false);
+  const [verifyingAddressModalVisible, setVerifyingAddressModalVisible] =
+    useState(false);
   const [importingModalVisible, setImportingModalVisible] = useState(false);
   const restoreIdentifier = Constants.installationId;
   const [pinCode, setPinCode] = useState("");
@@ -200,6 +202,27 @@ function WalletScreen({ route, navigation }) {
     postTest();
   }, []);
  */
+  // 监听设备数量
+  useEffect(() => {
+    const loadVerifiedDevices = async () => {
+      try {
+        // 从 AsyncStorage 加载已验证的设备列表
+        const savedDevices = await AsyncStorage.getItem("verifiedDevices");
+        if (savedDevices !== null) {
+          setVerifiedDevices(JSON.parse(savedDevices));
+        }
+      } catch (error) {
+        console.error("Error loading verified devices: ", error);
+      }
+    };
+
+    loadVerifiedDevices();
+  }, []); // 这个依赖空数组确保该代码只在组件挂载时执行一次
+  // 打印设备数量
+  useEffect(() => {
+    console.log("Verified Devices Count:", verifiedDevices.length);
+  }, [verifiedDevices]);
+
   useEffect(() => {
     if (!bleVisible && selectedDevice) {
       setPinModalVisible(true);
@@ -448,10 +471,10 @@ function WalletScreen({ route, navigation }) {
         writeCharacteristicUUID, // 可写特性的UUID
         base64Command // 最终的命令数据的Base64编码
       );
+      // Close the address modal and open the verifying address modal
+      setAddressModalVisible(false);
+      setVerifyingAddressModalVisible(true);
       console.log("显示地址命令已发送");
-
-      // 提示用户在 LIKKIM 设备上核对地址
-      alert("Please verify the address on your LIKKIM device.");
     } catch (error) {
       console.error("发送显示地址命令失败:", error);
     }
@@ -2292,6 +2315,39 @@ function WalletScreen({ route, navigation }) {
             <TouchableOpacity
               style={WalletScreenStyle.submitButton}
               onPress={() => setImportingModalVisible(false)}
+            >
+              <Text style={WalletScreenStyle.submitButtonText}>
+                {t("Close")}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+
+      {/* Verifying Address Modal */}
+      <Modal
+        visible={verifyingAddressModalVisible}
+        onRequestClose={() => setVerifyingAddressModalVisible(false)}
+        transparent={true}
+        animationType="slide"
+      >
+        <View style={WalletScreenStyle.centeredView}>
+          <View style={WalletScreenStyle.pendingModalView}>
+            <Text style={WalletScreenStyle.modalTitle}>
+              {t("Verifying Address on LIKKIM Device...")}
+            </Text>
+            <Image
+              source={require("../assets/gif/Pending.gif")}
+              style={{ width: 120, height: 120 }}
+            />
+            <Text
+              style={[WalletScreenStyle.modalSubtitle, { marginBottom: 20 }]}
+            >
+              {t("Please verify the address on your LIKKIM device.")}
+            </Text>
+            <TouchableOpacity
+              style={WalletScreenStyle.submitAddressButton}
+              onPress={() => setVerifyingAddressModalVisible(false)}
             >
               <Text style={WalletScreenStyle.submitButtonText}>
                 {t("Close")}

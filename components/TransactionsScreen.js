@@ -1750,12 +1750,13 @@ function TransactionsScreen() {
                 onPress={() => setConfirmingTransactionModalVisible(false)}
               >
                 <Text style={TransactionsScreenStyle.submitButtonText}>
-                  {t("Close")}
+                  {t("Cancel Signature")}
                 </Text>
               </TouchableOpacity>
             </View>
           </View>
         </Modal>
+
         {/* Verifying Address Modal */}
         <Modal
           visible={verifyingAddressModalVisible}
