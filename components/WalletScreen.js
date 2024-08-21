@@ -66,6 +66,7 @@ function WalletScreen({ route, navigation }) {
   const [processModalVisible, setProcessModalVisible] = useState(false);
   const [recoveryPhraseModalVisible, setRecoveryPhraseModalVisible] =
     useState(false);
+  const [isVerifyingAddress, setIsVerifyingAddress] = useState(false);
   const [deleteConfirmVisible, setDeleteConfirmVisible] = useState(false);
   const [cryptoCards, setCryptoCards] = useState([]);
   const [priceChanges, setPriceChanges] = useState({});
@@ -106,8 +107,7 @@ function WalletScreen({ route, navigation }) {
     useState(false);
   const [createPendingModalVisible, setCreatePendingModalVisible] =
     useState(false);
-  const [verifyingAddressModalVisible, setVerifyingAddressModalVisible] =
-    useState(false);
+
   const [importingModalVisible, setImportingModalVisible] = useState(false);
   const restoreIdentifier = Constants.installationId;
   const [pinCode, setPinCode] = useState("");
@@ -375,11 +375,11 @@ function WalletScreen({ route, navigation }) {
       if (device) {
         showAddressCommand(device); // 确保这里传递的是完整的设备对象
       } else {
-        setAddressModalVisible(false); // 关闭当前的 "Address for" 模态框
+        //  setAddressModalVisible(false); // 关闭当前的 "Address for" 模态框
         setBleVisible(true);
       }
     } else {
-      setAddressModalVisible(false); // 关闭当前的 "Address for" 模态框
+      // setAddressModalVisible(false); // 关闭当前的 "Address for" 模态框
       setBleVisible(true);
     }
   };
@@ -472,8 +472,8 @@ function WalletScreen({ route, navigation }) {
         base64Command // 最终的命令数据的Base64编码
       );
       // Close the address modal and open the verifying address modal
-      setAddressModalVisible(false);
-      setVerifyingAddressModalVisible(true);
+      //setAddressModalVisible(false);
+      setIsVerifyingAddress(true); // 显示提示
       console.log("显示地址命令已发送");
     } catch (error) {
       console.error("发送显示地址命令失败:", error);
@@ -658,6 +658,7 @@ function WalletScreen({ route, navigation }) {
     setSelectedCrypto(crypto.shortName);
     setSelectedAddress(crypto.address);
     setSelectedCryptoIcon(crypto.icon);
+    setIsVerifyingAddress(false);
     setAddressModalVisible(true);
   };
   let monitorSubscription;
@@ -1726,6 +1727,23 @@ function WalletScreen({ route, navigation }) {
             >
               <QRCode value={selectedAddress} size={200} />
             </View>
+            {isVerifyingAddress && ( // 根据状态控制提示文本显示
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <Image
+                  source={require("../assets/gif/Pending.gif")}
+                  style={{ width: 40, height: 40 }}
+                />
+                <Text
+                  style={[
+                    WalletScreenStyle.verifyingAddressText,
+                    { color: "#3CDA84" },
+                  ]}
+                >
+                  {t("Verifying Address on LIKKIM...")}
+                </Text>
+              </View>
+            )}
+
             <View
               style={{
                 flexDirection: "col",
@@ -1753,6 +1771,7 @@ function WalletScreen({ route, navigation }) {
           </View>
         </BlurView>
       </Modal>
+
       {/* Add Wallet Modal */}
       <Modal
         animationType="slide"
@@ -2315,39 +2334,6 @@ function WalletScreen({ route, navigation }) {
             <TouchableOpacity
               style={WalletScreenStyle.submitButton}
               onPress={() => setImportingModalVisible(false)}
-            >
-              <Text style={WalletScreenStyle.submitButtonText}>
-                {t("Close")}
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
-
-      {/* Verifying Address Modal */}
-      <Modal
-        visible={verifyingAddressModalVisible}
-        onRequestClose={() => setVerifyingAddressModalVisible(false)}
-        transparent={true}
-        animationType="slide"
-      >
-        <View style={WalletScreenStyle.centeredView}>
-          <View style={WalletScreenStyle.pendingModalView}>
-            <Text style={WalletScreenStyle.modalTitle}>
-              {t("Verifying Address on LIKKIM Device...")}
-            </Text>
-            <Image
-              source={require("../assets/gif/Pending.gif")}
-              style={{ width: 120, height: 120 }}
-            />
-            <Text
-              style={[WalletScreenStyle.modalSubtitle, { marginBottom: 20 }]}
-            >
-              {t("Please verify the address on your LIKKIM device.")}
-            </Text>
-            <TouchableOpacity
-              style={WalletScreenStyle.submitAddressButton}
-              onPress={() => setVerifyingAddressModalVisible(false)}
             >
               <Text style={WalletScreenStyle.submitButtonText}>
                 {t("Close")}

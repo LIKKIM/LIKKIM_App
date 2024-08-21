@@ -86,8 +86,7 @@ function TransactionsScreen() {
   const [isAddressValid, setIsAddressValid] = useState(false);
   const [verificationSuccessModalVisible, setVerificationSuccessModalVisible] =
     useState(false);
-  const [verifyingAddressModalVisible, setVerifyingAddressModalVisible] =
-    useState(false);
+  const [isVerifyingAddress, setIsVerifyingAddress] = useState(false);
   const [verificationFailModalVisible, setVerificationFailModalVisible] =
     useState(false);
   const [inputAddressModalVisible, setInputAddressModalVisible] =
@@ -409,8 +408,7 @@ function TransactionsScreen() {
         base64Command // 最终的命令数据的Base64编码
       );
       // Close the address modal and open the verifying address modal
-      setAddressModalVisible(false);
-      setVerifyingAddressModalVisible(true);
+      setIsVerifyingAddress(true); // 显示提示
       console.log("显示地址命令已发送");
     } catch (error) {
       console.error("发送显示地址命令失败:", error);
@@ -755,11 +753,9 @@ function TransactionsScreen() {
       if (device) {
         showAddressCommand(device); // 确保这里传递的是完整的设备对象
       } else {
-        setAddressModalVisible(false); // 关闭当前的 "Address for" 模态框
         setBleVisible(true);
       }
     } else {
-      setAddressModalVisible(false); // 关闭当前的 "Address for" 模态框
       setBleVisible(true);
     }
   };
@@ -882,6 +878,7 @@ function TransactionsScreen() {
     setSelectedCryptoChain(crypto.chain);
     setSelectedAddress(crypto.address);
     setSelectedCryptoIcon(crypto.icon);
+    setIsVerifyingAddress(false);
     setModalVisible(false);
 
     if (operationType === "receive") {
@@ -1429,7 +1426,7 @@ function TransactionsScreen() {
           <BlurView intensity={10} style={TransactionsScreenStyle.centeredView}>
             <View style={TransactionsScreenStyle.receiveModalView}>
               <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <Text style={TransactionsScreenStyle.modalReceiveTitle}>
+                <Text style={TransactionsScreenStyle.modalTitle}>
                   {t("Address for")}
                 </Text>
                 {selectedCryptoIcon && (
@@ -1443,7 +1440,7 @@ function TransactionsScreen() {
                     }}
                   />
                 )}
-                <Text style={TransactionsScreenStyle.modalReceiveTitle}>
+                <Text style={TransactionsScreenStyle.modalTitle}>
                   {selectedCrypto}:
                 </Text>
               </View>
@@ -1461,9 +1458,13 @@ function TransactionsScreen() {
                   {selectedAddress}
                 </Text>
                 <TouchableOpacity
-                  onPress={() => copyToClipboard(selectedAddress)}
+                  onPress={() => Clipboard.setString(selectedAddress)}
                 >
-                  <Icon name="content-copy" size={24} color={addressIcon} />
+                  <Icon
+                    name="content-copy"
+                    size={24}
+                    color={isDarkMode ? "#ffffff" : "#676776"}
+                  />
                 </TouchableOpacity>
               </View>
               <View
@@ -1478,25 +1479,40 @@ function TransactionsScreen() {
               >
                 <QRCode value={selectedAddress} size={200} />
               </View>
+              {isVerifyingAddress && ( // 根据状态控制提示文本显示
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  <Image
+                    source={require("../assets/gif/Pending.gif")}
+                    style={{ width: 40, height: 40 }}
+                  />
+                  <Text
+                    style={[
+                      TransactionsScreenStyle.verifyingAddressText,
+                      { color: "#3CDA84" },
+                    ]}
+                  >
+                    {t("Verifying Address on LIKKIM...")}
+                  </Text>
+                </View>
+              )}
+
               <View
                 style={{
                   flexDirection: "col",
                   width: "100%",
                   justifyContent: "space-between",
-                  marginTop: 20,
                 }}
               >
                 <TouchableOpacity
                   onPress={handleVerifyAddress}
-                  style={TransactionsScreenStyle.optionButton}
+                  style={TransactionsScreenStyle.verifyAddressButton}
                 >
                   <Text style={TransactionsScreenStyle.submitButtonText}>
                     {t("Verify Address")}
                   </Text>
                 </TouchableOpacity>
-
                 <TouchableOpacity
-                  style={TransactionsScreenStyle.cancelButton}
+                  style={TransactionsScreenStyle.cancelAddressButton}
                   onPress={() => setAddressModalVisible(false)}
                 >
                   <Text style={TransactionsScreenStyle.cancelButtonText}>
@@ -1751,42 +1767,6 @@ function TransactionsScreen() {
               >
                 <Text style={TransactionsScreenStyle.submitButtonText}>
                   {t("Cancel Signature")}
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </Modal>
-
-        {/* Verifying Address Modal */}
-        <Modal
-          visible={verifyingAddressModalVisible}
-          onRequestClose={() => setVerifyingAddressModalVisible(false)}
-          transparent={true}
-          animationType="slide"
-        >
-          <View style={TransactionsScreenStyle.centeredView}>
-            <View style={TransactionsScreenStyle.pendingModalView}>
-              <Text style={TransactionsScreenStyle.modalTitle}>
-                {t("Verifying Address on LIKKIM Device...")}
-              </Text>
-              <Image
-                source={require("../assets/gif/Pending.gif")}
-                style={{ width: 120, height: 120 }}
-              />
-              <Text
-                style={[
-                  TransactionsScreenStyle.modalSubtitle,
-                  { marginBottom: 20 },
-                ]}
-              >
-                {t("Please verify the address on your LIKKIM device.")}
-              </Text>
-              <TouchableOpacity
-                style={TransactionsScreenStyle.submitButton}
-                onPress={() => setVerifyingAddressModalVisible(false)}
-              >
-                <Text style={TransactionsScreenStyle.submitButtonText}>
-                  {t("Close")}
                 </Text>
               </TouchableOpacity>
             </View>

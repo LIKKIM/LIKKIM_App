@@ -18,6 +18,26 @@ const TransactionsScreenStyles = (isDarkMode) => {
   const secondTextColor = isDarkMode ? "#ddd" : "#676776";
   const secondBtnTextColor = isDarkMode ? "#ddd" : "#e0e0e0";
   return StyleSheet.create({
+    cancelAddressButton: {
+      borderWidth: 3, // 设置边框宽度
+      borderColor: buttonBackgroundColor, // 设置边框颜色
+      padding: 10,
+      width: "100%",
+      justifyContent: "center",
+      borderRadius: 30,
+      height: 60,
+      alignItems: "center",
+    },
+    verifyAddressButton: {
+      backgroundColor: btnColor,
+      padding: 10,
+      width: "100%",
+      justifyContent: "center",
+      borderRadius: 30,
+      height: 60,
+      alignItems: "center",
+      marginBottom: 16,
+    },
     blurBackground: {
       position: "absolute",
       top: 0,
