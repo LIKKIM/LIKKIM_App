@@ -139,6 +139,12 @@ function TransactionsScreen() {
     }
   }, [bleVisible]);
 
+  // 清空金额输入
+  useEffect(() => {
+    if (amountModalVisible) {
+      setAmount(""); // 清空之前的金额输入
+    }
+  }, [amountModalVisible]);
   // 清理蓝牙管理器
   useEffect(() => {
     return () => {
