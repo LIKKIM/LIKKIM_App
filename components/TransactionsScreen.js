@@ -526,9 +526,6 @@ function TransactionsScreen() {
         "hex"
       );
       const derivationPathLength = derivationPathHex.length / 2;
-      // 转换为小端字节序
-      const heightHexLE = heightHex.match(/../g).reverse().join("");
-      const blockTimeHexLE = blockTimeHex.match(/../g).reverse().join("");
       // 打印原始值
       console.log(`Little Endian Height Hex: ${heightHexLE}`);
       console.log(`Little Endian Block Time Hex: ${blockTimeHexLE}`);
@@ -599,10 +596,10 @@ function TransactionsScreen() {
         ...Buffer.from(userAddressHex, "hex"),
         amountHex.length / 2,
         ...Buffer.from(amountHex, "hex"),
-        hashHex.length / 2,
-        ...Buffer.from(hashHex, "hex"),
-        heightHexLE.length / 2, // 使用小端字节序的高度
-        ...Buffer.from(heightHexLE, "hex"), // 使用小端字节序的高度
+        heightHex.length / 2,
+        ...Buffer.from(heightHex, "hex"),
+        blockTimeHex.length / 2,
+        ...Buffer.from(blockTimeHex, "hex"),
         blockTimeHexLE.length / 2, // 使用小端字节序的区块时间
         ...Buffer.from(blockTimeHexLE, "hex"), // 使用小端字节序的区块时间
         derivationPathLength,
@@ -1250,7 +1247,7 @@ function TransactionsScreen() {
                 </Text>
               </View>
               <ScrollView
-                style={{ maxHeight: 320 }} // 设置最大高度，当内容超过时启用滚动
+                style={{ maxHeight: 30 }} // 设置最大高度，当内容超过时启用滚动
                 contentContainerStyle={{ paddingHorizontal: 16 }}
               >
                 <Text style={TransactionsScreenStyle.cancelButtonText}>
