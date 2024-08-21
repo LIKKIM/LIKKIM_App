@@ -277,7 +277,7 @@ function TransactionsScreen() {
                 });
 
                 const result = await response.json();
-                console.log("请求结果:", result);
+                console.log("广播请求结果返回:", result);
               } catch (error) {
                 console.error("发送签名数据时出错:", error);
               }
