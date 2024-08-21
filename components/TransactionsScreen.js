@@ -946,7 +946,7 @@ function TransactionsScreen() {
     setInputAddress(text);
     const network = detectNetwork(text);
     setDetectedNetwork(network);
-    setIsAddressValid(network !== "Unknown Network"); // Update address validity
+    setIsAddressValid(network !== "Invalid address"); // Update address validity
   };
 
   return (
@@ -1059,23 +1059,31 @@ function TransactionsScreen() {
                   value={inputAddress}
                   autoFocus={true}
                 />
-                <Text
+                <ScrollView
                   style={{
-                    color:
-                      detectedNetwork === "Unknown Network"
-                        ? "#FF5252"
-                        : "#22AA94",
-                    minHeight: 36,
-                    lineHeight: 36, // 设置与 minHeight 相同的 lineHeight 以实现垂直居中
-                    textAlignVertical: "center", // 适用于 Android 的文本垂直居中
+                    maxHeight: 60, // 限制 ScrollView 的最大高度为 50
+                    marginVertical: 10,
                   }}
+                  contentContainerStyle={{ flexGrow: 1 }} // 确保内容充满可用空间
+                  nestedScrollEnabled={true} // 允许嵌套滚动
                 >
-                  {inputAddress
-                    ? detectedNetwork === "Unknown Network"
-                      ? t("Invalid address")
-                      : `${t("Detected Network")}: ${detectedNetwork}`
-                    : ""}
-                </Text>
+                  <Text
+                    style={{
+                      color:
+                        detectedNetwork === "Invalid address"
+                          ? "#FF5252"
+                          : "#22AA94",
+                      lineHeight: 36, // 设置与 minHeight 相同的 lineHeight 以实现垂直居中
+                      textAlignVertical: "center", // 适用于 Android 的文本垂直居中
+                    }}
+                  >
+                    {inputAddress
+                      ? detectedNetwork === "Invalid address"
+                        ? t("Invalid address")
+                        : `${t("Detected Network")}: ${detectedNetwork}`
+                      : ""}
+                  </Text>
+                </ScrollView>
               </View>
 
               <TouchableOpacity

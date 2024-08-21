@@ -6,12 +6,7 @@ export const detectNetwork = (address) => {
 
   // Ethereum, BNB Smart Chain, Polygon, Fantom, Arbitrum, Avalanche, Huobi ECO Chain, OKX Chain, Optimism, Gnosis Chain, zkSync Era Mainnet, Linea, Mantle, Ethereum Classic, EthereumPoW, Base, Boba Network, Celo
   else if (/^0x[a-fA-F0-9]{40}$/.test(address)) {
-    return (
-      address.match(/^0x[a-fA-F0-9]{40}$/) &&
-      (address.match(/^0x[a-fA-F0-9]{40}$/).length === 40
-        ? "Ethereum (ETH)/BNB Smart Chain (BSC)/Polygon (MATIC)/Fantom (FTM)/Arbitrum (ARB)/Avalanche (AVAX)/Huobi ECO Chain (HECO)/OKX Chain (OKT)/Optimism (OP)/Gnosis Chain (xDAI)/zkSync Era Mainnet (zkSync)/Linea (Linea)/Mantle (Mantle)/Ethereum Classic (ETC)/EthereumPoW (ETHW)/Base (BASE)/Boba Network (BOBA)/Celo (CELO)"
-        : "Unknown Network")
-    );
+    return "Ethereum (ETH)/BNB Smart Chain (BSC)/Polygon (MATIC)/Fantom (FTM)/Arbitrum (ARB)/Avalanche (AVAX)/Huobi ECO Chain (HECO)/OKX Chain (OKT)/Optimism (OP)/Gnosis Chain (xDAI)/zkSync Era Mainnet (zkSync)/Linea (Linea)/Mantle (Mantle)/Ethereum Classic (ETC)/EthereumPoW (ETHW)/Base (BASE)/Boba Network (BOBA)/Celo (CELO)";
   }
 
   // Solana
@@ -172,7 +167,17 @@ export const detectNetwork = (address) => {
   // Lightning Network
   else if (/^lnbc[a-zA-Z0-9]{30,80}$/.test(address)) {
     return "Lightning Network (LN)";
-  } else {
+  } // Invalid address
+  else if (
+    /[^a-zA-Z0-9]/.test(address) ||
+    address.length < 26 ||
+    address.length > 90
+  ) {
+    return "Invalid address";
+  }
+
+  // Unknown Network
+  else {
     return "Unknown Network";
   }
 };
