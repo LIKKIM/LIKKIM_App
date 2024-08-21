@@ -237,21 +237,26 @@ function TransactionsScreen() {
             console.log(`数据总长度 (HEX): ${totalLengthHex}`);
             console.log(`数据总长度 (Decimal): ${totalLength}`);
 
-            // 提取CRC (倒数第三和第二个字节)
-            const crcReceived = dataBuffer.substr(-6, 4);
+            // 提取CRC (倒数第五和倒数第四个字节)
+            const crcReceived = dataBuffer.substr(-8, 4);
             console.log("接收到的CRC:", crcReceived);
 
             // 计算预期的CRC
             const expectedCrc = crc16Modbus(
-              Buffer.from(dataBuffer.slice(0, -6), "hex")
+              Buffer.from(dataBuffer.slice(0, -8), "hex")
             );
-            console.log("计算的CRC:", expectedCrc.toString(16).toUpperCase());
+
+            // 处理字节顺序确保与crcReceived顺序一致
+            const expectedCrcHex = expectedCrc
+              .toString(16)
+              .toUpperCase()
+              .padStart(4, "0");
+            const swappedExpectedCrc =
+              expectedCrcHex.substr(2, 2) + expectedCrcHex.substr(0, 2);
+            console.log("计算的CRC:", swappedExpectedCrc);
 
             // CRC校验
-            if (
-              crcReceived.toUpperCase() ===
-              expectedCrc.toString(16).toUpperCase()
-            ) {
+            if (crcReceived.toUpperCase() === swappedExpectedCrc) {
               console.log("CRC校验通过");
             } else {
               console.error("CRC校验失败");
