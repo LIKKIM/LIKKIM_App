@@ -229,9 +229,13 @@ function TransactionsScreen() {
             const signatureData = dataBuffer.substr(6, signatureDataLength * 2);
             console.log("接收到的签名数据:", signatureData);
 
-            // 解析总数据长度（倒数第四和第五个字节，高位在前低位在后）
-            const totalLength = parseInt(dataBuffer.substr(-8, 4), 16);
-            console.log("数据总长度:", totalLength);
+            // 假设总长度在倒数第6个字节和倒数第5个字节
+            const totalLengthHex = dataBuffer.substr(-12, 4); // 调整偏移量以提取 `011F`
+            const totalLength = parseInt(totalLengthHex, 16);
+
+            // 打印出用于解析的数据总长度的字节值和解析结果
+            console.log(`数据总长度 (HEX): ${totalLengthHex}`);
+            console.log(`数据总长度 (Decimal): ${totalLength}`);
 
             // 提取CRC (倒数第三和第二个字节)
             const crcReceived = dataBuffer.substr(-6, 4);
