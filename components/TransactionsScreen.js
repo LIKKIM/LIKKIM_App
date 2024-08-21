@@ -146,6 +146,7 @@ function TransactionsScreen() {
     };
   }, []);
   let monitorSubscription;
+
   const monitorVerificationCode = (device) => {
     const notifyCharacteristicUUID = "0000FFE1-0000-1000-8000-00805F9B34FB";
 
@@ -175,6 +176,43 @@ function TransactionsScreen() {
           setReceivedVerificationCode(verificationCode);
         } else {
           console.warn("接收到的不是预期的验证码数据");
+        }
+      }
+    );
+  };
+  // 监听交易反馈函数
+  const monitorTransactionResponse = (device) => {
+    const notifyCharacteristicUUID = "0000FFE1-0000-1000-8000-00805F9B34FB";
+
+    device.monitorCharacteristicForService(
+      serviceUUID,
+      notifyCharacteristicUUID,
+      (error, characteristic) => {
+        if (error) {
+          console.error("监听交易反馈时出错:", error.message);
+          return;
+        }
+
+        // Base64解码接收到的数据
+        const receivedData = Buffer.from(characteristic.value, "base64");
+
+        // 将接收到的数据解析为16进制字符串
+        const receivedDataHex = receivedData.toString("hex").toUpperCase();
+        console.log("接收到的16进制数据字符串:", receivedDataHex);
+
+        // 检查收到的数据是否为同意签名
+        if (receivedDataHex === "FA000230D00D0A") {
+          console.log("同意签名");
+          setConfirmingTransactionModalVisible(false);
+          setVerificationSuccessModalVisible(true);
+        }
+        // 检查收到的数据是否为拒绝签名
+        else if (receivedDataHex === "FA0102A0D10D0A") {
+          console.log("拒绝签名");
+          setConfirmingTransactionModalVisible(false);
+          setVerificationFailModalVisible(true);
+        } else {
+          console.warn("接收到的不是预期的交易反馈数据");
         }
       }
     );
@@ -583,7 +621,8 @@ function TransactionsScreen() {
         // 让设备有时间处理每个包
         await new Promise((resolve) => setTimeout(resolve, 100));
       }
-
+      // 监听交易反馈
+      monitorTransactionResponse(device);
       console.log("签名交易命令已成功发送到设备");
     } catch (error) {
       console.error("发送交易数据到 BLE 设备时出错:", error);
@@ -735,6 +774,7 @@ function TransactionsScreen() {
     }
     return crc & 0xffff; // 确保CRC值是16位
   }
+
   // 停止监听
   useEffect(() => {
     if (!pinModalVisible) {
