@@ -237,7 +237,6 @@ function TransactionsScreen() {
             console.log(`数据总长度 (HEX): ${totalLengthHex}`);
             console.log(`数据总长度 (Decimal): ${totalLength}`);
 
-            // 提取CRC (倒数第五和倒数第四个字节)
             const crcReceived = dataBuffer.substr(-8, 4);
             console.log("接收到的CRC:", crcReceived);
 
