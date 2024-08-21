@@ -1247,7 +1247,7 @@ function TransactionsScreen() {
                 </Text>
               </View>
               <ScrollView
-                style={{ maxHeight: 30 }} // 设置最大高度，当内容超过时启用滚动
+                style={{ maxHeight: 320 }} // 设置最大高度，当内容超过时启用滚动
                 contentContainerStyle={{ paddingHorizontal: 16 }}
               >
                 <Text style={TransactionsScreenStyle.cancelButtonText}>
