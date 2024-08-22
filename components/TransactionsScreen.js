@@ -215,7 +215,7 @@ function TransactionsScreen() {
 
     // 用于存储拼接的完整数据
     let dataBuffer = "";
-
+    console.log("签名反馈监听器启动成功");
     transactionMonitorSubscription = device.monitorCharacteristicForService(
       serviceUUID,
       notifyCharacteristicUUID,

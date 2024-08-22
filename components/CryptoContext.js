@@ -72,7 +72,7 @@ const initialAdditionalCryptos = [
     balance: "0.0",
     icon: require("../assets/USDTIcon.png"),
     cardImage: require("../assets/Card43.png"),
-    address: "1KAt6STtisWMMVo5XGdos9P7DBNNsFfjx7",
+    address: "TPTD3vfCgFspE8zatvKCLvZUUA1rbG6gHs",
     chain: "Tron",
   },
   {
@@ -146,7 +146,7 @@ export const usdtCrypto = {
   balance: "0.0",
   icon: require("../assets/USDTIcon.png"),
   cardImage: require("../assets/Card43.png"),
-  address: "1KAt6STtisWMMVo5XGdos9P7DBNNsFfjx7",
+  address: "TPTD3vfCgFspE8zatvKCLvZUUA1rbG6gHs",
   chain: "Tron",
 };
 
