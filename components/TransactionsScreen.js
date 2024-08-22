@@ -1608,6 +1608,59 @@ function TransactionsScreen() {
                   </Text>
                 </View>
               ) : (
+                devices.length > 0 && (
+                  <FlatList
+                    data={devices}
+                    keyExtractor={(item) => item.id}
+                    renderItem={({ item }) => {
+                      const isVerified = verifiedDevices.includes(item.id);
+
+                      return (
+                        <TouchableOpacity
+                          onPress={() => {
+                            if (!isVerified) {
+                              handleDevicePress(item); // 确保这里传递的是完整的设备对象
+                            }
+                          }}
+                        >
+                          <View
+                            style={TransactionsScreenStyle.deviceItemContainer}
+                          >
+                            <Icon
+                              name={
+                                isVerified ? "mobile-friendly" : "smartphone"
+                              }
+                              size={24}
+                              color={isVerified ? "#3CDA84" : iconColor}
+                              style={TransactionsScreenStyle.deviceIcon}
+                            />
+                            <Text
+                              style={TransactionsScreenStyle.scanModalSubtitle}
+                            >
+                              {item.name || item.id}
+                            </Text>
+                            {isVerified && (
+                              <TouchableOpacity
+                                style={TransactionsScreenStyle.disconnectButton}
+                                onPress={() => handleDisconnectDevice(item)}
+                              >
+                                <Text
+                                  style={
+                                    TransactionsScreenStyle.disconnectButtonText
+                                  }
+                                >
+                                  {t("Disconnect")}
+                                </Text>
+                              </TouchableOpacity>
+                            )}
+                          </View>
+                        </TouchableOpacity>
+                      );
+                    }}
+                  />
+                )
+              )}
+              {!isScanning && devices.length === 0 && (
                 <Text style={TransactionsScreenStyle.modalSubtitle}>
                   {t(
                     "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled."
