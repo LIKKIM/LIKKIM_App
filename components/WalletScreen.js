@@ -460,7 +460,7 @@ function WalletScreen({ route, navigation }) {
         return;
       }
 
-      console.log("发送显示地址命令之前的设备对象:", device);
+      //  console.log("发送显示地址命令之前的设备对象:", device);
 
       // 无论设备是否连接，均重新连接并发现服务和特性
       await device.connect();
@@ -598,7 +598,7 @@ function WalletScreen({ route, navigation }) {
         return;
       }
 
-      console.log("发送创建钱包命令之前的设备对象:", device);
+      //   console.log("发送创建钱包命令之前的设备对象:", device);
 
       // 无论设备是否连接，均重新连接并发现服务和特性
       await device.connect();
@@ -793,10 +793,10 @@ function WalletScreen({ route, navigation }) {
         if (receivedDataHex === "A40002B1E20D0A") {
           console.log("钱包创建失败");
           // 调用显示地址的函数
-          showAddressCommand(device);
         } else if (receivedDataHex === "A40102B0720D0A") {
           console.log("钱包创建成功");
           // 钱包创建成功后的逻辑处理
+          showAddressCommand(device);
           monitorWalletAddress(device);
         } else {
           console.error("接收到的数据不符合预期格式");
