@@ -787,46 +787,58 @@ function WalletScreen({ route, navigation }) {
         const receivedDataHex = receivedData.toString("hex");
         console.log("接收到的16进制数据字符串:", receivedDataHex);
 
-        // 检查头部标志位是否为 A3
-        if (receivedDataHex.startsWith("a3")) {
+        // 检查头部标志位是否为 A4
+        if (receivedDataHex.startsWith("a4")) {
+          // 解析链名长度
+          const chainNameLength = parseInt(receivedDataHex.substring(2, 4), 16);
+          console.log("链名长度:", chainNameLength);
+
+          // 解析链名
+          const chainNameStartIndex = 4;
+          const chainNameEndIndex = chainNameStartIndex + chainNameLength * 2; // 每个字符占2个16进制位
+          const chainNameHex = receivedDataHex.substring(
+            chainNameStartIndex,
+            chainNameEndIndex
+          );
+          const chainName = Buffer.from(chainNameHex, "hex").toString("utf-8");
+          console.log("链名:", chainName);
+
           // 解析地址长度
-          const addressLength = parseInt(receivedDataHex.substring(2, 4), 16);
+          const addressLengthIndex = chainNameEndIndex;
+          const addressLength = parseInt(
+            receivedDataHex.substring(
+              addressLengthIndex,
+              addressLengthIndex + 2
+            ),
+            16
+          );
+          console.log("地址长度:", addressLength);
 
           // 解析钱包地址
-          const addressStartIndex = 4;
+          const addressStartIndex = addressLengthIndex + 2;
           const addressEndIndex = addressStartIndex + addressLength * 2; // 每个字符占2个16进制位
           const walletAddressHex = receivedDataHex.substring(
             addressStartIndex,
             addressEndIndex
           );
-
-          // 将地址从16进制转换为字符串
           const walletAddress = Buffer.from(walletAddressHex, "hex").toString(
             "utf-8"
           );
-          console.log("提取的钱包地址:", walletAddress);
+          console.log("钱包地址:", walletAddress);
 
-          // 判断链名称
-          let chainName = "Unknown Chain";
-
-          if (/^1|3|bc1/.test(walletAddress)) {
-            chainName = "Bitcoin (BTC)";
-          } else if (/^0x/.test(walletAddress) && walletAddress.length === 42) {
-            chainName = "Ethereum (ETH)";
-          } else if (/^L/.test(walletAddress) || /^M/.test(walletAddress)) {
-            chainName = "Litecoin (LTC)";
-          } else if (/^r/.test(walletAddress)) {
-            chainName = "Ripple (XRP)";
-          } else if (/^T/.test(walletAddress)) {
-            chainName = "TRON (TRX)";
-          } else if (/^D/.test(walletAddress)) {
-            chainName = "Dogecoin (DOGE)";
-          }
-
-          console.log("该钱包地址属于链:", chainName);
+          // 解析总数据长度
+          const totalDataLengthIndex = addressEndIndex;
+          const totalDataLength = parseInt(
+            receivedDataHex.substring(
+              totalDataLengthIndex,
+              totalDataLengthIndex + 2
+            ),
+            16
+          );
+          console.log("总数据长度:", totalDataLength);
 
           // 解析CRC校验码（顺序：低字节在前，高字节在后）
-          const crcStartIndex = addressEndIndex + 2; // 过掉 dataLength 的部分
+          const crcStartIndex = totalDataLengthIndex + 2;
           const receivedCrcLowByte = receivedDataHex.substring(
             crcStartIndex,
             crcStartIndex + 2
@@ -836,6 +848,7 @@ function WalletScreen({ route, navigation }) {
             crcStartIndex + 4
           );
           const receivedCrc = receivedCrcLowByte + receivedCrcHighByte; // 低字节在前
+          console.log("接收到的CRC:", receivedCrc);
 
           // 提取所有用于CRC校验的数据（不包括 CRC 和结尾标志位）
           const dataToVerifyHex = receivedDataHex.substring(0, crcStartIndex);
@@ -848,18 +861,19 @@ function WalletScreen({ route, navigation }) {
 
           // 将计算的 CRC 码转换为低字节在前的格式
           calculatedCrc = calculatedCrc.slice(2) + calculatedCrc.slice(0, 2);
+          console.log("计算的CRC:", calculatedCrc);
 
           // 比较接收到的CRC和计算的CRC是否匹配
           if (calculatedCrc.toLowerCase() === receivedCrc.toLowerCase()) {
-            console.log("CRC校验通过，钱包地址有效:", walletAddress);
+            console.log("CRC校验通过，数据有效");
             // 可以在此处触发后续操作，如更新状态或UI
           } else {
             console.error(
-              `CRC校验失败，钱包地址可能无效。Received: ${receivedCrc}, Calculated: ${calculatedCrc}`
+              `CRC校验失败，数据可能无效。Received: ${receivedCrc}, Calculated: ${calculatedCrc}`
             );
           }
         } else {
-          console.error("收到的数据头部不正确，期望A3");
+          console.error("收到的数据头部不正确，期望A4");
         }
       }
     );
