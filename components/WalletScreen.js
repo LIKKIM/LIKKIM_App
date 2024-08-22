@@ -651,7 +651,9 @@ function WalletScreen({ route, navigation }) {
         base64Command // 最终的命令数据的Base64编码
       );
       console.log("创建钱包命令已发送");
-      monitorGeneratedWalletAddress(device);
+      // 开始监听创建结果
+      monitorWalletCreationResult(device);
+      // monitorGeneratedWalletAddress(device);
     } catch (error) {
       console.error("发送创建钱包命令失败:", error);
     }
@@ -717,7 +719,9 @@ function WalletScreen({ route, navigation }) {
         base64Command // 最终的命令数据的Base64编码
       );
       console.log("导入钱包命令已发送");
-      monitorGeneratedWalletAddress(device);
+      // 开始监听导入结果
+      monitorWalletCreationResult(device);
+      // monitorGeneratedWalletAddress(device);
     } catch (error) {
       console.error("发送导入钱包命令失败:", error);
     }
@@ -762,6 +766,40 @@ function WalletScreen({ route, navigation }) {
           setReceivedVerificationCode(verificationCode);
         } else {
           console.log("验证码模块接收到的数据:", receivedDataHex);
+        }
+      }
+    );
+  };
+  // 监听钱包生成结果
+  const monitorWalletCreationResult = (device) => {
+    const notifyCharacteristicUUID = "0000FFE1-0000-1000-8000-00805F9B34FB";
+
+    monitorSubscription = device.monitorCharacteristicForService(
+      serviceUUID,
+      notifyCharacteristicUUID,
+      (error, characteristic) => {
+        if (error) {
+          console.error("监听钱包生成结果时出错:", error.message);
+          return;
+        }
+
+        // Base64解码接收到的数据
+        const receivedData = Buffer.from(characteristic.value, "base64");
+
+        // 将接收到的数据解析为十六进制字符串
+        const receivedDataHex = receivedData.toString("hex").toUpperCase();
+        console.log("接收到的16进制数据字符串:", receivedDataHex);
+
+        if (receivedDataHex === "A40002B1E20D0A") {
+          console.log("钱包创建失败");
+          // 调用显示地址的函数
+          showAddressCommand(device);
+        } else if (receivedDataHex === "A40102B0720D0A") {
+          console.log("钱包创建成功");
+          // 钱包创建成功后的逻辑处理
+          monitorWalletAddress(device);
+        } else {
+          console.error("接收到的数据不符合预期格式");
         }
       }
     );
