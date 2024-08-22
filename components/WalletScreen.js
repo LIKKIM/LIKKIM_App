@@ -383,7 +383,7 @@ function WalletScreen({ route, navigation }) {
       setBleVisible(true);
     }
   };
-  // 显示地址函数
+  // 请求地址函数
   const showAddressCommand = async (device) => {
     try {
       // 检查 device 是否为一个有效的设备对象
@@ -391,8 +391,6 @@ function WalletScreen({ route, navigation }) {
         console.error("无效的设备对象：", device);
         return;
       }
-
-      //  console.log("发送显示地址命令之前的设备对象:", device);
 
       // 无论设备是否连接，均重新连接并发现服务和特性
       await device.connect();
@@ -425,19 +423,20 @@ function WalletScreen({ route, navigation }) {
       const coinTypeLength = coinTypeHex.length / 2; // 字节长度
       const derivationPathLength = derivationPathHex.length / 2; // 字节长度
 
-      // 总长度（包括命令标识符、TRX 长度、TRX 数据、路径长度、路径数据）
-      const totalLength = 1 + 1 + coinTypeLength + 1 + derivationPathLength;
+      // 总长度（包括命令标识符、标志位、TRX 长度、TRX 数据、路径长度、路径数据）
+      const totalLength = 1 + 1 + 1 + coinTypeLength + 1 + derivationPathLength;
 
       console.log(`Total Length: ${totalLength}`);
 
       // 构建命令数据
       const commandData = new Uint8Array([
         0xf9, // 命令标识符
+        0x01, // 固定的标志位
         coinTypeLength, // TRX 的长度
         ...Buffer.from(coinTypeHex, "hex"), // TRX 的16进制表示
         derivationPathLength, // 路径的长度
         ...Buffer.from(derivationPathHex, "hex"), // 路径的16进制表示
-        totalLength, // 总长度，包括命令、TRX和路径
+        totalLength, // 总长度，包括命令、标志位、TRX和路径
       ]);
 
       // 使用CRC-16-Modbus算法计算CRC校验码
@@ -471,8 +470,7 @@ function WalletScreen({ route, navigation }) {
         writeCharacteristicUUID, // 可写特性的UUID
         base64Command // 最终的命令数据的Base64编码
       );
-      // Close the address modal and open the verifying address modal
-      //setAddressModalVisible(false);
+
       setIsVerifyingAddress(true); // 显示提示
       console.log("显示地址命令已发送");
     } catch (error) {

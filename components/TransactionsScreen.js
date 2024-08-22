@@ -417,8 +417,6 @@ function TransactionsScreen() {
         return;
       }
 
-      console.log("发送显示地址命令之前的设备对象:", device);
-
       // 无论设备是否连接，均重新连接并发现服务和特性
       await device.connect();
       await device.discoverAllServicesAndCharacteristics();
@@ -450,7 +448,7 @@ function TransactionsScreen() {
       const coinTypeLength = coinTypeHex.length / 2; // 字节长度
       const derivationPathLength = derivationPathHex.length / 2; // 字节长度
 
-      // 总长度（包括命令标识符、TRX 长度、TRX 数据、路径长度、路径数据）
+      // 总长度（包括命令标识符、标志位、TRX 长度、TRX 数据、路径长度、路径数据）
       const totalLength = 1 + 1 + coinTypeLength + 1 + derivationPathLength;
 
       console.log(`Total Length: ${totalLength}`);
@@ -458,11 +456,12 @@ function TransactionsScreen() {
       // 构建命令数据
       const commandData = new Uint8Array([
         0xf9, // 命令标识符
+        0x02, // 添加标志位
         coinTypeLength, // TRX 的长度
         ...Buffer.from(coinTypeHex, "hex"), // TRX 的16进制表示
         derivationPathLength, // 路径的长度
         ...Buffer.from(derivationPathHex, "hex"), // 路径的16进制表示
-        totalLength, // 总长度，包括命令、TRX和路径
+        totalLength, // 总长度，包括命令、标志位、TRX和路径
       ]);
 
       // 使用CRC-16-Modbus算法计算CRC校验码
@@ -496,8 +495,9 @@ function TransactionsScreen() {
         writeCharacteristicUUID, // 可写特性的UUID
         base64Command // 最终的命令数据的Base64编码
       );
-      // Close the address modal and open the verifying address modal
-      setIsVerifyingAddress(true); // 显示提示
+
+      // 设置正在验证地址的状态
+      setIsVerifyingAddress(true);
       console.log("显示地址命令已发送");
     } catch (error) {
       console.error("发送显示地址命令失败:", error);
