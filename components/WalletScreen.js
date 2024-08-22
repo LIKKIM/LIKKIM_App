@@ -614,8 +614,6 @@ function WalletScreen({ route, navigation }) {
         return;
       }
 
-      // 创建钱包命令发送后，立即开始监听钱包地址
-      monitorWalletAddress(device);
       // 构建命令数据，未包含CRC校验码
       const commandData = new Uint8Array([0xf4, 0x01, 0x10, 0x00, 0x04]);
 
