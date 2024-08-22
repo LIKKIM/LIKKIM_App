@@ -355,74 +355,6 @@ function WalletScreen({ route, navigation }) {
     return crc & 0xffff; // 确保CRC值是16位
   }
 
-  // 监听生成的钱包地址
-  const monitorGeneratedWalletAddress = (device) => {
-    const notifyCharacteristicUUID = "0000FFE1-0000-1000-8000-00805F9B34FB";
-
-    monitorSubscription = device.monitorCharacteristicForService(
-      serviceUUID,
-      notifyCharacteristicUUID,
-      (error, characteristic) => {
-        if (error) {
-          console.error("监听生成钱包地址时出错:", error.message);
-          return;
-        }
-
-        // Base64解码接收到的数据
-        const receivedData = Buffer.from(characteristic.value, "base64");
-
-        // 将接收到的数据解析为十六进制字符串
-        const receivedDataHex = receivedData.toString("hex");
-        console.log("接收到的16进制数据字符串:", receivedDataHex);
-
-        // 检查头部标志位是否为 A4
-        if (receivedDataHex.startsWith("a4")) {
-          // 解析链名称长度
-          const chainLength = parseInt(receivedDataHex.substring(2, 4), 16);
-
-          // 解析链名称
-          const chainStartIndex = 4;
-          const chainEndIndex = chainStartIndex + chainLength * 2;
-          const chainNameHex = receivedDataHex.substring(
-            chainStartIndex,
-            chainEndIndex
-          );
-          const chainName = Buffer.from(chainNameHex, "hex").toString("utf-8");
-
-          // 解析地址长度
-          const addressLengthStartIndex = chainEndIndex;
-          const addressLength = parseInt(
-            receivedDataHex.substring(
-              addressLengthStartIndex,
-              addressLengthStartIndex + 2
-            ),
-            16
-          );
-
-          // 解析钱包地址
-          const addressStartIndex = addressLengthStartIndex + 2;
-          const addressEndIndex = addressStartIndex + addressLength * 2;
-          const walletAddressHex = receivedDataHex.substring(
-            addressStartIndex,
-            addressEndIndex
-          );
-          const walletAddress = Buffer.from(walletAddressHex, "hex").toString(
-            "utf-8"
-          );
-
-          // 打印链名称和钱包地址
-          console.log("链名称:", chainName);
-          console.log("钱包地址:", walletAddress);
-
-          // 在此处可以更新UI或存储钱包地址
-          // 停止监听
-          // stopMonitoringWalletAddress();
-        } else {
-          console.error("收到的数据头部不正确，期望A4创建钱包后收到地址的命令");
-        }
-      }
-    );
-  };
   // 停止监听验证码;
   const stopMonitoringVerificationCode = () => {
     if (monitorSubscription) {
@@ -752,7 +684,7 @@ function WalletScreen({ route, navigation }) {
 
         // 将接收到的数据解析为16进制字符串
         const receivedDataHex = receivedData.toString("hex");
-        console.log("接收到的16进制数据字符串:", receivedDataHex);
+        console.log("接收到的验证码模块16进制数据字符串:", receivedDataHex);
 
         // 示例：检查接收到的数据的前缀是否正确（例如，预期为 "a1"）
         if (receivedDataHex.startsWith("a1")) {
@@ -786,7 +718,10 @@ function WalletScreen({ route, navigation }) {
 
         // 将接收到的数据解析为十六进制字符串
         const receivedDataHex = receivedData.toString("hex").toUpperCase();
-        console.log("接收到的16进制数据字符串:", receivedDataHex);
+        /*        console.log(
+          "接收到监听钱包生成结果模块的16进制数据字符串:",
+          receivedDataHex
+        ); */
 
         if (receivedDataHex === "A40002B1E20D0A") {
           console.log("钱包创建失败");
@@ -796,8 +731,6 @@ function WalletScreen({ route, navigation }) {
           // 钱包创建成功后的逻辑处理
           showAddressCommand(device);
           monitorWalletAddress(device);
-        } else {
-          console.error("接收到的数据不符合预期格式");
         }
       }
     );
@@ -821,7 +754,7 @@ function WalletScreen({ route, navigation }) {
 
         // 将接收到的数据解析为十六进制字符串
         const receivedDataHex = receivedData.toString("hex");
-        console.log("接收到的16进制数据字符串:", receivedDataHex);
+        console.log("接收到监听地址模块的16进制数据字符串:", receivedDataHex);
 
         // 检查头部标志位是否为 A4
         if (receivedDataHex.startsWith("a4")) {
