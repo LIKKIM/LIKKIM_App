@@ -409,7 +409,7 @@ function TransactionsScreen() {
     }
   };
   // 显示地址函数
-  const showAddressCommand = async (device) => {
+  const showLIKKIMAddressCommand = async (device) => {
     try {
       // 检查 device 是否为一个有效的设备对象
       if (typeof device !== "object" || !device.isConnected) {
@@ -499,6 +499,48 @@ function TransactionsScreen() {
       // 设置正在验证地址的状态
       setIsVerifyingAddress(true);
       console.log("显示地址命令已发送");
+
+      // 开始监听 BLE 设备的响应
+      const notifyCharacteristicUUID = "0000FFE1-0000-1000-8000-00805F9B34FB";
+      let addressMonitorSubscription = device.monitorCharacteristicForService(
+        serviceUUID,
+        notifyCharacteristicUUID,
+        (error, characteristic) => {
+          if (error) {
+            console.error("监听设备响应时出错:", error.message);
+            return;
+          }
+
+          // Base64解码接收到的数据
+          const receivedData = Buffer.from(characteristic.value, "base64");
+
+          // 将接收到的数据解析为16进制字符串
+          const receivedDataHex = receivedData.toString("hex").toUpperCase();
+          console.log("接收到的16进制数据字符串:", receivedDataHex);
+
+          // 检查是否为指定的数据
+          if (receivedDataHex === "A40302B1120D0A") {
+            console.log("在LIKKIM上显示地址成功");
+            setIsVerifyingAddress(true);
+          }
+        }
+      );
+
+      // 监听模态窗口关闭状态，关闭时停止监听
+      const stopMonitoringOnModalClose = () => {
+        if (!addressModalVisible) {
+          if (addressMonitorSubscription) {
+            addressMonitorSubscription.remove();
+            addressMonitorSubscription = null;
+            console.log("显示地址监听已停止");
+          }
+        }
+      };
+
+      // 监听 addressModalVisible 变化
+      useEffect(() => {
+        stopMonitoringOnModalClose();
+      }, [addressModalVisible]);
     } catch (error) {
       console.error("发送显示地址命令失败:", error);
     }
@@ -848,7 +890,7 @@ function TransactionsScreen() {
       // 发送显示地址命令时，确保传递的是设备对象
       const device = devices.find((d) => d.id === verifiedDevices[0]);
       if (device) {
-        showAddressCommand(device); // 确保这里传递的是完整的设备对象
+        showLIKKIMAddressCommand(device); // 确保这里传递的是完整的设备对象
       } else {
         setBleVisible(true);
       }
