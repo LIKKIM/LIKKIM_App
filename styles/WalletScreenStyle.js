@@ -553,12 +553,6 @@ const WalletScreenStyles = (isDarkMode) => {
       alignItems: "center",
       marginBottom: 20,
     },
-    deleteImg: {
-      width: 130,
-      height: 130, // 设置固定高度
-      resizeMode: "contain", // 确保图片在其容器内完整显示
-      marginBottom: 40,
-    },
     QRImg: {
       width: 25,
       height: 25, // 设置固定高度

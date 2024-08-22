@@ -2050,8 +2050,8 @@ function WalletScreen({ route, navigation }) {
             </Text>
             <View style={{ alignItems: "center", justifyContent: "center" }}>
               <Image
-                source={require("../assets/modal/Delete.png")}
-                style={WalletScreenStyle.deleteImg}
+                source={require("../assets/gif/Delete.gif")}
+                style={{ width: 200, height: 200, marginBottom: 40 }}
               />
             </View>
             <TouchableOpacity
@@ -2099,11 +2099,17 @@ function WalletScreen({ route, navigation }) {
                 </Text>
               </View>
             ) : (
-              <Text style={WalletScreenStyle.modalSubtitle}>
-                {t(
-                  "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled."
-                )}
-              </Text>
+              <View>
+                <Image
+                  source={require("../assets/gif/Search.gif")}
+                  style={{ width: 180, height: 180, margin: 30 }}
+                />
+                <Text style={WalletScreenStyle.modalSubtitle}>
+                  {t(
+                    "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled."
+                  )}
+                </Text>
+              </View>
             )}
             <TouchableOpacity
               style={WalletScreenStyle.cancelButtonLookingFor}

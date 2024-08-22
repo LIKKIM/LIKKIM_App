@@ -1608,11 +1608,17 @@ function TransactionsScreen() {
                   </Text>
                 </View>
               ) : (
-                <Text style={TransactionsScreenStyle.modalSubtitle}>
-                  {t(
-                    "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled."
-                  )}
-                </Text>
+                <View>
+                  <Image
+                    source={require("../assets/gif/Search.gif")}
+                    style={{ width: 180, height: 180, margin: 30 }}
+                  />
+                  <Text style={TransactionsScreenStyle.modalSubtitle}>
+                    {t(
+                      "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled."
+                    )}
+                  </Text>
+                </View>
               )}
               <TouchableOpacity
                 style={TransactionsScreenStyle.cancelButtonLookingFor}
