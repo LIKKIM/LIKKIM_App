@@ -16,7 +16,6 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
     errorText: {
       color: "#FF5252",
       fontSize: 14,
-      marginTop: 5,
       marginBottom: 10,
       alignItems: "left",
       width: 280,
@@ -325,6 +324,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       height: 50,
       width: "100%",
       color: textColor,
+      marginBottom: 10,
     },
     passwordInputContainer: {
       flexDirection: "row",
