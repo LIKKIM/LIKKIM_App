@@ -418,7 +418,7 @@ function WalletScreen({ route, navigation }) {
           // 停止监听
           // stopMonitoringWalletAddress();
         } else {
-          console.error("收到的数据头部不正确，期望A4");
+          console.error("收到的数据头部不正确，期望A4创建钱包后收到地址的命令");
         }
       }
     );
