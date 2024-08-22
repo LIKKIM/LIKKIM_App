@@ -1144,11 +1144,14 @@ function WalletScreen({ route, navigation }) {
     setAddWalletModalVisible(false);
 
     if (verifiedDevices.length > 0) {
-      // 如果有已验证的设备，找到设备并显示导入模态框
+      // 如果有已验证的设备，找到设备并执行导入命令
       const device = devices.find((d) => d.id === verifiedDevices[0]);
       if (device) {
         sendImportWalletCommand(device);
         setImportingModalVisible(true);
+      } else {
+        // 如果找不到与ID匹配的设备对象，则显示蓝牙模态框
+        setBleVisible(true);
       }
     } else {
       // 如果没有已验证的设备，显示蓝牙模态框
@@ -1180,7 +1183,8 @@ function WalletScreen({ route, navigation }) {
 
         setCreatePendingModalVisible(true);
       } else {
-        console.error("未找到与该ID匹配的设备对象");
+        // console.error("未找到与该ID匹配的设备对象");
+        setBleVisible(true);
       }
     } else {
       setBleVisible(true);
@@ -2095,51 +2099,6 @@ function WalletScreen({ route, navigation }) {
                 </Text>
               </View>
             ) : (
-              devices.length > 0 && (
-                <FlatList
-                  data={devices}
-                  keyExtractor={(item) => item.id}
-                  renderItem={({ item }) => {
-                    const isVerified = verifiedDevices.includes(item.id);
-
-                    return (
-                      <TouchableOpacity
-                        onPress={() => {
-                          if (!isVerified) {
-                            handleDevicePress(item); // 确保这里传递的是完整的设备对象
-                          }
-                        }}
-                      >
-                        <View style={WalletScreenStyle.deviceItemContainer}>
-                          <Icon
-                            name={isVerified ? "mobile-friendly" : "smartphone"}
-                            size={24}
-                            color={isVerified ? "#3CDA84" : iconColor}
-                            style={WalletScreenStyle.deviceIcon}
-                          />
-                          <Text style={WalletScreenStyle.scanModalSubtitle}>
-                            {item.name || item.id}
-                          </Text>
-                          {isVerified && (
-                            <TouchableOpacity
-                              style={WalletScreenStyle.disconnectButton}
-                              onPress={() => handleDisconnectDevice(item)}
-                            >
-                              <Text
-                                style={WalletScreenStyle.disconnectButtonText}
-                              >
-                                {t("Disconnect")}
-                              </Text>
-                            </TouchableOpacity>
-                          )}
-                        </View>
-                      </TouchableOpacity>
-                    );
-                  }}
-                />
-              )
-            )}
-            {!isScanning && devices.length === 0 && (
               <Text style={WalletScreenStyle.modalSubtitle}>
                 {t(
                   "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled."
