@@ -151,6 +151,28 @@ function TransactionsScreen() {
       bleManagerRef.current.destroy();
     };
   }, []);
+
+  useEffect(() => {
+    let addressMonitorSubscription;
+
+    const startMonitoring = async () => {
+      if (addressModalVisible && selectedDevice) {
+        addressMonitorSubscription = await showLIKKIMAddressCommand(
+          selectedDevice
+        );
+      }
+    };
+
+    startMonitoring();
+
+    // 清理函数，关闭模态框时停止监听
+    return () => {
+      if (addressMonitorSubscription) {
+        addressMonitorSubscription.remove();
+        console.log("显示地址监听已停止");
+      }
+    };
+  }, [addressModalVisible, selectedDevice]);
   let monitorSubscription;
 
   const monitorVerificationCode = (device) => {
@@ -502,7 +524,7 @@ function TransactionsScreen() {
 
       // 开始监听 BLE 设备的响应
       const notifyCharacteristicUUID = "0000FFE1-0000-1000-8000-00805F9B34FB";
-      let addressMonitorSubscription = device.monitorCharacteristicForService(
+      const addressMonitorSubscription = device.monitorCharacteristicForService(
         serviceUUID,
         notifyCharacteristicUUID,
         (error, characteristic) => {
@@ -526,21 +548,8 @@ function TransactionsScreen() {
         }
       );
 
-      // 监听模态窗口关闭状态，关闭时停止监听
-      const stopMonitoringOnModalClose = () => {
-        if (!addressModalVisible) {
-          if (addressMonitorSubscription) {
-            addressMonitorSubscription.remove();
-            addressMonitorSubscription = null;
-            console.log("显示地址监听已停止");
-          }
-        }
-      };
-
-      // 监听 addressModalVisible 变化
-      useEffect(() => {
-        stopMonitoringOnModalClose();
-      }, [addressModalVisible]);
+      // 返回 subscription 用于在其他地方进行清理
+      return addressMonitorSubscription;
     } catch (error) {
       console.error("发送显示地址命令失败:", error);
     }
