@@ -460,88 +460,53 @@ function WalletScreen({ route, navigation }) {
         return;
       }
 
-      //  console.log("发送显示地址命令之前的设备对象:", device);
+      // console.log("发送显示地址命令之前的设备对象:", device);
 
-      // 无论设备是否连接，均重新连接并发现服务和特性
       await device.connect();
       await device.discoverAllServicesAndCharacteristics();
       console.log("设备已连接并发现所有服务。");
 
-      if (
-        typeof device.writeCharacteristicWithResponseForService !== "function"
-      ) {
-        console.error(
-          "设备没有 writeCharacteristicWithResponseForService 方法。"
-        );
-        return;
-      }
-
-      // TRX 和路径的字符串
       const coinType = "TRX";
       const derivationPath = "m/44'/195'/0'/0/0";
-
-      // 转换字符串为16进制格式
       const coinTypeHex = Buffer.from(coinType, "utf-8").toString("hex");
       const derivationPathHex = Buffer.from(derivationPath, "utf-8").toString(
         "hex"
       );
 
-      console.log(`Coin Type Hex: ${coinTypeHex}`);
-      console.log(`Derivation Path Hex: ${derivationPathHex}`);
+      const coinTypeLength = coinTypeHex.length / 2;
+      const derivationPathLength = derivationPathHex.length / 2;
 
-      // 计算长度
-      const coinTypeLength = coinTypeHex.length / 2; // 字节长度
-      const derivationPathLength = derivationPathHex.length / 2; // 字节长度
-
-      // 总长度（包括命令标识符、TRX 长度、TRX 数据、路径长度、路径数据）
       const totalLength = 1 + 1 + coinTypeLength + 1 + derivationPathLength;
 
-      console.log(`Total Length: ${totalLength}`);
-
-      // 构建命令数据
       const commandData = new Uint8Array([
-        0xf9, // 命令标识符
-        coinTypeLength, // TRX 的长度
-        ...Buffer.from(coinTypeHex, "hex"), // TRX 的16进制表示
-        derivationPathLength, // 路径的长度
-        ...Buffer.from(derivationPathHex, "hex"), // 路径的16进制表示
-        totalLength, // 总长度，包括命令、TRX和路径
+        0xf9,
+        coinTypeLength,
+        ...Buffer.from(coinTypeHex, "hex"),
+        derivationPathLength,
+        ...Buffer.from(derivationPathHex, "hex"),
+        totalLength,
       ]);
 
-      // 使用CRC-16-Modbus算法计算CRC校验码
       const crc = crc16Modbus(commandData);
-
-      // 将CRC校验码转换为高位在前，低位在后的格式
       const crcHighByte = (crc >> 8) & 0xff;
       const crcLowByte = crc & 0xff;
 
-      // 将原始命令数据、CRC校验码以及结束符组合成最终的命令
       const finalCommand = new Uint8Array([
         ...commandData,
         crcLowByte,
         crcHighByte,
-        0x0d, // 结束符
-        0x0a, // 结束符
+        0x0d,
+        0x0a,
       ]);
 
-      // 将最终的命令转换为Base64编码
       const base64Command = base64.fromByteArray(finalCommand);
 
-      console.log(
-        `显示地址命令: ${Array.from(finalCommand)
-          .map((byte) => byte.toString(16).padStart(2, "0"))
-          .join(" ")}`
+      await device.writeCharacteristicWithResponseForService(
+        serviceUUID,
+        writeCharacteristicUUID,
+        base64Command
       );
 
-      // 发送显示地址命令
-      await device.writeCharacteristicWithResponseForService(
-        serviceUUID, // BLE服务的UUID
-        writeCharacteristicUUID, // 可写特性的UUID
-        base64Command // 最终的命令数据的Base64编码
-      );
-      // Close the address modal and open the verifying address modal
-      //setAddressModalVisible(false);
-      setIsVerifyingAddress(true); // 显示提示
       console.log("显示地址命令已发送");
     } catch (error) {
       console.error("发送显示地址命令失败:", error);
@@ -615,7 +580,7 @@ function WalletScreen({ route, navigation }) {
       }
 
       // 创建钱包命令发送后，立即开始监听钱包地址
-      monitorWalletAddress(device);
+      //   monitorWalletAddress(device);
       // 构建命令数据，未包含CRC校验码
       const commandData = new Uint8Array([0xf4, 0x01, 0x10, 0x00, 0x04]);
 
@@ -796,8 +761,7 @@ function WalletScreen({ route, navigation }) {
         } else if (receivedDataHex === "A40102B0720D0A") {
           console.log("钱包创建成功");
           // 钱包创建成功后的逻辑处理
-          showAddressCommand(device);
-          monitorWalletAddress(device);
+          handleAddressCommandAndMonitor(device);
         } else {
           console.error("接收到的数据不符合预期格式");
         }
@@ -806,115 +770,50 @@ function WalletScreen({ route, navigation }) {
   };
 
   // 监听地址监听钱包地址的函数
-  const monitorWalletAddress = (device) => {
+  const monitorWalletAddress = async (device) => {
     const notifyCharacteristicUUID = "0000FFE1-0000-1000-8000-00805F9B34FB";
+    return new Promise((resolve, reject) => {
+      try {
+        monitorSubscription = device.monitorCharacteristicForService(
+          serviceUUID,
+          notifyCharacteristicUUID,
+          (error, characteristic) => {
+            if (error) {
+              console.error("监听钱包地址时出错:", error.message);
+              reject(error);
+              return;
+            }
 
-    monitorSubscription = device.monitorCharacteristicForService(
-      serviceUUID,
-      notifyCharacteristicUUID,
-      (error, characteristic) => {
-        if (error) {
-          console.error("监听钱包地址时出错:", error.message);
-          return;
-        }
+            const receivedData = Buffer.from(characteristic.value, "base64");
+            const receivedDataHex = receivedData.toString("hex");
+            console.log("接收到的16进制数据字符串:", receivedDataHex);
 
-        // Base64解码接收到的数据
-        const receivedData = Buffer.from(characteristic.value, "base64");
-
-        // 将接收到的数据解析为十六进制字符串
-        const receivedDataHex = receivedData.toString("hex");
-        console.log("接收到的16进制数据字符串:", receivedDataHex);
-
-        // 检查头部标志位是否为 A4
-        if (receivedDataHex.startsWith("a4")) {
-          // 解析链名长度
-          const chainNameLength = parseInt(receivedDataHex.substring(2, 4), 16);
-          console.log("链名长度:", chainNameLength);
-
-          // 解析链名
-          const chainNameStartIndex = 4;
-          const chainNameEndIndex = chainNameStartIndex + chainNameLength * 2; // 每个字符占2个16进制位
-          const chainNameHex = receivedDataHex.substring(
-            chainNameStartIndex,
-            chainNameEndIndex
-          );
-          const chainName = Buffer.from(chainNameHex, "hex").toString("utf-8");
-          console.log("链名:", chainName);
-
-          // 解析地址长度
-          const addressLengthIndex = chainNameEndIndex;
-          const addressLength = parseInt(
-            receivedDataHex.substring(
-              addressLengthIndex,
-              addressLengthIndex + 2
-            ),
-            16
-          );
-          console.log("地址长度:", addressLength);
-
-          // 解析钱包地址
-          const addressStartIndex = addressLengthIndex + 2;
-          const addressEndIndex = addressStartIndex + addressLength * 2; // 每个字符占2个16进制位
-          const walletAddressHex = receivedDataHex.substring(
-            addressStartIndex,
-            addressEndIndex
-          );
-          const walletAddress = Buffer.from(walletAddressHex, "hex").toString(
-            "utf-8"
-          );
-          console.log("钱包地址:", walletAddress);
-
-          // 解析总数据长度
-          const totalDataLengthIndex = addressEndIndex;
-          const totalDataLength = parseInt(
-            receivedDataHex.substring(
-              totalDataLengthIndex,
-              totalDataLengthIndex + 2
-            ),
-            16
-          );
-          console.log("总数据长度:", totalDataLength);
-
-          // 解析CRC校验码（顺序：低字节在前，高字节在后）
-          const crcStartIndex = totalDataLengthIndex + 2;
-          const receivedCrcLowByte = receivedDataHex.substring(
-            crcStartIndex,
-            crcStartIndex + 2
-          );
-          const receivedCrcHighByte = receivedDataHex.substring(
-            crcStartIndex + 2,
-            crcStartIndex + 4
-          );
-          const receivedCrc = receivedCrcLowByte + receivedCrcHighByte; // 低字节在前
-          console.log("接收到的CRC:", receivedCrc);
-
-          // 提取所有用于CRC校验的数据（不包括 CRC 和结尾标志位）
-          const dataToVerifyHex = receivedDataHex.substring(0, crcStartIndex);
-          const dataToVerify = Buffer.from(dataToVerifyHex, "hex");
-
-          // 计算CRC校验码
-          let calculatedCrc = crc16Modbus(dataToVerify)
-            .toString(16)
-            .padStart(4, "0");
-
-          // 将计算的 CRC 码转换为低字节在前的格式
-          calculatedCrc = calculatedCrc.slice(2) + calculatedCrc.slice(0, 2);
-          console.log("计算的CRC:", calculatedCrc);
-
-          // 比较接收到的CRC和计算的CRC是否匹配
-          if (calculatedCrc.toLowerCase() === receivedCrc.toLowerCase()) {
-            console.log("CRC校验通过，数据有效");
-            // 可以在此处触发后续操作，如更新状态或UI
-          } else {
-            console.error(
-              `CRC校验失败，数据可能无效。Received: ${receivedCrc}, Calculated: ${calculatedCrc}`
-            );
+            if (receivedDataHex.startsWith("a4")) {
+              console.log("钱包地址已接收:", receivedDataHex);
+              resolve(); // 成功时解析
+            } else {
+              reject(new Error("收到的数据头部不正确，期望A4"));
+            }
           }
-        } else {
-          console.error("收到的数据头部不正确，期望A4");
-        }
+        );
+      } catch (error) {
+        reject(error); // 失败时拒绝
       }
-    );
+    });
+  };
+
+  const handleAddressCommandAndMonitor = async (device) => {
+    try {
+      // 确保 `showAddressCommand` 先执行完成
+      await showAddressCommand(device);
+      console.log("Address command successfully sent.");
+
+      // 然后启动 `monitorWalletAddress`
+      await monitorWalletAddress(device);
+      console.log("Started monitoring wallet address.");
+    } catch (error) {
+      console.error("执行命令时发生错误:", error);
+    }
   };
 
   // 停止监听钱包地址
