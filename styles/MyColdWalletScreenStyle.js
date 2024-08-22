@@ -17,7 +17,9 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       color: "#FF5252",
       fontSize: 14,
       marginTop: 5,
-      marginLeft: 10,
+      marginBottom: 10,
+      alignItems: "left",
+      width: 280,
     },
     bluetoothModalView: {
       margin: 20,
