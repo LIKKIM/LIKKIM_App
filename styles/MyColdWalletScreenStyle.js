@@ -13,6 +13,12 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
   const focusedBorderColor = isDarkMode ? "#6C6CF4" : "#007AFF";
 
   return StyleSheet.create({
+    errorText: {
+      color: "#FF5252",
+      fontSize: 14,
+      marginTop: 5,
+      marginLeft: 10,
+    },
     bluetoothModalView: {
       margin: 20,
       height: 500,

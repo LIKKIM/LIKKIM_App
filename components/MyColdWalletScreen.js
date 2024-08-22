@@ -96,6 +96,7 @@ function MyColdWalletScreen() {
   const [confirmPasswordModalVisible, setConfirmPasswordModalVisible] =
     useState(false);
   const [storedPassword, setStoredPassword] = useState(""); // 存储已设置的密码
+  const [passwordError, setPasswordError] = useState(""); // 新增密码错误状态
 
   // 关闭设置密码模态框并清空输入
   const closePasswordModal = () => {
@@ -199,17 +200,23 @@ function MyColdWalletScreen() {
 
   // 设置密码模态框的提交处理函数
   const handleSetPassword = async () => {
+    if (password.length < 4) {
+      setPasswordError(t("Password must be at least 4 characters long"));
+      return;
+    }
+
     if (password === confirmPassword) {
       try {
         await changeScreenLockPassword(password);
         toggleScreenLock(true); // 启用屏幕锁定
         setPasswordModalVisible(false);
+        setPasswordError(""); // 清除错误信息
         Alert.alert(t("Success"), t("Screen lock enabled successfully"));
       } catch (error) {
         console.error("Failed to save password", error);
       }
     } else {
-      Alert.alert(t("Error"), t("Passwords do not match"));
+      setPasswordError(t("Passwords do not match"));
     }
   };
 
@@ -967,7 +974,10 @@ function MyColdWalletScreen() {
                     placeholder={t("Enter new password")}
                     placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
                     secureTextEntry={isPasswordHidden}
-                    onChangeText={setPassword}
+                    onChangeText={(text) => {
+                      setPassword(text);
+                      setPasswordError(""); // 清除错误信息
+                    }}
                     value={password}
                     autoFocus={true}
                   />
@@ -1009,7 +1019,17 @@ function MyColdWalletScreen() {
                     />
                   </TouchableOpacity>
                 </View>
-
+                {/* 错误提示，确保与输入框左对齐 */}
+                {passwordError ? (
+                  <Text
+                    style={[
+                      MyColdWalletScreenStyle.errorText,
+                      { marginLeft: 10 },
+                    ]}
+                  >
+                    {passwordError}
+                  </Text>
+                ) : null}
                 <View style={MyColdWalletScreenStyle.buttonContainer}>
                   <TouchableOpacity
                     style={MyColdWalletScreenStyle.submitButton}
