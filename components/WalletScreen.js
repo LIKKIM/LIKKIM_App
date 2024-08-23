@@ -2395,7 +2395,7 @@ function WalletScreen({ route, navigation }) {
               style={{ width: 120, height: 120 }}
             />
             <Text
-              style={[WalletScreenStyle.modalSubtitle, { marginBottom: 20 }]}
+              style={[WalletScreenStyle.modalSubtitle}
             >
               {t("Your device is already verified.")}
             </Text>
