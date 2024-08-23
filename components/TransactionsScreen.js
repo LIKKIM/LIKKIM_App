@@ -942,7 +942,10 @@ function TransactionsScreen() {
   }, []); // 这个依赖空数组确保该代码只在组件挂载时执行一次
   // 打印设备数量
   useEffect(() => {
-    console.log("Transaction Page Verified Devices Count:", verifiedDevices.length);
+    console.log(
+      "Transaction Page Verified Devices Count:",
+      verifiedDevices.length
+    );
   }, [verifiedDevices]);
 
   // 停止监听
@@ -987,7 +990,7 @@ function TransactionsScreen() {
           // 添加短暂延迟以确保蓝牙模块完全准备好
           setTimeout(() => {
             scanDevices();
-          }, 1000); // 1秒延迟
+          }, 2000); // 1秒延迟
         }
       }, true);
 
