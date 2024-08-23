@@ -107,7 +107,6 @@ function WalletScreen({ route, navigation }) {
     useState(false);
   const [createPendingModalVisible, setCreatePendingModalVisible] =
     useState(false);
-
   const [importingModalVisible, setImportingModalVisible] = useState(false);
   const restoreIdentifier = Constants.installationId;
   const [pinCode, setPinCode] = useState("");
@@ -116,6 +115,11 @@ function WalletScreen({ route, navigation }) {
       crypto.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       crypto.shortName.toLowerCase().includes(searchQuery.toLowerCase())
   );
+  const [walletCreationStatus, setWalletCreationStatus] = useState({
+    image: require("../assets/gif/Pending.gif"), // 初始状态为 Pending
+    message: t("Creating on LIKKIM Hardware..."), // 初始消息
+    subMessage: t("Please wait while your device creates a new wallet."),
+  });
 
   const bleManagerRef = useRef(null);
 
@@ -833,6 +837,10 @@ function WalletScreen({ route, navigation }) {
           // 比较接收到的CRC和计算的CRC是否匹配
           if (calculatedCrc.toLowerCase() === receivedCrc.toLowerCase()) {
             console.log("CRC校验通过，数据有效");
+
+            // 在此处添加接收钱包生成地址成功的日志
+            console.log("接收钱包生成地址成功:", walletAddress);
+
             // 可以在此处触发后续操作，如更新状态或UI
           } else {
             console.error(
