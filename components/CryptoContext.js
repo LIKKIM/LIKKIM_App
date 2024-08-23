@@ -168,7 +168,8 @@ export const usdtCrypto = {
   cardImage: require("../assets/Card43.png"),
   address: "TZ7QDpUHbe6VLCv9bEPdAzrnNeu5zCuXg6",
   chain: "Tron",
-  chainShortName: "TRX", // 新增的字段
+  chainShortName: "TRX",
+  chainIcon: require("../assets/icon/TRXIcon.png"),
 };
 
 export const CryptoProvider = ({ children }) => {

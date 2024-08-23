@@ -334,7 +334,7 @@ const WalletScreenStyles = (isDarkMode) => {
     },
     cardIcon: {
       position: "absolute",
-      top: 24,
+      top: 28,
       left: 10,
       width: 42,
       height: 42,

@@ -1769,13 +1769,12 @@ function WalletScreen({ route, navigation }) {
                   <View
                     style={{
                       position: "absolute",
-                      top: 46,
-                      left: 40,
+                      top: 52,
+                      left: 42,
                       width: 18,
                       height: 18,
                       borderWidth: 1,
                       borderColor: "#FFF",
-
                       alignItems: "center",
                       justifyContent: "center",
                       borderRadius: 15,
