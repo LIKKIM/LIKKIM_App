@@ -191,8 +191,43 @@ export const CryptoProvider = ({ children }) => {
   const [isVerificationSuccessful, setIsVerificationSuccessful] =
     useState(false);
   const [verifiedDevices, setVerifiedDevices] = useState([]);
-
   const [isAppLaunching, setIsAppLaunching] = useState(true);
+
+  // 在这里添加用于更新加密卡片的方法，并将其传递给上下文
+  const addCryptoCard = (chainName, walletAddress) => {
+    setAddedCryptos((prevCards) => {
+      const existingCard = prevCards.find(
+        (card) => card.chainShortName === chainName
+      );
+
+      if (!existingCard) {
+        const newCrypto = initialAdditionalCryptos.find(
+          (crypto) => crypto.chainShortName === chainName
+        );
+
+        if (newCrypto) {
+          const updatedCards = [
+            ...prevCards,
+            {
+              name: newCrypto.name,
+              shortName: newCrypto.shortName,
+              balance: newCrypto.balance,
+              icon: newCrypto.icon,
+              cardImage: newCrypto.cardImage,
+              address: walletAddress,
+              chain: newCrypto.chain,
+              chainShortName: newCrypto.chainShortName,
+              chainIcon: newCrypto.chainIcon,
+            },
+          ];
+          return updatedCards;
+        } else {
+          console.warn(`未找到 ${chainName} 的初始加密货币信息`);
+        }
+      }
+      return prevCards;
+    });
+  };
 
   useEffect(() => {
     const saveAddedCryptos = async () => {
@@ -368,6 +403,7 @@ export const CryptoProvider = ({ children }) => {
         setAdditionalCryptos,
         addedCryptos,
         setAddedCryptos,
+        addCryptoCard, // 提供 addCryptoCard 方法
         isVerificationSuccessful,
         setIsVerificationSuccessful,
         verifiedDevices,
