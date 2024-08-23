@@ -2394,9 +2394,7 @@ function WalletScreen({ route, navigation }) {
               source={require("../assets/gif/Pending.gif")}
               style={{ width: 120, height: 120 }}
             />
-            <Text
-              style={[WalletScreenStyle.modalSubtitle}
-            >
+            <Text style={[WalletScreenStyle.modalSubtitle]}>
               {t("Your device is already verified.")}
             </Text>
             <TouchableOpacity
