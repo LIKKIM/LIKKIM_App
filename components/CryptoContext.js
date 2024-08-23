@@ -57,7 +57,7 @@ const initialAdditionalCryptos = [
     address: "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
     chain: "Bitcoin",
     chainShortName: "BTC",
-    // chainIcon: require("../assets/BitcoinChainIcon.png"), // Placeholder for future chain icon
+    // chainIcon: require("../assets/BTCIcon.png"), // Placeholder for future chain icon
   },
   {
     name: "Ethereum",
@@ -68,7 +68,7 @@ const initialAdditionalCryptos = [
     address: "0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe",
     chain: "Ethereum",
     chainShortName: "ETH",
-    // chainIcon: require("../assets/EthereumChainIcon.png"), // Placeholder for future chain icon
+    // chainIcon: require("../assets/ETHIcon.png"), // Placeholder for future chain icon
   },
   {
     name: "USDT",
@@ -79,7 +79,7 @@ const initialAdditionalCryptos = [
     address: "TZ7QDpUHbe6VLCv9bEPdAzrnNeu5zCuXg6",
     chain: "Tron",
     chainShortName: "TRX",
-    // chainIcon: require("../assets/TronChainIcon.png"), // Placeholder for future chain icon
+    // chainIcon: require("../assets/TRXIcon.png"), // Placeholder for future chain icon
   },
   {
     name: "Litecoin",
@@ -90,7 +90,7 @@ const initialAdditionalCryptos = [
     address: "LcHKdCbbtGxDsN7BHyebDTrVKT4w3KpU5Z",
     chain: "Litecoin",
     chainShortName: "LTC",
-    // chainIcon: require("../assets/LitecoinChainIcon.png"), // Placeholder for future chain icon
+    // chainIcon: require("../assets/LTCIcon.png"), // Placeholder for future chain icon
   },
   {
     name: "Bitcoin Cash",
@@ -101,7 +101,7 @@ const initialAdditionalCryptos = [
     address: "qpm2qsznhks23z7629mms6s4cwef74vcwvy22gdx6a",
     chain: "Bitcoin Cash",
     chainShortName: "BCH",
-    // chainIcon: require("../assets/BitcoinCashChainIcon.png"), // Placeholder for future chain icon
+    // chainIcon: require("../assets/BCHIcon.png"), // Placeholder for future chain icon
   },
   {
     name: "Cardano",
@@ -112,7 +112,7 @@ const initialAdditionalCryptos = [
     address: "DdzFFzCqrhsusgjmXKG9VeSvfhRUHqNNNLiFYB8HHR7",
     chain: "Cardano",
     chainShortName: "ADA",
-    // chainIcon: require("../assets/CardanoChainIcon.png"), // Placeholder for future chain icon
+    // chainIcon: require("../assets/ADAIcon.png"), // Placeholder for future chain icon
   },
   {
     name: "Polkadot",
@@ -123,7 +123,7 @@ const initialAdditionalCryptos = [
     address: "14VSS98ov7KjJtyepigS65atjPjj73Fw4c8TyRjCnbhG",
     chain: "Polkadot",
     chainShortName: "DOT",
-    // chainIcon: require("../assets/PolkadotChainIcon.png"), // Placeholder for future chain icon
+    // chainIcon: require("../assets/DOTIcon.png"), // Placeholder for future chain icon
   },
   {
     name: "Chainlink",
@@ -134,7 +134,7 @@ const initialAdditionalCryptos = [
     address: "0x514910771af9ca656af840dff83e8264ecf986ca",
     chain: "Ethereum",
     chainShortName: "ETH",
-    // chainIcon: require("../assets/EthereumChainIcon.png"), // Placeholder for future chain icon
+    // chainIcon: require("../assets/ETHIcon.png"), // Placeholder for future chain icon
   },
   {
     name: "Stellar",
@@ -145,7 +145,7 @@ const initialAdditionalCryptos = [
     address: "GAHPDQD4MGHVZFJYZN46EZB2XB4LGIOHBTVHQRJ7MF2PL4EY7I7U77CC",
     chain: "Stellar",
     chainShortName: "XLM",
-    // chainIcon: require("../assets/StellarChainIcon.png"), // Placeholder for future chain icon
+    // chainIcon: require("../assets/XLMIcon.png"), // Placeholder for future chain icon
   },
   {
     name: "Dogecoin",
@@ -156,7 +156,7 @@ const initialAdditionalCryptos = [
     address: "D7Y55N4sFCw4KceCczPS3KhNWZ6o7pTPkd",
     chain: "Dogecoin",
     chainShortName: "DOGE",
-    // chainIcon: require("../assets/DogecoinChainIcon.png"), // Placeholder for future chain icon
+    // chainIcon: require("../assets/DOGEIcon.png"), // Placeholder for future chain icon
   },
 ];
 
