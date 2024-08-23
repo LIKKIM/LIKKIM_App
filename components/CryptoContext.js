@@ -195,6 +195,22 @@ export const CryptoProvider = ({ children }) => {
   const [isAppLaunching, setIsAppLaunching] = useState(true);
 
   useEffect(() => {
+    const saveAddedCryptos = async () => {
+      try {
+        await AsyncStorage.setItem(
+          "addedCryptos",
+          JSON.stringify(addedCryptos)
+        );
+      } catch (error) {
+        console.error("Error saving addedCryptos: ", error);
+      }
+    };
+    if (addedCryptos.length > 0) {
+      saveAddedCryptos();
+    }
+  }, [addedCryptos]);
+
+  useEffect(() => {
     const loadSettings = async () => {
       try {
         const darkModeValue = await AsyncStorage.getItem("darkMode");

@@ -456,6 +456,18 @@ function MyColdWalletScreen() {
     }
   };
 
+  const reconnectDevice = async (device) => {
+    try {
+      console.log(`正在尝试重新连接设备: ${device.id}`);
+      await device.cancelConnection(); // 首先断开连接
+      await device.connect(); // 尝试重新连接
+      await device.discoverAllServicesAndCharacteristics(); // 重新发现服务和特性
+      console.log("设备重新连接成功");
+    } catch (error) {
+      console.error("设备重新连接失败:", error);
+    }
+  };
+
   let monitorSubscription;
 
   const monitorVerificationCode = (device) => {

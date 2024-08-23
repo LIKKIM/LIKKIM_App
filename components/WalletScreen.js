@@ -826,6 +826,19 @@ function WalletScreen({ route, navigation }) {
     setIsVerifyingAddress(false);
     setAddressModalVisible(true);
   };
+
+  const reconnectDevice = async (device) => {
+    try {
+      console.log(`正在尝试重新连接设备: ${device.id}`);
+      await device.cancelConnection(); // 首先断开连接
+      await device.connect(); // 尝试重新连接
+      await device.discoverAllServicesAndCharacteristics(); // 重新发现服务和特性
+      console.log("设备重新连接成功");
+    } catch (error) {
+      console.error("设备重新连接失败:", error);
+    }
+  };
+
   let monitorSubscription;
 
   const monitorVerificationCode = (device) => {
@@ -1048,14 +1061,12 @@ function WalletScreen({ route, navigation }) {
               );
 
               if (!existingCard) {
-                // 从 initialAdditionalCryptosState 中获取对应的卡片信息
                 const newCrypto = initialAdditionalCryptos.find(
                   (crypto) => crypto.chainShortName === chainName
                 );
 
                 if (newCrypto) {
-                  console.log(`添加新的加密货币卡片: ${newCrypto.name}`);
-                  return [
+                  const updatedCards = [
                     ...prevCards,
                     {
                       name: newCrypto.name,
@@ -1066,9 +1077,13 @@ function WalletScreen({ route, navigation }) {
                       address: walletAddress,
                       chain: newCrypto.chain,
                       chainShortName: newCrypto.chainShortName,
-                      chainIcon: newCrypto.chainIcon, // 添加 chainIcon 字段
+                      chainIcon: newCrypto.chainIcon,
                     },
                   ];
+
+                  setAddedCryptos(updatedCards); // 立即更新 addedCryptos
+
+                  return updatedCards;
                 } else {
                   console.warn(`未找到 ${chainName} 的初始加密货币信息`);
                 }
@@ -1158,6 +1173,7 @@ function WalletScreen({ route, navigation }) {
       try {
         await AsyncStorage.setItem("cryptoCards", JSON.stringify(cryptoCards));
         await AsyncStorage.setItem("addedCryptos", JSON.stringify(cryptoCards)); // 保存时同步 addedCryptos
+        console.log("Updated addedCryptos wallet page:", cryptoCards); // 打印更新后的 addedCryptos
       } catch (error) {
         console.error("Error saving crypto cards:", error);
       }
