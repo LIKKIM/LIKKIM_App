@@ -216,7 +216,9 @@ function WalletScreen({ route, navigation }) {
     postTest();
   }, []);
  */
-
+  useEffect(() => {
+    setAddedCryptos(cryptoCards);
+  }, [cryptoCards]);
   // 监听 createPendingModalVisible 的变化
   useEffect(() => {
     if (!createPendingModalVisible) {
@@ -1080,8 +1082,6 @@ function WalletScreen({ route, navigation }) {
                       chainIcon: newCrypto.chainIcon,
                     },
                   ];
-
-                  setAddedCryptos(updatedCards); // 立即更新 addedCryptos
 
                   return updatedCards;
                 } else {
