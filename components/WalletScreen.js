@@ -207,6 +207,19 @@ function WalletScreen({ route, navigation }) {
     postTest();
   }, []);
  */
+
+  // 监听 createPendingModalVisible 的变化
+  useEffect(() => {
+    if (!createPendingModalVisible) {
+      // 当模态框关闭时重置状态
+      setWalletCreationStatus({
+        image: require("../assets/gif/Pending.gif"), // 重置为默认显示 Pending.gif
+        title: t("Creating on LIKKIM Hardware..."), // 重置为默认主消息
+        subtitle: t("Your device is already verified."), // 重置为默认子消息
+      });
+    }
+  }, [createPendingModalVisible]); // 依赖 createPendingModalVisible
+
   // 监听设备数量
   useEffect(() => {
     const loadVerifiedDevices = async () => {
