@@ -302,6 +302,30 @@ export const CryptoProvider = ({ children }) => {
     await AsyncStorage.setItem("screenLockPassword", newPassword);
   };
 
+  // 在启动时打印 TRX 地址
+  useEffect(() => {
+    // 从 initialAdditionalCryptosState 查找 TRX 地址
+    const trxCrypto = initialAdditionalCryptosState.find(
+      (crypto) => crypto.chainShortName === "TRX"
+    );
+
+    if (trxCrypto) {
+      console.log(
+        "initialAdditionalCryptosState 中的 TRX 地址:",
+        trxCrypto.address
+      );
+    } else {
+      console.log("initialAdditionalCryptosState 中的 TRX 地址未找到。");
+    }
+
+    // 检查 usdtCrypto 中的 TRX 地址
+    if (usdtCrypto.chainShortName === "TRX") {
+      console.log("usdtCrypto 中的 TRX 地址:", usdtCrypto.address);
+    } else {
+      console.log("usdtCrypto 中的 TRX 地址未找到。");
+    }
+  }, [initialAdditionalCryptosState]);
+
   return (
     <CryptoContext.Provider
       value={{
