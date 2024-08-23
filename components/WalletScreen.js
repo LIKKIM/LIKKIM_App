@@ -1030,11 +1030,11 @@ function WalletScreen({ route, navigation }) {
     }
   }, [cryptoCards]);
 
-  const addDefaultUSDT = () => {
+  /*   const addDefaultUSDT = () => {
     if (cryptoCards.length === 0) {
       handleAddCrypto(usdtCrypto);
     }
-  };
+  }; */
 
   const handlePinSubmit = async () => {
     // 首先关闭 "Enter PIN to Connect" 的模态框
@@ -2073,7 +2073,7 @@ function WalletScreen({ route, navigation }) {
         visible={addCryptoVisible}
         onRequestClose={() => {
           setAddCryptoVisible(false);
-          addDefaultUSDT();
+          //   addDefaultUSDT();
         }}
       >
         <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
@@ -2147,7 +2147,7 @@ function WalletScreen({ route, navigation }) {
               style={WalletScreenStyle.cancelButton}
               onPress={() => {
                 setAddCryptoVisible(false);
-                addDefaultUSDT();
+                //    addDefaultUSDT();
               }}
             >
               <Text style={WalletScreenStyle.cancelButtonText}>
