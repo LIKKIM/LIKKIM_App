@@ -741,7 +741,7 @@ function WalletScreen({ route, navigation }) {
   // 监听地址监听钱包地址的函数
   const monitorWalletAddress = (device) => {
     const notifyCharacteristicUUID = "0000FFE1-0000-1000-8000-00805F9B34FB";
-  
+
     monitorSubscription = device.monitorCharacteristicForService(
       serviceUUID,
       notifyCharacteristicUUID,
@@ -750,20 +750,20 @@ function WalletScreen({ route, navigation }) {
           console.error("监听钱包地址时出错:", error.message);
           return;
         }
-  
+
         // Base64解码接收到的数据
         const receivedData = Buffer.from(characteristic.value, "base64");
-  
+
         // 将接收到的数据解析为十六进制字符串
         const receivedDataHex = receivedData.toString("hex");
         console.log("接收到监听地址模块的16进制数据字符串:", receivedDataHex);
-  
+
         // 检查头部标志位是否为 A4
         if (receivedDataHex.startsWith("a4")) {
           // 解析链名长度
           const chainNameLength = parseInt(receivedDataHex.substring(2, 4), 16);
           console.log("链名长度:", chainNameLength);
-  
+
           // 解析链名
           const chainNameStartIndex = 4;
           const chainNameEndIndex = chainNameStartIndex + chainNameLength * 2; // 每个字符占2个16进制位
@@ -773,15 +773,18 @@ function WalletScreen({ route, navigation }) {
           );
           const chainName = Buffer.from(chainNameHex, "hex").toString("utf-8");
           console.log("链名chainShortName:", chainName);
-  
+
           // 解析地址长度
           const addressLengthIndex = chainNameEndIndex;
           const addressLength = parseInt(
-            receivedDataHex.substring(addressLengthIndex, addressLengthIndex + 2),
+            receivedDataHex.substring(
+              addressLengthIndex,
+              addressLengthIndex + 2
+            ),
             16
           );
           console.log("地址长度:", addressLength);
-  
+
           // 解析钱包地址
           const addressStartIndex = addressLengthIndex + 2;
           const addressEndIndex = addressStartIndex + addressLength * 2; // 每个字符占2个16进制位
@@ -793,7 +796,7 @@ function WalletScreen({ route, navigation }) {
             "utf-8"
           );
           console.log("钱包地址:", walletAddress);
-  
+
           // 解析总数据长度
           const totalDataLengthIndex = addressEndIndex;
           const totalDataLength = parseInt(
@@ -804,7 +807,7 @@ function WalletScreen({ route, navigation }) {
             16
           );
           console.log("总数据长度:", totalDataLength);
-  
+
           // 解析CRC校验码（顺序：低字节在前，高字节在后）
           const crcStartIndex = totalDataLengthIndex + 2;
           const receivedCrcLowByte = receivedDataHex.substring(
@@ -817,34 +820,33 @@ function WalletScreen({ route, navigation }) {
           );
           const receivedCrc = receivedCrcLowByte + receivedCrcHighByte; // 低字节在前
           console.log("接收到的CRC:", receivedCrc);
-  
+
           // 提取所有用于CRC校验的数据（不包括 CRC 和结尾标志位）
           const dataToVerifyHex = receivedDataHex.substring(0, crcStartIndex);
           const dataToVerify = Buffer.from(dataToVerifyHex, "hex");
-  
+
           // 计算CRC校验码
           let calculatedCrc = crc16Modbus(dataToVerify)
             .toString(16)
             .padStart(4, "0");
-  
+
           // 将计算的 CRC 码转换为低字节在前的格式
           calculatedCrc = calculatedCrc.slice(2) + calculatedCrc.slice(0, 2);
           console.log("计算的CRC:", calculatedCrc);
-  
+
           // 比较接收到的CRC和计算的CRC是否匹配
           if (calculatedCrc.toLowerCase() === receivedCrc.toLowerCase()) {
             console.log("CRC校验通过，数据有效");
-  
+
             // 在此处添加接收钱包生成地址成功的日志
             console.log("接收钱包生成地址成功:", walletAddress);
-  
+
             // 更新状态，切换图片和文本信息
             setWalletCreationStatus({
-              image: require('../assets/gif/Success.gif'),  // 切换到 Success.gif
-              title: t("Wallet Creation Successful!"),  // 更新主标题
-              subtitle: t("Your wallet address has been created successfully.")  // 更新子标题
+              image: require("../assets/gif/Success.gif"), // 切换到 Success.gif
+              title: t("Wallet Creation Successful!"), // 更新主标题
+              subtitle: t("Your wallet address has been created successfully."), // 更新子标题
             });
-            
           } else {
             console.error(
               `CRC校验失败，数据可能无效。Received: ${receivedCrc}, Calculated: ${calculatedCrc}`
@@ -856,7 +858,6 @@ function WalletScreen({ route, navigation }) {
       }
     );
   };
-  
 
   // 停止监听钱包地址
   const stopMonitoringWalletAddress = () => {
@@ -2303,41 +2304,41 @@ function WalletScreen({ route, navigation }) {
           </View>
         </BlurView>
       </Modal>
-{/* 创建新的 createPendingModal 模态框 */}
-<Modal
-  visible={createPendingModalVisible}
-  onRequestClose={() => {
-    setCreatePendingModalVisible(false);
-    stopMonitoringWalletAddress(); // 在关闭模态框时停止监听钱包地址
-  }}
-  transparent={true}
-  animationType="slide"
->
-  <View style={WalletScreenStyle.centeredView}>
-    <View style={WalletScreenStyle.pendingModalView}>
-      <Text style={WalletScreenStyle.modalTitle}>
-        {walletCreationStatus.title}  {/* 动态显示主标题 */}
-      </Text>
-      <Image
-        source={walletCreationStatus.image}  {/* 动态显示图片 */}
-        style={{ width: 120, height: 120 }}
-      />
-      <Text
-        style={[WalletScreenStyle.modalSubtitle, { marginBottom: 20 }]}
+      {/* 创建新的 createPendingModal 模态框 */}
+      <Modal
+        visible={createPendingModalVisible}
+        onRequestClose={() => {
+          setCreatePendingModalVisible(false);
+          stopMonitoringWalletAddress(); // 在关闭模态框时停止监听钱包地址
+        }}
+        transparent={true}
+        animationType="slide"
       >
-        {walletCreationStatus.subtitle}  {/* 动态显示子标题 */}
-      </Text>
-      <TouchableOpacity
-        style={WalletScreenStyle.submitButton}
-        onPress={() => setCreatePendingModalVisible(false)}
-      >
-        <Text style={WalletScreenStyle.submitButtonText}>
-          {t("Close")}
-        </Text>
-      </TouchableOpacity>
-    </View>
-  </View>
-</Modal>
+        <View style={WalletScreenStyle.centeredView}>
+          <View style={WalletScreenStyle.pendingModalView}>
+            <Text style={WalletScreenStyle.modalTitle}>
+              {walletCreationStatus.title}
+            </Text>
+            <Image
+              source={walletCreationStatus.image}
+              style={{ width: 120, height: 120 }}
+            />
+            <Text
+              style={[WalletScreenStyle.modalSubtitle, { marginBottom: 20 }]}
+            >
+              {walletCreationStatus.subtitle}
+            </Text>
+            <TouchableOpacity
+              style={WalletScreenStyle.submitButton}
+              onPress={() => setCreatePendingModalVisible(false)}
+            >
+              <Text style={WalletScreenStyle.submitButtonText}>
+                {t("Close")}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
 
       {/* 创建新的 importingModal 模态框 */}
       <Modal
