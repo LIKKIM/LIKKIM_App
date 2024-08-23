@@ -521,20 +521,21 @@ function MyColdWalletScreen() {
     );
 
     if (pinCodeValue === verificationCodeValue) {
-      console.log("PIN 验证成功");
       setVerificationSuccessModalVisible(true);
 
-      // 更新全局状态为成功，并在终端打印消息
-      setIsVerificationSuccessful(true);
-      console.log("验证成功！验证状态已更新。");
-
-      // 将已验证的设备ID添加到verifiedDevices状态中并持久化到本地存储
-      const newVerifiedDevices = [...verifiedDevices, selectedDevice.id];
+      // 清空已验证设备的状态并持久化
+      const newVerifiedDevices = [selectedDevice.id]; // 只存储当前设备的ID
       setVerifiedDevices(newVerifiedDevices);
+      console.log("验证成功！验证状态已更新。");
+      // 将更新后的 verifiedDevices 存储到 AsyncStorage
       await AsyncStorage.setItem(
         "verifiedDevices",
         JSON.stringify(newVerifiedDevices)
       );
+
+      // 更新全局状态为成功
+      setIsVerificationSuccessful(true);
+      console.log("验证成功！验证状态已更新。");
     } else {
       console.log("PIN 验证失败");
       stopMonitoringVerificationCode();
