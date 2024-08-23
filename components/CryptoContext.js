@@ -56,6 +56,7 @@ const initialAdditionalCryptos = [
     cardImage: require("../assets/Card3.png"),
     address: "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
     chain: "Bitcoin",
+    chainShortName: "BTC", // 新增的字段
   },
   {
     name: "Ethereum",
@@ -65,6 +66,7 @@ const initialAdditionalCryptos = [
     cardImage: require("../assets/Card54.png"),
     address: "0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe",
     chain: "Ethereum",
+    chainShortName: "ETH", // 新增的字段
   },
   {
     name: "USDT",
@@ -74,6 +76,7 @@ const initialAdditionalCryptos = [
     cardImage: require("../assets/Card43.png"),
     address: "TZ7QDpUHbe6VLCv9bEPdAzrnNeu5zCuXg6",
     chain: "Tron",
+    chainShortName: "TRX", // 新增的字段
   },
   {
     name: "Litecoin",
@@ -83,6 +86,7 @@ const initialAdditionalCryptos = [
     cardImage: require("../assets/Card1.png"),
     address: "LcHKdCbbtGxDsN7BHyebDTrVKT4w3KpU5Z",
     chain: "Litecoin",
+    chainShortName: "LTC", // 新增的字段
   },
   {
     name: "Bitcoin Cash",
@@ -92,6 +96,7 @@ const initialAdditionalCryptos = [
     cardImage: require("../assets/Card2.png"),
     address: "qpm2qsznhks23z7629mms6s4cwef74vcwvy22gdx6a",
     chain: "Bitcoin Cash",
+    chainShortName: "BCH", // 新增的字段
   },
   {
     name: "Cardano",
@@ -101,6 +106,7 @@ const initialAdditionalCryptos = [
     cardImage: require("../assets/Card5.png"),
     address: "DdzFFzCqrhsusgjmXKG9VeSvfhRUHqNNNLiFYB8HHR7",
     chain: "Cardano",
+    chainShortName: "ADA", // 新增的字段
   },
   {
     name: "Polkadot",
@@ -110,6 +116,7 @@ const initialAdditionalCryptos = [
     cardImage: require("../assets/Card6.png"),
     address: "14VSS98ov7KjJtyepigS65atjPjj73Fw4c8TyRjCnbhG",
     chain: "Polkadot",
+    chainShortName: "DOT", // 新增的字段
   },
   {
     name: "Chainlink",
@@ -119,6 +126,7 @@ const initialAdditionalCryptos = [
     cardImage: require("../assets/Card7.png"),
     address: "0x514910771af9ca656af840dff83e8264ecf986ca",
     chain: "Ethereum",
+    chainShortName: "ETH", // 新增的字段
   },
   {
     name: "Stellar",
@@ -128,6 +136,7 @@ const initialAdditionalCryptos = [
     cardImage: require("../assets/Card8.png"),
     address: "GAHPDQD4MGHVZFJYZN46EZB2XB4LGIOHBTVHQRJ7MF2PL4EY7I7U77CC",
     chain: "Stellar",
+    chainShortName: "XLM", // 新增的字段
   },
   {
     name: "Dogecoin",
@@ -137,6 +146,7 @@ const initialAdditionalCryptos = [
     cardImage: require("../assets/Card9.png"),
     address: "D7Y55N4sFCw4KceCczPS3KhNWZ6o7pTPkd",
     chain: "Dogecoin",
+    chainShortName: "DOGE", // 新增的字段
   },
 ];
 
@@ -148,6 +158,7 @@ export const usdtCrypto = {
   cardImage: require("../assets/Card43.png"),
   address: "TZ7QDpUHbe6VLCv9bEPdAzrnNeu5zCuXg6",
   chain: "Tron",
+  chainShortName: "TRX", // 新增的字段
 };
 
 export const CryptoProvider = ({ children }) => {
