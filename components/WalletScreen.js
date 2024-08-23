@@ -846,6 +846,7 @@ function WalletScreen({ route, navigation }) {
             .toString(16)
             .padStart(4, "0");
           calculatedCrc = calculatedCrc.slice(2) + calculatedCrc.slice(0, 2);
+          console.log("计算的CRC:", calculatedCrc);
           if (calculatedCrc.toLowerCase() === receivedCrc.toLowerCase()) {
             console.log("CRC校验通过，数据有效");
 
