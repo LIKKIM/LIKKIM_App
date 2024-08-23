@@ -1066,7 +1066,7 @@ function WalletScreen({ route, navigation }) {
                       address: walletAddress,
                       chain: newCrypto.chain,
                       chainShortName: newCrypto.chainShortName,
-                      chainIcon: newCrypto.chainIcon,
+                      chainIcon: newCrypto.chainIcon, // 添加 chainIcon 字段
                     },
                   ];
                 } else {
