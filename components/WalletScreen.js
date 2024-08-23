@@ -768,7 +768,7 @@ function WalletScreen({ route, navigation }) {
             chainNameEndIndex
           );
           const chainName = Buffer.from(chainNameHex, "hex").toString("utf-8");
-          console.log("链名:", chainName);
+          console.log("链名chainShortName:", chainName);
 
           // 解析地址长度
           const addressLengthIndex = chainNameEndIndex;
