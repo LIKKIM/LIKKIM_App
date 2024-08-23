@@ -619,62 +619,6 @@ function MyColdWalletScreen() {
     }
   };
 
-  const connectToDevice = async (device, pinCode) => {
-    // 开发版本使用生产版本要避免安全隐患
-    const serviceUUID = "0000FFE0-0000-1000-8000-00805F9B34FB";
-    const writeCharacteristicUUID = "0000FFE2-0000-1000-8000-00805F9B34FB";
-    const notifyCharacteristicUUID = "0000FFE1-0000-1000-8000-00805F9B34FB";
-
-    try {
-      await device.connect();
-      console.log(`Connected to device: ${device.id}`);
-      await device.discoverAllServicesAndCharacteristics();
-      console.log(
-        `Discovered services and characteristics for device: ${device.id}`
-      );
-
-      // 订阅通知特征
-      await device.monitorCharacteristicForService(
-        serviceUUID,
-        notifyCharacteristicUUID,
-        (error, characteristic) => {
-          if (error) {
-            if (error.message.includes("Operation was cancelled")) {
-              console.error("监听操作被取消，正在重新连接...");
-              reconnectDevice(device); // 主动重连
-            } else if (error.message.includes("Unknown error occurred")) {
-              console.error("未知错误，可能是一个Bug:", error.message);
-              if (error.reason) {
-                console.error("错误原因:", error.reason);
-              }
-              reconnectDevice(device); // 主动重连
-            } else {
-              console.error("监听设备响应时出错:", error.message);
-            }
-            return;
-          }
-          // 处理接收到的通知数据
-          const receivedData = Buffer.from(characteristic.value, "base64");
-          const decodedData = receivedData.toString("utf-8");
-          console.log("Notification received:", decodedData);
-          Alert.alert("Notification", `Received data: ${decodedData}`);
-        }
-      );
-
-      // 写入PIN码到特征
-      const pinCodeBytes = stringToBytes(pinCode);
-      const base64PinCode = base64.fromByteArray(pinCodeBytes);
-      await device.writeCharacteristicWithResponseForService(
-        serviceUUID,
-        writeCharacteristicUUID,
-        base64PinCode
-      );
-      console.log(`PIN code sent: ${pinCode}`);
-    } catch (error) {
-      throw new Error(`Failed to connect to device: ${error.message}`);
-    }
-  };
-
   // 辅助函数：将字符串转换为字节数组
   const stringToBytes = (str) => {
     const bytes = [];
