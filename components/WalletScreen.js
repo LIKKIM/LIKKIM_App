@@ -2326,7 +2326,7 @@ function WalletScreen({ route, navigation }) {
             <Text
               style={[WalletScreenStyle.modalSubtitle, { marginBottom: 20 }]}
             >
-              {walletCreationStatus.subtitle}
+              {walletCreationStatus.subtitle} {/* 动态显示子标题 */}
             </Text>
             <TouchableOpacity
               style={WalletScreenStyle.submitButton}
