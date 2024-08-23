@@ -619,21 +619,6 @@ function MyColdWalletScreen() {
     }
   };
 
-  // 辅助函数：将字符串转换为字节数组
-  const stringToBytes = (str) => {
-    const bytes = [];
-    for (let i = 0; i < str.length; i++) {
-      bytes.push(str.charCodeAt(i));
-    }
-    return bytes;
-  };
-
-  // New handlers for the buttons
-  const handleSyncBalances = () => {
-    console.log("Sync balances to LIKKIM coldwallet clicked");
-    // Add your sync logic here
-  };
-
   const handleFirmwareUpdate = () => {
     console.log("Firmware Update clicked");
     // Add your firmware update logic here
