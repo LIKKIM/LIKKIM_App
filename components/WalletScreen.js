@@ -41,6 +41,7 @@ function WalletScreen({ route, navigation }) {
     initialAdditionalCryptos,
     setInitialAdditionalCryptos,
     usdtCrypto,
+    addCryptoCard,
     setUsdtCrypto,
     additionalCryptos,
     cryptoCount,
@@ -216,6 +217,11 @@ function WalletScreen({ route, navigation }) {
     postTest();
   }, []);
  */
+  useEffect(() => {
+    if (chainName && walletAddress) {
+      addCryptoCard(chainName, walletAddress);
+    }
+  }, [chainName, walletAddress]);
 
   // 监听 createPendingModalVisible 的变化
   useEffect(() => {
