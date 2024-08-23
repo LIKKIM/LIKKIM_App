@@ -97,6 +97,31 @@ function MyColdWalletScreen() {
     useState(false);
   const [storedPassword, setStoredPassword] = useState(""); // 存储已设置的密码
   const [passwordError, setPasswordError] = useState(""); // 新增密码错误状态
+  const [confirmDisconnectModalVisible, setConfirmDisconnectModalVisible] =
+    useState(false);
+  const [deviceToDisconnect, setDeviceToDisconnect] = useState(null);
+
+  // Called when the user clicks the "Disconnect" button
+  const handleDisconnectPress = (device) => {
+    setModalVisible(false); // 关闭设备选择模态框
+    setDeviceToDisconnect(device); // 保存当前要断开的设备
+    setConfirmDisconnectModalVisible(true); // 显示确认断开模态框
+  };
+
+  // Called when the user confirms the disconnection
+  const confirmDisconnect = async () => {
+    if (deviceToDisconnect) {
+      await handleDisconnectDevice(deviceToDisconnect); // 执行断开操作
+      setConfirmDisconnectModalVisible(false); // 关闭确认断开模态框
+      setDeviceToDisconnect(null); // 清空当前要断开的设备
+    }
+  };
+
+  // Called when the user cancels the disconnection
+  const cancelDisconnect = () => {
+    setConfirmDisconnectModalVisible(false); // 关闭确认断开模态框
+    setModalVisible(true); // 重新显示设备选择模态框
+  };
 
   // 关闭设置密码模态框并清空输入
   const closePasswordModal = () => {
@@ -1438,7 +1463,7 @@ function MyColdWalletScreen() {
                           {isVerified && (
                             <TouchableOpacity
                               style={MyColdWalletScreenStyle.disconnectButton}
-                              onPress={() => handleDisconnectDevice(item)} // 这里也要传递完整设备对象
+                              onPress={() => handleDisconnectPress(item)} // 使用新方法触发确认
                             >
                               <Text
                                 style={
@@ -1595,6 +1620,50 @@ function MyColdWalletScreen() {
                 {t("Close")}
               </Text>
             </TouchableOpacity>
+          </View>
+        </BlurView>
+      </Modal>
+      {/* 二次确认模态框 */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={confirmDisconnectModalVisible}
+        onRequestClose={() => setConfirmDisconnectModalVisible(false)}
+      >
+        <BlurView intensity={10} style={MyColdWalletScreenStyle.centeredView}>
+          <View style={MyColdWalletScreenStyle.disconnectModalView}>
+            <Text style={MyColdWalletScreenStyle.modalTitle}>
+              {t("Confirm Disconnect")}
+            </Text>
+            <Text
+              style={[
+                MyColdWalletScreenStyle.disconnectSubtitle,
+                {
+                  height: 80,
+                  textAlignVertical: "center",
+                },
+              ]}
+            >
+              {t("Are you sure you want to disconnect this device?")}
+            </Text>
+            <View style={MyColdWalletScreenStyle.buttonContainer}>
+              <TouchableOpacity
+                style={MyColdWalletScreenStyle.submitButton}
+                onPress={confirmDisconnect} // 执行断开操作
+              >
+                <Text style={MyColdWalletScreenStyle.submitButtonText}>
+                  {t("Confirm")}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={MyColdWalletScreenStyle.cancelButton}
+                onPress={cancelDisconnect} // 返回设备选择模态框
+              >
+                <Text style={MyColdWalletScreenStyle.cancelButtonText}>
+                  {t("Back")}
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </BlurView>
       </Modal>

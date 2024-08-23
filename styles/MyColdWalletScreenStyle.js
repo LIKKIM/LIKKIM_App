@@ -67,8 +67,13 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
     modalSubtitle: {
       color: secondTextColor,
       fontSize: 14,
-
       textAlign: "center",
+    },
+    disconnectSubtitle: {
+      color: secondTextColor,
+      fontSize: 14,
+      textAlign: "center",
+      marginTop: 20,
     },
     scanModalSubtitle: {
       color: secondTextColor,
@@ -96,6 +101,17 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       borderRadius: 20,
       padding: 35,
       alignItems: "center",
+    },
+
+    disconnectModalView: {
+      margin: 20,
+      height: 340,
+      width: "90%",
+      backgroundColor: modalBackgroundColor,
+      borderRadius: 20,
+      padding: 35,
+      alignItems: "center",
+      justifyContent: "space-between",
     },
     currencyModalView: {
       margin: 20,
@@ -350,7 +366,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       borderRadius: 30,
       height: 60,
       alignItems: "center",
-      marginBottom: 20,
+      marginBottom: 15,
     },
     submitButtonText: {
       color: textColor,
