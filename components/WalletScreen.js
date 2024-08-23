@@ -220,7 +220,7 @@ function WalletScreen({ route, navigation }) {
   }, []); // 这个依赖空数组确保该代码只在组件挂载时执行一次
   // 打印设备数量
   useEffect(() => {
-    console.log("Verified Devices Count:", verifiedDevices.length);
+    console.log("Wallet Page Verified Devices Count:", verifiedDevices.length);
   }, [verifiedDevices]);
 
   useEffect(() => {

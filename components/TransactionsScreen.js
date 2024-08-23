@@ -942,7 +942,7 @@ function TransactionsScreen() {
   }, []); // 这个依赖空数组确保该代码只在组件挂载时执行一次
   // 打印设备数量
   useEffect(() => {
-    console.log("Verified Devices Count:", verifiedDevices.length);
+    console.log("Transaction Page Verified Devices Count:", verifiedDevices.length);
   }, [verifiedDevices]);
 
   // 停止监听
