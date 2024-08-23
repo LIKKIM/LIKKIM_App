@@ -451,9 +451,13 @@ function MyColdWalletScreen() {
         if (error) {
           if (error.message.includes("Operation was cancelled")) {
             console.error("监听操作被取消，正在重新连接...");
-            // 在此处添加重新连接逻辑，或提示用户操作被取消
-            // 例如：重新连接设备或提示用户操作失败
-            reconnectDevice(device);
+            reconnectDevice(device); // 主动重连
+          } else if (error.message.includes("Unknown error occurred")) {
+            console.error("未知错误，可能是一个Bug:", error.message);
+            if (error.reason) {
+              console.error("错误原因:", error.reason);
+            }
+            reconnectDevice(device); // 主动重连
           } else {
             console.error("监听设备响应时出错:", error.message);
           }
@@ -637,9 +641,13 @@ function MyColdWalletScreen() {
           if (error) {
             if (error.message.includes("Operation was cancelled")) {
               console.error("监听操作被取消，正在重新连接...");
-              // 在此处添加重新连接逻辑，或提示用户操作被取消
-              // 例如：重新连接设备或提示用户操作失败
-              reconnectDevice(device);
+              reconnectDevice(device); // 主动重连
+            } else if (error.message.includes("Unknown error occurred")) {
+              console.error("未知错误，可能是一个Bug:", error.message);
+              if (error.reason) {
+                console.error("错误原因:", error.reason);
+              }
+              reconnectDevice(device); // 主动重连
             } else {
               console.error("监听设备响应时出错:", error.message);
             }
