@@ -39,7 +39,11 @@ const WalletScreenStyles = (isDarkMode) => {
       fontSize: 12, // 字体大小与 cardName 一致
       fontWeight: "bold", // 字体粗细与 cardName 一致
     },
-
+    chainCardText: {
+      color: textColor,
+      fontSize: 12, // 字体大小与 cardName 一致
+      fontWeight: "bold", // 字体粗细与 cardName 一致
+    },
     disconnectButton: {
       marginLeft: 10,
       paddingVertical: 5,

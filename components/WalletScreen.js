@@ -2134,18 +2134,10 @@ function WalletScreen({ route, navigation }) {
                     <Text style={WalletScreenStyle.addCryptoText}>
                       {crypto.name}
                     </Text>
-                    <View
-                      style={{
-                        height: "auto",
-                        paddingVertical: 2,
-                        paddingHorizontal: 4,
-                        borderRadius: 4,
-                        width: "auto",
-                        backgroundColor: "#eee",
-                        margin: 8, // 增加文本与标签之间的间距
-                      }}
-                    >
-                      <Text style={{ fontSize: 12 }}>{crypto.chain}</Text>
+                    <View style={WalletScreenStyle.chainContainer}>
+                      <Text style={[WalletScreenStyle.chainCardText]}>
+                        {crypto.chain}
+                      </Text>
                     </View>
                   </View>
                 </TouchableOpacity>
