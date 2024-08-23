@@ -878,6 +878,40 @@ function WalletScreen({ route, navigation }) {
               }));
             }
 
+            // 动态添加新的加密货币卡片
+            setCryptoCards((prevCards) => {
+              const existingCard = prevCards.find(
+                (card) => card.chainShortName === chainName
+              );
+
+              if (!existingCard) {
+                // 从 initialAdditionalCryptosState 中获取对应的卡片信息
+                const newCrypto = initialAdditionalCryptos.find(
+                  (crypto) => crypto.chainShortName === chainName
+                );
+
+                if (newCrypto) {
+                  console.log(`添加新的加密货币卡片: ${newCrypto.name}`);
+                  return [
+                    ...prevCards,
+                    {
+                      name: newCrypto.name,
+                      shortName: newCrypto.shortName,
+                      balance: newCrypto.balance,
+                      icon: newCrypto.icon,
+                      cardImage: newCrypto.cardImage,
+                      address: walletAddress,
+                      chain: newCrypto.chain,
+                      chainShortName: newCrypto.chainShortName,
+                    },
+                  ];
+                } else {
+                  console.warn(`未找到 ${chainName} 的初始加密货币信息`);
+                }
+              }
+              return prevCards;
+            });
+
             // 更新状态，切换图片和文本信息
             setWalletCreationStatus({
               image: require("../assets/gif/Success.gif"),
