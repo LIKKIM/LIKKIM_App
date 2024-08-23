@@ -115,10 +115,11 @@ function WalletScreen({ route, navigation }) {
       crypto.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       crypto.shortName.toLowerCase().includes(searchQuery.toLowerCase())
   );
+  // 初始化状态为默认值
   const [walletCreationStatus, setWalletCreationStatus] = useState({
-    image: require("../assets/gif/Pending.gif"), // 初始状态为 Pending
-    message: t("Creating on LIKKIM Hardware..."), // 初始消息
-    subMessage: t("Please wait while your device creates a new wallet."),
+    image: require("../assets/gif/Pending.gif"), // 默认显示 Pending.gif
+    title: t("Creating on LIKKIM Hardware..."), // 默认主消息
+    subtitle: t("Your device is already verified."), // 默认子消息
   });
 
   const bleManagerRef = useRef(null);
@@ -2309,7 +2310,7 @@ function WalletScreen({ route, navigation }) {
         visible={createPendingModalVisible}
         onRequestClose={() => {
           setCreatePendingModalVisible(false);
-          stopMonitoringWalletAddress(); // 在关闭模态框时停止监听钱包地址
+          stopMonitoringWalletAddress();
         }}
         transparent={true}
         animationType="slide"
@@ -2326,7 +2327,7 @@ function WalletScreen({ route, navigation }) {
             <Text
               style={[WalletScreenStyle.modalSubtitle, { marginBottom: 20 }]}
             >
-              {walletCreationStatus.subtitle} {/* 动态显示子标题 */}
+              {walletCreationStatus.subtitle}
             </Text>
             <TouchableOpacity
               style={WalletScreenStyle.submitButton}
