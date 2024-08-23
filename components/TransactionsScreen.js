@@ -50,7 +50,7 @@ function TransactionsScreen() {
     verifiedDevices,
     setVerifiedDevices,
   } = useContext(CryptoContext);
-
+  console.log("Added Cryptos in TransactionsScreen:", addedCryptos);
   const [
     confirmingTransactionModalVisible,
     setConfirmingTransactionModalVisible,

@@ -1041,15 +1041,6 @@ function WalletScreen({ route, navigation }) {
               })
             );
 
-            // 如果 initialAdditionalCryptos 中没有找到匹配的，就检查 usdtCrypto
-            if (!isUpdated && usdtCrypto.chainShortName === chainName) {
-              console.log(`更新 USDT 的地址为: ${walletAddress}`);
-              setUsdtCrypto((prevUsdtCrypto) => ({
-                ...prevUsdtCrypto,
-                address: walletAddress,
-              }));
-            }
-
             // 动态添加新的加密货币卡片
             setCryptoCards((prevCards) => {
               const existingCard = prevCards.find(
@@ -1075,6 +1066,7 @@ function WalletScreen({ route, navigation }) {
                       address: walletAddress,
                       chain: newCrypto.chain,
                       chainShortName: newCrypto.chainShortName,
+                      chainIcon: newCrypto.chainIcon,
                     },
                   ];
                 } else {
@@ -1777,8 +1769,30 @@ function WalletScreen({ route, navigation }) {
                   <View
                     style={{
                       position: "absolute",
+                      top: 46,
+                      left: 40,
+                      width: 18,
+                      height: 18,
+                      borderWidth: 1,
+                      borderColor: "#FFF",
+
+                      alignItems: "center",
+                      justifyContent: "center",
+                      borderRadius: 15,
+                      backgroundColor: "#fff",
+                      overflow: "hidden",
+                    }}
+                  >
+                    <Image
+                      source={card.chainIcon}
+                      style={WalletScreenStyle.chainIcon}
+                    />
+                  </View>
+                  <View
+                    style={{
+                      position: "absolute",
                       top: 25,
-                      left: 60,
+                      left: 65,
                       flexDirection: "row",
                       alignItems: "center",
                     }}

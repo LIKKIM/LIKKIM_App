@@ -61,10 +61,10 @@ const WalletScreenStyles = (isDarkMode) => {
       backgroundColor: buttonBackgroundColor,
       padding: 10,
       width: "100%",
-      justifyContent: "center",
       borderRadius: 30,
       height: 60,
       alignItems: "center",
+      justifyContent: "center",
       marginTop: 20,
     },
     submitAddressButton: {
@@ -334,16 +334,19 @@ const WalletScreenStyles = (isDarkMode) => {
     },
     cardIcon: {
       position: "absolute",
-      top: 25,
-      left: 15,
-      width: 30,
-      height: 30,
+      top: 24,
+      left: 10,
+      width: 42,
+      height: 42,
     },
-
+    chainIcon: {
+      width: 16,
+      height: 16,
+    },
     cardShortName: {
       position: "absolute",
       top: 56,
-      left: 60,
+      left: 65,
       color: secondCardTextColor,
       fontSize: 14,
       //   textShadowColor: "rgba(0, 0, 0, 0.8)",
