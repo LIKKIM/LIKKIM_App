@@ -100,6 +100,9 @@ function MyColdWalletScreen() {
   const [confirmDisconnectModalVisible, setConfirmDisconnectModalVisible] =
     useState(false);
   const [deviceToDisconnect, setDeviceToDisconnect] = useState(null);
+  const [successModalVisible, setSuccessModalVisible] = useState(false);
+  const [errorModalVisible, setErrorModalVisible] = useState(false);
+  const [modalMessage, setModalMessage] = useState(""); // 用于动态设置模态框的消息内容
 
   // Called when the user clicks the "Disconnect" button
   const handleDisconnectPress = (device) => {
@@ -236,7 +239,8 @@ function MyColdWalletScreen() {
         toggleScreenLock(true); // 启用屏幕锁定
         setPasswordModalVisible(false);
         setPasswordError(""); // 清除错误信息
-        Alert.alert(t("Success"), t("Screen lock enabled successfully"));
+        setModalMessage(t("Screen lock enabled successfully"));
+        setSuccessModalVisible(true);
       } catch (error) {
         console.error("Failed to save password", error);
       }
@@ -250,7 +254,8 @@ function MyColdWalletScreen() {
     if (currentPassword === screenLockPassword) {
       toggleScreenLock(false); // 禁用屏幕锁定
       setEnterPasswordModalVisible(false);
-      Alert.alert(t("Success"), t("Screen lock disabled successfully"));
+      setModalMessage(t("Screen lock disabled successfully"));
+      setSuccessModalVisible(true);
     } else {
       Alert.alert(t("Error"), t("Incorrect password"));
     }
@@ -1615,6 +1620,64 @@ function MyColdWalletScreen() {
                 </Text>
               </TouchableOpacity>
             </View>
+          </View>
+        </BlurView>
+      </Modal>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={successModalVisible}
+        onRequestClose={() => setSuccessModalVisible(false)}
+      >
+        <BlurView intensity={10} style={MyColdWalletScreenStyle.centeredView}>
+          <View style={MyColdWalletScreenStyle.pinModalView}>
+            <Image
+              source={require("../assets/gif/Success.gif")}
+              style={{ width: 120, height: 120, marginTop: 20 }}
+            />
+            <Text style={MyColdWalletScreenStyle.modalTitle}>
+              {t("Success!")}
+            </Text>
+            <Text style={MyColdWalletScreenStyle.modalSubtitle}>
+              {modalMessage} {/* 动态显示消息 */}
+            </Text>
+            <TouchableOpacity
+              style={MyColdWalletScreenStyle.submitButton}
+              onPress={() => setSuccessModalVisible(false)}
+            >
+              <Text style={MyColdWalletScreenStyle.submitButtonText}>
+                {t("Close")}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </BlurView>
+      </Modal>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={errorModalVisible}
+        onRequestClose={() => setErrorModalVisible(false)}
+      >
+        <BlurView intensity={10} style={MyColdWalletScreenStyle.centeredView}>
+          <View style={MyColdWalletScreenStyle.pinModalView}>
+            <Image
+              source={require("../assets/gif/Fail.gif")}
+              style={{ width: 120, height: 120, marginTop: 20 }}
+            />
+            <Text style={MyColdWalletScreenStyle.modalTitle}>
+              {t("Error!")}
+            </Text>
+            <Text style={MyColdWalletScreenStyle.modalSubtitle}>
+              {modalMessage} {/* 动态显示消息 */}
+            </Text>
+            <TouchableOpacity
+              style={MyColdWalletScreenStyle.submitButton}
+              onPress={() => setErrorModalVisible(false)}
+            >
+              <Text style={MyColdWalletScreenStyle.submitButtonText}>
+                {t("Close")}
+              </Text>
+            </TouchableOpacity>
           </View>
         </BlurView>
       </Modal>
