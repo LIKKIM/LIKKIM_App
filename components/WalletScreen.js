@@ -784,7 +784,7 @@ function WalletScreen({ route, navigation }) {
 
           // 解析链名
           const chainNameStartIndex = 4;
-          const chainNameEndIndex = chainNameStartIndex + chainNameLength * 2; // 每个字符占2个16进制位
+          const chainNameEndIndex = chainNameStartIndex + chainNameLength * 2;
           const chainNameHex = receivedDataHex.substring(
             chainNameStartIndex,
             chainNameEndIndex
@@ -805,7 +805,7 @@ function WalletScreen({ route, navigation }) {
 
           // 解析钱包地址
           const addressStartIndex = addressLengthIndex + 2;
-          const addressEndIndex = addressStartIndex + addressLength * 2; // 每个字符占2个16进制位
+          const addressEndIndex = addressStartIndex + addressLength * 2;
           const walletAddressHex = receivedDataHex.substring(
             addressStartIndex,
             addressEndIndex
@@ -826,7 +826,7 @@ function WalletScreen({ route, navigation }) {
           );
           console.log("总数据长度:", totalDataLength);
 
-          // 解析CRC校验码（顺序：低字节在前，高字节在后）
+          // 解析CRC校验码
           const crcStartIndex = totalDataLengthIndex + 2;
           const receivedCrcLowByte = receivedDataHex.substring(
             crcStartIndex,
@@ -859,11 +859,11 @@ function WalletScreen({ route, navigation }) {
             setInitialAdditionalCryptos((prevCryptos) =>
               prevCryptos.map((crypto) => {
                 if (crypto.chainShortName === chainName) {
-                  isUpdated = true; // 标记为已更新
+                  isUpdated = true;
                   console.log(
                     `更新 ${crypto.chainShortName} 的地址为: ${walletAddress}`
-                  ); // 打印更新日志
-                  return { ...crypto, address: walletAddress }; // 更新地址字段
+                  );
+                  return { ...crypto, address: walletAddress };
                 }
                 return crypto;
               })
@@ -871,18 +871,18 @@ function WalletScreen({ route, navigation }) {
 
             // 如果 initialAdditionalCryptos 中没有找到匹配的，就检查 usdtCrypto
             if (!isUpdated && usdtCrypto.chainShortName === chainName) {
-              console.log(`更新 USDT 的地址为: ${walletAddress}`); // 打印更新日志
+              console.log(`更新 USDT 的地址为: ${walletAddress}`);
               setUsdtCrypto((prevUsdtCrypto) => ({
                 ...prevUsdtCrypto,
-                address: walletAddress, // 更新地址字段
+                address: walletAddress,
               }));
             }
 
             // 更新状态，切换图片和文本信息
             setWalletCreationStatus({
-              image: require("../assets/gif/Success.gif"), // 切换到 Success.gif
-              title: t("Wallet Creation Successful!"), // 更新主标题
-              subtitle: t("Your wallet address has been created successfully."), // 更新子标题
+              image: require("../assets/gif/Success.gif"),
+              title: t("Wallet Creation Successful!"),
+              subtitle: t("Your wallet address has been created successfully."),
             });
           } else {
             console.error(

@@ -167,15 +167,20 @@ export const CryptoProvider = ({ children }) => {
   const [cryptoCount, setCryptoCount] = useState(0);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [currencyUnit, setCurrencyUnit] = useState("USD");
-  const [additionalCryptos, setAdditionalCryptos] = useState(
+
+  // 状态管理 initialAdditionalCryptos
+  const [initialAdditionalCryptosState, setInitialAdditionalCryptos] = useState(
     initialAdditionalCryptos
   );
+  const [additionalCryptos, setAdditionalCryptos] = useState(
+    initialAdditionalCryptosState
+  );
+
   const [addedCryptos, setAddedCryptos] = useState([]);
   const [isVerificationSuccessful, setIsVerificationSuccessful] =
     useState(false);
   const [verifiedDevices, setVerifiedDevices] = useState([]);
 
-  // 新增的状态，用于追踪应用启动状态
   const [isAppLaunching, setIsAppLaunching] = useState(true);
 
   useEffect(() => {
@@ -207,6 +212,7 @@ export const CryptoProvider = ({ children }) => {
         if (savedDevices !== null) {
           setVerifiedDevices(JSON.parse(savedDevices));
         }
+
         const screenLockEnabled = await AsyncStorage.getItem(
           "screenLockEnabled"
         );
@@ -217,6 +223,14 @@ export const CryptoProvider = ({ children }) => {
           setIsScreenLockEnabled(JSON.parse(screenLockEnabled));
         if (screenLockPassword !== null)
           setScreenLockPassword(screenLockPassword);
+
+        // 载入 initialAdditionalCryptos 的状态
+        const savedInitialCryptos = await AsyncStorage.getItem(
+          "initialAdditionalCryptos"
+        );
+        if (savedInitialCryptos !== null) {
+          setInitialAdditionalCryptos(JSON.parse(savedInitialCryptos));
+        }
       } catch (error) {
         console.error("Error loading settings: ", error);
       } finally {
@@ -249,6 +263,12 @@ export const CryptoProvider = ({ children }) => {
           JSON.stringify(isScreenLockEnabled)
         );
         await AsyncStorage.setItem("screenLockPassword", screenLockPassword);
+
+        // 持久化保存 initialAdditionalCryptos 的状态
+        await AsyncStorage.setItem(
+          "initialAdditionalCryptos",
+          JSON.stringify(initialAdditionalCryptosState)
+        );
       } catch (error) {
         console.error("Error saving settings: ", error);
       }
@@ -263,6 +283,7 @@ export const CryptoProvider = ({ children }) => {
     verifiedDevices,
     isScreenLockEnabled,
     screenLockPassword,
+    initialAdditionalCryptosState, // 监控这个状态的变化
   ]);
 
   // 切换锁屏状态
@@ -290,7 +311,8 @@ export const CryptoProvider = ({ children }) => {
         setCurrencyUnit,
         currencies,
         usdtCrypto,
-        initialAdditionalCryptos,
+        initialAdditionalCryptos: initialAdditionalCryptosState, // 提供更新后的 initialAdditionalCryptos
+        setInitialAdditionalCryptos, // 提供 setInitialAdditionalCryptos
         additionalCryptos,
         setAdditionalCryptos,
         addedCryptos,
@@ -304,8 +326,8 @@ export const CryptoProvider = ({ children }) => {
         toggleScreenLock,
         screenLockPassword,
         changeScreenLockPassword,
-        isAppLaunching, // 提供 isAppLaunching
-        setIsAppLaunching, // 提供 setIsAppLaunching
+        isAppLaunching,
+        setIsAppLaunching,
       }}
     >
       <DarkModeContext.Provider value={{ isDarkMode, setIsDarkMode }}>
