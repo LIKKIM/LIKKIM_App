@@ -164,6 +164,7 @@ function MyColdWalletScreen() {
 
   // 确保 openNewPasswordModal 被调用时，清空输入框的值
   const openNewPasswordModal = () => {
+    setPasswordError("");
     setPassword(""); // 清空密码输入框
     setConfirmPassword(""); // 清空确认密码输入框
     setIsPasswordHidden(true); // 重置隐藏密码图标状态
@@ -212,15 +213,11 @@ function MyColdWalletScreen() {
         console.error("Failed to change password", error);
       }
     } else {
-      // 关闭其他可能正在显示的模态框
-      setNewPasswordModalVisible(false);
-      setSuccessModalVisible(false);
-
-      // 设置错误信息并显示错误模态框
-      setModalMessage(t("Passwords do not match"));
-      setErrorModalVisible(true);
+      // 设置错误信息，显示在原有的 Modal 中
+      setPasswordError(t("Passwords do not match"));
     }
   };
+
   const handleNextForChangePassword = () => {
     if (currentPassword === screenLockPassword) {
       setIsCurrentPasswordValid(true);
@@ -1288,7 +1285,10 @@ function MyColdWalletScreen() {
                       placeholder={t("Enter new password")}
                       placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
                       secureTextEntry={isPasswordHidden}
-                      onChangeText={setPassword}
+                      onChangeText={(text) => {
+                        setPassword(text);
+                        setPasswordError(""); // 清除错误信息
+                      }}
                       value={password}
                       autoFocus={true}
                     />
@@ -1317,7 +1317,10 @@ function MyColdWalletScreen() {
                       placeholder={t("Confirm new password")}
                       placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
                       secureTextEntry={isConfirmPasswordHidden}
-                      onChangeText={setConfirmPassword}
+                      onChangeText={(text) => {
+                        setConfirmPassword(text);
+                        setPasswordError(""); // 清除错误信息
+                      }}
                       value={confirmPassword}
                     />
                     <TouchableOpacity
@@ -1338,6 +1341,18 @@ function MyColdWalletScreen() {
                     </TouchableOpacity>
                   </View>
                 </View>
+
+                {/* 显示错误信息 */}
+                {passwordError ? (
+                  <Text
+                    style={[
+                      MyColdWalletScreenStyle.errorText,
+                      { marginLeft: 10 },
+                    ]}
+                  >
+                    {passwordError}
+                  </Text>
+                ) : null}
 
                 <View style={MyColdWalletScreenStyle.buttonContainer}>
                   <TouchableOpacity
