@@ -519,7 +519,7 @@ function TransactionsScreen() {
       );
 
       // 设置正在验证地址的状态
-      setIsVerifyingAddress(true);
+      //    setIsVerifyingAddress(true);
       console.log("显示地址命令已发送");
 
       // 开始监听 BLE 设备的响应
