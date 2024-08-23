@@ -508,7 +508,14 @@ function WalletScreen({ route, navigation }) {
         notifyCharacteristicUUID,
         (error, characteristic) => {
           if (error) {
-            console.error("监听设备响应时出错:", error.message);
+            if (error.message.includes("Operation was cancelled")) {
+              console.error("监听操作被取消，正在重新连接...");
+              // 在此处添加重新连接逻辑，或提示用户操作被取消
+              // 例如：重新连接设备或提示用户操作失败
+              reconnectDevice(device);
+            } else {
+              console.error("监听设备响应时出错:", error.message);
+            }
             return;
           }
 
@@ -825,7 +832,14 @@ function WalletScreen({ route, navigation }) {
       notifyCharacteristicUUID,
       (error, characteristic) => {
         if (error) {
-          console.error("监听验证码时出错:", error.message);
+          if (error.message.includes("Operation was cancelled")) {
+            console.error("监听操作被取消，正在重新连接...");
+            // 在此处添加重新连接逻辑，或提示用户操作被取消
+            // 例如：重新连接设备或提示用户操作失败
+            reconnectDevice(device);
+          } else {
+            console.error("监听设备响应时出错:", error.message);
+          }
           return;
         }
 
@@ -859,10 +873,16 @@ function WalletScreen({ route, navigation }) {
       notifyCharacteristicUUID,
       (error, characteristic) => {
         if (error) {
-          console.error("监听钱包生成结果时出错:", error.message);
+          if (error.message.includes("Operation was cancelled")) {
+            console.error("监听操作被取消，正在重新连接...");
+            // 在此处添加重新连接逻辑，或提示用户操作被取消
+            // 例如：重新连接设备或提示用户操作失败
+            reconnectDevice(device);
+          } else {
+            console.error("监听设备响应时出错:", error.message);
+          }
           return;
         }
-
         // Base64解码接收到的数据
         const receivedData = Buffer.from(characteristic.value, "base64");
 
@@ -895,10 +915,16 @@ function WalletScreen({ route, navigation }) {
       notifyCharacteristicUUID,
       (error, characteristic) => {
         if (error) {
-          console.error("监听钱包地址时出错:", error.message);
+          if (error.message.includes("Operation was cancelled")) {
+            console.error("监听操作被取消，正在重新连接...");
+            // 在此处添加重新连接逻辑，或提示用户操作被取消
+            // 例如：重新连接设备或提示用户操作失败
+            reconnectDevice(device);
+          } else {
+            console.error("监听设备响应时出错:", error.message);
+          }
           return;
         }
-
         // Base64解码接收到的数据
         const receivedData = Buffer.from(characteristic.value, "base64");
 
