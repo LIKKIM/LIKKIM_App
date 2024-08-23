@@ -95,6 +95,9 @@ function TransactionsScreen() {
   const [detectedNetwork, setDetectedNetwork] = useState("");
   const bleManagerRef = useRef(null);
   const [paymentAddress, setPaymentAddress] = useState("Your Payment Address");
+  const [addressVerificationMessage, setAddressVerificationMessage] = useState(
+    t("Verifying Address on LIKKIM...")
+  );
 
   // 扫描蓝牙设备的函数
   const scanDevices = () => {
@@ -519,7 +522,8 @@ function TransactionsScreen() {
       );
 
       // 设置正在验证地址的状态
-      //    setIsVerifyingAddress(true);
+      setIsVerifyingAddress(true);
+      setAddressVerificationMessage(t("Verifying Address on LIKKIM..."));
       console.log("显示地址命令已发送");
 
       // 开始监听 BLE 设备的响应
@@ -543,7 +547,9 @@ function TransactionsScreen() {
           // 检查是否为指定的数据
           if (receivedDataHex === "A40302B1120D0A") {
             console.log("在LIKKIM上显示地址成功");
-            setIsVerifyingAddress(true);
+            setAddressVerificationMessage(
+              t("Address successfully displayed on LIKKIM!")
+            );
           }
         }
       );
@@ -1604,7 +1610,7 @@ function TransactionsScreen() {
                       { color: "#3CDA84" },
                     ]}
                   >
-                    {t("Verifying Address on LIKKIM...")}
+                    {addressVerificationMessage}
                   </Text>
                 </View>
               )}

@@ -111,6 +111,11 @@ function WalletScreen({ route, navigation }) {
     useState(false);
   const [createPendingModalVisible, setCreatePendingModalVisible] =
     useState(false);
+  useState(false);
+  const [addressVerificationMessage, setAddressVerificationMessage] = useState(
+    t("Verifying Address on LIKKIM...")
+  );
+
   const [importingModalVisible, setImportingModalVisible] = useState(false);
   const restoreIdentifier = Constants.installationId;
   const [pinCode, setPinCode] = useState("");
@@ -491,9 +496,9 @@ function WalletScreen({ route, navigation }) {
         writeCharacteristicUUID, // 可写特性的UUID
         base64Command // 最终的命令数据的Base64编码
       );
-
-      // 设置正在验证地址的状态
-      //    setIsVerifyingAddress(true);
+      // 设置正在验证地址的状态，立即显示文案
+      setIsVerifyingAddress(true);
+      setAddressVerificationMessage(t("Verifying Address on LIKKIM..."));
       console.log("显示地址命令已发送");
 
       // 开始监听 BLE 设备的响应
@@ -517,7 +522,9 @@ function WalletScreen({ route, navigation }) {
           // 检查是否为指定的数据
           if (receivedDataHex === "A40302B1120D0A") {
             console.log("在LIKKIM上显示地址成功");
-            setIsVerifyingAddress(true);
+            setAddressVerificationMessage(
+              t("Address successfully displayed on LIKKIM!")
+            );
           }
         }
       );
@@ -2001,7 +2008,7 @@ function WalletScreen({ route, navigation }) {
                     { color: "#3CDA84" },
                   ]}
                 >
-                  {t("Verifying Address on LIKKIM...")}
+                  {addressVerificationMessage}
                 </Text>
               </View>
             )}
