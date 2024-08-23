@@ -2324,9 +2324,7 @@ function WalletScreen({ route, navigation }) {
               source={walletCreationStatus.image}
               style={{ width: 120, height: 120 }}
             />
-            <Text
-              style={[WalletScreenStyle.modalSubtitle, { marginBottom: 20 }]}
-            >
+            <Text style={[WalletScreenStyle.modalSubtitle]}>
               {walletCreationStatus.subtitle}
             </Text>
             <TouchableOpacity
