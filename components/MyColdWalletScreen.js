@@ -201,7 +201,26 @@ function MyColdWalletScreen() {
     }
   };
 
-  // 确保在唤起 New Password Modal 时调用 openNewPasswordModal
+  const handleChangePassword = async () => {
+    if (password === confirmPassword) {
+      try {
+        await changeScreenLockPassword(password);
+        setNewPasswordModalVisible(false); // 关闭设置新密码的模态框
+        setModalMessage(t("Password changed successfully"));
+        setSuccessModalVisible(true); // 显示成功的 Modal
+      } catch (error) {
+        console.error("Failed to change password", error);
+      }
+    } else {
+      // 关闭其他可能正在显示的模态框
+      setNewPasswordModalVisible(false);
+      setSuccessModalVisible(false);
+
+      // 设置错误信息并显示错误模态框
+      setModalMessage(t("Passwords do not match"));
+      setErrorModalVisible(true);
+    }
+  };
   const handleNextForChangePassword = () => {
     if (currentPassword === screenLockPassword) {
       setIsCurrentPasswordValid(true);
@@ -209,23 +228,15 @@ function MyColdWalletScreen() {
       openNewPasswordModal(); // 打开设置新密码的模态框并清空输入
       setCurrentPassword(""); // 清空当前密码的输入框
     } else {
-      Alert.alert(t("Error"), t("Incorrect current password"));
-    }
-  };
-  const handleChangePassword = async () => {
-    if (password === confirmPassword) {
-      try {
-        await changeScreenLockPassword(password);
-        setNewPasswordModalVisible(false); // 关闭设置新密码的模态框
-        Alert.alert(t("Success"), t("Password changed successfully"));
-      } catch (error) {
-        console.error("Failed to change password", error);
-      }
-    } else {
-      Alert.alert(t("Error"), t("Passwords do not match"));
-    }
-  };
+      // 关闭其他可能正在显示的模态框
+      setChangePasswordModalVisible(false);
+      setSuccessModalVisible(false);
 
+      // 设置错误信息并显示错误模态框
+      setModalMessage(t("Incorrect current password"));
+      setErrorModalVisible(true);
+    }
+  };
   // 设置密码模态框的提交处理函数
   const handleSetPassword = async () => {
     if (password.length < 4) {
@@ -257,7 +268,11 @@ function MyColdWalletScreen() {
       setModalMessage(t("Screen lock disabled successfully"));
       setSuccessModalVisible(true);
     } else {
-      Alert.alert(t("Error"), t("Incorrect password"));
+      setEnterPasswordModalVisible(false); // 关闭其他模态框
+      setModalMessage(t("Incorrect password"));
+      setErrorModalVisible(true);
+      // 确保 success 模态框不与 error 模态框同时显示
+      setSuccessModalVisible(false);
     }
   };
 
