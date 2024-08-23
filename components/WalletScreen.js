@@ -38,6 +38,10 @@ const writeCharacteristicUUID = "0000FFE2-0000-1000-8000-00805F9B34FB";
 function WalletScreen({ route, navigation }) {
   const [receivedVerificationCode, setReceivedVerificationCode] = useState("");
   const {
+    initialAdditionalCryptos,
+    setInitialAdditionalCryptos,
+    usdtCrypto,
+    setUsdtCrypto,
     additionalCryptos,
     cryptoCount,
     setCryptoCount,
@@ -832,28 +836,37 @@ function WalletScreen({ route, navigation }) {
             crcStartIndex + 2,
             crcStartIndex + 4
           );
-          const receivedCrc = receivedCrcLowByte + receivedCrcHighByte; // 低字节在前
+          const receivedCrc = receivedCrcLowByte + receivedCrcHighByte;
           console.log("接收到的CRC:", receivedCrc);
 
-          // 提取所有用于CRC校验的数据（不包括 CRC 和结尾标志位）
+          // 计算CRC并校验
           const dataToVerifyHex = receivedDataHex.substring(0, crcStartIndex);
           const dataToVerify = Buffer.from(dataToVerifyHex, "hex");
-
-          // 计算CRC校验码
           let calculatedCrc = crc16Modbus(dataToVerify)
             .toString(16)
             .padStart(4, "0");
-
-          // 将计算的 CRC 码转换为低字节在前的格式
           calculatedCrc = calculatedCrc.slice(2) + calculatedCrc.slice(0, 2);
-          console.log("计算的CRC:", calculatedCrc);
-
-          // 比较接收到的CRC和计算的CRC是否匹配
           if (calculatedCrc.toLowerCase() === receivedCrc.toLowerCase()) {
             console.log("CRC校验通过，数据有效");
 
             // 在此处添加接收钱包生成地址成功的日志
             console.log("接收钱包生成地址成功:", walletAddress);
+
+            // 根据 chainShortName 更新对应的数字货币地址字段
+            if (chainName === "USDT") {
+              setUsdtCrypto((prevUsdtCrypto) => ({
+                ...prevUsdtCrypto,
+                address: walletAddress, // 更新地址字段
+              }));
+            } else {
+              setInitialAdditionalCryptos((prevCryptos) =>
+                prevCryptos.map((crypto) =>
+                  crypto.chainShortName === chainName
+                    ? { ...crypto, address: walletAddress } // 更新地址字段
+                    : crypto
+                )
+              );
+            }
 
             // 更新状态，切换图片和文本信息
             setWalletCreationStatus({
