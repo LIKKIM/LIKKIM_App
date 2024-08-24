@@ -89,8 +89,10 @@ function TransactionsScreen() {
   const [devices, setDevices] = useState([]);
   const [pinModalVisible, setPinModalVisible] = useState(false);
   const [pinCode, setPinCode] = useState("");
+  const [showCloseButton, setShowCloseButton] = useState(false);
   const restoreIdentifier = Constants.installationId;
   const [isAddressValid, setIsAddressValid] = useState(false);
+  const [pendingModalVisible, setPendingModalVisible] = useState(false);
   const [verificationSuccessModalVisible, setVerificationSuccessModalVisible] =
     useState(false);
   const [isVerifyingAddress, setIsVerifyingAddress] = useState(false);
@@ -494,8 +496,10 @@ function TransactionsScreen() {
                 // 在这里检查 result.code 的值并打印相应的消息
                 if (result.code === 0 && result.msg === "success") {
                   console.log("签名广播成功");
+                  setShowCloseButton(true); // 显示关闭按钮
                 } else if (result.code === -1) {
                   console.log("签名广播失败");
+                  setShowCloseButton(true); // 显示关闭按钮
                 }
 
                 if (Array.isArray(result.data)) {
@@ -1689,6 +1693,7 @@ function TransactionsScreen() {
                   style={TransactionsScreenStyle.optionButton}
                   onPress={async () => {
                     try {
+                      setPendingModalVisible(true);
                       const response = await fetch(
                         "https://bt.likkim.com/meridian/address/queryBlockList",
                         {
@@ -2113,6 +2118,40 @@ function TransactionsScreen() {
                   {t("Cancel Signature")}
                 </Text>
               </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
+        {/* pending modal */}
+        <Modal
+          visible={pendingModalVisible}
+          onRequestClose={() => setPendingModalVisible(false)}
+          transparent={true}
+          animationType="slide"
+        >
+          <View style={TransactionsScreenStyle.centeredView}>
+            <View style={TransactionsScreenStyle.pendingModalView}>
+              <Text style={TransactionsScreenStyle.modalTitle}>
+                {t("Processing Transaction...")}
+              </Text>
+              <Image
+                source={require("../assets/loading.gif")} // 替换为实际的加载图标
+                style={{ width: 120, height: 120 }}
+              />
+              <Text style={TransactionsScreenStyle.modalSubtitle}>
+                {t("Please wait while your transaction is being processed.")}
+              </Text>
+
+              {/* 仅在显示关闭按钮时渲染 */}
+              {showCloseButton && (
+                <TouchableOpacity
+                  style={TransactionsScreenStyle.submitButton}
+                  onPress={() => setPendingModalVisible(false)}
+                >
+                  <Text style={TransactionsScreenStyle.submitButtonText}>
+                    {t("Close")}
+                  </Text>
+                </TouchableOpacity>
+              )}
             </View>
           </View>
         </Modal>
