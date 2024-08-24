@@ -154,9 +154,9 @@ function TransactionsScreen() {
       bleManagerRef.current.destroy();
     };
   }, []);
-  useEffect(() => {
+  /*   useEffect(() => {
     console.log("Added Cryptos in TransactionsScreen:", addedCryptos);
-  }, [addedCryptos]);
+  }, [addedCryptos]); */
 
   useEffect(() => {
     let addressMonitorSubscription;
@@ -330,7 +330,7 @@ function TransactionsScreen() {
                 const result = await response.json();
 
                 // 打印返回结果的结构
-                console.log("请求结果:");
+                console.log("签名请求结果:");
                 console.log(`Code: ${result.code}`);
                 console.log(`Message: ${result.msg}`);
 

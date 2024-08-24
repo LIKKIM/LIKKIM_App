@@ -170,7 +170,8 @@ function WalletScreen({ route, navigation }) {
   };
 
   const [bleVisible, setBleVisible] = useState(false); // New state for Bluetooth modal
-  /*   useEffect(() => {
+  // 余额查询
+  useEffect(() => {
     const postTest = async () => {
       try {
         const response = await fetch(
@@ -181,9 +182,9 @@ function WalletScreen({ route, navigation }) {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              chainShortName: "TRON",
-              address: "TXJHEnySTFpn8vLDzo42VP6f7mizpPZbyW",
-              protocolType: "token_20",
+              chainShortName: "TRON", // 区块链的简称
+              address: "TQNZ6U7DbAxFXwWe69QrLACyCVCaGhy9g1", // 查询的地址
+              protocolType: "token_20", // 协议类型，表示代币类型
             }),
           }
         );
@@ -193,7 +194,7 @@ function WalletScreen({ route, navigation }) {
         }
 
         const data = await response.json();
-        console.log("Response Data:", data);
+        console.log("余额查询 Response Data:", data); // 完整响应数据
 
         // 展开并打印 tokenList 数组的内容
         if (
@@ -203,7 +204,33 @@ function WalletScreen({ route, navigation }) {
           data.data[0].tokenList
         ) {
           const tokenList = data.data[0].tokenList;
-          console.log("Token List:", tokenList);
+
+          // 循环遍历并打印每个 token 的详细信息
+          tokenList.forEach((token, index) => {
+            console.log(`Token ${index + 1}:`);
+            console.log(
+              `  - holdingAmount: ${token.holdingAmount} // 持有的数量`
+            );
+            console.log(
+              `  - priceUsd: ${token.priceUsd} // 每个代币的美元价格`
+            );
+            console.log(`  - symbol: ${token.symbol} // 代币的符号`);
+            console.log(
+              `  - tokenContractAddress: ${token.tokenContractAddress} // 代币合约地址`
+            );
+            console.log(
+              `  - tokenId: ${token.tokenId} // NFT ID，若为空表示非NFT代币`
+            );
+            console.log(
+              `  - tokenType: ${token.tokenType} // 代币类型，例如 TRC20`
+            );
+            console.log(
+              `  - valueUsd: ${token.valueUsd} // 该地址持有的总美元价值`
+            );
+          });
+
+          // 使用 console.table 更直观地显示数据
+          console.table(tokenList);
         } else {
           console.log("No tokenList found in response data.");
         }
@@ -215,7 +242,7 @@ function WalletScreen({ route, navigation }) {
     // 调用 postTest 函数进行测试
     postTest();
   }, []);
- */
+
   useEffect(() => {
     setAddedCryptos(cryptoCards);
   }, [cryptoCards]);
@@ -248,10 +275,10 @@ function WalletScreen({ route, navigation }) {
     loadVerifiedDevices();
   }, []); // 这个依赖空数组确保该代码只在组件挂载时执行一次
   // 打印设备数量
-  useEffect(() => {
+  /*   useEffect(() => {
     console.log("Wallet Page Verified Devices Count:", verifiedDevices.length);
   }, [verifiedDevices]);
-
+ */
   useEffect(() => {
     if (!bleVisible && selectedDevice) {
       setPinModalVisible(true);
