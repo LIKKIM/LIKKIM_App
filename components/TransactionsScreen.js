@@ -2145,7 +2145,10 @@ function TransactionsScreen() {
               {showCloseButton && (
                 <TouchableOpacity
                   style={TransactionsScreenStyle.submitButton}
-                  onPress={() => setPendingModalVisible(false)}
+                  onPress={() => {
+                    setPendingModalVisible(false);
+                    setShowCloseButton(false); // 隐藏 modal 并重置按钮状态
+                  }}
                 >
                   <Text style={TransactionsScreenStyle.submitButtonText}>
                     {t("Close")}
