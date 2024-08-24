@@ -131,6 +131,12 @@ function WalletScreen({ route, navigation }) {
     subtitle: t("Your device is already verified."), // 默认子消息
   });
 
+  const [importingStatus, setImportingStatus] = useState({
+    image: require("../assets/gif/Pending.gif"), // 默认显示 Pending.gif
+    title: t("Importing on LIKKIM Hardware..."), // 默认主消息
+    subtitle: t("Your device is already verified."), // 默认子消息
+  });
+
   const bleManagerRef = useRef(null);
 
   const scanDevices = () => {
@@ -251,6 +257,11 @@ function WalletScreen({ route, navigation }) {
     if (!createPendingModalVisible) {
       // 当模态框关闭时重置状态
       setWalletCreationStatus({
+        image: require("../assets/gif/Pending.gif"), // 重置为默认显示 Pending.gif
+        title: t("Creating on LIKKIM Hardware..."), // 重置为默认主消息
+        subtitle: t("Your device is already verified."), // 重置为默认子消息
+      });
+      setImportingStatus({
         image: require("../assets/gif/Pending.gif"), // 重置为默认显示 Pending.gif
         title: t("Creating on LIKKIM Hardware..."), // 重置为默认主消息
         subtitle: t("Your device is already verified."), // 重置为默认子消息
@@ -1123,6 +1134,12 @@ function WalletScreen({ route, navigation }) {
               image: require("../assets/gif/Success.gif"),
               title: t("Wallet Creation Successful!"),
               subtitle: t("Your wallet address has been created successfully."),
+            });
+            // 导入成功时
+            setImportingStatus({
+              image: require("../assets/gif/Success.gif"),
+              title: t("Wallet Import Successful!"),
+              subtitle: t("Your wallet has been successfully imported."),
             });
           } else {
             console.error(
@@ -2657,14 +2674,14 @@ function WalletScreen({ route, navigation }) {
         <View style={WalletScreenStyle.centeredView}>
           <View style={WalletScreenStyle.pendingModalView}>
             <Text style={WalletScreenStyle.modalTitle}>
-              {t("Importing on LIKKIM Hardware...")}
+              {importingStatus.title}
             </Text>
             <Image
-              source={require("../assets/gif/Pending.gif")}
+              source={importingStatus.image}
               style={{ width: 120, height: 120 }}
             />
             <Text style={[WalletScreenStyle.modalSubtitle]}>
-              {t("Your device is already verified.")}
+              {importingStatus.subtitle}
             </Text>
             <TouchableOpacity
               style={WalletScreenStyle.submitButton}
