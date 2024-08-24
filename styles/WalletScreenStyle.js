@@ -333,15 +333,12 @@ const WalletScreenStyles = (isDarkMode) => {
       marginBottom: -130, // 重叠效果
     },
     cardIcon: {
-      position: "absolute",
-      top: 28,
-      left: 10,
       width: 42,
       height: 42,
     },
     chainIcon: {
-      width: 16,
-      height: 16,
+      width: 14,
+      height: 14,
     },
     cardShortName: {
       position: "absolute",

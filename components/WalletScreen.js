@@ -1778,23 +1778,38 @@ function WalletScreen({ route, navigation }) {
                   style={{ width: "100%", height: "100%" }}
                   imageStyle={{ borderRadius: 16 }}
                 >
-                  <Image
-                    source={card.icon}
-                    style={WalletScreenStyle.cardIcon}
-                  />
                   <View
                     style={{
                       position: "absolute",
-                      top: 52,
-                      left: 42,
-                      width: 18,
-                      height: 18,
+                      top: 28,
+                      left: 10,
+                      width: 42,
+                      height: 42,
+                      alignItems: "center",
+                      justifyContent: "center",
+                      borderRadius: 21,
+                      backgroundColor: "#ffffff50",
+                      overflow: "hidden",
+                    }}
+                  >
+                    <Image
+                      source={card.icon}
+                      style={WalletScreenStyle.cardIcon}
+                    />
+                  </View>
+                  <View
+                    style={{
+                      position: "absolute",
+                      top: 54,
+                      left: 38,
+                      width: 16,
+                      height: 16,
                       borderWidth: 1,
-                      borderColor: "#FFF",
+                      borderColor: "#ffffff80",
                       alignItems: "center",
                       justifyContent: "center",
                       borderRadius: 15,
-                      backgroundColor: "#fff",
+                      backgroundColor: "#ffffff80",
                       overflow: "hidden",
                     }}
                   >
