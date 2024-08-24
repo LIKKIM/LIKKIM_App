@@ -830,11 +830,21 @@ function TransactionsScreen() {
         });
         return;
       }
+
+      // 将 amount 乘以 1000000
+      const adjustedAmount = BigInt(amount) * BigInt(1000000);
+      console.log(`Adjusted Amount (in smallest unit): ${adjustedAmount}`);
+
+      // 将调整后的金额转换为十六进制
+      const amountHex = adjustedAmount.toString(16).toUpperCase();
+      console.log(`Amount Hex: ${amountHex}`);
+
       // 将字符串转换为 ASCII 码的十六进制表示
       function toAsciiHex(str) {
         return Buffer.from(str, "ascii").toString("hex");
       }
 
+      // 继续处理其他参数
       const contractAddressHex = Buffer.from(contractAddress, "utf-8").toString(
         "hex"
       );
@@ -842,23 +852,19 @@ function TransactionsScreen() {
         "hex"
       );
       const userAddressHex = Buffer.from(userAddress, "utf-8").toString("hex");
-      const amountHex = Buffer.from(amount.toString(), "utf-8").toString("hex");
       const hashHex = Buffer.from(hash, "utf-8").toString("hex");
-      // 将高度转换为 ASCII 码的十六进制表示，并确保8位
       const heightHex = toAsciiHex(height.toString()).padStart(8, "0");
-
-      // 将区块时间转换为 ASCII 码的十六进制表示，并确保16位
       const blockTimeHex = toAsciiHex(blockTime.toString()).padStart(16, "0");
       const derivationPathHex = Buffer.from(derivationPath, "utf-8").toString(
         "hex"
       );
       const derivationPathLength = derivationPathHex.length / 2;
-      // 打印原始值
 
+      // 打印其他参数
       console.log(`Contract Address: ${contractAddress}`);
       console.log(`Crypto Address: ${crypto.address}`);
       console.log(`User Address: ${userAddress}`);
-      console.log(`Amount: ${amount}`);
+      console.log(`Amount (Original): ${amount}`);
       console.log(`Hash: ${hash}`);
       console.log(`Height: ${height}`);
       console.log(`Block Time: ${blockTime}`);
@@ -901,7 +907,7 @@ function TransactionsScreen() {
         cryptoAddressHex.length / 2 +
         1 + // userAddress 长度
         userAddressHex.length / 2 +
-        1 + // amount 长度
+        1 + // amountHex 长度
         amountHex.length / 2 +
         1 + // hashHex 长度
         hashHex.length / 2 +
