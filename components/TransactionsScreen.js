@@ -313,27 +313,6 @@ function TransactionsScreen() {
   }, [addressModalVisible, selectedDevice]);
   let monitorSubscription;
 
-  const handleAmountChange = (text) => {
-    // 使用正则表达式验证用户输入
-    const validAmount = text.match(/^(0|[1-9]\d*)(\.\d{0,2})?$/);
-
-    // 如果输入是有效的
-    if (validAmount) {
-      let formattedAmount = text;
-
-      // 移除前导零，保留单个零或者合法的小数0.x
-      if (text.includes(".")) {
-        // 如果包含小数点，处理形如 0.01 的情况，确保 0.01 是有效的
-        formattedAmount = text.replace(/^0+(\d)/, "0$1");
-      } else {
-        // 如果不包含小数点，处理形如 01 或 0001 的情况
-        formattedAmount = text.replace(/^0+(\d)/, "$1");
-      }
-
-      setAmount(formattedAmount);
-    }
-  };
-
   const reconnectDevice = async (device) => {
     try {
       console.log(`正在尝试重新连接设备: ${device.id}`);
@@ -1506,7 +1485,16 @@ function TransactionsScreen() {
                   placeholder={t("Enter Amount")}
                   placeholderTextColor={isDarkMode ? "#808080" : "#cccccc"}
                   keyboardType="numeric"
-                  onChangeText={(text) => handleAmountChange(text)}
+                  onChangeText={(text) => {
+                    // Normalize the input by removing leading zeros
+                    let normalizedText = text.replace(/^0+(?!\.|$)/, "");
+
+                    // Allow only valid decimal numbers with up to 10 decimal places
+                    const regex = /^\d*\.?\d{0,10}$/;
+                    if (regex.test(normalizedText)) {
+                      setAmount(normalizedText);
+                    }
+                  }}
                   value={amount}
                   autoFocus={true}
                   caretHidden={true} // 隐藏光标
