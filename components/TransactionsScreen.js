@@ -68,8 +68,6 @@ function TransactionsScreen() {
   const [fee, setFee] = useState("");
   const [queryChainShortName, setQueryChainShortName] = useState("");
   const [priceUsd, setPriceUsd] = useState("");
-  const [selectedQueryChainShortName, setSelectedQueryChainShortName] =
-    useState("");
   const [selectedCryptoIcon, setSelectedCryptoIcon] = useState(null);
   const iconColor = isDarkMode ? "#ffffff" : "#24234C";
   const darkColors = ["#24234C", "#101021"];
