@@ -281,6 +281,7 @@ export const CryptoProvider = ({ children }) => {
               chain: newCrypto.chain,
               chainShortName: newCrypto.chainShortName,
               chainIcon: newCrypto.chainIcon,
+              queryChainShortName: newCrypto.queryChainShortName,
             },
           ];
           return updatedCards;

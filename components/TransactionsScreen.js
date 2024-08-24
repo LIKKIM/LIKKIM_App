@@ -67,6 +67,8 @@ function TransactionsScreen() {
   const [valueUsd, setValueUsd] = useState("");
   const [fee, setFee] = useState("");
   const [priceUsd, setPriceUsd] = useState("");
+  const [selectedQueryChainShortName, setSelectedQueryChainShortName] =
+    useState("");
   const [selectedCryptoIcon, setSelectedCryptoIcon] = useState(null);
   const iconColor = isDarkMode ? "#ffffff" : "#24234C";
   const darkColors = ["#24234C", "#101021"];
@@ -141,11 +143,31 @@ function TransactionsScreen() {
     }
   };
 
+  /*   useEffect(() => {
+    console.log("Initial Cryptos:", initialAdditionalCryptos);
+  }, []); */
+
   // 在 amountModalVisible 状态变为 true 时发送 POST 请求
   useEffect(() => {
     if (amountModalVisible) {
       const fetchTokenBalanceAndFee = async () => {
         try {
+          // 根据 selectedCrypto 查找对应的加密货币对象
+          const selectedCryptoObj = initialAdditionalCryptos.find(
+            (crypto) => crypto.shortName === selectedCrypto
+          );
+
+          if (!selectedCryptoObj) {
+            throw new Error(`Crypto ${selectedCrypto} not found`);
+          }
+
+          // 打印 selectedCryptoObj 的相关信息
+          console.log(`Selected Crypto: ${selectedCrypto}`);
+          console.log(
+            `chainShortName: ${selectedCryptoObj.queryChainShortName}, // 动态设置区块链简称`
+          );
+          console.log(`address: ${selectedCryptoObj.address}, // 动态设置地址`);
+
           // 查询代币余额
           const balanceResponse = await fetch(
             "https://bt.likkim.com/meridian/address/queryTokenBalance",
@@ -155,8 +177,8 @@ function TransactionsScreen() {
                 "Content-Type": "application/json",
               },
               body: JSON.stringify({
-                chainShortName: "TRON", // 区块链的简称
-                address: "TQNZ6U7DbAxFXwWe69QrLACyCVCaGhy9g1", // 使用 selectedCrypto 的地址
+                chainShortName: selectedCryptoObj.queryChainShortName, // 动态设置区块链简称
+                address: selectedCryptoObj.address, // 动态设置地址
                 protocolType: "token_20", // 协议类型，表示代币类型
               }),
             }
@@ -226,7 +248,7 @@ function TransactionsScreen() {
                 "Content-Type": "application/json",
               },
               body: JSON.stringify({
-                chainShortName: "TRON", // 区块链的简称
+                chainShortName: selectedCryptoObj.queryChainShortName, // 动态设置区块链简称
               }),
             }
           );
@@ -242,7 +264,6 @@ function TransactionsScreen() {
             const feeInfo = feeData.data[0];
             const fee = feeInfo.bestTransactionFee; // 从响应数据中提取手续费
 
-            // 更新手续费状态
             setFee(fee);
           } else {
             console.log("No fee data found in response data.");
@@ -254,7 +275,12 @@ function TransactionsScreen() {
 
       fetchTokenBalanceAndFee();
     }
-  }, [amountModalVisible]);
+  }, [
+    amountModalVisible,
+    selectedCrypto,
+    initialAdditionalCryptos,
+    updateCryptoData,
+  ]);
 
   // 监听 initialAdditionalCryptos 的变化，更新 Modal 中的数据
   useEffect(() => {
@@ -1208,6 +1234,7 @@ function TransactionsScreen() {
     setValueUsd(crypto.valueUsd);
     setFee(crypto.fee);
     setPriceUsd(crypto.priceUsd);
+    setSelectedQueryChainShortName(crypto.queryChainShortName);
     setIsVerifyingAddress(false);
     setModalVisible(false);
 
