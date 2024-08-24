@@ -66,6 +66,7 @@ function TransactionsScreen() {
   const [balance, setBalance] = useState("");
   const [valueUsd, setValueUsd] = useState("");
   const [fee, setFee] = useState("");
+  const [queryChainShortName, setQueryChainShortName] = useState("");
   const [priceUsd, setPriceUsd] = useState("");
   const [selectedQueryChainShortName, setSelectedQueryChainShortName] =
     useState("");
@@ -1234,7 +1235,7 @@ function TransactionsScreen() {
     setValueUsd(crypto.valueUsd);
     setFee(crypto.fee);
     setPriceUsd(crypto.priceUsd);
-    setSelectedQueryChainShortName(crypto.queryChainShortName);
+    setQueryChainShortName(crypto.queryChainShortName);
     setIsVerifyingAddress(false);
     setModalVisible(false);
 
