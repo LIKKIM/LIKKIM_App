@@ -144,9 +144,10 @@ function TransactionsScreen() {
   // 在 amountModalVisible 状态变为 true 时发送 POST 请求
   useEffect(() => {
     if (amountModalVisible) {
-      const fetchTokenBalance = async () => {
+      const fetchTokenBalanceAndFee = async () => {
         try {
-          const response = await fetch(
+          // 查询代币余额
+          const balanceResponse = await fetch(
             "https://bt.likkim.com/meridian/address/queryTokenBalance",
             {
               method: "POST",
@@ -161,21 +162,21 @@ function TransactionsScreen() {
             }
           );
 
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+          if (!balanceResponse.ok) {
+            throw new Error(`HTTP error! status: ${balanceResponse.status}`);
           }
 
-          const data = await response.json();
-          console.log("Transacion余额查询 Response Data:", data);
+          const balanceData = await balanceResponse.json();
+          console.log("Transaction 余额查询 Response Data:", balanceData);
 
           // 展开并打印 tokenList 数组的内容
           if (
-            data &&
-            data.data &&
-            data.data.length > 0 &&
-            data.data[0].tokenList
+            balanceData &&
+            balanceData.data &&
+            balanceData.data.length > 0 &&
+            balanceData.data[0].tokenList
           ) {
-            const tokenList = data.data[0].tokenList;
+            const tokenList = balanceData.data[0].tokenList;
 
             // 循环遍历并打印每个 token 的详细信息
             tokenList.forEach((token, index) => {
@@ -215,14 +216,46 @@ function TransactionsScreen() {
           } else {
             console.log("No tokenList found in response data.");
           }
+
+          // 查询手续费
+          const feeResponse = await fetch(
+            "https://bt.likkim.com/meridian/transaction/queryFee",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                chainShortName: "TRON", // 区块链的简称
+              }),
+            }
+          );
+
+          if (!feeResponse.ok) {
+            throw new Error(`HTTP error! status: ${feeResponse.status}`);
+          }
+
+          const feeData = await feeResponse.json();
+          console.log("Transaction 手续费查询 Response Data:", feeData);
+
+          if (feeData && feeData.data && feeData.data.length > 0) {
+            const feeInfo = feeData.data[0];
+            const fee = feeInfo.bestTransactionFee; // 从响应数据中提取手续费
+
+            // 更新手续费状态
+            setFee(fee);
+          } else {
+            console.log("No fee data found in response data.");
+          }
         } catch (error) {
           console.error("Error:", error);
         }
       };
 
-      fetchTokenBalance();
+      fetchTokenBalanceAndFee();
     }
   }, [amountModalVisible]);
+
   // 监听 initialAdditionalCryptos 的变化，更新 Modal 中的数据
   useEffect(() => {
     if (amountModalVisible) {
