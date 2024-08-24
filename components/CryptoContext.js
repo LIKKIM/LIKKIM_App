@@ -61,6 +61,7 @@ const initialAdditionalCryptos = [
     tokenType: "BTC", // 代币类型
     fee: "0.0001", // 手续费
     valueUsd: "0.0", // 总美元价值
+    priceUsd: "30000.0", // 每个代币的美元价格
   },
   {
     name: "Ethereum",
@@ -75,6 +76,7 @@ const initialAdditionalCryptos = [
     tokenType: "ERC20", // 代币类型
     fee: "0.01", // 手续费
     valueUsd: "0.0", // 总美元价值
+    priceUsd: "2000.0", // 每个代币的美元价格
   },
   {
     name: "USDT",
@@ -89,6 +91,7 @@ const initialAdditionalCryptos = [
     tokenType: "TRC20", // 代币类型
     fee: "1", // 手续费
     valueUsd: "0.0", // 总美元价值
+    priceUsd: "1.0", // 每个代币的美元价格
   },
   {
     name: "Litecoin",
@@ -103,6 +106,7 @@ const initialAdditionalCryptos = [
     tokenType: "LTC", // 代币类型
     fee: "0.001", // 手续费
     valueUsd: "0.0", // 总美元价值
+    priceUsd: "150.0", // 每个代币的美元价格
   },
   {
     name: "Bitcoin Cash",
@@ -117,6 +121,7 @@ const initialAdditionalCryptos = [
     tokenType: "BCH", // 代币类型
     fee: "0.001", // 手续费
     valueUsd: "0.0", // 总美元价值
+    priceUsd: "300.0", // 每个代币的美元价格
   },
   {
     name: "Cardano",
@@ -131,6 +136,7 @@ const initialAdditionalCryptos = [
     tokenType: "ADA", // 代币类型
     fee: "0.17", // 手续费
     valueUsd: "0.0", // 总美元价值
+    priceUsd: "1.5", // 每个代币的美元价格
   },
   {
     name: "Polkadot",
@@ -145,6 +151,7 @@ const initialAdditionalCryptos = [
     tokenType: "DOT", // 代币类型
     fee: "0.01", // 手续费
     valueUsd: "0.0", // 总美元价值
+    priceUsd: "4.5", // 每个代币的美元价格
   },
   {
     name: "Chainlink",
@@ -159,6 +166,7 @@ const initialAdditionalCryptos = [
     tokenType: "ERC20", // 代币类型
     fee: "0.01", // 手续费
     valueUsd: "0.0", // 总美元价值
+    priceUsd: "7.0", // 每个代币的美元价格
   },
   {
     name: "Stellar",
@@ -173,6 +181,7 @@ const initialAdditionalCryptos = [
     tokenType: "XLM", // 代币类型
     fee: "0.00001", // 手续费
     valueUsd: "2.0", // 总美元价值
+    priceUsd: "0.3", // 每个代币的美元价格
   },
   {
     name: "Dogecoin",
@@ -187,6 +196,7 @@ const initialAdditionalCryptos = [
     tokenType: "DOGE", // 代币类型
     fee: "0.01", // 手续费
     valueUsd: "1.0", // 总美元价值
+    priceUsd: "0.07", // 每个代币的美元价格
   },
 ];
 
@@ -203,6 +213,7 @@ export const usdtCrypto = {
   tokenType: "TRC20", // 代币类型
   fee: "1", // 手续费
   valueUsd: "0.0", // 总美元价值
+  priceUsd: "1.0", // 每个代币的美元价格
 };
 
 export const CryptoProvider = ({ children }) => {
