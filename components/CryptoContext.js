@@ -237,6 +237,14 @@ export const CryptoProvider = ({ children }) => {
   const [verifiedDevices, setVerifiedDevices] = useState([]);
   const [isAppLaunching, setIsAppLaunching] = useState(true);
 
+  const updateCryptoData = (shortName, newData) => {
+    setInitialAdditionalCryptos((prevCryptos) =>
+      prevCryptos.map((crypto) =>
+        crypto.shortName === shortName ? { ...crypto, ...newData } : crypto
+      )
+    );
+  };
+
   // 在这里添加用于更新加密卡片的方法，并将其传递给上下文
   const addCryptoCard = (chainName, walletAddress) => {
     setAddedCryptos((prevCards) => {
@@ -435,6 +443,7 @@ export const CryptoProvider = ({ children }) => {
   return (
     <CryptoContext.Provider
       value={{
+        updateCryptoData,
         cryptoCount,
         setCryptoCount,
         currencyUnit,

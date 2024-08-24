@@ -171,7 +171,7 @@ function WalletScreen({ route, navigation }) {
 
   const [bleVisible, setBleVisible] = useState(false); // New state for Bluetooth modal
   // 余额查询
-  useEffect(() => {
+  /*   useEffect(() => {
     const postTest = async () => {
       try {
         const response = await fetch(
@@ -241,7 +241,7 @@ function WalletScreen({ route, navigation }) {
 
     // 调用 postTest 函数进行测试
     postTest();
-  }, []);
+  }, []); */
 
   useEffect(() => {
     setAddedCryptos(cryptoCards);

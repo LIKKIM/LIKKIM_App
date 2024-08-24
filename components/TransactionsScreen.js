@@ -49,6 +49,7 @@ function TransactionsScreen() {
     setIsVerificationSuccessful,
     verifiedDevices,
     setVerifiedDevices,
+    updateCryptoData,
   } = useContext(CryptoContext);
 
   const [
@@ -60,7 +61,6 @@ function TransactionsScreen() {
   const [modalVisible, setModalVisible] = useState(false);
   const [addressModalVisible, setAddressModalVisible] = useState(false);
   const [operationType, setOperationType] = useState("");
-  const [selectedCrypto, setSelectedCrypto] = useState("");
   const [selectedCryptoChain, setSelectedCryptoChain] = useState("");
   const [selectedAddress, setSelectedAddress] = useState("");
   const [balance, setBalance] = useState("");
@@ -76,6 +76,7 @@ function TransactionsScreen() {
   const buttonBackgroundColor = isDarkMode ? "#6C6CF4" : "#8E80F0";
   const disabledButtonBackgroundColor = isDarkMode ? "#6c6c6c" : "#ccc"; // 根据 isDarkMode 设置不同的灰色
   const [inputAddress, setInputAddress] = useState("");
+  const [selectedCrypto, setSelectedCrypto] = useState("");
   const [amountModalVisible, setAmountModalVisible] = useState(false); // 新增状态
   const [confirmModalVisible, setConfirmModalVisible] = useState(false); // 新增交易确认modal状态
   const [transactionFee, setTransactionFee] = useState("0.001"); // 示例交易手续费
@@ -139,6 +140,94 @@ function TransactionsScreen() {
       console.log("Attempt to scan while already scanning");
     }
   };
+
+  // 在 amountModalVisible 状态变为 true 时发送 POST 请求
+  useEffect(() => {
+    if (amountModalVisible) {
+      setAmount("");
+      const fetchTokenBalance = async () => {
+        try {
+          const response = await fetch(
+            "https://bt.likkim.com/meridian/address/queryTokenBalance",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                chainShortName: "TRON", // 区块链的简称
+                address: "TQNZ6U7DbAxFXwWe69QrLACyCVCaGhy9g1", // 使用 selectedCrypto 的地址
+                protocolType: "token_20", // 协议类型，表示代币类型
+              }),
+            }
+          );
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const data = await response.json();
+          console.log("Transacion余额查询 Response Data:", data);
+
+          // 展开并打印 tokenList 数组的内容
+          if (
+            data &&
+            data.data &&
+            data.data.length > 0 &&
+            data.data[0].tokenList
+          ) {
+            const tokenList = data.data[0].tokenList;
+
+            // 循环遍历并打印每个 token 的详细信息
+            tokenList.forEach((token, index) => {
+              console.log(`Token ${index + 1}:`);
+              console.log(
+                `  - holdingAmount: ${token.holdingAmount} // 持有的数量`
+              );
+              console.log(
+                `  - priceUsd: ${token.priceUsd} // 每个代币的美元价格`
+              );
+              console.log(`  - symbol: ${token.symbol} // 代币的符号`);
+              console.log(
+                `  - tokenContractAddress: ${token.tokenContractAddress} // 代币合约地址`
+              );
+              console.log(
+                `  - tokenId: ${token.tokenId} // NFT ID，若为空表示非NFT代币`
+              );
+              console.log(
+                `  - tokenType: ${token.tokenType} // 代币类型，例如 TRC20`
+              );
+              console.log(
+                `  - valueUsd: ${token.valueUsd} // 该地址持有的总美元价值`
+              );
+            });
+
+            // 使用 console.table 更直观地显示数据
+            console.table(tokenList);
+
+            // 更新 initialAdditionalCryptos 中的相关信息
+            tokenList.forEach((token) => {
+              updateCryptoData(token.symbol, {
+                balance: token.holdingAmount,
+                priceUsd: token.priceUsd,
+                valueUsd: token.valueUsd,
+              });
+            });
+          } else {
+            console.log("No tokenList found in response data.");
+          }
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      };
+
+      fetchTokenBalance();
+    }
+  }, [amountModalVisible]);
+
+  useEffect(() => {
+    console.log("Current initialAdditionalCryptos:", initialAdditionalCryptos);
+  }, [initialAdditionalCryptos]);
   // 当蓝牙模态框打开时，开始扫描设备
   useEffect(() => {
     if (bleVisible) {
@@ -146,12 +235,6 @@ function TransactionsScreen() {
     }
   }, [bleVisible]);
 
-  // 清空金额输入
-  useEffect(() => {
-    if (amountModalVisible) {
-      setAmount(""); // 清空之前的金额输入
-    }
-  }, [amountModalVisible]);
   // 清理蓝牙管理器
   useEffect(() => {
     return () => {
