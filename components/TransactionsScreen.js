@@ -269,9 +269,9 @@ function TransactionsScreen() {
       }
     }
   }, [initialAdditionalCryptos, amountModalVisible]);
-  useEffect(() => {
+  /*   useEffect(() => {
     console.log("Current initialAdditionalCryptos:", initialAdditionalCryptos);
-  }, [initialAdditionalCryptos]);
+  }, [initialAdditionalCryptos]); */
   // 当蓝牙模态框打开时，开始扫描设备
   useEffect(() => {
     if (bleVisible) {
