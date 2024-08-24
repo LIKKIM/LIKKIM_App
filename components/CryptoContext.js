@@ -57,6 +57,7 @@ const initialAdditionalCryptos = [
     address: "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
     chain: "Bitcoin",
     chainShortName: "BTC",
+    queryChainShortName: "BTC", // 用于查询的字段
     chainIcon: require("../assets/icon/BTCIcon.png"),
     tokenType: "BTC", // 代币类型
     fee: "0.0001", // 手续费
@@ -72,6 +73,7 @@ const initialAdditionalCryptos = [
     address: "0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe",
     chain: "Ethereum",
     chainShortName: "ETH",
+    queryChainShortName: "ETH", // 用于查询的字段
     chainIcon: require("../assets/icon/ETHIcon.png"),
     tokenType: "ERC20", // 代币类型
     fee: "0.01", // 手续费
@@ -87,6 +89,7 @@ const initialAdditionalCryptos = [
     address: "TZ7QDpUHbe6VLCv9bEPdAzrnNeu5zCuXg6",
     chain: "Tron",
     chainShortName: "TRX",
+    queryChainShortName: "TRON", // 用于查询的字段
     chainIcon: require("../assets/icon/TRXIcon.png"),
     tokenType: "TRC20", // 代币类型
     fee: "1", // 手续费
@@ -102,6 +105,7 @@ const initialAdditionalCryptos = [
     address: "LcHKdCbbtGxDsN7BHyebDTrVKT4w3KpU5Z",
     chain: "Litecoin",
     chainShortName: "LTC",
+    queryChainShortName: "LTC", // 用于查询的字段
     chainIcon: require("../assets/icon/LTCIcon.png"),
     tokenType: "LTC", // 代币类型
     fee: "0.001", // 手续费
@@ -117,6 +121,7 @@ const initialAdditionalCryptos = [
     address: "qpm2qsznhks23z7629mms6s4cwef74vcwvy22gdx6a",
     chain: "Bitcoin Cash",
     chainShortName: "BCH",
+    queryChainShortName: "BCH", // 用于查询的字段
     chainIcon: require("../assets/icon/BCHIcon.png"),
     tokenType: "BCH", // 代币类型
     fee: "0.001", // 手续费
@@ -132,6 +137,7 @@ const initialAdditionalCryptos = [
     address: "DdzFFzCqrhsusgjmXKG9VeSvfhRUHqNNNLiFYB8HHR7",
     chain: "Cardano",
     chainShortName: "ADA",
+    queryChainShortName: "ADA", // 用于查询的字段
     chainIcon: require("../assets/icon/ADAIcon.png"),
     tokenType: "ADA", // 代币类型
     fee: "0.17", // 手续费
@@ -147,6 +153,7 @@ const initialAdditionalCryptos = [
     address: "14VSS98ov7KjJtyepigS65atjPjj73Fw4c8TyRjCnbhG",
     chain: "Polkadot",
     chainShortName: "DOT",
+    queryChainShortName: "DOT", // 用于查询的字段
     chainIcon: require("../assets/icon/DOTIcon.png"),
     tokenType: "DOT", // 代币类型
     fee: "0.01", // 手续费
@@ -162,6 +169,7 @@ const initialAdditionalCryptos = [
     address: "0x514910771af9ca656af840dff83e8264ecf986ca",
     chain: "Ethereum",
     chainShortName: "ETH",
+    queryChainShortName: "ETH", // 用于查询的字段
     chainIcon: require("../assets/icon/ETHIcon.png"),
     tokenType: "ERC20", // 代币类型
     fee: "0.01", // 手续费
@@ -177,6 +185,7 @@ const initialAdditionalCryptos = [
     address: "GAHPDQD4MGHVZFJYZN46EZB2XB4LGIOHBTVHQRJ7MF2PL4EY7I7U77CC",
     chain: "Stellar",
     chainShortName: "XLM",
+    queryChainShortName: "XLM", // 用于查询的字段
     chainIcon: require("../assets/icon/XLMIcon.png"),
     tokenType: "XLM", // 代币类型
     fee: "0.00001", // 手续费
@@ -192,6 +201,7 @@ const initialAdditionalCryptos = [
     address: "D7Y55N4sFCw4KceCczPS3KhNWZ6o7pTPkd",
     chain: "Dogecoin",
     chainShortName: "DOGE",
+    queryChainShortName: "DOGE", // 用于查询的字段
     chainIcon: require("../assets/icon/DOGEIcon.png"),
     tokenType: "DOGE", // 代币类型
     fee: "0.01", // 手续费
@@ -209,6 +219,7 @@ export const usdtCrypto = {
   address: "TZ7QDpUHbe6VLCv9bEPdAzrnNeu5zCuXg6",
   chain: "Tron",
   chainShortName: "TRX",
+  queryChainShortName: "TRON", // 用于查询的字段
   chainIcon: require("../assets/icon/TRXIcon.png"),
   tokenType: "TRC20", // 代币类型
   fee: "1", // 手续费
