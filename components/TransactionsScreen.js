@@ -491,6 +491,13 @@ function TransactionsScreen() {
                 console.log(`Code: ${result.code}`);
                 console.log(`Message: ${result.msg}`);
 
+                // 在这里检查 result.code 的值并打印相应的消息
+                if (result.code === 0 && result.msg === "success") {
+                  console.log("签名广播成功");
+                } else if (result.code === -1) {
+                  console.log("签名广播失败");
+                }
+
                 if (Array.isArray(result.data)) {
                   result.data.forEach((item, index) => {
                     console.log(`Item ${index + 1}:`);
