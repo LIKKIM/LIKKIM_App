@@ -313,6 +313,27 @@ function TransactionsScreen() {
   }, [addressModalVisible, selectedDevice]);
   let monitorSubscription;
 
+  const handleAmountChange = (text) => {
+    // 使用正则表达式验证用户输入
+    const validAmount = text.match(/^(0|[1-9]\d*)(\.\d{0,2})?$/);
+
+    // 如果输入是有效的
+    if (validAmount) {
+      let formattedAmount = text;
+
+      // 移除前导零，保留单个零或者合法的小数0.x
+      if (text.includes(".")) {
+        // 如果包含小数点，处理形如 0.01 的情况，确保 0.01 是有效的
+        formattedAmount = text.replace(/^0+(\d)/, "0$1");
+      } else {
+        // 如果不包含小数点，处理形如 01 或 0001 的情况
+        formattedAmount = text.replace(/^0+(\d)/, "$1");
+      }
+
+      setAmount(formattedAmount);
+    }
+  };
+
   const reconnectDevice = async (device) => {
     try {
       console.log(`正在尝试重新连接设备: ${device.id}`);
@@ -1485,7 +1506,7 @@ function TransactionsScreen() {
                   placeholder={t("Enter Amount")}
                   placeholderTextColor={isDarkMode ? "#808080" : "#cccccc"}
                   keyboardType="numeric"
-                  onChangeText={(text) => setAmount(text)}
+                  onChangeText={(text) => handleAmountChange(text)}
                   value={amount}
                   autoFocus={true}
                   caretHidden={true} // 隐藏光标
@@ -1499,15 +1520,31 @@ function TransactionsScreen() {
                   flexDirection: "row",
                   width: 280,
                   justifyContent: "space-between",
+                  marginBottom: 20,
                 }}
               >
-                <View>
-                  <Text style={TransactionsScreenStyle.amountSubtitle}>
+                <View
+                  style={{
+                    justifyContent: "flex-start", // 使内容从上到下排列
+                  }}
+                >
+                  <Text style={TransactionsScreenStyle.balanceSubtitle}>
                     {t("Balance")}: {balance} {selectedCrypto}
                   </Text>
+                  {/* 当用户输入的金额大于余额时显示余额不足 */}
+                  {parseFloat(amount) > parseFloat(balance) && (
+                    <Text
+                      style={[
+                        TransactionsScreenStyle.balanceSubtitle,
+                        { color: "#FF5252", marginTop: 5 }, // 使用 marginTop 而不是 marginLeft
+                      ]}
+                    >
+                      {t("Insufficient Balance")}
+                    </Text>
+                  )}
                 </View>
 
-                <Text style={TransactionsScreenStyle.amountSubtitle}>
+                <Text style={TransactionsScreenStyle.balanceSubtitle}>
                   {t("Fee")}: {fee} {selectedCrypto}
                 </Text>
               </View>

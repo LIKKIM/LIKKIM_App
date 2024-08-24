@@ -138,6 +138,11 @@ const TransactionsScreenStyles = (isDarkMode) => {
       fontSize: 14,
       marginBottom: 20,
     },
+    balanceSubtitle: {
+      color: secondTextColor,
+      fontSize: 14,
+      marginBottom: 6,
+    },
     cancelButtonLookingFor: {
       borderColor: buttonBackgroundColor,
       borderWidth: 3,
@@ -327,13 +332,14 @@ const TransactionsScreenStyles = (isDarkMode) => {
     },
     amountModalView: {
       margin: 20,
-      height: 420,
       width: "90%",
       backgroundColor: modalBackgroundColor,
       borderRadius: 20,
       padding: 35,
       alignItems: "center",
+      flex: 0, // 默认值：内部内容会撑开容器高度
     },
+
     /*  History */
     historyItemText: {
       fontSize: 16,
