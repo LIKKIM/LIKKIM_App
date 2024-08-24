@@ -9,6 +9,11 @@ export const detectNetwork = (address) => {
     return "Ethereum (ETH)/BNB Smart Chain (BSC)/Polygon (MATIC)/Fantom (FTM)/Arbitrum (ARB)/Avalanche (AVAX)/Huobi ECO Chain (HECO)/OKX Chain (OKT)/Optimism (OP)/Gnosis Chain (xDAI)/zkSync Era Mainnet (zkSync)/Linea (Linea)/Mantle (Mantle)/Ethereum Classic (ETC)/EthereumPoW (ETHW)/Base (BASE)/Boba Network (BOBA)/Celo (CELO)";
   }
 
+  // Tron
+  else if (/^T[A-Za-z1-9]{33}$/.test(address)) {
+    return "Tron (TRX)";
+  }
+
   // Solana
   else if (/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(address)) {
     return "Solana (SOL)";
@@ -32,11 +37,6 @@ export const detectNetwork = (address) => {
   // Secret Network
   else if (/^secret1[0-9a-z]{38}$/.test(address)) {
     return "Secret Network (SCRT)";
-  }
-
-  // Tron
-  else if (/^T[A-Za-z1-9]{33}$/.test(address)) {
-    return "Tron (TRX)";
   }
 
   // Kaspa
