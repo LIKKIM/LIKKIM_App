@@ -92,7 +92,7 @@ const initialAdditionalCryptos = [
     queryChainShortName: "TRON", // 用于查询的字段
     chainIcon: require("../assets/icon/TRXIcon.png"),
     tokenType: "TRC20", // 代币类型
-    fee: "1", // 手续费
+    fee: "2.0", // 手续费
     valueUsd: "0.0", // 总美元价值
     priceUsd: "1.0", // 每个代币的美元价格
   },
@@ -222,7 +222,7 @@ export const usdtCrypto = {
   queryChainShortName: "TRON", // 用于查询的字段
   chainIcon: require("../assets/icon/TRXIcon.png"),
   tokenType: "TRC20", // 代币类型
-  fee: "1", // 手续费
+  fee: "2.0", // 手续费
   valueUsd: "0.0", // 总美元价值
   priceUsd: "1.0", // 每个代币的美元价格
 };
