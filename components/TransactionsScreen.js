@@ -266,6 +266,7 @@ function TransactionsScreen() {
         setBalance(selected.balance);
         setPriceUsd(selected.priceUsd);
         setValueUsd(selected.valueUsd);
+        setFee(selected.fee);
       }
     }
   }, [initialAdditionalCryptos, amountModalVisible]);
