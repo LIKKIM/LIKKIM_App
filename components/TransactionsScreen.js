@@ -63,6 +63,10 @@ function TransactionsScreen() {
   const [selectedCrypto, setSelectedCrypto] = useState("");
   const [selectedCryptoChain, setSelectedCryptoChain] = useState("");
   const [selectedAddress, setSelectedAddress] = useState("");
+  const [balance, setBalance] = useState("");
+  const [valueUsd, setValueUsd] = useState("");
+  const [fee, setFee] = useState("");
+  const [priceUsd, setPriceUsd] = useState("");
   const [selectedCryptoIcon, setSelectedCryptoIcon] = useState(null);
   const iconColor = isDarkMode ? "#ffffff" : "#24234C";
   const darkColors = ["#24234C", "#101021"];
@@ -1072,6 +1076,10 @@ function TransactionsScreen() {
     setSelectedCryptoChain(crypto.chain);
     setSelectedAddress(crypto.address);
     setSelectedCryptoIcon(crypto.icon);
+    setBalance(crypto.balance);
+    setValueUsd(crypto.valueUsd);
+    setFee(crypto.fee);
+    setPriceUsd(crypto.priceUsd);
     setIsVerifyingAddress(false);
     setModalVisible(false);
 
@@ -1317,10 +1325,24 @@ function TransactionsScreen() {
                   {selectedCrypto} ({selectedCryptoChain})
                 </Text>
               </View>
+
+              {/* 显示余额和相关信息 */}
+              <View style={{ marginBottom: 15 }}>
+                {/*       <Text style={TransactionsScreenStyle.infoText}>
+                  {t("Price per unit in USD")}: ${priceUsd}
+                </Text> */}
+              </View>
+
               <Text style={TransactionsScreenStyle.modalTitle}>
                 {t("Enter the amount to send:")}
               </Text>
-              <View style={{ width: "100%" }}>
+              <View
+                style={{
+                  width: "100%",
+
+                  alignItems: "center",
+                }}
+              >
                 <TextInput
                   style={[
                     TransactionsScreenStyle.amountInput,
@@ -1340,7 +1362,28 @@ function TransactionsScreen() {
                   autoFocus={true}
                   caretHidden={true} // 隐藏光标
                 />
+                <Text style={TransactionsScreenStyle.amountSubtitle}>
+                  {t("Value in USD")}: ${valueUsd}
+                </Text>
               </View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  width: 280,
+                  justifyContent: "space-between",
+                }}
+              >
+                <View>
+                  <Text style={TransactionsScreenStyle.amountSubtitle}>
+                    {t("Balance")}: {balance} {selectedCrypto}
+                  </Text>
+                </View>
+
+                <Text style={TransactionsScreenStyle.amountSubtitle}>
+                  {t("Fee")}: {fee} {selectedCrypto}
+                </Text>
+              </View>
+
               <View
                 style={{
                   flexDirection: "column",

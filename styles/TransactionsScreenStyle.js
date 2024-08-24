@@ -133,6 +133,11 @@ const TransactionsScreenStyles = (isDarkMode) => {
       fontSize: 14,
       marginBottom: 20,
     },
+    amountSubtitle: {
+      color: secondTextColor,
+      fontSize: 14,
+      marginBottom: 20,
+    },
     cancelButtonLookingFor: {
       borderColor: buttonBackgroundColor,
       borderWidth: 3,
@@ -314,7 +319,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       backgroundColor: inputBackgroundColor,
       padding: 10,
       marginTop: 20,
-      marginBottom: 20,
+      // marginBottom: 20,
       justifyContent: "center",
       borderRadius: 10,
       height: 60,
@@ -322,7 +327,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
     },
     amountModalView: {
       margin: 20,
-      height: 360,
+      height: 420,
       width: "90%",
       backgroundColor: modalBackgroundColor,
       borderRadius: 20,
