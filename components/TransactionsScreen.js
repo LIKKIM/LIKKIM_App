@@ -144,7 +144,6 @@ function TransactionsScreen() {
   // 在 amountModalVisible 状态变为 true 时发送 POST 请求
   useEffect(() => {
     if (amountModalVisible) {
-      setAmount("");
       const fetchTokenBalance = async () => {
         try {
           const response = await fetch(
@@ -224,7 +223,19 @@ function TransactionsScreen() {
       fetchTokenBalance();
     }
   }, [amountModalVisible]);
-
+  // 监听 initialAdditionalCryptos 的变化，更新 Modal 中的数据
+  useEffect(() => {
+    if (amountModalVisible) {
+      const selected = initialAdditionalCryptos.find(
+        (crypto) => crypto.shortName === selectedCrypto
+      );
+      if (selected) {
+        setBalance(selected.balance);
+        setPriceUsd(selected.priceUsd);
+        setValueUsd(selected.valueUsd);
+      }
+    }
+  }, [initialAdditionalCryptos, amountModalVisible]);
   useEffect(() => {
     console.log("Current initialAdditionalCryptos:", initialAdditionalCryptos);
   }, [initialAdditionalCryptos]);
