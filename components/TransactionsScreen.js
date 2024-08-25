@@ -90,10 +90,10 @@ function TransactionsScreen() {
   const [devices, setDevices] = useState([]);
   const [pinModalVisible, setPinModalVisible] = useState(false);
   const [pinCode, setPinCode] = useState("");
-  const [showCloseButton, setShowCloseButton] = useState(false);
+
   const restoreIdentifier = Constants.installationId;
   const [isAddressValid, setIsAddressValid] = useState(false);
-  const [pendingModalVisible, setPendingModalVisible] = useState(false);
+
   const [verificationSuccessModalVisible, setVerificationSuccessModalVisible] =
     useState(false);
   const [isVerifyingAddress, setIsVerifyingAddress] = useState(false);
@@ -107,6 +107,11 @@ function TransactionsScreen() {
   const [addressVerificationMessage, setAddressVerificationMessage] = useState(
     t("Verifying Address on LIKKIM...")
   );
+  const [modalStatus, setModalStatus] = useState({
+    title: t("Confirming Transaction on LIKKIM Device..."),
+    subtitle: t("Please confirm the transaction on your LIKKIM device."),
+    image: require("../assets/gif/Pending.gif"),
+  });
 
   // 扫描蓝牙设备的函数
   const scanDevices = () => {
@@ -501,10 +506,26 @@ function TransactionsScreen() {
                 // 在这里检查 result.code 的值并打印相应的消息
                 if (result.code === 0 && result.msg === "success") {
                   console.log("签名广播成功");
-                  setShowCloseButton(true); // 显示关闭按钮
+
+                  // 更新模态框文案和 GIF
+                  setModalStatus({
+                    title: t("Transaction Successful"),
+                    subtitle: t(
+                      "Your transaction has been successfully processed."
+                    ),
+                    image: require("../assets/gif/Success.gif"),
+                  });
                 } else if (result.code === -1) {
                   console.log("签名广播失败");
-                  setShowCloseButton(true); // 显示关闭按钮
+
+                  // 更新模态框文案和 GIF
+                  setModalStatus({
+                    title: t("Transaction Failed"),
+                    subtitle: t(
+                      "The transaction could not be processed. Please try again."
+                    ),
+                    image: require("../assets/gif/Fail.gif"),
+                  });
                 }
 
                 if (Array.isArray(result.data)) {
@@ -1698,7 +1719,6 @@ function TransactionsScreen() {
                   style={TransactionsScreenStyle.optionButton}
                   onPress={async () => {
                     try {
-                      setPendingModalVisible(true);
                       const response = await fetch(
                         "https://bt.likkim.com/meridian/address/queryBlockList",
                         {
@@ -2101,10 +2121,10 @@ function TransactionsScreen() {
           <View style={TransactionsScreenStyle.centeredView}>
             <View style={TransactionsScreenStyle.pendingModalView}>
               <Text style={TransactionsScreenStyle.modalTitle}>
-                {t("Confirming Transaction on LIKKIM Device...")}
+                {modalStatus.title}
               </Text>
               <Image
-                source={require("../assets/gif/Pending.gif")}
+                source={modalStatus.image}
                 style={{ width: 120, height: 120 }}
               />
               <Text
@@ -2113,53 +2133,16 @@ function TransactionsScreen() {
                   { marginBottom: 20 },
                 ]}
               >
-                {t("Please confirm the transaction on your LIKKIM device.")}
+                {modalStatus.subtitle}
               </Text>
               <TouchableOpacity
                 style={TransactionsScreenStyle.submitButton}
                 onPress={() => setConfirmingTransactionModalVisible(false)}
               >
                 <Text style={TransactionsScreenStyle.submitButtonText}>
-                  {t("Cancel Signature")}
+                  {t("Close")}
                 </Text>
               </TouchableOpacity>
-            </View>
-          </View>
-        </Modal>
-        {/* pending modal */}
-        <Modal
-          visible={pendingModalVisible}
-          onRequestClose={() => setPendingModalVisible(false)}
-          transparent={true}
-          animationType="slide"
-        >
-          <View style={TransactionsScreenStyle.centeredView}>
-            <View style={TransactionsScreenStyle.pendingModalView}>
-              <Text style={TransactionsScreenStyle.modalTitle}>
-                {t("Processing Transaction...")}
-              </Text>
-              <Image
-                source={require("../assets/gif/Pending.gif")}
-                style={{ width: 120, height: 120 }}
-              />
-              <Text style={TransactionsScreenStyle.modalSubtitle}>
-                {t("Please wait while your transaction is being processed.")}
-              </Text>
-
-              {/* 仅在显示关闭按钮时渲染 */}
-              {showCloseButton && (
-                <TouchableOpacity
-                  style={TransactionsScreenStyle.submitButton}
-                  onPress={() => {
-                    setPendingModalVisible(false);
-                    setShowCloseButton(false); // 隐藏 modal 并重置按钮状态
-                  }}
-                >
-                  <Text style={TransactionsScreenStyle.submitButtonText}>
-                    {t("Close")}
-                  </Text>
-                </TouchableOpacity>
-              )}
             </View>
           </View>
         </Modal>
