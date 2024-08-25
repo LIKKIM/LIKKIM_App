@@ -836,7 +836,7 @@ function TransactionsScreen() {
       }
 
       // 将 amount 乘以 1000000
-      const adjustedAmount = BigInt(amount) * BigInt(1000000);
+      const adjustedAmount = BigInt(Math.round(parseFloat(amount) * 1000000));
       console.log(`Adjusted Amount (in smallest unit): ${adjustedAmount}`);
 
       // 将调整后的金额转换为十六进制
@@ -2134,7 +2134,7 @@ function TransactionsScreen() {
                 {t("Processing Transaction...")}
               </Text>
               <Image
-                source={require("../assets/loading.gif")} // 替换为实际的加载图标
+                source={require("../assets/gif/Pending.gif")}
                 style={{ width: 120, height: 120 }}
               />
               <Text style={TransactionsScreenStyle.modalSubtitle}>
