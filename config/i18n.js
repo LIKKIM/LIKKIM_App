@@ -141,6 +141,24 @@ i18n
           "Transaction Fee": "Transaction Fee",
           Confirm: "Confirm",
           "Transaction Confirmation": "Transaction Confirmation",
+          "Screen lock enabled successfully":
+            "Screen lock enabled successfully",
+          "Success!": "Success!",
+          "Enable Face ID": "Enable Face ID",
+          "I lost my password": "I lost my password",
+          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
+            "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.",
+          "Value in USD": "Value in USD",
+          Fee: "Fee",
+          "Confirming Transaction on LIKKIM Device...":
+            "Confirming Transaction on LIKKIM Device...",
+          "Please confirm the transaction on your LIKKIM device.":
+            "Please confirm the transaction on your LIKKIM device.",
+          "Verifying Address on LIKKIM...": "Verifying Address on LIKKIM...",
+          "Importing on LIKKIM Hardware...": "Importing on LIKKIM Hardware...",
+          "Your device is already verified.":
+            "Your device is already verified.",
+          "Creating on LIKKIM Hardware...": "Creating on LIKKIM Hardware...",
         },
       },
       zh: {
@@ -224,7 +242,6 @@ i18n
           "Use spaces between words": "单词之间用空格分隔",
           "Import Recovery Phrase": "导入恢复短语",
           Version: "版本",
-
           "Assets can only be sent within the same chain.":
             "资产只能在同一链内发送。",
           "Firmware Update": "固件更新",
@@ -272,6 +289,22 @@ i18n
           "Transaction Fee": "交易费",
           Confirm: "确认",
           "Transaction Confirmation": "交易确认",
+          "Screen lock enabled successfully": "屏幕锁已成功启用",
+          "Success!": "成功！",
+          "Enable Face ID": "启用面容ID",
+          "I lost my password": "我忘记了密码",
+          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
+            "请卸载然后重新安装应用程序以删除 LIKKIM 应用数据，包括账户和设置。",
+          "Value in USD": "以美元计值",
+          Fee: "手续费用",
+          "Confirming Transaction on LIKKIM Device...":
+            "正在 LIKKIM 设备上确认交易...",
+          "Please confirm the transaction on your LIKKIM device.":
+            "请在您的 LIKKIM 设备上确认交易。",
+          "Verifying Address on LIKKIM...": "正在 LIKKIM 上验证地址...",
+          "Importing on LIKKIM Hardware...": "正在 LIKKIM 硬件上导入...",
+          "Your device is already verified.": "您的设备已验证。",
+          "Creating on LIKKIM Hardware...": "正在 LIKKIM 硬件上创建...",
         },
       },
       "zh-TW": {
@@ -407,6 +440,22 @@ i18n
           "Transaction Fee": "交易費",
           Confirm: "確認",
           "Transaction Confirmation": "交易確認",
+          "Screen lock enabled successfully": "螢幕鎖已成功啟用",
+          "Success!": "成功！",
+          "Enable Face ID": "啟用面容ID",
+          "I lost my password": "我忘記了密碼",
+          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
+            "請卸載然後重新安裝應用程式以刪除 LIKKIM 應用資料，包括帳戶和設置。",
+          "Value in USD": "以美元計值",
+          Fee: "手续費用",
+          "Confirming Transaction on LIKKIM Device...":
+            "正在 LIKKIM 設備上確認交易...",
+          "Please confirm the transaction on your LIKKIM device.":
+            "請在您的 LIKKIM 設備上確認交易。",
+          "Verifying Address on LIKKIM...": "正在 LIKKIM 上驗證地址...",
+          "Importing on LIKKIM Hardware...": "正在 LIKKIM 硬體上導入...",
+          "Your device is already verified.": "您的設備已驗證。",
+          "Creating on LIKKIM Hardware...": "正在 LIKKIM 硬體上創建...",
         },
       },
       fr: {
@@ -498,7 +547,6 @@ i18n
           "Use spaces between words": "Utilisez des espaces entre les mots",
           "Import Recovery Phrase": "Importer la phrase de récupération",
           Version: "Version",
-
           "Assets can only be sent within the same chain.":
             "Les actifs ne peuvent être envoyés que sur la même chaîne.",
           "Firmware Update": "Mise à jour du firmware",
@@ -550,6 +598,48 @@ i18n
           "Transaction Fee": "Frais de transaction",
           Confirm: "Confirmer",
           "Transaction Confirmation": "Confirmation de transaction",
+          "Screen lock enabled successfully":
+            "Verrouillage d'écran activé avec succès",
+          "Success!": "Succès !",
+          "Enable Face ID": "Activer Face ID",
+          "I lost my password": "J'ai perdu mon mot de passe",
+          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
+            "Veuillez désinstaller puis réinstaller l'application sur votre téléphone pour supprimer les données de l'application LIKKIM, y compris les comptes et les paramètres.",
+          "Value in USD": "Valeur en USD",
+          Fee: "Frais",
+          "Confirming Transaction on LIKKIM Device...":
+            "Confirmation de la transaction sur le dispositif LIKKIM...",
+          "Please confirm the transaction on your LIKKIM device.":
+            "Veuillez confirmer la transaction sur votre dispositif LIKKIM.",
+          "Verifying Address on LIKKIM...":
+            "Vérification de l'adresse sur LIKKIM...",
+          "Importing on LIKKIM Hardware...":
+            "Importation sur le matériel LIKKIM...",
+          "Your device is already verified.":
+            "Votre appareil est déjà vérifié.",
+          "Creating on LIKKIM Hardware...":
+            "Création sur le matériel LIKKIM...",
+          "Screen lock enabled successfully":
+            "Verrouillage d'écran activé avec succès",
+          "Success!": "Succès !",
+          "Enable Face ID": "Activer Face ID",
+          "I lost my password": "J'ai perdu mon mot de passe",
+          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
+            "Veuillez désinstaller puis réinstaller l'application sur votre téléphone pour supprimer les données de l'application LIKKIM, y compris les comptes et les paramètres.",
+          "Value in USD": "Valeur en USD",
+          Fee: "Frais",
+          "Confirming Transaction on LIKKIM Device...":
+            "Confirmation de la transaction sur le dispositif LIKKIM...",
+          "Please confirm the transaction on your LIKKIM device.":
+            "Veuillez confirmer la transaction sur votre dispositif LIKKIM.",
+          "Verifying Address on LIKKIM...":
+            "Vérification de l'adresse sur LIKKIM...",
+          "Importing on LIKKIM Hardware...":
+            "Importation sur le matériel LIKKIM...",
+          "Your device is already verified.":
+            "Votre appareil est déjà vérifié.",
+          "Creating on LIKKIM Hardware...":
+            "Création sur le matériel LIKKIM...",
         },
       },
       es: {
@@ -641,7 +731,6 @@ i18n
           "Use spaces between words": "Usa espacios entre las palabras",
           "Import Recovery Phrase": "Importar frase de recuperación",
           Version: "Versión",
-
           "Assets can only be sent within the same chain.":
             "Los activos solo se pueden enviar dentro de la misma cadena.",
           "Firmware Update": "Actualización de firmware",
@@ -692,6 +781,25 @@ i18n
           "Transaction Fee": "Tarifa de transacción",
           Confirm: "Confirmar",
           "Transaction Confirmation": "Confirmación de transacción",
+          "Screen lock enabled successfully":
+            "Bloqueo de pantalla habilitado con éxito",
+          "Success!": "¡Éxito!",
+          "Enable Face ID": "Habilitar Face ID",
+          "I lost my password": "Perdí mi contraseña",
+          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
+            "Desinstale y luego reinstale la aplicación en su teléfono para eliminar los datos de la aplicación LIKKIM, incluidos los cuentas y configuraciones.",
+          "Value in USD": "Valor en USD",
+          Fee: "Tarifa",
+          "Confirming Transaction on LIKKIM Device...":
+            "Confirmando transacción en el dispositivo LIKKIM...",
+          "Please confirm the transaction on your LIKKIM device.":
+            "Por favor confirme la transacción en su dispositivo LIKKIM.",
+          "Verifying Address on LIKKIM...":
+            "Verificando dirección en LIKKIM...",
+          "Importing on LIKKIM Hardware...": "Importando en hardware LIKKIM...",
+          "Your device is already verified.":
+            "Su dispositivo ya está verificado.",
+          "Creating on LIKKIM Hardware...": "Creando en hardware LIKKIM...",
         },
       },
       ar: {
@@ -733,7 +841,6 @@ i18n
           "Enter the recipient's address:": "أدخل عنوان المستلم:",
           "Enter Address": "أدخل العنوان",
           Submit: "إرسال",
-
           "Choose the cryptocurrency to send:": "اختر العملة الرقمية لإرسالها:",
           "Choose the cryptocurrency to receive:":
             "اختر العملة الرقمية للاستلام:",
@@ -779,7 +886,6 @@ i18n
           "Use spaces between words": "استخدم مسافات بين الكلمات",
           "Import Recovery Phrase": "استيراد عبارة الاسترداد",
           Version: "الإصدار",
-
           "Assets can only be sent within the same chain.":
             "يمكن إرسال الأصول فقط ضمن نفس السلسلة.",
           "Firmware Update": "تحديث البرنامج الثابت",
@@ -829,6 +935,24 @@ i18n
           "Transaction Fee": "رسوم التحويل",
           Confirm: "تأكيد",
           "Transaction Confirmation": "تأكيد المعاملة",
+          "Screen lock enabled successfully": "تم تفعيل قفل الشاشة بنجاح",
+          "Success!": "نجاح!",
+          "Enable Face ID": "تفعيل بصمة الوجه",
+          "I lost my password": "فقدت كلمة المرور الخاصة بي",
+          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
+            "يرجى إلغاء تثبيت ثم إعادة تثبيت التطبيق على هاتفك لحذف بيانات تطبيق LIKKIM، بما في ذلك الحسابات والإعدادات.",
+          "Value in USD": "القيمة بالدولار الأمريكي",
+          Fee: "رسوم",
+          "Confirming Transaction on LIKKIM Device...":
+            "تأكيد المعاملة على جهاز LIKKIM...",
+          "Please confirm the transaction on your LIKKIM device.":
+            "يرجى تأكيد المعاملة على جهاز LIKKIM الخاص بك.",
+          "Verifying Address on LIKKIM...":
+            "جارٍ التحقق من العنوان على LIKKIM...",
+          "Importing on LIKKIM Hardware...":
+            "جاري الاستيراد على جهاز LIKKIM...",
+          "Your device is already verified.": "تم التحقق من جهازك بالفعل.",
+          "Creating on LIKKIM Hardware...": "جارٍ الإنشاء على جهاز LIKKIM...",
         },
       },
       ja: {
@@ -919,7 +1043,6 @@ i18n
           "Use spaces between words": "単語の間にスペースを使用",
           "Import Recovery Phrase": "リカバリーフレーズをインポート",
           Version: "バージョン",
-
           "Assets can only be sent within the same chain.":
             "資産は同じチェーン内でのみ送信できます。",
           "Firmware Update": "تحديث البرنامج الثابت",
@@ -971,6 +1094,44 @@ i18n
           "Transaction Fee": "取引手数料",
           Confirm: "確認",
           "Transaction Confirmation": "トランザクションの確認",
+          "Screen lock enabled successfully":
+            "スクリーンロックが正常に有効化されました",
+          "Success!": "成功！",
+          "Enable Face ID": "Face IDを有効にする",
+          "I lost my password": "パスワードを忘れた",
+          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
+            "LIKKIMアプリのデータ（アカウントや設定を含む）を削除するには、アプリをアンインストールしてから再インストールしてください。",
+          "Value in USD": "米ドルでの値",
+          Fee: "手数料",
+          "Confirming Transaction on LIKKIM Device...":
+            "LIKKIMデバイスで取引を確認しています...",
+          "Please confirm the transaction on your LIKKIM device.":
+            "LIKKIMデバイスで取引を確認してください。",
+          "Verifying Address on LIKKIM...": "LIKKIMでアドレスを確認中...",
+          "Importing on LIKKIM Hardware...":
+            "LIKKIMハードウェアでインポート中...",
+          "Your device is already verified.":
+            "お使いのデバイスは既に認証されています。",
+          "Creating on LIKKIM Hardware...": "LIKKIMハードウェアで作成中...",
+          "Screen lock enabled successfully":
+            "スクリーンロックが正常に有効化されました",
+          "Success!": "成功！",
+          "Enable Face ID": "Face IDを有効にする",
+          "I lost my password": "パスワードを忘れた",
+          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
+            "LIKKIMアプリのデータ（アカウントや設定を含む）を削除するには、アプリをアンインストールしてから再インストールしてください。",
+          "Value in USD": "米ドルでの値",
+          Fee: "手数料",
+          "Confirming Transaction on LIKKIM Device...":
+            "LIKKIMデバイスで取引を確認しています...",
+          "Please confirm the transaction on your LIKKIM device.":
+            "LIKKIMデバイスで取引を確認してください。",
+          "Verifying Address on LIKKIM...": "LIKKIMでアドレスを確認中...",
+          "Importing on LIKKIM Hardware...":
+            "LIKKIMハードウェアでインポート中...",
+          "Your device is already verified.":
+            "お使いのデバイスは既に認証されています。",
+          "Creating on LIKKIM Hardware...": "LIKKIMハードウェアで作成中...",
         },
       },
       ru: {
@@ -1111,6 +1272,24 @@ i18n
           "Transaction Fee": "Комиссия за транзакцию",
           Confirm: "Подтвердить",
           "Transaction Confirmation": "Подтверждение транзакции",
+          "Screen lock enabled successfully":
+            "Экранная блокировка успешно включена",
+          "Success!": "Успех!",
+          "Enable Face ID": "Включить Face ID",
+          "I lost my password": "Я забыл свой пароль",
+          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
+            "Пожалуйста, удалите и снова установите приложение на вашем телефоне, чтобы удалить данные приложения LIKKIM, включая аккаунты и настройки.",
+          "Value in USD": "Значение в долларах США",
+          Fee: "Комиссия",
+          "Confirming Transaction on LIKKIM Device...":
+            "Подтверждение транзакции на устройстве LIKKIM...",
+          "Please confirm the transaction on your LIKKIM device.":
+            "Пожалуйста, подтвердите транзакцию на вашем устройстве LIKKIM.",
+          "Verifying Address on LIKKIM...": "Проверка адреса на LIKKIM...",
+          "Importing on LIKKIM Hardware...": "Импорт на оборудование LIKKIM...",
+          "Your device is already verified.": "Ваше устройство уже проверено.",
+          "Creating on LIKKIM Hardware...":
+            "Создание на оборудовании LIKKIM...",
         },
       },
       ko: {
@@ -1245,6 +1424,23 @@ i18n
           "Transaction Fee": "거래 수수료",
           Confirm: "확인",
           "Transaction Confirmation": "거래 확인",
+          "Screen lock enabled successfully":
+            "화면 잠금이 성공적으로 활성화되었습니다",
+          "Success!": "성공!",
+          "Enable Face ID": "Face ID 활성화",
+          "I lost my password": "비밀번호를 잊어버렸습니다",
+          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
+            "LIKKIM 앱 데이터를 삭제하려면 앱을 삭제한 후 다시 설치하십시오. 여기에는 계정 및 설정이 포함됩니다.",
+          "Value in USD": "미국 달러로 된 값",
+          Fee: "수수료",
+          "Confirming Transaction on LIKKIM Device...":
+            "LIKKIM 장치에서 거래를 확인하는 중...",
+          "Please confirm the transaction on your LIKKIM device.":
+            "LIKKIM 장치에서 거래를 확인하십시오.",
+          "Verifying Address on LIKKIM...": "LIKKIM에서 주소를 확인하는 중...",
+          "Importing on LIKKIM Hardware...": "LIKKIM 하드웨어로 가져오는 중...",
+          "Your device is already verified.": "장치가 이미 확인되었습니다.",
+          "Creating on LIKKIM Hardware...": "LIKKIM 하드웨어에서 생성 중...",
         },
       },
       pt: {
@@ -1385,6 +1581,24 @@ i18n
           "Transaction Fee": "Taxa de transação",
           Confirm: "Confirmar",
           "Transaction Confirmation": "Confirmação de transação",
+          "Screen lock enabled successfully":
+            "Bloqueio de tela ativado com sucesso",
+          "Success!": "Sucesso!",
+          "Enable Face ID": "Ativar Face ID",
+          "I lost my password": "Perdi minha senha",
+          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
+            "Desinstale e reinstale o aplicativo no seu telefone para excluir os dados do aplicativo LIKKIM, incluindo contas e configurações.",
+          "Value in USD": "Valor em USD",
+          Fee: "Taxa",
+          "Confirming Transaction on LIKKIM Device...":
+            "Confirmando transação no dispositivo LIKKIM...",
+          "Please confirm the transaction on your LIKKIM device.":
+            "Por favor, confirme a transação no seu dispositivo LIKKIM.",
+          "Verifying Address on LIKKIM...": "Verificando endereço no LIKKIM...",
+          "Importing on LIKKIM Hardware...": "Importando no hardware LIKKIM...",
+          "Your device is already verified.":
+            "Seu dispositivo já está verificado.",
+          "Creating on LIKKIM Hardware...": "Criando no hardware LIKKIM...",
         },
       },
       "pt-BR": {
@@ -1526,6 +1740,24 @@ i18n
           "Transaction Fee": "Taxa de transação",
           Confirm: "Confirmar",
           "Transaction Confirmation": "Confirmação de transação",
+          "Screen lock enabled successfully":
+            "Bloqueio de tela ativado com sucesso",
+          "Success!": "Sucesso!",
+          "Enable Face ID": "Ativar Face ID",
+          "I lost my password": "Perdi minha senha",
+          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
+            "Desinstale e reinstale o aplicativo no seu telefone para excluir os dados do aplicativo LIKKIM, incluindo contas e configurações.",
+          "Value in USD": "Valor em USD",
+          Fee: "Taxa",
+          "Confirming Transaction on LIKKIM Device...":
+            "Confirmando transação no dispositivo LIKKIM...",
+          "Please confirm the transaction on your LIKKIM device.":
+            "Por favor, confirme a transação no seu dispositivo LIKKIM.",
+          "Verifying Address on LIKKIM...": "Verificando endereço no LIKKIM...",
+          "Importing on LIKKIM Hardware...": "Importando no hardware LIKKIM...",
+          "Your device is already verified.":
+            "Seu dispositivo já está verificado.",
+          "Creating on LIKKIM Hardware...": "Criando no hardware LIKKIM...",
         },
       },
       it: {
@@ -1667,6 +1899,26 @@ i18n
           "Transaction Fee": "Commissione di transazione",
           Confirm: "Confermare",
           "Transaction Confirmation": "Conferma della transazione",
+          "Screen lock enabled successfully":
+            "Blocco schermo abilitato con successo",
+          "Success!": "Successo!",
+          "Enable Face ID": "Abilita Face ID",
+          "I lost my password": "Ho perso la mia password",
+          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
+            "Disinstalla e reinstalla l'app sul tuo telefono per eliminare i dati dell'app LIKKIM, inclusi account e impostazioni.",
+          "Value in USD": "Valore in USD",
+          Fee: "Commissione",
+          "Confirming Transaction on LIKKIM Device...":
+            "Conferma della transazione sul dispositivo LIKKIM...",
+          "Please confirm the transaction on your LIKKIM device.":
+            "Si prega di confermare la transazione sul dispositivo LIKKIM.",
+          "Verifying Address on LIKKIM...":
+            "Verifica dell'indirizzo su LIKKIM...",
+          "Importing on LIKKIM Hardware...":
+            "Importazione su hardware LIKKIM...",
+          "Your device is already verified.":
+            "Il tuo dispositivo è già verificato.",
+          "Creating on LIKKIM Hardware...": "Creazione su hardware LIKKIM...",
         },
       },
       de: {
@@ -1810,6 +2062,25 @@ i18n
           "Transaction Fee": "Transaktionsgebühr",
           Confirm: "Bestätigen",
           "Transaction Confirmation": "Transaktionsbestätigung",
+          "Screen lock enabled successfully":
+            "Bildschirmsperre erfolgreich aktiviert",
+          "Success!": "Erfolg!",
+          "Enable Face ID": "Face ID aktivieren",
+          "I lost my password": "Ich habe mein Passwort verloren",
+          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
+            "Bitte deinstallieren Sie die App und installieren Sie sie dann erneut auf Ihrem Telefon, um die LIKKIM-App-Daten, einschließlich Konten und Einstellungen, zu löschen.",
+          "Value in USD": "Wert in USD",
+          Fee: "Gebühr",
+          "Confirming Transaction on LIKKIM Device...":
+            "Bestätigen der Transaktion auf dem LIKKIM-Gerät...",
+          "Please confirm the transaction on your LIKKIM device.":
+            "Bitte bestätigen Sie die Transaktion auf Ihrem LIKKIM-Gerät.",
+          "Verifying Address on LIKKIM...": "Adresse auf LIKKIM überprüfen...",
+          "Importing on LIKKIM Hardware...":
+            "Importieren auf LIKKIM-Hardware...",
+          "Your device is already verified.":
+            "Ihr Gerät ist bereits verifiziert.",
+          "Creating on LIKKIM Hardware...": "Erstellen auf LIKKIM-Hardware...",
         },
       },
       hi: {
@@ -1949,6 +2220,27 @@ i18n
           "Transaction Fee": "लेन-देन शुल्क",
           Confirm: "पुष्टि करें",
           "Transaction Confirmation": "लेन-देन की पुष्टि",
+          "Screen lock enabled successfully":
+            "स्क्रीन लॉक सफलतापूर्वक सक्षम किया गया",
+          "Success!": "सफलता!",
+          "Enable Face ID": "फेस आईडी सक्षम करें",
+          "I lost my password": "मैंने अपना पासवर्ड खो दिया है",
+          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
+            "कृपया LIKKIM ऐप डेटा, जिसमें खाते और सेटिंग्स शामिल हैं, को हटाने के लिए ऐप को अनइंस्टॉल करें और फिर से इंस्टॉल करें।",
+          "Value in USD": "यूएसडी में मूल्य",
+          Fee: "शुल्क",
+          "Confirming Transaction on LIKKIM Device...":
+            "LIKKIM डिवाइस पर लेन-देन की पुष्टि कर रहे हैं...",
+          "Please confirm the transaction on your LIKKIM device.":
+            "कृपया अपने LIKKIM डिवाइस पर लेन-देन की पुष्टि करें।",
+          "Verifying Address on LIKKIM...":
+            "LIKKIM पर पते की पुष्टि कर रहे हैं...",
+          "Importing on LIKKIM Hardware...":
+            "LIKKIM हार्डवेयर पर आयात कर रहे हैं...",
+          "Your device is already verified.":
+            "आपका डिवाइस पहले ही सत्यापित हो चुका है।",
+          "Creating on LIKKIM Hardware...":
+            "LIKKIM हार्डवेयर पर बना रहे हैं...",
         },
       },
       mn: {
@@ -2090,6 +2382,35 @@ i18n
           "Transaction Fee": "Гүйлгээний хураамж",
           Confirm: "Баталгаажуулах",
           "Transaction Confirmation": "Гүйлгээ баталгаажуулалт",
+          "Confirming Transaction on LIKKIM Device...":
+            "LIKKIM төхөөрөмж дээр гүйлгээг баталгаажуулж байна...",
+          "Please confirm the transaction on your LIKKIM device.":
+            "LIKKIM төхөөрөмж дээр гүйлгээг баталгаажуулна уу.",
+          "Verifying Address on LIKKIM...":
+            "LIKKIM дээр хаягийг шалгаж байна...",
+          "Importing on LIKKIM Hardware...":
+            "LIKKIM тоног төхөөрөмж дээр импортлож байна...",
+          "Your device is already verified.":
+            "Таны төхөөрөмж аль хэдийн баталгаажсан.",
+          "Creating on LIKKIM Hardware...":
+            "LIKKIM тоног төхөөрөмж дээр үүсгэж байна...",
+          "Screen lock enabled successfully": "เปิดการล็อคหน้าจอเรียบร้อยแล้ว",
+          "Success!": "สำเร็จ!",
+          "Enable Face ID": "เปิดใช้งาน Face ID",
+          "I lost my password": "ฉันลืมรหัสผ่าน",
+          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
+            "โปรดถอนการติดตั้งแล้วติดตั้งแอปใหม่ในโทรศัพท์ของคุณเพื่อทำการลบข้อมูลแอป LIKKIM รวมถึงบัญชีและการตั้งค่า",
+          "Value in USD": "มูลค่าในสกุลเงิน USD",
+          Fee: "ค่าธรรมเนียม",
+          "Confirming Transaction on LIKKIM Device...":
+            "กำลังยืนยันธุรกรรมบนอุปกรณ์ LIKKIM...",
+          "Please confirm the transaction on your LIKKIM device.":
+            "โปรดยืนยันธุรกรรมบนอุปกรณ์ LIKKIM ของคุณ",
+          "Verifying Address on LIKKIM...": "กำลังยืนยันที่อยู่บน LIKKIM...",
+          "Importing on LIKKIM Hardware...": "กำลังนำเข้าบนฮาร์ดแวร์ LIKKIM...",
+          "Your device is already verified.":
+            "อุปกรณ์ของคุณได้รับการยืนยันแล้ว",
+          "Creating on LIKKIM Hardware...": "กำลังสร้างบนฮาร์ดแวร์ LIKKIM...",
         },
       },
       th: {
@@ -2224,6 +2545,23 @@ i18n
           "Transaction Fee": "ค่าธรรมเนียมการทำธุรกรรม",
           Confirm: "ยืนยัน",
           "Transaction Confirmation": "ยืนยันการทำธุรกรรม",
+          "Screen lock enabled successfully": "เปิดการล็อคหน้าจอเรียบร้อยแล้ว",
+          "Success!": "สำเร็จ!",
+          "Enable Face ID": "เปิดใช้งาน Face ID",
+          "I lost my password": "ฉันลืมรหัสผ่าน",
+          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
+            "โปรดถอนการติดตั้งแล้วติดตั้งแอปใหม่ในโทรศัพท์ของคุณเพื่อทำการลบข้อมูลแอป LIKKIM รวมถึงบัญชีและการตั้งค่า",
+          "Value in USD": "มูลค่าในสกุลเงิน USD",
+          Fee: "ค่าธรรมเนียม",
+          "Confirming Transaction on LIKKIM Device...":
+            "กำลังยืนยันธุรกรรมบนอุปกรณ์ LIKKIM...",
+          "Please confirm the transaction on your LIKKIM device.":
+            "โปรดยืนยันธุรกรรมบนอุปกรณ์ LIKKIM ของคุณ",
+          "Verifying Address on LIKKIM...": "กำลังยืนยันที่อยู่บน LIKKIM...",
+          "Importing on LIKKIM Hardware...": "กำลังนำเข้าบนฮาร์ดแวร์ LIKKIM...",
+          "Your device is already verified.":
+            "อุปกรณ์ของคุณได้รับการยืนยันแล้ว",
+          "Creating on LIKKIM Hardware...": "กำลังสร้างบนฮาร์ดแวร์ LIKKIM...",
         },
       },
       uk: {
@@ -2361,6 +2699,25 @@ i18n
           "Transaction Fee": "Комісія за транзакцію",
           Confirm: "Підтвердити",
           "Transaction Confirmation": "Підтвердження транзакції",
+          "Screen lock enabled successfully":
+            "Блокування екрану успішно активовано",
+          "Success!": "Успіх!",
+          "Enable Face ID": "Увімкнути Face ID",
+          "I lost my password": "Я забув свій пароль",
+          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
+            "Будь ласка, видаліть програму і знову встановіть її на телефон, щоб видалити дані додатку LIKKIM, включаючи облікові записи та налаштування.",
+          "Value in USD": "Значення в доларах США",
+          Fee: "Комісія",
+          "Confirming Transaction on LIKKIM Device...":
+            "Підтвердження транзакції на пристрої LIKKIM...",
+          "Please confirm the transaction on your LIKKIM device.":
+            "Будь ласка, підтвердіть транзакцію на вашому пристрої LIKKIM.",
+          "Verifying Address on LIKKIM...": "Перевірка адреси на LIKKIM...",
+          "Importing on LIKKIM Hardware...":
+            "Імпорт на апаратному забезпеченні LIKKIM...",
+          "Your device is already verified.": "Ваш пристрій вже перевірено.",
+          "Creating on LIKKIM Hardware...":
+            "Створення на апаратному забезпеченні LIKKIM...",
         },
       },
       vi: {
@@ -2498,6 +2855,26 @@ i18n
           "Transaction Fee": "Phí giao dịch",
           Confirm: "Xác nhận",
           "Transaction Confirmation": "Xác nhận giao dịch",
+          "Screen lock enabled successfully":
+            "Khóa màn hình đã được bật thành công",
+          "Success!": "Thành công!",
+          "Enable Face ID": "Bật Face ID",
+          "I lost my password": "Tôi quên mật khẩu",
+          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
+            "Vui lòng gỡ cài đặt rồi cài đặt lại ứng dụng trên điện thoại của bạn để xóa dữ liệu ứng dụng LIKKIM, bao gồm tài khoản và cài đặt.",
+          "Value in USD": "Giá trị bằng USD",
+          Fee: "Phí",
+          "Confirming Transaction on LIKKIM Device...":
+            "Đang xác nhận giao dịch trên thiết bị LIKKIM...",
+          "Please confirm the transaction on your LIKKIM device.":
+            "Vui lòng xác nhận giao dịch trên thiết bị LIKKIM của bạn.",
+          "Verifying Address on LIKKIM...":
+            "Đang xác minh địa chỉ trên LIKKIM...",
+          "Importing on LIKKIM Hardware...":
+            "Đang nhập khẩu trên phần cứng LIKKIM...",
+          "Your device is already verified.":
+            "Thiết bị của bạn đã được xác minh.",
+          "Creating on LIKKIM Hardware...": "Đang tạo trên phần cứng LIKKIM...",
         },
       },
       id: {
@@ -2638,6 +3015,25 @@ i18n
           "Transaction Fee": "Biaya Transaksi",
           Confirm: "Konfirmasi",
           "Transaction Confirmation": "Konfirmasi Transaksi",
+          "Screen lock enabled successfully": "Kunci layar berhasil diaktifkan",
+          "Success!": "Sukses!",
+          "Enable Face ID": "Aktifkan Face ID",
+          "I lost my password": "Saya kehilangan kata sandi saya",
+          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
+            "Harap hapus dan instal ulang aplikasi di ponsel Anda untuk menghapus data aplikasi LIKKIM, termasuk akun dan pengaturan.",
+          "Value in USD": "Nilai dalam USD",
+          Fee: "Biaya",
+          "Confirming Transaction on LIKKIM Device...":
+            "Mengonfirmasi transaksi di perangkat LIKKIM...",
+          "Please confirm the transaction on your LIKKIM device.":
+            "Harap konfirmasi transaksi di perangkat LIKKIM Anda.",
+          "Verifying Address on LIKKIM...": "Memverifikasi alamat di LIKKIM...",
+          "Importing on LIKKIM Hardware...":
+            "Mengimpor di perangkat keras LIKKIM...",
+          "Your device is already verified.":
+            "Perangkat Anda sudah diverifikasi.",
+          "Creating on LIKKIM Hardware...":
+            "Membuat di perangkat keras LIKKIM...",
         },
       },
       tl: {
@@ -2781,6 +3177,25 @@ i18n
           "Transaction Fee": "Bayad sa Transaksyon",
           Confirm: "Kumpirmahin",
           "Transaction Confirmation": "Kumpirmasyon ng Transaksyon",
+          "Screen lock enabled successfully":
+            "Matagumpay na na-enable ang screen lock",
+          "Success!": "Tagumpay!",
+          "Enable Face ID": "I-enable ang Face ID",
+          "I lost my password": "Nawala ko ang aking password",
+          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
+            "Mangyaring i-uninstall at muling i-install ang app sa iyong telepono upang tanggalin ang data ng app na LIKKIM, kabilang ang mga account at mga setting.",
+          "Value in USD": "Halaga sa USD",
+          Fee: "Bayad",
+          "Confirming Transaction on LIKKIM Device...":
+            "Kinukumpirma ang transaksyon sa LIKKIM device...",
+          "Please confirm the transaction on your LIKKIM device.":
+            "Mangyaring kumpirmahin ang transaksyon sa iyong LIKKIM device.",
+          "Verifying Address on LIKKIM...":
+            "Tinitiyak ang address sa LIKKIM...",
+          "Importing on LIKKIM Hardware...": "Ina-import sa LIKKIM hardware...",
+          "Your device is already verified.":
+            "Ang iyong device ay napatunayan na.",
+          "Creating on LIKKIM Hardware...": "Gumagawa sa LIKKIM hardware...",
         },
       },
       bn: {
@@ -2922,6 +3337,27 @@ i18n
           "Transaction Fee": "লেনদেন ফি",
           Confirm: "নিশ্চিত করুন",
           "Transaction Confirmation": "লেনদেনের নিশ্চিতকরণ",
+          "Screen lock enabled successfully":
+            "স্ক্রিন লক সফলভাবে সক্ষম করা হয়েছে",
+          "Success!": "সফলতা!",
+          "Enable Face ID": "ফেস আইডি সক্রিয় করুন",
+          "I lost my password": "আমি আমার পাসওয়ার্ড হারিয়েছি",
+          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
+            "LIKKIM অ্যাপের ডেটা, সহ অ্যাকাউন্ট এবং সেটিংস, মুছে ফেলতে আপনার ফোনে অ্যাপটি আনইনস্টল করে পুনরায় ইনস্টল করুন।",
+          "Value in USD": "ইউএসডি-তে মান",
+          Fee: "ফি",
+          "Confirming Transaction on LIKKIM Device...":
+            "LIKKIM ডিভাইসে লেনদেন নিশ্চিত করা হচ্ছে...",
+          "Please confirm the transaction on your LIKKIM device.":
+            "অনুগ্রহ করে আপনার LIKKIM ডিভাইসে লেনদেন নিশ্চিত করুন।",
+          "Verifying Address on LIKKIM...":
+            "LIKKIM-এ ঠিকানা যাচাই করা হচ্ছে...",
+          "Importing on LIKKIM Hardware...":
+            "LIKKIM হার্ডওয়্যারে আমদানি করা হচ্ছে...",
+          "Your device is already verified.":
+            "আপনার ডিভাইসটি ইতিমধ্যেই যাচাই করা হয়েছে।",
+          "Creating on LIKKIM Hardware...":
+            "LIKKIM হার্ডওয়্যারে তৈরি করা হচ্ছে...",
         },
       },
     },
