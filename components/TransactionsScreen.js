@@ -124,8 +124,8 @@ function TransactionsScreen() {
         { allowDuplicates: true },
         (error, device) => {
           if (error) {
-            console.error("BleManager scanning error:", error);
-            return;
+            console.error("Transcation Page BleManager scanning error:", error);
+            //   return;
           }
 
           if (device.name && device.name.includes("LIKKIM")) {
@@ -1184,12 +1184,12 @@ function TransactionsScreen() {
     loadVerifiedDevices();
   }, []); // 这个依赖空数组确保该代码只在组件挂载时执行一次
   // 打印设备数量
-  useEffect(() => {
+  /*   useEffect(() => {
     console.log(
       "Transaction Page Verified Devices Count:",
       verifiedDevices.length
     );
-  }, [verifiedDevices]);
+  }, [verifiedDevices]); */
 
   // 停止监听
   useEffect(() => {
@@ -1286,6 +1286,7 @@ function TransactionsScreen() {
     } else if (operationType === "send") {
       // 检查 verifiedDevices 是否包含有效设备
       if (verifiedDevices.length > 0) {
+        console.log("Transation Verified Device ID:", verifiedDevices[0]);
         const device = devices.find((d) => d.id === verifiedDevices[0]);
         if (device) {
           setAddressModalVisible(false);
