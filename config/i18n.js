@@ -45,13 +45,11 @@ i18n
           "Enter the recipient's address:": "Enter the recipient's address:",
           "Enter Address": "Enter Address",
           Submit: "Submit",
-
           "Choose the cryptocurrency to send:":
             "Choose the cryptocurrency to send:",
           "Choose the cryptocurrency to receive:":
             "Choose the cryptocurrency to receive:",
           "Address for": "Address for",
-
           Wallet: "Wallet",
           Transactions: "Transactions",
           "My Cold Wallet": "My LIKKIM",

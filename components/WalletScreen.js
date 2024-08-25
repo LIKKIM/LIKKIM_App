@@ -263,7 +263,7 @@ function WalletScreen({ route, navigation }) {
       });
       setImportingStatus({
         image: require("../assets/gif/Pending.gif"), // 重置为默认显示 Pending.gif
-        title: t("Creating on LIKKIM Hardware..."), // 重置为默认主消息
+        title: t("Importing on LIKKIM Hardware..."), // 重置为默认主消息
         subtitle: t("Your device is already verified."), // 重置为默认子消息
       });
     }
