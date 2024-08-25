@@ -82,6 +82,7 @@ function TransactionsScreen() {
   const [confirmModalVisible, setConfirmModalVisible] = useState(false); // 新增交易确认modal状态
   const [transactionFee, setTransactionFee] = useState("0.001"); // 示例交易手续费
   const [transactionHistory, setTransactionHistory] = useState([]);
+  const [hasFetchedBalance, setHasFetchedBalance] = useState(false);
   const [selectedDevice, setSelectedDevice] = useState(null);
   const [bleVisible, setBleVisible] = useState(false); // New state for Bluetooth modal
   const isScanningRef = useRef(false);
@@ -150,7 +151,8 @@ function TransactionsScreen() {
 
   // 在 amountModalVisible 状态变为 true 时发送 POST 请求
   useEffect(() => {
-    if (amountModalVisible) {
+    if (amountModalVisible && !hasFetchedBalance) {
+      // 检查额外状态以避免重复执行
       const fetchTokenBalanceAndFee = async () => {
         try {
           // 根据 selectedCrypto 查找对应的加密货币对象
@@ -271,6 +273,8 @@ function TransactionsScreen() {
           }
         } catch (error) {
           console.error("Error:", error);
+        } finally {
+          setHasFetchedBalance(true); // 设置状态，防止重复执行
         }
       };
 
@@ -278,6 +282,7 @@ function TransactionsScreen() {
     }
   }, [
     amountModalVisible,
+    hasFetchedBalance, // 添加这个状态作为依赖
     selectedCrypto,
     initialAdditionalCryptos,
     updateCryptoData,
