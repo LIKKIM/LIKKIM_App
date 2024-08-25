@@ -142,6 +142,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       borderRadius: 20,
       padding: 35,
       alignItems: "center",
+      justifyContent: "space-between",
     },
 
     changePasswordModalView: {
@@ -153,6 +154,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       backgroundColor: modalBackgroundColor,
       borderRadius: 20,
       padding: 35,
+      justifyContent: "space-between",
       alignItems: "center",
     },
     enableLockModalView: {
@@ -182,7 +184,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
     EnterPasswordModalView: {
       position: "absolute",
       top: 100,
-      justifyContent: "space-evenly",
+      justifyContent: "space-between",
       margin: 20,
       height: 360,
       width: "90%",
@@ -368,6 +370,15 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       height: 60,
       alignItems: "center",
       marginBottom: 15,
+    },
+    closeButton: {
+      backgroundColor: buttonBackgroundColor,
+      padding: 10,
+      width: "100%",
+      justifyContent: "center",
+      borderRadius: 30,
+      height: 60,
+      alignItems: "center",
     },
     submitButtonText: {
       color: textColor,

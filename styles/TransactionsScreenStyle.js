@@ -132,6 +132,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       color: secondTextColor,
       fontSize: 14,
       marginBottom: 20,
+      textAlign: "center",
     },
     amountSubtitle: {
       color: secondTextColor,
@@ -228,6 +229,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       borderRadius: 20,
       padding: 35,
       alignItems: "center",
+      justifyContent: "space-between",
     },
     inputModelView: {
       margin: 20,

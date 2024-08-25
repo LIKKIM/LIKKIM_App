@@ -671,6 +671,7 @@ const WalletScreenStyles = (isDarkMode) => {
       color: secondTextColor,
       fontSize: 14,
       marginBottom: 20,
+      textAlign: "center",
     },
     scanModalSubtitle: {
       color: secondTextColor,

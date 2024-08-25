@@ -1711,7 +1711,7 @@ function MyColdWalletScreen() {
               {modalMessage} {/* 动态显示消息 */}
             </Text>
             <TouchableOpacity
-              style={MyColdWalletScreenStyle.submitButton}
+              style={MyColdWalletScreenStyle.closeButton}
               onPress={() => setSuccessModalVisible(false)}
             >
               <Text style={MyColdWalletScreenStyle.submitButtonText}>
@@ -1740,7 +1740,7 @@ function MyColdWalletScreen() {
               {modalMessage} {/* 动态显示消息 */}
             </Text>
             <TouchableOpacity
-              style={MyColdWalletScreenStyle.submitButton}
+              style={MyColdWalletScreenStyle.closeButton}
               onPress={() => setErrorModalVisible(false)}
             >
               <Text style={MyColdWalletScreenStyle.submitButtonText}>
