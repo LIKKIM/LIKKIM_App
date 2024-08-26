@@ -27,6 +27,8 @@ import i18n from "../config/i18n";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CryptoContext, DarkModeContext } from "./CryptoContext";
 import MyColdWalletScreenStyles from "../styles/MyColdWalletScreenStyle";
+import LanguageModal from "./modal/LanguageModal"; // 引入新的 LanguageModal
+import CurrencyModal from "./modal/CurrencyModal";
 import { languages } from "../config/languages";
 import base64 from "base64-js";
 import { Buffer } from "buffer";
@@ -104,14 +106,15 @@ function MyColdWalletScreen() {
   const [errorModalVisible, setErrorModalVisible] = useState(false);
   const [modalMessage, setModalMessage] = useState(""); // 用于动态设置模态框的消息内容
   const [isFaceIDEnabled, setIsFaceIDEnabled] = useState(() => {
-    AsyncStorage.getItem('faceID').then((status) => setIsFaceIDEnabled(status === 'open'))
+    AsyncStorage.getItem("faceID").then((status) =>
+      setIsFaceIDEnabled(status === "open")
+    );
   });
 
   const toggleFaceID = async (value) => {
     setIsFaceIDEnabled(value);
     // 在这里可以添加逻辑，例如将状态保存到AsyncStorage或触发相关的逻辑
     await AsyncStorage.setItem("faceID", value ? "open" : "close");
-
   };
 
   // Called when the user clicks the "Disconnect" button
@@ -739,35 +742,35 @@ function MyColdWalletScreen() {
     },
     ...(isScreenLockEnabled
       ? [
-        {
-          title: t("Change App Screen Lock Password"),
-          icon: "password",
-          onPress: () => {
-            Vibration.vibrate(); // 添加震动反馈
-            openChangePasswordModal();
+          {
+            title: t("Change App Screen Lock Password"),
+            icon: "password",
+            onPress: () => {
+              Vibration.vibrate(); // 添加震动反馈
+              openChangePasswordModal();
+            },
           },
-        },
-        {
-          title: t("Enable Face ID"),
-          icon: "face",
-          onPress: () => {
-            Vibration.vibrate(); // 添加震动反馈
-            toggleFaceID(!isFaceIDEnabled); // 添加Face ID的Toggle功能
+          {
+            title: t("Enable Face ID"),
+            icon: "face",
+            onPress: () => {
+              Vibration.vibrate(); // 添加震动反馈
+              toggleFaceID(!isFaceIDEnabled); // 添加Face ID的Toggle功能
+            },
+            toggle: (
+              <Switch
+                trackColor={{ false: "#767577", true: "#81b0ff" }}
+                thumbColor={isFaceIDEnabled ? "#fff" : "#f4f3f4"}
+                ios_backgroundColor="#3e3e3e"
+                onValueChange={() => {
+                  Vibration.vibrate(); // 添加震动反馈
+                  toggleFaceID(!isFaceIDEnabled); // 添加Face ID的Toggle功能
+                }}
+                value={isFaceIDEnabled} // 使用相关状态
+              />
+            ),
           },
-          toggle: (
-            <Switch
-              trackColor={{ false: "#767577", true: "#81b0ff" }}
-              thumbColor={isFaceIDEnabled ? "#fff" : "#f4f3f4"}
-              ios_backgroundColor="#3e3e3e"
-              onValueChange={() => {
-                Vibration.vibrate(); // 添加震动反馈
-                toggleFaceID(!isFaceIDEnabled); // 添加Face ID的Toggle功能
-              }}
-              value={isFaceIDEnabled} // 使用相关状态
-            />
-          ),
-        },
-      ]
+        ]
       : []),
 
     /*     {
@@ -885,117 +888,30 @@ function MyColdWalletScreen() {
           ))}
 
           {/* Language Modal */}
-          <Modal
-            animationType="slide"
-            transparent={true}
+          <LanguageModal
             visible={languageModalVisible}
-            onRequestClose={() => setLanguageModalVisible(false)}
-          >
-            <BlurView
-              intensity={10}
-              style={MyColdWalletScreenStyle.centeredView}
-            >
-              <View style={MyColdWalletScreenStyle.languageModalView}>
-                <Text style={MyColdWalletScreenStyle.languageModalTitle}>
-                  {t("Select Language")}
-                </Text>
-
-                {/* Search Box */}
-                <View style={MyColdWalletScreenStyle.searchContainer}>
-                  <Icon
-                    name="search"
-                    size={20}
-                    style={MyColdWalletScreenStyle.searchIcon}
-                  />
-                  <TextInput
-                    style={MyColdWalletScreenStyle.searchInput}
-                    placeholder={t("Search Language")}
-                    placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
-                    onChangeText={(text) => setSearchLanguage(text)}
-                    value={searchLanguage}
-                  />
-                </View>
-
-                <ScrollView style={MyColdWalletScreenStyle.languageList}>
-                  {filteredLanguages.map((language) => (
-                    <TouchableOpacity
-                      key={language.code}
-                      onPress={() => handleLanguageChange(language)}
-                    >
-                      <Text style={MyColdWalletScreenStyle.languageModalText}>
-                        {language.name}
-                      </Text>
-                    </TouchableOpacity>
-                  ))}
-                </ScrollView>
-                <TouchableOpacity
-                  style={MyColdWalletScreenStyle.languageCancelButton}
-                  onPress={() => setLanguageModalVisible(false)}
-                >
-                  <Text style={MyColdWalletScreenStyle.cancelButtonText}>
-                    {t("Cancel")}
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            </BlurView>
-          </Modal>
+            onClose={() => setLanguageModalVisible(false)}
+            languages={languages}
+            searchLanguage={searchLanguage}
+            setSearchLanguage={setSearchLanguage}
+            handleLanguageChange={handleLanguageChange}
+            styles={MyColdWalletScreenStyle}
+            isDarkMode={isDarkMode}
+            t={t}
+          />
 
           {/* Currency Modal */}
-          <Modal
-            animationType="slide"
-            transparent={true}
+          <CurrencyModal
             visible={currencyModalVisible}
-            onRequestClose={() => setCurrencyModalVisible(false)}
-          >
-            <BlurView
-              intensity={10}
-              style={MyColdWalletScreenStyle.centeredView}
-            >
-              <View style={MyColdWalletScreenStyle.currencyModalView}>
-                <Text style={MyColdWalletScreenStyle.languageModalTitle}>
-                  {t("Select Currency")}
-                </Text>
-
-                {/* Search Box */}
-                <View style={MyColdWalletScreenStyle.searchContainer}>
-                  <Icon
-                    name="search"
-                    size={20}
-                    style={MyColdWalletScreenStyle.searchIcon}
-                  />
-                  <TextInput
-                    style={MyColdWalletScreenStyle.searchInput}
-                    placeholder={t("Search Currency")}
-                    placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
-                    onChangeText={(text) => setSearchCurrency(text)}
-                    value={searchCurrency}
-                  />
-                </View>
-
-                <ScrollView style={MyColdWalletScreenStyle.languageList}>
-                  {filteredCurrencies.map((currency) => (
-                    <TouchableOpacity
-                      key={currency.shortName}
-                      style={MyColdWalletScreenStyle.currencyOption}
-                      onPress={() => handleCurrencyChange(currency)}
-                    >
-                      <Text style={MyColdWalletScreenStyle.languageModalText}>
-                        {currency.name} - {currency.shortName}
-                      </Text>
-                    </TouchableOpacity>
-                  ))}
-                </ScrollView>
-                <TouchableOpacity
-                  style={MyColdWalletScreenStyle.languageCancelButton}
-                  onPress={() => setCurrencyModalVisible(false)}
-                >
-                  <Text style={MyColdWalletScreenStyle.cancelButtonText}>
-                    {t("Cancel")}
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            </BlurView>
-          </Modal>
+            onClose={() => setCurrencyModalVisible(false)}
+            currencies={currencies}
+            searchCurrency={searchCurrency}
+            setSearchCurrency={setSearchCurrency}
+            handleCurrencyChange={handleCurrencyChange}
+            styles={MyColdWalletScreenStyle}
+            isDarkMode={isDarkMode}
+            t={t}
+          />
 
           {/* enable screen lock modal */}
           <Modal
@@ -1187,7 +1103,7 @@ function MyColdWalletScreen() {
                       style={[
                         MyColdWalletScreenStyle.passwordInput,
                         isPasswordFocused &&
-                        MyColdWalletScreenStyle.focusedInput,
+                          MyColdWalletScreenStyle.focusedInput,
                       ]}
                       placeholder={t("Enter current password")}
                       placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
