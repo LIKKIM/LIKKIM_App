@@ -64,7 +64,7 @@ function MyColdWalletScreen() {
     toggleScreenLock,
     changeScreenLockPassword,
   } = useContext(CryptoContext);
-  const [verificationStatus, setVerificationStatus] = useState("success");
+
   const { isDarkMode, setIsDarkMode } = useContext(DarkModeContext);
   const MyColdWalletScreenStyle = MyColdWalletScreenStyles(isDarkMode);
   const [currencyModalVisible, setCurrencyModalVisible] = useState(false);
@@ -110,6 +110,7 @@ function MyColdWalletScreen() {
   const [deviceToDisconnect, setDeviceToDisconnect] = useState(null);
   const [successModalVisible, setSuccessModalVisible] = useState(false);
   const [errorModalVisible, setErrorModalVisible] = useState(false);
+  const [verificationStatus, setVerificationStatus] = useState(null);
   const [modalMessage, setModalMessage] = useState(""); // 用于动态设置模态框的消息内容
   const [isFaceIDEnabled, setIsFaceIDEnabled] = useState(() => {
     AsyncStorage.getItem("faceID").then((status) =>
@@ -1324,9 +1325,9 @@ function MyColdWalletScreen() {
         isDarkMode={isDarkMode}
         t={t}
       />
-      {/* 验证密模态框 */}
+      {/* 验证码模态框 */}
       <MyColdWalletVerificationModal
-        visible={verificationModalVisible}
+        visible={verificationModalVisible && verificationStatus !== null}
         status={verificationStatus}
         onClose={() => setVerificationModalVisible(false)}
         styles={MyColdWalletScreenStyle}
