@@ -23,8 +23,6 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import Feather from "react-native-vector-icons/Feather";
 import { detectNetwork } from "../config/networkUtils";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import successImage from "../assets/success.png";
-import failImage from "../assets/fail.png";
 import Constants from "expo-constants";
 import base64 from "base64-js";
 import { Buffer } from "buffer";
