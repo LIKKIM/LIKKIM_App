@@ -372,7 +372,8 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       marginBottom: 15,
     },
     closeButton: {
-      backgroundColor: buttonBackgroundColor,
+      borderColor: buttonBackgroundColor,
+      borderWidth: 3,
       padding: 10,
       width: "100%",
       justifyContent: "center",

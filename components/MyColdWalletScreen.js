@@ -36,6 +36,7 @@ import MyColdWalletErrorModal from "./modal/MyColdWalletErrorModal";
 import MyColdWalletPinModal from "./modal/MyColdWalletPinModal";
 import MyColdWalletBluetoothModal from "./modal/MyColdWalletBluetoothModal";
 import MyColdWalletVerificationModal from "./modal/MyColdWalletVerificationModal";
+import AddressBookModal from "./modal/AddressBookModal";
 import { languages } from "../config/languages";
 import base64 from "base64-js";
 import { Buffer } from "buffer";
@@ -111,7 +112,20 @@ function MyColdWalletScreen() {
   const [successModalVisible, setSuccessModalVisible] = useState(false);
   const [errorModalVisible, setErrorModalVisible] = useState(false);
   const [verificationStatus, setVerificationStatus] = useState(null);
-  const [modalMessage, setModalMessage] = useState(""); // 用于动态设置模态框的消息内容
+  const [modalMessage, setModalMessage] = useState("");
+  const [addressBookModalVisible, setAddressBookModalVisible] = useState(false);
+  const [verificationModalVisible, setVerificationModalVisible] =
+    useState(false);
+  const [addresses, setAddresses] = useState([
+    { id: "1", name: "Home", address: "0x1234..." },
+    { id: "2", name: "Office", address: "0x5678..." },
+  ]);
+
+  const handleAddressSelect = (address) => {
+    console.log("Selected Address:", address);
+    setAddressBookModalVisible(false);
+    // 这里可以添加进一步的处理逻辑，例如设置选中的地址为交易地址
+  };
   const [isFaceIDEnabled, setIsFaceIDEnabled] = useState(() => {
     AsyncStorage.getItem("faceID").then((status) =>
       setIsFaceIDEnabled(status === "open")
@@ -716,7 +730,8 @@ function MyColdWalletScreen() {
       title: t("Address Book"),
       icon: "portrait",
       onPress: () => {
-        Vibration.vibrate(); // 添加震动反馈
+        Vibration.vibrate();
+        setAddressBookModalVisible(true);
       },
     },
 
@@ -1356,6 +1371,16 @@ function MyColdWalletScreen() {
         message={modalMessage}
         styles={MyColdWalletScreenStyle}
         t={t}
+      />
+
+      {/* Address Book Modal */}
+      <AddressBookModal
+        visible={addressBookModalVisible}
+        onClose={() => setAddressBookModalVisible(false)}
+        addresses={addresses}
+        onSelect={handleAddressSelect}
+        styles={MyColdWalletScreenStyle} // 传递样式
+        isDarkMode={isDarkMode} // 传递黑暗模式状态
       />
     </LinearGradient>
   );
