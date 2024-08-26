@@ -663,6 +663,57 @@ function MyColdWalletScreen() {
 
   const settingsOptions = [
     {
+      title: t("Default Currency"),
+      icon: "attach-money",
+      onPress: () => {
+        Vibration.vibrate(); // 添加震动反馈
+        setCurrencyModalVisible(true);
+      },
+      extraIcon: "arrow-drop-down",
+      selectedOption: selectedCurrency,
+    },
+    {
+      title: t("Language"),
+      icon: "language",
+      onPress: () => {
+        Vibration.vibrate(); // 添加震动反馈
+        setLanguageModalVisible(true);
+      },
+      extraIcon: "arrow-drop-down",
+      selectedOption: (
+        languages.find((lang) => lang.code === selectedLanguage) ||
+        languages.find((lang) => lang.code === "en")
+      ).name,
+    },
+    {
+      title: t("Dark Mode"),
+      icon: "dark-mode",
+      onPress: () => {
+        Vibration.vibrate(); // 添加震动反馈
+        handleDarkModeChange(!isDarkMode);
+      },
+      toggle: (
+        <Switch
+          trackColor={{ false: "#767577", true: "#81b0ff" }}
+          thumbColor={isDarkMode ? "#fff" : "#f4f3f4"}
+          ios_backgroundColor="#3e3e3e"
+          onValueChange={() => {
+            Vibration.vibrate(); // 添加震动反馈
+            handleDarkModeChange(!isDarkMode);
+          }}
+          value={isDarkMode}
+        />
+      ),
+    },
+    {
+      title: t("Address Book"),
+      icon: "portrait",
+      onPress: () => {
+        Vibration.vibrate(); // 添加震动反馈
+      },
+    },
+
+    {
       title: t("Enable Screen Lock"),
       icon: "lock-outline",
       onPress: () => {
@@ -715,49 +766,6 @@ function MyColdWalletScreen() {
         ]
       : []),
 
-    {
-      title: t("Default Currency"),
-      icon: "attach-money",
-      onPress: () => {
-        Vibration.vibrate(); // 添加震动反馈
-        setCurrencyModalVisible(true);
-      },
-      extraIcon: "arrow-drop-down",
-      selectedOption: selectedCurrency,
-    },
-    {
-      title: t("Language"),
-      icon: "language",
-      onPress: () => {
-        Vibration.vibrate(); // 添加震动反馈
-        setLanguageModalVisible(true);
-      },
-      extraIcon: "arrow-drop-down",
-      selectedOption: (
-        languages.find((lang) => lang.code === selectedLanguage) ||
-        languages.find((lang) => lang.code === "en")
-      ).name,
-    },
-    {
-      title: t("Dark Mode"),
-      icon: "dark-mode",
-      onPress: () => {
-        Vibration.vibrate(); // 添加震动反馈
-        handleDarkModeChange(!isDarkMode);
-      },
-      toggle: (
-        <Switch
-          trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={isDarkMode ? "#fff" : "#f4f3f4"}
-          ios_backgroundColor="#3e3e3e"
-          onValueChange={() => {
-            Vibration.vibrate(); // 添加震动反馈
-            handleDarkModeChange(!isDarkMode);
-          }}
-          value={isDarkMode}
-        />
-      ),
-    },
     /*     {
       title: t("Sync balances to LIKKIM coldwallet"),
       icon: "sync",
