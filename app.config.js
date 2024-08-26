@@ -38,7 +38,15 @@ export default {
   web: {
     favicon: "./assets/favicon.png",
   },
-  plugins: ["expo-localization"],
+  plugins: [
+    "expo-localization",
+    [
+      "expo-local-authentication",
+      {
+        "faceIDPermission": "Allow $(PRODUCT_NAME) to use Face ID."
+      }
+    ]
+  ],
   extra: {
     eas: {
       projectId: "fdfad2e7-7bed-4bcd-ae6d-ca6c74643d63",

@@ -1,5 +1,5 @@
 // ScreenLock.js
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   View,
   Text,
@@ -14,6 +14,8 @@ import {
 import { CryptoContext, DarkModeContext } from "./CryptoContext";
 import { useTranslation } from "react-i18next"; // 导入国际化库
 import Icon from "react-native-vector-icons/MaterialIcons"; // 导入图标库
+import * as LocalAuthentication from 'expo-local-authentication';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const ScreenLock = () => {
   const { screenLockPassword, setIsAppLaunching } = useContext(CryptoContext); // 使用 setIsAppLaunching
@@ -40,6 +42,28 @@ const ScreenLock = () => {
   };
 
   const themeStyles = isDarkMode ? darkStyles : lightStyles;
+
+  useEffect(() => {
+
+
+    //默认使用iOS FaceId，忽略Android设备指纹&密码锁 ｜ 2winter
+    if (Platform.OS === 'ios' || Platform.OS === 'macos') {
+
+      AsyncStorage.getItem('faceID').then((status) => {
+
+
+
+        status === 'open' && LocalAuthentication.authenticateAsync({}).then((res) => {
+          if (res.success) {
+            setIsAppLaunching(false); //解锁后设置 isAppLaunching 为 false
+          }
+        });
+      })
+
+    }
+
+
+  }, [])
 
   return (
     <KeyboardAvoidingView

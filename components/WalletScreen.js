@@ -1775,6 +1775,9 @@ function WalletScreen({ route, navigation }) {
           </View>
         )}
         {cryptoCards.map((card, index) => {
+          console.log('card------')
+          console.log(card.cardImage, card.icon)
+
           const isBlackText =
             card.shortName === "BTC" ||
             card.shortName === "USDT" ||
@@ -1789,8 +1792,8 @@ function WalletScreen({ route, navigation }) {
                 ? "#FF5252"
                 : "#F23645"
               : isBlackText
-              ? "#22AA94"
-              : "#0C9981";
+                ? "#22AA94"
+                : "#0C9981";
           const priceChange = priceChanges[card.shortName]?.priceChange || "0";
           const percentageChange =
             priceChanges[card.shortName]?.percentageChange || "0";
@@ -2015,7 +2018,7 @@ function WalletScreen({ route, navigation }) {
                   style={[
                     WalletScreenStyle.tabButtonText,
                     activeTab === "Prices" &&
-                      WalletScreenStyle.activeTabButtonText,
+                    WalletScreenStyle.activeTabButtonText,
                   ]}
                 >
                   {t("Prices")}
@@ -2032,7 +2035,7 @@ function WalletScreen({ route, navigation }) {
                   style={[
                     WalletScreenStyle.tabButtonText,
                     activeTab === "History" &&
-                      WalletScreenStyle.activeTabButtonText,
+                    WalletScreenStyle.activeTabButtonText,
                   ]}
                 >
                   {t("History")}

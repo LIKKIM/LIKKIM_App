@@ -103,11 +103,15 @@ function MyColdWalletScreen() {
   const [successModalVisible, setSuccessModalVisible] = useState(false);
   const [errorModalVisible, setErrorModalVisible] = useState(false);
   const [modalMessage, setModalMessage] = useState(""); // 用于动态设置模态框的消息内容
-  const [isFaceIDEnabled, setIsFaceIDEnabled] = useState(false);
+  const [isFaceIDEnabled, setIsFaceIDEnabled] = useState(() => {
+    AsyncStorage.getItem('faceID').then((status) => setIsFaceIDEnabled(status === 'open'))
+  });
 
-  const toggleFaceID = (value) => {
+  const toggleFaceID = async (value) => {
     setIsFaceIDEnabled(value);
     // 在这里可以添加逻辑，例如将状态保存到AsyncStorage或触发相关的逻辑
+    await AsyncStorage.setItem("faceID", value ? "open" : "close");
+
   };
 
   // Called when the user clicks the "Disconnect" button
@@ -684,35 +688,35 @@ function MyColdWalletScreen() {
     },
     ...(isScreenLockEnabled
       ? [
-          {
-            title: t("Change App Screen Lock Password"),
-            icon: "password",
-            onPress: () => {
-              Vibration.vibrate(); // 添加震动反馈
-              openChangePasswordModal();
-            },
+        {
+          title: t("Change App Screen Lock Password"),
+          icon: "password",
+          onPress: () => {
+            Vibration.vibrate(); // 添加震动反馈
+            openChangePasswordModal();
           },
-          {
-            title: t("Enable Face ID"),
-            icon: "face",
-            onPress: () => {
-              Vibration.vibrate(); // 添加震动反馈
-              toggleFaceID(!isFaceIDEnabled); // 添加Face ID的Toggle功能
-            },
-            toggle: (
-              <Switch
-                trackColor={{ false: "#767577", true: "#81b0ff" }}
-                thumbColor={isFaceIDEnabled ? "#fff" : "#f4f3f4"}
-                ios_backgroundColor="#3e3e3e"
-                onValueChange={() => {
-                  Vibration.vibrate(); // 添加震动反馈
-                  toggleFaceID(!isFaceIDEnabled); // 添加Face ID的Toggle功能
-                }}
-                value={isFaceIDEnabled} // 使用相关状态
-              />
-            ),
+        },
+        {
+          title: t("Enable Face ID"),
+          icon: "face",
+          onPress: () => {
+            Vibration.vibrate(); // 添加震动反馈
+            toggleFaceID(!isFaceIDEnabled); // 添加Face ID的Toggle功能
           },
-        ]
+          toggle: (
+            <Switch
+              trackColor={{ false: "#767577", true: "#81b0ff" }}
+              thumbColor={isFaceIDEnabled ? "#fff" : "#f4f3f4"}
+              ios_backgroundColor="#3e3e3e"
+              onValueChange={() => {
+                Vibration.vibrate(); // 添加震动反馈
+                toggleFaceID(!isFaceIDEnabled); // 添加Face ID的Toggle功能
+              }}
+              value={isFaceIDEnabled} // 使用相关状态
+            />
+          ),
+        },
+      ]
       : []),
 
     {
@@ -1175,7 +1179,7 @@ function MyColdWalletScreen() {
                       style={[
                         MyColdWalletScreenStyle.passwordInput,
                         isPasswordFocused &&
-                          MyColdWalletScreenStyle.focusedInput,
+                        MyColdWalletScreenStyle.focusedInput,
                       ]}
                       placeholder={t("Enter current password")}
                       placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
