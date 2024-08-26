@@ -35,6 +35,7 @@ import MyColdWalletSuccessModal from "./modal/MyColdWalletSuccessModal";
 import MyColdWalletErrorModal from "./modal/MyColdWalletErrorModal";
 import MyColdWalletPinModal from "./modal/MyColdWalletPinModal";
 import MyColdWalletBluetoothModal from "./modal/MyColdWalletBluetoothModal";
+import MyColdWalletVerificationModal from "./modal/MyColdWalletVerificationModal";
 import { languages } from "../config/languages";
 import base64 from "base64-js";
 import { Buffer } from "buffer";
@@ -62,7 +63,8 @@ function MyColdWalletScreen() {
     screenLockPassword,
     toggleScreenLock,
     changeScreenLockPassword,
-  } = useContext(CryptoContext); // 从 CryptoContext 中获取 setIsVerificationSuccessful 和 verifiedDevices
+  } = useContext(CryptoContext);
+  const [verificationStatus, setVerificationStatus] = useState("success");
   const { isDarkMode, setIsDarkMode } = useContext(DarkModeContext);
   const MyColdWalletScreenStyle = MyColdWalletScreenStyles(isDarkMode);
   const [currencyModalVisible, setCurrencyModalVisible] = useState(false);
