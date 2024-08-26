@@ -67,54 +67,50 @@ const ScreenLock = () => {
       style={{ flex: 1 }}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <View style={[styles.container, themeStyles.container]}>
-          <View style={styles.header}>
-            <Text style={[styles.title, themeStyles.title]}>{t("LIKKIM")}</Text>
-            <Text style={[styles.subTitle, themeStyles.subTitle]}>
-              {t("Enter Password to Unlock")}
-            </Text>
-          </View>
+      <View style={[styles.container, themeStyles.container]}>
+        <View style={styles.header}>
+          <Text style={[styles.title, themeStyles.title]}>{t("LIKKIM")}</Text>
+          <Text style={[styles.subTitle, themeStyles.subTitle]}>
+            {t("Enter Password to Unlock")}
+          </Text>
+        </View>
 
-          <View style={styles.passwordInputContainer}>
-            <TextInput
-              style={[styles.input, themeStyles.input]}
-              secureTextEntry={isPasswordHidden}
-              value={inputPassword}
-              onChangeText={setInputPassword}
-              placeholder={t("Enter Password")}
-              placeholderTextColor={themeStyles.placeholder.color}
+        <View style={styles.passwordInputContainer}>
+          <TextInput
+            style={[styles.input, themeStyles.input]}
+            secureTextEntry={isPasswordHidden}
+            value={inputPassword}
+            onChangeText={setInputPassword}
+            placeholder={t("Enter Password")}
+            placeholderTextColor={themeStyles.placeholder.color}
+          />
+          <TouchableOpacity
+            onPress={() => setIsPasswordHidden(!isPasswordHidden)}
+            style={styles.eyeIcon}
+          >
+            <Icon
+              name={isPasswordHidden ? "visibility-off" : "visibility"}
+              size={24}
+              color={themeStyles.placeholder.color}
             />
-            <TouchableOpacity
-              onPress={() => setIsPasswordHidden(!isPasswordHidden)}
-              style={styles.eyeIcon}
-            >
-              <Icon
-                name={isPasswordHidden ? "visibility-off" : "visibility"}
-                size={24}
-                color={themeStyles.placeholder.color}
-              />
-            </TouchableOpacity>
-          </View>
-
-          <TouchableOpacity
-            style={[styles.button, themeStyles.button]}
-            onPress={handleUnlock}
-          >
-            <Text style={themeStyles.buttonText}>{t("Unlock")}</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={handleLostPassword}
-            style={styles.lostPasswordContainer}
-          >
-            <Text
-              style={[styles.lostPasswordText, themeStyles.lostPasswordText]}
-            >
-              {t("I lost my password")}
-            </Text>
           </TouchableOpacity>
         </View>
+
+        <TouchableOpacity
+          style={[styles.button, themeStyles.button]}
+          onPress={handleUnlock}
+        >
+          <Text style={themeStyles.buttonText}>{t("Unlock")}</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={handleLostPassword}
+          style={styles.lostPasswordContainer}
+        >
+          <Text style={[styles.lostPasswordText, themeStyles.lostPasswordText]}>
+            {t("I lost my password")}
+          </Text>
+        </TouchableOpacity>
 
         {/* 丢失密码的 Modal */}
         <Modal
@@ -167,7 +163,7 @@ const ScreenLock = () => {
             </View>
           </View>
         </Modal>
-      </ScrollView>
+      </View>
     </KeyboardAvoidingView>
   );
 };
