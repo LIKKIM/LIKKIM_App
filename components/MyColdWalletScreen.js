@@ -108,6 +108,7 @@ function MyColdWalletScreen() {
   const [passwordError, setPasswordError] = useState(""); // 新增密码错误状态
   const [confirmDisconnectModalVisible, setConfirmDisconnectModalVisible] =
     useState(false);
+  const [shouldShowPinModal, setShouldShowPinModal] = useState(false);
   const [deviceToDisconnect, setDeviceToDisconnect] = useState(null);
   const [successModalVisible, setSuccessModalVisible] = useState(false);
   const [errorModalVisible, setErrorModalVisible] = useState(false);
@@ -429,7 +430,7 @@ function MyColdWalletScreen() {
   };
 
   useEffect(() => {
-    if (!modalVisible && selectedDevice) {
+    if (!modalVisible && selectedDevice && shouldShowPinModal) {
       setPinModalVisible(true);
     }
   }, [modalVisible, selectedDevice]);
@@ -563,9 +564,14 @@ function MyColdWalletScreen() {
     }
   };
 
+  const handleCancel = () => {
+    setModalVisible(false);
+    setShouldShowPinModal(false);
+  };
   // 设备选择和显示弹窗的处理函数
   const handleDevicePress = async (device) => {
     setSelectedDevice(device);
+    setShouldShowPinModal(true);
     setModalVisible(false);
 
     try {
@@ -1328,11 +1334,13 @@ function MyColdWalletScreen() {
         isScanning={isScanning}
         iconColor={iconColor}
         onDevicePress={handleDevicePress}
-        onCancel={() => setModalVisible(false)}
+        onCancel={handleCancel}
         verifiedDevices={verifiedDevices}
         MyColdWalletScreenStyle={MyColdWalletScreenStyle}
         t={t}
+        onDisconnectPress={handleDisconnectPress} // 新增的回调函数
       />
+
       {/* PIN码输入modal窗口 */}
       <MyColdWalletPinModal
         visible={pinModalVisible}

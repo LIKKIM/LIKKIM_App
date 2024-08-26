@@ -20,6 +20,7 @@ const MyColdWalletBluetoothModal = ({
   verifiedDevices,
   MyColdWalletScreenStyle,
   t,
+  onDisconnectPress, // 添加断开连接的回调函数
 }) => {
   return (
     <Modal
@@ -68,6 +69,20 @@ const MyColdWalletBluetoothModal = ({
                         <Text style={MyColdWalletScreenStyle.modalSubtitle}>
                           {item.name || item.id}
                         </Text>
+                        {isVerified && (
+                          <TouchableOpacity
+                            style={MyColdWalletScreenStyle.disconnectButton}
+                            onPress={() => onDisconnectPress(item)} // 断开连接的逻辑
+                          >
+                            <Text
+                              style={
+                                MyColdWalletScreenStyle.disconnectButtonText
+                              }
+                            >
+                              {t("Disconnect")}
+                            </Text>
+                          </TouchableOpacity>
+                        )}
                       </View>
                     </TouchableOpacity>
                   );
