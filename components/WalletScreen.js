@@ -2376,10 +2376,22 @@ function WalletScreen({ route, navigation }) {
                   >
                     <View style={WalletScreenStyle.addCryptoOverlay} />
                     <View style={WalletScreenStyle.iconAndTextContainer}>
-                      <Image
-                        source={crypto.icon}
-                        style={WalletScreenStyle.addCardIcon}
-                      />
+                      <View
+                        style={{
+                          width: 30,
+                          height: 30,
+                          alignItems: "center",
+                          justifyContent: "center",
+                          borderRadius: 15,
+                          backgroundColor: "#ffffff50",
+                          overflow: "hidden",
+                        }}
+                      >
+                        <Image
+                          source={crypto.icon}
+                          style={WalletScreenStyle.addCardIcon}
+                        />
+                      </View>
                       <Text style={WalletScreenStyle.addCryptoImageText}>
                         {crypto.shortName}
                       </Text>

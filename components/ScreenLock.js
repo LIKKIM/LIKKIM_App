@@ -5,11 +5,11 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  Alert,
   StyleSheet,
   KeyboardAvoidingView,
   ScrollView,
   Platform,
+  Modal,
 } from "react-native";
 import { CryptoContext, DarkModeContext } from "./CryptoContext";
 import { useTranslation } from "react-i18next"; // 导入国际化库
@@ -18,27 +18,32 @@ import * as LocalAuthentication from 'expo-local-authentication';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const ScreenLock = () => {
-  const { screenLockPassword, setIsAppLaunching } = useContext(CryptoContext); // 使用 setIsAppLaunching
+  const { screenLockPassword, setIsAppLaunching } = useContext(CryptoContext);
   const { isDarkMode } = useContext(DarkModeContext);
   const [inputPassword, setInputPassword] = useState("");
-  const [isPasswordHidden, setIsPasswordHidden] = useState(true); // 用于控制密码的可见性
-  const { t } = useTranslation(); // 使用国际化 hook
+  const [isPasswordHidden, setIsPasswordHidden] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false); // 用于显示丢失密码的 Modal
+  const [errorModalVisible, setErrorModalVisible] = useState(false); // 用于显示错误信息的 Modal
+  const { t } = useTranslation();
 
   const handleUnlock = () => {
     if (inputPassword === screenLockPassword) {
-      setIsAppLaunching(false); // 解锁后设置 isAppLaunching 为 false
+      setIsAppLaunching(false);
     } else {
-      Alert.alert(t("Incorrect Password"), t("Please try again.")); // 国际化提示
+      setErrorModalVisible(true); // 显示错误 Modal
     }
   };
 
   const handleLostPassword = () => {
-    Alert.alert(
-      t("I lost my password"),
-      t(
-        "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings."
-      )
-    );
+    setModalVisible(true); // 显示丢失密码的 Modal
+  };
+
+  const handleCloseModal = () => {
+    setModalVisible(false); // 关闭丢失密码的 Modal
+  };
+
+  const handleCloseErrorModal = () => {
+    setErrorModalVisible(false); // 关闭错误 Modal
   };
 
   const themeStyles = isDarkMode ? darkStyles : lightStyles;
@@ -72,22 +77,17 @@ const ScreenLock = () => {
     >
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <View style={[styles.container, themeStyles.container]}>
-          <View
-            style={{
-              alignItems: "center",
-            }}
-          >
+          <View style={styles.header}>
             <Text style={[styles.title, themeStyles.title]}>{t("LIKKIM")}</Text>
             <Text style={[styles.subTitle, themeStyles.subTitle]}>
               {t("Enter Password to Unlock")}
             </Text>
           </View>
 
-          {/* 密码输入框和小眼睛图标 */}
           <View style={styles.passwordInputContainer}>
             <TextInput
               style={[styles.input, themeStyles.input]}
-              secureTextEntry={isPasswordHidden} // 根据状态控制密码是否隐藏
+              secureTextEntry={isPasswordHidden}
               value={inputPassword}
               onChangeText={setInputPassword}
               placeholder={t("Enter Password")}
@@ -106,13 +106,12 @@ const ScreenLock = () => {
           </View>
 
           <TouchableOpacity
-            style={[styles.button, themeStyles.button]} // 圆角按钮样式
+            style={[styles.button, themeStyles.button]}
             onPress={handleUnlock}
           >
             <Text style={themeStyles.buttonText}>{t("Unlock")}</Text>
           </TouchableOpacity>
 
-          {/* "I lost my password" 文本 */}
           <TouchableOpacity
             onPress={handleLostPassword}
             style={styles.lostPasswordContainer}
@@ -124,6 +123,58 @@ const ScreenLock = () => {
             </Text>
           </TouchableOpacity>
         </View>
+
+        {/* 丢失密码的 Modal */}
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={handleCloseModal}
+        >
+          <View style={styles.modalBackground}>
+            <View style={[styles.modalView, themeStyles.modalView]}>
+              <Text style={[styles.modalTitle, themeStyles.modalTitle]}>
+                {t("I lost my password")}
+              </Text>
+              <Text style={[styles.modalText, themeStyles.modalText]}>
+                {t(
+                  "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings."
+                )}
+              </Text>
+              <TouchableOpacity
+                style={[styles.closeButton, themeStyles.closeButton]}
+                onPress={handleCloseModal}
+              >
+                <Text style={themeStyles.buttonText}>{t("OK")}</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
+
+        {/* 密码错误的 Modal */}
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={errorModalVisible}
+          onRequestClose={handleCloseErrorModal}
+        >
+          <View style={styles.modalBackground}>
+            <View style={[styles.modalView, themeStyles.modalView]}>
+              <Text style={[styles.modalTitle, themeStyles.modalTitle]}>
+                {t("Incorrect Password")}
+              </Text>
+              <Text style={[styles.modalText, themeStyles.modalText]}>
+                {t("Please try again.")}
+              </Text>
+              <TouchableOpacity
+                style={[styles.closeButton, themeStyles.closeButton]}
+                onPress={handleCloseErrorModal}
+              >
+                <Text style={themeStyles.buttonText}>{t("OK")}</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
       </ScrollView>
     </KeyboardAvoidingView>
   );
@@ -136,30 +187,26 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 20,
   },
+  header: {
+    alignItems: "center",
+    marginBottom: 20,
+  },
   title: {
     fontSize: 24,
-    marginBottom: 20,
     fontWeight: "bold",
   },
   subTitle: {
     fontSize: 16,
-    marginBottom: 20,
+    marginTop: 10,
   },
   input: {
     width: "100%",
-    height: 50, // 确保输入框的高度一致
+    height: 50,
     borderRadius: 8,
     paddingHorizontal: 15,
-    paddingRight: 50, // 给右侧的小眼睛图标留出空间
+    paddingRight: 50,
     marginBottom: 20,
     fontSize: 18,
-  },
-  button: {
-    width: "100%",
-    height: 50,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 25, // 设置圆角
   },
   passwordInputContainer: {
     flexDirection: "row",
@@ -169,30 +216,67 @@ const styles = StyleSheet.create({
   },
   eyeIcon: {
     position: "absolute",
-    right: 15, // 确保图标靠近输入框的右边缘
-    top: "50%", // 垂直居中
-    transform: [{ translateY: -22 }], // 偏移量为图标高度的一半，调整为适合的值
+    right: 15,
+    top: "50%",
+    transform: [{ translateY: -12 }],
     alignItems: "center",
     justifyContent: "center",
   },
+  button: {
+    width: "100%",
+    height: 50,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 25,
+  },
   lostPasswordContainer: {
-    marginTop: 30, // 调整这个值来确定文本的位置
+    marginTop: 30,
     alignItems: "center",
   },
   lostPasswordText: {
     fontSize: 16,
   },
+  modalBackground: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modalView: {
+    backgroundColor: "#fff",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    width: "80%", // Optional: Adjust modal width if needed
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginBottom: 15,
+  },
+  modalText: {
+    fontSize: 16,
+    textAlign: "center",
+    marginBottom: 20,
+  },
+  closeButton: {
+    width: "100%",
+    height: 50,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 25,
+  },
 });
 
 const lightStyles = StyleSheet.create({
-  subTitle: {
-    color: "#999",
-  },
   container: {
     backgroundColor: "#fff",
   },
   title: {
     color: "#333",
+  },
+  subTitle: {
+    color: "#999",
   },
   input: {
     color: "#000",
@@ -210,19 +294,31 @@ const lightStyles = StyleSheet.create({
     fontWeight: "bold",
   },
   lostPasswordText: {
-    color: "#8E80F0", // 你可以调整这个颜色
+    color: "#8E80F0",
+  },
+  modalView: {
+    backgroundColor: "#fff",
+  },
+  modalTitle: {
+    color: "#333",
+  },
+  modalText: {
+    color: "#666",
+  },
+  closeButton: {
+    backgroundColor: "#8E80F0",
   },
 });
 
 const darkStyles = StyleSheet.create({
-  subTitle: {
-    color: "#ccc",
-  },
   container: {
     backgroundColor: "#24234C",
   },
   title: {
     color: "#f5f5f5",
+  },
+  subTitle: {
+    color: "#ccc",
   },
   input: {
     color: "#fff",
@@ -240,7 +336,19 @@ const darkStyles = StyleSheet.create({
     fontWeight: "bold",
   },
   lostPasswordText: {
-    color: "#6C6CF4", // 你可以调整这个颜色
+    color: "#6C6CF4",
+  },
+  modalView: {
+    backgroundColor: "#2A2A48",
+  },
+  modalTitle: {
+    color: "#f5f5f5",
+  },
+  modalText: {
+    color: "#ccc",
+  },
+  closeButton: {
+    backgroundColor: "#6C6CF4",
   },
 });
 
