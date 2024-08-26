@@ -593,8 +593,7 @@ function MyColdWalletScreen() {
 
   const handlePinSubmit = async () => {
     setPinModalVisible(false);
-    setVerificationSuccessModalVisible(false);
-    setVerificationFailModalVisible(false);
+    setVerificationModalVisible(false);
 
     const pinCodeValue = parseInt(pinCode, 10);
     const verificationCodeValue = parseInt(
@@ -603,31 +602,27 @@ function MyColdWalletScreen() {
     );
 
     if (pinCodeValue === verificationCodeValue) {
-      setVerificationSuccessModalVisible(true);
+      setVerificationStatus("success");
 
-      // 清空已验证设备的状态并持久化
-      const newVerifiedDevices = [selectedDevice.id]; // 只存储当前设备的ID
+      // 更新设备验证状态
+      const newVerifiedDevices = [selectedDevice.id];
       setVerifiedDevices(newVerifiedDevices);
       console.log("验证成功！验证状态已更新。");
-      // 将更新后的 verifiedDevices 存储到 AsyncStorage
       await AsyncStorage.setItem(
         "verifiedDevices",
         JSON.stringify(newVerifiedDevices)
       );
-
-      // 更新全局状态为成功
       setIsVerificationSuccessful(true);
-      console.log("验证成功！验证状态已更新。");
     } else {
       console.log("PIN 验证失败");
+      setVerificationStatus("fail");
       stopMonitoringVerificationCode();
       await selectedDevice.cancelConnection();
-      setVerificationFailModalVisible(true);
     }
 
+    setVerificationModalVisible(true);
     setPinCode("");
   };
-
   // 处理断开连接的逻辑
   const handleDisconnectDevice = async (device) => {
     try {
@@ -1329,71 +1324,14 @@ function MyColdWalletScreen() {
         isDarkMode={isDarkMode}
         t={t}
       />
-
-      {/* 成功验证模态框 */}
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={verificationSuccessModalVisible}
-        onRequestClose={() => setVerificationSuccessModalVisible(false)}
-      >
-        <BlurView intensity={10} style={MyColdWalletScreenStyle.centeredView}>
-          <View style={MyColdWalletScreenStyle.pinModalView}>
-            <Image
-              source={require("../assets/gif/Success.gif")}
-              style={{ width: 120, height: 120, marginTop: 20 }}
-            />
-            <Text style={MyColdWalletScreenStyle.modalTitle}>
-              {t("Verification successful!")}
-            </Text>
-            <Text style={MyColdWalletScreenStyle.modalSubtitle}>
-              {t("You can now safely use the device.")}
-            </Text>
-            <TouchableOpacity
-              style={MyColdWalletScreenStyle.submitButton}
-              onPress={() => setVerificationSuccessModalVisible(false)}
-            >
-              <Text style={MyColdWalletScreenStyle.submitButtonText}>
-                {t("Close")}
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </BlurView>
-      </Modal>
-
-      {/* 失败验证模态框 */}
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={verificationFailModalVisible}
-        onRequestClose={() => setVerificationFailModalVisible(false)}
-      >
-        <BlurView intensity={10} style={MyColdWalletScreenStyle.centeredView}>
-          <View style={MyColdWalletScreenStyle.pinModalView}>
-            <Image
-              source={require("../assets/gif/Fail.gif")}
-              style={{ width: 120, height: 120, marginTop: 20 }}
-            />
-
-            <Text style={MyColdWalletScreenStyle.modalTitle}>
-              {t("Verification failed!")}
-            </Text>
-            <Text style={MyColdWalletScreenStyle.modalSubtitle}>
-              {t(
-                "The verification code you entered is incorrect. Please try again."
-              )}
-            </Text>
-            <TouchableOpacity
-              style={MyColdWalletScreenStyle.submitButton}
-              onPress={() => setVerificationFailModalVisible(false)}
-            >
-              <Text style={MyColdWalletScreenStyle.submitButtonText}>
-                {t("Close")}
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </BlurView>
-      </Modal>
+      {/* 验证密模态框 */}
+      <MyColdWalletVerificationModal
+        visible={verificationModalVisible}
+        status={verificationStatus}
+        onClose={() => setVerificationModalVisible(false)}
+        styles={MyColdWalletScreenStyle}
+        t={t}
+      />
       {/* 二次确认模态框   Confirm Disconnect Modal */}
       <ConfirmDisconnectModal
         visible={confirmDisconnectModalVisible}
