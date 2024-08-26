@@ -513,6 +513,19 @@ function TransactionsScreen() {
                     ),
                     image: require("../assets/gif/Success.gif"),
                   });
+
+                  // 发送广播成功的命令 FA 01 02 D1 A0 0D 0A
+                  const successCommand = new Uint8Array([
+                    0xfa, 0x01, 0x02, 0xd1, 0xa0, 0x0d, 0x0a,
+                  ]);
+                  const base64SuccessCommand =
+                    base64.fromByteArray(successCommand);
+
+                  await device.writeCharacteristicWithResponseForService(
+                    serviceUUID,
+                    writeCharacteristicUUID,
+                    base64SuccessCommand
+                  );
                 } else if (result.code === -1) {
                   console.log("签名广播失败");
 
@@ -524,6 +537,18 @@ function TransactionsScreen() {
                     ),
                     image: require("../assets/gif/Fail.gif"),
                   });
+
+                  // 发送广播失败的命令 FA 00 02 D0 30 0D 0A
+                  const failCommand = new Uint8Array([
+                    0xfa, 0x00, 0x02, 0xd0, 0x30, 0x0d, 0x0a,
+                  ]);
+                  const base64FailCommand = base64.fromByteArray(failCommand);
+
+                  await device.writeCharacteristicWithResponseForService(
+                    serviceUUID,
+                    writeCharacteristicUUID,
+                    base64FailCommand
+                  );
                 }
 
                 if (Array.isArray(result.data)) {
