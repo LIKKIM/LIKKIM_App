@@ -129,6 +129,7 @@ function AppContent({
     <View style={{ flex: 1, backgroundColor: bottomBackgroundColor }}>
       <Tab.Navigator
         screenOptions={({ route }) => ({
+          lazy: false,
           //    tabBarButton: (props) => (
           //      <TouchableOpacity
           //        {...props}
