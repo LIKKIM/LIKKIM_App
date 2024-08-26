@@ -33,6 +33,7 @@ import ChangePasswordModal from "./modal/ChangePasswordModal";
 import ConfirmDisconnectModal from "./modal/ConfirmDisconnectModal";
 import MyColdWalletSuccessModal from "./modal/MyColdWalletSuccessModal";
 import MyColdWalletErrorModal from "./modal/MyColdWalletErrorModal";
+import MyColdWalletPinModal from "./modal/MyColdWalletPinModal";
 import { languages } from "../config/languages";
 import base64 from "base64-js";
 import { Buffer } from "buffer";
@@ -1403,55 +1404,16 @@ function MyColdWalletScreen() {
         </BlurView>
       </Modal>
       {/* PIN码输入modal窗口 */}
-      <Modal
-        animationType="slide"
-        transparent={true}
+      <MyColdWalletPinModal
         visible={pinModalVisible}
-        onRequestClose={() => setPinModalVisible(false)}
-      >
-        <BlurView intensity={10} style={MyColdWalletScreenStyle.centeredView}>
-          <View style={MyColdWalletScreenStyle.pinModalView}>
-            <View style={{ alignItems: "center" }}>
-              <Text style={MyColdWalletScreenStyle.pinModalTitle}>
-                {t("Enter PIN to Connect")}
-              </Text>
-              <Text style={MyColdWalletScreenStyle.modalSubtitle}>
-                {t(
-                  "Use the PIN code to establish a secure connection with your LIKKIM hardware."
-                )}
-              </Text>
-            </View>
-            <TextInput
-              style={MyColdWalletScreenStyle.passwordInput}
-              placeholder={t("Enter PIN")}
-              placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
-              keyboardType="numeric"
-              secureTextEntry
-              onChangeText={setPinCode}
-              value={pinCode}
-              autoFocus={true}
-            />
-            <View style={{ width: "100%" }}>
-              <TouchableOpacity
-                style={MyColdWalletScreenStyle.submitButton}
-                onPress={() => handlePinSubmit(selectedDevice, pinCode)}
-              >
-                <Text style={MyColdWalletScreenStyle.submitButtonText}>
-                  {t("Submit")}
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={MyColdWalletScreenStyle.cancelButton}
-                onPress={() => setPinModalVisible(false)}
-              >
-                <Text style={MyColdWalletScreenStyle.cancelButtonText}>
-                  {t("Cancel")}
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </BlurView>
-      </Modal>
+        pinCode={pinCode}
+        setPinCode={setPinCode}
+        onSubmit={handlePinSubmit}
+        onCancel={() => setPinModalVisible(false)}
+        styles={MyColdWalletScreenStyle}
+        isDarkMode={isDarkMode}
+        t={t}
+      />
 
       {/* 成功验证模态框 */}
       <Modal
