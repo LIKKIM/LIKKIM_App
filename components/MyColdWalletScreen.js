@@ -731,7 +731,7 @@ function MyColdWalletScreen() {
       ),
     },
     {
-      title: t("Address Book"),
+      title: t("Address Book 功能开发中"),
       icon: "portrait",
       onPress: () => {
         Vibration.vibrate();
