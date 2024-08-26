@@ -10,6 +10,7 @@ function AddressBookModal({
   onSelect,
   styles,
   isDarkMode,
+  onAddAddress, // 添加回调函数
 }) {
   return (
     <Modal
@@ -21,19 +22,28 @@ function AddressBookModal({
       <BlurView intensity={10} style={styles.centeredView}>
         <View style={styles.modalView}>
           <Text style={styles.modalTitle}>Address Book</Text>
+
           <FlatList
             data={addresses}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
               <TouchableOpacity onPress={() => onSelect(item)}>
-                <Text style={styles.addressItemText}>
+                <Text style={styles.Text}>
                   {item.name}: {item.address}
                 </Text>
               </TouchableOpacity>
             )}
           />
+          {/* "Add Address" 按钮 */}
+          <TouchableOpacity
+            onPress={onAddAddress} // 触发回调函数
+            style={styles.submitButton} // 使用现有的样式
+          >
+            <Text style={styles.submitButtonText}>Add Address</Text>
+          </TouchableOpacity>
+
           <TouchableOpacity onPress={onClose} style={styles.closeButton}>
-            <Text style={styles.closeButtonText}>Close</Text>
+            <Text style={styles.cancelButtonText}>Close</Text>
           </TouchableOpacity>
         </View>
       </BlurView>

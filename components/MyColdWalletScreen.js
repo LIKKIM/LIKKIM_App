@@ -120,6 +120,10 @@ function MyColdWalletScreen() {
     { id: "1", name: "Home", address: "0x1234..." },
     { id: "2", name: "Office", address: "0x5678..." },
   ]);
+  const handleAddAddress = () => {
+    // 处理添加地址的逻辑，例如导航到添加地址的页面
+    console.log("Add Address button clicked");
+  };
 
   const handleAddressSelect = (address) => {
     console.log("Selected Address:", address);
@@ -1379,8 +1383,9 @@ function MyColdWalletScreen() {
         onClose={() => setAddressBookModalVisible(false)}
         addresses={addresses}
         onSelect={handleAddressSelect}
-        styles={MyColdWalletScreenStyle} // 传递样式
-        isDarkMode={isDarkMode} // 传递黑暗模式状态
+        styles={MyColdWalletScreenStyle}
+        isDarkMode={isDarkMode}
+        onAddAddress={handleAddAddress} // 传递添加地址的回调函数
       />
     </LinearGradient>
   );
