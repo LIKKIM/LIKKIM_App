@@ -10,7 +10,8 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   Platform,
-  Clipboard, // 引入 Clipboard 模块
+  Clipboard,
+  TouchableWithoutFeedback, // 导入 TouchableWithoutFeedback 组件
 } from "react-native";
 import { BlurView } from "expo-blur";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -107,7 +108,6 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
     }
   };
 
-  // 按字母顺序排序的区块链网络列表
   const networks = [
     "Akash",
     "Algorand",
@@ -183,223 +183,236 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
         keyboardVerticalOffset={Platform.OS === "ios" ? 64 : 0} // 根据需要调整偏移量
       >
         <BlurView intensity={10} style={styles.centeredView}>
-          <View
-            style={[
-              styles.addressModalView,
-              { justifyContent: "space-between" },
-            ]}
+          <TouchableWithoutFeedback
+            onPress={() => setDropdownVisible(null)} // 点击非 dropdown 区域关闭 dropdown
           >
-            {!isAddingAddress ? (
-              <>
-                <Text style={styles.modalTitle}>Address Book</Text>
-
+            <View
+              style={[
+                styles.addressModalView,
+                { justifyContent: "space-between" },
+              ]}
+            >
+              {!isAddingAddress ? (
                 <>
-                  {/* 搜索框 */}
-                  <View style={styles.searchContainer}>
-                    <Icon name="search" size={20} style={styles.searchIcon} />
-                    <TextInput
-                      style={styles.searchInput}
-                      placeholder="Search Address"
-                      placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
-                      onChangeText={setSearchAddress}
-                      value={searchAddress}
-                    />
-                  </View>
+                  <Text style={styles.modalTitle}>Address Book</Text>
 
-                  <FlatList
-                    data={filteredAddresses}
-                    keyExtractor={(item) => item.id}
-                    renderItem={({ item }) => (
-                      <View>
-                        <TouchableOpacity
-                          onPress={() => {
-                            onSelect(item); // 将选中的地址返回给 InputAddressModal
-                          }}
-                          style={{
-                            width: 280,
-                            paddingVertical: 10,
-                            alignItems: "center",
-                            flexDirection: "row",
-                            justifyContent: "space-between",
-                          }}
-                        >
-                          <View
-                            style={{ flexDirection: "column", flexShrink: 1 }}
+                  <>
+                    {/* 搜索框 */}
+                    <View style={styles.searchContainer}>
+                      <Icon name="search" size={20} style={styles.searchIcon} />
+                      <TextInput
+                        style={styles.searchInput}
+                        placeholder="Search Address"
+                        placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
+                        onChangeText={setSearchAddress}
+                        value={searchAddress}
+                      />
+                    </View>
+
+                    <FlatList
+                      data={filteredAddresses}
+                      keyExtractor={(item) => item.id}
+                      renderItem={({ item }) => (
+                        <View>
+                          <TouchableOpacity
+                            onPress={() => {
+                              onSelect(item); // 将选中的地址返回给 InputAddressModal
+                            }}
+                            style={{
+                              width: 280,
+                              paddingVertical: 10,
+                              alignItems: "center",
+                              flexDirection: "row",
+                              justifyContent: "space-between",
+                            }}
                           >
                             <View
                               style={{
-                                flexDirection: "row",
-                                marginBottom: 5,
-                                flexWrap: "wrap",
+                                flexDirection: "column",
+                                flexShrink: 1,
                               }}
                             >
-                              <Text style={[styles.Text, { marginRight: 10 }]}>
-                                Network: {item.network}
+                              <View
+                                style={{
+                                  flexDirection: "row",
+                                  marginBottom: 5,
+                                  flexWrap: "wrap",
+                                }}
+                              >
+                                <Text
+                                  style={[styles.Text, { marginRight: 10 }]}
+                                >
+                                  Network: {item.network}
+                                </Text>
+                                <Text style={styles.Text}>
+                                  Name: {item.name}
+                                </Text>
+                              </View>
+                              <Text
+                                style={[styles.Text, { flexShrink: 1 }]} // 允许文本在需要时缩小
+                                numberOfLines={1} // 限制为一行
+                                ellipsizeMode="middle" // 在中间截断文本并添加省略号
+                              >
+                                Address: {item.address}
                               </Text>
-                              <Text style={styles.Text}>Name: {item.name}</Text>
                             </View>
-                            <Text
-                              style={[styles.Text, { flexShrink: 1 }]} // 允许文本在需要时缩小
-                              numberOfLines={1} // 限制为一行
-                              ellipsizeMode="middle" // 在中间截断文本并添加省略号
+                            <TouchableOpacity
+                              onPress={() => toggleDropdown(item.id)}
+                              style={{ marginLeft: 10 }} // 给图标和文字间一些间距
                             >
-                              Address: {item.address}
-                            </Text>
-                          </View>
-                          <TouchableOpacity
-                            onPress={() => toggleDropdown(item.id)}
-                            style={{ marginLeft: 10 }} // 给图标和文字间一些间距
-                          >
-                            <Icon
-                              name="more-vert"
-                              size={24}
-                              color={isDarkMode ? "#fff" : "#000"} // 根据模式动态设置颜色
-                            />
+                              <Icon
+                                name="more-vert"
+                                size={24}
+                                color={isDarkMode ? "#fff" : "#000"} // 根据模式动态设置颜色
+                              />
+                            </TouchableOpacity>
                           </TouchableOpacity>
-                        </TouchableOpacity>
 
-                        {dropdownVisible === item.id && (
-                          <View style={styles.dropdown}>
+                          {dropdownVisible === item.id && (
+                            <View style={styles.dropdown}>
+                              <TouchableOpacity
+                                onPress={() => handleCopy(item.address)}
+                              >
+                                <Text style={styles.dropdownButtonText}>
+                                  Copy
+                                </Text>
+                              </TouchableOpacity>
+                              <TouchableOpacity
+                                onPress={() => handleDelete(item.id)}
+                              >
+                                <Text style={styles.dropdownButtonText}>
+                                  Delete
+                                </Text>
+                              </TouchableOpacity>
+                              <TouchableOpacity
+                                onPress={() => handleEdit(item.id)}
+                              >
+                                <Text style={styles.dropdownButtonText}>
+                                  Edit
+                                </Text>
+                              </TouchableOpacity>
+                            </View>
+                          )}
+                        </View>
+                      )}
+                    />
+
+                    <TouchableOpacity
+                      onPress={() => setIsAddingAddress(true)}
+                      style={styles.submitButton}
+                    >
+                      <Text style={styles.submitButtonText}>Add Address</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={onClose}
+                      style={styles.closeButton}
+                    >
+                      <Text style={styles.cancelButtonText}>Close</Text>
+                    </TouchableOpacity>
+                  </>
+                </>
+              ) : (
+                <>
+                  {/* 包裹三个输入框的视图 */}
+                  <View style={{ marginBottom: 10, width: "100%" }}>
+                    {/* Network 选择窗口 */}
+
+                    <TouchableOpacity
+                      style={[
+                        styles.passwordInput,
+                        {
+                          flexDirection: "row",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                        },
+                      ]}
+                      onPress={() =>
+                        setNetworkDropdownVisible(!networkDropdownVisible)
+                      }
+                    >
+                      <Text
+                        style={{
+                          color: newNetwork ? styles.Text.color : "#ccc",
+                        }}
+                      >
+                        {newNetwork || "Select Network"}
+                      </Text>
+                      <Icon
+                        name={
+                          networkDropdownVisible ? "expand-less" : "expand-more"
+                        }
+                        size={24}
+                        color={styles.Text.color}
+                      />
+                    </TouchableOpacity>
+                    {networkDropdownVisible && (
+                      <View style={{ width: "100%", marginBottom: 10 }}>
+                        <ScrollView style={{ maxHeight: 200 }}>
+                          {networks.map((network) => (
                             <TouchableOpacity
-                              onPress={() => handleCopy(item.address)}
+                              key={network}
+                              onPress={() => {
+                                setNewNetwork(network);
+                                setNetworkDropdownVisible(false);
+                              }}
+                              style={{
+                                padding: 10,
+                                backgroundColor:
+                                  network === newNetwork
+                                    ? styles.submitButton.backgroundColor
+                                    : styles.passwordInput.backgroundColor,
+                              }}
                             >
-                              <Text style={styles.dropdownButtonText}>
-                                Copy
+                              <Text style={{ color: styles.Text.color }}>
+                                {network}
                               </Text>
                             </TouchableOpacity>
-                            <TouchableOpacity
-                              onPress={() => handleDelete(item.id)}
-                            >
-                              <Text style={styles.dropdownButtonText}>
-                                Delete
-                              </Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                              onPress={() => handleEdit(item.id)}
-                            >
-                              <Text style={styles.dropdownButtonText}>
-                                Edit
-                              </Text>
-                            </TouchableOpacity>
-                          </View>
-                        )}
+                          ))}
+                        </ScrollView>
                       </View>
                     )}
-                  />
 
-                  <TouchableOpacity
-                    onPress={() => setIsAddingAddress(true)}
-                    style={styles.submitButton}
-                  >
-                    <Text style={styles.submitButtonText}>Add Address</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    onPress={onClose}
-                    style={styles.closeButton}
-                  >
-                    <Text style={styles.cancelButtonText}>Close</Text>
-                  </TouchableOpacity>
-                </>
-              </>
-            ) : (
-              <>
-                {/* 包裹三个输入框的视图 */}
-                <View style={{ marginBottom: 10, width: "100%" }}>
-                  {/* Network 选择窗口 */}
+                    {/* 仅当 networkDropdownVisible 为 false 时显示 Name 和 Address 输入框 */}
+                    {!networkDropdownVisible && (
+                      <>
+                        <TextInput
+                          style={[styles.passwordInput]}
+                          placeholder="Name Required"
+                          placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
+                          onChangeText={setNewName}
+                          value={newName}
+                        />
+                        <TextInput
+                          style={[styles.addressInput]}
+                          placeholder="Address Required"
+                          placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
+                          onChangeText={setNewAddress}
+                          value={newAddress}
+                          multiline
+                        />
+                      </>
+                    )}
+                  </View>
 
-                  <TouchableOpacity
-                    style={[
-                      styles.passwordInput,
-                      {
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                      },
-                    ]}
-                    onPress={() =>
-                      setNetworkDropdownVisible(!networkDropdownVisible)
-                    }
-                  >
-                    <Text
-                      style={{ color: newNetwork ? styles.Text.color : "#ccc" }}
+                  {/* 包裹两个按钮的视图 */}
+                  <View style={styles.buttonContainer}>
+                    <TouchableOpacity
+                      onPress={handleSaveAddress}
+                      style={styles.submitButton}
                     >
-                      {newNetwork || "Select Network"}
-                    </Text>
-                    <Icon
-                      name={
-                        networkDropdownVisible ? "expand-less" : "expand-more"
-                      }
-                      size={24}
-                      color={styles.Text.color}
-                    />
-                  </TouchableOpacity>
-                  {networkDropdownVisible && (
-                    <View style={{ width: "100%", marginBottom: 10 }}>
-                      <ScrollView style={{ maxHeight: 200 }}>
-                        {networks.map((network) => (
-                          <TouchableOpacity
-                            key={network}
-                            onPress={() => {
-                              setNewNetwork(network);
-                              setNetworkDropdownVisible(false);
-                            }}
-                            style={{
-                              padding: 10,
-                              backgroundColor:
-                                network === newNetwork
-                                  ? styles.submitButton.backgroundColor
-                                  : styles.passwordInput.backgroundColor,
-                            }}
-                          >
-                            <Text style={{ color: styles.Text.color }}>
-                              {network}
-                            </Text>
-                          </TouchableOpacity>
-                        ))}
-                      </ScrollView>
-                    </View>
-                  )}
-
-                  {/* 仅当 networkDropdownVisible 为 false 时显示 Name 和 Address 输入框 */}
-                  {!networkDropdownVisible && (
-                    <>
-                      <TextInput
-                        style={[styles.passwordInput]}
-                        placeholder="Name Required"
-                        placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
-                        onChangeText={setNewName}
-                        value={newName}
-                      />
-                      <TextInput
-                        style={[styles.addressInput]}
-                        placeholder="Address Required"
-                        placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
-                        onChangeText={setNewAddress}
-                        value={newAddress}
-                        multiline
-                      />
-                    </>
-                  )}
-                </View>
-
-                {/* 包裹两个按钮的视图 */}
-                <View style={styles.buttonContainer}>
-                  <TouchableOpacity
-                    onPress={handleSaveAddress}
-                    style={styles.submitButton}
-                  >
-                    <Text style={styles.submitButtonText}>Save</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    onPress={() => setIsAddingAddress(false)}
-                    style={styles.closeButton}
-                  >
-                    <Text style={styles.cancelButtonText}>Back</Text>
-                  </TouchableOpacity>
-                </View>
-              </>
-            )}
-          </View>
+                      <Text style={styles.submitButtonText}>Save</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() => setIsAddingAddress(false)}
+                      style={styles.closeButton}
+                    >
+                      <Text style={styles.cancelButtonText}>Back</Text>
+                    </TouchableOpacity>
+                  </View>
+                </>
+              )}
+            </View>
+          </TouchableWithoutFeedback>
         </BlurView>
       </KeyboardAvoidingView>
     </Modal>
