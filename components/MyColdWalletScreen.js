@@ -36,6 +36,7 @@ import MyColdWalletErrorModal from "./modal/MyColdWalletErrorModal";
 import MyColdWalletPinModal from "./modal/MyColdWalletPinModal";
 import MyColdWalletBluetoothModal from "./modal/MyColdWalletBluetoothModal";
 import MyColdWalletVerificationModal from "./modal/MyColdWalletVerificationModal";
+import * as LocalAuthentication from "expo-local-authentication";
 import AddressBookModal from "./modal/AddressBookModal";
 import { languages } from "../config/languages";
 import base64 from "base64-js";
@@ -138,9 +139,24 @@ function MyColdWalletScreen() {
   });
 
   const toggleFaceID = async (value) => {
-    setIsFaceIDEnabled(value);
-    // 在这里可以添加逻辑，例如将状态保存到AsyncStorage或触发相关的逻辑
-    await AsyncStorage.setItem("faceID", value ? "open" : "close");
+    if (value) {
+      // 启用时进行一次Face ID验证
+      const result = await LocalAuthentication.authenticateAsync({
+        promptMessage: t("Authenticate to enable Face ID"),
+      });
+
+      if (result.success) {
+        setIsFaceIDEnabled(value);
+        await AsyncStorage.setItem("faceID", value ? "open" : "close");
+      } else {
+        // 如果验证失败，可以弹出提示或者保持原状态
+        Alert.alert(t("Authentication Failed"), t("Unable to enable Face ID."));
+      }
+    } else {
+      // 直接禁用
+      setIsFaceIDEnabled(value);
+      await AsyncStorage.setItem("faceID", "close");
+    }
   };
 
   // Called when the user clicks the "Disconnect" button
@@ -780,16 +796,16 @@ function MyColdWalletScreen() {
             icon: "face",
             onPress: () => {
               Vibration.vibrate(); // 添加震动反馈
-              toggleFaceID(!isFaceIDEnabled); // 添加Face ID的Toggle功能
+              toggleFaceID(!isFaceIDEnabled); // 修改后的toggleFaceID
             },
             toggle: (
               <Switch
                 trackColor={{ false: "#767577", true: "#81b0ff" }}
                 thumbColor={isFaceIDEnabled ? "#fff" : "#f4f3f4"}
                 ios_backgroundColor="#3e3e3e"
-                onValueChange={() => {
+                onValueChange={async () => {
                   Vibration.vibrate(); // 添加震动反馈
-                  toggleFaceID(!isFaceIDEnabled); // 添加Face ID的Toggle功能
+                  await toggleFaceID(!isFaceIDEnabled); // 修改后的toggleFaceID
                 }}
                 value={isFaceIDEnabled} // 使用相关状态
               />
