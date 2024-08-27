@@ -129,7 +129,10 @@ function AddressBookModal({
                             </Text>
                           </TouchableOpacity>
                           <TouchableOpacity
-                            onPress={() => handleEdit(item.address)}
+                            onPress={() => {
+                              setIsAddingAddress(true); // 切换到添加新地址的视图
+                              handleEdit(item.address);
+                            }}
                           >
                             <Text style={styles.dropdownButtonText}>Edit</Text>
                           </TouchableOpacity>
