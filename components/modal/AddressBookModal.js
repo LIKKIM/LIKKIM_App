@@ -105,12 +105,10 @@ function AddressBookModal({
               { justifyContent: "space-between" },
             ]}
           >
-            {!isAddingAddress && (
-              <Text style={styles.modalTitle}>Address Book</Text>
-            )}
-
             {!isAddingAddress ? (
               <>
+                <Text style={styles.modalTitle}>Address Book</Text>
+
                 <>
                   {/* 搜索框 */}
                   <View style={styles.searchContainer}>
@@ -144,7 +142,7 @@ function AddressBookModal({
                         >
                           <View style={{ flexDirection: "column" }}>
                             <View style={{ flexDirection: "row" }}>
-                              <Text style={[styles.Text, { marginRight: 10 }]}>
+                              <Text style={styles.Text}>
                                 Network: {item.network}
                               </Text>
                               <Text style={styles.Text}>Name: {item.name}</Text>
@@ -208,7 +206,6 @@ function AddressBookModal({
               </>
             ) : (
               <>
-                {/* 不显示 Address Book 标题时的页面 */}
                 <Text style={styles.modalTitle}>Add New Address</Text>
 
                 {/* 包裹三个输入框的视图 */}
