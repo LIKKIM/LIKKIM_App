@@ -152,8 +152,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                       <View>
                         <TouchableOpacity
                           onPress={() => {
-                            setIsAddingAddress(true); // 切换到添加新地址的视图
-                            onSelect(item); // 调用传递进来的选择地址回调
+                            onSelect(item); // 将选中的地址返回给 InputAddressModal
                           }}
                           style={{
                             width: 280,

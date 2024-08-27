@@ -32,11 +32,17 @@ const InputAddressModal = ({
   selectedCryptoChain,
   selectedCryptoIcon,
 }) => {
-  const [isAddressBookVisible, setAddressBookVisible] = useState(false); // 新增状态
+  const [isAddressBookVisible, setAddressBookVisible] = useState(false); // 控制 AddressBookModal 的可见性
   const MyColdWalletScreenStyle = MyColdWalletScreenStyles(isDarkMode);
   const handleIconPress = () => {
     setAddressBookVisible(true);
     setInputAddressModalVisible(false); // 确保 InputAddressModal 关闭
+  };
+
+  const handleAddressSelect = (selectedAddress) => {
+    handleAddressChange(selectedAddress.address); // 更新输入框中的地址
+    setInputAddressModalVisible(true); // 重新打开 InputAddressModal
+    setAddressBookVisible(false); // 关闭 AddressBookModal
   };
 
   return (
@@ -169,11 +175,7 @@ const InputAddressModal = ({
       <AddressBookModal
         visible={isAddressBookVisible}
         onClose={() => setAddressBookVisible(false)} // 关闭 AddressBookModal
-        onSelect={(selectedAddress) => {
-          handleAddressChange(selectedAddress.address); // 更新输入框中的地址
-          setAddressBookVisible(false); // 选择地址后关闭 AddressBookModal
-          setInputAddressModalVisible(true); // 重新打开 InputAddressModal
-        }}
+        onSelect={handleAddressSelect} // 选择地址后处理
         styles={MyColdWalletScreenStyle}
         isDarkMode={isDarkMode}
       />
