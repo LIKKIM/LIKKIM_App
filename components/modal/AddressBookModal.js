@@ -1,4 +1,3 @@
-// AddressBookModal.js
 import React, { useState } from "react";
 import {
   Modal,
@@ -12,7 +11,7 @@ import {
 import { BlurView } from "expo-blur";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
-function MyColdWalletBluetoothModal({
+function AddressBookModal({
   visible,
   onClose,
   addresses,
@@ -20,14 +19,6 @@ function MyColdWalletBluetoothModal({
   styles,
   isDarkMode,
   onAddAddress,
-  devices,
-  isScanning,
-  iconColor,
-  onDevicePress,
-  onCancel,
-  verifiedDevices,
-  t,
-  onDisconnectPress,
 }) {
   const [searchAddress, setSearchAddress] = useState("");
   const [isAddingAddress, setIsAddingAddress] = useState(false);
@@ -35,7 +26,7 @@ function MyColdWalletBluetoothModal({
   const [newName, setNewName] = useState("");
   const [newAddress, setNewAddress] = useState("");
   const [networkDropdownVisible, setNetworkDropdownVisible] = useState(false);
-  const [dropdownVisible, setDropdownVisible] = useState(null); // 新增状态，用于控制哪个地址显示Dropdown
+  const [dropdownVisible, setDropdownVisible] = useState(null); // 控制哪个地址显示Dropdown
 
   const filteredAddresses = addresses?.filter(
     (address) =>
@@ -77,150 +68,87 @@ function MyColdWalletBluetoothModal({
         >
           {!isAddingAddress ? (
             <>
-              <Text style={styles.modalTitle}>
-                {isScanning ? "Bluetooth Devices" : "Address Book"}
-              </Text>
+              <Text style={styles.modalTitle}>Address Book</Text>
 
-              {!isScanning ? (
-                <>
-                  {/* 搜索框 */}
-                  <View style={styles.searchContainer}>
-                    <Icon name="search" size={20} style={styles.searchIcon} />
-                    <TextInput
-                      style={styles.searchInput}
-                      placeholder="Search Address"
-                      placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
-                      onChangeText={setSearchAddress}
-                      value={searchAddress}
-                    />
-                  </View>
-
-                  <FlatList
-                    data={filteredAddresses}
-                    keyExtractor={(item) => item.id}
-                    renderItem={({ item }) => (
-                      <View>
-                        <TouchableOpacity
-                          onPress={() => onSelect(item)}
-                          style={{
-                            width: 280,
-                            paddingVertical: 10,
-                            alignItems: "center",
-                            flexDirection: "row",
-                            justifyContent: "space-between",
-                          }}
-                        >
-                          <Text style={[styles.Text, { textAlign: "left" }]}>
-                            {item.name}: {item.address}
-                          </Text>
-                          <TouchableOpacity
-                            onPress={() => toggleDropdown(item.id)}
-                          >
-                            <Icon
-                              name="more-vert"
-                              size={24}
-                              color={isDarkMode ? "#fff" : "#000"} // 根据模式动态设置颜色
-                            />
-                          </TouchableOpacity>
-                        </TouchableOpacity>
-                        {dropdownVisible === item.id && (
-                          <View
-                            style={
-                              isDarkMode ? styles.dropdown : styles.dropdown
-                            }
-                          >
-                            <TouchableOpacity
-                              onPress={() => handleCopy(item.address)}
-                            >
-                              <Text
-                                style={
-                                  isDarkMode
-                                    ? styles.dropdownButtonText
-                                    : styles.dropdownButtonText
-                                }
-                              >
-                                Copy
-                              </Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                              onPress={() => handleDelete(item.address)}
-                            >
-                              <Text
-                                style={
-                                  isDarkMode
-                                    ? styles.dropdownButtonText
-                                    : styles.dropdownButtonText
-                                }
-                              >
-                                Delete
-                              </Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                              onPress={() => handleEdit(item.address)}
-                            >
-                              <Text
-                                style={
-                                  isDarkMode
-                                    ? styles.dropdownButtonText
-                                    : styles.dropdownButtonText
-                                }
-                              >
-                                Edit
-                              </Text>
-                            </TouchableOpacity>
-                          </View>
-                        )}
-                      </View>
-                    )}
+              <>
+                {/* 搜索框 */}
+                <View style={styles.searchContainer}>
+                  <Icon name="search" size={20} style={styles.searchIcon} />
+                  <TextInput
+                    style={styles.searchInput}
+                    placeholder="Search Address"
+                    placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
+                    onChangeText={setSearchAddress}
+                    value={searchAddress}
                   />
+                </View>
 
-                  <TouchableOpacity
-                    onPress={() => setIsAddingAddress(true)}
-                    style={styles.submitButton}
-                  >
-                    <Text style={styles.submitButtonText}>Add Address</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    onPress={onClose}
-                    style={styles.closeButton}
-                  >
-                    <Text style={styles.cancelButtonText}>Close</Text>
-                  </TouchableOpacity>
-                </>
-              ) : (
-                <>
-                  <FlatList
-                    data={devices}
-                    keyExtractor={(item) => item.id}
-                    renderItem={({ item }) => (
+                <FlatList
+                  data={filteredAddresses}
+                  keyExtractor={(item) => item.id}
+                  renderItem={({ item }) => (
+                    <View>
                       <TouchableOpacity
                         onPress={() => {
-                          // 处理设备选择逻辑
-                          onDevicePress(item);
-
-                          // 确保此处不调用关闭 Modal 的方法
-                          // 如果有必要关闭Modal, 可以在设备选择逻辑完成后调用:
-                          // onClose();
+                          setIsAddingAddress(true); // 切换到添加新地址的视图
+                          onSelect(item); // 调用传递进来的选择地址回调
+                        }}
+                        style={{
+                          width: 280,
+                          paddingVertical: 10,
+                          alignItems: "center",
+                          flexDirection: "row",
+                          justifyContent: "space-between",
                         }}
                       >
-                        <Text style={styles.Text}>
-                          {item.name || "Unnamed Device"} - {item.id}
+                        <Text style={[styles.Text, { textAlign: "left" }]}>
+                          {item.name}: {item.address}
                         </Text>
-                        {verifiedDevices.includes(item.id) && (
-                          <Icon name="verified" size={20} color={iconColor} />
-                        )}
+                        <TouchableOpacity
+                          onPress={() => toggleDropdown(item.id)}
+                        >
+                          <Icon
+                            name="more-vert"
+                            size={24}
+                            color={isDarkMode ? "#fff" : "#000"} // 根据模式动态设置颜色
+                          />
+                        </TouchableOpacity>
                       </TouchableOpacity>
-                    )}
-                  />
+                      {dropdownVisible === item.id && (
+                        <View style={styles.dropdown}>
+                          <TouchableOpacity
+                            onPress={() => handleCopy(item.address)}
+                          >
+                            <Text style={styles.dropdownButtonText}>Copy</Text>
+                          </TouchableOpacity>
+                          <TouchableOpacity
+                            onPress={() => handleDelete(item.address)}
+                          >
+                            <Text style={styles.dropdownButtonText}>
+                              Delete
+                            </Text>
+                          </TouchableOpacity>
+                          <TouchableOpacity
+                            onPress={() => handleEdit(item.address)}
+                          >
+                            <Text style={styles.dropdownButtonText}>Edit</Text>
+                          </TouchableOpacity>
+                        </View>
+                      )}
+                    </View>
+                  )}
+                />
 
-                  <TouchableOpacity
-                    onPress={onCancel}
-                    style={styles.closeButton}
-                  >
-                    <Text style={styles.cancelButtonText}>Cancel</Text>
-                  </TouchableOpacity>
-                </>
-              )}
+                <TouchableOpacity
+                  onPress={() => setIsAddingAddress(true)}
+                  style={styles.submitButton}
+                >
+                  <Text style={styles.submitButtonText}>Add Address</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={onClose} style={styles.closeButton}>
+                  <Text style={styles.cancelButtonText}>Close</Text>
+                </TouchableOpacity>
+              </>
             </>
           ) : (
             <>
@@ -233,7 +161,6 @@ function MyColdWalletBluetoothModal({
                 <TouchableOpacity
                   style={[
                     styles.passwordInput,
-
                     {
                       flexDirection: "row",
                       justifyContent: "space-between",
@@ -310,7 +237,6 @@ function MyColdWalletBluetoothModal({
                     <TextInput
                       style={[
                         styles.passwordInput,
-
                         { height: 120 }, // 这里设置高度，可以根据需要调整
                       ]}
                       placeholder="Address"
@@ -353,4 +279,4 @@ function MyColdWalletBluetoothModal({
   );
 }
 
-export default MyColdWalletBluetoothModal;
+export default AddressBookModal;

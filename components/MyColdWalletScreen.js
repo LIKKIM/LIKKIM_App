@@ -128,7 +128,7 @@ function MyColdWalletScreen() {
 
   const handleAddressSelect = (address) => {
     console.log("Selected Address:", address);
-    setAddressBookModalVisible(false);
+
     // 这里可以添加进一步的处理逻辑，例如设置选中的地址为交易地址
   };
   const [isFaceIDEnabled, setIsFaceIDEnabled] = useState(() => {
