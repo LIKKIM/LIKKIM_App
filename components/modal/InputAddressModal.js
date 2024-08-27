@@ -65,17 +65,41 @@ const InputAddressModal = ({
           {t("Enter the recipient's address:")}
         </Text>
         <View style={{ width: "100%" }}>
-          <TextInput
-            style={[
-              TransactionsScreenStyle.input,
-              { color: isDarkMode ? "#ffffff" : "#000" },
-            ]}
-            placeholder={t("Enter Address")}
-            placeholderTextColor={isDarkMode ? "#ffffff" : "#24234C"}
-            onChangeText={handleAddressChange}
-            value={inputAddress}
-            autoFocus={true}
-          />
+          <View
+            style={{
+              width: "100%",
+              flexDirection: "row",
+              alignItems: "center",
+              height: 100,
+            }}
+          >
+            <TextInput
+              style={[
+                TransactionsScreenStyle.input,
+                {
+                  flex: 1, // 让 TextInput 占据父容器的剩余空间
+                  color: isDarkMode ? "#ffffff" : "#000",
+                },
+              ]}
+              placeholder={t("Enter Address")}
+              placeholderTextColor={isDarkMode ? "#ffffff" : "#24234C"}
+              onChangeText={handleAddressChange}
+              value={inputAddress}
+              autoFocus={true}
+            />
+            <Icon
+              name="portrait"
+              size={28}
+              color={isDarkMode ? "#ffffff" : "#000"}
+              style={{
+                marginLeft: 6,
+                alignSelf: "center",
+                position: "relative",
+                top: 10,
+              }} // 给图标一些左边距
+            />
+          </View>
+
           <ScrollView
             style={{ maxHeight: 60, marginVertical: 10 }}
             contentContainerStyle={{ flexGrow: 1 }}

@@ -316,7 +316,6 @@ const TransactionsScreenStyles = (isDarkMode) => {
       backgroundColor: inputBackgroundColor,
       padding: 10,
       marginTop: 20,
-
       justifyContent: "center",
       borderRadius: 10,
       height: 60,
