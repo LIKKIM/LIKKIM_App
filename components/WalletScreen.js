@@ -1282,7 +1282,6 @@ function WalletScreen({ route, navigation }) {
 
     if (pinCodeValue === verificationCodeValue) {
       console.log("PIN 验证成功");
-      console.log("PIN 验证成功");
       setVerificationSuccessModalVisible(true);
 
       // 更新全局状态为成功，并在终端打印消息
@@ -1296,6 +1295,23 @@ function WalletScreen({ route, navigation }) {
         "verifiedDevices",
         JSON.stringify(newVerifiedDevices)
       );
+
+      // 发送成功命令 F4 03 10 00 04 95 97 0D 0A
+      const successCommand = new Uint8Array([
+        0xf4, 0x03, 0x10, 0x00, 0x04, 0x95, 0x97, 0x0d, 0x0a,
+      ]);
+      const base64SuccessCommand = base64.fromByteArray(successCommand);
+
+      try {
+        await selectedDevice.writeCharacteristicWithResponseForService(
+          serviceUUID,
+          writeCharacteristicUUID,
+          base64SuccessCommand
+        );
+        console.log("Success command has been sent");
+      } catch (error) {
+        console.error("Failed to send success command", error);
+      }
     } else {
       console.log("PIN 验证失败");
 
@@ -1775,8 +1791,8 @@ function WalletScreen({ route, navigation }) {
           </View>
         )}
         {cryptoCards.map((card, index) => {
-          console.log('card------')
-          console.log(card.cardImage, card.icon)
+          console.log("card------");
+          console.log(card.cardImage, card.icon);
 
           const isBlackText =
             card.shortName === "BTC" ||
@@ -1792,8 +1808,8 @@ function WalletScreen({ route, navigation }) {
                 ? "#FF5252"
                 : "#F23645"
               : isBlackText
-                ? "#22AA94"
-                : "#0C9981";
+              ? "#22AA94"
+              : "#0C9981";
           const priceChange = priceChanges[card.shortName]?.priceChange || "0";
           const percentageChange =
             priceChanges[card.shortName]?.percentageChange || "0";
@@ -2018,7 +2034,7 @@ function WalletScreen({ route, navigation }) {
                   style={[
                     WalletScreenStyle.tabButtonText,
                     activeTab === "Prices" &&
-                    WalletScreenStyle.activeTabButtonText,
+                      WalletScreenStyle.activeTabButtonText,
                   ]}
                 >
                   {t("Prices")}
@@ -2035,7 +2051,7 @@ function WalletScreen({ route, navigation }) {
                   style={[
                     WalletScreenStyle.tabButtonText,
                     activeTab === "History" &&
-                    WalletScreenStyle.activeTabButtonText,
+                      WalletScreenStyle.activeTabButtonText,
                   ]}
                 >
                   {t("History")}
