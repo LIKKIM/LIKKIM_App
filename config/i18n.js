@@ -159,6 +159,7 @@ i18n
           "Your device is already verified.":
             "Your device is already verified.",
           "Creating on LIKKIM Hardware...": "Creating on LIKKIM Hardware...",
+          "Address Book": "Address Book",
         },
       },
       zh: {
@@ -198,7 +199,6 @@ i18n
           "Enter the recipient's address:": "输入接收者的地址:",
           "Enter Address": "输入地址",
           Submit: "提交",
-
           "Choose the cryptocurrency to send:": "选择要发送的加密货币:",
           "Choose the cryptocurrency to receive:": "选择要接收的加密货币:",
           "Address for": "地址",
@@ -305,6 +305,7 @@ i18n
           "Importing on LIKKIM Hardware...": "正在 LIKKIM 硬件上导入...",
           "Your device is already verified.": "您的设备已验证。",
           "Creating on LIKKIM Hardware...": "正在 LIKKIM 硬件上创建...",
+          "Address Book": "地址簿",
         },
       },
       "zh-TW": {
@@ -456,6 +457,7 @@ i18n
           "Importing on LIKKIM Hardware...": "正在 LIKKIM 硬體上導入...",
           "Your device is already verified.": "您的設備已驗證。",
           "Creating on LIKKIM Hardware...": "正在 LIKKIM 硬體上創建...",
+          "Address Book": "地址簿",
         },
       },
       fr: {
@@ -640,6 +642,7 @@ i18n
             "Votre appareil est déjà vérifié.",
           "Creating on LIKKIM Hardware...":
             "Création sur le matériel LIKKIM...",
+          "Address Book": "Carnet d'adresses",
         },
       },
       es: {
@@ -800,6 +803,7 @@ i18n
           "Your device is already verified.":
             "Su dispositivo ya está verificado.",
           "Creating on LIKKIM Hardware...": "Creando en hardware LIKKIM...",
+          "Address Book": "Libreta de direcciones",
         },
       },
       ar: {
@@ -953,6 +957,7 @@ i18n
             "جاري الاستيراد على جهاز LIKKIM...",
           "Your device is already verified.": "تم التحقق من جهازك بالفعل.",
           "Creating on LIKKIM Hardware...": "جارٍ الإنشاء على جهاز LIKKIM...",
+          "Address Book": "دفتر العناوين",
         },
       },
       ja: {
@@ -1132,6 +1137,7 @@ i18n
           "Your device is already verified.":
             "お使いのデバイスは既に認証されています。",
           "Creating on LIKKIM Hardware...": "LIKKIMハードウェアで作成中...",
+          "Address Book": "アドレス帳",
         },
       },
       ru: {
@@ -1290,6 +1296,7 @@ i18n
           "Your device is already verified.": "Ваше устройство уже проверено.",
           "Creating on LIKKIM Hardware...":
             "Создание на оборудовании LIKKIM...",
+          "Address Book": "Адресная книга",
         },
       },
       ko: {
@@ -1441,6 +1448,7 @@ i18n
           "Importing on LIKKIM Hardware...": "LIKKIM 하드웨어로 가져오는 중...",
           "Your device is already verified.": "장치가 이미 확인되었습니다.",
           "Creating on LIKKIM Hardware...": "LIKKIM 하드웨어에서 생성 중...",
+          "Address Book": "주소록",
         },
       },
       pt: {
@@ -1599,6 +1607,7 @@ i18n
           "Your device is already verified.":
             "Seu dispositivo já está verificado.",
           "Creating on LIKKIM Hardware...": "Criando no hardware LIKKIM...",
+          "Address Book": "Livro de Endereços",
         },
       },
       "pt-BR": {
@@ -1758,6 +1767,7 @@ i18n
           "Your device is already verified.":
             "Seu dispositivo já está verificado.",
           "Creating on LIKKIM Hardware...": "Criando no hardware LIKKIM...",
+          "Address Book": "Livro de Endereços",
         },
       },
       it: {
@@ -1919,6 +1929,7 @@ i18n
           "Your device is already verified.":
             "Il tuo dispositivo è già verificato.",
           "Creating on LIKKIM Hardware...": "Creazione su hardware LIKKIM...",
+          "Address Book": "Rubrica",
         },
       },
       de: {
@@ -2081,6 +2092,7 @@ i18n
           "Your device is already verified.":
             "Ihr Gerät ist bereits verifiziert.",
           "Creating on LIKKIM Hardware...": "Erstellen auf LIKKIM-Hardware...",
+          "Address Book": "Adressbuch",
         },
       },
       hi: {
@@ -2241,6 +2253,7 @@ i18n
             "आपका डिवाइस पहले ही सत्यापित हो चुका है।",
           "Creating on LIKKIM Hardware...":
             "LIKKIM हार्डवेयर पर बना रहे हैं...",
+          "Address Book": "पता पुस्तिका",
         },
       },
       mn: {
@@ -2411,6 +2424,7 @@ i18n
           "Your device is already verified.":
             "อุปกรณ์ของคุณได้รับการยืนยันแล้ว",
           "Creating on LIKKIM Hardware...": "กำลังสร้างบนฮาร์ดแวร์ LIKKIM...",
+          "Address Book": "Хаягийн дэвтэр",
         },
       },
       th: {
@@ -2562,6 +2576,7 @@ i18n
           "Your device is already verified.":
             "อุปกรณ์ของคุณได้รับการยืนยันแล้ว",
           "Creating on LIKKIM Hardware...": "กำลังสร้างบนฮาร์ดแวร์ LIKKIM...",
+          "Address Book": "สมุดที่อยู่",
         },
       },
       uk: {
@@ -2718,6 +2733,7 @@ i18n
           "Your device is already verified.": "Ваш пристрій вже перевірено.",
           "Creating on LIKKIM Hardware...":
             "Створення на апаратному забезпеченні LIKKIM...",
+          "Address Book": "Адресна книга",
         },
       },
       vi: {
@@ -2875,6 +2891,7 @@ i18n
           "Your device is already verified.":
             "Thiết bị của bạn đã được xác minh.",
           "Creating on LIKKIM Hardware...": "Đang tạo trên phần cứng LIKKIM...",
+          "Address Book": "Sổ địa chỉ",
         },
       },
       id: {
@@ -3034,6 +3051,7 @@ i18n
             "Perangkat Anda sudah diverifikasi.",
           "Creating on LIKKIM Hardware...":
             "Membuat di perangkat keras LIKKIM...",
+          "Address Book": "Buku Alamat",
         },
       },
       tl: {
@@ -3196,6 +3214,7 @@ i18n
           "Your device is already verified.":
             "Ang iyong device ay napatunayan na.",
           "Creating on LIKKIM Hardware...": "Gumagawa sa LIKKIM hardware...",
+          "Address Book": "Aklat ng mga Adresa",
         },
       },
       bn: {
@@ -3358,6 +3377,7 @@ i18n
             "আপনার ডিভাইসটি ইতিমধ্যেই যাচাই করা হয়েছে।",
           "Creating on LIKKIM Hardware...":
             "LIKKIM হার্ডওয়্যারে তৈরি করা হচ্ছে...",
+          "Address Book": "ঠিকানা বই",
         },
       },
     },
