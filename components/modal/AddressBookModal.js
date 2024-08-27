@@ -1,5 +1,5 @@
 // AddressBookModal.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Modal,
   View,
@@ -13,16 +13,9 @@ import {
 } from "react-native";
 import { BlurView } from "expo-blur";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-function AddressBookModal({
-  visible,
-  onClose,
-  addresses,
-  onSelect,
-  styles,
-  isDarkMode,
-  onAddAddress,
-}) {
+function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
   const [searchAddress, setSearchAddress] = useState("");
   const [isAddingAddress, setIsAddingAddress] = useState(false);
   const [newNetwork, setNewNetwork] = useState("");
@@ -31,6 +24,29 @@ function AddressBookModal({
   const [networkDropdownVisible, setNetworkDropdownVisible] = useState(false);
   const [dropdownVisible, setDropdownVisible] = useState(null); // 控制哪个地址显示Dropdown
   const [savedAddresses, setSavedAddresses] = useState([]); // 保存地址的状态
+
+  useEffect(() => {
+    const loadAddresses = async () => {
+      try {
+        const storedAddresses = await AsyncStorage.getItem("savedAddresses");
+        if (storedAddresses) {
+          setSavedAddresses(JSON.parse(storedAddresses));
+        }
+      } catch (error) {
+        console.error("Failed to load addresses", error);
+      }
+    };
+
+    loadAddresses();
+  }, []);
+
+  const saveAddressesToStorage = async (addresses) => {
+    try {
+      await AsyncStorage.setItem("savedAddresses", JSON.stringify(addresses));
+    } catch (error) {
+      console.error("Failed to save addresses", error);
+    }
+  };
 
   const filteredAddresses = savedAddresses.filter(
     (address) =>
@@ -50,6 +66,7 @@ function AddressBookModal({
   const handleDelete = (id) => {
     const updatedAddresses = savedAddresses.filter((item) => item.id !== id);
     setSavedAddresses(updatedAddresses);
+    saveAddressesToStorage(updatedAddresses);
     setDropdownVisible(null); // 隐藏Dropdown
   };
 
@@ -73,7 +90,9 @@ function AddressBookModal({
         name: newName,
         address: newAddress,
       };
-      setSavedAddresses([...savedAddresses, newEntry]);
+      const updatedAddresses = [...savedAddresses, newEntry];
+      setSavedAddresses(updatedAddresses);
+      saveAddressesToStorage(updatedAddresses);
       // 清空输入框
       setNewNetwork("");
       setNewName("");
