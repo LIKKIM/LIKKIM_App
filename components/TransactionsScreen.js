@@ -13,6 +13,7 @@ import {
   Platform,
   Image,
 } from "react-native";
+import InputAddressModal from "./modal/InputAddressModal";
 import { LinearGradient } from "expo-linear-gradient";
 import { BlurView } from "expo-blur";
 import QRCode from "react-native-qrcode-svg";
@@ -1097,31 +1098,31 @@ function TransactionsScreen() {
   const handlePinSubmit = async () => {
     // 首先关闭 "Enter PIN to Connect" 的模态框
     setPinModalVisible(false);
-  
+
     // 关闭所有其他可能打开的模态框
     setVerificationSuccessModalVisible(false);
     setVerificationFailModalVisible(false);
-  
+
     // 将用户输入的 PIN 转换为数字
     const pinCodeValue = parseInt(pinCode, 10); // 将 "1234" 转换为数字 1234
-  
+
     // 将接收到的验证码转换为数字
     const verificationCodeValue = parseInt(
       receivedVerificationCode.replace(" ", ""),
       16
     );
-  
+
     console.log(`用户输入的 PIN 数值: ${pinCodeValue}`);
     console.log(`接收到的验证码数值: ${verificationCodeValue}`);
-  
+
     if (pinCodeValue === verificationCodeValue) {
       console.log("PIN 验证成功");
       setVerificationSuccessModalVisible(true);
-  
+
       // 更新全局状态为成功，并在终端打印消息
       setIsVerificationSuccessful(true);
       console.log("验证成功！验证状态已更新。");
-  
+
       // 将已验证的设备ID添加到verifiedDevices状态中并持久化到本地存储
       const newVerifiedDevices = [...verifiedDevices, selectedDevice.id];
       setVerifiedDevices(newVerifiedDevices);
@@ -1129,11 +1130,13 @@ function TransactionsScreen() {
         "verifiedDevices",
         JSON.stringify(newVerifiedDevices)
       );
-  
+
       // 发送成功命令 F4 03 10 00 04 95 97 0D 0A
-      const successCommand = new Uint8Array([0xF4, 0x03, 0x10, 0x00, 0x04, 0x95, 0x97, 0x0D, 0x0A]);
+      const successCommand = new Uint8Array([
+        0xf4, 0x03, 0x10, 0x00, 0x04, 0x95, 0x97, 0x0d, 0x0a,
+      ]);
       const base64SuccessCommand = base64.fromByteArray(successCommand);
-  
+
       try {
         await selectedDevice.writeCharacteristicWithResponseForService(
           serviceUUID,
@@ -1146,7 +1149,7 @@ function TransactionsScreen() {
       }
     } else {
       console.log("PIN 验证失败");
-  
+
       // 停止监听验证码
       if (monitorSubscription) {
         try {
@@ -1156,7 +1159,7 @@ function TransactionsScreen() {
           console.error("停止监听时发生错误:", error);
         }
       }
-  
+
       // 主动断开与嵌入式设备的连接
       if (selectedDevice) {
         try {
@@ -1166,14 +1169,13 @@ function TransactionsScreen() {
           console.error("断开连接时发生错误:", error);
         }
       }
-  
+
       setVerificationFailModalVisible(true); // 显示失败提示
     }
-  
+
     // 清空 PIN 输入框
     setPinCode("");
   };
-  
 
   const handleVerifyAddress = () => {
     if (verifiedDevices.length > 0) {
@@ -1422,111 +1424,24 @@ function TransactionsScreen() {
         </View>
 
         {/* 输入地址的 Modal */}
-        <Modal
-          animationType="slide"
-          transparent={true}
+        <InputAddressModal
           visible={inputAddressModalVisible}
           onRequestClose={() => setInputAddressModalVisible(false)}
-        >
-          <KeyboardAvoidingView
-            behavior={Platform.OS === "ios" ? "padding" : "height"}
-            style={TransactionsScreenStyle.centeredView}
-          >
-            {/* BlurView as the background */}
-            <BlurView
-              intensity={10}
-              style={TransactionsScreenStyle.blurBackground}
-            />
-
-            {/* Card container on top */}
-            <View style={TransactionsScreenStyle.cardContainer}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  marginBottom: 10,
-                }}
-              >
-                {selectedCryptoIcon && (
-                  <Image
-                    source={selectedCryptoIcon}
-                    style={{ width: 24, height: 24, marginRight: 8 }}
-                  />
-                )}
-                <Text style={TransactionsScreenStyle.modalTitle}>
-                  {selectedCrypto} ({selectedCryptoChain})
-                </Text>
-              </View>
-              <Text style={TransactionsScreenStyle.modalTitle}>
-                {t("Enter the recipient's address:")}
-              </Text>
-              <View style={{ width: "100%" }}>
-                <TextInput
-                  style={[
-                    TransactionsScreenStyle.input,
-                    { color: isDarkMode ? "#ffffff" : "#000" },
-                  ]}
-                  placeholder={t("Enter Address")}
-                  placeholderTextColor={isDarkMode ? "#ffffff" : "#24234C"}
-                  onChangeText={handleAddressChange}
-                  value={inputAddress}
-                  autoFocus={true}
-                />
-                <ScrollView
-                  style={{
-                    maxHeight: 60, // 限制 ScrollView 的最大高度为 50
-                    marginVertical: 10,
-                  }}
-                  contentContainerStyle={{ flexGrow: 1 }} // 确保内容充满可用空间
-                  nestedScrollEnabled={true} // 允许嵌套滚动
-                >
-                  <Text
-                    style={{
-                      color:
-                        detectedNetwork === "Invalid address"
-                          ? "#FF5252"
-                          : "#22AA94",
-                      lineHeight: 36, // 设置与 minHeight 相同的 lineHeight 以实现垂直居中
-                      textAlignVertical: "center", // 适用于 Android 的文本垂直居中
-                    }}
-                  >
-                    {inputAddress
-                      ? detectedNetwork === "Invalid address"
-                        ? t("Invalid address")
-                        : `${t("Detected Network")}: ${detectedNetwork}`
-                      : ""}
-                  </Text>
-                </ScrollView>
-              </View>
-
-              <TouchableOpacity
-                style={[
-                  TransactionsScreenStyle.optionButton,
-                  {
-                    backgroundColor: isAddressValid
-                      ? buttonBackgroundColor
-                      : disabledButtonBackgroundColor, // 动态设置按钮颜色
-                  },
-                ]}
-                onPress={handleNextAfterAddress}
-                disabled={!isAddressValid}
-              >
-                <Text style={TransactionsScreenStyle.submitButtonText}>
-                  {t("Next")}
-                </Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                style={TransactionsScreenStyle.cancelButton}
-                onPress={() => setInputAddressModalVisible(false)}
-              >
-                <Text style={TransactionsScreenStyle.cancelButtonText}>
-                  {t("Cancel")}
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </KeyboardAvoidingView>
-        </Modal>
+          TransactionsScreenStyle={TransactionsScreenStyle}
+          t={t}
+          isDarkMode={isDarkMode}
+          handleAddressChange={handleAddressChange}
+          inputAddress={inputAddress}
+          detectedNetwork={detectedNetwork}
+          isAddressValid={isAddressValid}
+          buttonBackgroundColor={buttonBackgroundColor}
+          disabledButtonBackgroundColor={disabledButtonBackgroundColor}
+          handleNextAfterAddress={handleNextAfterAddress}
+          setInputAddressModalVisible={setInputAddressModalVisible}
+          selectedCrypto={selectedCrypto}
+          selectedCryptoChain={selectedCryptoChain}
+          selectedCryptoIcon={selectedCryptoIcon}
+        />
 
         {/* 输入金额的 Modal */}
         <Modal
