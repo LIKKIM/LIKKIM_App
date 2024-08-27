@@ -107,7 +107,68 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
     }
   };
 
-  const networks = ["Ethereum", "Bitcoin", "Litecoin", "Ripple"];
+  // 按字母顺序排序的区块链网络列表
+  const networks = [
+    "Akash",
+    "Algorand",
+    "Aptos",
+    "Arbitrum",
+    "Astar",
+    "Aurora",
+    "Avalanche",
+    "Base",
+    "Bitcoin",
+    "Bitcoin Cash",
+    "Blast",
+    "BNB Smart Chain",
+    "Boba Network",
+    "Celo",
+    "Celestia / Lightning Network",
+    "Conflux",
+    "Conflux eSpace",
+    "Cosmos",
+    "Cronos",
+    "Crypto.org",
+    "DIS CHAIN",
+    "Dogecoin",
+    "Dynex",
+    "Ethereum",
+    "Ethereum Classic",
+    "EthereumPoW",
+    "Fantom",
+    "Fetch.ai",
+    "Filecoin",
+    "Filecoin FEVM",
+    "Gnosis Chain",
+    "Huobi ECO Chain",
+    "IoTeX Network Mainnet",
+    "Juno",
+    "Joystream",
+    "Kaspa",
+    "Kusama",
+    "Linea",
+    "Litecoin",
+    "Manta Atlantic",
+    "Manta Pacific Mainnet",
+    "Mantle",
+    "Mixin Virtual Machine",
+    "Monero",
+    "Near",
+    "Nervos",
+    "Neurai",
+    "Nexa",
+    "OctaSpace",
+    "OKX Chain",
+    "Optimism",
+    "Polygon",
+    "Ripple",
+    "Secret Network",
+    "Solana",
+    "Starcoin",
+    "SUI",
+    "Tron",
+    "zkSync Era Mainnet",
+  ].sort();
 
   return (
     <Modal
@@ -262,7 +323,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                   </TouchableOpacity>
                   {networkDropdownVisible && (
                     <View style={{ width: "100%", marginBottom: 10 }}>
-                      <ScrollView>
+                      <ScrollView style={{ maxHeight: 200 }}>
                         {networks.map((network) => (
                           <TouchableOpacity
                             key={network}
