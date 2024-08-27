@@ -189,7 +189,7 @@ function WalletScreen({ route, navigation }) {
             },
             body: JSON.stringify({
               chainShortName: "TRON", // 区块链的简称
-              address: "TN121JdH9t2y7qjuExHrYMdJA5RHJXdaZK", // 查询的地址
+              address: "TXAq2qZCAdgAbQmbaYhx213P2JjhKQbbTZ", // 查询的地址
               protocolType: "token_20", // 协议类型，表示代币类型
             }),
           }

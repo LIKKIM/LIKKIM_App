@@ -86,7 +86,7 @@ const initialAdditionalCryptos = [
     balance: "0.0",
     icon: require("../assets/USDTIcon.png"),
     cardImage: require("../assets/Card43.png"),
-    address: "TN121JdH9t2y7qjuExHrYMdJA5RHJXdaZK",
+    address: "TXAq2qZCAdgAbQmbaYhx213P2JjhKQbbTZ",
     chain: "Tron",
     chainShortName: "TRX",
     queryChainShortName: "TRON", // 用于查询的字段
@@ -216,7 +216,7 @@ export const usdtCrypto = {
   balance: "0.0",
   icon: require("../assets/USDTIcon.png"),
   cardImage: require("../assets/Card43.png"),
-  address: "TN121JdH9t2y7qjuExHrYMdJA5RHJXdaZK",
+  address: "TXAq2qZCAdgAbQmbaYhx213P2JjhKQbbTZ",
   chain: "Tron",
   chainShortName: "TRX",
   queryChainShortName: "TRON", // 用于查询的字段
