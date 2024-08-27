@@ -56,7 +56,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
     },
     addressModalView: {
       margin: 20,
-      height: 600,
+      height: 480,
       width: "90%",
       backgroundColor: modalBackgroundColor,
       borderRadius: 20,
@@ -378,6 +378,15 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       color: textColor,
       marginBottom: 10,
     },
+    addressInput: {
+      backgroundColor: inputBackgroundColor,
+      padding: 15,
+      borderRadius: 10,
+      height: 120,
+      width: "100%",
+      color: textColor,
+    },
+
     passwordInputContainer: {
       flexDirection: "row",
       alignItems: "center",
@@ -425,6 +434,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       width: "100%",
     },
     searchContainer: {
+      height: 50,
       flexDirection: "row",
       alignItems: "center",
       borderRadius: 10,

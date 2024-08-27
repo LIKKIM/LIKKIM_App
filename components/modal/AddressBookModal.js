@@ -206,14 +206,10 @@ function AddressBookModal({
               </>
             ) : (
               <>
-                <Text style={styles.modalTitle}>Add New Address</Text>
-
                 {/* 包裹三个输入框的视图 */}
-                <View style={{ marginBottom: 20, width: "100%" }}>
+                <View style={{ marginBottom: 10, width: "100%" }}>
                   {/* Network 选择窗口 */}
-                  <Text style={[styles.Text, { marginBottom: 5 }]}>
-                    Network
-                  </Text>
+
                   <TouchableOpacity
                     style={[
                       styles.passwordInput,
@@ -228,7 +224,7 @@ function AddressBookModal({
                     }
                   >
                     <Text
-                      style={{ color: newNetwork ? styles.Text.color : "#666" }}
+                      style={{ color: newNetwork ? styles.Text.color : "#ccc" }}
                     >
                       {newNetwork || "Select Network"}
                     </Text>
@@ -270,38 +266,16 @@ function AddressBookModal({
                   {/* 仅当 networkDropdownVisible 为 false 时显示 Name 和 Address 输入框 */}
                   {!networkDropdownVisible && (
                     <>
-                      {/* Name 输入框 */}
-                      <Text
-                        style={[
-                          styles.Text,
-                          { marginBottom: 5, marginTop: 10 },
-                        ]}
-                      >
-                        Name
-                      </Text>
                       <TextInput
                         style={[styles.passwordInput]}
-                        placeholder="Required"
+                        placeholder="Name Required"
                         placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
                         onChangeText={setNewName}
                         value={newName}
                       />
-
-                      {/* Address 输入框 */}
-                      <Text
-                        style={[
-                          styles.Text,
-                          { marginBottom: 5, marginTop: 10 },
-                        ]}
-                      >
-                        Address
-                      </Text>
                       <TextInput
-                        style={[
-                          styles.passwordInput,
-                          { height: 120 }, // 这里设置高度，可以根据需要调整
-                        ]}
-                        placeholder="Address"
+                        style={[styles.addressInput]}
+                        placeholder="Address Required"
                         placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
                         onChangeText={setNewAddress}
                         value={newAddress}
