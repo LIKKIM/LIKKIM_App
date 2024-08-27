@@ -1,4 +1,3 @@
-// AddressBookModal.js
 import React, { useState, useEffect } from "react";
 import {
   Modal,
@@ -10,6 +9,7 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   Platform,
+  Clipboard, // 引入 Clipboard 模块
 } from "react-native";
 import { BlurView } from "expo-blur";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -48,8 +48,10 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
     }
   };
 
+  // 更新后的搜索逻辑，支持 network, name 和 address
   const filteredAddresses = savedAddresses.filter(
     (address) =>
+      address.network.toLowerCase().includes(searchAddress.toLowerCase()) ||
       address.name.toLowerCase().includes(searchAddress.toLowerCase()) ||
       address.address.toLowerCase().includes(searchAddress.toLowerCase())
   );
@@ -59,7 +61,8 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
   };
 
   const handleCopy = (address) => {
-    console.log("Copy:", address);
+    Clipboard.setString(address);
+    console.log("Address copied to clipboard:", address);
     setDropdownVisible(null); // 隐藏Dropdown
   };
 
