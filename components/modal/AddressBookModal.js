@@ -223,21 +223,32 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                             justifyContent: "space-between",
                           }}
                         >
-                          <View style={{ flexDirection: "column" }}>
+                          <View
+                            style={{ flexDirection: "column", flexShrink: 1 }}
+                          >
                             <View
-                              style={{ flexDirection: "row", marginBottom: 5 }}
+                              style={{
+                                flexDirection: "row",
+                                marginBottom: 5,
+                                flexWrap: "wrap",
+                              }}
                             >
                               <Text style={[styles.Text, { marginRight: 10 }]}>
                                 Network: {item.network}
                               </Text>
                               <Text style={styles.Text}>Name: {item.name}</Text>
                             </View>
-                            <Text style={styles.Text}>
+                            <Text
+                              style={[styles.Text, { flexShrink: 1 }]} // 允许文本在需要时缩小
+                              numberOfLines={1} // 限制为一行
+                              ellipsizeMode="middle" // 在中间截断文本并添加省略号
+                            >
                               Address: {item.address}
                             </Text>
                           </View>
                           <TouchableOpacity
                             onPress={() => toggleDropdown(item.id)}
+                            style={{ marginLeft: 10 }} // 给图标和文字间一些间距
                           >
                             <Icon
                               name="more-vert"
@@ -246,6 +257,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                             />
                           </TouchableOpacity>
                         </TouchableOpacity>
+
                         {dropdownVisible === item.id && (
                           <View style={styles.dropdown}>
                             <TouchableOpacity
