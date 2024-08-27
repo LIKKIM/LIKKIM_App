@@ -156,7 +156,6 @@ function TransactionsScreen() {
   // 在 amountModalVisible 状态变为 true 时发送 POST 请求
   useEffect(() => {
     if (amountModalVisible && !hasFetchedBalance) {
-      // 检查额外状态以避免重复执行
       const fetchTokenBalanceAndFee = async () => {
         try {
           // 根据 selectedCrypto 查找对应的加密货币对象
@@ -171,9 +170,9 @@ function TransactionsScreen() {
           // 打印 selectedCryptoObj 的相关信息
           console.log(`Selected Crypto: ${selectedCrypto}`);
           console.log(
-            `chainShortName: ${selectedCryptoObj.queryChainShortName}, // 动态设置区块链简称`
+            `chainShortName: ${selectedCryptoObj.queryChainShortName}`
           );
-          console.log(`address: ${selectedCryptoObj.address}, // 动态设置地址`);
+          console.log(`address: ${selectedCryptoObj.address}`);
 
           // 查询代币余额
           const balanceResponse = await fetch(
@@ -184,9 +183,9 @@ function TransactionsScreen() {
                 "Content-Type": "application/json",
               },
               body: JSON.stringify({
-                chainShortName: selectedCryptoObj.queryChainShortName, // 动态设置区块链简称
-                address: selectedCryptoObj.address, // 动态设置地址
-                protocolType: "token_20", // 协议类型，表示代币类型
+                chainShortName: selectedCryptoObj.queryChainShortName,
+                address: selectedCryptoObj.address,
+                protocolType: "token_20",
               }),
             }
           );
@@ -198,7 +197,6 @@ function TransactionsScreen() {
           const balanceData = await balanceResponse.json();
           console.log("Transaction 余额查询 Response Data:", balanceData);
 
-          // 展开并打印 tokenList 数组的内容
           if (
             balanceData &&
             balanceData.data &&
@@ -231,10 +229,8 @@ function TransactionsScreen() {
               );
             });
 
-            // 使用 console.table 更直观地显示数据
             console.table(tokenList);
 
-            // 更新 initialAdditionalCryptos 中的相关信息
             tokenList.forEach((token) => {
               updateCryptoData(token.symbol, {
                 balance: token.holdingAmount,
@@ -255,7 +251,7 @@ function TransactionsScreen() {
                 "Content-Type": "application/json",
               },
               body: JSON.stringify({
-                chainShortName: selectedCryptoObj.queryChainShortName, // 动态设置区块链简称
+                chainShortName: selectedCryptoObj.queryChainShortName,
               }),
             }
           );
@@ -266,19 +262,20 @@ function TransactionsScreen() {
 
           const feeData = await feeResponse.json();
           console.log("Transaction 手续费查询 Response Data:", feeData);
-
           if (feeData && feeData.data && feeData.data.length > 0) {
             const feeInfo = feeData.data[0];
-            const fee = feeInfo.bestTransactionFee; // 从响应数据中提取手续费
+            const transactionFeeValue = feeInfo.bestTransactionFee;
 
-            setFee(fee);
+            setTransactionFee(transactionFeeValue); // 设置查询到的交易手续费
           } else {
             console.log("No fee data found in response data.");
+            setTransactionFee(selectedCryptoObj.fee); // 如果查询失败，使用 initialAdditionalCryptos 中的 fee 值
           }
         } catch (error) {
           console.error("Error:", error);
+          setTransactionFee(selectedCryptoObj.fee); // 如果请求出错，使用 initialAdditionalCryptos 中的 fee 值
         } finally {
-          setHasFetchedBalance(true); // 设置状态，防止重复执行
+          setHasFetchedBalance(true);
         }
       };
 
