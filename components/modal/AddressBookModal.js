@@ -160,8 +160,10 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                           }}
                         >
                           <View style={{ flexDirection: "column" }}>
-                            <View style={{ flexDirection: "row" }}>
-                              <Text style={styles.Text}>
+                            <View
+                              style={{ flexDirection: "row", marginBottom: 5 }}
+                            >
+                              <Text style={[styles.Text, { marginRight: 10 }]}>
                                 Network: {item.network}
                               </Text>
                               <Text style={styles.Text}>Name: {item.name}</Text>
