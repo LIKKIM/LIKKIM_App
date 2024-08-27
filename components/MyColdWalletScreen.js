@@ -654,6 +654,23 @@ function MyColdWalletScreen() {
         JSON.stringify(newVerifiedDevices)
       );
       setIsVerificationSuccessful(true);
+
+      // 发送成功命令 F4 03 10 00 04 95 97 0D 0A
+      const successCommand = new Uint8Array([
+        0xf4, 0x03, 0x10, 0x00, 0x04, 0x95, 0x97, 0x0d, 0x0a,
+      ]);
+      const base64SuccessCommand = base64.fromByteArray(successCommand);
+
+      try {
+        await selectedDevice.writeCharacteristicWithResponseForService(
+          serviceUUID,
+          writeCharacteristicUUID,
+          base64SuccessCommand
+        );
+        console.log("Success command has been sent");
+      } catch (error) {
+        console.error("Failed to send success command", error);
+      }
     } else {
       console.log("PIN 验证失败");
       setVerificationStatus("fail");
@@ -664,6 +681,7 @@ function MyColdWalletScreen() {
     setVerificationModalVisible(true);
     setPinCode("");
   };
+
   // 处理断开连接的逻辑
   const handleDisconnectDevice = async (device) => {
     try {
