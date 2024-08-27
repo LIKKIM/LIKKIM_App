@@ -35,12 +35,32 @@ function MyColdWalletBluetoothModal({
   const [newName, setNewName] = useState("");
   const [newAddress, setNewAddress] = useState("");
   const [networkDropdownVisible, setNetworkDropdownVisible] = useState(false);
+  const [dropdownVisible, setDropdownVisible] = useState(null); // 新增状态，用于控制哪个地址显示Dropdown
 
   const filteredAddresses = addresses?.filter(
     (address) =>
       address.name.toLowerCase().includes(searchAddress.toLowerCase()) ||
       address.address.toLowerCase().includes(searchAddress.toLowerCase())
   );
+
+  const toggleDropdown = (id) => {
+    setDropdownVisible(dropdownVisible === id ? null : id); // 切换Dropdown显示状态
+  };
+
+  const handleCopy = (address) => {
+    console.log("Copy:", address);
+    setDropdownVisible(null); // 隐藏Dropdown
+  };
+
+  const handleDelete = (address) => {
+    console.log("Delete:", address);
+    setDropdownVisible(null); // 隐藏Dropdown
+  };
+
+  const handleEdit = (address) => {
+    console.log("Edit:", address);
+    setDropdownVisible(null); // 隐藏Dropdown
+  };
 
   const networks = ["Ethereum", "Bitcoin", "Litecoin", "Ripple"];
 
@@ -79,11 +99,78 @@ function MyColdWalletBluetoothModal({
                     data={filteredAddresses}
                     keyExtractor={(item) => item.id}
                     renderItem={({ item }) => (
-                      <TouchableOpacity onPress={() => onSelect(item)}>
-                        <Text style={styles.Text}>
-                          {item.name}: {item.address}
-                        </Text>
-                      </TouchableOpacity>
+                      <View>
+                        <TouchableOpacity
+                          onPress={() => onSelect(item)}
+                          style={{
+                            width: 280,
+                            paddingVertical: 10,
+                            alignItems: "center",
+                            flexDirection: "row",
+                            justifyContent: "space-between",
+                          }}
+                        >
+                          <Text style={[styles.Text, { textAlign: "left" }]}>
+                            {item.name}: {item.address}
+                          </Text>
+                          <TouchableOpacity
+                            onPress={() => toggleDropdown(item.id)}
+                          >
+                            <Icon
+                              name="more-vert"
+                              size={24}
+                              color={isDarkMode ? "#fff" : "#000"} // 根据模式动态设置颜色
+                            />
+                          </TouchableOpacity>
+                        </TouchableOpacity>
+                        {dropdownVisible === item.id && (
+                          <View
+                            style={
+                              isDarkMode ? styles.dropdown : styles.dropdown
+                            }
+                          >
+                            <TouchableOpacity
+                              onPress={() => handleCopy(item.address)}
+                            >
+                              <Text
+                                style={
+                                  isDarkMode
+                                    ? styles.dropdownButtonText
+                                    : styles.dropdownButtonText
+                                }
+                              >
+                                Copy
+                              </Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                              onPress={() => handleDelete(item.address)}
+                            >
+                              <Text
+                                style={
+                                  isDarkMode
+                                    ? styles.dropdownButtonText
+                                    : styles.dropdownButtonText
+                                }
+                              >
+                                Delete
+                              </Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                              onPress={() => handleEdit(item.address)}
+                            >
+                              <Text
+                                style={
+                                  isDarkMode
+                                    ? styles.dropdownButtonText
+                                    : styles.dropdownButtonText
+                                }
+                              >
+                                Edit
+                              </Text>
+                            </TouchableOpacity>
+                          </View>
+                        )}
+                      </View>
                     )}
                   />
 
@@ -106,7 +193,16 @@ function MyColdWalletBluetoothModal({
                     data={devices}
                     keyExtractor={(item) => item.id}
                     renderItem={({ item }) => (
-                      <TouchableOpacity onPress={() => onDevicePress(item)}>
+                      <TouchableOpacity
+                        onPress={() => {
+                          // 处理设备选择逻辑
+                          onDevicePress(item);
+
+                          // 确保此处不调用关闭 Modal 的方法
+                          // 如果有必要关闭Modal, 可以在设备选择逻辑完成后调用:
+                          // onClose();
+                        }}
+                      >
                         <Text style={styles.Text}>
                           {item.name || "Unnamed Device"} - {item.id}
                         </Text>
@@ -116,6 +212,7 @@ function MyColdWalletBluetoothModal({
                       </TouchableOpacity>
                     )}
                   />
+
                   <TouchableOpacity
                     onPress={onCancel}
                     style={styles.closeButton}

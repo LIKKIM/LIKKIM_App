@@ -13,6 +13,29 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
   const focusedBorderColor = isDarkMode ? "#6C6CF4" : "#007AFF";
 
   return StyleSheet.create({
+    // Existing styles...
+
+    dropdown: {
+      position: "absolute",
+      right: 20, // 根据需要调整位置
+      top: 40, // 调整以确保下拉菜单显示在正确位置
+      backgroundColor: modalBackgroundColor, // 根据模式动态设置背景色
+      borderRadius: 5, // 圆角
+      padding: 10, // 内边距
+      zIndex: 1, // 确保Dropdown在其他元素上方
+      shadowColor: "#000", // 阴影颜色
+      shadowOffset: { width: 0, height: 2 }, // 阴影偏移
+      shadowOpacity: 0.25, // 阴影透明度
+      shadowRadius: 3.84, // 阴影扩散范围
+      elevation: 5, // 用于Android的材质阴影高度
+    },
+
+    dropdownButtonText: {
+      color: textColor, // 根据模式动态设置文本颜色
+      fontSize: 16, // 字体大小
+      paddingVertical: 5, // 增加垂直间距
+    },
+
     errorText: {
       color: "#FF5252",
       fontSize: 14,
