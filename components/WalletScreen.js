@@ -1217,7 +1217,7 @@ function WalletScreen({ route, navigation }) {
       try {
         await AsyncStorage.setItem("cryptoCards", JSON.stringify(cryptoCards));
         await AsyncStorage.setItem("addedCryptos", JSON.stringify(cryptoCards)); // 保存时同步 addedCryptos
-        console.log("Updated addedCryptos wallet page:", cryptoCards); // 打印更新后的 addedCryptos
+        //  console.log("Updated addedCryptos wallet page:", cryptoCards); // 打印更新后的 addedCryptos
       } catch (error) {
         console.error("Error saving crypto cards:", error);
       }
@@ -1791,8 +1791,8 @@ function WalletScreen({ route, navigation }) {
           </View>
         )}
         {cryptoCards.map((card, index) => {
-          console.log("card------");
-          console.log(card.cardImage, card.icon);
+          //     console.log("card------");
+          //   console.log(card.cardImage, card.icon);
 
           const isBlackText =
             card.shortName === "BTC" ||
