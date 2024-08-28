@@ -105,6 +105,7 @@ function WalletScreen({ route, navigation }) {
   const [isScanning, setIsScanning] = useState(false);
   const [devices, setDevices] = useState([]);
   const [selectedDevice, setSelectedDevice] = useState(null);
+  const [verificationStatus, setVerificationStatus] = useState(null);
   const [verificationSuccessModalVisible, setVerificationSuccessModalVisible] =
     useState(false);
   const [verificationFailModalVisible, setVerificationFailModalVisible] =
@@ -1263,31 +1264,27 @@ function WalletScreen({ route, navigation }) {
   const handlePinSubmit = async () => {
     // 首先关闭 "Enter PIN to Connect" 的模态框
     setPinModalVisible(false);
-
-    // 关闭所有其他可能打开的模态框
-    setVerificationSuccessModalVisible(false);
-    setVerificationFailModalVisible(false);
-
+  
     // 将用户输入的 PIN 转换为数字
     const pinCodeValue = parseInt(pinCode, 10); // 将 "1234" 转换为数字 1234
-
+  
     // 将接收到的验证码转换为数字
     const verificationCodeValue = parseInt(
       receivedVerificationCode.replace(" ", ""),
       16
     );
-
+  
     console.log(`用户输入的 PIN 数值: ${pinCodeValue}`);
     console.log(`接收到的验证码数值: ${verificationCodeValue}`);
-
+  
     if (pinCodeValue === verificationCodeValue) {
       console.log("PIN 验证成功");
-      setVerificationSuccessModalVisible(true);
-
+      setVerificationStatus("success"); // 显示成功提示
+  
       // 更新全局状态为成功，并在终端打印消息
       setIsVerificationSuccessful(true);
       console.log("验证成功！验证状态已更新。");
-
+  
       // 将已验证的设备ID添加到verifiedDevices状态中并持久化到本地存储
       const newVerifiedDevices = [...verifiedDevices, selectedDevice.id];
       setVerifiedDevices(newVerifiedDevices);
@@ -1295,13 +1292,13 @@ function WalletScreen({ route, navigation }) {
         "verifiedDevices",
         JSON.stringify(newVerifiedDevices)
       );
-
+  
       // 发送成功命令 F4 03 10 00 04 95 97 0D 0A
       const successCommand = new Uint8Array([
         0xf4, 0x03, 0x10, 0x00, 0x04, 0x95, 0x97, 0x0d, 0x0a,
       ]);
       const base64SuccessCommand = base64.fromByteArray(successCommand);
-
+  
       try {
         await selectedDevice.writeCharacteristicWithResponseForService(
           serviceUUID,
@@ -1314,7 +1311,7 @@ function WalletScreen({ route, navigation }) {
       }
     } else {
       console.log("PIN 验证失败");
-
+  
       // 停止监听验证码
       if (monitorSubscription) {
         try {
@@ -1324,7 +1321,7 @@ function WalletScreen({ route, navigation }) {
           console.error("停止监听时发生错误:", error);
         }
       }
-
+  
       // 主动断开与嵌入式设备的连接
       if (selectedDevice) {
         try {
@@ -1334,13 +1331,14 @@ function WalletScreen({ route, navigation }) {
           console.error("断开连接时发生错误:", error);
         }
       }
-
-      setVerificationFailModalVisible(true); // 显示失败提示
+  
+      setVerificationStatus("fail"); // 显示失败提示
     }
-
+  
     // 清空 PIN 输入框
     setPinCode("");
   };
+  
 
   const handleDeleteCard = () => {
     const updatedCards = cryptoCards.filter(
@@ -2595,28 +2593,38 @@ function WalletScreen({ route, navigation }) {
         </BlurView>
       </Modal>
 
-      {/* 成功验证模态框 */}
+      {/* 验证结果模态框 */}
       <Modal
         animationType="slide"
         transparent={true}
-        visible={verificationSuccessModalVisible}
-        onRequestClose={() => setVerificationSuccessModalVisible(false)}
+        visible={verificationStatus !== null}
+        onRequestClose={() => setVerificationStatus(null)}
       >
         <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
           <View style={WalletScreenStyle.pinModalView}>
             <Image
-              source={require("../assets/gif/Success.gif")}
+              source={require(`../assets/gif/${
+                verificationStatus === "success" ? "Success.gif" : "Fail.gif"
+              }`)}
               style={{ width: 120, height: 120, marginTop: 20 }}
             />
             <Text style={WalletScreenStyle.modalTitle}>
-              {t("Verification successful!")}
+              {t(
+                verificationStatus === "success"
+                  ? "Verification successful!"
+                  : "Verification failed!"
+              )}
             </Text>
             <Text style={WalletScreenStyle.modalSubtitle}>
-              {t("You can now safely use the device.")}
+              {t(
+                verificationStatus === "success"
+                  ? "You can now safely use the device."
+                  : "The verification code you entered is incorrect. Please try again."
+              )}
             </Text>
             <TouchableOpacity
               style={WalletScreenStyle.submitButton}
-              onPress={() => setVerificationSuccessModalVisible(false)}
+              onPress={() => setVerificationStatus(null)}
             >
               <Text style={WalletScreenStyle.submitButtonText}>
                 {t("Close")}
@@ -2626,38 +2634,6 @@ function WalletScreen({ route, navigation }) {
         </BlurView>
       </Modal>
 
-      {/* 失败验证模态框 */}
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={verificationFailModalVisible}
-        onRequestClose={() => setVerificationFailModalVisible(false)}
-      >
-        <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
-          <View style={WalletScreenStyle.pinModalView}>
-            <Image
-              source={require("../assets/gif/Fail.gif")}
-              style={{ width: 120, height: 120, marginTop: 20 }}
-            />
-            <Text style={WalletScreenStyle.modalTitle}>
-              {t("Verification failed!")}
-            </Text>
-            <Text style={WalletScreenStyle.modalSubtitle}>
-              {t(
-                "The verification code you entered is incorrect. Please try again."
-              )}
-            </Text>
-            <TouchableOpacity
-              style={WalletScreenStyle.submitButton}
-              onPress={() => setVerificationFailModalVisible(false)}
-            >
-              <Text style={WalletScreenStyle.submitButtonText}>
-                {t("Close")}
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </BlurView>
-      </Modal>
       {/* 创建新的 createPendingModal 模态框 */}
       <Modal
         visible={createPendingModalVisible}
