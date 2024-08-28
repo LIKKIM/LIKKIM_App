@@ -72,7 +72,7 @@ const MyColdWalletBluetoothModal = ({
                         {isVerified && (
                           <TouchableOpacity
                             style={MyColdWalletScreenStyle.disconnectButton}
-                            onPress={() => onDisconnectPress(item)} // 断开连接的逻辑
+                            onPress={() => onDisconnectPress(item)}
                           >
                             <Text
                               style={
