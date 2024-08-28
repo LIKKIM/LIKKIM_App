@@ -33,6 +33,10 @@ import PinModal from "./modal/PinModal";
 import BluetoothModal from "./modal/BluetoothModal";
 import VerificationModal from "./modal/VerificationModal";
 import DeleteConfirmationModal from "./modal/DeleteConfirmationModal";
+import AddWalletModal from "./modal/AddWalletModal";
+import TipModal from "./modal/TipModal";
+import ProcessModal from "./modal/ProcessModal";
+import AddCryptoModal from "./modal/AddCryptoModal";
 
 const serviceUUID = "0000FFE0-0000-1000-8000-00805F9B34FB";
 const writeCharacteristicUUID = "0000FFE2-0000-1000-8000-00805F9B34FB";
@@ -2190,263 +2194,49 @@ function WalletScreen({ route, navigation }) {
       </Modal>
 
       {/* Add Wallet Modal */}
-      <Modal
-        animationType="slide"
-        transparent={true}
+      <AddWalletModal
         visible={addWalletModalVisible}
-        onRequestClose={() => setAddWalletModalVisible(false)}
-      >
-        <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
-          <View style={WalletScreenStyle.modalView}>
-            <TouchableOpacity
-              style={WalletScreenStyle.modalButton}
-              onPress={handleCreateWallet}
-            >
-              <Text style={WalletScreenStyle.ButtonText}>
-                {t("Create Wallet")}
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={WalletScreenStyle.modalButton}
-              onPress={handleImportWallet}
-            >
-              <Text style={WalletScreenStyle.ButtonText}>
-                {t("Import Wallet")}
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={WalletScreenStyle.modalButton}
-              onPress={handleWalletTest}
-            >
-              <Text style={WalletScreenStyle.ButtonText}>
-                {t("直接创建钱包用于测试(无法转账)")}
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={WalletScreenStyle.cancelButton}
-              onPress={() => setAddWalletModalVisible(false)}
-            >
-              <Text style={WalletScreenStyle.cancelButtonText}>
-                {t("Close")}
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </BlurView>
-      </Modal>
-      {/* Import Phrase Modal */}
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={importPhraseModalVisible}
-        onRequestClose={() => setImportPhraseModalVisible(false)}
-      >
-        <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
-          <View style={WalletScreenStyle.modalView}>
-            <Text style={WalletScreenStyle.alertModalTitle}>
-              {t("Import Recovery Phrase")}
-            </Text>
-            <TextInput
-              style={WalletScreenStyle.textInput}
-              value={phrase}
-              onChangeText={setPhrase}
-              placeholder={t("Use spaces between words")}
-              placeholderTextColor={placeholderColor}
-              multiline
-            />
-            <TouchableOpacity
-              style={WalletScreenStyle.alertModalButton}
-              onPress={() => handleImport(phrase)}
-            >
-              <Text style={WalletScreenStyle.ButtonText}>
-                {t("Import Wallet")}
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={WalletScreenStyle.cancelButton}
-              onPress={() => setImportPhraseModalVisible(false)}
-            >
-              <Text style={WalletScreenStyle.cancelButtonText}>
-                {t("Close")}
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </BlurView>
-      </Modal>
+        onClose={() => setAddWalletModalVisible(false)}
+        onCreateWallet={handleCreateWallet}
+        onImportWallet={handleImportWallet}
+        onWalletTest={handleWalletTest}
+        styles={WalletScreenStyle}
+        t={t}
+      />
+
       {/* 提示 Modal */}
-      <Modal
-        animationType="slide"
-        transparent={true}
+      <TipModal
         visible={tipModalVisible}
-        onRequestClose={() => setTipModalVisible(false)}
-      >
-        <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
-          <View style={WalletScreenStyle.modalView}>
-            <Text style={WalletScreenStyle.alertModalTitle}>
-              {t("Recovery Phrase")}
-            </Text>
-            <Text style={WalletScreenStyle.alertModalSubtitle}>
-              {t("Read the following, then save the phrase securely.")}
-            </Text>
-            <Text style={WalletScreenStyle.alertModalContent}>
-              {`🔑  ${t(
-                "The recovery phrase alone gives you full access to your wallets and funds."
-              )}\n\n`}
-              {`🔒  ${t(
-                "If you forget your password, you can use the recovery phrase to get back into your wallet."
-              )}\n\n`}
-              {`🚫  ${t(
-                "LIKKIM will never ask for your recovery phrase."
-              )}\n\n`}
-              {`🤫  ${t("Never share it with anyone.")}`}
-            </Text>
-            <TouchableOpacity
-              style={WalletScreenStyle.alertModalButton}
-              onPress={handleContinue}
-            >
-              <Text style={WalletScreenStyle.ButtonText}>{t("Continue")}</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={WalletScreenStyle.cancelButton}
-              onPress={() => setTipModalVisible(false)}
-            >
-              <Text style={WalletScreenStyle.cancelButtonText}>
-                {t("Close")}
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </BlurView>
-      </Modal>
-
+        onClose={() => setTipModalVisible(false)}
+        onContinue={handleContinue}
+        styles={WalletScreenStyle}
+        t={t}
+      />
       {/* Process Modal */}
-      <Modal
-        animationType="slide"
-        transparent={true}
+      <ProcessModal
         visible={processModalVisible}
-        onRequestClose={() => setProcessModalVisible(false)}
-      >
-        <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
-          <View style={WalletScreenStyle.processModalView}>
-            {processMessages.map((message, index) => (
-              <Text key={index} style={WalletScreenStyle.processButtonText}>
-                {message}
-              </Text>
-            ))}
-            {showLetsGoButton && (
-              <TouchableOpacity
-                style={WalletScreenStyle.modalButton}
-                onPress={handleLetsGo}
-              >
-                <Text style={WalletScreenStyle.ButtonText}>
-                  {t("Let's Go")}
-                </Text>
-              </TouchableOpacity>
-            )}
-          </View>
-        </BlurView>
-      </Modal>
+        onClose={() => setProcessModalVisible(false)}
+        processMessages={processMessages}
+        showLetsGoButton={showLetsGoButton}
+        onLetsGo={handleLetsGo}
+        styles={WalletScreenStyle}
+        t={t}
+      />
       {/* Add Crypto Modal */}
-      <Modal
-        animationType="slide"
-        transparent={true}
+      <AddCryptoModal
         visible={addCryptoVisible}
-        onRequestClose={() => {
+        onClose={() => {
           setAddCryptoVisible(false);
-          //   addDefaultUSDT();
         }}
-      >
-        <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
-          <View style={WalletScreenStyle.addCryptoModalView}>
-            {/* 搜索输入框 */}
-            <View style={WalletScreenStyle.searchContainer}>
-              <Icon
-                name="search"
-                size={20}
-                style={WalletScreenStyle.searchIcon}
-              />
-              <TextInput
-                style={WalletScreenStyle.searchInput}
-                placeholder={t("Search Cryptocurrency")}
-                placeholderTextColor={isDarkMode ? "#ffffff" : "#24234C"}
-                onChangeText={(text) => setSearchQuery(text)}
-                value={searchQuery}
-              />
-            </View>
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        filteredCryptos={filteredCryptos}
+        handleAddCrypto={handleAddCrypto}
+        styles={WalletScreenStyle}
+        t={t}
+        isDarkMode={isDarkMode}
+      />
 
-            <ScrollView
-              style={WalletScreenStyle.addCryptoScrollView}
-              showsVerticalScrollIndicator={false}
-              showsHorizontalScrollIndicator={false}
-            >
-              {/* 使用搜索关键字过滤后的加密货币列表 */}
-              {filteredCryptos.map((crypto) => (
-                <TouchableOpacity
-                  key={crypto.name}
-                  style={WalletScreenStyle.addCryptoButton}
-                  onPress={() => handleAddCrypto(crypto)}
-                >
-                  <ImageBackground
-                    source={crypto.cardImage}
-                    style={WalletScreenStyle.addCryptoImage}
-                    imageStyle={{ borderRadius: 12 }}
-                  >
-                    <View style={WalletScreenStyle.addCryptoOverlay} />
-                    <View style={WalletScreenStyle.iconAndTextContainer}>
-                      <View
-                        style={{
-                          width: 30,
-                          height: 30,
-                          alignItems: "center",
-                          justifyContent: "center",
-                          borderRadius: 15,
-                          backgroundColor: "#ffffff50",
-                          overflow: "hidden",
-                        }}
-                      >
-                        <Image
-                          source={crypto.icon}
-                          style={WalletScreenStyle.addCardIcon}
-                        />
-                      </View>
-                      <Text style={WalletScreenStyle.addCryptoImageText}>
-                        {crypto.shortName}
-                      </Text>
-                    </View>
-                  </ImageBackground>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      flex: 1, // 使 View 占据父容器的剩余宽度
-                      flexWrap: "wrap", // 允许子元素在需要时换行
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Text style={WalletScreenStyle.addCryptoText}>
-                      {crypto.name}
-                    </Text>
-                    <View style={WalletScreenStyle.chainContainer}>
-                      <Text style={[WalletScreenStyle.chainCardText]}>
-                        {crypto.chain}
-                      </Text>
-                    </View>
-                  </View>
-                </TouchableOpacity>
-              ))}
-            </ScrollView>
-            <TouchableOpacity
-              style={WalletScreenStyle.cancelButton}
-              onPress={() => {
-                setAddCryptoVisible(false);
-                //    addDefaultUSDT();
-              }}
-            >
-              <Text style={WalletScreenStyle.cancelButtonText}>
-                {t("Close")}
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </BlurView>
-      </Modal>
       {/* Delete Confirmation Modal */}
       <DeleteConfirmationModal
         visible={deleteConfirmVisible}
@@ -2497,12 +2287,16 @@ function WalletScreen({ route, navigation }) {
         t={t}
       />
 
-      {/* 创建新的 createPendingModal 模态框 */}
+      {/* 通用的 PendingModal 模态框 */}
       <Modal
-        visible={createPendingModalVisible}
+        visible={createPendingModalVisible || importingModalVisible}
         onRequestClose={() => {
-          setCreatePendingModalVisible(false);
-          stopMonitoringWalletAddress();
+          if (createPendingModalVisible) {
+            setCreatePendingModalVisible(false);
+          } else if (importingModalVisible) {
+            setImportingModalVisible(false);
+          }
+          stopMonitoringWalletAddress(); // 关闭模态框时停止监听钱包地址
         }}
         transparent={true}
         animationType="slide"
@@ -2510,52 +2304,32 @@ function WalletScreen({ route, navigation }) {
         <View style={WalletScreenStyle.centeredView}>
           <View style={WalletScreenStyle.pendingModalView}>
             <Text style={WalletScreenStyle.modalTitle}>
-              {walletCreationStatus.title}
+              {createPendingModalVisible
+                ? walletCreationStatus.title
+                : importingStatus.title}
             </Text>
             <Image
-              source={walletCreationStatus.image}
+              source={
+                createPendingModalVisible
+                  ? walletCreationStatus.image
+                  : importingStatus.image
+              }
               style={{ width: 120, height: 120 }}
             />
             <Text style={[WalletScreenStyle.modalSubtitle]}>
-              {walletCreationStatus.subtitle}
+              {createPendingModalVisible
+                ? walletCreationStatus.subtitle
+                : importingStatus.subtitle}
             </Text>
             <TouchableOpacity
               style={WalletScreenStyle.submitButton}
-              onPress={() => setCreatePendingModalVisible(false)}
-            >
-              <Text style={WalletScreenStyle.submitButtonText}>
-                {t("Close")}
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
-
-      {/* 创建新的 importingModal 模态框 */}
-      <Modal
-        visible={importingModalVisible}
-        onRequestClose={() => {
-          setImportingModalVisible(false);
-          stopMonitoringWalletAddress(); // 在关闭模态框时停止监听钱包地址
-        }}
-        transparent={true}
-        animationType="slide"
-      >
-        <View style={WalletScreenStyle.centeredView}>
-          <View style={WalletScreenStyle.pendingModalView}>
-            <Text style={WalletScreenStyle.modalTitle}>
-              {importingStatus.title}
-            </Text>
-            <Image
-              source={importingStatus.image}
-              style={{ width: 120, height: 120 }}
-            />
-            <Text style={[WalletScreenStyle.modalSubtitle]}>
-              {importingStatus.subtitle}
-            </Text>
-            <TouchableOpacity
-              style={WalletScreenStyle.submitButton}
-              onPress={() => setImportingModalVisible(false)}
+              onPress={() => {
+                if (createPendingModalVisible) {
+                  setCreatePendingModalVisible(false);
+                } else if (importingModalVisible) {
+                  setImportingModalVisible(false);
+                }
+              }}
             >
               <Text style={WalletScreenStyle.submitButtonText}>
                 {t("Close")}
