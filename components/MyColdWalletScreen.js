@@ -109,7 +109,6 @@ function MyColdWalletScreen() {
   const [passwordError, setPasswordError] = useState(""); // 新增密码错误状态
   const [confirmDisconnectModalVisible, setConfirmDisconnectModalVisible] =
     useState(false);
-  const [shouldShowPinModal, setShouldShowPinModal] = useState(false);
   const [deviceToDisconnect, setDeviceToDisconnect] = useState(null);
   const [successModalVisible, setSuccessModalVisible] = useState(false);
   const [errorModalVisible, setErrorModalVisible] = useState(false);
@@ -159,7 +158,7 @@ function MyColdWalletScreen() {
     }
   };
 
-  // Called when the user clicks the "Disconnect" button
+  // 确保 handleDisconnectPress 仅设置 ConfirmDisconnectModal 的状态
   const handleDisconnectPress = (device) => {
     setModalVisible(false); // 关闭设备选择模态框
     setDeviceToDisconnect(device); // 保存当前要断开的设备
@@ -445,12 +444,6 @@ function MyColdWalletScreen() {
     }
   };
 
-  useEffect(() => {
-    if (!modalVisible && selectedDevice && shouldShowPinModal) {
-      setPinModalVisible(true);
-    }
-  }, [modalVisible, selectedDevice]);
-
   function crc16Modbus(arr) {
     let crc = 0xffff; // 初始值为0xFFFF
     for (let byte of arr) {
@@ -582,12 +575,12 @@ function MyColdWalletScreen() {
 
   const handleCancel = () => {
     setModalVisible(false);
-    setShouldShowPinModal(false);
+    setModalVisible(true);
   };
   // 设备选择和显示弹窗的处理函数
   const handleDevicePress = async (device) => {
     setSelectedDevice(device);
-    setShouldShowPinModal(true);
+
     setModalVisible(false);
 
     try {
@@ -627,6 +620,8 @@ function MyColdWalletScreen() {
 
       // 开始监听嵌入式设备的返回信息
       monitorVerificationCode(device);
+      // 显示 PIN 模态框
+      setPinModalVisible(true);
     } catch (error) {
       console.error("设备连接或命令发送错误:", error);
     }
@@ -1377,15 +1372,16 @@ function MyColdWalletScreen() {
 
       {/* PIN码输入modal窗口 */}
       <PinModal
-        visible={pinModalVisible}
-        pinCode={pinCode}
-        setPinCode={setPinCode}
-        onSubmit={handlePinSubmit}
-        onCancel={() => setPinModalVisible(false)}
+        visible={pinModalVisible} // 控制 PIN 模态框的可见性
+        pinCode={pinCode} // 绑定 PIN 输入的状态
+        setPinCode={setPinCode} // 设置 PIN 的状态函数
+        onSubmit={handlePinSubmit} // PIN 提交后的逻辑
+        onCancel={() => setPinModalVisible(false)} // 关闭 PIN 模态框
         styles={MyColdWalletScreenStyle}
         isDarkMode={isDarkMode}
         t={t}
       />
+
       {/* 验证码模态框 */}
       <MyColdWalletVerificationModal
         visible={verificationModalVisible && verificationStatus !== null}
@@ -1396,12 +1392,13 @@ function MyColdWalletScreen() {
       />
       {/* 二次确认模态框   Confirm Disconnect Modal */}
       <ConfirmDisconnectModal
-        visible={confirmDisconnectModalVisible}
-        onConfirm={confirmDisconnect}
-        onCancel={cancelDisconnect}
+        visible={confirmDisconnectModalVisible} // 仅控制这个模态框的可见性
+        onConfirm={confirmDisconnect} // 确认断开连接后的逻辑
+        onCancel={cancelDisconnect} // 取消断开连接后的逻辑
         styles={MyColdWalletScreenStyle}
         t={t}
       />
+
       {/* 成功模态框 */}
       <MyColdWalletSuccessModal
         visible={successModalVisible}
