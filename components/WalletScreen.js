@@ -38,6 +38,7 @@ import TipModal from "./modal/TipModal";
 import ProcessModal from "./modal/ProcessModal";
 import AddCryptoModal from "./modal/AddCryptoModal";
 import AddressModal from "./modal/AddressModal";
+import PendingModal from "./modal/PendingModal";
 
 const serviceUUID = "0000FFE0-0000-1000-8000-00805F9B34FB";
 const writeCharacteristicUUID = "0000FFE2-0000-1000-8000-00805F9B34FB";
@@ -89,7 +90,6 @@ function WalletScreen({ route, navigation }) {
   const lightColorsDown = ["#FDFCFD", "#EDEBEF"];
   const secondTextColor = isDarkMode ? "#ddd" : "#676776";
   const placeholderColor = isDarkMode ? "#ffffff" : "#24234C";
-  const [selectedWords, setSelectedWords] = useState(Array(12).fill(null));
   const [importPhraseModalVisible, setImportPhraseModalVisible] =
     useState(false);
   const [pinModalVisible, setPinModalVisible] = useState(false);
@@ -2195,7 +2195,7 @@ function WalletScreen({ route, navigation }) {
       />
 
       {/* 通用的 PendingModal 模态框 */}
-      <Modal
+      <PendingModal
         visible={createPendingModalVisible || importingModalVisible}
         onRequestClose={() => {
           if (createPendingModalVisible) {
@@ -2205,46 +2205,24 @@ function WalletScreen({ route, navigation }) {
           }
           stopMonitoringWalletAddress(); // 关闭模态框时停止监听钱包地址
         }}
-        transparent={true}
-        animationType="slide"
-      >
-        <View style={WalletScreenStyle.centeredView}>
-          <View style={WalletScreenStyle.pendingModalView}>
-            <Text style={WalletScreenStyle.modalTitle}>
-              {createPendingModalVisible
-                ? walletCreationStatus.title
-                : importingStatus.title}
-            </Text>
-            <Image
-              source={
-                createPendingModalVisible
-                  ? walletCreationStatus.image
-                  : importingStatus.image
-              }
-              style={{ width: 120, height: 120 }}
-            />
-            <Text style={[WalletScreenStyle.modalSubtitle]}>
-              {createPendingModalVisible
-                ? walletCreationStatus.subtitle
-                : importingStatus.subtitle}
-            </Text>
-            <TouchableOpacity
-              style={WalletScreenStyle.submitButton}
-              onPress={() => {
-                if (createPendingModalVisible) {
-                  setCreatePendingModalVisible(false);
-                } else if (importingModalVisible) {
-                  setImportingModalVisible(false);
-                }
-              }}
-            >
-              <Text style={WalletScreenStyle.submitButtonText}>
-                {t("Close")}
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
+        title={
+          createPendingModalVisible
+            ? walletCreationStatus.title
+            : importingStatus.title
+        }
+        imageSource={
+          createPendingModalVisible
+            ? walletCreationStatus.image
+            : importingStatus.image
+        }
+        subtitle={
+          createPendingModalVisible
+            ? walletCreationStatus.subtitle
+            : importingStatus.subtitle
+        }
+        WalletScreenStyle={WalletScreenStyle}
+        t={t}
+      />
     </LinearGradient>
   );
 }
