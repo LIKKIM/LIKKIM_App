@@ -29,8 +29,7 @@ import { BleManager, BleErrorCode } from "react-native-ble-plx";
 import Constants from "expo-constants";
 import base64 from "base64-js";
 import { Buffer } from "buffer";
-import successImage from "../assets/success.png";
-import failImage from "../assets/fail.png";
+import PinModal from "./modal/PinModal";
 
 const serviceUUID = "0000FFE0-0000-1000-8000-00805F9B34FB";
 const writeCharacteristicUUID = "0000FFE2-0000-1000-8000-00805F9B34FB";
@@ -1264,27 +1263,27 @@ function WalletScreen({ route, navigation }) {
   const handlePinSubmit = async () => {
     // 首先关闭 "Enter PIN to Connect" 的模态框
     setPinModalVisible(false);
-  
+
     // 将用户输入的 PIN 转换为数字
     const pinCodeValue = parseInt(pinCode, 10); // 将 "1234" 转换为数字 1234
-  
+
     // 将接收到的验证码转换为数字
     const verificationCodeValue = parseInt(
       receivedVerificationCode.replace(" ", ""),
       16
     );
-  
+
     console.log(`用户输入的 PIN 数值: ${pinCodeValue}`);
     console.log(`接收到的验证码数值: ${verificationCodeValue}`);
-  
+
     if (pinCodeValue === verificationCodeValue) {
       console.log("PIN 验证成功");
       setVerificationStatus("success"); // 显示成功提示
-  
+
       // 更新全局状态为成功，并在终端打印消息
       setIsVerificationSuccessful(true);
       console.log("验证成功！验证状态已更新。");
-  
+
       // 将已验证的设备ID添加到verifiedDevices状态中并持久化到本地存储
       const newVerifiedDevices = [...verifiedDevices, selectedDevice.id];
       setVerifiedDevices(newVerifiedDevices);
@@ -1292,13 +1291,13 @@ function WalletScreen({ route, navigation }) {
         "verifiedDevices",
         JSON.stringify(newVerifiedDevices)
       );
-  
+
       // 发送成功命令 F4 03 10 00 04 95 97 0D 0A
       const successCommand = new Uint8Array([
         0xf4, 0x03, 0x10, 0x00, 0x04, 0x95, 0x97, 0x0d, 0x0a,
       ]);
       const base64SuccessCommand = base64.fromByteArray(successCommand);
-  
+
       try {
         await selectedDevice.writeCharacteristicWithResponseForService(
           serviceUUID,
@@ -1311,7 +1310,7 @@ function WalletScreen({ route, navigation }) {
       }
     } else {
       console.log("PIN 验证失败");
-  
+
       // 停止监听验证码
       if (monitorSubscription) {
         try {
@@ -1321,7 +1320,7 @@ function WalletScreen({ route, navigation }) {
           console.error("停止监听时发生错误:", error);
         }
       }
-  
+
       // 主动断开与嵌入式设备的连接
       if (selectedDevice) {
         try {
@@ -1331,14 +1330,13 @@ function WalletScreen({ route, navigation }) {
           console.error("断开连接时发生错误:", error);
         }
       }
-  
+
       setVerificationStatus("fail"); // 显示失败提示
     }
-  
+
     // 清空 PIN 输入框
     setPinCode("");
   };
-  
 
   const handleDeleteCard = () => {
     const updatedCards = cryptoCards.filter(
@@ -2543,55 +2541,16 @@ function WalletScreen({ route, navigation }) {
       </Modal>
 
       {/* PIN码输入modal窗口 */}
-      <Modal
-        animationType="slide"
-        transparent={true}
+      <PinModal
         visible={pinModalVisible}
-        onRequestClose={() => setPinModalVisible(false)}
-      >
-        <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
-          <View style={WalletScreenStyle.pinModalView}>
-            <View style={{ alignItems: "center" }}>
-              <Text style={WalletScreenStyle.pinModalTitle}>
-                {t("Enter PIN to Connect")}
-              </Text>
-              <Text style={WalletScreenStyle.modalSubtitle}>
-                {t(
-                  "Use the PIN code to establish a secure connection with your LIKKIM hardware."
-                )}
-              </Text>
-            </View>
-            <TextInput
-              style={WalletScreenStyle.passwordInput}
-              placeholder={t("Enter PIN")}
-              placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
-              keyboardType="numeric"
-              secureTextEntry
-              onChangeText={setPinCode}
-              value={pinCode}
-              autoFocus={true}
-            />
-            <View style={{ width: "100%" }}>
-              <TouchableOpacity
-                style={WalletScreenStyle.submitButton}
-                onPress={() => handlePinSubmit(selectedDevice, pinCode)}
-              >
-                <Text style={WalletScreenStyle.submitButtonText}>
-                  {t("Submit")}
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={WalletScreenStyle.cancelButton}
-                onPress={() => setPinModalVisible(false)}
-              >
-                <Text style={WalletScreenStyle.cancelButtonText}>
-                  {t("Cancel")}
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </BlurView>
-      </Modal>
+        pinCode={pinCode}
+        setPinCode={setPinCode}
+        onSubmit={() => handlePinSubmit(selectedDevice, pinCode)}
+        onCancel={() => setPinModalVisible(false)}
+        styles={WalletScreenStyle}
+        isDarkMode={isDarkMode}
+        t={t}
+      />
 
       {/* 验证结果模态框 */}
       <Modal

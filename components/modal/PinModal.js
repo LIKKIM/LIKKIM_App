@@ -1,9 +1,10 @@
+// PinModal.js
 import React from "react";
 import { View, Text, Modal, TextInput, TouchableOpacity } from "react-native";
 import { BlurView } from "expo-blur";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
-const MyColdWalletPinModal = ({
+const PinModal = ({
   visible,
   pinCode,
   setPinCode,
@@ -56,4 +57,4 @@ const MyColdWalletPinModal = ({
   );
 };
 
-export default MyColdWalletPinModal;
+export default PinModal;

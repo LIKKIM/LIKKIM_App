@@ -33,7 +33,7 @@ import ChangePasswordModal from "./modal/ChangePasswordModal";
 import ConfirmDisconnectModal from "./modal/ConfirmDisconnectModal";
 import MyColdWalletSuccessModal from "./modal/MyColdWalletSuccessModal";
 import MyColdWalletErrorModal from "./modal/MyColdWalletErrorModal";
-import MyColdWalletPinModal from "./modal/MyColdWalletPinModal";
+import PinModal from "./modal/PinModal";
 import MyColdWalletBluetoothModal from "./modal/MyColdWalletBluetoothModal";
 import MyColdWalletVerificationModal from "./modal/MyColdWalletVerificationModal";
 import * as LocalAuthentication from "expo-local-authentication";
@@ -1376,7 +1376,7 @@ function MyColdWalletScreen() {
       />
 
       {/* PIN码输入modal窗口 */}
-      <MyColdWalletPinModal
+      <PinModal
         visible={pinModalVisible}
         pinCode={pinCode}
         setPinCode={setPinCode}
