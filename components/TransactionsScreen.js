@@ -27,6 +27,9 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import Constants from "expo-constants";
 import base64 from "base64-js";
 import { Buffer } from "buffer";
+import VerificationModal from "./modal/VerificationModal";
+import BluetoothModal from "./modal/BluetoothModal";
+
 import { BleManager, BleErrorCode } from "react-native-ble-plx";
 const serviceUUID = "0000FFE0-0000-1000-8000-00805F9B34FB";
 const writeCharacteristicUUID = "0000FFE2-0000-1000-8000-00805F9B34FB";
@@ -68,7 +71,7 @@ function TransactionsScreen() {
   const [queryChainShortName, setQueryChainShortName] = useState("");
   const [priceUsd, setPriceUsd] = useState("");
   const [selectedCryptoIcon, setSelectedCryptoIcon] = useState(null);
-  const iconColor = isDarkMode ? "#ffffff" : "#24234C";
+  const iconColor = isDarkMode ? "#ffffff" : "#676776";
   const darkColors = ["#24234C", "#101021"];
   const lightColors = ["#FFFFFF", "#EDEBEF"];
   const placeholderColor = isDarkMode ? "#ffffff" : "#24234C";
@@ -1900,56 +1903,21 @@ function TransactionsScreen() {
         </Modal>
 
         {/* Bluetooth modal */}
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={bleVisible} // Use bleVisible to control this modal
-          onRequestClose={() => {
-            setBleVisible(!bleVisible); // Toggle visibility
+        <BluetoothModal
+          visible={bleVisible} // 控制模态框的显示状态
+          devices={devices} // 设备列表
+          isScanning={isScanning} // 扫描状态
+          iconColor={iconColor} // 图标颜色
+          onDevicePress={handleDevicePress} // 设备点击处理函数
+          onCancel={() => {
+            setBleVisible(false); // 关闭蓝牙模态框
+            setSelectedDevice(null); // 重置选中的设备状态
           }}
-        >
-          <BlurView intensity={10} style={TransactionsScreenStyle.centeredView}>
-            <View style={TransactionsScreenStyle.bluetoothModalView}>
-              <Text style={TransactionsScreenStyle.bluetoothModalTitle}>
-                {t("LOOKING FOR DEVICES")}
-              </Text>
-              {isScanning ? (
-                <View style={{ alignItems: "center" }}>
-                  <Image
-                    source={require("../assets/gif/Bluetooth.gif")}
-                    style={TransactionsScreenStyle.bluetoothImg}
-                  />
-                  <Text style={TransactionsScreenStyle.scanModalSubtitle}>
-                    {t("Scanning...")}
-                  </Text>
-                </View>
-              ) : (
-                <View>
-                  <Image
-                    source={require("../assets/gif/Search.gif")}
-                    style={{ width: 180, height: 180, margin: 30 }}
-                  />
-                  <Text style={TransactionsScreenStyle.modalSubtitle}>
-                    {t(
-                      "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled."
-                    )}
-                  </Text>
-                </View>
-              )}
-              <TouchableOpacity
-                style={TransactionsScreenStyle.cancelButtonLookingFor}
-                onPress={() => {
-                  setBleVisible(false); // Close Bluetooth modal
-                  setSelectedDevice(null); // Reset selected device state
-                }}
-              >
-                <Text style={TransactionsScreenStyle.cancelButtonText}>
-                  {t("Cancel")}
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </BlurView>
-        </Modal>
+          verifiedDevices={verifiedDevices} // 已验证的设备列表
+          MyColdWalletScreenStyle={TransactionsScreenStyle} // 样式
+          t={t} // 国际化函数
+          onDisconnectPress={handleDisconnectDevice} // 断开连接处理函数
+        />
 
         {/* PIN码输入modal窗口 */}
         <Modal
@@ -2002,69 +1970,20 @@ function TransactionsScreen() {
           </BlurView>
         </Modal>
 
-        {/* 成功验证模态框 */}
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={verificationSuccessModalVisible}
-          onRequestClose={() => setVerificationSuccessModalVisible(false)}
-        >
-          <BlurView intensity={10} style={TransactionsScreenStyle.centeredView}>
-            <View style={TransactionsScreenStyle.pinModalView}>
-              <Image
-                source={require("../assets/gif/Success.gif")}
-                style={{ width: 120, height: 120, marginTop: 20 }}
-              />
-              <Text style={TransactionsScreenStyle.modalTitle}>
-                {t("Verification successful!")}
-              </Text>
-              <Text style={TransactionsScreenStyle.modalSubtitle}>
-                {t("You can now safely use the device.")}
-              </Text>
-              <TouchableOpacity
-                style={TransactionsScreenStyle.submitButton}
-                onPress={() => setVerificationSuccessModalVisible(false)}
-              >
-                <Text style={TransactionsScreenStyle.submitButtonText}>
-                  {t("Close")}
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </BlurView>
-        </Modal>
+        {/* 验证模态框 */}
+        <VerificationModal
+          visible={
+            verificationSuccessModalVisible || verificationFailModalVisible
+          }
+          status={verificationSuccessModalVisible ? "success" : "fail"}
+          onClose={() => {
+            setVerificationSuccessModalVisible(false);
+            setVerificationFailModalVisible(false);
+          }}
+          styles={TransactionsScreenStyle}
+          t={t}
+        />
 
-        {/* 失败验证模态框 */}
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={verificationFailModalVisible}
-          onRequestClose={() => setVerificationFailModalVisible(false)}
-        >
-          <BlurView intensity={10} style={TransactionsScreenStyle.centeredView}>
-            <View style={TransactionsScreenStyle.pinModalView}>
-              <Image
-                source={require("../assets/gif/Fail.gif")}
-                style={{ width: 120, height: 120, marginTop: 20 }}
-              />
-              <Text style={TransactionsScreenStyle.modalTitle}>
-                {t("Verification failed!")}
-              </Text>
-              <Text style={TransactionsScreenStyle.modalSubtitle}>
-                {t(
-                  "The verification code you entered is incorrect. Please try again."
-                )}
-              </Text>
-              <TouchableOpacity
-                style={TransactionsScreenStyle.submitButton}
-                onPress={() => setVerificationFailModalVisible(false)}
-              >
-                <Text style={TransactionsScreenStyle.submitButtonText}>
-                  {t("Close")}
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </BlurView>
-        </Modal>
         {/* Confirming Transaction Modal */}
         <Modal
           visible={confirmingTransactionModalVisible}

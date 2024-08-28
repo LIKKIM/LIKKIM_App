@@ -131,7 +131,6 @@ const TransactionsScreenStyles = (isDarkMode) => {
     modalSubtitle: {
       color: secondTextColor,
       fontSize: 14,
-      marginBottom: 20,
       textAlign: "center",
     },
     amountSubtitle: {
