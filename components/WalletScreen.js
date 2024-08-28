@@ -258,6 +258,35 @@ function WalletScreen({ route, navigation }) {
   }, []); */
 
   useEffect(() => {
+    // 同步 initialAdditionalCryptos 中的 balance 到 cryptoCards
+    const updatedCryptoCards = cryptoCards.map((card) => {
+      const matchingCrypto = initialAdditionalCryptos.find(
+        (crypto) => crypto.shortName === card.shortName
+      );
+      if (matchingCrypto) {
+        return { ...card, balance: matchingCrypto.balance };
+      }
+      return card;
+    });
+
+    setCryptoCards(updatedCryptoCards);
+  }, [initialAdditionalCryptos]);
+
+  /*   useEffect(() => {
+    // 打印 cryptoCards 中每个加密货币的 balance
+    cryptoCards.forEach((crypto) => {
+      console.log(`${crypto.name} balance:`, crypto.balance);
+    });
+  }, [cryptoCards]);
+
+  useEffect(() => {
+    // 打印每个加密货币的 balance
+    initialAdditionalCryptos.forEach((crypto) => {
+      console.log(`${crypto.name} balance:`, crypto.balance);
+    });
+  }, [initialAdditionalCryptos]);
+ */
+  useEffect(() => {
     setAddedCryptos(cryptoCards);
   }, [cryptoCards]);
   // 监听 createPendingModalVisible 的变化
