@@ -30,6 +30,7 @@ import Constants from "expo-constants";
 import base64 from "base64-js";
 import { Buffer } from "buffer";
 import PinModal from "./modal/PinModal";
+import BluetoothModal from "./modal/BluetoothModal";
 
 const serviceUUID = "0000FFE0-0000-1000-8000-00805F9B34FB";
 const writeCharacteristicUUID = "0000FFE2-0000-1000-8000-00805F9B34FB";
@@ -74,7 +75,7 @@ function WalletScreen({ route, navigation }) {
   const [cryptoCards, setCryptoCards] = useState([]);
   const [priceChanges, setPriceChanges] = useState({});
   const scrollViewRef = useRef();
-  const iconColor = isDarkMode ? "#ffffff" : "#24234C";
+  const iconColor = isDarkMode ? "#ffffff" : "#676776";
   const darkColors = ["#24234C", "#101021"];
   const lightColors = ["#FFFFFF", "#EDEBEF"];
   const darkColorsDown = ["#212146", "#101021"];
@@ -2489,56 +2490,21 @@ function WalletScreen({ route, navigation }) {
         </BlurView>
       </Modal>
       {/* Bluetooth modal */}
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={bleVisible} // Use bleVisible to control this modal
-        onRequestClose={() => {
-          setBleVisible(!bleVisible); // Toggle visibility
+      <BluetoothModal
+        visible={bleVisible} // 传入当前模态框的可见性状态
+        devices={devices} // 传入当前扫描到的设备列表
+        isScanning={isScanning} // 传入是否正在扫描的状态
+        iconColor={iconColor} // 传入图标颜色
+        onDevicePress={handleDevicePress} // 传入设备选择时的处理函数
+        onCancel={() => {
+          setBleVisible(false); // 取消时关闭模态框
+          setSelectedDevice(null); // 重置选中的设备
         }}
-      >
-        <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
-          <View style={WalletScreenStyle.bluetoothModalView}>
-            <Text style={WalletScreenStyle.bluetoothModalTitle}>
-              {t("LOOKING FOR DEVICES")}
-            </Text>
-            {isScanning ? (
-              <View style={{ alignItems: "center" }}>
-                <Image
-                  source={require("../assets/gif/Bluetooth.gif")}
-                  style={WalletScreenStyle.bluetoothImg}
-                />
-                <Text style={WalletScreenStyle.scanModalSubtitle}>
-                  {t("Scanning...")}
-                </Text>
-              </View>
-            ) : (
-              <View>
-                <Image
-                  source={require("../assets/gif/Search.gif")}
-                  style={{ width: 180, height: 180, margin: 30 }}
-                />
-                <Text style={WalletScreenStyle.modalSubtitle}>
-                  {t(
-                    "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled."
-                  )}
-                </Text>
-              </View>
-            )}
-            <TouchableOpacity
-              style={WalletScreenStyle.cancelButtonLookingFor}
-              onPress={() => {
-                setBleVisible(false); // Close Bluetooth modal
-                setSelectedDevice(null); // Reset selected device state
-              }}
-            >
-              <Text style={WalletScreenStyle.cancelButtonText}>
-                {t("Cancel")}
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </BlurView>
-      </Modal>
+        verifiedDevices={verifiedDevices} // 传入已验证的设备列表
+        MyColdWalletScreenStyle={WalletScreenStyle} // 传入样式
+        t={t} // 传入翻译函数
+        onDisconnectPress={handleDisconnectDevice} // 处理断开连接的逻辑
+      />
 
       {/* PIN码输入modal窗口 */}
       <PinModal

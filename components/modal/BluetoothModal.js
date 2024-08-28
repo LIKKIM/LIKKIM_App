@@ -1,3 +1,4 @@
+// BluetoothModal.js
 import React from "react";
 import {
   View,
@@ -10,7 +11,7 @@ import {
 import { BlurView } from "expo-blur";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
-const MyColdWalletBluetoothModal = ({
+const BluetoothModal = ({
   visible,
   devices,
   isScanning,
@@ -117,4 +118,4 @@ const MyColdWalletBluetoothModal = ({
   );
 };
 
-export default MyColdWalletBluetoothModal;
+export default BluetoothModal;

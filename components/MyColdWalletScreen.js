@@ -34,7 +34,7 @@ import ConfirmDisconnectModal from "./modal/ConfirmDisconnectModal";
 import MyColdWalletSuccessModal from "./modal/MyColdWalletSuccessModal";
 import MyColdWalletErrorModal from "./modal/MyColdWalletErrorModal";
 import PinModal from "./modal/PinModal";
-import MyColdWalletBluetoothModal from "./modal/MyColdWalletBluetoothModal";
+import BluetoothModal from "./modal/BluetoothModal";
 import MyColdWalletVerificationModal from "./modal/MyColdWalletVerificationModal";
 import * as LocalAuthentication from "expo-local-authentication";
 import AddressBookModal from "./modal/AddressBookModal";
@@ -575,7 +575,6 @@ function MyColdWalletScreen() {
 
   const handleCancel = () => {
     setModalVisible(false);
-    setModalVisible(true);
   };
   // 设备选择和显示弹窗的处理函数
   const handleDevicePress = async (device) => {
@@ -1357,7 +1356,7 @@ function MyColdWalletScreen() {
         </View>
       </ScrollView>
       {/* Bluetooth modal */}
-      <MyColdWalletBluetoothModal
+      <BluetoothModal
         visible={modalVisible}
         devices={devices}
         isScanning={isScanning}

@@ -114,6 +114,9 @@ const WalletScreenStyles = (isDarkMode) => {
       justifyContent: "center",
       marginTop: 20,
     },
+    deviceIcon: {
+      paddingRight: 4,
+    },
     cancelButtonLookingFor: {
       borderColor: buttonBackgroundColor,
       borderWidth: 3,
@@ -670,7 +673,6 @@ const WalletScreenStyles = (isDarkMode) => {
     modalSubtitle: {
       color: secondTextColor,
       fontSize: 14,
-      marginBottom: 20,
       textAlign: "center",
     },
     scanModalSubtitle: {
