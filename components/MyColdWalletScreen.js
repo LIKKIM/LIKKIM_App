@@ -35,7 +35,7 @@ import MyColdWalletSuccessModal from "./modal/MyColdWalletSuccessModal";
 import MyColdWalletErrorModal from "./modal/MyColdWalletErrorModal";
 import PinModal from "./modal/PinModal";
 import BluetoothModal from "./modal/BluetoothModal";
-import MyColdWalletVerificationModal from "./modal/MyColdWalletVerificationModal";
+import VerificationModal from "./modal/VerificationModal";
 import * as LocalAuthentication from "expo-local-authentication";
 import AddressBookModal from "./modal/AddressBookModal";
 import { languages } from "../config/languages";
@@ -1382,7 +1382,7 @@ function MyColdWalletScreen() {
       />
 
       {/* 验证码模态框 */}
-      <MyColdWalletVerificationModal
+      <VerificationModal
         visible={verificationModalVisible && verificationStatus !== null}
         status={verificationStatus}
         onClose={() => setVerificationModalVisible(false)}

@@ -1,15 +1,9 @@
-// MyColdWalletVerificationModal.js
+// VerificationModal.js
 import React from "react";
 import { View, Text, Modal, Image, TouchableOpacity } from "react-native";
 import { BlurView } from "expo-blur";
 
-const MyColdWalletVerificationModal = ({
-  visible,
-  status,
-  onClose,
-  styles,
-  t,
-}) => {
+const VerificationModal = ({ visible, status, onClose, styles, t }) => {
   const isSuccess = status === "success";
   const imageSource = isSuccess
     ? require("../../assets/gif/Success.gif")
@@ -45,4 +39,4 @@ const MyColdWalletVerificationModal = ({
   );
 };
 
-export default MyColdWalletVerificationModal;
+export default VerificationModal;

@@ -31,6 +31,8 @@ import base64 from "base64-js";
 import { Buffer } from "buffer";
 import PinModal from "./modal/PinModal";
 import BluetoothModal from "./modal/BluetoothModal";
+import VerificationModal from "./modal/VerificationModal";
+import DeleteConfirmationModal from "./modal/DeleteConfirmationModal";
 
 const serviceUUID = "0000FFE0-0000-1000-8000-00805F9B34FB";
 const writeCharacteristicUUID = "0000FFE2-0000-1000-8000-00805F9B34FB";
@@ -2446,49 +2448,17 @@ function WalletScreen({ route, navigation }) {
         </BlurView>
       </Modal>
       {/* Delete Confirmation Modal */}
-      <Modal
-        animationType="slide"
-        transparent={true}
+      <DeleteConfirmationModal
         visible={deleteConfirmVisible}
-        onRequestClose={() => {
+        onClose={() => {
           setDeleteConfirmVisible(false);
           navigation.setParams({ showDeleteConfirmModal: false }); // 重置参数
         }}
-      >
-        <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
-          <View style={WalletScreenStyle.deleteModalView}>
-            <Text style={WalletScreenStyle.alertModalTitle}>
-              {t("Remove Chain Account")}
-            </Text>
-            <Text style={WalletScreenStyle.modalSubtitle}>
-              {t("This chain account will be removed")}
-            </Text>
-            <View style={{ alignItems: "center", justifyContent: "center" }}>
-              <Image
-                source={require("../assets/gif/Delete.gif")}
-                style={{ width: 200, height: 200, marginBottom: 40 }}
-              />
-            </View>
-            <TouchableOpacity
-              style={WalletScreenStyle.removeModalButton}
-              onPress={handleDeleteCard}
-            >
-              <Text style={WalletScreenStyle.ButtonText}>{t("Remove")}</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={WalletScreenStyle.removeCancelButton}
-              onPress={() => {
-                setDeleteConfirmVisible(false);
-                navigation.setParams({ showDeleteConfirmModal: false }); // 重置参数
-              }}
-            >
-              <Text style={WalletScreenStyle.cancelButtonText}>
-                {t("Cancel")}
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </BlurView>
-      </Modal>
+        onConfirm={handleDeleteCard}
+        styles={WalletScreenStyle}
+        t={t}
+      />
+
       {/* Bluetooth modal */}
       <BluetoothModal
         visible={bleVisible} // 传入当前模态框的可见性状态
@@ -2519,47 +2489,13 @@ function WalletScreen({ route, navigation }) {
       />
 
       {/* 验证结果模态框 */}
-      <Modal
-        animationType="slide"
-        transparent={true}
+      <VerificationModal
         visible={verificationStatus !== null}
-        onRequestClose={() => setVerificationStatus(null)}
-      >
-        <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
-          <View style={WalletScreenStyle.pinModalView}>
-            <Image
-              source={
-                verificationStatus === "success"
-                  ? require("../assets/gif/Success.gif")
-                  : require("../assets/gif/Fail.gif")
-              }
-              style={{ width: 120, height: 120, marginTop: 20 }}
-            />
-            <Text style={WalletScreenStyle.modalTitle}>
-              {t(
-                verificationStatus === "success"
-                  ? "Verification successful!"
-                  : "Verification failed!"
-              )}
-            </Text>
-            <Text style={WalletScreenStyle.modalSubtitle}>
-              {t(
-                verificationStatus === "success"
-                  ? "You can now safely use the device."
-                  : "The verification code you entered is incorrect. Please try again."
-              )}
-            </Text>
-            <TouchableOpacity
-              style={WalletScreenStyle.submitButton}
-              onPress={() => setVerificationStatus(null)}
-            >
-              <Text style={WalletScreenStyle.submitButtonText}>
-                {t("Close")}
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </BlurView>
-      </Modal>
+        status={verificationStatus}
+        onClose={() => setVerificationStatus(null)}
+        styles={WalletScreenStyle}
+        t={t}
+      />
 
       {/* 创建新的 createPendingModal 模态框 */}
       <Modal
