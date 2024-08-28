@@ -1372,7 +1372,7 @@ function MyColdWalletScreen() {
         verifiedDevices={verifiedDevices}
         MyColdWalletScreenStyle={MyColdWalletScreenStyle}
         t={t}
-        onDisconnectPress={handleDisconnectPress} // 新增的回调函数
+        onDisconnectPress={handleDisconnectPress}
       />
 
       {/* PIN码输入modal窗口 */}
