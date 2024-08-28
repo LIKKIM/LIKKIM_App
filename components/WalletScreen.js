@@ -738,9 +738,7 @@ function WalletScreen({ route, navigation }) {
         console.error("无效的设备对象：", device);
         return;
       }
-
       //   console.log("发送创建钱包命令之前的设备对象:", device);
-
       // 无论设备是否连接，均重新连接并发现服务和特性
       await device.connect();
       await device.discoverAllServicesAndCharacteristics();
