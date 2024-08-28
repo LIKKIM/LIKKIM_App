@@ -37,6 +37,7 @@ import AddWalletModal from "./modal/AddWalletModal";
 import TipModal from "./modal/TipModal";
 import ProcessModal from "./modal/ProcessModal";
 import AddCryptoModal from "./modal/AddCryptoModal";
+import AddressModal from "./modal/AddressModal";
 
 const serviceUUID = "0000FFE0-0000-1000-8000-00805F9B34FB";
 const writeCharacteristicUUID = "0000FFE2-0000-1000-8000-00805F9B34FB";
@@ -2086,113 +2087,19 @@ function WalletScreen({ route, navigation }) {
         )}
       </ScrollView>
       {/* 显示选择的加密货币地址的模态窗口 */}
-      <Modal
-        animationType="slide"
-        transparent={true}
+      <AddressModal
         visible={addressModalVisible}
-        onRequestClose={() => setAddressModalVisible(false)}
-      >
-        <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
-          <View style={WalletScreenStyle.receiveModalView}>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Text style={WalletScreenStyle.modalTitle}>
-                {t("Address for")}
-              </Text>
-              {selectedCryptoIcon && (
-                <Image
-                  source={selectedCryptoIcon}
-                  style={{
-                    width: 24,
-                    height: 24,
-                    marginLeft: 5,
-                    marginRight: 5,
-                  }}
-                />
-              )}
-              <Text style={WalletScreenStyle.modalTitle}>
-                {selectedCrypto}:
-              </Text>
-            </View>
-            <Text style={WalletScreenStyle.subtitleText}>
-              {t("Assets can only be sent within the same chain.")}
-            </Text>
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Text style={WalletScreenStyle.addressText}>
-                {selectedAddress}
-              </Text>
-              <TouchableOpacity
-                onPress={() => Clipboard.setString(selectedAddress)}
-              >
-                <Icon
-                  name="content-copy"
-                  size={24}
-                  color={isDarkMode ? "#ffffff" : "#676776"}
-                />
-              </TouchableOpacity>
-            </View>
-            <View
-              style={{
-                backgroundColor: "#fff",
-                height: 220,
-                width: 220,
-                justifyContent: "center",
-                alignItems: "center",
-                borderRadius: 12,
-              }}
-            >
-              <QRCode value={selectedAddress} size={200} />
-            </View>
-            {isVerifyingAddress && ( // 根据状态控制提示文本显示
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <Image
-                  source={require("../assets/gif/Pending.gif")}
-                  style={{ width: 40, height: 40 }}
-                />
-                <Text
-                  style={[
-                    WalletScreenStyle.verifyingAddressText,
-                    { color: "#3CDA84" },
-                  ]}
-                >
-                  {addressVerificationMessage}
-                </Text>
-              </View>
-            )}
-
-            <View
-              style={{
-                flexDirection: "col",
-                width: "100%",
-                justifyContent: "space-between",
-              }}
-            >
-              <TouchableOpacity
-                onPress={handleVerifyAddress}
-                style={WalletScreenStyle.verifyAddressButton}
-              >
-                <Text style={WalletScreenStyle.submitButtonText}>
-                  {t("Verify Address")}
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={WalletScreenStyle.cancelAddressButton}
-                onPress={() => setAddressModalVisible(false)}
-              >
-                <Text style={WalletScreenStyle.cancelButtonText}>
-                  {t("Close")}
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </BlurView>
-      </Modal>
-
+        onClose={() => setAddressModalVisible(false)}
+        selectedCryptoIcon={selectedCryptoIcon}
+        selectedCrypto={selectedCrypto}
+        selectedAddress={selectedAddress}
+        isVerifyingAddress={isVerifyingAddress}
+        addressVerificationMessage={addressVerificationMessage}
+        onVerifyAddress={handleVerifyAddress}
+        WalletScreenStyle={WalletScreenStyle}
+        t={t}
+        isDarkMode={isDarkMode}
+      />
       {/* Add Wallet Modal */}
       <AddWalletModal
         visible={addWalletModalVisible}
