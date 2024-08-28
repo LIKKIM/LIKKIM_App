@@ -249,14 +249,21 @@ export const CryptoProvider = ({ children }) => {
   const [isAppLaunching, setIsAppLaunching] = useState(true);
 
   const updateCryptoData = (shortName, newData) => {
-    setInitialAdditionalCryptos((prevCryptos) =>
-      prevCryptos.map((crypto) =>
+    setInitialAdditionalCryptos((prevCryptos) => {
+      const updatedCryptos = prevCryptos.map((crypto) =>
         crypto.shortName === shortName ? { ...crypto, ...newData } : crypto
-      )
-    );
+      );
+
+      // 持久化更新后的数据
+      AsyncStorage.setItem(
+        "initialAdditionalCryptos",
+        JSON.stringify(updatedCryptos)
+      );
+
+      return updatedCryptos;
+    });
   };
 
-  // 在这里添加用于更新加密卡片的方法，并将其传递给上下文
   const addCryptoCard = (chainName, walletAddress) => {
     setAddedCryptos((prevCards) => {
       const existingCard = prevCards.find(

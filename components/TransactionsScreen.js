@@ -238,6 +238,9 @@ function TransactionsScreen() {
                 valueUsd: token.valueUsd,
               });
             });
+
+            // 在此打印检查更新后的数据
+            //  console.log('Updated initialAdditionalCryptos:', initialAdditionalCryptos);
           } else {
             console.log("No tokenList found in response data.");
           }
@@ -283,7 +286,7 @@ function TransactionsScreen() {
     }
   }, [
     amountModalVisible,
-    hasFetchedBalance, // 添加这个状态作为依赖
+    hasFetchedBalance,
     selectedCrypto,
     initialAdditionalCryptos,
     updateCryptoData,
