@@ -1,4 +1,3 @@
-// ScreenLock.js
 import React, { useState, useContext, useEffect } from "react";
 import {
   View,
@@ -45,8 +44,16 @@ const ScreenLock = () => {
   };
 
   const handleFaceIDIconPress = async () => {
-    await AsyncStorage.setItem("faceID", "open");
-    setFaceIDEnabled(true);
+    const result = await LocalAuthentication.authenticateAsync({
+      promptMessage: t("Unlock with Face ID"), // 提示信息
+    });
+
+    if (result.success) {
+      setIsAppLaunching(false);
+    } else {
+      console.log("Face ID 认证失败");
+      // 处理认证失败的情况，例如显示错误信息
+    }
   };
 
   const handleLostPassword = () => {
@@ -66,12 +73,13 @@ const ScreenLock = () => {
   useEffect(() => {
     if (Platform.OS === "ios" || Platform.OS === "macos") {
       AsyncStorage.getItem("faceID").then((status) => {
-        status === "open" &&
+        if (status === "open") {
           LocalAuthentication.authenticateAsync({}).then((res) => {
             if (res.success) {
               setIsAppLaunching(false); //解锁后设置 isAppLaunching 为 false
             }
           });
+        }
       });
     }
   }, []);
