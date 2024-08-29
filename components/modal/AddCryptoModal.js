@@ -60,7 +60,10 @@ const AddCryptoModal = ({
                 <ImageBackground
                   source={crypto.cardImage}
                   style={styles.addCryptoImage}
-                  imageStyle={{ borderRadius: 12 }}
+                  imageStyle={{
+                    borderRadius: 12,
+                    backgroundColor: "#ffffff10",
+                  }}
                 >
                   <View style={styles.addCryptoOverlay} />
                   <View style={styles.iconAndTextContainer}>
