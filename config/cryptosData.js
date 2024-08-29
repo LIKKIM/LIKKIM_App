@@ -181,23 +181,6 @@ export const initialAdditionalCryptos = [
     valueUsd: "0.0",
     priceUsd: "1.0",
   },
-
-  {
-    name: "Tron",
-    shortName: "TRX",
-    balance: "0.0",
-    // icon: require("../assets/icon/TRXIcon.png"),
-    // cardImage: require("../assets/CardTron.png"),
-    address: "Txyz...",
-    chain: "Tron",
-    chainShortName: "TRX",
-    queryChainShortName: "TRX",
-    // chainIcon: require("../assets/icon/TRXIcon.png"),
-    tokenType: "TRC20",
-    fee: "0.1",
-    valueUsd: "0.0",
-    priceUsd: "0.05",
-  },
   {
     name: "Solana",
     shortName: "SOL",
@@ -448,24 +431,7 @@ export const initialAdditionalCryptos = [
     valueUsd: "0.0",
     priceUsd: "15.0",
   },
-
-  // EthereumPoW (ETHW)
-  {
-    name: "EthereumPoW",
-    shortName: "ETHW",
-    balance: "0.0",
-    // icon: require("../assets/icon/ETHWIcon.png"),
-    // cardImage: require("../assets/CardETHW.png"),
-    address: "0xxyz...",
-    chain: "EthereumPoW",
-    chainShortName: "ETHW",
-    queryChainShortName: "ETHW",
-    // chainIcon: require("../assets/icon/ETHWIcon.png"),
-    tokenType: "ETHW",
-    fee: "0.01",
-    valueUsd: "0.0",
-    priceUsd: "3.0",
-  }, // Base (BASE)
+  // Base (BASE)
   {
     name: "Base",
     shortName: "BASE",
@@ -481,24 +447,6 @@ export const initialAdditionalCryptos = [
     fee: "0.001",
     valueUsd: "0.0",
     priceUsd: "0.5",
-  },
-
-  // Celo (CELO)
-  {
-    name: "Celo",
-    shortName: "CELO",
-    balance: "0.0",
-    // icon: require("../assets/icon/CELOIcon.png"),
-    // cardImage: require("../assets/CardCelo.png"),
-    address: "0xxyz...",
-    chain: "Celo",
-    chainShortName: "CELO",
-    queryChainShortName: "CELO",
-    // chainIcon: require("../assets/icon/CELOIcon.png"),
-    tokenType: "ERC20",
-    fee: "0.001",
-    valueUsd: "0.0",
-    priceUsd: "2.0",
   },
 
   // Ripple (XRP)
@@ -749,24 +697,6 @@ export const initialAdditionalCryptos = [
     priceUsd: "0.4",
   },
 
-  // Filecoin (FIL)
-  {
-    name: "Filecoin",
-    shortName: "FIL",
-    balance: "0.0",
-    // icon: require("../assets/icon/FILIcon.png"),
-    // cardImage: require("../assets/CardFilecoin.png"),
-    address: "fil1xyz...",
-    chain: "Filecoin",
-    chainShortName: "FIL",
-    queryChainShortName: "FIL",
-    // chainIcon: require("../assets/icon/FILIcon.png"),
-    tokenType: "FIL",
-    fee: "0.001",
-    valueUsd: "0.0",
-    priceUsd: "5.0",
-  },
-
   // Filecoin FEVM (FIL)
   {
     name: "Filecoin FEVM",
@@ -960,24 +890,6 @@ export const initialAdditionalCryptos = [
     fee: "0.01",
     valueUsd: "0.0",
     priceUsd: "3.0",
-  },
-
-  // Base (BASE)
-  {
-    name: "Base",
-    shortName: "BASE",
-    balance: "0.0",
-    // icon: require("../assets/icon/BASEIcon.png"),
-    // cardImage: require("../assets/CardBase.png"),
-    address: "0xxyz...",
-    chain: "Base",
-    chainShortName: "BASE",
-    queryChainShortName: "BASE",
-    // chainIcon: require("../assets/icon/BASEIcon.png"),
-    tokenType: "ERC20",
-    fee: "0.001",
-    valueUsd: "0.0",
-    priceUsd: "0.5",
   },
 
   // Boba Network (BOBA)
