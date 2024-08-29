@@ -14,6 +14,7 @@ import {
   Platform,
   ScrollView,
   Button,
+  RefreshControl,
   Clipboard,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
@@ -123,6 +124,7 @@ function WalletScreen({ route, navigation }) {
   const [addressVerificationMessage, setAddressVerificationMessage] = useState(
     t("Verifying Address on LIKKIM...")
   );
+  const [refreshing, setRefreshing] = useState(false);
 
   const [importingModalVisible, setImportingModalVisible] = useState(false);
   const restoreIdentifier = Constants.installationId;
@@ -144,7 +146,15 @@ function WalletScreen({ route, navigation }) {
     title: t("Importing on LIKKIM Hardware..."), // 默认主消息
     subtitle: t("Your device is already verified."), // 默认子消息
   });
-
+  // 定义下拉刷新执行的函数
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    // 这里添加你的数据重新加载逻辑
+    // 模拟网络请求的异步操作
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
+  }, []);
   const bleManagerRef = useRef(null);
 
   const scanDevices = () => {
@@ -1746,6 +1756,11 @@ function WalletScreen({ route, navigation }) {
           }
         }}
         scrollEventThrottle={16} // 滚动事件节流，以确保 onScroll 事件不会频繁触发
+        refreshControl={
+          cryptoCards.length > 0 && (
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          )
+        }
       >
         <Animated.View
           style={[
