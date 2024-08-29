@@ -1,5 +1,5 @@
 // AddCryptoModal.js
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -23,7 +23,15 @@ const AddCryptoModal = ({
   styles,
   t,
   isDarkMode,
+  chainCategories, // 添加一个新的prop用于传递链分类标签
 }) => {
+  const [selectedChain, setSelectedChain] = useState(null);
+
+  // 通过选中的链标签过滤加密货币
+  const filteredByChain = selectedChain
+    ? filteredCryptos.filter((crypto) => crypto.chain === selectedChain)
+    : filteredCryptos;
+
   return (
     <Modal
       animationType="slide"
@@ -44,14 +52,40 @@ const AddCryptoModal = ({
               value={searchQuery}
             />
           </View>
+          {/* 链分类标签 */}
+          <ScrollView
+            horizontal
+            style={styles.chainScrollView}
+            showsHorizontalScrollIndicator={false}
+          >
+            {chainCategories.map((chain) => (
+              <TouchableOpacity
+                key={chain}
+                style={[
+                  styles.chainTag,
+                  selectedChain === chain && styles.selectedChainTag,
+                ]}
+                onPress={() => setSelectedChain(chain)}
+              >
+                <Text
+                  style={[
+                    styles.chainTagText,
+                    selectedChain === chain && styles.selectedChainTagText,
+                  ]}
+                >
+                  {chain}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
 
+          {/* 加密货币列表 */}
           <ScrollView
             style={styles.addCryptoScrollView}
             showsVerticalScrollIndicator={false}
             showsHorizontalScrollIndicator={false}
           >
-            {/* 使用搜索关键字过滤后的加密货币列表 */}
-            {filteredCryptos.map((crypto) => (
+            {filteredByChain.map((crypto) => (
               <TouchableOpacity
                 key={crypto.name}
                 style={styles.addCryptoButton}
@@ -88,8 +122,8 @@ const AddCryptoModal = ({
                 <View
                   style={{
                     flexDirection: "row",
-                    flex: 1, // 使 View 占据父容器的剩余宽度
-                    flexWrap: "wrap", // 允许子元素在需要时换行
+                    flex: 1,
+                    flexWrap: "wrap",
                     justifyContent: "center",
                     alignItems: "center",
                   }}
@@ -102,6 +136,7 @@ const AddCryptoModal = ({
               </TouchableOpacity>
             ))}
           </ScrollView>
+
           <TouchableOpacity style={styles.cancelButton} onPress={onClose}>
             <Text style={styles.cancelButtonText}>{t("Close")}</Text>
           </TouchableOpacity>

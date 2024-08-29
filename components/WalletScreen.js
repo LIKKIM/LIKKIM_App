@@ -125,7 +125,9 @@ function WalletScreen({ route, navigation }) {
     t("Verifying Address on LIKKIM...")
   );
   const [refreshing, setRefreshing] = useState(false);
-
+  const chainCategories = Array.from(
+    new Set(initialAdditionalCryptos.map((crypto) => crypto.chain))
+  );
   const [importingModalVisible, setImportingModalVisible] = useState(false);
   const restoreIdentifier = Constants.installationId;
   const [pinCode, setPinCode] = useState("");
@@ -2184,6 +2186,7 @@ function WalletScreen({ route, navigation }) {
         styles={WalletScreenStyle}
         t={t}
         isDarkMode={isDarkMode}
+        chainCategories={chainCategories} // 传递链分类标签
       />
 
       {/* Delete Confirmation Modal */}

@@ -21,6 +21,27 @@ const WalletScreenStyles = (isDarkMode) => {
     ? "#24234C80"
     : "#FFFFFF80";
   return StyleSheet.create({
+    chainScrollView: {
+      marginBottom: 10,
+      paddingHorizontal: 10,
+    },
+    chainTag: {
+      paddingVertical: 5,
+      paddingHorizontal: 10,
+      marginRight: 8,
+      borderRadius: 6,
+      backgroundColor: addCryptoButtonBackgroundColor,
+    },
+    selectedChainTag: {
+      backgroundColor: buttonBackgroundColor,
+    },
+    chainTagText: {
+      fontSize: 14,
+      color: textColor,
+    },
+    selectedChainTagText: {
+      color: textColor,
+    },
     cardName: {
       fontSize: 16,
       fontWeight: "bold",
