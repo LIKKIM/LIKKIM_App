@@ -25,12 +25,13 @@ const AddCryptoModal = ({
   isDarkMode,
   chainCategories, // 添加一个新的prop用于传递链分类标签
 }) => {
-  const [selectedChain, setSelectedChain] = useState(null);
+  const [selectedChain, setSelectedChain] = useState("All");
 
   // 通过选中的链标签过滤加密货币
-  const filteredByChain = selectedChain
-    ? filteredCryptos.filter((crypto) => crypto.chain === selectedChain)
-    : filteredCryptos;
+  const filteredByChain =
+    selectedChain === "All"
+      ? filteredCryptos
+      : filteredCryptos.filter((crypto) => crypto.chain === selectedChain);
 
   return (
     <Modal
@@ -58,6 +59,25 @@ const AddCryptoModal = ({
             style={styles.chainScrollView}
             showsHorizontalScrollIndicator={false}
           >
+            {/* All 标签 */}
+            <TouchableOpacity
+              key="All"
+              style={[
+                styles.chainTag,
+                selectedChain === "All" && styles.selectedChainTag,
+              ]}
+              onPress={() => setSelectedChain("All")}
+            >
+              <Text
+                style={[
+                  styles.chainTagText,
+                  selectedChain === "All" && styles.selectedChainTagText,
+                ]}
+              >
+                All
+              </Text>
+            </TouchableOpacity>
+
             {chainCategories.map((chain) => (
               <TouchableOpacity
                 key={chain}
