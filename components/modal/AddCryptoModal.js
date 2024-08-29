@@ -87,6 +87,8 @@ const AddCryptoModal = ({
                 ]}
                 onPress={() => setSelectedChain(chain)}
               >
+                {/* 显示链的图标 */}
+                <Image source={chain.chainIcon} style={styles.TagChainIcon} />
                 <Text
                   style={[
                     styles.chainTagText,

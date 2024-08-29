@@ -21,11 +21,20 @@ const WalletScreenStyles = (isDarkMode) => {
     ? "#24234C80"
     : "#FFFFFF80";
   return StyleSheet.create({
+    TagChainIcon: {
+      width: 14,
+      height: 14,
+      backgroundColor: "#8E80F040",
+      marginRight: 8,
+      borderRadius: 10,
+    },
     chainScrollView: {
       marginBottom: 10,
       paddingHorizontal: 10,
     },
     chainTag: {
+      flexDirection: "row", // 使图标和文本在一行显示
+      alignItems: "center", // 垂直居中对齐
       paddingVertical: 5,
       paddingHorizontal: 10,
       marginRight: 8,
