@@ -22,9 +22,19 @@ const ScreenLock = () => {
   const { isDarkMode } = useContext(DarkModeContext);
   const [inputPassword, setInputPassword] = useState("");
   const [isPasswordHidden, setIsPasswordHidden] = useState(true);
+  const [isFocused, setIsFocused] = useState(false); // 跟踪输入框是否聚焦
   const [modalVisible, setModalVisible] = useState(false); // 用于显示丢失密码的 Modal
   const [errorModalVisible, setErrorModalVisible] = useState(false); // 用于显示错误信息的 Modal
+  const [faceIDEnabled, setFaceIDEnabled] = useState(false); // 用于跟踪是否启用FaceID
   const { t } = useTranslation();
+
+  useEffect(() => {
+    AsyncStorage.getItem("faceID").then((status) => {
+      if (status === "open") {
+        setFaceIDEnabled(true);
+      }
+    });
+  }, []);
 
   const handleUnlock = () => {
     if (inputPassword === screenLockPassword) {
@@ -32,6 +42,11 @@ const ScreenLock = () => {
     } else {
       setErrorModalVisible(true); // 显示错误 Modal
     }
+  };
+
+  const handleFaceIDIconPress = async () => {
+    await AsyncStorage.setItem("faceID", "open");
+    setFaceIDEnabled(true);
   };
 
   const handleLostPassword = () => {
@@ -49,7 +64,6 @@ const ScreenLock = () => {
   const themeStyles = isDarkMode ? darkStyles : lightStyles;
 
   useEffect(() => {
-    //默认使用iOS FaceId，忽略Android设备指纹&密码锁 ｜ 2winter
     if (Platform.OS === "ios" || Platform.OS === "macos") {
       AsyncStorage.getItem("faceID").then((status) => {
         status === "open" &&
@@ -83,13 +97,25 @@ const ScreenLock = () => {
             onChangeText={setInputPassword}
             placeholder={t("Enter Password")}
             placeholderTextColor={themeStyles.placeholder.color}
+            onFocus={() => setIsFocused(true)} // 输入框获取焦点时
+            onBlur={() => setIsFocused(false)} // 输入框失去焦点时
           />
           <TouchableOpacity
-            onPress={() => setIsPasswordHidden(!isPasswordHidden)}
+            onPress={
+              isFocused
+                ? () => setIsPasswordHidden(!isPasswordHidden)
+                : handleFaceIDIconPress
+            }
             style={styles.eyeIcon}
           >
             <Icon
-              name={isPasswordHidden ? "visibility-off" : "visibility"}
+              name={
+                isFocused || !faceIDEnabled
+                  ? isPasswordHidden
+                    ? "visibility-off"
+                    : "visibility"
+                  : "face"
+              }
               size={24}
               color={themeStyles.placeholder.color}
             />
