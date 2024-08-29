@@ -27,7 +27,7 @@ export default {
       UIBackgroundModes: ["bluetooth-central", "bluetooth-peripheral"],
     },
     supportsTablet: true,
-    buildNumber: "15.7.7",
+    buildNumber: "15.7.8",
     bundleIdentifier: "RN.LKKIM",
     icon: "./assets/icon.png",
   },
@@ -43,9 +43,9 @@ export default {
     [
       "expo-local-authentication",
       {
-        "faceIDPermission": "Allow $(PRODUCT_NAME) to use Face ID."
-      }
-    ]
+        faceIDPermission: "Allow $(PRODUCT_NAME) to use Face ID.",
+      },
+    ],
   ],
   extra: {
     eas: {
