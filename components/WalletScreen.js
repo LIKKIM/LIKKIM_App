@@ -271,10 +271,10 @@ function WalletScreen({ route, navigation }) {
     postTest();
   }, []); */
 
-  /*   useEffect(() => {
+  useEffect(() => {
     console.log("Updated cryptoCards:", cryptoCards);
   }, [cryptoCards]);
- */
+
   useEffect(() => {
     // 同步 initialAdditionalCryptos 中的 balance 到 cryptoCards
     const updatedCryptoCards = cryptoCards.map((card) => {
