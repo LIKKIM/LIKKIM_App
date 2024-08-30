@@ -1347,6 +1347,7 @@ function TransactionsScreen() {
   };
 
   const handleNextAfterAddress = () => {
+    setAmount("");
     setInputAddressModalVisible(false);
     setAmountModalVisible(true);
   };
