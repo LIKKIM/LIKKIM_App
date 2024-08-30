@@ -1308,6 +1308,7 @@ function TransactionsScreen() {
 
   const handleSendPress = () => {
     setOperationType("send");
+    setIsAddressValid(false);
     setModalVisible(true);
   };
   const selectCrypto = async (crypto) => {
