@@ -1546,7 +1546,8 @@ function TransactionsScreen() {
                     {t("USD Value")}: ${valueUsd}
                   </Text>
                   {/* 当用户输入的金额大于余额时显示余额不足 */}
-                  {parseFloat(amount) > parseFloat(balance) && (
+                  {parseFloat(amount) >
+                    parseFloat(balance) + parseFloat(fee) && (
                     <Text
                       style={[
                         TransactionsScreenStyle.balanceSubtitle,
