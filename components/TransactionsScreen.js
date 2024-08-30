@@ -1385,7 +1385,6 @@ function TransactionsScreen() {
             width: 360,
             height: 170,
             flexDirection: "row",
-
             gap: 20,
           }}
         >

@@ -426,7 +426,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       flex: 1,
       backgroundColor: backgroundColor,
       alignItems: "center",
-      justifyContent: "center",
+      // justifyContent: "center",
       padding: 20,
     },
     container: {
