@@ -109,6 +109,11 @@ function TransactionsScreen() {
   const [addressVerificationMessage, setAddressVerificationMessage] = useState(
     t("Verifying Address on LIKKIM...")
   );
+  const isAmountValid =
+    amount &&
+    parseFloat(amount) > 0 &&
+    parseFloat(amount) <= parseFloat(balance) + parseFloat(fee);
+
   const [modalStatus, setModalStatus] = useState({
     title: t("Confirming Transaction on LIKKIM Device..."),
     subtitle: t("Please confirm the transaction on your LIKKIM device."),
@@ -1577,21 +1582,13 @@ function TransactionsScreen() {
                   style={[
                     TransactionsScreenStyle.optionButton,
                     {
-                      backgroundColor:
-                        amount &&
-                        parseFloat(amount) > 0 &&
-                        parseFloat(amount) <=
-                          parseFloat(balance) + parseFloat(fee)
-                          ? buttonBackgroundColor
-                          : disabledButtonBackgroundColor, // 动态设置按钮颜色
+                      backgroundColor: isAmountValid
+                        ? buttonBackgroundColor
+                        : disabledButtonBackgroundColor,
                     },
                   ]}
                   onPress={handleNextAfterAmount}
-                  disabled={
-                    !amount ||
-                    parseFloat(amount) === 0 ||
-                    parseFloat(amount) > parseFloat(balance) + parseFloat(fee) // 余额不足时禁用按钮
-                  }
+                  disabled={!isAmountValid}
                 >
                   <Text style={TransactionsScreenStyle.submitButtonText}>
                     {t("Next")}
