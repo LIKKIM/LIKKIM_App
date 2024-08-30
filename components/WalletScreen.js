@@ -1414,11 +1414,6 @@ function WalletScreen({ route, navigation }) {
     navigation.setParams({ showDeleteConfirmModal: false });
   };
 
-  const handleConfirmDelete = () => {
-    setDeleteConfirmVisible(true);
-    setDropdownVisible(false);
-  };
-
   // 停止监听
   useEffect(() => {
     if (!pinModalVisible) {
