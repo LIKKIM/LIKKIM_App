@@ -305,7 +305,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       marginBottom: 10,
     },
     languageList: {
-      maxHeight: 300,
+      maxHeight: 290,
       width: 280,
     },
     contentContainer: {
