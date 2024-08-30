@@ -1576,13 +1576,20 @@ function TransactionsScreen() {
                     TransactionsScreenStyle.optionButton,
                     {
                       backgroundColor:
-                        amount && parseFloat(amount) > 0
+                        amount &&
+                        parseFloat(amount) > 0 &&
+                        parseFloat(amount) <=
+                          parseFloat(balance) + parseFloat(fee)
                           ? buttonBackgroundColor
                           : disabledButtonBackgroundColor, // 动态设置按钮颜色
                     },
                   ]}
                   onPress={handleNextAfterAmount}
-                  disabled={!amount || parseFloat(amount) === 0} // 若金额无效，则按钮禁用
+                  disabled={
+                    !amount ||
+                    parseFloat(amount) === 0 ||
+                    parseFloat(amount) > parseFloat(balance) + parseFloat(fee) // 余额不足时禁用按钮
+                  }
                 >
                   <Text style={TransactionsScreenStyle.submitButtonText}>
                     {t("Next")}
