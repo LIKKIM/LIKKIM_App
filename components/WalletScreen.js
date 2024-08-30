@@ -61,6 +61,9 @@ function WalletScreen({ route, navigation }) {
     setIsVerificationSuccessful,
     verifiedDevices,
     setVerifiedDevices,
+    cryptoCards,
+    setCryptoCards,
+    handleUpdateCryptoCards,
   } = useContext(CryptoContext);
   const { isDarkMode } = useContext(DarkModeContext);
   const WalletScreenStyle = WalletScreenStyles(isDarkMode);
@@ -81,7 +84,6 @@ function WalletScreen({ route, navigation }) {
     useState(false);
   const [isVerifyingAddress, setIsVerifyingAddress] = useState(false);
   const [deleteConfirmVisible, setDeleteConfirmVisible] = useState(false);
-  const [cryptoCards, setCryptoCards] = useState([]);
   const [priceChanges, setPriceChanges] = useState({});
   const scrollViewRef = useRef();
   const iconColor = isDarkMode ? "#ffffff" : "#676776";
@@ -374,14 +376,6 @@ function WalletScreen({ route, navigation }) {
     // 当 cryptoCards 状态变化时，更新 route.params
     navigation.setParams({ cryptoCards });
   }, [cryptoCards]);
-
-  const handleUpdateCryptoCards = (newCrypto) => {
-    setCryptoCards((prevCards) => {
-      const updatedCards = [...prevCards, newCrypto];
-      setAddedCryptos(updatedCards); // 同步更新 addedCryptos
-      return updatedCards;
-    });
-  };
 
   const handleDevicePress = async (device) => {
     // 检查是否传递了有效的设备对象

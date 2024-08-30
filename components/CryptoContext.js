@@ -79,11 +79,19 @@ export const CryptoProvider = ({ children }) => {
     initialAdditionalCryptosState
   );
 
-  const [addedCryptos, setAddedCryptos] = useState([]);
   const [isVerificationSuccessful, setIsVerificationSuccessful] =
     useState(false);
   const [verifiedDevices, setVerifiedDevices] = useState([]);
   const [isAppLaunching, setIsAppLaunching] = useState(true);
+  const [cryptoCards, setCryptoCards] = useState([]);
+  const [addedCryptos, setAddedCryptos] = useState([]);
+  const handleUpdateCryptoCards = (newCrypto) => {
+    setCryptoCards((prevCards) => {
+      const updatedCards = [...prevCards, newCrypto];
+      setAddedCryptos(updatedCards);
+      return updatedCards;
+    });
+  };
 
   const updateCryptoData = (shortName, newData) => {
     setInitialAdditionalCryptos((prevCryptos) => {
@@ -310,7 +318,7 @@ export const CryptoProvider = ({ children }) => {
         setInitialAdditionalCryptos, // 提供 setInitialAdditionalCryptos
         additionalCryptos,
         setAdditionalCryptos,
-        addedCryptos,
+
         setAddedCryptos,
         addCryptoCard, // 提供 addCryptoCard 方法
         isVerificationSuccessful,
@@ -324,6 +332,10 @@ export const CryptoProvider = ({ children }) => {
         changeScreenLockPassword,
         isAppLaunching,
         setIsAppLaunching,
+        cryptoCards,
+        addedCryptos,
+        setCryptoCards,
+        handleUpdateCryptoCards,
       }}
     >
       <DarkModeContext.Provider value={{ isDarkMode, setIsDarkMode }}>
