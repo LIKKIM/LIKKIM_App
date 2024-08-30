@@ -1757,7 +1757,7 @@ function TransactionsScreen() {
               ) : (
                 <ScrollView
                   contentContainerStyle={{ alignItems: "center" }}
-                  style={{ maxHeight: 400, width: 280 }}
+                  style={{ maxHeight: 400, width: 320, paddingHorizontal: 20 }}
                 >
                   {addedCryptos.map((crypto) => (
                     <TouchableOpacity
