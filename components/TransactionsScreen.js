@@ -1526,7 +1526,7 @@ function TransactionsScreen() {
                   caretHidden={true} // 隐藏光标
                 />
                 <Text style={TransactionsScreenStyle.amountSubtitle}>
-                  {t("Value in USD")}: ${valueUsd}
+                  {t("Balance")}: {balance} {selectedCrypto}
                 </Text>
               </View>
               <View
@@ -1543,7 +1543,7 @@ function TransactionsScreen() {
                   }}
                 >
                   <Text style={TransactionsScreenStyle.balanceSubtitle}>
-                    {t("Balance")}: {balance} {selectedCrypto}
+                    {t("USD Value")}: ${valueUsd}
                   </Text>
                   {/* 当用户输入的金额大于余额时显示余额不足 */}
                   {parseFloat(amount) > parseFloat(balance) && (
