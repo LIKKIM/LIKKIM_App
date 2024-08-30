@@ -242,18 +242,33 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                                 <Text
                                   style={[styles.Text, { marginRight: 10 }]}
                                 >
-                                  Network: {item.network}
+                                  Network:&nbsp;
+                                  <Text style={[styles.modalSubtitle]}>
+                                    {item.network}
+                                  </Text>
                                 </Text>
-                                <Text style={styles.Text}>
-                                  Name: {item.name}
+                                <Text
+                                  style={[styles.Text, { marginRight: 10 }]}
+                                >
+                                  Name:&nbsp;
+                                  <Text style={[styles.modalSubtitle]}>
+                                    {item.name}
+                                  </Text>
                                 </Text>
                               </View>
                               <Text
-                                style={[styles.Text, { flexShrink: 1 }]} // 允许文本在需要时缩小
+                                style={[
+                                  styles.Text,
+                                  { marginRight: 10 },
+                                  { flexShrink: 1 },
+                                ]} // 允许文本在需要时缩小
                                 numberOfLines={1} // 限制为一行
                                 ellipsizeMode="middle" // 在中间截断文本并添加省略号
                               >
-                                Address: {item.address}
+                                Address:&nbsp;
+                                <Text style={[styles.modalSubtitle]}>
+                                  {item.address}
+                                </Text>
                               </Text>
                             </View>
                             <TouchableOpacity
