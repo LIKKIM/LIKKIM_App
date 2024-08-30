@@ -247,7 +247,8 @@ const TransactionsScreenStyles = (isDarkMode) => {
 
     confirmModalView: {
       margin: 20,
-      height: 600,
+      alignSelf: "center",
+      maxHeight: "90%",
       width: "90%",
       backgroundColor: modalBackgroundColor,
       borderRadius: 20,
