@@ -1165,6 +1165,7 @@ function WalletScreen({ route, navigation }) {
                 const updatedCards = [
                   ...prevCards,
                   ...newCryptos.map((crypto) => ({
+                    key: `${crypto.shortName}_${crypto.chainShortName}`, // 这里使用组合唯一键
                     name: crypto.name,
                     shortName: crypto.shortName,
                     balance: crypto.balance,
@@ -1872,7 +1873,7 @@ function WalletScreen({ route, navigation }) {
             priceChanges[card.shortName]?.percentageChange || "0";
           return (
             <TouchableOpacity
-              key={card.name}
+              key={`${card.shortName}_${index}`}
               onPress={() => handleCardPress(card.name, index)}
               ref={(el) => {
                 cardRefs.current[index] = el;
