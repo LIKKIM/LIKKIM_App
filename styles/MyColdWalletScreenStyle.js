@@ -327,7 +327,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       backgroundColor: backgroundColor,
       alignItems: "center",
       justifyContent: "center",
-      paddingTop: 20, // 顶部 padding
+      paddingTop: 10, // 顶部 padding
       paddingLeft: 20, // 左侧 padding
       paddingRight: 20, // 右侧 padding
     },
