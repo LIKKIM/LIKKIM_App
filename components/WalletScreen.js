@@ -269,6 +269,10 @@ function WalletScreen({ route, navigation }) {
     postTest();
   }, []); */
 
+  /*   useEffect(() => {
+    console.log("Updated cryptoCards:", cryptoCards);
+  }, [cryptoCards]);
+ */
   useEffect(() => {
     // 同步 initialAdditionalCryptos 中的 balance 到 cryptoCards
     const updatedCryptoCards = cryptoCards.map((card) => {
@@ -370,6 +374,14 @@ function WalletScreen({ route, navigation }) {
     // 当 cryptoCards 状态变化时，更新 route.params
     navigation.setParams({ cryptoCards });
   }, [cryptoCards]);
+
+  const handleUpdateCryptoCards = (newCrypto) => {
+    setCryptoCards((prevCards) => {
+      const updatedCards = [...prevCards, newCrypto];
+      setAddedCryptos(updatedCards); // 同步更新 addedCryptos
+      return updatedCards;
+    });
+  };
 
   const handleDevicePress = async (device) => {
     // 检查是否传递了有效的设备对象
@@ -1143,36 +1155,41 @@ function WalletScreen({ route, navigation }) {
 
             // 动态添加新的加密货币卡片
             setCryptoCards((prevCards) => {
-              const existingCard = prevCards.find(
-                (card) => card.chainShortName === chainName
+              console.log("当前的卡片列表:", prevCards);
+
+              // 查找所有匹配的链信息
+              const newCryptos = initialAdditionalCryptos.filter(
+                (crypto) => crypto.chainShortName === chainName
+              );
+              console.log(
+                `在 initialAdditionalCryptos 中找到的链信息:`,
+                newCryptos
               );
 
-              if (!existingCard) {
-                const newCrypto = initialAdditionalCryptos.find(
-                  (crypto) => crypto.chainShortName === chainName
-                );
+              if (newCryptos.length > 0) {
+                // 添加所有匹配的卡片
+                const updatedCards = [
+                  ...prevCards,
+                  ...newCryptos.map((crypto) => ({
+                    name: crypto.name,
+                    shortName: crypto.shortName,
+                    balance: crypto.balance,
+                    icon: crypto.icon,
+                    cardImage: crypto.cardImage,
+                    address: walletAddress,
+                    chain: crypto.chain,
+                    chainShortName: crypto.chainShortName,
+                    chainIcon: crypto.chainIcon,
+                  })),
+                ];
 
-                if (newCrypto) {
-                  const updatedCards = [
-                    ...prevCards,
-                    {
-                      name: newCrypto.name,
-                      shortName: newCrypto.shortName,
-                      balance: newCrypto.balance,
-                      icon: newCrypto.icon,
-                      cardImage: newCrypto.cardImage,
-                      address: walletAddress,
-                      chain: newCrypto.chain,
-                      chainShortName: newCrypto.chainShortName,
-                      chainIcon: newCrypto.chainIcon,
-                    },
-                  ];
-
-                  return updatedCards;
-                } else {
-                  console.warn(`未找到 ${chainName} 的初始加密货币信息`);
-                }
+                newCryptos.forEach((crypto) => handleUpdateCryptoCards(crypto));
+                console.log(`添加后的新卡片列表updatedCards:`, updatedCards);
+                return updatedCards;
+              } else {
+                console.warn(`未找到链名为 ${chainName} 的初始加密货币信息`);
               }
+
               return prevCards;
             });
 
@@ -1199,7 +1216,10 @@ function WalletScreen({ route, navigation }) {
       }
     );
   };
-
+  /*   // 使用 useEffect 监控 cryptoCards 的变化
+  useEffect(() => {
+    console.log("cryptoCards 更新后的值:", cryptoCards);
+  }, [cryptoCards]); */
   // 停止监听钱包地址
   const stopMonitoringWalletAddress = () => {
     if (monitorSubscription) {
