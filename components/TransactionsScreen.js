@@ -1525,7 +1525,7 @@ function TransactionsScreen() {
                   autoFocus={true}
                   caretHidden={true} // 隐藏光标
                 />
-                <Text style={TransactionsScreenStyle.amountSubtitle}>
+                <Text style={TransactionsScreenStyle.balanceModalSubtitle}>
                   {t("Balance")}: {balance} {selectedCrypto}
                 </Text>
               </View>

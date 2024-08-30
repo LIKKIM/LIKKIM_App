@@ -114,7 +114,6 @@ const TransactionsScreenStyles = (isDarkMode) => {
     },
     passwordInput: {
       backgroundColor: inputBackgroundColor,
-
       paddingHorizontal: 15,
       paddingVertical: 10,
       borderRadius: 10,
@@ -136,6 +135,12 @@ const TransactionsScreenStyles = (isDarkMode) => {
     amountSubtitle: {
       color: secondTextColor,
       fontSize: 14,
+      marginBottom: 20,
+    },
+    balanceModalSubtitle: {
+      marginTop: 6,
+      color: textColor,
+      fontSize: 16,
       marginBottom: 20,
     },
     balanceSubtitle: {
