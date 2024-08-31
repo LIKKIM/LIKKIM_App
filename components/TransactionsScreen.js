@@ -898,8 +898,15 @@ function TransactionsScreen() {
       console.log(`Adjusted Amount (in smallest unit): ${adjustedAmount}`);
 
       // 将调整后的金额转换为十六进制
-      const amountHex = adjustedAmount.toString(16).toUpperCase();
-      console.log(`Amount Hex: ${amountHex}`);
+      let amountHex = adjustedAmount.toString(16).toUpperCase();
+      console.log(`Amount Hex (before padding): ${amountHex}`);
+
+      // 如果十六进制表示的长度是奇数，在前面补一个0
+      if (amountHex.length % 2 !== 0) {
+        amountHex = "0" + amountHex;
+      }
+
+      console.log(`Amount Hex (after padding if needed): ${amountHex}`);
 
       // 将字符串转换为 ASCII 码的十六进制表示
       function toAsciiHex(str) {

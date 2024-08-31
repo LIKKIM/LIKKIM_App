@@ -53,7 +53,7 @@ export const usdtCrypto = {
   balance: "0.0",
   icon: require("../assets/USDTIcon.png"),
   cardImage: require("../assets/Card43.png"),
-  address: "TXAq2qZCAdgAbQmbaYhx213P2JjhKQbbTZ",
+  address: "TN121JdH9t2y7qjuExHrYMdJA5RHJXdaZK",
   chain: "Tron",
   chainShortName: "TRX",
   queryChainShortName: "TRON", // 用于查询的字段
