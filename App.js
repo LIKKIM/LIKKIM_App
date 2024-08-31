@@ -95,7 +95,10 @@ function AppContent({
 
   const handleConfirmDelete = () => {
     setHeaderDropdownVisible(false);
-    navigation.navigate("Wallet", { showDeleteConfirmModal: true });
+    navigation.navigate("Wallet", {
+      showDeleteConfirmModal: true,
+      isModalVisible: true, // 设置 isModalVisible 为 true
+    });
   };
 
   const theme = isDarkMode ? darkTheme : lightTheme;
