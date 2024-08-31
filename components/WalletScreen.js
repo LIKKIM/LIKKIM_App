@@ -1147,25 +1147,35 @@ function WalletScreen({ route, navigation }) {
               })
             );
 
-            // 动态添加新的加密货币卡片
-            setCryptoCards((prevCards) => {
-              console.log("当前的卡片列表:", prevCards);
+            // 先定义 newCryptos 在外部作用域
+            let newCryptos = [];
 
-              // 查找所有匹配的链信息
-              const newCryptos = initialAdditionalCryptos.filter(
+            setCryptoCards((prevCards) => {
+              console.log("Before update: ", prevCards);
+
+              // 查找所有匹配的链信息，并更新外部作用域的 newCryptos
+              newCryptos = initialAdditionalCryptos.filter(
                 (crypto) => crypto.chainShortName === chainName
               );
-              console.log(
-                `在 initialAdditionalCryptos 中找到的链信息:`,
-                newCryptos
-              );
 
-              if (newCryptos.length > 0) {
-                // 添加所有匹配的卡片
-                const updatedCards = [
-                  ...prevCards,
-                  ...newCryptos.map((crypto) => ({
-                    key: `${crypto.shortName}_${crypto.chainShortName}`, // 这里使用组合唯一键
+              if (newCryptos.length === 0) {
+                // 如果没有找到匹配的 crypto，则直接返回当前的卡片列表
+                console.log(
+                  "No matching cryptos found. Returning previous cards."
+                );
+                return prevCards;
+              }
+
+              const updatedCards = newCryptos.reduce((acc, crypto) => {
+                const filteredCards = acc.filter(
+                  (card) =>
+                    card.key !== `${crypto.shortName}_${crypto.chainShortName}`
+                );
+
+                return [
+                  ...filteredCards,
+                  {
+                    key: `${crypto.shortName}_${crypto.chainShortName}`,
                     name: crypto.name,
                     shortName: crypto.shortName,
                     balance: crypto.balance,
@@ -1175,18 +1185,19 @@ function WalletScreen({ route, navigation }) {
                     chain: crypto.chain,
                     chainShortName: crypto.chainShortName,
                     chainIcon: crypto.chainIcon,
-                  })),
+                  },
                 ];
+              }, prevCards);
 
-                newCryptos.forEach((crypto) => handleUpdateCryptoCards(crypto));
-                console.log(`添加后的新卡片列表updatedCards:`, updatedCards);
-                return updatedCards;
-              } else {
-                console.warn(`未找到链名为 ${chainName} 的初始加密货币信息`);
-              }
-
-              return prevCards;
+              console.log("After update: ", updatedCards);
+              return updatedCards;
             });
+
+            // 在所有卡片更新后，手动调用 handleUpdateCryptoCards
+            newCryptos.forEach((crypto) => handleUpdateCryptoCards(crypto));
+
+            // 检查状态更新后的内容
+            console.log("Updated cryptoCards: ", cryptoCards);
 
             // 更新状态，切换图片和文本信息
             setWalletCreationStatus({

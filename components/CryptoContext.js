@@ -87,8 +87,26 @@ export const CryptoProvider = ({ children }) => {
   const [addedCryptos, setAddedCryptos] = useState([]);
   const handleUpdateCryptoCards = (newCrypto) => {
     setCryptoCards((prevCards) => {
+      // 检查是否已存在相同的卡片
+      const cardExists = prevCards.some(
+        (card) =>
+          card.shortName === newCrypto.shortName &&
+          card.chainShortName === newCrypto.chainShortName
+      );
+
+      // 如果存在相同的卡片，用新卡片替换旧卡片
+      if (cardExists) {
+        return prevCards.map((card) =>
+          card.shortName === newCrypto.shortName &&
+          card.chainShortName === newCrypto.chainShortName
+            ? newCrypto
+            : card
+        );
+      }
+
+      // 否则，将新卡片添加到列表中
       const updatedCards = [...prevCards, newCrypto];
-      setAddedCryptos(updatedCards);
+      setAddedCryptos(updatedCards); // 更新 addedCryptos 状态
       return updatedCards;
     });
   };
