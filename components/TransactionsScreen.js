@@ -509,9 +509,11 @@ function TransactionsScreen() {
                 console.log("签名请求结果:");
                 console.log(`Code: ${result.code}`);
                 console.log(`Message: ${result.msg}`);
+                console.log(`Code 类型: ${typeof result.code}`); // 打印类型
+                console.log(`Message 类型: ${typeof result.msg}`);
 
                 // 在这里检查 result.code 的值并打印相应的消息
-                if (result.code === 0 && result.msg === "success") {
+                if (result.code === "0" && result.msg === "success") {
                   console.log("签名广播成功");
 
                   // 更新模态框文案和 GIF
@@ -535,7 +537,7 @@ function TransactionsScreen() {
                     writeCharacteristicUUID,
                     base64SuccessCommand
                   );
-                } else if (result.code === -1) {
+                } else if (result.code === "-1") {
                   console.log("签名广播失败");
 
                   // 更新模态框文案和 GIF
@@ -897,20 +899,15 @@ function TransactionsScreen() {
       const adjustedAmount = BigInt(Math.round(parseFloat(amount) * 1000000));
       console.log(`Adjusted Amount (in smallest unit): ${adjustedAmount}`);
 
-      // 将调整后的金额转换为十六进制
-      let amountHex = adjustedAmount.toString(16).toUpperCase();
-      console.log(`Amount Hex (before padding): ${amountHex}`);
-
-      // 如果十六进制表示的长度是奇数，在前面补一个0
-      if (amountHex.length % 2 !== 0) {
-        amountHex = "0" + amountHex;
-      }
-
-      console.log(`Amount Hex (after padding if needed): ${amountHex}`);
+      // 将调整后的金额转换为 ASCII 的十六进制表示
+      const amountHex = Buffer.from(adjustedAmount.toString(), "ascii")
+        .toString("hex")
+        .toUpperCase();
+      console.log(`Amount Hex (ASCII after adjustment): ${amountHex}`);
 
       // 将字符串转换为 ASCII 码的十六进制表示
       function toAsciiHex(str) {
-        return Buffer.from(str, "ascii").toString("hex");
+        return Buffer.from(str, "ascii").toString("hex").toUpperCase();
       }
 
       // 继续处理其他参数
@@ -953,7 +950,7 @@ function TransactionsScreen() {
       const contractAddressLength = contractAddress.length;
       const cryptoAddressLength = crypto.address.length;
       const userAddressLength = userAddress.length;
-      const amountLength = amountHex.length / 2;
+      const amountLength = amountHex.length / 2; // ASCII 十六进制表示的长度
       const hashLength = hashHex.length / 2;
       const heightLength = heightHex.length / 2;
       const blockTimeLength = blockTimeHex.length / 2;
