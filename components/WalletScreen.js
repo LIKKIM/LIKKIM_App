@@ -290,20 +290,6 @@ function WalletScreen({ route, navigation }) {
     setCryptoCards(updatedCryptoCards);
   }, [initialAdditionalCryptos]);
 
-  /*   useEffect(() => {
-    // 打印 cryptoCards 中每个加密货币的 balance
-    cryptoCards.forEach((crypto) => {
-      console.log(`${crypto.name} balance:`, crypto.balance);
-    });
-  }, [cryptoCards]);
-
-  useEffect(() => {
-    // 打印每个加密货币的 balance
-    initialAdditionalCryptos.forEach((crypto) => {
-      console.log(`${crypto.name} balance:`, crypto.balance);
-    });
-  }, [initialAdditionalCryptos]);
- */
   useEffect(() => {
     setAddedCryptos(cryptoCards);
   }, [cryptoCards]);
@@ -340,11 +326,7 @@ function WalletScreen({ route, navigation }) {
 
     loadVerifiedDevices();
   }, []); // 这个依赖空数组确保该代码只在组件挂载时执行一次
-  // 打印设备数量
-  /*   useEffect(() => {
-    console.log("Wallet Page Verified Devices Count:", verifiedDevices.length);
-  }, [verifiedDevices]);
- */
+
   useEffect(() => {
     if (!bleVisible && selectedDevice) {
       setPinModalVisible(true);
@@ -1529,6 +1511,49 @@ function WalletScreen({ route, navigation }) {
     }).start();
   }, [modalVisible, fadeAnim]);
 
+  useEffect(() => {
+    if (processModalVisible) {
+      setShowLetsGoButton(false);
+      setProcessMessages([t("Creating your wallet")]);
+      const timer1 = setTimeout(() => {
+        setProcessMessages((prevMessages) => [
+          ...prevMessages,
+          t("Generating your accounts"),
+        ]);
+      }, 1000);
+      const timer2 = setTimeout(() => {
+        setProcessMessages((prevMessages) => [
+          ...prevMessages,
+          t("Encrypting your data"),
+        ]);
+      }, 2000);
+      const timer3 = setTimeout(() => {
+        setProcessMessages((prevMessages) => [
+          ...prevMessages,
+          t("Your wallet is now ready"),
+        ]);
+      }, 3000);
+      const timer4 = setTimeout(() => {
+        setShowLetsGoButton(true);
+      }, 4000);
+      return () => {
+        clearTimeout(timer1);
+        clearTimeout(timer2);
+        clearTimeout(timer3);
+        clearTimeout(timer4);
+      };
+    }
+  }, [processModalVisible, t]);
+
+  useEffect(() => {
+    if (modalVisible) {
+      scrollViewRef.current.scrollTo({ y: 0, animated: true });
+      setTimeout(() => {
+        scrollYOffset.current = 0;
+      }, 300); // 确保在滚动完成后再设置偏移量
+    }
+  }, [modalVisible]);
+
   const handleCardPress = (cryptoName, index) => {
     const crypto = cryptoCards.find((card) => card.name === cryptoName);
     setSelectedAddress(crypto?.address || "Unknown");
@@ -1646,40 +1671,6 @@ function WalletScreen({ route, navigation }) {
       .toFixed(2);
   };
 
-  useEffect(() => {
-    if (processModalVisible) {
-      setShowLetsGoButton(false);
-      setProcessMessages([t("Creating your wallet")]);
-      const timer1 = setTimeout(() => {
-        setProcessMessages((prevMessages) => [
-          ...prevMessages,
-          t("Generating your accounts"),
-        ]);
-      }, 1000);
-      const timer2 = setTimeout(() => {
-        setProcessMessages((prevMessages) => [
-          ...prevMessages,
-          t("Encrypting your data"),
-        ]);
-      }, 2000);
-      const timer3 = setTimeout(() => {
-        setProcessMessages((prevMessages) => [
-          ...prevMessages,
-          t("Your wallet is now ready"),
-        ]);
-      }, 3000);
-      const timer4 = setTimeout(() => {
-        setShowLetsGoButton(true);
-      }, 4000);
-      return () => {
-        clearTimeout(timer1);
-        clearTimeout(timer2);
-        clearTimeout(timer3);
-        clearTimeout(timer4);
-      };
-    }
-  }, [processModalVisible, t]);
-
   const animatedCardStyle = (index) => {
     const cardStartPosition = cardStartPositions.current[index] || 0;
     const endPosition = 120 - (scrollYOffset.current || 0); // 考虑 scrollTo 的 Y 偏移量
@@ -1693,15 +1684,6 @@ function WalletScreen({ route, navigation }) {
       zIndex: 9,
     };
   };
-
-  useEffect(() => {
-    if (modalVisible) {
-      scrollViewRef.current.scrollTo({ y: 0, animated: true });
-      setTimeout(() => {
-        scrollYOffset.current = 0;
-      }, 300); // 确保在滚动完成后再设置偏移量
-    }
-  }, [modalVisible]);
 
   //fix card 初始化紀錄位置
   const initCardPosition = (_ref, _index) =>
