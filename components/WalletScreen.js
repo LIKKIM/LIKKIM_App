@@ -29,6 +29,7 @@ import { BleManager, BleErrorCode } from "react-native-ble-plx";
 import Constants from "expo-constants";
 import base64 from "base64-js";
 import { Buffer } from "buffer";
+import DraggableFlatList from "react-native-draggable-flatlist";
 
 // 样式和上下文
 import WalletScreenStyles from "../styles/WalletScreenStyle";

@@ -45,6 +45,7 @@
     "react-native-ble-plx": "^3.1.2",
     "react-native-chart-kit": "^6.12.0",
     "react-native-draggable-flatlist": "^4.0.1",
+    "react-native-gesture-handler": "^2.18.1",
     "react-native-locale-detector": "^1.0.1",
     "react-native-qrcode-svg": "^6.3.1",
     "react-native-quick-base64": "^2.1.2",

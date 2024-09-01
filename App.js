@@ -19,6 +19,7 @@ import TransactionsScreen from "./components/TransactionsScreen";
 import MyColdWalletScreen from "./components/MyColdWalletScreen";
 import OnboardingScreen from "./components/OnboardingScreen";
 import ScreenLock from "./components/ScreenLock";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import {
   CryptoProvider,
   CryptoContext,
@@ -62,17 +63,19 @@ export default function App() {
   }
 
   return (
-    <CryptoProvider>
-      <NavigationContainer>
-        <AppContent
-          t={t}
-          headerDropdownVisible={headerDropdownVisible}
-          setHeaderDropdownVisible={setHeaderDropdownVisible}
-          selectedCardName={selectedCardName}
-          setSelectedCardName={setSelectedCardName}
-        />
-      </NavigationContainer>
-    </CryptoProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <CryptoProvider>
+        <NavigationContainer>
+          <AppContent
+            t={t}
+            headerDropdownVisible={headerDropdownVisible}
+            setHeaderDropdownVisible={setHeaderDropdownVisible}
+            selectedCardName={selectedCardName}
+            setSelectedCardName={setSelectedCardName}
+          />
+        </NavigationContainer>
+      </CryptoProvider>
+    </GestureHandlerRootView>
   );
 }
 
