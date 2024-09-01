@@ -1549,11 +1549,6 @@ function WalletScreen({ route, navigation }) {
     setAddWalletModalVisible(false);
     setProcessModalVisible(true);
   };
-  const handleImport = (phrase) => {
-    // 处理导入逻辑
-    setImportPhraseModalVisible(false);
-    setProcessModalVisible(true);
-  };
 
   const handleContinue = () => {
     setTipModalVisible(false);
@@ -1575,11 +1570,6 @@ function WalletScreen({ route, navigation }) {
     } else {
       setBleVisible(true);
     }
-  };
-
-  const handlePhraseSaved = () => {
-    setRecoveryPhraseModalVisible(false);
-    setProcessModalVisible(true);
   };
 
   const handleLetsGo = () => {
