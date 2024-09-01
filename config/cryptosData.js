@@ -1718,3 +1718,87 @@ export const initialAdditionalCryptos = [
     priceUsd: "0.8",
   },
 ];
+
+// 1. Bitcoin
+// 2. Ethereum
+// 3. BNB Smart Chain
+// 4. Polygon
+// 5. Arbitrum
+// 6. Avalanche
+// 7. Fantom
+// 8. Optimism
+// 9. Tron
+// 10. Solana
+// 11. Ripple
+// 12. Cardano
+// 13. Base
+// 14. zkSync Era Mainnet
+// 15. Linea
+// 16. Mantle
+// 17. OKX Chain
+// 18. Huobi ECO Chain
+// 19. Gnosis Chain
+// 20. Celo
+// 21. Aurora
+// 22. Moonbeam
+// 23. Kava
+// 24. Klaytn
+// 25. Harmony
+// 26. Cronos (CRO)
+// 27. Cosmos (ATOM)
+// 28. Filecoin / Filecoin FEVM
+// 29. Aptos
+// 30. SUI
+// 31. Secret Network
+// 32. Conflux / Conflux eSpace
+// 33. Osmosis
+// 34. Ronin
+// 35. zkLink Nova
+// 36. Zora
+// 37. PulseChain
+// 38. Scroll
+// 39. Taiko
+// 40. WEMIX3.0
+// 41. ZetaChain
+// 42. Celestia (TIA)
+// 43. opBNB
+// 44. Manta Atlantic
+// 45. Manta Pacific Mainnet
+// 46. Mixin Virtual Machine
+// 47. Joystream (JOY)
+// 48. Akash (AKT)
+// 49. Fetch.ai (FET)
+// 50. IoTeX Network Mainnet (IOTX)
+// 51. Dymension
+// 52. Merlin
+// 53. Nervos (CKB)
+// 54. OctaSpace (OCTA)
+// 55. Neurai (XNA)
+// 56. Nexa (NEXA)
+// 57. Bitcoin Cash (BCH)
+// 58. Litecoin
+// 59. Dogecoin (DOGE)
+// 60. Astar
+// 61. Kusama
+// 62. Kasp
+// 63. Blast (BLAST)
+// 64. Dynex (DNX)
+// 65. Zircuit
+// 66. Zora
+// 67. ZetaChain
+// 68. Neurai (XNA)
+// 69. Bitcoin Testnet
+// 70. Bitcoin Signet
+// 71. Ethereum Classic
+// 72. EthereumPoW
+// 73. Ethereum Sepolia Testnet
+// 74. Garnet Holesky
+// 75. Lightning Network Testnet
+// 76. Endurance
+// 77. Flare
+// 78. Nostr
+// 79. B2 Mainnet
+// 80. BounceBit
+// 81. Bitlayer
+// 82. BOB
+// 83. Cyber
