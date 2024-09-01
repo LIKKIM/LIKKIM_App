@@ -23,7 +23,58 @@ const WalletScreenStyles = (isDarkMode) => {
     : "#FFFFFF80";
 
   return StyleSheet.create({
+    animatedTabContainer: {
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+      position: "absolute",
+      zIndex: 10,
+      top: 236,
+    },
+    cardModalContent: {
+      width: 326,
+      height: 206,
+      justifyContent: "center",
+      alignItems: "center",
+      position: "relative",
+    },
+    cardInfoContainer: {
+      position: "absolute",
+      top: 25,
+      left: 65,
+      flexDirection: "row",
+      alignItems: "center",
+    },
+
+    cardIconContainer: {
+      position: "absolute",
+      top: 28,
+      left: 10,
+      width: 42,
+      height: 42,
+      alignItems: "center",
+      justifyContent: "center",
+      borderRadius: 21,
+      backgroundColor: "#ffffff50",
+      overflow: "hidden",
+    },
+    cardChainIconContainer: {
+      position: "absolute",
+      top: 54,
+      left: 38,
+      width: 16,
+      height: 16,
+      borderWidth: 1,
+      borderColor: "#ffffff80",
+      alignItems: "center",
+      justifyContent: "center",
+      borderRadius: 15,
+      backgroundColor: "#ffffff80",
+      overflow: "hidden",
+    },
+
     // 标签样式
+
     TagChainIcon: {
       width: 14,
       height: 14,

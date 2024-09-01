@@ -18,19 +18,24 @@ import {
   Clipboard,
 } from "react-native";
 
+// 第三方库
 import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import WalletScreenStyles from "../styles/WalletScreenStyle";
 import { BlurView } from "expo-blur";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { CryptoContext, DarkModeContext, usdtCrypto } from "./CryptoContext";
 import { useTranslation } from "react-i18next";
 import QRCode from "react-native-qrcode-svg";
-import PriceChartCom from "./PriceChartCom";
 import { BleManager, BleErrorCode } from "react-native-ble-plx";
 import Constants from "expo-constants";
 import base64 from "base64-js";
 import { Buffer } from "buffer";
+
+// 样式和上下文
+import WalletScreenStyles from "../styles/WalletScreenStyle";
+import { CryptoContext, DarkModeContext, usdtCrypto } from "./CryptoContext";
+
+// 自定义组件
+import PriceChartCom from "./PriceChartCom";
 import PinModal from "./modal/PinModal";
 import BluetoothModal from "./modal/BluetoothModal";
 import VerificationModal from "./modal/VerificationModal";
@@ -199,78 +204,6 @@ function WalletScreen({ route, navigation }) {
   };
 
   const [bleVisible, setBleVisible] = useState(false); // New state for Bluetooth modal
-  // 余额查询
-  /*   useEffect(() => {
-    const postTest = async () => {
-      try {
-        const response = await fetch(
-          "https://bt.likkim.com/meridian/address/queryTokenBalance",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              chainShortName: "TRON", // 区块链的简称
-              address: "TXAq2qZCAdgAbQmbaYhx213P2JjhKQbbTZ", // 查询的地址
-              protocolType: "token_20", // 协议类型，表示代币类型
-            }),
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        console.log("余额查询 Response Data:", data); // 完整响应数据
-
-        // 展开并打印 tokenList 数组的内容
-        if (
-          data &&
-          data.data &&
-          data.data.length > 0 &&
-          data.data[0].tokenList
-        ) {
-          const tokenList = data.data[0].tokenList;
-
-          // 循环遍历并打印每个 token 的详细信息
-          tokenList.forEach((token, index) => {
-            console.log(`Token ${index + 1}:`);
-            console.log(
-              `  - holdingAmount: ${token.holdingAmount} // 持有的数量`
-            );
-            console.log(
-              `  - priceUsd: ${token.priceUsd} // 每个代币的美元价格`
-            );
-            console.log(`  - symbol: ${token.symbol} // 代币的符号`);
-            console.log(
-              `  - tokenContractAddress: ${token.tokenContractAddress} // 代币合约地址`
-            );
-            console.log(
-              `  - tokenId: ${token.tokenId} // NFT ID，若为空表示非NFT代币`
-            );
-            console.log(
-              `  - tokenType: ${token.tokenType} // 代币类型，例如 TRC20`
-            );
-            console.log(
-              `  - valueUsd: ${token.valueUsd} // 该地址持有的总美元价值`
-            );
-          });
-
-          // 使用 console.table 更直观地显示数据
-          console.table(tokenList);
-        } else {
-          console.log("No tokenList found in response data.");
-        }
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
-
-    // 调用 postTest 函数进行测试
-    postTest();
-  }, []); */
 
   useEffect(() => {
     console.log("Updated cryptoCards:", cryptoCards);
@@ -1205,11 +1138,7 @@ function WalletScreen({ route, navigation }) {
       }
     );
   };
-  /*   // 使用 useEffect 监控 cryptoCards 的变化
-  useEffect(() => {
-    console.log("cryptoCards 更新后的值:", cryptoCards);
-  }, [cryptoCards]); */
-  // 停止监听钱包地址
+
   const stopMonitoringWalletAddress = () => {
     if (monitorSubscription) {
       try {
@@ -1309,12 +1238,6 @@ function WalletScreen({ route, navigation }) {
       fetchPriceChanges();
     }
   }, [cryptoCards]);
-
-  /*   const addDefaultUSDT = () => {
-    if (cryptoCards.length === 0) {
-      handleAddCrypto(usdtCrypto);
-    }
-  }; */
 
   const handlePinSubmit = async () => {
     // 首先关闭 "Enter PIN to Connect" 的模态框
@@ -1893,55 +1816,19 @@ function WalletScreen({ route, navigation }) {
                   style={{ width: "100%", height: "100%" }}
                   imageStyle={{ borderRadius: 16 }}
                 >
-                  <View
-                    style={{
-                      position: "absolute",
-                      top: 28,
-                      left: 10,
-                      width: 42,
-                      height: 42,
-                      alignItems: "center",
-                      justifyContent: "center",
-                      borderRadius: 21,
-                      backgroundColor: "#ffffff50",
-                      overflow: "hidden",
-                    }}
-                  >
+                  <View style={WalletScreenStyle.cardIconContainer}>
                     <Image
                       source={card.icon}
                       style={WalletScreenStyle.cardIcon}
                     />
                   </View>
-                  <View
-                    style={{
-                      position: "absolute",
-                      top: 54,
-                      left: 38,
-                      width: 16,
-                      height: 16,
-                      borderWidth: 1,
-                      borderColor: "#ffffff80",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      borderRadius: 15,
-                      backgroundColor: "#ffffff80",
-                      overflow: "hidden",
-                    }}
-                  >
+                  <View style={WalletScreenStyle.cardChainIconContainer}>
                     <Image
                       source={card.chainIcon}
                       style={WalletScreenStyle.chainIcon}
                     />
                   </View>
-                  <View
-                    style={{
-                      position: "absolute",
-                      top: 25,
-                      left: 65,
-                      flexDirection: "row",
-                      alignItems: "center",
-                    }}
-                  >
+                  <View style={WalletScreenStyle.cardIconContainer}>
                     <Text
                       style={[
                         WalletScreenStyle.cardName,
@@ -2006,15 +1893,7 @@ function WalletScreen({ route, navigation }) {
                     </>
                   )}
                   {modalVisible && cardInfoVisible && (
-                    <View
-                      style={{
-                        width: 326,
-                        height: 206,
-                        justifyContent: "center",
-                        alignItems: "center",
-                        position: "relative",
-                      }}
-                    >
+                    <View style={WalletScreenStyle.cardModalContent}>
                       <TouchableOpacity
                         onPress={() => handleQRCodePress(card)}
                         style={{
@@ -2058,15 +1937,10 @@ function WalletScreen({ route, navigation }) {
         {/* 数字货币弹窗表面层view */}
         {modalVisible && (
           <Animated.View
-            style={{
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              position: "absolute",
-              zIndex: 10,
-              top: 236,
-              opacity: tabOpacity, // 使用 tabOpacity 控制透明度
-            }}
+            style={[
+              WalletScreenStyle.animatedTabContainer,
+              { opacity: tabOpacity }, // 保留 opacity 动态值
+            ]}
           >
             <View
               style={{
