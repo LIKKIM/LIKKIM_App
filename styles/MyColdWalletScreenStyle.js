@@ -13,8 +13,210 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
   const focusedBorderColor = isDarkMode ? "#6C6CF4" : "#007AFF";
 
   return StyleSheet.create({
-    // Existing styles...
+    // 基本容器样式
+    container: {
+      flex: 1,
+      backgroundColor: backgroundColor,
+      alignItems: "center",
+      justifyContent: "center",
+      paddingTop: 10, // 顶部 padding
+      paddingLeft: 20, // 左侧 padding
+      paddingRight: 20, // 右侧 padding
+    },
+    contentContainer: {
+      flexGrow: 1,
+    },
+    scrollView: {
+      width: "100%",
+    },
 
+    // 按钮样式
+    roundButton: {
+      backgroundColor: BluetoothBtnColor,
+      borderRadius: 30,
+      paddingVertical: 10,
+      paddingHorizontal: 20,
+      width: "100%",
+      height: 60,
+      alignItems: "center",
+      justifyContent: "center",
+      marginBottom: 20,
+    },
+    submitButton: {
+      backgroundColor: buttonBackgroundColor,
+      padding: 10,
+      width: "100%",
+      justifyContent: "center",
+      borderRadius: 30,
+      height: 60,
+      alignItems: "center",
+      marginBottom: 15,
+    },
+    closeButton: {
+      borderColor: buttonBackgroundColor,
+      borderWidth: 3,
+      padding: 10,
+      width: "100%",
+      justifyContent: "center",
+      borderRadius: 30,
+      height: 60,
+      alignItems: "center",
+    },
+    cancelButton: {
+      borderColor: buttonBackgroundColor,
+      borderWidth: 3,
+      padding: 10,
+      width: "100%",
+      justifyContent: "center",
+      borderRadius: 30,
+      height: 60,
+      alignItems: "center",
+    },
+    cancelButtonLookingFor: {
+      borderColor: buttonBackgroundColor,
+      borderWidth: 3,
+      padding: 10,
+      width: "100%",
+      justifyContent: "center",
+      borderRadius: 30,
+      height: 60,
+      alignItems: "center",
+      marginTop: 20,
+    },
+    languageCancelButton: {
+      borderColor: buttonBackgroundColor,
+      borderWidth: 3,
+      padding: 10,
+      width: "90%",
+      borderRadius: 30,
+      height: 60,
+      alignItems: "center",
+      justifyContent: "center",
+      position: "absolute",
+      bottom: 30,
+      marginTop: 20,
+    },
+    disconnectButton: {
+      marginLeft: 10,
+      paddingVertical: 5,
+      paddingHorizontal: 10,
+      backgroundColor: "#6C6CF4",
+      borderRadius: 5,
+    },
+
+    // 文本样式
+    Text: {
+      color: textColor,
+      fontSize: 16,
+    },
+    buttonText: {
+      color: textColor,
+      fontSize: 16,
+    },
+    cancelButtonText: {
+      color: secondTextColor,
+      fontSize: 16,
+    },
+    BluetoothBtnText: {
+      color: "#fff",
+      fontSize: 16,
+    },
+    passwordModalText: {
+      color: textColor,
+      fontSize: 16,
+      marginBottom: 10,
+      textAlign: "left",
+    },
+    languageModalText: {
+      color: textColor,
+      fontSize: 16,
+      marginBottom: 10,
+      textAlign: "center",
+    },
+    modalSubtitle: {
+      color: secondTextColor,
+      fontSize: 14,
+      textAlign: "center",
+    },
+    disconnectSubtitle: {
+      color: secondTextColor,
+      fontSize: 14,
+      textAlign: "center",
+      marginTop: 20,
+    },
+    scanModalSubtitle: {
+      color: secondTextColor,
+      fontSize: 14,
+      textAlign: "center",
+    },
+    dropdownButtonText: {
+      color: textColor, // 根据模式动态设置文本颜色
+      fontSize: 16, // 字体大小
+      paddingVertical: 5, // 增加垂直间距
+    },
+    modalTitle: {
+      color: textColor,
+      fontSize: 16,
+      fontWeight: "bold",
+      marginBottom: 15,
+    },
+    pinModalTitle: {
+      color: textColor,
+      fontSize: 20,
+      fontWeight: "bold",
+      marginBottom: 15,
+    },
+    languageModalTitle: {
+      color: textColor,
+      fontSize: 20,
+      fontWeight: "bold",
+      marginBottom: 30,
+    },
+    passwordModalTitle: {
+      color: textColor,
+      fontSize: 20,
+      fontWeight: "bold",
+      marginBottom: 10,
+    },
+
+    // 输入框样式
+    passwordInput: {
+      backgroundColor: inputBackgroundColor,
+      paddingHorizontal: 15,
+      paddingVertical: 10,
+      borderRadius: 10,
+      height: 50,
+      width: "100%",
+      color: textColor,
+      marginBottom: 10,
+    },
+    addressInput: {
+      backgroundColor: inputBackgroundColor,
+      padding: 15,
+      borderRadius: 10,
+      height: 120,
+      width: "100%",
+      color: textColor,
+    },
+    passwordInputContainer: {
+      flexDirection: "row",
+      alignItems: "center",
+      width: "100%",
+      position: "relative",
+    },
+    eyeIcon: {
+      position: "absolute",
+      right: 15,
+      top: 12,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    focusedInput: {
+      borderColor: focusedBorderColor,
+      borderWidth: 2,
+    },
+
+    // 下拉菜单样式
     dropdown: {
       position: "absolute",
       right: 20, // 根据需要调整位置
@@ -31,18 +233,15 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       elevation: 5, // 用于Android的材质阴影高度
     },
 
-    dropdownButtonText: {
-      color: textColor, // 根据模式动态设置文本颜色
-      fontSize: 16, // 字体大小
-      paddingVertical: 5, // 增加垂直间距
-    },
-
-    errorText: {
-      color: "#FF5252",
-      fontSize: 14,
-      marginBottom: 10,
-      alignItems: "left",
-      width: 280,
+    // 模态框样式
+    modalView: {
+      margin: 20,
+      height: 500,
+      width: "90%",
+      backgroundColor: modalBackgroundColor,
+      borderRadius: 20,
+      padding: 35,
+      alignItems: "center",
     },
     bluetoothModalView: {
       margin: 20,
@@ -64,79 +263,6 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       justifyContent: "space-between",
       alignItems: "center",
     },
-    bluetoothImg: {
-      width: 150,
-      height: 150,
-      marginBottom: 30,
-    },
-    BluetoothBtnText: {
-      color: "#fff",
-      fontSize: 16,
-    },
-    bluetoothModalTitle: {
-      color: textColor,
-      fontSize: 20,
-      fontWeight: "bold",
-      marginBottom: 10,
-    },
-
-    deviceItemContainer: {
-      flexDirection: "row", // 横向排列
-      alignItems: "center", // 垂直居中
-      justifyContent: "center",
-      marginTop: 20,
-    },
-    deviceIcon: {
-      paddingRight: 4,
-    },
-    listContainer: {
-      flexDirection: "row",
-      alignItems: "center",
-      flex: 1,
-    },
-    cancelButtonText: {
-      color: secondTextColor,
-      fontSize: 16,
-    },
-    modalSubtitle: {
-      color: secondTextColor,
-      fontSize: 14,
-      textAlign: "center",
-    },
-    disconnectSubtitle: {
-      color: secondTextColor,
-      fontSize: 14,
-      textAlign: "center",
-      marginTop: 20,
-    },
-    scanModalSubtitle: {
-      color: secondTextColor,
-      fontSize: 14,
-      textAlign: "center",
-    },
-    modalTitle: {
-      color: textColor,
-      fontSize: 16,
-      fontWeight: "bold",
-      marginBottom: 15,
-    },
-    pinModalTitle: {
-      color: textColor,
-      fontSize: 20,
-      fontWeight: "bold",
-      marginBottom: 15,
-    },
-
-    modalView: {
-      margin: 20,
-      height: 500,
-      width: "90%",
-      backgroundColor: modalBackgroundColor,
-      borderRadius: 20,
-      padding: 35,
-      alignItems: "center",
-    },
-
     disconnectModalView: {
       margin: 20,
       height: 340,
@@ -165,7 +291,6 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       padding: 35,
       alignItems: "center",
     },
-
     setPasswordModalView: {
       position: "absolute",
       top: 60,
@@ -178,7 +303,6 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       alignItems: "center",
       justifyContent: "space-between",
     },
-
     changePasswordModalView: {
       position: "absolute",
       top: 60,
@@ -214,7 +338,6 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       padding: 35,
       alignItems: "center",
     },
-
     EnterPasswordModalView: {
       position: "absolute",
       top: 100,
@@ -227,7 +350,6 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       padding: 35,
       alignItems: "center",
     },
-
     pinModalView: {
       position: "absolute",
       top: 100,
@@ -240,79 +362,26 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       justifyContent: "space-between",
       alignItems: "center",
     },
-
     centeredView: {
       flex: 1,
       justifyContent: "center",
       alignItems: "center",
       backgroundColor: "rgba(0, 0, 0, 0.5)",
     },
-    Text: {
-      color: textColor,
-      fontSize: 16,
+
+    // 图标样式
+    Icon: {
+      marginRight: 10,
     },
-    buttonText: {
-      color: textColor,
-      fontSize: 16,
+    deviceIcon: {
+      paddingRight: 4,
     },
 
-    roundButton: {
-      backgroundColor: BluetoothBtnColor,
-      borderRadius: 30,
-      paddingVertical: 10,
-      paddingHorizontal: 20,
-      width: "100%",
-      height: 60,
+    // 列表项样式
+    listContainer: {
+      flexDirection: "row",
       alignItems: "center",
-      justifyContent: "center",
-      marginBottom: 20,
-    },
-    languageCancelButton: {
-      borderColor: buttonBackgroundColor,
-      borderWidth: 3,
-      padding: 10,
-      width: "90%",
-      borderRadius: 30,
-      height: 60,
-      alignItems: "center",
-      justifyContent: "center",
-      position: "absolute",
-      bottom: 30,
-      marginTop: 20,
-    },
-    passwordModalText: {
-      color: textColor,
-      fontSize: 16,
-      marginBottom: 10,
-      textAlign: "left",
-    },
-    languageModalText: {
-      color: textColor,
-      fontSize: 16,
-      marginBottom: 10,
-      textAlign: "center",
-    },
-    languageModalTitle: {
-      color: textColor,
-      fontSize: 20,
-      fontWeight: "bold",
-      marginBottom: 30,
-    },
-    passwordModalTitle: {
-      color: textColor,
-      fontSize: 20,
-      fontWeight: "bold",
-      marginBottom: 10,
-    },
-    languageList: {
-      maxHeight: 290,
-      width: 280,
-    },
-    contentContainer: {
-      flexGrow: 1,
-    },
-    scrollView: {
-      width: "100%",
+      flex: 1,
     },
     settingsItem: {
       flexDirection: "row",
@@ -322,117 +391,21 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       borderBottomWidth: 1,
       borderBottomColor: borderColor,
     },
-    container: {
-      flex: 1,
-      backgroundColor: backgroundColor,
-      alignItems: "center",
+    deviceItemContainer: {
+      flexDirection: "row", // 横向排列
+      alignItems: "center", // 垂直居中
       justifyContent: "center",
-      paddingTop: 10, // 顶部 padding
-      paddingLeft: 20, // 左侧 padding
-      paddingRight: 20, // 右侧 padding
-    },
-    cancelButton: {
-      borderColor: buttonBackgroundColor,
-      borderWidth: 3,
-      padding: 10,
-      width: "100%",
-      justifyContent: "center",
-      borderRadius: 30,
-      height: 60,
-      alignItems: "center",
-    },
-    cancelButtonLookingFor: {
-      borderColor: buttonBackgroundColor,
-      borderWidth: 3,
-      padding: 10,
-      width: "100%",
-      justifyContent: "center",
-      borderRadius: 30,
-      height: 60,
-      alignItems: "center",
       marginTop: 20,
     },
-    Icon: {
-      marginRight: 10,
-    },
-    disconnectButton: {
-      marginLeft: 10,
-      paddingVertical: 5,
-      paddingHorizontal: 10,
-      backgroundColor: "#6C6CF4",
-      borderRadius: 5,
+
+    // 图片样式
+    bluetoothImg: {
+      width: 150,
+      height: 150,
+      marginBottom: 30,
     },
 
-    disconnectButtonText: {
-      color: "#FFFFFF",
-      fontWeight: "bold",
-    },
-
-    passwordInput: {
-      backgroundColor: inputBackgroundColor,
-      paddingHorizontal: 15,
-      paddingVertical: 10,
-      borderRadius: 10,
-      height: 50,
-      width: "100%",
-      color: textColor,
-      marginBottom: 10,
-    },
-    addressInput: {
-      backgroundColor: inputBackgroundColor,
-      padding: 15,
-      borderRadius: 10,
-      height: 120,
-      width: "100%",
-      color: textColor,
-    },
-
-    passwordInputContainer: {
-      flexDirection: "row",
-      alignItems: "center",
-      width: "100%",
-      position: "relative",
-    },
-    eyeIcon: {
-      position: "absolute",
-      right: 15,
-      top: 12,
-      alignItems: "center",
-      justifyContent: "center",
-    },
-    focusedInput: {
-      borderColor: focusedBorderColor,
-      borderWidth: 2,
-    },
-    submitButton: {
-      backgroundColor: buttonBackgroundColor,
-      padding: 10,
-      width: "100%",
-      justifyContent: "center",
-      borderRadius: 30,
-      height: 60,
-      alignItems: "center",
-      marginBottom: 15,
-    },
-    closeButton: {
-      borderColor: buttonBackgroundColor,
-      borderWidth: 3,
-      padding: 10,
-      width: "100%",
-      justifyContent: "center",
-      borderRadius: 30,
-      height: 60,
-      alignItems: "center",
-    },
-    submitButtonText: {
-      color: textColor,
-      fontSize: 16,
-    },
-    buttonContainer: {
-      flexDirection: "column",
-      alignItems: "center",
-      width: "100%",
-    },
+    // 搜索框样式
     searchContainer: {
       height: 50,
       flexDirection: "row",
@@ -442,17 +415,24 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       backgroundColor: isDarkMode ? "#1E1D3F" : "#E5E1E9", // Dark mode and light mode background color
       marginBottom: 20,
     },
-
     searchInput: {
       width: "100%",
       padding: 10,
       borderRadius: 10,
       color: textColor, // Dark mode and light mode text color
     },
-
     searchIcon: {
       paddingLeft: 10,
       color: textColor,
+    },
+
+    // 错误提示文本样式
+    errorText: {
+      color: "#FF5252",
+      fontSize: 14,
+      marginBottom: 10,
+      alignItems: "left",
+      width: 280,
     },
   });
 };
