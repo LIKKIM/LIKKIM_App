@@ -17,6 +17,7 @@ import {
   RefreshControl,
   Clipboard,
 } from "react-native";
+
 import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import WalletScreenStyles from "../styles/WalletScreenStyle";
@@ -24,7 +25,7 @@ import { BlurView } from "expo-blur";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CryptoContext, DarkModeContext, usdtCrypto } from "./CryptoContext";
 import { useTranslation } from "react-i18next";
-import QRCode from "react-native-qrcode-svg"; // 确保导入 QRCode 模块
+import QRCode from "react-native-qrcode-svg";
 import PriceChartCom from "./PriceChartCom";
 import { BleManager, BleErrorCode } from "react-native-ble-plx";
 import Constants from "expo-constants";
