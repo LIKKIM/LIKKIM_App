@@ -46,6 +46,7 @@ import ProcessModal from "./modal/ProcessModal";
 import AddCryptoModal from "./modal/AddCryptoModal";
 import AddressModal from "./modal/AddressModal";
 import PendingModal from "./modal/PendingModal";
+import EmptyWalletView from "./modal/EmptyWalletView";
 
 const serviceUUID = "0000FFE0-0000-1000-8000-00805F9B34FB";
 const writeCharacteristicUUID = "0000FFE2-0000-1000-8000-00805F9B34FB";
@@ -1722,36 +1723,12 @@ function WalletScreen({ route, navigation }) {
           </Animated.View>
         )}
         {cryptoCards.length === 0 && (
-          <View style={WalletScreenStyle.centeredContent}>
-            <ImageBackground
-              source={
-                isDarkMode
-                  ? require("../assets/AddWallet.png")
-                  : require("../assets/Card22.png")
-              }
-              style={WalletScreenStyle.addWalletImage}
-              imageStyle={WalletScreenStyle.addWalletImageBorder}
-            >
-              <TouchableOpacity
-                onPress={() => setAddWalletModalVisible(true)}
-                style={WalletScreenStyle.addWalletButton}
-              >
-                <Text style={WalletScreenStyle.addWalletButtonText}>
-                  {t("Add Wallet")}
-                </Text>
-              </TouchableOpacity>
-            </ImageBackground>
-            <View style={WalletScreenStyle.walletInfoContainer}>
-              <Text style={WalletScreenStyle.securityTitle}>
-                {t("Security in your hands")}
-              </Text>
-              <Text style={WalletScreenStyle.walletInfoText}>
-                {t(
-                  "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies."
-                )}
-              </Text>
-            </View>
-          </View>
+          <EmptyWalletView
+            isDarkMode={isDarkMode}
+            WalletScreenStyle={WalletScreenStyle}
+            setAddWalletModalVisible={setAddWalletModalVisible}
+            t={t}
+          />
         )}
         {cryptoCards.map((card, index) => {
           //     console.log("card------");
