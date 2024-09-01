@@ -51,6 +51,7 @@ const serviceUUID = "0000FFE0-0000-1000-8000-00805F9B34FB";
 const writeCharacteristicUUID = "0000FFE2-0000-1000-8000-00805F9B34FB";
 
 function WalletScreen({ route, navigation }) {
+  // 使用状态
   const [receivedVerificationCode, setReceivedVerificationCode] = useState("");
   const {
     initialAdditionalCryptos,
@@ -77,7 +78,7 @@ function WalletScreen({ route, navigation }) {
   const [activeTab, setActiveTab] = useState("History");
   const [modalVisible, setModalVisible] = useState(false);
   const [dropdownVisible, setDropdownVisible] = useState(false);
-  const [addressModalVisible, setAddressModalVisible] = useState(false); // 新增地址模态窗口的状态
+  const [addressModalVisible, setAddressModalVisible] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState("");
   const [selectedCrypto, setSelectedCrypto] = useState(null);
   const [addCryptoVisible, setAddCryptoVisible] = useState(false);
@@ -115,7 +116,7 @@ function WalletScreen({ route, navigation }) {
   const [processMessages, setProcessMessages] = useState([]);
   const [showLetsGoButton, setShowLetsGoButton] = useState(false);
   const [tabOpacity] = useState(new Animated.Value(1));
-  const [cardInfoVisible, setCardInfoVisible] = useState(false); // 控制卡片信息显示
+  const [cardInfoVisible, setCardInfoVisible] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const isScanningRef = useRef(false);
   const [isScanning, setIsScanning] = useState(false);
