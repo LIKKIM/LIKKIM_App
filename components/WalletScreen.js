@@ -1816,7 +1816,7 @@ function WalletScreen({ route, navigation }) {
                       style={WalletScreenStyle.chainIcon}
                     />
                   </View>
-                  <View style={WalletScreenStyle.cardIconContainer}>
+                  <View style={WalletScreenStyle.cardInfoContainer}>
                     <Text
                       style={[
                         WalletScreenStyle.cardName,
