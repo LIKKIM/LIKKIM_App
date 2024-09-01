@@ -94,8 +94,6 @@ function WalletScreen({ route, navigation }) {
   const [priceChanges, setPriceChanges] = useState({});
   const scrollViewRef = useRef();
   const iconColor = isDarkMode ? "#ffffff" : "#676776";
-  const darkColors = ["#24234C", "#101021"];
-  const lightColors = ["#FFFFFF", "#EDEBEF"];
   const darkColorsDown = ["#212146", "#101021"];
   const lightColorsDown = ["#FDFCFD", "#EDEBEF"];
   const secondTextColor = isDarkMode ? "#ddd" : "#676776";
@@ -157,11 +155,10 @@ function WalletScreen({ route, navigation }) {
     title: t("Importing on LIKKIM Hardware..."), // 默认主消息
     subtitle: t("Your device is already verified."), // 默认子消息
   });
+
   // 定义下拉刷新执行的函数
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
-    // 这里添加你的数据重新加载逻辑
-    // 模拟网络请求的异步操作
     setTimeout(() => {
       setRefreshing(false);
     }, 2000);
@@ -1664,7 +1661,7 @@ function WalletScreen({ route, navigation }) {
 
   return (
     <LinearGradient
-      colors={isDarkMode ? darkColors : lightColors}
+      colors={isDarkMode ? ["#24234C", "#101021"] : ["#FFFFFF", "#EDEBEF"]}
       style={WalletScreenStyle.linearGradient}
     >
       <ScrollView
