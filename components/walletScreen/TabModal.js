@@ -2,6 +2,7 @@
 import React from "react";
 import { View, Text, TouchableOpacity, Animated } from "react-native";
 import PriceChartCom from "../PriceChartCom";
+import { LinearGradient } from "expo-linear-gradient";
 
 const TabModal = ({
   activeTab,
@@ -13,6 +14,10 @@ const TabModal = ({
   transactionHistory, // 传入transactionHistory
   scrollViewRef,
   selectedCrypto,
+  isDarkMode,
+  fadeAnim,
+  darkColorsDown,
+  lightColorsDown,
 }) => {
   // renderTabContent 函数在这里定义
   const renderTabContent = () => {
@@ -56,59 +61,76 @@ const TabModal = ({
   };
 
   return (
-    <Animated.View
-      style={[WalletScreenStyle.animatedTabContainer, { opacity: tabOpacity }]}
-    >
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "center",
-          zIndex: 10,
-        }}
+    <>
+      {/* 数字货币弹窗背景层view 目的是衔接顶部菜单栏与背景的颜色 */}
+      <Animated.View
+        style={[WalletScreenStyle.cardModalView, { opacity: fadeAnim }]}
       >
-        <TouchableOpacity
-          style={[
-            WalletScreenStyle.tabButton,
-            activeTab === "Prices" && WalletScreenStyle.activeTabButton,
-          ]}
-          onPress={() => setActiveTab("Prices")}
-        >
-          <Text
-            style={[
-              WalletScreenStyle.tabButtonText,
-              activeTab === "Prices" && WalletScreenStyle.activeTabButtonText,
-            ]}
-          >
-            {t("Prices")}
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[
-            WalletScreenStyle.tabButton,
-            activeTab === "History" && WalletScreenStyle.activeTabButton,
-          ]}
-          onPress={() => setActiveTab("History")}
-        >
-          <Text
-            style={[
-              WalletScreenStyle.tabButtonText,
-              activeTab === "History" && WalletScreenStyle.activeTabButtonText,
-            ]}
-          >
-            {t("History")}
-          </Text>
-        </TouchableOpacity>
-      </View>
+        <LinearGradient
+          colors={isDarkMode ? darkColorsDown : lightColorsDown}
+          style={[WalletScreenStyle.cardModalView]}
+        />
+      </Animated.View>
 
-      {renderTabContent()}
-
-      <TouchableOpacity
-        style={WalletScreenStyle.cancelButtonCryptoCard}
-        onPress={closeModal}
+      {/* 数字货币弹窗表面层TabModal view */}
+      <Animated.View
+        style={[
+          WalletScreenStyle.animatedTabContainer,
+          { opacity: tabOpacity },
+        ]}
       >
-        <Text style={WalletScreenStyle.cancelButtonText}>{t("Close")}</Text>
-      </TouchableOpacity>
-    </Animated.View>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "center",
+            zIndex: 10,
+          }}
+        >
+          <TouchableOpacity
+            style={[
+              WalletScreenStyle.tabButton,
+              activeTab === "Prices" && WalletScreenStyle.activeTabButton,
+            ]}
+            onPress={() => setActiveTab("Prices")}
+          >
+            <Text
+              style={[
+                WalletScreenStyle.tabButtonText,
+                activeTab === "Prices" && WalletScreenStyle.activeTabButtonText,
+              ]}
+            >
+              {t("Prices")}
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[
+              WalletScreenStyle.tabButton,
+              activeTab === "History" && WalletScreenStyle.activeTabButton,
+            ]}
+            onPress={() => setActiveTab("History")}
+          >
+            <Text
+              style={[
+                WalletScreenStyle.tabButtonText,
+                activeTab === "History" &&
+                  WalletScreenStyle.activeTabButtonText,
+              ]}
+            >
+              {t("History")}
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        {renderTabContent()}
+
+        <TouchableOpacity
+          style={WalletScreenStyle.cancelButtonCryptoCard}
+          onPress={closeModal}
+        >
+          <Text style={WalletScreenStyle.cancelButtonText}>{t("Close")}</Text>
+        </TouchableOpacity>
+      </Animated.View>
+    </>
   );
 };
 

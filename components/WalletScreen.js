@@ -1649,17 +1649,6 @@ function WalletScreen({ route, navigation }) {
             </>
           )}
         </Animated.View>
-        {/* 数字货币弹窗背景层view 目的是衔接顶部菜单栏与背景的颜色 */}
-        {modalVisible && (
-          <Animated.View
-            style={[WalletScreenStyle.cardModalView, { opacity: fadeAnim }]}
-          >
-            <LinearGradient
-              colors={isDarkMode ? darkColorsDown : lightColorsDown}
-              style={[WalletScreenStyle.cardModalView]}
-            ></LinearGradient>
-          </Animated.View>
-        )}
 
         {cryptoCards.length === 0 && (
           <EmptyWalletView
@@ -1814,7 +1803,7 @@ function WalletScreen({ route, navigation }) {
             </TouchableOpacity>
           );
         })}
-        {/* 数字货币弹窗表面层TabModal view */}
+
         {modalVisible && (
           <TabModal
             activeTab={activeTab}
@@ -1823,9 +1812,13 @@ function WalletScreen({ route, navigation }) {
             WalletScreenStyle={WalletScreenStyle}
             t={t}
             tabOpacity={tabOpacity}
-            transactionHistory={transactionHistory} // 传递必要的状态或道具
+            transactionHistory={transactionHistory} // 传递交易历史记录
             scrollViewRef={scrollViewRef}
             selectedCrypto={selectedCrypto}
+            isDarkMode={isDarkMode} // 新增参数，传递当前是否为暗模式
+            fadeAnim={fadeAnim} // 新增参数，传递动画效果
+            darkColorsDown={darkColorsDown} // 新增参数，传递暗模式下的渐变颜色
+            lightColorsDown={lightColorsDown} // 新增参数，传递亮模式下的渐变颜色
           />
         )}
       </ScrollView>
