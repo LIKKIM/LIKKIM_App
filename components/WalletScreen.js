@@ -1649,7 +1649,7 @@ function WalletScreen({ route, navigation }) {
             </>
           )}
         </Animated.View>
-
+        {/* 数字货币弹窗背景层view 目的是衔接顶部菜单栏与背景的颜色 */}
         {modalVisible && (
           <Animated.View
             style={[WalletScreenStyle.cardModalView, { opacity: fadeAnim }]}
@@ -1661,16 +1661,6 @@ function WalletScreen({ route, navigation }) {
           </Animated.View>
         )}
 
-        {modalVisible && (
-          <Animated.View
-            style={[WalletScreenStyle.cardModalView, { opacity: fadeAnim }]}
-          >
-            <LinearGradient
-              colors={isDarkMode ? darkColorsDown : lightColorsDown}
-              style={[WalletScreenStyle.cardModalView]}
-            ></LinearGradient>
-          </Animated.View>
-        )}
         {cryptoCards.length === 0 && (
           <EmptyWalletView
             isDarkMode={isDarkMode}
@@ -1837,17 +1827,6 @@ function WalletScreen({ route, navigation }) {
             scrollViewRef={scrollViewRef}
             selectedCrypto={selectedCrypto}
           />
-        )}
-        {/* 数字货币弹窗背景层view 目的是衔接顶部菜单栏与背景的颜色 */}
-        {modalVisible && (
-          <Animated.View
-            style={[WalletScreenStyle.cardModalView, { opacity: fadeAnim }]}
-          >
-            <LinearGradient
-              colors={isDarkMode ? darkColorsDown : lightColorsDown}
-              style={[WalletScreenStyle.cardModalView]}
-            ></LinearGradient>
-          </Animated.View>
         )}
       </ScrollView>
       <ModalsContainer
