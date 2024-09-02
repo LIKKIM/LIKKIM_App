@@ -1876,7 +1876,7 @@ function WalletScreen({ route, navigation }) {
             </TouchableOpacity>
           );
         })}
-        {/* 数字货币弹窗表面层view */}
+        {/* 数字货币弹窗表面层TabModal view */}
         {modalVisible && (
           <TabModal
             activeTab={activeTab}
