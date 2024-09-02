@@ -1775,38 +1775,35 @@ function WalletScreen({ route, navigation }) {
                   style={{ width: "100%", height: "100%" }}
                   imageStyle={{ borderRadius: 16 }}
                 >
-                  <View style={WalletScreenStyle.cardIconContainer}>
-                    <Image
-                      source={card.icon}
-                      style={WalletScreenStyle.cardIcon}
-                    />
-                  </View>
-                  <View style={WalletScreenStyle.cardChainIconContainer}>
-                    <Image
-                      source={card.chainIcon}
-                      style={WalletScreenStyle.chainIcon}
-                    />
-                  </View>
+                  {["cardIconContainer", "cardChainIconContainer"].map(
+                    (styleKey, i) => (
+                      <View key={i} style={WalletScreenStyle[styleKey]}>
+                        <Image
+                          source={i === 0 ? card.icon : card.chainIcon}
+                          style={
+                            i === 0
+                              ? WalletScreenStyle.cardIcon
+                              : WalletScreenStyle.chainIcon
+                          }
+                        />
+                      </View>
+                    )
+                  )}
+
                   <View style={WalletScreenStyle.cardInfoContainer}>
-                    <Text
-                      style={[
-                        WalletScreenStyle.cardName,
-                        { color: isBlackText ? "#333" : "#eee" },
-                      ]}
-                    >
-                      {card.name}
-                    </Text>
-                    <View style={WalletScreenStyle.chainContainer}>
+                    {["cardName", "chainText"].map((textStyle, i) => (
                       <Text
+                        key={i}
                         style={[
-                          WalletScreenStyle.chainText,
+                          WalletScreenStyle[textStyle],
                           { color: isBlackText ? "#333" : "#eee" },
                         ]}
                       >
-                        {card.chain}
+                        {i === 0 ? card.name : card.chain}
                       </Text>
-                    </View>
+                    ))}
                   </View>
+
                   <Text
                     style={[
                       WalletScreenStyle.cardShortName,
@@ -1815,7 +1812,8 @@ function WalletScreen({ route, navigation }) {
                   >
                     {card.shortName}
                   </Text>
-                  {!modalVisible && (
+
+                  {!modalVisible ? (
                     <>
                       <Text
                         style={[
@@ -1840,38 +1838,38 @@ function WalletScreen({ route, navigation }) {
                         </Text>
                       </View>
                     </>
-                  )}
-                  {modalVisible && cardInfoVisible && (
-                    <View style={WalletScreenStyle.cardModalContent}>
-                      <TouchableOpacity
-                        onPress={() => handleQRCodePress(card)}
-                        style={{ position: "absolute", right: 0, top: 0 }}
-                      >
-                        <Image
-                          source={require("../assets/icon/QR.png")}
-                          style={[
-                            WalletScreenStyle.QRImg,
-                            isBlackText && { tintColor: "#121518" },
-                          ]}
-                        />
-                      </TouchableOpacity>
-                      <Text
-                        style={[
-                          WalletScreenStyle.cardBalanceCenter,
-                          isBlackText && { color: "#121518" },
-                        ]}
-                      >
-                        {`${card.balance} ${card.shortName}`}
-                      </Text>
-                      <Text
-                        style={[
-                          WalletScreenStyle.balanceShortNameCenter,
-                          isBlackText && { color: "#121518" },
-                        ]}
-                      >
-                        {`${card.balance} ${currencyUnit}`}
-                      </Text>
-                    </View>
+                  ) : (
+                    cardInfoVisible && (
+                      <View style={WalletScreenStyle.cardModalContent}>
+                        <TouchableOpacity
+                          onPress={() => handleQRCodePress(card)}
+                          style={{ position: "absolute", right: 0, top: 0 }}
+                        >
+                          <Image
+                            source={require("../assets/icon/QR.png")}
+                            style={[
+                              WalletScreenStyle.QRImg,
+                              isBlackText && { tintColor: "#121518" },
+                            ]}
+                          />
+                        </TouchableOpacity>
+                        {["cardBalanceCenter", "balanceShortNameCenter"].map(
+                          (styleKey, i) => (
+                            <Text
+                              key={i}
+                              style={[
+                                WalletScreenStyle[styleKey],
+                                isBlackText && { color: "#121518" },
+                              ]}
+                            >
+                              {`${card.balance} ${
+                                i === 0 ? card.shortName : currencyUnit
+                              }`}
+                            </Text>
+                          )
+                        )}
+                      </View>
+                    )
                   )}
                 </ImageBackground>
               </Animated.View>
