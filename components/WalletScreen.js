@@ -1597,51 +1597,6 @@ function WalletScreen({ route, navigation }) {
         (cardStartPositions.current[_index] = py)
     );
 
-  const renderTabContent = () => {
-    switch (activeTab) {
-      case "History":
-        return (
-          <>
-            <Text style={WalletScreenStyle.historyTitle}>
-              {t("Transaction History")}
-            </Text>
-            <View style={WalletScreenStyle.historyContainer}>
-              {transactionHistory.length === 0 ? (
-                <Text style={WalletScreenStyle.noHistoryText}>
-                  {t("No Histories")}
-                </Text>
-              ) : (
-                transactionHistory.map((transaction, index) => (
-                  <View key={index} style={WalletScreenStyle.historyItem}>
-                    <Text style={WalletScreenStyle.historyItemText}>
-                      {transaction.detail}
-                    </Text>
-                  </View>
-                ))
-              )}
-            </View>
-          </>
-        );
-      case "Prices":
-        return (
-          <>
-            {/* TODO K线图表组件 */}
-
-            <View style={WalletScreenStyle.priceContainer}>
-              {/* 传入指定的instId&货币符号 */}
-              <PriceChartCom
-                instId={`${selectedCrypto?.shortName}-USD`}
-                priceFla="$"
-                parentScrollviewRef={scrollViewRef}
-              />
-            </View>
-          </>
-        );
-      default:
-        return null;
-    }
-  };
-
   return (
     <LinearGradient
       colors={isDarkMode ? ["#24234C", "#101021"] : ["#FFFFFF", "#EDEBEF"]}
@@ -1872,11 +1827,13 @@ function WalletScreen({ route, navigation }) {
           <TabModal
             activeTab={activeTab}
             setActiveTab={setActiveTab}
-            renderTabContent={renderTabContent}
             closeModal={closeModal}
             WalletScreenStyle={WalletScreenStyle}
             t={t}
             tabOpacity={tabOpacity}
+            transactionHistory={transactionHistory} // 传递必要的状态或道具
+            scrollViewRef={scrollViewRef}
+            selectedCrypto={selectedCrypto}
           />
         )}
         {/* 数字货币弹窗背景层view 目的是衔接顶部菜单栏与背景的颜色 */}
