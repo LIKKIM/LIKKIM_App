@@ -36,16 +36,6 @@ import { CryptoContext, DarkModeContext, usdtCrypto } from "./CryptoContext";
 
 // 自定义组件
 import PriceChartCom from "./PriceChartCom";
-import PinModal from "./modal/PinModal";
-import BluetoothModal from "./modal/BluetoothModal";
-import VerificationModal from "./modal/VerificationModal";
-import DeleteConfirmationModal from "./modal/DeleteConfirmationModal";
-import AddWalletModal from "./modal/AddWalletModal";
-import TipModal from "./modal/TipModal";
-import ProcessModal from "./modal/ProcessModal";
-import AddCryptoModal from "./modal/AddCryptoModal";
-import AddressModal from "./modal/AddressModal";
-import PendingModal from "./modal/PendingModal";
 import EmptyWalletView from "./modal/EmptyWalletView";
 import TabModal from "./walletScreen/TabModal";
 import ModalsContainer from "./walletScreen/ModalsContainer";
