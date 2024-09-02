@@ -47,6 +47,7 @@ import AddCryptoModal from "./modal/AddCryptoModal";
 import AddressModal from "./modal/AddressModal";
 import PendingModal from "./modal/PendingModal";
 import EmptyWalletView from "./modal/EmptyWalletView";
+import TabModal from "./walletScreen/TabModal";
 
 const serviceUUID = "0000FFE0-0000-1000-8000-00805F9B34FB";
 const writeCharacteristicUUID = "0000FFE2-0000-1000-8000-00805F9B34FB";
@@ -1879,67 +1880,17 @@ function WalletScreen({ route, navigation }) {
         })}
         {/* 数字货币弹窗表面层view */}
         {modalVisible && (
-          <Animated.View
-            style={[
-              WalletScreenStyle.animatedTabContainer,
-              { opacity: tabOpacity }, // 保留 opacity 动态值
-            ]}
-          >
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "center",
-                zIndex: 10,
-              }}
-            >
-              <TouchableOpacity
-                style={[
-                  WalletScreenStyle.tabButton,
-                  activeTab === "Prices" && WalletScreenStyle.activeTabButton,
-                ]}
-                onPress={() => setActiveTab("Prices")}
-              >
-                <Text
-                  style={[
-                    WalletScreenStyle.tabButtonText,
-                    activeTab === "Prices" &&
-                      WalletScreenStyle.activeTabButtonText,
-                  ]}
-                >
-                  {t("Prices")}
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={[
-                  WalletScreenStyle.tabButton,
-                  activeTab === "History" && WalletScreenStyle.activeTabButton,
-                ]}
-                onPress={() => setActiveTab("History")}
-              >
-                <Text
-                  style={[
-                    WalletScreenStyle.tabButtonText,
-                    activeTab === "History" &&
-                      WalletScreenStyle.activeTabButtonText,
-                  ]}
-                >
-                  {t("History")}
-                </Text>
-              </TouchableOpacity>
-            </View>
-
-            {renderTabContent()}
-            <TouchableOpacity
-              style={WalletScreenStyle.cancelButtonCryptoCard}
-              onPress={closeModal}
-            >
-              <Text style={WalletScreenStyle.cancelButtonText}>
-                {t("Close")}
-              </Text>
-            </TouchableOpacity>
-          </Animated.View>
+          <TabModal
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
+            renderTabContent={renderTabContent}
+            closeModal={closeModal}
+            WalletScreenStyle={WalletScreenStyle}
+            t={t}
+            tabOpacity={tabOpacity}
+          />
         )}
-        {/* 数字货币弹窗背景层view */}
+        {/* 数字货币弹窗背景层view 目的是衔接顶部菜单栏与背景的颜色 */}
         {modalVisible && (
           <Animated.View
             style={[WalletScreenStyle.cardModalView, { opacity: fadeAnim }]}
