@@ -48,6 +48,7 @@ import AddressModal from "./modal/AddressModal";
 import PendingModal from "./modal/PendingModal";
 import EmptyWalletView from "./modal/EmptyWalletView";
 import TabModal from "./walletScreen/TabModal";
+import ModalsContainer from "./walletScreen/ModalsContainer";
 
 const serviceUUID = "0000FFE0-0000-1000-8000-00805F9B34FB";
 const writeCharacteristicUUID = "0000FFE2-0000-1000-8000-00805F9B34FB";
@@ -1900,143 +1901,65 @@ function WalletScreen({ route, navigation }) {
           </Animated.View>
         )}
       </ScrollView>
-      {/* 显示选择的加密货币地址的模态窗口 */}
-      <AddressModal
-        visible={addressModalVisible}
-        onClose={() => setAddressModalVisible(false)}
+      <ModalsContainer
+        addressModalVisible={addressModalVisible}
+        setAddressModalVisible={setAddressModalVisible}
         selectedCryptoIcon={selectedCryptoIcon}
         selectedCrypto={selectedCrypto}
         selectedAddress={selectedAddress}
         isVerifyingAddress={isVerifyingAddress}
         addressVerificationMessage={addressVerificationMessage}
-        onVerifyAddress={handleVerifyAddress}
+        handleVerifyAddress={handleVerifyAddress}
         WalletScreenStyle={WalletScreenStyle}
         t={t}
         isDarkMode={isDarkMode}
-      />
-      {/* Add Wallet Modal */}
-      <AddWalletModal
-        visible={addWalletModalVisible}
-        onClose={() => setAddWalletModalVisible(false)}
-        onCreateWallet={handleCreateWallet}
-        onImportWallet={handleImportWallet}
-        onWalletTest={handleWalletTest}
-        styles={WalletScreenStyle}
-        t={t}
-      />
-
-      {/* 提示 Modal */}
-      <TipModal
-        visible={tipModalVisible}
-        onClose={() => setTipModalVisible(false)}
-        onContinue={handleContinue}
-        styles={WalletScreenStyle}
-        t={t}
-      />
-      {/* Process Modal */}
-      <ProcessModal
-        visible={processModalVisible}
-        onClose={() => setProcessModalVisible(false)}
+        addWalletModalVisible={addWalletModalVisible}
+        setAddWalletModalVisible={setAddWalletModalVisible}
+        handleCreateWallet={handleCreateWallet}
+        handleImportWallet={handleImportWallet}
+        handleWalletTest={handleWalletTest}
+        tipModalVisible={tipModalVisible}
+        setTipModalVisible={setTipModalVisible}
+        handleContinue={handleContinue}
+        processModalVisible={processModalVisible}
+        setProcessModalVisible={setProcessModalVisible}
         processMessages={processMessages}
         showLetsGoButton={showLetsGoButton}
-        onLetsGo={handleLetsGo}
-        styles={WalletScreenStyle}
-        t={t}
-      />
-      {/* Add Crypto Modal */}
-      <AddCryptoModal
-        visible={addCryptoVisible}
-        onClose={() => {
-          setAddCryptoVisible(false);
-        }}
+        handleLetsGo={handleLetsGo}
+        addCryptoVisible={addCryptoVisible}
+        setAddCryptoVisible={setAddCryptoVisible}
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
         filteredCryptos={filteredCryptos}
         handleAddCrypto={handleAddCrypto}
-        styles={WalletScreenStyle}
-        t={t}
-        isDarkMode={isDarkMode}
-        chainCategories={chainCategories} // 传递链分类标签
-      />
-
-      {/* Delete Confirmation Modal */}
-      <DeleteConfirmationModal
-        visible={deleteConfirmVisible}
-        onClose={() => {
-          setDeleteConfirmVisible(false);
-          navigation.setParams({ showDeleteConfirmModal: false }); // 重置参数
-        }}
-        onConfirm={handleDeleteCard}
-        styles={WalletScreenStyle}
-        t={t}
-      />
-
-      {/* Bluetooth modal */}
-      <BluetoothModal
-        visible={bleVisible} // 传入当前模态框的可见性状态
-        devices={devices} // 传入当前扫描到的设备列表
-        isScanning={isScanning} // 传入是否正在扫描的状态
-        iconColor={iconColor} // 传入图标颜色
-        onDevicePress={handleDevicePress} // 传入设备选择时的处理函数
-        onCancel={() => {
-          setBleVisible(false); // 取消时关闭模态框
-          setSelectedDevice(null); // 重置选中的设备
-        }}
-        verifiedDevices={verifiedDevices} // 传入已验证的设备列表
-        MyColdWalletScreenStyle={WalletScreenStyle} // 传入样式
-        t={t} // 传入翻译函数
-        onDisconnectPress={handleDisconnectDevice} // 处理断开连接的逻辑
-      />
-
-      {/* PIN码输入modal窗口 */}
-      <PinModal
-        visible={pinModalVisible}
+        chainCategories={chainCategories}
+        deleteConfirmVisible={deleteConfirmVisible}
+        setDeleteConfirmVisible={setDeleteConfirmVisible}
+        handleDeleteCard={handleDeleteCard}
+        navigation={navigation}
+        bleVisible={bleVisible}
+        devices={devices}
+        isScanning={isScanning}
+        iconColor={iconColor}
+        handleDevicePress={handleDevicePress}
+        setBleVisible={setBleVisible}
+        setSelectedDevice={setSelectedDevice}
+        verifiedDevices={verifiedDevices}
+        handleDisconnectDevice={handleDisconnectDevice}
+        pinModalVisible={pinModalVisible}
         pinCode={pinCode}
         setPinCode={setPinCode}
-        onSubmit={() => handlePinSubmit(selectedDevice, pinCode)}
-        onCancel={() => setPinModalVisible(false)}
-        styles={WalletScreenStyle}
-        isDarkMode={isDarkMode}
-        t={t}
-      />
-
-      {/* 验证结果模态框 */}
-      <VerificationModal
-        visible={verificationStatus !== null}
-        status={verificationStatus}
-        onClose={() => setVerificationStatus(null)}
-        styles={WalletScreenStyle}
-        t={t}
-      />
-
-      {/* 通用的 PendingModal 模态框 */}
-      <PendingModal
-        visible={createPendingModalVisible || importingModalVisible}
-        onRequestClose={() => {
-          if (createPendingModalVisible) {
-            setCreatePendingModalVisible(false);
-          } else if (importingModalVisible) {
-            setImportingModalVisible(false);
-          }
-          stopMonitoringWalletAddress(); // 关闭模态框时停止监听钱包地址
-        }}
-        title={
-          createPendingModalVisible
-            ? walletCreationStatus.title
-            : importingStatus.title
-        }
-        imageSource={
-          createPendingModalVisible
-            ? walletCreationStatus.image
-            : importingStatus.image
-        }
-        subtitle={
-          createPendingModalVisible
-            ? walletCreationStatus.subtitle
-            : importingStatus.subtitle
-        }
-        WalletScreenStyle={WalletScreenStyle}
-        t={t}
+        handlePinSubmit={handlePinSubmit}
+        setPinModalVisible={setPinModalVisible}
+        verificationStatus={verificationStatus}
+        setVerificationStatus={setVerificationStatus}
+        createPendingModalVisible={createPendingModalVisible}
+        importingModalVisible={importingModalVisible}
+        setCreatePendingModalVisible={setCreatePendingModalVisible}
+        setImportingModalVisible={setImportingModalVisible}
+        stopMonitoringWalletAddress={stopMonitoringWalletAddress}
+        walletCreationStatus={walletCreationStatus}
+        importingStatus={importingStatus}
       />
     </LinearGradient>
   );
