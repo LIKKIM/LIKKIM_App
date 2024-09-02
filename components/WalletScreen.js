@@ -1731,17 +1731,12 @@ function WalletScreen({ route, navigation }) {
           />
         )}
         {cryptoCards.map((card, index) => {
-          //     console.log("card------");
-          //   console.log(card.cardImage, card.icon);
-
-          const isBlackText =
-            card.shortName === "BTC" ||
-            card.shortName === "USDT" ||
-            card.shortName === "BCH" ||
-            card.shortName === "DOT" ||
-            card.shortName === "DOGE";
-
-          // 根据卡牌类型设置文字颜色
+          const isBlackText = ["BTC", "USDT", "BCH", "DOT", "DOGE"].includes(
+            card.shortName
+          );
+          const priceChange = priceChanges[card.shortName]?.priceChange || "0";
+          const percentageChange =
+            priceChanges[card.shortName]?.percentageChange || "0";
           const textColor =
             priceChange > 0
               ? isBlackText
@@ -1750,9 +1745,7 @@ function WalletScreen({ route, navigation }) {
               : isBlackText
               ? "#22AA94"
               : "#0C9981";
-          const priceChange = priceChanges[card.shortName]?.priceChange || "0";
-          const percentageChange =
-            priceChanges[card.shortName]?.percentageChange || "0";
+
           return (
             <TouchableOpacity
               key={`${card.shortName}_${index}`}
@@ -1765,7 +1758,7 @@ function WalletScreen({ route, navigation }) {
                 WalletScreenStyle.cardContainer,
                 selectedCardIndex === index && { zIndex: 3 },
               ]}
-              disabled={modalVisible} // 禁用卡片点击
+              disabled={modalVisible}
             >
               <Animated.View
                 style={[
@@ -1797,7 +1790,7 @@ function WalletScreen({ route, navigation }) {
                     <Text
                       style={[
                         WalletScreenStyle.cardName,
-                        isBlackText ? { color: "#333" } : { color: "#eee" }, // 根据 isBlackText 动态设置颜色
+                        { color: isBlackText ? "#333" : "#eee" },
                       ]}
                     >
                       {card.name}
@@ -1806,18 +1799,16 @@ function WalletScreen({ route, navigation }) {
                       <Text
                         style={[
                           WalletScreenStyle.chainText,
-                          isBlackText ? { color: "#333" } : { color: "#eee" }, // 根据 isBlackText 动态设置颜色
+                          { color: isBlackText ? "#333" : "#eee" },
                         ]}
                       >
                         {card.chain}
                       </Text>
                     </View>
                   </View>
-
                   <Text
                     style={[
                       WalletScreenStyle.cardShortName,
-                      //  isBlackText && { color: "#676776" },
                       isBlackText && { color: "#121518" },
                     ]}
                   >
@@ -1834,21 +1825,13 @@ function WalletScreen({ route, navigation }) {
                         {`${card.balance} ${card.shortName}`}
                       </Text>
                       <View style={WalletScreenStyle.priceChangeView}>
-                        <Text
-                          style={{
-                            color: textColor,
-                            fontWeight: "bold",
-                          }}
-                        >
-                          {priceChanges[card.shortName]?.percentageChange > 0
-                            ? "+"
-                            : ""}
-                          {priceChanges[card.shortName]?.percentageChange}%
+                        <Text style={{ color: textColor, fontWeight: "bold" }}>
+                          {percentageChange > 0 ? "+" : ""}
+                          {percentageChange}%
                         </Text>
                         <Text
                           style={[
                             WalletScreenStyle.balanceShortName,
-                            //  isBlackText && { color: "#676776" },
                             isBlackText && { color: "#121518" },
                           ]}
                         >
@@ -1861,11 +1844,7 @@ function WalletScreen({ route, navigation }) {
                     <View style={WalletScreenStyle.cardModalContent}>
                       <TouchableOpacity
                         onPress={() => handleQRCodePress(card)}
-                        style={{
-                          position: "absolute",
-                          right: 0,
-                          top: 0,
-                        }}
+                        style={{ position: "absolute", right: 0, top: 0 }}
                       >
                         <Image
                           source={require("../assets/icon/QR.png")}
@@ -1886,7 +1865,6 @@ function WalletScreen({ route, navigation }) {
                       <Text
                         style={[
                           WalletScreenStyle.balanceShortNameCenter,
-                          //  isBlackText && { color: "#676776" },
                           isBlackText && { color: "#121518" },
                         ]}
                       >
