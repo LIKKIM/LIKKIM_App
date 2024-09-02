@@ -1196,9 +1196,11 @@ function TransactionsScreen() {
       if (device) {
         showLIKKIMAddressCommand(device); // 确保这里传递的是完整的设备对象
       } else {
+        setAddressModalVisible(false);
         setBleVisible(true);
       }
     } else {
+      setAddressModalVisible(false);
       setBleVisible(true);
     }
   };
