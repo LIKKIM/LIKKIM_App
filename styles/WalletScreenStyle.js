@@ -321,11 +321,11 @@ const WalletScreenStyles = (isDarkMode) => {
       marginBottom: 10,
     },
     historyList: {
-      width: 300,
+      width: 326,
       marginBottom: 20,
     },
     historyItem: {
-      padding: 10,
+      paddingVertical: 10,
       borderBottomWidth: 1,
       borderBottomColor: historyItemBorderColor,
     },
