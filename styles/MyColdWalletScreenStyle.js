@@ -412,6 +412,9 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       borderBottomWidth: 1,
       borderBottomColor: borderColor,
     },
+    scrollView: {
+      width: "100%",
+    },
     submitButton: {
       backgroundColor: buttonBackgroundColor,
       padding: 10,

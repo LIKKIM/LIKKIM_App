@@ -39,49 +39,46 @@ const TabModal = ({
             }
           );
 
-          const data = await response.json(); // 总是尝试解析JSON响应
+          const data = await response.json(); // 尝试解析JSON响应
 
-          console.log("API Response:", data); // 总是打印API响应
+          console.log("API Response:", data); // 打印API响应
 
-          // 检查响应是否OK，并确认msg字段是否为'success'
           if (!response.ok || data.msg !== "success") {
             console.error(
               `API Error: HTTP status: ${response.status}, Message: ${data.msg}`
             );
-            setTransactionHistory([]); // 清空交易历史，以防出错时显示旧数据
+            setTransactionHistory([]); // 清空交易历史
           } else {
-            // 成功时处理和打印具体交易数据
-            if (data.data && data.data.length > 0) {
-              data.data.forEach((transaction) => {
-                console.log(`Transaction:
-                  Amount: ${transaction.amount},
-                  From: ${transaction.from},
-                  State: ${transaction.state},
-                  To: ${transaction.to},
-                  Token Contract Address: ${transaction.tokenContractAddress},
-                  Transaction Symbol: ${transaction.transactionSymbol},
-                  Transaction Time: ${new Date(
-                    parseInt(transaction.transactionTime) * 1000
-                  ).toLocaleString()},
-                  Transaction ID: ${transaction.txid}`);
-              });
-              setTransactionHistory(data.data);
-            } else {
-              console.log("No transactions found.");
-              setTransactionHistory([]);
-            }
+            printData(data.data); // 动态打印数据
+            setTransactionHistory(data.data); // 更新状态
           }
         } catch (error) {
           console.error(
             `Failed to fetch transaction history: ${error.message}`
           );
-          setTransactionHistory([]); // 清空交易历史，以防出错时显示旧数据
+          setTransactionHistory([]); // 清空交易历史
         }
       }
     };
 
     fetchTransactionHistory();
   }, [selectedCrypto, activeTab]);
+
+  // 动态打印数据的函数
+  function printData(data) {
+    if (Array.isArray(data)) {
+      data.forEach((item) => printData(item)); // 对数组的每一项递归
+    } else if (typeof data === "object" && data !== null) {
+      for (const key in data) {
+        if (data.hasOwnProperty(key)) {
+          console.log(`${key}: `, data[key]); // 打印每个键值对
+          printData(data[key]); // 对对象的每个值递归
+        }
+      }
+    } else {
+      console.log(data); // 如果是基本类型，直接打印
+    }
+  }
 
   const renderTabContent = () => {
     switch (activeTab) {
