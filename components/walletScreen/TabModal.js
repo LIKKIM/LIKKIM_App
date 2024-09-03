@@ -38,8 +38,8 @@ const TabModal = ({
                 "Content-Type": "application/json",
               },
               body: JSON.stringify({
-                chainShortName: "TRON",
-                address: "TN121JdH9t2y7qjuExHrYMdJA5RHJXdaZK",
+                chainShortName: selectedCrypto.shortName,
+                address: selectedCrypto.address,
                 protocolType: "token_20",
               }),
             }

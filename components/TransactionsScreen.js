@@ -191,8 +191,8 @@ function TransactionsScreen() {
                 "Content-Type": "application/json",
               },
               body: JSON.stringify({
-                chainShortName: selectedCryptoObj.queryChainShortName,
-                address: selectedCryptoObj.address,
+                chainShortName: selectedCrypto.shortName,
+                address: selectedCrypto.address,
                 protocolType: "token_20",
               }),
             }
