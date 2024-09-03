@@ -32,28 +32,49 @@ const TabModal = ({
                 "Content-Type": "application/json",
               },
               body: JSON.stringify({
-                chainShortName: "TRON", // 区块链的简称
-                address: "TXAq2qZCAdgAbQmbaYhx213P2JjhKQbbTZ",
+                chainShortName: "TRON",
+                address: "TN121JdH9t2y7qjuExHrYMdJA5RHJXdaZK",
                 protocolType: "token_20",
               }),
             }
           );
-          //    chainShortName: selectedCrypto.shortName,
-          //    address: selectedCrypto.address,
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
 
-          const data = await response.json();
+          const data = await response.json(); // 总是尝试解析JSON响应
 
-          if (data.code === "OK") {
-            setTransactionHistory(data.data[0]?.transactionLists || []);
+          console.log("API Response:", data); // 总是打印API响应
+
+          // 检查响应是否OK，并确认msg字段是否为'success'
+          if (!response.ok || data.msg !== "success") {
+            console.error(
+              `API Error: HTTP status: ${response.status}, Message: ${data.msg}`
+            );
+            setTransactionHistory([]); // 清空交易历史，以防出错时显示旧数据
           } else {
-            setTransactionHistory([]);
-            console.error("Failed to fetch transaction history:", data.msg);
+            // 成功时处理和打印具体交易数据
+            if (data.data && data.data.length > 0) {
+              data.data.forEach((transaction) => {
+                console.log(`Transaction:
+                  Amount: ${transaction.amount},
+                  From: ${transaction.from},
+                  State: ${transaction.state},
+                  To: ${transaction.to},
+                  Token Contract Address: ${transaction.tokenContractAddress},
+                  Transaction Symbol: ${transaction.transactionSymbol},
+                  Transaction Time: ${new Date(
+                    parseInt(transaction.transactionTime) * 1000
+                  ).toLocaleString()},
+                  Transaction ID: ${transaction.txid}`);
+              });
+              setTransactionHistory(data.data);
+            } else {
+              console.log("No transactions found.");
+              setTransactionHistory([]);
+            }
           }
         } catch (error) {
-          console.error("Failed to fetch transaction history:", error.message);
+          console.error(
+            `Failed to fetch transaction history: ${error.message}`
+          );
           setTransactionHistory([]); // 清空交易历史，以防出错时显示旧数据
         }
       }
