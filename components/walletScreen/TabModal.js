@@ -187,17 +187,31 @@ const TabModal = ({
                           ).toLocaleString()}`}
                         </Text>
 
-                        <Text style={WalletScreenStyle.historyItemText}>
+                        <Text
+                          style={[
+                            WalletScreenStyle.historyItemText,
+                            { lineHeight: 24 },
+                          ]}
+                        >
                           <Text style={{ fontWeight: "bold" }}>{`From: `}</Text>
                           {transaction.from}
                         </Text>
-
-                        <Text style={WalletScreenStyle.historyItemText}>
+                        <Text
+                          style={[
+                            WalletScreenStyle.historyItemText,
+                            { lineHeight: 24 },
+                          ]}
+                        >
                           <Text style={{ fontWeight: "bold" }}>{`To: `}</Text>
                           {transaction.to}
                         </Text>
 
-                        <Text style={WalletScreenStyle.historyItemText}>
+                        <Text
+                          style={[
+                            WalletScreenStyle.historyItemText,
+                            { lineHeight: 24 },
+                          ]}
+                        >
                           <Text
                             style={{ fontWeight: "bold" }}
                           >{`Transaction hash: `}</Text>
