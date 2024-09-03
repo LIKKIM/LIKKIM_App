@@ -1,6 +1,12 @@
 // TabModal.js
 import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, Animated } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Animated,
+  ScrollView,
+} from "react-native";
 import PriceChartCom from "../PriceChartCom";
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -88,7 +94,9 @@ const TabModal = ({
             <Text style={WalletScreenStyle.historyTitle}>
               {t("Transaction History")}
             </Text>
-            <View style={WalletScreenStyle.historyContainer}>
+            <ScrollView
+              contentContainerStyle={WalletScreenStyle.historyContainer}
+            >
               {transactionHistory.length === 0 ? (
                 <Text style={WalletScreenStyle.noHistoryText}>
                   {t("No Histories")}
@@ -97,12 +105,35 @@ const TabModal = ({
                 transactionHistory.map((transaction, index) => (
                   <View key={index} style={WalletScreenStyle.historyItem}>
                     <Text style={WalletScreenStyle.historyItemText}>
-                      {transaction.detail || transaction.txId}
+                      {`Amount: ${transaction.amount}`}
+                    </Text>
+                    <Text style={WalletScreenStyle.historyItemText}>
+                      {`From: ${transaction.from}`}
+                    </Text>
+                    <Text style={WalletScreenStyle.historyItemText}>
+                      {`State: ${transaction.state}`}
+                    </Text>
+                    <Text style={WalletScreenStyle.historyItemText}>
+                      {`To: ${transaction.to}`}
+                    </Text>
+                    <Text style={WalletScreenStyle.historyItemText}>
+                      {`Token Contract Address: ${transaction.tokenContractAddress}`}
+                    </Text>
+                    <Text style={WalletScreenStyle.historyItemText}>
+                      {`Transaction Symbol: ${transaction.transactionSymbol}`}
+                    </Text>
+                    <Text style={WalletScreenStyle.historyItemText}>
+                      {`Transaction Time: ${new Date(
+                        transaction.transactionTime * 1000
+                      ).toLocaleString()}`}
+                    </Text>
+                    <Text style={WalletScreenStyle.historyItemText}>
+                      {`TxID: ${transaction.txid}`}
                     </Text>
                   </View>
                 ))
               )}
-            </View>
+            </ScrollView>
           </>
         );
       case "Prices":
