@@ -1,5 +1,5 @@
 // TabModal.js
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, Animated } from "react-native";
 import PriceChartCom from "../PriceChartCom";
 import { LinearGradient } from "expo-linear-gradient";
@@ -11,7 +11,6 @@ const TabModal = ({
   WalletScreenStyle,
   t,
   tabOpacity,
-  transactionHistory, // 传入transactionHistory
   scrollViewRef,
   selectedCrypto,
   isDarkMode,
@@ -19,7 +18,50 @@ const TabModal = ({
   darkColorsDown,
   lightColorsDown,
 }) => {
-  // renderTabContent 函数在这里定义
+  const [transactionHistory, setTransactionHistory] = useState([]);
+
+  useEffect(() => {
+    const fetchTransactionHistory = async () => {
+      if (selectedCrypto && activeTab === "History") {
+        try {
+          const response = await fetch(
+            "https://bt.likkim.com/meridian/address/queryTransactionList",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                chainShortName: "TRON",
+                address: "TN121JdH9t2y7qjuExHrYMdJA5RHJXdaZK",
+                protocolType: "token_20",
+              }),
+            }
+          );
+          //     chainShortName: selectedCrypto.shortName,
+          //    address: selectedCrypto.address,
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const data = await response.json();
+
+          if (data.code === "OK") {
+            setTransactionHistory(data.data[0]?.transactionLists || []);
+          } else {
+            setTransactionHistory([]);
+            console.error("Failed to fetch transaction history:", data.msg);
+          }
+        } catch (error) {
+          console.error("Failed to fetch transaction history:", error.message);
+          setTransactionHistory([]); // 清空交易历史，以防出错时显示旧数据
+        }
+      }
+    };
+
+    fetchTransactionHistory();
+  }, [selectedCrypto, activeTab]);
+
   const renderTabContent = () => {
     switch (activeTab) {
       case "History":
@@ -37,7 +79,7 @@ const TabModal = ({
                 transactionHistory.map((transaction, index) => (
                   <View key={index} style={WalletScreenStyle.historyItem}>
                     <Text style={WalletScreenStyle.historyItemText}>
-                      {transaction.detail}
+                      {transaction.detail || transaction.txId}
                     </Text>
                   </View>
                 ))
@@ -62,7 +104,6 @@ const TabModal = ({
 
   return (
     <>
-      {/* 数字货币弹窗背景层view 目的是衔接顶部菜单栏与背景的颜色 */}
       <Animated.View
         style={[WalletScreenStyle.cardModalView, { opacity: fadeAnim }]}
       >
@@ -72,7 +113,6 @@ const TabModal = ({
         />
       </Animated.View>
 
-      {/* 数字货币弹窗表面层TabModal view */}
       <Animated.View
         style={[
           WalletScreenStyle.animatedTabContainer,
