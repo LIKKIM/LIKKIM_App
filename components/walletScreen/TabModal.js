@@ -115,36 +115,99 @@ const TabModal = ({
                     </Text>
                   </View>
                 ) : (
-                  transactionHistory.map((transaction, index) => (
-                    <View key={index} style={WalletScreenStyle.historyItem}>
-                      <Text style={WalletScreenStyle.historyItemText}>
-                        {`Amount: ${transaction.amount}`}
-                      </Text>
-                      <Text style={WalletScreenStyle.historyItemText}>
-                        {`From: ${transaction.from}`}
-                      </Text>
-                      <Text style={WalletScreenStyle.historyItemText}>
-                        {`State: ${transaction.state}`}
-                      </Text>
-                      <Text style={WalletScreenStyle.historyItemText}>
-                        {`To: ${transaction.to}`}
-                      </Text>
-                      <Text style={WalletScreenStyle.historyItemText}>
-                        {`Token Contract Address: ${transaction.tokenContractAddress}`}
-                      </Text>
-                      <Text style={WalletScreenStyle.historyItemText}>
-                        {`Transaction Symbol: ${transaction.transactionSymbol}`}
-                      </Text>
-                      <Text style={WalletScreenStyle.historyItemText}>
-                        {`Transaction Time: ${new Date(
-                          transaction.transactionTime * 1000
-                        ).toLocaleString()}`}
-                      </Text>
-                      <Text style={WalletScreenStyle.historyItemText}>
-                        {`TxID: ${transaction.txid}`}
-                      </Text>
-                    </View>
-                  ))
+                  transactionHistory.map((transaction, index) => {
+                    // 判断是 Send 还是 Receive 交易
+                    const transactionType =
+                      transaction.from === selectedCrypto.address
+                        ? "Send"
+                        : "Receive";
+
+                    return (
+                      <View key={index} style={WalletScreenStyle.historyItem}>
+                        <View
+                          style={{
+                            flexDirection: "row", // 设置为行方向
+                            justifyContent: "space-between", // 让两个 Text 之间使用 space-between 布局
+                            alignItems: "center", // 垂直居中对齐
+                          }}
+                        >
+                          <Text
+                            style={[
+                              WalletScreenStyle.historyItemText,
+                              { fontSize: 18, fontWeight: "bold" },
+                            ]}
+                          >
+                            {transactionType === "Send"
+                              ? t("Send")
+                              : t("Receive")}
+                          </Text>
+
+                          <Text
+                            style={[
+                              WalletScreenStyle.historyItemText,
+                              { fontSize: 18, fontWeight: "bold" },
+                            ]}
+                          >
+                            {transaction.amount}{" "}
+                            {`${transaction.transactionSymbol}`}
+                          </Text>
+                        </View>
+
+                        <View
+                          style={{
+                            flexDirection: "row",
+                            justifyContent: "space-between",
+                          }}
+                        >
+                          <Text style={WalletScreenStyle.historyItemText}>
+                            <Text
+                              style={{ fontWeight: "bold" }}
+                            >{`State: `}</Text>
+                            <Text
+                              style={{
+                                color:
+                                  transaction.state === "success"
+                                    ? "#47B480"
+                                    : "inherit",
+                              }}
+                            >
+                              {transaction.state}
+                            </Text>
+                          </Text>
+                        </View>
+
+                        <Text style={WalletScreenStyle.historyItemText}>
+                          <Text
+                            style={{ fontWeight: "bold" }}
+                          >{`Transaction Time: `}</Text>
+                          {`${new Date(
+                            transaction.transactionTime * 1000
+                          ).toLocaleString()}`}
+                        </Text>
+
+                        <Text style={WalletScreenStyle.historyItemText}>
+                          <Text style={{ fontWeight: "bold" }}>{`From: `}</Text>
+                          {transaction.from}
+                        </Text>
+
+                        <Text style={WalletScreenStyle.historyItemText}>
+                          <Text style={{ fontWeight: "bold" }}>{`To: `}</Text>
+                          {transaction.to}
+                        </Text>
+
+                        <Text style={WalletScreenStyle.historyItemText}>
+                          <Text
+                            style={{ fontWeight: "bold" }}
+                          >{`Transaction hash: `}</Text>
+                          {transaction.txid}
+                        </Text>
+
+                        {/* <Text style={WalletScreenStyle.historyItemText}>
+                          {`Token Contract Address: ${transaction.tokenContractAddress}`}
+                        </Text> */}
+                      </View>
+                    );
+                  })
                 )}
               </ScrollView>
             </View>
