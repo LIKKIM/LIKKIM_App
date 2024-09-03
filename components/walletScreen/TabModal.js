@@ -202,9 +202,20 @@ const TabModal = ({
                           {transaction.txid}
                         </Text>
 
-                        {/* <Text style={WalletScreenStyle.historyItemText}>
-                          {`Token Contract Address: ${transaction.tokenContractAddress}`}
-                        </Text> */}
+                        {/* 添加 Network Fee 和 Block Height */}
+                        <Text style={WalletScreenStyle.historyItemText}>
+                          <Text
+                            style={{ fontWeight: "bold" }}
+                          >{`Network Fee: `}</Text>
+                          {transaction.txFee}
+                        </Text>
+
+                        <Text style={WalletScreenStyle.historyItemText}>
+                          <Text
+                            style={{ fontWeight: "bold" }}
+                          >{`Block Height: `}</Text>
+                          {transaction.height}
+                        </Text>
                       </View>
                     );
                   })
