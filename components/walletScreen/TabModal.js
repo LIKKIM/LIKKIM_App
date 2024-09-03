@@ -32,13 +32,13 @@ const TabModal = ({
                 "Content-Type": "application/json",
               },
               body: JSON.stringify({
-                chainShortName: "TRON",
-                address: "TN121JdH9t2y7qjuExHrYMdJA5RHJXdaZK",
+                chainShortName: "TRON", // 区块链的简称
+                address: "TXAq2qZCAdgAbQmbaYhx213P2JjhKQbbTZ",
                 protocolType: "token_20",
               }),
             }
           );
-          //     chainShortName: selectedCrypto.shortName,
+          //    chainShortName: selectedCrypto.shortName,
           //    address: selectedCrypto.address,
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
