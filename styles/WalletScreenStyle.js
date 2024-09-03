@@ -318,8 +318,12 @@ const WalletScreenStyles = (isDarkMode) => {
     historyItemText: {
       fontSize: 16,
       color: textColor,
+      marginBottom: 10,
     },
-
+    historyList: {
+      width: 300,
+      marginBottom: 20,
+    },
     historyItem: {
       padding: 10,
       borderBottomWidth: 1,

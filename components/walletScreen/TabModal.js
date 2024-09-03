@@ -94,46 +94,60 @@ const TabModal = ({
             <Text style={WalletScreenStyle.historyTitle}>
               {t("Transaction History")}
             </Text>
-            <ScrollView
-              contentContainerStyle={WalletScreenStyle.historyContainer}
+            <View
+              style={{
+                height: 280,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
             >
-              {transactionHistory.length === 0 ? (
-                <Text style={WalletScreenStyle.noHistoryText}>
-                  {t("No Histories")}
-                </Text>
-              ) : (
-                transactionHistory.map((transaction, index) => (
-                  <View key={index} style={WalletScreenStyle.historyItem}>
-                    <Text style={WalletScreenStyle.historyItemText}>
-                      {`Amount: ${transaction.amount}`}
-                    </Text>
-                    <Text style={WalletScreenStyle.historyItemText}>
-                      {`From: ${transaction.from}`}
-                    </Text>
-                    <Text style={WalletScreenStyle.historyItemText}>
-                      {`State: ${transaction.state}`}
-                    </Text>
-                    <Text style={WalletScreenStyle.historyItemText}>
-                      {`To: ${transaction.to}`}
-                    </Text>
-                    <Text style={WalletScreenStyle.historyItemText}>
-                      {`Token Contract Address: ${transaction.tokenContractAddress}`}
-                    </Text>
-                    <Text style={WalletScreenStyle.historyItemText}>
-                      {`Transaction Symbol: ${transaction.transactionSymbol}`}
-                    </Text>
-                    <Text style={WalletScreenStyle.historyItemText}>
-                      {`Transaction Time: ${new Date(
-                        transaction.transactionTime * 1000
-                      ).toLocaleString()}`}
-                    </Text>
-                    <Text style={WalletScreenStyle.historyItemText}>
-                      {`TxID: ${transaction.txid}`}
+              <ScrollView style={WalletScreenStyle.historyList}>
+                {transactionHistory.length === 0 ? (
+                  <View
+                    style={{
+                      height: 280,
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Text style={WalletScreenStyle.noHistoryText}>
+                      {t("No Histories")}
                     </Text>
                   </View>
-                ))
-              )}
-            </ScrollView>
+                ) : (
+                  transactionHistory.map((transaction, index) => (
+                    <View key={index} style={WalletScreenStyle.historyItem}>
+                      <Text style={WalletScreenStyle.historyItemText}>
+                        {`Amount: ${transaction.amount}`}
+                      </Text>
+                      <Text style={WalletScreenStyle.historyItemText}>
+                        {`From: ${transaction.from}`}
+                      </Text>
+                      <Text style={WalletScreenStyle.historyItemText}>
+                        {`State: ${transaction.state}`}
+                      </Text>
+                      <Text style={WalletScreenStyle.historyItemText}>
+                        {`To: ${transaction.to}`}
+                      </Text>
+                      <Text style={WalletScreenStyle.historyItemText}>
+                        {`Token Contract Address: ${transaction.tokenContractAddress}`}
+                      </Text>
+                      <Text style={WalletScreenStyle.historyItemText}>
+                        {`Transaction Symbol: ${transaction.transactionSymbol}`}
+                      </Text>
+                      <Text style={WalletScreenStyle.historyItemText}>
+                        {`Transaction Time: ${new Date(
+                          transaction.transactionTime * 1000
+                        ).toLocaleString()}`}
+                      </Text>
+                      <Text style={WalletScreenStyle.historyItemText}>
+                        {`TxID: ${transaction.txid}`}
+                      </Text>
+                    </View>
+                  ))
+                )}
+              </ScrollView>
+            </View>
           </>
         );
       case "Prices":
