@@ -725,8 +725,8 @@ const WalletScreenStyles = (isDarkMode) => {
       fontSize: 16,
     },
 
-    disableText: {
-      color: "#000000", // 确认按钮的文字颜色
+    disabledText: {
+      color: "#aaa", // 确认按钮的文字颜色
       fontSize: 16,
     },
     QRImg: {

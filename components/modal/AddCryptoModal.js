@@ -1,5 +1,5 @@
 // AddCryptoModal.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -26,13 +26,31 @@ const AddCryptoModal = ({
   chainCategories,
 }) => {
   const [selectedChain, setSelectedChain] = useState("All"); // 状态追踪选中的链标签
-  const [selectedCrypto, setSelectedCrypto] = useState(null); // 状态追踪用户选中的加密货币
+  const [selectedCryptos, setSelectedCryptos] = useState([]); // 用于存储选中的加密货币
 
   // 通过选中的链标签过滤加密货币
   const filteredByChain =
     selectedChain === "All"
       ? filteredCryptos
       : filteredCryptos.filter((crypto) => crypto.chain === selectedChain);
+
+  // 当模态框打开时重置已选的加密货币项
+  useEffect(() => {
+    if (visible) {
+      setSelectedCryptos([]); // 每次打开模态框时重置选择项
+    }
+  }, [visible]);
+
+  // 处理多选功能
+  const toggleSelectCrypto = (crypto) => {
+    if (selectedCryptos.includes(crypto)) {
+      // 如果已选中，取消选择
+      setSelectedCryptos(selectedCryptos.filter((c) => c !== crypto));
+    } else {
+      // 如果未选中，添加到数组
+      setSelectedCryptos([...selectedCryptos, crypto]);
+    }
+  };
 
   return (
     <Modal
@@ -115,14 +133,13 @@ const AddCryptoModal = ({
                 style={[
                   styles.addCryptoButton,
                   {
-                    //     backgroundColor:
-                    //       selectedCrypto === crypto ? "#E5E1E9" : "#f0f0f0", // 动态改变背景颜色
-                    borderWidth: selectedCrypto === crypto ? 2 : 2, // 选中时增加边框宽度，未选中时无边框
-                    borderColor:
-                      selectedCrypto === crypto ? "#8E80F0" : "transparent", // 选中时边框颜色为 #8E80F0
+                    borderWidth: selectedCryptos.includes(crypto) ? 2 : 2, // 选中时增加边框宽度，未选中时无边框
+                    borderColor: selectedCryptos.includes(crypto)
+                      ? "#8E80F0"
+                      : "transparent", // 选中时边框颜色为 #8E80F0
                   },
                 ]}
-                onPress={() => setSelectedCrypto(crypto)} // 设置选中的货币
+                onPress={() => toggleSelectCrypto(crypto)} // 切换选中状态
               >
                 <ImageBackground
                   source={crypto.cardImage}
@@ -173,19 +190,23 @@ const AddCryptoModal = ({
           {/* 确认按钮 */}
           <TouchableOpacity
             style={[
-              selectedCrypto ? styles.addModalButton : styles.disabledButton, // 按选择状态改变按钮样式
+              selectedCryptos.length > 0
+                ? styles.addModalButton
+                : styles.disabledButton, // 按选择状态改变按钮样式
             ]}
             onPress={() => {
-              if (selectedCrypto) {
-                handleAddCrypto(selectedCrypto); // 仅当选中了货币才执行添加
-                setSelectedCrypto(null); // 重置选中的货币
+              if (selectedCryptos.length > 0) {
+                selectedCryptos.forEach((crypto) => handleAddCrypto(crypto)); // 处理所有选中的货币
+                setSelectedCryptos([]); // 重置选中的货币
               }
             }}
-            disabled={!selectedCrypto} // 如果未选择数字货币，禁用按钮
+            disabled={selectedCryptos.length === 0} // 如果未选择任何货币，禁用按钮
           >
             <Text
               style={[
-                selectedCrypto ? styles.confirmText : styles.disabledText,
+                selectedCryptos.length > 0
+                  ? styles.confirmText
+                  : styles.disabledText,
               ]}
             >
               {t("Confirm")}
