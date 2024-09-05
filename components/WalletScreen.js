@@ -198,17 +198,17 @@ function WalletScreen({ route, navigation }) {
   const [bleVisible, setBleVisible] = useState(false); // New state for Bluetooth modal
 
   const getConvertedBalance = (cardBalance, cardShortName) => {
-    // 从汇率中获取目标货币的汇率
-    const rate = exchangeRates[currencyUnit];
-    const cryptoToUsdRate = exchangeRates[cardShortName] || 1;
+    // 获取到当前的法定货币汇率
+    const rate = exchangeRates[currencyUnit]; // 当前法定货币的汇率（例如 USD, CNY 等）
+    const cryptoToUsdRate = exchangeRates[cardShortName] || 1; // 加密货币兑换 USD 的汇率
 
     if (!rate) {
-      return cardBalance; // 如果找不到汇率，则返回原始余额
+      return cardBalance; // 如果没有找到汇率，返回原始余额
     }
 
-    // 计算转换后的余额：首先将加密货币转换为 USD，再乘以汇率
+    // 将加密货币余额转换为 USD，再转换为目标货币
     const usdBalance = cardBalance * cryptoToUsdRate;
-    return (usdBalance * rate).toFixed(2); // 转换为目标货币并保留两位小数
+    return (usdBalance * rate).toFixed(2); // 返回法定货币的余额并保留两位小数
   };
 
   useEffect(() => {
