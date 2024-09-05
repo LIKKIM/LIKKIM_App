@@ -166,7 +166,7 @@ export const CryptoProvider = ({ children }) => {
       const data = await response.json();
       setExchangeRates(data.rates); // 保存汇率数据
       await AsyncStorage.setItem("exchangeRates", JSON.stringify(data.rates)); // 保存到AsyncStorage
-      console.log("最新汇率: ", data.rates);
+      //  console.log("最新汇率: ", data.rates);
     } catch (error) {
       console.error("获取汇率数据失败: ", error);
     }
