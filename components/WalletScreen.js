@@ -47,6 +47,7 @@ function WalletScreen({ route, navigation }) {
   // 使用状态
   const [receivedVerificationCode, setReceivedVerificationCode] = useState("");
   const {
+    exchangeRates,
     initialAdditionalCryptos,
     setInitialAdditionalCryptos,
     usdtCrypto,
@@ -195,6 +196,20 @@ function WalletScreen({ route, navigation }) {
   };
 
   const [bleVisible, setBleVisible] = useState(false); // New state for Bluetooth modal
+
+  const getConvertedBalance = (cardBalance, cardShortName) => {
+    // 从汇率中获取目标货币的汇率
+    const rate = exchangeRates[currencyUnit];
+    const cryptoToUsdRate = exchangeRates[cardShortName] || 1;
+
+    if (!rate) {
+      return cardBalance; // 如果找不到汇率，则返回原始余额
+    }
+
+    // 计算转换后的余额：首先将加密货币转换为 USD，再乘以汇率
+    const usdBalance = cardBalance * cryptoToUsdRate;
+    return (usdBalance * rate).toFixed(2); // 转换为目标货币并保留两位小数
+  };
 
   useEffect(() => {
     console.log("Updated cryptoCards:", cryptoCards);
@@ -1761,7 +1776,10 @@ function WalletScreen({ route, navigation }) {
                             isBlackText && { color: "#121518" },
                           ]}
                         >
-                          {`${card.balance} ${currencyUnit}`}
+                          {`${getConvertedBalance(
+                            card.balance,
+                            card.shortName
+                          )} ${currencyUnit}`}
                         </Text>
                       </View>
                     </>
@@ -1789,9 +1807,14 @@ function WalletScreen({ route, navigation }) {
                                 isBlackText && { color: "#121518" },
                               ]}
                             >
-                              {`${card.balance} ${
-                                i === 0 ? card.shortName : currencyUnit
-                              }`}
+                              {`${
+                                i === 0
+                                  ? card.balance
+                                  : getConvertedBalance(
+                                      card.balance,
+                                      card.shortName
+                                    )
+                              } ${i === 0 ? card.shortName : currencyUnit}`}
                             </Text>
                           )
                         )}
