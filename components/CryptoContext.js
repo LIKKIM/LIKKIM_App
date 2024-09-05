@@ -6,6 +6,9 @@ import { initialAdditionalCryptos } from "../config/cryptosData";
 export const CryptoContext = createContext();
 export const DarkModeContext = createContext();
 
+// 汇率API的URL
+const EXCHANGE_RATE_API_URL = "https://api.exchangerate-api.com/v4/latest/USD";
+
 const currencies = [
   { name: "Australian Dollar", shortName: "AUD" },
   { name: "Bahraini Dinar", shortName: "BHD" },
@@ -56,12 +59,12 @@ export const usdtCrypto = {
   address: "TN121JdH9t2y7qjuExHrYMdJA5RHJXdaZK",
   chain: "Tron",
   chainShortName: "TRX",
-  queryChainShortName: "TRON", // 用于查询的字段
+  queryChainShortName: "TRON",
   chainIcon: require("../assets/icon/TRXIcon.png"),
-  tokenType: "TRC20", // 代币类型
-  fee: "2.0", // 手续费
-  valueUsd: "0.0", // 总美元价值
-  priceUsd: "1.0", // 每个代币的美元价格
+  tokenType: "TRC20",
+  fee: "2.0",
+  valueUsd: "0.0",
+  priceUsd: "1.0",
 };
 
 export const CryptoProvider = ({ children }) => {
@@ -71,7 +74,6 @@ export const CryptoProvider = ({ children }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [currencyUnit, setCurrencyUnit] = useState("USD");
 
-  // 状态管理 initialAdditionalCryptos
   const [initialAdditionalCryptosState, setInitialAdditionalCryptos] = useState(
     initialAdditionalCryptos
   );
@@ -85,16 +87,15 @@ export const CryptoProvider = ({ children }) => {
   const [isAppLaunching, setIsAppLaunching] = useState(true);
   const [cryptoCards, setCryptoCards] = useState([]);
   const [addedCryptos, setAddedCryptos] = useState([]);
+  const [exchangeRates, setExchangeRates] = useState({}); // 添加汇率状态
+
   const handleUpdateCryptoCards = (newCrypto) => {
     setCryptoCards((prevCards) => {
-      // 检查是否已存在相同的卡片
       const cardExists = prevCards.some(
         (card) =>
           card.shortName === newCrypto.shortName &&
           card.chainShortName === newCrypto.chainShortName
       );
-
-      // 如果存在相同的卡片，用新卡片替换旧卡片
       if (cardExists) {
         return prevCards.map((card) =>
           card.shortName === newCrypto.shortName &&
@@ -103,10 +104,8 @@ export const CryptoProvider = ({ children }) => {
             : card
         );
       }
-
-      // 否则，将新卡片添加到列表中
       const updatedCards = [...prevCards, newCrypto];
-      setAddedCryptos(updatedCards); // 更新 addedCryptos 状态
+      setAddedCryptos(updatedCards);
       return updatedCards;
     });
   };
@@ -116,13 +115,10 @@ export const CryptoProvider = ({ children }) => {
       const updatedCryptos = prevCryptos.map((crypto) =>
         crypto.shortName === shortName ? { ...crypto, ...newData } : crypto
       );
-
-      // 持久化更新后的数据
       AsyncStorage.setItem(
         "initialAdditionalCryptos",
         JSON.stringify(updatedCryptos)
       );
-
       return updatedCryptos;
     });
   };
@@ -161,6 +157,18 @@ export const CryptoProvider = ({ children }) => {
       }
       return prevCards;
     });
+  };
+
+  // 汇率获取函数
+  const fetchExchangeRates = async () => {
+    try {
+      const response = await fetch(EXCHANGE_RATE_API_URL);
+      const data = await response.json();
+      setExchangeRates(data.rates); // 保存汇率数据
+      console.log("最新汇率: ", data.rates);
+    } catch (error) {
+      console.error("获取汇率数据失败: ", error);
+    }
   };
 
   useEffect(() => {
@@ -220,7 +228,6 @@ export const CryptoProvider = ({ children }) => {
         if (screenLockPassword !== null)
           setScreenLockPassword(screenLockPassword);
 
-        // 载入 initialAdditionalCryptos 的状态
         const savedInitialCryptos = await AsyncStorage.getItem(
           "initialAdditionalCryptos"
         );
@@ -260,7 +267,6 @@ export const CryptoProvider = ({ children }) => {
         );
         await AsyncStorage.setItem("screenLockPassword", screenLockPassword);
 
-        // 持久化保存 initialAdditionalCryptos 的状态
         await AsyncStorage.setItem(
           "initialAdditionalCryptos",
           JSON.stringify(initialAdditionalCryptosState)
@@ -279,28 +285,31 @@ export const CryptoProvider = ({ children }) => {
     verifiedDevices,
     isScreenLockEnabled,
     screenLockPassword,
-    initialAdditionalCryptosState, // 监控这个状态的变化
+    initialAdditionalCryptosState,
   ]);
 
-  // 切换锁屏状态
+  // 每小时更新汇率
+  useEffect(() => {
+    fetchExchangeRates();
+    const intervalId = setInterval(fetchExchangeRates, 3600000);
+    return () => clearInterval(intervalId); // 清理定时器
+  }, []);
+
   const toggleScreenLock = async (enabled) => {
-    setIsAppLaunching(false); // 先设置 isAppLaunching 为 false
+    setIsAppLaunching(false);
     setIsScreenLockEnabled(enabled);
     await AsyncStorage.multiSet([
       ["screenLockEnabled", JSON.stringify(enabled)],
-      ["isAppLaunching", JSON.stringify(false)], // 持久化 isAppLaunching 状态
+      ["isAppLaunching", JSON.stringify(false)],
     ]);
   };
 
-  // 更改锁屏密码
   const changeScreenLockPassword = async (newPassword) => {
     setScreenLockPassword(newPassword);
     await AsyncStorage.setItem("screenLockPassword", newPassword);
   };
 
-  // 在启动时打印 TRX 地址
   useEffect(() => {
-    // 从 initialAdditionalCryptosState 查找 TRX 地址
     const trxCrypto = initialAdditionalCryptosState.find(
       (crypto) => crypto.chainShortName === "TRX"
     );
@@ -314,7 +323,6 @@ export const CryptoProvider = ({ children }) => {
       console.log("initialAdditionalCryptosState 中的 TRX 地址未找到。");
     }
 
-    // 检查 usdtCrypto 中的 TRX 地址
     if (usdtCrypto.chainShortName === "TRX") {
       console.log("usdtCrypto 中的 TRX 地址:", usdtCrypto.address);
     } else {
@@ -332,13 +340,12 @@ export const CryptoProvider = ({ children }) => {
         setCurrencyUnit,
         currencies,
         usdtCrypto,
-        initialAdditionalCryptos: initialAdditionalCryptosState, // 提供更新后的 initialAdditionalCryptos
-        setInitialAdditionalCryptos, // 提供 setInitialAdditionalCryptos
+        initialAdditionalCryptos: initialAdditionalCryptosState,
+        setInitialAdditionalCryptos,
         additionalCryptos,
         setAdditionalCryptos,
-
         setAddedCryptos,
-        addCryptoCard, // 提供 addCryptoCard 方法
+        addCryptoCard,
         isVerificationSuccessful,
         setIsVerificationSuccessful,
         verifiedDevices,
@@ -354,6 +361,7 @@ export const CryptoProvider = ({ children }) => {
         addedCryptos,
         setCryptoCards,
         handleUpdateCryptoCards,
+        exchangeRates, // 提供汇率数据
       }}
     >
       <DarkModeContext.Provider value={{ isDarkMode, setIsDarkMode }}>
