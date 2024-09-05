@@ -165,9 +165,22 @@ export const CryptoProvider = ({ children }) => {
       const response = await fetch(EXCHANGE_RATE_API_URL);
       const data = await response.json();
       setExchangeRates(data.rates); // 保存汇率数据
+      await AsyncStorage.setItem("exchangeRates", JSON.stringify(data.rates)); // 保存到AsyncStorage
       console.log("最新汇率: ", data.rates);
     } catch (error) {
       console.error("获取汇率数据失败: ", error);
+    }
+  };
+
+  // 加载本地存储的汇率数据
+  const loadExchangeRates = async () => {
+    try {
+      const savedRates = await AsyncStorage.getItem("exchangeRates");
+      if (savedRates !== null) {
+        setExchangeRates(JSON.parse(savedRates)); // 从本地加载汇率
+      }
+    } catch (error) {
+      console.error("加载汇率数据失败: ", error);
     }
   };
 
@@ -234,6 +247,9 @@ export const CryptoProvider = ({ children }) => {
         if (savedInitialCryptos !== null) {
           setInitialAdditionalCryptos(JSON.parse(savedInitialCryptos));
         }
+
+        // 加载本地汇率数据
+        await loadExchangeRates();
       } catch (error) {
         console.error("Error loading settings: ", error);
       } finally {
@@ -290,8 +306,8 @@ export const CryptoProvider = ({ children }) => {
 
   // 每小时更新汇率
   useEffect(() => {
-    fetchExchangeRates();
-    const intervalId = setInterval(fetchExchangeRates, 3600000);
+    fetchExchangeRates(); // 初次加载时获取汇率
+    const intervalId = setInterval(fetchExchangeRates, 3600000); // 每小时更新汇率
     return () => clearInterval(intervalId); // 清理定时器
   }, []);
 
