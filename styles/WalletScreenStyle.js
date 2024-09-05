@@ -690,9 +690,8 @@ const WalletScreenStyles = (isDarkMode) => {
       padding: 35,
       alignItems: "center",
     },
-
     modalButton: {
-      backgroundColor: buttonBackgroundColor,
+      backgroundColor: BluetoothBtnColor,
       padding: 10,
       width: "100%",
       justifyContent: "center",
@@ -701,7 +700,35 @@ const WalletScreenStyles = (isDarkMode) => {
       alignItems: "center",
       marginBottom: 20,
     },
+    addModalButton: {
+      backgroundColor: BluetoothBtnColor,
+      padding: 10,
+      width: "100%",
+      justifyContent: "center",
+      borderRadius: 30,
+      height: 60,
+      alignItems: "center",
+      marginTop: 20,
+    },
+    disabledButton: {
+      backgroundColor: buttonBackgroundColor,
+      padding: 10,
+      width: "100%",
+      justifyContent: "center",
+      borderRadius: 30,
+      height: 60,
+      alignItems: "center",
+      marginTop: 20,
+    },
+    confirmText: {
+      color: "#ffffff", // 确认按钮的文字颜色
+      fontSize: 16,
+    },
 
+    disableText: {
+      color: "#000000", // 确认按钮的文字颜色
+      fontSize: 16,
+    },
     QRImg: {
       width: 25,
       height: 25,
