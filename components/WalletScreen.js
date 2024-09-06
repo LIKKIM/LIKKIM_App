@@ -1246,6 +1246,88 @@ function WalletScreen({ route, navigation }) {
       fetchPriceChanges();
     }
   }, [cryptoCards]);
+  // 停止监听
+  useEffect(() => {
+    if (!pinModalVisible) {
+      stopMonitoringVerificationCode();
+    }
+  }, [pinModalVisible]);
+
+  useEffect(() => {
+    if (route.params?.showAddModal) {
+      setAddCryptoVisible(true);
+    }
+    if (route.params?.showAddIconModal) {
+      setAddIconModalVisible(true);
+    }
+    if (route.params?.showDeleteConfirmModal) {
+      setDeleteConfirmVisible(true);
+    } else {
+      setDeleteConfirmVisible(false);
+    }
+  }, [route.params]);
+
+  useEffect(() => {
+    setCryptoCount(cryptoCards.length);
+  }, [cryptoCards.length]);
+
+  useEffect(() => {
+    navigation.setParams({
+      isModalVisible: modalVisible,
+      showAddModal: addCryptoVisible,
+    });
+  }, [modalVisible, addCryptoVisible]);
+  useEffect(() => {
+    Animated.timing(fadeAnim, {
+      toValue: modalVisible ? 1 : 0,
+      duration: 300,
+      easing: Easing.ease,
+      useNativeDriver: true,
+    }).start();
+  }, [modalVisible, fadeAnim]);
+
+  useEffect(() => {
+    if (processModalVisible) {
+      setShowLetsGoButton(false);
+      setProcessMessages([t("Creating your wallet")]);
+      const timer1 = setTimeout(() => {
+        setProcessMessages((prevMessages) => [
+          ...prevMessages,
+          t("Generating your accounts"),
+        ]);
+      }, 1000);
+      const timer2 = setTimeout(() => {
+        setProcessMessages((prevMessages) => [
+          ...prevMessages,
+          t("Encrypting your data"),
+        ]);
+      }, 2000);
+      const timer3 = setTimeout(() => {
+        setProcessMessages((prevMessages) => [
+          ...prevMessages,
+          t("Your wallet is now ready"),
+        ]);
+      }, 3000);
+      const timer4 = setTimeout(() => {
+        setShowLetsGoButton(true);
+      }, 4000);
+      return () => {
+        clearTimeout(timer1);
+        clearTimeout(timer2);
+        clearTimeout(timer3);
+        clearTimeout(timer4);
+      };
+    }
+  }, [processModalVisible, t]);
+
+  useEffect(() => {
+    if (modalVisible) {
+      scrollViewRef.current.scrollTo({ y: 0, animated: true });
+      setTimeout(() => {
+        scrollYOffset.current = 0;
+      }, 300); // 确保在滚动完成后再设置偏移量
+    }
+  }, [modalVisible]);
 
   const handlePinSubmit = async () => {
     // 首先关闭 "Enter PIN to Connect" 的模态框
@@ -1340,38 +1422,6 @@ function WalletScreen({ route, navigation }) {
     navigation.setParams({ showDeleteConfirmModal: false });
   };
 
-  // 停止监听
-  useEffect(() => {
-    if (!pinModalVisible) {
-      stopMonitoringVerificationCode();
-    }
-  }, [pinModalVisible]);
-
-  useEffect(() => {
-    if (route.params?.showAddModal) {
-      setAddCryptoVisible(true);
-    }
-    if (route.params?.showAddIconModal) {
-      setAddIconModalVisible(true);
-    }
-    if (route.params?.showDeleteConfirmModal) {
-      setDeleteConfirmVisible(true);
-    } else {
-      setDeleteConfirmVisible(false);
-    }
-  }, [route.params]);
-
-  useEffect(() => {
-    setCryptoCount(cryptoCards.length);
-  }, [cryptoCards.length]);
-
-  useEffect(() => {
-    navigation.setParams({
-      isModalVisible: modalVisible,
-      showAddModal: addCryptoVisible,
-    });
-  }, [modalVisible, addCryptoVisible]);
-
   const animateCard = (index) => {
     setSelectedCardIndex(index);
     cardRefs.current[index]?.measure((fx, fy, width, height, px, py) => {
@@ -1433,58 +1483,6 @@ function WalletScreen({ route, navigation }) {
       });
     });
   };
-
-  useEffect(() => {
-    Animated.timing(fadeAnim, {
-      toValue: modalVisible ? 1 : 0,
-      duration: 300,
-      easing: Easing.ease,
-      useNativeDriver: true,
-    }).start();
-  }, [modalVisible, fadeAnim]);
-
-  useEffect(() => {
-    if (processModalVisible) {
-      setShowLetsGoButton(false);
-      setProcessMessages([t("Creating your wallet")]);
-      const timer1 = setTimeout(() => {
-        setProcessMessages((prevMessages) => [
-          ...prevMessages,
-          t("Generating your accounts"),
-        ]);
-      }, 1000);
-      const timer2 = setTimeout(() => {
-        setProcessMessages((prevMessages) => [
-          ...prevMessages,
-          t("Encrypting your data"),
-        ]);
-      }, 2000);
-      const timer3 = setTimeout(() => {
-        setProcessMessages((prevMessages) => [
-          ...prevMessages,
-          t("Your wallet is now ready"),
-        ]);
-      }, 3000);
-      const timer4 = setTimeout(() => {
-        setShowLetsGoButton(true);
-      }, 4000);
-      return () => {
-        clearTimeout(timer1);
-        clearTimeout(timer2);
-        clearTimeout(timer3);
-        clearTimeout(timer4);
-      };
-    }
-  }, [processModalVisible, t]);
-
-  useEffect(() => {
-    if (modalVisible) {
-      scrollViewRef.current.scrollTo({ y: 0, animated: true });
-      setTimeout(() => {
-        scrollYOffset.current = 0;
-      }, 300); // 确保在滚动完成后再设置偏移量
-    }
-  }, [modalVisible]);
 
   const handleCardPress = (cryptoName, index) => {
     const crypto = cryptoCards.find((card) => card.name === cryptoName);
