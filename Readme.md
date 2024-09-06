@@ -2,6 +2,10 @@
 
 `ColdWallet` 是一个专注于数字货币交易的移动应用程序，使用 React Native 和 ESP32 设备开发。该应用程序支持发送和接收各种数字货币，保证了交易的安全性和便捷性。
 
+Icon 打包 https://icon.kitchen/i/H4sIAAAAAAAAA6tWKkvMKU0tVrKqVkpJLMoOyUjNTVWySkvMKU6t1VHKzU8pzQHJRisl5qUU5WemKOkoZeYXA8ny1CSl2FoApT8%2BHkAAAAA%3D
+
+launch 背景 https://apetools.webprofusion.com/#/
+
 ## 核心功能和接口 🚀
 
 ### 1. 钱包地址生成接口(接受数字货币)
