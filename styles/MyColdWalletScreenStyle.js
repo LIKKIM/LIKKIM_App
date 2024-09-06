@@ -234,7 +234,6 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       color: "#FF5252",
       fontSize: 14,
       marginBottom: 10,
-      alignItems: "left",
       width: 280,
     },
     eyeIcon: {

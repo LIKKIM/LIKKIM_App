@@ -9,6 +9,7 @@ import {
   ScrollView,
   Platform,
   Modal,
+  Image,
 } from "react-native";
 import { CryptoContext, DarkModeContext } from "./CryptoContext";
 import { useTranslation } from "react-i18next"; // 导入国际化库
@@ -91,6 +92,10 @@ const ScreenLock = () => {
     >
       <View style={[styles.container, themeStyles.container]}>
         <View style={styles.header}>
+          <Image
+            source={require("../assets/Logo@500.png")}
+            style={{ width: 50, height: 50, marginBottom: 20 }}
+          />
           <Text style={[styles.title, themeStyles.title]}>{t("LIKKIM")}</Text>
           <Text style={[styles.subTitle, themeStyles.subTitle]}>
             {t("Enter Password to Unlock")}
