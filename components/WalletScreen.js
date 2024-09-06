@@ -1731,17 +1731,36 @@ function WalletScreen({ route, navigation }) {
                   )}
 
                   <View style={WalletScreenStyle.cardInfoContainer}>
-                    {["cardName", "chainText"].map((textStyle, i) => (
-                      <Text
-                        key={i}
-                        style={[
-                          WalletScreenStyle[textStyle],
-                          { color: isBlackText ? "#333" : "#eee" },
-                        ]}
-                      >
-                        {i === 0 ? card.name : card.chain}
-                      </Text>
-                    ))}
+                    {["cardName", "chainText"].map((textStyle, i) =>
+                      i === 0 ? (
+                        <Text
+                          key={i}
+                          style={[
+                            WalletScreenStyle[textStyle],
+                            { color: isBlackText ? "#333" : "#eee" },
+                          ]}
+                        >
+                          {card.name}
+                        </Text>
+                      ) : (
+                        <View
+                          key={i}
+                          style={[
+                            WalletScreenStyle.chainContainer, // 新增按钮样式
+                            // 根据主题颜色改变按钮背景色
+                          ]}
+                        >
+                          <Text
+                            style={[
+                              WalletScreenStyle.chainCardText,
+                              { color: isBlackText ? "#333" : "#eee" },
+                            ]}
+                          >
+                            {card.chain}
+                          </Text>
+                        </View>
+                      )
+                    )}
                   </View>
 
                   <Text
