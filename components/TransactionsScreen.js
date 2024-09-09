@@ -32,6 +32,7 @@ import BluetoothModal from "./modal/BluetoothModal";
 import AmountModal from "./modal/AmountModal";
 import SelectCryptoModal from "./modal/SelectCryptoModal";
 import ReceiveAddressModal from "./modal/ReceiveAddressModal";
+import PinModal from "./modal/PinModal";
 import { BleManager, BleErrorCode } from "react-native-ble-plx";
 const serviceUUID = "0000FFE0-0000-1000-8000-00805F9B34FB";
 const writeCharacteristicUUID = "0000FFE2-0000-1000-8000-00805F9B34FB";
@@ -1769,55 +1770,16 @@ function TransactionsScreen() {
         />
 
         {/* PIN码输入modal窗口 */}
-        <Modal
-          animationType="slide"
-          transparent={true}
+        <PinModal
           visible={pinModalVisible}
-          onRequestClose={() => setPinModalVisible(false)}
-        >
-          <BlurView intensity={10} style={TransactionsScreenStyle.centeredView}>
-            <View style={TransactionsScreenStyle.pinModalView}>
-              <View style={{ alignItems: "center" }}>
-                <Text style={TransactionsScreenStyle.pinModalTitle}>
-                  {t("Enter PIN to Connect")}
-                </Text>
-                <Text style={TransactionsScreenStyle.modalSubtitle}>
-                  {t(
-                    "Use the PIN code to establish a secure connection with your LIKKIM hardware."
-                  )}
-                </Text>
-              </View>
-              <TextInput
-                style={TransactionsScreenStyle.passwordInput}
-                placeholder={t("Enter PIN")}
-                placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
-                keyboardType="numeric"
-                secureTextEntry
-                onChangeText={setPinCode}
-                value={pinCode}
-                autoFocus={true}
-              />
-              <View style={{ width: "100%" }}>
-                <TouchableOpacity
-                  style={TransactionsScreenStyle.submitButton}
-                  onPress={() => handlePinSubmit(selectedDevice, pinCode)}
-                >
-                  <Text style={TransactionsScreenStyle.submitButtonText}>
-                    {t("Submit")}
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={TransactionsScreenStyle.cancelButton}
-                  onPress={() => setPinModalVisible(false)}
-                >
-                  <Text style={TransactionsScreenStyle.cancelButtonText}>
-                    {t("Cancel")}
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </BlurView>
-        </Modal>
+          pinCode={pinCode}
+          setPinCode={setPinCode}
+          onSubmit={handlePinSubmit}
+          onCancel={() => setPinModalVisible(false)}
+          styles={TransactionsScreenStyle}
+          isDarkMode={isDarkMode}
+          t={t}
+        />
 
         {/* 验证模态框 */}
         <VerificationModal
