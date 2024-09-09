@@ -1443,41 +1443,42 @@ function TransactionsScreen() {
           <Text style={TransactionsScreenStyle.historyTitle}>
             {t("Transaction History")}
           </Text>
+          <ScrollView>
+            {transactionHistory.length === 0 ? (
+              <Text style={TransactionsScreenStyle.noHistoryText}>
+                {t("No Histories")}
+              </Text>
+            ) : (
+              transactionHistory.map((transaction, index) => (
+                <View key={index} style={TransactionsScreenStyle.historyItem}>
+                  <Text style={TransactionsScreenStyle.historyItemText}>
+                    {transaction.amount} {`${transaction.transactionSymbol}`}
+                  </Text>
 
-          {transactionHistory.length === 0 ? (
-            <Text style={TransactionsScreenStyle.noHistoryText}>
-              {t("No Histories")}
-            </Text>
-          ) : (
-            transactionHistory.map((transaction, index) => (
-              <View key={index} style={TransactionsScreenStyle.historyItem}>
-                <Text style={TransactionsScreenStyle.historyItemText}>
-                  {transaction.amount} {`${transaction.transactionSymbol}`}
-                </Text>
-
-                <Text style={TransactionsScreenStyle.historyItemText}>
-                  {`${new Date(
-                    transaction.transactionTime * 1000
-                  ).toLocaleString()}`}
-                </Text>
-                <Text style={TransactionsScreenStyle.historyItemText}>
-                  {transaction.from}
-                </Text>
-                <Text style={TransactionsScreenStyle.historyItemText}>
-                  {transaction.to}
-                </Text>
-                <Text style={TransactionsScreenStyle.historyItemText}>
-                  {transaction.txid}
-                </Text>
-                <Text style={TransactionsScreenStyle.historyItemText}>
-                  {transaction.txFee}
-                </Text>
-                <Text style={TransactionsScreenStyle.historyItemText}>
-                  {transaction.height}
-                </Text>
-              </View>
-            ))
-          )}
+                  <Text style={TransactionsScreenStyle.historyItemText}>
+                    {`${new Date(
+                      transaction.transactionTime * 1000
+                    ).toLocaleString()}`}
+                  </Text>
+                  <Text style={TransactionsScreenStyle.historyItemText}>
+                    {transaction.from}
+                  </Text>
+                  <Text style={TransactionsScreenStyle.historyItemText}>
+                    {transaction.to}
+                  </Text>
+                  <Text style={TransactionsScreenStyle.historyItemText}>
+                    {transaction.txid}
+                  </Text>
+                  <Text style={TransactionsScreenStyle.historyItemText}>
+                    {transaction.txFee}
+                  </Text>
+                  <Text style={TransactionsScreenStyle.historyItemText}>
+                    {transaction.height}
+                  </Text>
+                </View>
+              ))
+            )}
+          </ScrollView>
         </View>
 
         {/* 输入地址的 Modal */}
