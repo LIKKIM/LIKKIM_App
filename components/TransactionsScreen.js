@@ -30,6 +30,7 @@ import { Buffer } from "buffer";
 import VerificationModal from "./modal/VerificationModal";
 import BluetoothModal from "./modal/BluetoothModal";
 import AmountModal from "./modal/AmountModal";
+import SelectCryptoModal from "./modal/SelectCryptoModal";
 import { BleManager, BleErrorCode } from "react-native-ble-plx";
 const serviceUUID = "0000FFE0-0000-1000-8000-00805F9B34FB";
 const writeCharacteristicUUID = "0000FFE2-0000-1000-8000-00805F9B34FB";
@@ -1723,73 +1724,16 @@ function TransactionsScreen() {
         </Modal>
 
         {/* 选择接收的加密货币模态窗口 */}
-        <Modal
-          animationType="slide"
-          transparent={true}
+        <SelectCryptoModal
           visible={modalVisible}
           onRequestClose={() => setModalVisible(false)}
-        >
-          <BlurView intensity={10} style={TransactionsScreenStyle.centeredView}>
-            <View style={TransactionsScreenStyle.modalView}>
-              <Text style={TransactionsScreenStyle.TransactionModalTitle}>
-                {addedCryptos.length === 0
-                  ? t("No cryptocurrencies available. Please add wallet first.")
-                  : operationType === "send"
-                  ? t("Choose the cryptocurrency to send:")
-                  : t("Choose the cryptocurrency to receive:")}
-              </Text>
-              {addedCryptos.length === 0 ? (
-                <View
-                  style={{
-                    justifyContent: "center",
-                    alignItems: "center",
-                    height: 260,
-                  }}
-                >
-                  <Image
-                    source={require("../assets/gif/Empty.gif")}
-                    style={{ width: 200, height: 200, marginBottom: 40 }}
-                  />
-                </View>
-              ) : (
-                <ScrollView
-                  contentContainerStyle={{ alignItems: "center" }}
-                  style={{ maxHeight: 400, width: 320, paddingHorizontal: 20 }}
-                >
-                  {addedCryptos.map((crypto) => (
-                    <TouchableOpacity
-                      key={crypto.shortName}
-                      style={TransactionsScreenStyle.optionButton}
-                      onPress={() => selectCrypto(crypto)}
-                    >
-                      <View
-                        style={{ flexDirection: "row", alignItems: "center" }}
-                      >
-                        {crypto.icon && (
-                          <Image
-                            source={crypto.icon}
-                            style={{ width: 24, height: 24, marginRight: 8 }}
-                          />
-                        )}
-                        <Text style={TransactionsScreenStyle.optionButtonText}>
-                          {crypto.shortName} ({crypto.chain})
-                        </Text>
-                      </View>
-                    </TouchableOpacity>
-                  ))}
-                </ScrollView>
-              )}
-              <TouchableOpacity
-                style={TransactionsScreenStyle.cancelButtonReceive}
-                onPress={() => setModalVisible(false)}
-              >
-                <Text style={TransactionsScreenStyle.cancelButtonText}>
-                  {t("Cancel")}
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </BlurView>
-        </Modal>
+          addedCryptos={addedCryptos}
+          operationType={operationType}
+          selectCrypto={selectCrypto}
+          TransactionsScreenStyle={TransactionsScreenStyle}
+          t={t}
+          setModalVisible={setModalVisible}
+        />
 
         {/* 显示选择的加密货币地址的模态窗口 */}
         <Modal
