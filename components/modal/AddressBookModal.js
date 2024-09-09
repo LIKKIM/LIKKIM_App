@@ -180,7 +180,6 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={{ flex: 1 }}
-        keyboardVerticalOffset={Platform.OS === "ios" ? 64 : 0} // 根据需要调整偏移量
       >
         <BlurView intensity={10} style={styles.centeredView}>
           <TouchableWithoutFeedback
