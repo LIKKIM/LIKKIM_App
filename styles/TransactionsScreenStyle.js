@@ -206,12 +206,13 @@ const TransactionsScreenStyles = (isDarkMode) => {
     historyContainer: {
       marginTop: 22,
       padding: 20,
+      paddingTop: 50,
       backgroundColor: historyContainerBackgroundColor,
       alignItems: "center",
       justifyContent: "center",
       borderRadius: 10,
       width: 360,
-      height: 360,
+      height: 420,
     },
     historyItem: {
       padding: 10,
@@ -221,11 +222,12 @@ const TransactionsScreenStyles = (isDarkMode) => {
     historyItemText: {
       fontSize: 16,
       color: textColor,
+      marginBottom: 10,
     },
     historyTitle: {
       position: "absolute",
       left: 20,
-      top: 20,
+      top: 16,
       fontSize: 16,
       color: textColor,
       fontWeight: "bold",
