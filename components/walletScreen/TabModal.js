@@ -39,8 +39,6 @@ const TabModal = ({
                 "Content-Type": "application/json",
               },
               body: JSON.stringify({
-                //       chainShortName: selectedCrypto.shortName,
-                //       address: selectedCrypto.address,
                 chainShortName: "TRON",
                 address: "TN121JdH9t2y7qjuExHrYMdJA5RHJXdaZK",
                 protocolType: "token_20",
@@ -56,11 +54,20 @@ const TabModal = ({
             );
             setTransactionHistory([]);
           } else {
-            setTransactionHistory(data.data);
+            // 处理数据以添加 transactionType
+            const enhancedData = data.data.map((transaction) => ({
+              ...transaction,
+              transactionType:
+                transaction.from === selectedCrypto.address
+                  ? "Send"
+                  : "Receive",
+            }));
+
+            setTransactionHistory(enhancedData);
             AsyncStorage.setItem(
               "transactionHistory",
-              JSON.stringify(data.data)
-            ); // 保存数据
+              JSON.stringify(enhancedData)
+            ); // 保存调整后的数据
           }
         } catch (error) {
           console.error(
@@ -120,19 +127,13 @@ const TabModal = ({
                   </View>
                 ) : (
                   transactionHistory.map((transaction, index) => {
-                    // 判断是 Send 还是 Receive 交易
-                    const transactionType =
-                      transaction.from === selectedCrypto.address
-                        ? "Send"
-                        : "Receive";
-
                     return (
                       <View key={index} style={WalletScreenStyle.historyItem}>
                         <View
                           style={{
-                            flexDirection: "row", // 设置为行方向
-                            justifyContent: "space-between", // 让两个 Text 之间使用 space-between 布局
-                            alignItems: "center", // 垂直居中对齐
+                            flexDirection: "row",
+                            justifyContent: "space-between",
+                            alignItems: "center",
                           }}
                         >
                           <Text
@@ -141,7 +142,7 @@ const TabModal = ({
                               { fontSize: 18, fontWeight: "bold" },
                             ]}
                           >
-                            {transactionType === "Send"
+                            {transaction.transactionType === "Send"
                               ? t("Send")
                               : t("Receive")}
                           </Text>
@@ -220,7 +221,6 @@ const TabModal = ({
                           {transaction.txid}
                         </Text>
 
-                        {/* 添加 Network Fee 和 Block Height */}
                         <Text style={WalletScreenStyle.historyItemText}>
                           <Text
                             style={{ fontWeight: "bold" }}
