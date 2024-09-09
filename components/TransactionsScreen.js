@@ -31,6 +31,7 @@ import VerificationModal from "./modal/VerificationModal";
 import BluetoothModal from "./modal/BluetoothModal";
 import AmountModal from "./modal/AmountModal";
 import SelectCryptoModal from "./modal/SelectCryptoModal";
+import ReceiveAddressModal from "./modal/ReceiveAddressModal";
 import { BleManager, BleErrorCode } from "react-native-ble-plx";
 const serviceUUID = "0000FFE0-0000-1000-8000-00805F9B34FB";
 const writeCharacteristicUUID = "0000FFE2-0000-1000-8000-00805F9B34FB";
@@ -1736,112 +1737,19 @@ function TransactionsScreen() {
         />
 
         {/* 显示选择的加密货币地址的模态窗口 */}
-        <Modal
-          animationType="slide"
-          transparent={true}
+        <ReceiveAddressModal
           visible={addressModalVisible}
           onRequestClose={() => setAddressModalVisible(false)}
-        >
-          <BlurView intensity={10} style={TransactionsScreenStyle.centeredView}>
-            <View style={TransactionsScreenStyle.receiveModalView}>
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <Text style={TransactionsScreenStyle.modalTitle}>
-                  {t("Address for")}
-                </Text>
-                {selectedCryptoIcon && (
-                  <Image
-                    source={selectedCryptoIcon}
-                    style={{
-                      width: 24,
-                      height: 24,
-                      marginLeft: 5,
-                      marginRight: 5,
-                    }}
-                  />
-                )}
-                <Text style={TransactionsScreenStyle.modalTitle}>
-                  {selectedCrypto}:
-                </Text>
-              </View>
-              <Text style={TransactionsScreenStyle.subtitleText}>
-                {t("Assets can only be sent within the same chain.")}
-              </Text>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Text style={TransactionsScreenStyle.addressText}>
-                  {selectedAddress}
-                </Text>
-                <TouchableOpacity
-                  onPress={() => Clipboard.setString(selectedAddress)}
-                >
-                  <Icon
-                    name="content-copy"
-                    size={24}
-                    color={isDarkMode ? "#ffffff" : "#676776"}
-                  />
-                </TouchableOpacity>
-              </View>
-              <View
-                style={{
-                  backgroundColor: "#fff",
-                  height: 220,
-                  width: 220,
-                  justifyContent: "center",
-                  alignItems: "center",
-                  borderRadius: 12,
-                }}
-              >
-                <QRCode value={selectedAddress} size={200} />
-              </View>
-              {isVerifyingAddress && ( // 根据状态控制提示文本显示
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
-                  <Image
-                    source={require("../assets/gif/Pending.gif")}
-                    style={{ width: 40, height: 40 }}
-                  />
-                  <Text
-                    style={[
-                      TransactionsScreenStyle.verifyingAddressText,
-                      { color: "#3CDA84" },
-                    ]}
-                  >
-                    {addressVerificationMessage}
-                  </Text>
-                </View>
-              )}
-
-              <View
-                style={{
-                  flexDirection: "col",
-                  width: "100%",
-                  justifyContent: "space-between",
-                }}
-              >
-                <TouchableOpacity
-                  onPress={handleVerifyAddress}
-                  style={TransactionsScreenStyle.verifyAddressButton}
-                >
-                  <Text style={TransactionsScreenStyle.submitButtonText}>
-                    {t("Verify Address")}
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={TransactionsScreenStyle.cancelAddressButton}
-                  onPress={() => setAddressModalVisible(false)}
-                >
-                  <Text style={TransactionsScreenStyle.cancelButtonText}>
-                    {t("Close")}
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </BlurView>
-        </Modal>
+          TransactionsScreenStyle={TransactionsScreenStyle}
+          t={t}
+          selectedCryptoIcon={selectedCryptoIcon}
+          selectedCrypto={selectedCrypto}
+          selectedAddress={selectedAddress}
+          isVerifyingAddress={isVerifyingAddress}
+          addressVerificationMessage={addressVerificationMessage}
+          handleVerifyAddress={handleVerifyAddress}
+          isDarkMode={isDarkMode}
+        />
 
         {/* Bluetooth modal */}
         <BluetoothModal
