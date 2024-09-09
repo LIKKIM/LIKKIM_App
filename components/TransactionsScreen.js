@@ -40,6 +40,9 @@ const writeCharacteristicUUID = "0000FFE2-0000-1000-8000-00805F9B34FB";
 function TransactionsScreen() {
   const [receivedVerificationCode, setReceivedVerificationCode] = useState("");
   const { t } = useTranslation();
+  const [swapModalVisible, setSwapModalVisible] = useState(false);
+  const [fromValue, setFromValue] = useState("");
+  const [toValue, setToValue] = useState("");
   const { isDarkMode } = useContext(DarkModeContext);
   const {
     usdtCrypto,
@@ -379,6 +382,10 @@ function TransactionsScreen() {
     };
   }, [addressModalVisible, selectedDevice]);
   let monitorSubscription;
+
+  const handleSwapPress = () => {
+    setSwapModalVisible(true);
+  };
 
   const reconnectDevice = async (device) => {
     try {
@@ -1443,7 +1450,7 @@ function TransactionsScreen() {
           {/* Swap 按钮 */}
           <TouchableOpacity
             style={[TransactionsScreenStyle.roundButton, { flex: 1 }]} // 均等宽度
-            //  onPress={handleSwapPress}
+            onPress={handleSwapPress}
           >
             <Icon name="swap-horiz" size={24} color={iconColor} />
             <Text style={TransactionsScreenStyle.mainButtonText}>
@@ -1839,6 +1846,82 @@ function TransactionsScreen() {
               </TouchableOpacity>
             </View>
           </View>
+        </Modal>
+
+        {/* Swap 模态框 */}
+        <Modal
+          visible={swapModalVisible}
+          transparent={true}
+          animationType="slide"
+          onRequestClose={() => setSwapModalVisible(false)}
+        >
+          <BlurView intensity={10} style={TransactionsScreenStyle.centeredView}>
+            <View style={TransactionsScreenStyle.modalView}>
+              {/* From Section */}
+
+              <Text style={TransactionsScreenStyle.modalTitle}>From</Text>
+              <View style={TransactionsScreenStyle.swapInputContainer}>
+                <TextInput
+                  style={TransactionsScreenStyle.swapInput}
+                  value={fromValue}
+                  onChangeText={setFromValue}
+                  placeholder="0.0"
+                  keyboardType="numeric"
+                />
+                <TouchableOpacity style={TransactionsScreenStyle.tokenSelect}>
+                  <Text style={TransactionsScreenStyle.subtitleText}>
+                    Select token
+                  </Text>
+                  <Icon name="arrow-drop-down" size={24} color="#fff" />
+                </TouchableOpacity>
+              </View>
+              <Text style={TransactionsScreenStyle.subtitleText}>$0.00</Text>
+
+              {/* Swap Button */}
+              <TouchableOpacity style={TransactionsScreenStyle.swapButton}>
+                <Icon name="swap-vert" size={24} color="#fff" />
+              </TouchableOpacity>
+
+              {/* To Section */}
+
+              <Text style={TransactionsScreenStyle.modalTitle}>To</Text>
+              <View style={TransactionsScreenStyle.swapInputContainer}>
+                <TextInput
+                  style={TransactionsScreenStyle.swapInput}
+                  value={toValue}
+                  onChangeText={setToValue}
+                  placeholder="0.0"
+                  keyboardType="numeric"
+                />
+                <TouchableOpacity style={TransactionsScreenStyle.tokenSelect}>
+                  <Text style={TransactionsScreenStyle.subtitleText}>
+                    Select token
+                  </Text>
+                  <Icon name="arrow-drop-down" size={24} color="#fff" />
+                </TouchableOpacity>
+              </View>
+              <Text style={TransactionsScreenStyle.subtitleText}>$0.00</Text>
+
+              {/* confrim Button */}
+              <TouchableOpacity
+                onPress={() => setSwapModalVisible(false)}
+                style={TransactionsScreenStyle.submitButton}
+              >
+                <Text style={TransactionsScreenStyle.submitButtonText}>
+                  Confrim
+                </Text>
+              </TouchableOpacity>
+              {/* Close Button */}
+              <TouchableOpacity
+                onPress={() => setSwapModalVisible(false)}
+                style={TransactionsScreenStyle.cancelButton}
+              >
+                <Text style={TransactionsScreenStyle.cancelButtonText}>
+                  Close
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </BlurView>
         </Modal>
       </View>
     </LinearGradient>

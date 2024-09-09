@@ -19,6 +19,62 @@ const TransactionsScreenStyles = (isDarkMode) => {
   const titleColor = isDarkMode ? "#fff" : "#000";
 
   return StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    roundButton: {
+      backgroundColor: "#6c6cf4",
+      padding: 15,
+      borderRadius: 30,
+      alignItems: "center",
+    },
+
+    modalContainer: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: "rgba(0, 0, 0, 0.8)",
+    },
+    swapSection: {
+      width: 300,
+      padding: 20,
+      backgroundColor: "#1c1c1e",
+      borderRadius: 10,
+      marginVertical: 10,
+    },
+
+    swapInputContainer: {
+      width: "100%",
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      borderWidth: 2,
+      borderColor: btnBorderColor,
+      borderRadius: 10,
+      padding: 10,
+    },
+    swapInput: {
+      flex: 1,
+      fontSize: 18,
+      color: "#fff",
+    },
+    tokenSelect: {
+      flexDirection: "row",
+      alignItems: "center",
+    },
+    tokenSelectText: {
+      color: "#fff",
+      marginRight: 5,
+    },
+    swapButton: {
+      backgroundColor: btnColor,
+      padding: 10,
+      borderRadius: 50,
+      alignItems: "center",
+    },
+
     amountInput: {
       backgroundColor: inputBackgroundColor,
       padding: 10,
@@ -183,9 +239,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       alignItems: "center",
       justifyContent: "space-between",
     },
-    container: {
-      alignItems: "center",
-    },
+
     deviceItemContainer: {
       flexDirection: "row",
       alignItems: "center",
@@ -360,8 +414,8 @@ const TransactionsScreenStyles = (isDarkMode) => {
       borderColor: btnBorderColor,
       paddingVertical: 10,
       paddingHorizontal: 20,
-      /*      width: 110,
-      height: 110, */
+      width: 110,
+      height: 110,
       borderRadius: 20,
       alignItems: "center",
       justifyContent: "center",
