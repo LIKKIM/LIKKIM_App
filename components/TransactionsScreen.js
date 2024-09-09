@@ -1414,7 +1414,7 @@ function TransactionsScreen() {
             width: 360,
             height: 170,
             flexDirection: "row",
-            gap: 20,
+            gap: 10,
           }}
         >
           <TouchableOpacity
@@ -1425,9 +1425,9 @@ function TransactionsScreen() {
             <Text style={TransactionsScreenStyle.mainButtonText}>
               {t("Send")}
             </Text>
-            <Text style={TransactionsScreenStyle.mainSubButtonText}>
+            {/*       <Text style={TransactionsScreenStyle.mainSubButtonText}>
               {t("Send crypto to another wallet")}
-            </Text>
+            </Text> */}
           </TouchableOpacity>
           <TouchableOpacity
             style={TransactionsScreenStyle.roundButton}
@@ -1437,9 +1437,24 @@ function TransactionsScreen() {
             <Text style={TransactionsScreenStyle.mainButtonText}>
               {t("Receive")}
             </Text>
-            <Text style={TransactionsScreenStyle.mainSubButtonText}>
+            {/*          <Text style={TransactionsScreenStyle.mainSubButtonText}>
               {t("Receive crypto from another wallet")}
+            </Text> */}
+          </TouchableOpacity>
+
+          {/* Swap 按钮 */}
+          <TouchableOpacity
+            style={TransactionsScreenStyle.roundButton}
+            //  onPress={handleSwapPress}
+          >
+            <Icon name="swap-horiz" size={24} color={iconColor} />
+            {/* 使用 swap 图标 */}
+            <Text style={TransactionsScreenStyle.mainButtonText}>
+              {t("Swap")}
             </Text>
+            {/*        <Text style={TransactionsScreenStyle.mainSubButtonText}>
+              {t("Instantly exchange cryptocurrencies")}
+            </Text> */}
           </TouchableOpacity>
         </View>
         <View style={TransactionsScreenStyle.historyContainer}>
