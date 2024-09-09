@@ -36,10 +36,9 @@ i18n
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.",
           Send: "Send",
-          "Send crypto to another wallet": "Send crypto to another wallet",
+
           Receive: "Receive",
-          "Receive crypto from another wallet":
-            "Receive crypto from another wallet",
+
           "Transaction History": "Transaction History",
           "No Histories": "No Histories",
           "Enter the recipient's address:": "Enter the recipient's address:",
@@ -191,9 +190,9 @@ i18n
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "请确保你的冷钱包已解锁并启用蓝牙。",
           Send: "发送",
-          "Send crypto to another wallet": "发送加密货币到其他钱包",
+
           Receive: "接收",
-          "Receive crypto from another wallet": "从其他钱包接收加密货币",
+
           "Transaction History": "交易记录",
           "No Histories": "没有记录",
           "Enter the recipient's address:": "输入接收者的地址:",
@@ -337,9 +336,9 @@ i18n
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "請確保你的冷錢包已解鎖並啟用藍牙。",
           Send: "發送",
-          "Send crypto to another wallet": "發送加密貨幣到其他錢包",
+
           Receive: "接收",
-          "Receive crypto from another wallet": "從其他錢包接收加密貨幣",
+
           "Transaction History": "交易記錄",
           "No Histories": "沒有記錄",
           "Enter the recipient's address:": "輸入接收者的地址:",
@@ -490,11 +489,9 @@ i18n
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "Veuillez vous assurer que votre portefeuille froid est déverrouillé et que le Bluetooth est activé.",
           Send: "Envoyer",
-          "Send crypto to another wallet":
-            "Envoyer des crypto-monnaies à un autre portefeuille",
+
           Receive: "Recevoir",
-          "Receive crypto from another wallet":
-            "Recevoir des crypto-monnaies d'un autre portefeuille",
+
           "Transaction History": "Historique des transactions",
           "No Histories": "Aucun historique",
           "Enter the recipient's address:":
@@ -675,11 +672,9 @@ i18n
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "Por favor, asegúrate de que tu billetera fría esté desbloqueada y el Bluetooth esté activado.",
           Send: "Enviar",
-          "Send crypto to another wallet":
-            "Enviar criptomonedas a otro monedero",
+
           Receive: "Recibir",
-          "Receive crypto from another wallet":
-            "Recibir criptomonedas de otro monedero",
+
           "Transaction History": "Historial de transacciones",
           "No Histories": "No hay historiales",
           "Enter the recipient's address:":
@@ -835,11 +830,9 @@ i18n
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "يرجى التأكد من أن محفظتك الباردة غير مقفلة وتم تمكين البلوتوث.",
           Send: "إرسال",
-          "Send crypto to another wallet":
-            "إرسال العملات الرقمية إلى محفظة أخرى",
+
           Receive: "استلام",
-          "Receive crypto from another wallet":
-            "استلام العملات الرقمية من محفظة أخرى",
+
           "Transaction History": "سجل المعاملات",
           "No Histories": "لا يوجد سجلات",
           "Enter the recipient's address:": "أدخل عنوان المستلم:",
@@ -990,11 +983,9 @@ i18n
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "コールドウォレットがロック解除され、Bluetoothが有効になっていることを確認してください。",
           Send: "Enviar",
-          "Send crypto to another wallet":
-            "Enviar criptomonedas a otro monedero",
+
           Receive: "Recibir",
-          "Receive crypto from another wallet":
-            "Recibir criptomonedas de otro monedero",
+
           "Transaction History": "Historial de transacciones",
           "No Histories": "No hay historiales",
           "Enter the recipient's address:":
@@ -1170,11 +1161,9 @@ i18n
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "Пожалуйста, убедитесь, что ваш Cold Wallet разблокирован и Bluetooth включен.",
           Send: "Enviar",
-          "Send crypto to another wallet":
-            "Enviar criptomonedas a otro monedero",
+
           Receive: "Recibir",
-          "Receive crypto from another wallet":
-            "Recibir criptomonedas de otro monedero",
+
           "Transaction History": "Historial de transacciones",
           "No Histories": "No hay historiales",
           "Enter the recipient's address:":
@@ -1329,9 +1318,9 @@ i18n
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "콜드 월렛이 잠금 해제되고 Bluetooth가 활성화되어 있는지 확인하십시오.",
           Send: "보내다",
-          "Send crypto to another wallet": "다른 지갑으로 암호화폐 보내기",
+
           Receive: "받다",
-          "Receive crypto from another wallet": "다른 지갑에서 암호화폐 받기",
+
           "Transaction History": "거래 내역",
           "No Histories": "기록 없음",
           "Enter the recipient's address:": "수신자의 주소를 입력하십시오:",
@@ -1481,11 +1470,9 @@ i18n
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "Certifique-se de que sua Cold Wallet esteja desbloqueada e o Bluetooth esteja ativado.",
           Send: "Enviar",
-          "Send crypto to another wallet":
-            "Enviar criptomoeda para outra carteira",
+
           Receive: "Receber",
-          "Receive crypto from another wallet":
-            "Receber criptomoeda de outra carteira",
+
           "Transaction History": "Histórico de transações",
           "No Histories": "Sem históricos",
           "Enter the recipient's address:":
@@ -1640,11 +1627,9 @@ i18n
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "Certifique-se de que sua Cold Wallet esteja desbloqueada e o Bluetooth esteja ativado.",
           Send: "Enviar",
-          "Send crypto to another wallet":
-            "Enviar criptomoeda para outra carteira",
+
           Receive: "Receber",
-          "Receive crypto from another wallet":
-            "Receber criptomoeda de outra carteira",
+
           "Transaction History": "Histórico de transações",
           "No Histories": "Nenhum histórico",
           "Enter the recipient's address:":
@@ -1800,11 +1785,9 @@ i18n
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "Assicurati che il tuo Cold Wallet sia sbloccato e che il Bluetooth sia abilitato.",
           Send: "Inviare",
-          "Send crypto to another wallet":
-            "Invia criptovaluta a un altro portafoglio",
+
           Receive: "Ricevere",
-          "Receive crypto from another wallet":
-            "Ricevi criptovaluta da un altro portafoglio",
+
           "Transaction History": "Cronologia delle transazioni",
           "No Histories": "Nessuna cronologia",
           "Enter the recipient's address:":
@@ -1962,11 +1945,9 @@ i18n
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "Bitte stellen Sie sicher, dass Ihre Cold Wallet entsperrt und Bluetooth aktiviert ist.",
           Send: "Senden",
-          "Send crypto to another wallet":
-            "Kryptowährung an eine andere Brieftasche senden",
+
           Receive: "Empfangen",
-          "Receive crypto from another wallet":
-            "Kryptowährung von einer anderen Brieftasche empfangen",
+
           "Transaction History": "Transaktionsverlauf",
           "No Histories": "Keine Verlaufsdaten",
           "Enter the recipient's address:":
@@ -2125,10 +2106,9 @@ i18n
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "कृपया सुनिश्चित करें कि आपका कोल्ड वॉलेट अनलॉक है और ब्लूटूथ सक्षम है।",
           Send: "भेजें",
-          "Send crypto to another wallet": "दूसरे वॉलेट में क्रिप्टो भेजें",
+
           Receive: "प्राप्त करें",
-          "Receive crypto from another wallet":
-            "दूसरे वॉलेट से क्रिप्टो प्राप्त करें",
+
           "Transaction History": "लेन-देन का इतिहास",
           "No Histories": "कोई इतिहास नहीं",
           "Enter the recipient's address:": "प्राप्तकर्ता का पता दर्ज करें:",
@@ -2286,11 +2266,9 @@ i18n
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "Таны хүйтэн хэтэвч тайлагдсан, Bluetooth асаалттай байгаа эсэхийг шалгана уу.",
           Send: "Илгээх",
-          "Send crypto to another wallet":
-            "Криптовалютыг өөр түрийвчинд илгээх",
+
           Receive: "Хүлээн авах",
-          "Receive crypto from another wallet":
-            "Криптовалютыг өөр түрийвчээс хүлээн авах",
+
           "Transaction History": "Гүйлгээний түүх",
           "No Histories": "Түүх байхгүй",
           "Enter the recipient's address:":
@@ -2457,9 +2435,9 @@ i18n
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "โปรดตรวจสอบให้แน่ใจว่ากระเป๋าเงินเย็นของคุณถูกปลดล็อกและเปิดใช้งาน Bluetooth แล้ว",
           Send: "ส่ง",
-          "Send crypto to another wallet": "ส่งคริปโตไปยังวอลเล็ตอื่น",
+
           Receive: "รับ",
-          "Receive crypto from another wallet": "รับคริปโตจากวอลเล็ตอื่น",
+
           "Transaction History": "ประวัติการทำธุรกรรม",
           "No Histories": "ไม่มีประวัติ",
           "Enter the recipient's address:": "ป้อนที่อยู่ผู้รับ:",
@@ -2609,11 +2587,9 @@ i18n
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "Будь ласка, переконайтеся, що ваш холодний гаманець розблокований і Bluetooth увімкнено.",
           Send: "Відправити",
-          "Send crypto to another wallet":
-            "Відправити криптовалюту на інший гаманець",
+
           Receive: "Отримати",
-          "Receive crypto from another wallet":
-            "Отримати криптовалюту з іншого гаманця",
+
           "Transaction History": "Історія транзакцій",
           "No Histories": "Немає історії",
           "Enter the recipient's address:": "Введіть адресу одержувача:",
@@ -2766,9 +2742,9 @@ i18n
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "Hãy đảm bảo rằng Ví Lạnh của bạn đã được mở khóa và Bluetooth được kích hoạt.",
           Send: "Gửi",
-          "Send crypto to another wallet": "Gửi tiền điện tử đến ví khác",
+
           Receive: "Nhận",
-          "Receive crypto from another wallet": "Nhận tiền điện tử từ ví khác",
+
           "Transaction History": "Lịch sử giao dịch",
           "No Histories": "Không có lịch sử",
           "Enter the recipient's address:": "Nhập địa chỉ người nhận:",
@@ -2924,10 +2900,9 @@ i18n
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "Pastikan Dompet Dingin Anda tidak terkunci dan Bluetooth diaktifkan.",
           Send: "Kirim",
-          "Send crypto to another wallet": "Kirim kripto ke dompet lain",
+
           Receive: "Terima",
-          "Receive crypto from another wallet":
-            "Terima kripto dari dompet lain",
+
           "Transaction History": "Riwayat Transaksi",
           "No Histories": "Tidak ada riwayat",
           "Enter the recipient's address:": "Masukkan alamat penerima:",
@@ -3082,11 +3057,9 @@ i18n
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "Mangyaring tiyakin na ang iyong Cold Wallet ay naka-unlock at naka-enable ang Bluetooth.",
           Send: "Magpadala",
-          "Send crypto to another wallet":
-            "Magpadala ng crypto sa ibang wallet",
+
           Receive: "Tumanggap",
-          "Receive crypto from another wallet":
-            "Tumanggap ng crypto mula sa ibang wallet",
+
           "Transaction History": "Kasaysayan ng Transaksyon",
           "No Histories": "Walang Kasaysayan",
           "Enter the recipient's address:": "Ilagay ang address ng tatanggap:",
@@ -3247,10 +3220,8 @@ i18n
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "অনুগ্রহ করে নিশ্চিত করুন যে আপনার ঠান্ডা ওয়ালেট আনলক করা হয়েছে এবং ব্লুটুথ সক্রিয় করা হয়েছে।",
           Send: "পাঠান",
-          "Send crypto to another wallet": "অন্য ওয়ালেটে ক্রিপ্টো পাঠান",
           Receive: "গ্রহণ করুন",
-          "Receive crypto from another wallet":
-            "অন্য ওয়ালেট থেকে ক্রিপ্টো গ্রহণ করুন",
+
           "Transaction History": "লেনদেনের ইতিহাস",
           "No Histories": "কোনো ইতিহাস নেই",
           "Enter the recipient's address:": "প্রাপকের ঠিকানা লিখুন:",
