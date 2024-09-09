@@ -3,6 +3,7 @@ import React, { createContext, useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import i18n from "../config/i18n";
 import { initialAdditionalCryptos } from "../config/cryptosData";
+
 export const CryptoContext = createContext();
 export const DarkModeContext = createContext();
 
@@ -73,6 +74,7 @@ export const CryptoProvider = ({ children }) => {
   const [cryptoCount, setCryptoCount] = useState(0);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [currencyUnit, setCurrencyUnit] = useState("USD");
+  const [transactionHistory, setTransactionHistory] = useState([]); // 新增交易历史状态
 
   const [initialAdditionalCryptosState, setInitialAdditionalCryptos] = useState(
     initialAdditionalCryptos
@@ -183,6 +185,38 @@ export const CryptoProvider = ({ children }) => {
       console.error("加载汇率数据失败: ", error);
     }
   };
+
+  useEffect(() => {
+    const loadTransactionHistory = async () => {
+      try {
+        const history = await AsyncStorage.getItem("transactionHistory");
+        if (history !== null) {
+          setTransactionHistory(JSON.parse(history));
+        }
+      } catch (error) {
+        console.error("加载交易历史失败:", error);
+      }
+    };
+
+    loadTransactionHistory();
+  }, []);
+
+  useEffect(() => {
+    const saveTransactionHistory = async () => {
+      try {
+        await AsyncStorage.setItem(
+          "transactionHistory",
+          JSON.stringify(transactionHistory)
+        );
+      } catch (error) {
+        console.error("保存交易历史失败:", error);
+      }
+    };
+
+    if (transactionHistory.length > 0) {
+      saveTransactionHistory();
+    }
+  }, [transactionHistory]);
 
   useEffect(() => {
     const saveAddedCryptos = async () => {
@@ -378,6 +412,8 @@ export const CryptoProvider = ({ children }) => {
         setCryptoCards,
         handleUpdateCryptoCards,
         exchangeRates, // 提供汇率数据
+        transactionHistory,
+        setTransactionHistory,
       }}
     >
       <DarkModeContext.Provider value={{ isDarkMode, setIsDarkMode }}>

@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import PriceChartCom from "../PriceChartCom";
 import { LinearGradient } from "expo-linear-gradient";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const TabModal = ({
   activeTab,
@@ -47,24 +48,25 @@ const TabModal = ({
             }
           );
 
-          const data = await response.json(); // 尝试解析JSON响应
-
-          console.log("API Response:", data); // 打印API响应
+          const data = await response.json();
 
           if (!response.ok || data.msg !== "success") {
             console.error(
               `API Error: HTTP status: ${response.status}, Message: ${data.msg}`
             );
-            setTransactionHistory([]); // 清空交易历史
+            setTransactionHistory([]);
           } else {
-            printData(data.data); // 动态打印数据
-            setTransactionHistory(data.data); // 更新状态
+            setTransactionHistory(data.data);
+            AsyncStorage.setItem(
+              "transactionHistory",
+              JSON.stringify(data.data)
+            ); // 保存数据
           }
         } catch (error) {
           console.error(
             `Failed to fetch transaction history: ${error.message}`
           );
-          setTransactionHistory([]); // 清空交易历史
+          setTransactionHistory([]);
         }
       }
     };

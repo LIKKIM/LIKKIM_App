@@ -52,6 +52,8 @@ function TransactionsScreen() {
     verifiedDevices,
     setVerifiedDevices,
     updateCryptoData,
+    transactionHistory,
+    setTransactionHistory,
   } = useContext(CryptoContext);
 
   const [
@@ -83,7 +85,7 @@ function TransactionsScreen() {
   const [amountModalVisible, setAmountModalVisible] = useState(false); // 新增状态
   const [confirmModalVisible, setConfirmModalVisible] = useState(false); // 新增交易确认modal状态
   const [transactionFee, setTransactionFee] = useState(""); // 示例交易手续费
-  const [transactionHistory, setTransactionHistory] = useState([]);
+  // const [transactionHistory, setTransactionHistory] = useState([]);
   const [hasFetchedBalance, setHasFetchedBalance] = useState(false);
   const [selectedDevice, setSelectedDevice] = useState(null);
   const [bleVisible, setBleVisible] = useState(false); // New state for Bluetooth modal
@@ -162,6 +164,24 @@ function TransactionsScreen() {
   }, []); */
 
   // 在 amountModalVisible 状态变为 true 时发送 POST 请求
+
+  useEffect(() => {
+    const loadTransactionHistory = async () => {
+      try {
+        const historyJson = await AsyncStorage.getItem("transactionHistory");
+        if (historyJson !== null) {
+          // 如果之前保存过交易历史，则将其解析后设置到状态中
+          const history = JSON.parse(historyJson);
+          setTransactionHistory(history);
+        }
+      } catch (error) {
+        console.error("Failed to load transaction history:", error);
+      }
+    };
+
+    loadTransactionHistory();
+  }, []); // 依赖数组为空，确保此操作仅在组件挂载时执行一次
+
   useEffect(() => {
     if (amountModalVisible && !hasFetchedBalance) {
       const fetchTokenBalanceAndFee = async () => {
@@ -1423,6 +1443,7 @@ function TransactionsScreen() {
           <Text style={TransactionsScreenStyle.historyTitle}>
             {t("Transaction History")}
           </Text>
+
           {transactionHistory.length === 0 ? (
             <Text style={TransactionsScreenStyle.noHistoryText}>
               {t("No Histories")}
@@ -1431,7 +1452,28 @@ function TransactionsScreen() {
             transactionHistory.map((transaction, index) => (
               <View key={index} style={TransactionsScreenStyle.historyItem}>
                 <Text style={TransactionsScreenStyle.historyItemText}>
-                  {transaction.detail}
+                  {transaction.amount} {`${transaction.transactionSymbol}`}
+                </Text>
+
+                <Text style={TransactionsScreenStyle.historyItemText}>
+                  {`${new Date(
+                    transaction.transactionTime * 1000
+                  ).toLocaleString()}`}
+                </Text>
+                <Text style={TransactionsScreenStyle.historyItemText}>
+                  {transaction.from}
+                </Text>
+                <Text style={TransactionsScreenStyle.historyItemText}>
+                  {transaction.to}
+                </Text>
+                <Text style={TransactionsScreenStyle.historyItemText}>
+                  {transaction.txid}
+                </Text>
+                <Text style={TransactionsScreenStyle.historyItemText}>
+                  {transaction.txFee}
+                </Text>
+                <Text style={TransactionsScreenStyle.historyItemText}>
+                  {transaction.height}
                 </Text>
               </View>
             ))
