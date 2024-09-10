@@ -1463,7 +1463,9 @@ function TransactionsScreen() {
           <Text style={TransactionsScreenStyle.historyTitle}>
             {t("Transaction History")}
           </Text>
-          <ScrollView>
+          <ScrollView
+            contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
+          >
             {transactionHistory.length === 0 ? (
               <Text style={TransactionsScreenStyle.noHistoryText}>
                 {t("No Histories")}
