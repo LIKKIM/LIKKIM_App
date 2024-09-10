@@ -1856,7 +1856,7 @@ function TransactionsScreen() {
           onRequestClose={() => setSwapModalVisible(false)}
         >
           <BlurView intensity={10} style={TransactionsScreenStyle.centeredView}>
-            <View style={TransactionsScreenStyle.modalView}>
+            <View style={TransactionsScreenStyle.swapModalView}>
               {/* From Section */}
               <View style={{ alignItems: "flex-start", width: "100%" }}>
                 <Text
@@ -1880,7 +1880,7 @@ function TransactionsScreen() {
                     <TextInput
                       style={[
                         TransactionsScreenStyle.swapInput,
-                        { fontSize: 30, fontWeight: "bold", textAlign: "left" }, // 确保 TextInput 左对齐
+                        { fontSize: 30, fontWeight: "bold", textAlign: "left" },
                       ]}
                       value={fromValue}
                       onChangeText={setFromValue}
@@ -1888,7 +1888,6 @@ function TransactionsScreen() {
                       placeholderTextColor="#aaa"
                       keyboardType="numeric"
                     />
-                    {/* 金额文本放到输入框下方，确保左对齐 */}
                     <Text
                       style={[
                         TransactionsScreenStyle.subtitleText,
@@ -1934,15 +1933,14 @@ function TransactionsScreen() {
                     <TextInput
                       style={[
                         TransactionsScreenStyle.swapInput,
-                        { fontSize: 30, fontWeight: "bold", textAlign: "left" }, // 确保 TextInput 左对齐
+                        { fontSize: 30, fontWeight: "bold", textAlign: "left" },
                       ]}
-                      value={fromValue}
-                      onChangeText={setFromValue}
+                      value={toValue}
+                      onChangeText={setToValue}
                       placeholder="0.0"
                       placeholderTextColor="#aaa"
                       keyboardType="numeric"
                     />
-                    {/* 金额文本放到输入框下方，确保左对齐 */}
                     <Text
                       style={[
                         TransactionsScreenStyle.subtitleText,
@@ -1960,7 +1958,6 @@ function TransactionsScreen() {
                   </TouchableOpacity>
                 </View>
               </View>
-
               {/* confrim Button */}
               <TouchableOpacity
                 onPress={() => setSwapModalVisible(false)}

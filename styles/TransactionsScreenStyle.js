@@ -75,7 +75,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       backgroundColor: btnColor,
       padding: 10,
       borderRadius: 50,
-      marginVertical: 20,
+      marginTop: 20,
       alignSelf: "flex-end",
     },
 
@@ -341,6 +341,16 @@ const TransactionsScreenStyles = (isDarkMode) => {
     modalView: {
       margin: 20,
       height: 500,
+      width: "90%",
+      backgroundColor: modalBackgroundColor,
+      borderRadius: 20,
+      padding: 35,
+      alignItems: "center",
+      justifyContent: "space-between",
+    },
+    swapModalView: {
+      margin: 20,
+      height: 550,
       width: "90%",
       backgroundColor: modalBackgroundColor,
       borderRadius: 20,
