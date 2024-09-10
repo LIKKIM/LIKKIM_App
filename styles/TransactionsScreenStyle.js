@@ -56,13 +56,16 @@ const TransactionsScreenStyles = (isDarkMode) => {
       padding: 10,
     },
     swapInput: {
-      flex: 1,
-      fontSize: 18,
-      color: "#fff",
+      width: "100%", // 确保 TextInput 占满容器宽度
+      height: 40,
+      paddingHorizontal: 10,
     },
     tokenSelect: {
+      flex: 1, // 平均分配宽度
       flexDirection: "row",
       alignItems: "center",
+      justifyContent: "space-between", // 确保“Select token”和图标两边对齐
+      paddingHorizontal: 10, // 可选，调整按钮的内边距
     },
     tokenSelectText: {
       color: "#fff",
@@ -72,7 +75,8 @@ const TransactionsScreenStyles = (isDarkMode) => {
       backgroundColor: btnColor,
       padding: 10,
       borderRadius: 50,
-      alignItems: "center",
+      marginVertical: 20,
+      alignSelf: "flex-end",
     },
 
     amountInput: {
@@ -445,9 +449,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       fontSize: 14,
       color: secondTextColor,
       textAlign: "center",
-      marginBottom: 20,
       flexWrap: "wrap",
-      width: 326,
     },
     TransactionModalTitle: {
       fontSize: 16,

@@ -1858,24 +1858,54 @@ function TransactionsScreen() {
           <BlurView intensity={10} style={TransactionsScreenStyle.centeredView}>
             <View style={TransactionsScreenStyle.modalView}>
               {/* From Section */}
+              <View style={{ alignItems: "flex-start", width: "100%" }}>
+                <Text
+                  style={[
+                    TransactionsScreenStyle.modalTitle,
+                    { marginBottom: 16 },
+                  ]}
+                >
+                  From
+                </Text>
 
-              <Text style={TransactionsScreenStyle.modalTitle}>From</Text>
-              <View style={TransactionsScreenStyle.swapInputContainer}>
-                <TextInput
-                  style={TransactionsScreenStyle.swapInput}
-                  value={fromValue}
-                  onChangeText={setFromValue}
-                  placeholder="0.0"
-                  keyboardType="numeric"
-                />
-                <TouchableOpacity style={TransactionsScreenStyle.tokenSelect}>
-                  <Text style={TransactionsScreenStyle.subtitleText}>
-                    Select token
-                  </Text>
-                  <Icon name="arrow-drop-down" size={24} color="#fff" />
-                </TouchableOpacity>
+                <View style={TransactionsScreenStyle.swapInputContainer}>
+                  <View
+                    style={{
+                      flex: 1,
+                      flexDirection: "column",
+                      alignItems: "flex-start",
+                      width: "100%",
+                    }}
+                  >
+                    <TextInput
+                      style={[
+                        TransactionsScreenStyle.swapInput,
+                        { fontSize: 30, fontWeight: "bold", textAlign: "left" }, // 确保 TextInput 左对齐
+                      ]}
+                      value={fromValue}
+                      onChangeText={setFromValue}
+                      placeholder="0.0"
+                      placeholderTextColor="#aaa"
+                      keyboardType="numeric"
+                    />
+                    {/* 金额文本放到输入框下方，确保左对齐 */}
+                    <Text
+                      style={[
+                        TransactionsScreenStyle.subtitleText,
+                        { textAlign: "left", width: "100%" },
+                      ]}
+                    >
+                      $0.00
+                    </Text>
+                  </View>
+                  <TouchableOpacity style={TransactionsScreenStyle.tokenSelect}>
+                    <Text style={TransactionsScreenStyle.subtitleText}>
+                      Select token
+                    </Text>
+                    <Icon name="arrow-drop-down" size={24} color="#ccc" />
+                  </TouchableOpacity>
+                </View>
               </View>
-              <Text style={TransactionsScreenStyle.subtitleText}>$0.00</Text>
 
               {/* Swap Button */}
               <TouchableOpacity style={TransactionsScreenStyle.swapButton}>
@@ -1883,24 +1913,53 @@ function TransactionsScreen() {
               </TouchableOpacity>
 
               {/* To Section */}
-
-              <Text style={TransactionsScreenStyle.modalTitle}>To</Text>
-              <View style={TransactionsScreenStyle.swapInputContainer}>
-                <TextInput
-                  style={TransactionsScreenStyle.swapInput}
-                  value={toValue}
-                  onChangeText={setToValue}
-                  placeholder="0.0"
-                  keyboardType="numeric"
-                />
-                <TouchableOpacity style={TransactionsScreenStyle.tokenSelect}>
-                  <Text style={TransactionsScreenStyle.subtitleText}>
-                    Select token
-                  </Text>
-                  <Icon name="arrow-drop-down" size={24} color="#fff" />
-                </TouchableOpacity>
+              <View style={{ alignItems: "flex-start", width: "100%" }}>
+                <Text
+                  style={[
+                    TransactionsScreenStyle.modalTitle,
+                    { marginBottom: 16 },
+                  ]}
+                >
+                  To
+                </Text>
+                <View style={TransactionsScreenStyle.swapInputContainer}>
+                  <View
+                    style={{
+                      flex: 1,
+                      flexDirection: "column",
+                      alignItems: "flex-start",
+                      width: "100%",
+                    }}
+                  >
+                    <TextInput
+                      style={[
+                        TransactionsScreenStyle.swapInput,
+                        { fontSize: 30, fontWeight: "bold", textAlign: "left" }, // 确保 TextInput 左对齐
+                      ]}
+                      value={fromValue}
+                      onChangeText={setFromValue}
+                      placeholder="0.0"
+                      placeholderTextColor="#aaa"
+                      keyboardType="numeric"
+                    />
+                    {/* 金额文本放到输入框下方，确保左对齐 */}
+                    <Text
+                      style={[
+                        TransactionsScreenStyle.subtitleText,
+                        { textAlign: "left", width: "100%" },
+                      ]}
+                    >
+                      $0.00
+                    </Text>
+                  </View>
+                  <TouchableOpacity style={TransactionsScreenStyle.tokenSelect}>
+                    <Text style={TransactionsScreenStyle.subtitleText}>
+                      Select token
+                    </Text>
+                    <Icon name="arrow-drop-down" size={24} color="#ccc" />
+                  </TouchableOpacity>
+                </View>
               </View>
-              <Text style={TransactionsScreenStyle.subtitleText}>$0.00</Text>
 
               {/* confrim Button */}
               <TouchableOpacity
