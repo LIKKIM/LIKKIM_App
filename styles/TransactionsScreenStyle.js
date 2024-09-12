@@ -363,6 +363,16 @@ const TransactionsScreenStyles = (isDarkMode) => {
       color: secondTextColor,
       textAlign: "center",
     },
+    swapConfirmButton: {
+      backgroundColor: btnColor,
+      padding: 10,
+      width: "100%",
+      justifyContent: "center",
+      borderRadius: 30,
+      height: 60,
+      alignItems: "center",
+      marginTop: 20,
+    },
     optionButton: {
       backgroundColor: btnColor,
       padding: 10,

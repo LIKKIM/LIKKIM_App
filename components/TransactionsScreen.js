@@ -1893,7 +1893,7 @@ function TransactionsScreen() {
                     <Text
                       style={[
                         TransactionsScreenStyle.subtitleText,
-                        { textAlign: "left", width: "100%" },
+                        { textAlign: "left", width: "100%", marginLeft: 12 },
                       ]}
                     >
                       $0.00
@@ -1946,7 +1946,7 @@ function TransactionsScreen() {
                     <Text
                       style={[
                         TransactionsScreenStyle.subtitleText,
-                        { textAlign: "left", width: "100%" },
+                        { textAlign: "left", width: "100%", marginLeft: 12 },
                       ]}
                     >
                       $0.00
@@ -1963,7 +1963,7 @@ function TransactionsScreen() {
               {/* confrim Button */}
               <TouchableOpacity
                 onPress={() => setSwapModalVisible(false)}
-                style={TransactionsScreenStyle.submitButton}
+                style={TransactionsScreenStyle.swapConfirmButton}
               >
                 <Text style={TransactionsScreenStyle.submitButtonText}>
                   Confrim

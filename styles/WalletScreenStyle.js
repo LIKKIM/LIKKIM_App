@@ -166,7 +166,10 @@ const WalletScreenStyles = (isDarkMode) => {
       color: textColor,
       fontSize: 16,
     },
-
+    mainButtonText: {
+      color: "#FFF",
+      fontSize: 16,
+    },
     // 模态框样式
     pinModalTitle: {
       color: textColor,
