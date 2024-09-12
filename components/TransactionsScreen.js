@@ -1918,7 +1918,7 @@ function TransactionsScreen() {
                 <Text
                   style={[
                     TransactionsScreenStyle.modalTitle,
-                    { marginBottom: 16 },
+                    { marginBottom: 16, marginTop: -32 },
                   ]}
                 >
                   To

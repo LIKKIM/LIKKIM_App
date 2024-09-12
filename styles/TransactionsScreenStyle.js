@@ -75,7 +75,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       backgroundColor: btnColor,
       padding: 10,
       borderRadius: 50,
-      marginTop: 20,
+      marginTop: 0,
       alignSelf: "flex-end",
     },
 
