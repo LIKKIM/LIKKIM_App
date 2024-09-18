@@ -908,25 +908,6 @@ export const initialAdditionalCryptos = [
     valueUsd: "0.0",
     priceUsd: "2.0",
   },
-
-  // Starcoin (STC)
-  {
-    name: "Starcoin",
-    shortName: "STC",
-    balance: "0.0",
-    // icon: require("../assets/icon/STCIcon.png"),
-    cardImage: require("../assets/CardBg/Card57.png"),
-    address: "stc1xyz...",
-    chain: "Starcoin",
-    chainShortName: "STC",
-    queryChainShortName: "STC",
-    // chainIcon: require("../assets/icon/STCIcon.png"),
-    tokenType: "STC",
-    fee: "0.001",
-    valueUsd: "0.0",
-    priceUsd: "0.05",
-  },
-
   // Secret Network (SCRT)
   {
     name: "Secret Network",
