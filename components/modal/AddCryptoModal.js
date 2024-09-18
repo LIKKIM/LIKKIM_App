@@ -196,7 +196,8 @@ const AddCryptoModal = ({
             ]}
             onPress={() => {
               if (selectedCryptos.length > 0) {
-                selectedCryptos.forEach((crypto) => handleAddCrypto(crypto)); // 处理所有选中的货币
+                console.log("提交了多少个卡片:", selectedCryptos.length); // 打印提交的卡片数量
+                handleAddCrypto(selectedCryptos); // 处理所有选中的货币
                 setSelectedCryptos([]); // 重置选中的货币
               }
             }}

@@ -1519,13 +1519,17 @@ function WalletScreen({ route, navigation }) {
     setModalVisible(true);
   };
 
-  const handleAddCrypto = (crypto) => {
-    if (!cryptoCards.find((card) => card.name === crypto.name)) {
-      const newCryptoCards = [...cryptoCards, crypto];
-      setCryptoCards(newCryptoCards);
-      setCryptoCount(newCryptoCards.length);
-      setAddedCryptos(newCryptoCards);
-    }
+  const handleAddCrypto = (cryptos) => {
+    // 将所有选中的卡片添加到 cryptoCards 中
+    const newCryptoCards = [
+      ...cryptoCards,
+      ...cryptos.filter(
+        (crypto) => !cryptoCards.find((card) => card.name === crypto.name)
+      ),
+    ];
+    setCryptoCards(newCryptoCards);
+    setCryptoCount(newCryptoCards.length);
+    setAddedCryptos(newCryptoCards);
     setAddCryptoVisible(false);
   };
 
