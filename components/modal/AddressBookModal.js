@@ -164,7 +164,6 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
     "Ripple",
     "Secret Network",
     "Solana",
-    "Starcoin",
     "SUI",
     "Tron",
     "zkSync Era Mainnet",
