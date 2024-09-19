@@ -73,9 +73,9 @@ const TransactionsScreenStyles = (isDarkMode) => {
     },
     swapButton: {
       backgroundColor: btnColor,
-      padding: 10,
+      padding: 6,
       borderRadius: 50,
-      marginTop: 0,
+      marginTop: -10,
       alignSelf: "flex-end",
     },
 
@@ -350,7 +350,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
     },
     swapModalView: {
       margin: 20,
-      height: 550,
+      height: 500,
       width: "90%",
       backgroundColor: modalBackgroundColor,
       borderRadius: 20,

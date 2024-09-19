@@ -1871,7 +1871,7 @@ function TransactionsScreen() {
                   <Text
                     style={[
                       TransactionsScreenStyle.modalTitle,
-                      { marginBottom: 16 },
+                      { marginBottom: 6 },
                     ]}
                   >
                     From
@@ -1931,7 +1931,7 @@ function TransactionsScreen() {
                   <Text
                     style={[
                       TransactionsScreenStyle.modalTitle,
-                      { marginBottom: 16, marginTop: -32 },
+                      { marginBottom: 6, marginTop: -32 },
                     ]}
                   >
                     To
