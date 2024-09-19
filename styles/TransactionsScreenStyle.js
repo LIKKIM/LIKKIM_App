@@ -177,7 +177,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       borderWidth: 3,
       borderColor: buttonBackgroundColor,
       padding: 10,
-      width: "100%",
+      width: 280,
       justifyContent: "center",
       borderRadius: 30,
       height: 60,
@@ -366,7 +366,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
     swapConfirmButton: {
       backgroundColor: btnColor,
       padding: 10,
-      width: "100%",
+      width: 280,
       justifyContent: "center",
       borderRadius: 30,
       height: 60,

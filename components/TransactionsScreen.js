@@ -1857,129 +1857,150 @@ function TransactionsScreen() {
           animationType="slide"
           onRequestClose={() => setSwapModalVisible(false)}
         >
-          <BlurView intensity={10} style={TransactionsScreenStyle.centeredView}>
-            <View style={TransactionsScreenStyle.swapModalView}>
-              {/* From Section */}
-              <View style={{ alignItems: "flex-start", width: "100%" }}>
-                <Text
-                  style={[
-                    TransactionsScreenStyle.modalTitle,
-                    { marginBottom: 16 },
-                  ]}
-                >
-                  From
-                </Text>
-
-                <View style={TransactionsScreenStyle.swapInputContainer}>
-                  <View
-                    style={{
-                      flex: 1,
-                      flexDirection: "column",
-                      alignItems: "flex-start",
-                      width: "100%",
-                    }}
+          <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            style={TransactionsScreenStyle.centeredView}
+          >
+            <BlurView
+              intensity={10}
+              style={TransactionsScreenStyle.centeredView}
+            >
+              <View style={TransactionsScreenStyle.swapModalView}>
+                {/* From Section */}
+                <View style={{ alignItems: "flex-start", width: "100%" }}>
+                  <Text
+                    style={[
+                      TransactionsScreenStyle.modalTitle,
+                      { marginBottom: 16 },
+                    ]}
                   >
-                    <TextInput
-                      style={[
-                        TransactionsScreenStyle.swapInput,
-                        { fontSize: 30, fontWeight: "bold", textAlign: "left" },
-                      ]}
-                      value={fromValue}
-                      onChangeText={setFromValue}
-                      placeholder="0.0"
-                      placeholderTextColor="#aaa"
-                      keyboardType="numeric"
-                    />
-                    <Text
-                      style={[
-                        TransactionsScreenStyle.subtitleText,
-                        { textAlign: "left", width: "100%", marginLeft: 12 },
-                      ]}
+                    From
+                  </Text>
+
+                  <View style={TransactionsScreenStyle.swapInputContainer}>
+                    <View
+                      style={{
+                        flex: 1,
+                        flexDirection: "column",
+                        alignItems: "flex-start",
+                        width: "100%",
+                      }}
                     >
-                      $0.00
-                    </Text>
+                      <TextInput
+                        style={[
+                          TransactionsScreenStyle.swapInput,
+                          {
+                            fontSize: 30,
+                            fontWeight: "bold",
+                            textAlign: "left",
+                          },
+                        ]}
+                        value={fromValue}
+                        onChangeText={setFromValue}
+                        placeholder="0.0"
+                        placeholderTextColor="#aaa"
+                        keyboardType="numeric"
+                      />
+                      <Text
+                        style={[
+                          TransactionsScreenStyle.subtitleText,
+                          { textAlign: "left", width: "100%", marginLeft: 12 },
+                        ]}
+                      >
+                        $0.00
+                      </Text>
+                    </View>
+                    <TouchableOpacity
+                      style={TransactionsScreenStyle.tokenSelect}
+                    >
+                      <Text style={TransactionsScreenStyle.subtitleText}>
+                        Select token
+                      </Text>
+                      <Icon name="arrow-drop-down" size={24} color="#ccc" />
+                    </TouchableOpacity>
                   </View>
-                  <TouchableOpacity style={TransactionsScreenStyle.tokenSelect}>
-                    <Text style={TransactionsScreenStyle.subtitleText}>
-                      Select token
-                    </Text>
-                    <Icon name="arrow-drop-down" size={24} color="#ccc" />
-                  </TouchableOpacity>
                 </View>
-              </View>
 
-              {/* Swap Button */}
-              <TouchableOpacity style={TransactionsScreenStyle.swapButton}>
-                <Icon name="swap-vert" size={24} color="#fff" />
-              </TouchableOpacity>
+                {/* Swap Button */}
+                <TouchableOpacity style={TransactionsScreenStyle.swapButton}>
+                  <Icon name="swap-vert" size={24} color="#fff" />
+                </TouchableOpacity>
 
-              {/* To Section */}
-              <View style={{ alignItems: "flex-start", width: "100%" }}>
-                <Text
-                  style={[
-                    TransactionsScreenStyle.modalTitle,
-                    { marginBottom: 16, marginTop: -32 },
-                  ]}
-                >
-                  To
-                </Text>
-                <View style={TransactionsScreenStyle.swapInputContainer}>
-                  <View
-                    style={{
-                      flex: 1,
-                      flexDirection: "column",
-                      alignItems: "flex-start",
-                      width: "100%",
-                    }}
+                {/* To Section */}
+                <View style={{ alignItems: "flex-start", width: "100%" }}>
+                  <Text
+                    style={[
+                      TransactionsScreenStyle.modalTitle,
+                      { marginBottom: 16, marginTop: -32 },
+                    ]}
                   >
-                    <TextInput
-                      style={[
-                        TransactionsScreenStyle.swapInput,
-                        { fontSize: 30, fontWeight: "bold", textAlign: "left" },
-                      ]}
-                      value={toValue}
-                      onChangeText={setToValue}
-                      placeholder="0.0"
-                      placeholderTextColor="#aaa"
-                      keyboardType="numeric"
-                    />
-                    <Text
-                      style={[
-                        TransactionsScreenStyle.subtitleText,
-                        { textAlign: "left", width: "100%", marginLeft: 12 },
-                      ]}
+                    To
+                  </Text>
+                  <View style={TransactionsScreenStyle.swapInputContainer}>
+                    <View
+                      style={{
+                        flex: 1,
+                        flexDirection: "column",
+                        alignItems: "flex-start",
+                        width: "100%",
+                      }}
                     >
-                      $0.00
-                    </Text>
+                      <TextInput
+                        style={[
+                          TransactionsScreenStyle.swapInput,
+                          {
+                            fontSize: 30,
+                            fontWeight: "bold",
+                            textAlign: "left",
+                          },
+                        ]}
+                        value={toValue}
+                        onChangeText={setToValue}
+                        placeholder="0.0"
+                        placeholderTextColor="#aaa"
+                        keyboardType="numeric"
+                      />
+                      <Text
+                        style={[
+                          TransactionsScreenStyle.subtitleText,
+                          { textAlign: "left", width: "100%", marginLeft: 12 },
+                        ]}
+                      >
+                        $0.00
+                      </Text>
+                    </View>
+                    <TouchableOpacity
+                      style={TransactionsScreenStyle.tokenSelect}
+                    >
+                      <Text style={TransactionsScreenStyle.subtitleText}>
+                        Select token
+                      </Text>
+                      <Icon name="arrow-drop-down" size={24} color="#ccc" />
+                    </TouchableOpacity>
                   </View>
-                  <TouchableOpacity style={TransactionsScreenStyle.tokenSelect}>
-                    <Text style={TransactionsScreenStyle.subtitleText}>
-                      Select token
-                    </Text>
-                    <Icon name="arrow-drop-down" size={24} color="#ccc" />
-                  </TouchableOpacity>
                 </View>
+
+                {/* confrim Button */}
+                <TouchableOpacity
+                  onPress={() => setSwapModalVisible(false)}
+                  style={TransactionsScreenStyle.swapConfirmButton}
+                >
+                  <Text style={TransactionsScreenStyle.submitButtonText}>
+                    Confirm
+                  </Text>
+                </TouchableOpacity>
+                {/* Close Button */}
+                <TouchableOpacity
+                  onPress={() => setSwapModalVisible(false)}
+                  style={TransactionsScreenStyle.cancelButton}
+                >
+                  <Text style={TransactionsScreenStyle.cancelButtonText}>
+                    Close
+                  </Text>
+                </TouchableOpacity>
               </View>
-              {/* confrim Button */}
-              <TouchableOpacity
-                onPress={() => setSwapModalVisible(false)}
-                style={TransactionsScreenStyle.swapConfirmButton}
-              >
-                <Text style={TransactionsScreenStyle.submitButtonText}>
-                  Confrim
-                </Text>
-              </TouchableOpacity>
-              {/* Close Button */}
-              <TouchableOpacity
-                onPress={() => setSwapModalVisible(false)}
-                style={TransactionsScreenStyle.cancelButton}
-              >
-                <Text style={TransactionsScreenStyle.cancelButtonText}>
-                  Close
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </BlurView>
+            </BlurView>
+          </KeyboardAvoidingView>
         </Modal>
       </View>
     </LinearGradient>
