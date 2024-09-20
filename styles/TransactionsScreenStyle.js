@@ -39,7 +39,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       borderBottomColor: isDarkMode ? "#555" : "#ddd",
     },
     selectedChainTag: {
-      backgroundColor: isDarkMode ? "#6C6CF4" : "#8E80F0",
+      backgroundColor: isDarkMode ? "#6C6CF4" : "#ccc",
     },
     chainTagText: {
       color: isDarkMode ? "#fff" : "#000",
