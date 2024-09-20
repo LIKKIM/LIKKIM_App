@@ -111,13 +111,19 @@ function TransactionsScreen() {
     useState(false);
   const [inputAddressModalVisible, setInputAddressModalVisible] =
     useState(false);
-  const [fromDropdownVisible, setFromDropdownVisible] = useState(false);
-  const [toDropdownVisible, setToDropdownVisible] = useState(false);
   const [detectedNetwork, setDetectedNetwork] = useState("");
   const bleManagerRef = useRef(null);
   const [selectedToken, setSelectedToken] = useState(""); // 用于存储选中的token
   const [selectedChain, setSelectedChain] = useState(""); // 新增状态
-  const [dropdownVisible, setDropdownVisible] = useState(false); // 控制Dropdown的显示状态
+  const [fromDropdownVisible, setFromDropdownVisible] = useState(false);
+  const [toDropdownVisible, setToDropdownVisible] = useState(false);
+
+  const [selectedFromToken, setSelectedFromToken] = useState(""); // "From" token state
+  const [selectedFromChain, setSelectedFromChain] = useState(""); // "From" chain state
+
+  const [selectedToToken, setSelectedToToken] = useState(""); // "To" token state
+  const [selectedToChain, setSelectedToChain] = useState(""); // "To" chain state
+
   const [paymentAddress, setPaymentAddress] = useState("Your Payment Address");
   const [addressVerificationMessage, setAddressVerificationMessage] = useState(
     t("Verifying Address on LIKKIM...")
@@ -1922,8 +1928,13 @@ function TransactionsScreen() {
                       }
                     >
                       <Text style={TransactionsScreenStyle.subtitleText}>
-                        {selectedToken || "Select token"}
+                        {selectedFromToken
+                          ? initialAdditionalCryptos.find(
+                              (token) => token.shortName === selectedFromToken
+                            )?.name
+                          : "Select token"}
                       </Text>
+
                       <Icon name="arrow-drop-down" size={24} color="#ccc" />
                     </TouchableOpacity>
                   </View>
@@ -1936,19 +1947,19 @@ function TransactionsScreen() {
                           key={`${chain.shortName}-${index}`}
                           style={[
                             TransactionsScreenStyle.chainTag,
-                            selectedChain === chain.shortName &&
+                            selectedFromChain === chain.shortName &&
                               TransactionsScreenStyle.selectedChainTag,
                           ]}
                           onPress={() => {
-                            setSelectedToken(chain.shortName);
-                            setSelectedChain(chain.shortName);
-                            setFromDropdownVisible(false); // 关闭 From Dropdown
+                            setSelectedFromToken(chain.shortName); // Use from-specific state
+                            setSelectedFromChain(chain.shortName); // Use from-specific state
+                            setFromDropdownVisible(false); // Close the From dropdown
                           }}
                         >
                           <Text
                             style={[
                               TransactionsScreenStyle.chainTagText,
-                              selectedChain === chain.shortName &&
+                              selectedFromChain === chain.shortName &&
                                 TransactionsScreenStyle.selectedChainTagText,
                             ]}
                           >
@@ -2014,8 +2025,13 @@ function TransactionsScreen() {
                       onPress={() => setToDropdownVisible(!toDropdownVisible)}
                     >
                       <Text style={TransactionsScreenStyle.subtitleText}>
-                        {selectedToken || "Select token"}
+                        {selectedToToken
+                          ? initialAdditionalCryptos.find(
+                              (token) => token.shortName === selectedToToken
+                            )?.name
+                          : "Select token"}
                       </Text>
+
                       <Icon name="arrow-drop-down" size={24} color="#ccc" />
                     </TouchableOpacity>
                   </View>
@@ -2028,19 +2044,19 @@ function TransactionsScreen() {
                           key={`${chain.shortName}-${index}`}
                           style={[
                             TransactionsScreenStyle.chainTag,
-                            selectedChain === chain.shortName &&
+                            selectedToChain === chain.shortName &&
                               TransactionsScreenStyle.selectedChainTag,
                           ]}
                           onPress={() => {
-                            setSelectedToken(chain.shortName);
-                            setSelectedChain(chain.shortName);
-                            setToDropdownVisible(false); // 关闭 To Dropdown
+                            setSelectedToToken(chain.shortName); // Use to-specific state
+                            setSelectedToChain(chain.shortName); // Use to-specific state
+                            setToDropdownVisible(false); // Close the To dropdown
                           }}
                         >
                           <Text
                             style={[
                               TransactionsScreenStyle.chainTagText,
-                              selectedChain === chain.shortName &&
+                              selectedToChain === chain.shortName &&
                                 TransactionsScreenStyle.selectedChainTagText,
                             ]}
                           >
