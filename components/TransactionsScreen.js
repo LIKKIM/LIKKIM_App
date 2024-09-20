@@ -1931,9 +1931,9 @@ function TransactionsScreen() {
                   {/* From Dropdown */}
                   {fromDropdownVisible && (
                     <ScrollView style={TransactionsScreenStyle.dropdown}>
-                      {initialAdditionalCryptos.map((chain) => (
+                      {initialAdditionalCryptos.map((chain, index) => (
                         <TouchableOpacity
-                          key={chain.shortName}
+                          key={`${chain.shortName}-${index}`}
                           style={[
                             TransactionsScreenStyle.chainTag,
                             selectedChain === chain.shortName &&
@@ -2023,9 +2023,9 @@ function TransactionsScreen() {
                   {/* To Dropdown */}
                   {toDropdownVisible && (
                     <ScrollView style={TransactionsScreenStyle.dropdown}>
-                      {initialAdditionalCryptos.map((chain) => (
+                      {initialAdditionalCryptos.map((chain, index) => (
                         <TouchableOpacity
-                          key={chain.shortName}
+                          key={`${chain.shortName}-${index}`}
                           style={[
                             TransactionsScreenStyle.chainTag,
                             selectedChain === chain.shortName &&
