@@ -23,7 +23,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
     // Dropdown Styles
     dropdown: {
       position: "absolute",
-      top: 80, // 确保下拉菜单显示在按钮下方
+      top: 120, // 确保下拉菜单显示在按钮下方
       width: "100%",
       maxHeight: 200, // 限制 dropdown 最大高度，超出时可以滚动
       backgroundColor: dropdownBackgroundColor,

@@ -1938,6 +1938,36 @@ function TransactionsScreen() {
                   </View>
                 </View>
 
+                {/* From Dropdown */}
+                {fromDropdownVisible && (
+                  <ScrollView style={TransactionsScreenStyle.dropdown}>
+                    {initialAdditionalCryptos.map((chain, index) => (
+                      <TouchableOpacity
+                        key={`${chain.shortName}-${index}`}
+                        style={[
+                          TransactionsScreenStyle.chainTag,
+                          selectedFromToken === chain.shortName &&
+                            TransactionsScreenStyle.selectedChainTag,
+                        ]}
+                        onPress={() => {
+                          setSelectedFromToken(chain.shortName);
+                          setFromDropdownVisible(false);
+                        }}
+                      >
+                        <Text
+                          style={[
+                            TransactionsScreenStyle.chainTagText,
+                            selectedFromToken === chain.shortName &&
+                              TransactionsScreenStyle.selectedChainTagText,
+                          ]}
+                        >
+                          {chain.name}
+                        </Text>
+                      </TouchableOpacity>
+                    ))}
+                  </ScrollView>
+                )}
+
                 {/* Swap Button */}
                 <TouchableOpacity style={TransactionsScreenStyle.swapButton}>
                   <Icon name="swap-vert" size={24} color="#fff" />
@@ -2001,36 +2031,6 @@ function TransactionsScreen() {
                     </TouchableOpacity>
                   </View>
                 </View>
-
-                {/* From Dropdown */}
-                {fromDropdownVisible && (
-                  <ScrollView style={TransactionsScreenStyle.dropdown}>
-                    {initialAdditionalCryptos.map((chain, index) => (
-                      <TouchableOpacity
-                        key={`${chain.shortName}-${index}`}
-                        style={[
-                          TransactionsScreenStyle.chainTag,
-                          selectedFromToken === chain.shortName &&
-                            TransactionsScreenStyle.selectedChainTag,
-                        ]}
-                        onPress={() => {
-                          setSelectedFromToken(chain.shortName);
-                          setFromDropdownVisible(false);
-                        }}
-                      >
-                        <Text
-                          style={[
-                            TransactionsScreenStyle.chainTagText,
-                            selectedFromToken === chain.shortName &&
-                              TransactionsScreenStyle.selectedChainTagText,
-                          ]}
-                        >
-                          {chain.name}
-                        </Text>
-                      </TouchableOpacity>
-                    ))}
-                  </ScrollView>
-                )}
 
                 {/* To Dropdown */}
                 {toDropdownVisible && (
