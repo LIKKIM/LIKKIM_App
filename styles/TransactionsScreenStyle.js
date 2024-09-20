@@ -17,8 +17,37 @@ const TransactionsScreenStyles = (isDarkMode) => {
   const textBtnColor = isDarkMode ? "#fff" : "#fff";
   const textColor = isDarkMode ? "#fff" : "#000";
   const titleColor = isDarkMode ? "#fff" : "#000";
+  const dropdownBackgroundColor = isDarkMode ? "#24234C" : "#ffffff";
 
   return StyleSheet.create({
+    // Dropdown Styles
+    dropdown: {
+      position: "absolute",
+      top: 80, // 确保下拉菜单显示在按钮下方
+      width: "100%",
+      maxHeight: 200, // 限制 dropdown 最大高度，超出时可以滚动
+      backgroundColor: dropdownBackgroundColor,
+      borderRadius: 10,
+      padding: 10,
+      zIndex: 999, // 提高 zIndex 确保 dropdown 始终在其他组件上方
+      overflow: "hidden", // 避免溢出内容被隐藏
+    },
+    chainTag: {
+      paddingVertical: 10,
+      paddingHorizontal: 15,
+      borderBottomWidth: 1,
+      borderBottomColor: isDarkMode ? "#555" : "#ddd",
+    },
+    selectedChainTag: {
+      backgroundColor: isDarkMode ? "#6C6CF4" : "#8E80F0",
+    },
+    chainTagText: {
+      color: isDarkMode ? "#fff" : "#000",
+    },
+    selectedChainTagText: {
+      color: isDarkMode ? "#000" : "#fff",
+    },
+
     container: {
       flex: 1,
       justifyContent: "center",

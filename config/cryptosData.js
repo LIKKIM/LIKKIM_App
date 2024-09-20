@@ -915,7 +915,7 @@ export const initialAdditionalCryptos = [
   // Manta Atlantic
   {
     name: "Manta Atlantic",
-    shortName: "MANTA",
+    shortName: "PAC",
     balance: "0.0",
     icon: require("../assets/icon/MANTAIcon.png"),
     cardImage: require("../assets/CardBg/Card61.png"),
@@ -933,7 +933,7 @@ export const initialAdditionalCryptos = [
   // Manta Pacific Mainnet
   {
     name: "Manta Pacific Mainnet",
-    shortName: "MANTA",
+    shortName: "ATL",
     balance: "0.0",
     icon: require("../assets/icon/MANTAIcon.png"),
     cardImage: require("../assets/CardBg/Card62.png"),

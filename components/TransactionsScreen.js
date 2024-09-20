@@ -111,8 +111,13 @@ function TransactionsScreen() {
     useState(false);
   const [inputAddressModalVisible, setInputAddressModalVisible] =
     useState(false);
+  const [fromDropdownVisible, setFromDropdownVisible] = useState(false);
+  const [toDropdownVisible, setToDropdownVisible] = useState(false);
   const [detectedNetwork, setDetectedNetwork] = useState("");
   const bleManagerRef = useRef(null);
+  const [selectedToken, setSelectedToken] = useState(""); // 用于存储选中的token
+  const [selectedChain, setSelectedChain] = useState(""); // 新增状态
+  const [dropdownVisible, setDropdownVisible] = useState(false); // 控制Dropdown的显示状态
   const [paymentAddress, setPaymentAddress] = useState("Your Payment Address");
   const [addressVerificationMessage, setAddressVerificationMessage] = useState(
     t("Verifying Address on LIKKIM...")
@@ -1912,13 +1917,47 @@ function TransactionsScreen() {
                     </View>
                     <TouchableOpacity
                       style={TransactionsScreenStyle.tokenSelect}
+                      onPress={() =>
+                        setFromDropdownVisible(!fromDropdownVisible)
+                      }
                     >
                       <Text style={TransactionsScreenStyle.subtitleText}>
-                        Select token
+                        {selectedToken || "Select token"}
                       </Text>
                       <Icon name="arrow-drop-down" size={24} color="#ccc" />
                     </TouchableOpacity>
                   </View>
+
+                  {/* From Dropdown */}
+                  {fromDropdownVisible && (
+                    <ScrollView style={TransactionsScreenStyle.dropdown}>
+                      {initialAdditionalCryptos.map((chain) => (
+                        <TouchableOpacity
+                          key={chain.shortName}
+                          style={[
+                            TransactionsScreenStyle.chainTag,
+                            selectedChain === chain.shortName &&
+                              TransactionsScreenStyle.selectedChainTag,
+                          ]}
+                          onPress={() => {
+                            setSelectedToken(chain.shortName);
+                            setSelectedChain(chain.shortName);
+                            setFromDropdownVisible(false); // 关闭 From Dropdown
+                          }}
+                        >
+                          <Text
+                            style={[
+                              TransactionsScreenStyle.chainTagText,
+                              selectedChain === chain.shortName &&
+                                TransactionsScreenStyle.selectedChainTagText,
+                            ]}
+                          >
+                            {chain.name}
+                          </Text>
+                        </TouchableOpacity>
+                      ))}
+                    </ScrollView>
+                  )}
                 </View>
 
                 {/* Swap Button */}
@@ -1936,6 +1975,7 @@ function TransactionsScreen() {
                   >
                     To
                   </Text>
+
                   <View style={TransactionsScreenStyle.swapInputContainer}>
                     <View
                       style={{
@@ -1971,16 +2011,48 @@ function TransactionsScreen() {
                     </View>
                     <TouchableOpacity
                       style={TransactionsScreenStyle.tokenSelect}
+                      onPress={() => setToDropdownVisible(!toDropdownVisible)}
                     >
                       <Text style={TransactionsScreenStyle.subtitleText}>
-                        Select token
+                        {selectedToken || "Select token"}
                       </Text>
                       <Icon name="arrow-drop-down" size={24} color="#ccc" />
                     </TouchableOpacity>
                   </View>
+
+                  {/* To Dropdown */}
+                  {toDropdownVisible && (
+                    <ScrollView style={TransactionsScreenStyle.dropdown}>
+                      {initialAdditionalCryptos.map((chain) => (
+                        <TouchableOpacity
+                          key={chain.shortName}
+                          style={[
+                            TransactionsScreenStyle.chainTag,
+                            selectedChain === chain.shortName &&
+                              TransactionsScreenStyle.selectedChainTag,
+                          ]}
+                          onPress={() => {
+                            setSelectedToken(chain.shortName);
+                            setSelectedChain(chain.shortName);
+                            setToDropdownVisible(false); // 关闭 To Dropdown
+                          }}
+                        >
+                          <Text
+                            style={[
+                              TransactionsScreenStyle.chainTagText,
+                              selectedChain === chain.shortName &&
+                                TransactionsScreenStyle.selectedChainTagText,
+                            ]}
+                          >
+                            {chain.name}
+                          </Text>
+                        </TouchableOpacity>
+                      ))}
+                    </ScrollView>
+                  )}
                 </View>
 
-                {/* confrim Button */}
+                {/* Confirm Button */}
                 <TouchableOpacity
                   onPress={() => setSwapModalVisible(false)}
                   style={TransactionsScreenStyle.swapConfirmButton}
@@ -1989,6 +2061,7 @@ function TransactionsScreen() {
                     Confirm
                   </Text>
                 </TouchableOpacity>
+
                 {/* Close Button */}
                 <TouchableOpacity
                   onPress={() => setSwapModalVisible(false)}
