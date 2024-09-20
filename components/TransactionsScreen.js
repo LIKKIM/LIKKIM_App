@@ -1887,7 +1887,6 @@ function TransactionsScreen() {
                   >
                     From
                   </Text>
-
                   <View style={TransactionsScreenStyle.swapInputContainer}>
                     <View
                       style={{
@@ -1934,7 +1933,6 @@ function TransactionsScreen() {
                             )?.name
                           : "Select token"}
                       </Text>
-
                       <Icon name="arrow-drop-down" size={24} color="#ccc" />
                     </TouchableOpacity>
                   </View>
@@ -1947,19 +1945,18 @@ function TransactionsScreen() {
                           key={`${chain.shortName}-${index}`}
                           style={[
                             TransactionsScreenStyle.chainTag,
-                            selectedFromChain === chain.shortName &&
+                            selectedFromToken === chain.shortName &&
                               TransactionsScreenStyle.selectedChainTag,
                           ]}
                           onPress={() => {
-                            setSelectedFromToken(chain.shortName); // Use from-specific state
-                            setSelectedFromChain(chain.shortName); // Use from-specific state
-                            setFromDropdownVisible(false); // Close the From dropdown
+                            setSelectedFromToken(chain.shortName);
+                            setFromDropdownVisible(false);
                           }}
                         >
                           <Text
                             style={[
                               TransactionsScreenStyle.chainTagText,
-                              selectedFromChain === chain.shortName &&
+                              selectedFromToken === chain.shortName &&
                                 TransactionsScreenStyle.selectedChainTagText,
                             ]}
                           >
@@ -1986,7 +1983,6 @@ function TransactionsScreen() {
                   >
                     To
                   </Text>
-
                   <View style={TransactionsScreenStyle.swapInputContainer}>
                     <View
                       style={{
@@ -2031,7 +2027,6 @@ function TransactionsScreen() {
                             )?.name
                           : "Select token"}
                       </Text>
-
                       <Icon name="arrow-drop-down" size={24} color="#ccc" />
                     </TouchableOpacity>
                   </View>
@@ -2044,19 +2039,18 @@ function TransactionsScreen() {
                           key={`${chain.shortName}-${index}`}
                           style={[
                             TransactionsScreenStyle.chainTag,
-                            selectedToChain === chain.shortName &&
+                            selectedToToken === chain.shortName &&
                               TransactionsScreenStyle.selectedChainTag,
                           ]}
                           onPress={() => {
-                            setSelectedToToken(chain.shortName); // Use to-specific state
-                            setSelectedToChain(chain.shortName); // Use to-specific state
-                            setToDropdownVisible(false); // Close the To dropdown
+                            setSelectedToToken(chain.shortName);
+                            setToDropdownVisible(false);
                           }}
                         >
                           <Text
                             style={[
                               TransactionsScreenStyle.chainTagText,
-                              selectedToChain === chain.shortName &&
+                              selectedToToken === chain.shortName &&
                                 TransactionsScreenStyle.selectedChainTagText,
                             ]}
                           >
