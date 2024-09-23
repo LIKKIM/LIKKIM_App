@@ -467,7 +467,7 @@ const WalletScreenStyles = (isDarkMode) => {
     // 卡片容器样式
     cardContainer: {
       position: "relative",
-      marginBottom: -130,
+      // marginBottom: -130,
     },
 
     cardIcon: {
@@ -529,11 +529,11 @@ const WalletScreenStyles = (isDarkMode) => {
       width: 326,
       height: 206,
       borderRadius: 20,
-      overflow: "hidden",
+      // overflow: "hidden",
       justifyContent: "center",
       alignItems: "center",
       backgroundColor: cardBackgroundColor,
-      marginBottom: 20,
+      // marginBottom: 20,
     },
 
     cardFirst: {

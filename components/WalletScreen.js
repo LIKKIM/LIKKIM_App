@@ -1,4 +1,18 @@
-// WalletScreen.js
+// import React, { useState, useEffect, useRef, useContext } from "react";
+// import WalletList from "./CardListCom";
+
+
+
+
+// function WalletScreen() {
+
+//   return <WalletList />;
+// };
+
+// export default WalletList;
+
+
+// // WalletScreen.js
 import React, { useState, useEffect, useRef, useContext } from "react";
 import {
   View,
@@ -7,6 +21,7 @@ import {
   TouchableOpacity,
   Modal,
   ImageBackground,
+  PanResponder,
   TextInput,
   Animated,
   Easing,
@@ -39,6 +54,7 @@ import PriceChartCom from "./PriceChartCom";
 import EmptyWalletView from "./modal/EmptyWalletView";
 import TabModal from "./walletScreen/TabModal";
 import ModalsContainer from "./walletScreen/ModalsContainer";
+import WalletList from "./CardListCom";
 
 const serviceUUID = "0000FFE0-0000-1000-8000-00805F9B34FB";
 const writeCharacteristicUUID = "0000FFE2-0000-1000-8000-00805F9B34FB";
@@ -1612,12 +1628,16 @@ function WalletScreen({ route, navigation }) {
         (cardStartPositions.current[_index] = py)
     );
 
+
+
+
   return (
     <LinearGradient
       colors={isDarkMode ? ["#24234C", "#101021"] : ["#FFFFFF", "#EDEBEF"]}
       style={WalletScreenStyle.linearGradient}
     >
       <ScrollView
+        scrollEnabled={false}
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
         ref={scrollViewRef}
@@ -1671,7 +1691,13 @@ function WalletScreen({ route, navigation }) {
             t={t}
           />
         )}
-        {cryptoCards.map((card, index) => {
+
+
+
+        {<WalletList cards={cryptoCards} priceChanges={priceChanges} WalletScreenStyle={WalletScreenStyle} handleQRCodePress={handleQRCodePress} />}
+
+
+        {[].map((card, index) => {
           const isBlackText = ["BTC", "USDT", "BCH", "DOT", "DOGE"].includes(
             card.shortName
           );
@@ -1684,8 +1710,8 @@ function WalletScreen({ route, navigation }) {
                 ? "#FF5252"
                 : "#F23645"
               : isBlackText
-              ? "#22AA94"
-              : "#0C9981";
+                ? "#22AA94"
+                : "#0C9981";
 
           return (
             <TouchableOpacity
@@ -1824,14 +1850,13 @@ function WalletScreen({ route, navigation }) {
                                 isBlackText && { color: "#121518" },
                               ]}
                             >
-                              {`${
-                                i === 0
-                                  ? card.balance
-                                  : getConvertedBalance(
-                                      card.balance,
-                                      card.shortName
-                                    )
-                              } ${i === 0 ? card.shortName : currencyUnit}`}
+                              {`${i === 0
+                                ? card.balance
+                                : getConvertedBalance(
+                                  card.balance,
+                                  card.shortName
+                                )
+                                } ${i === 0 ? card.shortName : currencyUnit}`}
                             </Text>
                           )
                         )}
