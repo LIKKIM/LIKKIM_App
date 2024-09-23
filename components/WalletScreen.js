@@ -1,18 +1,4 @@
-// import React, { useState, useEffect, useRef, useContext } from "react";
-// import WalletList from "./CardListCom";
 
-
-
-
-// function WalletScreen() {
-
-//   return <WalletList />;
-// };
-
-// export default WalletList;
-
-
-// // WalletScreen.js
 import React, { useState, useEffect, useRef, useContext } from "react";
 import {
   View,
@@ -31,6 +17,8 @@ import {
   Button,
   RefreshControl,
   Clipboard,
+  TouchableWithoutFeedback,
+  TouchableHighlight
 } from "react-native";
 
 // 第三方库
@@ -1501,6 +1489,9 @@ function WalletScreen({ route, navigation }) {
   };
 
   const handleCardPress = (cryptoName, index) => {
+
+    console.log('click card...')
+
     const crypto = cryptoCards.find((card) => card.name === cryptoName);
     setSelectedAddress(crypto?.address || "Unknown");
     setSelectedCardName(cryptoName);
@@ -1613,7 +1604,7 @@ function WalletScreen({ route, navigation }) {
 
   const animatedCardStyle = (index) => {
     const cardStartPosition = cardStartPositions.current[index] || 0;
-    const endPosition = 120 - (scrollYOffset.current || 0); // 考虑 scrollTo 的 Y 偏移量
+    const endPosition = Platform.OS == 'android' ? 60 : 120 - (scrollYOffset.current || 0); // 考虑 scrollTo 的 Y 偏移量
     const translateY = animation.interpolate({
       inputRange: [0, 1],
       outputRange: [0, endPosition - cardStartPosition],
@@ -1641,7 +1632,7 @@ function WalletScreen({ route, navigation }) {
       style={WalletScreenStyle.linearGradient}
     >
       <ScrollView
-        scrollEnabled={false}
+
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
         ref={scrollViewRef}
@@ -1697,11 +1688,11 @@ function WalletScreen({ route, navigation }) {
         )}
 
 
+        {/* TODO fix */}
+        {/* {<WalletList cards={cryptoCards} priceChanges={priceChanges} WalletScreenStyle={WalletScreenStyle} handleQRCodePress={handleQRCodePress} />} */}
 
-        {<WalletList cards={cryptoCards} priceChanges={priceChanges} WalletScreenStyle={WalletScreenStyle} handleQRCodePress={handleQRCodePress} />}
 
-
-        {[].map((card, index) => {
+        {cryptoCards.map((card, index) => {
           const isBlackText = ["BTC", "USDT", "BCH", "DOT", "DOGE"].includes(
             card.shortName
           );
@@ -1718,7 +1709,9 @@ function WalletScreen({ route, navigation }) {
                 : "#0C9981";
 
           return (
-            <TouchableOpacity
+            <TouchableHighlight
+
+              underlayColor={'transparent'}
               key={`${card.shortName}_${index}`}
               onPress={() => handleCardPress(card.name, index)}
               ref={(el) => {
@@ -1834,6 +1827,7 @@ function WalletScreen({ route, navigation }) {
                     cardInfoVisible && (
                       <View style={WalletScreenStyle.cardModalContent}>
                         <TouchableOpacity
+                          opacity={1}
                           onPress={() => handleQRCodePress(card)}
                           style={{ position: "absolute", right: 0, top: 0 }}
                         >
@@ -1869,7 +1863,7 @@ function WalletScreen({ route, navigation }) {
                   )}
                 </ImageBackground>
               </Animated.View>
-            </TouchableOpacity>
+            </TouchableHighlight>
           );
         })}
 

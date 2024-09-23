@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Animated,
   ScrollView,
+  Platform,
 } from "react-native";
 import PriceChartCom from "../PriceChartCom";
 import { LinearGradient } from "expo-linear-gradient";
@@ -270,8 +271,10 @@ const TabModal = ({
 
       <Animated.View
         style={[
+
           WalletScreenStyle.animatedTabContainer,
           { opacity: tabOpacity },
+          { marginTop: Platform.OS === 'android' ? -30 : 0 }
         ]}
       >
         <View
@@ -308,7 +311,7 @@ const TabModal = ({
               style={[
                 WalletScreenStyle.tabButtonText,
                 activeTab === "History" &&
-                  WalletScreenStyle.activeTabButtonText,
+                WalletScreenStyle.activeTabButtonText,
               ]}
             >
               {t("History")}

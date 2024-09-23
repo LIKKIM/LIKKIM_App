@@ -5,6 +5,12 @@ import { CryptoContext } from "./CryptoContext";
 
 
 
+/**
+ * 
+ * TODO fix
+ * @param {*} param0 
+ * @returns 
+ */
 const WalletList = ({ cards, priceChanges, WalletScreenStyle, modalVisible, handleQRCodePress }) => {
 
 

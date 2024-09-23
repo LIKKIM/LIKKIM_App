@@ -470,7 +470,7 @@ const WalletScreenStyles = (isDarkMode) => {
     // 卡片容器样式
     cardContainer: {
       position: "relative",
-      // marginBottom: -130,
+      marginBottom: -130,
     },
 
     cardIcon: {
@@ -532,11 +532,11 @@ const WalletScreenStyles = (isDarkMode) => {
       width: 326,
       height: 206,
       borderRadius: 20,
-      // overflow: "hidden",
+      overflow: "hidden",
       justifyContent: "center",
       alignItems: "center",
       backgroundColor: cardBackgroundColor,
-      // marginBottom: 20,
+      marginBottom: 20,
     },
 
     cardFirst: {
@@ -544,7 +544,7 @@ const WalletScreenStyles = (isDarkMode) => {
       shadowColor: shadowColor,
       shadowOpacity: 0.2,
       shadowRadius: 20,
-      elevation: 10,
+      elevation: 5,
     },
 
     cardOthers: {
@@ -552,7 +552,7 @@ const WalletScreenStyles = (isDarkMode) => {
       shadowColor: shadowColor,
       shadowOpacity: 0.2,
       shadowRadius: 30,
-      elevation: 20,
+      elevation: 5,
     },
 
     // 通用按钮样式
