@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef, useContext } from "react";
 import {
   View,
@@ -18,7 +17,7 @@ import {
   RefreshControl,
   Clipboard,
   TouchableWithoutFeedback,
-  TouchableHighlight
+  TouchableHighlight,
 } from "react-native";
 
 // 第三方库
@@ -130,9 +129,12 @@ function WalletScreen({ route, navigation }) {
     t("Verifying Address on LIKKIM...")
   );
   const [refreshing, setRefreshing] = useState(false);
-  const chainCategories = Array.from(
-    new Set(initialAdditionalCryptos.map((crypto) => crypto.chain))
-  );
+  const chainCategories = initialAdditionalCryptos.map((crypto) => ({
+    name: crypto.chain,
+    chainIcon: crypto.chainIcon,
+    ...crypto, // 这里确保包括所有相关属性
+  }));
+
   const [importingModalVisible, setImportingModalVisible] = useState(false);
   const restoreIdentifier = Constants.installationId;
   const [pinCode, setPinCode] = useState("");
@@ -1489,8 +1491,7 @@ function WalletScreen({ route, navigation }) {
   };
 
   const handleCardPress = (cryptoName, index) => {
-
-    console.log('click card...')
+    console.log("click card...");
 
     const crypto = cryptoCards.find((card) => card.name === cryptoName);
     setSelectedAddress(crypto?.address || "Unknown");
@@ -1604,7 +1605,8 @@ function WalletScreen({ route, navigation }) {
 
   const animatedCardStyle = (index) => {
     const cardStartPosition = cardStartPositions.current[index] || 0;
-    const endPosition = Platform.OS == 'android' ? 60 : 120 - (scrollYOffset.current || 0); // 考虑 scrollTo 的 Y 偏移量
+    const endPosition =
+      Platform.OS == "android" ? 60 : 120 - (scrollYOffset.current || 0); // 考虑 scrollTo 的 Y 偏移量
     const translateY = animation.interpolate({
       inputRange: [0, 1],
       outputRange: [0, endPosition - cardStartPosition],
@@ -1623,16 +1625,12 @@ function WalletScreen({ route, navigation }) {
         (cardStartPositions.current[_index] = py)
     );
 
-
-
-
   return (
     <LinearGradient
       colors={isDarkMode ? ["#24234C", "#101021"] : ["#FFFFFF", "#EDEBEF"]}
       style={WalletScreenStyle.linearGradient}
     >
       <ScrollView
-
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
         ref={scrollViewRef}
@@ -1687,10 +1685,8 @@ function WalletScreen({ route, navigation }) {
           />
         )}
 
-
         {/* TODO fix */}
         {/* {<WalletList cards={cryptoCards} priceChanges={priceChanges} WalletScreenStyle={WalletScreenStyle} handleQRCodePress={handleQRCodePress} />} */}
-
 
         {cryptoCards.map((card, index) => {
           const isBlackText = ["BTC", "USDT", "BCH", "DOT", "DOGE"].includes(
@@ -1705,13 +1701,12 @@ function WalletScreen({ route, navigation }) {
                 ? "#FF5252"
                 : "#F23645"
               : isBlackText
-                ? "#22AA94"
-                : "#0C9981";
+              ? "#22AA94"
+              : "#0C9981";
 
           return (
             <TouchableHighlight
-
-              underlayColor={'transparent'}
+              underlayColor={"transparent"}
               key={`${card.shortName}_${index}`}
               onPress={() => handleCardPress(card.name, index)}
               ref={(el) => {
@@ -1848,13 +1843,14 @@ function WalletScreen({ route, navigation }) {
                                 isBlackText && { color: "#121518" },
                               ]}
                             >
-                              {`${i === 0
-                                ? card.balance
-                                : getConvertedBalance(
-                                  card.balance,
-                                  card.shortName
-                                )
-                                } ${i === 0 ? card.shortName : currencyUnit}`}
+                              {`${
+                                i === 0
+                                  ? card.balance
+                                  : getConvertedBalance(
+                                      card.balance,
+                                      card.shortName
+                                    )
+                              } ${i === 0 ? card.shortName : currencyUnit}`}
                             </Text>
                           )
                         )}

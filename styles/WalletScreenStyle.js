@@ -80,6 +80,7 @@ const WalletScreenStyles = (isDarkMode) => {
       height: 14,
       backgroundColor: "#8E80F040",
       marginRight: 8,
+      resizeMode: "contain",
       borderRadius: 10,
     },
 
