@@ -1959,15 +1959,31 @@ function TransactionsScreen() {
                             setFromDropdownVisible(false);
                           }}
                         >
-                          <Text
-                            style={[
-                              TransactionsScreenStyle.chainTagText,
-                              selectedFromToken === chain.shortName &&
-                                TransactionsScreenStyle.selectedChainTagText,
-                            ]}
+                          <View
+                            style={{
+                              flexDirection: "row",
+                              alignItems: "center",
+                            }}
                           >
-                            {chain.name}
-                          </Text>
+                            <Image
+                              source={chain.chainIcon}
+                              style={{
+                                width: 20,
+                                height: 20,
+                                borderRadius: 15,
+                                marginRight: 10,
+                              }}
+                            />
+                            <Text
+                              style={[
+                                TransactionsScreenStyle.chainTagText,
+                                selectedFromToken === chain.shortName &&
+                                  TransactionsScreenStyle.selectedChainTagText,
+                              ]}
+                            >
+                              {chain.name}
+                            </Text>
+                          </View>
                         </TouchableOpacity>
                       ))}
                     </ScrollView>
