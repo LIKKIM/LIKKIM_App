@@ -22,13 +22,13 @@ const AddWalletModal = ({
       <BlurView intensity={10} style={styles.centeredView}>
         <View style={styles.modalView}>
           <TouchableOpacity style={styles.modalButton} onPress={onCreateWallet}>
-            <Text style={styles.ButtonText}>{t("Create Wallet")}</Text>
+            <Text style={styles.mainButtonText}>{t("Create Wallet")}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.modalButton} onPress={onImportWallet}>
-            <Text style={styles.ButtonText}>{t("Import Wallet")}</Text>
+            <Text style={styles.mainButtonText}>{t("Import Wallet")}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.modalButton} onPress={onWalletTest}>
-            <Text style={styles.ButtonText}>
+            <Text style={styles.mainButtonText}>
               {t("直接创建钱包用于测试(无法转账)")}
             </Text>
           </TouchableOpacity>

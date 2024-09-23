@@ -17,8 +17,37 @@ const TransactionsScreenStyles = (isDarkMode) => {
   const textBtnColor = isDarkMode ? "#fff" : "#fff";
   const textColor = isDarkMode ? "#fff" : "#000";
   const titleColor = isDarkMode ? "#fff" : "#000";
+  const dropdownBackgroundColor = isDarkMode ? "#484692" : "#eee";
 
   return StyleSheet.create({
+    // Dropdown Styles
+    dropdown: {
+      position: "absolute",
+      top: 120, // 确保下拉菜单显示在按钮下方
+      width: "100%",
+      maxHeight: 200, // 限制 dropdown 最大高度，超出时可以滚动
+      backgroundColor: dropdownBackgroundColor,
+      borderRadius: 10,
+      padding: 10,
+      zIndex: 999, // 提高 zIndex 确保 dropdown 始终在其他组件上方
+      overflow: "hidden", // 避免溢出内容被隐藏
+    },
+    chainTag: {
+      paddingVertical: 10,
+      paddingHorizontal: 15,
+      borderBottomWidth: 1,
+      borderBottomColor: isDarkMode ? "#555" : "#ddd",
+    },
+    selectedChainTag: {
+      backgroundColor: isDarkMode ? "#6C6CF4" : "#ccc",
+    },
+    chainTagText: {
+      color: isDarkMode ? "#fff" : "#000",
+    },
+    selectedChainTagText: {
+      color: isDarkMode ? "#000" : "#fff",
+    },
+
     container: {
       flex: 1,
       justifyContent: "center",
@@ -56,13 +85,16 @@ const TransactionsScreenStyles = (isDarkMode) => {
       padding: 10,
     },
     swapInput: {
-      flex: 1,
-      fontSize: 18,
-      color: "#fff",
+      width: "100%", // 确保 TextInput 占满容器宽度
+      height: 40,
+      paddingHorizontal: 10,
     },
     tokenSelect: {
+      flex: 1, // 平均分配宽度
       flexDirection: "row",
       alignItems: "center",
+      justifyContent: "space-between", // 确保“Select token”和图标两边对齐
+      paddingHorizontal: 10, // 可选，调整按钮的内边距
     },
     tokenSelectText: {
       color: "#fff",
@@ -70,9 +102,10 @@ const TransactionsScreenStyles = (isDarkMode) => {
     },
     swapButton: {
       backgroundColor: btnColor,
-      padding: 10,
+      padding: 6,
       borderRadius: 50,
-      alignItems: "center",
+      marginTop: -10,
+      alignSelf: "flex-end",
     },
 
     amountInput: {
@@ -173,7 +206,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       borderWidth: 3,
       borderColor: buttonBackgroundColor,
       padding: 10,
-      width: "100%",
+      width: 280,
       justifyContent: "center",
       borderRadius: 30,
       height: 60,
@@ -344,10 +377,30 @@ const TransactionsScreenStyles = (isDarkMode) => {
       alignItems: "center",
       justifyContent: "space-between",
     },
+    swapModalView: {
+      margin: 20,
+      height: 500,
+      width: "90%",
+      backgroundColor: modalBackgroundColor,
+      borderRadius: 20,
+      padding: 35,
+      alignItems: "center",
+      justifyContent: "space-between",
+    },
     noHistoryText: {
       fontSize: 16,
       color: secondTextColor,
       textAlign: "center",
+    },
+    swapConfirmButton: {
+      backgroundColor: btnColor,
+      padding: 10,
+      width: 280,
+      justifyContent: "center",
+      borderRadius: 30,
+      height: 60,
+      alignItems: "center",
+      marginTop: 20,
     },
     optionButton: {
       backgroundColor: btnColor,
@@ -445,9 +498,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       fontSize: 14,
       color: secondTextColor,
       textAlign: "center",
-      marginBottom: 20,
       flexWrap: "wrap",
-      width: 326,
     },
     TransactionModalTitle: {
       fontSize: 16,
