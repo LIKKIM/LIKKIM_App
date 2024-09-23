@@ -21,9 +21,20 @@ const TransactionsScreenStyles = (isDarkMode) => {
 
   return StyleSheet.create({
     // Dropdown Styles
-    dropdown: {
+    fromDropdown: {
       position: "absolute",
       top: 100, // 确保下拉菜单显示在按钮下方
+      width: "100%",
+      maxHeight: 200, // 限制 dropdown 最大高度，超出时可以滚动
+      backgroundColor: dropdownBackgroundColor,
+      borderRadius: 10,
+      padding: 10,
+      zIndex: 999, // 提高 zIndex 确保 dropdown 始终在其他组件上方
+      overflow: "hidden", // 避免溢出内容被隐藏
+    },
+    toDropdown: {
+      position: "absolute",
+      top: 70, // 确保下拉菜单显示在按钮下方
       width: "100%",
       maxHeight: 200, // 限制 dropdown 最大高度，超出时可以滚动
       backgroundColor: dropdownBackgroundColor,

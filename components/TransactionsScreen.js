@@ -1945,7 +1945,7 @@ function TransactionsScreen() {
 
                   {/* From Dropdown */}
                   {fromDropdownVisible && (
-                    <ScrollView style={TransactionsScreenStyle.dropdown}>
+                    <ScrollView style={TransactionsScreenStyle.fromDropdown}>
                       {initialAdditionalCryptos.map((chain, index) => (
                         <TouchableOpacity
                           key={`${chain.shortName}-${index}`}
@@ -2044,7 +2044,7 @@ function TransactionsScreen() {
 
                   {/* To Dropdown */}
                   {toDropdownVisible && (
-                    <ScrollView style={TransactionsScreenStyle.dropdown}>
+                    <ScrollView style={TransactionsScreenStyle.toDropdown}>
                       {initialAdditionalCryptos.map((chain, index) => (
                         <TouchableOpacity
                           key={`${chain.shortName}-${index}`}
