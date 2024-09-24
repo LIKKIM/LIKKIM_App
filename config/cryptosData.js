@@ -1126,7 +1126,7 @@ export const initialAdditionalCryptos = [
   }, */
 
   // Polygon Zkevm
-  {
+  /*   {
     name: "Polygon Zkevm",
     shortName: "MATIC-ZKEVM",
     balance: "0.0",
@@ -1141,7 +1141,7 @@ export const initialAdditionalCryptos = [
     fee: "0.001",
     valueUsd: "0.0",
     priceUsd: "1.0",
-  },
+  }, */
 
   // Ronin
   /*  {
