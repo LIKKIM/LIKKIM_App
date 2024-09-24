@@ -59,7 +59,11 @@ export default function App() {
   if (isFirstLaunch === null) {
     return null;
   } else if (isFirstLaunch === true) {
-    return <OnboardingScreen onDone={handleOnboardingDone} />;
+    return (
+      <CryptoProvider>
+        <OnboardingApp handleOnboardingDone={handleOnboardingDone} />
+      </CryptoProvider>
+    );
   }
 
   return (
@@ -76,6 +80,20 @@ export default function App() {
         </NavigationContainer>
       </CryptoProvider>
     </GestureHandlerRootView>
+  );
+}
+
+function OnboardingApp({ handleOnboardingDone }) {
+  const { isDarkMode } = useContext(DarkModeContext); // 获取 isDarkMode
+
+  return (
+    <>
+      <StatusBar
+        backgroundColor={isDarkMode ? "#24234C" : "#FFFFFF"}
+        barStyle={isDarkMode ? "light-content" : "dark-content"}
+      />
+      <OnboardingScreen onDone={handleOnboardingDone} />
+    </>
   );
 }
 
@@ -260,8 +278,7 @@ function AppContent({
       </Tab.Navigator>
 
       <StatusBar
-        backgroundColor={isDarkMode ? "#101021" : "#FFFFFF"}
-        //  style={isDarkMode ? "light" : "dark"}
+        backgroundColor={isDarkMode ? "#24234C" : "#FFFFFF"}
         barStyle={isDarkMode ? "light-content" : "dark-content"}
       />
 
