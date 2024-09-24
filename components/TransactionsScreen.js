@@ -143,11 +143,8 @@ function TransactionsScreen() {
   // 扫描蓝牙设备的函数
   const scanDevices = () => {
     if (Platform.OS !== "web" && !isScanning) {
-
-
       //申请权限
       checkAndReqPermission(() => {
-
         console.log("Scanning started");
         setIsScanning(true);
 
@@ -156,7 +153,10 @@ function TransactionsScreen() {
           { allowDuplicates: true },
           (error, device) => {
             if (error) {
-              console.error("Transcation Page BleManager scanning error:", error);
+              console.error(
+                "Transcation Page BleManager scanning error:",
+                error
+              );
               //   return;
             }
 
@@ -172,18 +172,12 @@ function TransactionsScreen() {
           }
         );
 
-
         setTimeout(() => {
           console.log("Scanning stopped");
           bleManagerRef.current.stopDeviceScan();
           setIsScanning(false);
         }, 2000);
-
       });
-
-
-
-
     } else {
       console.log("Attempt to scan while already scanning");
     }
@@ -1319,26 +1313,25 @@ function TransactionsScreen() {
   //安卓高版本申请蓝牙权限
   const checkAndReqPermission = async (cb) => {
     if (Platform.OS === "android" && Platform.Version >= 23) {
-      console.log('安卓申请权限。。。')
+      console.log("安卓申请权限。。。");
       // Scanning: Checking permissions...
       const enableds = await PermissionsAndroid.requestMultiple([
         PermissionsAndroid.PERMISSIONS.BLUETOOTH_CONNECT,
         PermissionsAndroid.PERMISSIONS.BLUETOOTH_SCAN,
         PermissionsAndroid.PERMISSIONS.BLUETOOTH_ADVERTISE,
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
       ]);
       let canRunCb = true;
       for (let permissionItem in enableds) {
-        if (enableds[permissionItem] !== 'granted') {
-          console.warn(permissionItem + '权限未授予');
+        if (enableds[permissionItem] !== "granted") {
+          console.warn(permissionItem + "权限未授予");
           canRunCb = false;
         }
       }
 
       canRunCb && cb();
     }
-  }
-
+  };
 
   // 使用 useEffect 监听模态窗口的变化
   useEffect(() => {
@@ -1356,24 +1349,17 @@ function TransactionsScreen() {
   // Update Bluetooth modal visibility management
   useEffect(() => {
     if (Platform.OS !== "web") {
-
-
-
       bleManagerRef.current = new BleManager({
         restoreStateIdentifier: restoreIdentifier,
       });
-
-
 
       const subscription = bleManagerRef.current.onStateChange((state) => {
         if (state === "PoweredOn") {
           // 添加短暂延迟以确保蓝牙模块完全准备好
 
           setTimeout(() => {
-
             scanDevices();
           }, 2000); // 1秒延迟
-
         }
       }, true);
 
@@ -1979,8 +1965,8 @@ function TransactionsScreen() {
                         <Text style={TransactionsScreenStyle.subtitleText}>
                           {selectedFromToken
                             ? initialAdditionalCryptos.find(
-                              (token) => token.shortName === selectedFromToken
-                            )?.name
+                                (token) => token.shortName === selectedFromToken
+                              )?.name
                             : "Select token"}
                         </Text>
                         <Icon name="arrow-drop-down" size={24} color="#ccc" />
@@ -1997,7 +1983,7 @@ function TransactionsScreen() {
                           style={[
                             TransactionsScreenStyle.chainTag,
                             selectedFromToken === chain.shortName &&
-                            TransactionsScreenStyle.selectedChainTag,
+                              TransactionsScreenStyle.selectedChainTag,
                           ]}
                           onPress={() => {
                             setSelectedFromToken(chain.shortName);
@@ -2023,7 +2009,7 @@ function TransactionsScreen() {
                               style={[
                                 TransactionsScreenStyle.chainTagText,
                                 selectedFromToken === chain.shortName &&
-                                TransactionsScreenStyle.selectedChainTagText,
+                                  TransactionsScreenStyle.selectedChainTagText,
                               ]}
                             >
                               {chain.name}
@@ -2094,8 +2080,8 @@ function TransactionsScreen() {
                         <Text style={TransactionsScreenStyle.subtitleText}>
                           {selectedToToken
                             ? initialAdditionalCryptos.find(
-                              (token) => token.shortName === selectedToToken
-                            )?.name
+                                (token) => token.shortName === selectedToToken
+                              )?.name
                             : "Select token"}
                         </Text>
                         <Icon name="arrow-drop-down" size={24} color="#ccc" />
@@ -2112,7 +2098,7 @@ function TransactionsScreen() {
                           style={[
                             TransactionsScreenStyle.chainTag,
                             selectedFromToken === chain.shortName &&
-                            TransactionsScreenStyle.selectedChainTag,
+                              TransactionsScreenStyle.selectedChainTag,
                           ]}
                           onPress={() => {
                             setSelectedFromToken(chain.shortName);
@@ -2138,7 +2124,7 @@ function TransactionsScreen() {
                               style={[
                                 TransactionsScreenStyle.chainTagText,
                                 selectedFromToken === chain.shortName &&
-                                TransactionsScreenStyle.selectedChainTagText,
+                                  TransactionsScreenStyle.selectedChainTagText,
                               ]}
                             >
                               {chain.name}

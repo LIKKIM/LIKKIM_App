@@ -15,6 +15,7 @@ import {
   Linking,
   Alert,
   Button,
+  PermissionsAndroid,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -333,6 +334,29 @@ function MyColdWalletScreen() {
 
   const bleManagerRef = useRef(null);
 
+  //安卓高版本申请蓝牙权限
+  const checkAndReqPermission = async (cb) => {
+    if (Platform.OS === "android" && Platform.Version >= 23) {
+      console.log("安卓申请权限。。。");
+      // Scanning: Checking permissions...
+      const enableds = await PermissionsAndroid.requestMultiple([
+        PermissionsAndroid.PERMISSIONS.BLUETOOTH_CONNECT,
+        PermissionsAndroid.PERMISSIONS.BLUETOOTH_SCAN,
+        PermissionsAndroid.PERMISSIONS.BLUETOOTH_ADVERTISE,
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+      ]);
+      let canRunCb = true;
+      for (let permissionItem in enableds) {
+        if (enableds[permissionItem] !== "granted") {
+          console.warn(permissionItem + "权限未授予");
+          canRunCb = false;
+        }
+      }
+
+      canRunCb && cb();
+    }
+  };
+
   useEffect(() => {
     if (Platform.OS !== "web") {
       bleManagerRef.current = new BleManager({
@@ -350,7 +374,7 @@ function MyColdWalletScreen() {
 
       return () => {
         subscription.remove();
-        bleManagerRef.current.destroy();
+        bleManagerRef.current && bleManagerRef.current.destroy();
       };
     }
   }, []);
@@ -405,40 +429,44 @@ function MyColdWalletScreen() {
     });
   }, [t, navigation]);
 
+  // 扫描蓝牙设备的函数
   const scanDevices = () => {
     if (Platform.OS !== "web" && !isScanning) {
-      console.log("Scanning started");
-      setIsScanning(true);
-      const scanOptions = { allowDuplicates: true };
-      const scanFilter = null;
+      //申请权限
+      checkAndReqPermission(() => {
+        console.log("Scanning started");
+        setIsScanning(true);
 
-      bleManagerRef.current.startDeviceScan(
-        scanFilter,
-        scanOptions,
-        (error, device) => {
-          if (error) {
-            console.error("BleManager scanning error:", error);
-            if (error.errorCode === BleErrorCode.BluetoothUnsupported) {
-              //   console.error("Bluetooth LE is unsupported on this device");
-              //    return;
+        bleManagerRef.current?.startDeviceScan(
+          null,
+          { allowDuplicates: true },
+          (error, device) => {
+            if (error) {
+              console.error(
+                "Transcation Page BleManager scanning error:",
+                error
+              );
+              //   return;
             }
-          } else if (device.name && device.name.includes("LIKKIM")) {
-            setDevices((prevDevices) => {
-              if (!prevDevices.find((d) => d.id === device.id)) {
-                return [...prevDevices, device];
-              }
-              return prevDevices;
-            });
-            //   console.log("Scanned device:", device);
-          }
-        }
-      );
 
-      setTimeout(() => {
-        console.log("Scanning stopped");
-        bleManagerRef.current.stopDeviceScan();
-        setIsScanning(false);
-      }, 2000);
+            if (device && device.name && device.name.includes("LIKKIM")) {
+              setDevices((prevDevices) => {
+                if (!prevDevices.find((d) => d.id === device.id)) {
+                  return [...prevDevices, device]; // 这里 device 是完整的设备对象
+                }
+                return prevDevices;
+              });
+              //  console.log("Scanned device:", device);
+            }
+          }
+        );
+
+        setTimeout(() => {
+          console.log("Scanning stopped");
+          bleManagerRef.current.stopDeviceScan();
+          setIsScanning(false);
+        }, 2000);
+      });
     } else {
       console.log("Attempt to scan while already scanning");
     }
