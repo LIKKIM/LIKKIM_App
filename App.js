@@ -261,7 +261,8 @@ function AppContent({
 
       <StatusBar
         backgroundColor={isDarkMode ? "#101021" : "#FFFFFF"}
-        style={isDarkMode ? "light" : "dark"}
+        //  style={isDarkMode ? "light" : "dark"}
+        barStyle={isDarkMode ? "light-content" : "dark-content"}
       />
 
       {headerDropdownVisible && (
