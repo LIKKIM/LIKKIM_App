@@ -167,7 +167,7 @@ export const initialAdditionalCryptos = [
   },
 
   // BNB Smart Chain (BEP20)
-  {
+  /*   {
     name: "BNB",
     shortName: "BNB",
     balance: "0.0",
@@ -182,7 +182,7 @@ export const initialAdditionalCryptos = [
     fee: "0.005",
     valueUsd: "0.0",
     priceUsd: "300.0",
-  },
+  }, */
 
   // Fantom (FTM)
   {
@@ -347,7 +347,7 @@ export const initialAdditionalCryptos = [
   },
 
   // Linea (LINA)
-  {
+  /*   {
     name: "Linea",
     shortName: "LINA",
     balance: "0.0",
@@ -362,10 +362,10 @@ export const initialAdditionalCryptos = [
     fee: "0.001",
     valueUsd: "0.0",
     priceUsd: "0.3",
-  },
+  }, */
 
   // Mantle (MNT)
-  {
+  /*   {
     name: "Mantle",
     shortName: "MNT",
     balance: "0.0",
@@ -380,7 +380,7 @@ export const initialAdditionalCryptos = [
     fee: "0.001",
     valueUsd: "0.0",
     priceUsd: "0.4",
-  },
+  }, */
 
   // Ethereum Classic (ETC)
   {
@@ -400,7 +400,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "15.0",
   },
   // Base (BASE)
-  {
+  /*   {
     name: "Base",
     shortName: "BASE",
     balance: "0.0",
@@ -415,7 +415,7 @@ export const initialAdditionalCryptos = [
     fee: "0.001",
     valueUsd: "0.0",
     priceUsd: "0.5",
-  },
+  }, */
 
   // Ripple (XRP)
   {
@@ -471,7 +471,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "7.0",
   },
   // Monero (XMR)
-  {
+  /*   {
     name: "Monero",
     shortName: "XMR",
     balance: "0.0",
@@ -486,10 +486,10 @@ export const initialAdditionalCryptos = [
     fee: "0.001",
     valueUsd: "0.0",
     priceUsd: "150.0",
-  },
+  }, */
 
   // Kusama (KSM)
-  {
+  /*   {
     name: "Kusama",
     shortName: "KSM",
     balance: "0.0",
@@ -504,10 +504,10 @@ export const initialAdditionalCryptos = [
     fee: "0.001",
     valueUsd: "0.0",
     priceUsd: "20.0",
-  },
+  }, */
 
   // Astar (ASTR)
-  {
+  /*   {
     name: "Astar",
     shortName: "ASTR",
     balance: "0.0",
@@ -522,9 +522,9 @@ export const initialAdditionalCryptos = [
     fee: "0.001",
     valueUsd: "0.0",
     priceUsd: "0.1",
-  },
+  }, */
   // Filecoin (FIL)
-  {
+  /*   {
     name: "Filecoin",
     shortName: "FIL",
     balance: "0.0",
@@ -539,7 +539,7 @@ export const initialAdditionalCryptos = [
     fee: "0.001",
     valueUsd: "0.0",
     priceUsd: "5.0",
-  },
+  }, */
 
   // Cosmos (ATOM)
   {
@@ -629,7 +629,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "1.0",
   },
   // Fetch.ai (FET)
-  {
+  /*   {
     name: "Fetch.ai",
     shortName: "FET",
     balance: "0.0",
@@ -644,10 +644,10 @@ export const initialAdditionalCryptos = [
     fee: "0.001",
     valueUsd: "0.0",
     priceUsd: "0.4",
-  },
+  }, */
 
   // Filecoin FEVM (FIL)
-  {
+  /*   {
     name: "Filecoin FEVM",
     shortName: "FIL",
     balance: "0.0",
@@ -662,7 +662,7 @@ export const initialAdditionalCryptos = [
     fee: "0.001",
     valueUsd: "0.0",
     priceUsd: "5.0",
-  },
+  }, */
 
   // IoTeX Network Mainnet (IOTX)
   {
@@ -683,7 +683,7 @@ export const initialAdditionalCryptos = [
   },
 
   // Joystream (JOY)
-  {
+  /*   {
     name: "Joystream",
     shortName: "JOY",
     balance: "0.0",
@@ -698,10 +698,10 @@ export const initialAdditionalCryptos = [
     fee: "0.001",
     valueUsd: "0.0",
     priceUsd: "0.2",
-  },
+  }, */
 
   // Conflux (CFX)
-  {
+  /*   {
     name: "Conflux",
     shortName: "CFX",
     balance: "0.0",
@@ -716,10 +716,10 @@ export const initialAdditionalCryptos = [
     fee: "0.001",
     valueUsd: "0.0",
     priceUsd: "0.2",
-  },
+  }, */
 
   // Conflux eSpace (CFX)
-  {
+  /*   {
     name: "Conflux eSpace",
     shortName: "CFX",
     balance: "0.0",
@@ -734,7 +734,7 @@ export const initialAdditionalCryptos = [
     fee: "0.001",
     valueUsd: "0.0",
     priceUsd: "0.2",
-  },
+  }, */
 
   // Algorand (ALGO)
   {
@@ -755,7 +755,7 @@ export const initialAdditionalCryptos = [
   },
 
   // Akash (AKT)
-  {
+  /*   {
     name: "Akash",
     shortName: "AKT",
     balance: "0.0",
@@ -770,7 +770,7 @@ export const initialAdditionalCryptos = [
     fee: "0.001",
     valueUsd: "0.0",
     priceUsd: "0.8",
-  },
+  }, */
 
   // Aurora (AURORA)
   {
@@ -790,7 +790,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "0.3",
   },
   // Blast (BLAST)
-  {
+  /*   {
     name: "Blast",
     shortName: "BLAST",
     balance: "0.0",
@@ -805,7 +805,7 @@ export const initialAdditionalCryptos = [
     fee: "0.001",
     valueUsd: "0.0",
     priceUsd: "0.05",
-  },
+  }, */
   // Celestia (TIA)
   {
     name: "Celestia",
@@ -824,7 +824,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "1.0",
   },
   // EthereumPoW (ETHW)
-  {
+  /*   {
     name: "EthereumPoW",
     shortName: "ETHW",
     balance: "0.0",
@@ -839,7 +839,7 @@ export const initialAdditionalCryptos = [
     fee: "0.01",
     valueUsd: "0.0",
     priceUsd: "3.0",
-  },
+  }, */
 
   // Boba Network (BOBA)
   {
@@ -895,7 +895,7 @@ export const initialAdditionalCryptos = [
   },
 
   // Kasp (KAS)
-  {
+  /*   {
     name: "Kasp",
     shortName: "KAS",
     balance: "0.0",
@@ -910,10 +910,27 @@ export const initialAdditionalCryptos = [
     fee: "0.0001",
     valueUsd: "0.0",
     priceUsd: "0.02",
+  }, */
+  // Dynex (DNX)
+  /*   {
+    name: "Dynex",
+    shortName: "DNX",
+    balance: "0.0",
+    icon: require("../assets/icon/DynexIcon.png"), // 假设有相应的图标文件
+    cardImage: require("../assets/CardBg/CardDynex.png"), // 假设有相应的背景图片
+    address: "dnx1abc...", // Dynex 的区块链地址示例
+    chain: "Dynex",
+    chainShortName: "DNX",
+    queryChainShortName: "DNX",
+    chainIcon: require("../assets/icon/DynexIcon.png"), // Dynex 的链图标
+    tokenType: "DNX",
+    fee: "0.002", // 假设的交易费
+    valueUsd: "0.0",
+    priceUsd: "0.5", // 假设的 DNX 价格
   },
-
+   */
   // Manta Atlantic
-  {
+  /*   {
     name: "Manta Atlantic",
     shortName: "PAC",
     balance: "0.0",
@@ -928,10 +945,10 @@ export const initialAdditionalCryptos = [
     fee: "0.001",
     valueUsd: "0.0",
     priceUsd: "0.2",
-  },
+  }, */
 
   // Manta Pacific Mainnet
-  {
+  /*   {
     name: "Manta Pacific Mainnet",
     shortName: "ATL",
     balance: "0.0",
@@ -946,10 +963,10 @@ export const initialAdditionalCryptos = [
     fee: "0.001",
     valueUsd: "0.0",
     priceUsd: "0.2",
-  },
+  }, */
 
   // Mixin Virtual Machine (MVM)
-  {
+  /*   {
     name: "Mixin Virtual Machine",
     shortName: "MVM",
     balance: "0.0",
@@ -964,7 +981,7 @@ export const initialAdditionalCryptos = [
     fee: "0.001",
     valueUsd: "0.0",
     priceUsd: "0.1",
-  },
+  }, */
 
   // Near (NEAR)
   {
@@ -985,7 +1002,7 @@ export const initialAdditionalCryptos = [
   },
 
   // Nervos (CKB)
-  {
+  /*   {
     name: "Nervos",
     shortName: "CKB",
     balance: "0.0",
@@ -1000,10 +1017,10 @@ export const initialAdditionalCryptos = [
     fee: "0.0001",
     valueUsd: "0.0",
     priceUsd: "0.02",
-  },
+  }, */
 
   // Neurai (XNA)
-  {
+  /*   {
     name: "Neurai",
     shortName: "XNA",
     balance: "0.0",
@@ -1018,9 +1035,9 @@ export const initialAdditionalCryptos = [
     fee: "0.0001",
     valueUsd: "0.0",
     priceUsd: "0.01",
-  },
+  }, */
   // Nexa (NEXA)
-  {
+  /*   {
     name: "Nexa",
     shortName: "NEXA",
     balance: "0.0",
@@ -1035,10 +1052,10 @@ export const initialAdditionalCryptos = [
     fee: "0.0001",
     valueUsd: "0.0",
     priceUsd: "0.01",
-  },
+  }, */
 
   // OctaSpace (OCTA)
-  {
+  /*   {
     name: "OctaSpace",
     shortName: "OCTA",
     balance: "0.0",
@@ -1053,9 +1070,9 @@ export const initialAdditionalCryptos = [
     fee: "0.001",
     valueUsd: "0.0",
     priceUsd: "0.03",
-  },
+  }, */
   // opBNB
-  {
+  /*   {
     name: "opBNB",
     shortName: "opBNB",
     balance: "0.0",
@@ -1070,7 +1087,7 @@ export const initialAdditionalCryptos = [
     fee: "0.001",
     valueUsd: "0.0",
     priceUsd: "0.5",
-  },
+  }, */
 
   // Osmosis
   {
@@ -1091,7 +1108,7 @@ export const initialAdditionalCryptos = [
   },
 
   // PulseChain
-  {
+  /*   {
     name: "PulseChain",
     shortName: "PLS",
     balance: "0.0",
@@ -1106,7 +1123,7 @@ export const initialAdditionalCryptos = [
     fee: "0.001",
     valueUsd: "0.0",
     priceUsd: "0.1",
-  },
+  }, */
 
   // Polygon Zkevm
   {
@@ -1127,7 +1144,7 @@ export const initialAdditionalCryptos = [
   },
 
   // Ronin
-  {
+  /*  {
     name: "Ronin",
     shortName: "RON",
     balance: "0.0",
@@ -1142,10 +1159,10 @@ export const initialAdditionalCryptos = [
     fee: "0.001",
     valueUsd: "0.0",
     priceUsd: "1.0",
-  },
+  }, */
 
   // Scroll
-  {
+  /*   {
     name: "Scroll",
     shortName: "SCRL",
     balance: "0.0",
@@ -1160,10 +1177,10 @@ export const initialAdditionalCryptos = [
     fee: "0.001",
     valueUsd: "0.0",
     priceUsd: "0.5",
-  },
+  }, */
 
   // Taiko
-  {
+  /*   {
     name: "Taiko",
     shortName: "TAIKO",
     balance: "0.0",
@@ -1178,10 +1195,10 @@ export const initialAdditionalCryptos = [
     fee: "0.001",
     valueUsd: "0.0",
     priceUsd: "1.0",
-  },
+  }, */
 
   // WEMIX3.0
-  {
+  /*   {
     name: "WEMIX3.0",
     shortName: "WEMIX",
     balance: "0.0",
@@ -1196,10 +1213,10 @@ export const initialAdditionalCryptos = [
     fee: "0.001",
     valueUsd: "0.0",
     priceUsd: "2.0",
-  },
+  }, */
 
   // zkLink Nova
-  {
+  /*   {
     name: "zkLink Nova",
     shortName: "ZKL-NOVA",
     balance: "0.0",
@@ -1214,10 +1231,10 @@ export const initialAdditionalCryptos = [
     fee: "0.001",
     valueUsd: "0.0",
     priceUsd: "0.5",
-  },
+  }, */
 
   // Zora
-  {
+  /*  {
     name: "Zora",
     shortName: "ZORA",
     balance: "0.0",
@@ -1232,10 +1249,10 @@ export const initialAdditionalCryptos = [
     fee: "0.001",
     valueUsd: "0.0",
     priceUsd: "0.4",
-  },
+  }, */
 
   // ZetaChain
-  {
+  /*   {
     name: "ZetaChain",
     shortName: "ZETA",
     balance: "0.0",
@@ -1250,10 +1267,10 @@ export const initialAdditionalCryptos = [
     fee: "0.001",
     valueUsd: "0.0",
     priceUsd: "0.6",
-  },
+  }, */
 
   // Zircuit
-  {
+  /*   {
     name: "Zircuit",
     shortName: "ZIRC",
     balance: "0.0",
@@ -1268,10 +1285,10 @@ export const initialAdditionalCryptos = [
     fee: "0.001",
     valueUsd: "0.0",
     priceUsd: "0.05",
-  },
+  }, */
 
   // Bitcoin Testnet
-  {
+  /*   {
     name: "Bitcoin Testnet",
     shortName: "TBTC",
     balance: "0.0",
@@ -1286,10 +1303,10 @@ export const initialAdditionalCryptos = [
     fee: "0.0001",
     valueUsd: "0.0",
     priceUsd: "0.0",
-  },
+  }, */
 
   // Bitcoin Signet
-  {
+  /*   {
     name: "Bitcoin Signet",
     shortName: "SBTC",
     balance: "0.0",
@@ -1304,10 +1321,10 @@ export const initialAdditionalCryptos = [
     fee: "0.0001",
     valueUsd: "0.0",
     priceUsd: "0.0",
-  },
+  }, */
 
   // Ethereum Sepolia Testnet
-  {
+  /*   {
     name: "Ethereum Sepolia",
     shortName: "SEPOLIA",
     balance: "0.0",
@@ -1322,10 +1339,10 @@ export const initialAdditionalCryptos = [
     fee: "0.001",
     valueUsd: "0.0",
     priceUsd: "0.0",
-  },
+  }, */
 
   // Garnet Holesky
-  {
+  /*   {
     name: "Garnet Holesky",
     shortName: "HOLESKY",
     balance: "0.0",
@@ -1340,10 +1357,10 @@ export const initialAdditionalCryptos = [
     fee: "0.001",
     valueUsd: "0.0",
     priceUsd: "0.0",
-  },
+  }, */
 
   // Lightning Network Testnet
-  {
+  /*   {
     name: "Lightning Network Testnet",
     shortName: "TLN",
     balance: "0.0",
@@ -1358,10 +1375,10 @@ export const initialAdditionalCryptos = [
     fee: "0.00001",
     valueUsd: "0.0",
     priceUsd: "0.0",
-  },
+  }, */
 
   // Endurance
-  {
+  /*   {
     name: "Endurance",
     shortName: "END",
     balance: "0.0",
@@ -1376,10 +1393,10 @@ export const initialAdditionalCryptos = [
     fee: "0.001",
     valueUsd: "0.0",
     priceUsd: "0.1",
-  },
+  }, */
 
   // Flare
-  {
+  /*   {
     name: "Flare",
     shortName: "FLR",
     balance: "0.0",
@@ -1394,10 +1411,10 @@ export const initialAdditionalCryptos = [
     fee: "0.001",
     valueUsd: "0.0",
     priceUsd: "0.5",
-  },
+  }, */
 
   // Harmony
-  {
+  /*   {
     name: "Harmony",
     shortName: "ONE",
     balance: "0.0",
@@ -1412,10 +1429,10 @@ export const initialAdditionalCryptos = [
     fee: "0.001",
     valueUsd: "0.0",
     priceUsd: "0.2",
-  },
+  }, */
 
   // Moonbeam
-  {
+  /*   {
     name: "Moonbeam",
     shortName: "GLMR",
     balance: "0.0",
@@ -1430,7 +1447,7 @@ export const initialAdditionalCryptos = [
     fee: "0.001",
     valueUsd: "0.0",
     priceUsd: "0.3",
-  },
+  }, */
 
   // Mobe
   {
@@ -1469,7 +1486,7 @@ export const initialAdditionalCryptos = [
   },
 
   // Merlin
-  {
+  /*   {
     name: "Merlin",
     shortName: "MERL",
     balance: "0.0",
@@ -1484,10 +1501,10 @@ export const initialAdditionalCryptos = [
     fee: "0.001",
     valueUsd: "0.0",
     priceUsd: "0.5",
-  },
+  }, */
 
   // Nostr
-  {
+  /*   {
     name: "Nostr",
     shortName: "NOSTR",
     balance: "0.0",
@@ -1502,10 +1519,10 @@ export const initialAdditionalCryptos = [
     fee: "0.001",
     valueUsd: "0.0",
     priceUsd: "0.05",
-  },
+  }, */
 
   // Klaytn
-  {
+  /*   {
     name: "Klaytn",
     shortName: "KLAY",
     balance: "0.0",
@@ -1520,10 +1537,10 @@ export const initialAdditionalCryptos = [
     fee: "0.001",
     valueUsd: "0.0",
     priceUsd: "0.8",
-  },
+  }, */
 
   // Kava
-  {
+  /*   {
     name: "Kava",
     shortName: "KAVA",
     balance: "0.0",
@@ -1538,10 +1555,10 @@ export const initialAdditionalCryptos = [
     fee: "0.001",
     valueUsd: "0.0",
     priceUsd: "1.0",
-  },
+  }, */
 
   // Dymension
-  {
+  /*   {
     name: "Dymension",
     shortName: "DYM",
     balance: "0.0",
@@ -1556,10 +1573,10 @@ export const initialAdditionalCryptos = [
     fee: "0.001",
     valueUsd: "0.0",
     priceUsd: "0.2",
-  },
+  }, */
 
   // B2 Mainnet
-  {
+  /*   {
     name: "B2 Mainnet",
     shortName: "B2",
     balance: "0.0",
@@ -1575,9 +1592,9 @@ export const initialAdditionalCryptos = [
     valueUsd: "0.0",
     priceUsd: "0.5",
   },
-
+ */
   // BounceBit
-  {
+  /*   {
     name: "BounceBit",
     shortName: "BOUNCE",
     balance: "0.0",
@@ -1592,10 +1609,10 @@ export const initialAdditionalCryptos = [
     fee: "0.001",
     valueUsd: "0.0",
     priceUsd: "0.1",
-  },
+  }, */
 
   // Bitlayer
-  {
+  /*   {
     name: "Bitlayer",
     shortName: "BITLAYER",
     balance: "0.0",
@@ -1610,10 +1627,10 @@ export const initialAdditionalCryptos = [
     fee: "0.001",
     valueUsd: "0.0",
     priceUsd: "0.3",
-  },
+  }, */
 
   // BOB
-  {
+  /*   {
     name: "BOB",
     shortName: "BOB",
     balance: "0.0",
@@ -1628,10 +1645,10 @@ export const initialAdditionalCryptos = [
     fee: "0.001",
     valueUsd: "0.0",
     priceUsd: "1.0",
-  },
+  }, */
 
   // Cyber
-  {
+  /*   {
     name: "Cyber",
     shortName: "CYBER",
     balance: "0.0",
@@ -1646,7 +1663,7 @@ export const initialAdditionalCryptos = [
     fee: "0.001",
     valueUsd: "0.0",
     priceUsd: "0.8",
-  },
+  }, */
 ];
 
 // 1. Bitcoin
