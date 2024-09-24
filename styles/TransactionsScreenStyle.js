@@ -350,7 +350,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
     },
     mainButtonText: {
       color: titleColor,
-      fontSize: 16,
+      fontSize: 14,
       fontWeight: "bold",
       marginVertical: 10,
     },
@@ -477,7 +477,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       borderWidth: 2,
       borderColor: btnBorderColor,
       paddingVertical: 10,
-      paddingHorizontal: 20,
+      paddingHorizontal: 10,
       borderRadius: 20,
       alignItems: "center",
       justifyContent: "center",

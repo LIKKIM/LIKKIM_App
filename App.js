@@ -88,10 +88,7 @@ function OnboardingApp({ handleOnboardingDone }) {
 
   return (
     <>
-      <StatusBar
-        backgroundColor="#24234C"
-        barStyle={isDarkMode ? "light-content" : "dark-content"}
-      />
+      <StatusBar backgroundColor="#24234C" barStyle="light-content" />
       <OnboardingScreen onDone={handleOnboardingDone} />
     </>
   );
