@@ -28,7 +28,7 @@ const ProcessModal = ({
           ))}
           {showLetsGoButton && (
             <TouchableOpacity style={styles.modalButton} onPress={onLetsGo}>
-              <Text style={styles.ButtonText}>{t("Let's Go")}</Text>
+              <Text style={styles.mainButtonText}>{t("Let's Go")}</Text>
             </TouchableOpacity>
           )}
         </View>
