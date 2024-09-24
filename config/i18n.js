@@ -6,6 +6,7 @@ i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
+    fallbackLng: "en",
     resources: {
       en: {
         translation: {
@@ -3340,7 +3341,6 @@ i18n
         },
       },
     },
-    fallbackLng: "en",
     interpolation: {
       escapeValue: false,
     },
