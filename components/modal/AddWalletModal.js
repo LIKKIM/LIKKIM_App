@@ -29,9 +29,7 @@ const AddWalletModal = ({
           </TouchableOpacity>
           <TouchableOpacity style={styles.modalButton} onPress={onWalletTest}>
             <Text style={styles.mainButtonText}>
-              {t(
-                "Create a wallet directly for testing (cannot make transfers)"
-              )}
+              {t("Create test wallet (no transfers)")}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.cancelButton} onPress={onClose}>
