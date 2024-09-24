@@ -1908,7 +1908,8 @@ i18n
             "Il tuo dispositivo è già verificato.",
           "Creating on LIKKIM Hardware...": "Creazione su hardware LIKKIM...",
           "Address Book": "Rubrica",
-          "it": "Scambiare",
+          it: "Scambiare",
+        },
       },
       de: {
         translation: {
@@ -2067,7 +2068,7 @@ i18n
             "Ihr Gerät ist bereits verifiziert.",
           "Creating on LIKKIM Hardware...": "Erstellen auf LIKKIM-Hardware...",
           "Address Book": "Adressbuch",
-          "de": "Tauschen",
+          de: "Tauschen",
         },
       },
       hi: {
@@ -2226,7 +2227,7 @@ i18n
           "Creating on LIKKIM Hardware...":
             "LIKKIM हार्डवेयर पर बना रहे हैं...",
           "Address Book": "पता पुस्तिका",
-          "hi": "विनिमय",
+          hi: "विनिमय",
         },
       },
       mn: {
@@ -2394,7 +2395,7 @@ i18n
             "อุปกรณ์ของคุณได้รับการยืนยันแล้ว",
           "Creating on LIKKIM Hardware...": "กำลังสร้างบนฮาร์ดแวร์ LIKKIM...",
           "Address Book": "Хаягийн дэвтэр",
-          "mn": "Солилцоо",
+          mn: "Солилцоо",
         },
       },
       th: {
@@ -2545,7 +2546,7 @@ i18n
             "อุปกรณ์ของคุณได้รับการยืนยันแล้ว",
           "Creating on LIKKIM Hardware...": "กำลังสร้างบนฮาร์ดแวร์ LIKKIM...",
           "Address Book": "สมุดที่อยู่",
-          "th": "แลกเปลี่ยน",
+          th: "แลกเปลี่ยน",
         },
       },
       uk: {
@@ -2699,7 +2700,7 @@ i18n
           "Creating on LIKKIM Hardware...":
             "Створення на апаратному забезпеченні LIKKIM...",
           "Address Book": "Адресна книга",
-          "uk": "Обмін",
+          uk: "Обмін",
         },
       },
       vi: {
@@ -2856,7 +2857,7 @@ i18n
             "Thiết bị của bạn đã được xác minh.",
           "Creating on LIKKIM Hardware...": "Đang tạo trên phần cứng LIKKIM...",
           "Address Book": "Sổ địa chỉ",
-          "vi": "Hoán đổi",
+          vi: "Hoán đổi",
         },
       },
       id: {
@@ -3014,7 +3015,7 @@ i18n
           "Creating on LIKKIM Hardware...":
             "Membuat di perangkat keras LIKKIM...",
           "Address Book": "Buku Alamat",
-          "id": "Tukar",
+          id: "Tukar",
         },
       },
       tl: {
@@ -3174,7 +3175,7 @@ i18n
             "Ang iyong device ay napatunayan na.",
           "Creating on LIKKIM Hardware...": "Gumagawa sa LIKKIM hardware...",
           "Address Book": "Aklat ng mga Adresa",
-          "tl": "Palitan",
+          tl: "Palitan",
         },
       },
       bn: {
@@ -3335,7 +3336,7 @@ i18n
           "Creating on LIKKIM Hardware...":
             "LIKKIM হার্ডওয়্যারে তৈরি করা হচ্ছে...",
           "Address Book": "ঠিকানা বই",
-          "bn": "বিনিময়"
+          bn: "বিনিময়",
         },
       },
     },
