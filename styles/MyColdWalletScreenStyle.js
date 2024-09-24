@@ -243,6 +243,9 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       alignItems: "center",
       justifyContent: "center",
     },
+    Icon: {
+      marginRight: 6,
+    },
     focusedInput: {
       borderColor: focusedBorderColor,
       borderWidth: 2,
