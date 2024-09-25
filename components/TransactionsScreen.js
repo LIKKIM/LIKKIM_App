@@ -2021,7 +2021,20 @@ function TransactionsScreen() {
                   )}
                 </View>
                 {/* Swap Button */}
-                <TouchableOpacity style={TransactionsScreenStyle.swapButton}>
+                <TouchableOpacity
+                  style={TransactionsScreenStyle.swapButton}
+                  onPress={() => {
+                    // Swap values
+                    const tempValue = fromValue;
+                    setFromValue(toValue);
+                    setToValue(tempValue);
+
+                    // Swap selected tokens
+                    const tempToken = selectedFromToken;
+                    setSelectedFromToken(selectedToToken);
+                    setSelectedToToken(tempToken);
+                  }}
+                >
                   <Icon name="swap-vert" size={24} color="#fff" />
                 </TouchableOpacity>
 
@@ -2097,12 +2110,12 @@ function TransactionsScreen() {
                           key={`${chain.shortName}-${index}`}
                           style={[
                             TransactionsScreenStyle.chainTag,
-                            selectedFromToken === chain.shortName &&
+                            selectedToToken === chain.shortName &&
                               TransactionsScreenStyle.selectedChainTag,
                           ]}
                           onPress={() => {
-                            setSelectedFromToken(chain.shortName);
-                            setFromDropdownVisible(false);
+                            setSelectedToToken(chain.shortName); // 修改为 setSelectedToToken
+                            setToDropdownVisible(false); // 关闭 To 下拉列表
                           }}
                         >
                           <View
@@ -2123,7 +2136,7 @@ function TransactionsScreen() {
                             <Text
                               style={[
                                 TransactionsScreenStyle.chainTagText,
-                                selectedFromToken === chain.shortName &&
+                                selectedToToken === chain.shortName &&
                                   TransactionsScreenStyle.selectedChainTagText,
                               ]}
                             >
