@@ -32,6 +32,13 @@ const SwapModal = ({
   initialAdditionalCryptos,
   TransactionsScreenStyle,
 }) => {
+  // Helper function to get the token details including the icon and name
+  const getTokenDetails = (tokenShortName) => {
+    return initialAdditionalCryptos.find(
+      (token) => token.shortName === tokenShortName
+    );
+  };
+
   return (
     <Modal
       visible={visible}
@@ -45,8 +52,8 @@ const SwapModal = ({
       >
         <BlurView intensity={10} style={TransactionsScreenStyle.centeredView}>
           <View style={TransactionsScreenStyle.swapModalView}>
+            {/* From Section */}
             <View style={{ zIndex: 20 }}>
-              {/* From Section */}
               <View style={{ alignItems: "flex-start", width: "100%" }}>
                 <Text
                   style={[
@@ -97,13 +104,27 @@ const SwapModal = ({
                     style={TransactionsScreenStyle.tokenSelect}
                     onPress={() => setFromDropdownVisible(!fromDropdownVisible)}
                   >
-                    <Text style={TransactionsScreenStyle.subtitleText}>
-                      {selectedFromToken
-                        ? initialAdditionalCryptos.find(
-                            (token) => token.shortName === selectedFromToken
-                          )?.name
-                        : "Select token"}
-                    </Text>
+                    {/* Display token icon and name */}
+                    {selectedFromToken ? (
+                      <>
+                        <Image
+                          source={getTokenDetails(selectedFromToken)?.chainIcon}
+                          style={{
+                            width: 20,
+                            height: 20,
+                            borderRadius: 10,
+                            marginRight: 8,
+                          }}
+                        />
+                        <Text style={TransactionsScreenStyle.subtitleText}>
+                          {getTokenDetails(selectedFromToken)?.name}
+                        </Text>
+                      </>
+                    ) : (
+                      <Text style={TransactionsScreenStyle.subtitleText}>
+                        Select token
+                      </Text>
+                    )}
                     <Icon name="arrow-drop-down" size={24} color="#ccc" />
                   </TouchableOpacity>
                 </View>
@@ -155,6 +176,7 @@ const SwapModal = ({
                 </ScrollView>
               )}
             </View>
+
             {/* Swap Button */}
             <TouchableOpacity
               style={TransactionsScreenStyle.swapButton}
@@ -173,8 +195,8 @@ const SwapModal = ({
               <Icon name="swap-vert" size={24} color="#fff" />
             </TouchableOpacity>
 
+            {/* To Section */}
             <View style={{ zIndex: 10 }}>
-              {/* To Section */}
               <View style={{ alignItems: "flex-start", width: "100%" }}>
                 <Text
                   style={[
@@ -225,13 +247,27 @@ const SwapModal = ({
                     style={TransactionsScreenStyle.tokenSelect}
                     onPress={() => setToDropdownVisible(!toDropdownVisible)}
                   >
-                    <Text style={TransactionsScreenStyle.subtitleText}>
-                      {selectedToToken
-                        ? initialAdditionalCryptos.find(
-                            (token) => token.shortName === selectedToToken
-                          )?.name
-                        : "Select token"}
-                    </Text>
+                    {/* Display token icon and name */}
+                    {selectedToToken ? (
+                      <>
+                        <Image
+                          source={getTokenDetails(selectedToToken)?.chainIcon}
+                          style={{
+                            width: 20,
+                            height: 20,
+                            borderRadius: 10,
+                            marginRight: 8,
+                          }}
+                        />
+                        <Text style={TransactionsScreenStyle.subtitleText}>
+                          {getTokenDetails(selectedToToken)?.name}
+                        </Text>
+                      </>
+                    ) : (
+                      <Text style={TransactionsScreenStyle.subtitleText}>
+                        Select token
+                      </Text>
+                    )}
                     <Icon name="arrow-drop-down" size={24} color="#ccc" />
                   </TouchableOpacity>
                 </View>
@@ -290,7 +326,7 @@ const SwapModal = ({
                 onPress={() => setSwapModalVisible(false)}
                 style={[
                   TransactionsScreenStyle.swapConfirmButton,
-                  { marginBottom: 20 }, // 添加下边距
+                  { marginBottom: 20 },
                 ]}
               >
                 <Text style={TransactionsScreenStyle.submitButtonText}>
@@ -303,7 +339,7 @@ const SwapModal = ({
                 onPress={() => setSwapModalVisible(false)}
                 style={[
                   TransactionsScreenStyle.cancelButton,
-                  { marginBottom: 10 }, // 如果还需要与下面的内容保持距离
+                  { marginBottom: 10 },
                 ]}
               >
                 <Text style={TransactionsScreenStyle.cancelButtonText}>
