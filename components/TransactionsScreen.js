@@ -189,6 +189,17 @@ function TransactionsScreen() {
 
   // 在 amountModalVisible 状态变为 true 时发送 POST 请求
 
+  // Clear values when opening the modal
+  useEffect(() => {
+    if (swapModalVisible) {
+      // Reset values when the modal opens
+      setFromValue("");
+      setToValue("");
+      setSelectedFromToken("");
+      setSelectedToToken("");
+    }
+  }, [swapModalVisible]);
+
   useEffect(() => {
     const loadTransactionHistory = async () => {
       try {
