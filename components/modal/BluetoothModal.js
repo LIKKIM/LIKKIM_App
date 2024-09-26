@@ -92,7 +92,7 @@ const BluetoothModal = ({
             )
           )}
           {!isScanning && devices.length === 0 && (
-            <View>
+            <View style={{ alignItems: "center" }}>
               <Image
                 source={require("../../assets/gif/Search.gif")}
                 style={{ width: 180, height: 180, margin: 30 }}
