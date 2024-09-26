@@ -102,7 +102,8 @@ const TransactionsScreenStyles = (isDarkMode) => {
       color: textColor,
     },
     tokenSelect: {
-      flex: 1, // 平均分配宽度
+      alignSelf: "stretch", // 高度填充父容器
+      flexShrink: 1, // 宽度自适应内容
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "space-between", // 确保“Select token”和图标两边对齐
