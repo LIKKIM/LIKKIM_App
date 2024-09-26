@@ -1,42 +1,75 @@
 // components/OnboardingScreen.js
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
   Image,
   StyleSheet,
   Dimensions,
+  Modal,
+  ScrollView,
   TouchableOpacity,
 } from "react-native";
 import AppIntroSlider from "react-native-app-intro-slider";
 import { LinearGradient } from "expo-linear-gradient";
+import Icon from "react-native-vector-icons/MaterialIcons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { languages } from "../config/languages";
+import i18n from "../config/i18n"; // Ensure this path is correct
 
 const { width, height } = Dimensions.get("window");
 
 const slides = [
   {
     key: "slide1",
-    title: "Welcome to LIKKIM",
-    text: "Your secure and user-friendly digital wallet.",
+    title: i18n.t("Welcome to LIKKIM"),
+    text: i18n.t("Your secure and user-friendly digital wallet."),
     image: require("../assets/slider/slider1.png"),
   },
   {
     key: "slide2",
-    title: "Manage Your Cryptos",
-    text: "Easily manage multiple cryptocurrencies.",
+    title: i18n.t("Manage Your Cryptos"),
+    text: i18n.t("Easily manage multiple cryptocurrencies."),
     image: require("../assets/slider/slider2.png"),
   },
   {
     key: "slide3",
-    title: "Secure and Reliable",
-    text: "Bank-level security for your digital assets.",
+    title: i18n.t("Secure and Reliable"),
+    text: i18n.t("Bank-level security for your digital assets."),
     image: require("../assets/slider/slider3.png"),
   },
 ];
 
-const OnboardingScreen = ({ onDone }) => {
+const OnboardingScreen = ({ onDone, onLanguageSelect }) => {
+  const [languageModalVisible, setLanguageModalVisible] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState("en");
+
+  useEffect(() => {
+    AsyncStorage.getItem("selectedLanguage").then((value) => {
+      if (value !== null) {
+        setSelectedLanguage(value);
+        i18n.changeLanguage(value);
+      }
+    });
+  }, []);
+
+  const handleLanguageChange = async (lang) => {
+    setSelectedLanguage(lang);
+    i18n.changeLanguage(lang); // Switch the i18n instance to the new language
+    await AsyncStorage.setItem("selectedLanguage", lang);
+    setLanguageModalVisible(false);
+  };
+
   const _renderItem = ({ item }) => (
     <LinearGradient colors={["#24234C", "#101021"]} style={styles.slide}>
+      <TouchableOpacity
+        style={styles.languageButton}
+        onPress={() => setLanguageModalVisible(true)}
+      >
+        <Text style={styles.buttonText}>
+          {languages.find((lang) => lang.code === selectedLanguage).name}
+        </Text>
+      </TouchableOpacity>
       <View style={styles.content}>
         <Image source={item.image} style={styles.image} />
         <Text style={styles.title}>{item.title}</Text>
@@ -47,43 +80,67 @@ const OnboardingScreen = ({ onDone }) => {
 
   const _renderNextButton = () => (
     <View style={styles.nextButton}>
-      <Text style={styles.buttonText}>Next</Text>
+      <Text style={styles.buttonText}>{i18n.t("Next")}</Text>
     </View>
   );
 
   const _renderPrevButton = () => (
     <View style={styles.button}>
-      <Text style={styles.buttonText}>Back</Text>
+      <Text style={styles.buttonText}>{i18n.t("Back")}</Text>
     </View>
   );
 
   const _renderDoneButton = () => (
     <View style={styles.doneButton}>
-      <Text style={styles.buttonText}>Start Exploring</Text>
+      <Text style={styles.buttonText}>{i18n.t("Start Exploring")}</Text>
     </View>
   );
 
   const _renderSkipButton = () => (
     <TouchableOpacity style={styles.button} onPress={onDone}>
-      <Text style={styles.buttonText}>Skip</Text>
+      <Text style={styles.buttonText}>{i18n.t("Skip")}</Text>
     </TouchableOpacity>
   );
 
   return (
-    <AppIntroSlider
-      bottomButton
-      renderItem={_renderItem}
-      data={slides}
-      onDone={onDone}
-      renderSkipButton={_renderSkipButton}
-      renderNextButton={_renderNextButton}
-      renderPrevButton={_renderPrevButton}
-      renderDoneButton={_renderDoneButton}
-      dotStyle={styles.dot}
-      activeDotStyle={styles.activeDot}
-      showSkipButton
-      showPrevButton
-    />
+    <View style={{ flex: 1 }}>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={languageModalVisible}
+        onRequestClose={() => setLanguageModalVisible(false)}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <ScrollView>
+              {languages.map((lang) => (
+                <TouchableOpacity
+                  key={lang.code}
+                  style={styles.languageOption}
+                  onPress={() => handleLanguageChange(lang.code)}
+                >
+                  <Text style={styles.languageText}>{lang.name}</Text>
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
+          </View>
+        </View>
+      </Modal>
+      <AppIntroSlider
+        bottomButton
+        renderItem={_renderItem}
+        data={slides}
+        onDone={onDone}
+        renderSkipButton={_renderSkipButton}
+        renderNextButton={_renderNextButton}
+        renderPrevButton={_renderPrevButton}
+        renderDoneButton={_renderDoneButton}
+        dotStyle={styles.dot}
+        activeDotStyle={styles.activeDot}
+        showSkipButton
+        showPrevButton
+      />
+    </View>
   );
 };
 
@@ -160,6 +217,49 @@ const styles = StyleSheet.create({
     height: 8,
     borderRadius: 4,
     marginHorizontal: 4,
+  },
+  languageButton: {
+    position: "absolute",
+    top: 40,
+    right: 20,
+    padding: 10,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: "#fff", // 白色边框
+    flexDirection: "row", // 横向排列
+    alignItems: "center", // 垂直居中
+    justifyContent: "center", // 水平居中
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)", // 半透明黑色背景，适用于深色模式
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "#484692", // 深色模式下的深蓝色背景
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    maxHeight: "60%",
+    width: "80%",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  languageOption: {
+    padding: 10,
+    alignItems: "center",
+  },
+  languageText: {
+    fontSize: 18,
+    color: "#FFF", // 深色模式下的文字通常是白色
   },
 });
 
