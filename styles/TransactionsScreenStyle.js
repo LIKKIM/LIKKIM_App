@@ -61,7 +61,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
 
     container: {
       flex: 1,
-      justifyContent: "center",
+      //  justifyContent: "center",
       alignItems: "center",
     },
     roundButton: {
@@ -310,7 +310,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       justifyContent: "center",
       borderRadius: 10,
       width: 360,
-      height: 420,
+      height: "76%",
     },
     historyItem: {
       padding: 10,
