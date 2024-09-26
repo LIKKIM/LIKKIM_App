@@ -97,15 +97,14 @@ const AddCryptoModal = ({
                 All
               </Text>
             </TouchableOpacity>
-
             {chainCategories.map((chain) => (
               <TouchableOpacity
-                key={chain.name}
+                key={chain.chain} // 将 name 改为 chain
                 style={[
                   styles.chainTag,
-                  selectedChain === chain.name && styles.selectedChainTag,
+                  selectedChain === chain.chain && styles.selectedChainTag, // 使用 chain
                 ]}
-                onPress={() => setSelectedChain(chain.name)}
+                onPress={() => setSelectedChain(chain.chain)} // 使用 chain
               >
                 {chain.chainIcon && (
                   <Image source={chain.chainIcon} style={styles.TagChainIcon} />
@@ -113,10 +112,11 @@ const AddCryptoModal = ({
                 <Text
                   style={[
                     styles.chainTagText,
-                    selectedChain === chain.name && styles.selectedChainTagText,
+                    selectedChain === chain.chain &&
+                      styles.selectedChainTagText, // 使用 chain
                   ]}
                 >
-                  {chain.name}
+                  {chain.chain}
                 </Text>
               </TouchableOpacity>
             ))}
