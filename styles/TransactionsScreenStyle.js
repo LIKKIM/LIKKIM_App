@@ -99,6 +99,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       width: "100%", // 确保 TextInput 占满容器宽度
       height: 40,
       paddingHorizontal: 10,
+      color: textColor,
     },
     tokenSelect: {
       flex: 1, // 平均分配宽度
