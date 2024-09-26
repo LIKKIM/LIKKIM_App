@@ -1325,7 +1325,7 @@ function TransactionsScreen() {
   //安卓高版本申请蓝牙权限
   const checkAndReqPermission = async (cb) => {
     if (Platform.OS === "android" && Platform.Version >= 23) {
-      console.log("安卓申请权限。。。");
+      console.log("安卓申请权限");
       // Scanning: Checking permissions...
       const enableds = await PermissionsAndroid.requestMultiple([
         PermissionsAndroid.PERMISSIONS.BLUETOOTH_CONNECT,
