@@ -2541,7 +2541,18 @@ i18n
             "อุปกรณ์ของคุณได้รับการยืนยันแล้ว",
           "Creating on LIKKIM Hardware...": "กำลังสร้างบนฮาร์ดแวร์ LIKKIM...",
           "Address Book": "Хаягийн дэвтэр",
-          mn: "Солилцоо",
+          Swap: "Солилцоо",
+          Skip: "Алгасах",
+          "Start Exploring": "Судлахаа эхлээрэй",
+          "Secure and Reliable": "Аюулгүй ба найдвартай",
+          "Bank-level security for your digital assets.":
+            "Таны цахим хөрөнгөд зориулсан банкны түвшний аюулгүй байдал.",
+          "Manage Your Cryptos": "Криптовалютуудаа удирдах",
+          "Easily manage multiple cryptocurrencies.":
+            "Олон криптовалютуудыг хялбар удирда.",
+          "Welcome to LIKKIM": "LIKKIM-д тавтай морилно уу",
+          "Your secure and user-friendly digital wallet.":
+            "Таны аюулгүй ба хэрэглэгчийн төвтэй цахим хэтэвч.",
         },
       },
       th: {
@@ -2692,7 +2703,18 @@ i18n
             "อุปกรณ์ของคุณได้รับการยืนยันแล้ว",
           "Creating on LIKKIM Hardware...": "กำลังสร้างบนฮาร์ดแวร์ LIKKIM...",
           "Address Book": "สมุดที่อยู่",
-          th: "แลกเปลี่ยน",
+          Swap: "แลกเปลี่ยน",
+          Skip: "ข้าม",
+          "Start Exploring": "เริ่มการสำรวจ",
+          "Secure and Reliable": "ปลอดภัยและเชื่อถือได้",
+          "Bank-level security for your digital assets.":
+            "ความปลอดภัยระดับธนาคารสำหรับทรัพย์สินดิจิทัลของคุณ.",
+          "Manage Your Cryptos": "จัดการคริปโตของคุณ",
+          "Easily manage multiple cryptocurrencies.":
+            "จัดการคริปโตเคอร์เรนซี่หลายอย่างได้ง่ายดาย.",
+          "Welcome to LIKKIM": "ยินดีต้อนรับสู่ LIKKIM",
+          "Your secure and user-friendly digital wallet.":
+            "กระเป๋าเงินดิจิทัลที่ปลอดภัยและใช้งานง่ายของคุณ.",
         },
       },
       uk: {
@@ -2846,7 +2868,18 @@ i18n
           "Creating on LIKKIM Hardware...":
             "Створення на апаратному забезпеченні LIKKIM...",
           "Address Book": "Адресна книга",
-          uk: "Обмін",
+          Swap: "Обмін",
+          Skip: "Пропустити",
+          "Start Exploring": "Розпочати огляд",
+          "Secure and Reliable": "Безпечний та надійний",
+          "Bank-level security for your digital assets.":
+            "Банківський рівень безпеки для ваших цифрових активів.",
+          "Manage Your Cryptos": "Керуйте своїми криптовалютами",
+          "Easily manage multiple cryptocurrencies.":
+            "Легко керуйте декількома криптовалютами.",
+          "Welcome to LIKKIM": "Ласкаво просимо до LIKKIM",
+          "Your secure and user-friendly digital wallet.":
+            "Ваш безпечний та зручний цифровий гаманець.",
         },
       },
       vi: {
@@ -3003,7 +3036,18 @@ i18n
             "Thiết bị của bạn đã được xác minh.",
           "Creating on LIKKIM Hardware...": "Đang tạo trên phần cứng LIKKIM...",
           "Address Book": "Sổ địa chỉ",
-          vi: "Hoán đổi",
+          Swap: "Hoán đổi",
+          Skip: "Bỏ qua",
+          "Start Exploring": "Bắt đầu khám phá",
+          "Secure and Reliable": "An toàn và Đáng tin cậy",
+          "Bank-level security for your digital assets.":
+            "Bảo mật cấp ngân hàng cho tài sản số của bạn.",
+          "Manage Your Cryptos": "Quản lý Tiền điện tử của bạn",
+          "Easily manage multiple cryptocurrencies.":
+            "Dễ dàng quản lý nhiều loại tiền điện tử.",
+          "Welcome to LIKKIM": "Chào mừng đến với LIKKIM",
+          "Your secure and user-friendly digital wallet.":
+            "Ví điện tử an toàn và thân thiện với người dùng của bạn.",
         },
       },
       id: {
@@ -3161,7 +3205,18 @@ i18n
           "Creating on LIKKIM Hardware...":
             "Membuat di perangkat keras LIKKIM...",
           "Address Book": "Buku Alamat",
-          id: "Tukar",
+          Swap: "Tukar",
+          Skip: "Lewati",
+          "Start Exploring": "Mulai Jelajahi",
+          "Secure and Reliable": "Aman dan Terpercaya",
+          "Bank-level security for your digital assets.":
+            "Keamanan tingkat bank untuk aset digital Anda.",
+          "Manage Your Cryptos": "Kelola Kripto Anda",
+          "Easily manage multiple cryptocurrencies.":
+            "Mudah mengelola berbagai mata uang kripto.",
+          "Welcome to LIKKIM": "Selamat Datang di LIKKIM",
+          "Your secure and user-friendly digital wallet.":
+            "Dompet digital Anda yang aman dan mudah digunakan.",
         },
       },
       tl: {
@@ -3321,7 +3376,18 @@ i18n
             "Ang iyong device ay napatunayan na.",
           "Creating on LIKKIM Hardware...": "Gumagawa sa LIKKIM hardware...",
           "Address Book": "Aklat ng mga Adresa",
-          tl: "Palitan",
+          Swap: "Palitan",
+          Skip: "Laktawan",
+          "Start Exploring": "Simulang Mag-explore",
+          "Secure and Reliable": "Ligtas at Mapagkakatiwalaan",
+          "Bank-level security for your digital assets.":
+            "Seguridad na antas bangko para sa iyong mga digital asset.",
+          "Manage Your Cryptos": "Pamahalaan ang Iyong Mga Krypto",
+          "Easily manage multiple cryptocurrencies.":
+            "Madaling pamahalaan ang maramihang mga cryptocurrency.",
+          "Welcome to LIKKIM": "Maligayang Pagdating sa LIKKIM",
+          "Your secure and user-friendly digital wallet.":
+            "Ang iyong ligtas at madaling gamiting digital wallet.",
         },
       },
       bn: {
@@ -3482,7 +3548,18 @@ i18n
           "Creating on LIKKIM Hardware...":
             "LIKKIM হার্ডওয়্যারে তৈরি করা হচ্ছে...",
           "Address Book": "ঠিকানা বই",
-          bn: "বিনিময়",
+          Swap: "বিনিময়",
+          Skip: "এড়িয়ে যান",
+          "Start Exploring": "অন্বেষণ শুরু করুন",
+          "Secure and Reliable": "নিরাপদ ও নির্ভরযোগ্য",
+          "Bank-level security for your digital assets.":
+            "আপনার ডিজিটাল সম্পদের জন্য ব্যাঙ্ক-স্তরের নিরাপত্তা।",
+          "Manage Your Cryptos": "আপনার ক্রিপ্টো পরিচালনা করুন",
+          "Easily manage multiple cryptocurrencies.":
+            "সহজেই একাধিক ক্রিপ্টোকারেন্সি পরিচালনা করুন।",
+          "Welcome to LIKKIM": "LIKKIM-এ স্বাগতম",
+          "Your secure and user-friendly digital wallet.":
+            "আপনার নিরাপদ ও ব্যবহারকারী-বান্ধব ডিজিটাল ওয়ালেট।",
         },
       },
     },
