@@ -175,6 +175,7 @@ const styles = StyleSheet.create({
     height: 260,
     resizeMode: "contain",
     marginVertical: 32,
+    marginTop: 100,
   },
 
   button: {
@@ -222,7 +223,7 @@ const styles = StyleSheet.create({
   },
   languageButton: {
     position: "absolute",
-    top: 40,
+    top: 70,
     right: 20,
     padding: 10,
     borderRadius: 10,
