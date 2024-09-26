@@ -114,7 +114,11 @@ const OnboardingScreen = ({ onDone }) => {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <ScrollView>
+            <ScrollView
+              style={{
+                width: "100%",
+              }}
+            >
               {languages.map((lang) => (
                 <TouchableOpacity
                   key={lang.code}
