@@ -17,7 +17,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
   const textBtnColor = isDarkMode ? "#fff" : "#fff";
   const textColor = isDarkMode ? "#fff" : "#000";
   const titleColor = isDarkMode ? "#fff" : "#000";
-  const dropdownBackgroundColor = isDarkMode ? "#484692" : "#eee";
+  const dropdownBackgroundColor = isDarkMode ? "#6C6CF4" : "#eee";
 
   return StyleSheet.create({
     // Dropdown Styles
@@ -46,8 +46,8 @@ const TransactionsScreenStyles = (isDarkMode) => {
     chainTag: {
       paddingVertical: 10,
       paddingHorizontal: 15,
-      borderBottomWidth: 1,
-      borderBottomColor: isDarkMode ? "#555" : "#ddd",
+      /*       borderBottomWidth: 1,
+      borderBottomColor: isDarkMode ? "#555" : "#ddd", */
     },
     selectedChainTag: {
       backgroundColor: isDarkMode ? "#6C6CF4" : "#ccc",
@@ -311,7 +311,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       alignItems: "center",
       justifyContent: "center",
       borderRadius: 10,
-      width: 360,
+      width: "96%",
       height: "76%",
     },
     historyItem: {
