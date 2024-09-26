@@ -160,6 +160,17 @@ i18n
           "Creating on LIKKIM Hardware...": "Creating on LIKKIM Hardware...",
           "Address Book": "Address Book",
           Swap: "Swap",
+          Skip: "Skip",
+          "Start Exploring": "Start Exploring",
+          "Secure and Reliable": "Secure and Reliable",
+          "Bank-level security for your digital assets.":
+            "Bank-level security for your digital assets.",
+          "Manage Your Cryptos": "Manage Your Cryptos",
+          "Easily manage multiple cryptocurrencies.":
+            "Easily manage multiple cryptocurrencies.",
+          "Welcome to LIKKIM": "Welcome to LIKKIM",
+          "Your secure and user-friendly digital wallet.":
+            "Your secure and user-friendly digital wallet.",
         },
       },
       zh: {
@@ -305,6 +316,16 @@ i18n
           "Creating on LIKKIM Hardware...": "正在 LIKKIM 硬件上创建...",
           "Address Book": "地址簿",
           Swap: "交换",
+          Skip: "跳过",
+          "Start Exploring": "开始探索",
+          "Secure and Reliable": "安全可靠",
+          "Bank-level security for your digital assets.":
+            "银行级别的数字资产安全。",
+          "Manage Your Cryptos": "管理您的加密货币",
+          "Easily manage multiple cryptocurrencies.": "轻松管理多种加密货币。",
+          "Welcome to LIKKIM": "欢迎来到LIKKIM",
+          "Your secure and user-friendly digital wallet.":
+            "您的安全且易用的数字钱包。",
         },
       },
       "zh-TW": {
@@ -456,6 +477,16 @@ i18n
           "Creating on LIKKIM Hardware...": "正在 LIKKIM 硬體上創建...",
           "Address Book": "地址簿",
           Swap: "交換",
+          Skip: "跳過",
+          "Start Exploring": "開始探索",
+          "Secure and Reliable": "安全可靠",
+          "Bank-level security for your digital assets.":
+            "銀行級的數位資產安全。",
+          "Manage Your Cryptos": "管理您的加密貨幣",
+          "Easily manage multiple cryptocurrencies.": "輕鬆管理多種加密貨幣。",
+          "Welcome to LIKKIM": "歡迎來到LIKKIM",
+          "Your secure and user-friendly digital wallet.":
+            "您的安全且友好的數字錢包。",
         },
       },
       fr: {
@@ -638,6 +669,17 @@ i18n
             "Création sur le matériel LIKKIM...",
           "Address Book": "Carnet d'adresses",
           Swap: "Échanger",
+          Skip: "Passer",
+          "Start Exploring": "Commencer à explorer",
+          "Secure and Reliable": "Sécurisé et fiable",
+          "Bank-level security for your digital assets.":
+            "Sécurité de niveau bancaire pour vos actifs numériques.",
+          "Manage Your Cryptos": "Gérez vos cryptomonnaies",
+          "Easily manage multiple cryptocurrencies.":
+            "Gérez facilement plusieurs cryptomonnaies.",
+          "Welcome to LIKKIM": "Bienvenue chez LIKKIM",
+          "Your secure and user-friendly digital wallet.":
+            "Votre portefeuille numérique sécurisé et convivial.",
         },
       },
       es: {
@@ -670,9 +712,7 @@ i18n
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "Por favor, asegúrate de que tu billetera fría esté desbloqueada y el Bluetooth esté activado.",
           Send: "Enviar",
-
           Receive: "Recibir",
-
           "Transaction History": "Historial de transacciones",
           "No Histories": "No hay historiales",
           "Enter the recipient's address:":
@@ -797,7 +837,18 @@ i18n
             "Su dispositivo ya está verificado.",
           "Creating on LIKKIM Hardware...": "Creando en hardware LIKKIM...",
           "Address Book": "Libreta de direcciones",
-          es: "Intercambiar",
+          Swap: "Intercambiar",
+          Skip: "Omitir",
+          "Start Exploring": "Comenzar a explorar",
+          "Secure and Reliable": "Seguro y confiable",
+          "Bank-level security for your digital assets.":
+            "Seguridad a nivel bancario para tus activos digitales.",
+          "Manage Your Cryptos": "Gestiona tus criptomonedas",
+          "Easily manage multiple cryptocurrencies.":
+            "Gestiona fácilmente múltiples criptomonedas.",
+          "Welcome to LIKKIM": "Bienvenido a LIKKIM",
+          "Your secure and user-friendly digital wallet.":
+            "Tu billetera digital segura y fácil de usar.",
         },
       },
       ar: {
@@ -948,7 +999,18 @@ i18n
           "Your device is already verified.": "تم التحقق من جهازك بالفعل.",
           "Creating on LIKKIM Hardware...": "جارٍ الإنشاء على جهاز LIKKIM...",
           "Address Book": "دفتر العناوين",
-          ar: "تبادل",
+          Swap: "تبادل",
+          Skip: "تخطي",
+          "Start Exploring": "ابدأ الاستكشاف",
+          "Secure and Reliable": "آمن وموثوق",
+          "Bank-level security for your digital assets.":
+            "أمان بمستوى البنوك لأصولك الرقمية.",
+          "Manage Your Cryptos": "إدارة عملاتك المشفرة",
+          "Easily manage multiple cryptocurrencies.":
+            "إدارة سهلة لعدة عملات مشفرة.",
+          "Welcome to LIKKIM": "مرحباً بك في LIKKIM",
+          "Your secure and user-friendly digital wallet.":
+            "محفظتك الرقمية الآمنة وسهلة الاستخدام.",
         },
       },
       ja: {
@@ -1125,7 +1187,18 @@ i18n
             "お使いのデバイスは既に認証されています。",
           "Creating on LIKKIM Hardware...": "LIKKIMハードウェアで作成中...",
           "Address Book": "アドレス帳",
-          ja: "スワップ",
+          Swap: "スワップ",
+          Skip: "スキップ",
+          "Start Exploring": "探索を始める",
+          "Secure and Reliable": "安全で信頼性の高い",
+          "Bank-level security for your digital assets.":
+            "デジタル資産のための銀行レベルのセキュリティ。",
+          "Manage Your Cryptos": "あなたの暗号通貨を管理する",
+          "Easily manage multiple cryptocurrencies.":
+            "複数の暗号通貨を簡単に管理。",
+          "Welcome to LIKKIM": "LIKKIMへようこそ",
+          "Your secure and user-friendly digital wallet.":
+            "安全で使いやすいデジタルウォレット。",
         },
       },
       ru: {
@@ -1158,9 +1231,7 @@ i18n
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "Пожалуйста, убедитесь, что ваш Cold Wallet разблокирован и Bluetooth включен.",
           Send: "Enviar",
-
           Receive: "Recibir",
-
           "Transaction History": "Historial de transacciones",
           "No Histories": "No hay historiales",
           "Enter the recipient's address:":
@@ -1283,7 +1354,18 @@ i18n
           "Creating on LIKKIM Hardware...":
             "Создание на оборудовании LIKKIM...",
           "Address Book": "Адресная книга",
-          ru: "Обмен",
+          Swap: "Обмен",
+          Skip: "Пропустить",
+          "Start Exploring": "Начать исследование",
+          "Secure and Reliable": "Надежно и безопасно",
+          "Bank-level security for your digital assets.":
+            "Банковский уровень безопасности для ваших цифровых активов.",
+          "Manage Your Cryptos": "Управляйте вашими криптовалютами",
+          "Easily manage multiple cryptocurrencies.":
+            "Легко управляйте несколькими криптовалютами.",
+          "Welcome to LIKKIM": "Добро пожаловать в LIKKIM",
+          "Your secure and user-friendly digital wallet.":
+            "Ваш надежный и удобный цифровой кошелек.",
         },
       },
       ko: {
@@ -1316,9 +1398,7 @@ i18n
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "콜드 월렛이 잠금 해제되고 Bluetooth가 활성화되어 있는지 확인하십시오.",
           Send: "보내다",
-
           Receive: "받다",
-
           "Transaction History": "거래 내역",
           "No Histories": "기록 없음",
           "Enter the recipient's address:": "수신자의 주소를 입력하십시오:",
@@ -1436,7 +1516,18 @@ i18n
           "Your device is already verified.": "장치가 이미 확인되었습니다.",
           "Creating on LIKKIM Hardware...": "LIKKIM 하드웨어에서 생성 중...",
           "Address Book": "주소록",
-          ko: "스왑",
+          Swap: "스왑",
+          Skip: "건너뛰기",
+          "Start Exploring": "탐색 시작",
+          "Secure and Reliable": "안전하고 신뢰성 있음",
+          "Bank-level security for your digital assets.":
+            "디지털 자산을 위한 은행 수준의 보안.",
+          "Manage Your Cryptos": "당신의 암호화폐 관리",
+          "Easily manage multiple cryptocurrencies.":
+            "여러 암호화폐를 쉽게 관리하세요.",
+          "Welcome to LIKKIM": "LIKKIM에 오신 것을 환영합니다",
+          "Your secure and user-friendly digital wallet.":
+            "안전하고 사용자 친화적인 디지털 지갑.",
         },
       },
       pt: {
@@ -1469,9 +1560,7 @@ i18n
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "Certifique-se de que sua Cold Wallet esteja desbloqueada e o Bluetooth esteja ativado.",
           Send: "Enviar",
-
           Receive: "Receber",
-
           "Transaction History": "Histórico de transações",
           "No Histories": "Sem históricos",
           "Enter the recipient's address:":
@@ -1594,7 +1683,18 @@ i18n
             "Seu dispositivo já está verificado.",
           "Creating on LIKKIM Hardware...": "Criando no hardware LIKKIM...",
           "Address Book": "Livro de Endereços",
-          pt: "Trocar",
+          Swap: "Trocar",
+          Skip: "Pular",
+          "Start Exploring": "Começar a Explorar",
+          "Secure and Reliable": "Seguro e Confiável",
+          "Bank-level security for your digital assets.":
+            "Segurança de nível bancário para seus ativos digitais.",
+          "Manage Your Cryptos": "Gerencie Suas Criptomoedas",
+          "Easily manage multiple cryptocurrencies.":
+            "Gerencie facilmente várias criptomoedas.",
+          "Welcome to LIKKIM": "Bem-vindo à LIKKIM",
+          "Your secure and user-friendly digital wallet.":
+            "Sua carteira digital segura e fácil de usar.",
         },
       },
       "pt-BR": {
@@ -1751,7 +1851,18 @@ i18n
             "Seu dispositivo já está verificado.",
           "Creating on LIKKIM Hardware...": "Criando no hardware LIKKIM...",
           "Address Book": "Livro de Endereços",
-          "pt-BR": "Trocar",
+          Swap: "Trocar",
+          Skip: "Pular",
+          "Start Exploring": "Comece a Explorar",
+          "Secure and Reliable": "Seguro e Confiável",
+          "Bank-level security for your digital assets.":
+            "Segurança de nível bancário para seus ativos digitais.",
+          "Manage Your Cryptos": "Gerencie Suas Criptomoedas",
+          "Easily manage multiple cryptocurrencies.":
+            "Gerencie facilmente várias criptomoedas.",
+          "Welcome to LIKKIM": "Bem-vindo ao LIKKIM",
+          "Your secure and user-friendly digital wallet.":
+            "Sua carteira digital segura e fácil de usar.",
         },
       },
       it: {
@@ -1910,7 +2021,18 @@ i18n
             "Il tuo dispositivo è già verificato.",
           "Creating on LIKKIM Hardware...": "Creazione su hardware LIKKIM...",
           "Address Book": "Rubrica",
-          it: "Scambiare",
+          Swap: "Scambiare",
+          Skip: "Salta",
+          "Start Exploring": "Inizia a esplorare",
+          "Secure and Reliable": "Sicuro e affidabile",
+          "Bank-level security for your digital assets.":
+            "Sicurezza a livello bancario per i tuoi beni digitali.",
+          "Manage Your Cryptos": "Gestisci le tue criptovalute",
+          "Easily manage multiple cryptocurrencies.":
+            "Gestisci facilmente più criptovalute.",
+          "Welcome to LIKKIM": "Benvenuto in LIKKIM",
+          "Your secure and user-friendly digital wallet.":
+            "Il tuo portafoglio digitale sicuro e facile da usare.",
         },
       },
       de: {
@@ -2070,7 +2192,18 @@ i18n
             "Ihr Gerät ist bereits verifiziert.",
           "Creating on LIKKIM Hardware...": "Erstellen auf LIKKIM-Hardware...",
           "Address Book": "Adressbuch",
-          de: "Tauschen",
+          Swap: "Tauschen",
+          Skip: "Überspringen",
+          "Start Exploring": "Erkunden beginnen",
+          "Secure and Reliable": "Sicher und zuverlässig",
+          "Bank-level security for your digital assets.":
+            "Banksicherheit für Ihre digitalen Vermögenswerte.",
+          "Manage Your Cryptos": "Verwalten Sie Ihre Kryptowährungen",
+          "Easily manage multiple cryptocurrencies.":
+            "Verwalten Sie problemlos mehrere Kryptowährungen.",
+          "Welcome to LIKKIM": "Willkommen bei LIKKIM",
+          "Your secure and user-friendly digital wallet.":
+            "Ihre sichere und benutzerfreundliche digitale Geldbörse.",
         },
       },
       hi: {
@@ -2229,7 +2362,18 @@ i18n
           "Creating on LIKKIM Hardware...":
             "LIKKIM हार्डवेयर पर बना रहे हैं...",
           "Address Book": "पता पुस्तिका",
-          hi: "विनिमय",
+          Swap: "विनिमय",
+          Skip: "छोड़ें",
+          "Start Exploring": "खोज शुरू करें",
+          "Secure and Reliable": "सुरक्षित और विश्वसनीय",
+          "Bank-level security for your digital assets.":
+            "आपकी डिजिटल संपत्तियों के लिए बैंक-स्तरीय सुरक्षा।",
+          "Manage Your Cryptos": "अपनी क्रिप्टो करेंसीज का प्रबंधन करें",
+          "Easily manage multiple cryptocurrencies.":
+            "आसानी से कई क्रिप्टोकरेंसियों का प्रबंधन करें।",
+          "Welcome to LIKKIM": "LIKKIM में आपका स्वागत है",
+          "Your secure and user-friendly digital wallet.":
+            "आपका सुरक्षित और उपयोगकर्ता-हितैषी डिजिटल वॉलेट।",
         },
       },
       mn: {

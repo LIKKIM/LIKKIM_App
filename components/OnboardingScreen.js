@@ -15,32 +15,11 @@ import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { languages } from "../config/languages";
-import i18n from "../config/i18n"; // Ensure this path is correct
+import i18n from "../config/i18n"; // 确保这个路径正确
 
 const { width, height } = Dimensions.get("window");
 
-const slides = [
-  {
-    key: "slide1",
-    title: i18n.t("Welcome to LIKKIM"),
-    text: i18n.t("Your secure and user-friendly digital wallet."),
-    image: require("../assets/slider/slider1.png"),
-  },
-  {
-    key: "slide2",
-    title: i18n.t("Manage Your Cryptos"),
-    text: i18n.t("Easily manage multiple cryptocurrencies."),
-    image: require("../assets/slider/slider2.png"),
-  },
-  {
-    key: "slide3",
-    title: i18n.t("Secure and Reliable"),
-    text: i18n.t("Bank-level security for your digital assets."),
-    image: require("../assets/slider/slider3.png"),
-  },
-];
-
-const OnboardingScreen = ({ onDone, onLanguageSelect }) => {
+const OnboardingScreen = ({ onDone }) => {
   const [languageModalVisible, setLanguageModalVisible] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState("en");
 
@@ -53,9 +32,31 @@ const OnboardingScreen = ({ onDone, onLanguageSelect }) => {
     });
   }, []);
 
+  // 在这里定义slides，依赖于当前语言设置
+  const slides = [
+    {
+      key: "slide1",
+      title: i18n.t("Welcome to LIKKIM"),
+      text: i18n.t("Your secure and user-friendly digital wallet."),
+      image: require("../assets/slider/slider1.png"),
+    },
+    {
+      key: "slide2",
+      title: i18n.t("Manage Your Cryptos"),
+      text: i18n.t("Easily manage multiple cryptocurrencies."),
+      image: require("../assets/slider/slider2.png"),
+    },
+    {
+      key: "slide3",
+      title: i18n.t("Secure and Reliable"),
+      text: i18n.t("Bank-level security for your digital assets."),
+      image: require("../assets/slider/slider3.png"),
+    },
+  ];
+
   const handleLanguageChange = async (lang) => {
     setSelectedLanguage(lang);
-    i18n.changeLanguage(lang); // Switch the i18n instance to the new language
+    i18n.changeLanguage(lang); // 切换i18n实例到新的语言
     await AsyncStorage.setItem("selectedLanguage", lang);
     setLanguageModalVisible(false);
   };
@@ -78,6 +79,7 @@ const OnboardingScreen = ({ onDone, onLanguageSelect }) => {
     </LinearGradient>
   );
 
+  // 确保其余按钮和文本使用 i18n 进行国际化
   const _renderNextButton = () => (
     <View style={styles.nextButton}>
       <Text style={styles.buttonText}>{i18n.t("Next")}</Text>
