@@ -226,6 +226,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 4,
   },
   languageButton: {
+    zIndex: 100,
     position: "absolute",
     top: 70,
     right: 20,
