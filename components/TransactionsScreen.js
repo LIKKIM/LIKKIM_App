@@ -145,9 +145,7 @@ function TransactionsScreen() {
     if (Platform.OS !== "web" && !isScanning) {
       if (Platform.OS === "android") {
         // 在安卓平台上检查和请求权限
-        checkAndReqPermission(() => {
-          startScanning();
-        });
+        checkAndReqPermission(startScanning);
       } else {
         // 对于非安卓平台，直接开始扫描
         startScanning();

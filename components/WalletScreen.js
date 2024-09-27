@@ -18,6 +18,7 @@ import {
   Clipboard,
   TouchableWithoutFeedback,
   TouchableHighlight,
+  PermissionsAndroid
 } from "react-native";
 
 // 第三方库
@@ -165,37 +166,70 @@ function WalletScreen({ route, navigation }) {
   }, []);
   const bleManagerRef = useRef(null);
 
+
+  //安卓高版本申请蓝牙权限
+  const checkAndReqPermission = async (cb) => {
+    if (Platform.OS === "android" && Platform.Version >= 23) {
+      console.log("安卓申请权限");
+      // Scanning: Checking permissions...
+      const enableds = await PermissionsAndroid.requestMultiple([
+        PermissionsAndroid.PERMISSIONS.BLUETOOTH_CONNECT,
+        PermissionsAndroid.PERMISSIONS.BLUETOOTH_SCAN,
+        PermissionsAndroid.PERMISSIONS.BLUETOOTH_ADVERTISE,
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+      ]);
+      let canRunCb = true;
+      for (let permissionItem in enableds) {
+        if (enableds[permissionItem] !== "granted") {
+          console.warn(permissionItem + "权限未授予");
+          canRunCb = false;
+        }
+      }
+
+      canRunCb && cb();
+    }
+
+    if (Platform.OS == 'ios') cb();
+  };
+
   const scanDevices = () => {
     if (Platform.OS !== "web" && !isScanning) {
-      console.log("Scanning started");
-      setIsScanning(true);
 
-      bleManagerRef.current.startDeviceScan(
-        null,
-        { allowDuplicates: true },
-        (error, device) => {
-          if (error) {
-            console.error("BleManager scanning error:", error);
-            return;
+
+      checkAndReqPermission(() => {
+
+        console.log("Scanning started");
+        setIsScanning(true);
+
+        bleManagerRef.current.startDeviceScan(
+          null,
+          { allowDuplicates: true },
+          (error, device) => {
+            if (error) {
+              console.error("BleManager scanning error:", error);
+              return;
+            }
+
+            if (device.name && device.name.includes("LIKKIM")) {
+              setDevices((prevDevices) => {
+                if (!prevDevices.find((d) => d.id === device.id)) {
+                  return [...prevDevices, device]; // 这里 device 是完整的设备对象
+                }
+                return prevDevices;
+              });
+              //  console.log("Scanned device:", device);
+            }
           }
+        );
 
-          if (device.name && device.name.includes("LIKKIM")) {
-            setDevices((prevDevices) => {
-              if (!prevDevices.find((d) => d.id === device.id)) {
-                return [...prevDevices, device]; // 这里 device 是完整的设备对象
-              }
-              return prevDevices;
-            });
-            //  console.log("Scanned device:", device);
-          }
-        }
-      );
+        setTimeout(() => {
+          console.log("Scanning stopped");
+          bleManagerRef.current.stopDeviceScan();
+          setIsScanning(false);
+        }, 2000);
 
-      setTimeout(() => {
-        console.log("Scanning stopped");
-        bleManagerRef.current.stopDeviceScan();
-        setIsScanning(false);
-      }, 2000);
+      })
+
     } else {
       console.log("Attempt to scan while already scanning");
     }
@@ -1701,8 +1735,8 @@ function WalletScreen({ route, navigation }) {
                 ? "#FF5252"
                 : "#F23645"
               : isBlackText
-              ? "#22AA94"
-              : "#0C9981";
+                ? "#22AA94"
+                : "#0C9981";
 
           return (
             <TouchableHighlight
@@ -1843,14 +1877,13 @@ function WalletScreen({ route, navigation }) {
                                 isBlackText && { color: "#121518" },
                               ]}
                             >
-                              {`${
-                                i === 0
-                                  ? card.balance
-                                  : getConvertedBalance(
-                                      card.balance,
-                                      card.shortName
-                                    )
-                              } ${i === 0 ? card.shortName : currencyUnit}`}
+                              {`${i === 0
+                                ? card.balance
+                                : getConvertedBalance(
+                                  card.balance,
+                                  card.shortName
+                                )
+                                } ${i === 0 ? card.shortName : currencyUnit}`}
                             </Text>
                           )
                         )}
