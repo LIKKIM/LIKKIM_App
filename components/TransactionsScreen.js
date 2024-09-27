@@ -141,47 +141,51 @@ function TransactionsScreen() {
     image: require("../assets/gif/Pending.gif"),
   });
 
-  // 扫描蓝牙设备的函数
   const scanDevices = () => {
     if (Platform.OS !== "web" && !isScanning) {
-      //申请权限
-      checkAndReqPermission(() => {
-        console.log("Scanning started");
-        setIsScanning(true);
-
-        bleManagerRef.current?.startDeviceScan(
-          null,
-          { allowDuplicates: true },
-          (error, device) => {
-            if (error) {
-              console.error(
-                "Transcation Page BleManager scanning error:",
-                error
-              );
-              //   return;
-            }
-
-            if (device && device.name && device.name.includes("LIKKIM")) {
-              setDevices((prevDevices) => {
-                if (!prevDevices.find((d) => d.id === device.id)) {
-                  return [...prevDevices, device]; // 这里 device 是完整的设备对象
-                }
-                return prevDevices;
-              });
-              //  console.log("Scanned device:", device);
-            }
-          }
-        );
-
-        setTimeout(() => {
-          console.log("Scanning stopped");
-          bleManagerRef.current.stopDeviceScan();
-          setIsScanning(false);
-        }, 2000);
-      });
+      if (Platform.OS === "android") {
+        // 在安卓平台上检查和请求权限
+        checkAndReqPermission(() => {
+          startScanning();
+        });
+      } else {
+        // 对于非安卓平台，直接开始扫描
+        startScanning();
+      }
     } else {
       console.log("Attempt to scan while already scanning");
     }
+  };
+
+  const startScanning = () => {
+    console.log("Scanning started");
+    setIsScanning(true);
+
+    bleManagerRef.current.startDeviceScan(
+      null,
+      { allowDuplicates: true },
+      (error, device) => {
+        if (error) {
+          console.error("BleManager scanning error:", error);
+          return;
+        }
+
+        if (device.name && device.name.includes("LIKKIM")) {
+          setDevices((prevDevices) => {
+            if (!prevDevices.find((d) => d.id === device.id)) {
+              return [...prevDevices, device];
+            }
+            return prevDevices;
+          });
+        }
+      }
+    );
+
+    setTimeout(() => {
+      console.log("Scanning stopped");
+      bleManagerRef.current.stopDeviceScan();
+      setIsScanning(false);
+    }, 2000);
   };
 
   /*   useEffect(() => {
