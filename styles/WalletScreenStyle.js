@@ -1,5 +1,5 @@
 // styles/WalletScreenStyle.js
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 
 const WalletScreenStyles = (isDarkMode) => {
   // 色彩定义
@@ -21,15 +21,18 @@ const WalletScreenStyles = (isDarkMode) => {
   const historyContainerBackgroundColor = isDarkMode
     ? "#24234C80"
     : "#FFFFFF80";
-
+  const { height } = Dimensions.get("window"); // 获取设备高度
+  const containerHeight = height - 236; // 计算高度
   return StyleSheet.create({
     animatedTabContainer: {
       flexDirection: "column",
-      justifyContent: "center",
+      justifyContent: "space-between",
       alignItems: "center",
       position: "absolute",
       zIndex: 10,
       top: 236,
+      height: containerHeight,
+      // backgroundColor: "red",
     },
     cardModalContent: {
       width: 326,
@@ -601,7 +604,7 @@ const WalletScreenStyles = (isDarkMode) => {
       borderRadius: 30,
       height: 60,
       alignItems: "center",
-      bottom: 0,
+      bottom: 60,
     },
 
     cancelButton: {
