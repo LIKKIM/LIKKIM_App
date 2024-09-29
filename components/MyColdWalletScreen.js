@@ -432,38 +432,40 @@ function MyColdWalletScreen() {
 
   const scanDevices = () => {
     if (Platform.OS !== "web" && !isScanning) {
-      console.log("Scanning started");
-      setIsScanning(true);
-      const scanOptions = { allowDuplicates: true };
-      const scanFilter = null;
+      checkAndReqPermission(() => {
+        console.log("Scanning started");
+        setIsScanning(true);
+        const scanOptions = { allowDuplicates: true };
+        const scanFilter = null;
 
-      bleManagerRef.current.startDeviceScan(
-        scanFilter,
-        scanOptions,
-        (error, device) => {
-          if (error) {
-            console.error("BleManager scanning error:", error);
-            if (error.errorCode === BleErrorCode.BluetoothUnsupported) {
-              //   console.error("Bluetooth LE is unsupported on this device");
-              //    return;
-            }
-          } else if (device.name && device.name.includes("LIKKIM")) {
-            setDevices((prevDevices) => {
-              if (!prevDevices.find((d) => d.id === device.id)) {
-                return [...prevDevices, device];
+        bleManagerRef.current.startDeviceScan(
+          scanFilter,
+          scanOptions,
+          (error, device) => {
+            if (error) {
+              console.error("BleManager scanning error:", error);
+              if (error.errorCode === BleErrorCode.BluetoothUnsupported) {
+                // console.error("Bluetooth LE is unsupported on this device");
+                // return;
               }
-              return prevDevices;
-            });
-            //   console.log("Scanned device:", device);
+            } else if (device.name && device.name.includes("LIKKIM")) {
+              setDevices((prevDevices) => {
+                if (!prevDevices.find((d) => d.id === device.id)) {
+                  return [...prevDevices, device];
+                }
+                return prevDevices;
+              });
+              // console.log("Scanned device:", device);
+            }
           }
-        }
-      );
+        );
 
-      setTimeout(() => {
-        console.log("Scanning stopped");
-        bleManagerRef.current.stopDeviceScan();
-        setIsScanning(false);
-      }, 2000);
+        setTimeout(() => {
+          console.log("Scanning stopped");
+          bleManagerRef.current.stopDeviceScan();
+          setIsScanning(false);
+        }, 2000);
+      });
     } else {
       console.log("Attempt to scan while already scanning");
     }
