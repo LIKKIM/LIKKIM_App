@@ -55,6 +55,12 @@ const SwapModal = ({
   // Get the selected crypto details for "From" and "To" tokens
   const fromCryptoDetails = getTokenDetails(selectedFromToken);
   const toCryptoDetails = getTokenDetails(selectedToToken);
+  // 动态获取用户输入的值（保持原样）
+  const displayedFromValue = fromValue || "0.00"; // 如果没有输入，显示 "0.00"
+  const displayedToValue = toValue || "0.00"; // 如果没有输入，显示 "0.00"
+
+  // 获取货币单位符号
+  const currencySymbol = "$"; // 根据需要替换为你项目中实际使用的货币符号
 
   // Function to handle confirm button in SwapModal
   const handleConfirmSwap = () => {
@@ -127,7 +133,7 @@ const SwapModal = ({
                           },
                         ]}
                       >
-                        {t("$0.00")}
+                        {`${currencySymbol}${displayedFromValue}`}
                       </Text>
                     </View>
                     <TouchableOpacity
@@ -274,7 +280,7 @@ const SwapModal = ({
                           },
                         ]}
                       >
-                        {t("$0.00")}
+                        {`${currencySymbol}${displayedToValue}`}
                       </Text>
                     </View>
                     <TouchableOpacity
