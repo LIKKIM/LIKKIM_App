@@ -378,72 +378,169 @@ const SwapModal = ({
 
       {/* Transaction Confirmation Modal */}
       <Modal
-        visible={confirmModalVisible}
-        transparent={true}
         animationType="slide"
+        transparent={true}
+        visible={confirmModalVisible}
         onRequestClose={() => setConfirmModalVisible(false)}
       >
         <BlurView intensity={10} style={TransactionsScreenStyle.centeredView}>
           <View style={TransactionsScreenStyle.confirmModalView}>
+            {/* 添加国际化标题 */}
             <Text style={TransactionsScreenStyle.modalTitle}>
               {t("Transaction Confirmation")}
             </Text>
 
-            {/* From Token Details */}
-            <View style={TransactionsScreenStyle.tokenDetailsContainer}>
-              <Text>
-                {t("From")}:{" "}
+            {/* From Section */}
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                marginTop: 6,
+                marginBottom: 16,
+              }}
+            >
+              {fromCryptoDetails?.chainIcon && (
                 <Image
-                  source={fromCryptoDetails?.chainIcon}
-                  style={{ width: 20, height: 20, marginRight: 8 }}
-                />{" "}
-                - {fromValue} {fromCryptoDetails?.name}
+                  source={fromCryptoDetails.chainIcon}
+                  style={{ width: 24, height: 24, marginRight: 8 }}
+                />
+              )}
+              <Text style={TransactionsScreenStyle.modalTitle}>
+                {`- ${fromCryptoDetails?.name} ${fromValue}`}
               </Text>
             </View>
 
-            {/* To Token Details */}
-            <View style={TransactionsScreenStyle.tokenDetailsContainer}>
-              <Text>
-                {t("To")}:{" "}
+            {/* To Section */}
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                marginBottom: 16,
+              }}
+            >
+              {toCryptoDetails?.chainIcon && (
                 <Image
-                  source={toCryptoDetails?.chainIcon}
-                  style={{ width: 20, height: 20, marginRight: 8 }}
-                />{" "}
-                + {toValue} {toCryptoDetails?.name}
+                  source={toCryptoDetails.chainIcon}
+                  style={{ width: 24, height: 24, marginRight: 8 }}
+                />
+              )}
+              <Text style={TransactionsScreenStyle.modalTitle}>
+                {`+ ${toCryptoDetails?.name} ${toValue}`}
               </Text>
             </View>
 
-            {/* Sending and Receiving Addresses */}
-            <Text>
-              {t("Sending Address")}: {fromCryptoDetails?.address}
-            </Text>
-            <Text>
-              {t("Receiving Address")}: {toCryptoDetails?.address}
-            </Text>
+            <ScrollView
+              style={{ maxHeight: 320 }} // 设置最大高度，当内容超过时启用滚动
+              contentContainerStyle={{ paddingHorizontal: 16 }}
+            >
+              {/* 交互地址（至） */}
+              <Text style={TransactionsScreenStyle.transactionText}>
+                <Text style={{ fontWeight: "bold" }}>
+                  {t("Interaction Address (To)")}:
+                </Text>
+              </Text>
+              <Text style={TransactionsScreenStyle.transactionText}>
+                {`Some Placeholder Address`} {/* 这是占位符 */}
+              </Text>
 
-            {/* Network and dApp */}
-            <Text>
-              {t("Network")}: {fromCryptoDetails?.chain}
-            </Text>
-            <Text>{t("dApp")}: Changelly</Text>
+              {/* 发送地址 */}
+              <Text style={TransactionsScreenStyle.transactionText}>
+                <Text style={{ fontWeight: "bold" }}>
+                  {t("Sending Address")}:
+                </Text>
+              </Text>
+              <Text style={TransactionsScreenStyle.transactionText}>
+                {` ${fromCryptoDetails?.address}`}
+              </Text>
 
-            {/* Estimated Network Fee */}
-            <Text>
-              {t("Estimated Network Fee")}: {fromCryptoDetails?.fee}
-            </Text>
+              {/* 接收地址 */}
+              <Text style={TransactionsScreenStyle.transactionText}>
+                <Text style={{ fontWeight: "bold" }}>
+                  {t("Receiving Address")}:
+                </Text>
+              </Text>
+              <Text style={TransactionsScreenStyle.transactionText}>
+                {` ${toCryptoDetails?.address}`}
+              </Text>
 
-            {/* Confirm and Cancel Buttons */}
-            <View>
+              {/* 网络 */}
+              <Text style={TransactionsScreenStyle.transactionText}>
+                <Text style={{ fontWeight: "bold" }}>{t("Network")}:</Text>
+              </Text>
+              <Text style={TransactionsScreenStyle.transactionText}>
+                {` ${fromCryptoDetails?.chain}`}
+              </Text>
+
+              {/* dApp */}
+              <Text style={TransactionsScreenStyle.transactionText}>
+                <Text style={{ fontWeight: "bold" }}>{t("dApp")}:</Text>
+                {` Changelly`}
+              </Text>
+
+              {/* 预估网络费用 */}
+              <Text style={TransactionsScreenStyle.transactionText}>
+                <Text style={{ fontWeight: "bold" }}>
+                  {t("Estimated Network Fee")}:
+                </Text>
+                {` ${fromCryptoDetails?.fee}`}
+              </Text>
+            </ScrollView>
+
+            <View
+              style={{ marginTop: 20, width: "100%", alignItems: "center" }}
+            >
+              {/* 确认交易按钮 */}
               <TouchableOpacity
-                style={TransactionsScreenStyle.swapConfirmButton}
-                onPress={() => setConfirmModalVisible(false)}
+                style={[
+                  TransactionsScreenStyle.optionButton,
+                  { marginBottom: 10, width: "80%" }, // 添加宽度以确保按钮居中
+                ]}
+                onPress={async () => {
+                  try {
+                    const response = await fetch(
+                      "https://bt.likkim.com/meridian/address/queryBlockList",
+                      {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                          chainShortName: fromCryptoDetails?.chain,
+                        }),
+                      }
+                    );
+                    const data = await response.json();
+
+                    if (data.code === "0" && Array.isArray(data.data)) {
+                      const block = data.data[0].blockList[0];
+                      const { hash, height, blockTime } = block;
+
+                      // 执行签名
+                      await signTransaction(
+                        verifiedDevices,
+                        hash,
+                        height,
+                        blockTime,
+                        fromValue,
+                        toCryptoDetails?.address
+                      );
+                    }
+
+                    setConfirmModalVisible(false);
+                  } catch (error) {
+                    console.error("确认交易时出错:", error);
+                  }
+                }}
               >
                 <Text style={TransactionsScreenStyle.submitButtonText}>
                   {t("Confirm")}
                 </Text>
               </TouchableOpacity>
+
+              {/* 取消按钮 */}
               <TouchableOpacity
-                style={TransactionsScreenStyle.cancelButton}
+                style={[
+                  TransactionsScreenStyle.cancelButton,
+                  { width: "80%" }, // 添加宽度以确保按钮居中
+                ]}
                 onPress={() => setConfirmModalVisible(false)}
               >
                 <Text style={TransactionsScreenStyle.cancelButtonText}>
