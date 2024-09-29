@@ -91,6 +91,7 @@ function MyColdWalletScreen() {
   const lightColors = ["#FFFFFF", "#EDEBEF"];
   const [receivedVerificationCode, setReceivedVerificationCode] = useState("");
   const [newPasswordModalVisible, setNewPasswordModalVisible] = useState(false);
+  const [isSupportExpanded, setIsSupportExpanded] = useState(false);
   const [verificationSuccessModalVisible, setVerificationSuccessModalVisible] =
     useState(false);
   const [verificationFailModalVisible, setVerificationFailModalVisible] =
@@ -852,8 +853,14 @@ function MyColdWalletScreen() {
             },
           ]
         : []),
-    ],
-    support: [
+
+      {
+        title: t("Find My LIKKIM"),
+        icon: "location-on", // 使用表示位置的图标
+        onPress: () => {
+          Vibration.vibrate();
+        },
+      },
       {
         title: t("Firmware Update"),
         icon: "downloading",
@@ -862,6 +869,8 @@ function MyColdWalletScreen() {
           handleFirmwareUpdate();
         },
       },
+    ],
+    support: [
       {
         title: t("Help & Support"),
         icon: "help-outline",
@@ -870,8 +879,7 @@ function MyColdWalletScreen() {
           Linking.openURL("https://www.likkim.com");
         },
       },
-    ],
-    info: [
+
       {
         title: t("Privacy & Data"),
         icon: "gpp-good",
@@ -888,6 +896,8 @@ function MyColdWalletScreen() {
           Linking.openURL("https://www.likkim.com");
         },
       },
+    ],
+    info: [
       {
         title: t("Version"),
         icon: "update",
@@ -920,9 +930,6 @@ function MyColdWalletScreen() {
       >
         <View style={MyColdWalletScreenStyle.contentContainer}>
           {/* 设置分类 */}
-          {/*     <Text style={MyColdWalletScreenStyle.categoryTitle}>
-            {t("Settings")}
-          </Text> */}
           <View>
             {settingsOptions.settings.map((option) => (
               <TouchableOpacity
@@ -958,34 +965,55 @@ function MyColdWalletScreen() {
               </TouchableOpacity>
             ))}
           </View>
-          {/* 支持分类 */}
-          {/*      <Text style={MyColdWalletScreenStyle.categoryTitle}>
-            {t("Support")}
-          </Text> */}
-          <View>
-            {settingsOptions.support.map((option) => (
-              <TouchableOpacity
-                key={option.title}
-                style={MyColdWalletScreenStyle.settingsItem}
-                onPress={option.onPress}
-              >
-                <View style={MyColdWalletScreenStyle.listContainer}>
-                  <Icon
-                    name={option.icon}
-                    size={24}
-                    color={iconColor}
-                    style={MyColdWalletScreenStyle.Icon}
-                  />
-                  <Text style={[MyColdWalletScreenStyle.Text, { flex: 1 }]}>
-                    {option.title}
-                  </Text>
-                </View>
-              </TouchableOpacity>
-            ))}
-          </View>
-          {/* 信息分类 */}
-          {/*      <Text style={MyColdWalletScreenStyle.categoryTitle}>{t("Info")}</Text> */}
 
+          {/* 支持分类（折叠功能） */}
+          <TouchableOpacity
+            style={MyColdWalletScreenStyle.settingsItem}
+            onPress={() => setIsSupportExpanded(!isSupportExpanded)}
+          >
+            <View style={MyColdWalletScreenStyle.listContainer}>
+              <Icon
+                name="support-agent"
+                size={24}
+                color={iconColor}
+                style={{ marginRight: 8 }}
+              />
+              <Text style={[MyColdWalletScreenStyle.Text, { flex: 1 }]}>
+                {t("Support")}
+              </Text>
+              <Icon
+                name={isSupportExpanded ? "arrow-drop-up" : "arrow-drop-down"}
+                size={24}
+                color={iconColor}
+              />
+            </View>
+          </TouchableOpacity>
+
+          {isSupportExpanded && (
+            <View>
+              {settingsOptions.support.map((option) => (
+                <TouchableOpacity
+                  key={option.title}
+                  style={MyColdWalletScreenStyle.settingsItem}
+                  onPress={option.onPress}
+                >
+                  <View style={MyColdWalletScreenStyle.listContainer}>
+                    <Icon
+                      name={option.icon}
+                      size={24}
+                      color={iconColor}
+                      style={MyColdWalletScreenStyle.Icon}
+                    />
+                    <Text style={[MyColdWalletScreenStyle.Text, { flex: 1 }]}>
+                      {option.title}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              ))}
+            </View>
+          )}
+
+          {/* 信息分类（保持展开状态，无需折叠） */}
           <View>
             {settingsOptions.info.map((option) => (
               <TouchableOpacity
@@ -1018,21 +1046,16 @@ function MyColdWalletScreen() {
             ))}
           </View>
 
-          {/* Bluetooth Btn modal*/}
-          <View style={{ marginTop: 40 }}>
-            {/* <Text style={MyColdWalletScreenStyle.languageModalTitle}>
-              {t("Bluetooth")}
-            </Text> */}
-            <View style={{ alignItems: "center" }}>
-              <TouchableOpacity
-                style={MyColdWalletScreenStyle.roundButton}
-                onPress={handleBluetoothPairing}
-              >
-                <Text style={MyColdWalletScreenStyle.BluetoothBtnText}>
-                  {t("Pair with Bluetooth")}
-                </Text>
-              </TouchableOpacity>
-            </View>
+          {/* 蓝牙配对按钮 */}
+          <View style={{ marginTop: 40, alignItems: "center" }}>
+            <TouchableOpacity
+              style={MyColdWalletScreenStyle.roundButton}
+              onPress={handleBluetoothPairing}
+            >
+              <Text style={MyColdWalletScreenStyle.BluetoothBtnText}>
+                {t("Pair with Bluetooth")}
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
       </ScrollView>
