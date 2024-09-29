@@ -89,7 +89,6 @@ const InputAddressModal = ({
                   width: "100%",
                   flexDirection: "row",
                   alignItems: "center",
-                  height: 100,
                 }}
               >
                 <TextInput

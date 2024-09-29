@@ -15,6 +15,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import { useTranslation } from "react-i18next";
 
 const SwapModal = ({
+  isDarkMode,
   visible,
   setSwapModalVisible,
   fromValue,
@@ -34,6 +35,15 @@ const SwapModal = ({
 }) => {
   const { t } = useTranslation(); // i18n translation hook
   const [confirmModalVisible, setConfirmModalVisible] = useState(false);
+  const disabledButtonBackgroundColor = isDarkMode ? "#6c6c6c" : "#ccc"; // 根据 isDarkMode
+  // 确定是否禁用按钮
+  const isConfirmDisabled =
+    !fromValue || !toValue || !selectedFromToken || !selectedToToken;
+
+  // 按钮背景色动态设置
+  const confirmButtonBackgroundColor = isConfirmDisabled
+    ? disabledButtonBackgroundColor // 如果禁用，则使用灰色
+    : TransactionsScreenStyle.swapConfirmButton.backgroundColor; // 正常状态下使用默认颜色
 
   // Helper function to get the token details including the icon and name
   const getTokenDetails = (tokenShortName) => {
@@ -347,10 +357,14 @@ const SwapModal = ({
               <View>
                 {/* Confirm Button */}
                 <TouchableOpacity
+                  disabled={isConfirmDisabled} // 根据状态禁用按钮
                   onPress={handleConfirmSwap}
                   style={[
                     TransactionsScreenStyle.swapConfirmButton,
-                    { marginBottom: 20 },
+                    {
+                      backgroundColor: confirmButtonBackgroundColor,
+                      marginBottom: 20,
+                    },
                   ]}
                 >
                   <Text style={TransactionsScreenStyle.submitButtonText}>

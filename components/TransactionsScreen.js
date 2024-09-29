@@ -1908,6 +1908,7 @@ function TransactionsScreen() {
 
         {/* Swap 模态框 */}
         <SwapModal
+          isDarkMode={isDarkMode}
           visible={swapModalVisible}
           setSwapModalVisible={setSwapModalVisible}
           fromValue={fromValue}
