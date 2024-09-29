@@ -22,7 +22,7 @@ const WalletScreenStyles = (isDarkMode) => {
     ? "#24234C80"
     : "#FFFFFF80";
   const { height } = Dimensions.get("window"); // 获取设备高度
-  const containerHeight = height - 236; // 计算高度
+  const containerHeight = height - 360; // 计算高度
   return StyleSheet.create({
     animatedTabContainer: {
       flexDirection: "column",
@@ -604,7 +604,7 @@ const WalletScreenStyles = (isDarkMode) => {
       borderRadius: 30,
       height: 60,
       alignItems: "center",
-      bottom: 60,
+      bottom: 0,
     },
 
     cancelButton: {
