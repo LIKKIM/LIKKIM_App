@@ -18,7 +18,7 @@ import {
   Clipboard,
   TouchableWithoutFeedback,
   TouchableHighlight,
-  PermissionsAndroid
+  PermissionsAndroid,
 } from "react-native";
 
 // 第三方库
@@ -166,7 +166,6 @@ function WalletScreen({ route, navigation }) {
   }, []);
   const bleManagerRef = useRef(null);
 
-
   //安卓高版本申请蓝牙权限
   const checkAndReqPermission = async (cb) => {
     if (Platform.OS === "android" && Platform.Version >= 23) {
@@ -189,15 +188,12 @@ function WalletScreen({ route, navigation }) {
       canRunCb && cb();
     }
 
-    if (Platform.OS == 'ios') cb();
+    if (Platform.OS == "ios") cb();
   };
 
   const scanDevices = () => {
     if (Platform.OS !== "web" && !isScanning) {
-
-
       checkAndReqPermission(() => {
-
         console.log("Scanning started");
         setIsScanning(true);
 
@@ -227,9 +223,7 @@ function WalletScreen({ route, navigation }) {
           bleManagerRef.current.stopDeviceScan();
           setIsScanning(false);
         }, 2000);
-
-      })
-
+      });
     } else {
       console.log("Attempt to scan while already scanning");
     }
@@ -1735,8 +1729,8 @@ function WalletScreen({ route, navigation }) {
                 ? "#FF5252"
                 : "#F23645"
               : isBlackText
-                ? "#22AA94"
-                : "#0C9981";
+              ? "#22AA94"
+              : "#0C9981";
 
           return (
             <TouchableHighlight
@@ -1877,13 +1871,14 @@ function WalletScreen({ route, navigation }) {
                                 isBlackText && { color: "#121518" },
                               ]}
                             >
-                              {`${i === 0
-                                ? card.balance
-                                : getConvertedBalance(
-                                  card.balance,
-                                  card.shortName
-                                )
-                                } ${i === 0 ? card.shortName : currencyUnit}`}
+                              {`${
+                                i === 0
+                                  ? card.balance
+                                  : getConvertedBalance(
+                                      card.balance,
+                                      card.shortName
+                                    )
+                              } ${i === 0 ? card.shortName : currencyUnit}`}
                             </Text>
                           )
                         )}
@@ -1956,6 +1951,7 @@ function WalletScreen({ route, navigation }) {
         iconColor={iconColor}
         handleDevicePress={handleDevicePress}
         setBleVisible={setBleVisible}
+        selectedDevice={selectedDevice}
         setSelectedDevice={setSelectedDevice}
         verifiedDevices={verifiedDevices}
         handleDisconnectDevice={handleDisconnectDevice}

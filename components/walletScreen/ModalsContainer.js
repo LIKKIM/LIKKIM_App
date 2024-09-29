@@ -53,6 +53,7 @@ const ModalsContainer = ({
   iconColor,
   handleDevicePress,
   setBleVisible,
+  selectedDevice,
   setSelectedDevice,
   verifiedDevices,
   handleDisconnectDevice,
