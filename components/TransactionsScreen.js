@@ -1379,7 +1379,7 @@ function TransactionsScreen() {
 
       return () => {
         subscription.remove();
-        bleManagerRef.current.destroy();
+        bleManagerRef.current && bleManagerRef.current.destroy();
       };
     }
   }, []);

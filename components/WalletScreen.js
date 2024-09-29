@@ -324,7 +324,7 @@ function WalletScreen({ route, navigation }) {
 
       return () => {
         subscription.remove();
-        bleManagerRef.current.destroy();
+        bleManagerRef.current && bleManagerRef.current.destroy();
       };
     }
   }, []);
