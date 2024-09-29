@@ -277,7 +277,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
     confirmModalView: {
       margin: 20,
       alignSelf: "center",
-      flex: 1, // 使用 flex 让 modal 动态填充可用空间
+      //  flex: 1, // 使用 flex 让 modal 动态填充可用空间
       width: "90%",
       backgroundColor: modalBackgroundColor,
       borderRadius: 20,

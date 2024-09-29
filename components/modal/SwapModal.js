@@ -492,7 +492,7 @@ const SwapModal = ({
               <TouchableOpacity
                 style={[
                   TransactionsScreenStyle.optionButton,
-                  { marginBottom: 10, width: "80%" }, // 添加宽度以确保按钮居中
+                  { marginBottom: 10, width: "100%" }, // 添加宽度以确保按钮居中
                 ]}
                 onPress={async () => {
                   try {
@@ -538,7 +538,7 @@ const SwapModal = ({
               <TouchableOpacity
                 style={[
                   TransactionsScreenStyle.cancelButton,
-                  { width: "80%" }, // 添加宽度以确保按钮居中
+                  { width: "100%" }, // 添加宽度以确保按钮居中
                 ]}
                 onPress={() => setConfirmModalVisible(false)}
               >
