@@ -271,10 +271,9 @@ const TabModal = ({
 
       <Animated.View
         style={[
-
           WalletScreenStyle.animatedTabContainer,
           { opacity: tabOpacity },
-          { marginTop: Platform.OS === 'android' ? -30 : 0 }
+          { marginTop: Platform.OS === "android" ? -30 : 0 },
         ]}
       >
         <View
@@ -311,7 +310,7 @@ const TabModal = ({
               style={[
                 WalletScreenStyle.tabButtonText,
                 activeTab === "History" &&
-                WalletScreenStyle.activeTabButtonText,
+                  WalletScreenStyle.activeTabButtonText,
               ]}
             >
               {t("History")}
