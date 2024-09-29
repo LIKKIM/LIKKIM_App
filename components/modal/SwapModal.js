@@ -390,43 +390,42 @@ const SwapModal = ({
               {t("Transaction Confirmation")}
             </Text>
 
-            {/* From Section */}
+            {/* From and To Sections in the same row */}
             <View
               style={{
                 flexDirection: "row",
+                justifyContent: "space-between", // 确保左右两边分布
                 alignItems: "center",
+                width: "90%",
                 marginTop: 6,
                 marginBottom: 16,
               }}
             >
-              {fromCryptoDetails?.chainIcon && (
-                <Image
-                  source={fromCryptoDetails.chainIcon}
-                  style={{ width: 24, height: 24, marginRight: 8 }}
-                />
-              )}
-              <Text style={TransactionsScreenStyle.modalTitle}>
-                {`- ${fromCryptoDetails?.name} ${fromValue}`}
-              </Text>
-            </View>
+              {/* From Section */}
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                {fromCryptoDetails?.chainIcon && (
+                  <Image
+                    source={fromCryptoDetails.chainIcon}
+                    style={{ width: 24, height: 24, marginRight: 8 }}
+                  />
+                )}
+                <Text style={TransactionsScreenStyle.modalTitle}>
+                  {`- ${fromCryptoDetails?.name} ${fromValue}`}
+                </Text>
+              </View>
 
-            {/* To Section */}
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                marginBottom: 16,
-              }}
-            >
-              {toCryptoDetails?.chainIcon && (
-                <Image
-                  source={toCryptoDetails.chainIcon}
-                  style={{ width: 24, height: 24, marginRight: 8 }}
-                />
-              )}
-              <Text style={TransactionsScreenStyle.modalTitle}>
-                {`+ ${toCryptoDetails?.name} ${toValue}`}
-              </Text>
+              {/* To Section */}
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                {toCryptoDetails?.chainIcon && (
+                  <Image
+                    source={toCryptoDetails.chainIcon}
+                    style={{ width: 24, height: 24, marginRight: 8 }}
+                  />
+                )}
+                <Text style={TransactionsScreenStyle.modalTitle}>
+                  {`+ ${toCryptoDetails?.name} ${toValue}`}
+                </Text>
+              </View>
             </View>
 
             <ScrollView
