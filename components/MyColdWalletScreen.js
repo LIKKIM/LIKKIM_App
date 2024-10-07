@@ -21,7 +21,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import { BlurView } from "expo-blur";
 import { BleManager, BleErrorCode } from "react-native-ble-plx";
 import Constants from "expo-constants";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 import i18n from "../config/i18n";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -66,6 +66,7 @@ function MyColdWalletScreen() {
     toggleScreenLock,
     changeScreenLockPassword,
   } = useContext(CryptoContext);
+
 
   const { isDarkMode, setIsDarkMode } = useContext(DarkModeContext);
   const MyColdWalletScreenStyle = MyColdWalletScreenStyles(isDarkMode);
@@ -823,35 +824,35 @@ function MyColdWalletScreen() {
       },
       ...(isScreenLockEnabled
         ? [
-            {
-              title: t("Change App Screen Lock Password"),
-              icon: "password",
-              onPress: () => {
-                Vibration.vibrate();
-                openChangePasswordModal();
-              },
+          {
+            title: t("Change App Screen Lock Password"),
+            icon: "password",
+            onPress: () => {
+              Vibration.vibrate();
+              openChangePasswordModal();
             },
-            {
-              title: t("Enable Face ID"),
-              icon: "face",
-              onPress: () => {
-                Vibration.vibrate();
-                toggleFaceID(!isFaceIDEnabled);
-              },
-              toggle: (
-                <Switch
-                  trackColor={{ false: "#767577", true: "#81b0ff" }}
-                  thumbColor={isFaceIDEnabled ? "#fff" : "#f4f3f4"}
-                  ios_backgroundColor="#3e3e3e"
-                  onValueChange={async () => {
-                    Vibration.vibrate();
-                    await toggleFaceID(!isFaceIDEnabled);
-                  }}
-                  value={isFaceIDEnabled}
-                />
-              ),
+          },
+          {
+            title: t("Enable Face ID"),
+            icon: "face",
+            onPress: () => {
+              Vibration.vibrate();
+              toggleFaceID(!isFaceIDEnabled);
             },
-          ]
+            toggle: (
+              <Switch
+                trackColor={{ false: "#767577", true: "#81b0ff" }}
+                thumbColor={isFaceIDEnabled ? "#fff" : "#f4f3f4"}
+                ios_backgroundColor="#3e3e3e"
+                onValueChange={async () => {
+                  Vibration.vibrate();
+                  await toggleFaceID(!isFaceIDEnabled);
+                }}
+                value={isFaceIDEnabled}
+              />
+            ),
+          },
+        ]
         : []),
 
       {
@@ -859,6 +860,8 @@ function MyColdWalletScreen() {
         icon: "location-on", // 使用表示位置的图标
         onPress: () => {
           Vibration.vibrate();
+          navigation.navigate('FindMyLikkim')
+
         },
       },
       {

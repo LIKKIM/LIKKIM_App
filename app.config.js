@@ -19,6 +19,7 @@ export default {
   },
   assetBundlePatterns: ["**/*"],
   ios: {
+
     infoPlist: {
       ITSAppUsesNonExemptEncryption: false,
       NSBluetoothAlwaysUsageDescription: "获取蓝牙权限连接钱包设备",
@@ -32,6 +33,11 @@ export default {
     icon: "./assets/icon.png",
   },
   android: {
+    config: {
+      googleMaps: {
+        apiKey: "AIzaSyDJTXrzqBMGFBtQcKTYx0IeODOas6mGIAc"
+      }
+    },
     versionCode: 1,
     package: "com.anonymous.likkim",
   },

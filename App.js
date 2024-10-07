@@ -20,6 +20,8 @@ import MyColdWalletScreen from "./components/MyColdWalletScreen";
 import OnboardingScreen from "./components/OnboardingScreen";
 import ScreenLock from "./components/ScreenLock";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import FindMyLkkim from "./components/FindMyLkkim";
 import {
   CryptoProvider,
   CryptoContext,
@@ -29,9 +31,14 @@ import i18n from "./config/i18n";
 import { useTranslation } from "react-i18next";
 import { BlurView } from "expo-blur";
 
+
+
+
 if (__DEV__) {
   import("./ReactotronConfig").then(() => console.log("Reactotron Configured"));
 }
+
+const Stack = createNativeStackNavigator();
 
 const Tab = createBottomTabNavigator();
 
@@ -66,17 +73,28 @@ export default function App() {
     );
   }
 
+  const _APP = () => <AppContent
+    t={t}
+    headerDropdownVisible={headerDropdownVisible}
+    setHeaderDropdownVisible={setHeaderDropdownVisible}
+    selectedCardName={selectedCardName}
+    setSelectedCardName={setSelectedCardName}
+  />
+
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <CryptoProvider>
         <NavigationContainer>
-          <AppContent
-            t={t}
-            headerDropdownVisible={headerDropdownVisible}
-            setHeaderDropdownVisible={setHeaderDropdownVisible}
-            selectedCardName={selectedCardName}
-            setSelectedCardName={setSelectedCardName}
-          />
+
+          <Stack.Navigator>
+            <Stack.Screen
+              name="Home"
+              component={_APP}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen name="FindMyLikkim" component={FindMyLkkim} />
+          </Stack.Navigator>
+
         </NavigationContainer>
       </CryptoProvider>
     </GestureHandlerRootView>
@@ -147,6 +165,9 @@ function AppContent({
   }
 
   return (
+
+
+
     <View style={{ flex: 1, backgroundColor: bottomBackgroundColor }}>
       <Tab.Navigator
         screenOptions={({ route }) => ({
