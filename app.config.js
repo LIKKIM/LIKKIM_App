@@ -35,7 +35,7 @@ export default {
   android: {
     config: {
       googleMaps: {
-        apiKey: "AIzaSyDJTXrzqBMGFBtQcKTYx0IeODOas6mGIAc"
+        apiKey: "AIzaSyAaLPaHuHj_vT7cHsA99HZeuAH_Z1p3Xbg"
       }
     },
     versionCode: 1,
@@ -52,6 +52,12 @@ export default {
         faceIDPermission: "Allow $(PRODUCT_NAME) to use Face ID.",
       },
     ],
+    [
+      "expo-location",
+      {
+        "locationAlwaysAndWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location."
+      }
+    ]
   ],
   extra: {
     eas: {
