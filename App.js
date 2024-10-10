@@ -31,9 +31,6 @@ import i18n from "./config/i18n";
 import { useTranslation } from "react-i18next";
 import { BlurView } from "expo-blur";
 
-
-
-
 if (__DEV__) {
   import("./ReactotronConfig").then(() => console.log("Reactotron Configured"));
 }
@@ -73,28 +70,28 @@ export default function App() {
     );
   }
 
-  const _APP = () => <AppContent
-    t={t}
-    headerDropdownVisible={headerDropdownVisible}
-    setHeaderDropdownVisible={setHeaderDropdownVisible}
-    selectedCardName={selectedCardName}
-    setSelectedCardName={setSelectedCardName}
-  />
+  const _APP = () => (
+    <AppContent
+      t={t}
+      headerDropdownVisible={headerDropdownVisible}
+      setHeaderDropdownVisible={setHeaderDropdownVisible}
+      selectedCardName={selectedCardName}
+      setSelectedCardName={setSelectedCardName}
+    />
+  );
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <CryptoProvider>
         <NavigationContainer>
-
           <Stack.Navigator>
             <Stack.Screen
-              name="Home"
+              name="Back"
               component={_APP}
               options={{ headerShown: false }}
             />
-            <Stack.Screen name="FindMyLikkim" component={FindMyLkkim} />
+            <Stack.Screen name="Find My LIKKIM" component={FindMyLkkim} />
           </Stack.Navigator>
-
         </NavigationContainer>
       </CryptoProvider>
     </GestureHandlerRootView>
@@ -165,9 +162,6 @@ function AppContent({
   }
 
   return (
-
-
-
     <View style={{ flex: 1, backgroundColor: bottomBackgroundColor }}>
       <Tab.Navigator
         screenOptions={({ route }) => ({

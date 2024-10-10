@@ -67,7 +67,6 @@ function MyColdWalletScreen() {
     changeScreenLockPassword,
   } = useContext(CryptoContext);
 
-
   const { isDarkMode, setIsDarkMode } = useContext(DarkModeContext);
   const MyColdWalletScreenStyle = MyColdWalletScreenStyles(isDarkMode);
   const [currencyModalVisible, setCurrencyModalVisible] = useState(false);
@@ -824,35 +823,35 @@ function MyColdWalletScreen() {
       },
       ...(isScreenLockEnabled
         ? [
-          {
-            title: t("Change App Screen Lock Password"),
-            icon: "password",
-            onPress: () => {
-              Vibration.vibrate();
-              openChangePasswordModal();
+            {
+              title: t("Change App Screen Lock Password"),
+              icon: "password",
+              onPress: () => {
+                Vibration.vibrate();
+                openChangePasswordModal();
+              },
             },
-          },
-          {
-            title: t("Enable Face ID"),
-            icon: "face",
-            onPress: () => {
-              Vibration.vibrate();
-              toggleFaceID(!isFaceIDEnabled);
+            {
+              title: t("Enable Face ID"),
+              icon: "face",
+              onPress: () => {
+                Vibration.vibrate();
+                toggleFaceID(!isFaceIDEnabled);
+              },
+              toggle: (
+                <Switch
+                  trackColor={{ false: "#767577", true: "#81b0ff" }}
+                  thumbColor={isFaceIDEnabled ? "#fff" : "#f4f3f4"}
+                  ios_backgroundColor="#3e3e3e"
+                  onValueChange={async () => {
+                    Vibration.vibrate();
+                    await toggleFaceID(!isFaceIDEnabled);
+                  }}
+                  value={isFaceIDEnabled}
+                />
+              ),
             },
-            toggle: (
-              <Switch
-                trackColor={{ false: "#767577", true: "#81b0ff" }}
-                thumbColor={isFaceIDEnabled ? "#fff" : "#f4f3f4"}
-                ios_backgroundColor="#3e3e3e"
-                onValueChange={async () => {
-                  Vibration.vibrate();
-                  await toggleFaceID(!isFaceIDEnabled);
-                }}
-                value={isFaceIDEnabled}
-              />
-            ),
-          },
-        ]
+          ]
         : []),
 
       {
@@ -860,8 +859,7 @@ function MyColdWalletScreen() {
         icon: "location-on", // 使用表示位置的图标
         onPress: () => {
           Vibration.vibrate();
-          navigation.navigate('FindMyLikkim')
-
+          navigation.navigate("Find My LIKKIM");
         },
       },
       {

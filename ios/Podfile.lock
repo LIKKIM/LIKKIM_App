@@ -6,6 +6,8 @@ PODS:
   - EXFont (11.10.3):
     - ExpoModulesCore
   - EXJSONUtils (0.12.3)
+  - EXLocation (16.5.5):
+    - ExpoModulesCore
   - EXManifests (0.13.2):
     - ExpoModulesCore
   - Expo (50.0.17):
@@ -990,6 +992,8 @@ PODS:
     - MultiplatformBleAdapter (= 0.2.0)
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
+  - react-native-maps (1.10.0):
+    - React-Core
   - react-native-quick-base64 (2.1.2):
     - glog
     - RCT-Folly (= 2022.05.16.00)
@@ -1165,7 +1169,7 @@ PODS:
     - React-perflogger (= 0.73.6)
   - RNCAsyncStorage (1.23.1):
     - React-Core
-  - RNGestureHandler (2.18.1):
+  - RNGestureHandler (2.20.0):
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
@@ -1193,6 +1197,7 @@ DEPENDENCIES:
   - EXConstants (from `../node_modules/expo-constants/ios`)
   - EXFont (from `../node_modules/expo-font/ios`)
   - EXJSONUtils (from `../node_modules/expo-json-utils/ios`)
+  - EXLocation (from `../node_modules/expo-location/ios`)
   - EXManifests (from `../node_modules/expo-manifests/ios`)
   - Expo (from `../node_modules/expo`)
   - expo-dev-client (from `../node_modules/expo-dev-client/ios`)
@@ -1237,6 +1242,7 @@ DEPENDENCIES:
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - React-Mapbuffer (from `../node_modules/react-native/ReactCommon`)
   - react-native-ble-plx (from `../node_modules/react-native-ble-plx`)
+  - react-native-maps (from `../node_modules/react-native-maps`)
   - react-native-quick-base64 (from `../node_modules/react-native-quick-base64`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - React-nativeconfig (from `../node_modules/react-native/ReactCommon`)
@@ -1285,6 +1291,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo-font/ios"
   EXJSONUtils:
     :path: "../node_modules/expo-json-utils/ios"
+  EXLocation:
+    :path: "../node_modules/expo-location/ios"
   EXManifests:
     :path: "../node_modules/expo-manifests/ios"
   Expo:
@@ -1368,6 +1376,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   react-native-ble-plx:
     :path: "../node_modules/react-native-ble-plx"
+  react-native-maps:
+    :path: "../node_modules/react-native-maps"
   react-native-quick-base64:
     :path: "../node_modules/react-native-quick-base64"
   react-native-safe-area-context:
@@ -1433,6 +1443,7 @@ SPEC CHECKSUMS:
   EXConstants: a5f6276e565d98f9eb4280f81241fc342d641590
   EXFont: f20669cb266ef48b004f1eb1f2b20db96cd1df9f
   EXJSONUtils: 5c42959e87be238b045ef37cc5268b16a6c0ad4a
+  EXLocation: a631bd8dc4e7db986fb27edb7fc9ea8174ebe249
   EXManifests: 5e8c29f36c716af768a4ea47ec05e1b89ab93091
   Expo: 2cdb5916749a1509cf88114f1f510bd458630eb4
   expo-dev-client: f22fdebdb8760bc22f660b7c0cb1dd58d80005c0
@@ -1477,6 +1488,7 @@ SPEC CHECKSUMS:
   React-logger: 3eb80a977f0d9669468ef641a5e1fabbc50a09ec
   React-Mapbuffer: 84ea43c6c6232049135b1550b8c60b2faac19fab
   react-native-ble-plx: c040d0123518e121bf4cda02061bf72644f68d15
+  react-native-maps: b4c3b092b1c71240d8d4792bae3738828942f14a
   react-native-quick-base64: e1ea036b3dec44c6da2439bd62881a09de614b23
   react-native-safe-area-context: 0ee144a6170530ccc37a0fd9388e28d06f516a89
   React-nativeconfig: b4d4e9901d4cabb57be63053fd2aa6086eb3c85f
@@ -1500,7 +1512,7 @@ SPEC CHECKSUMS:
   React-utils: d16c1d2251c088ad817996621947d0ac8167b46c
   ReactCommon: 2aa35648354bd4c4665b9a5084a7d37097b89c10
   RNCAsyncStorage: 826b603ae9c0f88b5ac4e956801f755109fa4d5c
-  RNGestureHandler: 1155b1898ceddefeebf77792927360d44fe11e77
+  RNGestureHandler: bb81850add626ddd265294323310fec6e861c96b
   RNReanimated: f6b02d8f5eaa2830296411d4ec3b8ef5442dd13d
   RNScreens: 17e2f657f1b09a71ec3c821368a04acbb7ebcb46
   RNSVG: cb24fb322de8c1ebf59904e7aca0447bb8dbed5a
