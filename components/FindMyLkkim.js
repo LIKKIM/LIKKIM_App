@@ -225,9 +225,10 @@ export default function FindMyLkkim() {
       <View
         style={{
           flex: 1,
+
           backgroundColor: "white", // 使用纯白背景
-          padding: 10,
-          borderRadius: 20,
+          padding: 15,
+
           shadowColor: "#000",
           shadowOffset: { width: 0, height: 1 },
           shadowOpacity: 0.2,
@@ -270,14 +271,9 @@ export default function FindMyLkkim() {
             )}
           </View>
         </View>
-
         <Pressable
           style={{
-            width: "98%",
-            margin: "1%",
-            padding: 15,
-            borderRadius: 10, // 圆角稍微减少
-            backgroundColor: "#ffffff", // 使用纯白背景
+            marginTop: 16,
           }}
         >
           <Text style={{ color: "#333", fontWeight: "500", marginBottom: 5 }}>
