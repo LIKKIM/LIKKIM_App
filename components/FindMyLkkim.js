@@ -14,8 +14,8 @@ import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
 
 const styles = StyleSheet.create({
   container: {
-    height: 400,
-    width: 400,
+    height: "70%",
+    // width: 400,
     justifyContent: "flex-end",
     alignItems: "center",
   },
@@ -194,7 +194,7 @@ export default function FindMyLkkim() {
           >
             <View
               style={{
-                backgroundColor: "#555555",
+                backgroundColor: "#f7f7f7",
                 height: 50,
                 width: 50,
                 borderRadius: 25,
@@ -205,8 +205,8 @@ export default function FindMyLkkim() {
                   ? {
                       shadowColor: "#000",
                       shadowOffset: { width: 0, height: 0 },
-                      shadowOpacity: 0.8,
-                      shadowRadius: 2,
+                      shadowOpacity: 0.5,
+                      shadowRadius: 5,
                     }
                   : {
                       elevation: 5,
@@ -215,7 +215,7 @@ export default function FindMyLkkim() {
             >
               <Image
                 source={require("../assets/icon/device.png")}
-                style={{ width: 30, height: 30 }}
+                style={{ height: 40, width: 40 }}
               />
             </View>
           </Marker>
@@ -225,20 +225,16 @@ export default function FindMyLkkim() {
       <View
         style={{
           flex: 1,
-          backgroundColor: "#f8f8f8",
+          backgroundColor: "white", // 使用纯白背景
           padding: 10,
           borderRadius: 20,
+          shadowColor: "#000",
+          shadowOffset: { width: 0, height: 1 },
+          shadowOpacity: 0.2,
+          shadowRadius: 1,
+          elevation: 3, // 对Android也应用阴影
         }}
       >
-        <View
-          style={{
-            width: "10%",
-            height: 5,
-            backgroundColor: "rgba(0,0,0,0.2)",
-            borderRadius: 10,
-            marginLeft: "40%",
-          }}
-        ></View>
         <View
           style={{
             marginTop: 10,
@@ -248,70 +244,51 @@ export default function FindMyLkkim() {
           }}
         >
           <View>
-            <Text style={{ fontWeight: 800, fontSize: 16, marginBottom: 5 }}>
-              My Likkim Device.
+            <Text
+              style={{
+                fontWeight: "600",
+                fontSize: 16,
+                marginBottom: 5,
+                color: "#333",
+              }}
+            >
+              Devices
             </Text>
             {!loading && (
-              <Text style={{ fontSize: 13 }}>
-                {" "}
+              <Text style={{ fontSize: 13, color: "#666" }}>
                 {Date.now() - positionUnix > unixOffest
-                  ? "Last time：" + address
-                  : "Now:" + address}
+                  ? "Last time: " + address // 文本描述和格式调整
+                  : "Now: " + address}
               </Text>
             )}
 
             {loading && (
               <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <Text style={{}}> Now:</Text>
-                <ActivityIndicator style={{ marginLeft: 5 }} />
+                <Text style={{ color: "#666" }}> Locating:</Text>
+                <ActivityIndicator style={{ marginLeft: 5 }} color="#666" />
               </View>
             )}
           </View>
-          {/* <Pressable onPress={getCurrentPoistion}><Text style={{ fontWeight: 800, color: 'blue' }}>Refresh</Text></Pressable> */}
-        </View>
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            marginTop: 8,
-          }}
-        >
-          <Pressable
-            onPress={connectToLkkim}
-            style={{
-              backgroundColor: "rgba(0,0,0,0.05)",
-              width: "38%",
-              margin: "1%",
-              padding: 30,
-              borderRadius: 10,
-            }}
-          >
-            <Text>ICON</Text>
-            <Text>Connect</Text>
-          </Pressable>
-
-          <Pressable
-            onPress={getCurrentPoistion}
-            style={{
-              backgroundColor: "rgba(0,0,0,0.05)",
-              width: "58%",
-              margin: "1%",
-              padding: 30,
-              borderRadius: 10,
-            }}
-          >
-            <Text>ICON</Text>
-
-            <Text>Refresh Position</Text>
-          </Pressable>
         </View>
 
         <Pressable
-          style={{ width: "98%", margin: "1%", padding: 15, borderRadius: 30 }}
+          style={{
+            width: "98%",
+            margin: "1%",
+            padding: 15,
+            borderRadius: 10, // 圆角稍微减少
+            backgroundColor: "#ffffff", // 使用纯白背景
+          }}
         >
-          <Text style={{ color: "gray" }}>Last Day at xxxx</Text>
-          <Text style={{ color: "gray" }}>Last Week at xxxx</Text>
-          <Text style={{ color: "gray" }}>Last Month at xxxx</Text>
+          <Text style={{ color: "#333", fontWeight: "500", marginBottom: 5 }}>
+            Last Day at xxxx
+          </Text>
+          <Text style={{ color: "#333", fontWeight: "500", marginBottom: 5 }}>
+            Last Week at xxxx
+          </Text>
+          <Text style={{ color: "#333", fontWeight: "500" }}>
+            Last Month at xxxx
+          </Text>
         </Pressable>
       </View>
     </View>
