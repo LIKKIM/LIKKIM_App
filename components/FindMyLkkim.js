@@ -295,35 +295,16 @@ export default function FindMyLkkim() {
             )}
           </View>
         </View>
-        <Pressable
+
+        <Text
           style={{
-            marginTop: 16,
+            color: isDarkMode ? "#ddd" : "#666",
+            fontWeight: "500",
+            marginBottom: 5,
           }}
         >
-          <Text
-            style={{
-              color: isDarkMode ? "#ddd" : "#666",
-              fontWeight: "500",
-              marginBottom: 5,
-            }}
-          >
-            Last Day at xxxx
-          </Text>
-          <Text
-            style={{
-              color: isDarkMode ? "#ddd" : "#666",
-              fontWeight: "500",
-              marginBottom: 5,
-            }}
-          >
-            Last Week at xxxx
-          </Text>
-          <Text
-            style={{ color: isDarkMode ? "#ddd" : "#666", fontWeight: "500" }}
-          >
-            Last Month at xxxx
-          </Text>
-        </Pressable>
+          Last Day at xxxx
+        </Text>
       </View>
     </View>
   );
