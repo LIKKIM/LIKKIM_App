@@ -196,7 +196,7 @@ export default function FindMyLkkim() {
           >
             <View
               style={{
-                backgroundColor: "#f7f7f7",
+                backgroundColor: isDarkMode ? "#24234C" : "#f5f5f5",
                 height: 50,
                 width: 50,
                 borderRadius: 25,
@@ -227,7 +227,7 @@ export default function FindMyLkkim() {
       <View
         style={{
           flex: 1,
-          backgroundColor: isDarkMode ? "#121212" : "#f5f5f5", // 动态背景颜色
+          backgroundColor: isDarkMode ? "#24234C" : "#f5f5f5", // 动态背景颜色
           padding: 15,
 
           shadowColor: "#000",
@@ -251,13 +251,15 @@ export default function FindMyLkkim() {
                 fontWeight: "600",
                 fontSize: 16,
                 marginBottom: 5,
-                color: "#333",
+                color: isDarkMode ? "#fff" : "#000",
               }}
             >
               Devices
             </Text>
             {!loading && (
-              <Text style={{ fontSize: 13, color: "#666" }}>
+              <Text
+                style={{ fontSize: 13, color: isDarkMode ? "#ddd" : "#666" }}
+              >
                 {Date.now() - positionUnix > unixOffest
                   ? "Last time: " + address // 文本描述和格式调整
                   : "Now: " + address}
@@ -266,8 +268,14 @@ export default function FindMyLkkim() {
 
             {loading && (
               <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <Text style={{ color: "#666" }}> Locating:</Text>
-                <ActivityIndicator style={{ marginLeft: 5 }} color="#666" />
+                <Text style={{ color: isDarkMode ? "#ddd" : "#666" }}>
+                  {" "}
+                  Locating:
+                </Text>
+                <ActivityIndicator
+                  style={{ marginLeft: 5 }}
+                  color={isDarkMode ? "#ddd" : "#666"}
+                />
               </View>
             )}
           </View>
@@ -277,13 +285,27 @@ export default function FindMyLkkim() {
             marginTop: 16,
           }}
         >
-          <Text style={{ color: "#333", fontWeight: "500", marginBottom: 5 }}>
+          <Text
+            style={{
+              color: isDarkMode ? "#ddd" : "#666",
+              fontWeight: "500",
+              marginBottom: 5,
+            }}
+          >
             Last Day at xxxx
           </Text>
-          <Text style={{ color: "#333", fontWeight: "500", marginBottom: 5 }}>
+          <Text
+            style={{
+              color: isDarkMode ? "#ddd" : "#666",
+              fontWeight: "500",
+              marginBottom: 5,
+            }}
+          >
             Last Week at xxxx
           </Text>
-          <Text style={{ color: "#333", fontWeight: "500" }}>
+          <Text
+            style={{ color: isDarkMode ? "#ddd" : "#666", fontWeight: "500" }}
+          >
             Last Month at xxxx
           </Text>
         </Pressable>
