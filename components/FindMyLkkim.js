@@ -58,9 +58,9 @@ const simulatedDevices = [
     unix: Date.now() - 1000 * 60 * 30, // 30分钟前的时间戳
   },
   {
-    deviceId: "device1",
-    lat: 37.7749, // 纬度
-    lng: -122.4194, // 经度
+    deviceId: "device4",
+    lat: 6.5244, // 纬度
+    lng: 3.3792, // 经度
     unix: Date.now() - 1000 * 60 * 3, // 3分钟前的时间戳
   },
 ];
