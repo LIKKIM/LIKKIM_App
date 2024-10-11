@@ -7,7 +7,6 @@ import {
   Image,
   ActivityIndicator,
   Pressable,
-  Button,
 } from "react-native";
 import * as Location from "expo-location"; // 引入expo-location库
 import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
@@ -25,11 +24,14 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
+
+  buttonIcon: {
+    width: 30,
+    height: 30,
+    tintColor: "#007AFF", // iOS "Find My" 风格的蓝色图标
+  },
 });
 
-/**
- * 寻找多个 LIKKIM 设备的模拟定位，并显示当前设备位置
- */
 export default function FindMyLkkim() {
   const navigation = useNavigation();
   const { isDarkMode } = useContext(DarkModeContext);
@@ -135,6 +137,8 @@ export default function FindMyLkkim() {
           provider={Platform.OS === "android" ? PROVIDER_GOOGLE : undefined} // 使用 Google Maps
           style={styles.map}
           zoomEnabled
+          showsUserLocation={true} // 显示用户当前位置
+          showsMyLocationButton={Platform.OS === "android"} // Android 上显示 "移动到我的位置" 按钮
           region={{
             latitude: currentPosition?.lat || devicesPositions[0]?.lat || 0,
             longitude: currentPosition?.lng || devicesPositions[0]?.lng || 0,
@@ -142,43 +146,6 @@ export default function FindMyLkkim() {
             longitudeDelta: 10,
           }}
         >
-          {/* 显示当前设备的位置 */}
-          {currentPosition && (
-            <Marker
-              coordinate={{
-                latitude: currentPosition.lat,
-                longitude: currentPosition.lng,
-              }}
-              title="My Location"
-            >
-              <View
-                style={{
-                  height: 50,
-                  width: 50,
-                  borderRadius: 25,
-                  margin: 15,
-                  alignItems: "center",
-                  justifyContent: "center",
-                  ...(Platform.OS === "ios"
-                    ? {
-                        shadowColor: "#000",
-                        shadowOffset: { width: 0, height: 0 },
-                        shadowOpacity: 0.5,
-                        shadowRadius: 5,
-                      }
-                    : {
-                        elevation: 5,
-                      }),
-                }}
-              >
-                <Image
-                  source={require("../assets/icon/location.png")}
-                  style={{ height: 38, width: 38 }}
-                />
-              </View>
-            </Marker>
-          )}
-
           {/* 显示其他设备的位置 */}
           {devicesPositions.map((device, index) => (
             <Marker
@@ -224,6 +191,34 @@ export default function FindMyLkkim() {
             </Marker>
           ))}
         </MapView>
+
+        {/* 如果是iOS，自定义按钮 */}
+        {Platform.OS === "ios" && (
+          <Pressable
+            style={{
+              position: "absolute",
+              bottom: 20,
+              right: 20,
+              backgroundColor: isDarkMode ? "#24234C" : "#f5f5f5",
+              borderRadius: 30,
+              width: 50,
+              height: 50,
+              justifyContent: "center",
+              alignItems: "center",
+              shadowColor: "#000",
+              shadowOffset: { width: 0, height: 2 },
+              shadowOpacity: 0.3,
+              shadowRadius: 4,
+              elevation: 5,
+            }}
+            onPress={moveToCurrentLocation}
+          >
+            <Image
+              //      source={require("../assets/icon/findMyLocation.png")} // 需要的图标
+              style={styles.buttonIcon}
+            />
+          </Pressable>
+        )}
       </View>
 
       <View
@@ -293,11 +288,6 @@ export default function FindMyLkkim() {
               </View>
             )}
           </View>
-        </View>
-
-        {/* 添加一个按钮，点击后移动到当前设备位置 */}
-        <View style={{ marginTop: 20 }}>
-          <Button title="移动到我的位置" onPress={moveToCurrentLocation} />
         </View>
       </View>
     </View>
