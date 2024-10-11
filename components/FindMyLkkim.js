@@ -158,8 +158,8 @@ export default function FindMyLkkim() {
     setLoading(false);
   };
 
-  // 设备列表点击跳转函数 + Alert & 复制地址
-  const handleDevicePress = (device) => {
+  // 地图上点击设备的函数
+  const handleMarkerPress = (device) => {
     const address = deviceAddresses[device.deviceId] || "Address not found";
 
     // 复制地址到剪切板
@@ -167,12 +167,14 @@ export default function FindMyLkkim() {
 
     // 显示 Alert 提示
     Alert.alert(
-      "Device Location",
+      "Address Copied to Clipboard",
       `The address of device ${device.deviceId} is:\n${address}\n\nThe address has been copied to your clipboard.`,
       [{ text: "OK" }]
     );
+  };
 
-    // 平滑移动到设备所在位置
+  // 列表中点击设备时移动到该设备的位置
+  const moveToDeviceLocation = (device) => {
     if (mapRef.current) {
       mapRef.current.animateToRegion(
         {
@@ -226,7 +228,7 @@ export default function FindMyLkkim() {
                 latitude: device.lat,
                 longitude: device.lng,
               }}
-              onPress={() => handleDevicePress(device)} // 点击设备时调用
+              onPress={() => handleMarkerPress(device)} // 点击地图上的设备时调用
             >
               <View
                 style={{
@@ -327,7 +329,10 @@ export default function FindMyLkkim() {
               Devices
             </Text>
             {devicesPositions.map((device, index) => (
-              <Pressable key={index} onPress={() => handleDevicePress(device)}>
+              <Pressable
+                key={index}
+                onPress={() => moveToDeviceLocation(device)}
+              >
                 <View
                   style={{
                     flexDirection: "row",
