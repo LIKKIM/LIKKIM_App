@@ -57,6 +57,12 @@ const simulatedDevices = [
     lng: -74.006, // 经度
     unix: Date.now() - 1000 * 60 * 30, // 30分钟前的时间戳
   },
+  {
+    deviceId: "device1",
+    lat: 37.7749, // 纬度
+    lng: -122.4194, // 经度
+    unix: Date.now() - 1000 * 60 * 3, // 3分钟前的时间戳
+  },
 ];
 
 // 使用 Google Maps Geocoding API 获取地址
@@ -328,7 +334,11 @@ export default function FindMyLkkim() {
 
         {/* 如果设备太多，使用 ScrollView，否则正常显示 */}
         {devicesPositions.length > 3 ? (
-          <ScrollView>
+          <ScrollView
+            style={{
+              marginBottom: 50,
+            }}
+          >
             {devicesPositions.map((device, index) => (
               <Pressable
                 key={index}
