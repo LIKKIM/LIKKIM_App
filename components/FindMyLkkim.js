@@ -1,23 +1,22 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import {
   Platform,
   StyleSheet,
   View,
   Text,
-  Pressable,
   Image,
   ActivityIndicator,
+  Pressable,
+  Button,
 } from "react-native";
-import * as Location from "expo-location";
-import { useNavigation } from "@react-navigation/native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as Location from "expo-location"; // 引入expo-location库
 import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
-import { DarkModeContext } from "./CryptoContext";
+import { useNavigation } from "@react-navigation/native";
+import { DarkModeContext } from "./CryptoContext"; // 假设这个文件包含 DarkMode 的上下文
 
 const styles = StyleSheet.create({
   container: {
     height: "70%",
-    // width: 400,
     justifyContent: "flex-end",
     alignItems: "center",
   },
@@ -29,16 +28,16 @@ const styles = StyleSheet.create({
 });
 
 /**
- * 寻找LKKIM定位
- * author 2winter
+ * 寻找多个 LIKKIM 设备的模拟定位，并显示当前设备位置
  */
 export default function FindMyLkkim() {
   const navigation = useNavigation();
   const { isDarkMode } = useContext(DarkModeContext);
   const [loading, setLoading] = useState(false);
-  const [address, setAddress] = useState("");
-  const [status, requestPermission] = Location.useForegroundPermissions();
-  //当前定位｜最近一次定位
+  const [devicesPositions, setDevicesPositions] = useState([]); // 保存多个设备的模拟定位
+  const [currentPosition, setCurrentPosition] = useState(null); // 保存当前设备的位置
+  const mapRef = useRef(null); // 通过 useRef 获取 MapView 的引用
+
   useEffect(() => {
     navigation.setOptions({
       headerStyle: {
@@ -46,196 +45,184 @@ export default function FindMyLkkim() {
       },
       headerTintColor: isDarkMode ? "#FFFFFF" : "#000000", // 动态文本颜色
     });
+
+    // 请求设备定位权限并获取当前位置
+    requestLocationPermission();
+
+    // 模拟多个设备的定位数据
+    simulateMultipleDevices();
   }, [isDarkMode, navigation]);
 
-  const [currentPosition, setPosition] = useState({
-    lat: 0, //纬度
-    lng: 0, //经度
-    unix: 0, //时间戳
-    status: false,
-  });
+  // 请求定位权限并获取设备当前位置
+  const requestLocationPermission = async () => {
+    const { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== "granted") {
+      alert("权限被拒绝，无法获取设备位置");
+      return;
+    }
 
-  //刷新时间误差
-  const unixOffest = 1000 * 60 * 5; //五分钟之内为最新定位
-  //是否最新定位
-  const [positionUnix, setPositionUnix] = useState(0);
-  //经纬度转地址
-  const latlngToAddress = async ({ lat, lng }) => {
-    let _address = await Location.reverseGeocodeAsync({
-      latitude: lat,
-      longitude: lng,
+    const location = await Location.getCurrentPositionAsync({});
+    setCurrentPosition({
+      lat: location.coords.latitude,
+      lng: location.coords.longitude,
     });
+  };
 
-    // console.log('地址：')
-    // console.log(_address);
-    if (_address && _address.length > 0) {
-      setAddress(_address[0].formattedAddress);
-      syncLocalPosition({
-        lat,
-        lng,
-        unix: Date.now(),
-        status: true,
-        address: _address,
-      }); //本地存储同步
+  // 模拟多个设备的定位信息
+  const simulateMultipleDevices = () => {
+    const simulatedDevices = [
+      {
+        deviceId: "device1",
+        lat: 37.7749, // 纬度
+        lng: -122.4194, // 经度
+        address: "San Francisco, CA",
+        unix: Date.now() - 1000 * 60 * 3, // 3分钟前的时间戳
+      },
+      {
+        deviceId: "device2",
+        lat: 34.0522, // 纬度
+        lng: -118.2437, // 经度
+        address: "Los Angeles, CA",
+        unix: Date.now() - 1000 * 60 * 10, // 10分钟前的时间戳
+      },
+      {
+        deviceId: "device3",
+        lat: 40.7128, // 纬度
+        lng: -74.006, // 经度
+        address: "New York, NY",
+        unix: Date.now() - 1000 * 60 * 30, // 30分钟前的时间戳
+      },
+    ];
+
+    setDevicesPositions(simulatedDevices); // 设置模拟设备位置
+  };
+
+  // 设备列表点击跳转函数
+  const handleDevicePress = (device) => {
+    if (mapRef.current) {
+      mapRef.current.animateToRegion(
+        {
+          latitude: device.lat,
+          longitude: device.lng,
+          latitudeDelta: 0.05, // 控制缩放程度
+          longitudeDelta: 0.05,
+        },
+        1000 // 1000 毫秒平滑移动到目标位置
+      );
     }
   };
 
-  //获取当前定位
-  const getCurrentPoistion = async () => {
-    if (!(await Location.hasServicesEnabledAsync()))
-      return alert("未开启手机定位功能！");
-
-    console.log("检查定位权限");
-
-    if (!status || !status.granted) {
-      // console.log('未授予定位权限，开始请求定位');
-      let _pr = await requestPermission();
-      console.log(_pr);
-      setLoading(false);
-      if (!_pr.granted) return alert("申请被拒绝，请重新进入！");
-    } else {
-      console.log("定位权限授予.");
+  // 移动到当前设备的位置
+  const moveToCurrentLocation = () => {
+    if (currentPosition && mapRef.current) {
+      mapRef.current.animateToRegion(
+        {
+          latitude: currentPosition.lat,
+          longitude: currentPosition.lng,
+          latitudeDelta: 0.05,
+          longitudeDelta: 0.05,
+        },
+        1000
+      );
     }
-
-    console.log("开始获取定位功能");
-
-    setLoading(true);
-    let lastPosition = await Location.getLastKnownPositionAsync();
-    let _currentPosition = lastPosition;
-
-    //未获取到上次缓存定位，开始获取最新定位
-    if (!_currentPosition) {
-      console.log("获取最新");
-      _currentPosition = await Location.getCurrentPositionAsync();
-    } else {
-      console.log("获取上一次缓存");
-    }
-
-    console.log("获取成功:");
-    console.log(_currentPosition);
-
-    if (_currentPosition) {
-      console.log("更新View定位");
-      //定位成功同步到本地
-      setPositionUnix(Date.now()); //刷新最新定位时间
-      setPosition({
-        lat: _currentPosition.coords.latitude,
-        lng: _currentPosition.coords.longitude,
-        unix: Date.now(),
-        status: true,
-      });
-
-      latlngToAddress({
-        lat: _currentPosition.coords.latitude,
-        lng: _currentPosition.coords.longitude,
-      });
-    } else {
-      alert("定位失败.");
-    }
-
-    setLoading(false);
   };
-
-  //保存定位到本地
-  const syncLocalPosition = async (_info) => {
-    AsyncStorage.setItem("positionInfo", JSON.stringify(_info));
-  };
-
-  //从本地恢复定位
-  const restorePosition = async () => {
-    let _positionInfo = await AsyncStorage.getItem("positionInfo");
-    if (_positionInfo) {
-      _positionInfo = JSON.parse(_positionInfo);
-      console.log("缓存恢复数据：");
-      console.log(_positionInfo);
-      //TODO 恢复定位
-      setPosition({
-        lat: _positionInfo.lat,
-        lng: _positionInfo.lng,
-        unix: _positionInfo.unix,
-        status: true,
-      });
-      //恢复地址
-      setAddress(_positionInfo.address);
-    } else {
-      console.log("本地缓存不存在定位信息.");
-    }
-
-    //链接设备,同时重新刷新定位信息
-    connectToLkkim();
-  };
-
-  //TODO 链接到设备
-  const connectToLkkim = async () => {
-    // console.log('链接设备...:' + Math.random());
-    //链接成功 获取定位保存到本地,更新view定位。
-
-    //TODO connect LKKIM
-    if (true) {
-      //链接设备成功 更新本地和state位置
-      await getCurrentPoistion();
-    }
-    //else 链接失败，不刷新定位，默认只展示最近一次位置
-  };
-
-  useEffect(() => {
-    restorePosition(); //最近一次保存的定位信息
-  }, []);
 
   return (
     <View style={{ flex: 1 }}>
       <View style={styles.container}>
         <MapView
-          provider={Platform.OS === "android" ? PROVIDER_GOOGLE : undefined} // remove if not using Google Maps
+          ref={mapRef} // 通过 useRef 获取 MapView 实例
+          provider={Platform.OS === "android" ? PROVIDER_GOOGLE : undefined} // 使用 Google Maps
           style={styles.map}
           zoomEnabled
-          zoomTapEnabled
-          zoomControlEnabled={true}
           region={{
-            latitude: currentPosition.lat,
-            longitude: currentPosition.lng,
-            latitudeDelta: 0.015,
-            longitudeDelta: 0.0121,
+            latitude: currentPosition?.lat || devicesPositions[0]?.lat || 0,
+            longitude: currentPosition?.lng || devicesPositions[0]?.lng || 0,
+            latitudeDelta: 10, // 控制地图缩放比例
+            longitudeDelta: 10,
           }}
         >
-          <Marker
-            coordinate={{
-              latitude: currentPosition.lat,
-              longitude: currentPosition.lng,
-            }}
-            onPress={() => alert("你的LIKKIM在这里！")}
-          >
-            <View
-              style={{
-                backgroundColor: isDarkMode ? "#24234C" : "#f5f5f5",
-                height: 50,
-                width: 50,
-                borderRadius: 25,
-                margin: 15,
-                alignItems: "center",
-                justifyContent: "center",
-                ...(Platform.OS === "ios"
-                  ? {
-                      shadowColor: "#000",
-                      shadowOffset: { width: 0, height: 0 },
-                      shadowOpacity: 0.5,
-                      shadowRadius: 5,
-                    }
-                  : {
-                      elevation: 5,
-                    }),
+          {/* 显示当前设备的位置 */}
+          {currentPosition && (
+            <Marker
+              coordinate={{
+                latitude: currentPosition.lat,
+                longitude: currentPosition.lng,
               }}
+              title="My Location"
             >
-              <Image
-                source={
-                  isDarkMode
-                    ? require("../assets/icon/deviceDarkMode.png") // dark模式下的图标
-                    : require("../assets/icon/device.png") // light模式下的图标
-                }
-                style={{ height: 38, width: 38 }}
-              />
-            </View>
-          </Marker>
+              <View
+                style={{
+                  height: 50,
+                  width: 50,
+                  borderRadius: 25,
+                  margin: 15,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  ...(Platform.OS === "ios"
+                    ? {
+                        shadowColor: "#000",
+                        shadowOffset: { width: 0, height: 0 },
+                        shadowOpacity: 0.5,
+                        shadowRadius: 5,
+                      }
+                    : {
+                        elevation: 5,
+                      }),
+                }}
+              >
+                <Image
+                  source={require("../assets/icon/location.png")}
+                  style={{ height: 38, width: 38 }}
+                />
+              </View>
+            </Marker>
+          )}
+
+          {/* 显示其他设备的位置 */}
+          {devicesPositions.map((device, index) => (
+            <Marker
+              key={index}
+              coordinate={{
+                latitude: device.lat,
+                longitude: device.lng,
+              }}
+              onPress={() =>
+                alert(`设备 ${device.deviceId} 在 ${device.address}！`)
+              }
+            >
+              <View
+                style={{
+                  backgroundColor: isDarkMode ? "#24234C" : "#f5f5f5",
+                  height: 50,
+                  width: 50,
+                  borderRadius: 25,
+                  margin: 15,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  ...(Platform.OS === "ios"
+                    ? {
+                        shadowColor: "#000",
+                        shadowOffset: { width: 0, height: 0 },
+                        shadowOpacity: 0.5,
+                        shadowRadius: 5,
+                      }
+                    : {
+                        elevation: 5,
+                      }),
+                }}
+              >
+                <Image
+                  source={
+                    isDarkMode
+                      ? require("../assets/icon/deviceDarkMode.png")
+                      : require("../assets/icon/device.png")
+                  }
+                  style={{ height: 38, width: 38 }}
+                />
+              </View>
+            </Marker>
+          ))}
         </MapView>
       </View>
 
@@ -244,7 +231,6 @@ export default function FindMyLkkim() {
           flex: 1,
           backgroundColor: isDarkMode ? "#24234C" : "#f5f5f5", // 动态背景颜色
           padding: 15,
-
           shadowColor: "#000",
           shadowOffset: { width: 0, height: 1 },
           shadowOpacity: 0.2,
@@ -271,20 +257,33 @@ export default function FindMyLkkim() {
             >
               Devices
             </Text>
-            {!loading && (
-              <Text
-                style={{ fontSize: 13, color: isDarkMode ? "#ddd" : "#666" }}
-              >
-                {Date.now() - positionUnix > unixOffest
-                  ? "Last time: " + address // 文本描述和格式调整
-                  : "Now: " + address}
-              </Text>
-            )}
+            {devicesPositions.map((device, index) => (
+              <Pressable key={index} onPress={() => handleDevicePress(device)}>
+                <View style={{ marginBottom: 10 }}>
+                  <Text
+                    style={{
+                      fontSize: 13,
+                      color: isDarkMode ? "#ddd" : "#666",
+                    }}
+                  >
+                    Now: {device.address} {/* 显示设备当前地址 */}
+                  </Text>
 
+                  <Text
+                    style={{
+                      fontSize: 12,
+                      color: isDarkMode ? "#aaa" : "#999",
+                    }}
+                  >
+                    Last connected: {new Date(device.unix).toLocaleString()}{" "}
+                    {/* 显示最后连接的时间 */}
+                  </Text>
+                </View>
+              </Pressable>
+            ))}
             {loading && (
               <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <Text style={{ color: isDarkMode ? "#ddd" : "#666" }}>
-                  {" "}
                   Locating:
                 </Text>
                 <ActivityIndicator
@@ -296,15 +295,10 @@ export default function FindMyLkkim() {
           </View>
         </View>
 
-        <Text
-          style={{
-            color: isDarkMode ? "#ddd" : "#666",
-            fontWeight: "500",
-            marginBottom: 5,
-          }}
-        >
-          Last Day at xxxx
-        </Text>
+        {/* 添加一个按钮，点击后移动到当前设备位置 */}
+        <View style={{ marginTop: 20 }}>
+          <Button title="移动到我的位置" onPress={moveToCurrentLocation} />
+        </View>
       </View>
     </View>
   );
