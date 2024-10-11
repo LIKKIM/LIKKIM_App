@@ -227,8 +227,12 @@ export default function FindMyLkkim() {
               }}
             >
               <Image
-                source={require("../assets/icon/device.png")}
-                style={{ height: 40, width: 40 }}
+                source={
+                  isDarkMode
+                    ? require("../assets/icon/deviceDarkMode.png") // dark模式下的图标
+                    : require("../assets/icon/device.png") // light模式下的图标
+                }
+                style={{ height: 38, width: 38 }}
               />
             </View>
           </Marker>
