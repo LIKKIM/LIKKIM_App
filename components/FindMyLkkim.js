@@ -257,40 +257,62 @@ export default function FindMyLkkim() {
             </Text>
             {devicesPositions.map((device, index) => (
               <Pressable key={index} onPress={() => handleDevicePress(device)}>
-                <View style={{ marginBottom: 10 }}>
-                  <Text
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    marginBottom: 10,
+                  }}
+                >
+                  <View
                     style={{
-                      fontSize: 13,
-                      marginBottom: 6,
-                      color: isDarkMode ? "#ddd" : "#666",
+                      width: 35,
+                      height: 35,
+                      marginRight: 10,
+                      justifyContent: "center", // 垂直方向居中
+                      alignItems: "center", // 水平方向居中
+                      borderRadius: 18, // 使容器为圆形
+                      backgroundColor: "rgba(0, 0, 0, 0.2)", // 带透明度的背景色
                     }}
                   >
-                    {device.address} {/* 显示设备当前地址 */}
-                  </Text>
+                    <Image
+                      source={
+                        isDarkMode
+                          ? require("../assets/icon/deviceDarkMode.png") // 替换为实际的暗模式图标路径
+                          : require("../assets/icon/device.png") // 替换为实际的亮模式图标路径
+                      }
+                      style={{
+                        width: 22,
+                        height: 22, // 图标的大小
+                      }}
+                    />
+                  </View>
 
-                  <Text
-                    style={{
-                      fontSize: 12,
-                      color: isDarkMode ? "#aaa" : "#999",
-                    }}
-                  >
-                    Last connected: {new Date(device.unix).toLocaleString()}{" "}
-                    {/* 显示最后连接的时间 */}
-                  </Text>
+                  {/* 设备地址和时间部分 */}
+                  <View>
+                    <Text
+                      style={{
+                        fontSize: 13,
+                        marginBottom: 6,
+                        color: isDarkMode ? "#ddd" : "#666",
+                      }}
+                    >
+                      {device.address} {/* 显示设备当前地址 */}
+                    </Text>
+
+                    <Text
+                      style={{
+                        fontSize: 12,
+                        color: isDarkMode ? "#aaa" : "#999",
+                      }}
+                    >
+                      Last connected: {new Date(device.unix).toLocaleString()}{" "}
+                      {/* 显示最后连接的时间 */}
+                    </Text>
+                  </View>
                 </View>
               </Pressable>
             ))}
-            {loading && (
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <Text style={{ color: isDarkMode ? "#ddd" : "#666" }}>
-                  Locating:
-                </Text>
-                <ActivityIndicator
-                  style={{ marginLeft: 5 }}
-                  color={isDarkMode ? "#ddd" : "#666"}
-                />
-              </View>
-            )}
           </View>
         </View>
       </View>
