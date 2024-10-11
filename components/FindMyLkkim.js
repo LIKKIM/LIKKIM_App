@@ -8,6 +8,7 @@ import {
   ActivityIndicator,
   Pressable,
 } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Location from "expo-location"; // 引入expo-location库
 import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
 import { useNavigation } from "@react-navigation/native";
@@ -30,6 +31,57 @@ const styles = StyleSheet.create({
     height: 26,
   },
 });
+
+const simulatedDevices = [
+  {
+    deviceId: "device1",
+    lat: 37.7749, // 纬度
+    lng: -122.4194, // 经度
+    address: "San Francisco, CA",
+    unix: Date.now() - 1000 * 60 * 3, // 3分钟前的时间戳
+  },
+  {
+    deviceId: "device2",
+    lat: 34.0522, // 纬度
+    lng: -118.2437, // 经度
+    address: "Los Angeles, CA",
+    unix: Date.now() - 1000 * 60 * 10, // 10分钟前的时间戳
+  },
+  {
+    deviceId: "device3",
+    lat: 40.7128, // 纬度
+    lng: -74.006, // 经度
+    address: "New York, NY",
+    unix: Date.now() - 1000 * 60 * 30, // 30分钟前的时间戳
+  },
+];
+
+// 将设备数据持久化存储到 AsyncStorage
+const persistSimulatedDevices = async (devices) => {
+  try {
+    await AsyncStorage.setItem("simulatedDevices", JSON.stringify(devices));
+    console.log("设备数据已保存");
+  } catch (error) {
+    console.error("设备数据保存失败:", error);
+  }
+};
+
+// 从 AsyncStorage 中恢复设备数据
+const loadSimulatedDevices = async (setDevicesPositions) => {
+  try {
+    const savedDevices = await AsyncStorage.getItem("simulatedDevices");
+    if (savedDevices !== null) {
+      setDevicesPositions(JSON.parse(savedDevices));
+      console.log("设备数据已恢复");
+    } else {
+      // 如果没有存储的数据，则存储默认的模拟设备
+      setDevicesPositions(simulatedDevices);
+      persistSimulatedDevices(simulatedDevices); // 将默认数据持久化
+    }
+  } catch (error) {
+    console.error("加载设备数据失败:", error);
+  }
+};
 
 export default function FindMyLkkim() {
   const navigation = useNavigation();
@@ -71,30 +123,6 @@ export default function FindMyLkkim() {
 
   // 模拟多个设备的定位信息
   const simulateMultipleDevices = () => {
-    const simulatedDevices = [
-      {
-        deviceId: "device1",
-        lat: 37.7749, // 纬度
-        lng: -122.4194, // 经度
-        address: "San Francisco, CA",
-        unix: Date.now() - 1000 * 60 * 3, // 3分钟前的时间戳
-      },
-      {
-        deviceId: "device2",
-        lat: 34.0522, // 纬度
-        lng: -118.2437, // 经度
-        address: "Los Angeles, CA",
-        unix: Date.now() - 1000 * 60 * 10, // 10分钟前的时间戳
-      },
-      {
-        deviceId: "device3",
-        lat: 40.7128, // 纬度
-        lng: -74.006, // 经度
-        address: "New York, NY",
-        unix: Date.now() - 1000 * 60 * 30, // 30分钟前的时间戳
-      },
-    ];
-
     setDevicesPositions(simulatedDevices); // 设置模拟设备位置
   };
 
