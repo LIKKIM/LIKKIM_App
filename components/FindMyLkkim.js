@@ -376,16 +376,23 @@ export default function FindMyLkkim() {
                   </View>
 
                   {/* 设备地址和时间部分 */}
-                  <View>
+                  <View
+                    style={{
+                      width: "86%",
+                    }}
+                  >
                     <Text
                       style={{
                         fontSize: 13,
                         marginBottom: 6,
                         color: isDarkMode ? "#ddd" : "#666",
+                        flexWrap: "wrap",
+
+                        lineHeight: 18,
                       }}
                     >
                       {deviceAddresses[device.deviceId] ||
-                        "Fetching address..."}{" "}
+                        "Fetching address..."}
                       {/* 动态显示地址 */}
                     </Text>
 
