@@ -5,9 +5,11 @@ import {
   View,
   Text,
   Image,
-  ActivityIndicator,
+  Alert, // 引入 Alert 模块
   Pressable,
+  Clipboard,
 } from "react-native";
+
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Location from "expo-location"; // 引入expo-location库
 import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
@@ -156,8 +158,21 @@ export default function FindMyLkkim() {
     setLoading(false);
   };
 
-  // 设备列表点击跳转函数
+  // 设备列表点击跳转函数 + Alert & 复制地址
   const handleDevicePress = (device) => {
+    const address = deviceAddresses[device.deviceId] || "Address not found";
+
+    // 复制地址到剪切板
+    Clipboard.setString(address);
+
+    // 显示 Alert 提示
+    Alert.alert(
+      "Device Location",
+      `The address of device ${device.deviceId} is:\n${address}\n\nThe address has been copied to your clipboard.`,
+      [{ text: "OK" }]
+    );
+
+    // 平滑移动到设备所在位置
     if (mapRef.current) {
       mapRef.current.animateToRegion(
         {
@@ -211,13 +226,7 @@ export default function FindMyLkkim() {
                 latitude: device.lat,
                 longitude: device.lng,
               }}
-              onPress={() =>
-                alert(
-                  `设备 ${device.deviceId} 在 ${
-                    deviceAddresses[device.deviceId]
-                  }！`
-                )
-              }
+              onPress={() => handleDevicePress(device)} // 点击设备时调用
             >
               <View
                 style={{
@@ -359,7 +368,8 @@ export default function FindMyLkkim() {
                         color: isDarkMode ? "#ddd" : "#666",
                       }}
                     >
-                      {deviceAddresses[device.deviceId] || "获取地址中..."}{" "}
+                      {deviceAddresses[device.deviceId] ||
+                        "Fetching address..."}{" "}
                       {/* 动态显示地址 */}
                     </Text>
 
