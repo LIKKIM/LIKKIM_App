@@ -8,6 +8,8 @@ import {
   Alert, // 引入 Alert 模块
   Pressable,
   Clipboard,
+  ScrollView, // 引入 ScrollView
+  Dimensions, // 引入 Dimensions 获取屏幕高度
 } from "react-native";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -110,6 +112,9 @@ export default function FindMyLkkim() {
   const [currentPosition, setCurrentPosition] = useState(null); // 保存当前设备的位置
   const mapRef = useRef(null); // 通过 useRef 获取 MapView 的引用
   const [deviceAddresses, setDeviceAddresses] = useState({}); // 保存设备地址
+
+  const screenHeight = Dimensions.get("window").height; // 获取屏幕高度
+  const listHeight = screenHeight * 0.3; // 列表的高度占屏幕的30%
 
   useEffect(() => {
     navigation.setOptions({
@@ -297,9 +302,10 @@ export default function FindMyLkkim() {
         )}
       </View>
 
+      {/* 设备列表区域，限制高度为屏幕的 30% */}
       <View
         style={{
-          flex: 1,
+          height: listHeight, // 限制列表区域高度
           backgroundColor: isDarkMode ? "#24234C" : "#f5f5f5", // 动态背景颜色
           padding: 15,
           shadowColor: "#000",
@@ -309,25 +315,20 @@ export default function FindMyLkkim() {
           elevation: 3, // 对Android也应用阴影
         }}
       >
-        <View
+        <Text
           style={{
-            marginTop: 10,
-            height: 50,
-            flexDirection: "row",
-            justifyContent: "space-between",
+            fontWeight: "600",
+            fontSize: 16,
+            marginBottom: 15,
+            color: isDarkMode ? "#fff" : "#000",
           }}
         >
-          <View>
-            <Text
-              style={{
-                fontWeight: "600",
-                fontSize: 16,
-                marginBottom: 15,
-                color: isDarkMode ? "#fff" : "#000",
-              }}
-            >
-              Devices
-            </Text>
+          Devices
+        </Text>
+
+        {/* 如果设备太多，使用 ScrollView，否则正常显示 */}
+        {devicesPositions.length > 3 ? (
+          <ScrollView>
             {devicesPositions.map((device, index) => (
               <Pressable
                 key={index}
@@ -391,8 +392,68 @@ export default function FindMyLkkim() {
                 </View>
               </Pressable>
             ))}
-          </View>
-        </View>
+          </ScrollView>
+        ) : (
+          devicesPositions.map((device, index) => (
+            <Pressable key={index} onPress={() => moveToDeviceLocation(device)}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  marginBottom: 10,
+                }}
+              >
+                <View
+                  style={{
+                    width: 35,
+                    height: 35,
+                    marginRight: 10,
+                    justifyContent: "center", // 垂直方向居中
+                    alignItems: "center", // 水平方向居中
+                    borderRadius: 18, // 使容器为圆形
+                    backgroundColor: "rgba(0, 0, 0, 0.2)", // 带透明度的背景色
+                  }}
+                >
+                  <Image
+                    source={
+                      isDarkMode
+                        ? require("../assets/icon/deviceDarkMode.png") // 替换为实际的暗模式图标路径
+                        : require("../assets/icon/device.png") // 替换为实际的亮模式图标路径
+                    }
+                    style={{
+                      width: 22,
+                      height: 22, // 图标的大小
+                    }}
+                  />
+                </View>
+
+                {/* 设备地址和时间部分 */}
+                <View>
+                  <Text
+                    style={{
+                      fontSize: 13,
+                      marginBottom: 6,
+                      color: isDarkMode ? "#ddd" : "#666",
+                    }}
+                  >
+                    {deviceAddresses[device.deviceId] || "Fetching address..."}{" "}
+                    {/* 动态显示地址 */}
+                  </Text>
+
+                  <Text
+                    style={{
+                      fontSize: 12,
+                      color: isDarkMode ? "#aaa" : "#999",
+                    }}
+                  >
+                    Last connected: {new Date(device.unix).toLocaleString()}{" "}
+                    {/* 显示最后连接的时间 */}
+                  </Text>
+                </View>
+              </View>
+            </Pressable>
+          ))
+        )}
       </View>
     </View>
   );
