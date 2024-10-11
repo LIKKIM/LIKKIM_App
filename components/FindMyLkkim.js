@@ -9,6 +9,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 import * as Location from "expo-location";
+import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
 import { DarkModeContext } from "./CryptoContext";
@@ -32,11 +33,21 @@ const styles = StyleSheet.create({
  * author 2winter
  */
 export default function FindMyLkkim() {
+  const navigation = useNavigation();
   const { isDarkMode } = useContext(DarkModeContext);
   const [loading, setLoading] = useState(false);
   const [address, setAddress] = useState("");
   const [status, requestPermission] = Location.useForegroundPermissions();
   //当前定位｜最近一次定位
+  useEffect(() => {
+    navigation.setOptions({
+      headerStyle: {
+        backgroundColor: isDarkMode ? "#24234C" : "#FFFFFF", // 动态背景色
+      },
+      headerTintColor: isDarkMode ? "#FFFFFF" : "#000000", // 动态文本颜色
+    });
+  }, [isDarkMode, navigation]);
+
   const [currentPosition, setPosition] = useState({
     lat: 0, //纬度
     lng: 0, //经度

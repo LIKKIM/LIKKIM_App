@@ -90,16 +90,7 @@ export default function App() {
               component={_APP}
               options={{ headerShown: false }}
             />
-            <Stack.Screen
-              name="Find My LIKKIM"
-              component={FindMyLkkim}
-              options={{
-                headerStyle: {
-                  backgroundColor: "#24234C", // Set your desired background color here
-                },
-                headerTintColor: "#fff", // Optionally, set the text color for the header
-              }}
-            />
+            <Stack.Screen name="Find My LIKKIM" component={FindMyLkkim} />
           </Stack.Navigator>
         </NavigationContainer>
       </CryptoProvider>
