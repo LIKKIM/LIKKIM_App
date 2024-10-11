@@ -26,9 +26,8 @@ const styles = StyleSheet.create({
   },
 
   buttonIcon: {
-    width: 30,
-    height: 30,
-    tintColor: "#007AFF", // iOS "Find My" 风格的蓝色图标
+    width: 26,
+    height: 26,
   },
 });
 
@@ -214,7 +213,11 @@ export default function FindMyLkkim() {
             onPress={moveToCurrentLocation}
           >
             <Image
-              //      source={require("../assets/icon/findMyLocation.png")} // 需要的图标
+              source={
+                isDarkMode
+                  ? require("../assets/icon/location.png")
+                  : require("../assets/icon/locationBlack.png")
+              }
               style={styles.buttonIcon}
             />
           </Pressable>
