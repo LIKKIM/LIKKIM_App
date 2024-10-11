@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   Platform,
   StyleSheet,
@@ -227,8 +227,7 @@ export default function FindMyLkkim() {
       <View
         style={{
           flex: 1,
-
-          backgroundColor: "white", // 使用纯白背景
+          backgroundColor: isDarkMode ? "#121212" : "#f5f5f5", // 动态背景颜色
           padding: 15,
 
           shadowColor: "#000",
