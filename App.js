@@ -20,7 +20,7 @@ import MyColdWalletScreen from "./components/MyColdWalletScreen";
 import OnboardingScreen from "./components/OnboardingScreen";
 import ScreenLock from "./components/ScreenLock";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import FindMyLkkim from "./components/FindMyLkkim";
 import {
   CryptoProvider,
@@ -90,7 +90,16 @@ export default function App() {
               component={_APP}
               options={{ headerShown: false }}
             />
-            <Stack.Screen name="Find My LIKKIM" component={FindMyLkkim} />
+            <Stack.Screen
+              name="Find My LIKKIM"
+              component={FindMyLkkim}
+              options={{
+                headerStyle: {
+                  backgroundColor: "#24234C", // Set your desired background color here
+                },
+                headerTintColor: "#fff", // Optionally, set the text color for the header
+              }}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </CryptoProvider>
