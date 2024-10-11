@@ -14,6 +14,8 @@ import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
 import { useNavigation } from "@react-navigation/native";
 import { DarkModeContext } from "./CryptoContext"; // 假设这个文件包含 DarkMode 的上下文
 
+const GOOGLE_MAPS_API_KEY = "AIzaSyAaLPaHuHj_vT7cHsA99HZeuAH_Z1p3Xbg"; // 使用你的 Google Maps API Key
+
 const styles = StyleSheet.create({
   container: {
     height: "70%",
@@ -37,24 +39,39 @@ const simulatedDevices = [
     deviceId: "device1",
     lat: 37.7749, // 纬度
     lng: -122.4194, // 经度
-    address: "San Francisco, CA",
     unix: Date.now() - 1000 * 60 * 3, // 3分钟前的时间戳
   },
   {
     deviceId: "device2",
     lat: 34.0522, // 纬度
     lng: -118.2437, // 经度
-    address: "Los Angeles, CA",
     unix: Date.now() - 1000 * 60 * 10, // 10分钟前的时间戳
   },
   {
     deviceId: "device3",
     lat: 40.7128, // 纬度
     lng: -74.006, // 经度
-    address: "New York, NY",
     unix: Date.now() - 1000 * 60 * 30, // 30分钟前的时间戳
   },
 ];
+
+// 使用 Google Maps Geocoding API 获取地址
+const getAddressFromLatLng = async (lat, lng) => {
+  const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${GOOGLE_MAPS_API_KEY}`;
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+
+    if (data.results && data.results.length > 0) {
+      return data.results[0].formatted_address;
+    } else {
+      return "Address not found";
+    }
+  } catch (error) {
+    console.error("Error getting address:", error);
+    return "Error fetching address";
+  }
+};
 
 // 将设备数据持久化存储到 AsyncStorage
 const persistSimulatedDevices = async (devices) => {
@@ -90,6 +107,7 @@ export default function FindMyLkkim() {
   const [devicesPositions, setDevicesPositions] = useState([]); // 保存多个设备的模拟定位
   const [currentPosition, setCurrentPosition] = useState(null); // 保存当前设备的位置
   const mapRef = useRef(null); // 通过 useRef 获取 MapView 的引用
+  const [deviceAddresses, setDeviceAddresses] = useState({}); // 保存设备地址
 
   useEffect(() => {
     navigation.setOptions({
@@ -102,8 +120,8 @@ export default function FindMyLkkim() {
     // 请求设备定位权限并获取当前位置
     requestLocationPermission();
 
-    // 模拟多个设备的定位数据
-    simulateMultipleDevices();
+    // 模拟多个设备的定位数据并获取其地址
+    loadAndConvertDeviceAddresses();
   }, [isDarkMode, navigation]);
 
   // 请求定位权限并获取设备当前位置
@@ -121,9 +139,21 @@ export default function FindMyLkkim() {
     });
   };
 
-  // 模拟多个设备的定位信息
-  const simulateMultipleDevices = () => {
-    setDevicesPositions(simulatedDevices); // 设置模拟设备位置
+  // 加载设备并使用 Google API 转换其地址
+  const loadAndConvertDeviceAddresses = async () => {
+    setLoading(true);
+    const devicesWithAddresses = await Promise.all(
+      simulatedDevices.map(async (device) => {
+        const address = await getAddressFromLatLng(device.lat, device.lng);
+        setDeviceAddresses((prev) => ({
+          ...prev,
+          [device.deviceId]: address,
+        }));
+        return { ...device, address };
+      })
+    );
+    setDevicesPositions(devicesWithAddresses);
+    setLoading(false);
   };
 
   // 设备列表点击跳转函数
@@ -182,7 +212,11 @@ export default function FindMyLkkim() {
                 longitude: device.lng,
               }}
               onPress={() =>
-                alert(`设备 ${device.deviceId} 在 ${device.address}！`)
+                alert(
+                  `设备 ${device.deviceId} 在 ${
+                    deviceAddresses[device.deviceId]
+                  }！`
+                )
               }
             >
               <View
@@ -325,7 +359,8 @@ export default function FindMyLkkim() {
                         color: isDarkMode ? "#ddd" : "#666",
                       }}
                     >
-                      {device.address} {/* 显示设备当前地址 */}
+                      {deviceAddresses[device.deviceId] || "获取地址中..."}{" "}
+                      {/* 动态显示地址 */}
                     </Text>
 
                     <Text
