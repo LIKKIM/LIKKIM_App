@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useContext, useRef } from "react";
+import React, {
+  useState,
+  useEffect,
+  useContext,
+  useRef,
+  useLayoutEffect,
+} from "react";
 import {
   Platform,
   StyleSheet,
@@ -122,14 +128,16 @@ export default function FindMyLkkim() {
   const screenHeight = Dimensions.get("window").height; // 获取屏幕高度
   const listHeight = screenHeight * 0.3; // 列表的高度占屏幕的30%
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     navigation.setOptions({
       headerStyle: {
         backgroundColor: isDarkMode ? "#24234C" : "#FFFFFF", // 动态背景色
       },
-      headerTintColor: isDarkMode ? "#FFFFFF" : "#000000", // 动态文本颜色
+      headerTintColor: isDarkMode ? "#FFFFFF" : "#000000", // 动态文本和返回按钮颜色
     });
+  }, [isDarkMode, navigation]);
 
+  useEffect(() => {
     // 请求设备定位权限并获取当前位置
     requestLocationPermission();
 
