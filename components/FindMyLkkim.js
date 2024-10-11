@@ -249,7 +249,7 @@ export default function FindMyLkkim() {
               style={{
                 fontWeight: "600",
                 fontSize: 16,
-                marginBottom: 5,
+                marginBottom: 15,
                 color: isDarkMode ? "#fff" : "#000",
               }}
             >
@@ -261,10 +261,11 @@ export default function FindMyLkkim() {
                   <Text
                     style={{
                       fontSize: 13,
+                      marginBottom: 6,
                       color: isDarkMode ? "#ddd" : "#666",
                     }}
                   >
-                    Now: {device.address} {/* 显示设备当前地址 */}
+                    {device.address} {/* 显示设备当前地址 */}
                   </Text>
 
                   <Text
