@@ -11,6 +11,7 @@ import {
 import * as Location from "expo-location";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
+import { DarkModeContext } from "./CryptoContext";
 
 const styles = StyleSheet.create({
   container: {
@@ -28,9 +29,10 @@ const styles = StyleSheet.create({
 
 /**
  * 寻找LKKIM定位
- * @author 2winter
+ * author 2winter
  */
 export default function FindMyLkkim() {
+  const { isDarkMode } = useContext(DarkModeContext);
   const [loading, setLoading] = useState(false);
   const [address, setAddress] = useState("");
   const [status, requestPermission] = Location.useForegroundPermissions();
