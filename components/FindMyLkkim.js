@@ -336,15 +336,23 @@ export default function FindMyLkkim() {
 
         {/* 如果设备列表为空，显示提示信息 */}
         {devicesPositions.length === 0 ? (
-          <Text
+          <View
             style={{
-              color: isDarkMode ? "#ddd" : "#666",
-              fontSize: 14,
-              textAlign: "center", // 居中文本
+              height: "50%",
+              justifyContent: "center",
+              alignItems: "center",
             }}
           >
-            No devices found. Please pair a device to see it here.
-          </Text>
+            <Text
+              style={{
+                color: isDarkMode ? "#ddd" : "#666",
+                fontSize: 14,
+                textAlign: "center",
+              }}
+            >
+              No devices found. Please pair a device to see it here.
+            </Text>
+          </View>
         ) : (
           <ScrollView>
             {devicesPositions.map((device, index) => (
