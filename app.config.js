@@ -19,7 +19,6 @@ export default {
   },
   assetBundlePatterns: ["**/*"],
   ios: {
-
     infoPlist: {
       ITSAppUsesNonExemptEncryption: false,
       NSBluetoothAlwaysUsageDescription: "获取蓝牙权限连接钱包设备",
@@ -28,15 +27,15 @@ export default {
       UIBackgroundModes: ["bluetooth-central", "bluetooth-peripheral"],
     },
     supportsTablet: true,
-    buildNumber: "15.8.8",
+    buildNumber: "15.8.9",
     bundleIdentifier: "RN.LKKIM",
     icon: "./assets/icon.png",
   },
   android: {
     config: {
       googleMaps: {
-        apiKey: "AIzaSyAaLPaHuHj_vT7cHsA99HZeuAH_Z1p3Xbg"
-      }
+        apiKey: "AIzaSyAaLPaHuHj_vT7cHsA99HZeuAH_Z1p3Xbg",
+      },
     },
     versionCode: 1,
     package: "com.anonymous.likkim",
@@ -55,9 +54,10 @@ export default {
     [
       "expo-location",
       {
-        "locationAlwaysAndWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location."
-      }
-    ]
+        locationAlwaysAndWhenInUsePermission:
+          "Allow $(PRODUCT_NAME) to use your location.",
+      },
+    ],
   ],
   extra: {
     eas: {
