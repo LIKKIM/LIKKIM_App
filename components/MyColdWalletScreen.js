@@ -631,9 +631,13 @@ function MyColdWalletScreen() {
         devices.push(newDeviceData);
       }
 
+      console.log("正在保存设备信息:", newDeviceData);
+
       // 持久化存储更新后的设备信息
       await AsyncStorage.setItem("connectedDevices", JSON.stringify(devices));
-      console.log("设备信息已保存或更新:", newDeviceData);
+
+      // 确保信息存储成功后，打印设备信息
+      console.log("设备信息已成功保存或更新:", newDeviceData);
     } catch (error) {
       console.error("保存设备信息失败:", error);
     }
