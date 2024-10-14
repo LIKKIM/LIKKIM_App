@@ -63,27 +63,30 @@ const getAddressFromLatLng = async (lat, lng) => {
   }
 };
 
-// 将设备数据持久化存储到 AsyncStorage
-const persistSimulatedDevices = async (devices) => {
-  try {
-    await AsyncStorage.setItem("simulatedDevices", JSON.stringify(devices));
-    console.log("设备数据已保存");
-  } catch (error) {
-    console.error("设备数据保存失败:", error);
-  }
-};
-
 // 从 AsyncStorage 中恢复设备数据
-const loadSimulatedDevices = async (setDevicesPositions) => {
+const loadConnectedDevices = async (
+  setDevicesPositions,
+  setDeviceAddresses
+) => {
   try {
-    const savedDevices = await AsyncStorage.getItem("simulatedDevices");
+    const savedDevices = await AsyncStorage.getItem("connectedDevices");
     if (savedDevices !== null) {
-      setDevicesPositions(JSON.parse(savedDevices));
-      console.log("设备数据已恢复");
+      const devices = JSON.parse(savedDevices);
+      // 获取每个设备的地址
+      const devicesWithAddresses = await Promise.all(
+        devices.map(async (device) => {
+          const address = await getAddressFromLatLng(device.lat, device.lng);
+          setDeviceAddresses((prev) => ({
+            ...prev,
+            [device.id]: address,
+          }));
+          return { ...device, address };
+        })
+      );
+      setDevicesPositions(devicesWithAddresses);
+      console.log("设备数据已恢复:", devicesWithAddresses);
     } else {
-      // 如果没有存储的数据，则存储默认的模拟设备
-      setDevicesPositions(simulatedDevices);
-      persistSimulatedDevices(simulatedDevices); // 将默认数据持久化
+      console.log("没有已保存的设备数据");
     }
   } catch (error) {
     console.error("加载设备数据失败:", error);
@@ -115,8 +118,8 @@ export default function FindMyLkkim() {
     // 请求设备定位权限并获取当前位置
     requestLocationPermission();
 
-    // 模拟多个设备的定位数据并获取其地址
-    loadAndConvertDeviceAddresses();
+    // 从 AsyncStorage 中加载已保存的设备数据并获取其地址
+    loadConnectedDevices(setDevicesPositions, setDeviceAddresses);
   }, [isDarkMode, navigation]);
 
   // 请求定位权限并获取设备当前位置
@@ -134,26 +137,9 @@ export default function FindMyLkkim() {
     });
   };
 
-  // 加载设备并使用 Google API 转换其地址
-  const loadAndConvertDeviceAddresses = async () => {
-    setLoading(true);
-    const devicesWithAddresses = await Promise.all(
-      simulatedDevices.map(async (device) => {
-        const address = await getAddressFromLatLng(device.lat, device.lng);
-        setDeviceAddresses((prev) => ({
-          ...prev,
-          [device.deviceId]: address,
-        }));
-        return { ...device, address };
-      })
-    );
-    setDevicesPositions(devicesWithAddresses);
-    setLoading(false);
-  };
-
   // 地图上点击设备的函数
   const handleMarkerPress = (device) => {
-    const address = deviceAddresses[device.deviceId] || "Address not found";
+    const address = deviceAddresses[device.id] || "Address not found";
 
     // 复制地址到剪切板
     Clipboard.setString(address);
@@ -161,7 +147,7 @@ export default function FindMyLkkim() {
     // 显示 Alert 提示
     Alert.alert(
       "Address Copied to Clipboard",
-      `The address of device ${device.deviceId} is:\n${address}\n\nThe address has been copied to your clipboard.`,
+      `The address of device ${device.name} is:\n${address}\n\nThe address has been copied to your clipboard.`,
       [{ text: "OK" }]
     );
   };
@@ -369,12 +355,10 @@ export default function FindMyLkkim() {
                         marginBottom: 6,
                         color: isDarkMode ? "#ddd" : "#666",
                         flexWrap: "wrap",
-
                         lineHeight: 18,
                       }}
                     >
-                      {deviceAddresses[device.deviceId] ||
-                        "Fetching address..."}
+                      {deviceAddresses[device.id] || "Fetching address..."}
                       {/* 动态显示地址 */}
                     </Text>
 
@@ -384,7 +368,8 @@ export default function FindMyLkkim() {
                         color: isDarkMode ? "#aaa" : "#999",
                       }}
                     >
-                      Last connected: {new Date(device.unix).toLocaleString()}{" "}
+                      Last connected:{" "}
+                      {new Date(device.connectedAt).toLocaleString()}{" "}
                       {/* 显示最后连接的时间 */}
                     </Text>
                   </View>
@@ -435,7 +420,7 @@ export default function FindMyLkkim() {
                       color: isDarkMode ? "#ddd" : "#666",
                     }}
                   >
-                    {deviceAddresses[device.deviceId] || "Fetching address..."}{" "}
+                    {deviceAddresses[device.id] || "Fetching address..."}{" "}
                     {/* 动态显示地址 */}
                   </Text>
 
@@ -445,7 +430,8 @@ export default function FindMyLkkim() {
                       color: isDarkMode ? "#aaa" : "#999",
                     }}
                   >
-                    Last connected: {new Date(device.unix).toLocaleString()}{" "}
+                    Last connected:{" "}
+                    {new Date(device.connectedAt).toLocaleString()}{" "}
                     {/* 显示最后连接的时间 */}
                   </Text>
                 </View>

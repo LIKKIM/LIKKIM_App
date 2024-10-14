@@ -42,6 +42,7 @@ import { languages } from "../config/languages";
 import base64 from "base64-js";
 import { Buffer } from "buffer";
 import appConfig from "../app.config";
+import * as Location from "expo-location";
 
 let PermissionsAndroid;
 if (Platform.OS === "android") {
@@ -605,9 +606,42 @@ function MyColdWalletScreen() {
     setModalVisible(false);
   };
   // 设备选择和显示弹窗的处理函数
+  // 保存已连接设备的信息，若设备存在则更新地理位置
+  const saveConnectedDevice = async (device, lat, lng) => {
+    try {
+      const savedDevices = await AsyncStorage.getItem("connectedDevices");
+      let devices = savedDevices ? JSON.parse(savedDevices) : [];
+
+      // 查找是否已经存在该设备
+      const existingDeviceIndex = devices.findIndex((d) => d.id === device.id);
+
+      const newDeviceData = {
+        id: device.id,
+        name: device.name,
+        lat: lat,
+        lng: lng,
+        connectedAt: Date.now(), // 保存连接的时间戳
+      };
+
+      if (existingDeviceIndex !== -1) {
+        // 如果设备已存在，更新其位置和连接时间
+        devices[existingDeviceIndex] = newDeviceData;
+      } else {
+        // 如果设备不存在，添加新设备
+        devices.push(newDeviceData);
+      }
+
+      // 持久化存储更新后的设备信息
+      await AsyncStorage.setItem("connectedDevices", JSON.stringify(devices));
+      console.log("设备信息已保存或更新:", newDeviceData);
+    } catch (error) {
+      console.error("保存设备信息失败:", error);
+    }
+  };
+
+  // 修改 handleDevicePress 方法，增加获取位置和保存信息的逻辑
   const handleDevicePress = async (device) => {
     setSelectedDevice(device);
-
     setModalVisible(false);
 
     try {
@@ -615,6 +649,20 @@ function MyColdWalletScreen() {
       await device.connect();
       await device.discoverAllServicesAndCharacteristics();
       console.log("设备已连接并发现所有服务和特性");
+
+      // 获取当前位置
+      const { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        console.warn("定位权限被拒绝");
+        return;
+      }
+
+      const location = await Location.getCurrentPositionAsync({});
+      const lat = location.coords.latitude;
+      const lng = location.coords.longitude;
+
+      // 保存连接的设备信息
+      await saveConnectedDevice(device, lat, lng);
 
       // 发送第一条命令 F0 01 02
       const connectionCommandData = new Uint8Array([0xf0, 0x01, 0x02]);
@@ -639,14 +687,15 @@ function MyColdWalletScreen() {
       );
       console.log("第一条蓝牙连接命令已发送: F0 01 02");
 
-      // 延迟5毫秒
+      // 延迟 5 毫秒
       await new Promise((resolve) => setTimeout(resolve, 5));
 
       // 发送第二条命令 F1 01 02
       await sendStartCommand(device);
 
-      // 开始监听嵌入式设备的返回信息
+      // 开始监听设备响应
       monitorVerificationCode(device);
+
       // 显示 PIN 模态框
       setPinModalVisible(true);
     } catch (error) {
