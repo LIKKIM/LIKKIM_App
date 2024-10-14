@@ -1,5 +1,5 @@
 // BluetoothModal.js
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -25,14 +25,32 @@ const BluetoothModal = ({
   t,
   onDisconnectPress,
 }) => {
+  const [locationPermissionGranted, setLocationPermissionGranted] =
+    useState(false);
+
+  // 在组件挂载时预先请求地理位置权限
+  useEffect(() => {
+    const requestLocationPermission = async () => {
+      const { status } = await Location.requestForegroundPermissionsAsync();
+      if (status === "granted") {
+        setLocationPermissionGranted(true);
+      } else {
+        console.warn("定位权限被拒绝");
+      }
+    };
+
+    // 请求权限
+    requestLocationPermission();
+  }, []); // 仅在组件首次渲染时执行
+
   // 获取设备的位置信息
   const getDeviceLocation = async () => {
+    if (!locationPermissionGranted) {
+      console.warn("定位权限未授予");
+      return null;
+    }
+
     try {
-      const { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") {
-        console.warn("定位权限被拒绝");
-        return null;
-      }
       const location = await Location.getCurrentPositionAsync({});
       return { lat: location.coords.latitude, lng: location.coords.longitude };
     } catch (error) {
