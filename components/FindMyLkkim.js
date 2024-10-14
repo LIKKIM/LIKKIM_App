@@ -12,20 +12,20 @@ import {
   View,
   Text,
   Image,
-  Alert, // 引入 Alert 模块
+  Alert,
   Pressable,
   Clipboard,
-  ScrollView, // 引入 ScrollView
-  Dimensions, // 引入 Dimensions 获取屏幕高度
+  ScrollView,
+  Dimensions,
 } from "react-native";
-
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import * as Location from "expo-location"; // 引入expo-location库
+import * as Location from "expo-location";
 import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
 import { useNavigation } from "@react-navigation/native";
-import { DarkModeContext } from "./CryptoContext"; // 假设这个文件包含 DarkMode 的上下文
+import { DarkModeContext } from "./CryptoContext";
+import { Swipeable } from "react-native-gesture-handler"; // 引入Swipeable组件
 
-const GOOGLE_MAPS_API_KEY = "AIzaSyAaLPaHuHj_vT7cHsA99HZeuAH_Z1p3Xbg"; // 使用你的 Google Maps API Key
+const GOOGLE_MAPS_API_KEY = "AIzaSyAaLPaHuHj_vT7cHsA99HZeuAH_Z1p3Xbg";
 
 const styles = StyleSheet.create({
   container: {
@@ -38,10 +38,20 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
-
   buttonIcon: {
     width: 26,
     height: 26,
+  },
+  deleteButton: {
+    backgroundColor: "#ff4d4d",
+    justifyContent: "center",
+    alignItems: "center",
+    width: 70,
+    height: "100%",
+  },
+  deleteText: {
+    color: "white",
+    fontWeight: "600",
   },
 });
 
@@ -51,7 +61,6 @@ const getAddressFromLatLng = async (lat, lng) => {
   try {
     const response = await fetch(url);
     const data = await response.json();
-
     if (data.results && data.results.length > 0) {
       return data.results[0].formatted_address;
     } else {
@@ -72,7 +81,6 @@ const loadConnectedDevices = async (
     const savedDevices = await AsyncStorage.getItem("connectedDevices");
     if (savedDevices !== null) {
       const devices = JSON.parse(savedDevices);
-      // 获取每个设备的地址
       const devicesWithAddresses = await Promise.all(
         devices.map(async (device) => {
           const address = await getAddressFromLatLng(device.lat, device.lng);
@@ -96,40 +104,33 @@ const loadConnectedDevices = async (
 export default function FindMyLkkim() {
   const navigation = useNavigation();
   const { isDarkMode } = useContext(DarkModeContext);
-  const [loading, setLoading] = useState(false);
-  const [devicesPositions, setDevicesPositions] = useState([]); // 保存多个设备的模拟定位
-  const [currentPosition, setCurrentPosition] = useState(null); // 保存当前设备的位置
-  const mapRef = useRef(null); // 通过 useRef 获取 MapView 的引用
-  const [deviceAddresses, setDeviceAddresses] = useState({}); // 保存设备地址
-
-  const screenHeight = Dimensions.get("window").height; // 获取屏幕高度
-  const listHeight = screenHeight * 0.3; // 列表的高度占屏幕的30%
+  const [devicesPositions, setDevicesPositions] = useState([]);
+  const [deviceAddresses, setDeviceAddresses] = useState({});
+  const [currentPosition, setCurrentPosition] = useState(null);
+  const mapRef = useRef(null);
+  const screenHeight = Dimensions.get("window").height;
+  const listHeight = screenHeight * 0.3;
 
   useLayoutEffect(() => {
     navigation.setOptions({
       headerStyle: {
-        backgroundColor: isDarkMode ? "#24234C" : "#FFFFFF", // 动态背景色
+        backgroundColor: isDarkMode ? "#24234C" : "#FFFFFF",
       },
-      headerTintColor: isDarkMode ? "#FFFFFF" : "#000000", // 动态文本和返回按钮颜色
+      headerTintColor: isDarkMode ? "#FFFFFF" : "#000000",
     });
   }, [isDarkMode, navigation]);
 
   useEffect(() => {
-    // 请求设备定位权限并获取当前位置
     requestLocationPermission();
-
-    // 从 AsyncStorage 中加载已保存的设备数据并获取其地址
     loadConnectedDevices(setDevicesPositions, setDeviceAddresses);
   }, [isDarkMode, navigation]);
 
-  // 请求定位权限并获取设备当前位置
   const requestLocationPermission = async () => {
     const { status } = await Location.requestForegroundPermissionsAsync();
     if (status !== "granted") {
       alert("权限被拒绝，无法获取设备位置");
       return;
     }
-
     const location = await Location.getCurrentPositionAsync({});
     setCurrentPosition({
       lat: location.coords.latitude,
@@ -137,14 +138,9 @@ export default function FindMyLkkim() {
     });
   };
 
-  // 地图上点击设备的函数
   const handleMarkerPress = (device) => {
     const address = deviceAddresses[device.id] || "Address not found";
-
-    // 复制地址到剪切板
     Clipboard.setString(address);
-
-    // 显示 Alert 提示
     Alert.alert(
       "Address Copied to Clipboard",
       `The address of device ${device.name} is:\n${address}\n\nThe address has been copied to your clipboard.`,
@@ -152,22 +148,63 @@ export default function FindMyLkkim() {
     );
   };
 
-  // 列表中点击设备时移动到该设备的位置
   const moveToDeviceLocation = (device) => {
     if (mapRef.current) {
       mapRef.current.animateToRegion(
         {
           latitude: device.lat,
           longitude: device.lng,
-          latitudeDelta: 0.05, // 控制缩放程度
+          latitudeDelta: 0.05,
           longitudeDelta: 0.05,
         },
-        1000 // 1000 毫秒平滑移动到目标位置
+        1000
       );
     }
   };
 
-  // 移动到当前设备的位置
+  const handleDeleteDevice = async (deviceId) => {
+    try {
+      const savedDevices = await AsyncStorage.getItem("connectedDevices");
+      const devices = savedDevices ? JSON.parse(savedDevices) : [];
+      const updatedDevices = devices.filter((device) => device.id !== deviceId);
+      await AsyncStorage.setItem(
+        "connectedDevices",
+        JSON.stringify(updatedDevices)
+      );
+      setDevicesPositions(updatedDevices);
+      console.log(`设备 ${deviceId} 已删除`);
+    } catch (error) {
+      console.error("删除设备失败:", error);
+    }
+  };
+
+  const confirmDeleteDevice = (deviceId) => {
+    Alert.alert(
+      "Confirm Deletion",
+      "Are you sure you want to delete this device?",
+      [
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+        {
+          text: "Delete",
+          onPress: () => handleDeleteDevice(deviceId),
+          style: "destructive",
+        },
+      ]
+    );
+  };
+
+  const renderRightActions = (device) => (
+    <Pressable
+      style={styles.deleteButton}
+      onPress={() => confirmDeleteDevice(device.id)}
+    >
+      <Text style={styles.deleteText}>Delete</Text>
+    </Pressable>
+  );
+
   const moveToCurrentLocation = () => {
     if (currentPosition && mapRef.current) {
       mapRef.current.animateToRegion(
@@ -186,20 +223,18 @@ export default function FindMyLkkim() {
     <View style={{ flex: 1 }}>
       <View style={styles.container}>
         <MapView
-          ref={mapRef} // 通过 useRef 获取 MapView 实例
-          provider={Platform.OS === "android" ? PROVIDER_GOOGLE : undefined} // 使用 Google Maps
+          ref={mapRef}
+          provider={Platform.OS === "android" ? PROVIDER_GOOGLE : undefined}
           style={styles.map}
           zoomEnabled
-          showsUserLocation={true} // 显示用户当前位置
-          showsMyLocationButton={Platform.OS === "android"} // Android 上显示 "移动到我的位置" 按钮
+          showsUserLocation={true}
           region={{
             latitude: currentPosition?.lat || devicesPositions[0]?.lat || 0,
             longitude: currentPosition?.lng || devicesPositions[0]?.lng || 0,
-            latitudeDelta: 10, // 控制地图缩放比例
+            latitudeDelta: 10,
             longitudeDelta: 10,
           }}
         >
-          {/* 显示其他设备的位置 */}
           {devicesPositions.map((device, index) => (
             <Marker
               key={index}
@@ -207,7 +242,7 @@ export default function FindMyLkkim() {
                 latitude: device.lat,
                 longitude: device.lng,
               }}
-              onPress={() => handleMarkerPress(device)} // 点击地图上的设备时调用
+              onPress={() => handleMarkerPress(device)}
             >
               <View
                 style={{
@@ -243,7 +278,6 @@ export default function FindMyLkkim() {
           ))}
         </MapView>
 
-        {/* 如果是iOS，自定义按钮 */}
         {Platform.OS === "ios" && (
           <Pressable
             style={{
@@ -276,17 +310,17 @@ export default function FindMyLkkim() {
         )}
       </View>
 
-      {/* 设备列表区域，限制高度为屏幕的 30% */}
       <View
         style={{
-          height: listHeight, // 限制列表区域高度
-          backgroundColor: isDarkMode ? "#24234C" : "#f5f5f5", // 动态背景颜色
-          padding: 15,
+          height: listHeight,
+          backgroundColor: isDarkMode ? "#24234C" : "#f5f5f5",
+          paddingTop: 20,
+          paddingLeft: 15,
           shadowColor: "#000",
           shadowOffset: { width: 0, height: 1 },
           shadowOpacity: 0.2,
           shadowRadius: 1,
-          elevation: 3, // 对Android也应用阴影
+          elevation: 3,
         }}
       >
         <Text
@@ -300,18 +334,13 @@ export default function FindMyLkkim() {
           Devices
         </Text>
 
-        {/* 如果设备太多，使用 ScrollView，否则正常显示 */}
-        {devicesPositions.length > 3 ? (
-          <ScrollView
-            style={{
-              marginBottom: 50,
-            }}
-          >
-            {devicesPositions.map((device, index) => (
-              <Pressable
-                key={index}
-                onPress={() => moveToDeviceLocation(device)}
-              >
+        <ScrollView>
+          {devicesPositions.map((device, index) => (
+            <Swipeable
+              key={device.id}
+              renderRightActions={() => renderRightActions(device)}
+            >
+              <Pressable onPress={() => moveToDeviceLocation(device)}>
                 <View
                   style={{
                     flexDirection: "row",
@@ -324,42 +353,35 @@ export default function FindMyLkkim() {
                       width: 35,
                       height: 35,
                       marginRight: 10,
-                      justifyContent: "center", // 垂直方向居中
-                      alignItems: "center", // 水平方向居中
-                      borderRadius: 18, // 使容器为圆形
-                      backgroundColor: "rgba(0, 0, 0, 0.2)", // 带透明度的背景色
+                      justifyContent: "center",
+                      alignItems: "center",
+                      borderRadius: 18,
+                      backgroundColor: "rgba(0, 0, 0, 0.2)",
                     }}
                   >
                     <Image
                       source={
                         isDarkMode
-                          ? require("../assets/icon/deviceDarkMode.png") // 替换为实际的暗模式图标路径
-                          : require("../assets/icon/device.png") // 替换为实际的亮模式图标路径
+                          ? require("../assets/icon/deviceDarkMode.png")
+                          : require("../assets/icon/device.png")
                       }
-                      style={{
-                        width: 22,
-                        height: 22, // 图标的大小
-                      }}
+                      style={{ width: 22, height: 22 }}
                     />
                   </View>
 
                   {/* 设备地址和时间部分 */}
-                  <View
-                    style={{
-                      width: "86%",
-                    }}
-                  >
+                  <View style={{ flex: 1 }}>
+                    {/* 限制地址的显示行数，超出部分使用省略号 */}
                     <Text
                       style={{
                         fontSize: 13,
                         marginBottom: 6,
                         color: isDarkMode ? "#ddd" : "#666",
-                        flexWrap: "wrap",
+                        flexWrap: "wrap", // 确保文本换行
                         lineHeight: 18,
                       }}
                     >
                       {deviceAddresses[device.id] || "Fetching address..."}
-                      {/* 动态显示地址 */}
                     </Text>
 
                     <Text
@@ -369,76 +391,14 @@ export default function FindMyLkkim() {
                       }}
                     >
                       Last connected:{" "}
-                      {new Date(device.connectedAt).toLocaleString()}{" "}
-                      {/* 显示最后连接的时间 */}
+                      {new Date(device.connectedAt).toLocaleString()}
                     </Text>
                   </View>
                 </View>
               </Pressable>
-            ))}
-          </ScrollView>
-        ) : (
-          devicesPositions.map((device, index) => (
-            <Pressable key={index} onPress={() => moveToDeviceLocation(device)}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  marginBottom: 10,
-                }}
-              >
-                <View
-                  style={{
-                    width: 35,
-                    height: 35,
-                    marginRight: 10,
-                    justifyContent: "center", // 垂直方向居中
-                    alignItems: "center", // 水平方向居中
-                    borderRadius: 18, // 使容器为圆形
-                    backgroundColor: "rgba(0, 0, 0, 0.2)", // 带透明度的背景色
-                  }}
-                >
-                  <Image
-                    source={
-                      isDarkMode
-                        ? require("../assets/icon/deviceDarkMode.png") // 替换为实际的暗模式图标路径
-                        : require("../assets/icon/device.png") // 替换为实际的亮模式图标路径
-                    }
-                    style={{
-                      width: 22,
-                      height: 22, // 图标的大小
-                    }}
-                  />
-                </View>
-
-                {/* 设备地址和时间部分 */}
-                <View>
-                  <Text
-                    style={{
-                      fontSize: 13,
-                      marginBottom: 6,
-                      color: isDarkMode ? "#ddd" : "#666",
-                    }}
-                  >
-                    {deviceAddresses[device.id] || "Fetching address..."}{" "}
-                    {/* 动态显示地址 */}
-                  </Text>
-
-                  <Text
-                    style={{
-                      fontSize: 12,
-                      color: isDarkMode ? "#aaa" : "#999",
-                    }}
-                  >
-                    Last connected:{" "}
-                    {new Date(device.connectedAt).toLocaleString()}{" "}
-                    {/* 显示最后连接的时间 */}
-                  </Text>
-                </View>
-              </View>
-            </Pressable>
-          ))
-        )}
+            </Swipeable>
+          ))}
+        </ScrollView>
       </View>
     </View>
   );
