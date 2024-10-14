@@ -10,19 +10,78 @@ import {
 } from "react-native";
 import { BlurView } from "expo-blur";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import * as Location from "expo-location"; // 导入地理位置模块
+import AsyncStorage from "@react-native-async-storage/async-storage"; // 导入异步存储模块
 
 const BluetoothModal = ({
   visible,
   devices,
   isScanning,
   iconColor,
-  onDevicePress,
+  onDevicePress, // 从外部传入的设备按下处理函数
   onCancel,
   verifiedDevices,
   MyColdWalletScreenStyle,
   t,
-  onDisconnectPress, // 添加断开连接的回调函数
+  onDisconnectPress,
 }) => {
+  // 获取设备的位置信息
+  const getDeviceLocation = async () => {
+    try {
+      const { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        console.warn("定位权限被拒绝");
+        return null;
+      }
+      const location = await Location.getCurrentPositionAsync({});
+      return { lat: location.coords.latitude, lng: location.coords.longitude };
+    } catch (error) {
+      console.error("获取位置失败：", error);
+      return null;
+    }
+  };
+
+  // 保存已连接设备及其地理位置信息
+  const saveConnectedDevice = async (device, lat, lng) => {
+    try {
+      const savedDevices = await AsyncStorage.getItem("connectedDevices");
+      let devices = savedDevices ? JSON.parse(savedDevices) : [];
+
+      const newDeviceData = {
+        id: device.id,
+        name: device.name,
+        lat: lat,
+        lng: lng,
+        connectedAt: Date.now(),
+      };
+
+      const existingDeviceIndex = devices.findIndex((d) => d.id === device.id);
+      if (existingDeviceIndex !== -1) {
+        devices[existingDeviceIndex] = newDeviceData;
+      } else {
+        devices.push(newDeviceData);
+      }
+
+      await AsyncStorage.setItem("connectedDevices", JSON.stringify(devices));
+      console.log("设备信息已保存:", newDeviceData);
+    } catch (error) {
+      console.error("保存设备信息失败:", error);
+    }
+  };
+
+  // 处理设备点击，同时保存地理信息
+  const handleDeviceWithLocationPress = async (device) => {
+    // 立即调用外部传入的 onDevicePress，确保弹窗立即显示
+    onDevicePress(device);
+
+    // 异步获取地理位置信息和保存设备信息，不阻塞弹窗显示
+    const location = await getDeviceLocation();
+    if (!location) return;
+
+    // 保存设备和位置信息
+    saveConnectedDevice(device, location.lat, location.lng);
+  };
+
   return (
     <Modal
       animationType="slide"
@@ -56,7 +115,7 @@ const BluetoothModal = ({
                     <TouchableOpacity
                       onPress={() => {
                         if (!isVerified) {
-                          onDevicePress(item);
+                          handleDeviceWithLocationPress(item); // 使用包装后的函数
                         }
                       }}
                     >

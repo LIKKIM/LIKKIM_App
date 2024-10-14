@@ -606,42 +606,7 @@ function MyColdWalletScreen() {
     setModalVisible(false);
   };
   // 设备选择和显示弹窗的处理函数
-  // 保存已连接设备的信息，若设备存在则更新地理位置
-  const saveConnectedDevice = async (device, lat, lng) => {
-    try {
-      const savedDevices = await AsyncStorage.getItem("connectedDevices");
-      let devices = savedDevices ? JSON.parse(savedDevices) : [];
-
-      // 查找是否已经存在该设备
-      const existingDeviceIndex = devices.findIndex((d) => d.id === device.id);
-
-      const newDeviceData = {
-        id: device.id,
-        name: device.name,
-        lat: lat,
-        lng: lng,
-        connectedAt: Date.now(), // 保存连接的时间戳
-      };
-
-      if (existingDeviceIndex !== -1) {
-        // 如果设备已存在，更新其位置和连接时间
-        devices[existingDeviceIndex] = newDeviceData;
-      } else {
-        // 如果设备不存在，添加新设备
-        devices.push(newDeviceData);
-      }
-
-      console.log("正在保存设备信息:", newDeviceData);
-
-      // 持久化存储更新后的设备信息
-      await AsyncStorage.setItem("connectedDevices", JSON.stringify(devices));
-
-      // 确保信息存储成功后，打印设备信息
-      console.log("设备信息已成功保存或更新:", newDeviceData);
-    } catch (error) {
-      console.error("保存设备信息失败:", error);
-    }
-  };
+  // 保存已连接设备的信息
 
   // 修改 handleDevicePress 方法，增加获取位置和保存信息的逻辑
   const handleDevicePress = async (device) => {
@@ -654,24 +619,8 @@ function MyColdWalletScreen() {
       await device.discoverAllServicesAndCharacteristics();
       console.log("设备已连接并发现所有服务和特性");
 
-      // 显示 PIN 码弹窗，不等待地理位置的存储完成
+      // 显示 PIN 码弹窗
       setPinModalVisible(true);
-
-      // 获取当前位置
-      const { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") {
-        console.warn("定位权限被拒绝");
-        return;
-      }
-
-      const location = await Location.getCurrentPositionAsync({});
-      const lat = location.coords.latitude;
-      const lng = location.coords.longitude;
-
-      // 异步保存设备信息，防止阻塞弹窗显示
-      saveConnectedDevice(device, lat, lng).then(() => {
-        console.log("设备信息已保存");
-      });
 
       // 发送第一条命令 F0 01 02
       const connectionCommandData = new Uint8Array([0xf0, 0x01, 0x02]);
