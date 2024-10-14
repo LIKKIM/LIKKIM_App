@@ -645,10 +645,13 @@ function MyColdWalletScreen() {
     setModalVisible(false);
 
     try {
-      // 连接设备
+      // 异步连接设备和发现服务
       await device.connect();
       await device.discoverAllServicesAndCharacteristics();
       console.log("设备已连接并发现所有服务和特性");
+
+      // 显示 PIN 码弹窗，不等待地理位置的存储完成
+      setPinModalVisible(true);
 
       // 获取当前位置
       const { status } = await Location.requestForegroundPermissionsAsync();
@@ -661,8 +664,10 @@ function MyColdWalletScreen() {
       const lat = location.coords.latitude;
       const lng = location.coords.longitude;
 
-      // 保存连接的设备信息
-      await saveConnectedDevice(device, lat, lng);
+      // 异步保存设备信息，防止阻塞弹窗显示
+      saveConnectedDevice(device, lat, lng).then(() => {
+        console.log("设备信息已保存");
+      });
 
       // 发送第一条命令 F0 01 02
       const connectionCommandData = new Uint8Array([0xf0, 0x01, 0x02]);
@@ -695,9 +700,6 @@ function MyColdWalletScreen() {
 
       // 开始监听设备响应
       monitorVerificationCode(device);
-
-      // 显示 PIN 模态框
-      setPinModalVisible(true);
     } catch (error) {
       console.error("设备连接或命令发送错误:", error);
     }
