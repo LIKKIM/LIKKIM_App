@@ -1,3 +1,4 @@
+//FindMyLkkim.js
 import React, {
   useState,
   useEffect,
@@ -43,33 +44,6 @@ const styles = StyleSheet.create({
     height: 26,
   },
 });
-
-const simulatedDevices = [
-  {
-    deviceId: "device1",
-    lat: 37.7749, // 纬度
-    lng: -122.4194, // 经度
-    unix: Date.now() - 1000 * 60 * 3, // 3分钟前的时间戳
-  },
-  {
-    deviceId: "device2",
-    lat: 34.0522, // 纬度
-    lng: -118.2437, // 经度
-    unix: Date.now() - 1000 * 60 * 10, // 10分钟前的时间戳
-  },
-  {
-    deviceId: "device3",
-    lat: 40.7128, // 纬度
-    lng: -74.006, // 经度
-    unix: Date.now() - 1000 * 60 * 30, // 30分钟前的时间戳
-  },
-  {
-    deviceId: "device4",
-    lat: 6.5244, // 纬度
-    lng: 3.3792, // 经度
-    unix: Date.now() - 1000 * 60 * 3, // 3分钟前的时间戳
-  },
-];
 
 // 使用 Google Maps Geocoding API 获取地址
 const getAddressFromLatLng = async (lat, lng) => {
