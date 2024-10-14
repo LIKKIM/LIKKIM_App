@@ -334,71 +334,84 @@ export default function FindMyLkkim() {
           Devices
         </Text>
 
-        <ScrollView>
-          {devicesPositions.map((device, index) => (
-            <Swipeable
-              key={device.id}
-              renderRightActions={() => renderRightActions(device)}
-            >
-              <Pressable onPress={() => moveToDeviceLocation(device)}>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    marginBottom: 10,
-                  }}
-                >
+        {/* 如果设备列表为空，显示提示信息 */}
+        {devicesPositions.length === 0 ? (
+          <Text
+            style={{
+              color: isDarkMode ? "#ddd" : "#666",
+              fontSize: 14,
+              textAlign: "center", // 居中文本
+            }}
+          >
+            No devices found. Please pair a device to see it here.
+          </Text>
+        ) : (
+          <ScrollView>
+            {devicesPositions.map((device, index) => (
+              <Swipeable
+                key={device.id}
+                renderRightActions={() => renderRightActions(device)}
+              >
+                <Pressable onPress={() => moveToDeviceLocation(device)}>
                   <View
                     style={{
-                      width: 35,
-                      height: 35,
-                      marginRight: 10,
-                      justifyContent: "center",
+                      flexDirection: "row",
                       alignItems: "center",
-                      borderRadius: 18,
-                      backgroundColor: "rgba(0, 0, 0, 0.2)",
+                      marginBottom: 10,
                     }}
                   >
-                    <Image
-                      source={
-                        isDarkMode
-                          ? require("../assets/icon/deviceDarkMode.png")
-                          : require("../assets/icon/device.png")
-                      }
-                      style={{ width: 22, height: 22 }}
-                    />
-                  </View>
-
-                  {/* 设备地址和时间部分 */}
-                  <View style={{ flex: 1 }}>
-                    {/* 限制地址的显示行数，超出部分使用省略号 */}
-                    <Text
+                    <View
                       style={{
-                        fontSize: 13,
-                        marginBottom: 6,
-                        color: isDarkMode ? "#ddd" : "#666",
-                        flexWrap: "wrap", // 确保文本换行
-                        lineHeight: 18,
+                        width: 35,
+                        height: 35,
+                        marginRight: 10,
+                        justifyContent: "center",
+                        alignItems: "center",
+                        borderRadius: 18,
+                        backgroundColor: "rgba(0, 0, 0, 0.2)",
                       }}
                     >
-                      {deviceAddresses[device.id] || "Fetching address..."}
-                    </Text>
+                      <Image
+                        source={
+                          isDarkMode
+                            ? require("../assets/icon/deviceDarkMode.png")
+                            : require("../assets/icon/device.png")
+                        }
+                        style={{ width: 22, height: 22 }}
+                      />
+                    </View>
 
-                    <Text
-                      style={{
-                        fontSize: 12,
-                        color: isDarkMode ? "#aaa" : "#999",
-                      }}
-                    >
-                      Last connected:{" "}
-                      {new Date(device.connectedAt).toLocaleString()}
-                    </Text>
+                    {/* 设备地址和时间部分 */}
+                    <View style={{ flex: 1 }}>
+                      {/* 限制地址的显示行数，超出部分使用省略号 */}
+                      <Text
+                        style={{
+                          fontSize: 13,
+                          marginBottom: 6,
+                          color: isDarkMode ? "#ddd" : "#666",
+                          flexWrap: "wrap", // 确保文本换行
+                          lineHeight: 18,
+                        }}
+                      >
+                        {deviceAddresses[device.id] || "Fetching address..."}
+                      </Text>
+
+                      <Text
+                        style={{
+                          fontSize: 12,
+                          color: isDarkMode ? "#aaa" : "#999",
+                        }}
+                      >
+                        Last connected:{" "}
+                        {new Date(device.connectedAt).toLocaleString()}
+                      </Text>
+                    </View>
                   </View>
-                </View>
-              </Pressable>
-            </Swipeable>
-          ))}
-        </ScrollView>
+                </Pressable>
+              </Swipeable>
+            ))}
+          </ScrollView>
+        )}
       </View>
     </View>
   );
