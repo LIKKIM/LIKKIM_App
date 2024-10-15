@@ -753,52 +753,59 @@ function TransactionsScreen() {
   // 显示地址函数
   const showLIKKIMAddressCommand = async (device, coinType) => {
     try {
+      // 检查设备对象是否有效
       if (typeof device !== "object" || !device.isConnected) {
-        console.error("Invalid device object:", device);
+        console.error("设备对象无效:", device);
         return;
       }
 
+      // 连接设备并发现所有服务
       await device.connect();
       await device.discoverAllServicesAndCharacteristics();
-      console.log("Device connected and all services discovered.");
+      console.log("设备已连接并发现所有服务。");
 
+      // 检查设备是否具有 writeCharacteristicWithResponseForService 方法
       if (
         typeof device.writeCharacteristicWithResponseForService !== "function"
       ) {
         console.error(
-          "The device does not have the writeCharacteristicWithResponseForService method."
+          "设备不支持 writeCharacteristicWithResponseForService 方法。"
         );
         return;
       }
 
+      // 根据币种选择相应的派生路径
       let derivationPath;
       switch (coinType) {
         case "BTC":
-          derivationPath = "m/49'/0'/0'/0/0";
+          derivationPath = "m/49'/0'/0'/0/0"; // 比特币的派生路径
           break;
         case "ETH":
-          derivationPath = "m/44'/60'/0'/0/0";
+          derivationPath = "m/44'/60'/0'/0/0"; // 以太坊的派生路径
           break;
         case "TRX":
-          derivationPath = "m/44'/195'/0'/0/0";
+          derivationPath = "m/44'/195'/0'/0/0"; // 波场的派生路径
           break;
         default:
-          console.error("Unsupported coin type");
+          console.error("不支持的币种");
           return;
       }
 
+      // 将币种和派生路径转换为十六进制格式
       const coinTypeHex = Buffer.from(coinType, "utf-8").toString("hex");
       const derivationPathHex = Buffer.from(derivationPath, "utf-8").toString(
         "hex"
       );
 
+      // 计算数据长度
       const coinTypeLength = coinTypeHex.length / 2;
       const derivationPathLength = derivationPathHex.length / 2;
       const totalLength = 1 + 1 + coinTypeLength + 1 + derivationPathLength;
 
+      // 构建命令数据
       const commandData = new Uint8Array([
-        0xf9, // Command identifier
-        0x02, // Flags
+        0xf9, // 命令标识符
+        0x02, // 标志位
         coinTypeLength,
         ...Buffer.from(coinTypeHex, "hex"),
         derivationPathLength,
@@ -806,61 +813,65 @@ function TransactionsScreen() {
         totalLength,
       ]);
 
+      // 计算 CRC 校验码
       const crc = crc16Modbus(commandData);
       const crcHighByte = (crc >> 8) & 0xff;
       const crcLowByte = crc & 0xff;
 
+      // 构建并发送最终的命令
       const finalCommand = new Uint8Array([
         ...commandData,
         crcLowByte,
         crcHighByte,
-        0x0d,
-        0x0a,
+        0x0d, // 结束符
+        0x0a, // 结束符
       ]);
 
       const base64Command = base64.fromByteArray(finalCommand);
       console.log(
-        `Send address command: ${Array.from(finalCommand)
+        `发送地址显示命令: ${Array.from(finalCommand)
           .map((byte) => byte.toString(16).padStart(2, "0"))
           .join(" ")}`
       );
 
+      // 向服务写入命令
       await device.writeCharacteristicWithResponseForService(
         serviceUUID,
         writeCharacteristicUUID,
         base64Command
       );
 
+      // 设置验证地址的状态
       setIsVerifyingAddress(true);
-      setAddressVerificationMessage(t("Verifying Address on LIKKIM..."));
-      console.log("Address display command sent");
+      setAddressVerificationMessage("正在 LIKKIM 上验证地址...");
+      console.log("地址显示命令已发送");
 
+      // 监听设备的响应
       const notifyCharacteristicUUID = "0000FFE1-0000-1000-8000-00805F9B34FB";
       const addressMonitorSubscription = device.monitorCharacteristicForService(
         serviceUUID,
         notifyCharacteristicUUID,
         (error, characteristic) => {
           if (error) {
-            console.error("Error listening to device response:", error);
+            console.error("监听设备响应时出错:", error);
             return;
           }
           const receivedDataHex = Buffer.from(characteristic.value, "base64")
             .toString("hex")
             .toUpperCase();
-          console.log("Received hex data string:", receivedDataHex);
+          console.log("接收到的十六进制数据字符串:", receivedDataHex);
 
+          // 检查接收到的数据是否为预期的响应
           if (receivedDataHex === "A40302B1120D0A") {
-            console.log("Address successfully displayed on LIKKIM");
-            setAddressVerificationMessage(
-              t("Address successfully displayed on LIKKIM!")
-            );
+            console.log("在 LIKKIM 上成功显示地址");
+            setAddressVerificationMessage("地址已成功在 LIKKIM 上显示！");
           }
         }
       );
 
       return addressMonitorSubscription;
     } catch (error) {
-      console.error("Failed to send address display command:", error);
+      console.error("发送显示地址命令失败:", error);
     }
   };
 
