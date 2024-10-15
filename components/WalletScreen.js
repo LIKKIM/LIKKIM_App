@@ -92,7 +92,7 @@ function WalletScreen({ route, navigation }) {
   const [priceChanges, setPriceChanges] = useState({});
   const scrollViewRef = useRef();
   const iconColor = isDarkMode ? "#ffffff" : "#676776";
-  const darkColorsDown = ["#212146", "#101021"];
+  const darkColorsDown = ["#24234C", "#101021"];
   const lightColorsDown = ["#FDFCFD", "#EDEBEF"];
   const secondTextColor = isDarkMode ? "#ddd" : "#676776";
   const placeholderColor = isDarkMode ? "#ffffff" : "#24234C";
