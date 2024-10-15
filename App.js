@@ -30,6 +30,7 @@ import {
 import i18n from "./config/i18n";
 import { useTranslation } from "react-i18next";
 import { BlurView } from "expo-blur";
+import ConnectLIKKIMAuth from "./components/transactionScreens/ConnectLIKKIMAuth";
 
 if (__DEV__) {
   import("./ReactotronConfig").then(() => console.log("Reactotron Configured"));
@@ -91,6 +92,7 @@ export default function App() {
               options={{ headerShown: false }}
             />
             <Stack.Screen name="Find My LIKKIM" component={FindMyLkkim} />
+            <Stack.Screen name="Request Wallet Auth" options={{ title: "交易确认" }} component={ConnectLIKKIMAuth} />
           </Stack.Navigator>
         </NavigationContainer>
       </CryptoProvider>
