@@ -24,6 +24,7 @@ const ReceiveAddressModal = ({
   addressVerificationMessage,
   handleVerifyAddress,
   isDarkMode,
+  chainShortName,
 }) => {
   return (
     <Modal
@@ -117,7 +118,7 @@ const ReceiveAddressModal = ({
             }}
           >
             <TouchableOpacity
-              onPress={handleVerifyAddress}
+              onPress={() => handleVerifyAddress(chainShortName)}
               style={TransactionsScreenStyle.verifyAddressButton}
             >
               <Text style={TransactionsScreenStyle.submitButtonText}>

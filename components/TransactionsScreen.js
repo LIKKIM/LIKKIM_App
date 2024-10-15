@@ -90,6 +90,7 @@ function TransactionsScreen() {
   const disabledButtonBackgroundColor = isDarkMode ? "#6c6c6c" : "#ccc"; // 根据 isDarkMode 设置不同的灰色
   const [inputAddress, setInputAddress] = useState("");
   const [selectedCrypto, setSelectedCrypto] = useState("");
+  const [chainShortName, setChainShortName] = useState(""); // 设置链的简称，例如 TRX
   const [amountModalVisible, setAmountModalVisible] = useState(false); // 新增状态
   const [confirmModalVisible, setConfirmModalVisible] = useState(false); // 新增交易确认modal状态
   const [transactionFee, setTransactionFee] = useState(""); // 示例交易手续费
@@ -1251,7 +1252,9 @@ function TransactionsScreen() {
     setPinCode("");
   };
 
-  const handleVerifyAddress = () => {
+  const handleVerifyAddress = (chainShortName) => {
+    console.log("传入的链短名称是:", chainShortName); // 打印传入的 chainShortName
+
     if (verifiedDevices.length > 0) {
       // 发送显示地址命令时，确保传递的是设备对象
       const device = devices.find((d) => d.id === verifiedDevices[0]);
@@ -1418,6 +1421,7 @@ function TransactionsScreen() {
     setFee(crypto.fee);
     setPriceUsd(crypto.priceUsd);
     setQueryChainShortName(crypto.queryChainShortName);
+    setChainShortName(crypto.chainShortName);
     setIsVerifyingAddress(false);
     setModalVisible(false);
 
@@ -1825,6 +1829,7 @@ function TransactionsScreen() {
           addressVerificationMessage={addressVerificationMessage}
           handleVerifyAddress={handleVerifyAddress}
           isDarkMode={isDarkMode}
+          chainShortName={chainShortName}
         />
 
         {/* Bluetooth modal */}
