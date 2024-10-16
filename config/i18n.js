@@ -315,7 +315,7 @@ i18n
           "Your device is already verified.": "您的设备已验证。",
           "Creating on LIKKIM Hardware...": "正在 LIKKIM 硬件上创建...",
           "Address Book": "地址簿",
-          Swap: "交换",
+          Swap: "闪兑",
           Skip: "跳过",
           "Start Exploring": "开始探索",
           "Secure and Reliable": "安全可靠",
