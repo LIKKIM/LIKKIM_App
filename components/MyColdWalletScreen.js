@@ -890,7 +890,7 @@ function MyColdWalletScreen() {
         icon: "gpp-good",
         onPress: () => {
           Vibration.vibrate();
-          Linking.openURL("https://www.likkim.com");
+          Linking.openURL("https://likkim.com/privacy-policy");
         },
       },
       {
