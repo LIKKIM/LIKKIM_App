@@ -62,7 +62,7 @@ const OnboardingScreen = ({ onDone }) => {
   };
 
   const _renderItem = ({ item }) => (
-    <LinearGradient colors={["#24234C", "#101021"]} style={styles.slide}>
+    <LinearGradient colors={["#21201E", "#0E0D0D"]} style={styles.slide}>
       <TouchableOpacity
         style={styles.languageButton}
         onPress={() => setLanguageModalVisible(true)}

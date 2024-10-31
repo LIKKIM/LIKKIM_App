@@ -67,7 +67,7 @@ const AddCryptoModal = ({
             <TextInput
               style={styles.searchInput}
               placeholder={t("Search Cryptocurrency")}
-              placeholderTextColor={isDarkMode ? "#ffffff" : "#24234C"}
+              placeholderTextColor={isDarkMode ? "#ffffff" : "#21201E"}
               onChangeText={(text) => setSearchQuery(text)}
               value={searchQuery}
             />

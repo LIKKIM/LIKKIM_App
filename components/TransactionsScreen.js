@@ -82,9 +82,9 @@ function TransactionsScreen() {
   const [priceUsd, setPriceUsd] = useState("");
   const [selectedCryptoIcon, setSelectedCryptoIcon] = useState(null);
   const iconColor = isDarkMode ? "#ffffff" : "#676776";
-  const darkColors = ["#24234C", "#101021"];
+  const darkColors = ["#21201E", "#0E0D0D"];
   const lightColors = ["#FFFFFF", "#EDEBEF"];
-  const placeholderColor = isDarkMode ? "#ffffff" : "#24234C";
+  const placeholderColor = isDarkMode ? "#ffffff" : "#21201E";
   const [amount, setAmount] = useState("");
   const buttonBackgroundColor = isDarkMode ? "#CCB68C" : "#CFAB95";
   const disabledButtonBackgroundColor = isDarkMode ? "#6c6c6c" : "#ccc"; // 根据 isDarkMode 设置不同的灰色

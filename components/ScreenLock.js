@@ -339,7 +339,7 @@ const lightStyles = StyleSheet.create({
 
 const darkStyles = StyleSheet.create({
   container: {
-    backgroundColor: "#24234C",
+    backgroundColor: "#21201E",
   },
   title: {
     color: "#f5f5f5",

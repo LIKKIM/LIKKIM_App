@@ -11,7 +11,7 @@ const WalletScreenStyles = (isDarkMode) => {
   const backgroundColor = isDarkMode ? "#121212" : "#f5f5f5";
   const tagColor = isDarkMode ? "#CFAB9540" : "#CFAB9540";
   const buttonBackgroundColor = isDarkMode ? "#CCB68C" : "#E5E1E9";
-  const shadowColor = isDarkMode ? "#101021" : "#101021";
+  const shadowColor = isDarkMode ? "#0E0D0D" : "#0E0D0D";
   const cardBackgroundColor = isDarkMode ? "#484692" : "#E5E1E9";
   const currencyUnitColor = isDarkMode ? "#ddd" : "#666";
   const addCryptoButtonBackgroundColor = isDarkMode ? "#1E1D3F" : "#F8F6FE";
@@ -19,7 +19,7 @@ const WalletScreenStyles = (isDarkMode) => {
   const historyItemBorderColor = isDarkMode ? "#ccc" : "#999";
   const inputBackgroundColor = isDarkMode ? "#1A1A37" : "#e0e0e0";
   const historyContainerBackgroundColor = isDarkMode
-    ? "#24234C80"
+    ? "#22201F90"
     : "#FFFFFF80";
   const { height } = Dimensions.get("window"); // 获取设备高度
   const containerHeight = height - 360; // 计算高度
@@ -1007,7 +1007,7 @@ const WalletScreenStyles = (isDarkMode) => {
       padding: 10,
       borderRadius: 5,
       color: textColor,
-      backgroundColor: isDarkMode ? "#24234C" : "#E5E1E9",
+      backgroundColor: isDarkMode ? "#21201E" : "#E5E1E9",
       textAlignVertical: "top",
     },
   });

@@ -100,7 +100,7 @@ const InputAddressModal = ({
                     },
                   ]}
                   placeholder={t("Enter Address")}
-                  placeholderTextColor={isDarkMode ? "#ffffff" : "#24234C"}
+                  placeholderTextColor={isDarkMode ? "#ffffff" : "#21201E"}
                   onChangeText={handleAddressChange}
                   value={inputAddress}
                   autoFocus={true}

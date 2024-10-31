@@ -51,7 +51,7 @@ export default function PriceChartCom({
   // 根据 isDarkMode 设置 textColor
   const textColor = isDarkMode ? "#fff" : "#000";
   const textTabColor = isDarkMode ? "#6E6E7F" : "#8C8C9C";
-  const activeBackgroundColor = isDarkMode ? "#24234C" : "#fff";
+  const activeBackgroundColor = isDarkMode ? "#21201E" : "#fff";
   const inactiveBackgroundColor = "transparent";
   //取出最高，最低的開盤價格
   const _getMaxAndMinPrice = (data) => {

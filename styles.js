@@ -5,10 +5,10 @@ export const lightTheme = StyleSheet.create({
   settingsText: {
     marginLeft: 10,
     fontSize: 16,
-    color: "#24234C",
+    color: "#21201E",
   },
   titleText: {
-    color: "#24234C",
+    color: "#21201E",
     fontSize: 24, // 字体大小为24
     fontWeight: "bold", // 字体加粗
     marginBottom: 20, // 与下一个元素间距20
@@ -60,13 +60,13 @@ export const darkTheme = StyleSheet.create({
   },
 
   headerStyle: {
-    backgroundColor: "#24234C",
+    backgroundColor: "#21201E",
   },
   headerRight: {
-    backgroundColor: "#24234C",
+    backgroundColor: "#21201E",
   },
   addIconButton: {
-    backgroundColor: "#24234C",
+    backgroundColor: "#21201E",
   },
   dropdown: {
     position: "absolute",
@@ -263,7 +263,7 @@ const styles = StyleSheet.create({
   historyContainer: {
     marginTop: 20,
     padding: 20,
-    backgroundColor: "#24234C", // 深灰色背景
+    backgroundColor: "#21201E", // 深灰色背景
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 10,

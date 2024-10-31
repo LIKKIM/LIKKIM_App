@@ -88,7 +88,7 @@ function MyColdWalletScreen() {
   const [isCurrentPasswordHidden, setIsCurrentPasswordHidden] = useState(true);
   const restoreIdentifier = Constants.installationId;
   const iconColor = isDarkMode ? "#ffffff" : "#676776";
-  const darkColors = ["#24234C", "#101021"];
+  const darkColors = ["#21201E", "#0E0D0D"];
   const lightColors = ["#FFFFFF", "#EDEBEF"];
   const [receivedVerificationCode, setReceivedVerificationCode] = useState("");
   const [newPasswordModalVisible, setNewPasswordModalVisible] = useState(false);
