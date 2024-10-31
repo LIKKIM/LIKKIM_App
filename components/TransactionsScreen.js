@@ -86,7 +86,7 @@ function TransactionsScreen() {
   const lightColors = ["#FFFFFF", "#EDEBEF"];
   const placeholderColor = isDarkMode ? "#ffffff" : "#24234C";
   const [amount, setAmount] = useState("");
-  const buttonBackgroundColor = isDarkMode ? "#6C6CF4" : "#8E80F0";
+  const buttonBackgroundColor = isDarkMode ? "#CCB68C" : "#CFAB95";
   const disabledButtonBackgroundColor = isDarkMode ? "#6c6c6c" : "#ccc"; // 根据 isDarkMode 设置不同的灰色
   const [inputAddress, setInputAddress] = useState("");
   const [selectedCrypto, setSelectedCrypto] = useState("");

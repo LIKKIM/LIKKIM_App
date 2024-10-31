@@ -250,7 +250,7 @@ const styles = StyleSheet.create({
     width: 280,
   },
   languageCancelButton: {
-    backgroundColor: "#6C6CF4",
+    backgroundColor: "#CCB68C",
     padding: 10,
     width: "90%",
     borderRadius: 30,
@@ -301,7 +301,7 @@ const styles = StyleSheet.create({
   },
   // optionButton, cancelButton: 选项按钮和取消按钮的样式
   optionButton: {
-    backgroundColor: "#6C6CF4",
+    backgroundColor: "#CCB68C",
     padding: 10,
     width: "90%",
     justifyContent: "center",
@@ -321,7 +321,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   submitButton: {
-    backgroundColor: "#6C6CF4",
+    backgroundColor: "#CCB68C",
     padding: 10,
     width: "90%",
     justifyContent: "center",
@@ -330,7 +330,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   cancelButton: {
-    backgroundColor: "#6C6CF4",
+    backgroundColor: "#CCB68C",
     padding: 10,
     width: "90%",
     justifyContent: "center",

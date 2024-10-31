@@ -136,8 +136,8 @@ const AddCryptoModal = ({
                   {
                     borderWidth: selectedCryptos.includes(crypto) ? 2 : 2, // 选中时增加边框宽度，未选中时无边框
                     borderColor: selectedCryptos.includes(crypto)
-                      ? "#8E80F0"
-                      : "transparent", // 选中时边框颜色为 #8E80F0
+                      ? "#CFAB95"
+                      : "transparent", // 选中时边框颜色为 #CFAB95
                   },
                 ]}
                 onPress={() => toggleSelectCrypto(crypto)} // 切换选中状态

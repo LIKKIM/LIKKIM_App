@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     marginTop: 20,
     padding: 10,
-    borderColor: "#6C6CF4",
+    borderColor: "#CCB68C",
     borderWidth: 3,
     marginBottom: 60,
   },
@@ -200,7 +200,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     marginTop: 20,
     padding: 10,
-    backgroundColor: "#6C6CF4",
+    backgroundColor: "#CCB68C",
   },
   doneButton: {
     alignItems: "center",
@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     marginTop: 20,
     padding: 10,
-    backgroundColor: "#6C6CF4",
+    backgroundColor: "#CCB68C",
   },
   buttonText: {
     color: "#fff",
@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#8B8B96",
   },
   activeDot: {
-    backgroundColor: "#6C6CF4",
+    backgroundColor: "#CCB68C",
     width: 24,
     height: 8,
     borderRadius: 4,

@@ -3,9 +3,9 @@ import { StyleSheet } from "react-native";
 
 const TransactionsScreenStyles = (isDarkMode) => {
   const backgroundColor = isDarkMode ? "#121212" : "#f5f5f5";
-  const btnBorderColor = isDarkMode ? "#6C6CF4" : "#8E80F0";
-  const btnColor = isDarkMode ? "#6C6CF4" : "#8E80F0";
-  const buttonBackgroundColor = isDarkMode ? "#6C6CF4" : "#E5E1E9";
+  const btnBorderColor = isDarkMode ? "#CCB68C" : "#CFAB95";
+  const btnColor = isDarkMode ? "#CCB68C" : "#CFAB95";
+  const buttonBackgroundColor = isDarkMode ? "#CCB68C" : "#E5E1E9";
   const historyContainerBackgroundColor = isDarkMode
     ? "#24234C80"
     : "#FFFFFF80";
@@ -17,7 +17,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
   const textBtnColor = isDarkMode ? "#fff" : "#fff";
   const textColor = isDarkMode ? "#fff" : "#000";
   const titleColor = isDarkMode ? "#fff" : "#000";
-  const dropdownBackgroundColor = isDarkMode ? "#6C6CF4" : "#eee";
+  const dropdownBackgroundColor = isDarkMode ? "#CCB68C" : "#eee";
 
   return StyleSheet.create({
     // Dropdown Styles
@@ -50,7 +50,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       borderBottomColor: isDarkMode ? "#555" : "#ddd", */
     },
     selectedChainTag: {
-      backgroundColor: isDarkMode ? "#6C6CF4" : "#ccc",
+      backgroundColor: isDarkMode ? "#CCB68C" : "#ccc",
     },
     chainTagText: {
       color: isDarkMode ? "#fff" : "#000",
@@ -65,7 +65,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       alignItems: "center",
     },
     roundButton: {
-      backgroundColor: "#6c6cf4",
+      backgroundColor: "#CCB68C",
       padding: 15,
       borderRadius: 30,
       alignItems: "center",
@@ -296,7 +296,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       marginLeft: 10,
       paddingVertical: 5,
       paddingHorizontal: 10,
-      backgroundColor: "#6C6CF4",
+      backgroundColor: "#CCB68C",
       borderRadius: 5,
     },
     disconnectButtonText: {

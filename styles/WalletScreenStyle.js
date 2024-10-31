@@ -5,12 +5,12 @@ const WalletScreenStyles = (isDarkMode) => {
   // 色彩定义
   const textColor = isDarkMode ? "#fff" : "#000";
   const modalBackgroundColor = isDarkMode ? "#484692" : "#ffffff";
-  const BluetoothBtnColor = isDarkMode ? "#6C6CF4" : "#8E80F0";
+  const BluetoothBtnColor = isDarkMode ? "#CCB68C" : "#CFAB95";
   const secondTextColor = isDarkMode ? "#ddd" : "#676776";
   const secondCardTextColor = isDarkMode ? "#fff" : "#fff";
   const backgroundColor = isDarkMode ? "#121212" : "#f5f5f5";
-  const tagColor = isDarkMode ? "#8E80F040" : "#8E80F040";
-  const buttonBackgroundColor = isDarkMode ? "#6C6CF4" : "#E5E1E9";
+  const tagColor = isDarkMode ? "#CFAB9540" : "#CFAB9540";
+  const buttonBackgroundColor = isDarkMode ? "#CCB68C" : "#E5E1E9";
   const shadowColor = isDarkMode ? "#101021" : "#101021";
   const cardBackgroundColor = isDarkMode ? "#484692" : "#E5E1E9";
   const currencyUnitColor = isDarkMode ? "#ddd" : "#666";
@@ -81,7 +81,7 @@ const WalletScreenStyles = (isDarkMode) => {
     TagChainIcon: {
       width: 14,
       height: 14,
-      backgroundColor: "#8E80F040",
+      backgroundColor: "#CFAB9540",
       marginRight: 8,
       resizeMode: "contain",
       borderRadius: 10,
@@ -146,7 +146,7 @@ const WalletScreenStyles = (isDarkMode) => {
       marginLeft: 10,
       paddingVertical: 5,
       paddingHorizontal: 10,
-      backgroundColor: "#6C6CF4",
+      backgroundColor: "#CCB68C",
       borderRadius: 5,
     },
 
@@ -307,7 +307,7 @@ const WalletScreenStyles = (isDarkMode) => {
     activeTabButton: {
       padding: 20,
       borderBottomWidth: 2,
-      borderBottomColor: "#6C6CF4",
+      borderBottomColor: "#CCB68C",
       marginHorizontal: 60,
     },
 
