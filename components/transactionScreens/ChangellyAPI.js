@@ -1,8 +1,19 @@
 
 
-import '../../shim.js'
-import crypto from 'crypto'
+// import '../../shim.js'
+// import crypto from 'crypto'
 
+
+const crypto = {
+    createPrivateKey() {
+
+
+    },
+    sign() {
+
+        return '';
+    }
+};
 
 const API_KEY = 'iY91jULmC+d7AFNCB8ZcBJ3TOqYTklB9IcbU2indKQg=';
 const ChangellyBaseAPI = 'https://api.changelly.com';
