@@ -389,7 +389,7 @@ export default function PriceChartCom({
         style={{
           flexDirection: "row",
           justifyContent: "space-around",
-          backgroundColor: isDarkMode ? "#484692" : "#DEDEE1",
+          backgroundColor: isDarkMode ? "#3F3D3C" : "#DEDEE1",
           padding: 2,
           borderRadius: 8,
           marginTop: "0%",

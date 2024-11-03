@@ -72,7 +72,7 @@ export const darkTheme = StyleSheet.create({
     position: "absolute",
     right: 20,
     top: 60, // 调整以确保下拉菜单位于setting icon正下方
-    backgroundColor: "#484692",
+    backgroundColor: "#3F3D3C",
     borderRadius: 5,
     padding: 10,
     zIndex: 1,
@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     justifyContent: "center", // 内容居中显示
     alignItems: "center", // 内容居中显示
-    backgroundColor: "#484692", // 深灰色背景，比container稍浅
+    backgroundColor: "#3F3D3C", // 深灰色背景，比container稍浅
     marginBottom: 20, // 与下一个元素间距20
     shadowColor: "#000", // 阴影颜色为黑色
     shadowOffset: { width: 0, height: 2 }, // 阴影偏移
@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
 
   // roundButton: 圆形按钮的样式
   roundButton: {
-    backgroundColor: "#484692", // 按钮背景为灰色
+    backgroundColor: "#3F3D3C", // 按钮背景为灰色
     borderRadius: 30, // 圆角为30
     paddingVertical: 10, // 垂直内边距为10
     paddingHorizontal: 20, // 水平内边距为20
@@ -203,7 +203,7 @@ const styles = StyleSheet.create({
     margin: 20,
     height: 500, // 高度为500
     width: "90%",
-    backgroundColor: "#484692", // 深灰色背景
+    backgroundColor: "#3F3D3C", // 深灰色背景
     borderRadius: 20, // 圆角为20
     padding: 35, // 内边距为35
     alignItems: "center", // 内容居中对齐

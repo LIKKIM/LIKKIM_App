@@ -246,7 +246,7 @@ const styles = StyleSheet.create({
   },
   modalView: {
     margin: 20,
-    backgroundColor: "#484692", // 深色模式下的深蓝色背景
+    backgroundColor: "#3F3D3C", // 深色模式下的深蓝色背景
     borderRadius: 20,
     padding: 35,
     alignItems: "center",

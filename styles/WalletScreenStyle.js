@@ -4,7 +4,7 @@ import { StyleSheet, Dimensions } from "react-native";
 const WalletScreenStyles = (isDarkMode) => {
   // 色彩定义
   const textColor = isDarkMode ? "#fff" : "#000";
-  const modalBackgroundColor = isDarkMode ? "#484692" : "#ffffff";
+  const modalBackgroundColor = isDarkMode ? "#3F3D3C" : "#ffffff";
   const BluetoothBtnColor = isDarkMode ? "#CCB68C" : "#CFAB95";
   const secondTextColor = isDarkMode ? "#ddd" : "#676776";
   const secondCardTextColor = isDarkMode ? "#fff" : "#fff";
@@ -12,7 +12,7 @@ const WalletScreenStyles = (isDarkMode) => {
   const tagColor = isDarkMode ? "#CFAB9540" : "#CFAB9540";
   const buttonBackgroundColor = isDarkMode ? "#CCB68C" : "#E5E1E9";
   const shadowColor = isDarkMode ? "#0E0D0D" : "#0E0D0D";
-  const cardBackgroundColor = isDarkMode ? "#484692" : "#E5E1E9";
+  const cardBackgroundColor = isDarkMode ? "#3F3D3C" : "#E5E1E9";
   const currencyUnitColor = isDarkMode ? "#ddd" : "#666";
   const addCryptoButtonBackgroundColor = isDarkMode ? "#1E1D3F" : "#F8F6FE";
   const borderColor = isDarkMode ? "#555" : "#ccc";

@@ -4,7 +4,7 @@ import { StyleSheet } from "react-native";
 const MyColdWalletScreenStyles = (isDarkMode) => {
   const textColor = isDarkMode ? "#fff" : "#000";
   const backgroundColor = isDarkMode ? "#121212" : "#f5f5f5";
-  const modalBackgroundColor = isDarkMode ? "#484692" : "#ffffff";
+  const modalBackgroundColor = isDarkMode ? "#3F3D3C" : "#ffffff";
   const buttonBackgroundColor = isDarkMode ? "#CCB68C" : "#E5E1E9";
   const borderColor = isDarkMode ? "#404040" : "#ccc";
   const BluetoothBtnColor = isDarkMode ? "#CCB68C" : "#CFAB95";
