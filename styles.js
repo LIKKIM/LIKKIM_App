@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center", // 内容居中
     alignItems: "center", // 内容居中
-    backgroundColor: "rgba(0, 0, 0, 0.5)", // 半透明背景
+    backgroundColor: "rgba(0, 0, 0, 0.2)", // 半透明背景
   },
 
   // modalView: 模态视窗的样式

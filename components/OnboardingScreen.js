@@ -242,7 +242,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.5)", // 半透明黑色背景，适用于深色模式
+    backgroundColor: "rgba(0, 0, 0, 0.2)", // 半透明黑色背景，适用于深色模式
   },
   modalView: {
     margin: 20,

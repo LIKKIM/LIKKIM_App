@@ -272,7 +272,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       flex: 1,
       justifyContent: "center",
       alignItems: "center",
-      backgroundColor: "rgba(0, 0, 0, 0.5)",
+      backgroundColor: "rgba(0, 0, 0, 0.2)",
     },
     confirmModalView: {
       margin: 20,
