@@ -43,7 +43,7 @@ import EmptyWalletView from "./modal/EmptyWalletView";
 import TabModal from "./walletScreen/TabModal";
 import ModalsContainer from "./walletScreen/ModalsContainer";
 import WalletList from "./CardListCom";
-import { setHomeSelectCardName, useHomeSelectCardName, useLikkimStore } from "../store";
+import { useHomeSelectCardName, useLikkimStore } from "../store";
 
 const serviceUUID = "0000FFE0-0000-1000-8000-00805F9B34FB";
 const writeCharacteristicUUID = "0000FFE2-0000-1000-8000-00805F9B34FB";
@@ -132,10 +132,9 @@ function WalletScreen({ route, navigation }) {
     t("Verifying Address on LIKKIM...")
   );
 
+  const likkim_select_card = useLikkimStore((state) => state.homeSelectCardName)
 
-  //全局状态控制
-  const likkim_select_card = useHomeSelectCardName;
-  const likkim_set_select_card = setHomeSelectCardName();
+  const likkim_set_select_card = useLikkimStore((state) => state.setHomeSelectCardName);
 
   const [refreshing, setRefreshing] = useState(false);
   const chainCategories = initialAdditionalCryptos.map((crypto) => ({
@@ -1737,6 +1736,9 @@ function WalletScreen({ route, navigation }) {
 
         {/* TODO fix */}
         {/* {<WalletList cards={cryptoCards} priceChanges={priceChanges} WalletScreenStyle={WalletScreenStyle} handleQRCodePress={handleQRCodePress} />} */}
+
+
+        {/* <Text>{"LIKKIM:" + likkim_select_card}</Text> */}
 
         {cryptoCards.map((card, index) => {
           const isBlackText = ["BTC", "USDT", "BCH", "DOT", "DOGE"].includes(
