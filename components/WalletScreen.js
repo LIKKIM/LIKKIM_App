@@ -43,6 +43,7 @@ import EmptyWalletView from "./modal/EmptyWalletView";
 import TabModal from "./walletScreen/TabModal";
 import ModalsContainer from "./walletScreen/ModalsContainer";
 import WalletList from "./CardListCom";
+import { setHomeSelectCardName, useHomeSelectCardName, useLikkimStore } from "../store";
 
 const serviceUUID = "0000FFE0-0000-1000-8000-00805F9B34FB";
 const writeCharacteristicUUID = "0000FFE2-0000-1000-8000-00805F9B34FB";
@@ -126,9 +127,16 @@ function WalletScreen({ route, navigation }) {
   const [createPendingModalVisible, setCreatePendingModalVisible] =
     useState(false);
   useState(false);
+
   const [addressVerificationMessage, setAddressVerificationMessage] = useState(
     t("Verifying Address on LIKKIM...")
   );
+
+
+  //全局状态控制
+  const likkim_select_card = useHomeSelectCardName;
+  const likkim_set_select_card = setHomeSelectCardName();
+
   const [refreshing, setRefreshing] = useState(false);
   const chainCategories = initialAdditionalCryptos.map((crypto) => ({
     name: crypto.chain,
@@ -330,7 +338,8 @@ function WalletScreen({ route, navigation }) {
   }, []);
   useEffect(() => {
     // 当 cryptoCards 状态变化时，更新 route.params
-    navigation.setParams({ cryptoCards });
+    console.warn('selectedCardName' + selectedCardName)
+    navigation.setParams({ cryptoCards, selectedCardName });
   }, [cryptoCards]);
 
   const handleDevicePress = async (device) => {
@@ -1306,11 +1315,16 @@ function WalletScreen({ route, navigation }) {
   }, [cryptoCards.length]);
 
   useEffect(() => {
+
     navigation.setParams({
       isModalVisible: modalVisible,
       showAddModal: addCryptoVisible,
     });
   }, [modalVisible, addCryptoVisible]);
+
+
+
+
   useEffect(() => {
     Animated.timing(fadeAnim, {
       toValue: modalVisible ? 1 : 0,
@@ -1442,8 +1456,10 @@ function WalletScreen({ route, navigation }) {
   };
 
   const handleDeleteCard = () => {
+
+    console.warn(likkim_select_card + ':likkim')
     const updatedCards = cryptoCards.filter(
-      (card) => card.name !== selectedCardName
+      (card) => card.name !== likkim_select_card
     );
     setCryptoCards(updatedCards);
     setCryptoCount(updatedCards.length);
@@ -1489,6 +1505,9 @@ function WalletScreen({ route, navigation }) {
     });
   };
 
+
+
+
   const closeModal = () => {
     scrollViewRef?.current.setNativeProps({ scrollEnabled: true });
 
@@ -1524,6 +1543,9 @@ function WalletScreen({ route, navigation }) {
     const crypto = cryptoCards.find((card) => card.name === cryptoName);
     setSelectedAddress(crypto?.address || "Unknown");
     setSelectedCardName(cryptoName);
+    console.warn('设置：likkim_set_select_card' + cryptoName)
+    likkim_set_select_card(cryptoName);
+
     setSelectedCrypto(crypto);
     setActiveTab("Prices");
     scrollViewRef.current.scrollTo({ y: 0, animated: true });
@@ -1729,8 +1751,8 @@ function WalletScreen({ route, navigation }) {
                 ? "#FF5252"
                 : "#F23645"
               : isBlackText
-              ? "#22AA94"
-              : "#0C9981";
+                ? "#22AA94"
+                : "#0C9981";
 
           return (
             <TouchableHighlight
@@ -1871,14 +1893,13 @@ function WalletScreen({ route, navigation }) {
                                 isBlackText && { color: "#121518" },
                               ]}
                             >
-                              {`${
-                                i === 0
-                                  ? card.balance
-                                  : getConvertedBalance(
-                                      card.balance,
-                                      card.shortName
-                                    )
-                              } ${i === 0 ? card.shortName : currencyUnit}`}
+                              {`${i === 0
+                                ? card.balance
+                                : getConvertedBalance(
+                                  card.balance,
+                                  card.shortName
+                                )
+                                } ${i === 0 ? card.shortName : currencyUnit}`}
                             </Text>
                           )
                         )}
