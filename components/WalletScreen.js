@@ -43,7 +43,6 @@ import EmptyWalletView from "./modal/EmptyWalletView";
 import TabModal from "./walletScreen/TabModal";
 import ModalsContainer from "./walletScreen/ModalsContainer";
 import WalletList from "./CardListCom";
-import { setHomeSelectCardName, useHomeSelectCardName, useLikkimStore } from "../store";
 
 const serviceUUID = "0000FFE0-0000-1000-8000-00805F9B34FB";
 const writeCharacteristicUUID = "0000FFE2-0000-1000-8000-00805F9B34FB";
@@ -1454,7 +1453,7 @@ function WalletScreen({ route, navigation }) {
 
   const handleDeleteCard = () => {
 
-    console.warn(likkim_select_card + ':likkim')
+    // console.warn(likkim_select_card + ':likkim')
     const updatedCards = cryptoCards.filter(
       (card) => card.name !== selectedCardName
     );
@@ -1541,7 +1540,7 @@ function WalletScreen({ route, navigation }) {
     setSelectedAddress(crypto?.address || "Unknown");
     setSelectedCardName(cryptoName);
     console.warn('设置：likkim_set_select_card' + cryptoName)
-    likkim_set_select_card(cryptoName);
+
 
     setSelectedCrypto(crypto);
     setActiveTab("Prices");
