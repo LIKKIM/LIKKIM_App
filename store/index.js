@@ -15,5 +15,5 @@ export const useLikkimStore = create(
     ),
 )
 
-// export const useHomeSelectCardName = useLikkimStore((state) => state.homeSelectCardName)
-// export const setHomeSelectCardName = useLikkimStore((state) => state.setHomeSelectCardName)
+export const useHomeSelectCardName = () => useLikkimStore((state) => state.homeSelectCardName);
+export const setHomeSelectCardName = () => useLikkimStore((state) => state.setHomeSelectCardName)

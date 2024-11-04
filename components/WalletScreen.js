@@ -43,7 +43,7 @@ import EmptyWalletView from "./modal/EmptyWalletView";
 import TabModal from "./walletScreen/TabModal";
 import ModalsContainer from "./walletScreen/ModalsContainer";
 import WalletList from "./CardListCom";
-import { useHomeSelectCardName, useLikkimStore } from "../store";
+import { setHomeSelectCardName, useHomeSelectCardName, useLikkimStore } from "../store";
 
 const serviceUUID = "0000FFE0-0000-1000-8000-00805F9B34FB";
 const writeCharacteristicUUID = "0000FFE2-0000-1000-8000-00805F9B34FB";
@@ -132,9 +132,7 @@ function WalletScreen({ route, navigation }) {
     t("Verifying Address on LIKKIM...")
   );
 
-  const likkim_select_card = useLikkimStore((state) => state.homeSelectCardName)
 
-  const likkim_set_select_card = useLikkimStore((state) => state.setHomeSelectCardName);
 
   const [refreshing, setRefreshing] = useState(false);
   const chainCategories = initialAdditionalCryptos.map((crypto) => ({
@@ -337,7 +335,7 @@ function WalletScreen({ route, navigation }) {
   }, []);
   useEffect(() => {
     // 当 cryptoCards 状态变化时，更新 route.params
-    console.warn('selectedCardName' + selectedCardName)
+    // console.warn('selectedCardName' + selectedCardName)
     navigation.setParams({ cryptoCards, selectedCardName });
   }, [cryptoCards]);
 
@@ -1458,7 +1456,7 @@ function WalletScreen({ route, navigation }) {
 
     console.warn(likkim_select_card + ':likkim')
     const updatedCards = cryptoCards.filter(
-      (card) => card.name !== likkim_select_card
+      (card) => card.name !== selectedCardName
     );
     setCryptoCards(updatedCards);
     setCryptoCount(updatedCards.length);
