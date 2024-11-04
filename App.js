@@ -71,26 +71,23 @@ export default function App() {
     );
   }
 
-  const _APP = () => (
-    <AppContent
-      t={t}
-      headerDropdownVisible={headerDropdownVisible}
-      setHeaderDropdownVisible={setHeaderDropdownVisible}
-      selectedCardName={selectedCardName}
-      setSelectedCardName={setSelectedCardName}
-    />
-  );
-
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <CryptoProvider>
         <NavigationContainer>
           <Stack.Navigator>
-            <Stack.Screen
-              name="Back"
-              component={_APP}
-              options={{ headerShown: false }}
-            />
+            <Stack.Screen name="Back" options={{ headerShown: false }}>
+              {(props) => (
+                <AppContent
+                  {...props}
+                  t={t}
+                  headerDropdownVisible={headerDropdownVisible}
+                  setHeaderDropdownVisible={setHeaderDropdownVisible}
+                  selectedCardName={selectedCardName}
+                  setSelectedCardName={setSelectedCardName}
+                />
+              )}
+            </Stack.Screen>
             <Stack.Screen name="Find My LIKKIM" component={FindMyLkkim} />
             <Stack.Screen
               name="Request Wallet Auth"
