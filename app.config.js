@@ -30,6 +30,7 @@ export default {
     buildNumber: "15.9.0",
     bundleIdentifier: "RN.LKKIM",
     icon: "./assets/icon.png",
+    buildNumber: "2"
   },
   android: {
     config: {
@@ -37,7 +38,7 @@ export default {
         apiKey: "AIzaSyAaLPaHuHj_vT7cHsA99HZeuAH_Z1p3Xbg",
       },
     },
-    versionCode: 1,
+    versionCode: 2,
     package: "com.anonymous.likkim",
   },
   web: {
