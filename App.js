@@ -92,7 +92,11 @@ export default function App() {
               options={{ headerShown: false }}
             />
             <Stack.Screen name="Find My LIKKIM" component={FindMyLkkim} />
-            <Stack.Screen name="Request Wallet Auth" options={{ title: "交易确认" }} component={ConnectLIKKIMAuth} />
+            <Stack.Screen
+              name="Request Wallet Auth"
+              options={{ title: "交易确认" }}
+              component={ConnectLIKKIMAuth}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </CryptoProvider>
@@ -105,7 +109,7 @@ function OnboardingApp({ handleOnboardingDone }) {
 
   return (
     <>
-      <StatusBar backgroundColor="#24234C" barStyle="light-content" />
+      <StatusBar backgroundColor="#21201E" barStyle="light-content" />
       <OnboardingScreen onDone={handleOnboardingDone} />
     </>
   );
@@ -137,11 +141,11 @@ function AppContent({
   };
 
   const theme = isDarkMode ? darkTheme : lightTheme;
-  const tabBarActiveTintColor = isDarkMode ? "#ffffff" : "#8E80F0";
+  const tabBarActiveTintColor = isDarkMode ? "#CCB68C" : "#CFAB95";
   const tabBarInactiveTintColor = isDarkMode ? "#ffffff50" : "#676776";
   const headerTitleColor = isDarkMode ? "#ffffff" : "#333333";
-  const tabBarBackgroundColor = isDarkMode ? "#23224D" : "#fff";
-  const bottomBackgroundColor = isDarkMode ? "#101021" : "#EDEBEF";
+  const tabBarBackgroundColor = isDarkMode ? "#22201F" : "#fff";
+  const bottomBackgroundColor = isDarkMode ? "#0E0D0D" : "#EDEBEF";
   const iconColor = isDarkMode ? "#ffffff" : "#000000";
 
   useEffect(() => {
@@ -304,7 +308,7 @@ function AppContent({
       </Tab.Navigator>
 
       <StatusBar
-        backgroundColor={isDarkMode ? "#24234C" : "#FFFFFF"}
+        backgroundColor={isDarkMode ? "#21201E" : "#FFFFFF"}
         barStyle={isDarkMode ? "light-content" : "dark-content"}
       />
 

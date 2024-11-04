@@ -5,10 +5,10 @@ export const lightTheme = StyleSheet.create({
   settingsText: {
     marginLeft: 10,
     fontSize: 16,
-    color: "#24234C",
+    color: "#21201E",
   },
   titleText: {
-    color: "#24234C",
+    color: "#21201E",
     fontSize: 24, // 字体大小为24
     fontWeight: "bold", // 字体加粗
     marginBottom: 20, // 与下一个元素间距20
@@ -60,19 +60,19 @@ export const darkTheme = StyleSheet.create({
   },
 
   headerStyle: {
-    backgroundColor: "#24234C",
+    backgroundColor: "#21201E",
   },
   headerRight: {
-    backgroundColor: "#24234C",
+    backgroundColor: "#21201E",
   },
   addIconButton: {
-    backgroundColor: "#24234C",
+    backgroundColor: "#21201E",
   },
   dropdown: {
     position: "absolute",
     right: 20,
     top: 60, // 调整以确保下拉菜单位于setting icon正下方
-    backgroundColor: "#484692",
+    backgroundColor: "#3F3D3C",
     borderRadius: 5,
     padding: 10,
     zIndex: 1,
@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     justifyContent: "center", // 内容居中显示
     alignItems: "center", // 内容居中显示
-    backgroundColor: "#484692", // 深灰色背景，比container稍浅
+    backgroundColor: "#3F3D3C", // 深灰色背景，比container稍浅
     marginBottom: 20, // 与下一个元素间距20
     shadowColor: "#000", // 阴影颜色为黑色
     shadowOffset: { width: 0, height: 2 }, // 阴影偏移
@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
 
   // roundButton: 圆形按钮的样式
   roundButton: {
-    backgroundColor: "#484692", // 按钮背景为灰色
+    backgroundColor: "#3F3D3C", // 按钮背景为灰色
     borderRadius: 30, // 圆角为30
     paddingVertical: 10, // 垂直内边距为10
     paddingHorizontal: 20, // 水平内边距为20
@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center", // 内容居中
     alignItems: "center", // 内容居中
-    backgroundColor: "rgba(0, 0, 0, 0.5)", // 半透明背景
+    backgroundColor: "rgba(0, 0, 0, 0.2)", // 半透明背景
   },
 
   // modalView: 模态视窗的样式
@@ -203,7 +203,7 @@ const styles = StyleSheet.create({
     margin: 20,
     height: 500, // 高度为500
     width: "90%",
-    backgroundColor: "#484692", // 深灰色背景
+    backgroundColor: "#3F3D3C", // 深灰色背景
     borderRadius: 20, // 圆角为20
     padding: 35, // 内边距为35
     alignItems: "center", // 内容居中对齐
@@ -250,7 +250,7 @@ const styles = StyleSheet.create({
     width: 280,
   },
   languageCancelButton: {
-    backgroundColor: "#6C6CF4",
+    backgroundColor: "#CCB68C",
     padding: 10,
     width: "90%",
     borderRadius: 30,
@@ -263,7 +263,7 @@ const styles = StyleSheet.create({
   historyContainer: {
     marginTop: 20,
     padding: 20,
-    backgroundColor: "#24234C", // 深灰色背景
+    backgroundColor: "#21201E", // 深灰色背景
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 10,
@@ -301,7 +301,7 @@ const styles = StyleSheet.create({
   },
   // optionButton, cancelButton: 选项按钮和取消按钮的样式
   optionButton: {
-    backgroundColor: "#6C6CF4",
+    backgroundColor: "#CCB68C",
     padding: 10,
     width: "90%",
     justifyContent: "center",
@@ -321,7 +321,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   submitButton: {
-    backgroundColor: "#6C6CF4",
+    backgroundColor: "#CCB68C",
     padding: 10,
     width: "90%",
     justifyContent: "center",
@@ -330,7 +330,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   cancelButton: {
-    backgroundColor: "#6C6CF4",
+    backgroundColor: "#CCB68C",
     padding: 10,
     width: "90%",
     justifyContent: "center",

@@ -4,13 +4,13 @@ import { StyleSheet } from "react-native";
 const MyColdWalletScreenStyles = (isDarkMode) => {
   const textColor = isDarkMode ? "#fff" : "#000";
   const backgroundColor = isDarkMode ? "#121212" : "#f5f5f5";
-  const modalBackgroundColor = isDarkMode ? "#484692" : "#ffffff";
-  const buttonBackgroundColor = isDarkMode ? "#6C6CF4" : "#E5E1E9";
+  const modalBackgroundColor = isDarkMode ? "#3F3D3C" : "#ffffff";
+  const buttonBackgroundColor = isDarkMode ? "#CCB68C" : "#E5E1E9";
   const borderColor = isDarkMode ? "#404040" : "#ccc";
-  const BluetoothBtnColor = isDarkMode ? "#6C6CF4" : "#8E80F0";
+  const BluetoothBtnColor = isDarkMode ? "#CCB68C" : "#CFAB95";
   const secondTextColor = isDarkMode ? "#ddd" : "#676776";
   const inputBackgroundColor = isDarkMode ? "#1A1A37" : "#e0e0e0";
-  const focusedBorderColor = isDarkMode ? "#6C6CF4" : "#007AFF";
+  const focusedBorderColor = isDarkMode ? "#CCB68C" : "#007AFF";
 
   return StyleSheet.create({
     addressInput: {
@@ -94,7 +94,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       flex: 1,
       justifyContent: "center",
       alignItems: "center",
-      backgroundColor: "rgba(0, 0, 0, 0.5)",
+      backgroundColor: "rgba(0, 0, 0, 0.2)",
     },
     changePasswordModalView: {
       position: "absolute",
@@ -163,7 +163,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       marginLeft: 10,
       paddingVertical: 5,
       paddingHorizontal: 10,
-      backgroundColor: "#6C6CF4",
+      backgroundColor: "#CCB68C",
       borderRadius: 5,
     },
     disconnectButtonText: {

@@ -62,7 +62,7 @@ const OnboardingScreen = ({ onDone }) => {
   };
 
   const _renderItem = ({ item }) => (
-    <LinearGradient colors={["#24234C", "#101021"]} style={styles.slide}>
+    <LinearGradient colors={["#21201E", "#0E0D0D"]} style={styles.slide}>
       <TouchableOpacity
         style={styles.languageButton}
         onPress={() => setLanguageModalVisible(true)}
@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     marginTop: 20,
     padding: 10,
-    borderColor: "#6C6CF4",
+    borderColor: "#CCB68C",
     borderWidth: 3,
     marginBottom: 60,
   },
@@ -200,7 +200,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     marginTop: 20,
     padding: 10,
-    backgroundColor: "#6C6CF4",
+    backgroundColor: "#CCB68C",
   },
   doneButton: {
     alignItems: "center",
@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     marginTop: 20,
     padding: 10,
-    backgroundColor: "#6C6CF4",
+    backgroundColor: "#CCB68C",
   },
   buttonText: {
     color: "#fff",
@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#8B8B96",
   },
   activeDot: {
-    backgroundColor: "#6C6CF4",
+    backgroundColor: "#CCB68C",
     width: 24,
     height: 8,
     borderRadius: 4,
@@ -242,11 +242,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.5)", // 半透明黑色背景，适用于深色模式
+    backgroundColor: "rgba(0, 0, 0, 0.2)", // 半透明黑色背景，适用于深色模式
   },
   modalView: {
     margin: 20,
-    backgroundColor: "#484692", // 深色模式下的深蓝色背景
+    backgroundColor: "#3F3D3C", // 深色模式下的深蓝色背景
     borderRadius: 20,
     padding: 35,
     alignItems: "center",

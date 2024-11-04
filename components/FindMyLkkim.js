@@ -114,7 +114,7 @@ export default function FindMyLkkim() {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerStyle: {
-        backgroundColor: isDarkMode ? "#24234C" : "#FFFFFF",
+        backgroundColor: isDarkMode ? "#21201E" : "#FFFFFF",
       },
       headerTintColor: isDarkMode ? "#FFFFFF" : "#000000",
     });
@@ -246,7 +246,7 @@ export default function FindMyLkkim() {
             >
               <View
                 style={{
-                  backgroundColor: isDarkMode ? "#24234C" : "#f5f5f5",
+                  backgroundColor: isDarkMode ? "#21201E" : "#f5f5f5",
                   height: 50,
                   width: 50,
                   borderRadius: 25,
@@ -284,7 +284,7 @@ export default function FindMyLkkim() {
               position: "absolute",
               bottom: 20,
               right: 20,
-              backgroundColor: isDarkMode ? "#24234C" : "#f5f5f5",
+              backgroundColor: isDarkMode ? "#21201E" : "#f5f5f5",
               borderRadius: 30,
               width: 50,
               height: 50,
@@ -313,7 +313,7 @@ export default function FindMyLkkim() {
       <View
         style={{
           height: listHeight,
-          backgroundColor: isDarkMode ? "#24234C" : "#f5f5f5",
+          backgroundColor: isDarkMode ? "#21201E" : "#f5f5f5",
           paddingTop: 20,
           paddingLeft: 15,
           shadowColor: "#000",

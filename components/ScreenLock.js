@@ -267,7 +267,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    backgroundColor: "rgba(0, 0, 0, 0.2)",
   },
   modalView: {
     backgroundColor: "#fff",
@@ -313,7 +313,7 @@ const lightStyles = StyleSheet.create({
     color: "#999",
   },
   button: {
-    backgroundColor: "#8E80F0",
+    backgroundColor: "#CFAB95",
   },
   buttonText: {
     color: "#fff",
@@ -321,7 +321,7 @@ const lightStyles = StyleSheet.create({
     fontWeight: "bold",
   },
   lostPasswordText: {
-    color: "#8E80F0",
+    color: "#CFAB95",
   },
   modalView: {
     backgroundColor: "#fff",
@@ -333,13 +333,13 @@ const lightStyles = StyleSheet.create({
     color: "#666",
   },
   closeButton: {
-    backgroundColor: "#8E80F0",
+    backgroundColor: "#CFAB95",
   },
 });
 
 const darkStyles = StyleSheet.create({
   container: {
-    backgroundColor: "#24234C",
+    backgroundColor: "#21201E",
   },
   title: {
     color: "#f5f5f5",
@@ -355,7 +355,7 @@ const darkStyles = StyleSheet.create({
     color: "#999",
   },
   button: {
-    backgroundColor: "#6C6CF4",
+    backgroundColor: "#CCB68C",
   },
   buttonText: {
     color: "#fff",
@@ -363,7 +363,7 @@ const darkStyles = StyleSheet.create({
     fontWeight: "bold",
   },
   lostPasswordText: {
-    color: "#6C6CF4",
+    color: "#CCB68C",
   },
   modalView: {
     backgroundColor: "#2A2A48",
@@ -375,7 +375,7 @@ const darkStyles = StyleSheet.create({
     color: "#ccc",
   },
   closeButton: {
-    backgroundColor: "#6C6CF4",
+    backgroundColor: "#CCB68C",
   },
 });
 
