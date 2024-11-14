@@ -41,6 +41,7 @@ export default function ({
     };
 
 
+    const changellyData = route.params.data;
     const toValue = route.params.toValue;
     const fromValue = route.params.fromValue;
     const selectedToToken = route.params.to;
@@ -274,6 +275,17 @@ export default function ({
             {
 
                 load && <ActivityIndicator />
+            }
+
+
+            <Text>这里是传入的计算好的Changelly Data：供参考使用:</Text>
+
+            {
+                Object.keys(changellyData).map((r, i) => {
+                    return <View key={i}>
+                        <Text>{r.toUpperCase()}:{changellyData[r]}</Text>
+                    </View>
+                })
             }
 
 

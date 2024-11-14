@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Modal,
   View,
@@ -14,6 +14,9 @@ import { BlurView } from "expo-blur";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { useTranslation } from "react-i18next";
 import { useNavigation, useRoute } from "@react-navigation/native";
+// import ChangellyAPI from "../transactionScreens/ChangellyAPI";
+import SignUtils, { __HTML_CONTENT } from "../transactionScreens/SignUtils";
+import { WebView } from 'react-native-webview'
 import ChangellyAPI from "../transactionScreens/ChangellyAPI";
 
 const SwapModal = ({
@@ -43,6 +46,9 @@ const SwapModal = ({
   const [selectedToToken, setSelectedToToken] = useState('');
   const [toValue, setToValue] = useState('');
   const [fromValue, setFromValue] = useState('');
+
+  //TODO 将来移除 changelly 签名专用
+  const signRef = useRef();
 
   // 确定是否禁用按钮
   const isConfirmDisabled =
@@ -86,12 +92,14 @@ const SwapModal = ({
 
 
 
-      router.navigate('Request Wallet Auth', { fromValue, from: selectedFromToken, to: selectedToToken, toValue, fromAddress: '0x198198219821982', toAddress: '0x11212121212', dapp: '', data: { 'text': "放入API请求完整数据包" } })
+      router.navigate('Request Wallet Auth', { fromValue, from: selectedFromToken, to: selectedToToken, toValue, fromAddress: '0x198198219821982', toAddress: '0x11212121212', dapp: '', data: changellyPrice })
 
       // setConfirmModalVisible(true);
     }, 500); // Adding a delay to ensure SwapModal is completely closed before showing the next modal
   };
 
+
+  const [changellyPrice, setChangellyPrice] = useState()
 
   //计算实时价格
   const calcRealPrice = async () => {
@@ -99,10 +107,58 @@ const SwapModal = ({
 
     console.log('获取实时价格')
     console.log(selectedFromToken)
-    console.warn(`CALC::FROM:${selectedFromToken}, TO:${selectedToToken}, AMOUNT:${fromValue}}`);
-    let calcPrice = await ChangellyAPI.getExchangeAmount(selectedFromToken, selectedToToken, fromValue);
-    console.warn(calcPrice);
-    console.warn('更新数据到UI');
+    console.log(`CALC::FROM:${selectedFromToken}, TO:${selectedToToken}, AMOUNT:${fromValue}}`);
+
+    if (signRef.current) {
+      //发送选择数据获取 changelly Sign
+      console.log('发送给SigUtils')
+
+      const message = JSON.stringify({
+        method: 'getExchangeAmount',
+        data: {
+          "from": selectedFromToken.toLowerCase(),
+          "to": selectedToToken.toLowerCase(),
+          "amountFrom": fromValue
+        }
+      });
+      console.log(message)
+      const jsCode = `sign(${JSON.stringify(message)});`;
+      signRef.current.injectJavaScript(jsCode);
+    }
+
+  }
+
+
+  //接收Sig回传
+  const updateChangellyData = async (sig) => {
+
+    console.log('回传：')
+    // console.log(sig.nativeEvent.data);
+    try {
+      let _params = JSON.parse(sig.nativeEvent.data);
+      if (_params.type != 'error') {
+        setChangellyPrice(null);
+        console.log('签名：' + _params.data)
+        let calcPrice = await ChangellyAPI.getExchangeAmount(selectedFromToken, selectedToToken, fromValue, _params.data);
+        console.log('获取Changelly估算数据：')
+        console.log(calcPrice);
+        console.log('//TODO 更新Changelly数据到UI');
+        if (calcPrice.data && calcPrice.data.length > 0) {
+          setChangellyPrice(calcPrice.data[0]);
+        }
+
+
+
+      } else {
+        console.warn('查询changelly 失败：');
+        console.warn(_params.data);
+      }
+
+    } catch (e) {
+      console.warn('接收Sig组件签名异常:');
+      console.warn(e);
+    }
+
 
   }
 
@@ -110,7 +166,7 @@ const SwapModal = ({
   useEffect(() => {
 
 
-    //实时刷新数据
+    //实时刷新Changelly 估算数据
     if (selectedFromToken && selectedToToken && !!fromValue) {
 
       calcRealPrice();
@@ -118,6 +174,7 @@ const SwapModal = ({
 
 
   }, [selectedFromToken, selectedToToken, fromValue])
+
 
 
 
@@ -271,8 +328,8 @@ const SwapModal = ({
                 onPress={() => {
                   // Swap values
                   const tempValue = fromValue;
-                  setFromValue(toValue);
-                  setToValue(tempValue);
+                  // setFromValue(toValue);
+                  // setToValue(0);
 
                   // Swap selected tokens
                   const tempToken = selectedFromToken;
@@ -330,7 +387,7 @@ const SwapModal = ({
                           },
                         ]}
                       >
-                        {`${currencySymbol}${displayedToValue}`}
+                        {`${currencySymbol}${changellyPrice ? changellyPrice.amountTo : displayedToValue}`}
                       </Text>
                     </View>
                     <TouchableOpacity
@@ -441,7 +498,13 @@ const SwapModal = ({
                     {t("Close")}
                   </Text>
                 </TouchableOpacity>
+
+                {/* //TODO  changelly签名工具 将来需要移除 */}
+                <SignUtils ref={signRef} onMessage={updateChangellyData} />
+
               </View>
+
+
             </View>
           </BlurView>
         </KeyboardAvoidingView>
