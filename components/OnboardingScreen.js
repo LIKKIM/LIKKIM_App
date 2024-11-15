@@ -217,11 +217,12 @@ const styles = StyleSheet.create({
   },
   dot: {
     backgroundColor: "#8B8B96",
+    height: 4,
   },
   activeDot: {
     backgroundColor: "#CCB68C",
     width: 24,
-    height: 8,
+    height: 4,
     borderRadius: 4,
     marginHorizontal: 4,
   },
