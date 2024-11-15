@@ -21,16 +21,18 @@ export default {
   ios: {
     infoPlist: {
       ITSAppUsesNonExemptEncryption: false,
-      NSBluetoothAlwaysUsageDescription: "获取蓝牙权限连接钱包设备",
-      NSBluetoothPeripheralUsageDescription: "获取蓝牙权限连接钱包设备",
-      NSLocationWhenInUseUsageDescription: "获取定位权限以进行蓝牙扫描",
+      NSBluetoothAlwaysUsageDescription:
+        "Access to Bluetooth is required to connect to the wallet device",
+      NSBluetoothPeripheralUsageDescription:
+        "Access to Bluetooth is required to connect to the wallet device",
+      NSLocationWhenInUseUsageDescription:
+        "Location access is needed for Bluetooth scanning",
       UIBackgroundModes: ["bluetooth-central", "bluetooth-peripheral"],
     },
     supportsTablet: true,
-    buildNumber: "16.1.0",
+    buildNumber: "16.1.2",
     bundleIdentifier: "RN.LKKIM",
     icon: "./assets/icon.png",
-    buildNumber: "2",
   },
   android: {
     config: {
