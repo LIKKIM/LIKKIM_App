@@ -14,10 +14,10 @@ const WalletScreenStyles = (isDarkMode) => {
   const shadowColor = isDarkMode ? "#0E0D0D" : "#0E0D0D";
   const cardBackgroundColor = isDarkMode ? "#3F3D3C" : "#E5E1E9";
   const currencyUnitColor = isDarkMode ? "#ddd" : "#666";
-  const addCryptoButtonBackgroundColor = isDarkMode ? "#1E1D3F" : "#F8F6FE";
+  const addCryptoButtonBackgroundColor = isDarkMode ? "#21201E" : "#F8F6FE";
   const borderColor = isDarkMode ? "#555" : "#ccc";
   const historyItemBorderColor = isDarkMode ? "#ccc" : "#999";
-  const inputBackgroundColor = isDarkMode ? "#1A1A37" : "#e0e0e0";
+  const inputBackgroundColor = isDarkMode ? "#21201E" : "#e0e0e0";
   const historyContainerBackgroundColor = isDarkMode
     ? "#22201F90"
     : "#FFFFFF80";
@@ -374,7 +374,7 @@ const WalletScreenStyles = (isDarkMode) => {
       alignItems: "center",
       borderRadius: 10,
       width: "100%",
-      backgroundColor: isDarkMode ? "#1E1D3F" : "#E5E1E9",
+      backgroundColor: isDarkMode ? "#21201E" : "#E5E1E9",
       marginBottom: 20,
     },
 

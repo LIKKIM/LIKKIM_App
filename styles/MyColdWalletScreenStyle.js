@@ -9,7 +9,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
   const borderColor = isDarkMode ? "#404040" : "#ccc";
   const BluetoothBtnColor = isDarkMode ? "#CCB68C" : "#CFAB95";
   const secondTextColor = isDarkMode ? "#ddd" : "#676776";
-  const inputBackgroundColor = isDarkMode ? "#1A1A37" : "#e0e0e0";
+  const inputBackgroundColor = isDarkMode ? "#21201E" : "#e0e0e0";
   const focusedBorderColor = isDarkMode ? "#CCB68C" : "#007AFF";
 
   return StyleSheet.create({
@@ -381,7 +381,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       alignItems: "center",
       borderRadius: 10,
       width: "100%",
-      backgroundColor: isDarkMode ? "#1E1D3F" : "#E5E1E9", // Dark mode and light mode background color
+      backgroundColor: isDarkMode ? "#21201E" : "#E5E1E9", // Dark mode and light mode background color
       marginBottom: 20,
     },
     searchIcon: {

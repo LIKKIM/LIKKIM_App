@@ -311,7 +311,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   input: {
-    backgroundColor: "#1A1A37",
+    backgroundColor: "#21201E",
     padding: 10,
     marginTop: 30,
     marginBottom: 60,
