@@ -944,7 +944,7 @@ function TransactionsScreen() {
         return;
       }
 
-      // 将 amount 乘以 1000000
+      // 将 amount 乘以 1000000 这里要具体问题具体分析
       const adjustedAmount = BigInt(Math.round(parseFloat(amount) * 1000000));
       console.log(`Adjusted Amount (in smallest unit): ${adjustedAmount}`);
 
