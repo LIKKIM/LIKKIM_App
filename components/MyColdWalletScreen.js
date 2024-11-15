@@ -87,6 +87,7 @@ function MyColdWalletScreen() {
   const [currentPassword, setCurrentPassword] = useState("");
   const [isCurrentPasswordHidden, setIsCurrentPasswordHidden] = useState(true);
   const restoreIdentifier = Constants.installationId;
+  const toggleColor = isDarkMode ? "#CCB68C" : "#CFAB95";
   const iconColor = isDarkMode ? "#ffffff" : "#676776";
   const darkColors = ["#21201E", "#0E0D0D"];
   const lightColors = ["#FFFFFF", "#EDEBEF"];
@@ -786,7 +787,7 @@ function MyColdWalletScreen() {
         },
         toggle: (
           <Switch
-            trackColor={{ false: "#767577", true: "#81b0ff" }}
+            trackColor={{ false: "#767577", true: toggleColor }}
             thumbColor={isDarkMode ? "#fff" : "#f4f3f4"}
             ios_backgroundColor="#3e3e3e"
             onValueChange={() => {
@@ -814,7 +815,7 @@ function MyColdWalletScreen() {
         },
         toggle: (
           <Switch
-            trackColor={{ false: "#767577", true: "#81b0ff" }}
+            trackColor={{ false: "#767577", true: toggleColor }}
             thumbColor={isScreenLockEnabled ? "#fff" : "#f4f3f4"}
             ios_backgroundColor="#3e3e3e"
             onValueChange={() => {
@@ -844,7 +845,7 @@ function MyColdWalletScreen() {
               },
               toggle: (
                 <Switch
-                  trackColor={{ false: "#767577", true: "#81b0ff" }}
+                  trackColor={{ false: "#767577", true: toggleColor }}
                   thumbColor={isFaceIDEnabled ? "#fff" : "#f4f3f4"}
                   ios_backgroundColor="#3e3e3e"
                   onValueChange={async () => {
