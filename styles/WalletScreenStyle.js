@@ -43,7 +43,7 @@ const WalletScreenStyles = (isDarkMode) => {
     },
     cardInfoContainer: {
       flexDirection: "row",
-      width: 200,
+      width: 180,
       flex: 1,
       flexWrap: "wrap",
       alignItems: "center",
@@ -731,7 +731,7 @@ const WalletScreenStyles = (isDarkMode) => {
     },
 
     disabledText: {
-      color: "#aaa", // 确认按钮的文字颜色
+      color: "#ccc", // 确认按钮的文字颜色
       fontSize: 16,
     },
     QRImg: {
@@ -843,6 +843,8 @@ const WalletScreenStyles = (isDarkMode) => {
     },
 
     addCryptoText: {
+      marginTop: 6,
+      marginRight: 4,
       color: secondTextColor,
       fontWeight: "bold",
       textAlign: "center",
