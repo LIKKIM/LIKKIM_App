@@ -1819,7 +1819,17 @@ function WalletScreen({ route, navigation }) {
                         )
                       )}
                     </View>
-
+                    <Image
+                      source={require("../assets/CardBg/Logo.png")}
+                      style={{
+                        left: 50,
+                        top: -60,
+                        opacity: 0.12,
+                        width: 280,
+                        height: 280,
+                        transform: [{ rotate: "-10deg" }],
+                      }}
+                    />
                     <Text
                       style={[
                         WalletScreenStyle.cardShortName,
