@@ -533,7 +533,7 @@ const WalletScreenStyles = (isDarkMode) => {
     card: {
       width: 326,
       height: 206,
-      borderRadius: 20,
+      borderRadius: 18,
       overflow: "hidden",
       justifyContent: "center",
       alignItems: "center",
