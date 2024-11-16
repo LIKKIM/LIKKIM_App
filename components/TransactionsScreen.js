@@ -36,8 +36,8 @@ import SwapModal from "./modal/SwapModal";
 import ReceiveAddressModal from "./modal/ReceiveAddressModal";
 import PinModal from "./modal/PinModal";
 import { BleManager, BleErrorCode } from "react-native-ble-plx";
-const serviceUUID = "0000FFE0-0000-1000-8000-00805F9B34FB";
-const writeCharacteristicUUID = "0000FFE2-0000-1000-8000-00805F9B34FB";
+const serviceUUID = "6E400001-B5A3-F393-E0A9-E50E24DCCA9E";
+const writeCharacteristicUUID = "6E400002-B5A3-F393-E0A9-E50E24DCCA9E";
 
 function TransactionsScreen() {
   const [receivedVerificationCode, setReceivedVerificationCode] = useState("");
@@ -433,7 +433,7 @@ function TransactionsScreen() {
   };
 
   const monitorVerificationCode = (device) => {
-    const notifyCharacteristicUUID = "0000FFE1-0000-1000-8000-00805F9B34FB";
+    const notifyCharacteristicUUID = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E";
 
     monitorSubscription = device.monitorCharacteristicForService(
       serviceUUID,
@@ -479,7 +479,7 @@ function TransactionsScreen() {
 
   // 监听交易反馈函数
   const monitorTransactionResponse = (device) => {
-    const notifyCharacteristicUUID = "0000FFE1-0000-1000-8000-00805F9B34FB";
+    const notifyCharacteristicUUID = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E";
 
     // 用于存储拼接的完整数据
     let dataBuffer = "";
@@ -847,7 +847,7 @@ function TransactionsScreen() {
       console.log("地址显示命令已发送");
 
       // 监听设备的响应
-      const notifyCharacteristicUUID = "0000FFE1-0000-1000-8000-00805F9B34FB";
+      const notifyCharacteristicUUID = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E";
       const addressMonitorSubscription = device.monitorCharacteristicForService(
         serviceUUID,
         notifyCharacteristicUUID,

@@ -49,8 +49,8 @@ if (Platform.OS === "android") {
   PermissionsAndroid = require("react-native").PermissionsAndroid;
 }
 
-const serviceUUID = "0000FFE0-0000-1000-8000-00805F9B34FB";
-const writeCharacteristicUUID = "0000FFE2-0000-1000-8000-00805F9B34FB";
+const serviceUUID = "6E400001-B5A3-F393-E0A9-E50E24DCCA9E";
+const writeCharacteristicUUID = "6E400002-B5A3-F393-E0A9-E50E24DCCA9E";
 
 function MyColdWalletScreen() {
   const { t } = useTranslation();
@@ -547,7 +547,7 @@ function MyColdWalletScreen() {
   let monitorSubscription;
 
   const monitorVerificationCode = (device) => {
-    const notifyCharacteristicUUID = "0000FFE1-0000-1000-8000-00805F9B34FB";
+    const notifyCharacteristicUUID = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E";
 
     monitorSubscription = device.monitorCharacteristicForService(
       serviceUUID,

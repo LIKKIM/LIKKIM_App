@@ -44,8 +44,8 @@ import TabModal from "./walletScreen/TabModal";
 import ModalsContainer from "./walletScreen/ModalsContainer";
 import WalletList from "./CardListCom";
 
-const serviceUUID = "0000FFE0-0000-1000-8000-00805F9B34FB";
-const writeCharacteristicUUID = "0000FFE2-0000-1000-8000-00805F9B34FB";
+const serviceUUID = "6E400001-B5A3-F393-E0A9-E50E24DCCA9E";
+const writeCharacteristicUUID = "6E400002-B5A3-F393-E0A9-E50E24DCCA9E";
 
 function WalletScreen({ route, navigation }) {
   // 使用状态
@@ -130,8 +130,6 @@ function WalletScreen({ route, navigation }) {
   const [addressVerificationMessage, setAddressVerificationMessage] = useState(
     t("Verifying Address on LIKKIM...")
   );
-
-
 
   const [refreshing, setRefreshing] = useState(false);
   const chainCategories = initialAdditionalCryptos.map((crypto) => ({
@@ -560,7 +558,7 @@ function WalletScreen({ route, navigation }) {
       console.log("显示地址命令已发送");
 
       // 开始监听 BLE 设备的响应
-      const notifyCharacteristicUUID = "0000FFE1-0000-1000-8000-00805F9B34FB";
+      const notifyCharacteristicUUID = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E";
       const addressMonitorSubscription = device.monitorCharacteristicForService(
         serviceUUID,
         notifyCharacteristicUUID,
@@ -898,7 +896,7 @@ function WalletScreen({ route, navigation }) {
   let monitorSubscription;
 
   const monitorVerificationCode = (device) => {
-    const notifyCharacteristicUUID = "0000FFE1-0000-1000-8000-00805F9B34FB";
+    const notifyCharacteristicUUID = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E";
 
     monitorSubscription = device.monitorCharacteristicForService(
       serviceUUID,
@@ -943,7 +941,7 @@ function WalletScreen({ route, navigation }) {
   };
   // 监听钱包生成结果
   const monitorWalletCreationResult = (device) => {
-    const notifyCharacteristicUUID = "0000FFE1-0000-1000-8000-00805F9B34FB";
+    const notifyCharacteristicUUID = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E";
 
     monitorSubscription = device.monitorCharacteristicForService(
       serviceUUID,
@@ -989,7 +987,7 @@ function WalletScreen({ route, navigation }) {
 
   // 监听地址监听钱包地址的函数
   const monitorWalletAddress = (device) => {
-    const notifyCharacteristicUUID = "0000FFE1-0000-1000-8000-00805F9B34FB";
+    const notifyCharacteristicUUID = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E";
 
     monitorSubscription = device.monitorCharacteristicForService(
       serviceUUID,
@@ -1311,15 +1309,11 @@ function WalletScreen({ route, navigation }) {
   }, [cryptoCards.length]);
 
   useEffect(() => {
-
     navigation.setParams({
       isModalVisible: modalVisible,
       showAddModal: addCryptoVisible,
     });
   }, [modalVisible, addCryptoVisible]);
-
-
-
 
   useEffect(() => {
     Animated.timing(fadeAnim, {
@@ -1452,7 +1446,6 @@ function WalletScreen({ route, navigation }) {
   };
 
   const handleDeleteCard = () => {
-
     // console.warn(likkim_select_card + ':likkim')
     const updatedCards = cryptoCards.filter(
       (card) => card.name !== selectedCardName
@@ -1501,9 +1494,6 @@ function WalletScreen({ route, navigation }) {
     });
   };
 
-
-
-
   const closeModal = () => {
     scrollViewRef?.current.setNativeProps({ scrollEnabled: true });
 
@@ -1539,8 +1529,7 @@ function WalletScreen({ route, navigation }) {
     const crypto = cryptoCards.find((card) => card.name === cryptoName);
     setSelectedAddress(crypto?.address || "Unknown");
     setSelectedCardName(cryptoName);
-    console.warn('设置：likkim_set_select_card' + cryptoName)
-
+    console.warn("设置：likkim_set_select_card" + cryptoName);
 
     setSelectedCrypto(crypto);
     setActiveTab("Prices");
@@ -1734,7 +1723,6 @@ function WalletScreen({ route, navigation }) {
         {/* TODO fix */}
         {/* {<WalletList cards={cryptoCards} priceChanges={priceChanges} WalletScreenStyle={WalletScreenStyle} handleQRCodePress={handleQRCodePress} />} */}
 
-
         {/* <Text>{"LIKKIM:" + likkim_select_card}</Text> */}
 
         {cryptoCards.map((card, index) => {
@@ -1750,8 +1738,8 @@ function WalletScreen({ route, navigation }) {
                 ? "#FF5252"
                 : "#F23645"
               : isBlackText
-                ? "#22AA94"
-                : "#0C9981";
+              ? "#22AA94"
+              : "#0C9981";
 
           return (
             <TouchableHighlight
@@ -1892,13 +1880,14 @@ function WalletScreen({ route, navigation }) {
                                 isBlackText && { color: "#121518" },
                               ]}
                             >
-                              {`${i === 0
-                                ? card.balance
-                                : getConvertedBalance(
-                                  card.balance,
-                                  card.shortName
-                                )
-                                } ${i === 0 ? card.shortName : currencyUnit}`}
+                              {`${
+                                i === 0
+                                  ? card.balance
+                                  : getConvertedBalance(
+                                      card.balance,
+                                      card.shortName
+                                    )
+                              } ${i === 0 ? card.shortName : currencyUnit}`}
                             </Text>
                           )
                         )}
