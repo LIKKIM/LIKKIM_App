@@ -1529,7 +1529,7 @@ function WalletScreen({ route, navigation }) {
     const crypto = cryptoCards.find((card) => card.name === cryptoName);
     setSelectedAddress(crypto?.address || "Unknown");
     setSelectedCardName(cryptoName);
-    console.warn("设置：likkim_set_select_card" + cryptoName);
+   // console.warn("设置：likkim_set_select_card" + cryptoName);
 
     setSelectedCrypto(crypto);
     setActiveTab("Prices");
@@ -1726,9 +1726,7 @@ function WalletScreen({ route, navigation }) {
         {/* <Text>{"LIKKIM:" + likkim_select_card}</Text> */}
 
         {cryptoCards.map((card, index) => {
-          const isBlackText = ["BTC", "USDT", "BCH", "DOT", "DOGE"].includes(
-            card.shortName
-          );
+          const isBlackText = [""].includes(card.shortName);
           const priceChange = priceChanges[card.shortName]?.priceChange || "0";
           const percentageChange =
             priceChanges[card.shortName]?.percentageChange || "0";
