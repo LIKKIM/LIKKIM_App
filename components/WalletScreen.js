@@ -1529,7 +1529,7 @@ function WalletScreen({ route, navigation }) {
     const crypto = cryptoCards.find((card) => card.name === cryptoName);
     setSelectedAddress(crypto?.address || "Unknown");
     setSelectedCardName(cryptoName);
-   // console.warn("设置：likkim_set_select_card" + cryptoName);
+    // console.warn("设置：likkim_set_select_card" + cryptoName);
 
     setSelectedCrypto(crypto);
     setActiveTab("Prices");
@@ -1782,49 +1782,53 @@ function WalletScreen({ route, navigation }) {
                       </View>
                     )
                   )}
-
-                  <View style={WalletScreenStyle.cardInfoContainer}>
-                    {["cardName", "chainText"].map((textStyle, i) =>
-                      i === 0 ? (
-                        <Text
-                          key={i}
-                          style={[
-                            WalletScreenStyle[textStyle],
-                            { color: isBlackText ? "#333" : "#eee" },
-                          ]}
-                        >
-                          {card.name}
-                        </Text>
-                      ) : (
-                        <View
-                          key={i}
-                          style={[
-                            WalletScreenStyle.chainContainer, // 新增按钮样式
-                            // 根据主题颜色改变按钮背景色
-                          ]}
-                        >
+                  <View style={{ position: "absolute", top: 25, left: 65 }}>
+                    <View style={WalletScreenStyle.cardInfoContainer}>
+                      {["cardName", "chainText"].map((textStyle, i) =>
+                        i === 0 ? (
                           <Text
+                            key={i}
                             style={[
-                              WalletScreenStyle.chainCardText,
-                              { color: isBlackText ? "#333" : "#eee" },
+                              WalletScreenStyle[textStyle], // 现有样式
+                              {
+                                color: isBlackText ? "#333" : "#eee",
+                                marginRight: 4,
+                                marginBottom: 4,
+                              }, // 添加新的 marginRight 属性
                             ]}
                           >
-                            {card.chain}
+                            {card.name}
                           </Text>
-                        </View>
-                      )
-                    )}
+                        ) : (
+                          <View
+                            key={i}
+                            style={[
+                              WalletScreenStyle.chainContainer, // 新增按钮样式
+                              // 根据主题颜色改变按钮背景色
+                            ]}
+                          >
+                            <Text
+                              style={[
+                                WalletScreenStyle.chainCardText,
+                                { color: isBlackText ? "#333" : "#eee" },
+                              ]}
+                            >
+                              {card.chain}
+                            </Text>
+                          </View>
+                        )
+                      )}
+                    </View>
+
+                    <Text
+                      style={[
+                        WalletScreenStyle.cardShortName,
+                        isBlackText && { color: "#121518" },
+                      ]}
+                    >
+                      {card.shortName}
+                    </Text>
                   </View>
-
-                  <Text
-                    style={[
-                      WalletScreenStyle.cardShortName,
-                      isBlackText && { color: "#121518" },
-                    ]}
-                  >
-                    {card.shortName}
-                  </Text>
-
                   {!modalVisible ? (
                     <>
                       <Text

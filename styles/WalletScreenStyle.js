@@ -42,11 +42,12 @@ const WalletScreenStyles = (isDarkMode) => {
       position: "relative",
     },
     cardInfoContainer: {
-      position: "absolute",
-      top: 25,
-      left: 65,
       flexDirection: "row",
+      width: 200,
+      flex: 1,
+      flexWrap: "wrap",
       alignItems: "center",
+      marginBottom: 8,
     },
 
     cardIconContainer: {
@@ -127,7 +128,7 @@ const WalletScreenStyles = (isDarkMode) => {
       paddingHorizontal: 6,
       paddingVertical: 2,
       borderRadius: 6,
-      marginLeft: 4,
+      marginTop: 3,
     },
 
     chainText: {
@@ -488,9 +489,6 @@ const WalletScreenStyles = (isDarkMode) => {
     },
 
     cardShortName: {
-      position: "absolute",
-      top: 56,
-      left: 65,
       color: secondCardTextColor,
       fontSize: 14,
     },
