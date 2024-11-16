@@ -108,7 +108,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
     }
   };
 
-  const networks = [
+  /*   const networks = [
     "Akash",
     "Algorand",
     "Aptos",
@@ -165,6 +165,29 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
     "Secret Network",
     "Solana",
     "SUI",
+    "Tron",
+    "zkSync Era Mainnet",
+  ].sort(); */
+
+  const networks = [
+    "Arbitrum",
+    "Aurora",
+    "Avalanche",
+    "Bitcoin",
+    "Bitcoin Cash",
+    "BNB Smart Chain",
+    "Celo",
+    "Ethereum",
+    "Ethereum Classic",
+    "Fantom",
+    "Huobi ECO Chain",
+    "IoTeX Network Mainnet",
+    "Litecoin",
+    "OKX Chain",
+    "Optimism",
+    "Polygon",
+    "Ripple",
+    "Solana",
     "Tron",
     "zkSync Era Mainnet",
   ].sort();
