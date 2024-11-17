@@ -1,4 +1,3 @@
-//FindMyLkkim.js
 import React, {
   useState,
   useEffect,
@@ -16,6 +15,7 @@ import {
   Pressable,
   Clipboard,
   ScrollView,
+  ActivityIndicator,
   Dimensions,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -23,7 +23,7 @@ import * as Location from "expo-location";
 import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
 import { useNavigation } from "@react-navigation/native";
 import { DarkModeContext } from "./CryptoContext";
-import { Swipeable } from "react-native-gesture-handler"; // 引入Swipeable组件
+import { Swipeable } from "react-native-gesture-handler";
 
 const GOOGLE_MAPS_API_KEY = "AIzaSyAaLPaHuHj_vT7cHsA99HZeuAH_Z1p3Xbg";
 
@@ -52,6 +52,11 @@ const styles = StyleSheet.create({
   deleteText: {
     color: "white",
     fontWeight: "600",
+  },
+  loadingButtonIcon: {
+    width: 26,
+    height: 26,
+    opacity: 0.5,
   },
 });
 
@@ -107,6 +112,7 @@ export default function FindMyLkkim() {
   const [devicesPositions, setDevicesPositions] = useState([]);
   const [deviceAddresses, setDeviceAddresses] = useState({});
   const [currentPosition, setCurrentPosition] = useState(null);
+  const [isLoadingLocation, setIsLoadingLocation] = useState(false);
   const mapRef = useRef(null);
   const screenHeight = Dimensions.get("window").height;
   const listHeight = screenHeight * 0.3;
@@ -126,9 +132,11 @@ export default function FindMyLkkim() {
   }, [isDarkMode, navigation]);
 
   const requestLocationPermission = async () => {
+    setIsLoadingLocation(true);
     const { status } = await Location.requestForegroundPermissionsAsync();
     if (status !== "granted") {
       alert("权限被拒绝，无法获取设备位置");
+      setIsLoadingLocation(false);
       return;
     }
     const location = await Location.getCurrentPositionAsync({});
@@ -136,6 +144,7 @@ export default function FindMyLkkim() {
       lat: location.coords.latitude,
       lng: location.coords.longitude,
     });
+    setIsLoadingLocation(false);
   };
 
   const handleMarkerPress = (device) => {
@@ -298,14 +307,21 @@ export default function FindMyLkkim() {
             }}
             onPress={moveToCurrentLocation}
           >
-            <Image
-              source={
-                isDarkMode
-                  ? require("../assets/icon/location.png")
-                  : require("../assets/icon/locationBlack.png")
-              }
-              style={styles.buttonIcon}
-            />
+            {isLoadingLocation ? (
+              <ActivityIndicator
+                size="small"
+                color={isDarkMode ? "#FFF" : "#000"}
+              />
+            ) : (
+              <Image
+                source={
+                  isDarkMode
+                    ? require("../assets/icon/location.png")
+                    : require("../assets/icon/locationBlack.png")
+                }
+                style={styles.buttonIcon}
+              />
+            )}
           </Pressable>
         )}
       </View>
@@ -333,8 +349,6 @@ export default function FindMyLkkim() {
         >
           Devices
         </Text>
-
-        {/* 如果设备列表为空，显示提示信息 */}
         {devicesPositions.length === 0 ? (
           <View
             style={{
@@ -388,10 +402,7 @@ export default function FindMyLkkim() {
                         style={{ width: 22, height: 22 }}
                       />
                     </View>
-
-                    {/* 设备地址和时间部分 */}
                     <View style={{ flex: 1 }}>
-                      {/* 限制地址的显示行数，超出部分使用省略号 */}
                       <Text
                         style={{
                           fontSize: 13,
@@ -403,7 +414,6 @@ export default function FindMyLkkim() {
                       >
                         {deviceAddresses[device.id] || "Fetching address..."}
                       </Text>
-
                       <Text
                         style={{
                           fontSize: 12,
