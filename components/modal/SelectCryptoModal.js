@@ -45,7 +45,11 @@ const SelectCryptoModal = ({
             >
               <Image
                 source={require("../../assets/gif/Empty.gif")}
-                style={{ width: 200, height: 200, marginBottom: 40 }}
+                style={{
+                  width: 200,
+                  height: 200,
+                  marginBottom: 40,
+                }}
               />
             </View>
           ) : (
@@ -63,7 +67,13 @@ const SelectCryptoModal = ({
                     {crypto.icon && (
                       <Image
                         source={crypto.icon}
-                        style={{ width: 24, height: 24, marginRight: 8 }}
+                        style={{
+                          width: 24,
+                          height: 24,
+                          marginRight: 8,
+                          backgroundColor: "rgba(255, 255, 255, 0.2)",
+                          borderRadius: 12,
+                        }}
                       />
                     )}
                     <Text style={TransactionsScreenStyle.optionButtonText}>
