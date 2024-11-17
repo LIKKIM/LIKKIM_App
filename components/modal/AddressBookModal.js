@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import {
   Modal,
   View,
+  Image,
   Text,
   TouchableOpacity,
   FlatList,
@@ -26,6 +27,19 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
   const [networkDropdownVisible, setNetworkDropdownVisible] = useState(false);
   const [dropdownVisible, setDropdownVisible] = useState(null); // 控制哪个地址显示Dropdown
   const [savedAddresses, setSavedAddresses] = useState([]); // 保存地址的状态
+
+  useEffect(() => {
+    if (visible) {
+      // 每次模态窗口打开时重置输入和选择
+      setSearchAddress("");
+      setIsAddingAddress(false);
+      setNewNetwork("");
+      setNewName("");
+      setNewAddress("");
+      setDropdownVisible(null);
+      setNetworkDropdownVisible(false);
+    }
+  }, [visible]);
 
   useEffect(() => {
     const loadAddresses = async () => {
@@ -168,6 +182,29 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
     "Tron",
     "zkSync Era Mainnet",
   ].sort(); */
+
+  const networkImages = {
+    Arbitrum: require("../../assets/icon/ARBIcon.png"),
+    Aurora: require("../../assets/icon/AURORAIcon.png"),
+    Avalanche: require("../../assets/icon/AVAXIcon.png"),
+    Bitcoin: require("../../assets/icon/BTCIcon.png"),
+    "Bitcoin Cash": require("../../assets/icon/BCHIcon.png"),
+    "BNB Smart Chain": require("../../assets/icon/BNBIcon.png"),
+    Celo: require("../../assets/icon/CELOIcon.png"),
+    Ethereum: require("../../assets/icon/ETHIcon.png"),
+    "Ethereum Classic": require("../../assets/icon/ETCIcon.png"),
+    Fantom: require("../../assets/icon/FTMIcon.png"),
+    "Huobi ECO Chain": require("../../assets/icon/HTIcon.png"),
+    "IoTeX Network Mainnet": require("../../assets/icon/IOTXIcon.png"),
+    Litecoin: require("../../assets/icon/LTCIcon.png"),
+    "OKX Chain": require("../../assets/icon/OKBIcon.png"),
+    Optimism: require("../../assets/icon/OPIcon.png"),
+    Polygon: require("../../assets/icon/PolygonIcon.png"),
+    Ripple: require("../../assets/icon/XRPIcon.png"),
+    Solana: require("../../assets/icon/SOLIcon.png"),
+    Tron: require("../../assets/icon/TRXIcon.png"),
+    "zkSync Era Mainnet": require("../../assets/icon/ZKSIcon.png"),
+  };
 
   const networks = [
     "Arbitrum",
@@ -366,6 +403,17 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                         setNetworkDropdownVisible(!networkDropdownVisible)
                       }
                     >
+                      {/* 添加网络图标显示 */}
+                      {newNetwork && (
+                        <Image
+                          source={networkImages[newNetwork]}
+                          style={{
+                            width: 24,
+                            height: 24,
+                            marginRight: 10,
+                          }}
+                        />
+                      )}
                       <Text
                         style={{
                           color: newNetwork ? styles.Text.color : "#ccc",
@@ -393,12 +441,25 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                               }}
                               style={{
                                 padding: 10,
+                                flexDirection: "row", // 添加方向为行，使图片和文本水平排列
+                                alignItems: "center", // 垂直居中对齐
                                 backgroundColor:
                                   network === newNetwork
                                     ? styles.submitButton.backgroundColor
                                     : styles.passwordInput.backgroundColor,
                               }}
                             >
+                              <Image
+                                source={networkImages[network]}
+                                style={{
+                                  width: 24,
+                                  height: 24,
+                                  marginRight: 8,
+                                  backgroundColor: "rgba(255, 255, 255, 0.2)",
+                                  borderRadius: 12,
+                                }}
+                              />
+
                               <Text style={{ color: styles.Text.color }}>
                                 {network}
                               </Text>
