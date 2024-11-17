@@ -228,6 +228,18 @@ function MyColdWalletScreen() {
     setIsConfirmPasswordHidden(true); // 重置隐藏密码图标状态
     setNewPasswordModalVisible(true); // 打开模态框
   };
+
+  useEffect(() => {
+    const loadLanguageSetting = async () => {
+      const storedLanguageCode = await AsyncStorage.getItem("language");
+      if (storedLanguageCode) {
+        setSelectedLanguage(storedLanguageCode);
+      }
+    };
+
+    loadLanguageSetting();
+  }, []);
+
   // 持久化已连接设备
   useEffect(() => {
     const loadVerifiedDevices = async () => {
