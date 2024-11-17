@@ -1446,6 +1446,7 @@ function WalletScreen({ route, navigation }) {
   };
 
   const handleDeleteCard = () => {
+    scrollViewRef?.current.setNativeProps({ scrollEnabled: true });
     // console.warn(likkim_select_card + ':likkim')
     const updatedCards = cryptoCards.filter(
       (card) => card.name !== selectedCardName
@@ -1671,7 +1672,7 @@ function WalletScreen({ route, navigation }) {
         ref={scrollViewRef}
         contentContainerStyle={[
           WalletScreenStyle.scrollViewContent,
-          modalVisible && { overflow: "hidden", height: "100%" },
+          modalVisible && { overflow: "hidden" },
           cryptoCards.length !== 0 && !modalVisible && { paddingBottom: 130 },
         ]}
         style={[
