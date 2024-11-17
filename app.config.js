@@ -29,7 +29,7 @@ export default {
         "Location access is needed for Bluetooth scanning",
       UIBackgroundModes: ["bluetooth-central", "bluetooth-peripheral"],
     },
-    supportsTablet: true,
+    supportsTablet: false,
     buildNumber: "16.1.3",
     bundleIdentifier: "RN.LKKIM",
     icon: "./assets/icon.png",
