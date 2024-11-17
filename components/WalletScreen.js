@@ -1674,10 +1674,7 @@ function WalletScreen({ route, navigation }) {
           modalVisible && { overflow: "hidden", height: "100%" },
           cryptoCards.length !== 0 && !modalVisible && { paddingBottom: 130 },
         ]}
-        style={[
-          WalletScreenStyle.scrollView,
-          modalVisible && { overflow: "hidden" },
-        ]}
+        style={[WalletScreenStyle.scrollView, { overflow: "visible" }]}
         onScroll={(event) => {
           if (!modalVisible) {
             scrollYOffset.current = event.nativeEvent.contentOffset.y;
