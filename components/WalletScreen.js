@@ -1825,7 +1825,7 @@ function WalletScreen({ route, navigation }) {
                       style={{
                         left: 50,
                         top: -60,
-                        opacity: 0.12,
+                        opacity: 0.2,
                         width: 280,
                         height: 280,
                         transform: [{ rotate: "-10deg" }],

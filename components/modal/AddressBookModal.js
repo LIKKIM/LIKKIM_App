@@ -403,24 +403,32 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                         setNetworkDropdownVisible(!networkDropdownVisible)
                       }
                     >
-                      {/* 添加网络图标显示 */}
-                      {newNetwork && (
-                        <Image
-                          source={networkImages[newNetwork]}
-                          style={{
-                            width: 24,
-                            height: 24,
-                            marginRight: 10,
-                          }}
-                        />
-                      )}
-                      <Text
+                      <View
                         style={{
-                          color: newNetwork ? styles.Text.color : "#ccc",
+                          flexDirection: "row",
+                          alignItems: "center",
                         }}
                       >
-                        {newNetwork || "Select Network"}
-                      </Text>
+                        {/* 添加网络图标显示 */}
+                        {newNetwork && (
+                          <Image
+                            source={networkImages[newNetwork]}
+                            style={{
+                              width: 24,
+                              height: 24,
+                              marginRight: 10,
+                            }}
+                          />
+                        )}
+                        <Text
+                          style={{
+                            color: newNetwork ? styles.Text.color : "#ccc",
+                          }}
+                        >
+                          {newNetwork || "Select Network"}
+                        </Text>
+                      </View>
+
                       <Icon
                         name={
                           networkDropdownVisible ? "expand-less" : "expand-more"
