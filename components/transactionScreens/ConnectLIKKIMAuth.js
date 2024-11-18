@@ -28,7 +28,7 @@ export default function ({ route, navigation }) {
   // 根据暗黑模式状态动态设置界面风格
   const backgroundColor = isDarkMode ? "#333" : "#fff"; // 暗色或亮色背景
   const textColor = isDarkMode ? "#fff" : "#000"; // 文本颜色
-  const buttonBackgroundColor = isDarkMode ? "#666" : "#000"; // 按钮背景颜色
+  const buttonMain = isDarkMode ? "#CCB68C" : "#CFAB95";
   // console.log(route.params)
 
   // Helper function to get the token details including the icon and name
@@ -97,7 +97,7 @@ export default function ({ route, navigation }) {
       style={{
         flex: 1,
         padding: 10,
-        backgroundColor: isDarkMode ? "#333" : "#fff",
+        backgroundColor: isDarkMode ? "#21201E" : "#fff",
       }}
     >
       {/* Transaction Confirmation Modal */}
@@ -174,6 +174,7 @@ export default function ({ route, navigation }) {
             style={{
               ...TransactionsScreenStyle.transactionText,
               color: isDarkMode ? "#ccc" : "#333",
+              marginBottom: 10,
             }}
           >
             {xrpAddress}
@@ -184,6 +185,7 @@ export default function ({ route, navigation }) {
             style={{
               ...TransactionsScreenStyle.transactionText,
               color: isDarkMode ? "#ccc" : "#333",
+              marginBottom: 10,
             }}
           >
             <Text style={{ fontWeight: "bold" }}>{t("Sending Address")}:</Text>
@@ -192,6 +194,7 @@ export default function ({ route, navigation }) {
             style={{
               ...TransactionsScreenStyle.transactionText,
               color: isDarkMode ? "#ccc" : "#333",
+              marginBottom: 10,
             }}
           >
             {fromAddress}
@@ -202,6 +205,7 @@ export default function ({ route, navigation }) {
             style={{
               ...TransactionsScreenStyle.transactionText,
               color: isDarkMode ? "#ccc" : "#333",
+              marginBottom: 10,
             }}
           >
             <Text style={{ fontWeight: "bold" }}>
@@ -212,6 +216,7 @@ export default function ({ route, navigation }) {
             style={{
               ...TransactionsScreenStyle.transactionText,
               color: isDarkMode ? "#ccc" : "#333",
+              marginBottom: 10,
             }}
           >
             {toAddress}
@@ -222,6 +227,7 @@ export default function ({ route, navigation }) {
             style={{
               ...TransactionsScreenStyle.transactionText,
               color: isDarkMode ? "#ccc" : "#333",
+              marginBottom: 10,
             }}
           >
             <Text style={{ fontWeight: "bold" }}>{t("Network")}:</Text>
@@ -230,6 +236,7 @@ export default function ({ route, navigation }) {
             style={{
               ...TransactionsScreenStyle.transactionText,
               color: isDarkMode ? "#ccc" : "#333",
+              marginBottom: 10,
             }}
           >
             {` ${fromCryptoDetails?.chain}`}
@@ -240,6 +247,7 @@ export default function ({ route, navigation }) {
             style={{
               ...TransactionsScreenStyle.transactionText,
               color: isDarkMode ? "#ccc" : "#333",
+              marginBottom: 10,
             }}
           >
             <Text style={{ fontWeight: "bold" }}>{t("dApp")}:</Text>
@@ -251,6 +259,7 @@ export default function ({ route, navigation }) {
             style={{
               ...TransactionsScreenStyle.transactionText,
               color: isDarkMode ? "#ccc" : "#333",
+              marginBottom: 10,
             }}
           >
             <Text style={{ fontWeight: "bold" }}>
@@ -265,17 +274,22 @@ export default function ({ route, navigation }) {
             marginTop: 20,
             width: "100%",
             alignItems: "center",
-            flexDirection: "row",
+            flexDirection: "col",
           }}
         >
           {/* 确认交易按钮 */}
           <TouchableOpacity
             style={{
-              width: "48%",
-              margin: "1%",
-              backgroundColor: "#000",
+              width: 326,
+              backgroundColor: buttonMain,
               padding: 12,
               borderRadius: 8,
+              padding: 10,
+              justifyContent: "center",
+              borderRadius: 30,
+              height: 60,
+              alignItems: "center",
+              marginBottom: 16,
             }}
             onPress={async () => {
               console.warn("检查设备，链接后发送至钱包，等待结果。");
@@ -321,7 +335,7 @@ export default function ({ route, navigation }) {
             }}
           >
             <Text
-              style={{ color: "#fff", textAlign: "center", fontWeight: 600 }}
+              style={{ color: textColor, textAlign: "center", fontWeight: 600 }}
             >
               {t("Confirm")}
             </Text>
@@ -330,16 +344,21 @@ export default function ({ route, navigation }) {
           {/* 取消按钮 */}
           <TouchableOpacity
             style={{
-              width: "48%",
-              margin: "1%",
-              backgroundColor: "gray",
+              width: 326,
+              borderWidth: 2,
+              borderColor: buttonMain,
               padding: 12,
               borderRadius: 8,
+              padding: 10,
+              justifyContent: "center",
+              borderRadius: 30,
+              height: 60,
+              alignItems: "center",
             }}
             onPress={() => navigation.goBack()}
           >
             <Text
-              style={{ color: "#000", fontWeight: 600, textAlign: "center" }}
+              style={{ color: textColor, fontWeight: 600, textAlign: "center" }}
             >
               {t("Cancel")}
             </Text>
