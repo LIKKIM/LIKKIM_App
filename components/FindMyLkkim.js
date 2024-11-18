@@ -135,7 +135,7 @@ export default function FindMyLkkim() {
     setIsLoadingLocation(true);
     const { status } = await Location.requestForegroundPermissionsAsync();
     if (status !== "granted") {
-      alert("权限被拒绝，无法获取设备位置");
+      alert("Permission denied, unable to access device location");
       setIsLoadingLocation(false);
       return;
     }
