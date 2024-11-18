@@ -91,7 +91,10 @@ export default function App() {
             <Stack.Screen name="Find My LIKKIM" component={FindMyLkkim} />
             <Stack.Screen
               name="Request Wallet Auth"
-              options={{ title: "交易确认" }}
+              options={{
+                title: "Transaction Confirmation",
+                headerShadowVisible: false,
+              }}
               component={ConnectLIKKIMAuth}
             />
           </Stack.Navigator>

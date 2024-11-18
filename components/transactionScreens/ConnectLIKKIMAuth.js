@@ -156,7 +156,7 @@ export default function ({ route, navigation }) {
         </View>
 
         <ScrollView
-          style={{ maxHeight: 320 }} // 设置最大高度，当内容超过时启用滚动
+          style={{ height: "100%" }} // 设置最大高度，当内容超过时启用滚动
           contentContainerStyle={{ paddingHorizontal: 16 }}
         >
           {/* 交互地址（至） */}
@@ -271,8 +271,9 @@ export default function ({ route, navigation }) {
 
         <View
           style={{
-            marginTop: 20,
+            bottom: 70,
             width: "100%",
+            position: "absolute",
             alignItems: "center",
             flexDirection: "col",
           }}
@@ -335,7 +336,11 @@ export default function ({ route, navigation }) {
             }}
           >
             <Text
-              style={{ color: textColor, textAlign: "center", fontWeight: 600 }}
+              style={{
+                color: textColor,
+                textAlign: "center",
+                fontWeight: 600,
+              }}
             >
               {t("Confirm")}
             </Text>
@@ -358,7 +363,11 @@ export default function ({ route, navigation }) {
             onPress={() => navigation.goBack()}
           >
             <Text
-              style={{ color: textColor, fontWeight: 600, textAlign: "center" }}
+              style={{
+                color: textColor,
+                fontWeight: 600,
+                textAlign: "center",
+              }}
             >
               {t("Cancel")}
             </Text>
