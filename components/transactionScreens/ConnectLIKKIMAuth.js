@@ -93,7 +93,13 @@ export default function ({ route, navigation }) {
   };
 
   return (
-    <View style={{ flex: 1, padding: 10, backgroundColor }}>
+    <View
+      style={{
+        flex: 1,
+        padding: 10,
+        backgroundColor: isDarkMode ? "#333" : "#fff",
+      }}
+    >
       {/* Transaction Confirmation Modal */}
       <View style={TransactionsScreenStyle.confirmModalView}>
         {/* 添加国际化标题 */}
@@ -120,7 +126,12 @@ export default function ({ route, navigation }) {
                 style={{ width: 24, height: 24, marginRight: 8 }}
               />
             )}
-            <Text style={TransactionsScreenStyle.modalTitle}>
+            <Text
+              style={{
+                ...TransactionsScreenStyle.modalTitle,
+                color: isDarkMode ? "#fff" : "#000",
+              }}
+            >
               {`- ${fromCryptoDetails?.name} ${fromValue}`}
             </Text>
           </View>
@@ -133,7 +144,12 @@ export default function ({ route, navigation }) {
                 style={{ width: 24, height: 24, marginRight: 8 }}
               />
             )}
-            <Text style={TransactionsScreenStyle.modalTitle}>
+            <Text
+              style={{
+                ...TransactionsScreenStyle.modalTitle,
+                color: isDarkMode ? "#fff" : "#000",
+              }}
+            >
               {`+ ${toCryptoDetails?.name} ${toValue}`}
             </Text>
           </View>
@@ -144,49 +160,99 @@ export default function ({ route, navigation }) {
           contentContainerStyle={{ paddingHorizontal: 16 }}
         >
           {/* 交互地址（至） */}
-          <Text style={TransactionsScreenStyle.transactionText}>
+          <Text
+            style={{
+              ...TransactionsScreenStyle.transactionText,
+              color: isDarkMode ? "#ccc" : "#333",
+            }}
+          >
             <Text style={{ fontWeight: "bold" }}>
               {t("Interaction Address (To)")}:
             </Text>
           </Text>
-          <Text style={TransactionsScreenStyle.transactionText}>
+          <Text
+            style={{
+              ...TransactionsScreenStyle.transactionText,
+              color: isDarkMode ? "#ccc" : "#333",
+            }}
+          >
             {xrpAddress}
           </Text>
 
           {/* 发送地址 */}
-          <Text style={TransactionsScreenStyle.transactionText}>
+          <Text
+            style={{
+              ...TransactionsScreenStyle.transactionText,
+              color: isDarkMode ? "#ccc" : "#333",
+            }}
+          >
             <Text style={{ fontWeight: "bold" }}>{t("Sending Address")}:</Text>
           </Text>
-          <Text style={TransactionsScreenStyle.transactionText}>
+          <Text
+            style={{
+              ...TransactionsScreenStyle.transactionText,
+              color: isDarkMode ? "#ccc" : "#333",
+            }}
+          >
             {fromAddress}
           </Text>
 
           {/* 接收地址 */}
-          <Text style={TransactionsScreenStyle.transactionText}>
+          <Text
+            style={{
+              ...TransactionsScreenStyle.transactionText,
+              color: isDarkMode ? "#ccc" : "#333",
+            }}
+          >
             <Text style={{ fontWeight: "bold" }}>
               {t("Receiving Address")}:
             </Text>
           </Text>
-          <Text style={TransactionsScreenStyle.transactionText}>
+          <Text
+            style={{
+              ...TransactionsScreenStyle.transactionText,
+              color: isDarkMode ? "#ccc" : "#333",
+            }}
+          >
             {toAddress}
           </Text>
 
           {/* 网络 */}
-          <Text style={TransactionsScreenStyle.transactionText}>
+          <Text
+            style={{
+              ...TransactionsScreenStyle.transactionText,
+              color: isDarkMode ? "#ccc" : "#333",
+            }}
+          >
             <Text style={{ fontWeight: "bold" }}>{t("Network")}:</Text>
           </Text>
-          <Text style={TransactionsScreenStyle.transactionText}>
+          <Text
+            style={{
+              ...TransactionsScreenStyle.transactionText,
+              color: isDarkMode ? "#ccc" : "#333",
+            }}
+          >
             {` ${fromCryptoDetails?.chain}`}
           </Text>
 
           {/* dApp */}
-          <Text style={TransactionsScreenStyle.transactionText}>
+          <Text
+            style={{
+              ...TransactionsScreenStyle.transactionText,
+              color: isDarkMode ? "#ccc" : "#333",
+            }}
+          >
             <Text style={{ fontWeight: "bold" }}>{t("dApp")}:</Text>
             {dapp}
           </Text>
 
           {/* 预估网络费用 */}
-          <Text style={TransactionsScreenStyle.transactionText}>
+          <Text
+            style={{
+              ...TransactionsScreenStyle.transactionText,
+              color: isDarkMode ? "#ccc" : "#333",
+            }}
+          >
             <Text style={{ fontWeight: "bold" }}>
               {t("Estimated Network Fee")}:
             </Text>
