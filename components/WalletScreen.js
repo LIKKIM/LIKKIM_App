@@ -1672,7 +1672,8 @@ function WalletScreen({ route, navigation }) {
         ref={scrollViewRef}
         contentContainerStyle={[
           WalletScreenStyle.scrollViewContent,
-          modalVisible && { overflow: "hidden" },
+          modalVisible && { overflow: "hidden", height: "100%" },
+
           cryptoCards.length !== 0 && !modalVisible && { paddingBottom: 130 },
         ]}
         style={[
