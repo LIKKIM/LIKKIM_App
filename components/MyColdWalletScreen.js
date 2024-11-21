@@ -51,6 +51,7 @@ if (Platform.OS === "android") {
 
 const serviceUUID = "6E400001-B5A3-F393-E0A9-E50E24DCCA9E";
 const writeCharacteristicUUID = "6E400002-B5A3-F393-E0A9-E50E24DCCA9E";
+const notifyCharacteristicUUID = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E";
 
 function MyColdWalletScreen() {
   const { t } = useTranslation();
@@ -635,15 +636,15 @@ function MyColdWalletScreen() {
       // 显示 PIN 码弹窗
       setPinModalVisible(true);
 
-      // 发送字符串 "apple"
-      const appleString = "apple";
-      const bufferAppleString = Buffer.from(appleString, "utf-8");
-      const base64AppleString = bufferAppleString.toString("base64");
+      // 发送字符串 "request"
+      const requestString = "request";
+      const bufferRequestString = Buffer.from(requestString, "utf-8");
+      const base64requestString = bufferRequestString.toString("base64");
 
       await device.writeCharacteristicWithResponseForService(
         serviceUUID,
         writeCharacteristicUUID,
-        base64AppleString
+        base64requestString
       );
       console.log("字符串 'apple' 已发送");
 
