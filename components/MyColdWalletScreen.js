@@ -646,7 +646,7 @@ function MyColdWalletScreen() {
         writeCharacteristicUUID,
         base64requestString
       );
-      console.log("字符串 'apple' 已发送");
+      console.log("字符串 'request' 已发送");
 
       // 延迟 5 毫秒
       await new Promise((resolve) => setTimeout(resolve, 5));
