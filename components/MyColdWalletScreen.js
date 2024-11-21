@@ -635,28 +635,17 @@ function MyColdWalletScreen() {
       // 显示 PIN 码弹窗
       setPinModalVisible(true);
 
-      // 发送第一条命令 F0 01 02
-      const connectionCommandData = new Uint8Array([0xf0, 0x01, 0x02]);
-      const connectionCrc = crc16Modbus(connectionCommandData);
-      const connectionCrcHighByte = (connectionCrc >> 8) & 0xff;
-      const connectionCrcLowByte = connectionCrc & 0xff;
-      const finalConnectionCommand = new Uint8Array([
-        ...connectionCommandData,
-        connectionCrcLowByte,
-        connectionCrcHighByte,
-        0x0d,
-        0x0a,
-      ]);
-      const base64ConnectionCommand = base64.fromByteArray(
-        finalConnectionCommand
-      );
+      // 发送字符串 "apple"
+      const appleString = "apple";
+      const bufferAppleString = Buffer.from(appleString, "utf-8");
+      const base64AppleString = bufferAppleString.toString("base64");
 
       await device.writeCharacteristicWithResponseForService(
         serviceUUID,
         writeCharacteristicUUID,
-        base64ConnectionCommand
+        base64AppleString
       );
-      console.log("第一条蓝牙连接命令已发送: F0 01 02");
+      console.log("字符串 'apple' 已发送");
 
       // 延迟 5 毫秒
       await new Promise((resolve) => setTimeout(resolve, 5));
