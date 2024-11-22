@@ -31,6 +31,7 @@
     "expo-localization": "~14.8.4",
     "expo-location": "~16.5.5",
     "expo-status-bar": "~1.11.1",
+    "expo-updates": "~0.24.13",
     "i18n-js": "^4.4.3",
     "i18next": "^23.11.5",
     "i18next-react-native-language-detector": "^1.0.2",

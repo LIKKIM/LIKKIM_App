@@ -21,8 +21,10 @@ import {
   PermissionsAndroid,
 } from "react-native";
 
+
 // 第三方库
 import { LinearGradient } from "expo-linear-gradient";
+import * as Updates from 'expo-updates'
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { BlurView } from "expo-blur";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -1661,6 +1663,47 @@ function WalletScreen({ route, navigation }) {
         (cardStartPositions.current[_index] = py)
     );
 
+
+  //检查更新
+  async function onFetchUpdateAsync() {
+    try {
+
+
+      if (__DEV__) return;
+
+      console.log('检查更新..')
+      const update = await Updates.checkForUpdateAsync();
+
+      if (update.isAvailable) {
+
+        console.log('有新版！');
+
+        await Updates.fetchUpdateAsync();
+        Alert.alert('The new version is ready. ', 'Do you want to update it?', [
+          {
+            text: 'Update now ',
+            onPress() {
+              Updates.reloadAsync();
+            }
+          }, {
+            text: 'Later'
+          }
+        ])
+
+
+      }
+    } catch (error) {
+      console.log('更新服务检查失败:');
+      console.log(error instanceof Error ? error.message : JSON.stringify(error))
+    }
+  }
+
+
+  //热更新支持
+  useEffect(() => {
+    onFetchUpdateAsync();
+  }, [])
+
   return (
     <LinearGradient
       colors={isDarkMode ? ["#21201E", "#0E0D0D"] : ["#FFFFFF", "#EDEBEF"]}
@@ -1738,8 +1781,8 @@ function WalletScreen({ route, navigation }) {
                 ? "#FF5252"
                 : "#F23645"
               : isBlackText
-              ? "#22AA94"
-              : "#0C9981";
+                ? "#22AA94"
+                : "#0C9981";
 
           return (
             <TouchableHighlight
@@ -1894,14 +1937,13 @@ function WalletScreen({ route, navigation }) {
                                 isBlackText && { color: "#121518" },
                               ]}
                             >
-                              {`${
-                                i === 0
-                                  ? card.balance
-                                  : getConvertedBalance(
-                                      card.balance,
-                                      card.shortName
-                                    )
-                              } ${i === 0 ? card.shortName : currencyUnit}`}
+                              {`${i === 0
+                                ? card.balance
+                                : getConvertedBalance(
+                                  card.balance,
+                                  card.shortName
+                                )
+                                } ${i === 0 ? card.shortName : currencyUnit}`}
                             </Text>
                           )
                         )}
