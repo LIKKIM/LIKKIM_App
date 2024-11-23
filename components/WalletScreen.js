@@ -770,13 +770,20 @@ function WalletScreen({ route, navigation }) {
       // 构建创建钱包命令为字符串 "create:16"
       const createWalletCommand = "create:16";
 
-      console.log(`创建钱包命令: ${createWalletCommand}`);
+      // 将字符串转换为 UTF-8 编码的 Buffer
+      const bufferCommand = Buffer.from(createWalletCommand, "utf-8");
 
-      // 发送创建钱包命令
+      // 将 Buffer 转换为 Base64 编码的字符串
+      const base64Command = bufferCommand.toString("base64");
+
+      console.log(`创建钱包命令 (字符串): ${createWalletCommand}`);
+      console.log(`创建钱包命令 (Base64): ${base64Command}`);
+
+      // 发送 Base64 编码的命令
       await device.writeCharacteristicWithResponseForService(
         serviceUUID, // BLE服务的UUID
         writeCharacteristicUUID, // 可写特性的UUID
-        createWalletCommand // 直接发送字符串命令
+        base64Command // Base64 编码字符串
       );
 
       console.log("创建钱包命令已发送");
