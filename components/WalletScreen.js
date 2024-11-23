@@ -1436,17 +1436,12 @@ function WalletScreen({ route, navigation }) {
     // 首先关闭 "Enter PIN to Connect" 的模态框
     setPinModalVisible(false);
 
-    // 将用户输入的 PIN 转换为数字
-    const pinCodeValue = parseInt(pinCode, 10); // 将 "1234" 转换为数字 1234
+    // 去除用户输入的 PIN 和接收到的验证码的空格
+    const pinCodeValue = pinCode.trim(); // 去除多余空格
+    const verificationCodeValue = receivedVerificationCode.trim(); // 去除多余空格
 
-    // 将接收到的验证码转换为数字
-    const verificationCodeValue = parseInt(
-      receivedVerificationCode.replace(/\s+/g, ""), // 移除所有空格
-      16 // 将16进制字符串转换为数字
-    );
-
-    console.log(`用户输入的 PIN 数值: ${pinCodeValue}`);
-    console.log(`接收到的验证码数值: ${verificationCodeValue}`);
+    console.log(`用户输入的 PIN: ${pinCodeValue}`);
+    console.log(`接收到的验证码: ${verificationCodeValue}`);
 
     // 检查 PIN 是否匹配
     if (pinCodeValue === verificationCodeValue) {
