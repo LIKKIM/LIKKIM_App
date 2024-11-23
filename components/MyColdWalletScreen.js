@@ -557,6 +557,25 @@ function MyColdWalletScreen() {
     }
   };
 
+  function decrypt(v, k) {
+    let v0 = v[0],
+      v1 = v[1],
+      sum = 0xc6ef3720,
+      i;
+    const delta = 0x9e3779b9;
+    const k0 = k[0],
+      k1 = k[1],
+      k2 = k[2],
+      k3 = k[3];
+    for (i = 0; i < 32; i++) {
+      v1 -= ((v0 << 4) + k2) ^ (v0 + sum) ^ ((v0 >> 5) + k3);
+      v0 -= ((v1 << 4) + k0) ^ (v1 + sum) ^ ((v1 >> 5) + k1);
+      sum -= delta;
+    }
+    v[0] = v0;
+    v[1] = v1;
+  }
+
   let monitorSubscription;
 
   const monitorVerificationCode = (device) => {
@@ -568,17 +587,7 @@ function MyColdWalletScreen() {
       (error, characteristic) => {
         if (error) {
           console.error("监听设备响应时出错:", error.message);
-          if (error.message.includes("Operation was cancelled")) {
-            console.error("监听操作被取消，正在重新连接...");
-            // reconnectDevice(device); // 主动重连
-          } else if (error.message.includes("Unknown error occurred")) {
-            console.error("未知错误，可能是一个Bug:", error.message);
-            if (error.reason) {
-              console.error("错误原因:", error.reason);
-            }
-            // reconnectDevice(device); // 主动重连
-          }
-          //   return;
+          return;
         }
 
         // Base64解码接收到的数据
@@ -587,6 +596,31 @@ function MyColdWalletScreen() {
         // 将接收到的数据解析为UTF-8字符串
         const receivedDataString = receivedData.toString("utf8");
         console.log("接收到的数据字符串:", receivedDataString);
+
+        if (receivedDataString.includes("ID:")) {
+          // 提取出加密部分
+          const encryptedDataString = receivedDataString.split("ID:")[1];
+
+          // 将16进制字符串转换为Uint32Array，以便解密
+          const encryptedData = [
+            parseInt(encryptedDataString.slice(0, 8), 16),
+            parseInt(encryptedDataString.slice(8, 16), 16),
+          ];
+          const encryptedArray = new Uint32Array(encryptedData);
+
+          // 使用给定密钥
+          const key = new Uint32Array([0x1234, 0x1234, 0x1234, 0x1234]);
+
+          // 解密
+          decrypt(encryptedArray, key);
+
+          // 将解密后的Uint32Array转换为字节数组（Buffer），再解码为UTF-8字符串
+          const decryptedBuffer = Buffer.from(
+            new Uint8Array(encryptedArray.buffer)
+          );
+          const decryptedString = decryptedBuffer.toString("utf8");
+          console.log("解密后的数据:", decryptedString);
+        }
       }
     );
   };
