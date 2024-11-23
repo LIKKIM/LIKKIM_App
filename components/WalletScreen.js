@@ -820,44 +820,29 @@ function WalletScreen({ route, navigation }) {
         return;
       }
 
-      // 构建命令数据，未包含CRC校验码
-      const commandData = new Uint8Array([0xf4, 0x02, 0x10, 0x00, 0x04]);
+      // 构建导入钱包命令为字符串 "Import"
+      const importWalletCommand = "Import";
 
-      // 使用CRC-16-Modbus算法计算CRC校验码
-      const crc = crc16Modbus(commandData);
+      // 将字符串转换为 UTF-8 编码的 Buffer
+      const bufferCommand = Buffer.from(importWalletCommand, "utf-8");
 
-      // 将CRC校验码转换为高位在前，低位在后的格式
-      const crcHighByte = (crc >> 8) & 0xff;
-      const crcLowByte = crc & 0xff;
+      // 将 Buffer 转换为 Base64 编码的字符串
+      const base64Command = bufferCommand.toString("base64");
 
-      // 将原始命令数据、CRC校验码以及结束符组合成最终的命令
-      const finalCommand = new Uint8Array([
-        ...commandData,
-        crcLowByte,
-        crcHighByte,
-        0x0d, // 结束符
-        0x0a, // 结束符
-      ]);
+      console.log(`导入钱包命令 (字符串): ${importWalletCommand}`);
+      console.log(`导入钱包命令 (Base64): ${base64Command}`);
 
-      // 将最终的命令转换为Base64编码
-      const base64Command = base64.fromByteArray(finalCommand);
-
-      console.log(
-        `导入钱包命令: ${Array.from(finalCommand)
-          .map((byte) => byte.toString(16).padStart(2, "0"))
-          .join(" ")}`
-      );
-
-      // 发送导入钱包命令
+      // 发送 Base64 编码的命令
       await device.writeCharacteristicWithResponseForService(
         serviceUUID, // BLE服务的UUID
         writeCharacteristicUUID, // 可写特性的UUID
-        base64Command // 最终的命令数据的Base64编码
+        base64Command // Base64 编码字符串
       );
+
       console.log("导入钱包命令已发送");
+
       // 开始监听导入结果
       monitorWalletCreationResult(device);
-      // monitorGeneratedWalletAddress(device);
     } catch (error) {
       console.log("发送导入钱包命令失败:", error);
     }
