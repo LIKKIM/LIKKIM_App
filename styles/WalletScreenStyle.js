@@ -43,7 +43,7 @@ const WalletScreenStyles = (isDarkMode) => {
     },
     cardInfoContainer: {
       flexDirection: "row",
-      width: 180,
+      width: 156,
       flex: 1,
       flexWrap: "wrap",
       alignItems: "center",
