@@ -752,7 +752,7 @@ function WalletScreen({ route, navigation }) {
         console.error("无效的设备对象：", device);
         return;
       }
-      //   console.log("发送创建钱包命令之前的设备对象:", device);
+
       // 无论设备是否连接，均重新连接并发现服务和特性
       await device.connect();
       await device.discoverAllServicesAndCharacteristics();
@@ -767,44 +767,22 @@ function WalletScreen({ route, navigation }) {
         return;
       }
 
-      // 构建命令数据，未包含CRC校验码
-      const commandData = new Uint8Array([0xf4, 0x01, 0x10, 0x00, 0x04]);
+      // 构建创建钱包命令为字符串 "create:16"
+      const createWalletCommand = "create:16";
 
-      // 使用CRC-16-Modbus算法计算CRC校验码
-      const crc = crc16Modbus(commandData);
-
-      // 将CRC校验码转换为高位在前，低位在后的格式
-      const crcHighByte = (crc >> 8) & 0xff;
-      const crcLowByte = crc & 0xff;
-
-      // 将原始命令数据、CRC校验码以及结束符组合成最终的命令
-      const finalCommand = new Uint8Array([
-        ...commandData,
-        crcLowByte,
-        crcHighByte,
-        0x0d, // 结束符
-        0x0a, // 结束符
-      ]);
-
-      // 将最终的命令转换为Base64编码
-      const base64Command = base64.fromByteArray(finalCommand);
-
-      console.log(
-        `创建钱包命令: ${Array.from(finalCommand)
-          .map((byte) => byte.toString(16).padStart(2, "0"))
-          .join(" ")}`
-      );
+      console.log(`创建钱包命令: ${createWalletCommand}`);
 
       // 发送创建钱包命令
       await device.writeCharacteristicWithResponseForService(
         serviceUUID, // BLE服务的UUID
         writeCharacteristicUUID, // 可写特性的UUID
-        base64Command // 最终的命令数据的Base64编码
+        createWalletCommand // 直接发送字符串命令
       );
+
       console.log("创建钱包命令已发送");
+
       // 开始监听创建结果
       monitorWalletCreationResult(device);
-      // monitorGeneratedWalletAddress(device);
     } catch (error) {
       console.error("发送创建钱包命令失败:", error);
     }
@@ -895,7 +873,7 @@ function WalletScreen({ route, navigation }) {
       await device.discoverAllServicesAndCharacteristics(); // 重新发现服务和特性
       console.log("设备重新连接成功");
     } catch (error) {
-      console.error("设备重新连接失败:", error);
+      console.log("设备重新连接失败:", error);
     }
   };
 

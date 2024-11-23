@@ -553,7 +553,7 @@ function MyColdWalletScreen() {
       await device.discoverAllServicesAndCharacteristics(); // 重新发现服务和特性
       console.log("设备重新连接成功");
     } catch (error) {
-      console.error("设备重新连接失败:", error);
+      console.log("设备重新连接失败:", error);
     }
   };
 
