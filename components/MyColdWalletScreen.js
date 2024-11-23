@@ -557,28 +557,49 @@ function MyColdWalletScreen() {
     }
   };
 
+  function hexStringToUint32Array(hexString) {
+    // 将16进制字符串拆分为两个32位无符号整数
+    return new Uint32Array([
+      parseInt(hexString.slice(0, 8), 16),
+      parseInt(hexString.slice(8, 16), 16),
+    ]);
+  }
+
+  function uint32ArrayToHexString(uint32Array) {
+    // 将两个32位无符号整数转换回16进制字符串
+    return (
+      uint32Array[0].toString(16).toUpperCase().padStart(8, "0") +
+      uint32Array[1].toString(16).toUpperCase().padStart(8, "0")
+    );
+  }
+
+  // 解密算法
   function decrypt(v, k) {
-    let v0 = v[0],
-      v1 = v[1],
-      sum = 0xc6ef3720,
+    let v0 = v[0] >>> 0,
+      v1 = v[1] >>> 0,
+      sum = 0xc6ef3720 >>> 0,
       i;
-    const delta = 0x9e3779b9;
-    const k0 = k[0],
-      k1 = k[1],
-      k2 = k[2],
-      k3 = k[3];
+    const delta = 0x9e3779b9 >>> 0;
+    const k0 = k[0] >>> 0,
+      k1 = k[1] >>> 0,
+      k2 = k[2] >>> 0,
+      k3 = k[3] >>> 0;
+
     for (i = 0; i < 32; i++) {
-      v1 -= ((v0 << 4) + k2) ^ (v0 + sum) ^ ((v0 >> 5) + k3);
-      v0 -= ((v1 << 4) + k0) ^ (v1 + sum) ^ ((v1 >> 5) + k1);
+      v1 -= (((v0 << 4) >>> 0) + k2) ^ (v0 + sum) ^ (((v0 >>> 5) >>> 0) + k3);
+      v1 >>>= 0;
+      v0 -= (((v1 << 4) >>> 0) + k0) ^ (v1 + sum) ^ (((v1 >>> 5) >>> 0) + k1);
+      v0 >>>= 0;
       sum -= delta;
+      sum >>>= 0;
     }
-    v[0] = v0;
-    v[1] = v1;
+    v[0] = v0 >>> 0;
+    v[1] = v1 >>> 0;
   }
 
   let monitorSubscription;
 
-  const monitorVerificationCode = (device) => {
+  const monitorVerificationCode = (device, sendDecryptedValue) => {
     const notifyCharacteristicUUID = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E";
 
     monitorSubscription = device.monitorCharacteristicForService(
@@ -590,36 +611,26 @@ function MyColdWalletScreen() {
           return;
         }
 
-        // Base64解码接收到的数据
         const receivedData = Buffer.from(characteristic.value, "base64");
-
-        // 将接收到的数据解析为UTF-8字符串
         const receivedDataString = receivedData.toString("utf8");
         console.log("接收到的数据字符串:", receivedDataString);
 
         if (receivedDataString.includes("ID:")) {
-          // 提取出加密部分
-          const encryptedDataString = receivedDataString.split("ID:")[1];
+          const encryptedHex = receivedDataString.split("ID:")[1];
+          const encryptedData = hexStringToUint32Array(encryptedHex);
 
-          // 将16进制字符串转换为Uint32Array，以便解密
-          const encryptedData = [
-            parseInt(encryptedDataString.slice(0, 8), 16),
-            parseInt(encryptedDataString.slice(8, 16), 16),
-          ];
-          const encryptedArray = new Uint32Array(encryptedData);
-
-          // 使用给定密钥
           const key = new Uint32Array([0x1234, 0x1234, 0x1234, 0x1234]);
 
-          // 解密
-          decrypt(encryptedArray, key);
+          decrypt(encryptedData, key);
 
-          // 将解密后的Uint32Array转换为字节数组（Buffer），再解码为UTF-8字符串
-          const decryptedBuffer = Buffer.from(
-            new Uint8Array(encryptedArray.buffer)
-          );
-          const decryptedString = decryptedBuffer.toString("utf8");
-          console.log("解密后的数据:", decryptedString);
+          const decryptedHex = uint32ArrayToHexString(encryptedData);
+
+          console.log("解密后的字符串:", decryptedHex);
+
+          // 将解密后的值发送给设备
+          if (sendDecryptedValue) {
+            sendDecryptedValue(decryptedHex);
+          }
         }
       }
     );
@@ -672,15 +683,33 @@ function MyColdWalletScreen() {
       );
       console.log("字符串 'request' 已发送");
 
-      /*       // 延迟 5 毫秒
-      await new Promise((resolve) => setTimeout(resolve, 5));
-  
-      // 发送第二条命令 F1 01 02
-      await sendStartCommand(device); */
+      // 解密后的值发送给设备
+      const sendDecryptedValue = async (decryptedValue) => {
+        try {
+          // 构建字符串 "ID：+解密的值"
+          const message = `ID:${decryptedValue}`;
+          const bufferMessage = Buffer.from(message, "utf-8");
+          const base64Message = bufferMessage.toString("base64");
+
+          // 发送到 BLE 设备
+          await device.writeCharacteristicWithResponseForService(
+            serviceUUID,
+            writeCharacteristicUUID,
+            base64Message
+          );
+          console.log(`解密后的值已发送: ${message}`);
+        } catch (error) {
+          console.error("发送解密值时出错:", error);
+        }
+      };
+
+      // 将解密后的值发送（从监听函数中调用此方法）
+      monitorVerificationCode(device, sendDecryptedValue);
     } catch (error) {
       console.error("设备连接或命令发送错误:", error);
     }
   };
+
   const handlePinSubmit = async () => {
     setPinModalVisible(false);
     setVerificationModalVisible(false);
