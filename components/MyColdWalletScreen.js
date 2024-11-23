@@ -648,11 +648,11 @@ function MyColdWalletScreen() {
       );
       console.log("字符串 'request' 已发送");
 
-      // 延迟 5 毫秒
+      /*       // 延迟 5 毫秒
       await new Promise((resolve) => setTimeout(resolve, 5));
 
       // 发送第二条命令 F1 01 02
-      await sendStartCommand(device);
+      await sendStartCommand(device); */
 
       // 开始监听设备响应
       monitorVerificationCode(device);
