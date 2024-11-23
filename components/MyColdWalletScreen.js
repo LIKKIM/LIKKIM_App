@@ -605,7 +605,7 @@ function MyColdWalletScreen() {
     monitorSubscription = device.monitorCharacteristicForService(
       serviceUUID,
       notifyCharacteristicUUID,
-      (error, characteristic) => {
+      async (error, characteristic) => {
         if (error) {
           console.error("监听设备响应时出错:", error.message);
           return;
@@ -615,6 +615,7 @@ function MyColdWalletScreen() {
         const receivedDataString = receivedData.toString("utf8");
         console.log("接收到的数据字符串:", receivedDataString);
 
+        // 处理包含 "ID:" 的数据
         if (receivedDataString.includes("ID:")) {
           const encryptedHex = receivedDataString.split("ID:")[1];
           const encryptedData = hexStringToUint32Array(encryptedHex);
@@ -630,6 +631,28 @@ function MyColdWalletScreen() {
           // 将解密后的值发送给设备
           if (sendDecryptedValue) {
             sendDecryptedValue(decryptedHex);
+          }
+        }
+
+        // 如果接收到 "VALID"，发送 "validation"
+        if (receivedDataString === "VALID") {
+          try {
+            const validationMessage = "validation";
+            const bufferValidationMessage = Buffer.from(
+              validationMessage,
+              "utf-8"
+            );
+            const base64ValidationMessage =
+              bufferValidationMessage.toString("base64");
+
+            await device.writeCharacteristicWithResponseForService(
+              serviceUUID,
+              writeCharacteristicUUID,
+              base64ValidationMessage
+            );
+            console.log(`已发送字符串 'validation' 给设备`);
+          } catch (error) {
+            console.error("发送 'validation' 时出错:", error);
           }
         }
       }
@@ -653,7 +676,7 @@ function MyColdWalletScreen() {
   };
   // 设备选择和显示弹窗的处理函数
   // 保存已连接设备的信息
-
+  // 根据的值（VALID 或 INVALID），判断设备真伪
   // 修改 handleDevicePress 方法，增加获取位置和保存信息的逻辑
   const handleDevicePress = async (device) => {
     setSelectedDevice(device);
@@ -710,7 +733,7 @@ function MyColdWalletScreen() {
       console.error("设备连接或命令发送错误:", error);
     }
   };
-
+  // 匹配验证码
   const handlePinSubmit = async () => {
     setPinModalVisible(false);
     setVerificationModalVisible(false);
