@@ -206,7 +206,7 @@ function WalletScreen({ route, navigation }) {
           { allowDuplicates: true },
           (error, device) => {
             if (error) {
-              console.error("BleManager scanning error:", error);
+              console.log("BleManager scanning error:", error);
               return;
             }
 
@@ -298,7 +298,7 @@ function WalletScreen({ route, navigation }) {
           setVerifiedDevices(JSON.parse(savedDevices));
         }
       } catch (error) {
-        console.error("Error loading verified devices: ", error);
+        console.log("Error loading verified devices: ", error);
       }
     };
 
@@ -341,7 +341,7 @@ function WalletScreen({ route, navigation }) {
   const handleDevicePress = async (device) => {
     // 检查是否传递了有效的设备对象
     if (typeof device !== "object" || typeof device.connect !== "function") {
-      console.error("无效的设备对象，无法连接设备:", device);
+      console.log("无效的设备对象，无法连接设备:", device);
       return;
     }
 
@@ -368,7 +368,7 @@ function WalletScreen({ route, navigation }) {
           );
           console.log(`解密后的值已发送: ${message}`);
         } catch (error) {
-          console.error("发送解密值时出错:", error);
+          console.log("发送解密值时出错:", error);
         }
       };
 
@@ -389,14 +389,14 @@ function WalletScreen({ route, navigation }) {
           );
           console.log("字符串 'request' 已发送");
         } catch (error) {
-          console.error("发送 'request' 时出错:", error);
+          console.log("发送 'request' 时出错:", error);
         }
       }, 200); // 延迟 200ms 确保监听器启动（根据设备响应调整）
 
       // 显示 PIN 码弹窗
       setPinModalVisible(true);
     } catch (error) {
-      console.error("设备连接或命令发送错误:", error);
+      console.log("设备连接或命令发送错误:", error);
     }
   };
   // 处理断开连接的逻辑
@@ -423,7 +423,7 @@ function WalletScreen({ route, navigation }) {
       setIsVerificationSuccessful(false);
       console.log("验证状态已更新为 false。");
     } catch (error) {
-      console.error("断开设备连接失败:", error);
+      console.log("断开设备连接失败:", error);
     }
   };
   function crc16Modbus(arr) {
@@ -450,7 +450,7 @@ function WalletScreen({ route, navigation }) {
         monitorSubscription = null;
         console.log("验证码监听已停止");
       } catch (error) {
-        console.error("停止监听时发生错误:", error);
+        console.log("停止监听时发生错误:", error);
       }
     }
   };
@@ -476,7 +476,7 @@ function WalletScreen({ route, navigation }) {
     try {
       // 检查 device 是否为一个有效的设备对象
       if (typeof device !== "object" || !device.isConnected) {
-        console.error("无效的设备对象：", device);
+        console.log("无效的设备对象：", device);
         return;
       }
 
@@ -488,7 +488,7 @@ function WalletScreen({ route, navigation }) {
       if (
         typeof device.writeCharacteristicWithResponseForService !== "function"
       ) {
-        console.error(
+        console.log(
           "设备没有 writeCharacteristicWithResponseForService 方法。"
         );
         return;
@@ -571,16 +571,16 @@ function WalletScreen({ route, navigation }) {
         (error, characteristic) => {
           if (error) {
             if (error.message.includes("Operation was cancelled")) {
-              console.error("监听操作被取消，正在重新连接...");
+              console.log("监听操作被取消，正在重新连接...");
               reconnectDevice(device); // 主动重连
             } else if (error.message.includes("Unknown error occurred")) {
-              console.error("未知错误，可能是一个Bug:", error.message);
+              console.log("未知错误，可能是一个Bug:", error.message);
               if (error.reason) {
-                console.error("错误原因:", error.reason);
+                console.log("错误原因:", error.reason);
               }
               reconnectDevice(device); // 主动重连
             } else {
-              console.error("监听设备响应时出错:", error.message);
+              console.log("监听设备响应时出错:", error.message);
             }
             return;
           }
@@ -605,7 +605,7 @@ function WalletScreen({ route, navigation }) {
       // 返回 subscription 用于在其他地方进行清理
       return addressMonitorSubscription;
     } catch (error) {
-      console.error("发送显示地址命令失败:", error);
+      console.log("发送显示地址命令失败:", error);
     }
   };
   // 请求地址函数
@@ -613,7 +613,7 @@ function WalletScreen({ route, navigation }) {
     try {
       // 检查 device 是否为一个有效的设备对象
       if (typeof device !== "object" || !device.isConnected) {
-        console.error("无效的设备对象：", device);
+        console.log("无效的设备对象：", device);
         return;
       }
 
@@ -625,7 +625,7 @@ function WalletScreen({ route, navigation }) {
       if (
         typeof device.writeCharacteristicWithResponseForService !== "function"
       ) {
-        console.error(
+        console.log(
           "设备没有 writeCharacteristicWithResponseForService 方法。"
         );
         return;
@@ -699,7 +699,7 @@ function WalletScreen({ route, navigation }) {
       setIsVerifyingAddress(true); // 显示提示
       console.log("显示地址命令已发送");
     } catch (error) {
-      console.error("发送显示地址命令失败:", error);
+      console.log("发送显示地址命令失败:", error);
     }
   };
 
@@ -741,7 +741,7 @@ function WalletScreen({ route, navigation }) {
       );
       console.log("启动验证命令已发送");
     } catch (error) {
-      console.error("发送启动命令失败", error);
+      console.log("发送启动命令失败", error);
     }
   };
   // 创建钱包命令
@@ -749,7 +749,7 @@ function WalletScreen({ route, navigation }) {
     try {
       // 检查 device 是否为一个有效的设备对象
       if (typeof device !== "object" || !device.isConnected) {
-        console.error("无效的设备对象：", device);
+        console.log("无效的设备对象：", device);
         return;
       }
 
@@ -761,7 +761,7 @@ function WalletScreen({ route, navigation }) {
       if (
         typeof device.writeCharacteristicWithResponseForService !== "function"
       ) {
-        console.error(
+        console.log(
           "设备没有 writeCharacteristicWithResponseForService 方法。"
         );
         return;
@@ -784,7 +784,7 @@ function WalletScreen({ route, navigation }) {
       // 开始监听创建结果
       monitorWalletCreationResult(device);
     } catch (error) {
-      console.error("发送创建钱包命令失败:", error);
+      console.log("发送创建钱包命令失败:", error);
     }
   };
 
@@ -793,7 +793,7 @@ function WalletScreen({ route, navigation }) {
     try {
       // 检查 device 是否为一个有效的设备对象
       if (typeof device !== "object" || !device.isConnected) {
-        console.error("无效的设备对象：", device);
+        console.log("无效的设备对象：", device);
         return;
       }
 
@@ -807,7 +807,7 @@ function WalletScreen({ route, navigation }) {
       if (
         typeof device.writeCharacteristicWithResponseForService !== "function"
       ) {
-        console.error(
+        console.log(
           "设备没有 writeCharacteristicWithResponseForService 方法。"
         );
         return;
@@ -852,7 +852,7 @@ function WalletScreen({ route, navigation }) {
       monitorWalletCreationResult(device);
       // monitorGeneratedWalletAddress(device);
     } catch (error) {
-      console.error("发送导入钱包命令失败:", error);
+      console.log("发送导入钱包命令失败:", error);
     }
   };
 
@@ -968,7 +968,7 @@ function WalletScreen({ route, navigation }) {
             );
             console.log(`已发送字符串 'validation' 给设备`);
           } catch (error) {
-            console.error("发送 'validation' 时出错:", error);
+            console.log("发送 'validation' 时出错:", error);
           }
         }
 
@@ -992,16 +992,16 @@ function WalletScreen({ route, navigation }) {
       (error, characteristic) => {
         if (error) {
           if (error.message.includes("Operation was cancelled")) {
-            console.error("监听操作被取消，正在重新连接...");
+            console.log("监听操作被取消，正在重新连接...");
             reconnectDevice(device); // 主动重连
           } else if (error.message.includes("Unknown error occurred")) {
-            console.error("未知错误，可能是一个Bug:", error.message);
+            console.log("未知错误，可能是一个Bug:", error.message);
             if (error.reason) {
-              console.error("错误原因:", error.reason);
+              console.log("错误原因:", error.reason);
             }
             reconnectDevice(device); // 主动重连
           } else {
-            console.error("监听设备响应时出错:", error.message);
+            console.log("监听设备响应时出错:", error.message);
           }
           return;
         }
@@ -1038,16 +1038,16 @@ function WalletScreen({ route, navigation }) {
       (error, characteristic) => {
         if (error) {
           if (error.message.includes("Operation was cancelled")) {
-            console.error("监听操作被取消，正在重新连接...");
+            console.log("监听操作被取消，正在重新连接...");
             reconnectDevice(device); // 主动重连
           } else if (error.message.includes("Unknown error occurred")) {
-            console.error("未知错误，可能是一个Bug:", error.message);
+            console.log("未知错误，可能是一个Bug:", error.message);
             if (error.reason) {
-              console.error("错误原因:", error.reason);
+              console.log("错误原因:", error.reason);
             }
             reconnectDevice(device); // 主动重连
           } else {
-            console.error("监听设备响应时出错:", error.message);
+            console.log("监听设备响应时出错:", error.message);
           }
           return;
         }
@@ -1216,12 +1216,12 @@ function WalletScreen({ route, navigation }) {
               subtitle: t("Your wallet has been successfully imported."),
             });
           } else {
-            console.error(
+            console.log(
               `CRC校验失败，数据可能无效。Received: ${receivedCrc}, Calculated: ${calculatedCrc}`
             );
           }
         } else {
-          console.error("收到的数据头部不正确，期望A4");
+          console.log("收到的数据头部不正确，期望A4");
         }
       }
     );
@@ -1234,7 +1234,7 @@ function WalletScreen({ route, navigation }) {
         monitorSubscription = null;
         console.log("钱包地址监听已停止");
       } catch (error) {
-        console.error("停止监听时发生错误:", error);
+        console.log("停止监听时发生错误:", error);
       }
     }
   };
@@ -1279,7 +1279,7 @@ function WalletScreen({ route, navigation }) {
           setAddedCryptos(JSON.parse(storedCards)); // 加载时同步 addedCryptos
         }
       } catch (error) {
-        console.error("Error loading crypto cards:", error);
+        console.log("Error loading crypto cards:", error);
       }
     };
     loadCryptoCards();
@@ -1292,7 +1292,7 @@ function WalletScreen({ route, navigation }) {
         await AsyncStorage.setItem("addedCryptos", JSON.stringify(cryptoCards)); // 保存时同步 addedCryptos
         //  console.log("Updated addedCryptos wallet page:", cryptoCards); // 打印更新后的 addedCryptos
       } catch (error) {
-        console.error("Error saving crypto cards:", error);
+        console.log("Error saving crypto cards:", error);
       }
     };
     saveCryptoCards();
@@ -1314,7 +1314,7 @@ function WalletScreen({ route, navigation }) {
             };
           }
         } catch (error) {
-          console.error(
+          console.log(
             `Error fetching price change for ${card.shortName}:`,
             error
           );
@@ -1446,7 +1446,7 @@ function WalletScreen({ route, navigation }) {
           monitorSubscription.remove();
           console.log("验证码监听已停止");
         } catch (error) {
-          console.error("停止监听时发生错误:", error);
+          console.log("停止监听时发生错误:", error);
         }
       }
 
@@ -1456,7 +1456,7 @@ function WalletScreen({ route, navigation }) {
           await selectedDevice.cancelConnection();
           console.log("已断开与设备的连接");
         } catch (error) {
-          console.error("断开连接时发生错误:", error);
+          console.log("断开连接时发生错误:", error);
         }
       }
 
@@ -1492,7 +1492,7 @@ function WalletScreen({ route, navigation }) {
 
       // 确保 start 和 end 位置都是有效的数值
       if (isNaN(cardStartPositions.current[index]) || isNaN(endPosition)) {
-        console.error("Invalid position values", {
+        console.log("Invalid position values", {
           startPosition: cardStartPositions.current[index],
           endPosition: endPosition,
         });
@@ -1642,7 +1642,7 @@ function WalletScreen({ route, navigation }) {
 
         setCreatePendingModalVisible(true);
       } else {
-        // console.error("未找到与该ID匹配的设备对象");
+        // console.log("未找到与该ID匹配的设备对象");
         setBleVisible(true);
       }
     } else {
