@@ -600,14 +600,12 @@ function MyColdWalletScreen() {
   let monitorSubscription;
 
   const monitorVerificationCode = (device, sendDecryptedValue) => {
-    const notifyCharacteristicUUID = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E";
-
     monitorSubscription = device.monitorCharacteristicForService(
       serviceUUID,
       notifyCharacteristicUUID,
       async (error, characteristic) => {
         if (error) {
-          console.error("监听设备响应时出错:", error.message);
+          console.log("监听设备响应时出错:", error.message);
           return;
         }
 
@@ -619,13 +617,11 @@ function MyColdWalletScreen() {
         if (receivedDataString.includes("ID:")) {
           const encryptedHex = receivedDataString.split("ID:")[1];
           const encryptedData = hexStringToUint32Array(encryptedHex);
-
           const key = new Uint32Array([0x1234, 0x1234, 0x1234, 0x1234]);
 
           decrypt(encryptedData, key);
 
           const decryptedHex = uint32ArrayToHexString(encryptedData);
-
           console.log("解密后的字符串:", decryptedHex);
 
           // 将解密后的值发送给设备
@@ -655,6 +651,13 @@ function MyColdWalletScreen() {
             console.error("发送 'validation' 时出错:", error);
           }
         }
+
+        // 提取 PIN:XXXX,N 的验证码
+        if (receivedDataString.startsWith("PIN:")) {
+          const pin = receivedDataString.split(":")[1].split(",")[0]; // 提取 PIN 值
+          setReceivedVerificationCode(pin); // 保存接收到的 PIN
+          console.log("接收到的验证码:", pin);
+        }
       }
     );
   };
@@ -666,7 +669,7 @@ function MyColdWalletScreen() {
         monitorSubscription = null;
         console.log("验证码监听已停止");
       } catch (error) {
-        console.error("停止监听时发生错误:", error);
+        console.log("停止监听时发生错误:", error);
       }
     }
   };
@@ -735,53 +738,37 @@ function MyColdWalletScreen() {
   };
   // 匹配验证码
   const handlePinSubmit = async () => {
-    setPinModalVisible(false);
-    setVerificationModalVisible(false);
+    setPinModalVisible(false); // 关闭 PIN 输入框
+    setVerificationModalVisible(false); // 关闭验证状态框
 
-    const pinCodeValue = parseInt(pinCode, 10);
-    const verificationCodeValue = parseInt(
-      receivedVerificationCode.replace(" ", ""),
-      16
-    );
+    console.log("用户输入的 PIN:", pinCode);
+    console.log("设备发送的 PIN:", receivedVerificationCode);
 
-    if (pinCodeValue === verificationCodeValue) {
+    // 比较用户输入的 PIN 和接收的 PIN
+    if (pinCode === receivedVerificationCode) {
       setVerificationStatus("success");
 
       // 更新设备验证状态
       const newVerifiedDevices = [selectedDevice.id];
       setVerifiedDevices(newVerifiedDevices);
       console.log("验证成功！验证状态已更新。");
+
       await AsyncStorage.setItem(
         "verifiedDevices",
         JSON.stringify(newVerifiedDevices)
       );
       setIsVerificationSuccessful(true);
 
-      // 发送成功命令 F4 03 10 00 04 95 97 0D 0A
-      const successCommand = new Uint8Array([
-        0xf4, 0x03, 0x10, 0x00, 0x04, 0x95, 0x97, 0x0d, 0x0a,
-      ]);
-      const base64SuccessCommand = base64.fromByteArray(successCommand);
-
-      try {
-        await selectedDevice.writeCharacteristicWithResponseForService(
-          serviceUUID,
-          writeCharacteristicUUID,
-          base64SuccessCommand
-        );
-        console.log("Success command has been sent");
-      } catch (error) {
-        console.error("Failed to send success command", error);
-      }
+      console.log("PIN 验证成功！");
     } else {
-      console.log("PIN 验证失败");
+      console.log("PIN 验证失败！");
       setVerificationStatus("fail");
-      stopMonitoringVerificationCode();
-      await selectedDevice.cancelConnection();
+      stopMonitoringVerificationCode(); // 停止监听
+      await selectedDevice.cancelConnection(); // 断开设备连接
     }
 
-    setVerificationModalVisible(true);
-    setPinCode("");
+    setVerificationModalVisible(true); // 显示验证结果
+    setPinCode(""); // 清空输入框
   };
 
   // 处理断开连接的逻辑
