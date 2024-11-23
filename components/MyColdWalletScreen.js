@@ -570,15 +570,15 @@ function MyColdWalletScreen() {
           console.error("监听设备响应时出错:", error.message);
           if (error.message.includes("Operation was cancelled")) {
             console.error("监听操作被取消，正在重新连接...");
-            reconnectDevice(device); // 主动重连
+            // reconnectDevice(device); // 主动重连
           } else if (error.message.includes("Unknown error occurred")) {
             console.error("未知错误，可能是一个Bug:", error.message);
             if (error.reason) {
               console.error("错误原因:", error.reason);
             }
-            reconnectDevice(device); // 主动重连
+            // reconnectDevice(device); // 主动重连
           }
-          return;
+          //   return;
         }
 
         // Base64解码接收到的数据
@@ -620,6 +620,9 @@ function MyColdWalletScreen() {
       await device.discoverAllServicesAndCharacteristics();
       console.log("设备已连接并发现所有服务和特性");
 
+      // 开始监听设备响应
+      monitorVerificationCode(device);
+
       // 显示 PIN 码弹窗
       setPinModalVisible(true);
 
@@ -637,17 +640,13 @@ function MyColdWalletScreen() {
 
       /*       // 延迟 5 毫秒
       await new Promise((resolve) => setTimeout(resolve, 5));
-
+  
       // 发送第二条命令 F1 01 02
       await sendStartCommand(device); */
-
-      // 开始监听设备响应
-      monitorVerificationCode(device);
     } catch (error) {
       console.error("设备连接或命令发送错误:", error);
     }
   };
-
   const handlePinSubmit = async () => {
     setPinModalVisible(false);
     setVerificationModalVisible(false);
