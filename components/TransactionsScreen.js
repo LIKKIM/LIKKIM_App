@@ -38,6 +38,7 @@ import PinModal from "./modal/PinModal";
 import { BleManager, BleErrorCode } from "react-native-ble-plx";
 const serviceUUID = "6E400001-B5A3-F393-E0A9-E50E24DCCA9E";
 const writeCharacteristicUUID = "6E400002-B5A3-F393-E0A9-E50E24DCCA9E";
+const notifyCharacteristicUUID = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E";
 
 function TransactionsScreen() {
   const [receivedVerificationCode, setReceivedVerificationCode] = useState("");
@@ -414,7 +415,6 @@ function TransactionsScreen() {
       }
     };
   }, [addressModalVisible, selectedDevice]);
-  let monitorSubscription;
 
   const handleSwapPress = () => {
     setSwapModalVisible(true);
@@ -432,46 +432,66 @@ function TransactionsScreen() {
     }
   };
 
-  const monitorVerificationCode = (device) => {
-    const notifyCharacteristicUUID = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E";
+  let monitorSubscription;
 
+  const monitorVerificationCode = (device, sendDecryptedValue) => {
     monitorSubscription = device.monitorCharacteristicForService(
       serviceUUID,
       notifyCharacteristicUUID,
-      (error, characteristic) => {
+      async (error, characteristic) => {
         if (error) {
-          if (error.message.includes("Operation was cancelled")) {
-            console.error("监听操作被取消，正在重新连接...");
-            reconnectDevice(device); // 主动重连
-          } else if (error.message.includes("Unknown error occurred")) {
-            console.error("未知错误，可能是一个Bug:", error.message);
-            if (error.reason) {
-              console.error("错误原因:", error.reason);
-            }
-            reconnectDevice(device); // 主动重连
-          } else {
-            console.error("监听设备响应时出错:", error.message);
-          }
+          console.log("监听设备响应时出错:", error.message);
           return;
         }
 
-        // Base64解码接收到的数据
         const receivedData = Buffer.from(characteristic.value, "base64");
+        const receivedDataString = receivedData.toString("utf8");
+        console.log("接收到的数据字符串:", receivedDataString);
 
-        // 将接收到的数据解析为16进制字符串
-        const receivedDataHex = receivedData.toString("hex");
-        console.log("接收到的16进制数据字符串:", receivedDataHex);
+        // 处理包含 "ID:" 的数据
+        if (receivedDataString.includes("ID:")) {
+          const encryptedHex = receivedDataString.split("ID:")[1];
+          const encryptedData = hexStringToUint32Array(encryptedHex);
+          const key = new Uint32Array([0x1234, 0x1234, 0x1234, 0x1234]);
 
-        // 示例：检查接收到的数据的前缀是否正确（例如，预期为 "a1"）
-        if (receivedDataHex.startsWith("a1")) {
-          // 提取接收到的验证码（根据你的协议调整具体的截取方式）
-          const verificationCode = receivedDataHex.substring(2, 6); // 获取从第2个字符开始的4个字符（例如 "a1 04 D2" 中的 "04D2"）
-          console.log("接收到的验证码:", verificationCode);
+          decrypt(encryptedData, key);
 
-          // 将验证码存储到状态中，或进行进一步的处理
-          setReceivedVerificationCode(verificationCode);
-        } else {
-          console.warn("接收到的不是预期的验证码数据");
+          const decryptedHex = uint32ArrayToHexString(encryptedData);
+          console.log("解密后的字符串:", decryptedHex);
+
+          // 将解密后的值发送给设备
+          if (sendDecryptedValue) {
+            sendDecryptedValue(decryptedHex);
+          }
+        }
+
+        // 如果接收到 "VALID"，发送 "validation"
+        if (receivedDataString === "VALID") {
+          try {
+            const validationMessage = "validation";
+            const bufferValidationMessage = Buffer.from(
+              validationMessage,
+              "utf-8"
+            );
+            const base64ValidationMessage =
+              bufferValidationMessage.toString("base64");
+
+            await device.writeCharacteristicWithResponseForService(
+              serviceUUID,
+              writeCharacteristicUUID,
+              base64ValidationMessage
+            );
+            console.log(`已发送字符串 'validation' 给设备`);
+          } catch (error) {
+            console.error("发送 'validation' 时出错:", error);
+          }
+        }
+
+        // 提取 PIN:XXXX,N 的验证码
+        if (receivedDataString.startsWith("PIN:")) {
+          const pin = receivedDataString.split(":")[1].split(",")[0]; // 提取 PIN 值
+          setReceivedVerificationCode(pin); // 保存接收到的 PIN
+          console.log("接收到的验证码:", pin);
         }
       }
     );
