@@ -567,6 +567,7 @@ function MyColdWalletScreen() {
       notifyCharacteristicUUID,
       (error, characteristic) => {
         if (error) {
+          console.error("监听设备响应时出错:", error.message);
           if (error.message.includes("Operation was cancelled")) {
             console.error("监听操作被取消，正在重新连接...");
             reconnectDevice(device); // 主动重连
@@ -576,8 +577,6 @@ function MyColdWalletScreen() {
               console.error("错误原因:", error.reason);
             }
             reconnectDevice(device); // 主动重连
-          } else {
-            console.error("监听设备响应时出错:", error.message);
           }
           return;
         }
@@ -585,21 +584,9 @@ function MyColdWalletScreen() {
         // Base64解码接收到的数据
         const receivedData = Buffer.from(characteristic.value, "base64");
 
-        // 将接收到的数据解析为16进制字符串
-        const receivedDataHex = receivedData.toString("hex");
-        console.log("接收到的16进制数据字符串:", receivedDataHex);
-
-        // 示例：检查接收到的数据的前缀是否正确（例如，预期为 "a1"）
-        if (receivedDataHex.startsWith("a1")) {
-          // 提取接收到的验证码（根据你的协议调整具体的截取方式）
-          const verificationCode = receivedDataHex.substring(2, 6); // 获取从第2个字符开始的4个字符（例如 "a1 04 D2" 中的 "04D2"）
-          console.log("接收到的验证码:", verificationCode);
-
-          // 将验证码存储到状态中，或进行进一步的处理
-          setReceivedVerificationCode(verificationCode);
-        } else {
-          console.warn("接收到的不是预期的验证码数据");
-        }
+        // 将接收到的数据解析为UTF-8字符串
+        const receivedDataString = receivedData.toString("utf8");
+        console.log("接收到的数据字符串:", receivedDataString);
       }
     );
   };
