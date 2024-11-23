@@ -64,12 +64,6 @@ const TransactionsScreenStyles = (isDarkMode) => {
       //  justifyContent: "center",
       alignItems: "center",
     },
-    roundButton: {
-      backgroundColor: "#CCB68C",
-      padding: 15,
-      borderRadius: 30,
-      alignItems: "center",
-    },
 
     modalContainer: {
       flex: 1,
@@ -483,8 +477,9 @@ const TransactionsScreenStyles = (isDarkMode) => {
       borderRadius: 20,
       alignItems: "center",
       justifyContent: "center",
-      marginBottom: 20,
+      //  marginBottom: 20,
     },
+
     scanModalSubtitle: {
       color: secondTextColor,
       fontSize: 14,
