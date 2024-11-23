@@ -368,7 +368,13 @@ export default function FindMyLkkim() {
             </Text>
           </View>
         ) : (
-          <ScrollView>
+          <ScrollView
+            style={{
+              maxHeight: 140,
+            }}
+            scrollIndicatorInsets={{ right: 4 }}
+            showsVerticalScrollIndicator={true}
+          >
             {devicesPositions.map((device, index) => (
               <Swipeable
                 key={device.id}
