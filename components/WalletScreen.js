@@ -1771,13 +1771,13 @@ function WalletScreen({ route, navigation }) {
           const percentageChange =
             priceChanges[card.shortName]?.percentageChange || "0";
           const textColor =
-            priceChange > 0
+            percentageChange > 0
               ? isBlackText
-                ? "#FF5252"
-                : "#F23645"
+                ? "#00EE88"
+                : "#00EE88"
               : isBlackText
-              ? "#22AA94"
-              : "#0C9981";
+              ? "#F44336"
+              : "#F44336";
 
           return (
             <TouchableHighlight
