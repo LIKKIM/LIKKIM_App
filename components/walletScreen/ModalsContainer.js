@@ -164,11 +164,11 @@ const ModalsContainer = ({
 
       {/* PIN码输入modal窗口 */}
       <PinModal
-        visible={pinModalVisible}
-        pinCode={pinCode}
-        setPinCode={setPinCode}
-        onSubmit={() => handlePinSubmit(selectedDevice, pinCode)}
-        onCancel={() => setPinModalVisible(false)}
+        visible={pinModalVisible} // 控制 PIN 模态框的可见性
+        pinCode={pinCode} // 绑定 PIN 输入的状态
+        setPinCode={setPinCode} // 设置 PIN 的状态函数
+        onSubmit={handlePinSubmit} // PIN 提交后的逻辑
+        onCancel={() => setPinModalVisible(false)} // 关闭 PIN 模态框
         styles={WalletScreenStyle}
         isDarkMode={isDarkMode}
         t={t}
