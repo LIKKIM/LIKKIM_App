@@ -665,33 +665,13 @@ function MyColdWalletScreen() {
       await device.discoverAllServicesAndCharacteristics();
       console.log("设备已连接并发现所有服务和特性");
 
-      // 开始监听设备响应
-      monitorVerificationCode(device);
-
-      // 显示 PIN 码弹窗
-      setPinModalVisible(true);
-
-      // 发送字符串 "request"
-      const requestString = "request";
-      const bufferRequestString = Buffer.from(requestString, "utf-8");
-      const base64requestString = bufferRequestString.toString("base64");
-
-      await device.writeCharacteristicWithResponseForService(
-        serviceUUID,
-        writeCharacteristicUUID,
-        base64requestString
-      );
-      console.log("字符串 'request' 已发送");
-
       // 解密后的值发送给设备
       const sendDecryptedValue = async (decryptedValue) => {
         try {
-          // 构建字符串 "ID：+解密的值"
           const message = `ID:${decryptedValue}`;
           const bufferMessage = Buffer.from(message, "utf-8");
           const base64Message = bufferMessage.toString("base64");
 
-          // 发送到 BLE 设备
           await device.writeCharacteristicWithResponseForService(
             serviceUUID,
             writeCharacteristicUUID,
@@ -703,8 +683,29 @@ function MyColdWalletScreen() {
         }
       };
 
-      // 将解密后的值发送（从监听函数中调用此方法）
+      // 先启动监听器
       monitorVerificationCode(device, sendDecryptedValue);
+
+      // 确保监听器已完全启动后再发送 'request'
+      setTimeout(async () => {
+        try {
+          const requestString = "request";
+          const bufferRequestString = Buffer.from(requestString, "utf-8");
+          const base64requestString = bufferRequestString.toString("base64");
+
+          await device.writeCharacteristicWithResponseForService(
+            serviceUUID,
+            writeCharacteristicUUID,
+            base64requestString
+          );
+          console.log("字符串 'request' 已发送");
+        } catch (error) {
+          console.error("发送 'request' 时出错:", error);
+        }
+      }, 200); // 延迟 200ms 确保监听器启动（根据设备响应调整）
+
+      // 显示 PIN 码弹窗
+      setPinModalVisible(true);
     } catch (error) {
       console.error("设备连接或命令发送错误:", error);
     }
