@@ -346,55 +346,59 @@ function WalletScreen({ route, navigation }) {
     }
 
     setSelectedDevice(device);
+    setModalVisible(false);
 
     try {
-      // 连接设备
+      // 异步连接设备和发现服务
       await device.connect();
       await device.discoverAllServicesAndCharacteristics();
       console.log("设备已连接并发现所有服务和特性");
 
-      // 发送第一条命令 F0 01 02
-      const connectionCommandData = new Uint8Array([0xf0, 0x01, 0x02]);
-      const connectionCrc = crc16Modbus(connectionCommandData);
-      const connectionCrcHighByte = (connectionCrc >> 8) & 0xff;
-      const connectionCrcLowByte = connectionCrc & 0xff;
-      const finalConnectionCommand = new Uint8Array([
-        ...connectionCommandData,
-        connectionCrcLowByte,
-        connectionCrcHighByte,
-        0x0d, // 结束符
-        0x0a, // 结束符
-      ]);
-      const base64ConnectionCommand = base64.fromByteArray(
-        finalConnectionCommand
-      );
+      // 解密后的值发送给设备
+      const sendDecryptedValue = async (decryptedValue) => {
+        try {
+          const message = `ID:${decryptedValue}`;
+          const bufferMessage = Buffer.from(message, "utf-8");
+          const base64Message = bufferMessage.toString("base64");
 
-      await device.writeCharacteristicWithResponseForService(
-        serviceUUID,
-        writeCharacteristicUUID,
-        base64ConnectionCommand
-      );
-      console.log("第一条蓝牙连接命令已发送: F0 01 02");
+          await device.writeCharacteristicWithResponseForService(
+            serviceUUID,
+            writeCharacteristicUUID,
+            base64Message
+          );
+          console.log(`解密后的值已发送: ${message}`);
+        } catch (error) {
+          console.error("发送解密值时出错:", error);
+        }
+      };
 
-      // 延迟 5 毫秒
-      await new Promise((resolve) => setTimeout(resolve, 5));
+      // 先启动监听器
+      monitorVerificationCode(device, sendDecryptedValue);
 
-      // 发送第二条命令 F1 01 02
-      await sendStartCommand(device);
+      // 确保监听器已完全启动后再发送 'request'
+      setTimeout(async () => {
+        try {
+          const requestString = "request";
+          const bufferRequestString = Buffer.from(requestString, "utf-8");
+          const base64requestString = bufferRequestString.toString("base64");
 
-      // 开始监听嵌入式设备的返回信息
-      monitorVerificationCode(device);
+          await device.writeCharacteristicWithResponseForService(
+            serviceUUID,
+            writeCharacteristicUUID,
+            base64requestString
+          );
+          console.log("字符串 'request' 已发送");
+        } catch (error) {
+          console.error("发送 'request' 时出错:", error);
+        }
+      }, 200); // 延迟 200ms 确保监听器启动（根据设备响应调整）
 
-      // 关闭设备扫描模态框
-      setBleVisible(false);
-
-      // 显示 PIN 码输入模态框
+      // 显示 PIN 码弹窗
       setPinModalVisible(true);
     } catch (error) {
       console.error("设备连接或命令发送错误:", error);
     }
   };
-
   // 处理断开连接的逻辑
   const handleDisconnectDevice = async (device) => {
     try {
@@ -894,6 +898,46 @@ function WalletScreen({ route, navigation }) {
       console.error("设备重新连接失败:", error);
     }
   };
+
+  function hexStringToUint32Array(hexString) {
+    // 将16进制字符串拆分为两个32位无符号整数
+    return new Uint32Array([
+      parseInt(hexString.slice(0, 8), 16),
+      parseInt(hexString.slice(8, 16), 16),
+    ]);
+  }
+
+  function uint32ArrayToHexString(uint32Array) {
+    // 将两个32位无符号整数转换回16进制字符串
+    return (
+      uint32Array[0].toString(16).toUpperCase().padStart(8, "0") +
+      uint32Array[1].toString(16).toUpperCase().padStart(8, "0")
+    );
+  }
+
+  // 解密算法
+  function decrypt(v, k) {
+    let v0 = v[0] >>> 0,
+      v1 = v[1] >>> 0,
+      sum = 0xc6ef3720 >>> 0,
+      i;
+    const delta = 0x9e3779b9 >>> 0;
+    const k0 = k[0] >>> 0,
+      k1 = k[1] >>> 0,
+      k2 = k[2] >>> 0,
+      k3 = k[3] >>> 0;
+
+    for (i = 0; i < 32; i++) {
+      v1 -= (((v0 << 4) >>> 0) + k2) ^ (v0 + sum) ^ (((v0 >>> 5) >>> 0) + k3);
+      v1 >>>= 0;
+      v0 -= (((v1 << 4) >>> 0) + k0) ^ (v1 + sum) ^ (((v1 >>> 5) >>> 0) + k1);
+      v0 >>>= 0;
+      sum -= delta;
+      sum >>>= 0;
+    }
+    v[0] = v0 >>> 0;
+    v[1] = v1 >>> 0;
+  }
 
   let monitorSubscription;
 
