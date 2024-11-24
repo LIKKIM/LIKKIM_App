@@ -858,11 +858,16 @@ function TransactionsScreen() {
       // 将币种和派生路径组合为一个字符串
       const commandString = coinType + ":" + derivationPath;
 
-      // 向服务写入命令字符串
+      // 将命令字符串转换为 Base64 编码
+      const encodedCommand = Buffer.from(commandString, "utf-8").toString(
+        "base64"
+      );
+
+      // 向服务写入命令字符串（确保使用 Base64 编码）
       await device.writeCharacteristicWithResponseForService(
         serviceUUID,
         writeCharacteristicUUID,
-        Buffer.from(commandString, "utf-8")
+        encodedCommand
       );
 
       // 设置验证地址的状态
@@ -878,7 +883,7 @@ function TransactionsScreen() {
         (error, characteristic) => {
           if (error) {
             console.log("监听设备响应时出错:", error);
-            //  return;
+            return;
           }
           const receivedDataHex = Buffer.from(characteristic.value, "base64")
             .toString("hex")
