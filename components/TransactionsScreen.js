@@ -855,45 +855,14 @@ function TransactionsScreen() {
           return;
       }
 
-      // 将币种和派生路径转换为 UTF-8 格式的数组
-      const coinTypeBytes = Buffer.from(coinType, "utf-8");
-      const derivationPathBytes = Buffer.from(derivationPath, "utf-8");
+      // 将币种和派生路径组合为一个字符串
+      const commandString = coinType + ":" + derivationPath;
 
-      // 计算数据长度
-      const coinTypeLength = coinTypeBytes.length;
-      const derivationPathLength = derivationPathBytes.length;
-      const totalLength = 1 + 1 + coinTypeLength + 1 + derivationPathLength;
-
-      // 构建命令数据
-      const commandData = new Uint8Array([
-        0xf9, // 命令标识符
-        0x02, // 标志位
-        coinTypeLength,
-        ...coinTypeBytes,
-        derivationPathLength,
-        ...derivationPathBytes,
-        totalLength,
-      ]);
-
-      // 计算 CRC 校验码
-      const crc = crc16Modbus(commandData);
-      const crcHighByte = (crc >> 8) & 0xff;
-      const crcLowByte = crc & 0xff;
-
-      // 构建并发送最终的命令
-      const finalCommand = new Uint8Array([
-        ...commandData,
-        crcLowByte,
-        crcHighByte,
-        0x0d, // 结束符
-        0x0a, // 结束符
-      ]);
-
-      // 向服务写入命令
+      // 向服务写入命令字符串
       await device.writeCharacteristicWithResponseForService(
         serviceUUID,
         writeCharacteristicUUID,
-        Buffer.from(finalCommand)
+        Buffer.from(commandString, "utf-8")
       );
 
       // 设置验证地址的状态
