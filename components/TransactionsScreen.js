@@ -842,37 +842,88 @@ function TransactionsScreen() {
       let commandString;
       switch (coinType) {
         case "BTC":
-          commandString = "bitcoin:m/49'/0'/0'/0/0"; // 比特币
+          commandString = "bitcoin:m/49'/0'/0'/0/0"; // Bitcoin
           break;
         case "ETH":
-          commandString = "ethereum:m/44'/60'/0'/0/0"; // 以太坊
+          commandString = "ethereum:m/44'/60'/0'/0/0"; // Ethereum
           break;
         case "TRX":
-          commandString = "tron:m/44'/195'/0'/0/0"; // 波场
+          commandString = "tron:m/44'/195'/0'/0/0"; // Tron
           break;
         case "BCH":
-          commandString = "bitcoin_cash:m/44'/145'/0'/0/0"; // 比特币现金
+          commandString = "bitcoin_cash:m/44'/145'/0'/0/0"; // Bitcoin Cash
           break;
         case "BNB":
-          commandString = "binance:m/44'/60'/0'/0/0"; // 币安币
+          commandString = "binance:m/44'/60'/0'/0/0"; // BNB
           break;
         case "OP":
           commandString = "optimism:m/44'/60'/0'/0/0"; // Optimism
           break;
         case "ETC":
-          commandString = "ethereum_classic:m/44'/60'/0'/0/0"; // 以太坊经典
+          commandString = "ethereum_classic:m/44'/60'/0'/0/0"; // Ethereum Classic
           break;
         case "LTC":
-          commandString = "litecoin:m/49'/2'/0'/0/0"; // 莱特币
+          commandString = "litecoin:m/49'/2'/0'/0/0"; // Litecoin
           break;
         case "XRP":
-          commandString = "ripple:m/44'/144'/0'/0/0"; // 瑞波币
+          commandString = "ripple:m/44'/144'/0'/0/0"; // Ripple
           break;
         case "SOL":
           commandString = "solana:m/44'/501'/0'/0/0"; // Solana
           break;
         case "ARB":
           commandString = "arbitrum:m/44'/60'/0'/0/0"; // Arbitrum
+          break;
+        case "AURORA":
+          commandString = "aurora:m/44'/60'/0'/0/0"; // Aurora
+          break;
+        case "AVAX":
+          commandString = "avalanche:m/44'/60'/0'/0/0"; // Avalanche
+          break;
+        case "CELO":
+          commandString = "celo:m/44'/60'/0'/0/0"; // Celo
+          break;
+        case "FTM":
+          commandString = "fantom:m/44'/60'/0'/0/0"; // Fantom
+          break;
+        case "HTX":
+          commandString = "huobi:m/44'/60'/0'/0/0"; // Huobi ECO Chain
+          break;
+        case "IOTX":
+          commandString = "iotex:m/44'/60'/0'/0/0"; // IoTeX
+          break;
+        case "OKB":
+          commandString = "okx:m/44'/60'/0'/0/0"; // OKX Chain
+          break;
+        case "MATIC":
+          commandString = "polygon:m/44'/60'/0'/0/0"; // Polygon
+          break;
+        case "ZKSYNC":
+          commandString = "zksync:m/44'/60'/0'/0/0"; // zkSync Era
+          break;
+        case "APT":
+          commandString = "aptos:m/44'/637'/0'/0'/0"; // Aptos
+          break;
+        case "SUI":
+          commandString = "sui:m/44'/784'/0'/0'/0"; // SUI
+          break;
+        case "COSMOS":
+          commandString = "cosmos:m/44'/118'/0'/0/0"; // Cosmos
+          break;
+        case "Celestia":
+          commandString = "celestia:m/44'/118'/0'/0/0"; // Celestia
+          break;
+        case "Cronos":
+          commandString = "cronos:m/44'/60'/0'/0/0"; // Cronos
+          break;
+        case "Juno":
+          commandString = "juno:m/44'/118'/0'/0/0"; // Juno
+          break;
+        case "Osmosis":
+          commandString = "osmosis:m/44'/118'/0'/0/0"; // Osmosis
+          break;
+        case "Gnosis":
+          commandString = "gnosis:m/44'/60'/0'/0/0"; // Gnosis
           break;
         default:
           console.log("不支持的币种:", coinType);
