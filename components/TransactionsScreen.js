@@ -895,7 +895,7 @@ function TransactionsScreen() {
         case "OKB":
           commandString = "okx:m/44'/60'/0'/0/0"; // OKX Chain
           break;
-        case "MATIC":
+        case "POL":
           commandString = "polygon:m/44'/60'/0'/0/0"; // Polygon
           break;
         case "ZKSYNC":
