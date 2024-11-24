@@ -855,15 +855,13 @@ function TransactionsScreen() {
           return;
       }
 
-      // 将币种和派生路径转换为十六进制格式
-      const coinTypeHex = Buffer.from(coinType, "utf-8").toString("hex");
-      const derivationPathHex = Buffer.from(derivationPath, "utf-8").toString(
-        "hex"
-      );
+      // 将币种和派生路径转换为 UTF-8 格式的数组
+      const coinTypeBytes = Buffer.from(coinType, "utf-8");
+      const derivationPathBytes = Buffer.from(derivationPath, "utf-8");
 
       // 计算数据长度
-      const coinTypeLength = coinTypeHex.length / 2;
-      const derivationPathLength = derivationPathHex.length / 2;
+      const coinTypeLength = coinTypeBytes.length;
+      const derivationPathLength = derivationPathBytes.length;
       const totalLength = 1 + 1 + coinTypeLength + 1 + derivationPathLength;
 
       // 构建命令数据
@@ -871,9 +869,9 @@ function TransactionsScreen() {
         0xf9, // 命令标识符
         0x02, // 标志位
         coinTypeLength,
-        ...Buffer.from(coinTypeHex, "hex"),
+        ...coinTypeBytes,
         derivationPathLength,
-        ...Buffer.from(derivationPathHex, "hex"),
+        ...derivationPathBytes,
         totalLength,
       ]);
 
@@ -891,18 +889,11 @@ function TransactionsScreen() {
         0x0a, // 结束符
       ]);
 
-      const base64Command = base64.fromByteArray(finalCommand);
-      console.log(
-        `发送地址显示命令: ${Array.from(finalCommand)
-          .map((byte) => byte.toString(16).padStart(2, "0"))
-          .join(" ")}`
-      );
-
       // 向服务写入命令
       await device.writeCharacteristicWithResponseForService(
         serviceUUID,
         writeCharacteristicUUID,
-        base64Command
+        Buffer.from(finalCommand)
       );
 
       // 设置验证地址的状态
