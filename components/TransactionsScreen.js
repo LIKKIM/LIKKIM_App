@@ -166,7 +166,7 @@ function TransactionsScreen() {
       { allowDuplicates: true },
       (error, device) => {
         if (error) {
-          console.error("BleManager scanning error:", error);
+          console.log("BleManager scanning error:", error);
           return;
         }
 
@@ -215,7 +215,7 @@ function TransactionsScreen() {
           setTransactionHistory(history);
         }
       } catch (error) {
-        console.error("Failed to load transaction history:", error);
+        console.log("Failed to load transaction history:", error);
       }
     };
 
@@ -343,7 +343,7 @@ function TransactionsScreen() {
             setTransactionFee(selectedCryptoObj.fee); // 如果查询失败，使用 initialAdditionalCryptos 中的 fee 值
           }
         } catch (error) {
-          console.error("Error:", error);
+          console.log("Error:", error);
           setTransactionFee(selectedCryptoObj.fee); // 如果请求出错，使用 initialAdditionalCryptos 中的 fee 值
         } finally {
           setHasFetchedBalance(true);
@@ -481,7 +481,7 @@ function TransactionsScreen() {
       async (error, characteristic) => {
         if (error) {
           console.log("监听设备响应时出错:", error.message);
-          return;
+          //   return;
         }
 
         const receivedData = Buffer.from(characteristic.value, "base64");
@@ -523,7 +523,7 @@ function TransactionsScreen() {
             );
             console.log(`已发送字符串 'validation' 给设备`);
           } catch (error) {
-            console.error("发送 'validation' 时出错:", error);
+            console.log("发送 'validation' 时出错:", error);
           }
         }
 
@@ -549,7 +549,7 @@ function TransactionsScreen() {
       notifyCharacteristicUUID,
       async (error, characteristic) => {
         if (error) {
-          console.error("监听交易反馈时出错:", error.message);
+          console.log("监听交易反馈时出错:", error.message);
           return;
         }
 
@@ -694,10 +694,10 @@ function TransactionsScreen() {
                   });
                 }
               } catch (error) {
-                console.error("发送签名数据时出错:", error);
+                console.log("发送签名数据时出错:", error);
               }
             } else {
-              console.error("CRC校验失败");
+              console.log("CRC校验失败");
             }
           } else if (dataBuffer === "FA000230D00D0A") {
             console.log("拒绝签名");
@@ -717,7 +717,7 @@ function TransactionsScreen() {
   const handleDevicePress = async (device) => {
     // 检查是否传递了有效的设备对象
     if (typeof device !== "object" || typeof device.connect !== "function") {
-      console.error("无效的设备对象，无法连接设备:", device);
+      console.log("无效的设备对象，无法连接设备:", device);
       return;
     }
 
@@ -744,7 +744,7 @@ function TransactionsScreen() {
           );
           console.log(`解密后的值已发送: ${message}`);
         } catch (error) {
-          console.error("发送解密值时出错:", error);
+          console.log("发送解密值时出错:", error);
         }
       };
 
@@ -765,14 +765,14 @@ function TransactionsScreen() {
           );
           console.log("字符串 'request' 已发送");
         } catch (error) {
-          console.error("发送 'request' 时出错:", error);
+          console.log("发送 'request' 时出错:", error);
         }
       }, 200); // 延迟 200ms 确保监听器启动（根据设备响应调整）
 
       // 显示 PIN 码弹窗
       setPinModalVisible(true);
     } catch (error) {
-      console.error("设备连接或命令发送错误:", error);
+      console.log("设备连接或命令发送错误:", error);
     }
   };
   // 处理断开连接的逻辑
@@ -799,7 +799,7 @@ function TransactionsScreen() {
       setIsVerificationSuccessful(false);
       console.log("验证状态已更新为 false。");
     } catch (error) {
-      console.error("断开设备连接失败:", error);
+      console.log("断开设备连接失败:", error);
     }
   };
   // 停止监听验证码;
@@ -810,7 +810,7 @@ function TransactionsScreen() {
         monitorSubscription = null;
         console.log("验证码监听已停止");
       } catch (error) {
-        console.error("停止监听时发生错误:", error);
+        console.log("停止监听时发生错误:", error);
       }
     }
   };
@@ -819,7 +819,7 @@ function TransactionsScreen() {
     try {
       // 检查设备对象是否有效
       if (typeof device !== "object" || !device.isConnected) {
-        console.error("设备对象无效:", device);
+        console.log("设备对象无效:", device);
         return;
       }
 
@@ -832,7 +832,7 @@ function TransactionsScreen() {
       if (
         typeof device.writeCharacteristicWithResponseForService !== "function"
       ) {
-        console.error(
+        console.log(
           "设备不支持 writeCharacteristicWithResponseForService 方法。"
         );
         return;
@@ -851,7 +851,7 @@ function TransactionsScreen() {
           derivationPath = "m/44'/195'/0'/0/0"; // 波场的派生路径
           break;
         default:
-          console.error("不支持的币种");
+          console.log("不支持的币种");
           return;
       }
 
@@ -877,8 +877,8 @@ function TransactionsScreen() {
         notifyCharacteristicUUID,
         (error, characteristic) => {
           if (error) {
-            console.error("监听设备响应时出错:", error);
-            return;
+            console.log("监听设备响应时出错:", error);
+            //  return;
           }
           const receivedDataHex = Buffer.from(characteristic.value, "base64")
             .toString("hex")
@@ -895,7 +895,7 @@ function TransactionsScreen() {
 
       return addressMonitorSubscription;
     } catch (error) {
-      console.error("发送显示地址命令失败:", error);
+      console.log("发送显示地址命令失败:", error);
     }
   };
 
@@ -911,7 +911,7 @@ function TransactionsScreen() {
   ) => {
     try {
       if (verifiedDevices.length === 0) {
-        console.error("未找到已验证的设备");
+        console.log("未找到已验证的设备");
         return;
       }
 
@@ -922,7 +922,7 @@ function TransactionsScreen() {
       await device.connect();
       await device.discoverAllServicesAndCharacteristics();
       if (!device.isConnected) {
-        console.error("设备未连接，无法发送交易命令");
+        console.log("设备未连接，无法发送交易命令");
         return;
       }
 
@@ -938,7 +938,7 @@ function TransactionsScreen() {
       }
 
       if (!crypto || !crypto.address) {
-        console.error("未找到有效的加密货币或地址缺失");
+        console.log("未找到有效的加密货币或地址缺失");
         return;
       }
 
@@ -955,7 +955,7 @@ function TransactionsScreen() {
         !blockTime ||
         !derivationPath
       ) {
-        console.error("参数缺失：", {
+        console.log("参数缺失：", {
           contractAddress,
           cryptoAddress: crypto.address,
           userAddress,
@@ -1129,11 +1129,11 @@ function TransactionsScreen() {
       monitorTransactionResponse(device);
       console.log("签名交易命令已成功发送到设备");
     } catch (error) {
-      console.error("发送交易数据到 BLE 设备时出错:", error);
+      console.log("发送交易数据到 BLE 设备时出错:", error);
 
       // 检查是否设备断开连接或其他问题
       if (error.message.includes("is not connected")) {
-        console.error("设备可能已断开连接，或未正确连接。");
+        console.log("设备可能已断开连接，或未正确连接。");
       }
     }
   };
@@ -1176,7 +1176,7 @@ function TransactionsScreen() {
       );
       console.log("启动验证命令已发送");
     } catch (error) {
-      console.error("发送启动命令失败", error);
+      console.log("发送启动命令失败", error);
     }
   };
   // 提交验证码
@@ -1230,7 +1230,7 @@ function TransactionsScreen() {
         );
         console.log("Success command has been sent");
       } catch (error) {
-        console.error("Failed to send success command", error);
+        console.log("Failed to send success command", error);
       }
     } else {
       console.log("PIN 验证失败");
@@ -1241,7 +1241,7 @@ function TransactionsScreen() {
           monitorSubscription.remove();
           console.log("验证码监听已停止");
         } catch (error) {
-          console.error("停止监听时发生错误:", error);
+          console.log("停止监听时发生错误:", error);
         }
       }
 
@@ -1251,7 +1251,7 @@ function TransactionsScreen() {
           await selectedDevice.cancelConnection();
           console.log("已断开与设备的连接");
         } catch (error) {
-          console.error("断开连接时发生错误:", error);
+          console.log("断开连接时发生错误:", error);
         }
       }
 
@@ -1306,7 +1306,7 @@ function TransactionsScreen() {
           setVerifiedDevices(JSON.parse(savedDevices));
         }
       } catch (error) {
-        console.error("Error loading verified devices: ", error);
+        console.log("Error loading verified devices: ", error);
       }
     };
 
@@ -1405,7 +1405,7 @@ function TransactionsScreen() {
           setAddedCryptos(JSON.parse(savedCryptos));
         }
       } catch (error) {
-        console.error("Error loading addedCryptos: ", error);
+        console.log("Error loading addedCryptos: ", error);
       }
     };
     loadAddedCryptos();
@@ -1792,7 +1792,7 @@ function TransactionsScreen() {
 
                       setConfirmModalVisible(false);
                     } catch (error) {
-                      console.error("确认交易时出错:", error);
+                      console.log("确认交易时出错:", error);
                     }
                   }}
                 >
