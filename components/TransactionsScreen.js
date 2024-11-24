@@ -838,25 +838,46 @@ function TransactionsScreen() {
         return;
       }
 
-      // 根据币种选择相应的派生路径
-      let derivationPath;
+      // 根据 coinType 匹配对应的字符串
+      let commandString;
       switch (coinType) {
         case "BTC":
-          derivationPath = "m/49'/0'/0'/0/0"; // 比特币的派生路径
+          commandString = "bitcoin:m/49'/0'/0'/0/0"; // 比特币
           break;
         case "ETH":
-          derivationPath = "m/44'/60'/0'/0/0"; // 以太坊的派生路径
+          commandString = "ethereum:m/44'/60'/0'/0/0"; // 以太坊
           break;
         case "TRX":
-          derivationPath = "m/44'/195'/0'/0/0"; // 波场的派生路径
+          commandString = "tron:m/44'/195'/0'/0/0"; // 波场
+          break;
+        case "BCH":
+          commandString = "bitcoin_cash:m/44'/145'/0'/0/0"; // 比特币现金
+          break;
+        case "BNB":
+          commandString = "binance:m/44'/60'/0'/0/0"; // 币安币
+          break;
+        case "OP":
+          commandString = "optimism:m/44'/60'/0'/0/0"; // Optimism
+          break;
+        case "ETC":
+          commandString = "ethereum_classic:m/44'/60'/0'/0/0"; // 以太坊经典
+          break;
+        case "LTC":
+          commandString = "litecoin:m/49'/2'/0'/0/0"; // 莱特币
+          break;
+        case "XRP":
+          commandString = "ripple:m/44'/144'/0'/0/0"; // 瑞波币
+          break;
+        case "SOL":
+          commandString = "solana:m/44'/501'/0'/0/0"; // Solana
+          break;
+        case "ARB":
+          commandString = "arbitrum:m/44'/60'/0'/0/0"; // Arbitrum
           break;
         default:
-          console.log("不支持的币种");
+          console.log("不支持的币种:", coinType);
           return;
       }
-
-      // 将币种和派生路径组合为一个字符串
-      const commandString = coinType + ":" + derivationPath;
 
       // 将命令字符串转换为 Base64 编码
       const encodedCommand = Buffer.from(commandString, "utf-8").toString(
@@ -873,7 +894,7 @@ function TransactionsScreen() {
       // 设置验证地址的状态
       setIsVerifyingAddress(true);
       setAddressVerificationMessage("正在 LIKKIM 上验证地址...");
-      console.log("地址显示命令已发送");
+      console.log("地址显示命令已发送:", commandString);
 
       // 监听设备的响应
       const notifyCharacteristicUUID = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E";
