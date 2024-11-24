@@ -722,8 +722,8 @@ function TransactionsScreen() {
     }
 
     setSelectedDevice(device);
-    setModalVisible(false);
-
+    // setModalVisible(false);
+    setBleVisible(false);
     try {
       // 异步连接设备和发现服务
       await device.connect();
@@ -1331,7 +1331,7 @@ function TransactionsScreen() {
       let canRunCb = true;
       for (let permissionItem in enableds) {
         if (enableds[permissionItem] !== "granted") {
-          console.warn(permissionItem + "权限未授予");
+          console.log(permissionItem + "权限未授予");
           canRunCb = false;
         }
       }
