@@ -1189,22 +1189,14 @@ function TransactionsScreen() {
     // 首先关闭 "Enter PIN to Connect" 的模态框
     setPinModalVisible(false);
 
-    // 关闭所有其他可能打开的模态框
-    setVerificationSuccessModalVisible(false);
-    setVerificationFailModalVisible(false);
+    // 去除用户输入的 PIN 和接收到的验证码的空格
+    const pinCodeValue = pinCode.trim(); // 去除多余空格
+    const verificationCodeValue = receivedVerificationCode.trim(); // 去除多余空格
 
-    // 将用户输入的 PIN 转换为数字
-    const pinCodeValue = parseInt(pinCode, 10); // 将 "1234" 转换为数字 1234
+    console.log(`用户输入的 PIN: ${pinCodeValue}`);
+    console.log(`接收到的验证码: ${verificationCodeValue}`);
 
-    // 将接收到的验证码转换为数字
-    const verificationCodeValue = parseInt(
-      receivedVerificationCode.replace(" ", ""),
-      16
-    );
-
-    console.log(`用户输入的 PIN 数值: ${pinCodeValue}`);
-    console.log(`接收到的验证码数值: ${verificationCodeValue}`);
-
+    // 检查 PIN 是否匹配
     if (pinCodeValue === verificationCodeValue) {
       console.log("PIN 验证成功");
       setVerificationSuccessModalVisible(true);
@@ -1220,23 +1212,6 @@ function TransactionsScreen() {
         "verifiedDevices",
         JSON.stringify(newVerifiedDevices)
       );
-
-      // 发送成功命令 F4 03 10 00 04 95 97 0D 0A
-      const successCommand = new Uint8Array([
-        0xf4, 0x03, 0x10, 0x00, 0x04, 0x95, 0x97, 0x0d, 0x0a,
-      ]);
-      const base64SuccessCommand = base64.fromByteArray(successCommand);
-
-      try {
-        await selectedDevice.writeCharacteristicWithResponseForService(
-          serviceUUID,
-          writeCharacteristicUUID,
-          base64SuccessCommand
-        );
-        console.log("Success command has been sent");
-      } catch (error) {
-        console.log("Failed to send success command", error);
-      }
     } else {
       console.log("PIN 验证失败");
 
