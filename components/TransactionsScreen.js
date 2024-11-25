@@ -1002,141 +1002,189 @@ function TransactionsScreen() {
         return;
       }
 
-      let chainKey, hdPath;
-      switch (coinType) {
-        case "BTC":
-          chainKey = "bitcoin";
-          hdPath = "m/49'/0'/0'/0/0";
-          break;
-        case "ETH":
-          chainKey = "ethereum";
-          hdPath = "m/44'/60'/0'/0/0";
-          break;
-        case "TRX":
-          chainKey = "tron";
-          hdPath = "m/44'/195'/0'/0/0";
-          break;
-        case "BCH":
-          chainKey = "bitcoin_cash";
-          hdPath = "m/44'/145'/0'/0/0";
-          break;
-        case "BNB":
-          chainKey = "binance";
-          hdPath = "m/44'/60'/0'/0/0";
-          break;
-        case "OP":
-          chainKey = "optimism";
-          hdPath = "m/44'/60'/0'/0/0";
-          break;
-        case "ETC":
-          chainKey = "ethereum_classic";
-          hdPath = "m/44'/60'/0'/0/0";
-          break;
-        case "LTC":
-          chainKey = "litecoin";
-          hdPath = "m/49'/2'/0'/0/0";
-          break;
-        case "XRP":
-          chainKey = "ripple";
-          hdPath = "m/44'/144'/0'/0/0";
-          break;
-        case "SOL":
-          chainKey = "solana";
-          hdPath = "m/44'/501'/0'/0/0";
-          break;
-        case "ARB":
-          chainKey = "arbitrum";
-          hdPath = "m/44'/60'/0'/0/0";
-          break;
-        case "AURORA":
-          chainKey = "aurora";
-          hdPath = "m/44'/60'/0'/0/0";
-          break;
-        case "AVAX":
-          chainKey = "avalanche";
-          hdPath = "m/44'/60'/0'/0/0";
-          break;
-        case "CELO":
-          chainKey = "celo";
-          hdPath = "m/44'/60'/0'/0/0";
-          break;
-        case "FTM":
-          chainKey = "fantom";
-          hdPath = "m/44'/60'/0'/0/0";
-          break;
-        case "HTX":
-          chainKey = "huobi";
-          hdPath = "m/44'/60'/0'/0/0";
-          break;
-        case "IOTX":
-          chainKey = "iotex";
-          hdPath = "m/44'/60'/0'/0/0";
-          break;
-        case "OKB":
-          chainKey = "okx";
-          hdPath = "m/44'/60'/0'/0/0";
-          break;
-        case "POL":
-          chainKey = "polygon";
-          hdPath = "m/44'/60'/0'/0/0";
-          break;
-        case "ZKSYNC":
-          chainKey = "zksync";
-          hdPath = "m/44'/60'/0'/0/0";
-          break;
-        case "APT":
-          chainKey = "aptos";
-          hdPath = "m/44'/637'/0'/0'/0";
-          break;
-        case "SUI":
-          chainKey = "sui";
-          hdPath = "m/44'/784'/0'/0'/0";
-          break;
-        case "COSMOS":
-          chainKey = "cosmos";
-          hdPath = "m/44'/118'/0'/0/0";
-          break;
-        case "Celestia":
-          chainKey = "celestia";
-          hdPath = "m/44'/118'/0'/0/0";
-          break;
-        case "Cronos":
-          chainKey = "cronos";
-          hdPath = "m/44'/60'/0'/0/0";
-          break;
-        case "Juno":
-          chainKey = "juno";
-          hdPath = "m/44'/118'/0'/0/0";
-          break;
-        case "Osmosis":
-          chainKey = "osmosis";
-          hdPath = "m/44'/118'/0'/0/0";
-          break;
-        case "Gnosis":
-          chainKey = "gnosis";
-          hdPath = "m/44'/60'/0'/0/0";
-          break;
-        default:
-          console.log("不支持的币种:", coinType);
-          return;
+      if (coinType === "ETH") {
+        // 手动构造交易数据
+        const nonce = 1; // 示例值，实际应从链上获取
+        const gasPrice = 20; // 示例值，单位 gwei
+        const gasLimit = 10000; // 示例值
+        const to = userAddress; // 目标地址，用户输入的接收地址
+        const value = `${amount * Math.pow(10, 18)}`; // 转换为 wei 单位
+
+        // 构造 `data` 字段（代替 web3.eth.abi.encodeFunctionCall）
+        const recipient = userAddress.replace("0x", "").toLowerCase(); // 地址去掉 `0x`
+        const paddedRecipient = recipient.padStart(64, "0"); // 地址补齐 64 位
+        const amountHex = parseInt(value).toString(16).padStart(64, "0"); // 金额补齐 64 位
+        const functionSignature = "a9059cbb"; // `transfer` 的方法 ID（预定义值）
+        const data = `0x${functionSignature}${paddedRecipient}${amountHex}`;
+
+        const transactionData = {
+          nonce,
+          gas_price: gasPrice,
+          gas_limit: gasLimit,
+          to,
+          value,
+          data,
+        };
+
+        console.log("ETH交易数据:", transactionData);
+
+        // 将交易数据转换为 UTF-8 字符串
+        const utf8String = JSON.stringify(transactionData);
+        console.log(`UTF-8 String to send: ${utf8String}`);
+
+        // 使用 BLE 向设备发送数据
+        const base64String = Buffer.from(utf8String, "utf-8").toString(
+          "base64"
+        );
+        await device.writeCharacteristicWithResponseForService(
+          serviceUUID,
+          writeCharacteristicUUID,
+          base64String
+        );
+        console.log("交易数据已发送到设备");
+      } else {
+        // 其他链的处理逻辑（保留之前的代码逻辑）
+        let chainKey, hdPath;
+        switch (coinType) {
+          case "BTC":
+            chainKey = "bitcoin";
+            hdPath = "m/49'/0'/0'/0/0";
+            break;
+          case "TRX":
+            chainKey = "tron";
+            hdPath = "m/44'/195'/0'/0/0";
+            break;
+          case "BCH":
+            chainKey = "bitcoin_cash";
+            hdPath = "m/44'/145'/0'/0/0";
+            break;
+          case "BNB":
+            chainKey = "binance";
+            hdPath = "m/44'/60'/0'/0/0";
+            break;
+          case "OP":
+            chainKey = "optimism";
+            hdPath = "m/44'/60'/0'/0/0";
+            break;
+          case "ETC":
+            chainKey = "ethereum_classic";
+            hdPath = "m/44'/60'/0'/0/0";
+            break;
+          case "LTC":
+            chainKey = "litecoin";
+            hdPath = "m/49'/2'/0'/0/0";
+            break;
+          case "XRP":
+            chainKey = "ripple";
+            hdPath = "m/44'/144'/0'/0/0";
+            break;
+          case "SOL":
+            chainKey = "solana";
+            hdPath = "m/44'/501'/0'/0/0";
+            break;
+          case "ARB":
+            chainKey = "arbitrum";
+            hdPath = "m/44'/60'/0'/0/0";
+            break;
+          case "AURORA":
+            chainKey = "aurora";
+            hdPath = "m/44'/60'/0'/0/0";
+            break;
+          case "AVAX":
+            chainKey = "avalanche";
+            hdPath = "m/44'/60'/0'/0/0";
+            break;
+          case "CELO":
+            chainKey = "celo";
+            hdPath = "m/44'/60'/0'/0/0";
+            break;
+          case "FTM":
+            chainKey = "fantom";
+            hdPath = "m/44'/60'/0'/0/0";
+            break;
+          case "HTX":
+            chainKey = "huobi";
+            hdPath = "m/44'/60'/0'/0/0";
+            break;
+          case "IOTX":
+            chainKey = "iotex";
+            hdPath = "m/44'/60'/0'/0/0";
+            break;
+          case "OKB":
+            chainKey = "okx";
+            hdPath = "m/44'/60'/0'/0/0";
+            break;
+          case "POL":
+            chainKey = "polygon";
+            hdPath = "m/44'/60'/0'/0/0";
+            break;
+          case "ZKSYNC":
+            chainKey = "zksync";
+            hdPath = "m/44'/60'/0'/0/0";
+            break;
+          case "APT":
+            chainKey = "aptos";
+            hdPath = "m/44'/637'/0'/0'/0";
+            break;
+          case "SUI":
+            chainKey = "sui";
+            hdPath = "m/44'/784'/0'/0'/0";
+            break;
+          case "COSMOS":
+            chainKey = "cosmos";
+            hdPath = "m/44'/118'/0'/0/0";
+            break;
+          case "Celestia":
+            chainKey = "celestia";
+            hdPath = "m/44'/118'/0'/0/0";
+            break;
+          case "Cronos":
+            chainKey = "cronos";
+            hdPath = "m/44'/60'/0'/0/0";
+            break;
+          case "Juno":
+            chainKey = "juno";
+            hdPath = "m/44'/118'/0'/0/0";
+            break;
+          case "Osmosis":
+            chainKey = "osmosis";
+            hdPath = "m/44'/118'/0'/0/0";
+            break;
+          case "Gnosis":
+            chainKey = "gnosis";
+            hdPath = "m/44'/60'/0'/0/0";
+            break;
+          default:
+            console.log("不支持的币种:", coinType);
+            return;
+        }
+
+        const transactionData = {
+          chain_key: chainKey,
+          hd_path: hdPath,
+          data: {
+            hash,
+            height: height.toString(),
+            blockTime: blockTime.toString(),
+            amount: amount.toString(),
+            userAddress,
+          },
+        };
+
+        const utf8String = JSON.stringify(transactionData);
+        console.log(`UTF-8 String to send: ${utf8String}`);
+
+        // 发送数据
+        const base64String = Buffer.from(utf8String, "utf-8").toString(
+          "base64"
+        );
+        await device.writeCharacteristicWithResponseForService(
+          serviceUUID,
+          writeCharacteristicUUID,
+          base64String
+        );
+        console.log("交易数据已发送到设备");
       }
-
-      const transactionData = {
-        chain_key: chainKey,
-        hd_path: hdPath,
-        data: {
-          hash,
-          height: height.toString(),
-          blockTime: blockTime.toString(),
-          amount: amount.toString(),
-          userAddress,
-        },
-      };
-
-      const utf8String = JSON.stringify(transactionData);
-      console.log(`UTF-8 String to send: ${utf8String}`);
-
-      // 发送数据的其他步骤
     } catch (error) {
       console.log("发送交易数据到 BLE 设备时出错:", error);
     }
