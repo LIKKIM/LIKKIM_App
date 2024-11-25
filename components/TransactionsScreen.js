@@ -984,7 +984,7 @@ function TransactionsScreen() {
     blockTime,
     amount,
     userAddress,
-    cryptoName = "USDT"
+    coinType // 币种类型
   ) => {
     try {
       if (verifiedDevices.length === 0) {
@@ -995,7 +995,6 @@ function TransactionsScreen() {
       const deviceID = verifiedDevices[0];
       const device = await bleManagerRef.current.connectToDevice(deviceID);
 
-      // 确保设备已连接并发现所有服务和特性
       await device.connect();
       await device.discoverAllServicesAndCharacteristics();
       if (!device.isConnected) {
@@ -1003,212 +1002,162 @@ function TransactionsScreen() {
         return;
       }
 
-      // 让设备准备好
       await new Promise((resolve) => setTimeout(resolve, 500));
 
-      let crypto = initialAdditionalCryptos.find(
-        (c) => c.name === cryptoName || c.shortName === cryptoName
-      );
-
-      if (!crypto && usdtCrypto.shortName === cryptoName) {
-        crypto = usdtCrypto;
+      let chainKey, hdPath;
+      switch (coinType) {
+        case "BTC":
+          chainKey = "bitcoin";
+          hdPath = "m/49'/0'/0'/0/0";
+          break;
+        case "ETH":
+          chainKey = "ethereum";
+          hdPath = "m/44'/60'/0'/0/0";
+          break;
+        case "TRX":
+          chainKey = "tron";
+          hdPath = "m/44'/195'/0'/0/0";
+          break;
+        case "BCH":
+          chainKey = "bitcoin_cash";
+          hdPath = "m/44'/145'/0'/0/0";
+          break;
+        case "BNB":
+          chainKey = "binance";
+          hdPath = "m/44'/60'/0'/0/0";
+          break;
+        case "OP":
+          chainKey = "optimism";
+          hdPath = "m/44'/60'/0'/0/0";
+          break;
+        case "ETC":
+          chainKey = "ethereum_classic";
+          hdPath = "m/44'/60'/0'/0/0";
+          break;
+        case "LTC":
+          chainKey = "litecoin";
+          hdPath = "m/49'/2'/0'/0/0";
+          break;
+        case "XRP":
+          chainKey = "ripple";
+          hdPath = "m/44'/144'/0'/0/0";
+          break;
+        case "SOL":
+          chainKey = "solana";
+          hdPath = "m/44'/501'/0'/0/0";
+          break;
+        case "ARB":
+          chainKey = "arbitrum";
+          hdPath = "m/44'/60'/0'/0/0";
+          break;
+        case "AURORA":
+          chainKey = "aurora";
+          hdPath = "m/44'/60'/0'/0/0";
+          break;
+        case "AVAX":
+          chainKey = "avalanche";
+          hdPath = "m/44'/60'/0'/0/0";
+          break;
+        case "CELO":
+          chainKey = "celo";
+          hdPath = "m/44'/60'/0'/0/0";
+          break;
+        case "FTM":
+          chainKey = "fantom";
+          hdPath = "m/44'/60'/0'/0/0";
+          break;
+        case "HTX":
+          chainKey = "huobi";
+          hdPath = "m/44'/60'/0'/0/0";
+          break;
+        case "IOTX":
+          chainKey = "iotex";
+          hdPath = "m/44'/60'/0'/0/0";
+          break;
+        case "OKB":
+          chainKey = "okx";
+          hdPath = "m/44'/60'/0'/0/0";
+          break;
+        case "POL":
+          chainKey = "polygon";
+          hdPath = "m/44'/60'/0'/0/0";
+          break;
+        case "ZKSYNC":
+          chainKey = "zksync";
+          hdPath = "m/44'/60'/0'/0/0";
+          break;
+        case "APT":
+          chainKey = "aptos";
+          hdPath = "m/44'/637'/0'/0'/0";
+          break;
+        case "SUI":
+          chainKey = "sui";
+          hdPath = "m/44'/784'/0'/0'/0";
+          break;
+        case "COSMOS":
+          chainKey = "cosmos";
+          hdPath = "m/44'/118'/0'/0/0";
+          break;
+        case "Celestia":
+          chainKey = "celestia";
+          hdPath = "m/44'/118'/0'/0/0";
+          break;
+        case "Cronos":
+          chainKey = "cronos";
+          hdPath = "m/44'/60'/0'/0/0";
+          break;
+        case "Juno":
+          chainKey = "juno";
+          hdPath = "m/44'/118'/0'/0/0";
+          break;
+        case "Osmosis":
+          chainKey = "osmosis";
+          hdPath = "m/44'/118'/0'/0/0";
+          break;
+        case "Gnosis":
+          chainKey = "gnosis";
+          hdPath = "m/44'/60'/0'/0/0";
+          break;
+        default:
+          console.log("不支持的币种:", coinType);
+          return;
       }
 
-      if (!crypto || !crypto.address) {
-        console.log("未找到有效的加密货币或地址缺失");
-        return;
-      }
+      // 构建发送的数据
+      const transactionData = {
+        chain_key: chainKey, // 动态生成的 chain_key
+        hd_path: hdPath, // 动态生成的派生路径
+        hash,
+        height: height.toString(),
+        blockTime: blockTime.toString(),
+        amount: amount.toString(),
+        userAddress,
+      };
 
-      const contractAddress = "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t";
-      const derivationPath = "m/44'/195'/0'/0/0";
+      const utf8String = JSON.stringify(transactionData);
+      console.log(`UTF-8 String to send: ${utf8String}`);
 
-      if (
-        !contractAddress ||
-        !crypto.address ||
-        !userAddress ||
-        !amount ||
-        !hash ||
-        !height ||
-        !blockTime ||
-        !derivationPath
-      ) {
-        console.log("参数缺失：", {
-          contractAddress,
-          cryptoAddress: crypto.address,
-          userAddress,
-          amount,
-          hash,
-          height,
-          blockTime,
-          derivationPath,
-        });
-        return;
-      }
+      const chunkSize = 20;
+      const utf8Buffer = Buffer.from(utf8String, "utf-8");
 
-      // 将 amount 乘以 1000000 这里要具体问题具体分析
-      const adjustedAmount = BigInt(Math.round(parseFloat(amount) * 1000000));
-      console.log(`Adjusted Amount (in smallest unit): ${adjustedAmount}`);
-
-      // 将调整后的金额转换为 ASCII 的十六进制表示
-      const amountHex = Buffer.from(adjustedAmount.toString(), "ascii")
-        .toString("hex")
-        .toUpperCase();
-      console.log(`Amount Hex (ASCII after adjustment): ${amountHex}`);
-
-      // 将字符串转换为 ASCII 码的十六进制表示
-      function toAsciiHex(str) {
-        return Buffer.from(str, "ascii").toString("hex").toUpperCase();
-      }
-
-      // 继续处理其他参数
-      const contractAddressHex = Buffer.from(contractAddress, "utf-8").toString(
-        "hex"
-      );
-      const cryptoAddressHex = Buffer.from(crypto.address, "utf-8").toString(
-        "hex"
-      );
-      const userAddressHex = Buffer.from(userAddress, "utf-8").toString("hex");
-      const hashHex = Buffer.from(hash, "utf-8").toString("hex");
-      const heightHex = toAsciiHex(height.toString()).padStart(8, "0");
-      const blockTimeHex = toAsciiHex(blockTime.toString()).padStart(16, "0");
-      const derivationPathHex = Buffer.from(derivationPath, "utf-8").toString(
-        "hex"
-      );
-      const derivationPathLength = derivationPathHex.length / 2;
-
-      // 打印其他参数
-      console.log(`Contract Address: ${contractAddress}`);
-      console.log(`Crypto Address: ${crypto.address}`);
-      console.log(`User Address: ${userAddress}`);
-      console.log(`Amount (Original): ${amount}`);
-      console.log(`Hash: ${hash}`);
-      console.log(`Height: ${height}`);
-      console.log(`Block Time: ${blockTime}`);
-      console.log(`Derivation Path: ${derivationPath}`);
-
-      // 打印十六进制值
-      console.log(`Contract Address Hex: ${contractAddressHex}`);
-      console.log(`Crypto Address Hex: ${cryptoAddressHex}`);
-      console.log(`User Address Hex: ${userAddressHex}`);
-      console.log(`Amount Hex: ${amountHex}`);
-      console.log(`Hash Hex: ${hashHex}`);
-      console.log(`Height Hex: ${heightHex}`);
-      console.log(`Block Time Hex: ${blockTimeHex}`);
-      console.log(`Derivation Path Hex: ${derivationPathHex}`);
-
-      // 计算并打印各部分长度
-      const contractAddressLength = contractAddress.length;
-      const cryptoAddressLength = crypto.address.length;
-      const userAddressLength = userAddress.length;
-      const amountLength = amountHex.length / 2; // ASCII 十六进制表示的长度
-      const hashLength = hashHex.length / 2;
-      const heightLength = heightHex.length / 2;
-      const blockTimeLength = blockTimeHex.length / 2;
-
-      console.log(`Contract Address Length: ${contractAddressLength}`);
-      console.log(`Crypto Address Length: ${cryptoAddressLength}`);
-      console.log(`User Address Length: ${userAddressLength}`);
-      console.log(`Amount Length: ${amountLength}`);
-      console.log(`Hash Length: ${hashLength}`);
-      console.log(`Height Length: ${heightLength}`);
-      console.log(`Block Time Length: ${blockTimeLength}`);
-      console.log(`Derivation Path Length: ${derivationPathLength}`);
-
-      // 计算总数据长度
-      const totalDataLength =
-        1 + // 头字节
-        1 + // contractAddress 长度
-        contractAddressHex.length / 2 +
-        1 + // cryptoAddress 长度
-        cryptoAddressHex.length / 2 +
-        1 + // userAddress 长度
-        userAddressHex.length / 2 +
-        1 + // amountHex 长度
-        amountHex.length / 2 +
-        1 + // hashHex 长度
-        hashHex.length / 2 +
-        1 + // heightHex 长度
-        heightHex.length / 2 +
-        1 + // blockTimeHex 长度
-        blockTimeHex.length / 2 +
-        1 + // derivationPath 长度
-        derivationPathLength;
-
-      console.log(`Total Data Length: ${totalDataLength}`);
-
-      // 构建命令数据
-      const commandData = new Uint8Array([
-        0xf8, // 头字节
-        contractAddressHex.length / 2,
-        ...Buffer.from(contractAddressHex, "hex"),
-        cryptoAddressHex.length / 2,
-        ...Buffer.from(cryptoAddressHex, "hex"),
-        userAddressHex.length / 2,
-        ...Buffer.from(userAddressHex, "hex"),
-        amountHex.length / 2,
-        ...Buffer.from(amountHex, "hex"),
-        hashHex.length / 2,
-        ...Buffer.from(hashHex, "hex"),
-        heightHex.length / 2,
-        ...Buffer.from(heightHex, "hex"),
-        blockTimeHex.length / 2,
-        ...Buffer.from(blockTimeHex, "hex"),
-        derivationPathLength,
-        ...Buffer.from(derivationPathHex, "hex"),
-        totalDataLength, // 总长度
-      ]);
-
-      // 打印命令数据
-      console.log(
-        `Command Data (bytes): ${Array.from(commandData)
-          .map((byte) => byte.toString(16).padStart(2, "0"))
-          .join(" ")}`
-      );
-
-      // 计算CRC并添加到命令末尾
-      const crc = crc16Modbus(commandData);
-      const crcHighByte = (crc >> 8) & 0xff;
-      const crcLowByte = crc & 0xff;
-
-      const finalCommand = Buffer.concat([
-        commandData,
-        Buffer.from([crcLowByte, crcHighByte, 0x0d, 0x0a]),
-      ]);
-
-      console.log(
-        `签名交易命令: ${finalCommand
-          .toString("hex")
-          .match(/.{1,2}/g)
-          .join(" ")}`
-      );
-      // 提示用户在 LIKKIM 设备上确认交易签名
-      setConfirmModalVisible(false);
-      setConfirmingTransactionModalVisible(true);
-      // 分割命令到多个小包
-      const chunkSize = 20; // 20 字节是常见的 BLE 数据包大小限制
-      for (let i = 0; i < finalCommand.length; i += chunkSize) {
-        const chunk = finalCommand.slice(i, i + chunkSize);
+      for (let i = 0; i < utf8Buffer.length; i += chunkSize) {
+        const chunk = utf8Buffer.slice(i, i + chunkSize);
         const base64Chunk = base64.fromByteArray(chunk);
 
         console.log(`Sending chunk (base64): ${base64Chunk}`);
 
-        // 逐个发送每个包
         await device.writeCharacteristicWithResponseForService(
           serviceUUID,
           writeCharacteristicUUID,
           base64Chunk
         );
 
-        // 让设备有时间处理每个包
         await new Promise((resolve) => setTimeout(resolve, 100));
       }
-      // 监听交易反馈
-      monitorTransactionResponse(device);
+
       console.log("签名交易命令已成功发送到设备");
     } catch (error) {
       console.log("发送交易数据到 BLE 设备时出错:", error);
-
-      // 检查是否设备断开连接或其他问题
       if (error.message.includes("is not connected")) {
         console.log("设备可能已断开连接，或未正确连接。");
       }
@@ -1817,28 +1766,34 @@ function TransactionsScreen() {
                   style={TransactionsScreenStyle.optionButton}
                   onPress={async () => {
                     try {
+                      if (!chainShortName) {
+                        throw new Error("未选择链或未设置 chainShortName");
+                      }
+
                       const response = await fetch(
                         "https://bt.likkim.com/meridian/address/queryBlockList",
                         {
                           method: "POST",
                           headers: { "Content-Type": "application/json" },
-                          body: JSON.stringify({ chainShortName: "TRON" }),
+                          body: JSON.stringify({ chainShortName }), // 使用动态的链短名称
                         }
                       );
+
                       const data = await response.json();
 
                       if (data.code === "0" && Array.isArray(data.data)) {
                         const block = data.data[0].blockList[0];
                         const { hash, height, blockTime } = block;
 
-                        // 执行签名
+                        // 调用签名函数
                         await signTransaction(
                           verifiedDevices,
                           hash,
                           height,
                           blockTime,
                           amount,
-                          inputAddress
+                          inputAddress,
+                          selectedCrypto // 动态传入币种
                         );
                       }
 
