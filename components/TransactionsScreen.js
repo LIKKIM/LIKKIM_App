@@ -1002,8 +1002,48 @@ function TransactionsScreen() {
         return;
       }
 
-      if (coinType === "ETH") {
-        // 手动构造交易数据
+      if (coinType === "TRX") {
+        // 手动构造 TRX 交易数据
+        const latestBlock = {
+          hash,
+          number: height,
+          timestamp: blockTime,
+        };
+
+        const transactionData = {
+          token: "", // 如果是 TRC10，请填写对应的 token 标识；为空表示 TRC20
+          contract_address: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t", // USDT 的合约地址，其他代币需替换
+          from: userAddress, // 发送方地址
+          to: userAddress, // 接收方地址
+          value: `${amount * Math.pow(10, 6)}`, // 转换为最小单位，例如 USDT 的最小单位是 0.000001
+          latest_block: latestBlock,
+          override: {
+            token_short_name: "USDT", // 币种简称
+            token_full_name: "Tether", // 币种全称
+            decimals: 6, // 小数位
+          },
+          fee: 1, // 手续费，可根据链上的实际需求修改
+          memo: "", // 交易备注，默认为空
+        };
+
+        console.log("TRX交易数据:", transactionData);
+
+        // 将交易数据转换为 UTF-8 字符串
+        const utf8String = JSON.stringify(transactionData);
+        console.log(`UTF-8 String to send: ${utf8String}`);
+
+        // 使用 BLE 向设备发送数据
+        const base64String = Buffer.from(utf8String, "utf-8").toString(
+          "base64"
+        );
+        await device.writeCharacteristicWithResponseForService(
+          serviceUUID,
+          writeCharacteristicUUID,
+          base64String
+        );
+        console.log("交易数据已发送到设备");
+      } else if (coinType === "ETH") {
+        // ETH 签名逻辑
         const nonce = 1; // 示例值，实际应从链上获取
         const gasPrice = 20; // 示例值，单位 gwei
         const gasLimit = 10000; // 示例值
