@@ -537,7 +537,7 @@ function TransactionsScreen() {
     );
   };
 
-  // 监听交易反馈函数
+  // 监听交易反馈函数  监听签名返回函数
   const monitorTransactionResponse = (device) => {
     const notifyCharacteristicUUID = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E";
 
