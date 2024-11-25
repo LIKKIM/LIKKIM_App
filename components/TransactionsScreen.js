@@ -984,7 +984,7 @@ function TransactionsScreen() {
     blockTime,
     amount,
     userAddress,
-    coinType // 币种类型
+    coinType
   ) => {
     try {
       if (verifiedDevices.length === 0) {
@@ -1001,8 +1001,6 @@ function TransactionsScreen() {
         console.log("设备未连接，无法发送交易命令");
         return;
       }
-
-      await new Promise((resolve) => setTimeout(resolve, 500));
 
       let chainKey, hdPath;
       switch (coinType) {
@@ -1123,44 +1121,24 @@ function TransactionsScreen() {
           return;
       }
 
-      // 构建发送的数据
       const transactionData = {
-        chain_key: chainKey, // 动态生成的 chain_key
-        hd_path: hdPath, // 动态生成的派生路径
-        hash,
-        height: height.toString(),
-        blockTime: blockTime.toString(),
-        amount: amount.toString(),
-        userAddress,
+        chain_key: chainKey,
+        hd_path: hdPath,
+        data: {
+          hash,
+          height: height.toString(),
+          blockTime: blockTime.toString(),
+          amount: amount.toString(),
+          userAddress,
+        },
       };
 
       const utf8String = JSON.stringify(transactionData);
       console.log(`UTF-8 String to send: ${utf8String}`);
 
-      const chunkSize = 20;
-      const utf8Buffer = Buffer.from(utf8String, "utf-8");
-
-      for (let i = 0; i < utf8Buffer.length; i += chunkSize) {
-        const chunk = utf8Buffer.slice(i, i + chunkSize);
-        const base64Chunk = base64.fromByteArray(chunk);
-
-        console.log(`Sending chunk (base64): ${base64Chunk}`);
-
-        await device.writeCharacteristicWithResponseForService(
-          serviceUUID,
-          writeCharacteristicUUID,
-          base64Chunk
-        );
-
-        await new Promise((resolve) => setTimeout(resolve, 100));
-      }
-
-      console.log("签名交易命令已成功发送到设备");
+      // 发送数据的其他步骤
     } catch (error) {
       console.log("发送交易数据到 BLE 设备时出错:", error);
-      if (error.message.includes("is not connected")) {
-        console.log("设备可能已断开连接，或未正确连接。");
-      }
     }
   };
 
