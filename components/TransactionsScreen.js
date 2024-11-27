@@ -976,6 +976,14 @@ function TransactionsScreen() {
     }
   };
 
+  // 转换函数：将十六进制或字符串转换为十进制数
+  const convertToDecimal = (value) => {
+    if (typeof value === "string" && value.startsWith("0x")) {
+      return parseInt(value, 16); // 如果是十六进制，转换为十进制
+    }
+    return parseInt(value, 10); // 否则直接返回十进制数值
+  };
+
   // 签名函数
   const signTransaction = async (
     verifiedDevices,
@@ -1012,54 +1020,57 @@ function TransactionsScreen() {
         };
 
         const transactionData = {
-          token: "", // 如果是 TRC10，请填写对应的 token 标识；为空表示 TRC20
-          contract_address: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t", // USDT 的合约地址，其他代币需替换
-          from: userAddress, // 发送方地址
-          to: userAddress, // 接收方地址
-          value: `${amount * Math.pow(10, 6)}`, // 转换为 TRX 最小单位
+          token: "",
+          contract_address: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
+          from: userAddress,
+          to: userAddress,
+          value: `${amount * Math.pow(10, 6)}`,
           latest_block: latestBlock,
           override: {
-            token_short_name: "USDT", // 币种简称
-            token_full_name: "Tether", // 币种全称
-            decimals: 6, // 小数位
+            token_short_name: "USDT",
+            token_full_name: "Tether",
+            decimals: 6,
           },
-          fee: 1, // 手续费，可根据链上的实际需求修改
-          memo: "", // 交易备注，默认为空
+          fee: 1,
+          memo: "",
         };
 
         console.log("TRX交易数据:", transactionData);
-
-        // 发送数据
         await sendDataToDevice(device, transactionData);
       }
 
       // 处理 ETH 交易
       else if (coinType === "ETH") {
-        const nonce = 1; // 示例值，实际应从链上获取
-        const gasPrice = 20; // 示例值，单位 gwei
-        const gasLimit = 10000; // 示例值
-        const to = userAddress; // 目标地址
-        const value = `${amount * Math.pow(10, 18)}`; // 转换为 wei 单位
+        const nonce = "0x1A"; // 示例值
+        const gasPrice = "0x4A817C800"; // 示例值
+        const gasLimit = "0x5208"; // 示例值
+        const value = "0xDE0B6B3A7640000"; // 示例值
+
+        // 转换为十进制
+        const decimalNonce = convertToDecimal(nonce);
+        const decimalGasPrice = convertToDecimal(gasPrice);
+        const decimalGasLimit = convertToDecimal(gasLimit);
+        const decimalValue = convertToDecimal(value);
 
         // 构造 `data` 字段
         const recipient = userAddress.replace("0x", "").toLowerCase();
         const paddedRecipient = recipient.padStart(64, "0");
-        const amountHex = parseInt(value).toString(16).padStart(64, "0");
+        const amountHex = parseInt(amount * Math.pow(10, 18))
+          .toString(16)
+          .padStart(64, "0");
         const functionSignature = "a9059cbb"; // `transfer` 方法的 ID
         const data = `0x${functionSignature}${paddedRecipient}${amountHex}`;
 
         const transactionData = {
-          nonce,
-          gas_price: gasPrice,
-          gas_limit: gasLimit,
-          to,
-          value,
+          nonce: decimalNonce,
+          gas_price: decimalGasPrice,
+          gas_limit: decimalGasLimit,
+          to: userAddress,
+          value: decimalValue,
           data,
         };
 
         console.log("ETH交易数据:", transactionData);
-
-        // 发送数据
         await sendDataToDevice(device, transactionData);
       }
 
@@ -1084,8 +1095,6 @@ function TransactionsScreen() {
         };
 
         console.log(`${coinType}交易数据:`, transactionData);
-
-        // 发送数据
         await sendDataToDevice(device, transactionData);
       }
     } catch (error) {
