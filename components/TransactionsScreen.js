@@ -842,88 +842,88 @@ function TransactionsScreen() {
       let commandString;
       switch (coinType) {
         case "BTC":
-          commandString = `modify:bitcoin:m/49'/0'/0'/0/0`; // Bitcoin
+          commandString = `address:bitcoin:m/49'/0'/0'/0/0`; // Bitcoin
           break;
         case "ETH":
-          commandString = `modify:ethereum:m/44'/60'/0'/0/0`; // Ethereum
+          commandString = `address:ethereum:m/44'/60'/0'/0/0`; // Ethereum
           break;
         case "TRX":
-          commandString = `modify:tron:m/44'/195'/0'/0/0`; // Tron
+          commandString = `address:tron:m/44'/195'/0'/0/0`; // Tron
           break;
         case "BCH":
-          commandString = `modify:bitcoin_cash:m/44'/145'/0'/0/0`; // Bitcoin Cash
+          commandString = `address:bitcoin_cash:m/44'/145'/0'/0/0`; // Bitcoin Cash
           break;
         case "BNB":
-          commandString = `modify:binance:m/44'/60'/0'/0/0`; // BNB
+          commandString = `address:binance:m/44'/60'/0'/0/0`; // BNB
           break;
         case "OP":
-          commandString = `modify:optimism:m/44'/60'/0'/0/0`; // Optimism
+          commandString = `address:optimism:m/44'/60'/0'/0/0`; // Optimism
           break;
         case "ETC":
-          commandString = `modify:ethereum_classic:m/44'/60'/0'/0/0`; // Ethereum Classic
+          commandString = `address:ethereum_classic:m/44'/60'/0'/0/0`; // Ethereum Classic
           break;
         case "LTC":
-          commandString = `modify:litecoin:m/49'/2'/0'/0/0`; // Litecoin
+          commandString = `address:litecoin:m/49'/2'/0'/0/0`; // Litecoin
           break;
         case "XRP":
-          commandString = `modify:ripple:m/44'/144'/0'/0/0`; // Ripple
+          commandString = `address:ripple:m/44'/144'/0'/0/0`; // Ripple
           break;
         case "SOL":
-          commandString = `modify:solana:m/44'/501'/0'/0/0`; // Solana
+          commandString = `address:solana:m/44'/501'/0'/0/0`; // Solana
           break;
         case "ARB":
-          commandString = `modify:arbitrum:m/44'/60'/0'/0/0`; // Arbitrum
+          commandString = `address:arbitrum:m/44'/60'/0'/0/0`; // Arbitrum
           break;
         case "AURORA":
-          commandString = `modify:aurora:m/44'/60'/0'/0/0`; // Aurora
+          commandString = `address:aurora:m/44'/60'/0'/0/0`; // Aurora
           break;
         case "AVAX":
-          commandString = `modify:avalanche:m/44'/60'/0'/0/0`; // Avalanche
+          commandString = `address:avalanche:m/44'/60'/0'/0/0`; // Avalanche
           break;
         case "CELO":
-          commandString = `modify:celo:m/44'/60'/0'/0/0`; // Celo
+          commandString = `address:celo:m/44'/60'/0'/0/0`; // Celo
           break;
         case "FTM":
-          commandString = `modify:fantom:m/44'/60'/0'/0/0`; // Fantom
+          commandString = `address:fantom:m/44'/60'/0'/0/0`; // Fantom
           break;
         case "HTX":
-          commandString = `modify:huobi:m/44'/60'/0'/0/0`; // Huobi ECO Chain
+          commandString = `address:huobi:m/44'/60'/0'/0/0`; // Huobi ECO Chain
           break;
         case "IOTX":
-          commandString = `modify:iotex:m/44'/60'/0'/0/0`; // IoTeX
+          commandString = `address:iotex:m/44'/60'/0'/0/0`; // IoTeX
           break;
         case "OKB":
-          commandString = `modify:okx:m/44'/60'/0'/0/0`; // OKX Chain
+          commandString = `address:okx:m/44'/60'/0'/0/0`; // OKX Chain
           break;
         case "POL":
-          commandString = `modify:polygon:m/44'/60'/0'/0/0`; // Polygon
+          commandString = `address:polygon:m/44'/60'/0'/0/0`; // Polygon
           break;
         case "ZKSYNC":
-          commandString = `modify:zksync:m/44'/60'/0'/0/0`; // zkSync Era
+          commandString = `address:zksync:m/44'/60'/0'/0/0`; // zkSync Era
           break;
         case "APT":
-          commandString = `modify:aptos:m/44'/637'/0'/0'/0`; // Aptos
+          commandString = `address:aptos:m/44'/637'/0'/0'/0`; // Aptos
           break;
         case "SUI":
-          commandString = `modify:sui:m/44'/784'/0'/0'/0`; // SUI
+          commandString = `address:sui:m/44'/784'/0'/0'/0`; // SUI
           break;
         case "COSMOS":
-          commandString = `modify:cosmos:m/44'/118'/0'/0/0`; // Cosmos
+          commandString = `address:cosmos:m/44'/118'/0'/0/0`; // Cosmos
           break;
         case "Celestia":
-          commandString = `modify:celestia:m/44'/118'/0'/0/0`; // Celestia
+          commandString = `address:celestia:m/44'/118'/0'/0/0`; // Celestia
           break;
         case "Cronos":
-          commandString = `modify:cronos:m/44'/60'/0'/0/0`; // Cronos
+          commandString = `address:cronos:m/44'/60'/0'/0/0`; // Cronos
           break;
         case "Juno":
-          commandString = `modify:juno:m/44'/118'/0'/0/0`; // Juno
+          commandString = `address:juno:m/44'/118'/0'/0/0`; // Juno
           break;
         case "Osmosis":
-          commandString = `modify:osmosis:m/44'/118'/0'/0/0`; // Osmosis
+          commandString = `address:osmosis:m/44'/118'/0'/0/0`; // Osmosis
           break;
         case "Gnosis":
-          commandString = `modify:gnosis:m/44'/60'/0'/0/0`; // Gnosis
+          commandString = `address:gnosis:m/44'/60'/0'/0/0`; // Gnosis
           break;
         default:
           console.log("不支持的币种:", coinType);
