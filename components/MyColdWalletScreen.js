@@ -630,9 +630,13 @@ function MyColdWalletScreen() {
           }
         }
 
-        // 如果接收到 "VALID"，发送 "validation"
+        // 如果接收到 "VALID"，改变状态并发送 "validation"
         if (receivedDataString === "VALID") {
           try {
+            // 立即更新状态为 "VALID"
+            setVerificationStatus("VALID");
+            console.log("状态更新为: VALID");
+
             const validationMessage = "validation";
             const bufferValidationMessage = Buffer.from(
               validationMessage,
@@ -682,6 +686,7 @@ function MyColdWalletScreen() {
   // 根据的值（VALID 或 INVALID），判断设备真伪
   // 修改 handleDevicePress 方法，增加获取位置和保存信息的逻辑
   const handleDevicePress = async (device) => {
+    setVerificationStatus(null);
     setSelectedDevice(device);
     setModalVisible(false);
 
@@ -1519,6 +1524,7 @@ function MyColdWalletScreen() {
         styles={MyColdWalletScreenStyle}
         isDarkMode={isDarkMode}
         t={t}
+        status={verificationStatus} // 传递状态
       />
 
       {/* 验证码模态框 */}
