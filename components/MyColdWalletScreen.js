@@ -385,7 +385,7 @@ function MyColdWalletScreen() {
       );
 
       if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
-        console.warn("Location permission denied");
+        console.log("Location permission denied");
         return;
       }
     }
@@ -435,7 +435,7 @@ function MyColdWalletScreen() {
       let canRunCb = true;
       for (let permissionItem in enableds) {
         if (enableds[permissionItem] !== "granted") {
-          console.warn(permissionItem + "权限未授予");
+          console.log(permissionItem + "权限未授予");
           canRunCb = false;
         }
       }
@@ -776,7 +776,7 @@ function MyColdWalletScreen() {
     try {
       const isConnected = await device.isConnected();
       if (!isConnected) {
-        console.warn(`设备 ${device.id} 已经断开连接`);
+        console.log(`设备 ${device.id} 已经断开连接`);
       } else {
         await device.cancelConnection(); // 断开设备连接
         console.log(`设备 ${device.id} 已断开连接`);
@@ -801,7 +801,7 @@ function MyColdWalletScreen() {
         error instanceof BleError &&
         error.errorCode === BleErrorCode.OperationCancelled
       ) {
-        console.warn(`设备 ${device.id} 断开操作被取消`);
+        console.log(`设备 ${device.id} 断开操作被取消`);
       } else {
         console.error("断开设备连接失败:", error);
       }
