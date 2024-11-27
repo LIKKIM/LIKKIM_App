@@ -1403,60 +1403,49 @@ function WalletScreen({ route, navigation }) {
   }, [modalVisible]);
 
   const handlePinSubmit = async () => {
-    // 首先关闭 "Enter PIN to Connect" 的模态框
-    setPinModalVisible(false);
+    setPinModalVisible(false); // 关闭PIN输入模态框
 
-    // 去除用户输入的 PIN 和接收到的验证码的空格
-    const pinCodeValue = pinCode.trim(); // 去除多余空格
-    const verificationCodeValue = receivedVerificationCode.trim(); // 去除多余空格
+    const pinCodeValue = pinCode.trim();
+    const verificationCodeValue = receivedVerificationCode.trim();
 
     console.log(`用户输入的 PIN: ${pinCodeValue}`);
     console.log(`接收到的验证码: ${verificationCodeValue}`);
 
-    // 检查 PIN 是否匹配
     if (pinCodeValue === verificationCodeValue) {
       console.log("PIN 验证成功");
-      setVerificationStatus("success"); // 显示成功提示
+      setVerificationStatus("success");
 
-      // 更新全局状态为成功，并在终端打印消息
-      setIsVerificationSuccessful(true);
-      console.log("验证成功！验证状态已更新。");
+      // 添加设备ID到verifiedDevices数组，确保不重复
+      const newVerifiedDevices = new Set([
+        ...verifiedDevices,
+        selectedDevice.id,
+      ]);
+      setVerifiedDevices([...newVerifiedDevices]);
 
-      // 将已验证的设备ID添加到verifiedDevices状态中并持久化到本地存储
-      const newVerifiedDevices = [...verifiedDevices, selectedDevice.id];
-      setVerifiedDevices(newVerifiedDevices);
+      // 异步存储更新后的verifiedDevices数组
       await AsyncStorage.setItem(
         "verifiedDevices",
-        JSON.stringify(newVerifiedDevices)
+        JSON.stringify([...newVerifiedDevices])
       );
+
+      setIsVerificationSuccessful(true);
+      console.log("设备验证并存储成功");
     } else {
       console.log("PIN 验证失败");
+      setVerificationStatus("fail");
 
-      // 停止监听验证码
       if (monitorSubscription) {
-        try {
-          monitorSubscription.remove();
-          console.log("验证码监听已停止");
-        } catch (error) {
-          console.log("停止监听时发生错误:", error);
-        }
+        monitorSubscription.remove();
+        console.log("验证码监听已停止");
       }
 
-      // 主动断开与嵌入式设备的连接
       if (selectedDevice) {
-        try {
-          await selectedDevice.cancelConnection();
-          console.log("已断开与设备的连接");
-        } catch (error) {
-          console.log("断开连接时发生错误:", error);
-        }
+        await selectedDevice.cancelConnection();
+        console.log("已断开与设备的连接");
       }
-
-      setVerificationStatus("fail"); // 显示失败提示
     }
 
-    // 清空 PIN 输入框
-    setPinCode("");
+    setPinCode(""); // 清空PIN输入框
   };
 
   const handleDeleteCard = () => {
