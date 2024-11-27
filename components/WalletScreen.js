@@ -41,6 +41,7 @@ import { CryptoContext, DarkModeContext, usdtCrypto } from "./CryptoContext";
 // 自定义组件
 import PriceChartCom from "./PriceChartCom";
 import EmptyWalletView from "./modal/EmptyWalletView";
+import AddCryptoModal from "./modal/AddCryptoModal";
 import TabModal from "./walletScreen/TabModal";
 import ModalsContainer from "./walletScreen/ModalsContainer";
 import WalletList from "./CardListCom";
@@ -2032,6 +2033,22 @@ function WalletScreen({ route, navigation }) {
         stopMonitoringWalletAddress={stopMonitoringWalletAddress}
         walletCreationStatus={walletCreationStatus}
         importingStatus={importingStatus}
+      />
+      {/* Add Crypto Modal */}
+      <AddCryptoModal
+        visible={addCryptoVisible}
+        onClose={() => {
+          setAddCryptoVisible(false);
+        }}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        filteredCryptos={filteredCryptos}
+        handleAddCrypto={handleAddCrypto}
+        styles={WalletScreenStyle}
+        t={t}
+        isDarkMode={isDarkMode}
+        chainCategories={chainCategories}
+        cryptoCards={cryptoCards}
       />
     </LinearGradient>
   );

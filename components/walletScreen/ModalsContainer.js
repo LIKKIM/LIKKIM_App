@@ -4,7 +4,7 @@ import AddressModal from "../modal/AddressModal";
 import AddWalletModal from "../modal/AddWalletModal";
 import TipModal from "../modal/TipModal";
 import ProcessModal from "../modal/ProcessModal";
-import AddCryptoModal from "../modal/AddCryptoModal";
+
 import DeleteConfirmationModal from "../modal/DeleteConfirmationModal";
 import BluetoothModal from "../modal/BluetoothModal";
 import PinModal from "../modal/PinModal";
@@ -116,21 +116,6 @@ const ModalsContainer = ({
         onLetsGo={handleLetsGo}
         styles={WalletScreenStyle}
         t={t}
-      />
-      {/* Add Crypto Modal */}
-      <AddCryptoModal
-        visible={addCryptoVisible}
-        onClose={() => {
-          setAddCryptoVisible(false);
-        }}
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        filteredCryptos={filteredCryptos}
-        handleAddCrypto={handleAddCrypto}
-        styles={WalletScreenStyle}
-        t={t}
-        isDarkMode={isDarkMode}
-        chainCategories={chainCategories}
       />
 
       {/* Delete Confirmation Modal */}
