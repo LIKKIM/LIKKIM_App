@@ -175,6 +175,28 @@ const AddCryptoModal = ({
                     </Text>
                   </View>
                 </ImageBackground>
+                {cryptoCards.some((card) => card.name === crypto.name) && (
+                  <View
+                    style={{
+                      position: "absolute",
+                      top: 6,
+                      right: 6,
+                      backgroundColor: "#CFAB9540",
+                      paddingVertical: 2,
+                      paddingHorizontal: 8,
+                      borderRadius: 30,
+                    }}
+                  >
+                    <Text
+                      style={{
+                        fontSize: 12,
+                        color: isDarkMode ? "#ffffff" : "#21201E",
+                      }}
+                    >
+                      {t("Added")}
+                    </Text>
+                  </View> // 显示"Added"文本
+                )}
                 <View
                   style={{
                     flexDirection: "row",
@@ -185,6 +207,7 @@ const AddCryptoModal = ({
                   }}
                 >
                   <Text style={styles.addCryptoText}>{crypto.name}</Text>
+
                   <View style={styles.chainContainer}>
                     <Text style={[styles.chainCardText]}>{crypto.chain}</Text>
                   </View>
