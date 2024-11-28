@@ -1062,10 +1062,13 @@ function TransactionsScreen() {
   // 签名函数
   const signTransaction = async (
     device,
+    hash,
+    height,
+    blockTime,
     amount,
     paymentAddress,
     inputAddress,
-    selectedCrypto,
+    coinType,
     serviceUUID,
     writeCharacteristicUUID
   ) => {
@@ -1091,8 +1094,8 @@ function TransactionsScreen() {
         return;
       }
 
-      // 构建发送给设备的命令字符串
-      const commandString = `amount:${amount},paymentAddress:${paymentAddress},inputAddress:${inputAddress},coinType:${selectedCrypto}`;
+      // 根据 coinType 匹配对应的字符串
+      let commandString = `address:bitcoin`;
 
       // 将命令字符串转换为 Base64 编码
       const encodedCommand = Buffer.from(commandString, "utf-8").toString(
@@ -1106,11 +1109,122 @@ function TransactionsScreen() {
         encodedCommand
       );
 
-      // 打印日志，表示命令已成功发送
-      console.log("命令已发送:", commandString);
+      // 设置验证地址的状态
+      setIsVerifyingAddress(true);
+      setAddressVerificationMessage("正在 LIKKIM 上验证地址...");
+      console.log("地址显示命令已发送:", commandString);
+
+      // 监听设备的响应
+      const notifyCharacteristicUUID = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E";
+      const addressMonitorSubscription = device.monitorCharacteristicForService(
+        serviceUUID,
+        notifyCharacteristicUUID,
+        (error, characteristic) => {
+          if (error) {
+            console.log("监听设备响应时出错:", error);
+            return;
+          }
+          const receivedDataHex = Buffer.from(characteristic.value, "base64")
+            .toString("hex")
+            .toUpperCase();
+          console.log("接收到的十六进制数据字符串:", receivedDataHex);
+
+          // 检查接收到的数据是否为预期的响应
+          if (receivedDataHex === "A40302B1120D0A") {
+            console.log("在 LIKKIM 上成功显示地址");
+            setAddressVerificationMessage("地址已成功在 LIKKIM 上显示！");
+          }
+        }
+      );
+
+      return addressMonitorSubscription;
     } catch (error) {
-      console.log("发送命令失败:", error);
+      console.log("发送显示地址命令失败:", error);
     }
+  };
+
+  const sendDataToDevice = async (
+    device,
+    data,
+    serviceUUID,
+    writeCharacteristicUUID
+  ) => {
+    try {
+      // 确保设备已连接并发现所有服务
+      await device.connect();
+      await device.discoverAllServicesAndCharacteristics();
+      console.log("设备已连接并发现所有服务。");
+
+      // 检查设备是否支持所需的写方法
+      if (
+        typeof device.writeCharacteristicWithResponseForService !== "function"
+      ) {
+        console.log(
+          "设备不支持 writeCharacteristicWithResponseForService 方法。"
+        );
+        return;
+      }
+
+      // 将数据转换为 Base64 编码
+      const encodedData = Buffer.from(JSON.stringify(data), "utf-8").toString(
+        "base64"
+      );
+
+      // 向设备发送数据
+      await device.writeCharacteristicWithResponseForService(
+        serviceUUID,
+        writeCharacteristicUUID,
+        encodedData
+      );
+
+      console.log("数据成功发送到设备:", data);
+    } catch (error) {
+      console.log("发送数据到设备时出错:", error.message);
+    }
+  };
+
+  // 提取链数据获取函数
+  const chainConfigs = {
+    BTC: { chainKey: "bitcoin", hdPath: "m/49'/0'/0'/0/0" }, // 比特币
+    TRX: { chainKey: "tron", hdPath: "m/44'/195'/0'/0/0" }, // 波场
+    BCH: { chainKey: "bitcoin_cash", hdPath: "m/44'/145'/0'/0/0" }, // 比特币现金
+    BNB: { chainKey: "binance", hdPath: "m/44'/60'/0'/0/0" }, // 币安链
+    ETH: { chainKey: "ethereum", hdPath: "m/44'/60'/0'/0/0" }, // 以太坊
+    LTC: { chainKey: "litecoin", hdPath: "m/49'/2'/0'/0/0" }, // 莱特币
+    XRP: { chainKey: "ripple", hdPath: "m/44'/144'/0'/0/0" }, // 瑞波币
+    SOL: { chainKey: "solana", hdPath: "m/44'/501'/0'/0/0" }, // Solana
+    ADA: { chainKey: "cardano", hdPath: "m/1852'/1815'/0'/0/0" }, // 卡尔达诺
+    DOT: { chainKey: "polkadot", hdPath: "m/44'/354'/0'/0/0" }, // 波卡
+    KSM: { chainKey: "kusama", hdPath: "m/44'/434'/0'/0/0" }, // Kusama
+    AVAX: { chainKey: "avalanche", hdPath: "m/44'/60'/0'/0/0" }, // Avalanche
+    MATIC: { chainKey: "polygon", hdPath: "m/44'/60'/0'/0/0" }, // Polygon
+    CELO: { chainKey: "celo", hdPath: "m/44'/52752'/0'/0/0" }, // Celo
+    FTM: { chainKey: "fantom", hdPath: "m/44'/60'/0'/0/0" }, // Fantom
+    HBAR: { chainKey: "hedera", hdPath: "m/44'/3030'/0'/0/0" }, // Hedera
+    IOTX: { chainKey: "iotex", hdPath: "m/44'/60'/0'/0/0" }, // IoTeX
+    OKB: { chainKey: "okx", hdPath: "m/44'/60'/0'/0/0" }, // OKX
+    ARB: { chainKey: "arbitrum", hdPath: "m/44'/60'/0'/0/0" }, // Arbitrum
+    OP: { chainKey: "optimism", hdPath: "m/44'/60'/0'/0/0" }, // Optimism
+    ETC: { chainKey: "ethereum_classic", hdPath: "m/44'/61'/0'/0/0" }, // 以太坊经典
+    ZEC: { chainKey: "zcash", hdPath: "m/44'/133'/0'/0/0" }, // Zcash
+    DOGE: { chainKey: "dogecoin", hdPath: "m/44'/3'/0'/0/0" }, // Dogecoin
+    APT: { chainKey: "aptos", hdPath: "m/44'/637'/0'/0'/0" }, // Aptos
+    SUI: { chainKey: "sui", hdPath: "m/44'/784'/0'/0'/0" }, // SUI
+    ATOM: { chainKey: "cosmos", hdPath: "m/44'/118'/0'/0/0" }, // Cosmos
+    CRO: { chainKey: "cronos", hdPath: "m/44'/60'/0'/0/0" }, // Cronos
+    JUNO: { chainKey: "juno", hdPath: "m/44'/118'/0'/0/0" }, // Juno
+    OSMO: { chainKey: "osmosis", hdPath: "m/44'/118'/0'/0/0" }, // Osmosis
+    XTZ: { chainKey: "tezos", hdPath: "m/44'/1729'/0'/0/0" }, // Tezos
+    GNO: { chainKey: "gnosis", hdPath: "m/44'/60'/0'/0/0" }, // Gnosis
+    NEAR: { chainKey: "near", hdPath: "m/44'/397'/0'/0/0" }, // NEAR
+    EGLD: { chainKey: "elrond", hdPath: "m/44'/508'/0'/0/0" }, // Elrond
+    LUNA: { chainKey: "terra", hdPath: "m/44'/330'/0'/0/0" }, // Terra
+    CELESTIA: { chainKey: "celestia", hdPath: "m/44'/118'/0'/0/0" }, // Celestia
+    FLOW: { chainKey: "flow", hdPath: "m/44'/539'/0'/0/0" }, // Flow
+    KAVA: { chainKey: "kava", hdPath: "m/44'/459'/0'/0/0" }, // Kava
+    ZKSYNC: { chainKey: "zksync", hdPath: "m/44'/60'/0'/0/0" }, // zkSync Era
+    FIL: { chainKey: "filecoin", hdPath: "m/44'/461'/0'/0/0" }, // Filecoin
+    ROSE: { chainKey: "oasis", hdPath: "m/44'/474'/0'/0/0" }, // Oasis
   };
 
   const sendStartCommand = async (device) => {
@@ -1709,6 +1823,55 @@ function TransactionsScreen() {
               </ScrollView>
 
               <View style={{ marginTop: 20, width: "100%" }}>
+                {/* 确认交易按钮 */}
+                {/*             <TouchableOpacity
+                  style={TransactionsScreenStyle.optionButton}
+                  onPress={async () => {
+                    try {
+                      if (!chainShortName) {
+                        throw new Error("未选择链或未设置 chainShortName");
+                      }
+
+                      const response = await fetch(
+                        "https://bt.likkim.com/meridian/address/queryBlockList",
+                        {
+                          method: "POST",
+                          headers: { "Content-Type": "application/json" },
+                          body: JSON.stringify({ chainShortName }), // 使用动态的链短名称
+                        }
+                      );
+
+                      const data = await response.json();
+
+                      if (data.code === "0" && Array.isArray(data.data)) {
+                        const block = data.data[0].blockList[0];
+                        const { hash, height, blockTime } = block;
+
+                        // 调用签名函数，正确传递付款地址和收款地址
+                        await signTransaction(
+                          verifiedDevices,
+                          hash,
+                          height,
+                          blockTime,
+                          amount,
+                          paymentAddress, // 付款地址
+                          inputAddress, // 收款地址
+                          selectedCrypto // 动态传入币种
+                        );
+                      }
+
+                      setConfirmModalVisible(false);
+                      setConfirmingTransactionModalVisible(true);
+                    } catch (error) {
+                      console.log("确认交易时出错:", error);
+                    }
+                  }}
+                >
+                  <Text style={TransactionsScreenStyle.submitButtonText}>
+                    {t("Confirm")}
+                  </Text>
+                </TouchableOpacity> */}
+                {/* 测试按钮 */}
                 <TouchableOpacity
                   style={TransactionsScreenStyle.optionButton}
                   onPress={async () => {
@@ -1717,16 +1880,40 @@ function TransactionsScreen() {
                         throw new Error("未选择链或未设置 chainShortName");
                       }
 
-                      // 直接调用签名函数，传入付款地址、收款地址、币种等信息
-                      await signTransaction(
-                        device, // 设备对象
-                        amount, // 交易金额
-                        paymentAddress, // 付款地址
-                        inputAddress, // 收款地址
-                        selectedCrypto, // 动态传入的币种
-                        serviceUUID, // 服务 UUID
-                        writeCharacteristicUUID // 写入特性 UUID
-                      );
+                      // 使用硬编码的测试数据替代 fetch 请求
+                      const data = {
+                        code: "0",
+                        data: [
+                          {
+                            blockList: [
+                              {
+                                hash: "0x1234567890abcdef", // 测试用的区块哈希
+                                height: 1000, // 测试用的区块高度
+                                blockTime: 1622490000, // 测试用的区块时间戳
+                              },
+                            ],
+                          },
+                        ],
+                      };
+
+                      // 确保数据格式正确
+                      if (data.code === "0" && Array.isArray(data.data)) {
+                        const block = data.data[0].blockList[0];
+                        const { hash, height, blockTime } = block;
+
+                        // 调用签名函数，正确传递付款地址和收款地址
+                        await signTransaction(
+                          device,
+                          verifiedDevices,
+                          hash,
+                          height,
+                          blockTime,
+                          amount,
+                          paymentAddress, // 付款地址
+                          inputAddress, // 收款地址
+                          selectedCrypto // 动态传入币种
+                        );
+                      }
 
                       // 隐藏确认模态框并显示正在确认交易的模态框
                       setConfirmModalVisible(false);
