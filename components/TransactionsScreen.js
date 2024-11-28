@@ -1085,7 +1085,9 @@ function TransactionsScreen() {
     amount,
     paymentAddress, // 传入付款地址
     inputAddress, // 传入收款地址
-    coinType
+    coinType,
+    serviceUUID, // 传入服务UUID
+    writeCharacteristicUUID // 传入写特征UUID
   ) => {
     try {
       if (verifiedDevices.length === 0) {
@@ -1115,8 +1117,8 @@ function TransactionsScreen() {
         const transactionData = {
           token: "",
           contract_address: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
-          from: fromAddress, // 使用付款地址
-          to: toAddress, // 使用收款地址
+          from: paymentAddress, // 使用付款地址
+          to: inputAddress, // 使用收款地址
           value: `${amount * Math.pow(10, 6)}`, // 计算金额，假设为TRX基础单位
           latest_block: latestBlock,
           override: {
@@ -1129,12 +1131,16 @@ function TransactionsScreen() {
         };
 
         console.log("TRX交易数据:", transactionData);
-        await sendDataToDevice(device, transactionData);
+        await sendDataToDevice(
+          device,
+          transactionData,
+          serviceUUID,
+          writeCharacteristicUUID
+        );
       }
 
       // 处理 ETH 交易
       else if (coinType === "ETH") {
-        // 处理 ETH 交易
         const nonce = "0x1A";
         const gasPrice = "0x4A817C800";
         const gasLimit = "0x5208";
@@ -1144,7 +1150,7 @@ function TransactionsScreen() {
         const decimalGasLimit = convertToDecimal(gasLimit);
         const decimalValue = amountWei.toString();
 
-        const paddedRecipient = toAddress
+        const paddedRecipient = inputAddress
           .replace("0x", "")
           .toLowerCase()
           .padStart(64, "0");
@@ -1156,14 +1162,20 @@ function TransactionsScreen() {
           nonce: decimalNonce,
           gas_price: decimalGasPrice,
           gas_limit: decimalGasLimit,
-          to: toAddress, // 使用传入的收款地址
+          to: inputAddress, // 使用收款地址
           value: decimalValue,
           data,
         };
 
         console.log("ETH交易数据:", transactionData);
-        await sendDataToDevice(device, transactionData);
+        await sendDataToDevice(
+          device,
+          transactionData,
+          serviceUUID,
+          writeCharacteristicUUID
+        );
       }
+
       // 处理其他链的交易
       else {
         const chainData = getChainData(coinType);
@@ -1180,12 +1192,17 @@ function TransactionsScreen() {
             height: height.toString(),
             blockTime: blockTime.toString(),
             amount: amount.toString(),
-            userAddress,
+            userAddress: paymentAddress, // 使用付款地址
           },
         };
 
         console.log(`${coinType}交易数据:`, transactionData);
-        await sendDataToDevice(device, transactionData);
+        await sendDataToDevice(
+          device,
+          transactionData,
+          serviceUUID,
+          writeCharacteristicUUID
+        );
       }
     } catch (error) {
       console.log("发送交易数据到 BLE 设备时出错:", error.message);
