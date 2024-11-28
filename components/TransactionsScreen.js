@@ -1060,54 +1060,23 @@ function TransactionsScreen() {
   };
 
   // 签名函数
-  const signTransaction = async (
-    device,
-    amount,
-    paymentAddress,
-    inputAddress,
-    selectedCrypto,
-    serviceUUID,
-    writeCharacteristicUUID
-  ) => {
+  const signTransaction = async (device) => {
     try {
-      // 检查设备对象是否有效
-      if (typeof device !== "object" || !device.isConnected) {
-        console.log("设备对象无效:", device);
-        return;
-      }
+      if (!device?.isConnected) return console.log("设备无效");
 
-      // 连接设备并发现所有服务
       await device.connect();
       await device.discoverAllServicesAndCharacteristics();
-      console.log("设备已连接并发现所有服务。");
 
-      // 检查设备是否具有 writeCharacteristicWithResponseForService 方法
-      if (
-        typeof device.writeCharacteristicWithResponseForService !== "function"
-      ) {
-        console.log(
-          "设备不支持 writeCharacteristicWithResponseForService 方法。"
-        );
-        return;
-      }
+      // 直接发送字符串 '1'
+      const encodedCommand = Buffer.from("1", "utf-8").toString("base64");
 
-      // 构建发送给设备的命令字符串
-      const commandString = `amount:${amount},paymentAddress:${paymentAddress},inputAddress:${inputAddress},coinType:${selectedCrypto}`;
-
-      // 将命令字符串转换为 Base64 编码
-      const encodedCommand = Buffer.from(commandString, "utf-8").toString(
-        "base64"
-      );
-
-      // 向服务写入命令字符串（确保使用 Base64 编码）
       await device.writeCharacteristicWithResponseForService(
         serviceUUID,
         writeCharacteristicUUID,
         encodedCommand
       );
 
-      // 打印日志，表示命令已成功发送
-      console.log("命令已发送:", commandString);
+      console.log("命令已发送: 1");
     } catch (error) {
       console.log("发送命令失败:", error);
     }
@@ -1713,22 +1682,22 @@ function TransactionsScreen() {
                   style={TransactionsScreenStyle.optionButton}
                   onPress={async () => {
                     try {
-                      if (!chainShortName) {
+                      if (!chainShortName)
                         throw new Error("未选择链或未设置 chainShortName");
-                      }
 
-                      // 直接调用签名函数，传入付款地址、收款地址、币种等信息
-                      await signTransaction(
-                        device, // 设备对象
-                        amount, // 交易金额
-                        paymentAddress, // 付款地址
-                        inputAddress, // 收款地址
-                        selectedCrypto, // 动态传入的币种
-                        serviceUUID, // 服务 UUID
-                        writeCharacteristicUUID // 写入特性 UUID
+                      // 确保 verifiedDevices 非空并从中获取设备
+                      if (verifiedDevices.length === 0)
+                        throw new Error("未验证设备");
+
+                      // 查找匹配的设备
+                      const device = devices.find(
+                        (d) => d.id === verifiedDevices[0]
                       );
+                      if (!device) throw new Error("未找到匹配的设备");
 
-                      // 隐藏确认模态框并显示正在确认交易的模态框
+                      // 直接调用签名函数并传递设备
+                      await signTransaction(device);
+
                       setConfirmModalVisible(false);
                       setConfirmingTransactionModalVisible(true);
                     } catch (error) {
