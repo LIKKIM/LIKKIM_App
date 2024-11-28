@@ -1882,7 +1882,7 @@ function TransactionsScreen() {
 
               <View style={{ marginTop: 20, width: "100%" }}>
                 {/* 确认交易按钮 */}
-                <TouchableOpacity
+                {/*             <TouchableOpacity
                   style={TransactionsScreenStyle.optionButton}
                   onPress={async () => {
                     try {
@@ -1918,6 +1918,61 @@ function TransactionsScreen() {
                         );
                       }
 
+                      setConfirmModalVisible(false);
+                      setConfirmingTransactionModalVisible(true);
+                    } catch (error) {
+                      console.log("确认交易时出错:", error);
+                    }
+                  }}
+                >
+                  <Text style={TransactionsScreenStyle.submitButtonText}>
+                    {t("Confirm")}
+                  </Text>
+                </TouchableOpacity> */}
+                {/* 测试按钮 */}
+                <TouchableOpacity
+                  style={TransactionsScreenStyle.optionButton}
+                  onPress={async () => {
+                    try {
+                      if (!chainShortName) {
+                        throw new Error("未选择链或未设置 chainShortName");
+                      }
+
+                      // 使用硬编码的测试数据替代 fetch 请求
+                      const data = {
+                        code: "0",
+                        data: [
+                          {
+                            blockList: [
+                              {
+                                hash: "0x1234567890abcdef", // 测试用的区块哈希
+                                height: 1000, // 测试用的区块高度
+                                blockTime: 1622490000, // 测试用的区块时间戳
+                              },
+                            ],
+                          },
+                        ],
+                      };
+
+                      // 确保数据格式正确
+                      if (data.code === "0" && Array.isArray(data.data)) {
+                        const block = data.data[0].blockList[0];
+                        const { hash, height, blockTime } = block;
+
+                        // 调用签名函数，正确传递付款地址和收款地址
+                        await signTransaction(
+                          verifiedDevices,
+                          hash,
+                          height,
+                          blockTime,
+                          amount,
+                          paymentAddress, // 付款地址
+                          inputAddress, // 收款地址
+                          selectedCrypto // 动态传入币种
+                        );
+                      }
+
+                      // 隐藏确认模态框并显示正在确认交易的模态框
                       setConfirmModalVisible(false);
                       setConfirmingTransactionModalVisible(true);
                     } catch (error) {
