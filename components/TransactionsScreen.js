@@ -1210,17 +1210,25 @@ function TransactionsScreen() {
   };
 
   // 提取通用的发送数据函数
-  const sendDataToDevice = async (device, transactionData) => {
+  const sendDataToDevice = async (
+    device,
+    data,
+    serviceUUID,
+    writeCharacteristicUUID
+  ) => {
     try {
-      const utf8String = JSON.stringify(transactionData);
-      console.log(`UTF-8 String to send: ${utf8String}`);
-      const base64String = Buffer.from(utf8String, "utf-8").toString("base64");
-      await device.writeCharacteristicWithResponseForService(
-        serviceUUID,
-        writeCharacteristicUUID,
-        base64String
+      // 获取设备的服务和特征
+      const service = await device.discoverService(serviceUUID);
+      const characteristic = await service.discoverCharacteristic(
+        writeCharacteristicUUID
       );
-      console.log("交易数据已发送到设备");
+
+      // 将数据转换为适当的格式
+      const dataBuffer = new TextEncoder().encode(JSON.stringify(data)); // 假设数据是 JSON 格式
+
+      // 发送数据到设备
+      await characteristic.writeWithResponse(dataBuffer);
+      console.log("数据成功发送到设备");
     } catch (error) {
       console.log("发送数据到设备时出错:", error.message);
     }
