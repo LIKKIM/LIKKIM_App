@@ -1893,6 +1893,7 @@ function TransactionsScreen() {
                       }
 
                       setConfirmModalVisible(false);
+                      setConfirmingTransactionModalVisible(true);
                     } catch (error) {
                       console.log("确认交易时出错:", error);
                     }
@@ -1988,7 +1989,7 @@ function TransactionsScreen() {
           t={t}
         />
 
-        {/* Confirming Transaction Modal */}
+        {/* Pending Transaction Modal */}
         <Modal
           visible={confirmingTransactionModalVisible}
           onRequestClose={() => setConfirmingTransactionModalVisible(false)}
