@@ -1836,7 +1836,7 @@ function TransactionsScreen() {
                   <Text style={{ fontWeight: "bold" }}>
                     {t("Recipient Address")}:
                   </Text>
-                  {"\n"}
+                  {/*  {"\n"} */}
                   {` ${inputAddress}`}
                 </Text>
                 <Text style={TransactionsScreenStyle.transactionText}>
