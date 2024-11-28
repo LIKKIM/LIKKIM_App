@@ -1060,15 +1060,24 @@ function TransactionsScreen() {
   };
 
   // 签名函数
-  const signTransaction = async (device) => {
+  const signTransaction = async (
+    device,
+    amount,
+    paymentAddress,
+    inputAddress,
+    selectedCrypto
+  ) => {
     try {
       if (!device?.isConnected) return console.log("设备无效");
 
       await device.connect();
       await device.discoverAllServicesAndCharacteristics();
 
-      // 直接发送字符串 '1'
-      const encodedCommand = Buffer.from("1", "utf-8").toString("base64");
+      // 构造发送的命令，可以根据需要将字段嵌入到命令中
+      const commandString = `1|${amount}|${paymentAddress}|${inputAddress}|${selectedCrypto}`;
+      const encodedCommand = Buffer.from(commandString, "utf-8").toString(
+        "base64"
+      );
 
       await device.writeCharacteristicWithResponseForService(
         serviceUUID,
@@ -1076,7 +1085,7 @@ function TransactionsScreen() {
         encodedCommand
       );
 
-      console.log("命令已发送: 1");
+      console.log("命令已发送:", commandString);
     } catch (error) {
       console.log("发送命令失败:", error);
     }
@@ -1695,8 +1704,14 @@ function TransactionsScreen() {
                       );
                       if (!device) throw new Error("未找到匹配的设备");
 
-                      // 直接调用签名函数并传递设备
-                      await signTransaction(device);
+                      // 传递 amount, paymentAddress, inputAddress, selectedCrypto 给签名函数
+                      await signTransaction(
+                        device,
+                        amount, // 传递金额
+                        paymentAddress, // 付款地址
+                        inputAddress, // 收款地址
+                        selectedCrypto // 币种
+                      );
 
                       setConfirmModalVisible(false);
                       setConfirmingTransactionModalVisible(true);
