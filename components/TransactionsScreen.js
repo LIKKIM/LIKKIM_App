@@ -1051,17 +1051,6 @@ function TransactionsScreen() {
     }
   };
 
-  // 转换函数：将十六进制或字符串转换为十进制数
-  const toDecimalString = (value) => {
-    if (typeof value === "number") {
-      return value.toString(10); // 将数字转为10进制字符串
-    } else if (typeof value === "string" && !isNaN(Number(value))) {
-      return parseInt(value, 10).toString(10); // 将字符串数字解析为整数后再转为10进制字符串
-    } else {
-      throw new Error("Invalid value for decimal conversion");
-    }
-  };
-
   // 签名函数
   const signTransaction = async (
     device,
@@ -1076,21 +1065,53 @@ function TransactionsScreen() {
       await device.connect();
       await device.discoverAllServicesAndCharacteristics();
 
-      // 构造发送的命令，可以根据需要将字段嵌入到命令中
-      const commandString = `1|${amount}|${paymentAddress}|${inputAddress}|${selectedCrypto}`;
-      const encodedCommand = Buffer.from(commandString, "utf-8").toString(
-        "base64"
-      );
+      let commandString = "";
+
+      if (selectedCrypto === "ETH") {
+        // 构建 ETH 交易的 JSON 数据
+        const transactionData = {
+          nonce: toDecimalString(1), // 转换为10进制
+          gas_price: toDecimalString(20), // 转换为10进制
+          gas_limit: toDecimalString(10000), // 转换为10进制
+          to: paymentAddress, // 目标地址
+          value: toDecimalString(amount), // 转换为10进制
+          data: `0xa9059cbb000000000000000000000000${inputAddress.slice(
+            2
+          )}0000000000000000000000000000000000000000000000000000000000000000`, // transfer 函数的编码数据
+        };
+
+        // 转换为 JSON 字符串并编码为 Base64
+        commandString = Buffer.from(
+          JSON.stringify(transactionData),
+          "utf-8"
+        ).toString("base64");
+      } else {
+        // 对于其他币种，仍然使用之前的方式构建命令
+        commandString = `1|${toDecimalString(
+          amount
+        )}|${paymentAddress}|${inputAddress}|${selectedCrypto}`;
+      }
 
       await device.writeCharacteristicWithResponseForService(
         serviceUUID,
         writeCharacteristicUUID,
-        encodedCommand
+        commandString
       );
 
       console.log("命令已发送:", commandString);
     } catch (error) {
       console.log("发送命令失败:", error);
+    }
+  };
+
+  // 转换为 10 进制字符串的函数
+  const toDecimalString = (value) => {
+    if (typeof value === "number") {
+      return value.toString(10); // 将数字转为10进制字符串
+    } else if (typeof value === "string" && !isNaN(Number(value))) {
+      return parseInt(value, 10).toString(10); // 将字符串数字解析为整数后再转为10进制字符串
+    } else {
+      throw new Error("Invalid value for decimal conversion");
     }
   };
 
