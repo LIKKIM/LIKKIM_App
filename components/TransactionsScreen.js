@@ -1052,11 +1052,14 @@ function TransactionsScreen() {
   };
 
   // 转换函数：将十六进制或字符串转换为十进制数
-  const convertToDecimal = (value) => {
-    if (typeof value === "string" && value.startsWith("0x")) {
-      return parseInt(value, 16); // 如果是十六进制，转换为十进制
+  const toDecimalString = (value) => {
+    if (typeof value === "number") {
+      return value.toString(10); // 将数字转为10进制字符串
+    } else if (typeof value === "string" && !isNaN(Number(value))) {
+      return parseInt(value, 10).toString(10); // 将字符串数字解析为整数后再转为10进制字符串
+    } else {
+      throw new Error("Invalid value for decimal conversion");
     }
-    return parseInt(value, 10); // 否则直接返回十进制数值
   };
 
   // 签名函数
