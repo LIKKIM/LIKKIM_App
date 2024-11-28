@@ -104,7 +104,7 @@ function TransactionsScreen() {
   const [devices, setDevices] = useState([]);
   const [pinModalVisible, setPinModalVisible] = useState(false);
   const [pinCode, setPinCode] = useState("");
-
+  const [verificationStatus, setVerificationStatus] = useState(null);
   const restoreIdentifier = Constants.installationId;
   const [isAddressValid, setIsAddressValid] = useState(false);
 
