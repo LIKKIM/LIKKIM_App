@@ -107,6 +107,7 @@ function TransactionsScreen() {
   const [verificationStatus, setVerificationStatus] = useState(null);
   const restoreIdentifier = Constants.installationId;
   const [isAddressValid, setIsAddressValid] = useState(false);
+
   const [verificationSuccessModalVisible, setVerificationSuccessModalVisible] =
     useState(false);
   const [isVerifyingAddress, setIsVerifyingAddress] = useState(false);
@@ -120,10 +121,13 @@ function TransactionsScreen() {
   const [selectedChain, setSelectedChain] = useState(""); // 新增状态
   const [fromDropdownVisible, setFromDropdownVisible] = useState(false);
   const [toDropdownVisible, setToDropdownVisible] = useState(false);
+
   const [selectedFromToken, setSelectedFromToken] = useState(""); // "From" token state
   const [selectedFromChain, setSelectedFromChain] = useState(""); // "From" chain state
+
   const [selectedToToken, setSelectedToToken] = useState(""); // "To" token state
   const [selectedToChain, setSelectedToChain] = useState(""); // "To" chain state
+
   const [paymentAddress, setPaymentAddress] = useState("Your Payment Address");
   const [addressVerificationMessage, setAddressVerificationMessage] = useState(
     t("Verifying Address on LIKKIM...")
@@ -183,6 +187,12 @@ function TransactionsScreen() {
       setIsScanning(false);
     }, 2000);
   };
+
+  /*   useEffect(() => {
+    console.log("Initial Cryptos:", initialAdditionalCryptos);
+  }, []); */
+
+  // 在 amountModalVisible 状态变为 true 时发送 POST 请求
 
   // Clear values when opening the modal
   useEffect(() => {
@@ -364,7 +374,10 @@ function TransactionsScreen() {
       }
     }
   }, [initialAdditionalCryptos, amountModalVisible]);
-
+  /*   useEffect(() => {
+    console.log("Current initialAdditionalCryptos:", initialAdditionalCryptos);
+  }, [initialAdditionalCryptos]); */
+  // 当蓝牙模态框打开时，开始扫描设备
   useEffect(() => {
     if (bleVisible) {
       scanDevices();
@@ -377,9 +390,13 @@ function TransactionsScreen() {
       bleManagerRef.current && bleManagerRef.current.destroy();
     };
   }, []);
+  /*   useEffect(() => {
+    console.log("Added Cryptos in TransactionsScreen:", addedCryptos);
+  }, [addedCryptos]); */
 
   useEffect(() => {
     let addressMonitorSubscription;
+
     const startMonitoring = async () => {
       if (addressModalVisible && selectedDevice) {
         addressMonitorSubscription = await showLIKKIMAddressCommand(
@@ -1061,88 +1078,138 @@ function TransactionsScreen() {
 
   // 签名函数
   const signTransaction = async (
-    device,
+    verifiedDevices,
     hash,
     height,
     blockTime,
     amount,
-    paymentAddress,
-    inputAddress,
+    paymentAddress, // 传入付款地址
+    inputAddress, // 传入收款地址
     coinType,
-    serviceUUID,
-    writeCharacteristicUUID
+    serviceUUID, // 传入服务UUID
+    writeCharacteristicUUID // 传入写特征UUID
   ) => {
     try {
-      // 检查设备对象是否有效
-      if (typeof device !== "object" || !device.isConnected) {
-        console.log("设备对象无效:", device);
+      if (verifiedDevices.length === 0) {
+        console.log("未找到已验证的设备");
         return;
       }
 
-      // 连接设备并发现所有服务
+      const deviceID = verifiedDevices[0];
+      const device = await bleManagerRef.current.connectToDevice(deviceID);
+
       await device.connect();
       await device.discoverAllServicesAndCharacteristics();
-      console.log("设备已连接并发现所有服务。");
 
-      // 检查设备是否具有 writeCharacteristicWithResponseForService 方法
-      if (
-        typeof device.writeCharacteristicWithResponseForService !== "function"
-      ) {
-        console.log(
-          "设备不支持 writeCharacteristicWithResponseForService 方法。"
-        );
+      if (!device.isConnected) {
+        console.log("设备未连接，无法发送交易命令");
         return;
       }
 
-      // 根据 coinType 匹配对应的字符串
-      let commandString = `address:bitcoin`;
+      // 处理 TRX 交易
+      if (coinType === "TRX") {
+        const latestBlock = {
+          hash,
+          number: height,
+          timestamp: blockTime,
+        };
 
-      // 将命令字符串转换为 Base64 编码
-      const encodedCommand = Buffer.from(commandString, "utf-8").toString(
-        "base64"
-      );
+        const transactionData = {
+          token: "",
+          contract_address: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
+          from: paymentAddress, // 使用付款地址
+          to: inputAddress, // 使用收款地址
+          value: `${amount * Math.pow(10, 6)}`, // 计算金额，假设为TRX基础单位
+          latest_block: latestBlock,
+          override: {
+            token_short_name: "USDT",
+            token_full_name: "Tether",
+            decimals: 6,
+          },
+          fee: 1,
+          memo: "",
+        };
 
-      // 向服务写入命令字符串（确保使用 Base64 编码）
-      await device.writeCharacteristicWithResponseForService(
-        serviceUUID,
-        writeCharacteristicUUID,
-        encodedCommand
-      );
+        console.log("TRX交易数据:", transactionData);
+        await sendDataToDevice(
+          device,
+          transactionData,
+          serviceUUID,
+          writeCharacteristicUUID
+        );
+      }
 
-      // 设置验证地址的状态
-      setIsVerifyingAddress(true);
-      setAddressVerificationMessage("正在 LIKKIM 上验证地址...");
-      console.log("地址显示命令已发送:", commandString);
+      // 处理 ETH 交易
+      else if (coinType === "ETH") {
+        const nonce = "0x1A";
+        const gasPrice = "0x4A817C800";
+        const gasLimit = "0x5208";
+        const amountWei = BigInt(Math.round(amount * 10 ** 18));
+        const decimalNonce = convertToDecimal(nonce);
+        const decimalGasPrice = convertToDecimal(gasPrice);
+        const decimalGasLimit = convertToDecimal(gasLimit);
+        const decimalValue = amountWei.toString();
 
-      // 监听设备的响应
-      const notifyCharacteristicUUID = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E";
-      const addressMonitorSubscription = device.monitorCharacteristicForService(
-        serviceUUID,
-        notifyCharacteristicUUID,
-        (error, characteristic) => {
-          if (error) {
-            console.log("监听设备响应时出错:", error);
-            return;
-          }
-          const receivedDataHex = Buffer.from(characteristic.value, "base64")
-            .toString("hex")
-            .toUpperCase();
-          console.log("接收到的十六进制数据字符串:", receivedDataHex);
+        const paddedRecipient = inputAddress
+          .replace("0x", "")
+          .toLowerCase()
+          .padStart(64, "0");
+        const amountHex = amountWei.toString(16).padStart(64, "0");
+        const functionSignature = "a9059cbb"; // `transfer` 方法的 ID
+        const data = `0x${functionSignature}${paddedRecipient}${amountHex}`;
 
-          // 检查接收到的数据是否为预期的响应
-          if (receivedDataHex === "A40302B1120D0A") {
-            console.log("在 LIKKIM 上成功显示地址");
-            setAddressVerificationMessage("地址已成功在 LIKKIM 上显示！");
-          }
+        const transactionData = {
+          nonce: decimalNonce,
+          gas_price: decimalGasPrice,
+          gas_limit: decimalGasLimit,
+          to: inputAddress, // 使用收款地址
+          value: decimalValue,
+          data,
+        };
+
+        console.log("ETH交易数据:", transactionData);
+        await sendDataToDevice(
+          device,
+          transactionData,
+          serviceUUID,
+          writeCharacteristicUUID
+        );
+      }
+
+      // 处理其他链的交易
+      else {
+        const chainData = getChainData(coinType);
+        if (!chainData) {
+          console.log("不支持的币种:", coinType);
+          return;
         }
-      );
 
-      return addressMonitorSubscription;
+        const transactionData = {
+          chain_key: chainData.chainKey,
+          hd_path: chainData.hdPath,
+          data: {
+            hash,
+            height: height.toString(),
+            blockTime: blockTime.toString(),
+            amount: amount.toString(),
+            userAddress: paymentAddress, // 使用付款地址
+          },
+        };
+
+        console.log(`${coinType}交易数据:`, transactionData);
+        await sendDataToDevice(
+          device,
+          transactionData,
+          serviceUUID,
+          writeCharacteristicUUID
+        );
+      }
     } catch (error) {
-      console.log("发送显示地址命令失败:", error);
+      console.log("发送交易数据到 BLE 设备时出错:", error.message);
     }
   };
 
+  // 提取通用的发送数据函数
   const sendDataToDevice = async (
     device,
     data,
@@ -1150,34 +1217,18 @@ function TransactionsScreen() {
     writeCharacteristicUUID
   ) => {
     try {
-      // 确保设备已连接并发现所有服务
-      await device.connect();
-      await device.discoverAllServicesAndCharacteristics();
-      console.log("设备已连接并发现所有服务。");
-
-      // 检查设备是否支持所需的写方法
-      if (
-        typeof device.writeCharacteristicWithResponseForService !== "function"
-      ) {
-        console.log(
-          "设备不支持 writeCharacteristicWithResponseForService 方法。"
-        );
-        return;
-      }
-
-      // 将数据转换为 Base64 编码
-      const encodedData = Buffer.from(JSON.stringify(data), "utf-8").toString(
-        "base64"
+      // 获取设备的服务和特征
+      const service = await device.discoverService(serviceUUID);
+      const characteristic = await service.discoverCharacteristic(
+        writeCharacteristicUUID
       );
 
-      // 向设备发送数据
-      await device.writeCharacteristicWithResponseForService(
-        serviceUUID,
-        writeCharacteristicUUID,
-        encodedData
-      );
+      // 将数据转换为适当的格式
+      const dataBuffer = new TextEncoder().encode(JSON.stringify(data)); // 假设数据是 JSON 格式
 
-      console.log("数据成功发送到设备:", data);
+      // 发送数据到设备
+      await characteristic.writeWithResponse(dataBuffer);
+      console.log("数据成功发送到设备");
     } catch (error) {
       console.log("发送数据到设备时出错:", error.message);
     }
@@ -1376,6 +1427,13 @@ function TransactionsScreen() {
 
     loadVerifiedDevices();
   }, []); // 这个依赖空数组确保该代码只在组件挂载时执行一次
+  // 打印设备数量
+  /*   useEffect(() => {
+    console.log(
+      "Transaction Page Verified Devices Count:",
+      verifiedDevices.length
+    );
+  }, [verifiedDevices]); */
 
   // 停止监听
   useEffect(() => {
@@ -1824,7 +1882,7 @@ function TransactionsScreen() {
 
               <View style={{ marginTop: 20, width: "100%" }}>
                 {/* 确认交易按钮 */}
-                {/*             <TouchableOpacity
+                <TouchableOpacity
                   style={TransactionsScreenStyle.optionButton}
                   onPress={async () => {
                     try {
@@ -1860,62 +1918,6 @@ function TransactionsScreen() {
                         );
                       }
 
-                      setConfirmModalVisible(false);
-                      setConfirmingTransactionModalVisible(true);
-                    } catch (error) {
-                      console.log("确认交易时出错:", error);
-                    }
-                  }}
-                >
-                  <Text style={TransactionsScreenStyle.submitButtonText}>
-                    {t("Confirm")}
-                  </Text>
-                </TouchableOpacity> */}
-                {/* 测试按钮 */}
-                <TouchableOpacity
-                  style={TransactionsScreenStyle.optionButton}
-                  onPress={async () => {
-                    try {
-                      if (!chainShortName) {
-                        throw new Error("未选择链或未设置 chainShortName");
-                      }
-
-                      // 使用硬编码的测试数据替代 fetch 请求
-                      const data = {
-                        code: "0",
-                        data: [
-                          {
-                            blockList: [
-                              {
-                                hash: "0x1234567890abcdef", // 测试用的区块哈希
-                                height: 1000, // 测试用的区块高度
-                                blockTime: 1622490000, // 测试用的区块时间戳
-                              },
-                            ],
-                          },
-                        ],
-                      };
-
-                      // 确保数据格式正确
-                      if (data.code === "0" && Array.isArray(data.data)) {
-                        const block = data.data[0].blockList[0];
-                        const { hash, height, blockTime } = block;
-
-                        // 调用签名函数，正确传递付款地址和收款地址
-                        await signTransaction(
-                          device,
-                          verifiedDevices,
-                          hash,
-                          height,
-                          blockTime,
-                          amount,
-                          paymentAddress, // 付款地址
-                          inputAddress, // 收款地址
-                          selectedCrypto // 动态传入币种
-                        );
-                      }
-
-                      // 隐藏确认模态框并显示正在确认交易的模态框
                       setConfirmModalVisible(false);
                       setConfirmingTransactionModalVisible(true);
                     } catch (error) {
