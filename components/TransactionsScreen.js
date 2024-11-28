@@ -481,7 +481,7 @@ function TransactionsScreen() {
       async (error, characteristic) => {
         if (error) {
           console.log("监听设备响应时出错:", error.message);
-          //   return;
+          // return;
         }
 
         const receivedData = Buffer.from(characteristic.value, "base64");
@@ -505,9 +505,13 @@ function TransactionsScreen() {
           }
         }
 
-        // 如果接收到 "VALID"，发送 "validation"
+        // 如果接收到 "VALID"，改变状态并发送 "validation"
         if (receivedDataString === "VALID") {
           try {
+            // 立即更新状态为 "VALID"
+            setVerificationStatus("VALID");
+            console.log("状态更新为: VALID");
+
             const validationMessage = "validation";
             const bufferValidationMessage = Buffer.from(
               validationMessage,
@@ -536,7 +540,6 @@ function TransactionsScreen() {
       }
     );
   };
-
   // 监听交易反馈函数  监听签名返回函数
   const monitorTransactionResponse = (device) => {
     const notifyCharacteristicUUID = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E";
@@ -1964,6 +1967,7 @@ function TransactionsScreen() {
           styles={TransactionsScreenStyle}
           isDarkMode={isDarkMode}
           t={t}
+          status={verificationStatus} // 传递状态
         />
 
         {/* 验证模态框 */}

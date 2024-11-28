@@ -148,6 +148,7 @@ const ModalsContainer = ({
       />
 
       {/* PIN码输入modal窗口 */}
+
       <PinModal
         visible={pinModalVisible} // 控制 PIN 模态框的可见性
         pinCode={pinCode} // 绑定 PIN 输入的状态
@@ -157,6 +158,7 @@ const ModalsContainer = ({
         styles={WalletScreenStyle}
         isDarkMode={isDarkMode}
         t={t}
+        status={verificationStatus} // 传递状态
       />
 
       {/* 验证结果模态框 */}

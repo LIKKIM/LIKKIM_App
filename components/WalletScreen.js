@@ -583,7 +583,7 @@ function WalletScreen({ route, navigation }) {
             } else {
               console.log("监听设备响应时出错:", error.message);
             }
-            return;
+            //  return;
           }
 
           // Base64解码接收到的数据
@@ -919,7 +919,7 @@ function WalletScreen({ route, navigation }) {
       async (error, characteristic) => {
         if (error) {
           console.log("监听设备响应时出错:", error.message);
-          return;
+          //  return;
         }
 
         const receivedData = Buffer.from(characteristic.value, "base64");
@@ -943,9 +943,13 @@ function WalletScreen({ route, navigation }) {
           }
         }
 
-        // 如果接收到 "VALID"，发送 "validation"
+        // 如果接收到 "VALID"，改变状态并发送 "validation"
         if (receivedDataString === "VALID") {
           try {
+            // 立即更新状态为 "VALID"
+            setVerificationStatus("VALID");
+            console.log("状态更新为: VALID");
+
             const validationMessage = "validation";
             const bufferValidationMessage = Buffer.from(
               validationMessage,
@@ -996,7 +1000,7 @@ function WalletScreen({ route, navigation }) {
           } else {
             console.log("监听设备响应时出错:", error.message);
           }
-          return;
+          //  return;
         }
         // Base64解码接收到的数据
         const receivedData = Buffer.from(characteristic.value, "base64");
@@ -1042,7 +1046,7 @@ function WalletScreen({ route, navigation }) {
           } else {
             console.log("监听设备响应时出错:", error.message);
           }
-          return;
+          //    return;
         }
         // Base64解码接收到的数据
         const receivedData = Buffer.from(characteristic.value, "base64");
