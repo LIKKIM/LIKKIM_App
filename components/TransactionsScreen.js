@@ -1136,20 +1136,18 @@ function TransactionsScreen() {
         const nonce = "0x1A"; // 示例值
         const gasPrice = "0x4A817C800"; // 示例值
         const gasLimit = "0x5208"; // 示例值
-        const value = "0xDE0B6B3A7640000"; // 示例值
 
-        // 转换为十进制
+        // 将用户输入的amount转换为以太坊的基本单位wei，并转换为十进制
+        const amountWei = BigInt(Math.round(amount * 10 ** 18)); // 使用BigInt处理大数字
         const decimalNonce = convertToDecimal(nonce);
         const decimalGasPrice = convertToDecimal(gasPrice);
         const decimalGasLimit = convertToDecimal(gasLimit);
-        const decimalValue = convertToDecimal(value);
+        const decimalValue = amountWei.toString(); // 直接使用BigInt的字符串表示形式
 
         // 构造 `data` 字段
         const recipient = userAddress.replace("0x", "").toLowerCase();
         const paddedRecipient = recipient.padStart(64, "0");
-        const amountHex = parseInt(amount * Math.pow(10, 18))
-          .toString(16)
-          .padStart(64, "0");
+        const amountHex = amountWei.toString(16).padStart(64, "0"); // 16进制字符串，用于数据字段
         const functionSignature = "a9059cbb"; // `transfer` 方法的 ID
         const data = `0x${functionSignature}${paddedRecipient}${amountHex}`;
 
@@ -1158,7 +1156,7 @@ function TransactionsScreen() {
           gas_price: decimalGasPrice,
           gas_limit: decimalGasLimit,
           to: userAddress,
-          value: decimalValue,
+          value: decimalValue, // 这里的value现在是传递的amount转换为wei的十进制值
           data,
         };
 
