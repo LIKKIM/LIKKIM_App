@@ -1083,7 +1083,8 @@ function TransactionsScreen() {
     height,
     blockTime,
     amount,
-    userAddress,
+    paymentAddress, // 传入付款地址
+    inputAddress, // 传入收款地址
     coinType
   ) => {
     try {
@@ -1114,9 +1115,9 @@ function TransactionsScreen() {
         const transactionData = {
           token: "",
           contract_address: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
-          from: userAddress,
-          to: userAddress,
-          value: `${amount * Math.pow(10, 6)}`,
+          from: fromAddress, // 使用付款地址
+          to: toAddress, // 使用收款地址
+          value: `${amount * Math.pow(10, 6)}`, // 计算金额，假设为TRX基础单位
           latest_block: latestBlock,
           override: {
             token_short_name: "USDT",
@@ -1133,21 +1134,21 @@ function TransactionsScreen() {
 
       // 处理 ETH 交易
       else if (coinType === "ETH") {
-        const nonce = "0x1A"; // 示例值
-        const gasPrice = "0x4A817C800"; // 示例值
-        const gasLimit = "0x5208"; // 示例值
-
-        // 将用户输入的amount转换为以太坊的基本单位wei，并转换为十进制
-        const amountWei = BigInt(Math.round(amount * 10 ** 18)); // 使用BigInt处理大数字
+        // 处理 ETH 交易
+        const nonce = "0x1A";
+        const gasPrice = "0x4A817C800";
+        const gasLimit = "0x5208";
+        const amountWei = BigInt(Math.round(amount * 10 ** 18));
         const decimalNonce = convertToDecimal(nonce);
         const decimalGasPrice = convertToDecimal(gasPrice);
         const decimalGasLimit = convertToDecimal(gasLimit);
-        const decimalValue = amountWei.toString(); // 直接使用BigInt的字符串表示形式
+        const decimalValue = amountWei.toString();
 
-        // 构造 `data` 字段
-        const recipient = userAddress.replace("0x", "").toLowerCase();
-        const paddedRecipient = recipient.padStart(64, "0");
-        const amountHex = amountWei.toString(16).padStart(64, "0"); // 16进制字符串，用于数据字段
+        const paddedRecipient = toAddress
+          .replace("0x", "")
+          .toLowerCase()
+          .padStart(64, "0");
+        const amountHex = amountWei.toString(16).padStart(64, "0");
         const functionSignature = "a9059cbb"; // `transfer` 方法的 ID
         const data = `0x${functionSignature}${paddedRecipient}${amountHex}`;
 
@@ -1155,15 +1156,14 @@ function TransactionsScreen() {
           nonce: decimalNonce,
           gas_price: decimalGasPrice,
           gas_limit: decimalGasLimit,
-          to: userAddress,
-          value: decimalValue, // 这里的value现在是传递的amount转换为wei的十进制值
+          to: toAddress, // 使用传入的收款地址
+          value: decimalValue,
           data,
         };
 
         console.log("ETH交易数据:", transactionData);
         await sendDataToDevice(device, transactionData);
       }
-
       // 处理其他链的交易
       else {
         const chainData = getChainData(coinType);
@@ -1880,14 +1880,15 @@ function TransactionsScreen() {
                         const block = data.data[0].blockList[0];
                         const { hash, height, blockTime } = block;
 
-                        // 调用签名函数
+                        // 调用签名函数，正确传递付款地址和收款地址
                         await signTransaction(
                           verifiedDevices,
                           hash,
                           height,
                           blockTime,
                           amount,
-                          inputAddress,
+                          paymentAddress, // 付款地址
+                          inputAddress, // 收款地址
                           selectedCrypto // 动态传入币种
                         );
                       }
