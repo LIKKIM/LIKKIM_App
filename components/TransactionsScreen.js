@@ -1819,34 +1819,40 @@ function TransactionsScreen() {
               </View>
               <ScrollView
                 style={{ maxHeight: 320 }} // 设置最大高度，当内容超过时启用滚动
-                contentContainerStyle={{ paddingHorizontal: 16 }}
+                contentContainerStyle={{ paddingHorizontal: 0 }}
               >
                 <Text style={TransactionsScreenStyle.transactionText}>
                   <Text style={{ fontWeight: "bold" }}>{t("Amount")}:</Text>
+                  {"\n"}
                   {` ${amount} ${selectedCrypto}`}
                 </Text>
                 <Text style={TransactionsScreenStyle.transactionText}>
                   <Text style={{ fontWeight: "bold" }}>
                     {t("Payment Address")}:
                   </Text>
-                  {` ${paymentAddress}`}
+                  {"\n"}
+                  {paymentAddress}
                 </Text>
+
                 <Text style={TransactionsScreenStyle.transactionText}>
                   <Text style={{ fontWeight: "bold" }}>
                     {t("Recipient Address")}:
                   </Text>
+                  {"\n"}
                   {` ${inputAddress}`}
                 </Text>
                 <Text style={TransactionsScreenStyle.transactionText}>
                   <Text style={{ fontWeight: "bold" }}>
                     {t("Detected Network")}:
                   </Text>
+                  {"\n"}
                   {` ${detectedNetwork}`}
                 </Text>
                 <Text style={TransactionsScreenStyle.transactionText}>
                   <Text style={{ fontWeight: "bold" }}>
                     {t("Transaction Fee")}:
                   </Text>
+                  {"\n"}
                   {` ${transactionFee} ${selectedCrypto}`}
                 </Text>
               </ScrollView>
