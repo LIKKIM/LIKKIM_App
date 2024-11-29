@@ -35,6 +35,7 @@ import SelectCryptoModal from "./modal/SelectCryptoModal";
 import SwapModal from "./modal/SwapModal";
 import ReceiveAddressModal from "./modal/ReceiveAddressModal";
 import PinModal from "./modal/PinModal";
+import { ethers } from "ethers"; //11月29号 签名for 如风新增部分
 import { BleManager, BleErrorCode } from "react-native-ble-plx";
 const serviceUUID = "6E400001-B5A3-F393-E0A9-E50E24DCCA9E";
 const writeCharacteristicUUID = "6E400002-B5A3-F393-E0A9-E50E24DCCA9E";
@@ -1051,7 +1052,7 @@ function TransactionsScreen() {
     }
   };
 
-  // 签名函数
+  // 签名函数 11月29号 修改新增部分 for 如风
   const signTransaction = async (
     device,
     amount,
@@ -1068,23 +1069,27 @@ function TransactionsScreen() {
       let commandString = "";
 
       if (selectedCrypto === "ETH") {
-        // 构建 ETH 交易的 JSON 数据
+        // 创建一个 ethers.js provider 用于获取 nonce 等信息
+        const provider = new ethers.JsonRpcProvider(
+          "https://mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID"
+        );
+
+        // 构建交易数据
         const transactionData = {
-          nonce: toDecimalString(1), // 转换为10进制
-          gas_price: toDecimalString(20), // 转换为10进制
-          gas_limit: toDecimalString(10000), // 转换为10进制
+          nonce: await provider.getTransactionCount(inputAddress, "latest"), // 获取最新的交易 nonce
+          gasLimit: ethers.utils.hexlify(21000), // 默认的 gas limit
+          gasPrice: ethers.utils.parseUnits("20", "gwei"), // 设置 gas price 为 20 Gwei
           to: paymentAddress, // 目标地址
-          value: toDecimalString(amount), // 转换为10进制
-          data: `0xa9059cbb000000000000000000000000${inputAddress.slice(
-            2
-          )}0000000000000000000000000000000000000000000000000000000000000000`, // transfer 函数的编码数据
+          value: ethers.utils.parseEther(amount.toString()), // 转账金额，单位为 ETH
+          data: "0x", // 如果有需要附加的数据（例如合约调用），可以在这里填入
+          chainId: 1, // 以太坊主网链 ID
         };
 
-        // 转换为 JSON 字符串并编码为 Base64
-        commandString = Buffer.from(
-          JSON.stringify(transactionData),
-          "utf-8"
-        ).toString("base64");
+        // 使用 ethers.js 将交易对象序列化为待签名的数据
+        const unsignedTx = ethers.utils.serializeTransaction(transactionData);
+
+        // 将交易数据转换为 base64 编码
+        commandString = Buffer.from(unsignedTx, "utf-8").toString("base64");
       } else {
         // 对于其他币种，仍然使用之前的方式构建命令
         commandString = `1|${toDecimalString(
@@ -1092,6 +1097,7 @@ function TransactionsScreen() {
         )}|${paymentAddress}|${inputAddress}|${selectedCrypto}`;
       }
 
+      // 将命令数据发送到设备
       await device.writeCharacteristicWithResponseForService(
         serviceUUID,
         writeCharacteristicUUID,
