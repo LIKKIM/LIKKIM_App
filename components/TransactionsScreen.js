@@ -1156,7 +1156,7 @@ function TransactionsScreen() {
         };
 
         // 将 JSON 数据转换为符合格式的字符串
-        commandString = JSON.stringify(commandData);
+        commandString = commandData;
       } else {
         // 对于其他币种，仍然使用之前的方式构建命令
         commandString = `1|${toDecimalString(
