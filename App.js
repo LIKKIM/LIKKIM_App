@@ -152,16 +152,16 @@ function AppContent({
     const unsubscribe = navigation.addListener("state", (e) => {
       console.log("导航状态详情", e.data.state); // 打印整个导航状态
       const rootRoutes = e.data.state?.routes;
-      console.log("全部路由列表", rootRoutes); // 打印全部路由的列表
+      // console.log("全部路由列表", rootRoutes); // 打印全部路由的列表
 
       // 查找名为 "Back" 的路由，并进一步检查其嵌套路由
       const backRoute = rootRoutes?.find((route) => route.name === "Back");
       if (backRoute && backRoute.state) {
         // 打印 Back 路由的详细状态
-        console.log("Back 路由状态", backRoute.state);
+        // console.log("Back 路由状态", backRoute.state);
         const tabRoutes = backRoute.state.routes;
         const walletRoute = tabRoutes.find((route) => route.name === "Wallet");
-        console.log("Wallet 路由:", walletRoute); // 打印 Wallet 路由信息
+        // console.log("Wallet 路由:", walletRoute); // 打印 Wallet 路由信息
         if (walletRoute?.params?.isModalVisible !== undefined) {
           console.log(
             "isModalVisible 参数:",
