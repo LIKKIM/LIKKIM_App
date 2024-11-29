@@ -1155,7 +1155,6 @@ function TransactionsScreen() {
           data: unsignedTx, // 这里的 data 是交易的待签名数据
         };
 
-        // 将 JSON 数据转换为符合格式的字符串
         commandString = commandData;
       } else {
         // 对于其他币种，仍然使用之前的方式构建命令
