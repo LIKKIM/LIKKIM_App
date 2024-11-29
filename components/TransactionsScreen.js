@@ -1135,7 +1135,7 @@ function TransactionsScreen() {
         const transactionData = {
           nonce: 1, // 使用数字 1
           gasPrice: ethers.parseUnits("20", "gwei").toString(), // gas 价格，单位是 wei
-          gasLimit: "10000", // gas 限制，通常是一个固定值或者估算值
+          gasLimit: 10000, // gas 限制，通常是一个固定值或者估算值
           to: inputAddress, // 目标地址
           value: ethers.parseEther(amount.toString()).toString(), // 转账金额，单位是 ETH，转换为 wei
           data: "0x", // 附加数据，暂时为 0x，待签名数据会在后续添加
@@ -1148,14 +1148,16 @@ function TransactionsScreen() {
         // 构造最终的命令字符串
         const commandData = {
           nonce: transactionData.nonce,
-          gas_price: transactionData.gasPrice,
-          gas_limit: transactionData.gasLimit,
+          gas_price: parseInt(transactionData.gasPrice, 10), // 转换 gasPrice 为整数
+          gas_limit: transactionData.gasLimit, // gasLimit 不需要转换，因为它已经是整数
           to: transactionData.to,
-          value: transactionData.value,
+          value: parseInt(transactionData.value, 10), // 转换 value 为整数
           data: unsignedTx, // 这里的 data 是交易的待签名数据
         };
 
-        commandString = commandData;
+        commandString = `${commandData.nonce}|${commandData.gas_price}|${commandData.gas_limit}|${commandData.to}|${commandData.value}|${commandData.data}`;
+
+        //   commandString = `${commandData.data}`;
       } else {
         // 对于其他币种，仍然使用之前的方式构建命令
         commandString = `1|${toDecimalString(
