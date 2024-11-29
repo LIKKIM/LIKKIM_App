@@ -1161,7 +1161,7 @@ function TransactionsScreen() {
         // 对于其他币种，仍然使用之前的方式构建命令
         commandString = `1|${toDecimalString(
           amount
-        )}|${paymentAddress}|${inputAddress}|${selectedCrypto}`;
+        )}|${inputAddress}|${selectedCrypto}`;
       }
 
       // 将命令数据发送到设备
