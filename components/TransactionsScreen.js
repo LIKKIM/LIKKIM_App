@@ -1115,8 +1115,7 @@ function TransactionsScreen() {
   // 签名函数 11月29号 修改新增部分 for 如风
   const signTransaction = async (
     device,
-    amount,
-    paymentAddress,
+    amount, // 如果不需要支付地址，可以移除这个参数
     inputAddress,
     selectedCrypto
   ) => {
@@ -1132,22 +1131,20 @@ function TransactionsScreen() {
       let commandString = "";
 
       if (selectedCrypto === "ETH") {
-        // 构建交易数据
+        // 构建交易数据，nonce 固定为 1
         const transactionData = {
-          nonce: toDecimalString(1), // 假设 nonce 是 1，实际情况下需要从 provider 获取
-          gasPrice: ethers.parseUnits("20", "gwei"), // gas 价格
-          gasLimit: toDecimalString(10000), // gas 限制
+          nonce: 1, // 使用数字 1
+          gasPrice: ethers.utils.parseUnits("20", "gwei").toString(), // gas 价格，单位是 wei，转换为字符串
+          gasLimit: "10000", // gas 限制，通常是一个固定值或者估算值
           to: inputAddress, // 目标地址
-          value: ethers.parseEther(amount.toString()), // 转账金额（单位是 ETH）
-          data: "0x", // 如果有需要附加的数据（例如合约调用），可以在这里填入
+          value: ethers.utils.parseEther(amount.toString()).toString(), // 转账金额（单位是 ETH），转换为 wei 并转为字符串
+          data: "0x", // 附加数据，如果有合约调用则需要在这里填入相应的编码数据
           chainId: 1, // 以太坊主网链 ID
         };
 
-        // 使用 ethers.js 将交易对象序列化为待签名的数据
-        const unsignedTx = Transaction.from(transactionData).unsignedSerialized;
-
-        // 将交易数据转换为 hex 格式
-        commandString = unsignedTx.toString("hex"); // 修改这里，从 Base64 改为 Hex
+        // 使用 ethers.js 库中的 Transaction 对象构建并序列化交易
+        const unsignedTx = await serializeTransaction(transactionData);
+        commandString = unsignedTx.toString("hex"); // 确保以 hex 格式发送
       } else {
         // 对于其他币种，仍然使用之前的方式构建命令
         commandString = `1|${toDecimalString(
@@ -1167,6 +1164,12 @@ function TransactionsScreen() {
       console.log("发送命令失败:", error);
     }
   };
+
+  // 你也需要一个函数来序列化交易
+  async function serializeTransaction(txData) {
+    const tx = new ethers.utils.Transaction(txData);
+    return ethers.utils.serializeTransaction(tx).substr(2); // 去掉前导的 '0x'
+  }
 
   // 转换为 10 进制字符串的函数
   const toDecimalString = (value) => {
@@ -1796,7 +1799,6 @@ function TransactionsScreen() {
                       await signTransaction(
                         device,
                         amount, // 传递金额
-                        paymentAddress, // 付款地址
                         inputAddress, // 收款地址
                         selectedCrypto // 币种
                       );
