@@ -1126,6 +1126,9 @@ function TransactionsScreen() {
       await device.connect();
       await device.discoverAllServicesAndCharacteristics();
 
+      // 打印 selectedCrypto 的值
+      console.log("选择的币种:", selectedCrypto);
+
       let commandString = "";
 
       if (selectedCrypto === "ETH") {
@@ -1142,8 +1145,9 @@ function TransactionsScreen() {
 
         // 使用 ethers.js 将交易对象序列化为待签名的数据
         const unsignedTx = Transaction.from(transactionData).unsignedSerialized;
-        // 将交易数据转换为 base64 编码
-        commandString = Buffer.from(unsignedTx, "utf-8").toString("base64");
+
+        // 将交易数据转换为 hex 格式
+        commandString = unsignedTx.toString("hex"); // 修改这里，从 Base64 改为 Hex
       } else {
         // 对于其他币种，仍然使用之前的方式构建命令
         commandString = `1|${toDecimalString(
