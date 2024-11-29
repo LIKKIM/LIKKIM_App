@@ -48,7 +48,7 @@ function TransactionsScreen() {
   /**
    * Test Start by RF
    */
-  const testSign = () => {
+  /*   const testSign = () => {
     console.log("test start");
     const toDecimalString = (num) => num.toString(10);
 
@@ -97,7 +97,7 @@ function TransactionsScreen() {
   useEffect(() => {
     testSign();
   }, []);
-
+ */
   /**
    * Test End
    */
@@ -1129,25 +1129,19 @@ function TransactionsScreen() {
       let commandString = "";
 
       if (selectedCrypto === "ETH") {
-        // 创建一个 ethers.js provider 用于获取 nonce 等信息
-        const provider = new ethers.JsonRpcProvider(
-          "https://mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID"
-        );
-
         // 构建交易数据
         const transactionData = {
-          nonce: await provider.getTransactionCount(inputAddress, "latest"), // 获取最新的交易 nonce
-          gasLimit: ethers.utils.hexlify(21000), // 默认的 gas limit
-          gasPrice: ethers.utils.parseUnits("20", "gwei"), // 设置 gas price 为 20 Gwei
-          to: paymentAddress, // 目标地址
-          value: ethers.utils.parseEther(amount.toString()), // 转账金额，单位为 ETH
+          nonce: toDecimalString(1), // 假设 nonce 是 1，实际情况下需要从 provider 获取
+          gasPrice: ethers.parseUnits("20", "gwei"), // gas 价格
+          gasLimit: toDecimalString(10000), // gas 限制
+          to: inputAddress, // 目标地址
+          value: ethers.parseEther(amount.toString()), // 转账金额（单位是 ETH）
           data: "0x", // 如果有需要附加的数据（例如合约调用），可以在这里填入
           chainId: 1, // 以太坊主网链 ID
         };
 
         // 使用 ethers.js 将交易对象序列化为待签名的数据
-        const unsignedTx = ethers.utils.serializeTransaction(transactionData);
-
+        const unsignedTx = Transaction.from(transactionData).unsignedSerialized;
         // 将交易数据转换为 base64 编码
         commandString = Buffer.from(unsignedTx, "utf-8").toString("base64");
       } else {
