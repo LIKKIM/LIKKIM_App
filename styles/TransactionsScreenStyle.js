@@ -518,7 +518,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
     transactionText: {
       color: secondTextColor,
       fontSize: 16,
-      marginBottom: 10,
+      marginBottom: 16,
     },
     verifyAddressButton: {
       backgroundColor: btnColor,

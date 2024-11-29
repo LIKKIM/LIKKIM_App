@@ -158,7 +158,8 @@ const AmountModal = ({
                 },
               ]}
               onPress={handleNextAfterAmount}
-              disabled={!isAmountValid}
+              disabled={isAmountValid} //测试使用
+              // disabled={!isAmountValid}
             >
               <Text style={TransactionsScreenStyle.submitButtonText}>
                 {t("Next")}

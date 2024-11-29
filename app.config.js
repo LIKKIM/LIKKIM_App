@@ -20,7 +20,7 @@ export default {
   assetBundlePatterns: ["**/*"],
   ios: {
     runtimeVersion: {
-      policy: "appVersion"
+      policy: "appVersion",
     },
     infoPlist: {
       ITSAppUsesNonExemptEncryption: false,
@@ -33,7 +33,7 @@ export default {
       UIBackgroundModes: ["bluetooth-central", "bluetooth-peripheral"],
     },
     supportsTablet: false,
-    buildNumber: "16.1.5",
+    buildNumber: "16.1.6",
     bundleIdentifier: "RN.LKKIM",
     icon: "./assets/icon.png",
   },
@@ -72,6 +72,6 @@ export default {
     },
   },
   updates: {
-    url: "https://u.expo.dev/fdfad2e7-7bed-4bcd-ae6d-ca6c74643d63"
-  }
+    url: "https://u.expo.dev/fdfad2e7-7bed-4bcd-ae6d-ca6c74643d63",
+  },
 };

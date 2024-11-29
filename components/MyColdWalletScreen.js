@@ -250,7 +250,7 @@ function MyColdWalletScreen() {
           setVerifiedDevices(JSON.parse(savedDevices));
         }
       } catch (error) {
-        console.error("Failed to load verified devices", error);
+        console.log("Failed to load verified devices", error);
       }
     };
 
@@ -280,7 +280,7 @@ function MyColdWalletScreen() {
         setModalMessage(t("Password changed successfully"));
         setSuccessModalVisible(true); // 显示成功的 Modal
       } catch (error) {
-        console.error("Failed to change password", error);
+        console.log("Failed to change password", error);
       }
     } else {
       // 设置错误信息，显示在原有的 Modal 中
@@ -318,7 +318,7 @@ function MyColdWalletScreen() {
         setModalMessage(t("Screen lock enabled successfully"));
         setSuccessModalVisible(true);
       } catch (error) {
-        console.error("Failed to save password", error);
+        console.log("Failed to save password", error);
       }
     } else {
       setPasswordError(t("Passwords do not match"));
@@ -385,7 +385,7 @@ function MyColdWalletScreen() {
       );
 
       if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
-        console.warn("Location permission denied");
+        console.log("Location permission denied");
         return;
       }
     }
@@ -435,7 +435,7 @@ function MyColdWalletScreen() {
       let canRunCb = true;
       for (let permissionItem in enableds) {
         if (enableds[permissionItem] !== "granted") {
-          console.warn(permissionItem + "权限未授予");
+          console.log(permissionItem + "权限未授予");
           canRunCb = false;
         }
       }
@@ -459,9 +459,9 @@ function MyColdWalletScreen() {
           scanOptions,
           (error, device) => {
             if (error) {
-              console.error("BleManager scanning error:", error);
+              console.log("BleManager scanning error:", error);
               if (error.errorCode === BleErrorCode.BluetoothUnsupported) {
-                // console.error("Bluetooth LE is unsupported on this device");
+                // console.log("Bluetooth LE is unsupported on this device");
                 // return;
               }
             } else if (device.name && device.name.includes("LIKKIM")) {
@@ -541,7 +541,7 @@ function MyColdWalletScreen() {
       );
       console.log("启动验证命令已发送");
     } catch (error) {
-      console.error("发送启动命令失败", error);
+      console.log("发送启动命令失败", error);
     }
   };
 
@@ -606,7 +606,7 @@ function MyColdWalletScreen() {
       async (error, characteristic) => {
         if (error) {
           console.log("监听设备响应时出错:", error.message);
-          return;
+          //  return;
         }
 
         const receivedData = Buffer.from(characteristic.value, "base64");
@@ -630,9 +630,13 @@ function MyColdWalletScreen() {
           }
         }
 
-        // 如果接收到 "VALID"，发送 "validation"
+        // 如果接收到 "VALID"，改变状态并发送 "validation"
         if (receivedDataString === "VALID") {
           try {
+            // 立即更新状态为 "VALID"
+            setVerificationStatus("VALID");
+            console.log("状态更新为: VALID");
+
             const validationMessage = "validation";
             const bufferValidationMessage = Buffer.from(
               validationMessage,
@@ -648,7 +652,7 @@ function MyColdWalletScreen() {
             );
             console.log(`已发送字符串 'validation' 给设备`);
           } catch (error) {
-            console.error("发送 'validation' 时出错:", error);
+            console.log("发送 'validation' 时出错:", error);
           }
         }
 
@@ -682,6 +686,7 @@ function MyColdWalletScreen() {
   // 根据的值（VALID 或 INVALID），判断设备真伪
   // 修改 handleDevicePress 方法，增加获取位置和保存信息的逻辑
   const handleDevicePress = async (device) => {
+    setVerificationStatus(null);
     setSelectedDevice(device);
     setModalVisible(false);
 
@@ -705,7 +710,7 @@ function MyColdWalletScreen() {
           );
           console.log(`解密后的值已发送: ${message}`);
         } catch (error) {
-          console.error("发送解密值时出错:", error);
+          console.log("发送解密值时出错:", error);
         }
       };
 
@@ -726,14 +731,14 @@ function MyColdWalletScreen() {
           );
           console.log("字符串 'request' 已发送");
         } catch (error) {
-          console.error("发送 'request' 时出错:", error);
+          console.log("发送 'request' 时出错:", error);
         }
       }, 200); // 延迟 200ms 确保监听器启动（根据设备响应调整）
 
       // 显示 PIN 码弹窗
       setPinModalVisible(true);
     } catch (error) {
-      console.error("设备连接或命令发送错误:", error);
+      console.log("设备连接或命令发送错误:", error);
     }
   };
   // 匹配验证码
@@ -776,7 +781,7 @@ function MyColdWalletScreen() {
     try {
       const isConnected = await device.isConnected();
       if (!isConnected) {
-        console.warn(`设备 ${device.id} 已经断开连接`);
+        console.log(`设备 ${device.id} 已经断开连接`);
       } else {
         await device.cancelConnection(); // 断开设备连接
         console.log(`设备 ${device.id} 已断开连接`);
@@ -801,9 +806,9 @@ function MyColdWalletScreen() {
         error instanceof BleError &&
         error.errorCode === BleErrorCode.OperationCancelled
       ) {
-        console.warn(`设备 ${device.id} 断开操作被取消`);
+        console.log(`设备 ${device.id} 断开操作被取消`);
       } else {
-        console.error("断开设备连接失败:", error);
+        console.log("断开设备连接失败:", error);
       }
     }
   };
@@ -1519,6 +1524,7 @@ function MyColdWalletScreen() {
         styles={MyColdWalletScreenStyle}
         isDarkMode={isDarkMode}
         t={t}
+        status={verificationStatus} // 传递状态
       />
 
       {/* 验证码模态框 */}

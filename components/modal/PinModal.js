@@ -1,6 +1,13 @@
 // PinModal.js
 import React from "react";
-import { View, Text, Modal, TextInput, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  Modal,
+  TextInput,
+  TouchableOpacity,
+  Image,
+} from "react-native";
 import { BlurView } from "expo-blur";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
@@ -13,6 +20,7 @@ const PinModal = ({
   styles,
   isDarkMode,
   t,
+  status, // 父组件传入的状态
 }) => {
   return (
     <Modal
@@ -24,9 +32,24 @@ const PinModal = ({
       <BlurView intensity={10} style={styles.centeredView}>
         <View style={styles.pinModalView}>
           <View style={{ alignItems: "center" }}>
-            <Text style={styles.pinModalTitle}>
-              {t("Enter PIN to Connect")}
-            </Text>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              {status === "VALID" && (
+                <Image
+                  source={require("../../assets/Authentic.png")} // 替换为实际图片路径
+                  style={{
+                    width: 40,
+                    height: 40,
+                    marginRight: 10,
+                    marginBottom: 15,
+                    resizeMode: "contain", // 保持图片宽高比并适应容器
+                  }}
+                />
+              )}
+              <Text style={styles.pinModalTitle}>
+                {t("Enter PIN to Connect")}
+                {/* 如果状态为 VALID，显示额外的 View */}
+              </Text>
+            </View>
             <Text style={styles.modalSubtitle}>
               {t(
                 "Use the PIN code to establish a secure connection with your LIKKIM hardware."

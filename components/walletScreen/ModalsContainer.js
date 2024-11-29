@@ -4,7 +4,7 @@ import AddressModal from "../modal/AddressModal";
 import AddWalletModal from "../modal/AddWalletModal";
 import TipModal from "../modal/TipModal";
 import ProcessModal from "../modal/ProcessModal";
-import AddCryptoModal from "../modal/AddCryptoModal";
+
 import DeleteConfirmationModal from "../modal/DeleteConfirmationModal";
 import BluetoothModal from "../modal/BluetoothModal";
 import PinModal from "../modal/PinModal";
@@ -117,21 +117,6 @@ const ModalsContainer = ({
         styles={WalletScreenStyle}
         t={t}
       />
-      {/* Add Crypto Modal */}
-      <AddCryptoModal
-        visible={addCryptoVisible}
-        onClose={() => {
-          setAddCryptoVisible(false);
-        }}
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        filteredCryptos={filteredCryptos}
-        handleAddCrypto={handleAddCrypto}
-        styles={WalletScreenStyle}
-        t={t}
-        isDarkMode={isDarkMode}
-        chainCategories={chainCategories}
-      />
 
       {/* Delete Confirmation Modal */}
       <DeleteConfirmationModal
@@ -163,6 +148,7 @@ const ModalsContainer = ({
       />
 
       {/* PIN码输入modal窗口 */}
+
       <PinModal
         visible={pinModalVisible} // 控制 PIN 模态框的可见性
         pinCode={pinCode} // 绑定 PIN 输入的状态
@@ -172,6 +158,7 @@ const ModalsContainer = ({
         styles={WalletScreenStyle}
         isDarkMode={isDarkMode}
         t={t}
+        status={verificationStatus} // 传递状态
       />
 
       {/* 验证结果模态框 */}

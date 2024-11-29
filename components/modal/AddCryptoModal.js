@@ -24,6 +24,7 @@ const AddCryptoModal = ({
   t,
   isDarkMode,
   chainCategories,
+  cryptoCards,
 }) => {
   const [selectedChain, setSelectedChain] = useState("All"); // 状态追踪选中的链标签
   const [selectedCryptos, setSelectedCryptos] = useState([]); // 用于存储选中的加密货币
@@ -34,20 +35,22 @@ const AddCryptoModal = ({
       ? filteredCryptos
       : filteredCryptos.filter((crypto) => crypto.chain === selectedChain);
 
-  // 当模态框打开时重置已选的加密货币项
+  // 根据持久化的数据初始化selectedCryptos
   useEffect(() => {
     if (visible) {
-      setSelectedCryptos([]); // 每次打开模态框时重置选择项
+      // 将已添加的加密货币标记为选中
+      const addedCryptos = cryptoCards.map((crypto) => crypto.name);
+      const initiallySelected = filteredCryptos.filter((crypto) =>
+        addedCryptos.includes(crypto.name)
+      );
+      setSelectedCryptos(initiallySelected);
     }
-  }, [visible]);
+  }, [visible, cryptoCards, filteredCryptos]);
 
-  // 处理多选功能
   const toggleSelectCrypto = (crypto) => {
     if (selectedCryptos.includes(crypto)) {
-      // 如果已选中，取消选择
       setSelectedCryptos(selectedCryptos.filter((c) => c !== crypto));
     } else {
-      // 如果未选中，添加到数组
       setSelectedCryptos([...selectedCryptos, crypto]);
     }
   };
@@ -134,10 +137,12 @@ const AddCryptoModal = ({
                 style={[
                   styles.addCryptoButton,
                   {
-                    borderWidth: selectedCryptos.includes(crypto) ? 2 : 2, // 选中时增加边框宽度，未选中时无边框
+                    borderWidth: 2, // 统一的边框宽度
                     borderColor: selectedCryptos.includes(crypto)
-                      ? "#CFAB95"
-                      : "transparent", // 选中时边框颜色为 #CFAB95
+                      ? "#CFAB95" // 选中时边框颜色
+                      : cryptoCards.some((card) => card.name === crypto.name)
+                      ? "#CFAB95" // 已添加的加密货币边框颜色
+                      : "transparent", // 未选中且未添加时边框颜色
                   },
                 ]}
                 onPress={() => toggleSelectCrypto(crypto)} // 切换选中状态
@@ -170,6 +175,28 @@ const AddCryptoModal = ({
                     </Text>
                   </View>
                 </ImageBackground>
+                {cryptoCards.some((card) => card.name === crypto.name) && (
+                  <View
+                    style={{
+                      position: "absolute",
+                      top: 6,
+                      right: 6,
+                      backgroundColor: "#CFAB9540",
+                      paddingVertical: 2,
+                      paddingHorizontal: 8,
+                      borderRadius: 30,
+                    }}
+                  >
+                    <Text
+                      style={{
+                        fontSize: 12,
+                        color: isDarkMode ? "#ffffff" : "#21201E",
+                      }}
+                    >
+                      {t("Added")}
+                    </Text>
+                  </View> // 显示"Added"文本
+                )}
                 <View
                   style={{
                     flexDirection: "row",
@@ -180,6 +207,7 @@ const AddCryptoModal = ({
                   }}
                 >
                   <Text style={styles.addCryptoText}>{crypto.name}</Text>
+
                   <View style={styles.chainContainer}>
                     <Text style={[styles.chainCardText]}>{crypto.chain}</Text>
                   </View>
