@@ -1134,19 +1134,29 @@ function TransactionsScreen() {
         // 构建交易数据，nonce 固定为 1
         const transactionData = {
           nonce: 1, // 使用数字 1
-          gasPrice: ethers.utils.parseUnits("20", "gwei").toString(), // gas 价格，单位是 wei
+          gasPrice: ethers.parseUnits("20", "gwei").toString(), // gas 价格，单位是 wei
           gasLimit: "10000", // gas 限制，通常是一个固定值或者估算值
           to: inputAddress, // 目标地址
-          value: ethers.utils.parseEther(amount.toString()).toString(), // 转账金额，单位是 ETH，转换为 wei
-          data: "0x", // 附加数据
+          value: ethers.parseEther(amount.toString()).toString(), // 转账金额，单位是 ETH，转换为 wei
+          data: "0x", // 附加数据，暂时为 0x，待签名数据会在后续添加
           chainId: 1, // 以太坊主网链 ID
         };
 
-        // 使用 ethers.js 进行序列化
-        const tx = new ethers.utils.Transaction(transactionData);
-        const unsignedTx = tx.serialize(); // 序列化为十六进制字符串
+        // 使用 ethers.js 将交易对象序列化为待签名的数据
+        const unsignedTx = Transaction.from(transactionData).unsignedSerialized;
 
-        commandString = unsignedTx;
+        // 构造最终的命令字符串
+        const commandData = {
+          nonce: transactionData.nonce,
+          gas_price: transactionData.gasPrice,
+          gas_limit: transactionData.gasLimit,
+          to: transactionData.to,
+          value: transactionData.value,
+          data: unsignedTx, // 这里的 data 是交易的待签名数据
+        };
+
+        // 将 JSON 数据转换为符合格式的字符串
+        commandString = JSON.stringify(commandData);
       } else {
         // 对于其他币种，仍然使用之前的方式构建命令
         commandString = `1|${toDecimalString(
@@ -1167,12 +1177,6 @@ function TransactionsScreen() {
     }
   };
 
-  // 你也需要一个函数来序列化交易
-  async function serializeTransaction(txData) {
-    const tx = new ethers.utils.Transaction(txData);
-    return ethers.utils.serializeTransaction(tx).substr(2); // 去掉前导的 '0x'
-  }
-
   // 转换为 10 进制字符串的函数
   const toDecimalString = (value) => {
     if (typeof value === "number") {
@@ -1184,47 +1188,6 @@ function TransactionsScreen() {
     }
   };
 
-  const sendStartCommand = async (device) => {
-    // 命令数据，未包含CRC校验码
-    const commandData = new Uint8Array([0xf1, 0x01, 0x02]);
-
-    // 使用CRC-16-Modbus算法计算CRC校验码
-    const crc = crc16Modbus(commandData);
-
-    // 将CRC校验码转换为高位在前，低位在后的格式
-    const crcHighByte = (crc >> 8) & 0xff;
-    const crcLowByte = crc & 0xff;
-
-    // 将原始命令数据、CRC校验码以及结束符组合成最终的命令
-    const finalCommand = new Uint8Array([
-      ...commandData,
-      crcLowByte,
-      crcHighByte,
-      0x0d, // 结束符
-      0x0a, // 结束符
-    ]);
-
-    // 将最终的命令转换为Base64编码
-    const base64Command = base64.fromByteArray(finalCommand);
-
-    // 打印最终的命令数据（十六进制表示）
-    console.log(
-      `Final command: ${Array.from(finalCommand)
-        .map((byte) => byte.toString(16).padStart(2, "0"))
-        .join(" ")}`
-    );
-
-    try {
-      await device.writeCharacteristicWithResponseForService(
-        serviceUUID, // BLE服务的UUID
-        writeCharacteristicUUID, // 可写特性的UUID
-        base64Command // 最终的命令数据的Base64编码
-      );
-      console.log("启动验证命令已发送");
-    } catch (error) {
-      console.log("发送启动命令失败", error);
-    }
-  };
   // 提交验证码
   const handlePinSubmit = async () => {
     // 首先关闭 "Enter PIN to Connect" 的模态框
