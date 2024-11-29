@@ -35,13 +35,85 @@ import SelectCryptoModal from "./modal/SelectCryptoModal";
 import SwapModal from "./modal/SwapModal";
 import ReceiveAddressModal from "./modal/ReceiveAddressModal";
 import PinModal from "./modal/PinModal";
-import { ethers } from "ethers"; //11月29号 签名for 如风新增部分
+// import { ethers } from "ethers"; //11月29号 签名for 如风新增部分
 import { BleManager, BleErrorCode } from "react-native-ble-plx";
 const serviceUUID = "6E400001-B5A3-F393-E0A9-E50E24DCCA9E";
 const writeCharacteristicUUID = "6E400002-B5A3-F393-E0A9-E50E24DCCA9E";
 const notifyCharacteristicUUID = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E";
 
+
+import "react-native-get-random-values"
+import "@ethersproject/shims"
+// 导入 ethers 库
+import { ethers, Transaction } from "ethers";
+
+
 function TransactionsScreen() {
+
+
+
+  /**
+   * Test Start by RF
+   */
+  const testSign = () => {
+
+
+    console.log('test start')
+    const toDecimalString = (num) => num.toString(10);
+
+    // 写死的交易数据
+    const amount = 0.1;  // 转账金额，单位 ETH
+    const paymentAddress = '0x63a9975ba31b0b9626b34300f3c8e0634a7a3f26';  // 收款地址
+    const inputAddress = '0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC';  // 转账地址
+    const selectedCrypto = 'ETH';  // 选择的加密货币（这里只考虑 ETH）
+    // 签名函数
+    try {
+      if (selectedCrypto === "ETH") {
+        // 构建 ETH 交易的 JSON 数据
+        const transactionData = {
+
+          nonce: toDecimalString(1), // 假设 nonce 是 1，实际情况下需要从 provider 获取
+          gasPrice: ethers.parseUnits('20', 'gwei'), // gas 价格
+          gasLimit: toDecimalString(10000), // gas 限制
+          to: paymentAddress, // 目标地址
+          value: ethers.parseEther(amount.toString()), // 转账金额（单位是 ETH）
+          data: `0xa9059cbb000000000000000000000000${inputAddress.slice(
+            2
+          )}0000000000000000000000000000000000000000000000000000000000000000`, // transfer 函数的编码数据
+        };
+
+        // 使用 ethers.js v6 序列化交易
+        const unsignedTx = Transaction.from(transactionData).unsignedSerialized;
+
+        console.log('待签名的命令 raw :' + unsignedTx)
+        // 转换为 Base64 编码
+        const commandString = Buffer.from(unsignedTx, 'utf-8').toString('base64');
+
+        console.warn("待签名的命令 base64 :", commandString);
+      } else {
+        // 对于其他币种，仍然使用之前的方式构建命令
+        const commandString = `1|${toDecimalString(amount)}|${paymentAddress}|${inputAddress}|${selectedCrypto}`;
+        console.warn("命令:", commandString);
+      }
+    } catch (error) {
+      console.warn("生成待签名数据失败:", error);
+    }
+
+
+
+  }
+
+
+  useEffect(() => {
+
+
+    testSign();
+  }, [])
+
+  /**
+   * Test End
+   */
+
   const [receivedVerificationCode, setReceivedVerificationCode] = useState("");
   const { t } = useTranslation();
   const [swapModalVisible, setSwapModalVisible] = useState(false);
@@ -1720,6 +1792,9 @@ function TransactionsScreen() {
                 <TouchableOpacity
                   style={TransactionsScreenStyle.optionButton}
                   onPress={async () => {
+
+
+
                     try {
                       if (!chainShortName)
                         throw new Error("未选择链或未设置 chainShortName");

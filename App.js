@@ -150,7 +150,7 @@ function AppContent({
 
   useEffect(() => {
     const unsubscribe = navigation.addListener("state", (e) => {
-      console.log("导航状态详情", e.data.state); // 打印整个导航状态
+      // console.log("导航状态详情", e.data.state); // 打印整个导航状态
       const rootRoutes = e.data.state?.routes;
       // console.log("全部路由列表", rootRoutes); // 打印全部路由的列表
 
