@@ -1134,17 +1134,19 @@ function TransactionsScreen() {
         // 构建交易数据，nonce 固定为 1
         const transactionData = {
           nonce: 1, // 使用数字 1
-          gasPrice: ethers.utils.parseUnits("20", "gwei").toString(), // gas 价格，单位是 wei，转换为字符串
+          gasPrice: ethers.utils.parseUnits("20", "gwei").toString(), // gas 价格，单位是 wei
           gasLimit: "10000", // gas 限制，通常是一个固定值或者估算值
           to: inputAddress, // 目标地址
-          value: ethers.utils.parseEther(amount.toString()).toString(), // 转账金额（单位是 ETH），转换为 wei 并转为字符串
-          data: "0x", // 附加数据，如果有合约调用则需要在这里填入相应的编码数据
+          value: ethers.utils.parseEther(amount.toString()).toString(), // 转账金额，单位是 ETH，转换为 wei
+          data: "0x", // 附加数据
           chainId: 1, // 以太坊主网链 ID
         };
 
-        // 使用 ethers.js 库中的 Transaction 对象构建并序列化交易
-        const unsignedTx = await serializeTransaction(transactionData);
-        commandString = unsignedTx.toString("hex"); // 确保以 hex 格式发送
+        // 使用 ethers.js 进行序列化
+        const tx = new ethers.utils.Transaction(transactionData);
+        const unsignedTx = tx.serialize(); // 序列化为十六进制字符串
+
+        commandString = unsignedTx;
       } else {
         // 对于其他币种，仍然使用之前的方式构建命令
         commandString = `1|${toDecimalString(
