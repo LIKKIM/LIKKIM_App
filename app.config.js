@@ -44,8 +44,8 @@ export default {
         apiKey: "AIzaSyAaLPaHuHj_vT7cHsA99HZeuAH_Z1p3Xbg",
       },
     },
-    versionCode: 3,
-    package: "com.anonymous.likkim",
+    versionCode: 1,
+    package: "com.app.likkim",
   },
   web: {
     favicon: "./assets/favicon.png",
