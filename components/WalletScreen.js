@@ -929,15 +929,34 @@ function WalletScreen({ route, navigation }) {
         console.log("接收到的数据字符串:", receivedDataString);
 
         // ==========================
-        // 新增对 "ethereum:" 的处理逻辑
+        // 映射表: 前缀 -> shortName
         // ==========================
-        if (receivedDataString.startsWith("ethereum:")) {
-          const newAddress = receivedDataString.replace("ethereum:", "").trim(); // 提取地址
-          console.log("收到的 Ethereum 地址: ", newAddress);
+        const prefixToShortName = {
+          "ethereum:": "ETH",
+          "bitcoin_cash:": "BCH",
+          "optimism:": "OP",
+          "ethereum_classic:": "ETC",
+          "litecoin:": "LTC",
+          "ripple:": "XRP",
+          "solana:": "SOL",
+          "arbitrum:": "ARB",
+        };
 
-          // 更新 ETH 的地址
-          updateCryptoAddress("ETH", newAddress);
+        // 检查是否以某个前缀开头
+        const prefix = Object.keys(prefixToShortName).find((key) =>
+          receivedDataString.startsWith(key)
+        );
+
+        if (prefix) {
+          const newAddress = receivedDataString.replace(prefix, "").trim(); // 提取地址
+          const shortName = prefixToShortName[prefix]; // 获取对应的 shortName
+
+          console.log(`收到的 ${shortName} 地址: `, newAddress);
+
+          // 更新对应加密货币的地址
+          updateCryptoAddress(shortName, newAddress);
         }
+
         // 处理包含 "ID:" 的数据
         if (receivedDataString.includes("ID:")) {
           const encryptedHex = receivedDataString.split("ID:")[1];
