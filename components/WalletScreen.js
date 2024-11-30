@@ -920,7 +920,7 @@ function WalletScreen({ route, navigation }) {
       async (error, characteristic) => {
         if (error) {
           console.log("监听设备响应时出错:", error.message);
-          //  return;
+          return;
         }
 
         const receivedData = Buffer.from(characteristic.value, "base64");
@@ -970,11 +970,10 @@ function WalletScreen({ route, navigation }) {
           }
         }
 
-        // 提取 PIN:XXXX,N 的验证码
+        // 提取完整的 PIN 数据（例如 PIN:1234,Y 或 PIN:1234,N）
         if (receivedDataString.startsWith("PIN:")) {
-          const pin = receivedDataString.split(":")[1].split(",")[0]; // 提取 PIN 值
-          setReceivedVerificationCode(pin); // 保存接收到的 PIN
-          console.log("接收到的验证码:", pin);
+          setReceivedVerificationCode(receivedDataString); // 保存完整的 PIN 数据
+          console.log("接收到的完整数据字符串:", receivedDataString);
         }
       }
     );
@@ -1409,26 +1408,47 @@ function WalletScreen({ route, navigation }) {
   }, [modalVisible]);
 
   const handlePinSubmit = async () => {
-    setPinModalVisible(false); // 关闭PIN输入模态框
+    setPinModalVisible(false); // 关闭 PIN 输入模态框
 
-    const pinCodeValue = pinCode.trim();
-    const verificationCodeValue = receivedVerificationCode.trim();
+    // 确保完整保留接收到的数据字符串
+    const verificationCodeValue = receivedVerificationCode.trim(); // 接收到的完整字符串
+    const pinCodeValue = pinCode.trim(); // 用户输入的 PIN
 
     console.log(`用户输入的 PIN: ${pinCodeValue}`);
-    console.log(`接收到的验证码: ${verificationCodeValue}`);
+    console.log(`接收到的完整数据: ${verificationCodeValue}`);
 
-    if (pinCodeValue === verificationCodeValue) {
+    // 使用 ':' 分割，提取 PIN 和标志位部分
+    const [prefix, rest] = verificationCodeValue.split(":"); // 分割出前缀和其余部分
+    if (prefix !== "PIN" || !rest) {
+      console.log("接收到的验证码格式不正确:", verificationCodeValue);
+      setVerificationStatus("fail");
+      return;
+    }
+
+    // 使用 ',' 分割，提取 PIN 和标志位
+    const [receivedPin, flag] = rest.split(","); // 分割出 PIN 值和标志位
+    if (!receivedPin || (flag !== "Y" && flag !== "N")) {
+      console.log("接收到的验证码格式不正确:", verificationCodeValue);
+      setVerificationStatus("fail");
+      return;
+    }
+
+    console.log(`提取到的 PIN 值: ${receivedPin}`);
+    console.log(`提取到的标志位: ${flag}`);
+
+    // 验证用户输入的 PIN 是否匹配
+    if (pinCodeValue === receivedPin) {
       console.log("PIN 验证成功");
       setVerificationStatus("success");
 
-      // 添加设备ID到verifiedDevices数组，确保不重复
+      // 添加设备 ID 到 verifiedDevices 数组，确保不重复
       const newVerifiedDevices = new Set([
         ...verifiedDevices,
         selectedDevice.id,
       ]);
       setVerifiedDevices([...newVerifiedDevices]);
 
-      // 异步存储更新后的verifiedDevices数组
+      // 异步存储更新后的 verifiedDevices 数组
       await AsyncStorage.setItem(
         "verifiedDevices",
         JSON.stringify([...newVerifiedDevices])
@@ -1436,6 +1456,27 @@ function WalletScreen({ route, navigation }) {
 
       setIsVerificationSuccessful(true);
       console.log("设备验证并存储成功");
+
+      // 如果标志位为 Y，发送字符串 'address'
+      if (flag === "Y") {
+        console.log("设备返回了 PIN:xxxx,Y，发送字符串 'address' 给嵌入式设备");
+        try {
+          const message = "address";
+          const bufferMessage = Buffer.from(message, "utf-8");
+          const base64Message = bufferMessage.toString("base64");
+
+          await selectedDevice.writeCharacteristicWithResponseForService(
+            serviceUUID,
+            writeCharacteristicUUID,
+            base64Message
+          );
+          console.log("字符串 'address' 已成功发送给设备");
+        } catch (error) {
+          console.log("发送字符串 'address' 时发生错误:", error);
+        }
+      } else if (flag === "N") {
+        console.log("设备返回了 PIN:xxxx,N，无需发送 'address'");
+      }
     } else {
       console.log("PIN 验证失败");
       setVerificationStatus("fail");
@@ -1451,7 +1492,7 @@ function WalletScreen({ route, navigation }) {
       }
     }
 
-    setPinCode(""); // 清空PIN输入框
+    setPinCode(""); // 清空 PIN 输入框
   };
 
   const handleDeleteCard = () => {
