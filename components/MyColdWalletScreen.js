@@ -619,14 +619,15 @@ function MyColdWalletScreen() {
         // 映射表: 前缀 -> shortName
         // ==========================
         const prefixToShortName = {
-          "ethereum:": "ETH",
-          "bitcoin_cash:": "BCH",
-          "optimism:": "OP",
-          "ethereum_classic:": "ETC",
-          "litecoin:": "LTC",
-          "ripple:": "XRP",
-          "solana:": "SOL",
-          "arbitrum:": "ARB",
+          "ethereum:": "ETH", // Ethereum
+          "bitcoin_cash:": "BCH", // Bitcoin Cash
+          "optimism:": "OP", // Optimism
+          "ethereum_classic:": "ETC", // Ethereum Classic
+          "litecoin:": "LTC", // Litecoin
+          "ripple:": "XRP", // Ripple
+          "solana:": "SOL", // Solana
+          "arbitrum:": "ARB", // Arbitrum
+          "binance:": "BNB", // Binance Coin (BNB)
         };
 
         // 检查是否以某个前缀开头
@@ -776,34 +777,89 @@ function MyColdWalletScreen() {
     setPinModalVisible(false); // 关闭 PIN 输入框
     setVerificationModalVisible(false); // 关闭验证状态框
 
-    console.log("用户输入的 PIN:", pinCode);
-    console.log("设备发送的 PIN:", receivedVerificationCode);
+    // 确保完整保留接收到的数据字符串
+    const verificationCodeValue = receivedVerificationCode.trim(); // 接收到的完整字符串
+    const pinCodeValue = pinCode.trim(); // 用户输入的 PIN
 
-    // 比较用户输入的 PIN 和接收的 PIN
-    if (pinCode === receivedVerificationCode) {
-      setVerificationStatus("success");
+    console.log(`用户输入的 PIN: ${pinCodeValue}`);
+    console.log(`接收到的完整数据: ${verificationCodeValue}`);
 
-      // 更新设备验证状态
-      const newVerifiedDevices = [selectedDevice.id];
-      setVerifiedDevices(newVerifiedDevices);
-      console.log("验证成功！验证状态已更新。");
-
-      await AsyncStorage.setItem(
-        "verifiedDevices",
-        JSON.stringify(newVerifiedDevices)
-      );
-      setIsVerificationSuccessful(true);
-
-      console.log("PIN 验证成功！");
-    } else {
-      console.log("PIN 验证失败！");
+    // 使用 ':' 分割，提取 PIN 和标志位部分
+    const [prefix, rest] = verificationCodeValue.split(":"); // 分割出前缀和其余部分
+    if (prefix !== "PIN" || !rest) {
+      console.log("接收到的验证码格式不正确:", verificationCodeValue);
       setVerificationStatus("fail");
-      stopMonitoringVerificationCode(); // 停止监听
-      await selectedDevice.cancelConnection(); // 断开设备连接
+      return;
     }
 
+    // 使用 ',' 分割，提取 PIN 和标志位
+    const [receivedPin, flag] = rest.split(","); // 分割出 PIN 值和标志位
+    if (!receivedPin || (flag !== "Y" && flag !== "N")) {
+      console.log("接收到的验证码格式不正确:", verificationCodeValue);
+      setVerificationStatus("fail");
+      return;
+    }
+
+    console.log(`提取到的 PIN 值: ${receivedPin}`);
+    console.log(`提取到的标志位: ${flag}`);
+
+    // 验证用户输入的 PIN 是否匹配
+    if (pinCodeValue === receivedPin) {
+      console.log("PIN 验证成功");
+      setVerificationStatus("success");
+
+      // 添加设备 ID 到 verifiedDevices 数组，确保不重复
+      const newVerifiedDevices = new Set([
+        ...verifiedDevices,
+        selectedDevice.id,
+      ]);
+      setVerifiedDevices([...newVerifiedDevices]);
+
+      // 异步存储更新后的 verifiedDevices 数组
+      await AsyncStorage.setItem(
+        "verifiedDevices",
+        JSON.stringify([...newVerifiedDevices])
+      );
+
+      setIsVerificationSuccessful(true);
+      console.log("设备验证并存储成功");
+
+      // 如果标志位为 Y，发送字符串 'address'
+      if (flag === "Y") {
+        console.log("设备返回了 PIN:xxxx,Y，发送字符串 'address' 给嵌入式设备");
+        try {
+          const message = "address";
+          const bufferMessage = Buffer.from(message, "utf-8");
+          const base64Message = bufferMessage.toString("base64");
+
+          await selectedDevice.writeCharacteristicWithResponseForService(
+            serviceUUID,
+            writeCharacteristicUUID,
+            base64Message
+          );
+          console.log("字符串 'address' 已成功发送给设备");
+        } catch (error) {
+          console.log("发送字符串 'address' 时发生错误:", error);
+        }
+      } else if (flag === "N") {
+        console.log("设备返回了 PIN:xxxx,N，无需发送 'address'");
+      }
+    } else {
+      console.log("PIN 验证失败");
+      setVerificationStatus("fail");
+
+      if (monitorSubscription) {
+        monitorSubscription.remove();
+        console.log("验证码监听已停止");
+      }
+
+      if (selectedDevice) {
+        await selectedDevice.cancelConnection();
+        console.log("已断开与设备的连接");
+      }
+    }
     setVerificationModalVisible(true); // 显示验证结果
-    setPinCode(""); // 清空输入框
+    setPinCode(""); // 清空 PIN 输入框
   };
 
   // 处理断开连接的逻辑
