@@ -116,10 +116,10 @@ export const CryptoProvider = ({ children }) => {
   const updateCryptoAddress = (shortName, newAddress) => {
     // 更新 initialAdditionalCryptos 的地址
     setInitialAdditionalCryptos((prevCryptos) => {
-      // 只更新对应的加密货币卡片（如 Ethereum）
+      // 只更新对应的加密货币卡片
       const updatedCryptos = prevCryptos.map((crypto) =>
         crypto.shortName === shortName
-          ? { ...crypto, address: newAddress } // 只更新 ETH 的地址
+          ? { ...crypto, address: newAddress } // 只更新指定的 shortName 地址
           : crypto
       );
 
@@ -131,14 +131,14 @@ export const CryptoProvider = ({ children }) => {
 
       // 更新 cryptoCards
       setCryptoCards((prevCards) => {
-        // 找到 ETH 卡片并更新
+        // 找到对应 shortName 卡片并更新
         const updatedCards = prevCards.map((card) =>
           card.shortName === shortName
-            ? { ...card, address: newAddress } // 只更新 ETH 卡片
+            ? { ...card, address: newAddress } // 只更新对应 shortName 的卡片
             : card
         );
 
-        // 如果 ETH 卡片没有在 prevCards 中，新增 ETH 卡片
+        // 如果该卡片之前没有存在，则添加它
         if (!prevCards.find((card) => card.shortName === shortName)) {
           updatedCards.push(
             updatedCryptos.find((crypto) => crypto.shortName === shortName)
