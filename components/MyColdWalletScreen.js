@@ -57,6 +57,7 @@ function MyColdWalletScreen() {
   const { t } = useTranslation();
   const navigation = useNavigation();
   const {
+    updateCryptoAddress,
     currencies,
     currencyUnit,
     setCurrencyUnit,

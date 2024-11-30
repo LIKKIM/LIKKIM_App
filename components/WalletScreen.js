@@ -54,7 +54,6 @@ function WalletScreen({ route, navigation }) {
   // 使用状态
   const [receivedVerificationCode, setReceivedVerificationCode] = useState("");
   const {
-    updateCryptoAddress,
     exchangeRates,
     initialAdditionalCryptos,
     setInitialAdditionalCryptos,
