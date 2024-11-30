@@ -109,6 +109,7 @@ function TransactionsScreen() {
   const [toValue, setToValue] = useState("");
   const { isDarkMode } = useContext(DarkModeContext);
   const {
+    updateCryptoAddress,
     usdtCrypto,
     initialAdditionalCryptos,
     additionalCryptos,
