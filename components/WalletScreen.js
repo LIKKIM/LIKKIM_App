@@ -932,14 +932,15 @@ function WalletScreen({ route, navigation }) {
         // 映射表: 前缀 -> shortName
         // ==========================
         const prefixToShortName = {
-          "ethereum:": "ETH",
-          "bitcoin_cash:": "BCH",
-          "optimism:": "OP",
-          "ethereum_classic:": "ETC",
-          "litecoin:": "LTC",
-          "ripple:": "XRP",
-          "solana:": "SOL",
-          "arbitrum:": "ARB",
+          "ethereum:": "ETH", // Ethereum
+          "bitcoin_cash:": "BCH", // Bitcoin Cash
+          "optimism:": "OP", // Optimism
+          "ethereum_classic:": "ETC", // Ethereum Classic
+          "litecoin:": "LTC", // Litecoin
+          "ripple:": "XRP", // Ripple
+          "solana:": "SOL", // Solana
+          "arbitrum:": "ARB", // Arbitrum
+          "binance:": "BNB", // Binance Coin (BNB)
         };
 
         // 检查是否以某个前缀开头

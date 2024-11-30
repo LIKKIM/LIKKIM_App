@@ -81,7 +81,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "300.0",
   },
   {
-    name: "BNB",
+    name: "Binance",
     shortName: "BNB",
     balance: "0.0",
     icon: require("../assets/icon/BNBIcon.png"),
