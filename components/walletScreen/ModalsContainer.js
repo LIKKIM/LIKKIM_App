@@ -72,6 +72,7 @@ const ModalsContainer = ({
   stopMonitoringWalletAddress,
   walletCreationStatus,
   importingStatus,
+  blueToothStatus,
 }) => {
   return (
     <>
@@ -159,7 +160,7 @@ const ModalsContainer = ({
         styles={WalletScreenStyle}
         isDarkMode={isDarkMode}
         t={t}
-        status={verificationStatus} // 传递状态
+        status={blueToothStatus}
       />
 
       {/* 验证结果模态框 */}

@@ -124,6 +124,8 @@ function WalletScreen({ route, navigation }) {
   const [devices, setDevices] = useState([]);
   const [selectedDevice, setSelectedDevice] = useState(null);
   const [verificationStatus, setVerificationStatus] = useState(null);
+  const [blueToothStatus, setBlueToothStatus] = useState(null);
+
   const [verificationSuccessModalVisible, setVerificationSuccessModalVisible] =
     useState(false);
   const [verificationFailModalVisible, setVerificationFailModalVisible] =
@@ -979,7 +981,7 @@ function WalletScreen({ route, navigation }) {
         if (receivedDataString === "VALID") {
           try {
             // 立即更新状态为 "VALID"
-            setVerificationStatus("VALID");
+            setBlueToothStatus("VALID");
             console.log("状态更新为: VALID");
 
             const validationMessage = "validation";
@@ -2104,6 +2106,8 @@ function WalletScreen({ route, navigation }) {
         setPinModalVisible={setPinModalVisible}
         verificationStatus={verificationStatus}
         setVerificationStatus={setVerificationStatus}
+        blueToothStatus={blueToothStatus}
+        setBlueToothStatus={setBlueToothStatus}
         createPendingModalVisible={createPendingModalVisible}
         importingModalVisible={importingModalVisible}
         setCreatePendingModalVisible={setCreatePendingModalVisible}
