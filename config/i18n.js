@@ -187,6 +187,7 @@ i18n
           "Permission denied, unable to access device location":
             "Permission denied, unable to access device location",
           "Last connected": "Last connected",
+          "Find My LIKKIM": "Find My LIKKIM",
         },
       },
       zh: {
@@ -357,6 +358,7 @@ i18n
           "Permission denied, unable to access device location":
             "权限被拒绝，无法访问设备位置",
           "Last connected": "最后连接",
+          "Find My LIKKIM": "查找我的LIKKIM",
         },
       },
       "zh-TW": {
@@ -533,6 +535,7 @@ i18n
           "Permission denied, unable to access device location":
             "權限被拒絕，無法訪問設備位置",
           "Last connected": "最後連接",
+          "Find My LIKKIM": "尋找我的LIKKIM",
         },
       },
       fr: {
@@ -743,6 +746,7 @@ i18n
           "Permission denied, unable to access device location":
             "Permission refusée, impossible d'accéder à l'emplacement de l'appareil",
           "Last connected": "Dernière connexion",
+          "Find My LIKKIM": "Trouvez mon LIKKIM",
         },
       },
       es: {
@@ -928,6 +932,7 @@ i18n
           "Permission denied, unable to access device location":
             "Permiso denegado, no se puede acceder a la ubicación del dispositivo",
           "Last connected": "Última conexión",
+          "Find My LIKKIM": "Encuentra mi LIKKIM",
         },
       },
       ar: {
@@ -1106,6 +1111,7 @@ i18n
           "Permission denied, unable to access device location":
             "تم رفض الإذن، غير قادر على الوصول إلى موقع الجهاز",
           "Last connected": "آخر اتصال",
+          "Find My LIKKIM": "ابحث عن LIKKIM الخاص بي",
         },
       },
       ja: {
@@ -1311,6 +1317,7 @@ i18n
           "Permission denied, unable to access device location":
             "権限が拒否されました。デバイスの位置にアクセスできません",
           "Last connected": "最終接続",
+          "Find My LIKKIM": "私のLIKKIMを見つける",
         },
       },
       ru: {
@@ -1494,6 +1501,7 @@ i18n
           "Permission denied, unable to access device location":
             "Доступ запрещен, не удается получить доступ к местоположению устройства",
           "Last connected": "Последнее подключение",
+          "Find My LIKKIM": "Найти мой LIKKIM",
         },
       },
       ko: {
@@ -1672,6 +1680,7 @@ i18n
           "Permission denied, unable to access device location":
             "권한이 거부되어 장치 위치에 접근할 수 없습니다",
           "Last connected": "마지막 연결",
+          "Find My LIKKIM": "내 LIKKIM 찾기",
         },
       },
       pt: {
@@ -1856,6 +1865,7 @@ i18n
           "Permission denied, unable to access device location":
             "Permissão negada, não é possível acessar a localização do dispositivo",
           "Last connected": "Última conexão",
+          "Find My LIKKIM": "Encontre meu LIKKIM",
         },
       },
       "pt-BR": {
@@ -2057,6 +2067,7 @@ i18n
           "Permission denied, unable to access device location":
             "Permesso negato, impossibile accedere alla posizione del dispositivo",
           "Last connected": "Ultima connessione",
+          "Find My LIKKIM": "Encontre meu LIKKIM",
         },
       },
       it: {
@@ -2243,6 +2254,7 @@ i18n
           "Permission denied, unable to access device location":
             "Permesso negato, impossibile accedere alla posizione del dispositivo",
           "Last connected": "Ultima connessione",
+          "Find My LIKKIM": "Trova il mio LIKKIM",
         },
       },
       de: {
@@ -2431,6 +2443,7 @@ i18n
           "Permission denied, unable to access device location":
             "Zugriff verweigert, kann den Standort des Geräts nicht erreichen",
           "Last connected": "Zuletzt verbunden",
+          "Find My LIKKIM": "Finde mein LIKKIM",
         },
       },
       hi: {
@@ -2617,6 +2630,7 @@ i18n
           "Permission denied, unable to access device location":
             "अनुमति अस्वीकृत, डिवाइस का स्थान प्राप्त नहीं कर सकते",
           "Last connected": "अंतिम कनेक्शन",
+          "Find My LIKKIM": "मेरा LIKKIM ढूंढें",
         },
       },
       mn: {
@@ -2812,6 +2826,7 @@ i18n
           "Permission denied, unable to access device location":
             "Зөвшөөрөл зөвшөөрөгдөөгүй, төхөөрөмжийн байрлалд нэвтрэх боломжгүй",
           "Last connected": "Сүүлийн холболт",
+          "Find My LIKKIM": "Миний LIKKIM-г олох",
         },
       },
       th: {
@@ -2989,6 +3004,7 @@ i18n
           "Permission denied, unable to access device location":
             "การเข้าถึงถูกปฏิเสธ ไม่สามารถเข้าถึงตำแหน่งอุปกรณ์",
           "Last connected": "การเชื่อมต่อครั้งสุดท้าย",
+          "Find My LIKKIM": "ค้นหาของ LIKKIM ของฉัน",
         },
       },
       uk: {
@@ -3170,6 +3186,7 @@ i18n
           "Permission denied, unable to access device location":
             "Доступ заборонено, неможливо отримати доступ до місцеположення пристрою",
           "Last connected": "Останнє підключення",
+          "Find My LIKKIM": "Знайти мій LIKKIM",
         },
       },
       vi: {
@@ -3355,6 +3372,7 @@ i18n
           "Permission denied, unable to access device location":
             "Quyền truy cập bị từ chối, không thể truy cập vị trí thiết bị",
           "Last connected": "Kết nối lần cuối",
+          "Find My LIKKIM": "Tìm LIKKIM của tôi",
         },
       },
       id: {
@@ -3540,6 +3558,7 @@ i18n
           "Permission denied, unable to access device location":
             "Izin ditolak, tidak dapat mengakses lokasi perangkat",
           "Last connected": "Terhubung terakhir",
+          "Find My LIKKIM": "Cari LIKKIM saya",
         },
       },
       tl: {
@@ -3727,6 +3746,7 @@ i18n
           "Permission denied, unable to access device location":
             "Tinanggihan ang permiso, hindi makuha ang lokasyon ng device",
           "Last connected": "Huling koneksyon",
+          "Find My LIKKIM": "Hanapin ang aking LIKKIM",
         },
       },
       bn: {
@@ -3915,6 +3935,7 @@ i18n
           "Permission denied, unable to access device location":
             "অনুমতি প্রত্যাখ্যান, ডিভাইসের অবস্থান অ্যাক্সেস করা যাচ্ছে না",
           "Last connected": "শেষ সংযোগ",
+          "Find My LIKKIM": "আমার LIKKIM খুঁজুন",
         },
       },
     },

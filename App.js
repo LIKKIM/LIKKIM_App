@@ -88,7 +88,13 @@ export default function App() {
                 />
               )}
             </Stack.Screen>
-            <Stack.Screen name="Find My LIKKIM" component={FindMyLkkim} />
+            <Stack.Screen
+              name="Find My LIKKIM"
+              component={FindMyLkkim}
+              options={{
+                title: t("Find My LIKKIM"), // 使用 i18n 进行国际化处理
+              }}
+            />
             <Stack.Screen
               name="Request Wallet Auth"
               options={{
