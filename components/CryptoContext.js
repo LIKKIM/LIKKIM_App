@@ -112,11 +112,37 @@ export const CryptoProvider = ({ children }) => {
     });
   };
 
+  // 更新加密货币地址的函数
+  const updateCryptoAddress = (shortName, newAddress) => {
+    // 更新 initialAdditionalCryptos 的地址
+    setInitialAdditionalCryptos((prevCryptos) => {
+      const updatedCryptos = prevCryptos.map((crypto) =>
+        crypto.shortName === shortName
+          ? { ...crypto, address: newAddress } // 更新对应加密货币的地址
+          : crypto
+      );
+
+      // 持久化到 AsyncStorage
+      AsyncStorage.setItem(
+        "initialAdditionalCryptos",
+        JSON.stringify(updatedCryptos)
+      );
+
+      // 更新 cryptoCards
+      setCryptoCards(
+        updatedCryptos.filter((crypto) => crypto.address.trim() !== "")
+      ); // 只显示有地址的卡片
+
+      return updatedCryptos;
+    });
+  };
+
   const updateCryptoData = (shortName, newData) => {
     setInitialAdditionalCryptos((prevCryptos) => {
       const updatedCryptos = prevCryptos.map((crypto) =>
         crypto.shortName === shortName ? { ...crypto, ...newData } : crypto
       );
+
       AsyncStorage.setItem(
         "initialAdditionalCryptos",
         JSON.stringify(updatedCryptos)
@@ -396,6 +422,7 @@ export const CryptoProvider = ({ children }) => {
         setAdditionalCryptos,
         setAddedCryptos,
         addCryptoCard,
+        updateCryptoAddress,
         isVerificationSuccessful,
         setIsVerificationSuccessful,
         verifiedDevices,

@@ -57,6 +57,7 @@ function WalletScreen({ route, navigation }) {
     exchangeRates,
     initialAdditionalCryptos,
     setInitialAdditionalCryptos,
+    updateCryptoAddress,
     usdtCrypto,
     setUsdtCrypto,
     additionalCryptos,
@@ -926,6 +927,17 @@ function WalletScreen({ route, navigation }) {
         const receivedData = Buffer.from(characteristic.value, "base64");
         const receivedDataString = receivedData.toString("utf8");
         console.log("接收到的数据字符串:", receivedDataString);
+
+        // ==========================
+        // 新增对 "ethereum:" 的处理逻辑
+        // ==========================
+        if (receivedDataString.startsWith("ethereum: ")) {
+          const address = receivedDataString.replace("ethereum: ", ""); // 提取地址
+          console.log("收到的 Ethereum 地址: ", address);
+
+          // 更新 ETH 的地址
+          updateCryptoAddress("ETH", address); // 调用 updateCryptoAddress 函数
+        }
 
         // 处理包含 "ID:" 的数据
         if (receivedDataString.includes("ID:")) {
