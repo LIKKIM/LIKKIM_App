@@ -1827,7 +1827,10 @@ function TransactionsScreen() {
           pinCode={pinCode} // 绑定 PIN 输入的状态
           setPinCode={setPinCode} // 设置 PIN 的状态函数
           onSubmit={handlePinSubmit} // PIN 提交后的逻辑
-          onCancel={() => setPinModalVisible(false)} // 关闭 PIN 模态框
+          onCancel={() => {
+            setPinModalVisible(false); // 关闭 PIN 模态框
+            setPinCode(""); // 清空 PIN 输入框
+          }}
           styles={TransactionsScreenStyle}
           isDarkMode={isDarkMode}
           t={t}
