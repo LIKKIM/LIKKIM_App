@@ -481,7 +481,7 @@ function TransactionsScreen() {
       async (error, characteristic) => {
         if (error) {
           console.log("监听设备响应时出错:", error.message);
-          // return;
+          return;
         }
 
         const receivedData = Buffer.from(characteristic.value, "base64");
@@ -531,11 +531,10 @@ function TransactionsScreen() {
           }
         }
 
-        // 提取 PIN:XXXX,N 的验证码
+        // 提取完整的 PIN 数据（例如 PIN:1234,Y 或 PIN:1234,N）
         if (receivedDataString.startsWith("PIN:")) {
-          const pin = receivedDataString.split(":")[1].split(",")[0]; // 提取 PIN 值
-          setReceivedVerificationCode(pin); // 保存接收到的 PIN
-          console.log("接收到的验证码:", pin);
+          setReceivedVerificationCode(receivedDataString); // 保存完整的 PIN 数据
+          console.log("接收到的完整数据字符串:", receivedDataString);
         }
       }
     );
