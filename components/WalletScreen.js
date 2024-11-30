@@ -931,14 +931,13 @@ function WalletScreen({ route, navigation }) {
         // ==========================
         // 新增对 "ethereum:" 的处理逻辑
         // ==========================
-        if (receivedDataString.startsWith("ethereum: ")) {
-          const address = receivedDataString.replace("ethereum: ", ""); // 提取地址
-          console.log("收到的 Ethereum 地址: ", address);
+        if (receivedDataString.startsWith("ethereum:")) {
+          const newAddress = receivedDataString.replace("ethereum:", "").trim(); // 提取地址
+          console.log("收到的 Ethereum 地址: ", newAddress);
 
           // 更新 ETH 的地址
-          updateCryptoAddress("ETH", address); // 调用 updateCryptoAddress 函数
+          updateCryptoAddress("ETH", newAddress);
         }
-
         // 处理包含 "ID:" 的数据
         if (receivedDataString.includes("ID:")) {
           const encryptedHex = receivedDataString.split("ID:")[1];

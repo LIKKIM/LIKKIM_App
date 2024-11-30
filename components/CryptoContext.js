@@ -116,22 +116,37 @@ export const CryptoProvider = ({ children }) => {
   const updateCryptoAddress = (shortName, newAddress) => {
     // 更新 initialAdditionalCryptos 的地址
     setInitialAdditionalCryptos((prevCryptos) => {
+      // 只更新对应的加密货币卡片（如 Ethereum）
       const updatedCryptos = prevCryptos.map((crypto) =>
         crypto.shortName === shortName
-          ? { ...crypto, address: newAddress } // 更新对应加密货币的地址
+          ? { ...crypto, address: newAddress } // 只更新 ETH 的地址
           : crypto
       );
 
-      // 持久化到 AsyncStorage
+      // 持久化更新后的数据到 AsyncStorage
       AsyncStorage.setItem(
         "initialAdditionalCryptos",
         JSON.stringify(updatedCryptos)
       );
 
       // 更新 cryptoCards
-      setCryptoCards(
-        updatedCryptos.filter((crypto) => crypto.address.trim() !== "")
-      ); // 只显示有地址的卡片
+      setCryptoCards((prevCards) => {
+        // 找到 ETH 卡片并更新
+        const updatedCards = prevCards.map((card) =>
+          card.shortName === shortName
+            ? { ...card, address: newAddress } // 只更新 ETH 卡片
+            : card
+        );
+
+        // 如果 ETH 卡片没有在 prevCards 中，新增 ETH 卡片
+        if (!prevCards.find((card) => card.shortName === shortName)) {
+          updatedCards.push(
+            updatedCryptos.find((crypto) => crypto.shortName === shortName)
+          );
+        }
+
+        return updatedCards;
+      });
 
       return updatedCryptos;
     });
