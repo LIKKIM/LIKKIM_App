@@ -171,6 +171,22 @@ i18n
           "Welcome to LIKKIM": "Welcome to LIKKIM",
           "Your secure and user-friendly digital wallet.":
             "Your secure and user-friendly digital wallet.",
+          "Address Copied to Clipboard": "Address copied to clipboard",
+          "No devices found":
+            "No devices found. Please pair a device to see it here.",
+          "Fetching address...": "Fetching address...",
+          Devices: "Devices",
+          "Confirm Deletion": "Confirm Deletion",
+          "Are you sure you want to delete this device?":
+            "Are you sure you want to delete this device?",
+          OK: "OK",
+          "The address of device": "The address of device",
+          is: "is",
+          "The address has been copied to your clipboard.":
+            "The address has been copied to your clipboard.",
+          "Permission denied, unable to access device location":
+            "Permission denied, unable to access device location",
+          "Last connected": "Last connected",
         },
       },
       zh: {
@@ -326,6 +342,21 @@ i18n
           "Welcome to LIKKIM": "欢迎来到LIKKIM",
           "Your secure and user-friendly digital wallet.":
             "您的安全且易用的数字钱包。",
+          "Address Copied to Clipboard": "地址已复制到剪贴板",
+          "No devices found": "未找到设备，请配对设备后查看。",
+          "Fetching address...": "正在获取地址...",
+          Devices: "设备",
+          "Confirm Deletion": "确认删除",
+          "Are you sure you want to delete this device?":
+            "您确定要删除此设备吗？",
+          OK: "确定",
+          "The address of device": "设备的地址",
+          is: "是",
+          "The address has been copied to your clipboard.":
+            "地址已复制到剪贴板。",
+          "Permission denied, unable to access device location":
+            "权限被拒绝，无法访问设备位置",
+          "Last connected": "最后连接",
         },
       },
       "zh-TW": {
@@ -487,6 +518,21 @@ i18n
           "Welcome to LIKKIM": "歡迎來到LIKKIM",
           "Your secure and user-friendly digital wallet.":
             "您的安全且友好的數字錢包。",
+          "Address Copied to Clipboard": "地址已複製到剪貼簿",
+          "No devices found": "未找到設備，請配對設備後查看。",
+          "Fetching address...": "正在獲取地址...",
+          Devices: "設備",
+          "Confirm Deletion": "確認刪除",
+          "Are you sure you want to delete this device?":
+            "您確定要刪除這個設備嗎？",
+          OK: "確定",
+          "The address of device": "設備的地址",
+          is: "是",
+          "The address has been copied to your clipboard.":
+            "地址已複製到剪貼簿。",
+          "Permission denied, unable to access device location":
+            "權限被拒絕，無法訪問設備位置",
+          "Last connected": "最後連接",
         },
       },
       fr: {
@@ -680,6 +726,23 @@ i18n
           "Welcome to LIKKIM": "Bienvenue chez LIKKIM",
           "Your secure and user-friendly digital wallet.":
             "Votre portefeuille numérique sécurisé et convivial.",
+          "Address Copied to Clipboard":
+            "Adresse copiée dans le presse-papiers",
+          "No devices found":
+            "Aucun appareil trouvé. Veuillez associer un appareil pour le voir ici.",
+          "Fetching address...": "Récupération de l'adresse...",
+          Devices: "Appareils",
+          "Confirm Deletion": "Confirmer la suppression",
+          "Are you sure you want to delete this device?":
+            "Êtes-vous sûr de vouloir supprimer cet appareil ?",
+          OK: "OK",
+          "The address of device": "L'adresse de l'appareil",
+          is: "est",
+          "The address has been copied to your clipboard.":
+            "L'adresse a été copiée dans votre presse-papiers.",
+          "Permission denied, unable to access device location":
+            "Permission refusée, impossible d'accéder à l'emplacement de l'appareil",
+          "Last connected": "Dernière connexion",
         },
       },
       es: {
@@ -849,6 +912,22 @@ i18n
           "Welcome to LIKKIM": "Bienvenido a LIKKIM",
           "Your secure and user-friendly digital wallet.":
             "Tu billetera digital segura y fácil de usar.",
+          "Address Copied to Clipboard": "Dirección copiada al portapapeles",
+          "No devices found":
+            "No se encontraron dispositivos. Por favor, empareja un dispositivo para verlo aquí.",
+          "Fetching address...": "Obteniendo dirección...",
+          Devices: "Dispositivos",
+          "Confirm Deletion": "Confirmar eliminación",
+          "Are you sure you want to delete this device?":
+            "¿Está seguro de que desea eliminar este dispositivo?",
+          OK: "Aceptar",
+          "The address of device": "La dirección del dispositivo",
+          is: "es",
+          "The address has been copied to your clipboard.":
+            "La dirección ha sido copiada al portapapeles.",
+          "Permission denied, unable to access device location":
+            "Permiso denegado, no se puede acceder a la ubicación del dispositivo",
+          "Last connected": "Última conexión",
         },
       },
       ar: {
@@ -1011,6 +1090,22 @@ i18n
           "Welcome to LIKKIM": "مرحباً بك في LIKKIM",
           "Your secure and user-friendly digital wallet.":
             "محفظتك الرقمية الآمنة وسهلة الاستخدام.",
+          "Address Copied to Clipboard": "تم نسخ العنوان إلى الحافظة",
+          "No devices found":
+            "لم يتم العثور على أجهزة. يرجى اقتران جهاز لرؤيته هنا.",
+          "Fetching address...": "جاري الحصول على العنوان...",
+          Devices: "الأجهزة",
+          "Confirm Deletion": "تأكيد الحذف",
+          "Are you sure you want to delete this device?":
+            "هل أنت متأكد أنك تريد حذف هذا الجهاز؟",
+          OK: "موافق",
+          "The address of device": "عنوان الجهاز",
+          is: "هو",
+          "The address has been copied to your clipboard.":
+            "تم نسخ العنوان إلى الحافظة.",
+          "Permission denied, unable to access device location":
+            "تم رفض الإذن، غير قادر على الوصول إلى موقع الجهاز",
+          "Last connected": "آخر اتصال",
         },
       },
       ja: {
@@ -1199,6 +1294,23 @@ i18n
           "Welcome to LIKKIM": "LIKKIMへようこそ",
           "Your secure and user-friendly digital wallet.":
             "安全で使いやすいデジタルウォレット。",
+          "Address Copied to Clipboard":
+            "アドレスがクリップボードにコピーされました",
+          "No devices found":
+            "デバイスが見つかりません。デバイスをペアリングしてここで確認してください。",
+          "Fetching address...": "住所を取得中...",
+          Devices: "デバイス",
+          "Confirm Deletion": "削除の確認",
+          "Are you sure you want to delete this device?":
+            "このデバイスを削除してもよろしいですか？",
+          OK: "OK",
+          "The address of device": "デバイスの住所",
+          is: "は",
+          "The address has been copied to your clipboard.":
+            "住所はクリップボードにコピーされました。",
+          "Permission denied, unable to access device location":
+            "権限が拒否されました。デバイスの位置にアクセスできません",
+          "Last connected": "最終接続",
         },
       },
       ru: {
@@ -1366,6 +1478,22 @@ i18n
           "Welcome to LIKKIM": "Добро пожаловать в LIKKIM",
           "Your secure and user-friendly digital wallet.":
             "Ваш надежный и удобный цифровой кошелек.",
+          "Address Copied to Clipboard": "Адрес скопирован в буфер обмена",
+          "No devices found":
+            "Устройства не найдены. Пожалуйста, подключите устройство, чтобы увидеть его здесь.",
+          "Fetching address...": "Получение адреса...",
+          Devices: "Устройства",
+          "Confirm Deletion": "Подтверждение удаления",
+          "Are you sure you want to delete this device?":
+            "Вы уверены, что хотите удалить это устройство?",
+          OK: "ОК",
+          "The address of device": "Адрес устройства",
+          is: "это",
+          "The address has been copied to your clipboard.":
+            "Адрес был скопирован в буфер обмена.",
+          "Permission denied, unable to access device location":
+            "Доступ запрещен, не удается получить доступ к местоположению устройства",
+          "Last connected": "Последнее подключение",
         },
       },
       ko: {
@@ -1528,6 +1656,22 @@ i18n
           "Welcome to LIKKIM": "LIKKIM에 오신 것을 환영합니다",
           "Your secure and user-friendly digital wallet.":
             "안전하고 사용자 친화적인 디지털 지갑.",
+          "Address Copied to Clipboard": "주소가 클립보드에 복사되었습니다",
+          "No devices found":
+            "장치가 없습니다. 장치를 연결하여 여기에서 확인하십시오.",
+          "Fetching address...": "주소를 가져오는 중...",
+          Devices: "장치",
+          "Confirm Deletion": "삭제 확인",
+          "Are you sure you want to delete this device?":
+            "이 장치를 삭제하시겠습니까?",
+          OK: "확인",
+          "The address of device": "장치의 주소",
+          is: "는",
+          "The address has been copied to your clipboard.":
+            "주소가 클립보드에 복사되었습니다.",
+          "Permission denied, unable to access device location":
+            "권한이 거부되어 장치 위치에 접근할 수 없습니다",
+          "Last connected": "마지막 연결",
         },
       },
       pt: {
@@ -1695,6 +1839,23 @@ i18n
           "Welcome to LIKKIM": "Bem-vindo à LIKKIM",
           "Your secure and user-friendly digital wallet.":
             "Sua carteira digital segura e fácil de usar.",
+          "Address Copied to Clipboard":
+            "Endereço copiado para a área de transferência",
+          "No devices found":
+            "Nenhum dispositivo encontrado. Emparelhe um dispositivo para vê-lo aqui.",
+          "Fetching address...": "Buscando endereço...",
+          Devices: "Dispositivos",
+          "Confirm Deletion": "Confirmar exclusão",
+          "Are you sure you want to delete this device?":
+            "Tem certeza de que deseja excluir este dispositivo?",
+          OK: "OK",
+          "The address of device": "Endereço do dispositivo",
+          is: "é",
+          "The address has been copied to your clipboard.":
+            "O endereço foi copiado para sua área de transferência.",
+          "Permission denied, unable to access device location":
+            "Permissão negada, não é possível acessar a localização do dispositivo",
+          "Last connected": "Última conexão",
         },
       },
       "pt-BR": {
@@ -1863,6 +2024,39 @@ i18n
           "Welcome to LIKKIM": "Bem-vindo ao LIKKIM",
           "Your secure and user-friendly digital wallet.":
             "Sua carteira digital segura e fácil de usar.",
+          "Address Copied to Clipboard":
+            "Endereço copiado para a área de transferência",
+          "No devices found":
+            "Nenhum dispositivo encontrado. Emparelhe um dispositivo para vê-lo aqui.",
+          "Fetching address...": "Buscando endereço...",
+          Devices: "Dispositivos",
+          "Confirm Deletion": "Confirmar exclusão",
+          "Are you sure you want to delete this device?":
+            "Tem certeza de que deseja excluir este dispositivo?",
+          OK: "OK",
+          "The address of device": "Endereço do dispositivo",
+          is: "é",
+          "The address has been copied to your clipboard.":
+            "O endereço foi copiado para sua área de transferência.",
+          "Permission denied, unable to access device location":
+            "Permissão negada, não é possível acessar a localização do dispositivo",
+          "Last connected": "Última conexão",
+          "Address Copied to Clipboard": "Indirizzo copiato negli appunti",
+          "No devices found":
+            "Nessun dispositivo trovato. Si prega di associare un dispositivo per vederlo qui.",
+          "Fetching address...": "Recupero dell'indirizzo...",
+          Devices: "Dispositivi",
+          "Confirm Deletion": "Conferma eliminazione",
+          "Are you sure you want to delete this device?":
+            "Sei sicuro di voler eliminare questo dispositivo?",
+          OK: "OK",
+          "The address of device": "L'indirizzo del dispositivo",
+          is: "è",
+          "The address has been copied to your clipboard.":
+            "L'indirizzo è stato copiato negli appunti.",
+          "Permission denied, unable to access device location":
+            "Permesso negato, impossibile accedere alla posizione del dispositivo",
+          "Last connected": "Ultima connessione",
         },
       },
       it: {
@@ -2033,6 +2227,22 @@ i18n
           "Welcome to LIKKIM": "Benvenuto in LIKKIM",
           "Your secure and user-friendly digital wallet.":
             "Il tuo portafoglio digitale sicuro e facile da usare.",
+          "Address Copied to Clipboard": "Indirizzo copiato negli appunti",
+          "No devices found":
+            "Nessun dispositivo trovato. Si prega di associare un dispositivo per vederlo qui.",
+          "Fetching address...": "Recupero dell'indirizzo...",
+          Devices: "Dispositivi",
+          "Confirm Deletion": "Conferma eliminazione",
+          "Are you sure you want to delete this device?":
+            "Sei sicuro di voler eliminare questo dispositivo?",
+          OK: "OK",
+          "The address of device": "L'indirizzo del dispositivo",
+          is: "è",
+          "The address has been copied to your clipboard.":
+            "L'indirizzo è stato copiato negli appunti.",
+          "Permission denied, unable to access device location":
+            "Permesso negato, impossibile accedere alla posizione del dispositivo",
+          "Last connected": "Ultima connessione",
         },
       },
       de: {
@@ -2204,6 +2414,23 @@ i18n
           "Welcome to LIKKIM": "Willkommen bei LIKKIM",
           "Your secure and user-friendly digital wallet.":
             "Ihre sichere und benutzerfreundliche digitale Geldbörse.",
+          "Address Copied to Clipboard":
+            "Adresse in die Zwischenablage kopiert",
+          "No devices found":
+            "Keine Geräte gefunden. Bitte verbinden Sie ein Gerät, um es hier anzuzeigen.",
+          "Fetching address...": "Adresse wird abgerufen...",
+          Devices: "Geräte",
+          "Confirm Deletion": "Löschung bestätigen",
+          "Are you sure you want to delete this device?":
+            "Sind Sie sicher, dass Sie dieses Gerät löschen möchten?",
+          OK: "OK",
+          "The address of device": "Die Adresse des Geräts",
+          is: "ist",
+          "The address has been copied to your clipboard.":
+            "Die Adresse wurde in die Zwischenablage kopiert.",
+          "Permission denied, unable to access device location":
+            "Zugriff verweigert, kann den Standort des Geräts nicht erreichen",
+          "Last connected": "Zuletzt verbunden",
         },
       },
       hi: {
@@ -2374,6 +2601,22 @@ i18n
           "Welcome to LIKKIM": "LIKKIM में आपका स्वागत है",
           "Your secure and user-friendly digital wallet.":
             "आपका सुरक्षित और उपयोगकर्ता-हितैषी डिजिटल वॉलेट।",
+          "Address Copied to Clipboard": "पता क्लिपबोर्ड पर कॉपी कर लिया गया",
+          "No devices found":
+            "कोई डिवाइस नहीं मिला। कृपया एक डिवाइस पेयर करें और इसे यहां देखें।",
+          "Fetching address...": "पता प्राप्त कर रहे हैं...",
+          Devices: "डिवाइस",
+          "Confirm Deletion": "हटाने की पुष्टि करें",
+          "Are you sure you want to delete this device?":
+            "क्या आप वाकई इस डिवाइस को हटाना चाहते हैं?",
+          OK: "ठीक है",
+          "The address of device": "डिवाइस का पता",
+          is: "है",
+          "The address has been copied to your clipboard.":
+            "पता क्लिपबोर्ड पर कॉपी कर लिया गया है।",
+          "Permission denied, unable to access device location":
+            "अनुमति अस्वीकृत, डिवाइस का स्थान प्राप्त नहीं कर सकते",
+          "Last connected": "अंतिम कनेक्शन",
         },
       },
       mn: {
@@ -2553,6 +2796,22 @@ i18n
           "Welcome to LIKKIM": "LIKKIM-д тавтай морилно уу",
           "Your secure and user-friendly digital wallet.":
             "Таны аюулгүй ба хэрэглэгчийн төвтэй цахим хэтэвч.",
+          "Address Copied to Clipboard": "Хаяг clipboard руу хуулсан байна",
+          "No devices found":
+            "Төхөөрөмж олдсонгүй. Энд харахын тулд төхөөрөмжийг холбож авна уу.",
+          "Fetching address...": "Хаягийг авч байна...",
+          Devices: "Төхөөрөмжүүд",
+          "Confirm Deletion": "Устгах баталгаажуулалт",
+          "Are you sure you want to delete this device?":
+            "Та энэ төхөөрөмжийг устгахыг хүсэж байна уу?",
+          OK: "Тийм",
+          "The address of device": "Төхөөрөмжийн хаяг",
+          is: "болон",
+          "The address has been copied to your clipboard.":
+            "Хаяг clipboard руу хуулсан байна.",
+          "Permission denied, unable to access device location":
+            "Зөвшөөрөл зөвшөөрөгдөөгүй, төхөөрөмжийн байрлалд нэвтрэх боломжгүй",
+          "Last connected": "Сүүлийн холболт",
         },
       },
       th: {
@@ -2715,6 +2974,21 @@ i18n
           "Welcome to LIKKIM": "ยินดีต้อนรับสู่ LIKKIM",
           "Your secure and user-friendly digital wallet.":
             "กระเป๋าเงินดิจิทัลที่ปลอดภัยและใช้งานง่ายของคุณ.",
+          "Address Copied to Clipboard": "ที่อยู่ถูกคัดลอกไปยังคลิปบอร์ด",
+          "No devices found": "ไม่พบอุปกรณ์ โปรดเชื่อมต่ออุปกรณ์เพื่อดูที่นี่",
+          "Fetching address...": "กำลังดึงที่อยู่...",
+          Devices: "อุปกรณ์",
+          "Confirm Deletion": "ยืนยันการลบ",
+          "Are you sure you want to delete this device?":
+            "คุณแน่ใจหรือไม่ว่าต้องการลบอุปกรณ์นี้?",
+          OK: "ตกลง",
+          "The address of device": "ที่อยู่ของอุปกรณ์",
+          is: "คือ",
+          "The address has been copied to your clipboard.":
+            "ที่อยู่ถูกคัดลอกไปยังคลิปบอร์ดของคุณ",
+          "Permission denied, unable to access device location":
+            "การเข้าถึงถูกปฏิเสธ ไม่สามารถเข้าถึงตำแหน่งอุปกรณ์",
+          "Last connected": "การเชื่อมต่อครั้งสุดท้าย",
         },
       },
       uk: {
@@ -2880,6 +3154,22 @@ i18n
           "Welcome to LIKKIM": "Ласкаво просимо до LIKKIM",
           "Your secure and user-friendly digital wallet.":
             "Ваш безпечний та зручний цифровий гаманець.",
+          "Address Copied to Clipboard": "Адрес скопійовано в буфер обміну",
+          "No devices found":
+            "Пристрої не знайдені. Будь ласка, підключіть пристрій, щоб побачити його тут.",
+          "Fetching address...": "Отримання адреси...",
+          Devices: "Пристрої",
+          "Confirm Deletion": "Підтвердження видалення",
+          "Are you sure you want to delete this device?":
+            "Ви впевнені, що хочете видалити цей пристрій?",
+          OK: "ОК",
+          "The address of device": "Адреса пристрою",
+          is: "це",
+          "The address has been copied to your clipboard.":
+            "Адреса скопійована в буфер обміну.",
+          "Permission denied, unable to access device location":
+            "Доступ заборонено, неможливо отримати доступ до місцеположення пристрою",
+          "Last connected": "Останнє підключення",
         },
       },
       vi: {
@@ -3048,6 +3338,23 @@ i18n
           "Welcome to LIKKIM": "Chào mừng đến với LIKKIM",
           "Your secure and user-friendly digital wallet.":
             "Ví điện tử an toàn và thân thiện với người dùng của bạn.",
+          "Address Copied to Clipboard":
+            "Địa chỉ đã được sao chép vào clipboard",
+          "No devices found":
+            "Không tìm thấy thiết bị. Vui lòng ghép nối một thiết bị để xem tại đây.",
+          "Fetching address...": "Đang lấy địa chỉ...",
+          Devices: "Thiết bị",
+          "Confirm Deletion": "Xác nhận xóa",
+          "Are you sure you want to delete this device?":
+            "Bạn có chắc chắn muốn xóa thiết bị này?",
+          OK: "OK",
+          "The address of device": "Địa chỉ của thiết bị",
+          is: "là",
+          "The address has been copied to your clipboard.":
+            "Địa chỉ đã được sao chép vào clipboard của bạn.",
+          "Permission denied, unable to access device location":
+            "Quyền truy cập bị từ chối, không thể truy cập vị trí thiết bị",
+          "Last connected": "Kết nối lần cuối",
         },
       },
       id: {
@@ -3217,6 +3524,22 @@ i18n
           "Welcome to LIKKIM": "Selamat Datang di LIKKIM",
           "Your secure and user-friendly digital wallet.":
             "Dompet digital Anda yang aman dan mudah digunakan.",
+          "Address Copied to Clipboard": "Alamat telah disalin ke clipboard",
+          "No devices found":
+            "Tidak ada perangkat ditemukan. Silakan sambungkan perangkat untuk melihat di sini.",
+          "Fetching address...": "Mengambil alamat...",
+          Devices: "Perangkat",
+          "Confirm Deletion": "Konfirmasi penghapusan",
+          "Are you sure you want to delete this device?":
+            "Apakah Anda yakin ingin menghapus perangkat ini?",
+          OK: "OK",
+          "The address of device": "Alamat perangkat",
+          is: "adalah",
+          "The address has been copied to your clipboard.":
+            "Alamat telah disalin ke clipboard Anda.",
+          "Permission denied, unable to access device location":
+            "Izin ditolak, tidak dapat mengakses lokasi perangkat",
+          "Last connected": "Terhubung terakhir",
         },
       },
       tl: {
@@ -3388,6 +3711,22 @@ i18n
           "Welcome to LIKKIM": "Maligayang Pagdating sa LIKKIM",
           "Your secure and user-friendly digital wallet.":
             "Ang iyong ligtas at madaling gamiting digital wallet.",
+          "Address Copied to Clipboard": "Ang address ay nakopya sa clipboard",
+          "No devices found":
+            "Walang mga device na nahanap. Mangyaring i-pair ang isang device upang makita ito dito.",
+          "Fetching address...": "Kinukuha ang address...",
+          Devices: "Mga device",
+          "Confirm Deletion": "Kumpirmahin ang pagtanggal",
+          "Are you sure you want to delete this device?":
+            "Sigurado ka bang gusto mong tanggalin ang device na ito?",
+          OK: "OK",
+          "The address of device": "Ang address ng device",
+          is: "ay",
+          "The address has been copied to your clipboard.":
+            "Ang address ay nakopya na sa iyong clipboard.",
+          "Permission denied, unable to access device location":
+            "Tinanggihan ang permiso, hindi makuha ang lokasyon ng device",
+          "Last connected": "Huling koneksyon",
         },
       },
       bn: {
@@ -3560,6 +3899,22 @@ i18n
           "Welcome to LIKKIM": "LIKKIM-এ স্বাগতম",
           "Your secure and user-friendly digital wallet.":
             "আপনার নিরাপদ ও ব্যবহারকারী-বান্ধব ডিজিটাল ওয়ালেট।",
+          "Address Copied to Clipboard": "ঠিকানা ক্লিপবোর্ডে কপি করা হয়েছে",
+          "No devices found":
+            "কোনো ডিভাইস পাওয়া যায়নি। এখানে দেখতে একটি ডিভাইস পেয়ার করুন।",
+          "Fetching address...": "ঠিকানা পাওয়া যাচ্ছে...",
+          Devices: "ডিভাইস",
+          "Confirm Deletion": "মুছে ফেলার নিশ্চয়তা",
+          "Are you sure you want to delete this device?":
+            "আপনি কি নিশ্চিত যে আপনি এই ডিভাইসটি মুছে ফেলতে চান?",
+          OK: "ওকে",
+          "The address of device": "ডিভাইসের ঠিকানা",
+          is: "হচ্ছে",
+          "The address has been copied to your clipboard.":
+            "ঠিকানা আপনার ক্লিপবোর্ডে কপি করা হয়েছে।",
+          "Permission denied, unable to access device location":
+            "অনুমতি প্রত্যাখ্যান, ডিভাইসের অবস্থান অ্যাক্সেস করা যাচ্ছে না",
+          "Last connected": "শেষ সংযোগ",
         },
       },
     },

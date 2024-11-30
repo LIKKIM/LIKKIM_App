@@ -24,6 +24,7 @@ import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
 import { useNavigation } from "@react-navigation/native";
 import { DarkModeContext } from "./CryptoContext";
 import { Swipeable } from "react-native-gesture-handler";
+import { useTranslation } from "react-i18next"; // 导入 useTranslation
 
 const GOOGLE_MAPS_API_KEY = "AIzaSyAaLPaHuHj_vT7cHsA99HZeuAH_Z1p3Xbg";
 
@@ -60,7 +61,6 @@ const styles = StyleSheet.create({
   },
 });
 
-// 使用 Google Maps Geocoding API 获取地址
 const getAddressFromLatLng = async (lat, lng) => {
   const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${GOOGLE_MAPS_API_KEY}`;
   try {
@@ -77,7 +77,6 @@ const getAddressFromLatLng = async (lat, lng) => {
   }
 };
 
-// 从 AsyncStorage 中恢复设备数据
 const loadConnectedDevices = async (
   setDevicesPositions,
   setDeviceAddresses
@@ -109,6 +108,7 @@ const loadConnectedDevices = async (
 export default function FindMyLkkim() {
   const navigation = useNavigation();
   const { isDarkMode } = useContext(DarkModeContext);
+  const { t } = useTranslation(); // 获取翻译函数
   const [devicesPositions, setDevicesPositions] = useState([]);
   const [deviceAddresses, setDeviceAddresses] = useState({});
   const [currentPosition, setCurrentPosition] = useState(null);
@@ -135,7 +135,7 @@ export default function FindMyLkkim() {
     setIsLoadingLocation(true);
     const { status } = await Location.requestForegroundPermissionsAsync();
     if (status !== "granted") {
-      alert("Permission denied, unable to access device location");
+      alert(t("Permission denied, unable to access device location"));
       setIsLoadingLocation(false);
       return;
     }
@@ -148,12 +148,16 @@ export default function FindMyLkkim() {
   };
 
   const handleMarkerPress = (device) => {
-    const address = deviceAddresses[device.id] || "Address not found";
+    const address = deviceAddresses[device.id] || t("Address not found");
     Clipboard.setString(address);
     Alert.alert(
-      "Address Copied to Clipboard",
-      `The address of device ${device.name} is:\n${address}\n\nThe address has been copied to your clipboard.`,
-      [{ text: "OK" }]
+      t("Address Copied to Clipboard"),
+      `${t("The address of device")} ${device.name} ${t(
+        "is"
+      )}: \n${address}\n\n${t(
+        "The address has been copied to your clipboard."
+      )}`,
+      [{ text: t("OK") }]
     );
   };
 
@@ -189,15 +193,15 @@ export default function FindMyLkkim() {
 
   const confirmDeleteDevice = (deviceId) => {
     Alert.alert(
-      "Confirm Deletion",
-      "Are you sure you want to delete this device?",
+      t("Confirm Deletion"),
+      t("Are you sure you want to delete this device?"),
       [
         {
-          text: "Cancel",
+          text: t("Cancel"),
           style: "cancel",
         },
         {
-          text: "Delete",
+          text: t("Delete"),
           onPress: () => handleDeleteDevice(deviceId),
           style: "destructive",
         },
@@ -210,7 +214,7 @@ export default function FindMyLkkim() {
       style={styles.deleteButton}
       onPress={() => confirmDeleteDevice(device.id)}
     >
-      <Text style={styles.deleteText}>Delete</Text>
+      <Text style={styles.deleteText}>{t("Delete")}</Text>
     </Pressable>
   );
 
@@ -347,7 +351,7 @@ export default function FindMyLkkim() {
             color: isDarkMode ? "#fff" : "#000",
           }}
         >
-          Devices
+          {t("Devices")}
         </Text>
         {devicesPositions.length === 0 ? (
           <View
@@ -364,7 +368,7 @@ export default function FindMyLkkim() {
                 textAlign: "center",
               }}
             >
-              No devices found. Please pair a device to see it here.
+              {t("No devices found")}
             </Text>
           </View>
         ) : (
@@ -414,11 +418,11 @@ export default function FindMyLkkim() {
                           fontSize: 13,
                           marginBottom: 6,
                           color: isDarkMode ? "#ddd" : "#666",
-                          flexWrap: "wrap", // 确保文本换行
+                          flexWrap: "wrap",
                           lineHeight: 18,
                         }}
                       >
-                        {deviceAddresses[device.id] || "Fetching address..."}
+                        {deviceAddresses[device.id] || t("Fetching address...")}
                       </Text>
                       <Text
                         style={{
@@ -426,7 +430,7 @@ export default function FindMyLkkim() {
                           color: isDarkMode ? "#aaa" : "#999",
                         }}
                       >
-                        Last connected:{" "}
+                        {t("Last connected")}:{" "}
                         {new Date(device.connectedAt).toLocaleString()}
                       </Text>
                     </View>
