@@ -50,14 +50,7 @@ const serviceUUID = "6E400001-B5A3-F393-E0A9-E50E24DCCA9E";
 const writeCharacteristicUUID = "6E400002-B5A3-F393-E0A9-E50E24DCCA9E";
 const notifyCharacteristicUUID = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E";
 
-
-
 function WalletScreen({ route, navigation }) {
-
-
-
-
-
   // 使用状态
   const [receivedVerificationCode, setReceivedVerificationCode] = useState("");
   const {
@@ -101,6 +94,7 @@ function WalletScreen({ route, navigation }) {
   const [deleteConfirmVisible, setDeleteConfirmVisible] = useState(false);
   const [priceChanges, setPriceChanges] = useState({});
   const scrollViewRef = useRef();
+  const blueToothColor = isDarkMode ? "#CCB68C" : "#CFAB95";
   const iconColor = isDarkMode ? "#ffffff" : "#676776";
   const darkColorsDown = ["#21201E", "#0E0D0D"];
   const lightColorsDown = ["#FDFCFD", "#EDEBEF"];
@@ -1790,8 +1784,8 @@ function WalletScreen({ route, navigation }) {
                 ? "#00EE88"
                 : "#00EE88"
               : isBlackText
-                ? "#F44336"
-                : "#F44336";
+              ? "#F44336"
+              : "#F44336";
 
           return (
             <TouchableHighlight
@@ -1946,13 +1940,14 @@ function WalletScreen({ route, navigation }) {
                                 isBlackText && { color: "#121518" },
                               ]}
                             >
-                              {`${i === 0
-                                ? card.balance
-                                : getConvertedBalance(
-                                  card.balance,
-                                  card.shortName
-                                )
-                                } ${i === 0 ? card.shortName : currencyUnit}`}
+                              {`${
+                                i === 0
+                                  ? card.balance
+                                  : getConvertedBalance(
+                                      card.balance,
+                                      card.shortName
+                                    )
+                              } ${i === 0 ? card.shortName : currencyUnit}`}
                             </Text>
                           )
                         )}
@@ -2023,6 +2018,7 @@ function WalletScreen({ route, navigation }) {
         devices={devices}
         isScanning={isScanning}
         iconColor={iconColor}
+        blueToothColor={blueToothColor}
         handleDevicePress={handleDevicePress}
         setBleVisible={setBleVisible}
         selectedDevice={selectedDevice}

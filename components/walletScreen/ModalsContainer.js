@@ -51,6 +51,7 @@ const ModalsContainer = ({
   devices,
   isScanning,
   iconColor,
+  blueToothColor,
   handleDevicePress,
   setBleVisible,
   selectedDevice,
@@ -135,7 +136,7 @@ const ModalsContainer = ({
         visible={bleVisible}
         devices={devices}
         isScanning={isScanning}
-        iconColor={iconColor}
+        iconColor={blueToothColor}
         onDevicePress={handleDevicePress}
         onCancel={() => {
           setBleVisible(false);

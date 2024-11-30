@@ -89,6 +89,7 @@ function MyColdWalletScreen() {
   const [isCurrentPasswordHidden, setIsCurrentPasswordHidden] = useState(true);
   const restoreIdentifier = Constants.installationId;
   const toggleColor = isDarkMode ? "#CCB68C" : "#CFAB95";
+  const blueToothColor = isDarkMode ? "#CCB68C" : "#CFAB95";
   const iconColor = isDarkMode ? "#ffffff" : "#676776";
   const darkColors = ["#21201E", "#0E0D0D"];
   const lightColors = ["#FFFFFF", "#EDEBEF"];
@@ -1505,7 +1506,7 @@ function MyColdWalletScreen() {
         visible={modalVisible}
         devices={devices}
         isScanning={isScanning}
-        iconColor={iconColor}
+        iconColor={blueToothColor}
         onDevicePress={handleDevicePress}
         onCancel={handleCancel}
         verifiedDevices={verifiedDevices}
