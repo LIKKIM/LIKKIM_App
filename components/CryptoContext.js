@@ -114,9 +114,28 @@ export const CryptoProvider = ({ children }) => {
 
   // 更新加密货币地址的函数
   const updateCryptoAddress = (shortName, newAddress) => {
-    // 更新 initialAdditionalCryptos 的地址
+    // 只处理 Ethereum (ETH) 的地址更新
+    if (shortName !== "ETH") {
+      // 如果不是 ETH 地址，直接更新地址，但不添加卡片到 Wallet Screen
+      setInitialAdditionalCryptos((prevCryptos) => {
+        const updatedCryptos = prevCryptos.map((crypto) =>
+          crypto.shortName === shortName
+            ? { ...crypto, address: newAddress } // 只更新指定的 shortName 地址
+            : crypto
+        );
+
+        // 持久化更新后的数据到 AsyncStorage
+        AsyncStorage.setItem(
+          "initialAdditionalCryptos",
+          JSON.stringify(updatedCryptos)
+        );
+        return updatedCryptos;
+      });
+      return; // 如果不是 ETH 地址，直接返回
+    }
+
+    // 只有 ETH 地址会更新并添加到 Wallet Screen
     setInitialAdditionalCryptos((prevCryptos) => {
-      // 只更新对应的加密货币卡片
       const updatedCryptos = prevCryptos.map((crypto) =>
         crypto.shortName === shortName
           ? { ...crypto, address: newAddress } // 只更新指定的 shortName 地址
@@ -131,7 +150,7 @@ export const CryptoProvider = ({ children }) => {
 
       // 更新 cryptoCards
       setCryptoCards((prevCards) => {
-        // 找到对应 shortName 卡片并更新
+        // 找到对应 shortName 的卡片并更新
         const updatedCards = prevCards.map((card) =>
           card.shortName === shortName
             ? { ...card, address: newAddress } // 只更新对应 shortName 的卡片
