@@ -73,7 +73,7 @@ const getAddressFromLatLng = async (lat, lng) => {
       return "Address not found";
     }
   } catch (error) {
-    console.error("Error getting address:", error);
+    console.log("Error getting address:", error);
     return "Error fetching address";
   }
 };
@@ -102,7 +102,7 @@ const loadConnectedDevices = async (
       console.log("没有已保存的设备数据");
     }
   } catch (error) {
-    console.error("加载设备数据失败:", error);
+    console.log("加载设备数据失败:", error);
   }
 };
 
@@ -195,7 +195,7 @@ export default function FindMyLkkim() {
       setDevicesPositions(updatedDevices);
       console.log(`设备 ${deviceId} 已删除`);
     } catch (error) {
-      console.error("删除设备失败:", error);
+      console.log("删除设备失败:", error);
     }
   };
 
