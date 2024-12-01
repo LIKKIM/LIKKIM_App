@@ -366,13 +366,13 @@ i18n
             "权限被拒绝，无法访问设备位置",
           "Last connected": "最后连接",
           "Find My LIKKIM": "查找我的LIKKIM",
-          "Wallet Management": "錢包管理",
-          "Delete Wallet": "刪除錢包",
-          Support: "幫助",
+          "Wallet Management": "钱包管理",
+          "Delete Wallet": "删除钱包",
+          Support: "帮助",
           Warning: "警告",
           "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet.":
-            "您確定要刪除您的錢包嗎？\n請確保您已經保存了恢復短語（助記詞）。\n\n刪除後，您可以通過將錢包導入LIKKIM設備並將設備與應用程序連接來恢復您的錢包。\n如果您已經在LIKKIM設備上擁有錢包，只需將設備與應用程序連接即可恢復錢包。",
-          Delete: "刪除",
+            "您确定要删除您的钱包吗？\n请确保您已经保存了恢复短语（助记词）。\n\n一旦删除，您的钱包可以通过将其导入到LIKKIM设备中并将设备与应用程序连接来恢复。\n如果您已经在LIKKIM设备上有一个钱包，只需将设备与应用程序连接即可恢复您的钱包。",
+          Delete: "删除",
         },
       },
       "zh-TW": {
