@@ -1208,6 +1208,52 @@ function MyColdWalletScreen() {
             ))}
           </View>
 
+          <TouchableOpacity
+            style={MyColdWalletScreenStyle.settingsItem}
+            onPress={() => setIsDeleteWalletVisible(!isDeleteWalletVisible)} // 切换折叠状态
+          >
+            <View style={MyColdWalletScreenStyle.listContainer}>
+              <Icon
+                name="wallet"
+                size={24}
+                color={iconColor} // 这里的颜色可以根据需要调整
+                style={{ marginRight: 8 }}
+              />
+              <Text style={[MyColdWalletScreenStyle.Text, { flex: 1 }]}>
+                {t("Wallet Management")}
+              </Text>
+              <Icon
+                name={
+                  isDeleteWalletVisible ? "arrow-drop-up" : "arrow-drop-down"
+                }
+                size={24}
+                color={iconColor}
+              />
+            </View>
+          </TouchableOpacity>
+
+          {/* 如果 isDeleteWalletVisible 为 true，显示删除钱包项 */}
+          {isDeleteWalletVisible && (
+            <View>
+              <TouchableOpacity
+                style={MyColdWalletScreenStyle.settingsItem}
+                onPress={handleDeleteWallet} // 调用删除钱包的处理函数
+              >
+                <View style={MyColdWalletScreenStyle.listContainer}>
+                  <Icon
+                    name="delete-outline" // 这是删除图标
+                    size={24}
+                    color={iconColor}
+                    style={MyColdWalletScreenStyle.Icon}
+                  />
+                  <Text style={[MyColdWalletScreenStyle.Text, { flex: 1 }]}>
+                    {t("Delete Wallet")}
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          )}
+
           {/* 支持分类（折叠功能） */}
           <TouchableOpacity
             style={MyColdWalletScreenStyle.settingsItem}
