@@ -188,6 +188,13 @@ i18n
             "Permission denied, unable to access device location",
           "Last connected": "Last connected",
           "Find My LIKKIM": "Find My LIKKIM",
+          "Wallet Management": "Wallet Management",
+          "Delete Wallet": "Delete Wallet",
+          Support: "Support",
+          Warning: "Warning",
+          "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet.":
+            "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet.",
+          Delete: "Delete",
         },
       },
       zh: {
@@ -359,6 +366,13 @@ i18n
             "权限被拒绝，无法访问设备位置",
           "Last connected": "最后连接",
           "Find My LIKKIM": "查找我的LIKKIM",
+          "Wallet Management": "錢包管理",
+          "Delete Wallet": "刪除錢包",
+          Support: "幫助",
+          Warning: "警告",
+          "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet.":
+            "您確定要刪除您的錢包嗎？\n請確保您已經保存了恢復短語（助記詞）。\n\n刪除後，您可以通過將錢包導入LIKKIM設備並將設備與應用程序連接來恢復您的錢包。\n如果您已經在LIKKIM設備上擁有錢包，只需將設備與應用程序連接即可恢復錢包。",
+          Delete: "刪除",
         },
       },
       "zh-TW": {
@@ -536,6 +550,13 @@ i18n
             "權限被拒絕，無法訪問設備位置",
           "Last connected": "最後連接",
           "Find My LIKKIM": "尋找我的LIKKIM",
+          "Wallet Management": "錢包管理",
+          "Delete Wallet": "刪除錢包",
+          Support: "幫助",
+          Warning: "警告",
+          "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet.":
+            "您確定要刪除您的錢包嗎？\n請確保您已經保存了恢復短語（助記詞）。\n\n刪除後，您可以通過將錢包導入LIKKIM設備並將設備與應用程序連接來恢復您的錢包。\n如果您已經在LIKKIM設備上擁有錢包，只需將設備與應用程序連接即可恢復錢包。",
+          Delete: "刪除",
         },
       },
       fr: {
@@ -747,6 +768,13 @@ i18n
             "Permission refusée, impossible d'accéder à l'emplacement de l'appareil",
           "Last connected": "Dernière connexion",
           "Find My LIKKIM": "Trouvez mon LIKKIM",
+          "Wallet Management": "Gestion du portefeuille",
+          "Delete Wallet": "Supprimer le portefeuille",
+          Support: "Assistance",
+          Warning: "Avertissement",
+          "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet.":
+            "Êtes-vous sûr de vouloir supprimer votre portefeuille ?\nAssurez-vous d'avoir sauvegardé votre phrase de récupération (mnémotechnique).\n\nUne fois supprimé, votre portefeuille pourra être restauré en l'importation dans l'appareil LIKKIM, puis en liant l'appareil à l'application.\nSi vous avez déjà un portefeuille sur l'appareil LIKKIM, il vous suffit de lier l'appareil à l'application pour restaurer votre portefeuille.",
+          Delete: "Supprimer",
         },
       },
       es: {
@@ -933,6 +961,13 @@ i18n
             "Permiso denegado, no se puede acceder a la ubicación del dispositivo",
           "Last connected": "Última conexión",
           "Find My LIKKIM": "Encuentra mi LIKKIM",
+          "Wallet Management": "Gestión de cartera",
+          "Delete Wallet": "Eliminar cartera",
+          Support: "Soporte",
+          Warning: "Advertencia",
+          "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet.":
+            "¿Está seguro de que desea eliminar su billetera?\nAsegúrese de haber guardado su frase de recuperación (mnemotécnica).\n\nUna vez eliminada, su billetera se puede restaurar importándola al dispositivo LIKKIM y luego vinculando el dispositivo a la aplicación.\nSi ya tiene una billetera en el dispositivo LIKKIM, simplemente vincule el dispositivo a la aplicación para restaurar su billetera.",
+          Delete: "Eliminar",
         },
       },
       ar: {
@@ -1112,6 +1147,13 @@ i18n
             "تم رفض الإذن، غير قادر على الوصول إلى موقع الجهاز",
           "Last connected": "آخر اتصال",
           "Find My LIKKIM": "ابحث عن LIKKIM الخاص بي",
+          "Wallet Management": "إدارة المحفظة",
+          "Delete Wallet": "حذف المحفظة",
+          Support: "الدعم",
+          Warning: "تحذير",
+          "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet.":
+            "هل أنت متأكد أنك تريد حذف محفظتك؟\nتأكد من أنك قد حفظت عبارة الاسترداد الخاصة بك (العبارة التذكيرية).\n\nبمجرد الحذف، يمكن استعادة محفظتك عن طريق استيرادها إلى جهاز LIKKIM ثم ربط الجهاز بالتطبيق.\nإذا كان لديك محفظة على جهاز LIKKIM بالفعل، فقط قم بربط الجهاز بالتطبيق لاستعادة محفظتك.",
+          Delete: "حذف",
         },
       },
       ja: {
@@ -1318,6 +1360,13 @@ i18n
             "権限が拒否されました。デバイスの位置にアクセスできません",
           "Last connected": "最終接続",
           "Find My LIKKIM": "私のLIKKIMを見つける",
+          "Wallet Management": "ウォレット管理",
+          "Delete Wallet": "ウォレット削除",
+          Support: "サポート",
+          Warning: "警告",
+          "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet.":
+            "本当にウォレットを削除してもよろしいですか？\n回復フレーズ（ニーモニック）を保存したことを確認してください。\n\n削除後、LIKKIMデバイスにインポートしてデバイスをアプリにリンクすることでウォレットを復元できます。\nLIKKIMデバイスにすでにウォレットがある場合は、デバイスをアプリにリンクすることでウォレットを復元できます。",
+          Delete: "削除",
         },
       },
       ru: {
@@ -1502,6 +1551,13 @@ i18n
             "Доступ запрещен, не удается получить доступ к местоположению устройства",
           "Last connected": "Последнее подключение",
           "Find My LIKKIM": "Найти мой LIKKIM",
+          "Wallet Management": "Управление кошельком",
+          "Delete Wallet": "Удалить кошелек",
+          Support: "Поддержка",
+          Warning: "Предупреждение",
+          "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet.":
+            "Вы уверены, что хотите удалить свой кошелек?\nУбедитесь, что вы сохранили свою фразу восстановления (мнемоническую).\n\nПосле удаления кошелек можно восстановить, импортировав его в устройство LIKKIM и связав устройство с приложением.\nЕсли у вас уже есть кошелек на устройстве LIKKIM, просто свяжите устройство с приложением для восстановления кошелька.",
+          Delete: "Удалить",
         },
       },
       ko: {
@@ -1681,6 +1737,13 @@ i18n
             "권한이 거부되어 장치 위치에 접근할 수 없습니다",
           "Last connected": "마지막 연결",
           "Find My LIKKIM": "내 LIKKIM 찾기",
+          "Wallet Management": "지갑 관리",
+          "Delete Wallet": "지갑 삭제",
+          Support: "지원",
+          Warning: "경고",
+          "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet.":
+            "정말로 지갑을 삭제하시겠습니까?\n복구 문구(니모닉)를 저장했는지 확인해주세요.\n\n삭제된 후, 지갑은 LIKKIM 기기에 가져오고 장치를 앱에 연결하여 복원할 수 있습니다.\n이미 LIKKIM 기기에 지갑이 있는 경우, 장치를 앱에 연결하여 지갑을 복원하세요.",
+          Delete: "삭제",
         },
       },
       pt: {
@@ -1866,6 +1929,13 @@ i18n
             "Permissão negada, não é possível acessar a localização do dispositivo",
           "Last connected": "Última conexão",
           "Find My LIKKIM": "Encontre meu LIKKIM",
+          "Wallet Management": "Gestão de Carteira",
+          "Delete Wallet": "Eliminar Carteira",
+          Support: "Suporte",
+          Warning: "Aviso",
+          "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet.":
+            "Tem certeza de que deseja excluir sua carteira?\nCertifique-se de ter salvo sua frase de recuperação (mnemonic).\n\nApós excluída, sua carteira pode ser restaurada importando-a para o dispositivo LIKKIM e depois vinculando o dispositivo ao aplicativo.\nSe você já tiver uma carteira no dispositivo LIKKIM, basta vincular o dispositivo ao aplicativo para restaurar sua carteira.",
+          Delete: "Excluir",
         },
       },
       "pt-BR": {
@@ -2068,6 +2138,13 @@ i18n
             "Permesso negato, impossibile accedere alla posizione del dispositivo",
           "Last connected": "Ultima connessione",
           "Find My LIKKIM": "Encontre meu LIKKIM",
+          "Wallet Management": "Gestão de Carteira",
+          "Delete Wallet": "Excluir Carteira",
+          Support: "Suporte",
+          Warning: "Aviso",
+          "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet.":
+            "Tem certeza de que deseja excluir sua carteira?\nCertifique-se de ter salvo sua frase de recuperação (mnemônica).\n\nApós excluir, sua carteira pode ser restaurada importando-a para o dispositivo LIKKIM e depois vinculando o dispositivo ao aplicativo.\nSe você já tiver uma carteira no dispositivo LIKKIM, basta vincular o dispositivo ao aplicativo para restaurá-la.",
+          Delete: "Excluir",
         },
       },
       it: {
@@ -2255,6 +2332,13 @@ i18n
             "Permesso negato, impossibile accedere alla posizione del dispositivo",
           "Last connected": "Ultima connessione",
           "Find My LIKKIM": "Trova il mio LIKKIM",
+          "Wallet Management": "Gestione Portafoglio",
+          "Delete Wallet": "Elimina Portafoglio",
+          Support: "Supporto",
+          Warning: "Avviso",
+          "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet.":
+            "Sei sicuro di voler eliminare il tuo portafoglio?\nAssicurati di aver salvato la tua frase di recupero (mnemonica).\n\nUna volta eliminato, il tuo portafoglio può essere ripristinato importandolo nel dispositivo LIKKIM e collegando il dispositivo all'app.\nSe hai già un portafoglio sul dispositivo LIKKIM, basta collegare il dispositivo all'app per ripristinare il tuo portafoglio.",
+          Delete: "Elimina",
         },
       },
       de: {
@@ -2444,6 +2528,13 @@ i18n
             "Zugriff verweigert, kann den Standort des Geräts nicht erreichen",
           "Last connected": "Zuletzt verbunden",
           "Find My LIKKIM": "Finde mein LIKKIM",
+          "Wallet Management": "Wallet-Verwaltung",
+          "Delete Wallet": "Wallet löschen",
+          Support: "Unterstützung",
+          Warning: "Warnung",
+          "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet.":
+            "Bist du sicher, dass du dein Wallet löschen möchtest?\nBitte stelle sicher, dass du deinen Wiederherstellungssatz (mnemonisch) gespeichert hast.\n\nNachdem das Wallet gelöscht wurde, kann es wiederhergestellt werden, indem du es in das LIKKIM-Gerät importierst und das Gerät mit der App verbindest.\nFalls du bereits ein Wallet auf dem LIKKIM-Gerät hast, verbinde einfach das Gerät mit der App, um dein Wallet wiederherzustellen.",
+          Delete: "Löschen",
         },
       },
       hi: {
@@ -2631,6 +2722,13 @@ i18n
             "अनुमति अस्वीकृत, डिवाइस का स्थान प्राप्त नहीं कर सकते",
           "Last connected": "अंतिम कनेक्शन",
           "Find My LIKKIM": "मेरा LIKKIM ढूंढें",
+          "Wallet Management": "वॉलेट प्रबंधन",
+          "Delete Wallet": "वॉलेट हटाएँ",
+          Support: "सहायता",
+          Warning: "चेतावनी",
+          "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet.":
+            "क्या आप वाकई अपना वॉलेट हटाना चाहते हैं?\nकृपया यह सुनिश्चित करें कि आपने अपनी रिकवरी वाक्य (म्नेमोनिक) को सुरक्षित किया है।\n\nहटाने के बाद, आपका वॉलेट LIKKIM डिवाइस में आयात करके और फिर डिवाइस को ऐप से जोड़कर पुनर्स्थापित किया जा सकता है।\nअगर आपके पास पहले से ही LIKKIM डिवाइस पर एक वॉलेट है, तो सिर्फ डिवाइस को ऐप से जोड़कर अपना वॉलेट पुनर्स्थापित करें।",
+          Delete: "हटाएँ",
         },
       },
       mn: {
@@ -2827,6 +2925,13 @@ i18n
             "Зөвшөөрөл зөвшөөрөгдөөгүй, төхөөрөмжийн байрлалд нэвтрэх боломжгүй",
           "Last connected": "Сүүлийн холболт",
           "Find My LIKKIM": "Миний LIKKIM-г олох",
+          "Wallet Management": "Хэтэвчийн удирдлага",
+          "Delete Wallet": "Хэтэвч устгах",
+          Support: "Тусламж",
+          Warning: "Сэрэмжлүүлэг",
+          "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet.":
+            "Та хэтэвчээ устгахыг хүсч байна уу?\nТа сэргээн авалтын үгээ (mnemonic) хадгалсан эсэхээ шалгаарай.\n\nХэтэвч устсаны дараа, та үүнийг LIKKIM төхөөрөмж рүү оруулж, төхөөрөмжийг апптай холбосноор сэргээж болно.\nХэрвээ таны LIKKIM төхөөрөмж дээр хэтэвч байгаа бол төхөөрөмжийг апптай холбож хэтэвчээ сэргээх боломжтой.",
+          Delete: "Устгах",
         },
       },
       th: {
@@ -3005,6 +3110,13 @@ i18n
             "การเข้าถึงถูกปฏิเสธ ไม่สามารถเข้าถึงตำแหน่งอุปกรณ์",
           "Last connected": "การเชื่อมต่อครั้งสุดท้าย",
           "Find My LIKKIM": "ค้นหาของ LIKKIM ของฉัน",
+          "Wallet Management": "การจัดการกระเป๋าเงิน",
+          "Delete Wallet": "ลบกระเป๋าเงิน",
+          Support: "สนับสนุน",
+          Warning: "คำเตือน",
+          "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet.":
+            "คุณแน่ใจหรือไม่ว่าต้องการลบกระเป๋าเงินของคุณ?\nโปรดตรวจสอบให้แน่ใจว่าคุณได้บันทึกคำพูดการกู้คืน (คำช่วยจำ).\n\nหลังจากลบแล้ว กระเป๋าเงินของคุณสามารถกู้คืนได้โดยการนำเข้ากระเป๋าเงินไปยังอุปกรณ์ LIKKIM และเชื่อมต่ออุปกรณ์กับแอป.\nหากคุณมี กระเป๋าเงินบนอุปกรณ์ LIKKIM อยู่แล้ว เพียงแค่เชื่อมต่ออุปกรณ์กับแอปเพื่อกู้คืนกระเป๋าเงินของคุณ.",
+          Delete: "ลบ",
         },
       },
       uk: {
@@ -3187,6 +3299,13 @@ i18n
             "Доступ заборонено, неможливо отримати доступ до місцеположення пристрою",
           "Last connected": "Останнє підключення",
           "Find My LIKKIM": "Знайти мій LIKKIM",
+          "Wallet Management": "Управління гаманцем",
+          "Delete Wallet": "Видалити гаманець",
+          Support: "Підтримка",
+          Warning: "Попередження",
+          "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet.":
+            "Ви впевнені, що хочете видалити свій гаманець?\nБудь ласка, переконайтесь, що ви зберегли свою фразу відновлення (мнемонічну).\n\nПісля видалення ваш гаманець можна відновити, імпортуючи його в пристрій LIKKIM і потім зв’язавши пристрій з додатком.\nЯкщо у вас вже є гаманець на пристрої LIKKIM, просто зв’яжіть пристрій з додатком для відновлення вашого гаманця.",
+          Delete: "Видалити",
         },
       },
       vi: {
@@ -3373,6 +3492,13 @@ i18n
             "Quyền truy cập bị từ chối, không thể truy cập vị trí thiết bị",
           "Last connected": "Kết nối lần cuối",
           "Find My LIKKIM": "Tìm LIKKIM của tôi",
+          "Wallet Management": "Quản lý ví",
+          "Delete Wallet": "Xóa ví",
+          Support: "Hỗ trợ",
+          Warning: "Cảnh báo",
+          "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet.":
+            "Bạn chắc chắn muốn xóa ví của mình không?\nHãy đảm bảo rằng bạn đã lưu cụm từ phục hồi của mình (mnemonic).\n\nSau khi xóa, ví của bạn có thể được khôi phục bằng cách nhập vào thiết bị LIKKIM và kết nối thiết bị với ứng dụng.\nNếu bạn đã có một ví trên thiết bị LIKKIM, chỉ cần kết nối thiết bị với ứng dụng để khôi phục ví của bạn.",
+          Delete: "Xóa",
         },
       },
       id: {
@@ -3559,6 +3685,13 @@ i18n
             "Izin ditolak, tidak dapat mengakses lokasi perangkat",
           "Last connected": "Terhubung terakhir",
           "Find My LIKKIM": "Cari LIKKIM saya",
+          "Wallet Management": "Manajemen Dompet",
+          "Delete Wallet": "Hapus Dompet",
+          Support: "Dukungan",
+          Warning: "Peringatan",
+          "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet.":
+            "Apakah Anda yakin ingin menghapus dompet Anda?\nPastikan Anda telah menyimpan frase pemulihan Anda (mnemonic).\n\nSetelah dihapus, dompet Anda dapat dipulihkan dengan mengimpor ke perangkat LIKKIM dan menghubungkan perangkat dengan aplikasi.\nJika Anda sudah memiliki dompet di perangkat LIKKIM, cukup hubungkan perangkat dengan aplikasi untuk memulihkan dompet Anda.",
+          Delete: "Hapus",
         },
       },
       tl: {
@@ -3747,6 +3880,13 @@ i18n
             "Tinanggihan ang permiso, hindi makuha ang lokasyon ng device",
           "Last connected": "Huling koneksyon",
           "Find My LIKKIM": "Hanapin ang aking LIKKIM",
+          "Wallet Management": "Pamamahala ng Wallet",
+          "Delete Wallet": "Tanggalin ang Wallet",
+          Support: "Suporta",
+          Warning: "Babala",
+          "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet.":
+            "Sigurado ka bang nais mong tanggalin ang iyong wallet?\nSiguraduhing nai-save mo ang iyong recovery phrase (mnemonic).\n\nKapag natanggal na, ang iyong wallet ay maaaring maibalik sa pamamagitan ng pag-import nito sa LIKKIM device at pagkatapos ay i-link ang device sa app.\nKung mayroon ka nang wallet sa LIKKIM device, i-link lamang ang device sa app upang maibalik ang iyong wallet.",
+          Delete: "Tanggalin",
         },
       },
       bn: {
@@ -3936,6 +4076,13 @@ i18n
             "অনুমতি প্রত্যাখ্যান, ডিভাইসের অবস্থান অ্যাক্সেস করা যাচ্ছে না",
           "Last connected": "শেষ সংযোগ",
           "Find My LIKKIM": "আমার LIKKIM খুঁজুন",
+          "Wallet Management": "ওয়ালেট ব্যবস্থাপনা",
+          "Delete Wallet": "ওয়ালেট মুছুন",
+          Support: "সমর্থন",
+          Warning: "সতর্কতা",
+          "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet.":
+            "আপনি কি নিশ্চিত যে আপনি আপনার ওয়ালেট মুছে ফেলতে চান?\nদয়া করে নিশ্চিত করুন যে আপনি আপনার পুনরুদ্ধার বাক্য (mnemonic) সংরক্ষণ করেছেন।\n\nএকবার মুছে ফেললে, আপনার ওয়ালেটটি LIKKIM ডিভাইসে আমদানি করে এবং তারপর ডিভাইসটি অ্যাপের সাথে সংযুক্ত করে পুনরুদ্ধার করা যেতে পারে।\nযদি আপনার LIKKIM ডিভাইসে ইতিমধ্যে একটি ওয়ালেট থাকে, তবে কেবল ডিভাইসটি অ্যাপের সাথে সংযুক্ত করুন এবং আপনার ওয়ালেট পুনরুদ্ধার করুন।",
+          Delete: "মুছুন",
         },
       },
     },
