@@ -26,7 +26,8 @@ import { DarkModeContext } from "./CryptoContext";
 import { Swipeable } from "react-native-gesture-handler";
 import { useTranslation } from "react-i18next"; // 导入 useTranslation
 
-const GOOGLE_MAPS_API_KEY = "AIzaSyAaLPaHuHj_vT7cHsA99HZeuAH_Z1p3Xbg";
+const GOOGLE_MAPS_API_KEY = "AIzaSyAaLPaHuHj_vT7cHsA99HZeuAH_Z1p3Xbg"; // Google API 密钥
+const GAODE_MAP_API_KEY = "c48411da5c359aa1f6f685dd52dd372b"; // 高德 API 密钥
 
 const styles = StyleSheet.create({
   container: {
@@ -125,6 +126,13 @@ export default function FindMyLkkim() {
       headerTintColor: isDarkMode ? "#FFFFFF" : "#000000",
     });
   }, [isDarkMode, navigation]);
+
+  // 使用 useEffect 来设置返回按钮的文本
+  useEffect(() => {
+    navigation.setOptions({
+      headerBackTitle: t("Back"), // 设置国际化的“返回”按钮文本
+    });
+  }, [navigation, t]); // 依赖项是 navigation 和 t，确保翻译变化时更新按钮文本
 
   useEffect(() => {
     requestLocationPermission();

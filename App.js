@@ -80,7 +80,7 @@ export default function App() {
               {(props) => (
                 <AppContent
                   {...props}
-                  t={t}
+                  t={t} // 传递 i18n 的 t 函数
                   headerDropdownVisible={headerDropdownVisible}
                   setHeaderDropdownVisible={setHeaderDropdownVisible}
                   selectedCardName={selectedCardName}
@@ -88,6 +88,7 @@ export default function App() {
                 />
               )}
             </Stack.Screen>
+
             <Stack.Screen
               name="Find My LIKKIM"
               component={FindMyLkkim}
