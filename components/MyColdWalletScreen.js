@@ -907,6 +907,12 @@ function MyColdWalletScreen() {
 
   const buildNumber = appConfig.ios.buildNumber;
 
+  const [isDeleteWalletVisible, setIsDeleteWalletVisible] = useState(false);
+
+  const toggleDeleteWalletVisibility = () => {
+    setIsDeleteWalletVisible((prevState) => !prevState);
+  };
+
   const settingsOptions = {
     settings: [
       {
@@ -1015,7 +1021,7 @@ function MyColdWalletScreen() {
 
       {
         title: t("Find My LIKKIM"),
-        icon: "location-on", // 使用表示位置的图标
+        icon: "location-on",
         onPress: () => {
           Vibration.vibrate();
           navigation.navigate("Find My LIKKIM");
@@ -1029,16 +1035,26 @@ function MyColdWalletScreen() {
           handleFirmwareUpdate();
         },
       },
-      // 第二层可折叠的功能——删除钱包
+    ],
+    // 新增 walletManagement 部分
+    walletManagement: [
       {
+        title: t("Wallet Management"),
+        icon: "wallet",
+        extraIcon: isDeleteWalletVisible ? "arrow-drop-up" : "arrow-drop-down", // 控制箭头方向
+        onPress: toggleDeleteWalletVisibility, // 切换折叠状态
+      },
+      isDeleteWalletVisible && {
         title: t("Delete Wallet"),
-        icon: "delete-forever",
+        icon: "delete-outline",
         onPress: () => {
           Vibration.vibrate();
           handleDeleteWallet(); // 调用删除钱包的处理函数
         },
+        style: { color: "red" }, // 使用红色强调危险性
       },
     ],
+
     support: [
       {
         title: t("Help & Support"),
@@ -1083,7 +1099,7 @@ function MyColdWalletScreen() {
     Alert.alert(
       t("Warning"),
       t(
-        "Are you sure you want to delete your wallet? This action cannot be undone."
+        "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet."
       ),
       [
         {
