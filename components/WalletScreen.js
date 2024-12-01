@@ -99,10 +99,6 @@ function WalletScreen({ route, navigation }) {
   const iconColor = isDarkMode ? "#ffffff" : "#676776";
   const darkColorsDown = ["#21201E", "#0E0D0D"];
   const lightColorsDown = ["#FDFCFD", "#EDEBEF"];
-  const secondTextColor = isDarkMode ? "#ddd" : "#676776";
-  const placeholderColor = isDarkMode ? "#ffffff" : "#21201E";
-  const [importPhraseModalVisible, setImportPhraseModalVisible] =
-    useState(false);
   const [pinModalVisible, setPinModalVisible] = useState(false);
   const [phrase, setPhrase] = useState("");
   const [animation] = useState(new Animated.Value(0));
