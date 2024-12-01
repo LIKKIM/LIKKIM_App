@@ -780,7 +780,7 @@ function WalletScreen({ route, navigation }) {
   }
 
   let monitorSubscription;
-
+  //监听函数
   const monitorVerificationCode = (device, sendDecryptedValue) => {
     monitorSubscription = device.monitorCharacteristicForService(
       serviceUUID,
