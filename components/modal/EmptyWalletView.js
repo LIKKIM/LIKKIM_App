@@ -33,7 +33,7 @@ const EmptyWalletView = ({
         </Text>
         <Text style={WalletScreenStyle.walletInfoText}>
           {t(
-            "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies."
+            "LIKKIM supports 30 blockchains and over 10,000 cryptocurrencies."
           )}
         </Text>
       </View>

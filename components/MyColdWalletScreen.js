@@ -1161,7 +1161,7 @@ function MyColdWalletScreen() {
         );
         navigation.goBack(); // 返回上一页或跳转到登录界面等
       } else {
-        // 如果没有钱包数据，提示用户
+        // 如果没有钱包数据，提示用户 这里以后需要国际化
         Alert.alert(t("No Wallet"), t("No wallet available to delete."));
       }
     } catch (error) {

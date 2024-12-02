@@ -61,8 +61,8 @@ i18n
           "Remove Chain Account": "Remove Chain Account",
           Remove: "Remove",
           "Security in your hands": "Security in your hands",
-          "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies.":
-            "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies.",
+          "LIKKIM supports 30 blockchains and over 10,000 cryptocurrencies.":
+            "LIKKIM supports 30 blockchains and over 10,000 cryptocurrencies.",
           Continue: "Continue",
           "Never share the recovery phrase.":
             "Never share the recovery phrase.",
@@ -250,8 +250,8 @@ i18n
           "Remove Chain Account": "移除链账户",
           Remove: "移除",
           "Security in your hands": "安全尽在掌握",
-          "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies.":
-            "LIKKIM 支持 27 条区块链和超过 10,000 种加密货币。",
+          "LIKKIM supports 30 blockchains and over 10,000 cryptocurrencies.":
+            "LIKKIM 支持 30 条区块链和超过 10,000 种加密货币。",
           Continue: "继续",
           "Never share the recovery phrase.": "不要分享恢复短语。",
           "Please save the recovery phrase displayed on the LIKKIM hardware wallet screen.":
@@ -429,8 +429,8 @@ i18n
           "Remove Chain Account": "移除鏈賬戶",
           Remove: "移除",
           "Security in your hands": "安全盡在掌握",
-          "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies.":
-            "LIKKIM 支持 27 條區塊鏈和超過 10,000 種加密貨幣。",
+          "LIKKIM supports 30 blockchains and over 10,000 cryptocurrencies.":
+            "LIKKIM 支持 30 條區塊鏈和超過 10,000 種加密貨幣。",
           Continue: "繼續",
           "Never share the recovery phrase.": "不要分享恢復短語。",
           "Please save the recovery phrase displayed on the LIKKIM hardware wallet screen.":
@@ -620,8 +620,8 @@ i18n
           "Remove Chain Account": "Supprimer le compte de chaîne",
           Remove: "Supprimer",
           "Security in your hands": "Sécurité entre vos mains",
-          "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies.":
-            "LIKKIM prend en charge 27 blockchains et plus de 10 000 crypto-monnaies.",
+          "LIKKIM supports 30 blockchains and over 10,000 cryptocurrencies.":
+            "LIKKIM prend en charge 30 blockchains et plus de 10 000 crypto-monnaies.",
           Continue: "Continuer",
           "Never share the recovery phrase.":
             "Ne partagez jamais la phrase de récupération.",
@@ -841,8 +841,8 @@ i18n
           "Remove Chain Account": "Eliminar cuenta de cadena",
           Remove: "Eliminar",
           "Security in your hands": "Seguridad en tus manos",
-          "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies.":
-            "LIKKIM admite 27 cadenas de bloques y más de 10,000 criptomonedas.",
+          "LIKKIM supports 30 blockchains and over 10,000 cryptocurrencies.":
+            "LIKKIM admite 30 cadenas de bloques y más de 10,000 criptomonedas.",
           Continue: "Continuar",
           "Never share the recovery phrase.":
             "Nunca compartas la frase de recuperación.",
@@ -1034,8 +1034,8 @@ i18n
           "Remove Chain Account": "إزالة حساب السلسلة",
           Remove: "إزالة",
           "Security in your hands": "الأمان بين يديك",
-          "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies.":
-            "يدعم LIKKIM 27 سلسلة كتل وأكثر من 10,000 عملة مشفرة.",
+          "LIKKIM supports 30 blockchains and over 10,000 cryptocurrencies.":
+            "يدعم LIKKIM 30 سلسلة كتل وأكثر من 10,000 عملة مشفرة.",
           Continue: "متابعة",
           "Never share the recovery phrase.": "لا تشارك عبارة الاسترداد أبدًا.",
           "Please save the recovery phrase displayed on the LIKKIM hardware wallet screen.":
@@ -1225,8 +1225,8 @@ i18n
           "Remove Chain Account": "チェーンアカウントを削除",
           Remove: "削除",
           "Security in your hands": "安全はあなたの手に",
-          "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies.":
-            "LIKKIMは27のブロックチェーンと10,000以上の暗号通貨をサポートしています。",
+          "LIKKIM supports 30 blockchains and over 10,000 cryptocurrencies.":
+            "LIKKIMは30のブロックチェーンと10,000以上の暗号通貨をサポートしています。",
           Continue: "続行",
           "Never share the recovery phrase.":
             "リカバリーフレーズは絶対に共有しないでください。",
@@ -1441,8 +1441,8 @@ i18n
           "Remove Chain Account": "Удалить учетную запись цепочки",
           Remove: "Удалить",
           "Security in your hands": "Безопасность в ваших руках",
-          "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies.":
-            "LIKKIM поддерживает 27 блокчейнов и более 10 000 криптовалют.",
+          "LIKKIM supports 30 blockchains and over 10,000 cryptocurrencies.":
+            "LIKKIM поддерживает 30 блокчейнов и более 10 000 криптовалют.",
           Continue: "Продолжить",
           "Never share the recovery phrase.":
             "Никогда не делитесь фразой восстановления.",
@@ -1632,8 +1632,8 @@ i18n
           "Remove Chain Account": "체인 계정 제거",
           Remove: "제거",
           "Security in your hands": "안전은 당신의 손안에 있습니다",
-          "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies.":
-            "LIKKIM은 27개의 블록체인과 10,000개 이상의 암호화폐를 지원합니다.",
+          "LIKKIM supports 30 blockchains and over 10,000 cryptocurrencies.":
+            "LIKKIM은 30개의 블록체인과 10,000개 이상의 암호화폐를 지원합니다.",
           Continue: "계속",
           "Never share the recovery phrase.":
             "복구 구문을 절대 공유하지 마세요.",
@@ -1824,8 +1824,8 @@ i18n
           "Remove Chain Account": "Remover conta de cadeia",
           Remove: "Remover",
           "Security in your hands": "Segurança em suas mãos",
-          "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies.":
-            "A LIKKIM suporta 27 blockchains e mais de 10.000 criptomoedas.",
+          "LIKKIM supports 30 blockchains and over 10,000 cryptocurrencies.":
+            "A LIKKIM suporta 30 blockchains e mais de 10.000 criptomoedas.",
           Continue: "Continuar",
           "Never share the recovery phrase.":
             "Nunca compartilhe a frase de recuperação.",
@@ -2020,8 +2020,8 @@ i18n
           "Remove Chain Account": "Remover conta de cadeia",
           Remove: "Remover",
           "Security in your hands": "Segurança em suas mãos",
-          "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies.":
-            "A LIKKIM suporta 27 blockchains e mais de 10.000 criptomoedas.",
+          "LIKKIM supports 30 blockchains and over 10,000 cryptocurrencies.":
+            "A LIKKIM suporta 30 blockchains e mais de 10.000 criptomoedas.",
           Continue: "Continuar",
           "Never share the recovery phrase.":
             "Nunca compartilhe a frase de recuperação.",
@@ -2232,8 +2232,8 @@ i18n
           "Remove Chain Account": "Rimuovere account di catena",
           Remove: "Rimuovere",
           "Security in your hands": "Sicurezza nelle tue mani",
-          "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies.":
-            "LIKKIM supporta 27 blockchain e oltre 10.000 criptovalute.",
+          "LIKKIM supports 30 blockchains and over 10,000 cryptocurrencies.":
+            "LIKKIM supporta 30 blockchain e oltre 10.000 criptovalute.",
           Continue: "Continua",
           "Never share the recovery phrase.":
             "Non condividere mai la frase di recupero.",
@@ -2429,8 +2429,8 @@ i18n
           "Remove Chain Account": "Kettenkonto entfernen",
           Remove: "Entfernen",
           "Security in your hands": "Sicherheit in Ihren Händen",
-          "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies.":
-            "LIKKIM unterstützt 27 Blockchains und über 10.000 Kryptowährungen.",
+          "LIKKIM supports 30 blockchains and over 10,000 cryptocurrencies.":
+            "LIKKIM unterstützt 30 Blockchains und über 10.000 Kryptowährungen.",
           Continue: "Fortsetzen",
           "Never share the recovery phrase.":
             "Teilen Sie niemals die Wiederherstellungsphrase.",
@@ -2627,8 +2627,8 @@ i18n
           "Remove Chain Account": "श्रृंखला खाता हटाएं",
           Remove: "हटाएं",
           "Security in your hands": "सुरक्षा आपके हाथ में",
-          "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies.":
-            "LIKKIM 27 ब्लॉकचेन और 10,000 से अधिक क्रिप्टोकरेंसी का समर्थन करता है।",
+          "LIKKIM supports 30 blockchains and over 10,000 cryptocurrencies.":
+            "LIKKIM 30 ब्लॉकचेन और 10,000 से अधिक क्रिप्टोकरेंसी का समर्थन करता है।",
           Continue: "जारी रखें",
           "Never share the recovery phrase.":
             "रिकवरी वाक्यांश को कभी साझा न करें।",
@@ -2824,8 +2824,8 @@ i18n
           "Remove Chain Account": "Гинжний дансыг устгах",
           Remove: "Устгах",
           "Security in your hands": "Аюулгүй байдал таны гарт",
-          "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies.":
-            "LIKKIM 27 блокчэйн болон 10,000 гаруй криптовалютыг дэмждэг.",
+          "LIKKIM supports 30 blockchains and over 10,000 cryptocurrencies.":
+            "LIKKIM 30 блокчэйн болон 10,000 гаруй криптовалютыг дэмждэг.",
           Continue: "Үргэлжлүүлэх",
           "Never share the recovery phrase.":
             "Сэргээх үгийг хэзээ ч бүү хуваалцаарай.",
@@ -3028,8 +3028,8 @@ i18n
           "Remove Chain Account": "ลบบัญชีเครือ",
           Remove: "ลบ",
           "Security in your hands": "ความปลอดภัยอยู่ในมือคุณ",
-          "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies.":
-            "LIKKIM รองรับ 27 บล็อกเชนและมากกว่า 10,000 สกุลเงินดิจิทัล",
+          "LIKKIM supports 30 blockchains and over 10,000 cryptocurrencies.":
+            "LIKKIM รองรับ 30 บล็อกเชนและมากกว่า 10,000 สกุลเงินดิจิทัล",
           Continue: "ดำเนินการต่อ",
           "Never share the recovery phrase.": "อย่าแชร์วลีการกู้คืน",
           "Please save the recovery phrase displayed on the LIKKIM hardware wallet screen.":
@@ -3218,8 +3218,8 @@ i18n
           "Remove Chain Account": "Видалити ланцюговий акаунт",
           Remove: "Видалити",
           "Security in your hands": "Безпека у ваших руках",
-          "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies.":
-            "LIKKIM підтримує 27 блокчейнів і понад 10 000 криптовалют.",
+          "LIKKIM supports 30 blockchains and over 10,000 cryptocurrencies.":
+            "LIKKIM підтримує 30 блокчейнів і понад 10 000 криптовалют.",
           Continue: "Продовжити",
           "Never share the recovery phrase.":
             "Ніколи не діліться фразою відновлення.",
@@ -3409,8 +3409,8 @@ i18n
           "Remove Chain Account": "Xóa tài khoản chuỗi",
           Remove: "Xóa",
           "Security in your hands": "Bảo mật trong tay bạn",
-          "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies.":
-            "LIKKIM hỗ trợ 27 blockchain và hơn 10.000 loại tiền điện tử.",
+          "LIKKIM supports 30 blockchains and over 10,000 cryptocurrencies.":
+            "LIKKIM hỗ trợ 30 blockchain và hơn 10.000 loại tiền điện tử.",
           Continue: "Tiếp tục",
           "Never share the recovery phrase.":
             "Không bao giờ chia sẻ cụm từ khôi phục.",
@@ -3605,8 +3605,8 @@ i18n
           "Remove Chain Account": "Hapus akun rantai",
           Remove: "Hapus",
           "Security in your hands": "Keamanan di tangan Anda",
-          "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies.":
-            "LIKKIM mendukung 27 blockchain dan lebih dari 10.000 cryptocurrency.",
+          "LIKKIM supports 30 blockchains and over 10,000 cryptocurrencies.":
+            "LIKKIM mendukung 30 blockchain dan lebih dari 10.000 cryptocurrency.",
           Continue: "Lanjutkan",
           "Never share the recovery phrase.":
             "Jangan pernah membagikan frasa pemulihan.",
@@ -3800,8 +3800,8 @@ i18n
           "Remove Chain Account": "Alisin ang chain account",
           Remove: "Alisin",
           "Security in your hands": "Seguridad sa iyong mga kamay",
-          "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies.":
-            "Sinusuportahan ng LIKKIM ang 27 blockchains at higit sa 10,000 cryptocurrencies.",
+          "LIKKIM supports 30 blockchains and over 10,000 cryptocurrencies.":
+            "Sinusuportahan ng LIKKIM ang 30 blockchains at higit sa 10,000 cryptocurrencies.",
           Continue: "Magpatuloy",
           "Never share the recovery phrase.":
             "Huwag kailanman ibahagi ang parirala ng pagbawi.",
@@ -4000,8 +4000,8 @@ i18n
           "Remove Chain Account": "চেইন অ্যাকাউন্ট সরান",
           Remove: "সরান",
           "Security in your hands": "নিরাপত্তা আপনার হাতে",
-          "LIKKIM supports 27 blockchains and over 10,000 cryptocurrencies.":
-            "LIKKIM 27 টি ব্লকচেইন এবং 10,000 টিরও বেশি ক্রিপ্টোকারেন্সি সমর্থন করে।",
+          "LIKKIM supports 30 blockchains and over 10,000 cryptocurrencies.":
+            "LIKKIM 30 টি ব্লকচেইন এবং 10,000 টিরও বেশি ক্রিপ্টোকারেন্সি সমর্থন করে।",
           Continue: "চালিয়ে যান",
           "Never share the recovery phrase.":
             "পুনরুদ্ধার বাক্যাংশটি কখনই শেয়ার করবেন না।",
