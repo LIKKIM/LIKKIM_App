@@ -1144,26 +1144,26 @@ function MyColdWalletScreen() {
   // 删除钱包的具体操作
   const deleteWallet = async () => {
     try {
-      // 清除加密钱包数据的代码
-      await AsyncStorage.removeItem("cryptoCards");
+      // 先从存储中获取 cryptoCards 数据
+      const cryptoCardsData = await AsyncStorage.getItem("cryptoCards");
+      const cryptoCards = JSON.parse(cryptoCardsData);
 
-      // 重新加载 cryptoCards 数据（此处可以根据实际情况修改）
-      const updatedCryptoCards = await AsyncStorage.getItem("cryptoCards");
-      if (updatedCryptoCards) {
-        setCryptoCards(JSON.parse(updatedCryptoCards));
+      // 检查 cryptoCards 是否为空
+      if (cryptoCards && cryptoCards.length > 0) {
+        // 执行删除钱包的操作
+        await AsyncStorage.removeItem("cryptoCards");
+        setCryptoCards([]); // 清空应用状态中的钱包数据
+
+        // 显示成功信息
+        Alert.alert(
+          t("Success"),
+          t("Your wallet has been deleted successfully.")
+        );
+        navigation.goBack(); // 返回上一页或跳转到登录界面等
       } else {
-        setCryptoCards([]); // 如果没有数据，确保钱包界面为空
+        // 如果没有钱包数据，提示用户
+        Alert.alert(t("No Wallet"), t("No wallet available to delete."));
       }
-
-      // 可能还需要清除其他相关的本地存储数据
-      // 例如：清除用户身份信息、PIN码、Face ID设置等
-
-      // 显示成功信息
-      Alert.alert(
-        t("Success"),
-        t("Your wallet has been deleted successfully.")
-      );
-      navigation.goBack(); // 返回上一页或跳转到登录界面等
     } catch (error) {
       console.log("删除钱包时出错:", error);
       Alert.alert(
