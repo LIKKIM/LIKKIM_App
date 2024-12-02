@@ -13,7 +13,6 @@ const EXCHANGE_RATE_API_URL = "https://api.exchangerate-api.com/v4/latest/USD";
 const currencies = [
   { name: "Australian Dollar", shortName: "AUD" },
   { name: "Bahraini Dinar", shortName: "BHD" },
-  { name: "Bitcoin", shortName: "BTC" },
   { name: "Brazilian Real", shortName: "BRL" },
   { name: "British Pound", shortName: "GBP" },
   { name: "Canadian Dollar", shortName: "CAD" },
@@ -21,7 +20,6 @@ const currencies = [
   { name: "Czech Koruna", shortName: "CZK" },
   { name: "Danish Krone", shortName: "DKK" },
   { name: "Emirati Dirham", shortName: "AED" },
-  { name: "Ethereum", shortName: "ETH" },
   { name: "Euro", shortName: "EUR" },
   { name: "Hong Kong Dollar", shortName: "HKD" },
   { name: "Hungarian Forint", shortName: "HUF" },
@@ -114,9 +112,11 @@ export const CryptoProvider = ({ children }) => {
 
   // 更新加密货币地址的函数
   const updateCryptoAddress = (shortName, newAddress) => {
-    // 只处理 Ethereum (ETH) 的地址更新
-    if (shortName !== "ETH") {
-      // 如果不是 ETH 地址，直接更新地址，但不添加卡片到 Wallet Screen
+    // 只处理 ETH、BTC、SOL、BNB 的地址更新
+    const supportedChains = ["ETH", "BTC", "SOL", "BNB"];
+
+    if (!supportedChains.includes(shortName)) {
+      // 如果不是 ETH、BTC、SOL、BNB 地址，直接更新地址，但不添加卡片到 Wallet Screen
       setInitialAdditionalCryptos((prevCryptos) => {
         const updatedCryptos = prevCryptos.map((crypto) =>
           crypto.shortName === shortName
@@ -131,10 +131,10 @@ export const CryptoProvider = ({ children }) => {
         );
         return updatedCryptos;
       });
-      return; // 如果不是 ETH 地址，直接返回
+      return; // 如果不是 ETH、BTC、SOL 或 BNB 地址，直接返回
     }
 
-    // 只有 ETH 地址会更新并添加到 Wallet Screen
+    // 对 ETH、BTC、SOL、BNB 地址进行更新并添加到 Wallet Screen
     setInitialAdditionalCryptos((prevCryptos) => {
       const updatedCryptos = prevCryptos.map((crypto) =>
         crypto.shortName === shortName
@@ -171,18 +171,24 @@ export const CryptoProvider = ({ children }) => {
     });
   };
 
+  // 更新加密货币数据的函数
   const updateCryptoData = (shortName, newData) => {
-    setInitialAdditionalCryptos((prevCryptos) => {
-      const updatedCryptos = prevCryptos.map((crypto) =>
-        crypto.shortName === shortName ? { ...crypto, ...newData } : crypto
-      );
+    // 只更新 ETH、BTC、SOL、BNB 的数据
+    const supportedChains = ["ETH", "BTC", "SOL", "BNB"];
 
-      AsyncStorage.setItem(
-        "initialAdditionalCryptos",
-        JSON.stringify(updatedCryptos)
-      );
-      return updatedCryptos;
-    });
+    if (supportedChains.includes(shortName)) {
+      setInitialAdditionalCryptos((prevCryptos) => {
+        const updatedCryptos = prevCryptos.map((crypto) =>
+          crypto.shortName === shortName ? { ...crypto, ...newData } : crypto
+        );
+
+        AsyncStorage.setItem(
+          "initialAdditionalCryptos",
+          JSON.stringify(updatedCryptos)
+        );
+        return updatedCryptos;
+      });
+    }
   };
 
   const addCryptoCard = (chainName, walletAddress) => {
