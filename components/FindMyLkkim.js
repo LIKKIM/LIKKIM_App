@@ -25,6 +25,7 @@ import { useNavigation } from "@react-navigation/native";
 import { DarkModeContext } from "./CryptoContext";
 import { Swipeable } from "react-native-gesture-handler";
 import { useTranslation } from "react-i18next"; // 导入 useTranslation
+import { useLocales } from "expo-localization";
 
 const GOOGLE_MAPS_API_KEY = "AIzaSyAaLPaHuHj_vT7cHsA99HZeuAH_Z1p3Xbg"; // Google API 密钥
 const GAODE_MAP_API_KEY = "c48411da5c359aa1f6f685dd52dd372b"; // 高德 API 密钥
@@ -78,6 +79,40 @@ const getAddressFromLatLng = async (lat, lng) => {
   }
 };
 
+
+/**
+ * 高德地址解析
+ */
+const getAddressFromLatLngGD = async (lat, lng) => {
+
+  console.warn(`TEST:高德经纬度：${lat},${lng}`);
+
+  let geoData = await fetch(`https://restapi.amap.com/v3/geocode/regeo?key=${GAODE_MAP_API_KEY}&location=${lng},${lat}&extensions=all`).then((res) => res.json());
+  if (geoData.status == 1 && geoData.regeocode.addressComponent.adcode.length > 0) {
+
+    console.warn('Test高德逆地址解析成功');
+    console.log(geoData.regeocode.pois[0]);
+
+    let d = geoData.regeocode.addressComponent;
+    let _address = `${d.city}${d.district}${d.township}${d.streetNumber.street}${d.streetNumber.number}(${geoData.regeocode.pois.length > 0 ? geoData.regeocode.pois[0].name : ''})`;
+
+    console.warn('Test高德地址解析：' + _address);
+
+
+
+    return _address;
+
+  } else {
+    console.warn('高德地址逆解析失败：');
+    console.warn(geoData.regeocode);
+
+    return 'Address Fetch Failed.'
+  }
+
+
+
+}
+
 const loadConnectedDevices = async (
   setDevicesPositions,
   setDeviceAddresses
@@ -89,6 +124,7 @@ const loadConnectedDevices = async (
       const devicesWithAddresses = await Promise.all(
         devices.map(async (device) => {
           const address = await getAddressFromLatLng(device.lat, device.lng);
+          //const address = await getAddressFromLatLngGD(device.lat, device.lng);
           setDeviceAddresses((prev) => ({
             ...prev,
             [device.id]: address,
@@ -117,6 +153,9 @@ export default function FindMyLkkim() {
   const mapRef = useRef(null);
   const screenHeight = Dimensions.get("window").height;
   const listHeight = screenHeight * 0.3;
+
+
+  const locales = useLocales();
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -240,6 +279,18 @@ export default function FindMyLkkim() {
     }
   };
 
+
+  //TODO 高德
+  useEffect(() => {
+
+
+    console.log(locales)
+
+    //测试地址：广州南站附近
+    getAddressFromLatLngGD(22.989943, 113.268858);
+
+  }, [])
+
   return (
     <View style={{ flex: 1 }}>
       <View style={styles.container}>
@@ -276,14 +327,14 @@ export default function FindMyLkkim() {
                   justifyContent: "center",
                   ...(Platform.OS === "ios"
                     ? {
-                        shadowColor: "#000",
-                        shadowOffset: { width: 0, height: 0 },
-                        shadowOpacity: 0.5,
-                        shadowRadius: 5,
-                      }
+                      shadowColor: "#000",
+                      shadowOffset: { width: 0, height: 0 },
+                      shadowOpacity: 0.5,
+                      shadowRadius: 5,
+                    }
                     : {
-                        elevation: 5,
-                      }),
+                      elevation: 5,
+                    }),
                 }}
               >
                 <Image
