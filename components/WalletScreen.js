@@ -164,11 +164,52 @@ function WalletScreen({ route, navigation }) {
 
   // 定义下拉刷新执行的函数
   const onRefresh = React.useCallback(() => {
-    setRefreshing(true);
-    setTimeout(() => {
-      setRefreshing(false);
-    }, 2000);
-  }, []);
+    setRefreshing(true); // 显示刷新状态
+
+    // 调用价格刷新函数
+    const fetchPriceChanges = async () => {
+      if (cryptoCards.length === 0) {
+        setRefreshing(false); // 没有卡片时直接停止刷新
+        return;
+      }
+
+      const instIds = cryptoCards
+        .map((card) => `${card.shortName}-USD`)
+        .join(",");
+
+      try {
+        const response = await fetch(
+          `https://df.likkim.com/api/market/index-tickers?instId=${instIds}`
+        );
+        const data = await response.json();
+
+        if (data.code === 0 && data.data) {
+          const changes = {};
+
+          // 更新每个卡片的价格变化数据
+          Object.keys(data.data).forEach((key) => {
+            const shortName = key.replace("$", "").split("-")[0]; // 提取币种名称
+            const ticker = data.data[key];
+
+            changes[shortName] = {
+              priceChange: ticker.last || "0", // 最新价格
+              percentageChange: ticker.changePercent || "0", // 百分比变化
+            };
+          });
+
+          setPriceChanges(changes); // 更新状态
+          //   console.log("Price changes updated:", changes);
+        }
+      } catch (error) {
+        console.log("Error fetching price changes:", error);
+      } finally {
+        setRefreshing(false); // 无论成功还是失败，都停止刷新动画
+      }
+    };
+
+    fetchPriceChanges(); // 调用刷新函数
+  }, [cryptoCards]); // 依赖于 cryptoCards 的更新
+
   const bleManagerRef = useRef(null);
 
   //安卓高版本申请蓝牙权限
@@ -1212,6 +1253,8 @@ function WalletScreen({ route, navigation }) {
   }, [cryptoCards]);
 
   useEffect(() => {
+    let intervalId; // 定时器 ID
+
     const fetchPriceChanges = async () => {
       if (cryptoCards.length === 0) return; // 没有卡片时不请求
 
@@ -1246,8 +1289,21 @@ function WalletScreen({ route, navigation }) {
       }
     };
 
+    // 初次调用
     fetchPriceChanges();
-  }, [cryptoCards]); // 依赖于 cryptoCards 更新
+
+    // 设置定时器，每隔 30 秒刷新一次价格
+    intervalId = setInterval(() => {
+      fetchPriceChanges();
+    }, 300000); // 每 5 分钟刷新一次
+
+    // 清理定时器，防止内存泄漏
+    return () => {
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
+    };
+  }, [cryptoCards]); // 依赖于 cryptoCards
 
   // 停止监听
   useEffect(() => {
