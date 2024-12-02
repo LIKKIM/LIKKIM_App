@@ -1295,7 +1295,7 @@ function WalletScreen({ route, navigation }) {
     // 设置定时器，每隔 30 秒刷新一次价格
     intervalId = setInterval(() => {
       fetchPriceChanges();
-    }, 300000); // 每 5 分钟刷新一次
+    }, 60000); // 每 1 分钟刷新一次
 
     // 清理定时器，防止内存泄漏
     return () => {
