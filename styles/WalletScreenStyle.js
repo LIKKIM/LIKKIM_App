@@ -468,7 +468,7 @@ const WalletScreenStyles = (isDarkMode) => {
 
     addWalletButtonText: {
       color: "#fff",
-      fontSize: 16,
+      fontSize: 20,
       fontWeight: "bold",
     },
 
@@ -953,12 +953,6 @@ const WalletScreenStyles = (isDarkMode) => {
       textAlign: "center",
       fontSize: 40,
       marginBottom: 30,
-    },
-
-    addWalletButtonText: {
-      color: "#fff",
-      fontSize: 18,
-      fontWeight: "bold",
     },
 
     // 钱包信息样式
