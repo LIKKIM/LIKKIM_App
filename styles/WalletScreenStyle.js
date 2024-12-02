@@ -441,8 +441,8 @@ const WalletScreenStyles = (isDarkMode) => {
     // 添加钱包图片样式
     addWalletImage: {
       marginTop: -110,
-      width: 300,
-      height: 170,
+      width: 326,
+      height: 206,
       borderRadius: 20,
       overflow: "hidden",
       justifyContent: "center",
