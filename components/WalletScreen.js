@@ -1213,32 +1213,42 @@ function WalletScreen({ route, navigation }) {
 
   useEffect(() => {
     const fetchPriceChanges = async () => {
-      const changes = {};
-      for (const card of cryptoCards) {
-        try {
-          const response = await fetch(
-            `https://df.likkim.com/api/market/index-tickers?instId=${card.shortName}-USD`
-          );
-          const data = await response.json();
-          if (data.code === 0 && data.data) {
-            changes[card.shortName] = {
-              priceChange: data.data.last, // 保存最新价格
-              percentageChange: data.data.changePercent, // 直接使用API返回的百分比变化
+      if (cryptoCards.length === 0) return; // 没有卡片时不请求
+
+      const instIds = cryptoCards
+        .map((card) => `${card.shortName}-USD`)
+        .join(",");
+
+      try {
+        const response = await fetch(
+          `https://df.likkim.com/api/market/index-tickers?instId=${instIds}`
+        );
+        const data = await response.json();
+
+        if (data.code === 0 && data.data) {
+          const changes = {};
+
+          // 解析返回的 'data' 对象，按币种进行更新
+          Object.keys(data.data).forEach((key) => {
+            const shortName = key.replace("$", "").split("-")[0]; // 提取币种名称
+            const ticker = data.data[key];
+
+            changes[shortName] = {
+              priceChange: ticker.last || "0", // 最新价格
+              percentageChange: ticker.changePercent || "0", // 百分比变化
             };
-          }
-        } catch (error) {
-          console.log(
-            `Error fetching price change for ${card.shortName}:`,
-            error
-          );
+          });
+
+          setPriceChanges(changes); // 更新状态
         }
+      } catch (error) {
+        console.log("Error fetching price changes:", error);
       }
-      setPriceChanges(changes);
     };
-    if (cryptoCards.length > 0) {
-      fetchPriceChanges();
-    }
-  }, [cryptoCards]);
+
+    fetchPriceChanges();
+  }, [cryptoCards]); // 依赖于 cryptoCards 更新
+
   // 停止监听
   useEffect(() => {
     if (!pinModalVisible) {
