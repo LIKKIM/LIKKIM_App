@@ -857,7 +857,7 @@ function TransactionsScreen() {
       }
     }
   };
-  // 显示地址函数
+  // 显示地址函数 发送数据写法
   const showLIKKIMAddressCommand = async (device, coinType) => {
     try {
       // 检查设备对象是否有效
