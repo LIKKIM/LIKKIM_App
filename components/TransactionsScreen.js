@@ -216,8 +216,8 @@ function TransactionsScreen() {
 
     loadTransactionHistory();
   }, []); // 依赖数组为空，确保此操作仅在组件挂载时执行一次
-
-  useEffect(() => {
+  // 余额查询
+  /*   useEffect(() => {
     if (amountModalVisible && !hasFetchedBalance) {
       const fetchTokenBalanceAndFee = async () => {
         try {
@@ -353,7 +353,7 @@ function TransactionsScreen() {
     selectedCrypto,
     initialAdditionalCryptos,
     updateCryptoData,
-  ]);
+  ]); */
 
   // 监听 initialAdditionalCryptos 的变化，更新 Modal 中的数据
   useEffect(() => {
