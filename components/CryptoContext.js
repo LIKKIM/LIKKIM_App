@@ -8,7 +8,8 @@ export const CryptoContext = createContext();
 export const DarkModeContext = createContext();
 
 // 汇率API的URL
-const EXCHANGE_RATE_API_URL = "https://api.exchangerate-api.com/v4/latest/USD";
+const NEW_EXCHANGE_RATE_API_URL =
+  "https://df.likkim.com/api/market/exchange-rate";
 
 const currencies = [
   { name: "Australian Dollar", shortName: "AUD" },
@@ -227,30 +228,33 @@ export const CryptoProvider = ({ children }) => {
     });
   };
 
-  // 汇率获取函数
-  const fetchExchangeRates = async () => {
+  useEffect(() => {
+    fetchAndStoreExchangeRates();
+  }, []);
+
+  const fetchAndStoreExchangeRates = async () => {
     try {
-      const response = await fetch(EXCHANGE_RATE_API_URL);
+      const response = await fetch(NEW_EXCHANGE_RATE_API_URL, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       const data = await response.json();
-      setExchangeRates(data.rates); // 保存汇率数据
-      await AsyncStorage.setItem("exchangeRates", JSON.stringify(data.rates)); // 保存到AsyncStorage
-      //  console.log("最新汇率: ", data.rates);
+      if (data.code === 0 && data.data) {
+        console.log("API返回的汇率数据:", data.data);
+        setExchangeRates(data.data);
+        await AsyncStorage.setItem("exchangeRates", JSON.stringify(data.data));
+      } else {
+        console.error("获取汇率数据失败: ", data.msg);
+      }
     } catch (error) {
-      console.error("获取汇率数据失败: ", error);
+      console.error("请求汇率数据出错: ", error);
     }
   };
 
-  // 加载本地存储的汇率数据
-  const loadExchangeRates = async () => {
-    try {
-      const savedRates = await AsyncStorage.getItem("exchangeRates");
-      if (savedRates !== null) {
-        setExchangeRates(JSON.parse(savedRates)); // 从本地加载汇率
-      }
-    } catch (error) {
-      console.error("加载汇率数据失败: ", error);
-    }
-  };
+  // 汇率数据状态
+  //const [exchangeRates, setExchangeRates] = useState({});
 
   useEffect(() => {
     const loadTransactionHistory = async () => {
@@ -349,7 +353,7 @@ export const CryptoProvider = ({ children }) => {
         }
 
         // 加载本地汇率数据
-        await loadExchangeRates();
+        //   await loadExchangeRates();
       } catch (error) {
         console.error("Error loading settings: ", error);
       } finally {
@@ -404,12 +408,12 @@ export const CryptoProvider = ({ children }) => {
     initialAdditionalCryptosState,
   ]);
 
-  // 每小时更新汇率
+  /*   // 每小时更新汇率
   useEffect(() => {
     fetchExchangeRates(); // 初次加载时获取汇率
     const intervalId = setInterval(fetchExchangeRates, 3600000); // 每小时更新汇率
     return () => clearInterval(intervalId); // 清理定时器
-  }, []);
+  }, []); */
 
   const toggleScreenLock = async (enabled) => {
     setIsAppLaunching(false);
