@@ -1037,10 +1037,36 @@ function TransactionsScreen() {
       // 打印所选币种
       console.log("选择的币种:", selectedCrypto);
 
-      if (selectedCrypto !== "ETH") {
-        console.log("暂时仅支持 ETH");
+      // EVM 区块链映射
+      const evmChainMapping = {
+        arbitrum: "ARB",
+        aurora: "AURORA",
+        avalanche: "AVAX",
+        binance: "BNB",
+        celo: "CELO",
+        ethereum: "ETH",
+        ethereum_classic: "ETC",
+        fantom: "FTM",
+        gnosis: "GNO",
+        huobi: "HTX",
+        iotext: "IOTX",
+        lina: "LINEA",
+        okb: "OKB",
+        optimism: "OP",
+        polygon: "POL",
+        ronin: "RON",
+        zksync: "ZKSYNC",
+      };
+
+      // 检查是否支持该币种
+      if (!(selectedCrypto in evmChainMapping)) {
+        console.log(`不支持的币种: ${selectedCrypto}`);
         return;
       }
+
+      const chainKey = evmChainMapping[selectedCrypto]; // 获取对应的链标识
+
+      console.log("选择的链标识:", chainKey);
 
       // 第一步：获取 nonce 和 gasPrice
       const walletParamsResponse = await fetch(
@@ -1051,7 +1077,7 @@ function TransactionsScreen() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            chain: "eth", // 固定为以太坊链
+            chain: chainKey, // 使用获取的链标识
             address: paymentAddress, // 使用 paymentAddress 参数
           }),
         }
@@ -1080,11 +1106,11 @@ function TransactionsScreen() {
 
       // 第二步：构造 POST 请求数据
       const requestData = {
-        chainKey: "ethereum", // 链标识
+        chainKey: chainKey, // 使用对应的链标识
         nonce: nonce, // 使用原始的 nonce 值
-        gasLimit: 23000, // 固定的 gas 限制
+        gasLimit: 53000, // 更新的 gas 限制为 53000
         gasPrice: gasPrice, // 不进行任何转换，直接使用返回的 gasPrice
-        value: parseFloat(amount), // 转账金额（单位：ETH）
+        value: amount, // 直接使用传入的 amount，不再使用 parseFloat
         to: inputAddress, // 目标地址
         contractAddress: "", // 没有合约调用
         contractValue: null, // 没有合约调用
