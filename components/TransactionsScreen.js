@@ -1125,10 +1125,10 @@ function TransactionsScreen() {
         nonce: nonce, // 使用原始的 nonce 值
         gasLimit: 53000, // 更新的 gas 限制为 53000
         gasPrice: gasPrice, // 不进行任何转换，直接使用返回的 gasPrice
-        value: amount, // 直接使用传入的 amount
+        value: Number(amount), // 确保金额为数字类型
         to: inputAddress, // 目标地址
         contractAddress: "", // 没有合约调用
-        contractValue: null, // 没有合约调用
+        contractValue: 0,
       };
 
       // 打印 requestData
