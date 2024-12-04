@@ -1788,7 +1788,7 @@ function TransactionsScreen() {
                     {t("Payment Address")}:
                   </Text>
                   {"\n"}
-                  {paymentAddress}
+                  {` ${selectedAddress}`}
                 </Text>
 
                 <Text style={TransactionsScreenStyle.transactionText}>
