@@ -1103,7 +1103,7 @@ function TransactionsScreen() {
         return;
       }
 
-      // 打印接口返回的完整数据
+      // 获取接口返回数据
       const walletParamsData = await walletParamsResponse.json();
       console.log("getSignParam 返回的数据:", walletParamsData);
 
@@ -1115,9 +1115,7 @@ function TransactionsScreen() {
         return;
       }
 
-      const { gasPrice, nonce } = walletParamsData.data; // 访问 data 下的 gasPrice 和 nonce
-
-      console.log("解析后的参数:", { gasPrice, nonce });
+      const { gasPrice, nonce } = walletParamsData.data;
 
       // 第二步：构造 POST 请求数据
       const requestData = {
@@ -1131,7 +1129,6 @@ function TransactionsScreen() {
         contractValue: 0,
       };
 
-      // 打印 requestData
       console.log("构造的请求数据:", JSON.stringify(requestData, null, 2));
 
       // 第三步：发送交易请求
@@ -1146,24 +1143,35 @@ function TransactionsScreen() {
         }
       );
 
-      /*       if (!response.ok) {
-        console.log("生成待签名数据失败，响应状态码:", response.status);
-        return;
-      } */
-
       const responseData = await response.json();
 
-      // 打印返回的 data.data
+      // 打印返回的数据
       if (responseData?.data?.data) {
         console.log("返回的数据:", responseData.data.data);
+
+        // 将返回的 UTF-8 格式的数据发送给嵌入式设备
+        try {
+          // 将返回的数据（UTF-8）转换为 Buffer
+          const bufferMessage = Buffer.from(responseData.data.data, "utf-8"); // 直接作为 UTF-8 编码
+          const base64Message = bufferMessage.toString("base64"); // 转换为 Base64 格式
+
+          // 发送 Base64 编码的数据给设备
+          await device.writeCharacteristicWithResponseForService(
+            serviceUUID,
+            writeCharacteristicUUID,
+            base64Message
+          );
+
+          console.log("数据已成功发送给设备");
+        } catch (error) {
+          console.log("发送数据给设备时发生错误:", error);
+        }
       } else {
         console.log("返回的数据不包含 'data' 字段");
       }
 
-      console.log("签名成功，返回值为:", responseData);
       return responseData; // 返回签名结果
     } catch (error) {
-      // 捕获错误并打印
       console.log("处理交易失败:", error.message || error);
     }
   };
