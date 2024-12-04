@@ -1146,10 +1146,10 @@ function TransactionsScreen() {
         }
       );
 
-      if (!response.ok) {
+      /*       if (!response.ok) {
         console.log("生成待签名数据失败，响应状态码:", response.status);
         return;
-      }
+      } */
 
       const responseData = await response.json();
 
