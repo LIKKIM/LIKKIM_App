@@ -1076,6 +1076,10 @@ function TransactionsScreen() {
 
       console.log("选择的链标识:", chainKey);
 
+      // 打印请求的链标识和支付地址
+      console.log("请求的链标识:", selectedCrypto); // 使用 selectedCrypto
+      console.log("请求的支付地址:", paymentAddress);
+
       // 第一步：获取 nonce 和 gasPrice
       const walletParamsResponse = await fetch(
         "https://df.likkim.com/api/wallet/getSignParam",
@@ -1085,7 +1089,7 @@ function TransactionsScreen() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            chain: evmChainMapping[chainKey], // 使用获取的链标识
+            chain: selectedCrypto, // 直接使用 selectedCrypto 作为 chain
             address: paymentAddress, // 使用 paymentAddress 参数
           }),
         }
@@ -1114,7 +1118,7 @@ function TransactionsScreen() {
 
       // 第二步：构造 POST 请求数据
       const requestData = {
-        chainKey: evmChainMapping[chainKey], // 使用对应的链标识
+        chainKey: selectedCrypto, // 使用对应的链标识
         nonce: nonce, // 使用原始的 nonce 值
         gasLimit: 53000, // 更新的 gas 限制为 53000
         gasPrice: gasPrice, // 不进行任何转换，直接使用返回的 gasPrice
