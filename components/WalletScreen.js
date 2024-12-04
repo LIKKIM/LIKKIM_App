@@ -284,14 +284,14 @@ function WalletScreen({ route, navigation }) {
   };
   const getConvertedBalance = (cardBalance, cardShortName) => {
     // 打印原始卡余额
-    console.log(`Original card balance: ${cardBalance}`);
+    // console.log(`Original card balance: ${cardBalance}`);
 
     const rate = exchangeRates[currencyUnit]; // 当前法定货币的汇率
     const cryptoToUsdRate = exchangeRates[cardShortName] || 1; // 加密货币对美元的汇率，默认为1
 
     // 打印汇率信息
-    console.log(`Rate for ${currencyUnit}: ${rate}`);
-    console.log(`Crypto to USD rate for ${cardShortName}: ${cryptoToUsdRate}`);
+    // console.log(`Rate for ${currencyUnit}: ${rate}`);
+    //  console.log(`Crypto to USD rate for ${cardShortName}: ${cryptoToUsdRate}`);
 
     if (!rate) {
       return cardBalance; // 如果没有找到汇率，返回原始余额
@@ -299,12 +299,12 @@ function WalletScreen({ route, navigation }) {
 
     const usdBalance = cardBalance * cryptoToUsdRate; // 将加密货币余额转换为 USD
     // 打印转换后的 USD 余额
-    console.log(`USD Balance: ${usdBalance}`);
+    //  console.log(`USD Balance: ${usdBalance}`);
 
     // 计算并返回法定货币的余额，并保留两位小数
     const finalBalance = (usdBalance * rate).toFixed(2);
     // 打印最终转换后的余额
-    console.log(`Converted Balance in ${currencyUnit}: ${finalBalance}`);
+    //  console.log(`Converted Balance in ${currencyUnit}: ${finalBalance}`);
 
     return finalBalance;
   };
@@ -312,21 +312,6 @@ function WalletScreen({ route, navigation }) {
   useEffect(() => {
     console.log("Updated cryptoCards:", cryptoCards);
   }, [cryptoCards]);
-
-  useEffect(() => {
-    // 同步 initialAdditionalCryptos 中的 balance 到 cryptoCards
-    const updatedCryptoCards = cryptoCards.map((card) => {
-      const matchingCrypto = initialAdditionalCryptos.find(
-        (crypto) => crypto.shortName === card.shortName
-      );
-      if (matchingCrypto) {
-        return { ...card, balance: matchingCrypto.balance };
-      }
-      return card;
-    });
-
-    setCryptoCards(updatedCryptoCards);
-  }, [initialAdditionalCryptos]);
 
   useEffect(() => {
     setAddedCryptos(cryptoCards);
