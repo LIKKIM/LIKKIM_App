@@ -496,7 +496,7 @@ function TransactionsScreen() {
           "fantom:": "FTM", // Fantom
           "huobi:": "HTX", // Huobi Token
           "iotex:": "IOTX", // IoTeX
-          "okx:": "OKB", // OKB
+          "okx:": "OKT", // OKT
           "polygon:": "POL", // Polygon
           "ripple:": "XRP", // Ripple
           "tron:": "TRX", // Tron
@@ -936,7 +936,7 @@ function TransactionsScreen() {
         case "IOTX":
           commandString = `address:iote`; // IoTeX
           break;
-        case "OKB":
+        case "OKT":
           commandString = `address:okx`; // OKX Chain
           break;
         case "POL":
@@ -1051,7 +1051,7 @@ function TransactionsScreen() {
         huobi: "HTX",
         iotext: "IOTX",
         lina: "LINEA",
-        okb: "OKB",
+        OKT: "OKT",
         optimism: "OP",
         polygon: "POL",
         ronin: "RON",

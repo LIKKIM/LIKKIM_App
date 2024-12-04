@@ -197,7 +197,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
     "Huobi ECO Chain": require("../../assets/icon/HTIcon.png"),
     "IoTeX Network Mainnet": require("../../assets/icon/IOTXIcon.png"),
     Litecoin: require("../../assets/icon/LTCIcon.png"),
-    "OKX Chain": require("../../assets/icon/OKBIcon.png"),
+    "OKX Chain": require("../../assets/icon/OKTIcon.png"),
     Optimism: require("../../assets/icon/OPIcon.png"),
     Polygon: require("../../assets/icon/PolygonIcon.png"),
     Ripple: require("../../assets/icon/XRPIcon.png"),

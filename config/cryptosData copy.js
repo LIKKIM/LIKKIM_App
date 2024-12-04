@@ -274,18 +274,18 @@ export const initialAdditionalCryptos = [
     priceUsd: "7.0",
   },
 
-  // OKX Chain (OKB)
+  // OKX Chain (OKT)
   {
-    name: "OKB",
-    shortName: "OKB",
+    name: "OKT",
+    shortName: "OKT",
     balance: "0.0",
-    icon: require("../assets/icon/OKBIcon.png"),
+    icon: require("../assets/icon/OKTIcon.png"),
     cardImage: require("../assets/CardBg/Card15.png"),
     address: "0xxyz...",
     chain: "OKX Chain",
-    chainShortName: "OKB",
-    queryChainShortName: "OKB",
-    chainIcon: require("../assets/icon/OKBIcon.png"),
+    chainShortName: "OKT",
+    queryChainShortName: "OKT",
+    chainIcon: require("../assets/icon/OKTIcon.png"),
     tokenType: "ERC20",
     fee: "0.003",
     valueUsd: "0.0",

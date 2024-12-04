@@ -636,7 +636,7 @@ function MyColdWalletScreen() {
           "fantom:": "FTM", // Fantom
           "huobi:": "HTX", // Huobi Token
           "iotex:": "IOTX", // IoTeX
-          "okx:": "OKB", // OKB
+          "okx:": "OKT", // OKT
           "polygon:": "POL", // Polygon
           "ripple:": "XRP", // Ripple
           "tron:": "TRX", // Tron
