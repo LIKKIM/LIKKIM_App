@@ -1023,7 +1023,7 @@ function TransactionsScreen() {
   const signTransaction = async (
     device,
     amount, // 转账金额
-    paymentAddress,
+    paymentAddress, // 传递 selectedCryptoObj.address
     inputAddress, // 收款地址
     selectedCrypto // 选择的加密货币
   ) => {
@@ -1044,7 +1044,7 @@ function TransactionsScreen() {
         avalanche: "AVAX",
         binance: "BNB",
         celo: "CELO",
-        ethereum: ["ETH", "USDT"], // ETH 和 USDT 映射到 ethereum
+        ethereum: ["ETH", "TEST"], // ETH 和 TEST 映射到 ethereum
         ethereum_classic: "ETC",
         fantom: "FTM",
         gnosis: "GNO",
@@ -1078,18 +1078,18 @@ function TransactionsScreen() {
 
       // 打印请求的链标识和支付地址
       console.log("请求的链标识:", selectedCrypto); // 使用 selectedCrypto
-      console.log("请求的支付地址:", paymentAddress);
+      console.log("请求的支付地址:", paymentAddress); // 使用 paymentAddress
 
       // 第一步：获取 nonce 和 gasPrice
       const walletParamsResponse = await fetch(
-        "https://df.likkim.com/api/wallet/getSignParam",
+        "https://bt.likkim.com/api/wallet/getSignParam",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            chain: selectedCrypto, // 直接使用 selectedCrypto 作为 chain
+            chain: selectedCrypto, // 使用 selectedCrypto 作为 chain
             address: paymentAddress, // 使用 paymentAddress 参数
           }),
         }
@@ -1107,30 +1107,36 @@ function TransactionsScreen() {
       const walletParamsData = await walletParamsResponse.json();
       console.log("getSignParam 返回的数据:", walletParamsData);
 
-      if (!walletParamsData.gasPrice || walletParamsData.nonce == null) {
+      if (
+        !walletParamsData.data?.gasPrice ||
+        walletParamsData.data?.nonce == null
+      ) {
         console.log("接口返回数据不完整:", walletParamsData);
         return;
       }
 
-      const { gasPrice, nonce } = walletParamsData;
+      const { gasPrice, nonce } = walletParamsData.data; // 访问 data 下的 gasPrice 和 nonce
 
       console.log("解析后的参数:", { gasPrice, nonce });
 
       // 第二步：构造 POST 请求数据
       const requestData = {
-        chainKey: selectedCrypto, // 使用对应的链标识
+        chainKey: chainKey, // 修正为链标识
         nonce: nonce, // 使用原始的 nonce 值
         gasLimit: 53000, // 更新的 gas 限制为 53000
         gasPrice: gasPrice, // 不进行任何转换，直接使用返回的 gasPrice
-        value: amount, // 直接使用传入的 amount，不再使用 parseFloat
+        value: amount, // 直接使用传入的 amount
         to: inputAddress, // 目标地址
         contractAddress: "", // 没有合约调用
         contractValue: null, // 没有合约调用
       };
 
+      // 打印 requestData
+      console.log("构造的请求数据:", JSON.stringify(requestData, null, 2));
+
       // 第三步：发送交易请求
       const response = await fetch(
-        "https://df.likkim.com/api/sign/encode_evm",
+        "https://bt.likkim.com/api/sign/encode_evm",
         {
           method: "POST",
           headers: {
@@ -1141,7 +1147,7 @@ function TransactionsScreen() {
       );
 
       if (!response.ok) {
-        console.log("签名失败，响应状态码:", response.status);
+        console.log("生成待签名数据失败，响应状态码:", response.status);
         return;
       }
 
@@ -1775,13 +1781,27 @@ function TransactionsScreen() {
                       );
                       if (!device) throw new Error("未找到匹配的设备");
 
-                      // 传递 amount, paymentAddress, inputAddress, selectedCrypto 给签名函数
+                      // 获取 selectedCryptoObj
+                      const selectedCryptoObj = initialAdditionalCryptos.find(
+                        (crypto) => crypto.shortName === selectedCrypto
+                      );
+
+                      if (!selectedCryptoObj) {
+                        throw new Error(`未找到加密货币：${selectedCrypto}`);
+                      }
+
+                      console.log(
+                        "选择的加密货币:",
+                        selectedCryptoObj.shortName
+                      );
+
+                      // 调用签名函数
                       await signTransaction(
                         device,
                         amount, // 传递金额
-                        paymentAddress,
-                        inputAddress, // 收款地址
-                        selectedCrypto // 币种
+                        selectedCryptoObj.address, // 传递 selectedCryptoObj.address 作为 paymentAddress
+                        inputAddress, // 传递收款地址
+                        selectedCryptoObj.shortName // 传递 selectedCryptoObj.shortName 作为 selectedCrypto
                       );
 
                       setConfirmModalVisible(false);
