@@ -277,18 +277,36 @@ function WalletScreen({ route, navigation }) {
 
   const [bleVisible, setBleVisible] = useState(false); // New state for Bluetooth modal
 
+  // 函数获取指定卡的余额
+  const getCardBalance = (cardShortName) => {
+    const card = cryptoCards.find((c) => c.shortName === cardShortName);
+    return card ? card.balance : "Card not found";
+  };
   const getConvertedBalance = (cardBalance, cardShortName) => {
-    // 获取到当前的法定货币汇率
-    const rate = exchangeRates[currencyUnit]; // 当前法定货币的汇率（例如 USD, CNY 等）
-    const cryptoToUsdRate = exchangeRates[cardShortName] || 1; // 加密货币兑换 USD 的汇率
+    // 打印原始卡余额
+    console.log(`Original card balance: ${cardBalance}`);
+
+    const rate = exchangeRates[currencyUnit]; // 当前法定货币的汇率
+    const cryptoToUsdRate = exchangeRates[cardShortName] || 1; // 加密货币对美元的汇率，默认为1
+
+    // 打印汇率信息
+    console.log(`Rate for ${currencyUnit}: ${rate}`);
+    console.log(`Crypto to USD rate for ${cardShortName}: ${cryptoToUsdRate}`);
 
     if (!rate) {
       return cardBalance; // 如果没有找到汇率，返回原始余额
     }
 
-    // 将加密货币余额转换为 USD，再转换为目标货币
-    const usdBalance = cardBalance * cryptoToUsdRate;
-    return (usdBalance * rate).toFixed(2); // 返回法定货币的余额并保留两位小数
+    const usdBalance = cardBalance * cryptoToUsdRate; // 将加密货币余额转换为 USD
+    // 打印转换后的 USD 余额
+    console.log(`USD Balance: ${usdBalance}`);
+
+    // 计算并返回法定货币的余额，并保留两位小数
+    const finalBalance = (usdBalance * rate).toFixed(2);
+    // 打印最终转换后的余额
+    console.log(`Converted Balance in ${currencyUnit}: ${finalBalance}`);
+
+    return finalBalance;
   };
 
   useEffect(() => {
@@ -1666,9 +1684,14 @@ function WalletScreen({ route, navigation }) {
   };
 
   const calculateTotalBalance = () => {
-    return cryptoCards
-      .reduce((total, card) => total + parseFloat(card.balance), 0)
-      .toFixed(2);
+    const totalBalance = cryptoCards.reduce((total, card) => {
+      const convertedBalance = parseFloat(
+        getConvertedBalance(card.balance, card.shortName)
+      );
+      return total + convertedBalance;
+    }, 0);
+
+    return totalBalance.toFixed(2);
   };
 
   const animatedCardStyle = (index) => {
