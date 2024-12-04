@@ -1058,6 +1058,41 @@ function TransactionsScreen() {
         zksync: "ZKSYNC",
       };
 
+      // 支付路径映射
+      const cryptoPathMapping = {
+        bitcoin: "m/49'/0'/0'/0/0",
+        ethereum: "m/44'/60'/0'/0/0",
+        tron: "m/44'/195'/0'/0/0",
+        bitcoin_cash: "m/44'/145'/0'/0/0",
+        binance: "m/44'/60'/0'/0/0",
+        optimism: "m/44'/60'/0'/0/0",
+        ethereum_classic: "m/44'/60'/0'/0/0",
+        litecoin: "m/49'/2'/0'/0/0",
+        ripple: "m/44'/144'/0'/0/0",
+        solana: "m/44'/501'/0'/0/0",
+        arbitrum: "m/44'/60'/0'/0/0",
+        cosmos: "m/44'/118'/0'/0/0",
+        celestia: "m/44'/118'/0'/0/0",
+        cronos: "m/44'/60'/0'/0/0",
+        juno: "m/44'/118'/0'/0/0",
+        osmosis: "m/44'/118'/0'/0/0",
+        aurora: "m/44'/60'/0'/0/0",
+        avalanche: "m/44'/60'/0'/0/0",
+        celo: "m/44'/60'/0'/0/0",
+        fantom: "m/44'/60'/0'/0/0",
+        gnosis: "m/44'/60'/0'/0/0",
+        huobi: "m/44'/60'/0'/0/0",
+        iotex: "m/44'/60'/0'/0/0",
+        okx: "m/44'/60'/0'/0/0",
+        polygon: "m/44'/60'/0'/0/0",
+        zksync: "m/44'/60'/0'/0/0",
+        aptos: "m/44'/637'/0'/0'/0",
+        sui: "m/44'/784'/0'/0'/0",
+        cardano: "m/1852'/1815'/0'/0/0",
+        linea: "m/44'/60'/0'/0/0",
+        ronin: "m/44'/60'/0'/0/0",
+      };
+
       // 将 selectedCrypto 转换为大写，确保一致性
       const selectedCryptoUpper = selectedCrypto.toUpperCase();
 
@@ -1076,9 +1111,15 @@ function TransactionsScreen() {
 
       console.log("选择的链标识:", chainKey);
 
-      // 打印请求的链标识和支付地址
-      console.log("请求的链标识:", selectedCrypto); // 使用 selectedCrypto
-      console.log("请求的支付地址:", paymentAddress); // 使用 paymentAddress
+      // 使用 chainKey 查找对应的路径
+      const path = cryptoPathMapping[chainKey];
+
+      if (!path) {
+        console.log(`不支持的路径: ${chainKey}`);
+        return;
+      }
+
+      console.log("选择的路径:", path); // 打印选择的路径
 
       // 第一步：获取 nonce 和 gasPrice
       const walletParamsResponse = await fetch(
@@ -1119,7 +1160,7 @@ function TransactionsScreen() {
 
       // 第二步：构造 POST 请求数据
       const requestData = {
-        chainKey: chainKey, // 修正为链标识
+        chainKey: selectedCrypto, // 使用 selectedCrypto 作为链标识
         nonce: nonce, // 使用原始的 nonce 值
         gasLimit: 53000, // 更新的 gas 限制为 53000
         gasPrice: gasPrice, // 不进行任何转换，直接使用返回的 gasPrice
@@ -1150,7 +1191,7 @@ function TransactionsScreen() {
         console.log("返回的数据:", responseData.data.data);
 
         // 构建要发送的字符串
-        const signMessage = `sign:${chainKey},m/44'/60'/0'/0/0,${responseData.data.data}`;
+        const signMessage = `sign:${chainKey},${path},${responseData.data.data}`;
         console.log("构建的发送消息:", signMessage);
 
         // 将构建的字符串转换为 Base64 编码
