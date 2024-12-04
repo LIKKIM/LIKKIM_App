@@ -1023,8 +1023,8 @@ function TransactionsScreen() {
   const signTransaction = async (
     device,
     amount, // 转账金额
-    inputAddress, // 目标地址
-    paymentAddress, // 用户的支付地址
+    paymentAddress,
+    inputAddress, // 收款地址
     selectedCrypto // 选择的加密货币
   ) => {
     try {
