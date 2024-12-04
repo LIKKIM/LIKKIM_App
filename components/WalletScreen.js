@@ -855,7 +855,7 @@ function WalletScreen({ route, navigation }) {
           "fantom:": "FTM", // Fantom
           "huobi:": "HTX", // Huobi Token
           "iotex:": "IOTX", // IoTeX
-          "okx:": "OKT", // OKT
+          "okx:": "OKB", // OKB
           "polygon:": "POL", // Polygon
           "ripple:": "XRP", // Ripple
           "tron:": "TRX", // Tron

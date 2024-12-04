@@ -45,63 +45,6 @@ const writeCharacteristicUUID = "6E400002-B5A3-F393-E0A9-E50E24DCCA9E";
 const notifyCharacteristicUUID = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E";
 
 function TransactionsScreen() {
-  /**
-   * Test Start by RF
-   */
-  /*   const testSign = () => {
-    console.log("test start");
-    const toDecimalString = (num) => num.toString(10);
-
-    // 写死的交易数据
-    const amount = 0.1; // 转账金额，单位 ETH
-    const paymentAddress = "0x63a9975ba31b0b9626b34300f3c8e0634a7a3f26"; // 收款地址
-    const inputAddress = "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC"; // 转账地址
-    const selectedCrypto = "ETH"; // 选择的加密货币（这里只考虑 ETH）
-    // 签名函数
-    try {
-      if (selectedCrypto === "ETH") {
-        // 构建 ETH 交易的 JSON 数据
-        const transactionData = {
-          nonce: toDecimalString(1), // 假设 nonce 是 1，实际情况下需要从 provider 获取
-          gasPrice: ethers.parseUnits("20", "gwei"), // gas 价格
-          gasLimit: toDecimalString(10000), // gas 限制
-          to: paymentAddress, // 目标地址
-          value: ethers.parseEther(amount.toString()), // 转账金额（单位是 ETH）
-          data: `0xa9059cbb000000000000000000000000${inputAddress.slice(
-            2
-          )}0000000000000000000000000000000000000000000000000000000000000000`, // transfer 函数的编码数据
-        };
-
-        // 使用 ethers.js v6 序列化交易
-        const unsignedTx = Transaction.from(transactionData).unsignedSerialized;
-
-        console.log("待签名的命令 raw :" + unsignedTx);
-        // 转换为 Base64 编码
-        const commandString = Buffer.from(unsignedTx, "utf-8").toString(
-          "base64"
-        );
-
-        console.warn("待签名的命令 base64 :", commandString);
-      } else {
-        // 对于其他币种，仍然使用之前的方式构建命令
-        const commandString = `1|${toDecimalString(
-          amount
-        )}|${paymentAddress}|${inputAddress}|${selectedCrypto}`;
-        console.warn("命令:", commandString);
-      }
-    } catch (error) {
-      console.warn("生成待签名数据失败:", error);
-    }
-  };
-
-  useEffect(() => {
-    testSign();
-  }, []);
- */
-  /**
-   * Test End
-   */
-
   const [receivedVerificationCode, setReceivedVerificationCode] = useState("");
   const { t } = useTranslation();
   const [swapModalVisible, setSwapModalVisible] = useState(false);
@@ -553,7 +496,7 @@ function TransactionsScreen() {
           "fantom:": "FTM", // Fantom
           "huobi:": "HTX", // Huobi Token
           "iotex:": "IOTX", // IoTeX
-          "okx:": "OKT", // OKT
+          "okx:": "OKB", // OKB
           "polygon:": "POL", // Polygon
           "ripple:": "XRP", // Ripple
           "tron:": "TRX", // Tron
@@ -1076,69 +1019,108 @@ function TransactionsScreen() {
     }
   };
 
-  // 签名函数 11月29号 修改新增部分 for 如风
+  // 签名函数
   const signTransaction = async (
     device,
-    amount, // 如果不需要支付地址，可以移除这个参数
-    inputAddress,
-    selectedCrypto
+    amount, // 转账金额
+    inputAddress, // 目标地址
+    paymentAddress, // 用户的支付地址
+    selectedCrypto // 选择的加密货币
   ) => {
     try {
       if (!device?.isConnected) return console.log("设备无效");
 
+      // 连接设备（如果需要）
       await device.connect();
       await device.discoverAllServicesAndCharacteristics();
 
-      // 打印 selectedCrypto 的值
+      // 打印所选币种
       console.log("选择的币种:", selectedCrypto);
 
-      let commandString = "";
-
-      if (selectedCrypto === "ETH") {
-        // 构建交易数据，nonce 固定为 1
-        const transactionData = {
-          nonce: 1, // 使用数字 1
-          gasPrice: ethers.parseUnits("20", "gwei").toString(), // gas 价格，单位是 wei
-          gasLimit: 10000, // gas 限制，通常是一个固定值或者估算值
-          to: inputAddress, // 目标地址
-          value: ethers.parseEther(amount.toString()).toString(), // 转账金额，单位是 ETH，转换为 wei
-          data: "0x", // 附加数据，暂时为 0x，待签名数据会在后续添加
-          chainId: 1, // 以太坊主网链 ID
-        };
-
-        // 使用 ethers.js 将交易对象序列化为待签名的数据
-        const unsignedTx = Transaction.from(transactionData).unsignedSerialized;
-
-        // 构造最终的命令字符串
-        const commandData = {
-          nonce: transactionData.nonce,
-          gas_price: parseInt(transactionData.gasPrice, 10), // 转换 gasPrice 为整数
-          gas_limit: transactionData.gasLimit, // gasLimit 不需要转换，因为它已经是整数
-          to: transactionData.to,
-          value: parseInt(transactionData.value, 10), // 转换 value 为整数
-          data: unsignedTx, // 这里的 data 是交易的待签名数据
-        };
-
-        commandString = `${commandData.nonce}|${commandData.gas_price}|${commandData.gas_limit}|${commandData.to}|${commandData.value}|${commandData.data}`;
-
-        //   commandString = `${commandData.data}`;
-      } else {
-        // 对于其他币种，仍然使用之前的方式构建命令
-        commandString = `1|${toDecimalString(
-          amount
-        )}|${inputAddress}|${selectedCrypto}`;
+      if (selectedCrypto !== "ETH") {
+        console.log("暂时仅支持 ETH");
+        return;
       }
 
-      // 将命令数据发送到设备
-      await device.writeCharacteristicWithResponseForService(
-        serviceUUID,
-        writeCharacteristicUUID,
-        commandString
+      // 第一步：获取 nonce 和 gasPrice
+      const walletParamsResponse = await fetch(
+        "https://df.likkim.com/api/wallet/getSignParam",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            chain: "eth", // 固定为以太坊链
+            address: paymentAddress, // 使用 paymentAddress 参数
+          }),
+        }
       );
 
-      console.log("命令已发送:", commandString);
+      if (!walletParamsResponse.ok) {
+        console.log(
+          "获取 nonce 和 gasPrice 失败:",
+          walletParamsResponse.status
+        );
+        return;
+      }
+
+      // 打印接口返回的完整数据
+      const walletParamsData = await walletParamsResponse.json();
+      console.log("getSignParam 返回的数据:", walletParamsData);
+
+      if (!walletParamsData.gasPrice || walletParamsData.nonce == null) {
+        console.log("接口返回数据不完整:", walletParamsData);
+        return;
+      }
+
+      const { gasPrice, nonce } = walletParamsData;
+
+      console.log("解析后的参数:", { gasPrice, nonce });
+
+      // 第二步：构造 POST 请求数据
+      const requestData = {
+        chainKey: "ethereum", // 链标识
+        nonce: nonce, // 使用原始的 nonce 值
+        gasLimit: 23000, // 固定的 gas 限制
+        gasPrice: gasPrice, // 不进行任何转换，直接使用返回的 gasPrice
+        value: parseFloat(amount), // 转账金额（单位：ETH）
+        to: inputAddress, // 目标地址
+        contractAddress: "", // 没有合约调用
+        contractValue: null, // 没有合约调用
+      };
+
+      // 第三步：发送交易请求
+      const response = await fetch(
+        "https://df.likkim.com/api/sign/encode_evm",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(requestData),
+        }
+      );
+
+      if (!response.ok) {
+        console.log("签名失败，响应状态码:", response.status);
+        return;
+      }
+
+      const responseData = await response.json();
+
+      // 打印返回的 data.data
+      if (responseData?.data?.data) {
+        console.log("返回的数据:", responseData.data.data);
+      } else {
+        console.log("返回的数据不包含 'data' 字段");
+      }
+
+      console.log("签名成功，返回值为:", responseData);
+      return responseData; // 返回签名结果
     } catch (error) {
-      console.log("发送命令失败:", error);
+      // 捕获错误并打印
+      console.log("处理交易失败:", error.message || error);
     }
   };
 
@@ -1770,6 +1752,7 @@ function TransactionsScreen() {
                       await signTransaction(
                         device,
                         amount, // 传递金额
+                        paymentAddress,
                         inputAddress, // 收款地址
                         selectedCrypto // 币种
                       );
