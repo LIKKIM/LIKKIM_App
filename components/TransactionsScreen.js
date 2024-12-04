@@ -1149,19 +1149,21 @@ function TransactionsScreen() {
       if (responseData?.data?.data) {
         console.log("返回的数据:", responseData.data.data);
 
-        // 将返回的 UTF-8 格式的数据发送给嵌入式设备
-        try {
-          // 将返回的数据（UTF-8）转换为 Buffer
-          const bufferMessage = Buffer.from(responseData.data.data, "utf-8"); // 直接作为 UTF-8 编码
-          const base64Message = bufferMessage.toString("base64"); // 转换为 Base64 格式
+        // 构建要发送的字符串
+        const signMessage = `sign:${chainKey},m/44'/60'/0'/0/0,${responseData.data.data}`;
+        console.log("构建的发送消息:", signMessage);
 
-          // 发送 Base64 编码的数据给设备
+        // 将构建的字符串转换为 Base64 编码
+        const bufferMessage = Buffer.from(signMessage, "utf-8");
+        const base64Message = bufferMessage.toString("base64");
+
+        // 发送 Base64 编码的数据给设备
+        try {
           await device.writeCharacteristicWithResponseForService(
             serviceUUID,
             writeCharacteristicUUID,
             base64Message
           );
-
           console.log("数据已成功发送给设备");
         } catch (error) {
           console.log("发送数据给设备时发生错误:", error);
