@@ -1044,7 +1044,7 @@ function TransactionsScreen() {
         avalanche: "AVAX",
         binance: "BNB",
         celo: "CELO",
-        ethereum: "ETH",
+        ethereum: ["ETH", "USDT"], // ETH 和 USDT 映射到 ethereum
         ethereum_classic: "ETC",
         fantom: "FTM",
         gnosis: "GNO",
@@ -1058,13 +1058,21 @@ function TransactionsScreen() {
         zksync: "ZKSYNC",
       };
 
-      // 检查是否支持该币种
-      if (!(selectedCrypto in evmChainMapping)) {
+      // 将 selectedCrypto 转换为大写，确保一致性
+      const selectedCryptoUpper = selectedCrypto.toUpperCase();
+
+      // 查找哪个链标识包含 selectedCrypto
+      const chainKey = Object.keys(evmChainMapping).find((key) => {
+        const value = evmChainMapping[key];
+        return Array.isArray(value)
+          ? value.includes(selectedCryptoUpper)
+          : value === selectedCryptoUpper;
+      });
+
+      if (!chainKey) {
         console.log(`不支持的币种: ${selectedCrypto}`);
         return;
       }
-
-      const chainKey = evmChainMapping[selectedCrypto]; // 获取对应的链标识
 
       console.log("选择的链标识:", chainKey);
 
@@ -1077,7 +1085,7 @@ function TransactionsScreen() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            chain: chainKey, // 使用获取的链标识
+            chain: evmChainMapping[chainKey], // 使用获取的链标识
             address: paymentAddress, // 使用 paymentAddress 参数
           }),
         }
@@ -1106,7 +1114,7 @@ function TransactionsScreen() {
 
       // 第二步：构造 POST 请求数据
       const requestData = {
-        chainKey: chainKey, // 使用对应的链标识
+        chainKey: evmChainMapping[chainKey], // 使用对应的链标识
         nonce: nonce, // 使用原始的 nonce 值
         gasLimit: 53000, // 更新的 gas 限制为 53000
         gasPrice: gasPrice, // 不进行任何转换，直接使用返回的 gasPrice
