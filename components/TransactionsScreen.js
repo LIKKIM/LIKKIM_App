@@ -1158,17 +1158,6 @@ function TransactionsScreen() {
     }
   };
 
-  // 转换为 10 进制字符串的函数
-  const toDecimalString = (value) => {
-    if (typeof value === "number") {
-      return value.toString(10); // 将数字转为10进制字符串
-    } else if (typeof value === "string" && !isNaN(Number(value))) {
-      return parseInt(value, 10).toString(10); // 将字符串数字解析为整数后再转为10进制字符串
-    } else {
-      throw new Error("Invalid value for decimal conversion");
-    }
-  };
-
   // 提交验证码
   const handlePinSubmit = async () => {
     // 首先关闭 "Enter PIN to Connect" 的模态框
