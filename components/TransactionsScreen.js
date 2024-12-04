@@ -1255,17 +1255,12 @@ function TransactionsScreen() {
       console.log("PIN 验证成功");
       setVerificationSuccessModalVisible(true); // 显示成功提示
 
-      // 添加设备 ID 到 verifiedDevices 数组，确保不重复
-      const newVerifiedDevices = new Set([
-        ...verifiedDevices,
-        selectedDevice.id,
-      ]);
-      setVerifiedDevices([...newVerifiedDevices]);
+      setVerifiedDevices([selectedDevice.id]);
 
-      // 异步存储更新后的 verifiedDevices 数组
+      // 异步存储更新后的 verifiedDevices 数组（只存一个设备ID）
       await AsyncStorage.setItem(
         "verifiedDevices",
-        JSON.stringify([...newVerifiedDevices])
+        JSON.stringify([selectedDevice.id])
       );
 
       setIsVerificationSuccessful(true);
