@@ -164,7 +164,7 @@ function TransactionsScreen() {
 
     bleManagerRef.current.startDeviceScan(
       null,
-      { allowDuplicates: false },
+      { allowDuplicates: true },
       async (error, device) => {
         if (error) {
           console.log("BleManager scanning error:", error);
