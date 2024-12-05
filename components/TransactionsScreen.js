@@ -180,30 +180,14 @@ function TransactionsScreen() {
             return prevDevices;
           });
 
-          //    console.log("已验证的设备数量:", verifiedDevices.length);
-          //    console.log("检查的设备 ID:", device.id);
-          // console.log("已验证的设备 ID:", verifiedDevices);
-          //    console.log("检查的设备 ID:", device);
-          // 检查是否有已验证的设备且与当前设备匹配
-          if (verifiedDevices[0] && device.id === verifiedDevices[0]) {
-            //      console.log("检查的设备 ID:", device.id);
-            //   console.log("已验证的设备 ID:", verifiedDevices[0].id);
+          /*        if (verifiedDevices[0] && device.id === verifiedDevices[0]) {
+
             try {
               console.log(`设备 ${device.name} 已验证，准备发送 'ping' 消息`);
 
               await device.connect();
               await device.discoverAllServicesAndCharacteristics();
-              //   console.log(`设备 ${device.name} 连接尝试完成`);
 
-              //  console.log(`尝试发现设备 ${device.name} 的所有服务和特性`);
-              /*         await device
-                .discoverAllServicesAndCharacteristics()
-                .catch((error) => console.log(`发现服务和特性失败:`, error)); */
-              //   console.log(`服务和特性发现尝试完成`);
-
-              //       console.log(`设备 ${device.name} 连接成功`);
-
-              // 发送 'ping' 消息
 
               const pingMessage = "ping"; // 要发送的消息
               const bufferPingMessage = Buffer.from(pingMessage, "utf-8");
@@ -223,7 +207,7 @@ function TransactionsScreen() {
                 connectError.message
               );
             }
-          }
+          } */
         }
       }
     );
@@ -707,6 +691,7 @@ function TransactionsScreen() {
       // 确保监听器已完全启动后再发送 'request'
       setTimeout(async () => {
         try {
+          //在这里可以发送ping
           const requestString = "request";
           const bufferRequestString = Buffer.from(requestString, "utf-8");
           const base64requestString = bufferRequestString.toString("base64");
