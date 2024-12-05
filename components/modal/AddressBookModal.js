@@ -217,115 +217,127 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                       value={searchAddress}
                     />
                   </View>
-                  <FlatList
-                    data={filteredAddresses}
-                    keyExtractor={(item) => item.id}
-                    style={{
-                      marginBottom: 20,
-                    }}
-                    renderItem={({ item }) => (
-                      <View>
-                        <TouchableOpacity
-                          onPress={() => onSelect(item)}
+                  <View style={{ flex: 1 }}>
+                    <FlatList
+                      data={filteredAddresses}
+                      keyExtractor={(item) => item.id}
+                      style={{
+                        marginBottom: 20,
+                      }}
+                      renderItem={({ item }) => (
+                        <View
                           style={{
-                            width: 280,
-                            paddingVertical: 10,
-                            alignItems: "center",
-                            flexDirection: "row",
-                            justifyContent: "space-between",
+                            position: "relative",
+                            zIndex: dropdownVisible === item.id ? 100 : 1,
                           }}
                         >
-                          <View
-                            style={{ flexDirection: "column", flexShrink: 1 }}
+                          <TouchableOpacity
+                            onPress={() => onSelect(item)}
+                            style={{
+                              width: 280,
+                              paddingVertical: 10,
+                              alignItems: "center",
+                              flexDirection: "row",
+                              justifyContent: "space-between",
+                            }}
                           >
                             <View
-                              style={{
-                                flexDirection: "row",
-                                marginBottom: 5,
-                                flexWrap: "wrap",
-                              }}
+                              style={{ flexDirection: "column", flexShrink: 1 }}
                             >
                               <View
                                 style={{
                                   flexDirection: "row",
-                                  alignItems: "center",
-                                  marginRight: 10,
+                                  marginBottom: 5,
+                                  flexWrap: "wrap",
                                 }}
                               >
-                                <Text style={styles.Text}>Network:&nbsp;</Text>
-                                <Image
-                                  source={networkImages[item.network]}
+                                <View
                                   style={{
-                                    width: 24,
-                                    height: 24,
-                                    marginLeft: 5,
+                                    flexDirection: "row",
+                                    alignItems: "center",
+                                    marginRight: 10,
                                   }}
-                                />
-                                <Text style={styles.modalSubtitle}>
-                                  {item.network}
+                                >
+                                  <Text style={styles.text}>
+                                    Network:&nbsp;
+                                  </Text>
+                                  <Image
+                                    source={networkImages[item.network]}
+                                    style={{
+                                      width: 24,
+                                      height: 24,
+                                      marginLeft: 5,
+                                    }}
+                                  />
+                                  <Text style={styles.modalSubtitle}>
+                                    {item.network}
+                                  </Text>
+                                </View>
+
+                                <Text
+                                  style={[styles.text, { marginRight: 10 }]}
+                                >
+                                  Name:&nbsp;
+                                  <Text style={styles.modalSubtitle}>
+                                    {item.name}
+                                  </Text>
                                 </Text>
                               </View>
-
-                              <Text style={[styles.Text, { marginRight: 10 }]}>
-                                Name:&nbsp;
-                                <Text style={[styles.modalSubtitle]}>
-                                  {item.name}
+                              <Text
+                                style={[
+                                  styles.text,
+                                  { marginRight: 10, flexShrink: 1 },
+                                ]}
+                                numberOfLines={1}
+                                ellipsizeMode="middle"
+                              >
+                                Address:&nbsp;
+                                <Text style={styles.modalSubtitle}>
+                                  {item.address}
                                 </Text>
                               </Text>
                             </View>
-                            <Text
-                              style={[
-                                styles.Text,
-                                { marginRight: 10, flexShrink: 1 },
-                              ]}
-                              numberOfLines={1}
-                              ellipsizeMode="middle"
+                            <TouchableOpacity
+                              onPress={() => toggleDropdown(item.id)}
+                              style={{ marginLeft: 10 }}
                             >
-                              Address:&nbsp;
-                              <Text style={[styles.modalSubtitle]}>
-                                {item.address}
-                              </Text>
-                            </Text>
-                          </View>
-                          <TouchableOpacity
-                            onPress={() => toggleDropdown(item.id)}
-                            style={{ marginLeft: 10 }}
-                          >
-                            <Icon
-                              name="more-vert"
-                              size={24}
-                              color={isDarkMode ? "#fff" : "#000"}
-                            />
+                              <Icon
+                                name="more-vert"
+                                size={24}
+                                color={isDarkMode ? "#fff" : "#000"}
+                              />
+                            </TouchableOpacity>
                           </TouchableOpacity>
-                        </TouchableOpacity>
-                        {dropdownVisible === item.id && (
-                          <View style={styles.dropdown}>
-                            <TouchableOpacity
-                              onPress={() => handleCopy(item.address)}
-                            >
-                              <Text style={styles.dropdownButtonText}>
-                                Copy
-                              </Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                              onPress={() => handleDelete(item.id)}
-                            >
-                              <Text style={styles.dropdownButtonText}>
-                                Delete
-                              </Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                              onPress={() => handleEdit(item.id)}
-                            >
-                              <Text style={styles.dropdownButtonText}>
-                                Edit
-                              </Text>
-                            </TouchableOpacity>
-                          </View>
-                        )}
-                      </View>
-                    )}
-                  />
+                          {dropdownVisible === item.id && (
+                            <View style={styles.dropdown}>
+                              <TouchableOpacity
+                                onPress={() => handleCopy(item.address)}
+                              >
+                                <Text style={styles.dropdownButtonText}>
+                                  Copy
+                                </Text>
+                              </TouchableOpacity>
+                              <TouchableOpacity
+                                onPress={() => handleDelete(item.id)}
+                              >
+                                <Text style={styles.dropdownButtonText}>
+                                  Delete
+                                </Text>
+                              </TouchableOpacity>
+                              <TouchableOpacity
+                                onPress={() => handleEdit(item.id)}
+                              >
+                                <Text style={styles.dropdownButtonText}>
+                                  Edit
+                                </Text>
+                              </TouchableOpacity>
+                            </View>
+                          )}
+                        </View>
+                      )}
+                    />
+                  </View>
+
                   <TouchableOpacity
                     onPress={() => setIsAddingAddress(true)}
                     style={styles.submitButton}
