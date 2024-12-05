@@ -164,7 +164,7 @@ function TransactionsScreen() {
 
     bleManagerRef.current.startDeviceScan(
       null,
-      { allowDuplicates: true },
+      { allowDuplicates: false },
       async (error, device) => {
         if (error) {
           console.log("BleManager scanning error:", error);
@@ -180,9 +180,10 @@ function TransactionsScreen() {
             return prevDevices;
           });
 
-          //      console.log("检查的设备 ID:", device.id);
-          //        console.log("已验证的设备 ID:", verifiedDevices[0]);
-
+          //    console.log("已验证的设备数量:", verifiedDevices.length);
+          //    console.log("检查的设备 ID:", device.id);
+          // console.log("已验证的设备 ID:", verifiedDevices);
+          //    console.log("检查的设备 ID:", device);
           // 检查是否有已验证的设备且与当前设备匹配
           if (verifiedDevices[0] && device.id === verifiedDevices[0]) {
             //      console.log("检查的设备 ID:", device.id);
@@ -191,8 +192,19 @@ function TransactionsScreen() {
               console.log(`设备 ${device.name} 已验证，准备发送 'ping' 消息`);
 
               // 连接到已验证的设备
-              await device.connect({ timeout: 10000 });
-              console.log(`设备 ${device.name} 连接成功`);
+              console.log(`尝试连接设备 ${device.name}`);
+              await device
+                .connect()
+                .catch((error) => console.log(`device连接设备失败:`, error));
+              //   console.log(`设备 ${device.name} 连接尝试完成`);
+
+              //  console.log(`尝试发现设备 ${device.name} 的所有服务和特性`);
+              /*         await device
+                .discoverAllServicesAndCharacteristics()
+                .catch((error) => console.log(`发现服务和特性失败:`, error)); */
+              //   console.log(`服务和特性发现尝试完成`);
+
+              //       console.log(`设备 ${device.name} 连接成功`);
 
               // 发送 'ping' 消息
               const pingMessage = "ping"; // 要发送的消息
@@ -200,6 +212,7 @@ function TransactionsScreen() {
               const base64PingMessage = bufferPingMessage.toString("base64");
 
               // 发送 Base64 编码的消息
+
               await device.writeCharacteristicWithResponseForService(
                 serviceUUID,
                 writeCharacteristicUUID,
