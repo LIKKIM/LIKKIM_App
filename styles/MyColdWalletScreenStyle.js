@@ -16,6 +16,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
     addressInput: {
       backgroundColor: inputBackgroundColor,
       padding: 15,
+      paddingTop: 15,
       borderRadius: 10,
       height: 120,
       width: "100%",
