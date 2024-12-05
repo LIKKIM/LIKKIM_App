@@ -220,6 +220,9 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                   <FlatList
                     data={filteredAddresses}
                     keyExtractor={(item) => item.id}
+                    style={{
+                      marginBottom: 20,
+                    }}
                     renderItem={({ item }) => (
                       <View>
                         <TouchableOpacity
@@ -385,7 +388,11 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                     </TouchableOpacity>
                     {networkDropdownVisible && (
                       <View style={{ width: "100%", marginBottom: 10 }}>
-                        <ScrollView style={{ maxHeight: 200 }}>
+                        <ScrollView
+                          style={{ maxHeight: 200, borderRadius: 10 }}
+                          showsVerticalScrollIndicator={true} // 确保在垂直滚动时显示滚动条
+                          showsHorizontalScrollIndicator={false} // 如果不需要水平滚动条可以设置为false
+                        >
                           {networks.map((network) => (
                             <TouchableOpacity
                               key={network}
