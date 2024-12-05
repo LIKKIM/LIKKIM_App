@@ -159,7 +159,7 @@ function TransactionsScreen() {
   };
 
   const startScanning = () => {
-    console.log("Scanning started");
+    console.log("扫描设备 Scanning started");
     setIsScanning(true);
 
     bleManagerRef.current.startDeviceScan(
@@ -180,8 +180,13 @@ function TransactionsScreen() {
             return prevDevices;
           });
 
+          //      console.log("检查的设备 ID:", device.id);
+          //        console.log("已验证的设备 ID:", verifiedDevices[0]);
+
           // 检查是否有已验证的设备且与当前设备匹配
-          if (verifiedDevices[0] && device.id === verifiedDevices[0].id) {
+          if (verifiedDevices[0] && device.id === verifiedDevices[0]) {
+            //      console.log("检查的设备 ID:", device.id);
+            //   console.log("已验证的设备 ID:", verifiedDevices[0].id);
             try {
               console.log(`设备 ${device.name} 已验证，准备发送 'ping' 消息`);
 

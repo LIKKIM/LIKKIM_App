@@ -198,6 +198,7 @@ i18n
           Success: "Success",
           "Your wallet has been deleted successfully.":
             "Your wallet has been deleted successfully.",
+          "Insufficient Balance": "Insufficient Balance",
         },
       },
       zh: {
@@ -378,6 +379,7 @@ i18n
           Delete: "删除",
           Success: "成功",
           "Your wallet has been deleted successfully.": "您的钱包已成功删除。",
+          "Insufficient Balance": "余额不足",
         },
       },
       "zh-TW": {
@@ -564,6 +566,7 @@ i18n
           Delete: "刪除",
           Success: "成功",
           "Your wallet has been deleted successfully.": "您的錢包已成功刪除。",
+          "Insufficient Balance": "餘額不足",
         },
       },
       fr: {
@@ -785,6 +788,7 @@ i18n
           Success: "Succès",
           "Your wallet has been deleted successfully.":
             "Votre portefeuille a été supprimé avec succès.",
+          "Insufficient Balance": "Solde insuffisant",
         },
       },
       es: {
@@ -981,6 +985,7 @@ i18n
           Success: "Éxito",
           "Your wallet has been deleted successfully.":
             "Tu billetera ha sido eliminada con éxito.",
+          "Insufficient Balance": "Saldo insuficiente",
         },
       },
       ar: {
@@ -1169,6 +1174,7 @@ i18n
           Delete: "حذف",
           Success: "نجاح",
           "Your wallet has been deleted successfully.": "تم حذف محفظتك بنجاح.",
+          "Insufficient Balance": "رصيد غير كافي",
         },
       },
       ja: {
@@ -1385,6 +1391,7 @@ i18n
           Success: "成功",
           "Your wallet has been deleted successfully.":
             "ウォレットが正常に削除されました。",
+          "Insufficient Balance": "残高不足",
         },
       },
       ru: {
@@ -1579,6 +1586,7 @@ i18n
           Success: "Успех",
           "Your wallet has been deleted successfully.":
             "Ваш кошелек был успешно удален.",
+          "Insufficient Balance": "Недостаточно средств",
         },
       },
       ko: {
@@ -1768,6 +1776,7 @@ i18n
           Success: "성공",
           "Your wallet has been deleted successfully.":
             "지갑이 성공적으로 삭제되었습니다.",
+          "Insufficient Balance": "잔액 부족",
         },
       },
       pt: {
@@ -1963,6 +1972,7 @@ i18n
           Success: "Sucesso",
           "Your wallet has been deleted successfully.":
             "Sua carteira foi excluída com sucesso.",
+          "Insufficient Balance": "Saldo insuficiente",
         },
       },
       "pt-BR": {
@@ -2175,6 +2185,7 @@ i18n
           Success: "Sucesso",
           "Your wallet has been deleted successfully.":
             "Sua carteira foi excluída com sucesso.",
+          "Insufficient Balance": "Saldo insuficiente",
         },
       },
       it: {
@@ -2372,6 +2383,7 @@ i18n
           Success: "Successo",
           "Your wallet has been deleted successfully.":
             "Il tuo portafoglio è stato eliminato con successo.",
+          "Insufficient Balance": "Saldo insufficiente",
         },
       },
       de: {
@@ -2571,6 +2583,7 @@ i18n
           Success: "Erfolg",
           "Your wallet has been deleted successfully.":
             "Ihr Wallet wurde erfolgreich gelöscht.",
+          "Insufficient Balance": "Unzureichendes Guthaben",
         },
       },
       hi: {
@@ -2768,6 +2781,7 @@ i18n
           Success: "सफलता",
           "Your wallet has been deleted successfully.":
             "आपकी वॉलेट को सफलतापूर्वक हटा दिया गया है।",
+          "Insufficient Balance": "अपर्याप्त शेष",
         },
       },
       mn: {
@@ -2974,6 +2988,7 @@ i18n
           Success: "Амжилт",
           "Your wallet has been deleted successfully.":
             "Таны түрийвч амжилттай устгагдсан.",
+          "Insufficient Balance": "Хүлээгдэж буй үлдэгдэл",
         },
       },
       th: {
@@ -3162,6 +3177,7 @@ i18n
           Success: "สำเร็จ",
           "Your wallet has been deleted successfully.":
             "กระเป๋าของคุณถูกลบเรียบร้อยแล้ว",
+          "Insufficient Balance": "ยอดเงินไม่พอ",
         },
       },
       uk: {
@@ -3354,6 +3370,7 @@ i18n
           Success: "Успіх",
           "Your wallet has been deleted successfully.":
             "Ваш гаманець був успішно видалений.",
+          "Insufficient Balance": "Недостатньо коштів",
         },
       },
       vi: {
@@ -3550,6 +3567,7 @@ i18n
           Success: "Thành công",
           "Your wallet has been deleted successfully.":
             "Ví của bạn đã được xóa thành công.",
+          "Insufficient Balance": "Số dư không đủ",
         },
       },
       id: {
@@ -3746,6 +3764,7 @@ i18n
           Success: "Sukses",
           "Your wallet has been deleted successfully.":
             "Dompet Anda telah dihapus dengan sukses.",
+          "Insufficient Balance": "Saldo tidak cukup",
         },
       },
       tl: {
@@ -3944,6 +3963,7 @@ i18n
           Success: "Tagumpay",
           "Your wallet has been deleted successfully.":
             "Matagumpay na natanggal ang iyong wallet.",
+          "Insufficient Balance": "Hindi sapat na balanse",
         },
       },
       bn: {
@@ -4143,6 +4163,7 @@ i18n
           Success: "সফলতা",
           "Your wallet has been deleted successfully.":
             "আপনার ওয়ালেট সফলভাবে মুছে ফেলা হয়েছে।",
+          "Insufficient Balance": "অপর্যাপ্ত ব্যালেন্স",
         },
       },
     },

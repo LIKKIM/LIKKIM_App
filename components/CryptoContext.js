@@ -242,7 +242,7 @@ export const CryptoProvider = ({ children }) => {
       });
       const data = await response.json();
       if (data.code === 0 && data.data) {
-        console.log("API返回的汇率数据:", data.data);
+        //  console.log("API返回的汇率数据:", data.data);
         setExchangeRates(data.data);
         await AsyncStorage.setItem("exchangeRates", JSON.stringify(data.data));
       } else {
