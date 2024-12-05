@@ -50,8 +50,8 @@ const TabModal = ({
           const data = await response.json();
 
           if (!response.ok || data.msg !== "success") {
-            console.error(
-              `API Error: HTTP status: ${response.status}, Message: ${data.msg}`
+            console.log(
+              `Tab页行情数据API Error: HTTP status: ${response.status}, Message: ${data.msg}`
             );
             setTransactionHistory([]);
           } else {
