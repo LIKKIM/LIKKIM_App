@@ -242,12 +242,27 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                                 flexWrap: "wrap",
                               }}
                             >
-                              <Text style={[styles.Text, { marginRight: 10 }]}>
-                                Network:&nbsp;
-                                <Text style={[styles.modalSubtitle]}>
+                              <View
+                                style={{
+                                  flexDirection: "row",
+                                  alignItems: "center",
+                                  marginRight: 10,
+                                }}
+                              >
+                                <Text style={styles.Text}>Network:&nbsp;</Text>
+                                <Image
+                                  source={networkImages[item.network]}
+                                  style={{
+                                    width: 24,
+                                    height: 24,
+                                    marginLeft: 5,
+                                  }}
+                                />
+                                <Text style={styles.modalSubtitle}>
                                   {item.network}
                                 </Text>
-                              </Text>
+                              </View>
+
                               <Text style={[styles.Text, { marginRight: 10 }]}>
                                 Name:&nbsp;
                                 <Text style={[styles.modalSubtitle]}>
@@ -347,6 +362,8 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                               width: 24,
                               height: 24,
                               marginRight: 10,
+                              backgroundColor: "rgba(255, 255, 255, 0.2)",
+                              borderRadius: 12,
                             }}
                           />
                         )}
