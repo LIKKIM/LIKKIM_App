@@ -12,7 +12,8 @@ import {
   KeyboardAvoidingView,
   Platform,
   Clipboard,
-  TouchableWithoutFeedback, // 导入 TouchableWithoutFeedback 组件
+  TouchableWithoutFeedback,
+  Alert, // 引入 Alert 组件
 } from "react-native";
 import { BlurView } from "expo-blur";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -25,12 +26,11 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
   const [newName, setNewName] = useState("");
   const [newAddress, setNewAddress] = useState("");
   const [networkDropdownVisible, setNetworkDropdownVisible] = useState(false);
-  const [dropdownVisible, setDropdownVisible] = useState(null); // 控制哪个地址显示Dropdown
-  const [savedAddresses, setSavedAddresses] = useState([]); // 保存地址的状态
+  const [dropdownVisible, setDropdownVisible] = useState(null);
+  const [savedAddresses, setSavedAddresses] = useState([]);
 
   useEffect(() => {
     if (visible) {
-      // 每次模态窗口打开时重置输入和选择
       setSearchAddress("");
       setIsAddingAddress(false);
       setNewNetwork("");
@@ -64,7 +64,6 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
     }
   };
 
-  // 更新后的搜索逻辑，支持 network, name 和 address
   const filteredAddresses = savedAddresses.filter(
     (address) =>
       address.network.toLowerCase().includes(searchAddress.toLowerCase()) ||
@@ -73,20 +72,35 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
   );
 
   const toggleDropdown = (id) => {
-    setDropdownVisible(dropdownVisible === id ? null : id); // 切换Dropdown显示状态
+    setDropdownVisible(dropdownVisible === id ? null : id);
   };
 
   const handleCopy = (address) => {
     Clipboard.setString(address);
-    console.log("Address copied to clipboard:", address);
+    Alert.alert("Copied", "Address copied to clipboard."); // 显示确认提示
     setDropdownVisible(null); // 隐藏Dropdown
   };
 
   const handleDelete = (id) => {
-    const updatedAddresses = savedAddresses.filter((item) => item.id !== id);
-    setSavedAddresses(updatedAddresses);
-    saveAddressesToStorage(updatedAddresses);
-    setDropdownVisible(null); // 隐藏Dropdown
+    Alert.alert(
+      "Confirm Delete",
+      "Are you sure you want to delete this address?",
+      [
+        { text: "Cancel", style: "cancel" },
+        {
+          text: "Delete",
+          style: "destructive",
+          onPress: () => {
+            const updatedAddresses = savedAddresses.filter(
+              (item) => item.id !== id
+            );
+            setSavedAddresses(updatedAddresses);
+            saveAddressesToStorage(updatedAddresses);
+            setDropdownVisible(null);
+          },
+        },
+      ]
+    );
   };
 
   const handleEdit = (id) => {
@@ -97,7 +111,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
       setNewAddress(addressToEdit.address);
       setIsAddingAddress(true); // 切换到添加/编辑视图
       setDropdownVisible(null);
-      handleDelete(id); // 删除旧条目，准备替换为新条目
+      // handleDelete(id); // 不再在这里删除，而是等待用户保存编辑后处理
     }
   };
 
@@ -109,7 +123,10 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
         name: newName,
         address: newAddress,
       };
-      const updatedAddresses = [...savedAddresses, newEntry];
+      const updatedAddresses = savedAddresses.filter(
+        (item) => item.id !== newEntry.id
+      ); // 先移除旧的地址
+      updatedAddresses.push(newEntry); // 添加更新后的新地址
       setSavedAddresses(updatedAddresses);
       saveAddressesToStorage(updatedAddresses);
       // 清空输入框
@@ -180,9 +197,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
         style={{ flex: 1 }}
       >
         <BlurView intensity={10} style={styles.centeredView}>
-          <TouchableWithoutFeedback
-            onPress={() => setDropdownVisible(null)} // 点击非 dropdown 区域关闭 dropdown
-          >
+          <TouchableWithoutFeedback onPress={() => setDropdownVisible(null)}>
             <View
               style={[
                 styles.addressModalView,
@@ -192,143 +207,123 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
               {!isAddingAddress ? (
                 <>
                   <Text style={styles.modalTitle}>Address Book</Text>
-
-                  <>
-                    {/* 搜索框 */}
-                    <View style={styles.searchContainer}>
-                      <Icon name="search" size={20} style={styles.searchIcon} />
-                      <TextInput
-                        style={styles.searchInput}
-                        placeholder="Search Address"
-                        placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
-                        onChangeText={setSearchAddress}
-                        value={searchAddress}
-                      />
-                    </View>
-
-                    <FlatList
-                      data={filteredAddresses}
-                      keyExtractor={(item) => item.id}
-                      renderItem={({ item }) => (
-                        <View>
-                          <TouchableOpacity
-                            onPress={() => {
-                              onSelect(item); // 将选中的地址返回给 InputAddressModal
-                            }}
-                            style={{
-                              width: 280,
-                              paddingVertical: 10,
-                              alignItems: "center",
-                              flexDirection: "row",
-                              justifyContent: "space-between",
-                            }}
+                  <View style={styles.searchContainer}>
+                    <Icon name="search" size={20} style={styles.searchIcon} />
+                    <TextInput
+                      style={styles.searchInput}
+                      placeholder="Search Address"
+                      placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
+                      onChangeText={setSearchAddress}
+                      value={searchAddress}
+                    />
+                  </View>
+                  <FlatList
+                    data={filteredAddresses}
+                    keyExtractor={(item) => item.id}
+                    renderItem={({ item }) => (
+                      <View>
+                        <TouchableOpacity
+                          onPress={() => onSelect(item)}
+                          style={{
+                            width: 280,
+                            paddingVertical: 10,
+                            alignItems: "center",
+                            flexDirection: "row",
+                            justifyContent: "space-between",
+                          }}
+                        >
+                          <View
+                            style={{ flexDirection: "column", flexShrink: 1 }}
                           >
                             <View
                               style={{
-                                flexDirection: "column",
-                                flexShrink: 1,
+                                flexDirection: "row",
+                                marginBottom: 5,
+                                flexWrap: "wrap",
                               }}
                             >
-                              <View
-                                style={{
-                                  flexDirection: "row",
-                                  marginBottom: 5,
-                                  flexWrap: "wrap",
-                                }}
-                              >
-                                <Text
-                                  style={[styles.Text, { marginRight: 10 }]}
-                                >
-                                  Network:&nbsp;
-                                  <Text style={[styles.modalSubtitle]}>
-                                    {item.network}
-                                  </Text>
-                                </Text>
-                                <Text
-                                  style={[styles.Text, { marginRight: 10 }]}
-                                >
-                                  Name:&nbsp;
-                                  <Text style={[styles.modalSubtitle]}>
-                                    {item.name}
-                                  </Text>
-                                </Text>
-                              </View>
-                              <Text
-                                style={[
-                                  styles.Text,
-                                  { marginRight: 10 },
-                                  { flexShrink: 1 },
-                                ]} // 允许文本在需要时缩小
-                                numberOfLines={1} // 限制为一行
-                                ellipsizeMode="middle" // 在中间截断文本并添加省略号
-                              >
-                                Address:&nbsp;
+                              <Text style={[styles.Text, { marginRight: 10 }]}>
+                                Network:&nbsp;
                                 <Text style={[styles.modalSubtitle]}>
-                                  {item.address}
+                                  {item.network}
+                                </Text>
+                              </Text>
+                              <Text style={[styles.Text, { marginRight: 10 }]}>
+                                Name:&nbsp;
+                                <Text style={[styles.modalSubtitle]}>
+                                  {item.name}
                                 </Text>
                               </Text>
                             </View>
-                            <TouchableOpacity
-                              onPress={() => toggleDropdown(item.id)}
-                              style={{ marginLeft: 10 }} // 给图标和文字间一些间距
+                            <Text
+                              style={[
+                                styles.Text,
+                                { marginRight: 10, flexShrink: 1 },
+                              ]}
+                              numberOfLines={1}
+                              ellipsizeMode="middle"
                             >
-                              <Icon
-                                name="more-vert"
-                                size={24}
-                                color={isDarkMode ? "#fff" : "#000"} // 根据模式动态设置颜色
-                              />
-                            </TouchableOpacity>
+                              Address:&nbsp;
+                              <Text style={[styles.modalSubtitle]}>
+                                {item.address}
+                              </Text>
+                            </Text>
+                          </View>
+                          <TouchableOpacity
+                            onPress={() => toggleDropdown(item.id)}
+                            style={{ marginLeft: 10 }}
+                          >
+                            <Icon
+                              name="more-vert"
+                              size={24}
+                              color={isDarkMode ? "#fff" : "#000"}
+                            />
                           </TouchableOpacity>
-
-                          {dropdownVisible === item.id && (
-                            <View style={styles.dropdown}>
-                              <TouchableOpacity
-                                onPress={() => handleCopy(item.address)}
-                              >
-                                <Text style={styles.dropdownButtonText}>
-                                  Copy
-                                </Text>
-                              </TouchableOpacity>
-                              <TouchableOpacity
-                                onPress={() => handleDelete(item.id)}
-                              >
-                                <Text style={styles.dropdownButtonText}>
-                                  Delete
-                                </Text>
-                              </TouchableOpacity>
-                              <TouchableOpacity
-                                onPress={() => handleEdit(item.id)}
-                              >
-                                <Text style={styles.dropdownButtonText}>
-                                  Edit
-                                </Text>
-                              </TouchableOpacity>
-                            </View>
-                          )}
-                        </View>
-                      )}
-                    />
-
-                    <TouchableOpacity
-                      onPress={() => setIsAddingAddress(true)}
-                      style={styles.submitButton}
-                    >
-                      <Text style={styles.submitButtonText}>Add Address</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      onPress={onClose}
-                      style={styles.closeButton}
-                    >
-                      <Text style={styles.cancelButtonText}>Close</Text>
-                    </TouchableOpacity>
-                  </>
+                        </TouchableOpacity>
+                        {dropdownVisible === item.id && (
+                          <View style={styles.dropdown}>
+                            <TouchableOpacity
+                              onPress={() => handleCopy(item.address)}
+                            >
+                              <Text style={styles.dropdownButtonText}>
+                                Copy
+                              </Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                              onPress={() => handleDelete(item.id)}
+                            >
+                              <Text style={styles.dropdownButtonText}>
+                                Delete
+                              </Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                              onPress={() => handleEdit(item.id)}
+                            >
+                              <Text style={styles.dropdownButtonText}>
+                                Edit
+                              </Text>
+                            </TouchableOpacity>
+                          </View>
+                        )}
+                      </View>
+                    )}
+                  />
+                  <TouchableOpacity
+                    onPress={() => setIsAddingAddress(true)}
+                    style={styles.submitButton}
+                  >
+                    <Text style={styles.submitButtonText}>Add Address</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={onClose}
+                    style={styles.closeButton}
+                  >
+                    <Text style={styles.cancelButtonText}>Close</Text>
+                  </TouchableOpacity>
                 </>
               ) : (
                 <>
-                  {/* 包裹三个输入框的视图 */}
                   <View style={{ marginBottom: 10, width: "100%" }}>
-                    {/* Network 选择窗口 */}
-
                     <TouchableOpacity
                       style={[
                         styles.passwordInput,
@@ -343,12 +338,8 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                       }
                     >
                       <View
-                        style={{
-                          flexDirection: "row",
-                          alignItems: "center",
-                        }}
+                        style={{ flexDirection: "row", alignItems: "center" }}
                       >
-                        {/* 添加网络图标显示 */}
                         {newNetwork && (
                           <Image
                             source={networkImages[newNetwork]}
@@ -367,7 +358,6 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                           {newNetwork || "Select Network"}
                         </Text>
                       </View>
-
                       <Icon
                         name={
                           networkDropdownVisible ? "expand-less" : "expand-more"
@@ -388,8 +378,8 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                               }}
                               style={{
                                 padding: 10,
-                                flexDirection: "row", // 添加方向为行，使图片和文本水平排列
-                                alignItems: "center", // 垂直居中对齐
+                                flexDirection: "row",
+                                alignItems: "center",
                                 backgroundColor:
                                   network === newNetwork
                                     ? styles.submitButton.backgroundColor
@@ -406,7 +396,6 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                                   borderRadius: 12,
                                 }}
                               />
-
                               <Text style={{ color: styles.Text.color }}>
                                 {network}
                               </Text>
@@ -415,8 +404,6 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                         </ScrollView>
                       </View>
                     )}
-
-                    {/* 仅当 networkDropdownVisible 为 false 时显示 Name 和 Address 输入框 */}
                     {!networkDropdownVisible && (
                       <>
                         <TextInput
@@ -437,8 +424,6 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                       </>
                     )}
                   </View>
-
-                  {/* 包裹两个按钮的视图 */}
                   <View style={styles.buttonContainer}>
                     <TouchableOpacity
                       onPress={handleSaveAddress}
