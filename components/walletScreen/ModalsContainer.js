@@ -143,7 +143,7 @@ const ModalsContainer = ({
           setBleVisible(false);
           setSelectedDevice(null);
         }}
-        verifiedDevices={verifiedDevices}
+        verifiedDevices={"0"} // 这里是避免这个页面有设备管理disconnect的功能
         MyColdWalletScreenStyle={WalletScreenStyle}
         t={t}
         onDisconnectPress={handleDisconnectDevice}

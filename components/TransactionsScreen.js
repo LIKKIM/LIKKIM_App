@@ -1914,7 +1914,7 @@ function TransactionsScreen() {
             setBleVisible(false); // 关闭蓝牙模态框
             setSelectedDevice(null); // 重置选中的设备状态
           }}
-          verifiedDevices={verifiedDevices} // 已验证的设备列表
+          verifiedDevices={"0"} // 这里是避免这个页面有设备管理disconnect的功能
           MyColdWalletScreenStyle={TransactionsScreenStyle} // 样式
           t={t} // 国际化函数
           onDisconnectPress={handleDisconnectDevice} // 断开连接处理函数
