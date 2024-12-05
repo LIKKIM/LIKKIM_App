@@ -370,11 +370,11 @@ function TransactionsScreen() {
     }
   }, [initialAdditionalCryptos, amountModalVisible]);
 
-  useEffect(() => {
+  /*   useEffect(() => {
     if (bleVisible) {
       scanDevices();
     }
-  }, [bleVisible]);
+  }, [bleVisible]); */
 
   // 清理蓝牙管理器
   useEffect(() => {
@@ -1456,11 +1456,13 @@ function TransactionsScreen() {
   }, []);
 
   const handleReceivePress = () => {
+    scanDevices();
     setOperationType("receive");
     setModalVisible(true);
   };
 
   const handleSendPress = () => {
+    scanDevices();
     setOperationType("send");
     setIsAddressValid(false);
     setModalVisible(true);
