@@ -165,19 +165,49 @@ function TransactionsScreen() {
     bleManagerRef.current.startDeviceScan(
       null,
       { allowDuplicates: true },
-      (error, device) => {
+      async (error, device) => {
         if (error) {
           console.log("BleManager scanning error:", error);
           return;
         }
 
         if (device.name && device.name.includes("LIKKIM")) {
+          // 存储新设备到设备列表
           setDevices((prevDevices) => {
             if (!prevDevices.find((d) => d.id === device.id)) {
               return [...prevDevices, device];
             }
             return prevDevices;
           });
+
+          // 检查是否有已验证的设备且与当前设备匹配
+          if (verifiedDevices[0] && device.id === verifiedDevices[0].id) {
+            try {
+              console.log(`设备 ${device.name} 已验证，准备发送 'ping' 消息`);
+
+              // 连接到已验证的设备
+              await device.connect({ timeout: 10000 });
+              console.log(`设备 ${device.name} 连接成功`);
+
+              // 发送 'ping' 消息
+              const pingMessage = "ping"; // 要发送的消息
+              const bufferPingMessage = Buffer.from(pingMessage, "utf-8");
+              const base64PingMessage = bufferPingMessage.toString("base64");
+
+              // 发送 Base64 编码的消息
+              await device.writeCharacteristicWithResponseForService(
+                serviceUUID,
+                writeCharacteristicUUID,
+                base64PingMessage
+              );
+              console.log("发送 'ping' 消息给设备:", base64PingMessage);
+            } catch (connectError) {
+              console.log(
+                `连接设备 ${device.name} 时发生错误:`,
+                connectError.message
+              );
+            }
+          }
         }
       }
     );
@@ -568,6 +598,47 @@ function TransactionsScreen() {
             console.log(`已发送字符串 'validation' 给设备`);
           } catch (error) {
             console.log("发送 'validation' 时出错:", error);
+          }
+        }
+
+        // 提取并处理 "signed_data:" 开头的数据
+        if (receivedDataString.startsWith("signed_data:")) {
+          // 从 receivedDataString 中提取 chain 和 hex 值
+          const signedData = receivedDataString.split("signed_data:")[1];
+          const [chain, hex] = signedData.split(",");
+
+          // 构造 JSON 数据
+          const postData = {
+            chain: chain.trim(), // 去掉可能的空格
+            hex: hex.trim(), // 去掉可能的空格
+          };
+
+          console.log("准备发送的 JSON 数据:", postData);
+
+          try {
+            // 发送 POST 请求到指定的 URL
+            const response = await fetch(
+              "https://bt.likkim.com/api/wallet/broadcastHex",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(postData), // 将数据转换为 JSON 字符串
+              }
+            );
+
+            // 监听并处理返回结果
+            const responseData = await response.json();
+            console.log("API 返回的数据:", responseData);
+
+            if (responseData.success) {
+              console.log("成功广播交易:", responseData);
+            } else {
+              console.log("广播交易失败:", responseData.message);
+            }
+          } catch (error) {
+            console.log("发送请求时出错:", error);
           }
         }
 
@@ -1013,11 +1084,11 @@ function TransactionsScreen() {
       if (responseData?.data?.data) {
         console.log("返回的数据:", responseData.data.data);
 
-        // 构建要发送的字符串
+        // 构建要发送的第一个字符串
         const signMessage = `sign:${chainKey},${path},${responseData.data.data}`;
         console.log("构建的发送消息:", signMessage);
 
-        // 将构建的字符串转换为 Base64 编码
+        // 将构建的第一个字符串转换为 Base64 编码
         const bufferMessage = Buffer.from(signMessage, "utf-8");
         const base64Message = bufferMessage.toString("base64");
 
@@ -1031,6 +1102,28 @@ function TransactionsScreen() {
           console.log("数据已成功发送给设备");
         } catch (error) {
           console.log("发送数据给设备时发生错误:", error);
+        }
+
+        // 构建要发送的第二组数据
+        const destinationAddress = inputAddress;
+        const transactionFee = "0.0001"; // 替换为实际交易手续费
+        const secondMessage = `destinationAddress:${destinationAddress},${transactionFee},${chainKey},${path}`;
+        console.log("构建的第二组发送消息:", secondMessage);
+
+        // 将第二组消息转换为 Base64 编码
+        const bufferSecondMessage = Buffer.from(secondMessage, "utf-8");
+        const base64SecondMessage = bufferSecondMessage.toString("base64");
+
+        // 发送第二组数据给设备
+        try {
+          await device.writeCharacteristicWithResponseForService(
+            serviceUUID,
+            writeCharacteristicUUID,
+            base64SecondMessage
+          );
+          console.log("第二组数据已成功发送给设备");
+        } catch (error) {
+          console.log("发送第二组数据给设备时发生错误:", error);
         }
       } else {
         console.log("返回的数据不包含 'data' 字段");
