@@ -228,7 +228,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                         <View
                           style={{
                             position: "relative",
-                            zIndex: dropdownVisible === item.id ? 100 : 1,
+                            marginBottom: 8,
                           }}
                         >
                           <TouchableOpacity

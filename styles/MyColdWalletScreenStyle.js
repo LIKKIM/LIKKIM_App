@@ -192,8 +192,8 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       top: 2, // 调整以确保下拉菜单显示在正确位置
       backgroundColor: modalBackgroundColor, // 根据模式动态设置背景色
       borderRadius: 5, // 圆角
-      paddingVertical: 10, // 垂直方向的内边距
-      paddingHorizontal: 20, // 水平方向的内边距
+      paddingVertical: 8, // 垂直方向的内边距
+      paddingHorizontal: 16, // 水平方向的内边距
       zIndex: 101, // 确保Dropdown在其他元素上方
       shadowColor: "#000", // 阴影颜色
       shadowOffset: { width: 0, height: 2 }, // 阴影偏移
@@ -203,7 +203,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
     },
     dropdownButtonText: {
       color: textColor, // 根据模式动态设置文本颜色
-      fontSize: 16, // 字体大小
+      fontSize: 14, // 字体大小
       paddingVertical: 5, // 增加垂直间距
     },
     enableLockModalView: {
