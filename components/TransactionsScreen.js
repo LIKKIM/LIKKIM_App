@@ -191,11 +191,8 @@ function TransactionsScreen() {
             try {
               console.log(`设备 ${device.name} 已验证，准备发送 'ping' 消息`);
 
-              // 连接到已验证的设备
-              console.log(`尝试连接设备 ${device.name}`);
-              await device
-                .connect()
-                .catch((error) => console.log(`device连接设备失败:`, error));
+              await device.connect();
+              await device.discoverAllServicesAndCharacteristics();
               //   console.log(`设备 ${device.name} 连接尝试完成`);
 
               //  console.log(`尝试发现设备 ${device.name} 的所有服务和特性`);
@@ -207,6 +204,7 @@ function TransactionsScreen() {
               //       console.log(`设备 ${device.name} 连接成功`);
 
               // 发送 'ping' 消息
+
               const pingMessage = "ping"; // 要发送的消息
               const bufferPingMessage = Buffer.from(pingMessage, "utf-8");
               const base64PingMessage = bufferPingMessage.toString("base64");
