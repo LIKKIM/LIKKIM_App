@@ -1,11 +1,12 @@
 // components/OnboardingScreen.js
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   View,
   Text,
   Image,
   StyleSheet,
   Dimensions,
+  Animated,
   Modal,
   ScrollView,
   TouchableOpacity,
@@ -22,6 +23,19 @@ const { width, height } = Dimensions.get("window");
 const OnboardingScreen = ({ onDone }) => {
   const [languageModalVisible, setLanguageModalVisible] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState("en");
+  const scaleAnim = useRef(new Animated.Value(1)).current; // 初始缩放比例为1
+  const [currentSlideKey, setCurrentSlideKey] = useState("");
+  const opacityAnim = useRef(new Animated.Value(0)).current; // 初始透明度为0
+  const translateYAnim = useRef(new Animated.Value(30)).current; // 初始位置稍低，用于从下到上的效果
+
+  useEffect(() => {
+    scaleAnim.setValue(0.9); // 设置动画初始缩放比例为0.8
+    Animated.timing(scaleAnim, {
+      toValue: 1.05, // 动画结束时的缩放比例为1.1
+      duration: 8000, // 动画持续时间为3000毫秒
+      useNativeDriver: true,
+    }).start();
+  }, []);
 
   useEffect(() => {
     AsyncStorage.getItem("selectedLanguage").then((value) => {
@@ -31,6 +45,21 @@ const OnboardingScreen = ({ onDone }) => {
       }
     });
   }, []);
+
+  useEffect(() => {
+    Animated.parallel([
+      Animated.timing(opacityAnim, {
+        toValue: 1,
+        duration: 500,
+        useNativeDriver: true,
+      }),
+      Animated.timing(translateYAnim, {
+        toValue: 0,
+        duration: 500,
+        useNativeDriver: true,
+      }),
+    ]).start();
+  }, [currentSlideKey]);
 
   // 在这里定义slides，依赖于当前语言设置
   const slides = [
@@ -72,7 +101,13 @@ const OnboardingScreen = ({ onDone }) => {
         </Text>
       </TouchableOpacity>
       <View style={styles.content}>
-        <Image source={item.image} style={styles.image} />
+        <Animated.Image
+          source={item.image}
+          style={{
+            ...styles.image,
+            transform: [{ scale: scaleAnim }], // 应用动画缩放效果
+          }}
+        />
         <Text style={styles.title}>{item.title}</Text>
         <Text style={styles.text}>{item.text}</Text>
       </View>
