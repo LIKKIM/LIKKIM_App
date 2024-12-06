@@ -339,7 +339,7 @@ function TransactionsScreen() {
           }
 
           // 查询手续费
-          const feeResponse = await fetch(
+          /*           const feeResponse = await fetch(
             "https://bt.likkim.com/meridian/transaction/queryFee",
             {
               method: "POST",
@@ -351,7 +351,7 @@ function TransactionsScreen() {
               }),
             }
           );
-
+ */
           if (!feeResponse.ok) {
             throw new Error(`HTTP error! status: ${feeResponse.status}`);
           }
