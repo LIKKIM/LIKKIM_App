@@ -79,39 +79,39 @@ const getAddressFromLatLng = async (lat, lng) => {
   }
 };
 
-
 /**
  * 高德地址解析
  */
 const getAddressFromLatLngGD = async (lat, lng) => {
+  console.log(`TEST:高德经纬度：${lat},${lng}`);
 
-  console.warn(`TEST:高德经纬度：${lat},${lng}`);
-
-  let geoData = await fetch(`https://restapi.amap.com/v3/geocode/regeo?key=${GAODE_MAP_API_KEY}&location=${lng},${lat}&extensions=all`).then((res) => res.json());
-  if (geoData.status == 1 && geoData.regeocode.addressComponent.adcode.length > 0) {
-
-    console.warn('Test高德逆地址解析成功');
+  let geoData = await fetch(
+    `https://restapi.amap.com/v3/geocode/regeo?key=${GAODE_MAP_API_KEY}&location=${lng},${lat}&extensions=all`
+  ).then((res) => res.json());
+  if (
+    geoData.status == 1 &&
+    geoData.regeocode.addressComponent.adcode.length > 0
+  ) {
+    console.log("Test高德逆地址解析成功");
     console.log(geoData.regeocode.pois[0]);
 
     let d = geoData.regeocode.addressComponent;
-    let _address = `${d.city}${d.district}${d.township}${d.streetNumber.street}${d.streetNumber.number}(${geoData.regeocode.pois.length > 0 ? geoData.regeocode.pois[0].name : ''})`;
+    let _address = `${d.city}${d.district}${d.township}${
+      d.streetNumber.street
+    }${d.streetNumber.number}(${
+      geoData.regeocode.pois.length > 0 ? geoData.regeocode.pois[0].name : ""
+    })`;
 
-    console.warn('Test高德地址解析：' + _address);
-
-
+    console.log("Test高德地址解析：" + _address);
 
     return _address;
-
   } else {
-    console.warn('高德地址逆解析失败：');
-    console.warn(geoData.regeocode);
+    console.log("高德地址逆解析失败：");
+    console.log(geoData.regeocode);
 
-    return 'Address Fetch Failed.'
+    return "Address Fetch Failed.";
   }
-
-
-
-}
+};
 
 const loadConnectedDevices = async (
   setDevicesPositions,
@@ -153,7 +153,6 @@ export default function FindMyLkkim() {
   const mapRef = useRef(null);
   const screenHeight = Dimensions.get("window").height;
   const listHeight = screenHeight * 0.3;
-
 
   const locales = useLocales();
 
@@ -279,17 +278,13 @@ export default function FindMyLkkim() {
     }
   };
 
-
   //TODO 高德
   useEffect(() => {
-
-
-    console.log(locales)
+    console.log(locales);
 
     //测试地址：广州南站附近
     getAddressFromLatLngGD(22.989943, 113.268858);
-
-  }, [])
+  }, []);
 
   return (
     <View style={{ flex: 1 }}>
@@ -327,14 +322,14 @@ export default function FindMyLkkim() {
                   justifyContent: "center",
                   ...(Platform.OS === "ios"
                     ? {
-                      shadowColor: "#000",
-                      shadowOffset: { width: 0, height: 0 },
-                      shadowOpacity: 0.5,
-                      shadowRadius: 5,
-                    }
+                        shadowColor: "#000",
+                        shadowOffset: { width: 0, height: 0 },
+                        shadowOpacity: 0.5,
+                        shadowRadius: 5,
+                      }
                     : {
-                      elevation: 5,
-                    }),
+                        elevation: 5,
+                      }),
                 }}
               >
                 <Image
