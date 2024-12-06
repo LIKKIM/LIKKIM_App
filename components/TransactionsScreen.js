@@ -653,6 +653,228 @@ function TransactionsScreen() {
     );
   };
 
+  // 签名函数
+  const signTransaction = async (
+    device,
+    amount, // 转账金额
+    paymentAddress, // 传递 selectedCryptoObj.address
+    inputAddress, // 收款地址
+    selectedCrypto // 选择的加密货币
+  ) => {
+    try {
+      if (!device?.isConnected) return console.log("设备无效");
+
+      // 连接设备（如果需要）
+      await device.connect();
+      await device.discoverAllServicesAndCharacteristics();
+
+      // 打印所选币种
+      console.log("选择的币种:", selectedCrypto);
+
+      // EVM 区块链映射
+      const evmChainMapping = {
+        arbitrum: "ARB",
+        aurora: "AURORA",
+        avalanche: "AVAX",
+        binance: "BNB",
+        celo: "CELO",
+        ethereum: ["ETH", "TEST"], // ETH 和 TEST 映射到 ethereum
+        ethereum_classic: "ETC",
+        fantom: "FTM",
+        gnosis: "GNO",
+        huobi: "HTX",
+        iotext: "IOTX",
+        lina: "LINEA",
+        OKT: "OKT",
+        optimism: "OP",
+        polygon: "POL",
+        ronin: "RON",
+        zksync: "ZKSYNC",
+      };
+
+      // 支付路径映射
+      const cryptoPathMapping = {
+        bitcoin: "m/49'/0'/0'/0/0",
+        ethereum: "m/44'/60'/0'/0/0",
+        tron: "m/44'/195'/0'/0/0",
+        bitcoin_cash: "m/44'/145'/0'/0/0",
+        binance: "m/44'/60'/0'/0/0",
+        optimism: "m/44'/60'/0'/0/0",
+        ethereum_classic: "m/44'/60'/0'/0/0",
+        litecoin: "m/49'/2'/0'/0/0",
+        ripple: "m/44'/144'/0'/0/0",
+        solana: "m/44'/501'/0'/0/0",
+        arbitrum: "m/44'/60'/0'/0/0",
+        cosmos: "m/44'/118'/0'/0/0",
+        celestia: "m/44'/118'/0'/0/0",
+        cronos: "m/44'/60'/0'/0/0",
+        juno: "m/44'/118'/0'/0/0",
+        osmosis: "m/44'/118'/0'/0/0",
+        aurora: "m/44'/60'/0'/0/0",
+        avalanche: "m/44'/60'/0'/0/0",
+        celo: "m/44'/60'/0'/0/0",
+        fantom: "m/44'/60'/0'/0/0",
+        gnosis: "m/44'/60'/0'/0/0",
+        huobi: "m/44'/60'/0'/0/0",
+        iotex: "m/44'/60'/0'/0/0",
+        okx: "m/44'/60'/0'/0/0",
+        polygon: "m/44'/60'/0'/0/0",
+        zksync: "m/44'/60'/0'/0/0",
+        aptos: "m/44'/637'/0'/0'/0",
+        sui: "m/44'/784'/0'/0'/0",
+        cardano: "m/1852'/1815'/0'/0/0",
+        linea: "m/44'/60'/0'/0/0",
+        ronin: "m/44'/60'/0'/0/0",
+      };
+
+      // 将 selectedCrypto 转换为大写，确保一致性
+      const selectedCryptoUpper = selectedCrypto.toUpperCase();
+
+      // 查找哪个链标识包含 selectedCrypto
+      const chainKey = Object.keys(evmChainMapping).find((key) => {
+        const value = evmChainMapping[key];
+        return Array.isArray(value)
+          ? value.includes(selectedCryptoUpper)
+          : value === selectedCryptoUpper;
+      });
+
+      if (!chainKey) {
+        console.log(`不支持的币种: ${selectedCrypto}`);
+        return;
+      }
+
+      console.log("选择的链标识:", chainKey);
+
+      // 使用 chainKey 查找对应的路径
+      const path = cryptoPathMapping[chainKey];
+
+      if (!path) {
+        console.log(`不支持的路径: ${chainKey}`);
+        return;
+      }
+
+      console.log("选择的路径:", path); // 打印选择的路径
+
+      // 第一步：获取 nonce 和 gasPrice
+      const walletParamsResponse = await fetch(
+        "https://bt.likkim.com/api/wallet/getSignParam",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            chain: selectedCrypto, // 使用 selectedCrypto 作为 chain
+            address: paymentAddress, // 使用 paymentAddress 参数
+          }),
+        }
+      );
+
+      if (!walletParamsResponse.ok) {
+        console.log(
+          "获取 nonce 和 gasPrice 失败:",
+          walletParamsResponse.status
+        );
+        return;
+      }
+
+      // 获取接口返回数据
+      const walletParamsData = await walletParamsResponse.json();
+      console.log("getSignParam 返回的数据:", walletParamsData);
+
+      if (
+        !walletParamsData.data?.gasPrice ||
+        walletParamsData.data?.nonce == null
+      ) {
+        console.log("接口返回数据不完整:", walletParamsData);
+        return;
+      }
+
+      const { gasPrice, nonce } = walletParamsData.data;
+
+      // 第二步：构造 POST 请求数据
+      const requestData = {
+        chainKey: selectedCrypto, // 使用 selectedCrypto 作为链标识
+        nonce: nonce, // 使用原始的 nonce 值
+        gasLimit: 53000, // 更新的 gas 限制为 53000
+        gasPrice: gasPrice, // 不进行任何转换，直接使用返回的 gasPrice
+        value: Number(amount), // 确保金额为数字类型
+        to: inputAddress, // 目标地址
+        contractAddress: "", // 没有合约调用
+        contractValue: 0,
+      };
+
+      console.log("构造的请求数据:", JSON.stringify(requestData, null, 2));
+
+      // 第三步：发送交易请求
+      const response = await fetch(
+        "https://bt.likkim.com/api/sign/encode_evm",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(requestData),
+        }
+      );
+
+      const responseData = await response.json();
+
+      // 打印返回的数据
+      if (responseData?.data?.data) {
+        console.log("返回的数据:", responseData.data.data);
+
+        // 构建要发送的第一个字符串
+        const signMessage = `sign:${chainKey},${path},${responseData.data.data}`;
+        console.log("构建的发送消息:", signMessage);
+
+        // 将构建的第一个字符串转换为 Base64 编码
+        const bufferMessage = Buffer.from(signMessage, "utf-8");
+        const base64Message = bufferMessage.toString("base64");
+
+        // 发送 Base64 编码的数据给设备
+        try {
+          await device.writeCharacteristicWithResponseForService(
+            serviceUUID,
+            writeCharacteristicUUID,
+            base64Message
+          );
+          console.log("数据已成功发送给设备");
+        } catch (error) {
+          console.log("发送数据给设备时发生错误:", error);
+        }
+
+        // 构建要发送的第二组数据
+        const destinationAddress = inputAddress;
+        const transactionFee = "0.0001"; // 替换为实际交易手续费
+        const secondMessage = `destinationAddress:${destinationAddress},${transactionFee},${chainKey},${path}`;
+        console.log("构建的第二组发送消息:", secondMessage);
+
+        // 将第二组消息转换为 Base64 编码
+        const bufferSecondMessage = Buffer.from(secondMessage, "utf-8");
+        const base64SecondMessage = bufferSecondMessage.toString("base64");
+
+        // 发送第二组数据给设备
+        try {
+          await device.writeCharacteristicWithResponseForService(
+            serviceUUID,
+            writeCharacteristicUUID,
+            base64SecondMessage
+          );
+          console.log("第二组数据已成功发送给设备");
+        } catch (error) {
+          console.log("发送第二组数据给设备时发生错误:", error);
+        }
+      } else {
+        console.log("返回的数据不包含 'data' 字段");
+      }
+
+      return responseData; // 返回签名结果
+    } catch (error) {
+      console.log("处理交易失败:", error.message || error);
+    }
+  };
+
   const handleDevicePress = async (device) => {
     // 检查是否传递了有效的设备对象
     if (typeof device !== "object" || typeof device.connect !== "function") {
@@ -913,228 +1135,6 @@ function TransactionsScreen() {
       return addressMonitorSubscription;
     } catch (error) {
       console.log("发送显示地址命令失败:", error);
-    }
-  };
-
-  // 签名函数
-  const signTransaction = async (
-    device,
-    amount, // 转账金额
-    paymentAddress, // 传递 selectedCryptoObj.address
-    inputAddress, // 收款地址
-    selectedCrypto // 选择的加密货币
-  ) => {
-    try {
-      if (!device?.isConnected) return console.log("设备无效");
-
-      // 连接设备（如果需要）
-      await device.connect();
-      await device.discoverAllServicesAndCharacteristics();
-
-      // 打印所选币种
-      console.log("选择的币种:", selectedCrypto);
-
-      // EVM 区块链映射
-      const evmChainMapping = {
-        arbitrum: "ARB",
-        aurora: "AURORA",
-        avalanche: "AVAX",
-        binance: "BNB",
-        celo: "CELO",
-        ethereum: ["ETH", "TEST"], // ETH 和 TEST 映射到 ethereum
-        ethereum_classic: "ETC",
-        fantom: "FTM",
-        gnosis: "GNO",
-        huobi: "HTX",
-        iotext: "IOTX",
-        lina: "LINEA",
-        OKT: "OKT",
-        optimism: "OP",
-        polygon: "POL",
-        ronin: "RON",
-        zksync: "ZKSYNC",
-      };
-
-      // 支付路径映射
-      const cryptoPathMapping = {
-        bitcoin: "m/49'/0'/0'/0/0",
-        ethereum: "m/44'/60'/0'/0/0",
-        tron: "m/44'/195'/0'/0/0",
-        bitcoin_cash: "m/44'/145'/0'/0/0",
-        binance: "m/44'/60'/0'/0/0",
-        optimism: "m/44'/60'/0'/0/0",
-        ethereum_classic: "m/44'/60'/0'/0/0",
-        litecoin: "m/49'/2'/0'/0/0",
-        ripple: "m/44'/144'/0'/0/0",
-        solana: "m/44'/501'/0'/0/0",
-        arbitrum: "m/44'/60'/0'/0/0",
-        cosmos: "m/44'/118'/0'/0/0",
-        celestia: "m/44'/118'/0'/0/0",
-        cronos: "m/44'/60'/0'/0/0",
-        juno: "m/44'/118'/0'/0/0",
-        osmosis: "m/44'/118'/0'/0/0",
-        aurora: "m/44'/60'/0'/0/0",
-        avalanche: "m/44'/60'/0'/0/0",
-        celo: "m/44'/60'/0'/0/0",
-        fantom: "m/44'/60'/0'/0/0",
-        gnosis: "m/44'/60'/0'/0/0",
-        huobi: "m/44'/60'/0'/0/0",
-        iotex: "m/44'/60'/0'/0/0",
-        okx: "m/44'/60'/0'/0/0",
-        polygon: "m/44'/60'/0'/0/0",
-        zksync: "m/44'/60'/0'/0/0",
-        aptos: "m/44'/637'/0'/0'/0",
-        sui: "m/44'/784'/0'/0'/0",
-        cardano: "m/1852'/1815'/0'/0/0",
-        linea: "m/44'/60'/0'/0/0",
-        ronin: "m/44'/60'/0'/0/0",
-      };
-
-      // 将 selectedCrypto 转换为大写，确保一致性
-      const selectedCryptoUpper = selectedCrypto.toUpperCase();
-
-      // 查找哪个链标识包含 selectedCrypto
-      const chainKey = Object.keys(evmChainMapping).find((key) => {
-        const value = evmChainMapping[key];
-        return Array.isArray(value)
-          ? value.includes(selectedCryptoUpper)
-          : value === selectedCryptoUpper;
-      });
-
-      if (!chainKey) {
-        console.log(`不支持的币种: ${selectedCrypto}`);
-        return;
-      }
-
-      console.log("选择的链标识:", chainKey);
-
-      // 使用 chainKey 查找对应的路径
-      const path = cryptoPathMapping[chainKey];
-
-      if (!path) {
-        console.log(`不支持的路径: ${chainKey}`);
-        return;
-      }
-
-      console.log("选择的路径:", path); // 打印选择的路径
-
-      // 第一步：获取 nonce 和 gasPrice
-      const walletParamsResponse = await fetch(
-        "https://bt.likkim.com/api/wallet/getSignParam",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            chain: selectedCrypto, // 使用 selectedCrypto 作为 chain
-            address: paymentAddress, // 使用 paymentAddress 参数
-          }),
-        }
-      );
-
-      if (!walletParamsResponse.ok) {
-        console.log(
-          "获取 nonce 和 gasPrice 失败:",
-          walletParamsResponse.status
-        );
-        return;
-      }
-
-      // 获取接口返回数据
-      const walletParamsData = await walletParamsResponse.json();
-      console.log("getSignParam 返回的数据:", walletParamsData);
-
-      if (
-        !walletParamsData.data?.gasPrice ||
-        walletParamsData.data?.nonce == null
-      ) {
-        console.log("接口返回数据不完整:", walletParamsData);
-        return;
-      }
-
-      const { gasPrice, nonce } = walletParamsData.data;
-
-      // 第二步：构造 POST 请求数据
-      const requestData = {
-        chainKey: selectedCrypto, // 使用 selectedCrypto 作为链标识
-        nonce: nonce, // 使用原始的 nonce 值
-        gasLimit: 53000, // 更新的 gas 限制为 53000
-        gasPrice: gasPrice, // 不进行任何转换，直接使用返回的 gasPrice
-        value: Number(amount), // 确保金额为数字类型
-        to: inputAddress, // 目标地址
-        contractAddress: "", // 没有合约调用
-        contractValue: 0,
-      };
-
-      console.log("构造的请求数据:", JSON.stringify(requestData, null, 2));
-
-      // 第三步：发送交易请求
-      const response = await fetch(
-        "https://bt.likkim.com/api/sign/encode_evm",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(requestData),
-        }
-      );
-
-      const responseData = await response.json();
-
-      // 打印返回的数据
-      if (responseData?.data?.data) {
-        console.log("返回的数据:", responseData.data.data);
-
-        // 构建要发送的第一个字符串
-        const signMessage = `sign:${chainKey},${path},${responseData.data.data}`;
-        console.log("构建的发送消息:", signMessage);
-
-        // 将构建的第一个字符串转换为 Base64 编码
-        const bufferMessage = Buffer.from(signMessage, "utf-8");
-        const base64Message = bufferMessage.toString("base64");
-
-        // 发送 Base64 编码的数据给设备
-        try {
-          await device.writeCharacteristicWithResponseForService(
-            serviceUUID,
-            writeCharacteristicUUID,
-            base64Message
-          );
-          console.log("数据已成功发送给设备");
-        } catch (error) {
-          console.log("发送数据给设备时发生错误:", error);
-        }
-
-        // 构建要发送的第二组数据
-        const destinationAddress = inputAddress;
-        const transactionFee = "0.0001"; // 替换为实际交易手续费
-        const secondMessage = `destinationAddress:${destinationAddress},${transactionFee},${chainKey},${path}`;
-        console.log("构建的第二组发送消息:", secondMessage);
-
-        // 将第二组消息转换为 Base64 编码
-        const bufferSecondMessage = Buffer.from(secondMessage, "utf-8");
-        const base64SecondMessage = bufferSecondMessage.toString("base64");
-
-        // 发送第二组数据给设备
-        try {
-          await device.writeCharacteristicWithResponseForService(
-            serviceUUID,
-            writeCharacteristicUUID,
-            base64SecondMessage
-          );
-          console.log("第二组数据已成功发送给设备");
-        } catch (error) {
-          console.log("发送第二组数据给设备时发生错误:", error);
-        }
-      } else {
-        console.log("返回的数据不包含 'data' 字段");
-      }
-
-      return responseData; // 返回签名结果
-    } catch (error) {
-      console.log("处理交易失败:", error.message || error);
     }
   };
 
