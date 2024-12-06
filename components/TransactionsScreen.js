@@ -653,6 +653,57 @@ function TransactionsScreen() {
     );
   };
 
+  const monitorSignedResult = (device) => {
+    monitorSubscription = device.monitorCharacteristicForService(
+      serviceUUID,
+      notifyCharacteristicUUID,
+      async (error, characteristic) => {
+        if (error) {
+          // 错误处理
+          if (error.message.includes("Operation was cancelled")) {
+            console.log("监听操作被取消，正在重新连接...");
+            reconnectDevice(device); // 主动重连逻辑
+          } else if (error.message.includes("Unknown error occurred")) {
+            console.log("未知错误，可能是一个Bug:", error.message);
+            if (error.reason) {
+              console.log("错误原因:", error.reason);
+            }
+            reconnectDevice(device); // 主动重连逻辑
+          } else {
+            console.log("监听设备响应时出错:", error.message);
+          }
+          return; // 直接返回，避免后续处理
+        }
+
+        // 解码 Base64 数据
+        const receivedData = Buffer.from(
+          characteristic.value,
+          "base64"
+        ).toString("utf8");
+        console.log("接收到的数据:", receivedData);
+
+        // 处理 signed_data 响应
+        if (receivedData.startsWith("signed_data:")) {
+          // 提取 signed_data 内容
+          const signedData = receivedData.split("signed_data:")[1];
+          const [chain, hex] = signedData.split(",");
+          console.log("签名结果 - Chain:", chain.trim());
+          console.log("签名结果 - Hex:", hex.trim());
+
+          // 构造广播交易的数据
+          const postData = {
+            chain: chain.trim(),
+            hex: hex.trim(),
+          };
+        } else {
+          console.log("签名结果收到未知数据:", receivedData);
+        }
+      }
+    );
+
+    console.log("已启动对 signed_data 的监听");
+  };
+
   // 签名函数
   const signTransaction = async (
     device,
@@ -820,6 +871,7 @@ function TransactionsScreen() {
 
       const responseData = await response.json();
 
+      monitorSignedResult(device);
       // 打印返回的数据
       if (responseData?.data?.data) {
         console.log("返回的数据:", responseData.data.data);
