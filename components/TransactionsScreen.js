@@ -687,14 +687,45 @@ function TransactionsScreen() {
           // 提取 signed_data 内容
           const signedData = receivedData.split("signed_data:")[1];
           const [chain, hex] = signedData.split(",");
-          console.log("签名结果 - Chain:", chain.trim());
-          console.log("签名结果 - Hex:", hex.trim());
+          //    console.log("签名结果 - Chain:", chain.trim());
+          //   console.log("签名结果 - Hex:", hex.trim());
 
           // 构造广播交易的数据
           const postData = {
-            chain: chain.trim(),
-            hex: hex.trim(),
+            chain: chain.trim(), // 去掉可能的空格
+            hex: hex.trim(), // 去掉可能的空格
           };
+
+          // 打印对象
+          console.log("准备发送的 POST 数据:", postData);
+          // 输出: 准备发送的 POST 数据: { chain: "ethereum", hex: "F86C..." }
+
+          // 打印 JSON 字符串
+          console.log("POST 数据的 JSON 字符串:", JSON.stringify(postData));
+
+          // 调用广播交易的 API
+          try {
+            const response = await fetch(
+              "https://bt.likkim.com/api/wallet/broadcastHex",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(postData), // 将数据转换为 JSON 字符串
+              }
+            );
+
+            const responseData = await response.json();
+
+            if (response.ok && responseData.success) {
+              console.log("交易广播成功:", responseData);
+            } else {
+              console.log("交易广播失败:", responseData);
+            }
+          } catch (broadcastError) {
+            console.log("交易广播时出错:", broadcastError.message);
+          }
         } else {
           console.log("签名结果收到未知数据:", receivedData);
         }
