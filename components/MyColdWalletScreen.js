@@ -1148,7 +1148,7 @@ function MyColdWalletScreen() {
         // 执行删除钱包的操作
         await AsyncStorage.removeItem("cryptoCards");
         setCryptoCards([]); // 清空应用状态中的钱包数据
-
+        setVerifiedDevices([]);
         // 显示成功信息
         Alert.alert(
           t("Success"),
