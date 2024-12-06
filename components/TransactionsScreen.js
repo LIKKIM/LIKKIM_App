@@ -499,7 +499,7 @@ function TransactionsScreen() {
       async (error, characteristic) => {
         if (error) {
           console.log("监听设备响应时出错:", error.message);
-          return;
+          //      return;
         }
 
         const receivedData = Buffer.from(characteristic.value, "base64");
@@ -1117,7 +1117,7 @@ function TransactionsScreen() {
         (error, characteristic) => {
           if (error) {
             console.log("监听设备响应时出错:", error);
-            return;
+            //    return;
           }
           const receivedDataHex = Buffer.from(characteristic.value, "base64")
             .toString("hex")
