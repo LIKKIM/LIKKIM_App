@@ -364,7 +364,9 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                     onPress={() => setIsAddingAddress(true)}
                     style={styles.submitButton}
                   >
-                    <Text style={styles.submitButtonText}>Add Address</Text>
+                    <Text style={styles.submitButtonText}>
+                      {t("Add Address")}
+                    </Text>
                   </TouchableOpacity>
                   <TouchableOpacity
                     onPress={onClose}

@@ -199,6 +199,16 @@ i18n
           "Your wallet has been deleted successfully.":
             "Your wallet has been deleted successfully.",
           "Insufficient Balance": "Insufficient Balance",
+          "Confirming Transaction on LIKKIM Device...":
+            "Confirming Transaction on LIKKIM Device...",
+          "Please confirm the transaction on your LIKKIM device.":
+            "Please confirm the transaction on your LIKKIM device.",
+          Save: "Save",
+          Address: "Address",
+          "Add Address": "Add Address",
+          Network: "Network",
+          Copy: "Copy",
+          Edit: "Edit",
         },
       },
       zh: {
@@ -380,6 +390,16 @@ i18n
           Success: "成功",
           "Your wallet has been deleted successfully.": "您的钱包已成功删除。",
           "Insufficient Balance": "余额不足",
+          "Confirming Transaction on LIKKIM Device...":
+            "正在确认LIKKIM设备上的交易...",
+          "Please confirm the transaction on your LIKKIM device.":
+            "请在您的LIKKIM设备上确认交易。",
+          Save: "保存",
+          Address: "地址",
+          "Add Address": "添加地址",
+          Network: "网络",
+          Copy: "复制",
+          Edit: "编辑",
         },
       },
       "zh-TW": {
@@ -567,6 +587,16 @@ i18n
           Success: "成功",
           "Your wallet has been deleted successfully.": "您的錢包已成功刪除。",
           "Insufficient Balance": "餘額不足",
+          "Confirming Transaction on LIKKIM Device...":
+            "正在確認LIKKIM設備上的交易...",
+          "Please confirm the transaction on your LIKKIM device.":
+            "請在您的LIKKIM設備上確認交易。",
+          Save: "儲存",
+          Address: "地址",
+          "Add Address": "新增地址",
+          Network: "網絡",
+          Copy: "複製",
+          Edit: "編輯",
         },
       },
       fr: {
@@ -789,6 +819,16 @@ i18n
           "Your wallet has been deleted successfully.":
             "Votre portefeuille a été supprimé avec succès.",
           "Insufficient Balance": "Solde insuffisant",
+          "Confirming Transaction on LIKKIM Device...":
+            "Confirmation de la transaction sur l'appareil LIKKIM...",
+          "Please confirm the transaction on your LIKKIM device.":
+            "Veuillez confirmer la transaction sur votre appareil LIKKIM.",
+          Save: "Sauvegarder",
+          Address: "Adresse",
+          "Add Address": "Ajouter une adresse",
+          Network: "Réseau",
+          Copy: "Copier",
+          Edit: "Éditer",
         },
       },
       es: {
@@ -986,6 +1026,16 @@ i18n
           "Your wallet has been deleted successfully.":
             "Tu billetera ha sido eliminada con éxito.",
           "Insufficient Balance": "Saldo insuficiente",
+          "Confirming Transaction on LIKKIM Device...":
+            "Confirmando la transacción en el dispositivo LIKKIM...",
+          "Please confirm the transaction on your LIKKIM device.":
+            "Por favor, confirma la transacción en tu dispositivo LIKKIM.",
+          Save: "Guardar",
+          Address: "Dirección",
+          "Add Address": "Añadir dirección",
+          Network: "Red",
+          Copy: "Copiar",
+          Edit: "Editar",
         },
       },
       ar: {
@@ -1175,6 +1225,16 @@ i18n
           Success: "نجاح",
           "Your wallet has been deleted successfully.": "تم حذف محفظتك بنجاح.",
           "Insufficient Balance": "رصيد غير كافي",
+          "Confirming Transaction on LIKKIM Device...":
+            "تأكيد العملية على جهاز LIKKIM...",
+          "Please confirm the transaction on your LIKKIM device.":
+            "يرجى تأكيد العملية على جهاز LIKKIM الخاص بك.",
+          Save: "حفظ",
+          Address: "العنوان",
+          "Add Address": "إضافة عنوان",
+          Network: "الشبكة",
+          Copy: "نسخ",
+          Edit: "تعديل",
         },
       },
       ja: {
@@ -1392,6 +1452,16 @@ i18n
           "Your wallet has been deleted successfully.":
             "ウォレットが正常に削除されました。",
           "Insufficient Balance": "残高不足",
+          "Confirming Transaction on LIKKIM Device...":
+            "LIKKIMデバイスでの取引を確認中...",
+          "Please confirm the transaction on your LIKKIM device.":
+            "LIKKIMデバイスで取引を確認してください。",
+          Save: "保存",
+          Address: "アドレス",
+          "Add Address": "アドレスを追加",
+          Network: "ネットワーク",
+          Copy: "コピー",
+          Edit: "編集",
         },
       },
       ru: {
@@ -1587,6 +1657,16 @@ i18n
           "Your wallet has been deleted successfully.":
             "Ваш кошелек был успешно удален.",
           "Insufficient Balance": "Недостаточно средств",
+          "Confirming Transaction on LIKKIM Device...":
+            "Подтверждение транзакции на устройстве LIKKIM...",
+          "Please confirm the transaction on your LIKKIM device.":
+            "Пожалуйста, подтвердите транзакцию на вашем устройстве LIKKIM.",
+          Save: "Сохранить",
+          Address: "Адрес",
+          "Add Address": "Добавить адрес",
+          Network: "Сеть",
+          Copy: "Копировать",
+          Edit: "Редактировать",
         },
       },
       ko: {
@@ -1777,6 +1857,16 @@ i18n
           "Your wallet has been deleted successfully.":
             "지갑이 성공적으로 삭제되었습니다.",
           "Insufficient Balance": "잔액 부족",
+          "Confirming Transaction on LIKKIM Device...":
+            "LIKKIM 장치에서 거래 확인 중...",
+          "Please confirm the transaction on your LIKKIM device.":
+            "LIKKIM 장치에서 거래를 확인해 주세요.",
+          Save: "저장",
+          Address: "주소",
+          "Add Address": "주소 추가",
+          Network: "네트워크",
+          Copy: "복사",
+          Edit: "편집",
         },
       },
       pt: {
@@ -1973,6 +2063,16 @@ i18n
           "Your wallet has been deleted successfully.":
             "Sua carteira foi excluída com sucesso.",
           "Insufficient Balance": "Saldo insuficiente",
+          "Confirming Transaction on LIKKIM Device...":
+            "Confirmando a transação no dispositivo LIKKIM...",
+          "Please confirm the transaction on your LIKKIM device.":
+            "Por favor, confirme a transação no seu dispositivo LIKKIM.",
+          Save: "Salvar",
+          Address: "Endereço",
+          "Add Address": "Adicionar Endereço",
+          Network: "Rede",
+          Copy: "Copiar",
+          Edit: "Editar",
         },
       },
       "pt-BR": {
@@ -2186,6 +2286,16 @@ i18n
           "Your wallet has been deleted successfully.":
             "Sua carteira foi excluída com sucesso.",
           "Insufficient Balance": "Saldo insuficiente",
+          "Confirming Transaction on LIKKIM Device...":
+            "Confirmando a transação no dispositivo LIKKIM...",
+          "Please confirm the transaction on your LIKKIM device.":
+            "Por favor, confirme a transação no seu dispositivo LIKKIM.",
+          Save: "Salvar",
+          Address: "Endereço",
+          "Add Address": "Adicionar Endereço",
+          Network: "Rede",
+          Copy: "Copiar",
+          Edit: "Editar",
         },
       },
       it: {
@@ -2384,6 +2494,16 @@ i18n
           "Your wallet has been deleted successfully.":
             "Il tuo portafoglio è stato eliminato con successo.",
           "Insufficient Balance": "Saldo insufficiente",
+          "Confirming Transaction on LIKKIM Device...":
+            "Confermando la transazione sul dispositivo LIKKIM...",
+          "Please confirm the transaction on your LIKKIM device.":
+            "Conferma la transazione sul tuo dispositivo LIKKIM.",
+          Save: "Salva",
+          Address: "Indirizzo",
+          "Add Address": "Aggiungi indirizzo",
+          Network: "Rete",
+          Copy: "Copia",
+          Edit: "Modifica",
         },
       },
       de: {
@@ -2584,6 +2704,16 @@ i18n
           "Your wallet has been deleted successfully.":
             "Ihr Wallet wurde erfolgreich gelöscht.",
           "Insufficient Balance": "Unzureichendes Guthaben",
+          "Confirming Transaction on LIKKIM Device...":
+            "Transaktion auf dem LIKKIM-Gerät wird bestätigt...",
+          "Please confirm the transaction on your LIKKIM device.":
+            "Bitte bestätigen Sie die Transaktion auf Ihrem LIKKIM-Gerät.",
+          Save: "Speichern",
+          Address: "Adresse",
+          "Add Address": "Adresse hinzufügen",
+          Network: "Netzwerk",
+          Copy: "Kopieren",
+          Edit: "Bearbeiten",
         },
       },
       hi: {
@@ -2782,6 +2912,16 @@ i18n
           "Your wallet has been deleted successfully.":
             "आपकी वॉलेट को सफलतापूर्वक हटा दिया गया है।",
           "Insufficient Balance": "अपर्याप्त शेष",
+          "Confirming Transaction on LIKKIM Device...":
+            "LIKKIM डिवाइस पर लेनदेन की पुष्टि हो रही है...",
+          "Please confirm the transaction on your LIKKIM device.":
+            "कृपया अपने LIKKIM डिवाइस पर लेनदेन की पुष्टि करें।",
+          Save: "सहेजें",
+          Address: "पता",
+          "Add Address": "पता जोड़ें",
+          Network: "नेटवर्क",
+          Copy: "कॉपी",
+          Edit: "संपादित करें",
         },
       },
       mn: {
@@ -2989,6 +3129,16 @@ i18n
           "Your wallet has been deleted successfully.":
             "Таны түрийвч амжилттай устгагдсан.",
           "Insufficient Balance": "Хүлээгдэж буй үлдэгдэл",
+          "Confirming Transaction on LIKKIM Device...":
+            "LIKKIM төхөөрөмж дээр гүйлгээг баталгаажуулж байна...",
+          "Please confirm the transaction on your LIKKIM device.":
+            "Та өөрийн LIKKIM төхөөрөмж дээр гүйлгээг баталгаажуулна уу.",
+          Save: "Хадгалах",
+          Address: "Хаяг",
+          "Add Address": "Хаяг нэмэх",
+          Network: "Сүлжээ",
+          Copy: "Хуулах",
+          Edit: "Засварлах",
         },
       },
       th: {
@@ -3178,6 +3328,16 @@ i18n
           "Your wallet has been deleted successfully.":
             "กระเป๋าของคุณถูกลบเรียบร้อยแล้ว",
           "Insufficient Balance": "ยอดเงินไม่พอ",
+          "Confirming Transaction on LIKKIM Device...":
+            "กำลังยืนยันการทำรายการบนอุปกรณ์ LIKKIM...",
+          "Please confirm the transaction on your LIKKIM device.":
+            "โปรดยืนยันการทำรายการบนอุปกรณ์ LIKKIM ของคุณ",
+          Save: "บันทึก",
+          Address: "ที่อยู่",
+          "Add Address": "เพิ่มที่อยู่",
+          Network: "เครือข่าย",
+          Copy: "คัดลอก",
+          Edit: "แก้ไข",
         },
       },
       uk: {
@@ -3371,6 +3531,16 @@ i18n
           "Your wallet has been deleted successfully.":
             "Ваш гаманець був успішно видалений.",
           "Insufficient Balance": "Недостатньо коштів",
+          "Confirming Transaction on LIKKIM Device...":
+            "Підтвердження транзакції на пристрої LIKKIM...",
+          "Please confirm the transaction on your LIKKIM device.":
+            "Будь ласка, підтвердіть транзакцію на вашому пристрої LIKKIM.",
+          Save: "Зберегти",
+          Address: "Адреса",
+          "Add Address": "Додати адресу",
+          Network: "Мережа",
+          Copy: "Копіювати",
+          Edit: "Редагувати",
         },
       },
       vi: {
@@ -3568,6 +3738,16 @@ i18n
           "Your wallet has been deleted successfully.":
             "Ví của bạn đã được xóa thành công.",
           "Insufficient Balance": "Số dư không đủ",
+          "Confirming Transaction on LIKKIM Device...":
+            "Đang xác nhận giao dịch trên thiết bị LIKKIM...",
+          "Please confirm the transaction on your LIKKIM device.":
+            "Vui lòng xác nhận giao dịch trên thiết bị LIKKIM của bạn.",
+          Save: "Lưu",
+          Address: "Địa chỉ",
+          "Add Address": "Thêm địa chỉ",
+          Network: "Mạng",
+          Copy: "Sao chép",
+          Edit: "Chỉnh sửa",
         },
       },
       id: {
@@ -3765,6 +3945,16 @@ i18n
           "Your wallet has been deleted successfully.":
             "Dompet Anda telah dihapus dengan sukses.",
           "Insufficient Balance": "Saldo tidak cukup",
+          "Confirming Transaction on LIKKIM Device...":
+            "Mengonfirmasi transaksi pada perangkat LIKKIM...",
+          "Please confirm the transaction on your LIKKIM device.":
+            "Silakan konfirmasi transaksi pada perangkat LIKKIM Anda.",
+          Save: "Simpan",
+          Address: "Alamat",
+          "Add Address": "Tambah Alamat",
+          Network: "Jaringan",
+          Copy: "Salin",
+          Edit: "Edit",
         },
       },
       tl: {
@@ -3964,6 +4154,16 @@ i18n
           "Your wallet has been deleted successfully.":
             "Matagumpay na natanggal ang iyong wallet.",
           "Insufficient Balance": "Hindi sapat na balanse",
+          "Confirming Transaction on LIKKIM Device...":
+            "Kinukumpirma ang transaksyon sa LIKKIM Device...",
+          "Please confirm the transaction on your LIKKIM device.":
+            "Pakikumpirma ang transaksyon sa iyong LIKKIM device.",
+          Save: "I-save",
+          Address: "Address",
+          "Add Address": "Magdagdag ng Address",
+          Network: "Network",
+          Copy: "Kopyahin",
+          Edit: "I-edit",
         },
       },
       bn: {
@@ -4164,6 +4364,16 @@ i18n
           "Your wallet has been deleted successfully.":
             "আপনার ওয়ালেট সফলভাবে মুছে ফেলা হয়েছে।",
           "Insufficient Balance": "অপর্যাপ্ত ব্যালেন্স",
+          "Confirming Transaction on LIKKIM Device...":
+            "LIKKIM ডিভাইসে লেনদেন নিশ্চিত করা হচ্ছে...",
+          "Please confirm the transaction on your LIKKIM device.":
+            "আপনার LIKKIM ডিভাইসে লেনদেন নিশ্চিত করুন।",
+          Save: "সংরক্ষণ",
+          Address: "ঠিকানা",
+          "Add Address": "ঠিকানা যোগ করুন",
+          Network: "নেটওয়ার্ক",
+          Copy: "কপি",
+          Edit: "সম্পাদনা করুন",
         },
       },
     },
