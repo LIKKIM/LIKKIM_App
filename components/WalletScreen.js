@@ -140,6 +140,42 @@ function WalletScreen({ route, navigation }) {
     chainIcon: crypto.chainIcon,
     ...crypto, // 这里确保包括所有相关属性
   }));
+  const [selectedChainShortName, setSelectedChainShortName] = useState([
+    "ETH",
+    "BCH",
+    "OP",
+    "ETC",
+    "LTC",
+    "XRP",
+    "SOL",
+    "ARB",
+    "BNB",
+    "AURORA",
+    "AVAX",
+    "BTC",
+    "CELO",
+    "FTM",
+    "HTX",
+    "IOTX",
+    "OKT",
+    "POL",
+    "TRX",
+    "ZKSYNC",
+    "ATOM",
+    "CEL",
+    "CRO",
+    "JUNO",
+    "OSMO",
+    "GNO",
+    "LINEA",
+    "RON",
+    "APT",
+    "SUI",
+  ]);
+
+  const chainFilteredCards = cryptoCards.filter((card) =>
+    selectedChainShortName.includes(card.chainShortName)
+  );
 
   const [importingModalVisible, setImportingModalVisible] = useState(false);
   const restoreIdentifier = Constants.installationId;
@@ -962,23 +998,6 @@ function WalletScreen({ route, navigation }) {
         }
         // Base64解码接收到的数据
         const receivedData = Buffer.from(characteristic.value, "base64");
-
-        // 将接收到的数据解析为十六进制字符串
-        const receivedDataHex = receivedData.toString("hex").toUpperCase();
-        /*        console.log(
-          "接收到监听钱包生成结果模块的16进制数据字符串:",
-          receivedDataHex
-        ); */
-
-        if (receivedDataHex === "A40002B1E20D0A") {
-          console.log("钱包创建失败");
-          // 调用显示地址的函数
-        } else if (receivedDataHex === "A40102B0720D0A") {
-          console.log("钱包创建成功");
-          // 钱包创建成功后的逻辑处理
-          // showAddressCommand(device);
-          monitorWalletAddress(device);
-        }
       }
     );
   };
@@ -1727,6 +1746,9 @@ function WalletScreen({ route, navigation }) {
     }
   }
 
+  const filteredCards = cryptoCards.filter(
+    (card) => card.chainShortName === "AURORA"
+  );
   //热更新支持
   useEffect(() => {
     onFetchUpdateAsync();
@@ -1798,7 +1820,7 @@ function WalletScreen({ route, navigation }) {
 
         {/* <Text>{"LIKKIM:" + likkim_select_card}</Text> */}
 
-        {cryptoCards.map((card, index) => {
+        {chainFilteredCards.map((card, index) => {
           const isBlackText = [""].includes(card.shortName);
           const priceChange = priceChanges[card.shortName]?.priceChange || "0";
           const percentageChange =
