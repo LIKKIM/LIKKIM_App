@@ -368,7 +368,7 @@ function TransactionsScreen() {
             setTransactionFee(selectedCryptoObj.fee); // 如果查询失败，使用 initialAdditionalCryptos 中的 fee 值
           }
         } catch (error) {
-          console.log("Error:", error);
+          console.log("查询手续费Error:", error);
           setTransactionFee(selectedCryptoObj.fee); // 如果请求出错，使用 initialAdditionalCryptos 中的 fee 值
         } finally {
           setHasFetchedBalance(true);
@@ -606,7 +606,9 @@ function TransactionsScreen() {
           // 从 receivedDataString 中提取 chain 和 hex 值
           const signedData = receivedDataString.split("signed_data:")[1];
           const [chain, hex] = signedData.split(",");
-
+          // 打印 chain 和 hex 以确认它们的值
+          console.log("Chain:", chain.trim());
+          console.log("Hex:", hex.trim());
           // 构造 JSON 数据
           const postData = {
             chain: chain.trim(), // 去掉可能的空格

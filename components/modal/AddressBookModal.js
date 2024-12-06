@@ -18,6 +18,7 @@ import {
 import { BlurView } from "expo-blur";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useTranslation } from "react-i18next"; // 导入 useTranslation
 
 function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
   const [searchAddress, setSearchAddress] = useState("");
@@ -28,6 +29,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
   const [networkDropdownVisible, setNetworkDropdownVisible] = useState(false);
   const [dropdownVisible, setDropdownVisible] = useState(null);
   const [savedAddresses, setSavedAddresses] = useState([]);
+  const { t } = useTranslation(); // 获取翻译函数
 
   useEffect(() => {
     if (visible) {
@@ -226,7 +228,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
             >
               {!isAddingAddress ? (
                 <>
-                  <Text style={styles.modalTitle}>Address Book</Text>
+                  <Text style={styles.modalTitle}>{t("Address Book")}</Text>
                   <View style={styles.searchContainer}>
                     <Icon name="search" size={20} style={styles.searchIcon} />
                     <TextInput
@@ -279,7 +281,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                                   }}
                                 >
                                   <Text style={styles.text}>
-                                    Network:&nbsp;
+                                    {t("Network")}:&nbsp;
                                   </Text>
                                   <Image
                                     source={networkImages[item.network]}
@@ -297,7 +299,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                                 <Text
                                   style={[styles.text, { marginRight: 10 }]}
                                 >
-                                  Name:&nbsp;
+                                  {t("Name")}:&nbsp;
                                   <Text style={styles.modalSubtitle}>
                                     {item.name}
                                   </Text>
@@ -311,7 +313,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                                 numberOfLines={1}
                                 ellipsizeMode="middle"
                               >
-                                Address:&nbsp;
+                                {t("Address")}:&nbsp;
                                 <Text style={styles.modalSubtitle}>
                                   {item.address}
                                 </Text>
@@ -334,21 +336,21 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                                 onPress={() => handleCopy(item.address)}
                               >
                                 <Text style={styles.dropdownButtonText}>
-                                  Copy
+                                  {t("Copy")}
                                 </Text>
                               </TouchableOpacity>
                               <TouchableOpacity
                                 onPress={() => handleDelete(item.id)}
                               >
                                 <Text style={styles.dropdownButtonText}>
-                                  Delete
+                                  {t("Delete")}
                                 </Text>
                               </TouchableOpacity>
                               <TouchableOpacity
                                 onPress={() => handleEdit(item.id)}
                               >
                                 <Text style={styles.dropdownButtonText}>
-                                  Edit
+                                  {t("Edit")}
                                 </Text>
                               </TouchableOpacity>
                             </View>
@@ -368,7 +370,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                     onPress={onClose}
                     style={styles.closeButton}
                   >
-                    <Text style={styles.cancelButtonText}>Close</Text>
+                    <Text style={styles.cancelButtonText}>{t("Close")}</Text>
                   </TouchableOpacity>
                 </>
               ) : (
@@ -485,13 +487,13 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                       onPress={handleSaveAddress}
                       style={styles.submitButton}
                     >
-                      <Text style={styles.submitButtonText}>Save</Text>
+                      <Text style={styles.submitButtonText}>{t("Save")}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                       onPress={() => setIsAddingAddress(false)}
                       style={styles.closeButton}
                     >
-                      <Text style={styles.cancelButtonText}>Back</Text>
+                      <Text style={styles.cancelButtonText}>{t("Back")}</Text>
                     </TouchableOpacity>
                   </View>
                 </>
