@@ -652,7 +652,7 @@ function TransactionsScreen() {
       }
     );
   };
-
+  //监听签名结果
   const monitorSignedResult = (device) => {
     monitorSubscription = device.monitorCharacteristicForService(
       serviceUUID,
