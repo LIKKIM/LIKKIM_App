@@ -24,35 +24,10 @@ const OnboardingScreen = ({ onDone }) => {
   const [languageModalVisible, setLanguageModalVisible] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState("en");
   const [currentSlideKey, setCurrentSlideKey] = useState("slide1");
-  const scaleAnim = useRef(new Animated.Value(1)).current; // 初始缩放比例为1
+  const scaleAnim = useRef(new Animated.Value(0.8)).current; // 初始缩放比例为1
   const opacityAnim = useRef(new Animated.Value(0)).current; // 初始透明度为0
   const translateYAnim = useRef(new Animated.Value(30)).current; // 初始位置稍低，用于从下到上的效果
   const fadeInUpAnim = useRef(new Animated.Value(0)).current;
-
-  useEffect(() => {
-    scaleAnim.setValue(0.9); // 设置动画初始缩放比例为0.8
-    Animated.timing(scaleAnim, {
-      toValue: 1.05, // 动画结束时的缩放比例为1.1
-      duration: 8000, // 动画持续时间为3000毫秒
-      useNativeDriver: true,
-    }).start();
-  }, []);
-
-  useEffect(() => {
-    scaleAnim.setValue(0.9);
-    Animated.timing(scaleAnim, {
-      toValue: 1.05,
-      duration: 10000,
-      useNativeDriver: true,
-    }).start();
-
-    fadeInUpAnim.setValue(0);
-    Animated.timing(fadeInUpAnim, {
-      toValue: 1,
-      duration: 1000,
-      useNativeDriver: true,
-    }).start();
-  }, [currentSlideKey]); // 依赖于currentSlideKey，确保每次切换滑动页时重启动画
 
   useEffect(() => {
     AsyncStorage.getItem("selectedLanguage").then((value) => {
@@ -62,21 +37,6 @@ const OnboardingScreen = ({ onDone }) => {
       }
     });
   }, []);
-
-  useEffect(() => {
-    Animated.parallel([
-      Animated.timing(opacityAnim, {
-        toValue: 1,
-        duration: 500,
-        useNativeDriver: true,
-      }),
-      Animated.timing(translateYAnim, {
-        toValue: 0,
-        duration: 500,
-        useNativeDriver: true,
-      }),
-    ]).start();
-  }, [currentSlideKey]);
 
   // 在这里定义slides，依赖于当前语言设置
   const slides = [
@@ -107,63 +67,96 @@ const OnboardingScreen = ({ onDone }) => {
     setLanguageModalVisible(false);
   };
 
-  const _renderItem = ({ item }) => (
-    <LinearGradient colors={["#21201E", "#0E0D0D"]} style={styles.slide}>
-      <TouchableOpacity
-        style={styles.languageButton}
-        onPress={() => setLanguageModalVisible(true)}
-      >
-        <Text style={styles.buttonText}>
-          {languages.find((lang) => lang.code === selectedLanguage).name}
-        </Text>
-      </TouchableOpacity>
-      <View style={styles.content}>
-        <Animated.Image
-          source={item.image}
-          style={{
-            ...styles.image,
-            transform: [{ scale: scaleAnim }],
-          }}
-        />
-        <Animated.Text
-          style={[
-            styles.title,
-            {
-              opacity: fadeInUpAnim,
-              transform: [
-                {
-                  translateY: fadeInUpAnim.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [20, 0],
-                  }),
-                },
-              ],
-            },
-          ]}
+  const _renderItem = ({ item }) => {
+    // 初始化动画值
+    scaleAnim.setValue(0.8);
+    fadeInUpAnim.setValue(0);
+    opacityAnim.setValue(0);
+    translateYAnim.setValue(30);
+
+    // 启动动画
+    Animated.parallel([
+      Animated.timing(scaleAnim, {
+        toValue: 1,
+        duration: 3000,
+        useNativeDriver: true,
+      }),
+      Animated.timing(fadeInUpAnim, {
+        toValue: 1,
+        duration: 600,
+        useNativeDriver: true,
+      }),
+      Animated.timing(opacityAnim, {
+        toValue: 1,
+        duration: 800,
+        useNativeDriver: true,
+      }),
+      Animated.timing(translateYAnim, {
+        toValue: 0,
+        duration: 600,
+        useNativeDriver: true,
+      }),
+    ]).start();
+
+    return (
+      <LinearGradient colors={["#21201E", "#0E0D0D"]} style={styles.slide}>
+        <TouchableOpacity
+          style={styles.languageButton}
+          onPress={() => setLanguageModalVisible(true)}
         >
-          {item.title}
-        </Animated.Text>
-        <Animated.Text
-          style={[
-            styles.text,
-            {
-              opacity: fadeInUpAnim,
-              transform: [
-                {
-                  translateY: fadeInUpAnim.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [20, 0],
-                  }),
-                },
-              ],
-            },
-          ]}
-        >
-          {item.text}
-        </Animated.Text>
-      </View>
-    </LinearGradient>
-  );
+          <Text style={styles.buttonText}>
+            {languages.find((lang) => lang.code === selectedLanguage).name}
+          </Text>
+        </TouchableOpacity>
+        <View style={styles.content}>
+          <Animated.Image
+            source={item.image}
+            style={{
+              ...styles.image,
+              transform: [{ scale: scaleAnim }],
+              opacity: opacityAnim,
+            }}
+          />
+          <Animated.Text
+            style={[
+              styles.title,
+              {
+                opacity: fadeInUpAnim,
+                transform: [
+                  {
+                    translateY: fadeInUpAnim.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [20, 0],
+                    }),
+                  },
+                ],
+              },
+            ]}
+          >
+            {item.title}
+          </Animated.Text>
+          <Animated.Text
+            style={[
+              styles.text,
+              {
+                opacity: fadeInUpAnim,
+                transform: [
+                  {
+                    translateY: fadeInUpAnim.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [20, 0],
+                    }),
+                  },
+                ],
+              },
+            ]}
+          >
+            {item.text}
+          </Animated.Text>
+        </View>
+      </LinearGradient>
+    );
+  };
 
   // 确保其余按钮和文本使用 i18n 进行国际化
   const _renderNextButton = () => (
