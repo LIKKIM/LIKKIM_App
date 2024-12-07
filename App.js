@@ -144,7 +144,6 @@ function AppContent({
 
   const allChains = cryptoCards.map((card) => card.chainShortName);
 
-  console.log("app", allChains);
   // 全选按钮处理
   const handleSelectAll = () => {
     if (selectedChainShortName.length !== allChains.length) {
@@ -216,22 +215,15 @@ function AppContent({
     return <ScreenLock />;
   }
 
+  const updateSelectedChain = (newChainShortName) => {
+    setSelectedChainShortName(newChainShortName);
+    navigation.setParams({ selectedChainShortName: newChainShortName }); // 动态更新导航参数
+  };
   return (
     <View style={{ flex: 1, backgroundColor: bottomBackgroundColor }}>
       <Tab.Navigator
         screenOptions={({ route }) => ({
           lazy: false,
-          //    tabBarButton: (props) => (
-          //      <TouchableOpacity
-          //        {...props}
-          //        onPress={() => {
-          //          Vibration.vibrate();
-          //          props.onPress();
-          //        }}
-          //      >
-          //        {props.children}
-          //      </TouchableOpacity>
-          //    ),
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
             if (route.name === "Wallet") {
@@ -304,6 +296,8 @@ function AppContent({
             const showAddIcon = cryptoCards.length > 0;
             const isModalVisible = route.params?.isModalVisible;
 
+            console.log("selectedChainShortName:", selectedChainShortName);
+
             // 判断是否显示 "Selected Chain" 和 "Add Icon"
             const showChainAndAddIcon = showAddIcon && !isModalVisible;
 
@@ -351,9 +345,12 @@ function AppContent({
                       onPress={() => setChainModalVisible(true)} // 点击时显示 Modal
                     >
                       <Text style={{ fontSize: 16 }}>
-                        {selectedChainShortName
-                          ? `Selected Chain: ${selectedChainShortName}`
-                          : "Select a Chain"}
+                        {Array.isArray(selectedChainShortName) &&
+                        selectedChainShortName.every((chain) =>
+                          allChains.includes(chain)
+                        )
+                          ? "All added"
+                          : selectedChainShortName}
                       </Text>
                     </TouchableOpacity>
                   );
@@ -408,43 +405,50 @@ function AppContent({
         transparent={true}
         onRequestClose={() => setChainModalVisible(false)} // 关闭 Modal
       >
-        <View
+        <BlurView
+          intensity={10}
           style={{
             flex: 1,
             justifyContent: "center",
             alignItems: "center",
-            backgroundColor: "rgba(0,0,0,0.5)", // 半透明背景
+            backgroundColor: "rgba(0, 0, 0, 0.2)",
           }}
         >
           <View
             style={{
-              width: 300,
-              padding: 20,
-              backgroundColor: "white",
-              borderRadius: 10,
+              margin: 20,
+              minHeight: 400,
+              width: "90%",
+              backgroundColor: isDarkMode ? "#3F3D3C" : "#ffffff",
+              borderRadius: 20,
+              padding: 35,
               alignItems: "center",
             }}
           >
             <Text style={{ fontSize: 18, marginBottom: 20 }}>
-              {t("Select a Blockchain")}
+              {t("Added Chains")}
             </Text>
 
             {/* 显示所有链选项 */}
-            <ScrollView style={{ maxHeight: 300 }}>
+            <ScrollView style={{ width: "100%", maxHeight: 300 }}>
               {/* 全选按钮 */}
               <View
                 style={{
-                  flexDirection: "row",
+                  width: "100%",
+                  padding: 6,
+                  marginBottom: 6,
+                  borderRadius: 30,
+                  display: "flex",
+                  justifyContent: "center",
                   alignItems: "center",
-                  marginBottom: 10,
+                  flexDirection: "row",
+
                   borderWidth:
                     selectedChainShortName.length === allChains.length ? 2 : 0, // 选中所有时显示边框
                   borderColor:
                     selectedChainShortName.length === allChains.length
                       ? "blue"
                       : "transparent", // 边框颜色
-                  padding: 5,
-                  borderRadius: 5,
                 }}
               >
                 <Button
@@ -463,12 +467,18 @@ function AppContent({
                 <View
                   key={chain}
                   style={{
-                    flexDirection: "row",
+                    width: "100%",
+                    padding: 6,
+                    marginBottom: 6,
+                    borderRadius: 30,
+                    display: "flex",
+                    justifyContent: "center",
                     alignItems: "center",
-                    marginBottom: 10,
-                    borderWidth: 0, // 确保链项按钮没有边框
-                    padding: 5,
-                    borderRadius: 5, // 边框圆角
+                    flexDirection: "row",
+                    borderWidth: selectedChainShortName.includes(chain) ? 2 : 0, // 选中所有时显示边框
+                    borderColor: selectedChainShortName.includes(chain)
+                      ? "blue"
+                      : "transparent", // 边框颜色
                   }}
                 >
                   <Button
@@ -485,7 +495,7 @@ function AppContent({
               ))}
             </ScrollView>
           </View>
-        </View>
+        </BlurView>
       </Modal>
     </View>
   );

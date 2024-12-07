@@ -385,6 +385,13 @@ function WalletScreen({ route, navigation }) {
     }
   }, []);
   useEffect(() => {
+    // 更新 Tab.Screen 的参数
+    navigation.setParams({
+      selectedChainShortName: selectedChainShortName,
+    });
+  }, [selectedChainShortName]);
+
+  useEffect(() => {
     // 当 cryptoCards 状态变化时，更新 route.params
     // console.warn('selectedCardName' + selectedCardName)
     navigation.setParams({ cryptoCards, selectedCardName });
