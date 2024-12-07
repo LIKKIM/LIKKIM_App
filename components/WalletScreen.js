@@ -1,4 +1,4 @@
-// WalletScreen.js
+//WalletScreen.js
 import React, { useState, useEffect, useRef, useContext } from "react";
 import {
   View,
@@ -55,8 +55,6 @@ function WalletScreen({ route, navigation }) {
   // 使用状态
   const [receivedVerificationCode, setReceivedVerificationCode] = useState("");
   const {
-    selectedChainShortName,
-    setSelectedChainShortName,
     exchangeRates,
     initialAdditionalCryptos,
     setInitialAdditionalCryptos,
@@ -143,6 +141,38 @@ function WalletScreen({ route, navigation }) {
     chainIcon: crypto.chainIcon,
     ...crypto, // 这里确保包括所有相关属性
   }));
+  const [selectedChainShortName, setSelectedChainShortName] = useState([
+    "ETH",
+    "BCH",
+    "OP",
+    "ETC",
+    "LTC",
+    "XRP",
+    "SOL",
+    "ARB",
+    "BNB",
+    "AURORA",
+    "AVAX",
+    "BTC",
+    "CELO",
+    "FTM",
+    "HTX",
+    "IOTX",
+    "OKT",
+    "POL",
+    "TRX",
+    "ZKSYNC",
+    "ATOM",
+    "CEL",
+    "CRO",
+    "JUNO",
+    "OSMO",
+    "GNO",
+    "LINEA",
+    "RON",
+    "APT",
+    "SUI",
+  ]);
 
   const chainFilteredCards = cryptoCards.filter((card) =>
     selectedChainShortName.includes(card.chainShortName)
@@ -384,13 +414,6 @@ function WalletScreen({ route, navigation }) {
       };
     }
   }, []);
-  useEffect(() => {
-    // 更新 Tab.Screen 的参数
-    navigation.setParams({
-      selectedChainShortName: selectedChainShortName,
-    });
-  }, [selectedChainShortName]);
-
   useEffect(() => {
     // 当 cryptoCards 状态变化时，更新 route.params
     // console.warn('selectedCardName' + selectedCardName)
