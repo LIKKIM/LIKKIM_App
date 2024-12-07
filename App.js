@@ -8,6 +8,8 @@ import {
   TouchableOpacity,
   StatusBar,
   Modal,
+  Button,
+  ScrollView,
 } from "react-native";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -129,7 +131,35 @@ function AppContent({
   selectedCardName,
   setSelectedCardName,
 }) {
-  const { isScreenLockEnabled, isAppLaunching } = useContext(CryptoContext); // 获取 isAppLaunching 状态
+  const {
+    selectedChainShortName,
+    setSelectedChainShortName,
+    isScreenLockEnabled,
+    isAppLaunching,
+    cryptoCards,
+  } = useContext(CryptoContext); // 获取 isAppLaunching 状态
+
+  // 用于控制 Modal 的显示/隐藏
+  const [isChainModalVisible, setChainModalVisible] = useState(false);
+
+  const allChains = cryptoCards.map((card) => card.chainShortName);
+
+  console.log("app", allChains);
+  // 全选按钮处理
+  const handleSelectAll = () => {
+    if (selectedChainShortName.length !== allChains.length) {
+      setSelectedChainShortName(allChains);
+    }
+    setChainModalVisible(false);
+  };
+
+  // 选择链操作
+  const handleChainSelect = (chainName) => {
+    if (selectedChainShortName !== chainName) {
+      setSelectedChainShortName(chainName);
+    }
+  };
+
   const { isDarkMode } = useContext(DarkModeContext);
   const navigation = useNavigation();
   const [walletModalVisible, setWalletModalVisible] = useState(false);
@@ -270,14 +300,15 @@ function AppContent({
           component={WalletScreen}
           options={({ route, navigation }) => {
             const cryptoCards = route.params?.cryptoCards || [{}];
+            const selectedChainShortName = route.params?.selectedChainShortName;
+            const showAddIcon = cryptoCards.length > 0;
+            const isModalVisible = route.params?.isModalVisible;
+
+            // 判断是否显示 "Selected Chain" 和 "Add Icon"
+            const showChainAndAddIcon = showAddIcon && !isModalVisible;
 
             return {
               headerRight: () => {
-                const isModalVisible = route.params?.isModalVisible;
-
-                // 判断是否显示 "+" 图标：当有数字货币卡片时显示
-                const showAddIcon = cryptoCards.length > 0;
-
                 return (
                   <View style={{ flexDirection: "row", alignItems: "center" }}>
                     {isModalVisible ? (
@@ -291,7 +322,7 @@ function AppContent({
                         <Icon name="settings" size={24} color={iconColor} />
                       </TouchableOpacity>
                     ) : (
-                      showAddIcon && (
+                      showChainAndAddIcon && (
                         <TouchableOpacity
                           onPress={() =>
                             navigation.navigate("Wallet", {
@@ -307,9 +338,32 @@ function AppContent({
                   </View>
                 );
               },
+              headerLeft: () => {
+                // 只有当没有显示设置图标时才显示 "Selected Chain"
+                if (showChainAndAddIcon && !isModalVisible) {
+                  return (
+                    <TouchableOpacity
+                      style={{
+                        flexDirection: "row",
+                        alignItems: "center",
+                        paddingLeft: 20,
+                      }}
+                      onPress={() => setChainModalVisible(true)} // 点击时显示 Modal
+                    >
+                      <Text style={{ fontSize: 16 }}>
+                        {selectedChainShortName
+                          ? `Selected Chain: ${selectedChainShortName}`
+                          : "Select a Chain"}
+                      </Text>
+                    </TouchableOpacity>
+                  );
+                }
+                return null; // 如果没有显示 "Selected Chain"，返回 null
+              },
             };
           }}
         />
+
         <Tab.Screen name="Transactions" component={TransactionsScreen} />
         <Tab.Screen name="My Cold Wallet" component={MyColdWalletScreen} />
       </Tab.Navigator>
@@ -346,6 +400,93 @@ function AppContent({
           </TouchableOpacity>
         </Modal>
       )}
+
+      {/* 选择chain的modal */}
+      <Modal
+        visible={isChainModalVisible}
+        animationType="slide"
+        transparent={true}
+        onRequestClose={() => setChainModalVisible(false)} // 关闭 Modal
+      >
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: "rgba(0,0,0,0.5)", // 半透明背景
+          }}
+        >
+          <View
+            style={{
+              width: 300,
+              padding: 20,
+              backgroundColor: "white",
+              borderRadius: 10,
+              alignItems: "center",
+            }}
+          >
+            <Text style={{ fontSize: 18, marginBottom: 20 }}>
+              {t("Select a Blockchain")}
+            </Text>
+
+            {/* 显示所有链选项 */}
+            <ScrollView style={{ maxHeight: 300 }}>
+              {/* 全选按钮 */}
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  marginBottom: 10,
+                  borderWidth:
+                    selectedChainShortName.length === allChains.length ? 2 : 0, // 选中所有时显示边框
+                  borderColor:
+                    selectedChainShortName.length === allChains.length
+                      ? "blue"
+                      : "transparent", // 边框颜色
+                  padding: 5,
+                  borderRadius: 5,
+                }}
+              >
+                <Button
+                  title={t("Select All")}
+                  onPress={handleSelectAll}
+                  color={
+                    selectedChainShortName.length === allChains.length
+                      ? "blue"
+                      : "black"
+                  } // 按钮颜色
+                />
+              </View>
+
+              {/* 显示链列表 */}
+              {allChains.map((chain) => (
+                <View
+                  key={chain}
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    marginBottom: 10,
+                    borderWidth: 0, // 确保链项按钮没有边框
+                    padding: 5,
+                    borderRadius: 5, // 边框圆角
+                  }}
+                >
+                  <Button
+                    title={chain}
+                    onPress={() => {
+                      handleChainSelect(chain);
+                      setChainModalVisible(false); // 选择后关闭 Modal
+                    }}
+                    color={
+                      selectedChainShortName.includes(chain) ? "blue" : "black"
+                    } // 按钮颜色
+                  />
+                </View>
+              ))}
+            </ScrollView>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }

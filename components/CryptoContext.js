@@ -86,9 +86,79 @@ export const CryptoProvider = ({ children }) => {
     useState(false);
   const [verifiedDevices, setVerifiedDevices] = useState([]);
   const [isAppLaunching, setIsAppLaunching] = useState(true);
-  const [cryptoCards, setCryptoCards] = useState([]);
   const [addedCryptos, setAddedCryptos] = useState([]);
   const [exchangeRates, setExchangeRates] = useState({}); // 添加汇率状态
+
+  const [cryptoCards, setCryptoCards] = useState([]); // 你的加密货币卡片列表
+
+  const [selectedChainShortName, setSelectedChainShortName] = useState([
+    "ETH",
+    "BCH",
+    "OP",
+    "ETC",
+    "LTC",
+    "XRP",
+    "SOL",
+    "ARB",
+    "BNB",
+    "AURORA",
+    "AVAX",
+    "BTC",
+    "CELO",
+    "FTM",
+    "HTX",
+    "IOTX",
+    "OKT",
+    "POL",
+    "TRX",
+    "ZKSYNC",
+    "ATOM",
+    "CEL",
+    "CRO",
+    "JUNO",
+    "OSMO",
+    "GNO",
+    "LINEA",
+    "RON",
+    "APT",
+    "SUI",
+  ]);
+
+  useEffect(() => {
+    const loadSelectedChainShortName = async () => {
+      try {
+        const savedChainShortName = await AsyncStorage.getItem(
+          "selectedChainShortName"
+        );
+        if (savedChainShortName !== null) {
+          setSelectedChainShortName(JSON.parse(savedChainShortName));
+        }
+      } catch (error) {
+        console.error("加载 selectedChainShortName 时出错:", error);
+      }
+    };
+
+    loadSelectedChainShortName();
+  }, []); // 仅在组件首次加载时运行
+
+  useEffect(() => {
+    const saveSelectedChainShortName = async () => {
+      try {
+        await AsyncStorage.setItem(
+          "selectedChainShortName",
+          JSON.stringify(selectedChainShortName)
+        );
+      } catch (error) {
+        console.error("保存 selectedChainShortName 时出错:", error);
+      }
+    };
+
+    saveSelectedChainShortName();
+  }, [selectedChainShortName]); // 当 selectedChainShortName 改变时保存
+
+  const chainFilteredCards = cryptoCards.filter((card) =>
+    selectedChainShortName.includes(card.chainShortName)
+  );
 
   const handleUpdateCryptoCards = (newCrypto) => {
     setCryptoCards((prevCards) => {
@@ -453,6 +523,8 @@ export const CryptoProvider = ({ children }) => {
   return (
     <CryptoContext.Provider
       value={{
+        selectedChainShortName,
+        setSelectedChainShortName,
         updateCryptoData,
         cryptoCount,
         setCryptoCount,
