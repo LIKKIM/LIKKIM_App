@@ -464,19 +464,25 @@ function AppContent({
                       : "transparent", // 边框颜色
                 }}
               >
-                <Button
-                  title={t("Select All")}
+                <Text
                   onPress={handleSelectAll}
-                  color={
-                    selectedChainShortName.length === allChains.length
-                      ? isDarkMode
-                        ? "#CCB68C" // 暗黑模式下按钮颜色
-                        : "#CFAB95" // 常规模式下按钮颜色
-                      : isDarkMode
-                      ? "white" // 暗黑模式下按钮颜色为白色
-                      : "black" // 常规模式下按钮颜色为黑色
-                  } // 按钮颜色
-                />
+                  style={{
+                    fontSize: 14,
+                    color:
+                      selectedChainShortName.length === allChains.length
+                        ? isDarkMode
+                          ? "#CCB68C" // 暗黑模式下按钮颜色
+                          : "#CFAB95" // 常规模式下按钮颜色
+                        : isDarkMode
+                        ? "white" // 暗黑模式下按钮颜色为白色
+                        : "black", // 常规模式下按钮颜色为黑色
+                    padding: 10,
+                    textAlign: "center",
+                    borderRadius: 30,
+                  }}
+                >
+                  {t("Select All")}
+                </Text>
               </View>
 
               {/* 显示链列表 */}
@@ -498,7 +504,6 @@ function AppContent({
                       selectedChainShortName.length !== allChains.length
                         ? 2
                         : 0,
-
                     borderColor:
                       selectedChainShortName.includes(chain) &&
                       selectedChainShortName.length !== allChains.length
@@ -508,23 +513,29 @@ function AppContent({
                         : "transparent", // 边框颜色
                   }}
                 >
-                  <Button
-                    title={chain}
+                  <Text
                     onPress={() => {
                       handleChainSelect(chain);
                       setChainModalVisible(false); // 选择后关闭 Modal
                     }}
-                    color={
-                      selectedChainShortName.includes(chain) &&
-                      selectedChainShortName.length !== allChains.length
-                        ? isDarkMode
-                          ? "#CCB68C" // 暗黑模式下按钮颜色
-                          : "#CFAB95" // 常规模式下按钮颜色
-                        : isDarkMode
-                        ? "white" // 暗黑模式下按钮颜色为白色
-                        : "black" // 常规模式下按钮颜色为黑色
-                    } // 按钮颜色
-                  />
+                    style={{
+                      fontSize: 14,
+                      color:
+                        selectedChainShortName.includes(chain) &&
+                        selectedChainShortName.length !== allChains.length
+                          ? isDarkMode
+                            ? "#CCB68C" // 暗黑模式下按钮颜色
+                            : "#CFAB95" // 常规模式下按钮颜色
+                          : isDarkMode
+                          ? "white" // 暗黑模式下按钮颜色为白色
+                          : "black", // 常规模式下按钮颜色为黑色
+                      padding: 10,
+                      textAlign: "center",
+                      borderRadius: 30,
+                    }}
+                  >
+                    {chain}
+                  </Text>
                 </View>
               ))}
             </ScrollView>
