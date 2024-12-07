@@ -178,6 +178,50 @@ function WalletScreen({ route, navigation }) {
     selectedChainShortName.includes(card.chainShortName)
   );
 
+  const [isChainSelectionModalVisible, setChainSelectionModalVisible] =
+    useState(false); // 修改名字
+  const [selectedChain, setSelectedChain] = useState("All"); // 初始选项为“全部”
+
+  // 读取用户之前的选择
+  useEffect(() => {
+    const getSelectedChain = async () => {
+      try {
+        const savedChain = await AsyncStorage.getItem("selectedChain");
+        if (savedChain) {
+          setSelectedChain(savedChain);
+          if (savedChain === "All") {
+            setSelectedChainShortName(
+              cryptoCards.map((card) => card.chainShortName)
+            ); // 选择全部
+          } else {
+            setSelectedChainShortName([savedChain]); // 选择单个链
+          }
+        }
+      } catch (e) {
+        console.error("Error reading saved chain:", e);
+      }
+    };
+
+    getSelectedChain();
+  }, []); // 在组件加载时调用一次
+
+  // Modal点击确定按钮时更新selectedChainShortName并保存
+  const handleSelectChain = async (chain) => {
+    try {
+      await AsyncStorage.setItem("selectedChain", chain); // 保存用户选择
+    } catch (e) {
+      console.error("Error saving chain:", e);
+    }
+
+    if (chain === "All") {
+      setSelectedChainShortName(cryptoCards.map((card) => card.chainShortName)); // 选择全部
+    } else {
+      setSelectedChainShortName([chain]); // 选择单个链
+    }
+    setSelectedChain(chain); // 更新选中的链
+    setChainSelectionModalVisible(false); // 关闭modal
+  };
+
   const [importingModalVisible, setImportingModalVisible] = useState(false);
   const restoreIdentifier = Constants.installationId;
   const [pinCode, setPinCode] = useState("");
@@ -1793,17 +1837,35 @@ function WalletScreen({ route, navigation }) {
           ]}
         >
           {cryptoCards.length > 0 && !modalVisible && (
-            <>
-              <Text style={WalletScreenStyle.totalBalanceText}>
-                {t("Total Balance")}
-              </Text>
-              <Text style={WalletScreenStyle.totalBalanceAmount}>
-                {`${calculateTotalBalance()} `}
-                <Text style={WalletScreenStyle.currencyUnit}>
-                  {currencyUnit}
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+              }}
+            >
+              <View>
+                <Text style={WalletScreenStyle.totalBalanceText}>
+                  {t("Total Balance")}
                 </Text>
-              </Text>
-            </>
+                <Text style={WalletScreenStyle.totalBalanceAmount}>
+                  {`${calculateTotalBalance()} `}
+                  <Text style={WalletScreenStyle.currencyUnit}>
+                    {currencyUnit}
+                  </Text>
+                </Text>
+              </View>
+
+              <TouchableOpacity
+                onPress={() => setChainSelectionModalVisible(true)}
+                style={{
+                  marginTop: 16,
+                }}
+              >
+                <Text style={{ color: isDarkMode ? "#FFFFFF" : "#000000" }}>
+                  {selectedChain === "All" ? t("All Chains") : selectedChain}
+                </Text>
+              </TouchableOpacity>
+            </View>
           )}
         </Animated.View>
 
@@ -2106,6 +2168,132 @@ function WalletScreen({ route, navigation }) {
         chainCategories={chainCategories}
         cryptoCards={cryptoCards}
       />
+      {/* 选择链的Modal */}
+
+      <Modal
+        visible={isChainSelectionModalVisible}
+        transparent={true}
+        animationType="slide"
+        onRequestClose={() => setChainSelectionModalVisible(false)} // 添加关闭modal的功能
+      >
+        <BlurView
+          intensity={10}
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: "rgba(0, 0, 0, 0.2)",
+          }}
+        >
+          <View
+            style={{
+              margin: 20,
+              height: 500,
+              width: "90%",
+              //  backgroundColor: modalBackgroundColor,
+              borderRadius: 20,
+              padding: 35,
+              alignItems: "center",
+              justifyContent: "space-between",
+              backgroundColor: isDarkMode ? "#21201E" : "#FFFFFF",
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 16,
+
+                textAlign: "center",
+                marginBottom: 20,
+                lineHeight: 30,
+                color: isDarkMode ? "#FFFFFF" : "#000000",
+              }}
+            >
+              {t("Select Chain")}
+            </Text>
+
+            <ScrollView
+              contentContainerStyle={{ alignItems: "center" }}
+              style={{ maxHeight: 400, width: 320, paddingHorizontal: 20 }}
+            >
+              {/* 选择链的选项 */}
+              <TouchableOpacity
+                onPress={() => handleSelectChain("All")}
+                style={{
+                  padding: 10,
+                  width: "100%",
+                  justifyContent: "center",
+                  borderRadius: 30,
+                  height: 60,
+                  alignItems: "center",
+                  marginBottom: 16,
+                  backgroundColor:
+                    selectedChain === "All"
+                      ? isDarkMode
+                        ? "#CCB68C"
+                        : "#CFAB95"
+                      : isDarkMode
+                      ? "#444444"
+                      : "#e0e0e0",
+                }}
+              >
+                <Text
+                  style={{
+                    color:
+                      selectedChain === "All"
+                        ? isDarkMode
+                          ? "#FFFFFF"
+                          : "#ffffff"
+                        : isDarkMode
+                        ? "#DDDDDD"
+                        : "#000000",
+                  }}
+                >
+                  {t("All Chains")}
+                </Text>
+              </TouchableOpacity>
+
+              {cryptoCards.map((card) => (
+                <TouchableOpacity
+                  key={card.chainShortName}
+                  onPress={() => handleSelectChain(card.chainShortName)}
+                  style={{
+                    padding: 10,
+                    width: "100%",
+                    justifyContent: "center",
+                    borderRadius: 30,
+                    height: 60,
+                    alignItems: "center",
+                    marginBottom: 16,
+                    backgroundColor:
+                      selectedChain === card.chainShortName
+                        ? isDarkMode
+                          ? "#CCB68C"
+                          : "#CFAB95"
+                        : isDarkMode
+                        ? "#444444"
+                        : "#e0e0e0",
+                  }}
+                >
+                  <Text
+                    style={{
+                      color:
+                        selectedChain === card.chainShortName
+                          ? isDarkMode
+                            ? "#FFFFFF"
+                            : "#ffffff"
+                          : isDarkMode
+                          ? "#DDDDDD"
+                          : "#000000",
+                    }}
+                  >
+                    {card.chainShortName}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
+          </View>
+        </BlurView>
+      </Modal>
     </LinearGradient>
   );
 }
