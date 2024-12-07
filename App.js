@@ -425,7 +425,13 @@ function AppContent({
               alignItems: "center",
             }}
           >
-            <Text style={{ fontSize: 18, marginBottom: 20 }}>
+            <Text
+              style={{
+                fontSize: 18,
+                marginBottom: 20,
+                color: isDarkMode ? "white" : "black", // 根据暗黑模式设置文字颜色
+              }}
+            >
               {t("Added Chains")}
             </Text>
 
@@ -447,7 +453,9 @@ function AppContent({
                     selectedChainShortName.length === allChains.length ? 2 : 0, // 选中所有时显示边框
                   borderColor:
                     selectedChainShortName.length === allChains.length
-                      ? "blue"
+                      ? isDarkMode
+                        ? "#CCB68C" // 暗黑模式下的边框颜色
+                        : "#CFAB95" // 常规模式下的边框颜色
                       : "transparent", // 边框颜色
                 }}
               >
@@ -456,8 +464,12 @@ function AppContent({
                   onPress={handleSelectAll}
                   color={
                     selectedChainShortName.length === allChains.length
-                      ? "blue"
-                      : "black"
+                      ? isDarkMode
+                        ? "#CCB68C" // 暗黑模式下按钮颜色
+                        : "#CFAB95" // 常规模式下按钮颜色
+                      : isDarkMode
+                      ? "white" // 暗黑模式下按钮颜色为白色
+                      : "black" // 常规模式下按钮颜色为黑色
                   } // 按钮颜色
                 />
               </View>
@@ -475,9 +487,11 @@ function AppContent({
                     justifyContent: "center",
                     alignItems: "center",
                     flexDirection: "row",
-                    borderWidth: selectedChainShortName.includes(chain) ? 2 : 0, // 选中所有时显示边框
+                    borderWidth: selectedChainShortName.includes(chain) ? 2 : 0, // 选中时显示边框
                     borderColor: selectedChainShortName.includes(chain)
-                      ? "blue"
+                      ? isDarkMode
+                        ? "#CCB68C" // 暗黑模式下的边框颜色
+                        : "#CFAB95" // 常规模式下的边框颜色
                       : "transparent", // 边框颜色
                   }}
                 >
@@ -488,7 +502,13 @@ function AppContent({
                       setChainModalVisible(false); // 选择后关闭 Modal
                     }}
                     color={
-                      selectedChainShortName.includes(chain) ? "blue" : "black"
+                      selectedChainShortName.includes(chain)
+                        ? isDarkMode
+                          ? "#CCB68C" // 暗黑模式下按钮颜色
+                          : "#CFAB95" // 常规模式下按钮颜色
+                        : isDarkMode
+                        ? "white" // 暗黑模式下按钮颜色为白色
+                        : "black" // 常规模式下按钮颜色为黑色
                     } // 按钮颜色
                   />
                 </View>
