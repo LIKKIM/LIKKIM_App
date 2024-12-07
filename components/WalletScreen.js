@@ -2252,44 +2252,48 @@ function WalletScreen({ route, navigation }) {
                 </Text>
               </TouchableOpacity>
 
-              {cryptoCards.map((card) => (
-                <TouchableOpacity
-                  key={card.chainShortName}
-                  onPress={() => handleSelectChain(card.chainShortName)}
-                  style={{
-                    padding: 10,
-                    width: "100%",
-                    justifyContent: "center",
-                    borderRadius: 30,
-                    height: 60,
-                    alignItems: "center",
-                    marginBottom: 16,
-                    backgroundColor:
-                      selectedChain === card.chainShortName
-                        ? isDarkMode
-                          ? "#CCB68C"
-                          : "#CFAB95"
-                        : isDarkMode
-                        ? "#444444"
-                        : "#e0e0e0",
-                  }}
-                >
-                  <Text
+              {cryptoCards
+                .sort((a, b) =>
+                  a.chainShortName.localeCompare(b.chainShortName)
+                ) // 按字母顺序排序
+                .map((card) => (
+                  <TouchableOpacity
+                    key={card.chainShortName}
+                    onPress={() => handleSelectChain(card.chainShortName)}
                     style={{
-                      color:
+                      padding: 10,
+                      width: "100%",
+                      justifyContent: "center",
+                      borderRadius: 30,
+                      height: 60,
+                      alignItems: "center",
+                      marginBottom: 16,
+                      backgroundColor:
                         selectedChain === card.chainShortName
                           ? isDarkMode
-                            ? "#FFFFFF"
-                            : "#ffffff"
+                            ? "#CCB68C"
+                            : "#CFAB95"
                           : isDarkMode
-                          ? "#DDDDDD"
-                          : "#000000",
+                          ? "#444444"
+                          : "#e0e0e0",
                     }}
                   >
-                    {card.chainShortName}
-                  </Text>
-                </TouchableOpacity>
-              ))}
+                    <Text
+                      style={{
+                        color:
+                          selectedChain === card.chainShortName
+                            ? isDarkMode
+                              ? "#FFFFFF"
+                              : "#ffffff"
+                            : isDarkMode
+                            ? "#DDDDDD"
+                            : "#000000",
+                      }}
+                    >
+                      {card.chainShortName}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
             </ScrollView>
           </View>
         </BlurView>
