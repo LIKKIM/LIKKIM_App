@@ -2206,7 +2206,6 @@ function WalletScreen({ route, navigation }) {
         cryptoCards={cryptoCards}
       />
       {/* 选择链的Modal */}
-
       <Modal
         visible={isChainSelectionModalVisible}
         transparent={true}
@@ -2227,7 +2226,6 @@ function WalletScreen({ route, navigation }) {
               margin: 20,
               height: 500,
               width: "90%",
-              //  backgroundColor: modalBackgroundColor,
               borderRadius: 20,
               padding: 35,
               alignItems: "center",
@@ -2238,7 +2236,6 @@ function WalletScreen({ route, navigation }) {
             <Text
               style={{
                 fontSize: 16,
-
                 textAlign: "center",
                 marginBottom: 20,
                 lineHeight: 30,
@@ -2300,13 +2297,12 @@ function WalletScreen({ route, navigation }) {
                     style={{
                       padding: 10,
                       width: "100%",
-                      justifyContent: "center", // Center horizontally
+                      justifyContent: "center",
                       alignItems: "center",
                       borderRadius: 30,
                       height: 60,
-                      alignItems: "center",
-                      marginBottom: 16,
                       flexDirection: "row",
+                      marginBottom: 16,
                       backgroundColor:
                         selectedChain === card.chainShortName
                           ? isDarkMode
@@ -2317,20 +2313,19 @@ function WalletScreen({ route, navigation }) {
                           : "#e0e0e0",
                     }}
                   >
-                    {selectedChain !== "All" &&
-                      card.chainShortName &&
-                      card.chainIcon && (
-                        <Image
-                          source={card.chainIcon}
-                          style={{
-                            width: 24,
-                            height: 24,
-                            marginRight: 8,
-                            backgroundColor: "rgba(255, 255, 255, 0.2)",
-                            borderRadius: 12,
-                          }}
-                        />
-                      )}
+                    {/* Render chain icon only when the card has an icon */}
+                    {card.chainIcon && (
+                      <Image
+                        source={card.chainIcon}
+                        style={{
+                          width: 24,
+                          height: 24,
+                          marginRight: 8,
+                          backgroundColor: "rgba(255, 255, 255, 0.2)",
+                          borderRadius: 12,
+                        }}
+                      />
+                    )}
                     <Text
                       style={{
                         color:
