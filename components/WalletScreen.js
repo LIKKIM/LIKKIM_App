@@ -1872,10 +1872,24 @@ function WalletScreen({ route, navigation }) {
                   alignItems: "center", // Center vertically
                 }}
               >
+                {/* Add icon for All Chains */}
+                {selectedChain === "All" && (
+                  <Image
+                    source={require("../assets/WalletScreenLogo.png")}
+                    style={{
+                      width: 24,
+                      height: 24,
+                      marginRight: 8,
+                      backgroundColor: "rgba(0, 0, 0, 0.05)",
+                      borderRadius: 12,
+                    }}
+                  />
+                )}
+
+                {/* Display icon for selected chain */}
                 {selectedChain !== "All" &&
                   cryptoCards.length > 0 &&
                   cryptoCards.map((card) => {
-                    // Check if the selectedChain matches the card's chainShortName
                     if (
                       selectedChain === card.chainShortName &&
                       card.chainIcon
@@ -1895,6 +1909,7 @@ function WalletScreen({ route, navigation }) {
                       );
                     }
                   })}
+
                 <Text style={{ color: isDarkMode ? "#FFFFFF" : "#000000" }}>
                   {selectedChain === "All"
                     ? t("All Chains")
