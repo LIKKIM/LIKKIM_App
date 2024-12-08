@@ -366,6 +366,7 @@ function WalletScreen({ route, navigation }) {
     const card = cryptoCards.find((c) => c.shortName === cardShortName);
     return card ? card.balance : "Card not found";
   };
+  // 使用最新的价格来计算最终余额
   const getConvertedBalance = (cardBalance, cardShortName) => {
     // 打印原始卡余额
     // console.log(`Original card balance: ${cardBalance}`);
@@ -373,22 +374,26 @@ function WalletScreen({ route, navigation }) {
     const rate = exchangeRates[currencyUnit]; // 当前法定货币的汇率
     const cryptoToUsdRate = exchangeRates[cardShortName] || 1; // 加密货币对美元的汇率，默认为1
 
+    // 获取市场最新价格（last）
+    const marketPrice = priceChanges[cardShortName]?.priceChange || 1; // 如果没有获取到价格，则默认使用 1
+
     // 打印汇率信息
     // console.log(`Rate for ${currencyUnit}: ${rate}`);
-    //  console.log(`Crypto to USD rate for ${cardShortName}: ${cryptoToUsdRate}`);
+    // console.log(`Crypto to USD rate for ${cardShortName}: ${cryptoToUsdRate}`);
+    // console.log(`Market price (last) for ${cardShortName}: ${marketPrice}`);
 
     if (!rate) {
       return cardBalance; // 如果没有找到汇率，返回原始余额
     }
 
-    const usdBalance = cardBalance * cryptoToUsdRate; // 将加密货币余额转换为 USD
+    const usdBalance = cardBalance * cryptoToUsdRate * marketPrice; // 计算并应用市场价格的影响
     // 打印转换后的 USD 余额
-    //  console.log(`USD Balance: ${usdBalance}`);
+    // console.log(`USD Balance: ${usdBalance}`);
 
     // 计算并返回法定货币的余额，并保留两位小数
     const finalBalance = (usdBalance * rate).toFixed(2);
     // 打印最终转换后的余额
-    //  console.log(`Converted Balance in ${currencyUnit}: ${finalBalance}`);
+    // console.log(`Converted Balance in ${currencyUnit}: ${finalBalance}`);
 
     return finalBalance;
   };
