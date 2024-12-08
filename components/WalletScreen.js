@@ -1849,6 +1849,7 @@ function WalletScreen({ route, navigation }) {
               style={{
                 flexDirection: "row",
                 justifyContent: "space-between",
+                alignItems: "flex-start", // 确保内容顶部对齐
               }}
             >
               <View>
@@ -1866,7 +1867,7 @@ function WalletScreen({ route, navigation }) {
               <TouchableOpacity
                 onPress={() => setChainSelectionModalVisible(true)}
                 style={{
-                  marginTop: 16,
+                  marginTop: 10,
                   flexDirection: "row", // Ensure text and image are aligned horizontally
                   alignItems: "center", // Center vertically
                 }}
