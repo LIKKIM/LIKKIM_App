@@ -2271,11 +2271,13 @@ function WalletScreen({ route, navigation }) {
                     style={{
                       padding: 10,
                       width: "100%",
-                      justifyContent: "center",
+                      justifyContent: "center", // Center horizontally
+                      alignItems: "center",
                       borderRadius: 30,
                       height: 60,
                       alignItems: "center",
                       marginBottom: 16,
+                      flexDirection: "row",
                       backgroundColor:
                         selectedChain === card.chainShortName
                           ? isDarkMode
@@ -2286,6 +2288,20 @@ function WalletScreen({ route, navigation }) {
                           : "#e0e0e0",
                     }}
                   >
+                    {selectedChain !== "All" &&
+                      card.chainShortName &&
+                      card.chainIcon && (
+                        <Image
+                          source={card.chainIcon}
+                          style={{
+                            width: 24,
+                            height: 24,
+                            marginRight: 8,
+                            backgroundColor: "rgba(255, 255, 255, 0.2)",
+                            borderRadius: 12,
+                          }}
+                        />
+                      )}
                     <Text
                       style={{
                         color:
