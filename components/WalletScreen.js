@@ -1867,10 +1867,39 @@ function WalletScreen({ route, navigation }) {
                 onPress={() => setChainSelectionModalVisible(true)}
                 style={{
                   marginTop: 16,
+                  flexDirection: "row", // Ensure text and image are aligned horizontally
+                  alignItems: "center", // Center vertically
                 }}
               >
+                {selectedChain !== "All" &&
+                  cryptoCards.length > 0 &&
+                  cryptoCards.map((card) => {
+                    // Check if the selectedChain matches the card's chainShortName
+                    if (
+                      selectedChain === card.chainShortName &&
+                      card.chainIcon
+                    ) {
+                      return (
+                        <Image
+                          key={card.chainShortName}
+                          source={card.chainIcon}
+                          style={{
+                            width: 24,
+                            height: 24,
+                            marginRight: 8,
+                            backgroundColor: "rgba(255, 255, 255, 0.2)",
+                            borderRadius: 12,
+                          }} // Adjust size and margin
+                        />
+                      );
+                    }
+                  })}
                 <Text style={{ color: isDarkMode ? "#FFFFFF" : "#000000" }}>
-                  {selectedChain === "All" ? t("All Chains") : selectedChain}
+                  {selectedChain === "All"
+                    ? t("All Chains")
+                    : cryptoCards.find(
+                        (card) => card.chainShortName === selectedChain
+                      )?.chain}
                 </Text>
               </TouchableOpacity>
             </View>
