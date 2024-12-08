@@ -183,7 +183,7 @@ function WalletScreen({ route, navigation }) {
   const [selectedChain, setSelectedChain] = useState("All"); // 初始选项为“全部”
 
   // 读取用户之前的选择
-  useEffect(() => {
+  /*   useEffect(() => {
     const getSelectedChain = async () => {
       try {
         const savedChain = await AsyncStorage.getItem("selectedChain");
@@ -207,7 +207,7 @@ function WalletScreen({ route, navigation }) {
       getSelectedChain();
     }
   }, [cryptoCards]); // 依赖 cryptoCards 的变化，确保数据加载后再执行
-
+ */
   // Modal点击确定按钮时更新selectedChainShortName并保存
   const handleSelectChain = async (chain) => {
     try {
