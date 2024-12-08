@@ -188,7 +188,7 @@ function WalletScreen({ route, navigation }) {
       try {
         const savedChain = await AsyncStorage.getItem("selectedChain");
         if (savedChain) {
-          setSelectedChain(savedChain);
+          setSelectedChain(savedChain); // 如果有保存的链，直接设置
           if (savedChain === "All") {
             setSelectedChainShortName(
               cryptoCards.map((card) => card.chainShortName)
@@ -202,8 +202,11 @@ function WalletScreen({ route, navigation }) {
       }
     };
 
-    getSelectedChain();
-  }, []); // 在组件加载时调用一次
+    // 确保在 cryptoCards 加载完成之后再读取选中的链
+    if (cryptoCards.length > 0) {
+      getSelectedChain();
+    }
+  }, [cryptoCards]); // 依赖 cryptoCards 的变化，确保数据加载后再执行
 
   // Modal点击确定按钮时更新selectedChainShortName并保存
   const handleSelectChain = async (chain) => {
