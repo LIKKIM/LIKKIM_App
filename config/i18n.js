@@ -209,6 +209,9 @@ i18n
           Network: "Network",
           Copy: "Copy",
           Edit: "Edit",
+          Chain: "Chain",
+          "All Chains": "All Chains",
+          "Select Chain": "Select Chain",
         },
       },
       zh: {
@@ -400,6 +403,9 @@ i18n
           Network: "网络",
           Copy: "复制",
           Edit: "编辑",
+          Chain: "链",
+          "All Chains": "所有链",
+          "Select Chain": "选择链",
         },
       },
       "zh-TW": {
@@ -597,6 +603,9 @@ i18n
           Network: "網絡",
           Copy: "複製",
           Edit: "編輯",
+          Chain: "鏈",
+          "All Chains": "所有鏈",
+          "Select Chain": "選擇鏈",
         },
       },
       fr: {
@@ -829,6 +838,9 @@ i18n
           Network: "Réseau",
           Copy: "Copier",
           Edit: "Éditer",
+          Chain: "Chaîne",
+          "All Chains": "Toutes les chaînes",
+          "Select Chain": "Sélectionner la chaîne",
         },
       },
       es: {
@@ -1036,6 +1048,9 @@ i18n
           Network: "Red",
           Copy: "Copiar",
           Edit: "Editar",
+          Chain: "Cadena",
+          "All Chains": "Todas las cadenas",
+          "Select Chain": "Seleccionar cadena",
         },
       },
       ar: {
@@ -1235,6 +1250,9 @@ i18n
           Network: "الشبكة",
           Copy: "نسخ",
           Edit: "تعديل",
+          Chain: "سلسلة",
+          "All Chains": "جميع السلاسل",
+          "Select Chain": "اختيار السلسلة",
         },
       },
       ja: {
@@ -1462,6 +1480,9 @@ i18n
           Network: "ネットワーク",
           Copy: "コピー",
           Edit: "編集",
+          Chain: "チェーン",
+          "All Chains": "すべてのチェーン",
+          "Select Chain": "チェーンを選択",
         },
       },
       ru: {
@@ -1667,6 +1688,9 @@ i18n
           Network: "Сеть",
           Copy: "Копировать",
           Edit: "Редактировать",
+          Chain: "Цепь",
+          "All Chains": "Все цепи",
+          "Select Chain": "Выбрать цепь",
         },
       },
       ko: {
@@ -1867,6 +1891,9 @@ i18n
           Network: "네트워크",
           Copy: "복사",
           Edit: "편집",
+          Chain: "체인",
+          "All Chains": "모든 체인",
+          "Select Chain": "체인 선택",
         },
       },
       pt: {
@@ -2073,6 +2100,9 @@ i18n
           Network: "Rede",
           Copy: "Copiar",
           Edit: "Editar",
+          Chain: "Cadeia",
+          "All Chains": "Todas as cadeias",
+          "Select Chain": "Selecionar cadeia",
         },
       },
       "pt-BR": {
@@ -2296,6 +2326,9 @@ i18n
           Network: "Rede",
           Copy: "Copiar",
           Edit: "Editar",
+          Chain: "Cadeia",
+          "All Chains": "Todas as cadeias",
+          "Select Chain": "Selecionar cadeia",
         },
       },
       it: {
@@ -2504,6 +2537,9 @@ i18n
           Network: "Rete",
           Copy: "Copia",
           Edit: "Modifica",
+          Chain: "Catena",
+          "All Chains": "Tutte le catene",
+          "Select Chain": "Seleziona catena",
         },
       },
       de: {
@@ -2714,6 +2750,9 @@ i18n
           Network: "Netzwerk",
           Copy: "Kopieren",
           Edit: "Bearbeiten",
+          Chain: "Kette",
+          "All Chains": "Alle Ketten",
+          "Select Chain": "Kette auswählen",
         },
       },
       hi: {
@@ -2922,6 +2961,9 @@ i18n
           Network: "नेटवर्क",
           Copy: "कॉपी",
           Edit: "संपादित करें",
+          Chain: "श्रृंखला",
+          "All Chains": "सभी श्रृंखलाएँ",
+          "Select Chain": "श्रृंखला चुनें",
         },
       },
       mn: {
@@ -3139,6 +3181,9 @@ i18n
           Network: "Сүлжээ",
           Copy: "Хуулах",
           Edit: "Засварлах",
+          Chain: "Гол мөр",
+          "All Chains": "Бүх гинжин хэлхээ",
+          "Select Chain": "Гол мөр сонгох",
         },
       },
       th: {
@@ -3338,6 +3383,9 @@ i18n
           Network: "เครือข่าย",
           Copy: "คัดลอก",
           Edit: "แก้ไข",
+          Chain: "โซ่",
+          "All Chains": "ทุกโซ่",
+          "Select Chain": "เลือกโซ่",
         },
       },
       uk: {
@@ -3541,6 +3589,9 @@ i18n
           Network: "Мережа",
           Copy: "Копіювати",
           Edit: "Редагувати",
+          Chain: "Ланка",
+          "All Chains": "Усі ланки",
+          "Select Chain": "Вибрати ланку",
         },
       },
       vi: {
@@ -3748,6 +3799,9 @@ i18n
           Network: "Mạng",
           Copy: "Sao chép",
           Edit: "Chỉnh sửa",
+          Chain: "Chuỗi",
+          "All Chains": "Tất cả chuỗi",
+          "Select Chain": "Chọn chuỗi",
         },
       },
       id: {
@@ -3955,6 +4009,9 @@ i18n
           Network: "Jaringan",
           Copy: "Salin",
           Edit: "Edit",
+          Chain: "Rantai",
+          "All Chains": "Semua Rantai",
+          "Select Chain": "Pilih Rantai",
         },
       },
       tl: {
@@ -4164,6 +4221,9 @@ i18n
           Network: "Network",
           Copy: "Kopyahin",
           Edit: "I-edit",
+          Chain: "Kadena",
+          "All Chains": "Lahat ng Kadena",
+          "Select Chain": "Piliin ang Kadena",
         },
       },
       bn: {

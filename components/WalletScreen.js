@@ -2366,7 +2366,7 @@ function WalletScreen({ route, navigation }) {
                             : "#000000",
                       }}
                     >
-                      {card.chainShortName}
+                      {card.chain} {t("Chain")}
                     </Text>
                   </TouchableOpacity>
                 ))}
