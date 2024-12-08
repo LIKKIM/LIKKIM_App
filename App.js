@@ -282,7 +282,7 @@ function AppContent({
                   <View style={{ flexDirection: "row", alignItems: "center" }}>
                     {isModalVisible ? (
                       <TouchableOpacity
-                        style={{ paddingRight: 20 }}
+                        style={{ paddingRight: 30 }}
                         onPress={() => {
                           setHeaderDropdownVisible(true);
                           setSelectedCardName(route.params?.selectedCardName);
@@ -298,7 +298,7 @@ function AppContent({
                               showAddModal: true,
                             })
                           }
-                          style={{ paddingRight: 20 }}
+                          style={{ paddingRight: 28 }}
                         >
                           <Icon name="add" size={24} color={iconColor} />
                         </TouchableOpacity>
