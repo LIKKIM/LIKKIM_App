@@ -2284,8 +2284,20 @@ function WalletScreen({ route, navigation }) {
                       : isDarkMode
                       ? "#444444"
                       : "#e0e0e0",
+                  flexDirection: "row", // Align text and image horizontally
                 }}
               >
+                {/* Add icon for All Chains */}
+                <Image
+                  source={require("../assets/WalletScreenLogo.png")} // Your default "All Chains" icon
+                  style={{
+                    width: 24,
+                    height: 24,
+                    marginRight: 8,
+                    backgroundColor: "rgba(255, 255, 255, 0.2)",
+                    borderRadius: 12,
+                  }}
+                />
                 <Text
                   style={{
                     color:
