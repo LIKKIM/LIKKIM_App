@@ -255,11 +255,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   image: {
-    width: 260,
-    height: 260,
+    height: "50%",
     resizeMode: "contain",
     marginVertical: 32,
-    marginTop: 100,
   },
 
   button: {
