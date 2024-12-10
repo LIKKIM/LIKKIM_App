@@ -85,7 +85,8 @@ function WalletScreen({ route, navigation }) {
   const [selectedAddress, setSelectedAddress] = useState("");
   const [selectedCrypto, setSelectedCrypto] = useState(null);
   const [addCryptoVisible, setAddCryptoVisible] = useState(false);
-  const [selectedCardName, setSelectedCardName] = useState(null);
+  const [selectedCardName, setSelectedCardName] = useState(null); // 已选中的卡片名称
+  const [selectedCardChain, setSelectedCardChain] = useState(null); // 已选中的卡片链信息
   const [addIconModalVisible, setAddIconModalVisible] = useState(false);
   const [addWalletModalVisible, setAddWalletModalVisible] = useState(false);
   const [tipModalVisible, setTipModalVisible] = useState(false);
@@ -1548,10 +1549,14 @@ function WalletScreen({ route, navigation }) {
 
   const handleDeleteCard = () => {
     scrollViewRef?.current.setNativeProps({ scrollEnabled: true });
-    // console.warn(likkim_select_card + ':likkim')
+
+    // 删除指定链和名称的卡片
     const updatedCards = cryptoCards.filter(
-      (card) => card.name !== selectedCardName
+      (card) =>
+        !(card.name === selectedCardName && card.chain === selectedCardChain)
     );
+
+    console.log("thisthis", selectedCardName);
     setCryptoCards(updatedCards);
     setCryptoCount(updatedCards.length);
     setAddedCryptos(updatedCards);
@@ -1631,6 +1636,7 @@ function WalletScreen({ route, navigation }) {
     const crypto = cryptoCards.find((card) => card.name === cryptoName);
     setSelectedAddress(crypto?.address || "Unknown");
     setSelectedCardName(cryptoName);
+    setSelectedCardChain(card.chain);
     // console.warn("设置：likkim_set_select_card" + cryptoName);
 
     setSelectedCrypto(crypto);
