@@ -133,7 +133,7 @@ const AddCryptoModal = ({
           >
             {filteredByChain.map((crypto) => (
               <TouchableOpacity
-                key={crypto.name}
+                key={`${crypto.name}-${crypto.chain}`}
                 style={[
                   styles.addCryptoButton,
                   {
