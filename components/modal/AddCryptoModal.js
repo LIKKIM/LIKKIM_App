@@ -48,8 +48,17 @@ const AddCryptoModal = ({
   }, [visible, cryptoCards, filteredCryptos]);
 
   const toggleSelectCrypto = (crypto) => {
-    if (selectedCryptos.includes(crypto)) {
-      setSelectedCryptos(selectedCryptos.filter((c) => c !== crypto));
+    const cryptoIdentifier = `${crypto.name}-${crypto.chain}`; // 使用name和chain作为唯一标识符
+    if (
+      selectedCryptos.some(
+        (selected) => `${selected.name}-${selected.chain}` === cryptoIdentifier
+      )
+    ) {
+      setSelectedCryptos(
+        selectedCryptos.filter(
+          (c) => `${c.name}-${c.chain}` !== cryptoIdentifier
+        )
+      );
     } else {
       setSelectedCryptos([...selectedCryptos, crypto]);
     }
