@@ -1669,7 +1669,10 @@ function WalletScreen({ route, navigation }) {
     const newCryptoCards = [
       ...cryptoCards,
       ...cryptos.filter(
-        (crypto) => !cryptoCards.find((card) => card.name === crypto.name)
+        (crypto) =>
+          !cryptoCards.find(
+            (card) => card.name === crypto.name && card.chain === crypto.chain
+          )
       ),
     ];
     setCryptoCards(newCryptoCards);

@@ -38,10 +38,12 @@ const AddCryptoModal = ({
   // 根据持久化的数据初始化selectedCryptos
   useEffect(() => {
     if (visible) {
-      // 将已添加的加密货币标记为选中
-      const addedCryptos = cryptoCards.map((crypto) => crypto.name);
+      // 使用 name 和 chain 的组合来标记已添加的加密货币
+      const addedCryptos = cryptoCards.map(
+        (crypto) => `${crypto.name}-${crypto.chain}`
+      );
       const initiallySelected = filteredCryptos.filter((crypto) =>
-        addedCryptos.includes(crypto.name)
+        addedCryptos.includes(`${crypto.name}-${crypto.chain}`)
       );
       setSelectedCryptos(initiallySelected);
     }
@@ -148,10 +150,14 @@ const AddCryptoModal = ({
                   {
                     borderWidth: 2, // 统一的边框宽度
                     borderColor: selectedCryptos.includes(crypto)
-                      ? "#CFAB95" // 选中时边框颜色
-                      : cryptoCards.some((card) => card.name === crypto.name)
-                      ? "#CFAB95" // 已添加的加密货币边框颜色
-                      : "transparent", // 未选中且未添加时边框颜色
+                      ? "#CFAB95"
+                      : cryptoCards.some(
+                          (card) =>
+                            card.name === crypto.name &&
+                            card.chain === crypto.chain
+                        )
+                      ? "#CFAB95"
+                      : "transparent",
                   },
                 ]}
                 onPress={() => toggleSelectCrypto(crypto)} // 切换选中状态
@@ -184,7 +190,12 @@ const AddCryptoModal = ({
                     </Text>
                   </View>
                 </ImageBackground>
-                {cryptoCards.some((card) => card.name === crypto.name) && (
+
+                {/* 判断 Added 状态 */}
+                {cryptoCards.some(
+                  (card) =>
+                    card.name === crypto.name && card.chain === crypto.chain
+                ) && (
                   <View
                     style={{
                       position: "absolute",
@@ -204,8 +215,9 @@ const AddCryptoModal = ({
                     >
                       {t("Added")}
                     </Text>
-                  </View> // 显示"Added"文本
+                  </View>
                 )}
+
                 <View
                   style={{
                     flexDirection: "row",
