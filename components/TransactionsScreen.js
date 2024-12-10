@@ -518,7 +518,7 @@ function TransactionsScreen() {
           "ripple:": "XRP", // Ripple
           "solana:": "SOL", // Solana
           "arbitrum:": "ARB", // Arbitrum
-          "binance:": "BNB", // Binance Coin (BNB)
+          "binance:": "BSC", // Binance Coin (BNB)
           "aurora:": "AURORA", // Aurora
           "avalanche:": "AVAX", // Avalanche
           "bitcoin:": "BTC", // Bitcoin
@@ -758,7 +758,7 @@ function TransactionsScreen() {
         arbitrum: "ARB",
         aurora: "AURORA",
         avalanche: "AVAX",
-        binance: "BNB",
+        binance: "BSC",
         celo: "CELO",
         ethereum: ["ETH", "TEST"], // ETH 和 TEST 映射到 ethereum
         ethereum_classic: "ETC",
@@ -1099,7 +1099,7 @@ function TransactionsScreen() {
         case "BCH":
           commandString = `address:bitcoin_cash`; // Bitcoin Cash
           break;
-        case "BNB":
+        case "BSC":
           commandString = `address:binance`; // BNB
           break;
         case "OP":

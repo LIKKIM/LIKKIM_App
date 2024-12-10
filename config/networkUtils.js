@@ -1,13 +1,13 @@
-// Bitcoin, Ethereum, BNB Smart Chain, Polygon, Fantom, Arbitrum, Avalanche, Huobi ECO Chain, OKX Chain, Optimism, Gnosis Chain, zkSync Era Mainnet, Linea, Mantle, Ethereum Classic, EthereumPoW, Base, Boba Network, Celo, Tron, Solana, Ripple, SUI, Aptos,Secret Network, Kasp, Kusama, Astar, Litecoin,Manta Atlantic, Manta Pacific Mainnet, Mixin Virtual Machine，Monero (XMR), Near (NEAR), Nervos (CKB), Neurai (XNA), Nexa (NEXA), OctaSpace (OCTA), Cosmos (ATOM)/Cronos (CRO)/Crypto.org (CRO)/DIS CHAIN (DIS)/Juno (JUNO), Dogecoin (DOGE), Dynex (DNX), Fetch.ai (FET), Filecoin (FIL)/Filecoin FEVM (FIL), IoTeX Network Mainnet (IOTX), Joystream (JOY), Conflux (CFX)/Conflux eSpace (CFX), Algorand (ALGO), Akash (AKT), Aurora (AURORA), Bitcoin Cash (BCH), Blast (BLAST), Celestia (TIA)
+// Bitcoin, Ethereum, Binance Smart Chain, Polygon, Fantom, Arbitrum, Avalanche, Huobi ECO Chain, OKX Chain, Optimism, Gnosis Chain, zkSync Era Mainnet, Linea, Mantle, Ethereum Classic, EthereumPoW, Base, Boba Network, Celo, Tron, Solana, Ripple, SUI, Aptos,Secret Network, Kasp, Kusama, Astar, Litecoin,Manta Atlantic, Manta Pacific Mainnet, Mixin Virtual Machine，Monero (XMR), Near (NEAR), Nervos (CKB), Neurai (XNA), Nexa (NEXA), OctaSpace (OCTA), Cosmos (ATOM)/Cronos (CRO)/Crypto.org (CRO)/DIS CHAIN (DIS)/Juno (JUNO), Dogecoin (DOGE), Dynex (DNX), Fetch.ai (FET), Filecoin (FIL)/Filecoin FEVM (FIL), IoTeX Network Mainnet (IOTX), Joystream (JOY), Conflux (CFX)/Conflux eSpace (CFX), Algorand (ALGO), Akash (AKT), Aurora (AURORA), Bitcoin Cash (BCH), Blast (BLAST), Celestia (TIA)
 export const detectNetwork = (address) => {
   // Bitcoin
   if (/^(1|3|bc1|tb1)[a-zA-HJ-NP-Z0-9]{25,39}$/.test(address)) {
     return "Bitcoin (BTC)";
   }
 
-  // Ethereum, BNB Smart Chain, Polygon, Fantom, Arbitrum, Avalanche, Huobi ECO Chain, OKX Chain, Optimism, Gnosis Chain, zkSync Era Mainnet, Linea, Mantle, Ethereum Classic, EthereumPoW, Base, Boba Network, Celo
+  // Ethereum, Binance Smart Chain, Polygon, Fantom, Arbitrum, Avalanche, Huobi ECO Chain, OKX Chain, Optimism, Gnosis Chain, zkSync Era Mainnet, Linea, Mantle, Ethereum Classic, EthereumPoW, Base, Boba Network, Celo
   else if (/^0x[a-fA-F0-9]{40}$/.test(address)) {
-    return "Ethereum (ETH)/BNB Smart Chain (BSC)/Polygon (MATIC)/Fantom (FTM)/Arbitrum (ARB)/Avalanche (AVAX)/Huobi ECO Chain (HECO)/OKX Chain (OKT)/Optimism (OP)/Gnosis Chain (xDAI)/zkSync Era Mainnet (zkSync)/Linea (Linea)/Mantle (Mantle)/Ethereum Classic (ETC)/EthereumPoW (ETHW)/Base (BASE)/Boba Network (BOBA)/Celo (CELO)";
+    return "Ethereum (ETH)/Binance Smart Chain (BSC)/Polygon (MATIC)/Fantom (FTM)/Arbitrum (ARB)/Avalanche (AVAX)/Huobi ECO Chain (HECO)/OKX Chain (OKT)/Optimism (OP)/Gnosis Chain (xDAI)/zkSync Era Mainnet (zkSync)/Linea (Linea)/Mantle (Mantle)/Ethereum Classic (ETC)/EthereumPoW (ETHW)/Base (BASE)/Boba Network (BOBA)/Celo (CELO)";
   }
 
   // Tron

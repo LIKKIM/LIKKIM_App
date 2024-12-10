@@ -937,7 +937,7 @@ function WalletScreen({ route, navigation }) {
           "ripple:": "XRP", // Ripple
           "solana:": "SOL", // Solana
           "arbitrum:": "ARB", // Arbitrum
-          "binance:": "BNB", // Binance Coin (BNB)
+          "binance:": "BSC", // Binance(BSC)
           "aurora:": "AURORA", // Aurora
           "avalanche:": "AVAX", // Avalanche
           "bitcoin:": "BTC", // Bitcoin

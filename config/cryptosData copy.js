@@ -1,5 +1,5 @@
 // cryptosData.js
-// Bitcoin, Ethereum, BNB Smart Chain, Polygon, Fantom, Arbitrum, Avalanche, Huobi ECO Chain, OKX Chain, Cardano, Optimism, Gnosis Chain, zkSync Era Mainnet, Linea, Mantle, Ethereum Classic, EthereumPoW, Base, Boba Network, Celo, Tron, Solana, Ripple, SUI, Aptos,Secret Network, Kasp, Kusama, Astar, Litecoin,Manta Atlantic, Manta Pacific Mainnet, Mixin Virtual Machine，Monero (XMR), Near (NEAR), Nervos (CKB), Neurai (XNA), Nexa (NEXA), OctaSpace (OCTA), Cosmos (ATOM)/Cronos (CRO)/Crypto.org (CRO)/DIS CHAIN (DIS)/Juno (JUNO), Dogecoin (DOGE), Dynex (DNX), Fetch.ai (FET), Filecoin (FIL)/Filecoin FEVM (FIL), IoTeX Network Mainnet (IOTX), Joystream (JOY), Conflux (CFX)/Conflux eSpace (CFX), Algorand (ALGO), Akash (AKT), Aurora (AURORA), Bitcoin Cash (BCH), Blast (BLAST), Celestia (TIA), opBNB, Osmosis, PulseChain, Polygon Zkevm, Ronin, Scroll, Taiko, WEMIX3.0, zkLink Nova, Zora, ZetaChain, Zircuit, Bitcoin Testnet, Bitcoin Signet, Ethereum Sepolia Testnet, Garnet Holesky, Lightning Network Testnet, Endurance, Flare, Harmony, Moonbeam, Mobe, Metis, Merlin, Nostr, Klaytn, Kava, Dymension, B2 Mainnet, BounceBit, Bitlayer, BOB, Cyber
+// Bitcoin, Ethereum, Binance Smart Chain, Polygon, Fantom, Arbitrum, Avalanche, Huobi ECO Chain, OKX Chain, Cardano, Optimism, Gnosis Chain, zkSync Era Mainnet, Linea, Mantle, Ethereum Classic, EthereumPoW, Base, Boba Network, Celo, Tron, Solana, Ripple, SUI, Aptos,Secret Network, Kasp, Kusama, Astar, Litecoin,Manta Atlantic, Manta Pacific Mainnet, Mixin Virtual Machine，Monero (XMR), Near (NEAR), Nervos (CKB), Neurai (XNA), Nexa (NEXA), OctaSpace (OCTA), Cosmos (ATOM)/Cronos (CRO)/Crypto.org (CRO)/DIS CHAIN (DIS)/Juno (JUNO), Dogecoin (DOGE), Dynex (DNX), Fetch.ai (FET), Filecoin (FIL)/Filecoin FEVM (FIL), IoTeX Network Mainnet (IOTX), Joystream (JOY), Conflux (CFX)/Conflux eSpace (CFX), Algorand (ALGO), Akash (AKT), Aurora (AURORA), Bitcoin Cash (BCH), Blast (BLAST), Celestia (TIA), opBNB, Osmosis, PulseChain, Polygon Zkevm, Ronin, Scroll, Taiko, WEMIX3.0, zkLink Nova, Zora, ZetaChain, Zircuit, Bitcoin Testnet, Bitcoin Signet, Ethereum Sepolia Testnet, Garnet Holesky, Lightning Network Testnet, Endurance, Flare, Harmony, Moonbeam, Mobe, Metis, Merlin, Nostr, Klaytn, Kava, Dymension, B2 Mainnet, BounceBit, Bitlayer, BOB, Cyber
 
 export const initialAdditionalCryptos = [
   {
@@ -166,7 +166,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "25.0",
   },
 
-  // BNB Smart Chain (BEP20)
+  // Binance Smart Chain (BEP20)
   /*   {
     name: "BNB",
     shortName: "BNB",
@@ -174,9 +174,9 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/BNBIcon.png"),
     cardImage: require("../assets/CardBg/Card32.png"),
     address: "bnb1xyz...",
-    chain: "BNB Smart Chain",
-    chainShortName: "BNB",
-    queryChainShortName: "BNB",
+    chain: "Binance Smart Chain",
+    chainShortName: "BSC",
+    queryChainShortName: "BSC",
     chainIcon: require("../assets/icon/BNBIcon.png"),
     tokenType: "BEP20",
     fee: "0.005",
@@ -1668,7 +1668,7 @@ export const initialAdditionalCryptos = [
 
 // 1. Bitcoin
 // 2. Ethereum
-// 3. BNB Smart Chain
+// 3. Binance Smart Chain
 // 4. Polygon
 // 5. Arbitrum
 // 6. Avalanche

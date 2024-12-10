@@ -545,7 +545,7 @@ function TransactionsScreen() {
           "ripple:": "XRP", // Ripple
           "solana:": "SOL", // Solana
           "arbitrum:": "ARB", // Arbitrum
-          "binance:": "BNB", // Binance Coin (BNB)
+          "binance:": "BSC", // Binance(BSC)
           "aurora:": "AURORA", // Aurora
           "avalanche:": "AVAX", // Avalanche
           "bitcoin:": "BTC", // Bitcoin
@@ -954,8 +954,8 @@ function TransactionsScreen() {
         case "BCH":
           commandString = `address:bitcoin_cash`; // Bitcoin Cash
           break;
-        case "BNB":
-          commandString = `address:binance`; // BNB
+        case "BSC":
+          commandString = `address:binance`; // BSC
           break;
         case "OP":
           commandString = `address:optimism`; // Optimism

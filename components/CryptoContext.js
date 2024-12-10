@@ -113,11 +113,11 @@ export const CryptoProvider = ({ children }) => {
 
   // 更新加密货币地址的函数
   const updateCryptoAddress = (shortName, newAddress) => {
-    // 只处理 ETH、BTC、SOL、BNB 的地址更新
-    const supportedChains = ["ETH", "BTC", "SOL", "BNB"];
+    // 只处理 ETH、BTC、SOL、BSC 的地址更新
+    const supportedChains = ["ETH", "BTC", "SOL", "BSC"];
 
     if (!supportedChains.includes(shortName)) {
-      // 如果不是 ETH、BTC、SOL、BNB 地址，直接更新地址，但不添加卡片到 Wallet Screen
+      // 如果不是 ETH、BTC、SOL、BSC 地址，直接更新地址，但不添加卡片到 Wallet Screen
       setInitialAdditionalCryptos((prevCryptos) => {
         const updatedCryptos = prevCryptos.map((crypto) =>
           crypto.shortName === shortName
@@ -132,10 +132,10 @@ export const CryptoProvider = ({ children }) => {
         );
         return updatedCryptos;
       });
-      return; // 如果不是 ETH、BTC、SOL 或 BNB 地址，直接返回
+      return; // 如果不是 ETH、BTC、SOL 或 BSC 地址，直接返回
     }
 
-    // 对 ETH、BTC、SOL、BNB 地址进行更新并添加到 Wallet Screen
+    // 对 ETH、BTC、SOL、BSC 地址进行更新并添加到 Wallet Screen
     setInitialAdditionalCryptos((prevCryptos) => {
       const updatedCryptos = prevCryptos.map((crypto) =>
         crypto.shortName === shortName
@@ -174,8 +174,8 @@ export const CryptoProvider = ({ children }) => {
 
   // 更新加密货币数据的函数
   const updateCryptoData = (shortName, newData) => {
-    // 只更新 ETH、BTC、SOL、BNB 的数据
-    const supportedChains = ["ETH", "BTC", "SOL", "BNB"];
+    // 只更新 ETH、BTC、SOL、BSC 的数据
+    const supportedChains = ["ETH", "BTC", "SOL", "BSC"];
 
     if (supportedChains.includes(shortName)) {
       setInitialAdditionalCryptos((prevCryptos) => {
