@@ -1630,13 +1630,15 @@ function WalletScreen({ route, navigation }) {
     });
   };
 
-  const handleCardPress = (cryptoName, index) => {
+  const handleCardPress = (cryptoName, cryptoChain, index) => {
     console.log("click card...");
 
-    const crypto = cryptoCards.find((card) => card.name === cryptoName);
+    const crypto = cryptoCards?.find(
+      (card) => card.name === cryptoName && card.chain === cryptoChain
+    );
     setSelectedAddress(crypto?.address || "Unknown");
     setSelectedCardName(cryptoName);
-    setSelectedCardChain(card.chain);
+    setSelectedCardChain(cryptoChain);
     // console.warn("设置：likkim_set_select_card" + cryptoName);
 
     setSelectedCrypto(crypto);
@@ -1963,7 +1965,7 @@ function WalletScreen({ route, navigation }) {
             <TouchableHighlight
               underlayColor={"transparent"}
               key={`${card.shortName}_${index}`}
-              onPress={() => handleCardPress(card.name, index)}
+              onPress={() => handleCardPress(card.name, card.chain, index)}
               ref={(el) => {
                 cardRefs.current[index] = el;
                 initCardPosition(el, index);
