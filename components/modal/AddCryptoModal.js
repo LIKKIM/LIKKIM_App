@@ -102,7 +102,7 @@ const AddCryptoModal = ({
             </TouchableOpacity>
             {chainCategories.map((chain, index) => (
               <TouchableOpacity
-                key={`${chain.chain}-${index}`} // 使用链名和index确保key唯一
+                key={`${chain.name}-${chain.chain}-${index}`} // 使用链名和index确保key唯一
                 style={[
                   styles.chainTag,
                   selectedChain === chain.chain && styles.selectedChainTag,
