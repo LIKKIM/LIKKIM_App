@@ -16,6 +16,7 @@ export const initialAdditionalCryptos = [
     valueUsd: "0.0",
     priceUsd: "1.2",
     contractAddress: "",
+    Decimals: "",
   },
   {
     name: "Aurora",
@@ -33,6 +34,7 @@ export const initialAdditionalCryptos = [
     valueUsd: "0.0",
     priceUsd: "0.3",
     contractAddress: "",
+    Decimals: "",
   },
   {
     name: "Avalanche",
@@ -50,6 +52,7 @@ export const initialAdditionalCryptos = [
     valueUsd: "0.0",
     priceUsd: "10.0",
     contractAddress: "",
+    Decimals: "",
   },
   {
     name: "Bitcoin",
@@ -67,6 +70,7 @@ export const initialAdditionalCryptos = [
     valueUsd: "0.0",
     priceUsd: "30000.0",
     contractAddress: "",
+    Decimals: "",
   },
   {
     name: "Bitcoin Cash",
@@ -84,6 +88,7 @@ export const initialAdditionalCryptos = [
     valueUsd: "0.0",
     priceUsd: "300.0",
     contractAddress: "",
+    Decimals: "",
   },
   {
     name: "Binance",
@@ -101,6 +106,7 @@ export const initialAdditionalCryptos = [
     valueUsd: "0.0",
     priceUsd: "300.0",
     contractAddress: "",
+    Decimals: "",
   },
   {
     name: "Celo",
@@ -118,6 +124,7 @@ export const initialAdditionalCryptos = [
     valueUsd: "0.0",
     priceUsd: "2.0",
     contractAddress: "",
+    Decimals: "",
   },
   {
     name: "Ethereum",
@@ -135,6 +142,7 @@ export const initialAdditionalCryptos = [
     valueUsd: "0.0",
     priceUsd: "2000.0",
     contractAddress: "",
+    Decimals: "",
   },
   {
     name: "Ethereum Classic",
@@ -152,6 +160,7 @@ export const initialAdditionalCryptos = [
     valueUsd: "0.0",
     priceUsd: "15.0",
     contractAddress: "",
+    Decimals: "",
   },
   {
     name: "Fantom",
@@ -169,6 +178,7 @@ export const initialAdditionalCryptos = [
     valueUsd: "0.0",
     priceUsd: "0.5",
     contractAddress: "",
+    Decimals: "",
   },
   {
     name: "Huobi Token",
@@ -186,6 +196,7 @@ export const initialAdditionalCryptos = [
     valueUsd: "0.0",
     priceUsd: "7.0",
     contractAddress: "",
+    Decimals: "",
   },
   {
     name: "IoTeX",
@@ -203,6 +214,7 @@ export const initialAdditionalCryptos = [
     valueUsd: "0.0",
     priceUsd: "0.05",
     contractAddress: "",
+    Decimals: "",
   },
   {
     name: "Litecoin",
@@ -220,6 +232,7 @@ export const initialAdditionalCryptos = [
     valueUsd: "0.0",
     priceUsd: "150.0",
     contractAddress: "",
+    Decimals: "",
   },
   {
     name: "OKT",
@@ -237,6 +250,7 @@ export const initialAdditionalCryptos = [
     valueUsd: "0.0",
     priceUsd: "20.0",
     contractAddress: "",
+    Decimals: "",
   },
   {
     name: "Optimism",
@@ -254,6 +268,7 @@ export const initialAdditionalCryptos = [
     valueUsd: "0.0",
     priceUsd: "2.0",
     contractAddress: "",
+    Decimals: "",
   },
   {
     name: "Polygon",
@@ -271,6 +286,7 @@ export const initialAdditionalCryptos = [
     valueUsd: "0.0",
     priceUsd: "1.0",
     contractAddress: "",
+    Decimals: "",
   },
   {
     name: "Ripple",
@@ -288,6 +304,7 @@ export const initialAdditionalCryptos = [
     valueUsd: "0.0",
     priceUsd: "0.5",
     contractAddress: "",
+    Decimals: "",
   },
   {
     name: "Solana",
@@ -305,6 +322,7 @@ export const initialAdditionalCryptos = [
     valueUsd: "0.0",
     priceUsd: "25.0",
     contractAddress: "",
+    Decimals: "",
   },
   {
     name: "Tron",
@@ -322,6 +340,7 @@ export const initialAdditionalCryptos = [
     valueUsd: "0.0",
     priceUsd: "0.05",
     contractAddress: "",
+    Decimals: "",
   },
   {
     name: "zkSync Era",
@@ -339,6 +358,7 @@ export const initialAdditionalCryptos = [
     valueUsd: "0.0",
     priceUsd: "0.5",
     contractAddress: "",
+    Decimals: "",
   },
 
   // 下面是新增的
@@ -358,6 +378,7 @@ export const initialAdditionalCryptos = [
     valueUsd: "0.0",
     priceUsd: "10.0",
     contractAddress: "",
+    Decimals: "",
   },
   {
     name: "Celestia",
@@ -375,6 +396,7 @@ export const initialAdditionalCryptos = [
     valueUsd: "0.0",
     priceUsd: "5.0",
     contractAddress: "",
+    Decimals: "",
   },
   {
     name: "Cronos",
@@ -392,6 +414,7 @@ export const initialAdditionalCryptos = [
     valueUsd: "0.0",
     priceUsd: "0.4",
     contractAddress: "",
+    Decimals: "",
   },
   {
     name: "Juno",
@@ -409,6 +432,7 @@ export const initialAdditionalCryptos = [
     valueUsd: "0.0",
     priceUsd: "3.0",
     contractAddress: "",
+    Decimals: "",
   },
   {
     name: "Osmosis",
@@ -426,6 +450,7 @@ export const initialAdditionalCryptos = [
     valueUsd: "0.0",
     priceUsd: "1.0",
     contractAddress: "",
+    Decimals: "",
   },
   {
     name: "Gnosis",
@@ -443,6 +468,7 @@ export const initialAdditionalCryptos = [
     valueUsd: "0.0",
     priceUsd: "5.0",
     contractAddress: "",
+    Decimals: "",
   },
   {
     name: "Linea",
@@ -460,6 +486,7 @@ export const initialAdditionalCryptos = [
     valueUsd: "0.0",
     priceUsd: "1.5",
     contractAddress: "",
+    Decimals: "",
   },
   {
     name: "Ronin",
@@ -477,6 +504,7 @@ export const initialAdditionalCryptos = [
     valueUsd: "0.0",
     priceUsd: "2.5",
     contractAddress: "",
+    Decimals: "",
   },
   {
     name: "Aptos",
@@ -494,6 +522,7 @@ export const initialAdditionalCryptos = [
     valueUsd: "0.0",
     priceUsd: "5.0",
     contractAddress: "",
+    Decimals: "",
   },
   {
     name: "SUI",
@@ -511,5 +540,6 @@ export const initialAdditionalCryptos = [
     valueUsd: "0.0",
     priceUsd: "0.8",
     contractAddress: "",
+    Decimals: "",
   },
 ];
