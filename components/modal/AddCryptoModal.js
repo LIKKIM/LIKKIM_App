@@ -111,29 +111,47 @@ const AddCryptoModal = ({
                 All
               </Text>
             </TouchableOpacity>
-            {chainCategories.map((chain, index) => (
-              <TouchableOpacity
-                key={`${chain.name}-${chain.chain}-${index}`} // 使用链名和index确保key唯一
-                style={[
-                  styles.chainTag,
-                  selectedChain === chain.chain && styles.selectedChainTag,
-                ]}
-                onPress={() => setSelectedChain(chain.chain)}
-              >
-                {chain.chainIcon && (
-                  <Image source={chain.chainIcon} style={styles.TagChainIcon} />
-                )}
-                <Text
+            {[...new Set(chainCategories.map((chain) => chain.chain))].map(
+              (chain) => (
+                <TouchableOpacity
+                  key={chain} // 使用链名作为唯一键
                   style={[
-                    styles.chainTagText,
-                    selectedChain === chain.chain &&
-                      styles.selectedChainTagText,
+                    styles.chainTag,
+                    selectedChain === chain && styles.selectedChainTag,
                   ]}
+                  onPress={() => setSelectedChain(chain)}
                 >
-                  {chain.chain}
-                </Text>
-              </TouchableOpacity>
-            ))}
+                  {/* 只渲染一次链图标和链名 */}
+                  {chainCategories.some(
+                    (category) => category.chain === chain
+                  ) && (
+                    <>
+                      {chainCategories.filter(
+                        (category) => category.chain === chain
+                      )[0].chainIcon && ( // 只取第一个匹配的链
+                        <Image
+                          source={
+                            chainCategories.filter(
+                              (category) => category.chain === chain
+                            )[0].chainIcon
+                          }
+                          style={styles.TagChainIcon}
+                        />
+                      )}
+                      <Text
+                        style={[
+                          styles.chainTagText,
+                          selectedChain === chain &&
+                            styles.selectedChainTagText,
+                        ]}
+                      >
+                        {chain}
+                      </Text>
+                    </>
+                  )}
+                </TouchableOpacity>
+              )
+            )}
           </ScrollView>
 
           {/* 加密货币列表 */}
