@@ -2325,13 +2325,17 @@ function WalletScreen({ route, navigation }) {
                 </Text>
               </TouchableOpacity>
 
-              {cryptoCards
+              {[
+                ...new Map(
+                  cryptoCards.map((card) => [card.chainShortName, card])
+                ).values(), // 使用 Map 去重链条
+              ]
                 .sort((a, b) =>
                   a.chainShortName.localeCompare(b.chainShortName)
                 ) // 按字母顺序排序
-                .map((card) => (
+                .map((card, index) => (
                   <TouchableOpacity
-                    key={card.chainShortName}
+                    key={`${card.chainShortName}-${index}`}
                     onPress={() => handleSelectChain(card.chainShortName)}
                     style={{
                       padding: 10,
@@ -2352,7 +2356,7 @@ function WalletScreen({ route, navigation }) {
                           : "#e0e0e0",
                     }}
                   >
-                    {/* Render chain icon only when the card has an icon */}
+                    {/* 渲染链图标 */}
                     {card.chainIcon && (
                       <Image
                         source={card.chainIcon}
