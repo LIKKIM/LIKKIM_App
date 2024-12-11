@@ -1889,6 +1889,7 @@ function TransactionsScreen() {
           TransactionsScreenStyle={TransactionsScreenStyle}
           t={t}
           setModalVisible={setModalVisible}
+          isDarkMode={isDarkMode}
         />
 
         {/* 显示选择的加密货币地址的模态窗口 */}

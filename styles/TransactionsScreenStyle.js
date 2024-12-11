@@ -20,6 +20,27 @@ const TransactionsScreenStyles = (isDarkMode) => {
   const dropdownBackgroundColor = isDarkMode ? "#CCB68C" : "#eee";
 
   return StyleSheet.create({
+    searchIcon: {
+      paddingLeft: 10,
+      color: textColor,
+    },
+
+    searchInput: {
+      width: "100%",
+      padding: 10,
+      borderRadius: 10,
+      color: textColor,
+    },
+    // 搜索框样式
+    searchContainer: {
+      flexDirection: "row",
+      alignItems: "center",
+      borderRadius: 10,
+      width: "100%",
+      backgroundColor: isDarkMode ? "#21201E" : "#E5E1E9",
+      marginBottom: 20,
+    },
+
     // Dropdown Styles
     fromDropdown: {
       position: "absolute",
