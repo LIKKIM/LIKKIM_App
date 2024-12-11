@@ -266,50 +266,49 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                             <View
                               style={{ flexDirection: "column", flexShrink: 1 }}
                             >
+                              {/* Network */}
                               <View
                                 style={{
                                   flexDirection: "row",
-                                  marginBottom: 5,
-                                  flexWrap: "wrap",
+                                  marginBottom: 4, // 统一底部间距
+                                  alignItems: "center", // 确保垂直居中对齐
                                 }}
                               >
-                                <View
+                                <Text style={styles.text}>
+                                  {t("Network")}:&nbsp;
+                                </Text>
+                                <Image
+                                  source={networkImages[item.network]}
                                   style={{
-                                    flexDirection: "row",
-                                    alignItems: "center",
-                                    marginRight: 10,
+                                    width: 24, // 控制宽度
+                                    height: 24, // 使高度与 Text 的行高接近
+                                    marginLeft: 5,
                                   }}
-                                >
-                                  <Text style={styles.text}>
-                                    {t("Network")}:&nbsp;
-                                  </Text>
-                                  <Image
-                                    source={networkImages[item.network]}
-                                    style={{
-                                      width: 24,
-                                      height: 24,
-                                      marginLeft: 5,
-                                    }}
-                                  />
-                                  <Text style={styles.modalSubtitle}>
-                                    {item.network}
-                                  </Text>
-                                </View>
-
-                                <Text
-                                  style={[styles.text, { marginRight: 10 }]}
-                                >
-                                  {t("Name")}:&nbsp;
-                                  <Text style={styles.modalSubtitle}>
-                                    {item.name}
-                                  </Text>
+                                />
+                                <Text style={styles.modalSubtitle}>
+                                  {item.network}
                                 </Text>
                               </View>
+
+                              {/* Name */}
+                              <View
+                                style={{
+                                  flexDirection: "row",
+                                  marginBottom: 8, // 统一底部间距
+                                  alignItems: "center",
+                                }}
+                              >
+                                <Text style={styles.text}>
+                                  {t("Name")}:&nbsp;
+                                </Text>
+                                <Text style={styles.modalSubtitle}>
+                                  {item.name}
+                                </Text>
+                              </View>
+
+                              {/* Address */}
                               <Text
-                                style={[
-                                  styles.text,
-                                  { marginRight: 10, flexShrink: 1 },
-                                ]}
+                                style={[styles.text, { flexShrink: 1 }]}
                                 numberOfLines={1}
                                 ellipsizeMode="middle"
                               >
@@ -319,6 +318,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                                 </Text>
                               </Text>
                             </View>
+
                             <TouchableOpacity
                               onPress={() => toggleDropdown(item.id)}
                               style={{ marginLeft: 10 }}
