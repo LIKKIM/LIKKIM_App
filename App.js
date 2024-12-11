@@ -61,15 +61,6 @@ export default function App() {
     setIsFirstLaunch(false);
   };
 
-
-  return (
-    <CryptoProvider>
-      <OnboardingApp handleOnboardingDone={handleOnboardingDone} />
-    </CryptoProvider>
-  );
-
-
-
   if (isFirstLaunch === null) {
     return null;
   } else if (isFirstLaunch === true) {
