@@ -51,6 +51,9 @@ const LanguageModal = ({
           <ScrollView style={styles.languageList}>
             {filteredLanguages.map((language) => (
               <TouchableOpacity
+                style={{
+                  marginBottom: 6,
+                }}
                 key={language.code}
                 onPress={() => handleLanguageChange(language)}
               >

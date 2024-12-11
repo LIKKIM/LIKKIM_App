@@ -376,15 +376,16 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       fontSize: 14,
       textAlign: "center",
     },
+
     searchContainer: {
-      height: 50,
       flexDirection: "row",
       alignItems: "center",
       borderRadius: 10,
       width: "100%",
-      backgroundColor: isDarkMode ? "#21201E" : "#E5E1E9", // Dark mode and light mode background color
+      backgroundColor: isDarkMode ? "#21201E" : "#E5E1E9",
       marginBottom: 20,
     },
+
     searchIcon: {
       paddingLeft: 10,
       color: textColor,
