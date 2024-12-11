@@ -61,6 +61,15 @@ export default function App() {
     setIsFirstLaunch(false);
   };
 
+
+  return (
+    <CryptoProvider>
+      <OnboardingApp handleOnboardingDone={handleOnboardingDone} />
+    </CryptoProvider>
+  );
+
+
+
   if (isFirstLaunch === null) {
     return null;
   } else if (isFirstLaunch === true) {
@@ -114,6 +123,7 @@ export default function App() {
 function OnboardingApp({ handleOnboardingDone }) {
   const { isDarkMode } = useContext(DarkModeContext); // 获取 isDarkMode
 
+  //TODO remove ｜debug 启动intro 使用
   return (
     <>
       <StatusBar backgroundColor="#21201E" barStyle="light-content" />

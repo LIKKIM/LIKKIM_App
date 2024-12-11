@@ -23,7 +23,7 @@ const { width, height } = Dimensions.get("window");
 const OnboardingScreen = ({ onDone }) => {
   const [languageModalVisible, setLanguageModalVisible] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState("en");
-  const [currentSlideKey, setCurrentSlideKey] = useState("slide1");
+  const [currentSlideKey, setCurrentSlideKey] = useState(0);
   const scaleAnim = useRef(new Animated.Value(0.8)).current; // 初始缩放比例为1
   const opacityAnim = useRef(new Animated.Value(0)).current; // 初始透明度为0
   const translateYAnim = useRef(new Animated.Value(30)).current; // 初始位置稍低，用于从下到上的效果
@@ -67,14 +67,8 @@ const OnboardingScreen = ({ onDone }) => {
     setLanguageModalVisible(false);
   };
 
-  const _renderItem = ({ item }) => {
-    // 初始化动画值
-    scaleAnim.setValue(0.8);
-    fadeInUpAnim.setValue(0);
-    opacityAnim.setValue(0);
-    translateYAnim.setValue(30);
+  const startAni = () => {
 
-    // 启动动画
     Animated.parallel([
       Animated.timing(scaleAnim, {
         toValue: 1,
@@ -97,7 +91,23 @@ const OnboardingScreen = ({ onDone }) => {
         useNativeDriver: true,
       }),
     ]).start();
+  }
 
+
+  //更改卡片后重置动画
+  useEffect(() => {
+    scaleAnim.setValue(0.8);
+    fadeInUpAnim.setValue(0);
+    opacityAnim.setValue(0);
+    translateYAnim.setValue(30);
+    startAni();
+
+  }, [currentSlideKey])
+
+
+  const _renderItem = (props) => {
+
+    const { item, index } = props;
     return (
       <LinearGradient colors={["#21201E", "#0E0D0D"]} style={styles.slide}>
         <TouchableOpacity
@@ -108,52 +118,55 @@ const OnboardingScreen = ({ onDone }) => {
             {languages.find((lang) => lang.code === selectedLanguage).name}
           </Text>
         </TouchableOpacity>
-        <View style={styles.content}>
-          <Animated.Image
-            source={item.image}
-            style={{
-              ...styles.image,
-              transform: [{ scale: scaleAnim }],
-              opacity: opacityAnim,
-            }}
-          />
-          <Animated.Text
-            style={[
-              styles.title,
-              {
-                opacity: fadeInUpAnim,
-                transform: [
-                  {
-                    translateY: fadeInUpAnim.interpolate({
-                      inputRange: [0, 1],
-                      outputRange: [20, 0],
-                    }),
-                  },
-                ],
-              },
-            ]}
-          >
-            {item.title}
-          </Animated.Text>
-          <Animated.Text
-            style={[
-              styles.text,
-              {
-                opacity: fadeInUpAnim,
-                transform: [
-                  {
-                    translateY: fadeInUpAnim.interpolate({
-                      inputRange: [0, 1],
-                      outputRange: [20, 0],
-                    }),
-                  },
-                ],
-              },
-            ]}
-          >
-            {item.text}
-          </Animated.Text>
-        </View>
+        {
+          //卡片未切到的时候，禁止渲染内容。
+          index != currentSlideKey ? null : <View style={styles.content}>
+            <Animated.Image
+              source={item.image}
+              style={{
+                ...styles.image,
+                transform: [{ scale: scaleAnim }],
+                opacity: opacityAnim,
+              }}
+            />
+            <Animated.Text
+              style={[
+                styles.title,
+                {
+                  opacity: fadeInUpAnim,
+                  transform: [
+                    {
+                      translateY: fadeInUpAnim.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [20, 0],
+                      }),
+                    },
+                  ],
+                },
+              ]}
+            >
+              {item.title}
+            </Animated.Text>
+            <Animated.Text
+              style={[
+                styles.text,
+                {
+                  opacity: fadeInUpAnim,
+                  transform: [
+                    {
+                      translateY: fadeInUpAnim.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [20, 0],
+                      }),
+                    },
+                  ],
+                },
+              ]}
+            >
+              {item.text}
+            </Animated.Text>
+          </View>
+        }
       </LinearGradient>
     );
   };
@@ -216,7 +229,7 @@ const OnboardingScreen = ({ onDone }) => {
         renderItem={_renderItem}
         data={slides}
         onDone={onDone}
-        onSlideChange={(index, key) => setCurrentSlideKey(key)} // 更新当前滑动页键值
+        onSlideChange={(index, key) => setCurrentSlideKey(index)} // 更新当前滑动页键值
         renderSkipButton={_renderSkipButton}
         renderNextButton={_renderNextButton}
         renderPrevButton={_renderPrevButton}
