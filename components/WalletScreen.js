@@ -1900,14 +1900,25 @@ function WalletScreen({ route, navigation }) {
                 {/* Display icon for selected chain */}
                 {selectedChain !== "All" &&
                   cryptoCards.length > 0 &&
-                  cryptoCards.map((card) => {
-                    if (
-                      selectedChain === card.chainShortName &&
-                      card.chainIcon
-                    ) {
-                      return (
+                  (() => {
+                    const uniqueChainIcons = new Set();
+
+                    return cryptoCards
+                      .filter((card) => {
+                        // 筛选符合当前选中链的卡片，同时去重链图标
+                        if (
+                          selectedChain === card.chainShortName &&
+                          card.chainIcon &&
+                          !uniqueChainIcons.has(card.chainShortName)
+                        ) {
+                          uniqueChainIcons.add(card.chainShortName);
+                          return true; // 保留去重后的链图标
+                        }
+                        return false;
+                      })
+                      .map((card, index) => (
                         <Image
-                          key={card.chainShortName}
+                          key={`${card.chainShortName}-${index}`} // 确保唯一 key
                           source={card.chainIcon}
                           style={{
                             width: 24,
@@ -1915,11 +1926,10 @@ function WalletScreen({ route, navigation }) {
                             marginRight: 8,
                             backgroundColor: "rgba(255, 255, 255, 0.2)",
                             borderRadius: 12,
-                          }} // Adjust size and margin
+                          }}
                         />
-                      );
-                    }
-                  })}
+                      ));
+                  })()}
 
                 <Text style={{ color: isDarkMode ? "#FFFFFF" : "#000000" }}>
                   {selectedChain === "All"
