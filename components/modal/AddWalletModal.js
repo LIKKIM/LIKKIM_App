@@ -27,11 +27,12 @@ const AddWalletModal = ({
           <TouchableOpacity style={styles.modalButton} onPress={onImportWallet}>
             <Text style={styles.mainButtonText}>{t("Import Wallet")}</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.modalButton} onPress={onWalletTest}>
+          {/*  test btn  */}
+          {/*     <TouchableOpacity style={styles.modalButton} onPress={onWalletTest}>
             <Text style={styles.mainButtonText}>
               {t("Create test wallet (no transfers)")}
             </Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <TouchableOpacity style={styles.cancelButton} onPress={onClose}>
             <Text style={styles.cancelButtonText}>{t("Close")}</Text>
           </TouchableOpacity>
