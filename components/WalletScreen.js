@@ -308,7 +308,10 @@ function WalletScreen({ route, navigation }) {
         PermissionsAndroid.PERMISSIONS.BLUETOOTH_ADVERTISE,
         PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
       ]);
+
       let canRunCb = true;
+
+      // 检查每个权限是否都被授予
       for (let permissionItem in enableds) {
         if (enableds[permissionItem] !== "granted") {
           console.warn(permissionItem + "权限未授予");
@@ -316,10 +319,16 @@ function WalletScreen({ route, navigation }) {
         }
       }
 
-      canRunCb && cb();
+      // 只有在权限都被授予时才执行回调
+      if (canRunCb && cb) {
+        cb(); // 执行回调
+      }
     }
 
-    if (Platform.OS == "ios") cb();
+    if (Platform.OS === "ios") {
+      // iOS平台直接调用回调
+      if (cb) cb();
+    }
   };
 
   const scanDevices = () => {
