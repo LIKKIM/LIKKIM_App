@@ -314,7 +314,7 @@ function WalletScreen({ route, navigation }) {
       // 检查每个权限是否都被授予
       for (let permissionItem in enableds) {
         if (enableds[permissionItem] !== "granted") {
-          console.warn(permissionItem + "权限未授予");
+          console.log(permissionItem + "权限未授予");
           canRunCb = false;
         }
       }
