@@ -102,6 +102,20 @@ const SupportPage = () => {
           </Text>
         </TouchableOpacity>
       ))}
+      <TouchableOpacity
+        style={styles.emailButton}
+        onPress={() => {
+          const email = "support@example.com"; // 更改为你的支持邮箱地址
+          const subject = encodeURIComponent("Support Request");
+          const body = encodeURIComponent("Hi there,\n\nI need help with...");
+          const url = `mailto:${email}?subject=${subject}&body=${body}`;
+          Linking.openURL(url).catch((err) =>
+            console.error("An error occurred", err)
+          );
+        }}
+      >
+        <Text style={styles.emailButtonText}>Contact Support</Text>
+      </TouchableOpacity>
     </LinearGradient>
   );
 };
@@ -126,6 +140,23 @@ const styles = StyleSheet.create({
   linkText: {
     marginLeft: 20,
     fontSize: 18,
+  },
+  emailButton: {
+    marginTop: 30,
+    backgroundColor: "#4CAF50",
+    borderRadius: 30,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    width: "100%",
+    height: 60,
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 20,
+  },
+  emailButtonText: {
+    color: "white",
+    fontSize: 16,
+    textAlign: "center",
   },
 });
 
