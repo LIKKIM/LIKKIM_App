@@ -21,6 +21,9 @@ const SupportPage = () => {
   const lightColors = ["#FFFFFF", "#EDEBEF"];
   const borderColor = isDarkMode ? "#3C3C3C" : "#EDEBEF";
 
+  // 动态设置按钮颜色
+  const BluetoothBtnColor = isDarkMode ? "#CCB68C" : "#CFAB95";
+
   useLayoutEffect(() => {
     navigation.setOptions({
       headerStyle: {
@@ -103,9 +106,9 @@ const SupportPage = () => {
         </TouchableOpacity>
       ))}
       <TouchableOpacity
-        style={styles.emailButton}
+        style={[styles.emailButton, { backgroundColor: BluetoothBtnColor }]}
         onPress={() => {
-          const email = "support@example.com"; // 更改为你的支持邮箱地址
+          const email = "support@example.com";
           const subject = encodeURIComponent("Support Request");
           const body = encodeURIComponent("Hi there,\n\nI need help with...");
           const url = `mailto:${email}?subject=${subject}&body=${body}`;
@@ -114,7 +117,7 @@ const SupportPage = () => {
           );
         }}
       >
-        <Text style={styles.emailButtonText}>Contact Support</Text>
+        <Text style={styles.emailButtonText}>Email Support</Text>
       </TouchableOpacity>
     </LinearGradient>
   );
@@ -143,7 +146,6 @@ const styles = StyleSheet.create({
   },
   emailButton: {
     marginTop: 30,
-    backgroundColor: "#4CAF50",
     borderRadius: 30,
     paddingVertical: 10,
     paddingHorizontal: 20,
