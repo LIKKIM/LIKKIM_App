@@ -108,16 +108,18 @@ const SupportPage = () => {
       <TouchableOpacity
         style={[styles.emailButton, { backgroundColor: BluetoothBtnColor }]}
         onPress={() => {
-          const email = "support@example.com";
-          const subject = encodeURIComponent("Support Request");
-          const body = encodeURIComponent("Hi there,\n\nI need help with...");
+          const email = "lukkeyswiss@gmail.com";
+          const subject = encodeURIComponent("LIKKIM feedback");
+          const body = encodeURIComponent("Hi support team");
           const url = `mailto:${email}?subject=${subject}&body=${body}`;
           Linking.openURL(url).catch((err) =>
             console.error("An error occurred", err)
           );
         }}
       >
-        <Text style={styles.emailButtonText}>Email Support</Text>
+        <Text style={styles.emailButtonText}>
+          {t("Contact Support via Email")}
+        </Text>
       </TouchableOpacity>
     </LinearGradient>
   );
