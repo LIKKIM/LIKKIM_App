@@ -109,7 +109,8 @@ export default function App() {
               name="Support"
               component={SupportPage}
               options={{
-                title: t("Help & Support"), // 根据需要进行国际化处理
+                title: t("Help & Support"),
+                headerShadowVisible: false,
               }}
             />
           </Stack.Navigator>
