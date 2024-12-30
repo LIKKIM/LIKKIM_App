@@ -19,6 +19,7 @@ const SupportPage = () => {
 
   const darkColors = ["#21201E", "#0E0D0D"];
   const lightColors = ["#FFFFFF", "#EDEBEF"];
+  const borderColor = isDarkMode ? "#3C3C3C" : "#EDEBEF"; // Adjusted for dark/light mode
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -61,14 +62,13 @@ const SupportPage = () => {
       {socialMediaLinks.map((link, index) => (
         <TouchableOpacity
           key={index}
-          style={styles.link}
+          style={[styles.settingsItem, { borderBottomColor: borderColor }]}
           onPress={() => Linking.openURL(link.url)}
         >
           <Icon
             name={link.icon}
             size={24}
             color={isDarkMode ? "#FFFFFF" : "#000000"}
-            style={styles.icon}
           />
           <Text
             style={[
@@ -87,19 +87,22 @@ const SupportPage = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
     alignItems: "center",
-    padding: 20,
+    paddingTop: 10, // 顶部 padding
+    paddingLeft: 20, // 左侧 padding
+    paddingRight: 20, // 右侧 padding
   },
-  link: {
+  settingsItem: {
     flexDirection: "row",
+    justifyContent: "flex-start",
     alignItems: "center",
-    paddingVertical: 10,
-  },
-  icon: {
-    marginRight: 10,
+    paddingVertical: 15,
+    borderBottomWidth: 1,
+    width: "100%", // Ensure full width for alignment
+    paddingHorizontal: 20, // Padding for aesthetic spacing
   },
   linkText: {
+    marginLeft: 20,
     fontSize: 18,
   },
 });
