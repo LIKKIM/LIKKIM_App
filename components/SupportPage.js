@@ -1,10 +1,16 @@
-// src/components/SupportPage.js
 import React, { useContext, useLayoutEffect } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Linking,
+} from "react-native";
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 import { DarkModeContext } from "./CryptoContext";
+import Icon from "react-native-vector-icons/MaterialIcons";
 
 const SupportPage = () => {
   const { isDarkMode } = useContext(DarkModeContext);
@@ -24,11 +30,57 @@ const SupportPage = () => {
     });
   }, [isDarkMode, navigation, t]);
 
+  const socialMediaLinks = [
+    { name: "Twitter", icon: "chat", url: "https://x.com/LIKKIMwallet" },
+    { name: "Telegram", icon: "send", url: "https://t.me/+VQMQoKWz0s5lNGZl" },
+    { name: "Discord", icon: "group", url: "https://discord.gg/W8Dz52BF" },
+    {
+      name: "Reddit",
+      icon: "whatshot",
+      url: "https://www.reddit.com/user/Ok_Bass_6829/",
+    },
+    { name: "Instagram", icon: "camera-alt", url: "https://www.instagram.com" },
+    {
+      name: "Facebook",
+      icon: "thumb-up",
+      url: "https://www.facebook.com/profile.php?id=61570753106156",
+    },
+    { name: "LinkedIn", icon: "work", url: "https://www.linkedin.com" },
+    {
+      name: "YouTube",
+      icon: "video-library",
+      url: "https://www.youtube.com/@LukkeyAG",
+    },
+  ];
+
   return (
     <LinearGradient
       style={styles.container}
       colors={isDarkMode ? darkColors : lightColors}
-    ></LinearGradient>
+    >
+      {socialMediaLinks.map((link, index) => (
+        <TouchableOpacity
+          key={index}
+          style={styles.link}
+          onPress={() => Linking.openURL(link.url)}
+        >
+          <Icon
+            name={link.icon}
+            size={24}
+            color={isDarkMode ? "#FFFFFF" : "#000000"}
+            style={styles.icon}
+          />
+          <Text
+            style={[
+              styles.linkText,
+              { color: isDarkMode ? "#FFFFFF" : "#000000" },
+            ]}
+          >
+            {link.name}
+          </Text>
+        </TouchableOpacity>
+      ))}
+    </LinearGradient>
   );
 };
 
@@ -37,6 +89,18 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    padding: 20,
+  },
+  link: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 10,
+  },
+  icon: {
+    marginRight: 10,
+  },
+  linkText: {
+    fontSize: 18,
   },
 });
 
