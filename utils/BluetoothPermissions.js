@@ -1,6 +1,6 @@
 // src/utils/BluetoothPermissions.js
 import { Platform, PermissionsAndroid } from "react-native";
-
+//安卓高版本申请蓝牙权限
 const checkAndReqPermission = async (callback) => {
   if (Platform.OS === "android" && Platform.Version >= 23) {
     console.log("Requesting Android permissions");

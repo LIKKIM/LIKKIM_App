@@ -46,6 +46,7 @@ import AddCryptoModal from "./modal/AddCryptoModal";
 import TabModal from "./walletScreen/TabModal";
 import ModalsContainer from "./walletScreen/ModalsContainer";
 import WalletList from "./CardListCom";
+import checkAndReqPermission from "../utils/BluetoothPermissions"; //安卓高版本申请蓝牙权限
 
 const serviceUUID = "6E400001-B5A3-F393-E0A9-E50E24DCCA9E";
 const writeCharacteristicUUID = "6E400002-B5A3-F393-E0A9-E50E24DCCA9E";
@@ -296,40 +297,6 @@ function WalletScreen({ route, navigation }) {
   }, [cryptoCards]); // 依赖于 cryptoCards 的更新
 
   const bleManagerRef = useRef(null);
-
-  //安卓高版本申请蓝牙权限
-  const checkAndReqPermission = async (cb) => {
-    if (Platform.OS === "android" && Platform.Version >= 23) {
-      console.log("安卓申请权限");
-      // Scanning: Checking permissions...
-      const enableds = await PermissionsAndroid.requestMultiple([
-        PermissionsAndroid.PERMISSIONS.BLUETOOTH_CONNECT,
-        PermissionsAndroid.PERMISSIONS.BLUETOOTH_SCAN,
-        PermissionsAndroid.PERMISSIONS.BLUETOOTH_ADVERTISE,
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-      ]);
-
-      let canRunCb = true;
-
-      // 检查每个权限是否都被授予
-      for (let permissionItem in enableds) {
-        if (enableds[permissionItem] !== "granted") {
-          console.log(permissionItem + "权限未授予");
-          canRunCb = false;
-        }
-      }
-
-      // 只有在权限都被授予时才执行回调
-      if (canRunCb && cb) {
-        cb(); // 执行回调
-      }
-    }
-
-    if (Platform.OS === "ios") {
-      // iOS平台直接调用回调
-      if (cb) cb();
-    }
-  };
 
   const scanDevices = () => {
     if (Platform.OS !== "web" && !isScanning) {
