@@ -212,6 +212,7 @@ i18n
           Chain: "Chain",
           "All Chains": "All Chains",
           "Select Chain": "Select Chain",
+          "Contact Support via Email": "Contact Support via Email",
         },
       },
       zh: {
@@ -406,6 +407,7 @@ i18n
           Chain: "链",
           "All Chains": "所有链",
           "Select Chain": "选择链",
+          "Contact Support via Email": "通过电子邮件联系支持",
         },
       },
       "zh-TW": {
@@ -606,6 +608,7 @@ i18n
           Chain: "鏈",
           "All Chains": "所有鏈",
           "Select Chain": "選擇鏈",
+          "Contact Support via Email": "透過電子郵件聯繫支持",
         },
       },
       fr: {
@@ -841,6 +844,7 @@ i18n
           Chain: "Chaîne",
           "All Chains": "Toutes les chaînes",
           "Select Chain": "Sélectionner la chaîne",
+          "Contact Support via Email": "Contacter le support par e-mail",
         },
       },
       es: {
@@ -1051,6 +1055,7 @@ i18n
           Chain: "Cadena",
           "All Chains": "Todas las cadenas",
           "Select Chain": "Seleccionar cadena",
+          "Contact Support via Email": "Contactar con el soporte vía email",
         },
       },
       ar: {
@@ -1253,6 +1258,7 @@ i18n
           Chain: "سلسلة",
           "All Chains": "جميع السلاسل",
           "Select Chain": "اختيار السلسلة",
+          "Contact Support via Email": "تواصل مع الدعم عبر البريد الإلكتروني",
         },
       },
       ja: {
@@ -1483,6 +1489,7 @@ i18n
           Chain: "チェーン",
           "All Chains": "すべてのチェーン",
           "Select Chain": "チェーンを選択",
+          "Contact Support via Email": "メールでサポートに連絡",
         },
       },
       ru: {
@@ -1691,6 +1698,8 @@ i18n
           Chain: "Цепь",
           "All Chains": "Все цепи",
           "Select Chain": "Выбрать цепь",
+          "Contact Support via Email":
+            "Связаться с поддержкой по электронной почте",
         },
       },
       ko: {
@@ -1894,6 +1903,7 @@ i18n
           Chain: "체인",
           "All Chains": "모든 체인",
           "Select Chain": "체인 선택",
+          "Contact Support via Email": "이메일을 통해 지원팀에 문의",
         },
       },
       pt: {
@@ -2103,6 +2113,7 @@ i18n
           Chain: "Cadeia",
           "All Chains": "Todas as cadeias",
           "Select Chain": "Selecionar cadeia",
+          "Contact Support via Email": "Contactar o Suporte por Email",
         },
       },
       "pt-BR": {
@@ -2329,6 +2340,7 @@ i18n
           Chain: "Cadeia",
           "All Chains": "Todas as cadeias",
           "Select Chain": "Selecionar cadeia",
+          "Contact Support via Email": "Contatar Suporte via Email",
         },
       },
       it: {
@@ -2540,6 +2552,7 @@ i18n
           Chain: "Catena",
           "All Chains": "Tutte le catene",
           "Select Chain": "Seleziona catena",
+          "Contact Support via Email": "Contatta il supporto via email",
         },
       },
       de: {
@@ -2753,6 +2766,7 @@ i18n
           Chain: "Kette",
           "All Chains": "Alle Ketten",
           "Select Chain": "Kette auswählen",
+          "Contact Support via Email": "Support per E-Mail kontaktieren",
         },
       },
       hi: {
@@ -2964,6 +2978,7 @@ i18n
           Chain: "श्रृंखला",
           "All Chains": "सभी श्रृंखलाएँ",
           "Select Chain": "श्रृंखला चुनें",
+          "Contact Support via Email": "ईमेल के माध्यम से सहायता संपर्क करें",
         },
       },
       mn: {
@@ -3184,6 +3199,7 @@ i18n
           Chain: "Гол мөр",
           "All Chains": "Бүх гинжин хэлхээ",
           "Select Chain": "Гол мөр сонгох",
+          "Contact Support via Email": "Имэйлээр дэмжлэг авах",
         },
       },
       th: {
@@ -3386,6 +3402,7 @@ i18n
           Chain: "โซ่",
           "All Chains": "ทุกโซ่",
           "Select Chain": "เลือกโซ่",
+          "Contact Support via Email": "ติดต่อสนับสนุนทางอีเมล",
         },
       },
       uk: {
@@ -3592,6 +3609,8 @@ i18n
           Chain: "Ланка",
           "All Chains": "Усі ланки",
           "Select Chain": "Вибрати ланку",
+          "Contact Support via Email":
+            "Звернутися до служби підтримки через електронну пошту",
         },
       },
       vi: {
@@ -3802,6 +3821,7 @@ i18n
           Chain: "Chuỗi",
           "All Chains": "Tất cả chuỗi",
           "Select Chain": "Chọn chuỗi",
+          "Contact Support via Email": "Liên hệ hỗ trợ qua Email",
         },
       },
       id: {
@@ -4012,6 +4032,7 @@ i18n
           Chain: "Rantai",
           "All Chains": "Semua Rantai",
           "Select Chain": "Pilih Rantai",
+          "Contact Support via Email": "Hubungi Dukungan via Email",
         },
       },
       tl: {
@@ -4224,6 +4245,8 @@ i18n
           Chain: "Kadena",
           "All Chains": "Lahat ng Kadena",
           "Select Chain": "Piliin ang Kadena",
+          "Contact Support via Email":
+            "Makipag-ugnayan sa Suporta sa pamamagitan ng Email",
         },
       },
       bn: {
@@ -4437,6 +4460,8 @@ i18n
           Chain: "চেইন",
           "All Chains": "সব চেইন",
           "Select Chain": "চেইন নির্বাচন করুন",
+          "Contact Support via Email":
+            "ইমেলের মাধ্যমে সাপোর্টের সাথে যোগাযোগ করুন",
         },
       },
     },
