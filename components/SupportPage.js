@@ -87,7 +87,11 @@ const SupportPage = () => {
           style={[styles.settingsItem, { borderBottomColor: borderColor }]}
           onPress={() => Linking.openURL(link.url)}
         >
-          <Image source={link.icon} style={{ width: 24, height: 24 }} />
+          <Image
+            source={link.icon}
+            style={{ width: 24, height: 24 }}
+            resizeMode="contain"
+          />
           <Text
             style={[
               styles.linkText,
