@@ -92,7 +92,7 @@ const SupportPage = () => {
         >
           <Image
             source={link.icon}
-            style={{ width: 24, height: 24 }}
+            style={{ width: 20, height: 20 }}
             resizeMode="contain"
           />
           <Text
@@ -135,12 +135,11 @@ const styles = StyleSheet.create({
   },
   settingsItem: {
     flexDirection: "row",
-    justifyContent: "flex-start",
+    justifyContent: "center",
     alignItems: "center",
     paddingVertical: 15,
     borderBottomWidth: 1,
     width: "100%",
-    paddingHorizontal: 20,
   },
   linkText: {
     marginLeft: 20,
