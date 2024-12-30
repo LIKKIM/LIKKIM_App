@@ -1054,7 +1054,7 @@ function MyColdWalletScreen() {
         icon: "help-outline",
         onPress: () => {
           Vibration.vibrate();
-          Linking.openURL("https://www.likkim.com");
+          navigation.navigate("Support");
         },
       },
 

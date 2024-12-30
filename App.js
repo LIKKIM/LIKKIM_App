@@ -22,6 +22,7 @@ import ScreenLock from "./components/ScreenLock";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import FindMyLkkim from "./components/FindMyLkkim";
+import SupportPage from "./components/SupportPage";
 import {
   CryptoProvider,
   CryptoContext,
@@ -103,6 +104,13 @@ export default function App() {
                 headerShadowVisible: false,
               }}
               component={ConnectLIKKIMAuth}
+            />
+            <Stack.Screen
+              name="Support"
+              component={SupportPage}
+              options={{
+                title: t("Help & Support"), // 根据需要进行国际化处理
+              }}
             />
           </Stack.Navigator>
         </NavigationContainer>
