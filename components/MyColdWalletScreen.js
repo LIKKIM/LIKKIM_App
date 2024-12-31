@@ -43,6 +43,7 @@ import base64 from "base64-js";
 import { Buffer } from "buffer";
 import appConfig from "../app.config";
 import * as Location from "expo-location";
+import checkAndReqPermission from "../utils/BluetoothPermissions"; //安卓高版本申请蓝牙权限
 
 let PermissionsAndroid;
 if (Platform.OS === "android") {
@@ -423,31 +424,6 @@ function MyColdWalletScreen() {
       headerTitle: t("My Cold Wallet"),
     });
   }, [t, navigation]);
-
-  //安卓高版本申请蓝牙权限
-  const checkAndReqPermission = async (cb) => {
-    if (Platform.OS === "android" && Platform.Version >= 23) {
-      console.log("安卓申请权限");
-      // Scanning: Checking permissions...
-      const enableds = await PermissionsAndroid.requestMultiple([
-        PermissionsAndroid.PERMISSIONS.BLUETOOTH_CONNECT,
-        PermissionsAndroid.PERMISSIONS.BLUETOOTH_SCAN,
-        PermissionsAndroid.PERMISSIONS.BLUETOOTH_ADVERTISE,
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-      ]);
-      let canRunCb = true;
-      for (let permissionItem in enableds) {
-        if (enableds[permissionItem] !== "granted") {
-          console.log(permissionItem + "权限未授予");
-          canRunCb = false;
-        }
-      }
-
-      canRunCb && cb();
-    }
-
-    if (Platform.OS == "ios") cb();
-  };
 
   const scanDevices = () => {
     if (Platform.OS !== "web" && !isScanning) {
@@ -1078,7 +1054,7 @@ function MyColdWalletScreen() {
         icon: "help-outline",
         onPress: () => {
           Vibration.vibrate();
-          Linking.openURL("https://www.likkim.com");
+          navigation.navigate("Support");
         },
       },
 

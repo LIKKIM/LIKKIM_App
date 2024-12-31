@@ -37,6 +37,7 @@ import ReceiveAddressModal from "./modal/ReceiveAddressModal";
 import PinModal from "./modal/PinModal";
 import "react-native-get-random-values";
 import "@ethersproject/shims";
+import checkAndReqPermission from "../utils/BluetoothPermissions"; //安卓高版本申请蓝牙权限
 // 导入 ethers 库
 import { ethers, Transaction } from "ethers";
 import { BleManager, BleErrorCode } from "react-native-ble-plx";
@@ -1312,29 +1313,6 @@ function TransactionsScreen() {
       transactionMonitorSubscription.remove();
       transactionMonitorSubscription = null;
       console.log("交易反馈监听已停止");
-    }
-  };
-
-  //安卓高版本申请蓝牙权限
-  const checkAndReqPermission = async (cb) => {
-    if (Platform.OS === "android" && Platform.Version >= 23) {
-      console.log("安卓申请权限");
-      // Scanning: Checking permissions...
-      const enableds = await PermissionsAndroid.requestMultiple([
-        PermissionsAndroid.PERMISSIONS.BLUETOOTH_CONNECT,
-        PermissionsAndroid.PERMISSIONS.BLUETOOTH_SCAN,
-        PermissionsAndroid.PERMISSIONS.BLUETOOTH_ADVERTISE,
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-      ]);
-      let canRunCb = true;
-      for (let permissionItem in enableds) {
-        if (enableds[permissionItem] !== "granted") {
-          console.log(permissionItem + "权限未授予");
-          canRunCb = false;
-        }
-      }
-
-      canRunCb && cb();
     }
   };
 
