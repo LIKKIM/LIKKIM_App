@@ -47,7 +47,7 @@ const SupportPage = () => {
       icon: isDarkMode
         ? require("../assets/icon/Telegram.png")
         : require("../assets/icon/TelegramDark.png"),
-      url: "https://t.me/+VQMQoKWz0s5lNGZl",
+      url: "https://t.me/+q9j351SAY8hlMDJl",
     },
     {
       name: "Discord",
