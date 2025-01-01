@@ -44,7 +44,7 @@ export default {
         apiKey: "AIzaSyAaLPaHuHj_vT7cHsA99HZeuAH_Z1p3Xbg",
       },
     },
-    versionCode: 1,
+    versionCode: 5,
     package: "com.app.likkim",
   },
   web: {
