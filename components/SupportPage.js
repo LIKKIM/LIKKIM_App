@@ -54,7 +54,7 @@ const SupportPage = () => {
       icon: isDarkMode
         ? require("../assets/icon/Discord.png")
         : require("../assets/icon/DiscordDark.png"),
-      url: "https://discord.gg/W8Dz52BF",
+      url: "https://discord.gg/59hKBX2daq",
     },
     {
       name: "Reddit",
