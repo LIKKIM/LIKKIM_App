@@ -172,13 +172,9 @@ function WalletScreen({ route, navigation }) {
                   ? "#555"
                   : "#fff"
                 : "transparent",
-            borderColor:
-              selectedView === "wallet"
-                ? isDarkMode
-                  ? "#333"
-                  : "#eee"
-                : "transparent",
-            borderWidth: selectedView === "wallet" ? 1 : 0,
+            // 移除边框宽度变化，使用统一的边框样式来避免位移
+            borderColor: isDarkMode ? "#333" : "#eee",
+            borderWidth: 1, // 保持边框宽度恒定
           }}
           onPress={() => setSelectedView("wallet")}
         >
@@ -190,9 +186,7 @@ function WalletScreen({ route, navigation }) {
                   ? isDarkMode
                     ? "#fff"
                     : "#000"
-                  : isDarkMode
-                  ? "#ddd"
-                  : "#888",
+                  : "#888", // 使用更明显的颜色差异来标识选中状态
             }}
           >
             Wallet
@@ -209,13 +203,9 @@ function WalletScreen({ route, navigation }) {
                   ? "#555"
                   : "#fff"
                 : "transparent",
-            borderColor:
-              selectedView === "nft"
-                ? isDarkMode
-                  ? "#333"
-                  : "#eee"
-                : "transparent",
-            borderWidth: selectedView === "nft" ? 1 : 0,
+            // 统一的边框样式
+            borderColor: isDarkMode ? "#333" : "#eee",
+            borderWidth: 1, // 保持边框宽度恒定
           }}
           onPress={() => setSelectedView("nft")}
         >
@@ -227,9 +217,7 @@ function WalletScreen({ route, navigation }) {
                   ? isDarkMode
                     ? "#fff"
                     : "#000"
-                  : isDarkMode
-                  ? "#ddd"
-                  : "#888",
+                  : "#888", // 使用更明显的颜色差异来标识选中状态
             }}
           >
             NFTs
