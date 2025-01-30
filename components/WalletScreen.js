@@ -152,28 +152,88 @@ function WalletScreen({ route, navigation }) {
 
   navigation.setOptions({
     headerTitle: () => (
-      <View style={{ flexDirection: "row", justifyContent: "center" }}>
+      <View
+        style={{
+          flexDirection: "row",
+          backgroundColor: isDarkMode ? "#333" : "#eee",
+          borderRadius: 20,
+          borderWidth: 1,
+          borderColor: isDarkMode ? "#333" : "#eee",
+        }}
+      >
         <TouchableOpacity
           style={{
-            marginHorizontal: 10,
-            padding: 10,
-            borderBottomWidth: selectedView === "wallet" ? 2 : 0,
-            borderBottomColor: "blue",
+            paddingVertical: 8,
+            paddingHorizontal: 20,
+            borderRadius: 20,
+            backgroundColor:
+              selectedView === "wallet"
+                ? isDarkMode
+                  ? "#555"
+                  : "#fff"
+                : "transparent",
+            borderColor:
+              selectedView === "wallet"
+                ? isDarkMode
+                  ? "#333"
+                  : "#eee"
+                : "transparent",
+            borderWidth: selectedView === "wallet" ? 1 : 0,
           }}
           onPress={() => setSelectedView("wallet")}
         >
-          <Text style={{ fontWeight: "bold" }}>Wallet</Text>
+          <Text
+            style={{
+              fontWeight: "bold",
+              color:
+                selectedView === "wallet"
+                  ? isDarkMode
+                    ? "#fff"
+                    : "#000"
+                  : isDarkMode
+                  ? "#ddd"
+                  : "#888",
+            }}
+          >
+            Wallet
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={{
-            marginHorizontal: 10,
-            padding: 10,
-            borderBottomWidth: selectedView === "nft" ? 2 : 0,
-            borderBottomColor: "blue",
+            paddingVertical: 8,
+            paddingHorizontal: 20,
+            borderRadius: 20,
+            backgroundColor:
+              selectedView === "nft"
+                ? isDarkMode
+                  ? "#555"
+                  : "#fff"
+                : "transparent",
+            borderColor:
+              selectedView === "nft"
+                ? isDarkMode
+                  ? "#333"
+                  : "#eee"
+                : "transparent",
+            borderWidth: selectedView === "nft" ? 1 : 0,
           }}
           onPress={() => setSelectedView("nft")}
         >
-          <Text style={{ fontWeight: "bold" }}>NFTs</Text>
+          <Text
+            style={{
+              fontWeight: "bold",
+              color:
+                selectedView === "nft"
+                  ? isDarkMode
+                    ? "#fff"
+                    : "#000"
+                  : isDarkMode
+                  ? "#ddd"
+                  : "#888",
+            }}
+          >
+            NFTs
+          </Text>
         </TouchableOpacity>
       </View>
     ),
