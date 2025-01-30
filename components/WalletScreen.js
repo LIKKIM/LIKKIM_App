@@ -189,7 +189,7 @@ function WalletScreen({ route, navigation }) {
                   : "#888", // 使用更明显的颜色差异来标识选中状态
             }}
           >
-            Wallet
+            {t("Wallet")}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
