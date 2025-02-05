@@ -36,8 +36,70 @@ const WalletContent = (props) => {
     animatedCardStyle,
     selectedCardIndex,
     cardInfoVisible,
-    // ...其他需要传递的 props
   } = props;
+
+  // 将重复的“All Chain 按钮”部分提取成一个局部函数
+  const renderChainButton = () => {
+    return (
+      <TouchableOpacity
+        onPress={() => setChainSelectionModalVisible(true)}
+        style={{
+          marginTop: 10,
+          flexDirection: "row",
+          alignItems: "center",
+        }}
+      >
+        {selectedChain === "All" ? (
+          <Image
+            source={require("../../assets/WalletScreenLogo.png")}
+            style={{
+              width: 24,
+              height: 24,
+              marginRight: 8,
+              backgroundColor: "rgba(0, 0, 0, 0.05)",
+              borderRadius: 12,
+            }}
+          />
+        ) : (
+          cryptoCards.length > 0 &&
+          (() => {
+            const uniqueChainIcons = new Set();
+            return cryptoCards
+              .filter((card) => {
+                if (
+                  selectedChain === card.chainShortName &&
+                  card.chainIcon &&
+                  !uniqueChainIcons.has(card.chainShortName)
+                ) {
+                  uniqueChainIcons.add(card.chainShortName);
+                  return true;
+                }
+                return false;
+              })
+              .map((card, index) => (
+                <Image
+                  key={`${card.chainShortName}-${index}`}
+                  source={card.chainIcon}
+                  style={{
+                    width: 24,
+                    height: 24,
+                    marginRight: 8,
+                    backgroundColor: "rgba(255, 255, 255, 0.2)",
+                    borderRadius: 12,
+                  }}
+                />
+              ));
+          })()
+        )}
+        <Text style={{ color: isDarkMode ? "#FFFFFF" : "#000000" }}>
+          {selectedChain === "All"
+            ? t("All Chains")
+            : cryptoCards.find((card) => card.chainShortName === selectedChain)
+                ?.chain}
+        </Text>
+      </TouchableOpacity>
+    );
+  };
 
   return selectedView === "wallet" ? (
     <ScrollView
@@ -59,7 +121,7 @@ const WalletContent = (props) => {
           props.scrollYOffset.current = event.nativeEvent.contentOffset.y;
         }
       }}
-      scrollEventThrottle={16}
+      scrollEventThrottle={16} // 滚动事件节流
       refreshControl={
         cryptoCards.length > 0 && (
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
@@ -91,69 +153,7 @@ const WalletContent = (props) => {
                 </Text>
               </Text>
             </View>
-
-            <TouchableOpacity
-              onPress={() => setChainSelectionModalVisible(true)}
-              style={{
-                marginTop: 10,
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-            >
-              {/* 当选中全部链时的图标 */}
-              {selectedChain === "All" && (
-                <Image
-                  source={require("../../assets/WalletScreenLogo.png")}
-                  style={{
-                    width: 24,
-                    height: 24,
-                    marginRight: 8,
-                    backgroundColor: "rgba(0, 0, 0, 0.05)",
-                    borderRadius: 12,
-                  }}
-                />
-              )}
-
-              {/* 当选中特定链时显示对应图标 */}
-              {selectedChain !== "All" &&
-                cryptoCards.length > 0 &&
-                (() => {
-                  const uniqueChainIcons = new Set();
-                  return cryptoCards
-                    .filter((card) => {
-                      if (
-                        selectedChain === card.chainShortName &&
-                        card.chainIcon &&
-                        !uniqueChainIcons.has(card.chainShortName)
-                      ) {
-                        uniqueChainIcons.add(card.chainShortName);
-                        return true;
-                      }
-                      return false;
-                    })
-                    .map((card, index) => (
-                      <Image
-                        key={`${card.chainShortName}-${index}`}
-                        source={card.chainIcon}
-                        style={{
-                          width: 24,
-                          height: 24,
-                          marginRight: 8,
-                          backgroundColor: "rgba(255, 255, 255, 0.2)",
-                          borderRadius: 12,
-                        }}
-                      />
-                    ));
-                })()}
-
-              <Text style={{ color: isDarkMode ? "#FFFFFF" : "#000000" }}>
-                {selectedChain === "All"
-                  ? t("All Chains")
-                  : cryptoCards.find(
-                      (card) => card.chainShortName === selectedChain
-                    )?.chain}
-              </Text>
-            </TouchableOpacity>
+            {renderChainButton()}
           </View>
         )}
       </Animated.View>
@@ -359,79 +359,20 @@ const WalletContent = (props) => {
   ) : (
     <View
       style={{
-        position: "absolute",
+        position: "absolute", // 使用绝对定位
         top: 0,
-        right: 25,
+        width: 326,
       }}
     >
       {cryptoCards.length > 0 && !modalVisible && (
         <View
           style={{
             flexDirection: "row",
-            justifyContent: "space-between",
+            justifyContent: "flex-end", // 内容靠右对齐
             alignItems: "flex-start",
           }}
         >
-          <TouchableOpacity
-            onPress={() => setChainSelectionModalVisible(true)}
-            style={{
-              marginTop: 10,
-              flexDirection: "row",
-              alignItems: "center",
-            }}
-          >
-            {selectedChain === "All" && (
-              <Image
-                source={require("../../assets/WalletScreenLogo.png")}
-                style={{
-                  width: 24,
-                  height: 24,
-                  marginRight: 8,
-                  backgroundColor: "rgba(0, 0, 0, 0.05)",
-                  borderRadius: 12,
-                }}
-              />
-            )}
-
-            {selectedChain !== "All" &&
-              cryptoCards.length > 0 &&
-              (() => {
-                const uniqueChainIcons = new Set();
-                return cryptoCards
-                  .filter((card) => {
-                    if (
-                      selectedChain === card.chainShortName &&
-                      card.chainIcon &&
-                      !uniqueChainIcons.has(card.chainShortName)
-                    ) {
-                      uniqueChainIcons.add(card.chainShortName);
-                      return true;
-                    }
-                    return false;
-                  })
-                  .map((card, index) => (
-                    <Image
-                      key={`${card.chainShortName}-${index}`}
-                      source={card.chainIcon}
-                      style={{
-                        width: 24,
-                        height: 24,
-                        marginRight: 8,
-                        backgroundColor: "rgba(255, 255, 255, 0.2)",
-                        borderRadius: 12,
-                      }}
-                    />
-                  ));
-              })()}
-
-            <Text style={{ color: isDarkMode ? "#FFFFFF" : "#000000" }}>
-              {selectedChain === "All"
-                ? t("All Chains")
-                : cryptoCards.find(
-                    (card) => card.chainShortName === selectedChain
-                  )?.chain}
-            </Text>
-          </TouchableOpacity>
+          {renderChainButton()}
         </View>
       )}
     </View>
