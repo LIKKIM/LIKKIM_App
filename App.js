@@ -33,12 +33,12 @@ import { useTranslation } from "react-i18next";
 import { BlurView } from "expo-blur";
 import ConnectLIKKIMAuth from "./components/transactionScreens/ConnectLIKKIMAuth";
 
+// Configure Reactotron in development mode
 if (__DEV__) {
   import("./ReactotronConfig").then(() => console.log("Reactotron Configured"));
 }
 
 const Stack = createNativeStackNavigator();
-
 const Tab = createBottomTabNavigator();
 
 export default function App() {
@@ -47,6 +47,7 @@ export default function App() {
   const [headerDropdownVisible, setHeaderDropdownVisible] = useState(false);
   const [selectedCardName, setSelectedCardName] = useState("");
 
+  // Check if the app is launched for the first time using AsyncStorage
   useEffect(() => {
     AsyncStorage.getItem("alreadyLaunched").then((value) => {
       if (value == null) {
@@ -58,10 +59,12 @@ export default function App() {
     });
   }, []);
 
+  // Callback to handle when onboarding is completed
   const handleOnboardingDone = () => {
     setIsFirstLaunch(false);
   };
 
+  // Render nothing until we know if this is the first launch
   if (isFirstLaunch === null) {
     return null;
   } else if (isFirstLaunch === true) {
@@ -77,11 +80,12 @@ export default function App() {
       <CryptoProvider>
         <NavigationContainer>
           <Stack.Navigator>
+            {/* Main application content is wrapped in a Stack screen called "Back" */}
             <Stack.Screen name="Back" options={{ headerShown: false }}>
               {(props) => (
                 <AppContent
                   {...props}
-                  t={t} // 传递 i18n 的 t 函数
+                  t={t} // Pass the i18n translation function
                   headerDropdownVisible={headerDropdownVisible}
                   setHeaderDropdownVisible={setHeaderDropdownVisible}
                   selectedCardName={selectedCardName}
@@ -90,13 +94,16 @@ export default function App() {
               )}
             </Stack.Screen>
 
+            {/* Screen for finding a LIKKIM device */}
             <Stack.Screen
               name="Find My LIKKIM"
               component={FindMyLkkim}
               options={{
-                title: t("Find My LIKKIM"), // 使用 i18n 进行国际化处理
+                title: t("Find My LIKKIM"), // Internationalized title
               }}
             />
+
+            {/* Screen for wallet authentication */}
             <Stack.Screen
               name="Request Wallet Auth"
               options={{
@@ -105,6 +112,8 @@ export default function App() {
               }}
               component={ConnectLIKKIMAuth}
             />
+
+            {/* Support page screen */}
             <Stack.Screen
               name="Support"
               component={SupportPage}
@@ -120,10 +129,14 @@ export default function App() {
   );
 }
 
+/**
+ * OnboardingApp component that shows the onboarding screen.
+ * It is rendered only when the app is launched for the first time.
+ */
 function OnboardingApp({ handleOnboardingDone }) {
-  const { isDarkMode } = useContext(DarkModeContext); // 获取 isDarkMode
+  const { isDarkMode } = useContext(DarkModeContext);
 
-  //TODO remove ｜debug 启动intro 使用
+  // TODO: Remove debug code for intro screen if not needed.
   return (
     <>
       <StatusBar backgroundColor="#21201E" barStyle="light-content" />
@@ -132,6 +145,9 @@ function OnboardingApp({ handleOnboardingDone }) {
   );
 }
 
+/**
+ * AppContent component holds the main content of the app (Tabs and screens).
+ */
 function AppContent({
   t,
   headerDropdownVisible,
@@ -139,24 +155,26 @@ function AppContent({
   selectedCardName,
   setSelectedCardName,
 }) {
-  const { isScreenLockEnabled, isAppLaunching } = useContext(CryptoContext); // 获取 isAppLaunching 状态
+  const { isScreenLockEnabled, isAppLaunching } = useContext(CryptoContext);
   const { isDarkMode } = useContext(DarkModeContext);
   const navigation = useNavigation();
   const [walletModalVisible, setWalletModalVisible] = useState(false);
 
-  // 在这里打印 isScreenLockEnabled 的值
+  // Log the screen lock status when it changes
   useEffect(() => {
     console.log("isScreenLockEnabled:", isScreenLockEnabled);
-  }, [isScreenLockEnabled]); // 当 isScreenLockEnabled 改变时，打印新值
+  }, [isScreenLockEnabled]);
 
+  // Function to handle card deletion confirmation
   const handleConfirmDelete = () => {
     setHeaderDropdownVisible(false);
     navigation.navigate("Wallet", {
       showDeleteConfirmModal: true,
-      isModalVisible: true, // 设置 isModalVisible 为 true
+      isModalVisible: true, // Set modal visibility to true
     });
   };
 
+  // Set up theme and styling based on dark mode
   const theme = isDarkMode ? darkTheme : lightTheme;
   const tabBarActiveTintColor = isDarkMode ? "#CCB68C" : "#CFAB95";
   const tabBarInactiveTintColor = isDarkMode ? "#ffffff50" : "#676776";
@@ -165,23 +183,20 @@ function AppContent({
   const bottomBackgroundColor = isDarkMode ? "#0E0D0D" : "#EDEBEF";
   const iconColor = isDarkMode ? "#ffffff" : "#000000";
 
+  // Listen for navigation state changes to update wallet modal visibility
   useEffect(() => {
     const unsubscribe = navigation.addListener("state", (e) => {
-      // console.log("导航状态详情", e.data.state); // 打印整个导航状态
+      // Get the routes from the navigation state
       const rootRoutes = e.data.state?.routes;
-      // console.log("全部路由列表", rootRoutes); // 打印全部路由的列表
 
-      // 查找名为 "Back" 的路由，并进一步检查其嵌套路由
+      // Find the "Back" route and check its nested routes
       const backRoute = rootRoutes?.find((route) => route.name === "Back");
       if (backRoute && backRoute.state) {
-        // 打印 Back 路由的详细状态
-        // console.log("Back 路由状态", backRoute.state);
         const tabRoutes = backRoute.state.routes;
         const walletRoute = tabRoutes.find((route) => route.name === "Wallet");
-        // console.log("Wallet 路由:", walletRoute); // 打印 Wallet 路由信息
         if (walletRoute?.params?.isModalVisible !== undefined) {
           console.log(
-            "isModalVisible 参数:",
+            "isModalVisible parameter:",
             walletRoute.params.isModalVisible
           );
           setWalletModalVisible(walletRoute.params.isModalVisible);
@@ -191,7 +206,7 @@ function AppContent({
     return unsubscribe;
   }, [navigation]);
 
-  // 条件渲染 ScreenLock 页面，只有在应用启动时和 ScreenLock 启用时才显示
+  // Conditionally render the ScreenLock component during app launch if enabled
   if (isScreenLockEnabled && isAppLaunching) {
     return <ScreenLock />;
   }
@@ -246,11 +261,11 @@ function AppContent({
           tabBarStyle: {
             backgroundColor: tabBarBackgroundColor,
             borderTopWidth: 0,
-            height: walletModalVisible ? 0 : 100, // 根据 walletModalVisible 控制 tabBar 的高度
+            height: walletModalVisible ? 0 : 100, // Hide tab bar if wallet modal is visible
             paddingBottom: walletModalVisible ? 0 : 30,
             borderTopLeftRadius: 22,
             borderTopRightRadius: 22,
-            display: walletModalVisible ? "none" : "flex", // 根据 walletModalVisible 显示或隐藏 tabBar
+            display: walletModalVisible ? "none" : "flex",
           },
           tabBarLabelStyle: { fontSize: 12 },
           headerStyle: {
@@ -264,6 +279,7 @@ function AppContent({
           headerShadowVisible: false,
         })}
       >
+        {/* Wallet Screen */}
         <Tab.Screen
           name="Wallet"
           component={WalletScreen}
@@ -271,15 +287,10 @@ function AppContent({
             const cryptoCards = route.params?.cryptoCards || [{}];
             return {
               headerRight: () => {
-                // 通过 route.params 获取 isModalVisible
+                // Retrieve modal visibility from route parameters
                 const isModalVisible = route.params?.isModalVisible;
                 return (
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      alignItems: "center",
-                    }}
-                  >
+                  <View style={{ flexDirection: "row", alignItems: "center" }}>
                     {isModalVisible ? (
                       <TouchableOpacity
                         style={{ paddingRight: 30 }}
@@ -311,7 +322,10 @@ function AppContent({
           }}
         />
 
+        {/* Transactions Screen */}
         <Tab.Screen name="Transactions" component={TransactionsScreen} />
+
+        {/* My Cold Wallet Screen */}
         <Tab.Screen name="My Cold Wallet" component={MyColdWalletScreen} />
       </Tab.Navigator>
 
@@ -320,6 +334,7 @@ function AppContent({
         barStyle={isDarkMode ? "light-content" : "dark-content"}
       />
 
+      {/* Header dropdown modal for additional settings/actions */}
       {headerDropdownVisible && (
         <Modal
           animationType="fade"
