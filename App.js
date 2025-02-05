@@ -280,16 +280,17 @@ function AppContent({
           component={WalletScreen}
           options={({ route, navigation }) => {
             const cryptoCards = route.params?.cryptoCards || [{}];
-
             return {
               headerRight: () => {
+                // 通过 route.params 获取 isModalVisible
                 const isModalVisible = route.params?.isModalVisible;
-
-                // 判断是否显示 "+" 图标：当有数字货币卡片时显示
-                const showAddIcon = cryptoCards.length > 0;
-
                 return (
-                  <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      alignItems: "center",
+                    }}
+                  >
                     {isModalVisible ? (
                       <TouchableOpacity
                         style={{ paddingRight: 30 }}
@@ -301,7 +302,7 @@ function AppContent({
                         <Icon name="settings" size={24} color={iconColor} />
                       </TouchableOpacity>
                     ) : (
-                      showAddIcon && (
+                      cryptoCards.length > 0 && (
                         <TouchableOpacity
                           onPress={() =>
                             navigation.navigate("Wallet", {
@@ -320,6 +321,7 @@ function AppContent({
             };
           }}
         />
+
         <Tab.Screen name="Transactions" component={TransactionsScreen} />
         <Tab.Screen name="My Cold Wallet" component={MyColdWalletScreen} />
       </Tab.Navigator>

@@ -150,83 +150,84 @@ function WalletScreen({ route, navigation }) {
   const [selectedChain, setSelectedChain] = useState("All"); // 初始选项为“全部”
 
   const [selectedView, setSelectedView] = useState("wallet"); // 管理视图状态，'wallet' 或 'nft'
-
+  const { isModalVisible } = route.params || {};
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerTitle: () => (
-        <View
-          style={{
-            flexDirection: "row",
-            backgroundColor: isDarkMode ? "#333" : "#eee",
-            borderRadius: 20,
-            borderWidth: 1,
-            borderColor: isDarkMode ? "#333" : "#eee",
-          }}
-        >
-          <TouchableOpacity
+      headerTitle: () =>
+        !isModalVisible ? (
+          <View
             style={{
-              paddingVertical: 8,
-              paddingHorizontal: 20,
+              flexDirection: "row",
+              backgroundColor: isDarkMode ? "#333" : "#eee",
               borderRadius: 20,
-              backgroundColor:
-                selectedView === "wallet"
-                  ? isDarkMode
-                    ? "#555"
-                    : "#fff"
-                  : "transparent",
-              borderColor: isDarkMode ? "#333" : "#eee",
               borderWidth: 1,
+              borderColor: isDarkMode ? "#333" : "#eee",
             }}
-            onPress={() => setSelectedView("wallet")}
           >
-            <Text
+            <TouchableOpacity
               style={{
-                fontWeight: "bold",
-                color:
+                paddingVertical: 8,
+                paddingHorizontal: 20,
+                borderRadius: 20,
+                backgroundColor:
                   selectedView === "wallet"
                     ? isDarkMode
-                      ? "#fff"
-                      : "#000"
-                    : "#888",
+                      ? "#555"
+                      : "#fff"
+                    : "transparent",
+                borderColor: isDarkMode ? "#333" : "#eee",
+                borderWidth: 1,
               }}
+              onPress={() => setSelectedView("wallet")}
             >
-              {t("Wallet")}
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={{
-              paddingVertical: 8,
-              paddingHorizontal: 20,
-              borderRadius: 20,
-              backgroundColor:
-                selectedView === "nft"
-                  ? isDarkMode
-                    ? "#555"
-                    : "#fff"
-                  : "transparent",
-              borderColor: isDarkMode ? "#333" : "#eee",
-              borderWidth: 1,
-            }}
-            onPress={() => setSelectedView("nft")}
-          >
-            <Text
+              <Text
+                style={{
+                  fontWeight: "bold",
+                  color:
+                    selectedView === "wallet"
+                      ? isDarkMode
+                        ? "#fff"
+                        : "#000"
+                      : "#888",
+                }}
+              >
+                {t("Wallet")}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
               style={{
-                fontWeight: "bold",
-                color:
+                paddingVertical: 8,
+                paddingHorizontal: 20,
+                borderRadius: 20,
+                backgroundColor:
                   selectedView === "nft"
                     ? isDarkMode
-                      ? "#fff"
-                      : "#000"
-                    : "#888",
+                      ? "#555"
+                      : "#fff"
+                    : "transparent",
+                borderColor: isDarkMode ? "#333" : "#eee",
+                borderWidth: 1,
               }}
+              onPress={() => setSelectedView("nft")}
             >
-              NFTs
-            </Text>
-          </TouchableOpacity>
-        </View>
-      ),
+              <Text
+                style={{
+                  fontWeight: "bold",
+                  color:
+                    selectedView === "nft"
+                      ? isDarkMode
+                        ? "#fff"
+                        : "#000"
+                      : "#888",
+                }}
+              >
+                NFTs
+              </Text>
+            </TouchableOpacity>
+          </View>
+        ) : null, // 当 isModalVisible 为 true 时，不显示切换按钮
     });
-  }, [navigation, selectedView, isDarkMode, t]);
+  }, [navigation, selectedView, isDarkMode, t, isModalVisible]);
 
   const handleSelectChain = async (chain) => {
     try {
