@@ -103,7 +103,7 @@ function WalletScreen({ route, navigation }) {
   const blueToothColor = isDarkMode ? "#CCB68C" : "#CFAB95";
   const iconColor = isDarkMode ? "#ffffff" : "#676776";
   const darkColorsDown = ["#21201E", "#0E0D0D"];
-  const lightColorsDown = ["#FDFCFD", "#EDEBEF"];
+  const lightColorsDown = ["#ffffff", "#EDEBEF"];
   const [pinModalVisible, setPinModalVisible] = useState(false);
   const [phrase, setPhrase] = useState("");
   const [animation] = useState(new Animated.Value(0));
