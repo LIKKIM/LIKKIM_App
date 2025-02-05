@@ -1,5 +1,11 @@
 //WalletScreen.js
-import React, { useState, useEffect, useRef, useContext } from "react";
+import React, {
+  useState,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useContext,
+} from "react";
 import {
   View,
   Text,
@@ -150,82 +156,82 @@ function WalletScreen({ route, navigation }) {
 
   const [selectedView, setSelectedView] = useState("wallet"); // 管理视图状态，'wallet' 或 'nft'
 
-  navigation.setOptions({
-    headerTitle: () => (
-      <View
-        style={{
-          flexDirection: "row",
-          backgroundColor: isDarkMode ? "#333" : "#eee",
-          borderRadius: 20,
-          borderWidth: 1,
-          borderColor: isDarkMode ? "#333" : "#eee",
-        }}
-      >
-        <TouchableOpacity
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerTitle: () => (
+        <View
           style={{
-            paddingVertical: 8,
-            paddingHorizontal: 20,
+            flexDirection: "row",
+            backgroundColor: isDarkMode ? "#333" : "#eee",
             borderRadius: 20,
-            backgroundColor:
-              selectedView === "wallet"
-                ? isDarkMode
-                  ? "#555"
-                  : "#fff"
-                : "transparent",
-            // 移除边框宽度变化，使用统一的边框样式来避免位移
+            borderWidth: 1,
             borderColor: isDarkMode ? "#333" : "#eee",
-            borderWidth: 1, // 保持边框宽度恒定
           }}
-          onPress={() => setSelectedView("wallet")}
         >
-          <Text
+          <TouchableOpacity
             style={{
-              fontWeight: "bold",
-              color:
+              paddingVertical: 8,
+              paddingHorizontal: 20,
+              borderRadius: 20,
+              backgroundColor:
                 selectedView === "wallet"
                   ? isDarkMode
-                    ? "#fff"
-                    : "#000"
-                  : "#888", // 使用更明显的颜色差异来标识选中状态
+                    ? "#555"
+                    : "#fff"
+                  : "transparent",
+              borderColor: isDarkMode ? "#333" : "#eee",
+              borderWidth: 1,
             }}
+            onPress={() => setSelectedView("wallet")}
           >
-            {t("Wallet")}
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            paddingVertical: 8,
-            paddingHorizontal: 20,
-            borderRadius: 20,
-            backgroundColor:
-              selectedView === "nft"
-                ? isDarkMode
-                  ? "#555"
-                  : "#fff"
-                : "transparent",
-            // 统一的边框样式
-            borderColor: isDarkMode ? "#333" : "#eee",
-            borderWidth: 1, // 保持边框宽度恒定
-          }}
-          onPress={() => setSelectedView("nft")}
-        >
-          <Text
+            <Text
+              style={{
+                fontWeight: "bold",
+                color:
+                  selectedView === "wallet"
+                    ? isDarkMode
+                      ? "#fff"
+                      : "#000"
+                    : "#888",
+              }}
+            >
+              {t("Wallet")}
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
             style={{
-              fontWeight: "bold",
-              color:
+              paddingVertical: 8,
+              paddingHorizontal: 20,
+              borderRadius: 20,
+              backgroundColor:
                 selectedView === "nft"
                   ? isDarkMode
-                    ? "#fff"
-                    : "#000"
-                  : "#888", // 使用更明显的颜色差异来标识选中状态
+                    ? "#555"
+                    : "#fff"
+                  : "transparent",
+              borderColor: isDarkMode ? "#333" : "#eee",
+              borderWidth: 1,
             }}
+            onPress={() => setSelectedView("nft")}
           >
-            NFTs
-          </Text>
-        </TouchableOpacity>
-      </View>
-    ),
-  });
+            <Text
+              style={{
+                fontWeight: "bold",
+                color:
+                  selectedView === "nft"
+                    ? isDarkMode
+                      ? "#fff"
+                      : "#000"
+                    : "#888",
+              }}
+            >
+              NFTs
+            </Text>
+          </TouchableOpacity>
+        </View>
+      ),
+    });
+  }, [navigation, selectedView, isDarkMode, t]);
 
   // 读取用户之前的选择
   /*   useEffect(() => {
