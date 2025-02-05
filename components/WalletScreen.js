@@ -361,9 +361,6 @@ function WalletScreen({ route, navigation }) {
   };
   // 使用最新的价格来计算最终余额
   const getConvertedBalance = (cardBalance, cardShortName) => {
-    // 打印原始卡余额
-    // console.log(`Original card balance: ${cardBalance}`);
-
     const rate = exchangeRates[currencyUnit]; // 当前法定货币的汇率
     const cryptoToUsdRate = exchangeRates[cardShortName] || 1; // 加密货币对美元的汇率，默认为1
 
