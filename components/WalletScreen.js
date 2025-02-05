@@ -1073,14 +1073,10 @@ function WalletScreen({ route, navigation }) {
           } else {
             console.log("监听设备响应时出错:", error.message);
           }
-        } else if (characteristic && characteristic.value) {
-          // Base64解码接收到的数据
-          const receivedData = Buffer.from(characteristic.value, "base64");
-          // 在这里处理接收到的数据
-        } else {
-          console.log("未接收到有效的特征数据");
+          //  return;
         }
-        // 监听依然保持，下一次数据变化时回调会再次执行
+        // Base64解码接收到的数据
+        const receivedData = Buffer.from(characteristic.value, "base64");
       }
     );
   };
