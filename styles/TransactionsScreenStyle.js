@@ -24,14 +24,12 @@ const TransactionsScreenStyles = (isDarkMode) => {
       paddingLeft: 10,
       color: textColor,
     },
-
     searchInput: {
       width: "100%",
       padding: 10,
       borderRadius: 10,
       color: textColor,
     },
-    // 搜索框样式
     searchContainer: {
       flexDirection: "row",
       alignItems: "center",
@@ -40,35 +38,31 @@ const TransactionsScreenStyles = (isDarkMode) => {
       backgroundColor: isDarkMode ? "#21201E" : "#E5E1E9",
       marginBottom: 20,
     },
-
-    // Dropdown Styles
     fromDropdown: {
       position: "absolute",
-      top: 100, // 确保下拉菜单显示在按钮下方
+      top: 100,
       width: "100%",
-      maxHeight: 200, // 限制 dropdown 最大高度，超出时可以滚动
+      maxHeight: 200,
       backgroundColor: dropdownBackgroundColor,
       borderRadius: 10,
       padding: 10,
-      zIndex: 999, // 提高 zIndex 确保 dropdown 始终在其他组件上方
-      overflow: "hidden", // 避免溢出内容被隐藏
+      zIndex: 999,
+      overflow: "hidden",
     },
     toDropdown: {
       position: "absolute",
-      top: 70, // 确保下拉菜单显示在按钮下方
+      top: 70,
       width: "100%",
-      maxHeight: 200, // 限制 dropdown 最大高度，超出时可以滚动
+      maxHeight: 200,
       backgroundColor: dropdownBackgroundColor,
       borderRadius: 10,
       padding: 10,
-      zIndex: 999, // 提高 zIndex 确保 dropdown 始终在其他组件上方
-      overflow: "hidden", // 避免溢出内容被隐藏
+      zIndex: 999,
+      overflow: "hidden",
     },
     chainTag: {
       paddingVertical: 10,
       paddingHorizontal: 15,
-      /*       borderBottomWidth: 1,
-      borderBottomColor: isDarkMode ? "#555" : "#ddd", */
     },
     selectedChainTag: {
       backgroundColor: isDarkMode ? "#CCB68C" : "#ccc",
@@ -79,13 +73,10 @@ const TransactionsScreenStyles = (isDarkMode) => {
     selectedChainTagText: {
       color: isDarkMode ? "#000" : "#fff",
     },
-
     container: {
       flex: 1,
-      //  justifyContent: "center",
       alignItems: "center",
     },
-
     modalContainer: {
       flex: 1,
       justifyContent: "center",
@@ -99,7 +90,6 @@ const TransactionsScreenStyles = (isDarkMode) => {
       borderRadius: 10,
       marginVertical: 10,
     },
-
     swapInputContainer: {
       width: "100%",
       flexDirection: "row",
@@ -111,18 +101,18 @@ const TransactionsScreenStyles = (isDarkMode) => {
       padding: 10,
     },
     swapInput: {
-      width: "100%", // 确保 TextInput 占满容器宽度
+      width: "100%",
       height: 40,
       paddingHorizontal: 10,
       color: textColor,
     },
     tokenSelect: {
-      alignSelf: "stretch", // 高度填充父容器
-      flexShrink: 1, // 宽度自适应内容
+      alignSelf: "stretch",
+      flexShrink: 1,
       flexDirection: "row",
       alignItems: "center",
-      justifyContent: "space-between", // 确保“Select token”和图标两边对齐
-      paddingHorizontal: 10, // 可选，调整按钮的内边距
+      justifyContent: "space-between",
+      paddingHorizontal: 10,
     },
     tokenSelectText: {
       color: "#fff",
@@ -135,7 +125,6 @@ const TransactionsScreenStyles = (isDarkMode) => {
       marginTop: -10,
       alignSelf: "flex-end",
     },
-
     amountInput: {
       backgroundColor: inputBackgroundColor,
       padding: 10,
@@ -152,7 +141,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       borderRadius: 20,
       padding: 35,
       alignItems: "center",
-      flex: 0, // 默认值：内部内容会撑开容器高度
+      flex: 0,
     },
     amountSubtitle: {
       color: secondTextColor,
@@ -179,7 +168,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
     },
     bgContainer: {
       flex: 1,
-      backgroundColor: backgroundColor,
+      backgroundColor,
       alignItems: "center",
       padding: 20,
     },
@@ -292,7 +281,6 @@ const TransactionsScreenStyles = (isDarkMode) => {
     confirmModalView: {
       margin: 20,
       alignSelf: "center",
-      //  flex: 1, // 使用 flex 让 modal 动态填充可用空间
       width: "90%",
       backgroundColor: modalBackgroundColor,
       borderRadius: 20,
@@ -300,7 +288,6 @@ const TransactionsScreenStyles = (isDarkMode) => {
       alignItems: "center",
       justifyContent: "space-between",
     },
-
     deviceItemContainer: {
       flexDirection: "row",
       alignItems: "center",
@@ -498,9 +485,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       borderRadius: 20,
       alignItems: "center",
       justifyContent: "center",
-      //  marginBottom: 20,
     },
-
     scanModalSubtitle: {
       color: secondTextColor,
       fontSize: 14,
