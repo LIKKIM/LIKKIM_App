@@ -101,7 +101,6 @@ function TransactionsScreen() {
   const [amountModalVisible, setAmountModalVisible] = useState(false); // 新增状态
   const [confirmModalVisible, setConfirmModalVisible] = useState(false); // 新增交易确认modal状态
   const [transactionFee, setTransactionFee] = useState(""); // 示例交易手续费
-  // const [transactionHistory, setTransactionHistory] = useState([]);
   const [hasFetchedBalance, setHasFetchedBalance] = useState(false);
   const [selectedDevice, setSelectedDevice] = useState(null);
   const [bleVisible, setBleVisible] = useState(false); // New state for Bluetooth modal
