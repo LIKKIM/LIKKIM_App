@@ -524,13 +524,10 @@ function WalletScreen({ route, navigation }) {
   // 处理断开连接的逻辑
   const handleDisconnectDevice = async (device) => {
     try {
-      // 停止监听验证码，避免因断开连接导致的错误
-      // stopMonitoringVerificationCode();
-
-      await device.cancelConnection(); // 断开设备连接
+      await device.cancelConnection();
       console.log(`设备 ${device.id} 已断开连接`);
 
-      // 移除已验证设备的ID
+      // Remove verified device ID
       const updatedVerifiedDevices = verifiedDevices.filter(
         (id) => id !== device.id
       );
@@ -549,13 +546,13 @@ function WalletScreen({ route, navigation }) {
     }
   };
   function crc16Modbus(arr) {
-    let crc = 0xffff; // 初始值为0xFFFF
+    let crc = 0xffff;
     for (let byte of arr) {
       crc ^= byte; // 按位异或
       for (let i = 0; i < 8; i++) {
         // 处理每一个字节的8位
         if (crc & 0x0001) {
-          crc = (crc >> 1) ^ 0xa001; // 多项式为0xA001
+          crc = (crc >> 1) ^ 0xa001;
         } else {
           crc = crc >> 1;
         }
