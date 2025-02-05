@@ -24,11 +24,12 @@ import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
 import { useNavigation } from "@react-navigation/native";
 import { DarkModeContext } from "./CryptoContext";
 import { Swipeable } from "react-native-gesture-handler";
-import { useTranslation } from "react-i18next"; // 导入 useTranslation
+import { useTranslation } from "react-i18next";
 import { useLocales } from "expo-localization";
+import keys from "../config/keys";
 
-const GOOGLE_MAPS_API_KEY = "AIzaSyAaLPaHuHj_vT7cHsA99HZeuAH_Z1p3Xbg"; // Google API 密钥
-const GAODE_MAP_API_KEY = "c48411da5c359aa1f6f685dd52dd372b"; // 高德 API 密钥
+const GOOGLE_MAPS_API_KEY = keys.GOOGLE_MAPS_API_KEY;
+const GAODE_MAP_API_KEY = keys.GAODE_MAP_API_KEY;
 
 const styles = StyleSheet.create({
   container: {
@@ -63,6 +64,7 @@ const styles = StyleSheet.create({
   },
 });
 
+// Retrieves an address from Google Maps using latitude and longitude.
 const getAddressFromLatLng = async (lat, lng) => {
   const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${GOOGLE_MAPS_API_KEY}`;
   try {
@@ -79,36 +81,27 @@ const getAddressFromLatLng = async (lat, lng) => {
   }
 };
 
-/**
- * 高德地址解析
- */
+// AMap reverse geocoding: Retrieves an address from AMap using latitude and longitude.
 const getAddressFromLatLngGD = async (lat, lng) => {
-  console.log(`TEST:高德经纬度：${lat},${lng}`);
-
-  let geoData = await fetch(
+  console.log(`AMap coordinates: ${lat}, ${lng}`);
+  const geoData = await fetch(
     `https://restapi.amap.com/v3/geocode/regeo?key=${GAODE_MAP_API_KEY}&location=${lng},${lat}&extensions=all`
   ).then((res) => res.json());
   if (
     geoData.status == 1 &&
     geoData.regeocode.addressComponent.adcode.length > 0
   ) {
-    console.log("Test高德逆地址解析成功");
-    console.log(geoData.regeocode.pois[0]);
-
-    let d = geoData.regeocode.addressComponent;
-    let _address = `${d.city}${d.district}${d.township}${
-      d.streetNumber.street
-    }${d.streetNumber.number}(${
+    console.log("AMap reverse geocoding successful");
+    const comp = geoData.regeocode.addressComponent;
+    const address = `${comp.city}${comp.district}${comp.township}${
+      comp.streetNumber.street
+    }${comp.streetNumber.number} (${
       geoData.regeocode.pois.length > 0 ? geoData.regeocode.pois[0].name : ""
     })`;
-
-    console.log("Test高德地址解析：" + _address);
-
-    return _address;
+    console.log("AMap address:", address);
+    return address;
   } else {
-    console.log("高德地址逆解析失败：");
-    console.log(geoData.regeocode);
-
+    console.log("AMap reverse geocoding failed", geoData.regeocode);
     return "Address Fetch Failed.";
   }
 };
@@ -124,28 +117,24 @@ const loadConnectedDevices = async (
       const devicesWithAddresses = await Promise.all(
         devices.map(async (device) => {
           const address = await getAddressFromLatLng(device.lat, device.lng);
-          //const address = await getAddressFromLatLngGD(device.lat, device.lng);
-          setDeviceAddresses((prev) => ({
-            ...prev,
-            [device.id]: address,
-          }));
+          setDeviceAddresses((prev) => ({ ...prev, [device.id]: address }));
           return { ...device, address };
         })
       );
       setDevicesPositions(devicesWithAddresses);
-      console.log("设备数据已恢复:", devicesWithAddresses);
+      console.log("Restored device data:", devicesWithAddresses);
     } else {
-      console.log("没有已保存的设备数据");
+      console.log("No saved device data found");
     }
   } catch (error) {
-    console.log("加载设备数据失败:", error);
+    console.log("Failed to load device data:", error);
   }
 };
 
 export default function FindMyLkkim() {
   const navigation = useNavigation();
   const { isDarkMode } = useContext(DarkModeContext);
-  const { t } = useTranslation(); // 获取翻译函数
+  const { t } = useTranslation();
   const [devicesPositions, setDevicesPositions] = useState([]);
   const [deviceAddresses, setDeviceAddresses] = useState({});
   const [currentPosition, setCurrentPosition] = useState(null);
@@ -153,24 +142,20 @@ export default function FindMyLkkim() {
   const mapRef = useRef(null);
   const screenHeight = Dimensions.get("window").height;
   const listHeight = screenHeight * 0.3;
-
   const locales = useLocales();
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerStyle: {
-        backgroundColor: isDarkMode ? "#21201E" : "#FFFFFF",
-      },
+      headerStyle: { backgroundColor: isDarkMode ? "#21201E" : "#FFFFFF" },
       headerTintColor: isDarkMode ? "#FFFFFF" : "#000000",
     });
   }, [isDarkMode, navigation]);
 
-  // 使用 useEffect 来设置返回按钮的文本
   useEffect(() => {
     navigation.setOptions({
-      headerBackTitle: t("Back"), // 设置国际化的“返回”按钮文本
+      headerBackTitle: t("Back"),
     });
-  }, [navigation, t]); // 依赖项是 navigation 和 t，确保翻译变化时更新按钮文本
+  }, [navigation, t]);
 
   useEffect(() => {
     requestLocationPermission();
@@ -231,9 +216,9 @@ export default function FindMyLkkim() {
         JSON.stringify(updatedDevices)
       );
       setDevicesPositions(updatedDevices);
-      console.log(`设备 ${deviceId} 已删除`);
+      console.log(`Device ${deviceId} deleted`);
     } catch (error) {
-      console.log("删除设备失败:", error);
+      console.log("Failed to delete device:", error);
     }
   };
 
@@ -242,10 +227,7 @@ export default function FindMyLkkim() {
       t("Confirm Deletion"),
       t("Are you sure you want to delete this device?"),
       [
-        {
-          text: t("Cancel"),
-          style: "cancel",
-        },
+        { text: t("Cancel"), style: "cancel" },
         {
           text: t("Delete"),
           onPress: () => handleDeleteDevice(deviceId),
@@ -278,14 +260,6 @@ export default function FindMyLkkim() {
     }
   };
 
-  //TODO 高德
-  useEffect(() => {
-    console.log(locales);
-
-    //测试地址：广州南站附近
-    getAddressFromLatLngGD(22.989943, 113.268858);
-  }, []);
-
   return (
     <View style={{ flex: 1 }}>
       <View style={styles.container}>
@@ -305,10 +279,7 @@ export default function FindMyLkkim() {
           {devicesPositions.map((device, index) => (
             <Marker
               key={index}
-              coordinate={{
-                latitude: device.lat,
-                longitude: device.lng,
-              }}
+              coordinate={{ latitude: device.lat, longitude: device.lng }}
               onPress={() => handleMarkerPress(device)}
             >
               <View
@@ -327,9 +298,7 @@ export default function FindMyLkkim() {
                         shadowOpacity: 0.5,
                         shadowRadius: 5,
                       }
-                    : {
-                        elevation: 5,
-                      }),
+                    : { elevation: 5 }),
                 }}
               >
                 <Image
@@ -427,9 +396,7 @@ export default function FindMyLkkim() {
           </View>
         ) : (
           <ScrollView
-            style={{
-              maxHeight: 140,
-            }}
+            style={{ maxHeight: 140 }}
             scrollIndicatorInsets={{ right: 4 }}
             showsVerticalScrollIndicator={true}
           >
