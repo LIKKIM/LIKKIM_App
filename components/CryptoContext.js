@@ -7,7 +7,6 @@ import { initialAdditionalCryptos } from "../config/cryptosData";
 export const CryptoContext = createContext();
 export const DarkModeContext = createContext();
 
-// 汇率API的URL
 const NEW_EXCHANGE_RATE_API_URL =
   "https://df.likkim.com/api/market/exchange-rate";
 
@@ -73,22 +72,20 @@ export const CryptoProvider = ({ children }) => {
   const [cryptoCount, setCryptoCount] = useState(0);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [currencyUnit, setCurrencyUnit] = useState("USD");
-  const [transactionHistory, setTransactionHistory] = useState([]); // 新增交易历史状态
-
+  const [transactionHistory, setTransactionHistory] = useState([]);
   const [initialAdditionalCryptosState, setInitialAdditionalCryptos] = useState(
     initialAdditionalCryptos
   );
   const [additionalCryptos, setAdditionalCryptos] = useState(
     initialAdditionalCryptosState
   );
-
   const [isVerificationSuccessful, setIsVerificationSuccessful] =
     useState(false);
   const [verifiedDevices, setVerifiedDevices] = useState([]);
   const [isAppLaunching, setIsAppLaunching] = useState(true);
   const [cryptoCards, setCryptoCards] = useState([]);
   const [addedCryptos, setAddedCryptos] = useState([]);
-  const [exchangeRates, setExchangeRates] = useState({}); // 添加汇率状态
+  const [exchangeRates, setExchangeRates] = useState({});
 
   const handleUpdateCryptoCards = (newCrypto) => {
     setCryptoCards((prevCards) => {
@@ -111,60 +108,48 @@ export const CryptoProvider = ({ children }) => {
     });
   };
 
-  // 更新加密货币地址的函数
   const updateCryptoAddress = (shortName, newAddress) => {
-    // 只处理 ETH、BTC、SOL、BSC 的地址更新
     const supportedChains = ["ETH", "BTC", "SOL", "BSC"];
 
     if (!supportedChains.includes(shortName)) {
-      // 如果不是 ETH、BTC、SOL、BSC 地址，直接更新地址，但不添加卡片到 Wallet Screen
+      // Update address for unsupported chains without adding to wallet screen
       setInitialAdditionalCryptos((prevCryptos) => {
         const updatedCryptos = prevCryptos.map((crypto) =>
           crypto.shortName === shortName
-            ? { ...crypto, address: newAddress } // 只更新指定的 shortName 地址
+            ? { ...crypto, address: newAddress }
             : crypto
         );
-
-        // 持久化更新后的数据到 AsyncStorage
         AsyncStorage.setItem(
           "initialAdditionalCryptos",
           JSON.stringify(updatedCryptos)
         );
         return updatedCryptos;
       });
-      return; // 如果不是 ETH、BTC、SOL 或 BSC 地址，直接返回
+      return;
     }
 
-    // 对 ETH、BTC、SOL、BSC 地址进行更新并添加到 Wallet Screen
+    // Update address for supported chains and update wallet screen
     setInitialAdditionalCryptos((prevCryptos) => {
       const updatedCryptos = prevCryptos.map((crypto) =>
         crypto.shortName === shortName
-          ? { ...crypto, address: newAddress } // 只更新指定的 shortName 地址
+          ? { ...crypto, address: newAddress }
           : crypto
       );
 
-      // 持久化更新后的数据到 AsyncStorage
       AsyncStorage.setItem(
         "initialAdditionalCryptos",
         JSON.stringify(updatedCryptos)
       );
 
-      // 更新 cryptoCards
       setCryptoCards((prevCards) => {
-        // 找到对应 shortName 的卡片并更新
         const updatedCards = prevCards.map((card) =>
-          card.shortName === shortName
-            ? { ...card, address: newAddress } // 只更新对应 shortName 的卡片
-            : card
+          card.shortName === shortName ? { ...card, address: newAddress } : card
         );
-
-        // 如果该卡片之前没有存在，则添加它
         if (!prevCards.find((card) => card.shortName === shortName)) {
           updatedCards.push(
             updatedCryptos.find((crypto) => crypto.shortName === shortName)
           );
         }
-
         return updatedCards;
       });
 
@@ -172,17 +157,13 @@ export const CryptoProvider = ({ children }) => {
     });
   };
 
-  // 更新加密货币数据的函数
   const updateCryptoData = (shortName, newData) => {
-    // 只更新 ETH、BTC、SOL、BSC 的数据
     const supportedChains = ["ETH", "BTC", "SOL", "BSC"];
-
     if (supportedChains.includes(shortName)) {
       setInitialAdditionalCryptos((prevCryptos) => {
         const updatedCryptos = prevCryptos.map((crypto) =>
           crypto.shortName === shortName ? { ...crypto, ...newData } : crypto
         );
-
         AsyncStorage.setItem(
           "initialAdditionalCryptos",
           JSON.stringify(updatedCryptos)
@@ -197,14 +178,12 @@ export const CryptoProvider = ({ children }) => {
       const existingCard = prevCards.find(
         (card) => card.chainShortName === chainName
       );
-
       if (!existingCard) {
         const newCrypto = initialAdditionalCryptos.find(
           (crypto) => crypto.chainShortName === chainName
         );
-
         if (newCrypto) {
-          const updatedCards = [
+          return [
             ...prevCards,
             {
               name: newCrypto.name,
@@ -219,9 +198,8 @@ export const CryptoProvider = ({ children }) => {
               queryChainShortName: newCrypto.queryChainShortName,
             },
           ];
-          return updatedCards;
         } else {
-          console.warn(`未找到 ${chainName} 的初始加密货币信息`);
+          console.warn(`No initial data found for chain: ${chainName}`);
         }
       }
       return prevCards;
@@ -236,25 +214,19 @@ export const CryptoProvider = ({ children }) => {
     try {
       const response = await fetch(NEW_EXCHANGE_RATE_API_URL, {
         method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
       });
       const data = await response.json();
       if (data.code === 0 && data.data) {
-        //  console.log("API返回的汇率数据:", data.data);
         setExchangeRates(data.data);
         await AsyncStorage.setItem("exchangeRates", JSON.stringify(data.data));
       } else {
-        console.error("获取汇率数据失败: ", data.msg);
+        console.error("Failed to fetch exchange rates:", data.msg);
       }
     } catch (error) {
-      console.error("请求汇率数据出错: ", error);
+      console.error("Error fetching exchange rates:", error);
     }
   };
-
-  // 汇率数据状态
-  //const [exchangeRates, setExchangeRates] = useState({});
 
   useEffect(() => {
     const loadTransactionHistory = async () => {
@@ -264,10 +236,9 @@ export const CryptoProvider = ({ children }) => {
           setTransactionHistory(JSON.parse(history));
         }
       } catch (error) {
-        console.error("加载交易历史失败:", error);
+        console.error("Failed to load transaction history:", error);
       }
     };
-
     loadTransactionHistory();
   }, []);
 
@@ -279,10 +250,9 @@ export const CryptoProvider = ({ children }) => {
           JSON.stringify(transactionHistory)
         );
       } catch (error) {
-        console.error("保存交易历史失败:", error);
+        console.error("Failed to save transaction history:", error);
       }
     };
-
     if (transactionHistory.length > 0) {
       saveTransactionHistory();
     }
@@ -296,7 +266,7 @@ export const CryptoProvider = ({ children }) => {
           JSON.stringify(addedCryptos)
         );
       } catch (error) {
-        console.error("Error saving addedCryptos: ", error);
+        console.error("Error saving addedCryptos:", error);
       }
     };
     if (addedCryptos.length > 0) {
@@ -318,8 +288,9 @@ export const CryptoProvider = ({ children }) => {
 
         const savedCryptos = await AsyncStorage.getItem("addedCryptos");
         if (savedCryptos !== null) {
-          setAddedCryptos(JSON.parse(savedCryptos));
-          setCryptoCount(JSON.parse(savedCryptos).length);
+          const parsedCryptos = JSON.parse(savedCryptos);
+          setAddedCryptos(parsedCryptos);
+          setCryptoCount(parsedCryptos.length);
         }
 
         const storedStatus = await AsyncStorage.getItem(
@@ -351,11 +322,8 @@ export const CryptoProvider = ({ children }) => {
         if (savedInitialCryptos !== null) {
           setInitialAdditionalCryptos(JSON.parse(savedInitialCryptos));
         }
-
-        // 加载本地汇率数据
-        //   await loadExchangeRates();
       } catch (error) {
-        console.error("Error loading settings: ", error);
+        console.error("Error loading settings:", error);
       } finally {
         setIsAppLaunching(true);
       }
@@ -386,13 +354,12 @@ export const CryptoProvider = ({ children }) => {
           JSON.stringify(isScreenLockEnabled)
         );
         await AsyncStorage.setItem("screenLockPassword", screenLockPassword);
-
         await AsyncStorage.setItem(
           "initialAdditionalCryptos",
           JSON.stringify(initialAdditionalCryptosState)
         );
       } catch (error) {
-        console.error("Error saving settings: ", error);
+        console.error("Error saving settings:", error);
       }
     };
     saveSettings();
@@ -407,13 +374,6 @@ export const CryptoProvider = ({ children }) => {
     screenLockPassword,
     initialAdditionalCryptosState,
   ]);
-
-  /*   // 每小时更新汇率
-  useEffect(() => {
-    fetchExchangeRates(); // 初次加载时获取汇率
-    const intervalId = setInterval(fetchExchangeRates, 3600000); // 每小时更新汇率
-    return () => clearInterval(intervalId); // 清理定时器
-  }, []); */
 
   const toggleScreenLock = async (enabled) => {
     setIsAppLaunching(false);
@@ -433,20 +393,18 @@ export const CryptoProvider = ({ children }) => {
     const trxCrypto = initialAdditionalCryptosState.find(
       (crypto) => crypto.chainShortName === "TRX"
     );
-
     if (trxCrypto) {
       console.log(
-        "initialAdditionalCryptosState 中的 TRX 地址:",
+        "TRX address in initialAdditionalCryptosState:",
         trxCrypto.address
       );
     } else {
-      console.log("initialAdditionalCryptosState 中的 TRX 地址未找到。");
+      console.log("TRX address not found in initialAdditionalCryptosState.");
     }
-
     if (usdtCrypto.chainShortName === "TRX") {
-      console.log("usdtCrypto 中的 TRX 地址:", usdtCrypto.address);
+      console.log("TRX address in usdtCrypto:", usdtCrypto.address);
     } else {
-      console.log("usdtCrypto 中的 TRX 地址未找到。");
+      console.log("TRX address not found in usdtCrypto.");
     }
   }, [initialAdditionalCryptosState]);
 
@@ -482,7 +440,7 @@ export const CryptoProvider = ({ children }) => {
         addedCryptos,
         setCryptoCards,
         handleUpdateCryptoCards,
-        exchangeRates, // 提供汇率数据
+        exchangeRates,
         transactionHistory,
         setTransactionHistory,
       }}
