@@ -201,17 +201,6 @@ function AppContent({
       <Tab.Navigator
         screenOptions={({ route }) => ({
           lazy: false,
-          //    tabBarButton: (props) => (
-          //      <TouchableOpacity
-          //        {...props}
-          //        onPress={() => {
-          //          Vibration.vibrate();
-          //          props.onPress();
-          //        }}
-          //      >
-          //        {props.children}
-          //      </TouchableOpacity>
-          //    ),
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
             if (route.name === "Wallet") {
