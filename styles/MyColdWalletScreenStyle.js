@@ -121,12 +121,12 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
     },
     container: {
       flex: 1,
-      backgroundColor: backgroundColor,
+      backgroundColor,
       alignItems: "center",
       justifyContent: "center",
-      paddingTop: 10, // 顶部 padding
-      paddingLeft: 20, // 左侧 padding
-      paddingRight: 20, // 右侧 padding
+      paddingTop: 10,
+      paddingLeft: 20,
+      paddingRight: 20,
     },
     contentContainer: {
       flexGrow: 1,
@@ -144,8 +144,8 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       paddingRight: 4,
     },
     deviceItemContainer: {
-      flexDirection: "row", // 横向排列
-      alignItems: "center", // 垂直居中
+      flexDirection: "row",
+      alignItems: "center",
       justifyContent: "center",
       marginTop: 20,
     },
@@ -189,23 +189,23 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
     },
     dropdown: {
       position: "absolute",
-      right: 20, // 根据需要调整位置
-      top: 2, // 调整以确保下拉菜单显示在正确位置
-      backgroundColor: modalBackgroundColor, // 根据模式动态设置背景色
-      borderRadius: 5, // 圆角
-      paddingVertical: 8, // 垂直方向的内边距
-      paddingHorizontal: 16, // 水平方向的内边距
-      zIndex: 101, // 确保Dropdown在其他元素上方
-      shadowColor: "#000", // 阴影颜色
-      shadowOffset: { width: 0, height: 2 }, // 阴影偏移
-      shadowOpacity: 0.25, // 阴影透明度
-      shadowRadius: 3.84, // 阴影扩散范围
-      elevation: 5, // 用于Android的材质阴影高度
+      right: 20,
+      top: 2,
+      backgroundColor: modalBackgroundColor,
+      borderRadius: 5,
+      paddingVertical: 8,
+      paddingHorizontal: 16,
+      zIndex: 101,
+      shadowColor: "#000",
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.25,
+      shadowRadius: 3.84,
+      elevation: 5,
     },
     dropdownButtonText: {
-      color: textColor, // 根据模式动态设置文本颜色
-      fontSize: 14, // 字体大小
-      paddingVertical: 5, // 增加垂直间距
+      color: textColor,
+      fontSize: 14,
+      paddingVertical: 5,
     },
     enableLockModalView: {
       position: "absolute",
@@ -376,7 +376,6 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       fontSize: 14,
       textAlign: "center",
     },
-
     searchContainer: {
       flexDirection: "row",
       alignItems: "center",
@@ -385,7 +384,6 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       backgroundColor: isDarkMode ? "#21201E" : "#E5E1E9",
       marginBottom: 20,
     },
-
     searchIcon: {
       paddingLeft: 10,
       color: textColor,
@@ -394,7 +392,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       width: "100%",
       padding: 10,
       borderRadius: 10,
-      color: textColor, // Dark mode and light mode text color
+      color: textColor,
     },
     setPasswordModalView: {
       position: "absolute",

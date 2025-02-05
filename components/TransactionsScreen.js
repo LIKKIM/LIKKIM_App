@@ -92,7 +92,6 @@ function TransactionsScreen() {
   const iconColor = isDarkMode ? "#CCB68C" : "#CFAB95";
   const darkColors = ["#21201E", "#0E0D0D"];
   const lightColors = ["#FFFFFF", "#EDEBEF"];
-  const placeholderColor = isDarkMode ? "#ffffff" : "#21201E";
   const [amount, setAmount] = useState("");
   const buttonBackgroundColor = isDarkMode ? "#CCB68C" : "#CFAB95";
   const disabledButtonBackgroundColor = isDarkMode ? "#6c6c6c" : "#ccc"; // 根据 isDarkMode 设置不同的灰色
@@ -102,7 +101,6 @@ function TransactionsScreen() {
   const [amountModalVisible, setAmountModalVisible] = useState(false); // 新增状态
   const [confirmModalVisible, setConfirmModalVisible] = useState(false); // 新增交易确认modal状态
   const [transactionFee, setTransactionFee] = useState(""); // 示例交易手续费
-  // const [transactionHistory, setTransactionHistory] = useState([]);
   const [hasFetchedBalance, setHasFetchedBalance] = useState(false);
   const [selectedDevice, setSelectedDevice] = useState(null);
   const [bleVisible, setBleVisible] = useState(false); // New state for Bluetooth modal

@@ -16,7 +16,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { languages } from "../config/languages";
-import i18n from "../config/i18n"; // 确保这个路径正确
+import i18n from "../config/i18n";
 
 const { width, height } = Dimensions.get("window");
 
@@ -24,9 +24,9 @@ const OnboardingScreen = ({ onDone }) => {
   const [languageModalVisible, setLanguageModalVisible] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState("en");
   const [currentSlideKey, setCurrentSlideKey] = useState(0);
-  const scaleAnim = useRef(new Animated.Value(0.8)).current; // 初始缩放比例为1
-  const opacityAnim = useRef(new Animated.Value(0)).current; // 初始透明度为0
-  const translateYAnim = useRef(new Animated.Value(30)).current; // 初始位置稍低，用于从下到上的效果
+  const scaleAnim = useRef(new Animated.Value(0.8)).current;
+  const opacityAnim = useRef(new Animated.Value(0)).current;
+  const translateYAnim = useRef(new Animated.Value(30)).current;
   const fadeInUpAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -38,7 +38,7 @@ const OnboardingScreen = ({ onDone }) => {
     });
   }, []);
 
-  // 在这里定义slides，依赖于当前语言设置
+  // Define slides based on the current language.
   const slides = [
     {
       key: "slide1",
@@ -62,13 +62,12 @@ const OnboardingScreen = ({ onDone }) => {
 
   const handleLanguageChange = async (lang) => {
     setSelectedLanguage(lang);
-    i18n.changeLanguage(lang); // 切换i18n实例到新的语言
+    i18n.changeLanguage(lang);
     await AsyncStorage.setItem("selectedLanguage", lang);
     setLanguageModalVisible(false);
   };
 
-  const startAni = () => {
-
+  const startAnimation = () => {
     Animated.parallel([
       Animated.timing(scaleAnim, {
         toValue: 1,
@@ -91,23 +90,18 @@ const OnboardingScreen = ({ onDone }) => {
         useNativeDriver: true,
       }),
     ]).start();
-  }
+  };
 
-
-  //更改卡片后重置动画
+  // Reset animation when the slide changes.
   useEffect(() => {
     scaleAnim.setValue(0.8);
     fadeInUpAnim.setValue(0);
     opacityAnim.setValue(0);
     translateYAnim.setValue(30);
-    startAni();
+    startAnimation();
+  }, [currentSlideKey]);
 
-  }, [currentSlideKey])
-
-
-  const _renderItem = (props) => {
-
-    const { item, index } = props;
+  const renderItem = ({ item, index }) => {
     return (
       <LinearGradient colors={["#21201E", "#0E0D0D"]} style={styles.slide}>
         <TouchableOpacity
@@ -118,9 +112,8 @@ const OnboardingScreen = ({ onDone }) => {
             {languages.find((lang) => lang.code === selectedLanguage).name}
           </Text>
         </TouchableOpacity>
-        {
-          //卡片未切到的时候，禁止渲染内容。
-          index != currentSlideKey ? null : <View style={styles.content}>
+        {index !== currentSlideKey ? null : (
+          <View style={styles.content}>
             <Animated.Image
               source={item.image}
               style={{
@@ -166,31 +159,30 @@ const OnboardingScreen = ({ onDone }) => {
               {item.text}
             </Animated.Text>
           </View>
-        }
+        )}
       </LinearGradient>
     );
   };
 
-  // 确保其余按钮和文本使用 i18n 进行国际化
-  const _renderNextButton = () => (
+  const renderNextButton = () => (
     <View style={styles.nextButton}>
       <Text style={styles.buttonText}>{i18n.t("Next")}</Text>
     </View>
   );
 
-  const _renderPrevButton = () => (
+  const renderPrevButton = () => (
     <View style={styles.button}>
       <Text style={styles.buttonText}>{i18n.t("Back")}</Text>
     </View>
   );
 
-  const _renderDoneButton = () => (
+  const renderDoneButton = () => (
     <View style={styles.doneButton}>
       <Text style={styles.buttonText}>{i18n.t("Start Exploring")}</Text>
     </View>
   );
 
-  const _renderSkipButton = () => (
+  const renderSkipButton = () => (
     <TouchableOpacity style={styles.button} onPress={onDone}>
       <Text style={styles.buttonText}>{i18n.t("Skip")}</Text>
     </TouchableOpacity>
@@ -206,11 +198,7 @@ const OnboardingScreen = ({ onDone }) => {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <ScrollView
-              style={{
-                width: "100%",
-              }}
-            >
+            <ScrollView style={{ width: "100%" }}>
               {languages.map((lang) => (
                 <TouchableOpacity
                   key={lang.code}
@@ -226,14 +214,14 @@ const OnboardingScreen = ({ onDone }) => {
       </Modal>
       <AppIntroSlider
         bottomButton
-        renderItem={_renderItem}
+        renderItem={renderItem}
         data={slides}
         onDone={onDone}
-        onSlideChange={(index, key) => setCurrentSlideKey(index)} // 更新当前滑动页键值
-        renderSkipButton={_renderSkipButton}
-        renderNextButton={_renderNextButton}
-        renderPrevButton={_renderPrevButton}
-        renderDoneButton={_renderDoneButton}
+        onSlideChange={(index) => setCurrentSlideKey(index)}
+        renderSkipButton={renderSkipButton}
+        renderNextButton={renderNextButton}
+        renderPrevButton={renderPrevButton}
+        renderDoneButton={renderDoneButton}
         dotStyle={styles.dot}
         activeDotStyle={styles.activeDot}
         showSkipButton
@@ -246,7 +234,7 @@ const OnboardingScreen = ({ onDone }) => {
 const styles = StyleSheet.create({
   slide: {
     alignItems: "center",
-    justifyContent: "start",
+    justifyContent: "flex-start",
     width: width,
     height: height,
   },
@@ -272,7 +260,6 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
     marginVertical: 32,
   },
-
   button: {
     alignItems: "center",
     justifyContent: "center",
@@ -325,30 +312,27 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: "#fff", // 白色边框
-    flexDirection: "row", // 横向排列
-    alignItems: "center", // 垂直居中
-    justifyContent: "center", // 水平居中
+    borderColor: "#fff",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
   },
   centeredView: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.2)", // 半透明黑色背景，适用于深色模式
+    backgroundColor: "rgba(0, 0, 0, 0.2)",
   },
   modalView: {
     margin: 20,
-    backgroundColor: "#3F3D3C", // 深色模式下的深蓝色背景
+    backgroundColor: "#3F3D3C",
     borderRadius: 20,
     padding: 35,
     alignItems: "center",
-    shadowColor: "#000",
     maxHeight: "60%",
     width: "80%",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
@@ -359,7 +343,7 @@ const styles = StyleSheet.create({
   },
   languageText: {
     fontSize: 18,
-    color: "#FFF", // 深色模式下的文字通常是白色
+    color: "#FFF",
   },
 });
 

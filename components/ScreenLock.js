@@ -6,28 +6,29 @@ import {
   TouchableOpacity,
   StyleSheet,
   KeyboardAvoidingView,
-  ScrollView,
-  Platform,
   Modal,
   Image,
+  Platform,
 } from "react-native";
 import { CryptoContext, DarkModeContext } from "./CryptoContext";
-import { useTranslation } from "react-i18next"; // 导入国际化库
-import Icon from "react-native-vector-icons/MaterialIcons"; // 导入图标库
+import { useTranslation } from "react-i18next";
+import Icon from "react-native-vector-icons/MaterialIcons";
 import * as LocalAuthentication from "expo-local-authentication";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const ScreenLock = () => {
   const { screenLockPassword, setIsAppLaunching } = useContext(CryptoContext);
   const { isDarkMode } = useContext(DarkModeContext);
-  const [inputPassword, setInputPassword] = useState("");
-  const [isPasswordHidden, setIsPasswordHidden] = useState(true);
-  const [isFocused, setIsFocused] = useState(false); // 跟踪输入框是否聚焦
-  const [modalVisible, setModalVisible] = useState(false); // 用于显示丢失密码的 Modal
-  const [errorModalVisible, setErrorModalVisible] = useState(false); // 用于显示错误信息的 Modal
-  const [faceIDEnabled, setFaceIDEnabled] = useState(false); // 用于跟踪是否启用FaceID
   const { t } = useTranslation();
 
+  const [inputPassword, setInputPassword] = useState("");
+  const [isPasswordHidden, setIsPasswordHidden] = useState(true);
+  const [isFocused, setIsFocused] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [errorModalVisible, setErrorModalVisible] = useState(false);
+  const [faceIDEnabled, setFaceIDEnabled] = useState(false);
+
+  // Check Face ID status on mount
   useEffect(() => {
     AsyncStorage.getItem("faceID").then((status) => {
       if (status === "open") {
@@ -36,48 +37,41 @@ const ScreenLock = () => {
     });
   }, []);
 
+  // Attempt to unlock with password
   const handleUnlock = () => {
     if (inputPassword === screenLockPassword) {
       setIsAppLaunching(false);
     } else {
-      setErrorModalVisible(true); // 显示错误 Modal
+      setErrorModalVisible(true);
     }
   };
 
+  // Attempt to unlock using Face ID
   const handleFaceIDIconPress = async () => {
     const result = await LocalAuthentication.authenticateAsync({
-      promptMessage: t("Unlock with Face ID"), // 提示信息
+      promptMessage: t("Unlock with Face ID"),
     });
-
     if (result.success) {
       setIsAppLaunching(false);
     } else {
-      console.log("Face ID 认证失败");
-      // 处理认证失败的情况，例如显示错误信息
+      console.log("Face ID authentication failed");
     }
   };
 
-  const handleLostPassword = () => {
-    setModalVisible(true); // 显示丢失密码的 Modal
-  };
-
-  const handleCloseModal = () => {
-    setModalVisible(false); // 关闭丢失密码的 Modal
-  };
-
-  const handleCloseErrorModal = () => {
-    setErrorModalVisible(false); // 关闭错误 Modal
-  };
+  const handleLostPassword = () => setModalVisible(true);
+  const handleCloseModal = () => setModalVisible(false);
+  const handleCloseErrorModal = () => setErrorModalVisible(false);
 
   const themeStyles = isDarkMode ? darkStyles : lightStyles;
 
+  // Automatically trigger Face ID on iOS/macOS if enabled
   useEffect(() => {
     if (Platform.OS === "ios" || Platform.OS === "macos") {
       AsyncStorage.getItem("faceID").then((status) => {
         if (status === "open") {
           LocalAuthentication.authenticateAsync({}).then((res) => {
             if (res.success) {
-              setIsAppLaunching(false); //解锁后设置 isAppLaunching 为 false
+              setIsAppLaunching(false);
             }
           });
         }
@@ -110,8 +104,8 @@ const ScreenLock = () => {
             onChangeText={setInputPassword}
             placeholder={t("Enter Password")}
             placeholderTextColor={themeStyles.placeholder.color}
-            onFocus={() => setIsFocused(true)} // 输入框获取焦点时
-            onBlur={() => setIsFocused(false)} // 输入框失去焦点时
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
           />
           <TouchableOpacity
             onPress={
@@ -151,7 +145,7 @@ const ScreenLock = () => {
           </Text>
         </TouchableOpacity>
 
-        {/* 丢失密码的 Modal */}
+        {/* Lost Password Modal */}
         <Modal
           animationType="slide"
           transparent={true}
@@ -178,7 +172,7 @@ const ScreenLock = () => {
           </View>
         </Modal>
 
-        {/* 密码错误的 Modal */}
+        {/* Incorrect Password Modal */}
         <Modal
           animationType="slide"
           transparent={true}
@@ -274,7 +268,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 35,
     alignItems: "center",
-    width: "80%", // Optional: Adjust modal width if needed
+    width: "80%",
   },
   modalTitle: {
     fontSize: 20,
