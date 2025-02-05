@@ -13,30 +13,24 @@ import {
   TouchableOpacity,
   Modal,
   ImageBackground,
-  PanResponder,
-  TextInput,
   Animated,
   Easing,
-  FlatList,
   Platform,
   ScrollView,
-  Button,
   RefreshControl,
   Clipboard,
   TouchableWithoutFeedback,
   TouchableHighlight,
-  PermissionsAndroid,
 } from "react-native";
 
 // 第三方库
 import { LinearGradient } from "expo-linear-gradient";
 import * as Updates from "expo-updates";
-import Icon from "react-native-vector-icons/MaterialIcons";
+
 import { BlurView } from "expo-blur";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useTranslation } from "react-i18next";
-import QRCode from "react-native-qrcode-svg";
-import { BleManager, BleErrorCode } from "react-native-ble-plx";
+import { BleManager } from "react-native-ble-plx";
 import Constants from "expo-constants";
 import base64 from "base64-js";
 import { Buffer } from "buffer";
@@ -46,13 +40,12 @@ import WalletScreenStyles from "../styles/WalletScreenStyle";
 import { CryptoContext, DarkModeContext, usdtCrypto } from "./CryptoContext";
 
 // 自定义组件
+import { prefixToShortName } from "../config/chainPrefixes";
 import { CHAIN_NAMES } from "../config/chainConfig";
-import PriceChartCom from "./PriceChartCom";
 import EmptyWalletView from "./modal/EmptyWalletView";
 import AddCryptoModal from "./modal/AddCryptoModal";
 import TabModal from "./walletScreen/TabModal";
 import ModalsContainer from "./walletScreen/ModalsContainer";
-import WalletList from "./CardListCom";
 import checkAndReqPermission from "../utils/BluetoothPermissions"; //安卓高版本申请蓝牙权限
 
 const serviceUUID = "6E400001-B5A3-F393-E0A9-E50E24DCCA9E";
@@ -921,39 +914,6 @@ function WalletScreen({ route, navigation }) {
         // ==========================
         // 映射表: 前缀 -> shortName
         // ==========================
-        const prefixToShortName = {
-          "ethereum:": "ETH", // Ethereum
-          "bitcoin_cash:": "BCH", // Bitcoin Cash
-          "optimism:": "OP", // Optimism
-          "ethereum_classic:": "ETC", // Ethereum Classic
-          "litecoin:": "LTC", // Litecoin
-          "ripple:": "XRP", // Ripple
-          "solana:": "SOL", // Solana
-          "arbitrum:": "ARB", // Arbitrum
-          "binance:": "BSC", // Binance(BSC)
-          "aurora:": "AURORA", // Aurora
-          "avalanche:": "AVAX", // Avalanche
-          "bitcoin:": "BTC", // Bitcoin
-          "celo:": "CELO", // Celo
-          "fantom:": "FTM", // Fantom
-          "huobi:": "HTX", // Huobi Token
-          "iotex:": "IOTX", // IoTeX
-          "okx:": "OKT", // OKT
-          "polygon:": "POL", // Polygon
-          "ripple:": "XRP", // Ripple
-          "tron:": "TRX", // Tron
-          "zksync:": "ZKSYNC", // zkSync Era
-          "cosmos:": "ATOM", // Cosmos
-          "celestia:": "CEL", // Celestia
-          "cronos:": "CRO", // Cronos
-          "juno:": "JUNO", // Juno
-          "osmosis:": "OSMO", // Osmosis
-          "gnosis:": "GNO", // Gnosis
-          "linea:": "LINEA", // Linea
-          "ronin:": "RON", // Ronin
-          "aptos:": "APT", // Aptos
-          "sui:": "SUI", // SUI
-        };
 
         // 检查是否以某个前缀开头
         const prefix = Object.keys(prefixToShortName).find((key) =>
