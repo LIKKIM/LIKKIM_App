@@ -1,5 +1,11 @@
 //WalletScreen.js
-import React, { useState, useEffect, useRef, useContext } from "react";
+import React, {
+  useState,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useContext,
+} from "react";
 import {
   View,
   Text,
@@ -7,30 +13,24 @@ import {
   TouchableOpacity,
   Modal,
   ImageBackground,
-  PanResponder,
-  TextInput,
   Animated,
   Easing,
-  FlatList,
   Platform,
   ScrollView,
-  Button,
   RefreshControl,
   Clipboard,
   TouchableWithoutFeedback,
   TouchableHighlight,
-  PermissionsAndroid,
 } from "react-native";
 
 // 第三方库
 import { LinearGradient } from "expo-linear-gradient";
 import * as Updates from "expo-updates";
-import Icon from "react-native-vector-icons/MaterialIcons";
+
 import { BlurView } from "expo-blur";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useTranslation } from "react-i18next";
-import QRCode from "react-native-qrcode-svg";
-import { BleManager, BleErrorCode } from "react-native-ble-plx";
+import { BleManager } from "react-native-ble-plx";
 import Constants from "expo-constants";
 import base64 from "base64-js";
 import { Buffer } from "buffer";
@@ -40,13 +40,14 @@ import WalletScreenStyles from "../styles/WalletScreenStyle";
 import { CryptoContext, DarkModeContext, usdtCrypto } from "./CryptoContext";
 
 // 自定义组件
+import { prefixToShortName } from "../config/chainPrefixes";
 import { CHAIN_NAMES } from "../config/chainConfig";
-import PriceChartCom from "./PriceChartCom";
 import EmptyWalletView from "./modal/EmptyWalletView";
 import AddCryptoModal from "./modal/AddCryptoModal";
+import ChainSelectionModal from "./modal/ChainSelectionModal";
+import WalletContent from "./walletScreen/WalletContent";
 import TabModal from "./walletScreen/TabModal";
 import ModalsContainer from "./walletScreen/ModalsContainer";
-import WalletList from "./CardListCom";
 import checkAndReqPermission from "../utils/BluetoothPermissions"; //安卓高版本申请蓝牙权限
 
 const serviceUUID = "6E400001-B5A3-F393-E0A9-E50E24DCCA9E";
@@ -102,7 +103,7 @@ function WalletScreen({ route, navigation }) {
   const blueToothColor = isDarkMode ? "#CCB68C" : "#CFAB95";
   const iconColor = isDarkMode ? "#ffffff" : "#676776";
   const darkColorsDown = ["#21201E", "#0E0D0D"];
-  const lightColorsDown = ["#FDFCFD", "#EDEBEF"];
+  const lightColorsDown = ["#ffffff", "#EDEBEF"];
   const [pinModalVisible, setPinModalVisible] = useState(false);
   const [phrase, setPhrase] = useState("");
   const [animation] = useState(new Animated.Value(0));
@@ -141,7 +142,7 @@ function WalletScreen({ route, navigation }) {
     useState(CHAIN_NAMES);
 
   const chainFilteredCards = cryptoCards.filter((card) =>
-    selectedChainShortName.includes(card.chainShortName)
+    selectedChainShortName.includes(card?.chainShortName)
   );
 
   const [isChainSelectionModalVisible, setChainSelectionModalVisible] =
@@ -149,111 +150,85 @@ function WalletScreen({ route, navigation }) {
   const [selectedChain, setSelectedChain] = useState("All"); // 初始选项为“全部”
 
   const [selectedView, setSelectedView] = useState("wallet"); // 管理视图状态，'wallet' 或 'nft'
-
-  navigation.setOptions({
-    headerTitle: () => (
-      <View
-        style={{
-          flexDirection: "row",
-          backgroundColor: isDarkMode ? "#333" : "#eee",
-          borderRadius: 20,
-          borderWidth: 1,
-          borderColor: isDarkMode ? "#333" : "#eee",
-        }}
-      >
-        <TouchableOpacity
-          style={{
-            paddingVertical: 8,
-            paddingHorizontal: 20,
-            borderRadius: 20,
-            backgroundColor:
-              selectedView === "wallet"
-                ? isDarkMode
-                  ? "#555"
-                  : "#fff"
-                : "transparent",
-            // 移除边框宽度变化，使用统一的边框样式来避免位移
-            borderColor: isDarkMode ? "#333" : "#eee",
-            borderWidth: 1, // 保持边框宽度恒定
-          }}
-          onPress={() => setSelectedView("wallet")}
-        >
-          <Text
+  const { isModalVisible } = route.params || {};
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerTitle: () =>
+        !isModalVisible ? (
+          <View
             style={{
-              fontWeight: "bold",
-              color:
-                selectedView === "wallet"
-                  ? isDarkMode
-                    ? "#fff"
-                    : "#000"
-                  : "#888", // 使用更明显的颜色差异来标识选中状态
+              flexDirection: "row",
+              backgroundColor: isDarkMode ? "#333" : "#eee",
+              borderRadius: 20,
+              borderWidth: 1,
+              borderColor: isDarkMode ? "#333" : "#eee",
             }}
           >
-            {t("Wallet")}
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            paddingVertical: 8,
-            paddingHorizontal: 20,
-            borderRadius: 20,
-            backgroundColor:
-              selectedView === "nft"
-                ? isDarkMode
-                  ? "#555"
-                  : "#fff"
-                : "transparent",
-            // 统一的边框样式
-            borderColor: isDarkMode ? "#333" : "#eee",
-            borderWidth: 1, // 保持边框宽度恒定
-          }}
-          onPress={() => setSelectedView("nft")}
-        >
-          <Text
-            style={{
-              fontWeight: "bold",
-              color:
-                selectedView === "nft"
-                  ? isDarkMode
-                    ? "#fff"
-                    : "#000"
-                  : "#888", // 使用更明显的颜色差异来标识选中状态
-            }}
-          >
-            NFTs
-          </Text>
-        </TouchableOpacity>
-      </View>
-    ),
-  });
+            <TouchableOpacity
+              style={{
+                paddingVertical: 8,
+                paddingHorizontal: 20,
+                borderRadius: 20,
+                backgroundColor:
+                  selectedView === "wallet"
+                    ? isDarkMode
+                      ? "#555"
+                      : "#fff"
+                    : "transparent",
+                borderColor: isDarkMode ? "#333" : "#eee",
+                borderWidth: 1,
+              }}
+              onPress={() => setSelectedView("wallet")}
+            >
+              <Text
+                style={{
+                  fontWeight: "bold",
+                  color:
+                    selectedView === "wallet"
+                      ? isDarkMode
+                        ? "#fff"
+                        : "#000"
+                      : "#888",
+                }}
+              >
+                {t("Wallet")}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                paddingVertical: 8,
+                paddingHorizontal: 20,
+                borderRadius: 20,
+                backgroundColor:
+                  selectedView === "nft"
+                    ? isDarkMode
+                      ? "#555"
+                      : "#fff"
+                    : "transparent",
+                borderColor: isDarkMode ? "#333" : "#eee",
+                borderWidth: 1,
+              }}
+              onPress={() => setSelectedView("nft")}
+            >
+              <Text
+                style={{
+                  fontWeight: "bold",
+                  color:
+                    selectedView === "nft"
+                      ? isDarkMode
+                        ? "#fff"
+                        : "#000"
+                      : "#888",
+                }}
+              >
+                NFTs
+              </Text>
+            </TouchableOpacity>
+          </View>
+        ) : null, // 当 isModalVisible 为 true 时，不显示切换按钮
+    });
+  }, [navigation, selectedView, isDarkMode, t, isModalVisible]);
 
-  // 读取用户之前的选择
-  /*   useEffect(() => {
-    const getSelectedChain = async () => {
-      try {
-        const savedChain = await AsyncStorage.getItem("selectedChain");
-        if (savedChain) {
-          setSelectedChain(savedChain); // 如果有保存的链，直接设置
-          if (savedChain === "All") {
-            setSelectedChainShortName(
-              cryptoCards.map((card) => card.chainShortName)
-            ); // 选择全部
-          } else {
-            setSelectedChainShortName([savedChain]); // 选择单个链
-          }
-        }
-      } catch (e) {
-        console.error("Error reading saved chain:", e);
-      }
-    };
-
-    // 确保在 cryptoCards 加载完成之后再读取选中的链
-    if (cryptoCards.length > 0) {
-      getSelectedChain();
-    }
-  }, [cryptoCards]); // 依赖 cryptoCards 的变化，确保数据加载后再执行
- */
-  // Modal点击确定按钮时更新selectedChainShortName并保存
   const handleSelectChain = async (chain) => {
     try {
       await AsyncStorage.setItem("selectedChain", chain); // 保存用户选择
@@ -388,19 +363,11 @@ function WalletScreen({ route, navigation }) {
   };
   // 使用最新的价格来计算最终余额
   const getConvertedBalance = (cardBalance, cardShortName) => {
-    // 打印原始卡余额
-    // console.log(`Original card balance: ${cardBalance}`);
-
     const rate = exchangeRates[currencyUnit]; // 当前法定货币的汇率
     const cryptoToUsdRate = exchangeRates[cardShortName] || 1; // 加密货币对美元的汇率，默认为1
 
     // 获取市场最新价格（last）
     const marketPrice = priceChanges[cardShortName]?.priceChange || 1; // 如果没有获取到价格，则默认使用 1
-
-    // 打印汇率信息
-    // console.log(`Rate for ${currencyUnit}: ${rate}`);
-    // console.log(`Crypto to USD rate for ${cardShortName}: ${cryptoToUsdRate}`);
-    // console.log(`Market price (last) for ${cardShortName}: ${marketPrice}`);
 
     if (!rate) {
       return cardBalance; // 如果没有找到汇率，返回原始余额
@@ -556,13 +523,10 @@ function WalletScreen({ route, navigation }) {
   // 处理断开连接的逻辑
   const handleDisconnectDevice = async (device) => {
     try {
-      // 停止监听验证码，避免因断开连接导致的错误
-      // stopMonitoringVerificationCode();
-
-      await device.cancelConnection(); // 断开设备连接
+      await device.cancelConnection();
       console.log(`设备 ${device.id} 已断开连接`);
 
-      // 移除已验证设备的ID
+      // Remove verified device ID
       const updatedVerifiedDevices = verifiedDevices.filter(
         (id) => id !== device.id
       );
@@ -581,13 +545,13 @@ function WalletScreen({ route, navigation }) {
     }
   };
   function crc16Modbus(arr) {
-    let crc = 0xffff; // 初始值为0xFFFF
+    let crc = 0xffff;
     for (let byte of arr) {
       crc ^= byte; // 按位异或
       for (let i = 0; i < 8; i++) {
         // 处理每一个字节的8位
         if (crc & 0x0001) {
-          crc = (crc >> 1) ^ 0xa001; // 多项式为0xA001
+          crc = (crc >> 1) ^ 0xa001;
         } else {
           crc = crc >> 1;
         }
@@ -947,39 +911,6 @@ function WalletScreen({ route, navigation }) {
         // ==========================
         // 映射表: 前缀 -> shortName
         // ==========================
-        const prefixToShortName = {
-          "ethereum:": "ETH", // Ethereum
-          "bitcoin_cash:": "BCH", // Bitcoin Cash
-          "optimism:": "OP", // Optimism
-          "ethereum_classic:": "ETC", // Ethereum Classic
-          "litecoin:": "LTC", // Litecoin
-          "ripple:": "XRP", // Ripple
-          "solana:": "SOL", // Solana
-          "arbitrum:": "ARB", // Arbitrum
-          "binance:": "BSC", // Binance(BSC)
-          "aurora:": "AURORA", // Aurora
-          "avalanche:": "AVAX", // Avalanche
-          "bitcoin:": "BTC", // Bitcoin
-          "celo:": "CELO", // Celo
-          "fantom:": "FTM", // Fantom
-          "huobi:": "HTX", // Huobi Token
-          "iotex:": "IOTX", // IoTeX
-          "okx:": "OKT", // OKT
-          "polygon:": "POL", // Polygon
-          "ripple:": "XRP", // Ripple
-          "tron:": "TRX", // Tron
-          "zksync:": "ZKSYNC", // zkSync Era
-          "cosmos:": "ATOM", // Cosmos
-          "celestia:": "CEL", // Celestia
-          "cronos:": "CRO", // Cronos
-          "juno:": "JUNO", // Juno
-          "osmosis:": "OSMO", // Osmosis
-          "gnosis:": "GNO", // Gnosis
-          "linea:": "LINEA", // Linea
-          "ronin:": "RON", // Ronin
-          "aptos:": "APT", // Aptos
-          "sui:": "SUI", // SUI
-        };
 
         // 检查是否以某个前缀开头
         const prefix = Object.keys(prefixToShortName).find((key) =>
@@ -1071,205 +1002,6 @@ function WalletScreen({ route, navigation }) {
         }
         // Base64解码接收到的数据
         const receivedData = Buffer.from(characteristic.value, "base64");
-      }
-    );
-  };
-
-  // 监听地址监听钱包地址的函数
-  const monitorWalletAddress = (device) => {
-    const notifyCharacteristicUUID = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E";
-
-    monitorSubscription = device.monitorCharacteristicForService(
-      serviceUUID,
-      notifyCharacteristicUUID,
-      (error, characteristic) => {
-        if (error) {
-          if (error.message.includes("Operation was cancelled")) {
-            console.log("监听操作被取消，正在重新连接...");
-            reconnectDevice(device); // 主动重连
-          } else if (error.message.includes("Unknown error occurred")) {
-            console.log("未知错误，可能是一个Bug:", error.message);
-            if (error.reason) {
-              console.log("错误原因:", error.reason);
-            }
-            reconnectDevice(device); // 主动重连
-          } else {
-            console.log("监听设备响应时出错:", error.message);
-          }
-          //    return;
-        }
-        // Base64解码接收到的数据
-        const receivedData = Buffer.from(characteristic.value, "base64");
-
-        // 将接收到的数据解析为十六进制字符串
-        const receivedDataHex = receivedData.toString("hex");
-        console.log("接收到监听地址模块的16进制数据字符串:", receivedDataHex);
-
-        // 检查头部标志位是否为 A4
-        if (receivedDataHex.startsWith("a4")) {
-          // 解析链名长度
-          const chainNameLength = parseInt(receivedDataHex.substring(2, 4), 16);
-          console.log("链名长度:", chainNameLength);
-
-          // 解析链名
-          const chainNameStartIndex = 4;
-          const chainNameEndIndex = chainNameStartIndex + chainNameLength * 2;
-          const chainNameHex = receivedDataHex.substring(
-            chainNameStartIndex,
-            chainNameEndIndex
-          );
-          const chainName = Buffer.from(chainNameHex, "hex").toString("utf-8");
-          console.log("链名chainShortName:", chainName);
-
-          // 解析地址长度
-          const addressLengthIndex = chainNameEndIndex;
-          const addressLength = parseInt(
-            receivedDataHex.substring(
-              addressLengthIndex,
-              addressLengthIndex + 2
-            ),
-            16
-          );
-          console.log("地址长度:", addressLength);
-
-          // 解析钱包地址
-          const addressStartIndex = addressLengthIndex + 2;
-          const addressEndIndex = addressStartIndex + addressLength * 2;
-          const walletAddressHex = receivedDataHex.substring(
-            addressStartIndex,
-            addressEndIndex
-          );
-          const walletAddress = Buffer.from(walletAddressHex, "hex").toString(
-            "utf-8"
-          );
-          console.log("钱包地址:", walletAddress);
-
-          // 解析总数据长度
-          const totalDataLengthIndex = addressEndIndex;
-          const totalDataLength = parseInt(
-            receivedDataHex.substring(
-              totalDataLengthIndex,
-              totalDataLengthIndex + 2
-            ),
-            16
-          );
-          console.log("总数据长度:", totalDataLength);
-
-          // 解析CRC校验码
-          const crcStartIndex = totalDataLengthIndex + 2;
-          const receivedCrcLowByte = receivedDataHex.substring(
-            crcStartIndex,
-            crcStartIndex + 2
-          );
-          const receivedCrcHighByte = receivedDataHex.substring(
-            crcStartIndex + 2,
-            crcStartIndex + 4
-          );
-          const receivedCrc = receivedCrcLowByte + receivedCrcHighByte;
-          console.log("接收到的CRC:", receivedCrc);
-
-          // 计算CRC并校验
-          const dataToVerifyHex = receivedDataHex.substring(0, crcStartIndex);
-          const dataToVerify = Buffer.from(dataToVerifyHex, "hex");
-          let calculatedCrc = crc16Modbus(dataToVerify)
-            .toString(16)
-            .padStart(4, "0");
-          calculatedCrc = calculatedCrc.slice(2) + calculatedCrc.slice(0, 2);
-          if (calculatedCrc.toLowerCase() === receivedCrc.toLowerCase()) {
-            console.log("CRC校验通过，数据有效");
-
-            // 在此处添加接收钱包生成地址成功的日志
-            console.log("接收钱包生成地址成功:", walletAddress);
-
-            // 根据 chainShortName 搜索并更新对应的数字货币地址字段
-            let isUpdated = false;
-
-            // 更新 initialAdditionalCryptos 中的地址
-            setInitialAdditionalCryptos((prevCryptos) =>
-              prevCryptos.map((crypto) => {
-                if (crypto.chainShortName === chainName) {
-                  isUpdated = true;
-                  console.log(
-                    `更新 ${crypto.chainShortName} 的地址为: ${walletAddress}`
-                  );
-                  return { ...crypto, address: walletAddress };
-                }
-                return crypto;
-              })
-            );
-
-            // 先定义 newCryptos 在外部作用域
-            let newCryptos = [];
-
-            setCryptoCards((prevCards) => {
-              console.log("Before update: ", prevCards);
-
-              // 查找所有匹配的链信息，并更新外部作用域的 newCryptos
-              newCryptos = initialAdditionalCryptos.filter(
-                (crypto) => crypto.chainShortName === chainName
-              );
-
-              if (newCryptos.length === 0) {
-                // 如果没有找到匹配的 crypto，则直接返回当前的卡片列表
-                console.log(
-                  "No matching cryptos found. Returning previous cards."
-                );
-                return prevCards;
-              }
-
-              const updatedCards = newCryptos.reduce((acc, crypto) => {
-                const filteredCards = acc.filter(
-                  (card) =>
-                    card.key !== `${crypto.shortName}_${crypto.chainShortName}`
-                );
-
-                return [
-                  ...filteredCards,
-                  {
-                    key: `${crypto.shortName}_${crypto.chainShortName}`,
-                    name: crypto.name,
-                    shortName: crypto.shortName,
-                    balance: crypto.balance,
-                    icon: crypto.icon,
-                    cardImage: crypto.cardImage,
-                    address: walletAddress,
-                    chain: crypto.chain,
-                    chainShortName: crypto.chainShortName,
-                    chainIcon: crypto.chainIcon,
-                  },
-                ];
-              }, prevCards);
-
-              console.log("After update: ", updatedCards);
-              return updatedCards;
-            });
-
-            // 在所有卡片更新后，手动调用 handleUpdateCryptoCards
-            newCryptos.forEach((crypto) => handleUpdateCryptoCards(crypto));
-
-            // 检查状态更新后的内容
-            console.log("Updated cryptoCards: ", cryptoCards);
-
-            // 更新状态，切换图片和文本信息
-            setWalletCreationStatus({
-              image: require("../assets/gif/Success.gif"),
-              title: t("Wallet Creation Successful!"),
-              subtitle: t("Your wallet address has been created successfully."),
-            });
-            // 导入成功时
-            setImportingStatus({
-              image: require("../assets/gif/Success.gif"),
-              title: t("Wallet Import Successful!"),
-              subtitle: t("Your wallet has been successfully imported."),
-            });
-          } else {
-            console.log(
-              `CRC校验失败，数据可能无效。Received: ${receivedCrc}, Calculated: ${calculatedCrc}`
-            );
-          }
-        } else {
-          console.log("收到的数据头部不正确，期望A4");
-        }
       }
     );
   };
@@ -1829,448 +1561,64 @@ function WalletScreen({ route, navigation }) {
     }
   }
 
-  const filteredCards = cryptoCards.filter(
-    (card) => card.chainShortName === "AURORA"
-  );
   //热更新支持
   useEffect(() => {
     onFetchUpdateAsync();
   }, []);
+
+  const renderTabModal = () => (
+    <TabModal
+      activeTab={activeTab}
+      setActiveTab={setActiveTab}
+      closeModal={closeModal}
+      WalletScreenStyle={WalletScreenStyle}
+      t={t}
+      tabOpacity={tabOpacity}
+      transactionHistory={transactionHistory}
+      scrollViewRef={scrollViewRef}
+      selectedCrypto={selectedCrypto}
+      isDarkMode={isDarkMode}
+      fadeAnim={fadeAnim}
+      darkColorsDown={darkColorsDown}
+      lightColorsDown={lightColorsDown}
+    />
+  );
 
   return (
     <LinearGradient
       colors={isDarkMode ? ["#21201E", "#0E0D0D"] : ["#FFFFFF", "#EDEBEF"]}
       style={WalletScreenStyle.linearGradient}
     >
-      {selectedView === "wallet" ? (
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          showsHorizontalScrollIndicator={false}
-          ref={scrollViewRef}
-          contentContainerStyle={[
-            WalletScreenStyle.scrollViewContent,
-            modalVisible && { overflow: "hidden", height: "100%" },
-
-            cryptoCards.length !== 0 && !modalVisible && { paddingBottom: 130 },
-          ]}
-          style={[
-            WalletScreenStyle.scrollView,
-            modalVisible && { overflow: "hidden" },
-          ]}
-          onScroll={(event) => {
-            if (!modalVisible) {
-              scrollYOffset.current = event.nativeEvent.contentOffset.y;
-            }
-          }}
-          scrollEventThrottle={16} // 滚动事件节流，以确保 onScroll 事件不会频繁触发
-          refreshControl={
-            cryptoCards.length > 0 && (
-              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-            )
-          }
-        >
-          <Animated.View
-            style={[
-              WalletScreenStyle.totalBalanceContainer,
-              { opacity: opacityAnim }, // 使用动画控制透明度
-            ]}
-          >
-            {cryptoCards.length > 0 && !modalVisible && (
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  alignItems: "flex-start", // 确保内容顶部对齐
-                }}
-              >
-                <View>
-                  <Text style={WalletScreenStyle.totalBalanceText}>
-                    {t("Total Balance")}
-                  </Text>
-                  <Text style={WalletScreenStyle.totalBalanceAmount}>
-                    {`${calculateTotalBalance()} `}
-                    <Text style={WalletScreenStyle.currencyUnit}>
-                      {currencyUnit}
-                    </Text>
-                  </Text>
-                </View>
-
-                <TouchableOpacity
-                  onPress={() => setChainSelectionModalVisible(true)}
-                  style={{
-                    marginTop: 10,
-                    flexDirection: "row", // Ensure text and image are aligned horizontally
-                    alignItems: "center", // Center vertically
-                  }}
-                >
-                  {/* Add icon for All Chains */}
-                  {selectedChain === "All" && (
-                    <Image
-                      source={require("../assets/WalletScreenLogo.png")}
-                      style={{
-                        width: 24,
-                        height: 24,
-                        marginRight: 8,
-                        backgroundColor: "rgba(0, 0, 0, 0.05)",
-                        borderRadius: 12,
-                      }}
-                    />
-                  )}
-
-                  {/* Display icon for selected chain */}
-                  {selectedChain !== "All" &&
-                    cryptoCards.length > 0 &&
-                    (() => {
-                      const uniqueChainIcons = new Set();
-
-                      return cryptoCards
-                        .filter((card) => {
-                          // 筛选符合当前选中链的卡片，同时去重链图标
-                          if (
-                            selectedChain === card.chainShortName &&
-                            card.chainIcon &&
-                            !uniqueChainIcons.has(card.chainShortName)
-                          ) {
-                            uniqueChainIcons.add(card.chainShortName);
-                            return true; // 保留去重后的链图标
-                          }
-                          return false;
-                        })
-                        .map((card, index) => (
-                          <Image
-                            key={`${card.chainShortName}-${index}`} // 确保唯一 key
-                            source={card.chainIcon}
-                            style={{
-                              width: 24,
-                              height: 24,
-                              marginRight: 8,
-                              backgroundColor: "rgba(255, 255, 255, 0.2)",
-                              borderRadius: 12,
-                            }}
-                          />
-                        ));
-                    })()}
-
-                  <Text style={{ color: isDarkMode ? "#FFFFFF" : "#000000" }}>
-                    {selectedChain === "All"
-                      ? t("All Chains")
-                      : cryptoCards.find(
-                          (card) => card.chainShortName === selectedChain
-                        )?.chain}
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            )}
-          </Animated.View>
-
-          {cryptoCards.length === 0 && (
-            <EmptyWalletView
-              isDarkMode={isDarkMode}
-              WalletScreenStyle={WalletScreenStyle}
-              setAddWalletModalVisible={setAddWalletModalVisible}
-              t={t}
-            />
-          )}
-
-          {/* TODO fix */}
-          {/* {<WalletList cards={cryptoCards} priceChanges={priceChanges} WalletScreenStyle={WalletScreenStyle} handleQRCodePress={handleQRCodePress} />} */}
-
-          {/* <Text>{"LIKKIM:" + likkim_select_card}</Text> */}
-
-          {chainFilteredCards.map((card, index) => {
-            const isBlackText = [""].includes(card.shortName);
-            const priceChange =
-              priceChanges[card.shortName]?.priceChange || "0";
-            const percentageChange =
-              priceChanges[card.shortName]?.percentageChange || "0";
-            const textColor =
-              percentageChange > 0
-                ? isBlackText
-                  ? "#00EE88"
-                  : "#00EE88"
-                : isBlackText
-                ? "#F44336"
-                : "#F44336";
-
-            return (
-              <TouchableHighlight
-                underlayColor={"transparent"}
-                key={`${card.shortName}_${index}`}
-                onPress={() => handleCardPress(card.name, card.chain, index)}
-                ref={(el) => {
-                  cardRefs.current[index] = el;
-                  initCardPosition(el, index);
-                }}
-                style={[
-                  WalletScreenStyle.cardContainer,
-                  selectedCardIndex === index && { zIndex: 3 },
-                ]}
-                disabled={modalVisible}
-              >
-                <Animated.View
-                  style={[
-                    WalletScreenStyle.card,
-                    index === 0
-                      ? WalletScreenStyle.cardFirst
-                      : WalletScreenStyle.cardOthers,
-                    selectedCardIndex === index && animatedCardStyle(index),
-                  ]}
-                >
-                  <ImageBackground
-                    source={card.cardImage}
-                    style={{ width: "100%", height: "100%" }}
-                    imageStyle={{ borderRadius: 16 }}
-                  >
-                    {["cardIconContainer", "cardChainIconContainer"].map(
-                      (styleKey, i) => (
-                        <View key={i} style={WalletScreenStyle[styleKey]}>
-                          <Image
-                            source={i === 0 ? card.icon : card.chainIcon}
-                            style={
-                              i === 0
-                                ? WalletScreenStyle.cardIcon
-                                : WalletScreenStyle.chainIcon
-                            }
-                          />
-                        </View>
-                      )
-                    )}
-                    <View style={{ position: "absolute", top: 25, left: 65 }}>
-                      <View style={WalletScreenStyle.cardInfoContainer}>
-                        {["cardName", "chainText"].map((textStyle, i) =>
-                          i === 0 ? (
-                            <Text
-                              key={i}
-                              style={[
-                                WalletScreenStyle[textStyle], // 现有样式
-                                {
-                                  color: isBlackText ? "#333" : "#eee",
-                                  marginRight: 4,
-                                  marginBottom: 4,
-                                }, // 添加新的 marginRight 属性
-                              ]}
-                            >
-                              {card.name}
-                            </Text>
-                          ) : (
-                            <View
-                              key={i}
-                              style={[
-                                WalletScreenStyle.chainContainer, // 新增按钮样式
-                                // 根据主题颜色改变按钮背景色
-                              ]}
-                            >
-                              <Text
-                                style={[
-                                  WalletScreenStyle.chainCardText,
-                                  { color: isBlackText ? "#333" : "#eee" },
-                                ]}
-                              >
-                                {card.chain}
-                              </Text>
-                            </View>
-                          )
-                        )}
-                      </View>
-                      <Image
-                        source={require("../assets/CardBg/Logo.png")}
-                        style={{
-                          left: 50,
-                          top: -60,
-                          opacity: 0.2,
-                          width: 280,
-                          height: 280,
-                          transform: [{ rotate: "-10deg" }],
-                        }}
-                      />
-                      <Text
-                        style={[
-                          WalletScreenStyle.cardShortName,
-                          isBlackText && { color: "#121518" },
-                        ]}
-                      >
-                        {card.shortName}
-                      </Text>
-                    </View>
-                    {!modalVisible ? (
-                      <>
-                        <Text
-                          style={[
-                            WalletScreenStyle.cardBalance,
-                            isBlackText && { color: "#121518" },
-                          ]}
-                        >
-                          {`${card.balance} ${card.shortName}`}
-                        </Text>
-                        <View style={WalletScreenStyle.priceChangeView}>
-                          <Text
-                            style={{ color: textColor, fontWeight: "bold" }}
-                          >
-                            {percentageChange > 0 ? "+" : ""}
-                            {percentageChange}%
-                          </Text>
-                          <Text
-                            style={[
-                              WalletScreenStyle.balanceShortName,
-                              isBlackText && { color: "#121518" },
-                            ]}
-                          >
-                            {`${getConvertedBalance(
-                              card.balance,
-                              card.shortName
-                            )} ${currencyUnit}`}
-                          </Text>
-                        </View>
-                      </>
-                    ) : (
-                      cardInfoVisible && (
-                        <View style={WalletScreenStyle.cardModalContent}>
-                          <TouchableOpacity
-                            opacity={1}
-                            onPress={() => handleQRCodePress(card)}
-                            style={{ position: "absolute", right: 0, top: 0 }}
-                          >
-                            <Image
-                              source={require("../assets/icon/QR.png")}
-                              style={[
-                                WalletScreenStyle.QRImg,
-                                isBlackText && { tintColor: "#121518" },
-                              ]}
-                            />
-                          </TouchableOpacity>
-                          {["cardBalanceCenter", "balanceShortNameCenter"].map(
-                            (styleKey, i) => (
-                              <Text
-                                key={i}
-                                style={[
-                                  WalletScreenStyle[styleKey],
-                                  isBlackText && { color: "#121518" },
-                                ]}
-                              >
-                                {`${
-                                  i === 0
-                                    ? card.balance
-                                    : getConvertedBalance(
-                                        card.balance,
-                                        card.shortName
-                                      )
-                                } ${i === 0 ? card.shortName : currencyUnit}`}
-                              </Text>
-                            )
-                          )}
-                        </View>
-                      )
-                    )}
-                  </ImageBackground>
-                </Animated.View>
-              </TouchableHighlight>
-            );
-          })}
-
-          {modalVisible && (
-            <TabModal
-              activeTab={activeTab}
-              setActiveTab={setActiveTab}
-              closeModal={closeModal}
-              WalletScreenStyle={WalletScreenStyle}
-              t={t}
-              tabOpacity={tabOpacity}
-              transactionHistory={transactionHistory} // 传递交易历史记录
-              scrollViewRef={scrollViewRef}
-              selectedCrypto={selectedCrypto}
-              isDarkMode={isDarkMode} // 新增参数，传递当前是否为暗模式
-              fadeAnim={fadeAnim} // 新增参数，传递动画效果
-              darkColorsDown={darkColorsDown} // 新增参数，传递暗模式下的渐变颜色
-              lightColorsDown={lightColorsDown} // 新增参数，传递亮模式下的渐变颜色
-            />
-          )}
-        </ScrollView>
-      ) : (
-        <View
-          style={{
-            position: "absolute", // 使用绝对定位
-            top: 0, // 顶部对齐
-            right: 25, // 右侧对齐
-            // 添加一些内边距以避免内容直接贴边
-          }}
-        >
-          {cryptoCards.length > 0 && !modalVisible && (
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "flex-start", // 确保内容顶部对齐
-              }}
-            >
-              <TouchableOpacity
-                onPress={() => setChainSelectionModalVisible(true)}
-                style={{
-                  marginTop: 10,
-                  flexDirection: "row", // Ensure text and image are aligned horizontally
-                  alignItems: "center", // Center vertically
-                }}
-              >
-                {/* Add icon for All Chains */}
-                {selectedChain === "All" && (
-                  <Image
-                    source={require("../assets/WalletScreenLogo.png")}
-                    style={{
-                      width: 24,
-                      height: 24,
-                      marginRight: 8,
-                      backgroundColor: "rgba(0, 0, 0, 0.05)",
-                      borderRadius: 12,
-                    }}
-                  />
-                )}
-
-                {/* Display icon for selected chain */}
-                {selectedChain !== "All" &&
-                  cryptoCards.length > 0 &&
-                  (() => {
-                    const uniqueChainIcons = new Set();
-
-                    return cryptoCards
-                      .filter((card) => {
-                        // 筛选符合当前选中链的卡片，同时去重链图标
-                        if (
-                          selectedChain === card.chainShortName &&
-                          card.chainIcon &&
-                          !uniqueChainIcons.has(card.chainShortName)
-                        ) {
-                          uniqueChainIcons.add(card.chainShortName);
-                          return true; // 保留去重后的链图标
-                        }
-                        return false;
-                      })
-                      .map((card, index) => (
-                        <Image
-                          key={`${card.chainShortName}-${index}`} // 确保唯一 key
-                          source={card.chainIcon}
-                          style={{
-                            width: 24,
-                            height: 24,
-                            marginRight: 8,
-                            backgroundColor: "rgba(255, 255, 255, 0.2)",
-                            borderRadius: 12,
-                          }}
-                        />
-                      ));
-                  })()}
-
-                <Text style={{ color: isDarkMode ? "#FFFFFF" : "#000000" }}>
-                  {selectedChain === "All"
-                    ? t("All Chains")
-                    : cryptoCards.find(
-                        (card) => card.chainShortName === selectedChain
-                      )?.chain}
-                </Text>
-              </TouchableOpacity>
-            </View>
-          )}
-        </View>
-      )}
-
+      <WalletContent
+        selectedView={selectedView}
+        scrollViewRef={scrollViewRef}
+        WalletScreenStyle={WalletScreenStyle}
+        modalVisible={modalVisible}
+        cryptoCards={cryptoCards}
+        refreshing={refreshing}
+        onRefresh={onRefresh}
+        opacityAnim={opacityAnim}
+        calculateTotalBalance={calculateTotalBalance}
+        currencyUnit={currencyUnit}
+        t={t}
+        setChainSelectionModalVisible={setChainSelectionModalVisible}
+        selectedChain={selectedChain}
+        isDarkMode={isDarkMode}
+        chainFilteredCards={chainFilteredCards}
+        cardRefs={cardRefs}
+        initCardPosition={initCardPosition}
+        handleCardPress={handleCardPress}
+        animatedCardStyle={animatedCardStyle}
+        selectedCardIndex={selectedCardIndex}
+        cardInfoVisible={cardInfoVisible}
+        priceChanges={priceChanges}
+        getConvertedBalance={getConvertedBalance}
+        handleQRCodePress={handleQRCodePress}
+        setAddWalletModalVisible={setAddWalletModalVisible}
+        renderTabModal={renderTabModal}
+        EmptyWalletViewComponent={EmptyWalletView}
+        scrollYOffset={scrollYOffset}
+      />
       <ModalsContainer
         addressModalVisible={addressModalVisible}
         setAddressModalVisible={setAddressModalVisible}
@@ -2352,172 +1700,15 @@ function WalletScreen({ route, navigation }) {
         cryptoCards={cryptoCards}
       />
       {/* 选择链的Modal */}
-      <Modal
-        visible={isChainSelectionModalVisible}
-        transparent={true}
-        animationType="slide"
-        onRequestClose={() => setChainSelectionModalVisible(false)}
-      >
-        {/* 监听点击模糊背景区域 */}
-        <TouchableWithoutFeedback
-          onPress={() => setChainSelectionModalVisible(false)} // 点击模糊背景关闭 Modal
-        >
-          <View style={{ flex: 1 }}>
-            {/* 模糊背景 */}
-            <BlurView
-              intensity={10}
-              style={{
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "center",
-                backgroundColor: "rgba(0, 0, 0, 0.2)",
-              }}
-            >
-              {/* 内容区域 */}
-              <View
-                style={{
-                  margin: 20,
-                  height: 500,
-                  width: "90%",
-                  borderRadius: 20,
-                  padding: 35,
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  backgroundColor: isDarkMode ? "#21201E" : "#FFFFFF",
-                }}
-                // 阻止点击事件冒泡，避免触发关闭 Modal
-                onStartShouldSetResponder={() => true}
-              >
-                <Text
-                  style={{
-                    fontSize: 16,
-                    textAlign: "center",
-                    marginBottom: 20,
-                    lineHeight: 30,
-                    color: isDarkMode ? "#FFFFFF" : "#000000",
-                  }}
-                >
-                  {t("Select Chain")}
-                </Text>
-
-                <ScrollView
-                  contentContainerStyle={{ alignItems: "center" }}
-                  style={{ maxHeight: 400, width: 320, paddingHorizontal: 20 }}
-                >
-                  {/* 选择链的选项 */}
-                  <TouchableOpacity
-                    onPress={() => handleSelectChain("All")}
-                    style={{
-                      padding: 10,
-                      width: "100%",
-                      justifyContent: "center",
-                      borderRadius: 30,
-                      height: 60,
-                      alignItems: "center",
-                      marginBottom: 16,
-                      backgroundColor:
-                        selectedChain === "All"
-                          ? isDarkMode
-                            ? "#CCB68C"
-                            : "#CFAB95"
-                          : isDarkMode
-                          ? "#444444"
-                          : "#e0e0e0",
-                      flexDirection: "row",
-                    }}
-                  >
-                    <Image
-                      source={require("../assets/WalletScreenLogo.png")}
-                      style={{
-                        width: 24,
-                        height: 24,
-                        marginRight: 8,
-                        backgroundColor: "rgba(255, 255, 255, 0.2)",
-                        borderRadius: 12,
-                      }}
-                    />
-                    <Text
-                      style={{
-                        color:
-                          selectedChain === "All"
-                            ? isDarkMode
-                              ? "#FFFFFF"
-                              : "#ffffff"
-                            : isDarkMode
-                            ? "#DDDDDD"
-                            : "#000000",
-                      }}
-                    >
-                      {t("All Chains")}
-                    </Text>
-                  </TouchableOpacity>
-
-                  {/* 渲染链的选项 */}
-                  {[
-                    ...new Map(
-                      cryptoCards.map((card) => [card.chainShortName, card])
-                    ).values(),
-                  ]
-                    .sort((a, b) =>
-                      a.chainShortName.localeCompare(b.chainShortName)
-                    )
-                    .map((card, index) => (
-                      <TouchableOpacity
-                        key={`${card.chainShortName}-${index}`}
-                        onPress={() => handleSelectChain(card.chainShortName)}
-                        style={{
-                          padding: 10,
-                          width: "100%",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          borderRadius: 30,
-                          height: 60,
-                          flexDirection: "row",
-                          marginBottom: 16,
-                          backgroundColor:
-                            selectedChain === card.chainShortName
-                              ? isDarkMode
-                                ? "#CCB68C"
-                                : "#CFAB95"
-                              : isDarkMode
-                              ? "#444444"
-                              : "#e0e0e0",
-                        }}
-                      >
-                        {card.chainIcon && (
-                          <Image
-                            source={card.chainIcon}
-                            style={{
-                              width: 24,
-                              height: 24,
-                              marginRight: 8,
-                              backgroundColor: "rgba(255, 255, 255, 0.2)",
-                              borderRadius: 12,
-                            }}
-                          />
-                        )}
-                        <Text
-                          style={{
-                            color:
-                              selectedChain === card.chainShortName
-                                ? isDarkMode
-                                  ? "#FFFFFF"
-                                  : "#ffffff"
-                                : isDarkMode
-                                ? "#DDDDDD"
-                                : "#000000",
-                          }}
-                        >
-                          {card.chain} {t("Chain")}
-                        </Text>
-                      </TouchableOpacity>
-                    ))}
-                </ScrollView>
-              </View>
-            </BlurView>
-          </View>
-        </TouchableWithoutFeedback>
-      </Modal>
+      <ChainSelectionModal
+        isVisible={isChainSelectionModalVisible}
+        onClose={() => setChainSelectionModalVisible(false)}
+        selectedChain={selectedChain}
+        handleSelectChain={handleSelectChain}
+        cryptoCards={cryptoCards}
+        isDarkMode={isDarkMode}
+        t={t}
+      />
     </LinearGradient>
   );
 }

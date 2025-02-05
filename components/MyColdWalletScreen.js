@@ -42,7 +42,7 @@ import { languages } from "../config/languages";
 import base64 from "base64-js";
 import { Buffer } from "buffer";
 import appConfig from "../app.config";
-import * as Location from "expo-location";
+import { prefixToShortName } from "../config/chainPrefixes";
 import checkAndReqPermission from "../utils/BluetoothPermissions"; //安卓高版本申请蓝牙权限
 
 let PermissionsAndroid;
@@ -595,39 +595,6 @@ function MyColdWalletScreen() {
         // ==========================
         // 映射表: 前缀 -> shortName
         // ==========================
-        const prefixToShortName = {
-          "ethereum:": "ETH", // Ethereum
-          "bitcoin_cash:": "BCH", // Bitcoin Cash
-          "optimism:": "OP", // Optimism
-          "ethereum_classic:": "ETC", // Ethereum Classic
-          "litecoin:": "LTC", // Litecoin
-          "ripple:": "XRP", // Ripple
-          "solana:": "SOL", // Solana
-          "arbitrum:": "ARB", // Arbitrum
-          "binance:": "BSC", // Binance(BSC)
-          "aurora:": "AURORA", // Aurora
-          "avalanche:": "AVAX", // Avalanche
-          "bitcoin:": "BTC", // Bitcoin
-          "celo:": "CELO", // Celo
-          "fantom:": "FTM", // Fantom
-          "huobi:": "HTX", // Huobi Token
-          "iotex:": "IOTX", // IoTeX
-          "okx:": "OKT", // OKT
-          "polygon:": "POL", // Polygon
-          "ripple:": "XRP", // Ripple
-          "tron:": "TRX", // Tron
-          "zksync:": "ZKSYNC", // zkSync Era
-          "cosmos:": "ATOM", // Cosmos
-          "celestia:": "CEL", // Celestia
-          "cronos:": "CRO", // Cronos
-          "juno:": "JUNO", // Juno
-          "osmosis:": "OSMO", // Osmosis
-          "gnosis:": "GNO", // Gnosis
-          "linea:": "LINEA", // Linea
-          "ronin:": "RON", // Ronin
-          "aptos:": "APT", // Aptos
-          "sui:": "SUI", // SUI
-        };
 
         // 检查是否以某个前缀开头
         const prefix = Object.keys(prefixToShortName).find((key) =>
