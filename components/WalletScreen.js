@@ -147,7 +147,7 @@ function WalletScreen({ route, navigation }) {
     useState(CHAIN_NAMES);
 
   const chainFilteredCards = cryptoCards.filter((card) =>
-    selectedChainShortName.includes(card.chainShortName)
+    selectedChainShortName.includes(card?.chainShortName)
   );
 
   const [isChainSelectionModalVisible, setChainSelectionModalVisible] =
@@ -1604,9 +1604,6 @@ function WalletScreen({ route, navigation }) {
     }
   }
 
-  const filteredCards = cryptoCards.filter(
-    (card) => card.chainShortName === "AURORA"
-  );
   //热更新支持
   useEffect(() => {
     onFetchUpdateAsync();
