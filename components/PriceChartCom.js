@@ -15,48 +15,34 @@ import * as Haptics from "expo-haptics";
 import { DarkModeContext } from "./CryptoContext";
 import { useTranslation } from "react-i18next";
 import WalletScreenStyles from "../styles/WalletScreenStyle";
-/**
- *
- * 2024/07/29
- * @author 2winter
- * @description 折线图组件,接收instId，上级ScrollViewRef,priceFla 货币符号
- * @param {object} param0
- * @returns
- */
+
 export default function PriceChartCom({
   instId = "BTC-USD",
   parentScrollviewRef,
   priceFla = "$",
 }) {
   const { t } = useTranslation();
+  const { isDarkMode } = useContext(DarkModeContext);
   const WalletScreenStyle = WalletScreenStyles(isDarkMode);
   const screenWidth = Dimensions.get("window").width;
-  const [isRefreshing, setIsRefreshing] = useState(false); // 控制下拉刷新
+
+  const [isRefreshing, setIsRefreshing] = useState(false);
   const load = useState(true);
-  // 添加状态变量
   const [hasData, setHasData] = useState(true);
-  //選擇的數據點
   const _selectPointData = useState();
-  //选择的索引
   const _selectIndex = useState(0);
-  //圖表數據
   const _chartData = useState([0]);
-  //图表原始数据
   const _sourceData = useState([]);
-  //最低和最高收盘
   const maxAndMin = useState([]);
-  //涨幅
   const priceIncrease = useState([0, 0]);
-  //单位
   const priceFlag = priceFla;
-  // 从上下文获取 isDarkMode 状态
-  const { isDarkMode } = useContext(DarkModeContext);
-  // 根据 isDarkMode 设置 textColor
+
   const textColor = isDarkMode ? "#fff" : "#000";
   const textTabColor = isDarkMode ? "#6E6E7F" : "#8C8C9C";
   const activeBackgroundColor = isDarkMode ? "#21201E" : "#fff";
   const inactiveBackgroundColor = "transparent";
-  //取出最高，最低的開盤價格
+
+  // Compute the maximum and minimum closing prices and their indices.
   const _getMaxAndMinPrice = (data) => {
     const values = data.map((item) => parseFloat(item[4]));
     const max = Math.max(...values);
@@ -64,27 +50,23 @@ export default function PriceChartCom({
     const maxIndex = values.indexOf(max);
     const minIndex = values.indexOf(min);
     maxAndMin[1]([max, min, maxIndex, minIndex]);
-    // console.log('最大值&最小:', max, min);
   };
 
-  //计算涨幅
+  // Calculate price change and percentage.
   const calcPointPrice = (
     _index,
     is_default = true,
     _dataPoints = null,
     _dataSource = null
   ) => {
-    let perStr = ""; //涨幅百分比
-    let priceStr = ""; //涨幅价格
+    let perStr = "";
+    let priceStr = "";
     if (is_default && _dataPoints) {
-      //图表默认：收盘-开盘
       priceStr = parseFloat(_dataPoints.last[4] - _dataPoints.start[1]).toFixed(
         2
       );
       perStr = parseFloat((priceStr / _dataPoints.start[1]) * 100).toFixed(2);
     } else {
-      //根据当前选择的数据：收盘-开盘
-
       if (!_sourceData[0][_index] && !_dataSource) return;
       const _parseData = _dataSource ?? _sourceData[0];
       priceStr = parseFloat(_parseData[_index][4] - _parseData[0][1]).toFixed(
@@ -92,11 +74,10 @@ export default function PriceChartCom({
       );
       perStr = parseFloat((priceStr / _parseData[0][1]) * 100).toFixed(2);
     }
-    //更新涨幅数据
     priceIncrease[1]([priceStr, perStr]);
   };
 
-  //实现横向触摸刷新点,初始化
+  // Initialize PanResponder for horizontal touch interactions.
   const panResponder = useState(
     PanResponder.create({
       onStartShouldSetPanResponder: () => true,
@@ -104,7 +85,7 @@ export default function PriceChartCom({
     })
   );
 
-  //刷新手势点,待优化
+  // Update PanResponder to track touch movements and update selected point.
   const updatePanResponder = (_sdata) => {
     panResponder[1](
       PanResponder.create({
@@ -117,7 +98,7 @@ export default function PriceChartCom({
         onPanResponderMove: (evt, gestureState) => {
           const chartWidth = screenWidth;
           const numPoints = _sdata.length;
-          const singlePointWidth = chartWidth / _sdata.length;
+          const singlePointWidth = chartWidth / numPoints;
           const xPosition = gestureState.moveX;
           const index = Math.floor(xPosition / singlePointWidth);
           if (index >= 0 && index <= numPoints) {
@@ -131,25 +112,23 @@ export default function PriceChartCom({
     );
   };
 
-  //獲取API數據
+  // Fetch data from the API.
   const _getData = async (_nd = "30m") => {
-    // console.log('get Data');
     load[1](true);
     let _rd = await fetch(
       `https://df.likkim.com/api/market/index-candles?instId=${instId}&bar=${_nd}`
     )
       .then((res) => res.json())
       .catch((er) => {
-        // console.error('獲取價格失敗：');
-        // console.error(er instanceof Error ? er.message : er);
+        // Handle error if needed.
       });
 
     if (!_rd || _rd.data.length === 0) {
-      setHasData(false); // 设置为无数据状态
+      setHasData(false);
       load[1](false);
       return;
     }
-    setHasData(true); // 设置为有数据状态
+    setHasData(true);
     const _cdata = _rd.data.map((r) => parseFloat(r[4]));
     _getMaxAndMinPrice(_rd.data);
     _chartData[1](_cdata);
@@ -164,13 +143,12 @@ export default function PriceChartCom({
 
   const onRefresh = () => {
     setIsRefreshing(true);
-    _getData().then(() => setIsRefreshing(false)); // 刷新完数据后结束刷新
+    _getData().then(() => setIsRefreshing(false));
   };
 
-  //切換數據
+  // Initialize the date selection and fetch data.
   const selectDate = useState(() => {
     _getData().catch((er) => null);
-    // 确保 parentScrollviewRef.current 不为空且支持 setNativeProps
     if (
       parentScrollviewRef.current &&
       typeof parentScrollviewRef.current.setNativeProps === "function"
@@ -180,7 +158,7 @@ export default function PriceChartCom({
     return "30m";
   });
 
-  //更新API查询范围
+  // Change the data interval and refresh data.
   const changeDate = (_nd) => {
     _selectIndex[1](0);
     _selectPointData[1](null);
@@ -191,30 +169,26 @@ export default function PriceChartCom({
   return (
     <ScrollView
       refreshControl={
-        <RefreshControl
-          refreshing={isRefreshing} // 控制刷新状态
-          onRefresh={onRefresh} // 下拉刷新触发的函数
-        />
+        <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
       }
     >
       <View style={{ marginVertical: 10 }}>
         <View style={{ height: 298 }}>
-          {!hasData &&
-            !load[0] && ( // 当没有数据且不在加载状态时显示提示信息
-              <View
-                style={{
-                  height: 298,
-                  justifyContent: "center",
-                  alignItems: "center",
-                  display: "flex",
-                  textAlign: "center",
-                }}
-              >
-                <Text style={WalletScreenStyle.modalSubtitle}>
-                  {t("No data available")}
-                </Text>
-              </View>
-            )}
+          {!hasData && !load[0] && (
+            <View
+              style={{
+                height: 298,
+                justifyContent: "center",
+                alignItems: "center",
+                display: "flex",
+                textAlign: "center",
+              }}
+            >
+              <Text style={WalletScreenStyle.modalSubtitle}>
+                {t("No data available")}
+              </Text>
+            </View>
+          )}
 
           {hasData && (
             <>
@@ -244,7 +218,6 @@ export default function PriceChartCom({
                 >
                   <Text
                     style={{
-                      color: "#2A9737",
                       fontWeight: "bold",
                       color: priceIncrease[0][0] > 0 ? "#47B480" : "#D2464B",
                     }}
@@ -256,24 +229,23 @@ export default function PriceChartCom({
                     {priceIncrease[0][1]}%)
                   </Text>
                   <Text style={{ marginLeft: 5, color: "gray" }}>
-                    {_selectPointData[0] &&
-                      new Date(
-                        parseFloat(_selectPointData[0][0])
-                      ).toDateString() +
+                    {_selectPointData[0]
+                      ? new Date(
+                          parseFloat(_selectPointData[0][0])
+                        ).toDateString() +
                         "," +
                         new Date(
                           parseFloat(_selectPointData[0][0])
-                        ).toLocaleTimeString()}
-                    {!_selectPointData[0] &&
-                      (selectDate[0] == "30m"
-                        ? t("past 24 hours")
-                        : selectDate[0] == "1H"
-                        ? t("past 7 days")
-                        : selectDate[0] == "1W"
-                        ? t("past 1 year")
-                        : selectDate[0] == "1D"
-                        ? t("past 30 days")
-                        : "")}
+                        ).toLocaleTimeString()
+                      : selectDate[0] === "30m"
+                      ? t("past 24 hours")
+                      : selectDate[0] === "1H"
+                      ? t("past 7 days")
+                      : selectDate[0] === "1W"
+                      ? t("past 1 year")
+                      : selectDate[0] === "1D"
+                      ? t("past 30 days")
+                      : ""}
                   </Text>
                 </View>
               </View>
@@ -305,7 +277,7 @@ export default function PriceChartCom({
                           top: y - 40,
                           left: x - 40,
                         }}
-                      ></View>
+                      />
                     ) : null;
                   }}
                   decorator={() => {
@@ -324,12 +296,9 @@ export default function PriceChartCom({
                         ? (screenWidth / chartDataLength) * maxAndMin[0][2] - 45
                         : (screenWidth / chartDataLength) * maxAndMin[0][2] +
                           32;
-                    // console.log('min:', (screenWidth / chartDataLength) * maxAndMin[0][3])
-                    // console.log('max', (screenWidth / chartDataLength) * maxAndMin[0][2])
 
                     return (
                       <>
-                        {/* 最大值 */}
                         <View
                           key={"maxPoint"}
                           style={{
@@ -343,7 +312,6 @@ export default function PriceChartCom({
                             {maxAndMin[0][0]}
                           </Text>
                         </View>
-                        {/* 最低值 */}
                         <View
                           key={"minPoint"}
                           style={{
@@ -381,7 +349,6 @@ export default function PriceChartCom({
                   withHorizontalLabels={false}
                   withOuterLines={false}
                   onDataPointClick={({ value, data, color, index }) => {
-                    //触摸反馈
                     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
                     _selectPointData[1](_sourceData[0][index]);
                     _selectIndex[1](index);
@@ -392,12 +359,12 @@ export default function PriceChartCom({
                     fillShadowGradientFrom: "#fff",
                     fillShadowGradientToOpacity: 0,
                     backgroundGradientFrom: "#fff",
-                    fillShadowGradientOpacity: 0, // 透明度设为0
+                    fillShadowGradientOpacity: 0,
                     useShadowColorFromDataset: false,
                     backgroundGradientFromOpacity: 0,
                     backgroundGradientToOpacity: 0,
                     backgroundGradientTo: "#fff",
-                    decimalPlaces: 2, // optional, defaults to 2dp
+                    decimalPlaces: 2,
                     color: () => `rgb(80,168.63)`,
                   }}
                   style={{ marginTop: 20, marginLeft: -32 }}
@@ -406,7 +373,6 @@ export default function PriceChartCom({
             </>
           )}
         </View>
-        {/* Always show the tab bar */}
         <View
           style={{
             flexDirection: "row",
@@ -436,7 +402,6 @@ export default function PriceChartCom({
               <Text style={{ textAlign: "center", color: textColor }}>1D</Text>
             </Pressable>
           </View>
-
           <View
             style={{
               backgroundColor:
@@ -454,7 +419,6 @@ export default function PriceChartCom({
               <Text style={{ textAlign: "center", color: textColor }}>1W</Text>
             </Pressable>
           </View>
-
           <View
             style={{
               backgroundColor:
@@ -472,7 +436,6 @@ export default function PriceChartCom({
               <Text style={{ textAlign: "center", color: textColor }}>1M</Text>
             </Pressable>
           </View>
-
           <View
             style={{
               backgroundColor:
