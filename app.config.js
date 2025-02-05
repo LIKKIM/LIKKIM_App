@@ -1,9 +1,6 @@
 /**
- * LIKKIM 动态Config
- * @param {*} param0
- * @returns
+ * LIKKIM Dynamic Config
  */
-
 export default {
   owner: "likkimteam",
   name: "LIKKIM",
