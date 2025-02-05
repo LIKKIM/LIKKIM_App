@@ -20,10 +20,9 @@ const SupportPage = () => {
   const darkColors = ["#21201E", "#0E0D0D"];
   const lightColors = ["#FFFFFF", "#EDEBEF"];
   const borderColor = isDarkMode ? "#3C3C3C" : "#EDEBEF";
-
-  // 动态设置按钮颜色
   const BluetoothBtnColor = isDarkMode ? "#CCB68C" : "#CFAB95";
 
+  // Configure header options dynamically based on dark mode
   useLayoutEffect(() => {
     navigation.setOptions({
       headerStyle: {
@@ -34,6 +33,7 @@ const SupportPage = () => {
     });
   }, [isDarkMode, navigation, t]);
 
+  // Social media links with corresponding icons and URLs
   const socialMediaLinks = [
     {
       name: "Twitter",
@@ -79,6 +79,17 @@ const SupportPage = () => {
     },
   ];
 
+  // Opens email client for support feedback
+  const handleEmailPress = () => {
+    const email = "lukkeyswiss@gmail.com";
+    const subject = encodeURIComponent("LIKKIM feedback");
+    const body = encodeURIComponent("Hi support team");
+    const url = `mailto:${email}?subject=${subject}&body=${body}`;
+    Linking.openURL(url).catch((err) =>
+      console.error("An error occurred", err)
+    );
+  };
+
   return (
     <LinearGradient
       style={styles.container}
@@ -107,15 +118,7 @@ const SupportPage = () => {
       ))}
       <TouchableOpacity
         style={[styles.emailButton, { backgroundColor: BluetoothBtnColor }]}
-        onPress={() => {
-          const email = "lukkeyswiss@gmail.com";
-          const subject = encodeURIComponent("LIKKIM feedback");
-          const body = encodeURIComponent("Hi support team");
-          const url = `mailto:${email}?subject=${subject}&body=${body}`;
-          Linking.openURL(url).catch((err) =>
-            console.error("An error occurred", err)
-          );
-        }}
+        onPress={handleEmailPress}
       >
         <Text style={styles.emailButtonText}>
           {t("Contact Support via Email")}
