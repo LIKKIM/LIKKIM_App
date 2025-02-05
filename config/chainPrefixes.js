@@ -1,7 +1,7 @@
 // config/chainPrefixes.js
 
 // ==========================
-// 映射表: 前缀 -> shortName
+// Mapping: prefix -> shortName
 // ==========================
 
 export const prefixToShortName = {
