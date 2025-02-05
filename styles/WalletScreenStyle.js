@@ -1,8 +1,14 @@
 // styles/WalletScreenStyle.js
 import { StyleSheet, Dimensions } from "react-native";
 
+/**
+ * Returns a stylesheet object for the Wallet Screen.
+ *
+ * @param {boolean} isDarkMode - Indicates whether dark mode is enabled.
+ * @returns {object} - A StyleSheet object for the Wallet Screen.
+ */
 const WalletScreenStyles = (isDarkMode) => {
-  // 色彩定义
+  // Color definitions based on theme mode
   const textColor = isDarkMode ? "#fff" : "#000";
   const modalBackgroundColor = isDarkMode ? "#3F3D3C" : "#ffffff";
   const BluetoothBtnColor = isDarkMode ? "#CCB68C" : "#CFAB95";
@@ -18,12 +24,18 @@ const WalletScreenStyles = (isDarkMode) => {
   const borderColor = isDarkMode ? "#555" : "#ccc";
   const historyItemBorderColor = isDarkMode ? "#ccc" : "#999";
   const inputBackgroundColor = isDarkMode ? "#21201E" : "#e0e0e0";
+
+  // Background color for the history container with opacity adjustments
   const historyContainerBackgroundColor = isDarkMode
     ? "#22201F90"
     : "#FFFFFF80";
-  const { height } = Dimensions.get("window"); // 获取设备高度
-  const containerHeight = height - 360; // 计算高度
+
+  // Get device height for dynamic layout calculations
+  const { height } = Dimensions.get("window");
+  const containerHeight = height - 360; // Calculated container height
+
   return StyleSheet.create({
+    // Animated container for tabs positioned over content
     animatedTabContainer: {
       flexDirection: "column",
       justifyContent: "space-between",
@@ -32,8 +44,8 @@ const WalletScreenStyles = (isDarkMode) => {
       zIndex: 10,
       top: 236,
       height: containerHeight,
-      // backgroundColor: "red",
     },
+    // Content container for the card modal
     cardModalContent: {
       width: 326,
       height: 206,
@@ -41,6 +53,7 @@ const WalletScreenStyles = (isDarkMode) => {
       alignItems: "center",
       position: "relative",
     },
+    // Container for card information with wrapping support
     cardInfoContainer: {
       flexDirection: "row",
       width: 156,
@@ -49,7 +62,7 @@ const WalletScreenStyles = (isDarkMode) => {
       alignItems: "center",
       marginBottom: 8,
     },
-
+    // Container for the card icon positioned at the top left
     cardIconContainer: {
       position: "absolute",
       top: 28,
@@ -62,6 +75,7 @@ const WalletScreenStyles = (isDarkMode) => {
       backgroundColor: "#ffffff50",
       overflow: "hidden",
     },
+    // Container for the chain icon positioned relative to the card icon
     cardChainIconContainer: {
       position: "absolute",
       top: 54,
@@ -77,8 +91,7 @@ const WalletScreenStyles = (isDarkMode) => {
       overflow: "hidden",
     },
 
-    // 标签样式
-
+    // Tag styles
     TagChainIcon: {
       width: 14,
       height: 14,
@@ -87,62 +100,54 @@ const WalletScreenStyles = (isDarkMode) => {
       resizeMode: "contain",
       borderRadius: 10,
     },
-
     chainScrollView: {
       marginBottom: 10,
       paddingHorizontal: 10,
     },
-
     chainTag: {
-      flexDirection: "row", // 图标和文本在一行显示
-      alignItems: "center", // 垂直居中对齐
+      flexDirection: "row",
+      alignItems: "center",
       paddingVertical: 5,
       paddingHorizontal: 10,
       marginRight: 8,
       borderRadius: 6,
       backgroundColor: addCryptoButtonBackgroundColor,
     },
-
     selectedChainTag: {
       backgroundColor: buttonBackgroundColor,
     },
-
     chainTagText: {
       fontSize: 14,
       color: textColor,
     },
-
     selectedChainTagText: {
       color: textColor,
     },
 
-    // 卡片样式
+    // Card styles
     cardName: {
       fontSize: 16,
       fontWeight: "bold",
     },
-
     chainContainer: {
       backgroundColor: tagColor,
-      alignSelf: "flex-start", // 自动适应内容宽度
+      alignSelf: "flex-start",
       paddingHorizontal: 6,
       paddingVertical: 2,
       borderRadius: 6,
       marginTop: 3,
     },
-
     chainText: {
       fontSize: 12,
       fontWeight: "bold",
     },
-
     chainCardText: {
       color: textColor,
       fontSize: 12,
       fontWeight: "bold",
     },
 
-    // 按钮样式
+    // Button styles
     disconnectButton: {
       marginLeft: 10,
       paddingVertical: 5,
@@ -150,12 +155,10 @@ const WalletScreenStyles = (isDarkMode) => {
       backgroundColor: "#CCB68C",
       borderRadius: 5,
     },
-
     disconnectButtonText: {
       color: "#FFFFFF",
       fontWeight: "bold",
     },
-
     submitButton: {
       backgroundColor: buttonBackgroundColor,
       padding: 10,
@@ -166,7 +169,6 @@ const WalletScreenStyles = (isDarkMode) => {
       justifyContent: "center",
       marginTop: 20,
     },
-
     submitButtonText: {
       color: textColor,
       fontSize: 16,
@@ -175,14 +177,14 @@ const WalletScreenStyles = (isDarkMode) => {
       color: "#FFF",
       fontSize: 16,
     },
-    // 模态框样式
+
+    // Modal styles
     pinModalTitle: {
       color: textColor,
       fontSize: 20,
       fontWeight: "bold",
       marginBottom: 15,
     },
-
     pinModalView: {
       position: "absolute",
       top: 100,
@@ -196,7 +198,7 @@ const WalletScreenStyles = (isDarkMode) => {
       alignItems: "center",
     },
 
-    // 输入框样式
+    // Input field styles
     passwordInput: {
       backgroundColor: inputBackgroundColor,
       paddingHorizontal: 15,
@@ -207,19 +209,18 @@ const WalletScreenStyles = (isDarkMode) => {
       color: textColor,
     },
 
-    // 设备项样式
+    // Device item styles
     deviceItemContainer: {
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "center",
       marginTop: 20,
     },
-
     deviceIcon: {
       paddingRight: 4,
     },
 
-    // 取消按钮样式
+    // Cancel button style for "Looking For" modal
     cancelButtonLookingFor: {
       borderColor: buttonBackgroundColor,
       borderWidth: 3,
@@ -232,7 +233,7 @@ const WalletScreenStyles = (isDarkMode) => {
       marginTop: 20,
     },
 
-    // 蓝牙模态框样式
+    // Bluetooth modal styles
     bluetoothModalView: {
       margin: 20,
       height: 500,
@@ -243,18 +244,15 @@ const WalletScreenStyles = (isDarkMode) => {
       justifyContent: "space-between",
       alignItems: "center",
     },
-
     bluetoothImg: {
       width: 150,
       height: 150,
       marginBottom: 30,
     },
-
     BluetoothBtnText: {
       color: "#fff",
       fontSize: 16,
     },
-
     bluetoothModalTitle: {
       color: textColor,
       fontSize: 20,
@@ -262,7 +260,7 @@ const WalletScreenStyles = (isDarkMode) => {
       marginBottom: 10,
     },
 
-    // 副标题样式
+    // Subtitle text styles
     subtitleText: {
       fontSize: 14,
       color: secondTextColor,
@@ -271,7 +269,6 @@ const WalletScreenStyles = (isDarkMode) => {
       flexWrap: "wrap",
       width: 326,
     },
-
     addressText: {
       color: secondTextColor,
       textAlign: "center",
@@ -280,13 +277,13 @@ const WalletScreenStyles = (isDarkMode) => {
       width: 280,
     },
 
-    // 取消按钮文本样式
+    // Cancel button text style
     cancelButtonText: {
       color: textColor,
       fontSize: 16,
     },
 
-    // 收款模态框样式
+    // Receive modal styles
     receiveModalView: {
       margin: 20,
       height: 600,
@@ -298,31 +295,28 @@ const WalletScreenStyles = (isDarkMode) => {
       alignItems: "center",
     },
 
-    // Tab按钮样式
+    // Tab button styles
     tabButton: {
       padding: 20,
       marginHorizontal: 60,
       zIndex: 11,
     },
-
     activeTabButton: {
       padding: 20,
       borderBottomWidth: 2,
       borderBottomColor: "#CCB68C",
       marginHorizontal: 60,
     },
-
     activeTabButtonText: {
       fontSize: 16,
       color: textColor,
     },
-
     tabButtonText: {
       fontSize: 16,
       color: secondTextColor,
     },
 
-    // 历史记录项样式
+    // History item styles
     historyItemText: {
       fontSize: 16,
       color: textColor,
@@ -337,13 +331,11 @@ const WalletScreenStyles = (isDarkMode) => {
       borderBottomWidth: 1,
       borderBottomColor: historyItemBorderColor,
     },
-
     noHistoryText: {
       fontSize: 16,
       color: secondTextColor,
       textAlign: "center",
     },
-
     historyTitle: {
       height: 60,
       textAlign: "left",
@@ -354,7 +346,6 @@ const WalletScreenStyles = (isDarkMode) => {
       color: textColor,
       fontWeight: "bold",
     },
-
     historyContainer: {
       width: "100%",
       padding: 20,
@@ -362,14 +353,13 @@ const WalletScreenStyles = (isDarkMode) => {
       justifyContent: "center",
       height: 300,
     },
-
     priceContainer: {
       width: "100%",
       paddingHorizontal: 20,
       height: 360,
     },
 
-    // 搜索框样式
+    // Search box styles
     searchContainer: {
       flexDirection: "row",
       alignItems: "center",
@@ -378,58 +368,51 @@ const WalletScreenStyles = (isDarkMode) => {
       backgroundColor: isDarkMode ? "#21201E" : "#E5E1E9",
       marginBottom: 20,
     },
-
     searchInput: {
       width: "100%",
       padding: 10,
       borderRadius: 10,
       color: textColor,
     },
-
     searchIcon: {
       paddingLeft: 10,
       color: textColor,
     },
 
-    // 渐变背景样式
+    // Linear gradient background style
     linearGradient: {
       flex: 1,
       backgroundColor: backgroundColor,
       alignItems: "center",
       justifyContent: "center",
     },
-
     scrollViewContent: {
       justifyContent: "start",
       alignItems: "center",
     },
-
     scrollView: {
       width: "100%",
       paddingHorizontal: 0,
     },
 
-    // 总余额容器样式
+    // Total balance container styles
     totalBalanceContainer: {
       width: 326,
       height: 80,
       marginBottom: 20,
     },
-
     totalBalanceText: {
       fontSize: 16,
       marginVertical: 10,
       color: secondTextColor,
       textAlign: "left",
     },
-
     totalBalanceAmount: {
       fontSize: 36,
       fontWeight: "bold",
       color: textColor,
       textAlign: "left",
     },
-
     currencyUnit: {
       marginLeft: 20,
       fontSize: 16,
@@ -438,7 +421,7 @@ const WalletScreenStyles = (isDarkMode) => {
       fontWeight: "normal",
     },
 
-    // 添加钱包图片样式
+    // Add wallet image styles
     addWalletImage: {
       marginTop: -110,
       width: 326,
@@ -454,45 +437,38 @@ const WalletScreenStyles = (isDarkMode) => {
       shadowRadius: 20,
       elevation: 10,
     },
-
     addWalletImageBorder: {
       borderRadius: 20,
     },
-
     addWalletButton: {
       width: "100%",
       height: "100%",
       justifyContent: "center",
       alignItems: "center",
     },
-
     addWalletButtonText: {
       color: "#fff",
       fontSize: 20,
       fontWeight: "bold",
     },
 
-    // 卡片容器样式
+    // Card container styles
     cardContainer: {
       position: "relative",
       marginBottom: -130,
     },
-
     cardIcon: {
       width: 42,
       height: 42,
     },
-
     chainIcon: {
       width: 14,
       height: 14,
     },
-
     cardShortName: {
       color: secondCardTextColor,
       fontSize: 14,
     },
-
     cardBalance: {
       position: "absolute",
       top: 25,
@@ -501,12 +477,10 @@ const WalletScreenStyles = (isDarkMode) => {
       fontSize: 16,
       fontWeight: "bold",
     },
-
     balanceShortName: {
       color: secondCardTextColor,
       fontSize: 14,
     },
-
     priceChangeView: {
       position: "absolute",
       display: "flex",
@@ -517,19 +491,16 @@ const WalletScreenStyles = (isDarkMode) => {
       color: secondCardTextColor,
       fontSize: 14,
     },
-
     cardBalanceCenter: {
       color: "#fff",
       fontSize: 28,
       fontWeight: "bold",
       marginBottom: 8,
     },
-
     balanceShortNameCenter: {
       color: secondCardTextColor,
       fontSize: 14,
     },
-
     card: {
       width: 326,
       height: 206,
@@ -540,7 +511,6 @@ const WalletScreenStyles = (isDarkMode) => {
       backgroundColor: cardBackgroundColor,
       marginBottom: 20,
     },
-
     cardFirst: {
       shadowOffset: { width: 0, height: 0 },
       shadowColor: shadowColor,
@@ -548,7 +518,6 @@ const WalletScreenStyles = (isDarkMode) => {
       shadowRadius: 20,
       elevation: 5,
     },
-
     cardOthers: {
       shadowOffset: { width: 0, height: -10 },
       shadowColor: shadowColor,
@@ -557,7 +526,7 @@ const WalletScreenStyles = (isDarkMode) => {
       elevation: 5,
     },
 
-    // 通用按钮样式
+    // General button styles
     Button: {
       backgroundColor: buttonBackgroundColor,
       padding: 10,
@@ -568,7 +537,6 @@ const WalletScreenStyles = (isDarkMode) => {
       alignItems: "center",
       marginTop: 20,
     },
-
     cancelAddressButton: {
       borderWidth: 3,
       borderColor: buttonBackgroundColor,
@@ -580,7 +548,6 @@ const WalletScreenStyles = (isDarkMode) => {
       alignItems: "center",
       marginTop: 20,
     },
-
     verifyAddressButton: {
       backgroundColor: buttonBackgroundColor,
       padding: 10,
@@ -591,7 +558,6 @@ const WalletScreenStyles = (isDarkMode) => {
       alignItems: "center",
       marginTop: 20,
     },
-
     cancelButtonCryptoCard: {
       zIndex: 10,
       borderWidth: 3,
@@ -604,7 +570,6 @@ const WalletScreenStyles = (isDarkMode) => {
       alignItems: "center",
       bottom: 0,
     },
-
     cancelButton: {
       borderWidth: 3,
       borderColor: buttonBackgroundColor,
@@ -616,7 +581,6 @@ const WalletScreenStyles = (isDarkMode) => {
       alignItems: "center",
       marginTop: 20,
     },
-
     removeCancelButton: {
       borderWidth: 3,
       borderColor: buttonBackgroundColor,
@@ -629,14 +593,13 @@ const WalletScreenStyles = (isDarkMode) => {
       marginTop: 20,
     },
 
-    // 居中视图样式
+    // Centered view style (e.g., for modals)
     centeredView: {
       flex: 1,
       justifyContent: "center",
       alignItems: "center",
       backgroundColor: "rgba(0, 0, 0, 0.2)",
     },
-
     cardModalView: {
       height: "100%",
       width: "100%",
@@ -646,8 +609,7 @@ const WalletScreenStyles = (isDarkMode) => {
       bottom: 0,
       zIndex: 2,
     },
-
-    // 通用模态框样式
+    // General modal view style
     modalView: {
       margin: 20,
       width: "90%",
@@ -656,7 +618,6 @@ const WalletScreenStyles = (isDarkMode) => {
       padding: 35,
       alignItems: "center",
     },
-
     pendingModalView: {
       margin: 20,
       width: "90%",
@@ -667,7 +628,6 @@ const WalletScreenStyles = (isDarkMode) => {
       alignItems: "center",
       justifyContent: "space-between",
     },
-
     deleteModalView: {
       margin: 20,
       width: "90%",
@@ -676,7 +636,6 @@ const WalletScreenStyles = (isDarkMode) => {
       padding: 35,
       alignItems: "center",
     },
-
     phraseModalView: {
       margin: 20,
       width: "90%",
@@ -685,7 +644,6 @@ const WalletScreenStyles = (isDarkMode) => {
       padding: 35,
       alignItems: "center",
     },
-
     processModalView: {
       margin: 20,
       width: "90%",
@@ -726,12 +684,11 @@ const WalletScreenStyles = (isDarkMode) => {
       marginTop: 20,
     },
     confirmText: {
-      color: "#ffffff", // 确认按钮的文字颜色
+      color: "#ffffff",
       fontSize: 16,
     },
-
     disabledText: {
-      color: "#ccc", // 确认按钮的文字颜色
+      color: "#ccc",
       fontSize: 16,
     },
     QRImg: {
@@ -743,7 +700,6 @@ const WalletScreenStyles = (isDarkMode) => {
       top: 0,
       margin: 25,
     },
-
     removeModalButton: {
       backgroundColor: buttonBackgroundColor,
       padding: 10,
@@ -753,7 +709,6 @@ const WalletScreenStyles = (isDarkMode) => {
       height: 60,
       alignItems: "center",
     },
-
     alertModalButton: {
       backgroundColor: buttonBackgroundColor,
       padding: 10,
@@ -765,12 +720,11 @@ const WalletScreenStyles = (isDarkMode) => {
       marginTop: 20,
     },
 
-    // 按钮文本样式
+    // Button text style
     ButtonText: {
       color: textColor,
       fontSize: 16,
     },
-
     processButtonText: {
       color: secondTextColor,
       fontSize: 16,
@@ -778,7 +732,7 @@ const WalletScreenStyles = (isDarkMode) => {
       fontWeight: "bold",
     },
 
-    // 添加加密货币模态框样式
+    // Add crypto modal styles
     addCryptoModalView: {
       margin: 20,
       minHeight: 400,
@@ -788,12 +742,10 @@ const WalletScreenStyles = (isDarkMode) => {
       padding: 35,
       alignItems: "center",
     },
-
     addCryptoScrollView: {
       width: "100%",
       height: 380,
     },
-
     addCryptoButton: {
       width: "100%",
       padding: 6,
@@ -804,30 +756,25 @@ const WalletScreenStyles = (isDarkMode) => {
       alignItems: "center",
       flexDirection: "row",
     },
-
     addCryptoImage: {
       width: 100,
       height: 100,
       justifyContent: "center",
       alignItems: "center",
     },
-
     addCardIcon: {
       width: 30,
       height: 30,
     },
-
     overlay: {
       ...StyleSheet.absoluteFillObject,
       backgroundColor: "rgba(108, 108, 244, 0.1)",
     },
-
     addCryptoOverlay: {
       ...StyleSheet.absoluteFillObject,
       backgroundColor: "rgba(0, 0, 0, 0)",
       borderRadius: 12,
     },
-
     addCryptoImageText: {
       marginLeft: 4,
       color: "#fff",
@@ -836,12 +783,10 @@ const WalletScreenStyles = (isDarkMode) => {
       textShadowOffset: { width: 1, height: 1 },
       textShadowRadius: 3,
     },
-
     iconAndTextContainer: {
       flexDirection: "row",
       alignItems: "center",
     },
-
     addCryptoText: {
       marginTop: 6,
       marginRight: 4,
@@ -850,31 +795,27 @@ const WalletScreenStyles = (isDarkMode) => {
       textAlign: "center",
     },
 
-    // 模态框头部样式
+    // Modal header styles
     modalHeader: {
       width: "100%",
       flexDirection: "row",
       justifyContent: "flex-end",
       alignItems: "center",
     },
-
     modalTitle: {
       color: textColor,
       fontSize: 16,
       fontWeight: "bold",
     },
-
     modalSubtitle: {
       color: secondTextColor,
       fontSize: 14,
       textAlign: "center",
     },
-
     scanModalSubtitle: {
       color: secondTextColor,
       fontSize: 14,
     },
-
     alertModalTitle: {
       color: textColor,
       fontSize: 16,
@@ -882,7 +823,6 @@ const WalletScreenStyles = (isDarkMode) => {
       marginBottom: 10,
       textAlign: "center",
     },
-
     alertModalSubtitle: {
       width: "100%",
       color: secondTextColor,
@@ -890,14 +830,13 @@ const WalletScreenStyles = (isDarkMode) => {
       marginBottom: 10,
       lineHeight: 20,
     },
-
     alertModalContent: {
       color: secondTextColor,
       fontSize: 16,
       fontWeight: "bold",
     },
 
-    // 下拉菜单样式
+    // Dropdown menu styles
     dropdown: {
       position: "absolute",
       right: 0,
@@ -907,39 +846,34 @@ const WalletScreenStyles = (isDarkMode) => {
       padding: 10,
       zIndex: 3,
     },
-
     dropdownButton: {
       padding: 10,
     },
-
     dropdownButtonText: {
       color: textColor,
       fontSize: 16,
     },
 
-    // 模态框图标样式
+    // Modal icon styles
     modalIconContainer: {
       flexDirection: "row",
       alignItems: "center",
     },
-
     modalIcon: {
       width: 24,
       height: 24,
       marginRight: 8,
     },
-
     modalCryptoName: {
       color: textColor,
       textAlign: "center",
       fontSize: 16,
     },
 
-    // 余额视图样式
+    // Balance view styles
     BalanceView: {
       paddingBottom: 200,
     },
-
     modalBalanceLabel: {
       color: textColor,
       textAlign: "center",
@@ -947,7 +881,6 @@ const WalletScreenStyles = (isDarkMode) => {
       marginTop: 40,
       marginBottom: 10,
     },
-
     modalBalance: {
       color: textColor,
       textAlign: "center",
@@ -955,21 +888,20 @@ const WalletScreenStyles = (isDarkMode) => {
       marginBottom: 30,
     },
 
-    // 钱包信息样式
+    // Wallet information styles
     walletInfoText: {
       color: "#676776",
       fontSize: 16,
       textAlign: "center",
       lineHeight: 22,
     },
-
     walletInfoContainer: {
       height: 400,
       justifyContent: "center",
       paddingHorizontal: 20,
     },
 
-    // 安全标题样式
+    // Security title style
     securityTitle: {
       color: secondTextColor,
       fontSize: 22,
@@ -977,6 +909,7 @@ const WalletScreenStyles = (isDarkMode) => {
       marginBottom: 18,
     },
 
+    // Centered content style
     centeredContent: {
       flex: 1,
       justifyContent: "center",
@@ -984,14 +917,13 @@ const WalletScreenStyles = (isDarkMode) => {
       paddingVertical: 20,
     },
 
-    // 高亮文本样式
+    // Highlight text style
     highlightText: {
-      color: "#FF6347", // 红色作为高亮颜色
-      fontSize: 14,
+      color: "#FF6347",
       textAlign: "left",
     },
 
-    // 输入框样式
+    // Multi-line text input styles
     textInput: {
       width: "100%",
       height: 300,
