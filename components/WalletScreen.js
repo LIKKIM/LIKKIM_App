@@ -44,6 +44,7 @@ import { prefixToShortName } from "../config/chainPrefixes";
 import { CHAIN_NAMES } from "../config/chainConfig";
 import EmptyWalletView from "./modal/EmptyWalletView";
 import AddCryptoModal from "./modal/AddCryptoModal";
+import ChainSelectionModal from "./modal/ChainSelectionModal";
 import TabModal from "./walletScreen/TabModal";
 import ModalsContainer from "./walletScreen/ModalsContainer";
 import checkAndReqPermission from "../utils/BluetoothPermissions"; //安卓高版本申请蓝牙权限
@@ -2084,172 +2085,15 @@ function WalletScreen({ route, navigation }) {
         cryptoCards={cryptoCards}
       />
       {/* 选择链的Modal */}
-      <Modal
-        visible={isChainSelectionModalVisible}
-        transparent={true}
-        animationType="slide"
-        onRequestClose={() => setChainSelectionModalVisible(false)}
-      >
-        {/* 监听点击模糊背景区域 */}
-        <TouchableWithoutFeedback
-          onPress={() => setChainSelectionModalVisible(false)} // 点击模糊背景关闭 Modal
-        >
-          <View style={{ flex: 1 }}>
-            {/* 模糊背景 */}
-            <BlurView
-              intensity={10}
-              style={{
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "center",
-                backgroundColor: "rgba(0, 0, 0, 0.2)",
-              }}
-            >
-              {/* 内容区域 */}
-              <View
-                style={{
-                  margin: 20,
-                  height: 500,
-                  width: "90%",
-                  borderRadius: 20,
-                  padding: 35,
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  backgroundColor: isDarkMode ? "#21201E" : "#FFFFFF",
-                }}
-                // 阻止点击事件冒泡，避免触发关闭 Modal
-                onStartShouldSetResponder={() => true}
-              >
-                <Text
-                  style={{
-                    fontSize: 16,
-                    textAlign: "center",
-                    marginBottom: 20,
-                    lineHeight: 30,
-                    color: isDarkMode ? "#FFFFFF" : "#000000",
-                  }}
-                >
-                  {t("Select Chain")}
-                </Text>
-
-                <ScrollView
-                  contentContainerStyle={{ alignItems: "center" }}
-                  style={{ maxHeight: 400, width: 320, paddingHorizontal: 20 }}
-                >
-                  {/* 选择链的选项 */}
-                  <TouchableOpacity
-                    onPress={() => handleSelectChain("All")}
-                    style={{
-                      padding: 10,
-                      width: "100%",
-                      justifyContent: "center",
-                      borderRadius: 30,
-                      height: 60,
-                      alignItems: "center",
-                      marginBottom: 16,
-                      backgroundColor:
-                        selectedChain === "All"
-                          ? isDarkMode
-                            ? "#CCB68C"
-                            : "#CFAB95"
-                          : isDarkMode
-                          ? "#444444"
-                          : "#e0e0e0",
-                      flexDirection: "row",
-                    }}
-                  >
-                    <Image
-                      source={require("../assets/WalletScreenLogo.png")}
-                      style={{
-                        width: 24,
-                        height: 24,
-                        marginRight: 8,
-                        backgroundColor: "rgba(255, 255, 255, 0.2)",
-                        borderRadius: 12,
-                      }}
-                    />
-                    <Text
-                      style={{
-                        color:
-                          selectedChain === "All"
-                            ? isDarkMode
-                              ? "#FFFFFF"
-                              : "#ffffff"
-                            : isDarkMode
-                            ? "#DDDDDD"
-                            : "#000000",
-                      }}
-                    >
-                      {t("All Chains")}
-                    </Text>
-                  </TouchableOpacity>
-
-                  {/* 渲染链的选项 */}
-                  {[
-                    ...new Map(
-                      cryptoCards.map((card) => [card.chainShortName, card])
-                    ).values(),
-                  ]
-                    .sort((a, b) =>
-                      a.chainShortName.localeCompare(b.chainShortName)
-                    )
-                    .map((card, index) => (
-                      <TouchableOpacity
-                        key={`${card.chainShortName}-${index}`}
-                        onPress={() => handleSelectChain(card.chainShortName)}
-                        style={{
-                          padding: 10,
-                          width: "100%",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          borderRadius: 30,
-                          height: 60,
-                          flexDirection: "row",
-                          marginBottom: 16,
-                          backgroundColor:
-                            selectedChain === card.chainShortName
-                              ? isDarkMode
-                                ? "#CCB68C"
-                                : "#CFAB95"
-                              : isDarkMode
-                              ? "#444444"
-                              : "#e0e0e0",
-                        }}
-                      >
-                        {card.chainIcon && (
-                          <Image
-                            source={card.chainIcon}
-                            style={{
-                              width: 24,
-                              height: 24,
-                              marginRight: 8,
-                              backgroundColor: "rgba(255, 255, 255, 0.2)",
-                              borderRadius: 12,
-                            }}
-                          />
-                        )}
-                        <Text
-                          style={{
-                            color:
-                              selectedChain === card.chainShortName
-                                ? isDarkMode
-                                  ? "#FFFFFF"
-                                  : "#ffffff"
-                                : isDarkMode
-                                ? "#DDDDDD"
-                                : "#000000",
-                          }}
-                        >
-                          {card.chain} {t("Chain")}
-                        </Text>
-                      </TouchableOpacity>
-                    ))}
-                </ScrollView>
-              </View>
-            </BlurView>
-          </View>
-        </TouchableWithoutFeedback>
-      </Modal>
+      <ChainSelectionModal
+        isVisible={isChainSelectionModalVisible}
+        onClose={() => setChainSelectionModalVisible(false)}
+        selectedChain={selectedChain}
+        handleSelectChain={handleSelectChain}
+        cryptoCards={cryptoCards}
+        isDarkMode={isDarkMode}
+        t={t}
+      />
     </LinearGradient>
   );
 }
