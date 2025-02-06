@@ -101,7 +101,6 @@ function WalletScreen({ route, navigation }) {
   const darkColorsDown = ["#21201E", "#0E0D0D"];
   const lightColorsDown = ["#ffffff", "#EDEBEF"];
   const [pinModalVisible, setPinModalVisible] = useState(false);
-  const [phrase, setPhrase] = useState("");
   const [animation] = useState(new Animated.Value(0));
   const [fadeAnim] = useState(new Animated.Value(0));
   const opacityAnim = useRef(new Animated.Value(0)).current;
