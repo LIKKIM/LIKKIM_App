@@ -31,6 +31,7 @@ import ChangePasswordModal from "./modal/ChangePasswordModal";
 import ConfirmDisconnectModal from "./modal/ConfirmDisconnectModal";
 import MyColdWalletSuccessModal from "./modal/MyColdWalletSuccessModal";
 import MyColdWalletErrorModal from "./modal/MyColdWalletErrorModal";
+import EnterPasswordModal from "./modal/EnterPasswordModal";
 import PinModal from "./modal/PinModal";
 import BluetoothModal from "./modal/BluetoothModal";
 import VerificationModal from "./modal/VerificationModal";
@@ -1374,76 +1375,21 @@ function MyColdWalletScreen() {
       </Modal>
 
       {/* Enter Password Modal */}
-      <Modal
-        animationType="slide"
-        transparent={true}
+      <EnterPasswordModal
         visible={enterPasswordModalVisible}
-        onRequestClose={() => setEnterPasswordModalVisible(false)}
-      >
-        <BlurView intensity={10} style={MyColdWalletScreenStyle.centeredView}>
-          <View style={MyColdWalletScreenStyle.EnterPasswordModalView}>
-            <Text style={MyColdWalletScreenStyle.passwordModalTitle}>
-              {t("Enter Password")}
-            </Text>
-            <Text style={MyColdWalletScreenStyle.modalSubtitle}>
-              {t("Enter current password before resetting it")}
-            </Text>
-            <View style={{ marginVertical: 10, width: "100%" }}>
-              <View style={MyColdWalletScreenStyle.passwordInputContainer}>
-                <TextInput
-                  style={[
-                    MyColdWalletScreenStyle.passwordInput,
-                    isPasswordFocused && MyColdWalletScreenStyle.focusedInput,
-                  ]}
-                  placeholder={t("Enter current password")}
-                  placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
-                  secureTextEntry={isCurrentPasswordHidden}
-                  onChangeText={setCurrentPassword}
-                  onFocus={() => setIsPasswordFocused(true)}
-                  onBlur={() => setIsPasswordFocused(false)}
-                  value={currentPassword}
-                  autoFocus={true}
-                />
-                <TouchableOpacity
-                  onPress={() =>
-                    setIsCurrentPasswordHidden(!isCurrentPasswordHidden)
-                  }
-                  style={MyColdWalletScreenStyle.eyeIcon}
-                >
-                  <Icon
-                    name={
-                      isCurrentPasswordHidden ? "visibility-off" : "visibility"
-                    }
-                    size={24}
-                    color={isDarkMode ? "#ccc" : "#666"}
-                  />
-                </TouchableOpacity>
-              </View>
-            </View>
-            <View style={MyColdWalletScreenStyle.buttonContainer}>
-              <TouchableOpacity
-                style={MyColdWalletScreenStyle.submitButton}
-                onPress={() => {
-                  setEnterPasswordModalVisible(false);
-                  setPasswordModalVisible(true);
-                }}
-              >
-                <Text style={MyColdWalletScreenStyle.submitButtonText}>
-                  {t("Continue")}
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={MyColdWalletScreenStyle.cancelButton}
-                onPress={() => setEnterPasswordModalVisible(false)}
-              >
-                <Text style={MyColdWalletScreenStyle.cancelButtonText}>
-                  {t("Cancel")}
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </BlurView>
-      </Modal>
+        onClose={closeEnterPasswordModal}
+        onSubmit={handleConfirmPassword}
+        isDarkMode={isDarkMode}
+        styles={MyColdWalletScreenStyle}
+        t={t}
+        enterPasswordModalVisible={enterPasswordModalVisible}
+        closeEnterPasswordModal={closeEnterPasswordModal}
+        handleConfirmPassword={handleConfirmPassword}
+        currentPassword={currentPassword}
+        setCurrentPassword={setCurrentPassword}
+        isCurrentPasswordHidden={isCurrentPasswordHidden}
+        setIsCurrentPasswordHidden={setIsCurrentPasswordHidden}
+      />
 
       {/* Change Password Modal */}
 
