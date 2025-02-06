@@ -35,34 +35,22 @@ const AmountModal = ({
   cryptoCards,
   selectedCryptoName,
 }) => {
-  // 根据 selectedCryptoName 或 selectedCrypto 查找对应的加密货币信息
+  // Find selected crypto info by shortName or name
   const selectedCryptoInfo = cryptoCards.find(
     (crypto) =>
       crypto.shortName === selectedCrypto || crypto.name === selectedCryptoName
   );
 
-  // 确保找到了对应的加密货币信息
+  // Get priceUsd or default to 1
   const priceUsd = selectedCryptoInfo ? selectedCryptoInfo.priceUsd : 1;
 
-  // 简化版的余额转换，先乘以 priceUsd，再乘以货币兑美元汇率
+  // Convert balance based on priceUsd and currency exchange rate
   const getConvertedBalance = (cardBalance) => {
-    // 打印汇率值，用于调试
-    console.log(`汇率 (${currencyUnit}): `, exchangeRates[currencyUnit]);
-    console.log(`价格 (priceUsd): `, priceUsd);
-
-    // 先根据加密货币的价格 (priceUsd) 转换为美元值
     const cryptoToUsdBalance = cardBalance * priceUsd;
-    console.log(`计算后的美元余额: `, cryptoToUsdBalance);
-
-    // 然后根据法定货币的汇率 (currencyUnit) 转换为目标货币
     const convertedBalance = cryptoToUsdBalance * exchangeRates[currencyUnit];
-    console.log(`最终转换后的余额: `, convertedBalance); // 打印转换后的余额
-
-    const finalBalance = convertedBalance.toFixed(4); // 保留四位小数
-    return finalBalance;
+    return convertedBalance.toFixed(2); // Return converted balance
   };
 
-  // 转换余额（先乘以 priceUsd，再乘以货币兑美元汇率）
   const convertedBalance = getConvertedBalance(balance);
 
   return (
@@ -98,8 +86,7 @@ const AmountModal = ({
               {selectedCrypto} ({selectedCryptoChain})
             </Text>
           </View>
-          {/* 显示余额和相关信息 */}
-          <View style={{ marginBottom: 15 }} />
+
           <Text style={TransactionsScreenStyle.modalTitle}>
             {t("Enter the amount to send:")}
           </Text>
@@ -110,20 +97,17 @@ const AmountModal = ({
                 TransactionsScreenStyle.amountInput,
                 {
                   color: isDarkMode ? "#ffffff" : "#000000",
-                  backgroundColor: "transparent", // 去掉背景颜色
-                  fontSize: 30, // 设置大字号
-                  textAlign: "center", // 输入的文本居中
-                  fontWeight: "bold", // 设置粗体字
+                  backgroundColor: "transparent",
+                  fontSize: 30,
+                  textAlign: "center",
+                  fontWeight: "bold",
                 },
               ]}
               placeholder={t("Enter Amount")}
               placeholderTextColor={isDarkMode ? "#808080" : "#cccccc"}
               keyboardType="numeric"
               onChangeText={(text) => {
-                // Normalize the input by removing leading zeros
                 let normalizedText = text.replace(/^0+(?!\.|$)/, "");
-
-                // Allow only valid decimal numbers with up to 10 decimal places
                 const regex = /^\d*\.?\d{0,10}$/;
                 if (regex.test(normalizedText)) {
                   setAmount(normalizedText);
@@ -131,7 +115,7 @@ const AmountModal = ({
               }}
               value={amount}
               autoFocus={true}
-              caretHidden={true} // 隐藏光标
+              caretHidden={true}
             />
             <Text style={TransactionsScreenStyle.balanceModalSubtitle}>
               {t("Balance")}: {balance} {selectedCrypto}
@@ -148,9 +132,8 @@ const AmountModal = ({
           >
             <View style={{ justifyContent: "flex-start" }}>
               <Text style={TransactionsScreenStyle.balanceSubtitle}>
-                {currencyUnit} : {convertedBalance} {/* 显示转换后的余额 */}
+                {currencyUnit}: {convertedBalance}
               </Text>
-              {/* 当用户输入的金额大于余额时显示余额不足 */}
               {parseFloat(amount) > parseFloat(balance) + parseFloat(fee) && (
                 <Text
                   style={[
@@ -185,7 +168,7 @@ const AmountModal = ({
                 },
               ]}
               onPress={handleNextAfterAmount}
-              disabled={isAmountValid} //测试使用
+              disabled={isAmountValid}
             >
               <Text style={TransactionsScreenStyle.submitButtonText}>
                 {t("Next")}
@@ -193,9 +176,7 @@ const AmountModal = ({
             </TouchableOpacity>
             <TouchableOpacity
               style={TransactionsScreenStyle.cancelButton}
-              onPress={() => {
-                onRequestClose();
-              }}
+              onPress={onRequestClose}
             >
               <Text style={TransactionsScreenStyle.cancelButtonText}>
                 {t("Back")}
