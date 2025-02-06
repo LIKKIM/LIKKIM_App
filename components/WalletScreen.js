@@ -1547,10 +1547,7 @@ function WalletScreen({ route, navigation }) {
       return total + convertedBalance;
     }, 0);
 
-    // 确保 totalBalance 是数字，并避免 NaN 或 undefined
-    const numericTotalBalance = isNaN(totalBalance) ? 0 : totalBalance;
-
-    return numericTotalBalance.toFixed(2); // 转换为小数点后两位
+    return totalBalance.toFixed(2);
   };
 
   const animatedCardStyle = (index) => {

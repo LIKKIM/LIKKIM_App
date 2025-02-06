@@ -1082,7 +1082,7 @@ function MyColdWalletScreen() {
   // 删除钱包的具体操作
   const deleteWallet = async () => {
     try {
-      // 从存储中获取 cryptoCards 数据
+      // 先从存储中获取 cryptoCards 数据
       const cryptoCardsData = await AsyncStorage.getItem("cryptoCards");
       const cryptoCards = JSON.parse(cryptoCardsData);
 
@@ -1091,21 +1091,7 @@ function MyColdWalletScreen() {
         // 执行删除钱包的操作
         await AsyncStorage.removeItem("cryptoCards");
         setCryptoCards([]); // 清空应用状态中的钱包数据
-        setVerifiedDevices([]); // 清空已验证的设备列表
-        await AsyncStorage.setItem("verifiedDevices", JSON.stringify([])); // 确保已验证设备被清空
-        console.log("钱包数据已删除");
-
-        // 取消所有已连接的蓝牙设备
-        if (bleManagerRef.current) {
-          const connectedDevices = await bleManagerRef.current.connectedDevices(
-            [serviceUUID]
-          );
-          for (const device of connectedDevices) {
-            await device.cancelConnection(); // 断开所有连接的设备
-            console.log(`已断开与设备 ${device.id} 的连接`);
-          }
-        }
-
+        setVerifiedDevices([]);
         // 显示成功信息
         Alert.alert(
           t("Success"),
@@ -1113,7 +1099,7 @@ function MyColdWalletScreen() {
         );
         navigation.goBack(); // 返回上一页或跳转到登录界面等
       } else {
-        // 如果没有钱包数据，提示用户
+        // 如果没有钱包数据，提示用户 这里以后需要国际化
         Alert.alert(t("No Wallet"), t("No wallet available to delete."));
       }
     } catch (error) {
