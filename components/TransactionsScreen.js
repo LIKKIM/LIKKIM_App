@@ -1731,17 +1731,17 @@ function TransactionsScreen() {
                 </Text>
                 <Text style={TransactionsScreenStyle.transactionText}>
                   <Text style={{ fontWeight: "bold" }}>
-                    {t("Detected Network")}:
-                  </Text>
-                  {"\n"}
-                  {` ${detectedNetwork}`}
-                </Text>
-                <Text style={TransactionsScreenStyle.transactionText}>
-                  <Text style={{ fontWeight: "bold" }}>
                     {t("Transaction Fee")}:
                   </Text>
                   {"\n"}
                   {` ${transactionFee} ${selectedCrypto}`}
+                </Text>
+                <Text style={TransactionsScreenStyle.transactionText}>
+                  <Text style={{ fontWeight: "bold" }}>
+                    {t("Detected Network")}:
+                  </Text>
+                  {"\n"}
+                  {` ${detectedNetwork}`}
                 </Text>
               </ScrollView>
 
