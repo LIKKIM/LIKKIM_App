@@ -352,11 +352,6 @@ function WalletScreen({ route, navigation }) {
 
   const [bleVisible, setBleVisible] = useState(false); // New state for Bluetooth modal
 
-  // 函数获取指定卡的余额
-  const getCardBalance = (cardShortName) => {
-    const card = cryptoCards.find((c) => c.shortName === cardShortName);
-    return card ? card.balance : "Card not found";
-  };
   // 使用最新的价格来计算最终余额
   const getConvertedBalance = (cardBalance, cardShortName) => {
     const rate = exchangeRates[currencyUnit]; // 当前法定货币的汇率
