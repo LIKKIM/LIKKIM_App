@@ -169,7 +169,7 @@ const AmountModal = ({
                 },
               ]}
               onPress={handleNextAfterAmount}
-              disabled={isAmountValid}
+              disabled={!isAmountValid}
             >
               <Text style={TransactionsScreenStyle.submitButtonText}>
                 {t("Next")}
