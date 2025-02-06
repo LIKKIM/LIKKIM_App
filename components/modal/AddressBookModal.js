@@ -106,39 +106,59 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
     );
   };
 
+  // 在组件最上方增加一个状态变量，用于记录编辑中的条目 id
+  const [editingId, setEditingId] = useState(null);
+
   const handleEdit = (id) => {
     const addressToEdit = savedAddresses.find((item) => item.id === id);
     if (addressToEdit) {
+      setEditingId(id); // 记录正在编辑的条目 id
       setNewNetwork(addressToEdit.network);
       setNewName(addressToEdit.name);
       setNewAddress(addressToEdit.address);
       setIsAddingAddress(true); // 切换到添加/编辑视图
       setDropdownVisible(null);
-      // handleDelete(id); // 不再在这里删除，而是等待用户保存编辑后处理
     }
   };
 
   const handleSaveAddress = () => {
     if (newNetwork && newName && newAddress) {
-      const newEntry = {
-        id: Date.now().toString(), // 使用时间戳作为唯一ID
-        network: newNetwork,
-        name: newName,
-        address: newAddress,
-      };
-      const updatedAddresses = savedAddresses.filter(
-        (item) => item.id !== newEntry.id
-      ); // 先移除旧的地址
-      updatedAddresses.push(newEntry); // 添加更新后的新地址
+      let updatedAddresses = [];
+      if (editingId) {
+        // 编辑模式：遍历数组，更新对应条目
+        updatedAddresses = savedAddresses.map((item) => {
+          if (item.id === editingId) {
+            return {
+              id: editingId, // 保持原来的 id
+              network: newNetwork,
+              name: newName,
+              address: newAddress,
+            };
+          }
+          return item;
+        });
+      } else {
+        // 新建模式：生成新条目
+        const newEntry = {
+          id: Date.now().toString(), // 使用时间戳作为唯一 id
+          network: newNetwork,
+          name: newName,
+          address: newAddress,
+        };
+        updatedAddresses = [...savedAddresses, newEntry];
+      }
+
       setSavedAddresses(updatedAddresses);
       saveAddressesToStorage(updatedAddresses);
-      // 清空输入框
+
+      // 清空输入框和编辑状态
       setNewNetwork("");
       setNewName("");
       setNewAddress("");
+      setEditingId(null); // 清空编辑标记
       setIsAddingAddress(false); // 返回地址簿视图
     } else {
-      console.log("Please fill all fields"); // 添加一个提示，以确保所有字段都填写
+      console.log("Please fill all fields"); // 提示用户填写所有字段
     }
   };
 
