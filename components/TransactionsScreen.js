@@ -1668,6 +1668,7 @@ function TransactionsScreen() {
           selectedCrypto={selectedCrypto}
           selectedCryptoIcon={selectedCryptoIcon}
           selectedCryptoChain={selectedCryptoChain}
+          currencyUnit={currencyUnit}
         />
 
         {/* 交易确认的 Modal */}
