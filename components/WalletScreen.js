@@ -9,14 +9,10 @@ import React, {
 import {
   View,
   Text,
-  Image,
   TouchableOpacity,
-  Modal,
-  ImageBackground,
   Animated,
   Easing,
   Platform,
-  ScrollView,
   RefreshControl,
   Clipboard,
   TouchableWithoutFeedback,
@@ -312,7 +308,7 @@ function WalletScreen({ route, navigation }) {
     };
 
     fetchPriceChanges(); // 调用刷新函数
-  }, [cryptoCards]); // 依赖于 cryptoCards 的更新
+  }, [cryptoCards]);
 
   const bleManagerRef = useRef(null);
 
