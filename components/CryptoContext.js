@@ -109,7 +109,7 @@ export const CryptoProvider = ({ children }) => {
   };
 
   const updateCryptoAddress = (shortName, newAddress) => {
-    const supportedChains = ["ETH", "BTC", "SOL", "BSC"];
+    const supportedChains = ["ETH", "BTC", "SOL"];
 
     if (!supportedChains.includes(shortName)) {
       // Update address for unsupported chains without adding to wallet screen
