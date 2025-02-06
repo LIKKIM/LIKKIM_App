@@ -1528,34 +1528,19 @@ function WalletScreen({ route, navigation }) {
   };
 
   const calculateTotalBalance = () => {
-    const totalBalance = cryptoCards.reduce((total, card, index) => {
-      // 确保 card 是有效对象
+    const totalBalance = cryptoCards.reduce((total, card) => {
       if (!card || typeof card.balance === "undefined") {
-        // 打印出跳过的卡片的所有信息
-        console.warn(`Skipping invalid card at index ${index}`);
-        console.log(`Skipping invalid card at index ${index}:`, card); // 打印卡片详细信息
         return total; // 跳过无效项
       }
 
-      // 打印 total, card 和 index
-      console.log(`Total:`, total);
-      console.log(`Card:`, card);
-      console.log(`Index:`, index);
-
-      // 获取转换后的余额
       const convertedBalance = parseFloat(
         getConvertedBalance(card.balance, card.shortName)
       );
 
-      // 累加总余额
       return total + convertedBalance;
     }, 0);
 
-    // 打印计算的总余额
-    console.log("Total Balance before formatting:", totalBalance);
-
-    // 返回总余额，并格式化为小数点后两位
-    return totalBalance.toFixed(2);
+    return totalBalance.toFixed(2); // 返回格式化后的总余额
   };
 
   const animatedCardStyle = (index) => {
