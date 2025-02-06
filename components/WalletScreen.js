@@ -302,7 +302,7 @@ function WalletScreen({ route, navigation }) {
         setRefreshing(false);
       }
     };
-
+    // 查询数字货币余额 查询余额
     const fetchWalletBalance = async () => {
       try {
         for (let card of cryptoCards) {
