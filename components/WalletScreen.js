@@ -266,10 +266,7 @@ function WalletScreen({ route, navigation }) {
     setRefreshing(true);
 
     const fetchPriceChanges = async () => {
-      if (cryptoCards.length === 0) {
-        setRefreshing(false);
-        return;
-      }
+      if (cryptoCards.length === 0) return; // 没有卡片时不请求
 
       const instIds = cryptoCards
         .map((card) => `${card.shortName}-USD`)
@@ -284,17 +281,32 @@ function WalletScreen({ route, navigation }) {
         if (data.code === 0 && data.data) {
           const changes = {};
 
+          // 解析返回的 'data' 对象，按币种进行更新
           Object.keys(data.data).forEach((key) => {
-            const shortName = key.replace("$", "").split("-")[0];
+            const shortName = key.replace("$", "").split("-")[0]; // 提取币种名称
             const ticker = data.data[key];
 
             changes[shortName] = {
-              priceChange: ticker.last || "0",
-              percentageChange: ticker.changePercent || "0",
+              priceChange: ticker.last || "0", // 最新价格
+              percentageChange: ticker.changePercent || "0", // 百分比变化
             };
           });
 
-          setPriceChanges(changes);
+          setPriceChanges(changes); // 更新状态
+
+          // 更新 cryptoCards 中的 priceUsd
+          setCryptoCards((prevCards) => {
+            return prevCards.map((card) => {
+              // 如果 priceChanges 中有相应的币种价格，更新该卡片的 priceUsd
+              if (changes[card.shortName]) {
+                return {
+                  ...card,
+                  priceUsd: changes[card.shortName].priceChange, // 更新价格
+                };
+              }
+              return card;
+            });
+          });
         }
       } catch (error) {
         console.log("Error fetching price changes:", error);
@@ -302,6 +314,7 @@ function WalletScreen({ route, navigation }) {
         setRefreshing(false);
       }
     };
+
     // 查询数字货币余额 查询余额
     const fetchWalletBalance = async () => {
       try {
@@ -1117,7 +1130,7 @@ function WalletScreen({ route, navigation }) {
       const instIds = cryptoCards
         .map((card) => `${card.shortName}-USD`)
         .join(",");
-
+      //bugging
       try {
         const response = await fetch(
           `https://df.likkim.com/api/market/index-tickers?instId=${instIds}`
