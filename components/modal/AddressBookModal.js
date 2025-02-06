@@ -420,11 +420,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                         {/* TextInput 输入框 */}
                         <TextInput
                           style={{
-                            color:
-                              newNetwork &&
-                              filteredNetworks.includes(newNetwork)
-                                ? styles.Text.color
-                                : "#ccc",
+                            color: isDarkMode ? "#ddd" : "#000", // 正确的写法
                             flex: 1, // 使输入框占满宽度
                           }}
                           value={newNetwork}
