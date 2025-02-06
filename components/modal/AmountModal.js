@@ -34,11 +34,14 @@ const AmountModal = ({
   exchangeRates,
 }) => {
   // 简化版的余额转换，只乘以货币兑美元汇率
-  const getConvertedBalance = (cardBalance, cardShortName) => {
-    const cryptoToUsdRate = exchangeRates[cardShortName] || 1; // 如果没有汇率，则默认为1
+  const getConvertedBalance = (cardBalance) => {
+    // 打印汇率值，用于调试
+    console.log(`汇率 (${currencyUnit}): `, exchangeRates[currencyUnit]);
 
-    const usdBalance = cardBalance * cryptoToUsdRate; // 直接计算美元值
-    const finalBalance = usdBalance.toFixed(2); // 保留两位小数
+    const convertedBalance = cardBalance * exchangeRates[currencyUnit]; // 直接计算美元值
+    console.log(`计算后的余额: `, convertedBalance); // 打印计算后的余额
+
+    const finalBalance = convertedBalance.toFixed(4); // 保留两位小数
     return finalBalance;
   };
 
