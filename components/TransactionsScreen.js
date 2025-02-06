@@ -246,7 +246,7 @@ function TransactionsScreen() {
 
     loadTransactionHistory();
   }, []); // 依赖数组为空，确保此操作仅在组件挂载时执行一次
-  // 余额查询
+  // 数字货币余额查询
   useEffect(() => {
     if (amountModalVisible && !hasFetchedBalance) {
       const fetchTokenBalanceAndFee = async () => {
