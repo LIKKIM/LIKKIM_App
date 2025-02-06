@@ -343,7 +343,7 @@ const darkStyles = StyleSheet.create({
   },
   input: {
     color: "#fff",
-    backgroundColor: "#21201E",
+    backgroundColor: "#333",
   },
   placeholder: {
     color: "#999",
