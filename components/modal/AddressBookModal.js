@@ -278,7 +278,12 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                                   alignItems: "center", // 确保垂直居中对齐
                                 }}
                               >
-                                <Text style={styles.text}>
+                                <Text
+                                  style={{
+                                    color: isDarkMode ? "#fff" : "#000", // 动态颜色
+                                    fontSize: 16,
+                                  }}
+                                >
                                   {t("Network")}:&nbsp;
                                 </Text>
                                 <Image
@@ -286,10 +291,15 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                                   style={{
                                     width: 24, // 控制宽度
                                     height: 24, // 使高度与 Text 的行高接近
-                                    marginLeft: 5,
+                                    marginRight: 5,
                                   }}
                                 />
-                                <Text style={styles.modalSubtitle}>
+                                <Text
+                                  style={{
+                                    color: isDarkMode ? "#ccc" : "#333", // 动态颜色
+                                    fontSize: 14,
+                                  }}
+                                >
                                   {item.network}
                                 </Text>
                               </View>
@@ -302,22 +312,41 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                                   alignItems: "center",
                                 }}
                               >
-                                <Text style={styles.text}>
+                                <Text
+                                  style={{
+                                    color: isDarkMode ? "#fff" : "#000", // 动态颜色
+                                    fontSize: 16,
+                                  }}
+                                >
                                   {t("Name")}:&nbsp;
                                 </Text>
-                                <Text style={styles.modalSubtitle}>
+                                <Text
+                                  style={{
+                                    color: isDarkMode ? "#ccc" : "#333", // 动态颜色
+                                    fontSize: 14,
+                                  }}
+                                >
                                   {item.name}
                                 </Text>
                               </View>
 
                               {/* Address */}
                               <Text
-                                style={[styles.text, { flexShrink: 1 }]}
+                                style={{
+                                  color: isDarkMode ? "#fff" : "#000", // 动态颜色
+                                  fontSize: 16,
+                                  flexShrink: 1,
+                                }}
                                 numberOfLines={1}
                                 ellipsizeMode="middle"
                               >
                                 {t("Address")}:&nbsp;
-                                <Text style={styles.modalSubtitle}>
+                                <Text
+                                  style={{
+                                    color: isDarkMode ? "#ccc" : "#333", // 动态颜色
+                                    fontSize: 14,
+                                  }}
+                                >
                                   {item.address}
                                 </Text>
                               </Text>
