@@ -263,14 +263,11 @@ function WalletScreen({ route, navigation }) {
 
   // 定义下拉刷新执行的函数
   const onRefresh = React.useCallback(() => {
-    // 打印当前的 cryptoCards
-    // console.log("当前 cryptoCards:", cryptoCards);
-    setRefreshing(true); // 显示刷新状态
+    setRefreshing(true);
 
-    // 调用价格刷新函数
     const fetchPriceChanges = async () => {
       if (cryptoCards.length === 0) {
-        setRefreshing(false); // 没有卡片时直接停止刷新
+        setRefreshing(false);
         return;
       }
 
@@ -287,43 +284,32 @@ function WalletScreen({ route, navigation }) {
         if (data.code === 0 && data.data) {
           const changes = {};
 
-          // 更新每个卡片的价格变化数据
           Object.keys(data.data).forEach((key) => {
-            const shortName = key.replace("$", "").split("-")[0]; // 提取币种名称
+            const shortName = key.replace("$", "").split("-")[0];
             const ticker = data.data[key];
 
             changes[shortName] = {
-              priceChange: ticker.last || "0", // 最新价格
-              percentageChange: ticker.changePercent || "0", // 百分比变化
+              priceChange: ticker.last || "0",
+              percentageChange: ticker.changePercent || "0",
             };
           });
 
-          setPriceChanges(changes); // 更新状态
-          // console.log("Price changes updated:", changes);
+          setPriceChanges(changes);
         }
       } catch (error) {
         console.log("Error fetching price changes:", error);
       } finally {
-        setRefreshing(false); // 无论成功还是失败，都停止刷新动画
+        setRefreshing(false);
       }
     };
 
-    // 新增：发送 POST 请求获取钱包余额数据，使用 cryptoCards 中的 queryChainName 和 address 字段
     const fetchWalletBalance = async () => {
       try {
-        // 遍历 cryptoCards 数组，对每个卡片发起请求
         for (let card of cryptoCards) {
-          // 构造 POST 数据
           const postData = {
             chain: card.queryChainName,
             address: card.address,
           };
-
-          // 打印即将发送的 POST 数据
-          console.log(
-            `POST data for ${card.name} (${card.queryChainName}):`,
-            postData
-          );
 
           const response = await fetch(
             "https://bt.likkim.com/api/wallet/balance",
@@ -336,23 +322,14 @@ function WalletScreen({ route, navigation }) {
             }
           );
           const data = await response.json();
-          console.log(
-            `Wallet balance result for ${card.name} (${card.queryChainName}):`,
-            data
-          );
 
-          // 判断返回数据的 "name" 是否与 card.queryChainName 匹配
           if (data.code === "0" && data.data) {
             const { name, balance } = data.data;
 
-            // 以大小写不敏感方式比较 "name" 与 "card.queryChainName"
             if (name.toLowerCase() === card.queryChainName.toLowerCase()) {
-              // 更新匹配的卡片的 balance
               card.balance = balance;
 
-              // 更新 cryptoCards
               setCryptoCards((prevCards) => {
-                // 持久化更新
                 AsyncStorage.setItem("cryptoCards", JSON.stringify(prevCards));
                 return prevCards.map((prevCard) =>
                   prevCard.queryChainName.toLowerCase() ===
@@ -369,7 +346,6 @@ function WalletScreen({ route, navigation }) {
       }
     };
 
-    // 同时调用两个函数（可以根据需求调整调用顺序或是否并行执行）
     fetchPriceChanges();
     fetchWalletBalance();
   }, [cryptoCards]);
