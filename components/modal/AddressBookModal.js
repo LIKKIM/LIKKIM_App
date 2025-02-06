@@ -424,13 +424,14 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                               newNetwork &&
                               filteredNetworks.includes(newNetwork)
                                 ? styles.Text.color
-                                : "#000",
+                                : "#ccc",
                             flex: 1, // 使输入框占满宽度
                           }}
                           value={newNetwork}
                           onChangeText={(text) => {
                             setNewNetwork(text); // 更新输入内容
                             setSearchNetwork(text); // 更新搜索条件
+                            setNetworkDropdownVisible(true); // 用户输入时自动展开下拉框
                           }}
                           placeholder="Search Network" // 占位符
                           placeholderTextColor={isDarkMode ? "#ccc" : "#666"} // 保持占位符颜色
@@ -443,10 +444,11 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                           networkDropdownVisible ? "expand-less" : "expand-more"
                         }
                         size={24}
-                        color={isDarkMode ? "#fff" : "#000"} // 确保箭头颜色符合主题
+                        color={isDarkMode ? "#ddd" : "#676776"} // 确保箭头颜色符合主题
                       />
                     </TouchableOpacity>
 
+                    {/* 下拉框显示自动匹配的网络选项 */}
                     {networkDropdownVisible && (
                       <View style={{ width: "100%", marginBottom: 10 }}>
                         <ScrollView
@@ -454,38 +456,46 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                           showsVerticalScrollIndicator={true}
                           showsHorizontalScrollIndicator={false}
                         >
-                          {filteredNetworks.map((network) => (
-                            <TouchableOpacity
-                              key={network}
-                              onPress={() => {
-                                setNewNetwork(network);
-                                setNetworkDropdownVisible(false);
-                              }}
-                              style={{
-                                padding: 10,
-                                flexDirection: "row",
-                                alignItems: "center",
-                                backgroundColor:
-                                  network === newNetwork
-                                    ? styles.submitButton.backgroundColor
-                                    : styles.passwordInput.backgroundColor,
-                              }}
-                            >
-                              <Image
-                                source={networkImages[network]}
-                                style={{
-                                  width: 24,
-                                  height: 24,
-                                  marginRight: 8,
-                                  backgroundColor: "rgba(255, 255, 255, 0.2)",
-                                  borderRadius: 12,
+                          {/* 动态过滤匹配的网络 */}
+                          {filteredNetworks
+                            .filter(
+                              (network) =>
+                                network
+                                  .toLowerCase()
+                                  .includes(searchNetwork.toLowerCase()) // 根据用户输入过滤网络
+                            )
+                            .map((network) => (
+                              <TouchableOpacity
+                                key={network}
+                                onPress={() => {
+                                  setNewNetwork(network);
+                                  setNetworkDropdownVisible(false);
                                 }}
-                              />
-                              <Text style={{ color: styles.Text.color }}>
-                                {network}
-                              </Text>
-                            </TouchableOpacity>
-                          ))}
+                                style={{
+                                  padding: 10,
+                                  flexDirection: "row",
+                                  alignItems: "center",
+                                  backgroundColor:
+                                    network === newNetwork
+                                      ? styles.submitButton.backgroundColor
+                                      : styles.passwordInput.backgroundColor,
+                                }}
+                              >
+                                <Image
+                                  source={networkImages[network]}
+                                  style={{
+                                    width: 24,
+                                    height: 24,
+                                    marginRight: 8,
+                                    backgroundColor: "rgba(255, 255, 255, 0.2)",
+                                    borderRadius: 12,
+                                  }}
+                                />
+                                <Text style={{ color: styles.Text.color }}>
+                                  {network}
+                                </Text>
+                              </TouchableOpacity>
+                            ))}
                         </ScrollView>
                       </View>
                     )}
