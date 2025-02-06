@@ -311,11 +311,6 @@ function WalletScreen({ route, navigation }) {
             address: card.address,
           };
 
-          // 打印发送的 chain 和 address
-          console.log(
-            `Sending request for chain: ${postData.chain}, address: ${postData.address}`
-          );
-
           const response = await fetch(
             "https://bt.likkim.com/api/wallet/balance",
             {
@@ -327,12 +322,6 @@ function WalletScreen({ route, navigation }) {
             }
           );
           const data = await response.json();
-
-          // 打印查询余额返回的数据
-          console.log(
-            `Wallet balance response for ${postData.chain} - ${postData.address}:`,
-            data
-          );
 
           if (data.code === "0" && data.data) {
             const { name, balance } = data.data;
@@ -427,9 +416,9 @@ function WalletScreen({ route, navigation }) {
     return finalBalance;
   };
 
-  /*   useEffect(() => {
+  useEffect(() => {
     console.log("Updated cryptoCards:", cryptoCards);
-  }, [cryptoCards]); */
+  }, [cryptoCards]);
 
   useEffect(() => {
     setAddedCryptos(cryptoCards);
@@ -1540,10 +1529,9 @@ function WalletScreen({ route, navigation }) {
 
   const calculateTotalBalance = () => {
     const totalBalance = cryptoCards.reduce((total, card) => {
-      const convertedBalance =
-        card.balance && !isNaN(card.balance)
-          ? getConvertedBalance(card.balance, card.shortName)
-          : 0;
+      const convertedBalance = parseFloat(
+        getConvertedBalance(card.balance, card.shortName)
+      );
       return total + convertedBalance;
     }, 0);
 
