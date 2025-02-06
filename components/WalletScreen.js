@@ -1528,13 +1528,31 @@ function WalletScreen({ route, navigation }) {
   };
 
   const calculateTotalBalance = () => {
-    const totalBalance = cryptoCards.reduce((total, card) => {
+    const totalBalance = cryptoCards.reduce((total, card, index) => {
+      // 确保 card 是有效对象
+      if (!card || typeof card.balance === "undefined") {
+        console.warn(`Skipping invalid card at index ${index}`);
+        return total; // 跳过无效项
+      }
+
+      // 获取转换后的余额
       const convertedBalance = parseFloat(
         getConvertedBalance(card.balance, card.shortName)
       );
+
+      // 打印 getConvertedBalance 返回的值
+      console.log(`Card ${index} balance:`, card.balance);
+      console.log(`Card ${index} shortName:`, card.shortName);
+      console.log(`Converted balance for card ${index}:`, convertedBalance);
+
+      // 累加总余额
       return total + convertedBalance;
     }, 0);
 
+    // 打印计算的总余额
+    console.log("Total Balance before formatting:", totalBalance);
+
+    // 返回总余额，并格式化为小数点后两位
     return totalBalance.toFixed(2);
   };
 
