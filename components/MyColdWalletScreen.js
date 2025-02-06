@@ -5,8 +5,6 @@ import {
   View,
   Text,
   Modal,
-  Image,
-  FlatList,
   TouchableOpacity,
   ScrollView,
   Platform,
