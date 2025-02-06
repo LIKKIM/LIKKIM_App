@@ -38,6 +38,26 @@ const WalletContent = (props) => {
     cardInfoVisible,
   } = props;
 
+  // 格式化余额：根据余额的值保留小数位数
+  const formatBalance = (balance) => {
+    const num = parseFloat(balance);
+
+    if (num === 0) {
+      return "0"; // 如果余额为0，返回0
+    }
+
+    if (Number.isInteger(num)) {
+      return num.toString(); // 如果余额是整数，返回整数值
+    }
+
+    // 计算小数部分的位数，最多保留7位
+    const decimalPlaces = Math.min(
+      7,
+      (num.toString().split(".")[1] || "").length
+    );
+    return num.toFixed(decimalPlaces); // 保留小数部分
+  };
+
   // 将重复的“All Chain 按钮”部分提取成一个局部函数
   const renderChainButton = () => {
     return (
@@ -117,11 +137,10 @@ const WalletContent = (props) => {
       ]}
       onScroll={(event) => {
         if (!modalVisible) {
-          // 请确保 scrollYOffset 在父组件中处理
           props.scrollYOffset.current = event.nativeEvent.contentOffset.y;
         }
       }}
-      scrollEventThrottle={16} // 滚动事件节流
+      scrollEventThrottle={16}
       refreshControl={
         cryptoCards.length > 0 && (
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
@@ -159,7 +178,6 @@ const WalletContent = (props) => {
       </Animated.View>
 
       {cryptoCards.length === 0 &&
-        // 确保 EmptyWalletView 组件已经导入
         (props.EmptyWalletViewComponent ? (
           <props.EmptyWalletViewComponent
             isDarkMode={isDarkMode}
@@ -289,7 +307,7 @@ const WalletContent = (props) => {
                         isBlackText && { color: "#121518" },
                       ]}
                     >
-                      {`${card.balance} ${card.shortName}`}
+                      {`${formatBalance(card.balance)}  ${card.shortName}`}
                     </Text>
                     <View style={WalletScreenStyle.priceChangeView}>
                       <Text style={{ color: textColor, fontWeight: "bold" }}>
@@ -336,7 +354,7 @@ const WalletContent = (props) => {
                           >
                             {`${
                               i === 0
-                                ? card.balance
+                                ? formatBalance(card.balance)
                                 : props.getConvertedBalance(
                                     card.balance,
                                     card.shortName
@@ -359,7 +377,7 @@ const WalletContent = (props) => {
   ) : (
     <View
       style={{
-        position: "absolute", // 使用绝对定位
+        position: "absolute",
         top: 0,
         width: 326,
       }}
@@ -368,7 +386,7 @@ const WalletContent = (props) => {
         <View
           style={{
             flexDirection: "row",
-            justifyContent: "flex-end", // 内容靠右对齐
+            justifyContent: "flex-end",
             alignItems: "flex-start",
           }}
         >
