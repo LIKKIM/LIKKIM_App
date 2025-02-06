@@ -256,7 +256,7 @@ const WalletContent = (props) => {
                             {
                               color: isBlackText ? "#333" : "#eee",
                               marginRight: 4,
-                              marginBottom: 4,
+                              marginBottom: 4, // 增加底部间距
                             },
                           ]}
                         >
@@ -265,7 +265,10 @@ const WalletContent = (props) => {
                       ) : (
                         <View
                           key={i}
-                          style={[WalletScreenStyle.chainContainer]}
+                          style={[
+                            WalletScreenStyle.chainContainer,
+                            { marginTop: 4 }, // 增加间距使其上下排列
+                          ]}
                         >
                           <Text
                             style={[
@@ -279,6 +282,7 @@ const WalletContent = (props) => {
                       )
                     )}
                   </View>
+
                   <Image
                     source={require("../../assets/CardBg/Logo.png")}
                     style={{
