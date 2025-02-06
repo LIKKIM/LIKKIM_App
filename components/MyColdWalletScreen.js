@@ -480,48 +480,6 @@ function MyColdWalletScreen() {
     return crc & 0xffff; // 确保CRC值是16位
   }
 
-  const sendStartCommand = async (device) => {
-    // 命令数据，未包含CRC校验码
-    const commandData = new Uint8Array([0xf1, 0x01, 0x02]);
-
-    // 使用CRC-16-Modbus算法计算CRC校验码
-    const crc = crc16Modbus(commandData);
-
-    // 将CRC校验码转换为高位在前，低位在后的格式
-    const crcHighByte = (crc >> 8) & 0xff;
-    const crcLowByte = crc & 0xff;
-
-    // 将原始命令数据、CRC校验码以及结束符组合成最终的命令
-    const finalCommand = new Uint8Array([
-      ...commandData,
-      crcLowByte,
-      crcHighByte,
-      0x0d, // 结束符
-      0x0a, // 结束符
-    ]);
-
-    // 将最终的命令转换为Base64编码
-    const base64Command = base64.fromByteArray(finalCommand);
-
-    // 打印最终的命令数据（十六进制表示）
-    console.log(
-      `Final command: ${Array.from(finalCommand)
-        .map((byte) => byte.toString(16).padStart(2, "0"))
-        .join(" ")}`
-    );
-
-    try {
-      await device.writeCharacteristicWithResponseForService(
-        serviceUUID, // BLE服务的UUID
-        writeCharacteristicUUID, // 可写特性的UUID
-        base64Command // 最终的命令数据的Base64编码
-      );
-      console.log("启动验证命令已发送");
-    } catch (error) {
-      console.log("发送启动命令失败", error);
-    }
-  };
-
   const reconnectDevice = async (device) => {
     try {
       console.log(`正在尝试重新连接设备: ${device.id}`);
