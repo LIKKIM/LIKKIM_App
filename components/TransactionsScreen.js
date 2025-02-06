@@ -57,9 +57,7 @@ function TransactionsScreen() {
     updateCryptoAddress,
     usdtCrypto,
     initialAdditionalCryptos,
-    additionalCryptos,
-    cryptoCount,
-    setCryptoCount,
+    exchangeRates,
     currencyUnit,
     addedCryptos,
     setAddedCryptos,
@@ -1660,7 +1658,6 @@ function TransactionsScreen() {
           setAmount={setAmount}
           balance={balance} // 使用 balance 而不是 selectedCryptoBalance
           fee={fee}
-          valueUsd={valueUsd}
           isAmountValid={isAmountValid}
           buttonBackgroundColor={buttonBackgroundColor}
           disabledButtonBackgroundColor={disabledButtonBackgroundColor}
@@ -1669,6 +1666,7 @@ function TransactionsScreen() {
           selectedCryptoIcon={selectedCryptoIcon}
           selectedCryptoChain={selectedCryptoChain}
           currencyUnit={currencyUnit}
+          exchangeRates={exchangeRates}
         />
 
         {/* 交易确认的 Modal */}

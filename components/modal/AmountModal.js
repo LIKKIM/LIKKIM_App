@@ -22,7 +22,6 @@ const AmountModal = ({
   setAmount,
   balance,
   fee,
-  valueUsd,
   isAmountValid,
   buttonBackgroundColor,
   disabledButtonBackgroundColor,
@@ -31,6 +30,7 @@ const AmountModal = ({
   selectedCryptoChain,
   selectedCryptoIcon,
   currencyUnit,
+  exchangeRates,
 }) => {
   return (
     <Modal
@@ -121,7 +121,7 @@ const AmountModal = ({
           >
             <View style={{ justifyContent: "flex-start" }}>
               <Text style={TransactionsScreenStyle.balanceSubtitle}>
-                {currencyUnit} : {valueUsd}
+                {currencyUnit} : {balance}
               </Text>
 
               {/* 当用户输入的金额大于余额时显示余额不足 */}
