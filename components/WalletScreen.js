@@ -932,7 +932,7 @@ function WalletScreen({ route, navigation }) {
       async (error, characteristic) => {
         if (error) {
           console.log("监听设备响应时出错:", error.message);
-          return;
+          // return;
         }
 
         const receivedData = Buffer.from(characteristic.value, "base64");
