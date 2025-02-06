@@ -493,7 +493,7 @@ const WalletScreenStyles = (isDarkMode) => {
     },
     cardBalanceCenter: {
       color: "#fff",
-      fontSize: 28,
+      fontSize: 25,
       fontWeight: "bold",
       marginBottom: 8,
     },
