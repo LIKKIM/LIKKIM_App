@@ -13,12 +13,12 @@ import {
   Platform,
   Clipboard,
   TouchableWithoutFeedback,
-  Alert, // 引入 Alert 组件
+  Alert,
 } from "react-native";
 import { BlurView } from "expo-blur";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useTranslation } from "react-i18next"; // 导入 useTranslation
+import { useTranslation } from "react-i18next";
 
 function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
   const [searchAddress, setSearchAddress] = useState("");
@@ -29,7 +29,8 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
   const [networkDropdownVisible, setNetworkDropdownVisible] = useState(false);
   const [dropdownVisible, setDropdownVisible] = useState(null);
   const [savedAddresses, setSavedAddresses] = useState([]);
-  const { t } = useTranslation(); // 获取翻译函数
+  const { t } = useTranslation();
+  const [searchNetwork, setSearchNetwork] = useState("");
 
   useEffect(() => {
     if (visible) {
@@ -206,6 +207,9 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
     "Aptos",
     "SUI",
   ].sort();
+  const filteredNetworks = networks.filter((network) =>
+    network.toLowerCase().includes(searchNetwork.toLowerCase())
+  );
 
   return (
     <Modal
@@ -392,44 +396,65 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                       }
                     >
                       <View
-                        style={{ flexDirection: "row", alignItems: "center" }}
+                        style={{
+                          flexDirection: "row",
+                          alignItems: "center",
+                          flex: 1,
+                        }}
                       >
-                        {newNetwork && (
-                          <Image
-                            source={networkImages[newNetwork]}
-                            style={{
-                              width: 24,
-                              height: 24,
-                              marginRight: 10,
-                              backgroundColor: "rgba(255, 255, 255, 0.2)",
-                              borderRadius: 12,
-                            }}
-                          />
-                        )}
-                        <Text
+                        {/* 只有当 newNetwork 完全匹配且有值时才显示图标 */}
+                        {newNetwork &&
+                          filteredNetworks.includes(newNetwork) && (
+                            <Image
+                              source={networkImages[newNetwork]}
+                              style={{
+                                width: 24,
+                                height: 24,
+                                marginRight: 10,
+                                backgroundColor: "rgba(255, 255, 255, 0.2)",
+                                borderRadius: 12,
+                              }}
+                            />
+                          )}
+
+                        {/* TextInput 输入框 */}
+                        <TextInput
                           style={{
-                            color: newNetwork ? styles.Text.color : "#ccc",
+                            color:
+                              newNetwork &&
+                              filteredNetworks.includes(newNetwork)
+                                ? styles.Text.color
+                                : "#000",
+                            flex: 1, // 使输入框占满宽度
                           }}
-                        >
-                          {newNetwork || "Select Network"}
-                        </Text>
+                          value={newNetwork}
+                          onChangeText={(text) => {
+                            setNewNetwork(text); // 更新输入内容
+                            setSearchNetwork(text); // 更新搜索条件
+                          }}
+                          placeholder="Search Network" // 占位符
+                          placeholderTextColor={isDarkMode ? "#ccc" : "#666"} // 保持占位符颜色
+                        />
                       </View>
+
+                      {/* 箭头图标保持原有样式 */}
                       <Icon
                         name={
                           networkDropdownVisible ? "expand-less" : "expand-more"
                         }
                         size={24}
-                        color={styles.Text.color}
+                        color={isDarkMode ? "#fff" : "#000"} // 确保箭头颜色符合主题
                       />
                     </TouchableOpacity>
+
                     {networkDropdownVisible && (
                       <View style={{ width: "100%", marginBottom: 10 }}>
                         <ScrollView
                           style={{ maxHeight: 200, borderRadius: 10 }}
-                          showsVerticalScrollIndicator={true} // 确保在垂直滚动时显示滚动条
-                          showsHorizontalScrollIndicator={false} // 如果不需要水平滚动条可以设置为false
+                          showsVerticalScrollIndicator={true}
+                          showsHorizontalScrollIndicator={false}
                         >
-                          {networks.map((network) => (
+                          {filteredNetworks.map((network) => (
                             <TouchableOpacity
                               key={network}
                               onPress={() => {
@@ -464,6 +489,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                         </ScrollView>
                       </View>
                     )}
+
                     {!networkDropdownVisible && (
                       <>
                         <TextInput
