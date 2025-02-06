@@ -1,4 +1,5 @@
 // AmountModal.js
+
 import React from "react";
 import {
   Modal,
@@ -32,6 +33,18 @@ const AmountModal = ({
   currencyUnit,
   exchangeRates,
 }) => {
+  // 简化版的余额转换，只乘以货币兑美元汇率
+  const getConvertedBalance = (cardBalance, cardShortName) => {
+    const cryptoToUsdRate = exchangeRates[cardShortName] || 1; // 如果没有汇率，则默认为1
+
+    const usdBalance = cardBalance * cryptoToUsdRate; // 直接计算美元值
+    const finalBalance = usdBalance.toFixed(2); // 保留两位小数
+    return finalBalance;
+  };
+
+  // 转换余额（乘上货币兑美元汇率）
+  const convertedBalance = getConvertedBalance(balance, selectedCrypto);
+
   return (
     <Modal
       animationType="slide"
@@ -65,14 +78,8 @@ const AmountModal = ({
               {selectedCrypto} ({selectedCryptoChain})
             </Text>
           </View>
-
           {/* 显示余额和相关信息 */}
-          <View style={{ marginBottom: 15 }}>
-            {/*  <Text style={TransactionsScreenStyle.infoText}>
-              {t("Price per unit in USD")}: ${priceUsd}
-            </Text> */}
-          </View>
-
+          <View style={{ marginBottom: 15 }} />
           <Text style={TransactionsScreenStyle.modalTitle}>
             {t("Enter the amount to send:")}
           </Text>
@@ -121,9 +128,8 @@ const AmountModal = ({
           >
             <View style={{ justifyContent: "flex-start" }}>
               <Text style={TransactionsScreenStyle.balanceSubtitle}>
-                {currencyUnit} : {balance}
+                {currencyUnit} : {convertedBalance} {/* 显示转换后的余额 */}
               </Text>
-
               {/* 当用户输入的金额大于余额时显示余额不足 */}
               {parseFloat(amount) > parseFloat(balance) + parseFloat(fee) && (
                 <Text
@@ -160,7 +166,6 @@ const AmountModal = ({
               ]}
               onPress={handleNextAfterAmount}
               disabled={isAmountValid} //测试使用
-              // disabled={!isAmountValid}
             >
               <Text style={TransactionsScreenStyle.submitButtonText}>
                 {t("Next")}
