@@ -1656,17 +1656,19 @@ function TransactionsScreen() {
           isDarkMode={isDarkMode}
           amount={amount}
           setAmount={setAmount}
-          balance={balance} // 使用 balance 而不是 selectedCryptoBalance
+          balance={balance}
           fee={fee}
           isAmountValid={isAmountValid}
           buttonBackgroundColor={buttonBackgroundColor}
           disabledButtonBackgroundColor={disabledButtonBackgroundColor}
           handleNextAfterAmount={handleNextAfterAmount}
           selectedCrypto={selectedCrypto}
-          selectedCryptoIcon={selectedCryptoIcon}
           selectedCryptoChain={selectedCryptoChain}
+          selectedCryptoIcon={selectedCryptoIcon}
           currencyUnit={currencyUnit}
           exchangeRates={exchangeRates}
+          cryptoCards={cryptoCards}
+          selectedCryptoName={selectedCryptoName} // 传递 selectedCryptoName
         />
 
         {/* 交易确认的 Modal */}

@@ -32,21 +32,38 @@ const AmountModal = ({
   selectedCryptoIcon,
   currencyUnit,
   exchangeRates,
+  cryptoCards,
+  selectedCryptoName,
 }) => {
-  // 简化版的余额转换，只乘以货币兑美元汇率
+  // 根据 selectedCryptoName 或 selectedCrypto 查找对应的加密货币信息
+  const selectedCryptoInfo = cryptoCards.find(
+    (crypto) =>
+      crypto.shortName === selectedCrypto || crypto.name === selectedCryptoName
+  );
+
+  // 确保找到了对应的加密货币信息
+  const priceUsd = selectedCryptoInfo ? selectedCryptoInfo.priceUsd : 1;
+
+  // 简化版的余额转换，先乘以 priceUsd，再乘以货币兑美元汇率
   const getConvertedBalance = (cardBalance) => {
     // 打印汇率值，用于调试
     console.log(`汇率 (${currencyUnit}): `, exchangeRates[currencyUnit]);
+    console.log(`价格 (priceUsd): `, priceUsd);
 
-    const convertedBalance = cardBalance * exchangeRates[currencyUnit]; // 直接计算美元值
-    console.log(`计算后的余额: `, convertedBalance); // 打印计算后的余额
+    // 先根据加密货币的价格 (priceUsd) 转换为美元值
+    const cryptoToUsdBalance = cardBalance * priceUsd;
+    console.log(`计算后的美元余额: `, cryptoToUsdBalance);
 
-    const finalBalance = convertedBalance.toFixed(4); // 保留两位小数
+    // 然后根据法定货币的汇率 (currencyUnit) 转换为目标货币
+    const convertedBalance = cryptoToUsdBalance * exchangeRates[currencyUnit];
+    console.log(`最终转换后的余额: `, convertedBalance); // 打印转换后的余额
+
+    const finalBalance = convertedBalance.toFixed(4); // 保留四位小数
     return finalBalance;
   };
 
-  // 转换余额（乘上货币兑美元汇率）
-  const convertedBalance = getConvertedBalance(balance, selectedCrypto);
+  // 转换余额（先乘以 priceUsd，再乘以货币兑美元汇率）
+  const convertedBalance = getConvertedBalance(balance);
 
   return (
     <Modal
