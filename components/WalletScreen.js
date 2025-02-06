@@ -340,6 +340,29 @@ function WalletScreen({ route, navigation }) {
             `Wallet balance result for ${card.name} (${card.queryChainName}):`,
             data
           );
+
+          // 判断返回数据的 "name" 是否与 card.queryChainName 匹配
+          if (data.code === "0" && data.data) {
+            const { name, balance } = data.data;
+
+            // 以大小写不敏感方式比较 "name" 与 "card.queryChainName"
+            if (name.toLowerCase() === card.queryChainName.toLowerCase()) {
+              // 更新匹配的卡片的 balance
+              card.balance = balance;
+
+              // 更新 cryptoCards
+              setCryptoCards((prevCards) => {
+                // 持久化更新
+                AsyncStorage.setItem("cryptoCards", JSON.stringify(prevCards));
+                return prevCards.map((prevCard) =>
+                  prevCard.queryChainName.toLowerCase() ===
+                  card.queryChainName.toLowerCase()
+                    ? { ...prevCard, balance: balance }
+                    : prevCard
+                );
+              });
+            }
+          }
         }
       } catch (error) {
         console.log("Error fetching wallet balance:", error);
