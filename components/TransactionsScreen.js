@@ -87,6 +87,7 @@ function TransactionsScreen() {
   const [selectedAddress, setSelectedAddress] = useState("");
   const [balance, setBalance] = useState("");
   const [valueUsd, setValueUsd] = useState("");
+  const [selectedCryptoName, setSelectedCryptoName] = useState(""); // 定义 selectedCryptoName 状态
   const [fee, setFee] = useState("");
   const [queryChainShortName, setQueryChainShortName] = useState("");
   const [priceUsd, setPriceUsd] = useState("");
@@ -357,14 +358,32 @@ function TransactionsScreen() {
   // 监听 initialAdditionalCryptos 的变化，更新 Modal 中的数据
   useEffect(() => {
     if (amountModalVisible) {
+      console.log("Amount Modal is visible, checking selected crypto...");
+
+      // 查找选中的加密货币对象
       const selected = initialAdditionalCryptos.find(
-        (crypto) => crypto.shortName === selectedCrypto
+        (crypto) =>
+          crypto.chain === selectedCryptoChain && crypto.name === selectedCrypto
       );
+
+      // 打印找到的加密货币对象
       if (selected) {
+        console.log("debug找到匹配的加密货币对象:", selected);
+
+        // 设置余额、价格等
         setBalance(selected.balance);
         setPriceUsd(selected.priceUsd);
         setValueUsd(selected.valueUsd);
         setFee(selected.fee);
+
+        // 打印设置的值
+        console.log("已设置以下值:");
+        console.log("Balance:", selected.balance);
+        console.log("Price in USD:", selected.priceUsd);
+        console.log("Value in USD:", selected.valueUsd);
+        console.log("Transaction Fee:", selected.fee);
+      } else {
+        console.log("未找到匹配的加密货币对象");
       }
     }
   }, [initialAdditionalCryptos, amountModalVisible]);
@@ -1393,6 +1412,7 @@ function TransactionsScreen() {
     setPriceUsd(crypto.priceUsd);
     setQueryChainShortName(crypto.queryChainShortName);
     setChainShortName(crypto.chainShortName);
+    setSelectedCryptoName(crypto.name);
     setIsVerifyingAddress(false);
     setModalVisible(false);
 
