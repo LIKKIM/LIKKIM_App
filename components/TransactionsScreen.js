@@ -1669,6 +1669,7 @@ function TransactionsScreen() {
           exchangeRates={exchangeRates}
           cryptoCards={cryptoCards}
           selectedCryptoName={selectedCryptoName} // 传递 selectedCryptoName
+          valueUsd={valueUsd} // 传递 valueUsd
         />
 
         {/* 交易确认的 Modal */}

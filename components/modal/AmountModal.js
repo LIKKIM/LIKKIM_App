@@ -34,6 +34,7 @@ const AmountModal = ({
   exchangeRates,
   cryptoCards,
   selectedCryptoName,
+  valueUsd,
 }) => {
   // Find selected crypto info by shortName or name
   const selectedCryptoInfo = cryptoCards.find(
