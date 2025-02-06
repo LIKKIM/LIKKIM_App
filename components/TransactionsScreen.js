@@ -68,6 +68,8 @@ function TransactionsScreen() {
     verifiedDevices,
     setVerifiedDevices,
     updateCryptoData,
+    cryptoCards,
+    setCryptoCards,
     transactionHistory,
     setTransactionHistory,
   } = useContext(CryptoContext);
@@ -246,143 +248,110 @@ function TransactionsScreen() {
 
     loadTransactionHistory();
   }, []); // 依赖数组为空，确保此操作仅在组件挂载时执行一次
-  // 数字货币余额查询
+  // 查询数字货币余额 查询余额
   useEffect(() => {
     if (amountModalVisible && !hasFetchedBalance) {
-      const fetchTokenBalanceAndFee = async () => {
+      const fetchWalletBalance = async () => {
         try {
-          // 根据 selectedCrypto 查找对应的加密货币对象
+          // 找到选中的加密货币对象
           const selectedCryptoObj = initialAdditionalCryptos.find(
             (crypto) => crypto.shortName === selectedCrypto
           );
 
           if (!selectedCryptoObj) {
-            throw new Error(`Crypto ${selectedCrypto} not found`);
+            console.log("未找到匹配的加密货币对象");
+            return;
           }
 
-          // 打印 selectedCryptoObj 的相关信息
-          console.log(`Selected Crypto: ${selectedCrypto}`);
-          console.log(
-            `chainShortName: ${selectedCryptoObj.queryChainShortName}`
-          );
-          console.log(`address: ${selectedCryptoObj.address}`);
+          // 循环遍历 cryptoCards，为选择的加密货币查询余额
+          for (let card of cryptoCards) {
+            // 打印 card.name 和 selectedCrypto
+            console.log(
+              `当前卡片的名称: ${card.name}, 选择的加密货币: ${selectedCrypto}`
+            );
+            // 打印 card.chain 和 selectedCryptoChain
+            console.log(
+              `当前卡片的链名称: ${card.chain}, 选择的链名称: ${selectedCryptoChain}`
+            );
 
-          // 查询代币余额
-          const balanceResponse = await fetch(
-            "https://bt.likkim.com/meridian/address/queryTokenBalance",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                chainShortName: selectedCrypto.shortName,
-                address: selectedCrypto.address,
-                protocolType: "token_20",
-              }),
+            // 只查询匹配的加密货币和链
+            if (
+              card.name === selectedCryptoObj.name &&
+              card.chain === selectedCryptoChain
+            ) {
+              console.log("条件满足，准备发送请求...");
+
+              const postData = {
+                chain: card.queryChainName,
+                address: card.address,
+              };
+
+              // 打印发送的 POST 数据
+              console.log("发送的 POST 数据:", postData);
+
+              const response = await fetch(
+                "https://bt.likkim.com/api/wallet/balance",
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify(postData),
+                }
+              );
+              const data = await response.json();
+
+              // 打印收到的响应数据
+              console.log("收到的响应数据:", data);
+
+              if (data.code === "0" && data.data) {
+                const { name, balance } = data.data;
+
+                // 打印响应数据中的名称和余额
+                console.log(`响应数据中的名称: ${name}, 余额: ${balance}`);
+
+                // 更新选择的加密货币余额
+                if (name.toLowerCase() === card.queryChainName.toLowerCase()) {
+                  card.balance = balance;
+
+                  setCryptoCards((prevCards) => {
+                    AsyncStorage.setItem(
+                      "cryptoCards",
+                      JSON.stringify(prevCards)
+                    );
+                    return prevCards.map((prevCard) =>
+                      prevCard.queryChainName.toLowerCase() ===
+                      card.queryChainName.toLowerCase()
+                        ? { ...prevCard, balance: balance }
+                        : prevCard
+                    );
+                  });
+                }
+              } else {
+                console.log("响应数据无效或错误代码:", data.code);
+              }
+              break; // 只查询匹配的卡片，查询完毕后跳出循环
+            } else {
+              console.log(
+                `卡片名称和链名称不匹配，跳过查询: ${card.name} - ${card.chain}`
+              );
             }
-          );
-
-          if (!balanceResponse.ok) {
-            throw new Error(`HTTP error! status: ${balanceResponse.status}`);
-          }
-
-          const balanceData = await balanceResponse.json();
-          console.log("Transaction 余额查询 Response Data:", balanceData);
-
-          if (
-            balanceData &&
-            balanceData.data &&
-            balanceData.data.length > 0 &&
-            balanceData.data[0].tokenList
-          ) {
-            const tokenList = balanceData.data[0].tokenList;
-
-            // 循环遍历并打印每个 token 的详细信息
-            tokenList.forEach((token, index) => {
-              console.log(`Token ${index + 1}:`);
-              console.log(
-                `  - holdingAmount: ${token.holdingAmount} // 持有的数量`
-              );
-              console.log(
-                `  - priceUsd: ${token.priceUsd} // 每个代币的美元价格`
-              );
-              console.log(`  - symbol: ${token.symbol} // 代币的符号`);
-              console.log(
-                `  - tokenContractAddress: ${token.tokenContractAddress} // 代币合约地址`
-              );
-              console.log(
-                `  - tokenId: ${token.tokenId} // NFT ID，若为空表示非NFT代币`
-              );
-              console.log(
-                `  - tokenType: ${token.tokenType} // 代币类型，例如 TRC20`
-              );
-              console.log(
-                `  - valueUsd: ${token.valueUsd} // 该地址持有的总美元价值`
-              );
-            });
-
-            console.table(tokenList);
-
-            tokenList.forEach((token) => {
-              updateCryptoData(token.symbol, {
-                balance: token.holdingAmount,
-                priceUsd: token.priceUsd,
-                valueUsd: token.valueUsd,
-              });
-            });
-
-            // 在此打印检查更新后的数据
-            //  console.log('Updated initialAdditionalCryptos:', initialAdditionalCryptos);
-          } else {
-            console.log("No tokenList found in response data.");
-          }
-
-          // 查询手续费
-          /*           const feeResponse = await fetch(
-            "https://bt.likkim.com/meridian/transaction/queryFee",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                chainShortName: selectedCryptoObj.queryChainShortName,
-              }),
-            }
-          );
- */
-          if (!feeResponse.ok) {
-            throw new Error(`HTTP error! status: ${feeResponse.status}`);
-          }
-
-          const feeData = await feeResponse.json();
-          console.log("Transaction 手续费查询 Response Data:", feeData);
-          if (feeData && feeData.data && feeData.data.length > 0) {
-            const feeInfo = feeData.data[0];
-            const transactionFeeValue = feeInfo.bestTransactionFee;
-
-            setTransactionFee(transactionFeeValue); // 设置查询到的交易手续费
-          } else {
-            console.log("No fee data found in response data.");
-            setTransactionFee(selectedCryptoObj.fee); // 如果查询失败，使用 initialAdditionalCryptos 中的 fee 值
           }
         } catch (error) {
-          console.log("查询手续费Error:", error);
-          setTransactionFee(selectedCryptoObj.fee); // 如果请求出错，使用 initialAdditionalCryptos 中的 fee 值
-        } finally {
-          setHasFetchedBalance(true);
+          console.log("查询余额时发生错误:", error);
         }
       };
 
-      fetchTokenBalanceAndFee();
+      fetchWalletBalance();
+      setHasFetchedBalance(true); // 标记为已查询余额，防止重复查询
     }
   }, [
-    amountModalVisible,
-    hasFetchedBalance,
-    selectedCrypto,
-    initialAdditionalCryptos,
-    updateCryptoData,
+    amountModalVisible, // 确保在 amountModalVisible 变化时触发查询
+    hasFetchedBalance, // 确保余额只查询一次
+    cryptoCards, // 监听 cryptoCards 变化
+    selectedCrypto, // 每次选择的加密货币变化时重新查询余额
+    selectedCryptoChain, // 每次选择的加密货币链变化时重新查询余额
+    setCryptoCards,
   ]);
 
   // 监听 initialAdditionalCryptos 的变化，更新 Modal 中的数据
@@ -1418,7 +1387,7 @@ function TransactionsScreen() {
     setSelectedCryptoChain(crypto.chain);
     setSelectedAddress(crypto.address);
     setSelectedCryptoIcon(crypto.icon);
-    setBalance(crypto.balance);
+    setBalance(crypto.balance); // 确保设置正确的 balance
     setValueUsd(crypto.valueUsd);
     setFee(crypto.fee);
     setPriceUsd(crypto.priceUsd);
@@ -1428,24 +1397,21 @@ function TransactionsScreen() {
     setModalVisible(false);
 
     if (operationType === "receive") {
-      // 直接启动地址模态框，不检查设备 ID
       setAddressModalVisible(true);
     } else if (operationType === "send") {
-      // 检查 verifiedDevices 是否包含有效设备
       if (verifiedDevices.length > 0) {
-        console.log("Transation Verified Device ID:", verifiedDevices[0]);
         const device = devices.find((d) => d.id === verifiedDevices[0]);
         if (device) {
           setAddressModalVisible(false);
           setInputAddress("");
           setInputAddressModalVisible(true);
         } else {
-          setBleVisible(true); // 设备不正确时显示蓝牙模态框
-          setModalVisible(false); // 关闭当前的模态框
+          setBleVisible(true);
+          setModalVisible(false);
         }
       } else {
-        setBleVisible(true); // 没有已验证设备时显示蓝牙模态框
-        setModalVisible(false); // 关闭当前的模态框
+        setBleVisible(true);
+        setModalVisible(false);
       }
     }
   };
@@ -1665,23 +1631,23 @@ function TransactionsScreen() {
 
         {/* 输入金额的 Modal */}
         <AmountModal
-          visible={amountModalVisible} // 控制模态框是否可见
-          onRequestClose={() => setAmountModalVisible(false)} // 关闭模态框的回调函数
-          TransactionsScreenStyle={TransactionsScreenStyle} // 样式对象
-          t={t} // 翻译函数，用于国际化
-          isDarkMode={isDarkMode} // 暗黑模式状态
-          amount={amount} // 当前输入的金额
-          setAmount={setAmount} // 更新金额的回调函数
-          balance={balance} // 用户的加密货币余额
-          fee={fee} // 交易费用
-          valueUsd={valueUsd} // 输入金额对应的美元价值
-          isAmountValid={isAmountValid} // 检查输入金额是否有效的状态
-          buttonBackgroundColor={buttonBackgroundColor} // 按钮背景色
-          disabledButtonBackgroundColor={disabledButtonBackgroundColor} // 禁用按钮时的背景色
-          handleNextAfterAmount={handleNextAfterAmount} // 处理用户点击"Next"后的逻辑
-          selectedCrypto={selectedCrypto} // 当前选择的加密货币
-          selectedCryptoIcon={selectedCryptoIcon} // 当前加密货币的图标
-          selectedCryptoChain={selectedCryptoChain} // 传递当前加密货币的链名称
+          visible={amountModalVisible}
+          onRequestClose={() => setAmountModalVisible(false)}
+          TransactionsScreenStyle={TransactionsScreenStyle}
+          t={t}
+          isDarkMode={isDarkMode}
+          amount={amount}
+          setAmount={setAmount}
+          balance={balance} // 使用 balance 而不是 selectedCryptoBalance
+          fee={fee}
+          valueUsd={valueUsd}
+          isAmountValid={isAmountValid}
+          buttonBackgroundColor={buttonBackgroundColor}
+          disabledButtonBackgroundColor={disabledButtonBackgroundColor}
+          handleNextAfterAmount={handleNextAfterAmount}
+          selectedCrypto={selectedCrypto}
+          selectedCryptoIcon={selectedCryptoIcon}
+          selectedCryptoChain={selectedCryptoChain}
         />
 
         {/* 交易确认的 Modal */}
