@@ -1540,9 +1540,10 @@ function WalletScreen({ route, navigation }) {
 
   const calculateTotalBalance = () => {
     const totalBalance = cryptoCards.reduce((total, card) => {
-      const convertedBalance = parseFloat(
-        getConvertedBalance(card.balance, card.shortName)
-      );
+      const convertedBalance =
+        card.balance && !isNaN(card.balance)
+          ? getConvertedBalance(card.balance, card.shortName)
+          : 0;
       return total + convertedBalance;
     }, 0);
 
