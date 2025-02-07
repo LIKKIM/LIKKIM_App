@@ -1736,9 +1736,9 @@ function TransactionsScreen() {
                 )}
                 <Text style={TransactionsScreenStyle.modalTitle}>
                   {`${selectedCrypto} (${selectedCryptoChain})`}{" "}
-                  {/* 添加链名称 */}
                 </Text>
               </View>
+
               <ScrollView
                 style={{ maxHeight: 320 }} // 设置最大高度，当内容超过时启用滚动
                 contentContainerStyle={{ paddingHorizontal: 0 }}
@@ -1749,7 +1749,7 @@ function TransactionsScreen() {
                   {` ${amount} ${selectedCrypto}`}
                 </Text>
 
-                {/* 计算并显示金额对应的法币价值 */}
+                {/* 显示金额对应的法币价值 */}
                 <Text style={TransactionsScreenStyle.transactionText}>
                   <Text style={{ fontWeight: "bold" }}>
                     {t("Amount in Currency")}:
@@ -1774,28 +1774,36 @@ function TransactionsScreen() {
                   <Text style={{ fontWeight: "bold" }}>
                     {t("Recipient Address")}:
                   </Text>
-                  {/*  {"\n"} */}
+                  {"\n"}
                   {` ${inputAddress}`}
                 </Text>
+
+                {/* 显示交易费用 */}
                 <Text style={TransactionsScreenStyle.transactionText}>
                   <Text style={{ fontWeight: "bold" }}>
                     {t("Transaction Fee")}:
                   </Text>
                   {"\n"}
-                  {` ${transactionFee} ${selectedCrypto}`}
+                  {` ${fee} ${selectedCrypto} normal`}
+                  {` ${rapidFee} ${selectedCrypto} rapid`}
                 </Text>
 
-                {/* 计算并显示手续费对应的法币价值 */}
+                {/* 显示交易费用对应的法币价值 */}
                 <Text style={TransactionsScreenStyle.transactionText}>
                   <Text style={{ fontWeight: "bold" }}>
                     {t("Transaction Fee in Currency")}:
                   </Text>
                   {"\n"}
                   {` ${(
-                    (parseFloat(transactionFee) / 1e9) *
+                    (parseFloat(fee) / 1e9) *
                     priceUsd *
                     exchangeRates[currencyUnit]
-                  ).toFixed(2)} ${currencyUnit}`}
+                  ).toFixed(9)} ${currencyUnit} normal`}
+                  {` ${(
+                    (parseFloat(rapidFee) / 1e9) *
+                    priceUsd *
+                    exchangeRates[currencyUnit]
+                  ).toFixed(9)} ${currencyUnit} rapid`}
                 </Text>
 
                 <Text style={TransactionsScreenStyle.transactionText}>
