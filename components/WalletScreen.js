@@ -429,10 +429,10 @@ function WalletScreen({ route, navigation }) {
     return finalBalance;
   };
 
-  useEffect(() => {
+  /*   useEffect(() => {
     console.log("Updated cryptoCards:", cryptoCards);
   }, [cryptoCards]);
-
+ */
   useEffect(() => {
     setAddedCryptos(cryptoCards);
   }, [cryptoCards]);
