@@ -254,6 +254,9 @@ function TransactionsScreen() {
         chain: selectedCryptoChain, // 使用 selectedCryptoChain 或其他相应字段
       };
 
+      // 打印发送的 POST 数据
+      console.log("Sending POST data:", postData);
+
       const response = await fetch(
         "https://bt.likkim.com/api/chain/blockchain-fee",
         {
@@ -266,6 +269,10 @@ function TransactionsScreen() {
       );
 
       const data = await response.json();
+
+      // 打印返回的数据
+      console.log("Received response data:", data);
+
       if (data && data.chain) {
         const { rapidGasPrice, recommendedGasPrice } = data;
 
@@ -282,7 +289,7 @@ function TransactionsScreen() {
 
   useEffect(() => {
     if (amountModalVisible) {
-      fetchTransactionFee(); // 确保在 AmountModal 显示时调用获取手续费的 API
+      fetchTransactionFee();
     }
   }, [amountModalVisible]);
 
@@ -1709,8 +1716,8 @@ function TransactionsScreen() {
           currencyUnit={currencyUnit}
           exchangeRates={exchangeRates}
           cryptoCards={cryptoCards}
-          selectedCryptoName={selectedCryptoName} // 传递 selectedCryptoName
-          valueUsd={valueUsd} // 传递 valueUsd
+          selectedCryptoName={selectedCryptoName}
+          valueUsd={valueUsd}
         />
 
         {/* 交易确认的 Modal */}
