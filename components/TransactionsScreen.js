@@ -1748,6 +1748,20 @@ function TransactionsScreen() {
                   {"\n"}
                   {` ${amount} ${selectedCrypto}`}
                 </Text>
+
+                {/* 计算并显示金额对应的法币价值 */}
+                <Text style={TransactionsScreenStyle.transactionText}>
+                  <Text style={{ fontWeight: "bold" }}>
+                    {t("Amount in Currency")}:
+                  </Text>
+                  {"\n"}
+                  {` ${(
+                    parseFloat(amount) *
+                    priceUsd *
+                    exchangeRates[currencyUnit]
+                  ).toFixed(2)} ${currencyUnit}`}
+                </Text>
+
                 <Text style={TransactionsScreenStyle.transactionText}>
                   <Text style={{ fontWeight: "bold" }}>
                     {t("Payment Address")}:
@@ -1770,6 +1784,20 @@ function TransactionsScreen() {
                   {"\n"}
                   {` ${transactionFee} ${selectedCrypto}`}
                 </Text>
+
+                {/* 计算并显示手续费对应的法币价值 */}
+                <Text style={TransactionsScreenStyle.transactionText}>
+                  <Text style={{ fontWeight: "bold" }}>
+                    {t("Transaction Fee in Currency")}:
+                  </Text>
+                  {"\n"}
+                  {` ${(
+                    (parseFloat(transactionFee) / 1e9) *
+                    priceUsd *
+                    exchangeRates[currencyUnit]
+                  ).toFixed(2)} ${currencyUnit}`}
+                </Text>
+
                 <Text style={TransactionsScreenStyle.transactionText}>
                   <Text style={{ fontWeight: "bold" }}>
                     {t("Detected Network")}:
