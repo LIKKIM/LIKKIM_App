@@ -1,6 +1,6 @@
 // AmountModal.js
 
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Modal,
   View,
@@ -38,7 +38,9 @@ const AmountModal = ({
   selectedCryptoName,
   valueUsd,
 }) => {
-  // 根据选择的加密货币信息获取其美元价格
+  useEffect(() => {
+    console.log("AmountModal - fee:", fee, "rapidFee:", rapidFee);
+  }, [fee, rapidFee]);
   const selectedCryptoInfo = cryptoCards.find(
     (crypto) =>
       crypto.shortName === selectedCrypto || crypto.name === selectedCryptoName
