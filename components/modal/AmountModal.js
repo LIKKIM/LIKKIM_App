@@ -138,7 +138,7 @@ const AmountModal = ({
               <View
                 style={{
                   width: "90%",
-                  marginBottom: 8,
+
                   justifyContent: "center", // 水平居中
                   alignItems: "center", // 垂直居中
                 }}
