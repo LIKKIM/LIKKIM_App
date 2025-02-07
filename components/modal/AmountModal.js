@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+// AmountModal.js
+
+import React from "react";
 import {
   Modal,
   View,
@@ -20,9 +22,9 @@ const AmountModal = ({
   amount,
   setAmount,
   balance,
-  fee, // 默认（recommendedGasPrice）的手续费
-  rapidFee, // rapidGasPrice 的手续费
-  setFee, // 更新手续费状态的函数
+  fee,
+  rapidFee,
+  setFee,
   isAmountValid,
   buttonBackgroundColor,
   disabledButtonBackgroundColor,
@@ -56,19 +58,6 @@ const AmountModal = ({
     amount && !isNaN(amount)
       ? (parseFloat(amount) * priceUsd * exchangeRates[currencyUnit]).toFixed(2)
       : "0.00";
-
-  // 使用状态保存当前选中的手续费
-  const [selectedFee, setSelectedFee] = useState(fee);
-
-  // 当外部 fee 更新时，同步内部 selectedFee
-  useEffect(() => {
-    setSelectedFee(fee);
-  }, [fee]);
-
-  const handleFeeChange = (value) => {
-    setSelectedFee(value);
-    setFee(value); // 同时更新外部传入的 fee 状态
-  };
 
   return (
     <Modal
@@ -147,9 +136,11 @@ const AmountModal = ({
                 marginVertical: 10,
               }}
             >
+              {/* 显示原始余额信息 */}
               <View
                 style={{
                   width: "90%",
+
                   justifyContent: "center", // 水平居中
                   alignItems: "center", // 垂直居中
                 }}
@@ -158,6 +149,8 @@ const AmountModal = ({
                   {t("Balance")}: {balance} {selectedCrypto}
                 </Text>
               </View>
+
+              {/* 同时显示余额转换后的法币金额 */}
               <View
                 style={{
                   flexDirection: "row",
@@ -173,6 +166,8 @@ const AmountModal = ({
                   {currencyUnit}: {convertedBalance}
                 </Text>
               </View>
+
+              {/* 显示用户输入金额转换后的法币金额 */}
               <View
                 style={{
                   flexDirection: "row",
@@ -189,11 +184,11 @@ const AmountModal = ({
               </View>
             </View>
 
-            {/* 手续费选择区域 */}
+            {/* 手续费及余额不足提示 */}
             <View
               style={{
                 flexDirection: "row",
-                alignItems: "center",
+                justifyContent: "space-between",
                 width: "90%",
                 marginBottom: 20,
               }}
@@ -201,59 +196,21 @@ const AmountModal = ({
               <Text style={TransactionsScreenStyle.balanceLabel}>
                 {t("Transaction Fee")}:
               </Text>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-around",
-                  flex: 1,
-                  marginLeft: 10,
-                }}
-              >
-                <TouchableOpacity
-                  onPress={() => handleFeeChange(fee)}
-                  style={{
-                    paddingVertical: 8,
-                    paddingHorizontal: 12,
-                    borderWidth: selectedFee === fee ? 2 : 1,
-                    borderColor: selectedFee === fee ? "#007AFF" : "#ccc",
-                    borderRadius: 4,
-                    backgroundColor: selectedFee === fee ? "#E0F0FF" : "#FFF",
-                    marginRight: 8,
-                  }}
-                >
-                  <Text style={{ fontSize: 14 }}>
-                    {t("Recommended")}: {fee}
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => handleFeeChange(rapidFee)}
-                  style={{
-                    paddingVertical: 8,
-                    paddingHorizontal: 12,
-                    borderWidth: selectedFee === rapidFee ? 2 : 1,
-                    borderColor: selectedFee === rapidFee ? "#007AFF" : "#ccc",
-                    borderRadius: 4,
-                    backgroundColor:
-                      selectedFee === rapidFee ? "#E0F0FF" : "#FFF",
-                  }}
-                >
-                  <Text style={{ fontSize: 14 }}>
-                    {t("Rapid")}: {rapidFee}
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-            {parseFloat(amount) >
-              parseFloat(balance) + parseFloat(selectedFee) && (
-              <Text
-                style={[
-                  TransactionsScreenStyle.balanceValue,
-                  { color: "#FF5252", marginTop: 5 },
-                ]}
-              >
-                {t("Insufficient Balance")}
+
+              <Text style={TransactionsScreenStyle.balanceValue}>
+                {fee} {selectedCrypto}
               </Text>
-            )}
+              {parseFloat(amount) > parseFloat(balance) + parseFloat(fee) && (
+                <Text
+                  style={[
+                    TransactionsScreenStyle.balanceValue,
+                    { color: "#FF5252", marginTop: 5 },
+                  ]}
+                >
+                  {t("Insufficient Balance")}
+                </Text>
+              )}
+            </View>
           </View>
 
           {/* 按钮区域 */}

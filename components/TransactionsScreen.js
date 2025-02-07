@@ -276,11 +276,11 @@ function TransactionsScreen() {
       if (data && data.chain) {
         const { rapidGasPrice, recommendedGasPrice } = data;
 
-        // 默认选择推荐手续费
         setFee(recommendedGasPrice);
+        console.log("Fee set to:", recommendedGasPrice); // 调试用日志
 
-        // 存储或更新 rapidGasPrice 以供用户选择
         setRapidFee(rapidGasPrice);
+        console.log("Rapid fee set to:", rapidGasPrice); // 调试用日志
       }
     } catch (error) {
       console.error("Failed to fetch transaction fee:", error);
