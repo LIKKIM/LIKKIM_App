@@ -1256,7 +1256,10 @@ function MyColdWalletScreen() {
           <View style={{ marginTop: 40, alignItems: "center" }}>
             <TouchableOpacity
               style={MyColdWalletScreenStyle.roundButton}
-              onPress={handleBluetoothPairing}
+              onPress={() => {
+                Vibration.vibrate();
+                handleBluetoothPairing();
+              }}
             >
               <Text style={MyColdWalletScreenStyle.BluetoothBtnText}>
                 {t("Pair with Bluetooth")}
