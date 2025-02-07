@@ -189,7 +189,7 @@ const AmountModal = ({
             {/* 手续费及余额不足提示区域 */}
             <View
               style={{
-                flexDirection: "row",
+                flexDirection: "column",
                 justifyContent: "space-between",
                 width: "90%",
                 marginBottom: 20,
@@ -199,13 +199,33 @@ const AmountModal = ({
                 {t("Transaction Fee")}:
               </Text>
               <View style={{ flexDirection: "column" }}>
+                {/* 推荐手续费显示 */}
                 <Text style={TransactionsScreenStyle.balanceValue}>
                   {(parseFloat(fee) / 1e9).toFixed(9)} {selectedCrypto}{" "}
                   (Recommended)
                 </Text>
                 <Text style={TransactionsScreenStyle.balanceValue}>
+                  ({currencyUnit}{" "}
+                  {(
+                    (parseFloat(fee) / 1e9) *
+                    priceUsd *
+                    exchangeRates[currencyUnit]
+                  ).toFixed(2)}
+                  )
+                </Text>
+                {/* Rapid 手续费显示 */}
+                <Text style={TransactionsScreenStyle.balanceValue}>
                   {(parseFloat(rapidFee) / 1e9).toFixed(9)} {selectedCrypto}{" "}
                   (Rapid)
+                </Text>
+                <Text style={TransactionsScreenStyle.balanceValue}>
+                  ({currencyUnit}{" "}
+                  {(
+                    (parseFloat(rapidFee) / 1e9) *
+                    priceUsd *
+                    exchangeRates[currencyUnit]
+                  ).toFixed(2)}
+                  )
                 </Text>
               </View>
               {parseFloat(amount) > parseFloat(balance) + parseFloat(fee) && (
