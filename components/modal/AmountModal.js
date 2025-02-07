@@ -186,7 +186,7 @@ const AmountModal = ({
               </View>
             </View>
 
-            {/* 手续费及余额不足提示 */}
+            {/* 手续费及余额不足提示区域 */}
             <View
               style={{
                 flexDirection: "row",
@@ -198,13 +198,16 @@ const AmountModal = ({
               <Text style={TransactionsScreenStyle.balanceLabel}>
                 {t("Transaction Fee")}:
               </Text>
-
-              <Text style={TransactionsScreenStyle.balanceValue}>
-                {fee} {selectedCrypto}
-              </Text>
-              <Text style={TransactionsScreenStyle.balanceValue}>
-                {rapidFee} {selectedCrypto}
-              </Text>
+              <View style={{ flexDirection: "column" }}>
+                <Text style={TransactionsScreenStyle.balanceValue}>
+                  {(parseFloat(fee) / 1e9).toFixed(9)} {selectedCrypto}{" "}
+                  (Recommended)
+                </Text>
+                <Text style={TransactionsScreenStyle.balanceValue}>
+                  {(parseFloat(rapidFee) / 1e9).toFixed(9)} {selectedCrypto}{" "}
+                  (Rapid)
+                </Text>
+              </View>
               {parseFloat(amount) > parseFloat(balance) + parseFloat(fee) && (
                 <Text
                   style={[
