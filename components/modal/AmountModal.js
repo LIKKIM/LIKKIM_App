@@ -1,5 +1,4 @@
 // AmountModal.js
-
 import React, { useEffect } from "react";
 import {
   Modal,
@@ -37,7 +36,48 @@ const AmountModal = ({
   cryptoCards,
   selectedCryptoName,
   valueUsd,
+  setCryptoCards,
 }) => {
+  useEffect(() => {
+    if (visible) {
+      fetchPriceChanges();
+    }
+  }, [visible]);
+
+  // Fetch price changes and update the priceUsd in cryptoCards
+  const fetchPriceChanges = async () => {
+    if (cryptoCards.length === 0) return; // 没有卡片时不请求
+
+    const instIds = cryptoCards
+      .map((card) => `${card.shortName}-USD`)
+      .join(",");
+
+    try {
+      const response = await fetch(
+        `https://df.likkim.com/api/market/index-tickers?instId=${instIds}`
+      );
+      const data = await response.json();
+
+      if (data.code === 0 && data.data) {
+        // 更新 cryptoCards 中的 priceUsd
+        setCryptoCards((prevCards) => {
+          return prevCards.map((card) => {
+            const ticker = data.data[`${card.shortName}-USD`];
+            if (ticker) {
+              return {
+                ...card,
+                priceUsd: ticker.last || "0", // 更新价格
+              };
+            }
+            return card;
+          });
+        });
+      }
+    } catch (error) {
+      console.log("Error fetching price changes:", error);
+    }
+  };
+
   const selectedCryptoInfo = cryptoCards.find(
     (crypto) =>
       crypto.shortName === selectedCrypto || crypto.name === selectedCryptoName

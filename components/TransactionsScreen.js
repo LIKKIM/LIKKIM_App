@@ -1703,6 +1703,7 @@ function TransactionsScreen() {
           cryptoCards={cryptoCards}
           selectedCryptoName={selectedCryptoName}
           valueUsd={valueUsd}
+          setCryptoCards={setCryptoCards}
         />
 
         {/* 交易确认的 Modal */}
