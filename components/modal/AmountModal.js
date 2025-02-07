@@ -202,6 +202,9 @@ const AmountModal = ({
               <Text style={TransactionsScreenStyle.balanceValue}>
                 {fee} {selectedCrypto}
               </Text>
+              <Text style={TransactionsScreenStyle.balanceValue}>
+                {rapidFee} {selectedCrypto}
+              </Text>
               {parseFloat(amount) > parseFloat(balance) + parseFloat(fee) && (
                 <Text
                   style={[

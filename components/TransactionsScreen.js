@@ -273,13 +273,14 @@ function TransactionsScreen() {
       // 打印返回的数据
       console.log("Received response data:", data);
 
-      if (data && data.chain) {
-        const { rapidGasPrice, recommendedGasPrice } = data;
+      if (data && data.data) {
+        // 检查 data.data 是否存在
+        const { rapidGasPrice, recommendedGasPrice } = data.data; // 从 data.data 获取值
 
-        setFee(recommendedGasPrice);
+        setFee(recommendedGasPrice); // 设置 fee
         console.log("Fee set to:", recommendedGasPrice); // 调试用日志
 
-        setRapidFee(rapidGasPrice);
+        setRapidFee(rapidGasPrice); // 设置 rapidFee
         console.log("Rapid fee set to:", rapidGasPrice); // 调试用日志
       }
     } catch (error) {
