@@ -310,15 +310,6 @@ function TransactionsScreen() {
 
           // 循环遍历 cryptoCards，为选择的加密货币查询余额
           for (let card of cryptoCards) {
-            // 打印 card.name 和 selectedCrypto
-            console.log(
-              `当前卡片的名称: ${card.name}, 选择的加密货币: ${selectedCrypto}`
-            );
-            // 打印 card.chain 和 selectedCryptoChain
-            console.log(
-              `当前卡片的链名称: ${card.chain}, 选择的链名称: ${selectedCryptoChain}`
-            );
-
             // 只查询匹配的加密货币和链
             if (
               card.name === selectedCryptoObj.name &&
@@ -402,8 +393,6 @@ function TransactionsScreen() {
   // 监听 initialAdditionalCryptos 的变化，更新 Modal 中的数据
   useEffect(() => {
     if (amountModalVisible) {
-      console.log("Amount Modal is visible, checking selected crypto...");
-
       // 查找选中的加密货币对象
       const selected = initialAdditionalCryptos.find(
         (crypto) =>
@@ -427,18 +416,13 @@ function TransactionsScreen() {
         console.log("Value in USD:", selected.valueUsd);
         console.log("Transaction Fee:", selected.fee);
       } else {
-        console.log("未找到匹配的加密货币对象");
+        console.log(
+          " 监听 initialAdditionalCryptos 的变化未找到匹配的加密货币对象"
+        );
       }
     }
   }, [initialAdditionalCryptos, amountModalVisible]);
 
-  /*   useEffect(() => {
-    if (bleVisible) {
-      scanDevices();
-    }
-  }, [bleVisible]); */
-
-  // 清理蓝牙管理器
   useEffect(() => {
     return () => {
       bleManagerRef.current && bleManagerRef.current.destroy();
