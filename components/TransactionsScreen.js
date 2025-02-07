@@ -86,7 +86,6 @@ function TransactionsScreen() {
   const [balance, setBalance] = useState("");
   const [valueUsd, setValueUsd] = useState("");
   const [selectedCryptoName, setSelectedCryptoName] = useState(""); // 定义 selectedCryptoName 状态
-  const [fee, setFee] = useState("");
   const [queryChainShortName, setQueryChainShortName] = useState("");
   const [priceUsd, setPriceUsd] = useState("");
   const [selectedCryptoIcon, setSelectedCryptoIcon] = useState(null);
@@ -122,8 +121,8 @@ function TransactionsScreen() {
     useState(false);
   const [detectedNetwork, setDetectedNetwork] = useState("");
   const bleManagerRef = useRef(null);
-  const [selectedToken, setSelectedToken] = useState(""); // 用于存储选中的token
-  const [selectedChain, setSelectedChain] = useState(""); // 新增状态
+  const [fee, setFee] = useState("");
+  const [rapidFee, setRapidFee] = useState("");
   const [fromDropdownVisible, setFromDropdownVisible] = useState(false);
   const [toDropdownVisible, setToDropdownVisible] = useState(false);
   const [selectedFromToken, setSelectedFromToken] = useState(""); // "From" token state
@@ -247,6 +246,46 @@ function TransactionsScreen() {
 
     loadTransactionHistory();
   }, []); // 依赖数组为空，确保此操作仅在组件挂载时执行一次
+
+  // 在 TransactionsScreen 组件的 useEffect 或合适位置添加代码来获取手续费
+  const fetchTransactionFee = async () => {
+    try {
+      const postData = {
+        chain: selectedCryptoChain, // 使用 selectedCryptoChain 或其他相应字段
+      };
+
+      const response = await fetch(
+        "https://bt.likkim.com/api/chain/blockchain-fee",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(postData),
+        }
+      );
+
+      const data = await response.json();
+      if (data && data.chain) {
+        const { rapidGasPrice, recommendedGasPrice } = data;
+
+        // 默认选择推荐手续费
+        setFee(recommendedGasPrice);
+
+        // 存储或更新 rapidGasPrice 以供用户选择
+        setRapidFee(rapidGasPrice);
+      }
+    } catch (error) {
+      console.error("Failed to fetch transaction fee:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (amountModalVisible) {
+      fetchTransactionFee(); // 确保在 AmountModal 显示时调用获取手续费的 API
+    }
+  }, [amountModalVisible]);
+
   // 查询数字货币余额 查询余额
   useEffect(() => {
     if (amountModalVisible && !hasFetchedBalance) {
@@ -1658,6 +1697,8 @@ function TransactionsScreen() {
           setAmount={setAmount}
           balance={balance}
           fee={fee}
+          rapidFee={rapidFee}
+          setFee={setFee}
           isAmountValid={isAmountValid}
           buttonBackgroundColor={buttonBackgroundColor}
           disabledButtonBackgroundColor={disabledButtonBackgroundColor}
