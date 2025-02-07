@@ -38,9 +38,6 @@ const AmountModal = ({
   selectedCryptoName,
   valueUsd,
 }) => {
-  useEffect(() => {
-    console.log("AmountModal - fee:", fee, "rapidFee:", rapidFee);
-  }, [fee, rapidFee]);
   const selectedCryptoInfo = cryptoCards.find(
     (crypto) =>
       crypto.shortName === selectedCrypto || crypto.name === selectedCryptoName
