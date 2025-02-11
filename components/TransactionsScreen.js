@@ -1761,17 +1761,19 @@ function TransactionsScreen() {
                 contentContainerStyle={{ paddingHorizontal: 0 }}
               >
                 <Text style={TransactionsScreenStyle.transactionText}>
-                  <Text style={{ fontWeight: "bold" }}>{t("Amount")}:</Text>
-                  {"\n"}
+                  <Text style={{ fontWeight: "bold", marginBottom: 8 }}>
+                    {t("Amount")}:
+                  </Text>
+
                   {` ${amount} ${selectedCrypto}`}
                 </Text>
 
                 {/* 显示金额对应的法币价值 */}
                 <Text style={TransactionsScreenStyle.transactionText}>
-                  <Text style={{ fontWeight: "bold" }}>
+                  <Text style={{ fontWeight: "bold", marginBottom: 8 }}>
                     {t("Amount in Currency")}:
                   </Text>
-                  {"\n"}
+
                   {` ${(
                     parseFloat(amount) *
                     priceUsd *
@@ -1780,24 +1782,24 @@ function TransactionsScreen() {
                 </Text>
 
                 <Text style={TransactionsScreenStyle.transactionText}>
-                  <Text style={{ fontWeight: "bold" }}>
+                  <Text style={{ fontWeight: "bold", marginBottom: 8 }}>
                     {t("Payment Address")}:
                   </Text>
-                  {"\n"}
+
                   {` ${selectedAddress}`}
                 </Text>
 
                 <Text style={TransactionsScreenStyle.transactionText}>
-                  <Text style={{ fontWeight: "bold" }}>
+                  <Text style={{ fontWeight: "bold", marginBottom: 8 }}>
                     {t("Recipient Address")}:
                   </Text>
-                  {"\n"}
+
                   {` ${inputAddress}`}
                 </Text>
 
-                <View style={{ marginVertical: 16 }}>
+                <View style={TransactionsScreenStyle.transactionText}>
                   {/* 标题部分 */}
-                  <Text style={{ marginBottom: 10, fontWeight: "bold" }}>
+                  <Text style={{ fontWeight: "bold", marginBottom: 8 }}>
                     {t("Transaction Fee")}:
                   </Text>
 
@@ -1899,7 +1901,7 @@ function TransactionsScreen() {
                 </View>
 
                 <Text style={TransactionsScreenStyle.transactionText}>
-                  <Text style={{ fontWeight: "bold" }}>
+                  <Text style={{ fontWeight: "bold", marginBottom: 8 }}>
                     {t("Detected Network")}:
                   </Text>
                   {"\n"}
