@@ -133,6 +133,23 @@ function TransactionsScreen() {
   const [addressVerificationMessage, setAddressVerificationMessage] = useState(
     t("Verifying Address on LIKKIM...")
   );
+  const [selectedFeeTab, setSelectedFeeTab] = useState("Recommended");
+
+  // 计算手续费和对应的法币价值
+  const recommendedFee = (parseFloat(fee) / 1e9).toFixed(9);
+  const recommendedValue = (
+    (parseFloat(fee) / 1e9) *
+    priceUsd *
+    exchangeRates[currencyUnit]
+  ).toFixed(2);
+
+  const rapidFeeValue = (parseFloat(rapidFee) / 1e9).toFixed(9);
+  const rapidCurrencyValue = (
+    (parseFloat(rapidFee) / 1e9) *
+    priceUsd *
+    exchangeRates[currencyUnit]
+  ).toFixed(2);
+
   const isAmountValid =
     amount &&
     parseFloat(amount) > 0 &&
@@ -1778,33 +1795,108 @@ function TransactionsScreen() {
                   {` ${inputAddress}`}
                 </Text>
 
-                {/* 显示交易费用 */}
-                <Text style={TransactionsScreenStyle.transactionText}>
-                  <Text style={{ fontWeight: "bold" }}>
+                <View style={{ marginVertical: 16 }}>
+                  {/* 标题部分 */}
+                  <Text style={{ marginBottom: 10, fontWeight: "bold" }}>
                     {t("Transaction Fee")}:
                   </Text>
-                  {"\n"}
-                  {` ${fee} ${selectedCrypto} normal`}
-                  {` ${rapidFee} ${selectedCrypto} rapid`}
-                </Text>
 
-                {/* 显示交易费用对应的法币价值 */}
-                <Text style={TransactionsScreenStyle.transactionText}>
-                  <Text style={{ fontWeight: "bold" }}>
-                    {t("Transaction Fee in Currency")}:
-                  </Text>
-                  {"\n"}
-                  {` ${(
-                    (parseFloat(fee) / 1e9) *
-                    priceUsd *
-                    exchangeRates[currencyUnit]
-                  ).toFixed(9)} ${currencyUnit} normal`}
-                  {` ${(
-                    (parseFloat(rapidFee) / 1e9) *
-                    priceUsd *
-                    exchangeRates[currencyUnit]
-                  ).toFixed(9)} ${currencyUnit} rapid`}
-                </Text>
+                  {/* Tab 按钮 */}
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      backgroundColor: isDarkMode ? "#333" : "#eee",
+                      borderRadius: 20,
+                      borderWidth: 1,
+                      borderColor: isDarkMode ? "#333" : "#eee",
+                      padding: 2,
+                      alignSelf: "flex-start", // 只包裹内容宽度
+                    }}
+                  >
+                    <TouchableOpacity
+                      style={{
+                        paddingVertical: 8,
+                        paddingHorizontal: 20,
+                        borderRadius: 20,
+                        backgroundColor:
+                          selectedFeeTab === "Recommended"
+                            ? isDarkMode
+                              ? "#555"
+                              : "#fff"
+                            : "transparent",
+                        borderColor: isDarkMode ? "#333" : "#eee",
+                        borderWidth: 1,
+                        // 移除了 marginRight，这样两个按钮之间就没有间隔
+                      }}
+                      onPress={() => setSelectedFeeTab("Recommended")}
+                    >
+                      <Text
+                        style={{
+                          fontWeight: "bold",
+                          color:
+                            selectedFeeTab === "Recommended"
+                              ? isDarkMode
+                                ? "#fff"
+                                : "#000"
+                              : "#888",
+                        }}
+                      >
+                        {t("Recommended")}
+                      </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={{
+                        paddingVertical: 8,
+                        paddingHorizontal: 20,
+                        borderRadius: 20,
+                        backgroundColor:
+                          selectedFeeTab === "Rapid"
+                            ? isDarkMode
+                              ? "#555"
+                              : "#fff"
+                            : "transparent",
+                        borderColor: isDarkMode ? "#333" : "#eee",
+                        borderWidth: 1,
+                      }}
+                      onPress={() => setSelectedFeeTab("Rapid")}
+                    >
+                      <Text
+                        style={{
+                          fontWeight: "bold",
+                          color:
+                            selectedFeeTab === "Rapid"
+                              ? isDarkMode
+                                ? "#fff"
+                                : "#000"
+                              : "#888",
+                        }}
+                      >
+                        {t("Rapid")}
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+
+                  {/* 根据 selectedFeeTab 渲染手续费信息 */}
+                  {selectedFeeTab === "Recommended" ? (
+                    <View style={{ marginTop: 10 }}>
+                      <Text style={TransactionsScreenStyle.balanceValue}>
+                        {recommendedFee} {selectedCrypto} (Recommended)
+                      </Text>
+                      <Text style={TransactionsScreenStyle.balanceValue}>
+                        ({currencyUnit} {recommendedValue})
+                      </Text>
+                    </View>
+                  ) : (
+                    <View style={{ marginTop: 10 }}>
+                      <Text style={TransactionsScreenStyle.balanceValue}>
+                        {rapidFeeValue} {selectedCrypto} (Rapid)
+                      </Text>
+                      <Text style={TransactionsScreenStyle.balanceValue}>
+                        ({currencyUnit} {rapidCurrencyValue})
+                      </Text>
+                    </View>
+                  )}
+                </View>
 
                 <Text style={TransactionsScreenStyle.transactionText}>
                   <Text style={{ fontWeight: "bold" }}>
