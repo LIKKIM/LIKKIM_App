@@ -150,7 +150,7 @@ const CurrencyModal = ({
                         <CountryFlag
                           isoCode={currencyToCountryMap[currency.shortName]}
                           size={20}
-                          style={{ marginRight: 8 }}
+                          style={{ marginRight: 8, marginLeft: 30 }}
                         />
                         <Text
                           style={[
