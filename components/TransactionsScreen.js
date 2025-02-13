@@ -736,7 +736,7 @@ function TransactionsScreen() {
     console.log("已启动对 signed_data 的监听");
   };
 
-  // 签名函数
+  // 签名函数（先发送第一组数据，等待 Signed_OK 后再发送第二组数据）
   const signTransaction = async (
     device,
     amount, // 转账金额
@@ -747,11 +747,36 @@ function TransactionsScreen() {
     try {
       if (!device?.isConnected) return console.log("设备无效");
 
-      // 连接设备（如果需要）
+      // 内部辅助函数：等待设备返回 "Signed_OK" 消息
+      const waitForSignedOk = async () => {
+        return new Promise((resolve, reject) => {
+          const subscription = device.monitorCharacteristicForService(
+            serviceUUID,
+            notifyCharacteristicUUID,
+            (error, characteristic) => {
+              if (error) {
+                console.log("监听 Signed_OK 时出错:", error);
+                // 若需要，可调用 reject(error);
+                return;
+              }
+              const received = Buffer.from(
+                characteristic.value,
+                "base64"
+              ).toString("utf8");
+              console.log("等待 Signed_OK，收到消息:", received);
+              if (received === "Signed_OK") {
+                subscription.remove();
+                resolve();
+              }
+            }
+          );
+        });
+      };
+
+      // 连接设备并发现所有服务和特性
       await device.connect();
       await device.discoverAllServicesAndCharacteristics();
 
-      // 打印所选币种
       console.log("选择的币种:", selectedCrypto);
 
       // EVM 区块链映射
@@ -836,7 +861,7 @@ function TransactionsScreen() {
         return;
       }
 
-      console.log("选择的路径:", path); // 打印选择的路径
+      console.log("选择的路径:", path);
 
       // 第一步：获取 nonce 和 gasPrice
       const walletParamsResponse = await fetch(
@@ -861,7 +886,6 @@ function TransactionsScreen() {
         return;
       }
 
-      // 获取接口返回数据
       const walletParamsData = await walletParamsResponse.json();
       console.log("getSignParam 返回的数据:", walletParamsData);
 
@@ -880,7 +904,7 @@ function TransactionsScreen() {
         chainKey: selectedCrypto, // 使用 selectedCrypto 作为链标识
         nonce: nonce, // 使用原始的 nonce 值
         gasLimit: 53000, // 更新的 gas 限制为 53000
-        gasPrice: gasPrice, // 不进行任何转换，直接使用返回的 gasPrice
+        gasPrice: gasPrice, // 直接使用返回的 gasPrice
         value: Number(amount), // 确保金额为数字类型
         to: inputAddress, // 目标地址
         contractAddress: "", // 没有合约调用
@@ -903,43 +927,40 @@ function TransactionsScreen() {
 
       const responseData = await response.json();
 
+      // 启动对 signed_data 的监听
       monitorSignedResult(device);
-      // 打印返回的数据
+
       if (responseData?.data?.data) {
         console.log("返回的数据:", responseData.data.data);
 
-        // 构建要发送的第一个字符串
+        // 【第一组数据】：构建并发送第一组数据
         const signMessage = `sign:${chainKey},${path},${responseData.data.data}`;
-        console.log("构建的发送消息:", signMessage);
-
-        // 将构建的第一个字符串转换为 Base64 编码
+        console.log("构建的第一组发送消息:", signMessage);
         const bufferMessage = Buffer.from(signMessage, "utf-8");
         const base64Message = bufferMessage.toString("base64");
-
-        // 发送 Base64 编码的数据给设备
         try {
           await device.writeCharacteristicWithResponseForService(
             serviceUUID,
             writeCharacteristicUUID,
             base64Message
           );
-          console.log("数据已成功发送给设备");
+          console.log("第一组数据已成功发送给设备");
         } catch (error) {
-          console.log("发送数据给设备时发生错误:", error);
+          console.log("发送第一组数据给设备时发生错误:", error);
         }
 
-        // 构建要发送的第二组数据
+        // 等待设备返回 "Signed_OK" 消息
+        await waitForSignedOk();
+        console.log("收到 Signed_OK，开始发送第二组数据");
+
+        // 【第二组数据】：构建并发送第二组数据
         const destinationAddress = inputAddress;
         const transactionFee =
           selectedFeeTab === "Recommended" ? recommendedFee : rapidFeeValue;
         const secondMessage = `destinationAddress:${destinationAddress},${transactionFee},${chainKey},${path}`;
         console.log("构建的第二组发送消息:", secondMessage);
-
-        // 将第二组消息转换为 Base64 编码
         const bufferSecondMessage = Buffer.from(secondMessage, "utf-8");
         const base64SecondMessage = bufferSecondMessage.toString("base64");
-
-        // 发送第二组数据给设备
         try {
           await device.writeCharacteristicWithResponseForService(
             serviceUUID,
