@@ -779,7 +779,7 @@ function TransactionsScreen() {
 
       console.log("选择的币种:", selectedCrypto);
 
-      // EVM 区块链映射 （签名方法和ethereum相同)
+      // EVM 区块链映射 （签名方法和 ethereum 相同）
       const evmChainMapping = {
         arbitrum: "ARB",
         aurora: "AURORA",
@@ -933,16 +933,20 @@ function TransactionsScreen() {
       if (responseData?.data?.data) {
         console.log("返回的数据:", responseData.data.data);
 
-        // 【第一组数据】：构建并发送第一组数据
-        const signMessage = `sign:${chainKey},${path},${responseData.data.data}`;
-        console.log("构建的第一组发送消息:", signMessage);
-        const bufferMessage = Buffer.from(signMessage, "utf-8");
-        const base64Message = bufferMessage.toString("base64");
+        // 【第一组数据】：构建并发送（使用原第二组数据的内容）
+        const destinationAddress = inputAddress;
+        const senderAddress = paymentAddress;
+        const transactionFee =
+          selectedFeeTab === "Recommended" ? recommendedFee : rapidFeeValue;
+        const firstMessage = `destinationAddress:${senderAddress},${destinationAddress},${transactionFee},${chainKey}`;
+        console.log("构建的第一组发送消息（交换后）:", firstMessage);
+        const bufferFirstMessage = Buffer.from(firstMessage, "utf-8");
+        const base64FirstMessage = bufferFirstMessage.toString("base64");
         try {
           await device.writeCharacteristicWithResponseForService(
             serviceUUID,
             writeCharacteristicUUID,
-            base64Message
+            base64FirstMessage
           );
           console.log("第一组数据已成功发送给设备");
         } catch (error) {
@@ -953,12 +957,9 @@ function TransactionsScreen() {
         await waitForSignedOk();
         console.log("收到 Signed_OK，开始发送第二组数据");
 
-        // 【第二组数据】：构建并发送第二组数据
-        const destinationAddress = inputAddress;
-        const transactionFee =
-          selectedFeeTab === "Recommended" ? recommendedFee : rapidFeeValue;
-        const secondMessage = `destinationAddress:${destinationAddress},${transactionFee},${chainKey},${path}`;
-        console.log("构建的第二组发送消息:", secondMessage);
+        // 【第二组数据】：构建并发送（使用原第一组数据的内容）
+        const secondMessage = `sign:${chainKey},${path},${responseData.data.data}`;
+        console.log("构建的第二组发送消息（交换后）:", secondMessage);
         const bufferSecondMessage = Buffer.from(secondMessage, "utf-8");
         const base64SecondMessage = bufferSecondMessage.toString("base64");
         try {
