@@ -701,9 +701,6 @@ function TransactionsScreen() {
           console.log("准备发送的 POST 数据:", postData);
           // 输出: 准备发送的 POST 数据: { chain: "ethereum", hex: "F86C..." }
 
-          // 打印 JSON 字符串
-          console.log("POST 数据的 JSON 字符串:", JSON.stringify(postData));
-
           // 调用广播交易的 API
           try {
             const response = await fetch(
@@ -747,13 +744,14 @@ function TransactionsScreen() {
     try {
       if (!device?.isConnected) return console.log("设备无效");
 
+      // 连接设备并发现服务
       await device.connect();
       await device.discoverAllServicesAndCharacteristics();
 
-      // 打印所选币种
-      // console.log("选择的币种:", selectedCrypto);
-
-      // EVM 区块链映射 （与ethereum链签名方法相同）
+      // ---------------------------
+      // 第1步：确定币种对应的链标识和支付路径
+      // ---------------------------
+      // EVM 区块链映射 （与 ethereum 链签名方法相同）
       const evmChainMapping = {
         arbitrum: "ARB",
         aurora: "AURORA",
@@ -811,7 +809,6 @@ function TransactionsScreen() {
 
       // 将 selectedCrypto 转换为大写，确保一致性
       const selectedCryptoUpper = selectedCrypto.toUpperCase();
-
       // 查找哪个链标识包含 selectedCrypto
       const chainKey = Object.keys(evmChainMapping).find((key) => {
         const value = evmChainMapping[key];
@@ -819,25 +816,48 @@ function TransactionsScreen() {
           ? value.includes(selectedCryptoUpper)
           : value === selectedCryptoUpper;
       });
-
       if (!chainKey) {
         console.log(`不支持的币种: ${selectedCrypto}`);
         return;
       }
-
       console.log("选择的链标识:", chainKey);
 
-      // 使用 chainKey 查找对应的路径
+      // 根据链标识获取支付路径
       const path = cryptoPathMapping[chainKey];
-
       if (!path) {
         console.log(`不支持的路径: ${chainKey}`);
         return;
       }
+      console.log("选择的路径:", path);
 
-      console.log("选择的路径:", path); // 打印选择的路径
+      // ---------------------------
+      // 第2步：构造并发送第一步交易信息给设备
+      // ---------------------------
+      // 这里假设 senderAddress 为付款地址，destinationAddress 为收款地址，
+      // 交易费用根据外部变量 selectedFeeTab、recommendedFee、rapidFeeValue 决定
+      const senderAddress = paymentAddress;
+      const destinationAddress = inputAddress;
+      const transactionFee =
+        selectedFeeTab === "Recommended" ? recommendedFee : rapidFeeValue;
+      const firstTradeMsg = `destinationAddress:${senderAddress},${destinationAddress},${transactionFee},${chainKey}`;
+      console.log("第一步交易信息发送:", firstTradeMsg);
+      const firstTradeBuffer = Buffer.from(firstTradeMsg, "utf-8");
+      const firstTradeBase64 = firstTradeBuffer.toString("base64");
 
-      // 第一步：获取 nonce 和 gasPrice
+      try {
+        await device.writeCharacteristicWithResponseForService(
+          serviceUUID,
+          writeCharacteristicUUID,
+          firstTradeBase64
+        );
+        console.log("第一步交易信息已成功发送给设备");
+      } catch (error) {
+        console.log("发送第一步交易信息给设备时发生错误:", error);
+      }
+
+      // ---------------------------
+      // 第3步：调用接口获取 nonce 和 gasPrice
+      // ---------------------------
       const walletParamsResponse = await fetch(
         "https://bt.likkim.com/api/wallet/getSignParam",
         {
@@ -851,7 +871,6 @@ function TransactionsScreen() {
           }),
         }
       );
-
       if (!walletParamsResponse.ok) {
         console.log(
           "获取 nonce 和 gasPrice 失败:",
@@ -859,11 +878,8 @@ function TransactionsScreen() {
         );
         return;
       }
-
-      // 获取接口返回数据
       const walletParamsData = await walletParamsResponse.json();
       console.log("getSignParam 返回的数据:", walletParamsData);
-
       if (
         !walletParamsData.data?.gasPrice ||
         walletParamsData.data?.nonce == null
@@ -871,24 +887,24 @@ function TransactionsScreen() {
         console.log("接口返回数据不完整:", walletParamsData);
         return;
       }
-
       const { gasPrice, nonce } = walletParamsData.data;
+      console.log("获取到的 gasPrice:", gasPrice, "nonce:", nonce);
 
-      // 第二步：构造 POST 请求数据
+      // ---------------------------
+      // 第4步：构造 POST 请求数据并调用签名编码接口
+      // ---------------------------
       const requestData = {
-        chainKey: selectedCrypto, // 使用 selectedCrypto 作为链标识
-        nonce: nonce, // 使用原始的 nonce 值
-        gasLimit: 53000, // 更新的 gas 限制为 53000
-        gasPrice: gasPrice, // 不进行任何转换，直接使用返回的 gasPrice
-        value: Number(amount), // 确保金额为数字类型
-        to: inputAddress, // 目标地址
-        contractAddress: "", // 没有合约调用
+        chainKey: selectedCrypto,
+        nonce: nonce,
+        gasLimit: 53000,
+        gasPrice: gasPrice,
+        value: Number(amount),
+        to: inputAddress,
+        contractAddress: "",
         contractValue: 0,
       };
-
       console.log("构造的请求数据:", JSON.stringify(requestData, null, 2));
 
-      // 第三步：发送交易请求
       const response = await fetch(
         "https://bt.likkim.com/api/sign/encode_evm",
         {
@@ -899,59 +915,33 @@ function TransactionsScreen() {
           body: JSON.stringify(requestData),
         }
       );
-
       const responseData = await response.json();
+      // console.log("交易请求返回的数据:", responseData);
 
+      // 启动监听签名返回数据（signed_data）的流程
       monitorSignedResult(device);
-      // 打印返回的数据
+
+      // ---------------------------
+      // 第5步：构造并发送 sign 消息
+      // ---------------------------
       if (responseData?.data?.data) {
-        console.log("返回的数据:", responseData.data.data);
-
-        // 构建要发送的第一个字符串
         const signMessage = `sign:${chainKey},${path},${responseData.data.data}`;
-        console.log("构建的发送消息:", signMessage);
+        console.log("构造的 sign 消息:", signMessage);
+        const signBuffer = Buffer.from(signMessage, "utf-8");
+        const signBase64 = signBuffer.toString("base64");
 
-        // 将构建的第一个字符串转换为 Base64 编码
-        const bufferMessage = Buffer.from(signMessage, "utf-8");
-        const base64Message = bufferMessage.toString("base64");
-
-        // 发送 Base64 编码的数据给设备
         try {
           await device.writeCharacteristicWithResponseForService(
             serviceUUID,
             writeCharacteristicUUID,
-            base64Message
+            signBase64
           );
-          console.log("数据已成功发送给设备");
+          console.log("sign消息已成功发送给设备");
         } catch (error) {
-          console.log("发送数据给设备时发生错误:", error);
-        }
-
-        // 第一步交易信息发送
-        const destinationAddress = inputAddress;
-        const senderAddress = paymentAddress;
-        const transactionFee =
-          selectedFeeTab === "Recommended" ? recommendedFee : rapidFeeValue;
-        const secondMessage = `destinationAddress:${senderAddress},${destinationAddress},${transactionFee},${chainKey}`;
-        console.log("第一步交易信息发送:", secondMessage);
-
-        // 将第一步交易信息转换为 Base64 编码
-        const bufferSecondMessage = Buffer.from(secondMessage, "utf-8");
-        const base64SecondMessage = bufferSecondMessage.toString("base64");
-
-        // 发送第一步交易信息发送给设备
-        try {
-          await device.writeCharacteristicWithResponseForService(
-            serviceUUID,
-            writeCharacteristicUUID,
-            base64SecondMessage
-          );
-          console.log("第一步交易信息发送已成功发送给设备");
-        } catch (error) {
-          console.log("发送第一步交易信息发送给设备时发生错误:", error);
+          console.log("发送sign消息时发生错误:", error);
         }
       } else {
-        console.log("返回的数据不包含 'data' 字段");
+        console.log("返回的数据不包含sign消息的data_从服务器获得");
       }
 
       return responseData; // 返回签名结果
