@@ -46,7 +46,7 @@ const currencies = [
   { name: "US Dollar", shortName: "USD" },
   { name: "Ukrainian Hryvnia", shortName: "UAH" },
   { name: "Vietnamese Dong", shortName: "VND" },
-  { name: "Yuan or Chinese Renminbi", shortName: "CNY" },
+  { name: "Chinese Yuan", shortName: "CNY" },
 ];
 
 export const usdtCrypto = {
