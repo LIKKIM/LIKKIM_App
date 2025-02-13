@@ -1,4 +1,22 @@
-// CurrencyModal.js
+/**
+ * CurrencyModal Component
+ *
+ * A modal component that displays a list of currencies for selection.
+ *
+ * Props:
+ *  - visible {boolean} - Determines if the modal is visible.
+ *  - onClose {function} - Callback to close the modal.
+ *  - currencies {Array} - Array of currency objects.
+ *  - searchCurrency {string} - Current search query.
+ *  - setSearchCurrency {function} - Function to update the search query.
+ *  - handleCurrencyChange {function} - Callback when a currency is selected.
+ *  - styles {object} - Custom styles for the modal.
+ *  - isDarkMode {boolean} - Flag for dark mode.
+ *  - t {function} - Translation function.
+ *
+ * @module CurrencyModal
+ */
+
 import React from "react";
 import {
   View,
@@ -26,6 +44,7 @@ const CurrencyModal = ({
   isDarkMode,
   t,
 }) => {
+  // Filter currencies based on the search query (case-insensitive)
   const filteredCurrencies = currencies.filter(
     (currency) =>
       currency.name.toLowerCase().includes(searchCurrency.toLowerCase()) ||
@@ -39,11 +58,13 @@ const CurrencyModal = ({
       visible={visible}
       onRequestClose={onClose}
     >
-      {/* 点击模糊区域关闭键盘和Modal */}
+      {/*
+        Dismiss keyboard and close modal when tapping outside.
+      */}
       <TouchableWithoutFeedback
         onPress={() => {
-          Keyboard.dismiss(); // 关闭键盘
-          onClose(); // 关闭 Modal
+          Keyboard.dismiss(); // Dismiss the keyboard
+          onClose(); // Close the modal
         }}
       >
         <View style={{ flex: 1 }}>
@@ -54,7 +75,7 @@ const CurrencyModal = ({
             <BlurView intensity={10} style={styles.centeredView}>
               <View
                 style={styles.currencyModalView}
-                onStartShouldSetResponder={() => true} // 阻止点击事件冒泡
+                onStartShouldSetResponder={() => true} // Prevent touch event propagation
               >
                 <Text style={styles.languageModalTitle}>
                   {t("Select Currency")}
@@ -72,13 +93,12 @@ const CurrencyModal = ({
                   />
                 </View>
 
+                {/* List of filtered currencies */}
                 <ScrollView style={styles.languageList}>
                   {filteredCurrencies.map((currency) => (
                     <TouchableOpacity
                       key={currency.shortName}
-                      style={{
-                        marginBottom: 6,
-                      }}
+                      style={{ marginBottom: 6 }}
                       onPress={() => handleCurrencyChange(currency)}
                     >
                       <Text style={styles.languageModalText}>
@@ -88,6 +108,7 @@ const CurrencyModal = ({
                   ))}
                 </ScrollView>
 
+                {/* Cancel Button */}
                 <TouchableOpacity
                   style={styles.languageCancelButton}
                   onPress={onClose}
