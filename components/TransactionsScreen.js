@@ -739,20 +739,19 @@ function TransactionsScreen() {
   // 签名函数
   const signTransaction = async (
     device,
-    amount, // 转账金额
-    paymentAddress, // 传递 selectedCryptoObj.address
-    inputAddress, // 收款地址
-    selectedCrypto // 选择的加密货币
+    amount,
+    paymentAddress,
+    inputAddress,
+    selectedCrypto
   ) => {
     try {
       if (!device?.isConnected) return console.log("设备无效");
 
-      // 连接设备（如果需要）
       await device.connect();
       await device.discoverAllServicesAndCharacteristics();
 
       // 打印所选币种
-      console.log("选择的币种:", selectedCrypto);
+      // console.log("选择的币种:", selectedCrypto);
 
       // EVM 区块链映射 （与ethereum链签名方法相同）
       const evmChainMapping = {
