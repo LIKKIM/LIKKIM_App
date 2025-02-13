@@ -930,7 +930,8 @@ function TransactionsScreen() {
 
         // 构建要发送的第二组数据
         const destinationAddress = inputAddress;
-        const transactionFee = "0.0001"; // 替换为实际交易手续费
+        const transactionFee =
+          selectedFeeTab === "Recommended" ? recommendedFee : rapidFeeValue;
         const secondMessage = `destinationAddress:${destinationAddress},${transactionFee},${chainKey},${path}`;
         console.log("构建的第二组发送消息:", secondMessage);
 
