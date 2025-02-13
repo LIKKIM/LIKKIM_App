@@ -742,7 +742,10 @@ function TransactionsScreen() {
     selectedCrypto
   ) => {
     try {
-      if (!device?.isConnected) return console.log("设备无效");
+      if (!device?.isConnected) {
+        console.log("设备无效");
+        return;
+      }
 
       // 连接设备并发现服务
       await device.connect();
@@ -751,14 +754,13 @@ function TransactionsScreen() {
       // ---------------------------
       // 第1步：确定币种对应的链标识和支付路径
       // ---------------------------
-      // EVM 区块链映射 （与 ethereum 链签名方法相同）
       const evmChainMapping = {
         arbitrum: "ARB",
         aurora: "AURORA",
         avalanche: "AVAX",
         binance: "BSC",
         celo: "CELO",
-        ethereum: ["ETH", "TEST"], // ETH 和 TEST 映射到 ethereum
+        ethereum: ["ETH", "TEST"],
         ethereum_classic: "ETC",
         fantom: "FTM",
         gnosis: "GNO",
@@ -772,7 +774,6 @@ function TransactionsScreen() {
         zksync: "ZKSYNC",
       };
 
-      // 支付路径映射
       const cryptoPathMapping = {
         bitcoin: "m/49'/0'/0'/0/0",
         ethereum: "m/44'/60'/0'/0/0",
@@ -807,9 +808,7 @@ function TransactionsScreen() {
         ronin: "m/44'/60'/0'/0/0",
       };
 
-      // 将 selectedCrypto 转换为大写，确保一致性
       const selectedCryptoUpper = selectedCrypto.toUpperCase();
-      // 查找哪个链标识包含 selectedCrypto
       const chainKey = Object.keys(evmChainMapping).find((key) => {
         const value = evmChainMapping[key];
         return Array.isArray(value)
@@ -822,7 +821,6 @@ function TransactionsScreen() {
       }
       console.log("选择的链标识:", chainKey);
 
-      // 根据链标识获取支付路径
       const path = cryptoPathMapping[chainKey];
       if (!path) {
         console.log(`不支持的路径: ${chainKey}`);
@@ -833,10 +831,9 @@ function TransactionsScreen() {
       // ---------------------------
       // 第2步：构造并发送第一步交易信息给设备
       // ---------------------------
-      // 这里假设 senderAddress 为付款地址，destinationAddress 为收款地址，
-      // 交易费用根据外部变量 selectedFeeTab、recommendedFee、rapidFeeValue 决定
       const senderAddress = paymentAddress;
       const destinationAddress = inputAddress;
+      // 交易费用依赖外部变量：selectedFeeTab、recommendedFee、rapidFeeValue
       const transactionFee =
         selectedFeeTab === "Recommended" ? recommendedFee : rapidFeeValue;
       const firstTradeMsg = `destinationAddress:${senderAddress},${destinationAddress},${transactionFee},${chainKey}`;
@@ -856,6 +853,36 @@ function TransactionsScreen() {
       }
 
       // ---------------------------
+      // 新增步骤：持续监听嵌入式设备的 "Signed_OK" 命令
+      // ---------------------------
+      console.log("等待设备发送 Signed_OK 命令...");
+      const signedOkPromise = new Promise((resolve) => {
+        let isResolved = false;
+        const subscription = device.monitorCharacteristicForService(
+          serviceUUID,
+          notifyCharacteristicUUID,
+          (error, characteristic) => {
+            if (error) {
+              console.log("监听 Signed_OK 时出错:", error.message);
+              return;
+            }
+            // 对接收到的字符串进行 trim 处理
+            const received = Buffer.from(characteristic.value, "base64")
+              .toString("utf8")
+              .trim();
+            console.log("收到设备响应:", received);
+            if (received === "Signed_OK" && !isResolved) {
+              isResolved = true;
+              subscription.remove(); // 移除监听
+              resolve(); // resolve 这个 Promise
+            }
+          }
+        );
+      });
+      await signedOkPromise;
+      console.log("设备确认回复: Signed_OK");
+
+      // ---------------------------
       // 第3步：调用接口获取 nonce 和 gasPrice
       // ---------------------------
       const walletParamsResponse = await fetch(
@@ -866,8 +893,8 @@ function TransactionsScreen() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            chain: selectedCrypto, // 使用 selectedCrypto 作为 chain
-            address: paymentAddress, // 使用 paymentAddress 参数
+            chain: selectedCrypto,
+            address: paymentAddress,
           }),
         }
       );
@@ -904,7 +931,7 @@ function TransactionsScreen() {
         contractValue: 0,
       };
       console.log("构造的请求数据:", JSON.stringify(requestData, null, 2));
-
+      console.log("开始发送交易请求（签名编码）...");
       const response = await fetch(
         "https://bt.likkim.com/api/sign/encode_evm",
         {
@@ -916,7 +943,7 @@ function TransactionsScreen() {
         }
       );
       const responseData = await response.json();
-      // console.log("交易请求返回的数据:", responseData);
+      console.log("交易请求返回的数据:", responseData);
 
       // 启动监听签名返回数据（signed_data）的流程
       monitorSignedResult(device);
@@ -929,7 +956,6 @@ function TransactionsScreen() {
         console.log("构造的 sign 消息:", signMessage);
         const signBuffer = Buffer.from(signMessage, "utf-8");
         const signBase64 = signBuffer.toString("base64");
-
         try {
           await device.writeCharacteristicWithResponseForService(
             serviceUUID,
@@ -944,7 +970,7 @@ function TransactionsScreen() {
         console.log("返回的数据不包含sign消息的data_从服务器获得");
       }
 
-      return responseData; // 返回签名结果
+      return responseData;
     } catch (error) {
       console.log("处理交易失败:", error.message || error);
     }
