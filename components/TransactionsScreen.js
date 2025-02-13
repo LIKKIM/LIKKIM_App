@@ -754,7 +754,7 @@ function TransactionsScreen() {
       // 打印所选币种
       console.log("选择的币种:", selectedCrypto);
 
-      // EVM 区块链映射
+      // EVM 区块链映射 （与ethereum链签名方法相同）
       const evmChainMapping = {
         arbitrum: "ARB",
         aurora: "AURORA",
