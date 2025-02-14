@@ -26,6 +26,15 @@ import cryptoPathMapping from "../config/cryptoPathMapping";
 import coinCommandMapping from "../config/coinCommandMapping";
 import { detectNetwork } from "../config/networkUtils";
 import checkAndReqPermission from "../utils/BluetoothPermissions";
+import {
+  btcChainMapping,
+  evmChainMapping,
+  aptosChainMapping,
+  cosmosChainMapping,
+  solChainMapping,
+  suiChainMapping,
+  xrpChainMapping,
+} from "../config/chainMapping";
 
 // 上下文和样式
 import { CryptoContext, DarkModeContext } from "./CryptoContext";
@@ -742,25 +751,6 @@ function TransactionsScreen() {
       // ---------------------------
       // 第1步：确定币种对应的链标识和支付路径 （使用以太坊的签名方法）
       // ---------------------------
-      const evmChainMapping = {
-        arbitrum: "ARB",
-        aurora: "AURORA",
-        avalanche: "AVAX",
-        binance: "BSC",
-        celo: "CELO",
-        ethereum: ["ETH", "TEST"],
-        ethereum_classic: "ETC",
-        fantom: "FTM",
-        gnosis: "GNO",
-        huobi: "HTX",
-        iotext: "IOTX",
-        lina: "LINEA",
-        OKT: "OKT",
-        optimism: "OP",
-        polygon: "POL",
-        ronin: "RON",
-        zksync: "ZKSYNC",
-      };
 
       const selectedCryptoUpper = selectedCrypto.toUpperCase();
       const chainKey = Object.keys(evmChainMapping).find((key) => {
