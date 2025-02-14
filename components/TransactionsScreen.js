@@ -17,6 +17,7 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import { BlurView } from "expo-blur";
 import { prefixToShortName } from "../config/chainPrefixes";
+import cryptoPathMapping from "../config/cryptoPathMapping";
 import { useTranslation } from "react-i18next";
 import { CryptoContext, DarkModeContext } from "./CryptoContext";
 import TransactionsScreenStyles from "../styles/TransactionsScreenStyle";
@@ -798,40 +799,6 @@ function TransactionsScreen() {
         polygon: "POL",
         ronin: "RON",
         zksync: "ZKSYNC",
-      };
-
-      const cryptoPathMapping = {
-        bitcoin: "m/49'/0'/0'/0/0",
-        ethereum: "m/44'/60'/0'/0/0",
-        tron: "m/44'/195'/0'/0/0",
-        bitcoin_cash: "m/44'/145'/0'/0/0",
-        binance: "m/44'/60'/0'/0/0",
-        optimism: "m/44'/60'/0'/0/0",
-        ethereum_classic: "m/44'/60'/0'/0/0",
-        litecoin: "m/49'/2'/0'/0/0",
-        ripple: "m/44'/144'/0'/0/0",
-        solana: "m/44'/501'/0'/0/0",
-        arbitrum: "m/44'/60'/0'/0/0",
-        cosmos: "m/44'/118'/0'/0/0",
-        celestia: "m/44'/118'/0'/0/0",
-        cronos: "m/44'/60'/0'/0/0",
-        juno: "m/44'/118'/0'/0/0",
-        osmosis: "m/44'/118'/0'/0/0",
-        aurora: "m/44'/60'/0'/0/0",
-        avalanche: "m/44'/60'/0'/0/0",
-        celo: "m/44'/60'/0'/0/0",
-        fantom: "m/44'/60'/0'/0/0",
-        gnosis: "m/44'/60'/0'/0/0",
-        huobi: "m/44'/60'/0'/0/0",
-        iotex: "m/44'/60'/0'/0/0",
-        okx: "m/44'/60'/0'/0/0",
-        polygon: "m/44'/60'/0'/0/0",
-        zksync: "m/44'/60'/0'/0/0",
-        aptos: "m/44'/637'/0'/0'/0",
-        sui: "m/44'/784'/0'/0'/0",
-        cardano: "m/1852'/1815'/0'/0/0",
-        linea: "m/44'/60'/0'/0/0",
-        ronin: "m/44'/60'/0'/0/0",
       };
 
       const selectedCryptoUpper = selectedCrypto.toUpperCase();
