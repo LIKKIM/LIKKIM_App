@@ -700,9 +700,9 @@ function WalletScreen({ route, navigation }) {
           console.log("接收到的十六进制数据字符串:", receivedDataHex);
 
           // 检查接收到的数据是否为预期的响应
-          if (receivedDataHex === "A40302B1120D0A") {
+          if (receivedDataString === "Address_OK") {
             console.log("在 LIKKIM 上成功显示地址");
-            setAddressVerificationMessage("地址已成功在 LIKKIM 上显示！");
+            setAddressVerificationMessage(t("addressShown")); // 假设 'addressShown' 是国际化文件中的 key
           }
         }
       );
