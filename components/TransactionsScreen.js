@@ -694,10 +694,6 @@ function TransactionsScreen() {
           const [chain, hex] = signedData.split(",");
 
           // 构造广播交易的数据
-          /*          const postData = {
-            chain: chain.trim(), // 去掉可能的空格
-            hex: hex.trim(), // 去掉可能的空格
-          }; */
           const postData = {
             chain: chain.trim(), // 去掉可能的空格
             hex: hex.trim(), // 在签名前加上 0x，并去掉空格
@@ -1273,22 +1269,6 @@ function TransactionsScreen() {
     }
   };
 
-  // 计算CRC-16-Modbus校验码的函数
-  function crc16Modbus(arr) {
-    let crc = 0xffff; // 初始值为0xFFFF
-    for (let byte of arr) {
-      crc ^= byte; // 按位异或
-      for (let i = 0; i < 8; i++) {
-        // 处理每一个字节的8位
-        if (crc & 0x0001) {
-          crc = (crc >> 1) ^ 0xa001; // 多项式为0xA001
-        } else {
-          crc = crc >> 1;
-        }
-      }
-    }
-    return crc & 0xffff; // 确保CRC值是16位
-  }
   // 监听设备数量
   useEffect(() => {
     const loadVerifiedDevices = async () => {
