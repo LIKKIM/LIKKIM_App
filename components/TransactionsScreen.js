@@ -27,6 +27,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import Constants from "expo-constants";
 import base64 from "base64-js";
 import { Buffer } from "buffer";
+import TransactionConfirmationModal from "./modal/TransactionConfirmationModal";
 import InputAddressModal from "./modal/InputAddressModal";
 import PendingTransactionModal from "./modal/PendingTransactionModal";
 import VerificationModal from "./modal/VerificationModal";
@@ -1774,255 +1775,59 @@ function TransactionsScreen() {
         />
 
         {/* 交易确认的 Modal */}
-        <Modal
-          animationType="slide"
-          transparent={true}
+        <TransactionConfirmationModal
           visible={confirmModalVisible}
           onRequestClose={() => setConfirmModalVisible(false)}
-        >
-          <BlurView intensity={10} style={TransactionsScreenStyle.centeredView}>
-            <View style={TransactionsScreenStyle.confirmModalView}>
-              {/* 添加国际化标题 */}
-              <Text style={TransactionsScreenStyle.modalTitle}>
-                {t("Transaction Confirmation")}
-              </Text>
+          onConfirm={async () => {
+            try {
+              if (!chainShortName)
+                throw new Error("未选择链或未设置 chainShortName");
+              if (verifiedDevices.length === 0) throw new Error("未验证设备");
 
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  marginTop: 6,
-                  marginBottom: 16,
-                }}
-              >
-                {selectedCryptoIcon && (
-                  <Image
-                    source={selectedCryptoIcon}
-                    style={{ width: 24, height: 24, marginRight: 8 }}
-                  />
-                )}
-                <Text style={TransactionsScreenStyle.modalTitle}>
-                  {`${selectedCrypto} (${selectedCryptoChain})`}{" "}
-                </Text>
-              </View>
+              const device = devices.find((d) => d.id === verifiedDevices[0]);
+              if (!device) throw new Error("未找到匹配的设备");
 
-              <ScrollView
-                style={{ maxHeight: 320 }} // 设置最大高度，当内容超过时启用滚动
-                contentContainerStyle={{ paddingHorizontal: 0 }}
-              >
-                <Text style={TransactionsScreenStyle.transactionText}>
-                  <Text style={{ fontWeight: "bold", marginBottom: 8 }}>
-                    {t("Amount")}:
-                  </Text>
+              const selectedCryptoObj = initialAdditionalCryptos.find(
+                (crypto) => crypto.shortName === selectedCrypto
+              );
+              if (!selectedCryptoObj) {
+                throw new Error(`未找到加密货币：${selectedCrypto}`);
+              }
 
-                  {` ${amount} ${selectedCrypto}`}
-                </Text>
-
-                {/* 显示金额对应的法币价值 */}
-                <Text style={TransactionsScreenStyle.transactionText}>
-                  <Text style={{ fontWeight: "bold", marginBottom: 8 }}>
-                    {t("Amount in Currency")}:
-                  </Text>
-
-                  {` ${(
-                    parseFloat(amount) *
-                    priceUsd *
-                    exchangeRates[currencyUnit]
-                  ).toFixed(2)} ${currencyUnit}`}
-                </Text>
-
-                <Text style={TransactionsScreenStyle.transactionText}>
-                  <Text style={{ fontWeight: "bold", marginBottom: 8 }}>
-                    {t("Payment Address")}:
-                  </Text>
-
-                  {` ${selectedAddress}`}
-                </Text>
-
-                <Text style={TransactionsScreenStyle.transactionText}>
-                  <Text style={{ fontWeight: "bold", marginBottom: 8 }}>
-                    {t("Recipient Address")}:
-                  </Text>
-
-                  {` ${inputAddress}`}
-                </Text>
-
-                <View style={TransactionsScreenStyle.transactionText}>
-                  {/* 标题部分 */}
-                  <Text style={{ fontWeight: "bold", marginBottom: 8 }}>
-                    {t("Transaction Fee")}:
-                  </Text>
-
-                  {/* Tab 按钮 */}
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      backgroundColor: isDarkMode ? "#333" : "#eee",
-                      borderRadius: 20,
-                      borderWidth: 1,
-                      borderColor: isDarkMode ? "#333" : "#eee",
-                      padding: 2,
-                      alignSelf: "flex-start", // 只包裹内容宽度
-                    }}
-                  >
-                    <TouchableOpacity
-                      style={{
-                        paddingVertical: 8,
-                        paddingHorizontal: 20,
-                        borderRadius: 20,
-                        backgroundColor:
-                          selectedFeeTab === "Recommended"
-                            ? isDarkMode
-                              ? "#555"
-                              : "#fff"
-                            : "transparent",
-                        borderColor: isDarkMode ? "#333" : "#eee",
-                        borderWidth: 1,
-                        // 移除了 marginRight，这样两个按钮之间就没有间隔
-                      }}
-                      onPress={() => setSelectedFeeTab("Recommended")}
-                    >
-                      <Text
-                        style={{
-                          fontWeight: "bold",
-                          color:
-                            selectedFeeTab === "Recommended"
-                              ? isDarkMode
-                                ? "#fff"
-                                : "#000"
-                              : "#888",
-                        }}
-                      >
-                        {t("Recommended")}
-                      </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      style={{
-                        paddingVertical: 8,
-                        paddingHorizontal: 20,
-                        borderRadius: 20,
-                        backgroundColor:
-                          selectedFeeTab === "Rapid"
-                            ? isDarkMode
-                              ? "#555"
-                              : "#fff"
-                            : "transparent",
-                        borderColor: isDarkMode ? "#333" : "#eee",
-                        borderWidth: 1,
-                      }}
-                      onPress={() => setSelectedFeeTab("Rapid")}
-                    >
-                      <Text
-                        style={{
-                          fontWeight: "bold",
-                          color:
-                            selectedFeeTab === "Rapid"
-                              ? isDarkMode
-                                ? "#fff"
-                                : "#000"
-                              : "#888",
-                        }}
-                      >
-                        {t("Rapid")}
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
-
-                  {/* 根据 selectedFeeTab 渲染手续费信息 */}
-                  {selectedFeeTab === "Recommended" ? (
-                    <View style={{ marginTop: 10 }}>
-                      <Text style={TransactionsScreenStyle.balanceValue}>
-                        {recommendedFee} {selectedCrypto} (Recommended)
-                      </Text>
-                      <Text style={TransactionsScreenStyle.balanceValue}>
-                        ({currencyUnit} {recommendedValue})
-                      </Text>
-                    </View>
-                  ) : (
-                    <View style={{ marginTop: 10 }}>
-                      <Text style={TransactionsScreenStyle.balanceValue}>
-                        {rapidFeeValue} {selectedCrypto} (Rapid)
-                      </Text>
-                      <Text style={TransactionsScreenStyle.balanceValue}>
-                        ({currencyUnit} {rapidCurrencyValue})
-                      </Text>
-                    </View>
-                  )}
-                </View>
-
-                <Text style={TransactionsScreenStyle.transactionText}>
-                  <Text style={{ fontWeight: "bold", marginBottom: 8 }}>
-                    {t("Detected Network")}:
-                  </Text>
-                  {"\n"}
-                  {` ${detectedNetwork}`}
-                </Text>
-              </ScrollView>
-
-              <View style={{ marginTop: 20, width: "100%" }}>
-                <TouchableOpacity
-                  style={TransactionsScreenStyle.optionButton}
-                  onPress={async () => {
-                    try {
-                      if (!chainShortName)
-                        throw new Error("未选择链或未设置 chainShortName");
-
-                      // 确保 verifiedDevices 非空并从中获取设备
-                      if (verifiedDevices.length === 0)
-                        throw new Error("未验证设备");
-
-                      // 查找匹配的设备
-                      const device = devices.find(
-                        (d) => d.id === verifiedDevices[0]
-                      );
-                      if (!device) throw new Error("未找到匹配的设备");
-
-                      // 获取 selectedCryptoObj
-                      const selectedCryptoObj = initialAdditionalCryptos.find(
-                        (crypto) => crypto.shortName === selectedCrypto
-                      );
-
-                      if (!selectedCryptoObj) {
-                        throw new Error(`未找到加密货币：${selectedCrypto}`);
-                      }
-
-                      console.log(
-                        "选择的加密货币:",
-                        selectedCryptoObj.shortName
-                      );
-
-                      setConfirmModalVisible(false);
-                      setConfirmingTransactionModalVisible(true);
-                      // 调用签名函数
-                      await signTransaction(
-                        device,
-                        amount, // 传递金额
-                        selectedCryptoObj.address, // 传递 selectedCryptoObj.address 作为 paymentAddress
-                        inputAddress, // 传递收款地址
-                        selectedCryptoObj.shortName // 传递 selectedCryptoObj.shortName 作为 selectedCrypto
-                      );
-                    } catch (error) {
-                      console.log("确认交易时出错:", error);
-                    }
-                  }}
-                >
-                  <Text style={TransactionsScreenStyle.submitButtonText}>
-                    {t("Confirm")}
-                  </Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                  style={TransactionsScreenStyle.cancelButton}
-                  onPress={() => setConfirmModalVisible(false)}
-                >
-                  <Text style={TransactionsScreenStyle.cancelButtonText}>
-                    {t("Cancel")}
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </BlurView>
-        </Modal>
+              setConfirmModalVisible(false);
+              setConfirmingTransactionModalVisible(true);
+              await signTransaction(
+                device,
+                amount,
+                selectedCryptoObj.address,
+                inputAddress,
+                selectedCryptoObj.shortName
+              );
+            } catch (error) {
+              console.log("确认交易时出错:", error);
+            }
+          }}
+          onCancel={() => setConfirmModalVisible(false)}
+          t={t}
+          TransactionsScreenStyle={TransactionsScreenStyle}
+          isDarkMode={isDarkMode}
+          selectedCryptoIcon={selectedCryptoIcon}
+          selectedCrypto={selectedCrypto}
+          selectedCryptoChain={selectedCryptoChain}
+          amount={amount}
+          priceUsd={priceUsd}
+          exchangeRates={exchangeRates}
+          currencyUnit={currencyUnit}
+          recommendedFee={recommendedFee}
+          recommendedValue={recommendedValue}
+          rapidFeeValue={rapidFeeValue}
+          rapidCurrencyValue={rapidCurrencyValue}
+          selectedFeeTab={selectedFeeTab}
+          setSelectedFeeTab={setSelectedFeeTab}
+          detectedNetwork={detectedNetwork}
+          selectedAddress={selectedAddress}
+          inputAddress={inputAddress}
+        />
 
         {/* 选择接收的加密货币模态窗口 */}
         <SelectCryptoModal
