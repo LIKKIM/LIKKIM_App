@@ -798,7 +798,7 @@ function TransactionsScreen() {
       }
 
       // ---------------------------
-      // 新增步骤：持续监听嵌入式设备的 "Signed_OK" 命令
+      // 第3步：持续监听嵌入式设备的 "Signed_OK" 命令
       // ---------------------------
       console.log("等待设备发送 Signed_OK 命令...");
       const signedOkPromise = new Promise((resolve) => {
@@ -836,7 +836,7 @@ function TransactionsScreen() {
       console.log("设备确认回复: Signed_OK");
 
       // ---------------------------
-      // 第3步：调用接口获取 nonce 和 gasPrice
+      // 第4步：调用接口获取 nonce 和 gasPrice
       // ---------------------------
       const walletParamsResponse = await fetch(
         "https://bt.likkim.com/api/wallet/getSignParam",
@@ -871,7 +871,7 @@ function TransactionsScreen() {
       console.log("获取到的 gasPrice:", gasPrice, "nonce:", nonce);
 
       // ---------------------------
-      // 第4步：构造 POST 请求数据并调用签名编码接口
+      // 第5步：构造 POST 请求数据并调用签名编码接口
       // ---------------------------
       const requestData = {
         chainKey: chainKey,
@@ -902,7 +902,7 @@ function TransactionsScreen() {
       monitorSignedResult(device);
 
       // ---------------------------
-      // 第5步：构造并发送 sign 消息
+      // 第6步：构造并发送 sign 消息
       // ---------------------------
       if (responseData?.data?.data) {
         const signMessage = `sign:${chainKey},${path},${responseData.data.data}`;
