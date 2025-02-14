@@ -14,7 +14,6 @@ import {
   Image,
   PermissionsAndroid,
 } from "react-native";
-import InputAddressModal from "./modal/InputAddressModal";
 import { LinearGradient } from "expo-linear-gradient";
 import { BlurView } from "expo-blur";
 import { prefixToShortName } from "../config/chainPrefixes";
@@ -28,6 +27,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import Constants from "expo-constants";
 import base64 from "base64-js";
 import { Buffer } from "buffer";
+import InputAddressModal from "./modal/InputAddressModal";
+import PendingTransactionModal from "./modal/PendingTransactionModal";
 import VerificationModal from "./modal/VerificationModal";
 import BluetoothModal from "./modal/BluetoothModal";
 import AmountModal from "./modal/AmountModal";
@@ -2100,40 +2101,13 @@ function TransactionsScreen() {
         />
 
         {/* Pending Transaction Modal */}
-        <Modal
+        <PendingTransactionModal
           visible={confirmingTransactionModalVisible}
-          onRequestClose={() => setConfirmingTransactionModalVisible(false)}
-          transparent={true}
-          animationType="slide"
-        >
-          <View style={TransactionsScreenStyle.centeredView}>
-            <View style={TransactionsScreenStyle.pendingModalView}>
-              <Text style={TransactionsScreenStyle.modalTitle}>
-                {modalStatus.title}
-              </Text>
-              <Image
-                source={modalStatus.image}
-                style={{ width: 120, height: 120 }}
-              />
-              <Text
-                style={[
-                  TransactionsScreenStyle.modalSubtitle,
-                  { marginBottom: 20 },
-                ]}
-              >
-                {modalStatus.subtitle}
-              </Text>
-              <TouchableOpacity
-                style={TransactionsScreenStyle.submitButton}
-                onPress={() => setConfirmingTransactionModalVisible(false)}
-              >
-                <Text style={TransactionsScreenStyle.submitButtonText}>
-                  {t("Close")}
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </Modal>
+          onClose={() => setConfirmingTransactionModalVisible(false)}
+          modalStatus={modalStatus}
+          TransactionsScreenStyle={TransactionsScreenStyle}
+          t={t}
+        />
 
         {/* Swap 模态框 */}
         <SwapModal
