@@ -1990,6 +1990,8 @@ function TransactionsScreen() {
                         selectedCryptoObj.shortName
                       );
 
+                      setConfirmModalVisible(false);
+                      setConfirmingTransactionModalVisible(true);
                       // 调用签名函数
                       await signTransaction(
                         device,
@@ -1998,9 +2000,6 @@ function TransactionsScreen() {
                         inputAddress, // 传递收款地址
                         selectedCryptoObj.shortName // 传递 selectedCryptoObj.shortName 作为 selectedCrypto
                       );
-
-                      setConfirmModalVisible(false);
-                      setConfirmingTransactionModalVisible(true);
                     } catch (error) {
                       console.log("确认交易时出错:", error);
                     }
