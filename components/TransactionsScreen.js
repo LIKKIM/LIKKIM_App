@@ -49,15 +49,11 @@ const writeCharacteristicUUID = "6E400002-B5A3-F393-E0A9-E50E24DCCA9E";
 const notifyCharacteristicUUID = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E";
 
 function TransactionsScreen() {
-  const [receivedVerificationCode, setReceivedVerificationCode] = useState("");
+  // ---------- 状态和上下文 ----------
   const { t } = useTranslation();
-  const [swapModalVisible, setSwapModalVisible] = useState(false);
-  const [fromValue, setFromValue] = useState("");
-  const [toValue, setToValue] = useState("");
   const { isDarkMode } = useContext(DarkModeContext);
   const {
     updateCryptoAddress,
-    usdtCrypto,
     initialAdditionalCryptos,
     exchangeRates,
     currencyUnit,
@@ -67,19 +63,27 @@ function TransactionsScreen() {
     setIsVerificationSuccessful,
     verifiedDevices,
     setVerifiedDevices,
-    updateCryptoData,
     cryptoCards,
     setCryptoCards,
     transactionHistory,
     setTransactionHistory,
   } = useContext(CryptoContext);
 
+  const TransactionsScreenStyle = TransactionsScreenStyles(isDarkMode);
+  const darkColors = ["#21201E", "#0E0D0D"];
+  const lightColors = ["#FFFFFF", "#EDEBEF"];
+  const buttonBackgroundColor = isDarkMode ? "#CCB68C" : "#CFAB95";
+  const disabledButtonBackgroundColor = isDarkMode ? "#6c6c6c" : "#ccc";
+
+  // 交易/设备/界面状态
+  const [receivedVerificationCode, setReceivedVerificationCode] = useState("");
+  const [swapModalVisible, setSwapModalVisible] = useState(false);
+  const [fromValue, setFromValue] = useState("");
+  const [toValue, setToValue] = useState("");
   const [
     confirmingTransactionModalVisible,
     setConfirmingTransactionModalVisible,
   ] = useState(false);
-  const TransactionsScreenStyle = TransactionsScreenStyles(isDarkMode);
-  const addressIcon = isDarkMode ? "#ffffff" : "#676776";
   const [modalVisible, setModalVisible] = useState(false);
   const [addressModalVisible, setAddressModalVisible] = useState(false);
   const [operationType, setOperationType] = useState("");
@@ -87,31 +91,24 @@ function TransactionsScreen() {
   const [selectedAddress, setSelectedAddress] = useState("");
   const [balance, setBalance] = useState("");
   const [valueUsd, setValueUsd] = useState("");
-  const [selectedCryptoName, setSelectedCryptoName] = useState(""); // 定义 selectedCryptoName 状态
+  const [selectedCryptoName, setSelectedCryptoName] = useState("");
   const [queryChainShortName, setQueryChainShortName] = useState("");
   const [priceUsd, setPriceUsd] = useState("");
   const [selectedCryptoIcon, setSelectedCryptoIcon] = useState(null);
-  const iconColor = isDarkMode ? "#CCB68C" : "#CFAB95";
-  const darkColors = ["#21201E", "#0E0D0D"];
-  const lightColors = ["#FFFFFF", "#EDEBEF"];
   const [amount, setAmount] = useState("");
-  const buttonBackgroundColor = isDarkMode ? "#CCB68C" : "#CFAB95";
-  const disabledButtonBackgroundColor = isDarkMode ? "#6c6c6c" : "#ccc"; // 根据 isDarkMode 设置不同的灰色
   const [inputAddress, setInputAddress] = useState("");
   const [selectedCrypto, setSelectedCrypto] = useState("");
-  const [chainShortName, setChainShortName] = useState(""); // 设置链的简称，例如 TRX
-  const [amountModalVisible, setAmountModalVisible] = useState(false); // 新增状态
-  const [confirmModalVisible, setConfirmModalVisible] = useState(false); // 新增交易确认modal状态
+  const [chainShortName, setChainShortName] = useState("");
+  const [amountModalVisible, setAmountModalVisible] = useState(false);
+  const [confirmModalVisible, setConfirmModalVisible] = useState(false);
   const [hasFetchedBalance, setHasFetchedBalance] = useState(false);
   const [selectedDevice, setSelectedDevice] = useState(null);
-  const [bleVisible, setBleVisible] = useState(false); // New state for Bluetooth modal
-  const isScanningRef = useRef(false);
+  const [bleVisible, setBleVisible] = useState(false);
   const [isScanning, setIsScanning] = useState(false);
   const [devices, setDevices] = useState([]);
   const [pinModalVisible, setPinModalVisible] = useState(false);
   const [pinCode, setPinCode] = useState("");
   const [verificationStatus, setVerificationStatus] = useState(null);
-  const restoreIdentifier = Constants.installationId;
   const [isAddressValid, setIsAddressValid] = useState(false);
   const [verificationSuccessModalVisible, setVerificationSuccessModalVisible] =
     useState(false);
@@ -121,46 +118,45 @@ function TransactionsScreen() {
   const [inputAddressModalVisible, setInputAddressModalVisible] =
     useState(false);
   const [detectedNetwork, setDetectedNetwork] = useState("");
-  const bleManagerRef = useRef(null);
   const [fee, setFee] = useState("");
   const [rapidFee, setRapidFee] = useState("");
   const [fromDropdownVisible, setFromDropdownVisible] = useState(false);
   const [toDropdownVisible, setToDropdownVisible] = useState(false);
-  const [selectedFromToken, setSelectedFromToken] = useState(""); // "From" token state
-  const [selectedFromChain, setSelectedFromChain] = useState(""); // "From" chain state
-  const [selectedToToken, setSelectedToToken] = useState(""); // "To" token state
-  const [selectedToChain, setSelectedToChain] = useState(""); // "To" chain state
+  const [selectedFromToken, setSelectedFromToken] = useState("");
+  const [selectedFromChain, setSelectedFromChain] = useState("");
+  const [selectedToToken, setSelectedToToken] = useState("");
+  const [selectedToChain, setSelectedToChain] = useState("");
   const [paymentAddress, setPaymentAddress] = useState("Your Payment Address");
   const [addressVerificationMessage, setAddressVerificationMessage] = useState(
     t("Verifying Address on LIKKIM...")
   );
   const [selectedFeeTab, setSelectedFeeTab] = useState("Recommended");
+  const [modalStatus, setModalStatus] = useState({
+    title: t("Confirming Transaction on LIKKIM Device..."),
+    subtitle: t("Please confirm the transaction on your LIKKIM device."),
+    image: require("../assets/gif/Pending.gif"),
+  });
 
-  // 计算手续费和对应的法币价值
+  // 费用计算
   const recommendedFee = (parseFloat(fee) / 1e9).toFixed(9);
   const recommendedValue = (
     (parseFloat(fee) / 1e9) *
     priceUsd *
     exchangeRates[currencyUnit]
   ).toFixed(2);
-
   const rapidFeeValue = (parseFloat(rapidFee) / 1e9).toFixed(9);
   const rapidCurrencyValue = (
     (parseFloat(rapidFee) / 1e9) *
     priceUsd *
     exchangeRates[currencyUnit]
   ).toFixed(2);
-
   const isAmountValid =
     amount &&
     parseFloat(amount) > 0 &&
     parseFloat(amount) <= parseFloat(balance) + parseFloat(fee);
 
-  const [modalStatus, setModalStatus] = useState({
-    title: t("Confirming Transaction on LIKKIM Device..."),
-    subtitle: t("Please confirm the transaction on your LIKKIM device."),
-    image: require("../assets/gif/Pending.gif"),
-  });
+  // ---------- 扫描设备 ----------
+  const bleManagerRef = useRef(null);
 
   const scanDevices = () => {
     if (Platform.OS !== "web" && !isScanning) {
