@@ -714,13 +714,14 @@ function TransactionsScreen() {
                 headers: {
                   "Content-Type": "application/json",
                 },
-                body: JSON.stringify(postData), // 将数据转换为 JSON 字符串
+                body: JSON.stringify(postData),
               }
             );
 
             const responseData = await response.json();
 
-            if (response.ok && responseData.success) {
+            // 根据返回的 code 字段判断广播是否成功
+            if (response.ok && responseData.code === "0") {
               console.log("交易广播成功:", responseData);
             } else {
               console.log("交易广播失败:", responseData);
@@ -756,7 +757,7 @@ function TransactionsScreen() {
       await device.discoverAllServicesAndCharacteristics();
 
       // ---------------------------
-      // 第1步：确定币种对应的链标识和支付路径
+      // 第1步：确定币种对应的链标识和支付路径 （使用以太坊的签名方法）
       // ---------------------------
       const evmChainMapping = {
         arbitrum: "ARB",
@@ -925,7 +926,7 @@ function TransactionsScreen() {
       // 第4步：构造 POST 请求数据并调用签名编码接口
       // ---------------------------
       const requestData = {
-        chainKey: selectedCrypto,
+        chainKey: chainKey,
         nonce: nonce,
         gasLimit: 53000,
         gasPrice: gasPrice,
