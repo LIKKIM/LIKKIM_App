@@ -29,6 +29,7 @@ import checkAndReqPermission from "../utils/BluetoothPermissions";
 import {
   btcChainMapping,
   evmChainMapping,
+  tronChainMapping,
   aptosChainMapping,
   cosmosChainMapping,
   solChainMapping,
