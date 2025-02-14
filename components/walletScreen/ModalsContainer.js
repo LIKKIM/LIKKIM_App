@@ -12,6 +12,7 @@ import VerificationModal from "../modal/VerificationModal";
 import PendingModal from "../modal/PendingModal";
 
 const ModalsContainer = ({
+  selectedCardChainShortName,
   addressModalVisible,
   setAddressModalVisible,
   selectedCryptoIcon,
@@ -83,6 +84,7 @@ const ModalsContainer = ({
         selectedCryptoIcon={selectedCryptoIcon}
         selectedCrypto={selectedCrypto}
         selectedAddress={selectedAddress}
+        selectedCardChainShortName={selectedCardChainShortName}
         isVerifyingAddress={isVerifyingAddress}
         addressVerificationMessage={addressVerificationMessage}
         onVerifyAddress={handleVerifyAddress}

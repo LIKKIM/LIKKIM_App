@@ -83,6 +83,8 @@ function WalletScreen({ route, navigation }) {
   const [addressModalVisible, setAddressModalVisible] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState("");
   const [selectedCrypto, setSelectedCrypto] = useState(null);
+  const [selectedCardChainShortName, setSelectedCardChainShortName] =
+    useState(null);
   const [addCryptoVisible, setAddCryptoVisible] = useState(false);
   const [selectedCardName, setSelectedCardName] = useState(null); // 已选中的卡片名称
   const [selectedCardChain, setSelectedCardChain] = useState(null); // 已选中的卡片链信息
@@ -1243,6 +1245,10 @@ function WalletScreen({ route, navigation }) {
   }, [processModalVisible, t]);
 
   useEffect(() => {
+    console.log("选中的 chainShortName 已更新:", selectedCardChainShortName);
+  }, [selectedCardChainShortName]);
+
+  useEffect(() => {
     if (modalVisible) {
       scrollViewRef.current.scrollTo({ y: 0, animated: true });
       setTimeout(() => {
@@ -1424,6 +1430,7 @@ function WalletScreen({ route, navigation }) {
     const crypto = cryptoCards?.find(
       (card) => card.name === cryptoName && card.chain === cryptoChain
     );
+    setSelectedCardChainShortName(crypto.chainShortName);
     setSelectedAddress(crypto?.address || "Unknown");
     setSelectedCardName(cryptoName);
     setSelectedCardChain(cryptoChain);
@@ -1662,6 +1669,7 @@ function WalletScreen({ route, navigation }) {
         scrollYOffset={scrollYOffset}
       />
       <ModalsContainer
+        selectedCardChainShortName={selectedCardChainShortName}
         addressModalVisible={addressModalVisible}
         setAddressModalVisible={setAddressModalVisible}
         selectedCryptoIcon={selectedCryptoIcon}

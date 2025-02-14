@@ -17,6 +17,7 @@ const AddressModal = ({
   selectedCryptoIcon,
   selectedCrypto,
   selectedAddress,
+  selectedCardChainShortName,
   isVerifyingAddress,
   addressVerificationMessage,
   onVerifyAddress,
