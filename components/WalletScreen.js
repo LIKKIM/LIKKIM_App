@@ -615,7 +615,6 @@ function WalletScreen({ route, navigation }) {
     console.log("传入的链短名称是:", chainShortName);
 
     if (verifiedDevices.length > 0) {
-      // 在已验证设备列表中查找设备
       const device = devices.find((d) => d.id === verifiedDevices[0]);
       if (device) {
         showLIKKIMAddressCommand(device, chainShortName);

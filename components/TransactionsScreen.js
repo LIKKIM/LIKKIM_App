@@ -1257,20 +1257,19 @@ function TransactionsScreen() {
   };
 
   const handleVerifyAddress = (chainShortName) => {
-    console.log("传入的链短名称是:", chainShortName); // 打印传入的链短名称
+    console.log("传入的链短名称是:", chainShortName);
 
     if (verifiedDevices.length > 0) {
-      // 在已验证设备列表中查找设备
       const device = devices.find((d) => d.id === verifiedDevices[0]);
       if (device) {
-        showLIKKIMAddressCommand(device, chainShortName); // 将链短名称传递给函数
+        showLIKKIMAddressCommand(device, chainShortName);
       } else {
-        setAddressModalVisible(false); // 如果没有找到设备，关闭地址模态框
-        setBleVisible(true); // 并显示蓝牙模态框
+        setAddressModalVisible(false);
+        setBleVisible(true);
       }
     } else {
-      setAddressModalVisible(false); // 如果没有已验证设备，关闭地址模态框
-      setBleVisible(true); // 并显示蓝牙模态框
+      setAddressModalVisible(false);
+      setBleVisible(true);
     }
   };
 
