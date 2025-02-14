@@ -17,9 +17,10 @@ const AddressModal = ({
   selectedCryptoIcon,
   selectedCrypto,
   selectedAddress,
+  selectedCardChainShortName,
   isVerifyingAddress,
   addressVerificationMessage,
-  onVerifyAddress,
+  handleVerifyAddress,
   WalletScreenStyle,
   t, // 确保 t 是通过 props 传递的
   isDarkMode,
@@ -52,10 +53,11 @@ const AddressModal = ({
           />
         )}
         <ActionButtons
-          onVerifyAddress={onVerifyAddress}
+          handleVerifyAddress={handleVerifyAddress}
           onClose={onClose}
           WalletScreenStyle={WalletScreenStyle}
-          t={t} // 传递 t 函数
+          t={t}
+          selectedCardChainShortName={selectedCardChainShortName}
         />
       </View>
     </BlurView>
@@ -133,7 +135,13 @@ const VerifyingStatus = ({ message, WalletScreenStyle }) => (
   </View>
 );
 
-const ActionButtons = ({ onVerifyAddress, onClose, WalletScreenStyle, t }) => (
+const ActionButtons = ({
+  handleVerifyAddress,
+  onClose,
+  WalletScreenStyle,
+  t,
+  selectedCardChainShortName,
+}) => (
   <View
     style={{
       flexDirection: "col",
@@ -142,7 +150,7 @@ const ActionButtons = ({ onVerifyAddress, onClose, WalletScreenStyle, t }) => (
     }}
   >
     <TouchableOpacity
-      onPress={onVerifyAddress}
+      onPress={() => handleVerifyAddress(selectedCardChainShortName)}
       style={WalletScreenStyle.verifyAddressButton}
     >
       <Text style={WalletScreenStyle.submitButtonText}>

@@ -55,13 +55,13 @@ const WalletScreenStyles = (isDarkMode) => {
     },
     // Container for card information with wrapping support
     cardInfoContainer: {
-      flexDirection: "row",
+      flexDirection: "column", // 修改为 column 使得它们上下排列
       width: 156,
       flex: 1,
-      flexWrap: "wrap",
-      alignItems: "center",
+      alignItems: "flex-start", // 确保子元素左对齐
       marginBottom: 8,
     },
+
     // Container for the card icon positioned at the top left
     cardIconContainer: {
       position: "absolute",
@@ -493,7 +493,7 @@ const WalletScreenStyles = (isDarkMode) => {
     },
     cardBalanceCenter: {
       color: "#fff",
-      fontSize: 28,
+      fontSize: 25,
       fontWeight: "bold",
       marginBottom: 8,
     },

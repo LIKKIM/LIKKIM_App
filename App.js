@@ -160,10 +160,10 @@ function AppContent({
   const navigation = useNavigation();
   const [walletModalVisible, setWalletModalVisible] = useState(false);
 
-  // Log the screen lock status when it changes
+  /*   // Log the screen lock status when it changes
   useEffect(() => {
     console.log("isScreenLockEnabled:", isScreenLockEnabled);
-  }, [isScreenLockEnabled]);
+  }, [isScreenLockEnabled]); */
 
   // Function to handle card deletion confirmation
   const handleConfirmDelete = () => {
@@ -195,10 +195,10 @@ function AppContent({
         const tabRoutes = backRoute.state.routes;
         const walletRoute = tabRoutes.find((route) => route.name === "Wallet");
         if (walletRoute?.params?.isModalVisible !== undefined) {
-          console.log(
+          /*           console.log(
             "isModalVisible parameter:",
             walletRoute.params.isModalVisible
-          );
+          ); */
           setWalletModalVisible(walletRoute.params.isModalVisible);
         }
       }

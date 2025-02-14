@@ -3,31 +3,48 @@ import React, { useContext, useState, useRef, useEffect } from "react";
 import {
   View,
   Text,
-  Modal,
   TouchableOpacity,
-  TextInput,
   ScrollView,
-  FlatList,
   Clipboard,
-  KeyboardAvoidingView,
   Platform,
-  Image,
-  PermissionsAndroid,
 } from "react-native";
-import InputAddressModal from "./modal/InputAddressModal";
 import { LinearGradient } from "expo-linear-gradient";
-import { BlurView } from "expo-blur";
-import { prefixToShortName } from "../config/chainPrefixes";
-import { useTranslation } from "react-i18next";
-import { CryptoContext, DarkModeContext } from "./CryptoContext";
-import TransactionsScreenStyles from "../styles/TransactionsScreenStyle";
-import Icon from "react-native-vector-icons/MaterialIcons";
-import Feather from "react-native-vector-icons/Feather";
-import { detectNetwork } from "../config/networkUtils";
+import { Buffer } from "buffer";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Constants from "expo-constants";
-import base64 from "base64-js";
-import { Buffer } from "buffer";
+import { useTranslation } from "react-i18next";
+import Icon from "react-native-vector-icons/MaterialIcons";
+import Feather from "react-native-vector-icons/Feather";
+import { ethers } from "ethers";
+import { BleManager } from "react-native-ble-plx";
+import "react-native-get-random-values";
+import "@ethersproject/shims";
+
+// 配置与工具
+import { prefixToShortName } from "../config/chainPrefixes";
+import cryptoPathMapping from "../config/cryptoPathMapping";
+import coinCommandMapping from "../config/coinCommandMapping";
+import { detectNetwork } from "../config/networkUtils";
+import checkAndReqPermission from "../utils/BluetoothPermissions";
+import {
+  btcChainMapping,
+  evmChainMapping,
+  tronChainMapping,
+  aptosChainMapping,
+  cosmosChainMapping,
+  solChainMapping,
+  suiChainMapping,
+  xrpChainMapping,
+} from "../config/chainMapping";
+
+// 上下文和样式
+import { CryptoContext, DarkModeContext } from "./CryptoContext";
+import TransactionsScreenStyles from "../styles/TransactionsScreenStyle";
+
+// Modal 组件
+import TransactionConfirmationModal from "./modal/TransactionConfirmationModal";
+import InputAddressModal from "./modal/InputAddressModal";
+import PendingTransactionModal from "./modal/PendingTransactionModal";
 import VerificationModal from "./modal/VerificationModal";
 import BluetoothModal from "./modal/BluetoothModal";
 import AmountModal from "./modal/AmountModal";
@@ -35,31 +52,20 @@ import SelectCryptoModal from "./modal/SelectCryptoModal";
 import SwapModal from "./modal/SwapModal";
 import ReceiveAddressModal from "./modal/ReceiveAddressModal";
 import PinModal from "./modal/PinModal";
-import "react-native-get-random-values";
-import "@ethersproject/shims";
-// 导入 ethers 库
-import { ethers, Transaction } from "ethers";
-import { BleManager, BleErrorCode } from "react-native-ble-plx";
-import checkAndReqPermission from "../utils/BluetoothPermissions"; //安卓高版本申请蓝牙权限
 
+// BLE 常量
 const serviceUUID = "6E400001-B5A3-F393-E0A9-E50E24DCCA9E";
 const writeCharacteristicUUID = "6E400002-B5A3-F393-E0A9-E50E24DCCA9E";
 const notifyCharacteristicUUID = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E";
 
 function TransactionsScreen() {
-  const [receivedVerificationCode, setReceivedVerificationCode] = useState("");
+  // ---------- 状态和上下文 ----------
   const { t } = useTranslation();
-  const [swapModalVisible, setSwapModalVisible] = useState(false);
-  const [fromValue, setFromValue] = useState("");
-  const [toValue, setToValue] = useState("");
   const { isDarkMode } = useContext(DarkModeContext);
   const {
     updateCryptoAddress,
-    usdtCrypto,
     initialAdditionalCryptos,
-    additionalCryptos,
-    cryptoCount,
-    setCryptoCount,
+    exchangeRates,
     currencyUnit,
     addedCryptos,
     setAddedCryptos,
@@ -67,17 +73,27 @@ function TransactionsScreen() {
     setIsVerificationSuccessful,
     verifiedDevices,
     setVerifiedDevices,
-    updateCryptoData,
+    cryptoCards,
+    setCryptoCards,
     transactionHistory,
     setTransactionHistory,
   } = useContext(CryptoContext);
 
+  const TransactionsScreenStyle = TransactionsScreenStyles(isDarkMode);
+  const darkColors = ["#21201E", "#0E0D0D"];
+  const lightColors = ["#FFFFFF", "#EDEBEF"];
+  const buttonBackgroundColor = isDarkMode ? "#CCB68C" : "#CFAB95";
+  const disabledButtonBackgroundColor = isDarkMode ? "#6c6c6c" : "#ccc";
+
+  // 交易/设备/界面状态
+  const [receivedVerificationCode, setReceivedVerificationCode] = useState("");
+  const [swapModalVisible, setSwapModalVisible] = useState(false);
+  const [fromValue, setFromValue] = useState("");
+  const [toValue, setToValue] = useState("");
   const [
     confirmingTransactionModalVisible,
     setConfirmingTransactionModalVisible,
   ] = useState(false);
-  const TransactionsScreenStyle = TransactionsScreenStyles(isDarkMode);
-  const addressIcon = isDarkMode ? "#ffffff" : "#676776";
   const [modalVisible, setModalVisible] = useState(false);
   const [addressModalVisible, setAddressModalVisible] = useState(false);
   const [operationType, setOperationType] = useState("");
@@ -85,32 +101,24 @@ function TransactionsScreen() {
   const [selectedAddress, setSelectedAddress] = useState("");
   const [balance, setBalance] = useState("");
   const [valueUsd, setValueUsd] = useState("");
-  const [fee, setFee] = useState("");
+  const [selectedCryptoName, setSelectedCryptoName] = useState("");
   const [queryChainShortName, setQueryChainShortName] = useState("");
   const [priceUsd, setPriceUsd] = useState("");
   const [selectedCryptoIcon, setSelectedCryptoIcon] = useState(null);
-  const iconColor = isDarkMode ? "#CCB68C" : "#CFAB95";
-  const darkColors = ["#21201E", "#0E0D0D"];
-  const lightColors = ["#FFFFFF", "#EDEBEF"];
   const [amount, setAmount] = useState("");
-  const buttonBackgroundColor = isDarkMode ? "#CCB68C" : "#CFAB95";
-  const disabledButtonBackgroundColor = isDarkMode ? "#6c6c6c" : "#ccc"; // 根据 isDarkMode 设置不同的灰色
   const [inputAddress, setInputAddress] = useState("");
   const [selectedCrypto, setSelectedCrypto] = useState("");
-  const [chainShortName, setChainShortName] = useState(""); // 设置链的简称，例如 TRX
-  const [amountModalVisible, setAmountModalVisible] = useState(false); // 新增状态
-  const [confirmModalVisible, setConfirmModalVisible] = useState(false); // 新增交易确认modal状态
-  const [transactionFee, setTransactionFee] = useState(""); // 示例交易手续费
+  const [chainShortName, setChainShortName] = useState("");
+  const [amountModalVisible, setAmountModalVisible] = useState(false);
+  const [confirmModalVisible, setConfirmModalVisible] = useState(false);
   const [hasFetchedBalance, setHasFetchedBalance] = useState(false);
   const [selectedDevice, setSelectedDevice] = useState(null);
-  const [bleVisible, setBleVisible] = useState(false); // New state for Bluetooth modal
-  const isScanningRef = useRef(false);
+  const [bleVisible, setBleVisible] = useState(false);
   const [isScanning, setIsScanning] = useState(false);
   const [devices, setDevices] = useState([]);
   const [pinModalVisible, setPinModalVisible] = useState(false);
   const [pinCode, setPinCode] = useState("");
   const [verificationStatus, setVerificationStatus] = useState(null);
-  const restoreIdentifier = Constants.installationId;
   const [isAddressValid, setIsAddressValid] = useState(false);
   const [verificationSuccessModalVisible, setVerificationSuccessModalVisible] =
     useState(false);
@@ -120,29 +128,45 @@ function TransactionsScreen() {
   const [inputAddressModalVisible, setInputAddressModalVisible] =
     useState(false);
   const [detectedNetwork, setDetectedNetwork] = useState("");
-  const bleManagerRef = useRef(null);
-  const [selectedToken, setSelectedToken] = useState(""); // 用于存储选中的token
-  const [selectedChain, setSelectedChain] = useState(""); // 新增状态
+  const [fee, setFee] = useState("");
+  const [rapidFee, setRapidFee] = useState("");
   const [fromDropdownVisible, setFromDropdownVisible] = useState(false);
   const [toDropdownVisible, setToDropdownVisible] = useState(false);
-  const [selectedFromToken, setSelectedFromToken] = useState(""); // "From" token state
-  const [selectedFromChain, setSelectedFromChain] = useState(""); // "From" chain state
-  const [selectedToToken, setSelectedToToken] = useState(""); // "To" token state
-  const [selectedToChain, setSelectedToChain] = useState(""); // "To" chain state
+  const [selectedFromToken, setSelectedFromToken] = useState("");
+  const [selectedFromChain, setSelectedFromChain] = useState("");
+  const [selectedToToken, setSelectedToToken] = useState("");
+  const [selectedToChain, setSelectedToChain] = useState("");
   const [paymentAddress, setPaymentAddress] = useState("Your Payment Address");
   const [addressVerificationMessage, setAddressVerificationMessage] = useState(
     t("Verifying Address on LIKKIM...")
   );
-  const isAmountValid =
-    amount &&
-    parseFloat(amount) > 0 &&
-    parseFloat(amount) <= parseFloat(balance) + parseFloat(fee);
-
+  const [selectedFeeTab, setSelectedFeeTab] = useState("Recommended");
   const [modalStatus, setModalStatus] = useState({
     title: t("Confirming Transaction on LIKKIM Device..."),
     subtitle: t("Please confirm the transaction on your LIKKIM device."),
     image: require("../assets/gif/Pending.gif"),
   });
+
+  // 费用计算
+  const recommendedFee = (parseFloat(fee) / 1e9).toFixed(9);
+  const recommendedValue = (
+    (parseFloat(fee) / 1e9) *
+    priceUsd *
+    exchangeRates[currencyUnit]
+  ).toFixed(2);
+  const rapidFeeValue = (parseFloat(rapidFee) / 1e9).toFixed(9);
+  const rapidCurrencyValue = (
+    (parseFloat(rapidFee) / 1e9) *
+    priceUsd *
+    exchangeRates[currencyUnit]
+  ).toFixed(2);
+  const isAmountValid =
+    amount &&
+    parseFloat(amount) > 0 &&
+    parseFloat(amount) <= parseFloat(balance) + parseFloat(fee);
+
+  // ---------- 扫描设备 ----------
+  const bleManagerRef = useRef(null);
 
   const scanDevices = () => {
     if (Platform.OS !== "web" && !isScanning) {
@@ -179,35 +203,6 @@ function TransactionsScreen() {
             }
             return prevDevices;
           });
-
-          /*        if (verifiedDevices[0] && device.id === verifiedDevices[0]) {
-
-            try {
-              console.log(`设备 ${device.name} 已验证，准备发送 'ping' 消息`);
-
-              await device.connect();
-              await device.discoverAllServicesAndCharacteristics();
-
-
-              const pingMessage = "ping"; // 要发送的消息
-              const bufferPingMessage = Buffer.from(pingMessage, "utf-8");
-              const base64PingMessage = bufferPingMessage.toString("base64");
-
-              // 发送 Base64 编码的消息
-
-              await device.writeCharacteristicWithResponseForService(
-                serviceUUID,
-                writeCharacteristicUUID,
-                base64PingMessage
-              );
-              console.log("发送 'ping' 消息给设备:", base64PingMessage);
-            } catch (connectError) {
-              console.log(
-                `连接设备 ${device.name} 时发生错误:`,
-                connectError.message
-              );
-            }
-          } */
         }
       }
     );
@@ -246,167 +241,184 @@ function TransactionsScreen() {
 
     loadTransactionHistory();
   }, []); // 依赖数组为空，确保此操作仅在组件挂载时执行一次
-  // 余额查询
+
+  // 在 TransactionsScreen 组件的 useEffect 或合适位置添加代码来获取手续费
+  const fetchTransactionFee = async () => {
+    try {
+      const postData = {
+        chain: selectedCryptoChain, // 使用 selectedCryptoChain 或其他相应字段
+      };
+
+      // 打印发送的 POST 数据
+      console.log("Sending POST data:", postData);
+
+      const response = await fetch(
+        "https://bt.likkim.com/api/chain/blockchain-fee",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(postData),
+        }
+      );
+
+      const data = await response.json();
+
+      // 打印返回的数据
+      console.log("Received response data:", data);
+
+      if (data && data.data) {
+        // 检查 data.data 是否存在
+        const { rapidGasPrice, recommendedGasPrice } = data.data; // 从 data.data 获取值
+
+        setFee(recommendedGasPrice); // 设置 fee
+        console.log("Fee set to:", recommendedGasPrice); // 调试用日志
+
+        setRapidFee(rapidGasPrice); // 设置 rapidFee
+        console.log("Rapid fee set to:", rapidGasPrice); // 调试用日志
+      }
+    } catch (error) {
+      console.error("Failed to fetch transaction fee:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (amountModalVisible) {
+      fetchTransactionFee();
+    }
+  }, [amountModalVisible]);
+
+  // 查询数字货币余额 查询余额
   useEffect(() => {
     if (amountModalVisible && !hasFetchedBalance) {
-      const fetchTokenBalanceAndFee = async () => {
+      const fetchWalletBalance = async () => {
         try {
-          // 根据 selectedCrypto 查找对应的加密货币对象
+          // 找到选中的加密货币对象
           const selectedCryptoObj = initialAdditionalCryptos.find(
             (crypto) => crypto.shortName === selectedCrypto
           );
 
           if (!selectedCryptoObj) {
-            throw new Error(`Crypto ${selectedCrypto} not found`);
+            console.log("未找到匹配的加密货币对象");
+            return;
           }
 
-          // 打印 selectedCryptoObj 的相关信息
-          console.log(`Selected Crypto: ${selectedCrypto}`);
-          console.log(
-            `chainShortName: ${selectedCryptoObj.queryChainShortName}`
-          );
-          console.log(`address: ${selectedCryptoObj.address}`);
+          // 循环遍历 cryptoCards，为选择的加密货币查询余额
+          for (let card of cryptoCards) {
+            // 只查询匹配的加密货币和链
+            if (
+              card.name === selectedCryptoObj.name &&
+              card.chain === selectedCryptoChain
+            ) {
+              console.log("条件满足，准备发送请求...");
 
-          // 查询代币余额
-          const balanceResponse = await fetch(
-            "https://bt.likkim.com/meridian/address/queryTokenBalance",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                chainShortName: selectedCrypto.shortName,
-                address: selectedCrypto.address,
-                protocolType: "token_20",
-              }),
+              const postData = {
+                chain: card.queryChainName,
+                address: card.address,
+              };
+
+              // 打印发送的 POST 数据
+              console.log("发送的 POST 数据:", postData);
+
+              const response = await fetch(
+                "https://bt.likkim.com/api/wallet/balance",
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify(postData),
+                }
+              );
+              const data = await response.json();
+
+              // 打印收到的响应数据
+              console.log("收到的响应数据:", data);
+
+              if (data.code === "0" && data.data) {
+                const { name, balance } = data.data;
+
+                // 打印响应数据中的名称和余额
+                console.log(`响应数据中的名称: ${name}, 余额: ${balance}`);
+
+                // 更新选择的加密货币余额
+                if (name.toLowerCase() === card.queryChainName.toLowerCase()) {
+                  card.balance = balance;
+
+                  setCryptoCards((prevCards) => {
+                    AsyncStorage.setItem(
+                      "cryptoCards",
+                      JSON.stringify(prevCards)
+                    );
+                    return prevCards.map((prevCard) =>
+                      prevCard.queryChainName.toLowerCase() ===
+                      card.queryChainName.toLowerCase()
+                        ? { ...prevCard, balance: balance }
+                        : prevCard
+                    );
+                  });
+                }
+              } else {
+                console.log("响应数据无效或错误代码:", data.code);
+              }
+              break; // 只查询匹配的卡片，查询完毕后跳出循环
+            } else {
+              console.log(
+                `卡片名称和链名称不匹配，跳过查询: ${card.name} - ${card.chain}`
+              );
             }
-          );
-
-          if (!balanceResponse.ok) {
-            throw new Error(`HTTP error! status: ${balanceResponse.status}`);
-          }
-
-          const balanceData = await balanceResponse.json();
-          console.log("Transaction 余额查询 Response Data:", balanceData);
-
-          if (
-            balanceData &&
-            balanceData.data &&
-            balanceData.data.length > 0 &&
-            balanceData.data[0].tokenList
-          ) {
-            const tokenList = balanceData.data[0].tokenList;
-
-            // 循环遍历并打印每个 token 的详细信息
-            tokenList.forEach((token, index) => {
-              console.log(`Token ${index + 1}:`);
-              console.log(
-                `  - holdingAmount: ${token.holdingAmount} // 持有的数量`
-              );
-              console.log(
-                `  - priceUsd: ${token.priceUsd} // 每个代币的美元价格`
-              );
-              console.log(`  - symbol: ${token.symbol} // 代币的符号`);
-              console.log(
-                `  - tokenContractAddress: ${token.tokenContractAddress} // 代币合约地址`
-              );
-              console.log(
-                `  - tokenId: ${token.tokenId} // NFT ID，若为空表示非NFT代币`
-              );
-              console.log(
-                `  - tokenType: ${token.tokenType} // 代币类型，例如 TRC20`
-              );
-              console.log(
-                `  - valueUsd: ${token.valueUsd} // 该地址持有的总美元价值`
-              );
-            });
-
-            console.table(tokenList);
-
-            tokenList.forEach((token) => {
-              updateCryptoData(token.symbol, {
-                balance: token.holdingAmount,
-                priceUsd: token.priceUsd,
-                valueUsd: token.valueUsd,
-              });
-            });
-
-            // 在此打印检查更新后的数据
-            //  console.log('Updated initialAdditionalCryptos:', initialAdditionalCryptos);
-          } else {
-            console.log("No tokenList found in response data.");
-          }
-
-          // 查询手续费
-          /*           const feeResponse = await fetch(
-            "https://bt.likkim.com/meridian/transaction/queryFee",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                chainShortName: selectedCryptoObj.queryChainShortName,
-              }),
-            }
-          );
- */
-          if (!feeResponse.ok) {
-            throw new Error(`HTTP error! status: ${feeResponse.status}`);
-          }
-
-          const feeData = await feeResponse.json();
-          console.log("Transaction 手续费查询 Response Data:", feeData);
-          if (feeData && feeData.data && feeData.data.length > 0) {
-            const feeInfo = feeData.data[0];
-            const transactionFeeValue = feeInfo.bestTransactionFee;
-
-            setTransactionFee(transactionFeeValue); // 设置查询到的交易手续费
-          } else {
-            console.log("No fee data found in response data.");
-            setTransactionFee(selectedCryptoObj.fee); // 如果查询失败，使用 initialAdditionalCryptos 中的 fee 值
           }
         } catch (error) {
-          console.log("查询手续费Error:", error);
-          setTransactionFee(selectedCryptoObj.fee); // 如果请求出错，使用 initialAdditionalCryptos 中的 fee 值
-        } finally {
-          setHasFetchedBalance(true);
+          console.log("查询余额时发生错误:", error);
         }
       };
 
-      fetchTokenBalanceAndFee();
+      fetchWalletBalance();
+      setHasFetchedBalance(true); // 标记为已查询余额，防止重复查询
     }
   }, [
-    amountModalVisible,
-    hasFetchedBalance,
-    selectedCrypto,
-    initialAdditionalCryptos,
-    updateCryptoData,
+    amountModalVisible, // 确保在 amountModalVisible 变化时触发查询
+    hasFetchedBalance, // 确保余额只查询一次
+    cryptoCards, // 监听 cryptoCards 变化
+    selectedCrypto, // 每次选择的加密货币变化时重新查询余额
+    selectedCryptoChain, // 每次选择的加密货币链变化时重新查询余额
+    setCryptoCards,
   ]);
 
   // 监听 initialAdditionalCryptos 的变化，更新 Modal 中的数据
   useEffect(() => {
     if (amountModalVisible) {
+      // 查找选中的加密货币对象
       const selected = initialAdditionalCryptos.find(
-        (crypto) => crypto.shortName === selectedCrypto
+        (crypto) =>
+          crypto.chain === selectedCryptoChain && crypto.name === selectedCrypto
       );
+
+      // 打印找到的加密货币对象
       if (selected) {
+        console.log("debug找到匹配的加密货币对象:", selected);
+
+        // 设置余额、价格等
         setBalance(selected.balance);
         setPriceUsd(selected.priceUsd);
         setValueUsd(selected.valueUsd);
         setFee(selected.fee);
+
+        // 打印设置的值
+        console.log("已设置以下值:");
+        console.log("Balance:", selected.balance);
+        console.log("Price in USD:", selected.priceUsd);
+        console.log("Value in USD:", selected.valueUsd);
+        console.log("Transaction Fee:", selected.fee);
+      } else {
+        console.log(
+          " 监听 initialAdditionalCryptos 的变化未找到匹配的加密货币对象"
+        );
       }
     }
   }, [initialAdditionalCryptos, amountModalVisible]);
 
-  /*   useEffect(() => {
-    if (bleVisible) {
-      scanDevices();
-    }
-  }, [bleVisible]); */
-
-  // 清理蓝牙管理器
   useEffect(() => {
     return () => {
       bleManagerRef.current && bleManagerRef.current.destroy();
@@ -654,21 +666,16 @@ function TransactionsScreen() {
           // 提取 signed_data 内容
           const signedData = receivedData.split("signed_data:")[1];
           const [chain, hex] = signedData.split(",");
-          //    console.log("签名结果 - Chain:", chain.trim());
-          //   console.log("签名结果 - Hex:", hex.trim());
 
           // 构造广播交易的数据
           const postData = {
             chain: chain.trim(), // 去掉可能的空格
-            hex: hex.trim(), // 去掉可能的空格
+            hex: hex.trim(), // 在签名前加上 0x，并去掉空格
           };
 
           // 打印对象
           console.log("准备发送的 POST 数据:", postData);
           // 输出: 准备发送的 POST 数据: { chain: "ethereum", hex: "F86C..." }
-
-          // 打印 JSON 字符串
-          console.log("POST 数据的 JSON 字符串:", JSON.stringify(postData));
 
           // 调用广播交易的 API
           try {
@@ -679,19 +686,41 @@ function TransactionsScreen() {
                 headers: {
                   "Content-Type": "application/json",
                 },
-                body: JSON.stringify(postData), // 将数据转换为 JSON 字符串
+                body: JSON.stringify(postData),
               }
             );
 
             const responseData = await response.json();
 
-            if (response.ok && responseData.success) {
+            // 根据返回的 code 字段判断广播是否成功
+            if (response.ok && responseData.code === "0") {
               console.log("交易广播成功:", responseData);
+              setModalStatus({
+                title: t("Transaction Successful"),
+                subtitle: t(
+                  "Your transaction was successfully broadcasted on the LIKKIM device."
+                ),
+                image: require("../assets/gif/Success.gif"),
+              });
             } else {
               console.log("交易广播失败:", responseData);
+              setModalStatus({
+                title: t("Transaction Failed"),
+                subtitle: t(
+                  "The transaction broadcast failed. Please check your device and try again."
+                ),
+                image: require("../assets/gif/Fail.gif"),
+              });
             }
           } catch (broadcastError) {
             console.log("交易广播时出错:", broadcastError.message);
+            setModalStatus({
+              title: t("Transaction Error"),
+              subtitle: t(
+                "An error occurred while broadcasting the transaction."
+              ),
+              image: require("../assets/gif/Fail.gif"),
+            });
           }
         } else {
           console.log("签名结果收到未知数据:", receivedData);
@@ -699,112 +728,116 @@ function TransactionsScreen() {
       }
     );
 
-    console.log("已启动对 signed_data 的监听");
+    // console.log("已启动对 signed_data 的监听");
   };
 
   // 签名函数
   const signTransaction = async (
     device,
-    amount, // 转账金额
-    paymentAddress, // 传递 selectedCryptoObj.address
-    inputAddress, // 收款地址
-    selectedCrypto // 选择的加密货币
+    amount,
+    paymentAddress,
+    inputAddress,
+    selectedCrypto
   ) => {
     try {
-      if (!device?.isConnected) return console.log("设备无效");
+      if (!device?.isConnected) {
+        console.log("设备无效");
+        return;
+      }
 
-      // 连接设备（如果需要）
+      // 连接设备并发现服务
       await device.connect();
       await device.discoverAllServicesAndCharacteristics();
 
-      // 打印所选币种
-      console.log("选择的币种:", selectedCrypto);
+      // ---------------------------
+      // 第1步：确定币种对应的链标识和支付路径 （使用以太坊的签名方法）
+      // ---------------------------
 
-      // EVM 区块链映射
-      const evmChainMapping = {
-        arbitrum: "ARB",
-        aurora: "AURORA",
-        avalanche: "AVAX",
-        binance: "BSC",
-        celo: "CELO",
-        ethereum: ["ETH", "TEST"], // ETH 和 TEST 映射到 ethereum
-        ethereum_classic: "ETC",
-        fantom: "FTM",
-        gnosis: "GNO",
-        huobi: "HTX",
-        iotext: "IOTX",
-        lina: "LINEA",
-        OKT: "OKT",
-        optimism: "OP",
-        polygon: "POL",
-        ronin: "RON",
-        zksync: "ZKSYNC",
-      };
-
-      // 支付路径映射
-      const cryptoPathMapping = {
-        bitcoin: "m/49'/0'/0'/0/0",
-        ethereum: "m/44'/60'/0'/0/0",
-        tron: "m/44'/195'/0'/0/0",
-        bitcoin_cash: "m/44'/145'/0'/0/0",
-        binance: "m/44'/60'/0'/0/0",
-        optimism: "m/44'/60'/0'/0/0",
-        ethereum_classic: "m/44'/60'/0'/0/0",
-        litecoin: "m/49'/2'/0'/0/0",
-        ripple: "m/44'/144'/0'/0/0",
-        solana: "m/44'/501'/0'/0/0",
-        arbitrum: "m/44'/60'/0'/0/0",
-        cosmos: "m/44'/118'/0'/0/0",
-        celestia: "m/44'/118'/0'/0/0",
-        cronos: "m/44'/60'/0'/0/0",
-        juno: "m/44'/118'/0'/0/0",
-        osmosis: "m/44'/118'/0'/0/0",
-        aurora: "m/44'/60'/0'/0/0",
-        avalanche: "m/44'/60'/0'/0/0",
-        celo: "m/44'/60'/0'/0/0",
-        fantom: "m/44'/60'/0'/0/0",
-        gnosis: "m/44'/60'/0'/0/0",
-        huobi: "m/44'/60'/0'/0/0",
-        iotex: "m/44'/60'/0'/0/0",
-        okx: "m/44'/60'/0'/0/0",
-        polygon: "m/44'/60'/0'/0/0",
-        zksync: "m/44'/60'/0'/0/0",
-        aptos: "m/44'/637'/0'/0'/0",
-        sui: "m/44'/784'/0'/0'/0",
-        cardano: "m/1852'/1815'/0'/0/0",
-        linea: "m/44'/60'/0'/0/0",
-        ronin: "m/44'/60'/0'/0/0",
-      };
-
-      // 将 selectedCrypto 转换为大写，确保一致性
       const selectedCryptoUpper = selectedCrypto.toUpperCase();
-
-      // 查找哪个链标识包含 selectedCrypto
       const chainKey = Object.keys(evmChainMapping).find((key) => {
         const value = evmChainMapping[key];
         return Array.isArray(value)
           ? value.includes(selectedCryptoUpper)
           : value === selectedCryptoUpper;
       });
-
       if (!chainKey) {
         console.log(`不支持的币种: ${selectedCrypto}`);
         return;
       }
-
       console.log("选择的链标识:", chainKey);
 
-      // 使用 chainKey 查找对应的路径
       const path = cryptoPathMapping[chainKey];
-
       if (!path) {
         console.log(`不支持的路径: ${chainKey}`);
         return;
       }
+      console.log("选择的路径:", path);
 
-      console.log("选择的路径:", path); // 打印选择的路径
+      // ---------------------------
+      // 第2步：构造并发送第一步交易信息给设备
+      // ---------------------------
+      const senderAddress = paymentAddress;
+      const destinationAddress = inputAddress;
+      // 交易费用依赖外部变量：selectedFeeTab、recommendedFee、rapidFeeValue
+      const transactionFee =
+        selectedFeeTab === "Recommended" ? recommendedFee : rapidFeeValue;
+      const firstTradeMsg = `destinationAddress:${senderAddress},${destinationAddress},${transactionFee},${chainKey}`;
+      console.log("第一步交易信息发送:", firstTradeMsg);
+      const firstTradeBuffer = Buffer.from(firstTradeMsg, "utf-8");
+      const firstTradeBase64 = firstTradeBuffer.toString("base64");
 
-      // 第一步：获取 nonce 和 gasPrice
+      try {
+        await device.writeCharacteristicWithResponseForService(
+          serviceUUID,
+          writeCharacteristicUUID,
+          firstTradeBase64
+        );
+        console.log("第一步交易信息已成功发送给设备");
+      } catch (error) {
+        console.log("发送第一步交易信息给设备时发生错误:", error);
+      }
+
+      // ---------------------------
+      // 第3步：持续监听嵌入式设备的 "Signed_OK" 命令
+      // ---------------------------
+      console.log("等待设备发送 Signed_OK 命令...");
+      const signedOkPromise = new Promise((resolve) => {
+        let isResolved = false;
+        const subscription = device.monitorCharacteristicForService(
+          serviceUUID,
+          notifyCharacteristicUUID,
+          (error, characteristic) => {
+            if (error) {
+              console.log("监听 Signed_OK 时出错:", error.message);
+              return;
+            }
+            // 对接收到的字符串进行 trim 处理
+            const received = Buffer.from(characteristic.value, "base64")
+              .toString("utf8")
+              .trim();
+            console.log("收到设备响应:", received);
+            if (received === "Signed_OK" && !isResolved) {
+              isResolved = true;
+              subscription.remove(); // 移除监听
+              // 更新 modalStatus 状态，表示设备已确认签名
+              setModalStatus({
+                title: t("Device Confirmed"),
+                subtitle: t(
+                  "The device has confirmed the transaction signature."
+                ),
+                image: require("../assets/gif/Pending.gif"),
+              });
+              resolve(); // resolve 这个 Promise
+            }
+          }
+        );
+      });
+      await signedOkPromise;
+      console.log("设备确认回复: Signed_OK");
+
+      // ---------------------------
+      // 第4步：获取 nonce 和 gasPrice 等参数，真正开启签名流程
+      // ---------------------------
       const walletParamsResponse = await fetch(
         "https://bt.likkim.com/api/wallet/getSignParam",
         {
@@ -813,12 +846,11 @@ function TransactionsScreen() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            chain: selectedCrypto, // 使用 selectedCrypto 作为 chain
-            address: paymentAddress, // 使用 paymentAddress 参数
+            chain: selectedCrypto,
+            address: paymentAddress,
           }),
         }
       );
-
       if (!walletParamsResponse.ok) {
         console.log(
           "获取 nonce 和 gasPrice 失败:",
@@ -826,11 +858,8 @@ function TransactionsScreen() {
         );
         return;
       }
-
-      // 获取接口返回数据
       const walletParamsData = await walletParamsResponse.json();
       console.log("getSignParam 返回的数据:", walletParamsData);
-
       if (
         !walletParamsData.data?.gasPrice ||
         walletParamsData.data?.nonce == null
@@ -838,24 +867,101 @@ function TransactionsScreen() {
         console.log("接口返回数据不完整:", walletParamsData);
         return;
       }
-
       const { gasPrice, nonce } = walletParamsData.data;
+      console.log("获取到的 gasPrice:", gasPrice, "nonce:", nonce);
 
-      // 第二步：构造 POST 请求数据
-      const requestData = {
-        chainKey: selectedCrypto, // 使用 selectedCrypto 作为链标识
-        nonce: nonce, // 使用原始的 nonce 值
-        gasLimit: 53000, // 更新的 gas 限制为 53000
-        gasPrice: gasPrice, // 不进行任何转换，直接使用返回的 gasPrice
-        value: Number(amount), // 确保金额为数字类型
-        to: inputAddress, // 目标地址
-        contractAddress: "", // 没有合约调用
-        contractValue: 0,
+      // ---------------------------
+      // 第5步：构造 POST 请求数据并调用签名编码接口
+      // ---------------------------
+      const getChainMappingMethod = (chainKey) => {
+        if (evmChainMapping[chainKey]) {
+          return "evm";
+        } else if (btcChainMapping[chainKey]) {
+          return "btc";
+        } else if (tronChainMapping[chainKey]) {
+          return "tron";
+        } else if (aptosChainMapping[chainKey]) {
+          return "aptos";
+        } else if (cosmosChainMapping[chainKey]) {
+          return "cosmos";
+        } else if (solChainMapping[chainKey]) {
+          return "solana";
+        } else if (suiChainMapping[chainKey]) {
+          return "sui";
+        } else if (xrpChainMapping[chainKey]) {
+          return "xrp";
+        }
+        return null; // 默认返回 null
       };
+
+      const chainMethod = getChainMappingMethod(chainKey);
+      let requestData = null;
+
+      if (chainMethod === "evm") {
+        requestData = {
+          chainKey,
+          nonce,
+          gasLimit: 53000,
+          gasPrice,
+          value: Number(amount),
+          to: inputAddress,
+          contractAddress: "",
+          contractValue: 0,
+        };
+      } else if (chainMethod === "btc") {
+        requestData = {
+          chainKey,
+          nonce,
+          value: Number(amount),
+          to: inputAddress,
+          contractAddress: "",
+        };
+      } else if (chainMethod === "tron") {
+        requestData = {
+          chainKey,
+          value: Number(amount),
+          to: inputAddress,
+          contractAddress: "",
+        };
+      } else if (chainMethod === "aptos") {
+        requestData = {
+          chainKey,
+          value: Number(amount),
+          to: inputAddress,
+          contractAddress: "",
+        };
+      } else if (chainMethod === "cosmos") {
+        requestData = {
+          chainKey,
+          value: Number(amount),
+          to: inputAddress,
+          contractAddress: "",
+        };
+      } else if (chainMethod === "solana") {
+        requestData = {
+          chainKey,
+          value: Number(amount),
+          to: inputAddress,
+          contractAddress: "",
+        };
+      } else if (chainMethod === "sui") {
+        requestData = {
+          chainKey,
+          value: Number(amount),
+          to: inputAddress,
+          contractAddress: "",
+        };
+      } else if (chainMethod === "xrp") {
+        requestData = {
+          chainKey,
+          value: Number(amount),
+          to: inputAddress,
+          contractAddress: "",
+        };
+      }
 
       console.log("构造的请求数据:", JSON.stringify(requestData, null, 2));
 
-      // 第三步：发送交易请求
       const response = await fetch(
         "https://bt.likkim.com/api/sign/encode_evm",
         {
@@ -866,60 +972,34 @@ function TransactionsScreen() {
           body: JSON.stringify(requestData),
         }
       );
-
       const responseData = await response.json();
+      console.log("交易请求返回的数据:", responseData);
 
       monitorSignedResult(device);
-      // 打印返回的数据
+
+      // ---------------------------
+      // 第6步：构造并发送 sign 消息
+      // ---------------------------
       if (responseData?.data?.data) {
-        console.log("返回的数据:", responseData.data.data);
-
-        // 构建要发送的第一个字符串
         const signMessage = `sign:${chainKey},${path},${responseData.data.data}`;
-        console.log("构建的发送消息:", signMessage);
-
-        // 将构建的第一个字符串转换为 Base64 编码
-        const bufferMessage = Buffer.from(signMessage, "utf-8");
-        const base64Message = bufferMessage.toString("base64");
-
-        // 发送 Base64 编码的数据给设备
+        console.log("构造的 sign 消息:", signMessage);
+        const signBuffer = Buffer.from(signMessage, "utf-8");
+        const signBase64 = signBuffer.toString("base64");
         try {
           await device.writeCharacteristicWithResponseForService(
             serviceUUID,
             writeCharacteristicUUID,
-            base64Message
+            signBase64
           );
-          console.log("数据已成功发送给设备");
+          console.log("sign消息已成功发送给设备");
         } catch (error) {
-          console.log("发送数据给设备时发生错误:", error);
-        }
-
-        // 构建要发送的第二组数据
-        const destinationAddress = inputAddress;
-        const transactionFee = "0.0001"; // 替换为实际交易手续费
-        const secondMessage = `destinationAddress:${destinationAddress},${transactionFee},${chainKey},${path}`;
-        console.log("构建的第二组发送消息:", secondMessage);
-
-        // 将第二组消息转换为 Base64 编码
-        const bufferSecondMessage = Buffer.from(secondMessage, "utf-8");
-        const base64SecondMessage = bufferSecondMessage.toString("base64");
-
-        // 发送第二组数据给设备
-        try {
-          await device.writeCharacteristicWithResponseForService(
-            serviceUUID,
-            writeCharacteristicUUID,
-            base64SecondMessage
-          );
-          console.log("第二组数据已成功发送给设备");
-        } catch (error) {
-          console.log("发送第二组数据给设备时发生错误:", error);
+          console.log("发送sign消息时发生错误:", error);
         }
       } else {
-        console.log("返回的数据不包含 'data' 字段");
+        console.log("返回的数据不包含sign消息的data_从服务器获得");
       }
 
-      return responseData; // 返回签名结果
+      return responseData;
     } catch (error) {
       console.log("处理交易失败:", error.message || error);
     }
@@ -1051,97 +1131,13 @@ function TransactionsScreen() {
       }
 
       // 根据 coinType 匹配对应的字符串
-      let commandString;
-
-      switch (coinType) {
-        case "BTC":
-          commandString = `address:bitcoin`; // Bitcoin
-          break;
-        case "ETH":
-          commandString = `address:ethereum`; // Ethereum
-          break;
-        case "TRX":
-          commandString = `address:tron`; // Tron
-          break;
-        case "BCH":
-          commandString = `address:bitcoin_cash`; // Bitcoin Cash
-          break;
-        case "BSC":
-          commandString = `address:binance`; // BNB
-          break;
-        case "OP":
-          commandString = `address:optimism`; // Optimism
-          break;
-        case "ETC":
-          commandString = `address:ethereum_classic`; // Ethereum Classic
-          break;
-        case "LTC":
-          commandString = `address:litecoin`; // Litecoin
-          break;
-        case "XRP":
-          commandString = `address:ripple`; // Ripple
-          break;
-        case "SOL":
-          commandString = `address:solana`; // Solana
-          break;
-        case "ARB":
-          commandString = `address:arbitrum`; // Arbitrum
-          break;
-        case "AURORA":
-          commandString = `address:aurora`; // Aurora
-          break;
-        case "AVAX":
-          commandString = `address:avalanche`; // Avalanche
-          break;
-        case "CELO":
-          commandString = `address:celo`; // Celo
-          break;
-        case "FTM":
-          commandString = `address:fantom`; // Fantom
-          break;
-        case "HTX":
-          commandString = `address:huobi`; // Huobi ECO Chain
-          break;
-        case "IOTX":
-          commandString = `address:iote`; // IoTeX
-          break;
-        case "OKT":
-          commandString = `address:okx`; // OKX Chain
-          break;
-        case "POL":
-          commandString = `address:polygon`; // Polygon
-          break;
-        case "ZKSYNC":
-          commandString = `address:zksync`; // zkSync Era
-          break;
-        case "APT":
-          commandString = `address:aptos`; // Aptos
-          break;
-        case "SUI":
-          commandString = `address:sui`; // SUI
-          break;
-        case "COSMOS":
-          commandString = `address:cosmos`; // Cosmos
-          break;
-        case "Celestia":
-          commandString = `address:celestia`; // Celestia
-          break;
-        case "Cronos":
-          commandString = `address:cronos`; // Cronos
-          break;
-        case "Juno":
-          commandString = `address:juno`; // Juno
-          break;
-        case "Osmosis":
-          commandString = `address:osmosis`; // Osmosis
-          break;
-        case "Gnosis":
-          commandString = `address:gnosis`; // Gnosis
-          break;
-        default:
-          console.log("不支持的币种:", coinType);
-          return;
+      const commandString = coinCommandMapping[coinType];
+      // 【新增】检查 commandString 是否存在
+      if (!commandString) {
+        console.log("不支持的币种:", coinType);
+        return;
       }
+
       // 将命令字符串转换为 Base64 编码
       const encodedCommand = Buffer.from(commandString, "utf-8").toString(
         "base64"
@@ -1159,7 +1155,7 @@ function TransactionsScreen() {
       setAddressVerificationMessage("正在 LIKKIM 上验证地址...");
       console.log("地址显示命令已发送:", commandString);
 
-      // 监听设备的响应
+      // 监听设备的响应 - bugging
       const notifyCharacteristicUUID = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E";
       const addressMonitorSubscription = device.monitorCharacteristicForService(
         serviceUUID,
@@ -1167,7 +1163,12 @@ function TransactionsScreen() {
         (error, characteristic) => {
           if (error) {
             console.log("监听设备响应时出错:", error);
-            //    return;
+            return;
+          }
+          // 【新增】检查 characteristic 是否有效
+          if (!characteristic || !characteristic.value) {
+            console.log("未收到有效数据");
+            return;
           }
           const receivedDataHex = Buffer.from(characteristic.value, "base64")
             .toString("hex")
@@ -1175,9 +1176,9 @@ function TransactionsScreen() {
           console.log("接收到的十六进制数据字符串:", receivedDataHex);
 
           // 检查接收到的数据是否为预期的响应
-          if (receivedDataHex === "A40302B1120D0A") {
+          if (receivedDataString === "Address_OK") {
             console.log("在 LIKKIM 上成功显示地址");
-            setAddressVerificationMessage("地址已成功在 LIKKIM 上显示！");
+            setAddressVerificationMessage(t("addressShown")); // 假设 'addressShown' 是国际化文件中的 key
           }
         }
       );
@@ -1283,39 +1284,22 @@ function TransactionsScreen() {
   };
 
   const handleVerifyAddress = (chainShortName) => {
-    console.log("传入的链短名称是:", chainShortName); // 打印传入的链短名称
+    console.log("传入的链短名称是:", chainShortName);
 
     if (verifiedDevices.length > 0) {
-      // 在已验证设备列表中查找设备
       const device = devices.find((d) => d.id === verifiedDevices[0]);
       if (device) {
-        showLIKKIMAddressCommand(device, chainShortName); // 将链短名称传递给函数
+        showLIKKIMAddressCommand(device, chainShortName);
       } else {
-        setAddressModalVisible(false); // 如果没有找到设备，关闭地址模态框
-        setBleVisible(true); // 并显示蓝牙模态框
+        setAddressModalVisible(false);
+        setBleVisible(true);
       }
     } else {
-      setAddressModalVisible(false); // 如果没有已验证设备，关闭地址模态框
-      setBleVisible(true); // 并显示蓝牙模态框
+      setAddressModalVisible(false);
+      setBleVisible(true);
     }
   };
 
-  // 计算CRC-16-Modbus校验码的函数
-  function crc16Modbus(arr) {
-    let crc = 0xffff; // 初始值为0xFFFF
-    for (let byte of arr) {
-      crc ^= byte; // 按位异或
-      for (let i = 0; i < 8; i++) {
-        // 处理每一个字节的8位
-        if (crc & 0x0001) {
-          crc = (crc >> 1) ^ 0xa001; // 多项式为0xA001
-        } else {
-          crc = crc >> 1;
-        }
-      }
-    }
-    return crc & 0xffff; // 确保CRC值是16位
-  }
   // 监听设备数量
   useEffect(() => {
     const loadVerifiedDevices = async () => {
@@ -1418,34 +1402,32 @@ function TransactionsScreen() {
     setSelectedCryptoChain(crypto.chain);
     setSelectedAddress(crypto.address);
     setSelectedCryptoIcon(crypto.icon);
-    setBalance(crypto.balance);
+    setBalance(crypto.balance); // 确保设置正确的 balance
     setValueUsd(crypto.valueUsd);
     setFee(crypto.fee);
     setPriceUsd(crypto.priceUsd);
     setQueryChainShortName(crypto.queryChainShortName);
     setChainShortName(crypto.chainShortName);
+    setSelectedCryptoName(crypto.name);
     setIsVerifyingAddress(false);
     setModalVisible(false);
 
     if (operationType === "receive") {
-      // 直接启动地址模态框，不检查设备 ID
       setAddressModalVisible(true);
     } else if (operationType === "send") {
-      // 检查 verifiedDevices 是否包含有效设备
       if (verifiedDevices.length > 0) {
-        console.log("Transation Verified Device ID:", verifiedDevices[0]);
         const device = devices.find((d) => d.id === verifiedDevices[0]);
         if (device) {
           setAddressModalVisible(false);
           setInputAddress("");
           setInputAddressModalVisible(true);
         } else {
-          setBleVisible(true); // 设备不正确时显示蓝牙模态框
-          setModalVisible(false); // 关闭当前的模态框
+          setBleVisible(true);
+          setModalVisible(false);
         }
       } else {
-        setBleVisible(true); // 没有已验证设备时显示蓝牙模态框
-        setModalVisible(false); // 关闭当前的模态框
+        setBleVisible(true);
+        setModalVisible(false);
       }
     }
   };
@@ -1665,163 +1647,86 @@ function TransactionsScreen() {
 
         {/* 输入金额的 Modal */}
         <AmountModal
-          visible={amountModalVisible} // 控制模态框是否可见
-          onRequestClose={() => setAmountModalVisible(false)} // 关闭模态框的回调函数
-          TransactionsScreenStyle={TransactionsScreenStyle} // 样式对象
-          t={t} // 翻译函数，用于国际化
-          isDarkMode={isDarkMode} // 暗黑模式状态
-          amount={amount} // 当前输入的金额
-          setAmount={setAmount} // 更新金额的回调函数
-          balance={balance} // 用户的加密货币余额
-          fee={fee} // 交易费用
-          valueUsd={valueUsd} // 输入金额对应的美元价值
-          isAmountValid={isAmountValid} // 检查输入金额是否有效的状态
-          buttonBackgroundColor={buttonBackgroundColor} // 按钮背景色
-          disabledButtonBackgroundColor={disabledButtonBackgroundColor} // 禁用按钮时的背景色
-          handleNextAfterAmount={handleNextAfterAmount} // 处理用户点击"Next"后的逻辑
-          selectedCrypto={selectedCrypto} // 当前选择的加密货币
-          selectedCryptoIcon={selectedCryptoIcon} // 当前加密货币的图标
-          selectedCryptoChain={selectedCryptoChain} // 传递当前加密货币的链名称
+          visible={amountModalVisible}
+          onRequestClose={() => setAmountModalVisible(false)}
+          TransactionsScreenStyle={TransactionsScreenStyle}
+          t={t}
+          isDarkMode={isDarkMode}
+          amount={amount}
+          setAmount={setAmount}
+          balance={balance}
+          fee={fee}
+          rapidFee={rapidFee}
+          setFee={setFee}
+          isAmountValid={isAmountValid}
+          buttonBackgroundColor={buttonBackgroundColor}
+          disabledButtonBackgroundColor={disabledButtonBackgroundColor}
+          handleNextAfterAmount={handleNextAfterAmount}
+          selectedCrypto={selectedCrypto}
+          selectedCryptoChain={selectedCryptoChain}
+          selectedCryptoIcon={selectedCryptoIcon}
+          currencyUnit={currencyUnit}
+          exchangeRates={exchangeRates}
+          cryptoCards={cryptoCards}
+          selectedCryptoName={selectedCryptoName}
+          valueUsd={valueUsd}
+          setCryptoCards={setCryptoCards}
         />
 
         {/* 交易确认的 Modal */}
-        <Modal
-          animationType="slide"
-          transparent={true}
+        <TransactionConfirmationModal
           visible={confirmModalVisible}
           onRequestClose={() => setConfirmModalVisible(false)}
-        >
-          <BlurView intensity={10} style={TransactionsScreenStyle.centeredView}>
-            <View style={TransactionsScreenStyle.confirmModalView}>
-              {/* 添加国际化标题 */}
-              <Text style={TransactionsScreenStyle.modalTitle}>
-                {t("Transaction Confirmation")}
-              </Text>
+          onConfirm={async () => {
+            try {
+              if (!chainShortName)
+                throw new Error("未选择链或未设置 chainShortName");
+              if (verifiedDevices.length === 0) throw new Error("未验证设备");
 
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  marginTop: 6,
-                  marginBottom: 16,
-                }}
-              >
-                {selectedCryptoIcon && (
-                  <Image
-                    source={selectedCryptoIcon}
-                    style={{ width: 24, height: 24, marginRight: 8 }}
-                  />
-                )}
-                <Text style={TransactionsScreenStyle.modalTitle}>
-                  {`${selectedCrypto} (${selectedCryptoChain})`}{" "}
-                  {/* 添加链名称 */}
-                </Text>
-              </View>
-              <ScrollView
-                style={{ maxHeight: 320 }} // 设置最大高度，当内容超过时启用滚动
-                contentContainerStyle={{ paddingHorizontal: 0 }}
-              >
-                <Text style={TransactionsScreenStyle.transactionText}>
-                  <Text style={{ fontWeight: "bold" }}>{t("Amount")}:</Text>
-                  {"\n"}
-                  {` ${amount} ${selectedCrypto}`}
-                </Text>
-                <Text style={TransactionsScreenStyle.transactionText}>
-                  <Text style={{ fontWeight: "bold" }}>
-                    {t("Payment Address")}:
-                  </Text>
-                  {"\n"}
-                  {` ${selectedAddress}`}
-                </Text>
+              const device = devices.find((d) => d.id === verifiedDevices[0]);
+              if (!device) throw new Error("未找到匹配的设备");
 
-                <Text style={TransactionsScreenStyle.transactionText}>
-                  <Text style={{ fontWeight: "bold" }}>
-                    {t("Recipient Address")}:
-                  </Text>
-                  {/*  {"\n"} */}
-                  {` ${inputAddress}`}
-                </Text>
-                <Text style={TransactionsScreenStyle.transactionText}>
-                  <Text style={{ fontWeight: "bold" }}>
-                    {t("Detected Network")}:
-                  </Text>
-                  {"\n"}
-                  {` ${detectedNetwork}`}
-                </Text>
-                <Text style={TransactionsScreenStyle.transactionText}>
-                  <Text style={{ fontWeight: "bold" }}>
-                    {t("Transaction Fee")}:
-                  </Text>
-                  {"\n"}
-                  {` ${transactionFee} ${selectedCrypto}`}
-                </Text>
-              </ScrollView>
+              const selectedCryptoObj = initialAdditionalCryptos.find(
+                (crypto) => crypto.shortName === selectedCrypto
+              );
+              if (!selectedCryptoObj) {
+                throw new Error(`未找到加密货币：${selectedCrypto}`);
+              }
 
-              <View style={{ marginTop: 20, width: "100%" }}>
-                <TouchableOpacity
-                  style={TransactionsScreenStyle.optionButton}
-                  onPress={async () => {
-                    try {
-                      if (!chainShortName)
-                        throw new Error("未选择链或未设置 chainShortName");
-
-                      // 确保 verifiedDevices 非空并从中获取设备
-                      if (verifiedDevices.length === 0)
-                        throw new Error("未验证设备");
-
-                      // 查找匹配的设备
-                      const device = devices.find(
-                        (d) => d.id === verifiedDevices[0]
-                      );
-                      if (!device) throw new Error("未找到匹配的设备");
-
-                      // 获取 selectedCryptoObj
-                      const selectedCryptoObj = initialAdditionalCryptos.find(
-                        (crypto) => crypto.shortName === selectedCrypto
-                      );
-
-                      if (!selectedCryptoObj) {
-                        throw new Error(`未找到加密货币：${selectedCrypto}`);
-                      }
-
-                      console.log(
-                        "选择的加密货币:",
-                        selectedCryptoObj.shortName
-                      );
-
-                      // 调用签名函数
-                      await signTransaction(
-                        device,
-                        amount, // 传递金额
-                        selectedCryptoObj.address, // 传递 selectedCryptoObj.address 作为 paymentAddress
-                        inputAddress, // 传递收款地址
-                        selectedCryptoObj.shortName // 传递 selectedCryptoObj.shortName 作为 selectedCrypto
-                      );
-
-                      setConfirmModalVisible(false);
-                      setConfirmingTransactionModalVisible(true);
-                    } catch (error) {
-                      console.log("确认交易时出错:", error);
-                    }
-                  }}
-                >
-                  <Text style={TransactionsScreenStyle.submitButtonText}>
-                    {t("Confirm")}
-                  </Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                  style={TransactionsScreenStyle.cancelButton}
-                  onPress={() => setConfirmModalVisible(false)}
-                >
-                  <Text style={TransactionsScreenStyle.cancelButtonText}>
-                    {t("Cancel")}
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </BlurView>
-        </Modal>
+              setConfirmModalVisible(false);
+              setConfirmingTransactionModalVisible(true);
+              await signTransaction(
+                device,
+                amount,
+                selectedCryptoObj.address,
+                inputAddress,
+                selectedCryptoObj.shortName
+              );
+            } catch (error) {
+              console.log("确认交易时出错:", error);
+            }
+          }}
+          onCancel={() => setConfirmModalVisible(false)}
+          t={t}
+          TransactionsScreenStyle={TransactionsScreenStyle}
+          isDarkMode={isDarkMode}
+          selectedCryptoIcon={selectedCryptoIcon}
+          selectedCrypto={selectedCrypto}
+          selectedCryptoChain={selectedCryptoChain}
+          amount={amount}
+          priceUsd={priceUsd}
+          exchangeRates={exchangeRates}
+          currencyUnit={currencyUnit}
+          recommendedFee={recommendedFee}
+          recommendedValue={recommendedValue}
+          rapidFeeValue={rapidFeeValue}
+          rapidCurrencyValue={rapidCurrencyValue}
+          selectedFeeTab={selectedFeeTab}
+          setSelectedFeeTab={setSelectedFeeTab}
+          detectedNetwork={detectedNetwork}
+          selectedAddress={selectedAddress}
+          inputAddress={inputAddress}
+        />
 
         {/* 选择接收的加密货币模态窗口 */}
         <SelectCryptoModal
@@ -1900,40 +1805,13 @@ function TransactionsScreen() {
         />
 
         {/* Pending Transaction Modal */}
-        <Modal
+        <PendingTransactionModal
           visible={confirmingTransactionModalVisible}
-          onRequestClose={() => setConfirmingTransactionModalVisible(false)}
-          transparent={true}
-          animationType="slide"
-        >
-          <View style={TransactionsScreenStyle.centeredView}>
-            <View style={TransactionsScreenStyle.pendingModalView}>
-              <Text style={TransactionsScreenStyle.modalTitle}>
-                {modalStatus.title}
-              </Text>
-              <Image
-                source={modalStatus.image}
-                style={{ width: 120, height: 120 }}
-              />
-              <Text
-                style={[
-                  TransactionsScreenStyle.modalSubtitle,
-                  { marginBottom: 20 },
-                ]}
-              >
-                {modalStatus.subtitle}
-              </Text>
-              <TouchableOpacity
-                style={TransactionsScreenStyle.submitButton}
-                onPress={() => setConfirmingTransactionModalVisible(false)}
-              >
-                <Text style={TransactionsScreenStyle.submitButtonText}>
-                  {t("Close")}
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </Modal>
+          onClose={() => setConfirmingTransactionModalVisible(false)}
+          modalStatus={modalStatus}
+          TransactionsScreenStyle={TransactionsScreenStyle}
+          t={t}
+        />
 
         {/* Swap 模态框 */}
         <SwapModal

@@ -5,6 +5,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
   const textColor = isDarkMode ? "#fff" : "#000";
   const backgroundColor = isDarkMode ? "#121212" : "#f5f5f5";
   const modalBackgroundColor = isDarkMode ? "#3F3D3C" : "#ffffff";
+  const currencyModalBgColor = isDarkMode ? "#3F3D3C" : "#f7f7f7";
   const buttonBackgroundColor = isDarkMode ? "#CCB68C" : "#E5E1E9";
   const borderColor = isDarkMode ? "#404040" : "#ccc";
   const BluetoothBtnColor = isDarkMode ? "#CCB68C" : "#CFAB95";
@@ -135,7 +136,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       margin: 20,
       height: 560,
       width: "90%",
-      backgroundColor: modalBackgroundColor,
+      backgroundColor: currencyModalBgColor,
       borderRadius: 20,
       padding: 35,
       alignItems: "center",
@@ -272,6 +273,11 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       color: textColor,
       fontSize: 16,
       marginBottom: 10,
+      textAlign: "center",
+    },
+    currencyModalText: {
+      color: textColor,
+      fontSize: 16,
       textAlign: "center",
     },
     languageModalTitle: {

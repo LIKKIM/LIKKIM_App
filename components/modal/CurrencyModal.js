@@ -1,4 +1,22 @@
-// CurrencyModal.js
+/**
+ * CurrencyModal Component
+ *
+ * A modal component that displays a list of currencies with corresponding country flags for selection.
+ *
+ * Props:
+ *  - visible {boolean} - Whether the modal is visible.
+ *  - onClose {function} - Callback function to close the modal.
+ *  - currencies {Array} - Array of currency objects. Each object should contain `name` and `shortName`.
+ *  - searchCurrency {string} - The current search query.
+ *  - setSearchCurrency {function} - Function to update the search query.
+ *  - handleCurrencyChange {function} - Callback function when a currency is selected.
+ *  - styles {object} - Custom styles for the modal.
+ *  - isDarkMode {boolean} - Flag indicating dark mode.
+ *  - t {function} - Translation function.
+ *
+ * @module CurrencyModal
+ */
+
 import React from "react";
 import {
   View,
@@ -14,6 +32,8 @@ import {
 } from "react-native";
 import { BlurView } from "expo-blur";
 import Icon from "react-native-vector-icons/MaterialIcons";
+// Import the CountryFlag component from react-native-country-flag library
+import CountryFlag from "react-native-country-flag";
 
 const CurrencyModal = ({
   visible,
@@ -26,6 +46,48 @@ const CurrencyModal = ({
   isDarkMode,
   t,
 }) => {
+  // Mapping from currency short names to corresponding country ISO codes
+  const currencyToCountryMap = {
+    AUD: "AU",
+    BHD: "BH",
+    BRL: "BR",
+    GBP: "GB",
+    CAD: "CA",
+    CLP: "CL",
+    CZK: "CZ",
+    DKK: "DK",
+    AED: "AE",
+    EUR: "EU",
+    HKD: "HK",
+    HUF: "HU",
+    INR: "IN",
+    IDR: "ID",
+    ILS: "IL",
+    JPY: "JP",
+    MYR: "MY",
+    MXN: "MX",
+    NZD: "NZ",
+    NGN: "NG",
+    NOK: "NO",
+    PKR: "PK",
+    PHP: "PH",
+    PLN: "PL",
+    RUB: "RU",
+    SGD: "SG",
+    ZAR: "ZA",
+    KRW: "KR",
+    SEK: "SE",
+    CHF: "CH",
+    THB: "TH",
+    TRY: "TR",
+    USD: "US",
+    UAH: "UA",
+    VND: "VN",
+    CNY: "CN",
+    // Add more mappings as needed...
+  };
+
+  // Filter currencies based on search query (case-insensitive)
   const filteredCurrencies = currencies.filter(
     (currency) =>
       currency.name.toLowerCase().includes(searchCurrency.toLowerCase()) ||
@@ -39,11 +101,13 @@ const CurrencyModal = ({
       visible={visible}
       onRequestClose={onClose}
     >
-      {/* 点击模糊区域关闭键盘和Modal */}
+      {/*
+        Dismiss keyboard and close modal when tapping outside.
+      */}
       <TouchableWithoutFeedback
         onPress={() => {
-          Keyboard.dismiss(); // 关闭键盘
-          onClose(); // 关闭 Modal
+          Keyboard.dismiss(); // Dismiss the keyboard
+          onClose(); // Close the modal
         }}
       >
         <View style={{ flex: 1 }}>
@@ -54,7 +118,7 @@ const CurrencyModal = ({
             <BlurView intensity={10} style={styles.centeredView}>
               <View
                 style={styles.currencyModalView}
-                onStartShouldSetResponder={() => true} // 阻止点击事件冒泡
+                onStartShouldSetResponder={() => true} // Prevent touch event propagation
               >
                 <Text style={styles.languageModalTitle}>
                   {t("Select Currency")}
@@ -72,22 +136,36 @@ const CurrencyModal = ({
                   />
                 </View>
 
+                {/* List of filtered currencies with flags */}
                 <ScrollView style={styles.languageList}>
                   {filteredCurrencies.map((currency) => (
                     <TouchableOpacity
                       key={currency.shortName}
-                      style={{
-                        marginBottom: 6,
-                      }}
+                      style={{ marginBottom: 16 }}
                       onPress={() => handleCurrencyChange(currency)}
                     >
-                      <Text style={styles.languageModalText}>
-                        {currency.name} - {currency.shortName}
-                      </Text>
+                      <View
+                        style={{ flexDirection: "row", alignItems: "center" }}
+                      >
+                        <CountryFlag
+                          isoCode={currencyToCountryMap[currency.shortName]}
+                          size={20}
+                          style={{ marginRight: 8, marginLeft: 30 }}
+                        />
+                        <Text
+                          style={[
+                            styles.currencyModalText,
+                            { height: 20, textAlignVertical: "center" },
+                          ]}
+                        >
+                          {currency.name} - {currency.shortName}
+                        </Text>
+                      </View>
                     </TouchableOpacity>
                   ))}
                 </ScrollView>
 
+                {/* Cancel Button */}
                 <TouchableOpacity
                   style={styles.languageCancelButton}
                   onPress={onClose}

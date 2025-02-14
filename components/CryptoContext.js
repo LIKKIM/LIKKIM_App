@@ -46,7 +46,7 @@ const currencies = [
   { name: "US Dollar", shortName: "USD" },
   { name: "Ukrainian Hryvnia", shortName: "UAH" },
   { name: "Vietnamese Dong", shortName: "VND" },
-  { name: "Yuan or Chinese Renminbi", shortName: "CNY" },
+  { name: "Chinese Yuan", shortName: "CNY" },
 ];
 
 export const usdtCrypto = {
@@ -108,9 +108,9 @@ export const CryptoProvider = ({ children }) => {
     });
   };
 
-  const updateCryptoAddress = (shortName, newAddress) => {
-    const supportedChains = ["ETH", "BTC", "SOL", "BSC"];
+  const supportedChains = ["ETH", "BTC", "SOL"];
 
+  const updateCryptoAddress = (shortName, newAddress) => {
     if (!supportedChains.includes(shortName)) {
       // Update address for unsupported chains without adding to wallet screen
       setInitialAdditionalCryptos((prevCryptos) => {
@@ -128,7 +128,7 @@ export const CryptoProvider = ({ children }) => {
       return;
     }
 
-    // Update address for supported chains and update wallet screen
+    // For supported chains, update both address and crypto cards
     setInitialAdditionalCryptos((prevCryptos) => {
       const updatedCryptos = prevCryptos.map((crypto) =>
         crypto.shortName === shortName
@@ -158,7 +158,6 @@ export const CryptoProvider = ({ children }) => {
   };
 
   const updateCryptoData = (shortName, newData) => {
-    const supportedChains = ["ETH", "BTC", "SOL", "BSC"];
     if (supportedChains.includes(shortName)) {
       setInitialAdditionalCryptos((prevCryptos) => {
         const updatedCryptos = prevCryptos.map((crypto) =>

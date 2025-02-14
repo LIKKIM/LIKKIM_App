@@ -9,14 +9,10 @@ import React, {
 import {
   View,
   Text,
-  Image,
   TouchableOpacity,
-  Modal,
-  ImageBackground,
   Animated,
   Easing,
   Platform,
-  ScrollView,
   RefreshControl,
   Clipboard,
   TouchableWithoutFeedback,
@@ -42,6 +38,7 @@ import { CryptoContext, DarkModeContext, usdtCrypto } from "./CryptoContext";
 // 自定义组件
 import { prefixToShortName } from "../config/chainPrefixes";
 import { CHAIN_NAMES } from "../config/chainConfig";
+import coinCommandMapping from "../config/coinCommandMapping";
 import EmptyWalletView from "./modal/EmptyWalletView";
 import AddCryptoModal from "./modal/AddCryptoModal";
 import ChainSelectionModal from "./modal/ChainSelectionModal";
@@ -87,6 +84,8 @@ function WalletScreen({ route, navigation }) {
   const [addressModalVisible, setAddressModalVisible] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState("");
   const [selectedCrypto, setSelectedCrypto] = useState(null);
+  const [selectedCardChainShortName, setSelectedCardChainShortName] =
+    useState(null);
   const [addCryptoVisible, setAddCryptoVisible] = useState(false);
   const [selectedCardName, setSelectedCardName] = useState(null); // 已选中的卡片名称
   const [selectedCardChain, setSelectedCardChain] = useState(null); // 已选中的卡片链信息
@@ -105,7 +104,6 @@ function WalletScreen({ route, navigation }) {
   const darkColorsDown = ["#21201E", "#0E0D0D"];
   const lightColorsDown = ["#ffffff", "#EDEBEF"];
   const [pinModalVisible, setPinModalVisible] = useState(false);
-  const [phrase, setPhrase] = useState("");
   const [animation] = useState(new Animated.Value(0));
   const [fadeAnim] = useState(new Animated.Value(0));
   const opacityAnim = useRef(new Animated.Value(0)).current;
@@ -268,14 +266,10 @@ function WalletScreen({ route, navigation }) {
 
   // 定义下拉刷新执行的函数
   const onRefresh = React.useCallback(() => {
-    setRefreshing(true); // 显示刷新状态
+    setRefreshing(true);
 
-    // 调用价格刷新函数
     const fetchPriceChanges = async () => {
-      if (cryptoCards.length === 0) {
-        setRefreshing(false); // 没有卡片时直接停止刷新
-        return;
-      }
+      if (cryptoCards.length === 0) return; // 没有卡片时不请求
 
       const instIds = cryptoCards
         .map((card) => `${card.shortName}-USD`)
@@ -290,7 +284,7 @@ function WalletScreen({ route, navigation }) {
         if (data.code === 0 && data.data) {
           const changes = {};
 
-          // 更新每个卡片的价格变化数据
+          // 解析返回的 'data' 对象，按币种进行更新
           Object.keys(data.data).forEach((key) => {
             const shortName = key.replace("$", "").split("-")[0]; // 提取币种名称
             const ticker = data.data[key];
@@ -302,17 +296,75 @@ function WalletScreen({ route, navigation }) {
           });
 
           setPriceChanges(changes); // 更新状态
-          //   console.log("Price changes updated:", changes);
+
+          // 更新 cryptoCards 中的 priceUsd
+          setCryptoCards((prevCards) => {
+            return prevCards.map((card) => {
+              // 如果 priceChanges 中有相应的币种价格，更新该卡片的 priceUsd
+              if (changes[card.shortName]) {
+                return {
+                  ...card,
+                  priceUsd: changes[card.shortName].priceChange, // 更新价格
+                };
+              }
+              return card;
+            });
+          });
         }
       } catch (error) {
         console.log("Error fetching price changes:", error);
       } finally {
-        setRefreshing(false); // 无论成功还是失败，都停止刷新动画
+        setRefreshing(false);
       }
     };
 
-    fetchPriceChanges(); // 调用刷新函数
-  }, [cryptoCards]); // 依赖于 cryptoCards 的更新
+    // 查询数字货币余额 查询余额
+    const fetchWalletBalance = async () => {
+      try {
+        for (let card of cryptoCards) {
+          const postData = {
+            chain: card.queryChainName,
+            address: card.address,
+          };
+
+          const response = await fetch(
+            "https://bt.likkim.com/api/wallet/balance",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(postData),
+            }
+          );
+          const data = await response.json();
+
+          if (data.code === "0" && data.data) {
+            const { name, balance } = data.data;
+
+            if (name.toLowerCase() === card.queryChainName.toLowerCase()) {
+              card.balance = balance;
+
+              setCryptoCards((prevCards) => {
+                AsyncStorage.setItem("cryptoCards", JSON.stringify(prevCards));
+                return prevCards.map((prevCard) =>
+                  prevCard.queryChainName.toLowerCase() ===
+                  card.queryChainName.toLowerCase()
+                    ? { ...prevCard, balance: balance }
+                    : prevCard
+                );
+              });
+            }
+          }
+        }
+      } catch (error) {
+        console.log("Error fetching wallet balance:", error);
+      }
+    };
+
+    fetchPriceChanges();
+    fetchWalletBalance();
+  }, [cryptoCards]);
 
   const bleManagerRef = useRef(null);
 
@@ -356,39 +408,27 @@ function WalletScreen({ route, navigation }) {
 
   const [bleVisible, setBleVisible] = useState(false); // New state for Bluetooth modal
 
-  // 函数获取指定卡的余额
-  const getCardBalance = (cardShortName) => {
-    const card = cryptoCards.find((c) => c.shortName === cardShortName);
-    return card ? card.balance : "Card not found";
-  };
   // 使用最新的价格来计算最终余额
   const getConvertedBalance = (cardBalance, cardShortName) => {
-    const rate = exchangeRates[currencyUnit]; // 当前法定货币的汇率
-    const cryptoToUsdRate = exchangeRates[cardShortName] || 1; // 加密货币对美元的汇率，默认为1
+    const rate = exchangeRates[currencyUnit];
+    const cryptoToUsdRate = exchangeRates[cardShortName] || 1;
 
-    // 获取市场最新价格（last）
-    const marketPrice = priceChanges[cardShortName]?.priceChange || 1; // 如果没有获取到价格，则默认使用 1
+    const marketPrice = priceChanges[cardShortName]?.priceChange || 1;
 
     if (!rate) {
-      return cardBalance; // 如果没有找到汇率，返回原始余额
+      return cardBalance;
     }
 
-    const usdBalance = cardBalance * cryptoToUsdRate * marketPrice; // 计算并应用市场价格的影响
-    // 打印转换后的 USD 余额
-    // console.log(`USD Balance: ${usdBalance}`);
-
-    // 计算并返回法定货币的余额，并保留两位小数
+    const usdBalance = cardBalance * cryptoToUsdRate * marketPrice;
     const finalBalance = (usdBalance * rate).toFixed(2);
-    // 打印最终转换后的余额
-    // console.log(`Converted Balance in ${currencyUnit}: ${finalBalance}`);
 
     return finalBalance;
   };
 
-  useEffect(() => {
+  /*   useEffect(() => {
     console.log("Updated cryptoCards:", cryptoCards);
   }, [cryptoCards]);
-
+ */
   useEffect(() => {
     setAddedCryptos(cryptoCards);
   }, [cryptoCards]);
@@ -573,12 +613,13 @@ function WalletScreen({ route, navigation }) {
     }
   };
 
-  const handleVerifyAddress = () => {
+  const handleVerifyAddress = (selectedCardChainShortName) => {
+    console.log("传入的链短名称是:", selectedCardChainShortName);
+
     if (verifiedDevices.length > 0) {
-      // 发送显示地址命令时，确保传递的是设备对象
       const device = devices.find((d) => d.id === verifiedDevices[0]);
       if (device) {
-        showLIKKIMAddressCommand(device); // 确保这里传递的是完整的设备对象
+        showLIKKIMAddressCommand(device, selectedCardChainShortName);
       } else {
         setAddressModalVisible(false);
         setBleVisible(true);
@@ -590,137 +631,82 @@ function WalletScreen({ route, navigation }) {
   };
 
   // 显示地址函数
-  const showLIKKIMAddressCommand = async (device) => {
+  const showLIKKIMAddressCommand = async (device, coinType) => {
     try {
-      // 检查 device 是否为一个有效的设备对象
+      // 检查设备对象是否有效
       if (typeof device !== "object" || !device.isConnected) {
-        console.log("无效的设备对象：", device);
+        console.log("设备对象无效:", device);
         return;
       }
 
-      // 无论设备是否连接，均重新连接并发现服务和特性
+      // 连接设备并发现所有服务
       await device.connect();
       await device.discoverAllServicesAndCharacteristics();
       console.log("设备已连接并发现所有服务。");
 
+      // 检查设备是否具有 writeCharacteristicWithResponseForService 方法
       if (
         typeof device.writeCharacteristicWithResponseForService !== "function"
       ) {
         console.log(
-          "设备没有 writeCharacteristicWithResponseForService 方法。"
+          "设备不支持 writeCharacteristicWithResponseForService 方法。"
         );
         return;
       }
 
-      // TRX 和路径的字符串
-      const coinType = "TRX";
-      const derivationPath = "m/44'/195'/0'/0/0";
+      // 根据 coinType 匹配对应的字符串
+      const commandString = coinCommandMapping[coinType];
+      // 【新增】检查 commandString 是否存在
+      if (!commandString) {
+        console.log("不支持的币种:", coinType);
+        return;
+      }
 
-      // 转换字符串为16进制格式
-      const coinTypeHex = Buffer.from(coinType, "utf-8").toString("hex");
-      const derivationPathHex = Buffer.from(derivationPath, "utf-8").toString(
-        "hex"
+      // 将命令字符串转换为 Base64 编码
+      const encodedCommand = Buffer.from(commandString, "utf-8").toString(
+        "base64"
       );
 
-      console.log(`Coin Type Hex: ${coinTypeHex}`);
-      console.log(`Derivation Path Hex: ${derivationPathHex}`);
-
-      // 计算长度
-      const coinTypeLength = coinTypeHex.length / 2; // 字节长度
-      const derivationPathLength = derivationPathHex.length / 2; // 字节长度
-
-      // 总长度（包括命令标识符、标志位、TRX 长度、TRX 数据、路径长度、路径数据）
-      const totalLength = 1 + 1 + coinTypeLength + 1 + derivationPathLength;
-
-      console.log(`Total Length: ${totalLength}`);
-
-      // 构建命令数据
-      const commandData = new Uint8Array([
-        0xf9, // 命令标识符
-        0x02, // 添加标志位
-        coinTypeLength, // TRX 的长度
-        ...Buffer.from(coinTypeHex, "hex"), // TRX 的16进制表示
-        derivationPathLength, // 路径的长度
-        ...Buffer.from(derivationPathHex, "hex"), // 路径的16进制表示
-        totalLength, // 总长度，包括命令、标志位、TRX和路径
-      ]);
-
-      // 使用CRC-16-Modbus算法计算CRC校验码
-      const crc = crc16Modbus(commandData);
-
-      // 将CRC校验码转换为高位在前，低位在后的格式
-      const crcHighByte = (crc >> 8) & 0xff;
-      const crcLowByte = crc & 0xff;
-
-      // 将原始命令数据、CRC校验码以及结束符组合成最终的命令
-      const finalCommand = new Uint8Array([
-        ...commandData,
-        crcLowByte,
-        crcHighByte,
-        0x0d, // 结束符
-        0x0a, // 结束符
-      ]);
-
-      // 将最终的命令转换为Base64编码
-      const base64Command = base64.fromByteArray(finalCommand);
-
-      console.log(
-        `显示地址命令: ${Array.from(finalCommand)
-          .map((byte) => byte.toString(16).padStart(2, "0"))
-          .join(" ")}`
-      );
-
-      // 发送显示地址命令
+      // 向服务写入命令字符串（确保使用 Base64 编码）
       await device.writeCharacteristicWithResponseForService(
-        serviceUUID, // BLE服务的UUID
-        writeCharacteristicUUID, // 可写特性的UUID
-        base64Command // 最终的命令数据的Base64编码
+        serviceUUID,
+        writeCharacteristicUUID,
+        encodedCommand
       );
-      // 设置正在验证地址的状态，立即显示文案
-      setIsVerifyingAddress(true);
-      setAddressVerificationMessage(t("Verifying Address on LIKKIM..."));
-      console.log("显示地址命令已发送");
 
-      // 开始监听 BLE 设备的响应
+      // 设置验证地址的状态
+      setIsVerifyingAddress(true);
+      setAddressVerificationMessage("正在 LIKKIM 上验证地址...");
+      console.log("地址显示命令已发送:", commandString);
+
+      // 监听设备的响应 - bugging
       const notifyCharacteristicUUID = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E";
       const addressMonitorSubscription = device.monitorCharacteristicForService(
         serviceUUID,
         notifyCharacteristicUUID,
         (error, characteristic) => {
           if (error) {
-            if (error.message.includes("Operation was cancelled")) {
-              console.log("监听操作被取消，正在重新连接...");
-              reconnectDevice(device); // 主动重连
-            } else if (error.message.includes("Unknown error occurred")) {
-              console.log("未知错误，可能是一个Bug:", error.message);
-              if (error.reason) {
-                console.log("错误原因:", error.reason);
-              }
-              reconnectDevice(device); // 主动重连
-            } else {
-              console.log("监听设备响应时出错:", error.message);
-            }
-            //  return;
+            console.log("监听设备响应时出错:", error);
+            return;
           }
+          // 【新增】检查 characteristic 是否有效
+          if (!characteristic || !characteristic.value) {
+            console.log("未收到有效数据");
+            return;
+          }
+          const receivedDataHex = Buffer.from(characteristic.value, "base64")
+            .toString("hex")
+            .toUpperCase();
+          console.log("接收到的十六进制数据字符串:", receivedDataHex);
 
-          // Base64解码接收到的数据
-          const receivedData = Buffer.from(characteristic.value, "base64");
-
-          // 将接收到的数据解析为16进制字符串
-          const receivedDataHex = receivedData.toString("hex").toUpperCase();
-          console.log("接收到的16进制数据字符串:", receivedDataHex);
-
-          // 检查是否为指定的数据
-          if (receivedDataHex === "A40302B1120D0A") {
-            console.log("在LIKKIM上显示地址成功");
-            setAddressVerificationMessage(
-              t("Address successfully displayed on LIKKIM!")
-            );
+          // 检查接收到的数据是否为预期的响应
+          if (receivedDataString === "Address_OK") {
+            console.log("在 LIKKIM 上成功显示地址");
+            setAddressVerificationMessage(t("addressShown")); // 假设 'addressShown' 是国际化文件中的 key
           }
         }
       );
 
-      // 返回 subscription 用于在其他地方进行清理
       return addressMonitorSubscription;
     } catch (error) {
       console.log("发送显示地址命令失败:", error);
@@ -901,7 +887,7 @@ function WalletScreen({ route, navigation }) {
       async (error, characteristic) => {
         if (error) {
           console.log("监听设备响应时出错:", error.message);
-          return;
+          // return;
         }
 
         const receivedData = Buffer.from(characteristic.value, "base64");
@@ -1086,7 +1072,7 @@ function WalletScreen({ route, navigation }) {
       const instIds = cryptoCards
         .map((card) => `${card.shortName}-USD`)
         .join(",");
-
+      //bugging
       try {
         const response = await fetch(
           `https://df.likkim.com/api/market/index-tickers?instId=${instIds}`
@@ -1204,6 +1190,10 @@ function WalletScreen({ route, navigation }) {
       };
     }
   }, [processModalVisible, t]);
+
+  useEffect(() => {
+    console.log("选中的 chainShortName 已更新:", selectedCardChainShortName);
+  }, [selectedCardChainShortName]);
 
   useEffect(() => {
     if (modalVisible) {
@@ -1387,6 +1377,7 @@ function WalletScreen({ route, navigation }) {
     const crypto = cryptoCards?.find(
       (card) => card.name === cryptoName && card.chain === cryptoChain
     );
+    setSelectedCardChainShortName(crypto.chainShortName);
     setSelectedAddress(crypto?.address || "Unknown");
     setSelectedCardName(cryptoName);
     setSelectedCardChain(cryptoChain);
@@ -1498,13 +1489,18 @@ function WalletScreen({ route, navigation }) {
 
   const calculateTotalBalance = () => {
     const totalBalance = cryptoCards.reduce((total, card) => {
+      if (!card || typeof card.balance === "undefined") {
+        return total; // 跳过无效项
+      }
+
       const convertedBalance = parseFloat(
         getConvertedBalance(card.balance, card.shortName)
       );
+
       return total + convertedBalance;
     }, 0);
 
-    return totalBalance.toFixed(2);
+    return totalBalance.toFixed(2); // 返回格式化后的总余额
   };
 
   const animatedCardStyle = (index) => {
@@ -1620,6 +1616,7 @@ function WalletScreen({ route, navigation }) {
         scrollYOffset={scrollYOffset}
       />
       <ModalsContainer
+        selectedCardChainShortName={selectedCardChainShortName}
         addressModalVisible={addressModalVisible}
         setAddressModalVisible={setAddressModalVisible}
         selectedCryptoIcon={selectedCryptoIcon}

@@ -213,6 +213,7 @@ i18n
           "All Chains": "All Chains",
           "Select Chain": "Select Chain",
           "Contact Support via Email": "Contact Support via Email",
+          addressShown: "Address has been successfully displayed on LIKKIM!",
         },
       },
       zh: {
@@ -408,6 +409,7 @@ i18n
           "All Chains": "所有链",
           "Select Chain": "选择链",
           "Contact Support via Email": "通过电子邮件联系支持",
+          addressShown: "地址已成功在 LIKKIM 上显示！",
         },
       },
       "zh-TW": {
@@ -609,6 +611,7 @@ i18n
           "All Chains": "所有鏈",
           "Select Chain": "選擇鏈",
           "Contact Support via Email": "透過電子郵件聯繫支持",
+          addressShown: "地址已在 LIKKIM 上成功顯示！",
         },
       },
       fr: {
@@ -845,6 +848,7 @@ i18n
           "All Chains": "Toutes les chaînes",
           "Select Chain": "Sélectionner la chaîne",
           "Contact Support via Email": "Contacter le support par e-mail",
+          addressShown: "L'adresse a été affichée avec succès sur LIKKIM !",
         },
       },
       es: {
@@ -1056,6 +1060,7 @@ i18n
           "All Chains": "Todas las cadenas",
           "Select Chain": "Seleccionar cadena",
           "Contact Support via Email": "Contactar con el soporte vía email",
+          addressShown: "¡La dirección se ha mostrado correctamente en LIKKIM!",
         },
       },
       ar: {
@@ -1259,6 +1264,7 @@ i18n
           "All Chains": "جميع السلاسل",
           "Select Chain": "اختيار السلسلة",
           "Contact Support via Email": "تواصل مع الدعم عبر البريد الإلكتروني",
+          addressShown: "تم عرض العنوان بنجاح على LIKKIM!",
         },
       },
       ja: {
@@ -1490,6 +1496,7 @@ i18n
           "All Chains": "すべてのチェーン",
           "Select Chain": "チェーンを選択",
           "Contact Support via Email": "メールでサポートに連絡",
+          addressShown: "LIKKIM上にアドレスが正常に表示されました！",
         },
       },
       ru: {
@@ -1700,6 +1707,7 @@ i18n
           "Select Chain": "Выбрать цепь",
           "Contact Support via Email":
             "Связаться с поддержкой по электронной почте",
+          addressShown: "Адрес успешно отображён на LIKKIM!",
         },
       },
       ko: {
@@ -1904,6 +1912,7 @@ i18n
           "All Chains": "모든 체인",
           "Select Chain": "체인 선택",
           "Contact Support via Email": "이메일을 통해 지원팀에 문의",
+          addressShown: "LIKKIM에 주소가 성공적으로 표시되었습니다!",
         },
       },
       pt: {
@@ -2114,6 +2123,7 @@ i18n
           "All Chains": "Todas as cadeias",
           "Select Chain": "Selecionar cadeia",
           "Contact Support via Email": "Contactar o Suporte por Email",
+          addressShown: "O endereço foi exibido com sucesso no LIKKIM!",
         },
       },
       "pt-BR": {
@@ -2341,6 +2351,7 @@ i18n
           "All Chains": "Todas as cadeias",
           "Select Chain": "Selecionar cadeia",
           "Contact Support via Email": "Contatar Suporte via Email",
+          addressShown: "O endereço foi exibido com sucesso no LIKKIM!",
         },
       },
       it: {
@@ -2553,6 +2564,8 @@ i18n
           "All Chains": "Tutte le catene",
           "Select Chain": "Seleziona catena",
           "Contact Support via Email": "Contatta il supporto via email",
+          addressShown:
+            "L'indirizzo è stato visualizzato con successo su LIKKIM!",
         },
       },
       de: {
@@ -2767,6 +2780,7 @@ i18n
           "All Chains": "Alle Ketten",
           "Select Chain": "Kette auswählen",
           "Contact Support via Email": "Support per E-Mail kontaktieren",
+          addressShown: "Die Adresse wurde erfolgreich auf LIKKIM angezeigt!",
         },
       },
       hi: {
@@ -2979,6 +2993,7 @@ i18n
           "All Chains": "सभी श्रृंखलाएँ",
           "Select Chain": "श्रृंखला चुनें",
           "Contact Support via Email": "ईमेल के माध्यम से सहायता संपर्क करें",
+          addressShown: "LIKKIM पर पता सफलतापूर्वक प्रदर्शित किया गया है!",
         },
       },
       mn: {
@@ -3200,6 +3215,7 @@ i18n
           "All Chains": "Бүх гинжин хэлхээ",
           "Select Chain": "Гол мөр сонгох",
           "Contact Support via Email": "Имэйлээр дэмжлэг авах",
+          addressShown: "Хаяг LIKKIM дээр амжилттай харуулсан байна!",
         },
       },
       th: {
@@ -3403,6 +3419,7 @@ i18n
           "All Chains": "ทุกโซ่",
           "Select Chain": "เลือกโซ่",
           "Contact Support via Email": "ติดต่อสนับสนุนทางอีเมล",
+          addressShown: "ที่อยู่ได้ถูกแสดงบน LIKKIM สำเร็จแล้ว!",
         },
       },
       uk: {
@@ -3611,6 +3628,7 @@ i18n
           "Select Chain": "Вибрати ланку",
           "Contact Support via Email":
             "Звернутися до служби підтримки через електронну пошту",
+          addressShown: "Адресу успішно відображено на LIKKIM!",
         },
       },
       vi: {
@@ -3822,6 +3840,7 @@ i18n
           "All Chains": "Tất cả chuỗi",
           "Select Chain": "Chọn chuỗi",
           "Contact Support via Email": "Liên hệ hỗ trợ qua Email",
+          addressShown: "Địa chỉ đã được hiển thị thành công trên LIKKIM!",
         },
       },
       id: {
@@ -4033,6 +4052,7 @@ i18n
           "All Chains": "Semua Rantai",
           "Select Chain": "Pilih Rantai",
           "Contact Support via Email": "Hubungi Dukungan via Email",
+          addressShown: "Alamat telah berhasil ditampilkan di LIKKIM!",
         },
       },
       tl: {
@@ -4247,6 +4267,7 @@ i18n
           "Select Chain": "Piliin ang Kadena",
           "Contact Support via Email":
             "Makipag-ugnayan sa Suporta sa pamamagitan ng Email",
+          addressShown: "Matagumpay na naipakita ang address sa LIKKIM!",
         },
       },
       bn: {
@@ -4462,6 +4483,7 @@ i18n
           "Select Chain": "চেইন নির্বাচন করুন",
           "Contact Support via Email":
             "ইমেলের মাধ্যমে সাপোর্টের সাথে যোগাযোগ করুন",
+          addressShown: "LIKKIM-এ ঠিকানাটি সফলভাবে প্রদর্শিত হয়েছে!",
         },
       },
     },
