@@ -836,7 +836,7 @@ function TransactionsScreen() {
       console.log("设备确认回复: Signed_OK");
 
       // ---------------------------
-      // 第4步：调用接口获取 nonce 和 gasPrice
+      // 第4步：获取 nonce 和 gasPrice 等参数，真正开启签名流程
       // ---------------------------
       const walletParamsResponse = await fetch(
         "https://bt.likkim.com/api/wallet/getSignParam",

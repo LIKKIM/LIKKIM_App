@@ -24,6 +24,8 @@ export const evmChainMapping = {
   polygon: "POL",
   zksync: "ZKSYNC",
   ronin: "RON",
+  gnosis: "GNO",
+  celo: "CELO",
 };
 // Tron 类链映射
 export const tronChainMapping = {
