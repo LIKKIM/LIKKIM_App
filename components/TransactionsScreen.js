@@ -688,8 +688,6 @@ function TransactionsScreen() {
           // 提取 signed_data 内容
           const signedData = receivedData.split("signed_data:")[1];
           const [chain, hex] = signedData.split(",");
-          //    console.log("签名结果 - Chain:", chain.trim());
-          //   console.log("签名结果 - Hex:", hex.trim());
 
           // 构造广播交易的数据
           /*          const postData = {
@@ -698,7 +696,7 @@ function TransactionsScreen() {
           }; */
           const postData = {
             chain: chain.trim(), // 去掉可能的空格
-            hex: "0x" + hex.trim(), // 在签名前加上 0x，并去掉空格
+            hex: hex.trim(), // 在签名前加上 0x，并去掉空格
           };
 
           // 打印对象
@@ -723,11 +721,32 @@ function TransactionsScreen() {
             // 根据返回的 code 字段判断广播是否成功
             if (response.ok && responseData.code === "0") {
               console.log("交易广播成功:", responseData);
+              setModalStatus({
+                title: t("Transaction Successful"),
+                subtitle: t(
+                  "Your transaction was successfully broadcasted on the LIKKIM device."
+                ),
+                image: require("../assets/gif/Success.gif"),
+              });
             } else {
               console.log("交易广播失败:", responseData);
+              setModalStatus({
+                title: t("Transaction Failed"),
+                subtitle: t(
+                  "The transaction broadcast failed. Please check your device and try again."
+                ),
+                image: require("../assets/gif/Fail.gif"),
+              });
             }
           } catch (broadcastError) {
             console.log("交易广播时出错:", broadcastError.message);
+            setModalStatus({
+              title: t("Transaction Error"),
+              subtitle: t(
+                "An error occurred while broadcasting the transaction."
+              ),
+              image: require("../assets/gif/Fail.gif"),
+            });
           }
         } else {
           console.log("签名结果收到未知数据:", receivedData);
