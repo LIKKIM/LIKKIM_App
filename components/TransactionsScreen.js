@@ -692,9 +692,13 @@ function TransactionsScreen() {
           //   console.log("签名结果 - Hex:", hex.trim());
 
           // 构造广播交易的数据
-          const postData = {
+          /*          const postData = {
             chain: chain.trim(), // 去掉可能的空格
             hex: hex.trim(), // 去掉可能的空格
+          }; */
+          const postData = {
+            chain: chain.trim(), // 去掉可能的空格
+            hex: "0x" + hex.trim(), // 在签名前加上 0x，并去掉空格
           };
 
           // 打印对象
