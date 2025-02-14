@@ -18,6 +18,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { BlurView } from "expo-blur";
 import { prefixToShortName } from "../config/chainPrefixes";
 import cryptoPathMapping from "../config/cryptoPathMapping";
+import coinCommandMapping from "../config/coinCommandMapping";
 import { useTranslation } from "react-i18next";
 import { CryptoContext, DarkModeContext } from "./CryptoContext";
 import TransactionsScreenStyles from "../styles/TransactionsScreenStyle";
@@ -1103,97 +1104,13 @@ function TransactionsScreen() {
       }
 
       // 根据 coinType 匹配对应的字符串
-      let commandString;
-
-      switch (coinType) {
-        case "BTC":
-          commandString = `address:bitcoin`; // Bitcoin
-          break;
-        case "ETH":
-          commandString = `address:ethereum`; // Ethereum
-          break;
-        case "TRX":
-          commandString = `address:tron`; // Tron
-          break;
-        case "BCH":
-          commandString = `address:bitcoin_cash`; // Bitcoin Cash
-          break;
-        case "BSC":
-          commandString = `address:binance`; // BNB
-          break;
-        case "OP":
-          commandString = `address:optimism`; // Optimism
-          break;
-        case "ETC":
-          commandString = `address:ethereum_classic`; // Ethereum Classic
-          break;
-        case "LTC":
-          commandString = `address:litecoin`; // Litecoin
-          break;
-        case "XRP":
-          commandString = `address:ripple`; // Ripple
-          break;
-        case "SOL":
-          commandString = `address:solana`; // Solana
-          break;
-        case "ARB":
-          commandString = `address:arbitrum`; // Arbitrum
-          break;
-        case "AURORA":
-          commandString = `address:aurora`; // Aurora
-          break;
-        case "AVAX":
-          commandString = `address:avalanche`; // Avalanche
-          break;
-        case "CELO":
-          commandString = `address:celo`; // Celo
-          break;
-        case "FTM":
-          commandString = `address:fantom`; // Fantom
-          break;
-        case "HTX":
-          commandString = `address:huobi`; // Huobi ECO Chain
-          break;
-        case "IOTX":
-          commandString = `address:iote`; // IoTeX
-          break;
-        case "OKT":
-          commandString = `address:okx`; // OKX Chain
-          break;
-        case "POL":
-          commandString = `address:polygon`; // Polygon
-          break;
-        case "ZKSYNC":
-          commandString = `address:zksync`; // zkSync Era
-          break;
-        case "APT":
-          commandString = `address:aptos`; // Aptos
-          break;
-        case "SUI":
-          commandString = `address:sui`; // SUI
-          break;
-        case "COSMOS":
-          commandString = `address:cosmos`; // Cosmos
-          break;
-        case "Celestia":
-          commandString = `address:celestia`; // Celestia
-          break;
-        case "Cronos":
-          commandString = `address:cronos`; // Cronos
-          break;
-        case "Juno":
-          commandString = `address:juno`; // Juno
-          break;
-        case "Osmosis":
-          commandString = `address:osmosis`; // Osmosis
-          break;
-        case "Gnosis":
-          commandString = `address:gnosis`; // Gnosis
-          break;
-        default:
-          console.log("不支持的币种:", coinType);
-          return;
+      const commandString = coinCommandMapping[coinType];
+      // 【新增】检查 commandString 是否存在
+      if (!commandString) {
+        console.log("不支持的币种:", coinType);
+        return;
       }
+
       // 将命令字符串转换为 Base64 编码
       const encodedCommand = Buffer.from(commandString, "utf-8").toString(
         "base64"
@@ -1211,7 +1128,7 @@ function TransactionsScreen() {
       setAddressVerificationMessage("正在 LIKKIM 上验证地址...");
       console.log("地址显示命令已发送:", commandString);
 
-      // 监听设备的响应
+      // 监听设备的响应 - bugging
       const notifyCharacteristicUUID = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E";
       const addressMonitorSubscription = device.monitorCharacteristicForService(
         serviceUUID,
@@ -1219,7 +1136,12 @@ function TransactionsScreen() {
         (error, characteristic) => {
           if (error) {
             console.log("监听设备响应时出错:", error);
-            //    return;
+            return;
+          }
+          // 【新增】检查 characteristic 是否有效
+          if (!characteristic || !characteristic.value) {
+            console.log("未收到有效数据");
+            return;
           }
           const receivedDataHex = Buffer.from(characteristic.value, "base64")
             .toString("hex")
