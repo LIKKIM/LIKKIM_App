@@ -38,7 +38,6 @@ import { CryptoContext, DarkModeContext, usdtCrypto } from "./CryptoContext";
 // 自定义组件
 import { prefixToShortName } from "../config/chainPrefixes";
 import { CHAIN_NAMES } from "../config/chainConfig";
-import coinCommandMapping from "../config/coinCommandMapping";
 import EmptyWalletView from "./modal/EmptyWalletView";
 import AddCryptoModal from "./modal/AddCryptoModal";
 import ChainSelectionModal from "./modal/ChainSelectionModal";
@@ -611,13 +610,12 @@ function WalletScreen({ route, navigation }) {
     }
   };
 
-  const handleVerifyAddress = (chainShortName) => {
-    console.log("传入的链短名称是:", chainShortName);
-
+  const handleVerifyAddress = () => {
     if (verifiedDevices.length > 0) {
+      // 发送显示地址命令时，确保传递的是设备对象
       const device = devices.find((d) => d.id === verifiedDevices[0]);
       if (device) {
-        showLIKKIMAddressCommand(device, chainShortName);
+        showLIKKIMAddressCommand(device); // 确保这里传递的是完整的设备对象
       } else {
         setAddressModalVisible(false);
         setBleVisible(true);
@@ -629,82 +627,137 @@ function WalletScreen({ route, navigation }) {
   };
 
   // 显示地址函数
-  const showLIKKIMAddressCommand = async (device, coinType) => {
+  const showLIKKIMAddressCommand = async (device) => {
     try {
-      // 检查设备对象是否有效
+      // 检查 device 是否为一个有效的设备对象
       if (typeof device !== "object" || !device.isConnected) {
-        console.log("设备对象无效:", device);
+        console.log("无效的设备对象：", device);
         return;
       }
 
-      // 连接设备并发现所有服务
+      // 无论设备是否连接，均重新连接并发现服务和特性
       await device.connect();
       await device.discoverAllServicesAndCharacteristics();
       console.log("设备已连接并发现所有服务。");
 
-      // 检查设备是否具有 writeCharacteristicWithResponseForService 方法
       if (
         typeof device.writeCharacteristicWithResponseForService !== "function"
       ) {
         console.log(
-          "设备不支持 writeCharacteristicWithResponseForService 方法。"
+          "设备没有 writeCharacteristicWithResponseForService 方法。"
         );
         return;
       }
 
-      // 根据 coinType 匹配对应的字符串
-      const commandString = coinCommandMapping[coinType];
-      // 【新增】检查 commandString 是否存在
-      if (!commandString) {
-        console.log("不支持的币种:", coinType);
-        return;
-      }
+      // TRX 和路径的字符串
+      const coinType = "TRX";
+      const derivationPath = "m/44'/195'/0'/0/0";
 
-      // 将命令字符串转换为 Base64 编码
-      const encodedCommand = Buffer.from(commandString, "utf-8").toString(
-        "base64"
+      // 转换字符串为16进制格式
+      const coinTypeHex = Buffer.from(coinType, "utf-8").toString("hex");
+      const derivationPathHex = Buffer.from(derivationPath, "utf-8").toString(
+        "hex"
       );
 
-      // 向服务写入命令字符串（确保使用 Base64 编码）
+      console.log(`Coin Type Hex: ${coinTypeHex}`);
+      console.log(`Derivation Path Hex: ${derivationPathHex}`);
+
+      // 计算长度
+      const coinTypeLength = coinTypeHex.length / 2; // 字节长度
+      const derivationPathLength = derivationPathHex.length / 2; // 字节长度
+
+      // 总长度（包括命令标识符、标志位、TRX 长度、TRX 数据、路径长度、路径数据）
+      const totalLength = 1 + 1 + coinTypeLength + 1 + derivationPathLength;
+
+      console.log(`Total Length: ${totalLength}`);
+
+      // 构建命令数据
+      const commandData = new Uint8Array([
+        0xf9, // 命令标识符
+        0x02, // 添加标志位
+        coinTypeLength, // TRX 的长度
+        ...Buffer.from(coinTypeHex, "hex"), // TRX 的16进制表示
+        derivationPathLength, // 路径的长度
+        ...Buffer.from(derivationPathHex, "hex"), // 路径的16进制表示
+        totalLength, // 总长度，包括命令、标志位、TRX和路径
+      ]);
+
+      // 使用CRC-16-Modbus算法计算CRC校验码
+      const crc = crc16Modbus(commandData);
+
+      // 将CRC校验码转换为高位在前，低位在后的格式
+      const crcHighByte = (crc >> 8) & 0xff;
+      const crcLowByte = crc & 0xff;
+
+      // 将原始命令数据、CRC校验码以及结束符组合成最终的命令
+      const finalCommand = new Uint8Array([
+        ...commandData,
+        crcLowByte,
+        crcHighByte,
+        0x0d, // 结束符
+        0x0a, // 结束符
+      ]);
+
+      // 将最终的命令转换为Base64编码
+      const base64Command = base64.fromByteArray(finalCommand);
+
+      console.log(
+        `显示地址命令: ${Array.from(finalCommand)
+          .map((byte) => byte.toString(16).padStart(2, "0"))
+          .join(" ")}`
+      );
+
+      // 发送显示地址命令
       await device.writeCharacteristicWithResponseForService(
-        serviceUUID,
-        writeCharacteristicUUID,
-        encodedCommand
+        serviceUUID, // BLE服务的UUID
+        writeCharacteristicUUID, // 可写特性的UUID
+        base64Command // 最终的命令数据的Base64编码
       );
-
-      // 设置验证地址的状态
+      // 设置正在验证地址的状态，立即显示文案
       setIsVerifyingAddress(true);
-      setAddressVerificationMessage("正在 LIKKIM 上验证地址...");
-      console.log("地址显示命令已发送:", commandString);
+      setAddressVerificationMessage(t("Verifying Address on LIKKIM..."));
+      console.log("显示地址命令已发送");
 
-      // 监听设备的响应 - bugging
+      // 开始监听 BLE 设备的响应
       const notifyCharacteristicUUID = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E";
       const addressMonitorSubscription = device.monitorCharacteristicForService(
         serviceUUID,
         notifyCharacteristicUUID,
         (error, characteristic) => {
           if (error) {
-            console.log("监听设备响应时出错:", error);
-            return;
+            if (error.message.includes("Operation was cancelled")) {
+              console.log("监听操作被取消，正在重新连接...");
+              reconnectDevice(device); // 主动重连
+            } else if (error.message.includes("Unknown error occurred")) {
+              console.log("未知错误，可能是一个Bug:", error.message);
+              if (error.reason) {
+                console.log("错误原因:", error.reason);
+              }
+              reconnectDevice(device); // 主动重连
+            } else {
+              console.log("监听设备响应时出错:", error.message);
+            }
+            //  return;
           }
-          // 【新增】检查 characteristic 是否有效
-          if (!characteristic || !characteristic.value) {
-            console.log("未收到有效数据");
-            return;
-          }
-          const receivedDataHex = Buffer.from(characteristic.value, "base64")
-            .toString("hex")
-            .toUpperCase();
-          console.log("接收到的十六进制数据字符串:", receivedDataHex);
 
-          // 检查接收到的数据是否为预期的响应
+          // Base64解码接收到的数据
+          const receivedData = Buffer.from(characteristic.value, "base64");
+
+          // 将接收到的数据解析为16进制字符串
+          const receivedDataHex = receivedData.toString("hex").toUpperCase();
+          console.log("接收到的16进制数据字符串:", receivedDataHex);
+
+          // 检查是否为指定的数据
           if (receivedDataHex === "A40302B1120D0A") {
-            console.log("在 LIKKIM 上成功显示地址");
-            setAddressVerificationMessage("地址已成功在 LIKKIM 上显示！");
+            console.log("在LIKKIM上显示地址成功");
+            setAddressVerificationMessage(
+              t("Address successfully displayed on LIKKIM!")
+            );
           }
         }
       );
 
+      // 返回 subscription 用于在其他地方进行清理
       return addressMonitorSubscription;
     } catch (error) {
       console.log("发送显示地址命令失败:", error);
