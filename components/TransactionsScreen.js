@@ -873,18 +873,95 @@ function TransactionsScreen() {
       // ---------------------------
       // 第5步：构造 POST 请求数据并调用签名编码接口
       // ---------------------------
-      const requestData = {
-        chainKey: chainKey,
-        nonce: nonce,
-        gasLimit: 53000,
-        gasPrice: gasPrice,
-        value: Number(amount),
-        to: inputAddress,
-        contractAddress: "",
-        contractValue: 0,
+      const getChainMappingMethod = (chainKey) => {
+        if (evmChainMapping[chainKey]) {
+          return "evm";
+        } else if (btcChainMapping[chainKey]) {
+          return "btc";
+        } else if (tronChainMapping[chainKey]) {
+          return "tron";
+        } else if (aptosChainMapping[chainKey]) {
+          return "aptos";
+        } else if (cosmosChainMapping[chainKey]) {
+          return "cosmos";
+        } else if (solChainMapping[chainKey]) {
+          return "solana";
+        } else if (suiChainMapping[chainKey]) {
+          return "sui";
+        } else if (xrpChainMapping[chainKey]) {
+          return "xrp";
+        }
+        return null; // 默认返回 null
       };
+
+      const chainMethod = getChainMappingMethod(chainKey);
+      let requestData = null;
+
+      if (chainMethod === "evm") {
+        requestData = {
+          chainKey,
+          nonce,
+          gasLimit: 53000,
+          gasPrice,
+          value: Number(amount),
+          to: inputAddress,
+          contractAddress: "",
+          contractValue: 0,
+        };
+      } else if (chainMethod === "btc") {
+        requestData = {
+          chainKey,
+          nonce,
+          value: Number(amount),
+          to: inputAddress,
+          contractAddress: "",
+        };
+      } else if (chainMethod === "tron") {
+        requestData = {
+          chainKey,
+          value: Number(amount),
+          to: inputAddress,
+          contractAddress: "",
+        };
+      } else if (chainMethod === "aptos") {
+        requestData = {
+          chainKey,
+          value: Number(amount),
+          to: inputAddress,
+          contractAddress: "",
+        };
+      } else if (chainMethod === "cosmos") {
+        requestData = {
+          chainKey,
+          value: Number(amount),
+          to: inputAddress,
+          contractAddress: "",
+        };
+      } else if (chainMethod === "solana") {
+        requestData = {
+          chainKey,
+          value: Number(amount),
+          to: inputAddress,
+          contractAddress: "",
+        };
+      } else if (chainMethod === "sui") {
+        requestData = {
+          chainKey,
+          value: Number(amount),
+          to: inputAddress,
+          contractAddress: "",
+        };
+      } else if (chainMethod === "xrp") {
+        requestData = {
+          chainKey,
+          value: Number(amount),
+          to: inputAddress,
+          contractAddress: "",
+        };
+      }
+
       console.log("构造的请求数据:", JSON.stringify(requestData, null, 2));
-      console.log("开始发送交易请求（签名编码）...");
+
       const response = await fetch(
         "https://bt.likkim.com/api/sign/encode_evm",
         {
@@ -898,7 +975,6 @@ function TransactionsScreen() {
       const responseData = await response.json();
       console.log("交易请求返回的数据:", responseData);
 
-      // 启动监听签名返回数据（signed_data）的流程
       monitorSignedResult(device);
 
       // ---------------------------
