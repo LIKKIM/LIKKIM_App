@@ -898,6 +898,14 @@ function TransactionsScreen() {
             if (received === "Signed_OK" && !isResolved) {
               isResolved = true;
               subscription.remove(); // 移除监听
+              // 更新 modalStatus 状态，表示设备已确认签名
+              setModalStatus({
+                title: t("Device Confirmed"),
+                subtitle: t(
+                  "The device has confirmed the transaction signature."
+                ),
+                image: require("../assets/gif/Pending.gif"),
+              });
               resolve(); // resolve 这个 Promise
             }
           }
