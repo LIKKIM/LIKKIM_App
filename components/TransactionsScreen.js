@@ -9,18 +9,29 @@ import {
   Platform,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { Buffer } from "buffer";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import Constants from "expo-constants";
+import { useTranslation } from "react-i18next";
+import Icon from "react-native-vector-icons/MaterialIcons";
+import Feather from "react-native-vector-icons/Feather";
+import { ethers } from "ethers";
+import { BleManager } from "react-native-ble-plx";
+import "react-native-get-random-values";
+import "@ethersproject/shims";
+
+// 配置与工具
 import { prefixToShortName } from "../config/chainPrefixes";
 import cryptoPathMapping from "../config/cryptoPathMapping";
 import coinCommandMapping from "../config/coinCommandMapping";
-import { useTranslation } from "react-i18next";
+import { detectNetwork } from "../config/networkUtils";
+import checkAndReqPermission from "../utils/BluetoothPermissions";
+
+// 上下文和样式
 import { CryptoContext, DarkModeContext } from "./CryptoContext";
 import TransactionsScreenStyles from "../styles/TransactionsScreenStyle";
-import Icon from "react-native-vector-icons/MaterialIcons";
-import Feather from "react-native-vector-icons/Feather";
-import { detectNetwork } from "../config/networkUtils";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import Constants from "expo-constants";
-import { Buffer } from "buffer";
+
+// Modal 组件
 import TransactionConfirmationModal from "./modal/TransactionConfirmationModal";
 import InputAddressModal from "./modal/InputAddressModal";
 import PendingTransactionModal from "./modal/PendingTransactionModal";
@@ -31,13 +42,8 @@ import SelectCryptoModal from "./modal/SelectCryptoModal";
 import SwapModal from "./modal/SwapModal";
 import ReceiveAddressModal from "./modal/ReceiveAddressModal";
 import PinModal from "./modal/PinModal";
-import "react-native-get-random-values";
-import "@ethersproject/shims";
-// 导入 ethers 库
-import { ethers, Transaction } from "ethers";
-import { BleManager, BleErrorCode } from "react-native-ble-plx";
-import checkAndReqPermission from "../utils/BluetoothPermissions"; //安卓高版本申请蓝牙权限
 
+// BLE 常量
 const serviceUUID = "6E400001-B5A3-F393-E0A9-E50E24DCCA9E";
 const writeCharacteristicUUID = "6E400002-B5A3-F393-E0A9-E50E24DCCA9E";
 const notifyCharacteristicUUID = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E";
