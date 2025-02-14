@@ -200,35 +200,6 @@ function TransactionsScreen() {
             }
             return prevDevices;
           });
-
-          /*        if (verifiedDevices[0] && device.id === verifiedDevices[0]) {
-
-            try {
-              console.log(`设备 ${device.name} 已验证，准备发送 'ping' 消息`);
-
-              await device.connect();
-              await device.discoverAllServicesAndCharacteristics();
-
-
-              const pingMessage = "ping"; // 要发送的消息
-              const bufferPingMessage = Buffer.from(pingMessage, "utf-8");
-              const base64PingMessage = bufferPingMessage.toString("base64");
-
-              // 发送 Base64 编码的消息
-
-              await device.writeCharacteristicWithResponseForService(
-                serviceUUID,
-                writeCharacteristicUUID,
-                base64PingMessage
-              );
-              console.log("发送 'ping' 消息给设备:", base64PingMessage);
-            } catch (connectError) {
-              console.log(
-                `连接设备 ${device.name} 时发生错误:`,
-                connectError.message
-              );
-            }
-          } */
         }
       }
     );
