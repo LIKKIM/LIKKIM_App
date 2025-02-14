@@ -3,19 +3,12 @@ import React, { useContext, useState, useRef, useEffect } from "react";
 import {
   View,
   Text,
-  Modal,
   TouchableOpacity,
-  TextInput,
   ScrollView,
-  FlatList,
   Clipboard,
-  KeyboardAvoidingView,
   Platform,
-  Image,
-  PermissionsAndroid,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { BlurView } from "expo-blur";
 import { prefixToShortName } from "../config/chainPrefixes";
 import cryptoPathMapping from "../config/cryptoPathMapping";
 import coinCommandMapping from "../config/coinCommandMapping";
@@ -27,7 +20,6 @@ import Feather from "react-native-vector-icons/Feather";
 import { detectNetwork } from "../config/networkUtils";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Constants from "expo-constants";
-import base64 from "base64-js";
 import { Buffer } from "buffer";
 import TransactionConfirmationModal from "./modal/TransactionConfirmationModal";
 import InputAddressModal from "./modal/InputAddressModal";
@@ -104,7 +96,6 @@ function TransactionsScreen() {
   const [chainShortName, setChainShortName] = useState(""); // 设置链的简称，例如 TRX
   const [amountModalVisible, setAmountModalVisible] = useState(false); // 新增状态
   const [confirmModalVisible, setConfirmModalVisible] = useState(false); // 新增交易确认modal状态
-  const [transactionFee, setTransactionFee] = useState(""); // 示例交易手续费
   const [hasFetchedBalance, setHasFetchedBalance] = useState(false);
   const [selectedDevice, setSelectedDevice] = useState(null);
   const [bleVisible, setBleVisible] = useState(false); // New state for Bluetooth modal
