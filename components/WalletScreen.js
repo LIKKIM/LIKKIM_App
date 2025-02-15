@@ -397,6 +397,36 @@ function WalletScreen({ route, navigation }) {
     });
   }, [navigation, selectedView, isDarkMode, t, isModalVisible]);
 
+  // 加载持久化的链选择（需要在 cryptoCards 加载后再进行）
+  useEffect(() => {
+    const loadSelectedChain = async () => {
+      try {
+        const savedChain = await AsyncStorage.getItem("selectedChain");
+        if (savedChain) {
+          setSelectedChain(savedChain);
+          if (savedChain === "All") {
+            setSelectedChainShortName(
+              cryptoCards.map((card) => card.chainShortName)
+            );
+          } else {
+            setSelectedChainShortName([savedChain]);
+          }
+        } else {
+          setSelectedChain("All");
+          setSelectedChainShortName(
+            cryptoCards.map((card) => card.chainShortName)
+          );
+        }
+      } catch (e) {
+        console.error("Error loading selected chain:", e);
+      }
+    };
+
+    if (cryptoCards && cryptoCards.length > 0) {
+      loadSelectedChain();
+    }
+  }, [cryptoCards]);
+
   useEffect(() => {
     setAddedCryptos(cryptoCards);
   }, [cryptoCards]);
