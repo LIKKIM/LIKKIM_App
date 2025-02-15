@@ -43,7 +43,7 @@ import base64 from "base64-js";
 import { Buffer } from "buffer";
 import appConfig from "../app.config";
 import { prefixToShortName } from "../config/chainPrefixes";
-import checkAndReqPermission from "../utils/BluetoothPermissions"; //安卓高版本申请蓝牙权限
+import checkAndReqPermission from "../utils/BluetoothPermissions"; // Request Bluetooth permission on Android
 
 let PermissionsAndroid;
 if (Platform.OS === "android") {
@@ -113,8 +113,8 @@ function MyColdWalletScreen() {
   );
   const [confirmPasswordModalVisible, setConfirmPasswordModalVisible] =
     useState(false);
-  const [storedPassword, setStoredPassword] = useState(""); // 存储已设置的密码
-  const [passwordError, setPasswordError] = useState(""); // 新增密码错误状态
+  const [storedPassword, setStoredPassword] = useState(""); // Stored password
+  const [passwordError, setPasswordError] = useState(""); // Password error state
   const [confirmDisconnectModalVisible, setConfirmDisconnectModalVisible] =
     useState(false);
   const [deviceToDisconnect, setDeviceToDisconnect] = useState(null);
@@ -130,15 +130,15 @@ function MyColdWalletScreen() {
     { id: "2", name: "Office", address: "0x5678..." },
   ]);
   const handleAddAddress = () => {
-    // 处理添加地址的逻辑，例如导航到添加地址的页面
+    // Handle adding a new address
     console.log("Add Address button clicked");
   };
 
   const handleAddressSelect = (address) => {
     console.log("Selected Address:", address);
-
-    // 这里可以添加进一步的处理逻辑，例如设置选中的地址为交易地址
+    // Further processing for the selected address can be added here
   };
+
   const [isFaceIDEnabled, setIsFaceIDEnabled] = useState(() => {
     AsyncStorage.getItem("faceID").then((status) =>
       setIsFaceIDEnabled(status === "open")
@@ -147,91 +147,92 @@ function MyColdWalletScreen() {
 
   const toggleFaceID = async (value) => {
     if (value) {
-      // 启用时进行一次Face ID验证
+      // Verify Face ID when enabling
       const result = await LocalAuthentication.authenticateAsync({
         promptMessage: t("Authenticate to enable Face ID"),
       });
-
       if (result.success) {
         setIsFaceIDEnabled(value);
         await AsyncStorage.setItem("faceID", value ? "open" : "close");
       } else {
-        // 如果验证失败，可以弹出提示或者保持原状态
         Alert.alert(t("Authentication Failed"), t("Unable to enable Face ID."));
       }
     } else {
-      // 直接禁用
+      // Disable directly
       setIsFaceIDEnabled(value);
       await AsyncStorage.setItem("faceID", "close");
     }
   };
 
-  // 确保 handleDisconnectPress 仅设置 ConfirmDisconnectModal 的状态
+  // Set disconnect modal state
   const handleDisconnectPress = (device) => {
-    setModalVisible(false); // 关闭设备选择模态框
-    setDeviceToDisconnect(device); // 保存当前要断开的设备
-    setConfirmDisconnectModalVisible(true); // 显示确认断开模态框
+    setModalVisible(false); // Close device selection modal
+    setDeviceToDisconnect(device);
+    setConfirmDisconnectModalVisible(true);
   };
 
-  // Called when the user confirms the disconnection
+  // Called when user confirms disconnection
   const confirmDisconnect = async () => {
     if (deviceToDisconnect) {
-      await handleDisconnectDevice(deviceToDisconnect); // 执行断开操作
-      setConfirmDisconnectModalVisible(false); // 关闭确认断开模态框
-      setDeviceToDisconnect(null); // 清空当前要断开的设备
+      await handleDisconnectDevice(deviceToDisconnect);
+      setConfirmDisconnectModalVisible(false);
+      setDeviceToDisconnect(null);
     }
   };
 
-  // Called when the user cancels the disconnection
+  // Called when user cancels disconnection
   const cancelDisconnect = () => {
-    setConfirmDisconnectModalVisible(false); // 关闭确认断开模态框
-    setModalVisible(true); // 重新显示设备选择模态框
+    setConfirmDisconnectModalVisible(false);
+    setModalVisible(true);
   };
 
-  // 关闭设置密码模态框并清空输入
+  // Close password modal and clear input
   const closePasswordModal = () => {
     setPasswordModalVisible(false);
-    setPassword(""); // 清空密码输入框
-    setConfirmPassword(""); // 清空确认密码输入框
-    setIsPasswordHidden(true); // 重置隐藏密码图标状态
-    setIsConfirmPasswordHidden(true); // 重置隐藏密码图标状态
+    setPassword(""); // Clear password input
+    setConfirmPassword(""); // Clear confirmation input
+    setIsPasswordHidden(true);
+    setIsConfirmPasswordHidden(true);
   };
-  // 关闭输入密码模态框并清空输入
+
+  // Close enter password modal and clear input
   const closeEnterPasswordModal = () => {
     setEnterPasswordModalVisible(false);
-    setCurrentPassword(""); // 清空当前密码输入框
-    setIsCurrentPasswordHidden(true); // 重置隐藏密码图标状态
+    setCurrentPassword(""); // Clear current password input
+    setIsCurrentPasswordHidden(true);
   };
 
-  // 显示设置密码模态框并清空输入
+  // Open password modal and clear input
   const openPasswordModal = () => {
-    setPassword(""); // 清空密码输入框
-    setConfirmPassword(""); // 清空确认密码输入框
-    setIsPasswordHidden(true); // 重置隐藏密码图标状态
-    setIsConfirmPasswordHidden(true); // 重置隐藏密码图标状态
-    setPasswordModalVisible(true); // 打开模态框
-  };
-  // 显示输入密码模态框并清空输入
-  const openEnterPasswordModal = () => {
-    setCurrentPassword(""); // 清空当前密码输入框
-    setIsCurrentPasswordHidden(true); // 重置隐藏密码图标状态
-    setEnterPasswordModalVisible(true); // 打开模态框
-  };
-  // 显示更改密码模态框并清空输入
-  const openChangePasswordModal = () => {
-    setCurrentPassword(""); // 清空当前密码输入框
-    setIsCurrentPasswordHidden(true); // 重置隐藏密码图标状态
-    setChangePasswordModalVisible(true); // 打开模态框
+    setPassword("");
+    setConfirmPassword("");
+    setIsPasswordHidden(true);
+    setIsConfirmPasswordHidden(true);
+    setPasswordModalVisible(true);
   };
 
-  // 确保 openNewPasswordModal 被调用时，清空输入框的值
+  // Open enter password modal and clear input
+  const openEnterPasswordModal = () => {
+    setCurrentPassword("");
+    setIsCurrentPasswordHidden(true);
+    setEnterPasswordModalVisible(true);
+  };
+
+  // Open change password modal and clear input
+  const openChangePasswordModal = () => {
+    setCurrentPassword("");
+    setIsCurrentPasswordHidden(true);
+    setChangePasswordModalVisible(true);
+  };
+
+  // Open new password modal and clear input
   const openNewPasswordModal = () => {
     setPasswordError("");
-    setPassword(""); // 清空密码输入框
-    setConfirmPassword(""); // 清空确认密码输入框
-    setIsPasswordHidden(true); // 重置隐藏密码图标状态
-    setIsConfirmPasswordHidden(true); // 重置隐藏密码图标状态
-    setNewPasswordModalVisible(true); // 打开模态框
+    setPassword("");
+    setConfirmPassword("");
+    setIsPasswordHidden(true);
+    setIsConfirmPasswordHidden(true);
+    setNewPasswordModalVisible(true);
   };
 
   useEffect(() => {
@@ -241,11 +242,10 @@ function MyColdWalletScreen() {
         setSelectedLanguage(storedLanguageCode);
       }
     };
-
     loadLanguageSetting();
   }, []);
 
-  // 持久化已连接设备
+  // Load verified devices from storage
   useEffect(() => {
     const loadVerifiedDevices = async () => {
       try {
@@ -257,11 +257,10 @@ function MyColdWalletScreen() {
         console.log("Failed to load verified devices", error);
       }
     };
-
     loadVerifiedDevices();
   }, []);
 
-  // 停止监听
+  // Stop monitoring when PIN modal is closed
   useEffect(() => {
     if (!pinModalVisible) {
       stopMonitoringVerificationCode();
@@ -270,9 +269,9 @@ function MyColdWalletScreen() {
 
   const handleScreenLockToggle = async (value) => {
     if (value) {
-      openPasswordModal(); // 启用锁屏时打开设置密码的模态框
+      openPasswordModal(); // Enable lock: open set password modal
     } else {
-      openEnterPasswordModal(); // 禁用锁屏时打开输入密码的模态框
+      openEnterPasswordModal(); // Disable lock: open enter password modal
     }
   };
 
@@ -280,14 +279,13 @@ function MyColdWalletScreen() {
     if (password === confirmPassword) {
       try {
         await changeScreenLockPassword(password);
-        setNewPasswordModalVisible(false); // 关闭设置新密码的模态框
+        setNewPasswordModalVisible(false);
         setModalMessage(t("Password changed successfully"));
-        setSuccessModalVisible(true); // 显示成功的 Modal
+        setSuccessModalVisible(true);
       } catch (error) {
         console.log("Failed to change password", error);
       }
     } else {
-      // 设置错误信息，显示在原有的 Modal 中
       setPasswordError(t("Passwords do not match"));
     }
   };
@@ -295,30 +293,29 @@ function MyColdWalletScreen() {
   const handleNextForChangePassword = (currentPassword) => {
     if (currentPassword === screenLockPassword) {
       setIsCurrentPasswordValid(true);
-      setChangePasswordModalVisible(false); // 关闭当前模态框
-      openNewPasswordModal(); // 打开设置新密码的模态框并清空输入
-      setCurrentPassword(""); // 清空当前密码的输入框
+      setChangePasswordModalVisible(false);
+      openNewPasswordModal();
+      setCurrentPassword("");
     } else {
-      // 关闭其他可能正在显示的模态框
       setChangePasswordModalVisible(false);
       setModalMessage(t("Incorrect current password"));
       setSuccessModalVisible(false);
       setErrorModalVisible(true);
     }
   };
-  // 设置密码模态框的提交处理函数
+
+  // Handle password modal submission
   const handleSetPassword = async () => {
     if (password.length < 4) {
       setPasswordError(t("Password must be at least 4 characters long"));
       return;
     }
-
     if (password === confirmPassword) {
       try {
         await changeScreenLockPassword(password);
-        toggleScreenLock(true); // 启用屏幕锁定
+        toggleScreenLock(true);
         setPasswordModalVisible(false);
-        setPasswordError(""); // 清除错误信息
+        setPasswordError("");
         setModalMessage(t("Screen lock enabled successfully"));
         setSuccessModalVisible(true);
       } catch (error) {
@@ -329,18 +326,17 @@ function MyColdWalletScreen() {
     }
   };
 
-  // 输入密码模态框的提交处理函数
+  // Handle enter password modal submission
   const handleConfirmPassword = async () => {
     if (currentPassword === screenLockPassword) {
-      toggleScreenLock(false); // 禁用屏幕锁定
+      toggleScreenLock(false);
       setEnterPasswordModalVisible(false);
       setModalMessage(t("Screen lock disabled successfully"));
       setSuccessModalVisible(true);
     } else {
-      setEnterPasswordModalVisible(false); // 关闭其他模态框
+      setEnterPasswordModalVisible(false);
       setModalMessage(t("Incorrect password"));
       setErrorModalVisible(true);
-      // 确保 success 模态框不与 error 模态框同时显示
       setSuccessModalVisible(false);
     }
   };
@@ -361,10 +357,10 @@ function MyColdWalletScreen() {
 
       const subscription = bleManagerRef.current.onStateChange((state) => {
         if (state === "PoweredOn") {
-          // 添加短暂延迟以确保蓝牙模块完全准备好
+          // Delay to ensure Bluetooth is ready
           setTimeout(() => {
             scanDevices();
-          }, 2000); // 1秒延迟
+          }, 2000);
         }
       }, true);
 
@@ -387,13 +383,11 @@ function MyColdWalletScreen() {
           buttonPositive: t("OK"),
         }
       );
-
       if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
         console.log("Location permission denied");
         return;
       }
     }
-
     setModalVisible(true);
     scanDevices();
   };
@@ -432,7 +426,6 @@ function MyColdWalletScreen() {
         setIsScanning(true);
         const scanOptions = { allowDuplicates: true };
         const scanFilter = null;
-
         bleManagerRef.current.startDeviceScan(
           scanFilter,
           scanOptions,
@@ -440,8 +433,7 @@ function MyColdWalletScreen() {
             if (error) {
               console.log("BleManager scanning error:", error);
               if (error.errorCode === BleErrorCode.BluetoothUnsupported) {
-                // console.log("Bluetooth LE is unsupported on this device");
-                // return;
+                // Bluetooth LE unsupported on device
               }
             } else if (device.name && device.name.includes("LIKKIM")) {
               setDevices((prevDevices) => {
@@ -450,11 +442,9 @@ function MyColdWalletScreen() {
                 }
                 return prevDevices;
               });
-              // console.log("Scanned device:", device);
             }
           }
         );
-
         setTimeout(() => {
           console.log("Scanning stopped");
           bleManagerRef.current.stopDeviceScan();
@@ -467,35 +457,30 @@ function MyColdWalletScreen() {
   };
 
   function crc16Modbus(arr) {
-    let crc = 0xffff; // 初始值为0xFFFF
+    let crc = 0xffff;
     for (let byte of arr) {
-      crc ^= byte; // 按位异或
+      crc ^= byte;
       for (let i = 0; i < 8; i++) {
-        // 处理每一个字节的8位
-        if (crc & 0x0001) {
-          crc = (crc >> 1) ^ 0xa001; // 多项式为0xA001
-        } else {
-          crc = crc >> 1;
-        }
+        crc = crc & 0x0001 ? (crc >> 1) ^ 0xa001 : crc >> 1;
       }
     }
-    return crc & 0xffff; // 确保CRC值是16位
+    return crc & 0xffff;
   }
 
   const reconnectDevice = async (device) => {
     try {
-      console.log(`正在尝试重新连接设备: ${device.id}`);
-      await device.cancelConnection(); // 首先断开连接
-      await device.connect(); // 尝试重新连接
-      await device.discoverAllServicesAndCharacteristics(); // 重新发现服务和特性
-      console.log("设备重新连接成功");
+      console.log(`Attempting to reconnect device: ${device.id}`);
+      await device.cancelConnection();
+      await device.connect();
+      await device.discoverAllServicesAndCharacteristics();
+      console.log("Device reconnected");
     } catch (error) {
-      console.log("设备重新连接失败:", error);
+      console.log("Device reconnection failed:", error);
     }
   };
 
   function hexStringToUint32Array(hexString) {
-    // 将16进制字符串拆分为两个32位无符号整数
+    // Convert hex string to two 32-bit unsigned integers
     return new Uint32Array([
       parseInt(hexString.slice(0, 8), 16),
       parseInt(hexString.slice(8, 16), 16),
@@ -503,14 +488,14 @@ function MyColdWalletScreen() {
   }
 
   function uint32ArrayToHexString(uint32Array) {
-    // 将两个32位无符号整数转换回16进制字符串
+    // Convert two 32-bit integers to a hex string
     return (
       uint32Array[0].toString(16).toUpperCase().padStart(8, "0") +
       uint32Array[1].toString(16).toUpperCase().padStart(8, "0")
     );
   }
 
-  // 解密算法
+  // Decryption algorithm
   function decrypt(v, k) {
     let v0 = v[0] >>> 0,
       v1 = v[1] >>> 0,
@@ -521,7 +506,6 @@ function MyColdWalletScreen() {
       k1 = k[1] >>> 0,
       k2 = k[2] >>> 0,
       k3 = k[3] >>> 0;
-
     for (i = 0; i < 32; i++) {
       v1 -= (((v0 << 4) >>> 0) + k2) ^ (v0 + sum) ^ (((v0 >>> 5) >>> 0) + k3);
       v1 >>>= 0;
@@ -542,57 +526,42 @@ function MyColdWalletScreen() {
       notifyCharacteristicUUID,
       async (error, characteristic) => {
         if (error) {
-          console.log("监听设备响应时出错:", error.message);
+          console.log("Error monitoring device response:", error.message);
           return;
         }
-
         const receivedData = Buffer.from(characteristic.value, "base64");
         const receivedDataString = receivedData.toString("utf8");
-        console.log("接收到的数据字符串:", receivedDataString);
+        console.log("Received data string:", receivedDataString);
 
-        // ==========================
-        // 映射表: 前缀 -> shortName
-        // ==========================
-
-        // 检查是否以某个前缀开头
+        // Check if data starts with a known prefix
         const prefix = Object.keys(prefixToShortName).find((key) =>
           receivedDataString.startsWith(key)
         );
-
         if (prefix) {
-          const newAddress = receivedDataString.replace(prefix, "").trim(); // 提取地址
-          const shortName = prefixToShortName[prefix]; // 获取对应的 shortName
-
-          console.log(`收到的 ${shortName} 地址: `, newAddress);
-
-          // 更新对应加密货币的地址
+          const newAddress = receivedDataString.replace(prefix, "").trim();
+          const shortName = prefixToShortName[prefix];
+          console.log(`Received ${shortName} address: `, newAddress);
           updateCryptoAddress(shortName, newAddress);
         }
 
-        // 处理包含 "ID:" 的数据
+        // Process data containing "ID:"
         if (receivedDataString.includes("ID:")) {
           const encryptedHex = receivedDataString.split("ID:")[1];
           const encryptedData = hexStringToUint32Array(encryptedHex);
           const key = new Uint32Array([0x1234, 0x1234, 0x1234, 0x1234]);
-
           decrypt(encryptedData, key);
-
           const decryptedHex = uint32ArrayToHexString(encryptedData);
-          console.log("解密后的字符串:", decryptedHex);
-
-          // 将解密后的值发送给设备
+          console.log("Decrypted string:", decryptedHex);
           if (sendDecryptedValue) {
             sendDecryptedValue(decryptedHex);
           }
         }
 
-        // 如果接收到 "VALID"，改变状态并发送 "validation"
+        // If data is "VALID", update status and send "validation"
         if (receivedDataString === "VALID") {
           try {
-            // 立即更新状态为 "VALID"
             setVerificationStatus("VALID");
-            console.log("状态更新为: VALID");
-
+            console.log("Status set to: VALID");
             const validationMessage = "validation";
             const bufferValidationMessage = Buffer.from(
               validationMessage,
@@ -600,22 +569,21 @@ function MyColdWalletScreen() {
             );
             const base64ValidationMessage =
               bufferValidationMessage.toString("base64");
-
             await device.writeCharacteristicWithResponseForService(
               serviceUUID,
               writeCharacteristicUUID,
               base64ValidationMessage
             );
-            console.log(`已发送字符串 'validation' 给设备`);
+            console.log(`Sent 'validation' to device`);
           } catch (error) {
-            console.log("发送 'validation' 时出错:", error);
+            console.log("Error sending 'validation':", error);
           }
         }
 
-        // 提取完整的 PIN 数据（例如 PIN:1234,Y 或 PIN:1234,N）
+        // Extract complete PIN data (e.g., PIN:1234,Y or PIN:1234,N)
         if (receivedDataString.startsWith("PIN:")) {
-          setReceivedVerificationCode(receivedDataString); // 保存完整的 PIN 数据
-          console.log("接收到的完整数据字符串:", receivedDataString);
+          setReceivedVerificationCode(receivedDataString);
+          console.log("Complete PIN data received:", receivedDataString);
         }
       }
     );
@@ -626,9 +594,9 @@ function MyColdWalletScreen() {
       try {
         monitorSubscription.remove();
         monitorSubscription = null;
-        console.log("验证码监听已停止");
+        console.log("Stopped monitoring verification code");
       } catch (error) {
-        console.log("停止监听时发生错误:", error);
+        console.log("Error stopping monitoring:", error);
       }
     }
   };
@@ -636,163 +604,133 @@ function MyColdWalletScreen() {
   const handleCancel = () => {
     setModalVisible(false);
   };
-  // 设备选择和显示弹窗的处理函数
-  // 保存已连接设备的信息
-  // 根据的值（VALID 或 INVALID），判断设备真伪
-  // 修改 handleDevicePress 方法，增加获取位置和保存信息的逻辑
+
+  // Handle device selection and show modal
   const handleDevicePress = async (device) => {
     setVerificationStatus(null);
     setSelectedDevice(device);
     setModalVisible(false);
-
     try {
-      // 异步连接设备和发现服务
       await device.connect();
       await device.discoverAllServicesAndCharacteristics();
-      console.log("设备已连接并发现所有服务和特性");
+      console.log("Device connected and services discovered");
 
-      // 解密后的值发送给设备
+      // Function to send decrypted value to device
       const sendDecryptedValue = async (decryptedValue) => {
         try {
           const message = `ID:${decryptedValue}`;
           const bufferMessage = Buffer.from(message, "utf-8");
           const base64Message = bufferMessage.toString("base64");
-
           await device.writeCharacteristicWithResponseForService(
             serviceUUID,
             writeCharacteristicUUID,
             base64Message
           );
-          console.log(`解密后的值已发送: ${message}`);
+          console.log(`Sent decrypted value: ${message}`);
         } catch (error) {
-          console.log("发送解密值时出错:", error);
+          console.log("Error sending decrypted value:", error);
         }
       };
 
-      // 先启动监听器
+      // Start monitoring before sending request
       monitorVerificationCode(device, sendDecryptedValue);
-
-      // 确保监听器已完全启动后再发送 'request'
       setTimeout(async () => {
         try {
           const requestString = "request";
           const bufferRequestString = Buffer.from(requestString, "utf-8");
           const base64requestString = bufferRequestString.toString("base64");
-
           await device.writeCharacteristicWithResponseForService(
             serviceUUID,
             writeCharacteristicUUID,
             base64requestString
           );
-          console.log("字符串 'request' 已发送");
+          console.log("Sent 'request'");
         } catch (error) {
-          console.log("发送 'request' 时出错:", error);
+          console.log("Error sending 'request':", error);
         }
-      }, 200); // 延迟 200ms 确保监听器启动（根据设备响应调整）
-
-      // 显示 PIN 码弹窗
+      }, 200);
       setPinModalVisible(true);
     } catch (error) {
-      console.log("设备连接或命令发送错误:", error);
+      console.log("Error connecting or sending command to device:", error);
     }
   };
-  // 匹配验证码
+
+  // Validate the PIN input
   const handlePinSubmit = async () => {
-    setPinModalVisible(false); // 关闭 PIN 输入框
-    setVerificationModalVisible(false); // 关闭验证状态框
-
-    // 确保完整保留接收到的数据字符串
-    const verificationCodeValue = receivedVerificationCode.trim(); // 接收到的完整字符串
-    const pinCodeValue = pinCode.trim(); // 用户输入的 PIN
-
-    console.log(`用户输入的 PIN: ${pinCodeValue}`);
-    console.log(`接收到的完整数据: ${verificationCodeValue}`);
-
-    // 使用 ':' 分割，提取 PIN 和标志位部分
-    const [prefix, rest] = verificationCodeValue.split(":"); // 分割出前缀和其余部分
+    setPinModalVisible(false);
+    setVerificationModalVisible(false);
+    const verificationCodeValue = receivedVerificationCode.trim();
+    const pinCodeValue = pinCode.trim();
+    console.log(`User PIN: ${pinCodeValue}`);
+    console.log(`Received data: ${verificationCodeValue}`);
+    const [prefix, rest] = verificationCodeValue.split(":");
     if (prefix !== "PIN" || !rest) {
-      console.log("接收到的验证码格式不正确:", verificationCodeValue);
+      console.log("Invalid verification format:", verificationCodeValue);
       setVerificationStatus("fail");
       return;
     }
-
-    // 使用 ',' 分割，提取 PIN 和标志位
-    const [receivedPin, flag] = rest.split(","); // 分割出 PIN 值和标志位
+    const [receivedPin, flag] = rest.split(",");
     if (!receivedPin || (flag !== "Y" && flag !== "N")) {
-      console.log("接收到的验证码格式不正确:", verificationCodeValue);
+      console.log("Invalid verification format:", verificationCodeValue);
       setVerificationStatus("fail");
       return;
     }
-
-    console.log(`提取到的 PIN 值: ${receivedPin}`);
-    console.log(`提取到的标志位: ${flag}`);
-
-    // 验证用户输入的 PIN 是否匹配
+    console.log(`Extracted PIN: ${receivedPin}`);
+    console.log(`Flag: ${flag}`);
     if (pinCodeValue === receivedPin) {
-      console.log("PIN 验证成功");
+      console.log("PIN verified successfully");
       setVerificationStatus("success");
-
       setVerifiedDevices([selectedDevice.id]);
-
-      // 异步存储更新后的 verifiedDevices 数组（只存一个设备ID）
       await AsyncStorage.setItem(
         "verifiedDevices",
         JSON.stringify([selectedDevice.id])
       );
-
       setIsVerificationSuccessful(true);
-      console.log("设备验证并存储成功");
-
-      // 如果标志位为 Y，发送字符串 'address'
+      console.log("Device verified and saved");
       if (flag === "Y") {
-        console.log("设备返回了 PIN:xxxx,Y，发送字符串 'address' 给嵌入式设备");
+        console.log("Flag Y received; sending 'address' to device");
         try {
           const message = "address";
           const bufferMessage = Buffer.from(message, "utf-8");
           const base64Message = bufferMessage.toString("base64");
-
           await selectedDevice.writeCharacteristicWithResponseForService(
             serviceUUID,
             writeCharacteristicUUID,
             base64Message
           );
-          console.log("字符串 'address' 已成功发送给设备");
+          console.log("Sent 'address' to device");
         } catch (error) {
-          console.log("发送字符串 'address' 时发生错误:", error);
+          console.log("Error sending 'address':", error);
         }
       } else if (flag === "N") {
-        console.log("设备返回了 PIN:xxxx,N，无需发送 'address'");
+        console.log("Flag N received; no 'address' sent");
       }
     } else {
-      console.log("PIN 验证失败");
+      console.log("PIN verification failed");
       setVerificationStatus("fail");
-
       if (monitorSubscription) {
         monitorSubscription.remove();
-        console.log("验证码监听已停止");
+        console.log("Stopped monitoring verification code");
       }
-
       if (selectedDevice) {
         await selectedDevice.cancelConnection();
-        console.log("已断开与设备的连接");
+        console.log("Disconnected device");
       }
     }
-    setVerificationModalVisible(true); // 显示验证结果
-    setPinCode(""); // 清空 PIN 输入框
+    setVerificationModalVisible(true);
+    setPinCode("");
   };
 
-  // 处理断开连接的逻辑
+  // Handle device disconnection
   const handleDisconnectDevice = async (device) => {
     try {
       const isConnected = await device.isConnected();
       if (!isConnected) {
-        console.log(`设备 ${device.id} 已经断开连接`);
+        console.log(`Device ${device.id} already disconnected`);
       } else {
-        await device.cancelConnection(); // 断开设备连接
-        console.log(`设备 ${device.id} 已断开连接`);
+        await device.cancelConnection();
+        console.log(`Device ${device.id} disconnected`);
       }
-
-      // 更新已验证设备列表
       const updatedVerifiedDevices = verifiedDevices.filter(
         (id) => id !== device.id
       );
@@ -801,32 +739,29 @@ function MyColdWalletScreen() {
         "verifiedDevices",
         JSON.stringify(updatedVerifiedDevices)
       );
-      console.log(`设备 ${device.id} 已从已验证设备中移除`);
+      console.log(`Device ${device.id} removed from verified devices`);
       stopMonitoringVerificationCode();
-      // 更新全局状态，表示设备已不再验证成功
       setIsVerificationSuccessful(false);
-      console.log("验证状态已更新为 false。");
+      console.log("Verification status updated to false");
     } catch (error) {
       if (
         error instanceof BleError &&
         error.errorCode === BleErrorCode.OperationCancelled
       ) {
-        console.log(`设备 ${device.id} 断开操作被取消`);
+        console.log(`Disconnection cancelled for device ${device.id}`);
       } else {
-        console.log("断开设备连接失败:", error);
+        console.log("Error disconnecting device:", error);
       }
     }
   };
 
   const handleFirmwareUpdate = () => {
     console.log("Firmware Update clicked");
-    // Add your firmware update logic here
+    // Add firmware update logic here
   };
 
   const buildNumber = appConfig.ios.buildNumber;
-
   const [isDeleteWalletVisible, setIsDeleteWalletVisible] = useState(false);
-
   const toggleDeleteWalletVisibility = () => {
     setIsDeleteWalletVisible((prevState) => !prevState);
   };
@@ -936,7 +871,6 @@ function MyColdWalletScreen() {
             },
           ]
         : []),
-
       {
         title: t("Find My LIKKIM"),
         icon: "location-on",
@@ -954,25 +888,23 @@ function MyColdWalletScreen() {
         },
       },
     ],
-    // 新增 walletManagement 部分
     walletManagement: [
       {
         title: t("Wallet Management"),
         icon: "wallet",
-        extraIcon: isDeleteWalletVisible ? "arrow-drop-up" : "arrow-drop-down", // 控制箭头方向
-        onPress: toggleDeleteWalletVisibility, // 切换折叠状态
+        extraIcon: isDeleteWalletVisible ? "arrow-drop-up" : "arrow-drop-down",
+        onPress: toggleDeleteWalletVisibility,
       },
       isDeleteWalletVisible && {
         title: t("Delete Wallet"),
         icon: "delete-outline",
         onPress: () => {
           Vibration.vibrate();
-          handleDeleteWallet(); // 调用删除钱包的处理函数
+          handleDeleteWallet();
         },
-        style: { color: "red" }, // 使用红色强调危险性
+        style: { color: "red" },
       },
     ],
-
     support: [
       {
         title: t("Help & Support"),
@@ -982,7 +914,6 @@ function MyColdWalletScreen() {
           navigation.navigate("Support");
         },
       },
-
       {
         title: t("Privacy & Data"),
         icon: "gpp-good",
@@ -1012,7 +943,7 @@ function MyColdWalletScreen() {
     ],
   };
 
-  // 处理删除钱包的函数
+  // Confirm delete wallet alert
   const handleDeleteWallet = () => {
     Alert.alert(
       t("Warning"),
@@ -1028,7 +959,6 @@ function MyColdWalletScreen() {
           text: t("Delete"),
           style: "destructive",
           onPress: () => {
-            // 执行删除钱包的操作
             deleteWallet();
           },
         },
@@ -1037,31 +967,25 @@ function MyColdWalletScreen() {
     );
   };
 
-  // 删除钱包的具体操作
+  // Delete wallet from storage and state
   const deleteWallet = async () => {
     try {
-      // 先从存储中获取 cryptoCards 数据
       const cryptoCardsData = await AsyncStorage.getItem("cryptoCards");
       const cryptoCards = JSON.parse(cryptoCardsData);
-
-      // 检查 cryptoCards 是否为空
       if (cryptoCards && cryptoCards.length > 0) {
-        // 执行删除钱包的操作
         await AsyncStorage.removeItem("cryptoCards");
-        setCryptoCards([]); // 清空应用状态中的钱包数据
+        setCryptoCards([]);
         setVerifiedDevices([]);
-        // 显示成功信息
         Alert.alert(
           t("Success"),
           t("Your wallet has been deleted successfully.")
         );
-        navigation.goBack(); // 返回上一页或跳转到登录界面等
+        navigation.goBack();
       } else {
-        // 如果没有钱包数据，提示用户 这里以后需要国际化
         Alert.alert(t("No Wallet"), t("No wallet available to delete."));
       }
     } catch (error) {
-      console.log("删除钱包时出错:", error);
+      console.log("Error deleting wallet:", error);
       Alert.alert(
         t("Error"),
         t("An error occurred while deleting your wallet.")
@@ -1074,7 +998,6 @@ function MyColdWalletScreen() {
   const [isPasswordHidden, setIsPasswordHidden] = useState(true);
   const [isConfirmPasswordHidden, setIsConfirmPasswordHidden] = useState(true);
   const [isPasswordFocused, setIsPasswordFocused] = useState(false);
-
   const [isConfirmPasswordFocused, setIsConfirmPasswordFocused] =
     useState(false);
 
@@ -1089,7 +1012,7 @@ function MyColdWalletScreen() {
         showsHorizontalScrollIndicator={false}
       >
         <View style={MyColdWalletScreenStyle.contentContainer}>
-          {/* 设置分类 */}
+          {/* Settings Section */}
           <View>
             {settingsOptions.settings.map((option) => (
               <TouchableOpacity
@@ -1128,13 +1051,13 @@ function MyColdWalletScreen() {
 
           <TouchableOpacity
             style={MyColdWalletScreenStyle.settingsItem}
-            onPress={() => setIsDeleteWalletVisible(!isDeleteWalletVisible)} // 切换折叠状态
+            onPress={() => setIsDeleteWalletVisible(!isDeleteWalletVisible)}
           >
             <View style={MyColdWalletScreenStyle.listContainer}>
               <Icon
                 name="wallet"
                 size={24}
-                color={iconColor} // 这里的颜色可以根据需要调整
+                color={iconColor}
                 style={{ marginRight: 8 }}
               />
               <Text style={[MyColdWalletScreenStyle.Text, { flex: 1 }]}>
@@ -1150,16 +1073,15 @@ function MyColdWalletScreen() {
             </View>
           </TouchableOpacity>
 
-          {/* 如果 isDeleteWalletVisible 为 true，显示删除钱包项 */}
           {isDeleteWalletVisible && (
             <View>
               <TouchableOpacity
                 style={MyColdWalletScreenStyle.settingsItem}
-                onPress={handleDeleteWallet} // 调用删除钱包的处理函数
+                onPress={handleDeleteWallet}
               >
                 <View style={MyColdWalletScreenStyle.listContainer}>
                   <Icon
-                    name="delete-outline" // 这是删除图标
+                    name="delete-outline"
                     size={24}
                     color={iconColor}
                     style={MyColdWalletScreenStyle.Icon}
@@ -1172,7 +1094,7 @@ function MyColdWalletScreen() {
             </View>
           )}
 
-          {/* 支持分类（折叠功能） */}
+          {/* Support Section (collapsible) */}
           <TouchableOpacity
             style={MyColdWalletScreenStyle.settingsItem}
             onPress={() => setIsSupportExpanded(!isSupportExpanded)}
@@ -1219,7 +1141,7 @@ function MyColdWalletScreen() {
             </View>
           )}
 
-          {/* 信息分类（保持展开状态，无需折叠） */}
+          {/* Info Section (always expanded) */}
           <View>
             {settingsOptions.info.map((option) => (
               <TouchableOpacity
@@ -1252,7 +1174,7 @@ function MyColdWalletScreen() {
             ))}
           </View>
 
-          {/* 蓝牙配对按钮 */}
+          {/* Bluetooth Pairing Button */}
           <View style={{ marginTop: 40, alignItems: "center" }}>
             <TouchableOpacity
               style={MyColdWalletScreenStyle.roundButton}
@@ -1268,6 +1190,7 @@ function MyColdWalletScreen() {
           </View>
         </View>
       </ScrollView>
+
       {/* Language Modal */}
       <LanguageModal
         visible={languageModalVisible}
@@ -1294,7 +1217,7 @@ function MyColdWalletScreen() {
         t={t}
       />
 
-      {/* enable screen lock modal */}
+      {/* Enable Screen Lock Modal */}
       <PasswordModal
         visible={passwordModalVisible}
         onClose={closePasswordModal}
@@ -1316,12 +1239,13 @@ function MyColdWalletScreen() {
         isConfirmPasswordHidden={isConfirmPasswordHidden}
         setIsConfirmPasswordHidden={setIsConfirmPasswordHidden}
       />
-      {/* Disable Lock Screen modal */}
+
+      {/* Disable Lock Screen Modal */}
       <Modal
         animationType="slide"
         transparent={true}
         visible={enterPasswordModalVisible}
-        onRequestClose={closeEnterPasswordModal} // 使用关闭函数
+        onRequestClose={closeEnterPasswordModal}
       >
         <BlurView intensity={10} style={MyColdWalletScreenStyle.centeredView}>
           <View style={MyColdWalletScreenStyle.disableLockModalView}>
@@ -1366,7 +1290,7 @@ function MyColdWalletScreen() {
               </TouchableOpacity>
               <TouchableOpacity
                 style={MyColdWalletScreenStyle.cancelButton}
-                onPress={closeEnterPasswordModal} // 使用关闭函数
+                onPress={closeEnterPasswordModal}
               >
                 <Text style={MyColdWalletScreenStyle.cancelButtonText}>
                   {t("Cancel")}
@@ -1395,7 +1319,6 @@ function MyColdWalletScreen() {
       />
 
       {/* Change Password Modal */}
-
       <ChangePasswordModal
         visible={changePasswordModalVisible}
         onClose={() => setChangePasswordModalVisible(false)}
@@ -1404,6 +1327,7 @@ function MyColdWalletScreen() {
         isDarkMode={isDarkMode}
         t={t}
       />
+
       {/* New Password Modal */}
       <Modal
         animationType="slide"
@@ -1416,7 +1340,6 @@ function MyColdWalletScreen() {
             <Text style={MyColdWalletScreenStyle.passwordModalTitle}>
               {t("Set New Password")}
             </Text>
-
             <View style={{ marginVertical: 10, width: "100%" }}>
               <View style={MyColdWalletScreenStyle.passwordInputContainer}>
                 <TextInput
@@ -1429,7 +1352,7 @@ function MyColdWalletScreen() {
                   secureTextEntry={isPasswordHidden}
                   onChangeText={(text) => {
                     setPassword(text);
-                    setPasswordError(""); // 清除错误信息
+                    setPasswordError("");
                   }}
                   value={password}
                   autoFocus={true}
@@ -1446,7 +1369,6 @@ function MyColdWalletScreen() {
                 </TouchableOpacity>
               </View>
             </View>
-
             <View style={{ marginVertical: 10, width: "100%" }}>
               <View style={MyColdWalletScreenStyle.passwordInputContainer}>
                 <TextInput
@@ -1459,7 +1381,7 @@ function MyColdWalletScreen() {
                   secureTextEntry={isConfirmPasswordHidden}
                   onChangeText={(text) => {
                     setConfirmPassword(text);
-                    setPasswordError(""); // 清除错误信息
+                    setPasswordError("");
                   }}
                   value={confirmPassword}
                 />
@@ -1479,8 +1401,6 @@ function MyColdWalletScreen() {
                 </TouchableOpacity>
               </View>
             </View>
-
-            {/* 显示错误信息 */}
             {passwordError ? (
               <Text
                 style={[MyColdWalletScreenStyle.errorText, { marginLeft: 10 }]}
@@ -1488,11 +1408,10 @@ function MyColdWalletScreen() {
                 {passwordError}
               </Text>
             ) : null}
-
             <View style={MyColdWalletScreenStyle.buttonContainer}>
               <TouchableOpacity
                 style={MyColdWalletScreenStyle.submitButton}
-                onPress={handleChangePassword} // 保存新密码
+                onPress={handleChangePassword}
               >
                 <Text style={MyColdWalletScreenStyle.submitButtonText}>
                   {t("Submit")}
@@ -1511,7 +1430,7 @@ function MyColdWalletScreen() {
         </BlurView>
       </Modal>
 
-      {/* Bluetooth modal */}
+      {/* Bluetooth Modal */}
       <BluetoothModal
         visible={modalVisible}
         devices={devices}
@@ -1525,20 +1444,20 @@ function MyColdWalletScreen() {
         onDisconnectPress={handleDisconnectPress}
       />
 
-      {/* PIN码输入modal窗口 */}
+      {/* PIN Modal */}
       <PinModal
-        visible={pinModalVisible} // 控制 PIN 模态框的可见性
-        pinCode={pinCode} // 绑定 PIN 输入的状态
-        setPinCode={setPinCode} // 设置 PIN 的状态函数
-        onSubmit={handlePinSubmit} // PIN 提交后的逻辑
-        onCancel={() => setPinModalVisible(false)} // 关闭 PIN 模态框
+        visible={pinModalVisible}
+        pinCode={pinCode}
+        setPinCode={setPinCode}
+        onSubmit={handlePinSubmit}
+        onCancel={() => setPinModalVisible(false)}
         styles={MyColdWalletScreenStyle}
         isDarkMode={isDarkMode}
         t={t}
-        status={verificationStatus} // 传递状态
+        status={verificationStatus}
       />
 
-      {/* 验证码模态框 */}
+      {/* Verification Modal */}
       <VerificationModal
         visible={verificationModalVisible && verificationStatus !== null}
         status={verificationStatus}
@@ -1546,16 +1465,17 @@ function MyColdWalletScreen() {
         styles={MyColdWalletScreenStyle}
         t={t}
       />
-      {/* 二次确认模态框   Confirm Disconnect Modal */}
+
+      {/* Confirm Disconnect Modal */}
       <ConfirmDisconnectModal
-        visible={confirmDisconnectModalVisible} // 仅控制这个模态框的可见性
-        onConfirm={confirmDisconnect} // 确认断开连接后的逻辑
-        onCancel={cancelDisconnect} // 取消断开连接后的逻辑
+        visible={confirmDisconnectModalVisible}
+        onConfirm={confirmDisconnect}
+        onCancel={cancelDisconnect}
         styles={MyColdWalletScreenStyle}
         t={t}
       />
 
-      {/* 成功模态框 */}
+      {/* Success Modal */}
       <MyColdWalletSuccessModal
         visible={successModalVisible}
         onClose={() => setSuccessModalVisible(false)}
@@ -1563,7 +1483,8 @@ function MyColdWalletScreen() {
         styles={MyColdWalletScreenStyle}
         t={t}
       />
-      {/* 失败模态框 */}
+
+      {/* Error Modal */}
       <MyColdWalletErrorModal
         visible={errorModalVisible}
         onClose={() => setErrorModalVisible(false)}
@@ -1580,7 +1501,7 @@ function MyColdWalletScreen() {
         onSelect={handleAddressSelect}
         styles={MyColdWalletScreenStyle}
         isDarkMode={isDarkMode}
-        onAddAddress={handleAddAddress} // 传递添加地址的回调函数
+        onAddAddress={handleAddAddress}
       />
     </LinearGradient>
   );
