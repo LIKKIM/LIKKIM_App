@@ -444,9 +444,80 @@ function TransactionsScreen() {
     };
   }, [addressModalVisible, selectedDevice]);
 
-  const handleSwapPress = () => {
-    setSwapModalVisible(true);
-  };
+  // 监听设备数量
+  useEffect(() => {
+    const loadVerifiedDevices = async () => {
+      try {
+        // 从 AsyncStorage 加载已验证的设备列表
+        const savedDevices = await AsyncStorage.getItem("verifiedDevices");
+        if (savedDevices !== null) {
+          setVerifiedDevices(JSON.parse(savedDevices));
+        }
+      } catch (error) {
+        console.log("Error loading verified devices: ", error);
+      }
+    };
+
+    loadVerifiedDevices();
+  }, []); // 这个依赖空数组确保该代码只在组件挂载时执行一次
+
+  // 停止监听
+  useEffect(() => {
+    if (!pinModalVisible) {
+      stopMonitoringVerificationCode();
+    }
+  }, [pinModalVisible]);
+
+  // 使用 useEffect 监听模态窗口的变化
+  useEffect(() => {
+    if (!confirmingTransactionModalVisible) {
+      stopMonitoringTransactionResponse();
+    }
+  }, [confirmingTransactionModalVisible]);
+
+  useEffect(() => {
+    if (!bleVisible && selectedDevice) {
+      setPinModalVisible(true);
+    }
+  }, [bleVisible, selectedDevice]);
+
+  // Update Bluetooth modal visibility management
+  useEffect(() => {
+    if (Platform.OS !== "web") {
+      bleManagerRef.current = new BleManager({
+        restoreStateIdentifier: restoreIdentifier,
+      });
+
+      const subscription = bleManagerRef.current.onStateChange((state) => {
+        if (state === "PoweredOn") {
+          // 添加短暂延迟以确保蓝牙模块完全准备好
+
+          setTimeout(() => {
+            scanDevices();
+          }, 2000); // 1秒延迟
+        }
+      }, true);
+
+      return () => {
+        subscription.remove();
+        bleManagerRef.current && bleManagerRef.current.destroy();
+      };
+    }
+  }, []);
+  useEffect(() => {
+    // 从 AsyncStorage 加载 addedCryptos 数据
+    const loadAddedCryptos = async () => {
+      try {
+        const savedCryptos = await AsyncStorage.getItem("addedCryptos");
+        if (savedCryptos !== null) {
+          setAddedCryptos(JSON.parse(savedCryptos));
+        }
+      } catch (error) {
+        console.log("Error loading addedCryptos: ", error);
+      }
+    };
+    loadAddedCryptos();
+  }, []);
 
   const reconnectDevice = async (device) => {
     try {
@@ -725,6 +796,28 @@ function TransactionsScreen() {
         }
       }
     );
+  };
+  // 停止监听验证码;
+  const stopMonitoringVerificationCode = () => {
+    if (monitorSubscription) {
+      try {
+        monitorSubscription.remove();
+        monitorSubscription = null;
+        console.log("验证码监听已停止");
+      } catch (error) {
+        console.log("停止监听时发生错误:", error);
+      }
+    }
+  };
+
+  let transactionMonitorSubscription;
+  // 停止监听交易反馈
+  const stopMonitoringTransactionResponse = () => {
+    if (transactionMonitorSubscription) {
+      transactionMonitorSubscription.remove();
+      transactionMonitorSubscription = null;
+      console.log("交易反馈监听已停止");
+    }
   };
 
   // 签名函数
@@ -1073,6 +1166,92 @@ function TransactionsScreen() {
     }
   };
 
+  // 显示地址函数 发送数据写法
+  const showLIKKIMAddressCommand = async (device, coinType) => {
+    try {
+      // 检查设备对象是否有效
+      if (typeof device !== "object" || !device.isConnected) {
+        console.log("设备对象无效:", device);
+        return;
+      }
+
+      // 连接设备并发现所有服务
+      await device.connect();
+      await device.discoverAllServicesAndCharacteristics();
+      console.log("设备已连接并发现所有服务。");
+
+      // 检查设备是否具有 writeCharacteristicWithResponseForService 方法
+      if (
+        typeof device.writeCharacteristicWithResponseForService !== "function"
+      ) {
+        console.log(
+          "设备不支持 writeCharacteristicWithResponseForService 方法。"
+        );
+        return;
+      }
+
+      // 根据 coinType 匹配对应的字符串
+      const commandString = coinCommandMapping[coinType];
+      // 【新增】检查 commandString 是否存在
+      if (!commandString) {
+        console.log("不支持的币种:", coinType);
+        return;
+      }
+
+      // 将命令字符串转换为 Base64 编码
+      const encodedCommand = Buffer.from(commandString, "utf-8").toString(
+        "base64"
+      );
+
+      // 向服务写入命令字符串（确保使用 Base64 编码）
+      await device.writeCharacteristicWithResponseForService(
+        serviceUUID,
+        writeCharacteristicUUID,
+        encodedCommand
+      );
+
+      // 设置验证地址的状态
+      setIsVerifyingAddress(true);
+      setAddressVerificationMessage("正在 LIKKIM 上验证地址...");
+      console.log("地址显示命令已发送:", commandString);
+
+      // 监听设备的响应 - bugging
+      const notifyCharacteristicUUID = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E";
+      const addressMonitorSubscription = device.monitorCharacteristicForService(
+        serviceUUID,
+        notifyCharacteristicUUID,
+        (error, characteristic) => {
+          if (error) {
+            console.log("监听设备响应时出错:", error);
+            return;
+          }
+          // 【新增】检查 characteristic 是否有效
+          if (!characteristic || !characteristic.value) {
+            console.log("未收到有效数据");
+            return;
+          }
+          const receivedDataHex = Buffer.from(characteristic.value, "base64")
+            .toString("hex")
+            .toUpperCase();
+          console.log("接收到的十六进制数据字符串:", receivedDataHex);
+
+          // 检查接收到的数据是否为预期的响应
+          if (receivedDataString === "Address_OK") {
+            console.log("在 LIKKIM 上成功显示地址");
+            setAddressVerificationMessage(t("addressShown")); // 假设 'addressShown' 是国际化文件中的 key
+          }
+        }
+      );
+
+      return addressMonitorSubscription;
+    } catch (error) {
+      console.log("发送显示地址命令失败:", error);
+    }
+  };
+
+  const handleSwapPress = () => {
+    setSwapModalVisible(true);
+  };
   const handleDevicePress = async (device) => {
     // 检查是否传递了有效的设备对象
     if (typeof device !== "object" || typeof device.connect !== "function") {
@@ -1160,100 +1339,6 @@ function TransactionsScreen() {
       console.log("验证状态已更新为 false。");
     } catch (error) {
       console.log("断开设备连接失败:", error);
-    }
-  };
-  // 停止监听验证码;
-  const stopMonitoringVerificationCode = () => {
-    if (monitorSubscription) {
-      try {
-        monitorSubscription.remove();
-        monitorSubscription = null;
-        console.log("验证码监听已停止");
-      } catch (error) {
-        console.log("停止监听时发生错误:", error);
-      }
-    }
-  };
-  // 显示地址函数 发送数据写法
-  const showLIKKIMAddressCommand = async (device, coinType) => {
-    try {
-      // 检查设备对象是否有效
-      if (typeof device !== "object" || !device.isConnected) {
-        console.log("设备对象无效:", device);
-        return;
-      }
-
-      // 连接设备并发现所有服务
-      await device.connect();
-      await device.discoverAllServicesAndCharacteristics();
-      console.log("设备已连接并发现所有服务。");
-
-      // 检查设备是否具有 writeCharacteristicWithResponseForService 方法
-      if (
-        typeof device.writeCharacteristicWithResponseForService !== "function"
-      ) {
-        console.log(
-          "设备不支持 writeCharacteristicWithResponseForService 方法。"
-        );
-        return;
-      }
-
-      // 根据 coinType 匹配对应的字符串
-      const commandString = coinCommandMapping[coinType];
-      // 【新增】检查 commandString 是否存在
-      if (!commandString) {
-        console.log("不支持的币种:", coinType);
-        return;
-      }
-
-      // 将命令字符串转换为 Base64 编码
-      const encodedCommand = Buffer.from(commandString, "utf-8").toString(
-        "base64"
-      );
-
-      // 向服务写入命令字符串（确保使用 Base64 编码）
-      await device.writeCharacteristicWithResponseForService(
-        serviceUUID,
-        writeCharacteristicUUID,
-        encodedCommand
-      );
-
-      // 设置验证地址的状态
-      setIsVerifyingAddress(true);
-      setAddressVerificationMessage("正在 LIKKIM 上验证地址...");
-      console.log("地址显示命令已发送:", commandString);
-
-      // 监听设备的响应 - bugging
-      const notifyCharacteristicUUID = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E";
-      const addressMonitorSubscription = device.monitorCharacteristicForService(
-        serviceUUID,
-        notifyCharacteristicUUID,
-        (error, characteristic) => {
-          if (error) {
-            console.log("监听设备响应时出错:", error);
-            return;
-          }
-          // 【新增】检查 characteristic 是否有效
-          if (!characteristic || !characteristic.value) {
-            console.log("未收到有效数据");
-            return;
-          }
-          const receivedDataHex = Buffer.from(characteristic.value, "base64")
-            .toString("hex")
-            .toUpperCase();
-          console.log("接收到的十六进制数据字符串:", receivedDataHex);
-
-          // 检查接收到的数据是否为预期的响应
-          if (receivedDataString === "Address_OK") {
-            console.log("在 LIKKIM 上成功显示地址");
-            setAddressVerificationMessage(t("addressShown")); // 假设 'addressShown' 是国际化文件中的 key
-          }
-        }
-      );
-
-      return addressMonitorSubscription;
-    } catch (error) {
-      console.log("发送显示地址命令失败:", error);
     }
   };
 
@@ -1367,92 +1452,6 @@ function TransactionsScreen() {
       setBleVisible(true);
     }
   };
-
-  // 监听设备数量
-  useEffect(() => {
-    const loadVerifiedDevices = async () => {
-      try {
-        // 从 AsyncStorage 加载已验证的设备列表
-        const savedDevices = await AsyncStorage.getItem("verifiedDevices");
-        if (savedDevices !== null) {
-          setVerifiedDevices(JSON.parse(savedDevices));
-        }
-      } catch (error) {
-        console.log("Error loading verified devices: ", error);
-      }
-    };
-
-    loadVerifiedDevices();
-  }, []); // 这个依赖空数组确保该代码只在组件挂载时执行一次
-
-  // 停止监听
-  useEffect(() => {
-    if (!pinModalVisible) {
-      stopMonitoringVerificationCode();
-    }
-  }, [pinModalVisible]);
-
-  let transactionMonitorSubscription;
-  // 停止监听交易反馈
-  const stopMonitoringTransactionResponse = () => {
-    if (transactionMonitorSubscription) {
-      transactionMonitorSubscription.remove();
-      transactionMonitorSubscription = null;
-      console.log("交易反馈监听已停止");
-    }
-  };
-
-  // 使用 useEffect 监听模态窗口的变化
-  useEffect(() => {
-    if (!confirmingTransactionModalVisible) {
-      stopMonitoringTransactionResponse();
-    }
-  }, [confirmingTransactionModalVisible]);
-
-  useEffect(() => {
-    if (!bleVisible && selectedDevice) {
-      setPinModalVisible(true);
-    }
-  }, [bleVisible, selectedDevice]);
-
-  // Update Bluetooth modal visibility management
-  useEffect(() => {
-    if (Platform.OS !== "web") {
-      bleManagerRef.current = new BleManager({
-        restoreStateIdentifier: restoreIdentifier,
-      });
-
-      const subscription = bleManagerRef.current.onStateChange((state) => {
-        if (state === "PoweredOn") {
-          // 添加短暂延迟以确保蓝牙模块完全准备好
-
-          setTimeout(() => {
-            scanDevices();
-          }, 2000); // 1秒延迟
-        }
-      }, true);
-
-      return () => {
-        subscription.remove();
-        bleManagerRef.current && bleManagerRef.current.destroy();
-      };
-    }
-  }, []);
-  useEffect(() => {
-    // 从 AsyncStorage 加载 addedCryptos 数据
-    const loadAddedCryptos = async () => {
-      try {
-        const savedCryptos = await AsyncStorage.getItem("addedCryptos");
-        if (savedCryptos !== null) {
-          setAddedCryptos(JSON.parse(savedCryptos));
-        }
-      } catch (error) {
-        console.log("Error loading addedCryptos: ", error);
-      }
-    };
-    loadAddedCryptos();
-  }, []);
-
   const handleReceivePress = () => {
     scanDevices();
     setOperationType("receive");
