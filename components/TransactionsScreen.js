@@ -1101,7 +1101,7 @@ function TransactionsScreen() {
           receiveAddress: inputAddress,
           receiveAmount: Number(amount),
           typeArg: typeArg,
-          expiration: 1735293600,
+          expiration: 600,
         };
       } else if (chainMethod === "cosmos") {
         // cosmos:  构造待签名hex请求数据（Cosmos 链）
