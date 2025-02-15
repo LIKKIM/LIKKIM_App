@@ -106,7 +106,7 @@ function TransactionsScreen() {
   const [selectedCryptoName, setSelectedCryptoName] = useState("");
   const [selectedCrypto, setSelectedCrypto] = useState("");
   const [selectedCryptoIcon, setSelectedCryptoIcon] = useState(null);
-  const [selectedQueryChainShortName, setQueryChainShortName] = useState("");
+  const [selectedQueryChainName, setQueryChainName] = useState("");
   const [priceUsd, setPriceUsd] = useState("");
   const [amount, setAmount] = useState("");
   const [inputAddress, setInputAddress] = useState("");
@@ -738,7 +738,7 @@ function TransactionsScreen() {
     paymentAddress,
     inputAddress,
     selectedCrypto,
-    selectedQueryChainShortName
+    selectedQueryChainName
   ) => {
     try {
       if (!device?.isConnected) {
@@ -847,7 +847,7 @@ function TransactionsScreen() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            chain: selectedQueryChainShortName,
+            chain: selectedQueryChainName,
             address: paymentAddress,
           }),
         }
@@ -1441,7 +1441,7 @@ function TransactionsScreen() {
     setValueUsd(crypto.valueUsd);
     setFee(crypto.fee);
     setPriceUsd(crypto.priceUsd);
-    setQueryChainShortName(crypto.queryChainShortName);
+    setQueryChainName(crypto.queryChainName);
     setChainShortName(crypto.chainShortName);
     setSelectedCryptoName(crypto.name);
     setIsVerifyingAddress(false);
