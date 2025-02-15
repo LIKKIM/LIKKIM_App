@@ -35,6 +35,7 @@ import {
   solChainMapping,
   suiChainMapping,
   xrpChainMapping,
+  chainGroups,
 } from "../config/chainMapping";
 
 // 上下文和样式
@@ -835,10 +836,16 @@ function TransactionsScreen() {
       });
       await signedOkPromise;
       console.log("设备确认回复: Signed_OK");
-
       // ---------------------------
       // 第4步：获取 nonce 和 gasPrice 等参数，真正开启签名流程
       // ---------------------------
+      let postChain = selectedQueryChainName;
+      for (const [defaultChain, chains] of Object.entries(chainGroups)) {
+        if (chains.includes(selectedQueryChainName)) {
+          postChain = defaultChain;
+          break;
+        }
+      }
       const walletParamsResponse = await fetch(
         "https://bt.likkim.com/api/wallet/getSignParam",
         {
@@ -847,7 +854,7 @@ function TransactionsScreen() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            chain: selectedQueryChainName,
+            chain: postChain,
             address: paymentAddress,
           }),
         }
@@ -859,6 +866,11 @@ function TransactionsScreen() {
         );
         return;
       }
+
+      // ---------------------------
+      // 处理返回的结果
+      // ---------------------------
+
       const walletParamsData = await walletParamsResponse.json();
       console.log("getSignParam 返回的数据:", walletParamsData);
       if (
