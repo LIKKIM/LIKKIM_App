@@ -728,8 +728,6 @@ function TransactionsScreen() {
         }
       }
     );
-
-    // console.log("已启动对 signed_data 的监听");
   };
 
   // 签名函数

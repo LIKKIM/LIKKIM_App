@@ -1,4 +1,35 @@
 // config/chainMapping.js
+/*
+ * Supported Chains:
+ *   - ethereum
+ *   - arbitrum
+ *   - aptos
+ *   - aurora
+ *   - avalanchec
+ *   - bitcoin
+ *   - bitcoincash
+ *   - smartchain
+ *   - celo
+ *   - cosmos
+ *   - cryptoorg
+ *   - classic
+ *   - fantom
+ *   - iotexevm
+ *   - juno
+ *   - litecoin
+ *   - okc
+ *   - optimism
+ *   - osmosis
+ *   - polygon
+ *   - ripple
+ *   - ronin
+ *   - solana
+ *   - sui
+ *   - tron
+ *   - zksync
+ *   - cronos
+ */
+
 // BTC 类链映射
 export const btcChainMapping = {
   bitcoin: "BTC",
