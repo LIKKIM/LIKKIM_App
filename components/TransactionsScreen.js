@@ -989,12 +989,20 @@ function TransactionsScreen() {
           typeArg,
         });
       } else if (postChain === "cosmos") {
-        const { gasPrice, nonce, sequence, accountNumber, feeAmount } =
-          walletParamsData.data;
+        const {
+          gasPrice,
+          nonce,
+          heigh,
+          sequence,
+          maxGasAmount,
+          accountNumber,
+          feeAmount,
+        } = walletParamsData.data;
         console.log("cosmos 返回的数据:", {
           gasPrice,
           nonce,
           sequence,
+          maxGasAmount,
           accountNumber,
           feeAmount,
         });
@@ -1115,9 +1123,9 @@ function TransactionsScreen() {
           accountNumber: accountNumber,
           feeDemon: "uatom",
           feeAmount: feeAmount,
-          gasLimit: 200000,
+          gasLimit: maxGasAmount,
           memo: "",
-          timeoutHeight: 0,
+          timeoutHeight: heigh,
           publicKey:
             "xpub6FmpQ9cxRXYYUNic6AtESRfMq2dfBm4hcAMgrLxm95NbmfC6ZFXmvRarzmfASdpwXjqR9BxsMLEWxNhVXjkxbQDkxMhpj4256ySt3wEuxdQ",
         };
