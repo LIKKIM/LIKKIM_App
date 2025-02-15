@@ -910,11 +910,18 @@ function TransactionsScreen() {
         };
       } else if (chainMethod === "btc") {
         requestData = {
-          chainKey,
-          nonce,
-          value: Number(amount),
-          to: inputAddress,
-          contractAddress: "",
+          chainKey: "bitcoin",
+          inputs: [
+            {
+              hash: "986fb96b3320c8e5bd5427167121aef0d93231b77e027da1648c83acf2d63c8b",
+              index: 1,
+              amount: 54774,
+            },
+          ],
+          feeRate: 3.047,
+          receiveAddress: inputAddress,
+          receiveAmount: 3000,
+          changeAddress: "3Nzrp7ncj3EGJPpLYyjPUYmLxmMoRDwB7Z",
         };
       } else if (chainMethod === "tron") {
         requestData = {
@@ -925,17 +932,31 @@ function TransactionsScreen() {
         };
       } else if (chainMethod === "aptos") {
         requestData = {
-          chainKey,
-          value: Number(amount),
-          to: inputAddress,
-          contractAddress: "",
+          from: paymentAddress,
+          sequenceNumber: 1,
+          maxGasAmount: 1000000,
+          gasUnitPrice: "",
+          receiveAddress: inputAddress,
+          receiveAmount: 0.01,
+          typeArg: "0x1::aptos_coin::AptosCoin",
+          expiration: 1735293600,
         };
       } else if (chainMethod === "cosmos") {
         requestData = {
-          chainKey,
-          value: Number(amount),
+          from: paymentAddress,
           to: inputAddress,
-          contractAddress: "",
+          demon: "uatom",
+          amount: 30000,
+          sequence: 1,
+          chainKey: "cosmos",
+          accountNumber: 623151,
+          feeDemon: "uatom",
+          feeAmount: "1000",
+          gasLimit: 200000,
+          memo: "",
+          timeoutHeight: 0,
+          publicKey:
+            "xpub6FmpQ9cxRXYYUNic6AtESRfMq2dfBm4hcAMgrLxm95NbmfC6ZFXmvRarzmfASdpwXjqR9BxsMLEWxNhVXjkxbQDkxMhpj4256ySt3wEuxdQ",
         };
       } else if (chainMethod === "solana") {
         requestData = {
@@ -946,17 +967,30 @@ function TransactionsScreen() {
         };
       } else if (chainMethod === "sui") {
         requestData = {
-          chainKey,
-          value: Number(amount),
+          objects: [
+            {
+              digest: "72MNvHizum45yZ68dQPaP6Ba9KpD7HS3vr9yck8SHHR5",
+              objectId:
+                "0x547423ba9528ab3bc240338331ebf62c9e73e44080d01c52a024e8c0ead37c00",
+              version: 449581001,
+            },
+          ],
+          from: paymentAddress,
           to: inputAddress,
-          contractAddress: "",
+          amount: Number(amount),
+          gasPrice: 750,
+          gasBudget: 100000000,
+          epoch: 623,
         };
       } else if (chainMethod === "xrp") {
         requestData = {
-          chainKey,
-          value: Number(amount),
+          from: paymentAddress,
           to: inputAddress,
-          contractAddress: "",
+          amount: Number(amount),
+          fee: "5000",
+          sequence: 92889716,
+          publicKey:
+            "xpub6Cev2GgWsGScABSqE3orVzNVbkNMm3AZ7PPopEjZjjZamQKN289XRFUzFau31vhpyMEdzJXywosaKXQHTqDjgjEPjK7Hxp5zGSvhQTDAwjW",
         };
       }
 
