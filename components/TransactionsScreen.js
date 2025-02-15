@@ -1025,6 +1025,7 @@ function TransactionsScreen() {
       let requestData = null;
 
       if (chainMethod === "evm") {
+        // evm:  构造待签名hex请求数据（例如 Ethereum）
         requestData = {
           chainKey: chainKey,
           nonce: nonce,
@@ -1036,6 +1037,7 @@ function TransactionsScreen() {
           contractValue: 0,
         };
       } else if (chainMethod === "btc") {
+        // btc:  构造待签名hex请求数据（比特币）
         requestData = {
           chainKey: "bitcoin",
           inputs: [
@@ -1051,6 +1053,7 @@ function TransactionsScreen() {
           changeAddress: "3Nzrp7ncj3EGJPpLYyjPUYmLxmMoRDwB7Z",
         };
       } else if (chainMethod === "tron") {
+        // tron:  构造待签名hex请求数据（波场）
         requestData = {
           chainKey,
           value: Number(amount),
@@ -1058,6 +1061,7 @@ function TransactionsScreen() {
           contractAddress: "",
         };
       } else if (chainMethod === "aptos") {
+        // aptos:  构造待签名hex请求数据（Aptos 链）
         requestData = {
           from: paymentAddress,
           sequenceNumber: 1,
@@ -1069,6 +1073,7 @@ function TransactionsScreen() {
           expiration: 1735293600,
         };
       } else if (chainMethod === "cosmos") {
+        // cosmos:  构造待签名hex请求数据（Cosmos 链）
         requestData = {
           from: paymentAddress,
           to: inputAddress,
@@ -1086,6 +1091,7 @@ function TransactionsScreen() {
             "xpub6FmpQ9cxRXYYUNic6AtESRfMq2dfBm4hcAMgrLxm95NbmfC6ZFXmvRarzmfASdpwXjqR9BxsMLEWxNhVXjkxbQDkxMhpj4256ySt3wEuxdQ",
         };
       } else if (chainMethod === "solana") {
+        // solana:  构造待签名hex请求数据（Solana 链）
         requestData = {
           from: paymentAddress,
           to: inputAddress,
@@ -1093,6 +1099,7 @@ function TransactionsScreen() {
           amount: Number(amount),
         };
       } else if (chainMethod === "sui") {
+        // sui:  构造待签名hex请求数据（Sui 链）
         requestData = {
           objects: [
             {
@@ -1110,6 +1117,7 @@ function TransactionsScreen() {
           epoch: epoch,
         };
       } else if (chainMethod === "xrp") {
+        // xrp:  构造待签名hex请求数据（Ripple）
         requestData = {
           from: paymentAddress,
           to: inputAddress,
@@ -1121,7 +1129,10 @@ function TransactionsScreen() {
         };
       }
 
-      console.log("构造的请求数据:", JSON.stringify(requestData, null, 2));
+      console.log(
+        " 构造待签名hex请求数据:",
+        JSON.stringify(requestData, null, 2)
+      );
 
       const response = await fetch(
         "https://bt.likkim.com/api/sign/encode_evm",
