@@ -1076,8 +1076,8 @@ function TransactionsScreen() {
           ],
           feeRate: 3.047,
           receiveAddress: inputAddress,
-          receiveAmount: 3000,
-          changeAddress: "3Nzrp7ncj3EGJPpLYyjPUYmLxmMoRDwB7Z",
+          receiveAmount: Number(amount),
+          changeAddress: paymentAddress,
         };
       } else if (chainMethod === "tron") {
         // tron:  构造待签名hex请求数据（波场）
@@ -1124,7 +1124,7 @@ function TransactionsScreen() {
           to: inputAddress,
           hash: blockHash,
           mint: "",
-          amount: Number(amount),
+          amount: Number(amount) * 1000000000,
         };
       } else if (chainMethod === "sui") {
         // sui:  构造待签名hex请求数据（Sui 链）
