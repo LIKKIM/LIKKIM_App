@@ -390,24 +390,7 @@ function WalletScreen({ route, navigation }) {
     }
   };
 
-  const [bleVisible, setBleVisible] = useState(false); // New state for Bluetooth modal
-
-  // 使用最新的价格来计算最终余额
-  const getConvertedBalance = (cardBalance, cardShortName) => {
-    const rate = exchangeRates[currencyUnit];
-    const cryptoToUsdRate = exchangeRates[cardShortName] || 1;
-
-    const marketPrice = priceChanges[cardShortName]?.priceChange || 1;
-
-    if (!rate) {
-      return cardBalance;
-    }
-
-    const usdBalance = cardBalance * cryptoToUsdRate * marketPrice;
-    const finalBalance = (usdBalance * rate).toFixed(2);
-
-    return finalBalance;
-  };
+  const [bleVisible, setBleVisible] = useState(false);
 
   /*   useEffect(() => {
     console.log("Updated cryptoCards:", cryptoCards);
@@ -682,6 +665,23 @@ function WalletScreen({ route, navigation }) {
       }, 300); // 确保在滚动完成后再设置偏移量
     }
   }, [modalVisible]);
+
+  // 使用最新的价格来计算最终余额
+  const getConvertedBalance = (cardBalance, cardShortName) => {
+    const rate = exchangeRates[currencyUnit];
+    const cryptoToUsdRate = exchangeRates[cardShortName] || 1;
+
+    const marketPrice = priceChanges[cardShortName]?.priceChange || 1;
+
+    if (!rate) {
+      return cardBalance;
+    }
+
+    const usdBalance = cardBalance * cryptoToUsdRate * marketPrice;
+    const finalBalance = (usdBalance * rate).toFixed(2);
+
+    return finalBalance;
+  };
 
   const handleDevicePress = async (device) => {
     // 检查是否传递了有效的设备对象
