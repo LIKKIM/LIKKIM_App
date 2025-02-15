@@ -135,6 +135,7 @@ function TransactionsScreen() {
   const [selectedToToken, setSelectedToToken] = useState("");
   const [selectedToChain, setSelectedToChain] = useState("");
   const [paymentAddress, setPaymentAddress] = useState("Your Payment Address");
+  const [contractAddress, setContractAddress] = useState("");
   const [addressVerificationMessage, setAddressVerificationMessage] = useState(
     t("Verifying Address on LIKKIM...")
   );
@@ -827,7 +828,8 @@ function TransactionsScreen() {
     paymentAddress,
     inputAddress,
     selectedCrypto,
-    selectedQueryChainName
+    selectedQueryChainName,
+    contractAddress
   ) => {
     try {
       if (!device?.isConnected) {
@@ -1123,7 +1125,7 @@ function TransactionsScreen() {
           from: paymentAddress,
           to: inputAddress,
           hash: blockHash,
-          mint: "",
+          mint: contractAddress,
           amount: Number(amount) * 1000000000,
         };
       } else if (chainMethod === "sui") {
@@ -1507,7 +1509,7 @@ function TransactionsScreen() {
     setSelectedCryptoChain(crypto.chain);
     setSelectedAddress(crypto.address);
     setSelectedCryptoIcon(crypto.icon);
-    setBalance(crypto.balance); // 确保设置正确的 balance
+    setBalance(crypto.balance);
     setValueUsd(crypto.valueUsd);
     setFee(crypto.fee);
     setPriceUsd(crypto.priceUsd);
@@ -1516,6 +1518,7 @@ function TransactionsScreen() {
     setSelectedCryptoName(crypto.name);
     setIsVerifyingAddress(false);
     setModalVisible(false);
+    setContractAddress(crypto.contractAddress);
 
     if (operationType === "receive") {
       setAddressModalVisible(true);
