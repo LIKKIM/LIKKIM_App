@@ -1068,7 +1068,7 @@ function TransactionsScreen() {
           maxGasAmount: 1000000,
           gasUnitPrice: "",
           receiveAddress: inputAddress,
-          receiveAmount: 0.01,
+          receiveAmount: Number(amount),
           typeArg: typeArg,
           expiration: 1735293600,
         };
@@ -1078,7 +1078,7 @@ function TransactionsScreen() {
           from: paymentAddress,
           to: inputAddress,
           demon: "uatom",
-          amount: 30000,
+          amount: Number(amount),
           sequence: 1,
           chainKey: "cosmos",
           accountNumber: 623151,
@@ -1095,6 +1095,7 @@ function TransactionsScreen() {
         requestData = {
           from: paymentAddress,
           to: inputAddress,
+          hash: "Cfudd6AiXTzPYrmEBGNFsHgaNKJ3xrrsGCT39avLkoiu",
           mint: "",
           amount: Number(amount),
         };
@@ -1112,7 +1113,7 @@ function TransactionsScreen() {
           from: paymentAddress,
           to: inputAddress,
           amount: Number(amount),
-          gasPrice: 750,
+          gasPrice: gasPrice,
           gasBudget: 100000000,
           epoch: epoch,
         };
