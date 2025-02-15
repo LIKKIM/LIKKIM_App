@@ -227,22 +227,6 @@ function WalletScreen({ route, navigation }) {
     });
   }, [navigation, selectedView, isDarkMode, t, isModalVisible]);
 
-  const handleSelectChain = async (chain) => {
-    try {
-      await AsyncStorage.setItem("selectedChain", chain); // 保存用户选择
-    } catch (e) {
-      console.error("Error saving chain:", e);
-    }
-
-    if (chain === "All") {
-      setSelectedChainShortName(cryptoCards.map((card) => card.chainShortName)); // 选择全部
-    } else {
-      setSelectedChainShortName([chain]); // 选择单个链
-    }
-    setSelectedChain(chain); // 更新选中的链
-    setChainSelectionModalVisible(false); // 关闭modal
-  };
-
   const [importingModalVisible, setImportingModalVisible] = useState(false);
   const restoreIdentifier = Constants.installationId;
   const [pinCode, setPinCode] = useState("");
@@ -499,6 +483,206 @@ function WalletScreen({ route, navigation }) {
     navigation.setParams({ cryptoCards, selectedCardName });
   }, [cryptoCards]);
 
+  useEffect(() => {
+    if (modalVisible) {
+      // 重置 tabOpacity 为 1
+      Animated.timing(tabOpacity, {
+        toValue: 1,
+        duration: 200,
+        useNativeDriver: true,
+      }).start();
+    }
+  }, [modalVisible]);
+
+  useEffect(() => {
+    // 根据条件触发动画
+    if (cryptoCards.length > 0 && !modalVisible) {
+      Animated.timing(opacityAnim, {
+        toValue: 1,
+        duration: 200,
+        easing: Easing.ease,
+        useNativeDriver: true,
+      }).start();
+    } else {
+      Animated.timing(opacityAnim, {
+        toValue: 0,
+        duration: 200,
+        easing: Easing.ease,
+        useNativeDriver: true,
+      }).start();
+    }
+  }, [cryptoCards.length, modalVisible, opacityAnim]);
+
+  useEffect(() => {
+    const loadCryptoCards = async () => {
+      try {
+        const storedCards = await AsyncStorage.getItem("cryptoCards");
+        //  console.log(storedCards);
+        if (storedCards !== null) {
+          setCryptoCards(JSON.parse(storedCards));
+          setAddedCryptos(JSON.parse(storedCards)); // 加载时同步 addedCryptos
+        }
+      } catch (error) {
+        console.log("Error loading crypto cards:", error);
+      }
+    };
+    loadCryptoCards();
+  }, []);
+
+  useEffect(() => {
+    const saveCryptoCards = async () => {
+      try {
+        await AsyncStorage.setItem("cryptoCards", JSON.stringify(cryptoCards));
+        await AsyncStorage.setItem("addedCryptos", JSON.stringify(cryptoCards)); // 保存时同步 addedCryptos
+        //  console.log("Updated addedCryptos wallet page:", cryptoCards); // 打印更新后的 addedCryptos
+      } catch (error) {
+        console.log("Error saving crypto cards:", error);
+      }
+    };
+    saveCryptoCards();
+  }, [cryptoCards]);
+
+  useEffect(() => {
+    let intervalId; // 定时器 ID
+
+    const fetchPriceChanges = async () => {
+      if (cryptoCards.length === 0) return; // 没有卡片时不请求
+
+      const instIds = cryptoCards
+        .map((card) => `${card.shortName}-USD`)
+        .join(",");
+      //bugging
+      try {
+        const response = await fetch(
+          `https://df.likkim.com/api/market/index-tickers?instId=${instIds}`
+        );
+        const data = await response.json();
+
+        if (data.code === 0 && data.data) {
+          const changes = {};
+
+          // 解析返回的 'data' 对象，按币种进行更新
+          Object.keys(data.data).forEach((key) => {
+            const shortName = key.replace("$", "").split("-")[0]; // 提取币种名称
+            const ticker = data.data[key];
+
+            changes[shortName] = {
+              priceChange: ticker.last || "0", // 最新价格
+              percentageChange: ticker.changePercent || "0", // 百分比变化
+            };
+          });
+
+          setPriceChanges(changes); // 更新状态
+        }
+      } catch (error) {
+        console.log("Error fetching price changes:", error);
+      }
+    };
+
+    // 初次调用
+    fetchPriceChanges();
+
+    // 设置定时器，每隔 30 秒刷新一次价格
+    intervalId = setInterval(() => {
+      fetchPriceChanges();
+    }, 60000); // 每 1 分钟刷新一次
+
+    // 清理定时器，防止内存泄漏
+    return () => {
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
+    };
+  }, [cryptoCards]);
+
+  // 停止监听
+  useEffect(() => {
+    if (!pinModalVisible) {
+      stopMonitoringVerificationCode();
+    }
+  }, [pinModalVisible]);
+
+  useEffect(() => {
+    if (route.params?.showAddModal) {
+      setAddCryptoVisible(true);
+    }
+    if (route.params?.showAddIconModal) {
+      setAddIconModalVisible(true);
+    }
+    if (route.params?.showDeleteConfirmModal) {
+      setDeleteConfirmVisible(true);
+    } else {
+      setDeleteConfirmVisible(false);
+    }
+  }, [route.params]);
+
+  useEffect(() => {
+    setCryptoCount(cryptoCards.length);
+  }, [cryptoCards.length]);
+
+  useEffect(() => {
+    navigation.setParams({
+      isModalVisible: modalVisible,
+      showAddModal: addCryptoVisible,
+    });
+  }, [modalVisible, addCryptoVisible]);
+
+  useEffect(() => {
+    Animated.timing(fadeAnim, {
+      toValue: modalVisible ? 1 : 0,
+      duration: 300,
+      easing: Easing.ease,
+      useNativeDriver: true,
+    }).start();
+  }, [modalVisible, fadeAnim]);
+
+  useEffect(() => {
+    if (processModalVisible) {
+      setShowLetsGoButton(false);
+      setProcessMessages([t("Creating your wallet")]);
+      const timer1 = setTimeout(() => {
+        setProcessMessages((prevMessages) => [
+          ...prevMessages,
+          t("Generating your accounts"),
+        ]);
+      }, 1000);
+      const timer2 = setTimeout(() => {
+        setProcessMessages((prevMessages) => [
+          ...prevMessages,
+          t("Encrypting your data"),
+        ]);
+      }, 2000);
+      const timer3 = setTimeout(() => {
+        setProcessMessages((prevMessages) => [
+          ...prevMessages,
+          t("Your wallet is now ready"),
+        ]);
+      }, 3000);
+      const timer4 = setTimeout(() => {
+        setShowLetsGoButton(true);
+      }, 4000);
+      return () => {
+        clearTimeout(timer1);
+        clearTimeout(timer2);
+        clearTimeout(timer3);
+        clearTimeout(timer4);
+      };
+    }
+  }, [processModalVisible, t]);
+
+  useEffect(() => {
+    console.log("选中的 chainShortName 已更新:", selectedCardChainShortName);
+  }, [selectedCardChainShortName]);
+
+  useEffect(() => {
+    if (modalVisible) {
+      scrollViewRef.current.scrollTo({ y: 0, animated: true });
+      setTimeout(() => {
+        scrollYOffset.current = 0;
+      }, 300); // 确保在滚动完成后再设置偏移量
+    }
+  }, [modalVisible]);
+
   const handleDevicePress = async (device) => {
     // 检查是否传递了有效的设备对象
     if (typeof device !== "object" || typeof device.connect !== "function") {
@@ -611,6 +795,22 @@ function WalletScreen({ route, navigation }) {
         console.log("停止监听时发生错误:", error);
       }
     }
+  };
+
+  const handleSelectChain = async (chain) => {
+    try {
+      await AsyncStorage.setItem("selectedChain", chain); // 保存用户选择
+    } catch (e) {
+      console.error("Error saving chain:", e);
+    }
+
+    if (chain === "All") {
+      setSelectedChainShortName(cryptoCards.map((card) => card.chainShortName)); // 选择全部
+    } else {
+      setSelectedChainShortName([chain]); // 选择单个链
+    }
+    setSelectedChain(chain); // 更新选中的链
+    setChainSelectionModalVisible(false); // 关闭modal
   };
 
   const handleVerifyAddress = (selectedCardChainShortName) => {
@@ -1003,206 +1203,6 @@ function WalletScreen({ route, navigation }) {
       }
     }
   };
-
-  useEffect(() => {
-    if (modalVisible) {
-      // 重置 tabOpacity 为 1
-      Animated.timing(tabOpacity, {
-        toValue: 1,
-        duration: 200,
-        useNativeDriver: true,
-      }).start();
-    }
-  }, [modalVisible]);
-
-  useEffect(() => {
-    // 根据条件触发动画
-    if (cryptoCards.length > 0 && !modalVisible) {
-      Animated.timing(opacityAnim, {
-        toValue: 1,
-        duration: 200,
-        easing: Easing.ease,
-        useNativeDriver: true,
-      }).start();
-    } else {
-      Animated.timing(opacityAnim, {
-        toValue: 0,
-        duration: 200,
-        easing: Easing.ease,
-        useNativeDriver: true,
-      }).start();
-    }
-  }, [cryptoCards.length, modalVisible, opacityAnim]);
-
-  useEffect(() => {
-    const loadCryptoCards = async () => {
-      try {
-        const storedCards = await AsyncStorage.getItem("cryptoCards");
-        //  console.log(storedCards);
-        if (storedCards !== null) {
-          setCryptoCards(JSON.parse(storedCards));
-          setAddedCryptos(JSON.parse(storedCards)); // 加载时同步 addedCryptos
-        }
-      } catch (error) {
-        console.log("Error loading crypto cards:", error);
-      }
-    };
-    loadCryptoCards();
-  }, []);
-
-  useEffect(() => {
-    const saveCryptoCards = async () => {
-      try {
-        await AsyncStorage.setItem("cryptoCards", JSON.stringify(cryptoCards));
-        await AsyncStorage.setItem("addedCryptos", JSON.stringify(cryptoCards)); // 保存时同步 addedCryptos
-        //  console.log("Updated addedCryptos wallet page:", cryptoCards); // 打印更新后的 addedCryptos
-      } catch (error) {
-        console.log("Error saving crypto cards:", error);
-      }
-    };
-    saveCryptoCards();
-  }, [cryptoCards]);
-
-  useEffect(() => {
-    let intervalId; // 定时器 ID
-
-    const fetchPriceChanges = async () => {
-      if (cryptoCards.length === 0) return; // 没有卡片时不请求
-
-      const instIds = cryptoCards
-        .map((card) => `${card.shortName}-USD`)
-        .join(",");
-      //bugging
-      try {
-        const response = await fetch(
-          `https://df.likkim.com/api/market/index-tickers?instId=${instIds}`
-        );
-        const data = await response.json();
-
-        if (data.code === 0 && data.data) {
-          const changes = {};
-
-          // 解析返回的 'data' 对象，按币种进行更新
-          Object.keys(data.data).forEach((key) => {
-            const shortName = key.replace("$", "").split("-")[0]; // 提取币种名称
-            const ticker = data.data[key];
-
-            changes[shortName] = {
-              priceChange: ticker.last || "0", // 最新价格
-              percentageChange: ticker.changePercent || "0", // 百分比变化
-            };
-          });
-
-          setPriceChanges(changes); // 更新状态
-        }
-      } catch (error) {
-        console.log("Error fetching price changes:", error);
-      }
-    };
-
-    // 初次调用
-    fetchPriceChanges();
-
-    // 设置定时器，每隔 30 秒刷新一次价格
-    intervalId = setInterval(() => {
-      fetchPriceChanges();
-    }, 60000); // 每 1 分钟刷新一次
-
-    // 清理定时器，防止内存泄漏
-    return () => {
-      if (intervalId) {
-        clearInterval(intervalId);
-      }
-    };
-  }, [cryptoCards]); // 依赖于 cryptoCards
-
-  // 停止监听
-  useEffect(() => {
-    if (!pinModalVisible) {
-      stopMonitoringVerificationCode();
-    }
-  }, [pinModalVisible]);
-
-  useEffect(() => {
-    if (route.params?.showAddModal) {
-      setAddCryptoVisible(true);
-    }
-    if (route.params?.showAddIconModal) {
-      setAddIconModalVisible(true);
-    }
-    if (route.params?.showDeleteConfirmModal) {
-      setDeleteConfirmVisible(true);
-    } else {
-      setDeleteConfirmVisible(false);
-    }
-  }, [route.params]);
-
-  useEffect(() => {
-    setCryptoCount(cryptoCards.length);
-  }, [cryptoCards.length]);
-
-  useEffect(() => {
-    navigation.setParams({
-      isModalVisible: modalVisible,
-      showAddModal: addCryptoVisible,
-    });
-  }, [modalVisible, addCryptoVisible]);
-
-  useEffect(() => {
-    Animated.timing(fadeAnim, {
-      toValue: modalVisible ? 1 : 0,
-      duration: 300,
-      easing: Easing.ease,
-      useNativeDriver: true,
-    }).start();
-  }, [modalVisible, fadeAnim]);
-
-  useEffect(() => {
-    if (processModalVisible) {
-      setShowLetsGoButton(false);
-      setProcessMessages([t("Creating your wallet")]);
-      const timer1 = setTimeout(() => {
-        setProcessMessages((prevMessages) => [
-          ...prevMessages,
-          t("Generating your accounts"),
-        ]);
-      }, 1000);
-      const timer2 = setTimeout(() => {
-        setProcessMessages((prevMessages) => [
-          ...prevMessages,
-          t("Encrypting your data"),
-        ]);
-      }, 2000);
-      const timer3 = setTimeout(() => {
-        setProcessMessages((prevMessages) => [
-          ...prevMessages,
-          t("Your wallet is now ready"),
-        ]);
-      }, 3000);
-      const timer4 = setTimeout(() => {
-        setShowLetsGoButton(true);
-      }, 4000);
-      return () => {
-        clearTimeout(timer1);
-        clearTimeout(timer2);
-        clearTimeout(timer3);
-        clearTimeout(timer4);
-      };
-    }
-  }, [processModalVisible, t]);
-
-  useEffect(() => {
-    console.log("选中的 chainShortName 已更新:", selectedCardChainShortName);
-  }, [selectedCardChainShortName]);
-
-  useEffect(() => {
-    if (modalVisible) {
-      scrollViewRef.current.scrollTo({ y: 0, animated: true });
-      setTimeout(() => {
-        scrollYOffset.current = 0;
-      }, 300); // 确保在滚动完成后再设置偏移量
-    }
-  }, [modalVisible]);
 
   const handlePinSubmit = async () => {
     setPinModalVisible(false); // 关闭 PIN 输入模态框
