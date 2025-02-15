@@ -1003,7 +1003,8 @@ function TransactionsScreen() {
         const { gasPrice, nonce, blockHash } = walletParamsData.data;
         console.log("solana 返回的数据:", { gasPrice, nonce, blockHash });
       } else if (postChain === "sui") {
-        const { gasPrice, nonce, epoch, suiObjects } = walletParamsData.data;
+        const { gasPrice, nonce, maxGasAmount, suiObjects, epoch } =
+          walletParamsData.data;
         // 如果需要使用数组中第一个对象的属性
         let digest, objectId, version;
         if (Array.isArray(suiObjects) && suiObjects.length > 0) {
@@ -1013,10 +1014,11 @@ function TransactionsScreen() {
         console.log("提取的 sui 数据:", {
           gasPrice,
           nonce,
-          epoch,
+          maxGasAmount,
           digest,
           objectId,
           version,
+          epoch,
         });
       } else if (postChain === "ripple") {
         const { gasPrice, nonce } = walletParamsData.data;
@@ -1142,7 +1144,7 @@ function TransactionsScreen() {
           to: inputAddress,
           amount: Number(amount),
           gasPrice: gasPrice,
-          gasBudget: 100000000,
+          gasBudget: maxGasAmount,
           epoch: epoch,
         };
       } else if (chainMethod === "ripple") {
