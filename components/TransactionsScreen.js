@@ -1086,7 +1086,7 @@ function TransactionsScreen() {
               amount: 54774,
             },
           ],
-          feeRate: 3.047,
+          feeRate: gasPrice,
           receiveAddress: inputAddress,
           receiveAmount: Number(amount),
           changeAddress: paymentAddress,
