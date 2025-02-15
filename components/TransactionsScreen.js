@@ -846,6 +846,7 @@ function TransactionsScreen() {
           break;
         }
       }
+
       const walletParamsResponse = await fetch(
         "https://bt.likkim.com/api/wallet/getSignParam",
         {
@@ -859,6 +860,7 @@ function TransactionsScreen() {
           }),
         }
       );
+
       if (!walletParamsResponse.ok) {
         console.log(
           "获取 nonce 和 gasPrice 失败:",
@@ -866,13 +868,12 @@ function TransactionsScreen() {
         );
         return;
       }
-
       // ---------------------------
       // 处理返回的结果
       // ---------------------------
-
       const walletParamsData = await walletParamsResponse.json();
       console.log("getSignParam 返回的数据:", walletParamsData);
+
       if (
         !walletParamsData.data?.gasPrice ||
         walletParamsData.data?.nonce == null
@@ -880,8 +881,22 @@ function TransactionsScreen() {
         console.log("接口返回数据不完整:", walletParamsData);
         return;
       }
-      const { gasPrice, nonce } = walletParamsData.data;
-      console.log("获取到的 gasPrice:", gasPrice, "nonce:", nonce);
+
+      if (postChain === "aptos") {
+        // 针对 aptos，除了 gasPrice 和 nonce 之外，还需要处理 typeArg
+        const { gasPrice, nonce, typeArg } = walletParamsData.data;
+        console.log("Aptos 返回的数据:", { gasPrice, nonce, typeArg });
+        // 此处可以做 aptos 特有的处理逻辑
+      } else if (postChain === "ethereum") {
+        // 针对 ethereum，仅处理 gasPrice 和 nonce
+        const { gasPrice, nonce } = walletParamsData.data;
+        console.log("Ethereum 返回的数据:", { gasPrice, nonce });
+        // 此处可以做 ethereum 特有的处理逻辑
+      } else {
+        // 如果需要支持其他链，也可以继续添加处理逻辑
+        const { gasPrice, nonce } = walletParamsData.data;
+        console.log("其他链返回的数据:", { gasPrice, nonce });
+      }
 
       // ---------------------------
       // 第5步：构造 POST 请求数据并调用签名编码接口
