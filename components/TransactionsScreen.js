@@ -1536,7 +1536,7 @@ function TransactionsScreen() {
         <View
           style={{
             width: "100%", // 使用100%的宽度来确保自适应
-            height: 130,
+            height: 110,
             flexDirection: "row",
             justifyContent: "space-between", // 确保按钮均匀分布
             gap: 10, // 设置按钮之间的间距
