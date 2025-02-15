@@ -899,10 +899,10 @@ function TransactionsScreen() {
 
       if (chainMethod === "evm") {
         requestData = {
-          chainKey,
-          nonce,
+          chainKey: chainKey,
+          nonce: nonce,
           gasLimit: 53000,
-          gasPrice,
+          gasPrice: gasPrice,
           value: Number(amount),
           to: inputAddress,
           contractAddress: "",
@@ -939,10 +939,10 @@ function TransactionsScreen() {
         };
       } else if (chainMethod === "solana") {
         requestData = {
-          chainKey,
-          value: Number(amount),
+          from: paymentAddress,
           to: inputAddress,
-          contractAddress: "",
+          mint: "",
+          amount: Number(amount),
         };
       } else if (chainMethod === "sui") {
         requestData = {
