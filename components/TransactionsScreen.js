@@ -1,13 +1,6 @@
 // TransactionsScreen.js
 import React, { useContext, useState, useRef, useEffect } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  ScrollView,
-  Clipboard,
-  Platform,
-} from "react-native";
+import { View, Clipboard, Platform } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Buffer } from "buffer";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -53,6 +46,8 @@ import SelectCryptoModal from "./modal/SelectCryptoModal";
 import SwapModal from "./modal/SwapModal";
 import ReceiveAddressModal from "./modal/ReceiveAddressModal";
 import PinModal from "./modal/PinModal";
+import TransactionHistory from "./transactionScreens/TransactionHistory";
+import ActionButtons from "./transactionScreens/ActionButtons";
 
 // BLE 常量
 const serviceUUID = "6E400001-B5A3-F393-E0A9-E50E24DCCA9E";
@@ -1533,171 +1528,20 @@ function TransactionsScreen() {
       style={TransactionsScreenStyle.bgContainer}
     >
       <View className="w-[100%]" style={TransactionsScreenStyle.container}>
-        <View
-          style={{
-            width: "100%", // 使用100%的宽度来确保自适应
-            height: 110,
-            flexDirection: "row",
-            justifyContent: "space-between", // 确保按钮均匀分布
-            gap: 10, // 设置按钮之间的间距
-          }}
-        >
-          {/* Send 按钮 */}
-          <TouchableOpacity
-            style={[TransactionsScreenStyle.roundButton, { flex: 1 }]} // 每个按钮占据均等的宽度
-            onPress={handleSendPress}
-          >
-            <Feather name="send" size={24} color={iconColor} />
-            <Text style={TransactionsScreenStyle.mainButtonText}>
-              {t("Send")}
-            </Text>
-          </TouchableOpacity>
-
-          {/* Receive 按钮 */}
-          <TouchableOpacity
-            style={[TransactionsScreenStyle.roundButton, { flex: 1 }]} // 均等宽度
-            onPress={handleReceivePress}
-          >
-            <Icon name="vertical-align-bottom" size={24} color={iconColor} />
-            <Text style={TransactionsScreenStyle.mainButtonText}>
-              {t("Receive")}
-            </Text>
-          </TouchableOpacity>
-
-          {/* Swap 按钮 */}
-          <TouchableOpacity
-            style={[TransactionsScreenStyle.roundButton, { flex: 1 }]} // 均等宽度
-            onPress={handleSwapPress}
-          >
-            <Icon name="swap-horiz" size={24} color={iconColor} />
-            <Text style={TransactionsScreenStyle.mainButtonText}>
-              {t("Swap")}
-            </Text>
-          </TouchableOpacity>
-        </View>
-
-        <View style={TransactionsScreenStyle.historyContainer}>
-          <Text style={TransactionsScreenStyle.historyTitle}>
-            {t("Transaction History")}
-          </Text>
-          <ScrollView
-            contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
-          >
-            {transactionHistory.length === 0 ? (
-              <Text style={TransactionsScreenStyle.noHistoryText}>
-                {t("No Histories")}
-              </Text>
-            ) : (
-              transactionHistory.map((transaction, index) => (
-                <View key={index} style={TransactionsScreenStyle.historyItem}>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Text
-                      style={[
-                        TransactionsScreenStyle.historyItemText,
-                        { fontSize: 18, fontWeight: "bold" },
-                      ]}
-                    >
-                      {transaction.transactionType === "Send"
-                        ? t("Send")
-                        : t("Receive")}
-                    </Text>
-
-                    <Text
-                      style={[
-                        TransactionsScreenStyle.historyItemText,
-                        { fontSize: 18, fontWeight: "bold" },
-                      ]}
-                    >
-                      {transaction.amount} {`${transaction.transactionSymbol}`}
-                    </Text>
-                  </View>
-
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <Text style={TransactionsScreenStyle.historyItemText}>
-                      <Text style={{ fontWeight: "bold" }}>{`State: `}</Text>
-                      <Text
-                        style={{
-                          color:
-                            transaction.state === "success"
-                              ? "#47B480"
-                              : "inherit",
-                        }}
-                      >
-                        {transaction.state}
-                      </Text>
-                    </Text>
-                  </View>
-
-                  <Text style={TransactionsScreenStyle.historyItemText}>
-                    <Text
-                      style={{ fontWeight: "bold" }}
-                    >{`Transaction Time: `}</Text>
-                    {`${new Date(
-                      transaction.transactionTime * 1000
-                    ).toLocaleString()}`}
-                  </Text>
-
-                  <Text
-                    style={[
-                      TransactionsScreenStyle.historyItemText,
-                      { lineHeight: 24 },
-                    ]}
-                  >
-                    <Text style={{ fontWeight: "bold" }}>{`From: `}</Text>
-                    {transaction.from}
-                  </Text>
-                  <Text
-                    style={[
-                      TransactionsScreenStyle.historyItemText,
-                      { lineHeight: 24 },
-                    ]}
-                  >
-                    <Text style={{ fontWeight: "bold" }}>{`To: `}</Text>
-                    {transaction.to}
-                  </Text>
-
-                  <Text
-                    style={[
-                      TransactionsScreenStyle.historyItemText,
-                      { lineHeight: 24 },
-                    ]}
-                  >
-                    <Text
-                      style={{ fontWeight: "bold" }}
-                    >{`Transaction hash: `}</Text>
-                    {transaction.txid}
-                  </Text>
-
-                  <Text style={TransactionsScreenStyle.historyItemText}>
-                    <Text
-                      style={{ fontWeight: "bold" }}
-                    >{`Network Fee: `}</Text>
-                    {transaction.txFee}
-                  </Text>
-
-                  <Text style={TransactionsScreenStyle.historyItemText}>
-                    <Text
-                      style={{ fontWeight: "bold" }}
-                    >{`Block Height: `}</Text>
-                    {transaction.height}
-                  </Text>
-                </View>
-              ))
-            )}
-          </ScrollView>
-        </View>
-
+        <ActionButtons
+          TransactionsScreenStyle={TransactionsScreenStyle}
+          t={t}
+          iconColor={iconColor}
+          handleSendPress={handleSendPress}
+          handleReceivePress={handleReceivePress}
+          handleSwapPress={handleSwapPress}
+        />
+        {/* 交易历史记录组件 */}
+        <TransactionHistory
+          TransactionsScreenStyle={TransactionsScreenStyle}
+          t={t}
+          transactionHistory={transactionHistory}
+        />
         {/* 输入地址的 Modal */}
         <InputAddressModal
           visible={inputAddressModalVisible}
@@ -1717,7 +1561,6 @@ function TransactionsScreen() {
           selectedCryptoChain={selectedCryptoChain}
           selectedCryptoIcon={selectedCryptoIcon}
         />
-
         {/* 输入金额的 Modal */}
         <AmountModal
           visible={amountModalVisible}
@@ -1745,7 +1588,6 @@ function TransactionsScreen() {
           valueUsd={valueUsd}
           setCryptoCards={setCryptoCards}
         />
-
         {/* 交易确认的 Modal */}
         <TransactionConfirmationModal
           visible={confirmModalVisible}
@@ -1800,7 +1642,6 @@ function TransactionsScreen() {
           selectedAddress={selectedAddress}
           inputAddress={inputAddress}
         />
-
         {/* 选择接收的加密货币模态窗口 */}
         <SelectCryptoModal
           visible={modalVisible}
@@ -1813,7 +1654,6 @@ function TransactionsScreen() {
           setModalVisible={setModalVisible}
           isDarkMode={isDarkMode}
         />
-
         {/* 显示选择的加密货币地址的模态窗口 */}
         <ReceiveAddressModal
           visible={addressModalVisible}
@@ -1829,7 +1669,6 @@ function TransactionsScreen() {
           isDarkMode={isDarkMode}
           chainShortName={chainShortName}
         />
-
         {/* Bluetooth modal */}
         <BluetoothModal
           visible={bleVisible} // 控制模态框的显示状态
@@ -1846,7 +1685,6 @@ function TransactionsScreen() {
           t={t} // 国际化函数
           onDisconnectPress={handleDisconnectDevice} // 断开连接处理函数
         />
-
         {/* PIN码输入modal窗口 */}
         <PinModal
           visible={pinModalVisible} // 控制 PIN 模态框的可见性
@@ -1862,7 +1700,6 @@ function TransactionsScreen() {
           t={t}
           status={verificationStatus} // 传递状态
         />
-
         {/* 验证模态框 */}
         <VerificationModal
           visible={
@@ -1876,7 +1713,6 @@ function TransactionsScreen() {
           styles={TransactionsScreenStyle}
           t={t}
         />
-
         {/* Pending Transaction Modal */}
         <PendingTransactionModal
           visible={confirmingTransactionModalVisible}
@@ -1885,7 +1721,6 @@ function TransactionsScreen() {
           TransactionsScreenStyle={TransactionsScreenStyle}
           t={t}
         />
-
         {/* Swap 模态框 */}
         <SwapModal
           isDarkMode={isDarkMode}
