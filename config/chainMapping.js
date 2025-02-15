@@ -1,10 +1,40 @@
 // config/chainMapping.js
+/*
+ * Supported Chains:
+ *   - ethereum
+ *   - arbitrum
+ *   - aptos
+ *   - aurora
+ *   - avalanchec
+ *   - bitcoin
+ *   - bitcoincash
+ *   - smartchain
+ *   - celo
+ *   - cosmos
+ *   - cryptoorg
+ *   - classic
+ *   - fantom
+ *   - iotexevm
+ *   - juno
+ *   - litecoin
+ *   - okc
+ *   - optimism
+ *   - osmosis
+ *   - polygon
+ *   - ripple
+ *   - ronin
+ *   - solana
+ *   - sui
+ *   - tron
+ *   - zksync
+ *   - cronos
+ */
+
 // BTC 类链映射
 export const btcChainMapping = {
   bitcoin: "BTC",
   bitcoincash: "BCH",
   litecoin: "LTC",
-  dogecoin: "DOGE", //等待支持
 };
 // EVM 类链映射
 export const evmChainMapping = {
@@ -54,4 +84,33 @@ export const suiChainMapping = {
 // XRP 类链映射
 export const xrpChainMapping = {
   ripple: "XRP",
+};
+
+export const chainGroups = {
+  ethereum: [
+    "arbitrum",
+    "aurora",
+    "avalanchec",
+    "smartchain",
+    "ethereum",
+    "classic",
+    "fantom",
+    "gnosis",
+    "cronos",
+    "iotexevm",
+    "linea",
+    "okc",
+    "optimisim",
+    "polygon",
+    "zksync",
+    "ronin",
+    "celo",
+  ],
+  bitcoin: ["bitcoin", "bitcoincash", "litecoin"],
+  tron: ["tron"],
+  aptos: ["aptos"],
+  cosmos: ["cosmos", "celestia", "cryptoorg", "juno", "osmosis"],
+  solana: ["solana"],
+  sui: ["sui"],
+  ripple: ["ripple"],
 };

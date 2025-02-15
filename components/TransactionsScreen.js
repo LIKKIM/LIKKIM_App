@@ -35,6 +35,7 @@ import {
   solChainMapping,
   suiChainMapping,
   xrpChainMapping,
+  chainGroups,
 } from "../config/chainMapping";
 
 // 上下文和样式
@@ -80,6 +81,7 @@ function TransactionsScreen() {
   } = useContext(CryptoContext);
 
   const TransactionsScreenStyle = TransactionsScreenStyles(isDarkMode);
+  const iconColor = isDarkMode ? "#CCB68C" : "#CFAB95";
   const darkColors = ["#21201E", "#0E0D0D"];
   const lightColors = ["#FFFFFF", "#EDEBEF"];
   const buttonBackgroundColor = isDarkMode ? "#CCB68C" : "#CFAB95";
@@ -97,17 +99,18 @@ function TransactionsScreen() {
   const [modalVisible, setModalVisible] = useState(false);
   const [addressModalVisible, setAddressModalVisible] = useState(false);
   const [operationType, setOperationType] = useState("");
-  const [selectedCryptoChain, setSelectedCryptoChain] = useState("");
+  const restoreIdentifier = Constants.installationId;
   const [selectedAddress, setSelectedAddress] = useState("");
   const [balance, setBalance] = useState("");
   const [valueUsd, setValueUsd] = useState("");
+  const [selectedCryptoChain, setSelectedCryptoChain] = useState("");
   const [selectedCryptoName, setSelectedCryptoName] = useState("");
-  const [queryChainShortName, setQueryChainShortName] = useState("");
-  const [priceUsd, setPriceUsd] = useState("");
+  const [selectedCrypto, setSelectedCrypto] = useState("");
   const [selectedCryptoIcon, setSelectedCryptoIcon] = useState(null);
+  const [selectedQueryChainName, setQueryChainName] = useState("");
+  const [priceUsd, setPriceUsd] = useState("");
   const [amount, setAmount] = useState("");
   const [inputAddress, setInputAddress] = useState("");
-  const [selectedCrypto, setSelectedCrypto] = useState("");
   const [chainShortName, setChainShortName] = useState("");
   const [amountModalVisible, setAmountModalVisible] = useState(false);
   const [confirmModalVisible, setConfirmModalVisible] = useState(false);
@@ -727,8 +730,6 @@ function TransactionsScreen() {
         }
       }
     );
-
-    // console.log("已启动对 signed_data 的监听");
   };
 
   // 签名函数
@@ -737,7 +738,8 @@ function TransactionsScreen() {
     amount,
     paymentAddress,
     inputAddress,
-    selectedCrypto
+    selectedCrypto,
+    selectedQueryChainName
   ) => {
     try {
       if (!device?.isConnected) {
@@ -834,10 +836,16 @@ function TransactionsScreen() {
       });
       await signedOkPromise;
       console.log("设备确认回复: Signed_OK");
-
       // ---------------------------
       // 第4步：获取 nonce 和 gasPrice 等参数，真正开启签名流程
       // ---------------------------
+      let postChain = selectedQueryChainName;
+      for (const [defaultChain, chains] of Object.entries(chainGroups)) {
+        if (chains.includes(selectedQueryChainName)) {
+          postChain = defaultChain;
+          break;
+        }
+      }
       const walletParamsResponse = await fetch(
         "https://bt.likkim.com/api/wallet/getSignParam",
         {
@@ -846,7 +854,7 @@ function TransactionsScreen() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            chain: selectedCrypto,
+            chain: postChain,
             address: paymentAddress,
           }),
         }
@@ -858,6 +866,11 @@ function TransactionsScreen() {
         );
         return;
       }
+
+      // ---------------------------
+      // 处理返回的结果
+      // ---------------------------
+
       const walletParamsData = await walletParamsResponse.json();
       console.log("getSignParam 返回的数据:", walletParamsData);
       if (
@@ -899,10 +912,10 @@ function TransactionsScreen() {
 
       if (chainMethod === "evm") {
         requestData = {
-          chainKey,
-          nonce,
+          chainKey: chainKey,
+          nonce: nonce,
           gasLimit: 53000,
-          gasPrice,
+          gasPrice: gasPrice,
           value: Number(amount),
           to: inputAddress,
           contractAddress: "",
@@ -910,11 +923,18 @@ function TransactionsScreen() {
         };
       } else if (chainMethod === "btc") {
         requestData = {
-          chainKey,
-          nonce,
-          value: Number(amount),
-          to: inputAddress,
-          contractAddress: "",
+          chainKey: "bitcoin",
+          inputs: [
+            {
+              hash: "986fb96b3320c8e5bd5427167121aef0d93231b77e027da1648c83acf2d63c8b",
+              index: 1,
+              amount: 54774,
+            },
+          ],
+          feeRate: 3.047,
+          receiveAddress: inputAddress,
+          receiveAmount: 3000,
+          changeAddress: "3Nzrp7ncj3EGJPpLYyjPUYmLxmMoRDwB7Z",
         };
       } else if (chainMethod === "tron") {
         requestData = {
@@ -925,38 +945,65 @@ function TransactionsScreen() {
         };
       } else if (chainMethod === "aptos") {
         requestData = {
-          chainKey,
-          value: Number(amount),
-          to: inputAddress,
-          contractAddress: "",
+          from: paymentAddress,
+          sequenceNumber: 1,
+          maxGasAmount: 1000000,
+          gasUnitPrice: "",
+          receiveAddress: inputAddress,
+          receiveAmount: 0.01,
+          typeArg: "0x1::aptos_coin::AptosCoin",
+          expiration: 1735293600,
         };
       } else if (chainMethod === "cosmos") {
         requestData = {
-          chainKey,
-          value: Number(amount),
+          from: paymentAddress,
           to: inputAddress,
-          contractAddress: "",
+          demon: "uatom",
+          amount: 30000,
+          sequence: 1,
+          chainKey: "cosmos",
+          accountNumber: 623151,
+          feeDemon: "uatom",
+          feeAmount: "1000",
+          gasLimit: 200000,
+          memo: "",
+          timeoutHeight: 0,
+          publicKey:
+            "xpub6FmpQ9cxRXYYUNic6AtESRfMq2dfBm4hcAMgrLxm95NbmfC6ZFXmvRarzmfASdpwXjqR9BxsMLEWxNhVXjkxbQDkxMhpj4256ySt3wEuxdQ",
         };
       } else if (chainMethod === "solana") {
         requestData = {
-          chainKey,
-          value: Number(amount),
+          from: paymentAddress,
           to: inputAddress,
-          contractAddress: "",
+          mint: "",
+          amount: Number(amount),
         };
       } else if (chainMethod === "sui") {
         requestData = {
-          chainKey,
-          value: Number(amount),
+          objects: [
+            {
+              digest: "72MNvHizum45yZ68dQPaP6Ba9KpD7HS3vr9yck8SHHR5",
+              objectId:
+                "0x547423ba9528ab3bc240338331ebf62c9e73e44080d01c52a024e8c0ead37c00",
+              version: 449581001,
+            },
+          ],
+          from: paymentAddress,
           to: inputAddress,
-          contractAddress: "",
+          amount: Number(amount),
+          gasPrice: 750,
+          gasBudget: 100000000,
+          epoch: 623,
         };
       } else if (chainMethod === "xrp") {
         requestData = {
-          chainKey,
-          value: Number(amount),
+          from: paymentAddress,
           to: inputAddress,
-          contractAddress: "",
+          amount: Number(amount),
+          fee: "5000",
+          sequence: 92889716,
+          publicKey:
+            "xpub6Cev2GgWsGScABSqE3orVzNVbkNMm3AZ7PPopEjZjjZamQKN289XRFUzFau31vhpyMEdzJXywosaKXQHTqDjgjEPjK7Hxp5zGSvhQTDAwjW",
         };
       }
 
@@ -1406,7 +1453,7 @@ function TransactionsScreen() {
     setValueUsd(crypto.valueUsd);
     setFee(crypto.fee);
     setPriceUsd(crypto.priceUsd);
-    setQueryChainShortName(crypto.queryChainShortName);
+    setQueryChainName(crypto.queryChainName);
     setChainShortName(crypto.chainShortName);
     setSelectedCryptoName(crypto.name);
     setIsVerifyingAddress(false);
