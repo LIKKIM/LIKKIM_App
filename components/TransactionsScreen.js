@@ -97,17 +97,18 @@ function TransactionsScreen() {
   const [modalVisible, setModalVisible] = useState(false);
   const [addressModalVisible, setAddressModalVisible] = useState(false);
   const [operationType, setOperationType] = useState("");
-  const [selectedCryptoChain, setSelectedCryptoChain] = useState("");
+
   const [selectedAddress, setSelectedAddress] = useState("");
   const [balance, setBalance] = useState("");
   const [valueUsd, setValueUsd] = useState("");
+  const [selectedCryptoChain, setSelectedCryptoChain] = useState("");
   const [selectedCryptoName, setSelectedCryptoName] = useState("");
+  const [selectedCrypto, setSelectedCrypto] = useState("");
+  const [selectedCryptoIcon, setSelectedCryptoIcon] = useState(null);
   const [queryChainShortName, setQueryChainShortName] = useState("");
   const [priceUsd, setPriceUsd] = useState("");
-  const [selectedCryptoIcon, setSelectedCryptoIcon] = useState(null);
   const [amount, setAmount] = useState("");
   const [inputAddress, setInputAddress] = useState("");
-  const [selectedCrypto, setSelectedCrypto] = useState("");
   const [chainShortName, setChainShortName] = useState("");
   const [amountModalVisible, setAmountModalVisible] = useState(false);
   const [confirmModalVisible, setConfirmModalVisible] = useState(false);
