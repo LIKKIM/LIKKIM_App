@@ -883,17 +883,12 @@ function TransactionsScreen() {
       }
 
       if (postChain === "aptos") {
-        // 针对 aptos，除了 gasPrice 和 nonce 之外，还需要处理 typeArg
         const { gasPrice, nonce, typeArg } = walletParamsData.data;
         console.log("Aptos 返回的数据:", { gasPrice, nonce, typeArg });
-        // 此处可以做 aptos 特有的处理逻辑
       } else if (postChain === "ethereum") {
-        // 针对 ethereum，仅处理 gasPrice 和 nonce
         const { gasPrice, nonce } = walletParamsData.data;
         console.log("Ethereum 返回的数据:", { gasPrice, nonce });
-        // 此处可以做 ethereum 特有的处理逻辑
       } else {
-        // 如果需要支持其他链，也可以继续添加处理逻辑
         const { gasPrice, nonce } = walletParamsData.data;
         console.log("其他链返回的数据:", { gasPrice, nonce });
       }
