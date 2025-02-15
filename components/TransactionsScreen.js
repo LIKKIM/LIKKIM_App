@@ -1003,13 +1003,14 @@ function TransactionsScreen() {
           accountNumber,
           feeAmount,
         } = walletParamsData.data;
+        const effectiveFeeAmount = feeAmount ? feeAmount : 3000;
         console.log("cosmos 返回的数据:", {
           gasPrice,
           nonce,
           sequence,
           maxGasAmount,
           accountNumber,
-          feeAmount,
+          feeAmount: effectiveFeeAmount,
         });
       }
       if (postChain === "solana") {
@@ -1114,7 +1115,7 @@ function TransactionsScreen() {
           chainKey: "cosmos",
           accountNumber: accountNumber,
           feeDemon: "uatom",
-          feeAmount: feeAmount,
+          feeAmount: effectiveFeeAmount,
           gasLimit: maxGasAmount,
           memo: "", //这个是备注
 
