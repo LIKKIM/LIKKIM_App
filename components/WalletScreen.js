@@ -144,88 +144,11 @@ function WalletScreen({ route, navigation }) {
   );
 
   const [isChainSelectionModalVisible, setChainSelectionModalVisible] =
-    useState(false); // 修改名字
-  const [selectedChain, setSelectedChain] = useState("All"); // 初始选项为“全部”
+    useState(false);
+  const [selectedChain, setSelectedChain] = useState("All");
 
-  const [selectedView, setSelectedView] = useState("wallet"); // 管理视图状态，'wallet' 或 'nft'
+  const [selectedView, setSelectedView] = useState("wallet");
   const { isModalVisible } = route.params || {};
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerTitle: () =>
-        !isModalVisible ? (
-          <View
-            style={{
-              flexDirection: "row",
-              backgroundColor: isDarkMode ? "#333" : "#eee",
-              borderRadius: 20,
-              borderWidth: 1,
-              borderColor: isDarkMode ? "#333" : "#eee",
-            }}
-          >
-            <TouchableOpacity
-              style={{
-                paddingVertical: 8,
-                paddingHorizontal: 20,
-                borderRadius: 20,
-                backgroundColor:
-                  selectedView === "wallet"
-                    ? isDarkMode
-                      ? "#555"
-                      : "#fff"
-                    : "transparent",
-                borderColor: isDarkMode ? "#333" : "#eee",
-                borderWidth: 1,
-              }}
-              onPress={() => setSelectedView("wallet")}
-            >
-              <Text
-                style={{
-                  fontWeight: "bold",
-                  color:
-                    selectedView === "wallet"
-                      ? isDarkMode
-                        ? "#fff"
-                        : "#000"
-                      : "#888",
-                }}
-              >
-                {t("Wallet")}
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={{
-                paddingVertical: 8,
-                paddingHorizontal: 20,
-                borderRadius: 20,
-                backgroundColor:
-                  selectedView === "nft"
-                    ? isDarkMode
-                      ? "#555"
-                      : "#fff"
-                    : "transparent",
-                borderColor: isDarkMode ? "#333" : "#eee",
-                borderWidth: 1,
-              }}
-              onPress={() => setSelectedView("nft")}
-            >
-              <Text
-                style={{
-                  fontWeight: "bold",
-                  color:
-                    selectedView === "nft"
-                      ? isDarkMode
-                        ? "#fff"
-                        : "#000"
-                      : "#888",
-                }}
-              >
-                NFTs
-              </Text>
-            </TouchableOpacity>
-          </View>
-        ) : null, // 当 isModalVisible 为 true 时，不显示切换按钮
-    });
-  }, [navigation, selectedView, isDarkMode, t, isModalVisible]);
 
   const [importingModalVisible, setImportingModalVisible] = useState(false);
   const restoreIdentifier = Constants.installationId;
@@ -235,7 +158,6 @@ function WalletScreen({ route, navigation }) {
       crypto.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       crypto.shortName.toLowerCase().includes(searchQuery.toLowerCase())
   );
-  // 初始化状态为默认值
   const [walletCreationStatus, setWalletCreationStatus] = useState({
     image: require("../assets/gif/Pending.gif"), // 默认显示 Pending.gif
     title: t("Creating on LIKKIM Hardware..."), // 默认主消息
@@ -396,10 +318,89 @@ function WalletScreen({ route, navigation }) {
     console.log("Updated cryptoCards:", cryptoCards);
   }, [cryptoCards]);
  */
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerTitle: () =>
+        !isModalVisible ? (
+          <View
+            style={{
+              flexDirection: "row",
+              backgroundColor: isDarkMode ? "#333" : "#eee",
+              borderRadius: 20,
+              borderWidth: 1,
+              borderColor: isDarkMode ? "#333" : "#eee",
+            }}
+          >
+            <TouchableOpacity
+              style={{
+                paddingVertical: 8,
+                paddingHorizontal: 20,
+                borderRadius: 20,
+                backgroundColor:
+                  selectedView === "wallet"
+                    ? isDarkMode
+                      ? "#555"
+                      : "#fff"
+                    : "transparent",
+                borderColor: isDarkMode ? "#333" : "#eee",
+                borderWidth: 1,
+              }}
+              onPress={() => setSelectedView("wallet")}
+            >
+              <Text
+                style={{
+                  fontWeight: "bold",
+                  color:
+                    selectedView === "wallet"
+                      ? isDarkMode
+                        ? "#fff"
+                        : "#000"
+                      : "#888",
+                }}
+              >
+                {t("Wallet")}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                paddingVertical: 8,
+                paddingHorizontal: 20,
+                borderRadius: 20,
+                backgroundColor:
+                  selectedView === "nft"
+                    ? isDarkMode
+                      ? "#555"
+                      : "#fff"
+                    : "transparent",
+                borderColor: isDarkMode ? "#333" : "#eee",
+                borderWidth: 1,
+              }}
+              onPress={() => setSelectedView("nft")}
+            >
+              <Text
+                style={{
+                  fontWeight: "bold",
+                  color:
+                    selectedView === "nft"
+                      ? isDarkMode
+                        ? "#fff"
+                        : "#000"
+                      : "#888",
+                }}
+              >
+                NFTs
+              </Text>
+            </TouchableOpacity>
+          </View>
+        ) : null,
+    });
+  }, [navigation, selectedView, isDarkMode, t, isModalVisible]);
+
   useEffect(() => {
     setAddedCryptos(cryptoCards);
   }, [cryptoCards]);
-  // 监听 createPendingModalVisible 的变化
+
   useEffect(() => {
     if (!createPendingModalVisible) {
       // 当模态框关闭时重置状态
@@ -414,7 +415,7 @@ function WalletScreen({ route, navigation }) {
         subtitle: t("Your device is already verified."), // 重置为默认子消息
       });
     }
-  }, [createPendingModalVisible]); // 依赖 createPendingModalVisible
+  }, [createPendingModalVisible]);
 
   // 监听设备数量
   useEffect(() => {
@@ -431,14 +432,13 @@ function WalletScreen({ route, navigation }) {
     };
 
     loadVerifiedDevices();
-  }, []); // 这个依赖空数组确保该代码只在组件挂载时执行一次
-
+  }, []);
   useEffect(() => {
     if (!bleVisible && selectedDevice) {
       setPinModalVisible(true);
     }
   }, [bleVisible, selectedDevice]);
-  // Update Bluetooth modal visibility management
+
   useEffect(() => {
     if (Platform.OS !== "web") {
       bleManagerRef.current = new BleManager({
@@ -665,6 +665,11 @@ function WalletScreen({ route, navigation }) {
       }, 300); // 确保在滚动完成后再设置偏移量
     }
   }, [modalVisible]);
+
+  //热更新支持
+  useEffect(() => {
+    onFetchUpdateAsync();
+  }, []);
 
   // 使用最新的价格来计算最终余额
   const getConvertedBalance = (cardBalance, cardShortName) => {
@@ -1079,7 +1084,7 @@ function WalletScreen({ route, navigation }) {
   }
 
   let monitorSubscription;
-  //监听函数
+
   const monitorVerificationCode = (device, sendDecryptedValue) => {
     monitorSubscription = device.monitorCharacteristicForService(
       serviceUUID,
@@ -1165,7 +1170,6 @@ function WalletScreen({ route, navigation }) {
     );
   };
 
-  // 监听钱包生成结果
   const monitorWalletCreationResult = (device) => {
     monitorSubscription = device.monitorCharacteristicForService(
       serviceUUID,
@@ -1556,11 +1560,6 @@ function WalletScreen({ route, navigation }) {
       );
     }
   }
-
-  //热更新支持
-  useEffect(() => {
-    onFetchUpdateAsync();
-  }, []);
 
   const renderTabModal = () => (
     <TabModal
