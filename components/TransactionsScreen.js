@@ -951,7 +951,7 @@ function TransactionsScreen() {
           gasUnitPrice: "",
           receiveAddress: inputAddress,
           receiveAmount: 0.01,
-          typeArg: "0x1::aptos_coin::AptosCoin",
+          typeArg: typeArg,
           expiration: 1735293600,
         };
       } else if (chainMethod === "cosmos") {
@@ -993,7 +993,7 @@ function TransactionsScreen() {
           amount: Number(amount),
           gasPrice: 750,
           gasBudget: 100000000,
-          epoch: 623,
+          epoch: epoch,
         };
       } else if (chainMethod === "xrp") {
         requestData = {
