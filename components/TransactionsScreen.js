@@ -975,9 +975,13 @@ function TransactionsScreen() {
       if (postChain === "ethereum") {
         const { gasPrice, nonce } = walletParamsData.data;
         console.log("Ethereum 返回的数据:", { gasPrice, nonce });
-      } else if (postChain === "bitcoin") {
-        const { gasPrice, nonce } = walletParamsData.data;
-        console.log("bitcoin 返回的数据:", { gasPrice, nonce });
+      } } else if (postChain === "bitcoin") {
+        const { gasPrice, nonce, utxoList } = walletParamsData.data;
+        let txid, unspentAmount, index;
+        if (Array.isArray(utxoList) && utxoList.length > 0) {
+          ({ txid, unspentAmount, index } = utxoList[0]);
+        }
+        console.log("bitcoin 返回的数据:", { gasPrice, nonce, txid, unspentAmount, index });
       } else if (postChain === "aptos") {
         const { gasPrice, nonce, sequence, maxGasAmount, typeArg } =
           walletParamsData.data;
@@ -1081,9 +1085,9 @@ function TransactionsScreen() {
           chainKey: "bitcoin",
           inputs: [
             {
-              hash: "986fb96b3320c8e5bd5427167121aef0d93231b77e027da1648c83acf2d63c8b",
-              index: 1,
-              amount: 54774,
+              hash: txid, 
+              index: index,
+              amount: unspentAmount,
             },
           ],
           feeRate: gasPrice,
