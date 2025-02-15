@@ -15,25 +15,25 @@ const ActionButtons = ({
   return (
     <View
       style={{
-        width: "100%", // 使用100%的宽度来确保自适应
+        width: "100%", // Full width for responsiveness
         height: 110,
         flexDirection: "row",
-        justifyContent: "space-between", // 确保按钮均匀分布
-        gap: 10, // 设置按钮之间的间距
+        justifyContent: "space-between", // Evenly spaced buttons
+        gap: 10, // Space between buttons
       }}
     >
-      {/* Send 按钮 */}
+      {/* Send button */}
       <TouchableOpacity
-        style={[TransactionsScreenStyle.roundButton, { flex: 1 }]} // 每个按钮占据均等的宽度
+        style={[TransactionsScreenStyle.roundButton, { flex: 1 }]} // Equal width for each button
         onPress={handleSendPress}
       >
         <Feather name="send" size={24} color={iconColor} />
         <Text style={TransactionsScreenStyle.mainButtonText}>{t("Send")}</Text>
       </TouchableOpacity>
 
-      {/* Receive 按钮 */}
+      {/* Receive button */}
       <TouchableOpacity
-        style={[TransactionsScreenStyle.roundButton, { flex: 1 }]} // 均等宽度
+        style={[TransactionsScreenStyle.roundButton, { flex: 1 }]} // Equal width for each button
         onPress={handleReceivePress}
       >
         <Icon name="vertical-align-bottom" size={24} color={iconColor} />
@@ -42,9 +42,9 @@ const ActionButtons = ({
         </Text>
       </TouchableOpacity>
 
-      {/* Swap 按钮 */}
+      {/* Swap button */}
       <TouchableOpacity
-        style={[TransactionsScreenStyle.roundButton, { flex: 1 }]} // 均等宽度
+        style={[TransactionsScreenStyle.roundButton, { flex: 1 }]} // Equal width for each button
         onPress={handleSwapPress}
       >
         <Icon name="swap-horiz" size={24} color={iconColor} />
