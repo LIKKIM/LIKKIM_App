@@ -1565,7 +1565,7 @@ function TransactionsScreen() {
           </TouchableOpacity>
 
           {/* Swap 按钮 */}
-          {/*           <TouchableOpacity
+          <TouchableOpacity
             style={[TransactionsScreenStyle.roundButton, { flex: 1 }]} // 均等宽度
             onPress={handleSwapPress}
           >
@@ -1573,7 +1573,7 @@ function TransactionsScreen() {
             <Text style={TransactionsScreenStyle.mainButtonText}>
               {t("Swap")}
             </Text>
-          </TouchableOpacity> */}
+          </TouchableOpacity>
         </View>
 
         <View style={TransactionsScreenStyle.historyContainer}>
