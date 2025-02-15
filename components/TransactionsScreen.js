@@ -80,6 +80,7 @@ function TransactionsScreen() {
   } = useContext(CryptoContext);
 
   const TransactionsScreenStyle = TransactionsScreenStyles(isDarkMode);
+  const iconColor = isDarkMode ? "#CCB68C" : "#CFAB95";
   const darkColors = ["#21201E", "#0E0D0D"];
   const lightColors = ["#FFFFFF", "#EDEBEF"];
   const buttonBackgroundColor = isDarkMode ? "#CCB68C" : "#CFAB95";
@@ -97,7 +98,7 @@ function TransactionsScreen() {
   const [modalVisible, setModalVisible] = useState(false);
   const [addressModalVisible, setAddressModalVisible] = useState(false);
   const [operationType, setOperationType] = useState("");
-
+  const restoreIdentifier = Constants.installationId;
   const [selectedAddress, setSelectedAddress] = useState("");
   const [balance, setBalance] = useState("");
   const [valueUsd, setValueUsd] = useState("");
