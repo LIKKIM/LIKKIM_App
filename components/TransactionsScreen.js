@@ -882,12 +882,28 @@ function TransactionsScreen() {
         return;
       }
 
-      if (postChain === "aptos") {
-        const { gasPrice, nonce, typeArg } = walletParamsData.data;
-        console.log("Aptos 返回的数据:", { gasPrice, nonce, typeArg });
-      } else if (postChain === "ethereum") {
+      if (postChain === "ethereum") {
         const { gasPrice, nonce } = walletParamsData.data;
         console.log("Ethereum 返回的数据:", { gasPrice, nonce });
+      } else if (postChain === "bitcoin") {
+        const { gasPrice, nonce } = walletParamsData.data;
+        console.log("bitcoin 返回的数据:", { gasPrice, nonce });
+      } else if (postChain === "aptos") {
+        const { gasPrice, nonce, typeArg } = walletParamsData.data;
+        console.log("Aptos 返回的数据:", { gasPrice, nonce, typeArg });
+      } else if (postChain === "cosmos") {
+        const { gasPrice, nonce } = walletParamsData.data;
+        console.log("cosmos 返回的数据:", { gasPrice, nonce });
+      }
+      if (postChain === "solana") {
+        const { gasPrice, nonce } = walletParamsData.data;
+        console.log("solana 返回的数据:", { gasPrice, nonce });
+      } else if (postChain === "sui") {
+        const { gasPrice, nonce, epoch } = walletParamsData.data;
+        console.log("sui 返回的数据:", { gasPrice, nonce, epoch });
+      } else if (postChain === "ripple") {
+        const { gasPrice, nonce } = walletParamsData.data;
+        console.log("ripple 返回的数据:", { gasPrice, nonce });
       } else {
         const { gasPrice, nonce } = walletParamsData.data;
         console.log("其他链返回的数据:", { gasPrice, nonce });
