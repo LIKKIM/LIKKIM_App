@@ -1677,6 +1677,11 @@ function WalletScreen({ route, navigation }) {
         filteredCryptos={filteredCryptos}
         handleAddCrypto={handleAddCrypto}
         chainCategories={chainCategories}
+        isChainSelectionModalVisible={isChainSelectionModalVisible}
+        setChainSelectionModalVisible={setChainSelectionModalVisible}
+        selectedChain={selectedChain}
+        handleSelectChain={handleSelectChain}
+        cryptoCards={cryptoCards}
         deleteConfirmVisible={deleteConfirmVisible}
         setDeleteConfirmVisible={setDeleteConfirmVisible}
         handleDeleteCard={handleDeleteCard}
@@ -1708,32 +1713,6 @@ function WalletScreen({ route, navigation }) {
         stopMonitoringWalletAddress={stopMonitoringWalletAddress}
         walletCreationStatus={walletCreationStatus}
         importingStatus={importingStatus}
-      />
-      {/* Add Crypto Modal */}
-      <AddCryptoModal
-        visible={addCryptoVisible}
-        onClose={() => {
-          setAddCryptoVisible(false);
-        }}
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        filteredCryptos={filteredCryptos}
-        handleAddCrypto={handleAddCrypto}
-        styles={WalletScreenStyle}
-        t={t}
-        isDarkMode={isDarkMode}
-        chainCategories={chainCategories}
-        cryptoCards={cryptoCards}
-      />
-      {/* 选择链的Modal */}
-      <ChainSelectionModal
-        isVisible={isChainSelectionModalVisible}
-        onClose={() => setChainSelectionModalVisible(false)}
-        selectedChain={selectedChain}
-        handleSelectChain={handleSelectChain}
-        cryptoCards={cryptoCards}
-        isDarkMode={isDarkMode}
-        t={t}
       />
     </LinearGradient>
   );

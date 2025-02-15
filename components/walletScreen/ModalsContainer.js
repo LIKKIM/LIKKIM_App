@@ -4,12 +4,15 @@ import AddressModal from "../modal/AddressModal";
 import AddWalletModal from "../modal/AddWalletModal";
 import TipModal from "../modal/TipModal";
 import ProcessModal from "../modal/ProcessModal";
-
 import DeleteConfirmationModal from "../modal/DeleteConfirmationModal";
 import BluetoothModal from "../modal/BluetoothModal";
 import PinModal from "../modal/PinModal";
 import VerificationModal from "../modal/VerificationModal";
 import PendingModal from "../modal/PendingModal";
+
+// 新增引入
+import AddCryptoModal from "../modal/AddCryptoModal";
+import ChainSelectionModal from "../modal/ChainSelectionModal";
 
 const ModalsContainer = ({
   selectedCardChainShortName,
@@ -37,6 +40,7 @@ const ModalsContainer = ({
   processMessages,
   showLetsGoButton,
   handleLetsGo,
+  // 新增传入 AddCryptoModal 所需参数
   addCryptoVisible,
   setAddCryptoVisible,
   searchQuery,
@@ -44,6 +48,13 @@ const ModalsContainer = ({
   filteredCryptos,
   handleAddCrypto,
   chainCategories,
+  // 新增传入 ChainSelectionModal 所需参数
+  isChainSelectionModalVisible,
+  setChainSelectionModalVisible,
+  selectedChain,
+  handleSelectChain,
+  cryptoCards,
+  //
   deleteConfirmVisible,
   setDeleteConfirmVisible,
   handleDeleteCard,
@@ -102,7 +113,6 @@ const ModalsContainer = ({
         styles={WalletScreenStyle}
         t={t}
       />
-
       {/* 提示 Modal */}
       <TipModal
         visible={tipModalVisible}
@@ -121,7 +131,6 @@ const ModalsContainer = ({
         styles={WalletScreenStyle}
         t={t}
       />
-
       {/* Delete Confirmation Modal */}
       <DeleteConfirmationModal
         visible={deleteConfirmVisible}
@@ -133,8 +142,7 @@ const ModalsContainer = ({
         styles={WalletScreenStyle}
         t={t}
       />
-
-      {/* Bluetooth modal */}
+      {/* Bluetooth Modal */}
       <BluetoothModal
         visible={bleVisible}
         devices={devices}
@@ -145,14 +153,12 @@ const ModalsContainer = ({
           setBleVisible(false);
           setSelectedDevice(null);
         }}
-        verifiedDevices={"0"} // 这里是避免这个页面有设备管理disconnect的功能
+        verifiedDevices={"0"} // 这里避免该页面具备设备管理断开功能
         MyColdWalletScreenStyle={WalletScreenStyle}
         t={t}
         onDisconnectPress={handleDisconnectDevice}
       />
-
-      {/* PIN码输入modal窗口 */}
-
+      {/* PIN码输入 Modal */}
       <PinModal
         visible={pinModalVisible} // 控制 PIN 模态框的可见性
         pinCode={pinCode} // 绑定 PIN 输入的状态
@@ -164,8 +170,7 @@ const ModalsContainer = ({
         t={t}
         status={blueToothStatus}
       />
-
-      {/* 验证结果模态框 */}
+      {/* 验证结果 Modal */}
       <VerificationModal
         visible={verificationStatus !== null}
         status={verificationStatus}
@@ -173,8 +178,7 @@ const ModalsContainer = ({
         styles={WalletScreenStyle}
         t={t}
       />
-
-      {/* 通用的 PendingModal 模态框 */}
+      {/* 通用 Pending Modal */}
       <PendingModal
         visible={createPendingModalVisible || importingModalVisible}
         onRequestClose={() => {
@@ -201,6 +205,34 @@ const ModalsContainer = ({
             : importingStatus.subtitle
         }
         WalletScreenStyle={WalletScreenStyle}
+        t={t}
+      />
+
+      {/* Add Crypto Modal */}
+      <AddCryptoModal
+        visible={addCryptoVisible}
+        onClose={() => {
+          setAddCryptoVisible(false);
+        }}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        filteredCryptos={filteredCryptos}
+        handleAddCrypto={handleAddCrypto}
+        styles={WalletScreenStyle}
+        t={t}
+        isDarkMode={isDarkMode}
+        chainCategories={chainCategories}
+        cryptoCards={cryptoCards}
+      />
+
+      {/* 选择链的 Modal */}
+      <ChainSelectionModal
+        isVisible={isChainSelectionModalVisible}
+        onClose={() => setChainSelectionModalVisible(false)}
+        selectedChain={selectedChain}
+        handleSelectChain={handleSelectChain}
+        cryptoCards={cryptoCards}
+        isDarkMode={isDarkMode}
         t={t}
       />
     </>
