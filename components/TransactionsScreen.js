@@ -975,13 +975,14 @@ function TransactionsScreen() {
       if (postChain === "ethereum") {
         const { gasPrice, nonce } = walletParamsData.data;
         console.log("Ethereum 返回的数据:", { gasPrice, nonce });
-      } } else if (postChain === "bitcoin") {
+      } else if (postChain === "bitcoin") {
         const { gasPrice, nonce, utxoList } = walletParamsData.data;
-        let txid, unspentAmount, index;
-        if (Array.isArray(utxoList) && utxoList.length > 0) {
-          ({ txid, unspentAmount, index } = utxoList[0]);
-        }
-        console.log("bitcoin 返回的数据:", { gasPrice, nonce, txid, unspentAmount, index });
+
+        console.log("bitcoin 返回的数据:", {
+          gasPrice,
+          nonce,
+          utxoList,
+        });
       } else if (postChain === "aptos") {
         const { gasPrice, nonce, sequence, maxGasAmount, typeArg } =
           walletParamsData.data;
@@ -1017,19 +1018,12 @@ function TransactionsScreen() {
       } else if (postChain === "sui") {
         const { gasPrice, nonce, maxGasAmount, suiObjects, epoch } =
           walletParamsData.data;
-        // 如果需要使用数组中第一个对象的属性
-        let digest, objectId, version;
-        if (Array.isArray(suiObjects) && suiObjects.length > 0) {
-          ({ digest, objectId, version } = suiObjects[0]);
-        }
 
         console.log("提取的 sui 数据:", {
           gasPrice,
           nonce,
           maxGasAmount,
-          digest,
-          objectId,
-          version,
+          suiObjects,
           epoch,
         });
       } else if (postChain === "ripple") {
@@ -1083,13 +1077,7 @@ function TransactionsScreen() {
         // btc:  构造待签名hex请求数据（比特币）
         requestData = {
           chainKey: "bitcoin",
-          inputs: [
-            {
-              hash: txid, 
-              index: index,
-              amount: unspentAmount,
-            },
-          ],
+          inputs: utxoList,
           feeRate: gasPrice,
           receiveAddress: inputAddress,
           receiveAmount: Number(amount),
@@ -1145,13 +1133,7 @@ function TransactionsScreen() {
       } else if (chainMethod === "sui") {
         // sui:  构造待签名hex请求数据（Sui 链）
         requestData = {
-          objects: [
-            {
-              digest: digest,
-              objectId: objectId,
-              version: version,
-            },
-          ],
+          objects: suiObjects,
           from: paymentAddress,
           to: inputAddress,
           amount: Number(amount),
