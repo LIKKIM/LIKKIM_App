@@ -1116,7 +1116,8 @@ function TransactionsScreen() {
           feeDemon: "uatom",
           feeAmount: feeAmount,
           gasLimit: maxGasAmount,
-          memo: "",
+          memo: "", //这个是备注
+
           timeoutHeight: heigh,
           publicKey:
             "xpub6FmpQ9cxRXYYUNic6AtESRfMq2dfBm4hcAMgrLxm95NbmfC6ZFXmvRarzmfASdpwXjqR9BxsMLEWxNhVXjkxbQDkxMhpj4256ySt3wEuxdQ",
@@ -1147,7 +1148,7 @@ function TransactionsScreen() {
           from: paymentAddress,
           to: inputAddress,
           amount: Number(amount),
-          fee: "5000",
+          fee: gasPrice,
           sequence: sequence,
           publicKey:
             "xpub6Cev2GgWsGScABSqE3orVzNVbkNMm3AZ7PPopEjZjjZamQKN289XRFUzFau31vhpyMEdzJXywosaKXQHTqDjgjEPjK7Hxp5zGSvhQTDAwjW",
