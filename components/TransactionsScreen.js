@@ -977,24 +977,51 @@ function TransactionsScreen() {
         const { gasPrice, nonce } = walletParamsData.data;
         console.log("bitcoin 返回的数据:", { gasPrice, nonce });
       } else if (postChain === "aptos") {
-        const { gasPrice, nonce, typeArg } = walletParamsData.data;
-        console.log("Aptos 返回的数据:", { gasPrice, nonce, typeArg });
+        const { gasPrice, nonce, sequence, maxGasAmount, typeArg } =
+          walletParamsData.data;
+        console.log("Aptos 返回的数据:", {
+          gasPrice,
+          nonce,
+          sequence,
+          maxGasAmount,
+          typeArg,
+        });
       } else if (postChain === "cosmos") {
-        const { gasPrice, nonce } = walletParamsData.data;
-        console.log("cosmos 返回的数据:", { gasPrice, nonce });
+        const { gasPrice, nonce, sequence, accountNumber, feeAmount } =
+          walletParamsData.data;
+        console.log("cosmos 返回的数据:", {
+          gasPrice,
+          nonce,
+          sequence,
+          accountNumber,
+          feeAmount,
+        });
       }
       if (postChain === "solana") {
-        const { gasPrice, nonce } = walletParamsData.data;
-        console.log("solana 返回的数据:", { gasPrice, nonce });
+        const { gasPrice, nonce, blockHash } = walletParamsData.data;
+        console.log("solana 返回的数据:", { gasPrice, nonce, blockHash });
       } else if (postChain === "sui") {
-        const { gasPrice, nonce, epoch } = walletParamsData.data;
-        console.log("sui 返回的数据:", { gasPrice, nonce, epoch });
+        const { gasPrice, nonce, epoch, suiObjects } = walletParamsData.data;
+        // 如果需要使用数组中第一个对象的属性
+        let digest, objectId, version;
+        if (Array.isArray(suiObjects) && suiObjects.length > 0) {
+          ({ digest, objectId, version } = suiObjects[0]);
+        }
+
+        console.log("提取的 sui 数据:", {
+          gasPrice,
+          nonce,
+          epoch,
+          digest,
+          objectId,
+          version,
+        });
       } else if (postChain === "ripple") {
         const { gasPrice, nonce } = walletParamsData.data;
         console.log("ripple 返回的数据:", { gasPrice, nonce });
       } else {
-        const { gasPrice, nonce } = walletParamsData.data;
-        console.log("其他链返回的数据:", { gasPrice, nonce });
+        const { gasPrice, nonce, sequence } = walletParamsData.data;
+        console.log("其他链返回的数据:", { gasPrice, nonce, sequence });
       }
 
       // ---------------------------
@@ -1016,7 +1043,7 @@ function TransactionsScreen() {
         } else if (suiChainMapping[chainKey]) {
           return "sui";
         } else if (xrpChainMapping[chainKey]) {
-          return "xrp";
+          return "ripple";
         }
         return null; // 默认返回 null
       };
@@ -1064,9 +1091,9 @@ function TransactionsScreen() {
         // aptos:  构造待签名hex请求数据（Aptos 链）
         requestData = {
           from: paymentAddress,
-          sequenceNumber: 1,
-          maxGasAmount: 1000000,
-          gasUnitPrice: "",
+          sequenceNumber: sequence,
+          maxGasAmount: maxGasAmount,
+          gasUnitPrice: gasPrice,
           receiveAddress: inputAddress,
           receiveAmount: Number(amount),
           typeArg: typeArg,
@@ -1079,11 +1106,11 @@ function TransactionsScreen() {
           to: inputAddress,
           demon: "uatom",
           amount: Number(amount),
-          sequence: 1,
+          sequence: sequence,
           chainKey: "cosmos",
-          accountNumber: 623151,
+          accountNumber: accountNumber,
           feeDemon: "uatom",
-          feeAmount: "1000",
+          feeAmount: feeAmount,
           gasLimit: 200000,
           memo: "",
           timeoutHeight: 0,
@@ -1095,7 +1122,7 @@ function TransactionsScreen() {
         requestData = {
           from: paymentAddress,
           to: inputAddress,
-          hash: "Cfudd6AiXTzPYrmEBGNFsHgaNKJ3xrrsGCT39avLkoiu",
+          hash: blockHash,
           mint: "",
           amount: Number(amount),
         };
@@ -1104,10 +1131,9 @@ function TransactionsScreen() {
         requestData = {
           objects: [
             {
-              digest: "72MNvHizum45yZ68dQPaP6Ba9KpD7HS3vr9yck8SHHR5",
-              objectId:
-                "0x547423ba9528ab3bc240338331ebf62c9e73e44080d01c52a024e8c0ead37c00",
-              version: 449581001,
+              digest: digest,
+              objectId: objectId,
+              version: version,
             },
           ],
           from: paymentAddress,
@@ -1117,14 +1143,14 @@ function TransactionsScreen() {
           gasBudget: 100000000,
           epoch: epoch,
         };
-      } else if (chainMethod === "xrp") {
-        // xrp:  构造待签名hex请求数据（Ripple）
+      } else if (chainMethod === "ripple") {
+        // ripple:  构造待签名hex请求数据（Ripple）
         requestData = {
           from: paymentAddress,
           to: inputAddress,
           amount: Number(amount),
           fee: "5000",
-          sequence: 92889716,
+          sequence: sequence,
           publicKey:
             "xpub6Cev2GgWsGScABSqE3orVzNVbkNMm3AZ7PPopEjZjjZamQKN289XRFUzFau31vhpyMEdzJXywosaKXQHTqDjgjEPjK7Hxp5zGSvhQTDAwjW",
         };
