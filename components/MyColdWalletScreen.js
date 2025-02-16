@@ -129,6 +129,15 @@ function MyColdWalletScreen() {
     { id: "1", name: "Home", address: "0x1234..." },
     { id: "2", name: "Office", address: "0x5678..." },
   ]);
+
+  // 在文件顶部的常量部分加入 XMODEM 协议相关常量
+  const XMODEM_BLOCK_SIZE = 128;
+  const SOH = 0x01; // start of header
+  const EOT = 0x04; // end of transmission
+  const ACK = 0x06; // acknowledgment
+  const NAK = 0x15; // negative acknowledgment
+  const CAN = 0x18; // cancel
+
   const handleAddAddress = () => {
     // Handle adding a new address
     console.log("Add Address button clicked");
@@ -755,10 +764,148 @@ function MyColdWalletScreen() {
     }
   };
 
-  const handleFirmwareUpdate = () => {
+  // 修改 handleFirmwareUpdate 函数
+  const handleFirmwareUpdate = async () => {
     console.log("Firmware Update clicked");
-    // Add firmware update logic here
+    // 检查是否已连接蓝牙设备（你可能需要让用户先完成配对）
+    if (!selectedDevice) {
+      Alert.alert(
+        t("Error"),
+        t("No device paired. Please pair with device first.")
+      );
+      return;
+    }
+    try {
+      // 下载固件文件
+      const response = await fetch(
+        "https://file.likkim.com/algo/lvgl_exec.dat"
+      );
+      if (!response.ok) {
+        throw new Error("Download failed");
+      }
+      const arrayBuffer = await response.arrayBuffer();
+      const firmwareData = new Uint8Array(arrayBuffer);
+      console.log("Firmware downloaded, size:", firmwareData.length);
+
+      // 开始使用 XMODEM 协议传输固件
+      await xmodemTransfer(selectedDevice, firmwareData);
+      Alert.alert(
+        t("Firmware Update"),
+        t("Firmware update completed successfully.")
+      );
+    } catch (error) {
+      console.error("Firmware update error:", error);
+      Alert.alert(t("Firmware Update Error"), error.message);
+    }
   };
+
+  // XMODEM 协议传输函数（简化实现）
+  async function xmodemTransfer(device, firmwareData) {
+    let blockNumber = 1;
+    for (
+      let offset = 0;
+      offset < firmwareData.length;
+      offset += XMODEM_BLOCK_SIZE
+    ) {
+      // 取出当前块数据
+      let blockData = firmwareData.slice(offset, offset + XMODEM_BLOCK_SIZE);
+      // 不足 128 字节则用 0x1A（SUB）填充
+      if (blockData.length < XMODEM_BLOCK_SIZE) {
+        const padded = new Uint8Array(XMODEM_BLOCK_SIZE);
+        padded.set(blockData);
+        padded.fill(0x1a, blockData.length);
+        blockData = padded;
+      }
+      // 构造 XMODEM 数据包：[SOH, block#, 255 - block#, data(128字节), checksum]
+      const packet = new Uint8Array(3 + XMODEM_BLOCK_SIZE + 1);
+      packet[0] = SOH;
+      packet[1] = blockNumber & 0xff;
+      packet[2] = ~blockNumber & 0xff;
+      packet.set(blockData, 3);
+      // 计算简单校验和（所有数据字节求和 mod 256）
+      let checksum = 0;
+      for (const byte of blockData) {
+        checksum = (checksum + byte) & 0xff;
+      }
+      packet[3 + XMODEM_BLOCK_SIZE] = checksum;
+
+      // 尝试发送当前块，最多重传 10 次
+      let success = false;
+      let retries = 0;
+      while (!success && retries < 10) {
+        // 将 packet 转换为 Base64 字符串并写入蓝牙特征
+        const base64Packet = Buffer.from(packet).toString("base64");
+        await device.writeCharacteristicWithResponseForService(
+          serviceUUID,
+          writeCharacteristicUUID,
+          base64Packet
+        );
+        console.log(`Sent block ${blockNumber}, retry ${retries}`);
+        // 等待设备响应（ACK/NAK），这里使用 waitForResponse 简单实现
+        const response = await waitForResponse(device);
+        if (response === ACK) {
+          success = true;
+        } else if (response === NAK) {
+          retries++;
+        } else {
+          throw new Error("Unexpected response during XMODEM transfer");
+        }
+      }
+      if (!success) {
+        throw new Error("Failed to transfer block " + blockNumber);
+      }
+      blockNumber = (blockNumber + 1) & 0xff;
+    }
+    // 全部数据传输完成后，发送 EOT（结束传输）
+    let eotSent = false;
+    let eotRetries = 0;
+    while (!eotSent && eotRetries < 10) {
+      const base64EOT = Buffer.from(new Uint8Array([EOT])).toString("base64");
+      await device.writeCharacteristicWithResponseForService(
+        serviceUUID,
+        writeCharacteristicUUID,
+        base64EOT
+      );
+      console.log("Sent EOT");
+      const response = await waitForResponse(device);
+      if (response === ACK) {
+        eotSent = true;
+      } else {
+        eotRetries++;
+      }
+    }
+    if (!eotSent) {
+      throw new Error("Failed to complete XMODEM transfer");
+    }
+  }
+
+  // 简单实现一个等待设备响应的函数（监听 notifyCharacteristic）
+  function waitForResponse(device) {
+    return new Promise((resolve, reject) => {
+      const subscription = device.monitorCharacteristicForService(
+        serviceUUID,
+        notifyCharacteristicUUID,
+        (error, characteristic) => {
+          if (error) {
+            subscription.remove();
+            reject(error);
+            return;
+          }
+          const data = Buffer.from(characteristic.value, "base64");
+          if (data.length > 0) {
+            subscription.remove();
+            // 假设设备响应为单字节数据
+            resolve(data[0]);
+          }
+        }
+      );
+      // 超时 5 秒未响应，则 reject
+      setTimeout(() => {
+        subscription.remove();
+        reject(new Error("Response timeout"));
+      }, 5000);
+    });
+  }
 
   const buildNumber = appConfig.ios.buildNumber;
   const [isDeleteWalletVisible, setIsDeleteWalletVisible] = useState(false);
