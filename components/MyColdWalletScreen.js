@@ -800,6 +800,11 @@ function MyColdWalletScreen() {
   };
 
   // XMODEM 协议传输函数（简化实现）
+  // 1. 将当前数据块转换为 Base64 后发送给设备。
+  // 2. 每个数据块最多尝试发送 10 次，直到收到设备返回的 ACK（0x06）。
+  //    如果收到 NAK（0x15），则重传该数据块；收到其他响应则抛出错误。
+  // 3. 所有数据块发送完毕后，发送 EOT 字节，并同样等待设备返回 ACK，最多重传 10 次。
+
   async function xmodemTransfer(device, firmwareData) {
     let blockNumber = 1;
     for (
