@@ -72,12 +72,12 @@ export const CryptoProvider = ({ children }) => {
 
   const supportedChains = ["ETH", "BTC", "SOL"];
 
-  const updateCryptoAddress = (shortName, newAddress) => {
-    if (!supportedChains.includes(shortName)) {
-      // Update address for unsupported chains without adding to wallet screen
+  const updateCryptoAddress = (chainShortName, newAddress) => {
+    if (!supportedChains.includes(chainShortName)) {
+      // 更新不支持的链时，不需要在钱包界面中显示，只更新initialAdditionalCryptos
       setInitialAdditionalCryptos((prevCryptos) => {
         const updatedCryptos = prevCryptos.map((crypto) =>
-          crypto.shortName === shortName
+          crypto.chainShortName === chainShortName
             ? { ...crypto, address: newAddress }
             : crypto
         );
@@ -85,15 +85,20 @@ export const CryptoProvider = ({ children }) => {
           "initialAdditionalCryptos",
           JSON.stringify(updatedCryptos)
         );
+        // 打印更新后的 initialAdditionalCryptos 数据
+        console.log(
+          "Updated initialAdditionalCryptos (unsupported chain):",
+          updatedCryptos
+        );
         return updatedCryptos;
       });
       return;
     }
 
-    // For supported chains, update both address and crypto cards
+    // 对于支持的链，同时更新地址和crypto cards
     setInitialAdditionalCryptos((prevCryptos) => {
       const updatedCryptos = prevCryptos.map((crypto) =>
-        crypto.shortName === shortName
+        crypto.chainShortName === chainShortName
           ? { ...crypto, address: newAddress }
           : crypto
       );
@@ -105,11 +110,15 @@ export const CryptoProvider = ({ children }) => {
 
       setCryptoCards((prevCards) => {
         const updatedCards = prevCards.map((card) =>
-          card.shortName === shortName ? { ...card, address: newAddress } : card
+          card.chainShortName === chainShortName
+            ? { ...card, address: newAddress }
+            : card
         );
-        if (!prevCards.find((card) => card.shortName === shortName)) {
+        if (!prevCards.find((card) => card.chainShortName === chainShortName)) {
           updatedCards.push(
-            updatedCryptos.find((crypto) => crypto.shortName === shortName)
+            updatedCryptos.find(
+              (crypto) => crypto.chainShortName === chainShortName
+            )
           );
         }
         return updatedCards;
@@ -132,39 +141,6 @@ export const CryptoProvider = ({ children }) => {
         return updatedCryptos;
       });
     }
-  };
-
-  const addCryptoCard = (chainName, walletAddress) => {
-    setAddedCryptos((prevCards) => {
-      const existingCard = prevCards.find(
-        (card) => card.chainShortName === chainName
-      );
-      if (!existingCard) {
-        const newCrypto = initialAdditionalCryptos.find(
-          (crypto) => crypto.chainShortName === chainName
-        );
-        if (newCrypto) {
-          return [
-            ...prevCards,
-            {
-              name: newCrypto.name,
-              shortName: newCrypto.shortName,
-              balance: newCrypto.balance,
-              icon: newCrypto.icon,
-              cardImage: newCrypto.cardImage,
-              address: walletAddress,
-              chain: newCrypto.chain,
-              chainShortName: newCrypto.chainShortName,
-              chainIcon: newCrypto.chainIcon,
-              queryChainName: newCrypto.queryChainName,
-            },
-          ];
-        } else {
-          console.warn(`No initial data found for chain: ${chainName}`);
-        }
-      }
-      return prevCards;
-    });
   };
 
   useEffect(() => {
@@ -384,7 +360,6 @@ export const CryptoProvider = ({ children }) => {
         additionalCryptos,
         setAdditionalCryptos,
         setAddedCryptos,
-        addCryptoCard,
         updateCryptoAddress,
         isVerificationSuccessful,
         setIsVerificationSuccessful,

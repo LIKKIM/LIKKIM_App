@@ -548,9 +548,9 @@ function MyColdWalletScreen() {
         );
         if (prefix) {
           const newAddress = receivedDataString.replace(prefix, "").trim();
-          const shortName = prefixToShortName[prefix];
-          console.log(`Received ${shortName} address: `, newAddress);
-          updateCryptoAddress(shortName, newAddress);
+          const chainShortName = prefixToShortName[prefix];
+          console.log(`Received ${chainShortName} address: `, newAddress);
+          updateCryptoAddress(chainShortName, newAddress);
         }
 
         // Process data containing "ID:"
