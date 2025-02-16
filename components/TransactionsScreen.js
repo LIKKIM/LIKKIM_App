@@ -1109,16 +1109,13 @@ function TransactionsScreen() {
         requestData = {
           from: paymentAddress,
           to: inputAddress,
-          demon: "uatom",
           amount: Number(amount),
           sequence: sequence,
           chainKey: "cosmos",
           accountNumber: accountNumber,
-          feeDemon: "uatom",
           feeAmount: effectiveFeeAmount,
           gasLimit: maxGasAmount,
           memo: "", //这个是备注
-
           timeoutHeight: heigh,
           publicKey:
             "xpub6FmpQ9cxRXYYUNic6AtESRfMq2dfBm4hcAMgrLxm95NbmfC6ZFXmvRarzmfASdpwXjqR9BxsMLEWxNhVXjkxbQDkxMhpj4256ySt3wEuxdQ",
