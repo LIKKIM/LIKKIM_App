@@ -3,51 +3,13 @@ import React, { createContext, useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import i18n from "../config/i18n";
 import { initialAdditionalCryptos } from "../config/cryptosData";
+import currencies from "../config/currencies";
 
 export const CryptoContext = createContext();
 export const DarkModeContext = createContext();
 
 const NEW_EXCHANGE_RATE_API_URL =
   "https://df.likkim.com/api/market/exchange-rate";
-
-const currencies = [
-  { name: "Australian Dollar", shortName: "AUD" },
-  { name: "Bahraini Dinar", shortName: "BHD" },
-  { name: "Brazilian Real", shortName: "BRL" },
-  { name: "British Pound", shortName: "GBP" },
-  { name: "Canadian Dollar", shortName: "CAD" },
-  { name: "Chilean Peso", shortName: "CLP" },
-  { name: "Czech Koruna", shortName: "CZK" },
-  { name: "Danish Krone", shortName: "DKK" },
-  { name: "Emirati Dirham", shortName: "AED" },
-  { name: "Euro", shortName: "EUR" },
-  { name: "Hong Kong Dollar", shortName: "HKD" },
-  { name: "Hungarian Forint", shortName: "HUF" },
-  { name: "Indian Rupee", shortName: "INR" },
-  { name: "Indonesian Rupiah", shortName: "IDR" },
-  { name: "Israeli Shekel", shortName: "ILS" },
-  { name: "Japanese Yen", shortName: "JPY" },
-  { name: "Malaysian Ringgit", shortName: "MYR" },
-  { name: "Mexico Peso", shortName: "MXN" },
-  { name: "New Zealand Dollar", shortName: "NZD" },
-  { name: "Nigerian Naira", shortName: "NGN" },
-  { name: "Norwegian Krone", shortName: "NOK" },
-  { name: "Pakistani Rupee", shortName: "PKR" },
-  { name: "Philippine Peso", shortName: "PHP" },
-  { name: "Polish Zloty", shortName: "PLN" },
-  { name: "Russian Rouble", shortName: "RUB" },
-  { name: "Singapore Dollar", shortName: "SGD" },
-  { name: "South African Rand", shortName: "ZAR" },
-  { name: "South Korean Won", shortName: "KRW" },
-  { name: "Swedish Krona", shortName: "SEK" },
-  { name: "Swiss Franc", shortName: "CHF" },
-  { name: "Thai Baht", shortName: "THB" },
-  { name: "Turkish Lira", shortName: "TRY" },
-  { name: "US Dollar", shortName: "USD" },
-  { name: "Ukrainian Hryvnia", shortName: "UAH" },
-  { name: "Vietnamese Dong", shortName: "VND" },
-  { name: "Chinese Yuan", shortName: "CNY" },
-];
 
 export const usdtCrypto = {
   name: "USDT",
