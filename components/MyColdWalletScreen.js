@@ -130,14 +130,6 @@ function MyColdWalletScreen() {
     { id: "2", name: "Office", address: "0x5678..." },
   ]);
 
-  // 在文件顶部的常量部分加入 XMODEM 协议相关常量
-  const XMODEM_BLOCK_SIZE = 128;
-  const SOH = 0x01; // start of header
-  const EOT = 0x04; // end of transmission
-  const ACK = 0x06; // acknowledgment
-  const NAK = 0x15; // negative acknowledgment
-  const CAN = 0x18; // cancel
-
   const handleAddAddress = () => {
     // Handle adding a new address
     console.log("Add Address button clicked");
@@ -766,9 +758,11 @@ function MyColdWalletScreen() {
 
   // 修改 handleFirmwareUpdate 函数
   // 修改后的固件更新函数：仅发送第一块数据进行测试
+  const XMODEM_BLOCK_SIZE = 64; // 每个数据块 128 字节
+
   const handleFirmwareUpdate = async () => {
     console.log("Firmware Update clicked");
-    // 检查是否已连接蓝牙设备（请确保用户已完成配对）
+    // 检查是否已连接蓝牙设备
     if (!selectedDevice) {
       Alert.alert(
         t("Error"),
@@ -776,6 +770,7 @@ function MyColdWalletScreen() {
       );
       return;
     }
+
     try {
       // 下载固件文件
       const response = await fetch(
@@ -788,23 +783,43 @@ function MyColdWalletScreen() {
       const firmwareData = new Uint8Array(arrayBuffer);
       console.log("Firmware downloaded, size:", firmwareData.length);
 
-      // 构造要发送的字符串（例如包含固件大小的信息）
-      const testMessage = `Firmware downloaded, size: ${firmwareData.length}`;
-      const bufferTestMessage = Buffer.from(testMessage, "utf-8");
-      const base64TestMessage = bufferTestMessage.toString("base64");
+      // 取出文件的第一个 128 字节数据块
+      let firstBlock = firmwareData.slice(0, XMODEM_BLOCK_SIZE);
+      // 如果数据不足 128 字节，则用 0x1A 填充到 128 字节
+      if (firstBlock.length < XMODEM_BLOCK_SIZE) {
+        const padded = new Uint8Array(XMODEM_BLOCK_SIZE);
+        padded.set(firstBlock);
+        padded.fill(0x1a, firstBlock.length);
+        firstBlock = padded;
+      }
 
-      // 发送字符串消息给嵌入式设备
+      // 将这 128 字节数据转换为十六进制字符串（每个字节两位）
+      const hexBlock = Array.from(firstBlock)
+        .map((byte) => ("0" + (byte & 0xff).toString(16)).slice(-2))
+        .join("");
+
+      // 构造命令字符串：前缀 "XMODEM_UPDATE:" + 十六进制字符串
+      const commandString = "XMODEM_UPDATE:" + hexBlock;
+      console.log("Command String:", commandString);
+
+      // 将命令字符串按 UTF-8 编码转换为 Buffer，再转换为 Base64 编码的字符串
+      const base64Command = Buffer.from(commandString, "utf-8").toString(
+        "base64"
+      );
+      console.log("Base64 Command:", base64Command);
+
+      // 发送 Base64 编码后的纯文本命令给嵌入式设备
       await selectedDevice.writeCharacteristicWithResponseForService(
         serviceUUID,
         writeCharacteristicUUID,
-        base64TestMessage
+        base64Command
       );
-      console.log("Sent test message:", testMessage);
+      console.log("Sent XMODEM update command as Base64 text");
 
       Alert.alert(
         t("Firmware Update Test"),
         t(
-          "Test message sent. Please check if the embedded device received the data."
+          "First 128-byte block sent successfully as a Base64 text command. Please check if the embedded device received the data."
         )
       );
     } catch (error) {
