@@ -765,9 +765,10 @@ function MyColdWalletScreen() {
   };
 
   // 修改 handleFirmwareUpdate 函数
+  // 修改后的固件更新函数：仅发送第一块数据进行测试
   const handleFirmwareUpdate = async () => {
     console.log("Firmware Update clicked");
-    // 检查是否已连接蓝牙设备（你可能需要让用户先完成配对）
+    // 检查是否已连接蓝牙设备（请确保用户已完成配对）
     if (!selectedDevice) {
       Alert.alert(
         t("Error"),
@@ -787,11 +788,24 @@ function MyColdWalletScreen() {
       const firmwareData = new Uint8Array(arrayBuffer);
       console.log("Firmware downloaded, size:", firmwareData.length);
 
-      // 开始使用 XMODEM 协议传输固件
-      await xmodemTransfer(selectedDevice, firmwareData);
+      // 构造要发送的字符串（例如包含固件大小的信息）
+      const testMessage = `Firmware downloaded, size: ${firmwareData.length}`;
+      const bufferTestMessage = Buffer.from(testMessage, "utf-8");
+      const base64TestMessage = bufferTestMessage.toString("base64");
+
+      // 发送字符串消息给嵌入式设备
+      await selectedDevice.writeCharacteristicWithResponseForService(
+        serviceUUID,
+        writeCharacteristicUUID,
+        base64TestMessage
+      );
+      console.log("Sent test message:", testMessage);
+
       Alert.alert(
-        t("Firmware Update"),
-        t("Firmware update completed successfully.")
+        t("Firmware Update Test"),
+        t(
+          "Test message sent. Please check if the embedded device received the data."
+        )
       );
     } catch (error) {
       console.error("Firmware update error:", error);
