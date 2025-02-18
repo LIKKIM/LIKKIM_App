@@ -572,65 +572,68 @@ function TransactionsScreen() {
     v[1] = v1 >>> 0;
   }
 
+  // 假设在组件中定义了状态：
+  const [receivedAddresses, setReceivedAddresses] = useState({});
+  // verificationStatus 用于表示整体状态
+  // 例如：setVerificationStatus("waiting") 或 setVerificationStatus("success")
+
   let monitorSubscription;
-  //监听函数 监听信息 监听方法
+
   const monitorVerificationCode = (device, sendDecryptedValue) => {
     monitorSubscription = device.monitorCharacteristicForService(
       serviceUUID,
       notifyCharacteristicUUID,
       async (error, characteristic) => {
         if (error) {
-          console.log("监听设备响应时出错:", error.message);
-          //      return;
+          console.log("Error monitoring device response:", error.message);
+          return;
         }
-
         const receivedData = Buffer.from(characteristic.value, "base64");
         const receivedDataString = receivedData.toString("utf8");
-        console.log("接收到的数据字符串:", receivedDataString);
+        console.log("Received data string:", receivedDataString);
 
-        // ==========================
-        // 映射表: 前缀 -> shortName
-        // ==========================
-
-        // 检查是否以某个前缀开头
+        // 检查数据是否以已知前缀开头（例如 "bitcoin:"、"ethereum:" 等）
         const prefix = Object.keys(prefixToShortName).find((key) =>
           receivedDataString.startsWith(key)
         );
-
         if (prefix) {
-          const newAddress = receivedDataString.replace(prefix, "").trim(); // 提取地址
-          const shortName = prefixToShortName[prefix]; // 获取对应的 shortName
+          const newAddress = receivedDataString.replace(prefix, "").trim();
+          const chainShortName = prefixToShortName[prefix];
+          console.log(`Received ${chainShortName} address: `, newAddress);
+          updateCryptoAddress(chainShortName, newAddress);
 
-          console.log(`收到的 ${shortName} 地址: `, newAddress);
-
-          // 更新对应加密货币的地址
-          updateCryptoAddress(shortName, newAddress);
+          // 更新 receivedAddresses 状态，并检查是否全部接收
+          setReceivedAddresses((prev) => {
+            const updated = { ...prev, [chainShortName]: newAddress };
+            // 假设预期地址数量与 prefixToShortName 中的条目数一致
+            const expectedCount = Object.keys(prefixToShortName).length;
+            if (Object.keys(updated).length >= expectedCount) {
+              setVerificationStatus("success");
+            } else {
+              setVerificationStatus("waiting");
+            }
+            return updated;
+          });
         }
 
-        // 处理包含 "ID:" 的数据
+        // Process data containing "ID:"
         if (receivedDataString.includes("ID:")) {
           const encryptedHex = receivedDataString.split("ID:")[1];
           const encryptedData = hexStringToUint32Array(encryptedHex);
           const key = new Uint32Array([0x1234, 0x1234, 0x1234, 0x1234]);
-
           decrypt(encryptedData, key);
-
           const decryptedHex = uint32ArrayToHexString(encryptedData);
-          console.log("解密后的字符串:", decryptedHex);
-
-          // 将解密后的值发送给设备
+          console.log("Decrypted string:", decryptedHex);
           if (sendDecryptedValue) {
             sendDecryptedValue(decryptedHex);
           }
         }
 
-        // 如果接收到 "VALID"，改变状态并发送 "validation"
+        // If data is "VALID", update status and send "validation"
         if (receivedDataString === "VALID") {
           try {
-            // 立即更新状态为 "VALID"
             setVerificationStatus("VALID");
-            console.log("状态更新为: VALID");
-
+            console.log("Status set to: VALID");
             const validationMessage = "validation";
             const bufferValidationMessage = Buffer.from(
               validationMessage,
@@ -638,13 +641,12 @@ function TransactionsScreen() {
             );
             const base64ValidationMessage =
               bufferValidationMessage.toString("base64");
-
             await device.writeCharacteristicWithResponseForService(
               serviceUUID,
               writeCharacteristicUUID,
               base64ValidationMessage
             );
-            console.log(`已发送字符串 'validation' 给设备`);
+            console.log(`Sent 'validation' to device`);
           } catch (error) {
             console.log("发送 'validation' 时出错:", error);
           }
@@ -689,14 +691,14 @@ function TransactionsScreen() {
               console.log("广播交易失败:", responseData.message);
             }
           } catch (error) {
-            console.log("发送请求时出错:", error);
+            console.log("Error sending 'validation':", error);
           }
         }
 
-        // 提取完整的 PIN 数据（例如 PIN:1234,Y 或 PIN:1234,N）
+        // Extract complete PIN data (e.g., PIN:1234,Y or PIN:1234,N)
         if (receivedDataString.startsWith("PIN:")) {
-          setReceivedVerificationCode(receivedDataString); // 保存完整的 PIN 数据
-          console.log("接收到的完整数据字符串:", receivedDataString);
+          setReceivedVerificationCode(receivedDataString);
+          console.log("Complete PIN data received:", receivedDataString);
         }
       }
     );
