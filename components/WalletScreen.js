@@ -1285,25 +1285,48 @@ function WalletScreen({ route, navigation }) {
       setIsVerificationSuccessful(true);
       console.log("设备验证并存储成功");
 
-      // 如果标志位为 Y，发送字符串 'address'
+      // 如果标志位为 Y，则发送字符串 'address'，之后发送多个 pubkey 消息
       if (flag === "Y") {
         console.log("设备返回了 PIN:xxxx,Y，发送字符串 'address' 给嵌入式设备");
         try {
-          const message = "address";
-          const bufferMessage = Buffer.from(message, "utf-8");
-          const base64Message = bufferMessage.toString("base64");
+          // 发送 address
+          const addressMessage = "address";
+          const addressBuffer = Buffer.from(addressMessage, "utf-8");
+          const base64Address = addressBuffer.toString("base64");
 
           await selectedDevice.writeCharacteristicWithResponseForService(
             serviceUUID,
             writeCharacteristicUUID,
-            base64Message
+            base64Address
           );
           console.log("字符串 'address' 已成功发送给设备");
+
+          // 构造 pubkey 消息数组（每个消息包含币种与对应的路径）
+          const pubkeyMessages = [
+            "pubkey: cosmosm,m/44'/118'/0'/0/0",
+            "pubkey: ripple,m/44'/144'/0'/0/0",
+            "pubkey: celestia,m/44'/118'/0'/0/0",
+            "pubkey: juno,m/44'/118'/0'/0/0",
+            "pubkey: osmosis,m/44'/118'/0'/0/0",
+          ];
+
+          // 遍历数组，逐条发送消息
+          for (const msg of pubkeyMessages) {
+            const bufferMessage = Buffer.from(msg, "utf-8");
+            const base64Message = bufferMessage.toString("base64");
+
+            await selectedDevice.writeCharacteristicWithResponseForService(
+              serviceUUID,
+              writeCharacteristicUUID,
+              base64Message
+            );
+            console.log(`字符串 '${msg}' 已成功发送给设备`);
+          }
         } catch (error) {
-          console.log("发送字符串 'address' 时发生错误:", error);
+          console.log("发送字符串时发生错误:", error);
         }
       } else if (flag === "N") {
-        console.log("设备返回了 PIN:xxxx,N，无需发送 'address'");
+        console.log("设备返回了 PIN:xxxx,N，无需发送 'address' 和 pubkey 消息");
       }
     } else {
       console.log("PIN 验证失败");

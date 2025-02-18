@@ -697,6 +697,7 @@ function MyColdWalletScreen() {
     }
     console.log(`Extracted PIN: ${receivedPin}`);
     console.log(`Flag: ${flag}`);
+
     if (pinCodeValue === receivedPin) {
       console.log("PIN verified successfully");
       setVerificationStatus("waiting");
@@ -707,20 +708,46 @@ function MyColdWalletScreen() {
       );
       setIsVerificationSuccessful(true);
       console.log("Device verified and saved");
+
       if (flag === "Y") {
+        // 发送 address 消息
         console.log("Flag Y received; sending 'address' to device");
         try {
-          const message = "address";
-          const bufferMessage = Buffer.from(message, "utf-8");
-          const base64Message = bufferMessage.toString("base64");
+          const addressMessage = "address";
+          const bufferAddress = Buffer.from(addressMessage, "utf-8");
+          const base64Address = bufferAddress.toString("base64");
           await selectedDevice.writeCharacteristicWithResponseForService(
             serviceUUID,
             writeCharacteristicUUID,
-            base64Message
+            base64Address
           );
           console.log("Sent 'address' to device");
         } catch (error) {
           console.log("Error sending 'address':", error);
+        }
+
+        // 逐条发送 pubkey 消息
+        const pubkeyMessages = [
+          "pubkey: cosmosm,m/44'/118'/0'/0/0",
+          "pubkey: ripple,m/44'/144'/0'/0/0",
+          "pubkey: celestia,m/44'/118'/0'/0/0",
+          "pubkey: juno,m/44'/118'/0'/0/0",
+          "pubkey: osmosis,m/44'/118'/0'/0/0",
+        ];
+
+        for (const message of pubkeyMessages) {
+          try {
+            const bufferMessage = Buffer.from(message, "utf-8");
+            const base64Message = bufferMessage.toString("base64");
+            await selectedDevice.writeCharacteristicWithResponseForService(
+              serviceUUID,
+              writeCharacteristicUUID,
+              base64Message
+            );
+            console.log(`Sent message: ${message}`);
+          } catch (error) {
+            console.log(`Error sending message "${message}":`, error);
+          }
         }
       } else if (flag === "N") {
         console.log("Flag N received; no 'address' sent");
