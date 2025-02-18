@@ -86,10 +86,10 @@ export const CryptoProvider = ({ children }) => {
           JSON.stringify(updatedCryptos)
         );
         // 打印更新后的 initialAdditionalCryptos 数据
-        console.log(
+        /*         console.log(
           "Updated initialAdditionalCryptos (unsupported chain):",
           updatedCryptos
-        );
+        ); */
         return updatedCryptos;
       });
       return;
@@ -326,7 +326,7 @@ export const CryptoProvider = ({ children }) => {
     await AsyncStorage.setItem("screenLockPassword", newPassword);
   };
 
-  useEffect(() => {
+  /*   useEffect(() => {
     const trxCrypto = initialAdditionalCryptosState.find(
       (crypto) => crypto.chainShortName === "TRX"
     );
@@ -339,12 +339,12 @@ export const CryptoProvider = ({ children }) => {
       console.log("TRX address not found in initialAdditionalCryptosState.");
     }
     if (usdtCrypto.chainShortName === "TRX") {
-      console.log("TRX address in usdtCrypto:", usdtCrypto.address);
+    //  console.log("TRX address in usdtCrypto:", usdtCrypto.address);
     } else {
       console.log("TRX address not found in usdtCrypto.");
     }
   }, [initialAdditionalCryptosState]);
-
+ */
   return (
     <CryptoContext.Provider
       value={{
