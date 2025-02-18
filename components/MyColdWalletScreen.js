@@ -519,6 +519,11 @@ function MyColdWalletScreen() {
     v[1] = v1 >>> 0;
   }
 
+  // 假设在组件中定义了状态：
+  const [receivedAddresses, setReceivedAddresses] = useState({});
+  // verificationStatus 用于表示整体状态
+  // 例如：setVerificationStatus("waiting") 或 setVerificationStatus("success")
+
   let monitorSubscription;
 
   const monitorVerificationCode = (device, sendDecryptedValue) => {
@@ -534,7 +539,7 @@ function MyColdWalletScreen() {
         const receivedDataString = receivedData.toString("utf8");
         console.log("Received data string:", receivedDataString);
 
-        // Check if data starts with a known prefix
+        // 检查数据是否以已知前缀开头（例如 "bitcoin:"、"ethereum:" 等）
         const prefix = Object.keys(prefixToShortName).find((key) =>
           receivedDataString.startsWith(key)
         );
@@ -543,6 +548,19 @@ function MyColdWalletScreen() {
           const chainShortName = prefixToShortName[prefix];
           console.log(`Received ${chainShortName} address: `, newAddress);
           updateCryptoAddress(chainShortName, newAddress);
+
+          // 更新 receivedAddresses 状态，并检查是否全部接收
+          setReceivedAddresses((prev) => {
+            const updated = { ...prev, [chainShortName]: newAddress };
+            // 假设预期地址数量与 prefixToShortName 中的条目数一致
+            const expectedCount = Object.keys(prefixToShortName).length;
+            if (Object.keys(updated).length >= expectedCount) {
+              setVerificationStatus("success");
+            } else {
+              setVerificationStatus("waiting");
+            }
+            return updated;
+          });
         }
 
         // Process data containing "ID:"
@@ -608,6 +626,7 @@ function MyColdWalletScreen() {
 
   // Handle device selection and show modal
   const handleDevicePress = async (device) => {
+    setReceivedAddresses({});
     setVerificationStatus(null);
     setSelectedDevice(device);
     setModalVisible(false);
