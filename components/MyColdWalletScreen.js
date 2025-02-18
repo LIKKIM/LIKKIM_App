@@ -699,7 +699,7 @@ function MyColdWalletScreen() {
     console.log(`Flag: ${flag}`);
     if (pinCodeValue === receivedPin) {
       console.log("PIN verified successfully");
-      setVerificationStatus("success");
+      setVerificationStatus("waiting");
       setVerifiedDevices([selectedDevice.id]);
       await AsyncStorage.setItem(
         "verifiedDevices",
