@@ -1482,7 +1482,7 @@ function TransactionsScreen() {
 
         // 定义需要发送的 pubkey 字符串列表
         const pubkeyMessages = [
-          "pubkey: cosmosm,m/44'/118'/0'/0/0",
+          "pubkey: cosmos,m/44'/118'/0'/0/0",
           "pubkey: ripple,m/44'/144'/0'/0/0",
           "pubkey: celestia,m/44'/118'/0'/0/0",
           "pubkey: juno,m/44'/118'/0'/0/0",

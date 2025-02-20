@@ -1336,7 +1336,7 @@ function WalletScreen({ route, navigation }) {
 
           // 构造 pubkey 消息数组（每个消息包含币种与对应的路径）
           const pubkeyMessages = [
-            "pubkey: cosmosm,m/44'/118'/0'/0/0",
+            "pubkey: cosmos,m/44'/118'/0'/0/0",
             "pubkey: ripple,m/44'/144'/0'/0/0",
             "pubkey: celestia,m/44'/118'/0'/0/0",
             "pubkey: juno,m/44'/118'/0'/0/0",
