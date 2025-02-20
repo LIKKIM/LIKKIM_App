@@ -32,9 +32,11 @@ import ConfirmDisconnectModal from "./modal/ConfirmDisconnectModal";
 import MyColdWalletSuccessModal from "./modal/MyColdWalletSuccessModal";
 import MyColdWalletErrorModal from "./modal/MyColdWalletErrorModal";
 import EnterPasswordModal from "./modal/EnterPasswordModal";
+import DisableLockScreenModal from "./modal/DisableLockScreenModal";
 import PinModal from "./modal/PinModal";
 import BluetoothModal from "./modal/BluetoothModal";
 import VerificationModal from "./modal/VerificationModal";
+import NewPasswordModal from "./modal/NewPasswordModal";
 import * as LocalAuthentication from "expo-local-authentication";
 import AddressBookModal from "./modal/AddressBookModal";
 import PasswordModal from "./modal/PasswordModal";
@@ -1483,65 +1485,19 @@ function MyColdWalletScreen() {
       />
 
       {/* Disable Lock Screen Modal */}
-      <Modal
-        animationType="slide"
-        transparent={true}
+
+      <DisableLockScreenModal
         visible={enterPasswordModalVisible}
         onRequestClose={closeEnterPasswordModal}
-      >
-        <BlurView intensity={10} style={MyColdWalletScreenStyle.centeredView}>
-          <View style={MyColdWalletScreenStyle.disableLockModalView}>
-            <Text style={MyColdWalletScreenStyle.passwordModalTitle}>
-              {t("Disable Lock Screen")}
-            </Text>
-            <View style={{ marginVertical: 10, width: "100%" }}>
-              <View style={MyColdWalletScreenStyle.passwordInputContainer}>
-                <TextInput
-                  style={MyColdWalletScreenStyle.passwordInput}
-                  placeholder={t("Enter your password")}
-                  placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
-                  secureTextEntry={isCurrentPasswordHidden}
-                  onChangeText={setCurrentPassword}
-                  value={currentPassword}
-                  autoFocus={true}
-                />
-                <TouchableOpacity
-                  onPress={() =>
-                    setIsCurrentPasswordHidden(!isCurrentPasswordHidden)
-                  }
-                  style={MyColdWalletScreenStyle.eyeIcon}
-                >
-                  <Icon
-                    name={
-                      isCurrentPasswordHidden ? "visibility-off" : "visibility"
-                    }
-                    size={24}
-                    color={isDarkMode ? "#ccc" : "#666"}
-                  />
-                </TouchableOpacity>
-              </View>
-            </View>
-            <View style={MyColdWalletScreenStyle.buttonContainer}>
-              <TouchableOpacity
-                style={MyColdWalletScreenStyle.submitButton}
-                onPress={handleConfirmPassword}
-              >
-                <Text style={MyColdWalletScreenStyle.submitButtonText}>
-                  {t("Submit")}
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={MyColdWalletScreenStyle.cancelButton}
-                onPress={closeEnterPasswordModal}
-              >
-                <Text style={MyColdWalletScreenStyle.cancelButtonText}>
-                  {t("Cancel")}
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </BlurView>
-      </Modal>
+        onSubmit={handleConfirmPassword}
+        currentPassword={currentPassword}
+        setCurrentPassword={setCurrentPassword}
+        isCurrentPasswordHidden={isCurrentPasswordHidden}
+        setIsCurrentPasswordHidden={setIsCurrentPasswordHidden}
+        t={t}
+        isDarkMode={isDarkMode}
+        styles={MyColdWalletScreenStyle}
+      />
 
       {/* Enter Password Modal */}
       <EnterPasswordModal
@@ -1571,106 +1527,25 @@ function MyColdWalletScreen() {
       />
 
       {/* New Password Modal */}
-      <Modal
-        animationType="slide"
-        transparent={true}
+
+      <NewPasswordModal
         visible={newPasswordModalVisible}
         onRequestClose={() => setNewPasswordModalVisible(false)}
-      >
-        <BlurView intensity={10} style={MyColdWalletScreenStyle.centeredView}>
-          <View style={MyColdWalletScreenStyle.setPasswordModalView}>
-            <Text style={MyColdWalletScreenStyle.passwordModalTitle}>
-              {t("Set New Password")}
-            </Text>
-            <View style={{ marginVertical: 10, width: "100%" }}>
-              <View style={MyColdWalletScreenStyle.passwordInputContainer}>
-                <TextInput
-                  style={[
-                    MyColdWalletScreenStyle.passwordInput,
-                    MyColdWalletScreenStyle.focusedInput,
-                  ]}
-                  placeholder={t("Enter new password")}
-                  placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
-                  secureTextEntry={isPasswordHidden}
-                  onChangeText={(text) => {
-                    setPassword(text);
-                    setPasswordError("");
-                  }}
-                  value={password}
-                  autoFocus={true}
-                />
-                <TouchableOpacity
-                  onPress={() => setIsPasswordHidden(!isPasswordHidden)}
-                  style={MyColdWalletScreenStyle.eyeIcon}
-                >
-                  <Icon
-                    name={isPasswordHidden ? "visibility-off" : "visibility"}
-                    size={24}
-                    color={isDarkMode ? "#ccc" : "#666"}
-                  />
-                </TouchableOpacity>
-              </View>
-            </View>
-            <View style={{ marginVertical: 10, width: "100%" }}>
-              <View style={MyColdWalletScreenStyle.passwordInputContainer}>
-                <TextInput
-                  style={[
-                    MyColdWalletScreenStyle.passwordInput,
-                    MyColdWalletScreenStyle.focusedInput,
-                  ]}
-                  placeholder={t("Confirm new password")}
-                  placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
-                  secureTextEntry={isConfirmPasswordHidden}
-                  onChangeText={(text) => {
-                    setConfirmPassword(text);
-                    setPasswordError("");
-                  }}
-                  value={confirmPassword}
-                />
-                <TouchableOpacity
-                  onPress={() =>
-                    setIsConfirmPasswordHidden(!isConfirmPasswordHidden)
-                  }
-                  style={MyColdWalletScreenStyle.eyeIcon}
-                >
-                  <Icon
-                    name={
-                      isConfirmPasswordHidden ? "visibility-off" : "visibility"
-                    }
-                    size={24}
-                    color={isDarkMode ? "#ccc" : "#666"}
-                  />
-                </TouchableOpacity>
-              </View>
-            </View>
-            {passwordError ? (
-              <Text
-                style={[MyColdWalletScreenStyle.errorText, { marginLeft: 10 }]}
-              >
-                {passwordError}
-              </Text>
-            ) : null}
-            <View style={MyColdWalletScreenStyle.buttonContainer}>
-              <TouchableOpacity
-                style={MyColdWalletScreenStyle.submitButton}
-                onPress={handleChangePassword}
-              >
-                <Text style={MyColdWalletScreenStyle.submitButtonText}>
-                  {t("Submit")}
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={MyColdWalletScreenStyle.cancelButton}
-                onPress={() => setNewPasswordModalVisible(false)}
-              >
-                <Text style={MyColdWalletScreenStyle.cancelButtonText}>
-                  {t("Cancel")}
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </BlurView>
-      </Modal>
+        onSubmit={handleChangePassword}
+        password={password}
+        setPassword={setPassword}
+        confirmPassword={confirmPassword}
+        setConfirmPassword={setConfirmPassword}
+        passwordError={passwordError}
+        setPasswordError={setPasswordError}
+        isPasswordHidden={isPasswordHidden}
+        setIsPasswordHidden={setIsPasswordHidden}
+        isConfirmPasswordHidden={isConfirmPasswordHidden}
+        setIsConfirmPasswordHidden={setIsConfirmPasswordHidden}
+        t={t}
+        isDarkMode={isDarkMode}
+        styles={MyColdWalletScreenStyle}
+      />
 
       {/* Bluetooth Modal */}
       <BluetoothModal
