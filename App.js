@@ -21,7 +21,7 @@ import OnboardingScreen from "./components/OnboardingScreen";
 import ScreenLock from "./components/ScreenLock";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import FindMyLkkim from "./components/FindMyLkkim";
+import FindMyLkkim from "./components/MyColdWalletScreen/FindMyLkkim";
 import SupportPage from "./components/SupportPage";
 import {
   CryptoProvider,

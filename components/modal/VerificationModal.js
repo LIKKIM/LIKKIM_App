@@ -4,16 +4,27 @@ import { View, Text, Modal, Image, TouchableOpacity } from "react-native";
 import { BlurView } from "expo-blur";
 
 const VerificationModal = ({ visible, status, onClose, styles, t }) => {
-  const isSuccess = status === "success";
-  const imageSource = isSuccess
-    ? require("../../assets/gif/Success.gif")
-    : require("../../assets/gif/Fail.gif");
-  const title = isSuccess
-    ? t("Verification successful!")
-    : t("Verification failed!");
-  const subtitle = isSuccess
-    ? t("You can now safely use the device.")
-    : t("The verification code you entered is incorrect. Please try again.");
+  let imageSource;
+  let title;
+  let subtitle;
+
+  if (status === "success") {
+    imageSource = require("../../assets/gif/Success.gif");
+    title = t("Verification successful!");
+    subtitle = t("You can now safely use the device.");
+  } else if (status === "fail") {
+    imageSource = require("../../assets/gif/Fail.gif");
+    title = t("Verification failed!");
+    subtitle = t(
+      "The verification code you entered is incorrect. Please try again."
+    );
+  } else if (status === "waiting") {
+    imageSource = require("../../assets/gif/Pending.gif");
+    title = t("Creating wallet...");
+    subtitle = t(
+      "Receiving all addresses from the device. Wallet is being created, please wait..."
+    );
+  }
 
   return (
     <Modal
@@ -30,9 +41,11 @@ const VerificationModal = ({ visible, status, onClose, styles, t }) => {
           />
           <Text style={styles.modalTitle}>{title}</Text>
           <Text style={styles.modalSubtitle}>{subtitle}</Text>
-          <TouchableOpacity style={styles.submitButton} onPress={onClose}>
-            <Text style={styles.submitButtonText}>{t("Close")}</Text>
-          </TouchableOpacity>
+          {status !== "waiting" && (
+            <TouchableOpacity style={styles.submitButton} onPress={onClose}>
+              <Text style={styles.submitButtonText}>{t("Close")}</Text>
+            </TouchableOpacity>
+          )}
         </View>
       </BlurView>
     </Modal>

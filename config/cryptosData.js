@@ -18,6 +18,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "1.2",
     contractAddress: "",
     Decimals: "",
+    publicKey: "",
   },
   {
     name: "Dai",
@@ -37,6 +38,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "1.0",
     contractAddress: "0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1",
     Decimals: "18",
+    publicKey: "",
   },
   {
     name: "Tether USD",
@@ -56,6 +58,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "1.0",
     contractAddress: "0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9",
     Decimals: "6",
+    publicKey: "",
   },
   {
     name: "USD Coin",
@@ -75,6 +78,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "1.0",
     contractAddress: "0xFF970A61A04b1cA14834A43f5dE4533eBDDB5CC8",
     Decimals: "6",
+    publicKey: "",
   },
 
   {
@@ -95,6 +99,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "0.3",
     contractAddress: "",
     Decimals: "",
+    publicKey: "",
   },
   {
     name: "Avalanche",
@@ -114,6 +119,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "10.0",
     contractAddress: "",
     Decimals: "",
+    publicKey: "",
   },
   {
     name: "USD Coin",
@@ -133,6 +139,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "1.0",
     contractAddress: "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E",
     Decimals: "6",
+    publicKey: "",
   },
   {
     name: "Tether USD",
@@ -152,6 +159,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "1.0",
     contractAddress: "0xc7198437980c041c805A1EDcbA50c1Ce5db95118",
     Decimals: "6",
+    publicKey: "",
   },
   {
     name: "Dai",
@@ -171,6 +179,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "1.0",
     contractAddress: "0xd586E7F844cEa2F87f50152665BCbc2C279D8d70",
     Decimals: "18",
+    publicKey: "",
   },
 
   {
@@ -191,6 +200,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "30000.0",
     contractAddress: "",
     Decimals: "",
+    publicKey: "",
   },
   {
     name: "Bitcoin Cash",
@@ -210,6 +220,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "300.0",
     contractAddress: "",
     Decimals: "",
+    publicKey: "",
   },
   {
     name: "Binance",
@@ -229,6 +240,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "300.0",
     contractAddress: "",
     Decimals: "",
+    publicKey: "",
   },
 
   {
@@ -249,6 +261,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "1.0",
     contractAddress: "0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3",
     Decimals: "18",
+    publicKey: "",
   },
   {
     name: "Tether USD",
@@ -268,6 +281,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "1.0",
     contractAddress: "0x55d398326f99059fF775485246999027B3197955",
     Decimals: "18",
+    publicKey: "",
   },
   {
     name: "USD Coin",
@@ -287,6 +301,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "1.0",
     contractAddress: "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d",
     Decimals: "18",
+    publicKey: "",
   },
   {
     name: "Celo",
@@ -306,6 +321,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "2.0",
     contractAddress: "",
     Decimals: "",
+    publicKey: "",
   },
   {
     name: "Ethereum",
@@ -325,6 +341,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "2000.0",
     contractAddress: "",
     Decimals: "",
+    publicKey: "",
   },
   {
     name: "Dai",
@@ -344,6 +361,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "1.0",
     contractAddress: "0x6B175474E89094C44Da98b954EedeAC495271d0F",
     Decimals: "18",
+    publicKey: "",
   },
   {
     name: "Tether USD",
@@ -363,6 +381,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "1.0",
     contractAddress: "0xdAC17F958D2ee523a2206206994597C13D831ec7",
     Decimals: "6",
+    publicKey: "",
   },
   {
     name: "USD Coin",
@@ -382,6 +401,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "1.0",
     contractAddress: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
     Decimals: "6",
+    publicKey: "",
   },
   {
     name: "Polygon",
@@ -401,6 +421,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "0.8",
     contractAddress: "0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0",
     Decimals: "18",
+    publicKey: "",
   },
   {
     name: "USD Coin",
@@ -420,6 +441,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "1.0",
     contractAddress: "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
     Decimals: "6",
+    publicKey: "",
   },
 
   {
@@ -440,6 +462,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "1.0",
     contractAddress: "0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063",
     Decimals: "18",
+    publicKey: "",
   },
 
   {
@@ -460,6 +483,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "1.0",
     contractAddress: "0xc2132D05D31c914a87C6611C10748AEb04B58e8F",
     Decimals: "6",
+    publicKey: "",
   },
   {
     name: "BNB",
@@ -479,6 +503,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "250.0",
     contractAddress: "0xB8c77482e45F1F44dE1745F52C74426C631bDD52",
     Decimals: "18",
+    publicKey: "",
   },
   {
     name: "Ethereum Classic",
@@ -498,6 +523,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "15.0",
     contractAddress: "",
     Decimals: "",
+    publicKey: "",
   },
   {
     name: "Fantom",
@@ -517,6 +543,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "0.5",
     contractAddress: "",
     Decimals: "",
+    publicKey: "",
   },
   {
     name: "USD Coin",
@@ -536,6 +563,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "1.0",
     contractAddress: "0x04068DA6C83AFCFA0e13ba15A6696662335D5B75",
     Decimals: "6",
+    publicKey: "",
   },
 
   {
@@ -556,6 +584,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "1.0",
     contractAddress: "0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E",
     Decimals: "18",
+    publicKey: "",
   },
 
   {
@@ -576,6 +605,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "7.0",
     contractAddress: "",
     Decimals: "",
+    publicKey: "",
   },
   {
     name: "IoTeX",
@@ -595,6 +625,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "0.05",
     contractAddress: "",
     Decimals: "",
+    publicKey: "",
   },
   {
     name: "Litecoin",
@@ -614,6 +645,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "150.0",
     contractAddress: "",
     Decimals: "",
+    publicKey: "",
   },
   {
     name: "OKT",
@@ -633,6 +665,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "20.0",
     contractAddress: "",
     Decimals: "",
+    publicKey: "",
   },
   {
     name: "USD Coin",
@@ -652,6 +685,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "1.0",
     contractAddress: "0xc946DAf81b08146B1C7A8Da2A851Ddf2B3EAaf85",
     Decimals: "18",
+    publicKey: "",
   },
   {
     name: "Tether USD",
@@ -671,6 +705,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "1.0",
     contractAddress: "0x382bB369d343125BfB2117af9c149795C6C65C50",
     Decimals: "18",
+    publicKey: "",
   },
   {
     name: "Optimism",
@@ -690,6 +725,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "2.0",
     contractAddress: "",
     Decimals: "",
+    publicKey: "",
   },
   {
     name: "USD Coin (Bridged from Ethereum)",
@@ -709,6 +745,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "1.0",
     contractAddress: "0x7F5c764cBc14f9669B88837ca1490cCa17c31607",
     Decimals: "6",
+    publicKey: "",
   },
   {
     name: "Tether USD",
@@ -728,6 +765,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "1.0",
     contractAddress: "0x94b008aA00579c1307B0EF2c499aD98a8ce58e58",
     Decimals: "6",
+    publicKey: "",
   },
   {
     name: "Dai",
@@ -747,6 +785,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "1.0",
     contractAddress: "0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1",
     Decimals: "18",
+    publicKey: "",
   },
 
   {
@@ -767,6 +806,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "1.0",
     contractAddress: "",
     Decimals: "",
+    publicKey: "",
   },
   {
     name: "Ripple",
@@ -786,6 +826,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "0.5",
     contractAddress: "",
     Decimals: "",
+    publicKey: "",
   },
   {
     name: "Solana",
@@ -805,6 +846,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "25.0",
     contractAddress: "",
     Decimals: "",
+    publicKey: "",
   },
   {
     name: "Tether USD",
@@ -824,6 +866,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "1.0",
     contractAddress: "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
     Decimals: "6",
+    publicKey: "",
   },
   {
     name: "USD Coin",
@@ -843,6 +886,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "1.0",
     contractAddress: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
     Decimals: "6",
+    publicKey: "",
   },
   {
     name: "Tron",
@@ -862,6 +906,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "0.05",
     contractAddress: "",
     Decimals: "",
+    publicKey: "",
   },
   {
     name: "USD Coin",
@@ -881,6 +926,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "1.0",
     contractAddress: "TEkxiTehnzSmSe2XqrBj4w32RUN966rdz8",
     Decimals: "6",
+    publicKey: "",
   },
 
   {
@@ -901,6 +947,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "1.0",
     contractAddress: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
     Decimals: "6",
+    publicKey: "",
   },
 
   {
@@ -921,6 +968,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "0.5",
     contractAddress: "",
     Decimals: "",
+    publicKey: "",
   },
 
   // 下面是新增的
@@ -942,6 +990,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "10.0",
     contractAddress: "",
     Decimals: "",
+    publicKey: "",
   },
   {
     name: "Celestia",
@@ -961,6 +1010,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "5.0",
     contractAddress: "",
     Decimals: "",
+    publicKey: "",
   },
   {
     name: "Crypto.org Coin",
@@ -980,6 +1030,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "0.4",
     contractAddress: "",
     Decimals: "",
+    publicKey: "",
   },
   {
     name: "Tether USD",
@@ -999,6 +1050,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "1.0",
     contractAddress: "0x66e428c3f67a68878562e79A0234c1F83c208770",
     Decimals: "6",
+    publicKey: "",
   },
 
   {
@@ -1019,6 +1071,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "3.0",
     contractAddress: "",
     Decimals: "",
+    publicKey: "",
   },
   {
     name: "Osmosis",
@@ -1038,6 +1091,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "1.0",
     contractAddress: "",
     Decimals: "",
+    publicKey: "",
   },
   {
     name: "Gnosis",
@@ -1057,6 +1111,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "5.0",
     contractAddress: "",
     Decimals: "",
+    publicKey: "",
   },
   {
     name: "Linea",
@@ -1076,6 +1131,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "1.5",
     contractAddress: "",
     Decimals: "",
+    publicKey: "",
   },
   {
     name: "Ronin",
@@ -1095,6 +1151,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "2.5",
     contractAddress: "",
     Decimals: "",
+    publicKey: "",
   },
   {
     name: "Aptos",
@@ -1114,6 +1171,7 @@ export const initialAdditionalCryptos = [
     priceUsd: "5.0",
     contractAddress: "",
     Decimals: "",
+    publicKey: "",
   },
   {
     name: "SUI",
@@ -1133,5 +1191,6 @@ export const initialAdditionalCryptos = [
     priceUsd: "0.8",
     contractAddress: "",
     Decimals: "",
+    publicKey: "",
   },
 ];

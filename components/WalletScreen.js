@@ -144,104 +144,11 @@ function WalletScreen({ route, navigation }) {
   );
 
   const [isChainSelectionModalVisible, setChainSelectionModalVisible] =
-    useState(false); // 修改名字
-  const [selectedChain, setSelectedChain] = useState("All"); // 初始选项为“全部”
+    useState(false);
+  const [selectedChain, setSelectedChain] = useState("All");
 
-  const [selectedView, setSelectedView] = useState("wallet"); // 管理视图状态，'wallet' 或 'nft'
+  const [selectedView, setSelectedView] = useState("wallet");
   const { isModalVisible } = route.params || {};
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerTitle: () =>
-        !isModalVisible ? (
-          <View
-            style={{
-              flexDirection: "row",
-              backgroundColor: isDarkMode ? "#333" : "#eee",
-              borderRadius: 20,
-              borderWidth: 1,
-              borderColor: isDarkMode ? "#333" : "#eee",
-            }}
-          >
-            <TouchableOpacity
-              style={{
-                paddingVertical: 8,
-                paddingHorizontal: 20,
-                borderRadius: 20,
-                backgroundColor:
-                  selectedView === "wallet"
-                    ? isDarkMode
-                      ? "#555"
-                      : "#fff"
-                    : "transparent",
-                borderColor: isDarkMode ? "#333" : "#eee",
-                borderWidth: 1,
-              }}
-              onPress={() => setSelectedView("wallet")}
-            >
-              <Text
-                style={{
-                  fontWeight: "bold",
-                  color:
-                    selectedView === "wallet"
-                      ? isDarkMode
-                        ? "#fff"
-                        : "#000"
-                      : "#888",
-                }}
-              >
-                {t("Wallet")}
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={{
-                paddingVertical: 8,
-                paddingHorizontal: 20,
-                borderRadius: 20,
-                backgroundColor:
-                  selectedView === "nft"
-                    ? isDarkMode
-                      ? "#555"
-                      : "#fff"
-                    : "transparent",
-                borderColor: isDarkMode ? "#333" : "#eee",
-                borderWidth: 1,
-              }}
-              onPress={() => setSelectedView("nft")}
-            >
-              <Text
-                style={{
-                  fontWeight: "bold",
-                  color:
-                    selectedView === "nft"
-                      ? isDarkMode
-                        ? "#fff"
-                        : "#000"
-                      : "#888",
-                }}
-              >
-                NFTs
-              </Text>
-            </TouchableOpacity>
-          </View>
-        ) : null, // 当 isModalVisible 为 true 时，不显示切换按钮
-    });
-  }, [navigation, selectedView, isDarkMode, t, isModalVisible]);
-
-  const handleSelectChain = async (chain) => {
-    try {
-      await AsyncStorage.setItem("selectedChain", chain); // 保存用户选择
-    } catch (e) {
-      console.error("Error saving chain:", e);
-    }
-
-    if (chain === "All") {
-      setSelectedChainShortName(cryptoCards.map((card) => card.chainShortName)); // 选择全部
-    } else {
-      setSelectedChainShortName([chain]); // 选择单个链
-    }
-    setSelectedChain(chain); // 更新选中的链
-    setChainSelectionModalVisible(false); // 关闭modal
-  };
 
   const [importingModalVisible, setImportingModalVisible] = useState(false);
   const restoreIdentifier = Constants.installationId;
@@ -251,7 +158,6 @@ function WalletScreen({ route, navigation }) {
       crypto.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       crypto.shortName.toLowerCase().includes(searchQuery.toLowerCase())
   );
-  // 初始化状态为默认值
   const [walletCreationStatus, setWalletCreationStatus] = useState({
     image: require("../assets/gif/Pending.gif"), // 默认显示 Pending.gif
     title: t("Creating on LIKKIM Hardware..."), // 默认主消息
@@ -406,33 +312,125 @@ function WalletScreen({ route, navigation }) {
     }
   };
 
-  const [bleVisible, setBleVisible] = useState(false); // New state for Bluetooth modal
-
-  // 使用最新的价格来计算最终余额
-  const getConvertedBalance = (cardBalance, cardShortName) => {
-    const rate = exchangeRates[currencyUnit];
-    const cryptoToUsdRate = exchangeRates[cardShortName] || 1;
-
-    const marketPrice = priceChanges[cardShortName]?.priceChange || 1;
-
-    if (!rate) {
-      return cardBalance;
-    }
-
-    const usdBalance = cardBalance * cryptoToUsdRate * marketPrice;
-    const finalBalance = (usdBalance * rate).toFixed(2);
-
-    return finalBalance;
-  };
+  const [bleVisible, setBleVisible] = useState(false);
 
   /*   useEffect(() => {
     console.log("Updated cryptoCards:", cryptoCards);
   }, [cryptoCards]);
  */
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerTitle: () =>
+        !isModalVisible ? (
+          <View
+            style={{
+              flexDirection: "row",
+              backgroundColor: isDarkMode ? "#333" : "#eee",
+              borderRadius: 20,
+              borderWidth: 1,
+              borderColor: isDarkMode ? "#333" : "#eee",
+            }}
+          >
+            <TouchableOpacity
+              style={{
+                paddingVertical: 8,
+                paddingHorizontal: 20,
+                borderRadius: 20,
+                backgroundColor:
+                  selectedView === "wallet"
+                    ? isDarkMode
+                      ? "#555"
+                      : "#fff"
+                    : "transparent",
+                borderColor: isDarkMode ? "#333" : "#eee",
+                borderWidth: 1,
+              }}
+              onPress={() => setSelectedView("wallet")}
+            >
+              <Text
+                style={{
+                  fontWeight: "bold",
+                  color:
+                    selectedView === "wallet"
+                      ? isDarkMode
+                        ? "#fff"
+                        : "#000"
+                      : "#888",
+                }}
+              >
+                {t("Wallet")}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                paddingVertical: 8,
+                paddingHorizontal: 20,
+                borderRadius: 20,
+                backgroundColor:
+                  selectedView === "nft"
+                    ? isDarkMode
+                      ? "#555"
+                      : "#fff"
+                    : "transparent",
+                borderColor: isDarkMode ? "#333" : "#eee",
+                borderWidth: 1,
+              }}
+              onPress={() => setSelectedView("nft")}
+            >
+              <Text
+                style={{
+                  fontWeight: "bold",
+                  color:
+                    selectedView === "nft"
+                      ? isDarkMode
+                        ? "#fff"
+                        : "#000"
+                      : "#888",
+                }}
+              >
+                NFTs
+              </Text>
+            </TouchableOpacity>
+          </View>
+        ) : null,
+    });
+  }, [navigation, selectedView, isDarkMode, t, isModalVisible]);
+
+  // 加载持久化的链选择（需要在 cryptoCards 加载后再进行）
+  useEffect(() => {
+    const loadSelectedChain = async () => {
+      try {
+        const savedChain = await AsyncStorage.getItem("selectedChain");
+        if (savedChain) {
+          setSelectedChain(savedChain);
+          if (savedChain === "All") {
+            setSelectedChainShortName(
+              cryptoCards.map((card) => card.chainShortName)
+            );
+          } else {
+            setSelectedChainShortName([savedChain]);
+          }
+        } else {
+          setSelectedChain("All");
+          setSelectedChainShortName(
+            cryptoCards.map((card) => card.chainShortName)
+          );
+        }
+      } catch (e) {
+        console.error("Error loading selected chain:", e);
+      }
+    };
+
+    if (cryptoCards && cryptoCards.length > 0) {
+      loadSelectedChain();
+    }
+  }, [cryptoCards]);
+
   useEffect(() => {
     setAddedCryptos(cryptoCards);
   }, [cryptoCards]);
-  // 监听 createPendingModalVisible 的变化
+
   useEffect(() => {
     if (!createPendingModalVisible) {
       // 当模态框关闭时重置状态
@@ -447,7 +445,7 @@ function WalletScreen({ route, navigation }) {
         subtitle: t("Your device is already verified."), // 重置为默认子消息
       });
     }
-  }, [createPendingModalVisible]); // 依赖 createPendingModalVisible
+  }, [createPendingModalVisible]);
 
   // 监听设备数量
   useEffect(() => {
@@ -464,14 +462,13 @@ function WalletScreen({ route, navigation }) {
     };
 
     loadVerifiedDevices();
-  }, []); // 这个依赖空数组确保该代码只在组件挂载时执行一次
-
+  }, []);
   useEffect(() => {
     if (!bleVisible && selectedDevice) {
       setPinModalVisible(true);
     }
   }, [bleVisible, selectedDevice]);
-  // Update Bluetooth modal visibility management
+
   useEffect(() => {
     if (Platform.OS !== "web") {
       bleManagerRef.current = new BleManager({
@@ -498,6 +495,228 @@ function WalletScreen({ route, navigation }) {
     // console.warn('selectedCardName' + selectedCardName)
     navigation.setParams({ cryptoCards, selectedCardName });
   }, [cryptoCards]);
+
+  useEffect(() => {
+    if (modalVisible) {
+      // 重置 tabOpacity 为 1
+      Animated.timing(tabOpacity, {
+        toValue: 1,
+        duration: 200,
+        useNativeDriver: true,
+      }).start();
+    }
+  }, [modalVisible]);
+
+  useEffect(() => {
+    // 根据条件触发动画
+    if (cryptoCards.length > 0 && !modalVisible) {
+      Animated.timing(opacityAnim, {
+        toValue: 1,
+        duration: 200,
+        easing: Easing.ease,
+        useNativeDriver: true,
+      }).start();
+    } else {
+      Animated.timing(opacityAnim, {
+        toValue: 0,
+        duration: 200,
+        easing: Easing.ease,
+        useNativeDriver: true,
+      }).start();
+    }
+  }, [cryptoCards.length, modalVisible, opacityAnim]);
+
+  useEffect(() => {
+    const loadCryptoCards = async () => {
+      try {
+        const storedCards = await AsyncStorage.getItem("cryptoCards");
+        //  console.log(storedCards);
+        if (storedCards !== null) {
+          setCryptoCards(JSON.parse(storedCards));
+          setAddedCryptos(JSON.parse(storedCards)); // 加载时同步 addedCryptos
+        }
+      } catch (error) {
+        console.log("Error loading crypto cards:", error);
+      }
+    };
+    loadCryptoCards();
+  }, []);
+
+  useEffect(() => {
+    const saveCryptoCards = async () => {
+      try {
+        await AsyncStorage.setItem("cryptoCards", JSON.stringify(cryptoCards));
+        await AsyncStorage.setItem("addedCryptos", JSON.stringify(cryptoCards)); // 保存时同步 addedCryptos
+        //  console.log("Updated addedCryptos wallet page:", cryptoCards); // 打印更新后的 addedCryptos
+      } catch (error) {
+        console.log("Error saving crypto cards:", error);
+      }
+    };
+    saveCryptoCards();
+  }, [cryptoCards]);
+
+  useEffect(() => {
+    let intervalId; // 定时器 ID
+
+    const fetchPriceChanges = async () => {
+      if (cryptoCards.length === 0) return; // 没有卡片时不请求
+
+      const instIds = cryptoCards
+        .map((card) => `${card.shortName}-USD`)
+        .join(",");
+      //bugging
+      try {
+        const response = await fetch(
+          `https://df.likkim.com/api/market/index-tickers?instId=${instIds}`
+        );
+        const data = await response.json();
+
+        if (data.code === 0 && data.data) {
+          const changes = {};
+
+          // 解析返回的 'data' 对象，按币种进行更新
+          Object.keys(data.data).forEach((key) => {
+            const shortName = key.replace("$", "").split("-")[0]; // 提取币种名称
+            const ticker = data.data[key];
+
+            changes[shortName] = {
+              priceChange: ticker.last || "0", // 最新价格
+              percentageChange: ticker.changePercent || "0", // 百分比变化
+            };
+          });
+
+          setPriceChanges(changes); // 更新状态
+        }
+      } catch (error) {
+        console.log("Error fetching price changes:", error);
+      }
+    };
+
+    // 初次调用
+    fetchPriceChanges();
+
+    // 设置定时器，每隔 30 秒刷新一次价格
+    intervalId = setInterval(() => {
+      fetchPriceChanges();
+    }, 60000); // 每 1 分钟刷新一次
+
+    // 清理定时器，防止内存泄漏
+    return () => {
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
+    };
+  }, [cryptoCards]);
+
+  // 停止监听
+  useEffect(() => {
+    if (!pinModalVisible) {
+      stopMonitoringVerificationCode();
+    }
+  }, [pinModalVisible]);
+
+  useEffect(() => {
+    if (route.params?.showAddModal) {
+      setAddCryptoVisible(true);
+    }
+    if (route.params?.showAddIconModal) {
+      setAddIconModalVisible(true);
+    }
+    if (route.params?.showDeleteConfirmModal) {
+      setDeleteConfirmVisible(true);
+    } else {
+      setDeleteConfirmVisible(false);
+    }
+  }, [route.params]);
+
+  useEffect(() => {
+    setCryptoCount(cryptoCards.length);
+  }, [cryptoCards.length]);
+
+  useEffect(() => {
+    navigation.setParams({
+      isModalVisible: modalVisible,
+      showAddModal: addCryptoVisible,
+    });
+  }, [modalVisible, addCryptoVisible]);
+
+  useEffect(() => {
+    Animated.timing(fadeAnim, {
+      toValue: modalVisible ? 1 : 0,
+      duration: 300,
+      easing: Easing.ease,
+      useNativeDriver: true,
+    }).start();
+  }, [modalVisible, fadeAnim]);
+
+  useEffect(() => {
+    if (processModalVisible) {
+      setShowLetsGoButton(false);
+      setProcessMessages([t("Creating your wallet")]);
+      const timer1 = setTimeout(() => {
+        setProcessMessages((prevMessages) => [
+          ...prevMessages,
+          t("Generating your accounts"),
+        ]);
+      }, 1000);
+      const timer2 = setTimeout(() => {
+        setProcessMessages((prevMessages) => [
+          ...prevMessages,
+          t("Encrypting your data"),
+        ]);
+      }, 2000);
+      const timer3 = setTimeout(() => {
+        setProcessMessages((prevMessages) => [
+          ...prevMessages,
+          t("Your wallet is now ready"),
+        ]);
+      }, 3000);
+      const timer4 = setTimeout(() => {
+        setShowLetsGoButton(true);
+      }, 4000);
+      return () => {
+        clearTimeout(timer1);
+        clearTimeout(timer2);
+        clearTimeout(timer3);
+        clearTimeout(timer4);
+      };
+    }
+  }, [processModalVisible, t]);
+
+  useEffect(() => {
+    console.log("选中的 chainShortName 已更新:", selectedCardChainShortName);
+  }, [selectedCardChainShortName]);
+
+  useEffect(() => {
+    if (modalVisible) {
+      scrollViewRef.current.scrollTo({ y: 0, animated: true });
+      setTimeout(() => {
+        scrollYOffset.current = 0;
+      }, 300); // 确保在滚动完成后再设置偏移量
+    }
+  }, [modalVisible]);
+
+  //热更新支持
+  useEffect(() => {
+    onFetchUpdateAsync();
+  }, []);
+
+  // 使用最新的价格来计算最终余额
+  const getConvertedBalance = (cardBalance, cardShortName) => {
+    const rate = exchangeRates[currencyUnit];
+    const cryptoToUsdRate = exchangeRates[cardShortName] || 1;
+
+    const marketPrice = priceChanges[cardShortName]?.priceChange || 1;
+
+    if (!rate) {
+      return cardBalance;
+    }
+
+    const usdBalance = cardBalance * cryptoToUsdRate * marketPrice;
+    const finalBalance = (usdBalance * rate).toFixed(2);
+
+    return finalBalance;
+  };
 
   const handleDevicePress = async (device) => {
     // 检查是否传递了有效的设备对象
@@ -611,6 +830,22 @@ function WalletScreen({ route, navigation }) {
         console.log("停止监听时发生错误:", error);
       }
     }
+  };
+
+  const handleSelectChain = async (chain) => {
+    try {
+      await AsyncStorage.setItem("selectedChain", chain); // 保存用户选择
+    } catch (e) {
+      console.error("Error saving chain:", e);
+    }
+
+    if (chain === "All") {
+      setSelectedChainShortName(cryptoCards.map((card) => card.chainShortName)); // 选择全部
+    } else {
+      setSelectedChainShortName([chain]); // 选择单个链
+    }
+    setSelectedChain(chain); // 更新选中的链
+    setChainSelectionModalVisible(false); // 关闭modal
   };
 
   const handleVerifyAddress = (selectedCardChainShortName) => {
@@ -878,65 +1113,89 @@ function WalletScreen({ route, navigation }) {
     v[1] = v1 >>> 0;
   }
 
+  // 假设在组件中定义了状态：
+  const [receivedAddresses, setReceivedAddresses] = useState({});
+  // verificationStatus 用于表示整体状态
+  // 例如：setVerificationStatus("waiting") 或 setVerificationStatus("success")
+
   let monitorSubscription;
-  //监听函数
+
   const monitorVerificationCode = (device, sendDecryptedValue) => {
     monitorSubscription = device.monitorCharacteristicForService(
       serviceUUID,
       notifyCharacteristicUUID,
       async (error, characteristic) => {
         if (error) {
-          console.log("监听设备响应时出错:", error.message);
-          // return;
+          console.log("Error monitoring device response:", error.message);
+          return;
         }
-
         const receivedData = Buffer.from(characteristic.value, "base64");
         const receivedDataString = receivedData.toString("utf8");
-        console.log("接收到的数据字符串:", receivedDataString);
+        console.log("Received data string:", receivedDataString);
 
-        // ==========================
-        // 映射表: 前缀 -> shortName
-        // ==========================
-
-        // 检查是否以某个前缀开头
+        // 检查数据是否以已知前缀开头（例如 "bitcoin:"、"ethereum:" 等）
         const prefix = Object.keys(prefixToShortName).find((key) =>
           receivedDataString.startsWith(key)
         );
-
         if (prefix) {
-          const newAddress = receivedDataString.replace(prefix, "").trim(); // 提取地址
-          const shortName = prefixToShortName[prefix]; // 获取对应的 shortName
+          const newAddress = receivedDataString.replace(prefix, "").trim();
+          const chainShortName = prefixToShortName[prefix];
+          console.log(`Received ${chainShortName} address: `, newAddress);
+          updateCryptoAddress(chainShortName, newAddress);
 
-          console.log(`收到的 ${shortName} 地址: `, newAddress);
-
-          // 更新对应加密货币的地址
-          updateCryptoAddress(shortName, newAddress);
+          // 更新 receivedAddresses 状态，并检查是否全部接收
+          setReceivedAddresses((prev) => {
+            const updated = { ...prev, [chainShortName]: newAddress };
+            // 假设预期地址数量与 prefixToShortName 中的条目数一致
+            const expectedCount = Object.keys(prefixToShortName).length;
+            if (Object.keys(updated).length >= expectedCount) {
+              setVerificationStatus("success");
+            } else {
+              setVerificationStatus("waiting");
+            }
+            return updated;
+          });
         }
 
-        // 处理包含 "ID:" 的数据
+        if (receivedDataString.startsWith("pubkey:")) {
+          // 假设返回数据格式为 "pubkey: cosmosm,04AABBCCDDEE..."
+          const pubkeyData = receivedDataString.replace("pubkey:", "").trim();
+          const [chainShortName, publicKey] = pubkeyData.split(",");
+          if (chainShortName && publicKey) {
+            console.log(
+              `Received public key for ${chainShortName}: ${publicKey}`
+            );
+            // 如果你在 CryptoContext 中定义了 updateCryptoPublicKey 方法，可以这样调用：
+            updateCryptoPublicKey(chainShortName, publicKey);
+
+            // 或者直接通过 setCryptoCards 更新状态，假设 cryptoCards 数组中每个对象都包含 chainShortName 和 publicKey 字段：
+            setCryptoCards((prevCards) =>
+              prevCards.map((card) =>
+                card.chainShortName === chainShortName
+                  ? { ...card, publicKey: publicKey }
+                  : card
+              )
+            );
+          }
+        }
+        // Process data containing "ID:"
         if (receivedDataString.includes("ID:")) {
           const encryptedHex = receivedDataString.split("ID:")[1];
           const encryptedData = hexStringToUint32Array(encryptedHex);
           const key = new Uint32Array([0x1234, 0x1234, 0x1234, 0x1234]);
-
           decrypt(encryptedData, key);
-
           const decryptedHex = uint32ArrayToHexString(encryptedData);
-          console.log("解密后的字符串:", decryptedHex);
-
-          // 将解密后的值发送给设备
+          console.log("Decrypted string:", decryptedHex);
           if (sendDecryptedValue) {
             sendDecryptedValue(decryptedHex);
           }
         }
 
-        // 如果接收到 "VALID"，改变状态并发送 "validation"
+        // If data is "VALID", update status and send "validation"
         if (receivedDataString === "VALID") {
           try {
-            // 立即更新状态为 "VALID"
-            setBlueToothStatus("VALID");
-            console.log("状态更新为: VALID");
-
+            setVerificationStatus("VALID");
+            console.log("Status set to: VALID");
             const validationMessage = "validation";
             const bufferValidationMessage = Buffer.from(
               validationMessage,
@@ -944,28 +1203,25 @@ function WalletScreen({ route, navigation }) {
             );
             const base64ValidationMessage =
               bufferValidationMessage.toString("base64");
-
             await device.writeCharacteristicWithResponseForService(
               serviceUUID,
               writeCharacteristicUUID,
               base64ValidationMessage
             );
-            console.log(`已发送字符串 'validation' 给设备`);
+            console.log(`Sent 'validation' to device`);
           } catch (error) {
-            console.log("发送 'validation' 时出错:", error);
+            console.log("Error sending 'validation':", error);
           }
         }
 
-        // 提取完整的 PIN 数据（例如 PIN:1234,Y 或 PIN:1234,N）
+        // Extract complete PIN data (e.g., PIN:1234,Y or PIN:1234,N)
         if (receivedDataString.startsWith("PIN:")) {
-          setReceivedVerificationCode(receivedDataString); // 保存完整的 PIN 数据
-          console.log("接收到的完整数据字符串:", receivedDataString);
+          setReceivedVerificationCode(receivedDataString);
+          console.log("Complete PIN data received:", receivedDataString);
         }
       }
     );
   };
-
-  // 监听钱包生成结果
   const monitorWalletCreationResult = (device) => {
     monitorSubscription = device.monitorCharacteristicForService(
       serviceUUID,
@@ -1003,206 +1259,6 @@ function WalletScreen({ route, navigation }) {
       }
     }
   };
-
-  useEffect(() => {
-    if (modalVisible) {
-      // 重置 tabOpacity 为 1
-      Animated.timing(tabOpacity, {
-        toValue: 1,
-        duration: 200,
-        useNativeDriver: true,
-      }).start();
-    }
-  }, [modalVisible]);
-
-  useEffect(() => {
-    // 根据条件触发动画
-    if (cryptoCards.length > 0 && !modalVisible) {
-      Animated.timing(opacityAnim, {
-        toValue: 1,
-        duration: 200,
-        easing: Easing.ease,
-        useNativeDriver: true,
-      }).start();
-    } else {
-      Animated.timing(opacityAnim, {
-        toValue: 0,
-        duration: 200,
-        easing: Easing.ease,
-        useNativeDriver: true,
-      }).start();
-    }
-  }, [cryptoCards.length, modalVisible, opacityAnim]);
-
-  useEffect(() => {
-    const loadCryptoCards = async () => {
-      try {
-        const storedCards = await AsyncStorage.getItem("cryptoCards");
-        //  console.log(storedCards);
-        if (storedCards !== null) {
-          setCryptoCards(JSON.parse(storedCards));
-          setAddedCryptos(JSON.parse(storedCards)); // 加载时同步 addedCryptos
-        }
-      } catch (error) {
-        console.log("Error loading crypto cards:", error);
-      }
-    };
-    loadCryptoCards();
-  }, []);
-
-  useEffect(() => {
-    const saveCryptoCards = async () => {
-      try {
-        await AsyncStorage.setItem("cryptoCards", JSON.stringify(cryptoCards));
-        await AsyncStorage.setItem("addedCryptos", JSON.stringify(cryptoCards)); // 保存时同步 addedCryptos
-        //  console.log("Updated addedCryptos wallet page:", cryptoCards); // 打印更新后的 addedCryptos
-      } catch (error) {
-        console.log("Error saving crypto cards:", error);
-      }
-    };
-    saveCryptoCards();
-  }, [cryptoCards]);
-
-  useEffect(() => {
-    let intervalId; // 定时器 ID
-
-    const fetchPriceChanges = async () => {
-      if (cryptoCards.length === 0) return; // 没有卡片时不请求
-
-      const instIds = cryptoCards
-        .map((card) => `${card.shortName}-USD`)
-        .join(",");
-      //bugging
-      try {
-        const response = await fetch(
-          `https://df.likkim.com/api/market/index-tickers?instId=${instIds}`
-        );
-        const data = await response.json();
-
-        if (data.code === 0 && data.data) {
-          const changes = {};
-
-          // 解析返回的 'data' 对象，按币种进行更新
-          Object.keys(data.data).forEach((key) => {
-            const shortName = key.replace("$", "").split("-")[0]; // 提取币种名称
-            const ticker = data.data[key];
-
-            changes[shortName] = {
-              priceChange: ticker.last || "0", // 最新价格
-              percentageChange: ticker.changePercent || "0", // 百分比变化
-            };
-          });
-
-          setPriceChanges(changes); // 更新状态
-        }
-      } catch (error) {
-        console.log("Error fetching price changes:", error);
-      }
-    };
-
-    // 初次调用
-    fetchPriceChanges();
-
-    // 设置定时器，每隔 30 秒刷新一次价格
-    intervalId = setInterval(() => {
-      fetchPriceChanges();
-    }, 60000); // 每 1 分钟刷新一次
-
-    // 清理定时器，防止内存泄漏
-    return () => {
-      if (intervalId) {
-        clearInterval(intervalId);
-      }
-    };
-  }, [cryptoCards]); // 依赖于 cryptoCards
-
-  // 停止监听
-  useEffect(() => {
-    if (!pinModalVisible) {
-      stopMonitoringVerificationCode();
-    }
-  }, [pinModalVisible]);
-
-  useEffect(() => {
-    if (route.params?.showAddModal) {
-      setAddCryptoVisible(true);
-    }
-    if (route.params?.showAddIconModal) {
-      setAddIconModalVisible(true);
-    }
-    if (route.params?.showDeleteConfirmModal) {
-      setDeleteConfirmVisible(true);
-    } else {
-      setDeleteConfirmVisible(false);
-    }
-  }, [route.params]);
-
-  useEffect(() => {
-    setCryptoCount(cryptoCards.length);
-  }, [cryptoCards.length]);
-
-  useEffect(() => {
-    navigation.setParams({
-      isModalVisible: modalVisible,
-      showAddModal: addCryptoVisible,
-    });
-  }, [modalVisible, addCryptoVisible]);
-
-  useEffect(() => {
-    Animated.timing(fadeAnim, {
-      toValue: modalVisible ? 1 : 0,
-      duration: 300,
-      easing: Easing.ease,
-      useNativeDriver: true,
-    }).start();
-  }, [modalVisible, fadeAnim]);
-
-  useEffect(() => {
-    if (processModalVisible) {
-      setShowLetsGoButton(false);
-      setProcessMessages([t("Creating your wallet")]);
-      const timer1 = setTimeout(() => {
-        setProcessMessages((prevMessages) => [
-          ...prevMessages,
-          t("Generating your accounts"),
-        ]);
-      }, 1000);
-      const timer2 = setTimeout(() => {
-        setProcessMessages((prevMessages) => [
-          ...prevMessages,
-          t("Encrypting your data"),
-        ]);
-      }, 2000);
-      const timer3 = setTimeout(() => {
-        setProcessMessages((prevMessages) => [
-          ...prevMessages,
-          t("Your wallet is now ready"),
-        ]);
-      }, 3000);
-      const timer4 = setTimeout(() => {
-        setShowLetsGoButton(true);
-      }, 4000);
-      return () => {
-        clearTimeout(timer1);
-        clearTimeout(timer2);
-        clearTimeout(timer3);
-        clearTimeout(timer4);
-      };
-    }
-  }, [processModalVisible, t]);
-
-  useEffect(() => {
-    console.log("选中的 chainShortName 已更新:", selectedCardChainShortName);
-  }, [selectedCardChainShortName]);
-
-  useEffect(() => {
-    if (modalVisible) {
-      scrollViewRef.current.scrollTo({ y: 0, animated: true });
-      setTimeout(() => {
-        scrollYOffset.current = 0;
-      }, 300); // 确保在滚动完成后再设置偏移量
-    }
-  }, [modalVisible]);
 
   const handlePinSubmit = async () => {
     setPinModalVisible(false); // 关闭 PIN 输入模态框
@@ -1250,25 +1306,61 @@ function WalletScreen({ route, navigation }) {
       setIsVerificationSuccessful(true);
       console.log("设备验证并存储成功");
 
-      // 如果标志位为 Y，发送字符串 'address'
+      // 如果标志位为 Y，则发送字符串 'address'，之后发送多个 pubkey 消息
       if (flag === "Y") {
-        console.log("设备返回了 PIN:xxxx,Y，发送字符串 'address' 给嵌入式设备");
+        // 先发送确认消息，告知嵌入式设备验证成功
         try {
-          const message = "address";
-          const bufferMessage = Buffer.from(message, "utf-8");
-          const base64Message = bufferMessage.toString("base64");
+          const confirmationMessage = "PIN_OK";
+          const bufferConfirmation = Buffer.from(confirmationMessage, "utf-8");
+          const base64Confirmation = bufferConfirmation.toString("base64");
+          await selectedDevice.writeCharacteristicWithResponseForService(
+            serviceUUID,
+            writeCharacteristicUUID,
+            base64Confirmation
+          );
+          console.log("Sent confirmation message:", confirmationMessage);
+        } catch (error) {
+          console.log("Error sending confirmation message:", error);
+        }
+        // 发送 address
+        try {
+          const addressMessage = "address";
+          const addressBuffer = Buffer.from(addressMessage, "utf-8");
+          const base64Address = addressBuffer.toString("base64");
 
           await selectedDevice.writeCharacteristicWithResponseForService(
             serviceUUID,
             writeCharacteristicUUID,
-            base64Message
+            base64Address
           );
           console.log("字符串 'address' 已成功发送给设备");
+
+          // 构造 pubkey 消息数组（每个消息包含币种与对应的路径）
+          const pubkeyMessages = [
+            "pubkey: cosmosm,m/44'/118'/0'/0/0",
+            "pubkey: ripple,m/44'/144'/0'/0/0",
+            "pubkey: celestia,m/44'/118'/0'/0/0",
+            "pubkey: juno,m/44'/118'/0'/0/0",
+            "pubkey: osmosis,m/44'/118'/0'/0/0",
+          ];
+
+          // 遍历数组，逐条发送消息
+          for (const msg of pubkeyMessages) {
+            const bufferMessage = Buffer.from(msg, "utf-8");
+            const base64Message = bufferMessage.toString("base64");
+
+            await selectedDevice.writeCharacteristicWithResponseForService(
+              serviceUUID,
+              writeCharacteristicUUID,
+              base64Message
+            );
+            console.log(`字符串 '${msg}' 已成功发送给设备`);
+          }
         } catch (error) {
-          console.log("发送字符串 'address' 时发生错误:", error);
+          console.log("发送字符串时发生错误:", error);
         }
       } else if (flag === "N") {
-        console.log("设备返回了 PIN:xxxx,N，无需发送 'address'");
+        console.log("设备返回了 PIN:xxxx,N，无需发送 'address' 和 pubkey 消息");
       }
     } else {
       console.log("PIN 验证失败");
@@ -1557,11 +1649,6 @@ function WalletScreen({ route, navigation }) {
     }
   }
 
-  //热更新支持
-  useEffect(() => {
-    onFetchUpdateAsync();
-  }, []);
-
   const renderTabModal = () => (
     <TabModal
       activeTab={activeTab}
@@ -1648,6 +1735,11 @@ function WalletScreen({ route, navigation }) {
         filteredCryptos={filteredCryptos}
         handleAddCrypto={handleAddCrypto}
         chainCategories={chainCategories}
+        isChainSelectionModalVisible={isChainSelectionModalVisible}
+        setChainSelectionModalVisible={setChainSelectionModalVisible}
+        selectedChain={selectedChain}
+        handleSelectChain={handleSelectChain}
+        cryptoCards={cryptoCards}
         deleteConfirmVisible={deleteConfirmVisible}
         setDeleteConfirmVisible={setDeleteConfirmVisible}
         handleDeleteCard={handleDeleteCard}
@@ -1679,32 +1771,6 @@ function WalletScreen({ route, navigation }) {
         stopMonitoringWalletAddress={stopMonitoringWalletAddress}
         walletCreationStatus={walletCreationStatus}
         importingStatus={importingStatus}
-      />
-      {/* Add Crypto Modal */}
-      <AddCryptoModal
-        visible={addCryptoVisible}
-        onClose={() => {
-          setAddCryptoVisible(false);
-        }}
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        filteredCryptos={filteredCryptos}
-        handleAddCrypto={handleAddCrypto}
-        styles={WalletScreenStyle}
-        t={t}
-        isDarkMode={isDarkMode}
-        chainCategories={chainCategories}
-        cryptoCards={cryptoCards}
-      />
-      {/* 选择链的Modal */}
-      <ChainSelectionModal
-        isVisible={isChainSelectionModalVisible}
-        onClose={() => setChainSelectionModalVisible(false)}
-        selectedChain={selectedChain}
-        handleSelectChain={handleSelectChain}
-        cryptoCards={cryptoCards}
-        isDarkMode={isDarkMode}
-        t={t}
       />
     </LinearGradient>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, TextInput, TouchableOpacity, Modal } from "react-native";
 import { BlurView } from "expo-blur";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -13,6 +13,14 @@ const ChangePasswordModal = ({
 }) => {
   const [currentPassword, setCurrentPassword] = useState("");
   const [isCurrentPasswordHidden, setIsCurrentPasswordHidden] = useState(true);
+
+  // 当 Modal 显示时，清空输入内容并重置密码显示状态
+  useEffect(() => {
+    if (visible) {
+      setCurrentPassword("");
+      setIsCurrentPasswordHidden(true);
+    }
+  }, [visible]);
 
   const handleNextForChangePassword = () => {
     // 调用父组件的提交处理函数

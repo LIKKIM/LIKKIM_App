@@ -360,7 +360,7 @@ const darkStyles = StyleSheet.create({
     color: "#CCB68C",
   },
   modalView: {
-    backgroundColor: "#2A2A48",
+    backgroundColor: "#21201E",
   },
   modalTitle: {
     color: "#f5f5f5",

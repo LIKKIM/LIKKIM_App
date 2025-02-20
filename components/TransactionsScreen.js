@@ -1,13 +1,6 @@
 // TransactionsScreen.js
 import React, { useContext, useState, useRef, useEffect } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  ScrollView,
-  Clipboard,
-  Platform,
-} from "react-native";
+import { View, Clipboard, Platform } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Buffer } from "buffer";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -53,6 +46,8 @@ import SelectCryptoModal from "./modal/SelectCryptoModal";
 import SwapModal from "./modal/SwapModal";
 import ReceiveAddressModal from "./modal/ReceiveAddressModal";
 import PinModal from "./modal/PinModal";
+import TransactionHistory from "./transactionScreens/TransactionHistory";
+import ActionButtons from "./transactionScreens/ActionButtons";
 
 // BLE 常量
 const serviceUUID = "6E400001-B5A3-F393-E0A9-E50E24DCCA9E";
@@ -140,6 +135,7 @@ function TransactionsScreen() {
   const [selectedToToken, setSelectedToToken] = useState("");
   const [selectedToChain, setSelectedToChain] = useState("");
   const [paymentAddress, setPaymentAddress] = useState("Your Payment Address");
+  const [contractAddress, setContractAddress] = useState("");
   const [addressVerificationMessage, setAddressVerificationMessage] = useState(
     t("Verifying Address on LIKKIM...")
   );
@@ -449,9 +445,80 @@ function TransactionsScreen() {
     };
   }, [addressModalVisible, selectedDevice]);
 
-  const handleSwapPress = () => {
-    setSwapModalVisible(true);
-  };
+  // 监听设备数量
+  useEffect(() => {
+    const loadVerifiedDevices = async () => {
+      try {
+        // 从 AsyncStorage 加载已验证的设备列表
+        const savedDevices = await AsyncStorage.getItem("verifiedDevices");
+        if (savedDevices !== null) {
+          setVerifiedDevices(JSON.parse(savedDevices));
+        }
+      } catch (error) {
+        console.log("Error loading verified devices: ", error);
+      }
+    };
+
+    loadVerifiedDevices();
+  }, []); // 这个依赖空数组确保该代码只在组件挂载时执行一次
+
+  // 停止监听
+  useEffect(() => {
+    if (!pinModalVisible) {
+      stopMonitoringVerificationCode();
+    }
+  }, [pinModalVisible]);
+
+  // 使用 useEffect 监听模态窗口的变化
+  useEffect(() => {
+    if (!confirmingTransactionModalVisible) {
+      stopMonitoringTransactionResponse();
+    }
+  }, [confirmingTransactionModalVisible]);
+
+  useEffect(() => {
+    if (!bleVisible && selectedDevice) {
+      setPinModalVisible(true);
+    }
+  }, [bleVisible, selectedDevice]);
+
+  // Update Bluetooth modal visibility management
+  useEffect(() => {
+    if (Platform.OS !== "web") {
+      bleManagerRef.current = new BleManager({
+        restoreStateIdentifier: restoreIdentifier,
+      });
+
+      const subscription = bleManagerRef.current.onStateChange((state) => {
+        if (state === "PoweredOn") {
+          // 添加短暂延迟以确保蓝牙模块完全准备好
+
+          setTimeout(() => {
+            scanDevices();
+          }, 2000); // 1秒延迟
+        }
+      }, true);
+
+      return () => {
+        subscription.remove();
+        bleManagerRef.current && bleManagerRef.current.destroy();
+      };
+    }
+  }, []);
+  useEffect(() => {
+    // 从 AsyncStorage 加载 addedCryptos 数据
+    const loadAddedCryptos = async () => {
+      try {
+        const savedCryptos = await AsyncStorage.getItem("addedCryptos");
+        if (savedCryptos !== null) {
+          setAddedCryptos(JSON.parse(savedCryptos));
+        }
+      } catch (error) {
+        console.log("Error loading addedCryptos: ", error);
+      }
+    };
+    loadAddedCryptos();
+  }, []);
 
   const reconnectDevice = async (device) => {
     try {
@@ -505,65 +572,89 @@ function TransactionsScreen() {
     v[1] = v1 >>> 0;
   }
 
+  // 假设在组件中定义了状态：
+  const [receivedAddresses, setReceivedAddresses] = useState({});
+  // verificationStatus 用于表示整体状态
+  // 例如：setVerificationStatus("waiting") 或 setVerificationStatus("success")
+
   let monitorSubscription;
-  //监听函数 监听信息 监听方法
+
   const monitorVerificationCode = (device, sendDecryptedValue) => {
     monitorSubscription = device.monitorCharacteristicForService(
       serviceUUID,
       notifyCharacteristicUUID,
       async (error, characteristic) => {
         if (error) {
-          console.log("监听设备响应时出错:", error.message);
-          //      return;
+          console.log("Error monitoring device response:", error.message);
+          return;
         }
-
         const receivedData = Buffer.from(characteristic.value, "base64");
         const receivedDataString = receivedData.toString("utf8");
-        console.log("接收到的数据字符串:", receivedDataString);
+        console.log("Received data string:", receivedDataString);
 
-        // ==========================
-        // 映射表: 前缀 -> shortName
-        // ==========================
-
-        // 检查是否以某个前缀开头
+        // 检查数据是否以已知前缀开头（例如 "bitcoin:"、"ethereum:" 等）
         const prefix = Object.keys(prefixToShortName).find((key) =>
           receivedDataString.startsWith(key)
         );
-
         if (prefix) {
-          const newAddress = receivedDataString.replace(prefix, "").trim(); // 提取地址
-          const shortName = prefixToShortName[prefix]; // 获取对应的 shortName
+          const newAddress = receivedDataString.replace(prefix, "").trim();
+          const chainShortName = prefixToShortName[prefix];
+          console.log(`Received ${chainShortName} address: `, newAddress);
+          updateCryptoAddress(chainShortName, newAddress);
 
-          console.log(`收到的 ${shortName} 地址: `, newAddress);
-
-          // 更新对应加密货币的地址
-          updateCryptoAddress(shortName, newAddress);
+          // 更新 receivedAddresses 状态，并检查是否全部接收
+          setReceivedAddresses((prev) => {
+            const updated = { ...prev, [chainShortName]: newAddress };
+            // 假设预期地址数量与 prefixToShortName 中的条目数一致
+            const expectedCount = Object.keys(prefixToShortName).length;
+            if (Object.keys(updated).length >= expectedCount) {
+              setVerificationStatus("success");
+            } else {
+              setVerificationStatus("waiting");
+            }
+            return updated;
+          });
         }
 
-        // 处理包含 "ID:" 的数据
+        if (receivedDataString.startsWith("pubkey:")) {
+          // 假设返回数据格式为 "pubkey: cosmosm,04AABBCCDDEE..."
+          const pubkeyData = receivedDataString.replace("pubkey:", "").trim();
+          const [chainShortName, publicKey] = pubkeyData.split(",");
+          if (chainShortName && publicKey) {
+            console.log(
+              `Received public key for ${chainShortName}: ${publicKey}`
+            );
+            // 如果你在 CryptoContext 中定义了 updateCryptoPublicKey 方法，可以这样调用：
+            updateCryptoPublicKey(chainShortName, publicKey);
+
+            // 或者直接通过 setCryptoCards 更新状态，假设 cryptoCards 数组中每个对象都包含 chainShortName 和 publicKey 字段：
+            setCryptoCards((prevCards) =>
+              prevCards.map((card) =>
+                card.chainShortName === chainShortName
+                  ? { ...card, publicKey: publicKey }
+                  : card
+              )
+            );
+          }
+        }
+        // Process data containing "ID:"
         if (receivedDataString.includes("ID:")) {
           const encryptedHex = receivedDataString.split("ID:")[1];
           const encryptedData = hexStringToUint32Array(encryptedHex);
           const key = new Uint32Array([0x1234, 0x1234, 0x1234, 0x1234]);
-
           decrypt(encryptedData, key);
-
           const decryptedHex = uint32ArrayToHexString(encryptedData);
-          console.log("解密后的字符串:", decryptedHex);
-
-          // 将解密后的值发送给设备
+          console.log("Decrypted string:", decryptedHex);
           if (sendDecryptedValue) {
             sendDecryptedValue(decryptedHex);
           }
         }
 
-        // 如果接收到 "VALID"，改变状态并发送 "validation"
+        // If data is "VALID", update status and send "validation"
         if (receivedDataString === "VALID") {
           try {
-            // 立即更新状态为 "VALID"
             setVerificationStatus("VALID");
-            console.log("状态更新为: VALID");
-
+            console.log("Status set to: VALID");
             const validationMessage = "validation";
             const bufferValidationMessage = Buffer.from(
               validationMessage,
@@ -571,13 +662,12 @@ function TransactionsScreen() {
             );
             const base64ValidationMessage =
               bufferValidationMessage.toString("base64");
-
             await device.writeCharacteristicWithResponseForService(
               serviceUUID,
               writeCharacteristicUUID,
               base64ValidationMessage
             );
-            console.log(`已发送字符串 'validation' 给设备`);
+            console.log(`Sent 'validation' to device`);
           } catch (error) {
             console.log("发送 'validation' 时出错:", error);
           }
@@ -622,14 +712,14 @@ function TransactionsScreen() {
               console.log("广播交易失败:", responseData.message);
             }
           } catch (error) {
-            console.log("发送请求时出错:", error);
+            console.log("Error sending 'validation':", error);
           }
         }
 
-        // 提取完整的 PIN 数据（例如 PIN:1234,Y 或 PIN:1234,N）
+        // Extract complete PIN data (e.g., PIN:1234,Y or PIN:1234,N)
         if (receivedDataString.startsWith("PIN:")) {
-          setReceivedVerificationCode(receivedDataString); // 保存完整的 PIN 数据
-          console.log("接收到的完整数据字符串:", receivedDataString);
+          setReceivedVerificationCode(receivedDataString);
+          console.log("Complete PIN data received:", receivedDataString);
         }
       }
     );
@@ -731,6 +821,28 @@ function TransactionsScreen() {
       }
     );
   };
+  // 停止监听验证码;
+  const stopMonitoringVerificationCode = () => {
+    if (monitorSubscription) {
+      try {
+        monitorSubscription.remove();
+        monitorSubscription = null;
+        console.log("验证码监听已停止");
+      } catch (error) {
+        console.log("停止监听时发生错误:", error);
+      }
+    }
+  };
+
+  let transactionMonitorSubscription;
+  // 停止监听交易反馈
+  const stopMonitoringTransactionResponse = () => {
+    if (transactionMonitorSubscription) {
+      transactionMonitorSubscription.remove();
+      transactionMonitorSubscription = null;
+      console.log("交易反馈监听已停止");
+    }
+  };
 
   // 签名函数
   const signTransaction = async (
@@ -739,7 +851,8 @@ function TransactionsScreen() {
     paymentAddress,
     inputAddress,
     selectedCrypto,
-    selectedQueryChainName
+    selectedQueryChainName,
+    contractAddress
   ) => {
     try {
       if (!device?.isConnected) {
@@ -846,6 +959,7 @@ function TransactionsScreen() {
           break;
         }
       }
+
       const walletParamsResponse = await fetch(
         "https://bt.likkim.com/api/wallet/getSignParam",
         {
@@ -859,6 +973,7 @@ function TransactionsScreen() {
           }),
         }
       );
+
       if (!walletParamsResponse.ok) {
         console.log(
           "获取 nonce 和 gasPrice 失败:",
@@ -866,13 +981,12 @@ function TransactionsScreen() {
         );
         return;
       }
-
       // ---------------------------
       // 处理返回的结果
       // ---------------------------
-
       const walletParamsData = await walletParamsResponse.json();
       console.log("getSignParam 返回的数据:", walletParamsData);
+
       if (
         !walletParamsData.data?.gasPrice ||
         walletParamsData.data?.nonce == null
@@ -880,8 +994,69 @@ function TransactionsScreen() {
         console.log("接口返回数据不完整:", walletParamsData);
         return;
       }
-      const { gasPrice, nonce } = walletParamsData.data;
-      console.log("获取到的 gasPrice:", gasPrice, "nonce:", nonce);
+
+      if (postChain === "ethereum") {
+        const { gasPrice, nonce } = walletParamsData.data;
+        console.log("Ethereum 返回的数据:", { gasPrice, nonce });
+      } else if (postChain === "bitcoin") {
+        const { gasPrice, nonce, utxoList } = walletParamsData.data;
+
+        console.log("bitcoin 返回的数据:", {
+          gasPrice,
+          nonce,
+          utxoList,
+        });
+      } else if (postChain === "aptos") {
+        const { gasPrice, nonce, sequence, maxGasAmount, typeArg } =
+          walletParamsData.data;
+        console.log("Aptos 返回的数据:", {
+          gasPrice,
+          nonce,
+          sequence,
+          maxGasAmount,
+          typeArg,
+        });
+      } else if (postChain === "cosmos") {
+        const {
+          gasPrice,
+          nonce,
+          heigh,
+          sequence,
+          maxGasAmount,
+          accountNumber,
+          feeAmount,
+        } = walletParamsData.data;
+        const effectiveFeeAmount = feeAmount ? feeAmount : 3000;
+        console.log("cosmos 返回的数据:", {
+          gasPrice,
+          nonce,
+          sequence,
+          maxGasAmount,
+          accountNumber,
+          feeAmount: effectiveFeeAmount,
+        });
+      }
+      if (postChain === "solana") {
+        const { gasPrice, nonce, blockHash } = walletParamsData.data;
+        console.log("solana 返回的数据:", { gasPrice, nonce, blockHash });
+      } else if (postChain === "sui") {
+        const { gasPrice, nonce, maxGasAmount, suiObjects, epoch } =
+          walletParamsData.data;
+
+        console.log("提取的 sui 数据:", {
+          gasPrice,
+          nonce,
+          maxGasAmount,
+          suiObjects,
+          epoch,
+        });
+      } else if (postChain === "ripple") {
+        const { gasPrice, nonce } = walletParamsData.data;
+        console.log("ripple 返回的数据:", { gasPrice, nonce });
+      } else {
+        const { gasPrice, nonce, sequence } = walletParamsData.data;
+        console.log("其他链返回的数据:", { gasPrice, nonce, sequence });
+      }
 
       // ---------------------------
       // 第5步：构造 POST 请求数据并调用签名编码接口
@@ -902,7 +1077,7 @@ function TransactionsScreen() {
         } else if (suiChainMapping[chainKey]) {
           return "sui";
         } else if (xrpChainMapping[chainKey]) {
-          return "xrp";
+          return "ripple";
         }
         return null; // 默认返回 null
       };
@@ -911,6 +1086,7 @@ function TransactionsScreen() {
       let requestData = null;
 
       if (chainMethod === "evm") {
+        // evm:  构造待签名hex请求数据（例如 Ethereum）
         requestData = {
           chainKey: chainKey,
           nonce: nonce,
@@ -922,21 +1098,17 @@ function TransactionsScreen() {
           contractValue: 0,
         };
       } else if (chainMethod === "btc") {
+        // btc:  构造待签名hex请求数据（比特币）
         requestData = {
           chainKey: "bitcoin",
-          inputs: [
-            {
-              hash: "986fb96b3320c8e5bd5427167121aef0d93231b77e027da1648c83acf2d63c8b",
-              index: 1,
-              amount: 54774,
-            },
-          ],
-          feeRate: 3.047,
+          inputs: utxoList,
+          feeRate: gasPrice,
           receiveAddress: inputAddress,
-          receiveAmount: 3000,
-          changeAddress: "3Nzrp7ncj3EGJPpLYyjPUYmLxmMoRDwB7Z",
+          receiveAmount: Number(amount),
+          changeAddress: paymentAddress,
         };
       } else if (chainMethod === "tron") {
+        // tron:  构造待签名hex请求数据（波场）
         requestData = {
           chainKey,
           value: Number(amount),
@@ -944,70 +1116,70 @@ function TransactionsScreen() {
           contractAddress: "",
         };
       } else if (chainMethod === "aptos") {
+        // aptos:  构造待签名hex请求数据（Aptos 链）
         requestData = {
           from: paymentAddress,
-          sequenceNumber: 1,
-          maxGasAmount: 1000000,
-          gasUnitPrice: "",
+          sequenceNumber: sequence,
+          maxGasAmount: maxGasAmount,
+          gasUnitPrice: gasPrice,
           receiveAddress: inputAddress,
-          receiveAmount: 0.01,
-          typeArg: "0x1::aptos_coin::AptosCoin",
-          expiration: 1735293600,
+          receiveAmount: Number(amount),
+          typeArg: typeArg,
+          expiration: 600,
         };
       } else if (chainMethod === "cosmos") {
+        // cosmos:  构造待签名hex请求数据（Cosmos 链）
         requestData = {
           from: paymentAddress,
           to: inputAddress,
-          demon: "uatom",
-          amount: 30000,
-          sequence: 1,
+          amount: Number(amount),
+          sequence: sequence,
           chainKey: "cosmos",
-          accountNumber: 623151,
-          feeDemon: "uatom",
-          feeAmount: "1000",
-          gasLimit: 200000,
-          memo: "",
-          timeoutHeight: 0,
+          accountNumber: accountNumber,
+          feeAmount: effectiveFeeAmount,
+          gasLimit: maxGasAmount,
+          memo: "", //这个是备注
+          timeoutHeight: heigh,
           publicKey:
             "xpub6FmpQ9cxRXYYUNic6AtESRfMq2dfBm4hcAMgrLxm95NbmfC6ZFXmvRarzmfASdpwXjqR9BxsMLEWxNhVXjkxbQDkxMhpj4256ySt3wEuxdQ",
         };
       } else if (chainMethod === "solana") {
+        // solana:  构造待签名hex请求数据（Solana 链）
         requestData = {
           from: paymentAddress,
           to: inputAddress,
-          mint: "",
-          amount: Number(amount),
+          hash: blockHash,
+          mint: contractAddress,
+          amount: Number(amount) * 1000000000,
         };
       } else if (chainMethod === "sui") {
+        // sui:  构造待签名hex请求数据（Sui 链）
         requestData = {
-          objects: [
-            {
-              digest: "72MNvHizum45yZ68dQPaP6Ba9KpD7HS3vr9yck8SHHR5",
-              objectId:
-                "0x547423ba9528ab3bc240338331ebf62c9e73e44080d01c52a024e8c0ead37c00",
-              version: 449581001,
-            },
-          ],
+          objects: suiObjects,
           from: paymentAddress,
           to: inputAddress,
           amount: Number(amount),
-          gasPrice: 750,
-          gasBudget: 100000000,
-          epoch: 623,
+          gasPrice: gasPrice,
+          gasBudget: maxGasAmount,
+          epoch: epoch,
         };
-      } else if (chainMethod === "xrp") {
+      } else if (chainMethod === "ripple") {
+        // ripple:  构造待签名hex请求数据（Ripple）
         requestData = {
           from: paymentAddress,
           to: inputAddress,
           amount: Number(amount),
-          fee: "5000",
-          sequence: 92889716,
+          fee: gasPrice,
+          sequence: sequence,
           publicKey:
             "xpub6Cev2GgWsGScABSqE3orVzNVbkNMm3AZ7PPopEjZjjZamQKN289XRFUzFau31vhpyMEdzJXywosaKXQHTqDjgjEPjK7Hxp5zGSvhQTDAwjW",
         };
       }
 
-      console.log("构造的请求数据:", JSON.stringify(requestData, null, 2));
+      console.log(
+        " 构造待签名hex请求数据:",
+        JSON.stringify(requestData, null, 2)
+      );
 
       const response = await fetch(
         "https://bt.likkim.com/api/sign/encode_evm",
@@ -1052,6 +1224,92 @@ function TransactionsScreen() {
     }
   };
 
+  // 显示地址函数 发送数据写法
+  const showLIKKIMAddressCommand = async (device, coinType) => {
+    try {
+      // 检查设备对象是否有效
+      if (typeof device !== "object" || !device.isConnected) {
+        console.log("设备对象无效:", device);
+        return;
+      }
+
+      // 连接设备并发现所有服务
+      await device.connect();
+      await device.discoverAllServicesAndCharacteristics();
+      console.log("设备已连接并发现所有服务。");
+
+      // 检查设备是否具有 writeCharacteristicWithResponseForService 方法
+      if (
+        typeof device.writeCharacteristicWithResponseForService !== "function"
+      ) {
+        console.log(
+          "设备不支持 writeCharacteristicWithResponseForService 方法。"
+        );
+        return;
+      }
+
+      // 根据 coinType 匹配对应的字符串
+      const commandString = coinCommandMapping[coinType];
+      // 【新增】检查 commandString 是否存在
+      if (!commandString) {
+        console.log("不支持的币种:", coinType);
+        return;
+      }
+
+      // 将命令字符串转换为 Base64 编码
+      const encodedCommand = Buffer.from(commandString, "utf-8").toString(
+        "base64"
+      );
+
+      // 向服务写入命令字符串（确保使用 Base64 编码）
+      await device.writeCharacteristicWithResponseForService(
+        serviceUUID,
+        writeCharacteristicUUID,
+        encodedCommand
+      );
+
+      // 设置验证地址的状态
+      setIsVerifyingAddress(true);
+      setAddressVerificationMessage("正在 LIKKIM 上验证地址...");
+      console.log("地址显示命令已发送:", commandString);
+
+      // 监听设备的响应 - bugging
+      const notifyCharacteristicUUID = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E";
+      const addressMonitorSubscription = device.monitorCharacteristicForService(
+        serviceUUID,
+        notifyCharacteristicUUID,
+        (error, characteristic) => {
+          if (error) {
+            console.log("监听设备响应时出错:", error);
+            return;
+          }
+          // 【新增】检查 characteristic 是否有效
+          if (!characteristic || !characteristic.value) {
+            console.log("未收到有效数据");
+            return;
+          }
+          const receivedDataHex = Buffer.from(characteristic.value, "base64")
+            .toString("hex")
+            .toUpperCase();
+          console.log("接收到的十六进制数据字符串:", receivedDataHex);
+
+          // 检查接收到的数据是否为预期的响应
+          if (receivedDataString === "Address_OK") {
+            console.log("在 LIKKIM 上成功显示地址");
+            setAddressVerificationMessage(t("addressShown")); // 假设 'addressShown' 是国际化文件中的 key
+          }
+        }
+      );
+
+      return addressMonitorSubscription;
+    } catch (error) {
+      console.log("发送显示地址命令失败:", error);
+    }
+  };
+
+  const handleSwapPress = () => {
+    setSwapModalVisible(true);
+  };
   const handleDevicePress = async (device) => {
     // 检查是否传递了有效的设备对象
     if (typeof device !== "object" || typeof device.connect !== "function") {
@@ -1141,100 +1399,6 @@ function TransactionsScreen() {
       console.log("断开设备连接失败:", error);
     }
   };
-  // 停止监听验证码;
-  const stopMonitoringVerificationCode = () => {
-    if (monitorSubscription) {
-      try {
-        monitorSubscription.remove();
-        monitorSubscription = null;
-        console.log("验证码监听已停止");
-      } catch (error) {
-        console.log("停止监听时发生错误:", error);
-      }
-    }
-  };
-  // 显示地址函数 发送数据写法
-  const showLIKKIMAddressCommand = async (device, coinType) => {
-    try {
-      // 检查设备对象是否有效
-      if (typeof device !== "object" || !device.isConnected) {
-        console.log("设备对象无效:", device);
-        return;
-      }
-
-      // 连接设备并发现所有服务
-      await device.connect();
-      await device.discoverAllServicesAndCharacteristics();
-      console.log("设备已连接并发现所有服务。");
-
-      // 检查设备是否具有 writeCharacteristicWithResponseForService 方法
-      if (
-        typeof device.writeCharacteristicWithResponseForService !== "function"
-      ) {
-        console.log(
-          "设备不支持 writeCharacteristicWithResponseForService 方法。"
-        );
-        return;
-      }
-
-      // 根据 coinType 匹配对应的字符串
-      const commandString = coinCommandMapping[coinType];
-      // 【新增】检查 commandString 是否存在
-      if (!commandString) {
-        console.log("不支持的币种:", coinType);
-        return;
-      }
-
-      // 将命令字符串转换为 Base64 编码
-      const encodedCommand = Buffer.from(commandString, "utf-8").toString(
-        "base64"
-      );
-
-      // 向服务写入命令字符串（确保使用 Base64 编码）
-      await device.writeCharacteristicWithResponseForService(
-        serviceUUID,
-        writeCharacteristicUUID,
-        encodedCommand
-      );
-
-      // 设置验证地址的状态
-      setIsVerifyingAddress(true);
-      setAddressVerificationMessage("正在 LIKKIM 上验证地址...");
-      console.log("地址显示命令已发送:", commandString);
-
-      // 监听设备的响应 - bugging
-      const notifyCharacteristicUUID = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E";
-      const addressMonitorSubscription = device.monitorCharacteristicForService(
-        serviceUUID,
-        notifyCharacteristicUUID,
-        (error, characteristic) => {
-          if (error) {
-            console.log("监听设备响应时出错:", error);
-            return;
-          }
-          // 【新增】检查 characteristic 是否有效
-          if (!characteristic || !characteristic.value) {
-            console.log("未收到有效数据");
-            return;
-          }
-          const receivedDataHex = Buffer.from(characteristic.value, "base64")
-            .toString("hex")
-            .toUpperCase();
-          console.log("接收到的十六进制数据字符串:", receivedDataHex);
-
-          // 检查接收到的数据是否为预期的响应
-          if (receivedDataString === "Address_OK") {
-            console.log("在 LIKKIM 上成功显示地址");
-            setAddressVerificationMessage(t("addressShown")); // 假设 'addressShown' 是国际化文件中的 key
-          }
-        }
-      );
-
-      return addressMonitorSubscription;
-    } catch (error) {
-      console.log("发送显示地址命令失败:", error);
-    }
-  };
 
   // 提交验证码
   const handlePinSubmit = async () => {
@@ -1283,25 +1447,67 @@ function TransactionsScreen() {
       setIsVerificationSuccessful(true);
       console.log("设备验证并存储成功");
 
-      // 如果标志位为 Y，发送字符串 'address'
+      // 如果标志位为 Y，发送字符串 'address' 以及后续的 pubkey 字符串
       if (flag === "Y") {
-        console.log("设备返回了 PIN:xxxx,Y，发送字符串 'address' 给嵌入式设备");
+        // 先发送确认消息，告知嵌入式设备验证成功
+
         try {
-          const message = "address";
-          const bufferMessage = Buffer.from(message, "utf-8");
-          const base64Message = bufferMessage.toString("base64");
+          const confirmationMessage = "PIN_OK";
+          const bufferConfirmation = Buffer.from(confirmationMessage, "utf-8");
+          const base64Confirmation = bufferConfirmation.toString("base64");
+          await selectedDevice.writeCharacteristicWithResponseForService(
+            serviceUUID,
+            writeCharacteristicUUID,
+            base64Confirmation
+          );
+          console.log("Sent confirmation message:", confirmationMessage);
+        } catch (error) {
+          console.log("Error sending confirmation message:", error);
+        }
+        // 发送 address 字符串
+        try {
+          const addressMessage = "address";
+          const bufferAddress = Buffer.from(addressMessage, "utf-8");
+          const base64Address = bufferAddress.toString("base64");
 
           await selectedDevice.writeCharacteristicWithResponseForService(
             serviceUUID,
             writeCharacteristicUUID,
-            base64Message
+            base64Address
           );
           console.log("字符串 'address' 已成功发送给设备");
         } catch (error) {
           console.log("发送字符串 'address' 时发生错误:", error);
         }
+
+        // 定义需要发送的 pubkey 字符串列表
+        const pubkeyMessages = [
+          "pubkey: cosmosm,m/44'/118'/0'/0/0",
+          "pubkey: ripple,m/44'/144'/0'/0/0",
+          "pubkey: celestia,m/44'/118'/0'/0/0",
+          "pubkey: juno,m/44'/118'/0'/0/0",
+          "pubkey: osmosis,m/44'/118'/0'/0/0",
+        ];
+
+        // 依次发送每条 pubkey 信息
+        for (const pubkeyMessage of pubkeyMessages) {
+          try {
+            const bufferMessage = Buffer.from(pubkeyMessage, "utf-8");
+            const base64Message = bufferMessage.toString("base64");
+            await selectedDevice.writeCharacteristicWithResponseForService(
+              serviceUUID,
+              writeCharacteristicUUID,
+              base64Message
+            );
+            console.log(`字符串 '${pubkeyMessage}' 已成功发送给设备`);
+          } catch (error) {
+            console.log(`发送字符串 '${pubkeyMessage}' 时发生错误:`, error);
+          }
+        }
       } else if (flag === "N") {
-        console.log("设备返回了 PIN:xxxx,N，无需发送 'address'");
+        console.log(
+          "设备返回了 PIN:xxxx,N，无需发送 'address' 和 pubkey 字符串"
+        );
       }
     } else {
       console.log("PIN 验证失败");
@@ -1346,92 +1552,6 @@ function TransactionsScreen() {
       setBleVisible(true);
     }
   };
-
-  // 监听设备数量
-  useEffect(() => {
-    const loadVerifiedDevices = async () => {
-      try {
-        // 从 AsyncStorage 加载已验证的设备列表
-        const savedDevices = await AsyncStorage.getItem("verifiedDevices");
-        if (savedDevices !== null) {
-          setVerifiedDevices(JSON.parse(savedDevices));
-        }
-      } catch (error) {
-        console.log("Error loading verified devices: ", error);
-      }
-    };
-
-    loadVerifiedDevices();
-  }, []); // 这个依赖空数组确保该代码只在组件挂载时执行一次
-
-  // 停止监听
-  useEffect(() => {
-    if (!pinModalVisible) {
-      stopMonitoringVerificationCode();
-    }
-  }, [pinModalVisible]);
-
-  let transactionMonitorSubscription;
-  // 停止监听交易反馈
-  const stopMonitoringTransactionResponse = () => {
-    if (transactionMonitorSubscription) {
-      transactionMonitorSubscription.remove();
-      transactionMonitorSubscription = null;
-      console.log("交易反馈监听已停止");
-    }
-  };
-
-  // 使用 useEffect 监听模态窗口的变化
-  useEffect(() => {
-    if (!confirmingTransactionModalVisible) {
-      stopMonitoringTransactionResponse();
-    }
-  }, [confirmingTransactionModalVisible]);
-
-  useEffect(() => {
-    if (!bleVisible && selectedDevice) {
-      setPinModalVisible(true);
-    }
-  }, [bleVisible, selectedDevice]);
-
-  // Update Bluetooth modal visibility management
-  useEffect(() => {
-    if (Platform.OS !== "web") {
-      bleManagerRef.current = new BleManager({
-        restoreStateIdentifier: restoreIdentifier,
-      });
-
-      const subscription = bleManagerRef.current.onStateChange((state) => {
-        if (state === "PoweredOn") {
-          // 添加短暂延迟以确保蓝牙模块完全准备好
-
-          setTimeout(() => {
-            scanDevices();
-          }, 2000); // 1秒延迟
-        }
-      }, true);
-
-      return () => {
-        subscription.remove();
-        bleManagerRef.current && bleManagerRef.current.destroy();
-      };
-    }
-  }, []);
-  useEffect(() => {
-    // 从 AsyncStorage 加载 addedCryptos 数据
-    const loadAddedCryptos = async () => {
-      try {
-        const savedCryptos = await AsyncStorage.getItem("addedCryptos");
-        if (savedCryptos !== null) {
-          setAddedCryptos(JSON.parse(savedCryptos));
-        }
-      } catch (error) {
-        console.log("Error loading addedCryptos: ", error);
-      }
-    };
-    loadAddedCryptos();
-  }, []);
-
   const handleReceivePress = () => {
     scanDevices();
     setOperationType("receive");
@@ -1449,7 +1569,7 @@ function TransactionsScreen() {
     setSelectedCryptoChain(crypto.chain);
     setSelectedAddress(crypto.address);
     setSelectedCryptoIcon(crypto.icon);
-    setBalance(crypto.balance); // 确保设置正确的 balance
+    setBalance(crypto.balance);
     setValueUsd(crypto.valueUsd);
     setFee(crypto.fee);
     setPriceUsd(crypto.priceUsd);
@@ -1458,6 +1578,7 @@ function TransactionsScreen() {
     setSelectedCryptoName(crypto.name);
     setIsVerifyingAddress(false);
     setModalVisible(false);
+    setContractAddress(crypto.contractAddress);
 
     if (operationType === "receive") {
       setAddressModalVisible(true);
@@ -1507,171 +1628,20 @@ function TransactionsScreen() {
       style={TransactionsScreenStyle.bgContainer}
     >
       <View className="w-[100%]" style={TransactionsScreenStyle.container}>
-        <View
-          style={{
-            width: "100%", // 使用100%的宽度来确保自适应
-            height: 130,
-            flexDirection: "row",
-            justifyContent: "space-between", // 确保按钮均匀分布
-            gap: 10, // 设置按钮之间的间距
-          }}
-        >
-          {/* Send 按钮 */}
-          <TouchableOpacity
-            style={[TransactionsScreenStyle.roundButton, { flex: 1 }]} // 每个按钮占据均等的宽度
-            onPress={handleSendPress}
-          >
-            <Feather name="send" size={24} color={iconColor} />
-            <Text style={TransactionsScreenStyle.mainButtonText}>
-              {t("Send")}
-            </Text>
-          </TouchableOpacity>
-
-          {/* Receive 按钮 */}
-          <TouchableOpacity
-            style={[TransactionsScreenStyle.roundButton, { flex: 1 }]} // 均等宽度
-            onPress={handleReceivePress}
-          >
-            <Icon name="vertical-align-bottom" size={24} color={iconColor} />
-            <Text style={TransactionsScreenStyle.mainButtonText}>
-              {t("Receive")}
-            </Text>
-          </TouchableOpacity>
-
-          {/* Swap 按钮 */}
-          {/*           <TouchableOpacity
-            style={[TransactionsScreenStyle.roundButton, { flex: 1 }]} // 均等宽度
-            onPress={handleSwapPress}
-          >
-            <Icon name="swap-horiz" size={24} color={iconColor} />
-            <Text style={TransactionsScreenStyle.mainButtonText}>
-              {t("Swap")}
-            </Text>
-          </TouchableOpacity> */}
-        </View>
-
-        <View style={TransactionsScreenStyle.historyContainer}>
-          <Text style={TransactionsScreenStyle.historyTitle}>
-            {t("Transaction History")}
-          </Text>
-          <ScrollView
-            contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
-          >
-            {transactionHistory.length === 0 ? (
-              <Text style={TransactionsScreenStyle.noHistoryText}>
-                {t("No Histories")}
-              </Text>
-            ) : (
-              transactionHistory.map((transaction, index) => (
-                <View key={index} style={TransactionsScreenStyle.historyItem}>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Text
-                      style={[
-                        TransactionsScreenStyle.historyItemText,
-                        { fontSize: 18, fontWeight: "bold" },
-                      ]}
-                    >
-                      {transaction.transactionType === "Send"
-                        ? t("Send")
-                        : t("Receive")}
-                    </Text>
-
-                    <Text
-                      style={[
-                        TransactionsScreenStyle.historyItemText,
-                        { fontSize: 18, fontWeight: "bold" },
-                      ]}
-                    >
-                      {transaction.amount} {`${transaction.transactionSymbol}`}
-                    </Text>
-                  </View>
-
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <Text style={TransactionsScreenStyle.historyItemText}>
-                      <Text style={{ fontWeight: "bold" }}>{`State: `}</Text>
-                      <Text
-                        style={{
-                          color:
-                            transaction.state === "success"
-                              ? "#47B480"
-                              : "inherit",
-                        }}
-                      >
-                        {transaction.state}
-                      </Text>
-                    </Text>
-                  </View>
-
-                  <Text style={TransactionsScreenStyle.historyItemText}>
-                    <Text
-                      style={{ fontWeight: "bold" }}
-                    >{`Transaction Time: `}</Text>
-                    {`${new Date(
-                      transaction.transactionTime * 1000
-                    ).toLocaleString()}`}
-                  </Text>
-
-                  <Text
-                    style={[
-                      TransactionsScreenStyle.historyItemText,
-                      { lineHeight: 24 },
-                    ]}
-                  >
-                    <Text style={{ fontWeight: "bold" }}>{`From: `}</Text>
-                    {transaction.from}
-                  </Text>
-                  <Text
-                    style={[
-                      TransactionsScreenStyle.historyItemText,
-                      { lineHeight: 24 },
-                    ]}
-                  >
-                    <Text style={{ fontWeight: "bold" }}>{`To: `}</Text>
-                    {transaction.to}
-                  </Text>
-
-                  <Text
-                    style={[
-                      TransactionsScreenStyle.historyItemText,
-                      { lineHeight: 24 },
-                    ]}
-                  >
-                    <Text
-                      style={{ fontWeight: "bold" }}
-                    >{`Transaction hash: `}</Text>
-                    {transaction.txid}
-                  </Text>
-
-                  <Text style={TransactionsScreenStyle.historyItemText}>
-                    <Text
-                      style={{ fontWeight: "bold" }}
-                    >{`Network Fee: `}</Text>
-                    {transaction.txFee}
-                  </Text>
-
-                  <Text style={TransactionsScreenStyle.historyItemText}>
-                    <Text
-                      style={{ fontWeight: "bold" }}
-                    >{`Block Height: `}</Text>
-                    {transaction.height}
-                  </Text>
-                </View>
-              ))
-            )}
-          </ScrollView>
-        </View>
-
+        <ActionButtons
+          TransactionsScreenStyle={TransactionsScreenStyle}
+          t={t}
+          iconColor={iconColor}
+          handleSendPress={handleSendPress}
+          handleReceivePress={handleReceivePress}
+          handleSwapPress={handleSwapPress}
+        />
+        {/* 交易历史记录组件 */}
+        <TransactionHistory
+          TransactionsScreenStyle={TransactionsScreenStyle}
+          t={t}
+          transactionHistory={transactionHistory}
+        />
         {/* 输入地址的 Modal */}
         <InputAddressModal
           visible={inputAddressModalVisible}
@@ -1691,7 +1661,6 @@ function TransactionsScreen() {
           selectedCryptoChain={selectedCryptoChain}
           selectedCryptoIcon={selectedCryptoIcon}
         />
-
         {/* 输入金额的 Modal */}
         <AmountModal
           visible={amountModalVisible}
@@ -1719,7 +1688,6 @@ function TransactionsScreen() {
           valueUsd={valueUsd}
           setCryptoCards={setCryptoCards}
         />
-
         {/* 交易确认的 Modal */}
         <TransactionConfirmationModal
           visible={confirmModalVisible}
@@ -1774,7 +1742,6 @@ function TransactionsScreen() {
           selectedAddress={selectedAddress}
           inputAddress={inputAddress}
         />
-
         {/* 选择接收的加密货币模态窗口 */}
         <SelectCryptoModal
           visible={modalVisible}
@@ -1787,7 +1754,6 @@ function TransactionsScreen() {
           setModalVisible={setModalVisible}
           isDarkMode={isDarkMode}
         />
-
         {/* 显示选择的加密货币地址的模态窗口 */}
         <ReceiveAddressModal
           visible={addressModalVisible}
@@ -1803,7 +1769,6 @@ function TransactionsScreen() {
           isDarkMode={isDarkMode}
           chainShortName={chainShortName}
         />
-
         {/* Bluetooth modal */}
         <BluetoothModal
           visible={bleVisible} // 控制模态框的显示状态
@@ -1820,7 +1785,6 @@ function TransactionsScreen() {
           t={t} // 国际化函数
           onDisconnectPress={handleDisconnectDevice} // 断开连接处理函数
         />
-
         {/* PIN码输入modal窗口 */}
         <PinModal
           visible={pinModalVisible} // 控制 PIN 模态框的可见性
@@ -1836,7 +1800,6 @@ function TransactionsScreen() {
           t={t}
           status={verificationStatus} // 传递状态
         />
-
         {/* 验证模态框 */}
         <VerificationModal
           visible={
@@ -1850,7 +1813,6 @@ function TransactionsScreen() {
           styles={TransactionsScreenStyle}
           t={t}
         />
-
         {/* Pending Transaction Modal */}
         <PendingTransactionModal
           visible={confirmingTransactionModalVisible}
@@ -1859,7 +1821,6 @@ function TransactionsScreen() {
           TransactionsScreenStyle={TransactionsScreenStyle}
           t={t}
         />
-
         {/* Swap 模态框 */}
         <SwapModal
           isDarkMode={isDarkMode}
