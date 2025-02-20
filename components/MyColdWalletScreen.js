@@ -566,21 +566,19 @@ function MyColdWalletScreen() {
           });
         }
 
-        if (receivedDataString.startsWith("pubkey:")) {
-          // 假设返回数据格式为 "pubkey: cosmosm,04AABBCCDDEE..."
-          const pubkeyData = receivedDataString.replace("pubkey:", "").trim();
+        if (receivedDataString.startsWith("pubkeyData:")) {
+          const pubkeyData = receivedDataString
+            .replace("pubkeyData:", "")
+            .trim();
           const [chainShortName, publicKey] = pubkeyData.split(",");
           if (chainShortName && publicKey) {
             console.log(
               `Received public key for ${chainShortName}: ${publicKey}`
             );
-            // 如果你在 CryptoContext 中定义了 updateCryptoPublicKey 方法，可以这样调用：
             updateCryptoPublicKey(chainShortName, publicKey);
-
-            // 或者直接通过 setCryptoCards 更新状态，假设 cryptoCards 数组中每个对象都包含 chainShortName 和 publicKey 字段：
             setCryptoCards((prevCards) =>
               prevCards.map((card) =>
-                card.chainShortName === chainShortName
+                card.queryChainName === chainShortName
                   ? { ...card, publicKey: publicKey }
                   : card
               )
@@ -767,11 +765,11 @@ function MyColdWalletScreen() {
 
         // 逐条发送 pubkey 消息
         const pubkeyMessages = [
-          "pubkey: cosmos,m/44'/118'/0'/0/0",
-          "pubkey: ripple,m/44'/144'/0'/0/0",
-          "pubkey: celestia,m/44'/118'/0'/0/0",
-          "pubkey: juno,m/44'/118'/0'/0/0",
-          "pubkey: osmosis,m/44'/118'/0'/0/0",
+          "pubkey:cosmos,m/44'/118'/0'/0/0",
+          "pubkey:ripple,m/44'/144'/0'/0/0",
+          "pubkey:celestia,m/44'/118'/0'/0/0",
+          "pubkey:juno,m/44'/118'/0'/0/0",
+          "pubkey:osmosis,m/44'/118'/0'/0/0",
         ];
 
         for (const message of pubkeyMessages) {
