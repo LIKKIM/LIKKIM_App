@@ -169,6 +169,9 @@ function WalletScreen({ route, navigation }) {
     title: t("Importing on LIKKIM Hardware..."), // 默认主消息
     subtitle: t("Your device is already verified."), // 默认子消息
   });
+  useEffect(() => {
+    console.log("initialAdditionalCryptosState:", initialAdditionalCryptos);
+  }, [initialAdditionalCryptos]);
 
   // 定义下拉刷新执行的函数
   const onRefresh = React.useCallback(() => {
@@ -1167,13 +1170,22 @@ function WalletScreen({ route, navigation }) {
               `Received public key for ${chainShortName}: ${publicKey}`
             );
             updateCryptoPublicKey(chainShortName, publicKey);
-            setCryptoCards((prevCards) =>
-              prevCards.map((card) =>
+            setCryptoCards((prevCards) => {
+              const updatedCards = prevCards.map((card) =>
                 card.queryChainName === chainShortName
                   ? { ...card, publicKey: publicKey }
                   : card
-              )
-            );
+              );
+              // 持久化更新后的 cryptoCards 数据
+              AsyncStorage.setItem("cryptoCards", JSON.stringify(updatedCards))
+                .then(() => {
+                  console.log("Persisted cryptoCards:", updatedCards);
+                })
+                .catch((error) => {
+                  console.error("Failed to persist cryptoCards:", error);
+                });
+              return updatedCards;
+            });
           }
         }
 
