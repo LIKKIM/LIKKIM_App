@@ -1,5 +1,5 @@
 // modal/NewPasswordModal.js
-import React from "react";
+import React, { useState } from "react";
 import { Modal, View, Text, TextInput, TouchableOpacity } from "react-native";
 import { BlurView } from "expo-blur";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -43,6 +43,11 @@ const NewPasswordModal = ({
   isDarkMode,
   styles,
 }) => {
+  // 状态用来记录每个 TextInput 是否处于焦点状态
+  const [isNewPasswordFocused, setIsNewPasswordFocused] = useState(false);
+  const [isConfirmPasswordFocused, setIsConfirmPasswordFocused] =
+    useState(false);
+
   return (
     <Modal
       animationType="slide"
@@ -56,10 +61,15 @@ const NewPasswordModal = ({
           <View style={{ marginVertical: 10, width: "100%" }}>
             <View style={styles.passwordInputContainer}>
               <TextInput
-                style={[styles.passwordInput, styles.focusedInput]}
+                style={[
+                  styles.passwordInput,
+                  isNewPasswordFocused && styles.focusedInput, // 仅在获得焦点时添加样式
+                ]}
                 placeholder={t("Enter new password")}
                 placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
                 secureTextEntry={isPasswordHidden}
+                onFocus={() => setIsNewPasswordFocused(true)}
+                onBlur={() => setIsNewPasswordFocused(false)}
                 onChangeText={(text) => {
                   setPassword(text);
                   setPasswordError("");
@@ -82,10 +92,15 @@ const NewPasswordModal = ({
           <View style={{ marginVertical: 10, width: "100%" }}>
             <View style={styles.passwordInputContainer}>
               <TextInput
-                style={[styles.passwordInput, styles.focusedInput]}
+                style={[
+                  styles.passwordInput,
+                  isConfirmPasswordFocused && styles.focusedInput, // 同理
+                ]}
                 placeholder={t("Confirm new password")}
                 placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
                 secureTextEntry={isConfirmPasswordHidden}
+                onFocus={() => setIsConfirmPasswordFocused(true)}
+                onBlur={() => setIsConfirmPasswordFocused(false)}
                 onChangeText={(text) => {
                   setConfirmPassword(text);
                   setPasswordError("");
