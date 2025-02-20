@@ -1447,23 +1447,23 @@ function TransactionsScreen() {
       setIsVerificationSuccessful(true);
       console.log("设备验证并存储成功");
 
+      try {
+        const confirmationMessage = "PIN_OK";
+        const bufferConfirmation = Buffer.from(confirmationMessage, "utf-8");
+        const base64Confirmation = bufferConfirmation.toString("base64");
+        await selectedDevice.writeCharacteristicWithResponseForService(
+          serviceUUID,
+          writeCharacteristicUUID,
+          base64Confirmation
+        );
+        console.log("Sent confirmation message:", confirmationMessage);
+      } catch (error) {
+        console.log("Error sending confirmation message:", error);
+      }
       // 如果标志位为 Y，发送字符串 'address' 以及后续的 pubkey 字符串
       if (flag === "Y") {
         // 先发送确认消息，告知嵌入式设备验证成功
 
-        try {
-          const confirmationMessage = "PIN_OK";
-          const bufferConfirmation = Buffer.from(confirmationMessage, "utf-8");
-          const base64Confirmation = bufferConfirmation.toString("base64");
-          await selectedDevice.writeCharacteristicWithResponseForService(
-            serviceUUID,
-            writeCharacteristicUUID,
-            base64Confirmation
-          );
-          console.log("Sent confirmation message:", confirmationMessage);
-        } catch (error) {
-          console.log("Error sending confirmation message:", error);
-        }
         // 发送 address 字符串
         try {
           const addressMessage = "address";
