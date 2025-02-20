@@ -128,6 +128,27 @@ export const CryptoProvider = ({ children }) => {
     });
   };
 
+  const updateCryptoPublicKey = (chainShortName, publicKey) => {
+    setInitialAdditionalCryptos((prevCryptos) => {
+      const updatedCryptos = prevCryptos.map((crypto) =>
+        crypto.chainShortName === chainShortName
+          ? { ...crypto, publicKey }
+          : crypto
+      );
+      AsyncStorage.setItem(
+        "initialAdditionalCryptos",
+        JSON.stringify(updatedCryptos)
+      )
+        .then(() => {
+          console.log("Persisted initialAdditionalCryptos:", updatedCryptos);
+        })
+        .catch((error) => {
+          console.error("Failed to persist initialAdditionalCryptos:", error);
+        });
+      return updatedCryptos;
+    });
+  };
+
   const updateCryptoData = (shortName, newData) => {
     if (supportedChains.includes(shortName)) {
       setInitialAdditionalCryptos((prevCryptos) => {
@@ -379,6 +400,7 @@ export const CryptoProvider = ({ children }) => {
         exchangeRates,
         transactionHistory,
         setTransactionHistory,
+        updateCryptoPublicKey,
       }}
     >
       <DarkModeContext.Provider value={{ isDarkMode, setIsDarkMode }}>

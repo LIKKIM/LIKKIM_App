@@ -73,6 +73,7 @@ function MyColdWalletScreen() {
     toggleScreenLock,
     changeScreenLockPassword,
     setCryptoCards,
+    updateCryptoPublicKey,
   } = useContext(CryptoContext);
 
   const { isDarkMode, setIsDarkMode } = useContext(DarkModeContext);
@@ -576,22 +577,6 @@ function MyColdWalletScreen() {
               `Received public key for ${chainShortName}: ${publicKey}`
             );
             updateCryptoPublicKey(chainShortName, publicKey);
-            setCryptoCards((prevCards) => {
-              const updatedCards = prevCards.map((card) =>
-                card.queryChainName === chainShortName
-                  ? { ...card, publicKey: publicKey }
-                  : card
-              );
-              // 持久化更新后的 cryptoCards 数据
-              AsyncStorage.setItem("cryptoCards", JSON.stringify(updatedCards))
-                .then(() => {
-                  console.log("Persisted cryptoCards:", updatedCards);
-                })
-                .catch((error) => {
-                  console.error("Failed to persist cryptoCards:", error);
-                });
-              return updatedCards;
-            });
           }
         }
 
