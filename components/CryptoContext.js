@@ -278,11 +278,17 @@ export const CryptoProvider = ({ children }) => {
           "initialAdditionalCryptos"
         );
         if (savedInitialCryptos !== null) {
-          setInitialAdditionalCryptos(JSON.parse(savedInitialCryptos));
+          const parsedInitialCryptos = JSON.parse(savedInitialCryptos);
+          /*           console.log(
+            "Loaded initialAdditionalCryptos from storage:",
+            parsedInitialCryptos
+          ); */
+          setInitialAdditionalCryptos(parsedInitialCryptos);
         }
       } catch (error) {
         console.error("Error loading settings:", error);
       } finally {
+        // 标记加载完成，之后再启动保存逻辑
         setIsAppLaunching(true);
       }
     };

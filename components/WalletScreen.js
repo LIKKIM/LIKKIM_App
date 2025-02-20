@@ -170,9 +170,9 @@ function WalletScreen({ route, navigation }) {
     title: t("Importing on LIKKIM Hardware..."), // 默认主消息
     subtitle: t("Your device is already verified."), // 默认子消息
   });
-  useEffect(() => {
+  /*   useEffect(() => {
     console.log("initialAdditionalCryptosState:", initialAdditionalCryptos);
-  }, [initialAdditionalCryptos]);
+  }, [initialAdditionalCryptos]); */
 
   // 定义下拉刷新执行的函数
   const onRefresh = React.useCallback(() => {
