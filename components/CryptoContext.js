@@ -140,7 +140,7 @@ export const CryptoProvider = ({ children }) => {
         JSON.stringify(updatedCryptos)
       )
         .then(() => {
-          console.log("Persisted initialAdditionalCryptos:", updatedCryptos);
+          //   console.log("Persisted initialAdditionalCryptos:", updatedCryptos);
         })
         .catch((error) => {
           console.error("Failed to persist initialAdditionalCryptos:", error);
