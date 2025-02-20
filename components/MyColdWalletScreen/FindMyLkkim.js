@@ -22,11 +22,11 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Location from "expo-location";
 import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
 import { useNavigation } from "@react-navigation/native";
-import { DarkModeContext } from "./CryptoContext";
+import { DarkModeContext } from "./../CryptoContext";
 import { Swipeable } from "react-native-gesture-handler";
 import { useTranslation } from "react-i18next";
 import { useLocales } from "expo-localization";
-import keys from "../config/keys";
+import keys from "../../config/keys";
 
 const GOOGLE_MAPS_API_KEY = keys.GOOGLE_MAPS_API_KEY;
 const GAODE_MAP_API_KEY = keys.GAODE_MAP_API_KEY;
@@ -304,8 +304,8 @@ export default function FindMyLkkim() {
                 <Image
                   source={
                     isDarkMode
-                      ? require("../assets/icon/deviceDarkMode.png")
-                      : require("../assets/icon/device.png")
+                      ? require("../../assets/icon/deviceDarkMode.png")
+                      : require("../../assets/icon/device.png")
                   }
                   style={{ height: 38, width: 38 }}
                 />
@@ -343,8 +343,8 @@ export default function FindMyLkkim() {
               <Image
                 source={
                   isDarkMode
-                    ? require("../assets/icon/location.png")
-                    : require("../assets/icon/locationBlack.png")
+                    ? require("../../assets/icon/location.png")
+                    : require("../../assets/icon/locationBlack.png")
                 }
                 style={styles.buttonIcon}
               />
@@ -427,8 +427,8 @@ export default function FindMyLkkim() {
                       <Image
                         source={
                           isDarkMode
-                            ? require("../assets/icon/deviceDarkMode.png")
-                            : require("../assets/icon/device.png")
+                            ? require("../../assets/icon/deviceDarkMode.png")
+                            : require("../../assets/icon/device.png")
                         }
                         style={{ width: 22, height: 22 }}
                       />
