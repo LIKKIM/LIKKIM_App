@@ -571,12 +571,12 @@ function MyColdWalletScreen() {
           const pubkeyData = receivedDataString
             .replace("pubkeyData:", "")
             .trim();
-          const [chainShortName, publicKey] = pubkeyData.split(",");
-          if (chainShortName && publicKey) {
+          const [queryChainName, publicKey] = pubkeyData.split(",");
+          if (queryChainName && publicKey) {
             console.log(
-              `Received public key for ${chainShortName}: ${publicKey}`
+              `Received public key for ${queryChainName}: ${publicKey}`
             );
-            updateCryptoPublicKey(chainShortName, publicKey);
+            updateCryptoPublicKey(queryChainName, publicKey);
           }
         }
 

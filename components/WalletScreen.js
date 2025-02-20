@@ -170,10 +170,10 @@ function WalletScreen({ route, navigation }) {
     title: t("Importing on LIKKIM Hardware..."), // 默认主消息
     subtitle: t("Your device is already verified."), // 默认子消息
   });
-  /*   useEffect(() => {
+  useEffect(() => {
     console.log("initialAdditionalCryptosState:", initialAdditionalCryptos);
   }, [initialAdditionalCryptos]);
- */
+
   // 定义下拉刷新执行的函数
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
@@ -1165,12 +1165,12 @@ function WalletScreen({ route, navigation }) {
           const pubkeyData = receivedDataString
             .replace("pubkeyData:", "")
             .trim();
-          const [chainShortName, publicKey] = pubkeyData.split(",");
-          if (chainShortName && publicKey) {
+          const [queryChainName, publicKey] = pubkeyData.split(",");
+          if (queryChainName && publicKey) {
             console.log(
-              `Received public key for ${chainShortName}: ${publicKey}`
+              `Received public key for ${queryChainName}: ${publicKey}`
             );
-            updateCryptoPublicKey(chainShortName, publicKey);
+            updateCryptoPublicKey(queryChainName, publicKey);
           }
         }
 

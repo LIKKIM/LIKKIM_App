@@ -128,10 +128,10 @@ export const CryptoProvider = ({ children }) => {
     });
   };
 
-  const updateCryptoPublicKey = (chainShortName, publicKey) => {
+  const updateCryptoPublicKey = (queryChainName, publicKey) => {
     setInitialAdditionalCryptos((prevCryptos) => {
       const updatedCryptos = prevCryptos.map((crypto) =>
-        crypto.chainShortName === chainShortName
+        crypto.queryChainName === queryChainName
           ? { ...crypto, publicKey }
           : crypto
       );
