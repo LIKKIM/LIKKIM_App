@@ -1,23 +1,5 @@
-/**
- * CurrencyModal Component
- *
- * A modal component that displays a list of currencies with corresponding country flags for selection.
- *
- * Props:
- *  - visible {boolean} - Whether the modal is visible.
- *  - onClose {function} - Callback function to close the modal.
- *  - currencies {Array} - Array of currency objects. Each object should contain `name` and `shortName`.
- *  - searchCurrency {string} - The current search query.
- *  - setSearchCurrency {function} - Function to update the search query.
- *  - handleCurrencyChange {function} - Callback function when a currency is selected.
- *  - styles {object} - Custom styles for the modal.
- *  - isDarkMode {boolean} - Flag indicating dark mode.
- *  - t {function} - Translation function.
- *
- * @module CurrencyModal
- */
-
-import React from "react";
+// modal/CurrencyModal.js
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -32,7 +14,6 @@ import {
 } from "react-native";
 import { BlurView } from "expo-blur";
 import Icon from "react-native-vector-icons/MaterialIcons";
-// Import the CountryFlag component from react-native-country-flag library
 import CountryFlag from "react-native-country-flag";
 
 const CurrencyModal = ({
@@ -46,6 +27,21 @@ const CurrencyModal = ({
   isDarkMode,
   t,
 }) => {
+  // 状态用来记录搜索框是否处于焦点状态
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
+
+  // 定义外部区域点击处理函数
+  const handleOuterPress = () => {
+    if (isSearchFocused) {
+      // 如果搜索框正处于聚焦状态，则取消聚焦
+      setIsSearchFocused(false);
+      Keyboard.dismiss();
+    } else {
+      // 如果搜索框未聚焦，则关闭 Modal
+      onClose();
+    }
+  };
+
   // Mapping from currency short names to corresponding country ISO codes
   const currencyToCountryMap = {
     AUD: "AU",
@@ -101,15 +97,8 @@ const CurrencyModal = ({
       visible={visible}
       onRequestClose={onClose}
     >
-      {/*
-        Dismiss keyboard and close modal when tapping outside.
-      */}
-      <TouchableWithoutFeedback
-        onPress={() => {
-          Keyboard.dismiss(); // Dismiss the keyboard
-          onClose(); // Close the modal
-        }}
-      >
+      {/* 点击外部区域，根据当前状态决定是取消聚焦还是关闭 Modal */}
+      <TouchableWithoutFeedback onPress={handleOuterPress}>
         <View style={{ flex: 1 }}>
           <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -118,25 +107,32 @@ const CurrencyModal = ({
             <BlurView intensity={10} style={styles.centeredView}>
               <View
                 style={styles.currencyModalView}
-                onStartShouldSetResponder={() => true} // Prevent touch event propagation
+                onStartShouldSetResponder={() => true} // 防止触摸事件冒泡
               >
                 <Text style={styles.languageModalTitle}>
                   {t("Select Currency")}
                 </Text>
 
-                {/* Search Box */}
-                <View style={styles.searchContainer}>
+                {/* 搜索框 */}
+                <View
+                  style={[
+                    styles.searchContainer,
+                    isSearchFocused && styles.focusedSearchContainer,
+                  ]}
+                >
                   <Icon name="search" size={20} style={styles.searchIcon} />
                   <TextInput
                     style={styles.searchInput}
                     placeholder={t("Search Currency")}
                     placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
+                    onFocus={() => setIsSearchFocused(true)}
+                    onBlur={() => setIsSearchFocused(false)}
                     onChangeText={setSearchCurrency}
                     value={searchCurrency}
                   />
                 </View>
 
-                {/* List of filtered currencies with flags */}
+                {/* 显示过滤后的币种列表 */}
                 <ScrollView style={styles.languageList}>
                   {filteredCurrencies.map((currency) => (
                     <TouchableOpacity
@@ -145,7 +141,10 @@ const CurrencyModal = ({
                       onPress={() => handleCurrencyChange(currency)}
                     >
                       <View
-                        style={{ flexDirection: "row", alignItems: "center" }}
+                        style={{
+                          flexDirection: "row",
+                          alignItems: "center",
+                        }}
                       >
                         <CountryFlag
                           isoCode={currencyToCountryMap[currency.shortName]}
@@ -165,7 +164,7 @@ const CurrencyModal = ({
                   ))}
                 </ScrollView>
 
-                {/* Cancel Button */}
+                {/* 取消按钮 */}
                 <TouchableOpacity
                   style={styles.languageCancelButton}
                   onPress={onClose}

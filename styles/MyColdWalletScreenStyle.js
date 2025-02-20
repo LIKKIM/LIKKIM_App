@@ -252,6 +252,10 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       borderColor: focusedBorderColor,
       borderWidth: 2,
     },
+    focusedSearchContainer: {
+      borderColor: focusedBorderColor,
+      borderWidth: 2,
+    },
     languageCancelButton: {
       borderColor: buttonBackgroundColor,
       borderWidth: 3,
