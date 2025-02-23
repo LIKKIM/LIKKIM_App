@@ -1,4 +1,4 @@
-// AmountModal.js
+//  modal/AmountModal.js
 import React, { useEffect } from "react";
 import {
   Modal,
@@ -44,34 +44,23 @@ const AmountModal = ({
     }
   }, [visible]);
 
-  // Fetch price changes and update the priceUsd in cryptoCards
   const fetchPriceChanges = async () => {
-    if (cryptoCards.length === 0) return; // 没有卡片时不请求
-
+    if (cryptoCards.length === 0) return;
     const instIds = cryptoCards
       .map((card) => `${card.shortName}-USD`)
       .join(",");
-
     try {
       const response = await fetch(
         `https://df.likkim.com/api/market/index-tickers?instId=${instIds}`
       );
       const data = await response.json();
-
       if (data.code === 0 && data.data) {
-        // 更新 cryptoCards 中的 priceUsd
-        setCryptoCards((prevCards) => {
-          return prevCards.map((card) => {
+        setCryptoCards((prevCards) =>
+          prevCards.map((card) => {
             const ticker = data.data[`${card.shortName}-USD`];
-            if (ticker) {
-              return {
-                ...card,
-                priceUsd: ticker.last || "0", // 更新价格
-              };
-            }
-            return card;
-          });
-        });
+            return ticker ? { ...card, priceUsd: ticker.last || "0" } : card;
+          })
+        );
       }
     } catch (error) {
       console.log("Error fetching price changes:", error);
@@ -84,15 +73,12 @@ const AmountModal = ({
   );
   const priceUsd = selectedCryptoInfo ? selectedCryptoInfo.priceUsd : 1;
 
-  // 将余额转换为法币金额
   const getConvertedBalance = (cardBalance) => {
     const cryptoToUsdBalance = cardBalance * priceUsd;
-    const convertedBalance = cryptoToUsdBalance * exchangeRates[currencyUnit];
-    return convertedBalance.toFixed(2);
+    return (cryptoToUsdBalance * exchangeRates[currencyUnit]).toFixed(2);
   };
   const convertedBalance = getConvertedBalance(balance);
 
-  // 将用户输入金额转换为法币金额
   const convertedAmount =
     amount && !isNaN(amount)
       ? (parseFloat(amount) * priceUsd * exchangeRates[currencyUnit]).toFixed(2)
@@ -101,7 +87,7 @@ const AmountModal = ({
   return (
     <Modal
       animationType="slide"
-      transparent={true}
+      transparent
       visible={visible}
       onRequestClose={onRequestClose}
     >
@@ -114,7 +100,6 @@ const AmountModal = ({
           style={TransactionsScreenStyle.blurBackground}
         />
         <View style={TransactionsScreenStyle.amountModalView}>
-          {/* 标题及图标 */}
           <View
             style={{
               flexDirection: "row",
@@ -138,7 +123,6 @@ const AmountModal = ({
           </Text>
 
           <View style={{ width: "100%", alignItems: "center" }}>
-            {/* 用户输入金额 */}
             <TextInput
               style={[
                 TransactionsScreenStyle.amountInput,
@@ -154,20 +138,17 @@ const AmountModal = ({
               placeholderTextColor={isDarkMode ? "#808080" : "#cccccc"}
               keyboardType="numeric"
               onChangeText={(text) => {
-                // 去除多余的前导 0
-                let normalizedText = text.replace(/^0+(?!\.|$)/, "");
-                // 限制数字格式（最多 10 位小数）
+                const normalizedText = text.replace(/^0+(?!\.|$)/, "");
                 const regex = /^\d*\.?\d{0,10}$/;
                 if (regex.test(normalizedText)) {
                   setAmount(normalizedText);
                 }
               }}
               value={amount}
-              autoFocus={true}
-              caretHidden={true}
+              autoFocus
+              caretHidden
             />
 
-            {/* 信息展示区域：原始余额 & 转换后的余额/输入金额 */}
             <View
               style={{
                 width: "100%",
@@ -175,21 +156,17 @@ const AmountModal = ({
                 marginVertical: 10,
               }}
             >
-              {/* 显示原始余额信息 */}
               <View
                 style={{
                   width: "90%",
-
-                  justifyContent: "center", // 水平居中
-                  alignItems: "center", // 垂直居中
+                  justifyContent: "center",
+                  alignItems: "center",
                 }}
               >
                 <Text style={TransactionsScreenStyle.balanceModalSubtitle}>
                   {t("Balance")}: {balance} {selectedCrypto}
                 </Text>
               </View>
-
-              {/* 同时显示余额转换后的法币金额 */}
               <View
                 style={{
                   flexDirection: "row",
@@ -205,8 +182,6 @@ const AmountModal = ({
                   {currencyUnit}: {convertedBalance}
                 </Text>
               </View>
-
-              {/* 显示用户输入金额转换后的法币金额 */}
               <View
                 style={{
                   flexDirection: "row",
@@ -223,7 +198,6 @@ const AmountModal = ({
               </View>
             </View>
 
-            {/* 手续费及余额不足提示区域 */}
             <View
               style={{
                 flexDirection: "column",
@@ -232,7 +206,6 @@ const AmountModal = ({
                 marginBottom: 20,
               }}
             >
-              <View style={{ flexDirection: "column" }}></View>
               {parseFloat(amount) > parseFloat(balance) && (
                 <Text
                   style={[
@@ -246,7 +219,6 @@ const AmountModal = ({
             </View>
           </View>
 
-          {/* 按钮区域 */}
           <View
             style={{
               flexDirection: "column",

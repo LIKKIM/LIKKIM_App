@@ -1,4 +1,4 @@
-// AddWalletModal.js
+// modal/AddWalletModal.js
 import React from "react";
 import { View, Text, Modal, TouchableOpacity } from "react-native";
 import { BlurView } from "expo-blur";
