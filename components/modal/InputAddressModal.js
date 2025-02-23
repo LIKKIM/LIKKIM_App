@@ -1,3 +1,4 @@
+// InputAddressModal.js
 import React, { useState } from "react";
 import {
   Modal,
@@ -12,8 +13,9 @@ import {
 } from "react-native";
 import { BlurView } from "expo-blur";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import AddressBookModal from "./AddressBookModal"; // 导入 AddressBookModal
+import AddressBookModal from "./AddressBookModal";
 import MyColdWalletScreenStyles from "../../styles/MyColdWalletScreenStyle";
+
 const InputAddressModal = ({
   visible,
   onRequestClose,
@@ -32,17 +34,18 @@ const InputAddressModal = ({
   selectedCryptoChain,
   selectedCryptoIcon,
 }) => {
-  const [isAddressBookVisible, setAddressBookVisible] = useState(false); // 控制 AddressBookModal 的可见性
-  const MyColdWalletScreenStyle = MyColdWalletScreenStyles(isDarkMode);
+  const [isAddressBookVisible, setAddressBookVisible] = useState(false);
+  const styles = MyColdWalletScreenStyles(isDarkMode);
+
   const handleIconPress = () => {
     setAddressBookVisible(true);
-    setInputAddressModalVisible(false); // 确保 InputAddressModal 关闭
+    setInputAddressModalVisible(false);
   };
 
   const handleAddressSelect = (selectedAddress) => {
-    handleAddressChange(selectedAddress.address); // 更新输入框中的地址
-    setInputAddressModalVisible(true); // 重新打开 InputAddressModal
-    setAddressBookVisible(false); // 关闭 AddressBookModal
+    handleAddressChange(selectedAddress.address);
+    setInputAddressModalVisible(true);
+    setAddressBookVisible(false);
   };
 
   return (
@@ -50,7 +53,7 @@ const InputAddressModal = ({
       <Modal
         animationType="slide"
         transparent={true}
-        visible={visible && !isAddressBookVisible} // 如果 AddressBookModal 打开，这个 modal 就关闭
+        visible={visible && !isAddressBookVisible}
         onRequestClose={onRequestClose}
       >
         <KeyboardAvoidingView
@@ -62,7 +65,6 @@ const InputAddressModal = ({
             style={TransactionsScreenStyle.blurBackground}
           />
           <View style={TransactionsScreenStyle.cardContainer}>
-            {/* 其他组件和样式 */}
             <View
               style={{
                 flexDirection: "row",
@@ -94,10 +96,7 @@ const InputAddressModal = ({
                 <TextInput
                   style={[
                     TransactionsScreenStyle.input,
-                    {
-                      flex: 1, // 让 TextInput 占据父容器的剩余空间
-                      color: isDarkMode ? "#ffffff" : "#000",
-                    },
+                    { flex: 1, color: isDarkMode ? "#ffffff" : "#000" },
                   ]}
                   placeholder={t("Enter Address")}
                   placeholderTextColor={isDarkMode ? "#ffffff" : "#21201E"}
@@ -109,13 +108,8 @@ const InputAddressModal = ({
                   name="portrait"
                   size={28}
                   color={isDarkMode ? "#ffffff" : "#000"}
-                  style={{
-                    marginLeft: 6,
-                    alignSelf: "center",
-                    position: "relative",
-                    top: 10,
-                  }} // 给图标一些左边距
-                  onPress={handleIconPress} // 点击图标时显示 AddressBookModal
+                  style={{ marginLeft: 6, alignSelf: "center", top: 10 }}
+                  onPress={handleIconPress}
                 />
               </View>
 
@@ -170,12 +164,11 @@ const InputAddressModal = ({
         </KeyboardAvoidingView>
       </Modal>
 
-      {/* AddressBookModal */}
       <AddressBookModal
         visible={isAddressBookVisible}
-        onClose={() => setAddressBookVisible(false)} // 关闭 AddressBookModal
-        onSelect={handleAddressSelect} // 选择地址后处理
-        styles={MyColdWalletScreenStyle}
+        onClose={() => setAddressBookVisible(false)}
+        onSelect={handleAddressSelect}
+        styles={MyColdWalletScreenStyles}
         isDarkMode={isDarkMode}
       />
     </>
