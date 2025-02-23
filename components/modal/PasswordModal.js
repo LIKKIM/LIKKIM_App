@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+// PasswordModal.js
+import React from "react";
 import { Modal, View, Text, TextInput, TouchableOpacity } from "react-native";
 import { BlurView } from "expo-blur";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import { useTranslation } from "react-i18next"; // 导入 useTranslation
 
 function PasswordModal({
   visible,
@@ -28,7 +28,7 @@ function PasswordModal({
   return (
     <Modal
       animationType="slide"
-      transparent={true}
+      transparent
       visible={visible}
       onRequestClose={onClose}
     >
@@ -46,10 +46,10 @@ function PasswordModal({
               secureTextEntry={isPasswordHidden}
               onChangeText={(text) => {
                 setPassword(text);
-                setPasswordError(""); // 清除错误信息
+                setPasswordError("");
               }}
               value={password}
-              autoFocus={true}
+              autoFocus
             />
             <TouchableOpacity
               onPress={() => setIsPasswordHidden(!isPasswordHidden)}
@@ -86,12 +86,11 @@ function PasswordModal({
             </TouchableOpacity>
           </View>
 
-          {/* 错误提示 */}
-          {passwordError ? (
+          {passwordError && (
             <Text style={[styles.errorText, { marginLeft: 10 }]}>
               {passwordError}
             </Text>
-          ) : null}
+          )}
 
           <View style={styles.buttonContainer}>
             <TouchableOpacity
@@ -100,10 +99,7 @@ function PasswordModal({
             >
               <Text style={styles.submitButtonText}>{t("Submit")}</Text>
             </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.cancelButton}
-              onPress={onClose} // 关闭模态框
-            >
+            <TouchableOpacity style={styles.cancelButton} onPress={onClose}>
               <Text style={styles.cancelButtonText}>{t("Cancel")}</Text>
             </TouchableOpacity>
           </View>
