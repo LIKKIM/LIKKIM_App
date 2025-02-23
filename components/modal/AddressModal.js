@@ -1,3 +1,4 @@
+// modal/AddressModal.js
 import React from "react";
 import {
   Modal,
@@ -22,12 +23,12 @@ const AddressModal = ({
   addressVerificationMessage,
   handleVerifyAddress,
   WalletScreenStyle,
-  t, // 确保 t 是通过 props 传递的
+  t,
   isDarkMode,
 }) => (
   <Modal
     animationType="slide"
-    transparent={true}
+    transparent
     visible={visible}
     onRequestClose={onClose}
   >
@@ -37,13 +38,13 @@ const AddressModal = ({
           selectedCryptoIcon={selectedCryptoIcon}
           selectedCrypto={selectedCrypto}
           WalletScreenStyle={WalletScreenStyle}
-          t={t} // 传递 t 函数
+          t={t}
         />
         <AddressInfo
           selectedAddress={selectedAddress}
           isDarkMode={isDarkMode}
           WalletScreenStyle={WalletScreenStyle}
-          t={t} // 传递 t 函数
+          t={t}
         />
         <QRCodeView selectedAddress={selectedAddress} />
         {isVerifyingAddress && (
@@ -75,7 +76,7 @@ const AddressHeader = ({
     {selectedCryptoIcon && (
       <Image
         source={selectedCryptoIcon}
-        style={{ width: 24, height: 24, marginLeft: 5, marginRight: 5 }}
+        style={{ width: 24, height: 24, marginHorizontal: 5 }}
       />
     )}
     <Text style={WalletScreenStyle.modalTitle}>{selectedCrypto}:</Text>
@@ -144,7 +145,7 @@ const ActionButtons = ({
 }) => (
   <View
     style={{
-      flexDirection: "col",
+      flexDirection: "column",
       width: "100%",
       justifyContent: "space-between",
     }}
