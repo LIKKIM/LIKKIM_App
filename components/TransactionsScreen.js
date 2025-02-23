@@ -1762,38 +1762,40 @@ function TransactionsScreen() {
           isDarkMode={isDarkMode}
           chainShortName={chainShortName}
         />
-        {/* Bluetooth modal */}
+        {/* Bluetooth Modal */}
         <BluetoothModal
-          visible={bleVisible} // 控制模态框的显示状态
-          devices={devices} // 设备列表
-          isScanning={isScanning} // 扫描状态
-          iconColor={iconColor} // 图标颜色
-          onDevicePress={handleDevicePress} // 设备点击处理函数
+          visible={bleVisible}
+          devices={devices}
+          isScanning={isScanning}
+          iconColor={iconColor}
+          onDevicePress={handleDevicePress}
           onCancel={() => {
-            setBleVisible(false); // 关闭蓝牙模态框
-            setSelectedDevice(null); // 重置选中的设备状态
+            setBleVisible(false);
+            setSelectedDevice(null);
           }}
-          verifiedDevices={"0"} // 这里是避免这个页面有设备管理disconnect的功能
-          MyColdWalletScreenStyle={TransactionsScreenStyle} // 样式
-          t={t} // 国际化函数
-          onDisconnectPress={handleDisconnectDevice} // 断开连接处理函数
+          verifiedDevices={"0"}
+          MyColdWalletScreenStyle={TransactionsScreenStyle}
+          t={t}
+          onDisconnectPress={handleDisconnectDevice}
         />
-        {/* PIN码输入modal窗口 */}
+
+        {/* PIN Modal */}
         <PinModal
-          visible={pinModalVisible} // 控制 PIN 模态框的可见性
-          pinCode={pinCode} // 绑定 PIN 输入的状态
-          setPinCode={setPinCode} // 设置 PIN 的状态函数
-          onSubmit={handlePinSubmit} // PIN 提交后的逻辑
+          visible={pinModalVisible}
+          pinCode={pinCode}
+          setPinCode={setPinCode}
+          onSubmit={handlePinSubmit}
           onCancel={() => {
-            setPinModalVisible(false); // 关闭 PIN 模态框
-            setPinCode(""); // 清空 PIN 输入框
+            setPinModalVisible(false);
+            setPinCode("");
           }}
           styles={TransactionsScreenStyle}
           isDarkMode={isDarkMode}
           t={t}
-          status={verificationStatus} // 传递状态
+          status={verificationStatus}
         />
-        {/* 验证模态框 */}
+
+        {/* Verification Modal */}
         <VerificationModal
           visible={
             verificationSuccessModalVisible || verificationFailModalVisible
@@ -1806,6 +1808,7 @@ function TransactionsScreen() {
           styles={TransactionsScreenStyle}
           t={t}
         />
+
         {/* Pending Transaction Modal */}
         <PendingTransactionModal
           visible={confirmingTransactionModalVisible}
@@ -1814,7 +1817,8 @@ function TransactionsScreen() {
           TransactionsScreenStyle={TransactionsScreenStyle}
           t={t}
         />
-        {/* Swap 模态框 */}
+
+        {/* Swap Modal */}
         <SwapModal
           isDarkMode={isDarkMode}
           visible={swapModalVisible}
