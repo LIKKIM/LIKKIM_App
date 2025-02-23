@@ -1,4 +1,4 @@
-// PasswordModal.js
+// modal/PasswordModal.js
 import React from "react";
 import { Modal, View, Text, TextInput, TouchableOpacity } from "react-native";
 import { BlurView } from "expo-blur";
