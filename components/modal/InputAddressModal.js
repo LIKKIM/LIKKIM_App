@@ -168,7 +168,7 @@ const InputAddressModal = ({
         visible={isAddressBookVisible}
         onClose={() => setAddressBookVisible(false)}
         onSelect={handleAddressSelect}
-        styles={MyColdWalletScreenStyles}
+        styles={styles}
         isDarkMode={isDarkMode}
       />
     </>
