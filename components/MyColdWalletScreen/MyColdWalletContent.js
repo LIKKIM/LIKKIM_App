@@ -11,7 +11,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 
 const MyColdWalletContent = ({
   styles, // MyColdWalletScreenStyle
-  settingsOptions, // 包含 settings、support、info 等选项的对象
+  settingsOptions,
   isDeleteWalletVisible,
   setIsDeleteWalletVisible,
   isSupportExpanded,
@@ -19,7 +19,7 @@ const MyColdWalletContent = ({
   handleDeleteWallet,
   handleBluetoothPairing,
   iconColor,
-  t, // 国际化函数
+  t,
 }) => {
   return (
     <ScrollView
