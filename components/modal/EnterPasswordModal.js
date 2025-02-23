@@ -1,19 +1,17 @@
-import React, { useState } from "react";
+// EnterPasswordModal.js
+import React from "react";
 import { Modal, View, Text, TextInput, TouchableOpacity } from "react-native";
 import { BlurView } from "expo-blur";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import { useTranslation } from "react-i18next"; // 导入 useTranslation
 
 function EnterPasswordModal({
   visible,
   onClose,
-  onSubmit,
+  handleConfirmPassword,
+  closeEnterPasswordModal,
   isDarkMode,
   styles,
   t,
-  enterPasswordModalVisible,
-  closeEnterPasswordModal,
-  handleConfirmPassword,
   currentPassword,
   setCurrentPassword,
   isCurrentPasswordHidden,
@@ -22,9 +20,9 @@ function EnterPasswordModal({
   return (
     <Modal
       animationType="slide"
-      transparent={true}
+      transparent
       visible={visible}
-      onRequestClose={onClose} // 使用关闭函数
+      onRequestClose={onClose}
     >
       <BlurView intensity={10} style={styles.centeredView}>
         <View style={styles.disableLockModalView}>
@@ -40,7 +38,7 @@ function EnterPasswordModal({
                 secureTextEntry={isCurrentPasswordHidden}
                 onChangeText={setCurrentPassword}
                 value={currentPassword}
-                autoFocus={true}
+                autoFocus
               />
               <TouchableOpacity
                 onPress={() =>
@@ -67,7 +65,7 @@ function EnterPasswordModal({
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.cancelButton}
-              onPress={closeEnterPasswordModal} // 使用关闭函数
+              onPress={closeEnterPasswordModal}
             >
               <Text style={styles.cancelButtonText}>{t("Cancel")}</Text>
             </TouchableOpacity>
