@@ -26,19 +26,16 @@ const AddCryptoModal = ({
   chainCategories,
   cryptoCards,
 }) => {
-  const [selectedChain, setSelectedChain] = useState("All"); // 状态追踪选中的链标签
-  const [selectedCryptos, setSelectedCryptos] = useState([]); // 用于存储选中的加密货币
+  const [selectedChain, setSelectedChain] = useState("All");
+  const [selectedCryptos, setSelectedCryptos] = useState([]);
 
-  // 通过选中的链标签过滤加密货币
   const filteredByChain =
     selectedChain === "All"
       ? filteredCryptos
       : filteredCryptos.filter((crypto) => crypto.chain === selectedChain);
 
-  // 根据持久化的数据初始化selectedCryptos
   useEffect(() => {
     if (visible) {
-      // 使用 name 和 chain 的组合来标记已添加的加密货币
       const addedCryptos = cryptoCards.map(
         (crypto) => `${crypto.name}-${crypto.chain}`
       );
@@ -50,7 +47,7 @@ const AddCryptoModal = ({
   }, [visible, cryptoCards, filteredCryptos]);
 
   const toggleSelectCrypto = (crypto) => {
-    const cryptoIdentifier = `${crypto.name}-${crypto.chain}`; // 使用name和chain作为唯一标识符
+    const cryptoIdentifier = `${crypto.name}-${crypto.chain}`;
     if (
       selectedCryptos.some(
         (selected) => `${selected.name}-${selected.chain}` === cryptoIdentifier
@@ -75,7 +72,6 @@ const AddCryptoModal = ({
     >
       <BlurView intensity={10} style={styles.centeredView}>
         <View style={styles.addCryptoModalView}>
-          {/* 搜索输入框 */}
           <View style={styles.searchContainer}>
             <Icon name="search" size={20} style={styles.searchIcon} />
             <TextInput
@@ -87,13 +83,11 @@ const AddCryptoModal = ({
             />
           </View>
 
-          {/* 链分类标签 */}
           <ScrollView
             horizontal
             style={styles.chainScrollView}
             showsHorizontalScrollIndicator={false}
           >
-            {/* All 标签 */}
             <TouchableOpacity
               key="All"
               style={[
@@ -114,21 +108,20 @@ const AddCryptoModal = ({
             {[...new Set(chainCategories.map((chain) => chain.chain))].map(
               (chain) => (
                 <TouchableOpacity
-                  key={chain} // 使用链名作为唯一键
+                  key={chain}
                   style={[
                     styles.chainTag,
                     selectedChain === chain && styles.selectedChainTag,
                   ]}
                   onPress={() => setSelectedChain(chain)}
                 >
-                  {/* 只渲染一次链图标和链名 */}
                   {chainCategories.some(
                     (category) => category.chain === chain
                   ) && (
                     <>
                       {chainCategories.filter(
                         (category) => category.chain === chain
-                      )[0].chainIcon && ( // 只取第一个匹配的链
+                      )[0].chainIcon && (
                         <Image
                           source={
                             chainCategories.filter(
@@ -154,7 +147,6 @@ const AddCryptoModal = ({
             )}
           </ScrollView>
 
-          {/* 加密货币列表 */}
           <ScrollView
             style={styles.addCryptoScrollView}
             showsVerticalScrollIndicator={false}
@@ -166,7 +158,7 @@ const AddCryptoModal = ({
                 style={[
                   styles.addCryptoButton,
                   {
-                    borderWidth: 2, // 统一的边框宽度
+                    borderWidth: 2,
                     borderColor: selectedCryptos.includes(crypto)
                       ? "#CFAB95"
                       : cryptoCards.some(
@@ -178,7 +170,7 @@ const AddCryptoModal = ({
                       : "transparent",
                   },
                 ]}
-                onPress={() => toggleSelectCrypto(crypto)} // 切换选中状态
+                onPress={() => toggleSelectCrypto(crypto)}
               >
                 <ImageBackground
                   source={crypto.cardImage}
@@ -209,7 +201,6 @@ const AddCryptoModal = ({
                   </View>
                 </ImageBackground>
 
-                {/* 判断 Added 状态 */}
                 {cryptoCards.some(
                   (card) =>
                     card.name === crypto.name && card.chain === crypto.chain
@@ -246,30 +237,28 @@ const AddCryptoModal = ({
                   }}
                 >
                   <Text style={styles.addCryptoText}>{crypto.name}</Text>
-
                   <View style={styles.chainContainer}>
-                    <Text style={[styles.chainCardText]}>{crypto.chain}</Text>
+                    <Text style={styles.chainCardText}>{crypto.chain}</Text>
                   </View>
                 </View>
               </TouchableOpacity>
             ))}
           </ScrollView>
 
-          {/* 确认按钮 */}
           <TouchableOpacity
             style={[
               selectedCryptos.length > 0
                 ? styles.addModalButton
-                : styles.disabledButton, // 按选择状态改变按钮样式
+                : styles.disabledButton,
             ]}
             onPress={() => {
               if (selectedCryptos.length > 0) {
-                console.log("提交了多少个卡片:", selectedCryptos.length); // 打印提交的卡片数量
-                handleAddCrypto(selectedCryptos); // 处理所有选中的货币
-                setSelectedCryptos([]); // 重置选中的货币
+                console.log("提交了多少个卡片:", selectedCryptos.length);
+                handleAddCrypto(selectedCryptos);
+                setSelectedCryptos([]);
               }
             }}
-            disabled={selectedCryptos.length === 0} // 如果未选择任何货币，禁用按钮
+            disabled={selectedCryptos.length === 0}
           >
             <Text
               style={[
