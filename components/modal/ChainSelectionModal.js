@@ -1,4 +1,4 @@
-// ChainSelectionModal.js
+// modal/ChainSelectionModal.js
 import React from "react";
 import {
   Modal,
