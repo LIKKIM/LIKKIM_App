@@ -320,14 +320,16 @@ const WalletContent = (props) => {
                       </Text>
                       <Text
                         style={[
-                          WalletScreenStyle.balanceShortName,
+                          WalletScreenStyle.balanceShortNameCenter,
                           isBlackText && { color: "#121518" },
                         ]}
                       >
-                        {`${props.getConvertedBalance(
-                          card.balance,
-                          card.shortName
-                        )} ${currencyUnit}`}
+                        {`${Number(
+                          props.getConvertedBalance(
+                            card.balance,
+                            card.shortName
+                          )
+                        ).toFixed(2)} ${currencyUnit}`}
                       </Text>
                     </View>
                   </>
