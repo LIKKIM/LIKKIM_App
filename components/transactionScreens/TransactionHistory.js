@@ -41,6 +41,7 @@ const TransactionHistory = ({
           justifyContent: "space-between",
           position: "relative",
           marginBottom: 10,
+          width: "100%",
         }}
       >
         <Text
