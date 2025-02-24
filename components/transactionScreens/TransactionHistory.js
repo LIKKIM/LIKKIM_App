@@ -118,71 +118,44 @@ const TransactionHistory = ({
             {selectedTransaction && (
               <>
                 {/* 显示交易概要信息 */}
-                <View style={{ width: "100%" }}>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Text
-                      style={[
-                        TransactionsScreenStyle.historyItemText,
-                        { fontSize: 16, fontWeight: "bold", textAlign: "left" },
-                      ]}
-                    >
-                      {selectedTransaction.address ===
-                      selectedTransaction.fromAddress
-                        ? t("Send")
-                        : t("Receive")}
-                    </Text>
-                    <Text
-                      style={[
-                        TransactionsScreenStyle.historyItemText,
-                        { fontSize: 16, fontWeight: "bold", textAlign: "left" },
-                      ]}
-                    >
-                      {selectedTransaction.amount} {selectedTransaction.symbol}
-                    </Text>
-                  </View>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <Text
-                      style={[
-                        TransactionsScreenStyle.historyItemText,
-                        { textAlign: "left" },
-                      ]}
-                    >
-                      <Text
-                        style={{
-                          color:
-                            selectedTransaction.state.toLowerCase() ===
-                            "success"
-                              ? "#47B480"
-                              : "#D2464B",
-                        }}
-                      >
-                        {selectedTransaction.state}
-                      </Text>
-                    </Text>
-                  </View>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    width: "100%",
+                  }}
+                >
                   <Text
                     style={[
                       TransactionsScreenStyle.historyItemText,
-                      { textAlign: "left" },
+                      { fontSize: 16, fontWeight: "bold", textAlign: "left" },
                     ]}
                   >
-                    <Text style={{ fontWeight: "bold" }}>
-                      {`Transaction Time: `}
+                    {selectedTransaction.address ===
+                    selectedTransaction.fromAddress
+                      ? t("Send")
+                      : t("Receive")}
+                    {"  "}
+                    <Text
+                      style={{
+                        color:
+                          selectedTransaction.state.toLowerCase() === "success"
+                            ? "#47B480"
+                            : "#D2464B",
+                        fontWeight: "normal",
+                      }}
+                    >
+                      {selectedTransaction.state}
                     </Text>
-                    {`${new Date(
-                      Number(selectedTransaction.transactionTime)
-                    ).toLocaleString()}`}
+                  </Text>
+                  <Text
+                    style={[
+                      TransactionsScreenStyle.historyItemText,
+                      { fontSize: 16, fontWeight: "bold", textAlign: "right" },
+                    ]}
+                  >
+                    {selectedTransaction.amount} {selectedTransaction.symbol}
                   </Text>
                 </View>
 
