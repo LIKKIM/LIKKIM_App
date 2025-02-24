@@ -19,6 +19,7 @@ import { BlurView } from "expo-blur";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useTranslation } from "react-i18next";
+import { networkImages, networks } from "../../config/networkConfig";
 
 function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
   const [searchAddress, setSearchAddress] = useState("");
@@ -155,72 +156,6 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
       console.log("Please fill all fields");
     }
   };
-
-  const networkImages = {
-    Arbitrum: require("../../assets/icon/ARBIcon.png"),
-    Aurora: require("../../assets/icon/AURORAIcon.png"),
-    Avalanche: require("../../assets/icon/AVAXIcon.png"),
-    Bitcoin: require("../../assets/icon/BTCIcon.png"),
-    "Bitcoin Cash": require("../../assets/icon/BCHIcon.png"),
-    "Binance Smart Chain": require("../../assets/icon/BNBIcon.png"),
-    Celo: require("../../assets/icon/CELOIcon.png"),
-    Ethereum: require("../../assets/icon/ETHIcon.png"),
-    "Ethereum Classic": require("../../assets/icon/ETCIcon.png"),
-    Fantom: require("../../assets/icon/FTMIcon.png"),
-    "Huobi ECO Chain": require("../../assets/icon/HTIcon.png"),
-    "IoTeX Network Mainnet": require("../../assets/icon/IOTXIcon.png"),
-    Litecoin: require("../../assets/icon/LTCIcon.png"),
-    "OKX Chain": require("../../assets/icon/OKTIcon.png"),
-    Optimism: require("../../assets/icon/OPIcon.png"),
-    Polygon: require("../../assets/icon/PolygonIcon.png"),
-    Ripple: require("../../assets/icon/XRPIcon.png"),
-    Solana: require("../../assets/icon/SOLIcon.png"),
-    Tron: require("../../assets/icon/TRXIcon.png"),
-    "zkSync Era Mainnet": require("../../assets/icon/ZKSIcon.png"),
-    Cosmos: require("../../assets/icon/ATOMIcon.png"),
-    Celestia: require("../../assets/icon/TIAIcon.png"),
-    Cronos: require("../../assets/icon/CROIcon.png"),
-    Juno: require("../../assets/icon/JUNOIcon.png"),
-    Osmosis: require("../../assets/icon/OSMOIcon.png"),
-    Gnosis: require("../../assets/icon/GNOIcon.png"),
-    Linea: require("../../assets/icon/LINEAIcon.png"),
-    Ronin: require("../../assets/icon/RONIcon.png"),
-    Aptos: require("../../assets/icon/APTIcon.png"),
-    SUI: require("../../assets/icon/SUIIcon.png"),
-  };
-
-  const networks = [
-    "Arbitrum",
-    "Aurora",
-    "Avalanche",
-    "Bitcoin",
-    "Bitcoin Cash",
-    "Binance Smart Chain",
-    "Celo",
-    "Ethereum",
-    "Ethereum Classic",
-    "Fantom",
-    "Huobi ECO Chain",
-    "IoTeX Network Mainnet",
-    "Litecoin",
-    "OKX Chain",
-    "Optimism",
-    "Polygon",
-    "Ripple",
-    "Solana",
-    "Tron",
-    "zkSync Era Mainnet",
-    "Cosmos",
-    "Celestia",
-    "Cronos",
-    "Juno",
-    "Osmosis",
-    "Gnosis",
-    "Linea",
-    "Ronin",
-    "Aptos",
-    "SUI",
-  ].sort();
 
   const filteredNetworks = networks.filter((network) =>
     network.toLowerCase().includes(searchNetwork.toLowerCase())

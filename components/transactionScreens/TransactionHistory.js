@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { View, Text, ScrollView, TouchableOpacity, Modal } from "react-native";
+import {
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  Modal,
+  Image,
+} from "react-native";
+import { initialAdditionalCryptos } from "../../config/cryptosData"; // 修改为实际路径
 
 const TransactionHistory = ({
   TransactionsScreenStyle,
