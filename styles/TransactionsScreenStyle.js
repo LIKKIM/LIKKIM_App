@@ -318,8 +318,9 @@ const TransactionsScreenStyles = (isDarkMode) => {
     },
     historyItem: {
       padding: 10,
-      borderBottomWidth: 1,
-      borderBottomColor: historyItemBorderColor,
+      marginBottom: 10,
+      /*       borderBottomWidth: 1,
+      borderBottomColor: historyItemBorderColor, */
     },
     historyItemText: {
       fontSize: 16,

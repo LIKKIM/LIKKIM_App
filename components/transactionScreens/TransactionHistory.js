@@ -15,6 +15,7 @@ const TransactionHistory = ({
       </Text>
       <ScrollView
         contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
+        style={{ flex: 1, width: "100%" }}
       >
         {transactionHistory.length === 0 ? (
           <Text style={TransactionsScreenStyle.noHistoryText}>
@@ -26,7 +27,22 @@ const TransactionHistory = ({
               key={index}
               onPress={() => setSelectedTransaction(transaction)}
             >
-              <View style={TransactionsScreenStyle.historyItem}>
+              <View
+                style={[
+                  TransactionsScreenStyle.historyItem,
+                  {
+                    backgroundColor:
+                      transaction.state.toLowerCase() === "success"
+                        ? "rgba(71, 180, 128, 0.05)" // 绿色，透明度 0.3
+                        : "rgba(210, 70, 75, 0.05)", // 红色，透明度 0.3
+                    borderLeftWidth: 3, // 设置左边框宽度
+                    borderLeftColor:
+                      transaction.state.toLowerCase() === "success"
+                        ? "#47B480" // 绿色
+                        : "#D2464B", // 红色
+                  },
+                ]}
+              >
                 <View>
                   <Text style={TransactionsScreenStyle.historyItemText}>
                     {`${new Date(
@@ -69,7 +85,7 @@ const TransactionHistory = ({
                       <Text
                         style={{
                           color:
-                            transaction.state === "success"
+                            transaction.state.toLowerCase() === "success"
                               ? "#47B480"
                               : "#D2464B",
                         }}
@@ -92,26 +108,17 @@ const TransactionHistory = ({
         animationType="slide"
         onRequestClose={() => setSelectedTransaction(null)}
       >
-        <View
-          style={{
-            flex: 1,
-            justifyContent: "center",
-            alignItems: "center",
-            backgroundColor: "rgba(0,0,0,0.5)",
-          }}
-        >
+        <View style={TransactionsScreenStyle.modalContainer}>
           <View
-            style={{
-              backgroundColor: "#fff",
-              padding: 20,
-              borderRadius: 10,
-              width: "80%",
-            }}
+            style={[
+              TransactionsScreenStyle.cardContainer,
+              { alignItems: "flex-start" },
+            ]}
           >
             {selectedTransaction && (
               <>
-                {/* 显示列表中上半部分的交易信息 */}
-                <View>
+                {/* 显示交易概要信息 */}
+                <View style={{ width: "100%" }}>
                   <View
                     style={{
                       flexDirection: "row",
@@ -122,7 +129,7 @@ const TransactionHistory = ({
                     <Text
                       style={[
                         TransactionsScreenStyle.historyItemText,
-                        { fontSize: 16, fontWeight: "bold" },
+                        { fontSize: 16, fontWeight: "bold", textAlign: "left" },
                       ]}
                     >
                       {selectedTransaction.address ===
@@ -133,7 +140,7 @@ const TransactionHistory = ({
                     <Text
                       style={[
                         TransactionsScreenStyle.historyItemText,
-                        { fontSize: 16, fontWeight: "bold" },
+                        { fontSize: 16, fontWeight: "bold", textAlign: "left" },
                       ]}
                     >
                       {selectedTransaction.amount} {selectedTransaction.symbol}
@@ -145,11 +152,17 @@ const TransactionHistory = ({
                       justifyContent: "space-between",
                     }}
                   >
-                    <Text style={TransactionsScreenStyle.historyItemText}>
+                    <Text
+                      style={[
+                        TransactionsScreenStyle.historyItemText,
+                        { textAlign: "left" },
+                      ]}
+                    >
                       <Text
                         style={{
                           color:
-                            selectedTransaction.state === "success"
+                            selectedTransaction.state.toLowerCase() ===
+                            "success"
                               ? "#47B480"
                               : "#D2464B",
                         }}
@@ -158,7 +171,12 @@ const TransactionHistory = ({
                       </Text>
                     </Text>
                   </View>
-                  <Text style={TransactionsScreenStyle.historyItemText}>
+                  <Text
+                    style={[
+                      TransactionsScreenStyle.historyItemText,
+                      { textAlign: "left" },
+                    ]}
+                  >
                     <Text style={{ fontWeight: "bold" }}>
                       {`Transaction Time: `}
                     </Text>
@@ -168,11 +186,11 @@ const TransactionHistory = ({
                   </Text>
                 </View>
 
-                {/* 显示列表中下半部分的详细信息 */}
+                {/* 显示交易详细信息 */}
                 <Text
                   style={[
                     TransactionsScreenStyle.historyItemText,
-                    { lineHeight: 24 },
+                    { lineHeight: 24, textAlign: "left" },
                   ]}
                 >
                   <Text style={{ fontWeight: "bold" }}>{`From: `}</Text>
@@ -181,7 +199,7 @@ const TransactionHistory = ({
                 <Text
                   style={[
                     TransactionsScreenStyle.historyItemText,
-                    { lineHeight: 24 },
+                    { lineHeight: 24, textAlign: "left" },
                   ]}
                 >
                   <Text style={{ fontWeight: "bold" }}>{`To: `}</Text>
@@ -190,7 +208,7 @@ const TransactionHistory = ({
                 <Text
                   style={[
                     TransactionsScreenStyle.historyItemText,
-                    { lineHeight: 24 },
+                    { lineHeight: 24, textAlign: "left" },
                   ]}
                 >
                   <Text style={{ fontWeight: "bold" }}>
@@ -198,28 +216,37 @@ const TransactionHistory = ({
                   </Text>
                   {selectedTransaction.txid}
                 </Text>
-                <Text style={TransactionsScreenStyle.historyItemText}>
+                <Text
+                  style={[
+                    TransactionsScreenStyle.historyItemText,
+                    { textAlign: "left" },
+                  ]}
+                >
                   <Text style={{ fontWeight: "bold" }}>{`Network Fee: `}</Text>
                   {selectedTransaction.txFee}
                 </Text>
-                <Text style={TransactionsScreenStyle.historyItemText}>
+                <Text
+                  style={[
+                    TransactionsScreenStyle.historyItemText,
+                    { textAlign: "left" },
+                  ]}
+                >
                   <Text style={{ fontWeight: "bold" }}>{`Block Height: `}</Text>
                   {selectedTransaction.height}
                 </Text>
 
                 <TouchableOpacity
                   onPress={() => setSelectedTransaction(null)}
-                  style={{ marginTop: 20 }}
+                  style={{ marginTop: 20, alignSelf: "stretch" }}
                 >
-                  <Text
-                    style={{
-                      textAlign: "center",
-                      color: "blue",
-                      fontWeight: "bold",
-                    }}
+                  <TouchableOpacity
+                    onPress={() => setSelectedTransaction(null)}
+                    style={TransactionsScreenStyle.cancelButton}
                   >
-                    {t("Close")}
-                  </Text>
+                    <Text style={TransactionsScreenStyle.cancelButtonText}>
+                      {t("Close")}
+                    </Text>
+                  </TouchableOpacity>
                 </TouchableOpacity>
               </>
             )}
