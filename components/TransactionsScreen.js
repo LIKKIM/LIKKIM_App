@@ -269,6 +269,12 @@ function TransactionsScreen() {
             pageSize: 10,
           };
 
+          // 打印发出的值
+          console.log(
+            `发送请求 for ${crypto.queryChainName} ${crypto.address}, page ${pageNumber}:`,
+            postData
+          );
+
           try {
             const response = await fetch(
               "https://bt.likkim.com/api/wallet/queryTransaction",
@@ -281,6 +287,13 @@ function TransactionsScreen() {
               }
             );
             const data = await response.json();
+
+            // 打印返回的值
+            console.log(
+              `返回数据 for ${crypto.queryChainName} ${crypto.address}, page ${pageNumber}:`,
+              data
+            );
+
             // 处理返回值的结构：
             // {
             //    "code": "0",
@@ -294,20 +307,18 @@ function TransactionsScreen() {
               data.data.length > 0
             ) {
               // 只保留你关心的字段
-              const processedTransactions = data.data.map((tx) => {
-                return {
-                  state: tx.state,
-                  amount: tx.amount,
-                  address: tx.address,
-                  fromAddress: tx.fromAddress,
-                  toAddress: tx.toAddress,
-                  symbol: tx.symbol,
-                  transactionTime: tx.transactionTime,
-                };
-              });
+              const processedTransactions = data.data.map((tx) => ({
+                state: tx.state,
+                amount: tx.amount,
+                address: tx.address,
+                fromAddress: tx.fromAddress,
+                toAddress: tx.toAddress,
+                symbol: tx.symbol,
+                transactionTime: tx.transactionTime,
+              }));
               // 打印当前卡片处理后的返回结果
               console.log(
-                `返回结果 for ${crypto.queryChainName} ${crypto.address}:`,
+                `处理后的返回结果 for ${crypto.queryChainName} ${crypto.address}:`,
                 processedTransactions
               );
               allTransactions = allTransactions.concat(processedTransactions);
