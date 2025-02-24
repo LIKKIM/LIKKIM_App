@@ -38,7 +38,7 @@ const TransactionHistory = ({
                     <Text
                       style={[
                         TransactionsScreenStyle.historyItemText,
-                        { fontSize: 18, fontWeight: "bold" },
+                        { fontSize: 16, fontWeight: "bold" },
                       ]}
                     >
                       {transaction.address === transaction.fromAddress
@@ -48,7 +48,7 @@ const TransactionHistory = ({
                     <Text
                       style={[
                         TransactionsScreenStyle.historyItemText,
-                        { fontSize: 18, fontWeight: "bold" },
+                        { fontSize: 16, fontWeight: "bold" },
                       ]}
                     >
                       {transaction.amount} {transaction.symbol}
@@ -72,15 +72,12 @@ const TransactionHistory = ({
                         {transaction.state}
                       </Text>
                     </Text>
-                  </View>
-                  <Text style={TransactionsScreenStyle.historyItemText}>
-                    <Text style={{ fontWeight: "bold" }}>
-                      {`Transaction Time: `}
+                    <Text style={TransactionsScreenStyle.historyItemText}>
+                      {`${new Date(
+                        Number(transaction.transactionTime)
+                      ).toLocaleString()}`}
                     </Text>
-                    {`${new Date(
-                      Number(transaction.transactionTime)
-                    ).toLocaleString()}`}
-                  </Text>
+                  </View>
                 </View>
               </View>
             </TouchableOpacity>
@@ -125,7 +122,7 @@ const TransactionHistory = ({
                     <Text
                       style={[
                         TransactionsScreenStyle.historyItemText,
-                        { fontSize: 18, fontWeight: "bold" },
+                        { fontSize: 16, fontWeight: "bold" },
                       ]}
                     >
                       {selectedTransaction.address ===
@@ -136,7 +133,7 @@ const TransactionHistory = ({
                     <Text
                       style={[
                         TransactionsScreenStyle.historyItemText,
-                        { fontSize: 18, fontWeight: "bold" },
+                        { fontSize: 16, fontWeight: "bold" },
                       ]}
                     >
                       {selectedTransaction.amount} {selectedTransaction.symbol}
