@@ -242,6 +242,83 @@ function TransactionsScreen() {
     loadTransactionHistory();
   }, []); // 依赖数组为空，确保此操作仅在组件挂载时执行一次
 
+  // 新增：获取所有卡片的交易历史记录（包含去重与分页处理）
+  const fetchAllTransactionHistory = async () => {
+    if (initialAdditionalCryptos && initialAdditionalCryptos.length > 0) {
+      // 去重：确保每个 { queryChainName, address } 组合只处理一次
+      const uniqueCryptos = initialAdditionalCryptos.filter(
+        (crypto, index, self) =>
+          index ===
+          self.findIndex(
+            (c) =>
+              c.queryChainName === crypto.queryChainName &&
+              c.address === crypto.address
+          )
+      );
+
+      // 对每个唯一卡片发起交易历史查询
+      const requests = uniqueCryptos.map(async (crypto) => {
+        let pageNumber = 1;
+        let allTransactions = [];
+        let continueFetching = true;
+        while (continueFetching) {
+          const postData = {
+            chain: crypto.queryChainName, // 使用卡片中的 queryChainName
+            address: crypto.address, // 使用卡片中的 address
+            page: pageNumber,
+            pageSize: 10,
+          };
+          // 打印 postData
+          console.log("当前请求数据:", postData);
+          try {
+            const response = await fetch(
+              "https://bt.likkim.com/api/wallet/queryTransaction",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(postData),
+              }
+            );
+            const data = await response.json();
+            // 假设返回数据格式为 { transactions: [...] }
+            if (data && data.transactions && data.transactions.length > 0) {
+              allTransactions = allTransactions.concat(data.transactions);
+              pageNumber++;
+            } else {
+              continueFetching = false;
+            }
+          } catch (error) {
+            console.error(
+              "查询交易历史失败, chain:",
+              crypto.queryChainName,
+              "address:",
+              crypto.address,
+              error
+            );
+            continueFetching = false;
+          }
+        }
+        return allTransactions;
+      });
+
+      // 等待所有请求完成，并合并所有交易记录
+      const results = await Promise.all(requests);
+      const mergedTransactions = results.reduce(
+        (acc, transactions) => acc.concat(transactions),
+        []
+      );
+      console.log("所有卡片的交易历史结果:", mergedTransactions);
+      setTransactionHistory(mergedTransactions);
+    }
+  };
+
+  // 使用 useEffect 在组件挂载或 initialAdditionalCryptos 变化时加载交易历史
+  useEffect(() => {
+    fetchAllTransactionHistory();
+  }, [initialAdditionalCryptos]);
+
   // 在 TransactionsScreen 组件的 useEffect 或合适位置添加代码来获取手续费
   const fetchTransactionFee = async () => {
     try {
