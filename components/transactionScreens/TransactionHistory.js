@@ -26,8 +26,6 @@ const TransactionHistory = ({
     useState(false);
 
   // 根据 transactionHistory 计算每笔交易对应的链卡片
-  // 遍历 transactionHistory，利用 initialAdditionalCryptos 进行匹配，
-  // 将匹配到的 card 按 chainShortName 去重
   const transactionChainCards = useMemo(() => {
     const map = new Map();
     transactionHistory.forEach((tx) => {
@@ -52,6 +50,7 @@ const TransactionHistory = ({
     return Array.from(map.values());
   }, [transactionHistory]);
 
+  // 筛选出符合当前选择链的交易记录，剔除 amount 为 0 的交易记录
   const filteredTransactionHistory =
     selectedChain === "All"
       ? transactionHistory.filter((tx) => tx.amount > 0) // Filter out transactions with amount 0
@@ -77,6 +76,8 @@ const TransactionHistory = ({
           return false;
         });
 
+  const shouldDisplayChainFilterModal = filteredTransactionHistory.length > 0;
+
   return (
     <View style={TransactionsScreenStyle.historyContainer}>
       <View
@@ -98,7 +99,9 @@ const TransactionHistory = ({
           {t("Transaction History")}
         </Text>
         <TouchableOpacity
-          onPress={() => setChainFilterModalVisible(true)}
+          onPress={() =>
+            shouldDisplayChainFilterModal && setChainFilterModalVisible(true)
+          }
           style={{ flexDirection: "row", alignItems: "center" }}
         >
           {selectedChain === "All" ? (
@@ -452,18 +455,20 @@ const TransactionHistory = ({
           </View>
         </View>
       </Modal>
-      <TransactionChainFilterModal
-        isVisible={isChainFilterModalVisible}
-        onClose={() => setChainFilterModalVisible(false)}
-        selectedChain={selectedChain}
-        handleSelectChain={(chain) => {
-          setSelectedChain(chain);
-          setChainFilterModalVisible(false);
-        }}
-        chainCards={transactionChainCards}
-        isDarkMode={isDarkMode}
-        t={t}
-      />
+      {shouldDisplayChainFilterModal && (
+        <TransactionChainFilterModal
+          isVisible={isChainFilterModalVisible}
+          onClose={() => setChainFilterModalVisible(false)}
+          selectedChain={selectedChain}
+          handleSelectChain={(chain) => {
+            setSelectedChain(chain);
+            setChainFilterModalVisible(false);
+          }}
+          chainCards={transactionChainCards}
+          isDarkMode={isDarkMode}
+          t={t}
+        />
+      )}
     </View>
   );
 };
