@@ -270,11 +270,11 @@ function TransactionsScreen() {
           };
 
           // 打印发出的值
-          console.log(
+          /*           console.log(
             `发送请求 for ${crypto.queryChainName} ${crypto.address}, page ${pageNumber}:`,
             postData
           );
-
+ */
           try {
             const response = await fetch(
               "https://bt.likkim.com/api/wallet/queryTransaction",
@@ -289,17 +289,11 @@ function TransactionsScreen() {
             const data = await response.json();
 
             // 打印返回的值
-            console.log(
+            /*          console.log(
               `返回数据 for ${crypto.queryChainName} ${crypto.address}, page ${pageNumber}:`,
               data
-            );
+            ); */
 
-            // 处理返回值的结构：
-            // {
-            //    "code": "0",
-            //    "msg": "success",
-            //    "data": [ ... ]
-            // }
             if (
               data &&
               data.code === "0" &&
