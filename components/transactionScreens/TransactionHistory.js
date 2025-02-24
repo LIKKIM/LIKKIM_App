@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useContext,
-} from "react";
+import React, { useState, useEffect, useMemo, useContext } from "react";
 import {
   View,
   Text,
@@ -17,20 +11,69 @@ import { initialAdditionalCryptos } from "../../config/cryptosData"; // 修改�
 import { CHAIN_NAMES } from "../../config/chainConfig";
 import { CryptoContext, DarkModeContext, usdtCrypto } from "../CryptoContext";
 import ChainSelectionModal from "../modal/ChainSelectionModal"; // 导入 ChainSelectionModal
+import TransactionChainFilterModal from "../modal/TransactionChainFilterModal";
 
 const TransactionHistory = ({
   TransactionsScreenStyle,
   t,
   transactionHistory,
-  cryptoCards,
+  cryptoCards, // 原来传入的，但这里不再直接使用它来筛选链
 }) => {
   const [selectedTransaction, setSelectedTransaction] = useState(null);
-  const [selectedChainShortName, setSelectedChainShortName] =
-    useState(CHAIN_NAMES);
   const [selectedChain, setSelectedChain] = useState("All");
   const { isDarkMode } = useContext(DarkModeContext);
-  const [isChainSelectionModalVisible, setChainSelectionModalVisible] =
+  const [isChainFilterModalVisible, setChainFilterModalVisible] =
     useState(false);
+
+  // 根据 transactionHistory 计算每笔交易对应的链卡片
+  // 遍历 transactionHistory，利用 initialAdditionalCryptos 进行匹配，
+  // 将匹配到的 card 按 chainShortName 去重
+  const transactionChainCards = useMemo(() => {
+    const map = new Map();
+    transactionHistory.forEach((tx) => {
+      const matchedItems = initialAdditionalCryptos.filter((item) => {
+        if (item.address.trim() === "Click the Verify Address Button") {
+          return (
+            item.shortName.trim().toLowerCase() ===
+            tx.symbol.trim().toLowerCase()
+          );
+        }
+        return (
+          item.address.trim().toLowerCase() === tx.address.trim().toLowerCase()
+        );
+      });
+      if (matchedItems.length > 0) {
+        const card = matchedItems[0];
+        if (!map.has(card.chainShortName)) {
+          map.set(card.chainShortName, card);
+        }
+      }
+    });
+    return Array.from(map.values());
+  }, [transactionHistory]);
+
+  // 筛选出符合当前选择链的交易记录
+  const filteredTransactionHistory =
+    selectedChain === "All"
+      ? transactionHistory
+      : transactionHistory.filter((transaction) => {
+          const matchedItems = initialAdditionalCryptos.filter((item) => {
+            if (item.address.trim() === "Click the Verify Address Button") {
+              return (
+                item.shortName.trim().toLowerCase() ===
+                transaction.symbol.trim().toLowerCase()
+              );
+            }
+            return (
+              item.address.trim().toLowerCase() ===
+              transaction.address.trim().toLowerCase()
+            );
+          });
+          if (matchedItems.length > 0) {
+            return matchedItems[0].chainShortName === selectedChain;
+          }
+          return false;
+        });
 
   return (
     <View style={TransactionsScreenStyle.historyContainer}>
@@ -53,11 +96,8 @@ const TransactionHistory = ({
           {t("Transaction History")}
         </Text>
         <TouchableOpacity
-          onPress={() => setChainSelectionModalVisible(true)}
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-          }}
+          onPress={() => setChainFilterModalVisible(true)}
+          style={{ flexDirection: "row", alignItems: "center" }}
         >
           {selectedChain === "All" ? (
             <Image
@@ -71,40 +111,27 @@ const TransactionHistory = ({
               }}
             />
           ) : (
-            cryptoCards.length > 0 &&
-            (() => {
-              const uniqueChainIcons = new Set();
-              return cryptoCards
-                .filter((card) => {
-                  if (
-                    selectedChain === card.chainShortName &&
-                    card.chainIcon &&
-                    !uniqueChainIcons.has(card.chainShortName)
-                  ) {
-                    uniqueChainIcons.add(card.chainShortName);
-                    return true;
-                  }
-                  return false;
-                })
-                .map((card, index) => (
-                  <Image
-                    key={`${card.chainShortName}-${index}`}
-                    source={card.chainIcon}
-                    style={{
-                      width: 24,
-                      height: 24,
-                      marginRight: 8,
-                      backgroundColor: "rgba(255, 255, 255, 0.2)",
-                      borderRadius: 12,
-                    }}
-                  />
-                ));
-            })()
+            transactionChainCards.length > 0 &&
+            transactionChainCards
+              .filter((card) => card.chainShortName === selectedChain)
+              .map((card, index) => (
+                <Image
+                  key={`${card.chainShortName}-${index}`}
+                  source={card.chainIcon}
+                  style={{
+                    width: 24,
+                    height: 24,
+                    marginRight: 8,
+                    backgroundColor: "rgba(255, 255, 255, 0.2)",
+                    borderRadius: 12,
+                  }}
+                />
+              ))
           )}
           <Text style={{ color: isDarkMode ? "#FFFFFF" : "#000000" }}>
             {selectedChain === "All"
               ? t("All Chains")
-              : cryptoCards.find(
+              : transactionChainCards.find(
                   (card) => card.chainShortName === selectedChain
                 )?.chain}
           </Text>
@@ -115,12 +142,12 @@ const TransactionHistory = ({
         contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
         style={{ flex: 1, width: "100%" }}
       >
-        {transactionHistory.length === 0 ? (
+        {filteredTransactionHistory.length === 0 ? (
           <Text style={TransactionsScreenStyle.noHistoryText}>
             {t("No Histories")}
           </Text>
         ) : (
-          transactionHistory.map((transaction, index) => {
+          filteredTransactionHistory.map((transaction, index) => {
             const matchedItems = initialAdditionalCryptos.filter((item) => {
               if (item.address.trim() === "Click the Verify Address Button") {
                 return (
@@ -415,16 +442,15 @@ const TransactionHistory = ({
           </View>
         </View>
       </Modal>
-      {/* 在这里添加 ChainSelectionModal */}
-      <ChainSelectionModal
-        isVisible={isChainSelectionModalVisible}
-        onClose={() => setChainSelectionModalVisible(false)}
+      <TransactionChainFilterModal
+        isVisible={isChainFilterModalVisible}
+        onClose={() => setChainFilterModalVisible(false)}
         selectedChain={selectedChain}
         handleSelectChain={(chain) => {
           setSelectedChain(chain);
-          setChainSelectionModalVisible(false);
+          setChainFilterModalVisible(false);
         }}
-        cryptoCards={cryptoCards}
+        chainCards={transactionChainCards}
         isDarkMode={isDarkMode}
         t={t}
       />
