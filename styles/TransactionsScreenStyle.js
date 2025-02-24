@@ -307,7 +307,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
     },
     historyContainer: {
       marginTop: 22,
-      padding: 20,
+      padding: 10,
       paddingTop: 50,
       backgroundColor: historyContainerBackgroundColor,
       alignItems: "center",

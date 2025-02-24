@@ -42,8 +42,8 @@ const TransactionHistory = ({
                       ]}
                     >
                       {transaction.address === transaction.fromAddress
-                        ? t("Send")
-                        : t("Receive")}
+                        ? t("Receive")
+                        : t("Send")}
                     </Text>
                     <Text
                       style={[
@@ -61,7 +61,6 @@ const TransactionHistory = ({
                     }}
                   >
                     <Text style={TransactionsScreenStyle.historyItemText}>
-                      <Text style={{ fontWeight: "bold" }}>{`State: `}</Text>
                       <Text
                         style={{
                           color:
@@ -150,7 +149,6 @@ const TransactionHistory = ({
                     }}
                   >
                     <Text style={TransactionsScreenStyle.historyItemText}>
-                      <Text style={{ fontWeight: "bold" }}>{`State: `}</Text>
                       <Text
                         style={{
                           color:
