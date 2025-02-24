@@ -22,61 +22,65 @@ const TransactionHistory = ({
         ) : (
           transactionHistory.map((transaction, index) => (
             <View key={index} style={TransactionsScreenStyle.historyItem}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
-              >
-                <Text
-                  style={[
-                    TransactionsScreenStyle.historyItemText,
-                    { fontSize: 18, fontWeight: "bold" },
-                  ]}
+              <View>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
                 >
-                  {transaction.transactionType === "Send"
-                    ? t("Send")
-                    : t("Receive")}
-                </Text>
-
-                <Text
-                  style={[
-                    TransactionsScreenStyle.historyItemText,
-                    { fontSize: 18, fontWeight: "bold" },
-                  ]}
-                >
-                  {transaction.amount} {`${transaction.transactionSymbol}`}
-                </Text>
-              </View>
-
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Text style={TransactionsScreenStyle.historyItemText}>
-                  <Text style={{ fontWeight: "bold" }}>{`State: `}</Text>
                   <Text
-                    style={{
-                      color:
-                        transaction.state === "success" ? "#47B480" : "inherit",
-                    }}
+                    style={[
+                      TransactionsScreenStyle.historyItemText,
+                      { fontSize: 18, fontWeight: "bold" },
+                    ]}
                   >
-                    {transaction.state}
+                    {transaction.address === transaction.fromAddress
+                      ? t("Send")
+                      : t("Receive")}
                   </Text>
+
+                  <Text
+                    style={[
+                      TransactionsScreenStyle.historyItemText,
+                      { fontSize: 18, fontWeight: "bold" },
+                    ]}
+                  >
+                    {transaction.amount} {`${transaction.symbol}`}
+                  </Text>
+                </View>
+
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <Text style={TransactionsScreenStyle.historyItemText}>
+                    <Text style={{ fontWeight: "bold" }}>{`State: `}</Text>
+                    <Text
+                      style={{
+                        color:
+                          transaction.state === "success"
+                            ? "#47B480"
+                            : "inherit",
+                      }}
+                    >
+                      {transaction.state}
+                    </Text>
+                  </Text>
+                </View>
+
+                <Text style={TransactionsScreenStyle.historyItemText}>
+                  <Text
+                    style={{ fontWeight: "bold" }}
+                  >{`Transaction Time: `}</Text>
+                  {`${new Date(
+                    Number(transaction.transactionTime)
+                  ).toLocaleString()}`}
                 </Text>
               </View>
-
-              <Text style={TransactionsScreenStyle.historyItemText}>
-                <Text
-                  style={{ fontWeight: "bold" }}
-                >{`Transaction Time: `}</Text>
-                {`${new Date(
-                  transaction.transactionTime * 1000
-                ).toLocaleString()}`}
-              </Text>
 
               <Text
                 style={[

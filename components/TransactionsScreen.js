@@ -301,6 +301,8 @@ function TransactionsScreen() {
                   address: tx.address,
                   fromAddress: tx.fromAddress,
                   toAddress: tx.toAddress,
+                  symbol: tx.symbol,
+                  transactionTime: tx.transactionTime,
                 };
               });
               // 打印当前卡片处理后的返回结果
