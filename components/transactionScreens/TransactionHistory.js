@@ -1,4 +1,10 @@
-import React, { useState } from "react";
+import React, {
+  useState,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useContext,
+} from "react";
 import {
   View,
   Text,
@@ -8,19 +14,102 @@ import {
   Image,
 } from "react-native";
 import { initialAdditionalCryptos } from "../../config/cryptosData"; // 修改为实际路径
-
+import { CHAIN_NAMES } from "../../config/chainConfig";
+import { CryptoContext, DarkModeContext, usdtCrypto } from "../CryptoContext";
 const TransactionHistory = ({
   TransactionsScreenStyle,
   t,
   transactionHistory,
 }) => {
   const [selectedTransaction, setSelectedTransaction] = useState(null);
+  const [selectedChainShortName, setSelectedChainShortName] =
+    useState(CHAIN_NAMES);
+  const [selectedChain, setSelectedChain] = useState("All");
+  const { isDarkMode } = useContext(DarkModeContext);
+  const [isChainSelectionModalVisible, setChainSelectionModalVisible] =
+    useState(false);
+  /*   const chainFilteredCards = cryptoCards.filter((card) =>
+    selectedChainShortName.includes(card?.chainShortName)
+  ); */
 
   return (
     <View style={TransactionsScreenStyle.historyContainer}>
-      <Text style={TransactionsScreenStyle.historyTitle}>
-        {t("Transaction History")}
-      </Text>
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+          position: "relative",
+          marginBottom: 10,
+        }}
+      >
+        <Text
+          style={[
+            TransactionsScreenStyle.historyTitle,
+            { position: "relative", left: 0, top: 0 },
+          ]}
+        >
+          {t("Transaction History")}
+        </Text>
+        <TouchableOpacity
+          onPress={() => setChainSelectionModalVisible(true)}
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
+          {selectedChain === "All" ? (
+            <Image
+              source={require("../../assets/WalletScreenLogo.png")}
+              style={{
+                width: 24,
+                height: 24,
+                marginRight: 8,
+                backgroundColor: "rgba(0, 0, 0, 0.05)",
+                borderRadius: 12,
+              }}
+            />
+          ) : (
+            cryptoCards.length > 0 &&
+            (() => {
+              const uniqueChainIcons = new Set();
+              return cryptoCards
+                .filter((card) => {
+                  if (
+                    selectedChain === card.chainShortName &&
+                    card.chainIcon &&
+                    !uniqueChainIcons.has(card.chainShortName)
+                  ) {
+                    uniqueChainIcons.add(card.chainShortName);
+                    return true;
+                  }
+                  return false;
+                })
+                .map((card, index) => (
+                  <Image
+                    key={`${card.chainShortName}-${index}`}
+                    source={card.chainIcon}
+                    style={{
+                      width: 24,
+                      height: 24,
+                      marginRight: 8,
+                      backgroundColor: "rgba(255, 255, 255, 0.2)",
+                      borderRadius: 12,
+                    }}
+                  />
+                ));
+            })()
+          )}
+          <Text style={{ color: isDarkMode ? "#FFFFFF" : "#000000" }}>
+            {selectedChain === "All"
+              ? t("All Chains")
+              : cryptoCards.find(
+                  (card) => card.chainShortName === selectedChain
+                )?.chain}
+          </Text>
+        </TouchableOpacity>
+      </View>
+
       <ScrollView
         contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
         style={{ flex: 1, width: "100%" }}
@@ -222,7 +311,6 @@ const TransactionHistory = ({
           })
         )}
       </ScrollView>
-
       {/* Modal 显示详细信息 */}
       <Modal
         visible={!!selectedTransaction}

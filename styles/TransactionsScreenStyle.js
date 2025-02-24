@@ -308,7 +308,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
     historyContainer: {
       marginTop: 22,
       padding: 10,
-      paddingTop: 50,
+      paddingTop: 10,
       backgroundColor: historyContainerBackgroundColor,
       alignItems: "center",
       justifyContent: "center",
@@ -328,9 +328,6 @@ const TransactionsScreenStyles = (isDarkMode) => {
       marginBottom: 10,
     },
     historyTitle: {
-      position: "absolute",
-      left: 20,
-      top: 16,
       fontSize: 16,
       color: textColor,
       fontWeight: "bold",
