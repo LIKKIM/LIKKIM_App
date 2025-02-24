@@ -95,7 +95,7 @@ const TransactionHistory = ({
                         transaction.state.toLowerCase() === "success"
                           ? "#47B480"
                           : "#D2464B",
-                      marginVertical: 8,
+                      marginVertical: 4,
                       padding: 10,
                     },
                   ]}
@@ -107,20 +107,20 @@ const TransactionHistory = ({
                   </Text>
                   {/* 外层容器，左右排列 */}
                   <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    {/* 左侧：图片容器（固定宽度，以便右侧内容对齐） */}
+                    {/* 左侧：图片组合 */}
                     <View
-                      style={{ position: "relative", width: 70, height: 70 }}
+                      style={{ position: "relative", width: 60, height: 50 }}
                     >
                       {["cardIconContainer", "cardChainIconContainer"].map(
-                        (styleKey, i) => (
+                        (_, i) => (
                           <View
                             key={i}
                             style={
                               i === 0
                                 ? {
-                                    // Container for the card icon positioned at the top left
+                                    // 数字货币图标容器
                                     position: "absolute",
-                                    top: 28,
+                                    top: 0,
                                     left: 10,
                                     width: 42,
                                     height: 42,
@@ -131,9 +131,9 @@ const TransactionHistory = ({
                                     overflow: "hidden",
                                   }
                                 : {
-                                    // Container for the chain icon positioned relative to the card icon
+                                    // 链图标容器
                                     position: "absolute",
-                                    top: 54,
+                                    top: 26,
                                     left: 38,
                                     width: 16,
                                     height: 16,
@@ -151,14 +151,8 @@ const TransactionHistory = ({
                               source={i === 0 ? cryptoIcon : chainIcon}
                               style={
                                 i === 0
-                                  ? {
-                                      width: 42,
-                                      height: 42,
-                                    }
-                                  : {
-                                      width: 14,
-                                      height: 14,
-                                    }
+                                  ? { width: 42, height: 42 }
+                                  : { width: 14, height: 14 }
                               }
                               resizeMode="contain"
                             />
@@ -167,8 +161,14 @@ const TransactionHistory = ({
                       )}
                     </View>
 
-                    {/* 右侧：交易详情，留出一定的左边距 */}
-                    <View style={{ flex: 1, marginLeft: 10 }}>
+                    {/* 右侧：交易详情 */}
+                    <View
+                      style={{
+                        flex: 1,
+                        marginLeft: 10,
+                        justifyContent: "center",
+                      }}
+                    >
                       <View
                         style={{
                           flexDirection: "row",
