@@ -28,6 +28,11 @@ const TransactionHistory = ({
             >
               <View style={TransactionsScreenStyle.historyItem}>
                 <View>
+                  <Text style={TransactionsScreenStyle.historyItemText}>
+                    {`${new Date(
+                      Number(transaction.transactionTime)
+                    ).toLocaleString()}`}
+                  </Text>
                   <View
                     style={{
                       flexDirection: "row",
@@ -71,11 +76,6 @@ const TransactionHistory = ({
                       >
                         {transaction.state}
                       </Text>
-                    </Text>
-                    <Text style={TransactionsScreenStyle.historyItemText}>
-                      {`${new Date(
-                        Number(transaction.transactionTime)
-                      ).toLocaleString()}`}
                     </Text>
                   </View>
                 </View>
