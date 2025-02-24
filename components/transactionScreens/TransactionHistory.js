@@ -159,6 +159,20 @@ const TransactionHistory = ({
                   </Text>
                 </View>
 
+                <Text
+                  style={[
+                    TransactionsScreenStyle.historyItemText,
+                    { textAlign: "left" },
+                  ]}
+                >
+                  <Text style={{ fontWeight: "bold" }}>
+                    {`Transaction Time: `}
+                  </Text>
+                  {`${new Date(
+                    Number(selectedTransaction.transactionTime)
+                  ).toLocaleString()}`}
+                </Text>
+
                 {/* 显示交易详细信息 */}
                 <Text
                   style={[
