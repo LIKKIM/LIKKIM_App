@@ -52,10 +52,9 @@ const TransactionHistory = ({
     return Array.from(map.values());
   }, [transactionHistory]);
 
-  // 筛选出符合当前选择链的交易记录
   const filteredTransactionHistory =
     selectedChain === "All"
-      ? transactionHistory
+      ? transactionHistory.filter((tx) => tx.amount > 0) // Filter out transactions with amount 0
       : transactionHistory.filter((transaction) => {
           const matchedItems = initialAdditionalCryptos.filter((item) => {
             if (item.address.trim() === "Click the Verify Address Button") {
@@ -70,7 +69,10 @@ const TransactionHistory = ({
             );
           });
           if (matchedItems.length > 0) {
-            return matchedItems[0].chainShortName === selectedChain;
+            return (
+              matchedItems[0].chainShortName === selectedChain &&
+              transaction.amount > 0 // Filter out amount 0
+            );
           }
           return false;
         });
