@@ -139,7 +139,12 @@ const TransactionHistory = ({
       </View>
 
       <ScrollView
-        contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
+        contentContainerStyle={{
+          flexGrow: 1,
+          justifyContent: "center",
+          justifyContent:
+            transactionHistory.length === 0 ? "center" : "flex-start",
+        }}
         style={{ flex: 1, width: "100%" }}
       >
         {filteredTransactionHistory.length === 0 ? (
