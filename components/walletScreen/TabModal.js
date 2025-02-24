@@ -174,7 +174,7 @@ const TabModal = ({
                                 color:
                                   transaction.state === "success"
                                     ? "#47B480"
-                                    : "inherit",
+                                    : "#D2464B",
                               }}
                             >
                               {transaction.state}

@@ -66,7 +66,7 @@ const TransactionHistory = ({
                           color:
                             transaction.state === "success"
                               ? "#47B480"
-                              : "inherit",
+                              : "#D2464B",
                         }}
                       >
                         {transaction.state}
@@ -151,7 +151,7 @@ const TransactionHistory = ({
                           color:
                             selectedTransaction.state === "success"
                               ? "#47B480"
-                              : "inherit",
+                              : "#D2464B",
                         }}
                       >
                         {selectedTransaction.state}
