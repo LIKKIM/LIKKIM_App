@@ -285,7 +285,10 @@ const TransactionHistory = ({
                             { fontSize: 16, fontWeight: "bold" },
                           ]}
                         >
-                          {transaction.amount} {transaction.symbol}
+                          {transaction.address === transaction.fromAddress
+                            ? `${transaction.amount}`
+                            : `-${transaction.amount}`}{" "}
+                          {transaction.symbol}
                         </Text>
                       </View>
                       <View
