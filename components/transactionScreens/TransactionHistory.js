@@ -1,12 +1,13 @@
-// TransactionHistory.js
-import React from "react";
-import { View, Text, ScrollView } from "react-native";
+import React, { useState } from "react";
+import { View, Text, ScrollView, TouchableOpacity, Modal } from "react-native";
 
 const TransactionHistory = ({
   TransactionsScreenStyle,
   t,
   transactionHistory,
 }) => {
+  const [selectedTransaction, setSelectedTransaction] = useState(null);
+
   return (
     <View style={TransactionsScreenStyle.historyContainer}>
       <Text style={TransactionsScreenStyle.historyTitle}>
@@ -21,111 +22,142 @@ const TransactionHistory = ({
           </Text>
         ) : (
           transactionHistory.map((transaction, index) => (
-            <View key={index} style={TransactionsScreenStyle.historyItem}>
-              <View>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                  }}
-                >
-                  <Text
-                    style={[
-                      TransactionsScreenStyle.historyItemText,
-                      { fontSize: 18, fontWeight: "bold" },
-                    ]}
+            <TouchableOpacity
+              key={index}
+              onPress={() => setSelectedTransaction(transaction)}
+            >
+              <View style={TransactionsScreenStyle.historyItem}>
+                <View>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
                   >
-                    {transaction.address === transaction.fromAddress
-                      ? t("Send")
-                      : t("Receive")}
-                  </Text>
-
-                  <Text
-                    style={[
-                      TransactionsScreenStyle.historyItemText,
-                      { fontSize: 18, fontWeight: "bold" },
-                    ]}
-                  >
-                    {transaction.amount} {`${transaction.symbol}`}
-                  </Text>
-                </View>
-
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <Text style={TransactionsScreenStyle.historyItemText}>
-                    <Text style={{ fontWeight: "bold" }}>{`State: `}</Text>
                     <Text
-                      style={{
-                        color:
-                          transaction.state === "success"
-                            ? "#47B480"
-                            : "inherit",
-                      }}
+                      style={[
+                        TransactionsScreenStyle.historyItemText,
+                        { fontSize: 18, fontWeight: "bold" },
+                      ]}
                     >
-                      {transaction.state}
+                      {transaction.address === transaction.fromAddress
+                        ? t("Send")
+                        : t("Receive")}
                     </Text>
+
+                    <Text
+                      style={[
+                        TransactionsScreenStyle.historyItemText,
+                        { fontSize: 18, fontWeight: "bold" },
+                      ]}
+                    >
+                      {transaction.amount} {`${transaction.symbol}`}
+                    </Text>
+                  </View>
+
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Text style={TransactionsScreenStyle.historyItemText}>
+                      <Text style={{ fontWeight: "bold" }}>{`State: `}</Text>
+                      <Text
+                        style={{
+                          color:
+                            transaction.state === "success"
+                              ? "#47B480"
+                              : "inherit",
+                        }}
+                      >
+                        {transaction.state}
+                      </Text>
+                    </Text>
+                  </View>
+
+                  <Text style={TransactionsScreenStyle.historyItemText}>
+                    <Text style={{ fontWeight: "bold" }}>
+                      {`Transaction Time: `}
+                    </Text>
+                    {`${new Date(
+                      Number(transaction.transactionTime)
+                    ).toLocaleString()}`}
                   </Text>
                 </View>
-
-                <Text style={TransactionsScreenStyle.historyItemText}>
-                  <Text
-                    style={{ fontWeight: "bold" }}
-                  >{`Transaction Time: `}</Text>
-                  {`${new Date(
-                    Number(transaction.transactionTime)
-                  ).toLocaleString()}`}
-                </Text>
               </View>
-
-              <Text
-                style={[
-                  TransactionsScreenStyle.historyItemText,
-                  { lineHeight: 24 },
-                ]}
-              >
-                <Text style={{ fontWeight: "bold" }}>{`From: `}</Text>
-                {transaction.from}
-              </Text>
-              <Text
-                style={[
-                  TransactionsScreenStyle.historyItemText,
-                  { lineHeight: 24 },
-                ]}
-              >
-                <Text style={{ fontWeight: "bold" }}>{`To: `}</Text>
-                {transaction.to}
-              </Text>
-
-              <Text
-                style={[
-                  TransactionsScreenStyle.historyItemText,
-                  { lineHeight: 24 },
-                ]}
-              >
-                <Text
-                  style={{ fontWeight: "bold" }}
-                >{`Transaction hash: `}</Text>
-                {transaction.txid}
-              </Text>
-
-              <Text style={TransactionsScreenStyle.historyItemText}>
-                <Text style={{ fontWeight: "bold" }}>{`Network Fee: `}</Text>
-                {transaction.txFee}
-              </Text>
-
-              <Text style={TransactionsScreenStyle.historyItemText}>
-                <Text style={{ fontWeight: "bold" }}>{`Block Height: `}</Text>
-                {transaction.height}
-              </Text>
-            </View>
+            </TouchableOpacity>
           ))
         )}
       </ScrollView>
+
+      {/* Modal 显示详细信息 */}
+      <Modal
+        visible={!!selectedTransaction}
+        transparent={true}
+        animationType="slide"
+        onRequestClose={() => setSelectedTransaction(null)}
+      >
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: "rgba(0,0,0,0.5)",
+          }}
+        >
+          <View
+            style={{
+              backgroundColor: "#fff",
+              padding: 20,
+              borderRadius: 10,
+              width: "80%",
+            }}
+          >
+            {selectedTransaction && (
+              <>
+                <Text style={TransactionsScreenStyle.historyItemText}>
+                  <Text style={{ fontWeight: "bold" }}>{`From: `}</Text>
+                  {selectedTransaction.from}
+                </Text>
+                <Text style={TransactionsScreenStyle.historyItemText}>
+                  <Text style={{ fontWeight: "bold" }}>{`To: `}</Text>
+                  {selectedTransaction.to}
+                </Text>
+                <Text style={TransactionsScreenStyle.historyItemText}>
+                  <Text style={{ fontWeight: "bold" }}>
+                    {`Transaction hash: `}
+                  </Text>
+                  {selectedTransaction.txid}
+                </Text>
+                <Text style={TransactionsScreenStyle.historyItemText}>
+                  <Text style={{ fontWeight: "bold" }}>{`Network Fee: `}</Text>
+                  {selectedTransaction.txFee}
+                </Text>
+                <Text style={TransactionsScreenStyle.historyItemText}>
+                  <Text style={{ fontWeight: "bold" }}>{`Block Height: `}</Text>
+                  {selectedTransaction.height}
+                </Text>
+                <TouchableOpacity
+                  onPress={() => setSelectedTransaction(null)}
+                  style={{ marginTop: 20 }}
+                >
+                  <Text
+                    style={{
+                      textAlign: "center",
+                      color: "blue",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {t("Close")}
+                  </Text>
+                </TouchableOpacity>
+              </>
+            )}
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
