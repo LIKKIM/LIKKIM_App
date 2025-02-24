@@ -16,10 +16,13 @@ import {
 import { initialAdditionalCryptos } from "../../config/cryptosData"; // 修改为实际路径
 import { CHAIN_NAMES } from "../../config/chainConfig";
 import { CryptoContext, DarkModeContext, usdtCrypto } from "../CryptoContext";
+import ChainSelectionModal from "../modal/ChainSelectionModal"; // 导入 ChainSelectionModal
+
 const TransactionHistory = ({
   TransactionsScreenStyle,
   t,
   transactionHistory,
+  cryptoCards,
 }) => {
   const [selectedTransaction, setSelectedTransaction] = useState(null);
   const [selectedChainShortName, setSelectedChainShortName] =
@@ -28,9 +31,6 @@ const TransactionHistory = ({
   const { isDarkMode } = useContext(DarkModeContext);
   const [isChainSelectionModalVisible, setChainSelectionModalVisible] =
     useState(false);
-  /*   const chainFilteredCards = cryptoCards.filter((card) =>
-    selectedChainShortName.includes(card?.chainShortName)
-  ); */
 
   return (
     <View style={TransactionsScreenStyle.historyContainer}>
@@ -121,52 +121,27 @@ const TransactionHistory = ({
           </Text>
         ) : (
           transactionHistory.map((transaction, index) => {
-            // 使用 toLowerCase() 和 trim() 统一格式
-            // 如果数据中的 address 为占位符，则不参与地址匹配，而是用 symbol 来匹配
             const matchedItems = initialAdditionalCryptos.filter((item) => {
               if (item.address.trim() === "Click the Verify Address Button") {
-                // 当地址为占位符时，使用 shortName 和交易 symbol 进行匹配
                 return (
                   item.shortName.trim().toLowerCase() ===
                   transaction.symbol.trim().toLowerCase()
                 );
               }
-              // 否则使用地址匹配
               return (
                 item.address.trim().toLowerCase() ===
                 transaction.address.trim().toLowerCase()
               );
             });
 
-            console.log(
-              `Transaction ${index} - address: ${transaction.address}`
-            );
-            console.log("Matched Items:", matchedItems);
-
-            // 如果匹配成功，取第一个匹配项的 chainIcon
             const chainIcon =
               matchedItems.length > 0 ? matchedItems[0].chainIcon : null;
-            if (chainIcon) {
-              console.log("Chain Icon found:", chainIcon);
-            } else {
-              console.log("No Chain Icon found");
-            }
-
-            // 在匹配项中查找 shortName 与交易 symbol 匹配的项（忽略大小写）
             const cryptoItem = matchedItems.find(
               (item) =>
                 item.shortName.trim().toUpperCase() ===
                 transaction.symbol.trim().toUpperCase()
             );
             const cryptoIcon = cryptoItem ? cryptoItem.icon : null;
-            if (cryptoIcon) {
-              console.log("Crypto Icon found:", cryptoIcon);
-            } else {
-              console.log(
-                "No Crypto Icon found for symbol:",
-                transaction.symbol
-              );
-            }
 
             return (
               <TouchableOpacity
@@ -195,9 +170,7 @@ const TransactionHistory = ({
                       Number(transaction.transactionTime)
                     ).toLocaleString()}`}
                   </Text>
-                  {/* 外层容器，左右排列 */}
                   <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    {/* 左侧：图片组合 */}
                     <View
                       style={{ position: "relative", width: 50, height: 50 }}
                     >
@@ -208,7 +181,6 @@ const TransactionHistory = ({
                             style={
                               i === 0
                                 ? {
-                                    // 数字货币图标容器
                                     position: "absolute",
                                     top: 0,
                                     left: 0,
@@ -221,7 +193,6 @@ const TransactionHistory = ({
                                     overflow: "hidden",
                                   }
                                 : {
-                                    // 链图标容器
                                     position: "absolute",
                                     top: 26,
                                     left: 28,
@@ -250,8 +221,6 @@ const TransactionHistory = ({
                         )
                       )}
                     </View>
-
-                    {/* 右侧：交易详情 */}
                     <View
                       style={{
                         flex: 1,
@@ -312,7 +281,7 @@ const TransactionHistory = ({
           })
         )}
       </ScrollView>
-      {/* Modal 显示详细信息 */}
+      {/* 显示交易详情的 Modal */}
       <Modal
         visible={!!selectedTransaction}
         transparent={true}
@@ -368,7 +337,6 @@ const TransactionHistory = ({
                     {selectedTransaction.amount} {selectedTransaction.symbol}
                   </Text>
                 </View>
-
                 <Text
                   style={[
                     TransactionsScreenStyle.historyItemText,
@@ -382,7 +350,6 @@ const TransactionHistory = ({
                     Number(selectedTransaction.transactionTime)
                   ).toLocaleString()}`}
                 </Text>
-
                 <Text
                   style={[
                     TransactionsScreenStyle.historyItemText,
@@ -430,7 +397,6 @@ const TransactionHistory = ({
                   <Text style={{ fontWeight: "bold" }}>{`Block Height: `}</Text>
                   {selectedTransaction.height}
                 </Text>
-
                 <TouchableOpacity
                   onPress={() => setSelectedTransaction(null)}
                   style={{ marginTop: 20, alignSelf: "stretch" }}
@@ -449,6 +415,19 @@ const TransactionHistory = ({
           </View>
         </View>
       </Modal>
+      {/* 在这里添加 ChainSelectionModal */}
+      <ChainSelectionModal
+        isVisible={isChainSelectionModalVisible}
+        onClose={() => setChainSelectionModalVisible(false)}
+        selectedChain={selectedChain}
+        handleSelectChain={(chain) => {
+          setSelectedChain(chain);
+          setChainSelectionModalVisible(false);
+        }}
+        cryptoCards={cryptoCards}
+        isDarkMode={isDarkMode}
+        t={t}
+      />
     </View>
   );
 };

@@ -1748,7 +1748,9 @@ function TransactionsScreen() {
           TransactionsScreenStyle={TransactionsScreenStyle}
           t={t}
           transactionHistory={transactionHistory}
+          cryptoCards={cryptoCards}
         />
+
         {/* 输入地址的 Modal */}
         <InputAddressModal
           visible={inputAddressModalVisible}
