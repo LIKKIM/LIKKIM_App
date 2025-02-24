@@ -109,7 +109,7 @@ const TransactionHistory = ({
                   <View style={{ flexDirection: "row", alignItems: "center" }}>
                     {/* 左侧：图片组合 */}
                     <View
-                      style={{ position: "relative", width: 60, height: 50 }}
+                      style={{ position: "relative", width: 50, height: 50 }}
                     >
                       {["cardIconContainer", "cardChainIconContainer"].map(
                         (_, i) => (
@@ -121,7 +121,7 @@ const TransactionHistory = ({
                                     // 数字货币图标容器
                                     position: "absolute",
                                     top: 0,
-                                    left: 10,
+                                    left: 0,
                                     width: 42,
                                     height: 42,
                                     alignItems: "center",
@@ -134,7 +134,7 @@ const TransactionHistory = ({
                                     // 链图标容器
                                     position: "absolute",
                                     top: 26,
-                                    left: 38,
+                                    left: 28,
                                     width: 16,
                                     height: 16,
                                     borderWidth: 1,
