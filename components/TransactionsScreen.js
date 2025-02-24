@@ -268,8 +268,7 @@ function TransactionsScreen() {
             page: pageNumber,
             pageSize: 10,
           };
-          // 打印 postData
-          console.log("当前请求数据:", postData);
+
           try {
             const response = await fetch(
               "https://bt.likkim.com/api/wallet/queryTransaction",
@@ -282,9 +281,34 @@ function TransactionsScreen() {
               }
             );
             const data = await response.json();
-            // 假设返回数据格式为 { transactions: [...] }
-            if (data && data.transactions && data.transactions.length > 0) {
-              allTransactions = allTransactions.concat(data.transactions);
+            // 处理返回值的结构：
+            // {
+            //    "code": "0",
+            //    "msg": "success",
+            //    "data": [ ... ]
+            // }
+            if (
+              data &&
+              data.code === "0" &&
+              data.data &&
+              data.data.length > 0
+            ) {
+              // 只保留你关心的字段
+              const processedTransactions = data.data.map((tx) => {
+                return {
+                  state: tx.state,
+                  amount: tx.amount,
+                  address: tx.address,
+                  fromAddress: tx.fromAddress,
+                  toAddress: tx.toAddress,
+                };
+              });
+              // 打印当前卡片处理后的返回结果
+              console.log(
+                `返回结果 for ${crypto.queryChainName} ${crypto.address}:`,
+                processedTransactions
+              );
+              allTransactions = allTransactions.concat(processedTransactions);
               pageNumber++;
             } else {
               continueFetching = false;
