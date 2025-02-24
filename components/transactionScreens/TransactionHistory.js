@@ -85,95 +85,135 @@ const TransactionHistory = ({
               >
                 <View
                   style={[
-                    TransactionsScreenStyle.historyItem,
                     {
                       backgroundColor:
                         transaction.state.toLowerCase() === "success"
-                          ? "rgba(71, 180, 128, 0.05)" // 绿色，透明度 0.05
-                          : "rgba(210, 70, 75, 0.05)", // 红色，透明度 0.05
+                          ? "rgba(71, 180, 128, 0.05)"
+                          : "rgba(210, 70, 75, 0.05)",
                       borderLeftWidth: 3,
                       borderLeftColor:
                         transaction.state.toLowerCase() === "success"
                           ? "#47B480"
                           : "#D2464B",
+                      marginVertical: 8,
+                      padding: 10,
                     },
                   ]}
                 >
-                  {/* 显示两个图片 */}
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      alignItems: "center",
-                      marginBottom: 8,
-                    }}
-                  >
-                    <Image
-                      source={chainIcon}
-                      style={{
-                        width: 14,
-                        height: 14,
-                      }}
-                      resizeMode="contain"
-                    />
-                    <Image
-                      source={cryptoIcon}
-                      style={{
-                        width: 42,
-                        height: 42,
-                      }}
-                      resizeMode="contain"
-                    />
-                  </View>
-                  <View>
-                    <Text style={TransactionsScreenStyle.historyItemText}>
-                      {`${new Date(
-                        Number(transaction.transactionTime)
-                      ).toLocaleString()}`}
-                    </Text>
+                  <Text style={TransactionsScreenStyle.historyItemText}>
+                    {`${new Date(
+                      Number(transaction.transactionTime)
+                    ).toLocaleString()}`}
+                  </Text>
+                  {/* 外层容器，左右排列 */}
+                  <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    {/* 左侧：图片容器（固定宽度，以便右侧内容对齐） */}
                     <View
-                      style={{
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                      }}
+                      style={{ position: "relative", width: 70, height: 70 }}
                     >
-                      <Text
-                        style={[
-                          TransactionsScreenStyle.historyItemText,
-                          { fontSize: 16, fontWeight: "bold" },
-                        ]}
-                      >
-                        {transaction.address === transaction.fromAddress
-                          ? t("Receive")
-                          : t("Send")}
-                      </Text>
-                      <Text
-                        style={[
-                          TransactionsScreenStyle.historyItemText,
-                          { fontSize: 16, fontWeight: "bold" },
-                        ]}
-                      >
-                        {transaction.amount} {transaction.symbol}
-                      </Text>
+                      {["cardIconContainer", "cardChainIconContainer"].map(
+                        (styleKey, i) => (
+                          <View
+                            key={i}
+                            style={
+                              i === 0
+                                ? {
+                                    // Container for the card icon positioned at the top left
+                                    position: "absolute",
+                                    top: 28,
+                                    left: 10,
+                                    width: 42,
+                                    height: 42,
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    borderRadius: 21,
+                                    backgroundColor: "#ffffff50",
+                                    overflow: "hidden",
+                                  }
+                                : {
+                                    // Container for the chain icon positioned relative to the card icon
+                                    position: "absolute",
+                                    top: 54,
+                                    left: 38,
+                                    width: 16,
+                                    height: 16,
+                                    borderWidth: 1,
+                                    borderColor: "#ffffff80",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    borderRadius: 15,
+                                    backgroundColor: "#ffffff80",
+                                    overflow: "hidden",
+                                  }
+                            }
+                          >
+                            <Image
+                              source={i === 0 ? cryptoIcon : chainIcon}
+                              style={
+                                i === 0
+                                  ? {
+                                      width: 42,
+                                      height: 42,
+                                    }
+                                  : {
+                                      width: 14,
+                                      height: 14,
+                                    }
+                              }
+                              resizeMode="contain"
+                            />
+                          </View>
+                        )
+                      )}
                     </View>
-                    <View
-                      style={{
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <Text style={TransactionsScreenStyle.historyItemText}>
+
+                    {/* 右侧：交易详情，留出一定的左边距 */}
+                    <View style={{ flex: 1, marginLeft: 10 }}>
+                      <View
+                        style={{
+                          flexDirection: "row",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                        }}
+                      >
                         <Text
-                          style={{
-                            color:
-                              transaction.state.toLowerCase() === "success"
-                                ? "#47B480"
-                                : "#D2464B",
-                          }}
+                          style={[
+                            TransactionsScreenStyle.historyItemText,
+                            { fontSize: 16, fontWeight: "bold" },
+                          ]}
                         >
-                          {transaction.state}
+                          {transaction.address === transaction.fromAddress
+                            ? t("Receive")
+                            : t("Send")}
                         </Text>
-                      </Text>
+                        <Text
+                          style={[
+                            TransactionsScreenStyle.historyItemText,
+                            { fontSize: 16, fontWeight: "bold" },
+                          ]}
+                        >
+                          {transaction.amount} {transaction.symbol}
+                        </Text>
+                      </View>
+                      <View
+                        style={{
+                          flexDirection: "row",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <Text style={TransactionsScreenStyle.historyItemText}>
+                          <Text
+                            style={{
+                              color:
+                                transaction.state.toLowerCase() === "success"
+                                  ? "#47B480"
+                                  : "#D2464B",
+                            }}
+                          >
+                            {transaction.state}
+                          </Text>
+                        </Text>
+                      </View>
                     </View>
                   </View>
                 </View>
