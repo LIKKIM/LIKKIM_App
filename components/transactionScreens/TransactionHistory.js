@@ -45,17 +45,15 @@ const TransactionHistory = ({
                         ? t("Send")
                         : t("Receive")}
                     </Text>
-
                     <Text
                       style={[
                         TransactionsScreenStyle.historyItemText,
                         { fontSize: 18, fontWeight: "bold" },
                       ]}
                     >
-                      {transaction.amount} {`${transaction.symbol}`}
+                      {transaction.amount} {transaction.symbol}
                     </Text>
                   </View>
-
                   <View
                     style={{
                       flexDirection: "row",
@@ -76,7 +74,6 @@ const TransactionHistory = ({
                       </Text>
                     </Text>
                   </View>
-
                   <Text style={TransactionsScreenStyle.historyItemText}>
                     <Text style={{ fontWeight: "bold" }}>
                       {`Transaction Time: `}
@@ -117,15 +114,90 @@ const TransactionHistory = ({
           >
             {selectedTransaction && (
               <>
-                <Text style={TransactionsScreenStyle.historyItemText}>
+                {/* 显示列表中上半部分的交易信息 */}
+                <View>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Text
+                      style={[
+                        TransactionsScreenStyle.historyItemText,
+                        { fontSize: 18, fontWeight: "bold" },
+                      ]}
+                    >
+                      {selectedTransaction.address ===
+                      selectedTransaction.fromAddress
+                        ? t("Send")
+                        : t("Receive")}
+                    </Text>
+                    <Text
+                      style={[
+                        TransactionsScreenStyle.historyItemText,
+                        { fontSize: 18, fontWeight: "bold" },
+                      ]}
+                    >
+                      {selectedTransaction.amount} {selectedTransaction.symbol}
+                    </Text>
+                  </View>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Text style={TransactionsScreenStyle.historyItemText}>
+                      <Text style={{ fontWeight: "bold" }}>{`State: `}</Text>
+                      <Text
+                        style={{
+                          color:
+                            selectedTransaction.state === "success"
+                              ? "#47B480"
+                              : "inherit",
+                        }}
+                      >
+                        {selectedTransaction.state}
+                      </Text>
+                    </Text>
+                  </View>
+                  <Text style={TransactionsScreenStyle.historyItemText}>
+                    <Text style={{ fontWeight: "bold" }}>
+                      {`Transaction Time: `}
+                    </Text>
+                    {`${new Date(
+                      Number(selectedTransaction.transactionTime)
+                    ).toLocaleString()}`}
+                  </Text>
+                </View>
+
+                {/* 显示列表中下半部分的详细信息 */}
+                <Text
+                  style={[
+                    TransactionsScreenStyle.historyItemText,
+                    { lineHeight: 24 },
+                  ]}
+                >
                   <Text style={{ fontWeight: "bold" }}>{`From: `}</Text>
                   {selectedTransaction.from}
                 </Text>
-                <Text style={TransactionsScreenStyle.historyItemText}>
+                <Text
+                  style={[
+                    TransactionsScreenStyle.historyItemText,
+                    { lineHeight: 24 },
+                  ]}
+                >
                   <Text style={{ fontWeight: "bold" }}>{`To: `}</Text>
                   {selectedTransaction.to}
                 </Text>
-                <Text style={TransactionsScreenStyle.historyItemText}>
+                <Text
+                  style={[
+                    TransactionsScreenStyle.historyItemText,
+                    { lineHeight: 24 },
+                  ]}
+                >
                   <Text style={{ fontWeight: "bold" }}>
                     {`Transaction hash: `}
                   </Text>
@@ -139,6 +211,7 @@ const TransactionHistory = ({
                   <Text style={{ fontWeight: "bold" }}>{`Block Height: `}</Text>
                   {selectedTransaction.height}
                 </Text>
+
                 <TouchableOpacity
                   onPress={() => setSelectedTransaction(null)}
                   style={{ marginTop: 20 }}
