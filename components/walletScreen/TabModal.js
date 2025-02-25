@@ -33,16 +33,17 @@ const TabModal = ({
       if (selectedCrypto && activeTab === "History") {
         try {
           const response = await fetch(
-            "https://bt.likkim.com/meridian/address/queryTransactionList",
+            "https://bt.likkim.com/api/wallet/queryTransaction",
             {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
               },
               body: JSON.stringify({
-                chainShortName: "TRON",
-                address: "TN121JdH9t2y7qjuExHrYMdJA5RHJXdaZK",
-                protocolType: "token_20",
+                chain: selectedCrypto.queryChainName,
+                address: selectedCrypto.address,
+                page: 1,
+                pageSize: 10,
               }),
             }
           );
@@ -82,22 +83,6 @@ const TabModal = ({
     fetchTransactionHistory();
   }, [selectedCrypto, activeTab]);
 
-  // 动态打印数据的函数
-  function printData(data) {
-    if (Array.isArray(data)) {
-      data.forEach((item) => printData(item)); // 对数组的每一项递归
-    } else if (typeof data === "object" && data !== null) {
-      for (const key in data) {
-        if (data.hasOwnProperty(key)) {
-          console.log(`${key}: `, data[key]); // 打印每个键值对
-          printData(data[key]); // 对对象的每个值递归
-        }
-      }
-    } else {
-      console.log(data); // 如果是基本类型，直接打印
-    }
-  }
-
   const renderTabContent = () => {
     switch (activeTab) {
       case "History":
@@ -129,7 +114,24 @@ const TabModal = ({
                 ) : (
                   transactionHistory.map((transaction, index) => {
                     return (
-                      <View key={index} style={WalletScreenStyle.historyItem}>
+                      <View
+                        key={index}
+                        style={[
+                          {
+                            backgroundColor:
+                              transaction.state.toLowerCase() === "success"
+                                ? "rgba(71, 180, 128, 0.05)"
+                                : "rgba(210, 70, 75, 0.05)",
+                            borderLeftWidth: 3,
+                            borderLeftColor:
+                              transaction.state.toLowerCase() === "success"
+                                ? "#47B480"
+                                : "#D2464B",
+                            marginVertical: 4,
+                            padding: 10,
+                          },
+                        ]}
+                      >
                         <View
                           style={{
                             flexDirection: "row",
@@ -183,11 +185,8 @@ const TabModal = ({
                         </View>
 
                         <Text style={WalletScreenStyle.historyItemText}>
-                          <Text
-                            style={{ fontWeight: "bold" }}
-                          >{`Transaction Time: `}</Text>
                           {`${new Date(
-                            transaction.transactionTime * 1000
+                            Number(transaction.transactionTime)
                           ).toLocaleString()}`}
                         </Text>
 
