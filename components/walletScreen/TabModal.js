@@ -7,6 +7,7 @@ import {
   Animated,
   ScrollView,
   Platform,
+  Modal,
 } from "react-native";
 import PriceChartCom from "../PriceChartCom";
 import { LinearGradient } from "expo-linear-gradient";
@@ -27,6 +28,8 @@ const TabModal = ({
   lightColorsDown,
 }) => {
   const [transactionHistory, setTransactionHistory] = useState([]);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [selectedTransaction, setSelectedTransaction] = useState(null);
 
   useEffect(() => {
     const fetchTransactionHistory = async () => {
@@ -56,27 +59,26 @@ const TabModal = ({
             );
             setTransactionHistory([]);
           } else {
-            // 处理数据以添加 transactionType 和所需的其他字段
             const enhancedData = data.data.map((transaction) => ({
               ...transaction,
               transactionType:
                 transaction.from === selectedCrypto.address
                   ? "Send"
                   : "Receive",
-              state: transaction.state, // 状态字段
-              amount: transaction.amount, // 金额字段
-              address: transaction.address, // 地址字段
-              fromAddress: transaction.fromAddress, // 发起地址
-              toAddress: transaction.toAddress, // 接收地址
-              symbol: transaction.symbol, // 交易的币种
-              transactionTime: transaction.transactionTime, // 交易时间
+              state: transaction.state,
+              amount: transaction.amount,
+              address: transaction.address,
+              fromAddress: transaction.fromAddress,
+              toAddress: transaction.toAddress,
+              symbol: transaction.symbol,
+              transactionTime: transaction.transactionTime,
             }));
 
             setTransactionHistory(enhancedData);
             AsyncStorage.setItem(
               "transactionHistory",
               JSON.stringify(enhancedData)
-            ); // 保存调整后的数据
+            );
           }
         } catch (error) {
           console.error(
@@ -89,6 +91,16 @@ const TabModal = ({
 
     fetchTransactionHistory();
   }, [selectedCrypto, activeTab]);
+
+  const openTransactionModal = (transaction) => {
+    setSelectedTransaction(transaction);
+    setIsModalVisible(true);
+  };
+
+  const closeTransactionModal = () => {
+    setIsModalVisible(false);
+    setSelectedTransaction(null);
+  };
 
   const renderTabContent = () => {
     switch (activeTab) {
@@ -121,126 +133,62 @@ const TabModal = ({
                 ) : (
                   transactionHistory.map((transaction, index) => {
                     return (
-                      <View
+                      <TouchableOpacity
                         key={index}
-                        style={[
-                          {
-                            backgroundColor:
-                              transaction.state.toLowerCase() === "success"
-                                ? "rgba(71, 180, 128, 0.05)"
-                                : "rgba(210, 70, 75, 0.05)",
-                            borderLeftWidth: 3,
-                            borderLeftColor:
-                              transaction.state.toLowerCase() === "success"
-                                ? "#47B480"
-                                : "#D2464B",
-                            marginVertical: 4,
-                            padding: 10,
-                          },
-                        ]}
+                        onPress={() => openTransactionModal(transaction)}
                       >
                         <View
-                          style={{
-                            flexDirection: "row",
-                            justifyContent: "space-between",
-                            alignItems: "center",
-                          }}
-                        >
-                          <Text
-                            style={[
-                              WalletScreenStyle.historyItemText,
-                              { fontSize: 16, fontWeight: "bold" },
-                            ]}
-                          >
-                            {transaction.transactionType === "Send"
-                              ? t("Send")
-                              : t("Receive")}
-                          </Text>
-
-                          <Text
-                            style={[
-                              WalletScreenStyle.historyItemText,
-                              { fontSize: 16, fontWeight: "bold" },
-                            ]}
-                          >
-                            {transaction.amount} {`${transaction.symbol}`}
-                          </Text>
-                        </View>
-
-                        <View
-                          style={{
-                            flexDirection: "row",
-                            justifyContent: "space-between",
-                          }}
+                          style={[
+                            {
+                              backgroundColor:
+                                transaction.state.toLowerCase() === "success"
+                                  ? "rgba(71, 180, 128, 0.05)"
+                                  : "rgba(210, 70, 75, 0.05)",
+                              borderLeftWidth: 3,
+                              borderLeftColor:
+                                transaction.state.toLowerCase() === "success"
+                                  ? "#47B480"
+                                  : "#D2464B",
+                              marginVertical: 4,
+                              padding: 10,
+                            },
+                          ]}
                         >
                           <Text style={WalletScreenStyle.historyItemText}>
-                            <Text
-                              style={{ fontWeight: "bold" }}
-                            >{`State: `}</Text>
-                            <Text
-                              style={{
-                                color:
-                                  transaction.state === "success"
-                                    ? "#47B480"
-                                    : "#D2464B",
-                              }}
-                            >
-                              {transaction.state}
-                            </Text>
+                            {`${new Date(
+                              Number(transaction.transactionTime)
+                            ).toLocaleString()}`}
                           </Text>
+
+                          <View
+                            style={{
+                              flexDirection: "row",
+                              justifyContent: "space-between",
+                              alignItems: "center",
+                            }}
+                          >
+                            <Text
+                              style={[
+                                WalletScreenStyle.historyItemText,
+                                { fontSize: 16, fontWeight: "bold" },
+                              ]}
+                            >
+                              {transaction.transactionType === "Send"
+                                ? t("Send")
+                                : t("Receive")}
+                            </Text>
+
+                            <Text
+                              style={[
+                                WalletScreenStyle.historyItemText,
+                                { fontSize: 16, fontWeight: "bold" },
+                              ]}
+                            >
+                              {transaction.amount} {`${transaction.symbol}`}
+                            </Text>
+                          </View>
                         </View>
-
-                        <Text style={WalletScreenStyle.historyItemText}>
-                          {`${new Date(
-                            Number(transaction.transactionTime)
-                          ).toLocaleString()}`}
-                        </Text>
-
-                        <Text
-                          style={[
-                            WalletScreenStyle.historyItemText,
-                            { lineHeight: 24 },
-                          ]}
-                        >
-                          <Text style={{ fontWeight: "bold" }}>{`From: `}</Text>
-                          {transaction.fromAddress}
-                        </Text>
-                        <Text
-                          style={[
-                            WalletScreenStyle.historyItemText,
-                            { lineHeight: 24 },
-                          ]}
-                        >
-                          <Text style={{ fontWeight: "bold" }}>{`To: `}</Text>
-                          {transaction.toAddress}
-                        </Text>
-
-                        <Text
-                          style={[
-                            WalletScreenStyle.historyItemText,
-                            { lineHeight: 24 },
-                          ]}
-                        >
-                          <Text
-                            style={{ fontWeight: "bold" }}
-                          >{`Transaction hash: `}</Text>
-                          {transaction.txid}
-                        </Text>
-
-                        <Text style={WalletScreenStyle.historyItemText}>
-                          <Text
-                            style={{ fontWeight: "bold" }}
-                          >{`Network Fee: `}</Text>
-                          {transaction.txFee}
-                        </Text>
-
-                        <Text style={WalletScreenStyle.historyItemText}>
-                          <Text
-                            style={{ fontWeight: "bold" }}
-                          >{`Block Height: `}</Text>
-                          {transaction.height}
-                        </Text>
-                      </View>
+                      </TouchableOpacity>
                     );
                   })
                 )}
@@ -332,6 +280,118 @@ const TabModal = ({
           <Text style={WalletScreenStyle.cancelButtonText}>{t("Close")}</Text>
         </TouchableOpacity>
       </Animated.View>
+
+      {/* Transaction Modal */}
+      <Modal visible={isModalVisible} animationType="slide" transparent={true}>
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+          }}
+        >
+          <View
+            style={{
+              backgroundColor: "#fff",
+              padding: 20,
+              borderRadius: 10,
+              width: 300,
+              maxHeight: "80%",
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 16,
+                color: "#333",
+                marginBottom: 10,
+              }}
+            >
+              {`${new Date(
+                Number(selectedTransaction?.transactionTime)
+              ).toLocaleString()}`}
+            </Text>
+
+            <Text
+              style={{
+                fontSize: 16,
+                color: "#333",
+                marginBottom: 10,
+                lineHeight: 24,
+              }}
+            >
+              <Text style={{ fontWeight: "bold" }}>From: </Text>
+              {selectedTransaction?.fromAddress}
+            </Text>
+
+            <Text
+              style={{
+                fontSize: 16,
+                color: "#333",
+                marginBottom: 10,
+                lineHeight: 24,
+              }}
+            >
+              <Text style={{ fontWeight: "bold" }}>To: </Text>
+              {selectedTransaction?.toAddress}
+            </Text>
+
+            <Text
+              style={{
+                fontSize: 16,
+                color: "#333",
+                marginBottom: 10,
+                lineHeight: 24,
+              }}
+            >
+              <Text style={{ fontWeight: "bold" }}>Transaction hash: </Text>
+              {selectedTransaction?.txid}
+            </Text>
+
+            <Text
+              style={{
+                fontSize: 16,
+                color: "#333",
+                marginBottom: 10,
+              }}
+            >
+              <Text style={{ fontWeight: "bold" }}>Network Fee: </Text>
+              {selectedTransaction?.txFee}
+            </Text>
+
+            <Text
+              style={{
+                fontSize: 16,
+                color: "#333",
+                marginBottom: 10,
+              }}
+            >
+              <Text style={{ fontWeight: "bold" }}>Block Height: </Text>
+              {selectedTransaction?.height}
+            </Text>
+
+            <TouchableOpacity
+              onPress={closeTransactionModal}
+              style={{
+                marginTop: 20,
+                padding: 10,
+                backgroundColor: "#007BFF",
+                borderRadius: 5,
+                alignItems: "center",
+              }}
+            >
+              <Text
+                style={{
+                  color: "#fff",
+                  fontWeight: "bold",
+                }}
+              >
+                Close
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </>
   );
 };
