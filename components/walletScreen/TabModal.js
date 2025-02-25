@@ -176,6 +176,19 @@ const TabModal = ({
                               {transaction.transactionType === "Send"
                                 ? t("Send")
                                 : t("Receive")}
+                              {"  "}
+                              <Text
+                                style={{
+                                  color:
+                                    transaction.state.toLowerCase() ===
+                                    "success"
+                                      ? "#47B480"
+                                      : "#D2464B",
+                                  fontWeight: "normal",
+                                }}
+                              >
+                                {transaction.state}
+                              </Text>
                             </Text>
 
                             <Text
@@ -293,17 +306,54 @@ const TabModal = ({
         >
           <View
             style={{
-              backgroundColor: "#fff",
+              backgroundColor: isDarkMode ? "#3F3D3C" : "#fff",
               padding: 20,
               borderRadius: 10,
-              width: 300,
+              width: 324,
               maxHeight: "80%",
             }}
           >
             <Text
+              style={[
+                {
+                  fontSize: 16,
+                  fontWeight: "bold",
+                  color: isDarkMode ? "#fff" : "#000",
+                },
+              ]}
+            >
+              {selectedTransaction?.transactionType === "Send"
+                ? t("Send")
+                : t("Receive")}
+              {"  "}
+              <Text
+                style={{
+                  color:
+                    selectedTransaction?.state.toLowerCase() === "success"
+                      ? "#47B480"
+                      : "#D2464B",
+                  fontWeight: "normal",
+                }}
+              >
+                {selectedTransaction?.state}
+              </Text>
+            </Text>
+
+            <Text
+              style={[
+                {
+                  fontSize: 16,
+                  fontWeight: "bold",
+                  color: isDarkMode ? "#fff" : "#000",
+                },
+              ]}
+            >
+              {selectedTransaction?.amount} {`${selectedTransaction?.symbol}`}
+            </Text>
+            <Text
               style={{
                 fontSize: 16,
-                color: "#333",
+                color: isDarkMode ? "#fff" : "#000",
                 marginBottom: 10,
               }}
             >
@@ -315,7 +365,7 @@ const TabModal = ({
             <Text
               style={{
                 fontSize: 16,
-                color: "#333",
+                color: isDarkMode ? "#fff" : "#000",
                 marginBottom: 10,
                 lineHeight: 24,
               }}
@@ -327,7 +377,7 @@ const TabModal = ({
             <Text
               style={{
                 fontSize: 16,
-                color: "#333",
+                color: isDarkMode ? "#fff" : "#000",
                 marginBottom: 10,
                 lineHeight: 24,
               }}
@@ -339,7 +389,7 @@ const TabModal = ({
             <Text
               style={{
                 fontSize: 16,
-                color: "#333",
+                color: isDarkMode ? "#fff" : "#000",
                 marginBottom: 10,
                 lineHeight: 24,
               }}
@@ -351,7 +401,7 @@ const TabModal = ({
             <Text
               style={{
                 fontSize: 16,
-                color: "#333",
+                color: isDarkMode ? "#fff" : "#000",
                 marginBottom: 10,
               }}
             >
@@ -362,7 +412,7 @@ const TabModal = ({
             <Text
               style={{
                 fontSize: 16,
-                color: "#333",
+                color: isDarkMode ? "#fff" : "#000",
                 marginBottom: 10,
               }}
             >
@@ -373,17 +423,20 @@ const TabModal = ({
             <TouchableOpacity
               onPress={closeTransactionModal}
               style={{
-                marginTop: 20,
+                borderWidth: 3,
+                borderColor: isDarkMode ? "#CCB68C" : "#CFAB95",
                 padding: 10,
-                backgroundColor: "#007BFF",
-                borderRadius: 5,
+                width: 280,
+                justifyContent: "center",
+                borderRadius: 30,
+                height: 60,
                 alignItems: "center",
               }}
             >
               <Text
                 style={{
-                  color: "#fff",
-                  fontWeight: "bold",
+                  color: isDarkMode ? "#CCB68C" : "#CFAB95",
+                  fontSize: 16,
                 }}
               >
                 Close
