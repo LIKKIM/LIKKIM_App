@@ -56,13 +56,20 @@ const TabModal = ({
             );
             setTransactionHistory([]);
           } else {
-            // 处理数据以添加 transactionType
+            // 处理数据以添加 transactionType 和所需的其他字段
             const enhancedData = data.data.map((transaction) => ({
               ...transaction,
               transactionType:
                 transaction.from === selectedCrypto.address
                   ? "Send"
                   : "Receive",
+              state: transaction.state, // 状态字段
+              amount: transaction.amount, // 金额字段
+              address: transaction.address, // 地址字段
+              fromAddress: transaction.fromAddress, // 发起地址
+              toAddress: transaction.toAddress, // 接收地址
+              symbol: transaction.symbol, // 交易的币种
+              transactionTime: transaction.transactionTime, // 交易时间
             }));
 
             setTransactionHistory(enhancedData);
@@ -142,7 +149,7 @@ const TabModal = ({
                           <Text
                             style={[
                               WalletScreenStyle.historyItemText,
-                              { fontSize: 18, fontWeight: "bold" },
+                              { fontSize: 16, fontWeight: "bold" },
                             ]}
                           >
                             {transaction.transactionType === "Send"
@@ -153,11 +160,10 @@ const TabModal = ({
                           <Text
                             style={[
                               WalletScreenStyle.historyItemText,
-                              { fontSize: 18, fontWeight: "bold" },
+                              { fontSize: 16, fontWeight: "bold" },
                             ]}
                           >
-                            {transaction.amount}{" "}
-                            {`${transaction.transactionSymbol}`}
+                            {transaction.amount} {`${transaction.symbol}`}
                           </Text>
                         </View>
 
@@ -197,7 +203,7 @@ const TabModal = ({
                           ]}
                         >
                           <Text style={{ fontWeight: "bold" }}>{`From: `}</Text>
-                          {transaction.from}
+                          {transaction.fromAddress}
                         </Text>
                         <Text
                           style={[
@@ -206,7 +212,7 @@ const TabModal = ({
                           ]}
                         >
                           <Text style={{ fontWeight: "bold" }}>{`To: `}</Text>
-                          {transaction.to}
+                          {transaction.toAddress}
                         </Text>
 
                         <Text
