@@ -139,14 +139,13 @@ function WalletScreen({ route, navigation }) {
   }));
   const [selectedChainShortName, setSelectedChainShortName] =
     useState(CHAIN_NAMES);
-
+  const [selectedChain, setSelectedChain] = useState("All");
   const chainFilteredCards = cryptoCards.filter((card) =>
     selectedChainShortName.includes(card?.chainShortName)
   );
 
   const [isChainSelectionModalVisible, setChainSelectionModalVisible] =
     useState(false);
-  const [selectedChain, setSelectedChain] = useState("All");
 
   const [selectedView, setSelectedView] = useState("wallet");
   const { isModalVisible } = route.params || {};
