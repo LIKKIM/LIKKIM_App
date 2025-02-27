@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Modal,
   Image,
+  RefreshControl,
 } from "react-native";
 import { initialAdditionalCryptos } from "../../config/cryptosData"; // 修改为实际路径
 import { CHAIN_NAMES } from "../../config/chainConfig";
@@ -18,6 +19,8 @@ const TransactionHistory = ({
   t,
   transactionHistory,
   cryptoCards, // 原来传入的，但这里不再直接使用它来筛选链
+  refreshing, // 添加的 prop
+  onRefresh, // 添加的 prop
 }) => {
   const [selectedTransaction, setSelectedTransaction] = useState(null);
   const [selectedChain, setSelectedChain] = useState("All");
@@ -151,6 +154,9 @@ const TransactionHistory = ({
             transactionHistory.length === 0 ? "center" : "flex-start",
         }}
         style={{ flex: 1, width: "100%" }}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
       >
         {filteredTransactionHistory.length === 0 ? (
           <Text style={TransactionsScreenStyle.noHistoryText}>

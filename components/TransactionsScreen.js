@@ -164,6 +164,13 @@ function TransactionsScreen() {
     amount &&
     parseFloat(amount) > 0 &&
     parseFloat(amount) <= parseFloat(balance) + parseFloat(fee);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await fetchAllTransactionHistory(); // 调用获取交易历史的函数
+    setRefreshing(false);
+  };
 
   // ---------- 扫描设备 ----------
   const bleManagerRef = useRef(null);
@@ -1743,6 +1750,8 @@ function TransactionsScreen() {
           t={t}
           transactionHistory={transactionHistory}
           cryptoCards={cryptoCards}
+          refreshing={refreshing}
+          onRefresh={onRefresh}
         />
 
         {/* 输入地址的 Modal */}
