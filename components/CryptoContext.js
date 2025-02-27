@@ -175,9 +175,21 @@ export const CryptoProvider = ({ children }) => {
         headers: { "Content-Type": "application/json" },
       });
       const data = await response.json();
+
       if (data.code === 0 && data.data) {
-        setExchangeRates(data.data);
-        await AsyncStorage.setItem("exchangeRates", JSON.stringify(data.data));
+        const flattenedData = {};
+        for (const [currency, rateArray] of Object.entries(data.data)) {
+          if (Array.isArray(rateArray) && rateArray.length > 0) {
+            flattenedData[currency] = rateArray[0];
+          }
+        }
+
+        // 然后存到你的 state 或者 AsyncStorage
+        setExchangeRates(flattenedData);
+        await AsyncStorage.setItem(
+          "exchangeRates",
+          JSON.stringify(flattenedData)
+        );
       } else {
         console.error("Failed to fetch exchange rates:", data.msg);
       }
