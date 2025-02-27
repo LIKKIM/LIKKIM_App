@@ -9,7 +9,7 @@ import {
   Platform,
   Modal,
 } from "react-native";
-import PriceChartCom from "../PriceChartCom";
+import PriceChartCom from "../walletScreen/PriceChartCom";
 import { LinearGradient } from "expo-linear-gradient";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
