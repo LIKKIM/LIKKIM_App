@@ -318,10 +318,10 @@ function TransactionsScreen() {
                 transactionTime: tx.transactionTime,
               }));
               // 打印当前卡片处理后的返回结果
-              console.log(
+              /*               console.log(
                 `处理后的返回结果 for ${crypto.queryChainName} ${crypto.address}:`,
                 processedTransactions
-              );
+              ); */
               allTransactions = allTransactions.concat(processedTransactions);
               pageNumber++;
             } else {
@@ -347,7 +347,7 @@ function TransactionsScreen() {
         (acc, transactions) => acc.concat(transactions),
         []
       );
-      console.log("所有卡片的交易历史结果:", mergedTransactions);
+      //  console.log("所有卡片的交易历史结果:", mergedTransactions);
       setTransactionHistory(mergedTransactions);
     }
   };

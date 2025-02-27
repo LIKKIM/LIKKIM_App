@@ -151,18 +151,21 @@ const TransactionHistory = ({
           flexGrow: 1,
           justifyContent: "center",
           justifyContent:
-            transactionHistory.length === 0 ? "center" : "flex-start",
+            transactionHistory.length === 0 || cryptoCards.length === 0
+              ? "center"
+              : "flex-start",
         }}
         style={{ flex: 1, width: "100%" }}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-        {filteredTransactionHistory.length === 0 ? (
+        {filteredTransactionHistory.length === 0 || cryptoCards.length === 0 ? (
           <Text style={TransactionsScreenStyle.noHistoryText}>
             {t("No Histories")}
           </Text>
         ) : (
+          cryptoCards.length > 0 &&
           filteredTransactionHistory.map((transaction, index) => {
             const matchedItems = initialAdditionalCryptos.filter((item) => {
               if (item.address.trim() === "Click the Verify Address Button") {
