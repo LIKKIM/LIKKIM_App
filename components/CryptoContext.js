@@ -199,7 +199,7 @@ export const CryptoProvider = ({ children }) => {
         console.error("Failed to fetch exchange rates:", data.msg);
       }
     } catch (error) {
-      console.error("Error fetching exchange rates:", error);
+      console.log("Error fetching exchange rates:", error);
     }
   };
 

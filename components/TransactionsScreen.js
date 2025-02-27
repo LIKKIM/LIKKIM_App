@@ -328,13 +328,13 @@ function TransactionsScreen() {
               continueFetching = false;
             }
           } catch (error) {
-            console.log(
+            /*          console.log(
               "查询交易历史失败, chain:",
               crypto.queryChainName,
               "address:",
               crypto.address,
               error
-            );
+            ); */
             continueFetching = false;
           }
         }
