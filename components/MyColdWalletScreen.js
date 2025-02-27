@@ -740,7 +740,6 @@ function MyColdWalletScreen() {
         console.log("Error sending confirmation message:", error);
       }
 
-      // 根据 flag 发送后续消息
       if (flag === "Y") {
         console.log("Flag Y received; sending 'address' to device");
         try {
@@ -753,6 +752,9 @@ function MyColdWalletScreen() {
             base64Address
           );
           console.log("Sent 'address' to device");
+
+          // 发送 address 后立即打开弹窗
+          setVerificationModalVisible(true);
         } catch (error) {
           console.log("Error sending 'address':", error);
         }
@@ -765,7 +767,6 @@ function MyColdWalletScreen() {
           "pubkey:juno,m/44'/118'/0'/0/0",
           "pubkey:osmosis,m/44'/118'/0'/0/0",
         ];
-
         for (const message of pubkeyMessages) {
           try {
             const bufferMessage = Buffer.from(message, "utf-8");
@@ -782,6 +783,8 @@ function MyColdWalletScreen() {
         }
       } else if (flag === "N") {
         console.log("Flag N received; no 'address' sent");
+        // 直接打开弹窗
+        setVerificationModalVisible(true);
       }
     } else {
       console.log("PIN verification failed");
@@ -795,7 +798,6 @@ function MyColdWalletScreen() {
         console.log("Disconnected device");
       }
     }
-    setVerificationModalVisible(true);
     setPinCode("");
   };
 
