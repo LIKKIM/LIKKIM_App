@@ -328,7 +328,7 @@ function TransactionsScreen() {
               continueFetching = false;
             }
           } catch (error) {
-            console.error(
+            console.log(
               "查询交易历史失败, chain:",
               crypto.queryChainName,
               "address:",
