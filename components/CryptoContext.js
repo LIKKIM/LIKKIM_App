@@ -170,11 +170,17 @@ export const CryptoProvider = ({ children }) => {
 
   const fetchAndStoreExchangeRates = async () => {
     try {
-      const response = await fetch(NEW_EXCHANGE_RATE_API_URL, {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      });
+      const response = await fetch(NEW_EXCHANGE_RATE_API_URL);
+      console.log("Response status:", response.status);
+
+      if (!response.ok) {
+        throw new Error(
+          `Network response was not ok, status: ${response.status}`
+        );
+      }
+
       const data = await response.json();
+      console.log("Fetched data:", data);
 
       if (data.code === 0 && data.data) {
         const flattenedData = {};
@@ -184,7 +190,6 @@ export const CryptoProvider = ({ children }) => {
           }
         }
 
-        // 然后存到你的 state 或者 AsyncStorage
         setExchangeRates(flattenedData);
         await AsyncStorage.setItem(
           "exchangeRates",
