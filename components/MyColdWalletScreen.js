@@ -531,6 +531,11 @@ function MyColdWalletScreen() {
   let monitorSubscription;
 
   const monitorVerificationCode = (device, sendDecryptedValue) => {
+    if (monitorSubscription) {
+      monitorSubscription.remove();
+      monitorSubscription = null;
+    }
+
     monitorSubscription = device.monitorCharacteristicForService(
       serviceUUID,
       notifyCharacteristicUUID,
