@@ -75,7 +75,7 @@ function TransactionsScreen() {
     setTransactionHistory,
     updateCryptoPublicKey,
   } = useContext(CryptoContext);
-
+  const [isLoading, setIsLoading] = useState(true);
   const TransactionsScreenStyle = TransactionsScreenStyles(isDarkMode);
   const iconColor = isDarkMode ? "#CCB68C" : "#CFAB95";
   const darkColors = ["#21201E", "#0E0D0D"];
@@ -234,20 +234,24 @@ function TransactionsScreen() {
 
   useEffect(() => {
     const loadTransactionHistory = async () => {
+      setIsLoading(true);
       try {
         const historyJson = await AsyncStorage.getItem("transactionHistory");
         if (historyJson !== null) {
-          // 如果之前保存过交易历史，则将其解析后设置到状态中
           const history = JSON.parse(historyJson);
           setTransactionHistory(history);
         }
       } catch (error) {
-        console.log("Failed to load transaction history:", error);
+        console.error(
+          "Failed to load transaction history from storage:",
+          error
+        );
       }
+      setIsLoading(false);
     };
 
     loadTransactionHistory();
-  }, []); // 依赖数组为空，确保此操作仅在组件挂载时执行一次
+  }, []);
 
   // 新增：获取所有卡片的交易历史记录（包含去重与分页处理）
   const fetchAllTransactionHistory = async () => {
@@ -1749,6 +1753,7 @@ function TransactionsScreen() {
           TransactionsScreenStyle={TransactionsScreenStyle}
           t={t}
           transactionHistory={transactionHistory}
+          isLoading={isLoading}
           cryptoCards={cryptoCards}
           refreshing={refreshing}
           onRefresh={onRefresh}

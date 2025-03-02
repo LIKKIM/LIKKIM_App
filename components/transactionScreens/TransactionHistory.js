@@ -18,9 +18,10 @@ const TransactionHistory = ({
   TransactionsScreenStyle,
   t,
   transactionHistory,
-  cryptoCards, // 原来传入的，但这里不再直接使用它来筛选链
-  refreshing, // 添加的 prop
-  onRefresh, // 添加的 prop
+  isLoading,
+  cryptoCards,
+  refreshing,
+  onRefresh,
 }) => {
   const [selectedTransaction, setSelectedTransaction] = useState(null);
   const [selectedChain, setSelectedChain] = useState("All");
@@ -149,9 +150,10 @@ const TransactionHistory = ({
       <ScrollView
         contentContainerStyle={{
           flexGrow: 1,
-          justifyContent: "center",
           justifyContent:
-            transactionHistory.length === 0 || cryptoCards.length === 0
+            transactionHistory.length === 0 ||
+            cryptoCards.length === 0 ||
+            isLoading
               ? "center"
               : "flex-start",
         }}
@@ -160,10 +162,23 @@ const TransactionHistory = ({
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-        {filteredTransactionHistory.length === 0 || cryptoCards.length === 0 ? (
-          <Text style={TransactionsScreenStyle.noHistoryText}>
-            {t("No Histories")}
-          </Text>
+        {isLoading ? (
+          <View
+            style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+          >
+            <Text style={TransactionsScreenStyle.loadingText}>
+              {t("Loading...")}
+            </Text>
+          </View>
+        ) : filteredTransactionHistory.length === 0 ||
+          cryptoCards.length === 0 ? (
+          <View
+            style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+          >
+            <Text style={TransactionsScreenStyle.noHistoryText}>
+              {t("No Histories")}
+            </Text>
+          </View>
         ) : (
           cryptoCards.length > 0 &&
           filteredTransactionHistory.map((transaction, index) => {
@@ -330,6 +345,7 @@ const TransactionHistory = ({
           })
         )}
       </ScrollView>
+
       {/* 显示交易详情的 Modal */}
       <Modal
         visible={!!selectedTransaction}
