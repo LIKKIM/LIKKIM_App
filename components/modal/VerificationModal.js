@@ -41,10 +41,12 @@ const VerificationModal = ({ visible, status, onClose, styles, t }) => {
           />
           <Text style={styles.modalTitle}>{title}</Text>
           <Text style={styles.modalSubtitle}>{subtitle}</Text>
-          {status !== "waiting" && (
+          {status !== "waiting" ? (
             <TouchableOpacity style={styles.submitButton} onPress={onClose}>
               <Text style={styles.submitButtonText}>{t("Close")}</Text>
             </TouchableOpacity>
+          ) : (
+            <View style={{ height: 60 }} />
           )}
         </View>
       </BlurView>
