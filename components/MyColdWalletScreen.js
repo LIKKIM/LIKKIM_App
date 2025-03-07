@@ -535,7 +535,7 @@ function MyColdWalletScreen() {
       monitorSubscription.remove();
       monitorSubscription = null;
     }
-
+    //bugging 这里要有循环查询地址的机制
     monitorSubscription = device.monitorCharacteristicForService(
       serviceUUID,
       notifyCharacteristicUUID,
