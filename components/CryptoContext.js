@@ -55,7 +55,7 @@ export const CryptoProvider = ({ children }) => {
   const [exchangeRates, setExchangeRates] = useState({});
 
   // Supported chains for address updates
-  const supportedChains = ["ETH", "BTC", "SOL"];
+  const supportedChains = ["ETH", "BTC", "SOL", "TRX"];
 
   // Update cryptoCards state: update if exists, otherwise add new card
   const handleUpdateCryptoCards = (newCrypto) => {
