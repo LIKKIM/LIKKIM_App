@@ -366,25 +366,6 @@ export const CryptoProvider = ({ children }) => {
     await AsyncStorage.setItem("screenLockPassword", newPassword);
   };
 
-  /*   useEffect(() => {
-    const trxCrypto = initialAdditionalCryptosState.find(
-      (crypto) => crypto.chainShortName === "TRX"
-    );
-    if (trxCrypto) {
-      console.log(
-        "TRX address in initialAdditionalCryptosState:",
-        trxCrypto.address
-      );
-    } else {
-      console.log("TRX address not found in initialAdditionalCryptosState.");
-    }
-    if (usdtCrypto.chainShortName === "TRX") {
-    //  console.log("TRX address in usdtCrypto:", usdtCrypto.address);
-    } else {
-      console.log("TRX address not found in usdtCrypto.");
-    }
-  }, [initialAdditionalCryptosState]);
- */
   return (
     <CryptoContext.Provider
       value={{
