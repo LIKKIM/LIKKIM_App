@@ -104,10 +104,11 @@ const TransactionConfirmationModal = ({
             </Text>
 
             <View style={TransactionsScreenStyle.transactionText}>
-              <Text style={{ fontWeight: "bold", marginBottom: 8 }}>
-                {t("Transaction Fee")}:
+              <Text style={TransactionsScreenStyle.transactionText}>
+                <Text style={{ fontWeight: "bold", marginBottom: 8 }}>
+                  {t("Transaction Fee")}:
+                </Text>
               </Text>
-
               <View
                 style={{
                   flexDirection: "row",
