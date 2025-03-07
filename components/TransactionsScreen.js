@@ -368,11 +368,11 @@ function TransactionsScreen() {
   const fetchTransactionFee = async () => {
     try {
       const postData = {
-        chain: selectedCryptoChain, // 使用 selectedCryptoChain 或其他相应字段
+        chain: selectedCryptoChain,
       };
 
       // 打印发送的 POST 数据
-      console.log("Sending POST data:", postData);
+      console.log("🚀 Sending POST data:", JSON.stringify(postData, null, 2));
 
       const response = await fetch(
         "https://bt.likkim.com/api/chain/blockchain-fee",
@@ -385,23 +385,26 @@ function TransactionsScreen() {
         }
       );
 
+      if (!response.ok) {
+        console.error("❌ HTTP Error:", response.status, response.statusText);
+        return;
+      }
+
       const data = await response.json();
 
-      // 打印返回的数据
-      console.log("Received response data:", data);
+      console.log("✅ Received response data:", JSON.stringify(data, null, 2));
 
       if (data && data.data) {
-        // 检查 data.data 是否存在
-        const { rapidGasPrice, recommendedGasPrice } = data.data; // 从 data.data 获取值
+        const { rapidGasPrice, recommendedGasPrice } = data.data;
 
-        setFee(recommendedGasPrice); // 设置 fee
-        console.log("Fee set to:", recommendedGasPrice); // 调试用日志
+        setFee(recommendedGasPrice);
+        console.log("✅ Fee set to:", recommendedGasPrice);
 
-        setRapidFee(rapidGasPrice); // 设置 rapidFee
-        console.log("Rapid fee set to:", rapidGasPrice); // 调试用日志
+        setRapidFee(rapidGasPrice);
+        console.log("✅ Rapid fee set to:", rapidGasPrice);
       }
     } catch (error) {
-      console.error("Failed to fetch transaction fee:", error);
+      console.log("❌ Failed to fetch transaction fee:", error);
     }
   };
 
