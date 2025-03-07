@@ -91,6 +91,7 @@ const TransactionHistory = ({
           justifyContent: "space-between",
           position: "relative",
           marginBottom: 10,
+
           width: "100%",
         }}
       >
@@ -212,6 +213,7 @@ const TransactionHistory = ({
                 <View
                   style={[
                     {
+                      borderRadius: 10,
                       backgroundColor:
                         transaction.state.toLowerCase() === "success"
                           ? "rgba(71, 180, 128, 0.05)"
