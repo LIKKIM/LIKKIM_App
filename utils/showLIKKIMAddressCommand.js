@@ -32,7 +32,9 @@ const showLIKKIMAddressCommand = async (
 
     await device.connect();
     await device.discoverAllServicesAndCharacteristics();
-    console.log("Device connected and services discovered.");
+    console.log(
+      "Show address function Device connected and services discovered."
+    );
 
     if (
       typeof device.writeCharacteristicWithResponseForService !== "function"
