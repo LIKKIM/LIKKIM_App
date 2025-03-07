@@ -1,46 +1,56 @@
 // App.js
+
+// ---------------------------
+// Import Statements
+// ---------------------------
 import "intl-pluralrules";
 import React, { useContext, useEffect, useState } from "react";
-import {
-  Vibration,
-  View,
-  Text,
-  TouchableOpacity,
-  StatusBar,
-  Modal,
-} from "react-native";
+import { View, Text, TouchableOpacity, StatusBar, Modal } from "react-native";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { BlurView } from "expo-blur";
+import { useTranslation } from "react-i18next";
+
 import styles, { darkTheme, lightTheme } from "./styles";
 import WalletScreen from "./components/WalletScreen";
 import TransactionsScreen from "./components/TransactionsScreen";
 import MyColdWalletScreen from "./components/MyColdWalletScreen";
 import OnboardingScreen from "./components/OnboardingScreen";
 import ScreenLock from "./components/ScreenLock";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import FindMyLkkim from "./components/MyColdWalletScreen/FindMyLkkim";
 import SupportPage from "./components/SupportPage";
+import ConnectLIKKIMAuth from "./components/transactionScreens/ConnectLIKKIMAuth";
 import {
   CryptoProvider,
   CryptoContext,
   DarkModeContext,
 } from "./components/CryptoContext";
 import i18n from "./config/i18n";
-import { useTranslation } from "react-i18next";
-import { BlurView } from "expo-blur";
-import ConnectLIKKIMAuth from "./components/transactionScreens/ConnectLIKKIMAuth";
 
-// Configure Reactotron in development mode
+// ---------------------------
+// Development Configuration
+// ---------------------------
 if (__DEV__) {
   import("./ReactotronConfig").then(() => console.log("Reactotron Configured"));
 }
 
+// ---------------------------
+// Navigator Constants
+// ---------------------------
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
+// ---------------------------
+// Main App Component
+// ---------------------------
+/**
+ * The main App component.
+ * Checks if the app is being launched for the first time and displays the onboarding screen accordingly.
+ */
 export default function App() {
   const { t } = useTranslation();
   const [isFirstLaunch, setIsFirstLaunch] = useState(null);
@@ -50,7 +60,7 @@ export default function App() {
   // Check if the app is launched for the first time using AsyncStorage
   useEffect(() => {
     AsyncStorage.getItem("alreadyLaunched").then((value) => {
-      if (value == null) {
+      if (value === null) {
         AsyncStorage.setItem("alreadyLaunched", "true");
         setIsFirstLaunch(true);
       } else {
@@ -59,12 +69,12 @@ export default function App() {
     });
   }, []);
 
-  // Callback to handle when onboarding is completed
+  // Callback when onboarding is completed
   const handleOnboardingDone = () => {
     setIsFirstLaunch(false);
   };
 
-  // Render nothing until we know if this is the first launch
+  // Render nothing until the first launch state is determined
   if (isFirstLaunch === null) {
     return null;
   } else if (isFirstLaunch === true) {
@@ -75,17 +85,18 @@ export default function App() {
     );
   }
 
+  // Main app content wrapped with gesture handling and crypto context providers
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <CryptoProvider>
         <NavigationContainer>
           <Stack.Navigator>
-            {/* Main application content is wrapped in a Stack screen called "Back" */}
+            {/* Main application content */}
             <Stack.Screen name="Back" options={{ headerShown: false }}>
               {(props) => (
                 <AppContent
                   {...props}
-                  t={t} // Pass the i18n translation function
+                  t={t}
                   headerDropdownVisible={headerDropdownVisible}
                   setHeaderDropdownVisible={setHeaderDropdownVisible}
                   selectedCardName={selectedCardName}
@@ -99,18 +110,18 @@ export default function App() {
               name="Find My LIKKIM"
               component={FindMyLkkim}
               options={{
-                title: t("Find My LIKKIM"), // Internationalized title
+                title: t("Find My LIKKIM"),
               }}
             />
 
-            {/* Screen for wallet authentication */}
+            {/* Wallet authentication screen */}
             <Stack.Screen
               name="Request Wallet Auth"
+              component={ConnectLIKKIMAuth}
               options={{
                 title: "Transaction Confirmation",
                 headerShadowVisible: false,
               }}
-              component={ConnectLIKKIMAuth}
             />
 
             {/* Support page screen */}
@@ -129,14 +140,16 @@ export default function App() {
   );
 }
 
+// ---------------------------
+// OnboardingApp Component
+// ---------------------------
 /**
- * OnboardingApp component that shows the onboarding screen.
- * It is rendered only when the app is launched for the first time.
+ * OnboardingApp displays the onboarding screen.
+ * This component is rendered only on the first launch.
  */
 function OnboardingApp({ handleOnboardingDone }) {
   const { isDarkMode } = useContext(DarkModeContext);
 
-  // TODO: Remove debug code for intro screen if not needed.
   return (
     <>
       <StatusBar backgroundColor="#21201E" barStyle="light-content" />
@@ -145,8 +158,12 @@ function OnboardingApp({ handleOnboardingDone }) {
   );
 }
 
+// ---------------------------
+// AppContent Component
+// ---------------------------
 /**
- * AppContent component holds the main content of the app (Tabs and screens).
+ * AppContent holds the main content of the application.
+ * It includes the Tab Navigator for Wallet, Transactions, and My Cold Wallet screens.
  */
 function AppContent({
   t,
@@ -160,21 +177,7 @@ function AppContent({
   const navigation = useNavigation();
   const [walletModalVisible, setWalletModalVisible] = useState(false);
 
-  /*   // Log the screen lock status when it changes
-  useEffect(() => {
-    console.log("isScreenLockEnabled:", isScreenLockEnabled);
-  }, [isScreenLockEnabled]); */
-
-  // Function to handle card deletion confirmation
-  const handleConfirmDelete = () => {
-    setHeaderDropdownVisible(false);
-    navigation.navigate("Wallet", {
-      showDeleteConfirmModal: true,
-      isModalVisible: true, // Set modal visibility to true
-    });
-  };
-
-  // Set up theme and styling based on dark mode
+  // Theme and style configuration based on dark mode
   const theme = isDarkMode ? darkTheme : lightTheme;
   const tabBarActiveTintColor = isDarkMode ? "#CCB68C" : "#CFAB95";
   const tabBarInactiveTintColor = isDarkMode ? "#ffffff50" : "#676776";
@@ -186,19 +189,12 @@ function AppContent({
   // Listen for navigation state changes to update wallet modal visibility
   useEffect(() => {
     const unsubscribe = navigation.addListener("state", (e) => {
-      // Get the routes from the navigation state
       const rootRoutes = e.data.state?.routes;
-
-      // Find the "Back" route and check its nested routes
       const backRoute = rootRoutes?.find((route) => route.name === "Back");
       if (backRoute && backRoute.state) {
         const tabRoutes = backRoute.state.routes;
         const walletRoute = tabRoutes.find((route) => route.name === "Wallet");
         if (walletRoute?.params?.isModalVisible !== undefined) {
-          /*           console.log(
-            "isModalVisible parameter:",
-            walletRoute.params.isModalVisible
-          ); */
           setWalletModalVisible(walletRoute.params.isModalVisible);
         }
       }
@@ -206,17 +202,26 @@ function AppContent({
     return unsubscribe;
   }, [navigation]);
 
-  // Conditionally render the ScreenLock component during app launch if enabled
+  // Display the ScreenLock component if enabled during app launch
   if (isScreenLockEnabled && isAppLaunching) {
     return <ScreenLock />;
   }
+
+  // Function to handle card deletion confirmation
+  const handleConfirmDelete = () => {
+    setHeaderDropdownVisible(false);
+    navigation.navigate("Wallet", {
+      showDeleteConfirmModal: true,
+      isModalVisible: true,
+    });
+  };
 
   return (
     <View style={{ flex: 1, backgroundColor: bottomBackgroundColor }}>
       <Tab.Navigator
         screenOptions={({ route }) => ({
           lazy: false,
-          tabBarIcon: ({ focused, color, size }) => {
+          tabBarIcon: ({ focused, size }) => {
             let iconName;
             if (route.name === "Wallet") {
               iconName = "account-balance-wallet";
@@ -287,7 +292,6 @@ function AppContent({
             const cryptoCards = route.params?.cryptoCards || [{}];
             return {
               headerRight: () => {
-                // Retrieve modal visibility from route parameters
                 const isModalVisible = route.params?.isModalVisible;
                 return (
                   <View style={{ flexDirection: "row", alignItems: "center" }}>
