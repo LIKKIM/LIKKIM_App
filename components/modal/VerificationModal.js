@@ -36,6 +36,7 @@ const VerificationModal = ({ visible, status, onClose, styles, t }) => {
       <BlurView intensity={10} style={styles.centeredView}>
         <View style={styles.pinModalView}>
           <Image
+            key={status}
             source={imageSource}
             style={{ width: 120, height: 120, marginTop: 20 }}
           />
