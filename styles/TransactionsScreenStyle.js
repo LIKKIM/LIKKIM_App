@@ -161,6 +161,16 @@ const TransactionsScreenStyles = (isDarkMode) => {
       fontSize: 16,
       marginBottom: 16,
     },
+    balanceLabel: {
+      marginTop: 6,
+      color: textColor,
+      fontSize: 12,
+    },
+    balanceValue: {
+      marginTop: 6,
+      color: textColor,
+      fontSize: 12,
+    },
     balanceSubtitle: {
       color: secondTextColor,
       fontSize: 14,
