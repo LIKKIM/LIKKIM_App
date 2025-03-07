@@ -204,9 +204,13 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                             onPress={() => onSelect(item)}
                             style={{
                               width: 280,
-                              paddingVertical: 10,
+                              backgroundColor: isDarkMode
+                                ? "#21201E80"
+                                : "#E5E1E980",
+                              padding: 10,
                               alignItems: "center",
                               flexDirection: "row",
+                              borderRadius: 10,
                               justifyContent: "space-between",
                             }}
                           >
