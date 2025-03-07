@@ -91,7 +91,7 @@ const MyColdWalletContent = ({
                   name="delete-outline"
                   size={24}
                   color={iconColor}
-                  style={[styles.Icon, { marginLeft: 10 }]}
+                  style={[styles.Icon, { marginLeft: 20 }]}
                 />
                 <Text style={[styles.Text, { flex: 1 }]}>
                   {t("Delete Wallet")}
@@ -125,12 +125,6 @@ const MyColdWalletContent = ({
         {isSupportExpanded && (
           <View>
             {settingsOptions.support.map((option) => {
-              const extraIconStyle = [
-                "Help & Support",
-                "Privacy & Data",
-              ].includes(option.title)
-                ? { marginLeft: 10 }
-                : {};
               return (
                 <TouchableOpacity
                   key={option.title}
@@ -142,7 +136,7 @@ const MyColdWalletContent = ({
                       name={option.icon}
                       size={24}
                       color={iconColor}
-                      style={[styles.Icon, extraIconStyle]}
+                      style={[styles.Icon, { marginLeft: 20 }]}
                     />
                     <Text style={[styles.Text, { flex: 1 }]}>
                       {option.title}

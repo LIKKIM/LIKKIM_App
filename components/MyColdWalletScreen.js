@@ -41,6 +41,7 @@ import * as LocalAuthentication from "expo-local-authentication";
 import AddressBookModal from "./modal/AddressBookModal";
 import PasswordModal from "./modal/PasswordModal";
 import MyColdWalletContent from "./MyColdWalletScreen/MyColdWalletContent";
+import getSettingsOptions from "./MyColdWalletScreen/settingsOptions";
 import { languages } from "../config/languages";
 import base64 from "base64-js";
 import { Buffer } from "buffer";
@@ -1031,182 +1032,28 @@ function MyColdWalletScreen() {
     setIsDeleteWalletVisible((prevState) => !prevState);
   };
 
-  const settingsOptions = {
-    settings: [
-      {
-        title: t("Default Currency"),
-        icon: "attach-money",
-        onPress: () => {
-          Vibration.vibrate();
-          setCurrencyModalVisible(true);
-        },
-        extraIcon: "arrow-drop-down",
-        selectedOption: selectedCurrency,
-      },
-      {
-        title: t("Language"),
-        icon: "language",
-        onPress: () => {
-          Vibration.vibrate();
-          setLanguageModalVisible(true);
-        },
-        extraIcon: "arrow-drop-down",
-        selectedOption: (
-          languages.find((lang) => lang.code === selectedLanguage) ||
-          languages.find((lang) => lang.code === "en")
-        ).name,
-      },
-      {
-        title: t("Dark Mode"),
-        icon: "dark-mode",
-        onPress: () => {
-          Vibration.vibrate();
-          handleDarkModeChange(!isDarkMode);
-        },
-        toggle: (
-          <Switch
-            trackColor={{ false: "#767577", true: toggleColor }}
-            thumbColor={isDarkMode ? "#fff" : "#f4f3f4"}
-            ios_backgroundColor="#3e3e3e"
-            onValueChange={() => {
-              Vibration.vibrate();
-              handleDarkModeChange(!isDarkMode);
-            }}
-            value={isDarkMode}
-          />
-        ),
-      },
-      {
-        title: t("Address Book"),
-        icon: "portrait",
-        onPress: () => {
-          Vibration.vibrate();
-          setAddressBookModalVisible(true);
-        },
-      },
-      {
-        title: t("Enable Screen Lock"),
-        icon: "lock-outline",
-        onPress: () => {
-          Vibration.vibrate();
-          handleScreenLockToggle(!isScreenLockEnabled);
-        },
-        toggle: (
-          <Switch
-            trackColor={{ false: "#767577", true: toggleColor }}
-            thumbColor={isScreenLockEnabled ? "#fff" : "#f4f3f4"}
-            ios_backgroundColor="#3e3e3e"
-            onValueChange={() => {
-              Vibration.vibrate();
-              handleScreenLockToggle(!isScreenLockEnabled);
-            }}
-            value={isScreenLockEnabled}
-          />
-        ),
-      },
-      ...(isScreenLockEnabled
-        ? [
-            {
-              title: t("Change App Screen Lock Password"),
-              icon: "password",
-              onPress: () => {
-                Vibration.vibrate();
-                openChangePasswordModal();
-              },
-            },
-            {
-              title: t("Enable Face ID"),
-              icon: "face",
-              onPress: () => {
-                Vibration.vibrate();
-                toggleFaceID(!isFaceIDEnabled);
-              },
-              toggle: (
-                <Switch
-                  trackColor={{ false: "#767577", true: toggleColor }}
-                  thumbColor={isFaceIDEnabled ? "#fff" : "#f4f3f4"}
-                  ios_backgroundColor="#3e3e3e"
-                  onValueChange={async () => {
-                    Vibration.vibrate();
-                    await toggleFaceID(!isFaceIDEnabled);
-                  }}
-                  value={isFaceIDEnabled}
-                />
-              ),
-            },
-          ]
-        : []),
-      {
-        title: t("Find My LIKKIM"),
-        icon: "location-on",
-        onPress: () => {
-          Vibration.vibrate();
-          navigation.navigate("Find My LIKKIM");
-        },
-      },
-      {
-        title: t("Firmware Update"),
-        icon: "downloading",
-        onPress: () => {
-          Vibration.vibrate();
-          handleFirmwareUpdate();
-        },
-      },
-    ],
-    walletManagement: [
-      {
-        title: t("Wallet Management"),
-        icon: "wallet",
-        extraIcon: isDeleteWalletVisible ? "arrow-drop-up" : "arrow-drop-down",
-        onPress: toggleDeleteWalletVisibility,
-      },
-      isDeleteWalletVisible && {
-        title: t("Delete Wallet"),
-        icon: "delete-outline",
-        onPress: () => {
-          Vibration.vibrate();
-          handleDeleteWallet();
-        },
-        style: { color: "red" },
-      },
-    ],
-    support: [
-      {
-        title: t("Help & Support"),
-        icon: "help-outline",
-        onPress: () => {
-          Vibration.vibrate();
-          navigation.navigate("Support");
-        },
-      },
-      {
-        title: t("Privacy & Data"),
-        icon: "gpp-good",
-        onPress: () => {
-          Vibration.vibrate();
-          Linking.openURL("https://likkim.com/privacy-policy");
-        },
-      },
-      {
-        title: t("About"),
-        icon: "info-outline",
-        onPress: () => {
-          Vibration.vibrate();
-          Linking.openURL("https://www.likkim.com");
-        },
-      },
-    ],
-    info: [
-      {
-        title: t("Version"),
-        icon: "update",
-        version: appConfig.ios.buildNumber,
-        onPress: () => {
-          Vibration.vibrate();
-        },
-      },
-    ],
-  };
+  const settingsOptions = getSettingsOptions({
+    t,
+    navigation,
+    selectedCurrency,
+    setCurrencyModalVisible,
+    setLanguageModalVisible,
+    languages,
+    selectedLanguage,
+    isDarkMode,
+    toggleColor,
+    handleDarkModeChange,
+    setAddressBookModalVisible,
+    handleScreenLockToggle,
+    isScreenLockEnabled,
+    openChangePasswordModal,
+    toggleFaceID,
+    isFaceIDEnabled,
+    handleFirmwareUpdate,
+    isDeleteWalletVisible,
+    toggleDeleteWalletVisibility,
+    handleDeleteWallet,
+  });
 
   // Confirm delete wallet alert
   const handleDeleteWallet = () => {
