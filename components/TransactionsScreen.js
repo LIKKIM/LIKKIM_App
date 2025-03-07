@@ -49,6 +49,9 @@ import PinModal from "./modal/PinModal";
 import TransactionHistory from "./transactionScreens/TransactionHistory";
 import ActionButtons from "./transactionScreens/ActionButtons";
 
+// 显示地址函数 发送数据写法
+import showLIKKIMAddressCommand from "../utils/showLIKKIMAddressCommand";
+
 // BLE 常量
 const serviceUUID = "6E400001-B5A3-F393-E0A9-E50E24DCCA9E";
 const writeCharacteristicUUID = "6E400002-B5A3-F393-E0A9-E50E24DCCA9E";
@@ -1333,89 +1336,6 @@ function TransactionsScreen() {
       return responseData;
     } catch (error) {
       console.log("处理交易失败:", error.message || error);
-    }
-  };
-
-  // 显示地址函数 发送数据写法
-  const showLIKKIMAddressCommand = async (device, coinType) => {
-    try {
-      // 检查设备对象是否有效
-      if (typeof device !== "object" || !device.isConnected) {
-        console.log("设备对象无效:", device);
-        return;
-      }
-
-      // 连接设备并发现所有服务
-      await device.connect();
-      await device.discoverAllServicesAndCharacteristics();
-      console.log("设备已连接并发现所有服务。");
-
-      // 检查设备是否具有 writeCharacteristicWithResponseForService 方法
-      if (
-        typeof device.writeCharacteristicWithResponseForService !== "function"
-      ) {
-        console.log(
-          "设备不支持 writeCharacteristicWithResponseForService 方法。"
-        );
-        return;
-      }
-
-      // 根据 coinType 匹配对应的字符串
-      const commandString = coinCommandMapping[coinType];
-      // 【新增】检查 commandString 是否存在
-      if (!commandString) {
-        console.log("不支持的币种:", coinType);
-        return;
-      }
-
-      // 将命令字符串转换为 Base64 编码
-      const encodedCommand = Buffer.from(commandString, "utf-8").toString(
-        "base64"
-      );
-
-      // 向服务写入命令字符串（确保使用 Base64 编码）
-      await device.writeCharacteristicWithResponseForService(
-        serviceUUID,
-        writeCharacteristicUUID,
-        encodedCommand
-      );
-
-      // 设置验证地址的状态
-      setIsVerifyingAddress(true);
-      setAddressVerificationMessage("正在 LIKKIM 上验证地址...");
-      console.log("地址显示命令已发送:", commandString);
-
-      // 监听设备的响应 - bugging
-      const notifyCharacteristicUUID = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E";
-      const addressMonitorSubscription = device.monitorCharacteristicForService(
-        serviceUUID,
-        notifyCharacteristicUUID,
-        (error, characteristic) => {
-          if (error) {
-            console.log("监听设备响应时出错:", error);
-            return;
-          }
-          // 【新增】检查 characteristic 是否有效
-          if (!characteristic || !characteristic.value) {
-            console.log("未收到有效数据");
-            return;
-          }
-          const receivedDataHex = Buffer.from(characteristic.value, "base64")
-            .toString("hex")
-            .toUpperCase();
-          console.log("接收到的十六进制数据字符串:", receivedDataHex);
-
-          // 检查接收到的数据是否为预期的响应
-          if (receivedDataString === "Address_OK") {
-            console.log("在 LIKKIM 上成功显示地址");
-            setAddressVerificationMessage(t("addressShown")); // 假设 'addressShown' 是国际化文件中的 key
-          }
-        }
-      );
-
-      return addressMonitorSubscription;
-    } catch (error) {
-      console.log("发送显示地址命令失败:", error);
     }
   };
 
