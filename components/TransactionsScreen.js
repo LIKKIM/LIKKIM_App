@@ -1574,7 +1574,13 @@ function TransactionsScreen() {
     if (verifiedDevices.length > 0) {
       const device = devices.find((d) => d.id === verifiedDevices[0]);
       if (device) {
-        showLIKKIMAddressCommand(device, chainShortName);
+        showLIKKIMAddressCommand(
+          device,
+          chainShortName,
+          setIsVerifyingAddress,
+          setAddressVerificationMessage,
+          t
+        );
       } else {
         setAddressModalVisible(false);
         setBleVisible(true);
@@ -1584,6 +1590,7 @@ function TransactionsScreen() {
       setBleVisible(true);
     }
   };
+
   const handleReceivePress = () => {
     scanDevices();
     setOperationType("receive");

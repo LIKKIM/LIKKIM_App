@@ -843,7 +843,13 @@ function WalletScreen({ route, navigation }) {
     if (verifiedDevices.length > 0) {
       const device = devices.find((d) => d.id === verifiedDevices[0]);
       if (device) {
-        showLIKKIMAddressCommand(device, selectedCardChainShortName);
+        showLIKKIMAddressCommand(
+          device,
+          selectedCardChainShortName,
+          setIsVerifyingAddress,
+          setAddressVerificationMessage,
+          t
+        );
       } else {
         setAddressModalVisible(false);
         setBleVisible(true);
