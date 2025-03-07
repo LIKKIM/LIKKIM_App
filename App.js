@@ -172,7 +172,7 @@ function AppContent({
   selectedCardName,
   setSelectedCardName,
 }) {
-  // 1. 固定调用所有 hook：useContext, useState, useEffect 都必须在函数最前面调用
+  // 固定调用所有 hook（不能放在条件语句中）
   const { isAppLaunching } = useContext(CryptoContext);
   const { isDarkMode } = useContext(DarkModeContext);
   const navigation = useNavigation();
@@ -181,7 +181,7 @@ function AppContent({
     useState(false);
   const [isScreenLockLoaded, setIsScreenLockLoaded] = useState(false);
 
-  // 2. 监听导航状态（无条件调用）
+  // 监听导航状态（无条件调用）
   useEffect(() => {
     const unsubscribe = navigation.addListener("state", (e) => {
       const rootRoutes = e.data.state?.routes;
@@ -197,7 +197,7 @@ function AppContent({
     return unsubscribe;
   }, [navigation]);
 
-  // 3. 加载 screenLockFeatureEnabled（无条件调用）
+  // 加载 screenLockFeatureEnabled（无条件调用）
   useEffect(() => {
     AsyncStorage.getItem("screenLockFeatureEnabled")
       .then((value) => {
@@ -218,7 +218,7 @@ function AppContent({
       });
   }, []);
 
-  // 4. 在所有 hook 调用完成后，再根据加载状态和条件返回内容
+  // 在所有 hook 调用完成后，根据加载状态返回内容
   if (!isScreenLockLoaded) {
     return null; // 或者返回一个 loading indicator
   }
@@ -228,7 +228,18 @@ function AppContent({
     return <ScreenLock />;
   }
 
-  // 5. 以下是 Tab Navigator 的返回内容
+  // ---------------------------
+  // Function to handle card deletion confirmation
+  // ---------------------------
+  const handleConfirmDelete = () => {
+    setHeaderDropdownVisible(false);
+    navigation.navigate("Wallet", {
+      showDeleteConfirmModal: true,
+      isModalVisible: true,
+    });
+  };
+
+  // Theme and style configuration based on dark mode
   const theme = isDarkMode ? darkTheme : lightTheme;
   const tabBarActiveTintColor = isDarkMode ? "#CCB68C" : "#CFAB95";
   const tabBarInactiveTintColor = isDarkMode ? "#ffffff50" : "#676776";
