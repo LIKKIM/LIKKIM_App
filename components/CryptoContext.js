@@ -85,11 +85,7 @@ export const CryptoProvider = ({ children }) => {
           "initialAdditionalCryptos",
           JSON.stringify(updatedCryptos)
         );
-        // 打印更新后的 initialAdditionalCryptos 数据
-        /*         console.log(
-          "Updated initialAdditionalCryptos (unsupported chain):",
-          updatedCryptos
-        ); */
+
         return updatedCryptos;
       });
       return;
