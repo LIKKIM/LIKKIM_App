@@ -394,11 +394,21 @@ const WalletContent = (props) => {
             flexDirection: "row",
             justifyContent: "flex-end",
             alignItems: "flex-start",
+            marginBottom: 10,
           }}
         >
           {renderChainButton()}
         </View>
       )}
+      {/*  NFTs view */}
+      <View
+        style={{
+          width: 320,
+          height: 590,
+          borderRadius: 8,
+          // backgroundColor: "red",
+        }}
+      ></View>
     </View>
   );
 };
