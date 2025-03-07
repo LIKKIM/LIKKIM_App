@@ -178,7 +178,7 @@ export const CryptoProvider = ({ children }) => {
       }
 
       const data = await response.json();
-      console.log("Fetched data:", data);
+      //  console.log("Fetched data:", data);
 
       if (data.code === 0 && data.data) {
         const flattenedData = {};
