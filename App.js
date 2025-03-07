@@ -172,7 +172,7 @@ function AppContent({
   selectedCardName,
   setSelectedCardName,
 }) {
-  // Retrieve isAppLaunching from CryptoContext.
+  // 1. 固定调用所有 hook：useContext, useState, useEffect 都必须在函数最前面调用
   const { isAppLaunching } = useContext(CryptoContext);
   const { isDarkMode } = useContext(DarkModeContext);
   const navigation = useNavigation();
@@ -181,7 +181,23 @@ function AppContent({
     useState(false);
   const [isScreenLockLoaded, setIsScreenLockLoaded] = useState(false);
 
-  // Load screenLockFeatureEnabled from persistent storage (AsyncStorage)
+  // 2. 监听导航状态（无条件调用）
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("state", (e) => {
+      const rootRoutes = e.data.state?.routes;
+      const backRoute = rootRoutes?.find((route) => route.name === "Back");
+      if (backRoute && backRoute.state) {
+        const tabRoutes = backRoute.state.routes;
+        const walletRoute = tabRoutes.find((route) => route.name === "Wallet");
+        if (walletRoute?.params?.isModalVisible !== undefined) {
+          setWalletModalVisible(walletRoute.params.isModalVisible);
+        }
+      }
+    });
+    return unsubscribe;
+  }, [navigation]);
+
+  // 3. 加载 screenLockFeatureEnabled（无条件调用）
   useEffect(() => {
     AsyncStorage.getItem("screenLockFeatureEnabled")
       .then((value) => {
@@ -202,9 +218,9 @@ function AppContent({
       });
   }, []);
 
-  // 在 screenLock 设置加载完之前不渲染 Tab Navigator
+  // 4. 在所有 hook 调用完成后，再根据加载状态和条件返回内容
   if (!isScreenLockLoaded) {
-    return null; // 或者可以返回一个 loading indicator
+    return null; // 或者返回一个 loading indicator
   }
 
   // 如果持久化中启用了屏幕锁，且应用仍处于启动中，则直接显示 ScreenLock 页面
@@ -212,7 +228,7 @@ function AppContent({
     return <ScreenLock />;
   }
 
-  // Theme and style configuration based on dark mode
+  // 5. 以下是 Tab Navigator 的返回内容
   const theme = isDarkMode ? darkTheme : lightTheme;
   const tabBarActiveTintColor = isDarkMode ? "#CCB68C" : "#CFAB95";
   const tabBarInactiveTintColor = isDarkMode ? "#ffffff50" : "#676776";
@@ -220,31 +236,6 @@ function AppContent({
   const tabBarBackgroundColor = isDarkMode ? "#22201F" : "#fff";
   const bottomBackgroundColor = isDarkMode ? "#0E0D0D" : "#EDEBEF";
   const iconColor = isDarkMode ? "#ffffff" : "#000000";
-
-  // Listen for navigation state changes to update wallet modal visibility
-  useEffect(() => {
-    const unsubscribe = navigation.addListener("state", (e) => {
-      const rootRoutes = e.data.state?.routes;
-      const backRoute = rootRoutes?.find((route) => route.name === "Back");
-      if (backRoute && backRoute.state) {
-        const tabRoutes = backRoute.state.routes;
-        const walletRoute = tabRoutes.find((route) => route.name === "Wallet");
-        if (walletRoute?.params?.isModalVisible !== undefined) {
-          setWalletModalVisible(walletRoute.params.isModalVisible);
-        }
-      }
-    });
-    return unsubscribe;
-  }, [navigation]);
-
-  // Function to handle card deletion confirmation
-  const handleConfirmDelete = () => {
-    setHeaderDropdownVisible(false);
-    navigation.navigate("Wallet", {
-      showDeleteConfirmModal: true,
-      isModalVisible: true,
-    });
-  };
 
   return (
     <View style={{ flex: 1, backgroundColor: bottomBackgroundColor }}>
