@@ -292,10 +292,7 @@ export const CryptoProvider = ({ children }) => {
         );
         if (savedInitialCryptos !== null) {
           const parsedInitialCryptos = JSON.parse(savedInitialCryptos);
-          /*           console.log(
-            "Loaded initialAdditionalCryptos from storage:",
-            parsedInitialCryptos
-          ); */
+
           setInitialAdditionalCryptos(parsedInitialCryptos);
         }
       } catch (error) {
