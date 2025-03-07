@@ -173,13 +173,13 @@ function AppContent({
   setSelectedCardName,
 }) {
   // Retrieve isAppLaunching from CryptoContext.
-  // Read isScreenLockEnabled directly from AsyncStorage.
   const { isAppLaunching } = useContext(CryptoContext);
   const { isDarkMode } = useContext(DarkModeContext);
   const navigation = useNavigation();
   const [walletModalVisible, setWalletModalVisible] = useState(false);
   const [screenLockFeatureEnabled, setScreenLockFeatureEnabled] =
     useState(false);
+  const [isScreenLockLoaded, setIsScreenLockLoaded] = useState(false);
 
   // Load screenLockFeatureEnabled from persistent storage (AsyncStorage)
   useEffect(() => {
@@ -195,8 +195,22 @@ function AppContent({
       })
       .catch((error) =>
         console.error("Failed to load screenLockFeatureEnabled", error)
-      );
+      )
+      .finally(() => {
+        // 标记加载已完成
+        setIsScreenLockLoaded(true);
+      });
   }, []);
+
+  // 在 screenLock 设置加载完之前不渲染 Tab Navigator
+  if (!isScreenLockLoaded) {
+    return null; // 或者可以返回一个 loading indicator
+  }
+
+  // 如果持久化中启用了屏幕锁，且应用仍处于启动中，则直接显示 ScreenLock 页面
+  if (screenLockFeatureEnabled && isAppLaunching) {
+    return <ScreenLock />;
+  }
 
   // Theme and style configuration based on dark mode
   const theme = isDarkMode ? darkTheme : lightTheme;
@@ -222,11 +236,6 @@ function AppContent({
     });
     return unsubscribe;
   }, [navigation]);
-
-  // Display the ScreenLock component if enabled during app launch
-  if (screenLockFeatureEnabled && isAppLaunching) {
-    return <ScreenLock />;
-  }
 
   // Function to handle card deletion confirmation
   const handleConfirmDelete = () => {
