@@ -806,21 +806,6 @@ function WalletScreen({ route, navigation }) {
       console.log("断开设备连接失败:", error);
     }
   };
-  function crc16Modbus(arr) {
-    let crc = 0xffff;
-    for (let byte of arr) {
-      crc ^= byte; // 按位异或
-      for (let i = 0; i < 8; i++) {
-        // 处理每一个字节的8位
-        if (crc & 0x0001) {
-          crc = (crc >> 1) ^ 0xa001;
-        } else {
-          crc = crc >> 1;
-        }
-      }
-    }
-    return crc & 0xffff; // 确保CRC值是16位
-  }
 
   // 停止监听验证码;
   const stopMonitoringVerificationCode = () => {

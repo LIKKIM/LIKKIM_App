@@ -462,17 +462,6 @@ function MyColdWalletScreen() {
     }
   };
 
-  function crc16Modbus(arr) {
-    let crc = 0xffff;
-    for (let byte of arr) {
-      crc ^= byte;
-      for (let i = 0; i < 8; i++) {
-        crc = crc & 0x0001 ? (crc >> 1) ^ 0xa001 : crc >> 1;
-      }
-    }
-    return crc & 0xffff;
-  }
-
   const reconnectDevice = async (device) => {
     try {
       console.log(`Attempting to reconnect device: ${device.id}`);
