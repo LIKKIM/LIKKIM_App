@@ -1,6 +1,7 @@
 // settingsOptions.js
 import React from "react";
 import { Vibration, Switch, Linking } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import appConfig from "../../app.config";
 
 const getSettingsOptions = ({
@@ -25,6 +26,25 @@ const getSettingsOptions = ({
   toggleDeleteWalletVisibility,
   handleDeleteWallet,
 }) => {
+  // Helper function to persist the screen lock setting
+  const persistScreenLockSetting = (newValue) => {
+    AsyncStorage.setItem("screenLockFeatureEnabled", JSON.stringify(newValue))
+      .then(() => {
+        console.log("Persisted screenLockFeatureEnabled:", newValue);
+      })
+      .catch((error) =>
+        console.error("Failed to persist screenLockFeatureEnabled", error)
+      );
+  };
+
+  // Toggle handler for Screen Lock option
+  const toggleScreenLock = () => {
+    const newValue = !isScreenLockEnabled;
+    Vibration.vibrate();
+    handleScreenLockToggle(newValue);
+    persistScreenLockSetting(newValue);
+  };
+
   return {
     settings: [
       {
@@ -83,7 +103,7 @@ const getSettingsOptions = ({
         icon: "lock-outline",
         onPress: () => {
           Vibration.vibrate();
-          handleScreenLockToggle(!isScreenLockEnabled);
+          toggleScreenLock();
         },
         toggle: (
           <Switch
@@ -92,7 +112,7 @@ const getSettingsOptions = ({
             ios_backgroundColor="#3e3e3e"
             onValueChange={() => {
               Vibration.vibrate();
-              handleScreenLockToggle(!isScreenLockEnabled);
+              toggleScreenLock();
             }}
             value={isScreenLockEnabled}
           />

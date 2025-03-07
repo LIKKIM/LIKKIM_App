@@ -172,10 +172,31 @@ function AppContent({
   selectedCardName,
   setSelectedCardName,
 }) {
-  const { isScreenLockEnabled, isAppLaunching } = useContext(CryptoContext);
+  // Retrieve isAppLaunching from CryptoContext.
+  // Read isScreenLockEnabled directly from AsyncStorage.
+  const { isAppLaunching } = useContext(CryptoContext);
   const { isDarkMode } = useContext(DarkModeContext);
   const navigation = useNavigation();
   const [walletModalVisible, setWalletModalVisible] = useState(false);
+  const [screenLockFeatureEnabled, setScreenLockFeatureEnabled] =
+    useState(false);
+
+  // Load screenLockFeatureEnabled from persistent storage (AsyncStorage)
+  useEffect(() => {
+    AsyncStorage.getItem("screenLockFeatureEnabled")
+      .then((value) => {
+        if (value !== null) {
+          const parsedValue = JSON.parse(value);
+          setScreenLockFeatureEnabled(parsedValue);
+          console.log("Loaded screenLockFeatureEnabled:", parsedValue);
+        } else {
+          console.log("screenLockFeatureEnabled is not set in AsyncStorage");
+        }
+      })
+      .catch((error) =>
+        console.error("Failed to load screenLockFeatureEnabled", error)
+      );
+  }, []);
 
   // Theme and style configuration based on dark mode
   const theme = isDarkMode ? darkTheme : lightTheme;
@@ -203,7 +224,7 @@ function AppContent({
   }, [navigation]);
 
   // Display the ScreenLock component if enabled during app launch
-  if (isScreenLockEnabled && isAppLaunching) {
+  if (screenLockFeatureEnabled && isAppLaunching) {
     return <ScreenLock />;
   }
 
