@@ -1,8 +1,5 @@
 // App.js
 
-// ---------------------------
-// Import Statements
-// ---------------------------
 import "intl-pluralrules";
 import React, { useContext, useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, StatusBar, Modal } from "react-native";
@@ -31,25 +28,16 @@ import {
 } from "./components/CryptoContext";
 import i18n from "./config/i18n";
 
-// ---------------------------
-// Development Configuration
-// ---------------------------
 if (__DEV__) {
   import("./ReactotronConfig").then(() => console.log("Reactotron Configured"));
 }
 
-// ---------------------------
-// Navigator Constants
-// ---------------------------
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-// ---------------------------
-// Main App Component
-// ---------------------------
 /**
- * The main App component.
- * Checks if the app is being launched for the first time and displays the onboarding screen accordingly.
+ * Main App component.
+ * Checks if the app is launched for the first time and displays the onboarding screen accordingly.
  */
 export default function App() {
   const { t } = useTranslation();
@@ -57,7 +45,6 @@ export default function App() {
   const [headerDropdownVisible, setHeaderDropdownVisible] = useState(false);
   const [selectedCardName, setSelectedCardName] = useState("");
 
-  // Check if the app is launched for the first time using AsyncStorage
   useEffect(() => {
     AsyncStorage.getItem("alreadyLaunched").then((value) => {
       if (value === null) {
@@ -69,29 +56,23 @@ export default function App() {
     });
   }, []);
 
-  // Callback when onboarding is completed
   const handleOnboardingDone = () => {
     setIsFirstLaunch(false);
   };
 
-  // Render nothing until the first launch state is determined
-  if (isFirstLaunch === null) {
-    return null;
-  } else if (isFirstLaunch === true) {
+  if (isFirstLaunch === null) return null;
+  if (isFirstLaunch === true)
     return (
       <CryptoProvider>
         <OnboardingApp handleOnboardingDone={handleOnboardingDone} />
       </CryptoProvider>
     );
-  }
 
-  // Main app content wrapped with gesture handling and crypto context providers
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <CryptoProvider>
         <NavigationContainer>
           <Stack.Navigator>
-            {/* Main application content */}
             <Stack.Screen name="Back" options={{ headerShown: false }}>
               {(props) => (
                 <AppContent
@@ -104,17 +85,11 @@ export default function App() {
                 />
               )}
             </Stack.Screen>
-
-            {/* Screen for finding a LIKKIM device */}
             <Stack.Screen
               name="Find My LIKKIM"
               component={FindMyLkkim}
-              options={{
-                title: t("Find My LIKKIM"),
-              }}
+              options={{ title: t("Find My LIKKIM") }}
             />
-
-            {/* Wallet authentication screen */}
             <Stack.Screen
               name="Request Wallet Auth"
               component={ConnectLIKKIMAuth}
@@ -123,8 +98,6 @@ export default function App() {
                 headerShadowVisible: false,
               }}
             />
-
-            {/* Support page screen */}
             <Stack.Screen
               name="Support"
               component={SupportPage}
@@ -140,12 +113,8 @@ export default function App() {
   );
 }
 
-// ---------------------------
-// OnboardingApp Component
-// ---------------------------
 /**
- * OnboardingApp displays the onboarding screen.
- * This component is rendered only on the first launch.
+ * OnboardingApp component displays the onboarding screen.
  */
 function OnboardingApp({ handleOnboardingDone }) {
   const { isDarkMode } = useContext(DarkModeContext);
@@ -158,9 +127,6 @@ function OnboardingApp({ handleOnboardingDone }) {
   );
 }
 
-// ---------------------------
-// AppContent Component
-// ---------------------------
 /**
  * AppContent holds the main content of the application.
  * It includes the Tab Navigator for Wallet, Transactions, and My Cold Wallet screens.
@@ -172,7 +138,6 @@ function AppContent({
   selectedCardName,
   setSelectedCardName,
 }) {
-  // 固定调用所有 hook（不能放在条件语句中）
   const { isAppLaunching } = useContext(CryptoContext);
   const { isDarkMode } = useContext(DarkModeContext);
   const navigation = useNavigation();
@@ -181,7 +146,6 @@ function AppContent({
     useState(false);
   const [isScreenLockLoaded, setIsScreenLockLoaded] = useState(false);
 
-  // 监听导航状态（无条件调用）
   useEffect(() => {
     const unsubscribe = navigation.addListener("state", (e) => {
       const rootRoutes = e.data.state?.routes;
@@ -197,7 +161,6 @@ function AppContent({
     return unsubscribe;
   }, [navigation]);
 
-  // 加载 screenLockFeatureEnabled（无条件调用）
   useEffect(() => {
     AsyncStorage.getItem("screenLockFeatureEnabled")
       .then((value) => {
@@ -213,24 +176,13 @@ function AppContent({
         console.error("Failed to load screenLockFeatureEnabled", error)
       )
       .finally(() => {
-        // 标记加载已完成
         setIsScreenLockLoaded(true);
       });
   }, []);
 
-  // 在所有 hook 调用完成后，根据加载状态返回内容
-  if (!isScreenLockLoaded) {
-    return null; // 或者返回一个 loading indicator
-  }
+  if (!isScreenLockLoaded) return null;
+  if (screenLockFeatureEnabled && isAppLaunching) return <ScreenLock />;
 
-  // 如果持久化中启用了屏幕锁，且应用仍处于启动中，则直接显示 ScreenLock 页面
-  if (screenLockFeatureEnabled && isAppLaunching) {
-    return <ScreenLock />;
-  }
-
-  // ---------------------------
-  // Function to handle card deletion confirmation
-  // ---------------------------
   const handleConfirmDelete = () => {
     setHeaderDropdownVisible(false);
     navigation.navigate("Wallet", {
@@ -239,7 +191,6 @@ function AppContent({
     });
   };
 
-  // Theme and style configuration based on dark mode
   const theme = isDarkMode ? darkTheme : lightTheme;
   const tabBarActiveTintColor = isDarkMode ? "#CCB68C" : "#CFAB95";
   const tabBarInactiveTintColor = isDarkMode ? "#ffffff50" : "#676776";
@@ -274,13 +225,10 @@ function AppContent({
           },
           tabBarLabel: ({ focused }) => {
             let label;
-            if (route.name === "Wallet") {
-              label = t("Wallet");
-            } else if (route.name === "Transactions") {
-              label = t("Transactions");
-            } else if (route.name === "My Cold Wallet") {
+            if (route.name === "Wallet") label = t("Wallet");
+            else if (route.name === "Transactions") label = t("Transactions");
+            else if (route.name === "My Cold Wallet")
               label = t("My Cold Wallet");
-            }
             return (
               <Text
                 style={{
@@ -293,12 +241,12 @@ function AppContent({
               </Text>
             );
           },
-          tabBarActiveTintColor: tabBarActiveTintColor,
-          tabBarInactiveTintColor: tabBarInactiveTintColor,
+          tabBarActiveTintColor,
+          tabBarInactiveTintColor,
           tabBarStyle: {
             backgroundColor: tabBarBackgroundColor,
             borderTopWidth: 0,
-            height: walletModalVisible ? 0 : 100, // Hide tab bar if wallet modal is visible
+            height: walletModalVisible ? 0 : 100,
             paddingBottom: walletModalVisible ? 0 : 30,
             borderTopLeftRadius: 22,
             borderTopRightRadius: 22,
@@ -316,65 +264,52 @@ function AppContent({
           headerShadowVisible: false,
         })}
       >
-        {/* Wallet Screen */}
         <Tab.Screen
           name="Wallet"
           component={WalletScreen}
           options={({ route, navigation }) => {
             const cryptoCards = route.params?.cryptoCards || [{}];
             return {
-              headerRight: () => {
-                const isModalVisible = route.params?.isModalVisible;
-                return (
-                  <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    {isModalVisible ? (
+              headerRight: () => (
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  {route.params?.isModalVisible ? (
+                    <TouchableOpacity
+                      style={{ paddingRight: 30 }}
+                      onPress={() => {
+                        setHeaderDropdownVisible(true);
+                        setSelectedCardName(route.params?.selectedCardName);
+                      }}
+                    >
+                      <Icon name="settings" size={24} color={iconColor} />
+                    </TouchableOpacity>
+                  ) : (
+                    cryptoCards.length > 0 && (
                       <TouchableOpacity
-                        style={{ paddingRight: 30 }}
-                        onPress={() => {
-                          setHeaderDropdownVisible(true);
-                          setSelectedCardName(route.params?.selectedCardName);
-                        }}
+                        onPress={() =>
+                          navigation.navigate("Wallet", { showAddModal: true })
+                        }
+                        style={{ paddingRight: 28 }}
                       >
-                        <Icon name="settings" size={24} color={iconColor} />
+                        <Icon name="add" size={24} color={iconColor} />
                       </TouchableOpacity>
-                    ) : (
-                      cryptoCards.length > 0 && (
-                        <TouchableOpacity
-                          onPress={() =>
-                            navigation.navigate("Wallet", {
-                              showAddModal: true,
-                            })
-                          }
-                          style={{ paddingRight: 28 }}
-                        >
-                          <Icon name="add" size={24} color={iconColor} />
-                        </TouchableOpacity>
-                      )
-                    )}
-                  </View>
-                );
-              },
+                    )
+                  )}
+                </View>
+              ),
             };
           }}
         />
-
-        {/* Transactions Screen */}
         <Tab.Screen name="Transactions" component={TransactionsScreen} />
-
-        {/* My Cold Wallet Screen */}
         <Tab.Screen name="My Cold Wallet" component={MyColdWalletScreen} />
       </Tab.Navigator>
-
       <StatusBar
         backgroundColor={isDarkMode ? "#21201E" : "#FFFFFF"}
         barStyle={isDarkMode ? "light-content" : "dark-content"}
       />
-
-      {/* Header dropdown modal for additional settings/actions */}
       {headerDropdownVisible && (
         <Modal
           animationType="fade"
-          transparent={true}
+          transparent
           visible={headerDropdownVisible}
           onRequestClose={() => setHeaderDropdownVisible(false)}
         >
