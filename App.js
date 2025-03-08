@@ -18,8 +18,8 @@ import TransactionsScreen from "./components/TransactionsScreen";
 import MyColdWalletScreen from "./components/MyColdWalletScreen";
 import OnboardingScreen from "./utils/OnboardingScreen";
 import ScreenLock from "./utils/ScreenLock";
-import FindMyLkkim from "./components/MyColdWalletScreen/FindMyLkkim";
-import SupportPage from "./components/MyColdWalletScreen/SupportPage";
+import FindMyLkkim from "./components/myColdWalletScreen/FindMyLkkim";
+import SupportPage from "./components/myColdWalletScreen/SupportPage";
 import ConnectLIKKIMAuth from "./components/transactionScreens/ConnectLIKKIMAuth";
 import {
   CryptoProvider,
