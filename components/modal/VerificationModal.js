@@ -16,6 +16,10 @@ const VerificationModal = ({ visible, status, onClose, styles, t }) => {
     imageSource = SuccessGif;
     title = t("Verification successful!");
     subtitle = t("You can now safely use the device.");
+  } else if (status === "walletReady") {
+    imageSource = SuccessGif;
+    title = t("Wallet ready!");
+    subtitle = t("The wallet has been fully set up and is ready to use.");
   } else if (status === "fail") {
     imageSource = FailGif;
     title = t("Verification failed!");

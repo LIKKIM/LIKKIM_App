@@ -1065,7 +1065,7 @@ function WalletScreen({ route, navigation }) {
             // 假设预期地址数量与 prefixToShortName 中的条目数一致
             const expectedCount = Object.keys(prefixToShortName).length;
             if (Object.keys(updated).length >= expectedCount) {
-              setVerificationStatus("success");
+              setVerificationStatus("walletReady");
             } else {
               setVerificationStatus("waiting");
             }
