@@ -81,7 +81,7 @@ function WalletScreen({ route, navigation }) {
     handleUpdateCryptoCards,
     updateCryptoPublicKey,
   } = useContext(CryptoContext);
-  const isDarkMode = route.params?.isDarkMode;
+  const { isDarkMode } = useContext(DarkModeContext);
   const WalletScreenStyle = WalletScreenStyles(isDarkMode);
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState("History");

@@ -282,7 +282,6 @@ function AppContent({
         <Tab.Screen
           name="Wallet"
           component={WalletScreen}
-          initialParams={{ isDarkMode }}
           options={({ route, navigation }) => {
             const cryptoCards = route.params?.cryptoCards || [{}];
             return {
