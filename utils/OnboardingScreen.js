@@ -1,4 +1,4 @@
-// components/OnboardingScreen.js
+// utils/OnboardingScreen.js
 import React, { useState, useEffect, useRef } from "react";
 import {
   View,
