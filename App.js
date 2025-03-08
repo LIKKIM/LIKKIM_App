@@ -44,10 +44,8 @@ export default function App() {
   const [isFirstLaunch, setIsFirstLaunch] = useState(null);
   const [headerDropdownVisible, setHeaderDropdownVisible] = useState(false);
   const [selectedCardName, setSelectedCardName] = useState("");
-  const [isDarkMode, setIsDarkMode] = useState(null); // Initialize to null
 
   useEffect(() => {
-    // Check if it's the first launch
     AsyncStorage.getItem("alreadyLaunched").then((value) => {
       if (value === null) {
         AsyncStorage.setItem("alreadyLaunched", "true");
@@ -56,23 +54,13 @@ export default function App() {
         setIsFirstLaunch(false);
       }
     });
-
-    // Check the dark mode setting
-    AsyncStorage.getItem("darkMode").then((value) => {
-      if (value !== null) {
-        setIsDarkMode(JSON.parse(value));
-      } else {
-        setIsDarkMode(false); // Default to light theme
-      }
-    });
   }, []);
 
   const handleOnboardingDone = () => {
     setIsFirstLaunch(false);
   };
 
-  if (isFirstLaunch === null || isDarkMode === null) return null; // Wait for both first launch and theme to be loaded
-
+  if (isFirstLaunch === null) return null;
   if (isFirstLaunch === true)
     return (
       <CryptoProvider>
@@ -94,7 +82,6 @@ export default function App() {
                   setHeaderDropdownVisible={setHeaderDropdownVisible}
                   selectedCardName={selectedCardName}
                   setSelectedCardName={setSelectedCardName}
-                  isDarkMode={isDarkMode} // Pass the theme state here
                 />
               )}
             </Stack.Screen>
@@ -150,9 +137,9 @@ function AppContent({
   setHeaderDropdownVisible,
   selectedCardName,
   setSelectedCardName,
-  isDarkMode, // Get the theme state here
 }) {
   const { isAppLaunching } = useContext(CryptoContext);
+  const { isDarkMode } = useContext(DarkModeContext);
   const navigation = useNavigation();
   const [walletModalVisible, setWalletModalVisible] = useState(false);
   const [screenLockFeatureEnabled, setScreenLockFeatureEnabled] =
@@ -194,10 +181,8 @@ function AppContent({
   }, []);
 
   if (!isScreenLockLoaded) return null;
-
   if (screenLockFeatureEnabled && isAppLaunching) return <ScreenLock />;
 
-  // Handle confirm delete modal
   const handleConfirmDelete = () => {
     setHeaderDropdownVisible(false);
     navigation.navigate("Wallet", {
