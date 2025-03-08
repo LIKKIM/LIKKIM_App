@@ -716,6 +716,7 @@ function MyColdWalletScreen() {
       setVerifiedDevices([selectedDevice.id]);
       await AsyncStorage.setItem(
         "verifiedDevices",
+        // save ble id
         JSON.stringify([selectedDevice.id])
       );
       setIsVerificationSuccessful(true);
