@@ -320,14 +320,16 @@ const WalletContent = (props) => {
                       </Text>
                       <Text
                         style={[
-                          WalletScreenStyle.balanceShortName,
+                          WalletScreenStyle.balanceShortNameCenter,
                           isBlackText && { color: "#121518" },
                         ]}
                       >
-                        {`${props.getConvertedBalance(
-                          card.balance,
-                          card.shortName
-                        )} ${currencyUnit}`}
+                        {`${Number(
+                          props.getConvertedBalance(
+                            card.balance,
+                            card.shortName
+                          )
+                        ).toFixed(2)} ${currencyUnit}`}
                       </Text>
                     </View>
                   </>
@@ -392,11 +394,21 @@ const WalletContent = (props) => {
             flexDirection: "row",
             justifyContent: "flex-end",
             alignItems: "flex-start",
+            marginBottom: 10,
           }}
         >
           {renderChainButton()}
         </View>
       )}
+      {/*  NFTs view */}
+      <View
+        style={{
+          width: 320,
+          height: 590,
+          borderRadius: 8,
+          // backgroundColor: "red",
+        }}
+      ></View>
     </View>
   );
 };

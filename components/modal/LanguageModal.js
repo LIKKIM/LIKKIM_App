@@ -37,11 +37,10 @@ const LanguageModal = ({
       visible={visible}
       onRequestClose={onClose}
     >
-      {/* 点击模糊区域关闭模态框 */}
       <TouchableWithoutFeedback
         onPress={() => {
-          Keyboard.dismiss(); // 关闭键盘
-          onClose(); // 关闭 Modal
+          Keyboard.dismiss();
+          onClose();
         }}
       >
         <View style={{ flex: 1 }}>
@@ -52,7 +51,6 @@ const LanguageModal = ({
             <BlurView intensity={10} style={styles.centeredView}>
               <View
                 style={styles.languageModalView}
-                // 阻止点击事件冒泡，避免触发关闭 Modal
                 onStartShouldSetResponder={() => true}
               >
                 <Text style={styles.languageModalTitle}>
@@ -73,10 +71,8 @@ const LanguageModal = ({
                 <ScrollView style={styles.languageList}>
                   {filteredLanguages.map((language) => (
                     <TouchableOpacity
-                      style={{
-                        marginBottom: 6,
-                      }}
                       key={language.code}
+                      style={{ marginBottom: 6 }}
                       onPress={() => handleLanguageChange(language)}
                     >
                       <Text style={styles.languageModalText}>

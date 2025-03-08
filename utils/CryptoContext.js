@@ -1,16 +1,20 @@
 // CryptoContext.js
+
 import React, { createContext, useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import i18n from "../config/i18n";
 import { initialAdditionalCryptos } from "../config/cryptosData";
 import currencies from "../config/currencies";
 
+// Create contexts
 export const CryptoContext = createContext();
 export const DarkModeContext = createContext();
 
+// API URL for fetching exchange rates
 const NEW_EXCHANGE_RATE_API_URL =
   "https://df.likkim.com/api/market/exchange-rate";
 
+// Default USDT crypto data
 export const usdtCrypto = {
   name: "USDT",
   shortName: "USDT",
@@ -29,6 +33,7 @@ export const usdtCrypto = {
 };
 
 export const CryptoProvider = ({ children }) => {
+  // State definitions
   const [isScreenLockEnabled, setIsScreenLockEnabled] = useState(false);
   const [screenLockPassword, setScreenLockPassword] = useState("");
   const [cryptoCount, setCryptoCount] = useState(0);
@@ -49,6 +54,10 @@ export const CryptoProvider = ({ children }) => {
   const [addedCryptos, setAddedCryptos] = useState([]);
   const [exchangeRates, setExchangeRates] = useState({});
 
+  // Supported chains for address updates
+  const supportedChains = ["ETH", "BTC", "SOL", "TRX"];
+
+  // Update cryptoCards state: update if exists, otherwise add new card
   const handleUpdateCryptoCards = (newCrypto) => {
     setCryptoCards((prevCards) => {
       const cardExists = prevCards.some(
@@ -70,11 +79,10 @@ export const CryptoProvider = ({ children }) => {
     });
   };
 
-  const supportedChains = ["ETH", "BTC", "SOL"];
-
+  // Update crypto address based on chain
   const updateCryptoAddress = (chainShortName, newAddress) => {
     if (!supportedChains.includes(chainShortName)) {
-      // 更新不支持的链时，不需要在钱包界面中显示，只更新initialAdditionalCryptos
+      // For unsupported chains, only update initialAdditionalCryptos
       setInitialAdditionalCryptos((prevCryptos) => {
         const updatedCryptos = prevCryptos.map((crypto) =>
           crypto.chainShortName === chainShortName
@@ -85,17 +93,12 @@ export const CryptoProvider = ({ children }) => {
           "initialAdditionalCryptos",
           JSON.stringify(updatedCryptos)
         );
-        // 打印更新后的 initialAdditionalCryptos 数据
-        /*         console.log(
-          "Updated initialAdditionalCryptos (unsupported chain):",
-          updatedCryptos
-        ); */
         return updatedCryptos;
       });
       return;
     }
 
-    // 对于支持的链，同时更新地址和crypto cards
+    // For supported chains, update both initialAdditionalCryptos and cryptoCards
     setInitialAdditionalCryptos((prevCryptos) => {
       const updatedCryptos = prevCryptos.map((crypto) =>
         crypto.chainShortName === chainShortName
@@ -128,6 +131,25 @@ export const CryptoProvider = ({ children }) => {
     });
   };
 
+  // Update crypto public key
+  const updateCryptoPublicKey = (queryChainName, publicKey) => {
+    setInitialAdditionalCryptos((prevCryptos) => {
+      const updatedCryptos = prevCryptos.map((crypto) =>
+        crypto.queryChainName === queryChainName
+          ? { ...crypto, publicKey }
+          : crypto
+      );
+      AsyncStorage.setItem(
+        "initialAdditionalCryptos",
+        JSON.stringify(updatedCryptos)
+      ).catch((error) => {
+        console.error("Failed to persist initialAdditionalCryptos:", error);
+      });
+      return updatedCryptos;
+    });
+  };
+
+  // Update crypto data for supported chains
   const updateCryptoData = (shortName, newData) => {
     if (supportedChains.includes(shortName)) {
       setInitialAdditionalCryptos((prevCryptos) => {
@@ -143,28 +165,42 @@ export const CryptoProvider = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-    fetchAndStoreExchangeRates();
-  }, []);
-
+  // Fetch and store exchange rates from API
   const fetchAndStoreExchangeRates = async () => {
     try {
-      const response = await fetch(NEW_EXCHANGE_RATE_API_URL, {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      });
+      const response = await fetch(NEW_EXCHANGE_RATE_API_URL);
+      console.log("Response status:", response.status);
+
+      if (!response.ok) {
+        throw new Error(
+          `Network response was not ok, status: ${response.status}`
+        );
+      }
+
       const data = await response.json();
+      //  console.log("Fetched data:", data);
+
       if (data.code === 0 && data.data) {
-        setExchangeRates(data.data);
-        await AsyncStorage.setItem("exchangeRates", JSON.stringify(data.data));
+        const flattenedData = {};
+        for (const [currency, rateArray] of Object.entries(data.data)) {
+          if (Array.isArray(rateArray) && rateArray.length > 0) {
+            flattenedData[currency] = rateArray[0];
+          }
+        }
+        setExchangeRates(flattenedData);
+        await AsyncStorage.setItem(
+          "exchangeRates",
+          JSON.stringify(flattenedData)
+        );
       } else {
         console.error("Failed to fetch exchange rates:", data.msg);
       }
     } catch (error) {
-      console.error("Error fetching exchange rates:", error);
+      console.log("Error fetching exchange rates:", error);
     }
   };
 
+  // Load transaction history from storage
   useEffect(() => {
     const loadTransactionHistory = async () => {
       try {
@@ -179,6 +215,7 @@ export const CryptoProvider = ({ children }) => {
     loadTransactionHistory();
   }, []);
 
+  // Save transaction history on change
   useEffect(() => {
     const saveTransactionHistory = async () => {
       try {
@@ -195,6 +232,7 @@ export const CryptoProvider = ({ children }) => {
     }
   }, [transactionHistory]);
 
+  // Save added cryptos when they change
   useEffect(() => {
     const saveAddedCryptos = async () => {
       try {
@@ -211,6 +249,7 @@ export const CryptoProvider = ({ children }) => {
     }
   }, [addedCryptos]);
 
+  // Load user settings from storage
   useEffect(() => {
     const loadSettings = async () => {
       try {
@@ -245,13 +284,13 @@ export const CryptoProvider = ({ children }) => {
         const screenLockEnabled = await AsyncStorage.getItem(
           "screenLockEnabled"
         );
-        const screenLockPassword = await AsyncStorage.getItem(
+        const storedScreenLockPassword = await AsyncStorage.getItem(
           "screenLockPassword"
         );
         if (screenLockEnabled !== null)
           setIsScreenLockEnabled(JSON.parse(screenLockEnabled));
-        if (screenLockPassword !== null)
-          setScreenLockPassword(screenLockPassword);
+        if (storedScreenLockPassword !== null)
+          setScreenLockPassword(storedScreenLockPassword);
 
         const savedInitialCryptos = await AsyncStorage.getItem(
           "initialAdditionalCryptos"
@@ -268,6 +307,7 @@ export const CryptoProvider = ({ children }) => {
     loadSettings();
   }, []);
 
+  // Save user settings whenever dependencies change
   useEffect(() => {
     const saveSettings = async () => {
       try {
@@ -312,6 +352,7 @@ export const CryptoProvider = ({ children }) => {
     initialAdditionalCryptosState,
   ]);
 
+  // Toggle screen lock functionality
   const toggleScreenLock = async (enabled) => {
     setIsAppLaunching(false);
     setIsScreenLockEnabled(enabled);
@@ -321,30 +362,17 @@ export const CryptoProvider = ({ children }) => {
     ]);
   };
 
+  // Change screen lock password
   const changeScreenLockPassword = async (newPassword) => {
     setScreenLockPassword(newPassword);
     await AsyncStorage.setItem("screenLockPassword", newPassword);
   };
 
-  /*   useEffect(() => {
-    const trxCrypto = initialAdditionalCryptosState.find(
-      (crypto) => crypto.chainShortName === "TRX"
-    );
-    if (trxCrypto) {
-      console.log(
-        "TRX address in initialAdditionalCryptosState:",
-        trxCrypto.address
-      );
-    } else {
-      console.log("TRX address not found in initialAdditionalCryptosState.");
-    }
-    if (usdtCrypto.chainShortName === "TRX") {
-    //  console.log("TRX address in usdtCrypto:", usdtCrypto.address);
-    } else {
-      console.log("TRX address not found in usdtCrypto.");
-    }
-  }, [initialAdditionalCryptosState]);
- */
+  // Fetch exchange rates when component mounts
+  useEffect(() => {
+    fetchAndStoreExchangeRates();
+  }, []);
+
   return (
     <CryptoContext.Provider
       value={{
@@ -379,6 +407,7 @@ export const CryptoProvider = ({ children }) => {
         exchangeRates,
         transactionHistory,
         setTransactionHistory,
+        updateCryptoPublicKey,
       }}
     >
       <DarkModeContext.Provider value={{ isDarkMode, setIsDarkMode }}>
@@ -387,3 +416,5 @@ export const CryptoProvider = ({ children }) => {
     </CryptoContext.Provider>
   );
 };
+
+export default CryptoProvider;

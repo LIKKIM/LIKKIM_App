@@ -10,7 +10,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
-import { DarkModeContext } from "./CryptoContext";
+import { DarkModeContext } from "../../utils/CryptoContext";
 
 const SupportPage = () => {
   const { isDarkMode } = useContext(DarkModeContext);
@@ -38,43 +38,43 @@ const SupportPage = () => {
     {
       name: "Twitter",
       icon: isDarkMode
-        ? require("../assets/icon/Twitter.png")
-        : require("../assets/icon/TwitterDark.png"),
+        ? require("../../assets/icon/Twitter.png")
+        : require("../../assets/icon/TwitterDark.png"),
       url: "https://x.com/LIKKIMwallet",
     },
     {
       name: "Telegram",
       icon: isDarkMode
-        ? require("../assets/icon/Telegram.png")
-        : require("../assets/icon/TelegramDark.png"),
+        ? require("../../assets/icon/Telegram.png")
+        : require("../../assets/icon/TelegramDark.png"),
       url: "https://t.me/+q9j351SAY8hlMDJl",
     },
     {
       name: "Discord",
       icon: isDarkMode
-        ? require("../assets/icon/Discord.png")
-        : require("../assets/icon/DiscordDark.png"),
+        ? require("../../assets/icon/Discord.png")
+        : require("../../assets/icon/DiscordDark.png"),
       url: "https://discord.gg/59hKBX2daq",
     },
     {
       name: "Reddit",
       icon: isDarkMode
-        ? require("../assets/icon/Reddit.png")
-        : require("../assets/icon/RedditDark.png"),
+        ? require("../../assets/icon/Reddit.png")
+        : require("../../assets/icon/RedditDark.png"),
       url: "https://www.reddit.com/user/Ok_Bass_6829/",
     },
     {
       name: "Facebook",
       icon: isDarkMode
-        ? require("../assets/icon/Facebook.png")
-        : require("../assets/icon/FacebookDark.png"),
+        ? require("../../assets/icon/Facebook.png")
+        : require("../../assets/icon/FacebookDark.png"),
       url: "https://www.facebook.com/profile.php?id=61570753106156",
     },
     {
       name: "YouTube",
       icon: isDarkMode
-        ? require("../assets/icon/Youtube.png")
-        : require("../assets/icon/YoutubeDark.png"),
+        ? require("../../assets/icon/Youtube.png")
+        : require("../../assets/icon/YoutubeDark.png"),
       url: "https://www.youtube.com/@LukkeyAG",
     },
   ];

@@ -33,7 +33,11 @@ import { Buffer } from "buffer";
 
 // 样式和上下文
 import WalletScreenStyles from "../styles/WalletScreenStyle";
-import { CryptoContext, DarkModeContext, usdtCrypto } from "./CryptoContext";
+import {
+  CryptoContext,
+  DarkModeContext,
+  usdtCrypto,
+} from "../utils/CryptoContext";
 
 // 自定义组件
 import { prefixToShortName } from "../config/chainPrefixes";
@@ -46,6 +50,7 @@ import WalletContent from "./walletScreen/WalletContent";
 import TabModal from "./walletScreen/TabModal";
 import ModalsContainer from "./walletScreen/ModalsContainer";
 import checkAndReqPermission from "../utils/BluetoothPermissions"; //安卓高版本申请蓝牙权限
+import showLIKKIMAddressCommand from "../utils/showLIKKIMAddressCommand"; // 显示地址函数 发送数据写法
 
 const serviceUUID = "6E400001-B5A3-F393-E0A9-E50E24DCCA9E";
 const writeCharacteristicUUID = "6E400002-B5A3-F393-E0A9-E50E24DCCA9E";
@@ -74,6 +79,7 @@ function WalletScreen({ route, navigation }) {
     cryptoCards,
     setCryptoCards,
     handleUpdateCryptoCards,
+    updateCryptoPublicKey,
   } = useContext(CryptoContext);
   const { isDarkMode } = useContext(DarkModeContext);
   const WalletScreenStyle = WalletScreenStyles(isDarkMode);
@@ -138,14 +144,13 @@ function WalletScreen({ route, navigation }) {
   }));
   const [selectedChainShortName, setSelectedChainShortName] =
     useState(CHAIN_NAMES);
-
+  const [selectedChain, setSelectedChain] = useState("All");
   const chainFilteredCards = cryptoCards.filter((card) =>
     selectedChainShortName.includes(card?.chainShortName)
   );
 
   const [isChainSelectionModalVisible, setChainSelectionModalVisible] =
     useState(false);
-  const [selectedChain, setSelectedChain] = useState("All");
 
   const [selectedView, setSelectedView] = useState("wallet");
   const { isModalVisible } = route.params || {};
@@ -169,6 +174,9 @@ function WalletScreen({ route, navigation }) {
     title: t("Importing on LIKKIM Hardware..."), // 默认主消息
     subtitle: t("Your device is already verified."), // 默认子消息
   });
+  /*   useEffect(() => {
+    console.log("initialAdditionalCryptosState:", initialAdditionalCryptos);
+  }, [initialAdditionalCryptos]); */
 
   // 定义下拉刷新执行的函数
   const onRefresh = React.useCallback(() => {
@@ -803,21 +811,6 @@ function WalletScreen({ route, navigation }) {
       console.log("断开设备连接失败:", error);
     }
   };
-  function crc16Modbus(arr) {
-    let crc = 0xffff;
-    for (let byte of arr) {
-      crc ^= byte; // 按位异或
-      for (let i = 0; i < 8; i++) {
-        // 处理每一个字节的8位
-        if (crc & 0x0001) {
-          crc = (crc >> 1) ^ 0xa001;
-        } else {
-          crc = crc >> 1;
-        }
-      }
-    }
-    return crc & 0xffff; // 确保CRC值是16位
-  }
 
   // 停止监听验证码;
   const stopMonitoringVerificationCode = () => {
@@ -854,7 +847,13 @@ function WalletScreen({ route, navigation }) {
     if (verifiedDevices.length > 0) {
       const device = devices.find((d) => d.id === verifiedDevices[0]);
       if (device) {
-        showLIKKIMAddressCommand(device, selectedCardChainShortName);
+        showLIKKIMAddressCommand(
+          device,
+          selectedCardChainShortName,
+          setIsVerifyingAddress,
+          setAddressVerificationMessage,
+          t
+        );
       } else {
         setAddressModalVisible(false);
         setBleVisible(true);
@@ -862,89 +861,6 @@ function WalletScreen({ route, navigation }) {
     } else {
       setAddressModalVisible(false);
       setBleVisible(true);
-    }
-  };
-
-  // 显示地址函数
-  const showLIKKIMAddressCommand = async (device, coinType) => {
-    try {
-      // 检查设备对象是否有效
-      if (typeof device !== "object" || !device.isConnected) {
-        console.log("设备对象无效:", device);
-        return;
-      }
-
-      // 连接设备并发现所有服务
-      await device.connect();
-      await device.discoverAllServicesAndCharacteristics();
-      console.log("设备已连接并发现所有服务。");
-
-      // 检查设备是否具有 writeCharacteristicWithResponseForService 方法
-      if (
-        typeof device.writeCharacteristicWithResponseForService !== "function"
-      ) {
-        console.log(
-          "设备不支持 writeCharacteristicWithResponseForService 方法。"
-        );
-        return;
-      }
-
-      // 根据 coinType 匹配对应的字符串
-      const commandString = coinCommandMapping[coinType];
-      // 【新增】检查 commandString 是否存在
-      if (!commandString) {
-        console.log("不支持的币种:", coinType);
-        return;
-      }
-
-      // 将命令字符串转换为 Base64 编码
-      const encodedCommand = Buffer.from(commandString, "utf-8").toString(
-        "base64"
-      );
-
-      // 向服务写入命令字符串（确保使用 Base64 编码）
-      await device.writeCharacteristicWithResponseForService(
-        serviceUUID,
-        writeCharacteristicUUID,
-        encodedCommand
-      );
-
-      // 设置验证地址的状态
-      setIsVerifyingAddress(true);
-      setAddressVerificationMessage("正在 LIKKIM 上验证地址...");
-      console.log("地址显示命令已发送:", commandString);
-
-      // 监听设备的响应 - bugging
-      const notifyCharacteristicUUID = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E";
-      const addressMonitorSubscription = device.monitorCharacteristicForService(
-        serviceUUID,
-        notifyCharacteristicUUID,
-        (error, characteristic) => {
-          if (error) {
-            console.log("监听设备响应时出错:", error);
-            return;
-          }
-          // 【新增】检查 characteristic 是否有效
-          if (!characteristic || !characteristic.value) {
-            console.log("未收到有效数据");
-            return;
-          }
-          const receivedDataHex = Buffer.from(characteristic.value, "base64")
-            .toString("hex")
-            .toUpperCase();
-          console.log("接收到的十六进制数据字符串:", receivedDataHex);
-
-          // 检查接收到的数据是否为预期的响应
-          if (receivedDataString === "Address_OK") {
-            console.log("在 LIKKIM 上成功显示地址");
-            setAddressVerificationMessage(t("addressShown")); // 假设 'addressShown' 是国际化文件中的 key
-          }
-        }
-      );
-
-      return addressMonitorSubscription;
-    } catch (error) {
-      console.log("发送显示地址命令失败:", error);
     }
   };
 
@@ -1149,7 +1065,7 @@ function WalletScreen({ route, navigation }) {
             // 假设预期地址数量与 prefixToShortName 中的条目数一致
             const expectedCount = Object.keys(prefixToShortName).length;
             if (Object.keys(updated).length >= expectedCount) {
-              setVerificationStatus("success");
+              setVerificationStatus("walletReady");
             } else {
               setVerificationStatus("waiting");
             }
@@ -1157,27 +1073,19 @@ function WalletScreen({ route, navigation }) {
           });
         }
 
-        if (receivedDataString.startsWith("pubkey:")) {
-          // 假设返回数据格式为 "pubkey: cosmosm,04AABBCCDDEE..."
-          const pubkeyData = receivedDataString.replace("pubkey:", "").trim();
-          const [chainShortName, publicKey] = pubkeyData.split(",");
-          if (chainShortName && publicKey) {
+        if (receivedDataString.startsWith("pubkeyData:")) {
+          const pubkeyData = receivedDataString
+            .replace("pubkeyData:", "")
+            .trim();
+          const [queryChainName, publicKey] = pubkeyData.split(",");
+          if (queryChainName && publicKey) {
             console.log(
-              `Received public key for ${chainShortName}: ${publicKey}`
+              `Received public key for ${queryChainName}: ${publicKey}`
             );
-            // 如果你在 CryptoContext 中定义了 updateCryptoPublicKey 方法，可以这样调用：
-            updateCryptoPublicKey(chainShortName, publicKey);
-
-            // 或者直接通过 setCryptoCards 更新状态，假设 cryptoCards 数组中每个对象都包含 chainShortName 和 publicKey 字段：
-            setCryptoCards((prevCards) =>
-              prevCards.map((card) =>
-                card.chainShortName === chainShortName
-                  ? { ...card, publicKey: publicKey }
-                  : card
-              )
-            );
+            updateCryptoPublicKey(queryChainName, publicKey);
           }
         }
+
         // Process data containing "ID:"
         if (receivedDataString.includes("ID:")) {
           const encryptedHex = receivedDataString.split("ID:")[1];
@@ -1306,22 +1214,21 @@ function WalletScreen({ route, navigation }) {
       setIsVerificationSuccessful(true);
       console.log("设备验证并存储成功");
 
+      try {
+        const confirmationMessage = "PIN_OK";
+        const bufferConfirmation = Buffer.from(confirmationMessage, "utf-8");
+        const base64Confirmation = bufferConfirmation.toString("base64");
+        await selectedDevice.writeCharacteristicWithResponseForService(
+          serviceUUID,
+          writeCharacteristicUUID,
+          base64Confirmation
+        );
+        console.log("Sent confirmation message:", confirmationMessage);
+      } catch (error) {
+        console.log("Error sending confirmation message:", error);
+      }
       // 如果标志位为 Y，则发送字符串 'address'，之后发送多个 pubkey 消息
       if (flag === "Y") {
-        // 先发送确认消息，告知嵌入式设备验证成功
-        try {
-          const confirmationMessage = "PIN_OK";
-          const bufferConfirmation = Buffer.from(confirmationMessage, "utf-8");
-          const base64Confirmation = bufferConfirmation.toString("base64");
-          await selectedDevice.writeCharacteristicWithResponseForService(
-            serviceUUID,
-            writeCharacteristicUUID,
-            base64Confirmation
-          );
-          console.log("Sent confirmation message:", confirmationMessage);
-        } catch (error) {
-          console.log("Error sending confirmation message:", error);
-        }
         // 发送 address
         try {
           const addressMessage = "address";
@@ -1337,11 +1244,11 @@ function WalletScreen({ route, navigation }) {
 
           // 构造 pubkey 消息数组（每个消息包含币种与对应的路径）
           const pubkeyMessages = [
-            "pubkey: cosmosm,m/44'/118'/0'/0/0",
-            "pubkey: ripple,m/44'/144'/0'/0/0",
-            "pubkey: celestia,m/44'/118'/0'/0/0",
-            "pubkey: juno,m/44'/118'/0'/0/0",
-            "pubkey: osmosis,m/44'/118'/0'/0/0",
+            "pubkey:cosmos,m/44'/118'/0'/0/0",
+            "pubkey:ripple,m/44'/144'/0'/0/0",
+            "pubkey:celestia,m/44'/118'/0'/0/0",
+            "pubkey:juno,m/44'/118'/0'/0/0",
+            "pubkey:osmosis,m/44'/118'/0'/0/0",
           ];
 
           // 遍历数组，逐条发送消息
@@ -1620,19 +1527,26 @@ function WalletScreen({ route, navigation }) {
   //检查更新
   async function onFetchUpdateAsync() {
     try {
+      // Skip update check in development mode
       if (__DEV__) return;
 
-      console.log("检查更新..");
+      console.log("Checking for updates...");
+
+      // Check for an available update
       const update = await Updates.checkForUpdateAsync();
 
       if (update.isAvailable) {
-        console.log("有新版！");
+        console.log("A new version is available!");
 
+        // Fetch the new update
         await Updates.fetchUpdateAsync();
+
+        // Show an alert asking the user if they want to update now or later
         Alert.alert("The new version is ready. ", "Do you want to update it?", [
           {
             text: "Update now ",
             onPress() {
+              // Reload the app to apply the update
               Updates.reloadAsync();
             },
           },
@@ -1642,7 +1556,8 @@ function WalletScreen({ route, navigation }) {
         ]);
       }
     } catch (error) {
-      console.log("更新服务检查失败:");
+      // Log the error if the update check fails
+      console.log("Update service check failed:");
       console.log(
         error instanceof Error ? error.message : JSON.stringify(error)
       );

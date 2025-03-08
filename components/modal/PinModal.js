@@ -1,4 +1,4 @@
-// PinModal.js
+// modal/PinModal.js
 import React from "react";
 import {
   View,
@@ -20,7 +20,7 @@ const PinModal = ({
   styles,
   isDarkMode,
   t,
-  status, // 父组件传入的状态
+  status,
 }) => {
   return (
     <Modal
@@ -35,19 +35,18 @@ const PinModal = ({
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               {status === "VALID" && (
                 <Image
-                  source={require("../../assets/Authentic.png")} // 替换为实际图片路径
+                  source={require("../../assets/Authentic.png")}
                   style={{
                     width: 40,
                     height: 40,
                     marginRight: 10,
                     marginBottom: 15,
-                    resizeMode: "contain", // 保持图片宽高比并适应容器
+                    resizeMode: "contain",
                   }}
                 />
               )}
               <Text style={styles.pinModalTitle}>
                 {t("Enter PIN to Connect")}
-                {/* 如果状态为 VALID，显示额外的 View */}
               </Text>
             </View>
             <Text style={styles.modalSubtitle}>

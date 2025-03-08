@@ -161,6 +161,16 @@ const TransactionsScreenStyles = (isDarkMode) => {
       fontSize: 16,
       marginBottom: 16,
     },
+    balanceLabel: {
+      marginTop: 6,
+      color: textColor,
+      fontSize: 12,
+    },
+    balanceValue: {
+      marginTop: 6,
+      color: textColor,
+      fontSize: 12,
+    },
     balanceSubtitle: {
       color: secondTextColor,
       fontSize: 14,
@@ -307,8 +317,8 @@ const TransactionsScreenStyles = (isDarkMode) => {
     },
     historyContainer: {
       marginTop: 22,
-      padding: 20,
-      paddingTop: 50,
+      padding: 10,
+      paddingTop: 10,
       backgroundColor: historyContainerBackgroundColor,
       alignItems: "center",
       justifyContent: "center",
@@ -318,8 +328,9 @@ const TransactionsScreenStyles = (isDarkMode) => {
     },
     historyItem: {
       padding: 10,
-      borderBottomWidth: 1,
-      borderBottomColor: historyItemBorderColor,
+      marginBottom: 10,
+      /*       borderBottomWidth: 1,
+      borderBottomColor: historyItemBorderColor, */
     },
     historyItemText: {
       fontSize: 16,
@@ -327,9 +338,6 @@ const TransactionsScreenStyles = (isDarkMode) => {
       marginBottom: 10,
     },
     historyTitle: {
-      position: "absolute",
-      left: 20,
-      top: 16,
       fontSize: 16,
       color: textColor,
       fontWeight: "bold",

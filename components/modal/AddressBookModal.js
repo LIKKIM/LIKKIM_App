@@ -1,4 +1,4 @@
-//AddressBookModal.js
+// AddressBookModal.js
 import React, { useState, useEffect } from "react";
 import {
   Modal,
@@ -19,6 +19,7 @@ import { BlurView } from "expo-blur";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useTranslation } from "react-i18next";
+import { networkImages, networks } from "../../config/networkConfig";
 
 function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
   const [searchAddress, setSearchAddress] = useState("");
@@ -31,6 +32,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
   const [savedAddresses, setSavedAddresses] = useState([]);
   const { t } = useTranslation();
   const [searchNetwork, setSearchNetwork] = useState("");
+  const [editingId, setEditingId] = useState(null);
 
   useEffect(() => {
     if (visible) {
@@ -80,8 +82,8 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
 
   const handleCopy = (address) => {
     Clipboard.setString(address);
-    Alert.alert("Copied", "Address copied to clipboard."); // 显示确认提示
-    setDropdownVisible(null); // 隐藏Dropdown
+    Alert.alert("Copied", "Address copied to clipboard.");
+    setDropdownVisible(null);
   };
 
   const handleDelete = (id) => {
@@ -106,17 +108,14 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
     );
   };
 
-  // 在组件最上方增加一个状态变量，用于记录编辑中的条目 id
-  const [editingId, setEditingId] = useState(null);
-
   const handleEdit = (id) => {
     const addressToEdit = savedAddresses.find((item) => item.id === id);
     if (addressToEdit) {
-      setEditingId(id); // 记录正在编辑的条目 id
+      setEditingId(id);
       setNewNetwork(addressToEdit.network);
       setNewName(addressToEdit.name);
       setNewAddress(addressToEdit.address);
-      setIsAddingAddress(true); // 切换到添加/编辑视图
+      setIsAddingAddress(true);
       setDropdownVisible(null);
     }
   };
@@ -125,11 +124,10 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
     if (newNetwork && newName && newAddress) {
       let updatedAddresses = [];
       if (editingId) {
-        // 编辑模式：遍历数组，更新对应条目
         updatedAddresses = savedAddresses.map((item) => {
           if (item.id === editingId) {
             return {
-              id: editingId, // 保持原来的 id
+              id: editingId,
               network: newNetwork,
               name: newName,
               address: newAddress,
@@ -138,9 +136,8 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
           return item;
         });
       } else {
-        // 新建模式：生成新条目
         const newEntry = {
-          id: Date.now().toString(), // 使用时间戳作为唯一 id
+          id: Date.now().toString(),
           network: newNetwork,
           name: newName,
           address: newAddress,
@@ -150,83 +147,16 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
 
       setSavedAddresses(updatedAddresses);
       saveAddressesToStorage(updatedAddresses);
-
-      // 清空输入框和编辑状态
       setNewNetwork("");
       setNewName("");
       setNewAddress("");
-      setEditingId(null); // 清空编辑标记
-      setIsAddingAddress(false); // 返回地址簿视图
+      setEditingId(null);
+      setIsAddingAddress(false);
     } else {
-      console.log("Please fill all fields"); // 提示用户填写所有字段
+      console.log("Please fill all fields");
     }
   };
 
-  const networkImages = {
-    Arbitrum: require("../../assets/icon/ARBIcon.png"),
-    Aurora: require("../../assets/icon/AURORAIcon.png"),
-    Avalanche: require("../../assets/icon/AVAXIcon.png"),
-    Bitcoin: require("../../assets/icon/BTCIcon.png"),
-    "Bitcoin Cash": require("../../assets/icon/BCHIcon.png"),
-    "Binance Smart Chain": require("../../assets/icon/BNBIcon.png"),
-    Celo: require("../../assets/icon/CELOIcon.png"),
-    Ethereum: require("../../assets/icon/ETHIcon.png"),
-    "Ethereum Classic": require("../../assets/icon/ETCIcon.png"),
-    Fantom: require("../../assets/icon/FTMIcon.png"),
-    "Huobi ECO Chain": require("../../assets/icon/HTIcon.png"),
-    "IoTeX Network Mainnet": require("../../assets/icon/IOTXIcon.png"),
-    Litecoin: require("../../assets/icon/LTCIcon.png"),
-    "OKX Chain": require("../../assets/icon/OKTIcon.png"),
-    Optimism: require("../../assets/icon/OPIcon.png"),
-    Polygon: require("../../assets/icon/PolygonIcon.png"),
-    Ripple: require("../../assets/icon/XRPIcon.png"),
-    Solana: require("../../assets/icon/SOLIcon.png"),
-    Tron: require("../../assets/icon/TRXIcon.png"),
-    "zkSync Era Mainnet": require("../../assets/icon/ZKSIcon.png"),
-    Cosmos: require("../../assets/icon/ATOMIcon.png"),
-    Celestia: require("../../assets/icon/TIAIcon.png"),
-    Cronos: require("../../assets/icon/CROIcon.png"),
-    Juno: require("../../assets/icon/JUNOIcon.png"),
-    Osmosis: require("../../assets/icon/OSMOIcon.png"),
-    Gnosis: require("../../assets/icon/GNOIcon.png"),
-    Linea: require("../../assets/icon/LINEAIcon.png"),
-    Ronin: require("../../assets/icon/RONIcon.png"),
-    Aptos: require("../../assets/icon/APTIcon.png"),
-    SUI: require("../../assets/icon/SUIIcon.png"),
-  };
-
-  const networks = [
-    "Arbitrum",
-    "Aurora",
-    "Avalanche",
-    "Bitcoin",
-    "Bitcoin Cash",
-    "Binance Smart Chain",
-    "Celo",
-    "Ethereum",
-    "Ethereum Classic",
-    "Fantom",
-    "Huobi ECO Chain",
-    "IoTeX Network Mainnet",
-    "Litecoin",
-    "OKX Chain",
-    "Optimism",
-    "Polygon",
-    "Ripple",
-    "Solana",
-    "Tron",
-    "zkSync Era Mainnet",
-    "Cosmos",
-    "Celestia",
-    "Cronos",
-    "Juno",
-    "Osmosis",
-    "Gnosis",
-    "Linea",
-    "Ronin",
-    "Aptos",
-    "SUI",
-  ].sort();
   const filteredNetworks = networks.filter((network) =>
     network.toLowerCase().includes(searchNetwork.toLowerCase())
   );
@@ -234,7 +164,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
   return (
     <Modal
       animationType="slide"
-      transparent={true}
+      transparent
       visible={visible}
       onRequestClose={onClose}
     >
@@ -267,40 +197,36 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                     <FlatList
                       data={filteredAddresses}
                       keyExtractor={(item) => item.id}
-                      style={{
-                        marginBottom: 20,
-                      }}
+                      style={{ marginBottom: 20 }}
                       renderItem={({ item }) => (
-                        <View
-                          style={{
-                            position: "relative",
-                            marginBottom: 8,
-                          }}
-                        >
+                        <View style={{ position: "relative", marginBottom: 8 }}>
                           <TouchableOpacity
                             onPress={() => onSelect(item)}
                             style={{
                               width: 280,
-                              paddingVertical: 10,
+                              backgroundColor: isDarkMode
+                                ? "#21201E80"
+                                : "#E5E1E980",
+                              padding: 10,
                               alignItems: "center",
                               flexDirection: "row",
+                              borderRadius: 10,
                               justifyContent: "space-between",
                             }}
                           >
                             <View
                               style={{ flexDirection: "column", flexShrink: 1 }}
                             >
-                              {/* Network */}
                               <View
                                 style={{
                                   flexDirection: "row",
-                                  marginBottom: 4, // 统一底部间距
-                                  alignItems: "center", // 确保垂直居中对齐
+                                  marginBottom: 4,
+                                  alignItems: "center",
                                 }}
                               >
                                 <Text
                                   style={{
-                                    color: isDarkMode ? "#fff" : "#000", // 动态颜色
+                                    color: isDarkMode ? "#fff" : "#000",
                                     fontSize: 16,
                                   }}
                                 >
@@ -309,32 +235,30 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                                 <Image
                                   source={networkImages[item.network]}
                                   style={{
-                                    width: 24, // 控制宽度
-                                    height: 24, // 使高度与 Text 的行高接近
+                                    width: 24,
+                                    height: 24,
                                     marginRight: 5,
                                   }}
                                 />
                                 <Text
                                   style={{
-                                    color: isDarkMode ? "#ccc" : "#333", // 动态颜色
+                                    color: isDarkMode ? "#ccc" : "#333",
                                     fontSize: 14,
                                   }}
                                 >
                                   {item.network}
                                 </Text>
                               </View>
-
-                              {/* Name */}
                               <View
                                 style={{
                                   flexDirection: "row",
-                                  marginBottom: 8, // 统一底部间距
+                                  marginBottom: 8,
                                   alignItems: "center",
                                 }}
                               >
                                 <Text
                                   style={{
-                                    color: isDarkMode ? "#fff" : "#000", // 动态颜色
+                                    color: isDarkMode ? "#fff" : "#000",
                                     fontSize: 16,
                                   }}
                                 >
@@ -342,18 +266,16 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                                 </Text>
                                 <Text
                                   style={{
-                                    color: isDarkMode ? "#ccc" : "#333", // 动态颜色
+                                    color: isDarkMode ? "#ccc" : "#333",
                                     fontSize: 14,
                                   }}
                                 >
                                   {item.name}
                                 </Text>
                               </View>
-
-                              {/* Address */}
                               <Text
                                 style={{
-                                  color: isDarkMode ? "#fff" : "#000", // 动态颜色
+                                  color: isDarkMode ? "#fff" : "#000",
                                   fontSize: 16,
                                   flexShrink: 1,
                                 }}
@@ -363,7 +285,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                                 {t("Address")}:&nbsp;
                                 <Text
                                   style={{
-                                    color: isDarkMode ? "#ccc" : "#333", // 动态颜色
+                                    color: isDarkMode ? "#ccc" : "#333",
                                     fontSize: 14,
                                   }}
                                 >
@@ -371,7 +293,6 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                                 </Text>
                               </Text>
                             </View>
-
                             <TouchableOpacity
                               onPress={() => toggleDropdown(item.id)}
                               style={{ marginLeft: 10 }}
@@ -412,7 +333,6 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                       )}
                     />
                   </View>
-
                   <TouchableOpacity
                     onPress={() => setIsAddingAddress(true)}
                     style={styles.submitButton}
@@ -451,7 +371,6 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                           flex: 1,
                         }}
                       >
-                        {/* 只有当 newNetwork 完全匹配且有值时才显示图标 */}
                         {newNetwork &&
                           filteredNetworks.includes(newNetwork) && (
                             <Image
@@ -465,97 +384,82 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                               }}
                             />
                           )}
-
-                        {/* TextInput 输入框 */}
                         <TextInput
                           style={{
-                            color: isDarkMode ? "#ddd" : "#000", // 正确的写法
-                            flex: 1, // 使输入框占满宽度
+                            color: isDarkMode ? "#ddd" : "#000",
+                            flex: 1,
                           }}
                           value={newNetwork}
                           onChangeText={(text) => {
-                            setNewNetwork(text); // 更新输入内容
-                            setSearchNetwork(text); // 更新搜索条件
-                            setNetworkDropdownVisible(true); // 用户输入时自动展开下拉框
+                            setNewNetwork(text);
+                            setSearchNetwork(text);
+                            setNetworkDropdownVisible(true);
                           }}
-                          placeholder="Search Network" // 占位符
-                          placeholderTextColor={isDarkMode ? "#ccc" : "#666"} // 保持占位符颜色
+                          placeholder="Search Network"
+                          placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
                         />
                       </View>
-
-                      {/* 箭头图标保持原有样式 */}
                       <Icon
                         name={
                           networkDropdownVisible ? "expand-less" : "expand-more"
                         }
                         size={24}
-                        color={isDarkMode ? "#ddd" : "#676776"} // 确保箭头颜色符合主题
+                        color={isDarkMode ? "#ddd" : "#676776"}
                       />
                     </TouchableOpacity>
-
-                    {/* 下拉框显示自动匹配的网络选项 */}
                     {networkDropdownVisible && (
                       <View style={{ width: "100%", marginBottom: 10 }}>
                         <ScrollView
                           style={{ maxHeight: 200, borderRadius: 10 }}
-                          showsVerticalScrollIndicator={true}
+                          showsVerticalScrollIndicator
                           showsHorizontalScrollIndicator={false}
                         >
-                          {/* 动态过滤匹配的网络 */}
-                          {filteredNetworks
-                            .filter(
-                              (network) =>
-                                network
-                                  .toLowerCase()
-                                  .includes(searchNetwork.toLowerCase()) // 根据用户输入过滤网络
-                            )
-                            .map((network) => (
-                              <TouchableOpacity
-                                key={network}
-                                onPress={() => {
-                                  setNewNetwork(network);
-                                  setNetworkDropdownVisible(false);
-                                }}
+                          {filteredNetworks.map((network) => (
+                            <TouchableOpacity
+                              key={network}
+                              onPress={() => {
+                                setNewNetwork(network);
+                                setNetworkDropdownVisible(false);
+                              }}
+                              style={{
+                                padding: 10,
+                                flexDirection: "row",
+                                alignItems: "center",
+                                backgroundColor:
+                                  network === newNetwork
+                                    ? styles.submitButton.backgroundColor
+                                    : styles.passwordInput.backgroundColor,
+                              }}
+                            >
+                              <Image
+                                source={networkImages[network]}
                                 style={{
-                                  padding: 10,
-                                  flexDirection: "row",
-                                  alignItems: "center",
-                                  backgroundColor:
-                                    network === newNetwork
-                                      ? styles.submitButton.backgroundColor
-                                      : styles.passwordInput.backgroundColor,
+                                  width: 24,
+                                  height: 24,
+                                  marginRight: 8,
+                                  backgroundColor: "rgba(255, 255, 255, 0.2)",
+                                  borderRadius: 12,
                                 }}
-                              >
-                                <Image
-                                  source={networkImages[network]}
-                                  style={{
-                                    width: 24,
-                                    height: 24,
-                                    marginRight: 8,
-                                    backgroundColor: "rgba(255, 255, 255, 0.2)",
-                                    borderRadius: 12,
-                                  }}
-                                />
-                                <Text style={{ color: styles.Text.color }}>
-                                  {network}
-                                </Text>
-                              </TouchableOpacity>
-                            ))}
+                              />
+                              <Text style={{ color: styles.Text.color }}>
+                                {network}
+                              </Text>
+                            </TouchableOpacity>
+                          ))}
                         </ScrollView>
                       </View>
                     )}
-
                     {!networkDropdownVisible && (
                       <>
                         <TextInput
-                          style={[styles.passwordInput]}
+                          style={styles.passwordInput}
                           placeholder="Name Required"
                           placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
                           onChangeText={setNewName}
                           value={newName}
                         />
                         <TextInput
-                          style={[styles.addressInput]}
+                          style={styles.addressInput}
                           placeholder="Address Required"
                           placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
                           onChangeText={setNewAddress}

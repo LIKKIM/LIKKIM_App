@@ -1,4 +1,4 @@
-// modal/ChainSelectionModal.js
+// TransactionChainFilterModal.js
 import React from "react";
 import {
   Modal,
@@ -12,12 +12,12 @@ import {
 import { BlurView } from "expo-blur";
 import { useTranslation } from "react-i18next";
 
-const ChainSelectionModal = ({
+const TransactionChainFilterModal = ({
   isVisible,
   onClose,
   selectedChain,
   handleSelectChain,
-  cryptoCards,
+  chainCards,
   isDarkMode,
   t,
 }) => {
@@ -115,11 +115,7 @@ const ChainSelectionModal = ({
                   </Text>
                 </TouchableOpacity>
 
-                {[
-                  ...new Map(
-                    cryptoCards.map((card) => [card.chainShortName, card])
-                  ).values(),
-                ]
+                {chainCards
                   .sort((a, b) =>
                     a.chainShortName.localeCompare(b.chainShortName)
                   )
@@ -183,4 +179,4 @@ const ChainSelectionModal = ({
   );
 };
 
-export default ChainSelectionModal;
+export default TransactionChainFilterModal;

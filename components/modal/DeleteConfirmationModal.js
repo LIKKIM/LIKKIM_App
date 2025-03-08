@@ -1,4 +1,4 @@
-// DeleteConfirmationModal.js
+// modal/DeleteConfirmationModal.js
 import React from "react";
 import { View, Text, Modal, Image, TouchableOpacity } from "react-native";
 import { BlurView } from "expo-blur";

@@ -1,3 +1,4 @@
+// SelectCryptoModal.js
 import React, { useState } from "react";
 import {
   Modal,
@@ -9,7 +10,7 @@ import {
   TextInput,
   KeyboardAvoidingView,
   Platform,
-  TouchableWithoutFeedback, // 引入TouchableWithoutFeedback
+  TouchableWithoutFeedback,
 } from "react-native";
 import { BlurView } from "expo-blur";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -25,9 +26,8 @@ const SelectCryptoModal = ({
   setModalVisible,
   isDarkMode,
 }) => {
-  const [searchQuery, setSearchQuery] = useState(""); // 搜索框输入状态
+  const [searchQuery, setSearchQuery] = useState("");
 
-  // 根据搜索框输入过滤加密货币列表
   const filteredCryptos = addedCryptos.filter((crypto) =>
     `${crypto.shortName} ${crypto.chain}`
       .toLowerCase()
@@ -41,7 +41,6 @@ const SelectCryptoModal = ({
       visible={visible}
       onRequestClose={onRequestClose}
     >
-      {/* 监听模糊背景点击 */}
       <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -50,7 +49,6 @@ const SelectCryptoModal = ({
           <BlurView intensity={10} style={TransactionsScreenStyle.centeredView}>
             <View
               style={TransactionsScreenStyle.modalView}
-              // 阻止点击事件冒泡，避免触发关闭 Modal
               onStartShouldSetResponder={() => true}
             >
               <Text style={TransactionsScreenStyle.TransactionModalTitle}>
@@ -60,7 +58,7 @@ const SelectCryptoModal = ({
                   ? t("Choose the cryptocurrency to send:")
                   : t("Choose the cryptocurrency to receive:")}
               </Text>
-              {/* 添加搜索框 */}
+
               {addedCryptos.length > 0 && (
                 <View style={TransactionsScreenStyle.searchContainer}>
                   <Icon
@@ -78,7 +76,6 @@ const SelectCryptoModal = ({
                 </View>
               )}
 
-              {/* 如果没有加密货币 */}
               {addedCryptos.length === 0 ? (
                 <View
                   style={{

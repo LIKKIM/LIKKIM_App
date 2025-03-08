@@ -23,7 +23,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 import i18n from "../config/i18n";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { CryptoContext, DarkModeContext } from "./CryptoContext";
+import { CryptoContext, DarkModeContext } from "../utils/CryptoContext";
 import MyColdWalletScreenStyles from "../styles/MyColdWalletScreenStyle";
 import LanguageModal from "./modal/LanguageModal";
 import CurrencyModal from "./modal/CurrencyModal";
@@ -41,6 +41,7 @@ import * as LocalAuthentication from "expo-local-authentication";
 import AddressBookModal from "./modal/AddressBookModal";
 import PasswordModal from "./modal/PasswordModal";
 import MyColdWalletContent from "./MyColdWalletScreen/MyColdWalletContent";
+import getSettingsOptions from "./MyColdWalletScreen/settingsOptions";
 import { languages } from "../config/languages";
 import base64 from "base64-js";
 import { Buffer } from "buffer";
@@ -73,6 +74,7 @@ function MyColdWalletScreen() {
     toggleScreenLock,
     changeScreenLockPassword,
     setCryptoCards,
+    updateCryptoPublicKey,
   } = useContext(CryptoContext);
 
   const { isDarkMode, setIsDarkMode } = useContext(DarkModeContext);
@@ -460,17 +462,6 @@ function MyColdWalletScreen() {
     }
   };
 
-  function crc16Modbus(arr) {
-    let crc = 0xffff;
-    for (let byte of arr) {
-      crc ^= byte;
-      for (let i = 0; i < 8; i++) {
-        crc = crc & 0x0001 ? (crc >> 1) ^ 0xa001 : crc >> 1;
-      }
-    }
-    return crc & 0xffff;
-  }
-
   const reconnectDevice = async (device) => {
     try {
       console.log(`Attempting to reconnect device: ${device.id}`);
@@ -530,6 +521,11 @@ function MyColdWalletScreen() {
   let monitorSubscription;
 
   const monitorVerificationCode = (device, sendDecryptedValue) => {
+    if (monitorSubscription) {
+      monitorSubscription.remove();
+      monitorSubscription = null;
+    }
+    //bugging 这里要有循环查询地址的机制
     monitorSubscription = device.monitorCharacteristicForService(
       serviceUUID,
       notifyCharacteristicUUID,
@@ -558,7 +554,7 @@ function MyColdWalletScreen() {
             // 假设预期地址数量与 prefixToShortName 中的条目数一致
             const expectedCount = Object.keys(prefixToShortName).length;
             if (Object.keys(updated).length >= expectedCount) {
-              setVerificationStatus("success");
+              setVerificationStatus("walletReady");
             } else {
               setVerificationStatus("waiting");
             }
@@ -566,25 +562,16 @@ function MyColdWalletScreen() {
           });
         }
 
-        if (receivedDataString.startsWith("pubkey:")) {
-          // 假设返回数据格式为 "pubkey: cosmosm,04AABBCCDDEE..."
-          const pubkeyData = receivedDataString.replace("pubkey:", "").trim();
-          const [chainShortName, publicKey] = pubkeyData.split(",");
-          if (chainShortName && publicKey) {
+        if (receivedDataString.startsWith("pubkeyData:")) {
+          const pubkeyData = receivedDataString
+            .replace("pubkeyData:", "")
+            .trim();
+          const [queryChainName, publicKey] = pubkeyData.split(",");
+          if (queryChainName && publicKey) {
             console.log(
-              `Received public key for ${chainShortName}: ${publicKey}`
+              `Received public key for ${queryChainName}: ${publicKey}`
             );
-            // 如果你在 CryptoContext 中定义了 updateCryptoPublicKey 方法，可以这样调用：
-            updateCryptoPublicKey(chainShortName, publicKey);
-
-            // 或者直接通过 setCryptoCards 更新状态，假设 cryptoCards 数组中每个对象都包含 chainShortName 和 publicKey 字段：
-            setCryptoCards((prevCards) =>
-              prevCards.map((card) =>
-                card.chainShortName === chainShortName
-                  ? { ...card, publicKey: publicKey }
-                  : card
-              )
-            );
+            updateCryptoPublicKey(queryChainName, publicKey);
           }
         }
 
@@ -729,28 +716,27 @@ function MyColdWalletScreen() {
       setVerifiedDevices([selectedDevice.id]);
       await AsyncStorage.setItem(
         "verifiedDevices",
+        // save ble id
         JSON.stringify([selectedDevice.id])
       );
       setIsVerificationSuccessful(true);
       console.log("Device verified and saved");
 
-      if (flag === "Y") {
-        // 先发送确认消息，告知嵌入式设备验证成功
-        try {
-          const confirmationMessage = "PIN_OK";
-          const bufferConfirmation = Buffer.from(confirmationMessage, "utf-8");
-          const base64Confirmation = bufferConfirmation.toString("base64");
-          await selectedDevice.writeCharacteristicWithResponseForService(
-            serviceUUID,
-            writeCharacteristicUUID,
-            base64Confirmation
-          );
-          console.log("Sent confirmation message:", confirmationMessage);
-        } catch (error) {
-          console.log("Error sending confirmation message:", error);
-        }
+      try {
+        const confirmationMessage = "PIN_OK";
+        const bufferConfirmation = Buffer.from(confirmationMessage, "utf-8");
+        const base64Confirmation = bufferConfirmation.toString("base64");
+        await selectedDevice.writeCharacteristicWithResponseForService(
+          serviceUUID,
+          writeCharacteristicUUID,
+          base64Confirmation
+        );
+        console.log("Sent confirmation message:", confirmationMessage);
+      } catch (error) {
+        console.log("Error sending confirmation message:", error);
+      }
 
-        // 发送 address 消息
+      if (flag === "Y") {
         console.log("Flag Y received; sending 'address' to device");
         try {
           const addressMessage = "address";
@@ -762,19 +748,21 @@ function MyColdWalletScreen() {
             base64Address
           );
           console.log("Sent 'address' to device");
+
+          // 发送 address 后立即打开弹窗
+          setVerificationModalVisible(true);
         } catch (error) {
           console.log("Error sending 'address':", error);
         }
 
         // 逐条发送 pubkey 消息
         const pubkeyMessages = [
-          "pubkey: cosmosm,m/44'/118'/0'/0/0",
-          "pubkey: ripple,m/44'/144'/0'/0/0",
-          "pubkey: celestia,m/44'/118'/0'/0/0",
-          "pubkey: juno,m/44'/118'/0'/0/0",
-          "pubkey: osmosis,m/44'/118'/0'/0/0",
+          "pubkey:cosmos,m/44'/118'/0'/0/0",
+          "pubkey:ripple,m/44'/144'/0'/0/0",
+          "pubkey:celestia,m/44'/118'/0'/0/0",
+          "pubkey:juno,m/44'/118'/0'/0/0",
+          "pubkey:osmosis,m/44'/118'/0'/0/0",
         ];
-
         for (const message of pubkeyMessages) {
           try {
             const bufferMessage = Buffer.from(message, "utf-8");
@@ -791,6 +779,8 @@ function MyColdWalletScreen() {
         }
       } else if (flag === "N") {
         console.log("Flag N received; no 'address' sent");
+        // 直接打开弹窗
+        setVerificationModalVisible(true);
       }
     } else {
       console.log("PIN verification failed");
@@ -804,7 +794,6 @@ function MyColdWalletScreen() {
         console.log("Disconnected device");
       }
     }
-    setVerificationModalVisible(true);
     setPinCode("");
   };
 
@@ -1033,182 +1022,28 @@ function MyColdWalletScreen() {
     setIsDeleteWalletVisible((prevState) => !prevState);
   };
 
-  const settingsOptions = {
-    settings: [
-      {
-        title: t("Default Currency"),
-        icon: "attach-money",
-        onPress: () => {
-          Vibration.vibrate();
-          setCurrencyModalVisible(true);
-        },
-        extraIcon: "arrow-drop-down",
-        selectedOption: selectedCurrency,
-      },
-      {
-        title: t("Language"),
-        icon: "language",
-        onPress: () => {
-          Vibration.vibrate();
-          setLanguageModalVisible(true);
-        },
-        extraIcon: "arrow-drop-down",
-        selectedOption: (
-          languages.find((lang) => lang.code === selectedLanguage) ||
-          languages.find((lang) => lang.code === "en")
-        ).name,
-      },
-      {
-        title: t("Dark Mode"),
-        icon: "dark-mode",
-        onPress: () => {
-          Vibration.vibrate();
-          handleDarkModeChange(!isDarkMode);
-        },
-        toggle: (
-          <Switch
-            trackColor={{ false: "#767577", true: toggleColor }}
-            thumbColor={isDarkMode ? "#fff" : "#f4f3f4"}
-            ios_backgroundColor="#3e3e3e"
-            onValueChange={() => {
-              Vibration.vibrate();
-              handleDarkModeChange(!isDarkMode);
-            }}
-            value={isDarkMode}
-          />
-        ),
-      },
-      {
-        title: t("Address Book"),
-        icon: "portrait",
-        onPress: () => {
-          Vibration.vibrate();
-          setAddressBookModalVisible(true);
-        },
-      },
-      {
-        title: t("Enable Screen Lock"),
-        icon: "lock-outline",
-        onPress: () => {
-          Vibration.vibrate();
-          handleScreenLockToggle(!isScreenLockEnabled);
-        },
-        toggle: (
-          <Switch
-            trackColor={{ false: "#767577", true: toggleColor }}
-            thumbColor={isScreenLockEnabled ? "#fff" : "#f4f3f4"}
-            ios_backgroundColor="#3e3e3e"
-            onValueChange={() => {
-              Vibration.vibrate();
-              handleScreenLockToggle(!isScreenLockEnabled);
-            }}
-            value={isScreenLockEnabled}
-          />
-        ),
-      },
-      ...(isScreenLockEnabled
-        ? [
-            {
-              title: t("Change App Screen Lock Password"),
-              icon: "password",
-              onPress: () => {
-                Vibration.vibrate();
-                openChangePasswordModal();
-              },
-            },
-            {
-              title: t("Enable Face ID"),
-              icon: "face",
-              onPress: () => {
-                Vibration.vibrate();
-                toggleFaceID(!isFaceIDEnabled);
-              },
-              toggle: (
-                <Switch
-                  trackColor={{ false: "#767577", true: toggleColor }}
-                  thumbColor={isFaceIDEnabled ? "#fff" : "#f4f3f4"}
-                  ios_backgroundColor="#3e3e3e"
-                  onValueChange={async () => {
-                    Vibration.vibrate();
-                    await toggleFaceID(!isFaceIDEnabled);
-                  }}
-                  value={isFaceIDEnabled}
-                />
-              ),
-            },
-          ]
-        : []),
-      {
-        title: t("Find My LIKKIM"),
-        icon: "location-on",
-        onPress: () => {
-          Vibration.vibrate();
-          navigation.navigate("Find My LIKKIM");
-        },
-      },
-      {
-        title: t("Firmware Update"),
-        icon: "downloading",
-        onPress: () => {
-          Vibration.vibrate();
-          handleFirmwareUpdate();
-        },
-      },
-    ],
-    walletManagement: [
-      {
-        title: t("Wallet Management"),
-        icon: "wallet",
-        extraIcon: isDeleteWalletVisible ? "arrow-drop-up" : "arrow-drop-down",
-        onPress: toggleDeleteWalletVisibility,
-      },
-      isDeleteWalletVisible && {
-        title: t("Delete Wallet"),
-        icon: "delete-outline",
-        onPress: () => {
-          Vibration.vibrate();
-          handleDeleteWallet();
-        },
-        style: { color: "red" },
-      },
-    ],
-    support: [
-      {
-        title: t("Help & Support"),
-        icon: "help-outline",
-        onPress: () => {
-          Vibration.vibrate();
-          navigation.navigate("Support");
-        },
-      },
-      {
-        title: t("Privacy & Data"),
-        icon: "gpp-good",
-        onPress: () => {
-          Vibration.vibrate();
-          Linking.openURL("https://likkim.com/privacy-policy");
-        },
-      },
-      {
-        title: t("About"),
-        icon: "info-outline",
-        onPress: () => {
-          Vibration.vibrate();
-          Linking.openURL("https://www.likkim.com");
-        },
-      },
-    ],
-    info: [
-      {
-        title: t("Version"),
-        icon: "update",
-        version: appConfig.ios.buildNumber,
-        onPress: () => {
-          Vibration.vibrate();
-        },
-      },
-    ],
-  };
+  const settingsOptions = getSettingsOptions({
+    t,
+    navigation,
+    selectedCurrency,
+    setCurrencyModalVisible,
+    setLanguageModalVisible,
+    languages,
+    selectedLanguage,
+    isDarkMode,
+    toggleColor,
+    handleDarkModeChange,
+    setAddressBookModalVisible,
+    handleScreenLockToggle,
+    isScreenLockEnabled,
+    openChangePasswordModal,
+    toggleFaceID,
+    isFaceIDEnabled,
+    handleFirmwareUpdate,
+    isDeleteWalletVisible,
+    toggleDeleteWalletVisibility,
+    handleDeleteWallet,
+  });
 
   // Confirm delete wallet alert
   const handleDeleteWallet = () => {

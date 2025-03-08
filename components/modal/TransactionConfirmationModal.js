@@ -44,7 +44,6 @@ const TransactionConfirmationModal = ({
     >
       <BlurView intensity={10} style={TransactionsScreenStyle.centeredView}>
         <View style={TransactionsScreenStyle.confirmModalView}>
-          {/* 标题 */}
           <Text style={TransactionsScreenStyle.modalTitle}>
             {t("Transaction Confirmation")}
           </Text>
@@ -105,11 +104,11 @@ const TransactionConfirmationModal = ({
             </Text>
 
             <View style={TransactionsScreenStyle.transactionText}>
-              <Text style={{ fontWeight: "bold", marginBottom: 8 }}>
-                {t("Transaction Fee")}:
+              <Text style={TransactionsScreenStyle.transactionText}>
+                <Text style={{ fontWeight: "bold", marginBottom: 8 }}>
+                  {t("Transaction Fee")}:
+                </Text>
               </Text>
-
-              {/* Tab 按钮 */}
               <View
                 style={{
                   flexDirection: "row",
@@ -185,7 +184,6 @@ const TransactionConfirmationModal = ({
                 </TouchableOpacity>
               </View>
 
-              {/* 手续费信息 */}
               {selectedFeeTab === "Recommended" ? (
                 <View style={{ marginTop: 10 }}>
                   <Text style={TransactionsScreenStyle.balanceValue}>

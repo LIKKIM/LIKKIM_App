@@ -11,7 +11,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 
 const MyColdWalletContent = ({
   styles, // MyColdWalletScreenStyle
-  settingsOptions, // 包含 settings、support、info 等选项的对象
+  settingsOptions,
   isDeleteWalletVisible,
   setIsDeleteWalletVisible,
   isSupportExpanded,
@@ -19,7 +19,7 @@ const MyColdWalletContent = ({
   handleDeleteWallet,
   handleBluetoothPairing,
   iconColor,
-  t, // 国际化函数
+  t,
 }) => {
   return (
     <ScrollView
@@ -91,7 +91,7 @@ const MyColdWalletContent = ({
                   name="delete-outline"
                   size={24}
                   color={iconColor}
-                  style={styles.Icon}
+                  style={[styles.Icon, { marginLeft: 20 }]}
                 />
                 <Text style={[styles.Text, { flex: 1 }]}>
                   {t("Delete Wallet")}
@@ -124,23 +124,27 @@ const MyColdWalletContent = ({
 
         {isSupportExpanded && (
           <View>
-            {settingsOptions.support.map((option) => (
-              <TouchableOpacity
-                key={option.title}
-                style={styles.settingsItem}
-                onPress={option.onPress}
-              >
-                <View style={styles.listContainer}>
-                  <Icon
-                    name={option.icon}
-                    size={24}
-                    color={iconColor}
-                    style={styles.Icon}
-                  />
-                  <Text style={[styles.Text, { flex: 1 }]}>{option.title}</Text>
-                </View>
-              </TouchableOpacity>
-            ))}
+            {settingsOptions.support.map((option) => {
+              return (
+                <TouchableOpacity
+                  key={option.title}
+                  style={styles.settingsItem}
+                  onPress={option.onPress}
+                >
+                  <View style={styles.listContainer}>
+                    <Icon
+                      name={option.icon}
+                      size={24}
+                      color={iconColor}
+                      style={[styles.Icon, { marginLeft: 20 }]}
+                    />
+                    <Text style={[styles.Text, { flex: 1 }]}>
+                      {option.title}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              );
+            })}
           </View>
         )}
 

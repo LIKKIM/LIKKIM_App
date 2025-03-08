@@ -4,27 +4,6 @@ import { Modal, View, Text, TextInput, TouchableOpacity } from "react-native";
 import { BlurView } from "expo-blur";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
-/**
- * NewPasswordModal 组件
- *
- * Props:
- * - visible: 控制 Modal 显示/隐藏
- * - onRequestClose: 点击取消或返回时调用的函数（关闭 Modal）
- * - onSubmit: 点击提交时调用的函数（处理密码提交）
- * - password: 当前新密码值
- * - setPassword: 设置新密码的函数
- * - confirmPassword: 确认密码的值
- * - setConfirmPassword: 设置确认密码的函数
- * - passwordError: 密码错误提示文本
- * - setPasswordError: 清空或设置密码错误提示的函数
- * - isPasswordHidden: 控制密码是否隐藏（布尔值）
- * - setIsPasswordHidden: 切换密码显示状态的函数
- * - isConfirmPasswordHidden: 控制确认密码是否隐藏的布尔值
- * - setIsConfirmPasswordHidden: 切换确认密码显示状态的函数
- * - t: 国际化函数
- * - isDarkMode: 是否为暗黑模式（布尔值）
- * - styles: 样式对象（例如 MyColdWalletScreenStyle）
- */
 const NewPasswordModal = ({
   visible,
   onRequestClose,
@@ -43,7 +22,6 @@ const NewPasswordModal = ({
   isDarkMode,
   styles,
 }) => {
-  // 状态用来记录每个 TextInput 是否处于焦点状态
   const [isNewPasswordFocused, setIsNewPasswordFocused] = useState(false);
   const [isConfirmPasswordFocused, setIsConfirmPasswordFocused] =
     useState(false);
@@ -63,7 +41,7 @@ const NewPasswordModal = ({
               <TextInput
                 style={[
                   styles.passwordInput,
-                  isNewPasswordFocused && styles.focusedInput, // 仅在获得焦点时添加样式
+                  isNewPasswordFocused && styles.focusedInput,
                 ]}
                 placeholder={t("Enter new password")}
                 placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
@@ -94,7 +72,7 @@ const NewPasswordModal = ({
               <TextInput
                 style={[
                   styles.passwordInput,
-                  isConfirmPasswordFocused && styles.focusedInput, // 同理
+                  isConfirmPasswordFocused && styles.focusedInput,
                 ]}
                 placeholder={t("Confirm new password")}
                 placeholderTextColor={isDarkMode ? "#ccc" : "#666"}

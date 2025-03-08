@@ -1,4 +1,4 @@
-// BluetoothModal.js
+// modal/BluetoothModal.js
 import React, { useEffect, useState } from "react";
 import {
   View,
@@ -10,15 +10,15 @@ import {
 } from "react-native";
 import { BlurView } from "expo-blur";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import * as Location from "expo-location"; // 导入地理位置模块
-import AsyncStorage from "@react-native-async-storage/async-storage"; // 导入异步存储模块
+import * as Location from "expo-location";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const BluetoothModal = ({
   visible,
   devices,
   isScanning,
   iconColor,
-  onDevicePress, // 从外部传入的设备按下处理函数
+  onDevicePress,
   onCancel,
   verifiedDevices,
   MyColdWalletScreenStyle,
@@ -28,82 +28,80 @@ const BluetoothModal = ({
   const [locationPermissionGranted, setLocationPermissionGranted] =
     useState(false);
 
-  // 在组件挂载时预先请求地理位置权限
   useEffect(() => {
     const requestLocationPermission = async () => {
       const { status } = await Location.requestForegroundPermissionsAsync();
       if (status === "granted") {
         setLocationPermissionGranted(true);
       } else {
-        console.warn("定位权限被拒绝");
+        console.warn("Location permission denied");
       }
     };
 
-    // 请求权限
     requestLocationPermission();
-  }, []); // 仅在组件首次渲染时执行
+  }, []);
 
-  // 获取设备的位置信息
   const getDeviceLocation = async () => {
     if (!locationPermissionGranted) {
-      console.warn("定位权限未授予");
+      console.warn("Location permission not granted");
       return null;
     }
-
     try {
       const location = await Location.getCurrentPositionAsync({});
-      return { lat: location.coords.latitude, lng: location.coords.longitude };
+      return {
+        lat: location.coords.latitude,
+        lng: location.coords.longitude,
+      };
     } catch (error) {
-      console.error("获取位置失败：", error);
+      console.error("Failed to get location:", error);
       return null;
     }
   };
 
-  // 保存已连接设备及其地理位置信息
   const saveConnectedDevice = async (device, lat, lng) => {
     try {
       const savedDevices = await AsyncStorage.getItem("connectedDevices");
-      let devices = savedDevices ? JSON.parse(savedDevices) : [];
+      const devicesArray = savedDevices ? JSON.parse(savedDevices) : [];
 
       const newDeviceData = {
         id: device.id,
         name: device.name,
-        lat: lat,
-        lng: lng,
+        lat,
+        lng,
         connectedAt: Date.now(),
       };
 
-      const existingDeviceIndex = devices.findIndex((d) => d.id === device.id);
+      const existingDeviceIndex = devicesArray.findIndex(
+        (d) => d.id === device.id
+      );
       if (existingDeviceIndex !== -1) {
-        devices[existingDeviceIndex] = newDeviceData;
+        devicesArray[existingDeviceIndex] = newDeviceData;
       } else {
-        devices.push(newDeviceData);
+        devicesArray.push(newDeviceData);
       }
 
-      await AsyncStorage.setItem("connectedDevices", JSON.stringify(devices));
-      console.log("设备信息已保存:", newDeviceData);
+      await AsyncStorage.setItem(
+        "connectedDevices",
+        JSON.stringify(devicesArray)
+      );
+      console.log("Device saved:", newDeviceData);
     } catch (error) {
-      console.error("保存设备信息失败:", error);
+      console.error("Failed to save device:", error);
     }
   };
 
-  // 处理设备点击，同时保存地理信息
   const handleDeviceWithLocationPress = async (device) => {
-    // 立即调用外部传入的 onDevicePress，确保弹窗立即显示
     onDevicePress(device);
-
-    // 异步获取地理位置信息和保存设备信息，不阻塞弹窗显示
     const location = await getDeviceLocation();
-    if (!location) return;
-
-    // 保存设备和位置信息
-    saveConnectedDevice(device, location.lat, location.lng);
+    if (location) {
+      saveConnectedDevice(device, location.lat, location.lng);
+    }
   };
 
   return (
     <Modal
       animationType="slide"
-      transparent={true}
+      transparent
       visible={visible}
       onRequestClose={onCancel}
     >
@@ -133,7 +131,7 @@ const BluetoothModal = ({
                     <TouchableOpacity
                       onPress={() => {
                         if (!isVerified) {
-                          handleDeviceWithLocationPress(item); // 使用包装后的函数
+                          handleDeviceWithLocationPress(item);
                         }
                       }}
                     >
