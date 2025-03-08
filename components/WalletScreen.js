@@ -1527,19 +1527,26 @@ function WalletScreen({ route, navigation }) {
   //检查更新
   async function onFetchUpdateAsync() {
     try {
+      // Skip update check in development mode
       if (__DEV__) return;
 
-      console.log("检查更新..");
+      console.log("Checking for updates...");
+
+      // Check for an available update
       const update = await Updates.checkForUpdateAsync();
 
       if (update.isAvailable) {
-        console.log("有新版！");
+        console.log("A new version is available!");
 
+        // Fetch the new update
         await Updates.fetchUpdateAsync();
+
+        // Show an alert asking the user if they want to update now or later
         Alert.alert("The new version is ready. ", "Do you want to update it?", [
           {
             text: "Update now ",
             onPress() {
+              // Reload the app to apply the update
               Updates.reloadAsync();
             },
           },
@@ -1549,7 +1556,8 @@ function WalletScreen({ route, navigation }) {
         ]);
       }
     } catch (error) {
-      console.log("更新服务检查失败:");
+      // Log the error if the update check fails
+      console.log("Update service check failed:");
       console.log(
         error instanceof Error ? error.message : JSON.stringify(error)
       );
