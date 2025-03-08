@@ -11,7 +11,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { useContext, useState, useLayoutEffect } from "react";
-import { CryptoContext, DarkModeContext } from "../CryptoContext";
+import { CryptoContext, DarkModeContext } from "../../utils/CryptoContext";
 import TransactionsScreenStyle from "../../styles/TransactionsScreenStyle";
 import { useTranslation } from "react-i18next";
 import ChangellyAPI from "./ChangellyAPI";

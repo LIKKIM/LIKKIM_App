@@ -32,7 +32,7 @@ import {
 } from "../config/chainMapping";
 
 // 上下文和样式
-import { CryptoContext, DarkModeContext } from "./CryptoContext";
+import { CryptoContext, DarkModeContext } from "../utils/CryptoContext";
 import TransactionsScreenStyles from "../styles/TransactionsScreenStyle";
 
 // Modal 组件

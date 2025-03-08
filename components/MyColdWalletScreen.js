@@ -23,7 +23,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 import i18n from "../config/i18n";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { CryptoContext, DarkModeContext } from "./CryptoContext";
+import { CryptoContext, DarkModeContext } from "../utils/CryptoContext";
 import MyColdWalletScreenStyles from "../styles/MyColdWalletScreenStyle";
 import LanguageModal from "./modal/LanguageModal";
 import CurrencyModal from "./modal/CurrencyModal";

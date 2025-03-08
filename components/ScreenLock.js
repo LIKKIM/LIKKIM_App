@@ -10,7 +10,7 @@ import {
   Image,
   Platform,
 } from "react-native";
-import { CryptoContext, DarkModeContext } from "./CryptoContext";
+import { CryptoContext, DarkModeContext } from "../utils/CryptoContext";
 import { useTranslation } from "react-i18next";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import * as LocalAuthentication from "expo-local-authentication";

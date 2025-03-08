@@ -33,7 +33,11 @@ import { Buffer } from "buffer";
 
 // 样式和上下文
 import WalletScreenStyles from "../styles/WalletScreenStyle";
-import { CryptoContext, DarkModeContext, usdtCrypto } from "./CryptoContext";
+import {
+  CryptoContext,
+  DarkModeContext,
+  usdtCrypto,
+} from "../utils/CryptoContext";
 
 // 自定义组件
 import { prefixToShortName } from "../config/chainPrefixes";

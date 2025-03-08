@@ -25,7 +25,7 @@ import {
   CryptoProvider,
   CryptoContext,
   DarkModeContext,
-} from "./components/CryptoContext";
+} from "./utils/CryptoContext";
 import i18n from "./config/i18n";
 
 if (__DEV__) {
