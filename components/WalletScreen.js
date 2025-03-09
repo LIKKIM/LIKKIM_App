@@ -1269,9 +1269,8 @@ function WalletScreen({ route, navigation }) {
           }
         }
       } else if (flag === "N") {
-        console.log(
-          "Device returned PIN:xxxx,N, no need to send 'address' and pubkey messages"
-        );
+        console.log("Flag N received; no 'address' sent");
+        setVerificationModalVisible(true);
       }
     } else {
       console.log("PIN verification failed");
