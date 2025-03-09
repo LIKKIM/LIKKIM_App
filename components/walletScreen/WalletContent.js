@@ -595,17 +595,16 @@ const WalletContent = (props) => {
                   </View>
                 )}
                 <Text style={{ fontWeight: "bold", marginBottom: 4 }}>
-                  {nft.token || "NFT Card"}{" "}
-                  {/* Display the token if available */}
+                  {nft.collectionName || "NFT Card"}
+                  {/* Display the collection name if available */}
                 </Text>
 
                 <Text style={{ fontSize: 12, marginBottom: 4 }}>
                   {t("Price")}: {nft.lastPrice} {nft.lastPriceUnit || t("N/A")}
                   {/* Display price */}
                 </Text>
-                <Text style={{ fontSize: 12 }}>
-                  {t("Chain")}: {nft.collectionName || t("N/A")}
-                  {/* Display collection or chain name */}
+                <Text style={{ fontSize: 12, marginBottom: 4 }}>
+                  {t("Chain")}: {nft.chain || t("N/A")}
                 </Text>
               </View>
             </TouchableOpacity>
@@ -666,8 +665,9 @@ const WalletContent = (props) => {
                   </View>
                 )}
                 <Text style={[WalletScreenStyle.cardName, { marginBottom: 4 }]}>
-                  {selectedNFT.token || t("NFT Card")}
+                  {selectedNFT.collectionName || t("NFT Card")}
                 </Text>
+
                 <Text
                   style={[WalletScreenStyle.chainCardText, { marginBottom: 2 }]}
                 >
