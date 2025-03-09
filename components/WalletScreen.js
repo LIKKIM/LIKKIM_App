@@ -1273,12 +1273,12 @@ function WalletScreen({ route, navigation }) {
 
       if (monitorSubscription) {
         monitorSubscription.remove();
-        console.log("Stopped verification code monitoring");
+        console.log("Stopped monitoring verification code");
       }
 
       if (selectedDevice) {
         await selectedDevice.cancelConnection();
-        console.log("Disconnected from device");
+        console.log("Disconnected device");
       }
     }
 
