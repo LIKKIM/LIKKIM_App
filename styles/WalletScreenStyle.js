@@ -618,6 +618,20 @@ const WalletScreenStyles = (isDarkMode) => {
       padding: 35,
       alignItems: "center",
     },
+
+    NFTmodalView: {
+      margin: 20,
+      width: "90%",
+      backgroundColor: modalBackgroundColor,
+      borderRadius: 20,
+      padding: 35,
+      //     alignItems: "center",
+      flex: 1,
+      justifyContent: "center",
+      minHeight: 300,
+      maxHeight: 600, // Maximum height, adjust as needed
+    },
+
     pendingModalView: {
       margin: 20,
       width: "90%",

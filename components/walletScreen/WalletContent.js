@@ -17,6 +17,7 @@ import { BlurView } from "expo-blur";
 const WalletContent = (props) => {
   const [nftData, setNftData] = useState(null);
   const [NFTmodalVisible, setNFTModalVisible] = useState(false);
+  const [selectedNFT, setSelectedNFT] = useState(null);
 
   const toggleModal = () => {
     setNFTModalVisible(!NFTmodalVisible);
@@ -159,6 +160,11 @@ const WalletContent = (props) => {
     selectedCardIndex,
     cardInfoVisible,
   } = props;
+
+  const handleNFTSelect = (nft) => {
+    setSelectedNFT(nft); // Store the selected NFT details
+    setNFTModalVisible(true); // Show the modal
+  };
 
   // 格式化余额：根据余额的值保留小数位数
   const formatBalance = (balance) => {
@@ -541,7 +547,7 @@ const WalletContent = (props) => {
           nftData.data.list.map((nft, index) => (
             <TouchableOpacity
               key={index}
-              onPress={toggleModal}
+              onPress={() => handleNFTSelect(nft)} // Use the renamed function
               style={{
                 width: "50%",
                 padding: 4,
@@ -592,13 +598,13 @@ const WalletContent = (props) => {
                   {nft.name || "NFT Card"}
                 </Text>
                 <Text style={{ fontSize: 12, marginBottom: 2 }}>
-                  Contract: {nft.tokenContractAddress}
+                  {t("Contract")}: {nft.tokenContractAddress}
                 </Text>
                 <Text style={{ fontSize: 12, marginBottom: 2 }}>
-                  Token ID: {nft.tokenId}
+                  {t("Token ID")}: {nft.tokenId}
                 </Text>
                 <Text style={{ fontSize: 12 }}>
-                  Protocol: {nft.protocolType || "N/A"}
+                  {t("Protocol")}: {nft.protocolType || "N/A"}
                 </Text>
               </View>
             </TouchableOpacity>
@@ -622,17 +628,70 @@ const WalletContent = (props) => {
         onRequestClose={toggleModal}
       >
         <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
-          <View style={WalletScreenStyle.modalView}>
-            <Text style={WalletScreenStyle.modalTitle}>
-              Here is the NFT content
-            </Text>
+          <View style={WalletScreenStyle.NFTmodalView}>
+            {selectedNFT ? (
+              <View>
+                {selectedNFT.logoUrl ? (
+                  <Image
+                    source={{ uri: selectedNFT.logoUrl }}
+                    style={{
+                      width: "100%",
+                      aspectRatio: 1, // This ensures the height is always equal to the width
+                      borderRadius: 8,
+                      marginBottom: 8,
+                    }}
+                    resizeMode="cover"
+                  />
+                ) : (
+                  <View
+                    style={{
+                      width: "100%",
+                      height: 100,
+                      borderRadius: 8,
+                      backgroundColor: "#ccc",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      marginBottom: 8,
+                    }}
+                  >
+                    <Text style={{ fontSize: 12, color: "#666" }}>
+                      {t("No Image")}
+                    </Text>
+                  </View>
+                )}
+                <Text style={{ fontWeight: "bold", marginBottom: 4 }}>
+                  {selectedNFT.name || t("NFT Card")}
+                </Text>
+                <Text style={{ fontSize: 12, marginBottom: 2 }}>
+                  {t("Contract")}: {selectedNFT.tokenContractAddress}
+                </Text>
+                <Text style={{ fontSize: 12, marginBottom: 2 }}>
+                  {t("Token ID")}: {selectedNFT.tokenId}
+                </Text>
+                <Text style={{ fontSize: 12 }}>
+                  {t("Protocol")}: {selectedNFT.protocolType || t("N/A")}
+                </Text>
+              </View>
+            ) : (
+              <Text
+                style={{
+                  textAlign: "center",
+                  color: isDarkMode ? "#fff" : "#000",
+                  width: "100%",
+                }}
+              >
+                {t("No NFT Data")}
+              </Text>
+            )}
 
-            {/* Close button with the desired styles */}
+            {/* Close button */}
             <TouchableOpacity
               onPress={toggleModal}
               style={WalletScreenStyle.cancelButtonLookingFor}
             >
-              <Text style={WalletScreenStyle.cancelButtonText}>Close</Text>
+              <Text style={WalletScreenStyle.cancelButtonText}>
+                {t("Close")}
+              </Text>
             </TouchableOpacity>
           </View>
         </BlurView>
