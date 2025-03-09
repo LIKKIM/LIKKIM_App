@@ -36,6 +36,7 @@ export default function App() {
   const [headerDropdownVisible, setHeaderDropdownVisible] = useState(false);
   const [selectedCardName, setSelectedCardName] = useState("");
 
+  // Check if the app is launched for the first time
   useEffect(() => {
     AsyncStorage.getItem("alreadyLaunched").then((value) => {
       if (value === null) {
@@ -47,7 +48,7 @@ export default function App() {
     });
   }, []);
 
-  // Preserve the naming "handleOnboardingDone"
+  // Handle completion of onboarding
   const handleOnboardingDone = () => {
     setIsFirstLaunch(false);
   };
@@ -106,7 +107,7 @@ export default function App() {
 }
 
 /**
- * OnboardingApp component displays the onboarding screen for first-time users.
+ * OnboardingApp displays the onboarding screen for first-time users.
  */
 function OnboardingApp({ onDone }) {
   return (
@@ -118,8 +119,8 @@ function OnboardingApp({ onDone }) {
 }
 
 /**
- * AppContent holds the main content of the application, including the bottom Tab Navigator.
- * 修改后的版本增加了 refreshDarkMode 方法，用于主动读取最新的 darkMode 值。
+ * AppContent holds the main application content including the bottom Tab Navigator.
+ * It includes a refreshDarkMode function to update the dark mode state.
  */
 function AppContent({
   t,
@@ -131,7 +132,7 @@ function AppContent({
   const { isAppLaunching } = useContext(CryptoContext);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
-  // 初次加载时读取 darkMode
+  // Load dark mode value on mount
   useEffect(() => {
     AsyncStorage.getItem("darkMode")
       .then((value) => {
@@ -144,7 +145,7 @@ function AppContent({
       .catch((error) => console.error("Failed to read darkMode", error));
   }, []);
 
-  // 添加主动刷新函数，用于在其他组件调用后更新 darkMode 状态
+  // Refresh dark mode value from AsyncStorage
   const refreshDarkMode = () => {
     AsyncStorage.getItem("darkMode")
       .then((value) => {
@@ -163,6 +164,7 @@ function AppContent({
     useState(false);
   const [isScreenLockLoaded, setIsScreenLockLoaded] = useState(false);
 
+  // Listen for navigation state changes to update wallet modal visibility
   useEffect(() => {
     const unsubscribe = navigation.addListener("state", (e) => {
       const rootRoutes = e.data.state?.routes;
@@ -178,6 +180,7 @@ function AppContent({
     return unsubscribe;
   }, [navigation]);
 
+  // Load screen lock feature flag from AsyncStorage
   useEffect(() => {
     AsyncStorage.getItem("screenLockFeatureEnabled")
       .then((value) => {
@@ -319,8 +322,6 @@ function AppContent({
         <Tab.Screen name="Transactions" component={TransactionsScreen} />
         <Tab.Screen name="My Cold Wallet">
           {(props) => (
-            // 通过 onDarkModeChange 属性传递 refreshDarkMode 方法给 MyColdWalletScreen，
-            // 当 dark mode 被切换后，MyColdWalletScreen 可主动调用该方法刷新 AppContent 中的状态
             <MyColdWalletScreen {...props} onDarkModeChange={refreshDarkMode} />
           )}
         </Tab.Screen>
