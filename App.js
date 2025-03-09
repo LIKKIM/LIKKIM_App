@@ -119,7 +119,7 @@ function OnboardingApp({ onDone }) {
 
 /**
  * AppContent holds the main content of the application, including the bottom Tab Navigator.
- * It now reads the darkMode value from AsyncStorage instead of using DarkModeContext.
+ * 修改后的版本增加了 refreshDarkMode 方法，用于主动读取最新的 darkMode 值。
  */
 function AppContent({
   t,
@@ -131,7 +131,7 @@ function AppContent({
   const { isAppLaunching } = useContext(CryptoContext);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
-  // Read darkMode value from AsyncStorage and print it to the console
+  // 初次加载时读取 darkMode
   useEffect(() => {
     AsyncStorage.getItem("darkMode")
       .then((value) => {
@@ -143,6 +143,19 @@ function AppContent({
       })
       .catch((error) => console.error("Failed to read darkMode", error));
   }, []);
+
+  // 添加主动刷新函数，用于在其他组件调用后更新 darkMode 状态
+  const refreshDarkMode = () => {
+    AsyncStorage.getItem("darkMode")
+      .then((value) => {
+        if (value !== null) {
+          const parsedValue = JSON.parse(value);
+          setIsDarkMode(parsedValue);
+          console.log("Refreshed darkMode:", parsedValue);
+        }
+      })
+      .catch((error) => console.error("Failed to refresh darkMode", error));
+  };
 
   const navigation = useNavigation();
   const [walletModalVisible, setWalletModalVisible] = useState(false);
@@ -304,7 +317,13 @@ function AppContent({
           }}
         />
         <Tab.Screen name="Transactions" component={TransactionsScreen} />
-        <Tab.Screen name="My Cold Wallet" component={MyColdWalletScreen} />
+        <Tab.Screen name="My Cold Wallet">
+          {(props) => (
+            // 通过 onDarkModeChange 属性传递 refreshDarkMode 方法给 MyColdWalletScreen，
+            // 当 dark mode 被切换后，MyColdWalletScreen 可主动调用该方法刷新 AppContent 中的状态
+            <MyColdWalletScreen {...props} onDarkModeChange={refreshDarkMode} />
+          )}
+        </Tab.Screen>
       </Tab.Navigator>
       <StatusBar
         backgroundColor={isDarkMode ? "#21201E" : "#FFFFFF"}
