@@ -584,7 +584,7 @@ const WalletContent = (props) => {
                     }}
                   >
                     <Text style={{ fontSize: 12, color: "#666" }}>
-                      暂无图片
+                      {t("No Image")}
                     </Text>
                   </View>
                 )}
@@ -611,7 +611,7 @@ const WalletContent = (props) => {
               width: "100%",
             }}
           >
-            暂无 NFT 数据
+            {t("No NFT Data")}
           </Text>
         )}
       </ScrollView>
