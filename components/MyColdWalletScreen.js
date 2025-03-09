@@ -591,6 +591,10 @@ function MyColdWalletScreen({ onDarkModeChange }) {
   };
 
   const handleDevicePress = async (device) => {
+    if (typeof device !== "object" || typeof device.connect !== "function") {
+      console.log("Invalid device object, cannot connect:", device);
+      return;
+    }
     setReceivedAddresses({});
     setVerificationStatus(null);
     setSelectedDevice(device);
