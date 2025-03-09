@@ -149,8 +149,9 @@ const WalletContent = (props) => {
     }, 300);
   };
 
-  const handleAddressSelect = (selectedAddress) => {
-    setRecipientAddress(selectedAddress); // 更新收款地址
+  const handleAddressSelect = (selectedItem) => {
+    console.log("Selected Address Object:", selectedItem); // 确保选中的是对象
+    setRecipientAddress(selectedItem.address); // 只提取 address 字段
     setAddressBookVisible(false); // 关闭 AddressBookModal
     setTimeout(() => {
       setSendModalVisible(true); // 重新打开 sendModal
@@ -924,13 +925,18 @@ const WalletContent = (props) => {
                     source={{ uri: selectedNFT?.image }}
                     style={WalletScreenStyle.nftImage}
                   />
-
-                  <Text style={WalletScreenStyle.sendNftText}>
-                    {selectedNFT?.name || "NFT Name"}
-                  </Text>
-                  <Text style={WalletScreenStyle.sendNftText}>
-                    {t("Token ID")}: {selectedNFT?.tokenId || "N/A"}
-                  </Text>
+                  <ScrollView
+                    style={{
+                      height: 80,
+                    }}
+                  >
+                    <Text style={WalletScreenStyle.sendNftText}>
+                      {selectedNFT?.name || "NFT Name"}
+                    </Text>
+                    <Text style={WalletScreenStyle.sendNftText}>
+                      {t("Token ID")}: {selectedNFT?.tokenId || "N/A"}
+                    </Text>
+                  </ScrollView>
                 </View>
 
                 <View
@@ -947,10 +953,11 @@ const WalletContent = (props) => {
                     ]}
                     placeholder={t("Enter Address")}
                     placeholderTextColor={isDarkMode ? "#ffffff" : "#21201E"}
-                    onChangeText={handleAddressChange}
-                    //   value={inputAddress}
+                    onChangeText={(text) => setRecipientAddress(text)} // 允许手动输入
+                    value={recipientAddress} // 让 TextInput 反映选中的地址
                     autoFocus={true}
                   />
+
                   <Icon
                     name="portrait"
                     size={28}
