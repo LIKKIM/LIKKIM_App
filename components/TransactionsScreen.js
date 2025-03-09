@@ -1329,6 +1329,7 @@ function TransactionsScreen() {
     }
 
     setSelectedDevice(device);
+    setModalVisible(false);
     setBleVisible(false);
     try {
       await device.connect();
