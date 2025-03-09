@@ -1175,25 +1175,22 @@ function WalletScreen({ route, navigation }) {
   };
 
   const handlePinSubmit = async () => {
-    setPinModalVisible(false); // 关闭 PIN 输入模态框
+    setPinModalVisible(false);
 
-    // 确保完整保留接收到的数据字符串
-    const verificationCodeValue = receivedVerificationCode.trim(); // 接收到的完整字符串
-    const pinCodeValue = pinCode.trim(); // 用户输入的 PIN
+    const verificationCodeValue = receivedVerificationCode.trim();
+    const pinCodeValue = pinCode.trim();
 
     console.log(`用户输入的 PIN: ${pinCodeValue}`);
     console.log(`接收到的完整数据: ${verificationCodeValue}`);
 
-    // 使用 ':' 分割，提取 PIN 和标志位部分
-    const [prefix, rest] = verificationCodeValue.split(":"); // 分割出前缀和其余部分
+    const [prefix, rest] = verificationCodeValue.split(":");
     if (prefix !== "PIN" || !rest) {
       console.log("接收到的验证码格式不正确:", verificationCodeValue);
       setVerificationStatus("fail");
       return;
     }
 
-    // 使用 ',' 分割，提取 PIN 和标志位
-    const [receivedPin, flag] = rest.split(","); // 分割出 PIN 值和标志位
+    const [receivedPin, flag] = rest.split(",");
     if (!receivedPin || (flag !== "Y" && flag !== "N")) {
       console.log("接收到的验证码格式不正确:", verificationCodeValue);
       setVerificationStatus("fail");
@@ -1203,15 +1200,12 @@ function WalletScreen({ route, navigation }) {
     console.log(`提取到的 PIN 值: ${receivedPin}`);
     console.log(`提取到的标志位: ${flag}`);
 
-    // 验证用户输入的 PIN 是否匹配
     if (pinCodeValue === receivedPin) {
       console.log("PIN 验证成功");
       setVerificationStatus("success");
 
-      // 添加设备 ID 到 verifiedDevices 数组，确保不重复
       setVerifiedDevices([selectedDevice.id]);
 
-      // 异步存储更新后的 verifiedDevices 数组（只存一个设备ID）
       await AsyncStorage.setItem(
         "verifiedDevices",
         JSON.stringify([selectedDevice.id])
@@ -1233,9 +1227,7 @@ function WalletScreen({ route, navigation }) {
       } catch (error) {
         console.log("Error sending confirmation message:", error);
       }
-      // 如果标志位为 Y，则发送字符串 'address'，之后发送多个 pubkey 消息
       if (flag === "Y") {
-        // 发送 address
         try {
           const addressMessage = "address";
           const addressBuffer = Buffer.from(addressMessage, "utf-8");
@@ -1248,7 +1240,6 @@ function WalletScreen({ route, navigation }) {
           );
           console.log("字符串 'address' 已成功发送给设备");
 
-          // 构造 pubkey 消息数组（每个消息包含币种与对应的路径）
           const pubkeyMessages = [
             "pubkey:cosmos,m/44'/118'/0'/0/0",
             "pubkey:ripple,m/44'/144'/0'/0/0",
@@ -1257,7 +1248,6 @@ function WalletScreen({ route, navigation }) {
             "pubkey:osmosis,m/44'/118'/0'/0/0",
           ];
 
-          // 遍历数组，逐条发送消息
           for (const msg of pubkeyMessages) {
             const bufferMessage = Buffer.from(msg, "utf-8");
             const base64Message = bufferMessage.toString("base64");
@@ -1290,7 +1280,7 @@ function WalletScreen({ route, navigation }) {
       }
     }
 
-    setPinCode(""); // 清空 PIN 输入框
+    setPinCode("");
   };
 
   const handleDeleteCard = () => {
