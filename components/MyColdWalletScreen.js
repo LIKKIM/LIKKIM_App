@@ -776,7 +776,7 @@ function MyColdWalletScreen({ onDarkModeChange }) {
     }
   };
 
-  const XMODEM_BLOCK_SIZE = 64;
+  const XMODEM_BLOCK_SIZE = 100;
 
   const handleFirmwareUpdate = async () => {
     console.log("Firmware Update clicked");
