@@ -15,14 +15,80 @@ import {
 } from "react-native";
 import { BlurView } from "expo-blur";
 
+/**
+ * SkeletonImage 组件：在图片加载过程中显示骨架图，加载完成后淡出骨架图并显示图片。
+ * Props:
+ * - source: 图片的资源
+ * - style: 样式对象（应包含 borderRadius 等信息）
+ * - resizeMode: 图片缩放模式
+ */
+const SkeletonImage = ({ source, style, resizeMode }) => {
+  const [loaded, setLoaded] = useState(false);
+  const skeletonOpacity = useState(new Animated.Value(1))[0];
+  const imageOpacity = useState(new Animated.Value(0))[0];
+
+  const handleLoad = () => {
+    setLoaded(true);
+    // 淡出骨架图
+    Animated.timing(skeletonOpacity, {
+      toValue: 0,
+      duration: 300,
+      useNativeDriver: true,
+    }).start();
+    // 图片淡入动画
+    Animated.timing(imageOpacity, {
+      toValue: 1,
+      duration: 500,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  return (
+    <View style={style}>
+      {/* 骨架图层 */}
+      {!loaded && (
+        <Animated.View
+          style={[
+            {
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              backgroundColor: "#e0e0e0", // 灰色骨架背景
+              borderRadius: style.borderRadius || 0,
+            },
+            { opacity: skeletonOpacity },
+          ]}
+        />
+      )}
+      {/* 实际图片 */}
+      <Animated.Image
+        source={source}
+        style={[
+          {
+            width: "100%",
+            height: "100%",
+            borderRadius: style.borderRadius || 0,
+          },
+          { opacity: imageOpacity },
+        ]}
+        resizeMode={resizeMode}
+        onLoad={handleLoad}
+      />
+    </View>
+  );
+};
+
 const WalletContent = (props) => {
   const [nftData, setNftData] = useState(null);
-  const [NFTmodalVisible, setNFTModalVisible] = useState(false);
+  const [NFTmodalVisible, setNFTModalVisible] = useState(false); // 正确的命名
   const [selectedNFT, setSelectedNFT] = useState(null);
 
   const toggleModal = () => {
-    setNFTModalVisible(!NFTmodalVisible);
+    setNFTModalVisible(!NFTmodalVisible); // 正确的使用
   };
+
   // 请求 NFT 数据的函数
   const fetchNFTData = async () => {
     const requestBody = {
@@ -566,7 +632,7 @@ const WalletContent = (props) => {
                 }}
               >
                 {nft.logoUrl ? (
-                  <Image
+                  <SkeletonImage
                     source={{ uri: nft.logoUrl }}
                     style={{
                       width: "100%",
@@ -652,7 +718,7 @@ const WalletContent = (props) => {
               {selectedNFT ? (
                 <View>
                   {selectedNFT.logoUrl ? (
-                    <Image
+                    <SkeletonImage
                       source={{ uri: selectedNFT.logoUrl }}
                       style={{
                         width: "100%",
