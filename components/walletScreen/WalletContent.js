@@ -597,15 +597,6 @@ const WalletContent = (props) => {
                 <Text style={{ fontWeight: "bold", marginBottom: 4 }}>
                   {nft.name || "NFT Card"}
                 </Text>
-                <Text style={{ fontSize: 12, marginBottom: 2 }}>
-                  {t("Contract")}: {nft.tokenContractAddress}
-                </Text>
-                <Text style={{ fontSize: 12, marginBottom: 2 }}>
-                  {t("Token ID")}: {nft.tokenId}
-                </Text>
-                <Text style={{ fontSize: 12 }}>
-                  {t("Protocol")}: {nft.protocolType || "N/A"}
-                </Text>
               </View>
             </TouchableOpacity>
           ))
