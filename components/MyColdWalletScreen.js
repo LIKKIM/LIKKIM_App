@@ -47,8 +47,11 @@ import base64 from "base64-js";
 import { Buffer } from "buffer";
 import appConfig from "../app.config";
 import { prefixToShortName } from "../config/chainPrefixes";
+
+// 自定义组件
 import checkAndReqPermission from "../utils/BluetoothPermissions"; // Request Bluetooth permission on Android
 import { handlePinSubmit } from "../utils/handlePinSubmit";
+import { decrypt } from "../utils/decrypt";
 
 let PermissionsAndroid;
 if (Platform.OS === "android") {
@@ -472,28 +475,6 @@ function MyColdWalletScreen({ onDarkModeChange }) {
       uint32Array[0].toString(16).toUpperCase().padStart(8, "0") +
       uint32Array[1].toString(16).toUpperCase().padStart(8, "0")
     );
-  }
-
-  function decrypt(v, k) {
-    let v0 = v[0] >>> 0,
-      v1 = v[1] >>> 0,
-      sum = 0xc6ef3720 >>> 0,
-      i;
-    const delta = 0x9e3779b9 >>> 0;
-    const k0 = k[0] >>> 0,
-      k1 = k[1] >>> 0,
-      k2 = k[2] >>> 0,
-      k3 = k[3] >>> 0;
-    for (i = 0; i < 32; i++) {
-      v1 -= (((v0 << 4) >>> 0) + k2) ^ (v0 + sum) ^ (((v0 >>> 5) >>> 0) + k3);
-      v1 >>>= 0;
-      v0 -= (((v1 << 4) >>> 0) + k0) ^ (v1 + sum) ^ (((v1 >>> 5) >>> 0) + k1);
-      v0 >>>= 0;
-      sum -= delta;
-      sum >>>= 0;
-    }
-    v[0] = v0 >>> 0;
-    v[1] = v1 >>> 0;
   }
 
   const [receivedAddresses, setReceivedAddresses] = useState({});

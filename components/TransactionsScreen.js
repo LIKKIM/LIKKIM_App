@@ -49,8 +49,9 @@ import PinModal from "./modal/PinModal";
 import TransactionHistory from "./transactionScreens/TransactionHistory";
 import ActionButtons from "./transactionScreens/ActionButtons";
 
-// 显示地址函数 发送数据写法
+// 自定义组件
 import showLIKKIMAddressCommand from "../utils/showLIKKIMAddressCommand";
+import { decrypt } from "../utils/decrypt";
 
 // BLE 常量
 const serviceUUID = "6E400001-B5A3-F393-E0A9-E50E24DCCA9E";
@@ -672,30 +673,6 @@ function TransactionsScreen() {
       uint32Array[0].toString(16).toUpperCase().padStart(8, "0") +
       uint32Array[1].toString(16).toUpperCase().padStart(8, "0")
     );
-  }
-
-  // 解密算法
-  function decrypt(v, k) {
-    let v0 = v[0] >>> 0,
-      v1 = v[1] >>> 0,
-      sum = 0xc6ef3720 >>> 0,
-      i;
-    const delta = 0x9e3779b9 >>> 0;
-    const k0 = k[0] >>> 0,
-      k1 = k[1] >>> 0,
-      k2 = k[2] >>> 0,
-      k3 = k[3] >>> 0;
-
-    for (i = 0; i < 32; i++) {
-      v1 -= (((v0 << 4) >>> 0) + k2) ^ (v0 + sum) ^ (((v0 >>> 5) >>> 0) + k3);
-      v1 >>>= 0;
-      v0 -= (((v1 << 4) >>> 0) + k0) ^ (v1 + sum) ^ (((v1 >>> 5) >>> 0) + k1);
-      v0 >>>= 0;
-      sum -= delta;
-      sum >>>= 0;
-    }
-    v[0] = v0 >>> 0;
-    v[1] = v1 >>> 0;
   }
 
   // 假设在组件中定义了状态：
