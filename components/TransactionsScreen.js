@@ -1437,43 +1437,37 @@ function TransactionsScreen() {
 
   // 提交验证码
   const handlePinSubmit = async () => {
-    // 首先关闭 "Enter PIN to Connect" 的模态框
     setPinModalVisible(false);
 
-    // 去除用户输入的 PIN 和接收到的验证码的空格
-    const pinCodeValue = pinCode.trim(); // 去除多余空格
-    const verificationCodeValue = receivedVerificationCode.trim(); // 去除多余空格
+    const pinCodeValue = pinCode.trim();
+    const verificationCodeValue = receivedVerificationCode.trim();
 
     console.log(`用户输入的 PIN: ${pinCodeValue}`);
     console.log(`接收到的验证码: ${verificationCodeValue}`);
 
-    // 检查验证码格式是否正确
-    const [prefix, rest] = verificationCodeValue.split(":"); // 分割出前缀和其余部分
+    const [prefix, rest] = verificationCodeValue.split(":");
     if (prefix !== "PIN" || !rest) {
       console.log("接收到的验证码格式不正确:", verificationCodeValue);
-      setVerificationFailModalVisible(true); // 显示失败提示
+      setVerificationFailModalVisible(true);
       return;
     }
 
-    // 使用 ',' 分割，提取 PIN 和标志位
-    const [receivedPin, flag] = rest.split(","); // 分割出 PIN 值和标志位
+    const [receivedPin, flag] = rest.split(",");
     if (!receivedPin || (flag !== "Y" && flag !== "N")) {
       console.log("接收到的验证码格式不正确:", verificationCodeValue);
-      setVerificationFailModalVisible(true); // 显示失败提示
+      setVerificationFailModalVisible(true);
       return;
     }
 
     console.log(`提取到的 PIN 值: ${receivedPin}`);
     console.log(`提取到的标志位: ${flag}`);
 
-    // 验证用户输入的 PIN 是否匹配
     if (pinCodeValue === receivedPin) {
       console.log("PIN 验证成功");
-      setVerificationSuccessModalVisible(true); // 显示成功提示
+      setVerificationSuccessModalVisible(true);
 
       setVerifiedDevices([selectedDevice.id]);
 
-      // 异步存储更新后的 verifiedDevices 数组（只存一个设备ID）
       await AsyncStorage.setItem(
         "verifiedDevices",
         JSON.stringify([selectedDevice.id])
@@ -1495,11 +1489,7 @@ function TransactionsScreen() {
       } catch (error) {
         console.log("Error sending confirmation message:", error);
       }
-      // 如果标志位为 Y，发送字符串 'address' 以及后续的 pubkey 字符串
       if (flag === "Y") {
-        // 先发送确认消息，告知嵌入式设备验证成功
-
-        // 发送 address 字符串
         try {
           const addressMessage = "address";
           const bufferAddress = Buffer.from(addressMessage, "utf-8");
@@ -1515,7 +1505,6 @@ function TransactionsScreen() {
           console.log("发送字符串 'address' 时发生错误:", error);
         }
 
-        // 定义需要发送的 pubkey 字符串列表
         const pubkeyMessages = [
           "pubkey:cosmos,m/44'/118'/0'/0/0",
           "pubkey:ripple,m/44'/144'/0'/0/0",
@@ -1524,7 +1513,6 @@ function TransactionsScreen() {
           "pubkey:osmosis,m/44'/118'/0'/0/0",
         ];
 
-        // 依次发送每条 pubkey 信息
         for (const pubkeyMessage of pubkeyMessages) {
           try {
             const bufferMessage = Buffer.from(pubkeyMessage, "utf-8");
@@ -1546,7 +1534,7 @@ function TransactionsScreen() {
       }
     } else {
       console.log("PIN 验证失败");
-      setVerificationFailModalVisible(true); // 显示失败提示
+      setVerificationFailModalVisible(true);
 
       if (monitorSubscription) {
         try {
@@ -1567,7 +1555,6 @@ function TransactionsScreen() {
       }
     }
 
-    // 清空 PIN 输入框
     setPinCode("");
   };
 
