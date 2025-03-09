@@ -595,7 +595,17 @@ const WalletContent = (props) => {
                   </View>
                 )}
                 <Text style={{ fontWeight: "bold", marginBottom: 4 }}>
-                  {nft.name || "NFT Card"}
+                  {nft.token || "NFT Card"}{" "}
+                  {/* Display the token if available */}
+                </Text>
+
+                <Text style={{ fontSize: 12, marginBottom: 4 }}>
+                  {t("Price")}: {nft.lastPrice} {nft.lastPriceUnit || t("N/A")}
+                  {/* Display price */}
+                </Text>
+                <Text style={{ fontSize: 12 }}>
+                  {t("Chain")}: {nft.collectionName || t("N/A")}
+                  {/* Display collection or chain name */}
                 </Text>
               </View>
             </TouchableOpacity>
