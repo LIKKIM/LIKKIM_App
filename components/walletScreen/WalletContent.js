@@ -13,19 +13,13 @@ import {
   Modal,
   TouchableWithoutFeedback,
   StyleSheet,
+  KeyboardAvoidingView,
+  Platform,
+  TextInput,
 } from "react-native";
 import { BlurView } from "expo-blur";
 import { LinearGradient } from "expo-linear-gradient";
 
-/**
- * SkeletonImage 组件：在图片加载过程中显示骨架图，
- * 骨架图采用深色背景，并使用 LinearGradient 实现从左到右流动闪烁的动画效果；
- * 图片加载完成后淡出骨架图、淡入图片。
- * Props:
- * - source: 图片的资源
- * - style: 样式对象（应包含 borderRadius 等信息）
- * - resizeMode: 图片缩放模式
- */
 const SkeletonImage = ({ source, style, resizeMode }) => {
   const [loaded, setLoaded] = useState(false);
   const skeletonOpacity = useState(new Animated.Value(1))[0];
@@ -134,6 +128,16 @@ const WalletContent = (props) => {
   const [NFTmodalVisible, setNFTModalVisible] = useState(false); // 正确的命名
   const [selectedNFT, setSelectedNFT] = useState(null);
   const [sendModalVisible, setSendModalVisible] = useState(false);
+  const [recipientAddress, setRecipientAddress] = useState("");
+
+  const handleOpenAddressBook = () => {
+    console.log("Open Address Book");
+  };
+
+  const handlePreview = () => {
+    console.log("Proceed to Preview NFT Transfer");
+    setSendModalVisible(false);
+  };
 
   const toggleModal = () => {
     setNFTModalVisible(!NFTmodalVisible); // 正确的使用
@@ -687,7 +691,7 @@ const WalletContent = (props) => {
                   </View>
                 )}
                 <Text style={WalletScreenStyle.modalTitle}>
-                  {nft.collectionName || "NFT Card"}
+                  {nft.name || "NFT Card"}
                 </Text>
                 <Text
                   style={[WalletScreenStyle.chainCardText, { marginBottom: 4 }]}
@@ -783,7 +787,7 @@ const WalletContent = (props) => {
                         { marginBottom: 4 },
                       ]}
                     >
-                      {selectedNFT.collectionName || t("NFT Card")}
+                      {selectedNFT.name || t("NFT Card")}
                     </Text>
                     <Text
                       style={[
@@ -869,23 +873,82 @@ const WalletContent = (props) => {
         visible={sendModalVisible}
         onRequestClose={() => setSendModalVisible(false)}
       >
-        <TouchableWithoutFeedback onPress={() => setSendModalVisible(false)}>
-          <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
-            <View
-              style={WalletScreenStyle.NFTmodalView}
-              onStartShouldSetResponder={(e) => e.stopPropagation()}
-            >
-              <Text style={WalletScreenStyle.modalTitle}>{t("Send NFT")}</Text>
-              {/* 可以在这里添加 NFT 发送表单 */}
-              <TouchableOpacity
-                style={[WalletScreenStyle.Button, { marginTop: 16 }]}
-                onPress={() => setSendModalVisible(false)}
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          style={WalletScreenStyle.centeredView}
+        >
+          <TouchableWithoutFeedback onPress={() => setSendModalVisible(false)}>
+            <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
+              <View
+                style={WalletScreenStyle.NFTmodalView}
+                onStartShouldSetResponder={(e) => e.stopPropagation()}
               >
-                <Text style={WalletScreenStyle.ButtonText}>{t("Close")}</Text>
-              </TouchableOpacity>
-            </View>
-          </BlurView>
-        </TouchableWithoutFeedback>
+                {/* 标题栏 */}
+                <View style={WalletScreenStyle.modalHeader}>
+                  <Text style={WalletScreenStyle.modalTitle}>
+                    {t("Send NFT")}
+                  </Text>
+                </View>
+
+                {/* NFT 信息 */}
+                <View style={WalletScreenStyle.nftCard}>
+                  <Image
+                    source={{ uri: selectedNFT?.image }}
+                    style={WalletScreenStyle.nftImage}
+                  />
+                  <View style={WalletScreenStyle.nftInfo}>
+                    <Text style={WalletScreenStyle.nftName}>
+                      {selectedNFT?.name || "NFT Name"}
+                    </Text>
+                    <Text style={WalletScreenStyle.nftId}>
+                      {t("Token ID")}: {selectedNFT?.tokenId || "N/A"}
+                    </Text>
+                  </View>
+                </View>
+
+                {/* 收款地址输入 */}
+                <Text style={WalletScreenStyle.label}>{t("Recipient")}</Text>
+                <View style={WalletScreenStyle.inputContainer}>
+                  <TextInput
+                    style={WalletScreenStyle.input}
+                    placeholder={t("Enter Address or Domain")}
+                    placeholderTextColor="#888"
+                    value={recipientAddress}
+                    onChangeText={setRecipientAddress}
+                  />
+
+                  {/* 选择地址簿 */}
+                  <TouchableOpacity
+                    style={WalletScreenStyle.iconButton}
+                    onPress={handleOpenAddressBook}
+                  >
+                    <Image
+                      //    source={require("../../assets/icons/address-book.png")}
+                      style={WalletScreenStyle.icon}
+                    />
+                  </TouchableOpacity>
+                </View>
+
+                {/* 预览按钮 */}
+                <TouchableOpacity
+                  style={[WalletScreenStyle.submitButton]}
+                  disabled={!recipientAddress}
+                  onPress={handlePreview}
+                >
+                  <Text style={WalletScreenStyle.ButtonText}>{t("Next")}</Text>
+                </TouchableOpacity>
+
+                {/* 关闭按钮 */}
+                <TouchableOpacity
+                  style={[WalletScreenStyle.Button]}
+                  onPress={() => setSendModalVisible(false)}
+                >
+                  <Text style={WalletScreenStyle.ButtonText}>{t("Close")}</Text>
+                </TouchableOpacity>
+              </View>
+            </BlurView>
+          </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
       </Modal>
     </View>
   );
