@@ -11,6 +11,7 @@ import {
   TouchableHighlight,
   ImageBackground,
   Modal,
+  TouchableWithoutFeedback,
 } from "react-native";
 import { BlurView } from "expo-blur";
 
@@ -636,103 +637,133 @@ const WalletContent = (props) => {
           </View>
         )}
       </ScrollView>
+
       <Modal
         animationType="slide"
         transparent={true}
         visible={NFTmodalVisible}
         onRequestClose={toggleModal}
       >
-        <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
-          <View style={WalletScreenStyle.NFTmodalView}>
-            {selectedNFT ? (
-              <View>
-                {selectedNFT.logoUrl ? (
-                  <Image
-                    source={{ uri: selectedNFT.logoUrl }}
-                    style={{
-                      width: "100%",
-                      aspectRatio: 1, // This ensures the height is always equal to the width
-                      borderRadius: 8,
-                      marginBottom: 8,
-                    }}
-                    resizeMode="cover"
-                  />
-                ) : (
-                  <View
-                    style={{
-                      width: "100%",
-                      aspectRatio: 1,
-                      borderRadius: 8,
-                      backgroundColor: "#ccc",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      marginBottom: 8,
-                    }}
-                  >
-                    <Text
-                      style={[
-                        WalletScreenStyle.modalSubtitle,
-                        { color: "#666" },
-                      ]}
+        <TouchableWithoutFeedback onPress={toggleModal}>
+          <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
+            <View style={WalletScreenStyle.NFTmodalView}>
+              {selectedNFT ? (
+                <ScrollView contentContainerStyle={{ paddingBottom: 20 }}>
+                  {selectedNFT.logoUrl ? (
+                    <Image
+                      source={{ uri: selectedNFT.logoUrl }}
+                      style={{
+                        width: "100%",
+                        aspectRatio: 1, // This ensures the height is always equal to the width
+                        borderRadius: 8,
+                        marginBottom: 8,
+                      }}
+                      resizeMode="cover"
+                    />
+                  ) : (
+                    <View
+                      style={{
+                        width: "100%",
+                        aspectRatio: 1,
+                        borderRadius: 8,
+                        backgroundColor: "#ccc",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        marginBottom: 8,
+                      }}
                     >
-                      {t("No Image")}
-                    </Text>
-                  </View>
-                )}
-                <Text
-                  style={[WalletScreenStyle.modalTitle, { marginBottom: 4 }]}
-                >
-                  {selectedNFT.collectionName || t("NFT Card")}
-                </Text>
-
-                <Text
-                  style={[WalletScreenStyle.chainCardText, { marginBottom: 2 }]}
-                >
-                  {t("Contract")}: {selectedNFT.tokenContractAddress}
-                </Text>
-                <Text
-                  style={[WalletScreenStyle.chainCardText, { marginBottom: 2 }]}
-                >
-                  {t("Token ID")}: {selectedNFT.tokenId}
-                </Text>
-                <Text style={[WalletScreenStyle.chainCardText]}>
-                  {t("Protocol")}: {selectedNFT.protocolType || t("N/A")}
-                </Text>
-                {/* Display the price */}
-                {selectedNFT.lastPrice && (
+                      <Text
+                        style={[
+                          WalletScreenStyle.modalSubtitle,
+                          { color: "#666" },
+                        ]}
+                      >
+                        {t("No Image")}
+                      </Text>
+                    </View>
+                  )}
                   <Text
-                    style={[WalletScreenStyle.modalTitle, { marginTop: 8 }]}
+                    style={[WalletScreenStyle.modalTitle, { marginBottom: 4 }]}
                   >
-                    {t("Price")}: {selectedNFT.lastPrice}{" "}
-                    {selectedNFT.lastPriceUnit || t("N/A")}
+                    {selectedNFT.collectionName || t("NFT Card")}
                   </Text>
-                )}
-              </View>
-            ) : (
-              <Text
-                style={[
-                  WalletScreenStyle.modalSubtitle,
-                  { textAlign: "center" },
-                ]}
-              >
-                {t("No NFT Data")}
-              </Text>
-            )}
 
-            {/* Close button */}
-            <TouchableOpacity
-              onPress={toggleModal}
-              style={[
-                WalletScreenStyle.cancelButtonLookingFor,
-                { marginTop: 20 },
-              ]}
-            >
-              <Text style={WalletScreenStyle.cancelButtonText}>
-                {t("Close")}
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </BlurView>
+                  <Text
+                    style={[
+                      WalletScreenStyle.chainCardText,
+                      { marginBottom: 2 },
+                    ]}
+                  >
+                    {t("Contract")}: {selectedNFT.tokenContractAddress}
+                  </Text>
+                  <Text
+                    style={[
+                      WalletScreenStyle.chainCardText,
+                      { marginBottom: 2 },
+                    ]}
+                  >
+                    {t("Token ID")}: {selectedNFT.tokenId}
+                  </Text>
+                  <Text style={[WalletScreenStyle.chainCardText]}>
+                    {t("Protocol")}: {selectedNFT.protocolType || t("N/A")}
+                  </Text>
+                  {/* Display the price */}
+                  {selectedNFT.lastPrice && (
+                    <Text
+                      style={[WalletScreenStyle.modalTitle, { marginTop: 8 }]}
+                    >
+                      {t("Price")}: {selectedNFT.lastPrice}{" "}
+                      {selectedNFT.lastPriceUnit || t("N/A")}
+                    </Text>
+                  )}
+                </ScrollView>
+              ) : (
+                <Text
+                  style={[
+                    WalletScreenStyle.modalSubtitle,
+                    { textAlign: "center" },
+                  ]}
+                >
+                  {t("No NFT Data")}
+                </Text>
+              )}
+
+              {/* Add Send and 收藏到冷钱包 buttons */}
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  marginTop: 16,
+                }}
+              >
+                <TouchableOpacity
+                  style={[
+                    WalletScreenStyle.Button,
+                    { flex: 1, marginRight: 8 },
+                  ]}
+                  onPress={() => {
+                    // Add send functionality here
+                    console.log("Send clicked");
+                  }}
+                >
+                  <Text style={WalletScreenStyle.ButtonText}>{t("Send")}</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  style={[WalletScreenStyle.Button, { flex: 1, marginLeft: 8 }]}
+                  onPress={() => {
+                    // Add save to cold wallet functionality here
+                    console.log("Save to Cold Wallet clicked");
+                  }}
+                >
+                  <Text style={WalletScreenStyle.ButtonText}>
+                    {t("收藏到冷钱包")}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </BlurView>
+        </TouchableWithoutFeedback>
       </Modal>
     </View>
   );
