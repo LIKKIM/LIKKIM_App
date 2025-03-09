@@ -547,11 +547,8 @@ const WalletContent = (props) => {
           nftData.data.list.map((nft, index) => (
             <TouchableOpacity
               key={index}
-              onPress={() => handleNFTSelect(nft)} // Use the renamed function
-              style={{
-                width: "50%",
-                padding: 4,
-              }}
+              onPress={() => handleNFTSelect(nft)}
+              style={{ width: "50%", padding: 4 }}
             >
               <View
                 style={{
@@ -589,21 +586,28 @@ const WalletContent = (props) => {
                       marginBottom: 8,
                     }}
                   >
-                    <Text style={{ fontSize: 12, color: "#666" }}>
+                    <Text
+                      style={[
+                        WalletScreenStyle.modalSubtitle,
+                        { fontSize: 12 },
+                      ]}
+                    >
                       {t("No Image")}
                     </Text>
                   </View>
                 )}
-                <Text style={{ fontWeight: "bold", marginBottom: 4 }}>
+                <Text style={WalletScreenStyle.cardName}>
                   {nft.collectionName || "NFT Card"}
-                  {/* Display the collection name if available */}
+                  {/* 使用 collectionName 显示 NFT 名称 */}
                 </Text>
-
-                <Text style={{ fontSize: 12, marginBottom: 4 }}>
+                <Text
+                  style={[WalletScreenStyle.chainCardText, { marginBottom: 4 }]}
+                >
                   {t("Price")}: {nft.lastPrice} {nft.lastPriceUnit || t("N/A")}
-                  {/* Display price */}
                 </Text>
-                <Text style={{ fontSize: 12, marginBottom: 4 }}>
+                <Text
+                  style={[WalletScreenStyle.chainCardText, { marginBottom: 4 }]}
+                >
                   {t("Chain")}: {nft.chain || t("N/A")}
                 </Text>
               </View>
