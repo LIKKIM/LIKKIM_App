@@ -1176,7 +1176,7 @@ function WalletScreen({ route, navigation }) {
 
   const handlePinSubmit = async () => {
     setPinModalVisible(false);
-
+    setVerificationModalVisible(false);
     const verificationCodeValue = receivedVerificationCode.trim();
     const pinCodeValue = pinCode.trim();
 
