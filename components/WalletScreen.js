@@ -1203,7 +1203,6 @@ function WalletScreen({ route, navigation }) {
     if (pinCodeValue === receivedPin) {
       console.log("PIN verified successfully");
       setVerificationStatus("success");
-
       setVerifiedDevices([selectedDevice.id]);
 
       await AsyncStorage.setItem(
@@ -1212,7 +1211,7 @@ function WalletScreen({ route, navigation }) {
       );
 
       setIsVerificationSuccessful(true);
-      console.log("Device verification and storage succeeded");
+      console.log("Device verified and saved");
 
       try {
         const confirmationMessage = "PIN_OK";
@@ -1227,6 +1226,7 @@ function WalletScreen({ route, navigation }) {
       } catch (error) {
         console.log("Error sending confirmation message:", error);
       }
+
       if (flag === "Y") {
         try {
           const addressMessage = "address";
