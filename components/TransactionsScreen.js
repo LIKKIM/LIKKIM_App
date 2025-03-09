@@ -256,7 +256,17 @@ function TransactionsScreen() {
 
     loadTransactionHistory();
   }, []);
-
+  const onDevicePressHandler = async (device) => {
+    await handleDevicePress(device, {
+      setReceivedAddresses,
+      setVerificationStatus,
+      setSelectedDevice,
+      setModalVisible,
+      setBleVisible,
+      setPinModalVisible,
+      monitorVerificationCode,
+    });
+  };
   // 新增：获取所有卡片的交易历史记录（包含去重与分页处理）
   const fetchAllTransactionHistory = async () => {
     if (initialAdditionalCryptos && initialAdditionalCryptos.length > 0) {
@@ -1733,7 +1743,7 @@ function TransactionsScreen() {
           devices={devices}
           isScanning={isScanning}
           iconColor={iconColor}
-          handleDevicePress={handleDevicePress}
+          handleDevicePress={onDevicePressHandler}
           onCancel={() => {
             setBleVisible(false);
             setSelectedDevice(null);

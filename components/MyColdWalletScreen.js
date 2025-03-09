@@ -138,7 +138,17 @@ function MyColdWalletScreen({ onDarkModeChange }) {
     { id: "1", name: "Home", address: "0x1234..." },
     { id: "2", name: "Office", address: "0x5678..." },
   ]);
-
+  const onDevicePressHandler = async (device) => {
+    await handleDevicePress(device, {
+      setReceivedAddresses,
+      setVerificationStatus,
+      setSelectedDevice,
+      setModalVisible,
+      setBleVisible,
+      setPinModalVisible,
+      monitorVerificationCode,
+    });
+  };
   const handleAddAddress = () => {
     console.log("Add Address button clicked");
   };
@@ -1006,7 +1016,7 @@ function MyColdWalletScreen({ onDarkModeChange }) {
         devices={devices}
         isScanning={isScanning}
         iconColor={blueToothColor}
-        handleDevicePress={handleDevicePress}
+        handleDevicePress={onDevicePressHandler}
         onCancel={handleCancel}
         verifiedDevices={verifiedDevices}
         MyColdWalletScreenStyle={MyColdWalletScreenStyle}

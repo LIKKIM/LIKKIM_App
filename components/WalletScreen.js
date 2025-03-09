@@ -186,7 +186,17 @@ function WalletScreen({ route, navigation }) {
   /*   useEffect(() => {
     console.log("initialAdditionalCryptosState:", initialAdditionalCryptos);
   }, [initialAdditionalCryptos]); */
-
+  const onDevicePressHandler = async (device) => {
+    await handleDevicePress(device, {
+      setReceivedAddresses,
+      setVerificationStatus,
+      setSelectedDevice,
+      setModalVisible,
+      setBleVisible,
+      setPinModalVisible,
+      monitorVerificationCode,
+    });
+  };
   // 定义下拉刷新执行的函数
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
@@ -1469,7 +1479,7 @@ function WalletScreen({ route, navigation }) {
         isScanning={isScanning}
         iconColor={iconColor}
         blueToothColor={blueToothColor}
-        handleDevicePress={handleDevicePress}
+        handleDevicePress={onDevicePressHandler}
         setBleVisible={setBleVisible}
         selectedDevice={selectedDevice}
         setSelectedDevice={setSelectedDevice}
