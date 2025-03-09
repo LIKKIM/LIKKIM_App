@@ -736,7 +736,7 @@ function WalletScreen({ route, navigation }) {
 
   const handleDevicePress = async (device) => {
     if (typeof device !== "object" || typeof device.connect !== "function") {
-      console.log("Invalid device object, cannot connect:", device);
+      console.log("Invalid device object, cannot connect device:", device);
       return;
     }
 
@@ -746,7 +746,9 @@ function WalletScreen({ route, navigation }) {
     try {
       await device.connect();
       await device.discoverAllServicesAndCharacteristics();
-      console.log("Device connected and services discovered");
+      console.log(
+        "Device connected and all services and characteristics discovered"
+      );
 
       const sendDecryptedValue = async (decryptedValue) => {
         try {
@@ -786,7 +788,7 @@ function WalletScreen({ route, navigation }) {
 
       setPinModalVisible(true);
     } catch (error) {
-      console.log("Error connecting or sending command to device:", error);
+      console.log("Device connection or command send error:", error);
     }
   };
 
