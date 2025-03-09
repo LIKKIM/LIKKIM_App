@@ -533,7 +533,7 @@ const WalletContent = (props) => {
         nftData.data &&
         Array.isArray(nftData.data.list) ? (
           nftData.data.list.map((nft, index) => (
-            <View
+            <TouchableOpacity
               key={index}
               style={{
                 width: "50%",
@@ -594,7 +594,7 @@ const WalletContent = (props) => {
                   Protocol: {nft.protocolType || "N/A"}
                 </Text>
               </View>
-            </View>
+            </TouchableOpacity>
           ))
         ) : (
           <Text
