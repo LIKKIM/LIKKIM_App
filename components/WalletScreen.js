@@ -735,9 +735,8 @@ function WalletScreen({ route, navigation }) {
   };
 
   const handleDevicePress = async (device) => {
-    // 检查是否传递了有效的设备对象
     if (typeof device !== "object" || typeof device.connect !== "function") {
-      console.log("无效的设备对象，无法连接设备:", device);
+      console.log("Invalid device object, cannot connect:", device);
       return;
     }
 
@@ -745,12 +744,10 @@ function WalletScreen({ route, navigation }) {
     setModalVisible(false);
     setBleVisible(false);
     try {
-      // 异步连接设备和发现服务
       await device.connect();
       await device.discoverAllServicesAndCharacteristics();
-      console.log("设备已连接并发现所有服务和特性");
+      console.log("Device connected and services discovered");
 
-      // 解密后的值发送给设备
       const sendDecryptedValue = async (decryptedValue) => {
         try {
           const message = `ID:${decryptedValue}`;
@@ -762,16 +759,14 @@ function WalletScreen({ route, navigation }) {
             writeCharacteristicUUID,
             base64Message
           );
-          console.log(`解密后的值已发送: ${message}`);
+          console.log(`Decrypted value sent: ${message}`);
         } catch (error) {
-          console.log("发送解密值时出错:", error);
+          console.log("Error sending decrypted value:", error);
         }
       };
 
-      // 先启动监听器
       monitorVerificationCode(device, sendDecryptedValue);
 
-      // 确保监听器已完全启动后再发送 'request'
       setTimeout(async () => {
         try {
           const requestString = "request";
@@ -783,18 +778,18 @@ function WalletScreen({ route, navigation }) {
             writeCharacteristicUUID,
             base64requestString
           );
-          console.log("字符串 'request' 已发送");
+          console.log("'request' string sent");
         } catch (error) {
-          console.log("发送 'request' 时出错:", error);
+          console.log("Error sending 'request':", error);
         }
-      }, 200); // 延迟 200ms 确保监听器启动（根据设备响应调整）
+      }, 200);
 
-      // 显示 PIN 码弹窗
       setPinModalVisible(true);
     } catch (error) {
-      console.log("设备连接或命令发送错误:", error);
+      console.log("Error connecting or sending command to device:", error);
     }
   };
+
   // 处理断开连接的逻辑
   const handleDisconnectDevice = async (device) => {
     try {
