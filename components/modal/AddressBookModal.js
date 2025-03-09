@@ -187,7 +187,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                     <Icon name="search" size={20} style={styles.searchIcon} />
                     <TextInput
                       style={styles.searchInput}
-                      placeholder="Search Address"
+                      placeholder={t("Search Address")}
                       placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
                       onChangeText={setSearchAddress}
                       value={searchAddress}

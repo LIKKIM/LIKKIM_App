@@ -639,10 +639,8 @@ function MyColdWalletScreen({ onDarkModeChange }) {
   const handleFirmwareUpdate = async () => {
     console.log("Firmware Update clicked");
     if (!selectedDevice) {
-      Alert.alert(
-        t("Error"),
-        t("No device paired. Please pair with device first.")
-      );
+      setModalMessage(t("No device paired. Please pair with device first."));
+      setErrorModalVisible(true);
       return;
     }
 
@@ -1083,6 +1081,25 @@ function MyColdWalletScreen({ onDarkModeChange }) {
         isDarkMode={isDarkMode}
         onAddAddress={handleAddAddress}
       />
+      <Modal
+        visible={errorModalVisible}
+        transparent={true}
+        animationType="slide"
+        onRequestClose={() => setErrorModalVisible(false)}
+      >
+        <View style={MyColdWalletScreenStyle.modalContainer}>
+          <View style={MyColdWalletScreenStyle.modalContent}>
+            <Text style={MyColdWalletScreenStyle.modalTitle}>{t("Error")}</Text>
+            <Text style={MyColdWalletScreenStyle.modalMessage}>
+              {modalMessage}
+            </Text>
+            <Button
+              title={t("OK")}
+              onPress={() => setErrorModalVisible(false)}
+            />
+          </View>
+        </View>
+      </Modal>
     </LinearGradient>
   );
 }
