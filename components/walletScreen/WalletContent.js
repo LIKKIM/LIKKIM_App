@@ -553,6 +553,34 @@ const WalletContent = (props) => {
                   elevation: 2,
                 }}
               >
+                {nft.logoUrl ? (
+                  <Image
+                    source={{ uri: nft.logoUrl }}
+                    style={{
+                      width: "100%",
+                      height: 100,
+                      borderRadius: 8,
+                      marginBottom: 8,
+                    }}
+                    resizeMode="cover"
+                  />
+                ) : (
+                  <View
+                    style={{
+                      width: "100%",
+                      height: 100,
+                      borderRadius: 8,
+                      backgroundColor: "#ccc",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      marginBottom: 8,
+                    }}
+                  >
+                    <Text style={{ fontSize: 12, color: "#666" }}>
+                      暂无图片
+                    </Text>
+                  </View>
+                )}
                 <Text style={{ fontWeight: "bold", marginBottom: 4 }}>
                   {nft.name || "NFT Card"}
                 </Text>
