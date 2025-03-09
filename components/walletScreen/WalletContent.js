@@ -12,11 +12,15 @@ import {
   ImageBackground,
   Modal,
   TouchableWithoutFeedback,
+  StyleSheet,
 } from "react-native";
 import { BlurView } from "expo-blur";
+import { LinearGradient } from "expo-linear-gradient";
 
 /**
- * SkeletonImage 组件：在图片加载过程中显示骨架图，加载完成后淡出骨架图并显示图片。
+ * SkeletonImage 组件：在图片加载过程中显示骨架图，
+ * 骨架图采用深色背景，并使用 LinearGradient 实现从左到右流动闪烁的动画效果；
+ * 图片加载完成后淡出骨架图、淡入图片。
  * Props:
  * - source: 图片的资源
  * - style: 样式对象（应包含 borderRadius 等信息）
@@ -26,10 +30,25 @@ const SkeletonImage = ({ source, style, resizeMode }) => {
   const [loaded, setLoaded] = useState(false);
   const skeletonOpacity = useState(new Animated.Value(1))[0];
   const imageOpacity = useState(new Animated.Value(0))[0];
+  // 用于控制闪烁渐变的水平平移动画
+  const shimmerTranslate = useState(new Animated.Value(-200))[0];
+
+  // 当组件挂载且图片未加载时启动循环动画
+  useEffect(() => {
+    if (!loaded) {
+      Animated.loop(
+        Animated.timing(shimmerTranslate, {
+          toValue: 200,
+          duration: 1000,
+          useNativeDriver: true,
+        })
+      ).start();
+    }
+  }, [loaded]);
 
   const handleLoad = () => {
     setLoaded(true);
-    // 淡出骨架图
+    // 淡出骨架图动画
     Animated.timing(skeletonOpacity, {
       toValue: 0,
       duration: 300,
@@ -49,18 +68,25 @@ const SkeletonImage = ({ source, style, resizeMode }) => {
       {!loaded && (
         <Animated.View
           style={[
-            {
-              position: "absolute",
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              backgroundColor: "#e0e0e0", // 灰色骨架背景
-              borderRadius: style.borderRadius || 0,
-            },
-            { opacity: skeletonOpacity },
+            styles.skeletonWrapper,
+            { opacity: skeletonOpacity, borderRadius: style.borderRadius || 0 },
           ]}
-        />
+        >
+          {/* 闪烁效果：利用 Animated.View 搭配 LinearGradient 实现从左到右的流动渐变 */}
+          <Animated.View
+            style={[
+              styles.shimmer,
+              { transform: [{ translateX: shimmerTranslate }] },
+            ]}
+          >
+            <LinearGradient
+              colors={["#2c2c2c", "#636363", "#2c2c2c"]}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 0 }}
+              style={StyleSheet.absoluteFill}
+            />
+          </Animated.View>
+        </Animated.View>
       )}
       {/* 实际图片 */}
       <Animated.Image
@@ -79,6 +105,22 @@ const SkeletonImage = ({ source, style, resizeMode }) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  skeletonWrapper: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "#2c2c2c", // 深色背景
+    overflow: "hidden",
+  },
+  shimmer: {
+    width: "50%", // 渐变块宽度，可根据需要调整
+    height: "100%",
+  },
+});
 
 const WalletContent = (props) => {
   const [nftData, setNftData] = useState(null);
@@ -101,7 +143,6 @@ const WalletContent = (props) => {
       type: "okx",
     };
 
-    // 打印请求数据
     console.log("POST 请求数据：", requestBody);
 
     try {
@@ -116,15 +157,9 @@ const WalletContent = (props) => {
         }
       );
       const json = await response.json();
-
-      // 打印整个返回数据
       console.log("返回数据：", json);
-
-      // 如果返回成功且有数据，则打印 total 字段
       if (json.code === "0" && json.data) {
         console.log("Total:", json.data.total);
-
-        // 判断 data.list 是否存在且为数组，然后遍历打印每个对象中的指定字段
         if (Array.isArray(json.data.list)) {
           json.data.list.forEach((item, index) => {
             console.log(`Item ${index + 1}:`);
@@ -134,7 +169,6 @@ const WalletContent = (props) => {
           });
         }
       }
-
       setNftData(json);
     } catch (error) {
       console.error("Error fetching NFT data", error);
@@ -150,7 +184,6 @@ const WalletContent = (props) => {
       type: "okx",
     };
 
-    // 打印详情请求数据
     console.log("Query NFT Details Request:", detailRequestBody);
 
     try {
@@ -164,15 +197,11 @@ const WalletContent = (props) => {
           body: JSON.stringify(detailRequestBody),
         }
       );
-
-      // 先获取响应的文本内容
       const responseText = await response.text();
       if (!responseText) {
         console.error("Empty response for NFT details", detailRequestBody);
         return null;
       }
-
-      // 尝试解析 JSON
       const json = JSON.parse(responseText);
       console.log("NFT Detail Response:", json);
       return json;
@@ -182,12 +211,10 @@ const WalletContent = (props) => {
     }
   };
 
-  // 在组件挂载时调用 NFT 数据接口
   useEffect(() => {
     fetchNFTData();
   }, []);
 
-  // 当 nftData 更新后，利用返回的值请求详情
   useEffect(() => {
     if (
       nftData &&
@@ -195,15 +222,12 @@ const WalletContent = (props) => {
       nftData.data &&
       Array.isArray(nftData.data.list)
     ) {
-      // 例如：对每个 NFT 调用详情接口
       nftData.data.list.forEach((nft) => {
-        // 此处传入的 chain 固定为 "okc"，tokenContractAddress 和 tokenId 从返回值中获取
         queryNFTDetail("okc", nft.tokenContractAddress, nft.tokenId);
       });
     }
   }, [nftData]);
 
-  // 从 props 中解构需要使用的变量和函数
   const {
     selectedView,
     scrollViewRef,
@@ -229,31 +253,21 @@ const WalletContent = (props) => {
   } = props;
 
   const handleNFTSelect = (nft) => {
-    setSelectedNFT(nft); // Store the selected NFT details
-    setNFTModalVisible(true); // Show the modal
+    setSelectedNFT(nft);
+    setNFTModalVisible(true);
   };
 
-  // 格式化余额：根据余额的值保留小数位数
   const formatBalance = (balance) => {
     const num = parseFloat(balance);
-
-    if (num === 0) {
-      return "0"; // 如果余额为0，返回0
-    }
-
-    if (Number.isInteger(num)) {
-      return num.toString(); // 如果余额是整数，返回整数值
-    }
-
-    // 计算小数部分的位数，最多保留7位
+    if (num === 0) return "0";
+    if (Number.isInteger(num)) return num.toString();
     const decimalPlaces = Math.min(
       7,
       (num.toString().split(".")[1] || "").length
     );
-    return num.toFixed(decimalPlaces); // 保留小数部分
+    return num.toFixed(decimalPlaces);
   };
 
-  // 将重复的“All Chain 按钮”部分提取成一个局部函数
   const renderChainButton = () => {
     return (
       <TouchableOpacity
@@ -451,7 +465,7 @@ const WalletContent = (props) => {
                             {
                               color: isBlackText ? "#333" : "#eee",
                               marginRight: 4,
-                              marginBottom: 4, // 增加底部间距
+                              marginBottom: 4,
                             },
                           ]}
                         >
@@ -462,7 +476,7 @@ const WalletContent = (props) => {
                           key={i}
                           style={[
                             WalletScreenStyle.chainContainer,
-                            { marginTop: 4 }, // 增加间距使其上下排列
+                            { marginTop: 4 },
                           ]}
                         >
                           <Text
@@ -595,7 +609,6 @@ const WalletContent = (props) => {
           {renderChainButton()}
         </View>
       )}
-      {/* NFTs view */}
       <ScrollView
         contentContainerStyle={{
           flexDirection: "row",
@@ -666,7 +679,6 @@ const WalletContent = (props) => {
                 )}
                 <Text style={WalletScreenStyle.modalTitle}>
                   {nft.collectionName || "NFT Card"}
-                  {/* 使用 collectionName 显示 NFT 名称 */}
                 </Text>
                 <Text
                   style={[WalletScreenStyle.chainCardText, { marginBottom: 4 }]}
@@ -713,7 +725,7 @@ const WalletContent = (props) => {
           <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
             <View
               style={WalletScreenStyle.NFTmodalView}
-              onStartShouldSetResponder={(e) => e.stopPropagation()} // Prevents event propagation
+              onStartShouldSetResponder={(e) => e.stopPropagation()}
             >
               {selectedNFT ? (
                 <View>
@@ -722,7 +734,7 @@ const WalletContent = (props) => {
                       source={{ uri: selectedNFT.logoUrl }}
                       style={{
                         width: "100%",
-                        aspectRatio: 1, // This ensures the height is always equal to the width
+                        aspectRatio: 1,
                         borderRadius: 8,
                         marginBottom: 8,
                       }}
@@ -765,7 +777,6 @@ const WalletContent = (props) => {
                     >
                       {selectedNFT.collectionName || t("NFT Card")}
                     </Text>
-
                     <Text
                       style={[
                         WalletScreenStyle.chainCardText,
@@ -785,7 +796,6 @@ const WalletContent = (props) => {
                     <Text style={[WalletScreenStyle.chainCardText]}>
                       {t("Protocol")}: {selectedNFT.protocolType || t("N/A")}
                     </Text>
-
                     {selectedNFT.lastPrice && (
                       <Text
                         style={[WalletScreenStyle.modalTitle, { marginTop: 8 }]}
@@ -807,7 +817,6 @@ const WalletContent = (props) => {
                 </Text>
               )}
 
-              {/* Add Send and 收藏到冷钱包 buttons */}
               <View
                 style={{
                   flexDirection: "row",
@@ -821,17 +830,14 @@ const WalletContent = (props) => {
                     { flex: 1, marginRight: 8 },
                   ]}
                   onPress={() => {
-                    // Add send functionality here
                     console.log("Send clicked");
                   }}
                 >
                   <Text style={WalletScreenStyle.ButtonText}>{t("Send")}</Text>
                 </TouchableOpacity>
-
                 <TouchableOpacity
                   style={[WalletScreenStyle.Button, { flex: 1, marginLeft: 8 }]}
                   onPress={() => {
-                    // Add save to cold wallet functionality here
                     console.log("Save to Cold Wallet clicked");
                   }}
                 >
