@@ -637,7 +637,6 @@ const WalletContent = (props) => {
           </View>
         )}
       </ScrollView>
-
       <Modal
         animationType="slide"
         transparent={true}
@@ -646,9 +645,12 @@ const WalletContent = (props) => {
       >
         <TouchableWithoutFeedback onPress={toggleModal}>
           <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
-            <View style={WalletScreenStyle.NFTmodalView}>
+            <View
+              style={WalletScreenStyle.NFTmodalView}
+              onStartShouldSetResponder={(e) => e.stopPropagation()} // Prevents event propagation
+            >
               {selectedNFT ? (
-                <ScrollView contentContainerStyle={{ paddingBottom: 20 }}>
+                <View>
                   {selectedNFT.logoUrl ? (
                     <Image
                       source={{ uri: selectedNFT.logoUrl }}
@@ -682,41 +684,52 @@ const WalletContent = (props) => {
                       </Text>
                     </View>
                   )}
-                  <Text
-                    style={[WalletScreenStyle.modalTitle, { marginBottom: 4 }]}
-                  >
-                    {selectedNFT.collectionName || t("NFT Card")}
-                  </Text>
 
-                  <Text
-                    style={[
-                      WalletScreenStyle.chainCardText,
-                      { marginBottom: 2 },
-                    ]}
+                  <ScrollView
+                    style={{
+                      height: 140,
+                      marginTop: 20,
+                    }}
                   >
-                    {t("Contract")}: {selectedNFT.tokenContractAddress}
-                  </Text>
-                  <Text
-                    style={[
-                      WalletScreenStyle.chainCardText,
-                      { marginBottom: 2 },
-                    ]}
-                  >
-                    {t("Token ID")}: {selectedNFT.tokenId}
-                  </Text>
-                  <Text style={[WalletScreenStyle.chainCardText]}>
-                    {t("Protocol")}: {selectedNFT.protocolType || t("N/A")}
-                  </Text>
-                  {/* Display the price */}
-                  {selectedNFT.lastPrice && (
                     <Text
-                      style={[WalletScreenStyle.modalTitle, { marginTop: 8 }]}
+                      style={[
+                        WalletScreenStyle.modalTitle,
+                        { marginBottom: 4 },
+                      ]}
                     >
-                      {t("Price")}: {selectedNFT.lastPrice}{" "}
-                      {selectedNFT.lastPriceUnit || t("N/A")}
+                      {selectedNFT.collectionName || t("NFT Card")}
                     </Text>
-                  )}
-                </ScrollView>
+
+                    <Text
+                      style={[
+                        WalletScreenStyle.chainCardText,
+                        { marginBottom: 2 },
+                      ]}
+                    >
+                      {t("Contract")}: {selectedNFT.tokenContractAddress}
+                    </Text>
+                    <Text
+                      style={[
+                        WalletScreenStyle.chainCardText,
+                        { marginBottom: 2 },
+                      ]}
+                    >
+                      {t("Token ID")}: {selectedNFT.tokenId}
+                    </Text>
+                    <Text style={[WalletScreenStyle.chainCardText]}>
+                      {t("Protocol")}: {selectedNFT.protocolType || t("N/A")}
+                    </Text>
+
+                    {selectedNFT.lastPrice && (
+                      <Text
+                        style={[WalletScreenStyle.modalTitle, { marginTop: 8 }]}
+                      >
+                        {t("Price")}: {selectedNFT.lastPrice}{" "}
+                        {selectedNFT.lastPriceUnit || t("N/A")}
+                      </Text>
+                    )}
+                  </ScrollView>
+                </View>
               ) : (
                 <Text
                   style={[
