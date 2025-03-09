@@ -133,7 +133,22 @@ const WalletContent = (props) => {
   const [selectedNFT, setSelectedNFT] = useState(null);
   const [sendModalVisible, setSendModalVisible] = useState(false);
   const [recipientAddress, setRecipientAddress] = useState("");
+  const [previewModalVisible, setPreviewModalVisible] = useState(false);
   const styles = MyColdWalletScreenStyles(isDarkMode);
+
+  // 处理 "Next" 按钮，打开预览 Modal
+  const handlePreview = () => {
+    if (!selectedNFT || !recipientAddress) {
+      console.log("NFT 或地址为空，不能预览");
+      return;
+    }
+
+    console.log("Opening Preview Modal...");
+    setSendModalVisible(false); // 先关闭 `sendModal`
+    setTimeout(() => {
+      setPreviewModalVisible(true); // 打开 `previewModal`
+    }, 300);
+  };
 
   const handleOpenAddressBook = () => {
     setSendModalVisible(false); // 先关闭 sendModal
@@ -149,11 +164,6 @@ const WalletContent = (props) => {
     setTimeout(() => {
       setSendModalVisible(true); // 重新打开 sendModal
     }, 300);
-  };
-
-  const handlePreview = () => {
-    console.log("Proceed to Preview NFT Transfer");
-    setSendModalVisible(false);
   };
 
   const toggleModal = () => {
@@ -986,6 +996,81 @@ const WalletContent = (props) => {
         styles={styles}
         isDarkMode={isDarkMode}
       />
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={previewModalVisible}
+        onRequestClose={() => setPreviewModalVisible(false)}
+      >
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          style={{ flex: 1 }}
+        >
+          <TouchableWithoutFeedback
+            onPress={() => setPreviewModalVisible(false)}
+          >
+            <BlurView intensity={10} style={styles.centeredView}>
+              <View
+                style={styles.inputAddressModal}
+                onStartShouldSetResponder={(e) => e.stopPropagation()}
+              >
+                {/* 标题栏 */}
+                <View style={{ width: "100%", alignItems: "center" }}>
+                  <Text style={styles.modalTitle}>
+                    {props.t("Preview Transaction")}
+                  </Text>
+                </View>
+
+                {/* NFT 预览信息 */}
+                <View>
+                  <Image
+                    source={{ uri: selectedNFT?.image }}
+                    style={styles.nftImage}
+                  />
+                  <ScrollView style={{ height: 80 }}>
+                    <Text style={styles.sendNftText}>
+                      {selectedNFT?.name || "NFT Name"}
+                    </Text>
+                    <Text style={styles.sendNftText}>
+                      {props.t("Token ID")}: {selectedNFT?.tokenId || "N/A"}
+                    </Text>
+                  </ScrollView>
+                </View>
+
+                {/* 收款地址 */}
+                <Text style={styles.label}>{props.t("Recipient Address")}</Text>
+                <View style={styles.inputContainer}>
+                  <Text style={styles.input}>
+                    {recipientAddress || props.t("No Address Selected")}
+                  </Text>
+                </View>
+
+                {/* 确认发送按钮 */}
+                <TouchableOpacity
+                  style={[styles.submitButton]}
+                  disabled={!recipientAddress}
+                  onPress={() => {
+                    console.log("Confirming Transaction...");
+                    setPreviewModalVisible(false);
+                  }}
+                >
+                  <Text style={styles.ButtonText}>
+                    {props.t("Confirm & Send")}
+                  </Text>
+                </TouchableOpacity>
+
+                {/* 关闭按钮 */}
+                <TouchableOpacity
+                  style={[styles.Button]}
+                  onPress={() => setPreviewModalVisible(false)}
+                >
+                  <Text style={styles.ButtonText}>{props.t("Close")}</Text>
+                </TouchableOpacity>
+              </View>
+            </BlurView>
+          </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
+      </Modal>
     </View>
   );
 };
