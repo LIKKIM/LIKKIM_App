@@ -1180,28 +1180,28 @@ function WalletScreen({ route, navigation }) {
     const verificationCodeValue = receivedVerificationCode.trim();
     const pinCodeValue = pinCode.trim();
 
-    console.log(`用户输入的 PIN: ${pinCodeValue}`);
-    console.log(`接收到的完整数据: ${verificationCodeValue}`);
+    console.log(`User entered PIN: ${pinCodeValue}`);
+    console.log(`Received complete data: ${verificationCodeValue}`);
 
     const [prefix, rest] = verificationCodeValue.split(":");
     if (prefix !== "PIN" || !rest) {
-      console.log("接收到的验证码格式不正确:", verificationCodeValue);
+      console.log("Invalid verification code format:", verificationCodeValue);
       setVerificationStatus("fail");
       return;
     }
 
     const [receivedPin, flag] = rest.split(",");
     if (!receivedPin || (flag !== "Y" && flag !== "N")) {
-      console.log("接收到的验证码格式不正确:", verificationCodeValue);
+      console.log("Invalid verification code format:", verificationCodeValue);
       setVerificationStatus("fail");
       return;
     }
 
-    console.log(`提取到的 PIN 值: ${receivedPin}`);
-    console.log(`提取到的标志位: ${flag}`);
+    console.log(`Extracted PIN value: ${receivedPin}`);
+    console.log(`Extracted flag: ${flag}`);
 
     if (pinCodeValue === receivedPin) {
-      console.log("PIN 验证成功");
+      console.log("PIN verification succeeded");
       setVerificationStatus("success");
 
       setVerifiedDevices([selectedDevice.id]);
@@ -1212,7 +1212,7 @@ function WalletScreen({ route, navigation }) {
       );
 
       setIsVerificationSuccessful(true);
-      console.log("设备验证并存储成功");
+      console.log("Device verification and storage succeeded");
 
       try {
         const confirmationMessage = "PIN_OK";
@@ -1238,7 +1238,7 @@ function WalletScreen({ route, navigation }) {
             writeCharacteristicUUID,
             base64Address
           );
-          console.log("字符串 'address' 已成功发送给设备");
+          console.log("Message 'address' successfully sent to device");
 
           const pubkeyMessages = [
             "pubkey:cosmos,m/44'/118'/0'/0/0",
@@ -1257,26 +1257,28 @@ function WalletScreen({ route, navigation }) {
               writeCharacteristicUUID,
               base64Message
             );
-            console.log(`字符串 '${msg}' 已成功发送给设备`);
+            console.log(`Message '${msg}' successfully sent to device`);
           }
         } catch (error) {
-          console.log("发送字符串时发生错误:", error);
+          console.log("Error sending message:", error);
         }
       } else if (flag === "N") {
-        console.log("设备返回了 PIN:xxxx,N，无需发送 'address' 和 pubkey 消息");
+        console.log(
+          "Device returned PIN:xxxx,N, no need to send 'address' and pubkey messages"
+        );
       }
     } else {
-      console.log("PIN 验证失败");
+      console.log("PIN verification failed");
       setVerificationStatus("fail");
 
       if (monitorSubscription) {
         monitorSubscription.remove();
-        console.log("验证码监听已停止");
+        console.log("Stopped verification code monitoring");
       }
 
       if (selectedDevice) {
         await selectedDevice.cancelConnection();
-        console.log("已断开与设备的连接");
+        console.log("Disconnected from device");
       }
     }
 
