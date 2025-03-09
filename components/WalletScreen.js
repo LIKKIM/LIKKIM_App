@@ -53,6 +53,7 @@ import checkAndReqPermission from "../utils/BluetoothPermissions"; //安卓高�
 import showLIKKIMAddressCommand from "../utils/showLIKKIMAddressCommand"; // 显示地址函数 发送数据写法
 import { handlePinSubmit } from "../utils/handlePinSubmit";
 import { decrypt } from "../utils/decrypt";
+import { handleDevicePress } from "../utils/devicePress";
 
 const serviceUUID = "6E400001-B5A3-F393-E0A9-E50E24DCCA9E";
 const writeCharacteristicUUID = "6E400002-B5A3-F393-E0A9-E50E24DCCA9E";
@@ -732,64 +733,6 @@ function WalletScreen({ route, navigation }) {
     const finalBalance = (usdBalance * rate).toFixed(2);
 
     return finalBalance;
-  };
-
-  const handleDevicePress = async (device) => {
-    if (typeof device !== "object" || typeof device.connect !== "function") {
-      console.log("Invalid device object, cannot connect device:", device);
-      return;
-    }
-
-    setSelectedDevice(device);
-    setModalVisible(false);
-    setBleVisible(false);
-    try {
-      await device.connect();
-      await device.discoverAllServicesAndCharacteristics();
-      console.log(
-        "Device connected and all services and characteristics discovered"
-      );
-
-      const sendDecryptedValue = async (decryptedValue) => {
-        try {
-          const message = `ID:${decryptedValue}`;
-          const bufferMessage = Buffer.from(message, "utf-8");
-          const base64Message = bufferMessage.toString("base64");
-
-          await device.writeCharacteristicWithResponseForService(
-            serviceUUID,
-            writeCharacteristicUUID,
-            base64Message
-          );
-          console.log(`Decrypted value sent: ${message}`);
-        } catch (error) {
-          console.log("Error sending decrypted value:", error);
-        }
-      };
-
-      monitorVerificationCode(device, sendDecryptedValue);
-
-      setTimeout(async () => {
-        try {
-          const requestString = "request";
-          const bufferRequestString = Buffer.from(requestString, "utf-8");
-          const base64requestString = bufferRequestString.toString("base64");
-
-          await device.writeCharacteristicWithResponseForService(
-            serviceUUID,
-            writeCharacteristicUUID,
-            base64requestString
-          );
-          console.log("'request' string sent");
-        } catch (error) {
-          console.log("Error sending 'request':", error);
-        }
-      }, 200);
-
-      setPinModalVisible(true);
-    } catch (error) {
-      console.log("Device connection or command send error:", error);
-    }
   };
 
   // 处理断开连接的逻辑
