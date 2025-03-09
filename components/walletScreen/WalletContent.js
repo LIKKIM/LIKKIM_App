@@ -1,5 +1,5 @@
 // ./walletScreen/WalletContent.js
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   ScrollView,
   View,
@@ -13,6 +13,65 @@ import {
 } from "react-native";
 
 const WalletContent = (props) => {
+  const [nftData, setNftData] = useState(null);
+
+  // 请求 NFT 数据的函数
+  const fetchNFTData = async () => {
+    const requestBody = {
+      chain: "okc",
+      address: "0xaba7161a7fb69c88e16ed9f455ce62b791ee4d03",
+      protocolType: "token_721",
+      tokenContractAddress: null,
+      pageSize: "100",
+      page: "1",
+      type: "okx",
+    };
+
+    // 打印请求数据
+    console.log("POST 请求数据：", requestBody);
+
+    try {
+      const response = await fetch(
+        "https://bt.likkim.com/api/nfts/query-address-balance-fills",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(requestBody),
+        }
+      );
+      const json = await response.json();
+
+      // 打印整个返回数据
+      console.log("返回数据：", json);
+
+      // 如果返回成功且有数据，则打印 total 字段
+      if (json.code === "0" && json.data) {
+        console.log("Total:", json.data.total);
+
+        // 判断 data.list 是否存在且为数组，然后遍历打印每个对象中的指定字段
+        if (Array.isArray(json.data.list)) {
+          json.data.list.forEach((item, index) => {
+            console.log(`Item ${index + 1}:`);
+            console.log("  tokenContractAddress:", item.tokenContractAddress);
+            console.log("  tokenId:", item.tokenId);
+            console.log("  protocolType:", item.protocolType);
+          });
+        }
+      }
+
+      setNftData(json);
+    } catch (error) {
+      console.error("Error fetching NFT data", error);
+    }
+  };
+
+  // 在组件挂载时调用 NFT 数据接口
+  useEffect(() => {
+    fetchNFTData();
+  }, []);
+
   // 从 props 中解构需要使用的变量和函数
   const {
     selectedView,
@@ -385,7 +444,7 @@ const WalletContent = (props) => {
       style={{
         position: "absolute",
         top: 0,
-        width: 326,
+        width: "90%", // 使用总宽度的96%
       }}
     >
       {cryptoCards.length > 0 && !modalVisible && (
@@ -400,15 +459,72 @@ const WalletContent = (props) => {
           {renderChainButton()}
         </View>
       )}
-      {/*  NFTs view */}
-      <View
+      {/* NFTs view */}
+      <ScrollView
+        contentContainerStyle={{
+          flexDirection: "row",
+          flexWrap: "wrap",
+        }}
         style={{
-          width: 320,
+          width: "100%", // 同样使用百分比宽度
           height: 590,
           borderRadius: 8,
-          // backgroundColor: "red",
         }}
-      ></View>
+      >
+        {nftData &&
+        nftData.code === "0" &&
+        nftData.data &&
+        Array.isArray(nftData.data.list) ? (
+          nftData.data.list.map((nft, index) => (
+            // 使用 width: "50%" 表示每个卡片占父容器宽度的一半
+            <View
+              key={index}
+              style={{
+                width: "50%",
+                padding: 4, // 如果需要间距可设置 padding
+              }}
+            >
+              <View
+                style={{
+                  flex: 1,
+                  backgroundColor: isDarkMode ? "#333" : "#fff",
+                  borderRadius: 8,
+                  padding: 10,
+                  // 可添加阴影等其他样式
+                  shadowColor: "#000",
+                  shadowOffset: { width: 0, height: 2 },
+                  shadowOpacity: 0.2,
+                  shadowRadius: 4,
+                  elevation: 2,
+                }}
+              >
+                <Text style={{ fontWeight: "bold", marginBottom: 4 }}>
+                  {nft.name || "NFT Card"}
+                </Text>
+                <Text style={{ fontSize: 12, marginBottom: 2 }}>
+                  Contract: {nft.tokenContractAddress}
+                </Text>
+                <Text style={{ fontSize: 12, marginBottom: 2 }}>
+                  Token ID: {nft.tokenId}
+                </Text>
+                <Text style={{ fontSize: 12 }}>
+                  Protocol: {nft.protocolType || "N/A"}
+                </Text>
+              </View>
+            </View>
+          ))
+        ) : (
+          <Text
+            style={{
+              textAlign: "center",
+              color: isDarkMode ? "#fff" : "#000",
+              width: "100%",
+            }}
+          >
+            暂无 NFT 数据
+          </Text>
+        )}
+      </ScrollView>
     </View>
   );
 };
