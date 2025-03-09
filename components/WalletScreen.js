@@ -53,7 +53,7 @@ import checkAndReqPermission from "../utils/BluetoothPermissions"; //安卓高�
 import showLIKKIMAddressCommand from "../utils/showLIKKIMAddressCommand"; // 显示地址函数 发送数据写法
 import { handlePinSubmit } from "../utils/handlePinSubmit";
 import { decrypt } from "../utils/decrypt";
-import { handleDevicePress } from "../utils/devicePress";
+import { handleDevicePress } from "../utils/handleDevicePress";
 
 const serviceUUID = "6E400001-B5A3-F393-E0A9-E50E24DCCA9E";
 const writeCharacteristicUUID = "6E400002-B5A3-F393-E0A9-E50E24DCCA9E";

@@ -1,17 +1,20 @@
-// utils/devicePress.js
+// utils/handleDevicePress.js
 import { Buffer } from "buffer";
 
 const serviceUUID = "6E400001-B5A3-F393-E0A9-E50E24DCCA9E";
 const writeCharacteristicUUID = "6E400002-B5A3-F393-E0A9-E50E24DCCA9E";
 
 /**
- * Handles device press action:
+ * Handles device press action for MyColdWalletScreen:
+ * - Resets receivedAddresses and verificationStatus.
  * - Connects to the device and discovers its services/characteristics.
  * - Sets up a listener to monitor the verification code and send a decrypted value.
  * - Sends a "request" command after a short delay.
  *
  * @param {object} device - The BLE device object.
  * @param {object} callbacks - An object containing state setter functions and the monitor function.
+ * @param {function} callbacks.setReceivedAddresses - Function to reset received addresses.
+ * @param {function} callbacks.setVerificationStatus - Function to reset verification status.
  * @param {function} callbacks.setSelectedDevice - Function to update selected device.
  * @param {function} callbacks.setModalVisible - Function to hide the modal.
  * @param {function} callbacks.setBleVisible - Function to hide the BLE modal.
@@ -21,6 +24,8 @@ const writeCharacteristicUUID = "6E400002-B5A3-F393-E0A9-E50E24DCCA9E";
 export async function handleDevicePress(
   device,
   {
+    setReceivedAddresses,
+    setVerificationStatus,
     setSelectedDevice,
     setModalVisible,
     setBleVisible,
@@ -33,9 +38,13 @@ export async function handleDevicePress(
     return;
   }
 
+  // Reset screen-specific states
+  setReceivedAddresses({});
+  setVerificationStatus(null);
   setSelectedDevice(device);
   setModalVisible(false);
   setBleVisible(false);
+
   try {
     await device.connect();
     await device.discoverAllServicesAndCharacteristics();

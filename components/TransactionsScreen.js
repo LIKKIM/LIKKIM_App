@@ -52,7 +52,7 @@ import ActionButtons from "./transactionScreens/ActionButtons";
 // 自定义组件
 import showLIKKIMAddressCommand from "../utils/showLIKKIMAddressCommand";
 import { decrypt } from "../utils/decrypt";
-import { handleDevicePress } from "../utils/devicePress";
+import { handleDevicePress } from "../utils/handleDevicePress";
 // BLE 常量
 const serviceUUID = "6E400001-B5A3-F393-E0A9-E50E24DCCA9E";
 const writeCharacteristicUUID = "6E400002-B5A3-F393-E0A9-E50E24DCCA9E";
