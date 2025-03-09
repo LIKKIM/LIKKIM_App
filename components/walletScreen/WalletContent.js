@@ -135,13 +135,6 @@ const WalletContent = (props) => {
   const [recipientAddress, setRecipientAddress] = useState("");
   const styles = MyColdWalletScreenStyles(isDarkMode);
 
-  const handleAddressChange = (text) => {
-    setInputAddress(text);
-    const network = detectNetwork(text);
-    setDetectedNetwork(network);
-    setIsAddressValid(network !== "Invalid address"); // Update address validity
-  };
-
   const handleOpenAddressBook = () => {
     setSendModalVisible(false); // 先关闭 sendModal
     setTimeout(() => {
