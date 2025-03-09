@@ -680,7 +680,7 @@ function MyColdWalletScreen({ onDarkModeChange }) {
 
     if (pinCodeValue === receivedPin) {
       console.log("PIN verified successfully");
-      setVerificationStatus("waiting");
+      setVerificationStatus("success");
       setVerifiedDevices([selectedDevice.id]);
       await AsyncStorage.setItem(
         "verifiedDevices",
