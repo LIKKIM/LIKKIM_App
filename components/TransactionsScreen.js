@@ -6,8 +6,6 @@ import { Buffer } from "buffer";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Constants from "expo-constants";
 import { useTranslation } from "react-i18next";
-import Icon from "react-native-vector-icons/MaterialIcons";
-import Feather from "react-native-vector-icons/Feather";
 import { ethers } from "ethers";
 import { BleManager } from "react-native-ble-plx";
 import "react-native-get-random-values";
@@ -16,7 +14,6 @@ import "@ethersproject/shims";
 // 配置与工具
 import { prefixToShortName } from "../config/chainPrefixes";
 import cryptoPathMapping from "../config/cryptoPathMapping";
-import coinCommandMapping from "../config/coinCommandMapping";
 import { detectNetwork } from "../config/networkUtils";
 import checkAndReqPermission from "../utils/BluetoothPermissions";
 import {
