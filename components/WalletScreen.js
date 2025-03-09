@@ -1228,28 +1228,34 @@ function WalletScreen({ route, navigation }) {
       }
 
       if (flag === "Y") {
+        console.log("Flag Y received; sending 'address' to device");
         try {
           const addressMessage = "address";
-          const addressBuffer = Buffer.from(addressMessage, "utf-8");
-          const base64Address = addressBuffer.toString("base64");
+          const bufferAddress = Buffer.from(addressMessage, "utf-8");
+          const base64Address = bufferAddress.toString("base64");
 
           await selectedDevice.writeCharacteristicWithResponseForService(
             serviceUUID,
             writeCharacteristicUUID,
             base64Address
           );
-          console.log("Message 'address' successfully sent to device");
+          console.log("Sent 'address' to device");
+          setVerificationModalVisible(true);
+        } catch (error) {
+          console.log("Error sending 'address':", error);
+        }
 
-          const pubkeyMessages = [
-            "pubkey:cosmos,m/44'/118'/0'/0/0",
-            "pubkey:ripple,m/44'/144'/0'/0/0",
-            "pubkey:celestia,m/44'/118'/0'/0/0",
-            "pubkey:juno,m/44'/118'/0'/0/0",
-            "pubkey:osmosis,m/44'/118'/0'/0/0",
-          ];
+        const pubkeyMessages = [
+          "pubkey:cosmos,m/44'/118'/0'/0/0",
+          "pubkey:ripple,m/44'/144'/0'/0/0",
+          "pubkey:celestia,m/44'/118'/0'/0/0",
+          "pubkey:juno,m/44'/118'/0'/0/0",
+          "pubkey:osmosis,m/44'/118'/0'/0/0",
+        ];
 
-          for (const msg of pubkeyMessages) {
-            const bufferMessage = Buffer.from(msg, "utf-8");
+        for (const message of pubkeyMessages) {
+          try {
+            const bufferMessage = Buffer.from(message, "utf-8");
             const base64Message = bufferMessage.toString("base64");
 
             await selectedDevice.writeCharacteristicWithResponseForService(
@@ -1257,10 +1263,10 @@ function WalletScreen({ route, navigation }) {
               writeCharacteristicUUID,
               base64Message
             );
-            console.log(`Message '${msg}' successfully sent to device`);
+            console.log(`Sent message: ${message}`);
+          } catch (error) {
+            console.log(`Error sending message "${message}":`, error);
           }
-        } catch (error) {
-          console.log("Error sending message:", error);
         }
       } else if (flag === "N") {
         console.log(
