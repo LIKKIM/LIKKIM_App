@@ -3,21 +3,21 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Buffer } from "buffer";
 
 /**
- * 提取后的 handlePinSubmit 函数
+ * Extracted handlePinSubmit function.
  *
- * 参数对象中需要传入：
- * - receivedVerificationCode: 完整的验证数据字符串
- * - pinCode: 用户输入的 PIN 字符串
- * - setPinModalVisible: 控制 PIN 弹窗显示的函数
- * - setVerificationModalVisible: 控制验证弹窗显示的函数
- * - setVerificationStatus: 更新验证状态的函数
- * - selectedDevice: 当前已连接的设备对象
- * - setVerifiedDevices: 更新已验证设备的函数
- * - setIsVerificationSuccessful: 更新验证成功状态的函数
- * - serviceUUID: 服务 UUID 字符串
- * - writeCharacteristicUUID: 写入特征 UUID 字符串
- * - monitorSubscription: （可选）监控订阅对象，若存在则可移除
- * - setPinCode: 重置 PIN 输入的函数
+ * The parameter object should include:
+ * - receivedVerificationCode: The complete verification data string.
+ * - pinCode: The user-entered PIN string.
+ * - setPinModalVisible: Function to control the visibility of the PIN modal.
+ * - setVerificationModalVisible: Function to control the visibility of the verification modal.
+ * - setVerificationStatus: Function to update the verification status.
+ * - selectedDevice: The currently connected device object.
+ * - setVerifiedDevices: Function to update the list of verified devices.
+ * - setIsVerificationSuccessful: Function to update the verification success state.
+ * - serviceUUID: The service UUID string.
+ * - writeCharacteristicUUID: The characteristic UUID string for writing.
+ * - monitorSubscription: (Optional) Monitoring subscription object; if present, it will be removed.
+ * - setPinCode: Function to reset the PIN input.
  */
 export async function handlePinSubmit({
   receivedVerificationCode,
