@@ -39,7 +39,7 @@ const SkeletonImage = ({ source, style, resizeMode }) => {
       Animated.loop(
         Animated.timing(shimmerTranslate, {
           toValue: 200,
-          duration: 1000,
+          duration: 1500, // 放慢动画速度
           useNativeDriver: true,
         })
       ).start();
@@ -51,7 +51,7 @@ const SkeletonImage = ({ source, style, resizeMode }) => {
     // 淡出骨架图动画
     Animated.timing(skeletonOpacity, {
       toValue: 0,
-      duration: 300,
+      duration: 500, // 放慢淡出动画
       useNativeDriver: true,
     }).start();
     // 图片淡入动画
@@ -80,10 +80,17 @@ const SkeletonImage = ({ source, style, resizeMode }) => {
             ]}
           >
             <LinearGradient
-              colors={["#2c2c2c", "#636363", "#2c2c2c"]}
+              colors={[
+                "#bbbbbb50",
+                "#cccccc50",
+                "#dddddd50",
+                "#cccccc50",
+                "#bbbbbb50",
+              ]}
+              locations={[0, 0.25, 0.5, 0.75, 1]}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 0 }}
-              style={StyleSheet.absoluteFill}
+              style={[StyleSheet.absoluteFill]}
             />
           </Animated.View>
         </Animated.View>
@@ -113,11 +120,11 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: "#2c2c2c", // 深色背景
+    backgroundColor: "#aaaaaa",
     overflow: "hidden",
   },
   shimmer: {
-    width: "50%", // 渐变块宽度，可根据需要调整
+    width: "30%", // 渐变块宽度，可根据需要调整
     height: "100%",
   },
 });
@@ -609,6 +616,7 @@ const WalletContent = (props) => {
           {renderChainButton()}
         </View>
       )}
+      {/* NFTs view */}
       <ScrollView
         contentContainerStyle={{
           flexDirection: "row",
@@ -762,7 +770,6 @@ const WalletContent = (props) => {
                       </Text>
                     </View>
                   )}
-
                   <ScrollView
                     style={{
                       height: 140,
@@ -796,6 +803,7 @@ const WalletContent = (props) => {
                     <Text style={[WalletScreenStyle.chainCardText]}>
                       {t("Protocol")}: {selectedNFT.protocolType || t("N/A")}
                     </Text>
+
                     {selectedNFT.lastPrice && (
                       <Text
                         style={[WalletScreenStyle.modalTitle, { marginTop: 8 }]}
@@ -817,6 +825,7 @@ const WalletContent = (props) => {
                 </Text>
               )}
 
+              {/* Add Send and 收藏到冷钱包 buttons */}
               <View
                 style={{
                   flexDirection: "row",
@@ -835,6 +844,7 @@ const WalletContent = (props) => {
                 >
                   <Text style={WalletScreenStyle.ButtonText}>{t("Send")}</Text>
                 </TouchableOpacity>
+
                 <TouchableOpacity
                   style={[WalletScreenStyle.Button, { flex: 1, marginLeft: 8 }]}
                   onPress={() => {
