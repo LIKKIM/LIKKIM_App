@@ -1442,28 +1442,34 @@ function TransactionsScreen() {
     const pinCodeValue = pinCode.trim();
     const verificationCodeValue = receivedVerificationCode.trim();
 
-    console.log(`用户输入的 PIN: ${pinCodeValue}`);
-    console.log(`接收到的验证码: ${verificationCodeValue}`);
+    console.log(`User-entered PIN: ${pinCodeValue}`);
+    console.log(`Received verification code: ${verificationCodeValue}`);
 
     const [prefix, rest] = verificationCodeValue.split(":");
     if (prefix !== "PIN" || !rest) {
-      console.log("接收到的验证码格式不正确:", verificationCodeValue);
+      console.log(
+        "Received verification code format is incorrect:",
+        verificationCodeValue
+      );
       setVerificationFailModalVisible(true);
       return;
     }
 
     const [receivedPin, flag] = rest.split(",");
     if (!receivedPin || (flag !== "Y" && flag !== "N")) {
-      console.log("接收到的验证码格式不正确:", verificationCodeValue);
+      console.log(
+        "Received verification code format is incorrect:",
+        verificationCodeValue
+      );
       setVerificationFailModalVisible(true);
       return;
     }
 
-    console.log(`提取到的 PIN 值: ${receivedPin}`);
-    console.log(`提取到的标志位: ${flag}`);
+    console.log(`Extracted PIN value: ${receivedPin}`);
+    console.log(`Extracted flag: ${flag}`);
 
     if (pinCodeValue === receivedPin) {
-      console.log("PIN 验证成功");
+      console.log("PIN verification succeeded");
       setVerificationSuccessModalVisible(true);
 
       setVerifiedDevices([selectedDevice.id]);
@@ -1474,7 +1480,7 @@ function TransactionsScreen() {
       );
 
       setIsVerificationSuccessful(true);
-      console.log("设备验证并存储成功");
+      console.log("Device verified and stored successfully");
 
       try {
         const confirmationMessage = "PIN_OK";
@@ -1500,9 +1506,9 @@ function TransactionsScreen() {
             writeCharacteristicUUID,
             base64Address
           );
-          console.log("字符串 'address' 已成功发送给设备");
+          console.log("String 'address' sent to device successfully");
         } catch (error) {
-          console.log("发送字符串 'address' 时发生错误:", error);
+          console.log("Error sending string 'address':", error);
         }
 
         const pubkeyMessages = [
@@ -1522,35 +1528,37 @@ function TransactionsScreen() {
               writeCharacteristicUUID,
               base64Message
             );
-            console.log(`字符串 '${pubkeyMessage}' 已成功发送给设备`);
+            console.log(
+              `String '${pubkeyMessage}' sent to device successfully`
+            );
           } catch (error) {
-            console.log(`发送字符串 '${pubkeyMessage}' 时发生错误:`, error);
+            console.log(`Error sending string '${pubkeyMessage}':`, error);
           }
         }
       } else if (flag === "N") {
         console.log(
-          "设备返回了 PIN:xxxx,N，无需发送 'address' 和 pubkey 字符串"
+          "Device returned PIN:xxxx,N, no need to send 'address' and pubkey strings"
         );
       }
     } else {
-      console.log("PIN 验证失败");
+      console.log("PIN verification failed");
       setVerificationFailModalVisible(true);
 
       if (monitorSubscription) {
         try {
           monitorSubscription.remove();
-          console.log("验证码监听已停止");
+          console.log("Stopped monitoring verification code");
         } catch (error) {
-          console.log("停止监听时发生错误:", error);
+          console.log("Error occurred while stopping monitoring:", error);
         }
       }
 
       if (selectedDevice) {
         try {
           await selectedDevice.cancelConnection();
-          console.log("已断开与设备的连接");
+          console.log("Disconnected from device");
         } catch (error) {
-          console.log("断开连接时发生错误:", error);
+          console.log("Error occurred while disconnecting:", error);
         }
       }
     }
