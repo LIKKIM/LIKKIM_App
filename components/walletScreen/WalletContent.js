@@ -39,7 +39,7 @@ const WalletContent = (props) => {
 
     try {
       const response = await fetch(
-        "https://bt.likkim.com/api/nfts/query-address- balance-fills",
+        "https://bt.likkim.com/api/nfts/query-address-balance-fills",
         {
           method: "POST",
           headers: {
@@ -615,15 +615,25 @@ const WalletContent = (props) => {
             </TouchableOpacity>
           ))
         ) : (
-          <Text
+          <View
             style={{
-              textAlign: "center",
-              color: isDarkMode ? "#fff" : "#000",
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
               width: "100%",
+              height: 590,
             }}
           >
-            {t("No NFT Data")}
-          </Text>
+            <Text
+              style={{
+                textAlign: "center",
+                color: isDarkMode ? "#fff" : "#000",
+                width: "100%",
+              }}
+            >
+              {t("No NFT Data")}
+            </Text>
+          </View>
         )}
       </ScrollView>
       <Modal
