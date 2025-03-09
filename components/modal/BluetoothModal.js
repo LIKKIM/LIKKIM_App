@@ -18,7 +18,7 @@ const BluetoothModal = ({
   devices,
   isScanning,
   iconColor,
-  onDevicePress,
+  handleDevicePress,
   onCancel,
   verifiedDevices,
   MyColdWalletScreenStyle,
@@ -91,7 +91,7 @@ const BluetoothModal = ({
   };
 
   const handleDeviceWithLocationPress = async (device) => {
-    onDevicePress(device);
+    handleDevicePress(device);
     const location = await getDeviceLocation();
     if (location) {
       saveConnectedDevice(device, location.lat, location.lng);

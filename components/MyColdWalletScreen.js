@@ -1064,7 +1064,7 @@ function MyColdWalletScreen({ onDarkModeChange }) {
         devices={devices}
         isScanning={isScanning}
         iconColor={blueToothColor}
-        onDevicePress={handleDevicePress}
+        handleDevicePress={handleDevicePress}
         onCancel={handleCancel}
         verifiedDevices={verifiedDevices}
         MyColdWalletScreenStyle={MyColdWalletScreenStyle}

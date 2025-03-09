@@ -1790,7 +1790,7 @@ function TransactionsScreen() {
           devices={devices}
           isScanning={isScanning}
           iconColor={iconColor}
-          onDevicePress={handleDevicePress}
+          handleDevicePress={handleDevicePress}
           onCancel={() => {
             setBleVisible(false);
             setSelectedDevice(null);
