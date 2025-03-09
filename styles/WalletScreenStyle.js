@@ -624,11 +624,10 @@ const WalletScreenStyles = (isDarkMode) => {
       backgroundColor: modalBackgroundColor,
       borderRadius: 20,
       padding: 35,
-
       flex: 1,
-      justifyContent: "center",
+      justifyContent: "space-between",
       minHeight: 300,
-      maxHeight: 600, // Maximum height, adjust as needed
+      maxHeight: 600,
     },
 
     pendingModalView: {

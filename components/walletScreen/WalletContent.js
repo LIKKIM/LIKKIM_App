@@ -568,7 +568,7 @@ const WalletContent = (props) => {
                     source={{ uri: nft.logoUrl }}
                     style={{
                       width: "100%",
-                      height: 100,
+                      aspectRatio: 1,
                       borderRadius: 8,
                       marginBottom: 8,
                     }}
@@ -578,7 +578,7 @@ const WalletContent = (props) => {
                   <View
                     style={{
                       width: "100%",
-                      height: 100,
+                      aspectRatio: 1,
                       borderRadius: 8,
                       backgroundColor: "#ccc",
                       justifyContent: "center",
@@ -589,14 +589,14 @@ const WalletContent = (props) => {
                     <Text
                       style={[
                         WalletScreenStyle.modalSubtitle,
-                        { fontSize: 12 },
+                        { color: "#666" },
                       ]}
                     >
                       {t("No Image")}
                     </Text>
                   </View>
                 )}
-                <Text style={WalletScreenStyle.cardName}>
+                <Text style={WalletScreenStyle.modalTitle}>
                   {nft.collectionName || "NFT Card"}
                   {/* 使用 collectionName 显示 NFT 名称 */}
                 </Text>
@@ -650,7 +650,7 @@ const WalletContent = (props) => {
                   <View
                     style={{
                       width: "100%",
-                      height: 100,
+                      aspectRatio: 1,
                       borderRadius: 8,
                       backgroundColor: "#ccc",
                       justifyContent: "center",
@@ -668,7 +668,9 @@ const WalletContent = (props) => {
                     </Text>
                   </View>
                 )}
-                <Text style={[WalletScreenStyle.cardName, { marginBottom: 4 }]}>
+                <Text
+                  style={[WalletScreenStyle.modalTitle, { marginBottom: 4 }]}
+                >
                   {selectedNFT.collectionName || t("NFT Card")}
                 </Text>
 
@@ -687,7 +689,9 @@ const WalletContent = (props) => {
                 </Text>
                 {/* Display the price */}
                 {selectedNFT.lastPrice && (
-                  <Text style={[WalletScreenStyle.cardName, { marginTop: 8 }]}>
+                  <Text
+                    style={[WalletScreenStyle.modalTitle, { marginTop: 8 }]}
+                  >
                     {t("Price")}: {selectedNFT.lastPrice}{" "}
                     {selectedNFT.lastPriceUnit || t("N/A")}
                   </Text>
