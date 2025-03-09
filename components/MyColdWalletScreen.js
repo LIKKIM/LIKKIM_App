@@ -655,7 +655,7 @@ function MyColdWalletScreen({ onDarkModeChange }) {
       console.log("Error connecting or sending command to device:", error);
     }
   };
-
+  // MyColdWalletScreen.js handlePinSubmit
   const handlePinSubmit = async () => {
     setPinModalVisible(false);
     setVerificationModalVisible(false);
