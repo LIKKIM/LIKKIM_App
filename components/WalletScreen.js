@@ -1180,28 +1180,28 @@ function WalletScreen({ route, navigation }) {
     const verificationCodeValue = receivedVerificationCode.trim();
     const pinCodeValue = pinCode.trim();
 
-    console.log(`User entered PIN: ${pinCodeValue}`);
-    console.log(`Received complete data: ${verificationCodeValue}`);
+    console.log(`User PIN: ${pinCodeValue}`);
+    console.log(`Received data: ${verificationCodeValue}`);
 
     const [prefix, rest] = verificationCodeValue.split(":");
     if (prefix !== "PIN" || !rest) {
-      console.log("Invalid verification code format:", verificationCodeValue);
+      console.log("Invalid verification format:", verificationCodeValue);
       setVerificationStatus("fail");
       return;
     }
 
     const [receivedPin, flag] = rest.split(",");
     if (!receivedPin || (flag !== "Y" && flag !== "N")) {
-      console.log("Invalid verification code format:", verificationCodeValue);
+      console.log("Invalid verification format:", verificationCodeValue);
       setVerificationStatus("fail");
       return;
     }
 
-    console.log(`Extracted PIN value: ${receivedPin}`);
-    console.log(`Extracted flag: ${flag}`);
+    console.log(`Extracted PIN: ${receivedPin}`);
+    console.log(`Flag: ${flag}`);
 
     if (pinCodeValue === receivedPin) {
-      console.log("PIN verification succeeded");
+      console.log("PIN verified successfully");
       setVerificationStatus("success");
 
       setVerifiedDevices([selectedDevice.id]);

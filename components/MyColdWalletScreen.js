@@ -661,20 +661,24 @@ function MyColdWalletScreen({ onDarkModeChange }) {
     setVerificationModalVisible(false);
     const verificationCodeValue = receivedVerificationCode.trim();
     const pinCodeValue = pinCode.trim();
+
     console.log(`User PIN: ${pinCodeValue}`);
     console.log(`Received data: ${verificationCodeValue}`);
+
     const [prefix, rest] = verificationCodeValue.split(":");
     if (prefix !== "PIN" || !rest) {
       console.log("Invalid verification format:", verificationCodeValue);
       setVerificationStatus("fail");
       return;
     }
+
     const [receivedPin, flag] = rest.split(",");
     if (!receivedPin || (flag !== "Y" && flag !== "N")) {
       console.log("Invalid verification format:", verificationCodeValue);
       setVerificationStatus("fail");
       return;
     }
+
     console.log(`Extracted PIN: ${receivedPin}`);
     console.log(`Flag: ${flag}`);
 
@@ -727,6 +731,7 @@ function MyColdWalletScreen({ onDarkModeChange }) {
           "pubkey:juno,m/44'/118'/0'/0/0",
           "pubkey:osmosis,m/44'/118'/0'/0/0",
         ];
+
         for (const message of pubkeyMessages) {
           try {
             const bufferMessage = Buffer.from(message, "utf-8");
