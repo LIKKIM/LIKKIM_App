@@ -655,31 +655,46 @@ const WalletContent = (props) => {
                       marginBottom: 8,
                     }}
                   >
-                    <Text style={{ fontSize: 12, color: "#666" }}>
+                    <Text
+                      style={[
+                        WalletScreenStyle.modalSubtitle,
+                        { color: "#666" },
+                      ]}
+                    >
                       {t("No Image")}
                     </Text>
                   </View>
                 )}
-                <Text style={{ fontWeight: "bold", marginBottom: 4 }}>
-                  {selectedNFT.name || t("NFT Card")}
+                <Text style={[WalletScreenStyle.cardName, { marginBottom: 4 }]}>
+                  {selectedNFT.token || t("NFT Card")}
                 </Text>
-                <Text style={{ fontSize: 12, marginBottom: 2 }}>
+                <Text
+                  style={[WalletScreenStyle.chainCardText, { marginBottom: 2 }]}
+                >
                   {t("Contract")}: {selectedNFT.tokenContractAddress}
                 </Text>
-                <Text style={{ fontSize: 12, marginBottom: 2 }}>
+                <Text
+                  style={[WalletScreenStyle.chainCardText, { marginBottom: 2 }]}
+                >
                   {t("Token ID")}: {selectedNFT.tokenId}
                 </Text>
-                <Text style={{ fontSize: 12 }}>
+                <Text style={[WalletScreenStyle.chainCardText]}>
                   {t("Protocol")}: {selectedNFT.protocolType || t("N/A")}
                 </Text>
+                {/* Display the price */}
+                {selectedNFT.lastPrice && (
+                  <Text style={[WalletScreenStyle.cardName, { marginTop: 8 }]}>
+                    {t("Price")}: {selectedNFT.lastPrice}{" "}
+                    {selectedNFT.lastPriceUnit || t("N/A")}
+                  </Text>
+                )}
               </View>
             ) : (
               <Text
-                style={{
-                  textAlign: "center",
-                  color: isDarkMode ? "#fff" : "#000",
-                  width: "100%",
-                }}
+                style={[
+                  WalletScreenStyle.modalSubtitle,
+                  { textAlign: "center" },
+                ]}
               >
                 {t("No NFT Data")}
               </Text>
@@ -688,7 +703,10 @@ const WalletContent = (props) => {
             {/* Close button */}
             <TouchableOpacity
               onPress={toggleModal}
-              style={WalletScreenStyle.cancelButtonLookingFor}
+              style={[
+                WalletScreenStyle.cancelButtonLookingFor,
+                { marginTop: 20 },
+              ]}
             >
               <Text style={WalletScreenStyle.cancelButtonText}>
                 {t("Close")}
