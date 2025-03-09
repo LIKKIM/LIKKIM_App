@@ -20,6 +20,8 @@ import {
 import { BlurView } from "expo-blur";
 import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import AddressBookModal from "./../modal/AddressBookModal";
+import MyColdWalletScreenStyles from "../../styles/MyColdWalletScreenStyle";
 
 const SkeletonImage = ({ source, style, resizeMode }) => {
   const [loaded, setLoaded] = useState(false);
@@ -125,14 +127,34 @@ const styles = StyleSheet.create({
 });
 
 const WalletContent = (props) => {
+  const [isAddressBookVisible, setAddressBookVisible] = useState(false);
   const [nftData, setNftData] = useState(null);
   const [NFTmodalVisible, setNFTModalVisible] = useState(false); // 正确的命名
   const [selectedNFT, setSelectedNFT] = useState(null);
   const [sendModalVisible, setSendModalVisible] = useState(false);
   const [recipientAddress, setRecipientAddress] = useState("");
+  const styles = MyColdWalletScreenStyles(isDarkMode);
+
+  const handleAddressChange = (text) => {
+    setInputAddress(text);
+    const network = detectNetwork(text);
+    setDetectedNetwork(network);
+    setIsAddressValid(network !== "Invalid address"); // Update address validity
+  };
 
   const handleOpenAddressBook = () => {
-    console.log("Open Address Book");
+    setSendModalVisible(false); // 先关闭 sendModal
+    setTimeout(() => {
+      setAddressBookVisible(true); // 延迟打开 AddressBookModal，防止 UI 闪烁
+    }, 300);
+  };
+
+  const handleAddressSelect = (selectedAddress) => {
+    setRecipientAddress(selectedAddress); // 更新收款地址
+    setAddressBookVisible(false); // 关闭 AddressBookModal
+    setTimeout(() => {
+      setSendModalVisible(true); // 重新打开 sendModal
+    }, 300);
   };
 
   const handlePreview = () => {
@@ -925,7 +947,7 @@ const WalletContent = (props) => {
                     ]}
                     placeholder={t("Enter Address")}
                     placeholderTextColor={isDarkMode ? "#ffffff" : "#21201E"}
-                    //    onChangeText={handleAddressChange}
+                    onChangeText={handleAddressChange}
                     //   value={inputAddress}
                     autoFocus={true}
                   />
@@ -934,7 +956,7 @@ const WalletContent = (props) => {
                     size={28}
                     color={isDarkMode ? "#ffffff" : "#000"}
                     style={{ marginLeft: 6, alignSelf: "center", top: 10 }}
-                    //   onPress={handleIconPress}
+                    onPress={handleOpenAddressBook} // 绑定点击事件
                   />
                 </View>
                 <TouchableOpacity
@@ -957,6 +979,13 @@ const WalletContent = (props) => {
           </TouchableWithoutFeedback>
         </KeyboardAvoidingView>
       </Modal>
+      <AddressBookModal
+        visible={isAddressBookVisible}
+        onClose={() => setAddressBookVisible(false)}
+        onSelect={handleAddressSelect}
+        styles={styles}
+        isDarkMode={isDarkMode}
+      />
     </View>
   );
 };
