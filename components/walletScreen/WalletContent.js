@@ -1002,74 +1002,76 @@ const WalletContent = (props) => {
         visible={previewModalVisible}
         onRequestClose={() => setPreviewModalVisible(false)}
       >
-        <KeyboardAvoidingView
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
-          style={{ flex: 1 }}
-        >
-          <TouchableWithoutFeedback
-            onPress={() => setPreviewModalVisible(false)}
-          >
-            <BlurView intensity={10} style={styles.centeredView}>
+        <TouchableWithoutFeedback onPress={() => setPreviewModalVisible(false)}>
+          <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
+            <View
+              style={WalletScreenStyle.inputAddressModal}
+              onStartShouldSetResponder={(e) => e.stopPropagation()}
+            >
+              {/* 标题栏 */}
               <View
-                style={styles.inputAddressModal}
-                onStartShouldSetResponder={(e) => e.stopPropagation()}
+                style={{
+                  width: "100%",
+                  alignItems: "center",
+                }}
               >
-                {/* 标题栏 */}
-                <View style={{ width: "100%", alignItems: "center" }}>
-                  <Text style={styles.modalTitle}>
-                    {props.t("Preview Transaction")}
-                  </Text>
-                </View>
-
-                {/* NFT 预览信息 */}
-                <View>
-                  <Image
-                    source={{ uri: selectedNFT?.image }}
-                    style={styles.nftImage}
-                  />
-                  <ScrollView style={{ height: 80 }}>
-                    <Text style={styles.sendNftText}>
-                      {selectedNFT?.name || "NFT Name"}
-                    </Text>
-                    <Text style={styles.sendNftText}>
-                      {props.t("Token ID")}: {selectedNFT?.tokenId || "N/A"}
-                    </Text>
-                  </ScrollView>
-                </View>
-
-                {/* 收款地址 */}
-                <Text style={styles.label}>{props.t("Recipient Address")}</Text>
-                <View style={styles.inputContainer}>
-                  <Text style={styles.input}>
-                    {recipientAddress || props.t("No Address Selected")}
-                  </Text>
-                </View>
-
-                {/* 确认发送按钮 */}
-                <TouchableOpacity
-                  style={[styles.submitButton]}
-                  disabled={!recipientAddress}
-                  onPress={() => {
-                    console.log("Confirming Transaction...");
-                    setPreviewModalVisible(false);
-                  }}
-                >
-                  <Text style={styles.ButtonText}>
-                    {props.t("Confirm & Send")}
-                  </Text>
-                </TouchableOpacity>
-
-                {/* 关闭按钮 */}
-                <TouchableOpacity
-                  style={[styles.Button]}
-                  onPress={() => setPreviewModalVisible(false)}
-                >
-                  <Text style={styles.ButtonText}>{props.t("Close")}</Text>
-                </TouchableOpacity>
+                <Text style={WalletScreenStyle.modalTitle}>
+                  {props.t("Preview Transaction")}
+                </Text>
               </View>
-            </BlurView>
-          </TouchableWithoutFeedback>
-        </KeyboardAvoidingView>
+
+              {/* NFT 预览信息 */}
+              <View>
+                <Image
+                  source={{ uri: selectedNFT?.image }}
+                  style={WalletScreenStyle.nftImage}
+                />
+                <ScrollView
+                  contentContainerStyle={WalletScreenStyle.scrollViewContent} // ✅ 修正此处
+                >
+                  <Text style={WalletScreenStyle.sendNftText}>
+                    {selectedNFT?.name || props.t("NFT Name")}
+                  </Text>
+                  <Text style={WalletScreenStyle.sendNftText}>
+                    {props.t("Token ID")}:{" "}
+                    {selectedNFT?.tokenId || props.t("N/A")}
+                  </Text>
+                </ScrollView>
+              </View>
+
+              {/* 收款地址 */}
+              <Text style={WalletScreenStyle.label}>
+                {props.t("Recipient Address")}
+              </Text>
+
+              <Text>{recipientAddress || props.t("No Address Selected")}</Text>
+
+              {/* 确认发送按钮 */}
+              <TouchableOpacity
+                style={WalletScreenStyle.submitButton}
+                disabled={!recipientAddress}
+                onPress={() => {
+                  console.log("Confirming Transaction...");
+                  setPreviewModalVisible(false);
+                }}
+              >
+                <Text style={WalletScreenStyle.ButtonText}>
+                  {props.t("Send")}
+                </Text>
+              </TouchableOpacity>
+
+              {/* 关闭按钮 */}
+              <TouchableOpacity
+                style={WalletScreenStyle.Button}
+                onPress={() => setPreviewModalVisible(false)}
+              >
+                <Text style={WalletScreenStyle.ButtonText}>
+                  {props.t("Close")}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </BlurView>
+        </TouchableWithoutFeedback>
       </Modal>
     </View>
   );
