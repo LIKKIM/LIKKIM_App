@@ -52,7 +52,6 @@ import { prefixToShortName } from "../config/chainPrefixes";
 import checkAndReqPermission from "../utils/BluetoothPermissions"; // Request Bluetooth permission on Android
 import { handlePinSubmit } from "../utils/handlePinSubmit";
 import { decrypt } from "../utils/decrypt";
-import { handleDevicePress } from "../utils/handleDevicePress";
 
 let PermissionsAndroid;
 if (Platform.OS === "android") {
@@ -138,17 +137,7 @@ function MyColdWalletScreen({ onDarkModeChange }) {
     { id: "1", name: "Home", address: "0x1234..." },
     { id: "2", name: "Office", address: "0x5678..." },
   ]);
-  const onDevicePressHandler = async (device) => {
-    await handleDevicePress(device, {
-      setReceivedAddresses,
-      setVerificationStatus,
-      setSelectedDevice,
-      setModalVisible,
-      setBleVisible,
-      setPinModalVisible,
-      monitorVerificationCode,
-    });
-  };
+
   const handleAddAddress = () => {
     console.log("Add Address button clicked");
   };
@@ -601,6 +590,54 @@ function MyColdWalletScreen({ onDarkModeChange }) {
     setModalVisible(false);
   };
 
+  const handleDevicePress = async (device) => {
+    setReceivedAddresses({});
+    setVerificationStatus(null);
+    setSelectedDevice(device);
+    setModalVisible(false);
+    try {
+      await device.connect();
+      await device.discoverAllServicesAndCharacteristics();
+      console.log("Device connected and services discovered");
+
+      const sendDecryptedValue = async (decryptedValue) => {
+        try {
+          const message = `ID:${decryptedValue}`;
+          const bufferMessage = Buffer.from(message, "utf-8");
+          const base64Message = bufferMessage.toString("base64");
+          await device.writeCharacteristicWithResponseForService(
+            serviceUUID,
+            writeCharacteristicUUID,
+            base64Message
+          );
+          console.log(`Sent decrypted value: ${message}`);
+        } catch (error) {
+          console.log("Error sending decrypted value:", error);
+        }
+      };
+
+      monitorVerificationCode(device, sendDecryptedValue);
+      setTimeout(async () => {
+        try {
+          const requestString = "request";
+          const bufferRequestString = Buffer.from(requestString, "utf-8");
+          const base64requestString = bufferRequestString.toString("base64");
+          await device.writeCharacteristicWithResponseForService(
+            serviceUUID,
+            writeCharacteristicUUID,
+            base64requestString
+          );
+          console.log("Sent 'request'");
+        } catch (error) {
+          console.log("Error sending 'request':", error);
+        }
+      }, 200);
+      setPinModalVisible(true);
+    } catch (error) {
+      console.log("Error connecting or sending command to device:", error);
+    }
+  };
+
   const handleDisconnectDevice = async (device) => {
     try {
       const isConnected = await device.isConnected();
@@ -1014,7 +1051,7 @@ function MyColdWalletScreen({ onDarkModeChange }) {
         devices={devices}
         isScanning={isScanning}
         iconColor={blueToothColor}
-        handleDevicePress={onDevicePressHandler}
+        handleDevicePress={handleDevicePress}
         onCancel={handleCancel}
         verifiedDevices={verifiedDevices}
         MyColdWalletScreenStyle={MyColdWalletScreenStyle}
