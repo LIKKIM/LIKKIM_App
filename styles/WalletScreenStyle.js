@@ -260,6 +260,14 @@ const WalletScreenStyles = (isDarkMode) => {
       marginBottom: 10,
     },
 
+    sendNftText: {
+      fontSize: 14,
+      color: secondTextColor,
+      textAlign: "center",
+      marginBottom: 20,
+      flexWrap: "wrap",
+    },
+
     // Subtitle text styles
     subtitleText: {
       fontSize: 14,
@@ -630,6 +638,17 @@ const WalletScreenStyles = (isDarkMode) => {
       maxHeight: 620,
     },
 
+    inputAddressModal: {
+      width: "90%",
+      backgroundColor: modalBackgroundColor,
+      borderRadius: 20,
+      padding: 30,
+      flex: 1,
+      justifyContent: "space-between",
+
+      maxHeight: 400,
+    },
+
     pendingModalView: {
       margin: 20,
       width: "90%",
@@ -947,6 +966,15 @@ const WalletScreenStyles = (isDarkMode) => {
       color: textColor,
       backgroundColor: isDarkMode ? "#21201E" : "#E5E1E9",
       textAlignVertical: "top",
+    },
+    input: {
+      backgroundColor: inputBackgroundColor,
+      padding: 10,
+      marginTop: 20,
+      justifyContent: "center",
+      borderRadius: 10,
+      height: 60,
+      alignItems: "center",
     },
   });
 };

@@ -19,6 +19,7 @@ import {
 } from "react-native";
 import { BlurView } from "expo-blur";
 import { LinearGradient } from "expo-linear-gradient";
+import Icon from "react-native-vector-icons/MaterialIcons";
 
 const SkeletonImage = ({ source, style, resizeMode }) => {
   const [loaded, setLoaded] = useState(false);
@@ -875,61 +876,67 @@ const WalletContent = (props) => {
       >
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
-          style={WalletScreenStyle.centeredView}
+          style={{ flex: 1 }}
         >
           <TouchableWithoutFeedback onPress={() => setSendModalVisible(false)}>
             <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
               <View
-                style={WalletScreenStyle.NFTmodalView}
+                style={WalletScreenStyle.inputAddressModal}
                 onStartShouldSetResponder={(e) => e.stopPropagation()}
               >
                 {/* 标题栏 */}
-                <View style={WalletScreenStyle.modalHeader}>
+                <View
+                  style={{
+                    width: "100%",
+                    alignItems: "center",
+                  }}
+                >
                   <Text style={WalletScreenStyle.modalTitle}>
                     {t("Send NFT")}
                   </Text>
                 </View>
 
                 {/* NFT 信息 */}
-                <View style={WalletScreenStyle.nftCard}>
+                <View>
                   <Image
                     source={{ uri: selectedNFT?.image }}
                     style={WalletScreenStyle.nftImage}
                   />
-                  <View style={WalletScreenStyle.nftInfo}>
-                    <Text style={WalletScreenStyle.nftName}>
-                      {selectedNFT?.name || "NFT Name"}
-                    </Text>
-                    <Text style={WalletScreenStyle.nftId}>
-                      {t("Token ID")}: {selectedNFT?.tokenId || "N/A"}
-                    </Text>
-                  </View>
+
+                  <Text style={WalletScreenStyle.sendNftText}>
+                    {selectedNFT?.name || "NFT Name"}
+                  </Text>
+                  <Text style={WalletScreenStyle.sendNftText}>
+                    {t("Token ID")}: {selectedNFT?.tokenId || "N/A"}
+                  </Text>
                 </View>
 
-                {/* 收款地址输入 */}
-                <Text style={WalletScreenStyle.label}>{t("Recipient")}</Text>
-                <View style={WalletScreenStyle.inputContainer}>
+                <View
+                  style={{
+                    width: "100%",
+                    flexDirection: "row",
+                    alignItems: "center",
+                  }}
+                >
                   <TextInput
-                    style={WalletScreenStyle.input}
-                    placeholder={t("Enter Address or Domain")}
-                    placeholderTextColor="#888"
-                    value={recipientAddress}
-                    onChangeText={setRecipientAddress}
+                    style={[
+                      WalletScreenStyle.input,
+                      { flex: 1, color: isDarkMode ? "#ffffff" : "#000" },
+                    ]}
+                    placeholder={t("Enter Address")}
+                    placeholderTextColor={isDarkMode ? "#ffffff" : "#21201E"}
+                    //    onChangeText={handleAddressChange}
+                    //   value={inputAddress}
+                    autoFocus={true}
                   />
-
-                  {/* 选择地址簿 */}
-                  <TouchableOpacity
-                    style={WalletScreenStyle.iconButton}
-                    onPress={handleOpenAddressBook}
-                  >
-                    <Image
-                      //    source={require("../../assets/icons/address-book.png")}
-                      style={WalletScreenStyle.icon}
-                    />
-                  </TouchableOpacity>
+                  <Icon
+                    name="portrait"
+                    size={28}
+                    color={isDarkMode ? "#ffffff" : "#000"}
+                    style={{ marginLeft: 6, alignSelf: "center", top: 10 }}
+                    //   onPress={handleIconPress}
+                  />
                 </View>
-
-                {/* 预览按钮 */}
                 <TouchableOpacity
                   style={[WalletScreenStyle.submitButton]}
                   disabled={!recipientAddress}
