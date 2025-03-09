@@ -1173,7 +1173,7 @@ function WalletScreen({ route, navigation }) {
       }
     }
   };
-
+  // WalletScreen.js handlePinSubmit
   const handlePinSubmit = async () => {
     setPinModalVisible(false);
     setVerificationModalVisible(false);
