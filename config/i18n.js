@@ -217,6 +217,7 @@ i18n
           "Search Address": "Search Address",
           "No device paired. Please pair with device first.":
             "No device paired. Please pair with device first.",
+          All: "All",
         },
       },
       zh: {
@@ -416,6 +417,7 @@ i18n
           "Search Address": "搜索地址",
           "No device paired. Please pair with device first.":
             "未配对设备。请先与设备配对。",
+          All: "全部",
         },
       },
       "zh-TW": {
@@ -621,6 +623,7 @@ i18n
           "Search Address": "搜尋地址",
           "No device paired. Please pair with device first.":
             "未配對設備。請先與設備配對。",
+          All: "全部",
         },
       },
       fr: {
@@ -861,6 +864,7 @@ i18n
           "Search Address": "Rechercher une adresse",
           "No device paired. Please pair with device first.":
             "Aucun appareil apparié. Veuillez d'abord appairer un appareil.",
+          All: "Tous",
         },
       },
       es: {
@@ -1076,6 +1080,7 @@ i18n
           "Search Address": "Buscar dirección",
           "No device paired. Please pair with device first.":
             "Ningún dispositivo emparejado. Por favor, empareje con un dispositivo primero.",
+          All: "Todos",
         },
       },
       ar: {
@@ -1283,6 +1288,7 @@ i18n
           "Search Address": "البحث عن عنوان",
           "No device paired. Please pair with device first.":
             "لا يوجد جهاز مقترن. يرجى إقران الجهاز أولاً.",
+          All: "الكل",
         },
       },
       ja: {
@@ -1518,6 +1524,7 @@ i18n
           "Search Address": "アドレスを検索",
           "No device paired. Please pair with device first.":
             "ペアリングされたデバイスがありません。まずデバイスとペアリングしてください。",
+          All: "すべて",
         },
       },
       ru: {
@@ -1732,6 +1739,7 @@ i18n
           "Search Address": "Поиск адреса",
           "No device paired. Please pair with device first.":
             "Нет подключенных устройств. Пожалуйста, сначала выполните сопряжение с устройством.",
+          All: "Все",
         },
       },
       ko: {
@@ -1940,6 +1948,7 @@ i18n
           "Search Address": "주소 검색",
           "No device paired. Please pair with device first.":
             "페어링된 장치가 없습니다. 먼저 장치를 페어링하십시오.",
+          All: "모두",
         },
       },
       pt: {
@@ -2154,6 +2163,7 @@ i18n
           "Search Address": "Pesquisar Endereço",
           "No device paired. Please pair with device first.":
             "Nenhum dispositivo emparelhado. Por favor, emparelhe com um dispositivo primeiro.",
+          All: "Todos",
         },
       },
       "pt-BR": {
@@ -2385,6 +2395,7 @@ i18n
           "Search Address": "Pesquisar Endereço",
           "No device paired. Please pair with device first.":
             "Nenhum dispositivo emparelhado. Por favor, emparelhe com um dispositivo primeiro.",
+          All: "Todos",
         },
       },
       it: {
@@ -2602,6 +2613,7 @@ i18n
           "Search Address": "Cerca indirizzo",
           "No device paired. Please pair with device first.":
             "Nessun dispositivo associato. Per favore, accoppia prima un dispositivo.",
+          All: "Tutti",
         },
       },
       de: {
@@ -2820,6 +2832,7 @@ i18n
           "Search Address": "Adresse suchen",
           "No device paired. Please pair with device first.":
             "Kein Gerät gekoppelt. Bitte koppeln Sie zuerst ein Gerät.",
+          All: "Alle",
         },
       },
       hi: {
@@ -3036,6 +3049,7 @@ i18n
           "Search Address": "पता खोजें",
           "No device paired. Please pair with device first.":
             "कोई डिवाइस पेयर नहीं है। कृपया पहले डिवाइस के साथ पेयर करें।",
+          All: "सभी",
         },
       },
       mn: {
@@ -3261,6 +3275,7 @@ i18n
           "Search Address": "Хаяг хайх",
           "No device paired. Please pair with device first.":
             "Хосуулагдсан төхөөрөмж байхгүй байна. Эхлээд төхөөрөмжтэй хослоорой.",
+          All: "Бүгд",
         },
       },
       th: {
@@ -3468,6 +3483,7 @@ i18n
           "Search Address": "ค้นหาที่อยู่",
           "No device paired. Please pair with device first.":
             "ยังไม่ได้จับคู่กับอุปกรณ์ใด ๆ กรุณาจับคู่กับอุปกรณ์ก่อน",
+          All: "ทั้งหมด",
         },
       },
       uk: {
@@ -3680,6 +3696,7 @@ i18n
           "Search Address": "Пошук адреси",
           "No device paired. Please pair with device first.":
             "Пристрій не підключено. Будь ласка, спочатку виконайте сполучення з пристроєм.",
+          All: "Всі",
         },
       },
       vi: {
@@ -3895,6 +3912,7 @@ i18n
           "Search Address": "Tìm kiếm địa chỉ",
           "No device paired. Please pair with device first.":
             "Chưa có thiết bị được ghép nối. Vui lòng ghép nối thiết bị trước.",
+          All: "Tất cả",
         },
       },
       id: {
@@ -4110,6 +4128,7 @@ i18n
           "Search Address": "Cari Alamat",
           "No device paired. Please pair with device first.":
             "Tidak ada perangkat yang dipasangkan. Harap pasangkan perangkat terlebih dahulu.",
+          All: "Semua",
         },
       },
       tl: {
@@ -4328,6 +4347,7 @@ i18n
           "Search Address": "Maghanap ng address",
           "No device paired. Please pair with device first.":
             "Walang naka-pair na device. Pakipair muna ang device.",
+          All: "Lahat",
         },
       },
       bn: {
@@ -4547,6 +4567,7 @@ i18n
           "Search Address": "ঠিকানা খুঁজুন",
           "No device paired. Please pair with device first.":
             "কোনও ডিভাইস জোড়া করা হয়নি। প্রথমে ডিভাইসের সাথে জোড়া করুন।",
+          All: "সব",
         },
       },
     },

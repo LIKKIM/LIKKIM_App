@@ -102,7 +102,7 @@ const AddCryptoModal = ({
                   selectedChain === "All" && styles.selectedChainTagText,
                 ]}
               >
-                All
+                {t("All")}
               </Text>
             </TouchableOpacity>
             {[...new Set(chainCategories.map((chain) => chain.chain))].map(
