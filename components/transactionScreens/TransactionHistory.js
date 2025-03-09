@@ -93,16 +93,13 @@ const TransactionHistory = ({
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
-          position: "relative",
-          marginBottom: 10,
-
           width: "100%",
         }}
       >
         <Text
           style={[
             TransactionsScreenStyle.historyTitle,
-            { position: "relative", left: 0, top: 0 },
+            { textAlign: "left", flex: 1 },
           ]}
         >
           {t("Transaction History")}
@@ -111,7 +108,14 @@ const TransactionHistory = ({
           onPress={() =>
             shouldDisplayChainFilterModal && setChainFilterModalVisible(true)
           }
-          style={{ flexDirection: "row", alignItems: "center" }}
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "flex-end",
+            flexShrink: 1,
+            flexWrap: "wrap",
+            marginLeft: 8,
+          }}
         >
           {selectedChain === "All" ? (
             <Image
@@ -142,7 +146,13 @@ const TransactionHistory = ({
                 />
               ))
           )}
-          <Text style={{ color: isDarkMode ? "#FFFFFF" : "#000000" }}>
+          <Text
+            style={{
+              color: isDarkMode ? "#FFFFFF" : "#000000",
+              textAlign: "right",
+              flexShrink: 1,
+            }}
+          >
             {selectedChain === "All"
               ? t("All Chains")
               : transactionChainCards.find(
