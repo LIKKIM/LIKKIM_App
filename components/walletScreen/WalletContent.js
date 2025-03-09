@@ -133,6 +133,7 @@ const WalletContent = (props) => {
   const [nftData, setNftData] = useState(null);
   const [NFTmodalVisible, setNFTModalVisible] = useState(false); // 正确的命名
   const [selectedNFT, setSelectedNFT] = useState(null);
+  const [sendModalVisible, setSendModalVisible] = useState(false);
 
   const toggleModal = () => {
     setNFTModalVisible(!NFTmodalVisible); // 正确的使用
@@ -647,7 +648,7 @@ const WalletContent = (props) => {
                   padding: 10,
                   shadowColor: "#000",
                   shadowOffset: { width: 0, height: 2 },
-                  shadowOpacity: 0.2,
+                  shadowOpacity: 0.05,
                   shadowRadius: 4,
                   elevation: 2,
                 }}
@@ -839,7 +840,9 @@ const WalletContent = (props) => {
                     { flex: 1, marginRight: 8 },
                   ]}
                   onPress={() => {
-                    console.log("Send clicked");
+                    setNFTModalVisible(false); // 先关闭当前 NFT modal
+
+                    setSendModalVisible(true);
                   }}
                 >
                   <Text style={WalletScreenStyle.ButtonText}>{t("Send")}</Text>
@@ -852,10 +855,34 @@ const WalletContent = (props) => {
                   }}
                 >
                   <Text style={WalletScreenStyle.ButtonText}>
-                    {t("收藏到冷钱包")}
+                    {t("Save To ColdWallet")}
                   </Text>
                 </TouchableOpacity>
               </View>
+            </View>
+          </BlurView>
+        </TouchableWithoutFeedback>
+      </Modal>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={sendModalVisible}
+        onRequestClose={() => setSendModalVisible(false)}
+      >
+        <TouchableWithoutFeedback onPress={() => setSendModalVisible(false)}>
+          <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
+            <View
+              style={WalletScreenStyle.NFTmodalView}
+              onStartShouldSetResponder={(e) => e.stopPropagation()}
+            >
+              <Text style={WalletScreenStyle.modalTitle}>{t("Send NFT")}</Text>
+              {/* 可以在这里添加 NFT 发送表单 */}
+              <TouchableOpacity
+                style={[WalletScreenStyle.Button, { marginTop: 16 }]}
+                onPress={() => setSendModalVisible(false)}
+              >
+                <Text style={WalletScreenStyle.ButtonText}>{t("Close")}</Text>
+              </TouchableOpacity>
             </View>
           </BlurView>
         </TouchableWithoutFeedback>
