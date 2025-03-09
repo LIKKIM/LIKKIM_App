@@ -39,7 +39,7 @@ const WalletContent = (props) => {
 
     try {
       const response = await fetch(
-        "https://bt.likkim.com/api/nfts/query-address-balance-fills",
+        "https://bt.likkim.com/api/nfts/query-address- balance-fills",
         {
           method: "POST",
           headers: {
@@ -533,6 +533,8 @@ const WalletContent = (props) => {
         contentContainerStyle={{
           flexDirection: "row",
           flexWrap: "wrap",
+          justifyContent: "center",
+          alignItems: "center",
         }}
         style={{
           width: "100%",
@@ -552,7 +554,6 @@ const WalletContent = (props) => {
             >
               <View
                 style={{
-                  flex: 1,
                   backgroundColor: isDarkMode ? "#333" : "#fff",
                   borderRadius: 8,
                   padding: 10,
