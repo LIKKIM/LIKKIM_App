@@ -592,9 +592,10 @@ function MyColdWalletScreen({ onDarkModeChange }) {
 
   const handleDevicePress = async (device) => {
     if (typeof device !== "object" || typeof device.connect !== "function") {
-      console.log("Invalid device object, cannot connect:", device);
+      console.log("Invalid device object, cannot connect device:", device);
       return;
     }
+
     setReceivedAddresses({});
     setVerificationStatus(null);
     setSelectedDevice(device);
@@ -602,43 +603,49 @@ function MyColdWalletScreen({ onDarkModeChange }) {
     try {
       await device.connect();
       await device.discoverAllServicesAndCharacteristics();
-      console.log("Device connected and services discovered");
+      console.log(
+        "Device connected and all services and characteristics discovered"
+      );
 
       const sendDecryptedValue = async (decryptedValue) => {
         try {
           const message = `ID:${decryptedValue}`;
           const bufferMessage = Buffer.from(message, "utf-8");
           const base64Message = bufferMessage.toString("base64");
+
           await device.writeCharacteristicWithResponseForService(
             serviceUUID,
             writeCharacteristicUUID,
             base64Message
           );
-          console.log(`Sent decrypted value: ${message}`);
+          console.log(`Decrypted value sent: ${message}`);
         } catch (error) {
           console.log("Error sending decrypted value:", error);
         }
       };
 
       monitorVerificationCode(device, sendDecryptedValue);
+
       setTimeout(async () => {
         try {
           const requestString = "request";
           const bufferRequestString = Buffer.from(requestString, "utf-8");
           const base64requestString = bufferRequestString.toString("base64");
+
           await device.writeCharacteristicWithResponseForService(
             serviceUUID,
             writeCharacteristicUUID,
             base64requestString
           );
-          console.log("Sent 'request'");
+          console.log("'request' string sent");
         } catch (error) {
           console.log("Error sending 'request':", error);
         }
       }, 200);
+
       setPinModalVisible(true);
     } catch (error) {
-      console.log("Error connecting or sending command to device:", error);
+      console.log("Device connection or command send error:", error);
     }
   };
 
