@@ -67,10 +67,67 @@ const WalletContent = (props) => {
     }
   };
 
+  // 查询 NFT 详情的函数
+  const queryNFTDetail = async (chain, tokenContractAddress, tokenId) => {
+    const detailRequestBody = {
+      chain,
+      tokenContractAddress,
+      tokenId,
+      type: "okx",
+    };
+
+    // 打印详情请求数据
+    console.log("Query NFT Details Request:", detailRequestBody);
+
+    try {
+      const response = await fetch(
+        "https://bt.likkim.com/api/nfts/query-nft-details",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(detailRequestBody),
+        }
+      );
+
+      // 先获取响应的文本内容
+      const responseText = await response.text();
+      if (!responseText) {
+        console.error("Empty response for NFT details", detailRequestBody);
+        return null;
+      }
+
+      // 尝试解析 JSON
+      const json = JSON.parse(responseText);
+      console.log("NFT Detail Response:", json);
+      return json;
+    } catch (error) {
+      console.error("Error querying NFT details", error);
+      return null;
+    }
+  };
+
   // 在组件挂载时调用 NFT 数据接口
   useEffect(() => {
     fetchNFTData();
   }, []);
+
+  // 当 nftData 更新后，利用返回的值请求详情
+  useEffect(() => {
+    if (
+      nftData &&
+      nftData.code === "0" &&
+      nftData.data &&
+      Array.isArray(nftData.data.list)
+    ) {
+      // 例如：对每个 NFT 调用详情接口
+      nftData.data.list.forEach((nft) => {
+        // 此处传入的 chain 固定为 "okc"，tokenContractAddress 和 tokenId 从返回值中获取
+        queryNFTDetail("okc", nft.tokenContractAddress, nft.tokenId);
+      });
+    }
+  }, [nftData]);
 
   // 从 props 中解构需要使用的变量和函数
   const {
@@ -444,7 +501,7 @@ const WalletContent = (props) => {
       style={{
         position: "absolute",
         top: 0,
-        width: "90%", // 使用总宽度的96%
+        width: "90%",
       }}
     >
       {cryptoCards.length > 0 && !modalVisible && (
@@ -466,7 +523,7 @@ const WalletContent = (props) => {
           flexWrap: "wrap",
         }}
         style={{
-          width: "100%", // 同样使用百分比宽度
+          width: "100%",
           height: 590,
           borderRadius: 8,
         }}
@@ -476,12 +533,11 @@ const WalletContent = (props) => {
         nftData.data &&
         Array.isArray(nftData.data.list) ? (
           nftData.data.list.map((nft, index) => (
-            // 使用 width: "50%" 表示每个卡片占父容器宽度的一半
             <View
               key={index}
               style={{
                 width: "50%",
-                padding: 4, // 如果需要间距可设置 padding
+                padding: 4,
               }}
             >
               <View
@@ -490,7 +546,6 @@ const WalletContent = (props) => {
                   backgroundColor: isDarkMode ? "#333" : "#fff",
                   borderRadius: 8,
                   padding: 10,
-                  // 可添加阴影等其他样式
                   shadowColor: "#000",
                   shadowOffset: { width: 0, height: 2 },
                   shadowOpacity: 0.2,
