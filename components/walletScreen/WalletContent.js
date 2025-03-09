@@ -10,11 +10,17 @@ import {
   RefreshControl,
   TouchableHighlight,
   ImageBackground,
+  Modal,
 } from "react-native";
+import { BlurView } from "expo-blur";
 
 const WalletContent = (props) => {
   const [nftData, setNftData] = useState(null);
+  const [NFTmodalVisible, setNFTModalVisible] = useState(false);
 
+  const toggleModal = () => {
+    setNFTModalVisible(!NFTmodalVisible);
+  };
   // 请求 NFT 数据的函数
   const fetchNFTData = async () => {
     const requestBody = {
@@ -535,6 +541,7 @@ const WalletContent = (props) => {
           nftData.data.list.map((nft, index) => (
             <TouchableOpacity
               key={index}
+              onPress={toggleModal}
               style={{
                 width: "50%",
                 padding: 4,
@@ -608,6 +615,28 @@ const WalletContent = (props) => {
           </Text>
         )}
       </ScrollView>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={NFTmodalVisible}
+        onRequestClose={toggleModal}
+      >
+        <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
+          <View style={WalletScreenStyle.modalView}>
+            <Text style={WalletScreenStyle.modalTitle}>
+              Here is the NFT content
+            </Text>
+
+            {/* Close button with the desired styles */}
+            <TouchableOpacity
+              onPress={toggleModal}
+              style={WalletScreenStyle.cancelButtonLookingFor}
+            >
+              <Text style={WalletScreenStyle.cancelButtonText}>Close</Text>
+            </TouchableOpacity>
+          </View>
+        </BlurView>
+      </Modal>
     </View>
   );
 };
