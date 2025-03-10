@@ -9,6 +9,7 @@ import {
   KeyboardAvoidingView,
   Image,
   Platform,
+  TouchableWithoutFeedback,
 } from "react-native";
 import { BlurView } from "expo-blur";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -98,7 +99,7 @@ const SwapModal = ({
     console.log("获取实时价格");
     console.log(selectedFromToken);
     console.warn(
-      `CALC::FROM:${selectedFromToken}, TO:${selectedToToken}, AMOUNT:${fromValue}}`
+      `CALC::FROM:${selectedFromToken}, TO:${selectedToToken}, AMOUNT:${fromValue}`
     );
     let calcPrice = await ChangellyAPI.getExchangeAmount(
       selectedFromToken,
@@ -128,323 +129,330 @@ const SwapModal = ({
           behavior={Platform.OS === "ios" ? "padding" : "height"}
           style={TransactionsScreenStyle.centeredView}
         >
-          <BlurView intensity={10} style={TransactionsScreenStyle.centeredView}>
-            <View style={TransactionsScreenStyle.swapModalView}>
-              {/* From Section */}
-              <View style={{ zIndex: 20 }}>
-                <View style={{ alignItems: "flex-start", width: "100%" }}>
-                  <Text
-                    style={[
-                      TransactionsScreenStyle.modalTitle,
-                      { marginBottom: 6 },
-                    ]}
-                  >
-                    {t("From")}
-                  </Text>
-                  <View style={TransactionsScreenStyle.swapInputContainer}>
-                    <View
-                      style={{
-                        flex: 1,
-                        flexDirection: "column",
-                        alignItems: "flex-start",
-                        width: "100%",
-                      }}
+          <TouchableWithoutFeedback onPress={() => setSwapModalVisible(false)}>
+            <BlurView
+              intensity={10}
+              style={TransactionsScreenStyle.centeredView}
+            >
+              <View style={TransactionsScreenStyle.swapModalView}>
+                {/* From Section */}
+                <View style={{ zIndex: 20 }}>
+                  <View style={{ alignItems: "flex-start", width: "100%" }}>
+                    <Text
+                      style={[
+                        TransactionsScreenStyle.modalTitle,
+                        { marginBottom: 6 },
+                      ]}
                     >
-                      <TextInput
-                        style={[
-                          TransactionsScreenStyle.swapInput,
-                          {
-                            fontSize: 30,
-                            fontWeight: "bold",
-                            textAlign: "left",
-                          },
-                        ]}
-                        value={fromValue}
-                        onChangeText={setFromValue}
-                        placeholder={t("0.0")}
-                        placeholderTextColor="#aaa"
-                        keyboardType="numeric"
-                      />
-                      <Text
-                        style={[
-                          TransactionsScreenStyle.subtitleText,
-                          {
-                            textAlign: "left",
-                            width: "100%",
-                            marginLeft: 12,
-                          },
-                        ]}
-                      >
-                        {`${currencySymbol}${displayedFromValue}`}
-                      </Text>
-                    </View>
-                    <TouchableOpacity
-                      style={TransactionsScreenStyle.tokenSelect}
-                      onPress={() =>
-                        setFromDropdownVisible(!fromDropdownVisible)
-                      }
-                    >
-                      {/* Display token icon and name */}
-                      {selectedFromToken ? (
-                        <>
-                          <Image
-                            source={
-                              getTokenDetails(selectedFromToken)?.chainIcon
-                            }
-                            style={{
-                              width: 20,
-                              height: 20,
-                              borderRadius: 10,
-                              marginRight: 8,
-                            }}
-                          />
-                          <Text style={TransactionsScreenStyle.subtitleText}>
-                            {getTokenDetails(selectedFromToken)?.name}
-                          </Text>
-                        </>
-                      ) : (
-                        <Text style={TransactionsScreenStyle.subtitleText}>
-                          {t("Select token")}
-                        </Text>
-                      )}
-                      <Icon name="arrow-drop-down" size={24} color="#ccc" />
-                    </TouchableOpacity>
-                  </View>
-                </View>
-
-                {/* From Dropdown */}
-                {fromDropdownVisible && (
-                  <ScrollView style={TransactionsScreenStyle.fromDropdown}>
-                    {initialAdditionalCryptos.map((chain, index) => (
-                      <TouchableOpacity
-                        key={`${chain.shortName}-${index}`}
-                        style={[
-                          TransactionsScreenStyle.chainTag,
-                          selectedFromToken === chain.shortName &&
-                            TransactionsScreenStyle.selectedChainTag,
-                        ]}
-                        onPress={() => {
-                          setSelectedFromToken(chain.shortName);
-                          setFromDropdownVisible(false);
+                      {t("From")}
+                    </Text>
+                    <View style={TransactionsScreenStyle.swapInputContainer}>
+                      <View
+                        style={{
+                          flex: 1,
+                          flexDirection: "column",
+                          alignItems: "flex-start",
+                          width: "100%",
                         }}
                       >
-                        <View
-                          style={{
-                            flexDirection: "row",
-                            alignItems: "center",
+                        <TextInput
+                          style={[
+                            TransactionsScreenStyle.swapInput,
+                            {
+                              fontSize: 30,
+                              fontWeight: "bold",
+                              textAlign: "left",
+                            },
+                          ]}
+                          value={fromValue}
+                          onChangeText={setFromValue}
+                          placeholder={t("0.0")}
+                          placeholderTextColor="#aaa"
+                          keyboardType="numeric"
+                        />
+                        <Text
+                          style={[
+                            TransactionsScreenStyle.subtitleText,
+                            {
+                              textAlign: "left",
+                              width: "100%",
+                              marginLeft: 12,
+                            },
+                          ]}
+                        >
+                          {`${currencySymbol}${displayedFromValue}`}
+                        </Text>
+                      </View>
+                      <TouchableOpacity
+                        style={TransactionsScreenStyle.tokenSelect}
+                        onPress={() =>
+                          setFromDropdownVisible(!fromDropdownVisible)
+                        }
+                      >
+                        {/* Display token icon and name */}
+                        {selectedFromToken ? (
+                          <>
+                            <Image
+                              source={
+                                getTokenDetails(selectedFromToken)?.chainIcon
+                              }
+                              style={{
+                                width: 20,
+                                height: 20,
+                                borderRadius: 10,
+                                marginRight: 8,
+                              }}
+                            />
+                            <Text style={TransactionsScreenStyle.subtitleText}>
+                              {getTokenDetails(selectedFromToken)?.name}
+                            </Text>
+                          </>
+                        ) : (
+                          <Text style={TransactionsScreenStyle.subtitleText}>
+                            {t("Select token")}
+                          </Text>
+                        )}
+                        <Icon name="arrow-drop-down" size={24} color="#ccc" />
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+
+                  {/* From Dropdown */}
+                  {fromDropdownVisible && (
+                    <ScrollView style={TransactionsScreenStyle.fromDropdown}>
+                      {initialAdditionalCryptos.map((chain, index) => (
+                        <TouchableOpacity
+                          key={`${chain.shortName}-${index}`}
+                          style={[
+                            TransactionsScreenStyle.chainTag,
+                            selectedFromToken === chain.shortName &&
+                              TransactionsScreenStyle.selectedChainTag,
+                          ]}
+                          onPress={() => {
+                            setSelectedFromToken(chain.shortName);
+                            setFromDropdownVisible(false);
                           }}
                         >
-                          <Image
-                            source={chain.chainIcon}
+                          <View
                             style={{
-                              width: 20,
-                              height: 20,
-                              borderRadius: 15,
-                              marginRight: 10,
+                              flexDirection: "row",
+                              alignItems: "center",
                             }}
-                          />
-                          <Text
-                            style={[
-                              TransactionsScreenStyle.chainTagText,
-                              selectedFromToken === chain.shortName &&
-                                TransactionsScreenStyle.selectedChainTagText,
-                            ]}
                           >
-                            {chain.name}
-                          </Text>
-                        </View>
-                      </TouchableOpacity>
-                    ))}
-                  </ScrollView>
-                )}
-              </View>
-
-              {/* Swap Button */}
-              <TouchableOpacity
-                style={TransactionsScreenStyle.swapButton}
-                onPress={() => {
-                  // Swap values
-                  const tempValue = fromValue;
-                  setFromValue(toValue);
-                  setToValue(tempValue);
-
-                  // Swap selected tokens
-                  const tempToken = selectedFromToken;
-                  setSelectedFromToken(selectedToToken);
-                  setSelectedToToken(tempToken);
-                }}
-              >
-                <Icon name="swap-vert" size={24} color="#fff" />
-              </TouchableOpacity>
-
-              {/* To Section */}
-              <View style={{ zIndex: 10 }}>
-                <View style={{ alignItems: "flex-start", width: "100%" }}>
-                  <Text
-                    style={[
-                      TransactionsScreenStyle.modalTitle,
-                      { marginBottom: 6, marginTop: -32 },
-                    ]}
-                  >
-                    {t("To")}
-                  </Text>
-                  <View style={TransactionsScreenStyle.swapInputContainer}>
-                    <View
-                      style={{
-                        flex: 1,
-                        flexDirection: "column",
-                        alignItems: "flex-start",
-                        width: "100%",
-                      }}
-                    >
-                      <TextInput
-                        editable={false}
-                        style={[
-                          TransactionsScreenStyle.swapInput,
-                          {
-                            fontSize: 30,
-                            fontWeight: "bold",
-                            textAlign: "left",
-                          },
-                        ]}
-                        value={toValue}
-                        // onChangeText={setToValue}
-                        placeholder={t("0.0")}
-                        // placeholderTextColor="#aaa"
-                        keyboardType="numeric"
-                      />
-                      <Text
-                        style={[
-                          TransactionsScreenStyle.subtitleText,
-                          {
-                            textAlign: "left",
-                            width: "100%",
-                            marginLeft: 12,
-                          },
-                        ]}
-                      >
-                        {`${currencySymbol}${displayedToValue}`}
-                      </Text>
-                    </View>
-                    <TouchableOpacity
-                      style={TransactionsScreenStyle.tokenSelect}
-                      onPress={() => setToDropdownVisible(!toDropdownVisible)}
-                    >
-                      {/* Display token icon and name */}
-                      {selectedToToken ? (
-                        <>
-                          <Image
-                            source={getTokenDetails(selectedToToken)?.chainIcon}
-                            style={{
-                              width: 20,
-                              height: 20,
-                              borderRadius: 10,
-                              marginRight: 8,
-                            }}
-                          />
-                          <Text style={TransactionsScreenStyle.subtitleText}>
-                            {getTokenDetails(selectedToToken)?.name}
-                          </Text>
-                        </>
-                      ) : (
-                        <Text style={TransactionsScreenStyle.subtitleText}>
-                          {t("Select token")}
-                        </Text>
-                      )}
-                      <Icon name="arrow-drop-down" size={24} color="#ccc" />
-                    </TouchableOpacity>
-                  </View>
+                            <Image
+                              source={chain.chainIcon}
+                              style={{
+                                width: 20,
+                                height: 20,
+                                borderRadius: 15,
+                                marginRight: 10,
+                              }}
+                            />
+                            <Text
+                              style={[
+                                TransactionsScreenStyle.chainTagText,
+                                selectedFromToken === chain.shortName &&
+                                  TransactionsScreenStyle.selectedChainTagText,
+                              ]}
+                            >
+                              {chain.name}
+                            </Text>
+                          </View>
+                        </TouchableOpacity>
+                      ))}
+                    </ScrollView>
+                  )}
                 </View>
 
-                {/* To Dropdown */}
-                {toDropdownVisible && (
-                  <ScrollView style={TransactionsScreenStyle.toDropdown}>
-                    {initialAdditionalCryptos.map((chain, index) => (
-                      <TouchableOpacity
-                        key={`${chain.shortName}-${index}`}
-                        style={[
-                          TransactionsScreenStyle.chainTag,
-                          selectedToToken === chain.shortName &&
-                            TransactionsScreenStyle.selectedChainTag,
-                        ]}
-                        onPress={() => {
-                          setSelectedToToken(chain.shortName);
-                          setToDropdownVisible(false);
+                {/* Swap Button */}
+                <TouchableOpacity
+                  style={TransactionsScreenStyle.swapButton}
+                  onPress={() => {
+                    // Swap values
+                    const tempValue = fromValue;
+                    setFromValue(toValue);
+                    setToValue(tempValue);
+
+                    // Swap selected tokens
+                    const tempToken = selectedFromToken;
+                    setSelectedFromToken(selectedToToken);
+                    setSelectedToToken(tempToken);
+                  }}
+                >
+                  <Icon name="swap-vert" size={24} color="#fff" />
+                </TouchableOpacity>
+
+                {/* To Section */}
+                <View style={{ zIndex: 10 }}>
+                  <View style={{ alignItems: "flex-start", width: "100%" }}>
+                    <Text
+                      style={[
+                        TransactionsScreenStyle.modalTitle,
+                        { marginBottom: 6, marginTop: -32 },
+                      ]}
+                    >
+                      {t("To")}
+                    </Text>
+                    <View style={TransactionsScreenStyle.swapInputContainer}>
+                      <View
+                        style={{
+                          flex: 1,
+                          flexDirection: "column",
+                          alignItems: "flex-start",
+                          width: "100%",
                         }}
                       >
-                        <View
-                          style={{
-                            flexDirection: "row",
-                            alignItems: "center",
+                        <TextInput
+                          editable={false}
+                          style={[
+                            TransactionsScreenStyle.swapInput,
+                            {
+                              fontSize: 30,
+                              fontWeight: "bold",
+                              textAlign: "left",
+                            },
+                          ]}
+                          value={toValue}
+                          // onChangeText={setToValue}
+                          placeholder={t("0.0")}
+                          // placeholderTextColor="#aaa"
+                          keyboardType="numeric"
+                        />
+                        <Text
+                          style={[
+                            TransactionsScreenStyle.subtitleText,
+                            {
+                              textAlign: "left",
+                              width: "100%",
+                              marginLeft: 12,
+                            },
+                          ]}
+                        >
+                          {`${currencySymbol}${displayedToValue}`}
+                        </Text>
+                      </View>
+                      <TouchableOpacity
+                        style={TransactionsScreenStyle.tokenSelect}
+                        onPress={() => setToDropdownVisible(!toDropdownVisible)}
+                      >
+                        {/* Display token icon and name */}
+                        {selectedToToken ? (
+                          <>
+                            <Image
+                              source={
+                                getTokenDetails(selectedToToken)?.chainIcon
+                              }
+                              style={{
+                                width: 20,
+                                height: 20,
+                                borderRadius: 10,
+                                marginRight: 8,
+                              }}
+                            />
+                            <Text style={TransactionsScreenStyle.subtitleText}>
+                              {getTokenDetails(selectedToToken)?.name}
+                            </Text>
+                          </>
+                        ) : (
+                          <Text style={TransactionsScreenStyle.subtitleText}>
+                            {t("Select token")}
+                          </Text>
+                        )}
+                        <Icon name="arrow-drop-down" size={24} color="#ccc" />
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+
+                  {/* To Dropdown */}
+                  {toDropdownVisible && (
+                    <ScrollView style={TransactionsScreenStyle.toDropdown}>
+                      {initialAdditionalCryptos.map((chain, index) => (
+                        <TouchableOpacity
+                          key={`${chain.shortName}-${index}`}
+                          style={[
+                            TransactionsScreenStyle.chainTag,
+                            selectedToToken === chain.shortName &&
+                              TransactionsScreenStyle.selectedChainTag,
+                          ]}
+                          onPress={() => {
+                            setSelectedToToken(chain.shortName);
+                            setToDropdownVisible(false);
                           }}
                         >
-                          <Image
-                            source={chain.chainIcon}
+                          <View
                             style={{
-                              width: 20,
-                              height: 20,
-                              borderRadius: 15,
-                              marginRight: 10,
+                              flexDirection: "row",
+                              alignItems: "center",
                             }}
-                          />
-                          <Text
-                            style={[
-                              TransactionsScreenStyle.chainTagText,
-                              selectedToToken === chain.shortName &&
-                                TransactionsScreenStyle.selectedChainTagText,
-                            ]}
                           >
-                            {chain.name}
-                          </Text>
-                        </View>
-                      </TouchableOpacity>
-                    ))}
-                  </ScrollView>
-                )}
-              </View>
+                            <Image
+                              source={chain.chainIcon}
+                              style={{
+                                width: 20,
+                                height: 20,
+                                borderRadius: 15,
+                                marginRight: 10,
+                              }}
+                            />
+                            <Text
+                              style={[
+                                TransactionsScreenStyle.chainTagText,
+                                selectedToToken === chain.shortName &&
+                                  TransactionsScreenStyle.selectedChainTagText,
+                              ]}
+                            >
+                              {chain.name}
+                            </Text>
+                          </View>
+                        </TouchableOpacity>
+                      ))}
+                    </ScrollView>
+                  )}
+                </View>
 
-              <View>
-                {/* Confirm Button */}
-                <TouchableOpacity
-                  disabled={
-                    !(selectedFromToken && selectedToToken && fromValue)
-                  }
-                  onPress={handleConfirmSwap}
-                  style={[
-                    TransactionsScreenStyle.swapConfirmButton,
-                    {
-                      backgroundColor: !(
-                        selectedFromToken &&
-                        selectedToToken &&
-                        fromValue
-                      )
-                        ? disabledButtonBackgroundColor
-                        : TransactionsScreenStyle.swapConfirmButton
-                            .backgroundColor,
-                      marginBottom: 20,
-                    },
-                  ]}
-                >
-                  <Text style={TransactionsScreenStyle.submitButtonText}>
-                    {t("Confirm")}
-                  </Text>
-                </TouchableOpacity>
+                <View>
+                  {/* Confirm Button */}
+                  <TouchableOpacity
+                    disabled={
+                      !(selectedFromToken && selectedToToken && fromValue)
+                    }
+                    onPress={handleConfirmSwap}
+                    style={[
+                      TransactionsScreenStyle.swapConfirmButton,
+                      {
+                        backgroundColor: !(
+                          selectedFromToken &&
+                          selectedToToken &&
+                          fromValue
+                        )
+                          ? disabledButtonBackgroundColor
+                          : TransactionsScreenStyle.swapConfirmButton
+                              .backgroundColor,
+                        marginBottom: 20,
+                      },
+                    ]}
+                  >
+                    <Text style={TransactionsScreenStyle.submitButtonText}>
+                      {t("Confirm")}
+                    </Text>
+                  </TouchableOpacity>
 
-                {/* Close Button */}
-                <TouchableOpacity
-                  onPress={() => setSwapModalVisible(false)}
-                  style={[
-                    TransactionsScreenStyle.cancelButton,
-                    { marginBottom: 10 },
-                  ]}
-                >
-                  <Text style={TransactionsScreenStyle.cancelButtonText}>
-                    {t("Close")}
-                  </Text>
-                </TouchableOpacity>
+                  {/* Close Button */}
+                  <TouchableOpacity
+                    onPress={() => setSwapModalVisible(false)}
+                    style={[
+                      TransactionsScreenStyle.cancelButton,
+                      { marginBottom: 10 },
+                    ]}
+                  >
+                    <Text style={TransactionsScreenStyle.cancelButtonText}>
+                      {t("Close")}
+                    </Text>
+                  </TouchableOpacity>
+                </View>
               </View>
-            </View>
-          </BlurView>
+            </BlurView>
+          </TouchableWithoutFeedback>
         </KeyboardAvoidingView>
       </Modal>
     </>
