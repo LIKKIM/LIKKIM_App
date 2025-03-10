@@ -633,7 +633,7 @@ const WalletContent = (props) => {
       style={{
         position: "absolute",
         top: 0,
-        width: "90%",
+        width: 326,
       }}
     >
       {cryptoCards.length > 0 && !modalVisible && (
