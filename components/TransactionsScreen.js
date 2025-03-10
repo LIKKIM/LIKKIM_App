@@ -282,12 +282,6 @@ function TransactionsScreen() {
             pageSize: 10,
           };
 
-          // 打印发出的值
-          /*           console.log(
-            `发送请求 for ${crypto.queryChainName} ${crypto.address}, page ${pageNumber}:`,
-            postData
-          );
- */
           try {
             const response = await fetch(
               "https://bt.likkim.com/api/wallet/queryTransaction",
@@ -301,19 +295,13 @@ function TransactionsScreen() {
             );
             const data = await response.json();
 
-            // 打印返回的值
-            /*          console.log(
-              `返回数据 for ${crypto.queryChainName} ${crypto.address}, page ${pageNumber}:`,
-              data
-            ); */
-
             if (
               data &&
               data.code === "0" &&
               data.data &&
               data.data.length > 0
             ) {
-              // 只保留你关心的字段
+              // 只保留关心的字段
               const processedTransactions = data.data.map((tx) => ({
                 state: tx.state,
                 amount: tx.amount,
@@ -323,24 +311,12 @@ function TransactionsScreen() {
                 symbol: tx.symbol,
                 transactionTime: tx.transactionTime,
               }));
-              // 打印当前卡片处理后的返回结果
-              /*               console.log(
-                `处理后的返回结果 for ${crypto.queryChainName} ${crypto.address}:`,
-                processedTransactions
-              ); */
               allTransactions = allTransactions.concat(processedTransactions);
               pageNumber++;
             } else {
               continueFetching = false;
             }
           } catch (error) {
-            /*          console.log(
-              "查询交易历史失败, chain:",
-              crypto.queryChainName,
-              "address:",
-              crypto.address,
-              error
-            ); */
             continueFetching = false;
           }
         }
@@ -353,8 +329,12 @@ function TransactionsScreen() {
         (acc, transactions) => acc.concat(transactions),
         []
       );
-      //  console.log("所有卡片的交易历史结果:", mergedTransactions);
-      setTransactionHistory(mergedTransactions);
+
+      if (mergedTransactions.length > 0) {
+        setTransactionHistory(mergedTransactions);
+      } else {
+        console.log("API 返回空数组，保留原有的交易记录");
+      }
     }
   };
 
