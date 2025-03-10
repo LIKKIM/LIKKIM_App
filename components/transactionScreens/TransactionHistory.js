@@ -36,25 +36,29 @@ const TransactionHistory = ({
   // 根据 transactionHistory 计算每笔交易对应的链卡片
   const transactionChainCards = useMemo(() => {
     const map = new Map();
-    transactionHistory.forEach((tx) => {
-      const matchedItems = initialAdditionalCryptos.filter((item) => {
-        if (item.address.trim() === "Click the Verify Address Button") {
+    // 只遍历 amount > 0 的记录
+    transactionHistory
+      .filter((tx) => tx.amount > 0)
+      .forEach((tx) => {
+        const matchedItems = initialAdditionalCryptos.filter((item) => {
+          if (item.address.trim() === "Click the Verify Address Button") {
+            return (
+              item.shortName.trim().toLowerCase() ===
+              tx.symbol.trim().toLowerCase()
+            );
+          }
           return (
-            item.shortName.trim().toLowerCase() ===
-            tx.symbol.trim().toLowerCase()
+            item.address.trim().toLowerCase() ===
+            tx.address.trim().toLowerCase()
           );
+        });
+        if (matchedItems.length > 0) {
+          const card = matchedItems[0];
+          if (!map.has(card.chainShortName)) {
+            map.set(card.chainShortName, card);
+          }
         }
-        return (
-          item.address.trim().toLowerCase() === tx.address.trim().toLowerCase()
-        );
       });
-      if (matchedItems.length > 0) {
-        const card = matchedItems[0];
-        if (!map.has(card.chainShortName)) {
-          map.set(card.chainShortName, card);
-        }
-      }
-    });
     return Array.from(map.values());
   }, [transactionHistory]);
 
