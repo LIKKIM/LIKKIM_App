@@ -172,322 +172,331 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={{ flex: 1 }}
       >
-        <BlurView intensity={10} style={styles.centeredView}>
-          <TouchableWithoutFeedback onPress={() => setDropdownVisible(null)}>
-            <View
-              style={[
-                styles.addressModalView,
-                { justifyContent: "space-between" },
-              ]}
-            >
-              {!isAddingAddress ? (
-                <>
-                  <Text style={styles.modalTitle}>{t("Address Book")}</Text>
-                  <View style={styles.searchContainer}>
-                    <Icon name="search" size={20} style={styles.searchIcon} />
-                    <TextInput
-                      style={styles.searchInput}
-                      placeholder={t("Search Address")}
-                      placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
-                      onChangeText={setSearchAddress}
-                      value={searchAddress}
-                    />
-                  </View>
-                  <View style={{ flex: 1 }}>
-                    <FlatList
-                      data={filteredAddresses}
-                      keyExtractor={(item) => item.id}
-                      style={{ marginBottom: 20 }}
-                      renderItem={({ item }) => (
-                        <View style={{ position: "relative", marginBottom: 8 }}>
-                          <TouchableOpacity
-                            onPress={() => onSelect(item)}
-                            style={{
-                              width: 280,
-                              backgroundColor: isDarkMode
-                                ? "#21201E80"
-                                : "#E5E1E980",
-                              padding: 10,
-                              alignItems: "center",
-                              flexDirection: "row",
-                              borderRadius: 10,
-                              justifyContent: "space-between",
-                            }}
+        <TouchableWithoutFeedback onPress={onClose}>
+          <BlurView intensity={10} style={styles.centeredView}>
+            <TouchableWithoutFeedback onPress={() => setDropdownVisible(null)}>
+              <View
+                style={[
+                  styles.addressModalView,
+                  { justifyContent: "space-between" },
+                ]}
+              >
+                {!isAddingAddress ? (
+                  <>
+                    <Text style={styles.modalTitle}>{t("Address Book")}</Text>
+                    <View style={styles.searchContainer}>
+                      <Icon name="search" size={20} style={styles.searchIcon} />
+                      <TextInput
+                        style={styles.searchInput}
+                        placeholder={t("Search Address")}
+                        placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
+                        onChangeText={setSearchAddress}
+                        value={searchAddress}
+                      />
+                    </View>
+                    <View style={{ flex: 1 }}>
+                      <FlatList
+                        data={filteredAddresses}
+                        keyExtractor={(item) => item.id}
+                        style={{ marginBottom: 20 }}
+                        renderItem={({ item }) => (
+                          <View
+                            style={{ position: "relative", marginBottom: 8 }}
                           >
-                            <View
-                              style={{ flexDirection: "column", flexShrink: 1 }}
+                            <TouchableOpacity
+                              onPress={() => onSelect(item)}
+                              style={{
+                                width: 280,
+                                backgroundColor: isDarkMode
+                                  ? "#21201E80"
+                                  : "#E5E1E980",
+                                padding: 10,
+                                alignItems: "center",
+                                flexDirection: "row",
+                                borderRadius: 10,
+                                justifyContent: "space-between",
+                              }}
                             >
                               <View
                                 style={{
-                                  flexDirection: "row",
-                                  marginBottom: 4,
-                                  alignItems: "center",
-                                }}
-                              >
-                                <Text
-                                  style={{
-                                    color: isDarkMode ? "#fff" : "#000",
-                                    fontSize: 16,
-                                  }}
-                                >
-                                  {t("Network")}:&nbsp;
-                                </Text>
-                                <Image
-                                  source={networkImages[item.network]}
-                                  style={{
-                                    width: 24,
-                                    height: 24,
-                                    marginRight: 5,
-                                  }}
-                                />
-                                <Text
-                                  style={{
-                                    color: isDarkMode ? "#ccc" : "#333",
-                                    fontSize: 14,
-                                  }}
-                                >
-                                  {item.network}
-                                </Text>
-                              </View>
-                              <View
-                                style={{
-                                  flexDirection: "row",
-                                  marginBottom: 8,
-                                  alignItems: "center",
-                                }}
-                              >
-                                <Text
-                                  style={{
-                                    color: isDarkMode ? "#fff" : "#000",
-                                    fontSize: 16,
-                                  }}
-                                >
-                                  {t("Name")}:&nbsp;
-                                </Text>
-                                <Text
-                                  style={{
-                                    color: isDarkMode ? "#ccc" : "#333",
-                                    fontSize: 14,
-                                  }}
-                                >
-                                  {item.name}
-                                </Text>
-                              </View>
-                              <Text
-                                style={{
-                                  color: isDarkMode ? "#fff" : "#000",
-                                  fontSize: 16,
+                                  flexDirection: "column",
                                   flexShrink: 1,
                                 }}
-                                numberOfLines={1}
-                                ellipsizeMode="middle"
                               >
-                                {t("Address")}:&nbsp;
-                                <Text
+                                <View
                                   style={{
-                                    color: isDarkMode ? "#ccc" : "#333",
-                                    fontSize: 14,
+                                    flexDirection: "row",
+                                    marginBottom: 4,
+                                    alignItems: "center",
                                   }}
                                 >
-                                  {item.address}
+                                  <Text
+                                    style={{
+                                      color: isDarkMode ? "#fff" : "#000",
+                                      fontSize: 16,
+                                    }}
+                                  >
+                                    {t("Network")}:&nbsp;
+                                  </Text>
+                                  <Image
+                                    source={networkImages[item.network]}
+                                    style={{
+                                      width: 24,
+                                      height: 24,
+                                      marginRight: 5,
+                                    }}
+                                  />
+                                  <Text
+                                    style={{
+                                      color: isDarkMode ? "#ccc" : "#333",
+                                      fontSize: 14,
+                                    }}
+                                  >
+                                    {item.network}
+                                  </Text>
+                                </View>
+                                <View
+                                  style={{
+                                    flexDirection: "row",
+                                    marginBottom: 8,
+                                    alignItems: "center",
+                                  }}
+                                >
+                                  <Text
+                                    style={{
+                                      color: isDarkMode ? "#fff" : "#000",
+                                      fontSize: 16,
+                                    }}
+                                  >
+                                    {t("Name")}:&nbsp;
+                                  </Text>
+                                  <Text
+                                    style={{
+                                      color: isDarkMode ? "#ccc" : "#333",
+                                      fontSize: 14,
+                                    }}
+                                  >
+                                    {item.name}
+                                  </Text>
+                                </View>
+                                <Text
+                                  style={{
+                                    color: isDarkMode ? "#fff" : "#000",
+                                    fontSize: 16,
+                                    flexShrink: 1,
+                                  }}
+                                  numberOfLines={1}
+                                  ellipsizeMode="middle"
+                                >
+                                  {t("Address")}:&nbsp;
+                                  <Text
+                                    style={{
+                                      color: isDarkMode ? "#ccc" : "#333",
+                                      fontSize: 14,
+                                    }}
+                                  >
+                                    {item.address}
+                                  </Text>
                                 </Text>
-                              </Text>
-                            </View>
-                            <TouchableOpacity
-                              onPress={() => toggleDropdown(item.id)}
-                              style={{ marginLeft: 10 }}
-                            >
-                              <Icon
-                                name="more-vert"
-                                size={24}
-                                color={isDarkMode ? "#fff" : "#000"}
-                              />
+                              </View>
+                              <TouchableOpacity
+                                onPress={() => toggleDropdown(item.id)}
+                                style={{ marginLeft: 10 }}
+                              >
+                                <Icon
+                                  name="more-vert"
+                                  size={24}
+                                  color={isDarkMode ? "#fff" : "#000"}
+                                />
+                              </TouchableOpacity>
                             </TouchableOpacity>
-                          </TouchableOpacity>
-                          {dropdownVisible === item.id && (
-                            <View style={styles.dropdown}>
-                              <TouchableOpacity
-                                onPress={() => handleCopy(item.address)}
-                              >
-                                <Text style={styles.dropdownButtonText}>
-                                  {t("Copy")}
-                                </Text>
-                              </TouchableOpacity>
-                              <TouchableOpacity
-                                onPress={() => handleDelete(item.id)}
-                              >
-                                <Text style={styles.dropdownButtonText}>
-                                  {t("Delete")}
-                                </Text>
-                              </TouchableOpacity>
-                              <TouchableOpacity
-                                onPress={() => handleEdit(item.id)}
-                              >
-                                <Text style={styles.dropdownButtonText}>
-                                  {t("Edit")}
-                                </Text>
-                              </TouchableOpacity>
-                            </View>
-                          )}
-                        </View>
-                      )}
-                    />
-                  </View>
-                  <TouchableOpacity
-                    onPress={() => setIsAddingAddress(true)}
-                    style={styles.submitButton}
-                  >
-                    <Text style={styles.submitButtonText}>
-                      {t("Add Address")}
-                    </Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    onPress={onClose}
-                    style={styles.closeButton}
-                  >
-                    <Text style={styles.cancelButtonText}>{t("Close")}</Text>
-                  </TouchableOpacity>
-                </>
-              ) : (
-                <>
-                  <View style={{ marginBottom: 10, width: "100%" }}>
+                            {dropdownVisible === item.id && (
+                              <View style={styles.dropdown}>
+                                <TouchableOpacity
+                                  onPress={() => handleCopy(item.address)}
+                                >
+                                  <Text style={styles.dropdownButtonText}>
+                                    {t("Copy")}
+                                  </Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                  onPress={() => handleDelete(item.id)}
+                                >
+                                  <Text style={styles.dropdownButtonText}>
+                                    {t("Delete")}
+                                  </Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                  onPress={() => handleEdit(item.id)}
+                                >
+                                  <Text style={styles.dropdownButtonText}>
+                                    {t("Edit")}
+                                  </Text>
+                                </TouchableOpacity>
+                              </View>
+                            )}
+                          </View>
+                        )}
+                      />
+                    </View>
                     <TouchableOpacity
-                      style={[
-                        styles.passwordInput,
-                        {
-                          flexDirection: "row",
-                          justifyContent: "space-between",
-                          alignItems: "center",
-                        },
-                      ]}
-                      onPress={() =>
-                        setNetworkDropdownVisible(!networkDropdownVisible)
-                      }
+                      onPress={() => setIsAddingAddress(true)}
+                      style={styles.submitButton}
                     >
-                      <View
-                        style={{
-                          flexDirection: "row",
-                          alignItems: "center",
-                          flex: 1,
-                        }}
+                      <Text style={styles.submitButtonText}>
+                        {t("Add Address")}
+                      </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={onClose}
+                      style={styles.closeButton}
+                    >
+                      <Text style={styles.cancelButtonText}>{t("Close")}</Text>
+                    </TouchableOpacity>
+                  </>
+                ) : (
+                  <>
+                    <View style={{ marginBottom: 10, width: "100%" }}>
+                      <TouchableOpacity
+                        style={[
+                          styles.passwordInput,
+                          {
+                            flexDirection: "row",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                          },
+                        ]}
+                        onPress={() =>
+                          setNetworkDropdownVisible(!networkDropdownVisible)
+                        }
                       >
-                        {newNetwork &&
-                          filteredNetworks.includes(newNetwork) && (
-                            <Image
-                              source={networkImages[newNetwork]}
-                              style={{
-                                width: 24,
-                                height: 24,
-                                marginRight: 10,
-                                backgroundColor: "rgba(255, 255, 255, 0.2)",
-                                borderRadius: 12,
-                              }}
-                            />
-                          )}
-                        <TextInput
+                        <View
                           style={{
-                            color: isDarkMode ? "#ddd" : "#000",
+                            flexDirection: "row",
+                            alignItems: "center",
                             flex: 1,
                           }}
-                          value={newNetwork}
-                          onChangeText={(text) => {
-                            setNewNetwork(text);
-                            setSearchNetwork(text);
-                            setNetworkDropdownVisible(true);
-                          }}
-                          placeholder="Search Network"
-                          placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
-                        />
-                      </View>
-                      <Icon
-                        name={
-                          networkDropdownVisible ? "expand-less" : "expand-more"
-                        }
-                        size={24}
-                        color={isDarkMode ? "#ddd" : "#676776"}
-                      />
-                    </TouchableOpacity>
-                    {networkDropdownVisible && (
-                      <View style={{ width: "100%", marginBottom: 10 }}>
-                        <ScrollView
-                          style={{ maxHeight: 200, borderRadius: 10 }}
-                          showsVerticalScrollIndicator
-                          showsHorizontalScrollIndicator={false}
                         >
-                          {filteredNetworks.map((network) => (
-                            <TouchableOpacity
-                              key={network}
-                              onPress={() => {
-                                setNewNetwork(network);
-                                setNetworkDropdownVisible(false);
-                              }}
-                              style={{
-                                padding: 10,
-                                flexDirection: "row",
-                                alignItems: "center",
-                                backgroundColor:
-                                  network === newNetwork
-                                    ? styles.submitButton.backgroundColor
-                                    : styles.passwordInput.backgroundColor,
-                              }}
-                            >
+                          {newNetwork &&
+                            filteredNetworks.includes(newNetwork) && (
                               <Image
-                                source={networkImages[network]}
+                                source={networkImages[newNetwork]}
                                 style={{
                                   width: 24,
                                   height: 24,
-                                  marginRight: 8,
+                                  marginRight: 10,
                                   backgroundColor: "rgba(255, 255, 255, 0.2)",
                                   borderRadius: 12,
                                 }}
                               />
-                              <Text style={{ color: styles.Text.color }}>
-                                {network}
-                              </Text>
-                            </TouchableOpacity>
-                          ))}
-                        </ScrollView>
-                      </View>
-                    )}
-                    {!networkDropdownVisible && (
-                      <>
-                        <TextInput
-                          style={styles.passwordInput}
-                          placeholder="Name Required"
-                          placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
-                          onChangeText={setNewName}
-                          value={newName}
+                            )}
+                          <TextInput
+                            style={{
+                              color: isDarkMode ? "#ddd" : "#000",
+                              flex: 1,
+                            }}
+                            value={newNetwork}
+                            onChangeText={(text) => {
+                              setNewNetwork(text);
+                              setSearchNetwork(text);
+                              setNetworkDropdownVisible(true);
+                            }}
+                            placeholder="Search Network"
+                            placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
+                          />
+                        </View>
+                        <Icon
+                          name={
+                            networkDropdownVisible
+                              ? "expand-less"
+                              : "expand-more"
+                          }
+                          size={24}
+                          color={isDarkMode ? "#ddd" : "#676776"}
                         />
-                        <TextInput
-                          style={styles.addressInput}
-                          placeholder="Address Required"
-                          placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
-                          onChangeText={setNewAddress}
-                          value={newAddress}
-                          multiline
-                        />
-                      </>
-                    )}
-                  </View>
-                  <View style={styles.buttonContainer}>
-                    <TouchableOpacity
-                      onPress={handleSaveAddress}
-                      style={styles.submitButton}
-                    >
-                      <Text style={styles.submitButtonText}>{t("Save")}</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      onPress={() => setIsAddingAddress(false)}
-                      style={styles.closeButton}
-                    >
-                      <Text style={styles.cancelButtonText}>{t("Back")}</Text>
-                    </TouchableOpacity>
-                  </View>
-                </>
-              )}
-            </View>
-          </TouchableWithoutFeedback>
-        </BlurView>
+                      </TouchableOpacity>
+                      {networkDropdownVisible && (
+                        <View style={{ width: "100%", marginBottom: 10 }}>
+                          <ScrollView
+                            style={{ maxHeight: 200, borderRadius: 10 }}
+                            showsVerticalScrollIndicator
+                            showsHorizontalScrollIndicator={false}
+                          >
+                            {filteredNetworks.map((network) => (
+                              <TouchableOpacity
+                                key={network}
+                                onPress={() => {
+                                  setNewNetwork(network);
+                                  setNetworkDropdownVisible(false);
+                                }}
+                                style={{
+                                  padding: 10,
+                                  flexDirection: "row",
+                                  alignItems: "center",
+                                  backgroundColor:
+                                    network === newNetwork
+                                      ? styles.submitButton.backgroundColor
+                                      : styles.passwordInput.backgroundColor,
+                                }}
+                              >
+                                <Image
+                                  source={networkImages[network]}
+                                  style={{
+                                    width: 24,
+                                    height: 24,
+                                    marginRight: 8,
+                                    backgroundColor: "rgba(255, 255, 255, 0.2)",
+                                    borderRadius: 12,
+                                  }}
+                                />
+                                <Text style={{ color: styles.Text.color }}>
+                                  {network}
+                                </Text>
+                              </TouchableOpacity>
+                            ))}
+                          </ScrollView>
+                        </View>
+                      )}
+                      {!networkDropdownVisible && (
+                        <>
+                          <TextInput
+                            style={styles.passwordInput}
+                            placeholder="Name Required"
+                            placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
+                            onChangeText={setNewName}
+                            value={newName}
+                          />
+                          <TextInput
+                            style={styles.addressInput}
+                            placeholder="Address Required"
+                            placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
+                            onChangeText={setNewAddress}
+                            value={newAddress}
+                            multiline
+                          />
+                        </>
+                      )}
+                    </View>
+                    <View style={styles.buttonContainer}>
+                      <TouchableOpacity
+                        onPress={handleSaveAddress}
+                        style={styles.submitButton}
+                      >
+                        <Text style={styles.submitButtonText}>{t("Save")}</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={() => setIsAddingAddress(false)}
+                        style={styles.closeButton}
+                      >
+                        <Text style={styles.cancelButtonText}>{t("Back")}</Text>
+                      </TouchableOpacity>
+                    </View>
+                  </>
+                )}
+              </View>
+            </TouchableWithoutFeedback>
+          </BlurView>
+        </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
     </Modal>
   );
