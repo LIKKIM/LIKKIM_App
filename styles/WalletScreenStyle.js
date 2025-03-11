@@ -838,6 +838,10 @@ const WalletScreenStyles = (isDarkMode) => {
       fontSize: 16,
       fontWeight: "bold",
     },
+    NFTtext: {
+      color: secondTextColor,
+      fontSize: 16,
+    },
     modalSubtitle: {
       color: secondTextColor,
       fontSize: 14,

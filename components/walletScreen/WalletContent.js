@@ -940,7 +940,9 @@ const WalletContent = (props) => {
                     alignItems: "center",
                   }}
                 >
-                  <Text style={WalletScreenStyle.modalTitle}>
+                  <Text
+                    style={[WalletScreenStyle.modalTitle, { marginBottom: 10 }]}
+                  >
                     {t("Send NFT")}
                   </Text>
                 </View>
@@ -965,7 +967,7 @@ const WalletContent = (props) => {
                     <Text style={WalletScreenStyle.modalTitle}>
                       {selectedNFT?.name || "NFT Name"}
                     </Text>
-                    <Text style={WalletScreenStyle.modalTitle}>
+                    <Text style={WalletScreenStyle.NFTtext}>
                       {t("Token ID")}: {selectedNFT?.tokenId || "N/A"}
                     </Text>
                   </View>
