@@ -952,15 +952,17 @@ const WalletContent = (props) => {
                     alignItems: "center",
                   }}
                 >
-                  <Image
-                    source={{ uri: selectedNFT?.logoUrl }}
-                    style={{
-                      width: 40,
-                      height: 40,
-                      borderRadius: 4,
-                      marginRight: 8,
-                    }}
-                  />
+                  {selectedNFT?.logoUrl && (
+                    <Image
+                      source={{ uri: selectedNFT.logoUrl }}
+                      style={{
+                        width: 40,
+                        height: 40,
+                        borderRadius: 4,
+                        marginRight: 8,
+                      }}
+                    />
+                  )}
                   <View style={{ flexDirection: "column" }}>
                     <Text style={WalletScreenStyle.modalTitle}>
                       {selectedNFT?.name || "NFT Name"}
@@ -1054,16 +1056,17 @@ const WalletContent = (props) => {
                   alignItems: "flex-start",
                 }}
               >
-                <Image
-                  source={{ uri: selectedNFT?.logoUrl }}
-                  style={{
-                    width: 40,
-                    height: 40,
-                    borderRadius: 4,
-                    marginRight: 8,
-                  }}
-                />
-
+                {selectedNFT?.logoUrl && (
+                  <Image
+                    source={{ uri: selectedNFT.logoUrl }}
+                    style={{
+                      width: 40,
+                      height: 40,
+                      borderRadius: 4,
+                      marginRight: 8,
+                    }}
+                  />
+                )}
                 <View style={{ flexDirection: "column", flex: 1 }}>
                   <Text style={{ flexWrap: "wrap" }}>
                     {selectedNFT?.name || "NFT Name"}
