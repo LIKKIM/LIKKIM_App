@@ -175,11 +175,10 @@ const WalletContent = (props) => {
     const requestBody = {
       chain: "okc",
       address: "0xaba7161a7fb69c88e16ed9f455ce62b791ee4d03",
-      protocolType: "token_721",
       tokenContractAddress: null,
       pageSize: "100",
       page: "1",
-      type: "okx",
+      type: "",
     };
 
     console.log("POST 请求数据：", requestBody);
@@ -197,17 +196,16 @@ const WalletContent = (props) => {
       );
       const json = await response.json();
       console.log("返回数据：", json);
-      if (json.code === "0" && json.data) {
-        console.log("Total:", json.data.total);
-        if (Array.isArray(json.data.list)) {
-          json.data.list.forEach((item, index) => {
-            console.log(`Item ${index + 1}:`);
-            console.log("  tokenContractAddress:", item.tokenContractAddress);
-            console.log("  tokenId:", item.tokenId);
-            console.log("  protocolType:", item.protocolType);
-          });
-        }
+      if (json.code === "0" && Array.isArray(json.data)) {
+        console.log("Total:", json.total);
+        json.data.forEach((item, index) => {
+          console.log(`Item ${index + 1}:`);
+          console.log("  tokenContractAddress:", item.tokenContractAddress);
+          console.log("  tokenId:", item.tokenId);
+          console.log("  protocolType:", item.protocolType);
+        });
       }
+
       setNftData(json);
     } catch (error) {
       console.error("Error fetching NFT data", error);
@@ -243,6 +241,14 @@ const WalletContent = (props) => {
       }
       const json = JSON.parse(responseText);
       console.log("NFT Detail Response:", json);
+      // 如果返回的 data 是数组且至少有一项，则返回第一项
+      if (
+        json.code === "0" &&
+        Array.isArray(json.data) &&
+        json.data.length > 0
+      ) {
+        return json.data[0];
+      }
       return json;
     } catch (error) {
       console.error("Error querying NFT details", error);
@@ -665,8 +671,8 @@ const WalletContent = (props) => {
         {nftData &&
         nftData.code === "0" &&
         nftData.data &&
-        Array.isArray(nftData.data.list) ? (
-          nftData.data.list.map((nft, index) => (
+        Array.isArray(nftData.data) ? (
+          nftData.data.map((nft, index) => (
             <TouchableOpacity
               key={index}
               onPress={() => handleNFTSelect(nft)}
@@ -677,6 +683,7 @@ const WalletContent = (props) => {
                   backgroundColor: isDarkMode ? "#333" : "#fff",
                   borderRadius: 8,
                   padding: 10,
+                  height: 250,
                   shadowColor: "#000",
                   shadowOffset: { width: 0, height: 2 },
                   shadowOpacity: 0.05,
