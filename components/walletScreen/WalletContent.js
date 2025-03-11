@@ -668,10 +668,7 @@ const WalletContent = (props) => {
           borderRadius: 8,
         }}
       >
-        {nftData &&
-        nftData.code === "0" &&
-        nftData.data &&
-        Array.isArray(nftData.data) ? (
+        {nftData && nftData.code === "0" && Array.isArray(nftData.data) ? (
           nftData.data.map((nft, index) => (
             <TouchableOpacity
               key={index}
@@ -684,6 +681,7 @@ const WalletContent = (props) => {
                   borderRadius: 8,
                   padding: 10,
                   height: 250,
+                  position: "relative",
                   shadowColor: "#000",
                   shadowOffset: { width: 0, height: 2 },
                   shadowOpacity: 0.05,
@@ -727,16 +725,34 @@ const WalletContent = (props) => {
                 <Text style={WalletScreenStyle.modalTitle}>
                   {nft.name || "NFT Card"}
                 </Text>
-                <Text
-                  style={[WalletScreenStyle.chainCardText, { marginBottom: 4 }]}
+                <View
+                  style={{
+                    position: "absolute",
+                    bottom: 10,
+                    left: 10,
+                    right: 10,
+                  }}
                 >
-                  {t("Price")}: {nft.lastPrice} {nft.lastPriceUnit || t("N/A")}
-                </Text>
-                <Text
-                  style={[WalletScreenStyle.chainCardText, { marginBottom: 4 }]}
-                >
-                  {t("Chain")}: {nft.chain || t("N/A")}
-                </Text>
+                  <View style={{ flexDirection: "column" }}>
+                    <Text
+                      style={[
+                        WalletScreenStyle.chainCardText,
+                        { marginBottom: 4 },
+                      ]}
+                    >
+                      {t("Price")}: {nft.lastPrice}{" "}
+                      {nft.lastPriceUnit || t("N/A")}
+                    </Text>
+                    <Text
+                      style={[
+                        WalletScreenStyle.chainCardText,
+                        { marginBottom: 4 },
+                      ]}
+                    >
+                      {t("Chain")}: {nft.chain || t("N/A")}
+                    </Text>
+                  </View>
+                </View>
               </View>
             </TouchableOpacity>
           ))
