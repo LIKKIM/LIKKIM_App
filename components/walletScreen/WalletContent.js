@@ -908,7 +908,7 @@ const WalletContent = (props) => {
                     console.log("Save to Cold Wallet clicked");
                   }}
                 >
-                  <Text style={WalletScreenStyle.ButtonText}>
+                  <Text style={WalletScreenStyle.NFTButtonText}>
                     {t("Save To ColdWallet")}
                   </Text>
                 </TouchableOpacity>

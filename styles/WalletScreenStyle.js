@@ -756,6 +756,11 @@ const WalletScreenStyles = (isDarkMode) => {
       color: textColor,
       fontSize: 16,
     },
+    NFTButtonText: {
+      color: textColor,
+      fontSize: 16,
+      textAlign: "center",
+    },
     processButtonText: {
       color: secondTextColor,
       fontSize: 16,
