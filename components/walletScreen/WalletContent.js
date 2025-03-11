@@ -1049,13 +1049,7 @@ const WalletContent = (props) => {
                   {props.t("Preview Transaction")}
                 </Text>
               </View>
-
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                }}
-              >
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <Image
                   source={{ uri: selectedNFT?.logoUrl }}
                   style={{
@@ -1063,14 +1057,21 @@ const WalletContent = (props) => {
                     height: 40,
                     borderRadius: 4,
                     marginRight: 8,
+                    alignSelf: "center", // 确保图片垂直居中
                   }}
                 />
-
-                <View style={{ flexDirection: "column" }}>
-                  <Text style={WalletScreenStyle.NFTtext}>
+                <View
+                  style={{
+                    flex: 1,
+                    flexDirection: "column",
+                    justifyContent: "center", // 垂直居中文本组合
+                    alignItems: "flex-start", // 文本左对齐
+                  }}
+                >
+                  <Text style={{ flexWrap: "wrap" }}>
                     {selectedNFT?.name || "NFT Name"}
                   </Text>
-                  <Text style={WalletScreenStyle.NFTtext}>
+                  <Text style={{ flexWrap: "wrap" }}>
                     {t("Token ID")}: {selectedNFT?.tokenId || "N/A"}
                   </Text>
                 </View>
