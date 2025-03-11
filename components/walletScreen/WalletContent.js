@@ -947,7 +947,6 @@ const WalletContent = (props) => {
                   </Text>
                 </View>
 
-                {/* NFT 信息 */}
                 <View
                   style={{
                     flexDirection: "row",
@@ -1051,23 +1050,30 @@ const WalletContent = (props) => {
                 </Text>
               </View>
 
-              {/* NFT 预览信息 */}
-              <View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                }}
+              >
                 <Image
-                  source={{ uri: selectedNFT?.image }}
-                  style={WalletScreenStyle.nftImage}
+                  source={{ uri: selectedNFT?.logoUrl }}
+                  style={{
+                    width: 40,
+                    height: 40,
+                    borderRadius: 4,
+                    marginRight: 8,
+                  }}
                 />
-                <ScrollView
-                  contentContainerStyle={WalletScreenStyle.scrollViewContent} // ✅ 修正此处
-                >
-                  <Text style={WalletScreenStyle.sendNftText}>
-                    {selectedNFT?.name || props.t("NFT Name")}
+
+                <View style={{ flexDirection: "column" }}>
+                  <Text style={WalletScreenStyle.NFTtext}>
+                    {selectedNFT?.name || "NFT Name"}
                   </Text>
-                  <Text style={WalletScreenStyle.sendNftText}>
-                    {props.t("Token ID")}:{" "}
-                    {selectedNFT?.tokenId || props.t("N/A")}
+                  <Text style={WalletScreenStyle.NFTtext}>
+                    {t("Token ID")}: {selectedNFT?.tokenId || "N/A"}
                   </Text>
-                </ScrollView>
+                </View>
               </View>
 
               {/* 收款地址 */}
