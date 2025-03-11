@@ -218,6 +218,7 @@ i18n
           "No device paired. Please pair with device first.":
             "No device paired. Please pair with device first.",
           All: "All",
+          "Save to Likkim Hardware": "Save to Likkim Hardware",
         },
       },
       zh: {

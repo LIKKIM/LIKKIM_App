@@ -909,7 +909,7 @@ const WalletContent = (props) => {
                   }}
                 >
                   <Text style={WalletScreenStyle.NFTButtonText}>
-                    {t("Save To ColdWallet")}
+                    {t("Save to Likkim Hardware")}
                   </Text>
                 </TouchableOpacity>
               </View>
