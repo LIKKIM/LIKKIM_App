@@ -949,7 +949,7 @@ const WalletContent = (props) => {
                 <View
                   style={{
                     flexDirection: "row",
-                    alignItems: "center",
+                    alignItems: "flex-start",
                   }}
                 >
                   {selectedNFT?.logoUrl && (
@@ -963,7 +963,9 @@ const WalletContent = (props) => {
                       }}
                     />
                   )}
-                  <View style={{ flexDirection: "column", flex: 1 }}>
+                  <ScrollView
+                    style={{ flexDirection: "column", flex: 1, height: 60 }}
+                  >
                     <Text
                       style={[
                         WalletScreenStyle.modalTitle,
@@ -975,7 +977,7 @@ const WalletContent = (props) => {
                     <Text style={WalletScreenStyle.NFTtext}>
                       {t("Token ID")}: {selectedNFT?.tokenId || "N/A"}
                     </Text>
-                  </View>
+                  </ScrollView>
                 </View>
 
                 <View
