@@ -946,23 +946,29 @@ const WalletContent = (props) => {
                 </View>
 
                 {/* NFT 信息 */}
-                <View>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                  }}
+                >
                   <Image
-                    source={{ uri: selectedNFT?.image }}
-                    style={WalletScreenStyle.nftImage}
-                  />
-                  <ScrollView
+                    source={{ uri: selectedNFT?.logoUrl }}
                     style={{
-                      height: 80,
+                      width: 40,
+                      height: 40,
+                      borderRadius: 4,
+                      marginRight: 8,
                     }}
-                  >
-                    <Text style={WalletScreenStyle.sendNftText}>
+                  />
+                  <View style={{ flexDirection: "column" }}>
+                    <Text style={WalletScreenStyle.modalTitle}>
                       {selectedNFT?.name || "NFT Name"}
                     </Text>
-                    <Text style={WalletScreenStyle.sendNftText}>
+                    <Text style={WalletScreenStyle.modalTitle}>
                       {t("Token ID")}: {selectedNFT?.tokenId || "N/A"}
                     </Text>
-                  </ScrollView>
+                  </View>
                 </View>
 
                 <View
