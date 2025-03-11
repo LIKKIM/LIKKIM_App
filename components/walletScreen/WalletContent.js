@@ -894,8 +894,8 @@ const WalletContent = (props) => {
                     { flex: 1, marginRight: 8 },
                   ]}
                   onPress={() => {
-                    setNFTModalVisible(false); // 先关闭当前 NFT modal
-
+                    setNFTModalVisible(false);
+                    setRecipientAddress("");
                     setSendModalVisible(true);
                   }}
                 >
@@ -1084,36 +1084,33 @@ const WalletContent = (props) => {
                 </View>
               </View>
 
-              {/* 收款地址 */}
               <Text style={WalletScreenStyle.label}>
                 {props.t("Recipient Address")}
               </Text>
 
               <Text>{recipientAddress || props.t("No Address Selected")}</Text>
-
-              {/* 确认发送按钮 */}
-              <TouchableOpacity
-                style={WalletScreenStyle.submitButton}
-                disabled={!recipientAddress}
-                onPress={() => {
-                  console.log("Confirming Transaction...");
-                  setPreviewModalVisible(false);
-                }}
-              >
-                <Text style={WalletScreenStyle.ButtonText}>
-                  {props.t("Send")}
-                </Text>
-              </TouchableOpacity>
-
-              {/* 关闭按钮 */}
-              <TouchableOpacity
-                style={WalletScreenStyle.Button}
-                onPress={() => setPreviewModalVisible(false)}
-              >
-                <Text style={WalletScreenStyle.ButtonText}>
-                  {props.t("Close")}
-                </Text>
-              </TouchableOpacity>
+              <View>
+                <TouchableOpacity
+                  style={WalletScreenStyle.submitButton}
+                  disabled={!recipientAddress}
+                  onPress={() => {
+                    console.log("Confirming Transaction...");
+                    setPreviewModalVisible(false);
+                  }}
+                >
+                  <Text style={WalletScreenStyle.ButtonText}>
+                    {props.t("Send")}
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={WalletScreenStyle.cancelButton}
+                  onPress={() => setPreviewModalVisible(false)}
+                >
+                  <Text style={WalletScreenStyle.ButtonText}>
+                    {props.t("Close")}
+                  </Text>
+                </TouchableOpacity>
+              </View>
             </View>
           </BlurView>
         </TouchableWithoutFeedback>
