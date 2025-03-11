@@ -963,8 +963,13 @@ const WalletContent = (props) => {
                       }}
                     />
                   )}
-                  <View style={{ flexDirection: "column" }}>
-                    <Text style={WalletScreenStyle.modalTitle}>
+                  <View style={{ flexDirection: "column", flex: 1 }}>
+                    <Text
+                      style={[
+                        WalletScreenStyle.modalTitle,
+                        { flexWrap: "wrap" },
+                      ]}
+                    >
                       {selectedNFT?.name || "NFT Name"}
                     </Text>
                     <Text style={WalletScreenStyle.NFTtext}>
