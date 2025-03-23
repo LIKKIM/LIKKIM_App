@@ -260,10 +260,32 @@ const WalletContent = (props) => {
     fetchNFTData();
   }, []);
 
+  const formatBytes = (bytes) => {
+    if (!bytes) return "Unknown size";
+    const kb = bytes / 1024;
+    if (kb < 1024) return `${kb.toFixed(2)} KB`;
+    return `${(kb / 1024).toFixed(2)} MB`;
+  };
+
   useEffect(() => {
-    if (nftData?.code === "0" && Array.isArray(nftData.data)) {
-      nftData.data.forEach((nft) => {
+    if (nftData?.code === "0" && Array.isArray(nftData.data.list)) {
+      nftData.data.list.forEach(async (nft) => {
+        // 1️⃣ 先查询详情
         queryNFTDetail("okc", nft.tokenContractAddress, nft.tokenId);
+
+        // 2️⃣ 再打印图片大小
+        if (nft.logoUrl) {
+          try {
+            const resp = await fetch(nft.logoUrl, { method: "HEAD" });
+            const length = resp.headers.get("Content-Length");
+            const sizeBytes = length ? parseInt(length, 10) : 0;
+            console.log(
+              `Image for tokenId ${nft.tokenId} size: ${formatBytes(sizeBytes)}`
+            );
+          } catch (err) {
+            console.error(`Failed to get size for ${nft.logoUrl}`, err);
+          }
+        }
       });
     }
   }, [nftData]);
