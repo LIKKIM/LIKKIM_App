@@ -107,7 +107,9 @@ const OnboardingScreen = ({ onDone }) => {
       <LinearGradient colors={["#21201E", "#0E0D0D"]} style={styles.slide}>
         <BlurView intensity={50} style={StyleSheet.absoluteFillObject}>
           <LinearGradient
-            colors={["#00000000", "#CCB68C60"]} // 从透明到半透明的黑色
+            colors={["#00000000", "#CCB68C30", "#CCB68C60"]}
+            //start={{ x: 0.5, y: 0 }}
+            //  end={{ x: 0.5, y: 0.9 }}
             style={StyleSheet.absoluteFillObject}
           />
         </BlurView>
