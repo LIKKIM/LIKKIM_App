@@ -92,7 +92,7 @@ const SkeletonImage = ({ source, style, resizeMode }) => {
           </Animated.View>
         </Animated.View>
       )}
-      {/* 实际图片 */}
+      {/* NFT Image */}
       <Animated.Image
         source={source}
         style={[
