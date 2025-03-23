@@ -17,6 +17,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { languages } from "../config/languages";
 import i18n from "../config/i18n";
+import { BlurView } from "expo-blur";
 
 const { width, height } = Dimensions.get("window");
 
@@ -112,6 +113,12 @@ const OnboardingScreen = ({ onDone }) => {
             {languages.find((lang) => lang.code === selectedLanguage).name}
           </Text>
         </TouchableOpacity>
+        <BlurView intensity={50} style={StyleSheet.absoluteFillObject}>
+          <LinearGradient
+            colors={["#00000000", "#CCB68C60"]} // 从透明到半透明的黑色
+            style={StyleSheet.absoluteFillObject}
+          />
+        </BlurView>
         {index !== currentSlideKey ? null : (
           <View style={styles.content}>
             <Animated.Image
@@ -122,6 +129,7 @@ const OnboardingScreen = ({ onDone }) => {
                 opacity: opacityAnim,
               }}
             />
+
             <Animated.Text
               style={[
                 styles.title,
