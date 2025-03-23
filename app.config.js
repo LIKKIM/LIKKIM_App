@@ -30,7 +30,7 @@ export default {
       UIBackgroundModes: ["bluetooth-central", "bluetooth-peripheral"],
     },
     supportsTablet: false,
-    buildNumber: "16.2.9",
+    buildNumber: "16.3.0",
     bundleIdentifier: "RN.LKKIM",
     icon: "./assets/icon.png",
   },
