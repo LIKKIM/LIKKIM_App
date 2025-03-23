@@ -105,14 +105,6 @@ const OnboardingScreen = ({ onDone }) => {
   const renderItem = ({ item, index }) => {
     return (
       <LinearGradient colors={["#21201E", "#0E0D0D"]} style={styles.slide}>
-        <TouchableOpacity
-          style={styles.languageButton}
-          onPress={() => setLanguageModalVisible(true)}
-        >
-          <Text style={styles.buttonText}>
-            {languages.find((lang) => lang.code === selectedLanguage).name}
-          </Text>
-        </TouchableOpacity>
         <BlurView intensity={50} style={StyleSheet.absoluteFillObject}>
           <LinearGradient
             colors={["#00000000", "#CCB68C60"]} // 从透明到半透明的黑色
@@ -198,6 +190,14 @@ const OnboardingScreen = ({ onDone }) => {
 
   return (
     <View style={{ flex: 1 }}>
+      <TouchableOpacity
+        style={styles.languageButton}
+        onPress={() => setLanguageModalVisible(true)}
+      >
+        <Text style={styles.buttonText}>
+          {languages.find((lang) => lang.code === selectedLanguage).name}
+        </Text>
+      </TouchableOpacity>
       <Modal
         animationType="slide"
         transparent={true}
