@@ -22,6 +22,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import AddressBookModal from "./../modal/AddressBookModal";
 import MyColdWalletScreenStyles from "../../styles/MyColdWalletScreenStyle";
+import { WebView } from "react-native-webview";
 
 const SkeletonImage = ({ source, style, resizeMode }) => {
   const [loaded, setLoaded] = useState(false);
@@ -93,7 +94,7 @@ const SkeletonImage = ({ source, style, resizeMode }) => {
         </Animated.View>
       )}
       {/* NFT Image bugging */}
-      <Animated.Image
+      {/*       <Animated.Image
         source={source}
         style={[
           {
@@ -105,7 +106,18 @@ const SkeletonImage = ({ source, style, resizeMode }) => {
         ]}
         resizeMode={resizeMode}
         onLoad={handleLoad}
-      />
+      /> */}
+      <Animated.View style={{ opacity: imageOpacity, flex: 1 }}>
+        <WebView
+          originWhitelist={["*"]}
+          source={{
+            html: `<img src="${source.uri}" style="width:100%;height:100%;object-fit:cover"/>`,
+          }}
+          onLoadEnd={handleLoadEnd}
+          scrollEnabled={false}
+          style={{ flex: 1 }}
+        />
+      </Animated.View>
     </View>
   );
 };
@@ -121,7 +133,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   shimmer: {
-    width: "30%", // 渐变块宽度，可根据需要调整
+    width: "30%",
     height: "100%",
   },
 });
