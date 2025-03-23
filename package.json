@@ -2,6 +2,7 @@
   "name": "LIKKIM",
   "version": "1.0.0",
   "scripts": {
+    "buildDev:all": "eas build --profile development --platform all",
     "buildDev": "eas build --profile development",
     "start": "expo start --dev-client",
     "android": "expo run:android",
