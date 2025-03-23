@@ -261,13 +261,8 @@ const WalletContent = (props) => {
   }, []);
 
   useEffect(() => {
-    if (
-      nftData &&
-      nftData.code === "0" &&
-      nftData.data &&
-      Array.isArray(nftData.data.list)
-    ) {
-      nftData.data.list.forEach((nft) => {
+    if (nftData?.code === "0" && Array.isArray(nftData.data)) {
+      nftData.data.forEach((nft) => {
         queryNFTDetail("okc", nft.tokenContractAddress, nft.tokenId);
       });
     }
