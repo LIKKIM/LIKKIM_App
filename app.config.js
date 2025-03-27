@@ -27,7 +27,19 @@ export default {
         "Access to Bluetooth is required to connect to the wallet device",
       NSLocationWhenInUseUsageDescription:
         "Location access is needed for Bluetooth scanning",
-      UIBackgroundModes: ["bluetooth-central", "bluetooth-peripheral"],
+      NSLocationAlwaysUsageDescription:
+        "Location access is required for background location updates.",
+      NSMotionUsageDescription: "Motion data is used for device interactions.",
+      UIBackgroundModes: [
+        "bluetooth-central",
+        "bluetooth-peripheral",
+        "location", // Location Updates
+        "fetch", // Background Fetch
+        "processing", // Background Processing
+        "remote-notification", // Remote Notifications
+      ],
+      NFCReaderUsageDescription:
+        "Allow $(PRODUCT_NAME) to read NFC tags to support secure transactions.",
     },
     supportsTablet: false,
     buildNumber: "16.3.0",
@@ -60,6 +72,14 @@ export default {
       {
         locationAlwaysAndWhenInUsePermission:
           "Allow $(PRODUCT_NAME) to use your location.",
+      },
+    ],
+    [
+      "expo-notifications",
+      {
+        mode: "production",
+        icon: "./assets/notification-icon.png",
+        color: "#ffffff",
       },
     ],
   ],
