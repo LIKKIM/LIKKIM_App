@@ -641,10 +641,8 @@ const WalletScreenStyles = (isDarkMode) => {
       backgroundColor: modalBackgroundColor,
       borderRadius: 20,
       padding: 30,
-      flex: 1,
+      aspectRatio: 9 / 16,
       justifyContent: "space-between",
-      minHeight: 300,
-      maxHeight: 620,
     },
 
     inputAddressModal: {

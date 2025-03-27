@@ -854,6 +854,7 @@ const WalletContent = (props) => {
                       source={{ uri: selectedNFT.logoUrl }}
                       style={{
                         width: "100%",
+
                         aspectRatio: 1,
                         borderRadius: 8,
                         marginBottom: 8,
