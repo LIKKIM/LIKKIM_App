@@ -884,46 +884,67 @@ const WalletContent = (props) => {
                   )}
                   <ScrollView
                     style={{
-                      height: 140,
-                      marginTop: 20,
+                      height: 120,
+                      marginVertical: 20,
+                    }}
+                    contentContainerStyle={{
+                      flexGrow: 1,
                     }}
                   >
-                    <Text
-                      style={[
-                        WalletScreenStyle.modalTitle,
-                        { marginBottom: 4 },
-                      ]}
+                    <View
+                      style={{
+                        flex: 1,
+                        justifyContent: "space-between",
+                      }}
                     >
-                      {selectedNFT.name || t("NFT Card")}
-                    </Text>
-                    <Text
-                      style={[
-                        WalletScreenStyle.chainCardText,
-                        { marginBottom: 2 },
-                      ]}
-                    >
-                      {t("Contract")}: {selectedNFT.tokenContractAddress}
-                    </Text>
-                    <Text
-                      style={[
-                        WalletScreenStyle.chainCardText,
-                        { marginBottom: 2 },
-                      ]}
-                    >
-                      {t("Token ID")}: {selectedNFT.tokenId}
-                    </Text>
-                    <Text style={[WalletScreenStyle.chainCardText]}>
-                      {t("Protocol")}: {selectedNFT.protocolType || t("N/A")}
-                    </Text>
-
-                    {selectedNFT.lastPrice && (
+                      {/* NFT 名称 */}
                       <Text
-                        style={[WalletScreenStyle.modalTitle, { marginTop: 8 }]}
+                        style={[
+                          WalletScreenStyle.modalTitle,
+                          { marginBottom: 4 },
+                        ]}
                       >
-                        {t("Price")}: {selectedNFT.lastPrice}{" "}
-                        {selectedNFT.lastPriceUnit || t("N/A")}
+                        {selectedNFT.name || t("NFT Card")}
                       </Text>
-                    )}
+
+                      {/* 合约地址 */}
+                      <Text
+                        style={[
+                          WalletScreenStyle.chainCardText,
+                          { marginBottom: 2 },
+                        ]}
+                      >
+                        {t("Contract")}: {selectedNFT.tokenContractAddress}
+                      </Text>
+
+                      {/* Token ID */}
+                      <Text
+                        style={[
+                          WalletScreenStyle.chainCardText,
+                          { marginBottom: 2 },
+                        ]}
+                      >
+                        {t("Token ID")}: {selectedNFT.tokenId}
+                      </Text>
+
+                      {/* 协议类型 */}
+                      <Text style={WalletScreenStyle.chainCardText}>
+                        {t("Protocol")}: {selectedNFT.protocolType || t("N/A")}
+                      </Text>
+
+                      {/* 价格信息，如果存在 */}
+                      {selectedNFT.lastPrice && (
+                        <Text
+                          style={[
+                            WalletScreenStyle.modalTitle,
+                            { marginTop: 8 },
+                          ]}
+                        >
+                          {t("Price")}: {selectedNFT.lastPrice}{" "}
+                          {selectedNFT.lastPriceUnit || t("N/A")}
+                        </Text>
+                      )}
+                    </View>
                   </ScrollView>
                 </View>
               ) : (
