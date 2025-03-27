@@ -545,6 +545,15 @@ const WalletScreenStyles = (isDarkMode) => {
       alignItems: "center",
       marginTop: 20,
     },
+    NFTButton: {
+      backgroundColor: buttonBackgroundColor,
+      padding: 10,
+      width: "100%",
+      justifyContent: "center",
+      borderRadius: 30,
+      height: 60,
+      alignItems: "center",
+    },
     cancelAddressButton: {
       borderWidth: 3,
       borderColor: buttonBackgroundColor,
@@ -632,10 +641,8 @@ const WalletScreenStyles = (isDarkMode) => {
       backgroundColor: modalBackgroundColor,
       borderRadius: 20,
       padding: 30,
-      flex: 1,
+      aspectRatio: 9 / 16,
       justifyContent: "space-between",
-      minHeight: 300,
-      maxHeight: 620,
     },
 
     inputAddressModal: {

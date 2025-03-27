@@ -691,7 +691,7 @@ const WalletContent = (props) => {
         position: "absolute",
         top: 0,
         bottom: 0,
-        width: 326,
+        width: "90%",
       }}
     >
       {cryptoCards.length > 0 && !modalVisible && (
@@ -732,7 +732,7 @@ const WalletContent = (props) => {
                   backgroundColor: isDarkMode ? "#333" : "#fff",
                   borderRadius: 8,
                   padding: 10,
-                  height: 250,
+                  aspectRatio: 2 / 3,
                   position: "relative",
                   shadowColor: "#000",
                   shadowOffset: { width: 0, height: 2 },
@@ -854,6 +854,7 @@ const WalletContent = (props) => {
                       source={{ uri: selectedNFT.logoUrl }}
                       style={{
                         width: "100%",
+
                         aspectRatio: 1,
                         borderRadius: 8,
                         marginBottom: 8,
@@ -884,46 +885,67 @@ const WalletContent = (props) => {
                   )}
                   <ScrollView
                     style={{
-                      height: 140,
-                      marginTop: 20,
+                      height: 120,
+                      marginVertical: 20,
+                    }}
+                    contentContainerStyle={{
+                      flexGrow: 1,
                     }}
                   >
-                    <Text
-                      style={[
-                        WalletScreenStyle.modalTitle,
-                        { marginBottom: 4 },
-                      ]}
+                    <View
+                      style={{
+                        flex: 1,
+                        justifyContent: "space-between",
+                      }}
                     >
-                      {selectedNFT.name || t("NFT Card")}
-                    </Text>
-                    <Text
-                      style={[
-                        WalletScreenStyle.chainCardText,
-                        { marginBottom: 2 },
-                      ]}
-                    >
-                      {t("Contract")}: {selectedNFT.tokenContractAddress}
-                    </Text>
-                    <Text
-                      style={[
-                        WalletScreenStyle.chainCardText,
-                        { marginBottom: 2 },
-                      ]}
-                    >
-                      {t("Token ID")}: {selectedNFT.tokenId}
-                    </Text>
-                    <Text style={[WalletScreenStyle.chainCardText]}>
-                      {t("Protocol")}: {selectedNFT.protocolType || t("N/A")}
-                    </Text>
-
-                    {selectedNFT.lastPrice && (
+                      {/* NFT 名称 */}
                       <Text
-                        style={[WalletScreenStyle.modalTitle, { marginTop: 8 }]}
+                        style={[
+                          WalletScreenStyle.modalTitle,
+                          { marginBottom: 4 },
+                        ]}
                       >
-                        {t("Price")}: {selectedNFT.lastPrice}{" "}
-                        {selectedNFT.lastPriceUnit || t("N/A")}
+                        {selectedNFT.name || t("NFT Card")}
                       </Text>
-                    )}
+
+                      {/* 合约地址 */}
+                      <Text
+                        style={[
+                          WalletScreenStyle.chainCardText,
+                          { marginBottom: 2 },
+                        ]}
+                      >
+                        {t("Contract")}: {selectedNFT.tokenContractAddress}
+                      </Text>
+
+                      {/* Token ID */}
+                      <Text
+                        style={[
+                          WalletScreenStyle.chainCardText,
+                          { marginBottom: 2 },
+                        ]}
+                      >
+                        {t("Token ID")}: {selectedNFT.tokenId}
+                      </Text>
+
+                      {/* 协议类型 */}
+                      <Text style={WalletScreenStyle.chainCardText}>
+                        {t("Protocol")}: {selectedNFT.protocolType || t("N/A")}
+                      </Text>
+
+                      {/* 价格信息，如果存在 */}
+                      {selectedNFT.lastPrice && (
+                        <Text
+                          style={[
+                            WalletScreenStyle.modalTitle,
+                            { marginTop: 8 },
+                          ]}
+                        >
+                          {t("Price")}: {selectedNFT.lastPrice}{" "}
+                          {selectedNFT.lastPriceUnit || t("N/A")}
+                        </Text>
+                      )}
+                    </View>
                   </ScrollView>
                 </View>
               ) : (
@@ -942,12 +964,11 @@ const WalletContent = (props) => {
                 style={{
                   flexDirection: "row",
                   justifyContent: "space-between",
-                  marginTop: 16,
                 }}
               >
                 <TouchableOpacity
                   style={[
-                    WalletScreenStyle.Button,
+                    WalletScreenStyle.NFTButton,
                     { flex: 1, marginRight: 8 },
                   ]}
                   onPress={() => {
@@ -956,11 +977,15 @@ const WalletContent = (props) => {
                     setSendModalVisible(true);
                   }}
                 >
-                  <Text style={WalletScreenStyle.ButtonText}>{t("Send")}</Text>
+                  <Text style={WalletScreenStyle.ButtonText}>{t("send")}</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                  style={[WalletScreenStyle.Button, { flex: 1, marginLeft: 8 }]}
+                  style={[
+                    WalletScreenStyle.NFTButton,
+
+                    { flex: 1, marginLeft: 8 },
+                  ]}
                   onPress={() => {
                     console.log("Save to Cold Wallet clicked");
                   }}
