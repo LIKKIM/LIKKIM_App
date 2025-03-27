@@ -774,9 +774,14 @@ const WalletContent = (props) => {
                     </Text>
                   </View>
                 )}
-                <Text style={WalletScreenStyle.modalTitle}>
+                <Text
+                  style={WalletScreenStyle.modalTitle}
+                  numberOfLines={2}
+                  ellipsizeMode="tail"
+                >
                   {nft.name || "NFT Card"}
                 </Text>
+
                 <View
                   style={{
                     position: "absolute",
