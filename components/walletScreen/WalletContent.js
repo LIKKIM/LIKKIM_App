@@ -691,7 +691,7 @@ const WalletContent = (props) => {
         position: "absolute",
         top: 0,
         bottom: 0,
-        width: 326,
+        width: "90%",
       }}
     >
       {cryptoCards.length > 0 && !modalVisible && (
@@ -732,7 +732,7 @@ const WalletContent = (props) => {
                   backgroundColor: isDarkMode ? "#333" : "#fff",
                   borderRadius: 8,
                   padding: 10,
-                  height: 250,
+                  aspectRatio: 2 / 3,
                   position: "relative",
                   shadowColor: "#000",
                   shadowOffset: { width: 0, height: 2 },
