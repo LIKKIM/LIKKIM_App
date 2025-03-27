@@ -690,6 +690,7 @@ const WalletContent = (props) => {
       style={{
         position: "absolute",
         top: 0,
+        bottom: 0,
         width: 326,
       }}
     >
@@ -712,10 +713,10 @@ const WalletContent = (props) => {
           flexWrap: "wrap",
           justifyContent: "center",
           alignItems: "center",
+          paddingBottom: 10,
         }}
         style={{
           width: "100%",
-          height: 590,
           borderRadius: 8,
         }}
       >
