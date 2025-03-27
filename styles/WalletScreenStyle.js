@@ -102,6 +102,7 @@ const WalletScreenStyles = (isDarkMode) => {
     },
     chainScrollView: {
       marginBottom: 10,
+      height: 64,
       paddingHorizontal: 10,
     },
     chainTag: {
@@ -778,7 +779,8 @@ const WalletScreenStyles = (isDarkMode) => {
     // Add crypto modal styles
     addCryptoModalView: {
       margin: 20,
-      minHeight: 400,
+      //  minHeight: 400,
+      maxHeight: "86%",
       width: "90%",
       backgroundColor: modalBackgroundColor,
       borderRadius: 20,
