@@ -942,12 +942,11 @@ const WalletContent = (props) => {
                 style={{
                   flexDirection: "row",
                   justifyContent: "space-between",
-                  marginTop: 16,
                 }}
               >
                 <TouchableOpacity
                   style={[
-                    WalletScreenStyle.Button,
+                    WalletScreenStyle.NFTButton,
                     { flex: 1, marginRight: 8 },
                   ]}
                   onPress={() => {
@@ -956,11 +955,15 @@ const WalletContent = (props) => {
                     setSendModalVisible(true);
                   }}
                 >
-                  <Text style={WalletScreenStyle.ButtonText}>{t("Send")}</Text>
+                  <Text style={WalletScreenStyle.ButtonText}>{t("send")}</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                  style={[WalletScreenStyle.Button, { flex: 1, marginLeft: 8 }]}
+                  style={[
+                    WalletScreenStyle.NFTButton,
+
+                    { flex: 1, marginLeft: 8 },
+                  ]}
                   onPress={() => {
                     console.log("Save to Cold Wallet clicked");
                   }}
