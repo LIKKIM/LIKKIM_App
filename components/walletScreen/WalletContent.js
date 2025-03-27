@@ -22,6 +22,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import AddressBookModal from "./../modal/AddressBookModal";
 import MyColdWalletScreenStyles from "../../styles/MyColdWalletScreenStyle";
+import { WebView } from "react-native-webview";
 
 const SkeletonImage = ({ source, style, resizeMode }) => {
   const [loaded, setLoaded] = useState(false);
@@ -93,7 +94,7 @@ const SkeletonImage = ({ source, style, resizeMode }) => {
         </Animated.View>
       )}
       {/* NFT Image bugging */}
-      <Animated.Image
+      {/*       <Animated.Image
         source={source}
         style={[
           {
@@ -105,7 +106,40 @@ const SkeletonImage = ({ source, style, resizeMode }) => {
         ]}
         resizeMode={resizeMode}
         onLoad={handleLoad}
-      />
+      /> */}
+      <Animated.View
+        style={{
+          opacity: imageOpacity,
+          borderRadius: 8,
+          overflow: "hidden",
+          flex: 1,
+        }}
+      >
+        <WebView
+          originWhitelist={["*"]}
+          source={{
+            html: `
+      <html>
+        <head>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <style>body,html{margin:0;padding:0;}</style>
+        </head>
+        <body>
+          <img src="${source.uri}" style="
+            width:100%;
+            height:auto;
+            object-fit:contain;
+            display:block;
+          "/>
+        </body>
+      </html>
+    `,
+          }}
+          scrollEnabled={false}
+          style={{ flex: 1 }}
+          onLoadEnd={handleLoad}
+        />
+      </Animated.View>
     </View>
   );
 };
@@ -121,7 +155,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   shimmer: {
-    width: "30%", // 渐变块宽度，可根据需要调整
+    width: "30%",
     height: "100%",
   },
 });
@@ -656,6 +690,7 @@ const WalletContent = (props) => {
       style={{
         position: "absolute",
         top: 0,
+        bottom: 0,
         width: 326,
       }}
     >
@@ -678,10 +713,10 @@ const WalletContent = (props) => {
           flexWrap: "wrap",
           justifyContent: "center",
           alignItems: "center",
+          paddingBottom: 10,
         }}
         style={{
           width: "100%",
-          height: 590,
           borderRadius: 8,
         }}
       >
@@ -739,9 +774,14 @@ const WalletContent = (props) => {
                     </Text>
                   </View>
                 )}
-                <Text style={WalletScreenStyle.modalTitle}>
+                <Text
+                  style={WalletScreenStyle.modalTitle}
+                  numberOfLines={2}
+                  ellipsizeMode="tail"
+                >
                   {nft.name || "NFT Card"}
                 </Text>
+
                 <View
                   style={{
                     position: "absolute",

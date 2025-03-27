@@ -2,6 +2,7 @@
   "name": "LIKKIM",
   "version": "1.0.0",
   "scripts": {
+    "buildDev:all": "eas build --profile development --platform all",
     "buildDev": "eas build --profile development",
     "start": "expo start --dev-client",
     "android": "expo run:android",
@@ -64,6 +65,7 @@
     "react-native-svg": "^15.4.0",
     "react-native-vector-icons": "^10.0.3",
     "react-native-web": "~0.19.6",
+    "react-native-webview": "13.6.4",
     "reactotron-react-native": "^5.1.7",
     "uuid": "^9.0.1",
     "zustand": "^5.0.1"
