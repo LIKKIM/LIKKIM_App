@@ -113,7 +113,7 @@ const SkeletonImage = ({ source, style, resizeMode }) => {
           source={{
             html: `<img src="${source.uri}" style="width:100%;height:100%;object-fit:cover"/>`,
           }}
-          onLoadEnd={handleLoadEnd}
+          onLoadEnd={handleLoad}
           scrollEnabled={false}
           style={{ flex: 1 }}
         />
