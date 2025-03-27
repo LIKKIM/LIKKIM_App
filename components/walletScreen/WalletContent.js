@@ -107,15 +107,37 @@ const SkeletonImage = ({ source, style, resizeMode }) => {
         resizeMode={resizeMode}
         onLoad={handleLoad}
       /> */}
-      <Animated.View style={{ opacity: imageOpacity, flex: 1 }}>
+      <Animated.View
+        style={{
+          opacity: imageOpacity,
+          borderRadius: 8,
+          overflow: "hidden",
+          flex: 1,
+        }}
+      >
         <WebView
           originWhitelist={["*"]}
           source={{
-            html: `<img src="${source.uri}" style="width:100%;height:100%;object-fit:cover"/>`,
+            html: `
+      <html>
+        <head>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <style>body,html{margin:0;padding:0;}</style>
+        </head>
+        <body>
+          <img src="${source.uri}" style="
+            width:100%;
+            height:auto;
+            object-fit:contain;
+            display:block;
+          "/>
+        </body>
+      </html>
+    `,
           }}
-          onLoadEnd={handleLoad}
           scrollEnabled={false}
           style={{ flex: 1 }}
+          onLoadEnd={handleLoad}
         />
       </Animated.View>
     </View>
