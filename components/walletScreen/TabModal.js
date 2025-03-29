@@ -8,6 +8,7 @@ import {
   ScrollView,
   Platform,
   Modal,
+  Dimensions,
 } from "react-native";
 import PriceChartCom from "../walletScreen/PriceChartCom";
 import { LinearGradient } from "expo-linear-gradient";
@@ -101,6 +102,7 @@ const TabModal = ({
     setIsModalVisible(false);
     setSelectedTransaction(null);
   };
+  const { height } = Dimensions.get("window");
 
   const renderTabContent = () => {
     switch (activeTab) {
@@ -244,7 +246,13 @@ const TabModal = ({
         style={[
           WalletScreenStyle.animatedTabContainer,
           { opacity: tabOpacity },
-          { marginTop: Platform.OS === "android" ? -30 : 0 },
+          {
+            marginTop:
+              Platform.OS === "android" ||
+              (Platform.OS === "ios" && height < 700)
+                ? -30
+                : 0,
+          },
         ]}
       >
         <View
