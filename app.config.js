@@ -42,7 +42,7 @@ export default {
         "Allow $(PRODUCT_NAME) to read NFC tags to support secure transactions.",
     },
     supportsTablet: false,
-    buildNumber: "16.3.1",
+    buildNumber: "16.3.2",
     bundleIdentifier: "RN.LKKIM",
     icon: "./assets/icon.png",
   },
