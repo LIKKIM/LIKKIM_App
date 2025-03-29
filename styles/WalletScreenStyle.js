@@ -32,8 +32,7 @@ const WalletScreenStyles = (isDarkMode) => {
 
   // Get device height for dynamic layout calculations
   const { height } = Dimensions.get("window");
-  const containerHeight = height - 360; // Calculated container height
-
+  const containerHeight = height < 700 ? height - 280 : height - 360;
   return StyleSheet.create({
     // Animated container for tabs positioned over content
     animatedTabContainer: {
@@ -365,7 +364,7 @@ const WalletScreenStyles = (isDarkMode) => {
     priceContainer: {
       width: "100%",
       paddingHorizontal: 20,
-      height: 360,
+      height: "100%",
     },
 
     // Search box styles

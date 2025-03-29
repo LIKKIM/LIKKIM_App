@@ -296,9 +296,7 @@ const TabModal = ({
             </Text>
           </TouchableOpacity>
         </View>
-
-        {renderTabContent()}
-
+        <View style={{ flex: 1 }}>{renderTabContent()}</View>
         <TouchableOpacity
           style={WalletScreenStyle.cancelButtonCryptoCard}
           onPress={closeModal}
