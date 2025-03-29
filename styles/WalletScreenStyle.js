@@ -432,7 +432,6 @@ const WalletScreenStyles = (isDarkMode) => {
 
     // Add wallet image styles
     addWalletImage: {
-      marginTop: -110,
       width: 326,
       height: 206,
       borderRadius: 20,
@@ -960,6 +959,8 @@ const WalletScreenStyles = (isDarkMode) => {
 
     // Centered content style
     centeredContent: {
+      position: "absolute",
+      top: 0,
       flex: 1,
       justifyContent: "center",
       alignItems: "center",
