@@ -15,6 +15,7 @@ import {
   Platform,
   RefreshControl,
   Clipboard,
+  Dimensions,
   TouchableWithoutFeedback,
   TouchableHighlight,
 } from "react-native";
@@ -1479,13 +1480,19 @@ function WalletScreen({ route, navigation }) {
       return total + convertedBalance;
     }, 0);
 
-    return totalBalance.toFixed(2); // 返回格式化后的总余额
+    return totalBalance.toFixed(2);
   };
+
+  const { height } = Dimensions.get("window");
+
+  const isIphoneSE = Platform.OS === "ios" && height < 700;
 
   const animatedCardStyle = (index) => {
     const cardStartPosition = cardStartPositions.current[index] || 0;
     const endPosition =
-      Platform.OS == "android" ? 60 : 120 - (scrollYOffset.current || 0); // 考虑 scrollTo 的 Y 偏移量
+      Platform.OS === "android" || isIphoneSE
+        ? 65
+        : 120 - (scrollYOffset.current || 0);
     const translateY = animation.interpolate({
       inputRange: [0, 1],
       outputRange: [0, endPosition - cardStartPosition],
