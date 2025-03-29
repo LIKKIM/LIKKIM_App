@@ -944,7 +944,7 @@ const WalletScreenStyles = (isDarkMode) => {
       lineHeight: 22,
     },
     walletInfoContainer: {
-      height: 400,
+      height: "100%",
       justifyContent: "center",
       paddingHorizontal: 20,
     },
@@ -959,8 +959,6 @@ const WalletScreenStyles = (isDarkMode) => {
 
     // Centered content style
     centeredContent: {
-      position: "absolute",
-      top: 0,
       flex: 1,
       justifyContent: "center",
       alignItems: "center",
