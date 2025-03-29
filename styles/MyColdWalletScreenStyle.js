@@ -25,7 +25,6 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
     },
     addressModalView: {
       margin: 20,
-      height: 480,
       width: "90%",
       backgroundColor: modalBackgroundColor,
       borderRadius: 20,
@@ -62,6 +61,13 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       flexDirection: "column",
       alignItems: "center",
       width: "100%",
+    },
+    AddressBookContainer: {
+      flexDirection: "row",
+      alignItems: "center",
+      width: "100%",
+
+      gap: 10,
     },
     buttonText: {
       color: textColor,
@@ -115,6 +121,16 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       borderWidth: 3,
       padding: 10,
       width: "100%",
+      justifyContent: "center",
+      borderRadius: 30,
+      height: 60,
+      alignItems: "center",
+    },
+    backButton: {
+      borderColor: buttonBackgroundColor,
+      borderWidth: 3,
+      padding: 10,
+      flex: 1,
       justifyContent: "center",
       borderRadius: 30,
       height: 60,
@@ -436,6 +452,15 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
       height: 60,
       alignItems: "center",
       marginBottom: 15,
+    },
+    saveButton: {
+      backgroundColor: buttonBackgroundColor,
+      padding: 10,
+      flex: 1,
+      justifyContent: "center",
+      borderRadius: 30,
+      height: 60,
+      alignItems: "center",
     },
     submitButtonText: {
       color: textColor,

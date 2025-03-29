@@ -179,6 +179,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                 style={[
                   styles.addressModalView,
                   { justifyContent: "space-between" },
+                  isAddingAddress ? { height: 400 } : { height: 480 },
                 ]}
               >
                 {!isAddingAddress ? (
@@ -477,16 +478,16 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                         </>
                       )}
                     </View>
-                    <View style={styles.buttonContainer}>
+                    <View style={styles.AddressBookContainer}>
                       <TouchableOpacity
                         onPress={handleSaveAddress}
-                        style={styles.submitButton}
+                        style={styles.saveButton}
                       >
                         <Text style={styles.submitButtonText}>{t("Save")}</Text>
                       </TouchableOpacity>
                       <TouchableOpacity
                         onPress={() => setIsAddingAddress(false)}
-                        style={styles.closeButton}
+                        style={styles.backButton}
                       >
                         <Text style={styles.cancelButtonText}>{t("Back")}</Text>
                       </TouchableOpacity>
