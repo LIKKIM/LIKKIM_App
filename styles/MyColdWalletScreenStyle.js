@@ -25,9 +25,9 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
     },
     addressModalView: {
       margin: 20,
-      width: "90%",
+
       backgroundColor: modalBackgroundColor,
-      borderRadius: 20,
+
       padding: 35,
       justifyContent: "space-between",
       alignItems: "center",

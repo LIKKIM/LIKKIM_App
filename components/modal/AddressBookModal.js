@@ -179,7 +179,9 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                 style={[
                   styles.addressModalView,
                   { justifyContent: "space-between" },
-                  isAddingAddress ? { height: 400 } : { height: 480 },
+                  isAddingAddress
+                    ? { height: "100%", width: "100%", borderRadius: 0 }
+                    : { height: 480, width: "90%", borderRadius: 20 },
                 ]}
               >
                 {!isAddingAddress ? (
@@ -466,6 +468,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                             placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
                             onChangeText={setNewName}
                             value={newName}
+                            autoFocus={true}
                           />
                           <TextInput
                             style={styles.addressInput}
