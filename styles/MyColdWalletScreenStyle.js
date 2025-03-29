@@ -151,7 +151,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
     },
     currencyModalView: {
       margin: 20,
-      height: 560,
+      height: 420,
       width: "90%",
       backgroundColor: currencyModalBgColor,
       borderRadius: 20,
@@ -309,7 +309,7 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
     },
     languageModalView: {
       margin: 20,
-      height: 560,
+      height: 420,
       width: "90%",
       backgroundColor: modalBackgroundColor,
       borderRadius: 20,

@@ -101,9 +101,6 @@ const CurrencyModal = ({
                 style={styles.currencyModalView}
                 onStartShouldSetResponder={() => true}
               >
-                <Text style={styles.languageModalTitle}>
-                  {t("Select Currency")}
-                </Text>
                 <View
                   style={[
                     styles.searchContainer,
@@ -148,12 +145,6 @@ const CurrencyModal = ({
                     </TouchableOpacity>
                   ))}
                 </ScrollView>
-                <TouchableOpacity
-                  style={styles.languageCancelButton}
-                  onPress={onClose}
-                >
-                  <Text style={styles.cancelButtonText}>{t("Cancel")}</Text>
-                </TouchableOpacity>
               </View>
             </BlurView>
           </KeyboardAvoidingView>
