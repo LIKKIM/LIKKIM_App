@@ -33,10 +33,9 @@ export default {
       UIBackgroundModes: [
         "bluetooth-central",
         "bluetooth-peripheral",
-        "location", // Location Updates
-        "fetch", // Background Fetch
-        "processing", // Background Processing
-        "remote-notification", // Remote Notifications
+        "location",
+        "fetch",
+        "remote-notification",
       ],
       NFCReaderUsageDescription:
         "Allow $(PRODUCT_NAME) to read NFC tags to support secure transactions.",
