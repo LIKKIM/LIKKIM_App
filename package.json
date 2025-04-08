@@ -14,6 +14,7 @@
     "getTF": "eas build  --auto-submit --platform ios",
     "pushPlayStore": "eas build --auto-submit --platform android",
     "updateNative": "expo prebuild",
+    "DownloadKeystore": "eas credentials --platform android",
     "expoGo": "expo start"
   },
   "dependencies": {
