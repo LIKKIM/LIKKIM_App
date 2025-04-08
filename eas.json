@@ -37,6 +37,9 @@
     },
     //build release app | android use aab
     "production": {
+      "android": {
+        "buildType": "app-bundle"
+      },
       "env": {
         //生产环境API
         "API_URL": "http://localhost"

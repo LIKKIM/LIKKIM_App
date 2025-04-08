@@ -10,6 +10,7 @@
     "web": "expo start --web",
     "postinstall": "patch-package",
     "getApk": "eas build --profile apk --platform android",
+    "getAab": "eas build --profile aab --platform android",
     "getTF": "eas build  --auto-submit --platform ios",
     "pushPlayStore": "eas build --auto-submit --platform android",
     "updateNative": "expo prebuild",
