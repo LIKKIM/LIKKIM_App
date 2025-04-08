@@ -53,7 +53,7 @@ export default {
       },
     },
     versionCode: 5,
-    package: "com.app.likkim",
+    package: "com.likkim.wallet",
   },
   web: {
     favicon: "./assets/favicon.png",
