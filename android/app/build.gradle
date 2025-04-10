@@ -83,9 +83,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace 'com.app.likkim'
+    namespace 'com.likkim.wallet'
     defaultConfig {
-        applicationId 'com.app.likkim'
+        applicationId 'com.likkim.wallet'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 5
