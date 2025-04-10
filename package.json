@@ -10,7 +10,7 @@
     "web": "expo start --web",
     "postinstall": "patch-package",
     "getApk": "eas build --profile apk --platform android",
-    "getAab": "eas build --profile production --platform android",
+    "getAab": "eas build --profile production --platform android --clear-cache",
     "getTF": "eas build  --auto-submit --platform ios",
     "pushPlayStore": "eas build --auto-submit --platform android",
     "updateNative": "expo prebuild",
@@ -75,6 +75,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "expo-cli": "^6.3.12",
     "tailwindcss": "3.3.2"
   },
   "private": true,
