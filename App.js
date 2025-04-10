@@ -17,8 +17,8 @@ import TransactionsScreen from "./components/TransactionsScreen";
 import MyColdWalletScreen from "./components/MyColdWalletScreen";
 import OnboardingScreen from "./utils/OnboardingScreen";
 import ScreenLock from "./utils/ScreenLock";
-import FindMyLkkim from "./components/myColdWalletScreen/FindMyLkkim";
-import SupportPage from "./components/myColdWalletScreen/SupportPage";
+import FindMyLikkim from "./components/MyColdWalletScreen/FindMyLikkim";
+import SupportPage from "./components/MyColdWalletScreen/SupportPage";
 import ConnectLIKKIMAuth from "./components/transactionScreens/ConnectLIKKIMAuth";
 import { CryptoProvider, CryptoContext } from "./utils/CryptoContext";
 import i18n from "./config/i18n";
@@ -80,7 +80,7 @@ export default function App() {
             </Stack.Screen>
             <Stack.Screen
               name="Find My LIKKIM"
-              component={FindMyLkkim}
+              component={FindMyLikkim}
               options={{ title: t("Find My LIKKIM") }}
             />
             <Stack.Screen
