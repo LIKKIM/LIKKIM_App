@@ -1,4 +1,4 @@
-// ./walletScreen/WalletContent.js
+// ./WalletScreen/WalletContent.js
 import React, { useEffect, useState } from "react";
 import {
   ScrollView,

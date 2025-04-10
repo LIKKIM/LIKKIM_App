@@ -19,7 +19,7 @@ import OnboardingScreen from "./utils/OnboardingScreen";
 import ScreenLock from "./utils/ScreenLock";
 import FindMyLikkim from "./components/MyColdWalletScreen/FindMyLikkim";
 import SupportPage from "./components/MyColdWalletScreen/SupportPage";
-import ConnectLIKKIMAuth from "./components/transactionScreens/ConnectLIKKIMAuth";
+import ConnectLIKKIMAuth from "./components/TransactionScreens/ConnectLIKKIMAuth";
 import { CryptoProvider, CryptoContext } from "./utils/CryptoContext";
 import i18n from "./config/i18n";
 

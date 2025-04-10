@@ -47,9 +47,9 @@ import coinCommandMapping from "../config/coinCommandMapping";
 import EmptyWalletView from "./modal/EmptyWalletView";
 import AddCryptoModal from "./modal/AddCryptoModal";
 import ChainSelectionModal from "./modal/ChainSelectionModal";
-import WalletContent from "./walletScreen/WalletContent";
-import TabModal from "./walletScreen/TabModal";
-import ModalsContainer from "./walletScreen/ModalsContainer";
+import WalletContent from "./WalletScreen/WalletContent";
+import TabModal from "./WalletScreen/TabModal";
+import ModalsContainer from "./WalletScreen/ModalsContainer";
 import checkAndReqPermission from "../utils/BluetoothPermissions"; //安卓高版本申请蓝牙权限
 import showLIKKIMAddressCommand from "../utils/showLIKKIMAddressCommand"; // 显示地址函数 发送数据写法
 import { decrypt } from "../utils/decrypt";

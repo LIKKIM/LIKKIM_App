@@ -15,7 +15,7 @@ import { BlurView } from "expo-blur";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { useTranslation } from "react-i18next";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import ChangellyAPI from "../transactionScreens/ChangellyAPI";
+import ChangellyAPI from "../TransactionScreens/ChangellyAPI";
 
 const SwapModal = ({
   isDarkMode,

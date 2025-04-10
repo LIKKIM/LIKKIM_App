@@ -44,8 +44,8 @@ import SelectCryptoModal from "./modal/SelectCryptoModal";
 import SwapModal from "./modal/SwapModal";
 import ReceiveAddressModal from "./modal/ReceiveAddressModal";
 import PinModal from "./modal/PinModal";
-import TransactionHistory from "./transactionScreens/TransactionHistory";
-import ActionButtons from "./transactionScreens/ActionButtons";
+import TransactionHistory from "./TransactionScreens/TransactionHistory";
+import ActionButtons from "./TransactionScreens/ActionButtons";
 
 // 自定义组件
 import showLIKKIMAddressCommand from "../utils/showLIKKIMAddressCommand";
