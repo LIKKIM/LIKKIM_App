@@ -44,7 +44,16 @@ const SwapModal = ({
   const [selectedToToken, setSelectedToToken] = useState("");
   const [toValue, setToValue] = useState("");
   const [fromValue, setFromValue] = useState("");
+  const [searchFromToken, setSearchFromToken] = useState("");
+  const [searchToToken, setSearchToToken] = useState("");
 
+  const filteredFromTokens = initialAdditionalCryptos.filter((chain) =>
+    chain.name.toLowerCase().includes(searchFromToken.toLowerCase())
+  );
+
+  const filteredToTokens = initialAdditionalCryptos.filter((chain) =>
+    chain.name.toLowerCase().includes(searchToToken.toLowerCase())
+  );
   const isConfirmDisabled =
     !fromValue || !toValue || !selectedFromToken || !selectedToToken;
 
@@ -219,48 +228,65 @@ const SwapModal = ({
 
                   {/* From Dropdown */}
                   {fromDropdownVisible && (
-                    <ScrollView style={TransactionsScreenStyle.fromDropdown}>
-                      {initialAdditionalCryptos.map((chain, index) => (
-                        <TouchableOpacity
-                          key={`${chain.shortName}-${index}`}
-                          style={[
-                            TransactionsScreenStyle.chainTag,
-                            selectedFromToken === chain.shortName &&
-                              TransactionsScreenStyle.selectedChainTag,
-                          ]}
-                          onPress={() => {
-                            setSelectedFromToken(chain.shortName);
-                            setFromDropdownVisible(false);
-                          }}
-                        >
-                          <View
-                            style={{
-                              flexDirection: "row",
-                              alignItems: "center",
+                    <View style={TransactionsScreenStyle.fromDropdown}>
+                      {/* 搜索区域 */}
+                      <TextInput
+                        style={[
+                          TransactionsScreenStyle.searchInput,
+                          {
+                            marginBottom: 10,
+                            paddingHorizontal: 8,
+                            paddingVertical: 5,
+                          },
+                        ]}
+                        placeholder={t("Enter cryptocurrency name...")}
+                        placeholderTextColor="#aaa"
+                        onChangeText={(text) => setSearchFromToken(text)}
+                      />
+                      {/* 滚动区域 */}
+                      <ScrollView>
+                        {filteredFromTokens.map((chain, index) => (
+                          <TouchableOpacity
+                            key={`${chain.shortName}-${index}`}
+                            style={[
+                              TransactionsScreenStyle.chainTag,
+                              selectedFromToken === chain.shortName &&
+                                TransactionsScreenStyle.selectedChainTag,
+                            ]}
+                            onPress={() => {
+                              setSelectedFromToken(chain.shortName);
+                              setFromDropdownVisible(false);
                             }}
                           >
-                            <Image
-                              source={chain.chainIcon}
+                            <View
                               style={{
-                                width: 20,
-                                height: 20,
-                                borderRadius: 15,
-                                marginRight: 10,
+                                flexDirection: "row",
+                                alignItems: "center",
                               }}
-                            />
-                            <Text
-                              style={[
-                                TransactionsScreenStyle.chainTagText,
-                                selectedFromToken === chain.shortName &&
-                                  TransactionsScreenStyle.selectedChainTagText,
-                              ]}
                             >
-                              {chain.name}
-                            </Text>
-                          </View>
-                        </TouchableOpacity>
-                      ))}
-                    </ScrollView>
+                              <Image
+                                source={chain.chainIcon}
+                                style={{
+                                  width: 20,
+                                  height: 20,
+                                  borderRadius: 15,
+                                  marginRight: 10,
+                                }}
+                              />
+                              <Text
+                                style={[
+                                  TransactionsScreenStyle.chainTagText,
+                                  selectedFromToken === chain.shortName &&
+                                    TransactionsScreenStyle.selectedChainTagText,
+                                ]}
+                              >
+                                {chain.name}
+                              </Text>
+                            </View>
+                          </TouchableOpacity>
+                        ))}
+                      </ScrollView>
+                    </View>
                   )}
                 </View>
 
@@ -365,48 +391,65 @@ const SwapModal = ({
 
                   {/* To Dropdown */}
                   {toDropdownVisible && (
-                    <ScrollView style={TransactionsScreenStyle.toDropdown}>
-                      {initialAdditionalCryptos.map((chain, index) => (
-                        <TouchableOpacity
-                          key={`${chain.shortName}-${index}`}
-                          style={[
-                            TransactionsScreenStyle.chainTag,
-                            selectedToToken === chain.shortName &&
-                              TransactionsScreenStyle.selectedChainTag,
-                          ]}
-                          onPress={() => {
-                            setSelectedToToken(chain.shortName);
-                            setToDropdownVisible(false);
-                          }}
-                        >
-                          <View
-                            style={{
-                              flexDirection: "row",
-                              alignItems: "center",
+                    <View style={TransactionsScreenStyle.toDropdown}>
+                      {/* 搜索区域 */}
+                      <TextInput
+                        style={[
+                          TransactionsScreenStyle.searchInput,
+                          {
+                            marginBottom: 10,
+                            paddingHorizontal: 8,
+                            paddingVertical: 5,
+                          },
+                        ]}
+                        placeholder={t("Enter cryptocurrency name...")}
+                        placeholderTextColor="#aaa"
+                        onChangeText={(text) => setSearchToToken(text)}
+                      />
+                      {/* 滚动区域 */}
+                      <ScrollView>
+                        {filteredToTokens.map((chain, index) => (
+                          <TouchableOpacity
+                            key={`${chain.shortName}-${index}`}
+                            style={[
+                              TransactionsScreenStyle.chainTag,
+                              selectedToToken === chain.shortName &&
+                                TransactionsScreenStyle.selectedChainTag,
+                            ]}
+                            onPress={() => {
+                              setSelectedToToken(chain.shortName);
+                              setToDropdownVisible(false);
                             }}
                           >
-                            <Image
-                              source={chain.chainIcon}
+                            <View
                               style={{
-                                width: 20,
-                                height: 20,
-                                borderRadius: 15,
-                                marginRight: 10,
+                                flexDirection: "row",
+                                alignItems: "center",
                               }}
-                            />
-                            <Text
-                              style={[
-                                TransactionsScreenStyle.chainTagText,
-                                selectedToToken === chain.shortName &&
-                                  TransactionsScreenStyle.selectedChainTagText,
-                              ]}
                             >
-                              {chain.name}
-                            </Text>
-                          </View>
-                        </TouchableOpacity>
-                      ))}
-                    </ScrollView>
+                              <Image
+                                source={chain.chainIcon}
+                                style={{
+                                  width: 20,
+                                  height: 20,
+                                  borderRadius: 15,
+                                  marginRight: 10,
+                                }}
+                              />
+                              <Text
+                                style={[
+                                  TransactionsScreenStyle.chainTagText,
+                                  selectedToToken === chain.shortName &&
+                                    TransactionsScreenStyle.selectedChainTagText,
+                                ]}
+                              >
+                                {chain.name}
+                              </Text>
+                            </View>
+                          </TouchableOpacity>
+                        ))}
+                      </ScrollView>
+                    </View>
                   )}
                 </View>
 
