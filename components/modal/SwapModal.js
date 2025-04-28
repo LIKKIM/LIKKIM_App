@@ -110,13 +110,42 @@ const SwapModal = ({
     console.warn(
       `CALC::FROM:${selectedFromToken}, TO:${selectedToToken}, AMOUNT:${fromValue}`
     );
-    let calcPrice = await ChangellyAPI.getExchangeAmount(
-      selectedFromToken,
-      selectedToToken,
-      fromValue
-    );
-    console.warn(calcPrice);
-    console.warn("更新数据到UI");
+
+    // Define the request body for the POST request
+    const requestBody = {
+      chain: "ethereum", // Replace with the actual chain if needed
+      fromTokenAddress: selectedFromToken, // Replace with the actual token address
+      toTokenAddress: selectedToToken, // Replace with the actual token address
+      amount: fromValue, // Ensure the amount is in the correct format (e.g., wei for ETH)
+      accountAddress: "0xaF872D2dAae0DE52F6951dD3d32812553DF15f34", // Replace with the actual account address
+    };
+
+    try {
+      // Make the POST request
+      const response = await fetch(
+        "https://bt.likkim.com/api/aggregator/queryQuote",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(requestBody),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      // Parse the response data
+      const data = await response.json();
+      console.warn(data); // Log the response data
+
+      // You can use the response data here to update the UI as needed
+      console.warn("更新数据到UI");
+    } catch (error) {
+      console.error("Error fetching price:", error);
+    }
   };
 
   useEffect(() => {
