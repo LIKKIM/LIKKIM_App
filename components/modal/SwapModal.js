@@ -165,7 +165,7 @@ const SwapModal = ({
       >
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
-          style={TransactionsScreenStyle.centeredView}
+          style={{ flex: 1 }}
         >
           <TouchableWithoutFeedback onPress={() => setSwapModalVisible(false)}>
             <BlurView
