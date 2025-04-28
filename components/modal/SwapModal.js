@@ -229,7 +229,6 @@ const SwapModal = ({
                   {/* From Dropdown */}
                   {fromDropdownVisible && (
                     <View style={TransactionsScreenStyle.fromDropdown}>
-                      {/* 搜索区域 */}
                       <TextInput
                         style={[
                           TransactionsScreenStyle.searchInput,
@@ -243,7 +242,7 @@ const SwapModal = ({
                         placeholderTextColor="#aaa"
                         onChangeText={(text) => setSearchFromToken(text)}
                       />
-                      {/* 滚动区域 */}
+
                       <ScrollView>
                         {filteredFromTokens.map((chain, index) => (
                           <TouchableOpacity
