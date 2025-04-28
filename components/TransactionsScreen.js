@@ -1308,7 +1308,6 @@ function TransactionsScreen() {
     }
 
     setSelectedDevice(device);
-    // setModalVisible(false);
     setBleVisible(false);
     try {
       // 异步连接设备和发现服务
