@@ -194,9 +194,10 @@ const SwapModal = ({
                       </View>
                       <TouchableOpacity
                         style={TransactionsScreenStyle.tokenSelect}
-                        onPress={() =>
-                          setFromDropdownVisible(!fromDropdownVisible)
-                        }
+                        onPress={() => {
+                          setFromDropdownVisible(!fromDropdownVisible);
+                          setToDropdownVisible(false);
+                        }}
                       >
                         {/* Display token icon and name */}
                         {selectedFromToken ? (
@@ -358,7 +359,10 @@ const SwapModal = ({
                       </View>
                       <TouchableOpacity
                         style={TransactionsScreenStyle.tokenSelect}
-                        onPress={() => setToDropdownVisible(!toDropdownVisible)}
+                        onPress={() => {
+                          setToDropdownVisible(!toDropdownVisible);
+                          setFromDropdownVisible(false);
+                        }}
                       >
                         {/* Display token icon and name */}
                         {selectedToToken ? (
