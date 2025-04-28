@@ -172,7 +172,10 @@ const SwapModal = ({
               intensity={10}
               style={TransactionsScreenStyle.centeredView}
             >
-              <View style={TransactionsScreenStyle.swapModalView}>
+              <View
+                style={TransactionsScreenStyle.modalView}
+                onStartShouldSetResponder={() => true}
+              >
                 {/* From Section */}
                 <View style={{ zIndex: 20 }}>
                   <View style={{ alignItems: "flex-start", width: "100%" }}>
