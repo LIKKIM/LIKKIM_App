@@ -101,7 +101,7 @@ const WalletScreenStyles = (isDarkMode) => {
     },
     chainScrollView: {
       marginBottom: 10,
-      height: 64,
+      height: 34,
       paddingHorizontal: 10,
     },
     chainTag: {
