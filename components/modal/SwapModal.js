@@ -207,8 +207,8 @@ const SwapModal = ({
                                 getTokenDetails(selectedFromToken)?.chainIcon
                               }
                               style={{
-                                width: 20,
-                                height: 20,
+                                width: 30,
+                                height: 30,
                                 borderRadius: 10,
                                 marginRight: 8,
                               }}
@@ -267,8 +267,8 @@ const SwapModal = ({
                               <Image
                                 source={chain.chainIcon}
                                 style={{
-                                  width: 20,
-                                  height: 20,
+                                  width: 30,
+                                  height: 30,
                                   borderRadius: 15,
                                   marginRight: 10,
                                 }}
@@ -372,8 +372,8 @@ const SwapModal = ({
                                 getTokenDetails(selectedToToken)?.chainIcon
                               }
                               style={{
-                                width: 20,
-                                height: 20,
+                                width: 30,
+                                height: 30,
                                 borderRadius: 10,
                                 marginRight: 8,
                               }}
@@ -433,8 +433,8 @@ const SwapModal = ({
                               <Image
                                 source={chain.chainIcon}
                                 style={{
-                                  width: 20,
-                                  height: 20,
+                                  width: 30,
+                                  height: 30,
                                   borderRadius: 15,
                                   marginRight: 10,
                                 }}
