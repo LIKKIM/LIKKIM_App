@@ -546,31 +546,46 @@ const SwapModal = ({
                           showsHorizontalScrollIndicator={false}
                         >
                           {/* All按钮处理 */}
-                          <TouchableOpacity
-                            key="All"
-                            style={{
-                              flexDirection: "row",
-                              alignItems: "center",
-                              paddingVertical: 5,
-                              paddingHorizontal: 10,
-                              marginRight: 8,
-                              borderRadius: 6,
-                              backgroundColor: isDarkMode
-                                ? selectedToChain === "All"
-                                  ? "#3F3D3C"
-                                  : "#CCB68C"
-                                : selectedToChain === "All"
-                                ? "#E5E1E9"
-                                : "#e0e0e0",
-                            }}
-                            onPress={() => setSelectedToChain("All")}
-                          >
-                            <Text
-                              style={[TransactionsScreenStyle.chainTagText]}
-                            >
-                              {t("All")}
-                            </Text>
-                          </TouchableOpacity>
+                          {(() => {
+                            const fromTokenDetails =
+                              getTokenDetails(selectedFromToken);
+                            const fromTokenChain = fromTokenDetails?.chain;
+                            const isAllDisabled = !!selectedFromToken; // 有selectedFromToken就禁用All
+
+                            return (
+                              <TouchableOpacity
+                                key="All"
+                                disabled={isAllDisabled}
+                                style={{
+                                  flexDirection: "row",
+                                  alignItems: "center",
+                                  paddingVertical: 5,
+                                  paddingHorizontal: 10,
+                                  marginRight: 8,
+                                  borderRadius: 6,
+                                  backgroundColor: isDarkMode
+                                    ? selectedToChain === "All"
+                                      ? "#6B5F5B"
+                                      : "#3F3D3C"
+                                    : selectedToChain === "All"
+                                    ? "#DADADA"
+                                    : "#F0F0F0",
+                                  opacity: isAllDisabled ? 0.4 : 1, // 🔥禁用All，半透明
+                                }}
+                                onPress={() => {
+                                  if (!isAllDisabled) {
+                                    setSelectedToChain("All");
+                                  }
+                                }}
+                              >
+                                <Text
+                                  style={[TransactionsScreenStyle.chainTagText]}
+                                >
+                                  {t("All")}
+                                </Text>
+                              </TouchableOpacity>
+                            );
+                          })()}
 
                           {/* 其他链按钮处理 */}
                           {[
@@ -602,7 +617,7 @@ const SwapModal = ({
                                     : selectedToChain === chain
                                     ? "#E5E1E9"
                                     : "#e0e0e0",
-                                  opacity: isDisabled ? 0.4 : 1, // 禁用的链变浅
+                                  opacity: isDisabled ? 0.4 : 1,
                                 }}
                                 onPress={() => {
                                   if (!isDisabled) {
