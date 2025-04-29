@@ -137,7 +137,7 @@ const SwapModal = ({
 
     try {
       const response = await fetch(
-        "https://bt.likkim.com/api/aggregator/queryQuote",
+        "https://swap.likkim.com/api/aggregator/queryQuote",
         {
           method: "POST",
           headers: {
@@ -533,19 +533,7 @@ const SwapModal = ({
                 >
                   <Icon name="swap-vert" size={24} color="#fff" />
                 </TouchableOpacity>
-                {exchangeRate && (
-                  <Text
-                    style={{
-                      textAlign: "center",
-                      color: isDarkMode ? "#ccc" : "#333",
-                      marginVertical: 10,
-                      fontSize: 14,
-                    }}
-                  >
-                    1 {getTokenDetails(selectedFromToken)?.symbol} ≈{" "}
-                    {exchangeRate} {getTokenDetails(selectedToToken)?.symbol}
-                  </Text>
-                )}
+
                 {/* To Section */}
                 <View style={{ zIndex: 10 }}>
                   <View style={{ alignItems: "flex-start", width: "100%" }}>
@@ -830,7 +818,19 @@ const SwapModal = ({
                     </View>
                   )}
                 </View>
-
+                {exchangeRate && (
+                  <Text
+                    style={{
+                      textAlign: "center",
+                      color: isDarkMode ? "#ccc" : "#333",
+                      marginVertical: 10,
+                      fontSize: 14,
+                    }}
+                  >
+                    1 {getTokenDetails(selectedFromToken)?.symbol} ≈{" "}
+                    {exchangeRate} {getTokenDetails(selectedToToken)?.symbol}
+                  </Text>
+                )}
                 <View>
                   {/* Confirm Button */}
                   <TouchableOpacity
@@ -857,7 +857,6 @@ const SwapModal = ({
                       {t("Confirm")}
                     </Text>
                   </TouchableOpacity>
-
                   {/* Close Button */}
                   <TouchableOpacity
                     onPress={() => setSwapModalVisible(false)}
