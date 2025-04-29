@@ -67,8 +67,21 @@ const SwapModal = ({
       (token) => token.shortName === tokenShortName
     );
   };
+  const chainCategories = initialAdditionalCryptos.map((crypto) => ({
+    name: crypto.chain,
+    chainIcon: crypto.chainIcon,
+    ...crypto,
+  }));
+  const printedNames = new Set();
 
-  // Get the selected crypto details for "From" and "To" tokens
+  chainCategories.forEach((item, index) => {
+    if (printedNames.has(item.name)) return; // 已经打印过，跳过
+    printedNames.add(item.name);
+
+    console.log(`第${printedNames.size}个链:`); // 用 size 保证序号连续
+    console.log("  🔗 name:", item.name);
+    console.log("  🖼️ chainIcon:", item.chainIcon);
+  });
   const fromCryptoDetails = getTokenDetails(selectedFromToken);
   const toCryptoDetails = getTokenDetails(selectedToToken);
 
@@ -254,7 +267,77 @@ const SwapModal = ({
                         placeholderTextColor="#aaa"
                         onChangeText={(text) => setSearchFromToken(text)}
                       />
-
+                      <ScrollView
+                        horizontal
+                        style={TransactionsScreenStyle.chainScrollView}
+                        showsHorizontalScrollIndicator={false}
+                      >
+                        <TouchableOpacity
+                          key="All"
+                          style={[
+                            TransactionsScreenStyle.chainTag,
+                            selectedFromToken === "All" &&
+                              TransactionsScreenStyle.selectedChainTag,
+                          ]}
+                          onPress={() => setSelectedFromToken("All")}
+                        >
+                          <Text
+                            style={[
+                              TransactionsScreenStyle.chainTagText,
+                              selectedFromToken === "All" &&
+                                TransactionsScreenStyle.selectedChainTagText,
+                            ]}
+                          >
+                            {t("All")}
+                          </Text>
+                        </TouchableOpacity>
+                        {[
+                          ...new Set(
+                            chainCategories.map((chain) => chain.chain)
+                          ),
+                        ].map((chain) => (
+                          <TouchableOpacity
+                            key={chain}
+                            style={[
+                              TransactionsScreenStyle.chainTag,
+                              selectedFromToken === chain &&
+                                TransactionsScreenStyle.selectedChainTag,
+                            ]}
+                            onPress={() => {
+                              console.log("点击了链按钮：", chain);
+                              setSelectedFromToken(chain);
+                            }}
+                          >
+                            {chainCategories.some(
+                              (category) => category.chain === chain
+                            ) && (
+                              <>
+                                {chainCategories.filter(
+                                  (category) => category.chain === chain
+                                )[0].chainIcon && (
+                                  <Image
+                                    source={
+                                      chainCategories.filter(
+                                        (category) => category.chain === chain
+                                      )[0].chainIcon
+                                    }
+                                    style={TransactionsScreenStyle.TagChainIcon}
+                                  />
+                                )}
+                                <Text
+                                  style={[
+                                    TransactionsScreenStyle.chainTagText,
+                                    selectedFromToken === chain &&
+                                      TransactionsScreenStyle.selectedChainTagText,
+                                  ]}
+                                >
+                                  {chain}
+                                </Text>
+                              </>
+                            )}
+                          </TouchableOpacity>
+                        ))}
+                      </ScrollView>
                       <ScrollView>
                         {filteredFromTokens.map((chain, index) => (
                           <TouchableOpacity
