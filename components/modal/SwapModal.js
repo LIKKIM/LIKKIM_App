@@ -11,6 +11,7 @@ import {
   Image,
   Platform,
   TouchableWithoutFeedback,
+  InteractionManager,
 } from "react-native";
 import { BlurView } from "expo-blur";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -49,7 +50,7 @@ const SwapModal = ({
   const [searchToToken, setSearchToToken] = useState("");
   const [selectedChain, setSelectedChain] = useState("All");
   const [selectedToChain, setSelectedToChain] = useState("All");
-
+  const [chainLayouts, setChainLayouts] = useState({});
   const disabledButtonBackgroundColor = isDarkMode ? "#6c6c6c" : "#ccc";
 
   const filteredFromTokens = initialAdditionalCryptos.filter((chain) =>
@@ -152,20 +153,25 @@ const SwapModal = ({
       calcRealPrice();
     }
   }, [selectedFromToken, selectedToToken, fromValue]);
+
   useEffect(() => {
-    if (toDropdownVisible && selectedToChain && toChainTagsScrollRef.current) {
-      const chainList = [...new Set(chainCategories.map((item) => item.chain))];
-      const index = chainList.indexOf(selectedToChain);
-      if (index !== -1) {
-        const BUTTON_WIDTH = 80; // 每个链按钮的宽度
-        const scrollX = index * (BUTTON_WIDTH + 8);
-        // 等To模块真正挂载后再scroll
-        setTimeout(() => {
-          toChainTagsScrollRef.current.scrollTo({ x: scrollX, animated: true });
-        }, 0);
-      }
+    if (
+      toDropdownVisible &&
+      selectedFromToken &&
+      toChainTagsScrollRef.current
+    ) {
+      InteractionManager.runAfterInteractions(() => {
+        const chainName = selectedFromToken.chain;
+        const layout = chainLayouts[chainName]; // 拿到选中链的布局
+        if (layout) {
+          toChainTagsScrollRef.current.scrollTo({
+            x: layout.x - 20, // 🔥 可以适当减去一点padding，让按钮更居中
+            animated: true,
+          });
+        }
+      });
     }
-  }, [toDropdownVisible, selectedToChain]);
+  }, [toDropdownVisible, selectedFromToken, chainLayouts]);
 
   return (
     <>
@@ -674,6 +680,13 @@ const SwapModal = ({
                                     ? "#E5E1E9"
                                     : "#e0e0e0",
                                   opacity: isDisabled ? 0.4 : 1,
+                                }}
+                                onLayout={(event) => {
+                                  const layout = event.nativeEvent.layout;
+                                  setChainLayouts((prev) => ({
+                                    ...prev,
+                                    [chain]: layout, // 把当前这个链的布局信息保存
+                                  }));
                                 }}
                                 onPress={() => {
                                   if (!isDisabled) {
