@@ -41,7 +41,7 @@ const SwapModal = ({
   const router = useNavigation();
   const toChainTagsScrollRef = useRef(null);
   const [confirmModalVisible, setConfirmModalVisible] = useState(false);
-  const [selectedFromToken, setSelectedFromToken] = useState("");
+  const [selectedFromToken, setSelectedFromToken] = useState(null);
   const [selectedToToken, setSelectedToToken] = useState("");
   const [toValue, setToValue] = useState("");
   const [fromValue, setFromValue] = useState("");
@@ -75,9 +75,10 @@ const SwapModal = ({
 
   const printedNames = new Set();
 
-  const getTokenDetails = (tokenShortName) => {
+  const getTokenDetails = (token) => {
+    if (!token) return null;
     return initialAdditionalCryptos.find(
-      (token) => token.shortName === tokenShortName
+      (item) => item.shortName === token.shortName && item.chain === token.chain
     );
   };
 
@@ -382,7 +383,10 @@ const SwapModal = ({
                                   TransactionsScreenStyle.selectedChainTag,
                               ]}
                               onPress={() => {
-                                setSelectedFromToken(chain.shortName);
+                                setSelectedFromToken({
+                                  shortName: chain.shortName,
+                                  chain: chain.chain, // 🔥这里把chain也记下来
+                                });
                                 setFromDropdownVisible(false);
 
                                 const selectedFrom = getTokenDetails(
