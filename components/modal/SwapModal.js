@@ -74,14 +74,6 @@ const SwapModal = ({
   }));
   const printedNames = new Set();
 
-  chainCategories.forEach((item, index) => {
-    if (printedNames.has(item.name)) return; // 已经打印过，跳过
-    printedNames.add(item.name);
-
-    console.log(`第${printedNames.size}个链:`); // 用 size 保证序号连续
-    console.log("  🔗 name:", item.name);
-    console.log("  🖼️ chainIcon:", item.chainIcon);
-  });
   const fromCryptoDetails = getTokenDetails(selectedFromToken);
   const toCryptoDetails = getTokenDetails(selectedToToken);
 
@@ -267,77 +259,88 @@ const SwapModal = ({
                         placeholderTextColor="#aaa"
                         onChangeText={(text) => setSearchFromToken(text)}
                       />
-                      <ScrollView
-                        horizontal
-                        style={TransactionsScreenStyle.chainScrollView}
-                        showsHorizontalScrollIndicator={false}
+                      <View
+                        style={{
+                          marginBottom: 6,
+                        }}
                       >
-                        <TouchableOpacity
-                          key="All"
-                          style={[
-                            TransactionsScreenStyle.chainTag,
-                            selectedFromToken === "All" &&
-                              TransactionsScreenStyle.selectedChainTag,
-                          ]}
-                          onPress={() => setSelectedFromToken("All")}
+                        <ScrollView
+                          horizontal
+                          style={{
+                            height: 34,
+                            paddingHorizontal: 10,
+                          }}
+                          showsHorizontalScrollIndicator={false}
                         >
-                          <Text
-                            style={[
-                              TransactionsScreenStyle.chainTagText,
-                              selectedFromToken === "All" &&
-                                TransactionsScreenStyle.selectedChainTagText,
-                            ]}
-                          >
-                            {t("All")}
-                          </Text>
-                        </TouchableOpacity>
-                        {[
-                          ...new Set(
-                            chainCategories.map((chain) => chain.chain)
-                          ),
-                        ].map((chain) => (
                           <TouchableOpacity
-                            key={chain}
-                            style={[
-                              TransactionsScreenStyle.chainTag,
-                              selectedFromToken === chain &&
-                                TransactionsScreenStyle.selectedChainTag,
-                            ]}
-                            onPress={() => {
-                              console.log("点击了链按钮：", chain);
-                              setSelectedFromToken(chain);
+                            key="All"
+                            style={{
+                              flexDirection: "row",
+                              alignItems: "center",
+                              paddingVertical: 5,
+                              paddingHorizontal: 10,
+                              marginRight: 8,
+                              borderRadius: 6,
                             }}
+                            onPress={() => setSelectedFromToken("All")}
                           >
-                            {chainCategories.some(
-                              (category) => category.chain === chain
-                            ) && (
-                              <>
-                                {chainCategories.filter(
-                                  (category) => category.chain === chain
-                                )[0].chainIcon && (
-                                  <Image
-                                    source={
-                                      chainCategories.filter(
-                                        (category) => category.chain === chain
-                                      )[0].chainIcon
-                                    }
-                                    style={TransactionsScreenStyle.TagChainIcon}
-                                  />
-                                )}
-                                <Text
-                                  style={[
-                                    TransactionsScreenStyle.chainTagText,
-                                    selectedFromToken === chain &&
-                                      TransactionsScreenStyle.selectedChainTagText,
-                                  ]}
-                                >
-                                  {chain}
-                                </Text>
-                              </>
-                            )}
+                            <Text
+                              style={[
+                                TransactionsScreenStyle.chainTagText,
+                                selectedFromToken === "All" &&
+                                  TransactionsScreenStyle.selectedChainTagText,
+                              ]}
+                            >
+                              {t("All")}
+                            </Text>
                           </TouchableOpacity>
-                        ))}
-                      </ScrollView>
+                          {[
+                            ...new Set(
+                              chainCategories.map((chain) => chain.chain)
+                            ),
+                          ].map((chain) => (
+                            <TouchableOpacity
+                              key={chain}
+                              style={{
+                                flexDirection: "row",
+                                alignItems: "center",
+                                paddingVertical: 5,
+                                paddingHorizontal: 10,
+                                marginRight: 8,
+                                borderRadius: 6,
+                              }}
+                            >
+                              {chainCategories.some(
+                                (category) => category.chain === chain
+                              ) && (
+                                <>
+                                  {chainCategories.filter(
+                                    (category) => category.chain === chain
+                                  )[0].chainIcon && (
+                                    <Image
+                                      source={
+                                        chainCategories.filter(
+                                          (category) => category.chain === chain
+                                        )[0].chainIcon
+                                      }
+                                      style={{
+                                        width: 14,
+                                        height: 14,
+                                        backgroundColor: "#CFAB9540",
+                                        marginRight: 8,
+                                        resizeMode: "contain",
+                                        borderRadius: 10,
+                                      }}
+                                    />
+                                  )}
+                                  <Text>{chain}</Text>
+                                </>
+                              )}
+                            </TouchableOpacity>
+                          ))}
+                        </ScrollView>
+                      </View>
+
                       <ScrollView>
                         {filteredFromTokens.map((chain, index) => (
                           <TouchableOpacity
@@ -516,7 +519,87 @@ const SwapModal = ({
                         placeholderTextColor="#aaa"
                         onChangeText={(text) => setSearchToToken(text)}
                       />
-                      {/* 滚动区域 */}
+                      <View
+                        style={{
+                          marginBottom: 6,
+                        }}
+                      >
+                        <ScrollView
+                          horizontal
+                          style={{
+                            height: 34,
+                            paddingHorizontal: 10,
+                          }}
+                          showsHorizontalScrollIndicator={false}
+                        >
+                          <TouchableOpacity
+                            key="All"
+                            style={{
+                              flexDirection: "row",
+                              alignItems: "center",
+                              paddingVertical: 5,
+                              paddingHorizontal: 10,
+                              marginRight: 8,
+                              borderRadius: 6,
+                            }}
+                            onPress={() => setSelectedFromToken("All")}
+                          >
+                            <Text
+                              style={[
+                                TransactionsScreenStyle.chainTagText,
+                                selectedFromToken === "All" &&
+                                  TransactionsScreenStyle.selectedChainTagText,
+                              ]}
+                            >
+                              {t("All")}
+                            </Text>
+                          </TouchableOpacity>
+                          {[
+                            ...new Set(
+                              chainCategories.map((chain) => chain.chain)
+                            ),
+                          ].map((chain) => (
+                            <TouchableOpacity
+                              key={chain}
+                              style={{
+                                flexDirection: "row",
+                                alignItems: "center",
+                                paddingVertical: 5,
+                                paddingHorizontal: 10,
+                                marginRight: 8,
+                                borderRadius: 6,
+                              }}
+                            >
+                              {chainCategories.some(
+                                (category) => category.chain === chain
+                              ) && (
+                                <>
+                                  {chainCategories.filter(
+                                    (category) => category.chain === chain
+                                  )[0].chainIcon && (
+                                    <Image
+                                      source={
+                                        chainCategories.filter(
+                                          (category) => category.chain === chain
+                                        )[0].chainIcon
+                                      }
+                                      style={{
+                                        width: 14,
+                                        height: 14,
+                                        backgroundColor: "#CFAB9540",
+                                        marginRight: 8,
+                                        resizeMode: "contain",
+                                        borderRadius: 10,
+                                      }}
+                                    />
+                                  )}
+                                  <Text>{chain}</Text>
+                                </>
+                              )}
+                            </TouchableOpacity>
+                          ))}
+                        </ScrollView>
+                      </View>
                       <ScrollView>
                         {filteredToTokens.map((chain, index) => (
                           <TouchableOpacity
