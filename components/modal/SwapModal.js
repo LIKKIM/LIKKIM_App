@@ -81,27 +81,7 @@ const SwapModal = ({
 
   // Function to handle confirm button in SwapModal
   const handleConfirmSwap = () => {
-    if (!selectedFromToken || !selectedToToken || !fromValue)
-      return alert("输入完整数据.");
-
-    // Close SwapModal first
     setSwapModalVisible(false);
-
-    // Open the transaction confirmation modal after SwapModal is closed
-    setTimeout(() => {
-      router.navigate("Request Wallet Auth", {
-        fromValue,
-        from: selectedFromToken,
-        to: selectedToToken,
-        toValue,
-        fromAddress: "0x198198219821982",
-        toAddress: "0x11212121212",
-        dapp: "",
-        data: { text: "放入API请求完整数据包" },
-      });
-
-      // setConfirmModalVisible(true);
-    }, 500); // Adding a delay to ensure SwapModal is completely closed before showing the next modal
   };
 
   const calcRealPrice = async () => {
