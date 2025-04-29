@@ -1826,14 +1826,6 @@ function TransactionsScreen() {
           isDarkMode={isDarkMode}
           visible={swapModalVisible}
           setSwapModalVisible={setSwapModalVisible}
-          // fromValue={fromValue}
-          // setFromValue={setFromValue}
-          // toValue={toValue}
-          // setToValue={setToValue}
-          // selectedFromToken={selectedFromToken}
-          // setSelectedFromToken={setSelectedFromToken}
-          // selectedToToken={selectedToToken}
-          // setSelectedToToken={setSelectedToToken}
           fromDropdownVisible={fromDropdownVisible}
           setFromDropdownVisible={setFromDropdownVisible}
           toDropdownVisible={toDropdownVisible}

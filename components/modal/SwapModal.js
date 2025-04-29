@@ -17,20 +17,11 @@ import { BlurView } from "expo-blur";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { useTranslation } from "react-i18next";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import ChangellyAPI from "../TransactionScreens/ChangellyAPI";
 
 const SwapModal = ({
   isDarkMode,
   visible,
   setSwapModalVisible,
-  // fromValue,
-  // setFromValue,
-  // toValue,
-  // setToValue,
-  // selectedFromToken,
-  // setSelectedFromToken,
-  // selectedToToken,
-  // setSelectedToToken,
   fromDropdownVisible,
   setFromDropdownVisible,
   toDropdownVisible,
@@ -93,8 +84,8 @@ const SwapModal = ({
   const currencySymbol = "$";
   const visibleToTokens = initialAdditionalCryptos
     .filter((token) => {
-      if (!selectedFromToken) return true; // 如果没选From，就全部显示
-      return token.chain === selectedFromToken.chain; // 只显示From同链的代币
+      if (!selectedFromToken) return true;
+      return token.chain === selectedFromToken.chain;
     })
     .filter((token) => {
       return (token.name + token.shortName)
@@ -108,7 +99,7 @@ const SwapModal = ({
       return;
     }
 
-    setSwapModalVisible(false); // 成功校验后再关Modal
+    setSwapModalVisible(false);
 
     try {
       const fromDetails = getTokenDetails(selectedFromToken);
@@ -152,7 +143,6 @@ const SwapModal = ({
       if (responseData?.code === "0") {
         console.log("Swap成功");
         console.log("交易签名Data：", responseData.data?.data);
-        // 🔥🔥 这里专门打印你想要的 "data" 字段
       } else {
         console.log("Swap失败", responseData?.message || "未知错误");
       }
@@ -212,13 +202,12 @@ const SwapModal = ({
       if (responseData?.code === "0" && responseData?.data?.length > 0) {
         const result = responseData.data[0];
 
-        const rate = result.instantRate; // 🔥拿到汇率
+        const rate = result.instantRate;
 
-        setExchangeRate(rate); // 更新到state
+        setExchangeRate(rate);
 
         console.log("即时汇率是：", rate);
 
-        // 你也可以顺便更新toValue（兑换后的数量）
         if (fromValue && rate) {
           const calculatedToValue = (
             parseFloat(fromValue) * parseFloat(rate)
@@ -255,10 +244,10 @@ const SwapModal = ({
     ) {
       InteractionManager.runAfterInteractions(() => {
         const chainName = selectedFromToken.chain;
-        const layout = chainLayouts[chainName]; // 拿到选中链的布局
+        const layout = chainLayouts[chainName];
         if (layout) {
           toChainTagsScrollRef.current.scrollTo({
-            x: layout.x - 20, // 🔥 可以适当减去一点padding，让按钮更居中
+            x: layout.x - 20,
             animated: true,
           });
         }
