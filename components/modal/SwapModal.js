@@ -101,9 +101,64 @@ const SwapModal = ({
         .toLowerCase()
         .includes(searchToToken.toLowerCase());
     });
-  // Function to handle confirm button in SwapModal
-  const handleConfirmSwap = () => {
-    setSwapModalVisible(false);
+
+  const handleConfirmSwap = async () => {
+    if (!selectedFromToken || !selectedToToken || !fromValue) {
+      console.log("缺少必要参数，无法执行Swap");
+      return;
+    }
+
+    setSwapModalVisible(false); // 成功校验后再关Modal
+
+    try {
+      const fromDetails = getTokenDetails(selectedFromToken);
+      const toDetails = getTokenDetails(selectedToToken);
+
+      if (!fromDetails || !toDetails) {
+        console.log("找不到代币详情");
+        return;
+      }
+
+      const requestBody = {
+        chain: fromDetails.queryChainName || "ethereum",
+        fromTokenAddress: fromDetails.contractAddress,
+        toTokenAddress: toDetails.contractAddress,
+        amount: fromValue.toString(),
+        userWalletAddress: fromDetails.address,
+        slippage: "0.01",
+        provider: "openocean",
+      };
+
+      console.log("准备发起Swap请求：", requestBody);
+
+      const response = await fetch(
+        "https://swap.likkim.com/api/aggregator/swap",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(requestBody),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("网络请求失败");
+      }
+
+      const responseData = await response.json();
+      console.log("Swap API返回：", responseData);
+
+      if (responseData?.code === "0") {
+        console.log("Swap成功");
+        console.log("交易签名Data：", responseData.data?.data);
+        // 🔥🔥 这里专门打印你想要的 "data" 字段
+      } else {
+        console.log("Swap失败", responseData?.message || "未知错误");
+      }
+    } catch (error) {
+      console.log("发送Swap请求异常:", error);
+    }
   };
 
   const calcRealPrice = async () => {
