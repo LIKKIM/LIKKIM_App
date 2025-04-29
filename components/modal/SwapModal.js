@@ -42,6 +42,7 @@ const SwapModal = ({
   const router = useNavigation();
   const toChainTagsScrollRef = useRef(null);
   const [confirmModalVisible, setConfirmModalVisible] = useState(false);
+  const [exchangeRate, setExchangeRate] = useState("");
   const [selectedFromToken, setSelectedFromToken] = useState(null);
   const [selectedToToken, setSelectedToToken] = useState("");
   const [toValue, setToValue] = useState("");
@@ -109,19 +110,32 @@ const SwapModal = ({
     console.log("获取实时价格");
     console.log(selectedFromToken);
     console.log(
-      `CALC::FROM:${selectedFromToken}, TO:${selectedToToken}, AMOUNT:${fromValue}`
+      `CALC::FROM:${JSON.stringify(selectedFromToken)}, TO:${JSON.stringify(
+        selectedToToken
+      )}, AMOUNT:${fromValue}`
     );
 
-    const requestBody = {
+    if (!selectedFromToken || !selectedToToken || !fromValue) {
+      console.log("参数不完整，停止请求");
+      return;
+    }
+
+    /*     const requestBody = {
       chain: selectedFromToken.queryChainName,
       fromTokenAddress: selectedFromToken.contractAddress,
       toTokenAddress: selectedToToken.contractAddress,
       amount: fromValue,
       accountAddress: getTokenDetails(selectedFromToken)?.address,
+    }; */
+    const requestBody = {
+      chain: "ethereum",
+      fromTokenAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+      toTokenAddress: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      amount: 1,
+      accountAddress: "0x36F06561b946801DCa606842C9701EA3Fe850Ca2",
     };
 
     try {
-      // Make the POST request
       const response = await fetch(
         "https://bt.likkim.com/api/aggregator/queryQuote",
         {
@@ -137,20 +151,44 @@ const SwapModal = ({
         throw new Error("Network response was not ok");
       }
 
-      // Parse the response data
-      const data = await response.json();
-      console.log(data); // Log the response data
+      const responseData = await response.json();
+      console.log("API返回结果：", responseData);
 
-      // You can use the response data here to update the UI as needed
-      console.log("更新数据到UI");
+      if (responseData?.code === "0" && responseData?.data?.length > 0) {
+        const result = responseData.data[0];
+
+        const rate = result.instantRate; // 🔥拿到汇率
+
+        setExchangeRate(rate); // 更新到state
+
+        console.log("即时汇率是：", rate);
+
+        // 你也可以顺便更新toValue（兑换后的数量）
+        if (fromValue && rate) {
+          const calculatedToValue = (
+            parseFloat(fromValue) * parseFloat(rate)
+          ).toFixed(6);
+          setToValue(calculatedToValue);
+        }
+      } else {
+        console.log("接口返回异常或无数据");
+      }
     } catch (error) {
       console.log("Error fetching price:", error);
     }
   };
 
   useEffect(() => {
+    console.log("[SwapModal] useEffect触发了");
+    console.log("selectedFromToken:", selectedFromToken);
+    console.log("selectedToToken:", selectedToToken);
+    console.log("fromValue:", fromValue);
+
     if (selectedFromToken && selectedToToken && !!fromValue) {
+      console.log("[SwapModal] 条件满足，调用 calcRealPrice");
       calcRealPrice();
+    } else {
+      console.log("[SwapModal] 条件不满足，暂时不请求价格");
     }
   }, [selectedFromToken, selectedToToken, fromValue]);
 
@@ -495,7 +533,19 @@ const SwapModal = ({
                 >
                   <Icon name="swap-vert" size={24} color="#fff" />
                 </TouchableOpacity>
-
+                {exchangeRate && (
+                  <Text
+                    style={{
+                      textAlign: "center",
+                      color: isDarkMode ? "#ccc" : "#333",
+                      marginVertical: 10,
+                      fontSize: 14,
+                    }}
+                  >
+                    1 {getTokenDetails(selectedFromToken)?.symbol} ≈{" "}
+                    {exchangeRate} {getTokenDetails(selectedToToken)?.symbol}
+                  </Text>
+                )}
                 {/* To Section */}
                 <View style={{ zIndex: 10 }}>
                   <View style={{ alignItems: "flex-start", width: "100%" }}>
