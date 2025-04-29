@@ -89,7 +89,16 @@ const SwapModal = ({
   const displayedToValue = toValue || "0.00";
 
   const currencySymbol = "$";
-
+  const visibleToTokens = initialAdditionalCryptos
+    .filter((token) => {
+      if (!selectedFromToken) return true; // 如果没选From，就全部显示
+      return token.chain === selectedFromToken.chain; // 只显示From同链的代币
+    })
+    .filter((token) => {
+      return (token.name + token.shortName)
+        .toLowerCase()
+        .includes(searchToToken.toLowerCase());
+    });
   // Function to handle confirm button in SwapModal
   const handleConfirmSwap = () => {
     setSwapModalVisible(false);
@@ -699,66 +708,61 @@ const SwapModal = ({
                       </View>
 
                       <ScrollView>
-                        {filteredToTokens
-                          .filter(
-                            (token) =>
-                              selectedToChain === "All" ||
-                              token.chain === selectedToChain
-                          )
-                          .map((chain, index) => (
-                            <TouchableOpacity
-                              key={`${chain.shortName}-${index}`}
-                              style={[
-                                TransactionsScreenStyle.chainTag,
-                                selectedToToken === chain.shortName &&
-                                  TransactionsScreenStyle.selectedChainTag,
-                              ]}
-                              onPress={() => {
-                                setSelectedToToken(chain.shortName);
-                                setToDropdownVisible(false);
+                        {visibleToTokens.map((chain, index) => (
+                          <TouchableOpacity
+                            key={`${chain.shortName}-${index}`}
+                            style={[
+                              TransactionsScreenStyle.chainTag,
+                              selectedToToken === chain.shortName &&
+                                TransactionsScreenStyle.selectedChainTag,
+                            ]}
+                            onPress={() => {
+                              setSelectedToToken({
+                                shortName: chain.shortName,
+                                chain: chain.chain, // 🔥同样记下来chain
+                              });
+                              setToDropdownVisible(false);
 
-                                const selectedFrom =
-                                  getTokenDetails(selectedFromToken);
-                                const selectedTo = getTokenDetails(
-                                  chain.shortName
-                                );
-                                console.log("选择To Token后打印：", {
-                                  chain: selectedFrom?.queryChainName,
-                                  fromTokenAddress:
-                                    selectedFrom?.contractAddress,
-                                  toTokenAddress: selectedTo?.contractAddress,
-                                  amount: fromValue,
-                                  accountAddress: selectedFrom?.address,
-                                });
+                              const selectedFrom =
+                                getTokenDetails(selectedFromToken);
+                              const selectedTo = getTokenDetails(chain);
+
+                              console.log("选择To Token后打印：", {
+                                chain: selectedFrom?.queryChainName,
+                                fromTokenAddress: selectedFrom?.contractAddress,
+                                toTokenAddress: selectedTo?.contractAddress,
+                                amount: fromValue,
+                                accountAddress: selectedFrom?.address,
+                              });
+                            }}
+                          >
+                            <View
+                              style={{
+                                flexDirection: "row",
+                                alignItems: "center",
                               }}
                             >
-                              <View
+                              <Image
+                                source={chain.chainIcon}
                                 style={{
-                                  flexDirection: "row",
-                                  alignItems: "center",
+                                  width: 30,
+                                  height: 30,
+                                  borderRadius: 15,
+                                  marginRight: 10,
                                 }}
+                              />
+                              <Text
+                                style={[
+                                  TransactionsScreenStyle.chainTagText,
+                                  selectedToToken === chain.shortName &&
+                                    TransactionsScreenStyle.selectedChainTagText,
+                                ]}
                               >
-                                <Image
-                                  source={chain.chainIcon}
-                                  style={{
-                                    width: 30,
-                                    height: 30,
-                                    borderRadius: 15,
-                                    marginRight: 10,
-                                  }}
-                                />
-                                <Text
-                                  style={[
-                                    TransactionsScreenStyle.chainTagText,
-                                    selectedToToken === chain.shortName &&
-                                      TransactionsScreenStyle.selectedChainTagText,
-                                  ]}
-                                >
-                                  {chain.name}
-                                </Text>
-                              </View>
-                            </TouchableOpacity>
-                          ))}
+                                {chain.name}
+                              </Text>
+                            </View>
+                          </TouchableOpacity>
+                        ))}
                       </ScrollView>
                     </View>
                   )}
