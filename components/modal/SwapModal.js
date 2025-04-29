@@ -322,7 +322,7 @@ const SwapModal = ({
                                     : "#CCB68C"
                                   : selectedChain === chain
                                   ? "#E5E1E9"
-                                  : "#F8F6FE",
+                                  : "#e0e0e0",
                               }}
                               onPress={() => setSelectedChain(chain)}
                             >
@@ -536,11 +536,7 @@ const SwapModal = ({
                         placeholderTextColor="#aaa"
                         onChangeText={(text) => setSearchToToken(text)}
                       />
-                      <View
-                        style={{
-                          marginBottom: 6,
-                        }}
-                      >
+                      <View style={{ marginBottom: 6 }}>
                         <ScrollView
                           horizontal
                           style={{
@@ -549,6 +545,7 @@ const SwapModal = ({
                           }}
                           showsHorizontalScrollIndicator={false}
                         >
+                          {/* All按钮处理 */}
                           <TouchableOpacity
                             key="All"
                             style={{
@@ -559,10 +556,10 @@ const SwapModal = ({
                               marginRight: 8,
                               borderRadius: 6,
                               backgroundColor: isDarkMode
-                                ? selectedChain === "All"
+                                ? selectedToChain === "All"
                                   ? "#3F3D3C"
                                   : "#CCB68C"
-                                : selectedChain === "All"
+                                : selectedToChain === "All"
                                 ? "#E5E1E9"
                                 : "#e0e0e0",
                             }}
@@ -575,54 +572,70 @@ const SwapModal = ({
                             </Text>
                           </TouchableOpacity>
 
+                          {/* 其他链按钮处理 */}
                           {[
                             ...new Set(
                               chainCategories.map((chain) => chain.chain)
                             ),
-                          ].map((chain) => (
-                            <TouchableOpacity
-                              key={chain}
-                              style={{
-                                flexDirection: "row",
-                                alignItems: "center",
-                                paddingVertical: 5,
-                                paddingHorizontal: 10,
-                                marginRight: 8,
-                                borderRadius: 6,
-                                backgroundColor: isDarkMode
-                                  ? selectedChain === chain
-                                    ? "#3F3D3C"
-                                    : "#CCB68C"
-                                  : selectedChain === chain
-                                  ? "#E5E1E9"
-                                  : "#F8F6FE",
-                              }}
-                              onPress={() => setSelectedToChain(chain)}
-                            >
-                              <Image
-                                source={
-                                  chainCategories.find(
-                                    (category) => category.chain === chain
-                                  )?.chainIcon
-                                }
+                          ].map((chain) => {
+                            const fromTokenDetails =
+                              getTokenDetails(selectedFromToken);
+                            const fromTokenChain = fromTokenDetails?.chain;
+                            const isDisabled =
+                              selectedFromToken && fromTokenChain !== chain; // 🔥这里判断
+
+                            return (
+                              <TouchableOpacity
+                                key={chain}
+                                disabled={isDisabled}
                                 style={{
-                                  width: 14,
-                                  height: 14,
-                                  backgroundColor: "#CFAB9540",
+                                  flexDirection: "row",
+                                  alignItems: "center",
+                                  paddingVertical: 5,
+                                  paddingHorizontal: 10,
                                   marginRight: 8,
-                                  resizeMode: "contain",
-                                  borderRadius: 10,
+                                  borderRadius: 6,
+                                  backgroundColor: isDarkMode
+                                    ? selectedToChain === chain
+                                      ? "#3F3D3C"
+                                      : "#CCB68C"
+                                    : selectedToChain === chain
+                                    ? "#E5E1E9"
+                                    : "#e0e0e0",
+                                  opacity: isDisabled ? 0.4 : 1, // 禁用的链变浅
                                 }}
-                              />
-                              <Text
-                                style={[TransactionsScreenStyle.chainTagText]}
+                                onPress={() => {
+                                  if (!isDisabled) {
+                                    setSelectedToChain(chain);
+                                  }
+                                }}
                               >
-                                {chain}
-                              </Text>
-                            </TouchableOpacity>
-                          ))}
+                                <Image
+                                  source={
+                                    chainCategories.find(
+                                      (category) => category.chain === chain
+                                    )?.chainIcon
+                                  }
+                                  style={{
+                                    width: 14,
+                                    height: 14,
+                                    backgroundColor: "#CFAB9540",
+                                    marginRight: 8,
+                                    resizeMode: "contain",
+                                    borderRadius: 10,
+                                  }}
+                                />
+                                <Text
+                                  style={[TransactionsScreenStyle.chainTagText]}
+                                >
+                                  {chain}
+                                </Text>
+                              </TouchableOpacity>
+                            );
+                          })}
                         </ScrollView>
                       </View>
+
                       <ScrollView>
                         {filteredToTokens
                           .filter(
