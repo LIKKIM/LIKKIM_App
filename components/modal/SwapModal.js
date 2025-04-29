@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+
 import {
   Modal,
   View,
@@ -38,7 +39,7 @@ const SwapModal = ({
 }) => {
   const { t } = useTranslation();
   const router = useNavigation();
-
+  const toChainScrollViewRef = useRef(null);
   const [confirmModalVisible, setConfirmModalVisible] = useState(false);
   const [selectedFromToken, setSelectedFromToken] = useState("");
   const [selectedToToken, setSelectedToToken] = useState("");
@@ -269,6 +270,7 @@ const SwapModal = ({
                         }}
                       >
                         <ScrollView
+                          ref={toChainScrollViewRef}
                           horizontal
                           style={{
                             height: 34,
@@ -375,6 +377,7 @@ const SwapModal = ({
                                 );
                                 const selectedTo =
                                   getTokenDetails(selectedToToken);
+
                                 console.log("选择From Token后打印：", {
                                   chain: selectedFrom?.queryChainName,
                                   fromTokenAddress:
@@ -383,6 +386,27 @@ const SwapModal = ({
                                   amount: fromValue,
                                   accountAddress: selectedFrom?.address,
                                 });
+
+                                // 下面加这一段
+                                const chainName = selectedFrom?.chain; // 比如 "Bitcoin"
+                                setSelectedToChain(chainName); // 设置To的链标签
+
+                                // 滚动到对应chain的标签位置
+                                const chainList = [
+                                  ...new Set(
+                                    chainCategories.map((item) => item.chain)
+                                  ),
+                                ];
+                                const index = chainList.indexOf(chainName);
+                                if (
+                                  toChainScrollViewRef.current &&
+                                  index !== -1
+                                ) {
+                                  toChainScrollViewRef.current.scrollTo({
+                                    x: index * 100, // 每个链按钮大概宽度估算，比如100px
+                                    animated: true,
+                                  });
+                                }
                               }}
                             >
                               <View
