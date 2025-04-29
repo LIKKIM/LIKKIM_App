@@ -285,6 +285,7 @@ const SwapModal = ({
                               paddingHorizontal: 10,
                               marginRight: 8,
                               borderRadius: 6,
+                              backgroundColor: "#3F3D3C",
                             }}
                             onPress={() => setSelectedChain("All")}
                           >
@@ -309,6 +310,7 @@ const SwapModal = ({
                                 paddingHorizontal: 10,
                                 marginRight: 8,
                                 borderRadius: 6,
+                                backgroundColor: "#3F3D3C",
                               }}
                               onPress={() => setSelectedChain(chain)}
                             >
@@ -544,6 +546,7 @@ const SwapModal = ({
                               paddingHorizontal: 10,
                               marginRight: 8,
                               borderRadius: 6,
+                              backgroundColor: "#3F3D3C",
                             }}
                             onPress={() => setSelectedToChain("All")}
                           >
@@ -568,6 +571,7 @@ const SwapModal = ({
                                 paddingHorizontal: 10,
                                 marginRight: 8,
                                 borderRadius: 6,
+                                backgroundColor: "#3F3D3C",
                               }}
                               onPress={() => setSelectedToChain(chain)}
                             >

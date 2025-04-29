@@ -17,7 +17,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
   const textBtnColor = isDarkMode ? "#fff" : "#fff";
   const textColor = isDarkMode ? "#fff" : "#000";
   const titleColor = isDarkMode ? "#fff" : "#000";
-  const dropdownBackgroundColor = isDarkMode ? "#CCB68C" : "#eee";
+  const dropdownBackgroundColor = isDarkMode ? "#21201E" : "#eee";
 
   return StyleSheet.create({
     searchIcon: {
