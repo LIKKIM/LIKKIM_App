@@ -91,13 +91,12 @@ const SwapModal = ({
       `CALC::FROM:${selectedFromToken}, TO:${selectedToToken}, AMOUNT:${fromValue}`
     );
 
-    // Define the request body for the POST request
     const requestBody = {
-      chain: "ethereum", // Replace with the actual chain if needed
-      fromTokenAddress: selectedFromToken, // Replace with the actual token address
-      toTokenAddress: selectedToToken, // Replace with the actual token address
-      amount: fromValue, // Ensure the amount is in the correct format (e.g., wei for ETH)
-      accountAddress: "0xaF872D2dAae0DE52F6951dD3d32812553DF15f34", // Replace with the actual account address
+      chain: selectedFromToken.queryChainName,
+      fromTokenAddress: selectedFromToken.contractAddress,
+      toTokenAddress: selectedToToken.contractAddress,
+      amount: fromValue,
+      accountAddress: getTokenDetails(selectedFromToken)?.address,
     };
 
     try {
@@ -268,6 +267,19 @@ const SwapModal = ({
                             onPress={() => {
                               setSelectedFromToken(chain.shortName);
                               setFromDropdownVisible(false);
+
+                              const selectedFrom = getTokenDetails(
+                                chain.shortName
+                              );
+                              const selectedTo =
+                                getTokenDetails(selectedToToken);
+                              console.log("选择From Token后打印：", {
+                                chain: selectedFrom?.queryChainName,
+                                fromTokenAddress: selectedFrom?.contractAddress,
+                                toTokenAddress: selectedTo?.contractAddress,
+                                amount: fromValue,
+                                accountAddress: selectedFrom?.address,
+                              });
                             }}
                           >
                             <View
@@ -434,6 +446,18 @@ const SwapModal = ({
                             onPress={() => {
                               setSelectedToToken(chain.shortName);
                               setToDropdownVisible(false);
+                              const selectedFrom =
+                                getTokenDetails(selectedFromToken);
+                              const selectedTo = getTokenDetails(
+                                chain.shortName
+                              );
+                              console.log("选择To Token后打印：", {
+                                chain: selectedFrom?.queryChainName,
+                                fromTokenAddress: selectedFrom?.contractAddress,
+                                toTokenAddress: selectedTo?.contractAddress,
+                                amount: fromValue,
+                                accountAddress: selectedFrom?.address,
+                              });
                             }}
                           >
                             <View
