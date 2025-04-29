@@ -40,7 +40,6 @@ const SwapModal = ({
   const { t } = useTranslation();
   const router = useNavigation();
   const toChainTagsScrollRef = useRef(null);
-  const [selectedFromCrypto, setSelectedFromCrypto] = useState(null);
   const [confirmModalVisible, setConfirmModalVisible] = useState(false);
   const [selectedFromToken, setSelectedFromToken] = useState("");
   const [selectedToToken, setSelectedToToken] = useState("");
@@ -103,7 +102,7 @@ const SwapModal = ({
     );
 
     const requestBody = {
-      chain: selectedFromCrypto?.queryChainName,
+      chain: selectedFromToken.queryChainName,
       fromTokenAddress: selectedFromToken.contractAddress,
       toTokenAddress: selectedToToken.contractAddress,
       amount: fromValue,
@@ -236,10 +235,12 @@ const SwapModal = ({
                         }}
                       >
                         {/* Display token icon and name */}
-                        {selectedFromCrypto ? (
+                        {selectedFromToken ? (
                           <>
                             <Image
-                              source={selectedFromCrypto.chainIcon}
+                              source={
+                                getTokenDetails(selectedFromToken)?.chainIcon
+                              }
                               style={{
                                 width: 30,
                                 height: 30,
@@ -248,7 +249,7 @@ const SwapModal = ({
                               }}
                             />
                             <Text style={TransactionsScreenStyle.subtitleText}>
-                              {selectedFromCrypto.name}
+                              {getTokenDetails(selectedFromToken)?.name}
                             </Text>
                           </>
                         ) : (
@@ -256,7 +257,6 @@ const SwapModal = ({
                             {t("Select token")}
                           </Text>
                         )}
-
                         <Icon name="arrow-drop-down" size={24} color="#ccc" />
                       </TouchableOpacity>
                     </View>
@@ -382,7 +382,7 @@ const SwapModal = ({
                                   TransactionsScreenStyle.selectedChainTag,
                               ]}
                               onPress={() => {
-                                setSelectedFromCrypto(chain);
+                                setSelectedFromToken(chain.shortName);
                                 setFromDropdownVisible(false);
 
                                 const selectedFrom = getTokenDetails(
@@ -400,7 +400,7 @@ const SwapModal = ({
                                   accountAddress: selectedFrom?.address,
                                 });
 
-                                const chainName = selectedFromCrypto?.chain;
+                                const chainName = selectedFrom?.chain;
                                 if (!chainName) return;
 
                                 setSelectedToChain(chainName);
@@ -592,8 +592,8 @@ const SwapModal = ({
                           {(() => {
                             const fromTokenDetails =
                               getTokenDetails(selectedFromToken);
-                            const fromTokenChain = selectedFromCrypto?.chain;
-                            const isAllDisabled = !!selectedFromCrypto; // 有选中Crypto对象就禁用All
+                            const fromTokenChain = fromTokenDetails?.chain;
+                            const isAllDisabled = !!selectedFromToken; // 有selectedFromToken就禁用All
 
                             return (
                               <TouchableOpacity
@@ -638,9 +638,9 @@ const SwapModal = ({
                           ].map((chain) => {
                             const fromTokenDetails =
                               getTokenDetails(selectedFromToken);
-                            const fromTokenChain = selectedFromCrypto?.chain;
+                            const fromTokenChain = fromTokenDetails?.chain;
                             const isDisabled =
-                              selectedFromCrypto && fromTokenChain !== chain;
+                              selectedFromToken && fromTokenChain !== chain; // 🔥这里判断
 
                             return (
                               <TouchableOpacity
