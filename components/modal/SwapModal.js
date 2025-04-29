@@ -285,7 +285,13 @@ const SwapModal = ({
                               paddingHorizontal: 10,
                               marginRight: 8,
                               borderRadius: 6,
-                              backgroundColor: "#3F3D3C",
+                              backgroundColor: isDarkMode
+                                ? selectedChain === "All"
+                                  ? "#3F3D3C"
+                                  : "#CCB68C"
+                                : selectedChain === "All"
+                                ? "#E5E1E9"
+                                : "#e0e0e0",
                             }}
                             onPress={() => setSelectedChain("All")}
                           >
@@ -310,7 +316,13 @@ const SwapModal = ({
                                 paddingHorizontal: 10,
                                 marginRight: 8,
                                 borderRadius: 6,
-                                backgroundColor: "#3F3D3C",
+                                backgroundColor: isDarkMode
+                                  ? selectedChain === chain
+                                    ? "#3F3D3C"
+                                    : "#CCB68C"
+                                  : selectedChain === chain
+                                  ? "#E5E1E9"
+                                  : "#F8F6FE",
                               }}
                               onPress={() => setSelectedChain(chain)}
                             >
@@ -546,7 +558,13 @@ const SwapModal = ({
                               paddingHorizontal: 10,
                               marginRight: 8,
                               borderRadius: 6,
-                              backgroundColor: "#3F3D3C",
+                              backgroundColor: isDarkMode
+                                ? selectedChain === "All"
+                                  ? "#3F3D3C"
+                                  : "#CCB68C"
+                                : selectedChain === "All"
+                                ? "#E5E1E9"
+                                : "#e0e0e0",
                             }}
                             onPress={() => setSelectedToChain("All")}
                           >
@@ -571,7 +589,13 @@ const SwapModal = ({
                                 paddingHorizontal: 10,
                                 marginRight: 8,
                                 borderRadius: 6,
-                                backgroundColor: "#3F3D3C",
+                                backgroundColor: isDarkMode
+                                  ? selectedChain === chain
+                                    ? "#3F3D3C"
+                                    : "#CCB68C"
+                                  : selectedChain === chain
+                                  ? "#E5E1E9"
+                                  : "#F8F6FE",
                               }}
                               onPress={() => setSelectedToChain(chain)}
                             >
