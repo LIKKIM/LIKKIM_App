@@ -28,6 +28,9 @@ const SwapModal = ({
   setToDropdownVisible,
   initialAdditionalCryptos,
   TransactionsScreenStyle,
+  selectedDevice,
+  serviceUUID,
+  writeCharacteristicUUID,
 }) => {
   const { t } = useTranslation();
   const router = useNavigation();
@@ -143,6 +146,22 @@ const SwapModal = ({
       if (responseData?.code === "0") {
         console.log("Swap成功");
         console.log("交易签名Data：", responseData.data?.data);
+
+        // 👉 新增：把Swap返回的data封装成sign消息发给设备
+        const hexToSign = responseData.data.data;
+        const chainKey = "ethereum"; // 这里先固定，如果以后支持其他链，记得做成动态
+        const path = "m/44'/60'/0'/0/0"; // 你的默认BIP44路径
+
+        const signMessage = `sign:${chainKey},${path},${hexToSign}`;
+        const signBuffer = Buffer.from(signMessage, "utf-8");
+        const signBase64 = signBuffer.toString("base64");
+
+        await selectedDevice.writeCharacteristicWithResponseForService(
+          serviceUUID,
+          writeCharacteristicUUID,
+          signBase64
+        );
+        console.log("Swap的sign消息已发送给设备等待签名...");
       } else {
         console.log("Swap失败", responseData?.message || "未知错误");
       }
@@ -237,22 +256,21 @@ const SwapModal = ({
   }, [selectedFromToken, selectedToToken, fromValue]);
 
   useEffect(() => {
-    if (
-      toDropdownVisible &&
-      selectedFromToken &&
-      toChainTagsScrollRef.current
-    ) {
-      InteractionManager.runAfterInteractions(() => {
-        const chainName = selectedFromToken.chain;
-        const layout = chainLayouts[chainName];
-        if (layout) {
-          toChainTagsScrollRef.current.scrollTo({
-            x: layout.x - 20,
-            animated: true,
-          });
-        }
-      });
-    }
+    if (!toDropdownVisible || !selectedFromToken) return;
+
+    InteractionManager.runAfterInteractions(() => {
+      const chainName = selectedFromToken.chain;
+      const layout = chainLayouts[chainName];
+
+      if (toChainTagsScrollRef.current && layout) {
+        toChainTagsScrollRef.current.scrollTo({
+          x: layout.x - 20,
+          animated: false,
+        });
+      } else {
+        console.log("⛔ scrollRef 或 layout 尚未准备好");
+      }
+    });
   }, [toDropdownVisible, selectedFromToken, chainLayouts]);
 
   return (

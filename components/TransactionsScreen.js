@@ -1832,6 +1832,9 @@ function TransactionsScreen() {
           setToDropdownVisible={setToDropdownVisible}
           initialAdditionalCryptos={initialAdditionalCryptos}
           TransactionsScreenStyle={TransactionsScreenStyle}
+          selectedDevice={selectedDevice}
+          serviceUUID={serviceUUID}
+          writeCharacteristicUUID={writeCharacteristicUUID}
         />
       </View>
     </LinearGradient>
