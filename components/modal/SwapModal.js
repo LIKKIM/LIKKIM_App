@@ -37,15 +37,17 @@ const SwapModal = ({
   TransactionsScreenStyle,
 }) => {
   const { t } = useTranslation();
-  const [confirmModalVisible, setConfirmModalVisible] = useState(false);
-  const disabledButtonBackgroundColor = isDarkMode ? "#6c6c6c" : "#ccc";
+  const router = useNavigation();
 
+  const [confirmModalVisible, setConfirmModalVisible] = useState(false);
   const [selectedFromToken, setSelectedFromToken] = useState("");
   const [selectedToToken, setSelectedToToken] = useState("");
   const [toValue, setToValue] = useState("");
   const [fromValue, setFromValue] = useState("");
   const [searchFromToken, setSearchFromToken] = useState("");
   const [searchToToken, setSearchToToken] = useState("");
+
+  const disabledButtonBackgroundColor = isDarkMode ? "#6c6c6c" : "#ccc";
 
   const filteredFromTokens = initialAdditionalCryptos.filter((chain) =>
     chain.name.toLowerCase().includes(searchFromToken.toLowerCase())
@@ -54,6 +56,7 @@ const SwapModal = ({
   const filteredToTokens = initialAdditionalCryptos.filter((chain) =>
     chain.name.toLowerCase().includes(searchToToken.toLowerCase())
   );
+
   const isConfirmDisabled =
     !fromValue || !toValue || !selectedFromToken || !selectedToToken;
 
@@ -61,18 +64,19 @@ const SwapModal = ({
     ? disabledButtonBackgroundColor
     : TransactionsScreenStyle.swapConfirmButton.backgroundColor;
 
-  // Helper function to get the token details including the icon and name
-  const getTokenDetails = (tokenShortName) => {
-    return initialAdditionalCryptos.find(
-      (token) => token.shortName === tokenShortName
-    );
-  };
   const chainCategories = initialAdditionalCryptos.map((crypto) => ({
     name: crypto.chain,
     chainIcon: crypto.chainIcon,
     ...crypto,
   }));
+
   const printedNames = new Set();
+
+  const getTokenDetails = (tokenShortName) => {
+    return initialAdditionalCryptos.find(
+      (token) => token.shortName === tokenShortName
+    );
+  };
 
   const fromCryptoDetails = getTokenDetails(selectedFromToken);
   const toCryptoDetails = getTokenDetails(selectedToToken);
@@ -81,8 +85,6 @@ const SwapModal = ({
   const displayedToValue = toValue || "0.00";
 
   const currencySymbol = "$";
-
-  const router = useNavigation();
 
   // Function to handle confirm button in SwapModal
   const handleConfirmSwap = () => {
