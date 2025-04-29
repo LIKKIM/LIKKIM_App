@@ -87,7 +87,7 @@ const SwapModal = ({
   const calcRealPrice = async () => {
     console.log("获取实时价格");
     console.log(selectedFromToken);
-    console.warn(
+    console.log(
       `CALC::FROM:${selectedFromToken}, TO:${selectedToToken}, AMOUNT:${fromValue}`
     );
 
@@ -118,12 +118,12 @@ const SwapModal = ({
 
       // Parse the response data
       const data = await response.json();
-      console.warn(data); // Log the response data
+      console.log(data); // Log the response data
 
       // You can use the response data here to update the UI as needed
-      console.warn("更新数据到UI");
+      console.log("更新数据到UI");
     } catch (error) {
-      console.error("Error fetching price:", error);
+      console.log("Error fetching price:", error);
     }
   };
 
