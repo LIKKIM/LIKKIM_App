@@ -47,6 +47,7 @@ const SwapModal = ({
   const [searchFromToken, setSearchFromToken] = useState("");
   const [searchToToken, setSearchToToken] = useState("");
   const [selectedChain, setSelectedChain] = useState("All");
+  const [selectedToChain, setSelectedToChain] = useState("All");
 
   const disabledButtonBackgroundColor = isDarkMode ? "#6c6c6c" : "#ccc";
 
@@ -288,11 +289,7 @@ const SwapModal = ({
                             onPress={() => setSelectedChain("All")}
                           >
                             <Text
-                              style={[
-                                TransactionsScreenStyle.chainTagText,
-                                selectedChain === "All" &&
-                                  TransactionsScreenStyle.selectedChainTagText,
-                              ]}
+                              style={[TransactionsScreenStyle.chainTagText]}
                             >
                               {t("All")}
                             </Text>
@@ -330,7 +327,11 @@ const SwapModal = ({
                                   borderRadius: 10,
                                 }}
                               />
-                              <Text>{chain}</Text>
+                              <Text
+                                style={[TransactionsScreenStyle.chainTagText]}
+                              >
+                                {chain}
+                              </Text>
                             </TouchableOpacity>
                           ))}
                         </ScrollView>
@@ -547,11 +548,7 @@ const SwapModal = ({
                             onPress={() => setSelectedToChain("All")}
                           >
                             <Text
-                              style={[
-                                TransactionsScreenStyle.chainTagText,
-                                selectedToChain === "All" &&
-                                  TransactionsScreenStyle.selectedChainTagText,
-                              ]}
+                              style={[TransactionsScreenStyle.chainTagText]}
                             >
                               {t("All")}
                             </Text>
@@ -589,7 +586,11 @@ const SwapModal = ({
                                   borderRadius: 10,
                                 }}
                               />
-                              <Text>{chain}</Text>
+                              <Text
+                                style={[TransactionsScreenStyle.chainTagText]}
+                              >
+                                {chain}
+                              </Text>
                             </TouchableOpacity>
                           ))}
                         </ScrollView>
