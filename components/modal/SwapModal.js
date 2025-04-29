@@ -980,6 +980,7 @@ const SwapModal = ({
                       width: 24,
                       height: 24,
                       marginRight: 8,
+                      marginBottom: 10,
                       borderRadius: 12,
                     }}
                   />
