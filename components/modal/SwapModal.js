@@ -103,7 +103,7 @@ const SwapModal = ({
     }
 
     setSwapModalVisible(false);
-
+    setConfirmModalVisible(true);
     try {
       const fromDetails = getTokenDetails(selectedFromToken);
       const toDetails = getTokenDetails(selectedToToken);
@@ -901,7 +901,10 @@ const SwapModal = ({
                     disabled={
                       !(selectedFromToken && selectedToToken && fromValue)
                     }
-                    onPress={handleConfirmSwap}
+                    onPress={() => {
+                      setSwapModalVisible(false); // ✅先关闭主Modal
+                      setConfirmModalVisible(true); // ✅打开二次确认Modal
+                    }}
                     style={[
                       TransactionsScreenStyle.swapConfirmButton,
                       {
@@ -936,6 +939,109 @@ const SwapModal = ({
           </TouchableWithoutFeedback>
         </KeyboardAvoidingView>
       </Modal>
+      {confirmModalVisible && (
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={confirmModalVisible}
+          onRequestClose={() => setConfirmModalVisible(false)}
+        >
+          <BlurView intensity={10} style={TransactionsScreenStyle.centeredView}>
+            <View style={TransactionsScreenStyle.confirmModalView}>
+              <Text style={TransactionsScreenStyle.modalTitle}>
+                {t("Transaction Confirmation")}
+              </Text>
+
+              {/* 基本信息 */}
+              <View style={{ marginTop: 20 }}>
+                {/* 网络信息 */}
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    marginBottom: 10,
+                  }}
+                >
+                  <Image
+                    source={getTokenDetails(selectedFromToken)?.chainIcon}
+                    style={{
+                      width: 24,
+                      height: 24,
+                      marginRight: 8,
+                      borderRadius: 12,
+                    }}
+                  />
+                  <Text style={TransactionsScreenStyle.transactionText}>
+                    {getTokenDetails(selectedFromToken)?.chain}
+                  </Text>
+                </View>
+
+                {/* From -> To 信息 */}
+                <Text style={TransactionsScreenStyle.transactionText}>
+                  {t("From")}: {getTokenDetails(selectedFromToken)?.name} (
+                  {fromValue})
+                </Text>
+                <Text style={TransactionsScreenStyle.transactionText}>
+                  {t("To")}: {getTokenDetails(selectedToToken)?.name} ({toValue}
+                  )
+                </Text>
+                <Text style={TransactionsScreenStyle.transactionText}>
+                  {t("Exchange Rate")}: 1{" "}
+                  {getTokenDetails(selectedFromToken)?.symbol} ≈ {exchangeRate}{" "}
+                  {getTokenDetails(selectedToToken)?.symbol}
+                </Text>
+
+                {/* 支付合约 */}
+                <Text
+                  style={[
+                    TransactionsScreenStyle.transactionText,
+                    { marginTop: 10 },
+                  ]}
+                >
+                  {t("From Token Address")}:{" "}
+                  {getTokenDetails(selectedFromToken)?.contractAddress || "-"}
+                </Text>
+
+                {/* 接收合约 */}
+                <Text style={TransactionsScreenStyle.transactionText}>
+                  {t("To Token Address")}:{" "}
+                  {getTokenDetails(selectedToToken)?.contractAddress || "-"}
+                </Text>
+
+                {/* 账户地址 */}
+                <Text style={TransactionsScreenStyle.transactionText}>
+                  {t("Account Address")}:{" "}
+                  {getTokenDetails(selectedFromToken)?.address || "-"}
+                </Text>
+              </View>
+
+              {/* 确认/取消按钮 */}
+              <View style={{ marginTop: 20, width: "100%" }}>
+                <TouchableOpacity
+                  style={TransactionsScreenStyle.optionButton}
+                  onPress={async () => {
+                    setConfirmModalVisible(false);
+                    await handleConfirmSwap(); // 🔥这里才真正去发起交易
+                  }}
+                >
+                  <Text style={TransactionsScreenStyle.submitButtonText}>
+                    {t("Confirm")}
+                  </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  style={TransactionsScreenStyle.cancelButton}
+                  onPress={() => setConfirmModalVisible(false)}
+                >
+                  <Text style={TransactionsScreenStyle.cancelButtonText}>
+                    {t("Cancel")}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </BlurView>
+        </Modal>
+      )}
     </>
   );
 };
