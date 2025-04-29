@@ -423,7 +423,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       borderRadius: 30,
       height: 60,
       alignItems: "center",
-      marginTop: 20,
+      //marginTop: 20,
     },
     optionButton: {
       backgroundColor: btnColor,

@@ -823,7 +823,9 @@ const SwapModal = ({
                     style={{
                       textAlign: "center",
                       color: isDarkMode ? "#ccc" : "#333",
-                      marginVertical: 10,
+                      textAlign: "left",
+                      fontSize: 14,
+                      width: "100%",
                       fontSize: 14,
                     }}
                   >
@@ -860,10 +862,7 @@ const SwapModal = ({
                   {/* Close Button */}
                   <TouchableOpacity
                     onPress={() => setSwapModalVisible(false)}
-                    style={[
-                      TransactionsScreenStyle.cancelButton,
-                      { marginBottom: 10 },
-                    ]}
+                    style={[TransactionsScreenStyle.cancelButton]}
                   >
                     <Text style={TransactionsScreenStyle.cancelButtonText}>
                       {t("Close")}
