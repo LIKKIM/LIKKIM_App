@@ -148,7 +148,7 @@ function WalletScreen({ route, navigation }) {
   const chainCategories = initialAdditionalCryptos.map((crypto) => ({
     name: crypto.chain,
     chainIcon: crypto.chainIcon,
-    ...crypto, // 这里确保包括所有相关属性
+    ...crypto,
   }));
   const [selectedChainShortName, setSelectedChainShortName] =
     useState(CHAIN_NAMES);
