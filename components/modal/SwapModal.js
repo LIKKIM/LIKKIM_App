@@ -39,7 +39,7 @@ const SwapModal = ({
 }) => {
   const { t } = useTranslation();
   const router = useNavigation();
-  const toChainScrollViewRef = useRef(null);
+  const toChainTagsScrollRef = useRef(null);
   const [confirmModalVisible, setConfirmModalVisible] = useState(false);
   const [selectedFromToken, setSelectedFromToken] = useState("");
   const [selectedToToken, setSelectedToToken] = useState("");
@@ -142,6 +142,20 @@ const SwapModal = ({
       calcRealPrice();
     }
   }, [selectedFromToken, selectedToToken, fromValue]);
+  useEffect(() => {
+    if (toDropdownVisible && selectedToChain && toChainTagsScrollRef.current) {
+      const chainList = [...new Set(chainCategories.map((item) => item.chain))];
+      const index = chainList.indexOf(selectedToChain);
+      if (index !== -1) {
+        const BUTTON_WIDTH = 80; // 每个链按钮的宽度
+        const scrollX = index * (BUTTON_WIDTH + 8);
+        // 等To模块真正挂载后再scroll
+        setTimeout(() => {
+          toChainTagsScrollRef.current.scrollTo({ x: scrollX, animated: true });
+        }, 0);
+      }
+    }
+  }, [toDropdownVisible, selectedToChain]);
 
   return (
     <>
@@ -270,7 +284,6 @@ const SwapModal = ({
                         }}
                       >
                         <ScrollView
-                          ref={toChainScrollViewRef}
                           horizontal
                           style={{
                             height: 34,
@@ -387,11 +400,11 @@ const SwapModal = ({
                                   accountAddress: selectedFrom?.address,
                                 });
 
-                                // 下面加这一段
-                                const chainName = selectedFrom?.chain; // 比如 "Bitcoin"
-                                setSelectedToChain(chainName); // 设置To的链标签
+                                const chainName = selectedFrom?.chain;
+                                if (!chainName) return;
 
-                                // 滚动到对应chain的标签位置
+                                setSelectedToChain(chainName);
+
                                 const chainList = [
                                   ...new Set(
                                     chainCategories.map((item) => item.chain)
@@ -399,13 +412,18 @@ const SwapModal = ({
                                 ];
                                 const index = chainList.indexOf(chainName);
                                 if (
-                                  toChainScrollViewRef.current &&
+                                  toChainTagsScrollRef.current &&
                                   index !== -1
                                 ) {
-                                  toChainScrollViewRef.current.scrollTo({
-                                    x: index * 100, // 每个链按钮大概宽度估算，比如100px
-                                    animated: true,
-                                  });
+                                  setTimeout(() => {
+                                    // 🔥加setTimeout确保scrollView已经渲染完
+                                    const BUTTON_WIDTH = 80;
+                                    const scrollX = index * (BUTTON_WIDTH + 8);
+                                    toChainTagsScrollRef.current.scrollTo({
+                                      x: scrollX,
+                                      animated: true,
+                                    });
+                                  }, 0);
                                 }
                               }}
                             >
@@ -562,6 +580,7 @@ const SwapModal = ({
                       />
                       <View style={{ marginBottom: 6 }}>
                         <ScrollView
+                          ref={toChainTagsScrollRef}
                           horizontal
                           style={{
                             height: 34,
