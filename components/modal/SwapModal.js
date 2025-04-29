@@ -13,6 +13,7 @@ import {
   TouchableWithoutFeedback,
   InteractionManager,
 } from "react-native";
+import { Buffer } from "buffer";
 import { BlurView } from "expo-blur";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { useTranslation } from "react-i18next";
@@ -112,14 +113,25 @@ const SwapModal = ({
         console.log("找不到代币详情");
         return;
       }
-
+      /* 
       const requestBody = {
         chain: fromDetails.queryChainName || "ethereum",
         fromTokenAddress: fromDetails.contractAddress,
         toTokenAddress: toDetails.contractAddress,
         amount: fromValue.toString(),
         userWalletAddress: fromDetails.address,
-        slippage: "0.01",
+        slippage: "1",
+        provider: "openocean",
+      };
+ */
+
+      const requestBody = {
+        chain: "ethereum",
+        fromTokenAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+        toTokenAddress: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+        amount: fromValue.toString(),
+        userWalletAddress: "0x36F06561b946801DCa606842C9701EA3Fe850Ca2",
+        slippage: "1",
         provider: "openocean",
       };
 

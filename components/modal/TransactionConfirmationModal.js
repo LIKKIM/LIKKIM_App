@@ -59,7 +59,12 @@ const TransactionConfirmationModal = ({
             {selectedCryptoIcon && (
               <Image
                 source={selectedCryptoIcon}
-                style={{ width: 24, height: 24, marginRight: 8 }}
+                style={{
+                  width: 24,
+                  height: 24,
+                  marginRight: 8,
+                  marginBottom: 10,
+                }}
               />
             )}
             <Text style={TransactionsScreenStyle.modalTitle}>
