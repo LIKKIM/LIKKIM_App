@@ -42,7 +42,7 @@ export default {
     },
     supportsTablet: false,
     buildNumber: "16.3.3",
-    bundleIdentifier: "RN.LKKIM",
+    bundleIdentifier: "com.likkim.likkim",
     icon: "./assets/icon.png",
   },
   android: {
