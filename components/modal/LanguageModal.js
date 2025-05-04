@@ -53,10 +53,6 @@ const LanguageModal = ({
                 style={styles.languageModalView}
                 onStartShouldSetResponder={() => true}
               >
-                <Text style={styles.languageModalTitle}>
-                  {t("Select Language")}
-                </Text>
-
                 <View style={styles.searchContainer}>
                   <Icon name="search" size={20} style={styles.searchIcon} />
                   <TextInput
@@ -81,13 +77,6 @@ const LanguageModal = ({
                     </TouchableOpacity>
                   ))}
                 </ScrollView>
-
-                <TouchableOpacity
-                  style={styles.languageCancelButton}
-                  onPress={onClose}
-                >
-                  <Text style={styles.cancelButtonText}>{t("Cancel")}</Text>
-                </TouchableOpacity>
               </View>
             </BlurView>
           </KeyboardAvoidingView>

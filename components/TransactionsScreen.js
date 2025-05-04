@@ -6,8 +6,6 @@ import { Buffer } from "buffer";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Constants from "expo-constants";
 import { useTranslation } from "react-i18next";
-import Icon from "react-native-vector-icons/MaterialIcons";
-import Feather from "react-native-vector-icons/Feather";
 import { ethers } from "ethers";
 import { BleManager } from "react-native-ble-plx";
 import "react-native-get-random-values";
@@ -16,7 +14,7 @@ import "@ethersproject/shims";
 // 配置与工具
 import { prefixToShortName } from "../config/chainPrefixes";
 import cryptoPathMapping from "../config/cryptoPathMapping";
-import coinCommandMapping from "../config/coinCommandMapping";
+
 import { detectNetwork } from "../config/networkUtils";
 import checkAndReqPermission from "../utils/BluetoothPermissions";
 import {
@@ -46,11 +44,12 @@ import SelectCryptoModal from "./modal/SelectCryptoModal";
 import SwapModal from "./modal/SwapModal";
 import ReceiveAddressModal from "./modal/ReceiveAddressModal";
 import PinModal from "./modal/PinModal";
-import TransactionHistory from "./transactionScreens/TransactionHistory";
-import ActionButtons from "./transactionScreens/ActionButtons";
+import TransactionHistory from "./TransactionScreens/TransactionHistory";
+import ActionButtons from "./TransactionScreens/ActionButtons";
 
-// 显示地址函数 发送数据写法
+// 自定义组件
 import showLIKKIMAddressCommand from "../utils/showLIKKIMAddressCommand";
+import { decrypt } from "../utils/decrypt";
 
 // BLE 常量
 const serviceUUID = "6E400001-B5A3-F393-E0A9-E50E24DCCA9E";
@@ -283,12 +282,6 @@ function TransactionsScreen() {
             pageSize: 10,
           };
 
-          // 打印发出的值
-          /*           console.log(
-            `发送请求 for ${crypto.queryChainName} ${crypto.address}, page ${pageNumber}:`,
-            postData
-          );
- */
           try {
             const response = await fetch(
               "https://bt.likkim.com/api/wallet/queryTransaction",
@@ -302,19 +295,13 @@ function TransactionsScreen() {
             );
             const data = await response.json();
 
-            // 打印返回的值
-            /*          console.log(
-              `返回数据 for ${crypto.queryChainName} ${crypto.address}, page ${pageNumber}:`,
-              data
-            ); */
-
             if (
               data &&
               data.code === "0" &&
               data.data &&
               data.data.length > 0
             ) {
-              // 只保留你关心的字段
+              // 只保留关心的字段
               const processedTransactions = data.data.map((tx) => ({
                 state: tx.state,
                 amount: tx.amount,
@@ -324,24 +311,12 @@ function TransactionsScreen() {
                 symbol: tx.symbol,
                 transactionTime: tx.transactionTime,
               }));
-              // 打印当前卡片处理后的返回结果
-              /*               console.log(
-                `处理后的返回结果 for ${crypto.queryChainName} ${crypto.address}:`,
-                processedTransactions
-              ); */
               allTransactions = allTransactions.concat(processedTransactions);
               pageNumber++;
             } else {
               continueFetching = false;
             }
           } catch (error) {
-            /*          console.log(
-              "查询交易历史失败, chain:",
-              crypto.queryChainName,
-              "address:",
-              crypto.address,
-              error
-            ); */
             continueFetching = false;
           }
         }
@@ -354,8 +329,12 @@ function TransactionsScreen() {
         (acc, transactions) => acc.concat(transactions),
         []
       );
-      //  console.log("所有卡片的交易历史结果:", mergedTransactions);
-      setTransactionHistory(mergedTransactions);
+
+      if (mergedTransactions.length > 0) {
+        setTransactionHistory(mergedTransactions);
+      } else {
+        console.log("API 返回空数组，保留原有的交易记录");
+      }
     }
   };
 
@@ -672,30 +651,6 @@ function TransactionsScreen() {
       uint32Array[0].toString(16).toUpperCase().padStart(8, "0") +
       uint32Array[1].toString(16).toUpperCase().padStart(8, "0")
     );
-  }
-
-  // 解密算法
-  function decrypt(v, k) {
-    let v0 = v[0] >>> 0,
-      v1 = v[1] >>> 0,
-      sum = 0xc6ef3720 >>> 0,
-      i;
-    const delta = 0x9e3779b9 >>> 0;
-    const k0 = k[0] >>> 0,
-      k1 = k[1] >>> 0,
-      k2 = k[2] >>> 0,
-      k3 = k[3] >>> 0;
-
-    for (i = 0; i < 32; i++) {
-      v1 -= (((v0 << 4) >>> 0) + k2) ^ (v0 + sum) ^ (((v0 >>> 5) >>> 0) + k3);
-      v1 >>>= 0;
-      v0 -= (((v1 << 4) >>> 0) + k0) ^ (v1 + sum) ^ (((v1 >>> 5) >>> 0) + k1);
-      v0 >>>= 0;
-      sum -= delta;
-      sum >>>= 0;
-    }
-    v[0] = v0 >>> 0;
-    v[1] = v1 >>> 0;
   }
 
   // 假设在组件中定义了状态：
@@ -1353,7 +1308,6 @@ function TransactionsScreen() {
     }
 
     setSelectedDevice(device);
-    // setModalVisible(false);
     setBleVisible(false);
     try {
       // 异步连接设备和发现服务
@@ -1437,50 +1391,50 @@ function TransactionsScreen() {
 
   // 提交验证码
   const handlePinSubmit = async () => {
-    // 首先关闭 "Enter PIN to Connect" 的模态框
     setPinModalVisible(false);
 
-    // 去除用户输入的 PIN 和接收到的验证码的空格
-    const pinCodeValue = pinCode.trim(); // 去除多余空格
-    const verificationCodeValue = receivedVerificationCode.trim(); // 去除多余空格
+    const pinCodeValue = pinCode.trim();
+    const verificationCodeValue = receivedVerificationCode.trim();
 
-    console.log(`用户输入的 PIN: ${pinCodeValue}`);
-    console.log(`接收到的验证码: ${verificationCodeValue}`);
+    console.log(`User-entered PIN: ${pinCodeValue}`);
+    console.log(`Received verification code: ${verificationCodeValue}`);
 
-    // 检查验证码格式是否正确
-    const [prefix, rest] = verificationCodeValue.split(":"); // 分割出前缀和其余部分
+    const [prefix, rest] = verificationCodeValue.split(":");
     if (prefix !== "PIN" || !rest) {
-      console.log("接收到的验证码格式不正确:", verificationCodeValue);
-      setVerificationFailModalVisible(true); // 显示失败提示
+      console.log(
+        "Received verification code format is incorrect:",
+        verificationCodeValue
+      );
+      setVerificationFailModalVisible(true);
       return;
     }
 
-    // 使用 ',' 分割，提取 PIN 和标志位
-    const [receivedPin, flag] = rest.split(","); // 分割出 PIN 值和标志位
+    const [receivedPin, flag] = rest.split(",");
     if (!receivedPin || (flag !== "Y" && flag !== "N")) {
-      console.log("接收到的验证码格式不正确:", verificationCodeValue);
-      setVerificationFailModalVisible(true); // 显示失败提示
+      console.log(
+        "Received verification code format is incorrect:",
+        verificationCodeValue
+      );
+      setVerificationFailModalVisible(true);
       return;
     }
 
-    console.log(`提取到的 PIN 值: ${receivedPin}`);
-    console.log(`提取到的标志位: ${flag}`);
+    console.log(`Extracted PIN value: ${receivedPin}`);
+    console.log(`Extracted flag: ${flag}`);
 
-    // 验证用户输入的 PIN 是否匹配
     if (pinCodeValue === receivedPin) {
-      console.log("PIN 验证成功");
-      setVerificationSuccessModalVisible(true); // 显示成功提示
+      console.log("PIN verification succeeded");
+      setVerificationSuccessModalVisible(true);
 
       setVerifiedDevices([selectedDevice.id]);
 
-      // 异步存储更新后的 verifiedDevices 数组（只存一个设备ID）
       await AsyncStorage.setItem(
         "verifiedDevices",
         JSON.stringify([selectedDevice.id])
       );
 
       setIsVerificationSuccessful(true);
-      console.log("设备验证并存储成功");
+      console.log("Device verified and stored successfully");
 
       try {
         const confirmationMessage = "PIN_OK";
@@ -1495,11 +1449,7 @@ function TransactionsScreen() {
       } catch (error) {
         console.log("Error sending confirmation message:", error);
       }
-      // 如果标志位为 Y，发送字符串 'address' 以及后续的 pubkey 字符串
       if (flag === "Y") {
-        // 先发送确认消息，告知嵌入式设备验证成功
-
-        // 发送 address 字符串
         try {
           const addressMessage = "address";
           const bufferAddress = Buffer.from(addressMessage, "utf-8");
@@ -1510,12 +1460,11 @@ function TransactionsScreen() {
             writeCharacteristicUUID,
             base64Address
           );
-          console.log("字符串 'address' 已成功发送给设备");
+          console.log("String 'address' sent to device successfully");
         } catch (error) {
-          console.log("发送字符串 'address' 时发生错误:", error);
+          console.log("Error sending string 'address':", error);
         }
 
-        // 定义需要发送的 pubkey 字符串列表
         const pubkeyMessages = [
           "pubkey:cosmos,m/44'/118'/0'/0/0",
           "pubkey:ripple,m/44'/144'/0'/0/0",
@@ -1524,7 +1473,6 @@ function TransactionsScreen() {
           "pubkey:osmosis,m/44'/118'/0'/0/0",
         ];
 
-        // 依次发送每条 pubkey 信息
         for (const pubkeyMessage of pubkeyMessages) {
           try {
             const bufferMessage = Buffer.from(pubkeyMessage, "utf-8");
@@ -1534,40 +1482,41 @@ function TransactionsScreen() {
               writeCharacteristicUUID,
               base64Message
             );
-            console.log(`字符串 '${pubkeyMessage}' 已成功发送给设备`);
+            console.log(
+              `String '${pubkeyMessage}' sent to device successfully`
+            );
           } catch (error) {
-            console.log(`发送字符串 '${pubkeyMessage}' 时发生错误:`, error);
+            console.log(`Error sending string '${pubkeyMessage}':`, error);
           }
         }
       } else if (flag === "N") {
         console.log(
-          "设备返回了 PIN:xxxx,N，无需发送 'address' 和 pubkey 字符串"
+          "Device returned PIN:xxxx,N, no need to send 'address' and pubkey strings"
         );
       }
     } else {
-      console.log("PIN 验证失败");
-      setVerificationFailModalVisible(true); // 显示失败提示
+      console.log("PIN verification failed");
+      setVerificationFailModalVisible(true);
 
       if (monitorSubscription) {
         try {
           monitorSubscription.remove();
-          console.log("验证码监听已停止");
+          console.log("Stopped monitoring verification code");
         } catch (error) {
-          console.log("停止监听时发生错误:", error);
+          console.log("Error occurred while stopping monitoring:", error);
         }
       }
 
       if (selectedDevice) {
         try {
           await selectedDevice.cancelConnection();
-          console.log("已断开与设备的连接");
+          console.log("Disconnected from device");
         } catch (error) {
-          console.log("断开连接时发生错误:", error);
+          console.log("Error occurred while disconnecting:", error);
         }
       }
     }
 
-    // 清空 PIN 输入框
     setPinCode("");
   };
 
@@ -1822,7 +1771,7 @@ function TransactionsScreen() {
           devices={devices}
           isScanning={isScanning}
           iconColor={iconColor}
-          onDevicePress={handleDevicePress}
+          handleDevicePress={handleDevicePress}
           onCancel={() => {
             setBleVisible(false);
             setSelectedDevice(null);
@@ -1877,20 +1826,15 @@ function TransactionsScreen() {
           isDarkMode={isDarkMode}
           visible={swapModalVisible}
           setSwapModalVisible={setSwapModalVisible}
-          fromValue={fromValue}
-          setFromValue={setFromValue}
-          toValue={toValue}
-          setToValue={setToValue}
-          selectedFromToken={selectedFromToken}
-          setSelectedFromToken={setSelectedFromToken}
-          selectedToToken={selectedToToken}
-          setSelectedToToken={setSelectedToToken}
           fromDropdownVisible={fromDropdownVisible}
           setFromDropdownVisible={setFromDropdownVisible}
           toDropdownVisible={toDropdownVisible}
           setToDropdownVisible={setToDropdownVisible}
           initialAdditionalCryptos={initialAdditionalCryptos}
           TransactionsScreenStyle={TransactionsScreenStyle}
+          selectedDevice={selectedDevice}
+          serviceUUID={serviceUUID}
+          writeCharacteristicUUID={writeCharacteristicUUID}
         />
       </View>
     </LinearGradient>

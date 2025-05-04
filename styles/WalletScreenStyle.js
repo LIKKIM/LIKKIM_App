@@ -32,8 +32,7 @@ const WalletScreenStyles = (isDarkMode) => {
 
   // Get device height for dynamic layout calculations
   const { height } = Dimensions.get("window");
-  const containerHeight = height - 360; // Calculated container height
-
+  const containerHeight = height < 700 ? height - 280 : height - 360;
   return StyleSheet.create({
     // Animated container for tabs positioned over content
     animatedTabContainer: {
@@ -102,6 +101,7 @@ const WalletScreenStyles = (isDarkMode) => {
     },
     chainScrollView: {
       marginBottom: 10,
+      height: 34,
       paddingHorizontal: 10,
     },
     chainTag: {
@@ -260,6 +260,14 @@ const WalletScreenStyles = (isDarkMode) => {
       marginBottom: 10,
     },
 
+    sendNftText: {
+      fontSize: 14,
+      color: secondTextColor,
+      textAlign: "center",
+      marginBottom: 20,
+      flexWrap: "wrap",
+    },
+
     // Subtitle text styles
     subtitleText: {
       fontSize: 14,
@@ -356,7 +364,7 @@ const WalletScreenStyles = (isDarkMode) => {
     priceContainer: {
       width: "100%",
       paddingHorizontal: 20,
-      height: 360,
+      height: "100%",
     },
 
     // Search box styles
@@ -423,7 +431,6 @@ const WalletScreenStyles = (isDarkMode) => {
 
     // Add wallet image styles
     addWalletImage: {
-      marginTop: -110,
       width: 326,
       height: 206,
       borderRadius: 20,
@@ -537,6 +544,15 @@ const WalletScreenStyles = (isDarkMode) => {
       alignItems: "center",
       marginTop: 20,
     },
+    NFTButton: {
+      backgroundColor: buttonBackgroundColor,
+      padding: 10,
+      width: "100%",
+      justifyContent: "center",
+      borderRadius: 30,
+      height: 60,
+      alignItems: "center",
+    },
     cancelAddressButton: {
       borderWidth: 3,
       borderColor: buttonBackgroundColor,
@@ -618,6 +634,27 @@ const WalletScreenStyles = (isDarkMode) => {
       padding: 35,
       alignItems: "center",
     },
+
+    NFTmodalView: {
+      width: "90%",
+      backgroundColor: modalBackgroundColor,
+      borderRadius: 20,
+      padding: 30,
+      aspectRatio: 9 / 16,
+      justifyContent: "space-between",
+    },
+
+    inputAddressModal: {
+      width: "90%",
+      backgroundColor: modalBackgroundColor,
+      borderRadius: 20,
+      padding: 30,
+      flex: 1,
+      justifyContent: "space-between",
+
+      maxHeight: 400,
+    },
+
     pendingModalView: {
       margin: 20,
       width: "90%",
@@ -725,6 +762,11 @@ const WalletScreenStyles = (isDarkMode) => {
       color: textColor,
       fontSize: 16,
     },
+    NFTButtonText: {
+      color: textColor,
+      fontSize: 16,
+      textAlign: "center",
+    },
     processButtonText: {
       color: secondTextColor,
       fontSize: 16,
@@ -735,7 +777,8 @@ const WalletScreenStyles = (isDarkMode) => {
     // Add crypto modal styles
     addCryptoModalView: {
       margin: 20,
-      minHeight: 400,
+      //  minHeight: 400,
+      maxHeight: "86%",
       width: "90%",
       backgroundColor: modalBackgroundColor,
       borderRadius: 20,
@@ -806,6 +849,10 @@ const WalletScreenStyles = (isDarkMode) => {
       color: textColor,
       fontSize: 16,
       fontWeight: "bold",
+    },
+    NFTtext: {
+      color: textColor,
+      fontSize: 16,
     },
     modalSubtitle: {
       color: secondTextColor,
@@ -896,7 +943,7 @@ const WalletScreenStyles = (isDarkMode) => {
       lineHeight: 22,
     },
     walletInfoContainer: {
-      height: 400,
+      height: "100%",
       justifyContent: "center",
       paddingHorizontal: 20,
     },
@@ -935,6 +982,15 @@ const WalletScreenStyles = (isDarkMode) => {
       color: textColor,
       backgroundColor: isDarkMode ? "#21201E" : "#E5E1E9",
       textAlignVertical: "top",
+    },
+    input: {
+      backgroundColor: inputBackgroundColor,
+      padding: 10,
+      marginTop: 20,
+      justifyContent: "center",
+      borderRadius: 10,
+      height: 60,
+      alignItems: "center",
     },
   });
 };

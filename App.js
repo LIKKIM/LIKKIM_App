@@ -1,5 +1,4 @@
 // App.js
-
 import "intl-pluralrules";
 import React, { useContext, useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, StatusBar, Modal } from "react-native";
@@ -16,16 +15,12 @@ import styles, { darkTheme, lightTheme } from "./styles";
 import WalletScreen from "./components/WalletScreen";
 import TransactionsScreen from "./components/TransactionsScreen";
 import MyColdWalletScreen from "./components/MyColdWalletScreen";
-import OnboardingScreen from "./components/OnboardingScreen";
-import ScreenLock from "./components/ScreenLock";
-import FindMyLkkim from "./components/MyColdWalletScreen/FindMyLkkim";
+import OnboardingScreen from "./utils/OnboardingScreen";
+import ScreenLock from "./utils/ScreenLock";
+import FindMyLikkim from "./components/MyColdWalletScreen/FindMyLikkim";
 import SupportPage from "./components/MyColdWalletScreen/SupportPage";
-import ConnectLIKKIMAuth from "./components/transactionScreens/ConnectLIKKIMAuth";
-import {
-  CryptoProvider,
-  CryptoContext,
-  DarkModeContext,
-} from "./utils/CryptoContext";
+import ConnectLIKKIMAuth from "./components/TransactionScreens/ConnectLIKKIMAuth";
+import { CryptoProvider, CryptoContext } from "./utils/CryptoContext";
 import i18n from "./config/i18n";
 
 if (__DEV__) {
@@ -35,16 +30,13 @@ if (__DEV__) {
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-/**
- * Main App component.
- * Checks if the app is launched for the first time and displays the onboarding screen accordingly.
- */
 export default function App() {
   const { t } = useTranslation();
   const [isFirstLaunch, setIsFirstLaunch] = useState(null);
   const [headerDropdownVisible, setHeaderDropdownVisible] = useState(false);
   const [selectedCardName, setSelectedCardName] = useState("");
 
+  // Check if the app is launched for the first time
   useEffect(() => {
     AsyncStorage.getItem("alreadyLaunched").then((value) => {
       if (value === null) {
@@ -56,6 +48,7 @@ export default function App() {
     });
   }, []);
 
+  // Handle completion of onboarding
   const handleOnboardingDone = () => {
     setIsFirstLaunch(false);
   };
@@ -64,7 +57,7 @@ export default function App() {
   if (isFirstLaunch === true)
     return (
       <CryptoProvider>
-        <OnboardingApp handleOnboardingDone={handleOnboardingDone} />
+        <OnboardingApp onDone={handleOnboardingDone} />
       </CryptoProvider>
     );
 
@@ -87,7 +80,7 @@ export default function App() {
             </Stack.Screen>
             <Stack.Screen
               name="Find My LIKKIM"
-              component={FindMyLkkim}
+              component={FindMyLikkim}
               options={{ title: t("Find My LIKKIM") }}
             />
             <Stack.Screen
@@ -114,22 +107,20 @@ export default function App() {
 }
 
 /**
- * OnboardingApp component displays the onboarding screen.
+ * OnboardingApp displays the onboarding screen for first-time users.
  */
-function OnboardingApp({ handleOnboardingDone }) {
-  const { isDarkMode } = useContext(DarkModeContext);
-
+function OnboardingApp({ onDone }) {
   return (
     <>
       <StatusBar backgroundColor="#21201E" barStyle="light-content" />
-      <OnboardingScreen onDone={handleOnboardingDone} />
+      <OnboardingScreen onDone={onDone} />
     </>
   );
 }
 
 /**
- * AppContent holds the main content of the application.
- * It includes the Tab Navigator for Wallet, Transactions, and My Cold Wallet screens.
+ * AppContent holds the main application content including the bottom Tab Navigator.
+ * It includes a refreshDarkMode function to update the dark mode state.
  */
 function AppContent({
   t,
@@ -139,13 +130,41 @@ function AppContent({
   setSelectedCardName,
 }) {
   const { isAppLaunching } = useContext(CryptoContext);
-  const { isDarkMode } = useContext(DarkModeContext);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  // Load dark mode value on mount
+  useEffect(() => {
+    AsyncStorage.getItem("darkMode")
+      .then((value) => {
+        if (value !== null) {
+          const parsedValue = JSON.parse(value);
+          setIsDarkMode(parsedValue);
+          console.log("Loaded darkMode value:", parsedValue);
+        }
+      })
+      .catch((error) => console.error("Failed to read darkMode", error));
+  }, []);
+
+  // Refresh dark mode value from AsyncStorage
+  const refreshDarkMode = () => {
+    AsyncStorage.getItem("darkMode")
+      .then((value) => {
+        if (value !== null) {
+          const parsedValue = JSON.parse(value);
+          setIsDarkMode(parsedValue);
+          console.log("Refreshed darkMode:", parsedValue);
+        }
+      })
+      .catch((error) => console.error("Failed to refresh darkMode", error));
+  };
+
   const navigation = useNavigation();
   const [walletModalVisible, setWalletModalVisible] = useState(false);
   const [screenLockFeatureEnabled, setScreenLockFeatureEnabled] =
     useState(false);
   const [isScreenLockLoaded, setIsScreenLockLoaded] = useState(false);
 
+  // Listen for navigation state changes to update wallet modal visibility
   useEffect(() => {
     const unsubscribe = navigation.addListener("state", (e) => {
       const rootRoutes = e.data.state?.routes;
@@ -161,6 +180,7 @@ function AppContent({
     return unsubscribe;
   }, [navigation]);
 
+  // Load screen lock feature flag from AsyncStorage
   useEffect(() => {
     AsyncStorage.getItem("screenLockFeatureEnabled")
       .then((value) => {
@@ -183,14 +203,6 @@ function AppContent({
   if (!isScreenLockLoaded) return null;
   if (screenLockFeatureEnabled && isAppLaunching) return <ScreenLock />;
 
-  const handleConfirmDelete = () => {
-    setHeaderDropdownVisible(false);
-    navigation.navigate("Wallet", {
-      showDeleteConfirmModal: true,
-      isModalVisible: true,
-    });
-  };
-
   const theme = isDarkMode ? darkTheme : lightTheme;
   const tabBarActiveTintColor = isDarkMode ? "#CCB68C" : "#CFAB95";
   const tabBarInactiveTintColor = isDarkMode ? "#ffffff50" : "#676776";
@@ -198,6 +210,14 @@ function AppContent({
   const tabBarBackgroundColor = isDarkMode ? "#22201F" : "#fff";
   const bottomBackgroundColor = isDarkMode ? "#0E0D0D" : "#EDEBEF";
   const iconColor = isDarkMode ? "#ffffff" : "#000000";
+
+  const handleConfirmDelete = () => {
+    setHeaderDropdownVisible(false);
+    navigation.navigate("Wallet", {
+      showDeleteConfirmModal: true,
+      isModalVisible: true,
+    });
+  };
 
   return (
     <View style={{ flex: 1, backgroundColor: bottomBackgroundColor }}>
@@ -267,6 +287,7 @@ function AppContent({
         <Tab.Screen
           name="Wallet"
           component={WalletScreen}
+          initialParams={{ isDarkMode }}
           options={({ route, navigation }) => {
             const cryptoCards = route.params?.cryptoCards || [{}];
             return {
@@ -300,7 +321,11 @@ function AppContent({
           }}
         />
         <Tab.Screen name="Transactions" component={TransactionsScreen} />
-        <Tab.Screen name="My Cold Wallet" component={MyColdWalletScreen} />
+        <Tab.Screen name="My Cold Wallet">
+          {(props) => (
+            <MyColdWalletScreen {...props} onDarkModeChange={refreshDarkMode} />
+          )}
+        </Tab.Screen>
       </Tab.Navigator>
       <StatusBar
         backgroundColor={isDarkMode ? "#21201E" : "#FFFFFF"}

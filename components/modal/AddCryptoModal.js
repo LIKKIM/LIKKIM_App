@@ -20,7 +20,7 @@ const AddCryptoModal = ({
   setSearchQuery,
   filteredCryptos,
   handleAddCrypto,
-  styles,
+  WalletScreenStyle,
   t,
   isDarkMode,
   chainCategories,
@@ -70,12 +70,16 @@ const AddCryptoModal = ({
       visible={visible}
       onRequestClose={onClose}
     >
-      <BlurView intensity={10} style={styles.centeredView}>
-        <View style={styles.addCryptoModalView}>
-          <View style={styles.searchContainer}>
-            <Icon name="search" size={20} style={styles.searchIcon} />
+      <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
+        <View style={WalletScreenStyle.addCryptoModalView}>
+          <View style={WalletScreenStyle.searchContainer}>
+            <Icon
+              name="search"
+              size={20}
+              style={WalletScreenStyle.searchIcon}
+            />
             <TextInput
-              style={styles.searchInput}
+              style={WalletScreenStyle.searchInput}
               placeholder={t("Search Cryptocurrency")}
               placeholderTextColor={isDarkMode ? "#ffffff" : "#21201E"}
               onChangeText={(text) => setSearchQuery(text)}
@@ -85,24 +89,25 @@ const AddCryptoModal = ({
 
           <ScrollView
             horizontal
-            style={styles.chainScrollView}
+            style={WalletScreenStyle.chainScrollView}
             showsHorizontalScrollIndicator={false}
           >
             <TouchableOpacity
               key="All"
               style={[
-                styles.chainTag,
-                selectedChain === "All" && styles.selectedChainTag,
+                WalletScreenStyle.chainTag,
+                selectedChain === "All" && WalletScreenStyle.selectedChainTag,
               ]}
               onPress={() => setSelectedChain("All")}
             >
               <Text
                 style={[
-                  styles.chainTagText,
-                  selectedChain === "All" && styles.selectedChainTagText,
+                  WalletScreenStyle.chainTagText,
+                  selectedChain === "All" &&
+                    WalletScreenStyle.selectedChainTagText,
                 ]}
               >
-                All
+                {t("All")}
               </Text>
             </TouchableOpacity>
             {[...new Set(chainCategories.map((chain) => chain.chain))].map(
@@ -110,8 +115,9 @@ const AddCryptoModal = ({
                 <TouchableOpacity
                   key={chain}
                   style={[
-                    styles.chainTag,
-                    selectedChain === chain && styles.selectedChainTag,
+                    WalletScreenStyle.chainTag,
+                    selectedChain === chain &&
+                      WalletScreenStyle.selectedChainTag,
                   ]}
                   onPress={() => setSelectedChain(chain)}
                 >
@@ -128,14 +134,14 @@ const AddCryptoModal = ({
                               (category) => category.chain === chain
                             )[0].chainIcon
                           }
-                          style={styles.TagChainIcon}
+                          style={WalletScreenStyle.TagChainIcon}
                         />
                       )}
                       <Text
                         style={[
-                          styles.chainTagText,
+                          WalletScreenStyle.chainTagText,
                           selectedChain === chain &&
-                            styles.selectedChainTagText,
+                            WalletScreenStyle.selectedChainTagText,
                         ]}
                       >
                         {chain}
@@ -148,7 +154,7 @@ const AddCryptoModal = ({
           </ScrollView>
 
           <ScrollView
-            style={styles.addCryptoScrollView}
+            style={WalletScreenStyle.addCryptoScrollView}
             showsVerticalScrollIndicator={false}
             showsHorizontalScrollIndicator={false}
           >
@@ -156,7 +162,7 @@ const AddCryptoModal = ({
               <TouchableOpacity
                 key={`${crypto.name}-${crypto.chain}`}
                 style={[
-                  styles.addCryptoButton,
+                  WalletScreenStyle.addCryptoButton,
                   {
                     borderWidth: 2,
                     borderColor: selectedCryptos.includes(crypto)
@@ -174,14 +180,14 @@ const AddCryptoModal = ({
               >
                 <ImageBackground
                   source={crypto.cardImage}
-                  style={styles.addCryptoImage}
+                  style={WalletScreenStyle.addCryptoImage}
                   imageStyle={{
                     borderRadius: 12,
                     backgroundColor: "#ffffff50",
                   }}
                 >
-                  <View style={styles.addCryptoOverlay} />
-                  <View style={styles.iconAndTextContainer}>
+                  <View style={WalletScreenStyle.addCryptoOverlay} />
+                  <View style={WalletScreenStyle.iconAndTextContainer}>
                     <View
                       style={{
                         width: 30,
@@ -193,9 +199,12 @@ const AddCryptoModal = ({
                         overflow: "hidden",
                       }}
                     >
-                      <Image source={crypto.icon} style={styles.addCardIcon} />
+                      <Image
+                        source={crypto.icon}
+                        style={WalletScreenStyle.addCardIcon}
+                      />
                     </View>
-                    <Text style={styles.addCryptoImageText}>
+                    <Text style={WalletScreenStyle.addCryptoImageText}>
                       {crypto.shortName}
                     </Text>
                   </View>
@@ -236,9 +245,13 @@ const AddCryptoModal = ({
                     alignItems: "center",
                   }}
                 >
-                  <Text style={styles.addCryptoText}>{crypto.name}</Text>
-                  <View style={styles.chainContainer}>
-                    <Text style={styles.chainCardText}>{crypto.chain}</Text>
+                  <Text style={WalletScreenStyle.addCryptoText}>
+                    {crypto.name}
+                  </Text>
+                  <View style={WalletScreenStyle.chainContainer}>
+                    <Text style={WalletScreenStyle.chainCardText}>
+                      {crypto.chain}
+                    </Text>
                   </View>
                 </View>
               </TouchableOpacity>
@@ -248,8 +261,8 @@ const AddCryptoModal = ({
           <TouchableOpacity
             style={[
               selectedCryptos.length > 0
-                ? styles.addModalButton
-                : styles.disabledButton,
+                ? WalletScreenStyle.addModalButton
+                : WalletScreenStyle.disabledButton,
             ]}
             onPress={() => {
               if (selectedCryptos.length > 0) {
@@ -263,16 +276,19 @@ const AddCryptoModal = ({
             <Text
               style={[
                 selectedCryptos.length > 0
-                  ? styles.confirmText
-                  : styles.disabledText,
+                  ? WalletScreenStyle.confirmText
+                  : WalletScreenStyle.disabledText,
               ]}
             >
               {t("Confirm")}
             </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.cancelButton} onPress={onClose}>
-            <Text style={styles.cancelButtonText}>{t("Close")}</Text>
+          <TouchableOpacity
+            style={WalletScreenStyle.cancelButton}
+            onPress={onClose}
+          >
+            <Text style={WalletScreenStyle.cancelButtonText}>{t("Close")}</Text>
           </TouchableOpacity>
         </View>
       </BlurView>

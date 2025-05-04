@@ -27,11 +27,22 @@ export default {
         "Access to Bluetooth is required to connect to the wallet device",
       NSLocationWhenInUseUsageDescription:
         "Location access is needed for Bluetooth scanning",
-      UIBackgroundModes: ["bluetooth-central", "bluetooth-peripheral"],
+      NSLocationAlwaysUsageDescription:
+        "Location access is required for background location updates.",
+      NSMotionUsageDescription: "Motion data is used for device interactions.",
+      UIBackgroundModes: [
+        "bluetooth-central",
+        "bluetooth-peripheral",
+        "location",
+        "fetch",
+        "remote-notification",
+      ],
+      NFCReaderUsageDescription:
+        "Allow $(PRODUCT_NAME) to read NFC tags to support secure transactions.",
     },
     supportsTablet: false,
-    buildNumber: "16.2.9",
-    bundleIdentifier: "RN.LKKIM",
+    buildNumber: "16.3.3",
+    bundleIdentifier: "com.likkim.likkim",
     icon: "./assets/icon.png",
   },
   android: {
@@ -42,7 +53,7 @@ export default {
       },
     },
     versionCode: 5,
-    package: "com.app.likkim",
+    package: "com.likkim.wallet",
   },
   web: {
     favicon: "./assets/favicon.png",
@@ -60,6 +71,14 @@ export default {
       {
         locationAlwaysAndWhenInUsePermission:
           "Allow $(PRODUCT_NAME) to use your location.",
+      },
+    ],
+    [
+      "expo-notifications",
+      {
+        mode: "production",
+        icon: "./assets/notification-icon.png",
+        color: "#ffffff",
       },
     ],
   ],

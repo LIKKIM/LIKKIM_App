@@ -48,7 +48,7 @@ import { Buffer } from "buffer";
 import appConfig from "../app.config";
 import { prefixToShortName } from "../config/chainPrefixes";
 import checkAndReqPermission from "../utils/BluetoothPermissions"; // Request Bluetooth permission on Android
-
+import { decrypt } from "../utils/decrypt";
 let PermissionsAndroid;
 if (Platform.OS === "android") {
   PermissionsAndroid = require("react-native").PermissionsAndroid;
@@ -58,7 +58,7 @@ const serviceUUID = "6E400001-B5A3-F393-E0A9-E50E24DCCA9E";
 const writeCharacteristicUUID = "6E400002-B5A3-F393-E0A9-E50E24DCCA9E";
 const notifyCharacteristicUUID = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E";
 
-function MyColdWalletScreen() {
+function MyColdWalletScreen({ onDarkModeChange }) {
   const { t } = useTranslation();
   const navigation = useNavigation();
   const {
@@ -76,7 +76,6 @@ function MyColdWalletScreen() {
     setCryptoCards,
     updateCryptoPublicKey,
   } = useContext(CryptoContext);
-
   const { isDarkMode, setIsDarkMode } = useContext(DarkModeContext);
   const MyColdWalletScreenStyle = MyColdWalletScreenStyles(isDarkMode);
   const [currencyModalVisible, setCurrencyModalVisible] = useState(false);
@@ -118,8 +117,8 @@ function MyColdWalletScreen() {
   );
   const [confirmPasswordModalVisible, setConfirmPasswordModalVisible] =
     useState(false);
-  const [storedPassword, setStoredPassword] = useState(""); // Stored password
-  const [passwordError, setPasswordError] = useState(""); // Password error state
+  const [storedPassword, setStoredPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const [confirmDisconnectModalVisible, setConfirmDisconnectModalVisible] =
     useState(false);
   const [deviceToDisconnect, setDeviceToDisconnect] = useState(null);
@@ -136,13 +135,11 @@ function MyColdWalletScreen() {
   ]);
 
   const handleAddAddress = () => {
-    // Handle adding a new address
     console.log("Add Address button clicked");
   };
 
   const handleAddressSelect = (address) => {
     console.log("Selected Address:", address);
-    // Further processing for the selected address can be added here
   };
 
   const [isFaceIDEnabled, setIsFaceIDEnabled] = useState(() => {
@@ -153,7 +150,6 @@ function MyColdWalletScreen() {
 
   const toggleFaceID = async (value) => {
     if (value) {
-      // Verify Face ID when enabling
       const result = await LocalAuthentication.authenticateAsync({
         promptMessage: t("Authenticate to enable Face ID"),
       });
@@ -164,20 +160,17 @@ function MyColdWalletScreen() {
         Alert.alert(t("Authentication Failed"), t("Unable to enable Face ID."));
       }
     } else {
-      // Disable directly
       setIsFaceIDEnabled(value);
       await AsyncStorage.setItem("faceID", "close");
     }
   };
 
-  // Set disconnect modal state
   const handleDisconnectPress = (device) => {
-    setModalVisible(false); // Close device selection modal
+    setModalVisible(false);
     setDeviceToDisconnect(device);
     setConfirmDisconnectModalVisible(true);
   };
 
-  // Called when user confirms disconnection
   const confirmDisconnect = async () => {
     if (deviceToDisconnect) {
       await handleDisconnectDevice(deviceToDisconnect);
@@ -186,29 +179,25 @@ function MyColdWalletScreen() {
     }
   };
 
-  // Called when user cancels disconnection
   const cancelDisconnect = () => {
     setConfirmDisconnectModalVisible(false);
     setModalVisible(true);
   };
 
-  // Close password modal and clear input
   const closePasswordModal = () => {
     setPasswordModalVisible(false);
-    setPassword(""); // Clear password input
-    setConfirmPassword(""); // Clear confirmation input
+    setPassword("");
+    setConfirmPassword("");
     setIsPasswordHidden(true);
     setIsConfirmPasswordHidden(true);
   };
 
-  // Close enter password modal and clear input
   const closeEnterPasswordModal = () => {
     setEnterPasswordModalVisible(false);
-    setCurrentPassword(""); // Clear current password input
+    setCurrentPassword("");
     setIsCurrentPasswordHidden(true);
   };
 
-  // Open password modal and clear input
   const openPasswordModal = () => {
     setPassword("");
     setConfirmPassword("");
@@ -217,21 +206,18 @@ function MyColdWalletScreen() {
     setPasswordModalVisible(true);
   };
 
-  // Open enter password modal and clear input
   const openEnterPasswordModal = () => {
     setCurrentPassword("");
     setIsCurrentPasswordHidden(true);
     setEnterPasswordModalVisible(true);
   };
 
-  // Open change password modal and clear input
   const openChangePasswordModal = () => {
     setCurrentPassword("");
     setIsCurrentPasswordHidden(true);
     setChangePasswordModalVisible(true);
   };
 
-  // Open new password modal and clear input
   const openNewPasswordModal = () => {
     setPasswordError("");
     setPassword("");
@@ -251,7 +237,6 @@ function MyColdWalletScreen() {
     loadLanguageSetting();
   }, []);
 
-  // Load verified devices from storage
   useEffect(() => {
     const loadVerifiedDevices = async () => {
       try {
@@ -266,7 +251,6 @@ function MyColdWalletScreen() {
     loadVerifiedDevices();
   }, []);
 
-  // Stop monitoring when PIN modal is closed
   useEffect(() => {
     if (!pinModalVisible) {
       stopMonitoringVerificationCode();
@@ -275,9 +259,9 @@ function MyColdWalletScreen() {
 
   const handleScreenLockToggle = async (value) => {
     if (value) {
-      openPasswordModal(); // Enable lock: open set password modal
+      openPasswordModal();
     } else {
-      openEnterPasswordModal(); // Disable lock: open enter password modal
+      openEnterPasswordModal();
     }
   };
 
@@ -310,7 +294,6 @@ function MyColdWalletScreen() {
     }
   };
 
-  // Handle password modal submission
   const handleSetPassword = async () => {
     if (password.length < 4) {
       setPasswordError(t("Password must be at least 4 characters long"));
@@ -332,7 +315,6 @@ function MyColdWalletScreen() {
     }
   };
 
-  // Handle enter password modal submission
   const handleConfirmPassword = async () => {
     if (currentPassword === screenLockPassword) {
       toggleScreenLock(false);
@@ -363,7 +345,6 @@ function MyColdWalletScreen() {
 
       const subscription = bleManagerRef.current.onStateChange((state) => {
         if (state === "PoweredOn") {
-          // Delay to ensure Bluetooth is ready
           setTimeout(() => {
             scanDevices();
           }, 2000);
@@ -414,9 +395,13 @@ function MyColdWalletScreen() {
     setLanguageModalVisible(false);
   };
 
+  // 修改后的 handleDarkModeChange 方法，添加 onDarkModeChange 回调调用
   const handleDarkModeChange = async (value) => {
     setIsDarkMode(value);
     await AsyncStorage.setItem("darkMode", JSON.stringify(value));
+    if (typeof onDarkModeChange === "function") {
+      onDarkModeChange();
+    }
   };
 
   useEffect(() => {
@@ -475,7 +460,6 @@ function MyColdWalletScreen() {
   };
 
   function hexStringToUint32Array(hexString) {
-    // Convert hex string to two 32-bit unsigned integers
     return new Uint32Array([
       parseInt(hexString.slice(0, 8), 16),
       parseInt(hexString.slice(8, 16), 16),
@@ -483,40 +467,13 @@ function MyColdWalletScreen() {
   }
 
   function uint32ArrayToHexString(uint32Array) {
-    // Convert two 32-bit integers to a hex string
     return (
       uint32Array[0].toString(16).toUpperCase().padStart(8, "0") +
       uint32Array[1].toString(16).toUpperCase().padStart(8, "0")
     );
   }
 
-  // Decryption algorithm
-  function decrypt(v, k) {
-    let v0 = v[0] >>> 0,
-      v1 = v[1] >>> 0,
-      sum = 0xc6ef3720 >>> 0,
-      i;
-    const delta = 0x9e3779b9 >>> 0;
-    const k0 = k[0] >>> 0,
-      k1 = k[1] >>> 0,
-      k2 = k[2] >>> 0,
-      k3 = k[3] >>> 0;
-    for (i = 0; i < 32; i++) {
-      v1 -= (((v0 << 4) >>> 0) + k2) ^ (v0 + sum) ^ (((v0 >>> 5) >>> 0) + k3);
-      v1 >>>= 0;
-      v0 -= (((v1 << 4) >>> 0) + k0) ^ (v1 + sum) ^ (((v1 >>> 5) >>> 0) + k1);
-      v0 >>>= 0;
-      sum -= delta;
-      sum >>>= 0;
-    }
-    v[0] = v0 >>> 0;
-    v[1] = v1 >>> 0;
-  }
-
-  // 假设在组件中定义了状态：
   const [receivedAddresses, setReceivedAddresses] = useState({});
-  // verificationStatus 用于表示整体状态
-  // 例如：setVerificationStatus("waiting") 或 setVerificationStatus("success")
 
   let monitorSubscription;
 
@@ -525,7 +482,6 @@ function MyColdWalletScreen() {
       monitorSubscription.remove();
       monitorSubscription = null;
     }
-    //bugging 这里要有循环查询地址的机制
     monitorSubscription = device.monitorCharacteristicForService(
       serviceUUID,
       notifyCharacteristicUUID,
@@ -538,7 +494,6 @@ function MyColdWalletScreen() {
         const receivedDataString = receivedData.toString("utf8");
         console.log("Received data string:", receivedDataString);
 
-        // 检查数据是否以已知前缀开头（例如 "bitcoin:"、"ethereum:" 等）
         const prefix = Object.keys(prefixToShortName).find((key) =>
           receivedDataString.startsWith(key)
         );
@@ -548,10 +503,8 @@ function MyColdWalletScreen() {
           console.log(`Received ${chainShortName} address: `, newAddress);
           updateCryptoAddress(chainShortName, newAddress);
 
-          // 更新 receivedAddresses 状态，并检查是否全部接收
           setReceivedAddresses((prev) => {
             const updated = { ...prev, [chainShortName]: newAddress };
-            // 假设预期地址数量与 prefixToShortName 中的条目数一致
             const expectedCount = Object.keys(prefixToShortName).length;
             if (Object.keys(updated).length >= expectedCount) {
               setVerificationStatus("walletReady");
@@ -575,7 +528,6 @@ function MyColdWalletScreen() {
           }
         }
 
-        // Process data containing "ID:"
         if (receivedDataString.includes("ID:")) {
           const encryptedHex = receivedDataString.split("ID:")[1];
           const encryptedData = hexStringToUint32Array(encryptedHex);
@@ -588,7 +540,6 @@ function MyColdWalletScreen() {
           }
         }
 
-        // If data is "VALID", update status and send "validation"
         if (receivedDataString === "VALID") {
           try {
             setVerificationStatus("VALID");
@@ -611,7 +562,6 @@ function MyColdWalletScreen() {
           }
         }
 
-        // Extract complete PIN data (e.g., PIN:1234,Y or PIN:1234,N)
         if (receivedDataString.startsWith("PIN:")) {
           setReceivedVerificationCode(receivedDataString);
           console.log("Complete PIN data received:", receivedDataString);
@@ -636,7 +586,6 @@ function MyColdWalletScreen() {
     setModalVisible(false);
   };
 
-  // Handle device selection and show modal
   const handleDevicePress = async (device) => {
     setReceivedAddresses({});
     setVerificationStatus(null);
@@ -647,7 +596,6 @@ function MyColdWalletScreen() {
       await device.discoverAllServicesAndCharacteristics();
       console.log("Device connected and services discovered");
 
-      // Function to send decrypted value to device
       const sendDecryptedValue = async (decryptedValue) => {
         try {
           const message = `ID:${decryptedValue}`;
@@ -664,7 +612,6 @@ function MyColdWalletScreen() {
         }
       };
 
-      // Start monitoring before sending request
       monitorVerificationCode(device, sendDecryptedValue);
       setTimeout(async () => {
         try {
@@ -686,37 +633,39 @@ function MyColdWalletScreen() {
       console.log("Error connecting or sending command to device:", error);
     }
   };
-
-  // Validate the PIN input
+  // MyColdWalletScreen.js handlePinSubmit
   const handlePinSubmit = async () => {
     setPinModalVisible(false);
     setVerificationModalVisible(false);
     const verificationCodeValue = receivedVerificationCode.trim();
     const pinCodeValue = pinCode.trim();
+
     console.log(`User PIN: ${pinCodeValue}`);
     console.log(`Received data: ${verificationCodeValue}`);
+
     const [prefix, rest] = verificationCodeValue.split(":");
     if (prefix !== "PIN" || !rest) {
       console.log("Invalid verification format:", verificationCodeValue);
       setVerificationStatus("fail");
       return;
     }
+
     const [receivedPin, flag] = rest.split(",");
     if (!receivedPin || (flag !== "Y" && flag !== "N")) {
       console.log("Invalid verification format:", verificationCodeValue);
       setVerificationStatus("fail");
       return;
     }
+
     console.log(`Extracted PIN: ${receivedPin}`);
     console.log(`Flag: ${flag}`);
 
     if (pinCodeValue === receivedPin) {
       console.log("PIN verified successfully");
-      setVerificationStatus("waiting");
+      setVerificationStatus("success");
       setVerifiedDevices([selectedDevice.id]);
       await AsyncStorage.setItem(
         "verifiedDevices",
-        // save ble id
         JSON.stringify([selectedDevice.id])
       );
       setIsVerificationSuccessful(true);
@@ -748,14 +697,11 @@ function MyColdWalletScreen() {
             base64Address
           );
           console.log("Sent 'address' to device");
-
-          // 发送 address 后立即打开弹窗
           setVerificationModalVisible(true);
         } catch (error) {
           console.log("Error sending 'address':", error);
         }
 
-        // 逐条发送 pubkey 消息
         const pubkeyMessages = [
           "pubkey:cosmos,m/44'/118'/0'/0/0",
           "pubkey:ripple,m/44'/144'/0'/0/0",
@@ -763,6 +709,7 @@ function MyColdWalletScreen() {
           "pubkey:juno,m/44'/118'/0'/0/0",
           "pubkey:osmosis,m/44'/118'/0'/0/0",
         ];
+
         for (const message of pubkeyMessages) {
           try {
             const bufferMessage = Buffer.from(message, "utf-8");
@@ -779,7 +726,6 @@ function MyColdWalletScreen() {
         }
       } else if (flag === "N") {
         console.log("Flag N received; no 'address' sent");
-        // 直接打开弹窗
         setVerificationModalVisible(true);
       }
     } else {
@@ -797,7 +743,6 @@ function MyColdWalletScreen() {
     setPinCode("");
   };
 
-  // Handle device disconnection
   const handleDisconnectDevice = async (device) => {
     try {
       const isConnected = await device.isConnected();
@@ -831,23 +776,18 @@ function MyColdWalletScreen() {
     }
   };
 
-  // 修改 handleFirmwareUpdate 函数
-  // 修改后的固件更新函数：仅发送第一块数据进行测试
-  const XMODEM_BLOCK_SIZE = 64; // 每个数据块 128 字节
+  const XMODEM_BLOCK_SIZE = 100;
 
   const handleFirmwareUpdate = async () => {
     console.log("Firmware Update clicked");
-    // 检查是否已连接蓝牙设备
     if (!selectedDevice) {
-      Alert.alert(
-        t("Error"),
-        t("No device paired. Please pair with device first.")
-      );
+      setModalMessage(t("No device paired. Please pair with device first."));
+      setErrorModalVisible(true);
+
       return;
     }
 
     try {
-      // 下载固件文件
       const response = await fetch(
         "https://file.likkim.com/algo/lvgl_exec.dat"
       );
@@ -858,9 +798,7 @@ function MyColdWalletScreen() {
       const firmwareData = new Uint8Array(arrayBuffer);
       console.log("Firmware downloaded, size:", firmwareData.length);
 
-      // 取出文件的第一个 128 字节数据块
       let firstBlock = firmwareData.slice(0, XMODEM_BLOCK_SIZE);
-      // 如果数据不足 128 字节，则用 0x1A 填充到 128 字节
       if (firstBlock.length < XMODEM_BLOCK_SIZE) {
         const padded = new Uint8Array(XMODEM_BLOCK_SIZE);
         padded.set(firstBlock);
@@ -868,22 +806,18 @@ function MyColdWalletScreen() {
         firstBlock = padded;
       }
 
-      // 将这 128 字节数据转换为十六进制字符串（每个字节两位）
       const hexBlock = Array.from(firstBlock)
         .map((byte) => ("0" + (byte & 0xff).toString(16)).slice(-2))
         .join("");
 
-      // 构造命令字符串：前缀 "XMODEM_UPDATE:" + 十六进制字符串
       const commandString = "XMODEM_UPDATE:" + hexBlock;
       console.log("Command String:", commandString);
 
-      // 将命令字符串按 UTF-8 编码转换为 Buffer，再转换为 Base64 编码的字符串
       const base64Command = Buffer.from(commandString, "utf-8").toString(
         "base64"
       );
       console.log("Base64 Command:", base64Command);
 
-      // 发送 Base64 编码后的纯文本命令给嵌入式设备
       await selectedDevice.writeCharacteristicWithResponseForService(
         serviceUUID,
         writeCharacteristicUUID,
@@ -902,7 +836,6 @@ function MyColdWalletScreen() {
       Alert.alert(t("Firmware Update Error"), error.message);
     }
   };
-
   // XMODEM 协议传输函数（简化实现）
   // 1. 将当前数据块转换为 Base64 后发送给设备。
   // 2. 每个数据块最多尝试发送 10 次，直到收到设备返回的 ACK（0x06）。
@@ -916,33 +849,27 @@ function MyColdWalletScreen() {
       offset < firmwareData.length;
       offset += XMODEM_BLOCK_SIZE
     ) {
-      // 取出当前块数据
       let blockData = firmwareData.slice(offset, offset + XMODEM_BLOCK_SIZE);
-      // 不足 128 字节则用 0x1A（SUB）填充
       if (blockData.length < XMODEM_BLOCK_SIZE) {
         const padded = new Uint8Array(XMODEM_BLOCK_SIZE);
         padded.set(blockData);
         padded.fill(0x1a, blockData.length);
         blockData = padded;
       }
-      // 构造 XMODEM 数据包：[SOH, block#, 255 - block#, data(128字节), checksum]
       const packet = new Uint8Array(3 + XMODEM_BLOCK_SIZE + 1);
       packet[0] = SOH;
       packet[1] = blockNumber & 0xff;
       packet[2] = ~blockNumber & 0xff;
       packet.set(blockData, 3);
-      // 计算简单校验和（所有数据字节求和 mod 256）
       let checksum = 0;
       for (const byte of blockData) {
         checksum = (checksum + byte) & 0xff;
       }
       packet[3 + XMODEM_BLOCK_SIZE] = checksum;
 
-      // 尝试发送当前块，最多重传 10 次
       let success = false;
       let retries = 0;
       while (!success && retries < 10) {
-        // 将 packet 转换为 Base64 字符串并写入蓝牙特征
         const base64Packet = Buffer.from(packet).toString("base64");
         await device.writeCharacteristicWithResponseForService(
           serviceUUID,
@@ -950,7 +877,6 @@ function MyColdWalletScreen() {
           base64Packet
         );
         console.log(`Sent block ${blockNumber}, retry ${retries}`);
-        // 等待设备响应（ACK/NAK），这里使用 waitForResponse 简单实现
         const response = await waitForResponse(device);
         if (response === ACK) {
           success = true;
@@ -965,7 +891,6 @@ function MyColdWalletScreen() {
       }
       blockNumber = (blockNumber + 1) & 0xff;
     }
-    // 全部数据传输完成后，发送 EOT（结束传输）
     let eotSent = false;
     let eotRetries = 0;
     while (!eotSent && eotRetries < 10) {
@@ -988,7 +913,6 @@ function MyColdWalletScreen() {
     }
   }
 
-  // 简单实现一个等待设备响应的函数（监听 notifyCharacteristic）
   function waitForResponse(device) {
     return new Promise((resolve, reject) => {
       const subscription = device.monitorCharacteristicForService(
@@ -1003,12 +927,10 @@ function MyColdWalletScreen() {
           const data = Buffer.from(characteristic.value, "base64");
           if (data.length > 0) {
             subscription.remove();
-            // 假设设备响应为单字节数据
             resolve(data[0]);
           }
         }
       );
-      // 超时 5 秒未响应，则 reject
       setTimeout(() => {
         subscription.remove();
         reject(new Error("Response timeout"));
@@ -1045,7 +967,6 @@ function MyColdWalletScreen() {
     handleDeleteWallet,
   });
 
-  // Confirm delete wallet alert
   const handleDeleteWallet = () => {
     Alert.alert(
       t("Warning"),
@@ -1069,7 +990,6 @@ function MyColdWalletScreen() {
     );
   };
 
-  // Delete wallet from storage and state
   const deleteWallet = async () => {
     try {
       const cryptoCardsData = await AsyncStorage.getItem("cryptoCards");
@@ -1171,7 +1091,6 @@ function MyColdWalletScreen() {
       />
 
       {/* Disable Lock Screen Modal */}
-
       <DisableLockScreenModal
         visible={enterPasswordModalVisible}
         onRequestClose={closeEnterPasswordModal}
@@ -1213,7 +1132,6 @@ function MyColdWalletScreen() {
       />
 
       {/* New Password Modal */}
-
       <NewPasswordModal
         visible={newPasswordModalVisible}
         onRequestClose={() => setNewPasswordModalVisible(false)}
@@ -1239,7 +1157,7 @@ function MyColdWalletScreen() {
         devices={devices}
         isScanning={isScanning}
         iconColor={blueToothColor}
-        onDevicePress={handleDevicePress}
+        handleDevicePress={handleDevicePress}
         onCancel={handleCancel}
         verifiedDevices={verifiedDevices}
         MyColdWalletScreenStyle={MyColdWalletScreenStyle}
@@ -1306,6 +1224,25 @@ function MyColdWalletScreen() {
         isDarkMode={isDarkMode}
         onAddAddress={handleAddAddress}
       />
+      <Modal
+        visible={errorModalVisible}
+        transparent={true}
+        animationType="slide"
+        onRequestClose={() => setErrorModalVisible(false)}
+      >
+        <View style={MyColdWalletScreenStyle.modalContainer}>
+          <View style={MyColdWalletScreenStyle.modalContent}>
+            <Text style={MyColdWalletScreenStyle.modalTitle}>{t("Error")}</Text>
+            <Text style={MyColdWalletScreenStyle.modalMessage}>
+              {modalMessage}
+            </Text>
+            <Button
+              title={t("OK")}
+              onPress={() => setErrorModalVisible(false)}
+            />
+          </View>
+        </View>
+      </Modal>
     </LinearGradient>
   );
 }

@@ -1,4 +1,4 @@
-// components/OnboardingScreen.js
+// utils/OnboardingScreen.js
 import React, { useState, useEffect, useRef } from "react";
 import {
   View,
@@ -17,6 +17,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { languages } from "../config/languages";
 import i18n from "../config/i18n";
+import { BlurView } from "expo-blur";
 
 const { width, height } = Dimensions.get("window");
 
@@ -104,14 +105,14 @@ const OnboardingScreen = ({ onDone }) => {
   const renderItem = ({ item, index }) => {
     return (
       <LinearGradient colors={["#21201E", "#0E0D0D"]} style={styles.slide}>
-        <TouchableOpacity
-          style={styles.languageButton}
-          onPress={() => setLanguageModalVisible(true)}
-        >
-          <Text style={styles.buttonText}>
-            {languages.find((lang) => lang.code === selectedLanguage).name}
-          </Text>
-        </TouchableOpacity>
+        <BlurView intensity={50} style={StyleSheet.absoluteFillObject}>
+          <LinearGradient
+            colors={["#00000000", "#CCB68C30", "#CCB68C60"]}
+            //start={{ x: 0.5, y: 0 }}
+            //  end={{ x: 0.5, y: 0.9 }}
+            style={StyleSheet.absoluteFillObject}
+          />
+        </BlurView>
         {index !== currentSlideKey ? null : (
           <View style={styles.content}>
             <Animated.Image
@@ -122,6 +123,7 @@ const OnboardingScreen = ({ onDone }) => {
                 opacity: opacityAnim,
               }}
             />
+
             <Animated.Text
               style={[
                 styles.title,
@@ -190,6 +192,14 @@ const OnboardingScreen = ({ onDone }) => {
 
   return (
     <View style={{ flex: 1 }}>
+      <TouchableOpacity
+        style={styles.languageButton}
+        onPress={() => setLanguageModalVisible(true)}
+      >
+        <Text style={styles.buttonText}>
+          {languages.find((lang) => lang.code === selectedLanguage).name}
+        </Text>
+      </TouchableOpacity>
       <Modal
         animationType="slide"
         transparent={true}

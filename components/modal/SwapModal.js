@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+
 import {
   Modal,
   View,
@@ -9,40 +10,52 @@ import {
   KeyboardAvoidingView,
   Image,
   Platform,
+  TouchableWithoutFeedback,
+  InteractionManager,
 } from "react-native";
+import { Buffer } from "buffer";
 import { BlurView } from "expo-blur";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { useTranslation } from "react-i18next";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import ChangellyAPI from "../transactionScreens/ChangellyAPI";
 
 const SwapModal = ({
   isDarkMode,
   visible,
   setSwapModalVisible,
-  // fromValue,
-  // setFromValue,
-  // toValue,
-  // setToValue,
-  // selectedFromToken,
-  // setSelectedFromToken,
-  // selectedToToken,
-  // setSelectedToToken,
   fromDropdownVisible,
   setFromDropdownVisible,
   toDropdownVisible,
   setToDropdownVisible,
   initialAdditionalCryptos,
   TransactionsScreenStyle,
+  selectedDevice,
+  serviceUUID,
+  writeCharacteristicUUID,
 }) => {
   const { t } = useTranslation();
+  const router = useNavigation();
+  const toChainTagsScrollRef = useRef(null);
   const [confirmModalVisible, setConfirmModalVisible] = useState(false);
-  const disabledButtonBackgroundColor = isDarkMode ? "#6c6c6c" : "#ccc";
-
-  const [selectedFromToken, setSelectedFromToken] = useState("");
+  const [exchangeRate, setExchangeRate] = useState("");
+  const [selectedFromToken, setSelectedFromToken] = useState(null);
   const [selectedToToken, setSelectedToToken] = useState("");
   const [toValue, setToValue] = useState("");
   const [fromValue, setFromValue] = useState("");
+  const [searchFromToken, setSearchFromToken] = useState("");
+  const [searchToToken, setSearchToToken] = useState("");
+  const [selectedChain, setSelectedChain] = useState("All");
+  const [selectedToChain, setSelectedToChain] = useState("All");
+  const [chainLayouts, setChainLayouts] = useState({});
+  const disabledButtonBackgroundColor = isDarkMode ? "#6c6c6c" : "#ccc";
+
+  const filteredFromTokens = initialAdditionalCryptos.filter((chain) =>
+    chain.name.toLowerCase().includes(searchFromToken.toLowerCase())
+  );
+
+  const filteredToTokens = initialAdditionalCryptos.filter((chain) =>
+    chain.name.toLowerCase().includes(searchToToken.toLowerCase())
+  );
 
   const isConfirmDisabled =
     !fromValue || !toValue || !selectedFromToken || !selectedToToken;
@@ -51,14 +64,21 @@ const SwapModal = ({
     ? disabledButtonBackgroundColor
     : TransactionsScreenStyle.swapConfirmButton.backgroundColor;
 
-  // Helper function to get the token details including the icon and name
-  const getTokenDetails = (tokenShortName) => {
+  const chainCategories = initialAdditionalCryptos.map((crypto) => ({
+    name: crypto.chain,
+    chainIcon: crypto.chainIcon,
+    ...crypto,
+  }));
+
+  const printedNames = new Set();
+
+  const getTokenDetails = (token) => {
+    if (!token) return null;
     return initialAdditionalCryptos.find(
-      (token) => token.shortName === tokenShortName
+      (item) => item.shortName === token.shortName && item.chain === token.chain
     );
   };
 
-  // Get the selected crypto details for "From" and "To" tokens
   const fromCryptoDetails = getTokenDetails(selectedFromToken);
   const toCryptoDetails = getTokenDetails(selectedToToken);
 
@@ -66,54 +86,204 @@ const SwapModal = ({
   const displayedToValue = toValue || "0.00";
 
   const currencySymbol = "$";
+  const visibleToTokens = initialAdditionalCryptos
+    .filter((token) => {
+      if (!selectedFromToken) return true;
+      return token.chain === selectedFromToken.chain;
+    })
+    .filter((token) => {
+      return (token.name + token.shortName)
+        .toLowerCase()
+        .includes(searchToToken.toLowerCase());
+    });
 
-  const router = useNavigation();
+  const handleConfirmSwap = async () => {
+    if (!selectedFromToken || !selectedToToken || !fromValue) {
+      console.log("缺少必要参数，无法执行Swap");
+      return;
+    }
 
-  // Function to handle confirm button in SwapModal
-  const handleConfirmSwap = () => {
-    if (!selectedFromToken || !selectedToToken || !fromValue)
-      return alert("输入完整数据.");
-
-    // Close SwapModal first
     setSwapModalVisible(false);
+    setConfirmModalVisible(true);
+    try {
+      const fromDetails = getTokenDetails(selectedFromToken);
+      const toDetails = getTokenDetails(selectedToToken);
 
-    // Open the transaction confirmation modal after SwapModal is closed
-    setTimeout(() => {
-      router.navigate("Request Wallet Auth", {
-        fromValue,
-        from: selectedFromToken,
-        to: selectedToToken,
-        toValue,
-        fromAddress: "0x198198219821982",
-        toAddress: "0x11212121212",
-        dapp: "",
-        data: { text: "放入API请求完整数据包" },
-      });
+      if (!fromDetails || !toDetails) {
+        console.log("找不到代币详情");
+        return;
+      }
+      /* 
+      const requestBody = {
+        chain: fromDetails.queryChainName || "ethereum",
+        fromTokenAddress: fromDetails.contractAddress,
+        toTokenAddress: toDetails.contractAddress,
+        amount: fromValue.toString(),
+        userWalletAddress: fromDetails.address,
+        slippage: "1",
+        provider: "openocean",
+      };
+ */
 
-      // setConfirmModalVisible(true);
-    }, 500); // Adding a delay to ensure SwapModal is completely closed before showing the next modal
+      const requestBody = {
+        chain: "ethereum",
+        fromTokenAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+        toTokenAddress: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+        amount: fromValue.toString(),
+        userWalletAddress: "0x36F06561b946801DCa606842C9701EA3Fe850Ca2",
+        slippage: "1",
+        provider: "openocean",
+      };
+
+      console.log("准备发起Swap请求：", requestBody);
+
+      const response = await fetch(
+        "https://swap.likkim.com/api/aggregator/swap",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(requestBody),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("网络请求失败");
+      }
+
+      const responseData = await response.json();
+      console.log("Swap API返回：", responseData);
+
+      if (responseData?.code === "0") {
+        console.log("Swap成功");
+        console.log("交易签名Data：", responseData.data?.data);
+
+        // 👉 新增：把Swap返回的data封装成sign消息发给设备
+        const hexToSign = responseData.data.data;
+        const chainKey = "ethereum"; // 这里先固定，如果以后支持其他链，记得做成动态
+        const path = "m/44'/60'/0'/0/0"; // 你的默认BIP44路径
+
+        const signMessage = `sign:${chainKey},${path},${hexToSign}`;
+        const signBuffer = Buffer.from(signMessage, "utf-8");
+        const signBase64 = signBuffer.toString("base64");
+
+        await selectedDevice.writeCharacteristicWithResponseForService(
+          serviceUUID,
+          writeCharacteristicUUID,
+          signBase64
+        );
+        console.log("Swap的sign消息已发送给设备等待签名...");
+      } else {
+        console.log("Swap失败", responseData?.message || "未知错误");
+      }
+    } catch (error) {
+      console.log("发送Swap请求异常:", error);
+    }
   };
 
   const calcRealPrice = async () => {
     console.log("获取实时价格");
     console.log(selectedFromToken);
-    console.warn(
-      `CALC::FROM:${selectedFromToken}, TO:${selectedToToken}, AMOUNT:${fromValue}}`
+    console.log(
+      `CALC::FROM:${JSON.stringify(selectedFromToken)}, TO:${JSON.stringify(
+        selectedToToken
+      )}, AMOUNT:${fromValue}`
     );
-    let calcPrice = await ChangellyAPI.getExchangeAmount(
-      selectedFromToken,
-      selectedToToken,
-      fromValue
-    );
-    console.warn(calcPrice);
-    console.warn("更新数据到UI");
+
+    if (!selectedFromToken || !selectedToToken || !fromValue) {
+      console.log("参数不完整，停止请求");
+      return;
+    }
+
+    /*     const requestBody = {
+      chain: selectedFromToken.queryChainName,
+      fromTokenAddress: selectedFromToken.contractAddress,
+      toTokenAddress: selectedToToken.contractAddress,
+      amount: fromValue,
+      accountAddress: getTokenDetails(selectedFromToken)?.address,
+    }; */
+    const requestBody = {
+      chain: "ethereum",
+      fromTokenAddress: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+      toTokenAddress: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      amount: 1,
+      accountAddress: "0x36F06561b946801DCa606842C9701EA3Fe850Ca2",
+    };
+
+    try {
+      const response = await fetch(
+        "https://swap.likkim.com/api/aggregator/queryQuote",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(requestBody),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const responseData = await response.json();
+      console.log("API返回结果：", responseData);
+
+      if (responseData?.code === "0" && responseData?.data?.length > 0) {
+        const result = responseData.data[0];
+
+        const rate = result.instantRate;
+
+        setExchangeRate(rate);
+
+        console.log("即时汇率是：", rate);
+
+        if (fromValue && rate) {
+          const calculatedToValue = (
+            parseFloat(fromValue) * parseFloat(rate)
+          ).toFixed(6);
+          setToValue(calculatedToValue);
+        }
+      } else {
+        console.log("接口返回异常或无数据");
+      }
+    } catch (error) {
+      console.log("Error fetching price:", error);
+    }
   };
 
   useEffect(() => {
+    console.log("[SwapModal] useEffect触发了");
+    console.log("selectedFromToken:", selectedFromToken);
+    console.log("selectedToToken:", selectedToToken);
+    console.log("fromValue:", fromValue);
+
     if (selectedFromToken && selectedToToken && !!fromValue) {
+      console.log("[SwapModal] 条件满足，调用 calcRealPrice");
       calcRealPrice();
+    } else {
+      console.log("[SwapModal] 条件不满足，暂时不请求价格");
     }
   }, [selectedFromToken, selectedToToken, fromValue]);
+
+  useEffect(() => {
+    if (!toDropdownVisible || !selectedFromToken) return;
+
+    InteractionManager.runAfterInteractions(() => {
+      const chainName = selectedFromToken.chain;
+      const layout = chainLayouts[chainName];
+
+      if (toChainTagsScrollRef.current && layout) {
+        toChainTagsScrollRef.current.scrollTo({
+          x: layout.x - 20,
+          animated: false,
+        });
+      } else {
+        console.log("⛔ scrollRef 或 layout 尚未准备好");
+      }
+    });
+  }, [toDropdownVisible, selectedFromToken, chainLayouts]);
 
   return (
     <>
@@ -126,327 +296,765 @@ const SwapModal = ({
       >
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
-          style={TransactionsScreenStyle.centeredView}
+          style={{ flex: 1 }}
         >
-          <BlurView intensity={10} style={TransactionsScreenStyle.centeredView}>
-            <View style={TransactionsScreenStyle.swapModalView}>
-              {/* From Section */}
-              <View style={{ zIndex: 20 }}>
-                <View style={{ alignItems: "flex-start", width: "100%" }}>
-                  <Text
-                    style={[
-                      TransactionsScreenStyle.modalTitle,
-                      { marginBottom: 6 },
-                    ]}
-                  >
-                    {t("From")}
-                  </Text>
-                  <View style={TransactionsScreenStyle.swapInputContainer}>
-                    <View
-                      style={{
-                        flex: 1,
-                        flexDirection: "column",
-                        alignItems: "flex-start",
-                        width: "100%",
-                      }}
+          <TouchableWithoutFeedback onPress={() => setSwapModalVisible(false)}>
+            <BlurView
+              intensity={10}
+              style={TransactionsScreenStyle.centeredView}
+            >
+              <View
+                style={TransactionsScreenStyle.modalView}
+                onStartShouldSetResponder={() => true}
+              >
+                {/* From Section */}
+                <View style={{ zIndex: 20 }}>
+                  <View style={{ alignItems: "flex-start", width: "100%" }}>
+                    <Text
+                      style={[
+                        TransactionsScreenStyle.modalTitle,
+                        { marginBottom: 6 },
+                      ]}
                     >
-                      <TextInput
-                        style={[
-                          TransactionsScreenStyle.swapInput,
-                          {
-                            fontSize: 30,
-                            fontWeight: "bold",
-                            textAlign: "left",
-                          },
-                        ]}
-                        value={fromValue}
-                        onChangeText={setFromValue}
-                        placeholder={t("0.0")}
-                        placeholderTextColor="#aaa"
-                        keyboardType="numeric"
-                      />
-                      <Text
-                        style={[
-                          TransactionsScreenStyle.subtitleText,
-                          {
-                            textAlign: "left",
-                            width: "100%",
-                            marginLeft: 12,
-                          },
-                        ]}
-                      >
-                        {`${currencySymbol}${displayedFromValue}`}
-                      </Text>
-                    </View>
-                    <TouchableOpacity
-                      style={TransactionsScreenStyle.tokenSelect}
-                      onPress={() =>
-                        setFromDropdownVisible(!fromDropdownVisible)
-                      }
-                    >
-                      {/* Display token icon and name */}
-                      {selectedFromToken ? (
-                        <>
-                          <Image
-                            source={
-                              getTokenDetails(selectedFromToken)?.chainIcon
-                            }
-                            style={{
-                              width: 20,
-                              height: 20,
-                              borderRadius: 10,
-                              marginRight: 8,
-                            }}
-                          />
-                          <Text style={TransactionsScreenStyle.subtitleText}>
-                            {getTokenDetails(selectedFromToken)?.name}
-                          </Text>
-                        </>
-                      ) : (
-                        <Text style={TransactionsScreenStyle.subtitleText}>
-                          {t("Select token")}
-                        </Text>
-                      )}
-                      <Icon name="arrow-drop-down" size={24} color="#ccc" />
-                    </TouchableOpacity>
-                  </View>
-                </View>
-
-                {/* From Dropdown */}
-                {fromDropdownVisible && (
-                  <ScrollView style={TransactionsScreenStyle.fromDropdown}>
-                    {initialAdditionalCryptos.map((chain, index) => (
-                      <TouchableOpacity
-                        key={`${chain.shortName}-${index}`}
-                        style={[
-                          TransactionsScreenStyle.chainTag,
-                          selectedFromToken === chain.shortName &&
-                            TransactionsScreenStyle.selectedChainTag,
-                        ]}
-                        onPress={() => {
-                          setSelectedFromToken(chain.shortName);
-                          setFromDropdownVisible(false);
+                      {t("From")}
+                    </Text>
+                    <View style={TransactionsScreenStyle.swapInputContainer}>
+                      <View
+                        style={{
+                          flex: 1,
+                          flexDirection: "column",
+                          alignItems: "flex-start",
+                          width: "100%",
                         }}
                       >
-                        <View
-                          style={{
-                            flexDirection: "row",
-                            alignItems: "center",
-                          }}
+                        <TextInput
+                          style={[
+                            TransactionsScreenStyle.swapInput,
+                            {
+                              fontSize: 30,
+                              fontWeight: "bold",
+                              textAlign: "left",
+                            },
+                          ]}
+                          value={fromValue}
+                          onChangeText={setFromValue}
+                          placeholder={t("0.0")}
+                          placeholderTextColor="#aaa"
+                          keyboardType="numeric"
+                        />
+                        <Text
+                          style={[
+                            TransactionsScreenStyle.subtitleText,
+                            {
+                              textAlign: "left",
+                              width: "100%",
+                              marginLeft: 12,
+                            },
+                          ]}
                         >
-                          <Image
-                            source={chain.chainIcon}
-                            style={{
-                              width: 20,
-                              height: 20,
-                              borderRadius: 15,
-                              marginRight: 10,
-                            }}
-                          />
-                          <Text
-                            style={[
-                              TransactionsScreenStyle.chainTagText,
-                              selectedFromToken === chain.shortName &&
-                                TransactionsScreenStyle.selectedChainTagText,
-                            ]}
-                          >
-                            {chain.name}
-                          </Text>
-                        </View>
-                      </TouchableOpacity>
-                    ))}
-                  </ScrollView>
-                )}
-              </View>
-
-              {/* Swap Button */}
-              <TouchableOpacity
-                style={TransactionsScreenStyle.swapButton}
-                onPress={() => {
-                  // Swap values
-                  const tempValue = fromValue;
-                  setFromValue(toValue);
-                  setToValue(tempValue);
-
-                  // Swap selected tokens
-                  const tempToken = selectedFromToken;
-                  setSelectedFromToken(selectedToToken);
-                  setSelectedToToken(tempToken);
-                }}
-              >
-                <Icon name="swap-vert" size={24} color="#fff" />
-              </TouchableOpacity>
-
-              {/* To Section */}
-              <View style={{ zIndex: 10 }}>
-                <View style={{ alignItems: "flex-start", width: "100%" }}>
-                  <Text
-                    style={[
-                      TransactionsScreenStyle.modalTitle,
-                      { marginBottom: 6, marginTop: -32 },
-                    ]}
-                  >
-                    {t("To")}
-                  </Text>
-                  <View style={TransactionsScreenStyle.swapInputContainer}>
-                    <View
-                      style={{
-                        flex: 1,
-                        flexDirection: "column",
-                        alignItems: "flex-start",
-                        width: "100%",
-                      }}
-                    >
-                      <TextInput
-                        editable={false}
-                        style={[
-                          TransactionsScreenStyle.swapInput,
-                          {
-                            fontSize: 30,
-                            fontWeight: "bold",
-                            textAlign: "left",
-                          },
-                        ]}
-                        value={toValue}
-                        // onChangeText={setToValue}
-                        placeholder={t("0.0")}
-                        // placeholderTextColor="#aaa"
-                        keyboardType="numeric"
-                      />
-                      <Text
-                        style={[
-                          TransactionsScreenStyle.subtitleText,
-                          {
-                            textAlign: "left",
-                            width: "100%",
-                            marginLeft: 12,
-                          },
-                        ]}
-                      >
-                        {`${currencySymbol}${displayedToValue}`}
-                      </Text>
-                    </View>
-                    <TouchableOpacity
-                      style={TransactionsScreenStyle.tokenSelect}
-                      onPress={() => setToDropdownVisible(!toDropdownVisible)}
-                    >
-                      {/* Display token icon and name */}
-                      {selectedToToken ? (
-                        <>
-                          <Image
-                            source={getTokenDetails(selectedToToken)?.chainIcon}
-                            style={{
-                              width: 20,
-                              height: 20,
-                              borderRadius: 10,
-                              marginRight: 8,
-                            }}
-                          />
-                          <Text style={TransactionsScreenStyle.subtitleText}>
-                            {getTokenDetails(selectedToToken)?.name}
-                          </Text>
-                        </>
-                      ) : (
-                        <Text style={TransactionsScreenStyle.subtitleText}>
-                          {t("Select token")}
+                          {`${currencySymbol}${displayedFromValue}`}
                         </Text>
-                      )}
-                      <Icon name="arrow-drop-down" size={24} color="#ccc" />
-                    </TouchableOpacity>
-                  </View>
-                </View>
-
-                {/* To Dropdown */}
-                {toDropdownVisible && (
-                  <ScrollView style={TransactionsScreenStyle.toDropdown}>
-                    {initialAdditionalCryptos.map((chain, index) => (
+                      </View>
                       <TouchableOpacity
-                        key={`${chain.shortName}-${index}`}
-                        style={[
-                          TransactionsScreenStyle.chainTag,
-                          selectedToToken === chain.shortName &&
-                            TransactionsScreenStyle.selectedChainTag,
-                        ]}
+                        style={TransactionsScreenStyle.tokenSelect}
                         onPress={() => {
-                          setSelectedToToken(chain.shortName);
+                          setFromDropdownVisible(!fromDropdownVisible);
                           setToDropdownVisible(false);
                         }}
                       >
-                        <View
-                          style={{
-                            flexDirection: "row",
-                            alignItems: "center",
-                          }}
-                        >
-                          <Image
-                            source={chain.chainIcon}
-                            style={{
-                              width: 20,
-                              height: 20,
-                              borderRadius: 15,
-                              marginRight: 10,
-                            }}
-                          />
-                          <Text
-                            style={[
-                              TransactionsScreenStyle.chainTagText,
-                              selectedToToken === chain.shortName &&
-                                TransactionsScreenStyle.selectedChainTagText,
-                            ]}
-                          >
-                            {chain.name}
+                        {/* Display token icon and name */}
+                        {selectedFromToken ? (
+                          <>
+                            <Image
+                              source={
+                                getTokenDetails(selectedFromToken)?.chainIcon
+                              }
+                              style={{
+                                width: 30,
+                                height: 30,
+                                borderRadius: 10,
+                                marginRight: 8,
+                              }}
+                            />
+                            <Text style={TransactionsScreenStyle.subtitleText}>
+                              {getTokenDetails(selectedFromToken)?.name}
+                            </Text>
+                          </>
+                        ) : (
+                          <Text style={TransactionsScreenStyle.subtitleText}>
+                            {t("Select token")}
                           </Text>
-                        </View>
+                        )}
+                        <Icon name="arrow-drop-down" size={24} color="#ccc" />
                       </TouchableOpacity>
-                    ))}
-                  </ScrollView>
+                    </View>
+                  </View>
+
+                  {/* From Dropdown */}
+                  {fromDropdownVisible && (
+                    <View style={TransactionsScreenStyle.fromDropdown}>
+                      <TextInput
+                        style={[
+                          TransactionsScreenStyle.searchInput,
+                          {
+                            marginBottom: 10,
+                            paddingHorizontal: 8,
+                            paddingVertical: 5,
+                          },
+                        ]}
+                        placeholder={t("Enter cryptocurrency name...")}
+                        placeholderTextColor="#aaa"
+                        onChangeText={(text) => setSearchFromToken(text)}
+                      />
+                      <View
+                        style={{
+                          marginBottom: 6,
+                        }}
+                      >
+                        <ScrollView
+                          horizontal
+                          style={{
+                            height: 34,
+                            paddingHorizontal: 10,
+                          }}
+                          showsHorizontalScrollIndicator={false}
+                        >
+                          <TouchableOpacity
+                            key="All"
+                            style={{
+                              flexDirection: "row",
+                              alignItems: "center",
+                              paddingVertical: 5,
+                              paddingHorizontal: 10,
+                              marginRight: 8,
+                              borderRadius: 6,
+                              backgroundColor: isDarkMode
+                                ? selectedChain === "All"
+                                  ? "#3F3D3C"
+                                  : "#CCB68C"
+                                : selectedChain === "All"
+                                ? "#E5E1E9"
+                                : "#e0e0e0",
+                            }}
+                            onPress={() => setSelectedChain("All")}
+                          >
+                            <Text
+                              style={[TransactionsScreenStyle.chainTagText]}
+                            >
+                              {t("All")}
+                            </Text>
+                          </TouchableOpacity>
+
+                          {[
+                            ...new Set(
+                              chainCategories.map((chain) => chain.chain)
+                            ),
+                          ].map((chain) => (
+                            <TouchableOpacity
+                              key={chain}
+                              style={{
+                                flexDirection: "row",
+                                alignItems: "center",
+                                paddingVertical: 5,
+                                paddingHorizontal: 10,
+                                marginRight: 8,
+                                borderRadius: 6,
+                                backgroundColor: isDarkMode
+                                  ? selectedChain === chain
+                                    ? "#3F3D3C"
+                                    : "#CCB68C"
+                                  : selectedChain === chain
+                                  ? "#E5E1E9"
+                                  : "#e0e0e0",
+                              }}
+                              onPress={() => setSelectedChain(chain)}
+                            >
+                              <Image
+                                source={
+                                  chainCategories.find(
+                                    (category) => category.chain === chain
+                                  )?.chainIcon
+                                }
+                                style={{
+                                  width: 14,
+                                  height: 14,
+                                  backgroundColor: "#CFAB9540",
+                                  marginRight: 8,
+                                  resizeMode: "contain",
+                                  borderRadius: 10,
+                                }}
+                              />
+                              <Text
+                                style={[TransactionsScreenStyle.chainTagText]}
+                              >
+                                {chain}
+                              </Text>
+                            </TouchableOpacity>
+                          ))}
+                        </ScrollView>
+                      </View>
+
+                      <ScrollView>
+                        {filteredFromTokens
+                          .filter(
+                            (token) =>
+                              selectedChain === "All" ||
+                              token.chain === selectedChain
+                          ) // 重点筛选逻辑
+                          .map((chain, index) => (
+                            <TouchableOpacity
+                              key={`${chain.shortName}-${index}`}
+                              style={[
+                                TransactionsScreenStyle.chainTag,
+                                selectedFromToken === chain.shortName &&
+                                  TransactionsScreenStyle.selectedChainTag,
+                              ]}
+                              onPress={() => {
+                                setSelectedFromToken({
+                                  shortName: chain.shortName,
+                                  chain: chain.chain, // 🔥这里把chain也记下来
+                                });
+                                setFromDropdownVisible(false);
+
+                                const selectedFrom = getTokenDetails(
+                                  chain.shortName
+                                );
+                                const selectedTo =
+                                  getTokenDetails(selectedToToken);
+
+                                console.log("选择From Token后打印：", {
+                                  chain: selectedFrom?.queryChainName,
+                                  fromTokenAddress:
+                                    selectedFrom?.contractAddress,
+                                  toTokenAddress: selectedTo?.contractAddress,
+                                  amount: fromValue,
+                                  accountAddress: selectedFrom?.address,
+                                });
+
+                                const chainName = selectedFrom?.chain;
+                                if (!chainName) return;
+
+                                setSelectedToChain(chainName);
+
+                                const chainList = [
+                                  ...new Set(
+                                    chainCategories.map((item) => item.chain)
+                                  ),
+                                ];
+                                const index = chainList.indexOf(chainName);
+                                if (
+                                  toChainTagsScrollRef.current &&
+                                  index !== -1
+                                ) {
+                                  setTimeout(() => {
+                                    // 🔥加setTimeout确保scrollView已经渲染完
+                                    const BUTTON_WIDTH = 80;
+                                    const scrollX = index * (BUTTON_WIDTH + 8);
+                                    toChainTagsScrollRef.current.scrollTo({
+                                      x: scrollX,
+                                      animated: true,
+                                    });
+                                  }, 0);
+                                }
+                              }}
+                            >
+                              <View
+                                style={{
+                                  flexDirection: "row",
+                                  alignItems: "center",
+                                }}
+                              >
+                                <Image
+                                  source={chain.chainIcon}
+                                  style={{
+                                    width: 30,
+                                    height: 30,
+                                    borderRadius: 15,
+                                    marginRight: 10,
+                                  }}
+                                />
+                                <Text
+                                  style={[
+                                    TransactionsScreenStyle.chainTagText,
+                                    selectedFromToken === chain.shortName &&
+                                      TransactionsScreenStyle.selectedChainTagText,
+                                  ]}
+                                >
+                                  {chain.name}
+                                </Text>
+                              </View>
+                            </TouchableOpacity>
+                          ))}
+                      </ScrollView>
+                    </View>
+                  )}
+                </View>
+
+                {/* Swap Button */}
+                <TouchableOpacity
+                  style={TransactionsScreenStyle.swapButton}
+                  onPress={() => {
+                    // Swap values
+                    const tempValue = fromValue;
+                    setFromValue(toValue);
+                    setToValue(tempValue);
+
+                    // Swap selected tokens
+                    const tempToken = selectedFromToken;
+                    setSelectedFromToken(selectedToToken);
+                    setSelectedToToken(tempToken);
+                  }}
+                >
+                  <Icon name="swap-vert" size={24} color="#fff" />
+                </TouchableOpacity>
+
+                {/* To Section */}
+                <View style={{ zIndex: 10 }}>
+                  <View style={{ alignItems: "flex-start", width: "100%" }}>
+                    <Text
+                      style={[
+                        TransactionsScreenStyle.modalTitle,
+                        { marginBottom: 6, marginTop: -32 },
+                      ]}
+                    >
+                      {t("To")}
+                    </Text>
+                    <View style={TransactionsScreenStyle.swapInputContainer}>
+                      <View
+                        style={{
+                          flex: 1,
+                          flexDirection: "column",
+                          alignItems: "flex-start",
+                          width: "100%",
+                        }}
+                      >
+                        <TextInput
+                          editable={false}
+                          style={[
+                            TransactionsScreenStyle.swapInput,
+                            {
+                              fontSize: 30,
+                              fontWeight: "bold",
+                              textAlign: "left",
+                            },
+                          ]}
+                          value={toValue}
+                          // onChangeText={setToValue}
+                          placeholder={t("0.0")}
+                          // placeholderTextColor="#aaa"
+                          keyboardType="numeric"
+                        />
+                        <Text
+                          style={[
+                            TransactionsScreenStyle.subtitleText,
+                            {
+                              textAlign: "left",
+                              width: "100%",
+                              marginLeft: 12,
+                            },
+                          ]}
+                        >
+                          {`${currencySymbol}${displayedToValue}`}
+                        </Text>
+                      </View>
+                      <TouchableOpacity
+                        style={TransactionsScreenStyle.tokenSelect}
+                        onPress={() => {
+                          setToDropdownVisible(!toDropdownVisible);
+                          setFromDropdownVisible(false);
+                        }}
+                      >
+                        {/* Display token icon and name */}
+                        {selectedToToken ? (
+                          <>
+                            <Image
+                              source={
+                                getTokenDetails(selectedToToken)?.chainIcon
+                              }
+                              style={{
+                                width: 30,
+                                height: 30,
+                                borderRadius: 10,
+                                marginRight: 8,
+                              }}
+                            />
+                            <Text style={TransactionsScreenStyle.subtitleText}>
+                              {getTokenDetails(selectedToToken)?.name}
+                            </Text>
+                          </>
+                        ) : (
+                          <Text style={TransactionsScreenStyle.subtitleText}>
+                            {t("Select token")}
+                          </Text>
+                        )}
+                        <Icon name="arrow-drop-down" size={24} color="#ccc" />
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+
+                  {/* To Dropdown */}
+                  {toDropdownVisible && (
+                    <View style={TransactionsScreenStyle.toDropdown}>
+                      {/* 搜索区域 */}
+                      <TextInput
+                        style={[
+                          TransactionsScreenStyle.searchInput,
+                          {
+                            marginBottom: 10,
+                            paddingHorizontal: 8,
+                            paddingVertical: 5,
+                          },
+                        ]}
+                        placeholder={t("Enter cryptocurrency name...")}
+                        placeholderTextColor="#aaa"
+                        onChangeText={(text) => setSearchToToken(text)}
+                      />
+                      <View style={{ marginBottom: 6 }}>
+                        <ScrollView
+                          ref={toChainTagsScrollRef}
+                          horizontal
+                          style={{
+                            height: 34,
+                            paddingHorizontal: 10,
+                          }}
+                          showsHorizontalScrollIndicator={false}
+                        >
+                          {/* All按钮处理 */}
+                          {(() => {
+                            const fromTokenDetails =
+                              getTokenDetails(selectedFromToken);
+                            const fromTokenChain = fromTokenDetails?.chain;
+                            const isAllDisabled = !!selectedFromToken; // 有selectedFromToken就禁用All
+
+                            return (
+                              <TouchableOpacity
+                                key="All"
+                                disabled={isAllDisabled}
+                                style={{
+                                  flexDirection: "row",
+                                  alignItems: "center",
+                                  paddingVertical: 5,
+                                  paddingHorizontal: 10,
+                                  marginRight: 8,
+                                  borderRadius: 6,
+                                  backgroundColor: isDarkMode
+                                    ? selectedToChain === "All"
+                                      ? "#6B5F5B"
+                                      : "#3F3D3C"
+                                    : selectedToChain === "All"
+                                    ? "#DADADA"
+                                    : "#F0F0F0",
+                                  opacity: isAllDisabled ? 0.4 : 1, // 🔥禁用All，半透明
+                                }}
+                                onPress={() => {
+                                  if (!isAllDisabled) {
+                                    setSelectedToChain("All");
+                                  }
+                                }}
+                              >
+                                <Text
+                                  style={[TransactionsScreenStyle.chainTagText]}
+                                >
+                                  {t("All")}
+                                </Text>
+                              </TouchableOpacity>
+                            );
+                          })()}
+
+                          {/* 其他链按钮处理 */}
+                          {[
+                            ...new Set(
+                              chainCategories.map((chain) => chain.chain)
+                            ),
+                          ].map((chain) => {
+                            const fromTokenDetails =
+                              getTokenDetails(selectedFromToken);
+                            const fromTokenChain = fromTokenDetails?.chain;
+                            const isDisabled =
+                              selectedFromToken && fromTokenChain !== chain; // 🔥这里判断
+
+                            return (
+                              <TouchableOpacity
+                                key={chain}
+                                disabled={isDisabled}
+                                style={{
+                                  flexDirection: "row",
+                                  alignItems: "center",
+                                  paddingVertical: 5,
+                                  paddingHorizontal: 10,
+                                  marginRight: 8,
+                                  borderRadius: 6,
+                                  backgroundColor: isDarkMode
+                                    ? selectedToChain === chain
+                                      ? "#3F3D3C"
+                                      : "#CCB68C"
+                                    : selectedToChain === chain
+                                    ? "#E5E1E9"
+                                    : "#e0e0e0",
+                                  opacity: isDisabled ? 0.4 : 1,
+                                }}
+                                onLayout={(event) => {
+                                  const layout = event.nativeEvent.layout;
+                                  setChainLayouts((prev) => ({
+                                    ...prev,
+                                    [chain]: layout, // 把当前这个链的布局信息保存
+                                  }));
+                                }}
+                                onPress={() => {
+                                  if (!isDisabled) {
+                                    setSelectedToChain(chain);
+                                  }
+                                }}
+                              >
+                                <Image
+                                  source={
+                                    chainCategories.find(
+                                      (category) => category.chain === chain
+                                    )?.chainIcon
+                                  }
+                                  style={{
+                                    width: 14,
+                                    height: 14,
+                                    backgroundColor: "#CFAB9540",
+                                    marginRight: 8,
+                                    resizeMode: "contain",
+                                    borderRadius: 10,
+                                  }}
+                                />
+                                <Text
+                                  style={[TransactionsScreenStyle.chainTagText]}
+                                >
+                                  {chain}
+                                </Text>
+                              </TouchableOpacity>
+                            );
+                          })}
+                        </ScrollView>
+                      </View>
+
+                      <ScrollView>
+                        {visibleToTokens.map((chain, index) => (
+                          <TouchableOpacity
+                            key={`${chain.shortName}-${index}`}
+                            style={[
+                              TransactionsScreenStyle.chainTag,
+                              selectedToToken === chain.shortName &&
+                                TransactionsScreenStyle.selectedChainTag,
+                            ]}
+                            onPress={() => {
+                              setSelectedToToken({
+                                shortName: chain.shortName,
+                                chain: chain.chain, // 🔥同样记下来chain
+                              });
+                              setToDropdownVisible(false);
+
+                              const selectedFrom =
+                                getTokenDetails(selectedFromToken);
+                              const selectedTo = getTokenDetails(chain);
+
+                              console.log("选择To Token后打印：", {
+                                chain: selectedFrom?.queryChainName,
+                                fromTokenAddress: selectedFrom?.contractAddress,
+                                toTokenAddress: selectedTo?.contractAddress,
+                                amount: fromValue,
+                                accountAddress: selectedFrom?.address,
+                              });
+                            }}
+                          >
+                            <View
+                              style={{
+                                flexDirection: "row",
+                                alignItems: "center",
+                              }}
+                            >
+                              <Image
+                                source={chain.chainIcon}
+                                style={{
+                                  width: 30,
+                                  height: 30,
+                                  borderRadius: 15,
+                                  marginRight: 10,
+                                }}
+                              />
+                              <Text
+                                style={[
+                                  TransactionsScreenStyle.chainTagText,
+                                  selectedToToken === chain.shortName &&
+                                    TransactionsScreenStyle.selectedChainTagText,
+                                ]}
+                              >
+                                {chain.name}
+                              </Text>
+                            </View>
+                          </TouchableOpacity>
+                        ))}
+                      </ScrollView>
+                    </View>
+                  )}
+                </View>
+                {exchangeRate && (
+                  <Text
+                    style={{
+                      textAlign: "center",
+                      color: isDarkMode ? "#ccc" : "#333",
+                      textAlign: "left",
+                      fontSize: 14,
+                      width: "100%",
+                      fontSize: 14,
+                    }}
+                  >
+                    1 {getTokenDetails(selectedFromToken)?.symbol} ≈{" "}
+                    {exchangeRate} {getTokenDetails(selectedToToken)?.symbol}
+                  </Text>
                 )}
+                <View>
+                  {/* Confirm Button */}
+                  <TouchableOpacity
+                    disabled={
+                      !(selectedFromToken && selectedToToken && fromValue)
+                    }
+                    onPress={() => {
+                      setSwapModalVisible(false); // ✅先关闭主Modal
+                      setConfirmModalVisible(true); // ✅打开二次确认Modal
+                    }}
+                    style={[
+                      TransactionsScreenStyle.swapConfirmButton,
+                      {
+                        backgroundColor: !(
+                          selectedFromToken &&
+                          selectedToToken &&
+                          fromValue
+                        )
+                          ? disabledButtonBackgroundColor
+                          : TransactionsScreenStyle.swapConfirmButton
+                              .backgroundColor,
+                        marginBottom: 20,
+                      },
+                    ]}
+                  >
+                    <Text style={TransactionsScreenStyle.submitButtonText}>
+                      {t("Confirm")}
+                    </Text>
+                  </TouchableOpacity>
+                  {/* Close Button */}
+                  <TouchableOpacity
+                    onPress={() => setSwapModalVisible(false)}
+                    style={[TransactionsScreenStyle.cancelButton]}
+                  >
+                    <Text style={TransactionsScreenStyle.cancelButtonText}>
+                      {t("Close")}
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </BlurView>
+          </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
+      </Modal>
+      {confirmModalVisible && (
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={confirmModalVisible}
+          onRequestClose={() => setConfirmModalVisible(false)}
+        >
+          <BlurView intensity={10} style={TransactionsScreenStyle.centeredView}>
+            <View style={TransactionsScreenStyle.confirmModalView}>
+              <Text style={TransactionsScreenStyle.modalTitle}>
+                {t("Transaction Confirmation")}
+              </Text>
+
+              {/* 基本信息 */}
+              <View style={{ marginTop: 20 }}>
+                {/* 网络信息 */}
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    marginBottom: 10,
+                  }}
+                >
+                  <Image
+                    source={getTokenDetails(selectedFromToken)?.chainIcon}
+                    style={{
+                      width: 24,
+                      height: 24,
+                      marginRight: 8,
+                      marginBottom: 10,
+                      borderRadius: 12,
+                    }}
+                  />
+                  <Text style={TransactionsScreenStyle.transactionText}>
+                    {getTokenDetails(selectedFromToken)?.chain}
+                  </Text>
+                </View>
+
+                {/* From -> To 信息 */}
+                <Text style={TransactionsScreenStyle.transactionText}>
+                  {t("From")}: {getTokenDetails(selectedFromToken)?.name} (
+                  {fromValue})
+                </Text>
+                <Text style={TransactionsScreenStyle.transactionText}>
+                  {t("To")}: {getTokenDetails(selectedToToken)?.name} ({toValue}
+                  )
+                </Text>
+                <Text style={TransactionsScreenStyle.transactionText}>
+                  {t("Exchange Rate")}: 1{" "}
+                  {getTokenDetails(selectedFromToken)?.symbol} ≈ {exchangeRate}{" "}
+                  {getTokenDetails(selectedToToken)?.symbol}
+                </Text>
+
+                {/* 支付合约 */}
+                <Text
+                  style={[
+                    TransactionsScreenStyle.transactionText,
+                    { marginTop: 10 },
+                  ]}
+                >
+                  {t("From Token Address")}:{" "}
+                  {getTokenDetails(selectedFromToken)?.contractAddress || "-"}
+                </Text>
+
+                {/* 接收合约 */}
+                <Text style={TransactionsScreenStyle.transactionText}>
+                  {t("To Token Address")}:{" "}
+                  {getTokenDetails(selectedToToken)?.contractAddress || "-"}
+                </Text>
+
+                {/* 账户地址 */}
+                <Text style={TransactionsScreenStyle.transactionText}>
+                  {t("Account Address")}:{" "}
+                  {getTokenDetails(selectedFromToken)?.address || "-"}
+                </Text>
               </View>
 
-              <View>
-                {/* Confirm Button */}
+              {/* 确认/取消按钮 */}
+              <View style={{ marginTop: 20, width: "100%" }}>
                 <TouchableOpacity
-                  disabled={
-                    !(selectedFromToken && selectedToToken && fromValue)
-                  }
-                  onPress={handleConfirmSwap}
-                  style={[
-                    TransactionsScreenStyle.swapConfirmButton,
-                    {
-                      backgroundColor: !(
-                        selectedFromToken &&
-                        selectedToToken &&
-                        fromValue
-                      )
-                        ? disabledButtonBackgroundColor
-                        : TransactionsScreenStyle.swapConfirmButton
-                            .backgroundColor,
-                      marginBottom: 20,
-                    },
-                  ]}
+                  style={TransactionsScreenStyle.optionButton}
+                  onPress={async () => {
+                    setConfirmModalVisible(false);
+                    await handleConfirmSwap(); // 🔥这里才真正去发起交易
+                  }}
                 >
                   <Text style={TransactionsScreenStyle.submitButtonText}>
                     {t("Confirm")}
                   </Text>
                 </TouchableOpacity>
 
-                {/* Close Button */}
                 <TouchableOpacity
-                  onPress={() => setSwapModalVisible(false)}
-                  style={[
-                    TransactionsScreenStyle.cancelButton,
-                    { marginBottom: 10 },
-                  ]}
+                  style={TransactionsScreenStyle.cancelButton}
+                  onPress={() => setConfirmModalVisible(false)}
                 >
                   <Text style={TransactionsScreenStyle.cancelButtonText}>
-                    {t("Close")}
+                    {t("Cancel")}
                   </Text>
                 </TouchableOpacity>
               </View>
             </View>
           </BlurView>
-        </KeyboardAvoidingView>
-      </Modal>
+        </Modal>
+      )}
     </>
   );
 };

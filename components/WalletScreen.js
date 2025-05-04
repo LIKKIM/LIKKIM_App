@@ -15,6 +15,7 @@ import {
   Platform,
   RefreshControl,
   Clipboard,
+  Dimensions,
   TouchableWithoutFeedback,
   TouchableHighlight,
 } from "react-native";
@@ -46,11 +47,12 @@ import coinCommandMapping from "../config/coinCommandMapping";
 import EmptyWalletView from "./modal/EmptyWalletView";
 import AddCryptoModal from "./modal/AddCryptoModal";
 import ChainSelectionModal from "./modal/ChainSelectionModal";
-import WalletContent from "./walletScreen/WalletContent";
-import TabModal from "./walletScreen/TabModal";
-import ModalsContainer from "./walletScreen/ModalsContainer";
+import WalletContent from "./WalletScreen/WalletContent";
+import TabModal from "./WalletScreen/TabModal";
+import ModalsContainer from "./WalletScreen/ModalsContainer";
 import checkAndReqPermission from "../utils/BluetoothPermissions"; //安卓高版本申请蓝牙权限
 import showLIKKIMAddressCommand from "../utils/showLIKKIMAddressCommand"; // 显示地址函数 发送数据写法
+import { decrypt } from "../utils/decrypt";
 
 const serviceUUID = "6E400001-B5A3-F393-E0A9-E50E24DCCA9E";
 const writeCharacteristicUUID = "6E400002-B5A3-F393-E0A9-E50E24DCCA9E";
@@ -81,7 +83,13 @@ function WalletScreen({ route, navigation }) {
     handleUpdateCryptoCards,
     updateCryptoPublicKey,
   } = useContext(CryptoContext);
-  const { isDarkMode } = useContext(DarkModeContext);
+  // First, use dark mode from route params
+  let isDarkMode = route.params?.isDarkMode;
+  // Then override with the latest value from DarkModeContext
+  const { isDarkMode: contextDarkMode } = useContext(DarkModeContext);
+  if (contextDarkMode !== undefined) {
+    isDarkMode = contextDarkMode;
+  }
   const WalletScreenStyle = WalletScreenStyles(isDarkMode);
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState("History");
@@ -140,7 +148,7 @@ function WalletScreen({ route, navigation }) {
   const chainCategories = initialAdditionalCryptos.map((crypto) => ({
     name: crypto.chain,
     chainIcon: crypto.chainIcon,
-    ...crypto, // 这里确保包括所有相关属性
+    ...crypto,
   }));
   const [selectedChainShortName, setSelectedChainShortName] =
     useState(CHAIN_NAMES);
@@ -1005,30 +1013,6 @@ function WalletScreen({ route, navigation }) {
     );
   }
 
-  // 解密算法
-  function decrypt(v, k) {
-    let v0 = v[0] >>> 0,
-      v1 = v[1] >>> 0,
-      sum = 0xc6ef3720 >>> 0,
-      i;
-    const delta = 0x9e3779b9 >>> 0;
-    const k0 = k[0] >>> 0,
-      k1 = k[1] >>> 0,
-      k2 = k[2] >>> 0,
-      k3 = k[3] >>> 0;
-
-    for (i = 0; i < 32; i++) {
-      v1 -= (((v0 << 4) >>> 0) + k2) ^ (v0 + sum) ^ (((v0 >>> 5) >>> 0) + k3);
-      v1 >>>= 0;
-      v0 -= (((v1 << 4) >>> 0) + k0) ^ (v1 + sum) ^ (((v1 >>> 5) >>> 0) + k1);
-      v0 >>>= 0;
-      sum -= delta;
-      sum >>>= 0;
-    }
-    v[0] = v0 >>> 0;
-    v[1] = v1 >>> 0;
-  }
-
   // 假设在组件中定义了状态：
   const [receivedAddresses, setReceivedAddresses] = useState({});
   // verificationStatus 用于表示整体状态
@@ -1167,52 +1151,45 @@ function WalletScreen({ route, navigation }) {
       }
     }
   };
-
+  // WalletScreen.js handlePinSubmit
   const handlePinSubmit = async () => {
-    setPinModalVisible(false); // 关闭 PIN 输入模态框
+    setPinModalVisible(false);
+    setVerificationModalVisible(false);
+    const verificationCodeValue = receivedVerificationCode.trim();
+    const pinCodeValue = pinCode.trim();
 
-    // 确保完整保留接收到的数据字符串
-    const verificationCodeValue = receivedVerificationCode.trim(); // 接收到的完整字符串
-    const pinCodeValue = pinCode.trim(); // 用户输入的 PIN
+    console.log(`User PIN: ${pinCodeValue}`);
+    console.log(`Received data: ${verificationCodeValue}`);
 
-    console.log(`用户输入的 PIN: ${pinCodeValue}`);
-    console.log(`接收到的完整数据: ${verificationCodeValue}`);
-
-    // 使用 ':' 分割，提取 PIN 和标志位部分
-    const [prefix, rest] = verificationCodeValue.split(":"); // 分割出前缀和其余部分
+    const [prefix, rest] = verificationCodeValue.split(":");
     if (prefix !== "PIN" || !rest) {
-      console.log("接收到的验证码格式不正确:", verificationCodeValue);
+      console.log("Invalid verification format:", verificationCodeValue);
       setVerificationStatus("fail");
       return;
     }
 
-    // 使用 ',' 分割，提取 PIN 和标志位
-    const [receivedPin, flag] = rest.split(","); // 分割出 PIN 值和标志位
+    const [receivedPin, flag] = rest.split(",");
     if (!receivedPin || (flag !== "Y" && flag !== "N")) {
-      console.log("接收到的验证码格式不正确:", verificationCodeValue);
+      console.log("Invalid verification format:", verificationCodeValue);
       setVerificationStatus("fail");
       return;
     }
 
-    console.log(`提取到的 PIN 值: ${receivedPin}`);
-    console.log(`提取到的标志位: ${flag}`);
+    console.log(`Extracted PIN: ${receivedPin}`);
+    console.log(`Flag: ${flag}`);
 
-    // 验证用户输入的 PIN 是否匹配
     if (pinCodeValue === receivedPin) {
-      console.log("PIN 验证成功");
+      console.log("PIN verified successfully");
       setVerificationStatus("success");
-
-      // 添加设备 ID 到 verifiedDevices 数组，确保不重复
       setVerifiedDevices([selectedDevice.id]);
 
-      // 异步存储更新后的 verifiedDevices 数组（只存一个设备ID）
       await AsyncStorage.setItem(
         "verifiedDevices",
         JSON.stringify([selectedDevice.id])
       );
 
       setIsVerificationSuccessful(true);
-      console.log("设备验证并存储成功");
+      console.log("Device verified and saved");
 
       try {
         const confirmationMessage = "PIN_OK";
@@ -1227,33 +1204,36 @@ function WalletScreen({ route, navigation }) {
       } catch (error) {
         console.log("Error sending confirmation message:", error);
       }
-      // 如果标志位为 Y，则发送字符串 'address'，之后发送多个 pubkey 消息
+
       if (flag === "Y") {
-        // 发送 address
+        console.log("Flag Y received; sending 'address' to device");
         try {
           const addressMessage = "address";
-          const addressBuffer = Buffer.from(addressMessage, "utf-8");
-          const base64Address = addressBuffer.toString("base64");
+          const bufferAddress = Buffer.from(addressMessage, "utf-8");
+          const base64Address = bufferAddress.toString("base64");
 
           await selectedDevice.writeCharacteristicWithResponseForService(
             serviceUUID,
             writeCharacteristicUUID,
             base64Address
           );
-          console.log("字符串 'address' 已成功发送给设备");
+          console.log("Sent 'address' to device");
+          setVerificationModalVisible(true);
+        } catch (error) {
+          console.log("Error sending 'address':", error);
+        }
 
-          // 构造 pubkey 消息数组（每个消息包含币种与对应的路径）
-          const pubkeyMessages = [
-            "pubkey:cosmos,m/44'/118'/0'/0/0",
-            "pubkey:ripple,m/44'/144'/0'/0/0",
-            "pubkey:celestia,m/44'/118'/0'/0/0",
-            "pubkey:juno,m/44'/118'/0'/0/0",
-            "pubkey:osmosis,m/44'/118'/0'/0/0",
-          ];
+        const pubkeyMessages = [
+          "pubkey:cosmos,m/44'/118'/0'/0/0",
+          "pubkey:ripple,m/44'/144'/0'/0/0",
+          "pubkey:celestia,m/44'/118'/0'/0/0",
+          "pubkey:juno,m/44'/118'/0'/0/0",
+          "pubkey:osmosis,m/44'/118'/0'/0/0",
+        ];
 
-          // 遍历数组，逐条发送消息
-          for (const msg of pubkeyMessages) {
-            const bufferMessage = Buffer.from(msg, "utf-8");
+        for (const message of pubkeyMessages) {
+          try {
+            const bufferMessage = Buffer.from(message, "utf-8");
             const base64Message = bufferMessage.toString("base64");
 
             await selectedDevice.writeCharacteristicWithResponseForService(
@@ -1261,30 +1241,31 @@ function WalletScreen({ route, navigation }) {
               writeCharacteristicUUID,
               base64Message
             );
-            console.log(`字符串 '${msg}' 已成功发送给设备`);
+            console.log(`Sent message: ${message}`);
+          } catch (error) {
+            console.log(`Error sending message "${message}":`, error);
           }
-        } catch (error) {
-          console.log("发送字符串时发生错误:", error);
         }
       } else if (flag === "N") {
-        console.log("设备返回了 PIN:xxxx,N，无需发送 'address' 和 pubkey 消息");
+        console.log("Flag N received; no 'address' sent");
+        setVerificationModalVisible(true);
       }
     } else {
-      console.log("PIN 验证失败");
+      console.log("PIN verification failed");
       setVerificationStatus("fail");
 
       if (monitorSubscription) {
         monitorSubscription.remove();
-        console.log("验证码监听已停止");
+        console.log("Stopped monitoring verification code");
       }
 
       if (selectedDevice) {
         await selectedDevice.cancelConnection();
-        console.log("已断开与设备的连接");
+        console.log("Disconnected device");
       }
     }
 
-    setPinCode(""); // 清空 PIN 输入框
+    setPinCode("");
   };
 
   const handleDeleteCard = () => {
@@ -1499,13 +1480,19 @@ function WalletScreen({ route, navigation }) {
       return total + convertedBalance;
     }, 0);
 
-    return totalBalance.toFixed(2); // 返回格式化后的总余额
+    return totalBalance.toFixed(2);
   };
+
+  const { height } = Dimensions.get("window");
+
+  const isIphoneSE = Platform.OS === "ios" && height < 700;
 
   const animatedCardStyle = (index) => {
     const cardStartPosition = cardStartPositions.current[index] || 0;
     const endPosition =
-      Platform.OS == "android" ? 60 : 120 - (scrollYOffset.current || 0); // 考虑 scrollTo 的 Y 偏移量
+      Platform.OS === "android" || isIphoneSE
+        ? 65
+        : 120 - (scrollYOffset.current || 0);
     const translateY = animation.interpolate({
       inputRange: [0, 1],
       outputRange: [0, endPosition - cardStartPosition],

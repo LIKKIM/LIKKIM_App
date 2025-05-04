@@ -17,7 +17,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
   const textBtnColor = isDarkMode ? "#fff" : "#fff";
   const textColor = isDarkMode ? "#fff" : "#000";
   const titleColor = isDarkMode ? "#fff" : "#000";
-  const dropdownBackgroundColor = isDarkMode ? "#CCB68C" : "#eee";
+  const dropdownBackgroundColor = isDarkMode ? "#21201E" : "#eee";
 
   return StyleSheet.create({
     searchIcon: {
@@ -42,7 +42,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       position: "absolute",
       top: 100,
       width: "100%",
-      maxHeight: 200,
+      maxHeight: 300,
       backgroundColor: dropdownBackgroundColor,
       borderRadius: 10,
       padding: 10,
@@ -53,7 +53,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       position: "absolute",
       top: 70,
       width: "100%",
-      maxHeight: 200,
+      maxHeight: 300,
       backgroundColor: dropdownBackgroundColor,
       borderRadius: 10,
       padding: 10,
@@ -423,7 +423,7 @@ const TransactionsScreenStyles = (isDarkMode) => {
       borderRadius: 30,
       height: 60,
       alignItems: "center",
-      marginTop: 20,
+      //marginTop: 20,
     },
     optionButton: {
       backgroundColor: btnColor,
