@@ -83,5 +83,3 @@ yarn-error.*
 # @end expo-cli
 
 # Used for sensitive config
-/env/*
-!/env/.gitkeep
