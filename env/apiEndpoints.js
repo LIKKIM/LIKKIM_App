@@ -20,3 +20,8 @@ export const nftAPI = {
   queryNFTBalance: "https://bt.likkim.com/api/nfts/query-address-balance-fills",
   queryNFTDetails: "https://bt.likkim.com/api/nfts/query-nft-details",
 };
+
+export const externalLinks = {
+  privacyPolicy: "https://likkim.com/privacy-policy",
+  aboutPage: "https://www.likkim.com",
+};

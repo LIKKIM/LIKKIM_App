@@ -3,6 +3,7 @@ import React from "react";
 import { Vibration, Switch, Linking } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import appConfig from "../../app.config";
+import { externalLinks } from "../../env/env/apiEndpoints";
 
 const getSettingsOptions = ({
   t,
@@ -198,7 +199,7 @@ const getSettingsOptions = ({
         icon: "gpp-good",
         onPress: () => {
           Vibration.vibrate();
-          Linking.openURL("https://likkim.com/privacy-policy");
+          Linking.openURL(externalLinks.privacyPolicy);
         },
       },
       {
@@ -206,7 +207,7 @@ const getSettingsOptions = ({
         icon: "info-outline",
         onPress: () => {
           Vibration.vibrate();
-          Linking.openURL("https://www.likkim.com");
+          Linking.openURL(externalLinks.aboutPage);
         },
       },
     ],
