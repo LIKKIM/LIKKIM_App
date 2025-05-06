@@ -13,3 +13,10 @@ export const walletAPI = {
   getSignParam: "https://bt.likkim.com/api/wallet/getSignParam",
   encodeEvm: "https://bt.likkim.com/api/sign/encode_evm",
 };
+export const marketAPI = {
+  exchangeRate: "https://df.likkim.com/api/market/exchange-rate",
+};
+export const nftAPI = {
+  queryNFTBalance: "https://bt.likkim.com/api/nfts/query-address-balance-fills",
+  queryNFTDetails: "https://bt.likkim.com/api/nfts/query-nft-details",
+};
