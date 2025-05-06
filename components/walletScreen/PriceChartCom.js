@@ -15,6 +15,7 @@ import * as Haptics from "expo-haptics";
 import { DarkModeContext } from "../../utils/CryptoContext";
 import { useTranslation } from "react-i18next";
 import WalletScreenStyles from "../../styles/WalletScreenStyle";
+import { chartAPI } from "../../env/apiEndpoints";
 
 export default function PriceChartCom({
   instId = "BTC-USD",
@@ -116,7 +117,7 @@ export default function PriceChartCom({
   const _getData = async (_nd = "30m") => {
     load[1](true);
     let _rd = await fetch(
-      `https://df.likkim.com/api/market/index-candles?instId=${instId}&bar=${_nd}`
+      `${chartAPI.indexCandles}?instId=${instId}&bar=${_nd}`
     )
       .then((res) => res.json())
       .catch((er) => {

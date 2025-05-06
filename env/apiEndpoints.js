@@ -15,6 +15,7 @@ export const walletAPI = {
 };
 export const marketAPI = {
   exchangeRate: "https://df.likkim.com/api/market/exchange-rate",
+  indexTickers: "https://df.likkim.com/api/market/index-tickers",
 };
 export const nftAPI = {
   queryNFTBalance: "https://bt.likkim.com/api/nfts/query-address-balance-fills",
@@ -24,4 +25,15 @@ export const nftAPI = {
 export const externalLinks = {
   privacyPolicy: "https://likkim.com/privacy-policy",
   aboutPage: "https://www.likkim.com",
+};
+
+export const meridianAPI = {
+  queryBlockList: "https://bt.likkim.com/meridian/address/queryBlockList",
+};
+export const chartAPI = {
+  indexCandles: "https://df.likkim.com/api/market/index-candles",
+};
+
+export const firmwareAPI = {
+  lvglExec: "https://file.likkim.com/algo/lvgl_exec.dat",
 };
