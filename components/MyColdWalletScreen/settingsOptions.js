@@ -3,7 +3,7 @@ import React from "react";
 import { Vibration, Switch, Linking } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import appConfig from "../../app.config";
-import { externalLinks } from "../../env/env/apiEndpoints";
+import { externalLinks } from "../../env/apiEndpoints";
 
 const getSettingsOptions = ({
   t,

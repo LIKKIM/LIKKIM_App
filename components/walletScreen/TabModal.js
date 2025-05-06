@@ -13,7 +13,7 @@ import {
 import PriceChartCom from "../WalletScreen/PriceChartCom";
 import { LinearGradient } from "expo-linear-gradient";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { walletAPI } from "../env/apiEndpoints";
+import { walletAPI } from "../../env/apiEndpoints";
 
 const TabModal = ({
   activeTab,
