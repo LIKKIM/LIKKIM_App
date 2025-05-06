@@ -137,17 +137,13 @@ const SwapModal = ({
 
       console.log("准备发起Swap请求：", requestBody);
 
-      const response = await fetch(
-        "https://swap.likkim.com/api/aggregator/swap",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(requestBody),
-        }
-      );
-
+      const response = await fetch(swapAPI.executeSwap, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestBody),
+      });
       if (!response.ok) {
         throw new Error("网络请求失败");
       }
@@ -212,16 +208,13 @@ const SwapModal = ({
     };
 
     try {
-      const response = await fetch(
-        "https://swap.likkim.com/api/aggregator/queryQuote",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(requestBody),
-        }
-      );
+      const response = await fetch(swapAPI.queryQuote, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestBody),
+      });
 
       if (!response.ok) {
         throw new Error("Network response was not ok");

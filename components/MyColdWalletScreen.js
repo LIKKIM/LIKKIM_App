@@ -49,14 +49,17 @@ import appConfig from "../app.config";
 import { prefixToShortName } from "../config/chainPrefixes";
 import checkAndReqPermission from "../utils/BluetoothPermissions"; // Request Bluetooth permission on Android
 import { decrypt } from "../utils/decrypt";
+import { firmwareAPI } from "../env/apiEndpoints";
+import { bluetoothConfig } from "../env/bluetoothConfig";
+
 let PermissionsAndroid;
 if (Platform.OS === "android") {
   PermissionsAndroid = require("react-native").PermissionsAndroid;
 }
 
-const serviceUUID = "6E400001-B5A3-F393-E0A9-E50E24DCCA9E";
-const writeCharacteristicUUID = "6E400002-B5A3-F393-E0A9-E50E24DCCA9E";
-const notifyCharacteristicUUID = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E";
+const serviceUUID = bluetoothConfig.serviceUUID;
+const writeCharacteristicUUID = bluetoothConfig.writeCharacteristicUUID;
+const notifyCharacteristicUUID = bluetoothConfig.notifyCharacteristicUUID;
 
 function MyColdWalletScreen({ onDarkModeChange }) {
   const { t } = useTranslation();
@@ -788,9 +791,7 @@ function MyColdWalletScreen({ onDarkModeChange }) {
     }
 
     try {
-      const response = await fetch(
-        "https://file.likkim.com/algo/lvgl_exec.dat"
-      );
+      const response = await fetch(firmwareAPI.lvglExec);
       if (!response.ok) {
         throw new Error("Download failed");
       }

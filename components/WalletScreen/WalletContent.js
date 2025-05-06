@@ -23,7 +23,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import AddressBookModal from "./../modal/AddressBookModal";
 import MyColdWalletScreenStyles from "../../styles/MyColdWalletScreenStyle";
 import { WebView } from "react-native-webview";
-
+import { nftAPI } from "../../env/apiEndpoints";
 const SkeletonImage = ({ source, style, resizeMode }) => {
   const [loaded, setLoaded] = useState(false);
   const skeletonOpacity = useState(new Animated.Value(1))[0];
@@ -218,16 +218,13 @@ const WalletContent = (props) => {
     console.log("POST 请求数据：", requestBody);
 
     try {
-      const response = await fetch(
-        "https://bt.likkim.com/api/nfts/query-address-balance-fills",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(requestBody),
-        }
-      );
+      const response = await fetch(nftAPI.queryNFTBalance, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestBody),
+      });
       const json = await response.json();
       console.log("返回数据：", json);
       if (json.code === "0" && Array.isArray(json.data)) {
@@ -258,16 +255,13 @@ const WalletContent = (props) => {
     console.log("Query NFT Details Request:", detailRequestBody);
 
     try {
-      const response = await fetch(
-        "https://bt.likkim.com/api/nfts/query-nft-details",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(detailRequestBody),
-        }
-      );
+      const response = await fetch(nftAPI.queryNFTDetails, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(detailRequestBody),
+      });
       const responseText = await response.text();
       if (!responseText) {
         console.error("Empty response for NFT details", detailRequestBody);

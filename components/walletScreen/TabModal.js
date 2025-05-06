@@ -13,6 +13,7 @@ import {
 import PriceChartCom from "../WalletScreen/PriceChartCom";
 import { LinearGradient } from "expo-linear-gradient";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { walletAPI } from "../env/apiEndpoints";
 
 const TabModal = ({
   activeTab,
@@ -36,21 +37,18 @@ const TabModal = ({
     const fetchTransactionHistory = async () => {
       if (selectedCrypto && activeTab === "History") {
         try {
-          const response = await fetch(
-            "https://bt.likkim.com/api/wallet/queryTransaction",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                chain: selectedCrypto.queryChainName,
-                address: selectedCrypto.address,
-                page: 1,
-                pageSize: 10,
-              }),
-            }
-          );
+          const response = await fetch(walletAPI.queryTransaction, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              chain: selectedCrypto.queryChainName,
+              address: selectedCrypto.address,
+              page: 1,
+              pageSize: 10,
+            }),
+          });
 
           const data = await response.json();
 
