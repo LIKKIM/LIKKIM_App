@@ -5,14 +5,14 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import i18n from "../config/i18n";
 import { initialAdditionalCryptos } from "../config/cryptosData";
 import currencies from "../config/currencies";
+import { marketAPI } from "../env/apiEndpoints";
 
 // Create contexts
 export const CryptoContext = createContext();
 export const DarkModeContext = createContext();
 
 // API URL for fetching exchange rates
-const NEW_EXCHANGE_RATE_API_URL =
-  "https://df.likkim.com/api/market/exchange-rate";
+const NEW_EXCHANGE_RATE_API_URL = marketAPI.exchangeRate;
 
 // Default USDT crypto data
 export const usdtCrypto = {

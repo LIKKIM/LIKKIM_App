@@ -53,6 +53,7 @@ import ModalsContainer from "./WalletScreen/ModalsContainer";
 import checkAndReqPermission from "../utils/BluetoothPermissions"; //安卓高版本申请蓝牙权限
 import showLIKKIMAddressCommand from "../utils/showLIKKIMAddressCommand"; // 显示地址函数 发送数据写法
 import { decrypt } from "../utils/decrypt";
+import { walletAPI, marketAPI } from "../env/apiEndpoints";
 
 const serviceUUID = "6E400001-B5A3-F393-E0A9-E50E24DCCA9E";
 const writeCharacteristicUUID = "6E400002-B5A3-F393-E0A9-E50E24DCCA9E";
@@ -199,7 +200,7 @@ function WalletScreen({ route, navigation }) {
 
       try {
         const response = await fetch(
-          `https://df.likkim.com/api/market/index-tickers?instId=${instIds}`
+          `${marketAPI.indexTickers}?instId=${instIds}`
         );
         const data = await response.json();
 
@@ -249,16 +250,13 @@ function WalletScreen({ route, navigation }) {
             address: card.address,
           };
 
-          const response = await fetch(
-            "https://bt.likkim.com/api/wallet/balance",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(postData),
-            }
-          );
+          const response = await fetch(walletAPI.balance, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(postData),
+          });
           const data = await response.json();
 
           if (data.code === "0" && data.data) {
@@ -582,9 +580,7 @@ function WalletScreen({ route, navigation }) {
         .join(",");
       //bugging
       try {
-        const response = await fetch(
-          `https://df.likkim.com/api/market/index-tickers?instId=${instIds}`
-        );
+        const response = await fetch(`${marketAPI.tickers}?instId=${instIds}`);
         const data = await response.json();
 
         if (data.code === 0 && data.data) {

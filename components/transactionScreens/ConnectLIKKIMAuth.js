@@ -15,7 +15,7 @@ import { CryptoContext, DarkModeContext } from "../../utils/CryptoContext";
 import TransactionsScreenStyle from "../../styles/TransactionsScreenStyle";
 import { useTranslation } from "react-i18next";
 import ChangellyAPI from "./ChangellyAPI";
-
+import { meridianAPI } from "../../env/apiEndpoints";
 /**
  * 闪兑请求钱包授权
  */
@@ -298,16 +298,13 @@ export default function ({ route, navigation }) {
 
               return;
               try {
-                const response = await fetch(
-                  "https://bt.likkim.com/meridian/address/queryBlockList",
-                  {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                      chainShortName: fromCryptoDetails?.chain,
-                    }),
-                  }
-                );
+                const response = await fetch(meridianAPI.queryBlockList, {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({
+                    chainShortName: fromCryptoDetails?.chain,
+                  }),
+                });
                 const data = await response.json();
 
                 if (data.code === "0" && Array.isArray(data.data)) {

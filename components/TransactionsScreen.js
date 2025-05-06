@@ -10,7 +10,7 @@ import { ethers } from "ethers";
 import { BleManager } from "react-native-ble-plx";
 import "react-native-get-random-values";
 import "@ethersproject/shims";
-
+import { walletAPI } from "../env/apiEndpoints";
 // 配置与工具
 import { prefixToShortName } from "../config/chainPrefixes";
 import cryptoPathMapping from "../config/cryptoPathMapping";
@@ -283,16 +283,13 @@ function TransactionsScreen() {
           };
 
           try {
-            const response = await fetch(
-              "https://bt.likkim.com/api/wallet/queryTransaction",
-              {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify(postData),
-              }
-            );
+            const response = await fetch(walletAPI.queryTransaction, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(postData),
+            });
             const data = await response.json();
 
             if (
@@ -353,16 +350,13 @@ function TransactionsScreen() {
       // 打印发送的 POST 数据
       console.log("🚀 Sending POST data:", JSON.stringify(postData, null, 2));
 
-      const response = await fetch(
-        "https://bt.likkim.com/api/chain/blockchain-fee",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(postData),
-        }
-      );
+      const response = await fetch(walletAPI.blockchainFee, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(postData),
+      });
 
       if (!response.ok) {
         console.error("❌ HTTP Error:", response.status, response.statusText);
@@ -425,16 +419,13 @@ function TransactionsScreen() {
               // 打印发送的 POST 数据
               console.log("发送的 POST 数据:", postData);
 
-              const response = await fetch(
-                "https://bt.likkim.com/api/wallet/balance",
-                {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify(postData),
-                }
-              );
+              const response = await fetch(walletAPI.balance, {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(postData),
+              });
               const data = await response.json();
 
               // 打印收到的响应数据
@@ -764,16 +755,13 @@ function TransactionsScreen() {
 
           try {
             // 发送 POST 请求到指定的 URL
-            const response = await fetch(
-              "https://bt.likkim.com/api/wallet/broadcastHex",
-              {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify(postData), // 将数据转换为 JSON 字符串
-              }
-            );
+            const response = await fetch(walletAPI.broadcastHex, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(postData),
+            });
 
             // 监听并处理返回结果
             const responseData = await response.json();
@@ -845,16 +833,13 @@ function TransactionsScreen() {
 
           // 调用广播交易的 API
           try {
-            const response = await fetch(
-              "https://bt.likkim.com/api/wallet/broadcastHex",
-              {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify(postData),
-              }
-            );
+            const response = await fetch(walletAPI.broadcastHex, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(postData),
+            });
 
             const responseData = await response.json();
 
@@ -1033,19 +1018,16 @@ function TransactionsScreen() {
         }
       }
 
-      const walletParamsResponse = await fetch(
-        "https://bt.likkim.com/api/wallet/getSignParam",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            chain: postChain,
-            address: paymentAddress,
-          }),
-        }
-      );
+      const walletParamsResponse = await fetch(walletAPI.getSignParam, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          chain: postChain,
+          address: paymentAddress,
+        }),
+      });
 
       if (!walletParamsResponse.ok) {
         console.log(
@@ -1254,16 +1236,14 @@ function TransactionsScreen() {
         JSON.stringify(requestData, null, 2)
       );
 
-      const response = await fetch(
-        "https://bt.likkim.com/api/sign/encode_evm",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(requestData),
-        }
-      );
+      const response = await fetch(signAPI.encodeEVM, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestData),
+      });
+
       const responseData = await response.json();
       console.log("交易请求返回的数据:", responseData);
 

@@ -49,6 +49,8 @@ import appConfig from "../app.config";
 import { prefixToShortName } from "../config/chainPrefixes";
 import checkAndReqPermission from "../utils/BluetoothPermissions"; // Request Bluetooth permission on Android
 import { decrypt } from "../utils/decrypt";
+import { firmwareAPI } from "../env/apiEndpoints";
+
 let PermissionsAndroid;
 if (Platform.OS === "android") {
   PermissionsAndroid = require("react-native").PermissionsAndroid;
@@ -788,9 +790,7 @@ function MyColdWalletScreen({ onDarkModeChange }) {
     }
 
     try {
-      const response = await fetch(
-        "https://file.likkim.com/algo/lvgl_exec.dat"
-      );
+      const response = await fetch(firmwareAPI.lvglExec);
       if (!response.ok) {
         throw new Error("Download failed");
       }
