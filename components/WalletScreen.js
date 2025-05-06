@@ -22,8 +22,6 @@ import {
 
 // 第三方库
 import { LinearGradient } from "expo-linear-gradient";
-import * as Updates from "expo-updates";
-
 import { BlurView } from "expo-blur";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useTranslation } from "react-i18next";
@@ -708,11 +706,6 @@ function WalletScreen({ route, navigation }) {
       }, 300); // 确保在滚动完成后再设置偏移量
     }
   }, [modalVisible]);
-
-  //热更新支持
-  useEffect(() => {
-    onFetchUpdateAsync();
-  }, []);
 
   // 使用最新的价格来计算最终余额
   const getConvertedBalance = (cardBalance, cardShortName) => {
@@ -1507,46 +1500,6 @@ function WalletScreen({ route, navigation }) {
       (fx, fy, width, height, px, py) =>
         (cardStartPositions.current[_index] = py)
     );
-
-  //检查更新
-  async function onFetchUpdateAsync() {
-    try {
-      // Skip update check in development mode
-      if (__DEV__) return;
-
-      console.log("Checking for updates...");
-
-      // Check for an available update
-      const update = await Updates.checkForUpdateAsync();
-
-      if (update.isAvailable) {
-        console.log("A new version is available!");
-
-        // Fetch the new update
-        await Updates.fetchUpdateAsync();
-
-        // Show an alert asking the user if they want to update now or later
-        Alert.alert("The new version is ready. ", "Do you want to update it?", [
-          {
-            text: "Update now ",
-            onPress() {
-              // Reload the app to apply the update
-              Updates.reloadAsync();
-            },
-          },
-          {
-            text: "Later",
-          },
-        ]);
-      }
-    } catch (error) {
-      // Log the error if the update check fails
-      console.log("Update service check failed:");
-      console.log(
-        error instanceof Error ? error.message : JSON.stringify(error)
-      );
-    }
-  }
 
   const renderTabModal = () => (
     <TabModal
