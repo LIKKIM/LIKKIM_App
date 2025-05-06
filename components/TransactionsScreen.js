@@ -10,7 +10,7 @@ import { ethers } from "ethers";
 import { BleManager } from "react-native-ble-plx";
 import "react-native-get-random-values";
 import "@ethersproject/shims";
-
+import { swapAPI } from "../env/apiEndpoints";
 // 配置与工具
 import { prefixToShortName } from "../config/chainPrefixes";
 import cryptoPathMapping from "../config/cryptoPathMapping";
