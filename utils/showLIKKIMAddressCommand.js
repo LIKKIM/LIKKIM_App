@@ -2,10 +2,11 @@
 
 import { Buffer } from "buffer";
 import coinCommandMapping from "../config/coinCommandMapping";
+import { bluetoothConfig } from "../env/bluetoothConfig";
 
-const serviceUUID = "6E400001-B5A3-F393-E0A9-E50E24DCCA9E";
-const writeCharacteristicUUID = "6E400002-B5A3-F393-E0A9-E50E24DCCA9E";
-const notifyCharacteristicUUID = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E";
+const serviceUUID = bluetoothConfig.serviceUUID;
+const writeCharacteristicUUID = bluetoothConfig.writeCharacteristicUUID;
+const notifyCharacteristicUUID = bluetoothConfig.notifyCharacteristicUUID;
 
 /**
  * Sends a command to display an address on the device and monitors its response.
