@@ -31,11 +31,6 @@ const EmptyWalletView = ({
         <Text style={VaultScreenStyle.securityTitle}>
           {t("Security in your hands")}
         </Text>
-        <Text style={VaultScreenStyle.walletInfoText}>
-          {t(
-            "LIKKIM supports 30 blockchains and over 10,000 cryptocurrencies."
-          )}
-        </Text>
       </View>
     </View>
   );
