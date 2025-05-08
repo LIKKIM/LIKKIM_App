@@ -12,9 +12,9 @@ import { BlurView } from "expo-blur";
 import { useTranslation } from "react-i18next";
 
 import styles, { darkTheme, lightTheme } from "./styles";
-import VaultScreen from "./components/VaultScreen";
-import ActivityScreen from "./components/ActivityScreen";
-import SecureDeviceScreen from "./components/SecureDeviceScreen";
+import VaultScreen from "./components/Vault";
+import ActivityScreen from "./components/Activity";
+import SecureDeviceScreen from "./components/SecureDevice";
 import OnboardingScreen from "./utils/OnboardingScreen";
 import ScreenLock from "./utils/ScreenLock";
 import DeviceDisplay from "./components/SecureDeviceScreen/DeviceDisplay";
