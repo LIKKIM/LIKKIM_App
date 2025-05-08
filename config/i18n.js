@@ -69,13 +69,7 @@ i18n
           "Recovery Phrase": "Recovery Phrase",
           "Read the following, then save the phrase securely.":
             "Read the following, then save the phrase securely.",
-
-          "If you forget your password, you can use the recovery phrase to get back into your wallet.":
-            "If you forget your password, you can use the recovery phrase to get back into your wallet.",
-          "LIKKIM will never ask for your recovery phrase.":
-            "LIKKIM will never ask for your recovery phrase.",
-          "Never share it with anyone.": "Never share it with anyone.",
-          "You must select all 12 words before you can proceed.":
+  
             "You must select all 12 words before you can proceed.",
           "Verify and I've Saved the Phrase":
             "Verify and I've Saved the Phrase",
@@ -272,14 +266,8 @@ i18n
           "Recovery Phrase": "恢复短语",
           "Read the following, then save the phrase securely.":
             "请阅读以下内容，然后安全地保存恢复短语。",
-
-          "If you forget your password, you can use the recovery phrase to get back into your wallet.":
-            "如果您忘记密码，可以使用恢复短语重新进入您的钱包。",
-          "LIKKIM will never ask for your recovery phrase.":
-            "LIKKIM 永远不会要求您的恢复短语。",
-          "Never share it with anyone.": "永远不要与任何人分享。",
-          "You must select all 12 words before you can proceed.":
-            "你必须选择所有12个单词才能继续。",
+ 
+ 
           "Verify and I've Saved the Phrase": "验证并且我已保存短语",
           "Creating your wallet": "创建你的钱包",
           "Generating your accounts": "生成你的账户",
@@ -469,13 +457,7 @@ i18n
           "Read the following, then save the phrase securely.":
             "請閱讀以下內容，然後安全地保存恢復短語。",
 
-          "If you forget your password, you can use the recovery phrase to get back into your wallet.":
-            "如果您忘記密碼，可以使用恢復短語重新進入您的錢包。",
-          "LIKKIM will never ask for your recovery phrase.":
-            "LIKKIM 永遠不會要求您的恢復短語。",
-          "Never share it with anyone.": "永遠不要與任何人分享。",
-          "You must select all 12 words before you can proceed.":
-            "你必須選擇所有12個單詞才能繼續。",
+ 
           "Verify and I've Saved the Phrase": "驗證並且我已保存短語",
           "Creating your wallet": "創建你的錢包",
           "Generating your accounts": "生成你的帳戶",
@@ -678,14 +660,8 @@ i18n
           "Recovery Phrase": "Phrase de récupération",
           "Read the following, then save the phrase securely.":
             "Lisez ce qui suit, puis enregistrez la phrase en toute sécurité.",
-
-          "If you forget your password, you can use the recovery phrase to get back into your wallet.":
-            "Si vous oubliez votre mot de passe, vous pouvez utiliser la phrase de récupération pour revenir dans votre portefeuille.",
-          "LIKKIM will never ask for your recovery phrase.":
-            "LIKKIM ne vous demandera jamais votre phrase de récupération.",
-          "Never share it with anyone.": "Ne la partagez jamais avec personne.",
-          "You must select all 12 words before you can proceed.":
-            "Vous devez sélectionner les 12 mots avant de pouvoir continuer.",
+ 
+         
           "Verify and I've Saved the Phrase":
             "Vérifiez et j'ai sauvegardé la phrase",
           "Creating your wallet": "Création de votre portefeuille",
@@ -915,14 +891,8 @@ i18n
           "Recovery Phrase": "Frase de recuperación",
           "Read the following, then save the phrase securely.":
             "Lea lo siguiente, luego guarde la frase de forma segura.",
-
-          "If you forget your password, you can use the recovery phrase to get back into your wallet.":
-            "Si olvida su contraseña, puede usar la frase de recuperación para volver a entrar en su billetera.",
-          "LIKKIM will never ask for your recovery phrase.":
-            "LIKKIM nunca le pedirá su frase de recuperación.",
-          "Never share it with anyone.": "Nunca la comparta con nadie.",
-          "You must select all 12 words before you can proceed.":
-            "Debe seleccionar las 12 palabras antes de poder continuar.",
+ 
+ 
           "Verify and I've Saved the Phrase":
             "Verificar y he guardado la frase",
           "Creating your wallet": "Creando tu billetera",
@@ -1123,14 +1093,8 @@ i18n
           "Recovery Phrase": "عبارة الاسترداد",
           "Read the following, then save the phrase securely.":
             "اقرأ ما يلي ، ثم احفظ العبارة بأمان.",
-
-          "If you forget your password, you can use the recovery phrase to get back into your wallet.":
-            "إذا نسيت كلمة المرور الخاصة بك ، يمكنك استخدام عبارة الاسترداد للعودة إلى محفظتك.",
-          "LIKKIM will never ask for your recovery phrase.":
-            "لن يطلب منك LIKKIM أبدًا عبارة الاسترداد الخاصة بك.",
-          "Never share it with anyone.": "لا تشاركها أبدًا مع أي شخص.",
-          "You must select all 12 words before you can proceed.":
-            "يجب عليك تحديد جميع الكلمات الـ 12 قبل المتابعة.",
+ 
+       
           "Verify and I've Saved the Phrase": "تحقق وقد قمت بحفظ العبارة",
           "Creating your wallet": "إنشاء محفظتك",
           "Generating your accounts": "إنشاء حساباتك",
@@ -1332,13 +1296,8 @@ i18n
           "Read the following, then save the phrase securely.":
             "以下を読んでからフレーズを安全に保存してください。",
 
-          "If you forget your password, you can use the recovery phrase to get back into your wallet.":
-            "パスワードを忘れた場合は、リカバリーフレーズを使用してウォレットに戻ることができます。",
-          "LIKKIM will never ask for your recovery phrase.":
-            "LIKKIM がリカバリーフレーズを尋ねることはありません。",
-          "Never share it with anyone.": "誰とも共有しないでください。",
-          "You must select all 12 words before you can proceed.":
-            "続行するには12個の単語すべてを選択する必要があります。",
+    
+         
           "Verify and I've Saved the Phrase": "確認してフレーズを保存しました",
           "Creating your wallet": "ウォレットを作成中",
           "Generating your accounts": "アカウントを生成中",
@@ -1563,13 +1522,8 @@ i18n
           "Read the following, then save the phrase securely.":
             "Прочитайте следующее, затем сохраните фразу надежно.",
 
-          "If you forget your password, you can use the recovery phrase to get back into your wallet.":
-            "Если вы забудете свой пароль, вы можете использовать фразу восстановления для доступа к своему кошельку.",
-          "LIKKIM will never ask for your recovery phrase.":
-            "LIKKIM никогда не попросит вашу фразу восстановления.",
-          "Never share it with anyone.": "Никогда не делитесь этим ни с кем.",
-          "You must select all 12 words before you can proceed.":
-            "Вы должны выбрать все 12 слов, прежде чем продолжить.",
+    
+          
           "Verify and I've Saved the Phrase": "Проверить и я сохранил фразу",
           "Creating your wallet": "Создание вашего кошелька",
           "Generating your accounts": "Создание ваших аккаунтов",
@@ -1771,13 +1725,8 @@ i18n
           "Read the following, then save the phrase securely.":
             "다음을 읽고 구문을 안전하게 저장하세요.",
 
-          "If you forget your password, you can use the recovery phrase to get back into your wallet.":
-            "비밀번호를 잊어버린 경우 복구 구문을 사용하여 지갑에 다시 액세스할 수 있습니다.",
-          "LIKKIM will never ask for your recovery phrase.":
-            "LIKKIM은 복구 구문을 묻지 않습니다.",
-          "Never share it with anyone.": "절대 다른 사람과 공유하지 마십시오.",
-          "You must select all 12 words before you can proceed.":
-            "계속하려면 12개의 단어를 모두 선택해야 합니다.",
+          
+       
           "Verify and I've Saved the Phrase": "확인하고 구문을 저장했습니다",
           "Creating your wallet": "지갑 생성 중",
           "Generating your accounts": "계정 생성 중",
@@ -1979,13 +1928,8 @@ i18n
           "Read the following, then save the phrase securely.":
             "Leia o seguinte e salve a frase com segurança.",
 
-          "If you forget your password, you can use the recovery phrase to get back into your wallet.":
-            "Se você esquecer sua senha, pode usar a frase de recuperação para voltar à sua carteira.",
-          "LIKKIM will never ask for your recovery phrase.":
-            "A LIKKIM nunca pedirá sua frase de recuperação.",
-          "Never share it with anyone.": "Nunca compartilhe com ninguém.",
-          "You must select all 12 words before you can proceed.":
-            "Você deve selecionar todas as 12 palavras antes de prosseguir.",
+ 
+         
           "Verify and I've Saved the Phrase": "Verifique e eu salvei a frase",
           "Creating your wallet": "Criando sua carteira",
           "Generating your accounts": "Gerando suas contas",
@@ -2190,14 +2134,8 @@ i18n
           "Recovery Phrase": "Frase de recuperação",
           "Read the following, then save the phrase securely.":
             "Leia o seguinte e salve a frase com segurança.",
-
-          "If you forget your password, you can use the recovery phrase to get back into your wallet.":
-            "Se você esquecer sua senha, pode usar a frase de recuperação para voltar à sua carteira.",
-          "LIKKIM will never ask for your recovery phrase.":
-            "A LIKKIM nunca pedirá sua frase de recuperação.",
-          "Never share it with anyone.": "Nunca compartilhe com ninguém.",
-          "You must select all 12 words before you can proceed.":
-            "Você deve selecionar todas as 12 palavras antes de prosseguir.",
+ 
+          
           "Verify and I've Saved the Phrase": "Verifique e eu salvei a frase",
           "Creating your wallet": "Criando sua carteira",
           "Generating your accounts": "Gerando suas contas",
@@ -2418,14 +2356,8 @@ i18n
           "Recovery Phrase": "Frase di recupero",
           "Read the following, then save the phrase securely.":
             "Leggi quanto segue, quindi salva la frase in modo sicuro.",
-
-          "If you forget your password, you can use the recovery phrase to get back into your wallet.":
-            "Se dimentichi la tua password, puoi utilizzare la frase di recupero per rientrare nel tuo portafoglio.",
-          "LIKKIM will never ask for your recovery phrase.":
-            "LIKKIM non chiederà mai la tua frase di recupero.",
-          "Never share it with anyone.": "Non condividerlo mai con nessuno.",
-          "You must select all 12 words before you can proceed.":
-            "Devi selezionare tutte le 12 parole prima di procedere.",
+ 
+       
           "Verify and I've Saved the Phrase": "Verifica e ho salvato la frase",
           "Creating your wallet": "Creazione del tuo portafoglio",
           "Generating your accounts": "Generazione dei tuoi account",
@@ -2632,14 +2564,8 @@ i18n
           "Recovery Phrase": "Wiederherstellungsphrase",
           "Read the following, then save the phrase securely.":
             "Lesen Sie das Folgende und speichern Sie die Phrase sicher.",
-
-          "If you forget your password, you can use the recovery phrase to get back into your wallet.":
-            "Wenn Sie Ihr Passwort vergessen, können Sie die Wiederherstellungsphrase verwenden, um wieder auf Ihre Wallet zuzugreifen.",
-          "LIKKIM will never ask for your recovery phrase.":
-            "LIKKIM wird niemals nach Ihrer Wiederherstellungsphrase fragen.",
-          "Never share it with anyone.": "Teilen Sie es niemals mit jemandem.",
-          "You must select all 12 words before you can proceed.":
-            "Sie müssen alle 12 Wörter auswählen, bevor Sie fortfahren können.",
+ 
+          
           "Verify and I've Saved the Phrase":
             "Überprüfen und ich habe die Phrase gespeichert",
           "Creating your wallet": "Erstellen Ihrer Brieftasche",
@@ -2846,13 +2772,8 @@ i18n
           "Recovery Phrase": "रिकवरी वाक्यांश",
           "Read the following, then save the phrase securely.":
             "निम्नलिखित पढ़ें, फिर वाक्यांश को सुरक्षित रूप से सहेजें।",
-          "If you forget your password, you can use the recovery phrase to get back into your wallet.":
-            "यदि आप अपना पासवर्ड भूल जाते हैं, तो आप अपने वॉलेट में वापस आने के लिए रिकवरी वाक्यांश का उपयोग कर सकते हैं।",
-          "LIKKIM will never ask for your recovery phrase.":
-            "LIKKIM कभी भी आपसे आपका रिकवरी वाक्यांश नहीं पूछेगा।",
-          "Never share it with anyone.": "इसे कभी भी किसी के साथ साझा न करें।",
-          "You must select all 12 words before you can proceed.":
-            "आगे बढ़ने से पहले आपको सभी 12 शब्दों का चयन करना होगा।",
+ 
+          
           "Verify and I've Saved the Phrase":
             "सत्यापित करें और मैंने वाक्यांश सहेज लिया है",
           "Creating your wallet": "आपका वॉलेट बना रहा है",
@@ -3058,13 +2979,8 @@ i18n
           "Read the following, then save the phrase securely.":
             "Дараахыг уншаад үгээ аюулгүй хадгална уу.",
 
-          "If you forget your password, you can use the recovery phrase to get back into your wallet.":
-            "Хэрэв та нууц үгээ мартсан бол сэргээх үгийг ашиглан түрийвчээ дахин ашиглаж болно.",
-          "LIKKIM will never ask for your recovery phrase.":
-            "LIKKIM таны сэргээх үгийг хэзээ ч асуухгүй.",
-          "Never share it with anyone.": "Хэнтэй ч битгий хуваалцаарай.",
-          "You must select all 12 words before you can proceed.":
-            "Та үргэлжлүүлэхийн өмнө бүх 12 үгийг сонгох ёстой.",
+ 
+         
           "Verify and I've Saved the Phrase":
             "Баталгаажуулж, би үгийг хадгалсан",
           "Creating your wallet": "Таны түрийвчийг үүсгэж байна",
@@ -3274,14 +3190,8 @@ i18n
           "Recovery Phrase": "วลีการกู้คืน",
           "Read the following, then save the phrase securely.":
             "อ่านข้อความต่อไปนี้ จากนั้นบันทึกวลีไว้อย่างปลอดภัย",
-
-          "If you forget your password, you can use the recovery phrase to get back into your wallet.":
-            "หากคุณลืมรหัสผ่าน คุณสามารถใช้วลีการกู้คืนเพื่อกลับเข้าสู่กระเป๋าเงินของคุณได้",
-          "LIKKIM will never ask for your recovery phrase.":
-            "LIKKIM จะไม่ขอวลีการกู้คืนของคุณ",
-          "Never share it with anyone.": "อย่าแชร์กับใครก็ตาม",
-          "You must select all 12 words before you can proceed.":
-            "คุณต้องเลือกทั้ง 12 คำก่อนจึงจะดำเนินการต่อได้",
+ 
+ 
           "Verify and I've Saved the Phrase": "ตรวจสอบและฉันได้บันทึกวลีแล้ว",
           "Creating your wallet": "กำลังสร้างกระเป๋าเงินของคุณ",
           "Generating your accounts": "กำลังสร้างบัญชีของคุณ",
@@ -3483,13 +3393,8 @@ i18n
           "Read the following, then save the phrase securely.":
             "Прочитайте наступне, а потім надійно збережіть фразу.",
 
-          "If you forget your password, you can use the recovery phrase to get back into your wallet.":
-            "Якщо ви забудете свій пароль, ви можете скористатися фразою відновлення, щоб повернутися до свого гаманця.",
-          "LIKKIM will never ask for your recovery phrase.":
-            "LIKKIM ніколи не попросить вашу фразу відновлення.",
-          "Never share it with anyone.": "Ніколи не діліться нею ні з ким.",
-          "You must select all 12 words before you can proceed.":
-            "Ви повинні вибрати всі 12 слів, перш ніж продовжити.",
+ 
+         
           "Verify and I've Saved the Phrase": "Підтвердьте, і я зберіг фразу",
           "Creating your wallet": "Створення вашого гаманця",
           "Generating your accounts": "Створення ваших облікових записів",
@@ -3689,15 +3594,8 @@ i18n
           "Recovery Phrase": "Cụm từ khôi phục",
           "Read the following, then save the phrase securely.":
             "Đọc phần sau, sau đó lưu cụm từ một cách an toàn.",
-
-          "If you forget your password, you can use the recovery phrase to get back into your wallet.":
-            "Nếu bạn quên mật khẩu, bạn có thể sử dụng cụm từ khôi phục để quay lại ví của mình.",
-          "LIKKIM will never ask for your recovery phrase.":
-            "LIKKIM sẽ không bao giờ yêu cầu cụm từ khôi phục của bạn.",
-          "Never share it with anyone.":
-            "Đừng bao giờ chia sẻ nó với bất kỳ ai.",
-          "You must select all 12 words before you can proceed.":
-            "Bạn phải chọn đủ 12 từ trước khi tiếp tục.",
+ 
+ 
           "Verify and I've Saved the Phrase": "Xác nhận và tôi đã lưu cụm từ",
           "Creating your wallet": "Đang tạo ví của bạn",
           "Generating your accounts": "Đang tạo tài khoản của bạn",
@@ -3902,15 +3800,8 @@ i18n
           "Recovery Phrase": "Frasa pemulihan",
           "Read the following, then save the phrase securely.":
             "Baca yang berikut, lalu simpan frasa dengan aman.",
-
-          "If you forget your password, you can use the recovery phrase to get back into your wallet.":
-            "Jika Anda lupa kata sandi, Anda dapat menggunakan frasa pemulihan untuk kembali ke dompet Anda.",
-          "LIKKIM will never ask for your recovery phrase.":
-            "LIKKIM tidak akan pernah meminta frasa pemulihan Anda.",
-          "Never share it with anyone.":
-            "Jangan pernah membagikannya dengan siapa pun.",
-          "You must select all 12 words before you can proceed.":
-            "Anda harus memilih semua 12 kata sebelum Anda dapat melanjutkan.",
+ 
+ 
           "Verify and I've Saved the Phrase":
             "Verifikasi dan saya telah menyimpan frasa",
           "Creating your wallet": "Membuat dompet Anda",
@@ -4114,14 +4005,8 @@ i18n
           "Read the following, then save the phrase securely.":
             "Basahin ang sumusunod, pagkatapos ay i-save ang parirala nang ligtas.",
 
-          "If you forget your password, you can use the recovery phrase to get back into your wallet.":
-            "Kung nakalimutan mo ang iyong password, maaari mong gamitin ang parirala ng pagbawi upang makabalik sa iyong wallet.",
-          "LIKKIM will never ask for your recovery phrase.":
-            "Hindi hihilingin ng LIKKIM ang iyong parirala ng pagbawi.",
-          "Never share it with anyone.":
-            "Huwag kailanman ibahagi ito sa sinuman.",
-          "You must select all 12 words before you can proceed.":
-            "Dapat mong piliin ang lahat ng 12 salita bago ka magpatuloy.",
+ 
+    
           "Verify and I've Saved the Phrase":
             "I-verify at nai-save ko ang parirala",
           "Creating your wallet": "Gumagawa ng iyong wallet",
@@ -4330,13 +4215,8 @@ i18n
           "Read the following, then save the phrase securely.":
             "নীচেরটি পড়ুন, তারপরে বাক্যাংশটি নিরাপদে সংরক্ষণ করুন।",
 
-          "If you forget your password, you can use the recovery phrase to get back into your wallet.":
-            "আপনি যদি আপনার পাসওয়ার্ড ভুলে যান, আপনি আপনার ওয়ালেটে ফিরে যেতে পুনরুদ্ধার বাক্যাংশ ব্যবহার করতে পারেন।",
-          "LIKKIM will never ask for your recovery phrase.":
-            "LIKKIM কখনই আপনার পুনরুদ্ধার বাক্যাংশ চাইবে না।",
-          "Never share it with anyone.": "এটি কখনই কারও সাথে ভাগ করবেন না।",
-          "You must select all 12 words before you can proceed.":
-            "আপনাকে অব্যাহত রাখার আগে সমস্ত 12টি শব্দ নির্বাচন করতে হবে।",
+   
+       
           "Verify and I've Saved the Phrase":
             "যাচাই করুন এবং আমি বাক্যাংশটি সংরক্ষণ করেছি",
           "Creating your wallet": "আপনার ওয়ালেট তৈরি করা হচ্ছে",
