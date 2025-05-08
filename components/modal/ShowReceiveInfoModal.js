@@ -15,7 +15,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 const ShowReceiveInfoModal = ({
   visible,
   onRequestClose,
-  TransactionsScreenStyle,
+  ActivityScreenStyle,
   t,
   selectedCryptoIcon,
   selectedCrypto,
@@ -33,10 +33,10 @@ const ShowReceiveInfoModal = ({
       visible={visible}
       onRequestClose={onRequestClose}
     >
-      <BlurView intensity={10} style={TransactionsScreenStyle.centeredView}>
-        <View style={TransactionsScreenStyle.receiveModalView}>
+      <BlurView intensity={10} style={ActivityScreenStyle.centeredView}>
+        <View style={ActivityScreenStyle.receiveModalView}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text style={TransactionsScreenStyle.modalTitle}>
+            <Text style={ActivityScreenStyle.modalTitle}>
               {t("Address for")}
             </Text>
             {selectedCryptoIcon && (
@@ -50,12 +50,12 @@ const ShowReceiveInfoModal = ({
                 }}
               />
             )}
-            <Text style={TransactionsScreenStyle.modalTitle}>
+            <Text style={ActivityScreenStyle.modalTitle}>
               {selectedCrypto}:
             </Text>
           </View>
 
-          <Text style={TransactionsScreenStyle.subtitleText}>
+          <Text style={ActivityScreenStyle.subtitleText}>
             {t("Assets can only be sent within the same chain.")}
           </Text>
 
@@ -66,7 +66,7 @@ const ShowReceiveInfoModal = ({
               alignItems: "center",
             }}
           >
-            <Text style={TransactionsScreenStyle.addressText}>
+            <Text style={ActivityScreenStyle.addressText}>
               {selectedAddress}
             </Text>
             <TouchableOpacity
@@ -101,7 +101,7 @@ const ShowReceiveInfoModal = ({
               />
               <Text
                 style={[
-                  TransactionsScreenStyle.verifyingAddressText,
+                  ActivityScreenStyle.verifyingAddressText,
                   { color: "#3CDA84" },
                 ]}
               >
@@ -119,18 +119,18 @@ const ShowReceiveInfoModal = ({
           >
             <TouchableOpacity
               onPress={() => handleVerifyAddress(chainShortName)}
-              style={TransactionsScreenStyle.verifyAddressButton}
+              style={ActivityScreenStyle.verifyAddressButton}
             >
-              <Text style={TransactionsScreenStyle.submitButtonText}>
+              <Text style={ActivityScreenStyle.submitButtonText}>
                 {t("Verify Address")}
               </Text>
             </TouchableOpacity>
 
             <TouchableOpacity
-              style={TransactionsScreenStyle.cancelAddressButton}
+              style={ActivityScreenStyle.cancelAddressButton}
               onPress={onRequestClose}
             >
-              <Text style={TransactionsScreenStyle.cancelButtonText}>
+              <Text style={ActivityScreenStyle.cancelButtonText}>
                 {t("Close")}
               </Text>
             </TouchableOpacity>

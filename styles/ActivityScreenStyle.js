@@ -1,7 +1,7 @@
-// styles/TransactionsScreenStyle.js
+// styles/ActivityScreenStyle.js
 import { StyleSheet } from "react-native";
 
-const TransactionsScreenStyles = (isDarkMode) => {
+const ActivityScreenStyles = (isDarkMode) => {
   const backgroundColor = isDarkMode ? "#121212" : "#f5f5f5";
   const btnBorderColor = isDarkMode ? "#CCB68C" : "#CFAB95";
   const btnColor = isDarkMode ? "#CCB68C" : "#CFAB95";
@@ -547,4 +547,4 @@ const TransactionsScreenStyles = (isDarkMode) => {
   });
 };
 
-export default TransactionsScreenStyles;
+export default ActivityScreenStyles;

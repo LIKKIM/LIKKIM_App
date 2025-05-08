@@ -6,7 +6,7 @@ const ActivityProgressModal = ({
   visible,
   onClose,
   modalStatus,
-  TransactionsScreenStyle,
+  ActivityScreenStyle,
   t,
 }) => {
   return (
@@ -16,9 +16,9 @@ const ActivityProgressModal = ({
       transparent={true}
       animationType="slide"
     >
-      <View style={TransactionsScreenStyle.centeredView}>
-        <View style={TransactionsScreenStyle.pendingModalView}>
-          <Text style={TransactionsScreenStyle.modalTitle}>
+      <View style={ActivityScreenStyle.centeredView}>
+        <View style={ActivityScreenStyle.pendingModalView}>
+          <Text style={ActivityScreenStyle.modalTitle}>
             {modalStatus.title}
           </Text>
           <Image
@@ -26,18 +26,15 @@ const ActivityProgressModal = ({
             style={{ width: 120, height: 120 }}
           />
           <Text
-            style={[
-              TransactionsScreenStyle.modalSubtitle,
-              { marginBottom: 20 },
-            ]}
+            style={[ActivityScreenStyle.modalSubtitle, { marginBottom: 20 }]}
           >
             {modalStatus.subtitle}
           </Text>
           <TouchableOpacity
-            style={TransactionsScreenStyle.submitButton}
+            style={ActivityScreenStyle.submitButton}
             onPress={onClose}
           >
-            <Text style={TransactionsScreenStyle.submitButtonText}>
+            <Text style={ActivityScreenStyle.submitButtonText}>
               {t("Close")}
             </Text>
           </TouchableOpacity>

@@ -21,7 +21,7 @@ const SelectCryptoModal = ({
   addedCryptos,
   operationType,
   selectCrypto,
-  TransactionsScreenStyle,
+  ActivityScreenStyle,
   t,
   setModalVisible,
   isDarkMode,
@@ -46,12 +46,12 @@ const SelectCryptoModal = ({
           behavior={Platform.OS === "ios" ? "padding" : "height"}
           style={{ flex: 1 }}
         >
-          <BlurView intensity={10} style={TransactionsScreenStyle.centeredView}>
+          <BlurView intensity={10} style={ActivityScreenStyle.centeredView}>
             <View
-              style={TransactionsScreenStyle.modalView}
+              style={ActivityScreenStyle.modalView}
               onStartShouldSetResponder={() => true}
             >
-              <Text style={TransactionsScreenStyle.TransactionModalTitle}>
+              <Text style={ActivityScreenStyle.TransactionModalTitle}>
                 {addedCryptos.length === 0
                   ? t("No cryptocurrencies available. Please add wallet first.")
                   : operationType === "send"
@@ -60,14 +60,14 @@ const SelectCryptoModal = ({
               </Text>
 
               {addedCryptos.length > 0 && (
-                <View style={TransactionsScreenStyle.searchContainer}>
+                <View style={ActivityScreenStyle.searchContainer}>
                   <Icon
                     name="search"
                     size={20}
-                    style={TransactionsScreenStyle.searchIcon}
+                    style={ActivityScreenStyle.searchIcon}
                   />
                   <TextInput
-                    style={TransactionsScreenStyle.searchInput}
+                    style={ActivityScreenStyle.searchInput}
                     placeholder={t("Search Cryptocurrency")}
                     placeholderTextColor={isDarkMode ? "#ffffff" : "#21201E"}
                     onChangeText={(text) => setSearchQuery(text)}
@@ -101,7 +101,7 @@ const SelectCryptoModal = ({
                   {filteredCryptos.map((crypto) => (
                     <TouchableOpacity
                       key={`${crypto.shortName}_${crypto.chain}`}
-                      style={TransactionsScreenStyle.optionButton}
+                      style={ActivityScreenStyle.optionButton}
                       onPress={() => selectCrypto(crypto)}
                     >
                       <View
@@ -119,7 +119,7 @@ const SelectCryptoModal = ({
                             }}
                           />
                         )}
-                        <Text style={TransactionsScreenStyle.optionButtonText}>
+                        <Text style={ActivityScreenStyle.optionButtonText}>
                           {crypto.shortName} ({crypto.chain})
                         </Text>
                       </View>
@@ -128,10 +128,10 @@ const SelectCryptoModal = ({
                 </ScrollView>
               )}
               <TouchableOpacity
-                style={TransactionsScreenStyle.cancelButtonReceive}
+                style={ActivityScreenStyle.cancelButtonReceive}
                 onPress={() => setModalVisible(false)}
               >
-                <Text style={TransactionsScreenStyle.cancelButtonText}>
+                <Text style={ActivityScreenStyle.cancelButtonText}>
                   {t("Cancel")}
                 </Text>
               </TouchableOpacity>

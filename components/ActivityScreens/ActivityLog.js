@@ -19,7 +19,7 @@ import ChainSelectionModal from "../modal/ChainSelectionModal"; // 导入 ChainS
 import TransactionChainFilterModal from "../modal/TransactionChainFilterModal";
 
 const ActivityLog = ({
-  TransactionsScreenStyle,
+  ActivityScreenStyle,
   t,
   ActivityLog,
   isLoading,
@@ -88,7 +88,7 @@ const ActivityLog = ({
   const shouldDisplayChainFilterModal = filteredActivityLog.length > 0;
 
   return (
-    <View style={TransactionsScreenStyle.historyContainer}>
+    <View style={ActivityScreenStyle.historyContainer}>
       <View
         style={{
           flexDirection: "row",
@@ -99,7 +99,7 @@ const ActivityLog = ({
       >
         <Text
           style={[
-            TransactionsScreenStyle.historyTitle,
+            ActivityScreenStyle.historyTitle,
             { textAlign: "left", flex: 1 },
           ]}
         >
@@ -180,7 +180,7 @@ const ActivityLog = ({
           <View
             style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
           >
-            <Text style={TransactionsScreenStyle.loadingText}>
+            <Text style={ActivityScreenStyle.loadingText}>
               {t("Loading...")}
             </Text>
           </View>
@@ -188,7 +188,7 @@ const ActivityLog = ({
           <View
             style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
           >
-            <Text style={TransactionsScreenStyle.noHistoryText}>
+            <Text style={ActivityScreenStyle.noHistoryText}>
               {t("No Histories")}
             </Text>
           </View>
@@ -240,7 +240,7 @@ const ActivityLog = ({
                     },
                   ]}
                 >
-                  <Text style={TransactionsScreenStyle.historyItemText}>
+                  <Text style={ActivityScreenStyle.historyItemText}>
                     {`${new Date(
                       Number(transaction.transactionTime)
                     ).toLocaleString()}`}
@@ -312,7 +312,7 @@ const ActivityLog = ({
                       >
                         <Text
                           style={[
-                            TransactionsScreenStyle.historyItemText,
+                            ActivityScreenStyle.historyItemText,
                             { fontSize: 16, fontWeight: "bold" },
                           ]}
                         >
@@ -322,7 +322,7 @@ const ActivityLog = ({
                         </Text>
                         <Text
                           style={[
-                            TransactionsScreenStyle.historyItemText,
+                            ActivityScreenStyle.historyItemText,
                             { fontSize: 16, fontWeight: "bold" },
                           ]}
                         >
@@ -338,7 +338,7 @@ const ActivityLog = ({
                           justifyContent: "space-between",
                         }}
                       >
-                        <Text style={TransactionsScreenStyle.historyItemText}>
+                        <Text style={ActivityScreenStyle.historyItemText}>
                           <Text
                             style={{
                               color:
@@ -367,10 +367,10 @@ const ActivityLog = ({
         animationType="slide"
         onRequestClose={() => setSelectedTransaction(null)}
       >
-        <View style={TransactionsScreenStyle.modalContainer}>
+        <View style={ActivityScreenStyle.modalContainer}>
           <View
             style={[
-              TransactionsScreenStyle.cardContainer,
+              ActivityScreenStyle.cardContainer,
               { alignItems: "flex-start" },
             ]}
           >
@@ -386,7 +386,7 @@ const ActivityLog = ({
                 >
                   <Text
                     style={[
-                      TransactionsScreenStyle.historyItemText,
+                      ActivityScreenStyle.historyItemText,
                       { fontSize: 16, fontWeight: "bold", textAlign: "left" },
                     ]}
                   >
@@ -409,7 +409,7 @@ const ActivityLog = ({
                   </Text>
                   <Text
                     style={[
-                      TransactionsScreenStyle.historyItemText,
+                      ActivityScreenStyle.historyItemText,
                       { fontSize: 16, fontWeight: "bold", textAlign: "right" },
                     ]}
                   >
@@ -418,7 +418,7 @@ const ActivityLog = ({
                 </View>
                 <Text
                   style={[
-                    TransactionsScreenStyle.historyItemText,
+                    ActivityScreenStyle.historyItemText,
                     { textAlign: "left" },
                   ]}
                 >
@@ -431,7 +431,7 @@ const ActivityLog = ({
                 </Text>
                 <Text
                   style={[
-                    TransactionsScreenStyle.historyItemText,
+                    ActivityScreenStyle.historyItemText,
                     { lineHeight: 24, textAlign: "left" },
                   ]}
                 >
@@ -440,7 +440,7 @@ const ActivityLog = ({
                 </Text>
                 <Text
                   style={[
-                    TransactionsScreenStyle.historyItemText,
+                    ActivityScreenStyle.historyItemText,
                     { lineHeight: 24, textAlign: "left" },
                   ]}
                 >
@@ -449,7 +449,7 @@ const ActivityLog = ({
                 </Text>
                 <Text
                   style={[
-                    TransactionsScreenStyle.historyItemText,
+                    ActivityScreenStyle.historyItemText,
                     { lineHeight: 24, textAlign: "left" },
                   ]}
                 >
@@ -460,7 +460,7 @@ const ActivityLog = ({
                 </Text>
                 <Text
                   style={[
-                    TransactionsScreenStyle.historyItemText,
+                    ActivityScreenStyle.historyItemText,
                     { textAlign: "left" },
                   ]}
                 >
@@ -469,7 +469,7 @@ const ActivityLog = ({
                 </Text>
                 <Text
                   style={[
-                    TransactionsScreenStyle.historyItemText,
+                    ActivityScreenStyle.historyItemText,
                     { textAlign: "left" },
                   ]}
                 >
@@ -482,9 +482,9 @@ const ActivityLog = ({
                 >
                   <TouchableOpacity
                     onPress={() => setSelectedTransaction(null)}
-                    style={TransactionsScreenStyle.cancelButton}
+                    style={ActivityScreenStyle.cancelButton}
                   >
-                    <Text style={TransactionsScreenStyle.cancelButtonText}>
+                    <Text style={ActivityScreenStyle.cancelButtonText}>
                       {t("Close")}
                     </Text>
                   </TouchableOpacity>

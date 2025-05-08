@@ -1,4 +1,4 @@
-// TransactionsScreen.js
+// ActivityScreen.js
 import React, { useContext, useState, useRef, useEffect } from "react";
 import { View, Clipboard, Platform } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
@@ -30,7 +30,7 @@ import {
 
 // 上下文和样式
 import { DeviceContext, DarkModeContext } from "../utils/DeviceContext";
-import TransactionsScreenStyles from "../styles/TransactionsScreenStyle";
+import ActivityScreenStyles from "../styles/ActivityScreenStyle";
 
 // Modal 组件
 import TransactionConfirmationModal from "./modal/TransactionConfirmationModal";
@@ -57,7 +57,7 @@ const serviceUUID = bluetoothConfig.serviceUUID;
 const writeCharacteristicUUID = bluetoothConfig.writeCharacteristicUUID;
 const notifyCharacteristicUUID = bluetoothConfig.notifyCharacteristicUUID;
 
-function TransactionsScreen() {
+function ActivityScreen() {
   // ---------- 状态和上下文 ----------
   const { t } = useTranslation();
   const { isDarkMode } = useContext(DarkModeContext);
@@ -79,7 +79,7 @@ function TransactionsScreen() {
     updateDevicePubHintKey,
   } = useContext(DeviceContext);
   const [isLoading, setIsLoading] = useState(true);
-  const TransactionsScreenStyle = TransactionsScreenStyles(isDarkMode);
+  const ActivityScreenStyle = ActivityScreenStyles(isDarkMode);
   const iconColor = isDarkMode ? "#CCB68C" : "#CFAB95";
   const darkColors = ["#21201E", "#0E0D0D"];
   const lightColors = ["#FFFFFF", "#EDEBEF"];
@@ -341,7 +341,7 @@ function TransactionsScreen() {
     fetchAllActivityLog();
   }, [initialAdditionalCryptos]);
 
-  // 在 TransactionsScreen 组件的 useEffect 或合适位置添加代码来获取手续费
+  // 在 ActivityScreen 组件的 useEffect 或合适位置添加代码来获取手续费
   const fetchTransactionFee = async () => {
     try {
       const postData = {
@@ -1595,11 +1595,11 @@ function TransactionsScreen() {
   return (
     <LinearGradient
       colors={isDarkMode ? darkColors : lightColors}
-      style={TransactionsScreenStyle.bgContainer}
+      style={ActivityScreenStyle.bgContainer}
     >
-      <View className="w-[100%]" style={TransactionsScreenStyle.container}>
+      <View className="w-[100%]" style={ActivityScreenStyle.container}>
         <ActionButtons
-          TransactionsScreenStyle={TransactionsScreenStyle}
+          ActivityScreenStyle={ActivityScreenStyle}
           t={t}
           iconColor={iconColor}
           handleSendPress={handleSendPress}
@@ -1608,7 +1608,7 @@ function TransactionsScreen() {
         />
         {/* 交易历史记录组件 */}
         <ActivityLog
-          TransactionsScreenStyle={TransactionsScreenStyle}
+          ActivityScreenStyle={ActivityScreenStyle}
           t={t}
           ActivityLog={ActivityLog}
           isLoading={isLoading}
@@ -1621,7 +1621,7 @@ function TransactionsScreen() {
         <ContactFormModal
           visible={ContactFormModalVisible}
           onRequestClose={() => setContactFormModalVisible(false)}
-          TransactionsScreenStyle={TransactionsScreenStyle}
+          ActivityScreenStyle={ActivityScreenStyle}
           t={t}
           isDarkMode={isDarkMode}
           handleAddressChange={handleAddressChange}
@@ -1640,7 +1640,7 @@ function TransactionsScreen() {
         <AmountModal
           visible={amountModalVisible}
           onRequestClose={() => setAmountModalVisible(false)}
-          TransactionsScreenStyle={TransactionsScreenStyle}
+          ActivityScreenStyle={ActivityScreenStyle}
           t={t}
           isDarkMode={isDarkMode}
           amount={amount}
@@ -1698,7 +1698,7 @@ function TransactionsScreen() {
           }}
           onCancel={() => setConfirmModalVisible(false)}
           t={t}
-          TransactionsScreenStyle={TransactionsScreenStyle}
+          ActivityScreenStyle={ActivityScreenStyle}
           isDarkMode={isDarkMode}
           selectedCryptoIcon={selectedCryptoIcon}
           selectedCrypto={selectedCrypto}
@@ -1724,7 +1724,7 @@ function TransactionsScreen() {
           addedCryptos={addedCryptos}
           operationType={operationType}
           selectCrypto={selectCrypto}
-          TransactionsScreenStyle={TransactionsScreenStyle}
+          ActivityScreenStyle={ActivityScreenStyle}
           t={t}
           setModalVisible={setModalVisible}
           isDarkMode={isDarkMode}
@@ -1733,7 +1733,7 @@ function TransactionsScreen() {
         <ShowReceiveInfoModal
           visible={addressModalVisible}
           onRequestClose={() => setAddressModalVisible(false)}
-          TransactionsScreenStyle={TransactionsScreenStyle}
+          ActivityScreenStyle={ActivityScreenStyle}
           t={t}
           selectedCryptoIcon={selectedCryptoIcon}
           selectedCrypto={selectedCrypto}
@@ -1756,7 +1756,7 @@ function TransactionsScreen() {
             setSelectedDevice(null);
           }}
           verifiedDevices={"0"}
-          SecureDeviceScreenStyle={TransactionsScreenStyle}
+          SecureDeviceScreenStyle={ActivityScreenStyle}
           t={t}
           onDisconnectPress={handleDisconnectDevice}
         />
@@ -1771,7 +1771,7 @@ function TransactionsScreen() {
             setSecurityCodeModalVisible(false);
             setPinCode("");
           }}
-          styles={TransactionsScreenStyle}
+          styles={ActivityScreenStyle}
           isDarkMode={isDarkMode}
           t={t}
           status={verificationStatus}
@@ -1787,7 +1787,7 @@ function TransactionsScreen() {
             setVerificationSuccessModalVisible(false);
             setVerificationFailModalVisible(false);
           }}
-          styles={TransactionsScreenStyle}
+          styles={ActivityScreenStyle}
           t={t}
         />
 
@@ -1796,7 +1796,7 @@ function TransactionsScreen() {
           visible={confirmingTransactionModalVisible}
           onClose={() => setConfirmingTransactionModalVisible(false)}
           modalStatus={modalStatus}
-          TransactionsScreenStyle={TransactionsScreenStyle}
+          ActivityScreenStyle={ActivityScreenStyle}
           t={t}
         />
 
@@ -1810,7 +1810,7 @@ function TransactionsScreen() {
           toDropdownVisible={toDropdownVisible}
           setToDropdownVisible={setToDropdownVisible}
           initialAdditionalCryptos={initialAdditionalCryptos}
-          TransactionsScreenStyle={TransactionsScreenStyle}
+          ActivityScreenStyle={ActivityScreenStyle}
           selectedDevice={selectedDevice}
           serviceUUID={serviceUUID}
           writeCharacteristicUUID={writeCharacteristicUUID}
@@ -1820,4 +1820,4 @@ function TransactionsScreen() {
   );
 }
 
-export default TransactionsScreen;
+export default ActivityScreen;

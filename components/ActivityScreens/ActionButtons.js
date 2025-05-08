@@ -5,7 +5,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import Feather from "react-native-vector-icons/Feather";
 
 const ActionButtons = ({
-  TransactionsScreenStyle,
+  ActivityScreenStyle,
   t,
   iconColor,
   handleSendPress,
@@ -24,31 +24,29 @@ const ActionButtons = ({
     >
       {/* Send button */}
       <TouchableOpacity
-        style={[TransactionsScreenStyle.roundButton, { flex: 1 }]} // Equal width for each button
+        style={[ActivityScreenStyle.roundButton, { flex: 1 }]} // Equal width for each button
         onPress={handleSendPress}
       >
         <Feather name="send" size={24} color={iconColor} />
-        <Text style={TransactionsScreenStyle.mainButtonText}>{t("Send")}</Text>
+        <Text style={ActivityScreenStyle.mainButtonText}>{t("Send")}</Text>
       </TouchableOpacity>
 
       {/* Receive button */}
       <TouchableOpacity
-        style={[TransactionsScreenStyle.roundButton, { flex: 1 }]} // Equal width for each button
+        style={[ActivityScreenStyle.roundButton, { flex: 1 }]} // Equal width for each button
         onPress={handleReceivePress}
       >
         <Icon name="vertical-align-bottom" size={24} color={iconColor} />
-        <Text style={TransactionsScreenStyle.mainButtonText}>
-          {t("Receive")}
-        </Text>
+        <Text style={ActivityScreenStyle.mainButtonText}>{t("Receive")}</Text>
       </TouchableOpacity>
 
       {/* Swap button */}
       <TouchableOpacity
-        style={[TransactionsScreenStyle.roundButton, { flex: 1 }]} // Equal width for each button
+        style={[ActivityScreenStyle.roundButton, { flex: 1 }]} // Equal width for each button
         onPress={handleSwapPress}
       >
         <Icon name="swap-horiz" size={24} color={iconColor} />
-        <Text style={TransactionsScreenStyle.mainButtonText}>{t("Swap")}</Text>
+        <Text style={ActivityScreenStyle.mainButtonText}>{t("Swap")}</Text>
       </TouchableOpacity>
     </View>
   );

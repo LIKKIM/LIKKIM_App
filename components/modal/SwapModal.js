@@ -28,7 +28,7 @@ const SwapModal = ({
   toDropdownVisible,
   setToDropdownVisible,
   initialAdditionalCryptos,
-  TransactionsScreenStyle,
+  ActivityScreenStyle,
   selectedDevice,
   serviceUUID,
   writeCharacteristicUUID,
@@ -62,7 +62,7 @@ const SwapModal = ({
 
   const confirmButtonBackgroundColor = isConfirmDisabled
     ? disabledButtonBackgroundColor
-    : TransactionsScreenStyle.swapConfirmButton.backgroundColor;
+    : ActivityScreenStyle.swapConfirmButton.backgroundColor;
 
   const chainCategories = initialAdditionalCryptos.map((crypto) => ({
     name: crypto.chain,
@@ -292,12 +292,9 @@ const SwapModal = ({
           style={{ flex: 1 }}
         >
           <TouchableWithoutFeedback onPress={() => setSwapModalVisible(false)}>
-            <BlurView
-              intensity={10}
-              style={TransactionsScreenStyle.centeredView}
-            >
+            <BlurView intensity={10} style={ActivityScreenStyle.centeredView}>
               <View
-                style={TransactionsScreenStyle.modalView}
+                style={ActivityScreenStyle.modalView}
                 onStartShouldSetResponder={() => true}
               >
                 {/* From Section */}
@@ -305,13 +302,13 @@ const SwapModal = ({
                   <View style={{ alignItems: "flex-start", width: "100%" }}>
                     <Text
                       style={[
-                        TransactionsScreenStyle.modalTitle,
+                        ActivityScreenStyle.modalTitle,
                         { marginBottom: 6 },
                       ]}
                     >
                       {t("From")}
                     </Text>
-                    <View style={TransactionsScreenStyle.swapInputContainer}>
+                    <View style={ActivityScreenStyle.swapInputContainer}>
                       <View
                         style={{
                           flex: 1,
@@ -322,7 +319,7 @@ const SwapModal = ({
                       >
                         <TextInput
                           style={[
-                            TransactionsScreenStyle.swapInput,
+                            ActivityScreenStyle.swapInput,
                             {
                               fontSize: 30,
                               fontWeight: "bold",
@@ -337,7 +334,7 @@ const SwapModal = ({
                         />
                         <Text
                           style={[
-                            TransactionsScreenStyle.subtitleText,
+                            ActivityScreenStyle.subtitleText,
                             {
                               textAlign: "left",
                               width: "100%",
@@ -349,7 +346,7 @@ const SwapModal = ({
                         </Text>
                       </View>
                       <TouchableOpacity
-                        style={TransactionsScreenStyle.tokenSelect}
+                        style={ActivityScreenStyle.tokenSelect}
                         onPress={() => {
                           setFromDropdownVisible(!fromDropdownVisible);
                           setToDropdownVisible(false);
@@ -369,12 +366,12 @@ const SwapModal = ({
                                 marginRight: 8,
                               }}
                             />
-                            <Text style={TransactionsScreenStyle.subtitleText}>
+                            <Text style={ActivityScreenStyle.subtitleText}>
                               {getTokenDetails(selectedFromToken)?.name}
                             </Text>
                           </>
                         ) : (
-                          <Text style={TransactionsScreenStyle.subtitleText}>
+                          <Text style={ActivityScreenStyle.subtitleText}>
                             {t("Select token")}
                           </Text>
                         )}
@@ -385,10 +382,10 @@ const SwapModal = ({
 
                   {/* From Dropdown */}
                   {fromDropdownVisible && (
-                    <View style={TransactionsScreenStyle.fromDropdown}>
+                    <View style={ActivityScreenStyle.fromDropdown}>
                       <TextInput
                         style={[
-                          TransactionsScreenStyle.searchInput,
+                          ActivityScreenStyle.searchInput,
                           {
                             marginBottom: 10,
                             paddingHorizontal: 8,
@@ -431,9 +428,7 @@ const SwapModal = ({
                             }}
                             onPress={() => setSelectedChain("All")}
                           >
-                            <Text
-                              style={[TransactionsScreenStyle.chainTagText]}
-                            >
+                            <Text style={[ActivityScreenStyle.chainTagText]}>
                               {t("All")}
                             </Text>
                           </TouchableOpacity>
@@ -477,9 +472,7 @@ const SwapModal = ({
                                   borderRadius: 10,
                                 }}
                               />
-                              <Text
-                                style={[TransactionsScreenStyle.chainTagText]}
-                              >
+                              <Text style={[ActivityScreenStyle.chainTagText]}>
                                 {chain}
                               </Text>
                             </TouchableOpacity>
@@ -498,9 +491,9 @@ const SwapModal = ({
                             <TouchableOpacity
                               key={`${chain.shortName}-${index}`}
                               style={[
-                                TransactionsScreenStyle.chainTag,
+                                ActivityScreenStyle.chainTag,
                                 selectedFromToken === chain.shortName &&
-                                  TransactionsScreenStyle.selectedChainTag,
+                                  ActivityScreenStyle.selectedChainTag,
                               ]}
                               onPress={() => {
                                 setSelectedFromToken({
@@ -568,9 +561,9 @@ const SwapModal = ({
                                 />
                                 <Text
                                   style={[
-                                    TransactionsScreenStyle.chainTagText,
+                                    ActivityScreenStyle.chainTagText,
                                     selectedFromToken === chain.shortName &&
-                                      TransactionsScreenStyle.selectedChainTagText,
+                                      ActivityScreenStyle.selectedChainTagText,
                                   ]}
                                 >
                                   {chain.name}
@@ -585,7 +578,7 @@ const SwapModal = ({
 
                 {/* Swap Button */}
                 <TouchableOpacity
-                  style={TransactionsScreenStyle.swapButton}
+                  style={ActivityScreenStyle.swapButton}
                   onPress={() => {
                     // Swap values
                     const tempValue = fromValue;
@@ -606,13 +599,13 @@ const SwapModal = ({
                   <View style={{ alignItems: "flex-start", width: "100%" }}>
                     <Text
                       style={[
-                        TransactionsScreenStyle.modalTitle,
+                        ActivityScreenStyle.modalTitle,
                         { marginBottom: 6, marginTop: -32 },
                       ]}
                     >
                       {t("To")}
                     </Text>
-                    <View style={TransactionsScreenStyle.swapInputContainer}>
+                    <View style={ActivityScreenStyle.swapInputContainer}>
                       <View
                         style={{
                           flex: 1,
@@ -624,7 +617,7 @@ const SwapModal = ({
                         <TextInput
                           editable={false}
                           style={[
-                            TransactionsScreenStyle.swapInput,
+                            ActivityScreenStyle.swapInput,
                             {
                               fontSize: 30,
                               fontWeight: "bold",
@@ -639,7 +632,7 @@ const SwapModal = ({
                         />
                         <Text
                           style={[
-                            TransactionsScreenStyle.subtitleText,
+                            ActivityScreenStyle.subtitleText,
                             {
                               textAlign: "left",
                               width: "100%",
@@ -651,7 +644,7 @@ const SwapModal = ({
                         </Text>
                       </View>
                       <TouchableOpacity
-                        style={TransactionsScreenStyle.tokenSelect}
+                        style={ActivityScreenStyle.tokenSelect}
                         onPress={() => {
                           setToDropdownVisible(!toDropdownVisible);
                           setFromDropdownVisible(false);
@@ -671,12 +664,12 @@ const SwapModal = ({
                                 marginRight: 8,
                               }}
                             />
-                            <Text style={TransactionsScreenStyle.subtitleText}>
+                            <Text style={ActivityScreenStyle.subtitleText}>
                               {getTokenDetails(selectedToToken)?.name}
                             </Text>
                           </>
                         ) : (
-                          <Text style={TransactionsScreenStyle.subtitleText}>
+                          <Text style={ActivityScreenStyle.subtitleText}>
                             {t("Select token")}
                           </Text>
                         )}
@@ -687,11 +680,11 @@ const SwapModal = ({
 
                   {/* To Dropdown */}
                   {toDropdownVisible && (
-                    <View style={TransactionsScreenStyle.toDropdown}>
+                    <View style={ActivityScreenStyle.toDropdown}>
                       {/* 搜索区域 */}
                       <TextInput
                         style={[
-                          TransactionsScreenStyle.searchInput,
+                          ActivityScreenStyle.searchInput,
                           {
                             marginBottom: 10,
                             paddingHorizontal: 8,
@@ -746,7 +739,7 @@ const SwapModal = ({
                                 }}
                               >
                                 <Text
-                                  style={[TransactionsScreenStyle.chainTagText]}
+                                  style={[ActivityScreenStyle.chainTagText]}
                                 >
                                   {t("All")}
                                 </Text>
@@ -815,7 +808,7 @@ const SwapModal = ({
                                   }}
                                 />
                                 <Text
-                                  style={[TransactionsScreenStyle.chainTagText]}
+                                  style={[ActivityScreenStyle.chainTagText]}
                                 >
                                   {chain}
                                 </Text>
@@ -830,9 +823,9 @@ const SwapModal = ({
                           <TouchableOpacity
                             key={`${chain.shortName}-${index}`}
                             style={[
-                              TransactionsScreenStyle.chainTag,
+                              ActivityScreenStyle.chainTag,
                               selectedToToken === chain.shortName &&
-                                TransactionsScreenStyle.selectedChainTag,
+                                ActivityScreenStyle.selectedChainTag,
                             ]}
                             onPress={() => {
                               setSelectedToToken({
@@ -871,9 +864,9 @@ const SwapModal = ({
                               />
                               <Text
                                 style={[
-                                  TransactionsScreenStyle.chainTagText,
+                                  ActivityScreenStyle.chainTagText,
                                   selectedToToken === chain.shortName &&
-                                    TransactionsScreenStyle.selectedChainTagText,
+                                    ActivityScreenStyle.selectedChainTagText,
                                 ]}
                               >
                                 {chain.name}
@@ -911,7 +904,7 @@ const SwapModal = ({
                       setConfirmModalVisible(true); // ✅打开二次确认Modal
                     }}
                     style={[
-                      TransactionsScreenStyle.swapConfirmButton,
+                      ActivityScreenStyle.swapConfirmButton,
                       {
                         backgroundColor: !(
                           selectedFromToken &&
@@ -919,22 +912,22 @@ const SwapModal = ({
                           fromValue
                         )
                           ? disabledButtonBackgroundColor
-                          : TransactionsScreenStyle.swapConfirmButton
+                          : ActivityScreenStyle.swapConfirmButton
                               .backgroundColor,
                         marginBottom: 20,
                       },
                     ]}
                   >
-                    <Text style={TransactionsScreenStyle.submitButtonText}>
+                    <Text style={ActivityScreenStyle.submitButtonText}>
                       {t("Confirm")}
                     </Text>
                   </TouchableOpacity>
                   {/* Close Button */}
                   <TouchableOpacity
                     onPress={() => setSwapModalVisible(false)}
-                    style={[TransactionsScreenStyle.cancelButton]}
+                    style={[ActivityScreenStyle.cancelButton]}
                   >
-                    <Text style={TransactionsScreenStyle.cancelButtonText}>
+                    <Text style={ActivityScreenStyle.cancelButtonText}>
                       {t("Close")}
                     </Text>
                   </TouchableOpacity>
@@ -951,9 +944,9 @@ const SwapModal = ({
           visible={confirmModalVisible}
           onRequestClose={() => setConfirmModalVisible(false)}
         >
-          <BlurView intensity={10} style={TransactionsScreenStyle.centeredView}>
-            <View style={TransactionsScreenStyle.confirmModalView}>
-              <Text style={TransactionsScreenStyle.modalTitle}>
+          <BlurView intensity={10} style={ActivityScreenStyle.centeredView}>
+            <View style={ActivityScreenStyle.confirmModalView}>
+              <Text style={ActivityScreenStyle.modalTitle}>
                 {t("Transaction Confirmation")}
               </Text>
 
@@ -977,21 +970,21 @@ const SwapModal = ({
                       borderRadius: 12,
                     }}
                   />
-                  <Text style={TransactionsScreenStyle.transactionText}>
+                  <Text style={ActivityScreenStyle.transactionText}>
                     {getTokenDetails(selectedFromToken)?.chain}
                   </Text>
                 </View>
 
                 {/* From -> To 信息 */}
-                <Text style={TransactionsScreenStyle.transactionText}>
+                <Text style={ActivityScreenStyle.transactionText}>
                   {t("From")}: {getTokenDetails(selectedFromToken)?.name} (
                   {fromValue})
                 </Text>
-                <Text style={TransactionsScreenStyle.transactionText}>
+                <Text style={ActivityScreenStyle.transactionText}>
                   {t("To")}: {getTokenDetails(selectedToToken)?.name} ({toValue}
                   )
                 </Text>
-                <Text style={TransactionsScreenStyle.transactionText}>
+                <Text style={ActivityScreenStyle.transactionText}>
                   {t("Exchange Rate")}: 1{" "}
                   {getTokenDetails(selectedFromToken)?.symbol} ≈ {exchangeRate}{" "}
                   {getTokenDetails(selectedToToken)?.symbol}
@@ -1000,7 +993,7 @@ const SwapModal = ({
                 {/* 支付合约 */}
                 <Text
                   style={[
-                    TransactionsScreenStyle.transactionText,
+                    ActivityScreenStyle.transactionText,
                     { marginTop: 10 },
                   ]}
                 >
@@ -1009,13 +1002,13 @@ const SwapModal = ({
                 </Text>
 
                 {/* 接收合约 */}
-                <Text style={TransactionsScreenStyle.transactionText}>
+                <Text style={ActivityScreenStyle.transactionText}>
                   {t("To Token Address")}:{" "}
                   {getTokenDetails(selectedToToken)?.contractAddress || "-"}
                 </Text>
 
                 {/* 账户地址 */}
-                <Text style={TransactionsScreenStyle.transactionText}>
+                <Text style={ActivityScreenStyle.transactionText}>
                   {t("Account Address")}:{" "}
                   {getTokenDetails(selectedFromToken)?.address || "-"}
                 </Text>
@@ -1024,22 +1017,22 @@ const SwapModal = ({
               {/* 确认/取消按钮 */}
               <View style={{ marginTop: 20, width: "100%" }}>
                 <TouchableOpacity
-                  style={TransactionsScreenStyle.optionButton}
+                  style={ActivityScreenStyle.optionButton}
                   onPress={async () => {
                     setConfirmModalVisible(false);
                     await handleConfirmSwap(); // 🔥这里才真正去发起交易
                   }}
                 >
-                  <Text style={TransactionsScreenStyle.submitButtonText}>
+                  <Text style={ActivityScreenStyle.submitButtonText}>
                     {t("Confirm")}
                   </Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                  style={TransactionsScreenStyle.cancelButton}
+                  style={ActivityScreenStyle.cancelButton}
                   onPress={() => setConfirmModalVisible(false)}
                 >
-                  <Text style={TransactionsScreenStyle.cancelButtonText}>
+                  <Text style={ActivityScreenStyle.cancelButtonText}>
                     {t("Cancel")}
                   </Text>
                 </TouchableOpacity>

@@ -13,7 +13,7 @@ import { useTranslation } from "react-i18next";
 
 import styles, { darkTheme, lightTheme } from "./styles";
 import VaultScreen from "./components/VaultScreen";
-import TransactionsScreen from "./components/TransactionsScreen";
+import ActivityScreen from "./components/ActivityScreen";
 import SecureDeviceScreen from "./components/SecureDeviceScreen";
 import OnboardingScreen from "./utils/OnboardingScreen";
 import ScreenLock from "./utils/ScreenLock";
@@ -311,7 +311,7 @@ function AppContent({
             };
           }}
         />
-        <Tab.Screen name="Transactions" component={TransactionsScreen} />
+        <Tab.Screen name="Transactions" component={ActivityScreen} />
         <Tab.Screen name="My Cold Wallet">
           {(props) => (
             <SecureDeviceScreen {...props} onDarkModeChange={refreshDarkMode} />

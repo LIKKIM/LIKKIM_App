@@ -19,7 +19,7 @@ import SecureDeviceScreenStyles from "../../styles/SecureDeviceScreenStyle";
 const ContactFormModal = ({
   visible,
   onRequestClose,
-  TransactionsScreenStyle,
+  ActivityScreenStyle,
   t,
   isDarkMode,
   handleAddressChange,
@@ -58,13 +58,10 @@ const ContactFormModal = ({
       >
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
-          style={TransactionsScreenStyle.centeredView}
+          style={ActivityScreenStyle.centeredView}
         >
-          <BlurView
-            intensity={10}
-            style={TransactionsScreenStyle.blurBackground}
-          />
-          <View style={TransactionsScreenStyle.cardContainer}>
+          <BlurView intensity={10} style={ActivityScreenStyle.blurBackground} />
+          <View style={ActivityScreenStyle.cardContainer}>
             <View
               style={{
                 flexDirection: "row",
@@ -78,11 +75,11 @@ const ContactFormModal = ({
                   style={{ width: 24, height: 24, marginRight: 8 }}
                 />
               )}
-              <Text style={TransactionsScreenStyle.modalTitle}>
+              <Text style={ActivityScreenStyle.modalTitle}>
                 {selectedCrypto} ({selectedCryptoChain})
               </Text>
             </View>
-            <Text style={TransactionsScreenStyle.modalTitle}>
+            <Text style={ActivityScreenStyle.modalTitle}>
               {t("Enter the recipient's address:")}
             </Text>
             <View style={{ width: "100%" }}>
@@ -95,7 +92,7 @@ const ContactFormModal = ({
               >
                 <TextInput
                   style={[
-                    TransactionsScreenStyle.input,
+                    ActivityScreenStyle.input,
                     { flex: 1, color: isDarkMode ? "#ffffff" : "#000" },
                   ]}
                   placeholder={t("Enter Address")}
@@ -138,7 +135,7 @@ const ContactFormModal = ({
             </View>
             <TouchableOpacity
               style={[
-                TransactionsScreenStyle.optionButton,
+                ActivityScreenStyle.optionButton,
                 {
                   backgroundColor: isAddressValid
                     ? buttonBackgroundColor
@@ -148,15 +145,15 @@ const ContactFormModal = ({
               onPress={handleNextAfterAddress}
               disabled={!isAddressValid}
             >
-              <Text style={TransactionsScreenStyle.submitButtonText}>
+              <Text style={ActivityScreenStyle.submitButtonText}>
                 {t("Next")}
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={TransactionsScreenStyle.cancelButton}
+              style={ActivityScreenStyle.cancelButton}
               onPress={() => setContactFormModalVisible(false)}
             >
-              <Text style={TransactionsScreenStyle.cancelButtonText}>
+              <Text style={ActivityScreenStyle.cancelButtonText}>
                 {t("Cancel")}
               </Text>
             </TouchableOpacity>
