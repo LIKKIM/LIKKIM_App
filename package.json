@@ -1,5 +1,5 @@
 {
-  "name": "LIKKIM",
+  "name": "app-mobile",
   "version": "1.0.0",
   "scripts": {
     "buildDev:all": "eas build --profile development --platform all",
