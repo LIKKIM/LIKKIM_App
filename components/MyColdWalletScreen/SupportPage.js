@@ -10,7 +10,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
-import { DarkModeContext } from "../../utils/CryptoContext";
+import { DarkModeContext } from "../../utils/DeviceContext";
 
 const SupportPage = () => {
   const { isDarkMode } = useContext(DarkModeContext);

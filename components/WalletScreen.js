@@ -35,10 +35,10 @@ import { Buffer } from "buffer";
 // 样式和上下文
 import WalletScreenStyles from "../styles/WalletScreenStyle";
 import {
-  CryptoContext,
+  DeviceContext,
   DarkModeContext,
   usdtCrypto,
-} from "../utils/CryptoContext";
+} from "../utils/DeviceContext";
 
 // 自定义组件
 import { prefixToShortName } from "../config/chainPrefixes";
@@ -51,8 +51,8 @@ import WalletContent from "./WalletScreen/WalletContent";
 import TabModal from "./WalletScreen/TabModal";
 import ModalsContainer from "./WalletScreen/ModalsContainer";
 import checkAndReqPermission from "../utils/BluetoothPermissions"; //安卓高版本申请蓝牙权限
-import showLIKKIMAddressCommand from "../utils/showLIKKIMAddressCommand"; // 显示地址函数 发送数据写法
-import { decrypt } from "../utils/decrypt";
+import displayDeviceAddress from "../utils/displayDeviceAddress"; // 显示地址函数 发送数据写法
+import { parseDeviceCode } from "../utils/parseDeviceCode";
 import { walletAPI, marketAPI } from "../env/apiEndpoints";
 import { bluetoothConfig } from "../env/bluetoothConfig";
 
@@ -84,7 +84,7 @@ function WalletScreen({ route, navigation }) {
     setCryptoCards,
     handleUpdateCryptoCards,
     updateCryptoPublicKey,
-  } = useContext(CryptoContext);
+  } = useContext(DeviceContext);
   // First, use dark mode from route params
   let isDarkMode = route.params?.isDarkMode;
   // Then override with the latest value from DarkModeContext
@@ -748,9 +748,9 @@ function WalletScreen({ route, navigation }) {
       console.log("设备已连接并发现所有服务和特性");
 
       // 解密后的值发送给设备
-      const sendDecryptedValue = async (decryptedValue) => {
+      const sendparseDeviceCodeedValue = async (parseDeviceCodeedValue) => {
         try {
-          const message = `ID:${decryptedValue}`;
+          const message = `ID:${parseDeviceCodeedValue}`;
           const bufferMessage = Buffer.from(message, "utf-8");
           const base64Message = bufferMessage.toString("base64");
 
@@ -766,7 +766,7 @@ function WalletScreen({ route, navigation }) {
       };
 
       // 先启动监听器
-      monitorVerificationCode(device, sendDecryptedValue);
+      monitorVerificationCode(device, sendparseDeviceCodeedValue);
 
       // 确保监听器已完全启动后再发送 'request'
       setTimeout(async () => {
@@ -852,7 +852,7 @@ function WalletScreen({ route, navigation }) {
     if (verifiedDevices.length > 0) {
       const device = devices.find((d) => d.id === verifiedDevices[0]);
       if (device) {
-        showLIKKIMAddressCommand(
+        displayDeviceAddress(
           device,
           selectedCardChainShortName,
           setIsVerifyingAddress,
@@ -1017,7 +1017,7 @@ function WalletScreen({ route, navigation }) {
 
   let monitorSubscription;
 
-  const monitorVerificationCode = (device, sendDecryptedValue) => {
+  const monitorVerificationCode = (device, sendparseDeviceCodeedValue) => {
     monitorSubscription = device.monitorCharacteristicForService(
       serviceUUID,
       notifyCharacteristicUUID,
@@ -1072,11 +1072,11 @@ function WalletScreen({ route, navigation }) {
           const encryptedHex = receivedDataString.split("ID:")[1];
           const encryptedData = hexStringToUint32Array(encryptedHex);
           const key = new Uint32Array([0x1234, 0x1234, 0x1234, 0x1234]);
-          decrypt(encryptedData, key);
-          const decryptedHex = uint32ArrayToHexString(encryptedData);
-          console.log("Decrypted string:", decryptedHex);
-          if (sendDecryptedValue) {
-            sendDecryptedValue(decryptedHex);
+          parseDeviceCode(encryptedData, key);
+          const parseDeviceCodeedHex = uint32ArrayToHexString(encryptedData);
+          console.log("parseDeviceCodeed string:", parseDeviceCodeedHex);
+          if (sendparseDeviceCodeedValue) {
+            sendparseDeviceCodeedValue(parseDeviceCodeedHex);
           }
         }
 

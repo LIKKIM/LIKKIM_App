@@ -11,10 +11,10 @@ import {
 import { initialAdditionalCryptos } from "../../config/assetInfo"; // 修改为实际路径
 import { CHAIN_NAMES } from "../../config/chainConfig";
 import {
-  CryptoContext,
+  DeviceContext,
   DarkModeContext,
   usdtCrypto,
-} from "../../utils/CryptoContext";
+} from "../../utils/DeviceContext";
 import ChainSelectionModal from "../modal/ChainSelectionModal"; // 导入 ChainSelectionModal
 import TransactionChainFilterModal from "../modal/TransactionChainFilterModal";
 

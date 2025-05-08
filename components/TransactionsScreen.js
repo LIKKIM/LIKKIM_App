@@ -29,7 +29,7 @@ import {
 } from "../config/chainMapping";
 
 // 上下文和样式
-import { CryptoContext, DarkModeContext } from "../utils/CryptoContext";
+import { DeviceContext, DarkModeContext } from "../utils/DeviceContext";
 import TransactionsScreenStyles from "../styles/TransactionsScreenStyle";
 
 // Modal 组件
@@ -47,8 +47,8 @@ import TransactionHistory from "./TransactionScreens/TransactionHistory";
 import ActionButtons from "./TransactionScreens/ActionButtons";
 
 // 自定义组件
-import showLIKKIMAddressCommand from "../utils/showLIKKIMAddressCommand";
-import { decrypt } from "../utils/decrypt";
+import displayDeviceAddress from "../utils/displayDeviceAddress";
+import { parseDeviceCode } from "../utils/parseDeviceCode";
 import { walletAPI } from "../env/apiEndpoints";
 import { bluetoothConfig } from "../env/bluetoothConfig";
 
@@ -77,7 +77,7 @@ function TransactionsScreen() {
     transactionHistory,
     setTransactionHistory,
     updateCryptoPublicKey,
-  } = useContext(CryptoContext);
+  } = useContext(DeviceContext);
   const [isLoading, setIsLoading] = useState(true);
   const TransactionsScreenStyle = TransactionsScreenStyles(isDarkMode);
   const iconColor = isDarkMode ? "#CCB68C" : "#CFAB95";
@@ -525,9 +525,7 @@ function TransactionsScreen() {
     let addressMonitorSubscription;
     const startMonitoring = async () => {
       if (addressModalVisible && selectedDevice) {
-        addressMonitorSubscription = await showLIKKIMAddressCommand(
-          selectedDevice
-        );
+        addressMonitorSubscription = await displayDeviceAddress(selectedDevice);
       }
     };
 
@@ -652,7 +650,7 @@ function TransactionsScreen() {
 
   let monitorSubscription;
 
-  const monitorVerificationCode = (device, sendDecryptedValue) => {
+  const monitorVerificationCode = (device, sendparseDeviceCodeedValue) => {
     monitorSubscription = device.monitorCharacteristicForService(
       serviceUUID,
       notifyCharacteristicUUID,
@@ -707,11 +705,11 @@ function TransactionsScreen() {
           const encryptedHex = receivedDataString.split("ID:")[1];
           const encryptedData = hexStringToUint32Array(encryptedHex);
           const key = new Uint32Array([0x1234, 0x1234, 0x1234, 0x1234]);
-          decrypt(encryptedData, key);
-          const decryptedHex = uint32ArrayToHexString(encryptedData);
-          console.log("Decrypted string:", decryptedHex);
-          if (sendDecryptedValue) {
-            sendDecryptedValue(decryptedHex);
+          parseDeviceCode(encryptedData, key);
+          const parseDeviceCodeedHex = uint32ArrayToHexString(encryptedData);
+          console.log("parseDeviceCodeed string:", parseDeviceCodeedHex);
+          if (sendparseDeviceCodeedValue) {
+            sendparseDeviceCodeedValue(parseDeviceCodeedHex);
           }
         }
 
@@ -1297,9 +1295,9 @@ function TransactionsScreen() {
       console.log("设备已连接并发现所有服务和特性");
 
       // 解密后的值发送给设备
-      const sendDecryptedValue = async (decryptedValue) => {
+      const sendparseDeviceCodeedValue = async (parseDeviceCodeedValue) => {
         try {
-          const message = `ID:${decryptedValue}`;
+          const message = `ID:${parseDeviceCodeedValue}`;
           const bufferMessage = Buffer.from(message, "utf-8");
           const base64Message = bufferMessage.toString("base64");
 
@@ -1315,7 +1313,7 @@ function TransactionsScreen() {
       };
 
       // 先启动监听器
-      monitorVerificationCode(device, sendDecryptedValue);
+      monitorVerificationCode(device, sendparseDeviceCodeedValue);
 
       // 确保监听器已完全启动后再发送 'request'
       setTimeout(async () => {
@@ -1507,7 +1505,7 @@ function TransactionsScreen() {
     if (verifiedDevices.length > 0) {
       const device = devices.find((d) => d.id === verifiedDevices[0]);
       if (device) {
-        showLIKKIMAddressCommand(
+        displayDeviceAddress(
           device,
           chainShortName,
           setIsVerifyingAddress,

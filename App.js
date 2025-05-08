@@ -20,7 +20,7 @@ import ScreenLock from "./utils/ScreenLock";
 import FindMy from "./components/MyColdWalletScreen/FindMy";
 import SupportPage from "./components/MyColdWalletScreen/SupportPage";
 import ConnectLIKKIMAuth from "./components/TransactionScreens/ConnectLIKKIMAuth";
-import { CryptoProvider, CryptoContext } from "./utils/CryptoContext";
+import { CryptoProvider, DeviceContext } from "./utils/DeviceContext";
 import i18n from "./config/i18n";
 
 if (__DEV__) {
@@ -129,7 +129,7 @@ function AppContent({
   selectedCardName,
   setSelectedCardName,
 }) {
-  const { isAppLaunching } = useContext(CryptoContext);
+  const { isAppLaunching } = useContext(DeviceContext);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   // Load dark mode value on mount

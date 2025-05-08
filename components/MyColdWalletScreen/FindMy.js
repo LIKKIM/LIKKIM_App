@@ -22,7 +22,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Location from "expo-location";
 import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
 import { useNavigation } from "@react-navigation/native";
-import { DarkModeContext } from "../../utils/CryptoContext";
+import { DarkModeContext } from "../../utils/DeviceContext";
 import { Swipeable } from "react-native-gesture-handler";
 import { useTranslation } from "react-i18next";
 import { useLocales } from "expo-localization";

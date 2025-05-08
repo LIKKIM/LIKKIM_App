@@ -11,7 +11,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { useContext, useState, useLayoutEffect } from "react";
-import { CryptoContext, DarkModeContext } from "../../utils/CryptoContext";
+import { DeviceContext, DarkModeContext } from "../../utils/DeviceContext";
 import TransactionsScreenStyle from "../../styles/TransactionsScreenStyle";
 import { useTranslation } from "react-i18next";
 import ChangellyAPI from "./ChangellyAPI";
@@ -22,7 +22,7 @@ import { meridianAPI } from "../../env/apiEndpoints";
 export default function ({ route, navigation }) {
   const { t } = useTranslation(); // i18n translation hook
 
-  const { initialAdditionalCryptos } = useContext(CryptoContext);
+  const { initialAdditionalCryptos } = useContext(DeviceContext);
   const { isDarkMode } = useContext(DarkModeContext); // 获取暗黑模式状态
 
   // 根据暗黑模式状态动态设置界面风格

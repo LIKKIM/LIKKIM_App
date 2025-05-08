@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { LineChart } from "react-native-chart-kit";
 import * as Haptics from "expo-haptics";
-import { DarkModeContext } from "../../utils/CryptoContext";
+import { DarkModeContext } from "../../utils/DeviceContext";
 import { useTranslation } from "react-i18next";
 import WalletScreenStyles from "../../styles/WalletScreenStyle";
 import { chartAPI } from "../../env/apiEndpoints";

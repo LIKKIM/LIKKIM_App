@@ -23,7 +23,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 import i18n from "../config/i18n";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { CryptoContext, DarkModeContext } from "../utils/CryptoContext";
+import { DeviceContext, DarkModeContext } from "../utils/DeviceContext";
 import MyColdWalletScreenStyles from "../styles/MyColdWalletScreenStyle";
 import LanguageModal from "./modal/LanguageModal";
 import CurrencyModal from "./modal/CurrencyModal";
@@ -48,7 +48,7 @@ import { Buffer } from "buffer";
 import appConfig from "../app.config";
 import { prefixToShortName } from "../config/chainPrefixes";
 import checkAndReqPermission from "../utils/BluetoothPermissions"; // Request Bluetooth permission on Android
-import { decrypt } from "../utils/decrypt";
+import { parseDeviceCode } from "../utils/parseDeviceCode";
 import { firmwareAPI } from "../env/apiEndpoints";
 import { bluetoothConfig } from "../env/bluetoothConfig";
 
@@ -78,7 +78,7 @@ function MyColdWalletScreen({ onDarkModeChange }) {
     changeScreenLockPassword,
     setCryptoCards,
     updateCryptoPublicKey,
-  } = useContext(CryptoContext);
+  } = useContext(DeviceContext);
   const { isDarkMode, setIsDarkMode } = useContext(DarkModeContext);
   const MyColdWalletScreenStyle = MyColdWalletScreenStyles(isDarkMode);
   const [currencyModalVisible, setCurrencyModalVisible] = useState(false);
@@ -480,7 +480,7 @@ function MyColdWalletScreen({ onDarkModeChange }) {
 
   let monitorSubscription;
 
-  const monitorVerificationCode = (device, sendDecryptedValue) => {
+  const monitorVerificationCode = (device, sendparseDeviceCodeedValue) => {
     if (monitorSubscription) {
       monitorSubscription.remove();
       monitorSubscription = null;
@@ -535,11 +535,11 @@ function MyColdWalletScreen({ onDarkModeChange }) {
           const encryptedHex = receivedDataString.split("ID:")[1];
           const encryptedData = hexStringToUint32Array(encryptedHex);
           const key = new Uint32Array([0x1234, 0x1234, 0x1234, 0x1234]);
-          decrypt(encryptedData, key);
-          const decryptedHex = uint32ArrayToHexString(encryptedData);
-          console.log("Decrypted string:", decryptedHex);
-          if (sendDecryptedValue) {
-            sendDecryptedValue(decryptedHex);
+          parseDeviceCode(encryptedData, key);
+          const parseDeviceCodeedHex = uint32ArrayToHexString(encryptedData);
+          console.log("parseDeviceCodeed string:", parseDeviceCodeedHex);
+          if (sendparseDeviceCodeedValue) {
+            sendparseDeviceCodeedValue(parseDeviceCodeedHex);
           }
         }
 
@@ -599,9 +599,9 @@ function MyColdWalletScreen({ onDarkModeChange }) {
       await device.discoverAllServicesAndCharacteristics();
       console.log("Device connected and services discovered");
 
-      const sendDecryptedValue = async (decryptedValue) => {
+      const sendparseDeviceCodeedValue = async (parseDeviceCodeedValue) => {
         try {
-          const message = `ID:${decryptedValue}`;
+          const message = `ID:${parseDeviceCodeedValue}`;
           const bufferMessage = Buffer.from(message, "utf-8");
           const base64Message = bufferMessage.toString("base64");
           await device.writeCharacteristicWithResponseForService(
@@ -609,13 +609,13 @@ function MyColdWalletScreen({ onDarkModeChange }) {
             writeCharacteristicUUID,
             base64Message
           );
-          console.log(`Sent decrypted value: ${message}`);
+          console.log(`Sent parseDeviceCodeed value: ${message}`);
         } catch (error) {
-          console.log("Error sending decrypted value:", error);
+          console.log("Error sending parseDeviceCodeed value:", error);
         }
       };
 
-      monitorVerificationCode(device, sendDecryptedValue);
+      monitorVerificationCode(device, sendparseDeviceCodeedValue);
       setTimeout(async () => {
         try {
           const requestString = "request";

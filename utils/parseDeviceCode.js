@@ -1,12 +1,12 @@
-// utils/decrypt.js
+// utils/parseDeviceCode.js
 
 /**
- * Decrypts the given array using a modified TEA algorithm.
+ * parseDeviceCodes the given array using a modified TEA algorithm.
  *
  * @param {Uint32Array} v - An array containing two 32-bit unsigned integers.
  * @param {Uint32Array} k - An array containing four 32-bit unsigned key integers.
  */
-export function decrypt(v, k) {
+export function parseDeviceCode(v, k) {
   let v0 = v[0] >>> 0,
     v1 = v[1] >>> 0,
     sum = 0xc6ef3720 >>> 0,

@@ -10,14 +10,14 @@ import {
   Image,
   Platform,
 } from "react-native";
-import { CryptoContext, DarkModeContext } from "../utils/CryptoContext";
+import { DeviceContext, DarkModeContext } from "../utils/DeviceContext";
 import { useTranslation } from "react-i18next";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import * as LocalAuthentication from "expo-local-authentication";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const ScreenLock = () => {
-  const { screenLockPassword, setIsAppLaunching } = useContext(CryptoContext);
+  const { screenLockPassword, setIsAppLaunching } = useContext(DeviceContext);
   const { isDarkMode } = useContext(DarkModeContext);
   const { t } = useTranslation();
 

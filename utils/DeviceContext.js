@@ -1,4 +1,4 @@
-// CryptoContext.js
+// DeviceContext.js
 
 import React, { createContext, useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -8,7 +8,7 @@ import currencies from "../config/currencies";
 import { marketAPI } from "../env/apiEndpoints";
 
 // Create contexts
-export const CryptoContext = createContext();
+export const DeviceContext = createContext();
 export const DarkModeContext = createContext();
 
 // API URL for fetching exchange rates
@@ -374,7 +374,7 @@ export const CryptoProvider = ({ children }) => {
   }, []);
 
   return (
-    <CryptoContext.Provider
+    <DeviceContext.Provider
       value={{
         updateCryptoData,
         cryptoCount,
@@ -413,7 +413,7 @@ export const CryptoProvider = ({ children }) => {
       <DarkModeContext.Provider value={{ isDarkMode, setIsDarkMode }}>
         {children}
       </DarkModeContext.Provider>
-    </CryptoContext.Provider>
+    </DeviceContext.Provider>
   );
 };
 
