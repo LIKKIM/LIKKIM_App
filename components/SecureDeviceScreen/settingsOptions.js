@@ -26,6 +26,7 @@ const getSettingsOptions = ({
   isDeleteWalletVisible,
   toggleDeleteWalletVisibility,
   handleDeleteWallet,
+  cryptoCards,
 }) => {
   // Helper function to persist the screen lock setting
   const persistScreenLockSetting = (newValue) => {
@@ -168,23 +169,29 @@ const getSettingsOptions = ({
         },
       },
     ],
-    walletManagement: [
-      {
-        title: t("Wallet Management"),
-        icon: "wallet",
-        extraIcon: isDeleteWalletVisible ? "arrow-drop-up" : "arrow-drop-down",
-        onPress: toggleDeleteWalletVisibility,
-      },
-      isDeleteWalletVisible && {
-        title: t("Delete Wallet"),
-        icon: "delete-outline",
-        onPress: () => {
-          Vibration.vibrate();
-          handleDeleteWallet();
-        },
-        style: { color: "red" },
-      },
-    ],
+    walletManagement:
+      cryptoCards && cryptoCards.length > 0
+        ? [
+            {
+              title: t("Wallet Management"),
+              icon: "wallet",
+              extraIcon: isDeleteWalletVisible
+                ? "arrow-drop-up"
+                : "arrow-drop-down",
+              onPress: toggleDeleteWalletVisibility,
+            },
+            isDeleteWalletVisible && {
+              title: t("Delete Wallet"),
+              icon: "delete-outline",
+              onPress: () => {
+                Vibration.vibrate();
+                handleDeleteWallet();
+              },
+              style: { color: "red" },
+            },
+          ].filter(Boolean) // 过滤掉 false 值，防止渲染出 null 项
+        : [],
+
     support: [
       {
         title: t("Help & Support"),

@@ -25,6 +25,7 @@ const ModuleSecureView = ({
   handleDeleteWallet,
   handleBluetoothPairing,
   iconColor,
+  cryptoCards,
   t,
 }) => {
   return (
@@ -64,47 +65,53 @@ const ModuleSecureView = ({
           ))}
         </View>
 
-        <TouchableOpacity
-          style={styles.settingsItem}
-          onPress={() => setIsDeleteWalletVisible(!isDeleteWalletVisible)}
-        >
-          <View style={styles.listContainer}>
-            <Icon
-              name="wallet"
-              size={24}
-              color={iconColor}
-              style={{ marginRight: 8 }}
-            />
-            <Text style={[styles.Text, { flex: 1 }]}>
-              {t("Wallet Management")}
-            </Text>
-            <Icon
-              name={isDeleteWalletVisible ? "arrow-drop-up" : "arrow-drop-down"}
-              size={24}
-              color={iconColor}
-            />
-          </View>
-        </TouchableOpacity>
-
-        {isDeleteWalletVisible && (
-          <View>
+        {cryptoCards.length > 0 && (
+          <>
             <TouchableOpacity
               style={styles.settingsItem}
-              onPress={handleDeleteWallet}
+              onPress={() => setIsDeleteWalletVisible(!isDeleteWalletVisible)}
             >
               <View style={styles.listContainer}>
                 <Icon
-                  name="delete-outline"
+                  name="wallet"
                   size={24}
                   color={iconColor}
-                  style={[styles.Icon, { marginLeft: 20 }]}
+                  style={{ marginRight: 8 }}
                 />
                 <Text style={[styles.Text, { flex: 1 }]}>
-                  {t("Delete Wallet")}
+                  {t("Wallet Management")}
                 </Text>
+                <Icon
+                  name={
+                    isDeleteWalletVisible ? "arrow-drop-up" : "arrow-drop-down"
+                  }
+                  size={24}
+                  color={iconColor}
+                />
               </View>
             </TouchableOpacity>
-          </View>
+
+            {isDeleteWalletVisible && (
+              <View>
+                <TouchableOpacity
+                  style={styles.settingsItem}
+                  onPress={handleDeleteWallet}
+                >
+                  <View style={styles.listContainer}>
+                    <Icon
+                      name="delete-outline"
+                      size={24}
+                      color={iconColor}
+                      style={[styles.Icon, { marginLeft: 20 }]}
+                    />
+                    <Text style={[styles.Text, { flex: 1 }]}>
+                      {t("Delete Wallet")}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
+            )}
+          </>
         )}
 
         {/* Support Section (collapsible) */}

@@ -78,6 +78,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
     changeScreenLockPassword,
     setCryptoCards,
     updateDevicePubHintKey,
+    cryptoCards,
   } = useContext(DeviceContext);
   const { isDarkMode, setIsDarkMode } = useContext(DarkModeContext);
   const SecureDeviceScreenStyle = SecureDeviceScreenStyles(isDarkMode);
@@ -966,6 +967,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
     isDeleteWalletVisible,
     toggleDeleteWalletVisibility,
     handleDeleteWallet,
+    cryptoCards,
   });
 
   const handleDeleteWallet = () => {
@@ -1039,6 +1041,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
         handleDeleteWallet={handleDeleteWallet}
         handleBluetoothPairing={handleBluetoothPairing}
         iconColor={iconColor}
+        cryptoCards={cryptoCards}
         t={t}
       />
 
