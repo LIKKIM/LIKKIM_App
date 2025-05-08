@@ -1602,6 +1602,7 @@ function VaultScreen({ route, navigation }) {
         EmptyWalletView={EmptyWalletView}
         scrollYOffset={scrollYOffset}
         handleContinue={handleContinue}
+        handleWalletTest={handleWalletTest}
       />
       <ModalsContainer
         selectedCardChainShortName={selectedCardChainShortName}

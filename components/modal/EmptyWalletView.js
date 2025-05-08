@@ -5,6 +5,7 @@ const EmptyWalletView = ({
   isDarkMode,
   VaultScreenStyle,
   handleContinue,
+  handleWalletTest,
   t,
 }) => {
   return (
@@ -19,7 +20,8 @@ const EmptyWalletView = ({
         imageStyle={VaultScreenStyle.addWalletImageBorder}
       >
         <TouchableOpacity
-          onPress={handleContinue}
+          //  onPress={handleContinue}
+          onPress={handleWalletTest} //      {/*  test btn  */}
           style={VaultScreenStyle.addWalletButton}
         >
           <Text style={VaultScreenStyle.addWalletButtonText}>

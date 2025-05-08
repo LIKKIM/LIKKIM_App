@@ -341,6 +341,7 @@ const SecureDeviceStatus = (props) => {
     selectedCardIndex,
     cardInfoVisible,
     handleContinue,
+    handleWalletTest,
   } = props;
 
   const handleNFTSelect = (nft) => {
@@ -483,6 +484,7 @@ const SecureDeviceStatus = (props) => {
             isDarkMode={isDarkMode}
             VaultScreenStyle={VaultScreenStyle}
             handleContinue={handleContinue}
+            handleWalletTest={handleWalletTest}
             t={t}
           />
         ) : null)}
