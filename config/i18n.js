@@ -165,7 +165,7 @@ i18n
           "Manage Your Cryptos": "Manage Your Cryptos",
           "Easily manage multiple cryptocurrencies.":
             "Easily manage multiple cryptocurrencies.",
-          "Welcome to LIKKIM": "Welcome to LIKKIM",
+          Welcome: "Welcome",
           "Your secure and user-friendly digital wallet.":
             "Your secure and user-friendly digital wallet.",
           "Address Copied to Clipboard": "Address copied to clipboard",
@@ -367,7 +367,7 @@ i18n
             "银行级别的数字资产安全。",
           "Manage Your Cryptos": "管理您的加密货币",
           "Easily manage multiple cryptocurrencies.": "轻松管理多种加密货币。",
-          "Welcome to LIKKIM": "欢迎来到LIKKIM",
+          Welcome: "欢迎",
           "Your secure and user-friendly digital wallet.":
             "您的安全且易用的数字钱包。",
           "Address Copied to Clipboard": "地址已复制到剪贴板",
@@ -572,7 +572,7 @@ i18n
             "銀行級的數位資產安全。",
           "Manage Your Cryptos": "管理您的加密貨幣",
           "Easily manage multiple cryptocurrencies.": "輕鬆管理多種加密貨幣。",
-          "Welcome to LIKKIM": "歡迎來到LIKKIM",
+          Welcome: "歡迎",
           "Your secure and user-friendly digital wallet.":
             "您的安全且友好的數字錢包。",
           "Address Copied to Clipboard": "地址已複製到剪貼簿",
@@ -808,7 +808,7 @@ i18n
           "Manage Your Cryptos": "Gérez vos cryptomonnaies",
           "Easily manage multiple cryptocurrencies.":
             "Gérez facilement plusieurs cryptomonnaies.",
-          "Welcome to LIKKIM": "Bienvenue chez LIKKIM",
+          Welcome: "Bienvenue",
           "Your secure and user-friendly digital wallet.":
             "Votre portefeuille numérique sécurisé et convivial.",
           "Address Copied to Clipboard":
@@ -1024,7 +1024,7 @@ i18n
           "Manage Your Cryptos": "Gestiona tus criptomonedas",
           "Easily manage multiple cryptocurrencies.":
             "Gestiona fácilmente múltiples criptomonedas.",
-          "Welcome to LIKKIM": "Bienvenido a LIKKIM",
+          Welcome: "Bienvenido",
           "Your secure and user-friendly digital wallet.":
             "Tu billetera digital segura y fácil de usar.",
           "Address Copied to Clipboard": "Dirección copiada al portapapeles",
@@ -1233,7 +1233,7 @@ i18n
           "Manage Your Cryptos": "إدارة عملاتك المشفرة",
           "Easily manage multiple cryptocurrencies.":
             "إدارة سهلة لعدة عملات مشفرة.",
-          "Welcome to LIKKIM": "مرحباً بك في LIKKIM",
+          Welcome: "مرحبًا",
           "Your secure and user-friendly digital wallet.":
             "محفظتك الرقمية الآمنة وسهلة الاستخدام.",
           "Address Copied to Clipboard": "تم نسخ العنوان إلى الحافظة",
@@ -1464,7 +1464,7 @@ i18n
           "Manage Your Cryptos": "あなたの暗号通貨を管理する",
           "Easily manage multiple cryptocurrencies.":
             "複数の暗号通貨を簡単に管理。",
-          "Welcome to LIKKIM": "LIKKIMへようこそ",
+          Welcome: "ようこそ",
           "Your secure and user-friendly digital wallet.":
             "安全で使いやすいデジタルウォレット。",
           "Address Copied to Clipboard":
@@ -1679,7 +1679,7 @@ i18n
           "Manage Your Cryptos": "Управляйте вашими криптовалютами",
           "Easily manage multiple cryptocurrencies.":
             "Легко управляйте несколькими криптовалютами.",
-          "Welcome to LIKKIM": "Добро пожаловать в LIKKIM",
+          Welcome: "Добро пожаловать",
           "Your secure and user-friendly digital wallet.":
             "Ваш надежный и удобный цифровой кошелек.",
           "Address Copied to Clipboard": "Адрес скопирован в буфер обмена",
@@ -1887,7 +1887,7 @@ i18n
           "Manage Your Cryptos": "당신의 암호화폐 관리",
           "Easily manage multiple cryptocurrencies.":
             "여러 암호화폐를 쉽게 관리하세요.",
-          "Welcome to LIKKIM": "LIKKIM에 오신 것을 환영합니다",
+          Welcome: "환영합니다",
           "Your secure and user-friendly digital wallet.":
             "안전하고 사용자 친화적인 디지털 지갑.",
           "Address Copied to Clipboard": "주소가 클립보드에 복사되었습니다",
@@ -2100,7 +2100,7 @@ i18n
           "Manage Your Cryptos": "Gerencie Suas Criptomoedas",
           "Easily manage multiple cryptocurrencies.":
             "Gerencie facilmente várias criptomoedas.",
-          "Welcome to LIKKIM": "Bem-vindo à LIKKIM",
+          Welcome: "Bem-vindo",
           "Your secure and user-friendly digital wallet.":
             "Sua carteira digital segura e fácil de usar.",
           "Address Copied to Clipboard":
@@ -2315,7 +2315,7 @@ i18n
           "Manage Your Cryptos": "Gerencie Suas Criptomoedas",
           "Easily manage multiple cryptocurrencies.":
             "Gerencie facilmente várias criptomoedas.",
-          "Welcome to LIKKIM": "Bem-vindo ao LIKKIM",
+          Welcome: "Bem-vindo",
           "Your secure and user-friendly digital wallet.":
             "Sua carteira digital segura e fácil de usar.",
           "Address Copied to Clipboard":
@@ -2548,7 +2548,7 @@ i18n
           "Manage Your Cryptos": "Gestisci le tue criptovalute",
           "Easily manage multiple cryptocurrencies.":
             "Gestisci facilmente più criptovalute.",
-          "Welcome to LIKKIM": "Benvenuto in LIKKIM",
+          Welcome: "Benvenuto",
           "Your secure and user-friendly digital wallet.":
             "Il tuo portafoglio digitale sicuro e facile da usare.",
           "Address Copied to Clipboard": "Indirizzo copiato negli appunti",
@@ -2766,7 +2766,7 @@ i18n
           "Manage Your Cryptos": "Verwalten Sie Ihre Kryptowährungen",
           "Easily manage multiple cryptocurrencies.":
             "Verwalten Sie problemlos mehrere Kryptowährungen.",
-          "Welcome to LIKKIM": "Willkommen bei LIKKIM",
+          Welcome: "Willkommen",
           "Your secure and user-friendly digital wallet.":
             "Ihre sichere und benutzerfreundliche digitale Geldbörse.",
           "Address Copied to Clipboard":
@@ -2983,7 +2983,7 @@ i18n
           "Manage Your Cryptos": "अपनी क्रिप्टो करेंसीज का प्रबंधन करें",
           "Easily manage multiple cryptocurrencies.":
             "आसानी से कई क्रिप्टोकरेंसियों का प्रबंधन करें।",
-          "Welcome to LIKKIM": "LIKKIM में आपका स्वागत है",
+          Welcome: "स्वागत है",
           "Your secure and user-friendly digital wallet.":
             "आपका सुरक्षित और उपयोगकर्ता-हितैषी डिजिटल वॉलेट।",
           "Address Copied to Clipboard": "पता क्लिपबोर्ड पर कॉपी कर लिया गया",
@@ -3207,7 +3207,7 @@ i18n
           "Manage Your Cryptos": "Криптовалютуудаа удирдах",
           "Easily manage multiple cryptocurrencies.":
             "Олон криптовалютуудыг хялбар удирда.",
-          "Welcome to LIKKIM": "LIKKIM-д тавтай морилно уу",
+          Welcome: "Тавтай морилно уу",
           "Your secure and user-friendly digital wallet.":
             "Таны аюулгүй ба хэрэглэгчийн төвтэй цахим хэтэвч.",
           "Address Copied to Clipboard": "Хаяг clipboard руу хуулсан байна",
@@ -3415,7 +3415,7 @@ i18n
           "Manage Your Cryptos": "จัดการคริปโตของคุณ",
           "Easily manage multiple cryptocurrencies.":
             "จัดการคริปโตเคอร์เรนซี่หลายอย่างได้ง่ายดาย.",
-          "Welcome to LIKKIM": "ยินดีต้อนรับสู่ LIKKIM",
+          Welcome: "ยินดีต้อนรับ",
           "Your secure and user-friendly digital wallet.":
             "กระเป๋าเงินดิจิทัลที่ปลอดภัยและใช้งานง่ายของคุณ.",
           "Address Copied to Clipboard": "ที่อยู่ถูกคัดลอกไปยังคลิปบอร์ด",
@@ -3626,7 +3626,7 @@ i18n
           "Manage Your Cryptos": "Керуйте своїми криптовалютами",
           "Easily manage multiple cryptocurrencies.":
             "Легко керуйте декількома криптовалютами.",
-          "Welcome to LIKKIM": "Ласкаво просимо до LIKKIM",
+          Welcome: "Ласкаво просимо",
           "Your secure and user-friendly digital wallet.":
             "Ваш безпечний та зручний цифровий гаманець.",
           "Address Copied to Clipboard": "Адрес скопійовано в буфер обміну",
@@ -3840,7 +3840,7 @@ i18n
           "Manage Your Cryptos": "Quản lý Tiền điện tử của bạn",
           "Easily manage multiple cryptocurrencies.":
             "Dễ dàng quản lý nhiều loại tiền điện tử.",
-          "Welcome to LIKKIM": "Chào mừng đến với LIKKIM",
+          Welcome: "Chào mừng",
           "Your secure and user-friendly digital wallet.":
             "Ví điện tử an toàn và thân thiện với người dùng của bạn.",
           "Address Copied to Clipboard":
@@ -4057,7 +4057,7 @@ i18n
           "Manage Your Cryptos": "Kelola Kripto Anda",
           "Easily manage multiple cryptocurrencies.":
             "Mudah mengelola berbagai mata uang kripto.",
-          "Welcome to LIKKIM": "Selamat Datang di LIKKIM",
+          Welcome: "Selamat Datang",
           "Your secure and user-friendly digital wallet.":
             "Dompet digital Anda yang aman dan mudah digunakan.",
           "Address Copied to Clipboard": "Alamat telah disalin ke clipboard",
@@ -4274,7 +4274,7 @@ i18n
           "Manage Your Cryptos": "Pamahalaan ang Iyong Mga Krypto",
           "Easily manage multiple cryptocurrencies.":
             "Madaling pamahalaan ang maramihang mga cryptocurrency.",
-          "Welcome to LIKKIM": "Maligayang Pagdating sa LIKKIM",
+          Welcome: "Maligayang Pagdating",
           "Your secure and user-friendly digital wallet.":
             "Ang iyong ligtas at madaling gamiting digital wallet.",
           "Address Copied to Clipboard": "Ang address ay nakopya sa clipboard",
@@ -4493,7 +4493,7 @@ i18n
           "Manage Your Cryptos": "আপনার ক্রিপ্টো পরিচালনা করুন",
           "Easily manage multiple cryptocurrencies.":
             "সহজেই একাধিক ক্রিপ্টোকারেন্সি পরিচালনা করুন।",
-          "Welcome to LIKKIM": "LIKKIM-এ স্বাগতম",
+          Welcome: "स्वागत है",
           "Your secure and user-friendly digital wallet.":
             "আপনার নিরাপদ ও ব্যবহারকারী-বান্ধব ডিজিটাল ওয়ালেট।",
           "Address Copied to Clipboard": "ঠিকানা ক্লিপবোর্ডে কপি করা হয়েছে",
