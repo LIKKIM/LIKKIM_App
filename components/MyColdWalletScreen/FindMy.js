@@ -131,7 +131,7 @@ const loadConnectedDevices = async (
   }
 };
 
-export default function FindMyLikkim() {
+export default function FindMy() {
   const navigation = useNavigation();
   const { isDarkMode } = useContext(DarkModeContext);
   const { t } = useTranslation();
