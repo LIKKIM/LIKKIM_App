@@ -26,10 +26,10 @@ import { DarkModeContext } from "../../utils/DeviceContext";
 import { Swipeable } from "react-native-gesture-handler";
 import { useTranslation } from "react-i18next";
 import { useLocales } from "expo-localization";
-import keys from "../../config/keys";
+import mapKeys from "../../env/mapKeys";
 
-const GOOGLE_MAPS_API_KEY = keys.GOOGLE_MAPS_API_KEY;
-const GAODE_MAP_API_KEY = keys.GAODE_MAP_API_KEY;
+const GOOGLE_MAPS_API_KEY = mapKeys.GOOGLE_MAPS_API_KEY;
+const GAODE_MAP_API_KEY = mapKeys.GAODE_MAP_API_KEY;
 
 const styles = StyleSheet.create({
   container: {
