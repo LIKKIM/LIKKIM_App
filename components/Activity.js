@@ -1,4 +1,4 @@
-// ActivityScreen.js
+// Activity.js
 import React, { useContext, useState, useRef, useEffect } from "react";
 import { View, Clipboard, Platform } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
@@ -45,7 +45,6 @@ import ShowReceiveInfoModal from "./modal/ShowReceiveInfoModal";
 import SecurityCodeModal from "./modal/SecurityCodeModal";
 import ActivityLog from "./ActivityScreen/ActivityLog";
 import ActionButtons from "./ActivityScreen/ActionButtons";
-
 // 自定义组件
 import displayDeviceAddress from "../utils/displayDeviceAddress";
 import { parseDeviceCode } from "../utils/parseDeviceCode";

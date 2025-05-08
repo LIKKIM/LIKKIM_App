@@ -1,4 +1,4 @@
-// SecureDeviceScreen.js
+// SecureDevice.js
 import React, { useState, useEffect, useRef, useContext } from "react";
 import {
   Vibration,

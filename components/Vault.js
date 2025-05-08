@@ -1,4 +1,4 @@
-//VaultScreen.js
+//Vault.js
 import React, {
   useState,
   useEffect,
