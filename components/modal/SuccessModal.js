@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, TouchableOpacity, Image, Modal } from "react-native";
 import { BlurView } from "expo-blur";
 
-const MyColdWalletSuccessModal = ({ visible, onClose, message, styles, t }) => {
+const SuccessModal = ({ visible, onClose, message, styles, t }) => {
   return (
     <Modal
       animationType="slide"
@@ -27,4 +27,4 @@ const MyColdWalletSuccessModal = ({ visible, onClose, message, styles, t }) => {
   );
 };
 
-export default MyColdWalletSuccessModal;
+export default SuccessModal;

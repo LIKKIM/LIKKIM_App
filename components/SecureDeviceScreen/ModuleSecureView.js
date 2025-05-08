@@ -1,7 +1,7 @@
 /*
  * Project: Secure Systems
  * Author: Helvetiq Labs Team
- * Module: SecureDeviceScreen/MyColdSecureDeviceStatus.js
+ * Module: SecureDeviceScreen/ModuleSecureView.js
  * License: MIT
  */
 
@@ -15,7 +15,7 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
-const MyColdSecureDeviceStatus = ({
+const ModuleSecureView = ({
   styles, // SecureDeviceScreenStyle
   settingsOptions,
   isDeleteWalletVisible,
@@ -199,4 +199,4 @@ const MyColdSecureDeviceStatus = ({
   );
 };
 
-export default MyColdSecureDeviceStatus;
+export default ModuleSecureView;

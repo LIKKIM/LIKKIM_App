@@ -29,8 +29,8 @@ import LanguageModal from "./modal/LanguageModal";
 import CurrencyModal from "./modal/CurrencyModal";
 import ChangeLockCodeModal from "./modal/ChangeLockCodeModal";
 import ConfirmDisconnectModal from "./modal/ConfirmDisconnectModal";
-import MyColdWalletSuccessModal from "./modal/MyColdWalletSuccessModal";
-import MyColdWalletErrorModal from "./modal/MyColdWalletErrorModal";
+import SuccessModal from "./modal/SuccessModal";
+import ErrorModal from "./modal/ErrorModal";
 import EnterLockCodeModal from "./modal/EnterLockCodeModal";
 import DisableLockScreenModal from "./modal/DisableLockScreenModal";
 import SecurityCodeModal from "./modal/SecurityCodeModal";
@@ -40,7 +40,7 @@ import NewLockCodeModal from "./modal/NewLockCodeModal";
 import * as LocalAuthentication from "expo-local-authentication";
 import AddressBookModal from "./modal/AddressBookModal";
 import LockCodeModal from "./modal/LockCodeModal";
-import MyColdSecureDeviceStatus from "./SecureDeviceScreen/MyColdSecureDeviceStatus";
+import ModuleSecureView from "./SecureDeviceScreen/ModuleSecureView";
 import getSettingsOptions from "./SecureDeviceScreen/settingsOptions";
 import { languages } from "../config/languages";
 import base64 from "base64-js";
@@ -1029,7 +1029,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
       colors={isDarkMode ? darkColors : lightColors}
       style={SecureDeviceScreenStyle.container}
     >
-      <MyColdSecureDeviceStatus
+      <ModuleSecureView
         styles={SecureDeviceScreenStyle}
         settingsOptions={settingsOptions}
         isDeleteWalletVisible={isDeleteWalletVisible}
@@ -1198,7 +1198,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
       />
 
       {/* Success Modal */}
-      <MyColdWalletSuccessModal
+      <SuccessModal
         visible={successModalVisible}
         onClose={() => setSuccessModalVisible(false)}
         message={modalMessage}
@@ -1207,7 +1207,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
       />
 
       {/* Error Modal */}
-      <MyColdWalletErrorModal
+      <ErrorModal
         visible={errorModalVisible}
         onClose={() => setErrorModalVisible(false)}
         message={modalMessage}
