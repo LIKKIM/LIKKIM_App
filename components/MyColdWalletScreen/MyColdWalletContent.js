@@ -1,4 +1,10 @@
-// MyColdWalletScreen/MyColdWalletContent.js
+/*
+ * Project: Secure Systems
+ * Author: Helvetiq Labs Team
+ * Module: MyColdWalletScreen/MyColdWalletContent.js
+ * License: MIT
+ */
+
 import React from "react";
 import {
   ScrollView,

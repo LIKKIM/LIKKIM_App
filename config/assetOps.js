@@ -1,4 +1,10 @@
-// config/assetOps.js
+/*
+ * Project: Secure Systems
+ * Author: Helvetiq Labs Team
+ * Module: Core/AssetOps
+ * Description: Route definitions for hierarchical data derivation
+ * License: MIT
+ */
 
 const assetOps = {
   bitcoin: "m/49'/0'/0'/0/0",

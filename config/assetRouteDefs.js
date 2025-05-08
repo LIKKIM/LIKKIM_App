@@ -1,4 +1,10 @@
-// config/assetRouteDefs.js
+/*
+ * Project: Secure Systems
+ * Author: Helvetiq Labs Team
+ * Module: Core/AssetRouter
+ * Description: Canonical mappings between virtual asset codes and references
+ * License: MIT
+ */
 
 const assetRouteDefs = {
   BTC: "address:bitcoin",
