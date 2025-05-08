@@ -1,10 +1,10 @@
 import "dotenv/config";
-import mapKeys from "../../env/mapKeys";
+import mapKeys from "./env/mapKeys";
 
 export default {
-  owner: "secureteam", // ✅ 新 Expo 账号（避免使用曾被封账号）
+  owner: "likkimteam", // ✅ 新 Expo 账号（避免使用曾被封账号）   owner: "secureteam", //❌
   name: "Lukkey Vault", // ✅
-  slug: "securewallet", //  新 slug，用于 OTA、缓存等路径
+  slug: "likkim", //  新 slug，用于 OTA、缓存等路径  slug: "securewallet",
   version: "1.0.0",
   orientation: "portrait",
   icon: "./assets/icon.png",
