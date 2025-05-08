@@ -2,7 +2,6 @@
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { MaterialIcons as Icon } from "@expo/vector-icons";
-import Feather from "react-native-vector-icons/Feather";
 
 const ActionButtons = ({
   ActivityScreenStyle,
@@ -27,7 +26,7 @@ const ActionButtons = ({
         style={[ActivityScreenStyle.roundButton, { flex: 1 }]} // Equal width for each button
         onPress={handleSendPress}
       >
-        <Feather name="send" size={24} color={iconColor} />
+        <Icon name="arrow-outward" size={24} color={iconColor} />
         <Text style={ActivityScreenStyle.mainButtonText}>{t("Send")}</Text>
       </TouchableOpacity>
 
