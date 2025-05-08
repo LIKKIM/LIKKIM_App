@@ -6,8 +6,6 @@ import { Buffer } from "buffer";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Constants from "expo-constants";
 import { useTranslation } from "react-i18next";
-import { ethers } from "ethers";
-import "@ethersproject/shims";
 
 import { BleManager } from "react-native-ble-plx";
 import "react-native-get-random-values";
