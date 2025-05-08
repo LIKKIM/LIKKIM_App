@@ -1,10 +1,10 @@
-// modal/NewPasswordModal.js
+// modal/NewLockCodeModal.js
 import React, { useState } from "react";
 import { Modal, View, Text, TextInput, TouchableOpacity } from "react-native";
 import { BlurView } from "expo-blur";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
-const NewPasswordModal = ({
+const NewLockCodeModal = ({
   visible,
   onRequestClose,
   onSubmit,
@@ -34,8 +34,8 @@ const NewPasswordModal = ({
       onRequestClose={onRequestClose}
     >
       <BlurView intensity={10} style={styles.centeredView}>
-        <View style={styles.setPasswordModalView}>
-          <Text style={styles.passwordModalTitle}>{t("Set New Password")}</Text>
+        <View style={styles.setLockCodeModalView}>
+          <Text style={styles.LockCodeModalTitle}>{t("Set New Password")}</Text>
           <View style={{ marginVertical: 10, width: "100%" }}>
             <View style={styles.passwordInputContainer}>
               <TextInput
@@ -123,4 +123,4 @@ const NewPasswordModal = ({
   );
 };
 
-export default NewPasswordModal;
+export default NewLockCodeModal;

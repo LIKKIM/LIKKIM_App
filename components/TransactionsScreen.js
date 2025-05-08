@@ -36,13 +36,13 @@ import TransactionsScreenStyles from "../styles/TransactionsScreenStyle";
 import TransactionConfirmationModal from "./modal/TransactionConfirmationModal";
 import InputAddressModal from "./modal/InputAddressModal";
 import PendingTransactionModal from "./modal/PendingTransactionModal";
-import VerificationModal from "./modal/VerificationModal";
+import CheckStatusModal from "./modal/CheckStatusModal";
 import BluetoothModal from "./modal/BluetoothModal";
 import AmountModal from "./modal/AmountModal";
 import SelectCryptoModal from "./modal/SelectCryptoModal";
 import SwapModal from "./modal/SwapModal";
 import ReceiveAddressModal from "./modal/ReceiveAddressModal";
-import PinModal from "./modal/PinModal";
+import SecurityCodeModal from "./modal/SecurityCodeModal";
 import TransactionHistory from "./TransactionScreens/TransactionHistory";
 import ActionButtons from "./TransactionScreens/ActionButtons";
 
@@ -118,7 +118,8 @@ function TransactionsScreen() {
   const [bleVisible, setBleVisible] = useState(false);
   const [isScanning, setIsScanning] = useState(false);
   const [devices, setDevices] = useState([]);
-  const [pinModalVisible, setPinModalVisible] = useState(false);
+  const [SecurityCodeModalVisible, setSecurityCodeModalVisible] =
+    useState(false);
   const [pinCode, setPinCode] = useState("");
   const [verificationStatus, setVerificationStatus] = useState(null);
   const [isAddressValid, setIsAddressValid] = useState(false);
@@ -559,10 +560,10 @@ function TransactionsScreen() {
 
   // 停止监听
   useEffect(() => {
-    if (!pinModalVisible) {
+    if (!SecurityCodeModalVisible) {
       stopMonitoringVerificationCode();
     }
-  }, [pinModalVisible]);
+  }, [SecurityCodeModalVisible]);
 
   // 使用 useEffect 监听模态窗口的变化
   useEffect(() => {
@@ -573,7 +574,7 @@ function TransactionsScreen() {
 
   useEffect(() => {
     if (!bleVisible && selectedDevice) {
-      setPinModalVisible(true);
+      setSecurityCodeModalVisible(true);
     }
   }, [bleVisible, selectedDevice]);
 
@@ -1335,7 +1336,7 @@ function TransactionsScreen() {
       }, 200); // 延迟 200ms 确保监听器启动（根据设备响应调整）
 
       // 显示 PIN 码弹窗
-      setPinModalVisible(true);
+      setSecurityCodeModalVisible(true);
     } catch (error) {
       console.log("设备连接或命令发送错误:", error);
     }
@@ -1370,7 +1371,7 @@ function TransactionsScreen() {
 
   // 提交验证码
   const handlePinSubmit = async () => {
-    setPinModalVisible(false);
+    setSecurityCodeModalVisible(false);
 
     const pinCodeValue = pinCode.trim();
     const verificationCodeValue = receivedVerificationCode.trim();
@@ -1762,13 +1763,13 @@ function TransactionsScreen() {
         />
 
         {/* PIN Modal */}
-        <PinModal
-          visible={pinModalVisible}
+        <SecurityCodeModal
+          visible={SecurityCodeModalVisible}
           pinCode={pinCode}
           setPinCode={setPinCode}
           onSubmit={handlePinSubmit}
           onCancel={() => {
-            setPinModalVisible(false);
+            setSecurityCodeModalVisible(false);
             setPinCode("");
           }}
           styles={TransactionsScreenStyle}
@@ -1778,7 +1779,7 @@ function TransactionsScreen() {
         />
 
         {/* Verification Modal */}
-        <VerificationModal
+        <CheckStatusModal
           visible={
             verificationSuccessModalVisible || verificationFailModalVisible
           }

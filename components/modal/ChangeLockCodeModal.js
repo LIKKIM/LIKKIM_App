@@ -1,44 +1,51 @@
-// EnterPasswordModal.js
-import React from "react";
-import { Modal, View, Text, TextInput, TouchableOpacity } from "react-native";
+// modal/ChangeLockCodeModal.js
+import React, { useState, useEffect } from "react";
+import { View, Text, TextInput, TouchableOpacity, Modal } from "react-native";
 import { BlurView } from "expo-blur";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
-function EnterPasswordModal({
+const ChangeLockCodeModal = ({
   visible,
   onClose,
-  handleConfirmPassword,
-  closeEnterPasswordModal,
-  isDarkMode,
+  onSubmit,
   styles,
+  isDarkMode,
   t,
-  currentPassword,
-  setCurrentPassword,
-  isCurrentPasswordHidden,
-  setIsCurrentPasswordHidden,
-}) {
+}) => {
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [isCurrentPasswordHidden, setIsCurrentPasswordHidden] = useState(true);
+
+  useEffect(() => {
+    if (visible) {
+      setCurrentPassword("");
+      setIsCurrentPasswordHidden(true);
+    }
+  }, [visible]);
+
+  const handleNextForChangePassword = () => {
+    onSubmit(currentPassword);
+  };
+
   return (
     <Modal
       animationType="slide"
-      transparent
+      transparent={true}
       visible={visible}
       onRequestClose={onClose}
     >
       <BlurView intensity={10} style={styles.centeredView}>
-        <View style={styles.disableLockModalView}>
-          <Text style={styles.passwordModalTitle}>
-            {t("Disable Lock Screen")}
-          </Text>
+        <View style={styles.changeLockCodeModalView}>
+          <Text style={styles.LockCodeModalTitle}>{t("Change Password")}</Text>
           <View style={{ marginVertical: 10, width: "100%" }}>
             <View style={styles.passwordInputContainer}>
               <TextInput
-                style={styles.passwordInput}
-                placeholder={t("Enter your password")}
+                style={[styles.passwordInput, styles.focusedInput]}
+                placeholder={t("Enter current password")}
                 placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
                 secureTextEntry={isCurrentPasswordHidden}
                 onChangeText={setCurrentPassword}
                 value={currentPassword}
-                autoFocus
+                autoFocus={true}
               />
               <TouchableOpacity
                 onPress={() =>
@@ -59,14 +66,11 @@ function EnterPasswordModal({
           <View style={styles.buttonContainer}>
             <TouchableOpacity
               style={styles.submitButton}
-              onPress={handleConfirmPassword}
+              onPress={handleNextForChangePassword}
             >
-              <Text style={styles.submitButtonText}>{t("Submit")}</Text>
+              <Text style={styles.submitButtonText}>{t("Next")}</Text>
             </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.cancelButton}
-              onPress={closeEnterPasswordModal}
-            >
+            <TouchableOpacity style={styles.cancelButton} onPress={onClose}>
               <Text style={styles.cancelButtonText}>{t("Cancel")}</Text>
             </TouchableOpacity>
           </View>
@@ -74,6 +78,6 @@ function EnterPasswordModal({
       </BlurView>
     </Modal>
   );
-}
+};
 
-export default EnterPasswordModal;
+export default ChangeLockCodeModal;

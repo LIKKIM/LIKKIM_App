@@ -1,4 +1,4 @@
-// modal/PinModal.js
+// modal/SecurityCodeModal.js
 import React from "react";
 import {
   View,
@@ -11,7 +11,7 @@ import {
 import { BlurView } from "expo-blur";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
-const PinModal = ({
+const SecurityCodeModal = ({
   visible,
   pinCode,
   setPinCode,
@@ -30,7 +30,7 @@ const PinModal = ({
       onRequestClose={onCancel}
     >
       <BlurView intensity={10} style={styles.centeredView}>
-        <View style={styles.pinModalView}>
+        <View style={styles.SecurityCodeModalView}>
           <View style={{ alignItems: "center" }}>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               {status === "VALID" && (
@@ -45,7 +45,7 @@ const PinModal = ({
                   }}
                 />
               )}
-              <Text style={styles.pinModalTitle}>
+              <Text style={styles.SecurityCodeModalTitle}>
                 {t("Enter PIN to Connect")}
               </Text>
             </View>
@@ -79,4 +79,4 @@ const PinModal = ({
   );
 };
 
-export default PinModal;
+export default SecurityCodeModal;

@@ -24,7 +24,7 @@ const DisableLockScreenModal = ({
   >
     <BlurView intensity={10} style={styles.centeredView}>
       <View style={styles.disableLockModalView}>
-        <Text style={styles.passwordModalTitle}>
+        <Text style={styles.LockCodeModalTitle}>
           {t("Disable Lock Screen")}
         </Text>
         <View style={{ marginVertical: 10, width: "100%" }}>

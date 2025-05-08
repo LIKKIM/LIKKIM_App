@@ -457,13 +457,13 @@ const TransactionsScreenStyles = (isDarkMode) => {
       alignItems: "center",
       justifyContent: "space-between",
     },
-    pinModalTitle: {
+    SecurityCodeModalTitle: {
       color: textColor,
       fontSize: 20,
       fontWeight: "bold",
       marginBottom: 15,
     },
-    pinModalView: {
+    SecurityCodeModalView: {
       position: "absolute",
       top: 100,
       margin: 20,

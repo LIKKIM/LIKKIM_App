@@ -215,7 +215,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     textAlign: "center",
   },
-  passwordModalText: {
+  LockCodeModalText: {
     color: "#ffffff",
     fontSize: 16,
     marginBottom: 10,

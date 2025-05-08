@@ -8,8 +8,8 @@ import { Buffer } from "buffer";
  * The parameter object should include:
  * - receivedVerificationCode: The complete verification data string.
  * - pinCode: The user-entered PIN string.
- * - setPinModalVisible: Function to control the visibility of the PIN modal.
- * - setVerificationModalVisible: Function to control the visibility of the verification modal.
+ * - setSecurityCodeModalVisible: Function to control the visibility of the PIN modal.
+ * - setCheckStatusModalVisible: Function to control the visibility of the verification modal.
  * - setVerificationStatus: Function to update the verification status.
  * - selectedDevice: The currently connected device object.
  * - setVerifiedDevices: Function to update the list of verified devices.
@@ -22,8 +22,8 @@ import { Buffer } from "buffer";
 export async function handlePinSubmit({
   receivedVerificationCode,
   pinCode,
-  setPinModalVisible,
-  setVerificationModalVisible,
+  setSecurityCodeModalVisible,
+  setCheckStatusModalVisible,
   setVerificationStatus,
   selectedDevice,
   setVerifiedDevices,
@@ -33,8 +33,8 @@ export async function handlePinSubmit({
   monitorSubscription,
   setPinCode,
 }) {
-  setPinModalVisible(false);
-  setVerificationModalVisible(false);
+  setSecurityCodeModalVisible(false);
+  setCheckStatusModalVisible(false);
   const verificationCodeValue = receivedVerificationCode.trim();
   const pinCodeValue = pinCode.trim();
 
@@ -98,7 +98,7 @@ export async function handlePinSubmit({
           base64Address
         );
         console.log("Sent 'address' to device");
-        setVerificationModalVisible(true);
+        setCheckStatusModalVisible(true);
       } catch (error) {
         console.log("Error sending 'address':", error);
       }
@@ -128,7 +128,7 @@ export async function handlePinSubmit({
       }
     } else if (flag === "N") {
       console.log("Flag N received; no 'address' sent");
-      setVerificationModalVisible(true);
+      setCheckStatusModalVisible(true);
     }
   } else {
     console.log("PIN verification failed");

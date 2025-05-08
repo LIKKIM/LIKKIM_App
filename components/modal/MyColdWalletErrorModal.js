@@ -11,7 +11,7 @@ const MyColdWalletErrorModal = ({ visible, onClose, message, styles, t }) => {
       onRequestClose={onClose}
     >
       <BlurView intensity={10} style={styles.centeredView}>
-        <View style={styles.pinModalView}>
+        <View style={styles.SecurityCodeModalView}>
           <Image
             source={require("../../assets/gif/Fail.gif")}
             style={{ width: 120, height: 120, marginTop: 20 }}

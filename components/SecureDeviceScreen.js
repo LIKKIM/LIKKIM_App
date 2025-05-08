@@ -27,19 +27,19 @@ import { DeviceContext, DarkModeContext } from "../utils/DeviceContext";
 import SecureDeviceScreenStyles from "../styles/SecureDeviceScreenStyle";
 import LanguageModal from "./modal/LanguageModal";
 import CurrencyModal from "./modal/CurrencyModal";
-import ChangePasswordModal from "./modal/ChangePasswordModal";
+import ChangeLockCodeModal from "./modal/ChangeLockCodeModal";
 import ConfirmDisconnectModal from "./modal/ConfirmDisconnectModal";
 import MyColdWalletSuccessModal from "./modal/MyColdWalletSuccessModal";
 import MyColdWalletErrorModal from "./modal/MyColdWalletErrorModal";
-import EnterPasswordModal from "./modal/EnterPasswordModal";
+import EnterLockCodeModal from "./modal/EnterLockCodeModal";
 import DisableLockScreenModal from "./modal/DisableLockScreenModal";
-import PinModal from "./modal/PinModal";
+import SecurityCodeModal from "./modal/SecurityCodeModal";
 import BluetoothModal from "./modal/BluetoothModal";
-import VerificationModal from "./modal/VerificationModal";
-import NewPasswordModal from "./modal/NewPasswordModal";
+import CheckStatusModal from "./modal/CheckStatusModal";
+import NewLockCodeModal from "./modal/NewLockCodeModal";
 import * as LocalAuthentication from "expo-local-authentication";
 import AddressBookModal from "./modal/AddressBookModal";
-import PasswordModal from "./modal/PasswordModal";
+import LockCodeModal from "./modal/LockCodeModal";
 import MyColdWalletContent from "./SecureDeviceScreen/MyColdWalletContent";
 import getSettingsOptions from "./SecureDeviceScreen/settingsOptions";
 import { languages } from "../config/languages";
@@ -82,8 +82,8 @@ function SecureDeviceScreen({ onDarkModeChange }) {
   const { isDarkMode, setIsDarkMode } = useContext(DarkModeContext);
   const SecureDeviceScreenStyle = SecureDeviceScreenStyles(isDarkMode);
   const [currencyModalVisible, setCurrencyModalVisible] = useState(false);
-  const [passwordModalVisible, setPasswordModalVisible] = useState(false);
-  const [enterPasswordModalVisible, setEnterPasswordModalVisible] =
+  const [LockCodeModalVisible, setLockCodeModalVisible] = useState(false);
+  const [enterLockCodeModalVisible, setEnterLockCodeModalVisible] =
     useState(false);
   const [selectedCurrency, setSelectedCurrency] = useState(currencyUnit);
   const [selectedLanguage, setSelectedLanguage] = useState(i18n.language);
@@ -92,7 +92,8 @@ function SecureDeviceScreen({ onDarkModeChange }) {
   const [devices, setDevices] = useState([]);
   const isScanningRef = useRef(false);
   const [isScanning, setIsScanning] = useState(false);
-  const [pinModalVisible, setPinModalVisible] = useState(false);
+  const [SecurityCodeModalVisible, setSecurityCodeModalVisible] =
+    useState(false);
   const [selectedDevice, setSelectedDevice] = useState(null);
   const [pinCode, setPinCode] = useState("");
   const [currentPassword, setCurrentPassword] = useState("");
@@ -104,7 +105,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
   const darkColors = ["#21201E", "#0E0D0D"];
   const lightColors = ["#FFFFFF", "#EDEBEF"];
   const [receivedVerificationCode, setReceivedVerificationCode] = useState("");
-  const [newPasswordModalVisible, setNewPasswordModalVisible] = useState(false);
+  const [newLockCodeModalVisible, setNewLockCodeModalVisible] = useState(false);
   const [isSupportExpanded, setIsSupportExpanded] = useState(false);
   const [verificationSuccessModalVisible, setVerificationSuccessModalVisible] =
     useState(false);
@@ -112,13 +113,13 @@ function SecureDeviceScreen({ onDarkModeChange }) {
     useState(false);
   const [searchLanguage, setSearchLanguage] = useState("");
   const [searchCurrency, setSearchCurrency] = useState("");
-  const [changePasswordModalVisible, setChangePasswordModalVisible] =
+  const [changeLockCodeModalVisible, setChangeLockCodeModalVisible] =
     useState(false);
   const [isCurrentPasswordValid, setIsCurrentPasswordValid] = useState(false);
   const filteredLanguages = languages.filter((language) =>
     language.name.toLowerCase().includes(searchLanguage.toLowerCase())
   );
-  const [confirmPasswordModalVisible, setConfirmPasswordModalVisible] =
+  const [confirmLockCodeModalVisible, setConfirmLockCodeModalVisible] =
     useState(false);
   const [storedPassword, setStoredPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -130,8 +131,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
   const [verificationStatus, setVerificationStatus] = useState(null);
   const [modalMessage, setModalMessage] = useState("");
   const [addressBookModalVisible, setAddressBookModalVisible] = useState(false);
-  const [verificationModalVisible, setVerificationModalVisible] =
-    useState(false);
+  const [CheckStatusModalVisible, setCheckStatusModalVisible] = useState(false);
   const [addresses, setAddresses] = useState([
     { id: "1", name: "Home", address: "0x1234..." },
     { id: "2", name: "Office", address: "0x5678..." },
@@ -187,47 +187,47 @@ function SecureDeviceScreen({ onDarkModeChange }) {
     setModalVisible(true);
   };
 
-  const closePasswordModal = () => {
-    setPasswordModalVisible(false);
+  const closeLockCodeModal = () => {
+    setLockCodeModalVisible(false);
     setPassword("");
     setConfirmPassword("");
     setIsPasswordHidden(true);
     setIsConfirmPasswordHidden(true);
   };
 
-  const closeEnterPasswordModal = () => {
-    setEnterPasswordModalVisible(false);
+  const closeEnterLockCodeModal = () => {
+    setEnterLockCodeModalVisible(false);
     setCurrentPassword("");
     setIsCurrentPasswordHidden(true);
   };
 
-  const openPasswordModal = () => {
+  const openLockCodeModal = () => {
     setPassword("");
     setConfirmPassword("");
     setIsPasswordHidden(true);
     setIsConfirmPasswordHidden(true);
-    setPasswordModalVisible(true);
+    setLockCodeModalVisible(true);
   };
 
-  const openEnterPasswordModal = () => {
+  const openEnterLockCodeModal = () => {
     setCurrentPassword("");
     setIsCurrentPasswordHidden(true);
-    setEnterPasswordModalVisible(true);
+    setEnterLockCodeModalVisible(true);
   };
 
-  const openChangePasswordModal = () => {
+  const openChangeLockCodeModal = () => {
     setCurrentPassword("");
     setIsCurrentPasswordHidden(true);
-    setChangePasswordModalVisible(true);
+    setChangeLockCodeModalVisible(true);
   };
 
-  const openNewPasswordModal = () => {
+  const openNewLockCodeModal = () => {
     setPasswordError("");
     setPassword("");
     setConfirmPassword("");
     setIsPasswordHidden(true);
     setIsConfirmPasswordHidden(true);
-    setNewPasswordModalVisible(true);
+    setNewLockCodeModalVisible(true);
   };
 
   useEffect(() => {
@@ -255,16 +255,16 @@ function SecureDeviceScreen({ onDarkModeChange }) {
   }, []);
 
   useEffect(() => {
-    if (!pinModalVisible) {
+    if (!SecurityCodeModalVisible) {
       stopMonitoringVerificationCode();
     }
-  }, [pinModalVisible]);
+  }, [SecurityCodeModalVisible]);
 
   const handleScreenLockToggle = async (value) => {
     if (value) {
-      openPasswordModal();
+      openLockCodeModal();
     } else {
-      openEnterPasswordModal();
+      openEnterLockCodeModal();
     }
   };
 
@@ -272,7 +272,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
     if (password === confirmPassword) {
       try {
         await changeScreenLockPassword(password);
-        setNewPasswordModalVisible(false);
+        setNewLockCodeModalVisible(false);
         setModalMessage(t("Password changed successfully"));
         setSuccessModalVisible(true);
       } catch (error) {
@@ -286,11 +286,11 @@ function SecureDeviceScreen({ onDarkModeChange }) {
   const handleNextForChangePassword = (currentPassword) => {
     if (currentPassword === screenLockPassword) {
       setIsCurrentPasswordValid(true);
-      setChangePasswordModalVisible(false);
-      openNewPasswordModal();
+      setChangeLockCodeModalVisible(false);
+      openNewLockCodeModal();
       setCurrentPassword("");
     } else {
-      setChangePasswordModalVisible(false);
+      setChangeLockCodeModalVisible(false);
       setModalMessage(t("Incorrect current password"));
       setSuccessModalVisible(false);
       setErrorModalVisible(true);
@@ -306,7 +306,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
       try {
         await changeScreenLockPassword(password);
         toggleScreenLock(true);
-        setPasswordModalVisible(false);
+        setLockCodeModalVisible(false);
         setPasswordError("");
         setModalMessage(t("Screen lock enabled successfully"));
         setSuccessModalVisible(true);
@@ -321,11 +321,11 @@ function SecureDeviceScreen({ onDarkModeChange }) {
   const handleConfirmPassword = async () => {
     if (currentPassword === screenLockPassword) {
       toggleScreenLock(false);
-      setEnterPasswordModalVisible(false);
+      setEnterLockCodeModalVisible(false);
       setModalMessage(t("Screen lock disabled successfully"));
       setSuccessModalVisible(true);
     } else {
-      setEnterPasswordModalVisible(false);
+      setEnterLockCodeModalVisible(false);
       setModalMessage(t("Incorrect password"));
       setErrorModalVisible(true);
       setSuccessModalVisible(false);
@@ -631,15 +631,15 @@ function SecureDeviceScreen({ onDarkModeChange }) {
           console.log("Error sending 'request':", error);
         }
       }, 200);
-      setPinModalVisible(true);
+      setSecurityCodeModalVisible(true);
     } catch (error) {
       console.log("Error connecting or sending command to device:", error);
     }
   };
   // SecureDeviceScreen.js handlePinSubmit
   const handlePinSubmit = async () => {
-    setPinModalVisible(false);
-    setVerificationModalVisible(false);
+    setSecurityCodeModalVisible(false);
+    setCheckStatusModalVisible(false);
     const verificationCodeValue = receivedVerificationCode.trim();
     const pinCodeValue = pinCode.trim();
 
@@ -700,7 +700,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
             base64Address
           );
           console.log("Sent 'address' to device");
-          setVerificationModalVisible(true);
+          setCheckStatusModalVisible(true);
         } catch (error) {
           console.log("Error sending 'address':", error);
         }
@@ -729,7 +729,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
         }
       } else if (flag === "N") {
         console.log("Flag N received; no 'address' sent");
-        setVerificationModalVisible(true);
+        setCheckStatusModalVisible(true);
       }
     } else {
       console.log("PIN verification failed");
@@ -959,7 +959,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
     setAddressBookModalVisible,
     handleScreenLockToggle,
     isScreenLockEnabled,
-    openChangePasswordModal,
+    openChangeLockCodeModal,
     toggleFaceID,
     isFaceIDEnabled,
     handleFirmwareUpdate,
@@ -1069,15 +1069,15 @@ function SecureDeviceScreen({ onDarkModeChange }) {
       />
 
       {/* Enable Screen Lock Modal */}
-      <PasswordModal
-        visible={passwordModalVisible}
-        onClose={closePasswordModal}
+      <LockCodeModal
+        visible={LockCodeModalVisible}
+        onClose={closeLockCodeModal}
         onSubmit={handleSetPassword}
         isDarkMode={isDarkMode}
         styles={SecureDeviceScreenStyle}
         t={t}
-        passwordModalVisible={passwordModalVisible}
-        closePasswordModal={closePasswordModal}
+        LockCodeModalVisible={LockCodeModalVisible}
+        closeLockCodeModal={closeLockCodeModal}
         handleSetPassword={handleSetPassword}
         password={password}
         setPassword={setPassword}
@@ -1093,8 +1093,8 @@ function SecureDeviceScreen({ onDarkModeChange }) {
 
       {/* Disable Lock Screen Modal */}
       <DisableLockScreenModal
-        visible={enterPasswordModalVisible}
-        onRequestClose={closeEnterPasswordModal}
+        visible={enterLockCodeModalVisible}
+        onRequestClose={closeEnterLockCodeModal}
         onSubmit={handleConfirmPassword}
         currentPassword={currentPassword}
         setCurrentPassword={setCurrentPassword}
@@ -1106,15 +1106,15 @@ function SecureDeviceScreen({ onDarkModeChange }) {
       />
 
       {/* Enter Password Modal */}
-      <EnterPasswordModal
-        visible={enterPasswordModalVisible}
-        onClose={closeEnterPasswordModal}
+      <EnterLockCodeModal
+        visible={enterLockCodeModalVisible}
+        onClose={closeEnterLockCodeModal}
         onSubmit={handleConfirmPassword}
         isDarkMode={isDarkMode}
         styles={SecureDeviceScreenStyle}
         t={t}
-        enterPasswordModalVisible={enterPasswordModalVisible}
-        closeEnterPasswordModal={closeEnterPasswordModal}
+        enterLockCodeModalVisible={enterLockCodeModalVisible}
+        closeEnterLockCodeModal={closeEnterLockCodeModal}
         handleConfirmPassword={handleConfirmPassword}
         currentPassword={currentPassword}
         setCurrentPassword={setCurrentPassword}
@@ -1123,9 +1123,9 @@ function SecureDeviceScreen({ onDarkModeChange }) {
       />
 
       {/* Change Password Modal */}
-      <ChangePasswordModal
-        visible={changePasswordModalVisible}
-        onClose={() => setChangePasswordModalVisible(false)}
+      <ChangeLockCodeModal
+        visible={changeLockCodeModalVisible}
+        onClose={() => setChangeLockCodeModalVisible(false)}
         onSubmit={handleNextForChangePassword}
         styles={SecureDeviceScreenStyle}
         isDarkMode={isDarkMode}
@@ -1133,9 +1133,9 @@ function SecureDeviceScreen({ onDarkModeChange }) {
       />
 
       {/* New Password Modal */}
-      <NewPasswordModal
-        visible={newPasswordModalVisible}
-        onRequestClose={() => setNewPasswordModalVisible(false)}
+      <NewLockCodeModal
+        visible={newLockCodeModalVisible}
+        onRequestClose={() => setNewLockCodeModalVisible(false)}
         onSubmit={handleChangePassword}
         password={password}
         setPassword={setPassword}
@@ -1167,12 +1167,12 @@ function SecureDeviceScreen({ onDarkModeChange }) {
       />
 
       {/* PIN Modal */}
-      <PinModal
-        visible={pinModalVisible}
+      <SecurityCodeModal
+        visible={SecurityCodeModalVisible}
         pinCode={pinCode}
         setPinCode={setPinCode}
         onSubmit={handlePinSubmit}
-        onCancel={() => setPinModalVisible(false)}
+        onCancel={() => setSecurityCodeModalVisible(false)}
         styles={SecureDeviceScreenStyle}
         isDarkMode={isDarkMode}
         t={t}
@@ -1180,10 +1180,10 @@ function SecureDeviceScreen({ onDarkModeChange }) {
       />
 
       {/* Verification Modal */}
-      <VerificationModal
-        visible={verificationModalVisible && verificationStatus !== null}
+      <CheckStatusModal
+        visible={CheckStatusModalVisible && verificationStatus !== null}
         status={verificationStatus}
-        onClose={() => setVerificationModalVisible(false)}
+        onClose={() => setCheckStatusModalVisible(false)}
         styles={SecureDeviceScreenStyle}
         t={t}
       />

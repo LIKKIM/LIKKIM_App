@@ -19,7 +19,7 @@ const getSettingsOptions = ({
   setAddressBookModalVisible,
   handleScreenLockToggle,
   isScreenLockEnabled,
-  openChangePasswordModal,
+  openChangeLockCodeModal,
   toggleFaceID,
   isFaceIDEnabled,
   handleFirmwareUpdate,
@@ -126,7 +126,7 @@ const getSettingsOptions = ({
               icon: "password",
               onPress: () => {
                 Vibration.vibrate();
-                openChangePasswordModal();
+                openChangeLockCodeModal();
               },
             },
             {

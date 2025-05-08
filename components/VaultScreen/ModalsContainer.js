@@ -6,8 +6,8 @@ import TipModal from "../modal/TipModal";
 import ProcessModal from "../modal/ProcessModal";
 import DeleteConfirmationModal from "../modal/DeleteConfirmationModal";
 import BluetoothModal from "../modal/BluetoothModal";
-import PinModal from "../modal/PinModal";
-import VerificationModal from "../modal/VerificationModal";
+import SecurityCodeModal from "../modal/SecurityCodeModal";
+import CheckStatusModal from "../modal/CheckStatusModal";
 import PendingModal from "../modal/PendingModal";
 
 // 新增引入
@@ -70,11 +70,11 @@ const ModalsContainer = ({
   setSelectedDevice,
   verifiedDevices,
   handleDisconnectDevice,
-  pinModalVisible,
+  SecurityCodeModalVisible,
   pinCode,
   setPinCode,
   handlePinSubmit,
-  setPinModalVisible,
+  setSecurityCodeModalVisible,
   verificationStatus,
   setVerificationStatus,
   createPendingModalVisible,
@@ -159,19 +159,19 @@ const ModalsContainer = ({
         onDisconnectPress={handleDisconnectDevice}
       />
       {/* PIN码输入 Modal */}
-      <PinModal
-        visible={pinModalVisible} // 控制 PIN 模态框的可见性
+      <SecurityCodeModal
+        visible={SecurityCodeModalVisible} // 控制 PIN 模态框的可见性
         pinCode={pinCode} // 绑定 PIN 输入的状态
         setPinCode={setPinCode} // 设置 PIN 的状态函数
         onSubmit={handlePinSubmit} // PIN 提交后的逻辑
-        onCancel={() => setPinModalVisible(false)} // 关闭 PIN 模态框
+        onCancel={() => setSecurityCodeModalVisible(false)} // 关闭 PIN 模态框
         styles={VaultScreenStyle}
         isDarkMode={isDarkMode}
         t={t}
         status={blueToothStatus}
       />
       {/* 验证结果 Modal */}
-      <VerificationModal
+      <CheckStatusModal
         visible={verificationStatus !== null}
         status={verificationStatus}
         onClose={() => setVerificationStatus(null)}

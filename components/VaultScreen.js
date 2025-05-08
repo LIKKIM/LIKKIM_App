@@ -119,7 +119,8 @@ function VaultScreen({ route, navigation }) {
   const iconColor = isDarkMode ? "#ffffff" : "#676776";
   const darkColorsDown = ["#21201E", "#0E0D0D"];
   const lightColorsDown = ["#ffffff", "#EDEBEF"];
-  const [pinModalVisible, setPinModalVisible] = useState(false);
+  const [SecurityCodeModalVisible, setSecurityCodeModalVisible] =
+    useState(false);
   const [animation] = useState(new Animated.Value(0));
   const [fadeAnim] = useState(new Animated.Value(0));
   const opacityAnim = useRef(new Animated.Value(0)).current;
@@ -480,7 +481,7 @@ function VaultScreen({ route, navigation }) {
   }, []);
   useEffect(() => {
     if (!bleVisible && selectedDevice) {
-      setPinModalVisible(true);
+      setSecurityCodeModalVisible(true);
     }
   }, [bleVisible, selectedDevice]);
 
@@ -623,10 +624,10 @@ function VaultScreen({ route, navigation }) {
 
   // 停止监听
   useEffect(() => {
-    if (!pinModalVisible) {
+    if (!SecurityCodeModalVisible) {
       stopMonitoringVerificationCode();
     }
-  }, [pinModalVisible]);
+  }, [SecurityCodeModalVisible]);
 
   useEffect(() => {
     if (route.params?.showAddModal) {
@@ -787,7 +788,7 @@ function VaultScreen({ route, navigation }) {
       }, 200); // 延迟 200ms 确保监听器启动（根据设备响应调整）
 
       // 显示 PIN 码弹窗
-      setPinModalVisible(true);
+      setSecurityCodeModalVisible(true);
     } catch (error) {
       console.log("设备连接或命令发送错误:", error);
     }
@@ -1150,8 +1151,8 @@ function VaultScreen({ route, navigation }) {
   };
   // VaultScreen.js handlePinSubmit
   const handlePinSubmit = async () => {
-    setPinModalVisible(false);
-    setVerificationModalVisible(false);
+    setSecurityCodeModalVisible(false);
+    setCheckStatusModalVisible(false);
     const verificationCodeValue = receivedVerificationCode.trim();
     const pinCodeValue = pinCode.trim();
 
@@ -1215,7 +1216,7 @@ function VaultScreen({ route, navigation }) {
             base64Address
           );
           console.log("Sent 'address' to device");
-          setVerificationModalVisible(true);
+          setCheckStatusModalVisible(true);
         } catch (error) {
           console.log("Error sending 'address':", error);
         }
@@ -1245,7 +1246,7 @@ function VaultScreen({ route, navigation }) {
         }
       } else if (flag === "N") {
         console.log("Flag N received; no 'address' sent");
-        setVerificationModalVisible(true);
+        setCheckStatusModalVisible(true);
       }
     } else {
       console.log("PIN verification failed");
@@ -1654,11 +1655,11 @@ function VaultScreen({ route, navigation }) {
         setSelectedDevice={setSelectedDevice}
         verifiedDevices={verifiedDevices}
         handleDisconnectDevice={handleDisconnectDevice}
-        pinModalVisible={pinModalVisible}
+        SecurityCodeModalVisible={SecurityCodeModalVisible}
         pinCode={pinCode}
         setPinCode={setPinCode}
         handlePinSubmit={handlePinSubmit}
-        setPinModalVisible={setPinModalVisible}
+        setSecurityCodeModalVisible={setSecurityCodeModalVisible}
         verificationStatus={verificationStatus}
         setVerificationStatus={setVerificationStatus}
         blueToothStatus={blueToothStatus}

@@ -105,7 +105,7 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
       alignItems: "center",
       backgroundColor: "rgba(0, 0, 0, 0.2)",
     },
-    changePasswordModalView: {
+    changeLockCodeModalView: {
       position: "absolute",
       top: 60,
       margin: 20,
@@ -237,7 +237,7 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
       alignItems: "center",
       justifyContent: "space-between",
     },
-    EnterPasswordModalView: {
+    EnterLockCodeModalView: {
       position: "absolute",
       top: 100,
       justifyContent: "space-between",
@@ -357,25 +357,25 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
       width: "100%",
       position: "relative",
     },
-    passwordModalText: {
+    LockCodeModalText: {
       color: textColor,
       fontSize: 16,
       marginBottom: 10,
       textAlign: "left",
     },
-    passwordModalTitle: {
+    LockCodeModalTitle: {
       color: textColor,
       fontSize: 20,
       fontWeight: "bold",
       marginBottom: 10,
     },
-    pinModalTitle: {
+    SecurityCodeModalTitle: {
       color: textColor,
       fontSize: 20,
       fontWeight: "bold",
       marginBottom: 15,
     },
-    pinModalView: {
+    SecurityCodeModalView: {
       position: "absolute",
       top: 100,
       margin: 20,
@@ -421,7 +421,7 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
       borderRadius: 10,
       color: textColor,
     },
-    setPasswordModalView: {
+    setLockCodeModalView: {
       position: "absolute",
       top: 60,
       margin: 20,

@@ -1,18 +1,18 @@
-// modal/PasswordModal.js
+// modal/LockCodeModal.js
 import React from "react";
 import { Modal, View, Text, TextInput, TouchableOpacity } from "react-native";
 import { BlurView } from "expo-blur";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
-function PasswordModal({
+function LockCodeModal({
   visible,
   onClose,
   onSubmit,
   isDarkMode,
   styles,
   t,
-  passwordModalVisible,
-  closePasswordModal,
+  LockCodeModalVisible,
+  closeLockCodeModal,
   handleSetPassword,
   password,
   setPassword,
@@ -34,7 +34,7 @@ function PasswordModal({
     >
       <BlurView intensity={10} style={styles.centeredView}>
         <View style={styles.enableLockModalView}>
-          <Text style={styles.passwordModalTitle}>
+          <Text style={styles.LockCodeModalTitle}>
             {t("Enable Screen Lock")}
           </Text>
 
@@ -109,4 +109,4 @@ function PasswordModal({
   );
 }
 
-export default PasswordModal;
+export default LockCodeModal;

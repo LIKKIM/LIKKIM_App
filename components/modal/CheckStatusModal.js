@@ -1,4 +1,4 @@
-// VerificationModal.js
+// CheckStatusModal.js
 import React from "react";
 import { View, Text, Modal, Image, TouchableOpacity } from "react-native";
 import { BlurView } from "expo-blur";
@@ -7,7 +7,7 @@ import SuccessGif from "../../assets/gif/Success.gif";
 import FailGif from "../../assets/gif/Fail.gif";
 import PendingGif from "../../assets/gif/Pending.gif";
 
-const VerificationModal = ({ visible, status, onClose, styles, t }) => {
+const CheckStatusModal = ({ visible, status, onClose, styles, t }) => {
   let imageSource;
   let title;
   let subtitle;
@@ -42,7 +42,7 @@ const VerificationModal = ({ visible, status, onClose, styles, t }) => {
       onRequestClose={onClose}
     >
       <BlurView intensity={10} style={styles.centeredView}>
-        <View style={styles.pinModalView}>
+        <View style={styles.SecurityCodeModalView}>
           <Image
             key={status}
             source={imageSource}
@@ -63,4 +63,4 @@ const VerificationModal = ({ visible, status, onClose, styles, t }) => {
   );
 };
 
-export default VerificationModal;
+export default CheckStatusModal;
