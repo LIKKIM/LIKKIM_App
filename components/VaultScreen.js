@@ -1360,7 +1360,6 @@ function VaultScreen({ route, navigation }) {
     setSelectedAddress(crypto?.address || "Unknown");
     setSelectedCardName(cryptoName);
     setSelectedCardChain(cryptoChain);
-    // console.warn("设置：likkim_set_select_card" + cryptoName);
 
     setSelectedCrypto(crypto);
     setActiveTab("Prices");
