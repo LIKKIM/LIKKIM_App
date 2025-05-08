@@ -8,7 +8,7 @@ import {
   Image,
   RefreshControl,
 } from "react-native";
-import { initialAdditionalCryptos } from "../../config/cryptosData"; // 修改为实际路径
+import { initialAdditionalCryptos } from "../../config/assetInfo"; // 修改为实际路径
 import { CHAIN_NAMES } from "../../config/chainConfig";
 import {
   CryptoContext,

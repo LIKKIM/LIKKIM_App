@@ -3,7 +3,7 @@
 import React, { createContext, useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import i18n from "../config/i18n";
-import { initialAdditionalCryptos } from "../config/cryptosData";
+import { initialAdditionalCryptos } from "../config/assetInfo";
 import currencies from "../config/currencies";
 import { marketAPI } from "../env/apiEndpoints";
 

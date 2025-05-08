@@ -43,7 +43,7 @@ import {
 // 自定义组件
 import { prefixToShortName } from "../config/chainPrefixes";
 import { CHAIN_NAMES } from "../config/chainConfig";
-import coinCommandMapping from "../config/coinCommandMapping";
+import assetRouteDefs from "../config/assetRouteDefs";
 import EmptyWalletView from "./modal/EmptyWalletView";
 import AddCryptoModal from "./modal/AddCryptoModal";
 import ChainSelectionModal from "./modal/ChainSelectionModal";

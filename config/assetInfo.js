@@ -1,4 +1,4 @@
-// cryptosData.js
+// assetInfo.js
 export const initialAdditionalCryptos = [
   {
     name: "Arbitrum",

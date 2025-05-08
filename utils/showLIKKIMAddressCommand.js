@@ -1,7 +1,7 @@
 // showLIKKIMAddressCommand.js
 
 import { Buffer } from "buffer";
-import coinCommandMapping from "../config/coinCommandMapping";
+import assetRouteDefs from "../config/assetRouteDefs";
 import { bluetoothConfig } from "../env/bluetoothConfig";
 
 const serviceUUID = bluetoothConfig.serviceUUID;
@@ -46,7 +46,7 @@ const showLIKKIMAddressCommand = async (
       return;
     }
 
-    const commandString = coinCommandMapping[coinType];
+    const commandString = assetRouteDefs[coinType];
     if (!commandString) {
       console.log("Unsupported coin type:", coinType);
       return;

@@ -1,6 +1,6 @@
-// config/cryptoPathMapping.js
+// config/assetOps.js
 
-const cryptoPathMapping = {
+const assetOps = {
   bitcoin: "m/49'/0'/0'/0/0",
   ethereum: "m/44'/60'/0'/0/0",
   tron: "m/44'/195'/0'/0/0",
@@ -34,4 +34,4 @@ const cryptoPathMapping = {
   ronin: "m/44'/60'/0'/0/0",
 };
 
-export default cryptoPathMapping;
+export default assetOps;

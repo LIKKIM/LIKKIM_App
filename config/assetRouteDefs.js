@@ -1,6 +1,6 @@
-// config/coinCommandMapping.js
+// config/assetRouteDefs.js
 
-const coinCommandMapping = {
+const assetRouteDefs = {
   BTC: "address:bitcoin",
   ETH: "address:ethereum",
   TRX: "address:tron",
@@ -31,4 +31,4 @@ const coinCommandMapping = {
   Gnosis: "address:gnosis",
 };
 
-export default coinCommandMapping;
+export default assetRouteDefs;

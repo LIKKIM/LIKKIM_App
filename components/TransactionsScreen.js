@@ -13,7 +13,7 @@ import "@ethersproject/shims";
 
 // 配置与工具
 import { prefixToShortName } from "../config/chainPrefixes";
-import cryptoPathMapping from "../config/cryptoPathMapping";
+import assetOps from "../config/assetOps";
 
 import { detectNetwork } from "../config/networkUtils";
 import checkAndReqPermission from "../utils/BluetoothPermissions";
@@ -941,7 +941,7 @@ function TransactionsScreen() {
       }
       console.log("选择的链标识:", chainKey);
 
-      const path = cryptoPathMapping[chainKey];
+      const path = assetOps[chainKey];
       if (!path) {
         console.log(`不支持的路径: ${chainKey}`);
         return;
