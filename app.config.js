@@ -1,7 +1,7 @@
 export default {
-  owner: "likkimteam",
-  name: "LIKKIM",
-  slug: "likkim",
+  owner: "secureteam", // ✅ 新 Expo 账号（避免使用曾被封账号）
+  name: "Lukkey Vault", // ✅
+  slug: "securewallet", //  新 slug，用于 OTA、缓存等路径
   version: "1.0.0",
   orientation: "portrait",
   icon: "./assets/icon.png",
