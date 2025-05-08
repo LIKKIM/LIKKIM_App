@@ -77,7 +77,7 @@ function MyColdWalletScreen({ onDarkModeChange }) {
     toggleScreenLock,
     changeScreenLockPassword,
     setCryptoCards,
-    updateCryptoPublicKey,
+    updateDevicePubHintKey,
   } = useContext(DeviceContext);
   const { isDarkMode, setIsDarkMode } = useContext(DarkModeContext);
   const MyColdWalletScreenStyle = MyColdWalletScreenStyles(isDarkMode);
@@ -527,7 +527,7 @@ function MyColdWalletScreen({ onDarkModeChange }) {
             console.log(
               `Received public key for ${queryChainName}: ${publicKey}`
             );
-            updateCryptoPublicKey(queryChainName, publicKey);
+            updateDevicePubHintKey(queryChainName, publicKey);
           }
         }
 

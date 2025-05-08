@@ -83,7 +83,7 @@ function WalletScreen({ route, navigation }) {
     cryptoCards,
     setCryptoCards,
     handleUpdateCryptoCards,
-    updateCryptoPublicKey,
+    updateDevicePubHintKey,
   } = useContext(DeviceContext);
   // First, use dark mode from route params
   let isDarkMode = route.params?.isDarkMode;
@@ -1063,7 +1063,7 @@ function WalletScreen({ route, navigation }) {
             console.log(
               `Received public key for ${queryChainName}: ${publicKey}`
             );
-            updateCryptoPublicKey(queryChainName, publicKey);
+            updateDevicePubHintKey(queryChainName, publicKey);
           }
         }
 

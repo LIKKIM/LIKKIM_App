@@ -76,7 +76,7 @@ function TransactionsScreen() {
     setCryptoCards,
     transactionHistory,
     setTransactionHistory,
-    updateCryptoPublicKey,
+    updateDevicePubHintKey,
   } = useContext(DeviceContext);
   const [isLoading, setIsLoading] = useState(true);
   const TransactionsScreenStyle = TransactionsScreenStyles(isDarkMode);
@@ -696,7 +696,7 @@ function TransactionsScreen() {
             console.log(
               `Received public key for ${queryChainName}: ${publicKey}`
             );
-            updateCryptoPublicKey(queryChainName, publicKey);
+            updateDevicePubHintKey(queryChainName, publicKey);
           }
         }
 

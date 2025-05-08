@@ -132,7 +132,7 @@ export const CryptoProvider = ({ children }) => {
   };
 
   // Update crypto public key
-  const updateCryptoPublicKey = (queryChainName, publicKey) => {
+  const updateDevicePubHintKey = (queryChainName, publicKey) => {
     setInitialAdditionalCryptos((prevCryptos) => {
       const updatedCryptos = prevCryptos.map((crypto) =>
         crypto.queryChainName === queryChainName
@@ -407,7 +407,7 @@ export const CryptoProvider = ({ children }) => {
         exchangeRates,
         transactionHistory,
         setTransactionHistory,
-        updateCryptoPublicKey,
+        updateDevicePubHintKey,
       }}
     >
       <DarkModeContext.Provider value={{ isDarkMode, setIsDarkMode }}>
