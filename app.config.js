@@ -1,6 +1,3 @@
-/**
- * LIKKIM Dynamic Config
- */
 export default {
   owner: "likkimteam",
   name: "LIKKIM",
