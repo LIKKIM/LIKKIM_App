@@ -92,14 +92,18 @@ const getSettingsOptions = ({
           />
         ),
       },
-      {
-        title: t("Address Book"),
-        icon: "portrait",
-        onPress: () => {
-          Vibration.vibrate();
-          setAddressBookModalVisible(true);
-        },
-      },
+      ...(cryptoCards && cryptoCards.length > 0
+        ? [
+            {
+              title: t("Address Book"),
+              icon: "portrait",
+              onPress: () => {
+                Vibration.vibrate();
+                setAddressBookModalVisible(true);
+              },
+            },
+          ]
+        : []),
       {
         title: t("Enable Screen Lock"),
         icon: "lock-outline",
