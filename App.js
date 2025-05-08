@@ -17,7 +17,7 @@ import TransactionsScreen from "./components/TransactionsScreen";
 import SecureDeviceScreen from "./components/SecureDeviceScreen";
 import OnboardingScreen from "./utils/OnboardingScreen";
 import ScreenLock from "./utils/ScreenLock";
-import FindMy from "./components/SecureDeviceScreen/FindMy";
+import DeviceDisplay from "./components/SecureDeviceScreen/DeviceDisplay";
 import SupportPage from "./components/SecureDeviceScreen/SupportPage";
 import ConnectLIKKIMAuth from "./components/TransactionScreens/ConnectLIKKIMAuth";
 import { CryptoProvider, DeviceContext } from "./utils/DeviceContext";
@@ -80,7 +80,7 @@ export default function App() {
             </Stack.Screen>
             <Stack.Screen
               name="Find My LIKKIM"
-              component={FindMy}
+              component={DeviceDisplay}
               options={{ title: t("Find My LIKKIM") }}
             />
             <Stack.Screen

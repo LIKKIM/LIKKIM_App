@@ -131,7 +131,7 @@ const loadConnectedDevices = async (
   }
 };
 
-export default function FindMy() {
+export default function DeviceDisplay() {
   const navigation = useNavigation();
   const { isDarkMode } = useContext(DarkModeContext);
   const { t } = useTranslation();
