@@ -60,8 +60,7 @@ i18n
           Remove: "Remove",
           "Security in your hands": "Security in your hands",
           Continue: "Continue",
-          "Never share the recovery phrase.":
-            "Never share the recovery phrase.",
+    
 
           "Scroll down to view all words": "Scroll down to view all words",
           "Recovery Phrase": "Recovery Phrase",
@@ -205,7 +204,6 @@ i18n
       zh: {
         translation: {
           "Add Wallet": "添加钱包",
-
           Close: "关闭",
           "Value:": "值:",
           "Delete Card": "删除卡片",
@@ -251,10 +249,8 @@ i18n
           "Remove Chain Account": "移除链账户",
           Remove: "移除",
           "Security in your hands": "安全尽在掌握",
-
           Continue: "继续",
-          "Never share the recovery phrase.": "不要分享恢复短语。",
-
+ 
           "Scroll down to view all words": "向下滚动查看所有单词",
           "Recovery Phrase": "恢复短语",
           "Read the following, then save the phrase securely.":
@@ -440,7 +436,7 @@ i18n
           "Security in your hands": "安全盡在掌握",
 
           Continue: "繼續",
-          "Never share the recovery phrase.": "不要分享恢復短語。",
+    
 
           "Scroll down to view all words": "向下滾動查看所有單詞",
           "Recovery Phrase": "恢復短語",
@@ -638,8 +634,7 @@ i18n
           "Security in your hands": "Sécurité entre vos mains",
 
           Continue: "Continuer",
-          "Never share the recovery phrase.":
-            "Ne partagez jamais la phrase de récupération.",
+ 
 
           "Scroll down to view all words":
             "Faites défiler vers le bas pour voir tous les mots",
@@ -865,8 +860,7 @@ i18n
           "Security in your hands": "Seguridad en tus manos",
 
           Continue: "Continuar",
-          "Never share the recovery phrase.":
-            "Nunca compartas la frase de recuperación.",
+ 
 
           "Scroll down to view all words":
             "Desplázate hacia abajo para ver todas las palabras",
@@ -1063,8 +1057,7 @@ i18n
           "Security in your hands": "الأمان بين يديك",
 
           Continue: "متابعة",
-          "Never share the recovery phrase.": "لا تشارك عبارة الاسترداد أبدًا.",
-
+ 
           "Scroll down to view all words":
             "قم بالتمرير لأسفل لعرض جميع الكلمات",
           "Recovery Phrase": "عبارة الاسترداد",
@@ -1260,9 +1253,7 @@ i18n
           "Security in your hands": "安全はあなたの手に",
 
           Continue: "続行",
-          "Never share the recovery phrase.":
-            "リカバリーフレーズは絶対に共有しないでください。",
-
+ 
           "Scroll down to view all words":
             "すべての単語を見るには下にスクロールしてください",
           "Recovery Phrase": "リカバリーフレーズ",
@@ -1481,9 +1472,7 @@ i18n
           "Security in your hands": "Безопасность в ваших руках",
 
           Continue: "Продолжить",
-          "Never share the recovery phrase.":
-            "Никогда не делитесь фразой восстановления.",
-
+  
           "Scroll down to view all words":
             "Прокрутите вниз, чтобы увидеть все слова",
           "Recovery Phrase": "Фраза восстановления",
@@ -1679,9 +1668,7 @@ i18n
           "Security in your hands": "안전은 당신의 손안에 있습니다",
 
           Continue: "계속",
-          "Never share the recovery phrase.":
-            "복구 구문을 절대 공유하지 마세요.",
-
+     
           "Scroll down to view all words":
             "모든 단어를 보려면 아래로 스크롤하세요",
           "Recovery Phrase": "복구 구문",
@@ -1877,9 +1864,7 @@ i18n
           "Security in your hands": "Segurança em suas mãos",
 
           Continue: "Continuar",
-          "Never share the recovery phrase.":
-            "Nunca compartilhe a frase de recuperação.",
-
+   
           "Scroll down to view all words":
             "Role para baixo para ver todas as palavras",
           "Recovery Phrase": "Frase de recuperação",
@@ -2079,8 +2064,7 @@ i18n
           "Security in your hands": "Segurança em suas mãos",
 
           Continue: "Continuar",
-          "Never share the recovery phrase.":
-            "Nunca compartilhe a frase de recuperação.",
+   
 
           "Scroll down to view all words":
             "Role para baixo para ver todas as palavras",
@@ -2297,8 +2281,7 @@ i18n
           "Security in your hands": "Sicurezza nelle tue mani",
 
           Continue: "Continua",
-          "Never share the recovery phrase.":
-            "Non condividere mai la frase di recupero.",
+ 
 
           "Scroll down to view all words":
             "Scorri verso il basso per visualizzare tutte le parole",
@@ -2501,8 +2484,7 @@ i18n
           "Security in your hands": "Sicherheit in Ihren Händen",
 
           Continue: "Fortsetzen",
-          "Never share the recovery phrase.":
-            "Teilen Sie niemals die Wiederherstellungsphrase.",
+ 
 
           "Scroll down to view all words":
             "Scrollen Sie nach unten, um alle Wörter zu sehen",
@@ -2704,9 +2686,7 @@ i18n
           "Security in your hands": "सुरक्षा आपके हाथ में",
 
           Continue: "जारी रखें",
-          "Never share the recovery phrase.":
-            "रिकवरी वाक्यांश को कभी साझा न करें।",
-
+ 
           "Scroll down to view all words":
             "सभी शब्दों को देखने के लिए नीचे स्क्रॉल करें",
           "Recovery Phrase": "रिकवरी वाक्यांश",
@@ -2905,8 +2885,7 @@ i18n
           Remove: "Устгах",
           "Security in your hands": "Аюулгүй байдал таны гарт",
           Continue: "Үргэлжлүүлэх",
-          "Never share the recovery phrase.":
-            "Сэргээх үгийг хэзээ ч бүү хуваалцаарай.",
+ 
 
           "Scroll down to view all words":
             "Бүх үгийг харахын тулд доош гүйлгэнэ үү",
@@ -3113,7 +3092,7 @@ i18n
           "Security in your hands": "ความปลอดภัยอยู่ในมือคุณ",
 
           Continue: "ดำเนินการต่อ",
-          "Never share the recovery phrase.": "อย่าแชร์วลีการกู้คืน",
+ 
 
           "Scroll down to view all words": "เลื่อนลงเพื่อดูคำทั้งหมด",
           "Recovery Phrase": "วลีการกู้คืน",
@@ -3309,9 +3288,7 @@ i18n
           "Security in your hands": "Безпека у ваших руках",
 
           Continue: "Продовжити",
-          "Never share the recovery phrase.":
-            "Ніколи не діліться фразою відновлення.",
-
+         
           "Scroll down to view all words":
             "Прокрутіть вниз, щоб побачити всі слова",
           "Recovery Phrase": "Фраза відновлення",
@@ -3507,9 +3484,7 @@ i18n
           "Security in your hands": "Bảo mật trong tay bạn",
 
           Continue: "Tiếp tục",
-          "Never share the recovery phrase.":
-            "Không bao giờ chia sẻ cụm từ khôi phục.",
-
+  
           "Scroll down to view all words": "Cuộn xuống để xem tất cả các từ",
           "Recovery Phrase": "Cụm từ khôi phục",
           "Read the following, then save the phrase securely.":
@@ -3708,9 +3683,7 @@ i18n
           "Security in your hands": "Keamanan di tangan Anda",
 
           Continue: "Lanjutkan",
-          "Never share the recovery phrase.":
-            "Jangan pernah membagikan frasa pemulihan.",
-
+   
           "Scroll down to view all words":
             "Gulir ke bawah untuk melihat semua kata",
           "Recovery Phrase": "Frasa pemulihan",
@@ -3907,9 +3880,7 @@ i18n
           "Security in your hands": "Seguridad sa iyong mga kamay",
 
           Continue: "Magpatuloy",
-          "Never share the recovery phrase.":
-            "Huwag kailanman ibahagi ang parirala ng pagbawi.",
-
+      
           "Scroll down to view all words":
             "Mag-scroll pababa upang makita ang lahat ng mga salita",
           "Recovery Phrase": "Parirala ng pagbawi",
@@ -4112,9 +4083,7 @@ i18n
           "Security in your hands": "নিরাপত্তা আপনার হাতে",
 
           Continue: "চালিয়ে যান",
-          "Never share the recovery phrase.":
-            "পুনরুদ্ধার বাক্যাংশটি কখনই শেয়ার করবেন না।",
-
+    
           "Scroll down to view all words": "সমস্ত শব্দ দেখতে নীচে স্ক্রোল করুন",
           "Recovery Phrase": "পুনরুদ্ধার বাক্যাংশ",
           "Read the following, then save the phrase securely.":
