@@ -2092,8 +2092,7 @@ i18n
             "Desinstale e reinstale o aplicativo no seu telefone para excluir os dados do aplicativo LIKKIM, incluindo contas e configurações.",
           "Value in USD": "Valor em USD",
           Fee: "Taxa",
-          "Confirming Transaction on LIKKIM Device...":
-            "Confirmando transação no dispositivo LIKKIM...",
+
           "Please confirm the transaction on your LIKKIM device.":
             "Por favor, confirme a transação no seu dispositivo LIKKIM.",
           "Verifying Address on LIKKIM...": "Verificando endereço no LIKKIM...",
@@ -2309,8 +2308,7 @@ i18n
             "Desinstale e reinstale o aplicativo no seu telefone para excluir os dados do aplicativo LIKKIM, incluindo contas e configurações.",
           "Value in USD": "Valor em USD",
           Fee: "Taxa",
-          "Confirming Transaction on LIKKIM Device...":
-            "Confirmando transação no dispositivo LIKKIM...",
+
           "Please confirm the transaction on your LIKKIM device.":
             "Por favor, confirme a transação no seu dispositivo LIKKIM.",
           "Verifying Address on LIKKIM...": "Verificando endereço no LIKKIM...",
@@ -2542,8 +2540,7 @@ i18n
             "Disinstalla e reinstalla l'app sul tuo telefono per eliminare i dati dell'app LIKKIM, inclusi account e impostazioni.",
           "Value in USD": "Valore in USD",
           Fee: "Commissione",
-          "Confirming Transaction on LIKKIM Device...":
-            "Conferma della transazione sul dispositivo LIKKIM...",
+
           "Please confirm the transaction on your LIKKIM device.":
             "Si prega di confermare la transazione sul dispositivo LIKKIM.",
           "Verifying Address on LIKKIM...":
@@ -2763,8 +2760,7 @@ i18n
             "Bitte deinstallieren Sie die App und installieren Sie sie dann erneut auf Ihrem Telefon, um die LIKKIM-App-Daten, einschließlich Konten und Einstellungen, zu löschen.",
           "Value in USD": "Wert in USD",
           Fee: "Gebühr",
-          "Confirming Transaction on LIKKIM Device...":
-            "Bestätigen der Transaktion auf dem LIKKIM-Gerät...",
+
           "Please confirm the transaction on your LIKKIM device.":
             "Bitte bestätigen Sie die Transaktion auf Ihrem LIKKIM-Gerät.",
           "Verifying Address on LIKKIM...": "Adresse auf LIKKIM überprüfen...",
@@ -2980,8 +2976,7 @@ i18n
             "कृपया LIKKIM ऐप डेटा, जिसमें खाते और सेटिंग्स शामिल हैं, को हटाने के लिए ऐप को अनइंस्टॉल करें और फिर से इंस्टॉल करें।",
           "Value in USD": "यूएसडी में मूल्य",
           Fee: "शुल्क",
-          "Confirming Transaction on LIKKIM Device...":
-            "LIKKIM डिवाइस पर लेन-देन की पुष्टि कर रहे हैं...",
+
           "Please confirm the transaction on your LIKKIM device.":
             "कृपया अपने LIKKIM डिवाइस पर लेन-देन की पुष्टि करें।",
           "Verifying Address on LIKKIM...":
@@ -3190,8 +3185,7 @@ i18n
           "Transaction Fee": "Гүйлгээний хураамж",
           Confirm: "Баталгаажуулах",
           "Transaction Confirmation": "Гүйлгээ баталгаажуулалт",
-          "Confirming Transaction on LIKKIM Device...":
-            "LIKKIM төхөөрөмж дээр гүйлгээг баталгаажуулж байна...",
+
           "Please confirm the transaction on your LIKKIM device.":
             "LIKKIM төхөөрөмж дээр гүйлгээг баталгаажуулна уу.",
           "Verifying Address on LIKKIM...":
@@ -3210,8 +3204,7 @@ i18n
             "โปรดถอนการติดตั้งแล้วติดตั้งแอปใหม่ในโทรศัพท์ของคุณเพื่อทำการลบข้อมูลแอป LIKKIM รวมถึงบัญชีและการตั้งค่า",
           "Value in USD": "มูลค่าในสกุลเงิน USD",
           Fee: "ค่าธรรมเนียม",
-          "Confirming Transaction on LIKKIM Device...":
-            "กำลังยืนยันธุรกรรมบนอุปกรณ์ LIKKIM...",
+
           "Please confirm the transaction on your LIKKIM device.":
             "โปรดยืนยันธุรกรรมบนอุปกรณ์ LIKKIM ของคุณ",
           "Verifying Address on LIKKIM...": "กำลังยืนยันที่อยู่บน LIKKIM...",
@@ -3420,8 +3413,7 @@ i18n
             "โปรดถอนการติดตั้งแล้วติดตั้งแอปใหม่ในโทรศัพท์ของคุณเพื่อทำการลบข้อมูลแอป LIKKIM รวมถึงบัญชีและการตั้งค่า",
           "Value in USD": "มูลค่าในสกุลเงิน USD",
           Fee: "ค่าธรรมเนียม",
-          "Confirming Transaction on LIKKIM Device...":
-            "กำลังยืนยันธุรกรรมบนอุปกรณ์ LIKKIM...",
+
           "Please confirm the transaction on your LIKKIM device.":
             "โปรดยืนยันธุรกรรมบนอุปกรณ์ LIKKIM ของคุณ",
           "Verifying Address on LIKKIM...": "กำลังยืนยันที่อยู่บน LIKKIM...",
@@ -3682,8 +3674,7 @@ i18n
           "Your wallet has been deleted successfully.":
             "Ваш гаманець був успішно видалений.",
           "Insufficient Balance": "Недостатньо коштів",
-          "Confirming Transaction on LIKKIM Device...":
-            "Підтвердження транзакції на пристрої LIKKIM...",
+
           "Please confirm the transaction on your LIKKIM device.":
             "Будь ласка, підтвердіть транзакцію на вашому пристрої LIKKIM.",
           Save: "Зберегти",
@@ -3847,8 +3838,7 @@ i18n
             "Vui lòng gỡ cài đặt rồi cài đặt lại ứng dụng trên điện thoại của bạn để xóa dữ liệu ứng dụng LIKKIM, bao gồm tài khoản và cài đặt.",
           "Value in USD": "Giá trị bằng USD",
           Fee: "Phí",
-          "Confirming Transaction on LIKKIM Device...":
-            "Đang xác nhận giao dịch trên thiết bị LIKKIM...",
+
           "Please confirm the transaction on your LIKKIM device.":
             "Vui lòng xác nhận giao dịch trên thiết bị LIKKIM của bạn.",
           "Verifying Address on LIKKIM...":
@@ -4117,8 +4107,7 @@ i18n
           "Your wallet has been deleted successfully.":
             "Dompet Anda telah dihapus dengan sukses.",
           "Insufficient Balance": "Saldo tidak cukup",
-          "Confirming Transaction on LIKKIM Device...":
-            "Mengonfirmasi transaksi pada perangkat LIKKIM...",
+
           "Please confirm the transaction on your LIKKIM device.":
             "Silakan konfirmasi transaksi pada perangkat LIKKIM Anda.",
           Save: "Simpan",
