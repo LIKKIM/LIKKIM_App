@@ -1,3 +1,6 @@
+import "dotenv/config";
+import mapKeys from "../../env/mapKeys";
+
 export default {
   owner: "secureteam", // ✅ 新 Expo 账号（避免使用曾被封账号）
   name: "Lukkey Vault", // ✅
@@ -39,18 +42,18 @@ export default {
     },
     supportsTablet: false,
     buildNumber: "16.3.3",
-    bundleIdentifier: "com.likkim.likkim",
-    icon: "./assets/icon.png",
+    bundleIdentifier: "com.likkim.likkim", //❌
+    icon: "./assets/icon.png", //❌
   },
   android: {
     runtimeVersion: "1.0.0",
     config: {
       googleMaps: {
-        apiKey: "AIzaSyAaLPaHuHj_vT7cHsA99HZeuAH_Z1p3Xbg",
+        apiKey: mapKeys.GOOGLE_MAPS_API_KEY,
       },
     },
     versionCode: 5,
-    package: "com.likkim.wallet",
+    package: "com.likkim.wallet", //❌
   },
   web: {
     favicon: "./assets/favicon.png",
