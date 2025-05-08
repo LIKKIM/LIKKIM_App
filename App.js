@@ -120,7 +120,7 @@ function AppContent({
   selectedCardName,
   setSelectedCardName,
 }) {
-  const { isAppLaunching } = useContext(DeviceContext);
+  const { isAppLaunching, cryptoCards } = useContext(DeviceContext);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   // Load dark mode value on mount
@@ -310,7 +310,10 @@ function AppContent({
             };
           }}
         />
-        <Tab.Screen name="Transactions" component={ActivityScreen} />
+        {cryptoCards.length > 0 && (
+          <Tab.Screen name="Transactions" component={ActivityScreen} />
+        )}
+
         <Tab.Screen name="General">
           {(props) => (
             <SecureDeviceScreen {...props} onDarkModeChange={refreshDarkMode} />

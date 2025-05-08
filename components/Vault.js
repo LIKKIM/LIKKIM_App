@@ -339,7 +339,7 @@ function VaultScreen({ route, navigation }) {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerTitle: () =>
-        !isModalVisible ? (
+        !isModalVisible && cryptoCards.length > 0 ? (
           <View
             style={{
               flexDirection: "row",
