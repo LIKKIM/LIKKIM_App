@@ -15,7 +15,7 @@ import {
   Button,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import Icon from "react-native-vector-icons/MaterialIcons";
+import { MaterialIcons as Icon } from "@expo/vector-icons";
 import { BlurView } from "expo-blur";
 import { BleManager, BleErrorCode } from "react-native-ble-plx";
 import Constants from "expo-constants";

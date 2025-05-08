@@ -19,7 +19,7 @@ import {
 } from "react-native";
 import { BlurView } from "expo-blur";
 import { LinearGradient } from "expo-linear-gradient";
-import Icon from "react-native-vector-icons/MaterialIcons";
+import { MaterialIcons as Icon } from "@expo/vector-icons";
 import AddressBookModal from "./../modal/AddressBookModal";
 import SecureDeviceScreenStyles from "../../styles/SecureDeviceScreenStyle";
 import { WebView } from "react-native-webview";

@@ -1,7 +1,7 @@
 // ActionButtons.js
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
-import Icon from "react-native-vector-icons/MaterialIcons";
+import { MaterialIcons as Icon } from "@expo/vector-icons";
 import Feather from "react-native-vector-icons/Feather";
 
 const ActionButtons = ({

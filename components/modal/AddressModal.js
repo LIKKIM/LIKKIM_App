@@ -9,7 +9,7 @@ import {
   Clipboard,
 } from "react-native";
 import { BlurView } from "expo-blur";
-import Icon from "react-native-vector-icons/MaterialIcons";
+import { MaterialIcons as Icon } from "@expo/vector-icons";
 import QRCode from "react-native-qrcode-svg";
 
 const AddressModal = ({

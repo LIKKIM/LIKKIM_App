@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TextInput, TouchableOpacity, Modal } from "react-native";
 import { BlurView } from "expo-blur";
-import Icon from "react-native-vector-icons/MaterialIcons";
+import { MaterialIcons as Icon } from "@expo/vector-icons";
 
 const ChangeLockCodeModal = ({
   visible,

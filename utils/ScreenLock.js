@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { DeviceContext, DarkModeContext } from "../utils/DeviceContext";
 import { useTranslation } from "react-i18next";
-import Icon from "react-native-vector-icons/MaterialIcons";
+import { MaterialIcons as Icon } from "@expo/vector-icons";
 import * as LocalAuthentication from "expo-local-authentication";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
