@@ -12,8 +12,7 @@ i18n
       en: {
         translation: {
           "Add Wallet": "Add Wallet",
-          "Create Wallet": "Create Wallet",
-          "Import Wallet": "Import Wallet",
+
           Close: "Close",
           "Value:": "Value:",
           "Delete Card": "Delete Card",
@@ -219,8 +218,7 @@ i18n
       zh: {
         translation: {
           "Add Wallet": "添加钱包",
-          "Create Wallet": "创建钱包",
-          "Import Wallet": "导入钱包",
+
           Close: "关闭",
           "Value:": "值:",
           "Delete Card": "删除卡片",
@@ -418,8 +416,7 @@ i18n
       "zh-TW": {
         translation: {
           "Add Wallet": "添加錢包",
-          "Create Wallet": "創建錢包",
-          "Import Wallet": "導入錢包",
+
           Close: "關閉",
           "Value:": "值:",
           "Delete Card": "刪除卡片",
@@ -623,8 +620,7 @@ i18n
       fr: {
         translation: {
           "Add Wallet": "Ajouter un portefeuille",
-          "Create Wallet": "Créer un portefeuille",
-          "Import Wallet": "Importer un portefeuille",
+
           Close: "Fermer",
           "Value:": "Valeur :",
           "Delete Card": "Supprimer la carte",
@@ -862,8 +858,7 @@ i18n
       es: {
         translation: {
           "Add Wallet": "Agregar billetera",
-          "Create Wallet": "Crear billetera",
-          "Import Wallet": "Importar billetera",
+
           Close: "Cerrar",
           "Value:": "Valor:",
           "Delete Card": "Eliminar tarjeta",
@@ -1076,8 +1071,7 @@ i18n
       ar: {
         translation: {
           "Add Wallet": "أضف محفظة",
-          "Create Wallet": "إنشاء محفظة",
-          "Import Wallet": "استيراد محفظة",
+
           Close: "إغلاق",
           "Value:": "القيمة:",
           "Delete Card": "حذف البطاقة",
@@ -1282,8 +1276,7 @@ i18n
       ja: {
         translation: {
           "Add Wallet": "ウォレットを追加",
-          "Create Wallet": "ウォレットを作成",
-          "Import Wallet": "ウォレットをインポート",
+
           Close: "閉じる",
           "Value:": "値:",
           "Delete Card": "カードを削除",
@@ -1515,8 +1508,7 @@ i18n
       ru: {
         translation: {
           "Add Wallet": "Добавить кошелек",
-          "Create Wallet": "Создать кошелек",
-          "Import Wallet": "Импортировать кошелек",
+
           Close: "Закрыть",
           "Value:": "Значение:",
           "Delete Card": "Удалить карту",
@@ -1728,8 +1720,7 @@ i18n
       ko: {
         translation: {
           "Add Wallet": "지갑 추가",
-          "Create Wallet": "지갑 만들기",
-          "Import Wallet": "지갑 가져오기",
+
           Close: "닫기",
           "Value:": "값:",
           "Delete Card": "카드 삭제",
@@ -1935,8 +1926,7 @@ i18n
       pt: {
         translation: {
           "Add Wallet": "Adicionar carteira",
-          "Create Wallet": "Criar carteira",
-          "Import Wallet": "Importar carteira",
+
           Close: "Fechar",
           "Value:": "Valor:",
           "Delete Card": "Excluir cartão",
@@ -2148,8 +2138,7 @@ i18n
       "pt-BR": {
         translation: {
           "Add Wallet": "Adicionar carteira",
-          "Create Wallet": "Criar carteira",
-          "Import Wallet": "Importar carteira",
+
           Close: "Fechar",
           "Value:": "Valor:",
           "Delete Card": "Excluir cartão",
@@ -2378,8 +2367,7 @@ i18n
       it: {
         translation: {
           "Add Wallet": "Aggiungi portafoglio",
-          "Create Wallet": "Crea portafoglio",
-          "Import Wallet": "Importa portafoglio",
+
           Close: "Chiudi",
           "Value:": "Valore:",
           "Delete Card": "Elimina carta",
@@ -2594,8 +2582,7 @@ i18n
       de: {
         translation: {
           "Add Wallet": "Brieftasche hinzufügen",
-          "Create Wallet": "Brieftasche erstellen",
-          "Import Wallet": "Brieftasche importieren",
+
           Close: "Schließen",
           "Value:": "Wert:",
           "Delete Card": "Karte löschen",
@@ -2811,8 +2798,7 @@ i18n
       hi: {
         translation: {
           "Add Wallet": "वॉलेट जोड़ें",
-          "Create Wallet": "वॉलेट बनाएँ",
-          "Import Wallet": "वॉलेट आयात करें",
+
           Close: "बंद करें",
           "Value:": "मूल्य:",
           "Delete Card": "कार्ड हटाएं",
@@ -3026,8 +3012,7 @@ i18n
       mn: {
         translation: {
           "Add Wallet": "Хэтэвч нэмэх",
-          "Create Wallet": "Хэтэвч үүсгэх",
-          "Import Wallet": "Хэтэвч импортлох",
+
           Close: "Хаах",
           "Value:": "Үнэ цэнэ:",
           "Delete Card": "Карт устгах",
@@ -3248,8 +3233,7 @@ i18n
       th: {
         translation: {
           "Add Wallet": "เพิ่มกระเป๋าเงิน",
-          "Create Wallet": "สร้างกระเป๋าเงิน",
-          "Import Wallet": "นำเข้ากระเป๋าเงิน",
+
           Close: "ปิด",
           "Value:": "มูลค่า:",
           "Delete Card": "ลบการ์ด",
@@ -3454,8 +3438,7 @@ i18n
       uk: {
         translation: {
           "Add Wallet": "Додати гаманець",
-          "Create Wallet": "Створити гаманець",
-          "Import Wallet": "Імпортувати гаманець",
+
           Close: "Закрити",
           "Value:": "Значення:",
           "Delete Card": "Видалити картку",
@@ -3665,8 +3648,7 @@ i18n
       vi: {
         translation: {
           "Add Wallet": "Thêm Ví",
-          "Create Wallet": "Tạo Ví",
-          "Import Wallet": "Nhập Ví",
+
           Close: "Đóng",
           "Value:": "Giá trị:",
           "Delete Card": "Xóa Thẻ",
@@ -3879,8 +3861,7 @@ i18n
       id: {
         translation: {
           "Add Wallet": "Tambah Dompet",
-          "Create Wallet": "Buat Dompet",
-          "Import Wallet": "Impor Dompet",
+
           Close: "Tutup",
           "Value:": "Nilai:",
           "Delete Card": "Hapus Kartu",
@@ -4093,8 +4074,7 @@ i18n
       tl: {
         translation: {
           "Add Wallet": "Magdagdag ng Wallet",
-          "Create Wallet": "Lumikha ng Wallet",
-          "Import Wallet": "Mag-import ng Wallet",
+
           Close: "Isara",
           "Value:": "Halaga:",
           "Delete Card": "Tanggalin ang Card",
@@ -4310,8 +4290,7 @@ i18n
       bn: {
         translation: {
           "Add Wallet": "ওয়ালেট যোগ করুন",
-          "Create Wallet": "ওয়ালেট তৈরি করুন",
-          "Import Wallet": "ওয়ালেট আমদানি করুন",
+
           Close: "বন্ধ করুন",
           "Value:": "মান:",
           "Delete Card": "কার্ড মুছুন",
