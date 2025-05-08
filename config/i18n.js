@@ -69,8 +69,7 @@ i18n
           "Recovery Phrase": "Recovery Phrase",
           "Read the following, then save the phrase securely.":
             "Read the following, then save the phrase securely.",
-          "The recovery phrase alone gives you full access to your wallets and funds.":
-            "The recovery phrase alone gives you full access to your wallets and funds.",
+
           "If you forget your password, you can use the recovery phrase to get back into your wallet.":
             "If you forget your password, you can use the recovery phrase to get back into your wallet.",
           "LIKKIM will never ask for your recovery phrase.":
@@ -273,8 +272,7 @@ i18n
           "Recovery Phrase": "恢复短语",
           "Read the following, then save the phrase securely.":
             "请阅读以下内容，然后安全地保存恢复短语。",
-          "The recovery phrase alone gives you full access to your wallets and funds.":
-            "恢复短语可完全访问您的钱包和资金。",
+
           "If you forget your password, you can use the recovery phrase to get back into your wallet.":
             "如果您忘记密码，可以使用恢复短语重新进入您的钱包。",
           "LIKKIM will never ask for your recovery phrase.":
@@ -470,8 +468,7 @@ i18n
           "Recovery Phrase": "恢復短語",
           "Read the following, then save the phrase securely.":
             "請閱讀以下內容，然後安全地保存恢復短語。",
-          "The recovery phrase alone gives you full access to your wallets and funds.":
-            "恢復短語可完全訪問您的錢包和資金。",
+
           "If you forget your password, you can use the recovery phrase to get back into your wallet.":
             "如果您忘記密碼，可以使用恢復短語重新進入您的錢包。",
           "LIKKIM will never ask for your recovery phrase.":
@@ -681,8 +678,7 @@ i18n
           "Recovery Phrase": "Phrase de récupération",
           "Read the following, then save the phrase securely.":
             "Lisez ce qui suit, puis enregistrez la phrase en toute sécurité.",
-          "The recovery phrase alone gives you full access to your wallets and funds.":
-            "La phrase de récupération seule vous donne un accès complet à vos portefeuilles et fonds.",
+
           "If you forget your password, you can use the recovery phrase to get back into your wallet.":
             "Si vous oubliez votre mot de passe, vous pouvez utiliser la phrase de récupération pour revenir dans votre portefeuille.",
           "LIKKIM will never ask for your recovery phrase.":
@@ -919,8 +915,7 @@ i18n
           "Recovery Phrase": "Frase de recuperación",
           "Read the following, then save the phrase securely.":
             "Lea lo siguiente, luego guarde la frase de forma segura.",
-          "The recovery phrase alone gives you full access to your wallets and funds.":
-            "La frase de recuperación sola le da acceso completo a sus billeteras y fondos.",
+
           "If you forget your password, you can use the recovery phrase to get back into your wallet.":
             "Si olvida su contraseña, puede usar la frase de recuperación para volver a entrar en su billetera.",
           "LIKKIM will never ask for your recovery phrase.":
@@ -1128,8 +1123,7 @@ i18n
           "Recovery Phrase": "عبارة الاسترداد",
           "Read the following, then save the phrase securely.":
             "اقرأ ما يلي ، ثم احفظ العبارة بأمان.",
-          "The recovery phrase alone gives you full access to your wallets and funds.":
-            "تمنحك عبارة الاسترداد وحدها الوصول الكامل إلى محافظك وأموالك.",
+
           "If you forget your password, you can use the recovery phrase to get back into your wallet.":
             "إذا نسيت كلمة المرور الخاصة بك ، يمكنك استخدام عبارة الاسترداد للعودة إلى محفظتك.",
           "LIKKIM will never ask for your recovery phrase.":
@@ -1337,8 +1331,7 @@ i18n
           "Recovery Phrase": "リカバリーフレーズ",
           "Read the following, then save the phrase securely.":
             "以下を読んでからフレーズを安全に保存してください。",
-          "The recovery phrase alone gives you full access to your wallets and funds.":
-            "リカバリーフレーズだけであなたのウォレットと資金に完全にアクセスできます。",
+
           "If you forget your password, you can use the recovery phrase to get back into your wallet.":
             "パスワードを忘れた場合は、リカバリーフレーズを使用してウォレットに戻ることができます。",
           "LIKKIM will never ask for your recovery phrase.":
@@ -1569,8 +1562,7 @@ i18n
           "Recovery Phrase": "Фраза восстановления",
           "Read the following, then save the phrase securely.":
             "Прочитайте следующее, затем сохраните фразу надежно.",
-          "The recovery phrase alone gives you full access to your wallets and funds.":
-            "Фраза восстановления дает полный доступ к вашим кошелькам и средствам.",
+
           "If you forget your password, you can use the recovery phrase to get back into your wallet.":
             "Если вы забудете свой пароль, вы можете использовать фразу восстановления для доступа к своему кошельку.",
           "LIKKIM will never ask for your recovery phrase.":
@@ -1778,8 +1770,7 @@ i18n
           "Recovery Phrase": "복구 구문",
           "Read the following, then save the phrase securely.":
             "다음을 읽고 구문을 안전하게 저장하세요.",
-          "The recovery phrase alone gives you full access to your wallets and funds.":
-            "복구 구문만으로도 지갑과 자금에 완전히 액세스할 수 있습니다.",
+
           "If you forget your password, you can use the recovery phrase to get back into your wallet.":
             "비밀번호를 잊어버린 경우 복구 구문을 사용하여 지갑에 다시 액세스할 수 있습니다.",
           "LIKKIM will never ask for your recovery phrase.":
@@ -1987,8 +1978,7 @@ i18n
           "Recovery Phrase": "Frase de recuperação",
           "Read the following, then save the phrase securely.":
             "Leia o seguinte e salve a frase com segurança.",
-          "The recovery phrase alone gives you full access to your wallets and funds.":
-            "A frase de recuperação sozinha dá-lhe acesso total às suas carteiras e fundos.",
+
           "If you forget your password, you can use the recovery phrase to get back into your wallet.":
             "Se você esquecer sua senha, pode usar a frase de recuperação para voltar à sua carteira.",
           "LIKKIM will never ask for your recovery phrase.":
@@ -2200,8 +2190,7 @@ i18n
           "Recovery Phrase": "Frase de recuperação",
           "Read the following, then save the phrase securely.":
             "Leia o seguinte e salve a frase com segurança.",
-          "The recovery phrase alone gives you full access to your wallets and funds.":
-            "A frase de recuperação sozinha dá-lhe acesso total às suas carteiras e fundos.",
+
           "If you forget your password, you can use the recovery phrase to get back into your wallet.":
             "Se você esquecer sua senha, pode usar a frase de recuperação para voltar à sua carteira.",
           "LIKKIM will never ask for your recovery phrase.":
@@ -2429,8 +2418,7 @@ i18n
           "Recovery Phrase": "Frase di recupero",
           "Read the following, then save the phrase securely.":
             "Leggi quanto segue, quindi salva la frase in modo sicuro.",
-          "The recovery phrase alone gives you full access to your wallets and funds.":
-            "La frase di recupero da sola ti dà pieno accesso ai tuoi portafogli e fondi.",
+
           "If you forget your password, you can use the recovery phrase to get back into your wallet.":
             "Se dimentichi la tua password, puoi utilizzare la frase di recupero per rientrare nel tuo portafoglio.",
           "LIKKIM will never ask for your recovery phrase.":
@@ -2644,8 +2632,7 @@ i18n
           "Recovery Phrase": "Wiederherstellungsphrase",
           "Read the following, then save the phrase securely.":
             "Lesen Sie das Folgende und speichern Sie die Phrase sicher.",
-          "The recovery phrase alone gives you full access to your wallets and funds.":
-            "Die Wiederherstellungsphrase allein gibt Ihnen vollen Zugriff auf Ihre Wallets und Gelder.",
+
           "If you forget your password, you can use the recovery phrase to get back into your wallet.":
             "Wenn Sie Ihr Passwort vergessen, können Sie die Wiederherstellungsphrase verwenden, um wieder auf Ihre Wallet zuzugreifen.",
           "LIKKIM will never ask for your recovery phrase.":
@@ -2859,8 +2846,6 @@ i18n
           "Recovery Phrase": "रिकवरी वाक्यांश",
           "Read the following, then save the phrase securely.":
             "निम्नलिखित पढ़ें, फिर वाक्यांश को सुरक्षित रूप से सहेजें।",
-          "The recovery phrase alone gives you full access to your wallets and funds.":
-            "रिकवरी वाक्यांश अकेले आपको आपके वॉलेट और फंड तक पूरी पहुंच प्रदान करता है।",
           "If you forget your password, you can use the recovery phrase to get back into your wallet.":
             "यदि आप अपना पासवर्ड भूल जाते हैं, तो आप अपने वॉलेट में वापस आने के लिए रिकवरी वाक्यांश का उपयोग कर सकते हैं।",
           "LIKKIM will never ask for your recovery phrase.":
@@ -3072,8 +3057,7 @@ i18n
           "Recovery Phrase": "Сэргээх үг",
           "Read the following, then save the phrase securely.":
             "Дараахыг уншаад үгээ аюулгүй хадгална уу.",
-          "The recovery phrase alone gives you full access to your wallets and funds.":
-            "Сэргээх үг дангаараа таны түрийвч болон хөрөнгөд бүрэн нэвтрэх боломжийг олгоно.",
+
           "If you forget your password, you can use the recovery phrase to get back into your wallet.":
             "Хэрэв та нууц үгээ мартсан бол сэргээх үгийг ашиглан түрийвчээ дахин ашиглаж болно.",
           "LIKKIM will never ask for your recovery phrase.":
@@ -3290,8 +3274,7 @@ i18n
           "Recovery Phrase": "วลีการกู้คืน",
           "Read the following, then save the phrase securely.":
             "อ่านข้อความต่อไปนี้ จากนั้นบันทึกวลีไว้อย่างปลอดภัย",
-          "The recovery phrase alone gives you full access to your wallets and funds.":
-            "วลีการกู้คืนจะทำให้คุณสามารถเข้าถึงกระเป๋าเงินและเงินทุนของคุณได้อย่างสมบูรณ์",
+
           "If you forget your password, you can use the recovery phrase to get back into your wallet.":
             "หากคุณลืมรหัสผ่าน คุณสามารถใช้วลีการกู้คืนเพื่อกลับเข้าสู่กระเป๋าเงินของคุณได้",
           "LIKKIM will never ask for your recovery phrase.":
@@ -3499,8 +3482,7 @@ i18n
           "Recovery Phrase": "Фраза відновлення",
           "Read the following, then save the phrase securely.":
             "Прочитайте наступне, а потім надійно збережіть фразу.",
-          "The recovery phrase alone gives you full access to your wallets and funds.":
-            "Фраза відновлення надає вам повний доступ до ваших гаманців та коштів.",
+
           "If you forget your password, you can use the recovery phrase to get back into your wallet.":
             "Якщо ви забудете свій пароль, ви можете скористатися фразою відновлення, щоб повернутися до свого гаманця.",
           "LIKKIM will never ask for your recovery phrase.":
@@ -3707,8 +3689,7 @@ i18n
           "Recovery Phrase": "Cụm từ khôi phục",
           "Read the following, then save the phrase securely.":
             "Đọc phần sau, sau đó lưu cụm từ một cách an toàn.",
-          "The recovery phrase alone gives you full access to your wallets and funds.":
-            "Cụm từ khôi phục duy nhất cho phép bạn truy cập đầy đủ vào ví và tiền của mình.",
+
           "If you forget your password, you can use the recovery phrase to get back into your wallet.":
             "Nếu bạn quên mật khẩu, bạn có thể sử dụng cụm từ khôi phục để quay lại ví của mình.",
           "LIKKIM will never ask for your recovery phrase.":
@@ -3921,8 +3902,7 @@ i18n
           "Recovery Phrase": "Frasa pemulihan",
           "Read the following, then save the phrase securely.":
             "Baca yang berikut, lalu simpan frasa dengan aman.",
-          "The recovery phrase alone gives you full access to your wallets and funds.":
-            "Frasa pemulihan saja memberi Anda akses penuh ke dompet dan dana Anda.",
+
           "If you forget your password, you can use the recovery phrase to get back into your wallet.":
             "Jika Anda lupa kata sandi, Anda dapat menggunakan frasa pemulihan untuk kembali ke dompet Anda.",
           "LIKKIM will never ask for your recovery phrase.":
@@ -4133,8 +4113,7 @@ i18n
           "Recovery Phrase": "Parirala ng pagbawi",
           "Read the following, then save the phrase securely.":
             "Basahin ang sumusunod, pagkatapos ay i-save ang parirala nang ligtas.",
-          "The recovery phrase alone gives you full access to your wallets and funds.":
-            "Ang parirala ng pagbawi lamang ay nagbibigay sa iyo ng buong access sa iyong mga wallet at pondo.",
+
           "If you forget your password, you can use the recovery phrase to get back into your wallet.":
             "Kung nakalimutan mo ang iyong password, maaari mong gamitin ang parirala ng pagbawi upang makabalik sa iyong wallet.",
           "LIKKIM will never ask for your recovery phrase.":
@@ -4350,8 +4329,7 @@ i18n
           "Recovery Phrase": "পুনরুদ্ধার বাক্যাংশ",
           "Read the following, then save the phrase securely.":
             "নীচেরটি পড়ুন, তারপরে বাক্যাংশটি নিরাপদে সংরক্ষণ করুন।",
-          "The recovery phrase alone gives you full access to your wallets and funds.":
-            "পুনরুদ্ধার বাক্যাংশ আপনাকে আপনার ওয়ালেট এবং তহবিলে সম্পূর্ণ অ্যাক্সেস দেয়।",
+
           "If you forget your password, you can use the recovery phrase to get back into your wallet.":
             "আপনি যদি আপনার পাসওয়ার্ড ভুলে যান, আপনি আপনার ওয়ালেটে ফিরে যেতে পুনরুদ্ধার বাক্যাংশ ব্যবহার করতে পারেন।",
           "LIKKIM will never ask for your recovery phrase.":
