@@ -409,7 +409,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
 
   useEffect(() => {
     navigation.setOptions({
-      headerTitle: t("My Cold Wallet"),
+      headerTitle: t("General"),
     });
   }, [t, navigation]);
 

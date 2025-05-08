@@ -221,7 +221,7 @@ function AppContent({
               iconName = "account-balance-wallet";
             } else if (route.name === "Transactions") {
               iconName = "swap-horiz";
-            } else if (route.name === "My Cold Wallet") {
+            } else if (route.name === "General") {
               iconName = "smartphone";
             }
             return (
@@ -238,8 +238,7 @@ function AppContent({
             let label;
             if (route.name === "Wallet") label = t("Wallet");
             else if (route.name === "Transactions") label = t("Transactions");
-            else if (route.name === "My Cold Wallet")
-              label = t("My Cold Wallet");
+            else if (route.name === "General") label = t("General");
             return (
               <Text
                 style={{
@@ -312,7 +311,7 @@ function AppContent({
           }}
         />
         <Tab.Screen name="Transactions" component={ActivityScreen} />
-        <Tab.Screen name="My Cold Wallet">
+        <Tab.Screen name="General">
           {(props) => (
             <SecureDeviceScreen {...props} onDarkModeChange={refreshDarkMode} />
           )}
