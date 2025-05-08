@@ -69,8 +69,7 @@ i18n
           "Recovery Phrase": "Recovery Phrase",
           "Read the following, then save the phrase securely.":
             "Read the following, then save the phrase securely.",
-  
-            "You must select all 12 words before you can proceed.",
+
           "Verify and I've Saved the Phrase":
             "Verify and I've Saved the Phrase",
           "Creating your wallet": "Creating your wallet",
@@ -266,8 +265,7 @@ i18n
           "Recovery Phrase": "恢复短语",
           "Read the following, then save the phrase securely.":
             "请阅读以下内容，然后安全地保存恢复短语。",
- 
- 
+
           "Verify and I've Saved the Phrase": "验证并且我已保存短语",
           "Creating your wallet": "创建你的钱包",
           "Generating your accounts": "生成你的账户",
@@ -457,7 +455,6 @@ i18n
           "Read the following, then save the phrase securely.":
             "請閱讀以下內容，然後安全地保存恢復短語。",
 
- 
           "Verify and I've Saved the Phrase": "驗證並且我已保存短語",
           "Creating your wallet": "創建你的錢包",
           "Generating your accounts": "生成你的帳戶",
@@ -660,8 +657,7 @@ i18n
           "Recovery Phrase": "Phrase de récupération",
           "Read the following, then save the phrase securely.":
             "Lisez ce qui suit, puis enregistrez la phrase en toute sécurité.",
- 
-         
+
           "Verify and I've Saved the Phrase":
             "Vérifiez et j'ai sauvegardé la phrase",
           "Creating your wallet": "Création de votre portefeuille",
@@ -891,8 +887,7 @@ i18n
           "Recovery Phrase": "Frase de recuperación",
           "Read the following, then save the phrase securely.":
             "Lea lo siguiente, luego guarde la frase de forma segura.",
- 
- 
+
           "Verify and I've Saved the Phrase":
             "Verificar y he guardado la frase",
           "Creating your wallet": "Creando tu billetera",
@@ -1093,8 +1088,7 @@ i18n
           "Recovery Phrase": "عبارة الاسترداد",
           "Read the following, then save the phrase securely.":
             "اقرأ ما يلي ، ثم احفظ العبارة بأمان.",
- 
-       
+
           "Verify and I've Saved the Phrase": "تحقق وقد قمت بحفظ العبارة",
           "Creating your wallet": "إنشاء محفظتك",
           "Generating your accounts": "إنشاء حساباتك",
@@ -1296,8 +1290,6 @@ i18n
           "Read the following, then save the phrase securely.":
             "以下を読んでからフレーズを安全に保存してください。",
 
-    
-         
           "Verify and I've Saved the Phrase": "確認してフレーズを保存しました",
           "Creating your wallet": "ウォレットを作成中",
           "Generating your accounts": "アカウントを生成中",
@@ -1522,8 +1514,6 @@ i18n
           "Read the following, then save the phrase securely.":
             "Прочитайте следующее, затем сохраните фразу надежно.",
 
-    
-          
           "Verify and I've Saved the Phrase": "Проверить и я сохранил фразу",
           "Creating your wallet": "Создание вашего кошелька",
           "Generating your accounts": "Создание ваших аккаунтов",
@@ -1725,8 +1715,6 @@ i18n
           "Read the following, then save the phrase securely.":
             "다음을 읽고 구문을 안전하게 저장하세요.",
 
-          
-       
           "Verify and I've Saved the Phrase": "확인하고 구문을 저장했습니다",
           "Creating your wallet": "지갑 생성 중",
           "Generating your accounts": "계정 생성 중",
@@ -1928,8 +1916,6 @@ i18n
           "Read the following, then save the phrase securely.":
             "Leia o seguinte e salve a frase com segurança.",
 
- 
-         
           "Verify and I've Saved the Phrase": "Verifique e eu salvei a frase",
           "Creating your wallet": "Criando sua carteira",
           "Generating your accounts": "Gerando suas contas",
@@ -2134,8 +2120,7 @@ i18n
           "Recovery Phrase": "Frase de recuperação",
           "Read the following, then save the phrase securely.":
             "Leia o seguinte e salve a frase com segurança.",
- 
-          
+
           "Verify and I've Saved the Phrase": "Verifique e eu salvei a frase",
           "Creating your wallet": "Criando sua carteira",
           "Generating your accounts": "Gerando suas contas",
@@ -2356,8 +2341,7 @@ i18n
           "Recovery Phrase": "Frase di recupero",
           "Read the following, then save the phrase securely.":
             "Leggi quanto segue, quindi salva la frase in modo sicuro.",
- 
-       
+
           "Verify and I've Saved the Phrase": "Verifica e ho salvato la frase",
           "Creating your wallet": "Creazione del tuo portafoglio",
           "Generating your accounts": "Generazione dei tuoi account",
@@ -2564,8 +2548,7 @@ i18n
           "Recovery Phrase": "Wiederherstellungsphrase",
           "Read the following, then save the phrase securely.":
             "Lesen Sie das Folgende und speichern Sie die Phrase sicher.",
- 
-          
+
           "Verify and I've Saved the Phrase":
             "Überprüfen und ich habe die Phrase gespeichert",
           "Creating your wallet": "Erstellen Ihrer Brieftasche",
@@ -2772,8 +2755,7 @@ i18n
           "Recovery Phrase": "रिकवरी वाक्यांश",
           "Read the following, then save the phrase securely.":
             "निम्नलिखित पढ़ें, फिर वाक्यांश को सुरक्षित रूप से सहेजें।",
- 
-          
+
           "Verify and I've Saved the Phrase":
             "सत्यापित करें और मैंने वाक्यांश सहेज लिया है",
           "Creating your wallet": "आपका वॉलेट बना रहा है",
@@ -2979,8 +2961,6 @@ i18n
           "Read the following, then save the phrase securely.":
             "Дараахыг уншаад үгээ аюулгүй хадгална уу.",
 
- 
-         
           "Verify and I've Saved the Phrase":
             "Баталгаажуулж, би үгийг хадгалсан",
           "Creating your wallet": "Таны түрийвчийг үүсгэж байна",
@@ -3190,8 +3170,7 @@ i18n
           "Recovery Phrase": "วลีการกู้คืน",
           "Read the following, then save the phrase securely.":
             "อ่านข้อความต่อไปนี้ จากนั้นบันทึกวลีไว้อย่างปลอดภัย",
- 
- 
+
           "Verify and I've Saved the Phrase": "ตรวจสอบและฉันได้บันทึกวลีแล้ว",
           "Creating your wallet": "กำลังสร้างกระเป๋าเงินของคุณ",
           "Generating your accounts": "กำลังสร้างบัญชีของคุณ",
@@ -3393,8 +3372,6 @@ i18n
           "Read the following, then save the phrase securely.":
             "Прочитайте наступне, а потім надійно збережіть фразу.",
 
- 
-         
           "Verify and I've Saved the Phrase": "Підтвердьте, і я зберіг фразу",
           "Creating your wallet": "Створення вашого гаманця",
           "Generating your accounts": "Створення ваших облікових записів",
@@ -3594,8 +3571,7 @@ i18n
           "Recovery Phrase": "Cụm từ khôi phục",
           "Read the following, then save the phrase securely.":
             "Đọc phần sau, sau đó lưu cụm từ một cách an toàn.",
- 
- 
+
           "Verify and I've Saved the Phrase": "Xác nhận và tôi đã lưu cụm từ",
           "Creating your wallet": "Đang tạo ví của bạn",
           "Generating your accounts": "Đang tạo tài khoản của bạn",
@@ -3800,8 +3776,7 @@ i18n
           "Recovery Phrase": "Frasa pemulihan",
           "Read the following, then save the phrase securely.":
             "Baca yang berikut, lalu simpan frasa dengan aman.",
- 
- 
+
           "Verify and I've Saved the Phrase":
             "Verifikasi dan saya telah menyimpan frasa",
           "Creating your wallet": "Membuat dompet Anda",
@@ -4005,8 +3980,6 @@ i18n
           "Read the following, then save the phrase securely.":
             "Basahin ang sumusunod, pagkatapos ay i-save ang parirala nang ligtas.",
 
- 
-    
           "Verify and I've Saved the Phrase":
             "I-verify at nai-save ko ang parirala",
           "Creating your wallet": "Gumagawa ng iyong wallet",
@@ -4215,8 +4188,6 @@ i18n
           "Read the following, then save the phrase securely.":
             "নীচেরটি পড়ুন, তারপরে বাক্যাংশটি নিরাপদে সংরক্ষণ করুন।",
 
-   
-       
           "Verify and I've Saved the Phrase":
             "যাচাই করুন এবং আমি বাক্যাংশটি সংরক্ষণ করেছি",
           "Creating your wallet": "আপনার ওয়ালেট তৈরি করা হচ্ছে",
