@@ -18,7 +18,7 @@ import {
 import ChainSelectionModal from "../modal/ChainSelectionModal"; // 导入 ChainSelectionModal
 import TransactionChainFilterModal from "../modal/TransactionChainFilterModal";
 
-const ActivityLog = ({
+const ActivityLogComponent = ({
   ActivityScreenStyle,
   t,
   ActivityLog,
@@ -512,4 +512,4 @@ const ActivityLog = ({
   );
 };
 
-export default ActivityLog;
+export default ActivityLogComponent;

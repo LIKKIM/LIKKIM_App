@@ -43,7 +43,7 @@ import SelectCryptoModal from "./modal/SelectCryptoModal";
 import SwapModal from "./modal/SwapModal";
 import ShowReceiveInfoModal from "./modal/ShowReceiveInfoModal";
 import SecurityCodeModal from "./modal/SecurityCodeModal";
-import ActivityLog from "./ActivityScreen/ActivityLog";
+import ActivityLogComponent from "./ActivityScreen/ActivityLogComponent";
 import ActionButtons from "./ActivityScreen/ActionButtons";
 // 自定义组件
 import displayDeviceAddress from "../utils/displayDeviceAddress";
@@ -1606,7 +1606,7 @@ function ActivityScreen() {
           handleSwapPress={handleSwapPress}
         />
         {/* 交易历史记录组件 */}
-        <ActivityLog
+        <ActivityLogComponent
           ActivityScreenStyle={ActivityScreenStyle}
           t={t}
           ActivityLog={ActivityLog}
