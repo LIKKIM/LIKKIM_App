@@ -29,12 +29,12 @@ const TabModal = ({
   darkColorsDown,
   lightColorsDown,
 }) => {
-  const [transactionHistory, setTransactionHistory] = useState([]);
+  const [ActivityLog, setActivityLog] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedTransaction, setSelectedTransaction] = useState(null);
 
   useEffect(() => {
-    const fetchTransactionHistory = async () => {
+    const fetchActivityLog = async () => {
       if (selectedCrypto && activeTab === "History") {
         try {
           const response = await fetch(walletAPI.queryTransaction, {
@@ -56,7 +56,7 @@ const TabModal = ({
             console.log(
               `Tab页行情数据API Error: HTTP status: ${response.status}, Message: ${data.msg}`
             );
-            setTransactionHistory([]);
+            setActivityLog([]);
           } else {
             const enhancedData = data.data.map((transaction) => ({
               ...transaction,
@@ -73,22 +73,19 @@ const TabModal = ({
               transactionTime: transaction.transactionTime,
             }));
 
-            setTransactionHistory(enhancedData);
-            AsyncStorage.setItem(
-              "transactionHistory",
-              JSON.stringify(enhancedData)
-            );
+            setActivityLog(enhancedData);
+            AsyncStorage.setItem("ActivityLog", JSON.stringify(enhancedData));
           }
         } catch (error) {
           console.error(
             `Failed to fetch transaction history: ${error.message}`
           );
-          setTransactionHistory([]);
+          setActivityLog([]);
         }
       }
     };
 
-    fetchTransactionHistory();
+    fetchActivityLog();
   }, [selectedCrypto, activeTab]);
 
   const openTransactionModal = (transaction) => {
@@ -118,7 +115,7 @@ const TabModal = ({
               }}
             >
               <ScrollView style={VaultScreenStyle.historyList}>
-                {transactionHistory.length === 0 ? (
+                {ActivityLog.length === 0 ? (
                   <View
                     style={{
                       height: 280,
@@ -131,84 +128,82 @@ const TabModal = ({
                     </Text>
                   </View>
                 ) : (
-                  transactionHistory
-                    .filter((transaction) => {
-                      const amount = parseFloat(transaction.amount);
-                      return !isNaN(amount) && amount !== 0;
-                    })
-                    .map((transaction, index) => {
-                      return (
-                        <TouchableOpacity
-                          key={index}
-                          onPress={() => openTransactionModal(transaction)}
+                  ActivityLog.filter((transaction) => {
+                    const amount = parseFloat(transaction.amount);
+                    return !isNaN(amount) && amount !== 0;
+                  }).map((transaction, index) => {
+                    return (
+                      <TouchableOpacity
+                        key={index}
+                        onPress={() => openTransactionModal(transaction)}
+                      >
+                        <View
+                          style={[
+                            {
+                              backgroundColor:
+                                transaction.state.toLowerCase() === "success"
+                                  ? "rgba(71, 180, 128, 0.05)"
+                                  : "rgba(210, 70, 75, 0.05)",
+                              borderLeftWidth: 3,
+                              borderLeftColor:
+                                transaction.state.toLowerCase() === "success"
+                                  ? "#47B480"
+                                  : "#D2464B",
+                              marginVertical: 4,
+                              padding: 10,
+                            },
+                          ]}
                         >
+                          <Text style={VaultScreenStyle.historyItemText}>
+                            {`${new Date(
+                              Number(transaction.transactionTime)
+                            ).toLocaleString()}`}
+                          </Text>
+
                           <View
-                            style={[
-                              {
-                                backgroundColor:
-                                  transaction.state.toLowerCase() === "success"
-                                    ? "rgba(71, 180, 128, 0.05)"
-                                    : "rgba(210, 70, 75, 0.05)",
-                                borderLeftWidth: 3,
-                                borderLeftColor:
-                                  transaction.state.toLowerCase() === "success"
-                                    ? "#47B480"
-                                    : "#D2464B",
-                                marginVertical: 4,
-                                padding: 10,
-                              },
-                            ]}
+                            style={{
+                              flexDirection: "row",
+                              justifyContent: "space-between",
+                              alignItems: "center",
+                            }}
                           >
-                            <Text style={VaultScreenStyle.historyItemText}>
-                              {`${new Date(
-                                Number(transaction.transactionTime)
-                              ).toLocaleString()}`}
+                            <Text
+                              style={[
+                                VaultScreenStyle.historyItemText,
+                                { fontSize: 16, fontWeight: "bold" },
+                              ]}
+                            >
+                              {transaction.transactionType === "Send"
+                                ? t("Send")
+                                : t("Receive")}
+                              {"  "}
+                              <Text
+                                style={{
+                                  color:
+                                    transaction.state.toLowerCase() ===
+                                    "success"
+                                      ? "#47B480"
+                                      : "#D2464B",
+                                  fontWeight: "normal",
+                                }}
+                              >
+                                {transaction.state}
+                              </Text>
                             </Text>
 
-                            <View
-                              style={{
-                                flexDirection: "row",
-                                justifyContent: "space-between",
-                                alignItems: "center",
-                              }}
+                            <Text
+                              style={[
+                                VaultScreenStyle.historyItemText,
+                                { fontSize: 16, fontWeight: "bold" },
+                              ]}
                             >
-                              <Text
-                                style={[
-                                  VaultScreenStyle.historyItemText,
-                                  { fontSize: 16, fontWeight: "bold" },
-                                ]}
-                              >
-                                {transaction.transactionType === "Send"
-                                  ? t("Send")
-                                  : t("Receive")}
-                                {"  "}
-                                <Text
-                                  style={{
-                                    color:
-                                      transaction.state.toLowerCase() ===
-                                      "success"
-                                        ? "#47B480"
-                                        : "#D2464B",
-                                    fontWeight: "normal",
-                                  }}
-                                >
-                                  {transaction.state}
-                                </Text>
-                              </Text>
-
-                              <Text
-                                style={[
-                                  VaultScreenStyle.historyItemText,
-                                  { fontSize: 16, fontWeight: "bold" },
-                                ]}
-                              >
-                                {transaction.amount} {`${transaction.symbol}`}
-                              </Text>
-                            </View>
+                              {transaction.amount} {`${transaction.symbol}`}
+                            </Text>
                           </View>
-                        </TouchableOpacity>
-                      );
-                    })
+                        </View>
+                      </TouchableOpacity>
+                    );
+                  })
                 )}
               </ScrollView>
             </View>

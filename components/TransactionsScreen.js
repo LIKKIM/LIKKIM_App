@@ -43,7 +43,7 @@ import SelectCryptoModal from "./modal/SelectCryptoModal";
 import SwapModal from "./modal/SwapModal";
 import ShowReceiveInfoModal from "./modal/ShowReceiveInfoModal";
 import SecurityCodeModal from "./modal/SecurityCodeModal";
-import TransactionHistory from "./TransactionScreens/TransactionHistory";
+import ActivityLog from "./TransactionScreens/ActivityLog";
 import ActionButtons from "./TransactionScreens/ActionButtons";
 
 // 自定义组件
@@ -74,8 +74,8 @@ function TransactionsScreen() {
     setVerifiedDevices,
     cryptoCards,
     setCryptoCards,
-    transactionHistory,
-    setTransactionHistory,
+    ActivityLog,
+    setActivityLog,
     updateDevicePubHintKey,
   } = useContext(DeviceContext);
   const [isLoading, setIsLoading] = useState(true);
@@ -171,7 +171,7 @@ function TransactionsScreen() {
 
   const onRefresh = async () => {
     setRefreshing(true);
-    await fetchAllTransactionHistory(); // 调用获取交易历史的函数
+    await fetchAllActivityLog(); // 调用获取交易历史的函数
     setRefreshing(false);
   };
 
@@ -236,13 +236,13 @@ function TransactionsScreen() {
   }, [swapModalVisible]);
 
   useEffect(() => {
-    const loadTransactionHistory = async () => {
+    const loadActivityLog = async () => {
       setIsLoading(true);
       try {
-        const historyJson = await AsyncStorage.getItem("transactionHistory");
+        const historyJson = await AsyncStorage.getItem("ActivityLog");
         if (historyJson !== null) {
           const history = JSON.parse(historyJson);
-          setTransactionHistory(history);
+          setActivityLog(history);
         }
       } catch (error) {
         console.error(
@@ -253,11 +253,11 @@ function TransactionsScreen() {
       setIsLoading(false);
     };
 
-    loadTransactionHistory();
+    loadActivityLog();
   }, []);
 
   // 新增：获取所有卡片的交易历史记录（包含去重与分页处理）
-  const fetchAllTransactionHistory = async () => {
+  const fetchAllActivityLog = async () => {
     if (initialAdditionalCryptos && initialAdditionalCryptos.length > 0) {
       // 去重：确保每个 { queryChainName, address } 组合只处理一次
       const uniqueCryptos = initialAdditionalCryptos.filter(
@@ -329,7 +329,7 @@ function TransactionsScreen() {
       );
 
       if (mergedTransactions.length > 0) {
-        setTransactionHistory(mergedTransactions);
+        setActivityLog(mergedTransactions);
       } else {
         console.log("API 返回空数组，保留原有的交易记录");
       }
@@ -338,7 +338,7 @@ function TransactionsScreen() {
 
   // 使用 useEffect 在组件挂载或 initialAdditionalCryptos 变化时加载交易历史
   useEffect(() => {
-    fetchAllTransactionHistory();
+    fetchAllActivityLog();
   }, [initialAdditionalCryptos]);
 
   // 在 TransactionsScreen 组件的 useEffect 或合适位置添加代码来获取手续费
@@ -1607,10 +1607,10 @@ function TransactionsScreen() {
           handleSwapPress={handleSwapPress}
         />
         {/* 交易历史记录组件 */}
-        <TransactionHistory
+        <ActivityLog
           TransactionsScreenStyle={TransactionsScreenStyle}
           t={t}
-          transactionHistory={transactionHistory}
+          ActivityLog={ActivityLog}
           isLoading={isLoading}
           cryptoCards={cryptoCards}
           refreshing={refreshing}

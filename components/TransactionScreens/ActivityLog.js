@@ -18,10 +18,10 @@ import {
 import ChainSelectionModal from "../modal/ChainSelectionModal"; // 导入 ChainSelectionModal
 import TransactionChainFilterModal from "../modal/TransactionChainFilterModal";
 
-const TransactionHistory = ({
+const ActivityLog = ({
   TransactionsScreenStyle,
   t,
-  transactionHistory,
+  ActivityLog,
   isLoading,
   cryptoCards,
   refreshing,
@@ -33,40 +33,37 @@ const TransactionHistory = ({
   const [isChainFilterModalVisible, setChainFilterModalVisible] =
     useState(false);
 
-  // 根据 transactionHistory 计算每笔交易对应的链卡片
+  // 根据 ActivityLog 计算每笔交易对应的链卡片
   const transactionChainCards = useMemo(() => {
     const map = new Map();
     // 只遍历 amount > 0 的记录
-    transactionHistory
-      .filter((tx) => tx.amount > 0)
-      .forEach((tx) => {
-        const matchedItems = initialAdditionalCryptos.filter((item) => {
-          if (item.address.trim() === "Click the Verify Address Button") {
-            return (
-              item.shortName.trim().toLowerCase() ===
-              tx.symbol.trim().toLowerCase()
-            );
-          }
+    ActivityLog.filter((tx) => tx.amount > 0).forEach((tx) => {
+      const matchedItems = initialAdditionalCryptos.filter((item) => {
+        if (item.address.trim() === "Click the Verify Address Button") {
           return (
-            item.address.trim().toLowerCase() ===
-            tx.address.trim().toLowerCase()
+            item.shortName.trim().toLowerCase() ===
+            tx.symbol.trim().toLowerCase()
           );
-        });
-        if (matchedItems.length > 0) {
-          const card = matchedItems[0];
-          if (!map.has(card.chainShortName)) {
-            map.set(card.chainShortName, card);
-          }
         }
+        return (
+          item.address.trim().toLowerCase() === tx.address.trim().toLowerCase()
+        );
       });
+      if (matchedItems.length > 0) {
+        const card = matchedItems[0];
+        if (!map.has(card.chainShortName)) {
+          map.set(card.chainShortName, card);
+        }
+      }
+    });
     return Array.from(map.values());
-  }, [transactionHistory]);
+  }, [ActivityLog]);
 
   // 筛选出符合当前选择链的交易记录，剔除 amount 为 0 的交易记录
-  const filteredTransactionHistory =
+  const filteredActivityLog =
     selectedChain === "All"
-      ? transactionHistory.filter((tx) => tx.amount > 0) // Filter out transactions with amount 0
-      : transactionHistory.filter((transaction) => {
+      ? ActivityLog.filter((tx) => tx.amount > 0) // Filter out transactions with amount 0
+      : ActivityLog.filter((transaction) => {
           const matchedItems = initialAdditionalCryptos.filter((item) => {
             if (item.address.trim() === "Click the Verify Address Button") {
               return (
@@ -88,7 +85,7 @@ const TransactionHistory = ({
           return false;
         });
 
-  const shouldDisplayChainFilterModal = filteredTransactionHistory.length > 0;
+  const shouldDisplayChainFilterModal = filteredActivityLog.length > 0;
 
   return (
     <View style={TransactionsScreenStyle.historyContainer}>
@@ -170,9 +167,7 @@ const TransactionHistory = ({
         contentContainerStyle={{
           flexGrow: 1,
           justifyContent:
-            transactionHistory.length === 0 ||
-            cryptoCards.length === 0 ||
-            isLoading
+            ActivityLog.length === 0 || cryptoCards.length === 0 || isLoading
               ? "center"
               : "flex-start",
         }}
@@ -189,8 +184,7 @@ const TransactionHistory = ({
               {t("Loading...")}
             </Text>
           </View>
-        ) : filteredTransactionHistory.length === 0 ||
-          cryptoCards.length === 0 ? (
+        ) : filteredActivityLog.length === 0 || cryptoCards.length === 0 ? (
           <View
             style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
           >
@@ -200,7 +194,7 @@ const TransactionHistory = ({
           </View>
         ) : (
           cryptoCards.length > 0 &&
-          filteredTransactionHistory.map((transaction, index) => {
+          filteredActivityLog.map((transaction, index) => {
             const matchedItems = initialAdditionalCryptos.filter((item) => {
               if (item.address.trim() === "Click the Verify Address Button") {
                 return (
@@ -518,4 +512,4 @@ const TransactionHistory = ({
   );
 };
 
-export default TransactionHistory;
+export default ActivityLog;

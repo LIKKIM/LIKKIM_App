@@ -187,7 +187,7 @@ i18n
           "Permission denied, unable to access device location":
             "Permission denied, unable to access device location",
           "Last connected": "Last connected",
-          "Find My LIKKIM": "Find My LIKKIM",
+          "Secure Device Status": "Secure Device Status",
           "Wallet Management": "Wallet Management",
           "Delete Wallet": "Delete Wallet",
           Support: "Support",
@@ -389,7 +389,7 @@ i18n
           "Permission denied, unable to access device location":
             "权限被拒绝，无法访问设备位置",
           "Last connected": "最后连接",
-          "Find My LIKKIM": "查找我的LIKKIM",
+          "Secure Device Status": "安全设备状态",
           "Wallet Management": "钱包管理",
           "Delete Wallet": "删除钱包",
           Support: "帮助",
@@ -596,7 +596,7 @@ i18n
           "Permission denied, unable to access device location":
             "權限被拒絕，無法訪問設備位置",
           "Last connected": "最後連接",
-          "Find My LIKKIM": "尋找我的LIKKIM",
+          "Secure Device Status": "安全設備狀態",
           "Wallet Management": "錢包管理",
           "Delete Wallet": "刪除錢包",
           Support: "幫助",
@@ -837,7 +837,7 @@ i18n
           "Permission denied, unable to access device location":
             "Permission refusée, impossible d'accéder à l'emplacement de l'appareil",
           "Last connected": "Dernière connexion",
-          "Find My LIKKIM": "Trouvez mon LIKKIM",
+          "Secure Device Status": "État de l'appareil sécurisé",
           "Wallet Management": "Gestion du portefeuille",
           "Delete Wallet": "Supprimer le portefeuille",
           Support: "Assistance",
@@ -1054,7 +1054,7 @@ i18n
           "Permission denied, unable to access device location":
             "Permiso denegado, no se puede acceder a la ubicación del dispositivo",
           "Last connected": "Última conexión",
-          "Find My LIKKIM": "Encuentra mi LIKKIM",
+          "Secure Device Status": "Estado del dispositivo seguro",
           "Wallet Management": "Gestión de cartera",
           "Delete Wallet": "Eliminar cartera",
           Support: "Soporte",
@@ -1264,7 +1264,7 @@ i18n
           "Permission denied, unable to access device location":
             "تم رفض الإذن، غير قادر على الوصول إلى موقع الجهاز",
           "Last connected": "آخر اتصال",
-          "Find My LIKKIM": "ابحث عن LIKKIM الخاص بي",
+          "Secure Device Status": "حالة الجهاز الآمن",
           "Wallet Management": "إدارة المحفظة",
           "Delete Wallet": "حذف المحفظة",
           Support: "الدعم",
@@ -1500,7 +1500,7 @@ i18n
           "Permission denied, unable to access device location":
             "権限が拒否されました。デバイスの位置にアクセスできません",
           "Last connected": "最終接続",
-          "Find My LIKKIM": "私のLIKKIMを見つける",
+          "Secure Device Status": "セキュリティデバイスの状態",
           "Wallet Management": "ウォレット管理",
           "Delete Wallet": "ウォレット削除",
           Support: "サポート",
@@ -1715,7 +1715,7 @@ i18n
           "Permission denied, unable to access device location":
             "Доступ запрещен, не удается получить доступ к местоположению устройства",
           "Last connected": "Последнее подключение",
-          "Find My LIKKIM": "Найти мой LIKKIM",
+          "Secure Device Status": "Состояние защищенного устройства",
           "Wallet Management": "Управление кошельком",
           "Delete Wallet": "Удалить кошелек",
           Support: "Поддержка",
@@ -1926,7 +1926,7 @@ i18n
           "Permission denied, unable to access device location":
             "권한이 거부되어 장치 위치에 접근할 수 없습니다",
           "Last connected": "마지막 연결",
-          "Find My LIKKIM": "내 LIKKIM 찾기",
+          "Secure Device Status": "보안 장치 상태",
           "Wallet Management": "지갑 관리",
           "Delete Wallet": "지갑 삭제",
           Support: "지원",
@@ -2142,7 +2142,7 @@ i18n
           "Permission denied, unable to access device location":
             "Permissão negada, não é possível acessar a localização do dispositivo",
           "Last connected": "Última conexão",
-          "Find My LIKKIM": "Encontre meu LIKKIM",
+          "Secure Device Status": "Estado do dispositivo seguro",
           "Wallet Management": "Gestão de Carteira",
           "Delete Wallet": "Eliminar Carteira",
           Support: "Suporte",
@@ -2375,7 +2375,7 @@ i18n
           "Permission denied, unable to access device location":
             "Permesso negato, impossibile accedere alla posizione del dispositivo",
           "Last connected": "Ultima connessione",
-          "Find My LIKKIM": "Encontre meu LIKKIM",
+          "Secure Device Status": "Estado do dispositivo seguro",
           "Wallet Management": "Gestão de Carteira",
           "Delete Wallet": "Excluir Carteira",
           Support: "Suporte",
@@ -2593,7 +2593,7 @@ i18n
           "Permission denied, unable to access device location":
             "Permesso negato, impossibile accedere alla posizione del dispositivo",
           "Last connected": "Ultima connessione",
-          "Find My LIKKIM": "Trova il mio LIKKIM",
+          "Secure Device Status": "Stato del dispositivo sicuro",
           "Wallet Management": "Gestione Portafoglio",
           "Delete Wallet": "Elimina Portafoglio",
           Support: "Supporto",
@@ -2814,7 +2814,7 @@ i18n
           "Permission denied, unable to access device location":
             "Zugriff verweigert, kann den Standort des Geräts nicht erreichen",
           "Last connected": "Zuletzt verbunden",
-          "Find My LIKKIM": "Finde mein LIKKIM",
+          "Secure Device Status": "Status des sicheren Geräts",
           "Wallet Management": "Wallet-Verwaltung",
           "Delete Wallet": "Wallet löschen",
           Support: "Unterstützung",
@@ -3032,7 +3032,7 @@ i18n
           "Permission denied, unable to access device location":
             "अनुमति अस्वीकृत, डिवाइस का स्थान प्राप्त नहीं कर सकते",
           "Last connected": "अंतिम कनेक्शन",
-          "Find My LIKKIM": "मेरा LIKKIM ढूंढें",
+          "Secure Device Status": "सुरक्षित डिवाइस की स्थिति",
           "Wallet Management": "वॉलेट प्रबंधन",
           "Delete Wallet": "वॉलेट हटाएँ",
           Support: "सहायता",
@@ -3259,7 +3259,7 @@ i18n
           "Permission denied, unable to access device location":
             "Зөвшөөрөл зөвшөөрөгдөөгүй, төхөөрөмжийн байрлалд нэвтрэх боломжгүй",
           "Last connected": "Сүүлийн холболт",
-          "Find My LIKKIM": "Миний LIKKIM-г олох",
+          "Secure Device Status": "Аюулгүй төхөөрөмжийн төлөв",
           "Wallet Management": "Хэтэвчийн удирдлага",
           "Delete Wallet": "Хэтэвч устгах",
           Support: "Тусламж",
@@ -3468,7 +3468,7 @@ i18n
           "Permission denied, unable to access device location":
             "การเข้าถึงถูกปฏิเสธ ไม่สามารถเข้าถึงตำแหน่งอุปกรณ์",
           "Last connected": "การเชื่อมต่อครั้งสุดท้าย",
-          "Find My LIKKIM": "ค้นหาของ LIKKIM ของฉัน",
+          "Secure Device Status": "สถานะของอุปกรณ์รักษาความปลอดภัย",
           "Wallet Management": "การจัดการกระเป๋าเงิน",
           "Delete Wallet": "ลบกระเป๋าเงิน",
           Support: "สนับสนุน",
@@ -3681,7 +3681,7 @@ i18n
           "Permission denied, unable to access device location":
             "Доступ заборонено, неможливо отримати доступ до місцеположення пристрою",
           "Last connected": "Останнє підключення",
-          "Find My LIKKIM": "Знайти мій LIKKIM",
+          "Secure Device Status": "Стан безпечного пристрою",
           "Wallet Management": "Управління гаманцем",
           "Delete Wallet": "Видалити гаманець",
           Support: "Підтримка",
@@ -3899,7 +3899,7 @@ i18n
           "Permission denied, unable to access device location":
             "Quyền truy cập bị từ chối, không thể truy cập vị trí thiết bị",
           "Last connected": "Kết nối lần cuối",
-          "Find My LIKKIM": "Tìm LIKKIM của tôi",
+          "Secure Device Status": "Trạng thái thiết bị an toàn",
           "Wallet Management": "Quản lý ví",
           "Delete Wallet": "Xóa ví",
           Support: "Hỗ trợ",
@@ -4116,7 +4116,7 @@ i18n
           "Permission denied, unable to access device location":
             "Izin ditolak, tidak dapat mengakses lokasi perangkat",
           "Last connected": "Terhubung terakhir",
-          "Find My LIKKIM": "Cari LIKKIM saya",
+          "Secure Device Status": "Status perangkat aman",
           "Wallet Management": "Manajemen Dompet",
           "Delete Wallet": "Hapus Dompet",
           Support: "Dukungan",
@@ -4335,7 +4335,7 @@ i18n
           "Permission denied, unable to access device location":
             "Tinanggihan ang permiso, hindi makuha ang lokasyon ng device",
           "Last connected": "Huling koneksyon",
-          "Find My LIKKIM": "Hanapin ang aking LIKKIM",
+          "Secure Device Status": "Kalagayan ng secure na device",
           "Wallet Management": "Pamamahala ng Wallet",
           "Delete Wallet": "Tanggalin ang Wallet",
           Support: "Suporta",
@@ -4556,7 +4556,7 @@ i18n
           "Permission denied, unable to access device location":
             "অনুমতি প্রত্যাখ্যান, ডিভাইসের অবস্থান অ্যাক্সেস করা যাচ্ছে না",
           "Last connected": "শেষ সংযোগ",
-          "Find My LIKKIM": "আমার LIKKIM খুঁজুন",
+          "Secure Device Status": "নিরাপদ ডিভাইসের অবস্থা",
           "Wallet Management": "ওয়ালেট ব্যবস্থাপনা",
           "Delete Wallet": "ওয়ালেট মুছুন",
           Support: "সমর্থন",

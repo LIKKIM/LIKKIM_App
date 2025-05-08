@@ -78,9 +78,9 @@ export default function App() {
               )}
             </Stack.Screen>
             <Stack.Screen
-              name="Find My LIKKIM"
+              name="Secure Device Status"
               component={DeviceDisplay}
-              options={{ title: t("Find My LIKKIM") }}
+              options={{ title: t("Secure Device Status") }}
             />
             <Stack.Screen
               name="Support"

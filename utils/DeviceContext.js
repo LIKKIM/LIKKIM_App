@@ -39,7 +39,7 @@ export const CryptoProvider = ({ children }) => {
   const [cryptoCount, setCryptoCount] = useState(0);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [currencyUnit, setCurrencyUnit] = useState("USD");
-  const [transactionHistory, setTransactionHistory] = useState([]);
+  const [ActivityLog, setActivityLog] = useState([]);
   const [initialAdditionalCryptosState, setInitialAdditionalCryptos] = useState(
     initialAdditionalCryptos
   );
@@ -202,35 +202,32 @@ export const CryptoProvider = ({ children }) => {
 
   // Load transaction history from storage
   useEffect(() => {
-    const loadTransactionHistory = async () => {
+    const loadActivityLog = async () => {
       try {
-        const history = await AsyncStorage.getItem("transactionHistory");
+        const history = await AsyncStorage.getItem("ActivityLog");
         if (history !== null) {
-          setTransactionHistory(JSON.parse(history));
+          setActivityLog(JSON.parse(history));
         }
       } catch (error) {
         console.error("Failed to load transaction history:", error);
       }
     };
-    loadTransactionHistory();
+    loadActivityLog();
   }, []);
 
   // Save transaction history on change
   useEffect(() => {
-    const saveTransactionHistory = async () => {
+    const saveActivityLog = async () => {
       try {
-        await AsyncStorage.setItem(
-          "transactionHistory",
-          JSON.stringify(transactionHistory)
-        );
+        await AsyncStorage.setItem("ActivityLog", JSON.stringify(ActivityLog));
       } catch (error) {
         console.error("Failed to save transaction history:", error);
       }
     };
-    if (transactionHistory.length > 0) {
-      saveTransactionHistory();
+    if (ActivityLog.length > 0) {
+      saveActivityLog();
     }
-  }, [transactionHistory]);
+  }, [ActivityLog]);
 
   // Save added cryptos when they change
   useEffect(() => {
@@ -405,8 +402,8 @@ export const CryptoProvider = ({ children }) => {
         setCryptoCards,
         handleUpdateCryptoCards,
         exchangeRates,
-        transactionHistory,
-        setTransactionHistory,
+        ActivityLog,
+        setActivityLog,
         updateDevicePubHintKey,
       }}
     >

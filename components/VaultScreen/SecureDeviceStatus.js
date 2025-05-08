@@ -1,4 +1,4 @@
-// ./VaultScreen/WalletContent.js
+// ./VaultScreen/SecureDeviceStatus.js
 import React, { useEffect, useState } from "react";
 import {
   ScrollView,
@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const WalletContent = (props) => {
+const SecureDeviceStatus = (props) => {
   const [isAddressBookVisible, setAddressBookVisible] = useState(false);
   const [nftData, setNftData] = useState(null);
   const [NFTmodalVisible, setNFTModalVisible] = useState(false); // 正确的命名
@@ -1195,4 +1195,4 @@ const WalletContent = (props) => {
   );
 };
 
-export default WalletContent;
+export default SecureDeviceStatus;

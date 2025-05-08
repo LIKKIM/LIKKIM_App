@@ -152,11 +152,11 @@ const getSettingsOptions = ({
           ]
         : []),
       {
-        title: t("Find My LIKKIM"),
+        title: t("Secure Device Status"),
         icon: "location-on",
         onPress: () => {
           Vibration.vibrate();
-          navigation.navigate("Find My LIKKIM");
+          navigation.navigate("Secure Device Status");
         },
       },
       {

@@ -47,7 +47,7 @@ import assetRouteDefs from "../config/assetRouteDefs";
 import EmptyWalletView from "./modal/EmptyWalletView";
 import AddCryptoModal from "./modal/AddCryptoModal";
 import ChainSelectionModal from "./modal/ChainSelectionModal";
-import WalletContent from "./VaultScreen/WalletContent";
+import SecureDeviceStatus from "./VaultScreen/SecureDeviceStatus";
 import TabModal from "./VaultScreen/TabModal";
 import ModalsContainer from "./VaultScreen/ModalsContainer";
 import checkAndReqPermission from "../utils/BluetoothPermissions"; //安卓高版本申请蓝牙权限
@@ -130,7 +130,7 @@ function VaultScreen({ route, navigation }) {
   const cardRefs = useRef([]);
   const cardStartPositions = useRef([]);
   const scrollYOffset = useRef(0);
-  const [transactionHistory, setTransactionHistory] = useState([]);
+  const [ActivityLog, setActivityLog] = useState([]);
   const [processMessages, setProcessMessages] = useState([]);
   const [showLetsGoButton, setShowLetsGoButton] = useState(false);
   const [tabOpacity] = useState(new Animated.Value(1));
@@ -1558,7 +1558,7 @@ function VaultScreen({ route, navigation }) {
       VaultScreenStyle={VaultScreenStyle}
       t={t}
       tabOpacity={tabOpacity}
-      transactionHistory={transactionHistory}
+      ActivityLog={ActivityLog}
       scrollViewRef={scrollViewRef}
       selectedCrypto={selectedCrypto}
       isDarkMode={isDarkMode}
@@ -1573,7 +1573,7 @@ function VaultScreen({ route, navigation }) {
       colors={isDarkMode ? ["#21201E", "#0E0D0D"] : ["#FFFFFF", "#EDEBEF"]}
       style={VaultScreenStyle.linearGradient}
     >
-      <WalletContent
+      <SecureDeviceStatus
         selectedView={selectedView}
         scrollViewRef={scrollViewRef}
         VaultScreenStyle={VaultScreenStyle}

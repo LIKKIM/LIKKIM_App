@@ -40,7 +40,7 @@ import NewLockCodeModal from "./modal/NewLockCodeModal";
 import * as LocalAuthentication from "expo-local-authentication";
 import AddressBookModal from "./modal/AddressBookModal";
 import LockCodeModal from "./modal/LockCodeModal";
-import MyColdWalletContent from "./SecureDeviceScreen/MyColdWalletContent";
+import MyColdSecureDeviceStatus from "./SecureDeviceScreen/MyColdSecureDeviceStatus";
 import getSettingsOptions from "./SecureDeviceScreen/settingsOptions";
 import { languages } from "../config/languages";
 import base64 from "base64-js";
@@ -1029,7 +1029,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
       colors={isDarkMode ? darkColors : lightColors}
       style={SecureDeviceScreenStyle.container}
     >
-      <MyColdWalletContent
+      <MyColdSecureDeviceStatus
         styles={SecureDeviceScreenStyle}
         settingsOptions={settingsOptions}
         isDeleteWalletVisible={isDeleteWalletVisible}
