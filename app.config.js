@@ -1,4 +1,3 @@
-import "dotenv/config";
 const mapKeys = require("./env/mapKeys");
 
 export default {

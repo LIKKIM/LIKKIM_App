@@ -93,8 +93,7 @@ i18n
           "Assets can only be sent within the same chain.":
             "Assets can only be sent within the same chain.",
           "Firmware Update": "Firmware Update",
-          "Sync balances to LIKKIM coldwallet":
-            "Sync balances to LIKKIM coldwallet",
+
           "No data available": "No data available",
           "Search Currency": "Search Currency",
           "Search Cryptocurrency": "Search Cryptocurrency",
@@ -298,7 +297,7 @@ i18n
           "Assets can only be sent within the same chain.":
             "资产只能在同一链内发送。",
           "Firmware Update": "固件更新",
-          "Sync balances to LIKKIM coldwallet": "同步余额到 LIKKIM 冷钱包",
+
           "No data available": "暂无数据",
           "Search Currency": "搜索货币",
           "Search Cryptocurrency": "搜索加密货币",
@@ -496,7 +495,7 @@ i18n
           "Assets can only be sent within the same chain.":
             "資產只能在同一鏈內發送。",
           "Firmware Update": "固件更新",
-          "Sync balances to LIKKIM coldwallet": "同步餘額到 LIKKIM 冷錢包",
+
           "No data available": "暫無數據",
           "Search Currency": "搜尋貨幣",
           "Search Cryptocurrency": "搜尋加密貨幣",
@@ -709,8 +708,7 @@ i18n
           "Assets can only be sent within the same chain.":
             "Les actifs ne peuvent être envoyés que sur la même chaîne.",
           "Firmware Update": "Mise à jour du firmware",
-          "Sync balances to LIKKIM coldwallet":
-            "Synchroniser les soldes avec le portefeuille froid LIKKIM",
+
           "No data available": "Aucune donnée disponible",
           "Search Currency": "Rechercher une devise",
           "Search Cryptocurrency": "Rechercher une cryptomonnaie",
@@ -949,8 +947,7 @@ i18n
           "Assets can only be sent within the same chain.":
             "Los activos solo se pueden enviar dentro de la misma cadena.",
           "Firmware Update": "Actualización de firmware",
-          "Sync balances to LIKKIM coldwallet":
-            "Sincronizar saldos con la billetera fría LIKKIM",
+
           "No data available": "No hay datos disponibles",
           "Search Currency": "Buscar moneda",
           "Search Cryptocurrency": "Buscar criptomoneda",
@@ -1159,8 +1156,7 @@ i18n
           "Assets can only be sent within the same chain.":
             "يمكن إرسال الأصول فقط ضمن نفس السلسلة.",
           "Firmware Update": "تحديث البرنامج الثابت",
-          "Sync balances to LIKKIM coldwallet":
-            "مزامنة الأرصدة مع محفظة LIKKIM الباردة",
+
           "No data available": "لا توجد بيانات متاحة",
           "Search Currency": "البحث عن عملة",
           "Search Cryptocurrency": "البحث عن عملة مشفرة",
@@ -1370,8 +1366,7 @@ i18n
           "Assets can only be sent within the same chain.":
             "資産は同じチェーン内でのみ送信できます。",
           "Firmware Update": "تحديث البرنامج الثابت",
-          "Sync balances to LIKKIM coldwallet":
-            "مزامنة الأرصدة مع محفظة LIKKIM الباردة",
+
           "No data available": "データがありません",
           "Search Currency": "通貨を検索",
           "Search Cryptocurrency": "暗号通貨を検索",
@@ -1604,8 +1599,7 @@ i18n
           "Assets can only be sent within the same chain.":
             "Активы могут быть отправлены только в пределах одной цепочки.",
           "Firmware Update": "Обновление прошивки",
-          "Sync balances to LIKKIM coldwallet":
-            "Синхронизировать балансы с холодным кошельком LIKKIM",
+
           "No data available": "Данные недоступны",
           "Search Currency": "Поиск валюты",
           "Search Cryptocurrency": "Поиск криптовалюты",
@@ -1815,8 +1809,7 @@ i18n
           "Assets can only be sent within the same chain.":
             "자산은 동일한 체인 내에서만 전송할 수 있습니다.",
           "Firmware Update": "펌웨어 업데이트",
-          "Sync balances to LIKKIM coldwallet":
-            "LIKKIM 콜드 월렛으로 잔액 동기화",
+
           "No data available": "데이터가 없습니다",
           "Search Currency": "통화 검색",
           "Search Cryptocurrency": "암호화폐 검색",
@@ -2026,8 +2019,7 @@ i18n
           "Assets can only be sent within the same chain.":
             "Os ativos só podem ser enviados dentro da mesma cadeia.",
           "Firmware Update": "Atualização de firmware",
-          "Sync balances to LIKKIM coldwallet":
-            "Sincronizar saldos com a carteira fria LIKKIM",
+
           "No data available": "Nenhum dado disponível",
           "Search Currency": "Pesquisar moeda",
           "Search Cryptocurrency": "Pesquisar criptomoeda",
@@ -2241,8 +2233,7 @@ i18n
           "Assets can only be sent within the same chain.":
             "Os ativos só podem ser enviados dentro da mesma cadeia.",
           "Firmware Update": "Atualização de firmware",
-          "Sync balances to LIKKIM coldwallet":
-            "Sincronizar saldos com a carteira fria LIKKIM",
+
           "No data available": "Nenhum dado disponível",
           "Search Currency": "Pesquisar moeda",
           "Search Cryptocurrency": "Pesquisar criptomoeda",
@@ -2472,8 +2463,7 @@ i18n
           "Assets can only be sent within the same chain.":
             "Gli asset possono essere inviati solo all'interno della stessa catena.",
           "Firmware Update": "Aggiornamento firmware",
-          "Sync balances to LIKKIM coldwallet":
-            "Sincronizza saldi con il portafoglio freddo LIKKIM",
+
           "No data available": "Nessun dato disponibile",
           "Search Currency": "Cerca valuta",
           "Search Cryptocurrency": "Cerca criptovaluta",
@@ -2691,8 +2681,7 @@ i18n
           "Assets can only be sent within the same chain.":
             "Vermögenswerte können nur innerhalb derselben Kette gesendet werden.",
           "Firmware Update": "Firmware-Aktualisierung",
-          "Sync balances to LIKKIM coldwallet":
-            "Salden mit LIKKIM Cold Wallet synchronisieren",
+
           "No data available": "Keine Daten verfügbar",
           "Search Currency": "Währung suchen",
           "Search Cryptocurrency": "Kryptowährung suchen",
@@ -2907,8 +2896,7 @@ i18n
           "Assets can only be sent within the same chain.":
             "संपत्तियां केवल उसी श्रृंखला के भीतर भेजी जा सकती हैं।",
           "Firmware Update": "फर्मवेयर अपडेट",
-          "Sync balances to LIKKIM coldwallet":
-            "LIKKIM कोल्डवॉलेट में बैलेंस सिंक करें",
+
           "No data available": "कोई डेटा उपलब्ध नहीं है",
           "Search Currency": "मुद्रा खोजें",
           "Search Cryptocurrency": "क्रिप्टोकरेंसी खोजें",
@@ -3123,8 +3111,7 @@ i18n
           "Assets can only be sent within the same chain.":
             "Хөрөнгийг зөвхөн нэг гинжин дотор л илгээх боломжтой.",
           "Firmware Update": "Фирмвэр шинэчлэх",
-          "Sync balances to LIKKIM coldwallet":
-            "LIKKIM хүйтэн түрийвчтэй тэнцвэрийг синк хийх",
+
           "No data available": "Мэдээлэл байхгүй",
           "Search Currency": "Валют хайх",
           "Search Cryptocurrency": "Криптовалют хайх",
@@ -3342,8 +3329,7 @@ i18n
           "Assets can only be sent within the same chain.":
             "สินทรัพย์สามารถส่งได้เฉพาะภายในโซ่เดียวกันเท่านั้น",
           "Firmware Update": "อัปเดตเฟิร์มแวร์",
-          "Sync balances to LIKKIM coldwallet":
-            "ซิงค์ยอดคงเหลือกับกระเป๋าเงินเย็น LIKKIM",
+
           "No data available": "ไม่มีข้อมูล",
           "Search Currency": "ค้นหาสกุลเงิน",
           "Search Cryptocurrency": "ค้นหาสกุลเงินดิจิทัล",
@@ -3550,8 +3536,7 @@ i18n
           "Assets can only be sent within the same chain.":
             "Активи можна надсилати лише в межах одного ланцюга.",
           "Firmware Update": "Оновлення прошивки",
-          "Sync balances to LIKKIM coldwallet":
-            "Синхронізація балансів із холодним гаманцем LIKKIM",
+
           "No data available": "Дані недоступні",
           "Search Currency": "Шукати валюту",
           "Search Cryptocurrency": "Шукати криптовалюту",
@@ -3764,8 +3749,7 @@ i18n
           "Assets can only be sent within the same chain.":
             "Tài sản chỉ có thể được gửi trong cùng một chuỗi.",
           "Firmware Update": "Cập nhật firmware",
-          "Sync balances to LIKKIM coldwallet":
-            "Đồng bộ số dư với ví lạnh LIKKIM",
+
           "No data available": "Không có dữ liệu",
           "Search Currency": "Tìm kiếm tiền tệ",
           "Search Cryptocurrency": "Tìm kiếm tiền điện tử",
@@ -3981,8 +3965,7 @@ i18n
           "Assets can only be sent within the same chain.":
             "Aset hanya dapat dikirim dalam rantai yang sama.",
           "Firmware Update": "Pembaruan firmware",
-          "Sync balances to LIKKIM coldwallet":
-            "Sinkronkan saldo ke dompet dingin LIKKIM",
+
           "No data available": "Tidak ada data",
           "Search Currency": "Cari mata uang",
           "Search Cryptocurrency": "Cari mata uang kripto",
@@ -4198,8 +4181,7 @@ i18n
           "Assets can only be sent within the same chain.":
             "Ang mga ari-arian ay maaari lamang ipadala sa loob ng parehong kadena.",
           "Firmware Update": "Pag-update ng firmware",
-          "Sync balances to LIKKIM coldwallet":
-            "I-sync ang mga balanse sa LIKKIM coldwallet",
+
           "No data available": "Walang magagamit na data",
           "Search Currency": "Maghanap ng Pera",
           "Search Cryptocurrency": "Maghanap ng Cryptocurrency",
@@ -4415,8 +4397,6 @@ i18n
           "Assets can only be sent within the same chain.":
             "সম্পদগুলি কেবল একই শৃঙ্খলে পাঠানো যেতে পারে।",
           "Firmware Update": "ফার্মওয়্যার আপডেট",
-          "Sync balances to LIKKIM coldwallet":
-            "LIKKIM ঠান্ডা ওয়ালেটে ব্যালেন্স সিঙ্ক করুন",
           "No data available": "কোনো তথ্য উপলব্ধ নেই",
           "Search Currency": "মুদ্রা খুঁজুন",
           "Search Cryptocurrency": "ক্রিপ্টোকারেন্সি খুঁজুন",
