@@ -19,7 +19,6 @@ import OnboardingScreen from "./utils/OnboardingScreen";
 import ScreenLock from "./utils/ScreenLock";
 import DeviceDisplay from "./components/SecureDeviceScreen/DeviceDisplay";
 import SupportPage from "./components/SecureDeviceScreen/SupportPage";
-import ConnectLIKKIMAuth from "./components/TransactionScreens/ConnectLIKKIMAuth";
 import { CryptoProvider, DeviceContext } from "./utils/DeviceContext";
 import i18n from "./config/i18n";
 
@@ -82,14 +81,6 @@ export default function App() {
               name="Find My LIKKIM"
               component={DeviceDisplay}
               options={{ title: t("Find My LIKKIM") }}
-            />
-            <Stack.Screen
-              name="Request Wallet Auth"
-              component={ConnectLIKKIMAuth}
-              options={{
-                title: "Transaction Confirmation",
-                headerShadowVisible: false,
-              }}
             />
             <Stack.Screen
               name="Support"
