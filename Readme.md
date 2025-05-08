@@ -1,39 +1,38 @@
-# LIKKIM Cold Wallet Mobile App
+# Secure Hardware Interface Companion App
 
-**LIKKIM** is a cross-platform mobile application designed to interact with a secure cold wallet hardware device. It allows users to manage digital assets through secure operations such as address display, transaction requests, and blockchain balance queries.
+**This project** is a cross-platform mobile application designed as a visual interface companion to a secure external hardware module. It provides users with access to view device-generated data, confirm external prompts, and operate through Bluetooth-based interaction.
 
-> **Important:** This repository includes only the mobile client logic. All cryptographic processes, key management, and signing operations are strictly handled by the external hardware device and are not exposed in this codebase.
-
----
-
-## Features
-
-- Display wallet address for receiving assets
-- Send transaction requests via secure device interaction
-- Retrieve balance and transaction history via blockchain APIs
-- Device pairing and user authentication
-- Secure communication interface (abstracted)
+> **Note:** This repository contains only UI and device communication logic. No cryptographic operations or financial workflows are implemented within this codebase.
 
 ---
 
-## Tech Stack
+## Key Capabilities
+
+- View addresses or data from the external secure device
+- Initiate device-assisted actions
+- Retrieve and display public data (e.g., history, status) via API
+- Connect and communicate with hardware modules via BLE
+- Support for iOS and Android native environments
+
+---
+
+## Technology Stack
 
 - React Native (with Expo)
-- Bluetooth Low Energy (BLE) communication
-- Blockchain API integration (e.g., ethers.js or web3.js)
-- iOS / Android native support
+- BLE (Bluetooth Low Energy) support
+- iOS and Android native integration
 
 ---
 
-## Getting Started
+## Setup Instructions
 
 ### Prerequisites
 
 - Node.js
 - npm or yarn
 - Expo CLI
-- Xcode (for iOS)
-- CocoaPods (for iOS native dependencies)
+- Xcode (macOS, for iOS)
+- CocoaPods (for native dependencies)
 
 ### Installation
 
@@ -43,21 +42,21 @@ npx expo prebuild
 cd ios && pod install && cd ..
 ```
 
-### Run the App
+### Running the App
 
 ```bash
-# For iOS
+# iOS
 npm run ios
 
-# For Android
+# Android
 npm run android
 ```
 
 ---
 
-## iOS Configuration
+## iOS BLE Configuration
 
-To enable background BLE communication on iOS, update `ios/Info.plist`:
+To enable BLE background support on iOS, update `ios/Info.plist`:
 
 ```xml
 <key>UIBackgroundModes</key>
@@ -66,20 +65,20 @@ To enable background BLE communication on iOS, update `ios/Info.plist`:
 </array>
 ```
 
-Also enable "Background Modes" > "Uses Bluetooth LE accessories" in Xcode project settings.
+Also activate: `Background Modes > Uses Bluetooth LE accessories` in Xcode.
 
 ---
 
-## Security Guidelines
+## Security Notes
 
-- Do **not** log or expose sensitive device data or user input.
-- Do **not** modify the internal device communication or authentication flows.
-- Private keys are **never stored** or handled in the app.
-- The hardware device performs all sensitive operations securely and offline.
+- The app **does not process or expose sensitive data**
+- All secure operations occur externally on dedicated hardware
+- The mobile client only facilitates display and communication
+- Credentials, authorization, or financial data are **not stored or transmitted**
 
 ---
 
-## Troubleshooting
+## Maintenance Tips
 
 ### Clear Cache and Rebuild
 
@@ -87,7 +86,7 @@ Also enable "Background Modes" > "Uses Bluetooth LE accessories" in Xcode projec
 npx react-native start --reset-cache
 ```
 
-### Reinstall iOS Dependencies
+### Reinstall iOS Native Modules
 
 ```bash
 cd ios && pod install && cd ..
@@ -95,16 +94,14 @@ cd ios && pod install && cd ..
 
 ---
 
-## License
+## License & Usage
 
-This project is distributed under a permissive license for integration and community contribution. It does **not** include firmware, hardware specifications, or cryptographic implementation details for security reasons.
+This codebase is open for community use and UI integration purposes only. It excludes device internals, firmware logic, or cryptographic designs to maintain secure boundaries.
 
 ---
 
 ## Disclaimer
 
-This software is part of a security-critical ecosystem. All interactions with the hardware device are abstracted and protected. Unauthorized analysis or reverse engineering of communication protocols is strictly prohibited.
-
-For contributions or support, please contact the project maintainers through official channels.
+This software is a part of a secure interaction system. No financial transactions, private data handling, or blockchain operations are performed in this application. For questions or collaborations, please contact the maintainers through verified channels.
 
 ---
