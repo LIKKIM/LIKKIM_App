@@ -60,19 +60,16 @@ i18n
           Remove: "Remove",
           "Security in your hands": "Security in your hands",
           Continue: "Continue",
-    
 
           "Scroll down to view all words": "Scroll down to view all words",
           "Recovery Phrase": "Recovery Phrase",
-          "Read the following, then save the phrase securely.":
-            "Read the following, then save the phrase securely.",
- 
+
           "Generating your accounts": "Generating your accounts",
           "Encrypting your data": "Encrypting your data",
           "Your wallet is now ready": "Your wallet is now ready",
           "Let's Go": "Let's Go",
           "Use spaces between words": "Use spaces between words",
- ,
+
           Version: "Version",
           "Assets can only be sent within the same chain.":
             "Assets can only be sent within the same chain.",
@@ -250,24 +247,17 @@ i18n
           Remove: "移除",
           "Security in your hands": "安全尽在掌握",
           Continue: "继续",
- 
           "Scroll down to view all words": "向下滚动查看所有单词",
           "Recovery Phrase": "恢复短语",
-          "Read the following, then save the phrase securely.":
-            "请阅读以下内容，然后安全地保存恢复短语。",
-
- 
           "Generating your accounts": "生成你的账户",
           "Encrypting your data": "加密你的数据",
           "Your wallet is now ready": "你的钱包已准备就绪",
           "Let's Go": "开始吧",
           "Use spaces between words": "单词之间用空格分隔",
- 
           Version: "版本",
           "Assets can only be sent within the same chain.":
             "资产只能在同一链内发送。",
           "Firmware Update": "固件更新",
-
           "No data available": "暂无数据",
           "Search Currency": "搜索货币",
           "Search Cryptocurrency": "搜索加密货币",
@@ -389,7 +379,6 @@ i18n
       "zh-TW": {
         translation: {
           "Add Wallet": "添加錢包",
-
           Close: "關閉",
           "Value:": "值:",
           "Delete Card": "刪除卡片",
@@ -434,26 +423,18 @@ i18n
           "Remove Chain Account": "移除鏈賬戶",
           Remove: "移除",
           "Security in your hands": "安全盡在掌握",
-
           Continue: "繼續",
-    
-
           "Scroll down to view all words": "向下滾動查看所有單詞",
           "Recovery Phrase": "恢復短語",
-          "Read the following, then save the phrase securely.":
-            "請閱讀以下內容，然後安全地保存恢復短語。",
-
           "Generating your accounts": "生成你的帳戶",
           "Encrypting your data": "加密你的數據",
           "Your wallet is now ready": "你的錢包已準備就緒",
           "Let's Go": "開始吧",
           "Use spaces between words": "單詞之間用空格分隔",
-         
           Version: "版本",
           "Assets can only be sent within the same chain.":
             "資產只能在同一鏈內發送。",
           "Firmware Update": "固件更新",
-
           "No data available": "暫無數據",
           "Search Currency": "搜尋貨幣",
           "Search Cryptocurrency": "搜尋加密貨幣",
@@ -558,7 +539,6 @@ i18n
           Success: "成功",
           "Your wallet has been deleted successfully.": "您的錢包已成功刪除。",
           "Insufficient Balance": "餘額不足",
-
           "Please confirm the transaction on your LIKKIM device.":
             "請在您的LIKKIM設備上確認交易。",
           Save: "儲存",
@@ -634,21 +614,17 @@ i18n
           "Security in your hands": "Sécurité entre vos mains",
 
           Continue: "Continuer",
- 
 
           "Scroll down to view all words":
             "Faites défiler vers le bas pour voir tous les mots",
           "Recovery Phrase": "Phrase de récupération",
-          "Read the following, then save the phrase securely.":
-            "Lisez ce qui suit, puis enregistrez la phrase en toute sécurité.",
 
- 
           "Generating your accounts": "Génération de vos comptes",
           "Encrypting your data": "Cryptage de vos données",
           "Your wallet is now ready": "Votre portefeuille est prêt",
           "Let's Go": "Allons-y",
           "Use spaces between words": "Utilisez des espaces entre les mots",
-           
+
           Version: "Version",
           "Assets can only be sent within the same chain.":
             "Les actifs ne peuvent être envoyés que sur la même chaîne.",
@@ -860,20 +836,17 @@ i18n
           "Security in your hands": "Seguridad en tus manos",
 
           Continue: "Continuar",
- 
 
           "Scroll down to view all words":
             "Desplázate hacia abajo para ver todas las palabras",
           "Recovery Phrase": "Frase de recuperación",
-          "Read the following, then save the phrase securely.":
-            "Lea lo siguiente, luego guarde la frase de forma segura.",
 
           "Generating your accounts": "Generando tus cuentas",
           "Encrypting your data": "Encriptando tus datos",
           "Your wallet is now ready": "Tu billetera está lista",
           "Let's Go": "Vamos",
           "Use spaces between words": "Usa espacios entre las palabras",
- 
+
           Version: "Versión",
           "Assets can only be sent within the same chain.":
             "Los activos solo se pueden enviar dentro de la misma cadena.",
@@ -1057,19 +1030,17 @@ i18n
           "Security in your hands": "الأمان بين يديك",
 
           Continue: "متابعة",
- 
+
           "Scroll down to view all words":
             "قم بالتمرير لأسفل لعرض جميع الكلمات",
           "Recovery Phrase": "عبارة الاسترداد",
-          "Read the following, then save the phrase securely.":
-            "اقرأ ما يلي ، ثم احفظ العبارة بأمان.",
 
           "Generating your accounts": "إنشاء حساباتك",
           "Encrypting your data": "تشفير بياناتك",
           "Your wallet is now ready": "محفظتك جاهزة الآن",
           "Let's Go": "هيا بنا",
           "Use spaces between words": "استخدم مسافات بين الكلمات",
-       
+
           Version: "الإصدار",
           "Assets can only be sent within the same chain.":
             "يمكن إرسال الأصول فقط ضمن نفس السلسلة.",
@@ -1253,19 +1224,17 @@ i18n
           "Security in your hands": "安全はあなたの手に",
 
           Continue: "続行",
- 
+
           "Scroll down to view all words":
             "すべての単語を見るには下にスクロールしてください",
           "Recovery Phrase": "リカバリーフレーズ",
-          "Read the following, then save the phrase securely.":
-            "以下を読んでからフレーズを安全に保存してください。",
 
           "Generating your accounts": "アカウントを生成中",
           "Encrypting your data": "データを暗号化中",
           "Your wallet is now ready": "ウォレットの準備が整いました",
           "Let's Go": "始めましょう",
           "Use spaces between words": "単語の間にスペースを使用",
- 
+
           Version: "バージョン",
           "Assets can only be sent within the same chain.":
             "資産は同じチェーン内でのみ送信できます。",
@@ -1472,19 +1441,17 @@ i18n
           "Security in your hands": "Безопасность в ваших руках",
 
           Continue: "Продолжить",
-  
+
           "Scroll down to view all words":
             "Прокрутите вниз, чтобы увидеть все слова",
           "Recovery Phrase": "Фраза восстановления",
-          "Read the following, then save the phrase securely.":
-            "Прочитайте следующее, затем сохраните фразу надежно.",
 
           "Generating your accounts": "Создание ваших аккаунтов",
           "Encrypting your data": "Шифрование ваших данных",
           "Your wallet is now ready": "Ваш кошелек готов",
           "Let's Go": "Поехали",
           "Use spaces between words": "Используйте пробелы между словами",
-    
+
           Version: "Версия",
           "Assets can only be sent within the same chain.":
             "Активы могут быть отправлены только в пределах одной цепочки.",
@@ -1668,19 +1635,17 @@ i18n
           "Security in your hands": "안전은 당신의 손안에 있습니다",
 
           Continue: "계속",
-     
+
           "Scroll down to view all words":
             "모든 단어를 보려면 아래로 스크롤하세요",
           "Recovery Phrase": "복구 구문",
-          "Read the following, then save the phrase securely.":
-            "다음을 읽고 구문을 안전하게 저장하세요.",
 
           "Generating your accounts": "계정 생성 중",
           "Encrypting your data": "데이터 암호화 중",
           "Your wallet is now ready": "지갑이 준비되었습니다",
           "Let's Go": "시작합시다",
           "Use spaces between words": "단어 사이에 공백 사용",
-  
+
           Version: "버전",
           "Assets can only be sent within the same chain.":
             "자산은 동일한 체인 내에서만 전송할 수 있습니다.",
@@ -1864,19 +1829,17 @@ i18n
           "Security in your hands": "Segurança em suas mãos",
 
           Continue: "Continuar",
-   
+
           "Scroll down to view all words":
             "Role para baixo para ver todas as palavras",
           "Recovery Phrase": "Frase de recuperação",
-          "Read the following, then save the phrase securely.":
-            "Leia o seguinte e salve a frase com segurança.",
 
           "Generating your accounts": "Gerando suas contas",
           "Encrypting your data": "Criptografando seus dados",
           "Your wallet is now ready": "Sua carteira está pronta",
           "Let's Go": "Vamos lá",
           "Use spaces between words": "Use espaços entre as palavras",
- 
+
           Version: "Versão",
           "Assets can only be sent within the same chain.":
             "Os ativos só podem ser enviados dentro da mesma cadeia.",
@@ -2064,20 +2027,17 @@ i18n
           "Security in your hands": "Segurança em suas mãos",
 
           Continue: "Continuar",
-   
 
           "Scroll down to view all words":
             "Role para baixo para ver todas as palavras",
           "Recovery Phrase": "Frase de recuperação",
-          "Read the following, then save the phrase securely.":
-            "Leia o seguinte e salve a frase com segurança.",
 
           "Generating your accounts": "Gerando suas contas",
           "Encrypting your data": "Criptografando seus dados",
           "Your wallet is now ready": "Sua carteira está pronta",
           "Let's Go": "Vamos lá",
           "Use spaces between words": "Use espaços entre as palavras",
- 
+
           Version: "Versão",
           "Assets can only be sent within the same chain.":
             "Os ativos só podem ser enviados dentro da mesma cadeia.",
@@ -2281,20 +2241,17 @@ i18n
           "Security in your hands": "Sicurezza nelle tue mani",
 
           Continue: "Continua",
- 
 
           "Scroll down to view all words":
             "Scorri verso il basso per visualizzare tutte le parole",
           "Recovery Phrase": "Frase di recupero",
-          "Read the following, then save the phrase securely.":
-            "Leggi quanto segue, quindi salva la frase in modo sicuro.",
 
           "Generating your accounts": "Generazione dei tuoi account",
           "Encrypting your data": "Criptazione dei tuoi dati",
           "Your wallet is now ready": "Il tuo portafoglio è pronto",
           "Let's Go": "Andiamo",
           "Use spaces between words": "Usa spazi tra le parole",
- 
+
           Version: "Versione",
           "Assets can only be sent within the same chain.":
             "Gli asset possono essere inviati solo all'interno della stessa catena.",
@@ -2484,13 +2441,10 @@ i18n
           "Security in your hands": "Sicherheit in Ihren Händen",
 
           Continue: "Fortsetzen",
- 
 
           "Scroll down to view all words":
             "Scrollen Sie nach unten, um alle Wörter zu sehen",
           "Recovery Phrase": "Wiederherstellungsphrase",
-          "Read the following, then save the phrase securely.":
-            "Lesen Sie das Folgende und speichern Sie die Phrase sicher.",
 
           "Generating your accounts": "Erstellen Ihrer Konten",
           "Encrypting your data": "Verschlüsseln Ihrer Daten",
@@ -2498,7 +2452,7 @@ i18n
           "Let's Go": "Los geht's",
           "Use spaces between words":
             "Verwenden Sie Leerzeichen zwischen den Wörtern",
-    
+
           Version: "Version",
           "Assets can only be sent within the same chain.":
             "Vermögenswerte können nur innerhalb derselben Kette gesendet werden.",
@@ -2686,19 +2640,17 @@ i18n
           "Security in your hands": "सुरक्षा आपके हाथ में",
 
           Continue: "जारी रखें",
- 
+
           "Scroll down to view all words":
             "सभी शब्दों को देखने के लिए नीचे स्क्रॉल करें",
           "Recovery Phrase": "रिकवरी वाक्यांश",
-          "Read the following, then save the phrase securely.":
-            "निम्नलिखित पढ़ें, फिर वाक्यांश को सुरक्षित रूप से सहेजें।",
 
           "Generating your accounts": "आपके खाते बना रहा है",
           "Encrypting your data": "आपका डेटा एन्क्रिप्ट कर रहा है",
           "Your wallet is now ready": "आपका वॉलेट अब तैयार है",
           "Let's Go": "चलिए चलते हैं",
           "Use spaces between words": "शब्दों के बीच स्पेस का उपयोग करें",
-       
+
           Version: "संस्करण",
           "Assets can only be sent within the same chain.":
             "संपत्तियां केवल उसी श्रृंखला के भीतर भेजी जा सकती हैं।",
@@ -2885,20 +2837,17 @@ i18n
           Remove: "Устгах",
           "Security in your hands": "Аюулгүй байдал таны гарт",
           Continue: "Үргэлжлүүлэх",
- 
 
           "Scroll down to view all words":
             "Бүх үгийг харахын тулд доош гүйлгэнэ үү",
           "Recovery Phrase": "Сэргээх үг",
-          "Read the following, then save the phrase securely.":
-            "Дараахыг уншаад үгээ аюулгүй хадгална уу.",
 
           "Generating your accounts": "Таны акаунтуудыг үүсгэж байна",
           "Encrypting your data": "Таны өгөгдлийг шифрлэж байна",
           "Your wallet is now ready": "Таны түрийвч одоо бэлэн боллоо",
           "Let's Go": "Эхэлцгээе",
           "Use spaces between words": "Үгсийн хооронд зай ашигла",
-  
+
           Version: "Хувилбар",
           "Assets can only be sent within the same chain.":
             "Хөрөнгийг зөвхөн нэг гинжин дотор л илгээх боломжтой.",
@@ -3092,19 +3041,16 @@ i18n
           "Security in your hands": "ความปลอดภัยอยู่ในมือคุณ",
 
           Continue: "ดำเนินการต่อ",
- 
 
           "Scroll down to view all words": "เลื่อนลงเพื่อดูคำทั้งหมด",
           "Recovery Phrase": "วลีการกู้คืน",
-          "Read the following, then save the phrase securely.":
-            "อ่านข้อความต่อไปนี้ จากนั้นบันทึกวลีไว้อย่างปลอดภัย",
 
           "Generating your accounts": "กำลังสร้างบัญชีของคุณ",
           "Encrypting your data": "กำลังเข้ารหัสข้อมูลของคุณ",
           "Your wallet is now ready": "กระเป๋าเงินของคุณพร้อมแล้ว",
           "Let's Go": "ไปกันเถอะ",
           "Use spaces between words": "ใช้ช่องว่างระหว่างคำ",
- 
+
           Version: "เวอร์ชัน",
           "Assets can only be sent within the same chain.":
             "สินทรัพย์สามารถส่งได้เฉพาะภายในโซ่เดียวกันเท่านั้น",
@@ -3288,12 +3234,10 @@ i18n
           "Security in your hands": "Безпека у ваших руках",
 
           Continue: "Продовжити",
-         
+
           "Scroll down to view all words":
             "Прокрутіть вниз, щоб побачити всі слова",
           "Recovery Phrase": "Фраза відновлення",
-          "Read the following, then save the phrase securely.":
-            "Прочитайте наступне, а потім надійно збережіть фразу.",
 
           "Generating your accounts": "Створення ваших облікових записів",
           "Encrypting your data": "Шифрування ваших даних",
@@ -3484,18 +3428,16 @@ i18n
           "Security in your hands": "Bảo mật trong tay bạn",
 
           Continue: "Tiếp tục",
-  
+
           "Scroll down to view all words": "Cuộn xuống để xem tất cả các từ",
           "Recovery Phrase": "Cụm từ khôi phục",
-          "Read the following, then save the phrase securely.":
-            "Đọc phần sau, sau đó lưu cụm từ một cách an toàn.",
 
           "Generating your accounts": "Đang tạo tài khoản của bạn",
           "Encrypting your data": "Đang mã hóa dữ liệu của bạn",
           "Your wallet is now ready": "Ví của bạn đã sẵn sàng",
           "Let's Go": "Bắt đầu",
           "Use spaces between words": "Sử dụng khoảng trắng giữa các từ",
-  
+
           Version: "Phiên bản",
           "Assets can only be sent within the same chain.":
             "Tài sản chỉ có thể được gửi trong cùng một chuỗi.",
@@ -3683,19 +3625,17 @@ i18n
           "Security in your hands": "Keamanan di tangan Anda",
 
           Continue: "Lanjutkan",
-   
+
           "Scroll down to view all words":
             "Gulir ke bawah untuk melihat semua kata",
           "Recovery Phrase": "Frasa pemulihan",
-          "Read the following, then save the phrase securely.":
-            "Baca yang berikut, lalu simpan frasa dengan aman.",
 
           "Generating your accounts": "Membuat akun Anda",
           "Encrypting your data": "Mengenkripsi data Anda",
           "Your wallet is now ready": "Dompet Anda sekarang siap",
           "Let's Go": "Ayo pergi",
           "Use spaces between words": "Gunakan spasi di antara kata-kata",
-      
+
           Version: "Versi",
           "Assets can only be sent within the same chain.":
             "Aset hanya dapat dikirim dalam rantai yang sama.",
@@ -3880,12 +3820,10 @@ i18n
           "Security in your hands": "Seguridad sa iyong mga kamay",
 
           Continue: "Magpatuloy",
-      
+
           "Scroll down to view all words":
             "Mag-scroll pababa upang makita ang lahat ng mga salita",
           "Recovery Phrase": "Parirala ng pagbawi",
-          "Read the following, then save the phrase securely.":
-            "Basahin ang sumusunod, pagkatapos ay i-save ang parirala nang ligtas.",
 
           "Generating your accounts": "Gumagawa ng iyong mga account",
           "Encrypting your data": "Ini-encrypt ang iyong data",
@@ -3893,7 +3831,7 @@ i18n
           "Let's Go": "Tara na",
           "Use spaces between words":
             "Gumamit ng mga espasyo sa pagitan ng mga salita",
-       
+
           Version: "Bersyon",
           "Only you can unlock your wallet":
             "Ikaw lang ang makakapagbukas ng iyong pitaka",
@@ -4006,7 +3944,6 @@ i18n
           "Your wallet has been deleted successfully.":
             "Matagumpay na natanggal ang iyong wallet.",
           "Insufficient Balance": "Hindi sapat na balanse",
-
           "Please confirm the transaction on your LIKKIM device.":
             "Pakikumpirma ang transaksyon sa iyong LIKKIM device.",
           Save: "I-save",
@@ -4031,7 +3968,6 @@ i18n
       bn: {
         translation: {
           "Add Wallet": "ওয়ালেট যোগ করুন",
-
           Close: "বন্ধ করুন",
           "Value:": "মান:",
           "Delete Card": "কার্ড মুছুন",
@@ -4081,20 +4017,14 @@ i18n
           "Remove Chain Account": "চেইন অ্যাকাউন্ট সরান",
           Remove: "সরান",
           "Security in your hands": "নিরাপত্তা আপনার হাতে",
-
           Continue: "চালিয়ে যান",
-    
           "Scroll down to view all words": "সমস্ত শব্দ দেখতে নীচে স্ক্রোল করুন",
           "Recovery Phrase": "পুনরুদ্ধার বাক্যাংশ",
-          "Read the following, then save the phrase securely.":
-            "নীচেরটি পড়ুন, তারপরে বাক্যাংশটি নিরাপদে সংরক্ষণ করুন।",
-
           "Generating your accounts": "আপনার অ্যাকাউন্ট তৈরি করা হচ্ছে",
           "Encrypting your data": "আপনার ডেটা এনক্রিপ্ট করা হচ্ছে",
           "Your wallet is now ready": "আপনার ওয়ালেট এখন প্রস্তুত",
           "Let's Go": "চলুন",
           "Use spaces between words": "শব্দের মধ্যে স্পেস ব্যবহার করুন",
-        
           Version: "সংস্করণ",
           "Only you can unlock your wallet":
             "শুধু আপনিই আপনার ওয়ালেট আনলক করতে পারবেন",
@@ -4208,7 +4138,6 @@ i18n
           "Your wallet has been deleted successfully.":
             "আপনার ওয়ালেট সফলভাবে মুছে ফেলা হয়েছে।",
           "Insufficient Balance": "অপর্যাপ্ত ব্যালেন্স",
-
           "Please confirm the transaction on your LIKKIM device.":
             "আপনার LIKKIM ডিভাইসে লেনদেন নিশ্চিত করুন।",
           Save: "সংরক্ষণ",
