@@ -12,13 +12,13 @@ import { BlurView } from "expo-blur";
 import { useTranslation } from "react-i18next";
 
 import styles, { darkTheme, lightTheme } from "./styles";
-import WalletScreen from "./components/WalletScreen";
+import VaultScreen from "./components/VaultScreen";
 import TransactionsScreen from "./components/TransactionsScreen";
-import MyColdWalletScreen from "./components/MyColdWalletScreen";
+import SecureDeviceScreen from "./components/SecureDeviceScreen";
 import OnboardingScreen from "./utils/OnboardingScreen";
 import ScreenLock from "./utils/ScreenLock";
-import FindMy from "./components/MyColdWalletScreen/FindMy";
-import SupportPage from "./components/MyColdWalletScreen/SupportPage";
+import FindMy from "./components/SecureDeviceScreen/FindMy";
+import SupportPage from "./components/SecureDeviceScreen/SupportPage";
 import ConnectLIKKIMAuth from "./components/TransactionScreens/ConnectLIKKIMAuth";
 import { CryptoProvider, DeviceContext } from "./utils/DeviceContext";
 import i18n from "./config/i18n";
@@ -286,7 +286,7 @@ function AppContent({
       >
         <Tab.Screen
           name="Wallet"
-          component={WalletScreen}
+          component={VaultScreen}
           initialParams={{ isDarkMode }}
           options={({ route, navigation }) => {
             const cryptoCards = route.params?.cryptoCards || [{}];
@@ -323,7 +323,7 @@ function AppContent({
         <Tab.Screen name="Transactions" component={TransactionsScreen} />
         <Tab.Screen name="My Cold Wallet">
           {(props) => (
-            <MyColdWalletScreen {...props} onDarkModeChange={refreshDarkMode} />
+            <SecureDeviceScreen {...props} onDarkModeChange={refreshDarkMode} />
           )}
         </Tab.Screen>
       </Tab.Navigator>

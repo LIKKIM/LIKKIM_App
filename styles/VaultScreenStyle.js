@@ -1,4 +1,4 @@
-// styles/WalletScreenStyle.js
+// styles/VaultScreenStyle.js
 import { StyleSheet, Dimensions } from "react-native";
 
 /**
@@ -7,7 +7,7 @@ import { StyleSheet, Dimensions } from "react-native";
  * @param {boolean} isDarkMode - Indicates whether dark mode is enabled.
  * @returns {object} - A StyleSheet object for the Wallet Screen.
  */
-const WalletScreenStyles = (isDarkMode) => {
+const VaultScreenStyles = (isDarkMode) => {
   // Color definitions based on theme mode
   const textColor = isDarkMode ? "#fff" : "#000";
   const modalBackgroundColor = isDarkMode ? "#3F3D3C" : "#ffffff";
@@ -995,4 +995,4 @@ const WalletScreenStyles = (isDarkMode) => {
   });
 };
 
-export default WalletScreenStyles;
+export default VaultScreenStyles;

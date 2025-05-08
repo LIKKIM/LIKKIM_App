@@ -10,7 +10,7 @@ import {
   Modal,
   Dimensions,
 } from "react-native";
-import PriceChartCom from "../WalletScreen/PriceChartCom";
+import PriceChartCom from "../VaultScreen/PriceChartCom";
 import { LinearGradient } from "expo-linear-gradient";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { walletAPI } from "../../env/apiEndpoints";
@@ -19,7 +19,7 @@ const TabModal = ({
   activeTab,
   setActiveTab,
   closeModal,
-  WalletScreenStyle,
+  VaultScreenStyle,
   t,
   tabOpacity,
   scrollViewRef,
@@ -107,7 +107,7 @@ const TabModal = ({
       case "History":
         return (
           <>
-            <Text style={WalletScreenStyle.historyTitle}>
+            <Text style={VaultScreenStyle.historyTitle}>
               {t("Transaction History")}
             </Text>
             <View
@@ -117,7 +117,7 @@ const TabModal = ({
                 alignItems: "center",
               }}
             >
-              <ScrollView style={WalletScreenStyle.historyList}>
+              <ScrollView style={VaultScreenStyle.historyList}>
                 {transactionHistory.length === 0 ? (
                   <View
                     style={{
@@ -126,7 +126,7 @@ const TabModal = ({
                       alignItems: "center",
                     }}
                   >
-                    <Text style={WalletScreenStyle.noHistoryText}>
+                    <Text style={VaultScreenStyle.noHistoryText}>
                       {t("No Histories")}
                     </Text>
                   </View>
@@ -159,7 +159,7 @@ const TabModal = ({
                               },
                             ]}
                           >
-                            <Text style={WalletScreenStyle.historyItemText}>
+                            <Text style={VaultScreenStyle.historyItemText}>
                               {`${new Date(
                                 Number(transaction.transactionTime)
                               ).toLocaleString()}`}
@@ -174,7 +174,7 @@ const TabModal = ({
                             >
                               <Text
                                 style={[
-                                  WalletScreenStyle.historyItemText,
+                                  VaultScreenStyle.historyItemText,
                                   { fontSize: 16, fontWeight: "bold" },
                                 ]}
                               >
@@ -198,7 +198,7 @@ const TabModal = ({
 
                               <Text
                                 style={[
-                                  WalletScreenStyle.historyItemText,
+                                  VaultScreenStyle.historyItemText,
                                   { fontSize: 16, fontWeight: "bold" },
                                 ]}
                               >
@@ -216,7 +216,7 @@ const TabModal = ({
         );
       case "Prices":
         return (
-          <View style={WalletScreenStyle.priceContainer}>
+          <View style={VaultScreenStyle.priceContainer}>
             <PriceChartCom
               instId={`${selectedCrypto?.shortName}-USD`}
               priceFla="$"
@@ -232,17 +232,17 @@ const TabModal = ({
   return (
     <>
       <Animated.View
-        style={[WalletScreenStyle.cardModalView, { opacity: fadeAnim }]}
+        style={[VaultScreenStyle.cardModalView, { opacity: fadeAnim }]}
       >
         <LinearGradient
           colors={isDarkMode ? darkColorsDown : lightColorsDown}
-          style={[WalletScreenStyle.cardModalView]}
+          style={[VaultScreenStyle.cardModalView]}
         />
       </Animated.View>
 
       <Animated.View
         style={[
-          WalletScreenStyle.animatedTabContainer,
+          VaultScreenStyle.animatedTabContainer,
           { opacity: tabOpacity },
           {
             marginTop:
@@ -262,15 +262,15 @@ const TabModal = ({
         >
           <TouchableOpacity
             style={[
-              WalletScreenStyle.tabButton,
-              activeTab === "Prices" && WalletScreenStyle.activeTabButton,
+              VaultScreenStyle.tabButton,
+              activeTab === "Prices" && VaultScreenStyle.activeTabButton,
             ]}
             onPress={() => setActiveTab("Prices")}
           >
             <Text
               style={[
-                WalletScreenStyle.tabButtonText,
-                activeTab === "Prices" && WalletScreenStyle.activeTabButtonText,
+                VaultScreenStyle.tabButtonText,
+                activeTab === "Prices" && VaultScreenStyle.activeTabButtonText,
               ]}
             >
               {t("Prices")}
@@ -278,16 +278,15 @@ const TabModal = ({
           </TouchableOpacity>
           <TouchableOpacity
             style={[
-              WalletScreenStyle.tabButton,
-              activeTab === "History" && WalletScreenStyle.activeTabButton,
+              VaultScreenStyle.tabButton,
+              activeTab === "History" && VaultScreenStyle.activeTabButton,
             ]}
             onPress={() => setActiveTab("History")}
           >
             <Text
               style={[
-                WalletScreenStyle.tabButtonText,
-                activeTab === "History" &&
-                  WalletScreenStyle.activeTabButtonText,
+                VaultScreenStyle.tabButtonText,
+                activeTab === "History" && VaultScreenStyle.activeTabButtonText,
               ]}
             >
               {t("History")}
@@ -296,10 +295,10 @@ const TabModal = ({
         </View>
         <View style={{ flex: 1 }}>{renderTabContent()}</View>
         <TouchableOpacity
-          style={WalletScreenStyle.cancelButtonCryptoCard}
+          style={VaultScreenStyle.cancelButtonCryptoCard}
           onPress={closeModal}
         >
-          <Text style={WalletScreenStyle.cancelButtonText}>{t("Close")}</Text>
+          <Text style={VaultScreenStyle.cancelButtonText}>{t("Close")}</Text>
         </TouchableOpacity>
       </Animated.View>
 

@@ -1,4 +1,4 @@
-//WalletScreen.js
+//VaultScreen.js
 import React, {
   useState,
   useEffect,
@@ -33,7 +33,7 @@ import base64 from "base64-js";
 import { Buffer } from "buffer";
 
 // 样式和上下文
-import WalletScreenStyles from "../styles/WalletScreenStyle";
+import VaultScreenStyles from "../styles/VaultScreenStyle";
 import {
   DeviceContext,
   DarkModeContext,
@@ -47,9 +47,9 @@ import assetRouteDefs from "../config/assetRouteDefs";
 import EmptyWalletView from "./modal/EmptyWalletView";
 import AddCryptoModal from "./modal/AddCryptoModal";
 import ChainSelectionModal from "./modal/ChainSelectionModal";
-import WalletContent from "./WalletScreen/WalletContent";
-import TabModal from "./WalletScreen/TabModal";
-import ModalsContainer from "./WalletScreen/ModalsContainer";
+import WalletContent from "./VaultScreen/WalletContent";
+import TabModal from "./VaultScreen/TabModal";
+import ModalsContainer from "./VaultScreen/ModalsContainer";
 import checkAndReqPermission from "../utils/BluetoothPermissions"; //安卓高版本申请蓝牙权限
 import displayDeviceAddress from "../utils/displayDeviceAddress"; // 显示地址函数 发送数据写法
 import { parseDeviceCode } from "../utils/parseDeviceCode";
@@ -60,7 +60,7 @@ const serviceUUID = bluetoothConfig.serviceUUID;
 const writeCharacteristicUUID = bluetoothConfig.writeCharacteristicUUID;
 const notifyCharacteristicUUID = bluetoothConfig.notifyCharacteristicUUID;
 
-function WalletScreen({ route, navigation }) {
+function VaultScreen({ route, navigation }) {
   // 使用状态
   const [receivedVerificationCode, setReceivedVerificationCode] = useState("");
   const {
@@ -92,7 +92,7 @@ function WalletScreen({ route, navigation }) {
   if (contextDarkMode !== undefined) {
     isDarkMode = contextDarkMode;
   }
-  const WalletScreenStyle = WalletScreenStyles(isDarkMode);
+  const VaultScreenStyle = VaultScreenStyles(isDarkMode);
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState("History");
   const [modalVisible, setModalVisible] = useState(false);
@@ -1148,7 +1148,7 @@ function WalletScreen({ route, navigation }) {
       }
     }
   };
-  // WalletScreen.js handlePinSubmit
+  // VaultScreen.js handlePinSubmit
   const handlePinSubmit = async () => {
     setPinModalVisible(false);
     setVerificationModalVisible(false);
@@ -1553,7 +1553,7 @@ function WalletScreen({ route, navigation }) {
       activeTab={activeTab}
       setActiveTab={setActiveTab}
       closeModal={closeModal}
-      WalletScreenStyle={WalletScreenStyle}
+      VaultScreenStyle={VaultScreenStyle}
       t={t}
       tabOpacity={tabOpacity}
       transactionHistory={transactionHistory}
@@ -1569,12 +1569,12 @@ function WalletScreen({ route, navigation }) {
   return (
     <LinearGradient
       colors={isDarkMode ? ["#21201E", "#0E0D0D"] : ["#FFFFFF", "#EDEBEF"]}
-      style={WalletScreenStyle.linearGradient}
+      style={VaultScreenStyle.linearGradient}
     >
       <WalletContent
         selectedView={selectedView}
         scrollViewRef={scrollViewRef}
-        WalletScreenStyle={WalletScreenStyle}
+        VaultScreenStyle={VaultScreenStyle}
         modalVisible={modalVisible}
         cryptoCards={cryptoCards}
         refreshing={refreshing}
@@ -1611,7 +1611,7 @@ function WalletScreen({ route, navigation }) {
         isVerifyingAddress={isVerifyingAddress}
         addressVerificationMessage={addressVerificationMessage}
         handleVerifyAddress={handleVerifyAddress}
-        WalletScreenStyle={WalletScreenStyle}
+        VaultScreenStyle={VaultScreenStyle}
         t={t}
         isDarkMode={isDarkMode}
         addWalletModalVisible={addWalletModalVisible}
@@ -1675,4 +1675,4 @@ function WalletScreen({ route, navigation }) {
   );
 }
 
-export default WalletScreen;
+export default VaultScreen;

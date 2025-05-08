@@ -90,7 +90,7 @@ const TransactionChainFilterModal = ({
                   }}
                 >
                   <Image
-                    source={require("../../assets/WalletScreenLogo.png")}
+                    source={require("../../assets/VaultScreenLogo.png")}
                     style={{
                       width: 24,
                       height: 24,

@@ -1,7 +1,7 @@
 /*
  * Project: Secure Systems
  * Author: Helvetiq Labs Team
- * Module: MyColdWalletScreen/MyColdWalletContent.js
+ * Module: SecureDeviceScreen/MyColdWalletContent.js
  * License: MIT
  */
 
@@ -16,7 +16,7 @@ import {
 import Icon from "react-native-vector-icons/MaterialIcons";
 
 const MyColdWalletContent = ({
-  styles, // MyColdWalletScreenStyle
+  styles, // SecureDeviceScreenStyle
   settingsOptions,
   isDeleteWalletVisible,
   setIsDeleteWalletVisible,

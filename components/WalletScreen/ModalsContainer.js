@@ -24,7 +24,7 @@ const ModalsContainer = ({
   isVerifyingAddress,
   addressVerificationMessage,
   handleVerifyAddress,
-  WalletScreenStyle,
+  VaultScreenStyle,
   t,
   isDarkMode,
   addWalletModalVisible,
@@ -99,7 +99,7 @@ const ModalsContainer = ({
         isVerifyingAddress={isVerifyingAddress}
         addressVerificationMessage={addressVerificationMessage}
         handleVerifyAddress={handleVerifyAddress}
-        WalletScreenStyle={WalletScreenStyle}
+        VaultScreenStyle={VaultScreenStyle}
         t={t}
         isDarkMode={isDarkMode}
       />
@@ -110,7 +110,7 @@ const ModalsContainer = ({
         onCreateWallet={handleCreateWallet}
         onImportWallet={handleImportWallet}
         onWalletTest={handleWalletTest}
-        styles={WalletScreenStyle}
+        styles={VaultScreenStyle}
         t={t}
       />
       {/* 提示 Modal */}
@@ -118,7 +118,7 @@ const ModalsContainer = ({
         visible={tipModalVisible}
         onClose={() => setTipModalVisible(false)}
         onContinue={handleContinue}
-        styles={WalletScreenStyle}
+        styles={VaultScreenStyle}
         t={t}
       />
       {/* Process Modal */}
@@ -128,7 +128,7 @@ const ModalsContainer = ({
         processMessages={processMessages}
         showLetsGoButton={showLetsGoButton}
         onLetsGo={handleLetsGo}
-        styles={WalletScreenStyle}
+        styles={VaultScreenStyle}
         t={t}
       />
       {/* Delete Confirmation Modal */}
@@ -139,7 +139,7 @@ const ModalsContainer = ({
           navigation.setParams({ showDeleteConfirmModal: false });
         }}
         onConfirm={handleDeleteCard}
-        styles={WalletScreenStyle}
+        styles={VaultScreenStyle}
         t={t}
       />
       {/* Bluetooth Modal */}
@@ -154,7 +154,7 @@ const ModalsContainer = ({
           setSelectedDevice(null);
         }}
         verifiedDevices={"0"} // 这里避免该页面具备设备管理断开功能
-        MyColdWalletScreenStyle={WalletScreenStyle}
+        SecureDeviceScreenStyle={VaultScreenStyle}
         t={t}
         onDisconnectPress={handleDisconnectDevice}
       />
@@ -165,7 +165,7 @@ const ModalsContainer = ({
         setPinCode={setPinCode} // 设置 PIN 的状态函数
         onSubmit={handlePinSubmit} // PIN 提交后的逻辑
         onCancel={() => setPinModalVisible(false)} // 关闭 PIN 模态框
-        styles={WalletScreenStyle}
+        styles={VaultScreenStyle}
         isDarkMode={isDarkMode}
         t={t}
         status={blueToothStatus}
@@ -175,7 +175,7 @@ const ModalsContainer = ({
         visible={verificationStatus !== null}
         status={verificationStatus}
         onClose={() => setVerificationStatus(null)}
-        styles={WalletScreenStyle}
+        styles={VaultScreenStyle}
         t={t}
       />
       {/* 通用 Pending Modal */}
@@ -204,7 +204,7 @@ const ModalsContainer = ({
             ? walletCreationStatus.subtitle
             : importingStatus.subtitle
         }
-        WalletScreenStyle={WalletScreenStyle}
+        VaultScreenStyle={VaultScreenStyle}
         t={t}
       />
 
@@ -218,7 +218,7 @@ const ModalsContainer = ({
         setSearchQuery={setSearchQuery}
         filteredCryptos={filteredCryptos}
         handleAddCrypto={handleAddCrypto}
-        WalletScreenStyle={WalletScreenStyle}
+        VaultScreenStyle={VaultScreenStyle}
         t={t}
         isDarkMode={isDarkMode}
         chainCategories={chainCategories}

@@ -123,7 +123,7 @@ const TransactionHistory = ({
         >
           {selectedChain === "All" ? (
             <Image
-              source={require("../../assets/WalletScreenLogo.png")}
+              source={require("../../assets/VaultScreenLogo.png")}
               style={{
                 width: 24,
                 height: 24,

@@ -1,4 +1,4 @@
-// MyColdWalletScreen.js
+// SecureDeviceScreen.js
 import React, { useState, useEffect, useRef, useContext } from "react";
 import {
   Vibration,
@@ -24,7 +24,7 @@ import { useTranslation } from "react-i18next";
 import i18n from "../config/i18n";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { DeviceContext, DarkModeContext } from "../utils/DeviceContext";
-import MyColdWalletScreenStyles from "../styles/MyColdWalletScreenStyle";
+import SecureDeviceScreenStyles from "../styles/SecureDeviceScreenStyle";
 import LanguageModal from "./modal/LanguageModal";
 import CurrencyModal from "./modal/CurrencyModal";
 import ChangePasswordModal from "./modal/ChangePasswordModal";
@@ -40,8 +40,8 @@ import NewPasswordModal from "./modal/NewPasswordModal";
 import * as LocalAuthentication from "expo-local-authentication";
 import AddressBookModal from "./modal/AddressBookModal";
 import PasswordModal from "./modal/PasswordModal";
-import MyColdWalletContent from "./MyColdWalletScreen/MyColdWalletContent";
-import getSettingsOptions from "./MyColdWalletScreen/settingsOptions";
+import MyColdWalletContent from "./SecureDeviceScreen/MyColdWalletContent";
+import getSettingsOptions from "./SecureDeviceScreen/settingsOptions";
 import { languages } from "../config/languages";
 import base64 from "base64-js";
 import { Buffer } from "buffer";
@@ -61,7 +61,7 @@ const serviceUUID = bluetoothConfig.serviceUUID;
 const writeCharacteristicUUID = bluetoothConfig.writeCharacteristicUUID;
 const notifyCharacteristicUUID = bluetoothConfig.notifyCharacteristicUUID;
 
-function MyColdWalletScreen({ onDarkModeChange }) {
+function SecureDeviceScreen({ onDarkModeChange }) {
   const { t } = useTranslation();
   const navigation = useNavigation();
   const {
@@ -80,7 +80,7 @@ function MyColdWalletScreen({ onDarkModeChange }) {
     updateDevicePubHintKey,
   } = useContext(DeviceContext);
   const { isDarkMode, setIsDarkMode } = useContext(DarkModeContext);
-  const MyColdWalletScreenStyle = MyColdWalletScreenStyles(isDarkMode);
+  const SecureDeviceScreenStyle = SecureDeviceScreenStyles(isDarkMode);
   const [currencyModalVisible, setCurrencyModalVisible] = useState(false);
   const [passwordModalVisible, setPasswordModalVisible] = useState(false);
   const [enterPasswordModalVisible, setEnterPasswordModalVisible] =
@@ -636,7 +636,7 @@ function MyColdWalletScreen({ onDarkModeChange }) {
       console.log("Error connecting or sending command to device:", error);
     }
   };
-  // MyColdWalletScreen.js handlePinSubmit
+  // SecureDeviceScreen.js handlePinSubmit
   const handlePinSubmit = async () => {
     setPinModalVisible(false);
     setVerificationModalVisible(false);
@@ -1027,10 +1027,10 @@ function MyColdWalletScreen({ onDarkModeChange }) {
   return (
     <LinearGradient
       colors={isDarkMode ? darkColors : lightColors}
-      style={MyColdWalletScreenStyle.container}
+      style={SecureDeviceScreenStyle.container}
     >
       <MyColdWalletContent
-        styles={MyColdWalletScreenStyle}
+        styles={SecureDeviceScreenStyle}
         settingsOptions={settingsOptions}
         isDeleteWalletVisible={isDeleteWalletVisible}
         setIsDeleteWalletVisible={setIsDeleteWalletVisible}
@@ -1050,7 +1050,7 @@ function MyColdWalletScreen({ onDarkModeChange }) {
         searchLanguage={searchLanguage}
         setSearchLanguage={setSearchLanguage}
         handleLanguageChange={handleLanguageChange}
-        styles={MyColdWalletScreenStyle}
+        styles={SecureDeviceScreenStyle}
         isDarkMode={isDarkMode}
         t={t}
       />
@@ -1063,7 +1063,7 @@ function MyColdWalletScreen({ onDarkModeChange }) {
         searchCurrency={searchCurrency}
         setSearchCurrency={setSearchCurrency}
         handleCurrencyChange={handleCurrencyChange}
-        styles={MyColdWalletScreenStyle}
+        styles={SecureDeviceScreenStyle}
         isDarkMode={isDarkMode}
         t={t}
       />
@@ -1074,7 +1074,7 @@ function MyColdWalletScreen({ onDarkModeChange }) {
         onClose={closePasswordModal}
         onSubmit={handleSetPassword}
         isDarkMode={isDarkMode}
-        styles={MyColdWalletScreenStyle}
+        styles={SecureDeviceScreenStyle}
         t={t}
         passwordModalVisible={passwordModalVisible}
         closePasswordModal={closePasswordModal}
@@ -1102,7 +1102,7 @@ function MyColdWalletScreen({ onDarkModeChange }) {
         setIsCurrentPasswordHidden={setIsCurrentPasswordHidden}
         t={t}
         isDarkMode={isDarkMode}
-        styles={MyColdWalletScreenStyle}
+        styles={SecureDeviceScreenStyle}
       />
 
       {/* Enter Password Modal */}
@@ -1111,7 +1111,7 @@ function MyColdWalletScreen({ onDarkModeChange }) {
         onClose={closeEnterPasswordModal}
         onSubmit={handleConfirmPassword}
         isDarkMode={isDarkMode}
-        styles={MyColdWalletScreenStyle}
+        styles={SecureDeviceScreenStyle}
         t={t}
         enterPasswordModalVisible={enterPasswordModalVisible}
         closeEnterPasswordModal={closeEnterPasswordModal}
@@ -1127,7 +1127,7 @@ function MyColdWalletScreen({ onDarkModeChange }) {
         visible={changePasswordModalVisible}
         onClose={() => setChangePasswordModalVisible(false)}
         onSubmit={handleNextForChangePassword}
-        styles={MyColdWalletScreenStyle}
+        styles={SecureDeviceScreenStyle}
         isDarkMode={isDarkMode}
         t={t}
       />
@@ -1149,7 +1149,7 @@ function MyColdWalletScreen({ onDarkModeChange }) {
         setIsConfirmPasswordHidden={setIsConfirmPasswordHidden}
         t={t}
         isDarkMode={isDarkMode}
-        styles={MyColdWalletScreenStyle}
+        styles={SecureDeviceScreenStyle}
       />
 
       {/* Bluetooth Modal */}
@@ -1161,7 +1161,7 @@ function MyColdWalletScreen({ onDarkModeChange }) {
         handleDevicePress={handleDevicePress}
         onCancel={handleCancel}
         verifiedDevices={verifiedDevices}
-        MyColdWalletScreenStyle={MyColdWalletScreenStyle}
+        SecureDeviceScreenStyle={SecureDeviceScreenStyle}
         t={t}
         onDisconnectPress={handleDisconnectPress}
       />
@@ -1173,7 +1173,7 @@ function MyColdWalletScreen({ onDarkModeChange }) {
         setPinCode={setPinCode}
         onSubmit={handlePinSubmit}
         onCancel={() => setPinModalVisible(false)}
-        styles={MyColdWalletScreenStyle}
+        styles={SecureDeviceScreenStyle}
         isDarkMode={isDarkMode}
         t={t}
         status={verificationStatus}
@@ -1184,7 +1184,7 @@ function MyColdWalletScreen({ onDarkModeChange }) {
         visible={verificationModalVisible && verificationStatus !== null}
         status={verificationStatus}
         onClose={() => setVerificationModalVisible(false)}
-        styles={MyColdWalletScreenStyle}
+        styles={SecureDeviceScreenStyle}
         t={t}
       />
 
@@ -1193,7 +1193,7 @@ function MyColdWalletScreen({ onDarkModeChange }) {
         visible={confirmDisconnectModalVisible}
         onConfirm={confirmDisconnect}
         onCancel={cancelDisconnect}
-        styles={MyColdWalletScreenStyle}
+        styles={SecureDeviceScreenStyle}
         t={t}
       />
 
@@ -1202,7 +1202,7 @@ function MyColdWalletScreen({ onDarkModeChange }) {
         visible={successModalVisible}
         onClose={() => setSuccessModalVisible(false)}
         message={modalMessage}
-        styles={MyColdWalletScreenStyle}
+        styles={SecureDeviceScreenStyle}
         t={t}
       />
 
@@ -1211,7 +1211,7 @@ function MyColdWalletScreen({ onDarkModeChange }) {
         visible={errorModalVisible}
         onClose={() => setErrorModalVisible(false)}
         message={modalMessage}
-        styles={MyColdWalletScreenStyle}
+        styles={SecureDeviceScreenStyle}
         t={t}
       />
 
@@ -1221,7 +1221,7 @@ function MyColdWalletScreen({ onDarkModeChange }) {
         onClose={() => setAddressBookModalVisible(false)}
         addresses={addresses}
         onSelect={handleAddressSelect}
-        styles={MyColdWalletScreenStyle}
+        styles={SecureDeviceScreenStyle}
         isDarkMode={isDarkMode}
         onAddAddress={handleAddAddress}
       />
@@ -1231,10 +1231,10 @@ function MyColdWalletScreen({ onDarkModeChange }) {
         animationType="slide"
         onRequestClose={() => setErrorModalVisible(false)}
       >
-        <View style={MyColdWalletScreenStyle.modalContainer}>
-          <View style={MyColdWalletScreenStyle.modalContent}>
-            <Text style={MyColdWalletScreenStyle.modalTitle}>{t("Error")}</Text>
-            <Text style={MyColdWalletScreenStyle.modalMessage}>
+        <View style={SecureDeviceScreenStyle.modalContainer}>
+          <View style={SecureDeviceScreenStyle.modalContent}>
+            <Text style={SecureDeviceScreenStyle.modalTitle}>{t("Error")}</Text>
+            <Text style={SecureDeviceScreenStyle.modalMessage}>
               {modalMessage}
             </Text>
             <Button
@@ -1248,4 +1248,4 @@ function MyColdWalletScreen({ onDarkModeChange }) {
   );
 }
 
-export default MyColdWalletScreen;
+export default SecureDeviceScreen;

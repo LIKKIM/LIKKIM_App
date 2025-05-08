@@ -1,4 +1,4 @@
-// ./WalletScreen/WalletContent.js
+// ./VaultScreen/WalletContent.js
 import React, { useEffect, useState } from "react";
 import {
   ScrollView,
@@ -21,7 +21,7 @@ import { BlurView } from "expo-blur";
 import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import AddressBookModal from "./../modal/AddressBookModal";
-import MyColdWalletScreenStyles from "../../styles/MyColdWalletScreenStyle";
+import SecureDeviceScreenStyles from "../../styles/SecureDeviceScreenStyle";
 import { WebView } from "react-native-webview";
 import { nftAPI } from "../../env/apiEndpoints";
 const SkeletonImage = ({ source, style, resizeMode }) => {
@@ -168,7 +168,7 @@ const WalletContent = (props) => {
   const [sendModalVisible, setSendModalVisible] = useState(false);
   const [recipientAddress, setRecipientAddress] = useState("");
   const [previewModalVisible, setPreviewModalVisible] = useState(false);
-  const styles = MyColdWalletScreenStyles(isDarkMode);
+  const styles = SecureDeviceScreenStyles(isDarkMode);
 
   // 处理 "Next" 按钮，打开预览 Modal
   const handlePreview = () => {
@@ -321,7 +321,7 @@ const WalletContent = (props) => {
   const {
     selectedView,
     scrollViewRef,
-    WalletScreenStyle,
+    VaultScreenStyle,
     modalVisible,
     cryptoCards,
     refreshing,
@@ -370,7 +370,7 @@ const WalletContent = (props) => {
       >
         {selectedChain === "All" ? (
           <Image
-            source={require("../../assets/WalletScreenLogo.png")}
+            source={require("../../assets/VaultScreenLogo.png")}
             style={{
               width: 24,
               height: 24,
@@ -426,12 +426,12 @@ const WalletContent = (props) => {
       showsHorizontalScrollIndicator={false}
       ref={scrollViewRef}
       contentContainerStyle={[
-        WalletScreenStyle.scrollViewContent,
+        VaultScreenStyle.scrollViewContent,
         modalVisible && { overflow: "hidden", height: "100%" },
         cryptoCards.length !== 0 && !modalVisible && { paddingBottom: 130 },
       ]}
       style={[
-        WalletScreenStyle.scrollView,
+        VaultScreenStyle.scrollView,
         modalVisible && { overflow: "hidden" },
       ]}
       onScroll={(event) => {
@@ -448,7 +448,7 @@ const WalletContent = (props) => {
     >
       <Animated.View
         style={[
-          WalletScreenStyle.totalBalanceContainer,
+          VaultScreenStyle.totalBalanceContainer,
           { opacity: opacityAnim },
         ]}
       >
@@ -461,12 +461,12 @@ const WalletContent = (props) => {
             }}
           >
             <View>
-              <Text style={WalletScreenStyle.totalBalanceText}>
+              <Text style={VaultScreenStyle.totalBalanceText}>
                 {t("Total Balance")}
               </Text>
-              <Text style={WalletScreenStyle.totalBalanceAmount}>
+              <Text style={VaultScreenStyle.totalBalanceAmount}>
                 {`${calculateTotalBalance()} `}
-                <Text style={WalletScreenStyle.currencyUnit}>
+                <Text style={VaultScreenStyle.currencyUnit}>
                   {currencyUnit}
                 </Text>
               </Text>
@@ -480,7 +480,7 @@ const WalletContent = (props) => {
         (props.EmptyWalletViewComponent ? (
           <props.EmptyWalletViewComponent
             isDarkMode={isDarkMode}
-            WalletScreenStyle={WalletScreenStyle}
+            VaultScreenStyle={VaultScreenStyle}
             setAddWalletModalVisible={props.setAddWalletModalVisible}
             t={t}
           />
@@ -511,17 +511,17 @@ const WalletContent = (props) => {
               initCardPosition(el, index);
             }}
             style={[
-              WalletScreenStyle.cardContainer,
+              VaultScreenStyle.cardContainer,
               selectedCardIndex === index && { zIndex: 3 },
             ]}
             disabled={modalVisible}
           >
             <Animated.View
               style={[
-                WalletScreenStyle.card,
+                VaultScreenStyle.card,
                 index === 0
-                  ? WalletScreenStyle.cardFirst
-                  : WalletScreenStyle.cardOthers,
+                  ? VaultScreenStyle.cardFirst
+                  : VaultScreenStyle.cardOthers,
                 selectedCardIndex === index && animatedCardStyle(index),
               ]}
             >
@@ -532,26 +532,26 @@ const WalletContent = (props) => {
               >
                 {["cardIconContainer", "cardChainIconContainer"].map(
                   (styleKey, i) => (
-                    <View key={i} style={WalletScreenStyle[styleKey]}>
+                    <View key={i} style={VaultScreenStyle[styleKey]}>
                       <Image
                         source={i === 0 ? card.icon : card.chainIcon}
                         style={
                           i === 0
-                            ? WalletScreenStyle.cardIcon
-                            : WalletScreenStyle.chainIcon
+                            ? VaultScreenStyle.cardIcon
+                            : VaultScreenStyle.chainIcon
                         }
                       />
                     </View>
                   )
                 )}
                 <View style={{ position: "absolute", top: 25, left: 65 }}>
-                  <View style={WalletScreenStyle.cardInfoContainer}>
+                  <View style={VaultScreenStyle.cardInfoContainer}>
                     {["cardName", "chainText"].map((textStyle, i) =>
                       i === 0 ? (
                         <Text
                           key={i}
                           style={[
-                            WalletScreenStyle[textStyle],
+                            VaultScreenStyle[textStyle],
                             {
                               color: isBlackText ? "#333" : "#eee",
                               marginRight: 4,
@@ -565,13 +565,13 @@ const WalletContent = (props) => {
                         <View
                           key={i}
                           style={[
-                            WalletScreenStyle.chainContainer,
+                            VaultScreenStyle.chainContainer,
                             { marginTop: 4 },
                           ]}
                         >
                           <Text
                             style={[
-                              WalletScreenStyle.chainCardText,
+                              VaultScreenStyle.chainCardText,
                               { color: isBlackText ? "#333" : "#eee" },
                             ]}
                           >
@@ -595,7 +595,7 @@ const WalletContent = (props) => {
                   />
                   <Text
                     style={[
-                      WalletScreenStyle.cardShortName,
+                      VaultScreenStyle.cardShortName,
                       isBlackText && { color: "#121518" },
                     ]}
                   >
@@ -606,20 +606,20 @@ const WalletContent = (props) => {
                   <>
                     <Text
                       style={[
-                        WalletScreenStyle.cardBalance,
+                        VaultScreenStyle.cardBalance,
                         isBlackText && { color: "#121518" },
                       ]}
                     >
                       {`${formatBalance(card.balance)}  ${card.shortName}`}
                     </Text>
-                    <View style={WalletScreenStyle.priceChangeView}>
+                    <View style={VaultScreenStyle.priceChangeView}>
                       <Text style={{ color: textColor, fontWeight: "bold" }}>
                         {percentageChange > 0 ? "+" : ""}
                         {percentageChange}%
                       </Text>
                       <Text
                         style={[
-                          WalletScreenStyle.balanceShortNameCenter,
+                          VaultScreenStyle.balanceShortNameCenter,
                           isBlackText && { color: "#121518" },
                         ]}
                       >
@@ -634,7 +634,7 @@ const WalletContent = (props) => {
                   </>
                 ) : (
                   cardInfoVisible && (
-                    <View style={WalletScreenStyle.cardModalContent}>
+                    <View style={VaultScreenStyle.cardModalContent}>
                       <TouchableOpacity
                         opacity={1}
                         onPress={() => props.handleQRCodePress(card)}
@@ -643,7 +643,7 @@ const WalletContent = (props) => {
                         <Image
                           source={require("../../assets/icon/QR.png")}
                           style={[
-                            WalletScreenStyle.QRImg,
+                            VaultScreenStyle.QRImg,
                             isBlackText && { tintColor: "#121518" },
                           ]}
                         />
@@ -653,7 +653,7 @@ const WalletContent = (props) => {
                           <Text
                             key={i}
                             style={[
-                              WalletScreenStyle[styleKey],
+                              VaultScreenStyle[styleKey],
                               isBlackText && { color: "#121518" },
                             ]}
                           >
@@ -760,7 +760,7 @@ const WalletContent = (props) => {
                   >
                     <Text
                       style={[
-                        WalletScreenStyle.modalSubtitle,
+                        VaultScreenStyle.modalSubtitle,
                         { color: "#666" },
                       ]}
                     >
@@ -769,7 +769,7 @@ const WalletContent = (props) => {
                   </View>
                 )}
                 <Text
-                  style={WalletScreenStyle.modalTitle}
+                  style={VaultScreenStyle.modalTitle}
                   numberOfLines={2}
                   ellipsizeMode="tail"
                 >
@@ -787,7 +787,7 @@ const WalletContent = (props) => {
                   <View style={{ flexDirection: "column" }}>
                     <Text
                       style={[
-                        WalletScreenStyle.chainCardText,
+                        VaultScreenStyle.chainCardText,
                         { marginBottom: 4 },
                       ]}
                     >
@@ -796,7 +796,7 @@ const WalletContent = (props) => {
                     </Text>
                     <Text
                       style={[
-                        WalletScreenStyle.chainCardText,
+                        VaultScreenStyle.chainCardText,
                         { marginBottom: 4 },
                       ]}
                     >
@@ -836,9 +836,9 @@ const WalletContent = (props) => {
         onRequestClose={toggleModal}
       >
         <TouchableWithoutFeedback onPress={toggleModal}>
-          <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
+          <BlurView intensity={10} style={VaultScreenStyle.centeredView}>
             <View
-              style={WalletScreenStyle.NFTmodalView}
+              style={VaultScreenStyle.NFTmodalView}
               onStartShouldSetResponder={(e) => e.stopPropagation()}
             >
               {selectedNFT ? (
@@ -869,7 +869,7 @@ const WalletContent = (props) => {
                     >
                       <Text
                         style={[
-                          WalletScreenStyle.modalSubtitle,
+                          VaultScreenStyle.modalSubtitle,
                           { color: "#666" },
                         ]}
                       >
@@ -895,7 +895,7 @@ const WalletContent = (props) => {
                       {/* NFT 名称 */}
                       <Text
                         style={[
-                          WalletScreenStyle.modalTitle,
+                          VaultScreenStyle.modalTitle,
                           { marginBottom: 4 },
                         ]}
                       >
@@ -905,7 +905,7 @@ const WalletContent = (props) => {
                       {/* 合约地址 */}
                       <Text
                         style={[
-                          WalletScreenStyle.chainCardText,
+                          VaultScreenStyle.chainCardText,
                           { marginBottom: 2 },
                         ]}
                       >
@@ -915,7 +915,7 @@ const WalletContent = (props) => {
                       {/* Token ID */}
                       <Text
                         style={[
-                          WalletScreenStyle.chainCardText,
+                          VaultScreenStyle.chainCardText,
                           { marginBottom: 2 },
                         ]}
                       >
@@ -923,7 +923,7 @@ const WalletContent = (props) => {
                       </Text>
 
                       {/* 协议类型 */}
-                      <Text style={WalletScreenStyle.chainCardText}>
+                      <Text style={VaultScreenStyle.chainCardText}>
                         {t("Protocol")}: {selectedNFT.protocolType || t("N/A")}
                       </Text>
 
@@ -931,7 +931,7 @@ const WalletContent = (props) => {
                       {selectedNFT.lastPrice && (
                         <Text
                           style={[
-                            WalletScreenStyle.modalTitle,
+                            VaultScreenStyle.modalTitle,
                             { marginTop: 8 },
                           ]}
                         >
@@ -945,7 +945,7 @@ const WalletContent = (props) => {
               ) : (
                 <Text
                   style={[
-                    WalletScreenStyle.modalSubtitle,
+                    VaultScreenStyle.modalSubtitle,
                     { textAlign: "center" },
                   ]}
                 >
@@ -962,7 +962,7 @@ const WalletContent = (props) => {
               >
                 <TouchableOpacity
                   style={[
-                    WalletScreenStyle.NFTButton,
+                    VaultScreenStyle.NFTButton,
                     { flex: 1, marginRight: 8 },
                   ]}
                   onPress={() => {
@@ -971,12 +971,12 @@ const WalletContent = (props) => {
                     setSendModalVisible(true);
                   }}
                 >
-                  <Text style={WalletScreenStyle.ButtonText}>{t("send")}</Text>
+                  <Text style={VaultScreenStyle.ButtonText}>{t("send")}</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
                   style={[
-                    WalletScreenStyle.NFTButton,
+                    VaultScreenStyle.NFTButton,
 
                     { flex: 1, marginLeft: 8 },
                   ]}
@@ -984,7 +984,7 @@ const WalletContent = (props) => {
                     console.log("Save to Cold Wallet clicked");
                   }}
                 >
-                  <Text style={WalletScreenStyle.NFTButtonText}>
+                  <Text style={VaultScreenStyle.NFTButtonText}>
                     {t("Save to Likkim Hardware")}
                   </Text>
                 </TouchableOpacity>
@@ -1004,9 +1004,9 @@ const WalletContent = (props) => {
           style={{ flex: 1 }}
         >
           <TouchableWithoutFeedback onPress={() => setSendModalVisible(false)}>
-            <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
+            <BlurView intensity={10} style={VaultScreenStyle.centeredView}>
               <View
-                style={WalletScreenStyle.inputAddressModal}
+                style={VaultScreenStyle.inputAddressModal}
                 onStartShouldSetResponder={(e) => e.stopPropagation()}
               >
                 <View
@@ -1016,7 +1016,7 @@ const WalletContent = (props) => {
                   }}
                 >
                   <Text
-                    style={[WalletScreenStyle.modalTitle, { marginBottom: 10 }]}
+                    style={[VaultScreenStyle.modalTitle, { marginBottom: 10 }]}
                   >
                     {t("Send NFT")}
                   </Text>
@@ -1044,13 +1044,13 @@ const WalletContent = (props) => {
                   >
                     <Text
                       style={[
-                        WalletScreenStyle.modalTitle,
+                        VaultScreenStyle.modalTitle,
                         { flexWrap: "wrap" },
                       ]}
                     >
                       {selectedNFT?.name || "NFT Name"}
                     </Text>
-                    <Text style={WalletScreenStyle.NFTtext}>
+                    <Text style={VaultScreenStyle.NFTtext}>
                       {t("Token ID")}: {selectedNFT?.tokenId || "N/A"}
                     </Text>
                   </ScrollView>
@@ -1065,7 +1065,7 @@ const WalletContent = (props) => {
                 >
                   <TextInput
                     style={[
-                      WalletScreenStyle.input,
+                      VaultScreenStyle.input,
                       { flex: 1, color: isDarkMode ? "#ffffff" : "#000" },
                     ]}
                     placeholder={t("Enter Address")}
@@ -1084,19 +1084,19 @@ const WalletContent = (props) => {
                   />
                 </View>
                 <TouchableOpacity
-                  style={[WalletScreenStyle.submitButton]}
+                  style={[VaultScreenStyle.submitButton]}
                   disabled={!recipientAddress}
                   onPress={handlePreview}
                 >
-                  <Text style={WalletScreenStyle.ButtonText}>{t("Next")}</Text>
+                  <Text style={VaultScreenStyle.ButtonText}>{t("Next")}</Text>
                 </TouchableOpacity>
 
                 {/* 关闭按钮 */}
                 <TouchableOpacity
-                  style={[WalletScreenStyle.Button]}
+                  style={[VaultScreenStyle.Button]}
                   onPress={() => setSendModalVisible(false)}
                 >
-                  <Text style={WalletScreenStyle.ButtonText}>{t("Close")}</Text>
+                  <Text style={VaultScreenStyle.ButtonText}>{t("Close")}</Text>
                 </TouchableOpacity>
               </View>
             </BlurView>
@@ -1117,9 +1117,9 @@ const WalletContent = (props) => {
         onRequestClose={() => setPreviewModalVisible(false)}
       >
         <TouchableWithoutFeedback onPress={() => setPreviewModalVisible(false)}>
-          <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
+          <BlurView intensity={10} style={VaultScreenStyle.centeredView}>
             <View
-              style={WalletScreenStyle.inputAddressModal}
+              style={VaultScreenStyle.inputAddressModal}
               onStartShouldSetResponder={(e) => e.stopPropagation()}
             >
               {/* 标题栏 */}
@@ -1129,7 +1129,7 @@ const WalletContent = (props) => {
                   alignItems: "center",
                 }}
               >
-                <Text style={WalletScreenStyle.modalTitle}>
+                <Text style={VaultScreenStyle.modalTitle}>
                   {props.t("Preview Transaction")}
                 </Text>
               </View>
@@ -1160,29 +1160,29 @@ const WalletContent = (props) => {
                 </View>
               </View>
 
-              <Text style={WalletScreenStyle.label}>
+              <Text style={VaultScreenStyle.label}>
                 {props.t("Recipient Address")}
               </Text>
 
               <Text>{recipientAddress || props.t("No Address Selected")}</Text>
               <View>
                 <TouchableOpacity
-                  style={WalletScreenStyle.submitButton}
+                  style={VaultScreenStyle.submitButton}
                   disabled={!recipientAddress}
                   onPress={() => {
                     console.log("Confirming Transaction...");
                     setPreviewModalVisible(false);
                   }}
                 >
-                  <Text style={WalletScreenStyle.ButtonText}>
+                  <Text style={VaultScreenStyle.ButtonText}>
                     {props.t("Send")}
                   </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  style={WalletScreenStyle.cancelButton}
+                  style={VaultScreenStyle.cancelButton}
                   onPress={() => setPreviewModalVisible(false)}
                 >
-                  <Text style={WalletScreenStyle.ButtonText}>
+                  <Text style={VaultScreenStyle.ButtonText}>
                     {props.t("Close")}
                   </Text>
                 </TouchableOpacity>

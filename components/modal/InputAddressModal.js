@@ -14,7 +14,7 @@ import {
 import { BlurView } from "expo-blur";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import AddressBookModal from "./AddressBookModal";
-import MyColdWalletScreenStyles from "../../styles/MyColdWalletScreenStyle";
+import SecureDeviceScreenStyles from "../../styles/SecureDeviceScreenStyle";
 
 const InputAddressModal = ({
   visible,
@@ -35,7 +35,7 @@ const InputAddressModal = ({
   selectedCryptoIcon,
 }) => {
   const [isAddressBookVisible, setAddressBookVisible] = useState(false);
-  const styles = MyColdWalletScreenStyles(isDarkMode);
+  const styles = SecureDeviceScreenStyles(isDarkMode);
 
   const handleIconPress = () => {
     setAddressBookVisible(true);

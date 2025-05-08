@@ -1756,7 +1756,7 @@ function TransactionsScreen() {
             setSelectedDevice(null);
           }}
           verifiedDevices={"0"}
-          MyColdWalletScreenStyle={TransactionsScreenStyle}
+          SecureDeviceScreenStyle={TransactionsScreenStyle}
           t={t}
           onDisconnectPress={handleDisconnectDevice}
         />

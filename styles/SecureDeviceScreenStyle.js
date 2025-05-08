@@ -1,7 +1,7 @@
-// styles/MyColdWalletScreenStyle.js
+// styles/SecureDeviceScreenStyle.js
 import { StyleSheet } from "react-native";
 
-const MyColdWalletScreenStyles = (isDarkMode) => {
+const SecureDeviceScreenStyles = (isDarkMode) => {
   const textColor = isDarkMode ? "#fff" : "#000";
   const backgroundColor = isDarkMode ? "#121212" : "#f5f5f5";
   const modalBackgroundColor = isDarkMode ? "#3F3D3C" : "#ffffff";
@@ -474,4 +474,4 @@ const MyColdWalletScreenStyles = (isDarkMode) => {
   });
 };
 
-export default MyColdWalletScreenStyles;
+export default SecureDeviceScreenStyles;

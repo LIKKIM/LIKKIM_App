@@ -14,7 +14,7 @@ import { LineChart } from "react-native-chart-kit";
 import * as Haptics from "expo-haptics";
 import { DarkModeContext } from "../../utils/DeviceContext";
 import { useTranslation } from "react-i18next";
-import WalletScreenStyles from "../../styles/WalletScreenStyle";
+import VaultScreenStyles from "../../styles/VaultScreenStyle";
 import { chartAPI } from "../../env/apiEndpoints";
 
 export default function PriceChartCom({
@@ -24,7 +24,7 @@ export default function PriceChartCom({
 }) {
   const { t } = useTranslation();
   const { isDarkMode } = useContext(DarkModeContext);
-  const WalletScreenStyle = WalletScreenStyles(isDarkMode);
+  const VaultScreenStyle = VaultScreenStyles(isDarkMode);
   const screenWidth = Dimensions.get("window").width;
 
   const [isRefreshing, setIsRefreshing] = useState(false);
@@ -185,7 +185,7 @@ export default function PriceChartCom({
                 textAlign: "center",
               }}
             >
-              <Text style={WalletScreenStyle.modalSubtitle}>
+              <Text style={VaultScreenStyle.modalSubtitle}>
                 {t("No data available")}
               </Text>
             </View>

@@ -22,7 +22,7 @@ const AddressModal = ({
   isVerifyingAddress,
   addressVerificationMessage,
   handleVerifyAddress,
-  WalletScreenStyle,
+  VaultScreenStyle,
   t,
   isDarkMode,
 }) => (
@@ -32,31 +32,31 @@ const AddressModal = ({
     visible={visible}
     onRequestClose={onClose}
   >
-    <BlurView intensity={10} style={WalletScreenStyle.centeredView}>
-      <View style={WalletScreenStyle.receiveModalView}>
+    <BlurView intensity={10} style={VaultScreenStyle.centeredView}>
+      <View style={VaultScreenStyle.receiveModalView}>
         <AddressHeader
           selectedCryptoIcon={selectedCryptoIcon}
           selectedCrypto={selectedCrypto}
-          WalletScreenStyle={WalletScreenStyle}
+          VaultScreenStyle={VaultScreenStyle}
           t={t}
         />
         <AddressInfo
           selectedAddress={selectedAddress}
           isDarkMode={isDarkMode}
-          WalletScreenStyle={WalletScreenStyle}
+          VaultScreenStyle={VaultScreenStyle}
           t={t}
         />
         <QRCodeView selectedAddress={selectedAddress} />
         {isVerifyingAddress && (
           <VerifyingStatus
             message={addressVerificationMessage}
-            WalletScreenStyle={WalletScreenStyle}
+            VaultScreenStyle={VaultScreenStyle}
           />
         )}
         <ActionButtons
           handleVerifyAddress={handleVerifyAddress}
           onClose={onClose}
-          WalletScreenStyle={WalletScreenStyle}
+          VaultScreenStyle={VaultScreenStyle}
           t={t}
           selectedCardChainShortName={selectedCardChainShortName}
         />
@@ -68,24 +68,24 @@ const AddressModal = ({
 const AddressHeader = ({
   selectedCryptoIcon,
   selectedCrypto,
-  WalletScreenStyle,
+  VaultScreenStyle,
   t,
 }) => (
   <View style={{ flexDirection: "row", alignItems: "center" }}>
-    <Text style={WalletScreenStyle.modalTitle}>{t("Address for")}</Text>
+    <Text style={VaultScreenStyle.modalTitle}>{t("Address for")}</Text>
     {selectedCryptoIcon && (
       <Image
         source={selectedCryptoIcon}
         style={{ width: 24, height: 24, marginHorizontal: 5 }}
       />
     )}
-    <Text style={WalletScreenStyle.modalTitle}>{selectedCrypto}:</Text>
+    <Text style={VaultScreenStyle.modalTitle}>{selectedCrypto}:</Text>
   </View>
 );
 
-const AddressInfo = ({ selectedAddress, isDarkMode, WalletScreenStyle, t }) => (
+const AddressInfo = ({ selectedAddress, isDarkMode, VaultScreenStyle, t }) => (
   <>
-    <Text style={WalletScreenStyle.subtitleText}>
+    <Text style={VaultScreenStyle.subtitleText}>
       {t("Assets can only be sent within the same chain.")}
     </Text>
     <View
@@ -95,7 +95,7 @@ const AddressInfo = ({ selectedAddress, isDarkMode, WalletScreenStyle, t }) => (
         alignItems: "center",
       }}
     >
-      <Text style={WalletScreenStyle.addressText}>{selectedAddress}</Text>
+      <Text style={VaultScreenStyle.addressText}>{selectedAddress}</Text>
       <TouchableOpacity onPress={() => Clipboard.setString(selectedAddress)}>
         <Icon
           name="content-copy"
@@ -122,15 +122,13 @@ const QRCodeView = ({ selectedAddress }) => (
   </View>
 );
 
-const VerifyingStatus = ({ message, WalletScreenStyle }) => (
+const VerifyingStatus = ({ message, VaultScreenStyle }) => (
   <View style={{ flexDirection: "row", alignItems: "center" }}>
     <Image
       source={require("../../assets/gif/Pending.gif")}
       style={{ width: 40, height: 40 }}
     />
-    <Text
-      style={[WalletScreenStyle.verifyingAddressText, { color: "#3CDA84" }]}
-    >
+    <Text style={[VaultScreenStyle.verifyingAddressText, { color: "#3CDA84" }]}>
       {message}
     </Text>
   </View>
@@ -139,7 +137,7 @@ const VerifyingStatus = ({ message, WalletScreenStyle }) => (
 const ActionButtons = ({
   handleVerifyAddress,
   onClose,
-  WalletScreenStyle,
+  VaultScreenStyle,
   t,
   selectedCardChainShortName,
 }) => (
@@ -152,17 +150,17 @@ const ActionButtons = ({
   >
     <TouchableOpacity
       onPress={() => handleVerifyAddress(selectedCardChainShortName)}
-      style={WalletScreenStyle.verifyAddressButton}
+      style={VaultScreenStyle.verifyAddressButton}
     >
-      <Text style={WalletScreenStyle.submitButtonText}>
+      <Text style={VaultScreenStyle.submitButtonText}>
         {t("Verify Address")}
       </Text>
     </TouchableOpacity>
     <TouchableOpacity
-      style={WalletScreenStyle.cancelAddressButton}
+      style={VaultScreenStyle.cancelAddressButton}
       onPress={onClose}
     >
-      <Text style={WalletScreenStyle.cancelButtonText}>{t("Close")}</Text>
+      <Text style={VaultScreenStyle.cancelButtonText}>{t("Close")}</Text>
     </TouchableOpacity>
   </View>
 );
