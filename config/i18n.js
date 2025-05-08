@@ -12,7 +12,6 @@ i18n
       en: {
         translation: {
           "Add Wallet": "Add Wallet",
-
           Close: "Close",
           "Value:": "Value:",
           "Delete Card": "Delete Card",
@@ -63,8 +62,7 @@ i18n
           Continue: "Continue",
           "Never share the recovery phrase.":
             "Never share the recovery phrase.",
-          "Please save the recovery phrase displayed on the LIKKIM hardware wallet screen.":
-            "Please save the recovery phrase displayed on the LIKKIM hardware wallet screen.",
+
           "Scroll down to view all words": "Scroll down to view all words",
           "Recovery Phrase": "Recovery Phrase",
           "Read the following, then save the phrase securely.":
@@ -259,8 +257,7 @@ i18n
 
           Continue: "继续",
           "Never share the recovery phrase.": "不要分享恢复短语。",
-          "Please save the recovery phrase displayed on the LIKKIM hardware wallet screen.":
-            "请保存 LIKKIM 硬件钱包屏幕上显示的恢复短语。",
+
           "Scroll down to view all words": "向下滚动查看所有单词",
           "Recovery Phrase": "恢复短语",
           "Read the following, then save the phrase securely.":
@@ -448,8 +445,7 @@ i18n
 
           Continue: "繼續",
           "Never share the recovery phrase.": "不要分享恢復短語。",
-          "Please save the recovery phrase displayed on the LIKKIM hardware wallet screen.":
-            "請保存 LIKKIM 硬體錢包螢幕上顯示的恢復短語。",
+
           "Scroll down to view all words": "向下滾動查看所有單詞",
           "Recovery Phrase": "恢復短語",
           "Read the following, then save the phrase securely.":
@@ -650,8 +646,7 @@ i18n
           Continue: "Continuer",
           "Never share the recovery phrase.":
             "Ne partagez jamais la phrase de récupération.",
-          "Please save the recovery phrase displayed on the LIKKIM hardware wallet screen.":
-            "Veuillez enregistrer la phrase de récupération affichée sur l'écran du portefeuille matériel LIKKIM.",
+
           "Scroll down to view all words":
             "Faites défiler vers le bas pour voir tous les mots",
           "Recovery Phrase": "Phrase de récupération",
@@ -880,8 +875,7 @@ i18n
           Continue: "Continuar",
           "Never share the recovery phrase.":
             "Nunca compartas la frase de recuperación.",
-          "Please save the recovery phrase displayed on the LIKKIM hardware wallet screen.":
-            "Por favor, guarda la frase de recuperación que aparece en la pantalla del monedero de hardware LIKKIM.",
+
           "Scroll down to view all words":
             "Desplázate hacia abajo para ver todas las palabras",
           "Recovery Phrase": "Frase de recuperación",
@@ -1081,8 +1075,7 @@ i18n
 
           Continue: "متابعة",
           "Never share the recovery phrase.": "لا تشارك عبارة الاسترداد أبدًا.",
-          "Please save the recovery phrase displayed on the LIKKIM hardware wallet screen.":
-            "يرجى حفظ عبارة الاسترداد المعروضة على شاشة محفظة الأجهزة LIKKIM.",
+
           "Scroll down to view all words":
             "قم بالتمرير لأسفل لعرض جميع الكلمات",
           "Recovery Phrase": "عبارة الاسترداد",
@@ -1282,8 +1275,7 @@ i18n
           Continue: "続行",
           "Never share the recovery phrase.":
             "リカバリーフレーズは絶対に共有しないでください。",
-          "Please save the recovery phrase displayed on the LIKKIM hardware wallet screen.":
-            "LIKKIMハードウェアウォレットの画面に表示されるリカバリーフレーズを保存してください。",
+
           "Scroll down to view all words":
             "すべての単語を見るには下にスクロールしてください",
           "Recovery Phrase": "リカバリーフレーズ",
@@ -1506,8 +1498,7 @@ i18n
           Continue: "Продолжить",
           "Never share the recovery phrase.":
             "Никогда не делитесь фразой восстановления.",
-          "Please save the recovery phrase displayed on the LIKKIM hardware wallet screen.":
-            "Пожалуйста, сохраните фразу восстановления, отображаемую на экране аппаратного кошелька LIKKIM.",
+
           "Scroll down to view all words":
             "Прокрутите вниз, чтобы увидеть все слова",
           "Recovery Phrase": "Фраза восстановления",
@@ -1707,8 +1698,7 @@ i18n
           Continue: "계속",
           "Never share the recovery phrase.":
             "복구 구문을 절대 공유하지 마세요.",
-          "Please save the recovery phrase displayed on the LIKKIM hardware wallet screen.":
-            "LIKKIM 하드웨어 지갑 화면에 표시된 복구 구문을 저장하세요.",
+
           "Scroll down to view all words":
             "모든 단어를 보려면 아래로 스크롤하세요",
           "Recovery Phrase": "복구 구문",
@@ -1908,8 +1898,7 @@ i18n
           Continue: "Continuar",
           "Never share the recovery phrase.":
             "Nunca compartilhe a frase de recuperação.",
-          "Please save the recovery phrase displayed on the LIKKIM hardware wallet screen.":
-            "Por favor, salve a frase de recuperação exibida na tela da carteira de hardware LIKKIM.",
+
           "Scroll down to view all words":
             "Role para baixo para ver todas as palavras",
           "Recovery Phrase": "Frase de recuperação",
@@ -2113,8 +2102,7 @@ i18n
           Continue: "Continuar",
           "Never share the recovery phrase.":
             "Nunca compartilhe a frase de recuperação.",
-          "Please save the recovery phrase displayed on the LIKKIM hardware wallet screen.":
-            "Por favor, salve a frase de recuperação exibida na tela da carteira de hardware LIKKIM.",
+
           "Scroll down to view all words":
             "Role para baixo para ver todas as palavras",
           "Recovery Phrase": "Frase de recuperação",
@@ -2334,8 +2322,7 @@ i18n
           Continue: "Continua",
           "Never share the recovery phrase.":
             "Non condividere mai la frase di recupero.",
-          "Please save the recovery phrase displayed on the LIKKIM hardware wallet screen.":
-            "Si prega di salvare la frase di recupero visualizzata sullo schermo del portafoglio hardware LIKKIM.",
+
           "Scroll down to view all words":
             "Scorri verso il basso per visualizzare tutte le parole",
           "Recovery Phrase": "Frase di recupero",
@@ -2541,8 +2528,7 @@ i18n
           Continue: "Fortsetzen",
           "Never share the recovery phrase.":
             "Teilen Sie niemals die Wiederherstellungsphrase.",
-          "Please save the recovery phrase displayed on the LIKKIM hardware wallet screen.":
-            "Bitte speichern Sie die Wiederherstellungsphrase, die auf dem Bildschirm der LIKKIM-Hardware-Wallet angezeigt wird.",
+
           "Scroll down to view all words":
             "Scrollen Sie nach unten, um alle Wörter zu sehen",
           "Recovery Phrase": "Wiederherstellungsphrase",
@@ -2748,8 +2734,7 @@ i18n
           Continue: "जारी रखें",
           "Never share the recovery phrase.":
             "रिकवरी वाक्यांश को कभी साझा न करें।",
-          "Please save the recovery phrase displayed on the LIKKIM hardware wallet screen.":
-            "कृपया LIKKIM हार्डवेयर वॉलेट स्क्रीन पर प्रदर्शित रिकवरी वाक्यांश को सहेजें।",
+
           "Scroll down to view all words":
             "सभी शब्दों को देखने के लिए नीचे स्क्रॉल करें",
           "Recovery Phrase": "रिकवरी वाक्यांश",
@@ -2953,8 +2938,7 @@ i18n
           Continue: "Үргэлжлүүлэх",
           "Never share the recovery phrase.":
             "Сэргээх үгийг хэзээ ч бүү хуваалцаарай.",
-          "Please save the recovery phrase displayed on the LIKKIM hardware wallet screen.":
-            "LIKKIM техник хангамжийн түрийвчний дэлгэц дээрх сэргээх үгийг хадгалаарай.",
+
           "Scroll down to view all words":
             "Бүх үгийг харахын тулд доош гүйлгэнэ үү",
           "Recovery Phrase": "Сэргээх үг",
@@ -3164,8 +3148,7 @@ i18n
 
           Continue: "ดำเนินการต่อ",
           "Never share the recovery phrase.": "อย่าแชร์วลีการกู้คืน",
-          "Please save the recovery phrase displayed on the LIKKIM hardware wallet screen.":
-            "โปรดบันทึกวลีการกู้คืนที่แสดงบนหน้าจอกระเป๋าเงินฮาร์ดแวร์ LIKKIM",
+
           "Scroll down to view all words": "เลื่อนลงเพื่อดูคำทั้งหมด",
           "Recovery Phrase": "วลีการกู้คืน",
           "Read the following, then save the phrase securely.":
@@ -3364,8 +3347,7 @@ i18n
           Continue: "Продовжити",
           "Never share the recovery phrase.":
             "Ніколи не діліться фразою відновлення.",
-          "Please save the recovery phrase displayed on the LIKKIM hardware wallet screen.":
-            "Будь ласка, збережіть фразу відновлення, що відображається на екрані апаратного гаманця LIKKIM.",
+
           "Scroll down to view all words":
             "Прокрутіть вниз, щоб побачити всі слова",
           "Recovery Phrase": "Фраза відновлення",
@@ -3565,8 +3547,7 @@ i18n
           Continue: "Tiếp tục",
           "Never share the recovery phrase.":
             "Không bao giờ chia sẻ cụm từ khôi phục.",
-          "Please save the recovery phrase displayed on the LIKKIM hardware wallet screen.":
-            "Vui lòng lưu cụm từ khôi phục hiển thị trên màn hình ví phần cứng LIKKIM.",
+
           "Scroll down to view all words": "Cuộn xuống để xem tất cả các từ",
           "Recovery Phrase": "Cụm từ khôi phục",
           "Read the following, then save the phrase securely.":
@@ -3769,8 +3750,7 @@ i18n
           Continue: "Lanjutkan",
           "Never share the recovery phrase.":
             "Jangan pernah membagikan frasa pemulihan.",
-          "Please save the recovery phrase displayed on the LIKKIM hardware wallet screen.":
-            "Silakan simpan frasa pemulihan yang ditampilkan di layar dompet perangkat keras LIKKIM.",
+
           "Scroll down to view all words":
             "Gulir ke bawah untuk melihat semua kata",
           "Recovery Phrase": "Frasa pemulihan",
@@ -3972,8 +3952,7 @@ i18n
           Continue: "Magpatuloy",
           "Never share the recovery phrase.":
             "Huwag kailanman ibahagi ang parirala ng pagbawi.",
-          "Please save the recovery phrase displayed on the LIKKIM hardware wallet screen.":
-            "Paki-save ang parirala ng pagbawi na ipinapakita sa screen ng LIKKIM hardware wallet.",
+
           "Scroll down to view all words":
             "Mag-scroll pababa upang makita ang lahat ng mga salita",
           "Recovery Phrase": "Parirala ng pagbawi",
@@ -4181,8 +4160,7 @@ i18n
           Continue: "চালিয়ে যান",
           "Never share the recovery phrase.":
             "পুনরুদ্ধার বাক্যাংশটি কখনই শেয়ার করবেন না।",
-          "Please save the recovery phrase displayed on the LIKKIM hardware wallet screen.":
-            "দয়া করে LIKKIM হার্ডওয়্যার ওয়ালেট স্ক্রিনে প্রদর্শিত পুনরুদ্ধার বাক্যাংশটি সংরক্ষণ করুন।",
+
           "Scroll down to view all words": "সমস্ত শব্দ দেখতে নীচে স্ক্রোল করুন",
           "Recovery Phrase": "পুনরুদ্ধার বাক্যাংশ",
           "Read the following, then save the phrase securely.":
