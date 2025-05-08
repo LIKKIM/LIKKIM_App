@@ -43,8 +43,8 @@ import SelectCryptoModal from "./modal/SelectCryptoModal";
 import SwapModal from "./modal/SwapModal";
 import ShowReceiveInfoModal from "./modal/ShowReceiveInfoModal";
 import SecurityCodeModal from "./modal/SecurityCodeModal";
-import ActivityLog from "./TransactionScreens/ActivityLog";
-import ActionButtons from "./TransactionScreens/ActionButtons";
+import ActivityLog from "./ActivityScreen/ActivityLog";
+import ActionButtons from "./ActivityScreen/ActionButtons";
 
 // 自定义组件
 import displayDeviceAddress from "../utils/displayDeviceAddress";
