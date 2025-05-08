@@ -414,7 +414,6 @@ function VaultScreen({ route, navigation }) {
     });
   }, [navigation, selectedView, isDarkMode, t, isModalVisible]);
 
-  // 加载持久化的链选择（需要在 cryptoCards 加载后再进行）
   useEffect(() => {
     const loadSelectedChain = async () => {
       try {
@@ -429,6 +428,7 @@ function VaultScreen({ route, navigation }) {
             setSelectedChainShortName([savedChain]);
           }
         } else {
+          // ✅ 如果没有保存任何 chain，设置为全部
           setSelectedChain("All");
           setSelectedChainShortName(
             cryptoCards.map((card) => card.chainShortName)
@@ -436,12 +436,14 @@ function VaultScreen({ route, navigation }) {
         }
       } catch (e) {
         console.error("Error loading selected chain:", e);
+        setSelectedChain("All");
+        setSelectedChainShortName(
+          cryptoCards.map((card) => card.chainShortName)
+        );
       }
     };
 
-    if (cryptoCards && cryptoCards.length > 0) {
-      loadSelectedChain();
-    }
+    loadSelectedChain(); // 🔁 总是执行一次，确保不会卡死在空状态
   }, [cryptoCards]);
 
   useEffect(() => {
