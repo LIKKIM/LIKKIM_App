@@ -1,7 +1,7 @@
 // ModalsContainer.js
 import React from "react";
 import AddressModal from "../modal/AddressModal";
-import AddWalletModal from "../modal/AddWalletModal";
+import ConnectDeviceModal from "../modal/ConnectDeviceModal";
 import TipModal from "../modal/TipModal";
 import ProcessModal from "../modal/ProcessModal";
 import DeleteConfirmationModal from "../modal/DeleteConfirmationModal";
@@ -27,8 +27,8 @@ const ModalsContainer = ({
   VaultScreenStyle,
   t,
   isDarkMode,
-  addWalletModalVisible,
-  setAddWalletModalVisible,
+  ConnectDeviceModalVisible,
+  setConnectDeviceModalVisible,
   handleCreateWallet,
   handleImportWallet,
   handleWalletTest,
@@ -104,9 +104,9 @@ const ModalsContainer = ({
         isDarkMode={isDarkMode}
       />
       {/* Add Wallet Modal */}
-      <AddWalletModal
-        visible={addWalletModalVisible}
-        onClose={() => setAddWalletModalVisible(false)}
+      <ConnectDeviceModal
+        visible={ConnectDeviceModalVisible}
+        onClose={() => setConnectDeviceModalVisible(false)}
         onCreateWallet={handleCreateWallet}
         onImportWallet={handleImportWallet}
         onWalletTest={handleWalletTest}

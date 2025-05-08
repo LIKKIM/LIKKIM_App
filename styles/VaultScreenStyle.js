@@ -644,7 +644,7 @@ const VaultScreenStyles = (isDarkMode) => {
       justifyContent: "space-between",
     },
 
-    inputAddressModal: {
+    ContactFormModal: {
       width: "90%",
       backgroundColor: modalBackgroundColor,
       borderRadius: 20,

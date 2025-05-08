@@ -4,7 +4,7 @@ import { View, ImageBackground, TouchableOpacity, Text } from "react-native";
 const EmptyWalletView = ({
   isDarkMode,
   VaultScreenStyle,
-  setAddWalletModalVisible,
+  setConnectDeviceModalVisible,
   t,
 }) => {
   return (
@@ -19,7 +19,7 @@ const EmptyWalletView = ({
         imageStyle={VaultScreenStyle.addWalletImageBorder}
       >
         <TouchableOpacity
-          onPress={() => setAddWalletModalVisible(true)}
+          onPress={() => setConnectDeviceModalVisible(true)}
           style={VaultScreenStyle.addWalletButton}
         >
           <Text style={VaultScreenStyle.addWalletButtonText}>

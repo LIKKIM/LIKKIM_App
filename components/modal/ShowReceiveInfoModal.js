@@ -1,4 +1,4 @@
-// ReceiveAddressModal.js
+// ShowReceiveInfoModal.js
 import React from "react";
 import {
   Modal,
@@ -12,7 +12,7 @@ import { BlurView } from "expo-blur";
 import QRCode from "react-native-qrcode-svg";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
-const ReceiveAddressModal = ({
+const ShowReceiveInfoModal = ({
   visible,
   onRequestClose,
   TransactionsScreenStyle,
@@ -141,4 +141,4 @@ const ReceiveAddressModal = ({
   );
 };
 
-export default ReceiveAddressModal;
+export default ShowReceiveInfoModal;

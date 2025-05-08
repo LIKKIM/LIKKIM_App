@@ -106,7 +106,8 @@ function VaultScreen({ route, navigation }) {
   const [selectedCardName, setSelectedCardName] = useState(null); // 已选中的卡片名称
   const [selectedCardChain, setSelectedCardChain] = useState(null); // 已选中的卡片链信息
   const [addIconModalVisible, setAddIconModalVisible] = useState(false);
-  const [addWalletModalVisible, setAddWalletModalVisible] = useState(false);
+  const [ConnectDeviceModalVisible, setConnectDeviceModalVisible] =
+    useState(false);
   const [tipModalVisible, setTipModalVisible] = useState(false);
   const [processModalVisible, setProcessModalVisible] = useState(false);
   const [recoveryPhraseModalVisible, setRecoveryPhraseModalVisible] =
@@ -1410,12 +1411,12 @@ function VaultScreen({ route, navigation }) {
   };
 
   const handleCreateWallet = () => {
-    setAddWalletModalVisible(false);
+    setConnectDeviceModalVisible(false);
     setTipModalVisible(true);
   };
 
   const handleImportWallet = () => {
-    setAddWalletModalVisible(false);
+    setConnectDeviceModalVisible(false);
 
     if (verifiedDevices.length > 0) {
       // 如果有已验证的设备，找到设备并执行导入命令
@@ -1434,7 +1435,7 @@ function VaultScreen({ route, navigation }) {
   };
 
   const handleWalletTest = () => {
-    setAddWalletModalVisible(false);
+    setConnectDeviceModalVisible(false);
     setProcessModalVisible(true);
   };
 
@@ -1597,7 +1598,7 @@ function VaultScreen({ route, navigation }) {
         priceChanges={priceChanges}
         getConvertedBalance={getConvertedBalance}
         handleQRCodePress={handleQRCodePress}
-        setAddWalletModalVisible={setAddWalletModalVisible}
+        setConnectDeviceModalVisible={setConnectDeviceModalVisible}
         renderTabModal={renderTabModal}
         EmptyWalletViewComponent={EmptyWalletView}
         scrollYOffset={scrollYOffset}
@@ -1615,8 +1616,8 @@ function VaultScreen({ route, navigation }) {
         VaultScreenStyle={VaultScreenStyle}
         t={t}
         isDarkMode={isDarkMode}
-        addWalletModalVisible={addWalletModalVisible}
-        setAddWalletModalVisible={setAddWalletModalVisible}
+        ConnectDeviceModalVisible={ConnectDeviceModalVisible}
+        setConnectDeviceModalVisible={setConnectDeviceModalVisible}
         handleCreateWallet={handleCreateWallet}
         handleImportWallet={handleImportWallet}
         handleWalletTest={handleWalletTest}

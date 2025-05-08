@@ -1,9 +1,9 @@
-// modal/AddWalletModal.js
+// modal/ConnectDeviceModal.js
 import React from "react";
 import { View, Text, Modal, TouchableOpacity } from "react-native";
 import { BlurView } from "expo-blur";
 
-const AddWalletModal = ({
+const ConnectDeviceModal = ({
   visible,
   onClose,
   onCreateWallet,
@@ -42,4 +42,4 @@ const AddWalletModal = ({
   );
 };
 
-export default AddWalletModal;
+export default ConnectDeviceModal;

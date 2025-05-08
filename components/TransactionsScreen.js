@@ -34,14 +34,14 @@ import TransactionsScreenStyles from "../styles/TransactionsScreenStyle";
 
 // Modal 组件
 import TransactionConfirmationModal from "./modal/TransactionConfirmationModal";
-import InputAddressModal from "./modal/InputAddressModal";
-import PendingTransactionModal from "./modal/PendingTransactionModal";
+import ContactFormModal from "./modal/ContactFormModal";
+import ActivityProgressModal from "./modal/ActivityProgressModal";
 import CheckStatusModal from "./modal/CheckStatusModal";
 import BluetoothModal from "./modal/BluetoothModal";
 import AmountModal from "./modal/AmountModal";
 import SelectCryptoModal from "./modal/SelectCryptoModal";
 import SwapModal from "./modal/SwapModal";
-import ReceiveAddressModal from "./modal/ReceiveAddressModal";
+import ShowReceiveInfoModal from "./modal/ShowReceiveInfoModal";
 import SecurityCodeModal from "./modal/SecurityCodeModal";
 import TransactionHistory from "./TransactionScreens/TransactionHistory";
 import ActionButtons from "./TransactionScreens/ActionButtons";
@@ -128,8 +128,7 @@ function TransactionsScreen() {
   const [isVerifyingAddress, setIsVerifyingAddress] = useState(false);
   const [verificationFailModalVisible, setVerificationFailModalVisible] =
     useState(false);
-  const [inputAddressModalVisible, setInputAddressModalVisible] =
-    useState(false);
+  const [ContactFormModalVisible, setContactFormModalVisible] = useState(false);
   const [detectedNetwork, setDetectedNetwork] = useState("");
   const [fee, setFee] = useState("");
   const [rapidFee, setRapidFee] = useState("");
@@ -1559,7 +1558,7 @@ function TransactionsScreen() {
         if (device) {
           setAddressModalVisible(false);
           setInputAddress("");
-          setInputAddressModalVisible(true);
+          setContactFormModalVisible(true);
         } else {
           setBleVisible(true);
           setModalVisible(false);
@@ -1573,7 +1572,7 @@ function TransactionsScreen() {
 
   const handleNextAfterAddress = () => {
     setAmount("");
-    setInputAddressModalVisible(false);
+    setContactFormModalVisible(false);
     setAmountModalVisible(true);
   };
 
@@ -1619,9 +1618,9 @@ function TransactionsScreen() {
         />
 
         {/* 输入地址的 Modal */}
-        <InputAddressModal
-          visible={inputAddressModalVisible}
-          onRequestClose={() => setInputAddressModalVisible(false)}
+        <ContactFormModal
+          visible={ContactFormModalVisible}
+          onRequestClose={() => setContactFormModalVisible(false)}
           TransactionsScreenStyle={TransactionsScreenStyle}
           t={t}
           isDarkMode={isDarkMode}
@@ -1632,7 +1631,7 @@ function TransactionsScreen() {
           buttonBackgroundColor={buttonBackgroundColor}
           disabledButtonBackgroundColor={disabledButtonBackgroundColor}
           handleNextAfterAddress={handleNextAfterAddress}
-          setInputAddressModalVisible={setInputAddressModalVisible}
+          setContactFormModalVisible={setContactFormModalVisible}
           selectedCrypto={selectedCrypto}
           selectedCryptoChain={selectedCryptoChain}
           selectedCryptoIcon={selectedCryptoIcon}
@@ -1731,7 +1730,7 @@ function TransactionsScreen() {
           isDarkMode={isDarkMode}
         />
         {/* 显示选择的加密货币地址的模态窗口 */}
-        <ReceiveAddressModal
+        <ShowReceiveInfoModal
           visible={addressModalVisible}
           onRequestClose={() => setAddressModalVisible(false)}
           TransactionsScreenStyle={TransactionsScreenStyle}
@@ -1793,7 +1792,7 @@ function TransactionsScreen() {
         />
 
         {/* Pending Transaction Modal */}
-        <PendingTransactionModal
+        <ActivityProgressModal
           visible={confirmingTransactionModalVisible}
           onClose={() => setConfirmingTransactionModalVisible(false)}
           modalStatus={modalStatus}

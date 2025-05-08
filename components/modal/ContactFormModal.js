@@ -1,4 +1,4 @@
-// InputAddressModal.js
+// ContactFormModal.js
 import React, { useState } from "react";
 import {
   Modal,
@@ -16,7 +16,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import AddressBookModal from "./AddressBookModal";
 import SecureDeviceScreenStyles from "../../styles/SecureDeviceScreenStyle";
 
-const InputAddressModal = ({
+const ContactFormModal = ({
   visible,
   onRequestClose,
   TransactionsScreenStyle,
@@ -29,7 +29,7 @@ const InputAddressModal = ({
   buttonBackgroundColor,
   disabledButtonBackgroundColor,
   handleNextAfterAddress,
-  setInputAddressModalVisible,
+  setContactFormModalVisible,
   selectedCrypto,
   selectedCryptoChain,
   selectedCryptoIcon,
@@ -39,12 +39,12 @@ const InputAddressModal = ({
 
   const handleIconPress = () => {
     setAddressBookVisible(true);
-    setInputAddressModalVisible(false);
+    setContactFormModalVisible(false);
   };
 
   const handleAddressSelect = (selectedAddress) => {
     handleAddressChange(selectedAddress.address);
-    setInputAddressModalVisible(true);
+    setContactFormModalVisible(true);
     setAddressBookVisible(false);
   };
 
@@ -154,7 +154,7 @@ const InputAddressModal = ({
             </TouchableOpacity>
             <TouchableOpacity
               style={TransactionsScreenStyle.cancelButton}
-              onPress={() => setInputAddressModalVisible(false)}
+              onPress={() => setContactFormModalVisible(false)}
             >
               <Text style={TransactionsScreenStyle.cancelButtonText}>
                 {t("Cancel")}
@@ -175,4 +175,4 @@ const InputAddressModal = ({
   );
 };
 
-export default InputAddressModal;
+export default ContactFormModal;

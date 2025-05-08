@@ -481,7 +481,7 @@ const WalletContent = (props) => {
           <props.EmptyWalletViewComponent
             isDarkMode={isDarkMode}
             VaultScreenStyle={VaultScreenStyle}
-            setAddWalletModalVisible={props.setAddWalletModalVisible}
+            setConnectDeviceModalVisible={props.setConnectDeviceModalVisible}
             t={t}
           />
         ) : null)}
@@ -1006,7 +1006,7 @@ const WalletContent = (props) => {
           <TouchableWithoutFeedback onPress={() => setSendModalVisible(false)}>
             <BlurView intensity={10} style={VaultScreenStyle.centeredView}>
               <View
-                style={VaultScreenStyle.inputAddressModal}
+                style={VaultScreenStyle.ContactFormModal}
                 onStartShouldSetResponder={(e) => e.stopPropagation()}
               >
                 <View
@@ -1119,7 +1119,7 @@ const WalletContent = (props) => {
         <TouchableWithoutFeedback onPress={() => setPreviewModalVisible(false)}>
           <BlurView intensity={10} style={VaultScreenStyle.centeredView}>
             <View
-              style={VaultScreenStyle.inputAddressModal}
+              style={VaultScreenStyle.ContactFormModal}
               onStartShouldSetResponder={(e) => e.stopPropagation()}
             >
               {/* 标题栏 */}

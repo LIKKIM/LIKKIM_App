@@ -1,8 +1,8 @@
-// PendingTransactionModal.js
+// ActivityProgressModal.js
 import React from "react";
 import { View, Text, Modal, Image, TouchableOpacity } from "react-native";
 
-const PendingTransactionModal = ({
+const ActivityProgressModal = ({
   visible,
   onClose,
   modalStatus,
@@ -47,4 +47,4 @@ const PendingTransactionModal = ({
   );
 };
 
-export default PendingTransactionModal;
+export default ActivityProgressModal;
