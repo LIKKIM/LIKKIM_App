@@ -562,7 +562,6 @@ i18n
       fr: {
         translation: {
           "Add Wallet": "Ajouter un portefeuille",
-
           Close: "Fermer",
           "Value:": "Valeur :",
           "Delete Card": "Supprimer la carte",
@@ -612,13 +611,10 @@ i18n
           "Remove Chain Account": "Supprimer le compte de chaîne",
           Remove: "Supprimer",
           "Security in your hands": "Sécurité entre vos mains",
-
           Continue: "Continuer",
-
           "Scroll down to view all words":
             "Faites défiler vers le bas pour voir tous les mots",
           "Recovery Phrase": "Phrase de récupération",
-
           "Generating your accounts": "Génération de vos comptes",
           "Encrypting your data": "Cryptage de vos données",
           "Your wallet is now ready": "Votre portefeuille est prêt",
