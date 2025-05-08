@@ -1,8 +1,7 @@
 // ModalsContainer.js
 import React from "react";
 import AddressModal from "../modal/AddressModal";
-import ConnectDeviceModal from "../modal/ConnectDeviceModal";
-import TipModal from "../modal/TipModal";
+
 import ProcessModal from "../modal/ProcessModal";
 import DeleteConfirmationModal from "../modal/DeleteConfirmationModal";
 import BluetoothModal from "../modal/BluetoothModal";
@@ -27,13 +26,9 @@ const ModalsContainer = ({
   VaultScreenStyle,
   t,
   isDarkMode,
-  ConnectDeviceModalVisible,
-  setConnectDeviceModalVisible,
-  handleCreateWallet,
-  handleImportWallet,
+
   handleWalletTest,
-  tipModalVisible,
-  setTipModalVisible,
+
   handleContinue,
   processModalVisible,
   setProcessModalVisible,
@@ -103,24 +98,7 @@ const ModalsContainer = ({
         t={t}
         isDarkMode={isDarkMode}
       />
-      {/* Add Wallet Modal */}
-      <ConnectDeviceModal
-        visible={ConnectDeviceModalVisible}
-        onClose={() => setConnectDeviceModalVisible(false)}
-        onCreateWallet={handleCreateWallet}
-        onImportWallet={handleImportWallet}
-        onWalletTest={handleWalletTest}
-        styles={VaultScreenStyle}
-        t={t}
-      />
-      {/* 提示 Modal */}
-      <TipModal
-        visible={tipModalVisible}
-        onClose={() => setTipModalVisible(false)}
-        onContinue={handleContinue}
-        styles={VaultScreenStyle}
-        t={t}
-      />
+
       {/* Process Modal */}
       <ProcessModal
         visible={processModalVisible}

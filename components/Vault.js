@@ -106,9 +106,7 @@ function VaultScreen({ route, navigation }) {
   const [selectedCardName, setSelectedCardName] = useState(null); // 已选中的卡片名称
   const [selectedCardChain, setSelectedCardChain] = useState(null); // 已选中的卡片链信息
   const [addIconModalVisible, setAddIconModalVisible] = useState(false);
-  const [ConnectDeviceModalVisible, setConnectDeviceModalVisible] =
-    useState(false);
-  const [tipModalVisible, setTipModalVisible] = useState(false);
+
   const [processModalVisible, setProcessModalVisible] = useState(false);
   const [recoveryPhraseModalVisible, setRecoveryPhraseModalVisible] =
     useState(false);
@@ -873,110 +871,6 @@ function VaultScreen({ route, navigation }) {
     }
   };
 
-  // 创建钱包命令
-  const sendCreateWalletCommand = async (device) => {
-    try {
-      // 检查 device 是否为一个有效的设备对象
-      if (typeof device !== "object" || !device.isConnected) {
-        console.log("无效的设备对象：", device);
-        return;
-      }
-
-      // 无论设备是否连接，均重新连接并发现服务和特性
-      await device.connect();
-      await device.discoverAllServicesAndCharacteristics();
-      console.log("设备已连接并发现所有服务。");
-
-      if (
-        typeof device.writeCharacteristicWithResponseForService !== "function"
-      ) {
-        console.log(
-          "设备没有 writeCharacteristicWithResponseForService 方法。"
-        );
-        return;
-      }
-
-      // 构建创建钱包命令为字符串 "create:16"
-      const createWalletCommand = "create:16";
-
-      // 将字符串转换为 UTF-8 编码的 Buffer
-      const bufferCommand = Buffer.from(createWalletCommand, "utf-8");
-
-      // 将 Buffer 转换为 Base64 编码的字符串
-      const base64Command = bufferCommand.toString("base64");
-
-      console.log(`创建钱包命令 (字符串): ${createWalletCommand}`);
-      console.log(`创建钱包命令 (Base64): ${base64Command}`);
-
-      // 发送 Base64 编码的命令
-      await device.writeCharacteristicWithResponseForService(
-        serviceUUID, // BLE服务的UUID
-        writeCharacteristicUUID, // 可写特性的UUID
-        base64Command // Base64 编码字符串
-      );
-
-      console.log("创建钱包命令已发送");
-
-      // 开始监听创建结果
-      monitorWalletCreationResult(device);
-    } catch (error) {
-      console.log("发送创建钱包命令失败:", error);
-    }
-  };
-
-  // 导入钱包命令
-  const sendImportWalletCommand = async (device) => {
-    try {
-      // 检查 device 是否为一个有效的设备对象
-      if (typeof device !== "object" || !device.isConnected) {
-        console.log("无效的设备对象：", device);
-        return;
-      }
-
-      console.log("发送导入钱包命令之前的设备对象:", device);
-
-      // 无论设备是否连接，均重新连接并发现服务和特性
-      await device.connect();
-      await device.discoverAllServicesAndCharacteristics();
-      console.log("设备已连接并发现所有服务。");
-
-      if (
-        typeof device.writeCharacteristicWithResponseForService !== "function"
-      ) {
-        console.log(
-          "设备没有 writeCharacteristicWithResponseForService 方法。"
-        );
-        return;
-      }
-
-      // 构建导入钱包命令为字符串 "Import"
-      const importWalletCommand = "Import";
-
-      // 将字符串转换为 UTF-8 编码的 Buffer
-      const bufferCommand = Buffer.from(importWalletCommand, "utf-8");
-
-      // 将 Buffer 转换为 Base64 编码的字符串
-      const base64Command = bufferCommand.toString("base64");
-
-      console.log(`导入钱包命令 (字符串): ${importWalletCommand}`);
-      console.log(`导入钱包命令 (Base64): ${base64Command}`);
-
-      // 发送 Base64 编码的命令
-      await device.writeCharacteristicWithResponseForService(
-        serviceUUID, // BLE服务的UUID
-        writeCharacteristicUUID, // 可写特性的UUID
-        base64Command // Base64 编码字符串
-      );
-
-      console.log("导入钱包命令已发送");
-
-      // 开始监听导入结果
-      monitorWalletCreationResult(device);
-    } catch (error) {
-      console.log("发送导入钱包命令失败:", error);
-    }
-  };
-
   // 点击 QR 代码图片时显示地址模态窗口
   const handleQRCodePress = (crypto) => {
     setSelectedCrypto(crypto.shortName);
@@ -1411,37 +1305,11 @@ function VaultScreen({ route, navigation }) {
     setAddCryptoVisible(false);
   };
 
-  const handleCreateWallet = () => {
-    setConnectDeviceModalVisible(false);
-    setTipModalVisible(true);
-  };
-
-  const handleImportWallet = () => {
-    setConnectDeviceModalVisible(false);
-
-    if (verifiedDevices.length > 0) {
-      // 如果有已验证的设备，找到设备并执行导入命令
-      const device = devices.find((d) => d.id === verifiedDevices[0]);
-      if (device) {
-        sendImportWalletCommand(device);
-        setImportingModalVisible(true);
-      } else {
-        // 如果找不到与ID匹配的设备对象，则显示蓝牙模态框
-        setBleVisible(true);
-      }
-    } else {
-      // 如果没有已验证的设备，显示蓝牙模态框
-      setBleVisible(true);
-    }
-  };
-
   const handleWalletTest = () => {
-    setConnectDeviceModalVisible(false);
     setProcessModalVisible(true);
   };
 
   const handleContinue = () => {
-    setTipModalVisible(false);
     setRecoveryPhraseModalVisible(false);
 
     if (verifiedDevices.length > 0) {
@@ -1449,8 +1317,6 @@ function VaultScreen({ route, navigation }) {
       const device = devices.find((d) => d.id === verifiedDevices[0]);
       if (device) {
         // 调用监听钱包地址的函数
-
-        sendCreateWalletCommand(device); // 确保这里传递的是完整的设备对象
 
         setCreatePendingModalVisible(true);
       } else {
@@ -1599,7 +1465,6 @@ function VaultScreen({ route, navigation }) {
         priceChanges={priceChanges}
         getConvertedBalance={getConvertedBalance}
         handleQRCodePress={handleQRCodePress}
-        setConnectDeviceModalVisible={setConnectDeviceModalVisible}
         renderTabModal={renderTabModal}
         EmptyWalletView={EmptyWalletView}
         scrollYOffset={scrollYOffset}
@@ -1619,13 +1484,7 @@ function VaultScreen({ route, navigation }) {
         VaultScreenStyle={VaultScreenStyle}
         t={t}
         isDarkMode={isDarkMode}
-        ConnectDeviceModalVisible={ConnectDeviceModalVisible}
-        setConnectDeviceModalVisible={setConnectDeviceModalVisible}
-        handleCreateWallet={handleCreateWallet}
-        handleImportWallet={handleImportWallet}
         handleWalletTest={handleWalletTest}
-        tipModalVisible={tipModalVisible}
-        setTipModalVisible={setTipModalVisible}
         processModalVisible={processModalVisible}
         setProcessModalVisible={setProcessModalVisible}
         processMessages={processMessages}
