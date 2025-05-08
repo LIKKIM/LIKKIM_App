@@ -149,8 +149,6 @@ i18n
             "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.",
           "Value in USD": "Value in USD",
           Fee: "Fee",
-          "Confirming Transaction on LIKKIM Device...":
-            "Confirming Transaction on LIKKIM Device...",
           "Please confirm the transaction on your LIKKIM device.":
             "Please confirm the transaction on your LIKKIM device.",
           "Verifying Address on LIKKIM...": "Verifying Address on LIKKIM...",
@@ -400,8 +398,7 @@ i18n
           Success: "成功",
           "Your wallet has been deleted successfully.": "您的钱包已成功删除。",
           "Insufficient Balance": "余额不足",
-          "Confirming Transaction on LIKKIM Device...":
-            "正在确认LIKKIM设备上的交易...",
+
           "Please confirm the transaction on your LIKKIM device.":
             "请在您的LIKKIM设备上确认交易。",
           Save: "保存",
@@ -607,8 +604,7 @@ i18n
           Success: "成功",
           "Your wallet has been deleted successfully.": "您的錢包已成功刪除。",
           "Insufficient Balance": "餘額不足",
-          "Confirming Transaction on LIKKIM Device...":
-            "正在確認LIKKIM設備上的交易...",
+
           "Please confirm the transaction on your LIKKIM device.":
             "請在您的LIKKIM設備上確認交易。",
           Save: "儲存",
@@ -774,8 +770,7 @@ i18n
             "Veuillez désinstaller puis réinstaller l'application sur votre téléphone pour supprimer les données de l'application LIKKIM, y compris les comptes et les paramètres.",
           "Value in USD": "Valeur en USD",
           Fee: "Frais",
-          "Confirming Transaction on LIKKIM Device...":
-            "Confirmation de la transaction sur le dispositif LIKKIM...",
+
           "Please confirm the transaction on your LIKKIM device.":
             "Veuillez confirmer la transaction sur votre dispositif LIKKIM.",
           "Verifying Address on LIKKIM...":
@@ -1015,8 +1010,7 @@ i18n
             "Desinstale y luego reinstale la aplicación en su teléfono para eliminar los datos de la aplicación LIKKIM, incluidos los cuentas y configuraciones.",
           "Value in USD": "Valor en USD",
           Fee: "Tarifa",
-          "Confirming Transaction on LIKKIM Device...":
-            "Confirmando transacción en el dispositivo LIKKIM...",
+
           "Please confirm the transaction on your LIKKIM device.":
             "Por favor confirme la transacción en su dispositivo LIKKIM.",
           "Verifying Address on LIKKIM...":
@@ -1275,8 +1269,7 @@ i18n
           Success: "نجاح",
           "Your wallet has been deleted successfully.": "تم حذف محفظتك بنجاح.",
           "Insufficient Balance": "رصيد غير كافي",
-          "Confirming Transaction on LIKKIM Device...":
-            "تأكيد العملية على جهاز LIKKIM...",
+
           "Please confirm the transaction on your LIKKIM device.":
             "يرجى تأكيد العملية على جهاز LIKKIM الخاص بك.",
           Save: "حفظ",
@@ -1441,8 +1434,7 @@ i18n
             "LIKKIMアプリのデータ（アカウントや設定を含む）を削除するには、アプリをアンインストールしてから再インストールしてください。",
           "Value in USD": "米ドルでの値",
           Fee: "手数料",
-          "Confirming Transaction on LIKKIM Device...":
-            "LIKKIMデバイスで取引を確認しています...",
+
           "Please confirm the transaction on your LIKKIM device.":
             "LIKKIMデバイスで取引を確認してください。",
           "Verifying Address on LIKKIM...": "LIKKIMでアドレスを確認中...",
@@ -1460,8 +1452,7 @@ i18n
             "LIKKIMアプリのデータ（アカウントや設定を含む）を削除するには、アプリをアンインストールしてから再インストールしてください。",
           "Value in USD": "米ドルでの値",
           Fee: "手数料",
-          "Confirming Transaction on LIKKIM Device...":
-            "LIKKIMデバイスで取引を確認しています...",
+
           "Please confirm the transaction on your LIKKIM device.":
             "LIKKIMデバイスで取引を確認してください。",
           "Verifying Address on LIKKIM...": "LIKKIMでアドレスを確認中...",
@@ -1727,8 +1718,7 @@ i18n
           "Your wallet has been deleted successfully.":
             "Ваш кошелек был успешно удален.",
           "Insufficient Balance": "Недостаточно средств",
-          "Confirming Transaction on LIKKIM Device...":
-            "Подтверждение транзакции на устройстве LIKKIM...",
+
           "Please confirm the transaction on your LIKKIM device.":
             "Пожалуйста, подтвердите транзакцию на вашем устройстве LIKKIM.",
           Save: "Сохранить",
@@ -1889,8 +1879,7 @@ i18n
             "LIKKIM 앱 데이터를 삭제하려면 앱을 삭제한 후 다시 설치하십시오. 여기에는 계정 및 설정이 포함됩니다.",
           "Value in USD": "미국 달러로 된 값",
           Fee: "수수료",
-          "Confirming Transaction on LIKKIM Device...":
-            "LIKKIM 장치에서 거래를 확인하는 중...",
+
           "Please confirm the transaction on your LIKKIM device.":
             "LIKKIM 장치에서 거래를 확인하십시오.",
           "Verifying Address on LIKKIM...": "LIKKIM에서 주소를 확인하는 중...",
@@ -4347,8 +4336,7 @@ i18n
           "Your wallet has been deleted successfully.":
             "Matagumpay na natanggal ang iyong wallet.",
           "Insufficient Balance": "Hindi sapat na balanse",
-          "Confirming Transaction on LIKKIM Device...":
-            "Kinukumpirma ang transaksyon sa LIKKIM Device...",
+
           "Please confirm the transaction on your LIKKIM device.":
             "Pakikumpirma ang transaksyon sa iyong LIKKIM device.",
           Save: "I-save",
@@ -4568,8 +4556,7 @@ i18n
           "Your wallet has been deleted successfully.":
             "আপনার ওয়ালেট সফলভাবে মুছে ফেলা হয়েছে।",
           "Insufficient Balance": "অপর্যাপ্ত ব্যালেন্স",
-          "Confirming Transaction on LIKKIM Device...":
-            "LIKKIM ডিভাইসে লেনদেন নিশ্চিত করা হচ্ছে...",
+
           "Please confirm the transaction on your LIKKIM device.":
             "আপনার LIKKIM ডিভাইসে লেনদেন নিশ্চিত করুন।",
           Save: "সংরক্ষণ",
