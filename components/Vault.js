@@ -1599,8 +1599,9 @@ function VaultScreen({ route, navigation }) {
         handleQRCodePress={handleQRCodePress}
         setConnectDeviceModalVisible={setConnectDeviceModalVisible}
         renderTabModal={renderTabModal}
-        EmptyWalletViewComponent={EmptyWalletView}
+        EmptyWalletView={EmptyWalletView}
         scrollYOffset={scrollYOffset}
+        handleContinue={handleContinue}
       />
       <ModalsContainer
         selectedCardChainShortName={selectedCardChainShortName}
@@ -1622,7 +1623,6 @@ function VaultScreen({ route, navigation }) {
         handleWalletTest={handleWalletTest}
         tipModalVisible={tipModalVisible}
         setTipModalVisible={setTipModalVisible}
-        handleContinue={handleContinue}
         processModalVisible={processModalVisible}
         setProcessModalVisible={setProcessModalVisible}
         processMessages={processMessages}

@@ -340,6 +340,7 @@ const SecureDeviceStatus = (props) => {
     animatedCardStyle,
     selectedCardIndex,
     cardInfoVisible,
+    handleContinue,
   } = props;
 
   const handleNFTSelect = (nft) => {
@@ -477,11 +478,11 @@ const SecureDeviceStatus = (props) => {
       </Animated.View>
 
       {cryptoCards.length === 0 &&
-        (props.EmptyWalletViewComponent ? (
-          <props.EmptyWalletViewComponent
+        (props.EmptyWalletView ? (
+          <props.EmptyWalletView
             isDarkMode={isDarkMode}
             VaultScreenStyle={VaultScreenStyle}
-            setConnectDeviceModalVisible={props.setConnectDeviceModalVisible}
+            handleContinue={handleContinue}
             t={t}
           />
         ) : null)}
