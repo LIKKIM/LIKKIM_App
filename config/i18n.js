@@ -67,16 +67,13 @@ i18n
           "Recovery Phrase": "Recovery Phrase",
           "Read the following, then save the phrase securely.":
             "Read the following, then save the phrase securely.",
-
-          "Verify and I've Saved the Phrase":
-            "Verify and I've Saved the Phrase",
-          "Creating your wallet": "Creating your wallet",
+ 
           "Generating your accounts": "Generating your accounts",
           "Encrypting your data": "Encrypting your data",
           "Your wallet is now ready": "Your wallet is now ready",
           "Let's Go": "Let's Go",
           "Use spaces between words": "Use spaces between words",
-          "Import Recovery Phrase": "Import Recovery Phrase",
+ ,
           Version: "Version",
           "Assets can only be sent within the same chain.":
             "Assets can only be sent within the same chain.",
@@ -263,14 +260,13 @@ i18n
           "Read the following, then save the phrase securely.":
             "请阅读以下内容，然后安全地保存恢复短语。",
 
-          "Verify and I've Saved the Phrase": "验证并且我已保存短语",
-          "Creating your wallet": "创建你的钱包",
+ 
           "Generating your accounts": "生成你的账户",
           "Encrypting your data": "加密你的数据",
           "Your wallet is now ready": "你的钱包已准备就绪",
           "Let's Go": "开始吧",
           "Use spaces between words": "单词之间用空格分隔",
-          "Import Recovery Phrase": "导入恢复短语",
+ 
           Version: "版本",
           "Assets can only be sent within the same chain.":
             "资产只能在同一链内发送。",
@@ -451,14 +447,12 @@ i18n
           "Read the following, then save the phrase securely.":
             "請閱讀以下內容，然後安全地保存恢復短語。",
 
-          "Verify and I've Saved the Phrase": "驗證並且我已保存短語",
-          "Creating your wallet": "創建你的錢包",
           "Generating your accounts": "生成你的帳戶",
           "Encrypting your data": "加密你的數據",
           "Your wallet is now ready": "你的錢包已準備就緒",
           "Let's Go": "開始吧",
           "Use spaces between words": "單詞之間用空格分隔",
-          "Import Recovery Phrase": "導入恢復短語",
+         
           Version: "版本",
           "Assets can only be sent within the same chain.":
             "資產只能在同一鏈內發送。",
@@ -653,15 +647,13 @@ i18n
           "Read the following, then save the phrase securely.":
             "Lisez ce qui suit, puis enregistrez la phrase en toute sécurité.",
 
-          "Verify and I've Saved the Phrase":
-            "Vérifiez et j'ai sauvegardé la phrase",
-          "Creating your wallet": "Création de votre portefeuille",
+ 
           "Generating your accounts": "Génération de vos comptes",
           "Encrypting your data": "Cryptage de vos données",
           "Your wallet is now ready": "Votre portefeuille est prêt",
           "Let's Go": "Allons-y",
           "Use spaces between words": "Utilisez des espaces entre les mots",
-          "Import Recovery Phrase": "Importer la phrase de récupération",
+           
           Version: "Version",
           "Assets can only be sent within the same chain.":
             "Les actifs ne peuvent être envoyés que sur la même chaîne.",
@@ -882,15 +874,12 @@ i18n
           "Read the following, then save the phrase securely.":
             "Lea lo siguiente, luego guarde la frase de forma segura.",
 
-          "Verify and I've Saved the Phrase":
-            "Verificar y he guardado la frase",
-          "Creating your wallet": "Creando tu billetera",
           "Generating your accounts": "Generando tus cuentas",
           "Encrypting your data": "Encriptando tus datos",
           "Your wallet is now ready": "Tu billetera está lista",
           "Let's Go": "Vamos",
           "Use spaces between words": "Usa espacios entre las palabras",
-          "Import Recovery Phrase": "Importar frase de recuperación",
+ 
           Version: "Versión",
           "Assets can only be sent within the same chain.":
             "Los activos solo se pueden enviar dentro de la misma cadena.",
@@ -1082,14 +1071,12 @@ i18n
           "Read the following, then save the phrase securely.":
             "اقرأ ما يلي ، ثم احفظ العبارة بأمان.",
 
-          "Verify and I've Saved the Phrase": "تحقق وقد قمت بحفظ العبارة",
-          "Creating your wallet": "إنشاء محفظتك",
           "Generating your accounts": "إنشاء حساباتك",
           "Encrypting your data": "تشفير بياناتك",
           "Your wallet is now ready": "محفظتك جاهزة الآن",
           "Let's Go": "هيا بنا",
           "Use spaces between words": "استخدم مسافات بين الكلمات",
-          "Import Recovery Phrase": "استيراد عبارة الاسترداد",
+       
           Version: "الإصدار",
           "Assets can only be sent within the same chain.":
             "يمكن إرسال الأصول فقط ضمن نفس السلسلة.",
@@ -1282,14 +1269,12 @@ i18n
           "Read the following, then save the phrase securely.":
             "以下を読んでからフレーズを安全に保存してください。",
 
-          "Verify and I've Saved the Phrase": "確認してフレーズを保存しました",
-          "Creating your wallet": "ウォレットを作成中",
           "Generating your accounts": "アカウントを生成中",
           "Encrypting your data": "データを暗号化中",
           "Your wallet is now ready": "ウォレットの準備が整いました",
           "Let's Go": "始めましょう",
           "Use spaces between words": "単語の間にスペースを使用",
-          "Import Recovery Phrase": "リカバリーフレーズをインポート",
+ 
           Version: "バージョン",
           "Assets can only be sent within the same chain.":
             "資産は同じチェーン内でのみ送信できます。",
@@ -1505,14 +1490,12 @@ i18n
           "Read the following, then save the phrase securely.":
             "Прочитайте следующее, затем сохраните фразу надежно.",
 
-          "Verify and I've Saved the Phrase": "Проверить и я сохранил фразу",
-          "Creating your wallet": "Создание вашего кошелька",
           "Generating your accounts": "Создание ваших аккаунтов",
           "Encrypting your data": "Шифрование ваших данных",
           "Your wallet is now ready": "Ваш кошелек готов",
           "Let's Go": "Поехали",
           "Use spaces between words": "Используйте пробелы между словами",
-          "Import Recovery Phrase": "Импортировать фразу восстановления",
+    
           Version: "Версия",
           "Assets can only be sent within the same chain.":
             "Активы могут быть отправлены только в пределах одной цепочки.",
@@ -1705,14 +1688,12 @@ i18n
           "Read the following, then save the phrase securely.":
             "다음을 읽고 구문을 안전하게 저장하세요.",
 
-          "Verify and I've Saved the Phrase": "확인하고 구문을 저장했습니다",
-          "Creating your wallet": "지갑 생성 중",
           "Generating your accounts": "계정 생성 중",
           "Encrypting your data": "데이터 암호화 중",
           "Your wallet is now ready": "지갑이 준비되었습니다",
           "Let's Go": "시작합시다",
           "Use spaces between words": "단어 사이에 공백 사용",
-          "Import Recovery Phrase": "복구 구문 가져오기",
+  
           Version: "버전",
           "Assets can only be sent within the same chain.":
             "자산은 동일한 체인 내에서만 전송할 수 있습니다.",
@@ -1905,14 +1886,12 @@ i18n
           "Read the following, then save the phrase securely.":
             "Leia o seguinte e salve a frase com segurança.",
 
-          "Verify and I've Saved the Phrase": "Verifique e eu salvei a frase",
-          "Creating your wallet": "Criando sua carteira",
           "Generating your accounts": "Gerando suas contas",
           "Encrypting your data": "Criptografando seus dados",
           "Your wallet is now ready": "Sua carteira está pronta",
           "Let's Go": "Vamos lá",
           "Use spaces between words": "Use espaços entre as palavras",
-          "Import Recovery Phrase": "Importar Frase de Recuperação",
+ 
           Version: "Versão",
           "Assets can only be sent within the same chain.":
             "Os ativos só podem ser enviados dentro da mesma cadeia.",
@@ -2109,14 +2088,12 @@ i18n
           "Read the following, then save the phrase securely.":
             "Leia o seguinte e salve a frase com segurança.",
 
-          "Verify and I've Saved the Phrase": "Verifique e eu salvei a frase",
-          "Creating your wallet": "Criando sua carteira",
           "Generating your accounts": "Gerando suas contas",
           "Encrypting your data": "Criptografando seus dados",
           "Your wallet is now ready": "Sua carteira está pronta",
           "Let's Go": "Vamos lá",
           "Use spaces between words": "Use espaços entre as palavras",
-          "Import Recovery Phrase": "Importar Frase de Recuperação",
+ 
           Version: "Versão",
           "Assets can only be sent within the same chain.":
             "Os ativos só podem ser enviados dentro da mesma cadeia.",
@@ -2329,14 +2306,12 @@ i18n
           "Read the following, then save the phrase securely.":
             "Leggi quanto segue, quindi salva la frase in modo sicuro.",
 
-          "Verify and I've Saved the Phrase": "Verifica e ho salvato la frase",
-          "Creating your wallet": "Creazione del tuo portafoglio",
           "Generating your accounts": "Generazione dei tuoi account",
           "Encrypting your data": "Criptazione dei tuoi dati",
           "Your wallet is now ready": "Il tuo portafoglio è pronto",
           "Let's Go": "Andiamo",
           "Use spaces between words": "Usa spazi tra le parole",
-          "Import Recovery Phrase": "Importa Frase di Recupero",
+ 
           Version: "Versione",
           "Assets can only be sent within the same chain.":
             "Gli asset possono essere inviati solo all'interno della stessa catena.",
@@ -2535,16 +2510,13 @@ i18n
           "Read the following, then save the phrase securely.":
             "Lesen Sie das Folgende und speichern Sie die Phrase sicher.",
 
-          "Verify and I've Saved the Phrase":
-            "Überprüfen und ich habe die Phrase gespeichert",
-          "Creating your wallet": "Erstellen Ihrer Brieftasche",
           "Generating your accounts": "Erstellen Ihrer Konten",
           "Encrypting your data": "Verschlüsseln Ihrer Daten",
           "Your wallet is now ready": "Ihre Brieftasche ist jetzt bereit",
           "Let's Go": "Los geht's",
           "Use spaces between words":
             "Verwenden Sie Leerzeichen zwischen den Wörtern",
-          "Import Recovery Phrase": "Wiederherstellungsphrase importieren",
+    
           Version: "Version",
           "Assets can only be sent within the same chain.":
             "Vermögenswerte können nur innerhalb derselben Kette gesendet werden.",
@@ -2741,15 +2713,12 @@ i18n
           "Read the following, then save the phrase securely.":
             "निम्नलिखित पढ़ें, फिर वाक्यांश को सुरक्षित रूप से सहेजें।",
 
-          "Verify and I've Saved the Phrase":
-            "सत्यापित करें और मैंने वाक्यांश सहेज लिया है",
-          "Creating your wallet": "आपका वॉलेट बना रहा है",
           "Generating your accounts": "आपके खाते बना रहा है",
           "Encrypting your data": "आपका डेटा एन्क्रिप्ट कर रहा है",
           "Your wallet is now ready": "आपका वॉलेट अब तैयार है",
           "Let's Go": "चलिए चलते हैं",
           "Use spaces between words": "शब्दों के बीच स्पेस का उपयोग करें",
-          "Import Recovery Phrase": "रिकवरी वाक्यांश आयात करें",
+       
           Version: "संस्करण",
           "Assets can only be sent within the same chain.":
             "संपत्तियां केवल उसी श्रृंखला के भीतर भेजी जा सकती हैं।",
@@ -2945,15 +2914,12 @@ i18n
           "Read the following, then save the phrase securely.":
             "Дараахыг уншаад үгээ аюулгүй хадгална уу.",
 
-          "Verify and I've Saved the Phrase":
-            "Баталгаажуулж, би үгийг хадгалсан",
-          "Creating your wallet": "Таны түрийвчийг үүсгэж байна",
           "Generating your accounts": "Таны акаунтуудыг үүсгэж байна",
           "Encrypting your data": "Таны өгөгдлийг шифрлэж байна",
           "Your wallet is now ready": "Таны түрийвч одоо бэлэн боллоо",
           "Let's Go": "Эхэлцгээе",
           "Use spaces between words": "Үгсийн хооронд зай ашигла",
-          "Import Recovery Phrase": "Сэргээх үгийг импортлох",
+  
           Version: "Хувилбар",
           "Assets can only be sent within the same chain.":
             "Хөрөнгийг зөвхөн нэг гинжин дотор л илгээх боломжтой.",
@@ -3154,14 +3120,12 @@ i18n
           "Read the following, then save the phrase securely.":
             "อ่านข้อความต่อไปนี้ จากนั้นบันทึกวลีไว้อย่างปลอดภัย",
 
-          "Verify and I've Saved the Phrase": "ตรวจสอบและฉันได้บันทึกวลีแล้ว",
-          "Creating your wallet": "กำลังสร้างกระเป๋าเงินของคุณ",
           "Generating your accounts": "กำลังสร้างบัญชีของคุณ",
           "Encrypting your data": "กำลังเข้ารหัสข้อมูลของคุณ",
           "Your wallet is now ready": "กระเป๋าเงินของคุณพร้อมแล้ว",
           "Let's Go": "ไปกันเถอะ",
           "Use spaces between words": "ใช้ช่องว่างระหว่างคำ",
-          "Import Recovery Phrase": "นำเข้าวลีการกู้คืน",
+ 
           Version: "เวอร์ชัน",
           "Assets can only be sent within the same chain.":
             "สินทรัพย์สามารถส่งได้เฉพาะภายในโซ่เดียวกันเท่านั้น",
@@ -3354,8 +3318,6 @@ i18n
           "Read the following, then save the phrase securely.":
             "Прочитайте наступне, а потім надійно збережіть фразу.",
 
-          "Verify and I've Saved the Phrase": "Підтвердьте, і я зберіг фразу",
-          "Creating your wallet": "Створення вашого гаманця",
           "Generating your accounts": "Створення ваших облікових записів",
           "Encrypting your data": "Шифрування ваших даних",
           "Your wallet is now ready": "Ваш гаманець готовий",
@@ -3553,14 +3515,12 @@ i18n
           "Read the following, then save the phrase securely.":
             "Đọc phần sau, sau đó lưu cụm từ một cách an toàn.",
 
-          "Verify and I've Saved the Phrase": "Xác nhận và tôi đã lưu cụm từ",
-          "Creating your wallet": "Đang tạo ví của bạn",
           "Generating your accounts": "Đang tạo tài khoản của bạn",
           "Encrypting your data": "Đang mã hóa dữ liệu của bạn",
           "Your wallet is now ready": "Ví của bạn đã sẵn sàng",
           "Let's Go": "Bắt đầu",
           "Use spaces between words": "Sử dụng khoảng trắng giữa các từ",
-          "Import Recovery Phrase": "Nhập cụm từ khôi phục",
+  
           Version: "Phiên bản",
           "Assets can only be sent within the same chain.":
             "Tài sản chỉ có thể được gửi trong cùng một chuỗi.",
@@ -3757,15 +3717,12 @@ i18n
           "Read the following, then save the phrase securely.":
             "Baca yang berikut, lalu simpan frasa dengan aman.",
 
-          "Verify and I've Saved the Phrase":
-            "Verifikasi dan saya telah menyimpan frasa",
-          "Creating your wallet": "Membuat dompet Anda",
           "Generating your accounts": "Membuat akun Anda",
           "Encrypting your data": "Mengenkripsi data Anda",
           "Your wallet is now ready": "Dompet Anda sekarang siap",
           "Let's Go": "Ayo pergi",
           "Use spaces between words": "Gunakan spasi di antara kata-kata",
-          "Import Recovery Phrase": "Impor Frasa Pemulihan",
+      
           Version: "Versi",
           "Assets can only be sent within the same chain.":
             "Aset hanya dapat dikirim dalam rantai yang sama.",
@@ -3959,16 +3916,13 @@ i18n
           "Read the following, then save the phrase securely.":
             "Basahin ang sumusunod, pagkatapos ay i-save ang parirala nang ligtas.",
 
-          "Verify and I've Saved the Phrase":
-            "I-verify at nai-save ko ang parirala",
-          "Creating your wallet": "Gumagawa ng iyong wallet",
           "Generating your accounts": "Gumagawa ng iyong mga account",
           "Encrypting your data": "Ini-encrypt ang iyong data",
           "Your wallet is now ready": "Handa na ang iyong wallet",
           "Let's Go": "Tara na",
           "Use spaces between words":
             "Gumamit ng mga espasyo sa pagitan ng mga salita",
-          "Import Recovery Phrase": "I-import ang Parirala ng Pagbawi",
+       
           Version: "Bersyon",
           "Only you can unlock your wallet":
             "Ikaw lang ang makakapagbukas ng iyong pitaka",
@@ -4166,15 +4120,12 @@ i18n
           "Read the following, then save the phrase securely.":
             "নীচেরটি পড়ুন, তারপরে বাক্যাংশটি নিরাপদে সংরক্ষণ করুন।",
 
-          "Verify and I've Saved the Phrase":
-            "যাচাই করুন এবং আমি বাক্যাংশটি সংরক্ষণ করেছি",
-          "Creating your wallet": "আপনার ওয়ালেট তৈরি করা হচ্ছে",
           "Generating your accounts": "আপনার অ্যাকাউন্ট তৈরি করা হচ্ছে",
           "Encrypting your data": "আপনার ডেটা এনক্রিপ্ট করা হচ্ছে",
           "Your wallet is now ready": "আপনার ওয়ালেট এখন প্রস্তুত",
           "Let's Go": "চলুন",
           "Use spaces between words": "শব্দের মধ্যে স্পেস ব্যবহার করুন",
-          "Import Recovery Phrase": "পুনরুদ্ধার বাক্যাংশ আমদানি করুন",
+        
           Version: "সংস্করণ",
           "Only you can unlock your wallet":
             "শুধু আপনিই আপনার ওয়ালেট আনলক করতে পারবেন",

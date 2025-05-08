@@ -667,7 +667,7 @@ function VaultScreen({ route, navigation }) {
   useEffect(() => {
     if (processModalVisible) {
       setShowLetsGoButton(false);
-      setProcessMessages([t("Creating your wallet")]);
+      setProcessMessages([t("Creating")]);
       const timer1 = setTimeout(() => {
         setProcessMessages((prevMessages) => [
           ...prevMessages,
