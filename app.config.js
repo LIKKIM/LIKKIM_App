@@ -1,5 +1,5 @@
 import "dotenv/config";
-import mapKeys from "./env/mapKeys";
+const mapKeys = require("./env/mapKeys");
 
 export default {
   owner: "likkimteam", // ✅ 新 Expo 账号（避免使用曾被封账号）   owner: "secureteam", //❌
