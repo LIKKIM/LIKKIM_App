@@ -93,7 +93,20 @@ const SkeletonImage = ({ source, style, resizeMode }) => {
           </Animated.View>
         </Animated.View>
       )}
-
+      {/* NFT Image bugging */}
+      {/*       <Animated.Image
+        source={source}
+        style={[
+          {
+            width: "100%",
+            height: "100%",
+            borderRadius: style.borderRadius || 0,
+          },
+          { opacity: imageOpacity },
+        ]}
+        resizeMode={resizeMode}
+        onLoad={handleLoad}
+      /> */}
       <Animated.View
         style={{
           opacity: imageOpacity,
