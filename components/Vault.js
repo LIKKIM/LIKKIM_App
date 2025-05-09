@@ -410,7 +410,14 @@ function VaultScreen({ route, navigation }) {
           </View>
         ) : null,
     });
-  }, [navigation, selectedView, isDarkMode, t, isModalVisible]);
+  }, [
+    navigation,
+    selectedView,
+    isDarkMode,
+    isModalVisible,
+    t,
+    cryptoCards.length,
+  ]);
 
   useEffect(() => {
     const loadSelectedChain = async () => {
