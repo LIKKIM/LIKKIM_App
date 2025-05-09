@@ -496,7 +496,7 @@ i18n
           "Verifying Address on LIKKIM...": "正在 LIKKIM 上驗證地址...",
 
           "Your device is already verified.": "您的設備已驗證。",
- 
+
           "Address Book": "地址簿",
           Swap: "交換",
           Skip: "跳過",
@@ -684,7 +684,7 @@ i18n
 
           "Your device is already verified.":
             "Votre appareil est déjà vérifié.",
-      
+
           "Screen lock enabled successfully":
             "Verrouillage d'écran activé avec succès",
           "Success!": "Succès !",
@@ -701,7 +701,7 @@ i18n
 
           "Your device is already verified.":
             "Votre appareil est déjà vérifié.",
- 
+
           "Address Book": "Carnet d'adresses",
           Swap: "Échanger",
           Skip: "Passer",
@@ -897,7 +897,7 @@ i18n
 
           "Your device is already verified.":
             "Su dispositivo ya está verificado.",
- 
+
           "Address Book": "Libreta de direcciones",
           Swap: "Intercambiar",
           Skip: "Omitir",
@@ -1089,7 +1089,7 @@ i18n
             "جارٍ التحقق من العنوان على LIKKIM...",
 
           "Your device is already verified.": "تم التحقق من جهازك بالفعل.",
-   
+
           "Address Book": "دفتر العناوين",
           Swap: "تبادل",
           Skip: "تخطي",
@@ -1282,7 +1282,7 @@ i18n
 
           "Your device is already verified.":
             "お使いのデバイスは既に認証されています。",
- 
+
           "Screen lock enabled successfully":
             "スクリーンロックが正常に有効化されました",
           "Success!": "成功！",
@@ -1292,10 +1292,10 @@ i18n
           Fee: "手数料",
 
           "Verifying Address on LIKKIM...": "LIKKIMでアドレスを確認中...",
- ,
+
           "Your device is already verified.":
             "お使いのデバイスは既に認証されています。",
- 
+
           "Address Book": "アドレス帳",
           Swap: "スワップ",
           Skip: "スキップ",
@@ -1487,9 +1487,9 @@ i18n
           "Waiting for approval on your device...":
             "Ожидание одобрения на вашем устройстве...",
           "Verifying Address on LIKKIM...": "Проверка адреса на LIKKIM...",
-       
+
           "Your device is already verified.": "Ваше устройство уже проверено.",
- 
+
           "Address Book": "Адресная книга",
           Swap: "Обмен",
           Skip: "Пропустить",
@@ -1676,9 +1676,9 @@ i18n
           Fee: "수수료",
 
           "Verifying Address on LIKKIM...": "LIKKIM에서 주소를 확인하는 중...",
-  
+
           "Your device is already verified.": "장치가 이미 확인되었습니다.",
- 
+
           "Address Book": "주소록",
           Swap: "스왑",
           Skip: "건너뛰기",
@@ -1869,10 +1869,10 @@ i18n
           Fee: "Taxa",
 
           "Verifying Address on LIKKIM...": "Verificando endereço no LIKKIM...",
- 
+
           "Your device is already verified.":
             "Seu dispositivo já está verificado.",
- 
+
           "Address Book": "Livro de Endereços",
           Swap: "Trocar",
           Skip: "Pular",
@@ -2065,10 +2065,10 @@ i18n
           Fee: "Taxa",
 
           "Verifying Address on LIKKIM...": "Verificando endereço no LIKKIM...",
- 
+
           "Your device is already verified.":
             "Seu dispositivo já está verificado.",
-      
+
           "Address Book": "Livro de Endereços",
           Swap: "Trocar",
           Skip: "Pular",
@@ -2276,10 +2276,10 @@ i18n
           Fee: "Commissione",
           "Verifying Address on LIKKIM...":
             "Verifica dell'indirizzo su LIKKIM...",
- 
+
           "Your device is already verified.":
             "Il tuo dispositivo è già verificato.",
-        
+
           "Address Book": "Rubrica",
           Swap: "Scambiare",
           Skip: "Salta",
@@ -2466,10 +2466,10 @@ i18n
           "Value in USD": "Wert in USD",
           Fee: "Gebühr",
           "Verifying Address on LIKKIM...": "Adresse auf LIKKIM überprüfen...",
- 
+
           "Your device is already verified.":
             "Ihr Gerät ist bereits verifiziert.",
-    
+
           "Address Book": "Adressbuch",
           Swap: "Tauschen",
           Skip: "Überspringen",
@@ -2654,10 +2654,10 @@ i18n
           Fee: "शुल्क",
           "Verifying Address on LIKKIM...":
             "LIKKIM पर पते की पुष्टि कर रहे हैं...",
- 
+
           "Your device is already verified.":
             "आपका डिवाइस पहले ही सत्यापित हो चुका है।",
-    
+
           "Address Book": "पता पुस्तिका",
           Swap: "विनिमय",
           Skip: "छोड़ें",
@@ -2831,10 +2831,10 @@ i18n
           "Waiting for Confirmation": "Баталгаажуулалт хүлээж байна",
           "Verifying Address on LIKKIM...":
             "LIKKIM дээр хаягийг шалгаж байна...",
-       
+
           "Your device is already verified.":
             "Таны төхөөрөмж аль хэдийн баталгаажсан.",
-  
+
           "Screen lock enabled successfully": "เปิดการล็อคหน้าจอเรียบร้อยแล้ว",
           "Success!": "สำเร็จ!",
           "Enable Face ID": "เปิดใช้งาน Face ID",
@@ -3020,10 +3020,10 @@ i18n
           "Value in USD": "มูลค่าในสกุลเงิน USD",
           Fee: "ค่าธรรมเนียม",
           "Verifying Address on LIKKIM...": "กำลังยืนยันที่อยู่บน LIKKIM...",
- 
+
           "Your device is already verified.":
             "อุปกรณ์ของคุณได้รับการยืนยันแล้ว",
- 
+
           "Address Book": "สมุดที่อยู่",
           Swap: "แลกเปลี่ยน",
           Skip: "ข้าม",
@@ -3208,7 +3208,7 @@ i18n
           "Verifying Address on LIKKIM...": "Перевірка адреси на LIKKIM...",
 
           "Your device is already verified.": "Ваш пристрій вже перевірено.",
-  
+
           "Address Book": "Адресна книга",
           Swap: "Обмін",
           Skip: "Пропустити",
@@ -3393,7 +3393,7 @@ i18n
 
           "Your device is already verified.":
             "Thiết bị của bạn đã được xác minh.",
- 
+
           "Address Book": "Sổ địa chỉ",
           Swap: "Hoán đổi",
           Skip: "Bỏ qua",
@@ -3587,7 +3587,7 @@ i18n
 
           "Your device is already verified.":
             "Perangkat Anda sudah diverifikasi.",
- 
+
           "Address Book": "Buku Alamat",
           Swap: "Tukar",
           Skip: "Lewati",
@@ -3776,7 +3776,7 @@ i18n
 
           "Your device is already verified.":
             "Ang iyong device ay napatunayan na.",
-      
+
           "Address Book": "Aklat ng mga Adresa",
           Swap: "Palitan",
           Skip: "Laktawan",
@@ -3968,7 +3968,7 @@ i18n
 
           "Your device is already verified.":
             "আপনার ডিভাইসটি ইতিমধ্যেই যাচাই করা হয়েছে।",
- 
+
           "Address Book": "ঠিকানা বই",
           Swap: "বিনিময়",
           Skip: "এড়িয়ে যান",
