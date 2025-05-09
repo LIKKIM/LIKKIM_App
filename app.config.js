@@ -85,8 +85,6 @@ export default {
     eas: {
       projectId: "fdfad2e7-7bed-4bcd-ae6d-ca6c74643d63", //❌
     },
-  },
-  updates: {
-    url: "https://u.expo.dev/fdfad2e7-7bed-4bcd-ae6d-ca6c74643d63", //❌
-  },
+  }
+  
 };
