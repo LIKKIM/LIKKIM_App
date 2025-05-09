@@ -130,10 +130,10 @@ i18n
           Fee: "Fee",
 
           "Verifying Address on LIKKIM...": "Verifying Address on LIKKIM...",
-          "Importing on LIKKIM Hardware...": "Importing on LIKKIM Hardware...",
+
           "Your device is already verified.":
             "Your device is already verified.",
-          "Creating on LIKKIM Hardware...": "Creating on LIKKIM Hardware...",
+
           "Address Book": "Address Book",
           Swap: "Swap",
           Skip: "Skip",
@@ -312,9 +312,9 @@ i18n
           "Waiting for approval on your device...": "正在等待您设备上的批准...",
 
           "Verifying Address on LIKKIM...": "正在 LIKKIM 上验证地址...",
-          "Importing on LIKKIM Hardware...": "正在 LIKKIM 硬件上导入...",
+
           "Your device is already verified.": "您的设备已验证。",
-          "Creating on LIKKIM Hardware...": "正在 LIKKIM 硬件上创建...",
+
           "Address Book": "地址簿",
           Swap: "闪兑",
           Skip: "跳过",
@@ -494,9 +494,9 @@ i18n
           "Waiting for approval on your device...": "正在等待您裝置上的核准...",
 
           "Verifying Address on LIKKIM...": "正在 LIKKIM 上驗證地址...",
-          "Importing on LIKKIM Hardware...": "正在 LIKKIM 硬體上導入...",
+
           "Your device is already verified.": "您的設備已驗證。",
-          "Creating on LIKKIM Hardware...": "正在 LIKKIM 硬體上創建...",
+ 
           "Address Book": "地址簿",
           Swap: "交換",
           Skip: "跳過",
@@ -681,12 +681,10 @@ i18n
 
           "Verifying Address on LIKKIM...":
             "Vérification de l'adresse sur LIKKIM...",
-          "Importing on LIKKIM Hardware...":
-            "Importation sur le matériel LIKKIM...",
+
           "Your device is already verified.":
             "Votre appareil est déjà vérifié.",
-          "Creating on LIKKIM Hardware...":
-            "Création sur le matériel LIKKIM...",
+      
           "Screen lock enabled successfully":
             "Verrouillage d'écran activé avec succès",
           "Success!": "Succès !",
@@ -700,12 +698,10 @@ i18n
 
           "Verifying Address on LIKKIM...":
             "Vérification de l'adresse sur LIKKIM...",
-          "Importing on LIKKIM Hardware...":
-            "Importation sur le matériel LIKKIM...",
+
           "Your device is already verified.":
             "Votre appareil est déjà vérifié.",
-          "Creating on LIKKIM Hardware...":
-            "Création sur le matériel LIKKIM...",
+ 
           "Address Book": "Carnet d'adresses",
           Swap: "Échanger",
           Skip: "Passer",
@@ -898,10 +894,10 @@ i18n
 
           "Verifying Address on LIKKIM...":
             "Verificando dirección en LIKKIM...",
-          "Importing on LIKKIM Hardware...": "Importando en hardware LIKKIM...",
+
           "Your device is already verified.":
             "Su dispositivo ya está verificado.",
-          "Creating on LIKKIM Hardware...": "Creando en hardware LIKKIM...",
+ 
           "Address Book": "Libreta de direcciones",
           Swap: "Intercambiar",
           Skip: "Omitir",
@@ -1091,10 +1087,9 @@ i18n
 
           "Verifying Address on LIKKIM...":
             "جارٍ التحقق من العنوان على LIKKIM...",
-          "Importing on LIKKIM Hardware...":
-            "جاري الاستيراد على جهاز LIKKIM...",
+
           "Your device is already verified.": "تم التحقق من جهازك بالفعل.",
-          "Creating on LIKKIM Hardware...": "جارٍ الإنشاء على جهاز LIKKIM...",
+   
           "Address Book": "دفتر العناوين",
           Swap: "تبادل",
           Skip: "تخطي",
@@ -1284,11 +1279,10 @@ i18n
           Fee: "手数料",
 
           "Verifying Address on LIKKIM...": "LIKKIMでアドレスを確認中...",
-          "Importing on LIKKIM Hardware...":
-            "LIKKIMハードウェアでインポート中...",
+
           "Your device is already verified.":
             "お使いのデバイスは既に認証されています。",
-          "Creating on LIKKIM Hardware...": "LIKKIMハードウェアで作成中...",
+ 
           "Screen lock enabled successfully":
             "スクリーンロックが正常に有効化されました",
           "Success!": "成功！",
@@ -1298,11 +1292,10 @@ i18n
           Fee: "手数料",
 
           "Verifying Address on LIKKIM...": "LIKKIMでアドレスを確認中...",
-          "Importing on LIKKIM Hardware...":
-            "LIKKIMハードウェアでインポート中...",
+ ,
           "Your device is already verified.":
             "お使いのデバイスは既に認証されています。",
-          "Creating on LIKKIM Hardware...": "LIKKIMハードウェアで作成中...",
+ 
           "Address Book": "アドレス帳",
           Swap: "スワップ",
           Skip: "スキップ",
@@ -1494,10 +1487,9 @@ i18n
           "Waiting for approval on your device...":
             "Ожидание одобрения на вашем устройстве...",
           "Verifying Address on LIKKIM...": "Проверка адреса на LIKKIM...",
-          "Importing on LIKKIM Hardware...": "Импорт на оборудование LIKKIM...",
+       
           "Your device is already verified.": "Ваше устройство уже проверено.",
-          "Creating on LIKKIM Hardware...":
-            "Создание на оборудовании LIKKIM...",
+ 
           "Address Book": "Адресная книга",
           Swap: "Обмен",
           Skip: "Пропустить",
@@ -1684,9 +1676,9 @@ i18n
           Fee: "수수료",
 
           "Verifying Address on LIKKIM...": "LIKKIM에서 주소를 확인하는 중...",
-          "Importing on LIKKIM Hardware...": "LIKKIM 하드웨어로 가져오는 중...",
+  
           "Your device is already verified.": "장치가 이미 확인되었습니다.",
-          "Creating on LIKKIM Hardware...": "LIKKIM 하드웨어에서 생성 중...",
+ 
           "Address Book": "주소록",
           Swap: "스왑",
           Skip: "건너뛰기",
@@ -1877,10 +1869,10 @@ i18n
           Fee: "Taxa",
 
           "Verifying Address on LIKKIM...": "Verificando endereço no LIKKIM...",
-          "Importing on LIKKIM Hardware...": "Importando no hardware LIKKIM...",
+ 
           "Your device is already verified.":
             "Seu dispositivo já está verificado.",
-          "Creating on LIKKIM Hardware...": "Criando no hardware LIKKIM...",
+ 
           "Address Book": "Livro de Endereços",
           Swap: "Trocar",
           Skip: "Pular",
@@ -2073,10 +2065,10 @@ i18n
           Fee: "Taxa",
 
           "Verifying Address on LIKKIM...": "Verificando endereço no LIKKIM...",
-          "Importing on LIKKIM Hardware...": "Importando no hardware LIKKIM...",
+ 
           "Your device is already verified.":
             "Seu dispositivo já está verificado.",
-          "Creating on LIKKIM Hardware...": "Criando no hardware LIKKIM...",
+      
           "Address Book": "Livro de Endereços",
           Swap: "Trocar",
           Skip: "Pular",
@@ -2284,11 +2276,10 @@ i18n
           Fee: "Commissione",
           "Verifying Address on LIKKIM...":
             "Verifica dell'indirizzo su LIKKIM...",
-          "Importing on LIKKIM Hardware...":
-            "Importazione su hardware LIKKIM...",
+ 
           "Your device is already verified.":
             "Il tuo dispositivo è già verificato.",
-          "Creating on LIKKIM Hardware...": "Creazione su hardware LIKKIM...",
+        
           "Address Book": "Rubrica",
           Swap: "Scambiare",
           Skip: "Salta",
@@ -2475,11 +2466,10 @@ i18n
           "Value in USD": "Wert in USD",
           Fee: "Gebühr",
           "Verifying Address on LIKKIM...": "Adresse auf LIKKIM überprüfen...",
-          "Importing on LIKKIM Hardware...":
-            "Importieren auf LIKKIM-Hardware...",
+ 
           "Your device is already verified.":
             "Ihr Gerät ist bereits verifiziert.",
-          "Creating on LIKKIM Hardware...": "Erstellen auf LIKKIM-Hardware...",
+    
           "Address Book": "Adressbuch",
           Swap: "Tauschen",
           Skip: "Überspringen",
@@ -2664,12 +2654,10 @@ i18n
           Fee: "शुल्क",
           "Verifying Address on LIKKIM...":
             "LIKKIM पर पते की पुष्टि कर रहे हैं...",
-          "Importing on LIKKIM Hardware...":
-            "LIKKIM हार्डवेयर पर आयात कर रहे हैं...",
+ 
           "Your device is already verified.":
             "आपका डिवाइस पहले ही सत्यापित हो चुका है।",
-          "Creating on LIKKIM Hardware...":
-            "LIKKIM हार्डवेयर पर बना रहे हैं...",
+    
           "Address Book": "पता पुस्तिका",
           Swap: "विनिमय",
           Skip: "छोड़ें",
@@ -2843,12 +2831,10 @@ i18n
           "Waiting for Confirmation": "Баталгаажуулалт хүлээж байна",
           "Verifying Address on LIKKIM...":
             "LIKKIM дээр хаягийг шалгаж байна...",
-          "Importing on LIKKIM Hardware...":
-            "LIKKIM тоног төхөөрөмж дээр импортлож байна...",
+       
           "Your device is already verified.":
             "Таны төхөөрөмж аль хэдийн баталгаажсан.",
-          "Creating on LIKKIM Hardware...":
-            "LIKKIM тоног төхөөрөмж дээр үүсгэж байна...",
+  
           "Screen lock enabled successfully": "เปิดการล็อคหน้าจอเรียบร้อยแล้ว",
           "Success!": "สำเร็จ!",
           "Enable Face ID": "เปิดใช้งาน Face ID",
@@ -3034,10 +3020,10 @@ i18n
           "Value in USD": "มูลค่าในสกุลเงิน USD",
           Fee: "ค่าธรรมเนียม",
           "Verifying Address on LIKKIM...": "กำลังยืนยันที่อยู่บน LIKKIM...",
-          "Importing on LIKKIM Hardware...": "กำลังนำเข้าบนฮาร์ดแวร์ LIKKIM...",
+ 
           "Your device is already verified.":
             "อุปกรณ์ของคุณได้รับการยืนยันแล้ว",
-          "Creating on LIKKIM Hardware...": "กำลังสร้างบนฮาร์ดแวร์ LIKKIM...",
+ 
           "Address Book": "สมุดที่อยู่",
           Swap: "แลกเปลี่ยน",
           Skip: "ข้าม",
@@ -3220,11 +3206,9 @@ i18n
           "Waiting for approval on your device...":
             "Очікується підтвердження на вашому пристрої...",
           "Verifying Address on LIKKIM...": "Перевірка адреси на LIKKIM...",
-          "Importing on LIKKIM Hardware...":
-            "Імпорт на апаратному забезпеченні LIKKIM...",
+
           "Your device is already verified.": "Ваш пристрій вже перевірено.",
-          "Creating on LIKKIM Hardware...":
-            "Створення на апаратному забезпеченні LIKKIM...",
+  
           "Address Book": "Адресна книга",
           Swap: "Обмін",
           Skip: "Пропустити",
@@ -3406,11 +3390,10 @@ i18n
           Fee: "Phí",
           "Verifying Address on LIKKIM...":
             "Đang xác minh địa chỉ trên LIKKIM...",
-          "Importing on LIKKIM Hardware...":
-            "Đang nhập khẩu trên phần cứng LIKKIM...",
+
           "Your device is already verified.":
             "Thiết bị của bạn đã được xác minh.",
-          "Creating on LIKKIM Hardware...": "Đang tạo trên phần cứng LIKKIM...",
+ 
           "Address Book": "Sổ địa chỉ",
           Swap: "Hoán đổi",
           Skip: "Bỏ qua",
@@ -3601,12 +3584,10 @@ i18n
           "Waiting for approval on your device...":
             "Menunggu persetujuan di perangkat Anda...",
           "Verifying Address on LIKKIM...": "Memverifikasi alamat di LIKKIM...",
-          "Importing on LIKKIM Hardware...":
-            "Mengimpor di perangkat keras LIKKIM...",
+
           "Your device is already verified.":
             "Perangkat Anda sudah diverifikasi.",
-          "Creating on LIKKIM Hardware...":
-            "Membuat di perangkat keras LIKKIM...",
+ 
           "Address Book": "Buku Alamat",
           Swap: "Tukar",
           Skip: "Lewati",
@@ -3792,10 +3773,10 @@ i18n
             "Naghihintay ng pag-apruba sa iyong device...",
           "Verifying Address on LIKKIM...":
             "Tinitiyak ang address sa LIKKIM...",
-          "Importing on LIKKIM Hardware...": "Ina-import sa LIKKIM hardware...",
+
           "Your device is already verified.":
             "Ang iyong device ay napatunayan na.",
-          "Creating on LIKKIM Hardware...": "Gumagawa sa LIKKIM hardware...",
+      
           "Address Book": "Aklat ng mga Adresa",
           Swap: "Palitan",
           Skip: "Laktawan",
@@ -3984,12 +3965,10 @@ i18n
 
           "Verifying Address on LIKKIM...":
             "LIKKIM-এ ঠিকানা যাচাই করা হচ্ছে...",
-          "Importing on LIKKIM Hardware...":
-            "LIKKIM হার্ডওয়্যারে আমদানি করা হচ্ছে...",
+
           "Your device is already verified.":
             "আপনার ডিভাইসটি ইতিমধ্যেই যাচাই করা হয়েছে।",
-          "Creating on LIKKIM Hardware...":
-            "LIKKIM হার্ডওয়্যারে তৈরি করা হচ্ছে...",
+ 
           "Address Book": "ঠিকানা বই",
           Swap: "বিনিময়",
           Skip: "এড়িয়ে যান",
