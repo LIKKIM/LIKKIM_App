@@ -159,7 +159,7 @@ const ScreenLock = () => {
               </Text>
               <Text style={[styles.modalText, themeStyles.modalText]}>
                 {t(
-                  "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings."
+                  "To reset the app and remove stored data, please uninstall and reinstall it on your phone."
                 )}
               </Text>
               <TouchableOpacity

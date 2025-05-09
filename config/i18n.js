@@ -124,8 +124,8 @@ i18n
           "Success!": "Success!",
           "Enable Face ID": "Enable Face ID",
           "I lost my password": "I lost my password",
-          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
-            "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.",
+          "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
+            "To reset the app and remove stored data, please uninstall and reinstall it on your phone.",
           "Value in USD": "Value in USD",
           Fee: "Fee",
 
@@ -304,8 +304,9 @@ i18n
           "Success!": "成功！",
           "Enable Face ID": "启用面容ID",
           "I lost my password": "我忘记了密码",
-          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
-            "请卸载然后重新安装应用程序以删除 LIKKIM 应用数据，包括账户和设置。",
+          "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
+            "若要重置应用并删除存储的数据，请卸载后在手机上重新安装。",
+
           "Value in USD": "以美元计值",
           Fee: "手续费用",
           "Waiting for approval on your device...": "正在等待您设备上的批准...",
@@ -485,8 +486,9 @@ i18n
           "Success!": "成功！",
           "Enable Face ID": "啟用面容ID",
           "I lost my password": "我忘記了密碼",
-          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
-            "請卸載然後重新安裝應用程式以刪除 LIKKIM 應用資料，包括帳戶和設置。",
+          "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
+            "若要重設應用程式並移除儲存的資料，請於手機上解除安裝後重新安裝。",
+
           "Value in USD": "以美元計值",
           Fee: "手续費用",
           "Waiting for approval on your device...": "正在等待您裝置上的核准...",
@@ -671,8 +673,9 @@ i18n
           "Success!": "Succès !",
           "Enable Face ID": "Activer Face ID",
           "I lost my password": "J'ai perdu mon mot de passe",
-          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
-            "Veuillez désinstaller puis réinstaller l'application sur votre téléphone pour supprimer les données de l'application LIKKIM, y compris les comptes et les paramètres.",
+          "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
+            "Pour réinitialiser l'application et supprimer les données enregistrées, veuillez la désinstaller puis la réinstaller sur votre téléphone.",
+
           "Value in USD": "Valeur en USD",
           Fee: "Frais",
 
@@ -689,8 +692,7 @@ i18n
           "Success!": "Succès !",
           "Enable Face ID": "Activer Face ID",
           "I lost my password": "J'ai perdu mon mot de passe",
-          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
-            "Veuillez désinstaller puis réinstaller l'application sur votre téléphone pour supprimer les données de l'application LIKKIM, y compris les comptes et les paramètres.",
+          "": "Veuillez désinstaller puis réinstaller l'application sur votre téléphone pour supprimer les données de l'application LIKKIM, y compris les comptes et les paramètres.",
           "Value in USD": "Valeur en USD",
           Fee: "Frais",
           "Waiting for approval on your device...":
@@ -888,8 +890,9 @@ i18n
           "Success!": "¡Éxito!",
           "Enable Face ID": "Habilitar Face ID",
           "I lost my password": "Perdí mi contraseña",
-          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
-            "Desinstale y luego reinstale la aplicación en su teléfono para eliminar los datos de la aplicación LIKKIM, incluidos los cuentas y configuraciones.",
+          "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
+            "Para restablecer la aplicación y eliminar los datos almacenados, desinstálala y vuelve a instalarla en tu teléfono.",
+
           "Value in USD": "Valor en USD",
           Fee: "Tarifa",
 
@@ -1078,8 +1081,9 @@ i18n
           "Success!": "نجاح!",
           "Enable Face ID": "تفعيل بصمة الوجه",
           "I lost my password": "فقدت كلمة المرور الخاصة بي",
-          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
-            "يرجى إلغاء تثبيت ثم إعادة تثبيت التطبيق على هاتفك لحذف بيانات تطبيق LIKKIM، بما في ذلك الحسابات والإعدادات.",
+          "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
+            "لإعادة ضبط التطبيق وإزالة البيانات المخزنة، يُرجى إلغاء تثبيته وإعادة تثبيته على هاتفك.",
+
           "Value in USD": "القيمة بالدولار الأمريكي",
           Fee: "رسوم",
           "Waiting for approval on your device...":
@@ -1273,8 +1277,9 @@ i18n
           "Success!": "成功！",
           "Enable Face ID": "Face IDを有効にする",
           "I lost my password": "パスワードを忘れた",
-          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
-            "LIKKIMアプリのデータ（アカウントや設定を含む）を削除するには、アプリをアンインストールしてから再インストールしてください。",
+          "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
+            "アプリをリセットして保存されたデータを削除するには、アンインストールしてからスマートフォンに再インストールしてください。",
+
           "Value in USD": "米ドルでの値",
           Fee: "手数料",
 
@@ -1289,8 +1294,6 @@ i18n
           "Success!": "成功！",
           "Enable Face ID": "Face IDを有効にする",
           "I lost my password": "パスワードを忘れた",
-          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
-            "LIKKIMアプリのデータ（アカウントや設定を含む）を削除するには、アプリをアンインストールしてから再インストールしてください。",
           "Value in USD": "米ドルでの値",
           Fee: "手数料",
 
@@ -1484,8 +1487,8 @@ i18n
           "Success!": "Успех!",
           "Enable Face ID": "Включить Face ID",
           "I lost my password": "Я забыл свой пароль",
-          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
-            "Пожалуйста, удалите и снова установите приложение на вашем телефоне, чтобы удалить данные приложения LIKKIM, включая аккаунты и настройки.",
+          "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
+            "Чтобы сбросить приложение и удалить сохранённые данные, удалите его и переустановите на вашем телефоне.",
           "Value in USD": "Значение в долларах США",
           Fee: "Комиссия",
           "Waiting for approval on your device...":
@@ -1674,8 +1677,9 @@ i18n
           "Success!": "성공!",
           "Enable Face ID": "Face ID 활성화",
           "I lost my password": "비밀번호를 잊어버렸습니다",
-          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
-            "LIKKIM 앱 데이터를 삭제하려면 앱을 삭제한 후 다시 설치하십시오. 여기에는 계정 및 설정이 포함됩니다.",
+          "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
+            "앱을 초기화하고 저장된 데이터를 제거하려면 휴대폰에서 앱을 삭제한 후 다시 설치하세요.",
+
           "Value in USD": "미국 달러로 된 값",
           Fee: "수수료",
 
@@ -1866,8 +1870,9 @@ i18n
           "Success!": "Sucesso!",
           "Enable Face ID": "Ativar Face ID",
           "I lost my password": "Perdi minha senha",
-          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
-            "Desinstale e reinstale o aplicativo no seu telefone para excluir os dados do aplicativo LIKKIM, incluindo contas e configurações.",
+          "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
+            "Para repor a aplicação e eliminar os dados guardados, desinstale-a e volte a instalá-la no seu telemóvel.",
+
           "Value in USD": "Valor em USD",
           Fee: "Taxa",
 
@@ -2062,8 +2067,8 @@ i18n
           "Success!": "Sucesso!",
           "Enable Face ID": "Ativar Face ID",
           "I lost my password": "Perdi minha senha",
-          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
-            "Desinstale e reinstale o aplicativo no seu telefone para excluir os dados do aplicativo LIKKIM, incluindo contas e configurações.",
+          "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
+            "Para redefinir o aplicativo e remover os dados armazenados, desinstale-o e reinstale-o no seu celular.",
           "Value in USD": "Valor em USD",
           Fee: "Taxa",
 
@@ -2272,8 +2277,9 @@ i18n
           "Success!": "Successo!",
           "Enable Face ID": "Abilita Face ID",
           "I lost my password": "Ho perso la mia password",
-          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
-            "Disinstalla e reinstalla l'app sul tuo telefono per eliminare i dati dell'app LIKKIM, inclusi account e impostazioni.",
+          "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
+            "Per reimpostare l'app e rimuovere i dati salvati, disinstallala e reinstallala sul tuo telefono.",
+
           "Value in USD": "Valore in USD",
           Fee: "Commissione",
           "Verifying Address on LIKKIM...":
@@ -2463,8 +2469,9 @@ i18n
           "Success!": "Erfolg!",
           "Enable Face ID": "Face ID aktivieren",
           "I lost my password": "Ich habe mein Passwort verloren",
-          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
-            "Bitte deinstallieren Sie die App und installieren Sie sie dann erneut auf Ihrem Telefon, um die LIKKIM-App-Daten, einschließlich Konten und Einstellungen, zu löschen.",
+          "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
+            "Um die App zurückzusetzen und gespeicherte Daten zu entfernen, deinstallieren Sie sie bitte und installieren Sie sie erneut auf Ihrem Telefon.",
+
           "Value in USD": "Wert in USD",
           Fee: "Gebühr",
           "Verifying Address on LIKKIM...": "Adresse auf LIKKIM überprüfen...",
@@ -2650,8 +2657,9 @@ i18n
           "Success!": "सफलता!",
           "Enable Face ID": "फेस आईडी सक्षम करें",
           "I lost my password": "मैंने अपना पासवर्ड खो दिया है",
-          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
-            "कृपया LIKKIM ऐप डेटा, जिसमें खाते और सेटिंग्स शामिल हैं, को हटाने के लिए ऐप को अनइंस्टॉल करें और फिर से इंस्टॉल करें।",
+          "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
+            "ऐप को रीसेट करने और संग्रहीत डेटा हटाने के लिए, कृपया इसे अपने फ़ोन से अनइंस्टॉल करके दोबारा इंस्टॉल करें।",
+
           "Value in USD": "यूएसडी में मूल्य",
           Fee: "शुल्क",
           "Verifying Address on LIKKIM...":
@@ -2833,7 +2841,6 @@ i18n
           "Transaction Fee": "Гүйлгээний хураамж",
           Confirm: "Баталгаажуулах",
           "Waiting for Confirmation": "Баталгаажуулалт хүлээж байна",
-
           "Verifying Address on LIKKIM...":
             "LIKKIM дээр хаягийг шалгаж байна...",
           "Importing on LIKKIM Hardware...":
@@ -2846,15 +2853,10 @@ i18n
           "Success!": "สำเร็จ!",
           "Enable Face ID": "เปิดใช้งาน Face ID",
           "I lost my password": "ฉันลืมรหัสผ่าน",
-          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
-            "โปรดถอนการติดตั้งแล้วติดตั้งแอปใหม่ในโทรศัพท์ของคุณเพื่อทำการลบข้อมูลแอป LIKKIM รวมถึงบัญชีและการตั้งค่า",
+          "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
+            "Аппликейшнийг дахин тохируулах болон хадгалагдсан өгөгдлийг устгахын тулд гар утсандаа апп-аа устгаад дахин суулгана уу.",
           "Value in USD": "มูลค่าในสกุลเงิน USD",
-          Fee: "ค่าธรรมเนียม",
-          "Verifying Address on LIKKIM...": "กำลังยืนยันที่อยู่บน LIKKIM...",
-          "Importing on LIKKIM Hardware...": "กำลังนำเข้าบนฮาร์ดแวร์ LIKKIM...",
-          "Your device is already verified.":
-            "อุปกรณ์ของคุณได้รับการยืนยันแล้ว",
-          "Creating on LIKKIM Hardware...": "กำลังสร้างบนฮาร์ดแวร์ LIKKIM...",
+          Fee: "Хураамж",
           "Address Book": "Хаягийн дэвтэр",
           Swap: "Солилцоо",
           Skip: "Алгасах",
@@ -2889,7 +2891,6 @@ i18n
           "Delete Wallet": "Хэтэвч устгах",
           Support: "Тусламж",
           Warning: "Сэрэмжлүүлэг",
-
           deleteDeviceConfirmMessage:
             "Та энэ төхөөрөмжийг апп-аас устгахдаа итгэлтэй байна уу?\nЭнэ нь тухайн төхөөрөмжтэй холбоотой бүх локал хадгалсан мэдээллийг устгах болно.\n\nТа дараа нь төхөөрөмжийг дахин холбож өгөгдлөө дахин синк хийх боломжтой.\nҮргэлжлүүлэхийн өмнө чухал мэдээллээ хадгалсан эсэхээ шалгаарай.",
           Delete: "Устгах",
@@ -3028,8 +3029,8 @@ i18n
           "Success!": "สำเร็จ!",
           "Enable Face ID": "เปิดใช้งาน Face ID",
           "I lost my password": "ฉันลืมรหัสผ่าน",
-          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
-            "โปรดถอนการติดตั้งแล้วติดตั้งแอปใหม่ในโทรศัพท์ของคุณเพื่อทำการลบข้อมูลแอป LIKKIM รวมถึงบัญชีและการตั้งค่า",
+          "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
+            "หากต้องการรีเซ็ตแอปและลบข้อมูลที่จัดเก็บไว้ โปรดยกเลิกการติดตั้งและติดตั้งใหม่บนโทรศัพท์ของคุณ",
           "Value in USD": "มูลค่าในสกุลเงิน USD",
           Fee: "ค่าธรรมเนียม",
           "Verifying Address on LIKKIM...": "กำลังยืนยันที่อยู่บน LIKKIM...",
@@ -3211,8 +3212,9 @@ i18n
           "Success!": "Успіх!",
           "Enable Face ID": "Увімкнути Face ID",
           "I lost my password": "Я забув свій пароль",
-          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
-            "Будь ласка, видаліть програму і знову встановіть її на телефон, щоб видалити дані додатку LIKKIM, включаючи облікові записи та налаштування.",
+          "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
+            "Щоб скинути застосунок і видалити збережені дані, будь ласка, видаліть його і перевстановіть на телефоні.",
+
           "Value in USD": "Значення в доларах США",
           Fee: "Комісія",
           "Waiting for approval on your device...":
@@ -3397,8 +3399,9 @@ i18n
           "Success!": "Thành công!",
           "Enable Face ID": "Bật Face ID",
           "I lost my password": "Tôi quên mật khẩu",
-          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
-            "Vui lòng gỡ cài đặt rồi cài đặt lại ứng dụng trên điện thoại của bạn để xóa dữ liệu ứng dụng LIKKIM, bao gồm tài khoản và cài đặt.",
+          "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
+            "Để đặt lại ứng dụng và xóa dữ liệu đã lưu, vui lòng gỡ cài đặt và cài đặt lại trên điện thoại của bạn.",
+
           "Value in USD": "Giá trị bằng USD",
           Fee: "Phí",
           "Verifying Address on LIKKIM...":
@@ -3590,8 +3593,9 @@ i18n
           "Success!": "Sukses!",
           "Enable Face ID": "Aktifkan Face ID",
           "I lost my password": "Saya kehilangan kata sandi saya",
-          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
-            "Harap hapus dan instal ulang aplikasi di ponsel Anda untuk menghapus data aplikasi LIKKIM, termasuk akun dan pengaturan.",
+          "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
+            "Untuk mengatur ulang aplikasi dan menghapus data yang tersimpan, silakan hapus instalan dan instal ulang di ponsel Anda.",
+
           "Value in USD": "Nilai dalam USD",
           Fee: "Biaya",
           "Waiting for approval on your device...":
@@ -3779,8 +3783,9 @@ i18n
           "Success!": "Tagumpay!",
           "Enable Face ID": "I-enable ang Face ID",
           "I lost my password": "Nawala ko ang aking password",
-          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
-            "Mangyaring i-uninstall at muling i-install ang app sa iyong telepono upang tanggalin ang data ng app na LIKKIM, kabilang ang mga account at mga setting.",
+          "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
+            "Upang i-reset ang app at alisin ang nakaimbak na data, mangyaring i-uninstall at muling i-install ito sa iyong telepono.",
+
           "Value in USD": "Halaga sa USD",
           Fee: "Bayad",
           "Waiting for approval on your device...":
@@ -3969,8 +3974,9 @@ i18n
           "Success!": "সফলতা!",
           "Enable Face ID": "ফেস আইডি সক্রিয় করুন",
           "I lost my password": "আমি আমার পাসওয়ার্ড হারিয়েছি",
-          "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.":
-            "LIKKIM অ্যাপের ডেটা, সহ অ্যাকাউন্ট এবং সেটিংস, মুছে ফেলতে আপনার ফোনে অ্যাপটি আনইনস্টল করে পুনরায় ইনস্টল করুন।",
+          "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
+            "অ্যাপটি রিসেট করতে এবং সংরক্ষিত ডেটা মুছে ফেলতে, অনুগ্রহ করে আপনার ফোনে এটি আনইনস্টল করে পুনরায় ইনস্টল করুন।",
+
           "Value in USD": "ইউএসডি-তে মান",
           Fee: "ফি",
           "Waiting for approval on your device...":
