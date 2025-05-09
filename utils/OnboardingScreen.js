@@ -9,6 +9,7 @@ import {
   Animated,
   Modal,
   ScrollView,
+  StatusBar,
   TouchableOpacity,
 } from "react-native";
 import AppIntroSlider from "react-native-app-intro-slider";
@@ -105,6 +106,8 @@ const OnboardingScreen = ({ onDone }) => {
   const renderItem = ({ item, index }) => {
     return (
       <LinearGradient colors={["#21201E", "#0E0D0D"]} style={styles.slide}>
+        {/* by will:优化引导页状态栏色差 */}
+        <StatusBar backgroundColor={'rgb(82,82,82)'}  barStyle="dark-content" />
         <BlurView intensity={50} style={StyleSheet.absoluteFillObject}>
           <LinearGradient
             colors={["#00000000", "#CCB68C30", "#CCB68C60"]}
