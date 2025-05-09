@@ -1327,7 +1327,6 @@ i18n
           "Delete Wallet": "ウォレット削除",
           Support: "サポート",
           Warning: "警告",
-
           deleteDeviceConfirmMessage:
             "このデバイスをアプリから削除してもよろしいですか？\nこれにより、このデバイスに関連するすべてのローカルに保存された情報が消去されます。\n\n後でデバイスを再接続してデータを再同期できます。\n続行する前に重要な情報を保存したことを確認してください。",
           Delete: "削除",
@@ -1335,9 +1334,8 @@ i18n
           "Your wallet has been deleted successfully.":
             "ウォレットが正常に削除されました。",
           "Insufficient Balance": "残高不足",
-          "Waiting for approval on your device....":
-            "LIKKIMデバイスでの取引を確認中...",
-
+          "Waiting for approval on your device...":
+            "デバイスでの承認を待っています...",
           Save: "保存",
           Address: "アドレス",
           "Add Address": "アドレスを追加",
@@ -1480,9 +1478,8 @@ i18n
             "Пожалуйста, удалите и снова установите приложение на вашем телефоне, чтобы удалить данные приложения LIKKIM, включая аккаунты и настройки.",
           "Value in USD": "Значение в долларах США",
           Fee: "Комиссия",
-          "Waiting for approval on your device....":
-            "Подтверждение транзакции на устройстве LIKKIM...",
-
+          "Waiting for approval on your device...":
+            "Ожидание одобрения на вашем устройстве...",
           "Verifying Address on LIKKIM...": "Проверка адреса на LIKKIM...",
           "Importing on LIKKIM Hardware...": "Импорт на оборудование LIKKIM...",
           "Your device is already verified.": "Ваше устройство уже проверено.",
@@ -1715,9 +1712,8 @@ i18n
           "Your wallet has been deleted successfully.":
             "지갑이 성공적으로 삭제되었습니다.",
           "Insufficient Balance": "잔액 부족",
-          "Waiting for approval on your device....":
-            "LIKKIM 장치에서 거래 확인 중...",
-
+          "Waiting for approval on your device...":
+            "기기에서 승인을 기다리는 중...",
           Save: "저장",
           Address: "주소",
           "Add Address": "주소 추가",
@@ -1908,8 +1904,8 @@ i18n
           "Your wallet has been deleted successfully.":
             "Sua carteira foi excluída com sucesso.",
           "Insufficient Balance": "Saldo insuficiente",
-          "Waiting for approval on your device....":
-            "Confirmando a transação no dispositivo LIKKIM...",
+          "Waiting for approval on your device...":
+            "A aguardar aprovação no seu dispositivo...",
 
           Save: "Salvar",
           Address: "Endereço",
@@ -2118,9 +2114,8 @@ i18n
           "Your wallet has been deleted successfully.":
             "Sua carteira foi excluída com sucesso.",
           "Insufficient Balance": "Saldo insuficiente",
-          "Waiting for approval on your device....":
-            "Confirmando a transação no dispositivo LIKKIM...",
-
+          "Waiting for approval on your device...":
+            "Aguardando aprovação no seu dispositivo...",
           Save: "Salvar",
           Address: "Endereço",
           "Add Address": "Adicionar Endereço",
@@ -2142,7 +2137,6 @@ i18n
       it: {
         translation: {
           "Add Wallet": "Aggiungi portafoglio",
-
           Close: "Chiudi",
           "Value:": "Valore:",
           "Delete Card": "Elimina carta",
@@ -2264,7 +2258,6 @@ i18n
             "Disinstalla e reinstalla l'app sul tuo telefono per eliminare i dati dell'app LIKKIM, inclusi account e impostazioni.",
           "Value in USD": "Valore in USD",
           Fee: "Commissione",
-
           "Verifying Address on LIKKIM...":
             "Verifica dell'indirizzo su LIKKIM...",
           "Importing on LIKKIM Hardware...":
@@ -2313,8 +2306,8 @@ i18n
           "Your wallet has been deleted successfully.":
             "Il tuo portafoglio è stato eliminato con successo.",
           "Insufficient Balance": "Saldo insufficiente",
-          "Waiting for approval on your device....":
-            "Confermando la transazione sul dispositivo LIKKIM...",
+          "Waiting for approval on your device...":
+            "In attesa di approvazione sul tuo dispositivo...",
           Save: "Salva",
           Address: "Indirizzo",
           "Add Address": "Aggiungi indirizzo",
@@ -2388,24 +2381,18 @@ i18n
           "Remove Chain Account": "Kettenkonto entfernen",
           Remove: "Entfernen",
           "Security in your hands": "Sicherheit in Ihren Händen",
-
           Continue: "Fortsetzen",
-
           "Scroll down to view all words":
             "Scrollen Sie nach unten, um alle Wörter zu sehen",
-
           "Generating your accounts": "Erstellen Ihrer Konten",
           "Encrypting your data": "Verschlüsseln Ihrer Daten",
-
           "Let's Go": "Los geht's",
           "Use spaces between words":
             "Verwenden Sie Leerzeichen zwischen den Wörtern",
-
           Version: "Version",
           "Assets can only be sent within the same chain.":
             "Vermögenswerte können nur innerhalb derselben Kette gesendet werden.",
           "Firmware Update": "Firmware-Aktualisierung",
-
           "No data available": "Keine Daten verfügbar",
           "Search Currency": "Währung suchen",
           "Search Cryptocurrency": "Kryptowährung suchen",
@@ -2460,7 +2447,6 @@ i18n
             "Bitte deinstallieren Sie die App und installieren Sie sie dann erneut auf Ihrem Telefon, um die LIKKIM-App-Daten, einschließlich Konten und Einstellungen, zu löschen.",
           "Value in USD": "Wert in USD",
           Fee: "Gebühr",
-
           "Verifying Address on LIKKIM...": "Adresse auf LIKKIM überprüfen...",
           "Importing on LIKKIM Hardware...":
             "Importieren auf LIKKIM-Hardware...",
@@ -2509,9 +2495,8 @@ i18n
           "Your wallet has been deleted successfully.":
             "Ihr Wallet wurde erfolgreich gelöscht.",
           "Insufficient Balance": "Unzureichendes Guthaben",
-          "Waiting for approval on your device....":
-            "Transaktion auf dem LIKKIM-Gerät wird bestätigt...",
-
+          "Waiting for approval on your device...":
+            "Warte auf Genehmigung auf deinem Gerät...",
           Save: "Speichern",
           Address: "Adresse",
           "Add Address": "Adresse hinzufügen",
@@ -2647,7 +2632,6 @@ i18n
             "कृपया LIKKIM ऐप डेटा, जिसमें खाते और सेटिंग्स शामिल हैं, को हटाने के लिए ऐप को अनइंस्टॉल करें और फिर से इंस्टॉल करें।",
           "Value in USD": "यूएसडी में मूल्य",
           Fee: "शुल्क",
-
           "Verifying Address on LIKKIM...":
             "LIKKIM पर पते की पुष्टि कर रहे हैं...",
           "Importing on LIKKIM Hardware...":
@@ -2697,9 +2681,8 @@ i18n
           "Your wallet has been deleted successfully.":
             "आपकी वॉलेट को सफलतापूर्वक हटा दिया गया है।",
           "Insufficient Balance": "अपर्याप्त शेष",
-          "Waiting for approval on your device....":
-            "LIKKIM डिवाइस पर लेनदेन की पुष्टि हो रही है...",
-
+          "Waiting for approval on your device...":
+            "आपके डिवाइस पर अनुमोदन की प्रतीक्षा हो रही है...",
           Save: "सहेजें",
           Address: "पता",
           "Add Address": "पता जोड़ें",
@@ -2890,8 +2873,8 @@ i18n
           "Your wallet has been deleted successfully.":
             "Таны түрийвч амжилттай устгагдсан.",
           "Insufficient Balance": "Хүлээгдэж буй үлдэгдэл",
-          "Waiting for approval on your device....":
-            "LIKKIM төхөөрөмж дээр гүйлгээг баталгаажуулж байна...",
+          "Waiting for approval on your device...":
+            "Таны төхөөрөмж дээр зөвшөөрөл хүлээж байна...",
           Save: "Хадгалах",
           Address: "Хаяг",
           "Add Address": "Хаяг нэмэх",
@@ -2913,7 +2896,6 @@ i18n
       th: {
         translation: {
           "Add Wallet": "เพิ่มกระเป๋าเงิน",
-
           Close: "ปิด",
           "Value:": "มูลค่า:",
           "Delete Card": "ลบการ์ด",
@@ -3069,8 +3051,8 @@ i18n
           "Your wallet has been deleted successfully.":
             "กระเป๋าของคุณถูกลบเรียบร้อยแล้ว",
           "Insufficient Balance": "ยอดเงินไม่พอ",
-          "Waiting for approval on your device....":
-            "กำลังยืนยันการทำรายการบนอุปกรณ์ LIKKIM...",
+          "Waiting for approval on your device...":
+            "กำลังรอการอนุมัติในอุปกรณ์ของคุณ...",
           Save: "บันทึก",
           Address: "ที่อยู่",
           "Add Address": "เพิ่มที่อยู่",
@@ -3205,8 +3187,8 @@ i18n
             "Будь ласка, видаліть програму і знову встановіть її на телефон, щоб видалити дані додатку LIKKIM, включаючи облікові записи та налаштування.",
           "Value in USD": "Значення в доларах США",
           Fee: "Комісія",
-          "Waiting for approval on your device....":
-            "Підтвердження транзакції на пристрої LIKKIM...",
+          "Waiting for approval on your device...":
+            "Очікується підтвердження на вашому пристрої...",
           "Verifying Address on LIKKIM...": "Перевірка адреси на LIKKIM...",
           "Importing on LIKKIM Hardware...":
             "Імпорт на апаратному забезпеченні LIKKIM...",
@@ -3438,8 +3420,8 @@ i18n
           "Your wallet has been deleted successfully.":
             "Ví của bạn đã được xóa thành công.",
           "Insufficient Balance": "Số dư không đủ",
-          "Waiting for approval on your device....":
-            "Đang xác nhận giao dịch trên thiết bị LIKKIM...",
+          "Waiting for approval on your device...":
+            "Đang chờ phê duyệt trên thiết bị của bạn...",
           Save: "Lưu",
           Address: "Địa chỉ",
           "Add Address": "Thêm địa chỉ",
@@ -3580,8 +3562,8 @@ i18n
             "Harap hapus dan instal ulang aplikasi di ponsel Anda untuk menghapus data aplikasi LIKKIM, termasuk akun dan pengaturan.",
           "Value in USD": "Nilai dalam USD",
           Fee: "Biaya",
-          "Waiting for approval on your device....":
-            "Mengonfirmasi transaksi di perangkat LIKKIM...",
+          "Waiting for approval on your device...":
+            "Menunggu persetujuan di perangkat Anda...",
           "Verifying Address on LIKKIM...": "Memverifikasi alamat di LIKKIM...",
           "Importing on LIKKIM Hardware...":
             "Mengimpor di perangkat keras LIKKIM...",
@@ -3767,9 +3749,8 @@ i18n
             "Mangyaring i-uninstall at muling i-install ang app sa iyong telepono upang tanggalin ang data ng app na LIKKIM, kabilang ang mga account at mga setting.",
           "Value in USD": "Halaga sa USD",
           Fee: "Bayad",
-          "Waiting for approval on your device....":
-            "Kinukumpirma ang transaksyon sa LIKKIM device...",
-
+          "Waiting for approval on your device...":
+            "Naghihintay ng pag-apruba sa iyong device...",
           "Verifying Address on LIKKIM...":
             "Tinitiyak ang address sa LIKKIM...",
           "Importing on LIKKIM Hardware...": "Ina-import sa LIKKIM hardware...",
@@ -3957,8 +3938,8 @@ i18n
             "LIKKIM অ্যাপের ডেটা, সহ অ্যাকাউন্ট এবং সেটিংস, মুছে ফেলতে আপনার ফোনে অ্যাপটি আনইনস্টল করে পুনরায় ইনস্টল করুন।",
           "Value in USD": "ইউএসডি-তে মান",
           Fee: "ফি",
-          "Waiting for approval on your device....":
-            "LIKKIM ডিভাইসে লেনদেন নিশ্চিত করা হচ্ছে...",
+          "Waiting for approval on your device...":
+            "আপনার ডিভাইসে অনুমোদনের অপেক্ষায়...",
 
           "Verifying Address on LIKKIM...":
             "LIKKIM-এ ঠিকানা যাচাই করা হচ্ছে...",
