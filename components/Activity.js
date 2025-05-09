@@ -144,8 +144,8 @@ function ActivityScreen() {
   );
   const [selectedFeeTab, setSelectedFeeTab] = useState("Recommended");
   const [modalStatus, setModalStatus] = useState({
-    title: t("Confirming Transaction on LIKKIM Device..."),
-    subtitle: t("Please confirm the transaction on your LIKKIM device."),
+    title: t("Waiting for approval on your device...."),
+    subtitle: t("Waiting for approval on your device..."),
     image: require("../assets/gif/Pending.gif"),
   });
 

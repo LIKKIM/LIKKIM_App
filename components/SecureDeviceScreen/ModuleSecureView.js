@@ -79,7 +79,7 @@ const ModuleSecureView = ({
                   style={{ marginRight: 8 }}
                 />
                 <Text style={[styles.Text, { flex: 1 }]}>
-                  {t("Wallet Management")}
+                  {t("Device Settings")}
                 </Text>
                 <Icon
                   name={

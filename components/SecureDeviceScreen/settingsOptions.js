@@ -177,7 +177,7 @@ const getSettingsOptions = ({
       cryptoCards && cryptoCards.length > 0
         ? [
             {
-              title: t("Wallet Management"),
+              title: t("Device Settings"),
               icon: "wallet",
               extraIcon: isDeleteWalletVisible
                 ? "arrow-drop-up"

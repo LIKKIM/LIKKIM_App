@@ -62,11 +62,10 @@ i18n
           Continue: "Continue",
 
           "Scroll down to view all words": "Scroll down to view all words",
-          "Recovery Phrase": "Recovery Phrase",
 
           "Generating your accounts": "Generating your accounts",
           "Encrypting your data": "Encrypting your data",
-          "Your wallet is now ready": "Your wallet is now ready",
+
           "Let's Go": "Let's Go",
           "Use spaces between words": "Use spaces between words",
 
@@ -128,8 +127,7 @@ i18n
             "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings.",
           "Value in USD": "Value in USD",
           Fee: "Fee",
-          "Please confirm the transaction on your LIKKIM device.":
-            "Please confirm the transaction on your LIKKIM device.",
+
           "Verifying Address on LIKKIM...": "Verifying Address on LIKKIM...",
           "Importing on LIKKIM Hardware...": "Importing on LIKKIM Hardware...",
           "Your device is already verified.":
@@ -165,7 +163,7 @@ i18n
             "Permission denied, unable to access device location",
           "Last connected": "Last connected",
           "Secure Device Status": "Secure Device Status",
-          "Wallet Management": "Wallet Management",
+          "Device Settings": "Device Settings",
           "Delete Wallet": "Delete Wallet",
           Support: "Support",
           Warning: "Warning",
@@ -176,10 +174,9 @@ i18n
           "Your wallet has been deleted successfully.":
             "Your wallet has been deleted successfully.",
           "Insufficient Balance": "Insufficient Balance",
-          "Confirming Transaction on LIKKIM Device...":
-            "Confirming Transaction on LIKKIM Device...",
-          "Please confirm the transaction on your LIKKIM device.":
-            "Please confirm the transaction on your LIKKIM device.",
+          "Waiting for approval on your device...":
+            "Waiting for approval on your device...",
+
           Save: "Save",
           Address: "Address",
           "Add Address": "Add Address",
@@ -248,10 +245,10 @@ i18n
           "Security in your hands": "安全尽在掌握",
           Continue: "继续",
           "Scroll down to view all words": "向下滚动查看所有单词",
-          "Recovery Phrase": "恢复短语",
+
           "Generating your accounts": "生成你的账户",
           "Encrypting your data": "加密你的数据",
-          "Your wallet is now ready": "你的钱包已准备就绪",
+
           "Let's Go": "开始吧",
           "Use spaces between words": "单词之间用空格分隔",
           Version: "版本",
@@ -309,10 +306,8 @@ i18n
             "请卸载然后重新安装应用程序以删除 LIKKIM 应用数据，包括账户和设置。",
           "Value in USD": "以美元计值",
           Fee: "手续费用",
-          "Confirming Transaction on LIKKIM Device...":
-            "正在 LIKKIM 设备上确认交易...",
-          "Please confirm the transaction on your LIKKIM device.":
-            "请在您的 LIKKIM 设备上确认交易。",
+          "Waiting for approval on your device...": "正在等待您设备上的批准...",
+
           "Verifying Address on LIKKIM...": "正在 LIKKIM 上验证地址...",
           "Importing on LIKKIM Hardware...": "正在 LIKKIM 硬件上导入...",
           "Your device is already verified.": "您的设备已验证。",
@@ -345,7 +340,7 @@ i18n
             "权限被拒绝，无法访问设备位置",
           "Last connected": "最后连接",
           "Secure Device Status": "安全设备状态",
-          "Wallet Management": "钱包管理",
+          "Device Settings": "设备设置",
           "Delete Wallet": "删除钱包",
           Support: "帮助",
           Warning: "警告",
@@ -356,8 +351,6 @@ i18n
           "Your wallet has been deleted successfully.": "您的钱包已成功删除。",
           "Insufficient Balance": "余额不足",
 
-          "Please confirm the transaction on your LIKKIM device.":
-            "请在您的LIKKIM设备上确认交易。",
           Save: "保存",
           Address: "地址",
           "Add Address": "添加地址",
@@ -425,10 +418,10 @@ i18n
           "Security in your hands": "安全盡在掌握",
           Continue: "繼續",
           "Scroll down to view all words": "向下滾動查看所有單詞",
-          "Recovery Phrase": "恢復短語",
+
           "Generating your accounts": "生成你的帳戶",
           "Encrypting your data": "加密你的數據",
-          "Your wallet is now ready": "你的錢包已準備就緒",
+
           "Let's Go": "開始吧",
           "Use spaces between words": "單詞之間用空格分隔",
           Version: "版本",
@@ -493,10 +486,8 @@ i18n
             "請卸載然後重新安裝應用程式以刪除 LIKKIM 應用資料，包括帳戶和設置。",
           "Value in USD": "以美元計值",
           Fee: "手续費用",
-          "Confirming Transaction on LIKKIM Device...":
-            "正在 LIKKIM 設備上確認交易...",
-          "Please confirm the transaction on your LIKKIM device.":
-            "請在您的 LIKKIM 設備上確認交易。",
+          "Waiting for approval on your device...": "正在等待您裝置上的核准...",
+
           "Verifying Address on LIKKIM...": "正在 LIKKIM 上驗證地址...",
           "Importing on LIKKIM Hardware...": "正在 LIKKIM 硬體上導入...",
           "Your device is already verified.": "您的設備已驗證。",
@@ -529,7 +520,7 @@ i18n
             "權限被拒絕，無法訪問設備位置",
           "Last connected": "最後連接",
           "Secure Device Status": "安全設備狀態",
-          "Wallet Management": "錢包管理",
+          "Device Settings": "裝置設定",
           "Delete Wallet": "刪除錢包",
           Support: "幫助",
           Warning: "警告",
@@ -539,8 +530,7 @@ i18n
           Success: "成功",
           "Your wallet has been deleted successfully.": "您的錢包已成功刪除。",
           "Insufficient Balance": "餘額不足",
-          "Please confirm the transaction on your LIKKIM device.":
-            "請在您的LIKKIM設備上確認交易。",
+
           Save: "儲存",
           Address: "地址",
           "Add Address": "新增地址",
@@ -614,10 +604,10 @@ i18n
           Continue: "Continuer",
           "Scroll down to view all words":
             "Faites défiler vers le bas pour voir tous les mots",
-          "Recovery Phrase": "Phrase de récupération",
+
           "Generating your accounts": "Génération de vos comptes",
           "Encrypting your data": "Cryptage de vos données",
-          "Your wallet is now ready": "Votre portefeuille est prêt",
+
           "Let's Go": "Allons-y",
           "Use spaces between words": "Utilisez des espaces entre les mots",
 
@@ -682,8 +672,6 @@ i18n
           "Value in USD": "Valeur en USD",
           Fee: "Frais",
 
-          "Please confirm the transaction on your LIKKIM device.":
-            "Veuillez confirmer la transaction sur votre dispositif LIKKIM.",
           "Verifying Address on LIKKIM...":
             "Vérification de l'adresse sur LIKKIM...",
           "Importing on LIKKIM Hardware...":
@@ -701,10 +689,9 @@ i18n
             "Veuillez désinstaller puis réinstaller l'application sur votre téléphone pour supprimer les données de l'application LIKKIM, y compris les comptes et les paramètres.",
           "Value in USD": "Valeur en USD",
           Fee: "Frais",
-          "Confirming Transaction on LIKKIM Device...":
-            "Confirmation de la transaction sur le dispositif LIKKIM...",
-          "Please confirm the transaction on your LIKKIM device.":
-            "Veuillez confirmer la transaction sur votre dispositif LIKKIM.",
+          "Waiting for approval on your device...":
+            "En attente d'approbation sur votre appareil...",
+
           "Verifying Address on LIKKIM...":
             "Vérification de l'adresse sur LIKKIM...",
           "Importing on LIKKIM Hardware...":
@@ -744,7 +731,7 @@ i18n
             "Permission refusée, impossible d'accéder à l'emplacement de l'appareil",
           "Last connected": "Dernière connexion",
           "Secure Device Status": "État de l'appareil sécurisé",
-          "Wallet Management": "Gestion du portefeuille",
+          "Device Settings": "Paramètres de l'appareil",
           "Delete Wallet": "Supprimer le portefeuille",
           Support: "Assistance",
           Warning: "Avertissement",
@@ -755,10 +742,9 @@ i18n
           "Your wallet has been deleted successfully.":
             "Votre portefeuille a été supprimé avec succès.",
           "Insufficient Balance": "Solde insuffisant",
-          "Confirming Transaction on LIKKIM Device...":
-            "Confirmation de la transaction sur l'appareil LIKKIM...",
-          "Please confirm the transaction on your LIKKIM device.":
-            "Veuillez confirmer la transaction sur votre appareil LIKKIM.",
+          "Waiting for approval on your device...":
+            "Esperando aprobación en su dispositivo...",
+
           Save: "Sauvegarder",
           Address: "Adresse",
           "Add Address": "Ajouter une adresse",
@@ -835,11 +821,10 @@ i18n
 
           "Scroll down to view all words":
             "Desplázate hacia abajo para ver todas las palabras",
-          "Recovery Phrase": "Frase de recuperación",
 
           "Generating your accounts": "Generando tus cuentas",
           "Encrypting your data": "Encriptando tus datos",
-          "Your wallet is now ready": "Tu billetera está lista",
+
           "Let's Go": "Vamos",
           "Use spaces between words": "Usa espacios entre las palabras",
 
@@ -903,8 +888,6 @@ i18n
           "Value in USD": "Valor en USD",
           Fee: "Tarifa",
 
-          "Please confirm the transaction on your LIKKIM device.":
-            "Por favor confirme la transacción en su dispositivo LIKKIM.",
           "Verifying Address on LIKKIM...":
             "Verificando dirección en LIKKIM...",
           "Importing on LIKKIM Hardware...": "Importando en hardware LIKKIM...",
@@ -941,7 +924,7 @@ i18n
             "Permiso denegado, no se puede acceder a la ubicación del dispositivo",
           "Last connected": "Última conexión",
           "Secure Device Status": "Estado del dispositivo seguro",
-          "Wallet Management": "Gestión de cartera",
+          "Device Settings": "Configuración del dispositivo",
           "Delete Wallet": "Eliminar cartera",
           Support: "Soporte",
           Warning: "Advertencia",
@@ -953,10 +936,9 @@ i18n
           "Your wallet has been deleted successfully.":
             "Tu billetera ha sido eliminada con éxito.",
           "Insufficient Balance": "Saldo insuficiente",
-          "Confirming Transaction on LIKKIM Device...":
+          "Waiting for approval on your device....":
             "Confirmando la transacción en el dispositivo LIKKIM...",
-          "Please confirm the transaction on your LIKKIM device.":
-            "Por favor, confirma la transacción en tu dispositivo LIKKIM.",
+
           Save: "Guardar",
           Address: "Dirección",
           "Add Address": "Añadir dirección",
@@ -1030,11 +1012,10 @@ i18n
 
           "Scroll down to view all words":
             "قم بالتمرير لأسفل لعرض جميع الكلمات",
-          "Recovery Phrase": "عبارة الاسترداد",
 
           "Generating your accounts": "إنشاء حساباتك",
           "Encrypting your data": "تشفير بياناتك",
-          "Your wallet is now ready": "محفظتك جاهزة الآن",
+
           "Let's Go": "هيا بنا",
           "Use spaces between words": "استخدم مسافات بين الكلمات",
 
@@ -1095,10 +1076,9 @@ i18n
             "يرجى إلغاء تثبيت ثم إعادة تثبيت التطبيق على هاتفك لحذف بيانات تطبيق LIKKIM، بما في ذلك الحسابات والإعدادات.",
           "Value in USD": "القيمة بالدولار الأمريكي",
           Fee: "رسوم",
-          "Confirming Transaction on LIKKIM Device...":
-            "تأكيد المعاملة على جهاز LIKKIM...",
-          "Please confirm the transaction on your LIKKIM device.":
-            "يرجى تأكيد المعاملة على جهاز LIKKIM الخاص بك.",
+          "Waiting for approval on your device...":
+            "بانتظار الموافقة على جهازك...",
+
           "Verifying Address on LIKKIM...":
             "جارٍ التحقق من العنوان على LIKKIM...",
           "Importing on LIKKIM Hardware...":
@@ -1135,7 +1115,7 @@ i18n
             "تم رفض الإذن، غير قادر على الوصول إلى موقع الجهاز",
           "Last connected": "آخر اتصال",
           "Secure Device Status": "حالة الجهاز الآمن",
-          "Wallet Management": "إدارة المحفظة",
+          "Device Settings": "إعدادات الجهاز",
           "Delete Wallet": "حذف المحفظة",
           Support: "الدعم",
           Warning: "تحذير",
@@ -1146,8 +1126,6 @@ i18n
           "Your wallet has been deleted successfully.": "تم حذف محفظتك بنجاح.",
           "Insufficient Balance": "رصيد غير كافي",
 
-          "Please confirm the transaction on your LIKKIM device.":
-            "يرجى تأكيد العملية على جهاز LIKKIM الخاص بك.",
           Save: "حفظ",
           Address: "العنوان",
           "Add Address": "إضافة عنوان",
@@ -1224,11 +1202,10 @@ i18n
 
           "Scroll down to view all words":
             "すべての単語を見るには下にスクロールしてください",
-          "Recovery Phrase": "リカバリーフレーズ",
 
           "Generating your accounts": "アカウントを生成中",
           "Encrypting your data": "データを暗号化中",
-          "Your wallet is now ready": "ウォレットの準備が整いました",
+
           "Let's Go": "始めましょう",
           "Use spaces between words": "単語の間にスペースを使用",
 
@@ -1293,8 +1270,6 @@ i18n
           "Value in USD": "米ドルでの値",
           Fee: "手数料",
 
-          "Please confirm the transaction on your LIKKIM device.":
-            "LIKKIMデバイスで取引を確認してください。",
           "Verifying Address on LIKKIM...": "LIKKIMでアドレスを確認中...",
           "Importing on LIKKIM Hardware...":
             "LIKKIMハードウェアでインポート中...",
@@ -1311,8 +1286,6 @@ i18n
           "Value in USD": "米ドルでの値",
           Fee: "手数料",
 
-          "Please confirm the transaction on your LIKKIM device.":
-            "LIKKIMデバイスで取引を確認してください。",
           "Verifying Address on LIKKIM...": "LIKKIMでアドレスを確認中...",
           "Importing on LIKKIM Hardware...":
             "LIKKIMハードウェアでインポート中...",
@@ -1350,7 +1323,7 @@ i18n
             "権限が拒否されました。デバイスの位置にアクセスできません",
           "Last connected": "最終接続",
           "Secure Device Status": "セキュリティデバイスの状態",
-          "Wallet Management": "ウォレット管理",
+          "Device Settings": "デバイス設定",
           "Delete Wallet": "ウォレット削除",
           Support: "サポート",
           Warning: "警告",
@@ -1362,10 +1335,9 @@ i18n
           "Your wallet has been deleted successfully.":
             "ウォレットが正常に削除されました。",
           "Insufficient Balance": "残高不足",
-          "Confirming Transaction on LIKKIM Device...":
+          "Waiting for approval on your device....":
             "LIKKIMデバイスでの取引を確認中...",
-          "Please confirm the transaction on your LIKKIM device.":
-            "LIKKIMデバイスで取引を確認してください。",
+
           Save: "保存",
           Address: "アドレス",
           "Add Address": "アドレスを追加",
@@ -1442,11 +1414,10 @@ i18n
 
           "Scroll down to view all words":
             "Прокрутите вниз, чтобы увидеть все слова",
-          "Recovery Phrase": "Фраза восстановления",
 
           "Generating your accounts": "Создание ваших аккаунтов",
           "Encrypting your data": "Шифрование ваших данных",
-          "Your wallet is now ready": "Ваш кошелек готов",
+
           "Let's Go": "Поехали",
           "Use spaces between words": "Используйте пробелы между словами",
 
@@ -1509,10 +1480,9 @@ i18n
             "Пожалуйста, удалите и снова установите приложение на вашем телефоне, чтобы удалить данные приложения LIKKIM, включая аккаунты и настройки.",
           "Value in USD": "Значение в долларах США",
           Fee: "Комиссия",
-          "Confirming Transaction on LIKKIM Device...":
+          "Waiting for approval on your device....":
             "Подтверждение транзакции на устройстве LIKKIM...",
-          "Please confirm the transaction on your LIKKIM device.":
-            "Пожалуйста, подтвердите транзакцию на вашем устройстве LIKKIM.",
+
           "Verifying Address on LIKKIM...": "Проверка адреса на LIKKIM...",
           "Importing on LIKKIM Hardware...": "Импорт на оборудование LIKKIM...",
           "Your device is already verified.": "Ваше устройство уже проверено.",
@@ -1548,7 +1518,7 @@ i18n
             "Доступ запрещен, не удается получить доступ к местоположению устройства",
           "Last connected": "Последнее подключение",
           "Secure Device Status": "Состояние защищенного устройства",
-          "Wallet Management": "Управление кошельком",
+          "Device Settings": "Настройки устройства",
           "Delete Wallet": "Удалить кошелек",
           Support: "Поддержка",
           Warning: "Предупреждение",
@@ -1560,8 +1530,6 @@ i18n
             "Ваш кошелек был успешно удален.",
           "Insufficient Balance": "Недостаточно средств",
 
-          "Please confirm the transaction on your LIKKIM device.":
-            "Пожалуйста, подтвердите транзакцию на вашем устройстве LIKKIM.",
           Save: "Сохранить",
           Address: "Адрес",
           "Add Address": "Добавить адрес",
@@ -1636,11 +1604,10 @@ i18n
 
           "Scroll down to view all words":
             "모든 단어를 보려면 아래로 스크롤하세요",
-          "Recovery Phrase": "복구 구문",
 
           "Generating your accounts": "계정 생성 중",
           "Encrypting your data": "데이터 암호화 중",
-          "Your wallet is now ready": "지갑이 준비되었습니다",
+
           "Let's Go": "시작합시다",
           "Use spaces between words": "단어 사이에 공백 사용",
 
@@ -1703,8 +1670,6 @@ i18n
           "Value in USD": "미국 달러로 된 값",
           Fee: "수수료",
 
-          "Please confirm the transaction on your LIKKIM device.":
-            "LIKKIM 장치에서 거래를 확인하십시오.",
           "Verifying Address on LIKKIM...": "LIKKIM에서 주소를 확인하는 중...",
           "Importing on LIKKIM Hardware...": "LIKKIM 하드웨어로 가져오는 중...",
           "Your device is already verified.": "장치가 이미 확인되었습니다.",
@@ -1739,7 +1704,7 @@ i18n
             "권한이 거부되어 장치 위치에 접근할 수 없습니다",
           "Last connected": "마지막 연결",
           "Secure Device Status": "보안 장치 상태",
-          "Wallet Management": "지갑 관리",
+          "Device Settings": "장치 설정",
           "Delete Wallet": "지갑 삭제",
           Support: "지원",
           Warning: "경고",
@@ -1750,10 +1715,9 @@ i18n
           "Your wallet has been deleted successfully.":
             "지갑이 성공적으로 삭제되었습니다.",
           "Insufficient Balance": "잔액 부족",
-          "Confirming Transaction on LIKKIM Device...":
+          "Waiting for approval on your device....":
             "LIKKIM 장치에서 거래 확인 중...",
-          "Please confirm the transaction on your LIKKIM device.":
-            "LIKKIM 장치에서 거래를 확인해 주세요.",
+
           Save: "저장",
           Address: "주소",
           "Add Address": "주소 추가",
@@ -1830,11 +1794,10 @@ i18n
 
           "Scroll down to view all words":
             "Role para baixo para ver todas as palavras",
-          "Recovery Phrase": "Frase de recuperação",
 
           "Generating your accounts": "Gerando suas contas",
           "Encrypting your data": "Criptografando seus dados",
-          "Your wallet is now ready": "Sua carteira está pronta",
+
           "Let's Go": "Vamos lá",
           "Use spaces between words": "Use espaços entre as palavras",
 
@@ -1898,8 +1861,6 @@ i18n
           "Value in USD": "Valor em USD",
           Fee: "Taxa",
 
-          "Please confirm the transaction on your LIKKIM device.":
-            "Por favor, confirme a transação no seu dispositivo LIKKIM.",
           "Verifying Address on LIKKIM...": "Verificando endereço no LIKKIM...",
           "Importing on LIKKIM Hardware...": "Importando no hardware LIKKIM...",
           "Your device is already verified.":
@@ -1936,7 +1897,7 @@ i18n
             "Permissão negada, não é possível acessar a localização do dispositivo",
           "Last connected": "Última conexão",
           "Secure Device Status": "Estado do dispositivo seguro",
-          "Wallet Management": "Gestão de Carteira",
+          "Device Settings": "Definições do dispositivo",
           "Delete Wallet": "Eliminar Carteira",
           Support: "Suporte",
           Warning: "Aviso",
@@ -1947,10 +1908,9 @@ i18n
           "Your wallet has been deleted successfully.":
             "Sua carteira foi excluída com sucesso.",
           "Insufficient Balance": "Saldo insuficiente",
-          "Confirming Transaction on LIKKIM Device...":
+          "Waiting for approval on your device....":
             "Confirmando a transação no dispositivo LIKKIM...",
-          "Please confirm the transaction on your LIKKIM device.":
-            "Por favor, confirme a transação no seu dispositivo LIKKIM.",
+
           Save: "Salvar",
           Address: "Endereço",
           "Add Address": "Adicionar Endereço",
@@ -2028,11 +1988,10 @@ i18n
 
           "Scroll down to view all words":
             "Role para baixo para ver todas as palavras",
-          "Recovery Phrase": "Frase de recuperação",
 
           "Generating your accounts": "Gerando suas contas",
           "Encrypting your data": "Criptografando seus dados",
-          "Your wallet is now ready": "Sua carteira está pronta",
+
           "Let's Go": "Vamos lá",
           "Use spaces between words": "Use espaços entre as palavras",
 
@@ -2096,8 +2055,6 @@ i18n
           "Value in USD": "Valor em USD",
           Fee: "Taxa",
 
-          "Please confirm the transaction on your LIKKIM device.":
-            "Por favor, confirme a transação no seu dispositivo LIKKIM.",
           "Verifying Address on LIKKIM...": "Verificando endereço no LIKKIM...",
           "Importing on LIKKIM Hardware...": "Importando no hardware LIKKIM...",
           "Your device is already verified.":
@@ -2150,7 +2107,7 @@ i18n
             "Permesso negato, impossibile accedere alla posizione del dispositivo",
           "Last connected": "Ultima connessione",
           "Secure Device Status": "Estado do dispositivo seguro",
-          "Wallet Management": "Gestão de Carteira",
+          "Device Settings": "Configurações do dispositivo",
           "Delete Wallet": "Excluir Carteira",
           Support: "Suporte",
           Warning: "Aviso",
@@ -2161,10 +2118,9 @@ i18n
           "Your wallet has been deleted successfully.":
             "Sua carteira foi excluída com sucesso.",
           "Insufficient Balance": "Saldo insuficiente",
-          "Confirming Transaction on LIKKIM Device...":
+          "Waiting for approval on your device....":
             "Confirmando a transação no dispositivo LIKKIM...",
-          "Please confirm the transaction on your LIKKIM device.":
-            "Por favor, confirme a transação no seu dispositivo LIKKIM.",
+
           Save: "Salvar",
           Address: "Endereço",
           "Add Address": "Adicionar Endereço",
@@ -2242,11 +2198,10 @@ i18n
 
           "Scroll down to view all words":
             "Scorri verso il basso per visualizzare tutte le parole",
-          "Recovery Phrase": "Frase di recupero",
 
           "Generating your accounts": "Generazione dei tuoi account",
           "Encrypting your data": "Criptazione dei tuoi dati",
-          "Your wallet is now ready": "Il tuo portafoglio è pronto",
+
           "Let's Go": "Andiamo",
           "Use spaces between words": "Usa spazi tra le parole",
 
@@ -2310,8 +2265,6 @@ i18n
           "Value in USD": "Valore in USD",
           Fee: "Commissione",
 
-          "Please confirm the transaction on your LIKKIM device.":
-            "Si prega di confermare la transazione sul dispositivo LIKKIM.",
           "Verifying Address on LIKKIM...":
             "Verifica dell'indirizzo su LIKKIM...",
           "Importing on LIKKIM Hardware...":
@@ -2349,7 +2302,7 @@ i18n
             "Permesso negato, impossibile accedere alla posizione del dispositivo",
           "Last connected": "Ultima connessione",
           "Secure Device Status": "Stato del dispositivo sicuro",
-          "Wallet Management": "Gestione Portafoglio",
+          "Device Settings": "Impostazioni del dispositivo",
           "Delete Wallet": "Elimina Portafoglio",
           Support: "Supporto",
           Warning: "Avviso",
@@ -2360,10 +2313,8 @@ i18n
           "Your wallet has been deleted successfully.":
             "Il tuo portafoglio è stato eliminato con successo.",
           "Insufficient Balance": "Saldo insufficiente",
-          "Confirming Transaction on LIKKIM Device...":
+          "Waiting for approval on your device....":
             "Confermando la transazione sul dispositivo LIKKIM...",
-          "Please confirm the transaction on your LIKKIM device.":
-            "Conferma la transazione sul tuo dispositivo LIKKIM.",
           Save: "Salva",
           Address: "Indirizzo",
           "Add Address": "Aggiungi indirizzo",
@@ -2442,11 +2393,10 @@ i18n
 
           "Scroll down to view all words":
             "Scrollen Sie nach unten, um alle Wörter zu sehen",
-          "Recovery Phrase": "Wiederherstellungsphrase",
 
           "Generating your accounts": "Erstellen Ihrer Konten",
           "Encrypting your data": "Verschlüsseln Ihrer Daten",
-          "Your wallet is now ready": "Ihre Brieftasche ist jetzt bereit",
+
           "Let's Go": "Los geht's",
           "Use spaces between words":
             "Verwenden Sie Leerzeichen zwischen den Wörtern",
@@ -2510,8 +2460,7 @@ i18n
             "Bitte deinstallieren Sie die App und installieren Sie sie dann erneut auf Ihrem Telefon, um die LIKKIM-App-Daten, einschließlich Konten und Einstellungen, zu löschen.",
           "Value in USD": "Wert in USD",
           Fee: "Gebühr",
-          "Please confirm the transaction on your LIKKIM device.":
-            "Bitte bestätigen Sie die Transaktion auf Ihrem LIKKIM-Gerät.",
+
           "Verifying Address on LIKKIM...": "Adresse auf LIKKIM überprüfen...",
           "Importing on LIKKIM Hardware...":
             "Importieren auf LIKKIM-Hardware...",
@@ -2549,7 +2498,7 @@ i18n
             "Zugriff verweigert, kann den Standort des Geräts nicht erreichen",
           "Last connected": "Zuletzt verbunden",
           "Secure Device Status": "Status des sicheren Geräts",
-          "Wallet Management": "Wallet-Verwaltung",
+          "Device Settings": "Geräteeinstellungen",
           "Delete Wallet": "Wallet löschen",
           Support: "Unterstützung",
           Warning: "Warnung",
@@ -2560,10 +2509,9 @@ i18n
           "Your wallet has been deleted successfully.":
             "Ihr Wallet wurde erfolgreich gelöscht.",
           "Insufficient Balance": "Unzureichendes Guthaben",
-          "Confirming Transaction on LIKKIM Device...":
+          "Waiting for approval on your device....":
             "Transaktion auf dem LIKKIM-Gerät wird bestätigt...",
-          "Please confirm the transaction on your LIKKIM device.":
-            "Bitte bestätigen Sie die Transaktion auf Ihrem LIKKIM-Gerät.",
+
           Save: "Speichern",
           Address: "Adresse",
           "Add Address": "Adresse hinzufügen",
@@ -2635,24 +2583,17 @@ i18n
           "Remove Chain Account": "श्रृंखला खाता हटाएं",
           Remove: "हटाएं",
           "Security in your hands": "सुरक्षा आपके हाथ में",
-
           Continue: "जारी रखें",
-
           "Scroll down to view all words":
             "सभी शब्दों को देखने के लिए नीचे स्क्रॉल करें",
-          "Recovery Phrase": "रिकवरी वाक्यांश",
-
           "Generating your accounts": "आपके खाते बना रहा है",
           "Encrypting your data": "आपका डेटा एन्क्रिप्ट कर रहा है",
-          "Your wallet is now ready": "आपका वॉलेट अब तैयार है",
           "Let's Go": "चलिए चलते हैं",
           "Use spaces between words": "शब्दों के बीच स्पेस का उपयोग करें",
-
           Version: "संस्करण",
           "Assets can only be sent within the same chain.":
             "संपत्तियां केवल उसी श्रृंखला के भीतर भेजी जा सकती हैं।",
           "Firmware Update": "फर्मवेयर अपडेट",
-
           "No data available": "कोई डेटा उपलब्ध नहीं है",
           "Search Currency": "मुद्रा खोजें",
           "Search Cryptocurrency": "क्रिप्टोकरेंसी खोजें",
@@ -2707,8 +2648,6 @@ i18n
           "Value in USD": "यूएसडी में मूल्य",
           Fee: "शुल्क",
 
-          "Please confirm the transaction on your LIKKIM device.":
-            "कृपया अपने LIKKIM डिवाइस पर लेन-देन की पुष्टि करें।",
           "Verifying Address on LIKKIM...":
             "LIKKIM पर पते की पुष्टि कर रहे हैं...",
           "Importing on LIKKIM Hardware...":
@@ -2747,7 +2686,7 @@ i18n
             "अनुमति अस्वीकृत, डिवाइस का स्थान प्राप्त नहीं कर सकते",
           "Last connected": "अंतिम कनेक्शन",
           "Secure Device Status": "सुरक्षित डिवाइस की स्थिति",
-          "Wallet Management": "वॉलेट प्रबंधन",
+          "Device Settings": "डिवाइस सेटिंग्स",
           "Delete Wallet": "वॉलेट हटाएँ",
           Support: "सहायता",
           Warning: "चेतावनी",
@@ -2758,10 +2697,9 @@ i18n
           "Your wallet has been deleted successfully.":
             "आपकी वॉलेट को सफलतापूर्वक हटा दिया गया है।",
           "Insufficient Balance": "अपर्याप्त शेष",
-          "Confirming Transaction on LIKKIM Device...":
+          "Waiting for approval on your device....":
             "LIKKIM डिवाइस पर लेनदेन की पुष्टि हो रही है...",
-          "Please confirm the transaction on your LIKKIM device.":
-            "कृपया अपने LIKKIM डिवाइस पर लेनदेन की पुष्टि करें।",
+
           Save: "सहेजें",
           Address: "पता",
           "Add Address": "पता जोड़ें",
@@ -2834,22 +2772,16 @@ i18n
           Remove: "Устгах",
           "Security in your hands": "Аюулгүй байдал таны гарт",
           Continue: "Үргэлжлүүлэх",
-
           "Scroll down to view all words":
             "Бүх үгийг харахын тулд доош гүйлгэнэ үү",
-          "Recovery Phrase": "Сэргээх үг",
-
           "Generating your accounts": "Таны акаунтуудыг үүсгэж байна",
           "Encrypting your data": "Таны өгөгдлийг шифрлэж байна",
-          "Your wallet is now ready": "Таны түрийвч одоо бэлэн боллоо",
           "Let's Go": "Эхэлцгээе",
           "Use spaces between words": "Үгсийн хооронд зай ашигла",
-
           Version: "Хувилбар",
           "Assets can only be sent within the same chain.":
             "Хөрөнгийг зөвхөн нэг гинжин дотор л илгээх боломжтой.",
           "Firmware Update": "Фирмвэр шинэчлэх",
-
           "No data available": "Мэдээлэл байхгүй",
           "Search Currency": "Валют хайх",
           "Search Cryptocurrency": "Криптовалют хайх",
@@ -2895,9 +2827,6 @@ i18n
           "Transaction Fee": "Гүйлгээний хураамж",
           Confirm: "Баталгаажуулах",
           "Transaction Confirmation": "Гүйлгээ баталгаажуулалт",
-
-          "Please confirm the transaction on your LIKKIM device.":
-            "LIKKIM төхөөрөмж дээр гүйлгээг баталгаажуулна уу.",
           "Verifying Address on LIKKIM...":
             "LIKKIM дээр хаягийг шалгаж байна...",
           "Importing on LIKKIM Hardware...":
@@ -2914,9 +2843,6 @@ i18n
             "โปรดถอนการติดตั้งแล้วติดตั้งแอปใหม่ในโทรศัพท์ของคุณเพื่อทำการลบข้อมูลแอป LIKKIM รวมถึงบัญชีและการตั้งค่า",
           "Value in USD": "มูลค่าในสกุลเงิน USD",
           Fee: "ค่าธรรมเนียม",
-
-          "Please confirm the transaction on your LIKKIM device.":
-            "โปรดยืนยันธุรกรรมบนอุปกรณ์ LIKKIM ของคุณ",
           "Verifying Address on LIKKIM...": "กำลังยืนยันที่อยู่บน LIKKIM...",
           "Importing on LIKKIM Hardware...": "กำลังนำเข้าบนฮาร์ดแวร์ LIKKIM...",
           "Your device is already verified.":
@@ -2952,7 +2878,7 @@ i18n
             "Зөвшөөрөл зөвшөөрөгдөөгүй, төхөөрөмжийн байрлалд нэвтрэх боломжгүй",
           "Last connected": "Сүүлийн холболт",
           "Secure Device Status": "Аюулгүй төхөөрөмжийн төлөв",
-          "Wallet Management": "Хэтэвчийн удирдлага",
+          "Device Settings": "Төхөөрөмжийн тохиргоо",
           "Delete Wallet": "Хэтэвч устгах",
           Support: "Тусламж",
           Warning: "Сэрэмжлүүлэг",
@@ -2964,10 +2890,8 @@ i18n
           "Your wallet has been deleted successfully.":
             "Таны түрийвч амжилттай устгагдсан.",
           "Insufficient Balance": "Хүлээгдэж буй үлдэгдэл",
-          "Confirming Transaction on LIKKIM Device...":
+          "Waiting for approval on your device....":
             "LIKKIM төхөөрөмж дээр гүйлгээг баталгаажуулж байна...",
-          "Please confirm the transaction on your LIKKIM device.":
-            "Та өөрийн LIKKIM төхөөрөмж дээр гүйлгээг баталгаажуулна уу.",
           Save: "Хадгалах",
           Address: "Хаяг",
           "Add Address": "Хаяг нэмэх",
@@ -3037,23 +2961,16 @@ i18n
           "Remove Chain Account": "ลบบัญชีเครือ",
           Remove: "ลบ",
           "Security in your hands": "ความปลอดภัยอยู่ในมือคุณ",
-
           Continue: "ดำเนินการต่อ",
-
           "Scroll down to view all words": "เลื่อนลงเพื่อดูคำทั้งหมด",
-          "Recovery Phrase": "วลีการกู้คืน",
-
           "Generating your accounts": "กำลังสร้างบัญชีของคุณ",
           "Encrypting your data": "กำลังเข้ารหัสข้อมูลของคุณ",
-          "Your wallet is now ready": "กระเป๋าเงินของคุณพร้อมแล้ว",
           "Let's Go": "ไปกันเถอะ",
           "Use spaces between words": "ใช้ช่องว่างระหว่างคำ",
-
           Version: "เวอร์ชัน",
           "Assets can only be sent within the same chain.":
             "สินทรัพย์สามารถส่งได้เฉพาะภายในโซ่เดียวกันเท่านั้น",
           "Firmware Update": "อัปเดตเฟิร์มแวร์",
-
           "No data available": "ไม่มีข้อมูล",
           "Search Currency": "ค้นหาสกุลเงิน",
           "Search Cryptocurrency": "ค้นหาสกุลเงินดิจิทัล",
@@ -3107,9 +3024,6 @@ i18n
             "โปรดถอนการติดตั้งแล้วติดตั้งแอปใหม่ในโทรศัพท์ของคุณเพื่อทำการลบข้อมูลแอป LIKKIM รวมถึงบัญชีและการตั้งค่า",
           "Value in USD": "มูลค่าในสกุลเงิน USD",
           Fee: "ค่าธรรมเนียม",
-
-          "Please confirm the transaction on your LIKKIM device.":
-            "โปรดยืนยันธุรกรรมบนอุปกรณ์ LIKKIM ของคุณ",
           "Verifying Address on LIKKIM...": "กำลังยืนยันที่อยู่บน LIKKIM...",
           "Importing on LIKKIM Hardware...": "กำลังนำเข้าบนฮาร์ดแวร์ LIKKIM...",
           "Your device is already verified.":
@@ -3144,7 +3058,7 @@ i18n
             "การเข้าถึงถูกปฏิเสธ ไม่สามารถเข้าถึงตำแหน่งอุปกรณ์",
           "Last connected": "การเชื่อมต่อครั้งสุดท้าย",
           "Secure Device Status": "สถานะของอุปกรณ์รักษาความปลอดภัย",
-          "Wallet Management": "การจัดการกระเป๋าเงิน",
+          "Device Settings": "การตั้งค่าอุปกรณ์",
           "Delete Wallet": "ลบกระเป๋าเงิน",
           Support: "สนับสนุน",
           Warning: "คำเตือน",
@@ -3155,10 +3069,8 @@ i18n
           "Your wallet has been deleted successfully.":
             "กระเป๋าของคุณถูกลบเรียบร้อยแล้ว",
           "Insufficient Balance": "ยอดเงินไม่พอ",
-          "Confirming Transaction on LIKKIM Device...":
+          "Waiting for approval on your device....":
             "กำลังยืนยันการทำรายการบนอุปกรณ์ LIKKIM...",
-          "Please confirm the transaction on your LIKKIM device.":
-            "โปรดยืนยันการทำรายการบนอุปกรณ์ LIKKIM ของคุณ",
           Save: "บันทึก",
           Address: "ที่อยู่",
           "Add Address": "เพิ่มที่อยู่",
@@ -3230,21 +3142,15 @@ i18n
           "Remove Chain Account": "Видалити ланцюговий акаунт",
           Remove: "Видалити",
           "Security in your hands": "Безпека у ваших руках",
-
           Continue: "Продовжити",
-
           "Scroll down to view all words":
             "Прокрутіть вниз, щоб побачити всі слова",
-          "Recovery Phrase": "Фраза відновлення",
-
           "Generating your accounts": "Створення ваших облікових записів",
           "Encrypting your data": "Шифрування ваших даних",
-          "Your wallet is now ready": "Ваш гаманець готовий",
           "Let's Go": "Почнемо",
           "Assets can only be sent within the same chain.":
             "Активи можна надсилати лише в межах одного ланцюга.",
           "Firmware Update": "Оновлення прошивки",
-
           "No data available": "Дані недоступні",
           "Search Currency": "Шукати валюту",
           "Search Cryptocurrency": "Шукати криптовалюту",
@@ -3299,10 +3205,8 @@ i18n
             "Будь ласка, видаліть програму і знову встановіть її на телефон, щоб видалити дані додатку LIKKIM, включаючи облікові записи та налаштування.",
           "Value in USD": "Значення в доларах США",
           Fee: "Комісія",
-          "Confirming Transaction on LIKKIM Device...":
+          "Waiting for approval on your device....":
             "Підтвердження транзакції на пристрої LIKKIM...",
-          "Please confirm the transaction on your LIKKIM device.":
-            "Будь ласка, підтвердіть транзакцію на вашому пристрої LIKKIM.",
           "Verifying Address on LIKKIM...": "Перевірка адреси на LIKKIM...",
           "Importing on LIKKIM Hardware...":
             "Імпорт на апаратному забезпеченні LIKKIM...",
@@ -3339,7 +3243,7 @@ i18n
             "Доступ заборонено, неможливо отримати доступ до місцеположення пристрою",
           "Last connected": "Останнє підключення",
           "Secure Device Status": "Стан безпечного пристрою",
-          "Wallet Management": "Управління гаманцем",
+          "Device Settings": "Налаштування пристрою",
           "Delete Wallet": "Видалити гаманець",
           Support: "Підтримка",
           Warning: "Попередження",
@@ -3350,9 +3254,6 @@ i18n
           "Your wallet has been deleted successfully.":
             "Ваш гаманець був успішно видалений.",
           "Insufficient Balance": "Недостатньо коштів",
-
-          "Please confirm the transaction on your LIKKIM device.":
-            "Будь ласка, підтвердіть транзакцію на вашому пристрої LIKKIM.",
           Save: "Зберегти",
           Address: "Адреса",
           "Add Address": "Додати адресу",
@@ -3424,23 +3325,16 @@ i18n
           "Remove Chain Account": "Xóa tài khoản chuỗi",
           Remove: "Xóa",
           "Security in your hands": "Bảo mật trong tay bạn",
-
           Continue: "Tiếp tục",
-
           "Scroll down to view all words": "Cuộn xuống để xem tất cả các từ",
-          "Recovery Phrase": "Cụm từ khôi phục",
-
           "Generating your accounts": "Đang tạo tài khoản của bạn",
           "Encrypting your data": "Đang mã hóa dữ liệu của bạn",
-          "Your wallet is now ready": "Ví của bạn đã sẵn sàng",
           "Let's Go": "Bắt đầu",
           "Use spaces between words": "Sử dụng khoảng trắng giữa các từ",
-
           Version: "Phiên bản",
           "Assets can only be sent within the same chain.":
             "Tài sản chỉ có thể được gửi trong cùng một chuỗi.",
           "Firmware Update": "Cập nhật firmware",
-
           "No data available": "Không có dữ liệu",
           "Search Currency": "Tìm kiếm tiền tệ",
           "Search Cryptocurrency": "Tìm kiếm tiền điện tử",
@@ -3495,9 +3389,6 @@ i18n
             "Vui lòng gỡ cài đặt rồi cài đặt lại ứng dụng trên điện thoại của bạn để xóa dữ liệu ứng dụng LIKKIM, bao gồm tài khoản và cài đặt.",
           "Value in USD": "Giá trị bằng USD",
           Fee: "Phí",
-
-          "Please confirm the transaction on your LIKKIM device.":
-            "Vui lòng xác nhận giao dịch trên thiết bị LIKKIM của bạn.",
           "Verifying Address on LIKKIM...":
             "Đang xác minh địa chỉ trên LIKKIM...",
           "Importing on LIKKIM Hardware...":
@@ -3536,7 +3427,7 @@ i18n
             "Quyền truy cập bị từ chối, không thể truy cập vị trí thiết bị",
           "Last connected": "Kết nối lần cuối",
           "Secure Device Status": "Trạng thái thiết bị an toàn",
-          "Wallet Management": "Quản lý ví",
+          "Device Settings": "Cài đặt thiết bị",
           "Delete Wallet": "Xóa ví",
           Support: "Hỗ trợ",
           Warning: "Cảnh báo",
@@ -3547,10 +3438,8 @@ i18n
           "Your wallet has been deleted successfully.":
             "Ví của bạn đã được xóa thành công.",
           "Insufficient Balance": "Số dư không đủ",
-          "Confirming Transaction on LIKKIM Device...":
+          "Waiting for approval on your device....":
             "Đang xác nhận giao dịch trên thiết bị LIKKIM...",
-          "Please confirm the transaction on your LIKKIM device.":
-            "Vui lòng xác nhận giao dịch trên thiết bị LIKKIM của bạn.",
           Save: "Lưu",
           Address: "Địa chỉ",
           "Add Address": "Thêm địa chỉ",
@@ -3626,11 +3515,10 @@ i18n
 
           "Scroll down to view all words":
             "Gulir ke bawah untuk melihat semua kata",
-          "Recovery Phrase": "Frasa pemulihan",
 
           "Generating your accounts": "Membuat akun Anda",
           "Encrypting your data": "Mengenkripsi data Anda",
-          "Your wallet is now ready": "Dompet Anda sekarang siap",
+
           "Let's Go": "Ayo pergi",
           "Use spaces between words": "Gunakan spasi di antara kata-kata",
 
@@ -3692,10 +3580,8 @@ i18n
             "Harap hapus dan instal ulang aplikasi di ponsel Anda untuk menghapus data aplikasi LIKKIM, termasuk akun dan pengaturan.",
           "Value in USD": "Nilai dalam USD",
           Fee: "Biaya",
-          "Confirming Transaction on LIKKIM Device...":
+          "Waiting for approval on your device....":
             "Mengonfirmasi transaksi di perangkat LIKKIM...",
-          "Please confirm the transaction on your LIKKIM device.":
-            "Harap konfirmasi transaksi di perangkat LIKKIM Anda.",
           "Verifying Address on LIKKIM...": "Memverifikasi alamat di LIKKIM...",
           "Importing on LIKKIM Hardware...":
             "Mengimpor di perangkat keras LIKKIM...",
@@ -3733,7 +3619,7 @@ i18n
             "Izin ditolak, tidak dapat mengakses lokasi perangkat",
           "Last connected": "Terhubung terakhir",
           "Secure Device Status": "Status perangkat aman",
-          "Wallet Management": "Manajemen Dompet",
+          "Device Settings": "Pengaturan perangkat",
           "Delete Wallet": "Hapus Dompet",
           Support: "Dukungan",
           Warning: "Peringatan",
@@ -3744,9 +3630,6 @@ i18n
           "Your wallet has been deleted successfully.":
             "Dompet Anda telah dihapus dengan sukses.",
           "Insufficient Balance": "Saldo tidak cukup",
-
-          "Please confirm the transaction on your LIKKIM device.":
-            "Silakan konfirmasi transaksi pada perangkat LIKKIM Anda.",
           Save: "Simpan",
           Address: "Alamat",
           "Add Address": "Tambah Alamat",
@@ -3816,27 +3699,20 @@ i18n
           "Remove Chain Account": "Alisin ang chain account",
           Remove: "Alisin",
           "Security in your hands": "Seguridad sa iyong mga kamay",
-
           Continue: "Magpatuloy",
-
           "Scroll down to view all words":
             "Mag-scroll pababa upang makita ang lahat ng mga salita",
-          "Recovery Phrase": "Parirala ng pagbawi",
-
           "Generating your accounts": "Gumagawa ng iyong mga account",
           "Encrypting your data": "Ini-encrypt ang iyong data",
-          "Your wallet is now ready": "Handa na ang iyong wallet",
           "Let's Go": "Tara na",
           "Use spaces between words":
             "Gumamit ng mga espasyo sa pagitan ng mga salita",
-
           Version: "Bersyon",
           "Only you can unlock your wallet":
             "Ikaw lang ang makakapagbukas ng iyong pitaka",
           "Assets can only be sent within the same chain.":
             "Ang mga ari-arian ay maaari lamang ipadala sa loob ng parehong kadena.",
           "Firmware Update": "Pag-update ng firmware",
-
           "No data available": "Walang magagamit na data",
           "Search Currency": "Maghanap ng Pera",
           "Search Cryptocurrency": "Maghanap ng Cryptocurrency",
@@ -3891,10 +3767,9 @@ i18n
             "Mangyaring i-uninstall at muling i-install ang app sa iyong telepono upang tanggalin ang data ng app na LIKKIM, kabilang ang mga account at mga setting.",
           "Value in USD": "Halaga sa USD",
           Fee: "Bayad",
-          "Confirming Transaction on LIKKIM Device...":
+          "Waiting for approval on your device....":
             "Kinukumpirma ang transaksyon sa LIKKIM device...",
-          "Please confirm the transaction on your LIKKIM device.":
-            "Mangyaring kumpirmahin ang transaksyon sa iyong LIKKIM device.",
+
           "Verifying Address on LIKKIM...":
             "Tinitiyak ang address sa LIKKIM...",
           "Importing on LIKKIM Hardware...": "Ina-import sa LIKKIM hardware...",
@@ -3931,7 +3806,7 @@ i18n
             "Tinanggihan ang permiso, hindi makuha ang lokasyon ng device",
           "Last connected": "Huling koneksyon",
           "Secure Device Status": "Kalagayan ng secure na device",
-          "Wallet Management": "Pamamahala ng Wallet",
+          "Device Settings": "Mga Setting ng Device",
           "Delete Wallet": "Tanggalin ang Wallet",
           Support: "Suporta",
           Warning: "Babala",
@@ -3942,8 +3817,7 @@ i18n
           "Your wallet has been deleted successfully.":
             "Matagumpay na natanggal ang iyong wallet.",
           "Insufficient Balance": "Hindi sapat na balanse",
-          "Please confirm the transaction on your LIKKIM device.":
-            "Pakikumpirma ang transaksyon sa iyong LIKKIM device.",
+
           Save: "I-save",
           Address: "Address",
           "Add Address": "Magdagdag ng Address",
@@ -4017,10 +3891,10 @@ i18n
           "Security in your hands": "নিরাপত্তা আপনার হাতে",
           Continue: "চালিয়ে যান",
           "Scroll down to view all words": "সমস্ত শব্দ দেখতে নীচে স্ক্রোল করুন",
-          "Recovery Phrase": "পুনরুদ্ধার বাক্যাংশ",
+
           "Generating your accounts": "আপনার অ্যাকাউন্ট তৈরি করা হচ্ছে",
           "Encrypting your data": "আপনার ডেটা এনক্রিপ্ট করা হচ্ছে",
-          "Your wallet is now ready": "আপনার ওয়ালেট এখন প্রস্তুত",
+
           "Let's Go": "চলুন",
           "Use spaces between words": "শব্দের মধ্যে স্পেস ব্যবহার করুন",
           Version: "সংস্করণ",
@@ -4083,10 +3957,9 @@ i18n
             "LIKKIM অ্যাপের ডেটা, সহ অ্যাকাউন্ট এবং সেটিংস, মুছে ফেলতে আপনার ফোনে অ্যাপটি আনইনস্টল করে পুনরায় ইনস্টল করুন।",
           "Value in USD": "ইউএসডি-তে মান",
           Fee: "ফি",
-          "Confirming Transaction on LIKKIM Device...":
+          "Waiting for approval on your device....":
             "LIKKIM ডিভাইসে লেনদেন নিশ্চিত করা হচ্ছে...",
-          "Please confirm the transaction on your LIKKIM device.":
-            "অনুগ্রহ করে আপনার LIKKIM ডিভাইসে লেনদেন নিশ্চিত করুন।",
+
           "Verifying Address on LIKKIM...":
             "LIKKIM-এ ঠিকানা যাচাই করা হচ্ছে...",
           "Importing on LIKKIM Hardware...":
@@ -4125,7 +3998,7 @@ i18n
             "অনুমতি প্রত্যাখ্যান, ডিভাইসের অবস্থান অ্যাক্সেস করা যাচ্ছে না",
           "Last connected": "শেষ সংযোগ",
           "Secure Device Status": "নিরাপদ ডিভাইসের অবস্থা",
-          "Wallet Management": "ওয়ালেট ব্যবস্থাপনা",
+          "Device Settings": "ডিভাইস সেটিংস",
           "Delete Wallet": "ওয়ালেট মুছুন",
           Support: "সমর্থন",
           Warning: "সতর্কতা",
@@ -4136,8 +4009,7 @@ i18n
           "Your wallet has been deleted successfully.":
             "আপনার ওয়ালেট সফলভাবে মুছে ফেলা হয়েছে।",
           "Insufficient Balance": "অপর্যাপ্ত ব্যালেন্স",
-          "Please confirm the transaction on your LIKKIM device.":
-            "আপনার LIKKIM ডিভাইসে লেনদেন নিশ্চিত করুন।",
+
           Save: "সংরক্ষণ",
           Address: "ঠিকানা",
           "Add Address": "ঠিকানা যোগ করুন",

@@ -687,20 +687,14 @@ function VaultScreen({ route, navigation }) {
           t("Encrypting your data"),
         ]);
       }, 2000);
+
       const timer3 = setTimeout(() => {
-        setProcessMessages((prevMessages) => [
-          ...prevMessages,
-          t("Your wallet is now ready"),
-        ]);
-      }, 3000);
-      const timer4 = setTimeout(() => {
         setShowLetsGoButton(true);
       }, 4000);
       return () => {
         clearTimeout(timer1);
         clearTimeout(timer2);
         clearTimeout(timer3);
-        clearTimeout(timer4);
       };
     }
   }, [processModalVisible, t]);
