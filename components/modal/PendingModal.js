@@ -1,15 +1,6 @@
-import React from "react";
-import { Modal, View, Text, TouchableOpacity, Image } from "react-native";
+import { Modal, View, Text, TouchableOpacity } from "react-native";
 
-const PendingModal = ({
-  visible,
-  onRequestClose,
-  title,
-  imageSource,
-  subtitle,
-  VaultScreenStyle,
-  t,
-}) => (
+const PendingModal = ({ visible, onRequestClose, VaultScreenStyle, t }) => (
   <Modal
     visible={visible}
     onRequestClose={onRequestClose}
@@ -18,9 +9,6 @@ const PendingModal = ({
   >
     <View style={VaultScreenStyle.centeredView}>
       <View style={VaultScreenStyle.pendingModalView}>
-        <Text style={VaultScreenStyle.modalTitle}>{title}</Text>
-        <Image source={imageSource} style={{ width: 120, height: 120 }} />
-        <Text style={VaultScreenStyle.modalSubtitle}>{subtitle}</Text>
         <TouchableOpacity
           style={VaultScreenStyle.submitButton}
           onPress={onRequestClose}

@@ -26,9 +26,7 @@ const ModalsContainer = ({
   VaultScreenStyle,
   t,
   isDarkMode,
-
   handleWalletTest,
-
   handleContinue,
   processModalVisible,
   setProcessModalVisible,
@@ -77,8 +75,6 @@ const ModalsContainer = ({
   setCreatePendingModalVisible,
   setImportingModalVisible,
   stopMonitoringWalletAddress,
-  walletCreationStatus,
-  importingStatus,
   blueToothStatus,
 }) => {
   return (
@@ -167,21 +163,6 @@ const ModalsContainer = ({
           }
           stopMonitoringWalletAddress();
         }}
-        title={
-          createPendingModalVisible
-            ? walletCreationStatus.title
-            : importingStatus.title
-        }
-        imageSource={
-          createPendingModalVisible
-            ? walletCreationStatus.image
-            : importingStatus.image
-        }
-        subtitle={
-          createPendingModalVisible
-            ? walletCreationStatus.subtitle
-            : importingStatus.subtitle
-        }
         VaultScreenStyle={VaultScreenStyle}
         t={t}
       />

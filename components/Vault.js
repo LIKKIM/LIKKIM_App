@@ -173,17 +173,7 @@ function VaultScreen({ route, navigation }) {
       crypto.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       crypto.shortName.toLowerCase().includes(searchQuery.toLowerCase())
   );
-  const [walletCreationStatus, setWalletCreationStatus] = useState({
-    image: require("../assets/gif/Pending.gif"), // 默认显示 Pending.gif
-    title: t("Creating on LIKKIM Hardware..."), // 默认主消息
-    subtitle: t("Your device is already verified."), // 默认子消息
-  });
 
-  const [importingStatus, setImportingStatus] = useState({
-    image: require("../assets/gif/Pending.gif"), // 默认显示 Pending.gif
-    title: t("Importing on LIKKIM Hardware..."), // 默认主消息
-    subtitle: t("Your device is already verified."), // 默认子消息
-  });
   /*   useEffect(() => {
     console.log("initialAdditionalCryptosState:", initialAdditionalCryptos);
   }, [initialAdditionalCryptos]); */
@@ -454,22 +444,6 @@ function VaultScreen({ route, navigation }) {
   useEffect(() => {
     setAddedCryptos(cryptoCards);
   }, [cryptoCards]);
-
-  useEffect(() => {
-    if (!createPendingModalVisible) {
-      // 当模态框关闭时重置状态
-      setWalletCreationStatus({
-        image: require("../assets/gif/Pending.gif"), // 重置为默认显示 Pending.gif
-        title: t("Creating on LIKKIM Hardware..."), // 重置为默认主消息
-        subtitle: t("Your device is already verified."), // 重置为默认子消息
-      });
-      setImportingStatus({
-        image: require("../assets/gif/Pending.gif"), // 重置为默认显示 Pending.gif
-        title: t("Importing on LIKKIM Hardware..."), // 重置为默认主消息
-        subtitle: t("Your device is already verified."), // 重置为默认子消息
-      });
-    }
-  }, [createPendingModalVisible]);
 
   // 监听设备数量
   useEffect(() => {
@@ -1532,8 +1506,6 @@ function VaultScreen({ route, navigation }) {
         setCreatePendingModalVisible={setCreatePendingModalVisible}
         setImportingModalVisible={setImportingModalVisible}
         stopMonitoringWalletAddress={stopMonitoringWalletAddress}
-        walletCreationStatus={walletCreationStatus}
-        importingStatus={importingStatus}
       />
     </LinearGradient>
   );
