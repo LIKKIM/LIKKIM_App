@@ -50,9 +50,7 @@ const SecurityCodeModal = ({
               </Text>
             </View>
             <Text style={styles.modalSubtitle}>
-              {t(
-                "Use the PIN code to establish a secure connection with your LIKKIM hardware."
-              )}
+              {t("Use the PIN code to connect securely to your device.")}
             </Text>
           </View>
           <TextInput

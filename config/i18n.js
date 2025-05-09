@@ -98,8 +98,8 @@ i18n
           "Set New Password": "Set New Password",
           "Verify Address": "Verify Address",
           "Enter PIN to Connect": "Enter PIN to Connect",
-          "Use the PIN code to establish a secure connection with your LIKKIM hardware.":
-            "Use the PIN code to establish a secure connection with your LIKKIM hardware.",
+          "Use the PIN code to connect securely to your device.":
+            "Use the PIN code to connect securely to your device.",
           "Enter PIN": "Enter PIN",
           "Verification successful!": "Verification successful!",
           "You can now safely use the device.":
@@ -280,8 +280,8 @@ i18n
           "Set New Password": "设置新密码",
           "Verify Address": "验证地址",
           "Enter PIN to Connect": "输入PIN码以连接",
-          "Use the PIN code to establish a secure connection with your LIKKIM hardware.":
-            "使用PIN码与您的LIKKIM硬件建立安全连接。",
+          "Use the PIN code to connect securely to your device.":
+            "使用 PIN 码安全连接到您的设备。",
           "Enter PIN": "输入PIN码",
           "Verification successful!": "验证成功！",
           "You can now safely use the device.": "您现在可以安全地使用设备。",
@@ -461,8 +461,9 @@ i18n
           "Set New Password": "設置新密碼",
           "Verify Address": "驗證地址",
           "Enter PIN to Connect": "輸入PIN碼以連接",
-          "Use the PIN code to establish a secure connection with your LIKKIM hardware.":
-            "使用PIN碼與您的LIKKIM硬件建立安全連接。",
+          "Use the PIN code to connect securely to your device.":
+            "使用 PIN 碼安全地連接到您的裝置。",
+
           "Enter PIN": "輸入PIN碼",
           "Verification successful!": "驗證成功！",
           "You can now safely use the device.": "您現在可以安全地使用設備。",
@@ -644,8 +645,9 @@ i18n
           "Set New Password": "Définir un nouveau mot de passe",
           "Verify Address": "Vérifier l'adresse",
           "Enter PIN to Connect": "Entrez le PIN pour se connecter",
-          "Use the PIN code to establish a secure connection with your LIKKIM hardware.":
-            "Utilisez le code PIN pour établir une connexion sécurisée avec votre matériel LIKKIM.",
+          "Use the PIN code to connect securely to your device.":
+            "Utilisez le code PIN pour vous connecter en toute sécurité à votre appareil.",
+
           "Enter PIN": "Entrez le PIN",
           "Verification successful!": "Vérification réussie !",
           "You can now safely use the device.":
@@ -860,8 +862,9 @@ i18n
           "Set New Password": "Establecer nueva contraseña",
           "Verify Address": "Verificar dirección",
           "Enter PIN to Connect": "Ingrese el PIN para conectar",
-          "Use the PIN code to establish a secure connection with your LIKKIM hardware.":
-            "Utilice el código PIN para establecer una conexión segura con su hardware LIKKIM.",
+          "Use the PIN code to connect securely to your device.":
+            "Utiliza el código PIN para conectarte de forma segura a tu dispositivo.",
+
           "Enter PIN": "Ingrese el PIN",
           "Verification successful!": "¡Verificación exitosa!",
           "You can now safely use the device.":
@@ -1050,8 +1053,9 @@ i18n
           "Set New Password": "تعيين كلمة مرور جديدة",
           "Verify Address": "تحقق من العنوان",
           "Enter PIN to Connect": "أدخل رقم التعريف الشخصي للاتصال",
-          "Use the PIN code to establish a secure connection with your LIKKIM hardware.":
-            "استخدم رمز PIN لإنشاء اتصال آمن بجهاز LIKKIM الخاص بك.",
+          "Use the PIN code to connect securely to your device.":
+            "استخدم رمز PIN للاتصال الآمن بجهازك.",
+
           "Enter PIN": "أدخل رقم التعريف الشخصي",
           "Verification successful!": "تم التحقق بنجاح!",
           "You can now safely use the device.":
@@ -1242,8 +1246,9 @@ i18n
           "Set New Password": "新しいパスワードを設定",
           "Verify Address": "アドレスを確認",
           "Enter PIN to Connect": "接続するにはPINを入力してください",
-          "Use the PIN code to establish a secure connection with your LIKKIM hardware.":
-            "PINコードを使用して、LIKKIMハードウェアとの安全な接続を確立します。",
+          "Use the PIN code to connect securely to your device.":
+            "PINコードを使用してデバイスに安全に接続してください。",
+
           "Enter PIN": "PINを入力",
           "Verification successful!": "確認に成功しました！",
           "You can now safely use the device.":
@@ -1452,8 +1457,9 @@ i18n
           "Set New Password": "Установить новый пароль",
           "Verify Address": "Проверить адрес",
           "Enter PIN to Connect": "Введите PIN для подключения",
-          "Use the PIN code to establish a secure connection with your LIKKIM hardware.":
-            "Используйте PIN-код для установления безопасного соединения с вашим оборудованием LIKKIM.",
+          "Use the PIN code to connect securely to your device.":
+            "Используйте PIN-код для безопасного подключения к вашему устройству.",
+
           "Enter PIN": "Введите PIN",
           "Verification successful!": "Проверка успешна!",
           "You can now safely use the device.":
@@ -1641,8 +1647,9 @@ i18n
           "Set New Password": "새 비밀번호 설정",
           "Verify Address": "주소 확인",
           "Enter PIN to Connect": "연결할 PIN 입력",
-          "Use the PIN code to establish a secure connection with your LIKKIM hardware.":
-            "PIN 코드를 사용하여 LIKKIM 하드웨어와의 안전한 연결을 설정합니다.",
+          "Use the PIN code to connect securely to your device.":
+            "PIN 코드를 사용하여 장치에 안전하게 연결하세요.",
+
           "Enter PIN": "PIN 입력",
           "Verification successful!": "검증 성공!",
           "You can now safely use the device.":
@@ -1832,8 +1839,9 @@ i18n
           "Set New Password": "Definir nova senha",
           "Verify Address": "Verificar endereço",
           "Enter PIN to Connect": "Digite o PIN para conectar",
-          "Use the PIN code to establish a secure connection with your LIKKIM hardware.":
-            "Use o código PIN para estabelecer uma conexão segura com seu hardware LIKKIM.",
+          "Use the PIN code to connect securely to your device.":
+            "Utilize o código PIN para se ligar com segurança ao seu dispositivo.",
+
           "Enter PIN": "Digite o PIN",
           "Verification successful!": "Verificação bem-sucedida!",
           "You can now safely use the device.":
@@ -2027,8 +2035,9 @@ i18n
           "Set New Password": "Definir nova senha",
           "Verify Address": "Verificar endereço",
           "Enter PIN to Connect": "Digite o PIN para conectar",
-          "Use the PIN code to establish a secure connection with your LIKKIM hardware.":
-            "Use o código PIN para estabelecer uma conexão segura com seu hardware LIKKIM.",
+          "Use the PIN code to connect securely to your device.":
+            "Use o código PIN para se conectar com segurança ao seu dispositivo.",
+
           "Enter PIN": "Digite o PIN",
           "Verification successful!": "Verificação bem-sucedida!",
           "You can now safely use the device.":
@@ -2236,8 +2245,9 @@ i18n
           "Set New Password": "Imposta una nuova password",
           "Verify Address": "Verifica indirizzo",
           "Enter PIN to Connect": "Inserisci il PIN per connetterti",
-          "Use the PIN code to establish a secure connection with your LIKKIM hardware.":
-            "Utilizzare il codice PIN per stabilire una connessione sicura con l'hardware LIKKIM.",
+          "Use the PIN code to connect securely to your device.":
+            "Usa il codice PIN per connetterti in modo sicuro al tuo dispositivo.",
+
           "Enter PIN": "Inserisci PIN",
           "Verification successful!": "Verifica riuscita!",
           "You can now safely use the device.":
@@ -2426,8 +2436,9 @@ i18n
           "Set New Password": "Neues Passwort festlegen",
           "Verify Address": "Adresse überprüfen",
           "Enter PIN to Connect": "PIN eingeben, um sich zu verbinden",
-          "Use the PIN code to establish a secure connection with your LIKKIM hardware.":
-            "Verwenden Sie den PIN-Code, um eine sichere Verbindung mit Ihrer LIKKIM-Hardware herzustellen.",
+          "Use the PIN code to connect securely to your device.":
+            "Verwenden Sie den PIN-Code, um eine sichere Verbindung zu Ihrem Gerät herzustellen.",
+
           "Enter PIN": "PIN eingeben",
           "Verification successful!": "Verifizierung erfolgreich!",
           "You can now safely use the device.":
@@ -2612,8 +2623,9 @@ i18n
           "Set New Password": "नया पासवर्ड सेट करें",
           "Verify Address": "पता सत्यापित करें",
           "Enter PIN to Connect": "कनेक्ट करने के लिए पिन दर्ज करें",
-          "Use the PIN code to establish a secure connection with your LIKKIM hardware.":
-            "अपने LIKKIM हार्डवेयर के साथ सुरक्षित कनेक्शन स्थापित करने के लिए पिन कोड का उपयोग करें।",
+          "Use the PIN code to connect securely to your device.":
+            "अपने डिवाइस से सुरक्षित रूप से कनेक्ट होने के लिए PIN कोड का उपयोग करें।",
+
           "Enter PIN": "पिन दर्ज करें",
           "Verification successful!": "सत्यापन सफल!",
           "You can now safely use the device.":
@@ -2800,8 +2812,9 @@ i18n
           "Set New Password": "Шинэ нууц үг тохируулах",
           "Verify Address": "Хаягийг баталгаажуулах",
           "Enter PIN to Connect": "Холбох PIN код оруулна уу",
-          "Use the PIN code to establish a secure connection with your LIKKIM hardware.":
-            "LIKKIM техник хангамжтай аюулгүй холболт үүсгэхийн тулд PIN кодыг ашиглана уу.",
+          "Use the PIN code to connect securely to your device.":
+            "Төхөөрөмжтэйгээ аюулгүй холбогдоход PIN кодыг ашиглана уу.",
+
           "Enter PIN": "PIN код оруулна уу",
           "Verification successful!": "Баталгаажуулалт амжилттай боллоо!",
           "You can now safely use the device.":
@@ -2989,8 +3002,9 @@ i18n
           "Set New Password": "ตั้งรหัสผ่านใหม่",
           "Verify Address": "ยืนยันที่อยู่",
           "Enter PIN to Connect": "ใส่ PIN เพื่อเชื่อมต่อ",
-          "Use the PIN code to establish a secure connection with your LIKKIM hardware.":
-            "ใช้รหัส PIN เพื่อสร้างการเชื่อมต่อที่ปลอดภัยกับฮาร์ดแวร์ LIKKIM ของคุณ",
+          "Use the PIN code to connect securely to your device.":
+            "ใช้รหัส PIN เพื่อเชื่อมต่อกับอุปกรณ์ของคุณอย่างปลอดภัย",
+
           "Enter PIN": "ใส่ PIN",
           "Verification successful!": "ยืนยันสำเร็จ!",
           "You can now safely use the device.":
@@ -3170,8 +3184,9 @@ i18n
           "Set New Password": "Встановити новий пароль",
           "Verify Address": "Перевірте адресу",
           "Enter PIN to Connect": "Введіть PIN для підключення",
-          "Use the PIN code to establish a secure connection with your LIKKIM hardware.":
-            "Використовуйте PIN-код для встановлення безпечного з'єднання з вашим обладнанням LIKKIM.",
+          "Use the PIN code to connect securely to your device.":
+            "Використовуйте PIN-код для безпечного підключення до вашого пристрою.",
+
           "Enter PIN": "Введіть PIN-код",
           "Verification successful!": "Перевірка успішна!",
           "You can now safely use the device.":
@@ -3355,8 +3370,9 @@ i18n
           "Set New Password": "Đặt mật khẩu mới",
           "Verify Address": "Xác minh địa chỉ",
           "Enter PIN to Connect": "Nhập PIN để kết nối",
-          "Use the PIN code to establish a secure connection with your LIKKIM hardware.":
-            "Sử dụng mã PIN để thiết lập kết nối an toàn với phần cứng LIKKIM của bạn.",
+          "Use the PIN code to connect securely to your device.":
+            "Sử dụng mã PIN để kết nối an toàn với thiết bị của bạn.",
+
           "Enter PIN": "Nhập mã PIN",
           "Verification successful!": "Xác minh thành công!",
           "You can now safely use the device.":
@@ -3548,8 +3564,9 @@ i18n
           "Set New Password": "Tetapkan Kata Sandi Baru",
           "Verify Address": "Verifikasi Alamat",
           "Enter PIN to Connect": "Masukkan PIN untuk Terhubung",
-          "Use the PIN code to establish a secure connection with your LIKKIM hardware.":
-            "Gunakan kode PIN untuk membangun koneksi yang aman dengan perangkat keras LIKKIM Anda.",
+          "Use the PIN code to connect securely to your device.":
+            "Gunakan kode PIN untuk terhubung dengan aman ke perangkat Anda.",
+
           "Enter PIN": "Masukkan PIN",
           "Verification successful!": "Verifikasi berhasil!",
           "You can now safely use the device.":
@@ -3735,8 +3752,9 @@ i18n
           "Set New Password": "Itakda ang Bagong Password",
           "Verify Address": "I-verify ang Address",
           "Enter PIN to Connect": "Ipasok ang PIN para Kumonekta",
-          "Use the PIN code to establish a secure connection with your LIKKIM hardware.":
-            "Gamitin ang PIN code upang magtatag ng secure na koneksyon sa iyong LIKKIM hardware.",
+          "Use the PIN code to connect securely to your device.":
+            "Gamitin ang PIN code upang ligtas na kumonekta sa iyong device.",
+
           "Enter PIN": "Ipasok ang PIN",
           "Verification successful!": "Matagumpay ang pag-verify!",
           "You can now safely use the device.":
@@ -3925,8 +3943,9 @@ i18n
           "Set New Password": "নতুন পাসওয়ার্ড সেট করুন",
           "Verify Address": "ঠিকানা যাচাই করুন",
           "Enter PIN to Connect": "সংযোগ করতে পিন লিখুন",
-          "Use the PIN code to establish a secure connection with your LIKKIM hardware.":
-            "আপনার LIKKIM হার্ডওয়্যারের সাথে একটি নিরাপদ সংযোগ স্থাপন করতে পিন কোড ব্যবহার করুন।",
+          "Use the PIN code to connect securely to your device.":
+            "আপনার ডিভাইসে নিরাপদে সংযোগ করতে PIN কোড ব্যবহার করুন।",
+
           "Enter PIN": "পিন লিখুন",
           "Verification successful!": "যাচাই সফল হয়েছে!",
           "You can now safely use the device.":
