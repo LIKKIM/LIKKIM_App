@@ -117,7 +117,8 @@ i18n
           "Recipient Address": "Recipient Address",
           "Transaction Fee": "Transaction Fee",
           Confirm: "Confirm",
-          "Transaction Confirmation": "Transaction Confirmation",
+          "Waiting for Confirmation": "Waiting for Confirmation",
+
           "Screen lock enabled successfully":
             "Screen lock enabled successfully",
           "Success!": "Success!",
@@ -297,7 +298,8 @@ i18n
           "Recipient Address": "收款人地址",
           "Transaction Fee": "交易费",
           Confirm: "确认",
-          "Transaction Confirmation": "交易确认",
+          "Waiting for Confirmation": "正在等待确认",
+
           "Screen lock enabled successfully": "屏幕锁已成功启用",
           "Success!": "成功！",
           "Enable Face ID": "启用面容ID",
@@ -477,7 +479,7 @@ i18n
           "Recipient Address": "收款人地址",
           "Transaction Fee": "交易費",
           Confirm: "確認",
-          "Transaction Confirmation": "交易確認",
+          "Waiting for Confirmation": "正在等待確認",
           "Screen lock enabled successfully": "螢幕鎖已成功啟用",
           "Success!": "成功！",
           "Enable Face ID": "啟用面容ID",
@@ -661,7 +663,7 @@ i18n
           "Recipient Address": "Adresse du destinataire",
           "Transaction Fee": "Frais de transaction",
           Confirm: "Confirmer",
-          "Transaction Confirmation": "Confirmation de transaction",
+          "Waiting for Confirmation": "En attente de confirmation",
           "Screen lock enabled successfully":
             "Verrouillage d'écran activé avec succès",
           "Success!": "Succès !",
@@ -877,7 +879,7 @@ i18n
           "Recipient Address": "Dirección del destinatario",
           "Transaction Fee": "Tarifa de transacción",
           Confirm: "Confirmar",
-          "Transaction Confirmation": "Confirmación de transacción",
+          "Waiting for Confirmation": "Esperando confirmación",
           "Screen lock enabled successfully":
             "Bloqueo de pantalla habilitado con éxito",
           "Success!": "¡Éxito!",
@@ -1067,7 +1069,7 @@ i18n
           "Recipient Address": "عنوان المستلم",
           "Transaction Fee": "رسوم التحويل",
           Confirm: "تأكيد",
-          "Transaction Confirmation": "تأكيد المعاملة",
+          "Waiting for Confirmation": "بانتظار التأكيد",
           "Screen lock enabled successfully": "تم تفعيل قفل الشاشة بنجاح",
           "Success!": "نجاح!",
           "Enable Face ID": "تفعيل بصمة الوجه",
@@ -1259,7 +1261,8 @@ i18n
           "Recipient Address": "受信者のアドレス",
           "Transaction Fee": "取引手数料",
           Confirm: "確認",
-          "Transaction Confirmation": "トランザクションの確認",
+          "Waiting for Confirmation": "確認を待っています",
+
           "Screen lock enabled successfully":
             "スクリーンロックが正常に有効化されました",
           "Success!": "成功！",
@@ -1468,7 +1471,8 @@ i18n
           "Recipient Address": "Адрес получателя",
           "Transaction Fee": "Комиссия за транзакцию",
           Confirm: "Подтвердить",
-          "Transaction Confirmation": "Подтверждение транзакции",
+          "Waiting for Confirmation": "Ожидание подтверждения",
+
           "Screen lock enabled successfully":
             "Экранная блокировка успешно включена",
           "Success!": "Успех!",
@@ -1656,7 +1660,8 @@ i18n
           "Recipient Address": "수취인 주소",
           "Transaction Fee": "거래 수수료",
           Confirm: "확인",
-          "Transaction Confirmation": "거래 확인",
+          "Waiting for Confirmation": "확인 대기 중",
+
           "Screen lock enabled successfully":
             "화면 잠금이 성공적으로 활성화되었습니다",
           "Success!": "성공!",
@@ -1846,7 +1851,8 @@ i18n
           "Recipient Address": "Endereço do destinatário",
           "Transaction Fee": "Taxa de transação",
           Confirm: "Confirmar",
-          "Transaction Confirmation": "Confirmação de transação",
+          "Waiting for Confirmation": "A aguardar confirmação",
+
           "Screen lock enabled successfully":
             "Bloqueio de tela ativado com sucesso",
           "Success!": "Sucesso!",
@@ -2040,7 +2046,8 @@ i18n
           "Recipient Address": "Endereço do destinatário",
           "Transaction Fee": "Taxa de transação",
           Confirm: "Confirmar",
-          "Transaction Confirmation": "Confirmação de transação",
+          "Waiting for Confirmation": "Aguardando confirmação",
+
           "Screen lock enabled successfully":
             "Bloqueio de tela ativado com sucesso",
           "Success!": "Sucesso!",
@@ -2248,7 +2255,8 @@ i18n
           "Recipient Address": "Indirizzo del destinatario",
           "Transaction Fee": "Commissione di transazione",
           Confirm: "Confermare",
-          "Transaction Confirmation": "Conferma della transazione",
+          "Waiting for Confirmation": "In attesa di conferma",
+
           "Screen lock enabled successfully":
             "Blocco schermo abilitato con successo",
           "Success!": "Successo!",
@@ -2437,7 +2445,8 @@ i18n
           "Recipient Address": "Empfängeradresse",
           "Transaction Fee": "Transaktionsgebühr",
           Confirm: "Bestätigen",
-          "Transaction Confirmation": "Transaktionsbestätigung",
+          "Waiting for Confirmation": "Warte auf Bestätigung",
+
           "Screen lock enabled successfully":
             "Bildschirmsperre erfolgreich aktiviert",
           "Success!": "Erfolg!",
@@ -2622,7 +2631,8 @@ i18n
           "Recipient Address": "प्राप्तकर्ता का पता",
           "Transaction Fee": "लेन-देन शुल्क",
           Confirm: "पुष्टि करें",
-          "Transaction Confirmation": "लेन-देन की पुष्टि",
+          "Waiting for Confirmation": "पुष्टि की प्रतीक्षा कर रहा है",
+
           "Screen lock enabled successfully":
             "स्क्रीन लॉक सफलतापूर्वक सक्षम किया गया",
           "Success!": "सफलता!",
@@ -2809,7 +2819,8 @@ i18n
           "Recipient Address": "Хүлээн авагчийн хаяг",
           "Transaction Fee": "Гүйлгээний хураамж",
           Confirm: "Баталгаажуулах",
-          "Transaction Confirmation": "Гүйлгээ баталгаажуулалт",
+          "Waiting for Confirmation": "Баталгаажуулалт хүлээж байна",
+
           "Verifying Address on LIKKIM...":
             "LIKKIM дээр хаягийг шалгаж байна...",
           "Importing on LIKKIM Hardware...":
@@ -2997,7 +3008,8 @@ i18n
           "Recipient Address": "ที่อยู่ผู้รับ",
           "Transaction Fee": "ค่าธรรมเนียมการทำธุรกรรม",
           Confirm: "ยืนยัน",
-          "Transaction Confirmation": "ยืนยันการทำธุรกรรม",
+          "Waiting for Confirmation": "กำลังรอการยืนยัน",
+
           "Screen lock enabled successfully": "เปิดการล็อคหน้าจอเรียบร้อยแล้ว",
           "Success!": "สำเร็จ!",
           "Enable Face ID": "เปิดใช้งาน Face ID",
@@ -3177,7 +3189,8 @@ i18n
           "Recipient Address": "Адреса одержувача",
           "Transaction Fee": "Комісія за транзакцію",
           Confirm: "Підтвердити",
-          "Transaction Confirmation": "Підтвердження транзакції",
+          "Waiting for Confirmation": "Очікується підтвердження",
+
           "Screen lock enabled successfully":
             "Блокування екрану успішно активовано",
           "Success!": "Успіх!",
@@ -3361,7 +3374,8 @@ i18n
           "Recipient Address": "Địa chỉ người nhận",
           "Transaction Fee": "Phí giao dịch",
           Confirm: "Xác nhận",
-          "Transaction Confirmation": "Xác nhận giao dịch",
+          "Waiting for Confirmation": "Đang chờ xác nhận",
+
           "Screen lock enabled successfully":
             "Khóa màn hình đã được bật thành công",
           "Success!": "Thành công!",
@@ -3553,7 +3567,8 @@ i18n
           "Recipient Address": "Alamat Penerima",
           "Transaction Fee": "Biaya Transaksi",
           Confirm: "Konfirmasi",
-          "Transaction Confirmation": "Konfirmasi Transaksi",
+          "Waiting for Confirmation": "Menunggu konfirmasi",
+
           "Screen lock enabled successfully": "Kunci layar berhasil diaktifkan",
           "Success!": "Sukses!",
           "Enable Face ID": "Aktifkan Face ID",
@@ -3739,7 +3754,8 @@ i18n
           "Recipient Address": "Address ng Tatanggap",
           "Transaction Fee": "Bayad sa Transaksyon",
           Confirm: "Kumpirmahin",
-          "Transaction Confirmation": "Kumpirmasyon ng Transaksyon",
+          "Waiting for Confirmation": "Naghihintay ng kumpirmasyon",
+
           "Screen lock enabled successfully":
             "Matagumpay na na-enable ang screen lock",
           "Success!": "Tagumpay!",
@@ -3928,7 +3944,7 @@ i18n
           "Recipient Address": "প্রাপক ঠিকানা",
           "Transaction Fee": "লেনদেন ফি",
           Confirm: "নিশ্চিত করুন",
-          "Transaction Confirmation": "লেনদেনের নিশ্চিতকরণ",
+          "Waiting for Confirmation": "নিশ্চিতকরণের জন্য অপেক্ষা করা হচ্ছে",
           "Screen lock enabled successfully":
             "স্ক্রিন লক সফলভাবে সক্ষম করা হয়েছে",
           "Success!": "সফলতা!",

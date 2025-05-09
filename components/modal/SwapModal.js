@@ -947,7 +947,7 @@ const SwapModal = ({
           <BlurView intensity={10} style={ActivityScreenStyle.centeredView}>
             <View style={ActivityScreenStyle.confirmModalView}>
               <Text style={ActivityScreenStyle.modalTitle}>
-                {t("Transaction Confirmation")}
+                {t("Waiting for Confirmation")}
               </Text>
 
               {/* 基本信息 */}
