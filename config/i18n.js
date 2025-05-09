@@ -169,8 +169,8 @@ i18n
           "Delete Wallet": "Delete Wallet",
           Support: "Support",
           Warning: "Warning",
-          "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet.":
-            "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet.",
+          deleteDeviceConfirmMessage:
+            "Are you sure you want to remove this device from the app?\nThis will erase all locally stored information related to this device.\n\nYou can reconnect the device later to sync data again.\nMake sure you've saved any important information before proceeding.",
           Delete: "Delete",
           Success: "Success",
           "Your wallet has been deleted successfully.":
@@ -349,8 +349,8 @@ i18n
           "Delete Wallet": "删除钱包",
           Support: "帮助",
           Warning: "警告",
-          "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet.":
-            "您确定要删除您的钱包吗？\n请确保您已经保存了恢复短语（助记词）。\n\n一旦删除，您的钱包可以通过将其导入到LIKKIM设备中并将设备与应用程序连接来恢复。\n如果您已经在LIKKIM设备上有一个钱包，只需将设备与应用程序连接即可恢复您的钱包。",
+          deleteDeviceConfirmMessage:
+            "您确定要将此设备从应用中移除吗？\n这将删除与该设备相关的所有本地存储信息。\n\n您可以稍后重新连接设备以再次同步数据。\n请确保在继续之前已保存所有重要信息。",
           Delete: "删除",
           Success: "成功",
           "Your wallet has been deleted successfully.": "您的钱包已成功删除。",
@@ -533,8 +533,8 @@ i18n
           "Delete Wallet": "刪除錢包",
           Support: "幫助",
           Warning: "警告",
-          "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet.":
-            "您確定要刪除您的錢包嗎？\n請確保您已經保存了恢復短語（助記詞）。\n\n刪除後，您可以通過將錢包導入LIKKIM設備並將設備與應用程序連接來恢復您的錢包。\n如果您已經在LIKKIM設備上擁有錢包，只需將設備與應用程序連接即可恢復錢包。",
+          deleteDeviceConfirmMessage:
+            "您確定要將此裝置從應用程式中移除嗎？\n這將刪除與該裝置相關的所有本地儲存資訊。\n\n您可以稍後重新連接裝置以再次同步資料。\n請確保在繼續之前已儲存所有重要資訊。",
           Delete: "刪除",
           Success: "成功",
           "Your wallet has been deleted successfully.": "您的錢包已成功刪除。",
@@ -748,8 +748,8 @@ i18n
           "Delete Wallet": "Supprimer le portefeuille",
           Support: "Assistance",
           Warning: "Avertissement",
-          "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet.":
-            "Êtes-vous sûr de vouloir supprimer votre portefeuille ?\nAssurez-vous d'avoir sauvegardé votre phrase de récupération (mnémotechnique).\n\nUne fois supprimé, votre portefeuille pourra être restauré en l'importation dans l'appareil LIKKIM, puis en liant l'appareil à l'application.\nSi vous avez déjà un portefeuille sur l'appareil LIKKIM, il vous suffit de lier l'appareil à l'application pour restaurer votre portefeuille.",
+          deleteDeviceConfirmMessage:
+            "Êtes-vous sûr de vouloir supprimer cet appareil de l'application ?\nCela effacera toutes les informations stockées localement liées à cet appareil.\n\nVous pouvez reconnecter l'appareil plus tard pour synchroniser à nouveau les données.\nAssurez-vous d'avoir sauvegardé toutes les informations importantes avant de continuer.",
           Delete: "Supprimer",
           Success: "Succès",
           "Your wallet has been deleted successfully.":
@@ -945,8 +945,9 @@ i18n
           "Delete Wallet": "Eliminar cartera",
           Support: "Soporte",
           Warning: "Advertencia",
-          "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet.":
-            "¿Está seguro de que desea eliminar su billetera?\nAsegúrese de haber guardado su frase de recuperación (mnemotécnica).\n\nUna vez eliminada, su billetera se puede restaurar importándola al dispositivo LIKKIM y luego vinculando el dispositivo a la aplicación.\nSi ya tiene una billetera en el dispositivo LIKKIM, simplemente vincule el dispositivo a la aplicación para restaurar su billetera.",
+
+          deleteDeviceConfirmMessage:
+            "¿Está seguro de que desea eliminar este dispositivo de la aplicación?\nEsto borrará toda la información almacenada localmente relacionada con este dispositivo.\n\nPuede volver a conectar el dispositivo más tarde para sincronizar los datos nuevamente.\nAsegúrese de haber guardado toda la información importante antes de continuar.",
           Delete: "Eliminar",
           Success: "Éxito",
           "Your wallet has been deleted successfully.":
@@ -1138,8 +1139,8 @@ i18n
           "Delete Wallet": "حذف المحفظة",
           Support: "الدعم",
           Warning: "تحذير",
-          "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet.":
-            "هل أنت متأكد أنك تريد حذف محفظتك؟\nتأكد من أنك قد حفظت عبارة الاسترداد الخاصة بك (العبارة التذكيرية).\n\nبمجرد الحذف، يمكن استعادة محفظتك عن طريق استيرادها إلى جهاز LIKKIM ثم ربط الجهاز بالتطبيق.\nإذا كان لديك محفظة على جهاز LIKKIM بالفعل، فقط قم بربط الجهاز بالتطبيق لاستعادة محفظتك.",
+          deleteDeviceConfirmMessage:
+            "هل أنت متأكد أنك تريد إزالة هذا الجهاز من التطبيق؟\nسيؤدي ذلك إلى مسح جميع المعلومات المخزنة محليًا المتعلقة بهذا الجهاز.\n\nيمكنك إعادة توصيل الجهاز لاحقًا لمزامنة البيانات مرة أخرى.\nتأكد من حفظ أي معلومات مهمة قبل المتابعة.",
           Delete: "حذف",
           Success: "نجاح",
           "Your wallet has been deleted successfully.": "تم حذف محفظتك بنجاح.",
@@ -1353,8 +1354,9 @@ i18n
           "Delete Wallet": "ウォレット削除",
           Support: "サポート",
           Warning: "警告",
-          "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet.":
-            "本当にウォレットを削除してもよろしいですか？\n回復フレーズ（ニーモニック）を保存したことを確認してください。\n\n削除後、LIKKIMデバイスにインポートしてデバイスをアプリにリンクすることでウォレットを復元できます。\nLIKKIMデバイスにすでにウォレットがある場合は、デバイスをアプリにリンクすることでウォレットを復元できます。",
+
+          deleteDeviceConfirmMessage:
+            "このデバイスをアプリから削除してもよろしいですか？\nこれにより、このデバイスに関連するすべてのローカルに保存された情報が消去されます。\n\n後でデバイスを再接続してデータを再同期できます。\n続行する前に重要な情報を保存したことを確認してください。",
           Delete: "削除",
           Success: "成功",
           "Your wallet has been deleted successfully.":
@@ -1550,8 +1552,8 @@ i18n
           "Delete Wallet": "Удалить кошелек",
           Support: "Поддержка",
           Warning: "Предупреждение",
-          "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet.":
-            "Вы уверены, что хотите удалить свой кошелек?\nУбедитесь, что вы сохранили свою фразу восстановления (мнемоническую).\n\nПосле удаления кошелек можно восстановить, импортировав его в устройство LIKKIM и связав устройство с приложением.\nЕсли у вас уже есть кошелек на устройстве LIKKIM, просто свяжите устройство с приложением для восстановления кошелька.",
+          deleteDeviceConfirmMessage:
+            "Вы уверены, что хотите удалить это устройство из приложения?\nЭто приведет к удалению всей локально сохраненной информации, связанной с этим устройством.\n\nВы можете повторно подключить устройство позже, чтобы снова синхронизировать данные.\nУбедитесь, что вы сохранили всю важную информацию перед продолжением.",
           Delete: "Удалить",
           Success: "Успех",
           "Your wallet has been deleted successfully.":
@@ -1741,8 +1743,8 @@ i18n
           "Delete Wallet": "지갑 삭제",
           Support: "지원",
           Warning: "경고",
-          "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet.":
-            "정말로 지갑을 삭제하시겠습니까?\n복구 문구(니모닉)를 저장했는지 확인해주세요.\n\n삭제된 후, 지갑은 LIKKIM 기기에 가져오고 장치를 앱에 연결하여 복원할 수 있습니다.\n이미 LIKKIM 기기에 지갑이 있는 경우, 장치를 앱에 연결하여 지갑을 복원하세요.",
+          deleteDeviceConfirmMessage:
+            "이 장치를 앱에서 제거하시겠습니까?\n이 작업은 이 장치와 관련된 모든 로컬 저장 정보를 삭제합니다.\n\n나중에 장치를 다시 연결하여 데이터를 다시 동기화할 수 있습니다.\n계속하기 전에 중요한 정보를 저장했는지 확인하십시오.",
           Delete: "삭제",
           Success: "성공",
           "Your wallet has been deleted successfully.":
@@ -1938,8 +1940,8 @@ i18n
           "Delete Wallet": "Eliminar Carteira",
           Support: "Suporte",
           Warning: "Aviso",
-          "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet.":
-            "Tem certeza de que deseja excluir sua carteira?\nCertifique-se de ter salvo sua frase de recuperação (mnemonic).\n\nApós excluída, sua carteira pode ser restaurada importando-a para o dispositivo LIKKIM e depois vinculando o dispositivo ao aplicativo.\nSe você já tiver uma carteira no dispositivo LIKKIM, basta vincular o dispositivo ao aplicativo para restaurar sua carteira.",
+          deleteDeviceConfirmMessage:
+            "Tem certeza de que deseja remover este dispositivo do aplicativo?\nIsso apagará todas as informações armazenadas localmente relacionadas a este dispositivo.\n\nVocê pode reconectar o dispositivo mais tarde para sincronizar os dados novamente.\nCertifique-se de ter salvo todas as informações importantes antes de continuar.",
           Delete: "Excluir",
           Success: "Sucesso",
           "Your wallet has been deleted successfully.":
@@ -2152,8 +2154,8 @@ i18n
           "Delete Wallet": "Excluir Carteira",
           Support: "Suporte",
           Warning: "Aviso",
-          "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet.":
-            "Tem certeza de que deseja excluir sua carteira?\nCertifique-se de ter salvo sua frase de recuperação (mnemônica).\n\nApós excluir, sua carteira pode ser restaurada importando-a para o dispositivo LIKKIM e depois vinculando o dispositivo ao aplicativo.\nSe você já tiver uma carteira no dispositivo LIKKIM, basta vincular o dispositivo ao aplicativo para restaurá-la.",
+          deleteDeviceConfirmMessage:
+            "Tem certeza de que deseja remover este dispositivo do aplicativo?\nIsso apagará todas as informações armazenadas localmente relacionadas a este dispositivo.\n\nVocê pode reconectar o dispositivo mais tarde para sincronizar os dados novamente.\nCertifique-se de ter salvo todas as informações importantes antes de continuar.",
           Delete: "Excluir",
           Success: "Sucesso",
           "Your wallet has been deleted successfully.":
@@ -2351,8 +2353,8 @@ i18n
           "Delete Wallet": "Elimina Portafoglio",
           Support: "Supporto",
           Warning: "Avviso",
-          "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet.":
-            "Sei sicuro di voler eliminare il tuo portafoglio?\nAssicurati di aver salvato la tua frase di recupero (mnemonica).\n\nUna volta eliminato, il tuo portafoglio può essere ripristinato importandolo nel dispositivo LIKKIM e collegando il dispositivo all'app.\nSe hai già un portafoglio sul dispositivo LIKKIM, basta collegare il dispositivo all'app per ripristinare il tuo portafoglio.",
+          deleteDeviceConfirmMessage:
+            "Sei sicuro di voler rimuovere questo dispositivo dall'app?\nQuesto cancellerà tutte le informazioni locali relative a questo dispositivo.\n\nPuoi riconnettere il dispositivo in un secondo momento per sincronizzare nuovamente i dati.\nAssicurati di aver salvato tutte le informazioni importanti prima di procedere.",
           Delete: "Elimina",
           Success: "Successo",
           "Your wallet has been deleted successfully.":
@@ -2508,7 +2510,6 @@ i18n
             "Bitte deinstallieren Sie die App und installieren Sie sie dann erneut auf Ihrem Telefon, um die LIKKIM-App-Daten, einschließlich Konten und Einstellungen, zu löschen.",
           "Value in USD": "Wert in USD",
           Fee: "Gebühr",
-
           "Please confirm the transaction on your LIKKIM device.":
             "Bitte bestätigen Sie die Transaktion auf Ihrem LIKKIM-Gerät.",
           "Verifying Address on LIKKIM...": "Adresse auf LIKKIM überprüfen...",
@@ -2552,8 +2553,8 @@ i18n
           "Delete Wallet": "Wallet löschen",
           Support: "Unterstützung",
           Warning: "Warnung",
-          "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet.":
-            "Bist du sicher, dass du dein Wallet löschen möchtest?\nBitte stelle sicher, dass du deinen Wiederherstellungssatz (mnemonisch) gespeichert hast.\n\nNachdem das Wallet gelöscht wurde, kann es wiederhergestellt werden, indem du es in das LIKKIM-Gerät importierst und das Gerät mit der App verbindest.\nFalls du bereits ein Wallet auf dem LIKKIM-Gerät hast, verbinde einfach das Gerät mit der App, um dein Wallet wiederherzustellen.",
+          deleteDeviceConfirmMessage:
+            "Möchten Sie dieses Gerät wirklich aus der App entfernen?\nDabei werden alle lokal gespeicherten Informationen zu diesem Gerät gelöscht.\n\nSie können das Gerät später erneut verbinden, um die Daten erneut zu synchronisieren.\nStellen Sie sicher, dass Sie alle wichtigen Informationen gespeichert haben, bevor Sie fortfahren.",
           Delete: "Löschen",
           Success: "Erfolg",
           "Your wallet has been deleted successfully.":
@@ -2750,8 +2751,8 @@ i18n
           "Delete Wallet": "वॉलेट हटाएँ",
           Support: "सहायता",
           Warning: "चेतावनी",
-          "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet.":
-            "क्या आप वाकई अपना वॉलेट हटाना चाहते हैं?\nकृपया यह सुनिश्चित करें कि आपने अपनी रिकवरी वाक्य (म्नेमोनिक) को सुरक्षित किया है।\n\nहटाने के बाद, आपका वॉलेट LIKKIM डिवाइस में आयात करके और फिर डिवाइस को ऐप से जोड़कर पुनर्स्थापित किया जा सकता है।\nअगर आपके पास पहले से ही LIKKIM डिवाइस पर एक वॉलेट है, तो सिर्फ डिवाइस को ऐप से जोड़कर अपना वॉलेट पुनर्स्थापित करें।",
+          deleteDeviceConfirmMessage:
+            "क्या आप वाकई इस डिवाइस को ऐप से हटाना चाहते हैं?\nयह इस डिवाइस से संबंधित सभी स्थानीय रूप से संग्रहीत जानकारी मिटा देगा।\n\nआप बाद में डिवाइस को फिर से जोड़कर डेटा को फिर से सिंक कर सकते हैं।\nकृपया आगे बढ़ने से पहले सभी महत्वपूर्ण जानकारी सहेज लें।",
           Delete: "हटाएँ",
           Success: "सफलता",
           "Your wallet has been deleted successfully.":
@@ -2955,8 +2956,9 @@ i18n
           "Delete Wallet": "Хэтэвч устгах",
           Support: "Тусламж",
           Warning: "Сэрэмжлүүлэг",
-          "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet.":
-            "Та хэтэвчээ устгахыг хүсч байна уу?\nТа сэргээн авалтын үгээ (mnemonic) хадгалсан эсэхээ шалгаарай.\n\nХэтэвч устсаны дараа, та үүнийг LIKKIM төхөөрөмж рүү оруулж, төхөөрөмжийг апптай холбосноор сэргээж болно.\nХэрвээ таны LIKKIM төхөөрөмж дээр хэтэвч байгаа бол төхөөрөмжийг апптай холбож хэтэвчээ сэргээх боломжтой.",
+
+          deleteDeviceConfirmMessage:
+            "Та энэ төхөөрөмжийг апп-аас устгахдаа итгэлтэй байна уу?\nЭнэ нь тухайн төхөөрөмжтэй холбоотой бүх локал хадгалсан мэдээллийг устгах болно.\n\nТа дараа нь төхөөрөмжийг дахин холбож өгөгдлөө дахин синк хийх боломжтой.\nҮргэлжлүүлэхийн өмнө чухал мэдээллээ хадгалсан эсэхээ шалгаарай.",
           Delete: "Устгах",
           Success: "Амжилт",
           "Your wallet has been deleted successfully.":
@@ -3146,8 +3148,8 @@ i18n
           "Delete Wallet": "ลบกระเป๋าเงิน",
           Support: "สนับสนุน",
           Warning: "คำเตือน",
-          "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet.":
-            "คุณแน่ใจหรือไม่ว่าต้องการลบกระเป๋าเงินของคุณ?\nโปรดตรวจสอบให้แน่ใจว่าคุณได้บันทึกคำพูดการกู้คืน (คำช่วยจำ).\n\nหลังจากลบแล้ว กระเป๋าเงินของคุณสามารถกู้คืนได้โดยการนำเข้ากระเป๋าเงินไปยังอุปกรณ์ LIKKIM และเชื่อมต่ออุปกรณ์กับแอป.\nหากคุณมี กระเป๋าเงินบนอุปกรณ์ LIKKIM อยู่แล้ว เพียงแค่เชื่อมต่ออุปกรณ์กับแอปเพื่อกู้คืนกระเป๋าเงินของคุณ.",
+          deleteDeviceConfirmMessage:
+            "คุณแน่ใจหรือไม่ว่าต้องการลบอุปกรณ์นี้ออกจากแอป?\nสิ่งนี้จะลบข้อมูลทั้งหมดที่จัดเก็บไว้ในเครื่องซึ่งเกี่ยวข้องกับอุปกรณ์นี้\n\nคุณสามารถเชื่อมต่ออุปกรณ์อีกครั้งในภายหลังเพื่อซิงค์ข้อมูลใหม่\nโปรดตรวจสอบให้แน่ใจว่าคุณได้บันทึกข้อมูลสำคัญทั้งหมดแล้วก่อนดำเนินการต่อ",
           Delete: "ลบ",
           Success: "สำเร็จ",
           "Your wallet has been deleted successfully.":
@@ -3341,8 +3343,8 @@ i18n
           "Delete Wallet": "Видалити гаманець",
           Support: "Підтримка",
           Warning: "Попередження",
-          "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet.":
-            "Ви впевнені, що хочете видалити свій гаманець?\nБудь ласка, переконайтесь, що ви зберегли свою фразу відновлення (мнемонічну).\n\nПісля видалення ваш гаманець можна відновити, імпортуючи його в пристрій LIKKIM і потім зв’язавши пристрій з додатком.\nЯкщо у вас вже є гаманець на пристрої LIKKIM, просто зв’яжіть пристрій з додатком для відновлення вашого гаманця.",
+          deleteDeviceConfirmMessage:
+            "Ви впевнені, що хочете видалити цей пристрій з додатка?\nЦе призведе до видалення всієї локально збереженої інформації, пов’язаної з цим пристроєм.\n\nВи зможете знову підключити пристрій пізніше, щоб повторно синхронізувати дані.\nПереконайтеся, що ви зберегли всю важливу інформацію перед продовженням.",
           Delete: "Видалити",
           Success: "Успіх",
           "Your wallet has been deleted successfully.":
@@ -3538,8 +3540,8 @@ i18n
           "Delete Wallet": "Xóa ví",
           Support: "Hỗ trợ",
           Warning: "Cảnh báo",
-          "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet.":
-            "Bạn chắc chắn muốn xóa ví của mình không?\nHãy đảm bảo rằng bạn đã lưu cụm từ phục hồi của mình (mnemonic).\n\nSau khi xóa, ví của bạn có thể được khôi phục bằng cách nhập vào thiết bị LIKKIM và kết nối thiết bị với ứng dụng.\nNếu bạn đã có một ví trên thiết bị LIKKIM, chỉ cần kết nối thiết bị với ứng dụng để khôi phục ví của bạn.",
+          deleteDeviceConfirmMessage:
+            "Bạn có chắc chắn muốn xóa thiết bị này khỏi ứng dụng không?\nThao tác này sẽ xóa tất cả thông tin được lưu trữ cục bộ liên quan đến thiết bị này.\n\nBạn có thể kết nối lại thiết bị sau để đồng bộ lại dữ liệu.\nHãy đảm bảo bạn đã lưu tất cả thông tin quan trọng trước khi tiếp tục.",
           Delete: "Xóa",
           Success: "Thành công",
           "Your wallet has been deleted successfully.":
@@ -3735,8 +3737,8 @@ i18n
           "Delete Wallet": "Hapus Dompet",
           Support: "Dukungan",
           Warning: "Peringatan",
-          "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet.":
-            "Apakah Anda yakin ingin menghapus dompet Anda?\nPastikan Anda telah menyimpan frase pemulihan Anda (mnemonic).\n\nSetelah dihapus, dompet Anda dapat dipulihkan dengan mengimpor ke perangkat LIKKIM dan menghubungkan perangkat dengan aplikasi.\nJika Anda sudah memiliki dompet di perangkat LIKKIM, cukup hubungkan perangkat dengan aplikasi untuk memulihkan dompet Anda.",
+          deleteDeviceConfirmMessage:
+            "Bạn có chắc chắn muốn xóa thiết bị này khỏi ứng dụng không?\nThao tác này sẽ xóa tất cả thông tin được lưu trữ cục bộ liên quan đến thiết bị này.\n\nBạn có thể kết nối lại thiết bị sau để đồng bộ lại dữ liệu.\nHãy đảm bảo bạn đã lưu tất cả thông tin quan trọng trước khi tiếp tục.",
           Delete: "Hapus",
           Success: "Sukses",
           "Your wallet has been deleted successfully.":
@@ -3933,8 +3935,8 @@ i18n
           "Delete Wallet": "Tanggalin ang Wallet",
           Support: "Suporta",
           Warning: "Babala",
-          "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet.":
-            "Sigurado ka bang nais mong tanggalin ang iyong wallet?\nSiguraduhing nai-save mo ang iyong recovery phrase (mnemonic).\n\nKapag natanggal na, ang iyong wallet ay maaaring maibalik sa pamamagitan ng pag-import nito sa LIKKIM device at pagkatapos ay i-link ang device sa app.\nKung mayroon ka nang wallet sa LIKKIM device, i-link lamang ang device sa app upang maibalik ang iyong wallet.",
+          deleteDeviceConfirmMessage:
+            "Sigurado ka bang gusto mong alisin ang device na ito sa app?\nMawawala ang lahat ng locally stored na impormasyon kaugnay ng device na ito.\n\nMaaari mong muling ikonekta ang device upang i-sync muli ang data.\nTiyaking na-save mo na ang mahahalagang impormasyon bago magpatuloy.",
           Delete: "Tanggalin",
           Success: "Tagumpay",
           "Your wallet has been deleted successfully.":
@@ -4127,8 +4129,8 @@ i18n
           "Delete Wallet": "ওয়ালেট মুছুন",
           Support: "সমর্থন",
           Warning: "সতর্কতা",
-          "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet.":
-            "আপনি কি নিশ্চিত যে আপনি আপনার ওয়ালেট মুছে ফেলতে চান?\nদয়া করে নিশ্চিত করুন যে আপনি আপনার পুনরুদ্ধার বাক্য (mnemonic) সংরক্ষণ করেছেন।\n\nএকবার মুছে ফেললে, আপনার ওয়ালেটটি LIKKIM ডিভাইসে আমদানি করে এবং তারপর ডিভাইসটি অ্যাপের সাথে সংযুক্ত করে পুনরুদ্ধার করা যেতে পারে।\nযদি আপনার LIKKIM ডিভাইসে ইতিমধ্যে একটি ওয়ালেট থাকে, তবে কেবল ডিভাইসটি অ্যাপের সাথে সংযুক্ত করুন এবং আপনার ওয়ালেট পুনরুদ্ধার করুন।",
+          deleteDeviceConfirmMessage:
+            "আপনি কি নিশ্চিত যে আপনি এই ডিভাইসটি অ্যাপ থেকে সরাতে চান?\nএটি এই ডিভাইসের সাথে সম্পর্কিত সমস্ত স্থানীয়ভাবে সংরক্ষিত তথ্য মুছে ফেলবে।\n\nআপনি পরে আবার ডিভাইসটি সংযুক্ত করে ডেটা সিঙ্ক করতে পারেন।\nচালিয়ে যাওয়ার আগে অনুগ্রহ করে সমস্ত গুরুত্বপূর্ণ তথ্য সংরক্ষণ করেছেন কিনা তা নিশ্চিত করুন।",
           Delete: "মুছুন",
           Success: "সফলতা",
           "Your wallet has been deleted successfully.":

@@ -973,9 +973,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
   const handleDeleteWallet = () => {
     Alert.alert(
       t("Warning"),
-      t(
-        "Are you sure you want to delete your wallet?\nPlease make sure you have saved your recovery phrase (mnemonic).\n\nOnce deleted, your wallet can be restored by importing it into the LIKKIM device and then linking the device to the app.\nIf you already have a wallet on the LIKKIM device, simply link the device to the app to restore your wallet."
-      ),
+      t("deleteDeviceConfirmMessage"),
       [
         {
           text: t("Cancel"),
