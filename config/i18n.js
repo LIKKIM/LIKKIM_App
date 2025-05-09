@@ -193,7 +193,7 @@ i18n
           "No device paired. Please pair with device first.":
             "No device paired. Please pair with device first.",
           All: "All",
-          "Save to Likkim Hardware": "Save to Likkim Hardware",
+          "Save to Device": "Save to Device",
         },
       },
       zh: {
@@ -368,7 +368,7 @@ i18n
           "No device paired. Please pair with device first.":
             "未配对设备。请先与设备配对。",
           All: "全部",
-          "Save to Likkim Hardware": "保存到 Likkim 硬件",
+          "Save to Device": "保存到设备",
         },
       },
       "zh-TW": {
@@ -548,7 +548,7 @@ i18n
           "No device paired. Please pair with device first.":
             "未配對設備。請先與設備配對。",
           All: "全部",
-          "Save to Likkim Hardware": "儲存到 Likkim 硬體",
+          "Save to Device": "儲存到裝置",
         },
       },
       fr: {
@@ -762,7 +762,7 @@ i18n
           "No device paired. Please pair with device first.":
             "Aucun appareil apparié. Veuillez d'abord appairer un appareil.",
           All: "Tous",
-          "Save to Likkim Hardware": "Enregistrer sur Likkim Hardware",
+          "Save to Device": "Enregistrer sur l'appareil",
         },
       },
       es: {
@@ -956,7 +956,7 @@ i18n
           "No device paired. Please pair with device first.":
             "Ningún dispositivo emparejado. Por favor, empareje con un dispositivo primero.",
           All: "Todos",
-          "Save to Likkim Hardware": "Guardar en Likkim Hardware",
+          "Save to Device": "Guardar en el dispositivo",
         },
       },
       ar: {
@@ -1143,7 +1143,7 @@ i18n
           "No device paired. Please pair with device first.":
             "لا يوجد جهاز مقترن. يرجى إقران الجهاز أولاً.",
           All: "الكل",
-          "Save to Likkim Hardware": "حفظ في أجهزة Likkim",
+          "Save to Device": "احفظ على الجهاز",
         },
       },
       ja: {
@@ -1354,7 +1354,7 @@ i18n
           "No device paired. Please pair with device first.":
             "ペアリングされたデバイスがありません。まずデバイスとペアリングしてください。",
           All: "すべて",
-          "Save to Likkim Hardware": "Likkim ハードウェアに保存",
+          "Save to Device": "デバイスに保存",
         },
       },
       ru: {
@@ -1547,7 +1547,7 @@ i18n
           "No device paired. Please pair with device first.":
             "Нет подключенных устройств. Пожалуйста, сначала выполните сопряжение с устройством.",
           All: "Все",
-          "Save to Likkim Hardware": "Сохранить на Likkim Hardware",
+          "Save to Device": "Сохранить на устройство",
         },
       },
       ko: {
@@ -1734,7 +1734,7 @@ i18n
           "No device paired. Please pair with device first.":
             "페어링된 장치가 없습니다. 먼저 장치를 페어링하십시오.",
           All: "모두",
-          "Save to Likkim Hardware": "Likkim 하드웨어에 저장",
+          "Save to Device": "장치에 저장",
         },
       },
       pt: {
@@ -1928,7 +1928,7 @@ i18n
           "No device paired. Please pair with device first.":
             "Nenhum dispositivo emparelhado. Por favor, emparelhe com um dispositivo primeiro.",
           All: "Todos",
-          "Save to Likkim Hardware": "Salvar no Likkim Hardware",
+          "Save to Device": "Guardar no dispositivo",
         },
       },
       "pt-BR": {
@@ -2138,7 +2138,7 @@ i18n
           "No device paired. Please pair with device first.":
             "Nenhum dispositivo emparelhado. Por favor, emparelhe com um dispositivo primeiro.",
           All: "Todos",
-          "Save to Likkim Hardware": "Salvar no Hardware da Likkim",
+          "Save to Device": "Salvar no dispositivo",
         },
       },
       it: {
@@ -2332,7 +2332,7 @@ i18n
           "No device paired. Please pair with device first.":
             "Nessun dispositivo associato. Per favore, accoppia prima un dispositivo.",
           All: "Tutti",
-          "Save to Likkim Hardware": "Salva su Likkim Hardware",
+          "Save to Device": "Salvar no dispositivo",
         },
       },
       de: {
@@ -2521,7 +2521,7 @@ i18n
           "No device paired. Please pair with device first.":
             "Kein Gerät gekoppelt. Bitte koppeln Sie zuerst ein Gerät.",
           All: "Alle",
-          "Save to Likkim Hardware": "Auf Likkim Hardware speichern",
+          "Save to Device": "Auf Gerät speichern",
         },
       },
       hi: {
@@ -2708,7 +2708,7 @@ i18n
           "No device paired. Please pair with device first.":
             "कोई डिवाइस पेयर नहीं है। कृपया पहले डिवाइस के साथ पेयर करें।",
           All: "सभी",
-          "Save to Likkim Hardware": "Likkim हार्डवेयर में सहेजें",
+          "Save to Device": "डिवाइस में सहेजें",
         },
       },
       mn: {
@@ -2901,7 +2901,7 @@ i18n
           "No device paired. Please pair with device first.":
             "Хосуулагдсан төхөөрөмж байхгүй байна. Эхлээд төхөөрөмжтэй хослоорой.",
           All: "Бүгд",
-          "Save to Likkim Hardware": "Likkim Тоног төхөөрөмжид хадгалах",
+          "Save to Device": "Төхөөрөмжид хадгалах",
         },
       },
       th: {
@@ -3080,7 +3080,7 @@ i18n
           "No device paired. Please pair with device first.":
             "ยังไม่ได้จับคู่กับอุปกรณ์ใด ๆ กรุณาจับคู่กับอุปกรณ์ก่อน",
           All: "ทั้งหมด",
-          "Save to Likkim Hardware": "บันทึกลงในฮาร์ดแวร์ของ Likkim",
+          "Save to Device": "บันทึกลงในอุปกรณ์",
         },
       },
       uk: {
@@ -3265,7 +3265,7 @@ i18n
           "No device paired. Please pair with device first.":
             "Пристрій не підключено. Будь ласка, спочатку виконайте сполучення з пристроєм.",
           All: "Всі",
-          "Save to Likkim Hardware": "Зберегти на Likkim Hardware",
+          "Save to Device": "Зберегти на пристрій",
         },
       },
       vi: {
@@ -3451,7 +3451,7 @@ i18n
           "No device paired. Please pair with device first.":
             "Chưa có thiết bị được ghép nối. Vui lòng ghép nối thiết bị trước.",
           All: "Tất cả",
-          "Save to Likkim Hardware": "Lưu vào phần cứng Likkim",
+          "Save to Device": "Lưu vào phần cứng Likkim",
         },
       },
       id: {
@@ -3642,7 +3642,7 @@ i18n
           "No device paired. Please pair with device first.":
             "Tidak ada perangkat yang dipasangkan. Harap pasangkan perangkat terlebih dahulu.",
           All: "Semua",
-          "Save to Likkim Hardware": "Simpan ke Perangkat Keras Likkim",
+          "Save to Device": "Simpan ke perangkat",
         },
       },
       tl: {
@@ -3831,7 +3831,7 @@ i18n
           "No device paired. Please pair with device first.":
             "Walang naka-pair na device. Pakipair muna ang device.",
           All: "Lahat",
-          "Save to Likkim Hardware": "I-save sa Likkim Hardware",
+          "Save to Device": "I-save sa device",
         },
       },
       bn: {
@@ -4023,7 +4023,7 @@ i18n
           "No device paired. Please pair with device first.":
             "কোনও ডিভাইস জোড়া করা হয়নি। প্রথমে ডিভাইসের সাথে জোড়া করুন।",
           All: "সব",
-          "Save to Likkim Hardware": "Likkim হার্ডওয়্যারে সংরক্ষণ করুন",
+          "Save to Device": "ডিভাইসে সংরক্ষণ করুন",
         },
       },
     },

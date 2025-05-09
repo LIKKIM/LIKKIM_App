@@ -988,7 +988,7 @@ const SecureDeviceStatus = (props) => {
                   }}
                 >
                   <Text style={VaultScreenStyle.NFTButtonText}>
-                    {t("Save to Likkim Hardware")}
+                    {t("Save to Device")}
                   </Text>
                 </TouchableOpacity>
               </View>
