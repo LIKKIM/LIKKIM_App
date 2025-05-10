@@ -45,7 +45,7 @@ const OnboardingScreen = ({ onDone }) => {
     {
       key: "slide1",
       title: i18n.t("Welcome"),
-      text: i18n.t("Your secure and user-friendly digital wallet."),
+      text: i18n.t("Your secure and intuitive companion app."),
       image: require("../assets/slider/slider1.png"),
     },
     {

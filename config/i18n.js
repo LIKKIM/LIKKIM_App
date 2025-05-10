@@ -135,8 +135,8 @@ i18n
           "Easily manage multiple cryptocurrencies.":
             "Easily manage multiple cryptocurrencies.",
           Welcome: "Welcome",
-          "Your secure and user-friendly digital wallet.":
-            "Your secure and user-friendly digital wallet.",
+          "Your secure and intuitive companion app.":
+            "Your secure and intuitive companion app.",
           "Address Copied to Clipboard": "Address copied to clipboard",
           "No devices found":
             "No devices found. Please pair a device to see it here.",
@@ -288,7 +288,8 @@ i18n
           "Processing Fee": "手续费",
           Confirm: "确认",
           "Waiting for Confirmation": "正在等待确认",
-
+          "Your secure and intuitive companion app.":
+            "您安全且直观的硬件伴侣应用。",
           "Screen lock enabled successfully": "屏幕锁已成功启用",
           "Success!": "成功！",
           "Enable Face ID": "启用面容ID",
@@ -310,8 +311,7 @@ i18n
           "Manage Your Assets": "管理您的资产",
           "Easily manage multiple cryptocurrencies.": "轻松管理多种加密货币。",
           Welcome: "欢迎",
-          "Your secure and user-friendly digital wallet.":
-            "您的安全且易用的数字钱包。",
+
           "Address Copied to Clipboard": "地址已复制到剪贴板",
           "No devices found": "未找到设备，请配对设备后查看。",
           "Fetching address...": "正在获取地址...",
@@ -487,8 +487,8 @@ i18n
           "Manage Your Assets": "管理您的資產",
           "Easily manage multiple cryptocurrencies.": "輕鬆管理多種加密貨幣。",
           Welcome: "歡迎",
-          "Your secure and user-friendly digital wallet.":
-            "您的安全且友好的數字錢包。",
+          "Your secure and intuitive companion app.":
+            "您安全且直覺的硬體伴侶應用程式。",
           "Address Copied to Clipboard": "地址已複製到剪貼簿",
           "No devices found": "未找到設備，請配對設備後查看。",
           "Fetching address...": "正在獲取地址...",
@@ -682,8 +682,8 @@ i18n
           "Easily manage multiple cryptocurrencies.":
             "Gérez facilement plusieurs cryptomonnaies.",
           Welcome: "Bienvenue",
-          "Your secure and user-friendly digital wallet.":
-            "Votre portefeuille numérique sécurisé et convivial.",
+          "Your secure and intuitive companion app.":
+            "Votre application compagnon matérielle sécurisée et intuitive.",
           "Address Copied to Clipboard":
             "Adresse copiée dans le presse-papiers",
           "No devices found":
@@ -872,8 +872,8 @@ i18n
           "Easily manage multiple cryptocurrencies.":
             "Gestiona fácilmente múltiples criptomonedas.",
           Welcome: "Bienvenido",
-          "Your secure and user-friendly digital wallet.":
-            "Tu billetera digital segura y fácil de usar.",
+          "Your secure and intuitive companion app.":
+            "Tu aplicación complementaria de hardware, segura e intuitiva.",
           "Address Copied to Clipboard": "Dirección copiada al portapapeles",
           "No devices found":
             "No se encontraron dispositivos. Por favor, empareja un dispositivo para verlo aquí.",
@@ -1050,8 +1050,8 @@ i18n
           "Easily manage multiple cryptocurrencies.":
             "إدارة سهلة لعدة عملات مشفرة.",
           Welcome: "مرحبًا",
-          "Your secure and user-friendly digital wallet.":
-            "محفظتك الرقمية الآمنة وسهلة الاستخدام.",
+          "Your secure and intuitive companion app.":
+            "تطبيقك المرافق للأجهزة الآمن والبديهي.",
           "Address Copied to Clipboard": "تم نسخ العنوان إلى الحافظة",
           "No devices found":
             "لم يتم العثور على أجهزة. يرجى اقتران جهاز لرؤيته هنا.",
@@ -1247,8 +1247,8 @@ i18n
           "Easily manage multiple cryptocurrencies.":
             "複数の暗号通貨を簡単に管理。",
           Welcome: "ようこそ",
-          "Your secure and user-friendly digital wallet.":
-            "安全で使いやすいデジタルウォレット。",
+          "Your secure and intuitive companion app.":
+            "安全で直感的なハードウェア連携アプリです。",
           "Address Copied to Clipboard":
             "アドレスがクリップボードにコピーされました",
           "No devices found":
@@ -1427,8 +1427,8 @@ i18n
           "Easily manage multiple cryptocurrencies.":
             "Легко управляйте несколькими криптовалютами.",
           Welcome: "Добро пожаловать",
-          "Your secure and user-friendly digital wallet.":
-            "Ваш надежный и удобный цифровой кошелек.",
+          "Your secure and intuitive companion app.":
+            "Ваше безопасное и интуитивно понятное приложение-компаньон для оборудования.",
           "Address Copied to Clipboard": "Адрес скопирован в буфер обмена",
           "No devices found":
             "Устройства не найдены. Пожалуйста, подключите устройство, чтобы увидеть его здесь.",
@@ -1601,8 +1601,8 @@ i18n
           "Easily manage multiple cryptocurrencies.":
             "여러 암호화폐를 쉽게 관리하세요.",
           Welcome: "환영합니다",
-          "Your secure and user-friendly digital wallet.":
-            "안전하고 사용자 친화적인 디지털 지갑.",
+          "Your secure and intuitive companion app.":
+            "안전하고 직관적인 하드웨어 동반 앱입니다.",
           "Address Copied to Clipboard": "주소가 클립보드에 복사되었습니다",
           "No devices found":
             "장치가 없습니다. 장치를 연결하여 여기에서 확인하십시오.",
@@ -1780,8 +1780,8 @@ i18n
           "Easily manage multiple cryptocurrencies.":
             "Gerencie facilmente várias criptomoedas.",
           Welcome: "Bem-vindo",
-          "Your secure and user-friendly digital wallet.":
-            "Sua carteira digital segura e fácil de usar.",
+          "Your secure and intuitive companion app.":
+            "A sua aplicação companheira de hardware, segura e intuitiva.",
           "Address Copied to Clipboard":
             "Endereço copiado para a área de transferência",
           "No devices found":
@@ -1962,8 +1962,8 @@ i18n
           "Easily manage multiple cryptocurrencies.":
             "Gerencie facilmente várias criptomoedas.",
           Welcome: "Bem-vindo",
-          "Your secure and user-friendly digital wallet.":
-            "Sua carteira digital segura e fácil de usar.",
+          "Your secure and intuitive companion app.":
+            "Seu aplicativo companheiro de hardware, seguro e intuitivo.",
           "Address Copied to Clipboard":
             "Endereço copiado para a área de transferência",
           "No devices found":
@@ -2160,8 +2160,8 @@ i18n
           "Easily manage multiple cryptocurrencies.":
             "Gestisci facilmente più criptovalute.",
           Welcome: "Benvenuto",
-          "Your secure and user-friendly digital wallet.":
-            "Il tuo portafoglio digitale sicuro e facile da usare.",
+          "Your secure and intuitive companion app.":
+            "La tua app sicura e intuitiva per dispositivi hardware.",
           "Address Copied to Clipboard": "Indirizzo copiato negli appunti",
           "No devices found":
             "Nessun dispositivo trovato. Si prega di associare un dispositivo per vederlo qui.",
@@ -2342,8 +2342,8 @@ i18n
           "Easily manage multiple cryptocurrencies.":
             "Verwalten Sie problemlos mehrere Kryptowährungen.",
           Welcome: "Willkommen",
-          "Your secure and user-friendly digital wallet.":
-            "Ihre sichere und benutzerfreundliche digitale Geldbörse.",
+          "Your secure and intuitive companion app.":
+            "Ihre sichere und intuitive Hardware-Begleit-App.",
           "Address Copied to Clipboard":
             "Adresse in die Zwischenablage kopiert",
           "No devices found":
@@ -2522,8 +2522,8 @@ i18n
           "Easily manage multiple cryptocurrencies.":
             "आसानी से कई क्रिप्टोकरेंसियों का प्रबंधन करें।",
           Welcome: "स्वागत है",
-          "Your secure and user-friendly digital wallet.":
-            "आपका सुरक्षित और उपयोगकर्ता-हितैषी डिजिटल वॉलेट।",
+          "Your secure and intuitive companion app.":
+            "आपका सुरक्षित और सहज हार्डवेयर साथी ऐप।",
           "Address Copied to Clipboard": "पता क्लिपबोर्ड पर कॉपी कर लिया गया",
           "No devices found":
             "कोई डिवाइस नहीं मिला। कृपया एक डिवाइस पेयर करें और इसे यहां देखें।",
@@ -2700,8 +2700,8 @@ i18n
           "Easily manage multiple cryptocurrencies.":
             "Олон криптовалютуудыг хялбар удирда.",
           Welcome: "Тавтай морилно уу",
-          "Your secure and user-friendly digital wallet.":
-            "Таны аюулгүй ба хэрэглэгчийн төвтэй цахим хэтэвч.",
+          "Your secure and intuitive companion app.":
+            "Таны аюулгүй, ойлгомжтой тоног төхөөрөмжийн хамтрагч аппликейшн.",
           "Address Copied to Clipboard": "Хаяг clipboard руу хуулсан байна",
           "No devices found":
             "Төхөөрөмж олдсонгүй. Энд харахын тулд төхөөрөмжийг холбож авна уу.",
@@ -2876,8 +2876,8 @@ i18n
           "Easily manage multiple cryptocurrencies.":
             "จัดการคริปโตเคอร์เรนซี่หลายอย่างได้ง่ายดาย.",
           Welcome: "ยินดีต้อนรับ",
-          "Your secure and user-friendly digital wallet.":
-            "กระเป๋าเงินดิจิทัลที่ปลอดภัยและใช้งานง่ายของคุณ.",
+          "Your secure and intuitive companion app.":
+            "แอปคู่หูฮาร์ดแวร์ที่ปลอดภัยและใช้งานง่ายของคุณ",
           "Address Copied to Clipboard": "ที่อยู่ถูกคัดลอกไปยังคลิปบอร์ด",
           "No devices found": "ไม่พบอุปกรณ์ โปรดเชื่อมต่ออุปกรณ์เพื่อดูที่นี่",
           "Fetching address...": "กำลังดึงที่อยู่...",
@@ -3053,8 +3053,8 @@ i18n
           "Easily manage multiple cryptocurrencies.":
             "Легко керуйте декількома криптовалютами.",
           Welcome: "Ласкаво просимо",
-          "Your secure and user-friendly digital wallet.":
-            "Ваш безпечний та зручний цифровий гаманець.",
+          "Your secure and intuitive companion app.":
+            "Ваш надійний і зручний додаток-компаньйон для пристрою.",
           "Address Copied to Clipboard": "Адрес скопійовано в буфер обміну",
           "No devices found":
             "Пристрої не знайдені. Будь ласка, підключіть пристрій, щоб побачити його тут.",
@@ -3229,8 +3229,8 @@ i18n
           "Easily manage multiple cryptocurrencies.":
             "Dễ dàng quản lý nhiều loại tiền điện tử.",
           Welcome: "Chào mừng",
-          "Your secure and user-friendly digital wallet.":
-            "Ví điện tử an toàn và thân thiện với người dùng của bạn.",
+          "Your secure and intuitive companion app.":
+            "Ứng dụng đồng hành phần cứng an toàn và dễ sử dụng của bạn.",
           "Address Copied to Clipboard":
             "Địa chỉ đã được sao chép vào clipboard",
           "No devices found":
@@ -3410,8 +3410,8 @@ i18n
           "Easily manage multiple cryptocurrencies.":
             "Mudah mengelola berbagai mata uang kripto.",
           Welcome: "Selamat Datang",
-          "Your secure and user-friendly digital wallet.":
-            "Dompet digital Anda yang aman dan mudah digunakan.",
+          "Your secure and intuitive companion app.":
+            "Aplikasi pendamping perangkat keras Anda yang aman dan intuitif.",
           "Address Copied to Clipboard": "Alamat telah disalin ke clipboard",
           "No devices found":
             "Tidak ada perangkat ditemukan. Silakan sambungkan perangkat untuk melihat di sini.",
@@ -3590,8 +3590,8 @@ i18n
           "Easily manage multiple cryptocurrencies.":
             "Madaling pamahalaan ang maramihang mga cryptocurrency.",
           Welcome: "Maligayang Pagdating",
-          "Your secure and user-friendly digital wallet.":
-            "Ang iyong ligtas at madaling gamiting digital wallet.",
+          "Your secure and intuitive companion app.":
+            "Ang iyong ligtas at madaling gamitin na hardware companion app.",
           "Address Copied to Clipboard": "Ang address ay nakopya sa clipboard",
           "No devices found":
             "Walang mga device na nahanap. Mangyaring i-pair ang isang device upang makita ito dito.",
@@ -3771,8 +3771,8 @@ i18n
           "Easily manage multiple cryptocurrencies.":
             "সহজেই একাধিক ক্রিপ্টোকারেন্সি পরিচালনা করুন।",
           Welcome: "स्वागत है",
-          "Your secure and user-friendly digital wallet.":
-            "আপনার নিরাপদ ও ব্যবহারকারী-বান্ধব ডিজিটাল ওয়ালেট।",
+          "Your secure and intuitive companion app.":
+            "আপনার নিরাপদ এবং স্বজ্ঞাত হার্ডওয়্যার সহায়ক অ্যাপ।",
           "Address Copied to Clipboard": "ঠিকানা ক্লিপবোর্ডে কপি করা হয়েছে",
           "No devices found":
             "কোনো ডিভাইস পাওয়া যায়নি। এখানে দেখতে একটি ডিভাইস পেয়ার করুন।",
