@@ -393,7 +393,7 @@ function VaultScreen({ route, navigation }) {
                       : "#888",
                 }}
               >
-                NFTs
+                Gallery
               </Text>
             </TouchableOpacity>
           </View>

@@ -344,7 +344,7 @@ const SecureDeviceStatus = (props) => {
     handleWalletTest,
   } = props;
 
-  const handleNFTSelect = (nft) => {
+  const handleGalleryelect = (nft) => {
     setSelectedNFT(nft);
     setNFTModalVisible(true);
   };
@@ -703,7 +703,7 @@ const SecureDeviceStatus = (props) => {
           {renderChainButton()}
         </View>
       )}
-      {/* NFTs view */}
+      {/* Gallery view */}
       <ScrollView
         contentContainerStyle={{
           flexDirection: "row",
@@ -721,7 +721,7 @@ const SecureDeviceStatus = (props) => {
           nftData.data.map((nft, index) => (
             <TouchableOpacity
               key={index}
-              onPress={() => handleNFTSelect(nft)}
+              onPress={() => handleGalleryelect(nft)}
               style={{ width: "50%", padding: 4 }}
             >
               <View
