@@ -482,7 +482,7 @@ i18n
           "Screen lock enabled successfully": "螢幕鎖已成功啟用",
           "Success!": "成功！",
           "Enable Face ID": "啟用面容ID",
-          "I lost my password": "我忘記了密碼",
+
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "若要重設應用程式並移除儲存的資料，請於手機上解除安裝後重新安裝。",
           "Value in USD": "以美元計值",
@@ -664,7 +664,7 @@ i18n
             "Verrouillage d'écran activé avec succès",
           "Success!": "Succès !",
           "Enable Face ID": "Activer Face ID",
-          "I lost my password": "J'ai perdu mon mot de passe",
+
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "Pour réinitialiser l'application et supprimer les données enregistrées, veuillez la désinstaller puis la réinstaller sur votre téléphone.",
           "Value in USD": "Valeur en USD",
@@ -1239,7 +1239,7 @@ i18n
             "スクリーンロックが正常に有効化されました",
           "Success!": "成功！",
           "Enable Face ID": "Face IDを有効にする",
-          "I lost my password": "パスワードを忘れた",
+
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "アプリをリセットして保存されたデータを削除するには、アンインストールしてからスマートフォンに再インストールしてください。",
           "Value in USD": "米ドルでの値",
@@ -1788,7 +1788,7 @@ i18n
             "Bloqueio de tela ativado com sucesso",
           "Success!": "Sucesso!",
           "Enable Face ID": "Ativar Face ID",
-          "I lost my password": "Perdi minha senha",
+
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "Para repor a aplicação e eliminar os dados guardados, desinstale-a e volte a instalá-la no seu telemóvel.",
           "Value in USD": "Valor em USD",
@@ -2722,7 +2722,7 @@ i18n
           "Screen lock enabled successfully": "เปิดการล็อคหน้าจอเรียบร้อยแล้ว",
           "Success!": "สำเร็จ!",
           "Enable Face ID": "เปิดใช้งาน Face ID",
-          "I lost my password": "ฉันลืมรหัสผ่าน",
+
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "Аппликейшнийг дахин тохируулах болон хадгалагдсан өгөгдлийг устгахын тулд гар утсандаа апп-аа устгаад дахин суулгана уу.",
           "Value in USD": "มูลค่าในสกุลเงิน USD",
