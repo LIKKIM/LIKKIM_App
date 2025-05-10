@@ -188,7 +188,8 @@ i18n
           "All Chains": "All Chains",
           "Select Chain": "Select Chain",
           "Contact Support via Email": "Contact Support via Email",
-          addressShown: "Address has been successfully displayed on LIKKIM!",
+          addressShown:
+            "Address has been successfully displayed on your device.",
           "Search Address": "Search Address",
           "No device paired. Please pair with device first.":
             "No device paired. Please pair with device first.",
@@ -360,7 +361,7 @@ i18n
           "All Chains": "所有链",
           "Select Chain": "选择链",
           "Contact Support via Email": "通过电子邮件联系支持",
-          addressShown: "地址已成功在 LIKKIM 上显示！",
+          addressShown: "地址已成功显示在您的设备上。",
           "Search Address": "搜索地址",
           "No device paired. Please pair with device first.":
             "未配对设备。请先与设备配对。",
@@ -538,7 +539,7 @@ i18n
           "All Chains": "所有鏈",
           "Select Chain": "選擇鏈",
           "Contact Support via Email": "透過電子郵件聯繫支持",
-          addressShown: "地址已在 LIKKIM 上成功顯示！",
+          addressShown: "地址已成功顯示在您的裝置上。",
           "Search Address": "搜尋地址",
           "No device paired. Please pair with device first.":
             "未配對設備。請先與設備配對。",
@@ -739,7 +740,8 @@ i18n
           "All Chains": "Toutes les chaînes",
           "Select Chain": "Sélectionner la chaîne",
           "Contact Support via Email": "Contacter le support par e-mail",
-          addressShown: "L'adresse a été affichée avec succès sur LIKKIM !",
+          addressShown:
+            "L'adresse a été affichée avec succès sur votre appareil.",
           "Search Address": "Rechercher une adresse",
           "No device paired. Please pair with device first.":
             "Aucun appareil apparié. Veuillez d'abord appairer un appareil.",
@@ -930,7 +932,8 @@ i18n
           "All Chains": "Todas las cadenas",
           "Select Chain": "Seleccionar cadena",
           "Contact Support via Email": "Contactar con el soporte vía email",
-          addressShown: "¡La dirección se ha mostrado correctamente en LIKKIM!",
+          addressShown:
+            "La dirección se ha mostrado correctamente en su dispositivo.",
           "Search Address": "Buscar dirección",
           "No device paired. Please pair with device first.":
             "Ningún dispositivo emparejado. Por favor, empareje con un dispositivo primero.",
@@ -1107,7 +1110,7 @@ i18n
           "All Chains": "جميع السلاسل",
           "Select Chain": "اختيار السلسلة",
           "Contact Support via Email": "تواصل مع الدعم عبر البريد الإلكتروني",
-          addressShown: "تم عرض العنوان بنجاح على LIKKIM!",
+          addressShown: "تم عرض العنوان بنجاح على جهازك.",
           "Search Address": "البحث عن عنوان",
           "No device paired. Please pair with device first.":
             "لا يوجد جهاز مقترن. يرجى إقران الجهاز أولاً.",
@@ -1309,7 +1312,7 @@ i18n
           "All Chains": "すべてのチェーン",
           "Select Chain": "チェーンを選択",
           "Contact Support via Email": "メールでサポートに連絡",
-          addressShown: "LIKKIM上にアドレスが正常に表示されました！",
+          addressShown: "アドレスがデバイスに正常に表示されました。",
           "Search Address": "アドレスを検索",
           "No device paired. Please pair with device first.":
             "ペアリングされたデバイスがありません。まずデバイスとペアリングしてください。",
@@ -1489,7 +1492,7 @@ i18n
           "Select Chain": "Выбрать цепь",
           "Contact Support via Email":
             "Связаться с поддержкой по электронной почте",
-          addressShown: "Адрес успешно отображён на LIKKIM!",
+          addressShown: "Адрес успешно отображён на вашем устройстве.",
           "Search Address": "Поиск адреса",
           "No device paired. Please pair with device first.":
             "Нет подключенных устройств. Пожалуйста, сначала выполните сопряжение с устройством.",
@@ -1666,7 +1669,7 @@ i18n
           "All Chains": "모든 체인",
           "Select Chain": "체인 선택",
           "Contact Support via Email": "이메일을 통해 지원팀에 문의",
-          addressShown: "LIKKIM에 주소가 성공적으로 표시되었습니다!",
+          addressShown: "주소가 기기에 성공적으로 표시되었습니다.",
           "Search Address": "주소 검색",
           "No device paired. Please pair with device first.":
             "페어링된 장치가 없습니다. 먼저 장치를 페어링하십시오.",
@@ -1848,7 +1851,8 @@ i18n
           "All Chains": "Todas as cadeias",
           "Select Chain": "Selecionar cadeia",
           "Contact Support via Email": "Contactar o Suporte por Email",
-          addressShown: "O endereço foi exibido com sucesso no LIKKIM!",
+          addressShown:
+            "O endereço foi exibido com sucesso no seu dispositivo.",
           "Search Address": "Pesquisar Endereço",
           "No device paired. Please pair with device first.":
             "Nenhum dispositivo emparelhado. Por favor, emparelhe com um dispositivo primeiro.",
@@ -2047,7 +2051,8 @@ i18n
           "All Chains": "Todas as cadeias",
           "Select Chain": "Selecionar cadeia",
           "Contact Support via Email": "Contatar Suporte via Email",
-          addressShown: "O endereço foi exibido com sucesso no LIKKIM!",
+          addressShown:
+            "O endereço foi exibido com sucesso no seu dispositivo.",
           "Search Address": "Pesquisar Endereço",
           "No device paired. Please pair with device first.":
             "Nenhum dispositivo emparelhado. Por favor, emparelhe com um dispositivo primeiro.",
@@ -2230,7 +2235,7 @@ i18n
           "Select Chain": "Seleziona catena",
           "Contact Support via Email": "Contatta il supporto via email",
           addressShown:
-            "L'indirizzo è stato visualizzato con successo su LIKKIM!",
+            "L'indirizzo è stato visualizzato correttamente sul tuo dispositivo.",
           "Search Address": "Cerca indirizzo",
           "No device paired. Please pair with device first.":
             "Nessun dispositivo associato. Per favore, accoppia prima un dispositivo.",
@@ -2414,7 +2419,8 @@ i18n
           "All Chains": "Alle Ketten",
           "Select Chain": "Kette auswählen",
           "Contact Support via Email": "Support per E-Mail kontaktieren",
-          addressShown: "Die Adresse wurde erfolgreich auf LIKKIM angezeigt!",
+          addressShown:
+            "Die Adresse wurde erfolgreich auf Ihrem Gerät angezeigt.",
           "Search Address": "Adresse suchen",
           "No device paired. Please pair with device first.":
             "Kein Gerät gekoppelt. Bitte koppeln Sie zuerst ein Gerät.",
@@ -2594,7 +2600,7 @@ i18n
           "All Chains": "सभी श्रृंखलाएँ",
           "Select Chain": "श्रृंखला चुनें",
           "Contact Support via Email": "ईमेल के माध्यम से सहायता संपर्क करें",
-          addressShown: "LIKKIM पर पता सफलतापूर्वक प्रदर्शित किया गया है!",
+          addressShown: "पता सफलतापूर्वक आपके डिवाइस पर प्रदर्शित किया गया है।",
           "Search Address": "पता खोजें",
           "No device paired. Please pair with device first.":
             "कोई डिवाइस पेयर नहीं है। कृपया पहले डिवाइस के साथ पेयर करें।",
@@ -2774,7 +2780,7 @@ i18n
           "All Chains": "Бүх гинжин хэлхээ",
           "Select Chain": "Гол мөр сонгох",
           "Contact Support via Email": "Имэйлээр дэмжлэг авах",
-          addressShown: "Хаяг LIKKIM дээр амжилттай харуулсан байна!",
+          addressShown: "Хаяг амжилттайгаар таны төхөөрөмж дээр харууллаа.",
           "Search Address": "Хаяг хайх",
           "No device paired. Please pair with device first.":
             "Хосуулагдсан төхөөрөмж байхгүй байна. Эхлээд төхөөрөмжтэй хослоорой.",
@@ -2951,7 +2957,7 @@ i18n
           "All Chains": "ทุกโซ่",
           "Select Chain": "เลือกโซ่",
           "Contact Support via Email": "ติดต่อสนับสนุนทางอีเมล",
-          addressShown: "ที่อยู่ได้ถูกแสดงบน LIKKIM สำเร็จแล้ว!",
+          addressShown: "ที่อยู่แสดงบนอุปกรณ์ของคุณเรียบร้อยแล้ว",
           "Search Address": "ค้นหาที่อยู่",
           "No device paired. Please pair with device first.":
             "ยังไม่ได้จับคู่กับอุปกรณ์ใด ๆ กรุณาจับคู่กับอุปกรณ์ก่อน",
@@ -3130,7 +3136,7 @@ i18n
           "Select Chain": "Вибрати ланку",
           "Contact Support via Email":
             "Звернутися до служби підтримки через електронну пошту",
-          addressShown: "Адресу успішно відображено на LIKKIM!",
+          addressShown: "Адресу успішно відображено на вашому пристрої.",
           "Search Address": "Пошук адреси",
           "No device paired. Please pair with device first.":
             "Пристрій не підключено. Будь ласка, спочатку виконайте сполучення з пристроєм.",
@@ -3310,12 +3316,13 @@ i18n
           "All Chains": "Tất cả chuỗi",
           "Select Chain": "Chọn chuỗi",
           "Contact Support via Email": "Liên hệ hỗ trợ qua Email",
-          addressShown: "Địa chỉ đã được hiển thị thành công trên LIKKIM!",
+          addressShown:
+            "Địa chỉ đã được hiển thị thành công trên thiết bị của bạn.",
           "Search Address": "Tìm kiếm địa chỉ",
           "No device paired. Please pair with device first.":
             "Chưa có thiết bị được ghép nối. Vui lòng ghép nối thiết bị trước.",
           All: "Tất cả",
-          "Save to Device": "Lưu vào phần cứng Likkim",
+          "Save to Device": "Lưu vào thiết bị",
         },
       },
       id: {
@@ -3489,7 +3496,7 @@ i18n
           "All Chains": "Semua Rantai",
           "Select Chain": "Pilih Rantai",
           "Contact Support via Email": "Hubungi Dukungan via Email",
-          addressShown: "Alamat telah berhasil ditampilkan di LIKKIM!",
+          addressShown: "Alamat berhasil ditampilkan di perangkat Anda.",
           "Search Address": "Cari Alamat",
           "No device paired. Please pair with device first.":
             "Tidak ada perangkat yang dipasangkan. Harap pasangkan perangkat terlebih dahulu.",
@@ -3672,7 +3679,7 @@ i18n
           "Select Chain": "Piliin ang Kadena",
           "Contact Support via Email":
             "Makipag-ugnayan sa Suporta sa pamamagitan ng Email",
-          addressShown: "Matagumpay na naipakita ang address sa LIKKIM!",
+          addressShown: "Matagumpay na naipakita ang address sa iyong device.",
           "Search Address": "Maghanap ng address",
           "No device paired. Please pair with device first.":
             "Walang naka-pair na device. Pakipair muna ang device.",
@@ -3855,7 +3862,7 @@ i18n
           "Select Chain": "চেইন নির্বাচন করুন",
           "Contact Support via Email":
             "ইমেলের মাধ্যমে সাপোর্টের সাথে যোগাযোগ করুন",
-          addressShown: "LIKKIM-এ ঠিকানাটি সফলভাবে প্রদর্শিত হয়েছে!",
+          addressShown: "ঠিকানাটি সফলভাবে আপনার ডিভাইসে প্রদর্শিত হয়েছে।",
           "Search Address": "ঠিকানা খুঁজুন",
           "No device paired. Please pair with device first.":
             "কোনও ডিভাইস জোড়া করা হয়নি। প্রথমে ডিভাইসের সাথে জোড়া করুন।",
