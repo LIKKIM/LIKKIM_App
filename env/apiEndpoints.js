@@ -13,7 +13,7 @@ export const accountAPI = {
   getSignParam: "https://bt.likkim.com/api/wallet/getSignParam",
   encodeEvm: "https://bt.likkim.com/api/sign/encode_evm",
 };
-export const marketAPI = {
+export const metricsAPII = {
   exchangeRate: "https://df.likkim.com/api/market/exchange-rate",
   indexTickers: "https://df.likkim.com/api/market/index-tickers",
 };

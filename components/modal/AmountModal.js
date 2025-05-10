@@ -11,7 +11,7 @@ import {
   Platform,
 } from "react-native";
 import { BlurView } from "expo-blur";
-import { marketAPI } from "../../env/apiEndpoints";
+import { metricsAPII } from "../../env/apiEndpoints";
 const AmountModal = ({
   visible,
   onRequestClose,
@@ -51,7 +51,7 @@ const AmountModal = ({
       .join(",");
     try {
       const response = await fetch(
-        `${marketAPI.indexTickers}?instId=${instIds}`
+        `${metricsAPII.indexTickers}?instId=${instIds}`
       );
       const data = await response.json();
       if (data.code === 0 && data.data) {

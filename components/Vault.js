@@ -52,7 +52,7 @@ import ModalsContainer from "./VaultScreen/ModalsContainer";
 import checkAndReqPermission from "../utils/BluetoothPermissions"; //安卓高版本申请蓝牙权限
 import displayDeviceAddress from "../utils/displayDeviceAddress"; // 显示地址函数 发送数据写法
 import { parseDeviceCode } from "../utils/parseDeviceCode";
-import { accountAPI, marketAPI } from "../env/apiEndpoints";
+import { accountAPI, metricsAPII } from "../env/apiEndpoints";
 import { bluetoothConfig } from "../env/bluetoothConfig";
 
 const serviceUUID = bluetoothConfig.serviceUUID;
@@ -190,7 +190,7 @@ function VaultScreen({ route, navigation }) {
 
       try {
         const response = await fetch(
-          `${marketAPI.indexTickers}?instId=${instIds}`
+          `${metricsAPII.indexTickers}?instId=${instIds}`
         );
         const data = await response.json();
 
@@ -563,7 +563,9 @@ function VaultScreen({ route, navigation }) {
         .join(",");
       //bugging
       try {
-        const response = await fetch(`${marketAPI.tickers}?instId=${instIds}`);
+        const response = await fetch(
+          `${metricsAPII.tickers}?instId=${instIds}`
+        );
         const data = await response.json();
 
         if (data.code === 0 && data.data) {
