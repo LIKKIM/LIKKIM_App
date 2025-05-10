@@ -116,7 +116,7 @@ const AmountModal = ({
           </View>
 
           <Text style={ActivityScreenStyle.modalTitle}>
-            {t("Enter the amount to send:")}
+            {t("Enter amount:")}
           </Text>
 
           <View style={{ width: "100%", alignItems: "center" }}>
