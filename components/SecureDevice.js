@@ -999,10 +999,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
         await AsyncStorage.removeItem("cryptoCards");
         setCryptoCards([]);
         setVerifiedDevices([]);
-        Alert.alert(
-          t("Success"),
-          t("Your wallet has been deleted successfully.")
-        );
+        Alert.alert(t("Success"), t("Deleted successfully."));
         navigation.goBack();
       } else {
         Alert.alert(t("No Wallet"), t("No wallet available to delete."));

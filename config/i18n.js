@@ -162,8 +162,7 @@ i18n
             "Are you sure you want to remove this device from the app?\nThis will erase all locally stored information related to this device.\n\nYou can reconnect the device later to sync data again.\nMake sure you've saved any important information before proceeding.",
           Delete: "Delete",
           Success: "Success",
-          "Your wallet has been deleted successfully.":
-            "Your wallet has been deleted successfully.",
+          "Deleted successfully.": "Deleted successfully.",
           "Insufficient Balance": "Insufficient Balance",
           "Waiting for approval on your device...":
             "Waiting for approval on your device...",
@@ -334,9 +333,8 @@ i18n
             "您确定要将此设备从应用中移除吗？\n这将删除与该设备相关的所有本地存储信息。\n\n您可以稍后重新连接设备以再次同步数据。\n请确保在继续之前已保存所有重要信息。",
           Delete: "删除",
           Success: "成功",
-          "Your wallet has been deleted successfully.": "您的钱包已成功删除。",
+          "Deleted successfully.": "删除成功。",
           "Insufficient Balance": "余额不足",
-
           Save: "保存",
           Address: "地址",
           "Add Address": "添加地址",
@@ -511,9 +509,8 @@ i18n
             "您確定要將此裝置從應用程式中移除嗎？\n這將刪除與該裝置相關的所有本地儲存資訊。\n\n您可以稍後重新連接裝置以再次同步資料。\n請確保在繼續之前已儲存所有重要資訊。",
           Delete: "刪除",
           Success: "成功",
-          "Your wallet has been deleted successfully.": "您的錢包已成功刪除。",
+          "Deleted successfully.": "刪除成功。",
           "Insufficient Balance": "餘額不足",
-
           Save: "儲存",
           Address: "地址",
           "Add Address": "新增地址",
@@ -708,8 +705,7 @@ i18n
             "Êtes-vous sûr de vouloir supprimer cet appareil de l'application ?\nCela effacera toutes les informations stockées localement liées à cet appareil.\n\nVous pouvez reconnecter l'appareil plus tard pour synchroniser à nouveau les données.\nAssurez-vous d'avoir sauvegardé toutes les informations importantes avant de continuer.",
           Delete: "Supprimer",
           Success: "Succès",
-          "Your wallet has been deleted successfully.":
-            "Votre portefeuille a été supprimé avec succès.",
+          "Deleted successfully.": "Supprimé avec succès.",
           "Insufficient Balance": "Solde insuffisant",
           "Waiting for approval on your device...":
             "Esperando aprobación en su dispositivo...",
@@ -897,8 +893,7 @@ i18n
             "¿Está seguro de que desea eliminar este dispositivo de la aplicación?\nEsto borrará toda la información almacenada localmente relacionada con este dispositivo.\n\nPuede volver a conectar el dispositivo más tarde para sincronizar los datos nuevamente.\nAsegúrese de haber guardado toda la información importante antes de continuar.",
           Delete: "Eliminar",
           Success: "Éxito",
-          "Your wallet has been deleted successfully.":
-            "Tu billetera ha sido eliminada con éxito.",
+          "Deleted successfully.": "Eliminado correctamente.",
           "Insufficient Balance": "Saldo insuficiente",
           "Waiting for approval on your device...":
             "Esperando aprobación en su dispositivo...",
@@ -1075,9 +1070,8 @@ i18n
             "هل أنت متأكد أنك تريد إزالة هذا الجهاز من التطبيق؟\nسيؤدي ذلك إلى مسح جميع المعلومات المخزنة محليًا المتعلقة بهذا الجهاز.\n\nيمكنك إعادة توصيل الجهاز لاحقًا لمزامنة البيانات مرة أخرى.\nتأكد من حفظ أي معلومات مهمة قبل المتابعة.",
           Delete: "حذف",
           Success: "نجاح",
-          "Your wallet has been deleted successfully.": "تم حذف محفظتك بنجاح.",
+          "Deleted successfully.": "تم الحذف بنجاح.",
           "Insufficient Balance": "رصيد غير كافي",
-
           Save: "حفظ",
           Address: "العنوان",
           "Add Address": "إضافة عنوان",
@@ -1273,8 +1267,7 @@ i18n
             "このデバイスをアプリから削除してもよろしいですか？\nこれにより、このデバイスに関連するすべてのローカルに保存された情報が消去されます。\n\n後でデバイスを再接続してデータを再同期できます。\n続行する前に重要な情報を保存したことを確認してください。",
           Delete: "削除",
           Success: "成功",
-          "Your wallet has been deleted successfully.":
-            "ウォレットが正常に削除されました。",
+          "Deleted successfully.": "正常に削除されました。",
           "Insufficient Balance": "残高不足",
           "Waiting for approval on your device...":
             "デバイスでの承認を待っています...",
@@ -1452,8 +1445,7 @@ i18n
             "Вы уверены, что хотите удалить это устройство из приложения?\nЭто приведет к удалению всей локально сохраненной информации, связанной с этим устройством.\n\nВы можете повторно подключить устройство позже, чтобы снова синхронизировать данные.\nУбедитесь, что вы сохранили всю важную информацию перед продолжением.",
           Delete: "Удалить",
           Success: "Успех",
-          "Your wallet has been deleted successfully.":
-            "Ваш кошелек был успешно удален.",
+          "Deleted successfully.": "Успешно удалено.",
           "Insufficient Balance": "Недостаточно средств",
           Save: "Сохранить",
           Address: "Адрес",
@@ -1626,8 +1618,7 @@ i18n
             "이 장치를 앱에서 제거하시겠습니까?\n이 작업은 이 장치와 관련된 모든 로컬 저장 정보를 삭제합니다.\n\n나중에 장치를 다시 연결하여 데이터를 다시 동기화할 수 있습니다.\n계속하기 전에 중요한 정보를 저장했는지 확인하십시오.",
           Delete: "삭제",
           Success: "성공",
-          "Your wallet has been deleted successfully.":
-            "지갑이 성공적으로 삭제되었습니다.",
+          "Deleted successfully.": "삭제되었습니다.",
           "Insufficient Balance": "잔액 부족",
           "Waiting for approval on your device...":
             "기기에서 승인을 기다리는 중...",
@@ -1806,8 +1797,7 @@ i18n
             "Tem certeza de que deseja remover este dispositivo do aplicativo?\nIsso apagará todas as informações armazenadas localmente relacionadas a este dispositivo.\n\nVocê pode reconectar o dispositivo mais tarde para sincronizar os dados novamente.\nCertifique-se de ter salvo todas as informações importantes antes de continuar.",
           Delete: "Excluir",
           Success: "Sucesso",
-          "Your wallet has been deleted successfully.":
-            "Sua carteira foi excluída com sucesso.",
+          "Deleted successfully.": "Eliminado com sucesso.",
           "Insufficient Balance": "Saldo insuficiente",
           "Waiting for approval on your device...":
             "A aguardar aprovação no seu dispositivo...",
@@ -2004,8 +1994,7 @@ i18n
             "Tem certeza de que deseja remover este dispositivo do aplicativo?\nIsso apagará todas as informações armazenadas localmente relacionadas a este dispositivo.\n\nVocê pode reconectar o dispositivo mais tarde para sincronizar os dados novamente.\nCertifique-se de ter salvo todas as informações importantes antes de continuar.",
           Delete: "Excluir",
           Success: "Sucesso",
-          "Your wallet has been deleted successfully.":
-            "Sua carteira foi excluída com sucesso.",
+          "Deleted successfully.": "Excluído com sucesso.",
           "Insufficient Balance": "Saldo insuficiente",
           "Waiting for approval on your device...":
             "Aguardando aprovação no seu dispositivo...",
@@ -2185,8 +2174,7 @@ i18n
             "Sei sicuro di voler rimuovere questo dispositivo dall'app?\nQuesto cancellerà tutte le informazioni locali relative a questo dispositivo.\n\nPuoi riconnettere il dispositivo in un secondo momento per sincronizzare nuovamente i dati.\nAssicurati di aver salvato tutte le informazioni importanti prima di procedere.",
           Delete: "Elimina",
           Success: "Successo",
-          "Your wallet has been deleted successfully.":
-            "Il tuo portafoglio è stato eliminato con successo.",
+          "Deleted successfully.": "Eliminato con successo.",
           "Insufficient Balance": "Saldo insufficiente",
           "Waiting for approval on your device...":
             "In attesa di approvazione sul tuo dispositivo...",
@@ -2368,8 +2356,7 @@ i18n
             "Möchten Sie dieses Gerät wirklich aus der App entfernen?\nDabei werden alle lokal gespeicherten Informationen zu diesem Gerät gelöscht.\n\nSie können das Gerät später erneut verbinden, um die Daten erneut zu synchronisieren.\nStellen Sie sicher, dass Sie alle wichtigen Informationen gespeichert haben, bevor Sie fortfahren.",
           Delete: "Löschen",
           Success: "Erfolg",
-          "Your wallet has been deleted successfully.":
-            "Ihr Wallet wurde erfolgreich gelöscht.",
+          "Deleted successfully.": "Erfolgreich gelöscht.",
           "Insufficient Balance": "Unzureichendes Guthaben",
           "Waiting for approval on your device...":
             "Warte auf Genehmigung auf deinem Gerät...",
@@ -2548,8 +2535,7 @@ i18n
             "क्या आप वाकई इस डिवाइस को ऐप से हटाना चाहते हैं?\nयह इस डिवाइस से संबंधित सभी स्थानीय रूप से संग्रहीत जानकारी मिटा देगा।\n\nआप बाद में डिवाइस को फिर से जोड़कर डेटा को फिर से सिंक कर सकते हैं।\nकृपया आगे बढ़ने से पहले सभी महत्वपूर्ण जानकारी सहेज लें।",
           Delete: "हटाएँ",
           Success: "सफलता",
-          "Your wallet has been deleted successfully.":
-            "आपकी वॉलेट को सफलतापूर्वक हटा दिया गया है।",
+          "Deleted successfully.": "सफलतापूर्वक हटाया गया।",
           "Insufficient Balance": "अपर्याप्त शेष",
           "Waiting for approval on your device...":
             "आपके डिवाइस पर अनुमोदन की प्रतीक्षा हो रही है...",
@@ -2726,8 +2712,7 @@ i18n
             "Та энэ төхөөрөмжийг апп-аас устгахдаа итгэлтэй байна уу?\nЭнэ нь тухайн төхөөрөмжтэй холбоотой бүх локал хадгалсан мэдээллийг устгах болно.\n\nТа дараа нь төхөөрөмжийг дахин холбож өгөгдлөө дахин синк хийх боломжтой.\nҮргэлжлүүлэхийн өмнө чухал мэдээллээ хадгалсан эсэхээ шалгаарай.",
           Delete: "Устгах",
           Success: "Амжилт",
-          "Your wallet has been deleted successfully.":
-            "Таны түрийвч амжилттай устгагдсан.",
+          "Deleted successfully.": "Амжилттай устгагдлаа.",
           "Insufficient Balance": "Хүлээгдэж буй үлдэгдэл",
           "Waiting for approval on your device...":
             "Таны төхөөрөмж дээр зөвшөөрөл хүлээж байна...",
@@ -2901,8 +2886,7 @@ i18n
             "คุณแน่ใจหรือไม่ว่าต้องการลบอุปกรณ์นี้ออกจากแอป?\nสิ่งนี้จะลบข้อมูลทั้งหมดที่จัดเก็บไว้ในเครื่องซึ่งเกี่ยวข้องกับอุปกรณ์นี้\n\nคุณสามารถเชื่อมต่ออุปกรณ์อีกครั้งในภายหลังเพื่อซิงค์ข้อมูลใหม่\nโปรดตรวจสอบให้แน่ใจว่าคุณได้บันทึกข้อมูลสำคัญทั้งหมดแล้วก่อนดำเนินการต่อ",
           Delete: "ลบ",
           Success: "สำเร็จ",
-          "Your wallet has been deleted successfully.":
-            "กระเป๋าของคุณถูกลบเรียบร้อยแล้ว",
+          "Deleted successfully.": "ลบเรียบร้อยแล้ว",
           "Insufficient Balance": "ยอดเงินไม่พอ",
           "Waiting for approval on your device...":
             "กำลังรอการอนุมัติในอุปกรณ์ของคุณ...",
@@ -3079,8 +3063,7 @@ i18n
             "Ви впевнені, що хочете видалити цей пристрій з додатка?\nЦе призведе до видалення всієї локально збереженої інформації, пов’язаної з цим пристроєм.\n\nВи зможете знову підключити пристрій пізніше, щоб повторно синхронізувати дані.\nПереконайтеся, що ви зберегли всю важливу інформацію перед продовженням.",
           Delete: "Видалити",
           Success: "Успіх",
-          "Your wallet has been deleted successfully.":
-            "Ваш гаманець був успішно видалений.",
+          "Deleted successfully.": "Успішно видалено.",
           "Insufficient Balance": "Недостатньо коштів",
           Save: "Зберегти",
           Address: "Адреса",
@@ -3256,8 +3239,7 @@ i18n
             "Bạn có chắc chắn muốn xóa thiết bị này khỏi ứng dụng không?\nThao tác này sẽ xóa tất cả thông tin được lưu trữ cục bộ liên quan đến thiết bị này.\n\nBạn có thể kết nối lại thiết bị sau để đồng bộ lại dữ liệu.\nHãy đảm bảo bạn đã lưu tất cả thông tin quan trọng trước khi tiếp tục.",
           Delete: "Xóa",
           Success: "Thành công",
-          "Your wallet has been deleted successfully.":
-            "Ví của bạn đã được xóa thành công.",
+          "Deleted successfully.": "Xóa thành công.",
           "Insufficient Balance": "Số dư không đủ",
           "Waiting for approval on your device...":
             "Đang chờ phê duyệt trên thiết bị của bạn...",
@@ -3436,8 +3418,7 @@ i18n
             "Bạn có chắc chắn muốn xóa thiết bị này khỏi ứng dụng không?\nThao tác này sẽ xóa tất cả thông tin được lưu trữ cục bộ liên quan đến thiết bị này.\n\nBạn có thể kết nối lại thiết bị sau để đồng bộ lại dữ liệu.\nHãy đảm bảo bạn đã lưu tất cả thông tin quan trọng trước khi tiếp tục.",
           Delete: "Hapus",
           Success: "Sukses",
-          "Your wallet has been deleted successfully.":
-            "Dompet Anda telah dihapus dengan sukses.",
+          "Deleted successfully.": "Berhasil dihapus.",
           "Insufficient Balance": "Saldo tidak cukup",
           Save: "Simpan",
           Address: "Alamat",
@@ -3616,8 +3597,7 @@ i18n
             "Sigurado ka bang gusto mong alisin ang device na ito sa app?\nMawawala ang lahat ng locally stored na impormasyon kaugnay ng device na ito.\n\nMaaari mong muling ikonekta ang device upang i-sync muli ang data.\nTiyaking na-save mo na ang mahahalagang impormasyon bago magpatuloy.",
           Delete: "Tanggalin",
           Success: "Tagumpay",
-          "Your wallet has been deleted successfully.":
-            "Matagumpay na natanggal ang iyong wallet.",
+          "Deleted successfully.": "Matagumpay na na-delete.",
           "Insufficient Balance": "Hindi sapat na balanse",
           Save: "I-save",
           Address: "Address",
@@ -3797,8 +3777,7 @@ i18n
             "আপনি কি নিশ্চিত যে আপনি এই ডিভাইসটি অ্যাপ থেকে সরাতে চান?\nএটি এই ডিভাইসের সাথে সম্পর্কিত সমস্ত স্থানীয়ভাবে সংরক্ষিত তথ্য মুছে ফেলবে।\n\nআপনি পরে আবার ডিভাইসটি সংযুক্ত করে ডেটা সিঙ্ক করতে পারেন।\nচালিয়ে যাওয়ার আগে অনুগ্রহ করে সমস্ত গুরুত্বপূর্ণ তথ্য সংরক্ষণ করেছেন কিনা তা নিশ্চিত করুন।",
           Delete: "মুছুন",
           Success: "সফলতা",
-          "Your wallet has been deleted successfully.":
-            "আপনার ওয়ালেট সফলভাবে মুছে ফেলা হয়েছে।",
+          "Deleted successfully.": "সফলভাবে মুছে ফেলা হয়েছে।",
           "Insufficient Balance": "অপর্যাপ্ত ব্যালেন্স",
           Save: "সংরক্ষণ",
           Address: "ঠিকানা",
