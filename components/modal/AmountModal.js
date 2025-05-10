@@ -210,7 +210,7 @@ const AmountModal = ({
                     { color: "#FF5252", marginTop: 5 },
                   ]}
                 >
-                  {t("Insufficient Balance")}
+                  {t("Not enough value")}
                 </Text>
               )}
             </View>
