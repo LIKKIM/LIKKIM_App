@@ -23,7 +23,6 @@ import {
 // 第三方库
 import { LinearGradient } from "expo-linear-gradient";
 
-
 import { BlurView } from "expo-blur";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useTranslation } from "react-i18next";
@@ -144,7 +143,7 @@ function VaultScreen({ route, navigation }) {
     useState(false);
   useState(false);
   const [addressVerificationMessage, setAddressVerificationMessage] = useState(
-    t("Verifying Address on LIKKIM...")
+    t("Verifying address on your device...")
   );
   const [refreshing, setRefreshing] = useState(false);
   const chainCategories = initialAdditionalCryptos.map((crypto) => ({
@@ -685,8 +684,6 @@ function VaultScreen({ route, navigation }) {
       }, 300); // 确保在滚动完成后再设置偏移量
     }
   }, [modalVisible]);
-
- 
 
   // 使用最新的价格来计算最终余额
   const getConvertedBalance = (cardBalance, cardShortName) => {
@@ -1348,8 +1345,6 @@ function VaultScreen({ route, navigation }) {
       (fx, fy, width, height, px, py) =>
         (cardStartPositions.current[_index] = py)
     );
-
- 
 
   const renderTabModal = () => (
     <TabModal

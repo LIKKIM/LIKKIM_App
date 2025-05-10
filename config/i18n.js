@@ -129,7 +129,8 @@ i18n
           "Value in USD": "Value in USD",
           Fee: "Fee",
 
-          "Verifying Address on LIKKIM...": "Verifying Address on LIKKIM...",
+          "Verifying address on your device...":
+            "Verifying address on your device...",
 
           "Your device is already verified.":
             "Your device is already verified.",
@@ -306,15 +307,11 @@ i18n
           "I lost my password": "我忘记了密码",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "若要重置应用并删除存储的数据，请卸载后在手机上重新安装。",
-
           "Value in USD": "以美元计值",
           Fee: "手续费用",
           "Waiting for approval on your device...": "正在等待您设备上的批准...",
-
-          "Verifying Address on LIKKIM...": "正在 LIKKIM 上验证地址...",
-
+          "Verifying address on your device...": "正在验证您设备上的地址...",
           "Your device is already verified.": "您的设备已验证。",
-
           "Address Book": "地址簿",
           Swap: "闪兑",
           Skip: "跳过",
@@ -488,15 +485,11 @@ i18n
           "I lost my password": "我忘記了密碼",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "若要重設應用程式並移除儲存的資料，請於手機上解除安裝後重新安裝。",
-
           "Value in USD": "以美元計值",
           Fee: "手续費用",
           "Waiting for approval on your device...": "正在等待您裝置上的核准...",
-
-          "Verifying Address on LIKKIM...": "正在 LIKKIM 上驗證地址...",
-
+          "Verifying address on your device...": "正在驗證您裝置上的地址...",
           "Your device is already verified.": "您的設備已驗證。",
-
           "Address Book": "地址簿",
           Swap: "交換",
           Skip: "跳過",
@@ -675,16 +668,12 @@ i18n
           "I lost my password": "J'ai perdu mon mot de passe",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "Pour réinitialiser l'application et supprimer les données enregistrées, veuillez la désinstaller puis la réinstaller sur votre téléphone.",
-
           "Value in USD": "Valeur en USD",
           Fee: "Frais",
-
-          "Verifying Address on LIKKIM...":
-            "Vérification de l'adresse sur LIKKIM...",
-
+          "Verifying address on your device...":
+            "Vérification de l'adresse sur votre appareil...",
           "Your device is already verified.":
             "Votre appareil est déjà vérifié.",
-
           "Screen lock enabled successfully":
             "Verrouillage d'écran activé avec succès",
           "Success!": "Succès !",
@@ -695,13 +684,8 @@ i18n
           Fee: "Frais",
           "Waiting for approval on your device...":
             "En attente d'approbation sur votre appareil...",
-
-          "Verifying Address on LIKKIM...":
-            "Vérification de l'adresse sur LIKKIM...",
-
           "Your device is already verified.":
             "Votre appareil est déjà vérifié.",
-
           "Address Book": "Carnet d'adresses",
           Swap: "Échanger",
           Skip: "Passer",
@@ -888,16 +872,12 @@ i18n
           "I lost my password": "Perdí mi contraseña",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "Para restablecer la aplicación y eliminar los datos almacenados, desinstálala y vuelve a instalarla en tu teléfono.",
-
           "Value in USD": "Valor en USD",
           Fee: "Tarifa",
-
-          "Verifying Address on LIKKIM...":
-            "Verificando dirección en LIKKIM...",
-
+          "Verifying address on your device...":
+            "Verificando la dirección en su dispositivo...",
           "Your device is already verified.":
             "Su dispositivo ya está verificado.",
-
           "Address Book": "Libreta de direcciones",
           Swap: "Intercambiar",
           Skip: "Omitir",
@@ -1084,10 +1064,8 @@ i18n
           Fee: "رسوم",
           "Waiting for approval on your device...":
             "بانتظار الموافقة على جهازك...",
-
-          "Verifying Address on LIKKIM...":
-            "جارٍ التحقق من العنوان على LIKKIM...",
-
+          "Verifying address on your device...":
+            "جارٍ التحقق من العنوان على جهازك...",
           "Your device is already verified.": "تم التحقق من جهازك بالفعل.",
 
           "Address Book": "دفتر العناوين",
@@ -1274,15 +1252,12 @@ i18n
           "I lost my password": "パスワードを忘れた",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "アプリをリセットして保存されたデータを削除するには、アンインストールしてからスマートフォンに再インストールしてください。",
-
           "Value in USD": "米ドルでの値",
           Fee: "手数料",
-
-          "Verifying Address on LIKKIM...": "LIKKIMでアドレスを確認中...",
-
+          "Verifying address on your device...":
+            "デバイス上のアドレスを確認しています...",
           "Your device is already verified.":
             "お使いのデバイスは既に認証されています。",
-
           "Screen lock enabled successfully":
             "スクリーンロックが正常に有効化されました",
           "Success!": "成功！",
@@ -1290,9 +1265,6 @@ i18n
           "I lost my password": "パスワードを忘れた",
           "Value in USD": "米ドルでの値",
           Fee: "手数料",
-
-          "Verifying Address on LIKKIM...": "LIKKIMでアドレスを確認中...",
-
           "Your device is already verified.":
             "お使いのデバイスは既に認証されています。",
 
@@ -1486,10 +1458,9 @@ i18n
           Fee: "Комиссия",
           "Waiting for approval on your device...":
             "Ожидание одобрения на вашем устройстве...",
-          "Verifying Address on LIKKIM...": "Проверка адреса на LIKKIM...",
-
+          "Verifying address on your device...":
+            "Проверка адреса на вашем устройстве...",
           "Your device is already verified.": "Ваше устройство уже проверено.",
-
           "Address Book": "Адресная книга",
           Swap: "Обмен",
           Skip: "Пропустить",
@@ -1531,7 +1502,6 @@ i18n
           "Your wallet has been deleted successfully.":
             "Ваш кошелек был успешно удален.",
           "Insufficient Balance": "Недостаточно средств",
-
           Save: "Сохранить",
           Address: "Адрес",
           "Add Address": "Добавить адрес",
@@ -1554,7 +1524,6 @@ i18n
       ko: {
         translation: {
           "Add Wallet": "지갑 추가",
-
           Close: "닫기",
           "Value:": "값:",
           "Delete Card": "카드 삭제",
@@ -1601,23 +1570,17 @@ i18n
           "Remove Chain Account": "체인 계정 제거",
           Remove: "제거",
           "Security in your hands": "안전은 당신의 손안에 있습니다",
-
           Continue: "계속",
-
           "Scroll down to view all words":
             "모든 단어를 보려면 아래로 스크롤하세요",
-
           "Generating your accounts": "계정 생성 중",
           "Encrypting your data": "데이터 암호화 중",
-
           "Let's Go": "시작합시다",
           "Use spaces between words": "단어 사이에 공백 사용",
-
           Version: "버전",
           "Assets can only be sent within the same chain.":
             "자산은 동일한 체인 내에서만 전송할 수 있습니다.",
           "Firmware Update": "펌웨어 업데이트",
-
           "No data available": "데이터가 없습니다",
           "Search Currency": "통화 검색",
           "Search Cryptocurrency": "암호화폐 검색",
@@ -1644,7 +1607,6 @@ i18n
           "Enter PIN to Connect": "연결할 PIN 입력",
           "Use the PIN code to connect securely to your device.":
             "PIN 코드를 사용하여 장치에 안전하게 연결하세요.",
-
           "Enter PIN": "PIN 입력",
           "Verification successful!": "검증 성공!",
           "You can now safely use the device.":
@@ -1663,7 +1625,6 @@ i18n
           "Transaction Fee": "거래 수수료",
           Confirm: "확인",
           "Waiting for Confirmation": "확인 대기 중",
-
           "Screen lock enabled successfully":
             "화면 잠금이 성공적으로 활성화되었습니다",
           "Success!": "성공!",
@@ -1671,14 +1632,11 @@ i18n
           "I lost my password": "비밀번호를 잊어버렸습니다",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "앱을 초기화하고 저장된 데이터를 제거하려면 휴대폰에서 앱을 삭제한 후 다시 설치하세요.",
-
           "Value in USD": "미국 달러로 된 값",
           Fee: "수수료",
-
-          "Verifying Address on LIKKIM...": "LIKKIM에서 주소를 확인하는 중...",
-
+          "Verifying address on your device...":
+            "기기에서 주소를 확인하는 중...",
           "Your device is already verified.": "장치가 이미 확인되었습니다.",
-
           "Address Book": "주소록",
           Swap: "스왑",
           Skip: "건너뛰기",
@@ -1743,7 +1701,6 @@ i18n
       pt: {
         translation: {
           "Add Wallet": "Adicionar carteira",
-
           Close: "Fechar",
           "Value:": "Valor:",
           "Delete Card": "Excluir cartão",
@@ -1793,23 +1750,17 @@ i18n
           "Remove Chain Account": "Remover conta de cadeia",
           Remove: "Remover",
           "Security in your hands": "Segurança em suas mãos",
-
           Continue: "Continuar",
-
           "Scroll down to view all words":
             "Role para baixo para ver todas as palavras",
-
           "Generating your accounts": "Gerando suas contas",
           "Encrypting your data": "Criptografando seus dados",
-
           "Let's Go": "Vamos lá",
           "Use spaces between words": "Use espaços entre as palavras",
-
           Version: "Versão",
           "Assets can only be sent within the same chain.":
             "Os ativos só podem ser enviados dentro da mesma cadeia.",
           "Firmware Update": "Atualização de firmware",
-
           "No data available": "Nenhum dado disponível",
           "Search Currency": "Pesquisar moeda",
           "Search Cryptocurrency": "Pesquisar criptomoeda",
@@ -1837,7 +1788,6 @@ i18n
           "Enter PIN to Connect": "Digite o PIN para conectar",
           "Use the PIN code to connect securely to your device.":
             "Utilize o código PIN para se ligar com segurança ao seu dispositivo.",
-
           "Enter PIN": "Digite o PIN",
           "Verification successful!": "Verificação bem-sucedida!",
           "You can now safely use the device.":
@@ -1856,7 +1806,6 @@ i18n
           "Transaction Fee": "Taxa de transação",
           Confirm: "Confirmar",
           "Waiting for Confirmation": "A aguardar confirmação",
-
           "Screen lock enabled successfully":
             "Bloqueio de tela ativado com sucesso",
           "Success!": "Sucesso!",
@@ -1864,15 +1813,12 @@ i18n
           "I lost my password": "Perdi minha senha",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "Para repor a aplicação e eliminar os dados guardados, desinstale-a e volte a instalá-la no seu telemóvel.",
-
           "Value in USD": "Valor em USD",
           Fee: "Taxa",
-
-          "Verifying Address on LIKKIM...": "Verificando endereço no LIKKIM...",
-
+          "Verifying address on your device...":
+            "A verificar o endereço no seu dispositivo...",
           "Your device is already verified.":
             "Seu dispositivo já está verificado.",
-
           "Address Book": "Livro de Endereços",
           Swap: "Trocar",
           Skip: "Pular",
@@ -1917,7 +1863,6 @@ i18n
           "Insufficient Balance": "Saldo insuficiente",
           "Waiting for approval on your device...":
             "A aguardar aprovação no seu dispositivo...",
-
           Save: "Salvar",
           Address: "Endereço",
           "Add Address": "Adicionar Endereço",
@@ -1939,7 +1884,6 @@ i18n
       "pt-BR": {
         translation: {
           "Add Wallet": "Adicionar carteira",
-
           Close: "Fechar",
           "Value:": "Valor:",
           "Delete Card": "Excluir cartão",
@@ -1990,23 +1934,17 @@ i18n
           "Remove Chain Account": "Remover conta de cadeia",
           Remove: "Remover",
           "Security in your hands": "Segurança em suas mãos",
-
           Continue: "Continuar",
-
           "Scroll down to view all words":
             "Role para baixo para ver todas as palavras",
-
           "Generating your accounts": "Gerando suas contas",
           "Encrypting your data": "Criptografando seus dados",
-
           "Let's Go": "Vamos lá",
           "Use spaces between words": "Use espaços entre as palavras",
-
           Version: "Versão",
           "Assets can only be sent within the same chain.":
             "Os ativos só podem ser enviados dentro da mesma cadeia.",
           "Firmware Update": "Atualização de firmware",
-
           "No data available": "Nenhum dado disponível",
           "Search Currency": "Pesquisar moeda",
           "Search Cryptocurrency": "Pesquisar criptomoeda",
@@ -2034,7 +1972,6 @@ i18n
           "Enter PIN to Connect": "Digite o PIN para conectar",
           "Use the PIN code to connect securely to your device.":
             "Use o código PIN para se conectar com segurança ao seu dispositivo.",
-
           "Enter PIN": "Digite o PIN",
           "Verification successful!": "Verificação bem-sucedida!",
           "You can now safely use the device.":
@@ -2053,7 +1990,6 @@ i18n
           "Transaction Fee": "Taxa de transação",
           Confirm: "Confirmar",
           "Waiting for Confirmation": "Aguardando confirmação",
-
           "Screen lock enabled successfully":
             "Bloqueio de tela ativado com sucesso",
           "Success!": "Sucesso!",
@@ -2063,12 +1999,10 @@ i18n
             "Para redefinir o aplicativo e remover os dados armazenados, desinstale-o e reinstale-o no seu celular.",
           "Value in USD": "Valor em USD",
           Fee: "Taxa",
-
-          "Verifying Address on LIKKIM...": "Verificando endereço no LIKKIM...",
-
+          "Verifying address on your device...":
+            "Verificando o endereço no seu dispositivo...",
           "Your device is already verified.":
             "Seu dispositivo já está verificado.",
-
           "Address Book": "Livro de Endereços",
           Swap: "Trocar",
           Skip: "Pular",
@@ -2200,23 +2134,17 @@ i18n
           "Remove Chain Account": "Rimuovere account di catena",
           Remove: "Rimuovere",
           "Security in your hands": "Sicurezza nelle tue mani",
-
           Continue: "Continua",
-
           "Scroll down to view all words":
             "Scorri verso il basso per visualizzare tutte le parole",
-
           "Generating your accounts": "Generazione dei tuoi account",
           "Encrypting your data": "Criptazione dei tuoi dati",
-
           "Let's Go": "Andiamo",
           "Use spaces between words": "Usa spazi tra le parole",
-
           Version: "Versione",
           "Assets can only be sent within the same chain.":
             "Gli asset possono essere inviati solo all'interno della stessa catena.",
           "Firmware Update": "Aggiornamento firmware",
-
           "No data available": "Nessun dato disponibile",
           "Search Currency": "Cerca valuta",
           "Search Cryptocurrency": "Cerca criptovaluta",
@@ -2244,7 +2172,6 @@ i18n
           "Enter PIN to Connect": "Inserisci il PIN per connetterti",
           "Use the PIN code to connect securely to your device.":
             "Usa il codice PIN per connetterti in modo sicuro al tuo dispositivo.",
-
           "Enter PIN": "Inserisci PIN",
           "Verification successful!": "Verifica riuscita!",
           "You can now safely use the device.":
@@ -2263,7 +2190,6 @@ i18n
           "Transaction Fee": "Commissione di transazione",
           Confirm: "Confermare",
           "Waiting for Confirmation": "In attesa di conferma",
-
           "Screen lock enabled successfully":
             "Blocco schermo abilitato con successo",
           "Success!": "Successo!",
@@ -2271,15 +2197,12 @@ i18n
           "I lost my password": "Ho perso la mia password",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "Per reimpostare l'app e rimuovere i dati salvati, disinstallala e reinstallala sul tuo telefono.",
-
           "Value in USD": "Valore in USD",
           Fee: "Commissione",
-          "Verifying Address on LIKKIM...":
-            "Verifica dell'indirizzo su LIKKIM...",
-
+          "Verifying address on your device...":
+            "Verifica dell'indirizzo sul tuo dispositivo...",
           "Your device is already verified.":
             "Il tuo dispositivo è già verificato.",
-
           "Address Book": "Rubrica",
           Swap: "Scambiare",
           Skip: "Salta",
@@ -2345,7 +2268,6 @@ i18n
       de: {
         translation: {
           "Add Wallet": "Brieftasche hinzufügen",
-
           Close: "Schließen",
           "Value:": "Wert:",
           "Delete Card": "Karte löschen",
@@ -2435,7 +2357,6 @@ i18n
           "Enter PIN to Connect": "PIN eingeben, um sich zu verbinden",
           "Use the PIN code to connect securely to your device.":
             "Verwenden Sie den PIN-Code, um eine sichere Verbindung zu Ihrem Gerät herzustellen.",
-
           "Enter PIN": "PIN eingeben",
           "Verification successful!": "Verifizierung erfolgreich!",
           "You can now safely use the device.":
@@ -2454,7 +2375,6 @@ i18n
           "Transaction Fee": "Transaktionsgebühr",
           Confirm: "Bestätigen",
           "Waiting for Confirmation": "Warte auf Bestätigung",
-
           "Screen lock enabled successfully":
             "Bildschirmsperre erfolgreich aktiviert",
           "Success!": "Erfolg!",
@@ -2462,14 +2382,12 @@ i18n
           "I lost my password": "Ich habe mein Passwort verloren",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "Um die App zurückzusetzen und gespeicherte Daten zu entfernen, deinstallieren Sie sie bitte und installieren Sie sie erneut auf Ihrem Telefon.",
-
           "Value in USD": "Wert in USD",
           Fee: "Gebühr",
-          "Verifying Address on LIKKIM...": "Adresse auf LIKKIM überprüfen...",
-
+          "Verifying address on your device...":
+            "Adresse auf Ihrem Gerät wird überprüft...",
           "Your device is already verified.":
             "Ihr Gerät ist bereits verifiziert.",
-
           "Address Book": "Adressbuch",
           Swap: "Tauschen",
           Skip: "Überspringen",
@@ -2535,7 +2453,6 @@ i18n
       hi: {
         translation: {
           "Add Wallet": "वॉलेट जोड़ें",
-
           Close: "बंद करें",
           "Value:": "मूल्य:",
           "Delete Card": "कार्ड हटाएं",
@@ -2622,7 +2539,6 @@ i18n
           "Enter PIN to Connect": "कनेक्ट करने के लिए पिन दर्ज करें",
           "Use the PIN code to connect securely to your device.":
             "अपने डिवाइस से सुरक्षित रूप से कनेक्ट होने के लिए PIN कोड का उपयोग करें।",
-
           "Enter PIN": "पिन दर्ज करें",
           "Verification successful!": "सत्यापन सफल!",
           "You can now safely use the device.":
@@ -2641,7 +2557,6 @@ i18n
           "Transaction Fee": "लेन-देन शुल्क",
           Confirm: "पुष्टि करें",
           "Waiting for Confirmation": "पुष्टि की प्रतीक्षा कर रहा है",
-
           "Screen lock enabled successfully":
             "स्क्रीन लॉक सफलतापूर्वक सक्षम किया गया",
           "Success!": "सफलता!",
@@ -2649,15 +2564,12 @@ i18n
           "I lost my password": "मैंने अपना पासवर्ड खो दिया है",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "ऐप को रीसेट करने और संग्रहीत डेटा हटाने के लिए, कृपया इसे अपने फ़ोन से अनइंस्टॉल करके दोबारा इंस्टॉल करें।",
-
           "Value in USD": "यूएसडी में मूल्य",
           Fee: "शुल्क",
-          "Verifying Address on LIKKIM...":
-            "LIKKIM पर पते की पुष्टि कर रहे हैं...",
-
+          "Verifying address on your device...":
+            "आपके डिवाइस पर पता सत्यापित किया जा रहा है...",
           "Your device is already verified.":
             "आपका डिवाइस पहले ही सत्यापित हो चुका है।",
-
           "Address Book": "पता पुस्तिका",
           Swap: "विनिमय",
           Skip: "छोड़ें",
@@ -2722,7 +2634,6 @@ i18n
       mn: {
         translation: {
           "Add Wallet": "Хэтэвч нэмэх",
-
           Close: "Хаах",
           "Value:": "Үнэ цэнэ:",
           "Delete Card": "Карт устгах",
@@ -2810,7 +2721,6 @@ i18n
           "Enter PIN to Connect": "Холбох PIN код оруулна уу",
           "Use the PIN code to connect securely to your device.":
             "Төхөөрөмжтэйгээ аюулгүй холбогдоход PIN кодыг ашиглана уу.",
-
           "Enter PIN": "PIN код оруулна уу",
           "Verification successful!": "Баталгаажуулалт амжилттай боллоо!",
           "You can now safely use the device.":
@@ -2829,12 +2739,10 @@ i18n
           "Transaction Fee": "Гүйлгээний хураамж",
           Confirm: "Баталгаажуулах",
           "Waiting for Confirmation": "Баталгаажуулалт хүлээж байна",
-          "Verifying Address on LIKKIM...":
-            "LIKKIM дээр хаягийг шалгаж байна...",
-
+          "Verifying address on your device...":
+            "Таны төхөөрөмж дээрх хаягийг баталгаажуулж байна...",
           "Your device is already verified.":
             "Таны төхөөрөмж аль хэдийн баталгаажсан.",
-
           "Screen lock enabled successfully": "เปิดการล็อคหน้าจอเรียบร้อยแล้ว",
           "Success!": "สำเร็จ!",
           "Enable Face ID": "เปิดใช้งาน Face ID",
@@ -2991,7 +2899,6 @@ i18n
           "Enter PIN to Connect": "ใส่ PIN เพื่อเชื่อมต่อ",
           "Use the PIN code to connect securely to your device.":
             "ใช้รหัส PIN เพื่อเชื่อมต่อกับอุปกรณ์ของคุณอย่างปลอดภัย",
-
           "Enter PIN": "ใส่ PIN",
           "Verification successful!": "ยืนยันสำเร็จ!",
           "You can now safely use the device.":
@@ -3010,7 +2917,6 @@ i18n
           "Transaction Fee": "ค่าธรรมเนียมการทำธุรกรรม",
           Confirm: "ยืนยัน",
           "Waiting for Confirmation": "กำลังรอการยืนยัน",
-
           "Screen lock enabled successfully": "เปิดการล็อคหน้าจอเรียบร้อยแล้ว",
           "Success!": "สำเร็จ!",
           "Enable Face ID": "เปิดใช้งาน Face ID",
@@ -3019,11 +2925,10 @@ i18n
             "หากต้องการรีเซ็ตแอปและลบข้อมูลที่จัดเก็บไว้ โปรดยกเลิกการติดตั้งและติดตั้งใหม่บนโทรศัพท์ของคุณ",
           "Value in USD": "มูลค่าในสกุลเงิน USD",
           Fee: "ค่าธรรมเนียม",
-          "Verifying Address on LIKKIM...": "กำลังยืนยันที่อยู่บน LIKKIM...",
-
+          "Verifying address on your device...":
+            "Đang xác minh địa chỉ trên thiết bị của bạn...",
           "Your device is already verified.":
             "อุปกรณ์ของคุณได้รับการยืนยันแล้ว",
-
           "Address Book": "สมุดที่อยู่",
           Swap: "แลกเปลี่ยน",
           Skip: "ข้าม",
@@ -3087,7 +2992,6 @@ i18n
       uk: {
         translation: {
           "Add Wallet": "Додати гаманець",
-
           Close: "Закрити",
           "Value:": "Значення:",
           "Delete Card": "Видалити картку",
@@ -3173,7 +3077,6 @@ i18n
           "Enter PIN to Connect": "Введіть PIN для підключення",
           "Use the PIN code to connect securely to your device.":
             "Використовуйте PIN-код для безпечного підключення до вашого пристрою.",
-
           "Enter PIN": "Введіть PIN-код",
           "Verification successful!": "Перевірка успішна!",
           "You can now safely use the device.":
@@ -3192,7 +3095,6 @@ i18n
           "Transaction Fee": "Комісія за транзакцію",
           Confirm: "Підтвердити",
           "Waiting for Confirmation": "Очікується підтвердження",
-
           "Screen lock enabled successfully":
             "Блокування екрану успішно активовано",
           "Success!": "Успіх!",
@@ -3200,15 +3102,13 @@ i18n
           "I lost my password": "Я забув свій пароль",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "Щоб скинути застосунок і видалити збережені дані, будь ласка, видаліть його і перевстановіть на телефоні.",
-
           "Value in USD": "Значення в доларах США",
           Fee: "Комісія",
           "Waiting for approval on your device...":
             "Очікується підтвердження на вашому пристрої...",
-          "Verifying Address on LIKKIM...": "Перевірка адреси на LIKKIM...",
-
+          "Verifying address on your device...":
+            "Перевірка адреси на вашому пристрої...",
           "Your device is already verified.": "Ваш пристрій вже перевірено.",
-
           "Address Book": "Адресна книга",
           Swap: "Обмін",
           Skip: "Пропустити",
@@ -3272,7 +3172,6 @@ i18n
       vi: {
         translation: {
           "Add Wallet": "Thêm Ví",
-
           Close: "Đóng",
           "Value:": "Giá trị:",
           "Delete Card": "Xóa Thẻ",
@@ -3358,7 +3257,6 @@ i18n
           "Enter PIN to Connect": "Nhập PIN để kết nối",
           "Use the PIN code to connect securely to your device.":
             "Sử dụng mã PIN để kết nối an toàn với thiết bị của bạn.",
-
           "Enter PIN": "Nhập mã PIN",
           "Verification successful!": "Xác minh thành công!",
           "You can now safely use the device.":
@@ -3377,7 +3275,6 @@ i18n
           "Transaction Fee": "Phí giao dịch",
           Confirm: "Xác nhận",
           "Waiting for Confirmation": "Đang chờ xác nhận",
-
           "Screen lock enabled successfully":
             "Khóa màn hình đã được bật thành công",
           "Success!": "Thành công!",
@@ -3385,15 +3282,12 @@ i18n
           "I lost my password": "Tôi quên mật khẩu",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "Để đặt lại ứng dụng và xóa dữ liệu đã lưu, vui lòng gỡ cài đặt và cài đặt lại trên điện thoại của bạn.",
-
           "Value in USD": "Giá trị bằng USD",
           Fee: "Phí",
-          "Verifying Address on LIKKIM...":
-            "Đang xác minh địa chỉ trên LIKKIM...",
-
+          "Verifying address on your device...":
+            "Đang xác minh địa chỉ trên thiết bị của bạn...",
           "Your device is already verified.":
             "Thiết bị của bạn đã được xác minh.",
-
           "Address Book": "Sổ địa chỉ",
           Swap: "Hoán đổi",
           Skip: "Bỏ qua",
@@ -3459,7 +3353,6 @@ i18n
       id: {
         translation: {
           "Add Wallet": "Tambah Dompet",
-
           Close: "Tutup",
           "Value:": "Nilai:",
           "Delete Card": "Hapus Kartu",
@@ -3508,23 +3401,17 @@ i18n
           "Remove Chain Account": "Hapus akun rantai",
           Remove: "Hapus",
           "Security in your hands": "Keamanan di tangan Anda",
-
           Continue: "Lanjutkan",
-
           "Scroll down to view all words":
             "Gulir ke bawah untuk melihat semua kata",
-
           "Generating your accounts": "Membuat akun Anda",
           "Encrypting your data": "Mengenkripsi data Anda",
-
           "Let's Go": "Ayo pergi",
           "Use spaces between words": "Gunakan spasi di antara kata-kata",
-
           Version: "Versi",
           "Assets can only be sent within the same chain.":
             "Aset hanya dapat dikirim dalam rantai yang sama.",
           "Firmware Update": "Pembaruan firmware",
-
           "No data available": "Tidak ada data",
           "Search Currency": "Cari mata uang",
           "Search Cryptocurrency": "Cari mata uang kripto",
@@ -3552,7 +3439,6 @@ i18n
           "Enter PIN to Connect": "Masukkan PIN untuk Terhubung",
           "Use the PIN code to connect securely to your device.":
             "Gunakan kode PIN untuk terhubung dengan aman ke perangkat Anda.",
-
           "Enter PIN": "Masukkan PIN",
           "Verification successful!": "Verifikasi berhasil!",
           "You can now safely use the device.":
@@ -3571,23 +3457,20 @@ i18n
           "Transaction Fee": "Biaya Transaksi",
           Confirm: "Konfirmasi",
           "Waiting for Confirmation": "Menunggu konfirmasi",
-
           "Screen lock enabled successfully": "Kunci layar berhasil diaktifkan",
           "Success!": "Sukses!",
           "Enable Face ID": "Aktifkan Face ID",
           "I lost my password": "Saya kehilangan kata sandi saya",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "Untuk mengatur ulang aplikasi dan menghapus data yang tersimpan, silakan hapus instalan dan instal ulang di ponsel Anda.",
-
           "Value in USD": "Nilai dalam USD",
           Fee: "Biaya",
           "Waiting for approval on your device...":
             "Menunggu persetujuan di perangkat Anda...",
-          "Verifying Address on LIKKIM...": "Memverifikasi alamat di LIKKIM...",
-
+          "Verifying address on your device...":
+            "Memverifikasi alamat di perangkat Anda...",
           "Your device is already verified.":
             "Perangkat Anda sudah diverifikasi.",
-
           "Address Book": "Buku Alamat",
           Swap: "Tukar",
           Skip: "Lewati",
@@ -3650,7 +3533,6 @@ i18n
       tl: {
         translation: {
           "Add Wallet": "Magdagdag ng Wallet",
-
           Close: "Isara",
           "Value:": "Halaga:",
           "Delete Card": "Tanggalin ang Card",
@@ -3739,7 +3621,6 @@ i18n
           "Enter PIN to Connect": "Ipasok ang PIN para Kumonekta",
           "Use the PIN code to connect securely to your device.":
             "Gamitin ang PIN code upang ligtas na kumonekta sa iyong device.",
-
           "Enter PIN": "Ipasok ang PIN",
           "Verification successful!": "Matagumpay ang pag-verify!",
           "You can now safely use the device.":
@@ -3758,7 +3639,6 @@ i18n
           "Transaction Fee": "Bayad sa Transaksyon",
           Confirm: "Kumpirmahin",
           "Waiting for Confirmation": "Naghihintay ng kumpirmasyon",
-
           "Screen lock enabled successfully":
             "Matagumpay na na-enable ang screen lock",
           "Success!": "Tagumpay!",
@@ -3766,17 +3646,14 @@ i18n
           "I lost my password": "Nawala ko ang aking password",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "Upang i-reset ang app at alisin ang nakaimbak na data, mangyaring i-uninstall at muling i-install ito sa iyong telepono.",
-
           "Value in USD": "Halaga sa USD",
           Fee: "Bayad",
           "Waiting for approval on your device...":
             "Naghihintay ng pag-apruba sa iyong device...",
-          "Verifying Address on LIKKIM...":
-            "Tinitiyak ang address sa LIKKIM...",
-
+          "Verifying address on your device...":
+            "Tinitingnan ang address sa iyong device...",
           "Your device is already verified.":
             "Ang iyong device ay napatunayan na.",
-
           "Address Book": "Aklat ng mga Adresa",
           Swap: "Palitan",
           Skip: "Laktawan",
@@ -3818,7 +3695,6 @@ i18n
           "Your wallet has been deleted successfully.":
             "Matagumpay na natanggal ang iyong wallet.",
           "Insufficient Balance": "Hindi sapat na balanse",
-
           Save: "I-save",
           Address: "Address",
           "Add Address": "Magdagdag ng Address",
@@ -3892,10 +3768,8 @@ i18n
           "Security in your hands": "নিরাপত্তা আপনার হাতে",
           Continue: "চালিয়ে যান",
           "Scroll down to view all words": "সমস্ত শব্দ দেখতে নীচে স্ক্রোল করুন",
-
           "Generating your accounts": "আপনার অ্যাকাউন্ট তৈরি করা হচ্ছে",
           "Encrypting your data": "আপনার ডেটা এনক্রিপ্ট করা হচ্ছে",
-
           "Let's Go": "চলুন",
           "Use spaces between words": "শব্দের মধ্যে স্পেস ব্যবহার করুন",
           Version: "সংস্করণ",
@@ -3931,7 +3805,6 @@ i18n
           "Enter PIN to Connect": "সংযোগ করতে পিন লিখুন",
           "Use the PIN code to connect securely to your device.":
             "আপনার ডিভাইসে নিরাপদে সংযোগ করতে PIN কোড ব্যবহার করুন।",
-
           "Enter PIN": "পিন লিখুন",
           "Verification successful!": "যাচাই সফল হয়েছে!",
           "You can now safely use the device.":
@@ -3957,18 +3830,14 @@ i18n
           "I lost my password": "আমি আমার পাসওয়ার্ড হারিয়েছি",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "অ্যাপটি রিসেট করতে এবং সংরক্ষিত ডেটা মুছে ফেলতে, অনুগ্রহ করে আপনার ফোনে এটি আনইনস্টল করে পুনরায় ইনস্টল করুন।",
-
           "Value in USD": "ইউএসডি-তে মান",
           Fee: "ফি",
           "Waiting for approval on your device...":
             "আপনার ডিভাইসে অনুমোদনের অপেক্ষায়...",
-
-          "Verifying Address on LIKKIM...":
-            "LIKKIM-এ ঠিকানা যাচাই করা হচ্ছে...",
-
+          "Verifying address on your device...":
+            "আপনার ডিভাইসে ঠিকানা যাচাই করা হচ্ছে...",
           "Your device is already verified.":
             "আপনার ডিভাইসটি ইতিমধ্যেই যাচাই করা হয়েছে।",
-
           "Address Book": "ঠিকানা বই",
           Swap: "বিনিময়",
           Skip: "এড়িয়ে যান",
@@ -4010,7 +3879,6 @@ i18n
           "Your wallet has been deleted successfully.":
             "আপনার ওয়ালেট সফলভাবে মুছে ফেলা হয়েছে।",
           "Insufficient Balance": "অপর্যাপ্ত ব্যালেন্স",
-
           Save: "সংরক্ষণ",
           Address: "ঠিকানা",
           "Add Address": "ঠিকানা যোগ করুন",

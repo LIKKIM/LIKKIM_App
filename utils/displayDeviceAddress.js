@@ -63,7 +63,7 @@ const showLIKKIMAddressCommand = async (
     );
 
     setIsVerifyingAddress(true);
-    setAddressVerificationMessage("Verifying address on LIKKIM...");
+    setAddressVerificationMessage("Verifying address on your device...");
     console.log("Display command sent:", commandString);
 
     const addressMonitorSubscription = device.monitorCharacteristicForService(

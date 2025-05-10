@@ -140,7 +140,7 @@ function ActivityScreen() {
   const [paymentAddress, setPaymentAddress] = useState("Your Payment Address");
   const [contractAddress, setContractAddress] = useState("");
   const [addressVerificationMessage, setAddressVerificationMessage] = useState(
-    t("Verifying Address on LIKKIM...")
+    t("Verifying address on your device...")
   );
   const [selectedFeeTab, setSelectedFeeTab] = useState("Recommended");
   const [modalStatus, setModalStatus] = useState({
