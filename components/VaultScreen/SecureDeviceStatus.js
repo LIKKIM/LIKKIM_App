@@ -23,7 +23,7 @@ import { MaterialIcons as Icon } from "@expo/vector-icons";
 import AddressBookModal from "./../modal/AddressBookModal";
 import SecureDeviceScreenStyles from "../../styles/SecureDeviceScreenStyle";
 import { WebView } from "react-native-webview";
-import { nftAPI } from "../../env/apiEndpoints";
+import { galleryAPI } from "../../env/apiEndpoints";
 const SkeletonImage = ({ source, style, resizeMode }) => {
   const [loaded, setLoaded] = useState(false);
   const skeletonOpacity = useState(new Animated.Value(1))[0];
@@ -218,7 +218,7 @@ const SecureDeviceStatus = (props) => {
     console.log("POST 请求数据：", requestBody);
 
     try {
-      const response = await fetch(nftAPI.queryNFTBalance, {
+      const response = await fetch(galleryAPI.queryNFTBalance, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -255,7 +255,7 @@ const SecureDeviceStatus = (props) => {
     console.log("Query NFT Details Request:", detailRequestBody);
 
     try {
-      const response = await fetch(nftAPI.queryNFTDetails, {
+      const response = await fetch(galleryAPI.queryNFTDetails, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

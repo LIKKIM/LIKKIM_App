@@ -52,7 +52,7 @@ import ModalsContainer from "./VaultScreen/ModalsContainer";
 import checkAndReqPermission from "../utils/BluetoothPermissions"; //安卓高版本申请蓝牙权限
 import displayDeviceAddress from "../utils/displayDeviceAddress"; // 显示地址函数 发送数据写法
 import { parseDeviceCode } from "../utils/parseDeviceCode";
-import { walletAPI, marketAPI } from "../env/apiEndpoints";
+import { accountAPI, marketAPI } from "../env/apiEndpoints";
 import { bluetoothConfig } from "../env/bluetoothConfig";
 
 const serviceUUID = bluetoothConfig.serviceUUID;
@@ -240,7 +240,7 @@ function VaultScreen({ route, navigation }) {
             address: card.address,
           };
 
-          const response = await fetch(walletAPI.balance, {
+          const response = await fetch(accountAPI.balance, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

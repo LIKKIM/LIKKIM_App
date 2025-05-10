@@ -48,7 +48,7 @@ import ActionButtons from "./ActivityScreen/ActionButtons";
 // 自定义组件
 import displayDeviceAddress from "../utils/displayDeviceAddress";
 import { parseDeviceCode } from "../utils/parseDeviceCode";
-import { walletAPI } from "../env/apiEndpoints";
+import { accountAPI } from "../env/apiEndpoints";
 import { bluetoothConfig } from "../env/bluetoothConfig";
 
 // BLE 常量
@@ -283,7 +283,7 @@ function ActivityScreen() {
           };
 
           try {
-            const response = await fetch(walletAPI.queryTransaction, {
+            const response = await fetch(accountAPI.queryTransaction, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -350,7 +350,7 @@ function ActivityScreen() {
       // 打印发送的 POST 数据
       console.log("🚀 Sending POST data:", JSON.stringify(postData, null, 2));
 
-      const response = await fetch(walletAPI.blockchainFee, {
+      const response = await fetch(accountAPI.blockchainFee, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -419,7 +419,7 @@ function ActivityScreen() {
               // 打印发送的 POST 数据
               console.log("发送的 POST 数据:", postData);
 
-              const response = await fetch(walletAPI.balance, {
+              const response = await fetch(accountAPI.balance, {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
@@ -753,7 +753,7 @@ function ActivityScreen() {
 
           try {
             // 发送 POST 请求到指定的 URL
-            const response = await fetch(walletAPI.broadcastHex, {
+            const response = await fetch(accountAPI.broadcastHex, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -831,7 +831,7 @@ function ActivityScreen() {
 
           // 调用广播交易的 API
           try {
-            const response = await fetch(walletAPI.broadcastHex, {
+            const response = await fetch(accountAPI.broadcastHex, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -1016,7 +1016,7 @@ function ActivityScreen() {
         }
       }
 
-      const walletParamsResponse = await fetch(walletAPI.getSignParam, {
+      const walletParamsResponse = await fetch(accountAPI.getSignParam, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

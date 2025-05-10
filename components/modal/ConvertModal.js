@@ -137,7 +137,7 @@ const ConvertModal = ({
 
       console.log("准备发起Convert请求：", requestBody);
 
-      const response = await fetch(swapAPI.executeConvert, {
+      const response = await fetch(convertAPI.executeConvert, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -208,7 +208,7 @@ const ConvertModal = ({
     };
 
     try {
-      const response = await fetch(swapAPI.queryQuote, {
+      const response = await fetch(convertAPI.queryQuote, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

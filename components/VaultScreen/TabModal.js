@@ -13,7 +13,7 @@ import {
 import PriceChartCom from "../VaultScreen/PriceChartCom";
 import { LinearGradient } from "expo-linear-gradient";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { walletAPI } from "../../env/apiEndpoints";
+import { accountAPI } from "../../env/apiEndpoints";
 
 const TabModal = ({
   activeTab,
@@ -37,7 +37,7 @@ const TabModal = ({
     const fetchActivityLog = async () => {
       if (selectedCrypto && activeTab === "History") {
         try {
-          const response = await fetch(walletAPI.queryTransaction, {
+          const response = await fetch(accountAPI.queryTransaction, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

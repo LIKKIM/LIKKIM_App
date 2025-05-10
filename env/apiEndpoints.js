@@ -1,11 +1,11 @@
 // env/apiEndpoints.js
 
-export const swapAPI = {
+export const convertAPI = {
   queryQuote: "https://swap.likkim.com/api/aggregator/queryQuote",
   executeConvert: "https://swap.likkim.com/api/aggregator/swap",
 };
 
-export const walletAPI = {
+export const accountAPI = {
   queryTransaction: "https://bt.likkim.com/api/wallet/queryTransaction",
   blockchainFee: "https://bt.likkim.com/api/chain/blockchain-fee",
   balance: "https://bt.likkim.com/api/wallet/balance",
@@ -17,7 +17,7 @@ export const marketAPI = {
   exchangeRate: "https://df.likkim.com/api/market/exchange-rate",
   indexTickers: "https://df.likkim.com/api/market/index-tickers",
 };
-export const nftAPI = {
+export const galleryAPI = {
   queryNFTBalance: "https://bt.likkim.com/api/nfts/query-address-balance-fills",
   queryNFTDetails: "https://bt.likkim.com/api/nfts/query-nft-details",
 };
