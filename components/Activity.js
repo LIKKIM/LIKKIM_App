@@ -504,7 +504,7 @@ function ActivityScreen() {
         console.log("已设置以下值:");
         console.log("Balance:", selected.balance);
         console.log("Price in USD:", selected.priceUsd);
-        console.log("Value in USD:", selected.valueUsd);
+        console.log("Estimated value (USD):", selected.valueUsd);
         console.log("Processing Fee:", selected.fee);
       } else {
         console.log(

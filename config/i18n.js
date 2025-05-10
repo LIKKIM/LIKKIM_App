@@ -118,7 +118,7 @@ i18n
           "I lost my password": "I lost my password",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "To reset the app and remove stored data, please uninstall and reinstall it on your phone.",
-          "Value in USD": "Value in USD",
+          "Estimated value (USD)": "Estimated value (USD)",
           Fee: "Fee",
           "Verifying address on your device...":
             "Verifying address on your device...",
@@ -295,7 +295,7 @@ i18n
           "I lost my password": "我忘记了密码",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "若要重置应用并删除存储的数据，请卸载后在手机上重新安装。",
-          "Value in USD": "以美元计值",
+          "Estimated value (USD)": "预估价值（美元）",
           Fee: "手续费用",
           "Waiting for approval on your device...": "正在等待您设备上的批准...",
           "Verifying address on your device...": "正在验证您设备上的地址...",
@@ -468,7 +468,7 @@ i18n
 
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "若要重設應用程式並移除儲存的資料，請於手機上解除安裝後重新安裝。",
-          "Value in USD": "以美元計值",
+          "Estimated value (USD)": "預估價值（美元）",
           Fee: "手续費用",
           "Waiting for approval on your device...": "正在等待您裝置上的核准...",
           "Verifying address on your device...": "正在驗證您裝置上的地址...",
@@ -660,7 +660,7 @@ i18n
           "I lost my password": "J'ai perdu mon mot de passe",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "Pour réinitialiser l'application et supprimer les données enregistrées, veuillez la désinstaller puis la réinstaller sur votre téléphone.",
-          "Value in USD": "Valeur en USD",
+          "Estimated value (USD)": "Valeur estimée (USD)",
           Fee: "Frais",
           "Waiting for approval on your device...":
             "En attente d'approbation sur votre appareil...",
@@ -849,7 +849,7 @@ i18n
           "I lost my password": "Perdí mi contraseña",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "Para restablecer la aplicación y eliminar los datos almacenados, desinstálala y vuelve a instalarla en tu teléfono.",
-          "Value in USD": "Valor en USD",
+          "Estimated value (USD)": "Valor estimado (USD)",
           Fee: "Tarifa",
           "Verifying address on your device...":
             "Verificando la dirección en su dispositivo...",
@@ -1025,7 +1025,7 @@ i18n
           "I lost my password": "فقدت كلمة المرور الخاصة بي",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "لإعادة ضبط التطبيق وإزالة البيانات المخزنة، يُرجى إلغاء تثبيته وإعادة تثبيته على هاتفك.",
-          "Value in USD": "القيمة بالدولار الأمريكي",
+          "Estimated value (USD)": "القيمة التقديرية (دولار أمريكي)",
           Fee: "رسوم",
           "Waiting for approval on your device...":
             "بانتظار الموافقة على جهازك...",
@@ -1223,7 +1223,7 @@ i18n
           "Success!": "成功！",
           "Enable Face ID": "Face IDを有効にする",
           "I lost my password": "パスワードを忘れた",
-          "Value in USD": "米ドルでの値",
+          "Estimated value (USD)": "推定価値（USD）",
           Fee: "手数料",
           "Your device is already verified.":
             "お使いのデバイスは既に認証されています。",
@@ -1400,7 +1400,7 @@ i18n
           "I lost my password": "Я забыл свой пароль",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "Чтобы сбросить приложение и удалить сохранённые данные, удалите его и переустановите на вашем телефоне.",
-          "Value in USD": "Значение в долларах США",
+          "Estimated value (USD)": "Оценочная стоимость (USD)",
           Fee: "Комиссия",
           "Waiting for approval on your device...":
             "Ожидание одобрения на вашем устройстве...",
@@ -1575,7 +1575,7 @@ i18n
           "I lost my password": "비밀번호를 잊어버렸습니다",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "앱을 초기화하고 저장된 데이터를 제거하려면 휴대폰에서 앱을 삭제한 후 다시 설치하세요.",
-          "Value in USD": "미국 달러로 된 값",
+          "Estimated value (USD)": "예상 가치 (USD)",
           Fee: "수수료",
           "Verifying address on your device...":
             "기기에서 주소를 확인하는 중...",
@@ -1933,7 +1933,7 @@ i18n
           "I lost my password": "Perdi minha senha",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "Para redefinir o aplicativo e remover os dados armazenados, desinstale-o e reinstale-o no seu celular.",
-          "Value in USD": "Valor em USD",
+          "Estimated value (USD)": "Valor estimado (USD)",
           Fee: "Taxa",
           "Verifying address on your device...":
             "Verificando o endereço no seu dispositivo...",
@@ -2130,7 +2130,7 @@ i18n
           "I lost my password": "Ho perso la mia password",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "Per reimpostare l'app e rimuovere i dati salvati, disinstallala e reinstallala sul tuo telefono.",
-          "Value in USD": "Valore in USD",
+          "Estimated value (USD)": "Valore stimato (USD)",
           Fee: "Commissione",
           "Verifying address on your device...":
             "Verifica dell'indirizzo sul tuo dispositivo...",
@@ -2311,7 +2311,7 @@ i18n
           "I lost my password": "Ich habe mein Passwort verloren",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "Um die App zurückzusetzen und gespeicherte Daten zu entfernen, deinstallieren Sie sie bitte und installieren Sie sie erneut auf Ihrem Telefon.",
-          "Value in USD": "Wert in USD",
+          "Estimated value (USD)": "Geschätzter Wert (USD)",
           Fee: "Gebühr",
           "Verifying address on your device...":
             "Adresse auf Ihrem Gerät wird überprüft...",
@@ -2490,7 +2490,7 @@ i18n
           "I lost my password": "मैंने अपना पासवर्ड खो दिया है",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "ऐप को रीसेट करने और संग्रहीत डेटा हटाने के लिए, कृपया इसे अपने फ़ोन से अनइंस्टॉल करके दोबारा इंस्टॉल करें।",
-          "Value in USD": "यूएसडी में मूल्य",
+          "Estimated value (USD)": "अनुमानित मूल्य (USD)",
           Fee: "शुल्क",
           "Verifying address on your device...":
             "आपके डिवाइस पर पता सत्यापित किया जा रहा है...",
@@ -2669,7 +2669,7 @@ i18n
           "Screen lock enabled successfully": "เปิดการล็อคหน้าจอเรียบร้อยแล้ว",
           "Success!": "สำเร็จ!",
           "Enable Face ID": "เปิดใช้งาน Face ID",
-
+          "Estimated value (USD)": "Тооцоолсон үнэ (USD)",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "Аппликейшнийг дахин тохируулах болон хадгалагдсан өгөгдлийг устгахын тулд гар утсандаа апп-аа устгаад дахин суулгана уу.",
 
@@ -2843,7 +2843,7 @@ i18n
           "I lost my password": "ฉันลืมรหัสผ่าน",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "หากต้องการรีเซ็ตแอปและลบข้อมูลที่จัดเก็บไว้ โปรดยกเลิกการติดตั้งและติดตั้งใหม่บนโทรศัพท์ของคุณ",
-          "Value in USD": "มูลค่าในสกุลเงิน USD",
+          "Estimated value (USD)": "มูลค่าประมาณ (USD)",
           Fee: "ค่าธรรมเนียม",
           "Verifying address on your device...":
             "Đang xác minh địa chỉ trên thiết bị của bạn...",
@@ -3018,7 +3018,7 @@ i18n
           "I lost my password": "Я забув свій пароль",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "Щоб скинути застосунок і видалити збережені дані, будь ласка, видаліть його і перевстановіть на телефоні.",
-          "Value in USD": "Значення в доларах США",
+          "Estimated value (USD)": "Орієнтовна вартість (USD)",
           Fee: "Комісія",
           "Waiting for approval on your device...":
             "Очікується підтвердження на вашому пристрої...",
@@ -3194,7 +3194,7 @@ i18n
           "I lost my password": "Tôi quên mật khẩu",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "Để đặt lại ứng dụng và xóa dữ liệu đã lưu, vui lòng gỡ cài đặt và cài đặt lại trên điện thoại của bạn.",
-          "Value in USD": "Giá trị bằng USD",
+          "Estimated value (USD)": "Giá trị ước tính (USD)",
           Fee: "Phí",
           "Verifying address on your device...":
             "Đang xác minh địa chỉ trên thiết bị của bạn...",
@@ -3372,7 +3372,7 @@ i18n
           "I lost my password": "Saya kehilangan kata sandi saya",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "Untuk mengatur ulang aplikasi dan menghapus data yang tersimpan, silakan hapus instalan dan instal ulang di ponsel Anda.",
-          "Value in USD": "Nilai dalam USD",
+          "Estimated value (USD)": "Perkiraan nilai (USD)",
           Fee: "Biaya",
           "Waiting for approval on your device...":
             "Menunggu persetujuan di perangkat Anda...",
@@ -3551,7 +3551,7 @@ i18n
           "I lost my password": "Nawala ko ang aking password",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "Upang i-reset ang app at alisin ang nakaimbak na data, mangyaring i-uninstall at muling i-install ito sa iyong telepono.",
-          "Value in USD": "Halaga sa USD",
+          "Estimated value (USD)": "Tinatayang halaga (USD)",
           Fee: "Bayad",
           "Waiting for approval on your device...":
             "Naghihintay ng pag-apruba sa iyong device...",
@@ -3731,7 +3731,7 @@ i18n
           "I lost my password": "আমি আমার পাসওয়ার্ড হারিয়েছি",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "অ্যাপটি রিসেট করতে এবং সংরক্ষিত ডেটা মুছে ফেলতে, অনুগ্রহ করে আপনার ফোনে এটি আনইনস্টল করে পুনরায় ইনস্টল করুন।",
-          "Value in USD": "ইউএসডি-তে মান",
+          "Estimated value (USD)": "আনুমানিক মূল্য (USD)",
           Fee: "ফি",
           "Waiting for approval on your device...":
             "আপনার ডিভাইসে অনুমোদনের অপেক্ষায়...",
