@@ -132,8 +132,8 @@ i18n
           "Bank-level security for your digital assets.":
             "Bank-level security for your digital assets.",
           "Manage Your Assets": "Manage Your Assets",
-          "Easily manage multiple cryptocurrencies.":
-            "Easily manage multiple cryptocurrencies.",
+          "Easily manage multiple asset types.":
+            "Easily manage multiple asset types.",
           Welcome: "Welcome",
           "Your secure and intuitive companion app.":
             "Your secure and intuitive companion app.",
@@ -308,10 +308,8 @@ i18n
           "Secure and Reliable": "安全可靠",
           "Bank-level security for your digital assets.":
             "银行级别的数字资产安全。",
-          "Manage Your Assets": "管理您的资产",
-          "Easily manage multiple cryptocurrencies.": "轻松管理多种加密货币。",
+          "Easily manage multiple asset types.": "轻松管理多种类型的资产。",
           Welcome: "欢迎",
-
           "Address Copied to Clipboard": "地址已复制到剪贴板",
           "No devices found": "未找到设备，请配对设备后查看。",
           "Fetching address...": "正在获取地址...",
@@ -485,7 +483,7 @@ i18n
           "Bank-level security for your digital assets.":
             "銀行級的數位資產安全。",
           "Manage Your Assets": "管理您的資產",
-          "Easily manage multiple cryptocurrencies.": "輕鬆管理多種加密貨幣。",
+          "Easily manage multiple asset types.": "輕鬆管理多種類型的資產。",
           Welcome: "歡迎",
           "Your secure and intuitive companion app.":
             "您安全且直覺的硬體伴侶應用程式。",
@@ -679,8 +677,8 @@ i18n
           "Bank-level security for your digital assets.":
             "Sécurité de niveau bancaire pour vos actifs numériques.",
           "Manage Your Assets": "Gérez vos actifs",
-          "Easily manage multiple cryptocurrencies.":
-            "Gérez facilement plusieurs cryptomonnaies.",
+          "Easily manage multiple asset types.":
+            "Gérez facilement plusieurs types d’actifs.",
           Welcome: "Bienvenue",
           "Your secure and intuitive companion app.":
             "Votre application compagnon matérielle sécurisée et intuitive.",
@@ -869,8 +867,8 @@ i18n
           "Bank-level security for your digital assets.":
             "Seguridad a nivel bancario para tus activos digitales.",
           "Manage Your Assets": "Administra tus activos",
-          "Easily manage multiple cryptocurrencies.":
-            "Gestiona fácilmente múltiples criptomonedas.",
+          "Easily manage multiple asset types.":
+            "Administra fácilmente varios tipos de activos.",
           Welcome: "Bienvenido",
           "Your secure and intuitive companion app.":
             "Tu aplicación complementaria de hardware, segura e intuitiva.",
@@ -1047,8 +1045,8 @@ i18n
           "Bank-level security for your digital assets.":
             "أمان بمستوى البنوك لأصولك الرقمية.",
           "Manage Your Assets": "إدارة أصولك",
-          "Easily manage multiple cryptocurrencies.":
-            "إدارة سهلة لعدة عملات مشفرة.",
+          "Easily manage multiple asset types.":
+            "إدارة أنواع متعددة من الأصول بسهولة.",
           Welcome: "مرحبًا",
           "Your secure and intuitive companion app.":
             "تطبيقك المرافق للأجهزة الآمن والبديهي.",
@@ -1244,8 +1242,8 @@ i18n
           "Bank-level security for your digital assets.":
             "デジタル資産のための銀行レベルのセキュリティ。",
           "Manage Your Assets": "資産を管理する",
-          "Easily manage multiple cryptocurrencies.":
-            "複数の暗号通貨を簡単に管理。",
+          "Easily manage multiple asset types.":
+            "複数の資産タイプを簡単に管理できます。",
           Welcome: "ようこそ",
           "Your secure and intuitive companion app.":
             "安全で直感的なハードウェア連携アプリです。",
@@ -1424,8 +1422,8 @@ i18n
           "Bank-level security for your digital assets.":
             "Банковский уровень безопасности для ваших цифровых активов.",
           "Manage Your Assets": "Управляйте своими активами",
-          "Easily manage multiple cryptocurrencies.":
-            "Легко управляйте несколькими криптовалютами.",
+          "Easily manage multiple asset types.":
+            "Легко управляйте различными типами активов.",
           Welcome: "Добро пожаловать",
           "Your secure and intuitive companion app.":
             "Ваше безопасное и интуитивно понятное приложение-компаньон для оборудования.",
@@ -1598,8 +1596,8 @@ i18n
           "Bank-level security for your digital assets.":
             "디지털 자산을 위한 은행 수준의 보안.",
           "Manage Your Assets": "자산 관리",
-          "Easily manage multiple cryptocurrencies.":
-            "여러 암호화폐를 쉽게 관리하세요.",
+          "Easily manage multiple asset types.":
+            "여러 자산 유형을 손쉽게 관리하세요.",
           Welcome: "환영합니다",
           "Your secure and intuitive companion app.":
             "안전하고 직관적인 하드웨어 동반 앱입니다.",
@@ -1777,8 +1775,8 @@ i18n
           "Bank-level security for your digital assets.":
             "Segurança de nível bancário para seus ativos digitais.",
           "Manage Your Assets": "Gerir os seus ativos",
-          "Easily manage multiple cryptocurrencies.":
-            "Gerencie facilmente várias criptomoedas.",
+          "Easily manage multiple asset types.":
+            "Gira facilmente vários tipos de ativos.",
           Welcome: "Bem-vindo",
           "Your secure and intuitive companion app.":
             "A sua aplicação companheira de hardware, segura e intuitiva.",
@@ -1959,8 +1957,8 @@ i18n
           "Bank-level security for your digital assets.":
             "Segurança de nível bancário para seus ativos digitais.",
           "Manage Your Assets": "Gerencie seus ativos",
-          "Easily manage multiple cryptocurrencies.":
-            "Gerencie facilmente várias criptomoedas.",
+          "Easily manage multiple asset types.":
+            "Gerencie facilmente vários tipos de ativos.",
           Welcome: "Bem-vindo",
           "Your secure and intuitive companion app.":
             "Seu aplicativo companheiro de hardware, seguro e intuitivo.",
@@ -2157,8 +2155,8 @@ i18n
           "Bank-level security for your digital assets.":
             "Sicurezza a livello bancario per i tuoi beni digitali.",
           "Manage Your Assets": "Gestisci i tuoi asset",
-          "Easily manage multiple cryptocurrencies.":
-            "Gestisci facilmente più criptovalute.",
+          "Easily manage multiple asset types.":
+            "Gestisci facilmente diversi tipi di asset.",
           Welcome: "Benvenuto",
           "Your secure and intuitive companion app.":
             "La tua app sicura e intuitiva per dispositivi hardware.",
@@ -2339,8 +2337,8 @@ i18n
           "Bank-level security for your digital assets.":
             "Banksicherheit für Ihre digitalen Vermögenswerte.",
           "Manage Your Assets": "Verwalten Sie Ihre Vermögenswerte",
-          "Easily manage multiple cryptocurrencies.":
-            "Verwalten Sie problemlos mehrere Kryptowährungen.",
+          "Easily manage multiple asset types.":
+            "Verwalten Sie ganz einfach verschiedene Arten von Vermögenswerten.",
           Welcome: "Willkommen",
           "Your secure and intuitive companion app.":
             "Ihre sichere und intuitive Hardware-Begleit-App.",
@@ -2519,8 +2517,8 @@ i18n
           "Bank-level security for your digital assets.":
             "आपकी डिजिटल संपत्तियों के लिए बैंक-स्तरीय सुरक्षा।",
           "Manage Your Assets": "अपनी संपत्तियाँ प्रबंधित करें",
-          "Easily manage multiple cryptocurrencies.":
-            "आसानी से कई क्रिप्टोकरेंसियों का प्रबंधन करें।",
+          "Easily manage multiple asset types.":
+            "एक से अधिक संपत्ति प्रकार को आसानी से प्रबंधित करें।",
           Welcome: "स्वागत है",
           "Your secure and intuitive companion app.":
             "आपका सुरक्षित और सहज हार्डवेयर साथी ऐप।",
@@ -2697,8 +2695,8 @@ i18n
           "Bank-level security for your digital assets.":
             "Таны цахим хөрөнгөд зориулсан банкны түвшний аюулгүй байдал.",
           "Manage Your Assets": "Өөрийн хөрөнгийг удирдах",
-          "Easily manage multiple cryptocurrencies.":
-            "Олон криптовалютуудыг хялбар удирда.",
+          "Easily manage multiple asset types.":
+            "Олон төрлийн хөрөнгийг хялбархан удирдаарай.",
           Welcome: "Тавтай морилно уу",
           "Your secure and intuitive companion app.":
             "Таны аюулгүй, ойлгомжтой тоног төхөөрөмжийн хамтрагч аппликейшн.",
@@ -2873,8 +2871,8 @@ i18n
           "Bank-level security for your digital assets.":
             "ความปลอดภัยระดับธนาคารสำหรับทรัพย์สินดิจิทัลของคุณ.",
           "Manage Your Assets": "จัดการสินทรัพย์ของคุณ",
-          "Easily manage multiple cryptocurrencies.":
-            "จัดการคริปโตเคอร์เรนซี่หลายอย่างได้ง่ายดาย.",
+          "Easily manage multiple asset types.":
+            "จัดการสินทรัพย์หลายประเภทได้อย่างง่ายดาย",
           Welcome: "ยินดีต้อนรับ",
           "Your secure and intuitive companion app.":
             "แอปคู่หูฮาร์ดแวร์ที่ปลอดภัยและใช้งานง่ายของคุณ",
@@ -3050,8 +3048,8 @@ i18n
           "Bank-level security for your digital assets.":
             "Банківський рівень безпеки для ваших цифрових активів.",
           "Manage Your Assets": "Керуйте своїми активами",
-          "Easily manage multiple cryptocurrencies.":
-            "Легко керуйте декількома криптовалютами.",
+          "Easily manage multiple asset types.":
+            "Легко керуйте кількома типами активів.",
           Welcome: "Ласкаво просимо",
           "Your secure and intuitive companion app.":
             "Ваш надійний і зручний додаток-компаньйон для пристрою.",
@@ -3226,8 +3224,8 @@ i18n
           "Bank-level security for your digital assets.":
             "Bảo mật cấp ngân hàng cho tài sản số của bạn.",
           "Manage Your Assets": "Quản lý tài sản của bạn",
-          "Easily manage multiple cryptocurrencies.":
-            "Dễ dàng quản lý nhiều loại tiền điện tử.",
+          "Easily manage multiple asset types.":
+            "Quản lý dễ dàng nhiều loại tài sản.",
           Welcome: "Chào mừng",
           "Your secure and intuitive companion app.":
             "Ứng dụng đồng hành phần cứng an toàn và dễ sử dụng của bạn.",
@@ -3407,8 +3405,8 @@ i18n
           "Bank-level security for your digital assets.":
             "Keamanan tingkat bank untuk aset digital Anda.",
           "Manage Your Assets": "Kelola aset Anda",
-          "Easily manage multiple cryptocurrencies.":
-            "Mudah mengelola berbagai mata uang kripto.",
+          "Easily manage multiple asset types.":
+            "Kelola berbagai jenis aset dengan mudah.",
           Welcome: "Selamat Datang",
           "Your secure and intuitive companion app.":
             "Aplikasi pendamping perangkat keras Anda yang aman dan intuitif.",
@@ -3587,8 +3585,8 @@ i18n
           "Bank-level security for your digital assets.":
             "Seguridad na antas bangko para sa iyong mga digital asset.",
           "Manage Your Assets": "Pamahalaan ang iyong mga asset",
-          "Easily manage multiple cryptocurrencies.":
-            "Madaling pamahalaan ang maramihang mga cryptocurrency.",
+          "Easily manage multiple asset types.":
+            "Madaling pamahalaan ang maraming uri ng asset.",
           Welcome: "Maligayang Pagdating",
           "Your secure and intuitive companion app.":
             "Ang iyong ligtas at madaling gamitin na hardware companion app.",
@@ -3768,8 +3766,8 @@ i18n
           "Bank-level security for your digital assets.":
             "আপনার ডিজিটাল সম্পদের জন্য ব্যাঙ্ক-স্তরের নিরাপত্তা।",
           "Manage Your Assets": "আপনার সম্পদ পরিচালনা করুন",
-          "Easily manage multiple cryptocurrencies.":
-            "সহজেই একাধিক ক্রিপ্টোকারেন্সি পরিচালনা করুন।",
+          "Easily manage multiple asset types.":
+            "একাধিক সম্পদের ধরন সহজেই পরিচালনা করুন।",
           Welcome: "स्वागत है",
           "Your secure and intuitive companion app.":
             "আপনার নিরাপদ এবং স্বজ্ঞাত হার্ডওয়্যার সহায়ক অ্যাপ।",

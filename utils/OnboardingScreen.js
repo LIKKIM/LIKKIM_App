@@ -51,7 +51,7 @@ const OnboardingScreen = ({ onDone }) => {
     {
       key: "slide2",
       title: i18n.t("Manage Your Assets"),
-      text: i18n.t("Easily manage multiple cryptocurrencies."),
+      text: i18n.t("Easily manage multiple asset types."),
       image: require("../assets/slider/slider2.png"),
     },
     {
