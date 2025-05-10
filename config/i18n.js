@@ -59,20 +59,15 @@ i18n
           Remove: "Remove",
           "Security in your hands": "Security in your hands",
           Continue: "Continue",
-
           "Scroll down to view all words": "Scroll down to view all words",
-
           "Generating your accounts": "Generating your accounts",
           "Encrypting your data": "Encrypting your data",
-
           "Let's Go": "Let's Go",
           "Use spaces between words": "Use spaces between words",
-
           Version: "Version",
           "Assets can only be sent within the same chain.":
             "Assets can only be sent within the same chain.",
           "Firmware Update": "Firmware Update",
-
           "No data available": "No data available",
           "Search Currency": "Search Currency",
           "Search Cryptocurrency": "Search Cryptocurrency",
@@ -117,7 +112,6 @@ i18n
           "Processing Fee": "Processing Fee",
           Confirm: "Confirm",
           "Waiting for Confirmation": "Waiting for Confirmation",
-
           "Screen lock enabled successfully":
             "Screen lock enabled successfully",
           "Success!": "Success!",
@@ -127,15 +121,12 @@ i18n
             "To reset the app and remove stored data, please uninstall and reinstall it on your phone.",
           "Value in USD": "Value in USD",
           Fee: "Fee",
-
           "Verifying address on your device...":
             "Verifying address on your device...",
-
           "Your device is already verified.":
             "Your device is already verified.",
-
           "Address Book": "Address Book",
-          Swap: "Swap",
+          Exchange: "Exchange",
           Skip: "Skip",
           "Start Exploring": "Start Exploring",
           "Secure and Reliable": "Secure and Reliable",
@@ -177,7 +168,6 @@ i18n
           "Insufficient Balance": "Insufficient Balance",
           "Waiting for approval on your device...":
             "Waiting for approval on your device...",
-
           Save: "Save",
           Address: "Address",
           "Add Address": "Add Address",
@@ -313,7 +303,7 @@ i18n
           "Verifying address on your device...": "正在验证您设备上的地址...",
           "Your device is already verified.": "您的设备已验证。",
           "Address Book": "地址簿",
-          Swap: "闪兑",
+          Exchange: "闪兑",
           Skip: "跳过",
           "Start Exploring": "开始探索",
           "Secure and Reliable": "安全可靠",
@@ -491,7 +481,7 @@ i18n
           "Verifying address on your device...": "正在驗證您裝置上的地址...",
           "Your device is already verified.": "您的設備已驗證。",
           "Address Book": "地址簿",
-          Swap: "交換",
+          Exchange: "交換",
           Skip: "跳過",
           "Start Exploring": "開始探索",
           "Secure and Reliable": "安全可靠",
@@ -687,7 +677,7 @@ i18n
           "Your device is already verified.":
             "Votre appareil est déjà vérifié.",
           "Address Book": "Carnet d'adresses",
-          Swap: "Échanger",
+          Exchange: "Échanger",
           Skip: "Passer",
           "Start Exploring": "Commencer à explorer",
           "Secure and Reliable": "Sécurisé et fiable",
@@ -879,7 +869,7 @@ i18n
           "Your device is already verified.":
             "Su dispositivo ya está verificado.",
           "Address Book": "Libreta de direcciones",
-          Swap: "Intercambiar",
+          Exchange: "Intercambiar",
           Skip: "Omitir",
           "Start Exploring": "Comenzar a explorar",
           "Secure and Reliable": "Seguro y confiable",
@@ -1059,7 +1049,7 @@ i18n
             "جارٍ التحقق من العنوان على جهازك...",
           "Your device is already verified.": "تم التحقق من جهازك بالفعل.",
           "Address Book": "دفتر العناوين",
-          Swap: "تبادل",
+          Exchange: "تبادل",
           Skip: "تخطي",
           "Start Exploring": "ابدأ الاستكشاف",
           "Secure and Reliable": "آمن وموثوق",
@@ -1258,7 +1248,7 @@ i18n
             "お使いのデバイスは既に認証されています。",
 
           "Address Book": "アドレス帳",
-          Swap: "スワップ",
+          Exchange: "スワップ",
           Skip: "スキップ",
           "Start Exploring": "探索を始める",
           "Secure and Reliable": "安全で信頼性の高い",
@@ -1440,7 +1430,7 @@ i18n
             "Проверка адреса на вашем устройстве...",
           "Your device is already verified.": "Ваше устройство уже проверено.",
           "Address Book": "Адресная книга",
-          Swap: "Обмен",
+          Exchange: "Обмен",
           Skip: "Пропустить",
           "Start Exploring": "Начать исследование",
           "Secure and Reliable": "Надежно и безопасно",
@@ -1616,7 +1606,7 @@ i18n
             "기기에서 주소를 확인하는 중...",
           "Your device is already verified.": "장치가 이미 확인되었습니다.",
           "Address Book": "주소록",
-          Swap: "스왑",
+          Exchange: "스왑",
           Skip: "건너뛰기",
           "Start Exploring": "탐색 시작",
           "Secure and Reliable": "안전하고 신뢰성 있음",
@@ -1797,7 +1787,7 @@ i18n
           "Your device is already verified.":
             "Seu dispositivo já está verificado.",
           "Address Book": "Livro de Endereços",
-          Swap: "Trocar",
+          Exchange: "Trocar",
           Skip: "Pular",
           "Start Exploring": "Começar a Explorar",
           "Secure and Reliable": "Seguro e Confiável",
@@ -1981,7 +1971,7 @@ i18n
           "Your device is already verified.":
             "Seu dispositivo já está verificado.",
           "Address Book": "Livro de Endereços",
-          Swap: "Trocar",
+          Exchange: "Trocar",
           Skip: "Pular",
           "Start Exploring": "Comece a Explorar",
           "Secure and Reliable": "Seguro e Confiável",
@@ -2181,7 +2171,7 @@ i18n
           "Your device is already verified.":
             "Il tuo dispositivo è già verificato.",
           "Address Book": "Rubrica",
-          Swap: "Scambiare",
+          Exchange: "Scambiare",
           Skip: "Salta",
           "Start Exploring": "Inizia a esplorare",
           "Secure and Reliable": "Sicuro e affidabile",
@@ -2365,7 +2355,7 @@ i18n
           "Your device is already verified.":
             "Ihr Gerät ist bereits verifiziert.",
           "Address Book": "Adressbuch",
-          Swap: "Tauschen",
+          Exchange: "Tauschen",
           Skip: "Überspringen",
           "Start Exploring": "Erkunden beginnen",
           "Secure and Reliable": "Sicher und zuverlässig",
@@ -2547,7 +2537,7 @@ i18n
           "Your device is already verified.":
             "आपका डिवाइस पहले ही सत्यापित हो चुका है।",
           "Address Book": "पता पुस्तिका",
-          Swap: "विनिमय",
+          Exchange: "विनिमय",
           Skip: "छोड़ें",
           "Start Exploring": "खोज शुरू करें",
           "Secure and Reliable": "सुरक्षित और विश्वसनीय",
@@ -2727,7 +2717,7 @@ i18n
 
           Fee: "Хураамж",
           "Address Book": "Хаягийн дэвтэр",
-          Swap: "Солилцоо",
+          Exchange: "Солилцоо",
           Skip: "Алгасах",
           "Start Exploring": "Судлахаа эхлээрэй",
           "Secure and Reliable": "Аюулгүй ба найдвартай",
@@ -2905,7 +2895,7 @@ i18n
           "Your device is already verified.":
             "อุปกรณ์ของคุณได้รับการยืนยันแล้ว",
           "Address Book": "สมุดที่อยู่",
-          Swap: "แลกเปลี่ยน",
+          Exchange: "แลกเปลี่ยน",
           Skip: "ข้าม",
           "Start Exploring": "เริ่มการสำรวจ",
           "Secure and Reliable": "ปลอดภัยและเชื่อถือได้",
@@ -3084,7 +3074,7 @@ i18n
             "Перевірка адреси на вашому пристрої...",
           "Your device is already verified.": "Ваш пристрій вже перевірено.",
           "Address Book": "Адресна книга",
-          Swap: "Обмін",
+          Exchange: "Обмін",
           Skip: "Пропустити",
           "Start Exploring": "Розпочати огляд",
           "Secure and Reliable": "Безпечний та надійний",
@@ -3262,7 +3252,7 @@ i18n
           "Your device is already verified.":
             "Thiết bị của bạn đã được xác minh.",
           "Address Book": "Sổ địa chỉ",
-          Swap: "Hoán đổi",
+          Exchange: "Hoán đổi",
           Skip: "Bỏ qua",
           "Start Exploring": "Bắt đầu khám phá",
           "Secure and Reliable": "An toàn và Đáng tin cậy",
@@ -3445,7 +3435,7 @@ i18n
           "Your device is already verified.":
             "Perangkat Anda sudah diverifikasi.",
           "Address Book": "Buku Alamat",
-          Swap: "Tukar",
+          Exchange: "Tukar",
           Skip: "Lewati",
           "Start Exploring": "Mulai Jelajahi",
           "Secure and Reliable": "Aman dan Terpercaya",
@@ -3627,7 +3617,7 @@ i18n
           "Your device is already verified.":
             "Ang iyong device ay napatunayan na.",
           "Address Book": "Aklat ng mga Adresa",
-          Swap: "Palitan",
+          Exchange: "Palitan",
           Skip: "Laktawan",
           "Start Exploring": "Simulang Mag-explore",
           "Secure and Reliable": "Ligtas at Mapagkakatiwalaan",
@@ -3810,7 +3800,7 @@ i18n
           "Your device is already verified.":
             "আপনার ডিভাইসটি ইতিমধ্যেই যাচাই করা হয়েছে।",
           "Address Book": "ঠিকানা বই",
-          Swap: "বিনিময়",
+          Exchange: "বিনিময়",
           Skip: "এড়িয়ে যান",
           "Start Exploring": "অন্বেষণ শুরু করুন",
           "Secure and Reliable": "নিরাপদ ও নির্ভরযোগ্য",

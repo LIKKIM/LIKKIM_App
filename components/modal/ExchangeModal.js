@@ -19,10 +19,10 @@ import { MaterialIcons as Icon } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
-const SwapModal = ({
+const ExchangeModal = ({
   isDarkMode,
   visible,
-  setSwapModalVisible,
+  setExchangeModalVisible,
   fromDropdownVisible,
   setFromDropdownVisible,
   toDropdownVisible,
@@ -97,13 +97,13 @@ const SwapModal = ({
         .includes(searchToToken.toLowerCase());
     });
 
-  const handleConfirmSwap = async () => {
+  const handleConfirmExchange = async () => {
     if (!selectedFromToken || !selectedToToken || !fromValue) {
-      console.log("缺少必要参数，无法执行Swap");
+      console.log("缺少必要参数，无法执行Exchange");
       return;
     }
 
-    setSwapModalVisible(false);
+    setExchangeModalVisible(false);
     setConfirmModalVisible(true);
     try {
       const fromDetails = getTokenDetails(selectedFromToken);
@@ -135,9 +135,9 @@ const SwapModal = ({
         provider: "openocean",
       };
 
-      console.log("准备发起Swap请求：", requestBody);
+      console.log("准备发起Exchange请求：", requestBody);
 
-      const response = await fetch(swapAPI.executeSwap, {
+      const response = await fetch(swapAPI.executeExchange, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -149,13 +149,13 @@ const SwapModal = ({
       }
 
       const responseData = await response.json();
-      console.log("Swap API返回：", responseData);
+      console.log("Exchange API返回：", responseData);
 
       if (responseData?.code === "0") {
-        console.log("Swap成功");
+        console.log("Exchange成功");
         console.log("交易签名Data：", responseData.data?.data);
 
-        // 👉 新增：把Swap返回的data封装成sign消息发给设备
+        // 👉 新增：把Exchange返回的data封装成sign消息发给设备
         const hexToSign = responseData.data.data;
         const chainKey = "ethereum"; // 这里先固定，如果以后支持其他链，记得做成动态
         const path = "m/44'/60'/0'/0/0"; // 你的默认BIP44路径
@@ -169,12 +169,12 @@ const SwapModal = ({
           writeCharacteristicUUID,
           signBase64
         );
-        console.log("Swap的sign消息已发送给设备等待签名...");
+        console.log("Exchange的sign消息已发送给设备等待签名...");
       } else {
-        console.log("Swap失败", responseData?.message || "未知错误");
+        console.log("Exchange失败", responseData?.message || "未知错误");
       }
     } catch (error) {
-      console.log("发送Swap请求异常:", error);
+      console.log("发送Exchange请求异常:", error);
     }
   };
 
@@ -247,16 +247,16 @@ const SwapModal = ({
   };
 
   useEffect(() => {
-    console.log("[SwapModal] useEffect触发了");
+    console.log("[ExchangeModal] useEffect触发了");
     console.log("selectedFromToken:", selectedFromToken);
     console.log("selectedToToken:", selectedToToken);
     console.log("fromValue:", fromValue);
 
     if (selectedFromToken && selectedToToken && !!fromValue) {
-      console.log("[SwapModal] 条件满足，调用 calcRealPrice");
+      console.log("[ExchangeModal] 条件满足，调用 calcRealPrice");
       calcRealPrice();
     } else {
-      console.log("[SwapModal] 条件不满足，暂时不请求价格");
+      console.log("[ExchangeModal] 条件不满足，暂时不请求价格");
     }
   }, [selectedFromToken, selectedToToken, fromValue]);
 
@@ -280,18 +280,20 @@ const SwapModal = ({
 
   return (
     <>
-      {/* Swap Modal */}
+      {/* Exchange Modal */}
       <Modal
         visible={visible}
         transparent={true}
         animationType="slide"
-        onRequestClose={() => setSwapModalVisible(false)}
+        onRequestClose={() => setExchangeModalVisible(false)}
       >
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
           style={{ flex: 1 }}
         >
-          <TouchableWithoutFeedback onPress={() => setSwapModalVisible(false)}>
+          <TouchableWithoutFeedback
+            onPress={() => setExchangeModalVisible(false)}
+          >
             <BlurView intensity={10} style={ActivityScreenStyle.centeredView}>
               <View
                 style={ActivityScreenStyle.modalView}
@@ -576,16 +578,16 @@ const SwapModal = ({
                   )}
                 </View>
 
-                {/* Swap Button */}
+                {/* Exchange Button */}
                 <TouchableOpacity
                   style={ActivityScreenStyle.swapButton}
                   onPress={() => {
-                    // Swap values
+                    // Exchange values
                     const tempValue = fromValue;
                     setFromValue(toValue);
                     setToValue(tempValue);
 
-                    // Swap selected tokens
+                    // Exchange selected tokens
                     const tempToken = selectedFromToken;
                     setSelectedFromToken(selectedToToken);
                     setSelectedToToken(tempToken);
@@ -900,7 +902,7 @@ const SwapModal = ({
                       !(selectedFromToken && selectedToToken && fromValue)
                     }
                     onPress={() => {
-                      setSwapModalVisible(false); // ✅先关闭主Modal
+                      setExchangeModalVisible(false); // ✅先关闭主Modal
                       setConfirmModalVisible(true); // ✅打开二次确认Modal
                     }}
                     style={[
@@ -924,7 +926,7 @@ const SwapModal = ({
                   </TouchableOpacity>
                   {/* Close Button */}
                   <TouchableOpacity
-                    onPress={() => setSwapModalVisible(false)}
+                    onPress={() => setExchangeModalVisible(false)}
                     style={[ActivityScreenStyle.cancelButton]}
                   >
                     <Text style={ActivityScreenStyle.cancelButtonText}>
@@ -1020,7 +1022,7 @@ const SwapModal = ({
                   style={ActivityScreenStyle.optionButton}
                   onPress={async () => {
                     setConfirmModalVisible(false);
-                    await handleConfirmSwap(); // 🔥这里才真正去发起交易
+                    await handleConfirmExchange(); // 🔥这里才真正去发起交易
                   }}
                 >
                   <Text style={ActivityScreenStyle.submitButtonText}>
@@ -1045,4 +1047,4 @@ const SwapModal = ({
   );
 };
 
-export default SwapModal;
+export default ExchangeModal;

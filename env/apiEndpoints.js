@@ -2,7 +2,7 @@
 
 export const swapAPI = {
   queryQuote: "https://swap.likkim.com/api/aggregator/queryQuote",
-  executeSwap: "https://swap.likkim.com/api/aggregator/swap",
+  executeExchange: "https://swap.likkim.com/api/aggregator/swap",
 };
 
 export const walletAPI = {
