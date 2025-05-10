@@ -57,7 +57,7 @@ const OnboardingScreen = ({ onDone }) => {
     {
       key: "slide3",
       title: i18n.t("Secure and Reliable"),
-      text: i18n.t("Bank-level security for your digital assets."),
+      text: i18n.t("Robust security designed for your information."),
       image: require("../assets/slider/slider3.png"),
     },
   ];

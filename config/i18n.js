@@ -129,8 +129,8 @@ i18n
           Skip: "Skip",
           "Start Exploring": "Start Exploring",
           "Secure and Reliable": "Secure and Reliable",
-          "Bank-level security for your digital assets.":
-            "Bank-level security for your digital assets.",
+          "Robust security designed for your information.":
+            "Robust security designed for your information.",
           "Manage Your Assets": "Manage Your Assets",
           "Easily manage multiple asset types.":
             "Easily manage multiple asset types.",
@@ -306,7 +306,7 @@ i18n
           Skip: "跳过",
           "Start Exploring": "开始探索",
           "Secure and Reliable": "安全可靠",
-          "Bank-level security for your digital assets.":
+          "Robust security designed for your information.":
             "银行级别的数字资产安全。",
           "Easily manage multiple asset types.": "轻松管理多种类型的资产。",
           Welcome: "欢迎",
@@ -480,7 +480,7 @@ i18n
           Skip: "跳過",
           "Start Exploring": "開始探索",
           "Secure and Reliable": "安全可靠",
-          "Bank-level security for your digital assets.":
+          "Robust security designed for your information.":
             "銀行級的數位資產安全。",
           "Manage Your Assets": "管理您的資產",
           "Easily manage multiple asset types.": "輕鬆管理多種類型的資產。",
@@ -674,7 +674,7 @@ i18n
           Skip: "Passer",
           "Start Exploring": "Commencer à explorer",
           "Secure and Reliable": "Sécurisé et fiable",
-          "Bank-level security for your digital assets.":
+          "Robust security designed for your information.":
             "Sécurité de niveau bancaire pour vos actifs numériques.",
           "Manage Your Assets": "Gérez vos actifs",
           "Easily manage multiple asset types.":
@@ -864,7 +864,7 @@ i18n
           Skip: "Omitir",
           "Start Exploring": "Comenzar a explorar",
           "Secure and Reliable": "Seguro y confiable",
-          "Bank-level security for your digital assets.":
+          "Robust security designed for your information.":
             "Seguridad a nivel bancario para tus activos digitales.",
           "Manage Your Assets": "Administra tus activos",
           "Easily manage multiple asset types.":
@@ -1042,7 +1042,7 @@ i18n
           Skip: "تخطي",
           "Start Exploring": "ابدأ الاستكشاف",
           "Secure and Reliable": "آمن وموثوق",
-          "Bank-level security for your digital assets.":
+          "Robust security designed for your information.":
             "أمان بمستوى البنوك لأصولك الرقمية.",
           "Manage Your Assets": "إدارة أصولك",
           "Easily manage multiple asset types.":
@@ -1239,7 +1239,7 @@ i18n
           Skip: "スキップ",
           "Start Exploring": "探索を始める",
           "Secure and Reliable": "安全で信頼性の高い",
-          "Bank-level security for your digital assets.":
+          "Robust security designed for your information.":
             "デジタル資産のための銀行レベルのセキュリティ。",
           "Manage Your Assets": "資産を管理する",
           "Easily manage multiple asset types.":
@@ -1419,7 +1419,7 @@ i18n
           Skip: "Пропустить",
           "Start Exploring": "Начать исследование",
           "Secure and Reliable": "Надежно и безопасно",
-          "Bank-level security for your digital assets.":
+          "Robust security designed for your information.":
             "Банковский уровень безопасности для ваших цифровых активов.",
           "Manage Your Assets": "Управляйте своими активами",
           "Easily manage multiple asset types.":
@@ -1593,7 +1593,7 @@ i18n
           Skip: "건너뛰기",
           "Start Exploring": "탐색 시작",
           "Secure and Reliable": "안전하고 신뢰성 있음",
-          "Bank-level security for your digital assets.":
+          "Robust security designed for your information.":
             "디지털 자산을 위한 은행 수준의 보안.",
           "Manage Your Assets": "자산 관리",
           "Easily manage multiple asset types.":
@@ -1772,7 +1772,7 @@ i18n
           Skip: "Pular",
           "Start Exploring": "Começar a Explorar",
           "Secure and Reliable": "Seguro e Confiável",
-          "Bank-level security for your digital assets.":
+          "Robust security designed for your information.":
             "Segurança de nível bancário para seus ativos digitais.",
           "Manage Your Assets": "Gerir os seus ativos",
           "Easily manage multiple asset types.":
@@ -1954,7 +1954,7 @@ i18n
           Skip: "Pular",
           "Start Exploring": "Comece a Explorar",
           "Secure and Reliable": "Seguro e Confiável",
-          "Bank-level security for your digital assets.":
+          "Robust security designed for your information.":
             "Segurança de nível bancário para seus ativos digitais.",
           "Manage Your Assets": "Gerencie seus ativos",
           "Easily manage multiple asset types.":
@@ -2152,7 +2152,7 @@ i18n
           Skip: "Salta",
           "Start Exploring": "Inizia a esplorare",
           "Secure and Reliable": "Sicuro e affidabile",
-          "Bank-level security for your digital assets.":
+          "Robust security designed for your information.":
             "Sicurezza a livello bancario per i tuoi beni digitali.",
           "Manage Your Assets": "Gestisci i tuoi asset",
           "Easily manage multiple asset types.":
@@ -2334,7 +2334,7 @@ i18n
           Skip: "Überspringen",
           "Start Exploring": "Erkunden beginnen",
           "Secure and Reliable": "Sicher und zuverlässig",
-          "Bank-level security for your digital assets.":
+          "Robust security designed for your information.":
             "Banksicherheit für Ihre digitalen Vermögenswerte.",
           "Manage Your Assets": "Verwalten Sie Ihre Vermögenswerte",
           "Easily manage multiple asset types.":
@@ -2514,7 +2514,7 @@ i18n
           Skip: "छोड़ें",
           "Start Exploring": "खोज शुरू करें",
           "Secure and Reliable": "सुरक्षित और विश्वसनीय",
-          "Bank-level security for your digital assets.":
+          "Robust security designed for your information.":
             "आपकी डिजिटल संपत्तियों के लिए बैंक-स्तरीय सुरक्षा।",
           "Manage Your Assets": "अपनी संपत्तियाँ प्रबंधित करें",
           "Easily manage multiple asset types.":
@@ -2692,7 +2692,7 @@ i18n
           Skip: "Алгасах",
           "Start Exploring": "Судлахаа эхлээрэй",
           "Secure and Reliable": "Аюулгүй ба найдвартай",
-          "Bank-level security for your digital assets.":
+          "Robust security designed for your information.":
             "Таны цахим хөрөнгөд зориулсан банкны түвшний аюулгүй байдал.",
           "Manage Your Assets": "Өөрийн хөрөнгийг удирдах",
           "Easily manage multiple asset types.":
@@ -2868,7 +2868,7 @@ i18n
           Skip: "ข้าม",
           "Start Exploring": "เริ่มการสำรวจ",
           "Secure and Reliable": "ปลอดภัยและเชื่อถือได้",
-          "Bank-level security for your digital assets.":
+          "Robust security designed for your information.":
             "ความปลอดภัยระดับธนาคารสำหรับทรัพย์สินดิจิทัลของคุณ.",
           "Manage Your Assets": "จัดการสินทรัพย์ของคุณ",
           "Easily manage multiple asset types.":
@@ -3045,7 +3045,7 @@ i18n
           Skip: "Пропустити",
           "Start Exploring": "Розпочати огляд",
           "Secure and Reliable": "Безпечний та надійний",
-          "Bank-level security for your digital assets.":
+          "Robust security designed for your information.":
             "Банківський рівень безпеки для ваших цифрових активів.",
           "Manage Your Assets": "Керуйте своїми активами",
           "Easily manage multiple asset types.":
@@ -3221,7 +3221,7 @@ i18n
           Skip: "Bỏ qua",
           "Start Exploring": "Bắt đầu khám phá",
           "Secure and Reliable": "An toàn và Đáng tin cậy",
-          "Bank-level security for your digital assets.":
+          "Robust security designed for your information.":
             "Bảo mật cấp ngân hàng cho tài sản số của bạn.",
           "Manage Your Assets": "Quản lý tài sản của bạn",
           "Easily manage multiple asset types.":
@@ -3402,7 +3402,7 @@ i18n
           Skip: "Lewati",
           "Start Exploring": "Mulai Jelajahi",
           "Secure and Reliable": "Aman dan Terpercaya",
-          "Bank-level security for your digital assets.":
+          "Robust security designed for your information.":
             "Keamanan tingkat bank untuk aset digital Anda.",
           "Manage Your Assets": "Kelola aset Anda",
           "Easily manage multiple asset types.":
@@ -3582,7 +3582,7 @@ i18n
           Skip: "Laktawan",
           "Start Exploring": "Simulang Mag-explore",
           "Secure and Reliable": "Ligtas at Mapagkakatiwalaan",
-          "Bank-level security for your digital assets.":
+          "Robust security designed for your information.":
             "Seguridad na antas bangko para sa iyong mga digital asset.",
           "Manage Your Assets": "Pamahalaan ang iyong mga asset",
           "Easily manage multiple asset types.":
@@ -3763,7 +3763,7 @@ i18n
           Skip: "এড়িয়ে যান",
           "Start Exploring": "অন্বেষণ শুরু করুন",
           "Secure and Reliable": "নিরাপদ ও নির্ভরযোগ্য",
-          "Bank-level security for your digital assets.":
+          "Robust security designed for your information.":
             "আপনার ডিজিটাল সম্পদের জন্য ব্যাঙ্ক-স্তরের নিরাপত্তা।",
           "Manage Your Assets": "আপনার সম্পদ পরিচালনা করুন",
           "Easily manage multiple asset types.":
