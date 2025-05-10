@@ -56,7 +56,7 @@ const SelectCryptoModal = ({
                   ? t("No cryptocurrencies available. Please add wallet first.")
                   : operationType === "send"
                   ? t("Select asset to proceed:")
-                  : t("Choose the cryptocurrency to receive:")}
+                  : t("Choose asset type:")}
               </Text>
 
               {addedCryptos.length > 0 && (
