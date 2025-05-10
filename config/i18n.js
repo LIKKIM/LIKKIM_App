@@ -307,7 +307,7 @@ i18n
           "Start Exploring": "开始探索",
           "Secure and Reliable": "安全可靠",
           "Robust security designed for your information.":
-            "银行级别的数字资产安全。",
+            "为您的信息量身打造的强大安全保障。",
           "Easily manage multiple asset types.": "轻松管理多种类型的资产。",
           Welcome: "欢迎",
           "Address Copied to Clipboard": "地址已复制到剪贴板",
@@ -481,7 +481,7 @@ i18n
           "Start Exploring": "開始探索",
           "Secure and Reliable": "安全可靠",
           "Robust security designed for your information.":
-            "銀行級的數位資產安全。",
+            "為您的資訊量身設計的強大安全保障。",
           "Manage Your Assets": "管理您的資產",
           "Easily manage multiple asset types.": "輕鬆管理多種類型的資產。",
           Welcome: "歡迎",
@@ -675,7 +675,7 @@ i18n
           "Start Exploring": "Commencer à explorer",
           "Secure and Reliable": "Sécurisé et fiable",
           "Robust security designed for your information.":
-            "Sécurité de niveau bancaire pour vos actifs numériques.",
+            "Sécurité renforcée conçue pour protéger vos informations.",
           "Manage Your Assets": "Gérez vos actifs",
           "Easily manage multiple asset types.":
             "Gérez facilement plusieurs types d’actifs.",
@@ -865,7 +865,7 @@ i18n
           "Start Exploring": "Comenzar a explorar",
           "Secure and Reliable": "Seguro y confiable",
           "Robust security designed for your information.":
-            "Seguridad a nivel bancario para tus activos digitales.",
+            "Seguridad sólida diseñada para tu información.",
           "Manage Your Assets": "Administra tus activos",
           "Easily manage multiple asset types.":
             "Administra fácilmente varios tipos de activos.",
@@ -1043,7 +1043,7 @@ i18n
           "Start Exploring": "ابدأ الاستكشاف",
           "Secure and Reliable": "آمن وموثوق",
           "Robust security designed for your information.":
-            "أمان بمستوى البنوك لأصولك الرقمية.",
+            "أمان قوي مصمم خصيصًا لمعلوماتك.",
           "Manage Your Assets": "إدارة أصولك",
           "Easily manage multiple asset types.":
             "إدارة أنواع متعددة من الأصول بسهولة.",
@@ -1240,7 +1240,7 @@ i18n
           "Start Exploring": "探索を始める",
           "Secure and Reliable": "安全で信頼性の高い",
           "Robust security designed for your information.":
-            "デジタル資産のための銀行レベルのセキュリティ。",
+            "お客様の情報のために設計された強固なセキュリティ。",
           "Manage Your Assets": "資産を管理する",
           "Easily manage multiple asset types.":
             "複数の資産タイプを簡単に管理できます。",
@@ -1420,7 +1420,7 @@ i18n
           "Start Exploring": "Начать исследование",
           "Secure and Reliable": "Надежно и безопасно",
           "Robust security designed for your information.":
-            "Банковский уровень безопасности для ваших цифровых активов.",
+            "Надёжная защита, разработанная для вашей информации.",
           "Manage Your Assets": "Управляйте своими активами",
           "Easily manage multiple asset types.":
             "Легко управляйте различными типами активов.",
@@ -1594,7 +1594,7 @@ i18n
           "Start Exploring": "탐색 시작",
           "Secure and Reliable": "안전하고 신뢰성 있음",
           "Robust security designed for your information.":
-            "디지털 자산을 위한 은행 수준의 보안.",
+            "귀하의 정보를 위한 강력한 보안 설계.",
           "Manage Your Assets": "자산 관리",
           "Easily manage multiple asset types.":
             "여러 자산 유형을 손쉽게 관리하세요.",
@@ -1773,7 +1773,7 @@ i18n
           "Start Exploring": "Começar a Explorar",
           "Secure and Reliable": "Seguro e Confiável",
           "Robust security designed for your information.":
-            "Segurança de nível bancário para seus ativos digitais.",
+            "Segurança robusta concebida para proteger a sua informação.",
           "Manage Your Assets": "Gerir os seus ativos",
           "Easily manage multiple asset types.":
             "Gira facilmente vários tipos de ativos.",
@@ -1955,7 +1955,7 @@ i18n
           "Start Exploring": "Comece a Explorar",
           "Secure and Reliable": "Seguro e Confiável",
           "Robust security designed for your information.":
-            "Segurança de nível bancário para seus ativos digitais.",
+            "Segurança robusta desenvolvida para proteger suas informações.",
           "Manage Your Assets": "Gerencie seus ativos",
           "Easily manage multiple asset types.":
             "Gerencie facilmente vários tipos de ativos.",
@@ -2153,7 +2153,7 @@ i18n
           "Start Exploring": "Inizia a esplorare",
           "Secure and Reliable": "Sicuro e affidabile",
           "Robust security designed for your information.":
-            "Sicurezza a livello bancario per i tuoi beni digitali.",
+            "Sicurezza solida progettata per proteggere le tue informazioni.",
           "Manage Your Assets": "Gestisci i tuoi asset",
           "Easily manage multiple asset types.":
             "Gestisci facilmente diversi tipi di asset.",
@@ -2335,7 +2335,7 @@ i18n
           "Start Exploring": "Erkunden beginnen",
           "Secure and Reliable": "Sicher und zuverlässig",
           "Robust security designed for your information.":
-            "Banksicherheit für Ihre digitalen Vermögenswerte.",
+            "Robuste Sicherheit, entwickelt für Ihre Informationen.",
           "Manage Your Assets": "Verwalten Sie Ihre Vermögenswerte",
           "Easily manage multiple asset types.":
             "Verwalten Sie ganz einfach verschiedene Arten von Vermögenswerten.",
@@ -2515,7 +2515,7 @@ i18n
           "Start Exploring": "खोज शुरू करें",
           "Secure and Reliable": "सुरक्षित और विश्वसनीय",
           "Robust security designed for your information.":
-            "आपकी डिजिटल संपत्तियों के लिए बैंक-स्तरीय सुरक्षा।",
+            "आपकी जानकारी के लिए डिज़ाइन की गई मज़बूत सुरक्षा।",
           "Manage Your Assets": "अपनी संपत्तियाँ प्रबंधित करें",
           "Easily manage multiple asset types.":
             "एक से अधिक संपत्ति प्रकार को आसानी से प्रबंधित करें।",
@@ -2693,7 +2693,7 @@ i18n
           "Start Exploring": "Судлахаа эхлээрэй",
           "Secure and Reliable": "Аюулгүй ба найдвартай",
           "Robust security designed for your information.":
-            "Таны цахим хөрөнгөд зориулсан банкны түвшний аюулгүй байдал.",
+            "Таны мэдээлэлд зориулсан найдвартай хамгаалалт.",
           "Manage Your Assets": "Өөрийн хөрөнгийг удирдах",
           "Easily manage multiple asset types.":
             "Олон төрлийн хөрөнгийг хялбархан удирдаарай.",
@@ -2869,7 +2869,7 @@ i18n
           "Start Exploring": "เริ่มการสำรวจ",
           "Secure and Reliable": "ปลอดภัยและเชื่อถือได้",
           "Robust security designed for your information.":
-            "ความปลอดภัยระดับธนาคารสำหรับทรัพย์สินดิจิทัลของคุณ.",
+            "การรักษาความปลอดภัยที่แข็งแกร่ง ออกแบบมาเพื่อข้อมูลของคุณ",
           "Manage Your Assets": "จัดการสินทรัพย์ของคุณ",
           "Easily manage multiple asset types.":
             "จัดการสินทรัพย์หลายประเภทได้อย่างง่ายดาย",
@@ -3046,7 +3046,7 @@ i18n
           "Start Exploring": "Розпочати огляд",
           "Secure and Reliable": "Безпечний та надійний",
           "Robust security designed for your information.":
-            "Банківський рівень безпеки для ваших цифрових активів.",
+            "Надійна безпека, створена для захисту вашої інформації.",
           "Manage Your Assets": "Керуйте своїми активами",
           "Easily manage multiple asset types.":
             "Легко керуйте кількома типами активів.",
@@ -3222,7 +3222,7 @@ i18n
           "Start Exploring": "Bắt đầu khám phá",
           "Secure and Reliable": "An toàn và Đáng tin cậy",
           "Robust security designed for your information.":
-            "Bảo mật cấp ngân hàng cho tài sản số của bạn.",
+            "Bảo mật mạnh mẽ được thiết kế cho thông tin của bạn.",
           "Manage Your Assets": "Quản lý tài sản của bạn",
           "Easily manage multiple asset types.":
             "Quản lý dễ dàng nhiều loại tài sản.",
@@ -3403,7 +3403,7 @@ i18n
           "Start Exploring": "Mulai Jelajahi",
           "Secure and Reliable": "Aman dan Terpercaya",
           "Robust security designed for your information.":
-            "Keamanan tingkat bank untuk aset digital Anda.",
+            "Keamanan tangguh yang dirancang untuk informasi Anda.",
           "Manage Your Assets": "Kelola aset Anda",
           "Easily manage multiple asset types.":
             "Kelola berbagai jenis aset dengan mudah.",
@@ -3583,7 +3583,7 @@ i18n
           "Start Exploring": "Simulang Mag-explore",
           "Secure and Reliable": "Ligtas at Mapagkakatiwalaan",
           "Robust security designed for your information.":
-            "Seguridad na antas bangko para sa iyong mga digital asset.",
+            "Matibay na seguridad na idinisenyo para sa iyong impormasyon.",
           "Manage Your Assets": "Pamahalaan ang iyong mga asset",
           "Easily manage multiple asset types.":
             "Madaling pamahalaan ang maraming uri ng asset.",
@@ -3764,7 +3764,7 @@ i18n
           "Start Exploring": "অন্বেষণ শুরু করুন",
           "Secure and Reliable": "নিরাপদ ও নির্ভরযোগ্য",
           "Robust security designed for your information.":
-            "আপনার ডিজিটাল সম্পদের জন্য ব্যাঙ্ক-স্তরের নিরাপত্তা।",
+            "আপনার তথ্যের জন্য ডিজাইনকৃত শক্তিশালী নিরাপত্তা।",
           "Manage Your Assets": "আপনার সম্পদ পরিচালনা করুন",
           "Easily manage multiple asset types.":
             "একাধিক সম্পদের ধরন সহজেই পরিচালনা করুন।",
