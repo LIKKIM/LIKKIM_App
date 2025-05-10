@@ -42,8 +42,7 @@ i18n
           "Enter the recipient's address:": "Enter the recipient's address:",
           "Enter Address": "Enter Address",
           Submit: "Submit",
-          "Choose the cryptocurrency to send:":
-            "Choose the cryptocurrency to send:",
+          "Select asset to proceed:": "Select asset to proceed:",
           "Choose the cryptocurrency to receive:":
             "Choose the cryptocurrency to receive:",
           "Address for": "Address for",
@@ -230,7 +229,7 @@ i18n
           "Enter the recipient's address:": "输入接收者的地址:",
           "Enter Address": "输入地址",
           Submit: "提交",
-          "Choose the cryptocurrency to send:": "选择要发送的加密货币:",
+          "Select asset to proceed": "请选择资产以继续",
           "Choose the cryptocurrency to receive:": "选择要接收的加密货币:",
           "Address for": "地址",
           Close: "关闭",
@@ -402,7 +401,7 @@ i18n
           "Enter the recipient's address:": "輸入接收者的地址:",
           "Enter Address": "輸入地址",
           Submit: "提交",
-          "Choose the cryptocurrency to send:": "選擇要發送的加密貨幣:",
+          "Select asset to proceed": "請選擇資產以繼續",
           "Choose the cryptocurrency to receive:": "選擇要接收的加密貨幣:",
           "Address for": "地址",
           Wallet: "錢包",
@@ -582,8 +581,7 @@ i18n
             "Entrez l'adresse du destinataire :",
           "Enter Address": "Entrer l'adresse",
           Submit: "Soumettre",
-          "Choose the cryptocurrency to send:":
-            "Choisissez la crypto-monnaie à envoyer :",
+          "Select asset to proceed": "Sélectionnez un actif pour continuer",
           "Choose the cryptocurrency to receive:":
             "Choisissez la crypto-monnaie à recevoir :",
           "Address for": "Adresse pour",
@@ -785,8 +783,7 @@ i18n
             "Ingrese la dirección del destinatario:",
           "Enter Address": "Ingrese la dirección",
           Submit: "Enviar",
-          "Choose the cryptocurrency to send:":
-            "Elija la criptomoneda para enviar:",
+          "Select asset to proceed": "Seleccione un activo para continuar",
           "Choose the cryptocurrency to receive:":
             "Elija la criptomoneda para recibir:",
           "Address for": "Dirección para",
@@ -975,7 +972,7 @@ i18n
           "Enter the recipient's address:": "أدخل عنوان المستلم:",
           "Enter Address": "أدخل العنوان",
           Submit: "إرسال",
-          "Choose the cryptocurrency to send:": "اختر العملة الرقمية لإرسالها:",
+          "Select asset to proceed": "حدد الأصل للمتابعة",
           "Choose the cryptocurrency to receive:":
             "اختر العملة الرقمية للاستلام:",
           "Address for": "العنوان لـ",
@@ -991,23 +988,17 @@ i18n
           "Remove Chain Account": "إزالة حساب السلسلة",
           Remove: "إزالة",
           "Security in your hands": "الأمان بين يديك",
-
           Continue: "متابعة",
-
           "Scroll down to view all words":
             "قم بالتمرير لأسفل لعرض جميع الكلمات",
-
           "Generating your accounts": "إنشاء حساباتك",
           "Encrypting your data": "تشفير بياناتك",
-
           "Let's Go": "هيا بنا",
           "Use spaces between words": "استخدم مسافات بين الكلمات",
-
           Version: "الإصدار",
           "Assets can only be sent within the same chain.":
             "يمكن إرسال الأصول فقط ضمن نفس السلسلة.",
           "Firmware Update": "تحديث البرنامج الثابت",
-
           "No data available": "لا توجد بيانات متاحة",
           "Search Currency": "البحث عن عملة",
           "Search Cryptocurrency": "البحث عن عملة مشفرة",
@@ -1034,7 +1025,6 @@ i18n
           "Enter PIN to Connect": "أدخل رقم التعريف الشخصي للاتصال",
           "Use the PIN code to connect securely to your device.":
             "استخدم رمز PIN للاتصال الآمن بجهازك.",
-
           "Enter PIN": "أدخل رقم التعريف الشخصي",
           "Verification successful!": "تم التحقق بنجاح!",
           "You can now safely use the device.":
@@ -1059,7 +1049,6 @@ i18n
           "I lost my password": "فقدت كلمة المرور الخاصة بي",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "لإعادة ضبط التطبيق وإزالة البيانات المخزنة، يُرجى إلغاء تثبيته وإعادة تثبيته على هاتفك.",
-
           "Value in USD": "القيمة بالدولار الأمريكي",
           Fee: "رسوم",
           "Waiting for approval on your device...":
@@ -1067,7 +1056,6 @@ i18n
           "Verifying address on your device...":
             "جارٍ التحقق من العنوان على جهازك...",
           "Your device is already verified.": "تم التحقق من جهازك بالفعل.",
-
           "Address Book": "دفتر العناوين",
           Swap: "تبادل",
           Skip: "تخطي",
@@ -1154,20 +1142,19 @@ i18n
           "LOOKING FOR DEVICES": "デバイスを探しています",
           "Scanning...": "スキャン中...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
-            "コールドウォレットがロック解除され、Bluetoothが有効になっていることを確認してください。",
-          Send: "Enviar",
-          Receive: "Recibir",
-          "Transaction History": "Historial de transacciones",
-          "No Histories": "No hay historiales",
+            "コールドウォレットのロックが解除され、Bluetoothが有効になっていることを確認してください。",
+          Send: "送信",
+          Receive: "受信",
+          "Transaction History": "取引履歴",
+          "No Histories": "履歴がありません",
           "Enter the recipient's address:":
-            "Ingrese la dirección del destinatario:",
-          "Enter Address": "Ingrese la dirección",
-          Submit: "Enviar",
-          "Choose the cryptocurrency to send:":
-            "Elija la criptomoneda para enviar:",
+            "受取人のアドレスを入力してください：",
+          "Enter Address": "アドレスを入力",
+          Submit: "送信",
+          "Select asset to proceed": "続行するにはアセットを選択してください",
           "Choose the cryptocurrency to receive:":
-            "Elija la criptomoneda para recibir:",
-          "Address for": "Dirección para",
+            "受け取る暗号資産を選択してください：",
+          "Address for": "アドレス：",
           Wallet: "ウォレット",
           Transactions: "トランザクション",
           General: "一般",
@@ -1333,7 +1320,6 @@ i18n
       ru: {
         translation: {
           "Add Wallet": "Добавить кошелек",
-
           Close: "Закрыть",
           "Value:": "Значение:",
           "Delete Card": "Удалить карту",
@@ -1358,19 +1344,17 @@ i18n
           "Scanning...": "Сканирование...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "Пожалуйста, убедитесь, что ваш Cold Wallet разблокирован и Bluetooth включен.",
-          Send: "Enviar",
-          Receive: "Recibir",
-          "Transaction History": "Historial de transacciones",
-          "No Histories": "No hay historiales",
-          "Enter the recipient's address:":
-            "Ingrese la dirección del destinatario:",
-          "Enter Address": "Ingrese la dirección",
-          Submit: "Enviar",
-          "Choose the cryptocurrency to send:":
-            "Elija la criptomoneda para enviar:",
+          Send: "Отправить",
+          Receive: "Получить",
+          "Transaction History": "История транзакций",
+          "No Histories": "Нет истории",
+          "Enter the recipient's address:": "Введите адрес получателя:",
+          "Enter Address": "Введите адрес",
+          Submit: "Подтвердить",
+          "Select asset to proceed": "Выберите актив, чтобы продолжить",
           "Choose the cryptocurrency to receive:":
-            "Elija la criptomoneda para recibir:",
-          "Address for": "Dirección para",
+            "Выберите криптовалюту для получения:",
+          "Address for": "Адрес для",
           Wallet: "Кошелек",
           Transactions: "Транзакции",
           General: "Общие",
@@ -1383,23 +1367,17 @@ i18n
           "Remove Chain Account": "Удалить учетную запись цепочки",
           Remove: "Удалить",
           "Security in your hands": "Безопасность в ваших руках",
-
           Continue: "Продолжить",
-
           "Scroll down to view all words":
             "Прокрутите вниз, чтобы увидеть все слова",
-
           "Generating your accounts": "Создание ваших аккаунтов",
           "Encrypting your data": "Шифрование ваших данных",
-
           "Let's Go": "Поехали",
           "Use spaces between words": "Используйте пробелы между словами",
-
           Version: "Версия",
           "Assets can only be sent within the same chain.":
             "Активы могут быть отправлены только в пределах одной цепочки.",
           "Firmware Update": "Обновление прошивки",
-
           "No data available": "Данные недоступны",
           "Search Currency": "Поиск валюты",
           "Search Cryptocurrency": "Поиск криптовалюты",
@@ -1427,7 +1405,6 @@ i18n
           "Enter PIN to Connect": "Введите PIN для подключения",
           "Use the PIN code to connect securely to your device.":
             "Используйте PIN-код для безопасного подключения к вашему устройству.",
-
           "Enter PIN": "Введите PIN",
           "Verification successful!": "Проверка успешна!",
           "You can now safely use the device.":
@@ -1446,7 +1423,6 @@ i18n
           "Transaction Fee": "Комиссия за транзакцию",
           Confirm: "Подтвердить",
           "Waiting for Confirmation": "Ожидание подтверждения",
-
           "Screen lock enabled successfully":
             "Экранная блокировка успешно включена",
           "Success!": "Успех!",
@@ -1555,7 +1531,7 @@ i18n
           "Enter the recipient's address:": "수신자의 주소를 입력하십시오:",
           "Enter Address": "주소를 입력하십시오",
           Submit: "제출",
-          "Choose the cryptocurrency to send:": "보낼 암호화폐를 선택하십시오:",
+          "Select asset to proceed:": "보낼 암호화폐를 선택하십시오:",
           "Choose the cryptocurrency to receive:":
             "받을 암호화폐를 선택하십시오:",
           "Address for": "주소",
@@ -1733,8 +1709,7 @@ i18n
             "Insira o endereço do destinatário:",
           "Enter Address": "Insira o endereço",
           Submit: "Enviar",
-          "Choose the cryptocurrency to send:":
-            "Escolha a criptomoeda para enviar:",
+          "Select asset to proceed:": "Escolha a criptomoeda para enviar:",
           "Choose the cryptocurrency to receive:":
             "Escolha a criptomoeda para receber:",
           "Address for": "Endereço para",
@@ -1916,8 +1891,7 @@ i18n
             "Digite o endereço do destinatário:",
           "Enter Address": "Digite o endereço",
           Submit: "Enviar",
-          "Choose the cryptocurrency to send:":
-            "Escolha a criptomoeda para enviar:",
+          "Select asset to proceed:": "Escolha a criptomoeda para enviar:",
           "Choose the cryptocurrency to receive:":
             "Escolha a criptomoeda para receber:",
           "Address for": "Endereço para",
@@ -2116,8 +2090,7 @@ i18n
             "Inserisci l'indirizzo del destinatario:",
           "Enter Address": "Inserisci l'indirizzo",
           Submit: "Invia",
-          "Choose the cryptocurrency to send:":
-            "Scegli la criptovaluta da inviare:",
+          "Select asset to proceed:": "Scegli la criptovaluta da inviare:",
           "Choose the cryptocurrency to receive:":
             "Scegli la criptovaluta da ricevere:",
           "Address for": "Indirizzo per",
@@ -2300,7 +2273,7 @@ i18n
             "Geben Sie die Adresse des Empfängers ein:",
           "Enter Address": "Adresse eingeben",
           Submit: "Einreichen",
-          "Choose the cryptocurrency to send:":
+          "Select asset to proceed:":
             "Wählen Sie die zu sendende Kryptowährung:",
           "Choose the cryptocurrency to receive:":
             "Wählen Sie die zu empfangende Kryptowährung:",
@@ -2484,8 +2457,7 @@ i18n
           "Enter the recipient's address:": "प्राप्तकर्ता का पता दर्ज करें:",
           "Enter Address": "पता दर्ज करें",
           Submit: "जमा करें",
-          "Choose the cryptocurrency to send:":
-            "भेजने के लिए क्रिप्टोकरेंसी चुनें:",
+          "Select asset to proceed:": "भेजने के लिए क्रिप्टोकरेंसी चुनें:",
           "Choose the cryptocurrency to receive:":
             "प्राप्त करने के लिए क्रिप्टोकरेंसी चुनें:",
           "Address for": "के लिए पता",
@@ -2666,8 +2638,7 @@ i18n
             "Хүлээн авагчийн хаягийг оруулна уу:",
           "Enter Address": "Хаяг оруулах",
           Submit: "Илгээх",
-          "Choose the cryptocurrency to send:":
-            "Илгээх криптовалютыг сонгоно уу:",
+          "Select asset to proceed:": "Илгээх криптовалютыг сонгоно уу:",
           "Choose the cryptocurrency to receive:":
             "Хүлээн авах криптовалютыг сонгоно уу:",
           "Address for": "Хаяг",
@@ -2846,7 +2817,7 @@ i18n
           "Enter the recipient's address:": "ป้อนที่อยู่ผู้รับ:",
           "Enter Address": "ป้อนที่อยู่",
           Submit: "ส่ง",
-          "Choose the cryptocurrency to send:": "เลือกสกุลเงินคริปโตที่จะส่ง:",
+          "Select asset to proceed:": "เลือกสกุลเงินคริปโตที่จะส่ง:",
           "Choose the cryptocurrency to receive:":
             "เลือกสกุลเงินคริปโตที่จะรับ:",
           "Address for": "ที่อยู่สำหรับ",
@@ -3023,8 +2994,7 @@ i18n
           "Enter the recipient's address:": "Введіть адресу одержувача:",
           "Enter Address": "Введіть адресу",
           Submit: "Відправити",
-          "Choose the cryptocurrency to send:":
-            "Виберіть криптовалюту для відправки:",
+          "Select asset to proceed:": "Виберіть криптовалюту для відправки:",
           "Choose the cryptocurrency to receive:":
             "Виберіть криптовалюту для отримання:",
           "Address for": "Адреса для",
@@ -3203,8 +3173,7 @@ i18n
           "Enter the recipient's address:": "Nhập địa chỉ người nhận:",
           "Enter Address": "Nhập địa chỉ",
           Submit: "Gửi đi",
-          "Choose the cryptocurrency to send:":
-            "Chọn loại tiền điện tử để gửi:",
+          "Select asset to proceed:": "Chọn loại tiền điện tử để gửi:",
           "Choose the cryptocurrency to receive:":
             "Chọn loại tiền điện tử để nhận:",
           "Address for": "Địa chỉ cho",
@@ -3384,8 +3353,7 @@ i18n
           "Enter the recipient's address:": "Masukkan alamat penerima:",
           "Enter Address": "Masukkan alamat",
           Submit: "Kirim",
-          "Choose the cryptocurrency to send:":
-            "Pilih cryptocurrency untuk dikirim:",
+          "Select asset to proceed:": "Pilih cryptocurrency untuk dikirim:",
           "Choose the cryptocurrency to receive:":
             "Pilih cryptocurrency untuk diterima:",
           "Address for": "Alamat untuk",
@@ -3562,8 +3530,7 @@ i18n
           "Enter the recipient's address:": "Ilagay ang address ng tatanggap:",
           "Enter Address": "Ilagay ang Address",
           Submit: "Ipasa",
-          "Choose the cryptocurrency to send:":
-            "Piliin ang cryptocurrency na ipapadala:",
+          "Select asset to proceed:": "Piliin ang cryptocurrency na ipapadala:",
           "Choose the cryptocurrency to receive:":
             "Piliin ang cryptocurrency na tatanggapin:",
           "Address for": "Address para sa",
@@ -3748,7 +3715,7 @@ i18n
           "Enter the recipient's address:": "প্রাপকের ঠিকানা লিখুন:",
           "Enter Address": "ঠিকানা লিখুন",
           Submit: "জমা দিন",
-          "Choose the cryptocurrency to send:":
+          "Select asset to proceed:":
             "পাঠানোর জন্য ক্রিপ্টোকারেন্সি নির্বাচন করুন:",
           "Choose the cryptocurrency to receive:":
             "গ্রহণের জন্য ক্রিপ্টোকারেন্সি নির্বাচন করুন:",
