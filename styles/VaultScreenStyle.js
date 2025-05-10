@@ -403,7 +403,7 @@ const VaultScreenStyles = (isDarkMode) => {
       paddingHorizontal: 0,
     },
 
-    // Total balance container styles
+    // Total Value container styles
     totalBalanceContainer: {
       width: 326,
       height: 80,

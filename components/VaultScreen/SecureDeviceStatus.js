@@ -464,7 +464,7 @@ const SecureDeviceStatus = (props) => {
           >
             <View>
               <Text style={VaultScreenStyle.totalBalanceText}>
-                {t("Total Balance")}
+                {t("Total Value")}
               </Text>
               <Text style={VaultScreenStyle.totalBalanceAmount}>
                 {`${calculateTotalBalance()} `}

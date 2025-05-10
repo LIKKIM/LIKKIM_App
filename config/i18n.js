@@ -48,7 +48,7 @@ i18n
           Wallet: "Wallet",
           Transactions: "Transactions",
           General: "General",
-          "Total Balance": "Total Balance",
+          "Total Value": "Total Value",
           Balance: "Balance",
           "No cryptocurrencies available. Please add wallet first.":
             "No cryptocurrencies available. Please add wallet first.",
@@ -226,7 +226,7 @@ i18n
           Wallet: "钱包",
           Transactions: "交易",
           General: "通用",
-          "Total Balance": "总余额",
+          "Total Value": "总余额",
           Balance: "余额",
           "No cryptocurrencies available. Please add wallet first.":
             "没有可用的加密货币。请先添加钱包。",
@@ -394,7 +394,7 @@ i18n
           Wallet: "錢包",
           Transactions: "交易",
           General: "通用",
-          "Total Balance": "總餘額",
+          "Total Value": "總餘額",
           Balance: "餘額",
           "No cryptocurrencies available. Please add wallet first.":
             "沒有可用的加密貨幣。請先添加錢包。",
@@ -573,7 +573,7 @@ i18n
           Wallet: "Portefeuille",
           Transactions: "Transactions",
           General: "Général",
-          "Total Balance": "Solde Total",
+          "Total Value": "Solde Total",
           Balance: "Solde",
           "No cryptocurrencies available. Please add wallet first.":
             "Aucune cryptomonnaie disponible. Veuillez d'abord ajouter un portefeuille.",
@@ -775,7 +775,7 @@ i18n
           Wallet: "Cartera",
           Transactions: "Transacciones",
           General: "General",
-          "Total Balance": "Saldo Total",
+          "Total Value": "Saldo Total",
           Balance: "Saldo",
           "No cryptocurrencies available. Please add wallet first.":
             "No hay criptomonedas disponibles. Por favor, agregue una billetera primero.",
@@ -962,7 +962,7 @@ i18n
           Wallet: "محفظة",
           Transactions: "المعاملات",
           General: "عام",
-          "Total Balance": "الرصيد الإجمالي",
+          "Total Value": "الرصيد الإجمالي",
           Balance: "الرصيد",
           "No cryptocurrencies available. Please add wallet first.":
             "لا توجد عملات مشفرة متاحة. يرجى إضافة المحفظة أولاً.",
@@ -1138,7 +1138,7 @@ i18n
           Wallet: "ウォレット",
           Transactions: "トランザクション",
           General: "一般",
-          "Total Balance": "総残高",
+          "Total Value": "総残高",
           Balance: "残高",
           "No cryptocurrencies available. Please add wallet first.":
             "利用可能な暗号通貨はありません。まずウォレットを追加してください。",
@@ -1336,7 +1336,7 @@ i18n
           Wallet: "Кошелек",
           Transactions: "Транзакции",
           General: "Общие",
-          "Total Balance": "Общий баланс",
+          "Total Value": "Общий баланс",
           Balance: "Баланс",
           "No cryptocurrencies available. Please add wallet first.":
             "Нет доступных криптовалют. Пожалуйста, сначала добавьте кошелек.",
@@ -1514,7 +1514,7 @@ i18n
           Wallet: "지갑",
           Transactions: "거래",
           General: "일반",
-          "Total Balance": "총 잔액",
+          "Total Value": "총 잔액",
           Balance: "잔액",
           "No cryptocurrencies available. Please add wallet first.":
             "사용 가능한 암호화폐가 없습니다. 먼저 지갑을 추가하십시오.",
@@ -1690,7 +1690,7 @@ i18n
           Wallet: "Carteira",
           Transactions: "Transações",
           General: "Geral",
-          "Total Balance": "Saldo Total",
+          "Total Value": "Saldo Total",
           Balance: "Saldo",
           "No cryptocurrencies available. Please add wallet first.":
             "Não há criptomoedas disponíveis. Por favor, adicione uma carteira primeiro.",
@@ -1872,7 +1872,7 @@ i18n
           Wallet: "Carteira",
           Transactions: "Transações",
           General: "Geral",
-          "Total Balance": "Saldo Total",
+          "Total Value": "Saldo Total",
           Balance: "Saldo",
           "No cryptocurrencies available. Please add wallet first.":
             "Não há criptomoedas disponíveis. Por favor, adicione uma carteira primeiro.",
@@ -2070,7 +2070,7 @@ i18n
           Wallet: "Portafoglio",
           Transactions: "Transazioni",
           General: "Generale",
-          "Total Balance": "Saldo Totale",
+          "Total Value": "Saldo Totale",
           Balance: "Saldo",
           "No cryptocurrencies available. Please add wallet first.":
             "Nessuna criptovaluta disponibile. Si prega di aggiungere prima un portafoglio.",
@@ -2251,7 +2251,7 @@ i18n
           Wallet: "Brieftasche",
           Transactions: "Transaktionen",
           General: "Allgemein",
-          "Total Balance": "Gesamtsaldo",
+          "Total Value": "Gesamtsaldo",
           Balance: "Guthaben",
           "No cryptocurrencies available. Please add wallet first.":
             "Keine Kryptowährungen verfügbar. Bitte fügen Sie zuerst eine Brieftasche hinzu.",
@@ -2433,7 +2433,7 @@ i18n
           Wallet: "बटुआ",
           Transactions: "लेनदेन",
           General: "सामान्य",
-          "Total Balance": "कुल शेष राशि",
+          "Total Value": "कुल शेष राशि",
           Balance: "शेष",
           "No cryptocurrencies available. Please add wallet first.":
             "कोई क्रिप्टोकरेंसी उपलब्ध नहीं है। कृपया पहले वॉलेट जोड़ें।",
@@ -2613,7 +2613,7 @@ i18n
           Wallet: "Хэтэвч",
           Transactions: "Гүйлгээ",
           General: "Ерөнхий",
-          "Total Balance": "Нийт үлдэгдэл",
+          "Total Value": "Нийт үлдэгдэл",
           Balance: "Үлдэгдэл",
           "No cryptocurrencies available. Please add wallet first.":
             "Криптовалют байхгүй байна. Эхлээд түрийвч нэмнэ үү.",
@@ -2790,7 +2790,7 @@ i18n
           Wallet: "กระเป๋าสตางค์",
           Transactions: "ธุรกรรม",
           General: "ทั่วไป",
-          "Total Balance": "ยอดเงินรวม",
+          "Total Value": "ยอดเงินรวม",
           Balance: "ยอดเงินคงเหลือ",
           "No cryptocurrencies available. Please add wallet first.":
             "ไม่มีสกุลเงินดิจิทัลที่พร้อมใช้งาน โปรดเพิ่มกระเป๋าเงินก่อน",
@@ -2965,7 +2965,7 @@ i18n
           Wallet: "Гаманець",
           Transactions: "Транзакції",
           General: "Загальні",
-          "Total Balance": "Загальний баланс",
+          "Total Value": "Загальний баланс",
           Balance: "Баланс",
           "No cryptocurrencies available. Please add wallet first.":
             "Немає доступних криптовалют. Будь ласка, спочатку додайте гаманець.",
@@ -3142,7 +3142,7 @@ i18n
           Wallet: "Ví",
           Transactions: "Giao dịch",
           General: "Chung",
-          "Total Balance": "Tổng Số Dư",
+          "Total Value": "Tổng Số Dư",
           Balance: "Số dư",
           "No cryptocurrencies available. Please add wallet first.":
             "Không có tiền điện tử nào khả dụng. Vui lòng thêm ví trước.",
@@ -3321,7 +3321,7 @@ i18n
           Wallet: "Dompet",
           Transactions: "Transaksi",
           General: "Umum",
-          "Total Balance": "Saldo Total",
+          "Total Value": "Saldo Total",
           Balance: "Saldo",
           "No cryptocurrencies available. Please add wallet first.":
             "Tidak ada cryptocurrency yang tersedia. Harap tambahkan dompet terlebih dahulu.",
@@ -3496,7 +3496,7 @@ i18n
           Wallet: "Pitaka",
           Transactions: "Mga transaksyon",
           General: "Pangkalahatan",
-          "Total Balance": "Kabuuang Balanse",
+          "Total Value": "Kabuuang Balanse",
           Balance: "Balanse",
           "No cryptocurrencies available. Please add wallet first.":
             "Walang magagamit na mga cryptocurrency. Mangyaring magdagdag muna ng pitaka.",
@@ -3679,7 +3679,7 @@ i18n
           Wallet: "ওয়ালেট",
           Transactions: "লেনদেন",
           General: "সাধারণ",
-          "Total Balance": "মোট ব্যালেন্স",
+          "Total Value": "মোট ব্যালেন্স",
           Balance: "ব্যালেন্স",
           "No cryptocurrencies available. Please add wallet first.":
             "কোনও ক্রিপ্টোকারেন্সি উপলব্ধ নেই। প্রথমে একটি ওয়ালেট যোগ করুন।",
