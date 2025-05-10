@@ -68,7 +68,7 @@ const SelectCryptoModal = ({
                   />
                   <TextInput
                     style={ActivityScreenStyle.searchInput}
-                    placeholder={t("Search Cryptocurrency")}
+                    placeholder={t("Search Asset")}
                     placeholderTextColor={isDarkMode ? "#ffffff" : "#21201E"}
                     onChangeText={(text) => setSearchQuery(text)}
                     value={searchQuery}

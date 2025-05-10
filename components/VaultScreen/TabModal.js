@@ -105,7 +105,7 @@ const TabModal = ({
         return (
           <>
             <Text style={VaultScreenStyle.historyTitle}>
-              {t("Transaction History")}
+              {t("Activity Log")}
             </Text>
             <View
               style={{

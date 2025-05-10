@@ -76,7 +76,7 @@ const AddCryptoModal = ({
             <Icon name="search" size={20} style={VaultScreenStyle.searchIcon} />
             <TextInput
               style={VaultScreenStyle.searchInput}
-              placeholder={t("Search Cryptocurrency")}
+              placeholder={t("Search Asset")}
               placeholderTextColor={isDarkMode ? "#ffffff" : "#21201E"}
               onChangeText={(text) => setSearchQuery(text)}
               value={searchQuery}

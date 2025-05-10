@@ -103,7 +103,7 @@ const ActivityLogComponent = ({
             { textAlign: "left", flex: 1 },
           ]}
         >
-          {t("Transaction History")}
+          {t("Activity Log")}
         </Text>
         <TouchableOpacity
           onPress={() =>
