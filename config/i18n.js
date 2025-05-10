@@ -1531,7 +1531,7 @@ i18n
           "Enter the recipient's address:": "수신자의 주소를 입력하십시오:",
           "Enter Address": "주소를 입력하십시오",
           Submit: "제출",
-          "Select asset to proceed:": "보낼 암호화폐를 선택하십시오:",
+          "Select asset to proceed": "계속하려면 자산을 선택하세요",
           "Choose the cryptocurrency to receive:":
             "받을 암호화폐를 선택하십시오:",
           "Address for": "주소",
@@ -1709,7 +1709,7 @@ i18n
             "Insira o endereço do destinatário:",
           "Enter Address": "Insira o endereço",
           Submit: "Enviar",
-          "Select asset to proceed:": "Escolha a criptomoeda para enviar:",
+          "Select asset to proceed": "Selecione um ativo para continuar",
           "Choose the cryptocurrency to receive:":
             "Escolha a criptomoeda para receber:",
           "Address for": "Endereço para",
@@ -1891,7 +1891,7 @@ i18n
             "Digite o endereço do destinatário:",
           "Enter Address": "Digite o endereço",
           Submit: "Enviar",
-          "Select asset to proceed:": "Escolha a criptomoeda para enviar:",
+          "Select asset to proceed": "Selecione um ativo para prosseguir",
           "Choose the cryptocurrency to receive:":
             "Escolha a criptomoeda para receber:",
           "Address for": "Endereço para",
@@ -2090,7 +2090,7 @@ i18n
             "Inserisci l'indirizzo del destinatario:",
           "Enter Address": "Inserisci l'indirizzo",
           Submit: "Invia",
-          "Select asset to proceed:": "Scegli la criptovaluta da inviare:",
+          "Select asset to proceed": "Seleziona una risorsa per procedere",
           "Choose the cryptocurrency to receive:":
             "Scegli la criptovaluta da ricevere:",
           "Address for": "Indirizzo per",
@@ -2273,8 +2273,7 @@ i18n
             "Geben Sie die Adresse des Empfängers ein:",
           "Enter Address": "Adresse eingeben",
           Submit: "Einreichen",
-          "Select asset to proceed:":
-            "Wählen Sie die zu sendende Kryptowährung:",
+          "Select asset to proceed": "Wählen Sie ein Asset, um fortzufahren",
           "Choose the cryptocurrency to receive:":
             "Wählen Sie die zu empfangende Kryptowährung:",
           "Address for": "Adresse für",
@@ -2457,7 +2456,7 @@ i18n
           "Enter the recipient's address:": "प्राप्तकर्ता का पता दर्ज करें:",
           "Enter Address": "पता दर्ज करें",
           Submit: "जमा करें",
-          "Select asset to proceed:": "भेजने के लिए क्रिप्टोकरेंसी चुनें:",
+          "Select asset to proceed": "आगे बढ़ने के लिए संपत्ति चुनें",
           "Choose the cryptocurrency to receive:":
             "प्राप्त करने के लिए क्रिप्टोकरेंसी चुनें:",
           "Address for": "के लिए पता",
@@ -2638,7 +2637,7 @@ i18n
             "Хүлээн авагчийн хаягийг оруулна уу:",
           "Enter Address": "Хаяг оруулах",
           Submit: "Илгээх",
-          "Select asset to proceed:": "Илгээх криптовалютыг сонгоно уу:",
+          "Select asset to proceed": "Үргэлжлүүлэхийн тулд хөрөнгөө сонгоно уу",
           "Choose the cryptocurrency to receive:":
             "Хүлээн авах криптовалютыг сонгоно уу:",
           "Address for": "Хаяг",
@@ -2817,7 +2816,7 @@ i18n
           "Enter the recipient's address:": "ป้อนที่อยู่ผู้รับ:",
           "Enter Address": "ป้อนที่อยู่",
           Submit: "ส่ง",
-          "Select asset to proceed:": "เลือกสกุลเงินคริปโตที่จะส่ง:",
+          "Select asset to proceed": "เลือกสินทรัพย์เพื่อดำเนินการต่อ",
           "Choose the cryptocurrency to receive:":
             "เลือกสกุลเงินคริปโตที่จะรับ:",
           "Address for": "ที่อยู่สำหรับ",
@@ -2994,7 +2993,7 @@ i18n
           "Enter the recipient's address:": "Введіть адресу одержувача:",
           "Enter Address": "Введіть адресу",
           Submit: "Відправити",
-          "Select asset to proceed:": "Виберіть криптовалюту для відправки:",
+          "Select asset to proceed": "Виберіть актив, щоб продовжити",
           "Choose the cryptocurrency to receive:":
             "Виберіть криптовалюту для отримання:",
           "Address for": "Адреса для",
@@ -3173,7 +3172,7 @@ i18n
           "Enter the recipient's address:": "Nhập địa chỉ người nhận:",
           "Enter Address": "Nhập địa chỉ",
           Submit: "Gửi đi",
-          "Select asset to proceed:": "Chọn loại tiền điện tử để gửi:",
+          "Select asset to proceed": "Chọn tài sản để tiếp tục",
           "Choose the cryptocurrency to receive:":
             "Chọn loại tiền điện tử để nhận:",
           "Address for": "Địa chỉ cho",
@@ -3353,7 +3352,7 @@ i18n
           "Enter the recipient's address:": "Masukkan alamat penerima:",
           "Enter Address": "Masukkan alamat",
           Submit: "Kirim",
-          "Select asset to proceed:": "Pilih cryptocurrency untuk dikirim:",
+          "Select asset to proceed": "Pilih aset untuk melanjutkan",
           "Choose the cryptocurrency to receive:":
             "Pilih cryptocurrency untuk diterima:",
           "Address for": "Alamat untuk",
@@ -3530,7 +3529,7 @@ i18n
           "Enter the recipient's address:": "Ilagay ang address ng tatanggap:",
           "Enter Address": "Ilagay ang Address",
           Submit: "Ipasa",
-          "Select asset to proceed:": "Piliin ang cryptocurrency na ipapadala:",
+          "Select asset to proceed": "Pumili ng asset upang magpatuloy",
           "Choose the cryptocurrency to receive:":
             "Piliin ang cryptocurrency na tatanggapin:",
           "Address for": "Address para sa",
@@ -3715,8 +3714,7 @@ i18n
           "Enter the recipient's address:": "প্রাপকের ঠিকানা লিখুন:",
           "Enter Address": "ঠিকানা লিখুন",
           Submit: "জমা দিন",
-          "Select asset to proceed:":
-            "পাঠানোর জন্য ক্রিপ্টোকারেন্সি নির্বাচন করুন:",
+          "Select asset to proceed": "এগিয়ে যেতে একটি সম্পদ নির্বাচন করুন",
           "Choose the cryptocurrency to receive:":
             "গ্রহণের জন্য ক্রিপ্টোকারেন্সি নির্বাচন করুন:",
           "Address for": "এর জন্য ঠিকানা",
