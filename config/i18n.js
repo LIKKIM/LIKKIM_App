@@ -46,12 +46,12 @@ i18n
           "Choose asset type:": "Choose asset type:",
           "Address for": "Address for",
           Wallet: "Wallet",
-          Transactions: "Transactions",
+          Activity: "Activity",
           General: "General",
           "Total Value": "Total Value",
           Balance: "Balance",
-          "No cryptocurrencies available. Please add wallet first.":
-            "No cryptocurrencies available. Please add wallet first.",
+          "No assets available. Please connect your device to continue.":
+            "No assets available. Please connect your device to continue.",
           "This chain account will be removed":
             "This chain account will be removed",
           "Remove Chain Account": "Remove Chain Account",
@@ -223,11 +223,11 @@ i18n
           "Address for": "地址",
           Close: "关闭",
           Wallet: "钱包",
-          Transactions: "交易",
+          Activity: "交易",
           General: "通用",
           "Total Value": "总余额",
           Balance: "余额",
-          "No cryptocurrencies available. Please add wallet first.":
+          "No assets available. Please connect your device to continue.":
             "没有可用的加密货币。请先添加钱包。",
           "This chain account will be removed": "此链账户将被移除",
           "Remove Chain Account": "移除链账户",
@@ -390,11 +390,11 @@ i18n
           "Choose asset type": "請選擇資產類型",
           "Address for": "地址",
           Wallet: "錢包",
-          Transactions: "交易",
+          Activity: "交易",
           General: "通用",
           "Total Value": "總餘額",
           Balance: "餘額",
-          "No cryptocurrencies available. Please add wallet first.":
+          "No assets available. Please connect your device to continue.":
             "沒有可用的加密貨幣。請先添加錢包。",
           "This chain account will be removed": "此鏈賬戶將被移除",
           "Remove Chain Account": "移除鏈賬戶",
@@ -568,11 +568,11 @@ i18n
           "Choose asset type": "Choisissez le type d'actif",
           "Address for": "Adresse pour",
           Wallet: "Portefeuille",
-          Transactions: "Transactions",
+          Activity: "Activity",
           General: "Général",
           "Total Value": "Solde Total",
           Balance: "Solde",
-          "No cryptocurrencies available. Please add wallet first.":
+          "No assets available. Please connect your device to continue.":
             "Aucune cryptomonnaie disponible. Veuillez d'abord ajouter un portefeuille.",
           "This chain account will be removed":
             "Ce compte de chaîne sera supprimé",
@@ -768,11 +768,11 @@ i18n
           "Choose asset type": "Elija el tipo de activo",
           "Address for": "Dirección para",
           Wallet: "Cartera",
-          Transactions: "Transacciones",
+          Activity: "Transacciones",
           General: "General",
           "Total Value": "Saldo Total",
           Balance: "Saldo",
-          "No cryptocurrencies available. Please add wallet first.":
+          "No assets available. Please connect your device to continue.":
             "No hay criptomonedas disponibles. Por favor, agregue una billetera primero.",
           "This chain account will be removed":
             "Esta cuenta de cadena será eliminada",
@@ -954,11 +954,11 @@ i18n
           "Address for": "العنوان لـ",
           Close: "إغلاق",
           Wallet: "محفظة",
-          Transactions: "المعاملات",
+          Activity: "المعاملات",
           General: "عام",
           "Total Value": "الرصيد الإجمالي",
           Balance: "الرصيد",
-          "No cryptocurrencies available. Please add wallet first.":
+          "No assets available. Please connect your device to continue.":
             "لا توجد عملات مشفرة متاحة. يرجى إضافة المحفظة أولاً.",
           "This chain account will be removed": "سيتم إزالة حساب السلسلة هذا",
           "Remove Chain Account": "إزالة حساب السلسلة",
@@ -1129,11 +1129,11 @@ i18n
           "Choose asset type": "資産の種類を選択してください",
           "Address for": "アドレス：",
           Wallet: "ウォレット",
-          Transactions: "トランザクション",
+          Activity: "トランザクション",
           General: "一般",
           "Total Value": "総残高",
           Balance: "残高",
-          "No cryptocurrencies available. Please add wallet first.":
+          "No assets available. Please connect your device to continue.":
             "利用可能な暗号通貨はありません。まずウォレットを追加してください。",
           "This chain account will be removed":
             "このチェーンアカウントは削除されます",
@@ -1326,11 +1326,11 @@ i18n
           "Choose asset type": "Выберите тип актива",
           "Address for": "Адрес для",
           Wallet: "Кошелек",
-          Transactions: "Транзакции",
+          Activity: "Транзакции",
           General: "Общие",
           "Total Value": "Общий баланс",
           Balance: "Баланс",
-          "No cryptocurrencies available. Please add wallet first.":
+          "No assets available. Please connect your device to continue.":
             "Нет доступных криптовалют. Пожалуйста, сначала добавьте кошелек.",
           "This chain account will be removed":
             "Этот учетная запись цепочки будет удалена",
@@ -1503,11 +1503,11 @@ i18n
           "Choose asset type": "자산 유형을 선택하세요",
           "Address for": "주소",
           Wallet: "지갑",
-          Transactions: "거래",
+          Activity: "거래",
           General: "일반",
           "Total Value": "총 잔액",
           Balance: "잔액",
-          "No cryptocurrencies available. Please add wallet first.":
+          "No assets available. Please connect your device to continue.":
             "사용 가능한 암호화폐가 없습니다. 먼저 지갑을 추가하십시오.",
           "This chain account will be removed": "이 체인 계정이 제거됩니다",
           "Remove Chain Account": "체인 계정 제거",
@@ -1678,11 +1678,11 @@ i18n
           "Choose asset type": "Escolha o tipo de ativo",
           "Address for": "Endereço para",
           Wallet: "Carteira",
-          Transactions: "Transações",
+          Activity: "Transações",
           General: "Geral",
           "Total Value": "Saldo Total",
           Balance: "Saldo",
-          "No cryptocurrencies available. Please add wallet first.":
+          "No assets available. Please connect your device to continue.":
             "Não há criptomoedas disponíveis. Por favor, adicione uma carteira primeiro.",
           "This chain account will be removed":
             "Esta conta de cadeia será removida",
@@ -1860,11 +1860,11 @@ i18n
           "Address for": "Endereço para",
           Close: "Fechar",
           Wallet: "Carteira",
-          Transactions: "Transações",
+          Activity: "Transações",
           General: "Geral",
           "Total Value": "Saldo Total",
           Balance: "Saldo",
-          "No cryptocurrencies available. Please add wallet first.":
+          "No assets available. Please connect your device to continue.":
             "Não há criptomoedas disponíveis. Por favor, adicione uma carteira primeiro.",
           "This chain account will be removed":
             "Esta conta de cadeia será removida",
@@ -2057,11 +2057,11 @@ i18n
           "Address for": "Indirizzo per",
           Close: "Chiudi",
           Wallet: "Portafoglio",
-          Transactions: "Transazioni",
+          Activity: "Transazioni",
           General: "Generale",
           "Total Value": "Saldo Totale",
           Balance: "Saldo",
-          "No cryptocurrencies available. Please add wallet first.":
+          "No assets available. Please connect your device to continue.":
             "Nessuna criptovaluta disponibile. Si prega di aggiungere prima un portafoglio.",
           "This chain account will be removed":
             "Questo account di catena verrà rimosso",
@@ -2237,11 +2237,11 @@ i18n
           "Address for": "Adresse für",
           Close: "Schließen",
           Wallet: "Brieftasche",
-          Transactions: "Transaktionen",
+          Activity: "Transaktionen",
           General: "Allgemein",
           "Total Value": "Gesamtsaldo",
           Balance: "Guthaben",
-          "No cryptocurrencies available. Please add wallet first.":
+          "No assets available. Please connect your device to continue.":
             "Keine Kryptowährungen verfügbar. Bitte fügen Sie zuerst eine Brieftasche hinzu.",
           "This chain account will be removed":
             "Dieses Kettenkonto wird entfernt",
@@ -2418,11 +2418,11 @@ i18n
           "Address for": "के लिए पता",
           Close: "बंद करें",
           Wallet: "बटुआ",
-          Transactions: "लेनदेन",
+          Activity: "लेनदेन",
           General: "सामान्य",
           "Total Value": "कुल शेष राशि",
           Balance: "शेष",
-          "No cryptocurrencies available. Please add wallet first.":
+          "No assets available. Please connect your device to continue.":
             "कोई क्रिप्टोकरेंसी उपलब्ध नहीं है। कृपया पहले वॉलेट जोड़ें।",
           "This chain account will be removed":
             "यह श्रृंखला खाता हटा दिया जाएगा",
@@ -2597,11 +2597,11 @@ i18n
           "Address for": "Хаяг",
           Close: "Хаах",
           Wallet: "Хэтэвч",
-          Transactions: "Гүйлгээ",
+          Activity: "Гүйлгээ",
           General: "Ерөнхий",
           "Total Value": "Нийт үлдэгдэл",
           Balance: "Үлдэгдэл",
-          "No cryptocurrencies available. Please add wallet first.":
+          "No assets available. Please connect your device to continue.":
             "Криптовалют байхгүй байна. Эхлээд түрийвч нэмнэ үү.",
           "This chain account will be removed": "Энэ гинжний дансыг устгана",
           "Remove Chain Account": "Гинжний дансыг устгах",
@@ -2773,11 +2773,11 @@ i18n
           "Address for": "ที่อยู่สำหรับ",
           Close: "ปิด",
           Wallet: "กระเป๋าสตางค์",
-          Transactions: "ธุรกรรม",
+          Activity: "ธุรกรรม",
           General: "ทั่วไป",
           "Total Value": "ยอดเงินรวม",
           Balance: "ยอดเงินคงเหลือ",
-          "No cryptocurrencies available. Please add wallet first.":
+          "No assets available. Please connect your device to continue.":
             "ไม่มีสกุลเงินดิจิทัลที่พร้อมใช้งาน โปรดเพิ่มกระเป๋าเงินก่อน",
           "This chain account will be removed": "บัญชีเครือนี้จะถูกลบ",
           "Remove Chain Account": "ลบบัญชีเครือ",
@@ -2947,11 +2947,11 @@ i18n
           "Address for": "Адреса для",
           Close: "Закрити",
           Wallet: "Гаманець",
-          Transactions: "Транзакції",
+          Activity: "Транзакції",
           General: "Загальні",
           "Total Value": "Загальний баланс",
           Balance: "Баланс",
-          "No cryptocurrencies available. Please add wallet first.":
+          "No assets available. Please connect your device to continue.":
             "Немає доступних криптовалют. Будь ласка, спочатку додайте гаманець.",
           "This chain account will be removed":
             "Цей ланцюговий акаунт буде видалено",
@@ -3123,11 +3123,11 @@ i18n
           "Address for": "Địa chỉ cho",
           Close: "Đóng",
           Wallet: "Ví",
-          Transactions: "Giao dịch",
+          Activity: "Giao dịch",
           General: "Chung",
           "Total Value": "Tổng Số Dư",
           Balance: "Số dư",
-          "No cryptocurrencies available. Please add wallet first.":
+          "No assets available. Please connect your device to continue.":
             "Không có tiền điện tử nào khả dụng. Vui lòng thêm ví trước.",
           "This chain account will be removed": "Tài khoản chuỗi này sẽ bị xóa",
           "Remove Chain Account": "Xóa tài khoản chuỗi",
@@ -3301,11 +3301,11 @@ i18n
           "Address for": "Alamat untuk",
           Close: "Tutup",
           Wallet: "Dompet",
-          Transactions: "Transaksi",
+          Activity: "Transaksi",
           General: "Umum",
           "Total Value": "Saldo Total",
           Balance: "Saldo",
-          "No cryptocurrencies available. Please add wallet first.":
+          "No assets available. Please connect your device to continue.":
             "Tidak ada cryptocurrency yang tersedia. Harap tambahkan dompet terlebih dahulu.",
           "This chain account will be removed": "Akun rantai ini akan dihapus",
           "Remove Chain Account": "Hapus akun rantai",
@@ -3475,11 +3475,11 @@ i18n
           "Address for": "Address para sa",
           Close: "Isara",
           Wallet: "Pitaka",
-          Transactions: "Mga transaksyon",
+          Activity: "Mga transaksyon",
           General: "Pangkalahatan",
           "Total Value": "Kabuuang Balanse",
           Balance: "Balanse",
-          "No cryptocurrencies available. Please add wallet first.":
+          "No assets available. Please connect your device to continue.":
             "Walang magagamit na mga cryptocurrency. Mangyaring magdagdag muna ng pitaka.",
           "This chain account will be removed":
             "Ang chain account na ito ay aalisin",
@@ -3657,11 +3657,11 @@ i18n
           "Address for": "এর জন্য ঠিকানা",
           Close: "বন্ধ করুন",
           Wallet: "ওয়ালেট",
-          Transactions: "লেনদেন",
+          Activity: "লেনদেন",
           General: "সাধারণ",
           "Total Value": "মোট ব্যালেন্স",
           Balance: "ব্যালেন্স",
-          "No cryptocurrencies available. Please add wallet first.":
+          "No assets available. Please connect your device to continue.":
             "কোনও ক্রিপ্টোকারেন্সি উপলব্ধ নেই। প্রথমে একটি ওয়ালেট যোগ করুন।",
           "This chain account will be removed":
             "এই চেইন অ্যাকাউন্টটি সরানো হবে",

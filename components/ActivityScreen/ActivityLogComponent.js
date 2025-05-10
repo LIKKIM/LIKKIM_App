@@ -59,10 +59,9 @@ const ActivityLogComponent = ({
     return Array.from(map.values());
   }, [ActivityLog]);
 
-  // 筛选出符合当前选择链的交易记录，剔除 amount 为 0 的交易记录
   const filteredActivityLog =
     selectedChain === "All"
-      ? ActivityLog.filter((tx) => tx.amount > 0) // Filter out transactions with amount 0
+      ? ActivityLog.filter((tx) => tx.amount > 0)
       : ActivityLog.filter((transaction) => {
           const matchedItems = initialAdditionalCryptos.filter((item) => {
             if (item.address.trim() === "Click the Verify Address Button") {

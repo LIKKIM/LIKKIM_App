@@ -53,7 +53,9 @@ const SelectCryptoModal = ({
             >
               <Text style={ActivityScreenStyle.TransactionModalTitle}>
                 {addedCryptos.length === 0
-                  ? t("No cryptocurrencies available. Please add wallet first.")
+                  ? t(
+                      "No assets available. Please connect your device to continue."
+                    )
                   : operationType === "send"
                   ? t("Select asset to proceed:")
                   : t("Choose asset type:")}

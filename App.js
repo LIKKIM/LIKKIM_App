@@ -30,7 +30,6 @@ if (__DEV__) {
 //by will: 阻止自动隐藏 splash screen
 SplashScreen.preventAutoHideAsync();
 
-
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -40,14 +39,12 @@ export default function App() {
   const [headerDropdownVisible, setHeaderDropdownVisible] = useState(false);
   const [selectedCardName, setSelectedCardName] = useState("");
 
-
-  useEffect(()=>{
+  useEffect(() => {
     //by will:给予初次渲染时间：修复自定义header闪烁和自定义翻译延迟加载问题
-    setTimeout(()=>{
+    setTimeout(() => {
       SplashScreen.hideAsync();
-    },1300)
-
-  },[])
+    }, 1300);
+  }, []);
 
   // Check if the app is launched for the first time
   useEffect(() => {
@@ -77,7 +74,7 @@ export default function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       {/* by will:优化状态栏颜色多次变动 */}
-      <StatusBar backgroundColor={'#fff'}  barStyle="dark-content" />
+      <StatusBar backgroundColor={"#fff"} barStyle="dark-content" />
       <CryptoProvider>
         <NavigationContainer>
           <Stack.Navigator>
@@ -119,7 +116,6 @@ export default function App() {
 function OnboardingApp({ onDone }) {
   return (
     <>
-      
       <OnboardingScreen onDone={onDone} />
     </>
   );
@@ -235,7 +231,7 @@ function AppContent({
             let iconName;
             if (route.name === "Wallet") {
               iconName = "account-balance-wallet";
-            } else if (route.name === "Transactions") {
+            } else if (route.name === "Activity") {
               iconName = "swap-horiz";
             } else if (route.name === "General") {
               iconName = "smartphone";
@@ -253,7 +249,7 @@ function AppContent({
           tabBarLabel: ({ focused }) => {
             let label;
             if (route.name === "Wallet") label = t("Wallet");
-            else if (route.name === "Transactions") label = t("Transactions");
+            else if (route.name === "Activity") label = t("Activity");
             else if (route.name === "General") label = t("General");
             return (
               <Text
@@ -327,7 +323,7 @@ function AppContent({
           }}
         />
         {cryptoCards.length > 0 && (
-          <Tab.Screen name="Transactions" component={ActivityScreen} />
+          <Tab.Screen name="Activity" component={ActivityScreen} />
         )}
 
         <Tab.Screen name="General">
