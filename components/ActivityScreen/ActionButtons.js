@@ -9,7 +9,7 @@ const ActionButtons = ({
   iconColor,
   handleSendPress,
   handleReceivePress,
-  handleExchangePress,
+  handleConvertPress,
 }) => {
   return (
     <View
@@ -39,13 +39,13 @@ const ActionButtons = ({
         <Text style={ActivityScreenStyle.mainButtonText}>{t("Receive")}</Text>
       </TouchableOpacity>
 
-      {/* Exchange button */}
+      {/* Convert button */}
       <TouchableOpacity
         style={[ActivityScreenStyle.roundButton, { flex: 1 }]} // Equal width for each button
-        onPress={handleExchangePress}
+        onPress={handleConvertPress}
       >
         <Icon name="swap-horiz" size={24} color={iconColor} />
-        <Text style={ActivityScreenStyle.mainButtonText}>{t("Exchange")}</Text>
+        <Text style={ActivityScreenStyle.mainButtonText}>{t("Convert")}</Text>
       </TouchableOpacity>
     </View>
   );

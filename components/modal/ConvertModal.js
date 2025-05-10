@@ -19,10 +19,10 @@ import { MaterialIcons as Icon } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
-const ExchangeModal = ({
+const ConvertModal = ({
   isDarkMode,
   visible,
-  setExchangeModalVisible,
+  setConvertModalVisible,
   fromDropdownVisible,
   setFromDropdownVisible,
   toDropdownVisible,
@@ -37,7 +37,7 @@ const ExchangeModal = ({
   const router = useNavigation();
   const toChainTagsScrollRef = useRef(null);
   const [confirmModalVisible, setConfirmModalVisible] = useState(false);
-  const [exchangeRate, setExchangeRate] = useState("");
+  const [exchangeRate, setConvertRate] = useState("");
   const [selectedFromToken, setSelectedFromToken] = useState(null);
   const [selectedToToken, setSelectedToToken] = useState("");
   const [toValue, setToValue] = useState("");
@@ -97,13 +97,13 @@ const ExchangeModal = ({
         .includes(searchToToken.toLowerCase());
     });
 
-  const handleConfirmExchange = async () => {
+  const handleConfirmConvert = async () => {
     if (!selectedFromToken || !selectedToToken || !fromValue) {
-      console.log("缺少必要参数，无法执行Exchange");
+      console.log("缺少必要参数，无法执行Convert");
       return;
     }
 
-    setExchangeModalVisible(false);
+    setConvertModalVisible(false);
     setConfirmModalVisible(true);
     try {
       const fromDetails = getTokenDetails(selectedFromToken);
@@ -135,9 +135,9 @@ const ExchangeModal = ({
         provider: "openocean",
       };
 
-      console.log("准备发起Exchange请求：", requestBody);
+      console.log("准备发起Convert请求：", requestBody);
 
-      const response = await fetch(swapAPI.executeExchange, {
+      const response = await fetch(swapAPI.executeConvert, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -149,13 +149,13 @@ const ExchangeModal = ({
       }
 
       const responseData = await response.json();
-      console.log("Exchange API返回：", responseData);
+      console.log("Convert API返回：", responseData);
 
       if (responseData?.code === "0") {
-        console.log("Exchange成功");
+        console.log("Convert成功");
         console.log("交易签名Data：", responseData.data?.data);
 
-        // 👉 新增：把Exchange返回的data封装成sign消息发给设备
+        // 👉 新增：把Convert返回的data封装成sign消息发给设备
         const hexToSign = responseData.data.data;
         const chainKey = "ethereum"; // 这里先固定，如果以后支持其他链，记得做成动态
         const path = "m/44'/60'/0'/0/0"; // 你的默认BIP44路径
@@ -169,12 +169,12 @@ const ExchangeModal = ({
           writeCharacteristicUUID,
           signBase64
         );
-        console.log("Exchange的sign消息已发送给设备等待签名...");
+        console.log("Convert的sign消息已发送给设备等待签名...");
       } else {
-        console.log("Exchange失败", responseData?.message || "未知错误");
+        console.log("Convert失败", responseData?.message || "未知错误");
       }
     } catch (error) {
-      console.log("发送Exchange请求异常:", error);
+      console.log("发送Convert请求异常:", error);
     }
   };
 
@@ -228,7 +228,7 @@ const ExchangeModal = ({
 
         const rate = result.instantRate;
 
-        setExchangeRate(rate);
+        setConvertRate(rate);
 
         console.log("即时汇率是：", rate);
 
@@ -247,16 +247,16 @@ const ExchangeModal = ({
   };
 
   useEffect(() => {
-    console.log("[ExchangeModal] useEffect触发了");
+    console.log("[ConvertModal] useEffect触发了");
     console.log("selectedFromToken:", selectedFromToken);
     console.log("selectedToToken:", selectedToToken);
     console.log("fromValue:", fromValue);
 
     if (selectedFromToken && selectedToToken && !!fromValue) {
-      console.log("[ExchangeModal] 条件满足，调用 calcRealPrice");
+      console.log("[ConvertModal] 条件满足，调用 calcRealPrice");
       calcRealPrice();
     } else {
-      console.log("[ExchangeModal] 条件不满足，暂时不请求价格");
+      console.log("[ConvertModal] 条件不满足，暂时不请求价格");
     }
   }, [selectedFromToken, selectedToToken, fromValue]);
 
@@ -280,19 +280,19 @@ const ExchangeModal = ({
 
   return (
     <>
-      {/* Exchange Modal */}
+      {/* Convert Modal */}
       <Modal
         visible={visible}
         transparent={true}
         animationType="slide"
-        onRequestClose={() => setExchangeModalVisible(false)}
+        onRequestClose={() => setConvertModalVisible(false)}
       >
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
           style={{ flex: 1 }}
         >
           <TouchableWithoutFeedback
-            onPress={() => setExchangeModalVisible(false)}
+            onPress={() => setConvertModalVisible(false)}
           >
             <BlurView intensity={10} style={ActivityScreenStyle.centeredView}>
               <View
@@ -578,16 +578,16 @@ const ExchangeModal = ({
                   )}
                 </View>
 
-                {/* Exchange Button */}
+                {/* Convert Button */}
                 <TouchableOpacity
                   style={ActivityScreenStyle.swapButton}
                   onPress={() => {
-                    // Exchange values
+                    // Convert values
                     const tempValue = fromValue;
                     setFromValue(toValue);
                     setToValue(tempValue);
 
-                    // Exchange selected tokens
+                    // Convert selected tokens
                     const tempToken = selectedFromToken;
                     setSelectedFromToken(selectedToToken);
                     setSelectedToToken(tempToken);
@@ -902,7 +902,7 @@ const ExchangeModal = ({
                       !(selectedFromToken && selectedToToken && fromValue)
                     }
                     onPress={() => {
-                      setExchangeModalVisible(false); // ✅先关闭主Modal
+                      setConvertModalVisible(false); // ✅先关闭主Modal
                       setConfirmModalVisible(true); // ✅打开二次确认Modal
                     }}
                     style={[
@@ -926,7 +926,7 @@ const ExchangeModal = ({
                   </TouchableOpacity>
                   {/* Close Button */}
                   <TouchableOpacity
-                    onPress={() => setExchangeModalVisible(false)}
+                    onPress={() => setConvertModalVisible(false)}
                     style={[ActivityScreenStyle.cancelButton]}
                   >
                     <Text style={ActivityScreenStyle.cancelButtonText}>
@@ -987,7 +987,7 @@ const ExchangeModal = ({
                   )
                 </Text>
                 <Text style={ActivityScreenStyle.transactionText}>
-                  {t("Exchange Rate")}: 1{" "}
+                  {t("Convert Rate")}: 1{" "}
                   {getTokenDetails(selectedFromToken)?.symbol} ≈ {exchangeRate}{" "}
                   {getTokenDetails(selectedToToken)?.symbol}
                 </Text>
@@ -1022,7 +1022,7 @@ const ExchangeModal = ({
                   style={ActivityScreenStyle.optionButton}
                   onPress={async () => {
                     setConfirmModalVisible(false);
-                    await handleConfirmExchange(); // 🔥这里才真正去发起交易
+                    await handleConfirmConvert(); // 🔥这里才真正去发起交易
                   }}
                 >
                   <Text style={ActivityScreenStyle.submitButtonText}>
@@ -1047,4 +1047,4 @@ const ExchangeModal = ({
   );
 };
 
-export default ExchangeModal;
+export default ConvertModal;

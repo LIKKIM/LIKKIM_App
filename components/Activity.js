@@ -40,7 +40,7 @@ import CheckStatusModal from "./modal/CheckStatusModal";
 import BluetoothModal from "./modal/BluetoothModal";
 import AmountModal from "./modal/AmountModal";
 import SelectCryptoModal from "./modal/SelectCryptoModal";
-import ExchangeModal from "./modal/ExchangeModal";
+import ConvertModal from "./modal/ConvertModal";
 import ShowReceiveInfoModal from "./modal/ShowReceiveInfoModal";
 import SecurityCodeModal from "./modal/SecurityCodeModal";
 import ActivityLogComponent from "./ActivityScreen/ActivityLogComponent";
@@ -87,7 +87,7 @@ function ActivityScreen() {
 
   // 交易/设备/界面状态
   const [receivedVerificationCode, setReceivedVerificationCode] = useState("");
-  const [swapModalVisible, setExchangeModalVisible] = useState(false);
+  const [swapModalVisible, setConvertModalVisible] = useState(false);
   const [fromValue, setFromValue] = useState("");
   const [toValue, setToValue] = useState("");
   const [
@@ -1275,8 +1275,8 @@ function ActivityScreen() {
     }
   };
 
-  const handleExchangePress = () => {
-    setExchangeModalVisible(true);
+  const handleConvertPress = () => {
+    setConvertModalVisible(true);
   };
   const handleDevicePress = async (device) => {
     // 检查是否传递了有效的设备对象
@@ -1603,7 +1603,7 @@ function ActivityScreen() {
           iconColor={iconColor}
           handleSendPress={handleSendPress}
           handleReceivePress={handleReceivePress}
-          handleExchangePress={handleExchangePress}
+          handleConvertPress={handleConvertPress}
         />
         {/* 交易历史记录组件 */}
         <ActivityLogComponent
@@ -1799,11 +1799,11 @@ function ActivityScreen() {
           t={t}
         />
 
-        {/* Exchange Modal */}
-        <ExchangeModal
+        {/* Convert Modal */}
+        <ConvertModal
           isDarkMode={isDarkMode}
           visible={swapModalVisible}
-          setExchangeModalVisible={setExchangeModalVisible}
+          setConvertModalVisible={setConvertModalVisible}
           fromDropdownVisible={fromDropdownVisible}
           setFromDropdownVisible={setFromDropdownVisible}
           toDropdownVisible={toDropdownVisible}
