@@ -667,7 +667,7 @@ i18n
 
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "Pour réinitialiser l'application et supprimer les données enregistrées, veuillez la désinstaller puis la réinstaller sur votre téléphone.",
-          "Value in USD": "Valeur en USD",
+
           Fee: "Frais",
           "Verifying address on your device...":
             "Vérification de l'adresse sur votre appareil...",
@@ -1242,7 +1242,7 @@ i18n
 
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "アプリをリセットして保存されたデータを削除するには、アンインストールしてからスマートフォンに再インストールしてください。",
-          "Value in USD": "米ドルでの値",
+
           Fee: "手数料",
           "Verifying address on your device...":
             "デバイス上のアドレスを確認しています...",
@@ -1791,7 +1791,7 @@ i18n
 
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "Para repor a aplicação e eliminar os dados guardados, desinstale-a e volte a instalá-la no seu telemóvel.",
-          "Value in USD": "Valor em USD",
+
           Fee: "Taxa",
           "Verifying address on your device...":
             "A verificar o endereço no seu dispositivo...",
@@ -2725,7 +2725,7 @@ i18n
 
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "Аппликейшнийг дахин тохируулах болон хадгалагдсан өгөгдлийг устгахын тулд гар утсандаа апп-аа устгаад дахин суулгана уу.",
-          "Value in USD": "มูลค่าในสกุลเงิน USD",
+
           Fee: "Хураамж",
           "Address Book": "Хаягийн дэвтэр",
           Swap: "Солилцоо",
