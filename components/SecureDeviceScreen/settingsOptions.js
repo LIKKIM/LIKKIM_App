@@ -50,14 +50,20 @@ const getSettingsOptions = ({
   return {
     settings: [
       {
-        title: t("Default Currency"),
-        icon: "attach-money",
-        onPress: () => {
-          Vibration.vibrate();
-          setCurrencyModalVisible(true);
-        },
-        extraIcon: "arrow-drop-down",
-        selectedOption: selectedCurrency,
+        ...(cryptoCards && cryptoCards.length > 0
+          ? [
+              {
+                title: t("Default Currency"),
+                icon: "attach-money",
+                onPress: () => {
+                  Vibration.vibrate();
+                  setCurrencyModalVisible(true);
+                },
+                extraIcon: "arrow-drop-down",
+                selectedOption: selectedCurrency,
+              },
+            ]
+          : []),
       },
       {
         title: t("Language"),
