@@ -678,7 +678,8 @@ i18n
           "Success!": "Succès !",
           "Enable Face ID": "Activer Face ID",
           "I lost my password": "J'ai perdu mon mot de passe",
-          "": "Veuillez désinstaller puis réinstaller l'application sur votre téléphone pour supprimer les données de l'application LIKKIM, y compris les comptes et les paramètres.",
+          "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
+            "Pour réinitialiser l'application et supprimer les données enregistrées, veuillez la désinstaller puis la réinstaller sur votre téléphone.",
           "Value in USD": "Valeur en USD",
           Fee: "Frais",
           "Waiting for approval on your device...":
@@ -911,7 +912,6 @@ i18n
           "Delete Wallet": "Eliminar cartera",
           Support: "Soporte",
           Warning: "Advertencia",
-
           deleteDeviceConfirmMessage:
             "¿Está seguro de que desea eliminar este dispositivo de la aplicación?\nEsto borrará toda la información almacenada localmente relacionada con este dispositivo.\n\nPuede volver a conectar el dispositivo más tarde para sincronizar los datos nuevamente.\nAsegúrese de haber guardado toda la información importante antes de continuar.",
           Delete: "Eliminar",
@@ -919,9 +919,8 @@ i18n
           "Your wallet has been deleted successfully.":
             "Tu billetera ha sido eliminada con éxito.",
           "Insufficient Balance": "Saldo insuficiente",
-          "Waiting for approval on your device....":
-            "Confirmando la transacción en el dispositivo LIKKIM...",
-
+          "Waiting for approval on your device...":
+            "Esperando aprobación en su dispositivo...",
           Save: "Guardar",
           Address: "Dirección",
           "Add Address": "Añadir dirección",
