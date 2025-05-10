@@ -188,14 +188,6 @@ function SecureDeviceScreen({ onDarkModeChange }) {
     setModalVisible(true);
   };
 
-  const closeLockCodeModal = () => {
-    setLockCodeModalVisible(false);
-    setPassword("");
-    setConfirmPassword("");
-    setIsPasswordHidden(true);
-    setIsConfirmPasswordHidden(true);
-  };
-
   const closeEnterLockCodeModal = () => {
     setEnterLockCodeModalVisible(false);
     setCurrentPassword("");
@@ -317,6 +309,14 @@ function SecureDeviceScreen({ onDarkModeChange }) {
     } else {
       setPasswordError(t("Passwords do not match"));
     }
+  };
+
+  const closeLockCodeModal = () => {
+    setLockCodeModalVisible(false);
+    setPassword("");
+    setConfirmPassword("");
+    setIsPasswordHidden(true);
+    setIsConfirmPasswordHidden(true);
   };
 
   const handleConfirmPassword = async () => {
