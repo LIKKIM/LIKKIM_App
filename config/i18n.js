@@ -131,7 +131,7 @@ i18n
           "Secure and Reliable": "Secure and Reliable",
           "Bank-level security for your digital assets.":
             "Bank-level security for your digital assets.",
-          "Manage Your Cryptos": "Manage Your Cryptos",
+          "Manage Your Assets": "Manage Your Assets",
           "Easily manage multiple cryptocurrencies.":
             "Easily manage multiple cryptocurrencies.",
           Welcome: "Welcome",
@@ -307,7 +307,7 @@ i18n
           "Secure and Reliable": "安全可靠",
           "Bank-level security for your digital assets.":
             "银行级别的数字资产安全。",
-          "Manage Your Cryptos": "管理您的加密货币",
+          "Manage Your Assets": "管理您的加密货币",
           "Easily manage multiple cryptocurrencies.": "轻松管理多种加密货币。",
           Welcome: "欢迎",
           "Your secure and user-friendly digital wallet.":
@@ -484,7 +484,7 @@ i18n
           "Secure and Reliable": "安全可靠",
           "Bank-level security for your digital assets.":
             "銀行級的數位資產安全。",
-          "Manage Your Cryptos": "管理您的加密貨幣",
+          "Manage Your Assets": "管理您的加密貨幣",
           "Easily manage multiple cryptocurrencies.": "輕鬆管理多種加密貨幣。",
           Welcome: "歡迎",
           "Your secure and user-friendly digital wallet.":
@@ -678,7 +678,7 @@ i18n
           "Secure and Reliable": "Sécurisé et fiable",
           "Bank-level security for your digital assets.":
             "Sécurité de niveau bancaire pour vos actifs numériques.",
-          "Manage Your Cryptos": "Gérez vos cryptomonnaies",
+          "Manage Your Assets": "Gérez vos cryptomonnaies",
           "Easily manage multiple cryptocurrencies.":
             "Gérez facilement plusieurs cryptomonnaies.",
           Welcome: "Bienvenue",
@@ -868,7 +868,7 @@ i18n
           "Secure and Reliable": "Seguro y confiable",
           "Bank-level security for your digital assets.":
             "Seguridad a nivel bancario para tus activos digitales.",
-          "Manage Your Cryptos": "Gestiona tus criptomonedas",
+          "Manage Your Assets": "Gestiona tus criptomonedas",
           "Easily manage multiple cryptocurrencies.":
             "Gestiona fácilmente múltiples criptomonedas.",
           Welcome: "Bienvenido",
@@ -1046,7 +1046,7 @@ i18n
           "Secure and Reliable": "آمن وموثوق",
           "Bank-level security for your digital assets.":
             "أمان بمستوى البنوك لأصولك الرقمية.",
-          "Manage Your Cryptos": "إدارة عملاتك المشفرة",
+          "Manage Your Assets": "إدارة عملاتك المشفرة",
           "Easily manage multiple cryptocurrencies.":
             "إدارة سهلة لعدة عملات مشفرة.",
           Welcome: "مرحبًا",
@@ -1243,7 +1243,7 @@ i18n
           "Secure and Reliable": "安全で信頼性の高い",
           "Bank-level security for your digital assets.":
             "デジタル資産のための銀行レベルのセキュリティ。",
-          "Manage Your Cryptos": "あなたの暗号通貨を管理する",
+          "Manage Your Assets": "あなたの暗号通貨を管理する",
           "Easily manage multiple cryptocurrencies.":
             "複数の暗号通貨を簡単に管理。",
           Welcome: "ようこそ",
@@ -1423,7 +1423,7 @@ i18n
           "Secure and Reliable": "Надежно и безопасно",
           "Bank-level security for your digital assets.":
             "Банковский уровень безопасности для ваших цифровых активов.",
-          "Manage Your Cryptos": "Управляйте вашими криптовалютами",
+          "Manage Your Assets": "Управляйте вашими криптовалютами",
           "Easily manage multiple cryptocurrencies.":
             "Легко управляйте несколькими криптовалютами.",
           Welcome: "Добро пожаловать",
@@ -1597,7 +1597,7 @@ i18n
           "Secure and Reliable": "안전하고 신뢰성 있음",
           "Bank-level security for your digital assets.":
             "디지털 자산을 위한 은행 수준의 보안.",
-          "Manage Your Cryptos": "당신의 암호화폐 관리",
+          "Manage Your Assets": "당신의 암호화폐 관리",
           "Easily manage multiple cryptocurrencies.":
             "여러 암호화폐를 쉽게 관리하세요.",
           Welcome: "환영합니다",
@@ -1776,7 +1776,7 @@ i18n
           "Secure and Reliable": "Seguro e Confiável",
           "Bank-level security for your digital assets.":
             "Segurança de nível bancário para seus ativos digitais.",
-          "Manage Your Cryptos": "Gerencie Suas Criptomoedas",
+          "Manage Your Assets": "Gerencie Suas Criptomoedas",
           "Easily manage multiple cryptocurrencies.":
             "Gerencie facilmente várias criptomoedas.",
           Welcome: "Bem-vindo",
@@ -1958,7 +1958,7 @@ i18n
           "Secure and Reliable": "Seguro e Confiável",
           "Bank-level security for your digital assets.":
             "Segurança de nível bancário para seus ativos digitais.",
-          "Manage Your Cryptos": "Gerencie Suas Criptomoedas",
+          "Manage Your Assets": "Gerencie Suas Criptomoedas",
           "Easily manage multiple cryptocurrencies.":
             "Gerencie facilmente várias criptomoedas.",
           Welcome: "Bem-vindo",
@@ -2156,7 +2156,7 @@ i18n
           "Secure and Reliable": "Sicuro e affidabile",
           "Bank-level security for your digital assets.":
             "Sicurezza a livello bancario per i tuoi beni digitali.",
-          "Manage Your Cryptos": "Gestisci le tue criptovalute",
+          "Manage Your Assets": "Gestisci le tue criptovalute",
           "Easily manage multiple cryptocurrencies.":
             "Gestisci facilmente più criptovalute.",
           Welcome: "Benvenuto",
@@ -2338,7 +2338,7 @@ i18n
           "Secure and Reliable": "Sicher und zuverlässig",
           "Bank-level security for your digital assets.":
             "Banksicherheit für Ihre digitalen Vermögenswerte.",
-          "Manage Your Cryptos": "Verwalten Sie Ihre Kryptowährungen",
+          "Manage Your Assets": "Verwalten Sie Ihre Kryptowährungen",
           "Easily manage multiple cryptocurrencies.":
             "Verwalten Sie problemlos mehrere Kryptowährungen.",
           Welcome: "Willkommen",
@@ -2518,7 +2518,7 @@ i18n
           "Secure and Reliable": "सुरक्षित और विश्वसनीय",
           "Bank-level security for your digital assets.":
             "आपकी डिजिटल संपत्तियों के लिए बैंक-स्तरीय सुरक्षा।",
-          "Manage Your Cryptos": "अपनी क्रिप्टो करेंसीज का प्रबंधन करें",
+          "Manage Your Assets": "अपनी क्रिप्टो करेंसीज का प्रबंधन करें",
           "Easily manage multiple cryptocurrencies.":
             "आसानी से कई क्रिप्टोकरेंसियों का प्रबंधन करें।",
           Welcome: "स्वागत है",
@@ -2696,7 +2696,7 @@ i18n
           "Secure and Reliable": "Аюулгүй ба найдвартай",
           "Bank-level security for your digital assets.":
             "Таны цахим хөрөнгөд зориулсан банкны түвшний аюулгүй байдал.",
-          "Manage Your Cryptos": "Криптовалютуудаа удирдах",
+          "Manage Your Assets": "Криптовалютуудаа удирдах",
           "Easily manage multiple cryptocurrencies.":
             "Олон криптовалютуудыг хялбар удирда.",
           Welcome: "Тавтай морилно уу",
@@ -2872,7 +2872,7 @@ i18n
           "Secure and Reliable": "ปลอดภัยและเชื่อถือได้",
           "Bank-level security for your digital assets.":
             "ความปลอดภัยระดับธนาคารสำหรับทรัพย์สินดิจิทัลของคุณ.",
-          "Manage Your Cryptos": "จัดการคริปโตของคุณ",
+          "Manage Your Assets": "จัดการคริปโตของคุณ",
           "Easily manage multiple cryptocurrencies.":
             "จัดการคริปโตเคอร์เรนซี่หลายอย่างได้ง่ายดาย.",
           Welcome: "ยินดีต้อนรับ",
@@ -3049,7 +3049,7 @@ i18n
           "Secure and Reliable": "Безпечний та надійний",
           "Bank-level security for your digital assets.":
             "Банківський рівень безпеки для ваших цифрових активів.",
-          "Manage Your Cryptos": "Керуйте своїми криптовалютами",
+          "Manage Your Assets": "Керуйте своїми криптовалютами",
           "Easily manage multiple cryptocurrencies.":
             "Легко керуйте декількома криптовалютами.",
           Welcome: "Ласкаво просимо",
@@ -3225,7 +3225,7 @@ i18n
           "Secure and Reliable": "An toàn và Đáng tin cậy",
           "Bank-level security for your digital assets.":
             "Bảo mật cấp ngân hàng cho tài sản số của bạn.",
-          "Manage Your Cryptos": "Quản lý Tiền điện tử của bạn",
+          "Manage Your Assets": "Quản lý Tiền điện tử của bạn",
           "Easily manage multiple cryptocurrencies.":
             "Dễ dàng quản lý nhiều loại tiền điện tử.",
           Welcome: "Chào mừng",
@@ -3406,7 +3406,7 @@ i18n
           "Secure and Reliable": "Aman dan Terpercaya",
           "Bank-level security for your digital assets.":
             "Keamanan tingkat bank untuk aset digital Anda.",
-          "Manage Your Cryptos": "Kelola Kripto Anda",
+          "Manage Your Assets": "Kelola Kripto Anda",
           "Easily manage multiple cryptocurrencies.":
             "Mudah mengelola berbagai mata uang kripto.",
           Welcome: "Selamat Datang",
@@ -3586,7 +3586,7 @@ i18n
           "Secure and Reliable": "Ligtas at Mapagkakatiwalaan",
           "Bank-level security for your digital assets.":
             "Seguridad na antas bangko para sa iyong mga digital asset.",
-          "Manage Your Cryptos": "Pamahalaan ang Iyong Mga Krypto",
+          "Manage Your Assets": "Pamahalaan ang Iyong Mga Krypto",
           "Easily manage multiple cryptocurrencies.":
             "Madaling pamahalaan ang maramihang mga cryptocurrency.",
           Welcome: "Maligayang Pagdating",
@@ -3767,7 +3767,7 @@ i18n
           "Secure and Reliable": "নিরাপদ ও নির্ভরযোগ্য",
           "Bank-level security for your digital assets.":
             "আপনার ডিজিটাল সম্পদের জন্য ব্যাঙ্ক-স্তরের নিরাপত্তা।",
-          "Manage Your Cryptos": "আপনার ক্রিপ্টো পরিচালনা করুন",
+          "Manage Your Assets": "আপনার ক্রিপ্টো পরিচালনা করুন",
           "Easily manage multiple cryptocurrencies.":
             "সহজেই একাধিক ক্রিপ্টোকারেন্সি পরিচালনা করুন।",
           Welcome: "स्वागत है",

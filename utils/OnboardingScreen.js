@@ -50,7 +50,7 @@ const OnboardingScreen = ({ onDone }) => {
     },
     {
       key: "slide2",
-      title: i18n.t("Manage Your Cryptos"),
+      title: i18n.t("Manage Your Assets"),
       text: i18n.t("Easily manage multiple cryptocurrencies."),
       image: require("../assets/slider/slider2.png"),
     },
@@ -107,7 +107,7 @@ const OnboardingScreen = ({ onDone }) => {
     return (
       <LinearGradient colors={["#21201E", "#0E0D0D"]} style={styles.slide}>
         {/* by will:优化引导页状态栏色差 */}
-        <StatusBar backgroundColor={'rgb(82,82,82)'}  barStyle="dark-content" />
+        <StatusBar backgroundColor={"rgb(82,82,82)"} barStyle="dark-content" />
         <BlurView intensity={50} style={StyleSheet.absoluteFillObject}>
           <LinearGradient
             colors={["#00000000", "#CCB68C30", "#CCB68C60"]}
