@@ -155,7 +155,7 @@ i18n
           "Last connected": "Last connected",
           "Secure Device Status": "Secure Device Status",
           "Device Settings": "Device Settings",
-          "Delete Wallet": "Delete Wallet",
+          "Reset Local Profile": "Reset Local Profile",
           Support: "Support",
           Warning: "Warning",
           deleteDeviceConfirmMessage:
@@ -327,7 +327,7 @@ i18n
           "Last connected": "最后连接",
           "Secure Device Status": "安全设备状态",
           "Device Settings": "设备设置",
-          "Delete Wallet": "删除钱包",
+          "Reset Local Profile": "重置本地数据",
           Support: "帮助",
           Warning: "警告",
           deleteDeviceConfirmMessage:
@@ -504,7 +504,7 @@ i18n
           "Last connected": "最後連接",
           "Secure Device Status": "安全設備狀態",
           "Device Settings": "裝置設定",
-          "Delete Wallet": "刪除錢包",
+          "Reset Local Profile": "重設本機資料",
           Support: "幫助",
           Warning: "警告",
           deleteDeviceConfirmMessage:
@@ -701,7 +701,7 @@ i18n
           "Last connected": "Dernière connexion",
           "Secure Device Status": "État de l'appareil sécurisé",
           "Device Settings": "Paramètres de l'appareil",
-          "Delete Wallet": "Supprimer le portefeuille",
+          "Reset Local Profile": "Réinitialiser les données locales",
           Support: "Assistance",
           Warning: "Avertissement",
           deleteDeviceConfirmMessage:
@@ -890,7 +890,7 @@ i18n
           "Last connected": "Última conexión",
           "Secure Device Status": "Estado del dispositivo seguro",
           "Device Settings": "Configuración del dispositivo",
-          "Delete Wallet": "Eliminar cartera",
+          "Reset Local Profile": "Restablecer los datos locales",
           Support: "Soporte",
           Warning: "Advertencia",
           deleteDeviceConfirmMessage:
@@ -1068,7 +1068,7 @@ i18n
           "Last connected": "آخر اتصال",
           "Secure Device Status": "حالة الجهاز الآمن",
           "Device Settings": "إعدادات الجهاز",
-          "Delete Wallet": "حذف المحفظة",
+          "Reset Local Profile": "إعادة تعيين البيانات المحلية",
           Support: "الدعم",
           Warning: "تحذير",
           deleteDeviceConfirmMessage:
@@ -1266,7 +1266,7 @@ i18n
           "Last connected": "最終接続",
           "Secure Device Status": "セキュリティデバイスの状態",
           "Device Settings": "デバイス設定",
-          "Delete Wallet": "ウォレット削除",
+          "Reset Local Profile": "ローカルデータをリセット",
           Support: "サポート",
           Warning: "警告",
           deleteDeviceConfirmMessage:
@@ -1445,7 +1445,7 @@ i18n
           "Last connected": "Последнее подключение",
           "Secure Device Status": "Состояние защищенного устройства",
           "Device Settings": "Настройки устройства",
-          "Delete Wallet": "Удалить кошелек",
+          "Reset Local Profile": "Сброс локальных данных",
           Support: "Поддержка",
           Warning: "Предупреждение",
           deleteDeviceConfirmMessage:
@@ -1619,7 +1619,7 @@ i18n
           "Last connected": "마지막 연결",
           "Secure Device Status": "보안 장치 상태",
           "Device Settings": "장치 설정",
-          "Delete Wallet": "지갑 삭제",
+          "Reset Local Profile": "로컬 데이터 재설정",
           Support: "지원",
           Warning: "경고",
           deleteDeviceConfirmMessage:
@@ -1799,7 +1799,7 @@ i18n
           "Last connected": "Última conexão",
           "Secure Device Status": "Estado do dispositivo seguro",
           "Device Settings": "Definições do dispositivo",
-          "Delete Wallet": "Eliminar Carteira",
+          "Reset Local Profile": "Repor os dados locais",
           Support: "Suporte",
           Warning: "Aviso",
           deleteDeviceConfirmMessage:
@@ -1997,7 +1997,7 @@ i18n
           "Last connected": "Ultima connessione",
           "Secure Device Status": "Estado do dispositivo seguro",
           "Device Settings": "Configurações do dispositivo",
-          "Delete Wallet": "Excluir Carteira",
+          "Reset Local Profile": "Redefinir os dados locais",
           Support: "Suporte",
           Warning: "Aviso",
           deleteDeviceConfirmMessage:
@@ -2178,7 +2178,7 @@ i18n
           "Last connected": "Ultima connessione",
           "Secure Device Status": "Stato del dispositivo sicuro",
           "Device Settings": "Impostazioni del dispositivo",
-          "Delete Wallet": "Elimina Portafoglio",
+          "Reset Local Profile": "Reimposta i dati locali",
           Support: "Supporto",
           Warning: "Avviso",
           deleteDeviceConfirmMessage:
@@ -2361,7 +2361,7 @@ i18n
           "Last connected": "Zuletzt verbunden",
           "Secure Device Status": "Status des sicheren Geräts",
           "Device Settings": "Geräteeinstellungen",
-          "Delete Wallet": "Wallet löschen",
+          "Reset Local Profile": "Lokale Daten zurücksetzen",
           Support: "Unterstützung",
           Warning: "Warnung",
           deleteDeviceConfirmMessage:
@@ -2540,7 +2540,8 @@ i18n
           "Last connected": "अंतिम कनेक्शन",
           "Secure Device Status": "सुरक्षित डिवाइस की स्थिति",
           "Device Settings": "डिवाइस सेटिंग्स",
-          "Delete Wallet": "वॉलेट हटाएँ",
+          "Reset Local Profile": "स्थानीय डेटा रीसेट करें",
+
           Support: "सहायता",
           Warning: "चेतावनी",
           deleteDeviceConfirmMessage:
@@ -2718,7 +2719,7 @@ i18n
           "Last connected": "Сүүлийн холболт",
           "Secure Device Status": "Аюулгүй төхөөрөмжийн төлөв",
           "Device Settings": "Төхөөрөмжийн тохиргоо",
-          "Delete Wallet": "Хэтэвч устгах",
+          "Reset Local Profile": "Локал өгөгдлийг дахин тохируулах",
           Support: "Тусламж",
           Warning: "Сэрэмжлүүлэг",
           deleteDeviceConfirmMessage:
@@ -2893,7 +2894,7 @@ i18n
           "Last connected": "การเชื่อมต่อครั้งสุดท้าย",
           "Secure Device Status": "สถานะของอุปกรณ์รักษาความปลอดภัย",
           "Device Settings": "การตั้งค่าอุปกรณ์",
-          "Delete Wallet": "ลบกระเป๋าเงิน",
+          "Reset Local Profile": "รีเซ็ตข้อมูลภายในเครื่อง",
           Support: "สนับสนุน",
           Warning: "คำเตือน",
           deleteDeviceConfirmMessage:
@@ -3071,7 +3072,7 @@ i18n
           "Last connected": "Останнє підключення",
           "Secure Device Status": "Стан безпечного пристрою",
           "Device Settings": "Налаштування пристрою",
-          "Delete Wallet": "Видалити гаманець",
+          "Reset Local Profile": "Скинути локальні дані",
           Support: "Підтримка",
           Warning: "Попередження",
           deleteDeviceConfirmMessage:
@@ -3248,7 +3249,7 @@ i18n
           "Last connected": "Kết nối lần cuối",
           "Secure Device Status": "Trạng thái thiết bị an toàn",
           "Device Settings": "Cài đặt thiết bị",
-          "Delete Wallet": "Xóa ví",
+          "Reset Local Profile": "Đặt lại dữ liệu cục bộ",
           Support: "Hỗ trợ",
           Warning: "Cảnh báo",
           deleteDeviceConfirmMessage:
@@ -3428,7 +3429,7 @@ i18n
           "Last connected": "Terhubung terakhir",
           "Secure Device Status": "Status perangkat aman",
           "Device Settings": "Pengaturan perangkat",
-          "Delete Wallet": "Hapus Dompet",
+          "Reset Local Profile": "Setel ulang data lokal",
           Support: "Dukungan",
           Warning: "Peringatan",
           deleteDeviceConfirmMessage:
@@ -3608,7 +3609,7 @@ i18n
           "Last connected": "Huling koneksyon",
           "Secure Device Status": "Kalagayan ng secure na device",
           "Device Settings": "Mga Setting ng Device",
-          "Delete Wallet": "Tanggalin ang Wallet",
+          "Reset Local Profile": "I-reset ang lokal na data",
           Support: "Suporta",
           Warning: "Babala",
           deleteDeviceConfirmMessage:
@@ -3789,7 +3790,7 @@ i18n
           "Last connected": "শেষ সংযোগ",
           "Secure Device Status": "নিরাপদ ডিভাইসের অবস্থা",
           "Device Settings": "ডিভাইস সেটিংস",
-          "Delete Wallet": "ওয়ালেট মুছুন",
+          "Reset Local Profile": "স্থানীয় ডেটা রিসেট করুন",
           Support: "সমর্থন",
           Warning: "সতর্কতা",
           deleteDeviceConfirmMessage:

@@ -185,7 +185,7 @@ const getSettingsOptions = ({
               onPress: toggleDeleteWalletVisibility,
             },
             isDeleteWalletVisible && {
-              title: t("Delete Wallet"),
+              title: t("Reset Local Profile"),
               icon: "delete-outline",
               onPress: () => {
                 Vibration.vibrate();
