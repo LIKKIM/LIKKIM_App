@@ -174,7 +174,7 @@ function AppContent({
       const backRoute = rootRoutes?.find((route) => route.name === "Back");
       if (backRoute && backRoute.state) {
         const tabRoutes = backRoute.state.routes;
-        const walletRoute = tabRoutes.find((route) => route.name === "Wallet");
+        const walletRoute = tabRoutes.find((route) => route.name === "Assets");
         if (walletRoute?.params?.isModalVisible !== undefined) {
           setWalletModalVisible(walletRoute.params.isModalVisible);
         }
@@ -216,7 +216,7 @@ function AppContent({
 
   const handleConfirmDelete = () => {
     setHeaderDropdownVisible(false);
-    navigation.navigate("Wallet", {
+    navigation.navigate("Assets", {
       showDeleteConfirmModal: true,
       isModalVisible: true,
     });
@@ -229,7 +229,7 @@ function AppContent({
           lazy: false,
           tabBarIcon: ({ focused, size }) => {
             let iconName;
-            if (route.name === "Wallet") {
+            if (route.name === "Assets") {
               iconName = "account-balance-wallet";
             } else if (route.name === "Activity") {
               iconName = "swap-horiz";
@@ -248,7 +248,7 @@ function AppContent({
           },
           tabBarLabel: ({ focused }) => {
             let label;
-            if (route.name === "Wallet") label = t("Wallet");
+            if (route.name === "Assets") label = t("Assets");
             else if (route.name === "Activity") label = t("Activity");
             else if (route.name === "General") label = t("General");
             return (
@@ -287,7 +287,7 @@ function AppContent({
         })}
       >
         <Tab.Screen
-          name="Wallet"
+          name="Assets"
           component={VaultScreen}
           initialParams={{ isDarkMode }}
           options={({ route, navigation }) => {
@@ -309,7 +309,7 @@ function AppContent({
                     cryptoCards.length > 0 && (
                       <TouchableOpacity
                         onPress={() =>
-                          navigation.navigate("Wallet", { showAddModal: true })
+                          navigation.navigate("Assets", { showAddModal: true })
                         }
                         style={{ paddingRight: 28 }}
                       >

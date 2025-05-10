@@ -363,7 +363,7 @@ function VaultScreen({ route, navigation }) {
                       : "#888",
                 }}
               >
-                {t("Wallet")}
+                {t("Assets")}
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
