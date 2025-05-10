@@ -110,7 +110,7 @@ const TransactionConfirmationModal = ({
             <View style={ActivityScreenStyle.transactionText}>
               <Text style={ActivityScreenStyle.transactionText}>
                 <Text style={{ fontWeight: "bold", marginBottom: 8 }}>
-                  {t("Transaction Fee")}:
+                  {t("Processing Fee")}:
                 </Text>
               </Text>
               <View

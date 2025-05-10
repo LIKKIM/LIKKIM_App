@@ -377,7 +377,7 @@ function ActivityScreen() {
         console.log("✅ Rapid fee set to:", rapidGasPrice);
       }
     } catch (error) {
-      console.log("❌ Failed to fetch transaction fee:", error);
+      console.log("❌ Failed to fetch processing Fee:", error);
     }
   };
 
@@ -505,7 +505,7 @@ function ActivityScreen() {
         console.log("Balance:", selected.balance);
         console.log("Price in USD:", selected.priceUsd);
         console.log("Value in USD:", selected.valueUsd);
-        console.log("Transaction Fee:", selected.fee);
+        console.log("Processing Fee:", selected.fee);
       } else {
         console.log(
           " 监听 initialAdditionalCryptos 的变化未找到匹配的加密货币对象"

@@ -114,7 +114,7 @@ i18n
           Amount: "Amount",
           "Payment Address": "Payment Address",
           "Recipient Address": "Recipient Address",
-          "Transaction Fee": "Transaction Fee",
+          "Processing Fee": "Processing Fee",
           Confirm: "Confirm",
           "Waiting for Confirmation": "Waiting for Confirmation",
 
@@ -297,7 +297,7 @@ i18n
           Amount: "金额",
           "Payment Address": "付款地址",
           "Recipient Address": "收款人地址",
-          "Transaction Fee": "交易费",
+          "Processing Fee": "手续费",
           Confirm: "确认",
           "Waiting for Confirmation": "正在等待确认",
 
@@ -476,7 +476,7 @@ i18n
           Amount: "金額",
           "Payment Address": "付款地址",
           "Recipient Address": "收款人地址",
-          "Transaction Fee": "交易費",
+          "Processing Fee": "手續費",
           Confirm: "確認",
           "Waiting for Confirmation": "正在等待確認",
           "Screen lock enabled successfully": "螢幕鎖已成功啟用",
@@ -657,7 +657,7 @@ i18n
           Amount: "Montant",
           "Payment Address": "Adresse de paiement",
           "Recipient Address": "Adresse du destinataire",
-          "Transaction Fee": "Frais de transaction",
+          "Processing Fee": "Frais de traitement",
           Confirm: "Confirmer",
           "Waiting for Confirmation": "En attente de confirmation",
           "Screen lock enabled successfully":
@@ -862,7 +862,7 @@ i18n
           Amount: "Cantidad",
           "Payment Address": "Dirección de pago",
           "Recipient Address": "Dirección del destinatario",
-          "Transaction Fee": "Tarifa de transacción",
+          "Processing Fee": "Tarifa de procesamiento",
           Confirm: "Confirmar",
           "Waiting for Confirmation": "Esperando confirmación",
           "Screen lock enabled successfully":
@@ -1042,7 +1042,7 @@ i18n
           Amount: "المبلغ",
           "Payment Address": "عنوان الدفع",
           "Recipient Address": "عنوان المستلم",
-          "Transaction Fee": "رسوم التحويل",
+          "Processing Fee": "رسوم المعالجة",
           Confirm: "تأكيد",
           "Waiting for Confirmation": "بانتظار التأكيد",
           "Screen lock enabled successfully": "تم تفعيل قفل الشاشة بنجاح",
@@ -1230,7 +1230,7 @@ i18n
           Amount: "金額",
           "Payment Address": "支払いアドレス",
           "Recipient Address": "受信者のアドレス",
-          "Transaction Fee": "取引手数料",
+          "Processing Fee": "処理手数料",
           Confirm: "確認",
           "Waiting for Confirmation": "確認を待っています",
 
@@ -1422,7 +1422,7 @@ i18n
           Amount: "Сумма",
           "Payment Address": "Платежный адрес",
           "Recipient Address": "Адрес получателя",
-          "Transaction Fee": "Комиссия за транзакцию",
+          "Processing Fee": "Комиссия за обработку",
           Confirm: "Подтвердить",
           "Waiting for Confirmation": "Ожидание подтверждения",
           "Screen lock enabled successfully":
@@ -1600,7 +1600,7 @@ i18n
           Amount: "금액",
           "Payment Address": "결제 주소",
           "Recipient Address": "수취인 주소",
-          "Transaction Fee": "거래 수수료",
+          "Processing Fee": "처리 수수료",
           Confirm: "확인",
           "Waiting for Confirmation": "확인 대기 중",
           "Screen lock enabled successfully":
@@ -1780,7 +1780,7 @@ i18n
           Amount: "Quantidade",
           "Payment Address": "Endereço de pagamento",
           "Recipient Address": "Endereço do destinatário",
-          "Transaction Fee": "Taxa de transação",
+          "Processing Fee": "Taxa de processamento",
           Confirm: "Confirmar",
           "Waiting for Confirmation": "A aguardar confirmação",
           "Screen lock enabled successfully":
@@ -1964,7 +1964,7 @@ i18n
           Amount: "Quantidade",
           "Payment Address": "Endereço de pagamento",
           "Recipient Address": "Endereço do destinatário",
-          "Transaction Fee": "Taxa de transação",
+          "Processing Fee": "Taxa de processamento",
           Confirm: "Confirmar",
           "Waiting for Confirmation": "Aguardando confirmação",
           "Screen lock enabled successfully":
@@ -2164,7 +2164,7 @@ i18n
           Amount: "Importo",
           "Payment Address": "Indirizzo di pagamento",
           "Recipient Address": "Indirizzo del destinatario",
-          "Transaction Fee": "Commissione di transazione",
+          "Processing Fee": "Commissione di elaborazione",
           Confirm: "Confermare",
           "Waiting for Confirmation": "In attesa di conferma",
           "Screen lock enabled successfully":
@@ -2348,7 +2348,7 @@ i18n
           Amount: "Betrag",
           "Payment Address": "Zahlungsadresse",
           "Recipient Address": "Empfängeradresse",
-          "Transaction Fee": "Transaktionsgebühr",
+          "Processing Fee": "Bearbeitungsgebühr",
           Confirm: "Bestätigen",
           "Waiting for Confirmation": "Warte auf Bestätigung",
           "Screen lock enabled successfully":
@@ -2530,7 +2530,7 @@ i18n
           Amount: "राशि",
           "Payment Address": "भुगतान पता",
           "Recipient Address": "प्राप्तकर्ता का पता",
-          "Transaction Fee": "लेन-देन शुल्क",
+          "Processing Fee": "प्रोसेसिंग शुल्क",
           Confirm: "पुष्टि करें",
           "Waiting for Confirmation": "पुष्टि की प्रतीक्षा कर रहा है",
           "Screen lock enabled successfully":
@@ -2711,7 +2711,7 @@ i18n
           Amount: "Дүн",
           "Payment Address": "Төлбөрийн хаяг",
           "Recipient Address": "Хүлээн авагчийн хаяг",
-          "Transaction Fee": "Гүйлгээний хураамж",
+          "Processing Fee": "Боловсруулалтын шимтгэл",
           Confirm: "Баталгаажуулах",
           "Waiting for Confirmation": "Баталгаажуулалт хүлээж байна",
           "Verifying address on your device...":
@@ -2889,7 +2889,7 @@ i18n
           Amount: "จำนวนเงิน",
           "Payment Address": "ที่อยู่การชำระเงิน",
           "Recipient Address": "ที่อยู่ผู้รับ",
-          "Transaction Fee": "ค่าธรรมเนียมการทำธุรกรรม",
+          "Processing Fee": "ค่าธรรมเนียมการดำเนินการ",
           Confirm: "ยืนยัน",
           "Waiting for Confirmation": "กำลังรอการยืนยัน",
           "Screen lock enabled successfully": "เปิดการล็อคหน้าจอเรียบร้อยแล้ว",
@@ -3066,7 +3066,7 @@ i18n
           Amount: "Сума",
           "Payment Address": "Платіжна адреса",
           "Recipient Address": "Адреса одержувача",
-          "Transaction Fee": "Комісія за транзакцію",
+          "Processing Fee": "Комісія за обробку",
           Confirm: "Підтвердити",
           "Waiting for Confirmation": "Очікується підтвердження",
           "Screen lock enabled successfully":
@@ -3245,7 +3245,7 @@ i18n
           Amount: "Số tiền",
           "Payment Address": "Địa chỉ thanh toán",
           "Recipient Address": "Địa chỉ người nhận",
-          "Transaction Fee": "Phí giao dịch",
+          "Processing Fee": "Phí xử lý",
           Confirm: "Xác nhận",
           "Waiting for Confirmation": "Đang chờ xác nhận",
           "Screen lock enabled successfully":
@@ -3427,7 +3427,7 @@ i18n
           Amount: "Jumlah",
           "Payment Address": "Alamat Pembayaran",
           "Recipient Address": "Alamat Penerima",
-          "Transaction Fee": "Biaya Transaksi",
+          "Processing Fee": "Biaya pemrosesan",
           Confirm: "Konfirmasi",
           "Waiting for Confirmation": "Menunggu konfirmasi",
           "Screen lock enabled successfully": "Kunci layar berhasil diaktifkan",
@@ -3608,7 +3608,7 @@ i18n
           Amount: "Halaga",
           "Payment Address": "Address ng Pagbabayad",
           "Recipient Address": "Address ng Tatanggap",
-          "Transaction Fee": "Bayad sa Transaksyon",
+          "Processing Fee": "Bayad sa pagproseso",
           Confirm: "Kumpirmahin",
           "Waiting for Confirmation": "Naghihintay ng kumpirmasyon",
           "Screen lock enabled successfully":
@@ -3791,7 +3791,7 @@ i18n
           Amount: "পরিমাণ",
           "Payment Address": "পেমেন্ট ঠিকানা",
           "Recipient Address": "প্রাপক ঠিকানা",
-          "Transaction Fee": "লেনদেন ফি",
+          "Processing Fee": "প্রক্রিয়াকরণ ফি",
           Confirm: "নিশ্চিত করুন",
           "Waiting for Confirmation": "নিশ্চিতকরণের জন্য অপেক্ষা করা হচ্ছে",
           "Screen lock enabled successfully":
