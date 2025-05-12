@@ -24,7 +24,7 @@ import {
   suiChainMapping,
   xrpChainMapping,
   chainGroups,
-} from "../config/chainMapping";
+} from "../config/mappingRegistry";
 
 // 上下文和样式
 import { DeviceContext, DarkModeContext } from "../utils/DeviceContext";

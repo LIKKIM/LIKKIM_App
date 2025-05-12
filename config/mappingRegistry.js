@@ -1,4 +1,4 @@
-// config/chainMapping.js
+// config/mappingRegistry.js
 /*
  * Supported Chains:
  *   - ethereum
@@ -28,6 +28,7 @@
  *   - tron
  *   - zksync
  *   - cronos
+ *   - doge
  */
 
 // BTC 类链映射
@@ -113,4 +114,5 @@ export const chainGroups = {
   solana: ["solana"],
   sui: ["sui"],
   ripple: ["ripple"],
+  doge: ["doge"],
 };
