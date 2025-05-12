@@ -559,7 +559,7 @@ i18n
           "Choose asset type": "Choisissez le type d'actif",
           "Address for": "Adresse pour",
           Assets: "Actifs",
-          Activity: "Activity",
+          Activity: "Activité",
           General: "Général",
           "Total Value": "Solde Total",
           Balance: "Solde",
@@ -623,7 +623,7 @@ i18n
             "Le code de vérification que vous avez saisi est incorrect. Veuillez réessayer.",
           "Invalid address": "Adresse invalide",
           "Detected Network": "Réseau détecté",
-          "Enter amount": "Ingrese el monto",
+          "Enter amount": "Entrez le montant",
           Back: "Retour",
           Amount: "Montant",
           "Payment Address": "Adresse de paiement",
@@ -635,28 +635,15 @@ i18n
             "Verrouillage d'écran activé avec succès",
           "Success!": "Succès !",
           "Enable Face ID": "Activer Face ID",
-
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "Pour réinitialiser l'application et supprimer les données enregistrées, veuillez la désinstaller puis la réinstaller sur votre téléphone.",
-
           Fee: "Frais",
           "Verifying address on your device...":
             "Vérification de l'adresse sur votre appareil...",
           "Your device is already verified.":
             "Votre appareil est déjà vérifié.",
-          "Screen lock enabled successfully":
-            "Verrouillage d'écran activé avec succès",
-          "Success!": "Succès !",
-          "Enable Face ID": "Activer Face ID",
           "I lost my password": "J'ai perdu mon mot de passe",
-          "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
-            "Pour réinitialiser l'application et supprimer les données enregistrées, veuillez la désinstaller puis la réinstaller sur votre téléphone.",
           "Estimated value (US$)": "Valeur estimée (US$)",
-          Fee: "Frais",
-          "Waiting for approval on your device...":
-            "En attente d'approbation sur votre appareil...",
-          "Your device is already verified.":
-            "Votre appareil est déjà vérifié.",
           "Address Book": "Carnet d'adresses",
           Convert: "Échanger",
           Skip: "Passer",
@@ -722,13 +709,12 @@ i18n
       es: {
         translation: {
           "Add Wallet": "Agregar billetera",
-
           Close: "Cerrar",
           "Value:": "Valor:",
           "Delete Card": "Eliminar tarjeta",
           "Select Language": "Seleccionar idioma",
           Cancel: "Cancelar",
-          "Select Currency": "Seleccionar moneda",
+
           "Set Password": "Establecer contraseña",
           "Only you can unlock your wallet":
             "Solo tú puedes desbloquear tu billetera",
