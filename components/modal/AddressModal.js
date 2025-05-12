@@ -84,8 +84,8 @@ const AddressHeader = ({
 );
 
 const AddressInfo = ({ selectedAddress, isDarkMode, VaultScreenStyle, t }) => {
-  const hasValidAddress =
-    typeof selectedAddress === "string" && selectedAddress.trim() !== "";
+  const safeAddress = (selectedAddress || "").trim();
+  const hasValidAddress = safeAddress !== "";
 
   return (
     <>
@@ -105,8 +105,29 @@ const AddressInfo = ({ selectedAddress, isDarkMode, VaultScreenStyle, t }) => {
         }}
       >
         {hasValidAddress ? (
-          <>
-            <Text style={VaultScreenStyle.addressText}>{selectedAddress}</Text>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              maxWidth: "100%",
+              flexWrap: "nowrap",
+            }}
+          >
+            <Text
+              style={[
+                VaultScreenStyle.addressText,
+                {
+                  flexShrink: 1,
+                  flexGrow: 1,
+                  flexBasis: "auto",
+                  marginRight: 8,
+                },
+              ]}
+              numberOfLines={1}
+              ellipsizeMode="middle"
+            >
+              {selectedAddress}
+            </Text>
             <TouchableOpacity
               onPress={() => Clipboard.setString(selectedAddress)}
             >
@@ -114,10 +135,9 @@ const AddressInfo = ({ selectedAddress, isDarkMode, VaultScreenStyle, t }) => {
                 name="content-copy"
                 size={24}
                 color={isDarkMode ? "#ffffff" : "#676776"}
-                style={{ marginLeft: 8 }}
               />
             </TouchableOpacity>
-          </>
+          </View>
         ) : (
           <Text
             style={[

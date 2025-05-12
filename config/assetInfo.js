@@ -6,7 +6,7 @@ export const initialAdditionalCryptos = [
     balance: "0.0",
     icon: require("../assets/icon/ARBIcon.png"),
     cardImage: require("../assets/CardBg/Card15.png"),
-    address: "111",
+    address: "qqqs",
     chain: "Arbitrum",
     chainShortName: "ARB",
     queryChainShortName: "ARB",
