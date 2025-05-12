@@ -32,20 +32,18 @@ const ActivityLogComponent = ({
   // 根据 ActivityLog 计算每笔交易对应的链卡片
   const transactionChainCards = useMemo(() => {
     const map = new Map();
-    // 只遍历 amount > 0 的记录
+
     ActivityLog.filter((tx) => tx.amount > 0).forEach((tx) => {
       const matchedItems = initialAdditionalCryptos.filter((item) => {
+        const address = item.address ? item.address.trim() : "";
+        const shortName = item.shortName ? item.shortName.trim() : "";
+
         if (item.address.trim() === "Click the Verify Address Button") {
-          return (
-            item.shortName.trim().toLowerCase() ===
-            tx.symbol.trim().toLowerCase()
-          );
+          return shortName.toLowerCase() === tx.symbol.trim().toLowerCase();
         }
-        return (
-          (item.address || "").trim().toLowerCase() ===
-          (tx.address || "").trim().toLowerCase()
-        );
+        return address.toLowerCase() === tx.address.trim().toLowerCase();
       });
+
       if (matchedItems.length > 0) {
         const card = matchedItems[0];
         if (!map.has(card.chainShortName)) {
@@ -61,21 +59,25 @@ const ActivityLogComponent = ({
       ? ActivityLog.filter((tx) => tx.amount > 0)
       : ActivityLog.filter((transaction) => {
           const matchedItems = initialAdditionalCryptos.filter((item) => {
+            const address = item.address ? item.address.trim() : "";
+            const shortName = item.shortName ? item.shortName.trim() : "";
+
             if (item.address.trim() === "Click the Verify Address Button") {
               return (
-                item.shortName.trim().toLowerCase() ===
+                shortName.toLowerCase() ===
                 transaction.symbol.trim().toLowerCase()
               );
             }
+
             return (
-              item.address.trim().toLowerCase() ===
-              transaction.address.trim().toLowerCase()
+              address.toLowerCase() === transaction.address.trim().toLowerCase()
             );
           });
+
           if (matchedItems.length > 0) {
             return (
               matchedItems[0].chainShortName === selectedChain &&
-              transaction.amount > 0 // Filter out amount 0
+              transaction.amount > 0
             );
           }
           return false;
