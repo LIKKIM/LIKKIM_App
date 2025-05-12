@@ -121,6 +121,11 @@ function ActivityScreen() {
   const [addressVerificationMessage, setAddressVerificationMessage] = useState(
     t("Verifying address on your device...")
   );
+
+  const [selectedFromToken, setSelectedFromToken] = useState("");
+
+  const [selectedToToken, setSelectedToToken] = useState("");
+
   const [selectedFeeTab, setSelectedFeeTab] = useState("Recommended");
   const [modalStatus, setModalStatus] = useState({
     title: t("Waiting for approval on your device...."),
