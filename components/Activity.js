@@ -91,6 +91,7 @@ function ActivityScreen() {
   const [selectedCryptoName, setSelectedCryptoName] = useState("");
   const [selectedCrypto, setSelectedCrypto] = useState("");
   const [selectedCryptoIcon, setSelectedCryptoIcon] = useState(null);
+  const [selectedQueryChainName, setQueryChainName] = useState("");
   const [priceUsd, setPriceUsd] = useState("");
   const [amount, setAmount] = useState("");
   const [inputAddress, setInputAddress] = useState("");

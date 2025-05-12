@@ -46,7 +46,8 @@ const ActivityLogComponent = ({
           );
         }
         return (
-          item.address.trim().toLowerCase() === tx.address.trim().toLowerCase()
+          (item.address || "").trim().toLowerCase() ===
+          (tx.address || "").trim().toLowerCase()
         );
       });
       if (matchedItems.length > 0) {

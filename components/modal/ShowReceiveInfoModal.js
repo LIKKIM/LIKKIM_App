@@ -88,6 +88,7 @@ const ShowReceiveInfoModal = ({
                   style={[
                     ActivityScreenStyle.addressText,
                     {
+                      textAlign: "center",
                       flexShrink: 1,
                       flexGrow: 1,
                       flexBasis: "auto",

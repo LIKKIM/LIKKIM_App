@@ -150,10 +150,9 @@ const ActivityScreenStyles = (isDarkMode) => {
     },
     addressText: {
       color: secondTextColor,
-      textAlign: "center",
-      marginRight: 10,
-      flexWrap: "wrap",
-      width: 280,
+      textAlign: "left", // 用 left 更自然些
+      flexWrap: "nowrap", // 保证单行
+      flex: 1, // 关键，自动填充剩余空间
     },
     balanceModalSubtitle: {
       marginTop: 6,
