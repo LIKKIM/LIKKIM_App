@@ -80,7 +80,6 @@ export const initialAdditionalCryptos = [
     Decimals: "6",
     publicKey: "",
   },
-
   {
     name: "Aurora",
     shortName: "AURORA",
@@ -181,7 +180,6 @@ export const initialAdditionalCryptos = [
     Decimals: "18",
     publicKey: "",
   },
-
   {
     name: "Bitcoin",
     shortName: "BTC",
@@ -242,7 +240,6 @@ export const initialAdditionalCryptos = [
     Decimals: "",
     publicKey: "",
   },
-
   {
     name: "Dai",
     shortName: "DAI",
@@ -443,7 +440,6 @@ export const initialAdditionalCryptos = [
     Decimals: "6",
     publicKey: "",
   },
-
   {
     name: "Dai",
     shortName: "DAI",
@@ -464,7 +460,6 @@ export const initialAdditionalCryptos = [
     Decimals: "18",
     publicKey: "",
   },
-
   {
     name: "Tether USD",
     shortName: "USDT",
@@ -565,7 +560,6 @@ export const initialAdditionalCryptos = [
     Decimals: "6",
     publicKey: "",
   },
-
   {
     name: "Dai",
     shortName: "DAI",
@@ -586,7 +580,6 @@ export const initialAdditionalCryptos = [
     Decimals: "18",
     publicKey: "",
   },
-
   {
     name: "Huobi Token",
     shortName: "HTX",
