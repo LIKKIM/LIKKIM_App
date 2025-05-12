@@ -60,20 +60,15 @@ i18n
           Remove: "Remove",
           "Security in your hands": "Security in your hands",
           Continue: "Continue",
-
           "Scroll down to view all words": "Scroll down to view all words",
-
           "Generating your accounts": "Generating your accounts",
           "Encrypting your data": "Encrypting your data",
-
           "Let's Go": "Let's Go",
           "Use spaces between words": "Use spaces between words",
-
           Version: "Version",
           "Assets can only be sent within the same chain.":
             "Assets can only be sent within the same chain.",
           "Firmware Update": "Firmware Update",
-
           "No data available": "No data available",
           "Search Currency": "Search Currency",
           "Search Cryptocurrency": "Search Cryptocurrency",
@@ -118,7 +113,6 @@ i18n
           "Transaction Fee": "Transaction Fee",
           Confirm: "Confirm",
           "Waiting for Confirmation": "Waiting for Confirmation",
-
           "Screen lock enabled successfully":
             "Screen lock enabled successfully",
           "Success!": "Success!",
@@ -128,12 +122,9 @@ i18n
             "To reset the app and remove stored data, please uninstall and reinstall it on your phone.",
           "Value in USD": "Value in USD",
           Fee: "Fee",
-
           "Verifying Address on LIKKIM...": "Verifying Address on LIKKIM...",
-
           "Your device is already verified.":
             "Your device is already verified.",
-
           "Address Book": "Address Book",
           Swap: "Swap",
           Skip: "Skip",
@@ -177,7 +168,6 @@ i18n
           "Insufficient Balance": "Insufficient Balance",
           "Waiting for approval on your device...":
             "Waiting for approval on your device...",
-
           Save: "Save",
           Address: "Address",
           "Add Address": "Add Address",
