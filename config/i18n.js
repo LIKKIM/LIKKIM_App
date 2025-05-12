@@ -188,7 +188,6 @@ i18n
       zh: {
         translation: {
           "Add Wallet": "添加钱包",
-          Close: "关闭",
           "Value:": "值:",
           "Delete Card": "删除卡片",
           "Select Language": "选择语言",
@@ -895,8 +894,6 @@ i18n
       ar: {
         translation: {
           "Add Wallet": "أضف محفظة",
-
-          Close: "إغلاق",
           "Value:": "القيمة:",
           "Delete Card": "حذف البطاقة",
           "Select Language": "اختر اللغة",
@@ -1725,10 +1722,8 @@ i18n
             "Bloqueio de tela ativado com sucesso",
           "Success!": "Sucesso!",
           "Enable Face ID": "Ativar Face ID",
-
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "Para repor a aplicação e eliminar os dados guardados, desinstale-a e volte a instalá-la no seu telemóvel.",
-
           Fee: "Taxa",
           "Verifying address on your device...":
             "A verificar o endereço no seu dispositivo...",
