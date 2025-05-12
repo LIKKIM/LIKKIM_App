@@ -14,17 +14,7 @@ import assetOps from "../config/assetOps";
 
 import { detectNetwork } from "../config/networkUtils";
 import checkAndReqPermission from "../utils/BluetoothPermissions";
-import {
-  btcChainMapping,
-  evmChainMapping,
-  tronChainMapping,
-  aptosChainMapping,
-  cosmosChainMapping,
-  solChainMapping,
-  suiChainMapping,
-  xrpChainMapping,
-  chainGroups,
-} from "../config/mappingRegistry";
+import { families } from "../config/mappingRegistry";
 
 // 上下文和样式
 import { DeviceContext, DarkModeContext } from "../utils/DeviceContext";
@@ -1101,24 +1091,16 @@ function ActivityScreen() {
       // 第5步：构造 POST 请求数据并调用签名编码接口
       // ---------------------------
       const getChainMappingMethod = (chainKey) => {
-        if (evmChainMapping[chainKey]) {
-          return "evm";
-        } else if (btcChainMapping[chainKey]) {
-          return "btc";
-        } else if (tronChainMapping[chainKey]) {
-          return "tron";
-        } else if (aptosChainMapping[chainKey]) {
-          return "aptos";
-        } else if (cosmosChainMapping[chainKey]) {
-          return "cosmos";
-        } else if (solChainMapping[chainKey]) {
-          return "solana";
-        } else if (suiChainMapping[chainKey]) {
-          return "sui";
-        } else if (xrpChainMapping[chainKey]) {
-          return "ripple";
-        }
-        return null; // 默认返回 null
+        if (families.evm.includes(chainKey)) return "evm";
+        if (families.btc.includes(chainKey)) return "btc";
+        if (families.tron.includes(chainKey)) return "tron";
+        if (families.aptos.includes(chainKey)) return "aptos";
+        if (families.cosmos.includes(chainKey)) return "cosmos";
+        if (families.sol.includes(chainKey)) return "solana";
+        if (families.sui.includes(chainKey)) return "sui";
+        if (families.xrp.includes(chainKey)) return "ripple";
+        if (families.doge.includes(chainKey)) return "doge";
+        return null;
       };
 
       const chainMethod = getChainMappingMethod(chainKey);
