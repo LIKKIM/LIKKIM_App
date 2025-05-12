@@ -15,7 +15,7 @@ export const initialAdditionalCryptos = [
     type: "coin",
     fee: "0.001",
     valueUsd: "0.0",
-    priceUsd: "1.2",
+    priceUsd: "0.0",
     contractAddress: "",
     Decimals: "",
     publicKey: "",
