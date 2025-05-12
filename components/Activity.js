@@ -1214,12 +1214,10 @@ function ActivityScreen() {
             "xpub6Cev2GgWsGScABSqE3orVzNVbkNMm3AZ7PPopEjZjjZamQKN289XRFUzFau31vhpyMEdzJXywosaKXQHTqDjgjEPjK7Hxp5zGSvhQTDAwjW",
         };
       }
-
       console.log(
         " 构造待签名hex请求数据:",
         JSON.stringify(requestData, null, 2)
       );
-
       const response = await fetch(signAPI.encodeEVM, {
         method: "POST",
         headers: {
