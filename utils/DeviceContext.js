@@ -5,14 +5,14 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import i18n from "../config/i18n";
 import { initialAdditionalCryptos } from "../config/assetInfo";
 import currencies from "../config/currencies";
-import { marketAPI } from "../env/apiEndpoints";
+import { metricsAPII } from "../env/apiEndpoints";
 
 // Create contexts
 export const DeviceContext = createContext();
 export const DarkModeContext = createContext();
 
 // API URL for fetching exchange rates
-const NEW_EXCHANGE_RATE_API_URL = marketAPI.exchangeRate;
+const NEW_EXCHANGE_RATE_API_URL = metricsAPII.exchangeRate;
 
 // Default USDT crypto data
 export const usdtCrypto = {
@@ -52,7 +52,7 @@ export const CryptoProvider = ({ children }) => {
   const [isAppLaunching, setIsAppLaunching] = useState(true);
   const [cryptoCards, setCryptoCards] = useState([]);
   const [addedCryptos, setAddedCryptos] = useState([]);
-  const [exchangeRates, setExchangeRates] = useState({});
+  const [exchangeRates, setConvertRates] = useState({});
 
   // Supported chains for address updates
   const supportedChains = ["ETH", "BTC", "SOL", "TRX"];
@@ -166,7 +166,7 @@ export const CryptoProvider = ({ children }) => {
   };
 
   // Fetch and store exchange rates from API
-  const fetchAndStoreExchangeRates = async () => {
+  const fetchAndStoreConvertRates = async () => {
     try {
       const response = await fetch(NEW_EXCHANGE_RATE_API_URL);
       console.log("Response status:", response.status);
@@ -187,7 +187,7 @@ export const CryptoProvider = ({ children }) => {
             flattenedData[currency] = rateArray[0];
           }
         }
-        setExchangeRates(flattenedData);
+        setConvertRates(flattenedData);
         await AsyncStorage.setItem(
           "exchangeRates",
           JSON.stringify(flattenedData)
@@ -367,7 +367,7 @@ export const CryptoProvider = ({ children }) => {
 
   // Fetch exchange rates when component mounts
   useEffect(() => {
-    fetchAndStoreExchangeRates();
+    fetchAndStoreConvertRates();
   }, []);
 
   return (

@@ -22,7 +22,6 @@ import {
 
 // 第三方库
 import { LinearGradient } from "expo-linear-gradient";
-import * as Updates from "expo-updates";
 
 import { BlurView } from "expo-blur";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -53,7 +52,7 @@ import ModalsContainer from "./VaultScreen/ModalsContainer";
 import checkAndReqPermission from "../utils/BluetoothPermissions"; //安卓高版本申请蓝牙权限
 import displayDeviceAddress from "../utils/displayDeviceAddress"; // 显示地址函数 发送数据写法
 import { parseDeviceCode } from "../utils/parseDeviceCode";
-import { walletAPI, marketAPI } from "../env/apiEndpoints";
+import { accountAPI, metricsAPII } from "../env/apiEndpoints";
 import { bluetoothConfig } from "../env/bluetoothConfig";
 
 const serviceUUID = bluetoothConfig.serviceUUID;
@@ -144,7 +143,7 @@ function VaultScreen({ route, navigation }) {
     useState(false);
   useState(false);
   const [addressVerificationMessage, setAddressVerificationMessage] = useState(
-    t("Verifying Address on LIKKIM...")
+    t("Verifying address on your device...")
   );
   const [refreshing, setRefreshing] = useState(false);
   const chainCategories = initialAdditionalCryptos.map((crypto) => ({
@@ -191,7 +190,7 @@ function VaultScreen({ route, navigation }) {
 
       try {
         const response = await fetch(
-          `${marketAPI.indexTickers}?instId=${instIds}`
+          `${metricsAPII.indexTickers}?instId=${instIds}`
         );
         const data = await response.json();
 
@@ -241,7 +240,7 @@ function VaultScreen({ route, navigation }) {
             address: card.address,
           };
 
-          const response = await fetch(walletAPI.balance, {
+          const response = await fetch(accountAPI.balance, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -364,7 +363,7 @@ function VaultScreen({ route, navigation }) {
                       : "#888",
                 }}
               >
-                {t("Wallet")}
+                {t("Assets")}
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -394,7 +393,7 @@ function VaultScreen({ route, navigation }) {
                       : "#888",
                 }}
               >
-                NFTs
+                Gallery
               </Text>
             </TouchableOpacity>
           </View>
@@ -564,7 +563,9 @@ function VaultScreen({ route, navigation }) {
         .join(",");
       //bugging
       try {
-        const response = await fetch(`${marketAPI.tickers}?instId=${instIds}`);
+        const response = await fetch(
+          `${metricsAPII.tickers}?instId=${instIds}`
+        );
         const data = await response.json();
 
         if (data.code === 0 && data.data) {
@@ -685,11 +686,6 @@ function VaultScreen({ route, navigation }) {
       }, 300); // 确保在滚动完成后再设置偏移量
     }
   }, [modalVisible]);
-
-  //热更新支持
-  useEffect(() => {
-    onFetchUpdateAsync();
-  }, []);
 
   // 使用最新的价格来计算最终余额
   const getConvertedBalance = (cardBalance, cardShortName) => {
@@ -1351,46 +1347,6 @@ function VaultScreen({ route, navigation }) {
       (fx, fy, width, height, px, py) =>
         (cardStartPositions.current[_index] = py)
     );
-
-  //检查更新
-  async function onFetchUpdateAsync() {
-    try {
-      // Skip update check in development mode
-      if (__DEV__) return;
-
-      console.log("Checking for updates...");
-
-      // Check for an available update
-      const update = await Updates.checkForUpdateAsync();
-
-      if (update.isAvailable) {
-        console.log("A new version is available!");
-
-        // Fetch the new update
-        await Updates.fetchUpdateAsync();
-
-        // Show an alert asking the user if they want to update now or later
-        Alert.alert("The new version is ready. ", "Do you want to update it?", [
-          {
-            text: "Update now ",
-            onPress() {
-              // Reload the app to apply the update
-              Updates.reloadAsync();
-            },
-          },
-          {
-            text: "Later",
-          },
-        ]);
-      }
-    } catch (error) {
-      // Log the error if the update check fails
-      console.log("Update service check failed:");
-      console.log(
-        error instanceof Error ? error.message : JSON.stringify(error)
-      );
-    }
-  }
 
   const renderTabModal = () => (
     <TabModal

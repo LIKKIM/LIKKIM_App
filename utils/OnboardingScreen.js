@@ -9,6 +9,7 @@ import {
   Animated,
   Modal,
   ScrollView,
+  StatusBar,
   TouchableOpacity,
 } from "react-native";
 import AppIntroSlider from "react-native-app-intro-slider";
@@ -44,19 +45,19 @@ const OnboardingScreen = ({ onDone }) => {
     {
       key: "slide1",
       title: i18n.t("Welcome"),
-      text: i18n.t("Your secure and user-friendly digital wallet."),
+      text: i18n.t("Your secure and intuitive companion app."),
       image: require("../assets/slider/slider1.png"),
     },
     {
       key: "slide2",
-      title: i18n.t("Manage Your Cryptos"),
-      text: i18n.t("Easily manage multiple cryptocurrencies."),
+      title: i18n.t("Manage Your Assets"),
+      text: i18n.t("Easily manage multiple asset types."),
       image: require("../assets/slider/slider2.png"),
     },
     {
       key: "slide3",
       title: i18n.t("Secure and Reliable"),
-      text: i18n.t("Bank-level security for your digital assets."),
+      text: i18n.t("Robust security designed for your information."),
       image: require("../assets/slider/slider3.png"),
     },
   ];
@@ -105,6 +106,8 @@ const OnboardingScreen = ({ onDone }) => {
   const renderItem = ({ item, index }) => {
     return (
       <LinearGradient colors={["#21201E", "#0E0D0D"]} style={styles.slide}>
+        {/* by will:优化引导页状态栏色差 */}
+        <StatusBar backgroundColor={"rgb(82,82,82)"} barStyle="dark-content" />
         <BlurView intensity={50} style={StyleSheet.absoluteFillObject}>
           <LinearGradient
             colors={["#00000000", "#CCB68C30", "#CCB68C60"]}

@@ -188,14 +188,6 @@ function SecureDeviceScreen({ onDarkModeChange }) {
     setModalVisible(true);
   };
 
-  const closeLockCodeModal = () => {
-    setLockCodeModalVisible(false);
-    setPassword("");
-    setConfirmPassword("");
-    setIsPasswordHidden(true);
-    setIsConfirmPasswordHidden(true);
-  };
-
   const closeEnterLockCodeModal = () => {
     setEnterLockCodeModalVisible(false);
     setCurrentPassword("");
@@ -317,6 +309,14 @@ function SecureDeviceScreen({ onDarkModeChange }) {
     } else {
       setPasswordError(t("Passwords do not match"));
     }
+  };
+
+  const closeLockCodeModal = () => {
+    setLockCodeModalVisible(false);
+    setPassword("");
+    setConfirmPassword("");
+    setIsPasswordHidden(true);
+    setIsConfirmPasswordHidden(true);
   };
 
   const handleConfirmPassword = async () => {
@@ -999,10 +999,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
         await AsyncStorage.removeItem("cryptoCards");
         setCryptoCards([]);
         setVerifiedDevices([]);
-        Alert.alert(
-          t("Success"),
-          t("Your wallet has been deleted successfully.")
-        );
+        Alert.alert(t("Success"), t("Deleted successfully."));
         navigation.goBack();
       } else {
         Alert.alert(t("No Wallet"), t("No wallet available to delete."));

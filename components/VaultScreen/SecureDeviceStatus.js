@@ -23,7 +23,7 @@ import { MaterialIcons as Icon } from "@expo/vector-icons";
 import AddressBookModal from "./../modal/AddressBookModal";
 import SecureDeviceScreenStyles from "../../styles/SecureDeviceScreenStyle";
 import { WebView } from "react-native-webview";
-import { nftAPI } from "../../env/apiEndpoints";
+import { galleryAPI } from "../../env/apiEndpoints";
 const SkeletonImage = ({ source, style, resizeMode }) => {
   const [loaded, setLoaded] = useState(false);
   const skeletonOpacity = useState(new Animated.Value(1))[0];
@@ -218,7 +218,7 @@ const SecureDeviceStatus = (props) => {
     console.log("POST 请求数据：", requestBody);
 
     try {
-      const response = await fetch(nftAPI.queryNFTBalance, {
+      const response = await fetch(galleryAPI.queryNFTBalance, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -255,7 +255,7 @@ const SecureDeviceStatus = (props) => {
     console.log("Query NFT Details Request:", detailRequestBody);
 
     try {
-      const response = await fetch(nftAPI.queryNFTDetails, {
+      const response = await fetch(galleryAPI.queryNFTDetails, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -344,7 +344,7 @@ const SecureDeviceStatus = (props) => {
     handleWalletTest,
   } = props;
 
-  const handleNFTSelect = (nft) => {
+  const handleGalleryelect = (nft) => {
     setSelectedNFT(nft);
     setNFTModalVisible(true);
   };
@@ -464,7 +464,7 @@ const SecureDeviceStatus = (props) => {
           >
             <View>
               <Text style={VaultScreenStyle.totalBalanceText}>
-                {t("Total Balance")}
+                {t("Total Value")}
               </Text>
               <Text style={VaultScreenStyle.totalBalanceAmount}>
                 {`${calculateTotalBalance()} `}
@@ -703,7 +703,7 @@ const SecureDeviceStatus = (props) => {
           {renderChainButton()}
         </View>
       )}
-      {/* NFTs view */}
+      {/* Gallery view */}
       <ScrollView
         contentContainerStyle={{
           flexDirection: "row",
@@ -721,7 +721,7 @@ const SecureDeviceStatus = (props) => {
           nftData.data.map((nft, index) => (
             <TouchableOpacity
               key={index}
-              onPress={() => handleNFTSelect(nft)}
+              onPress={() => handleGalleryelect(nft)}
               style={{ width: "50%", padding: 4 }}
             >
               <View

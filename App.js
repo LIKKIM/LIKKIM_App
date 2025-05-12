@@ -21,10 +21,14 @@ import DeviceDisplay from "./components/SecureDeviceScreen/DeviceDisplay";
 import SupportPage from "./components/SecureDeviceScreen/SupportPage";
 import { CryptoProvider, DeviceContext } from "./utils/DeviceContext";
 import i18n from "./config/i18n";
+import * as SplashScreen from "expo-splash-screen";
 
 if (__DEV__) {
   import("./ReactotronConfig").then(() => console.log("Reactotron Configured"));
 }
+
+//by will: 阻止自动隐藏 splash screen
+SplashScreen.preventAutoHideAsync();
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -34,6 +38,13 @@ export default function App() {
   const [isFirstLaunch, setIsFirstLaunch] = useState(null);
   const [headerDropdownVisible, setHeaderDropdownVisible] = useState(false);
   const [selectedCardName, setSelectedCardName] = useState("");
+
+  useEffect(() => {
+    //by will:给予初次渲染时间：修复自定义header闪烁和自定义翻译延迟加载问题
+    setTimeout(() => {
+      SplashScreen.hideAsync();
+    }, 1300);
+  }, []);
 
   // Check if the app is launched for the first time
   useEffect(() => {
@@ -62,6 +73,8 @@ export default function App() {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
+      {/* by will:优化状态栏颜色多次变动 */}
+      <StatusBar backgroundColor={"#fff"} barStyle="dark-content" />
       <CryptoProvider>
         <NavigationContainer>
           <Stack.Navigator>
@@ -103,7 +116,6 @@ export default function App() {
 function OnboardingApp({ onDone }) {
   return (
     <>
-      <StatusBar backgroundColor="#21201E" barStyle="light-content" />
       <OnboardingScreen onDone={onDone} />
     </>
   );
@@ -162,7 +174,7 @@ function AppContent({
       const backRoute = rootRoutes?.find((route) => route.name === "Back");
       if (backRoute && backRoute.state) {
         const tabRoutes = backRoute.state.routes;
-        const walletRoute = tabRoutes.find((route) => route.name === "Wallet");
+        const walletRoute = tabRoutes.find((route) => route.name === "Assets");
         if (walletRoute?.params?.isModalVisible !== undefined) {
           setWalletModalVisible(walletRoute.params.isModalVisible);
         }
@@ -204,7 +216,7 @@ function AppContent({
 
   const handleConfirmDelete = () => {
     setHeaderDropdownVisible(false);
-    navigation.navigate("Wallet", {
+    navigation.navigate("Assets", {
       showDeleteConfirmModal: true,
       isModalVisible: true,
     });
@@ -217,9 +229,9 @@ function AppContent({
           lazy: false,
           tabBarIcon: ({ focused, size }) => {
             let iconName;
-            if (route.name === "Wallet") {
+            if (route.name === "Assets") {
               iconName = "account-balance-wallet";
-            } else if (route.name === "Transactions") {
+            } else if (route.name === "Activity") {
               iconName = "swap-horiz";
             } else if (route.name === "General") {
               iconName = "smartphone";
@@ -236,8 +248,8 @@ function AppContent({
           },
           tabBarLabel: ({ focused }) => {
             let label;
-            if (route.name === "Wallet") label = t("Wallet");
-            else if (route.name === "Transactions") label = t("Transactions");
+            if (route.name === "Assets") label = t("Assets");
+            else if (route.name === "Activity") label = t("Activity");
             else if (route.name === "General") label = t("General");
             return (
               <Text
@@ -275,7 +287,7 @@ function AppContent({
         })}
       >
         <Tab.Screen
-          name="Wallet"
+          name="Assets"
           component={VaultScreen}
           initialParams={{ isDarkMode }}
           options={({ route, navigation }) => {
@@ -297,7 +309,7 @@ function AppContent({
                     cryptoCards.length > 0 && (
                       <TouchableOpacity
                         onPress={() =>
-                          navigation.navigate("Wallet", { showAddModal: true })
+                          navigation.navigate("Assets", { showAddModal: true })
                         }
                         style={{ paddingRight: 28 }}
                       >
@@ -311,7 +323,7 @@ function AppContent({
           }}
         />
         {cryptoCards.length > 0 && (
-          <Tab.Screen name="Transactions" component={ActivityScreen} />
+          <Tab.Screen name="Activity" component={ActivityScreen} />
         )}
 
         <Tab.Screen name="General">

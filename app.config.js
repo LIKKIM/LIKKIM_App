@@ -37,7 +37,7 @@ export default {
         "remote-notification",
       ],
       NFCReaderUsageDescription:
-        "Allow $(PRODUCT_NAME) to read NFC tags to support secure transactions.",
+        "Allow $(PRODUCT_NAME) to communicate with your device via NFC.",
     },
     supportsTablet: false,
     buildNumber: "16.3.3",
@@ -85,8 +85,5 @@ export default {
     eas: {
       projectId: "fdfad2e7-7bed-4bcd-ae6d-ca6c74643d63", //❌
     },
-  },
-  updates: {
-    url: "https://u.expo.dev/fdfad2e7-7bed-4bcd-ae6d-ca6c74643d63", //❌
   },
 };

@@ -105,7 +105,7 @@ const ModuleSecureView = ({
                       style={[styles.Icon, { marginLeft: 20 }]}
                     />
                     <Text style={[styles.Text, { flex: 1 }]}>
-                      {t("Delete Wallet")}
+                      {t("Reset Local Profile")}
                     </Text>
                   </View>
                 </TouchableOpacity>

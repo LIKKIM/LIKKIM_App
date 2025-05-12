@@ -53,10 +53,12 @@ const SelectCryptoModal = ({
             >
               <Text style={ActivityScreenStyle.TransactionModalTitle}>
                 {addedCryptos.length === 0
-                  ? t("No cryptocurrencies available. Please add wallet first.")
+                  ? t(
+                      "No assets available. Please connect your device to continue."
+                    )
                   : operationType === "send"
-                  ? t("Choose the cryptocurrency to send:")
-                  : t("Choose the cryptocurrency to receive:")}
+                  ? t("Select asset to proceed:")
+                  : t("Choose asset type:")}
               </Text>
 
               {addedCryptos.length > 0 && (
@@ -68,7 +70,7 @@ const SelectCryptoModal = ({
                   />
                   <TextInput
                     style={ActivityScreenStyle.searchInput}
-                    placeholder={t("Search Cryptocurrency")}
+                    placeholder={t("Search Asset")}
                     placeholderTextColor={isDarkMode ? "#ffffff" : "#21201E"}
                     onChangeText={(text) => setSearchQuery(text)}
                     value={searchQuery}

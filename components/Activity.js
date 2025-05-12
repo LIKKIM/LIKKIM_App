@@ -40,7 +40,7 @@ import CheckStatusModal from "./modal/CheckStatusModal";
 import BluetoothModal from "./modal/BluetoothModal";
 import AmountModal from "./modal/AmountModal";
 import SelectCryptoModal from "./modal/SelectCryptoModal";
-import SwapModal from "./modal/SwapModal";
+import ConvertModal from "./modal/ConvertModal";
 import ShowReceiveInfoModal from "./modal/ShowReceiveInfoModal";
 import SecurityCodeModal from "./modal/SecurityCodeModal";
 import ActivityLogComponent from "./ActivityScreen/ActivityLogComponent";
@@ -48,7 +48,7 @@ import ActionButtons from "./ActivityScreen/ActionButtons";
 // 自定义组件
 import displayDeviceAddress from "../utils/displayDeviceAddress";
 import { parseDeviceCode } from "../utils/parseDeviceCode";
-import { walletAPI } from "../env/apiEndpoints";
+import { accountAPI } from "../env/apiEndpoints";
 import { bluetoothConfig } from "../env/bluetoothConfig";
 
 // BLE 常量
@@ -87,7 +87,7 @@ function ActivityScreen() {
 
   // 交易/设备/界面状态
   const [receivedVerificationCode, setReceivedVerificationCode] = useState("");
-  const [swapModalVisible, setSwapModalVisible] = useState(false);
+  const [swapModalVisible, setConvertModalVisible] = useState(false);
   const [fromValue, setFromValue] = useState("");
   const [toValue, setToValue] = useState("");
   const [
@@ -140,7 +140,7 @@ function ActivityScreen() {
   const [paymentAddress, setPaymentAddress] = useState("Your Payment Address");
   const [contractAddress, setContractAddress] = useState("");
   const [addressVerificationMessage, setAddressVerificationMessage] = useState(
-    t("Verifying Address on LIKKIM...")
+    t("Verifying address on your device...")
   );
   const [selectedFeeTab, setSelectedFeeTab] = useState("Recommended");
   const [modalStatus, setModalStatus] = useState({
@@ -283,7 +283,7 @@ function ActivityScreen() {
           };
 
           try {
-            const response = await fetch(walletAPI.queryTransaction, {
+            const response = await fetch(accountAPI.queryTransaction, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -350,7 +350,7 @@ function ActivityScreen() {
       // 打印发送的 POST 数据
       console.log("🚀 Sending POST data:", JSON.stringify(postData, null, 2));
 
-      const response = await fetch(walletAPI.blockchainFee, {
+      const response = await fetch(accountAPI.blockchainFee, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -377,7 +377,7 @@ function ActivityScreen() {
         console.log("✅ Rapid fee set to:", rapidGasPrice);
       }
     } catch (error) {
-      console.log("❌ Failed to fetch transaction fee:", error);
+      console.log("❌ Failed to fetch processing Fee:", error);
     }
   };
 
@@ -419,7 +419,7 @@ function ActivityScreen() {
               // 打印发送的 POST 数据
               console.log("发送的 POST 数据:", postData);
 
-              const response = await fetch(walletAPI.balance, {
+              const response = await fetch(accountAPI.balance, {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
@@ -504,8 +504,8 @@ function ActivityScreen() {
         console.log("已设置以下值:");
         console.log("Balance:", selected.balance);
         console.log("Price in USD:", selected.priceUsd);
-        console.log("Value in USD:", selected.valueUsd);
-        console.log("Transaction Fee:", selected.fee);
+        console.log("Estimated value (US$):", selected.valueUsd);
+        console.log("Processing Fee:", selected.fee);
       } else {
         console.log(
           " 监听 initialAdditionalCryptos 的变化未找到匹配的加密货币对象"
@@ -753,7 +753,7 @@ function ActivityScreen() {
 
           try {
             // 发送 POST 请求到指定的 URL
-            const response = await fetch(walletAPI.broadcastHex, {
+            const response = await fetch(accountAPI.broadcastHex, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -831,7 +831,7 @@ function ActivityScreen() {
 
           // 调用广播交易的 API
           try {
-            const response = await fetch(walletAPI.broadcastHex, {
+            const response = await fetch(accountAPI.broadcastHex, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -1016,7 +1016,7 @@ function ActivityScreen() {
         }
       }
 
-      const walletParamsResponse = await fetch(walletAPI.getSignParam, {
+      const walletParamsResponse = await fetch(accountAPI.getSignParam, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -1275,8 +1275,8 @@ function ActivityScreen() {
     }
   };
 
-  const handleSwapPress = () => {
-    setSwapModalVisible(true);
+  const handleConvertPress = () => {
+    setConvertModalVisible(true);
   };
   const handleDevicePress = async (device) => {
     // 检查是否传递了有效的设备对象
@@ -1603,7 +1603,7 @@ function ActivityScreen() {
           iconColor={iconColor}
           handleSendPress={handleSendPress}
           handleReceivePress={handleReceivePress}
-          handleSwapPress={handleSwapPress}
+          handleConvertPress={handleConvertPress}
         />
         {/* 交易历史记录组件 */}
         <ActivityLogComponent
@@ -1799,11 +1799,11 @@ function ActivityScreen() {
           t={t}
         />
 
-        {/* Swap Modal */}
-        <SwapModal
+        {/* Convert Modal */}
+        <ConvertModal
           isDarkMode={isDarkMode}
           visible={swapModalVisible}
-          setSwapModalVisible={setSwapModalVisible}
+          setConvertModalVisible={setConvertModalVisible}
           fromDropdownVisible={fromDropdownVisible}
           setFromDropdownVisible={setFromDropdownVisible}
           toDropdownVisible={toDropdownVisible}

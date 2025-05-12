@@ -37,23 +37,21 @@ i18n
             "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.",
           Send: "Send",
           Receive: "Receive",
-          "Transaction History": "Transaction History",
+          "Activity Log": "Activity Log",
           "No Histories": "No Histories",
           "Enter the recipient's address:": "Enter the recipient's address:",
           "Enter Address": "Enter Address",
           Submit: "Submit",
-          "Choose the cryptocurrency to send:":
-            "Choose the cryptocurrency to send:",
-          "Choose the cryptocurrency to receive:":
-            "Choose the cryptocurrency to receive:",
+          "Select asset to proceed:": "Select asset to proceed:",
+          "Choose asset type:": "Choose asset type:",
           "Address for": "Address for",
-          Wallet: "Wallet",
-          Transactions: "Transactions",
+          Assets: "Assets",
+          Activity: "Activity",
           General: "General",
-          "Total Balance": "Total Balance",
+          "Total Value": "Total Value",
           Balance: "Balance",
-          "No cryptocurrencies available. Please add wallet first.":
-            "No cryptocurrencies available. Please add wallet first.",
+          "No assets available. Please connect your device to continue.":
+            "No assets available. Please connect your device to continue.",
           "This chain account will be removed":
             "This chain account will be removed",
           "Remove Chain Account": "Remove Chain Account",
@@ -71,7 +69,7 @@ i18n
           "Firmware Update": "Firmware Update",
           "No data available": "No data available",
           "Search Currency": "Search Currency",
-          "Search Cryptocurrency": "Search Cryptocurrency",
+          "Search Asset": "Search Asset",
           "Select Currency": "Select Currency",
           "Enable Screen Lock": "Enable Screen Lock",
           "Enter new password": "Enter new password",
@@ -105,12 +103,12 @@ i18n
           "Invalid address": "Invalid address",
           "Detected Network": "Detected Network",
           "Enter Amount": "Enter Amount",
-          "Enter the amount to send:": "Enter the amount to send:",
+          "Enter amount:": "Enter amount:",
           Back: "Back",
           Amount: "Amount",
           "Payment Address": "Payment Address",
           "Recipient Address": "Recipient Address",
-          "Transaction Fee": "Transaction Fee",
+          "Processing Fee": "Processing Fee",
           Confirm: "Confirm",
           "Waiting for Confirmation": "Waiting for Confirmation",
           "Screen lock enabled successfully":
@@ -120,24 +118,25 @@ i18n
           "I lost my password": "I lost my password",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "To reset the app and remove stored data, please uninstall and reinstall it on your phone.",
-          "Value in USD": "Value in USD",
+          "Estimated value (US$)": "Estimated value (US$)",
           Fee: "Fee",
-          "Verifying Address on LIKKIM...": "Verifying Address on LIKKIM...",
+          "Verifying address on your device...":
+            "Verifying address on your device...",
           "Your device is already verified.":
             "Your device is already verified.",
           "Address Book": "Address Book",
-          Swap: "Swap",
+          Convert: "Convert",
           Skip: "Skip",
           "Start Exploring": "Start Exploring",
           "Secure and Reliable": "Secure and Reliable",
-          "Bank-level security for your digital assets.":
-            "Bank-level security for your digital assets.",
-          "Manage Your Cryptos": "Manage Your Cryptos",
-          "Easily manage multiple cryptocurrencies.":
-            "Easily manage multiple cryptocurrencies.",
+          "Robust security designed for your information.":
+            "Robust security designed for your information.",
+          "Manage Your Assets": "Manage Your Assets",
+          "Easily manage multiple asset types.":
+            "Easily manage multiple asset types.",
           Welcome: "Welcome",
-          "Your secure and user-friendly digital wallet.":
-            "Your secure and user-friendly digital wallet.",
+          "Your secure and intuitive companion app.":
+            "Your secure and intuitive companion app.",
           "Address Copied to Clipboard": "Address copied to clipboard",
           "No devices found":
             "No devices found. Please pair a device to see it here.",
@@ -156,16 +155,15 @@ i18n
           "Last connected": "Last connected",
           "Secure Device Status": "Secure Device Status",
           "Device Settings": "Device Settings",
-          "Delete Wallet": "Delete Wallet",
+          "Reset Local Profile": "Reset Local Profile",
           Support: "Support",
           Warning: "Warning",
           deleteDeviceConfirmMessage:
             "Are you sure you want to remove this device from the app?\nThis will erase all locally stored information related to this device.\n\nYou can reconnect the device later to sync data again.\nMake sure you've saved any important information before proceeding.",
           Delete: "Delete",
           Success: "Success",
-          "Your wallet has been deleted successfully.":
-            "Your wallet has been deleted successfully.",
-          "Insufficient Balance": "Insufficient Balance",
+          "Deleted successfully.": "Deleted successfully.",
+          "Not enough value": "Not enough value",
           "Waiting for approval on your device...":
             "Waiting for approval on your device...",
           Save: "Save",
@@ -178,7 +176,8 @@ i18n
           "All Chains": "All Chains",
           "Select Chain": "Select Chain",
           "Contact Support via Email": "Contact Support via Email",
-          addressShown: "Address has been successfully displayed on LIKKIM!",
+          addressShown:
+            "Address has been successfully displayed on your device.",
           "Search Address": "Search Address",
           "No device paired. Please pair with device first.":
             "No device paired. Please pair with device first.",
@@ -214,21 +213,21 @@ i18n
             "请确保你的冷钱包已解锁并启用蓝牙。",
           Send: "发送",
           Receive: "接收",
-          "Transaction History": "交易记录",
+          "Activity Log": "操作记录",
           "No Histories": "没有记录",
           "Enter the recipient's address:": "输入接收者的地址:",
           "Enter Address": "输入地址",
           Submit: "提交",
-          "Choose the cryptocurrency to send:": "选择要发送的加密货币:",
-          "Choose the cryptocurrency to receive:": "选择要接收的加密货币:",
+          "Select asset to proceed": "请选择资产以继续",
+          "Choose asset type": "请选择资产类型",
           "Address for": "地址",
           Close: "关闭",
-          Wallet: "钱包",
-          Transactions: "交易",
+          Assets: "资产",
+          Activity: "交易",
           General: "通用",
-          "Total Balance": "总余额",
+          "Total Value": "总余额",
           Balance: "余额",
-          "No cryptocurrencies available. Please add wallet first.":
+          "No assets available. Please connect your device to continue.":
             "没有可用的加密货币。请先添加钱包。",
           "This chain account will be removed": "此链账户将被移除",
           "Remove Chain Account": "移除链账户",
@@ -248,7 +247,7 @@ i18n
           "Firmware Update": "固件更新",
           "No data available": "暂无数据",
           "Search Currency": "搜索货币",
-          "Search Cryptocurrency": "搜索加密货币",
+          "Search Asset": "搜索资产",
           "Select Currency": "选择货币",
           "Enable Screen Lock": "启用屏幕锁定",
           "Enter new password": "输入新密码",
@@ -280,43 +279,36 @@ i18n
             "您输入的验证码不正确，请重试。",
           "Invalid address": "地址无效",
           "Detected Network": "检测到的网络",
-          "Enter Amount": "输入金额",
-          "Enter the amount to send:": "输入发送金额：",
+          "Enter amount": "输入金额",
           Back: "返回",
           Amount: "金额",
           "Payment Address": "付款地址",
           "Recipient Address": "收款人地址",
-          "Transaction Fee": "交易费",
+          "Processing Fee": "手续费",
           Confirm: "确认",
           "Waiting for Confirmation": "正在等待确认",
-
+          "Your secure and intuitive companion app.":
+            "您安全且直观的硬件伴侣应用。",
           "Screen lock enabled successfully": "屏幕锁已成功启用",
           "Success!": "成功！",
           "Enable Face ID": "启用面容ID",
           "I lost my password": "我忘记了密码",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "若要重置应用并删除存储的数据，请卸载后在手机上重新安装。",
-
-          "Value in USD": "以美元计值",
+          "Estimated value (US$)": "预估价值（美元）",
           Fee: "手续费用",
           "Waiting for approval on your device...": "正在等待您设备上的批准...",
-
-          "Verifying Address on LIKKIM...": "正在 LIKKIM 上验证地址...",
-
+          "Verifying address on your device...": "正在验证您设备上的地址...",
           "Your device is already verified.": "您的设备已验证。",
-
           "Address Book": "地址簿",
-          Swap: "闪兑",
+          Convert: "闪兑",
           Skip: "跳过",
           "Start Exploring": "开始探索",
           "Secure and Reliable": "安全可靠",
-          "Bank-level security for your digital assets.":
-            "银行级别的数字资产安全。",
-          "Manage Your Cryptos": "管理您的加密货币",
-          "Easily manage multiple cryptocurrencies.": "轻松管理多种加密货币。",
+          "Robust security designed for your information.":
+            "为您的信息量身打造的强大安全保障。",
+          "Easily manage multiple asset types.": "轻松管理多种类型的资产。",
           Welcome: "欢迎",
-          "Your secure and user-friendly digital wallet.":
-            "您的安全且易用的数字钱包。",
           "Address Copied to Clipboard": "地址已复制到剪贴板",
           "No devices found": "未找到设备，请配对设备后查看。",
           "Fetching address...": "正在获取地址...",
@@ -334,16 +326,15 @@ i18n
           "Last connected": "最后连接",
           "Secure Device Status": "安全设备状态",
           "Device Settings": "设备设置",
-          "Delete Wallet": "删除钱包",
+          "Reset Local Profile": "重置本地数据",
           Support: "帮助",
           Warning: "警告",
           deleteDeviceConfirmMessage:
             "您确定要将此设备从应用中移除吗？\n这将删除与该设备相关的所有本地存储信息。\n\n您可以稍后重新连接设备以再次同步数据。\n请确保在继续之前已保存所有重要信息。",
           Delete: "删除",
           Success: "成功",
-          "Your wallet has been deleted successfully.": "您的钱包已成功删除。",
-          "Insufficient Balance": "余额不足",
-
+          "Deleted successfully.": "删除成功。",
+          "Not enough value": "当前数值不足，无法继续",
           Save: "保存",
           Address: "地址",
           "Add Address": "添加地址",
@@ -354,7 +345,7 @@ i18n
           "All Chains": "所有链",
           "Select Chain": "选择链",
           "Contact Support via Email": "通过电子邮件联系支持",
-          addressShown: "地址已成功在 LIKKIM 上显示！",
+          addressShown: "地址已成功显示在您的设备上。",
           "Search Address": "搜索地址",
           "No device paired. Please pair with device first.":
             "未配对设备。请先与设备配对。",
@@ -390,20 +381,20 @@ i18n
             "請確保你的冷錢包已解鎖並啟用藍牙。",
           Send: "發送",
           Receive: "接收",
-          "Transaction History": "交易記錄",
+          "Activity Log": "操作紀錄",
           "No Histories": "沒有記錄",
           "Enter the recipient's address:": "輸入接收者的地址:",
           "Enter Address": "輸入地址",
           Submit: "提交",
-          "Choose the cryptocurrency to send:": "選擇要發送的加密貨幣:",
-          "Choose the cryptocurrency to receive:": "選擇要接收的加密貨幣:",
+          "Select asset to proceed": "請選擇資產以繼續",
+          "Choose asset type": "請選擇資產類型",
           "Address for": "地址",
-          Wallet: "錢包",
-          Transactions: "交易",
+          Assets: "資產",
+          Activity: "交易",
           General: "通用",
-          "Total Balance": "總餘額",
+          "Total Value": "總餘額",
           Balance: "餘額",
-          "No cryptocurrencies available. Please add wallet first.":
+          "No assets available. Please connect your device to continue.":
             "沒有可用的加密貨幣。請先添加錢包。",
           "This chain account will be removed": "此鏈賬戶將被移除",
           "Remove Chain Account": "移除鏈賬戶",
@@ -423,7 +414,7 @@ i18n
           "Firmware Update": "固件更新",
           "No data available": "暫無數據",
           "Search Currency": "搜尋貨幣",
-          "Search Cryptocurrency": "搜尋加密貨幣",
+          "Search Asset": "搜尋資產",
           "Select Currency": "選擇貨幣",
           "Enable Screen Lock": "啟用螢幕鎖定",
           "Enter new password": "輸入新密碼",
@@ -463,42 +454,37 @@ i18n
             "您輸入的驗證碼不正確，請重試。",
           "Invalid address": "地址無效",
           "Detected Network": "檢測到的網絡",
-          "Enter Amount": "輸入金額",
-          "Enter the amount to send:": "輸入發送金額：",
+          "Enter amount": "輸入金額",
           Back: "返回",
           Amount: "金額",
           "Payment Address": "付款地址",
           "Recipient Address": "收款人地址",
-          "Transaction Fee": "交易費",
+          "Processing Fee": "手續費",
           Confirm: "確認",
           "Waiting for Confirmation": "正在等待確認",
           "Screen lock enabled successfully": "螢幕鎖已成功啟用",
           "Success!": "成功！",
           "Enable Face ID": "啟用面容ID",
-          "I lost my password": "我忘記了密碼",
+
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "若要重設應用程式並移除儲存的資料，請於手機上解除安裝後重新安裝。",
-
-          "Value in USD": "以美元計值",
+          "Estimated value (US$)": "預估價值（美元）",
           Fee: "手续費用",
           "Waiting for approval on your device...": "正在等待您裝置上的核准...",
-
-          "Verifying Address on LIKKIM...": "正在 LIKKIM 上驗證地址...",
-
+          "Verifying address on your device...": "正在驗證您裝置上的地址...",
           "Your device is already verified.": "您的設備已驗證。",
-
           "Address Book": "地址簿",
-          Swap: "交換",
+          Convert: "交換",
           Skip: "跳過",
           "Start Exploring": "開始探索",
           "Secure and Reliable": "安全可靠",
-          "Bank-level security for your digital assets.":
-            "銀行級的數位資產安全。",
-          "Manage Your Cryptos": "管理您的加密貨幣",
-          "Easily manage multiple cryptocurrencies.": "輕鬆管理多種加密貨幣。",
+          "Robust security designed for your information.":
+            "為您的資訊量身設計的強大安全保障。",
+          "Manage Your Assets": "管理您的資產",
+          "Easily manage multiple asset types.": "輕鬆管理多種類型的資產。",
           Welcome: "歡迎",
-          "Your secure and user-friendly digital wallet.":
-            "您的安全且友好的數字錢包。",
+          "Your secure and intuitive companion app.":
+            "您安全且直覺的硬體伴侶應用程式。",
           "Address Copied to Clipboard": "地址已複製到剪貼簿",
           "No devices found": "未找到設備，請配對設備後查看。",
           "Fetching address...": "正在獲取地址...",
@@ -516,16 +502,15 @@ i18n
           "Last connected": "最後連接",
           "Secure Device Status": "安全設備狀態",
           "Device Settings": "裝置設定",
-          "Delete Wallet": "刪除錢包",
+          "Reset Local Profile": "重設本機資料",
           Support: "幫助",
           Warning: "警告",
           deleteDeviceConfirmMessage:
             "您確定要將此裝置從應用程式中移除嗎？\n這將刪除與該裝置相關的所有本地儲存資訊。\n\n您可以稍後重新連接裝置以再次同步資料。\n請確保在繼續之前已儲存所有重要資訊。",
           Delete: "刪除",
           Success: "成功",
-          "Your wallet has been deleted successfully.": "您的錢包已成功刪除。",
-          "Insufficient Balance": "餘額不足",
-
+          "Deleted successfully.": "刪除成功。",
+          "Not enough value": "目前數值不足，無法繼續",
           Save: "儲存",
           Address: "地址",
           "Add Address": "新增地址",
@@ -536,7 +521,7 @@ i18n
           "All Chains": "所有鏈",
           "Select Chain": "選擇鏈",
           "Contact Support via Email": "透過電子郵件聯繫支持",
-          addressShown: "地址已在 LIKKIM 上成功顯示！",
+          addressShown: "地址已成功顯示在您的裝置上。",
           "Search Address": "搜尋地址",
           "No device paired. Please pair with device first.":
             "未配對設備。請先與設備配對。",
@@ -573,23 +558,21 @@ i18n
             "Veuillez vous assurer que votre portefeuille froid est déverrouillé et que le Bluetooth est activé.",
           Send: "Envoyer",
           Receive: "Recevoir",
-          "Transaction History": "Historique des transactions",
+          "Activity Log": "Historique des opérations",
           "No Histories": "Aucun historique",
           "Enter the recipient's address:":
             "Entrez l'adresse du destinataire :",
           "Enter Address": "Entrer l'adresse",
           Submit: "Soumettre",
-          "Choose the cryptocurrency to send:":
-            "Choisissez la crypto-monnaie à envoyer :",
-          "Choose the cryptocurrency to receive:":
-            "Choisissez la crypto-monnaie à recevoir :",
+          "Select asset to proceed": "Sélectionnez un actif pour continuer",
+          "Choose asset type": "Choisissez le type d'actif",
           "Address for": "Adresse pour",
-          Wallet: "Portefeuille",
-          Transactions: "Transactions",
+          Assets: "Actifs",
+          Activity: "Activity",
           General: "Général",
-          "Total Balance": "Solde Total",
+          "Total Value": "Solde Total",
           Balance: "Solde",
-          "No cryptocurrencies available. Please add wallet first.":
+          "No assets available. Please connect your device to continue.":
             "Aucune cryptomonnaie disponible. Veuillez d'abord ajouter un portefeuille.",
           "This chain account will be removed":
             "Ce compte de chaîne sera supprimé",
@@ -613,7 +596,7 @@ i18n
 
           "No data available": "Aucune donnée disponible",
           "Search Currency": "Rechercher une devise",
-          "Search Cryptocurrency": "Rechercher une cryptomonnaie",
+          "Search Asset": "Rechercher un actif",
           "Select Currency": "Sélectionner une devise",
           "Enable Screen Lock": "Activer le verrouillage de l'écran",
           "Enter new password": "Entrez un nouveau mot de passe",
@@ -649,15 +632,27 @@ i18n
             "Le code de vérification que vous avez saisi est incorrect. Veuillez réessayer.",
           "Invalid address": "Adresse invalide",
           "Detected Network": "Réseau détecté",
-          "Enter Amount": "Entrez le montant",
-          "Enter the amount to send:": "Entrez le montant à envoyer :",
+          "Enter amount": "Ingrese el monto",
           Back: "Retour",
           Amount: "Montant",
           "Payment Address": "Adresse de paiement",
           "Recipient Address": "Adresse du destinataire",
-          "Transaction Fee": "Frais de transaction",
+          "Processing Fee": "Frais de traitement",
           Confirm: "Confirmer",
           "Waiting for Confirmation": "En attente de confirmation",
+          "Screen lock enabled successfully":
+            "Verrouillage d'écran activé avec succès",
+          "Success!": "Succès !",
+          "Enable Face ID": "Activer Face ID",
+
+          "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
+            "Pour réinitialiser l'application et supprimer les données enregistrées, veuillez la désinstaller puis la réinstaller sur votre téléphone.",
+
+          Fee: "Frais",
+          "Verifying address on your device...":
+            "Vérification de l'adresse sur votre appareil...",
+          "Your device is already verified.":
+            "Votre appareil est déjà vérifié.",
           "Screen lock enabled successfully":
             "Verrouillage d'écran activé avec succès",
           "Success!": "Succès !",
@@ -665,46 +660,25 @@ i18n
           "I lost my password": "J'ai perdu mon mot de passe",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "Pour réinitialiser l'application et supprimer les données enregistrées, veuillez la désinstaller puis la réinstaller sur votre téléphone.",
-
-          "Value in USD": "Valeur en USD",
-          Fee: "Frais",
-
-          "Verifying Address on LIKKIM...":
-            "Vérification de l'adresse sur LIKKIM...",
-
-          "Your device is already verified.":
-            "Votre appareil est déjà vérifié.",
-
-          "Screen lock enabled successfully":
-            "Verrouillage d'écran activé avec succès",
-          "Success!": "Succès !",
-          "Enable Face ID": "Activer Face ID",
-          "I lost my password": "J'ai perdu mon mot de passe",
-          "": "Veuillez désinstaller puis réinstaller l'application sur votre téléphone pour supprimer les données de l'application LIKKIM, y compris les comptes et les paramètres.",
-          "Value in USD": "Valeur en USD",
+          "Estimated value (US$)": "Valeur estimée (US$)",
           Fee: "Frais",
           "Waiting for approval on your device...":
             "En attente d'approbation sur votre appareil...",
-
-          "Verifying Address on LIKKIM...":
-            "Vérification de l'adresse sur LIKKIM...",
-
           "Your device is already verified.":
             "Votre appareil est déjà vérifié.",
-
           "Address Book": "Carnet d'adresses",
-          Swap: "Échanger",
+          Convert: "Échanger",
           Skip: "Passer",
           "Start Exploring": "Commencer à explorer",
           "Secure and Reliable": "Sécurisé et fiable",
-          "Bank-level security for your digital assets.":
-            "Sécurité de niveau bancaire pour vos actifs numériques.",
-          "Manage Your Cryptos": "Gérez vos cryptomonnaies",
-          "Easily manage multiple cryptocurrencies.":
-            "Gérez facilement plusieurs cryptomonnaies.",
+          "Robust security designed for your information.":
+            "Sécurité renforcée conçue pour protéger vos informations.",
+          "Manage Your Assets": "Gérez vos actifs",
+          "Easily manage multiple asset types.":
+            "Gérez facilement plusieurs types d’actifs.",
           Welcome: "Bienvenue",
-          "Your secure and user-friendly digital wallet.":
-            "Votre portefeuille numérique sécurisé et convivial.",
+          "Your secure and intuitive companion app.":
+            "Votre application compagnon matérielle sécurisée et intuitive.",
           "Address Copied to Clipboard":
             "Adresse copiée dans le presse-papiers",
           "No devices found":
@@ -724,19 +698,17 @@ i18n
           "Last connected": "Dernière connexion",
           "Secure Device Status": "État de l'appareil sécurisé",
           "Device Settings": "Paramètres de l'appareil",
-          "Delete Wallet": "Supprimer le portefeuille",
+          "Reset Local Profile": "Réinitialiser les données locales",
           Support: "Assistance",
           Warning: "Avertissement",
           deleteDeviceConfirmMessage:
             "Êtes-vous sûr de vouloir supprimer cet appareil de l'application ?\nCela effacera toutes les informations stockées localement liées à cet appareil.\n\nVous pouvez reconnecter l'appareil plus tard pour synchroniser à nouveau les données.\nAssurez-vous d'avoir sauvegardé toutes les informations importantes avant de continuer.",
           Delete: "Supprimer",
           Success: "Succès",
-          "Your wallet has been deleted successfully.":
-            "Votre portefeuille a été supprimé avec succès.",
-          "Insufficient Balance": "Solde insuffisant",
+          "Deleted successfully.": "Supprimé avec succès.",
+          "Not enough value": "Valeur trop faible pour continuer",
           "Waiting for approval on your device...":
             "Esperando aprobación en su dispositivo...",
-
           Save: "Sauvegarder",
           Address: "Adresse",
           "Add Address": "Ajouter une adresse",
@@ -747,7 +719,8 @@ i18n
           "All Chains": "Toutes les chaînes",
           "Select Chain": "Sélectionner la chaîne",
           "Contact Support via Email": "Contacter le support par e-mail",
-          addressShown: "L'adresse a été affichée avec succès sur LIKKIM !",
+          addressShown:
+            "L'adresse a été affichée avec succès sur votre appareil.",
           "Search Address": "Rechercher une adresse",
           "No device paired. Please pair with device first.":
             "Aucun appareil apparié. Veuillez d'abord appairer un appareil.",
@@ -785,23 +758,21 @@ i18n
             "Por favor, asegúrate de que tu billetera fría esté desbloqueada y el Bluetooth esté activado.",
           Send: "Enviar",
           Receive: "Recibir",
-          "Transaction History": "Historial de transacciones",
+          "Activity Log": "Registro de operaciones",
           "No Histories": "No hay historiales",
           "Enter the recipient's address:":
             "Ingrese la dirección del destinatario:",
           "Enter Address": "Ingrese la dirección",
           Submit: "Enviar",
-          "Choose the cryptocurrency to send:":
-            "Elija la criptomoneda para enviar:",
-          "Choose the cryptocurrency to receive:":
-            "Elija la criptomoneda para recibir:",
+          "Select asset to proceed": "Seleccione un activo para continuar",
+          "Choose asset type": "Elija el tipo de activo",
           "Address for": "Dirección para",
-          Wallet: "Cartera",
-          Transactions: "Transacciones",
+          Assets: "Activos",
+          Activity: "Transacciones",
           General: "General",
-          "Total Balance": "Saldo Total",
+          "Total Value": "Saldo Total",
           Balance: "Saldo",
-          "No cryptocurrencies available. Please add wallet first.":
+          "No assets available. Please connect your device to continue.":
             "No hay criptomonedas disponibles. Por favor, agregue una billetera primero.",
           "This chain account will be removed":
             "Esta cuenta de cadena será eliminada",
@@ -827,7 +798,7 @@ i18n
 
           "No data available": "No hay datos disponibles",
           "Search Currency": "Buscar moneda",
-          "Search Cryptocurrency": "Buscar criptomoneda",
+          "Search Asset": "Buscar activo",
           "Select Currency": "Seleccionar moneda",
           "Enable Screen Lock": "Habilitar bloqueo de pantalla",
           "Enter new password": "Ingrese nueva contraseña",
@@ -862,13 +833,12 @@ i18n
             "El código de verificación que ingresó es incorrecto. Inténtelo de nuevo.",
           "Invalid address": "Dirección inválida",
           "Detected Network": "Red detectada",
-          "Enter Amount": "Ingrese el monto",
-          "Enter the amount to send:": "Ingrese la cantidad a enviar:",
+          "Enter amount": "Ingrese el monto",
           Back: "Atrás",
           Amount: "Cantidad",
           "Payment Address": "Dirección de pago",
           "Recipient Address": "Dirección del destinatario",
-          "Transaction Fee": "Tarifa de transacción",
+          "Processing Fee": "Tarifa de procesamiento",
           Confirm: "Confirmar",
           "Waiting for Confirmation": "Esperando confirmación",
           "Screen lock enabled successfully":
@@ -878,29 +848,25 @@ i18n
           "I lost my password": "Perdí mi contraseña",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "Para restablecer la aplicación y eliminar los datos almacenados, desinstálala y vuelve a instalarla en tu teléfono.",
-
-          "Value in USD": "Valor en USD",
+          "Estimated value (US$)": "Valor estimado (US$)",
           Fee: "Tarifa",
-
-          "Verifying Address on LIKKIM...":
-            "Verificando dirección en LIKKIM...",
-
+          "Verifying address on your device...":
+            "Verificando la dirección en su dispositivo...",
           "Your device is already verified.":
             "Su dispositivo ya está verificado.",
-
           "Address Book": "Libreta de direcciones",
-          Swap: "Intercambiar",
+          Convert: "Intercambiar",
           Skip: "Omitir",
           "Start Exploring": "Comenzar a explorar",
           "Secure and Reliable": "Seguro y confiable",
-          "Bank-level security for your digital assets.":
-            "Seguridad a nivel bancario para tus activos digitales.",
-          "Manage Your Cryptos": "Gestiona tus criptomonedas",
-          "Easily manage multiple cryptocurrencies.":
-            "Gestiona fácilmente múltiples criptomonedas.",
+          "Robust security designed for your information.":
+            "Seguridad sólida diseñada para tu información.",
+          "Manage Your Assets": "Administra tus activos",
+          "Easily manage multiple asset types.":
+            "Administra fácilmente varios tipos de activos.",
           Welcome: "Bienvenido",
-          "Your secure and user-friendly digital wallet.":
-            "Tu billetera digital segura y fácil de usar.",
+          "Your secure and intuitive companion app.":
+            "Tu aplicación complementaria de hardware, segura e intuitiva.",
           "Address Copied to Clipboard": "Dirección copiada al portapapeles",
           "No devices found":
             "No se encontraron dispositivos. Por favor, empareja un dispositivo para verlo aquí.",
@@ -919,20 +885,17 @@ i18n
           "Last connected": "Última conexión",
           "Secure Device Status": "Estado del dispositivo seguro",
           "Device Settings": "Configuración del dispositivo",
-          "Delete Wallet": "Eliminar cartera",
+          "Reset Local Profile": "Restablecer los datos locales",
           Support: "Soporte",
           Warning: "Advertencia",
-
           deleteDeviceConfirmMessage:
             "¿Está seguro de que desea eliminar este dispositivo de la aplicación?\nEsto borrará toda la información almacenada localmente relacionada con este dispositivo.\n\nPuede volver a conectar el dispositivo más tarde para sincronizar los datos nuevamente.\nAsegúrese de haber guardado toda la información importante antes de continuar.",
           Delete: "Eliminar",
           Success: "Éxito",
-          "Your wallet has been deleted successfully.":
-            "Tu billetera ha sido eliminada con éxito.",
-          "Insufficient Balance": "Saldo insuficiente",
-          "Waiting for approval on your device....":
-            "Confirmando la transacción en el dispositivo LIKKIM...",
-
+          "Deleted successfully.": "Eliminado correctamente.",
+          "Not enough value": "Valor insuficiente para continuar",
+          "Waiting for approval on your device...":
+            "Esperando aprobación en su dispositivo...",
           Save: "Guardar",
           Address: "Dirección",
           "Add Address": "Añadir dirección",
@@ -943,7 +906,8 @@ i18n
           "All Chains": "Todas las cadenas",
           "Select Chain": "Seleccionar cadena",
           "Contact Support via Email": "Contactar con el soporte vía email",
-          addressShown: "¡La dirección se ha mostrado correctamente en LIKKIM!",
+          addressShown:
+            "La dirección se ha mostrado correctamente en su dispositivo.",
           "Search Address": "Buscar dirección",
           "No device paired. Please pair with device first.":
             "Ningún dispositivo emparejado. Por favor, empareje con un dispositivo primero.",
@@ -980,47 +944,40 @@ i18n
             "يرجى التأكد من أن محفظتك الباردة غير مقفلة وتم تمكين البلوتوث.",
           Send: "إرسال",
           Receive: "استلام",
-          "Transaction History": "سجل المعاملات",
+          "Activity Log": "سجل العمليات",
           "No Histories": "لا يوجد سجلات",
           "Enter the recipient's address:": "أدخل عنوان المستلم:",
           "Enter Address": "أدخل العنوان",
           Submit: "إرسال",
-          "Choose the cryptocurrency to send:": "اختر العملة الرقمية لإرسالها:",
-          "Choose the cryptocurrency to receive:":
-            "اختر العملة الرقمية للاستلام:",
+          "Select asset to proceed": "حدد الأصل للمتابعة",
+          "Choose asset type": "اختر نوع الأصل",
           "Address for": "العنوان لـ",
           Close: "إغلاق",
-          Wallet: "محفظة",
-          Transactions: "المعاملات",
+          Assets: "الأصول",
+          Activity: "المعاملات",
           General: "عام",
-          "Total Balance": "الرصيد الإجمالي",
+          "Total Value": "الرصيد الإجمالي",
           Balance: "الرصيد",
-          "No cryptocurrencies available. Please add wallet first.":
+          "No assets available. Please connect your device to continue.":
             "لا توجد عملات مشفرة متاحة. يرجى إضافة المحفظة أولاً.",
           "This chain account will be removed": "سيتم إزالة حساب السلسلة هذا",
           "Remove Chain Account": "إزالة حساب السلسلة",
           Remove: "إزالة",
           "Security in your hands": "الأمان بين يديك",
-
           Continue: "متابعة",
-
           "Scroll down to view all words":
             "قم بالتمرير لأسفل لعرض جميع الكلمات",
-
           "Generating your accounts": "إنشاء حساباتك",
           "Encrypting your data": "تشفير بياناتك",
-
           "Let's Go": "هيا بنا",
           "Use spaces between words": "استخدم مسافات بين الكلمات",
-
           Version: "الإصدار",
           "Assets can only be sent within the same chain.":
             "يمكن إرسال الأصول فقط ضمن نفس السلسلة.",
           "Firmware Update": "تحديث البرنامج الثابت",
-
           "No data available": "لا توجد بيانات متاحة",
           "Search Currency": "البحث عن عملة",
-          "Search Cryptocurrency": "البحث عن عملة مشفرة",
+          "Search Asset": "ابحث عن الأصل",
           "Select Currency": "اختر العملة",
           "Enable Screen Lock": "تفعيل قفل الشاشة",
           "Enter new password": "أدخل كلمة مرور جديدة",
@@ -1044,7 +1001,6 @@ i18n
           "Enter PIN to Connect": "أدخل رقم التعريف الشخصي للاتصال",
           "Use the PIN code to connect securely to your device.":
             "استخدم رمز PIN للاتصال الآمن بجهازك.",
-
           "Enter PIN": "أدخل رقم التعريف الشخصي",
           "Verification successful!": "تم التحقق بنجاح!",
           "You can now safely use the device.":
@@ -1054,13 +1010,12 @@ i18n
             "رمز التحقق الذي أدخلته غير صحيح. حاول مرة اخرى.",
           "Invalid address": "عنوان غير صالح",
           "Detected Network": "تم اكتشاف الشبكة",
-          "Enter Amount": "أدخل المبلغ",
-          "Enter the amount to send:": "أدخل المبلغ المراد إرساله:",
+          "Enter amount": "أدخل المبلغ",
           Back: "رجوع",
           Amount: "المبلغ",
           "Payment Address": "عنوان الدفع",
           "Recipient Address": "عنوان المستلم",
-          "Transaction Fee": "رسوم التحويل",
+          "Processing Fee": "رسوم المعالجة",
           Confirm: "تأكيد",
           "Waiting for Confirmation": "بانتظار التأكيد",
           "Screen lock enabled successfully": "تم تفعيل قفل الشاشة بنجاح",
@@ -1069,30 +1024,26 @@ i18n
           "I lost my password": "فقدت كلمة المرور الخاصة بي",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "لإعادة ضبط التطبيق وإزالة البيانات المخزنة، يُرجى إلغاء تثبيته وإعادة تثبيته على هاتفك.",
-
-          "Value in USD": "القيمة بالدولار الأمريكي",
+          "Estimated value (US$)": "القيمة التقديرية (دولار أمريكي)",
           Fee: "رسوم",
           "Waiting for approval on your device...":
             "بانتظار الموافقة على جهازك...",
-
-          "Verifying Address on LIKKIM...":
-            "جارٍ التحقق من العنوان على LIKKIM...",
-
+          "Verifying address on your device...":
+            "جارٍ التحقق من العنوان على جهازك...",
           "Your device is already verified.": "تم التحقق من جهازك بالفعل.",
-
           "Address Book": "دفتر العناوين",
-          Swap: "تبادل",
+          Convert: "تبادل",
           Skip: "تخطي",
           "Start Exploring": "ابدأ الاستكشاف",
           "Secure and Reliable": "آمن وموثوق",
-          "Bank-level security for your digital assets.":
-            "أمان بمستوى البنوك لأصولك الرقمية.",
-          "Manage Your Cryptos": "إدارة عملاتك المشفرة",
-          "Easily manage multiple cryptocurrencies.":
-            "إدارة سهلة لعدة عملات مشفرة.",
+          "Robust security designed for your information.":
+            "أمان قوي مصمم خصيصًا لمعلوماتك.",
+          "Manage Your Assets": "إدارة أصولك",
+          "Easily manage multiple asset types.":
+            "إدارة أنواع متعددة من الأصول بسهولة.",
           Welcome: "مرحبًا",
-          "Your secure and user-friendly digital wallet.":
-            "محفظتك الرقمية الآمنة وسهلة الاستخدام.",
+          "Your secure and intuitive companion app.":
+            "تطبيقك المرافق للأجهزة الآمن والبديهي.",
           "Address Copied to Clipboard": "تم نسخ العنوان إلى الحافظة",
           "No devices found":
             "لم يتم العثور على أجهزة. يرجى اقتران جهاز لرؤيته هنا.",
@@ -1111,16 +1062,15 @@ i18n
           "Last connected": "آخر اتصال",
           "Secure Device Status": "حالة الجهاز الآمن",
           "Device Settings": "إعدادات الجهاز",
-          "Delete Wallet": "حذف المحفظة",
+          "Reset Local Profile": "إعادة تعيين البيانات المحلية",
           Support: "الدعم",
           Warning: "تحذير",
           deleteDeviceConfirmMessage:
             "هل أنت متأكد أنك تريد إزالة هذا الجهاز من التطبيق؟\nسيؤدي ذلك إلى مسح جميع المعلومات المخزنة محليًا المتعلقة بهذا الجهاز.\n\nيمكنك إعادة توصيل الجهاز لاحقًا لمزامنة البيانات مرة أخرى.\nتأكد من حفظ أي معلومات مهمة قبل المتابعة.",
           Delete: "حذف",
           Success: "نجاح",
-          "Your wallet has been deleted successfully.": "تم حذف محفظتك بنجاح.",
-          "Insufficient Balance": "رصيد غير كافي",
-
+          "Deleted successfully.": "تم الحذف بنجاح.",
+          "Not enough value": "القيمة غير كافية للمتابعة",
           Save: "حفظ",
           Address: "العنوان",
           "Add Address": "إضافة عنوان",
@@ -1131,7 +1081,7 @@ i18n
           "All Chains": "جميع السلاسل",
           "Select Chain": "اختيار السلسلة",
           "Contact Support via Email": "تواصل مع الدعم عبر البريد الإلكتروني",
-          addressShown: "تم عرض العنوان بنجاح على LIKKIM!",
+          addressShown: "تم عرض العنوان بنجاح على جهازك.",
           "Search Address": "البحث عن عنوان",
           "No device paired. Please pair with device first.":
             "لا يوجد جهاز مقترن. يرجى إقران الجهاز أولاً.",
@@ -1166,26 +1116,24 @@ i18n
           "LOOKING FOR DEVICES": "デバイスを探しています",
           "Scanning...": "スキャン中...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
-            "コールドウォレットがロック解除され、Bluetoothが有効になっていることを確認してください。",
-          Send: "Enviar",
-          Receive: "Recibir",
-          "Transaction History": "Historial de transacciones",
-          "No Histories": "No hay historiales",
+            "コールドウォレットのロックが解除され、Bluetoothが有効になっていることを確認してください。",
+          Send: "送信",
+          Receive: "受信",
+          "Activity Log": "操作記録",
+          "No Histories": "履歴がありません",
           "Enter the recipient's address:":
-            "Ingrese la dirección del destinatario:",
-          "Enter Address": "Ingrese la dirección",
-          Submit: "Enviar",
-          "Choose the cryptocurrency to send:":
-            "Elija la criptomoneda para enviar:",
-          "Choose the cryptocurrency to receive:":
-            "Elija la criptomoneda para recibir:",
-          "Address for": "Dirección para",
-          Wallet: "ウォレット",
-          Transactions: "トランザクション",
+            "受取人のアドレスを入力してください：",
+          "Enter Address": "アドレスを入力",
+          Submit: "送信",
+          "Select asset to proceed": "続行するにはアセットを選択してください",
+          "Choose asset type": "資産の種類を選択してください",
+          "Address for": "アドレス：",
+          Assets: "資産",
+          Activity: "トランザクション",
           General: "一般",
-          "Total Balance": "総残高",
+          "Total Value": "総残高",
           Balance: "残高",
-          "No cryptocurrencies available. Please add wallet first.":
+          "No assets available. Please connect your device to continue.":
             "利用可能な暗号通貨はありません。まずウォレットを追加してください。",
           "This chain account will be removed":
             "このチェーンアカウントは削除されます",
@@ -1211,7 +1159,7 @@ i18n
 
           "No data available": "データがありません",
           "Search Currency": "通貨を検索",
-          "Search Cryptocurrency": "暗号通貨を検索",
+          "Search Asset": "アセットを検索",
           "Select Currency": "通貨を選択",
           "Enable Screen Lock": "画面ロックを有効にする",
           "Enter new password": "新しいパスワードを入力してください",
@@ -1247,13 +1195,12 @@ i18n
             "入力した確認コードが間違っています。もう一度やり直してください。",
           "Invalid address": "無効なアドレス",
           "Detected Network": "検出されたネットワーク",
-          "Enter Amount": "金額を入力",
-          "Enter the amount to send:": "送信する金額を入力してください：",
+          "Enter amount": "金額を入力",
           Back: "戻る",
           Amount: "金額",
           "Payment Address": "支払いアドレス",
           "Recipient Address": "受信者のアドレス",
-          "Transaction Fee": "取引手数料",
+          "Processing Fee": "処理手数料",
           Confirm: "確認",
           "Waiting for Confirmation": "確認を待っています",
 
@@ -1261,44 +1208,38 @@ i18n
             "スクリーンロックが正常に有効化されました",
           "Success!": "成功！",
           "Enable Face ID": "Face IDを有効にする",
-          "I lost my password": "パスワードを忘れた",
+
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "アプリをリセットして保存されたデータを削除するには、アンインストールしてからスマートフォンに再インストールしてください。",
 
-          "Value in USD": "米ドルでの値",
           Fee: "手数料",
-
-          "Verifying Address on LIKKIM...": "LIKKIMでアドレスを確認中...",
-
+          "Verifying address on your device...":
+            "デバイス上のアドレスを確認しています...",
           "Your device is already verified.":
             "お使いのデバイスは既に認証されています。",
-
           "Screen lock enabled successfully":
             "スクリーンロックが正常に有効化されました",
           "Success!": "成功！",
           "Enable Face ID": "Face IDを有効にする",
           "I lost my password": "パスワードを忘れた",
-          "Value in USD": "米ドルでの値",
+          "Estimated value (US$)": "推定価値（USD）",
           Fee: "手数料",
-
-          "Verifying Address on LIKKIM...": "LIKKIMでアドレスを確認中...",
-
           "Your device is already verified.":
             "お使いのデバイスは既に認証されています。",
 
           "Address Book": "アドレス帳",
-          Swap: "スワップ",
+          Convert: "スワップ",
           Skip: "スキップ",
           "Start Exploring": "探索を始める",
           "Secure and Reliable": "安全で信頼性の高い",
-          "Bank-level security for your digital assets.":
-            "デジタル資産のための銀行レベルのセキュリティ。",
-          "Manage Your Cryptos": "あなたの暗号通貨を管理する",
-          "Easily manage multiple cryptocurrencies.":
-            "複数の暗号通貨を簡単に管理。",
+          "Robust security designed for your information.":
+            "お客様の情報のために設計された強固なセキュリティ。",
+          "Manage Your Assets": "資産を管理する",
+          "Easily manage multiple asset types.":
+            "複数の資産タイプを簡単に管理できます。",
           Welcome: "ようこそ",
-          "Your secure and user-friendly digital wallet.":
-            "安全で使いやすいデジタルウォレット。",
+          "Your secure and intuitive companion app.":
+            "安全で直感的なハードウェア連携アプリです。",
           "Address Copied to Clipboard":
             "アドレスがクリップボードにコピーされました",
           "No devices found":
@@ -1318,16 +1259,15 @@ i18n
           "Last connected": "最終接続",
           "Secure Device Status": "セキュリティデバイスの状態",
           "Device Settings": "デバイス設定",
-          "Delete Wallet": "ウォレット削除",
+          "Reset Local Profile": "ローカルデータをリセット",
           Support: "サポート",
           Warning: "警告",
           deleteDeviceConfirmMessage:
             "このデバイスをアプリから削除してもよろしいですか？\nこれにより、このデバイスに関連するすべてのローカルに保存された情報が消去されます。\n\n後でデバイスを再接続してデータを再同期できます。\n続行する前に重要な情報を保存したことを確認してください。",
           Delete: "削除",
           Success: "成功",
-          "Your wallet has been deleted successfully.":
-            "ウォレットが正常に削除されました。",
-          "Insufficient Balance": "残高不足",
+          "Deleted successfully.": "正常に削除されました。",
+          "Not enough value": "続行するには値が不足しています",
           "Waiting for approval on your device...":
             "デバイスでの承認を待っています...",
           Save: "保存",
@@ -1340,7 +1280,7 @@ i18n
           "All Chains": "すべてのチェーン",
           "Select Chain": "チェーンを選択",
           "Contact Support via Email": "メールでサポートに連絡",
-          addressShown: "LIKKIM上にアドレスが正常に表示されました！",
+          addressShown: "アドレスがデバイスに正常に表示されました。",
           "Search Address": "アドレスを検索",
           "No device paired. Please pair with device first.":
             "ペアリングされたデバイスがありません。まずデバイスとペアリングしてください。",
@@ -1351,7 +1291,6 @@ i18n
       ru: {
         translation: {
           "Add Wallet": "Добавить кошелек",
-
           Close: "Закрыть",
           "Value:": "Значение:",
           "Delete Card": "Удалить карту",
@@ -1376,51 +1315,42 @@ i18n
           "Scanning...": "Сканирование...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
             "Пожалуйста, убедитесь, что ваш Cold Wallet разблокирован и Bluetooth включен.",
-          Send: "Enviar",
-          Receive: "Recibir",
-          "Transaction History": "Historial de transacciones",
-          "No Histories": "No hay historiales",
-          "Enter the recipient's address:":
-            "Ingrese la dirección del destinatario:",
-          "Enter Address": "Ingrese la dirección",
-          Submit: "Enviar",
-          "Choose the cryptocurrency to send:":
-            "Elija la criptomoneda para enviar:",
-          "Choose the cryptocurrency to receive:":
-            "Elija la criptomoneda para recibir:",
-          "Address for": "Dirección para",
-          Wallet: "Кошелек",
-          Transactions: "Транзакции",
+          Send: "Отправить",
+          Receive: "Получить",
+          "Activity Log": "Журнал операций",
+          "No Histories": "Нет истории",
+          "Enter the recipient's address:": "Введите адрес получателя:",
+          "Enter Address": "Введите адрес",
+          Submit: "Подтвердить",
+          "Select asset to proceed": "Выберите актив, чтобы продолжить",
+          "Choose asset type": "Выберите тип актива",
+          "Address for": "Адрес для",
+          Assets: "Активы",
+          Activity: "Транзакции",
           General: "Общие",
-          "Total Balance": "Общий баланс",
+          "Total Value": "Общий баланс",
           Balance: "Баланс",
-          "No cryptocurrencies available. Please add wallet first.":
+          "No assets available. Please connect your device to continue.":
             "Нет доступных криптовалют. Пожалуйста, сначала добавьте кошелек.",
           "This chain account will be removed":
             "Этот учетная запись цепочки будет удалена",
           "Remove Chain Account": "Удалить учетную запись цепочки",
           Remove: "Удалить",
           "Security in your hands": "Безопасность в ваших руках",
-
           Continue: "Продолжить",
-
           "Scroll down to view all words":
             "Прокрутите вниз, чтобы увидеть все слова",
-
           "Generating your accounts": "Создание ваших аккаунтов",
           "Encrypting your data": "Шифрование ваших данных",
-
           "Let's Go": "Поехали",
           "Use spaces between words": "Используйте пробелы между словами",
-
           Version: "Версия",
           "Assets can only be sent within the same chain.":
             "Активы могут быть отправлены только в пределах одной цепочки.",
           "Firmware Update": "Обновление прошивки",
-
           "No data available": "Данные недоступны",
           "Search Currency": "Поиск валюты",
-          "Search Cryptocurrency": "Поиск криптовалюты",
+          "Search Asset": "Поиск актива",
           "Select Currency": "Выбрать валюту",
           "Enable Screen Lock": "Включить блокировку экрана",
           "Enter new password": "Введите новый пароль",
@@ -1445,7 +1375,6 @@ i18n
           "Enter PIN to Connect": "Введите PIN для подключения",
           "Use the PIN code to connect securely to your device.":
             "Используйте PIN-код для безопасного подключения к вашему устройству.",
-
           "Enter PIN": "Введите PIN",
           "Verification successful!": "Проверка успешна!",
           "You can now safely use the device.":
@@ -1455,16 +1384,14 @@ i18n
             "Введенный вами код проверки неверен. Попробуйте снова.",
           "Invalid address": "Неверный адрес",
           "Detected Network": "Обнаруженная сеть",
-          "Enter Amount": "Введите сумму",
-          "Enter the amount to send:": "Введите сумму для отправки:",
+          "Enter amount": "Введите сумму",
           Back: "Назад",
           Amount: "Сумма",
           "Payment Address": "Платежный адрес",
           "Recipient Address": "Адрес получателя",
-          "Transaction Fee": "Комиссия за транзакцию",
+          "Processing Fee": "Комиссия за обработку",
           Confirm: "Подтвердить",
           "Waiting for Confirmation": "Ожидание подтверждения",
-
           "Screen lock enabled successfully":
             "Экранная блокировка успешно включена",
           "Success!": "Успех!",
@@ -1472,27 +1399,26 @@ i18n
           "I lost my password": "Я забыл свой пароль",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "Чтобы сбросить приложение и удалить сохранённые данные, удалите его и переустановите на вашем телефоне.",
-          "Value in USD": "Значение в долларах США",
+          "Estimated value (US$)": "Оценочная стоимость (US$)",
           Fee: "Комиссия",
           "Waiting for approval on your device...":
             "Ожидание одобрения на вашем устройстве...",
-          "Verifying Address on LIKKIM...": "Проверка адреса на LIKKIM...",
-
+          "Verifying address on your device...":
+            "Проверка адреса на вашем устройстве...",
           "Your device is already verified.": "Ваше устройство уже проверено.",
-
           "Address Book": "Адресная книга",
-          Swap: "Обмен",
+          Convert: "Обмен",
           Skip: "Пропустить",
           "Start Exploring": "Начать исследование",
           "Secure and Reliable": "Надежно и безопасно",
-          "Bank-level security for your digital assets.":
-            "Банковский уровень безопасности для ваших цифровых активов.",
-          "Manage Your Cryptos": "Управляйте вашими криптовалютами",
-          "Easily manage multiple cryptocurrencies.":
-            "Легко управляйте несколькими криптовалютами.",
+          "Robust security designed for your information.":
+            "Надёжная защита, разработанная для вашей информации.",
+          "Manage Your Assets": "Управляйте своими активами",
+          "Easily manage multiple asset types.":
+            "Легко управляйте различными типами активов.",
           Welcome: "Добро пожаловать",
-          "Your secure and user-friendly digital wallet.":
-            "Ваш надежный и удобный цифровой кошелек.",
+          "Your secure and intuitive companion app.":
+            "Ваше безопасное и интуитивно понятное приложение-компаньон для оборудования.",
           "Address Copied to Clipboard": "Адрес скопирован в буфер обмена",
           "No devices found":
             "Устройства не найдены. Пожалуйста, подключите устройство, чтобы увидеть его здесь.",
@@ -1511,17 +1437,15 @@ i18n
           "Last connected": "Последнее подключение",
           "Secure Device Status": "Состояние защищенного устройства",
           "Device Settings": "Настройки устройства",
-          "Delete Wallet": "Удалить кошелек",
+          "Reset Local Profile": "Сброс локальных данных",
           Support: "Поддержка",
           Warning: "Предупреждение",
           deleteDeviceConfirmMessage:
             "Вы уверены, что хотите удалить это устройство из приложения?\nЭто приведет к удалению всей локально сохраненной информации, связанной с этим устройством.\n\nВы можете повторно подключить устройство позже, чтобы снова синхронизировать данные.\nУбедитесь, что вы сохранили всю важную информацию перед продолжением.",
           Delete: "Удалить",
           Success: "Успех",
-          "Your wallet has been deleted successfully.":
-            "Ваш кошелек был успешно удален.",
-          "Insufficient Balance": "Недостаточно средств",
-
+          "Deleted successfully.": "Успешно удалено.",
+          "Not enough value": "Недостаточно значения для продолжения",
           Save: "Сохранить",
           Address: "Адрес",
           "Add Address": "Добавить адрес",
@@ -1533,7 +1457,7 @@ i18n
           "Select Chain": "Выбрать цепь",
           "Contact Support via Email":
             "Связаться с поддержкой по электронной почте",
-          addressShown: "Адрес успешно отображён на LIKKIM!",
+          addressShown: "Адрес успешно отображён на вашем устройстве.",
           "Search Address": "Поиск адреса",
           "No device paired. Please pair with device first.":
             "Нет подключенных устройств. Пожалуйста, сначала выполните сопряжение с устройством.",
@@ -1544,7 +1468,6 @@ i18n
       ko: {
         translation: {
           "Add Wallet": "지갑 추가",
-
           Close: "닫기",
           "Value:": "값:",
           "Delete Card": "카드 삭제",
@@ -1571,46 +1494,39 @@ i18n
             "콜드 월렛이 잠금 해제되고 Bluetooth가 활성화되어 있는지 확인하십시오.",
           Send: "보내다",
           Receive: "받다",
-          "Transaction History": "거래 내역",
+          "Activity Log": "작업 기록",
           "No Histories": "기록 없음",
           "Enter the recipient's address:": "수신자의 주소를 입력하십시오:",
           "Enter Address": "주소를 입력하십시오",
           Submit: "제출",
-          "Choose the cryptocurrency to send:": "보낼 암호화폐를 선택하십시오:",
-          "Choose the cryptocurrency to receive:":
-            "받을 암호화폐를 선택하십시오:",
+          "Select asset to proceed": "계속하려면 자산을 선택하세요",
+          "Choose asset type": "자산 유형을 선택하세요",
           "Address for": "주소",
-          Wallet: "지갑",
-          Transactions: "거래",
+          Assets: "자산",
+          Activity: "거래",
           General: "일반",
-          "Total Balance": "총 잔액",
+          "Total Value": "총 잔액",
           Balance: "잔액",
-          "No cryptocurrencies available. Please add wallet first.":
+          "No assets available. Please connect your device to continue.":
             "사용 가능한 암호화폐가 없습니다. 먼저 지갑을 추가하십시오.",
           "This chain account will be removed": "이 체인 계정이 제거됩니다",
           "Remove Chain Account": "체인 계정 제거",
           Remove: "제거",
           "Security in your hands": "안전은 당신의 손안에 있습니다",
-
           Continue: "계속",
-
           "Scroll down to view all words":
             "모든 단어를 보려면 아래로 스크롤하세요",
-
           "Generating your accounts": "계정 생성 중",
           "Encrypting your data": "데이터 암호화 중",
-
           "Let's Go": "시작합시다",
           "Use spaces between words": "단어 사이에 공백 사용",
-
           Version: "버전",
           "Assets can only be sent within the same chain.":
             "자산은 동일한 체인 내에서만 전송할 수 있습니다.",
           "Firmware Update": "펌웨어 업데이트",
-
           "No data available": "데이터가 없습니다",
           "Search Currency": "통화 검색",
-          "Search Cryptocurrency": "암호화폐 검색",
+          "Search Asset": "자산 검색",
           "Select Currency": "통화 선택",
           "Enable Screen Lock": "화면 잠금 활성화",
           "Enter new password": "새 비밀번호 입력",
@@ -1634,7 +1550,6 @@ i18n
           "Enter PIN to Connect": "연결할 PIN 입력",
           "Use the PIN code to connect securely to your device.":
             "PIN 코드를 사용하여 장치에 안전하게 연결하세요.",
-
           "Enter PIN": "PIN 입력",
           "Verification successful!": "검증 성공!",
           "You can now safely use the device.":
@@ -1644,16 +1559,14 @@ i18n
             "입력한 확인 코드가 올바르지 않습니다. 다시 시도해 주세요.",
           "Invalid address": "잘못된 주소",
           "Detected Network": "감지된 네트워크",
-          "Enter Amount": "금액 입력",
-          "Enter the amount to send:": "보낼 금액을 입력하세요:",
+          "Enter amount": "금액 입력",
           Back: "뒤로",
           Amount: "금액",
           "Payment Address": "결제 주소",
           "Recipient Address": "수취인 주소",
-          "Transaction Fee": "거래 수수료",
+          "Processing Fee": "처리 수수료",
           Confirm: "확인",
           "Waiting for Confirmation": "확인 대기 중",
-
           "Screen lock enabled successfully":
             "화면 잠금이 성공적으로 활성화되었습니다",
           "Success!": "성공!",
@@ -1661,27 +1574,24 @@ i18n
           "I lost my password": "비밀번호를 잊어버렸습니다",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "앱을 초기화하고 저장된 데이터를 제거하려면 휴대폰에서 앱을 삭제한 후 다시 설치하세요.",
-
-          "Value in USD": "미국 달러로 된 값",
+          "Estimated value (US$)": "예상 가치 (US$)",
           Fee: "수수료",
-
-          "Verifying Address on LIKKIM...": "LIKKIM에서 주소를 확인하는 중...",
-
+          "Verifying address on your device...":
+            "기기에서 주소를 확인하는 중...",
           "Your device is already verified.": "장치가 이미 확인되었습니다.",
-
           "Address Book": "주소록",
-          Swap: "스왑",
+          Convert: "스왑",
           Skip: "건너뛰기",
           "Start Exploring": "탐색 시작",
           "Secure and Reliable": "안전하고 신뢰성 있음",
-          "Bank-level security for your digital assets.":
-            "디지털 자산을 위한 은행 수준의 보안.",
-          "Manage Your Cryptos": "당신의 암호화폐 관리",
-          "Easily manage multiple cryptocurrencies.":
-            "여러 암호화폐를 쉽게 관리하세요.",
+          "Robust security designed for your information.":
+            "귀하의 정보를 위한 강력한 보안 설계.",
+          "Manage Your Assets": "자산 관리",
+          "Easily manage multiple asset types.":
+            "여러 자산 유형을 손쉽게 관리하세요.",
           Welcome: "환영합니다",
-          "Your secure and user-friendly digital wallet.":
-            "안전하고 사용자 친화적인 디지털 지갑.",
+          "Your secure and intuitive companion app.":
+            "안전하고 직관적인 하드웨어 동반 앱입니다.",
           "Address Copied to Clipboard": "주소가 클립보드에 복사되었습니다",
           "No devices found":
             "장치가 없습니다. 장치를 연결하여 여기에서 확인하십시오.",
@@ -1700,16 +1610,15 @@ i18n
           "Last connected": "마지막 연결",
           "Secure Device Status": "보안 장치 상태",
           "Device Settings": "장치 설정",
-          "Delete Wallet": "지갑 삭제",
+          "Reset Local Profile": "로컬 데이터 재설정",
           Support: "지원",
           Warning: "경고",
           deleteDeviceConfirmMessage:
             "이 장치를 앱에서 제거하시겠습니까?\n이 작업은 이 장치와 관련된 모든 로컬 저장 정보를 삭제합니다.\n\n나중에 장치를 다시 연결하여 데이터를 다시 동기화할 수 있습니다.\n계속하기 전에 중요한 정보를 저장했는지 확인하십시오.",
           Delete: "삭제",
           Success: "성공",
-          "Your wallet has been deleted successfully.":
-            "지갑이 성공적으로 삭제되었습니다.",
-          "Insufficient Balance": "잔액 부족",
+          "Deleted successfully.": "삭제되었습니다.",
+          "Not enough value": "계속하려면 값이 부족합니다",
           "Waiting for approval on your device...":
             "기기에서 승인을 기다리는 중...",
           Save: "저장",
@@ -1722,7 +1631,7 @@ i18n
           "All Chains": "모든 체인",
           "Select Chain": "체인 선택",
           "Contact Support via Email": "이메일을 통해 지원팀에 문의",
-          addressShown: "LIKKIM에 주소가 성공적으로 표시되었습니다!",
+          addressShown: "주소가 기기에 성공적으로 표시되었습니다.",
           "Search Address": "주소 검색",
           "No device paired. Please pair with device first.":
             "페어링된 장치가 없습니다. 먼저 장치를 페어링하십시오.",
@@ -1733,7 +1642,6 @@ i18n
       pt: {
         translation: {
           "Add Wallet": "Adicionar carteira",
-
           Close: "Fechar",
           "Value:": "Valor:",
           "Delete Card": "Excluir cartão",
@@ -1760,49 +1668,41 @@ i18n
             "Certifique-se de que sua Cold Wallet esteja desbloqueada e o Bluetooth esteja ativado.",
           Send: "Enviar",
           Receive: "Receber",
-          "Transaction History": "Histórico de transações",
+          "Activity Log": "Registo de operações",
           "No Histories": "Sem históricos",
           "Enter the recipient's address:":
             "Insira o endereço do destinatário:",
           "Enter Address": "Insira o endereço",
           Submit: "Enviar",
-          "Choose the cryptocurrency to send:":
-            "Escolha a criptomoeda para enviar:",
-          "Choose the cryptocurrency to receive:":
-            "Escolha a criptomoeda para receber:",
+          "Select asset to proceed": "Selecione um ativo para continuar",
+          "Choose asset type": "Escolha o tipo de ativo",
           "Address for": "Endereço para",
-          Wallet: "Carteira",
-          Transactions: "Transações",
+          Assets: "Ativos",
+          Activity: "Transações",
           General: "Geral",
-          "Total Balance": "Saldo Total",
+          "Total Value": "Saldo Total",
           Balance: "Saldo",
-          "No cryptocurrencies available. Please add wallet first.":
+          "No assets available. Please connect your device to continue.":
             "Não há criptomoedas disponíveis. Por favor, adicione uma carteira primeiro.",
           "This chain account will be removed":
             "Esta conta de cadeia será removida",
           "Remove Chain Account": "Remover conta de cadeia",
           Remove: "Remover",
           "Security in your hands": "Segurança em suas mãos",
-
           Continue: "Continuar",
-
           "Scroll down to view all words":
             "Role para baixo para ver todas as palavras",
-
           "Generating your accounts": "Gerando suas contas",
           "Encrypting your data": "Criptografando seus dados",
-
           "Let's Go": "Vamos lá",
           "Use spaces between words": "Use espaços entre as palavras",
-
           Version: "Versão",
           "Assets can only be sent within the same chain.":
             "Os ativos só podem ser enviados dentro da mesma cadeia.",
           "Firmware Update": "Atualização de firmware",
-
           "No data available": "Nenhum dado disponível",
           "Search Currency": "Pesquisar moeda",
-          "Search Cryptocurrency": "Pesquisar criptomoeda",
+          "Search Asset": "Pesquisar criptomoeda",
           "Select Currency": "Selecionar moeda",
           "Enable Screen Lock": "Ativar bloqueio de tela",
           "Enter new password": "Digite a nova senha",
@@ -1827,7 +1727,6 @@ i18n
           "Enter PIN to Connect": "Digite o PIN para conectar",
           "Use the PIN code to connect securely to your device.":
             "Utilize o código PIN para se ligar com segurança ao seu dispositivo.",
-
           "Enter PIN": "Digite o PIN",
           "Verification successful!": "Verificação bem-sucedida!",
           "You can now safely use the device.":
@@ -1837,45 +1736,40 @@ i18n
             "O código de verificação inserido está incorreto. Tente novamente.",
           "Invalid address": "Endereço inválido",
           "Detected Network": "Rede detectada",
-          "Enter Amount": "Digite o valor",
-          "Enter the amount to send:": "Digite o valor a ser enviado:",
+          "Enter amount": "Insira o valor",
           Back: "Voltar",
           Amount: "Quantidade",
           "Payment Address": "Endereço de pagamento",
           "Recipient Address": "Endereço do destinatário",
-          "Transaction Fee": "Taxa de transação",
+          "Processing Fee": "Taxa de processamento",
           Confirm: "Confirmar",
           "Waiting for Confirmation": "A aguardar confirmação",
-
           "Screen lock enabled successfully":
             "Bloqueio de tela ativado com sucesso",
           "Success!": "Sucesso!",
           "Enable Face ID": "Ativar Face ID",
-          "I lost my password": "Perdi minha senha",
+
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "Para repor a aplicação e eliminar os dados guardados, desinstale-a e volte a instalá-la no seu telemóvel.",
 
-          "Value in USD": "Valor em USD",
           Fee: "Taxa",
-
-          "Verifying Address on LIKKIM...": "Verificando endereço no LIKKIM...",
-
+          "Verifying address on your device...":
+            "A verificar o endereço no seu dispositivo...",
           "Your device is already verified.":
             "Seu dispositivo já está verificado.",
-
           "Address Book": "Livro de Endereços",
-          Swap: "Trocar",
+          Convert: "Trocar",
           Skip: "Pular",
           "Start Exploring": "Começar a Explorar",
           "Secure and Reliable": "Seguro e Confiável",
-          "Bank-level security for your digital assets.":
-            "Segurança de nível bancário para seus ativos digitais.",
-          "Manage Your Cryptos": "Gerencie Suas Criptomoedas",
-          "Easily manage multiple cryptocurrencies.":
-            "Gerencie facilmente várias criptomoedas.",
+          "Robust security designed for your information.":
+            "Segurança robusta concebida para proteger a sua informação.",
+          "Manage Your Assets": "Gerir os seus ativos",
+          "Easily manage multiple asset types.":
+            "Gira facilmente vários tipos de ativos.",
           Welcome: "Bem-vindo",
-          "Your secure and user-friendly digital wallet.":
-            "Sua carteira digital segura e fácil de usar.",
+          "Your secure and intuitive companion app.":
+            "A sua aplicação companheira de hardware, segura e intuitiva.",
           "Address Copied to Clipboard":
             "Endereço copiado para a área de transferência",
           "No devices found":
@@ -1895,19 +1789,17 @@ i18n
           "Last connected": "Última conexão",
           "Secure Device Status": "Estado do dispositivo seguro",
           "Device Settings": "Definições do dispositivo",
-          "Delete Wallet": "Eliminar Carteira",
+          "Reset Local Profile": "Repor os dados locais",
           Support: "Suporte",
           Warning: "Aviso",
           deleteDeviceConfirmMessage:
             "Tem certeza de que deseja remover este dispositivo do aplicativo?\nIsso apagará todas as informações armazenadas localmente relacionadas a este dispositivo.\n\nVocê pode reconectar o dispositivo mais tarde para sincronizar os dados novamente.\nCertifique-se de ter salvo todas as informações importantes antes de continuar.",
           Delete: "Excluir",
           Success: "Sucesso",
-          "Your wallet has been deleted successfully.":
-            "Sua carteira foi excluída com sucesso.",
-          "Insufficient Balance": "Saldo insuficiente",
+          "Deleted successfully.": "Eliminado com sucesso.",
+          "Not enough value": "Valor demasiado baixo para continuar",
           "Waiting for approval on your device...":
             "A aguardar aprovação no seu dispositivo...",
-
           Save: "Salvar",
           Address: "Endereço",
           "Add Address": "Adicionar Endereço",
@@ -1918,7 +1810,8 @@ i18n
           "All Chains": "Todas as cadeias",
           "Select Chain": "Selecionar cadeia",
           "Contact Support via Email": "Contactar o Suporte por Email",
-          addressShown: "O endereço foi exibido com sucesso no LIKKIM!",
+          addressShown:
+            "O endereço foi exibido com sucesso no seu dispositivo.",
           "Search Address": "Pesquisar Endereço",
           "No device paired. Please pair with device first.":
             "Nenhum dispositivo emparelhado. Por favor, emparelhe com um dispositivo primeiro.",
@@ -1929,7 +1822,6 @@ i18n
       "pt-BR": {
         translation: {
           "Add Wallet": "Adicionar carteira",
-
           Close: "Fechar",
           "Value:": "Valor:",
           "Delete Card": "Excluir cartão",
@@ -1956,50 +1848,43 @@ i18n
             "Certifique-se de que sua Cold Wallet esteja desbloqueada e o Bluetooth esteja ativado.",
           Send: "Enviar",
           Receive: "Receber",
-          "Transaction History": "Histórico de transações",
+          "Activity Log": "Registro de operações",
+
           "No Histories": "Nenhum histórico",
           "Enter the recipient's address:":
             "Digite o endereço do destinatário:",
           "Enter Address": "Digite o endereço",
           Submit: "Enviar",
-          "Choose the cryptocurrency to send:":
-            "Escolha a criptomoeda para enviar:",
-          "Choose the cryptocurrency to receive:":
-            "Escolha a criptomoeda para receber:",
+          "Select asset to proceed": "Selecione um ativo para prosseguir",
+          "Choose asset type": "Escolha o tipo de ativo",
           "Address for": "Endereço para",
           Close: "Fechar",
-          Wallet: "Carteira",
-          Transactions: "Transações",
+          Assets: "Ativos",
+          Activity: "Transações",
           General: "Geral",
-          "Total Balance": "Saldo Total",
+          "Total Value": "Saldo Total",
           Balance: "Saldo",
-          "No cryptocurrencies available. Please add wallet first.":
+          "No assets available. Please connect your device to continue.":
             "Não há criptomoedas disponíveis. Por favor, adicione uma carteira primeiro.",
           "This chain account will be removed":
             "Esta conta de cadeia será removida",
           "Remove Chain Account": "Remover conta de cadeia",
           Remove: "Remover",
           "Security in your hands": "Segurança em suas mãos",
-
           Continue: "Continuar",
-
           "Scroll down to view all words":
             "Role para baixo para ver todas as palavras",
-
           "Generating your accounts": "Gerando suas contas",
           "Encrypting your data": "Criptografando seus dados",
-
           "Let's Go": "Vamos lá",
           "Use spaces between words": "Use espaços entre as palavras",
-
           Version: "Versão",
           "Assets can only be sent within the same chain.":
             "Os ativos só podem ser enviados dentro da mesma cadeia.",
           "Firmware Update": "Atualização de firmware",
-
           "No data available": "Nenhum dado disponível",
           "Search Currency": "Pesquisar moeda",
-          "Search Cryptocurrency": "Pesquisar criptomoeda",
+          "Search Asset": "Pesquisar criptomoeda",
           "Select Currency": "Selecionar moeda",
           "Enable Screen Lock": "Ativar bloqueio de tela",
           "Enter new password": "Digite a nova senha",
@@ -2024,7 +1909,6 @@ i18n
           "Enter PIN to Connect": "Digite o PIN para conectar",
           "Use the PIN code to connect securely to your device.":
             "Use o código PIN para se conectar com segurança ao seu dispositivo.",
-
           "Enter PIN": "Digite o PIN",
           "Verification successful!": "Verificação bem-sucedida!",
           "You can now safely use the device.":
@@ -2034,16 +1918,14 @@ i18n
             "O código de verificação inserido está incorreto. Tente novamente.",
           "Invalid address": "Endereço inválido",
           "Detected Network": "Rede detectada",
-          "Enter Amount": "Digite o valor",
-          "Enter the amount to send:": "Digite o valor a ser enviado:",
+          "Enter amount": "Digite o valor",
           Back: "Voltar",
           Amount: "Quantidade",
           "Payment Address": "Endereço de pagamento",
           "Recipient Address": "Endereço do destinatário",
-          "Transaction Fee": "Taxa de transação",
+          "Processing Fee": "Taxa de processamento",
           Confirm: "Confirmar",
           "Waiting for Confirmation": "Aguardando confirmação",
-
           "Screen lock enabled successfully":
             "Bloqueio de tela ativado com sucesso",
           "Success!": "Sucesso!",
@@ -2051,27 +1933,25 @@ i18n
           "I lost my password": "Perdi minha senha",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "Para redefinir o aplicativo e remover os dados armazenados, desinstale-o e reinstale-o no seu celular.",
-          "Value in USD": "Valor em USD",
+          "Estimated value (US$)": "Valor estimado (US$)",
           Fee: "Taxa",
-
-          "Verifying Address on LIKKIM...": "Verificando endereço no LIKKIM...",
-
+          "Verifying address on your device...":
+            "Verificando o endereço no seu dispositivo...",
           "Your device is already verified.":
             "Seu dispositivo já está verificado.",
-
           "Address Book": "Livro de Endereços",
-          Swap: "Trocar",
+          Convert: "Trocar",
           Skip: "Pular",
           "Start Exploring": "Comece a Explorar",
           "Secure and Reliable": "Seguro e Confiável",
-          "Bank-level security for your digital assets.":
-            "Segurança de nível bancário para seus ativos digitais.",
-          "Manage Your Cryptos": "Gerencie Suas Criptomoedas",
-          "Easily manage multiple cryptocurrencies.":
-            "Gerencie facilmente várias criptomoedas.",
+          "Robust security designed for your information.":
+            "Segurança robusta desenvolvida para proteger suas informações.",
+          "Manage Your Assets": "Gerencie seus ativos",
+          "Easily manage multiple asset types.":
+            "Gerencie facilmente vários tipos de ativos.",
           Welcome: "Bem-vindo",
-          "Your secure and user-friendly digital wallet.":
-            "Sua carteira digital segura e fácil de usar.",
+          "Your secure and intuitive companion app.":
+            "Seu aplicativo companheiro de hardware, seguro e intuitivo.",
           "Address Copied to Clipboard":
             "Endereço copiado para a área de transferência",
           "No devices found":
@@ -2107,16 +1987,15 @@ i18n
           "Last connected": "Ultima connessione",
           "Secure Device Status": "Estado do dispositivo seguro",
           "Device Settings": "Configurações do dispositivo",
-          "Delete Wallet": "Excluir Carteira",
+          "Reset Local Profile": "Redefinir os dados locais",
           Support: "Suporte",
           Warning: "Aviso",
           deleteDeviceConfirmMessage:
             "Tem certeza de que deseja remover este dispositivo do aplicativo?\nIsso apagará todas as informações armazenadas localmente relacionadas a este dispositivo.\n\nVocê pode reconectar o dispositivo mais tarde para sincronizar os dados novamente.\nCertifique-se de ter salvo todas as informações importantes antes de continuar.",
           Delete: "Excluir",
           Success: "Sucesso",
-          "Your wallet has been deleted successfully.":
-            "Sua carteira foi excluída com sucesso.",
-          "Insufficient Balance": "Saldo insuficiente",
+          "Deleted successfully.": "Excluído com sucesso.",
+          "Not enough value": "Valor insuficiente para prosseguir",
           "Waiting for approval on your device...":
             "Aguardando aprovação no seu dispositivo...",
           Save: "Salvar",
@@ -2129,7 +2008,8 @@ i18n
           "All Chains": "Todas as cadeias",
           "Select Chain": "Selecionar cadeia",
           "Contact Support via Email": "Contatar Suporte via Email",
-          addressShown: "O endereço foi exibido com sucesso no LIKKIM!",
+          addressShown:
+            "O endereço foi exibido com sucesso no seu dispositivo.",
           "Search Address": "Pesquisar Endereço",
           "No device paired. Please pair with device first.":
             "Nenhum dispositivo emparelhado. Por favor, emparelhe com um dispositivo primeiro.",
@@ -2166,50 +2046,42 @@ i18n
             "Assicurati che il tuo Cold Wallet sia sbloccato e che il Bluetooth sia abilitato.",
           Send: "Inviare",
           Receive: "Ricevere",
-          "Transaction History": "Cronologia delle transazioni",
+          "Activity Log": "Registro delle operazioni",
           "No Histories": "Nessuna cronologia",
           "Enter the recipient's address:":
             "Inserisci l'indirizzo del destinatario:",
           "Enter Address": "Inserisci l'indirizzo",
           Submit: "Invia",
-          "Choose the cryptocurrency to send:":
-            "Scegli la criptovaluta da inviare:",
-          "Choose the cryptocurrency to receive:":
-            "Scegli la criptovaluta da ricevere:",
+          "Select asset to proceed": "Seleziona una risorsa per procedere",
+          "Choose asset type": "Scegli il tipo di asset",
           "Address for": "Indirizzo per",
           Close: "Chiudi",
-          Wallet: "Portafoglio",
-          Transactions: "Transazioni",
+          Assets: "Risorse",
+          Activity: "Transazioni",
           General: "Generale",
-          "Total Balance": "Saldo Totale",
+          "Total Value": "Saldo Totale",
           Balance: "Saldo",
-          "No cryptocurrencies available. Please add wallet first.":
+          "No assets available. Please connect your device to continue.":
             "Nessuna criptovaluta disponibile. Si prega di aggiungere prima un portafoglio.",
           "This chain account will be removed":
             "Questo account di catena verrà rimosso",
           "Remove Chain Account": "Rimuovere account di catena",
           Remove: "Rimuovere",
           "Security in your hands": "Sicurezza nelle tue mani",
-
           Continue: "Continua",
-
           "Scroll down to view all words":
             "Scorri verso il basso per visualizzare tutte le parole",
-
           "Generating your accounts": "Generazione dei tuoi account",
           "Encrypting your data": "Criptazione dei tuoi dati",
-
           "Let's Go": "Andiamo",
           "Use spaces between words": "Usa spazi tra le parole",
-
           Version: "Versione",
           "Assets can only be sent within the same chain.":
             "Gli asset possono essere inviati solo all'interno della stessa catena.",
           "Firmware Update": "Aggiornamento firmware",
-
           "No data available": "Nessun dato disponibile",
           "Search Currency": "Cerca valuta",
-          "Search Cryptocurrency": "Cerca criptovaluta",
+          "Search Asset": "Cerca criptovaluta",
           "Select Currency": "Seleziona valuta",
           "Enable Screen Lock": "Abilita blocco schermo",
           "Enter new password": "Inserisci nuova password",
@@ -2234,7 +2106,6 @@ i18n
           "Enter PIN to Connect": "Inserisci il PIN per connetterti",
           "Use the PIN code to connect securely to your device.":
             "Usa il codice PIN per connetterti in modo sicuro al tuo dispositivo.",
-
           "Enter PIN": "Inserisci PIN",
           "Verification successful!": "Verifica riuscita!",
           "You can now safely use the device.":
@@ -2244,16 +2115,14 @@ i18n
             "Il codice di verifica inserito non è corretto. Per favore riprova.",
           "Invalid address": "Indirizzo non valido",
           "Detected Network": "Rete rilevata",
-          "Enter Amount": "Inserisci l'importo",
-          "Enter the amount to send:": "Inserisci l'importo da inviare:",
+          "Enter amount": "Inserisci l'importo",
           Back: "Indietro",
           Amount: "Importo",
           "Payment Address": "Indirizzo di pagamento",
           "Recipient Address": "Indirizzo del destinatario",
-          "Transaction Fee": "Commissione di transazione",
+          "Processing Fee": "Commissione di elaborazione",
           Confirm: "Confermare",
           "Waiting for Confirmation": "In attesa di conferma",
-
           "Screen lock enabled successfully":
             "Blocco schermo abilitato con successo",
           "Success!": "Successo!",
@@ -2261,28 +2130,25 @@ i18n
           "I lost my password": "Ho perso la mia password",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "Per reimpostare l'app e rimuovere i dati salvati, disinstallala e reinstallala sul tuo telefono.",
-
-          "Value in USD": "Valore in USD",
+          "Estimated value (US$)": "Valore stimato (US$)",
           Fee: "Commissione",
-          "Verifying Address on LIKKIM...":
-            "Verifica dell'indirizzo su LIKKIM...",
-
+          "Verifying address on your device...":
+            "Verifica dell'indirizzo sul tuo dispositivo...",
           "Your device is already verified.":
             "Il tuo dispositivo è già verificato.",
-
           "Address Book": "Rubrica",
-          Swap: "Scambiare",
+          Convert: "Scambiare",
           Skip: "Salta",
           "Start Exploring": "Inizia a esplorare",
           "Secure and Reliable": "Sicuro e affidabile",
-          "Bank-level security for your digital assets.":
-            "Sicurezza a livello bancario per i tuoi beni digitali.",
-          "Manage Your Cryptos": "Gestisci le tue criptovalute",
-          "Easily manage multiple cryptocurrencies.":
-            "Gestisci facilmente più criptovalute.",
+          "Robust security designed for your information.":
+            "Sicurezza solida progettata per proteggere le tue informazioni.",
+          "Manage Your Assets": "Gestisci i tuoi asset",
+          "Easily manage multiple asset types.":
+            "Gestisci facilmente diversi tipi di asset.",
           Welcome: "Benvenuto",
-          "Your secure and user-friendly digital wallet.":
-            "Il tuo portafoglio digitale sicuro e facile da usare.",
+          "Your secure and intuitive companion app.":
+            "La tua app sicura e intuitiva per dispositivi hardware.",
           "Address Copied to Clipboard": "Indirizzo copiato negli appunti",
           "No devices found":
             "Nessun dispositivo trovato. Si prega di associare un dispositivo per vederlo qui.",
@@ -2301,16 +2167,15 @@ i18n
           "Last connected": "Ultima connessione",
           "Secure Device Status": "Stato del dispositivo sicuro",
           "Device Settings": "Impostazioni del dispositivo",
-          "Delete Wallet": "Elimina Portafoglio",
+          "Reset Local Profile": "Reimposta i dati locali",
           Support: "Supporto",
           Warning: "Avviso",
           deleteDeviceConfirmMessage:
             "Sei sicuro di voler rimuovere questo dispositivo dall'app?\nQuesto cancellerà tutte le informazioni locali relative a questo dispositivo.\n\nPuoi riconnettere il dispositivo in un secondo momento per sincronizzare nuovamente i dati.\nAssicurati di aver salvato tutte le informazioni importanti prima di procedere.",
           Delete: "Elimina",
           Success: "Successo",
-          "Your wallet has been deleted successfully.":
-            "Il tuo portafoglio è stato eliminato con successo.",
-          "Insufficient Balance": "Saldo insufficiente",
+          "Deleted successfully.": "Eliminato con successo.",
+          "Not enough value": "Valore troppo basso per procedere",
           "Waiting for approval on your device...":
             "In attesa di approvazione sul tuo dispositivo...",
           Save: "Salva",
@@ -2324,7 +2189,7 @@ i18n
           "Select Chain": "Seleziona catena",
           "Contact Support via Email": "Contatta il supporto via email",
           addressShown:
-            "L'indirizzo è stato visualizzato con successo su LIKKIM!",
+            "L'indirizzo è stato visualizzato correttamente sul tuo dispositivo.",
           "Search Address": "Cerca indirizzo",
           "No device paired. Please pair with device first.":
             "Nessun dispositivo associato. Per favore, accoppia prima un dispositivo.",
@@ -2335,7 +2200,6 @@ i18n
       de: {
         translation: {
           "Add Wallet": "Brieftasche hinzufügen",
-
           Close: "Schließen",
           "Value:": "Wert:",
           "Delete Card": "Karte löschen",
@@ -2362,24 +2226,22 @@ i18n
             "Bitte stellen Sie sicher, dass Ihre Cold Wallet entsperrt und Bluetooth aktiviert ist.",
           Send: "Senden",
           Receive: "Empfangen",
-          "Transaction History": "Transaktionsverlauf",
+          "Activity Log": "Operationsprotokoll",
           "No Histories": "Keine Verlaufsdaten",
           "Enter the recipient's address:":
             "Geben Sie die Adresse des Empfängers ein:",
           "Enter Address": "Adresse eingeben",
           Submit: "Einreichen",
-          "Choose the cryptocurrency to send:":
-            "Wählen Sie die zu sendende Kryptowährung:",
-          "Choose the cryptocurrency to receive:":
-            "Wählen Sie die zu empfangende Kryptowährung:",
+          "Select asset to proceed": "Wählen Sie ein Asset, um fortzufahren",
+          "Choose asset type": "Wählen Sie den Asset-Typ",
           "Address for": "Adresse für",
           Close: "Schließen",
-          Wallet: "Brieftasche",
-          Transactions: "Transaktionen",
+          Assets: "Vermögenswerte",
+          Activity: "Transaktionen",
           General: "Allgemein",
-          "Total Balance": "Gesamtsaldo",
+          "Total Value": "Gesamtsaldo",
           Balance: "Guthaben",
-          "No cryptocurrencies available. Please add wallet first.":
+          "No assets available. Please connect your device to continue.":
             "Keine Kryptowährungen verfügbar. Bitte fügen Sie zuerst eine Brieftasche hinzu.",
           "This chain account will be removed":
             "Dieses Kettenkonto wird entfernt",
@@ -2400,7 +2262,7 @@ i18n
           "Firmware Update": "Firmware-Aktualisierung",
           "No data available": "Keine Daten verfügbar",
           "Search Currency": "Währung suchen",
-          "Search Cryptocurrency": "Kryptowährung suchen",
+          "Search Asset": "Kryptowährung suchen",
           "Select Currency": "Währung auswählen",
           "Enable Screen Lock": "Bildschirmsperre aktivieren",
           "Enter new password": "Neues Passwort eingeben",
@@ -2425,7 +2287,6 @@ i18n
           "Enter PIN to Connect": "PIN eingeben, um sich zu verbinden",
           "Use the PIN code to connect securely to your device.":
             "Verwenden Sie den PIN-Code, um eine sichere Verbindung zu Ihrem Gerät herzustellen.",
-
           "Enter PIN": "PIN eingeben",
           "Verification successful!": "Verifizierung erfolgreich!",
           "You can now safely use the device.":
@@ -2435,16 +2296,14 @@ i18n
             "Der von Ihnen eingegebene Verifizierungscode ist falsch. Bitte versuchen Sie es erneut.",
           "Invalid address": "Ungültige Adresse",
           "Detected Network": "Erkanntes Netzwerk",
-          "Enter Amount": "Betrag eingeben",
-          "Enter the amount to send:": "Betrag zum Senden eingeben:",
+          "Enter amount": "Betrag eingeben",
           Back: "Zurück",
           Amount: "Betrag",
           "Payment Address": "Zahlungsadresse",
           "Recipient Address": "Empfängeradresse",
-          "Transaction Fee": "Transaktionsgebühr",
+          "Processing Fee": "Bearbeitungsgebühr",
           Confirm: "Bestätigen",
           "Waiting for Confirmation": "Warte auf Bestätigung",
-
           "Screen lock enabled successfully":
             "Bildschirmsperre erfolgreich aktiviert",
           "Success!": "Erfolg!",
@@ -2452,27 +2311,25 @@ i18n
           "I lost my password": "Ich habe mein Passwort verloren",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "Um die App zurückzusetzen und gespeicherte Daten zu entfernen, deinstallieren Sie sie bitte und installieren Sie sie erneut auf Ihrem Telefon.",
-
-          "Value in USD": "Wert in USD",
+          "Estimated value (US$)": "Geschätzter Wert (US$)",
           Fee: "Gebühr",
-          "Verifying Address on LIKKIM...": "Adresse auf LIKKIM überprüfen...",
-
+          "Verifying address on your device...":
+            "Adresse auf Ihrem Gerät wird überprüft...",
           "Your device is already verified.":
             "Ihr Gerät ist bereits verifiziert.",
-
           "Address Book": "Adressbuch",
-          Swap: "Tauschen",
+          Convert: "Tauschen",
           Skip: "Überspringen",
           "Start Exploring": "Erkunden beginnen",
           "Secure and Reliable": "Sicher und zuverlässig",
-          "Bank-level security for your digital assets.":
-            "Banksicherheit für Ihre digitalen Vermögenswerte.",
-          "Manage Your Cryptos": "Verwalten Sie Ihre Kryptowährungen",
-          "Easily manage multiple cryptocurrencies.":
-            "Verwalten Sie problemlos mehrere Kryptowährungen.",
+          "Robust security designed for your information.":
+            "Robuste Sicherheit, entwickelt für Ihre Informationen.",
+          "Manage Your Assets": "Verwalten Sie Ihre Vermögenswerte",
+          "Easily manage multiple asset types.":
+            "Verwalten Sie ganz einfach verschiedene Arten von Vermögenswerten.",
           Welcome: "Willkommen",
-          "Your secure and user-friendly digital wallet.":
-            "Ihre sichere und benutzerfreundliche digitale Geldbörse.",
+          "Your secure and intuitive companion app.":
+            "Ihre sichere und intuitive Hardware-Begleit-App.",
           "Address Copied to Clipboard":
             "Adresse in die Zwischenablage kopiert",
           "No devices found":
@@ -2492,16 +2349,15 @@ i18n
           "Last connected": "Zuletzt verbunden",
           "Secure Device Status": "Status des sicheren Geräts",
           "Device Settings": "Geräteeinstellungen",
-          "Delete Wallet": "Wallet löschen",
+          "Reset Local Profile": "Lokale Daten zurücksetzen",
           Support: "Unterstützung",
           Warning: "Warnung",
           deleteDeviceConfirmMessage:
             "Möchten Sie dieses Gerät wirklich aus der App entfernen?\nDabei werden alle lokal gespeicherten Informationen zu diesem Gerät gelöscht.\n\nSie können das Gerät später erneut verbinden, um die Daten erneut zu synchronisieren.\nStellen Sie sicher, dass Sie alle wichtigen Informationen gespeichert haben, bevor Sie fortfahren.",
           Delete: "Löschen",
           Success: "Erfolg",
-          "Your wallet has been deleted successfully.":
-            "Ihr Wallet wurde erfolgreich gelöscht.",
-          "Insufficient Balance": "Unzureichendes Guthaben",
+          "Deleted successfully.": "Erfolgreich gelöscht.",
+          "Not enough value": "Wert zu niedrig, um fortzufahren",
           "Waiting for approval on your device...":
             "Warte auf Genehmigung auf deinem Gerät...",
           Save: "Speichern",
@@ -2514,7 +2370,8 @@ i18n
           "All Chains": "Alle Ketten",
           "Select Chain": "Kette auswählen",
           "Contact Support via Email": "Support per E-Mail kontaktieren",
-          addressShown: "Die Adresse wurde erfolgreich auf LIKKIM angezeigt!",
+          addressShown:
+            "Die Adresse wurde erfolgreich auf Ihrem Gerät angezeigt.",
           "Search Address": "Adresse suchen",
           "No device paired. Please pair with device first.":
             "Kein Gerät gekoppelt. Bitte koppeln Sie zuerst ein Gerät.",
@@ -2525,7 +2382,6 @@ i18n
       hi: {
         translation: {
           "Add Wallet": "वॉलेट जोड़ें",
-
           Close: "बंद करें",
           "Value:": "मूल्य:",
           "Delete Card": "कार्ड हटाएं",
@@ -2552,23 +2408,21 @@ i18n
             "कृपया सुनिश्चित करें कि आपका कोल्ड वॉलेट अनलॉक है और ब्लूटूथ सक्षम है।",
           Send: "भेजें",
           Receive: "प्राप्त करें",
-          "Transaction History": "लेन-देन का इतिहास",
+          "Activity Log": "ऑपरेशन रिकॉर्ड",
           "No Histories": "कोई इतिहास नहीं",
           "Enter the recipient's address:": "प्राप्तकर्ता का पता दर्ज करें:",
           "Enter Address": "पता दर्ज करें",
           Submit: "जमा करें",
-          "Choose the cryptocurrency to send:":
-            "भेजने के लिए क्रिप्टोकरेंसी चुनें:",
-          "Choose the cryptocurrency to receive:":
-            "प्राप्त करने के लिए क्रिप्टोकरेंसी चुनें:",
+          "Select asset to proceed": "आगे बढ़ने के लिए संपत्ति चुनें",
+          "Choose asset type": "एसेट प्रकार चुनें",
           "Address for": "के लिए पता",
           Close: "बंद करें",
-          Wallet: "बटुआ",
-          Transactions: "लेनदेन",
+          Assets: "संपत्ति",
+          Activity: "लेनदेन",
           General: "सामान्य",
-          "Total Balance": "कुल शेष राशि",
+          "Total Value": "कुल शेष राशि",
           Balance: "शेष",
-          "No cryptocurrencies available. Please add wallet first.":
+          "No assets available. Please connect your device to continue.":
             "कोई क्रिप्टोकरेंसी उपलब्ध नहीं है। कृपया पहले वॉलेट जोड़ें।",
           "This chain account will be removed":
             "यह श्रृंखला खाता हटा दिया जाएगा",
@@ -2588,7 +2442,7 @@ i18n
           "Firmware Update": "फर्मवेयर अपडेट",
           "No data available": "कोई डेटा उपलब्ध नहीं है",
           "Search Currency": "मुद्रा खोजें",
-          "Search Cryptocurrency": "क्रिप्टोकरेंसी खोजें",
+          "Search Asset": "क्रिप्टोकरेंसी खोजें",
           "Select Currency": "मुद्रा चुनें",
           "Enable Screen Lock": "स्क्रीन लॉक सक्षम करें",
           "Enter new password": "नया पासवर्ड दर्ज करें",
@@ -2612,7 +2466,6 @@ i18n
           "Enter PIN to Connect": "कनेक्ट करने के लिए पिन दर्ज करें",
           "Use the PIN code to connect securely to your device.":
             "अपने डिवाइस से सुरक्षित रूप से कनेक्ट होने के लिए PIN कोड का उपयोग करें।",
-
           "Enter PIN": "पिन दर्ज करें",
           "Verification successful!": "सत्यापन सफल!",
           "You can now safely use the device.":
@@ -2622,16 +2475,14 @@ i18n
             "आपके द्वारा दर्ज किया गया सत्यापन कोड गलत है। कृपया पुनः प्रयास करें।",
           "Invalid address": "अमान्य पता",
           "Detected Network": "पता चला नेटवर्क",
-          "Enter Amount": "राशि दर्ज करें",
-          "Enter the amount to send:": "भेजने के लिए राशि दर्ज करें:",
+          "Enter amount": "राशि दर्ज करें",
           Back: "वापस",
           Amount: "राशि",
           "Payment Address": "भुगतान पता",
           "Recipient Address": "प्राप्तकर्ता का पता",
-          "Transaction Fee": "लेन-देन शुल्क",
+          "Processing Fee": "प्रोसेसिंग शुल्क",
           Confirm: "पुष्टि करें",
           "Waiting for Confirmation": "पुष्टि की प्रतीक्षा कर रहा है",
-
           "Screen lock enabled successfully":
             "स्क्रीन लॉक सफलतापूर्वक सक्षम किया गया",
           "Success!": "सफलता!",
@@ -2639,28 +2490,25 @@ i18n
           "I lost my password": "मैंने अपना पासवर्ड खो दिया है",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "ऐप को रीसेट करने और संग्रहीत डेटा हटाने के लिए, कृपया इसे अपने फ़ोन से अनइंस्टॉल करके दोबारा इंस्टॉल करें।",
-
-          "Value in USD": "यूएसडी में मूल्य",
+          "Estimated value (US$)": "अनुमानित मूल्य (US$)",
           Fee: "शुल्क",
-          "Verifying Address on LIKKIM...":
-            "LIKKIM पर पते की पुष्टि कर रहे हैं...",
-
+          "Verifying address on your device...":
+            "आपके डिवाइस पर पता सत्यापित किया जा रहा है...",
           "Your device is already verified.":
             "आपका डिवाइस पहले ही सत्यापित हो चुका है।",
-
           "Address Book": "पता पुस्तिका",
-          Swap: "विनिमय",
+          Convert: "विनिमय",
           Skip: "छोड़ें",
           "Start Exploring": "खोज शुरू करें",
           "Secure and Reliable": "सुरक्षित और विश्वसनीय",
-          "Bank-level security for your digital assets.":
-            "आपकी डिजिटल संपत्तियों के लिए बैंक-स्तरीय सुरक्षा।",
-          "Manage Your Cryptos": "अपनी क्रिप्टो करेंसीज का प्रबंधन करें",
-          "Easily manage multiple cryptocurrencies.":
-            "आसानी से कई क्रिप्टोकरेंसियों का प्रबंधन करें।",
+          "Robust security designed for your information.":
+            "आपकी जानकारी के लिए डिज़ाइन की गई मज़बूत सुरक्षा।",
+          "Manage Your Assets": "अपनी संपत्तियाँ प्रबंधित करें",
+          "Easily manage multiple asset types.":
+            "एक से अधिक संपत्ति प्रकार को आसानी से प्रबंधित करें।",
           Welcome: "स्वागत है",
-          "Your secure and user-friendly digital wallet.":
-            "आपका सुरक्षित और उपयोगकर्ता-हितैषी डिजिटल वॉलेट।",
+          "Your secure and intuitive companion app.":
+            "आपका सुरक्षित और सहज हार्डवेयर साथी ऐप।",
           "Address Copied to Clipboard": "पता क्लिपबोर्ड पर कॉपी कर लिया गया",
           "No devices found":
             "कोई डिवाइस नहीं मिला। कृपया एक डिवाइस पेयर करें और इसे यहां देखें।",
@@ -2679,16 +2527,16 @@ i18n
           "Last connected": "अंतिम कनेक्शन",
           "Secure Device Status": "सुरक्षित डिवाइस की स्थिति",
           "Device Settings": "डिवाइस सेटिंग्स",
-          "Delete Wallet": "वॉलेट हटाएँ",
+          "Reset Local Profile": "स्थानीय डेटा रीसेट करें",
+
           Support: "सहायता",
           Warning: "चेतावनी",
           deleteDeviceConfirmMessage:
             "क्या आप वाकई इस डिवाइस को ऐप से हटाना चाहते हैं?\nयह इस डिवाइस से संबंधित सभी स्थानीय रूप से संग्रहीत जानकारी मिटा देगा।\n\nआप बाद में डिवाइस को फिर से जोड़कर डेटा को फिर से सिंक कर सकते हैं।\nकृपया आगे बढ़ने से पहले सभी महत्वपूर्ण जानकारी सहेज लें।",
           Delete: "हटाएँ",
           Success: "सफलता",
-          "Your wallet has been deleted successfully.":
-            "आपकी वॉलेट को सफलतापूर्वक हटा दिया गया है।",
-          "Insufficient Balance": "अपर्याप्त शेष",
+          "Deleted successfully.": "सफलतापूर्वक हटाया गया।",
+          "Not enough value": "आगे बढ़ने के लिए मान अपर्याप्त है",
           "Waiting for approval on your device...":
             "आपके डिवाइस पर अनुमोदन की प्रतीक्षा हो रही है...",
           Save: "सहेजें",
@@ -2701,7 +2549,7 @@ i18n
           "All Chains": "सभी श्रृंखलाएँ",
           "Select Chain": "श्रृंखला चुनें",
           "Contact Support via Email": "ईमेल के माध्यम से सहायता संपर्क करें",
-          addressShown: "LIKKIM पर पता सफलतापूर्वक प्रदर्शित किया गया है!",
+          addressShown: "पता सफलतापूर्वक आपके डिवाइस पर प्रदर्शित किया गया है।",
           "Search Address": "पता खोजें",
           "No device paired. Please pair with device first.":
             "कोई डिवाइस पेयर नहीं है। कृपया पहले डिवाइस के साथ पेयर करें।",
@@ -2712,7 +2560,6 @@ i18n
       mn: {
         translation: {
           "Add Wallet": "Хэтэвч нэмэх",
-
           Close: "Хаах",
           "Value:": "Үнэ цэнэ:",
           "Delete Card": "Карт устгах",
@@ -2739,24 +2586,22 @@ i18n
             "Таны хүйтэн хэтэвч тайлагдсан, Bluetooth асаалттай байгаа эсэхийг шалгана уу.",
           Send: "Илгээх",
           Receive: "Хүлээн авах",
-          "Transaction History": "Гүйлгээний түүх",
+          "Activity Log": "Үйлдлийн бүртгэл",
           "No Histories": "Түүх байхгүй",
           "Enter the recipient's address:":
             "Хүлээн авагчийн хаягийг оруулна уу:",
           "Enter Address": "Хаяг оруулах",
           Submit: "Илгээх",
-          "Choose the cryptocurrency to send:":
-            "Илгээх криптовалютыг сонгоно уу:",
-          "Choose the cryptocurrency to receive:":
-            "Хүлээн авах криптовалютыг сонгоно уу:",
+          "Select asset to proceed": "Үргэлжлүүлэхийн тулд хөрөнгөө сонгоно уу",
+          "Choose asset type": "Хөрөнгийн төрлөө сонгоно уу",
           "Address for": "Хаяг",
           Close: "Хаах",
-          Wallet: "Хэтэвч",
-          Transactions: "Гүйлгээ",
+          Assets: "Хөрөнгө",
+          Activity: "Гүйлгээ",
           General: "Ерөнхий",
-          "Total Balance": "Нийт үлдэгдэл",
+          "Total Value": "Нийт үлдэгдэл",
           Balance: "Үлдэгдэл",
-          "No cryptocurrencies available. Please add wallet first.":
+          "No assets available. Please connect your device to continue.":
             "Криптовалют байхгүй байна. Эхлээд түрийвч нэмнэ үү.",
           "This chain account will be removed": "Энэ гинжний дансыг устгана",
           "Remove Chain Account": "Гинжний дансыг устгах",
@@ -2775,7 +2620,7 @@ i18n
           "Firmware Update": "Фирмвэр шинэчлэх",
           "No data available": "Мэдээлэл байхгүй",
           "Search Currency": "Валют хайх",
-          "Search Cryptocurrency": "Криптовалют хайх",
+          "Search Asset": "Криптовалют хайх",
           "Select Currency": "Валют сонгох",
           "Enable Screen Lock": "Дэлгэцийн түгжээг идэвхжүүлэх",
           "Enter new password": "Шинэ нууц үгээ оруулна уу",
@@ -2800,7 +2645,6 @@ i18n
           "Enter PIN to Connect": "Холбох PIN код оруулна уу",
           "Use the PIN code to connect securely to your device.":
             "Төхөөрөмжтэйгээ аюулгүй холбогдоход PIN кодыг ашиглана уу.",
-
           "Enter PIN": "PIN код оруулна уу",
           "Verification successful!": "Баталгаажуулалт амжилттай боллоо!",
           "You can now safely use the device.":
@@ -2810,42 +2654,39 @@ i18n
             "Таны оруулсан баталгаажуулах код буруу байна. Дахин оролдоно уу.",
           "Invalid address": "Буруу хаяг",
           "Detected Network": "Илэрсэн сүлжээ",
-          "Enter Amount": "Мөнгөн дүн оруулна уу",
-          "Enter the amount to send:": "Илгээх мөнгөн дүнг оруулна уу:",
+          "Enter amount": "Дүнгээ оруулна уу",
           Back: "Буцах",
           Amount: "Дүн",
           "Payment Address": "Төлбөрийн хаяг",
           "Recipient Address": "Хүлээн авагчийн хаяг",
-          "Transaction Fee": "Гүйлгээний хураамж",
+          "Processing Fee": "Боловсруулалтын шимтгэл",
           Confirm: "Баталгаажуулах",
           "Waiting for Confirmation": "Баталгаажуулалт хүлээж байна",
-          "Verifying Address on LIKKIM...":
-            "LIKKIM дээр хаягийг шалгаж байна...",
-
+          "Verifying address on your device...":
+            "Таны төхөөрөмж дээрх хаягийг баталгаажуулж байна...",
           "Your device is already verified.":
             "Таны төхөөрөмж аль хэдийн баталгаажсан.",
-
           "Screen lock enabled successfully": "เปิดการล็อคหน้าจอเรียบร้อยแล้ว",
           "Success!": "สำเร็จ!",
           "Enable Face ID": "เปิดใช้งาน Face ID",
-          "I lost my password": "ฉันลืมรหัสผ่าน",
+          "Estimated value (US$)": "Тооцоолсон үнэ (US$)",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "Аппликейшнийг дахин тохируулах болон хадгалагдсан өгөгдлийг устгахын тулд гар утсандаа апп-аа устгаад дахин суулгана уу.",
-          "Value in USD": "มูลค่าในสกุลเงิน USD",
+
           Fee: "Хураамж",
           "Address Book": "Хаягийн дэвтэр",
-          Swap: "Солилцоо",
+          Convert: "Солилцоо",
           Skip: "Алгасах",
           "Start Exploring": "Судлахаа эхлээрэй",
           "Secure and Reliable": "Аюулгүй ба найдвартай",
-          "Bank-level security for your digital assets.":
-            "Таны цахим хөрөнгөд зориулсан банкны түвшний аюулгүй байдал.",
-          "Manage Your Cryptos": "Криптовалютуудаа удирдах",
-          "Easily manage multiple cryptocurrencies.":
-            "Олон криптовалютуудыг хялбар удирда.",
+          "Robust security designed for your information.":
+            "Таны мэдээлэлд зориулсан найдвартай хамгаалалт.",
+          "Manage Your Assets": "Өөрийн хөрөнгийг удирдах",
+          "Easily manage multiple asset types.":
+            "Олон төрлийн хөрөнгийг хялбархан удирдаарай.",
           Welcome: "Тавтай морилно уу",
-          "Your secure and user-friendly digital wallet.":
-            "Таны аюулгүй ба хэрэглэгчийн төвтэй цахим хэтэвч.",
+          "Your secure and intuitive companion app.":
+            "Таны аюулгүй, ойлгомжтой тоног төхөөрөмжийн хамтрагч аппликейшн.",
           "Address Copied to Clipboard": "Хаяг clipboard руу хуулсан байна",
           "No devices found":
             "Төхөөрөмж олдсонгүй. Энд харахын тулд төхөөрөмжийг холбож авна уу.",
@@ -2864,16 +2705,15 @@ i18n
           "Last connected": "Сүүлийн холболт",
           "Secure Device Status": "Аюулгүй төхөөрөмжийн төлөв",
           "Device Settings": "Төхөөрөмжийн тохиргоо",
-          "Delete Wallet": "Хэтэвч устгах",
+          "Reset Local Profile": "Локал өгөгдлийг дахин тохируулах",
           Support: "Тусламж",
           Warning: "Сэрэмжлүүлэг",
           deleteDeviceConfirmMessage:
             "Та энэ төхөөрөмжийг апп-аас устгахдаа итгэлтэй байна уу?\nЭнэ нь тухайн төхөөрөмжтэй холбоотой бүх локал хадгалсан мэдээллийг устгах болно.\n\nТа дараа нь төхөөрөмжийг дахин холбож өгөгдлөө дахин синк хийх боломжтой.\nҮргэлжлүүлэхийн өмнө чухал мэдээллээ хадгалсан эсэхээ шалгаарай.",
           Delete: "Устгах",
           Success: "Амжилт",
-          "Your wallet has been deleted successfully.":
-            "Таны түрийвч амжилттай устгагдсан.",
-          "Insufficient Balance": "Хүлээгдэж буй үлдэгдэл",
+          "Deleted successfully.": "Амжилттай устгагдлаа.",
+          "Not enough value": "Үргэлжлүүлэхэд хангалттай утга алга байна",
           "Waiting for approval on your device...":
             "Таны төхөөрөмж дээр зөвшөөрөл хүлээж байна...",
           Save: "Хадгалах",
@@ -2886,7 +2726,7 @@ i18n
           "All Chains": "Бүх гинжин хэлхээ",
           "Select Chain": "Гол мөр сонгох",
           "Contact Support via Email": "Имэйлээр дэмжлэг авах",
-          addressShown: "Хаяг LIKKIM дээр амжилттай харуулсан байна!",
+          addressShown: "Хаяг амжилттайгаар таны төхөөрөмж дээр харууллаа.",
           "Search Address": "Хаяг хайх",
           "No device paired. Please pair with device first.":
             "Хосуулагдсан төхөөрөмж байхгүй байна. Эхлээд төхөөрөмжтэй хослоорой.",
@@ -2923,22 +2763,21 @@ i18n
             "โปรดตรวจสอบให้แน่ใจว่ากระเป๋าเงินเย็นของคุณถูกปลดล็อกและเปิดใช้งาน Bluetooth แล้ว",
           Send: "ส่ง",
           Receive: "รับ",
-          "Transaction History": "ประวัติการทำธุรกรรม",
+          "Activity Log": "บันทึกการดำเนินการ",
           "No Histories": "ไม่มีประวัติ",
           "Enter the recipient's address:": "ป้อนที่อยู่ผู้รับ:",
           "Enter Address": "ป้อนที่อยู่",
           Submit: "ส่ง",
-          "Choose the cryptocurrency to send:": "เลือกสกุลเงินคริปโตที่จะส่ง:",
-          "Choose the cryptocurrency to receive:":
-            "เลือกสกุลเงินคริปโตที่จะรับ:",
+          "Select asset to proceed": "เลือกสินทรัพย์เพื่อดำเนินการต่อ",
+          "Choose asset type": "เลือกประเภทสินทรัพย์",
           "Address for": "ที่อยู่สำหรับ",
           Close: "ปิด",
-          Wallet: "กระเป๋าสตางค์",
-          Transactions: "ธุรกรรม",
+          Assets: "สินทรัพย์",
+          Activity: "ธุรกรรม",
           General: "ทั่วไป",
-          "Total Balance": "ยอดเงินรวม",
+          "Total Value": "ยอดเงินรวม",
           Balance: "ยอดเงินคงเหลือ",
-          "No cryptocurrencies available. Please add wallet first.":
+          "No assets available. Please connect your device to continue.":
             "ไม่มีสกุลเงินดิจิทัลที่พร้อมใช้งาน โปรดเพิ่มกระเป๋าเงินก่อน",
           "This chain account will be removed": "บัญชีเครือนี้จะถูกลบ",
           "Remove Chain Account": "ลบบัญชีเครือ",
@@ -2956,7 +2795,7 @@ i18n
           "Firmware Update": "อัปเดตเฟิร์มแวร์",
           "No data available": "ไม่มีข้อมูล",
           "Search Currency": "ค้นหาสกุลเงิน",
-          "Search Cryptocurrency": "ค้นหาสกุลเงินดิจิทัล",
+          "Search Asset": "ค้นหาสกุลเงินดิจิทัล",
           "Select Currency": "เลือกสกุลเงิน",
           "Enable Screen Lock": "เปิดใช้งานการล็อคหน้าจอ",
           "Enter new password": "กรอกรหัสผ่านใหม่",
@@ -2981,7 +2820,6 @@ i18n
           "Enter PIN to Connect": "ใส่ PIN เพื่อเชื่อมต่อ",
           "Use the PIN code to connect securely to your device.":
             "ใช้รหัส PIN เพื่อเชื่อมต่อกับอุปกรณ์ของคุณอย่างปลอดภัย",
-
           "Enter PIN": "ใส่ PIN",
           "Verification successful!": "ยืนยันสำเร็จ!",
           "You can now safely use the device.":
@@ -2991,42 +2829,39 @@ i18n
             "รหัสยืนยันที่คุณป้อนไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง",
           "Invalid address": "ที่อยู่ไม่ถูกต้อง",
           "Detected Network": "ตรวจพบเครือข่าย",
-          "Enter Amount": "ใส่จำนวนเงิน",
-          "Enter the amount to send:": "ใส่จำนวนเงินที่จะส่ง:",
+          "Enter amount": "กรอกจำนวนเงิน",
           Back: "กลับ",
           Amount: "จำนวนเงิน",
           "Payment Address": "ที่อยู่การชำระเงิน",
           "Recipient Address": "ที่อยู่ผู้รับ",
-          "Transaction Fee": "ค่าธรรมเนียมการทำธุรกรรม",
+          "Processing Fee": "ค่าธรรมเนียมการดำเนินการ",
           Confirm: "ยืนยัน",
           "Waiting for Confirmation": "กำลังรอการยืนยัน",
-
           "Screen lock enabled successfully": "เปิดการล็อคหน้าจอเรียบร้อยแล้ว",
           "Success!": "สำเร็จ!",
           "Enable Face ID": "เปิดใช้งาน Face ID",
           "I lost my password": "ฉันลืมรหัสผ่าน",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "หากต้องการรีเซ็ตแอปและลบข้อมูลที่จัดเก็บไว้ โปรดยกเลิกการติดตั้งและติดตั้งใหม่บนโทรศัพท์ของคุณ",
-          "Value in USD": "มูลค่าในสกุลเงิน USD",
+          "Estimated value (US$)": "มูลค่าประมาณ (US$)",
           Fee: "ค่าธรรมเนียม",
-          "Verifying Address on LIKKIM...": "กำลังยืนยันที่อยู่บน LIKKIM...",
-
+          "Verifying address on your device...":
+            "Đang xác minh địa chỉ trên thiết bị của bạn...",
           "Your device is already verified.":
             "อุปกรณ์ของคุณได้รับการยืนยันแล้ว",
-
           "Address Book": "สมุดที่อยู่",
-          Swap: "แลกเปลี่ยน",
+          Convert: "แลกเปลี่ยน",
           Skip: "ข้าม",
           "Start Exploring": "เริ่มการสำรวจ",
           "Secure and Reliable": "ปลอดภัยและเชื่อถือได้",
-          "Bank-level security for your digital assets.":
-            "ความปลอดภัยระดับธนาคารสำหรับทรัพย์สินดิจิทัลของคุณ.",
-          "Manage Your Cryptos": "จัดการคริปโตของคุณ",
-          "Easily manage multiple cryptocurrencies.":
-            "จัดการคริปโตเคอร์เรนซี่หลายอย่างได้ง่ายดาย.",
+          "Robust security designed for your information.":
+            "การรักษาความปลอดภัยที่แข็งแกร่ง ออกแบบมาเพื่อข้อมูลของคุณ",
+          "Manage Your Assets": "จัดการสินทรัพย์ของคุณ",
+          "Easily manage multiple asset types.":
+            "จัดการสินทรัพย์หลายประเภทได้อย่างง่ายดาย",
           Welcome: "ยินดีต้อนรับ",
-          "Your secure and user-friendly digital wallet.":
-            "กระเป๋าเงินดิจิทัลที่ปลอดภัยและใช้งานง่ายของคุณ.",
+          "Your secure and intuitive companion app.":
+            "แอปคู่หูฮาร์ดแวร์ที่ปลอดภัยและใช้งานง่ายของคุณ",
           "Address Copied to Clipboard": "ที่อยู่ถูกคัดลอกไปยังคลิปบอร์ด",
           "No devices found": "ไม่พบอุปกรณ์ โปรดเชื่อมต่ออุปกรณ์เพื่อดูที่นี่",
           "Fetching address...": "กำลังดึงที่อยู่...",
@@ -3044,16 +2879,15 @@ i18n
           "Last connected": "การเชื่อมต่อครั้งสุดท้าย",
           "Secure Device Status": "สถานะของอุปกรณ์รักษาความปลอดภัย",
           "Device Settings": "การตั้งค่าอุปกรณ์",
-          "Delete Wallet": "ลบกระเป๋าเงิน",
+          "Reset Local Profile": "รีเซ็ตข้อมูลภายในเครื่อง",
           Support: "สนับสนุน",
           Warning: "คำเตือน",
           deleteDeviceConfirmMessage:
             "คุณแน่ใจหรือไม่ว่าต้องการลบอุปกรณ์นี้ออกจากแอป?\nสิ่งนี้จะลบข้อมูลทั้งหมดที่จัดเก็บไว้ในเครื่องซึ่งเกี่ยวข้องกับอุปกรณ์นี้\n\nคุณสามารถเชื่อมต่ออุปกรณ์อีกครั้งในภายหลังเพื่อซิงค์ข้อมูลใหม่\nโปรดตรวจสอบให้แน่ใจว่าคุณได้บันทึกข้อมูลสำคัญทั้งหมดแล้วก่อนดำเนินการต่อ",
           Delete: "ลบ",
           Success: "สำเร็จ",
-          "Your wallet has been deleted successfully.":
-            "กระเป๋าของคุณถูกลบเรียบร้อยแล้ว",
-          "Insufficient Balance": "ยอดเงินไม่พอ",
+          "Deleted successfully.": "ลบเรียบร้อยแล้ว",
+          "Not enough value": "มูลค่ายังไม่เพียงพอที่จะดำเนินการต่อ",
           "Waiting for approval on your device...":
             "กำลังรอการอนุมัติในอุปกรณ์ของคุณ...",
           Save: "บันทึก",
@@ -3066,7 +2900,7 @@ i18n
           "All Chains": "ทุกโซ่",
           "Select Chain": "เลือกโซ่",
           "Contact Support via Email": "ติดต่อสนับสนุนทางอีเมล",
-          addressShown: "ที่อยู่ได้ถูกแสดงบน LIKKIM สำเร็จแล้ว!",
+          addressShown: "ที่อยู่แสดงบนอุปกรณ์ของคุณเรียบร้อยแล้ว",
           "Search Address": "ค้นหาที่อยู่",
           "No device paired. Please pair with device first.":
             "ยังไม่ได้จับคู่กับอุปกรณ์ใด ๆ กรุณาจับคู่กับอุปกรณ์ก่อน",
@@ -3077,7 +2911,6 @@ i18n
       uk: {
         translation: {
           "Add Wallet": "Додати гаманець",
-
           Close: "Закрити",
           "Value:": "Значення:",
           "Delete Card": "Видалити картку",
@@ -3104,23 +2937,21 @@ i18n
             "Будь ласка, переконайтеся, що ваш холодний гаманець розблокований і Bluetooth увімкнено.",
           Send: "Відправити",
           Receive: "Отримати",
-          "Transaction History": "Історія транзакцій",
+          "Activity Log": "Журнал операцій",
           "No Histories": "Немає історії",
           "Enter the recipient's address:": "Введіть адресу одержувача:",
           "Enter Address": "Введіть адресу",
           Submit: "Відправити",
-          "Choose the cryptocurrency to send:":
-            "Виберіть криптовалюту для відправки:",
-          "Choose the cryptocurrency to receive:":
-            "Виберіть криптовалюту для отримання:",
+          "Select asset to proceed": "Виберіть актив, щоб продовжити",
+          "Choose asset type": "Виберіть тип активу",
           "Address for": "Адреса для",
           Close: "Закрити",
-          Wallet: "Гаманець",
-          Transactions: "Транзакції",
+          Assets: "Активи",
+          Activity: "Транзакції",
           General: "Загальні",
-          "Total Balance": "Загальний баланс",
+          "Total Value": "Загальний баланс",
           Balance: "Баланс",
-          "No cryptocurrencies available. Please add wallet first.":
+          "No assets available. Please connect your device to continue.":
             "Немає доступних криптовалют. Будь ласка, спочатку додайте гаманець.",
           "This chain account will be removed":
             "Цей ланцюговий акаунт буде видалено",
@@ -3138,7 +2969,7 @@ i18n
           "Firmware Update": "Оновлення прошивки",
           "No data available": "Дані недоступні",
           "Search Currency": "Шукати валюту",
-          "Search Cryptocurrency": "Шукати криптовалюту",
+          "Search Asset": "Шукати криптовалюту",
           "Select Currency": "Вибрати валюту",
           "Enable Screen Lock": "Увімкнути блокування екрана",
           "Enter new password": "Введіть новий пароль",
@@ -3163,7 +2994,6 @@ i18n
           "Enter PIN to Connect": "Введіть PIN для підключення",
           "Use the PIN code to connect securely to your device.":
             "Використовуйте PIN-код для безпечного підключення до вашого пристрою.",
-
           "Enter PIN": "Введіть PIN-код",
           "Verification successful!": "Перевірка успішна!",
           "You can now safely use the device.":
@@ -3173,16 +3003,14 @@ i18n
             "Введений вами код перевірки неправильний. Будь ласка спробуйте ще раз.",
           "Invalid address": "Неправильна адреса",
           "Detected Network": "Виявлена мережа",
-          "Enter Amount": "Введіть суму",
-          "Enter the amount to send:": "Введіть суму для відправки:",
+          "Enter amount": "Введіть суму",
           Back: "Назад",
           Amount: "Сума",
           "Payment Address": "Платіжна адреса",
           "Recipient Address": "Адреса одержувача",
-          "Transaction Fee": "Комісія за транзакцію",
+          "Processing Fee": "Комісія за обробку",
           Confirm: "Підтвердити",
           "Waiting for Confirmation": "Очікується підтвердження",
-
           "Screen lock enabled successfully":
             "Блокування екрану успішно активовано",
           "Success!": "Успіх!",
@@ -3190,28 +3018,26 @@ i18n
           "I lost my password": "Я забув свій пароль",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "Щоб скинути застосунок і видалити збережені дані, будь ласка, видаліть його і перевстановіть на телефоні.",
-
-          "Value in USD": "Значення в доларах США",
+          "Estimated value (US$)": "Орієнтовна вартість (US$)",
           Fee: "Комісія",
           "Waiting for approval on your device...":
             "Очікується підтвердження на вашому пристрої...",
-          "Verifying Address on LIKKIM...": "Перевірка адреси на LIKKIM...",
-
+          "Verifying address on your device...":
+            "Перевірка адреси на вашому пристрої...",
           "Your device is already verified.": "Ваш пристрій вже перевірено.",
-
           "Address Book": "Адресна книга",
-          Swap: "Обмін",
+          Convert: "Обмін",
           Skip: "Пропустити",
           "Start Exploring": "Розпочати огляд",
           "Secure and Reliable": "Безпечний та надійний",
-          "Bank-level security for your digital assets.":
-            "Банківський рівень безпеки для ваших цифрових активів.",
-          "Manage Your Cryptos": "Керуйте своїми криптовалютами",
-          "Easily manage multiple cryptocurrencies.":
-            "Легко керуйте декількома криптовалютами.",
+          "Robust security designed for your information.":
+            "Надійна безпека, створена для захисту вашої інформації.",
+          "Manage Your Assets": "Керуйте своїми активами",
+          "Easily manage multiple asset types.":
+            "Легко керуйте кількома типами активів.",
           Welcome: "Ласкаво просимо",
-          "Your secure and user-friendly digital wallet.":
-            "Ваш безпечний та зручний цифровий гаманець.",
+          "Your secure and intuitive companion app.":
+            "Ваш надійний і зручний додаток-компаньйон для пристрою.",
           "Address Copied to Clipboard": "Адрес скопійовано в буфер обміну",
           "No devices found":
             "Пристрої не знайдені. Будь ласка, підключіть пристрій, щоб побачити його тут.",
@@ -3230,16 +3056,15 @@ i18n
           "Last connected": "Останнє підключення",
           "Secure Device Status": "Стан безпечного пристрою",
           "Device Settings": "Налаштування пристрою",
-          "Delete Wallet": "Видалити гаманець",
+          "Reset Local Profile": "Скинути локальні дані",
           Support: "Підтримка",
           Warning: "Попередження",
           deleteDeviceConfirmMessage:
             "Ви впевнені, що хочете видалити цей пристрій з додатка?\nЦе призведе до видалення всієї локально збереженої інформації, пов’язаної з цим пристроєм.\n\nВи зможете знову підключити пристрій пізніше, щоб повторно синхронізувати дані.\nПереконайтеся, що ви зберегли всю важливу інформацію перед продовженням.",
           Delete: "Видалити",
           Success: "Успіх",
-          "Your wallet has been deleted successfully.":
-            "Ваш гаманець був успішно видалений.",
-          "Insufficient Balance": "Недостатньо коштів",
+          "Deleted successfully.": "Успішно видалено.",
+          "Not enough value": "Недостатнє значення для продовження",
           Save: "Зберегти",
           Address: "Адреса",
           "Add Address": "Додати адресу",
@@ -3251,7 +3076,7 @@ i18n
           "Select Chain": "Вибрати ланку",
           "Contact Support via Email":
             "Звернутися до служби підтримки через електронну пошту",
-          addressShown: "Адресу успішно відображено на LIKKIM!",
+          addressShown: "Адресу успішно відображено на вашому пристрої.",
           "Search Address": "Пошук адреси",
           "No device paired. Please pair with device first.":
             "Пристрій не підключено. Будь ласка, спочатку виконайте сполучення з пристроєм.",
@@ -3262,7 +3087,6 @@ i18n
       vi: {
         translation: {
           "Add Wallet": "Thêm Ví",
-
           Close: "Đóng",
           "Value:": "Giá trị:",
           "Delete Card": "Xóa Thẻ",
@@ -3289,23 +3113,21 @@ i18n
             "Hãy đảm bảo rằng Ví Lạnh của bạn đã được mở khóa và Bluetooth được kích hoạt.",
           Send: "Gửi",
           Receive: "Nhận",
-          "Transaction History": "Lịch sử giao dịch",
+          "Activity Log": "Bản ghi thao tác",
           "No Histories": "Không có lịch sử",
           "Enter the recipient's address:": "Nhập địa chỉ người nhận:",
           "Enter Address": "Nhập địa chỉ",
           Submit: "Gửi đi",
-          "Choose the cryptocurrency to send:":
-            "Chọn loại tiền điện tử để gửi:",
-          "Choose the cryptocurrency to receive:":
-            "Chọn loại tiền điện tử để nhận:",
+          "Select asset to proceed": "Chọn tài sản để tiếp tục",
+          "Choose asset type": "Chọn loại tài sản",
           "Address for": "Địa chỉ cho",
           Close: "Đóng",
-          Wallet: "Ví",
-          Transactions: "Giao dịch",
+          Assets: "Tài sản",
+          Activity: "Giao dịch",
           General: "Chung",
-          "Total Balance": "Tổng Số Dư",
+          "Total Value": "Tổng Số Dư",
           Balance: "Số dư",
-          "No cryptocurrencies available. Please add wallet first.":
+          "No assets available. Please connect your device to continue.":
             "Không có tiền điện tử nào khả dụng. Vui lòng thêm ví trước.",
           "This chain account will be removed": "Tài khoản chuỗi này sẽ bị xóa",
           "Remove Chain Account": "Xóa tài khoản chuỗi",
@@ -3323,7 +3145,7 @@ i18n
           "Firmware Update": "Cập nhật firmware",
           "No data available": "Không có dữ liệu",
           "Search Currency": "Tìm kiếm tiền tệ",
-          "Search Cryptocurrency": "Tìm kiếm tiền điện tử",
+          "Search Asset": "Tìm kiếm tiền điện tử",
           "Select Currency": "Chọn tiền tệ",
           "Enable Screen Lock": "Bật khóa màn hình",
           "Enter new password": "Nhập mật khẩu mới",
@@ -3348,7 +3170,6 @@ i18n
           "Enter PIN to Connect": "Nhập PIN để kết nối",
           "Use the PIN code to connect securely to your device.":
             "Sử dụng mã PIN để kết nối an toàn với thiết bị của bạn.",
-
           "Enter PIN": "Nhập mã PIN",
           "Verification successful!": "Xác minh thành công!",
           "You can now safely use the device.":
@@ -3358,16 +3179,14 @@ i18n
             "Mã xác minh bạn đã nhập không chính xác. Vui lòng thử lại.",
           "Invalid address": "Địa chỉ không hợp lệ",
           "Detected Network": "Mạng được phát hiện",
-          "Enter Amount": "Nhập số tiền",
-          "Enter the amount to send:": "Nhập số tiền cần gửi:",
+          "Enter amount": "Nhập số tiền",
           Back: "Quay lại",
           Amount: "Số tiền",
           "Payment Address": "Địa chỉ thanh toán",
           "Recipient Address": "Địa chỉ người nhận",
-          "Transaction Fee": "Phí giao dịch",
+          "Processing Fee": "Phí xử lý",
           Confirm: "Xác nhận",
           "Waiting for Confirmation": "Đang chờ xác nhận",
-
           "Screen lock enabled successfully":
             "Khóa màn hình đã được bật thành công",
           "Success!": "Thành công!",
@@ -3375,28 +3194,25 @@ i18n
           "I lost my password": "Tôi quên mật khẩu",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "Để đặt lại ứng dụng và xóa dữ liệu đã lưu, vui lòng gỡ cài đặt và cài đặt lại trên điện thoại của bạn.",
-
-          "Value in USD": "Giá trị bằng USD",
+          "Estimated value (US$)": "Giá trị ước tính (US$)",
           Fee: "Phí",
-          "Verifying Address on LIKKIM...":
-            "Đang xác minh địa chỉ trên LIKKIM...",
-
+          "Verifying address on your device...":
+            "Đang xác minh địa chỉ trên thiết bị của bạn...",
           "Your device is already verified.":
             "Thiết bị của bạn đã được xác minh.",
-
           "Address Book": "Sổ địa chỉ",
-          Swap: "Hoán đổi",
+          Convert: "Hoán đổi",
           Skip: "Bỏ qua",
           "Start Exploring": "Bắt đầu khám phá",
           "Secure and Reliable": "An toàn và Đáng tin cậy",
-          "Bank-level security for your digital assets.":
-            "Bảo mật cấp ngân hàng cho tài sản số của bạn.",
-          "Manage Your Cryptos": "Quản lý Tiền điện tử của bạn",
-          "Easily manage multiple cryptocurrencies.":
-            "Dễ dàng quản lý nhiều loại tiền điện tử.",
+          "Robust security designed for your information.":
+            "Bảo mật mạnh mẽ được thiết kế cho thông tin của bạn.",
+          "Manage Your Assets": "Quản lý tài sản của bạn",
+          "Easily manage multiple asset types.":
+            "Quản lý dễ dàng nhiều loại tài sản.",
           Welcome: "Chào mừng",
-          "Your secure and user-friendly digital wallet.":
-            "Ví điện tử an toàn và thân thiện với người dùng của bạn.",
+          "Your secure and intuitive companion app.":
+            "Ứng dụng đồng hành phần cứng an toàn và dễ sử dụng của bạn.",
           "Address Copied to Clipboard":
             "Địa chỉ đã được sao chép vào clipboard",
           "No devices found":
@@ -3416,16 +3232,15 @@ i18n
           "Last connected": "Kết nối lần cuối",
           "Secure Device Status": "Trạng thái thiết bị an toàn",
           "Device Settings": "Cài đặt thiết bị",
-          "Delete Wallet": "Xóa ví",
+          "Reset Local Profile": "Đặt lại dữ liệu cục bộ",
           Support: "Hỗ trợ",
           Warning: "Cảnh báo",
           deleteDeviceConfirmMessage:
             "Bạn có chắc chắn muốn xóa thiết bị này khỏi ứng dụng không?\nThao tác này sẽ xóa tất cả thông tin được lưu trữ cục bộ liên quan đến thiết bị này.\n\nBạn có thể kết nối lại thiết bị sau để đồng bộ lại dữ liệu.\nHãy đảm bảo bạn đã lưu tất cả thông tin quan trọng trước khi tiếp tục.",
           Delete: "Xóa",
           Success: "Thành công",
-          "Your wallet has been deleted successfully.":
-            "Ví của bạn đã được xóa thành công.",
-          "Insufficient Balance": "Số dư không đủ",
+          "Deleted successfully.": "Xóa thành công.",
+          "Not enough value": "Giá trị quá thấp để tiếp tục",
           "Waiting for approval on your device...":
             "Đang chờ phê duyệt trên thiết bị của bạn...",
           Save: "Lưu",
@@ -3438,18 +3253,18 @@ i18n
           "All Chains": "Tất cả chuỗi",
           "Select Chain": "Chọn chuỗi",
           "Contact Support via Email": "Liên hệ hỗ trợ qua Email",
-          addressShown: "Địa chỉ đã được hiển thị thành công trên LIKKIM!",
+          addressShown:
+            "Địa chỉ đã được hiển thị thành công trên thiết bị của bạn.",
           "Search Address": "Tìm kiếm địa chỉ",
           "No device paired. Please pair with device first.":
             "Chưa có thiết bị được ghép nối. Vui lòng ghép nối thiết bị trước.",
           All: "Tất cả",
-          "Save to Device": "Lưu vào phần cứng Likkim",
+          "Save to Device": "Lưu vào thiết bị",
         },
       },
       id: {
         translation: {
           "Add Wallet": "Tambah Dompet",
-
           Close: "Tutup",
           "Value:": "Nilai:",
           "Delete Card": "Hapus Kartu",
@@ -3476,48 +3291,40 @@ i18n
             "Pastikan Dompet Dingin Anda tidak terkunci dan Bluetooth diaktifkan.",
           Send: "Kirim",
           Receive: "Terima",
-          "Transaction History": "Riwayat Transaksi",
+          "Activity Log": "Riwayat Transaksi",
           "No Histories": "Tidak ada riwayat",
           "Enter the recipient's address:": "Masukkan alamat penerima:",
           "Enter Address": "Masukkan alamat",
           Submit: "Kirim",
-          "Choose the cryptocurrency to send:":
-            "Pilih cryptocurrency untuk dikirim:",
-          "Choose the cryptocurrency to receive:":
-            "Pilih cryptocurrency untuk diterima:",
+          "Select asset to proceed": "Pilih aset untuk melanjutkan",
+          "Choose asset type": "Pilih jenis aset",
           "Address for": "Alamat untuk",
           Close: "Tutup",
-          Wallet: "Dompet",
-          Transactions: "Transaksi",
+          Assets: "Aset",
+          Activity: "Transaksi",
           General: "Umum",
-          "Total Balance": "Saldo Total",
+          "Total Value": "Saldo Total",
           Balance: "Saldo",
-          "No cryptocurrencies available. Please add wallet first.":
+          "No assets available. Please connect your device to continue.":
             "Tidak ada cryptocurrency yang tersedia. Harap tambahkan dompet terlebih dahulu.",
           "This chain account will be removed": "Akun rantai ini akan dihapus",
           "Remove Chain Account": "Hapus akun rantai",
           Remove: "Hapus",
           "Security in your hands": "Keamanan di tangan Anda",
-
           Continue: "Lanjutkan",
-
           "Scroll down to view all words":
             "Gulir ke bawah untuk melihat semua kata",
-
           "Generating your accounts": "Membuat akun Anda",
           "Encrypting your data": "Mengenkripsi data Anda",
-
           "Let's Go": "Ayo pergi",
           "Use spaces between words": "Gunakan spasi di antara kata-kata",
-
           Version: "Versi",
           "Assets can only be sent within the same chain.":
             "Aset hanya dapat dikirim dalam rantai yang sama.",
           "Firmware Update": "Pembaruan firmware",
-
           "No data available": "Tidak ada data",
           "Search Currency": "Cari mata uang",
-          "Search Cryptocurrency": "Cari mata uang kripto",
+          "Search Asset": "Cari mata uang kripto",
           "Select Currency": "Pilih mata uang",
           "Enable Screen Lock": "Aktifkan kunci layar",
           "Enter new password": "Masukkan kata sandi baru",
@@ -3542,7 +3349,6 @@ i18n
           "Enter PIN to Connect": "Masukkan PIN untuk Terhubung",
           "Use the PIN code to connect securely to your device.":
             "Gunakan kode PIN untuk terhubung dengan aman ke perangkat Anda.",
-
           "Enter PIN": "Masukkan PIN",
           "Verification successful!": "Verifikasi berhasil!",
           "You can now safely use the device.":
@@ -3552,45 +3358,41 @@ i18n
             "Kode verifikasi yang Anda masukkan salah. Silakan coba lagi.",
           "Invalid address": "Alamat tidak valid",
           "Detected Network": "Jaringan Terdeteksi",
-          "Enter Amount": "Masukkan jumlah",
-          "Enter the amount to send:": "Masukkan jumlah yang akan dikirim:",
+          "Enter amount": "Masukkan jumlah",
           Back: "Kembali",
           Amount: "Jumlah",
           "Payment Address": "Alamat Pembayaran",
           "Recipient Address": "Alamat Penerima",
-          "Transaction Fee": "Biaya Transaksi",
+          "Processing Fee": "Biaya pemrosesan",
           Confirm: "Konfirmasi",
           "Waiting for Confirmation": "Menunggu konfirmasi",
-
           "Screen lock enabled successfully": "Kunci layar berhasil diaktifkan",
           "Success!": "Sukses!",
           "Enable Face ID": "Aktifkan Face ID",
           "I lost my password": "Saya kehilangan kata sandi saya",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "Untuk mengatur ulang aplikasi dan menghapus data yang tersimpan, silakan hapus instalan dan instal ulang di ponsel Anda.",
-
-          "Value in USD": "Nilai dalam USD",
+          "Estimated value (US$)": "Perkiraan nilai (US$)",
           Fee: "Biaya",
           "Waiting for approval on your device...":
             "Menunggu persetujuan di perangkat Anda...",
-          "Verifying Address on LIKKIM...": "Memverifikasi alamat di LIKKIM...",
-
+          "Verifying address on your device...":
+            "Memverifikasi alamat di perangkat Anda...",
           "Your device is already verified.":
             "Perangkat Anda sudah diverifikasi.",
-
           "Address Book": "Buku Alamat",
-          Swap: "Tukar",
+          Convert: "Tukar",
           Skip: "Lewati",
           "Start Exploring": "Mulai Jelajahi",
           "Secure and Reliable": "Aman dan Terpercaya",
-          "Bank-level security for your digital assets.":
-            "Keamanan tingkat bank untuk aset digital Anda.",
-          "Manage Your Cryptos": "Kelola Kripto Anda",
-          "Easily manage multiple cryptocurrencies.":
-            "Mudah mengelola berbagai mata uang kripto.",
+          "Robust security designed for your information.":
+            "Keamanan tangguh yang dirancang untuk informasi Anda.",
+          "Manage Your Assets": "Kelola aset Anda",
+          "Easily manage multiple asset types.":
+            "Kelola berbagai jenis aset dengan mudah.",
           Welcome: "Selamat Datang",
-          "Your secure and user-friendly digital wallet.":
-            "Dompet digital Anda yang aman dan mudah digunakan.",
+          "Your secure and intuitive companion app.":
+            "Aplikasi pendamping perangkat keras Anda yang aman dan intuitif.",
           "Address Copied to Clipboard": "Alamat telah disalin ke clipboard",
           "No devices found":
             "Tidak ada perangkat ditemukan. Silakan sambungkan perangkat untuk melihat di sini.",
@@ -3609,16 +3411,15 @@ i18n
           "Last connected": "Terhubung terakhir",
           "Secure Device Status": "Status perangkat aman",
           "Device Settings": "Pengaturan perangkat",
-          "Delete Wallet": "Hapus Dompet",
+          "Reset Local Profile": "Setel ulang data lokal",
           Support: "Dukungan",
           Warning: "Peringatan",
           deleteDeviceConfirmMessage:
             "Bạn có chắc chắn muốn xóa thiết bị này khỏi ứng dụng không?\nThao tác này sẽ xóa tất cả thông tin được lưu trữ cục bộ liên quan đến thiết bị này.\n\nBạn có thể kết nối lại thiết bị sau để đồng bộ lại dữ liệu.\nHãy đảm bảo bạn đã lưu tất cả thông tin quan trọng trước khi tiếp tục.",
           Delete: "Hapus",
           Success: "Sukses",
-          "Your wallet has been deleted successfully.":
-            "Dompet Anda telah dihapus dengan sukses.",
-          "Insufficient Balance": "Saldo tidak cukup",
+          "Deleted successfully.": "Berhasil dihapus.",
+          "Not enough value": "Nilai terlalu rendah untuk melanjutkan",
           Save: "Simpan",
           Address: "Alamat",
           "Add Address": "Tambah Alamat",
@@ -3629,7 +3430,7 @@ i18n
           "All Chains": "Semua Rantai",
           "Select Chain": "Pilih Rantai",
           "Contact Support via Email": "Hubungi Dukungan via Email",
-          addressShown: "Alamat telah berhasil ditampilkan di LIKKIM!",
+          addressShown: "Alamat berhasil ditampilkan di perangkat Anda.",
           "Search Address": "Cari Alamat",
           "No device paired. Please pair with device first.":
             "Tidak ada perangkat yang dipasangkan. Harap pasangkan perangkat terlebih dahulu.",
@@ -3640,7 +3441,6 @@ i18n
       tl: {
         translation: {
           "Add Wallet": "Magdagdag ng Wallet",
-
           Close: "Isara",
           "Value:": "Halaga:",
           "Delete Card": "Tanggalin ang Card",
@@ -3665,23 +3465,21 @@ i18n
             "Mangyaring tiyakin na ang iyong Cold Wallet ay naka-unlock at naka-enable ang Bluetooth.",
           Send: "Magpadala",
           Receive: "Tumanggap",
-          "Transaction History": "Kasaysayan ng Transaksyon",
+          "Activity Log": "Catatan operasi",
           "No Histories": "Walang Kasaysayan",
           "Enter the recipient's address:": "Ilagay ang address ng tatanggap:",
           "Enter Address": "Ilagay ang Address",
           Submit: "Ipasa",
-          "Choose the cryptocurrency to send:":
-            "Piliin ang cryptocurrency na ipapadala:",
-          "Choose the cryptocurrency to receive:":
-            "Piliin ang cryptocurrency na tatanggapin:",
+          "Select asset to proceed": "Pumili ng asset upang magpatuloy",
+          "Choose asset type": "Piliin ang uri ng asset",
           "Address for": "Address para sa",
           Close: "Isara",
-          Wallet: "Pitaka",
-          Transactions: "Mga transaksyon",
+          Assets: "Mga asset",
+          Activity: "Mga transaksyon",
           General: "Pangkalahatan",
-          "Total Balance": "Kabuuang Balanse",
+          "Total Value": "Kabuuang Balanse",
           Balance: "Balanse",
-          "No cryptocurrencies available. Please add wallet first.":
+          "No assets available. Please connect your device to continue.":
             "Walang magagamit na mga cryptocurrency. Mangyaring magdagdag muna ng pitaka.",
           "This chain account will be removed":
             "Ang chain account na ito ay aalisin",
@@ -3704,7 +3502,7 @@ i18n
           "Firmware Update": "Pag-update ng firmware",
           "No data available": "Walang magagamit na data",
           "Search Currency": "Maghanap ng Pera",
-          "Search Cryptocurrency": "Maghanap ng Cryptocurrency",
+          "Search Asset": "Maghanap ng Cryptocurrency",
           "Select Currency": "Piliin ang Pera",
           "Enable Screen Lock": "I-enable ang Screen Lock",
           "Enter new password": "Ilagay ang bagong password",
@@ -3729,7 +3527,6 @@ i18n
           "Enter PIN to Connect": "Ipasok ang PIN para Kumonekta",
           "Use the PIN code to connect securely to your device.":
             "Gamitin ang PIN code upang ligtas na kumonekta sa iyong device.",
-
           "Enter PIN": "Ipasok ang PIN",
           "Verification successful!": "Matagumpay ang pag-verify!",
           "You can now safely use the device.":
@@ -3739,16 +3536,14 @@ i18n
             "Ang verification code na iyong ipinasok ay hindi tama. Pakiulit ulit.",
           "Invalid address": "Di-wastong address",
           "Detected Network": "Nadetect na Network",
-          "Enter Amount": "Ipasok ang Halaga",
-          "Enter the amount to send:": "Ipasok ang halaga na ipapadala:",
+          "Enter amount": "Ilagay ang halaga",
           Back: "Bumalik",
           Amount: "Halaga",
           "Payment Address": "Address ng Pagbabayad",
           "Recipient Address": "Address ng Tatanggap",
-          "Transaction Fee": "Bayad sa Transaksyon",
+          "Processing Fee": "Bayad sa pagproseso",
           Confirm: "Kumpirmahin",
           "Waiting for Confirmation": "Naghihintay ng kumpirmasyon",
-
           "Screen lock enabled successfully":
             "Matagumpay na na-enable ang screen lock",
           "Success!": "Tagumpay!",
@@ -3756,30 +3551,27 @@ i18n
           "I lost my password": "Nawala ko ang aking password",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "Upang i-reset ang app at alisin ang nakaimbak na data, mangyaring i-uninstall at muling i-install ito sa iyong telepono.",
-
-          "Value in USD": "Halaga sa USD",
+          "Estimated value (US$)": "Tinatayang halaga (US$)",
           Fee: "Bayad",
           "Waiting for approval on your device...":
             "Naghihintay ng pag-apruba sa iyong device...",
-          "Verifying Address on LIKKIM...":
-            "Tinitiyak ang address sa LIKKIM...",
-
+          "Verifying address on your device...":
+            "Tinitingnan ang address sa iyong device...",
           "Your device is already verified.":
             "Ang iyong device ay napatunayan na.",
-
           "Address Book": "Aklat ng mga Adresa",
-          Swap: "Palitan",
+          Convert: "Palitan",
           Skip: "Laktawan",
           "Start Exploring": "Simulang Mag-explore",
           "Secure and Reliable": "Ligtas at Mapagkakatiwalaan",
-          "Bank-level security for your digital assets.":
-            "Seguridad na antas bangko para sa iyong mga digital asset.",
-          "Manage Your Cryptos": "Pamahalaan ang Iyong Mga Krypto",
-          "Easily manage multiple cryptocurrencies.":
-            "Madaling pamahalaan ang maramihang mga cryptocurrency.",
+          "Robust security designed for your information.":
+            "Matibay na seguridad na idinisenyo para sa iyong impormasyon.",
+          "Manage Your Assets": "Pamahalaan ang iyong mga asset",
+          "Easily manage multiple asset types.":
+            "Madaling pamahalaan ang maraming uri ng asset.",
           Welcome: "Maligayang Pagdating",
-          "Your secure and user-friendly digital wallet.":
-            "Ang iyong ligtas at madaling gamiting digital wallet.",
+          "Your secure and intuitive companion app.":
+            "Ang iyong ligtas at madaling gamitin na hardware companion app.",
           "Address Copied to Clipboard": "Ang address ay nakopya sa clipboard",
           "No devices found":
             "Walang mga device na nahanap. Mangyaring i-pair ang isang device upang makita ito dito.",
@@ -3798,17 +3590,15 @@ i18n
           "Last connected": "Huling koneksyon",
           "Secure Device Status": "Kalagayan ng secure na device",
           "Device Settings": "Mga Setting ng Device",
-          "Delete Wallet": "Tanggalin ang Wallet",
+          "Reset Local Profile": "I-reset ang lokal na data",
           Support: "Suporta",
           Warning: "Babala",
           deleteDeviceConfirmMessage:
             "Sigurado ka bang gusto mong alisin ang device na ito sa app?\nMawawala ang lahat ng locally stored na impormasyon kaugnay ng device na ito.\n\nMaaari mong muling ikonekta ang device upang i-sync muli ang data.\nTiyaking na-save mo na ang mahahalagang impormasyon bago magpatuloy.",
           Delete: "Tanggalin",
           Success: "Tagumpay",
-          "Your wallet has been deleted successfully.":
-            "Matagumpay na natanggal ang iyong wallet.",
-          "Insufficient Balance": "Hindi sapat na balanse",
-
+          "Deleted successfully.": "Matagumpay na na-delete.",
+          "Not enough value": "Hindi sapat ang halaga upang magpatuloy",
           Save: "I-save",
           Address: "Address",
           "Add Address": "Magdagdag ng Address",
@@ -3820,7 +3610,7 @@ i18n
           "Select Chain": "Piliin ang Kadena",
           "Contact Support via Email":
             "Makipag-ugnayan sa Suporta sa pamamagitan ng Email",
-          addressShown: "Matagumpay na naipakita ang address sa LIKKIM!",
+          addressShown: "Matagumpay na naipakita ang address sa iyong device.",
           "Search Address": "Maghanap ng address",
           "No device paired. Please pair with device first.":
             "Walang naka-pair na device. Pakipair muna ang device.",
@@ -3857,23 +3647,21 @@ i18n
             "অনুগ্রহ করে নিশ্চিত করুন যে আপনার ঠান্ডা ওয়ালেট আনলক করা হয়েছে এবং ব্লুটুথ সক্রিয় করা হয়েছে।",
           Send: "পাঠান",
           Receive: "গ্রহণ করুন",
-          "Transaction History": "লেনদেনের ইতিহাস",
+          "Activity Log": "অপারেশন রেকর্ড",
           "No Histories": "কোনো ইতিহাস নেই",
           "Enter the recipient's address:": "প্রাপকের ঠিকানা লিখুন:",
           "Enter Address": "ঠিকানা লিখুন",
           Submit: "জমা দিন",
-          "Choose the cryptocurrency to send:":
-            "পাঠানোর জন্য ক্রিপ্টোকারেন্সি নির্বাচন করুন:",
-          "Choose the cryptocurrency to receive:":
-            "গ্রহণের জন্য ক্রিপ্টোকারেন্সি নির্বাচন করুন:",
+          "Select asset to proceed": "এগিয়ে যেতে একটি সম্পদ নির্বাচন করুন",
+          "Choose asset type": "সম্পদের ধরন নির্বাচন করুন",
           "Address for": "এর জন্য ঠিকানা",
           Close: "বন্ধ করুন",
-          Wallet: "ওয়ালেট",
-          Transactions: "লেনদেন",
+          Assets: "সম্পদ",
+          Activity: "লেনদেন",
           General: "সাধারণ",
-          "Total Balance": "মোট ব্যালেন্স",
+          "Total Value": "মোট ব্যালেন্স",
           Balance: "ব্যালেন্স",
-          "No cryptocurrencies available. Please add wallet first.":
+          "No assets available. Please connect your device to continue.":
             "কোনও ক্রিপ্টোকারেন্সি উপলব্ধ নেই। প্রথমে একটি ওয়ালেট যোগ করুন।",
           "This chain account will be removed":
             "এই চেইন অ্যাকাউন্টটি সরানো হবে",
@@ -3882,10 +3670,8 @@ i18n
           "Security in your hands": "নিরাপত্তা আপনার হাতে",
           Continue: "চালিয়ে যান",
           "Scroll down to view all words": "সমস্ত শব্দ দেখতে নীচে স্ক্রোল করুন",
-
           "Generating your accounts": "আপনার অ্যাকাউন্ট তৈরি করা হচ্ছে",
           "Encrypting your data": "আপনার ডেটা এনক্রিপ্ট করা হচ্ছে",
-
           "Let's Go": "চলুন",
           "Use spaces between words": "শব্দের মধ্যে স্পেস ব্যবহার করুন",
           Version: "সংস্করণ",
@@ -3896,7 +3682,7 @@ i18n
           "Firmware Update": "ফার্মওয়্যার আপডেট",
           "No data available": "কোনো তথ্য উপলব্ধ নেই",
           "Search Currency": "মুদ্রা খুঁজুন",
-          "Search Cryptocurrency": "ক্রিপ্টোকারেন্সি খুঁজুন",
+          "Search Asset": "ক্রিপ্টোকারেন্সি খুঁজুন",
           "Select Currency": "মুদ্রা নির্বাচন করুন",
           "Enable Screen Lock": "স্ক্রিন লক সক্রিয় করুন",
           "Enter new password": "নতুন পাসওয়ার্ড লিখুন",
@@ -3921,7 +3707,6 @@ i18n
           "Enter PIN to Connect": "সংযোগ করতে পিন লিখুন",
           "Use the PIN code to connect securely to your device.":
             "আপনার ডিভাইসে নিরাপদে সংযোগ করতে PIN কোড ব্যবহার করুন।",
-
           "Enter PIN": "পিন লিখুন",
           "Verification successful!": "যাচাই সফল হয়েছে!",
           "You can now safely use the device.":
@@ -3931,13 +3716,12 @@ i18n
             "আপনি যে যাচাইকরণ কোডটি প্রবেশ করেছেন তা সঠিক নয়। আবার চেষ্টা করুন.",
           "Invalid address": "অবৈধ ঠিকানা",
           "Detected Network": "সনাক্ত করা নেটওয়ার্ক",
-          "Enter Amount": "পরিমাণ লিখুন",
-          "Enter the amount to send:": "প্রেরণের পরিমাণ লিখুন:",
+          "Enter amount": "পরিমাণ লিখুন",
           Back: "ফিরে",
           Amount: "পরিমাণ",
           "Payment Address": "পেমেন্ট ঠিকানা",
           "Recipient Address": "প্রাপক ঠিকানা",
-          "Transaction Fee": "লেনদেন ফি",
+          "Processing Fee": "প্রক্রিয়াকরণ ফি",
           Confirm: "নিশ্চিত করুন",
           "Waiting for Confirmation": "নিশ্চিতকরণের জন্য অপেক্ষা করা হচ্ছে",
           "Screen lock enabled successfully":
@@ -3947,31 +3731,27 @@ i18n
           "I lost my password": "আমি আমার পাসওয়ার্ড হারিয়েছি",
           "To reset the app and remove stored data, please uninstall and reinstall it on your phone.":
             "অ্যাপটি রিসেট করতে এবং সংরক্ষিত ডেটা মুছে ফেলতে, অনুগ্রহ করে আপনার ফোনে এটি আনইনস্টল করে পুনরায় ইনস্টল করুন।",
-
-          "Value in USD": "ইউএসডি-তে মান",
+          "Estimated value (US$)": "আনুমানিক মূল্য (US$)",
           Fee: "ফি",
           "Waiting for approval on your device...":
             "আপনার ডিভাইসে অনুমোদনের অপেক্ষায়...",
-
-          "Verifying Address on LIKKIM...":
-            "LIKKIM-এ ঠিকানা যাচাই করা হচ্ছে...",
-
+          "Verifying address on your device...":
+            "আপনার ডিভাইসে ঠিকানা যাচাই করা হচ্ছে...",
           "Your device is already verified.":
             "আপনার ডিভাইসটি ইতিমধ্যেই যাচাই করা হয়েছে।",
-
           "Address Book": "ঠিকানা বই",
-          Swap: "বিনিময়",
+          Convert: "বিনিময়",
           Skip: "এড়িয়ে যান",
           "Start Exploring": "অন্বেষণ শুরু করুন",
           "Secure and Reliable": "নিরাপদ ও নির্ভরযোগ্য",
-          "Bank-level security for your digital assets.":
-            "আপনার ডিজিটাল সম্পদের জন্য ব্যাঙ্ক-স্তরের নিরাপত্তা।",
-          "Manage Your Cryptos": "আপনার ক্রিপ্টো পরিচালনা করুন",
-          "Easily manage multiple cryptocurrencies.":
-            "সহজেই একাধিক ক্রিপ্টোকারেন্সি পরিচালনা করুন।",
+          "Robust security designed for your information.":
+            "আপনার তথ্যের জন্য ডিজাইনকৃত শক্তিশালী নিরাপত্তা।",
+          "Manage Your Assets": "আপনার সম্পদ পরিচালনা করুন",
+          "Easily manage multiple asset types.":
+            "একাধিক সম্পদের ধরন সহজেই পরিচালনা করুন।",
           Welcome: "स्वागत है",
-          "Your secure and user-friendly digital wallet.":
-            "আপনার নিরাপদ ও ব্যবহারকারী-বান্ধব ডিজিটাল ওয়ালেট।",
+          "Your secure and intuitive companion app.":
+            "আপনার নিরাপদ এবং স্বজ্ঞাত হার্ডওয়্যার সহায়ক অ্যাপ।",
           "Address Copied to Clipboard": "ঠিকানা ক্লিপবোর্ডে কপি করা হয়েছে",
           "No devices found":
             "কোনো ডিভাইস পাওয়া যায়নি। এখানে দেখতে একটি ডিভাইস পেয়ার করুন।",
@@ -3990,17 +3770,15 @@ i18n
           "Last connected": "শেষ সংযোগ",
           "Secure Device Status": "নিরাপদ ডিভাইসের অবস্থা",
           "Device Settings": "ডিভাইস সেটিংস",
-          "Delete Wallet": "ওয়ালেট মুছুন",
+          "Reset Local Profile": "স্থানীয় ডেটা রিসেট করুন",
           Support: "সমর্থন",
           Warning: "সতর্কতা",
           deleteDeviceConfirmMessage:
             "আপনি কি নিশ্চিত যে আপনি এই ডিভাইসটি অ্যাপ থেকে সরাতে চান?\nএটি এই ডিভাইসের সাথে সম্পর্কিত সমস্ত স্থানীয়ভাবে সংরক্ষিত তথ্য মুছে ফেলবে।\n\nআপনি পরে আবার ডিভাইসটি সংযুক্ত করে ডেটা সিঙ্ক করতে পারেন।\nচালিয়ে যাওয়ার আগে অনুগ্রহ করে সমস্ত গুরুত্বপূর্ণ তথ্য সংরক্ষণ করেছেন কিনা তা নিশ্চিত করুন।",
           Delete: "মুছুন",
           Success: "সফলতা",
-          "Your wallet has been deleted successfully.":
-            "আপনার ওয়ালেট সফলভাবে মুছে ফেলা হয়েছে।",
-          "Insufficient Balance": "অপর্যাপ্ত ব্যালেন্স",
-
+          "Deleted successfully.": "সফলভাবে মুছে ফেলা হয়েছে।",
+          "Not enough value": "চালিয়ে যেতে যথেষ্ট মান নেই",
           Save: "সংরক্ষণ",
           Address: "ঠিকানা",
           "Add Address": "ঠিকানা যোগ করুন",
@@ -4012,7 +3790,7 @@ i18n
           "Select Chain": "চেইন নির্বাচন করুন",
           "Contact Support via Email":
             "ইমেলের মাধ্যমে সাপোর্টের সাথে যোগাযোগ করুন",
-          addressShown: "LIKKIM-এ ঠিকানাটি সফলভাবে প্রদর্শিত হয়েছে!",
+          addressShown: "ঠিকানাটি সফলভাবে আপনার ডিভাইসে প্রদর্শিত হয়েছে।",
           "Search Address": "ঠিকানা খুঁজুন",
           "No device paired. Please pair with device first.":
             "কোনও ডিভাইস জোড়া করা হয়নি। প্রথমে ডিভাইসের সাথে জোড়া করুন।",
