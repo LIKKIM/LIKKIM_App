@@ -295,19 +295,26 @@ function SecureDeviceScreen({ onDarkModeChange }) {
       setPasswordError(t("Password must be at least 4 characters long"));
       return;
     }
-    if (password === confirmPassword) {
-      try {
-        await changeScreenLockPassword(password);
-        toggleScreenLock(true);
-        setLockCodeModalVisible(false);
-        setPasswordError("");
-        setModalMessage(t("Screen lock enabled successfully"));
-        setSuccessModalVisible(true);
-      } catch (error) {
-        console.log("Failed to save password", error);
-      }
-    } else {
+
+    if (password !== confirmPassword) {
       setPasswordError(t("Passwords do not match"));
+      return;
+    }
+
+    try {
+      await AsyncStorage.setItem("appLockPassword", password);
+      await AsyncStorage.setItem(
+        "screenLockFeatureEnabled",
+        JSON.stringify(true)
+      );
+      toggleScreenLock(true); // 更新 UI 状态
+      setLockCodeModalVisible(false); // 关闭 modal
+      setPasswordError("");
+      setModalMessage(t("Screen lock enabled successfully"));
+      setSuccessModalVisible(true);
+    } catch (error) {
+      console.error("❌ Failed to enable lock:", error);
+      setPasswordError(t("An error occurred while saving password"));
     }
   };
 
@@ -320,16 +327,28 @@ function SecureDeviceScreen({ onDarkModeChange }) {
   };
 
   const handleConfirmPassword = async () => {
+    console.log("⛔ 当前输入：", currentPassword);
+    console.log("✅ 正确密码：", screenLockPassword);
+
     if (currentPassword === screenLockPassword) {
-      toggleScreenLock(false);
-      setEnterLockCodeModalVisible(false);
-      setModalMessage(t("Screen lock disabled successfully"));
-      setSuccessModalVisible(true);
+      try {
+        await AsyncStorage.setItem(
+          "screenLockFeatureEnabled",
+          JSON.stringify(false)
+        );
+        toggleScreenLock(false);
+        setEnterLockCodeModalVisible(false);
+        setModalMessage(t("Screen lock disabled successfully"));
+        setSuccessModalVisible(true);
+      } catch (err) {
+        console.error("❌ Failed to disable screen lock:", err);
+        setModalMessage(t("An error occurred"));
+        setErrorModalVisible(true);
+      }
     } else {
       setEnterLockCodeModalVisible(false);
       setModalMessage(t("Incorrect password"));
       setErrorModalVisible(true);
-      setSuccessModalVisible(false);
     }
   };
 

@@ -44,7 +44,7 @@ const getSettingsOptions = ({
     const newValue = !isScreenLockEnabled;
     Vibration.vibrate();
     handleScreenLockToggle(newValue);
-    persistScreenLockSetting(newValue);
+    //  persistScreenLockSetting(newValue);
   };
 
   return {
