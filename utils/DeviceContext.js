@@ -14,24 +14,6 @@ export const DarkModeContext = createContext();
 // API URL for fetching exchange rates
 const NEW_EXCHANGE_RATE_API_URL = metricsAPII.exchangeRate;
 
-// Default USDT crypto data
-export const usdtCrypto = {
-  name: "USDT",
-  shortName: "USDT",
-  balance: "0.0",
-  icon: require("../assets/USDTIcon.png"),
-  cardImage: require("../assets/Card43.png"),
-  address: "TN121JdH9t2y7qjuExHrYMdJA5RHJXdaZK",
-  chain: "Tron",
-  chainShortName: "TRX",
-  queryChainShortName: "TRON",
-  chainIcon: require("../assets/icon/TRXIcon.png"),
-  tokenType: "TRC20",
-  fee: "2.0",
-  EstimatedValue: "0.0",
-  priceUsd: "1.0",
-};
-
 export const CryptoProvider = ({ children }) => {
   // State definitions
   const [isScreenLockEnabled, setIsScreenLockEnabled] = useState(false);
@@ -379,7 +361,6 @@ export const CryptoProvider = ({ children }) => {
         currencyUnit,
         setCurrencyUnit,
         currencies,
-        usdtCrypto,
         initialAdditionalCryptos: initialAdditionalCryptosState,
         setInitialAdditionalCryptos,
         additionalCryptos,

@@ -10,11 +10,7 @@ import {
 } from "react-native";
 import { initialAdditionalCryptos } from "../../config/assetInfo"; // 修改为实际路径
 import { CHAIN_NAMES } from "../../config/chainConfig";
-import {
-  DeviceContext,
-  DarkModeContext,
-  usdtCrypto,
-} from "../../utils/DeviceContext";
+import { DeviceContext, DarkModeContext } from "../../utils/DeviceContext";
 import ChainSelectionModal from "../modal/ChainSelectionModal"; // 导入 ChainSelectionModal
 import TransactionChainFilterModal from "../modal/TransactionChainFilterModal";
 

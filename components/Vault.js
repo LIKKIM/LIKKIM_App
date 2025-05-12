@@ -33,11 +33,7 @@ import { Buffer } from "buffer";
 
 // 样式和上下文
 import VaultScreenStyles from "../styles/VaultScreenStyle";
-import {
-  DeviceContext,
-  DarkModeContext,
-  usdtCrypto,
-} from "../utils/DeviceContext";
+import { DeviceContext, DarkModeContext } from "../utils/DeviceContext";
 
 // 自定义组件
 import { prefixToShortName } from "../config/chainPrefixes";
@@ -67,8 +63,7 @@ function VaultScreen({ route, navigation }) {
     initialAdditionalCryptos,
     setInitialAdditionalCryptos,
     updateCryptoAddress,
-    usdtCrypto,
-    setUsdtCrypto,
+
     additionalCryptos,
     cryptoCount,
     setCryptoCount,
