@@ -6,9 +6,7 @@ import { Buffer } from "buffer";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Constants from "expo-constants";
 import { useTranslation } from "react-i18next";
-
 import { BleManager } from "react-native-ble-plx";
-import "react-native-get-random-values";
 
 // 配置与工具
 import { prefixToShortName } from "../config/chainPrefixes";
@@ -88,8 +86,6 @@ function ActivityScreen() {
   // 交易/设备/界面状态
   const [receivedVerificationCode, setReceivedVerificationCode] = useState("");
   const [swapModalVisible, setConvertModalVisible] = useState(false);
-  const [fromValue, setFromValue] = useState("");
-  const [toValue, setToValue] = useState("");
   const [
     confirmingTransactionModalVisible,
     setConfirmingTransactionModalVisible,
@@ -105,7 +101,6 @@ function ActivityScreen() {
   const [selectedCryptoName, setSelectedCryptoName] = useState("");
   const [selectedCrypto, setSelectedCrypto] = useState("");
   const [selectedCryptoIcon, setSelectedCryptoIcon] = useState(null);
-  const [selectedQueryChainName, setQueryChainName] = useState("");
   const [priceUsd, setPriceUsd] = useState("");
   const [amount, setAmount] = useState("");
   const [inputAddress, setInputAddress] = useState("");
@@ -133,12 +128,6 @@ function ActivityScreen() {
   const [rapidFee, setRapidFee] = useState("");
   const [fromDropdownVisible, setFromDropdownVisible] = useState(false);
   const [toDropdownVisible, setToDropdownVisible] = useState(false);
-  const [selectedFromToken, setSelectedFromToken] = useState("");
-  const [selectedFromChain, setSelectedFromChain] = useState("");
-  const [selectedToToken, setSelectedToToken] = useState("");
-  const [selectedToChain, setSelectedToChain] = useState("");
-  const [paymentAddress, setPaymentAddress] = useState("Your Payment Address");
-  const [contractAddress, setContractAddress] = useState("");
   const [addressVerificationMessage, setAddressVerificationMessage] = useState(
     t("Verifying address on your device...")
   );
@@ -226,9 +215,6 @@ function ActivityScreen() {
   // Clear values when opening the modal
   useEffect(() => {
     if (swapModalVisible) {
-      // Reset values when the modal opens
-      setFromValue("");
-      setToValue("");
       setSelectedFromToken("");
       setSelectedToToken("");
     }
@@ -1547,7 +1533,6 @@ function ActivityScreen() {
     setSelectedCryptoName(crypto.name);
     setIsVerifyingAddress(false);
     setModalVisible(false);
-    setContractAddress(crypto.contractAddress);
 
     if (operationType === "receive") {
       setAddressModalVisible(true);
