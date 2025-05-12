@@ -279,10 +279,9 @@ const VaultScreenStyles = (isDarkMode) => {
     },
     addressText: {
       color: secondTextColor,
-      textAlign: "center",
-      marginRight: 10,
-      flexWrap: "wrap",
-      width: 280,
+      flexWrap: "nowrap",
+
+      fontSize: 14,
     },
 
     // Cancel button text style

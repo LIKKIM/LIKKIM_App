@@ -273,7 +273,7 @@ const ConvertModal = ({
           animated: false,
         });
       } else {
-        console.log("⛔ scrollRef 或 layout 尚未准备好");
+        //  console.log("⛔ scrollRef 或 layout not ready");
       }
     });
   }, [toDropdownVisible, selectedFromToken, chainLayouts]);

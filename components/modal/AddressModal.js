@@ -109,7 +109,7 @@ const AddressInfo = ({ selectedAddress, isDarkMode, VaultScreenStyle, t }) => {
             style={{
               flexDirection: "row",
               alignItems: "center",
-              maxWidth: "100%",
+              maxWidth: "100%", // 确保最大宽度不超出父容器
               flexWrap: "nowrap",
             }}
           >
@@ -117,10 +117,9 @@ const AddressInfo = ({ selectedAddress, isDarkMode, VaultScreenStyle, t }) => {
               style={[
                 VaultScreenStyle.addressText,
                 {
-                  flexShrink: 1,
-                  flexGrow: 1,
-                  flexBasis: "auto",
+                  textAlign: "center", // 保持文字居中
                   marginRight: 8,
+                  maxWidth: 200, // 限制宽度，防止占据过多空间
                 },
               ]}
               numberOfLines={1}
