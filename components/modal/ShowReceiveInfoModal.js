@@ -80,8 +80,8 @@ const ShowReceiveInfoModal = ({
                 style={{
                   flexDirection: "row",
                   alignItems: "center",
+                  justifyContent: "center",
                   maxWidth: "100%",
-                  flexWrap: "nowrap",
                 }}
               >
                 <Text
@@ -89,9 +89,7 @@ const ShowReceiveInfoModal = ({
                     ActivityScreenStyle.addressText,
                     {
                       textAlign: "center",
-                      flexShrink: 1,
-                      flexGrow: 1,
-                      flexBasis: "auto",
+                      maxWidth: 200, // ✅ 限制最大宽度
                       marginRight: 8,
                     },
                   ]}
