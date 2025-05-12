@@ -26,6 +26,9 @@ const ShowReceiveInfoModal = ({
   isDarkMode,
   chainShortName,
 }) => {
+  const safeAddress = (selectedAddress || "").trim();
+  const hasValidAddress = safeAddress !== "";
+
   return (
     <Modal
       animationType="slide"
@@ -35,6 +38,7 @@ const ShowReceiveInfoModal = ({
     >
       <BlurView intensity={10} style={ActivityScreenStyle.centeredView}>
         <View style={ActivityScreenStyle.receiveModalView}>
+          {/* Header */}
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <Text style={ActivityScreenStyle.modalTitle}>
               {t("Address for")}
@@ -45,8 +49,7 @@ const ShowReceiveInfoModal = ({
                 style={{
                   width: 24,
                   height: 24,
-                  marginLeft: 5,
-                  marginRight: 5,
+                  marginHorizontal: 5,
                 }}
               />
             )}
@@ -55,56 +58,86 @@ const ShowReceiveInfoModal = ({
             </Text>
           </View>
 
-          <Text style={ActivityScreenStyle.subtitleText}>
-            {t("Assets can only be sent within the same chain.")}
-          </Text>
+          {/* Notice */}
+          {hasValidAddress && (
+            <Text style={ActivityScreenStyle.subtitleText}>
+              {t("Assets can only be sent within the same chain.")}
+            </Text>
+          )}
 
+          {/* Address Display */}
           <View
             style={{
-              flexDirection: "row",
+              flexDirection: hasValidAddress ? "row" : "column",
               justifyContent: "center",
               alignItems: "center",
               paddingHorizontal: 20,
               paddingVertical: 10,
             }}
           >
-            {typeof selectedAddress === "string" &&
-            selectedAddress.trim() !== "" ? (
-              <>
-                <Text style={ActivityScreenStyle.addressText}>
-                  {selectedAddress}
+            {hasValidAddress ? (
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  maxWidth: "100%",
+                  flexWrap: "nowrap",
+                }}
+              >
+                <Text
+                  style={[
+                    ActivityScreenStyle.addressText,
+                    {
+                      flexShrink: 1,
+                      flexGrow: 1,
+                      flexBasis: "auto",
+                      marginRight: 8,
+                    },
+                  ]}
+                  numberOfLines={1}
+                  ellipsizeMode="middle"
+                >
+                  {safeAddress}
                 </Text>
                 <TouchableOpacity
-                  onPress={() => Clipboard.setString(selectedAddress)}
+                  onPress={() => Clipboard.setString(safeAddress)}
                 >
                   <Icon
                     name="content-copy"
                     size={24}
                     color={isDarkMode ? "#ffffff" : "#676776"}
-                    style={{ marginLeft: 8 }}
                   />
                 </TouchableOpacity>
-              </>
+              </View>
             ) : (
-              <Text style={ActivityScreenStyle.addressText}>
+              <Text
+                style={[
+                  ActivityScreenStyle.addressText,
+                  { textAlign: "center", width: "100%" },
+                ]}
+              >
                 {t("Click the Verify Address Button.")}
               </Text>
             )}
           </View>
 
-          <View
-            style={{
-              backgroundColor: "#fff",
-              height: 220,
-              width: 220,
-              justifyContent: "center",
-              alignItems: "center",
-              borderRadius: 12,
-            }}
-          >
-            <QRCode value={selectedAddress} size={200} />
-          </View>
+          {/* QR Code */}
+          {hasValidAddress && (
+            <View
+              style={{
+                backgroundColor: "#fff",
+                height: 220,
+                width: 220,
+                justifyContent: "center",
+                alignItems: "center",
+                borderRadius: 12,
+              }}
+            >
+              <QRCode value={safeAddress} size={200} />
+            </View>
+          )}
 
+          {/* Verification Status */}
           {isVerifyingAddress && (
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <Image
@@ -122,6 +155,7 @@ const ShowReceiveInfoModal = ({
             </View>
           )}
 
+          {/* Action Buttons */}
           <View
             style={{
               flexDirection: "column",
