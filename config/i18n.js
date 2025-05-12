@@ -186,7 +186,6 @@ i18n
       },
       zh: {
         translation: {
-          "Select asset to proceed:": "请选择资产以继续",
           "Choose asset type:": "请选择资产类型",
           "Enter amount:": "输入金额：",
           "Add Wallet": "添加钱包",
