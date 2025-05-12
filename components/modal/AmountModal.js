@@ -35,7 +35,7 @@ const AmountModal = ({
   exchangeRates,
   cryptoCards,
   selectedCryptoName,
-  valueUsd,
+  EstimatedValue,
   setCryptoCards,
 }) => {
   useEffect(() => {

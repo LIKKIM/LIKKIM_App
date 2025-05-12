@@ -28,7 +28,7 @@ export const usdtCrypto = {
   chainIcon: require("../assets/icon/TRXIcon.png"),
   tokenType: "TRC20",
   fee: "2.0",
-  valueUsd: "0.0",
+  EstimatedValue: "0.0",
   priceUsd: "1.0",
 };
 

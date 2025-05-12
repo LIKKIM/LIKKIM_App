@@ -86,7 +86,7 @@ function ActivityScreen() {
   const restoreIdentifier = Constants.installationId;
   const [selectedAddress, setSelectedAddress] = useState("");
   const [balance, setBalance] = useState("");
-  const [valueUsd, setValueUsd] = useState("");
+  const [EstimatedValue, setEstimatedValue] = useState("");
   const [selectedCryptoChain, setSelectedCryptoChain] = useState("");
   const [selectedCryptoName, setSelectedCryptoName] = useState("");
   const [selectedCrypto, setSelectedCrypto] = useState("");
@@ -479,14 +479,14 @@ function ActivityScreen() {
         // 设置余额、价格等
         setBalance(selected.balance);
         setPriceUsd(selected.priceUsd);
-        setValueUsd(selected.valueUsd);
+        setEstimatedValue(selected.EstimatedValue);
         setFee(selected.fee);
 
         // 打印设置的值
         console.log("已设置以下值:");
         console.log("Balance:", selected.balance);
         console.log("Price in USD:", selected.priceUsd);
-        console.log("Estimated value (US$):", selected.valueUsd);
+        console.log("Estimated value (US$):", selected.EstimatedValue);
         console.log("Processing Fee:", selected.fee);
       } else {
         console.log(
@@ -1511,7 +1511,7 @@ function ActivityScreen() {
     setSelectedAddress(crypto.address);
     setSelectedCryptoIcon(crypto.icon);
     setBalance(crypto.balance);
-    setValueUsd(crypto.valueUsd);
+    setEstimatedValue(crypto.EstimatedValue);
     setFee(crypto.fee);
     setPriceUsd(crypto.priceUsd);
     setQueryChainName(crypto.queryChainName);
@@ -1630,7 +1630,7 @@ function ActivityScreen() {
           exchangeRates={exchangeRates}
           cryptoCards={cryptoCards}
           selectedCryptoName={selectedCryptoName}
-          valueUsd={valueUsd}
+          EstimatedValue={EstimatedValue}
           setCryptoCards={setCryptoCards}
         />
         {/* 交易确认的 Modal */}
