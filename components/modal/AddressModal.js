@@ -83,44 +83,76 @@ const AddressHeader = ({
   </View>
 );
 
-const AddressInfo = ({ selectedAddress, isDarkMode, VaultScreenStyle, t }) => (
-  <>
-    <Text style={VaultScreenStyle.subtitleText}>
-      {t("Assets can only be sent within the same chain.")}
-    </Text>
+const AddressInfo = ({ selectedAddress, isDarkMode, VaultScreenStyle, t }) => {
+  const hasValidAddress =
+    typeof selectedAddress === "string" && selectedAddress.trim() !== "";
+
+  return (
+    <>
+      {hasValidAddress && (
+        <Text style={VaultScreenStyle.subtitleText}>
+          {t("Assets can only be sent within the same chain.")}
+        </Text>
+      )}
+
+      <View
+        style={{
+          flexDirection: hasValidAddress ? "row" : "column",
+          justifyContent: "center",
+          alignItems: "center",
+          paddingHorizontal: 20,
+          paddingVertical: 10,
+        }}
+      >
+        {hasValidAddress ? (
+          <>
+            <Text style={VaultScreenStyle.addressText}>{selectedAddress}</Text>
+            <TouchableOpacity
+              onPress={() => Clipboard.setString(selectedAddress)}
+            >
+              <Icon
+                name="content-copy"
+                size={24}
+                color={isDarkMode ? "#ffffff" : "#676776"}
+                style={{ marginLeft: 8 }}
+              />
+            </TouchableOpacity>
+          </>
+        ) : (
+          <Text
+            style={[
+              VaultScreenStyle.addressText,
+              { textAlign: "center", width: "100%" },
+            ]}
+          >
+            {t("Click the Verify Address Button.")}
+          </Text>
+        )}
+      </View>
+    </>
+  );
+};
+
+const QRCodeView = ({ selectedAddress }) => {
+  if (typeof selectedAddress !== "string" || selectedAddress.trim() === "") {
+    return null;
+  }
+
+  return (
     <View
       style={{
-        flexDirection: "row",
+        backgroundColor: "#fff",
+        height: 220,
+        width: 220,
         justifyContent: "center",
         alignItems: "center",
+        borderRadius: 12,
       }}
     >
-      <Text style={VaultScreenStyle.addressText}>{selectedAddress}</Text>
-      <TouchableOpacity onPress={() => Clipboard.setString(selectedAddress)}>
-        <Icon
-          name="content-copy"
-          size={24}
-          color={isDarkMode ? "#ffffff" : "#676776"}
-        />
-      </TouchableOpacity>
+      <QRCode value={selectedAddress} size={200} />
     </View>
-  </>
-);
-
-const QRCodeView = ({ selectedAddress }) => (
-  <View
-    style={{
-      backgroundColor: "#fff",
-      height: 220,
-      width: 220,
-      justifyContent: "center",
-      alignItems: "center",
-      borderRadius: 12,
-    }}
-  >
-    <QRCode value={selectedAddress} size={200} />
-  </View>
-);
+  );
+};
 
 const VerifyingStatus = ({ message, VaultScreenStyle }) => (
   <View style={{ flexDirection: "row", alignItems: "center" }}>

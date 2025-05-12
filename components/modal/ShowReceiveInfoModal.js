@@ -64,20 +64,32 @@ const ShowReceiveInfoModal = ({
               flexDirection: "row",
               justifyContent: "center",
               alignItems: "center",
+              paddingHorizontal: 20,
+              paddingVertical: 10,
             }}
           >
-            <Text style={ActivityScreenStyle.addressText}>
-              {selectedAddress}
-            </Text>
-            <TouchableOpacity
-              onPress={() => Clipboard.setString(selectedAddress)}
-            >
-              <Icon
-                name="content-copy"
-                size={24}
-                color={isDarkMode ? "#ffffff" : "#676776"}
-              />
-            </TouchableOpacity>
+            {typeof selectedAddress === "string" &&
+            selectedAddress.trim() !== "" ? (
+              <>
+                <Text style={ActivityScreenStyle.addressText}>
+                  {selectedAddress}
+                </Text>
+                <TouchableOpacity
+                  onPress={() => Clipboard.setString(selectedAddress)}
+                >
+                  <Icon
+                    name="content-copy"
+                    size={24}
+                    color={isDarkMode ? "#ffffff" : "#676776"}
+                    style={{ marginLeft: 8 }}
+                  />
+                </TouchableOpacity>
+              </>
+            ) : (
+              <Text style={ActivityScreenStyle.addressText}>
+                {t("Click the Verify Address Button.")}
+              </Text>
+            )}
           </View>
 
           <View

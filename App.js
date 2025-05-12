@@ -1,4 +1,7 @@
 // App.js
+import { TextEncoder, TextDecoder } from "text-encoding";
+if (typeof global.TextEncoder === "undefined") global.TextEncoder = TextEncoder;
+if (typeof global.TextDecoder === "undefined") global.TextDecoder = TextDecoder;
 import "intl-pluralrules";
 import React, { useContext, useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, StatusBar, Modal } from "react-native";
