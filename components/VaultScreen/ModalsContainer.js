@@ -1,8 +1,6 @@
 // ModalsContainer.js
 import React from "react";
 import AddressModal from "../modal/AddressModal";
-
-import ProcessModal from "../modal/ProcessModal";
 import DeleteConfirmationModal from "../modal/DeleteConfirmationModal";
 import BluetoothModal from "../modal/BluetoothModal";
 import SecurityCodeModal from "../modal/SecurityCodeModal";
@@ -28,8 +26,6 @@ const ModalsContainer = ({
   isDarkMode,
   handleWalletTest,
   handleContinue,
-  processModalVisible,
-  setProcessModalVisible,
   processMessages,
   showLetsGoButton,
   handleLetsGo,
@@ -93,17 +89,6 @@ const ModalsContainer = ({
         VaultScreenStyle={VaultScreenStyle}
         t={t}
         isDarkMode={isDarkMode}
-      />
-
-      {/* Process Modal */}
-      <ProcessModal
-        visible={processModalVisible}
-        onClose={() => setProcessModalVisible(false)}
-        processMessages={processMessages}
-        showLetsGoButton={showLetsGoButton}
-        onLetsGo={handleLetsGo}
-        styles={VaultScreenStyle}
-        t={t}
       />
       {/* Delete Confirmation Modal */}
       <DeleteConfirmationModal

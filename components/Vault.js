@@ -100,8 +100,6 @@ function VaultScreen({ route, navigation }) {
   const [selectedCardName, setSelectedCardName] = useState(null); // 已选中的卡片名称
   const [selectedCardChain, setSelectedCardChain] = useState(null); // 已选中的卡片链信息
   const [addIconModalVisible, setAddIconModalVisible] = useState(false);
-
-  const [processModalVisible, setProcessModalVisible] = useState(false);
   const [recoveryPhraseModalVisible, setRecoveryPhraseModalVisible] =
     useState(false);
   const [isVerifyingAddress, setIsVerifyingAddress] = useState(false);
@@ -639,34 +637,6 @@ function VaultScreen({ route, navigation }) {
       useNativeDriver: true,
     }).start();
   }, [modalVisible, fadeAnim]);
-
-  useEffect(() => {
-    if (processModalVisible) {
-      setShowLetsGoButton(false);
-      setProcessMessages([t("Creating")]);
-      const timer1 = setTimeout(() => {
-        setProcessMessages((prevMessages) => [
-          ...prevMessages,
-          t("Generating your accounts"),
-        ]);
-      }, 1000);
-      const timer2 = setTimeout(() => {
-        setProcessMessages((prevMessages) => [
-          ...prevMessages,
-          t("Encrypting your data"),
-        ]);
-      }, 2000);
-
-      const timer3 = setTimeout(() => {
-        setShowLetsGoButton(true);
-      }, 4000);
-      return () => {
-        clearTimeout(timer1);
-        clearTimeout(timer2);
-        clearTimeout(timer3);
-      };
-    }
-  }, [processModalVisible, t]);
 
   useEffect(() => {
     console.log("选中的 chainShortName 已更新:", selectedCardChainShortName);
@@ -1245,10 +1215,6 @@ function VaultScreen({ route, navigation }) {
     setAddCryptoVisible(false);
   };
 
-  const handleWalletTest = () => {
-    setProcessModalVisible(true);
-  };
-
   const handleContinue = () => {
     setRecoveryPhraseModalVisible(false);
 
@@ -1269,7 +1235,10 @@ function VaultScreen({ route, navigation }) {
   };
 
   const handleLetsGo = () => {
-    setProcessModalVisible(false);
+    setAddCryptoVisible(true);
+  };
+
+  const handleWalletTest = () => {
     setAddCryptoVisible(true);
   };
 
@@ -1385,8 +1354,6 @@ function VaultScreen({ route, navigation }) {
         t={t}
         isDarkMode={isDarkMode}
         handleWalletTest={handleWalletTest}
-        processModalVisible={processModalVisible}
-        setProcessModalVisible={setProcessModalVisible}
         processMessages={processMessages}
         showLetsGoButton={showLetsGoButton}
         handleLetsGo={handleLetsGo}

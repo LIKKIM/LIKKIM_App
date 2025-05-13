@@ -40,16 +40,7 @@ import { CryptoProvider, DeviceContext } from "./utils/DeviceContext";
 import i18n from "./config/i18n";
 import * as SplashScreen from "expo-splash-screen";
 import { bluetoothConfig } from "./env/bluetoothConfig";
-import {
-  Svg,
-  Path,
-  Circle,
-  Rect,
-  G,
-  Defs,
-  LinearGradient,
-  Stop,
-} from "react-native-svg";
+import { Svg, Path, G } from "react-native-svg";
 
 const serviceUUID = bluetoothConfig.serviceUUID;
 const writeCharacteristicUUID = bluetoothConfig.writeCharacteristicUUID;

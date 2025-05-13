@@ -680,15 +680,7 @@ const VaultScreenStyles = (isDarkMode) => {
       padding: 35,
       alignItems: "center",
     },
-    processModalView: {
-      margin: 20,
-      width: "90%",
-      height: 400,
-      backgroundColor: modalBackgroundColor,
-      borderRadius: 20,
-      padding: 35,
-      alignItems: "center",
-    },
+
     modalButton: {
       backgroundColor: BluetoothBtnColor,
       padding: 10,
