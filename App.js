@@ -13,6 +13,7 @@ import {
   Modal,
   TouchableWithoutFeedback,
   Vibration,
+  Platform,
 } from "react-native";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -143,6 +144,26 @@ function AppContent({
 }) {
   const [scale] = useState(new Animated.Value(1)); // Animated scale value
 
+  const handleBluetoothPairing = async () => {
+    if (Platform.OS === "android") {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        {
+          title: t("Location Permission"),
+          message: t("We need access to your location to use Bluetooth."),
+          buttonNeutral: t("Ask Me Later"),
+          buttonNegative: t("Cancel"),
+          buttonPositive: t("OK"),
+        }
+      );
+      if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
+        console.log("Location permission denied");
+        return;
+      }
+    }
+    //  setModalVisible(true);
+    // scanDevices();
+  };
   // Handle press in animation (scale down)
   const handlePressIn = () => {
     Animated.timing(scale, {
@@ -367,6 +388,7 @@ function AppContent({
             onPressOut={handlePressOut}
             onPress={() => {
               Vibration.vibrate();
+              handleBluetoothPairing();
             }}
             //     onPress={() => alert("Button Pressed!")}
           >
