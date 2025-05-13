@@ -330,7 +330,53 @@ function AppContent({
       isModalVisible: true,
     });
   };
+  const handleDevicePress = async (device) => {
+    setReceivedAddresses({});
+    setVerificationStatus(null);
+    setSelectedDevice(device);
+    setModalVisible(false);
+    try {
+      await device.connect();
+      await device.discoverAllServicesAndCharacteristics();
+      console.log("Device connected and services discovered");
 
+      const sendparseDeviceCodeedValue = async (parseDeviceCodeedValue) => {
+        try {
+          const message = `ID:${parseDeviceCodeedValue}`;
+          const bufferMessage = Buffer.from(message, "utf-8");
+          const base64Message = bufferMessage.toString("base64");
+          await device.writeCharacteristicWithResponseForService(
+            serviceUUID,
+            writeCharacteristicUUID,
+            base64Message
+          );
+          console.log(`Sent parseDeviceCodeed value: ${message}`);
+        } catch (error) {
+          console.log("Error sending parseDeviceCodeed value:", error);
+        }
+      };
+
+      monitorVerificationCode(device, sendparseDeviceCodeedValue);
+      setTimeout(async () => {
+        try {
+          const requestString = "request";
+          const bufferRequestString = Buffer.from(requestString, "utf-8");
+          const base64requestString = bufferRequestString.toString("base64");
+          await device.writeCharacteristicWithResponseForService(
+            serviceUUID,
+            writeCharacteristicUUID,
+            base64requestString
+          );
+          console.log("Sent 'request'");
+        } catch (error) {
+          console.log("Error sending 'request':", error);
+        }
+      }, 200);
+      setSecurityCodeModalVisible(true);
+    } catch (error) {
+      console.log("Error connecting or sending command to device:", error);
+    }
+  };
   return (
     <View style={{ flex: 1, backgroundColor: bottomBackgroundColor }}>
       <Tab.Navigator
@@ -513,7 +559,7 @@ function AppContent({
         visible={modalVisible}
         devices={devices}
         isScanning={isScanning}
-        //   handleDevicePress={handleDevicePress}
+        handleDevicePress={handleDevicePress}
         onCancel={handleCancel}
         verifiedDevices={verifiedDevices}
       />
