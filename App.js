@@ -335,6 +335,34 @@ function AppContent({
           )}
         </Tab.Screen>
       </Tab.Navigator>
+      {cryptoCards.length === 0 && (
+        <View
+          style={{
+            position: "absolute",
+            bottom: 70, // Position it above the tab bar
+            left: "50%",
+            transform: [{ translateX: -25 }], // Adjust to center the button horizontally
+            zIndex: 10, // Make sure the button is above the tab bar
+          }}
+        >
+          <TouchableOpacity>
+            {/* Correctly closing the TouchableOpacity */}
+            <View
+              style={{
+                width: 60,
+                height: 60,
+                borderRadius: 30,
+                backgroundColor: tabBarActiveTintColor,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Icon name="bluetooth" size={24} color="#fff" />
+            </View>
+          </TouchableOpacity>
+        </View>
+      )}
+
       <StatusBar
         backgroundColor={isDarkMode ? "#21201E" : "#FFFFFF"}
         barStyle={isDarkMode ? "light-content" : "dark-content"}
