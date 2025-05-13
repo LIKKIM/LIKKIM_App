@@ -170,6 +170,47 @@ const SecureDeviceStatus = (props) => {
   const [recipientAddress, setRecipientAddress] = useState("");
   const [previewModalVisible, setPreviewModalVisible] = useState(false);
   const styles = SecureDeviceScreenStyles(isDarkMode);
+  const handleSaveToColdWallet = async () => {
+    console.log("Save to Cold Wallet clicked");
+
+    // 检查 selectedNFT.logoUrl 是否存在并有效
+    if (selectedNFT?.logoUrl) {
+      try {
+        // 使用 fetch 获取图片数据
+        const response = await fetch(selectedNFT.logoUrl);
+        const imageBlob = await response.blob();
+
+        // 将 blob 数据转为图片 URI
+        const imageUri = URL.createObjectURL(imageBlob);
+
+        // 使用 react-native-image-resizer 将图片转换为 JPG 格式
+        const resizedImage = await ImageResizer.createResizedImage(
+          imageUri,
+          800,
+          800,
+          "JPEG",
+          80
+        ); // 调整图片大小并转换为 JPG
+
+        console.log("Converted JPG image:", resizedImage.uri);
+
+        // 使用 fetch 获取调整后的图片并转为 Base64
+        const resizedImageResponse = await fetch(resizedImage.uri);
+        const resizedImageBlob = await resizedImageResponse.blob();
+
+        // 将 Blob 数据转为 Base64 字符串
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          // 获取 Base64 字符串
+          const base64String = reader.result;
+          console.log("Base64 String:", base64String); // 打印 base64 字符串
+        };
+        reader.readAsDataURL(resizedImageBlob); // 将 Blob 转为 Base64 字符串
+      } catch (error) {
+        console.error("Error fetching image or converting to JPG:", error);
+      }
+    }
+  };
 
   // 处理 "Next" 按钮，打开预览 Modal
   const handlePreview = () => {
@@ -990,46 +1031,7 @@ const SecureDeviceStatus = (props) => {
 
                     { flex: 1, marginLeft: 8 },
                   ]}
-                  onPress={async () => {
-                    console.log("Save to Cold Wallet clicked");
-
-                    // 检查 selectedNFT.logoUrl 是否存在并有效
-                    if (selectedNFT?.logoUrl) {
-                      try {
-                        // 使用 fetch 获取图片数据
-                        const response = await fetch(selectedNFT.logoUrl);
-                        const imageBlob = await response.blob();
-
-                        // 将 blob 数据转为图片 URI
-                        const imageUri = URL.createObjectURL(imageBlob);
-
-                        // 使用 react-native-image-resizer 将图片转换为 JPG 格式
-                        ImageResizer.createResizedImage(
-                          imageUri,
-                          800,
-                          800,
-                          "JPEG",
-                          80
-                        ) // 调整图片大小并转换为 JPG
-                          .then((resizedImage) => {
-                            console.log(
-                              "Converted JPG image:",
-                              resizedImage.uri
-                            );
-                            // resizedImage.uri 是转换后的 JPG 图片的 URI
-                            // 可以在这里保存图片或者进行其他操作
-                          })
-                          .catch((err) => {
-                            console.error("Error resizing image:", err);
-                          });
-                      } catch (error) {
-                        console.error(
-                          "Error fetching image or converting to JPG:",
-                          error
-                        );
-                      }
-                    }
-                  }}
+                  onPress={handleSaveToColdWallet}
                 >
                   <Text style={VaultScreenStyle.NFTButtonText}>
                     {t("Save to Device")}
