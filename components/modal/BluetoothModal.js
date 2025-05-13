@@ -12,7 +12,7 @@ import { BlurView } from "expo-blur";
 import { MaterialIcons as Icon } from "@expo/vector-icons";
 import * as Location from "expo-location";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import { useTranslation } from "react-i18next";
 const BluetoothModal = ({
   visible,
   devices,

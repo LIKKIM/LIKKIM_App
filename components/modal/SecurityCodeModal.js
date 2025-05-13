@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { BlurView } from "expo-blur";
 import { MaterialIcons as Icon } from "@expo/vector-icons";
-
+import { useTranslation } from "react-i18next";
 const SecurityCodeModal = ({
   visible,
   pinCode,
@@ -19,7 +19,6 @@ const SecurityCodeModal = ({
   onCancel,
   styles,
   isDarkMode,
-  t,
   status,
 }) => {
   const { t } = useTranslation();

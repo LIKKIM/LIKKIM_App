@@ -1,8 +1,9 @@
 import React from "react";
 import { View, Text, TouchableOpacity, Image, Modal } from "react-native";
 import { BlurView } from "expo-blur";
-
-const SuccessModal = ({ visible, onClose, message, styles, t }) => {
+import { useTranslation } from "react-i18next";
+const SuccessModal = ({ visible, onClose, message, styles }) => {
+  const { t } = useTranslation();
   return (
     <Modal
       animationType="slide"

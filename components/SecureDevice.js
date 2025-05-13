@@ -1218,7 +1218,6 @@ function SecureDeviceScreen({ onDarkModeChange }) {
         onClose={() => setSuccessModalVisible(false)}
         message={modalMessage}
         styles={SecureDeviceScreenStyle}
-        t={t}
       />
 
       {/* Error Modal */}
