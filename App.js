@@ -3,7 +3,7 @@ import { TextEncoder, TextDecoder } from "text-encoding";
 if (typeof global.TextEncoder === "undefined") global.TextEncoder = TextEncoder;
 if (typeof global.TextDecoder === "undefined") global.TextDecoder = TextDecoder;
 import "intl-pluralrules";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import {
   Animated,
   View,
@@ -23,13 +23,13 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { BlurView } from "expo-blur";
 import { useTranslation } from "react-i18next";
-
 import styles, { darkTheme, lightTheme } from "./styles";
 import VaultScreen from "./components/Vault";
 import ActivityScreen from "./components/Activity";
 import SecureDeviceScreen from "./components/SecureDevice";
 import OnboardingScreen from "./utils/OnboardingScreen";
 import ScreenLock from "./utils/ScreenLock";
+import checkAndReqPermission from "./utils/BluetoothPermissions";
 import DeviceDisplay from "./components/SecureDeviceScreen/DeviceDisplay";
 import SupportPage from "./components/SecureDeviceScreen/SupportPage";
 import { CryptoProvider, DeviceContext } from "./utils/DeviceContext";
@@ -143,6 +143,44 @@ function AppContent({
   setSelectedCardName,
 }) {
   const [scale] = useState(new Animated.Value(1)); // Animated scale value
+  const [isScanning, setIsScanning] = useState(false);
+  const bleManagerRef = useRef(null);
+  const scanDevices = () => {
+    if (Platform.OS !== "web" && !isScanning) {
+      checkAndReqPermission(() => {
+        console.log("Scanning started");
+        setIsScanning(true);
+        const scanOptions = { allowDuplicates: true };
+        const scanFilter = null;
+        bleManagerRef.current.startDeviceScan(
+          scanFilter,
+          scanOptions,
+          (error, device) => {
+            if (error) {
+              console.log("BleManager scanning error:", error);
+              if (error.errorCode === BleErrorCode.BluetoothUnsupported) {
+                // Bluetooth LE unsupported on device
+              }
+            } else if (device.name && device.name.includes("LIKKIM")) {
+              setDevices((prevDevices) => {
+                if (!prevDevices.find((d) => d.id === device.id)) {
+                  return [...prevDevices, device];
+                }
+                return prevDevices;
+              });
+            }
+          }
+        );
+        setTimeout(() => {
+          console.log("Scanning stopped");
+          bleManagerRef.current.stopDeviceScan();
+          setIsScanning(false);
+        }, 2000);
+      });
+    } else {
+      console.log("Attempt to scan while already scanning");
+    }
+  };
 
   const handleBluetoothPairing = async () => {
     if (Platform.OS === "android") {
@@ -162,7 +200,7 @@ function AppContent({
       }
     }
     //  setModalVisible(true);
-    // scanDevices();
+    scanDevices();
   };
   // Handle press in animation (scale down)
   const handlePressIn = () => {
