@@ -1172,12 +1172,12 @@ function SecureDeviceScreen({ onDarkModeChange }) {
       {/* Bluetooth Modal */}
       <BluetoothModal
         visible={modalVisible}
-        //   devices={devices}
-        //   isScanning={isScanning}
-        handleDevicePress={handleDevicePress}
         onCancel={handleCancel}
+        handleDevicePress={handleDevicePress}
         verifiedDevices={verifiedDevices}
         onDisconnectPress={handleDisconnectPress}
+        //   devices={devices}
+        //   isScanning={isScanning}
       />
 
       {/* PIN Modal */}
