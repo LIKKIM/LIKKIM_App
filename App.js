@@ -39,6 +39,10 @@ import BluetoothModal from "./components/modal/BluetoothModal";
 import { CryptoProvider, DeviceContext } from "./utils/DeviceContext";
 import i18n from "./config/i18n";
 import * as SplashScreen from "expo-splash-screen";
+import { bluetoothConfig } from "./env/bluetoothConfig";
+const serviceUUID = bluetoothConfig.serviceUUID;
+const writeCharacteristicUUID = bluetoothConfig.writeCharacteristicUUID;
+const notifyCharacteristicUUID = bluetoothConfig.notifyCharacteristicUUID;
 
 if (__DEV__) {
   import("./ReactotronConfig").then(() => console.log("Reactotron Configured"));
@@ -152,6 +156,10 @@ function AppContent({
   const restoreIdentifier = Constants.installationId;
   const [devices, setDevices] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
+  const [SecurityCodeModalVisible, setSecurityCodeModalVisible] =
+    useState(false);
+  const [pinCode, setPinCode] = useState("");
+  const [verificationStatus, setVerificationStatus] = useState(null);
   useEffect(() => {
     if (Platform.OS !== "web") {
       bleManagerRef.current = new BleManager({
@@ -229,7 +237,115 @@ function AppContent({
     setModalVisible(true);
     scanDevices();
   };
-  // Handle press in animation (scale down)
+  const handlePinSubmit = async () => {
+    setSecurityCodeModalVisible(false);
+    setCheckStatusModalVisible(false);
+    const verificationCodeValue = receivedVerificationCode.trim();
+    const pinCodeValue = pinCode.trim();
+
+    console.log(`User PIN: ${pinCodeValue}`);
+    console.log(`Received data: ${verificationCodeValue}`);
+
+    const [prefix, rest] = verificationCodeValue.split(":");
+    if (prefix !== "PIN" || !rest) {
+      console.log("Invalid verification format:", verificationCodeValue);
+      setVerificationStatus("fail");
+      return;
+    }
+
+    const [receivedPin, flag] = rest.split(",");
+    if (!receivedPin || (flag !== "Y" && flag !== "N")) {
+      console.log("Invalid verification format:", verificationCodeValue);
+      setVerificationStatus("fail");
+      return;
+    }
+
+    console.log(`Extracted PIN: ${receivedPin}`);
+    console.log(`Flag: ${flag}`);
+
+    if (pinCodeValue === receivedPin) {
+      console.log("PIN verified successfully");
+      setVerificationStatus("success");
+      setVerifiedDevices([selectedDevice.id]);
+      await AsyncStorage.setItem(
+        "verifiedDevices",
+        JSON.stringify([selectedDevice.id])
+      );
+      setIsVerificationSuccessful(true);
+      console.log("Device verified and saved");
+
+      try {
+        const confirmationMessage = "PIN_OK";
+        const bufferConfirmation = Buffer.from(confirmationMessage, "utf-8");
+        const base64Confirmation = bufferConfirmation.toString("base64");
+        await selectedDevice.writeCharacteristicWithResponseForService(
+          serviceUUID,
+          writeCharacteristicUUID,
+          base64Confirmation
+        );
+        console.log("Sent confirmation message:", confirmationMessage);
+      } catch (error) {
+        console.log("Error sending confirmation message:", error);
+      }
+
+      if (flag === "Y") {
+        console.log("Flag Y received; sending 'address' to device");
+        try {
+          const addressMessage = "address";
+          const bufferAddress = Buffer.from(addressMessage, "utf-8");
+          const base64Address = bufferAddress.toString("base64");
+          await selectedDevice.writeCharacteristicWithResponseForService(
+            serviceUUID,
+            writeCharacteristicUUID,
+            base64Address
+          );
+          console.log("Sent 'address' to device");
+          setCheckStatusModalVisible(true);
+        } catch (error) {
+          console.log("Error sending 'address':", error);
+        }
+
+        const pubkeyMessages = [
+          "pubkey:cosmos,m/44'/118'/0'/0/0",
+          "pubkey:ripple,m/44'/144'/0'/0/0",
+          "pubkey:celestia,m/44'/118'/0'/0/0",
+          "pubkey:juno,m/44'/118'/0'/0/0",
+          "pubkey:osmosis,m/44'/118'/0'/0/0",
+        ];
+
+        for (const message of pubkeyMessages) {
+          try {
+            const bufferMessage = Buffer.from(message, "utf-8");
+            const base64Message = bufferMessage.toString("base64");
+            await selectedDevice.writeCharacteristicWithResponseForService(
+              serviceUUID,
+              writeCharacteristicUUID,
+              base64Message
+            );
+            console.log(`Sent message: ${message}`);
+          } catch (error) {
+            console.log(`Error sending message "${message}":`, error);
+          }
+        }
+      } else if (flag === "N") {
+        console.log("Flag N received; no 'address' sent");
+        setCheckStatusModalVisible(true);
+      }
+    } else {
+      console.log("PIN verification failed");
+      setVerificationStatus("fail");
+      if (monitorSubscription) {
+        monitorSubscription.remove();
+        console.log("Stopped monitoring verification code");
+      }
+      if (selectedDevice) {
+        await selectedDevice.cancelConnection();
+        console.log("Disconnected device");
+      }
+    }
+    setPinCode("");
+  };
+
   const handlePressIn = () => {
     Animated.timing(scale, {
       toValue: 0.8, // Scale down to 0.8
@@ -238,7 +354,6 @@ function AppContent({
     }).start();
   };
 
-  // Handle press out animation (scale back to 1)
   const handlePressOut = () => {
     Animated.timing(scale, {
       toValue: 1, // Scale back to normal
@@ -565,14 +680,14 @@ function AppContent({
       />
 
       {/* PIN Modal */}
-      {/*     <SecurityCodeModal
+      <SecurityCodeModal
         visible={SecurityCodeModalVisible}
         pinCode={pinCode}
         setPinCode={setPinCode}
         onSubmit={handlePinSubmit}
         onCancel={() => setSecurityCodeModalVisible(false)}
         status={verificationStatus}
-      /> */}
+      />
     </View>
   );
 }
