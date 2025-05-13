@@ -15,6 +15,8 @@ import {
   Vibration,
   Platform,
 } from "react-native";
+import Constants from "expo-constants";
+import { BleManager, BleErrorCode } from "react-native-ble-plx";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -145,6 +147,28 @@ function AppContent({
   const [scale] = useState(new Animated.Value(1)); // Animated scale value
   const [isScanning, setIsScanning] = useState(false);
   const bleManagerRef = useRef(null);
+  const restoreIdentifier = Constants.installationId;
+  const [devices, setDevices] = useState([]);
+  useEffect(() => {
+    if (Platform.OS !== "web") {
+      bleManagerRef.current = new BleManager({
+        restoreStateIdentifier: restoreIdentifier,
+      });
+
+      const subscription = bleManagerRef.current.onStateChange((state) => {
+        if (state === "PoweredOn") {
+          setTimeout(() => {
+            scanDevices();
+          }, 2000);
+        }
+      }, true);
+
+      return () => {
+        subscription.remove();
+        bleManagerRef.current && bleManagerRef.current.destroy();
+      };
+    }
+  }, []);
   const scanDevices = () => {
     if (Platform.OS !== "web" && !isScanning) {
       checkAndReqPermission(() => {
