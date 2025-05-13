@@ -1175,11 +1175,11 @@ function SecureDeviceScreen({ onDarkModeChange }) {
         devices={devices}
         isScanning={isScanning}
         iconColor={blueToothColor}
+        onDisconnectPress={handleDisconnectPress}
         handleDevicePress={handleDevicePress}
         onCancel={handleCancel}
         verifiedDevices={verifiedDevices}
         SecureDeviceScreenStyle={SecureDeviceScreenStyle}
-        onDisconnectPress={handleDisconnectPress}
       />
 
       {/* PIN Modal */}
@@ -1200,7 +1200,6 @@ function SecureDeviceScreen({ onDarkModeChange }) {
         status={verificationStatus}
         onClose={() => setCheckStatusModalVisible(false)}
         styles={SecureDeviceScreenStyle}
-  
       />
 
       {/* Confirm Disconnect Modal */}
