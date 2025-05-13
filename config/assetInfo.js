@@ -1,22 +1,22 @@
 // assetInfo.js
 export const initialAdditionalCryptos = [
   {
-    name: "Arbitrum", // 数字货币代币的名称
-    shortName: "ARB", // 数字货币代币的缩写名称
-    icon: require("../assets/icon/ARBIcon.png"), // 数子货币的icon
-    cardImage: require("../assets/CardBg/Card15.png"), // 卡片的背景图片
-    chainIcon: require("../assets/icon/ARBIcon.png"), // 数子货币所在的区块链的icon
-    chain: "Arbitrum", // 数子货币所在的区块链的名称 （需要以后删掉因为和queryChainName是完全重复的）
-    chainShortName: "ARB", // 数子货币所在的区块链的名称缩写 （需要以后删掉因为和queryChainShortName完全重复的）
-    queryChainName: "arbitrum", // 数子货币所在的区块链的名称
-    queryChainShortName: "ARB", // 数子货币所在的区块链的名称缩写
-    type: "coin", // 数字货币的类型 只有主币 coin 和 代币xxx两大类类型
-    fee: "0.0", // 交易手续费 默认为0
-    EstimatedValue: "0.0", // 美元价值 = 数字货币数量 x 数字货币的美元价格
-    priceUsd: "0.0", // 数字货币的美元价格
-    Decimals: "", // 保留多少位小数 用于数字货币交易签名用的
+    name: "Arbitrum", // 数字货币代币的名称 (服务器获取)
+    shortName: "ARB", // 数字货币代币的缩写名称 (服务器获取)
+    icon: require("../assets/icon/ARBIcon.png"), // 数子货币的icon (服务器获取)
+    cardImage: require("../assets/CardBg/Card15.png"), // 卡片的背景图片 (服务器获取)
+    chainIcon: require("../assets/icon/ARBIcon.png"), // 数子货币所在的区块链的icon (服务器获取)
+    chain: "Arbitrum", // 数子货币所在的区块链的名称 （需要以后删掉因为和queryChainName是完全重复的）(服务器获取)
+    chainShortName: "ARB", // 数子货币所在的区块链的名称缩写 （需要以后删掉因为和queryChainShortName完全重复的） (服务器获取)
+    queryChainName: "arbitrum", // 数子货币所在的区块链的名称 (服务器获取)
+    queryChainShortName: "ARB", // 数子货币所在的区块链的名称缩写 (服务器获取)
+    type: "coin", // 数字货币的类型 只有主币 coin 和 代币xxx两大类类型 (服务器获取)
+    fee: "0.0", // 交易手续费 默认为0 (服务器获取)
+    EstimatedValue: "0.0", // 美元价值 = 数字货币数量 x 数字货币的美元价格 (服务器获取)
+    priceUsd: "0.0", // 数字货币的美元价格 (服务器获取)
+    Decimals: "", // 保留多少位小数 用于数字货币交易签名用的 (服务器获取)
     address: "", // 这个区块链的地址也就是本数字货币的地址（从嵌入式设备连接蓝牙后刷新记录获得）
-    contractAddress: "", // 数字货币的合约地址 用于数字货币签名交易用的
+    contractAddress: "", // 数字货币的合约地址 用于数字货币签名交易用的 (服务器获取)
     balance: "0.0", // 数字货币的数量
     publicKey: "", // 这个区块链的公钥（从嵌入式设备连接蓝牙后刷新记录获得）
   },
