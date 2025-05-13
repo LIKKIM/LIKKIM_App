@@ -388,7 +388,7 @@ function VaultScreen({ route, navigation }) {
                       : "#888",
                 }}
               >
-                Gallery
+                {t("Gallery ")}
               </Text>
             </TouchableOpacity>
           </View>
