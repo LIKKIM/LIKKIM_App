@@ -170,27 +170,25 @@ const SecureDeviceStatus = (props) => {
   const [recipientAddress, setRecipientAddress] = useState("");
   const [previewModalVisible, setPreviewModalVisible] = useState(false);
   const styles = SecureDeviceScreenStyles(isDarkMode);
-  const handleSaveToColdWallet = async () => {
+  const [dataUrl, setDataUrl] = useState(null);
+
+  const handleSaveToDevice = async () => {
     console.log("Save to Cold Wallet clicked");
 
-    // 检查 selectedNFT.logoUrl 是否存在并有效
     if (selectedNFT?.logoUrl) {
       try {
         // 使用 fetch 获取图片数据
         const response = await fetch(selectedNFT.logoUrl);
         const imageBlob = await response.blob();
 
-        // 将 blob 数据转为图片 URI
-        const imageUri = URL.createObjectURL(imageBlob);
-
         // 使用 react-native-image-resizer 将图片转换为 JPG 格式
         const resizedImage = await ImageResizer.createResizedImage(
-          imageUri,
+          URL.createObjectURL(imageBlob),
           800,
           800,
           "JPEG",
           80
-        ); // 调整图片大小并转换为 JPG
+        );
 
         console.log("Converted JPG image:", resizedImage.uri);
 
@@ -201,9 +199,17 @@ const SecureDeviceStatus = (props) => {
         // 将 Blob 数据转为 Base64 字符串
         const reader = new FileReader();
         reader.onloadend = () => {
-          // 获取 Base64 字符串
           const base64String = reader.result;
-          console.log("Base64 String:", base64String); // 打印 base64 字符串
+
+          // 创建 Data URL
+          const dataUrl = `data:image/jpeg;base64,${
+            base64String.split(",")[1]
+          }`;
+
+          console.log("Generated Data:", dataUrl);
+
+          // 保存 Data URL 到状态
+          setDataUrl(dataUrl);
         };
         reader.readAsDataURL(resizedImageBlob); // 将 Blob 转为 Base64 字符串
       } catch (error) {
@@ -1031,7 +1037,7 @@ const SecureDeviceStatus = (props) => {
 
                     { flex: 1, marginLeft: 8 },
                   ]}
-                  onPress={handleSaveToColdWallet}
+                  onPress={handleSaveToDevice}
                 >
                   <Text style={VaultScreenStyle.NFTButtonText}>
                     {t("Save to Device")}
