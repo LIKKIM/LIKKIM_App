@@ -1,5 +1,5 @@
 // modal/BluetoothModal.js
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -12,23 +12,22 @@ import { BlurView } from "expo-blur";
 import { MaterialIcons as Icon } from "@expo/vector-icons";
 import * as Location from "expo-location";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useTranslation } from "react-i18next";
-import { DarkModeContext } from "../../utils/DeviceContext";
+
 const BluetoothModal = ({
   visible,
   devices,
   isScanning,
+  iconColor,
   handleDevicePress,
   onCancel,
   verifiedDevices,
   SecureDeviceScreenStyle,
+  t,
   onDisconnectPress,
 }) => {
-  const { t } = useTranslation();
-  const { isDarkMode } = useContext(DarkModeContext);
-  const iconColor = isDarkMode ? "#CCB68C" : "#CFAB95";
   const [locationPermissionGranted, setLocationPermissionGranted] =
     useState(false);
+
   useEffect(() => {
     const requestLocationPermission = async () => {
       const { status } = await Location.requestForegroundPermissionsAsync();
