@@ -285,8 +285,10 @@ const SecureDeviceStatus = (props) => {
   };
 
   useEffect(() => {
-    fetchNFTData();
-  }, []);
+    if (cryptoCards && cryptoCards.length > 0) {
+      fetchNFTData();
+    }
+  }, [cryptoCards]);
 
   const formatBytes = (bytes) => {
     if (!bytes) return "Unknown size";
