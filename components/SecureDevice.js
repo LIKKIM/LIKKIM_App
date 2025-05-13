@@ -1174,7 +1174,6 @@ function SecureDeviceScreen({ onDarkModeChange }) {
         visible={modalVisible}
         devices={devices}
         isScanning={isScanning}
-        iconColor={blueToothColor}
         onDisconnectPress={handleDisconnectPress}
         handleDevicePress={handleDevicePress}
         onCancel={handleCancel}

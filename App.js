@@ -34,6 +34,8 @@ import ScreenLock from "./utils/ScreenLock";
 import checkAndReqPermission from "./utils/BluetoothPermissions";
 import DeviceDisplay from "./components/SecureDeviceScreen/DeviceDisplay";
 import SupportPage from "./components/SecureDeviceScreen/SupportPage";
+import SecurityCodeModal from "./components/modal/SecurityCodeModal";
+import BluetoothModal from "./components/modal/BluetoothModal";
 import { CryptoProvider, DeviceContext } from "./utils/DeviceContext";
 import i18n from "./config/i18n";
 import * as SplashScreen from "expo-splash-screen";
@@ -149,6 +151,7 @@ function AppContent({
   const bleManagerRef = useRef(null);
   const restoreIdentifier = Constants.installationId;
   const [devices, setDevices] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
   useEffect(() => {
     if (Platform.OS !== "web") {
       bleManagerRef.current = new BleManager({
@@ -223,7 +226,7 @@ function AppContent({
         return;
       }
     }
-    //  setModalVisible(true);
+    setModalVisible(true);
     scanDevices();
   };
   // Handle press in animation (scale down)
@@ -244,7 +247,8 @@ function AppContent({
     }).start();
   };
 
-  const { isAppLaunching, cryptoCards } = useContext(DeviceContext);
+  const { isAppLaunching, cryptoCards, verifiedDevices, setVerifiedDevices } =
+    useContext(DeviceContext);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
@@ -316,7 +320,9 @@ function AppContent({
   const tabBarBackgroundColor = isDarkMode ? "#22201F" : "#fff";
   const bottomBackgroundColor = isDarkMode ? "#0E0D0D" : "#EDEBEF";
   const iconColor = isDarkMode ? "#ffffff" : "#000000";
-
+  const handleCancel = () => {
+    setModalVisible(false);
+  };
   const handleConfirmDelete = () => {
     setHeaderDropdownVisible(false);
     navigation.navigate("Assets", {
@@ -502,6 +508,25 @@ function AppContent({
           </TouchableOpacity>
         </Modal>
       )}
+      {/* Bluetooth Modal */}
+      <BluetoothModal
+        visible={modalVisible}
+        devices={devices}
+        isScanning={isScanning}
+        //   handleDevicePress={handleDevicePress}
+        onCancel={handleCancel}
+        verifiedDevices={verifiedDevices}
+      />
+
+      {/* PIN Modal */}
+      {/*     <SecurityCodeModal
+        visible={SecurityCodeModalVisible}
+        pinCode={pinCode}
+        setPinCode={setPinCode}
+        onSubmit={handlePinSubmit}
+        onCancel={() => setSecurityCodeModalVisible(false)}
+        status={verificationStatus}
+      /> */}
     </View>
   );
 }
