@@ -8,88 +8,91 @@ import {
   FlatList,
   TouchableOpacity,
   Platform,
+  PermissionsAndroid,
 } from "react-native";
 import { BlurView } from "expo-blur";
 import { MaterialIcons as Icon } from "@expo/vector-icons";
 import * as Location from "expo-location";
+import Constants from "expo-constants";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useTranslation } from "react-i18next";
 import { DarkModeContext, DeviceContext } from "../../utils/DeviceContext";
 import checkAndReqPermission from "../../utils/BluetoothPermissions";
 import { BleManager, BleErrorCode } from "react-native-ble-plx";
+import SecureDeviceScreenStyles from "../../styles/SecureDeviceScreenStyle";
+
 const BluetoothModal = ({
   visible,
   handleDevicePress,
   onCancel,
   verifiedDevices,
-  SecureDeviceScreenStyle,
   onDisconnectPress,
 }) => {
   const { t } = useTranslation();
   const { isDarkMode } = useContext(DarkModeContext);
+  const styles = SecureDeviceScreenStyles(isDarkMode);
   const iconColor = isDarkMode ? "#CCB68C" : "#CFAB95";
   const [devices, setDevices] = useState([]);
   const [isScanning, setIsScanning] = useState(false);
   const bleManagerRef = useRef(new BleManager());
   const scanTimeoutRef = useRef(null);
 
+  const restoreIdentifier = Constants.installationId;
+
+  useEffect(() => {
+    if (Platform.OS === "web") return;
+    bleManagerRef.current = new BleManager({
+      restoreStateIdentifier: restoreIdentifier,
+    });
+    const subscription = bleManagerRef.current.onStateChange((state) => {
+      if (state === "PoweredOn" && visible) {
+        setTimeout(startScanning, 2000);
+      }
+    }, true);
+
+    return () => {
+      subscription.remove();
+      bleManagerRef.current.destroy();
+    };
+  }, []);
+
   const startScanning = () => {
     if (Platform.OS === "web" || isScanning) return;
+    setDevices([]);
+    setIsScanning(true);
     checkAndReqPermission(() => {
-      setDevices([]);
-      setIsScanning(true);
       bleManagerRef.current.startDeviceScan(
         null,
         { allowDuplicates: true },
         (error, device) => {
           if (error) {
             console.log("BleManager scanning error:", error);
-          } else if (device.name && device.name.includes("LIKKIM")) {
-            setDevices((prev) => {
-              if (!prev.find((d) => d.id === device.id)) {
-                return [...prev, device];
-              }
-              return prev;
-            });
+            return;
+          }
+          if (device.name && device.name.includes("LIKKIM")) {
+            setDevices((prev) =>
+              prev.find((d) => d.id === device.id) ? prev : [...prev, device]
+            );
           }
         }
       );
-      scanTimeoutRef.current = setTimeout(() => {
-        stopScanning();
-      }, 2000);
     });
-  };
 
-  const stopScanning = () => {
-    if (!isScanning) return;
-    bleManagerRef.current.stopDeviceScan();
-    setIsScanning(false);
-    clearTimeout(scanTimeoutRef.current);
+    setTimeout(() => {
+      bleManagerRef.current.stopDeviceScan();
+      setIsScanning(false);
+    }, 2000);
   };
 
   useEffect(() => {
     if (visible) {
       startScanning();
     } else {
-      stopScanning();
+      bleManagerRef.current.stopDeviceScan();
+      setIsScanning(false);
     }
   }, [visible]);
 
-  useEffect(() => {
-    return () => {
-      stopScanning();
-      bleManagerRef.current.destroy();
-    };
-  }, []);
-
-  useEffect(
-    () => () => {
-      // cleanup
-      stopScanning();
-      bleManagerRef.current.destroy();
-    },
-    []
-  );
   const [locationPermissionGranted, setLocationPermissionGranted] =
     useState(false);
   useEffect(() => {
@@ -169,20 +172,18 @@ const BluetoothModal = ({
       visible={visible}
       onRequestClose={onCancel}
     >
-      <BlurView intensity={10} style={SecureDeviceScreenStyle.centeredView}>
-        <View style={SecureDeviceScreenStyle.bluetoothModalView}>
-          <Text style={SecureDeviceScreenStyle.bluetoothModalTitle}>
+      <BlurView intensity={10} style={styles.centeredView}>
+        <View style={styles.bluetoothModalView}>
+          <Text style={styles.bluetoothModalTitle}>
             {t("LOOKING FOR DEVICES")}
           </Text>
           {isScanning ? (
             <View style={{ alignItems: "center" }}>
               <Image
                 source={require("../../assets/gif/Bluetooth.gif")}
-                style={SecureDeviceScreenStyle.bluetoothImg}
+                style={styles.bluetoothImg}
               />
-              <Text style={SecureDeviceScreenStyle.scanModalSubtitle}>
-                {t("Scanning...")}
-              </Text>
+              <Text style={styles.scanModalSubtitle}>{t("Scanning...")}</Text>
             </View>
           ) : (
             devices.length > 0 && (
@@ -199,26 +200,22 @@ const BluetoothModal = ({
                         }
                       }}
                     >
-                      <View style={SecureDeviceScreenStyle.deviceItemContainer}>
+                      <View style={styles.deviceItemContainer}>
                         <Icon
                           name={isVerified ? "mobile-friendly" : "smartphone"}
                           size={24}
                           color={isVerified ? "#3CDA84" : iconColor}
-                          style={SecureDeviceScreenStyle.deviceIcon}
+                          style={styles.deviceIcon}
                         />
-                        <Text style={SecureDeviceScreenStyle.modalSubtitle}>
+                        <Text style={styles.modalSubtitle}>
                           {item.name || item.id}
                         </Text>
                         {isVerified && (
                           <TouchableOpacity
-                            style={SecureDeviceScreenStyle.disconnectButton}
+                            style={styles.disconnectButton}
                             onPress={() => onDisconnectPress(item)}
                           >
-                            <Text
-                              style={
-                                SecureDeviceScreenStyle.disconnectButtonText
-                              }
-                            >
+                            <Text style={styles.disconnectButtonText}>
                               {t("Disconnect")}
                             </Text>
                           </TouchableOpacity>
@@ -236,7 +233,7 @@ const BluetoothModal = ({
                 source={require("../../assets/gif/Search.gif")}
                 style={{ width: 180, height: 180, margin: 30 }}
               />
-              <Text style={SecureDeviceScreenStyle.modalSubtitle}>
+              <Text style={styles.modalSubtitle}>
                 {t(
                   "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled."
                 )}
@@ -244,12 +241,10 @@ const BluetoothModal = ({
             </View>
           )}
           <TouchableOpacity
-            style={SecureDeviceScreenStyle.cancelButtonLookingFor}
+            style={styles.cancelButtonLookingFor}
             onPress={onCancel}
           >
-            <Text style={SecureDeviceScreenStyle.cancelButtonText}>
-              {t("Cancel")}
-            </Text>
+            <Text style={styles.cancelButtonText}>{t("Cancel")}</Text>
           </TouchableOpacity>
         </View>
       </BlurView>
