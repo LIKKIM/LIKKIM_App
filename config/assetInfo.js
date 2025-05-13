@@ -27,11 +27,12 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/DAIIcon.png"),
     cardImage: require("../assets/CardBg/Card55.png"),
     address: "",
-    chain: "Arbitrum",
-    chainShortName: "ARB",
-    queryChainShortName: "ARB",
+    chain: "Arbitrum", // (和上一个相同)
+    chainShortName: "ARB", // (和上一个相同)
+    queryChainName: "arbitrum", // (和上一个相同)
+    queryChainShortName: "ARB", // (和上一个相同)
     chainIcon: require("../assets/icon/ARBIcon.png"),
-    queryChainName: "arbitrum",
+
     type: "ARBITRUM",
     fee: "0.0",
     EstimatedValue: "0.0",
