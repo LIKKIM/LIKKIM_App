@@ -48,25 +48,6 @@ export default function App() {
   const [isFirstLaunch, setIsFirstLaunch] = useState(null);
   const [headerDropdownVisible, setHeaderDropdownVisible] = useState(false);
   const [selectedCardName, setSelectedCardName] = useState("");
-  const [scale] = useState(new Animated.Value(1)); // Animated scale value
-
-  // Handle press in animation (scale down)
-  const handlePressIn = () => {
-    Animated.timing(scale, {
-      toValue: 0.8, // Scale down to 0.8
-      duration: 150, // Duration of the scale animation
-      useNativeDriver: true,
-    }).start();
-  };
-
-  // Handle press out animation (scale back to 1)
-  const handlePressOut = () => {
-    Animated.timing(scale, {
-      toValue: 1, // Scale back to normal
-      duration: 150, // Duration of the scale animation
-      useNativeDriver: true,
-    }).start();
-  };
 
   useEffect(() => {
     setTimeout(() => {
@@ -158,6 +139,26 @@ function AppContent({
   selectedCardName,
   setSelectedCardName,
 }) {
+  const [scale] = useState(new Animated.Value(1)); // Animated scale value
+
+  // Handle press in animation (scale down)
+  const handlePressIn = () => {
+    Animated.timing(scale, {
+      toValue: 0.8, // Scale down to 0.8
+      duration: 150, // Duration of the scale animation
+      useNativeDriver: true,
+    }).start();
+  };
+
+  // Handle press out animation (scale back to 1)
+  const handlePressOut = () => {
+    Animated.timing(scale, {
+      toValue: 1, // Scale back to normal
+      duration: 150, // Duration of the scale animation
+      useNativeDriver: true,
+    }).start();
+  };
+
   const { isAppLaunching, cryptoCards } = useContext(DeviceContext);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
@@ -355,7 +356,7 @@ function AppContent({
             position: "absolute",
             bottom: 70, // Position it above the tab bar
             left: "50%",
-            transform: [{ translateX: -25 }], // Adjust to center the button horizontally
+            transform: [{ translateX: -35 }], // Adjust to center the button horizontally
             zIndex: 10, // Make sure the button is above the tab bar
           }}
         >
@@ -366,10 +367,10 @@ function AppContent({
           >
             <Animated.View
               style={{
-                width: 60,
-                height: 60,
-                borderRadius: 30,
-                backgroundColor: "#4CAF50", // Button color
+                width: 70,
+                height: 70,
+                borderRadius: 35,
+                backgroundColor: tabBarActiveTintColor,
                 justifyContent: "center",
                 alignItems: "center",
                 transform: [{ scale }], // Apply scaling transformation
