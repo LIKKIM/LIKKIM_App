@@ -1187,6 +1187,9 @@ function SecureDeviceScreen({ onDarkModeChange }) {
         setPinCode={setPinCode}
         onSubmit={handlePinSubmit}
         onCancel={() => setSecurityCodeModalVisible(false)}
+        styles={SecureDeviceScreenStyle}
+        isDarkMode={isDarkMode}
+        t={t}
         status={verificationStatus}
       />
 
