@@ -2,12 +2,13 @@
 import React from "react";
 import { View, Text, Modal, Image, TouchableOpacity } from "react-native";
 import { BlurView } from "expo-blur";
-
+import { useTranslation } from "react-i18next";
 import SuccessGif from "../../assets/gif/Success.gif";
 import FailGif from "../../assets/gif/Fail.gif";
 import PendingGif from "../../assets/gif/Pending.gif";
 
-const CheckStatusModal = ({ visible, status, onClose, styles, t }) => {
+const CheckStatusModal = ({ visible, status, onClose, styles }) => {
+  const { t } = useTranslation();
   let imageSource;
   let title;
   let subtitle;

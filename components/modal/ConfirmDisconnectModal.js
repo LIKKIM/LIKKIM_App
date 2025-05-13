@@ -2,14 +2,9 @@
 import React from "react";
 import { View, Text, TouchableOpacity, Modal } from "react-native";
 import { BlurView } from "expo-blur";
-
-const ConfirmDisconnectModal = ({
-  visible,
-  onConfirm,
-  onCancel,
-  styles,
-  t,
-}) => {
+import { useTranslation } from "react-i18next";
+const ConfirmDisconnectModal = ({ visible, onConfirm, onCancel, styles }) => {
+  const { t } = useTranslation();
   return (
     <Modal
       animationType="slide"

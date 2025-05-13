@@ -1200,7 +1200,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
         status={verificationStatus}
         onClose={() => setCheckStatusModalVisible(false)}
         styles={SecureDeviceScreenStyle}
-        t={t}
+  
       />
 
       {/* Confirm Disconnect Modal */}
@@ -1209,7 +1209,6 @@ function SecureDeviceScreen({ onDarkModeChange }) {
         onConfirm={confirmDisconnect}
         onCancel={cancelDisconnect}
         styles={SecureDeviceScreenStyle}
-        t={t}
       />
 
       {/* Success Modal */}
