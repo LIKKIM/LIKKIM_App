@@ -1191,7 +1191,6 @@ function SecureDeviceScreen({ onDarkModeChange }) {
         onCancel={() => setSecurityCodeModalVisible(false)}
         styles={SecureDeviceScreenStyle}
         isDarkMode={isDarkMode}
-        t={t}
         status={verificationStatus}
       />
 

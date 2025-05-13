@@ -22,6 +22,7 @@ const SecurityCodeModal = ({
   t,
   status,
 }) => {
+  const { t } = useTranslation();
   return (
     <Modal
       animationType="slide"
