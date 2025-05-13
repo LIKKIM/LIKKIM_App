@@ -16,9 +16,9 @@ import * as Location from "expo-location";
 import Constants from "expo-constants";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useTranslation } from "react-i18next";
-import { DarkModeContext, DeviceContext } from "../../utils/DeviceContext";
 import checkAndReqPermission from "../../utils/BluetoothPermissions";
 import { BleManager, BleErrorCode } from "react-native-ble-plx";
+import { DarkModeContext, DeviceContext } from "../../utils/DeviceContext";
 import SecureDeviceScreenStyles from "../../styles/SecureDeviceScreenStyle";
 
 const BluetoothModal = ({

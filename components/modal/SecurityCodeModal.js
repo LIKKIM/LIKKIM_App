@@ -1,5 +1,5 @@
 // modal/SecurityCodeModal.js
-import React from "react";
+import React, { useEffect, useState, useContext, useRef } from "react";
 import {
   View,
   Text,
@@ -9,19 +9,20 @@ import {
   Image,
 } from "react-native";
 import { BlurView } from "expo-blur";
-import { MaterialIcons as Icon } from "@expo/vector-icons";
-
+import { DarkModeContext, DeviceContext } from "../../utils/DeviceContext";
+import SecureDeviceScreenStyles from "../../styles/SecureDeviceScreenStyle";
+import { useTranslation } from "react-i18next";
 const SecurityCodeModal = ({
   visible,
   pinCode,
   setPinCode,
   onSubmit,
   onCancel,
-  styles,
-  isDarkMode,
-  t,
   status,
 }) => {
+  const { t } = useTranslation();
+  const { isDarkMode } = useContext(DarkModeContext);
+  const styles = SecureDeviceScreenStyles(isDarkMode);
   return (
     <Modal
       animationType="slide"
