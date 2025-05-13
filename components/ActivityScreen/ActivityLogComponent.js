@@ -37,17 +37,17 @@ const ActivityLogComponent = ({
       const matchedItems = initialAdditionalCryptos.filter((item) => {
         const address =
           item.address && typeof item.address === "string"
-            ? item.address.trim()
+            ? item.address?.trim()
             : "";
         const shortName =
           item.shortName && typeof item.shortName === "string"
-            ? item.shortName.trim()
+            ? item.shortName?.trim()
             : "";
 
         if (address === "Click the Verify Address Button") {
-          return shortName.toLowerCase() === tx.symbol.trim().toLowerCase();
+          return shortName.toLowerCase() === tx.symbol?.trim().toLowerCase();
         }
-        return address.toLowerCase() === tx.address.trim().toLowerCase();
+        return address.toLowerCase() === tx.address?.trim().toLowerCase();
       });
 
       if (matchedItems.length > 0) {
@@ -67,22 +67,23 @@ const ActivityLogComponent = ({
           const matchedItems = initialAdditionalCryptos.filter((item) => {
             const address =
               item.address && typeof item.address === "string"
-                ? item.address.trim()
+                ? item.address?.trim()
                 : "";
             const shortName =
               item.shortName && typeof item.shortName === "string"
-                ? item.shortName.trim()
+                ? item.shortName?.trim()
                 : "";
 
-            if (item.address.trim() === "Click the Verify Address Button") {
+            if (item.address?.trim() === "Click the Verify Address Button") {
               return (
                 shortName.toLowerCase() ===
-                transaction.symbol.trim().toLowerCase()
+                transaction.symbol?.trim().toLowerCase()
               );
             }
 
             return (
-              address.toLowerCase() === transaction.address.trim().toLowerCase()
+              address.toLowerCase() ===
+              transaction.address?.trim().toLowerCase()
             );
           });
 
@@ -206,15 +207,15 @@ const ActivityLogComponent = ({
           cryptoCards.length > 0 &&
           filteredActivityLog.map((transaction, index) => {
             const matchedItems = initialAdditionalCryptos.filter((item) => {
-              if (item.address.trim() === "Click the Verify Address Button") {
+              if (item.address?.trim() === "Click the Verify Address Button") {
                 return (
-                  item.shortName.trim().toLowerCase() ===
-                  transaction.symbol.trim().toLowerCase()
+                  item.shortName?.trim().toLowerCase() ===
+                  transaction.symbol?.trim().toLowerCase()
                 );
               }
               return (
-                item.address.trim().toLowerCase() ===
-                transaction.address.trim().toLowerCase()
+                item.address?.trim().toLowerCase() ===
+                transaction.address?.trim().toLowerCase()
               );
             });
 
@@ -222,8 +223,8 @@ const ActivityLogComponent = ({
               matchedItems.length > 0 ? matchedItems[0].chainIcon : null;
             const cryptoItem = matchedItems.find(
               (item) =>
-                item.shortName.trim().toUpperCase() ===
-                transaction.symbol.trim().toUpperCase()
+                item.shortName?.trim().toUpperCase() ===
+                transaction.symbol?.trim().toUpperCase()
             );
             const cryptoIcon = cryptoItem ? cryptoItem.icon : null;
 
