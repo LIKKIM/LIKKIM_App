@@ -998,6 +998,8 @@ PODS:
     - React-Core
   - react-native-get-random-values (1.8.0):
     - React-Core
+  - react-native-image-resizer (1.4.5):
+    - React-Core
   - react-native-maps (1.10.0):
     - React-Core
   - react-native-quick-base64 (2.1.2):
@@ -1192,7 +1194,7 @@ PODS:
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
-  - RNSVG (15.11.2):
+  - RNSVG (14.1.0):
     - React-Core
   - SocketRocket (0.6.1)
   - Yoga (1.14.0)
@@ -1251,6 +1253,7 @@ DEPENDENCIES:
   - React-Mapbuffer (from `../node_modules/react-native/ReactCommon`)
   - react-native-ble-plx (from `../node_modules/react-native-ble-plx`)
   - react-native-get-random-values (from `../node_modules/react-native-get-random-values`)
+  - react-native-image-resizer (from `../node_modules/react-native-image-resizer`)
   - react-native-maps (from `../node_modules/react-native-maps`)
   - react-native-quick-base64 (from `../node_modules/react-native-quick-base64`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
@@ -1391,6 +1394,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-ble-plx"
   react-native-get-random-values:
     :path: "../node_modules/react-native-get-random-values"
+  react-native-image-resizer:
+    :path: "../node_modules/react-native-image-resizer"
   react-native-maps:
     :path: "../node_modules/react-native-maps"
   react-native-quick-base64:
@@ -1506,6 +1511,7 @@ SPEC CHECKSUMS:
   React-Mapbuffer: 15dfcfeb4428d8799cce75e7fe85b18b706029e0
   react-native-ble-plx: 819e78cc6d833f2b361b282bbc42be5c652c7878
   react-native-get-random-values: 0fd2b6a3129988d701d10e30f0622d5f039531bc
+  react-native-image-resizer: 17b2d73c030975b6543395c7e7368bc8774c5efa
   react-native-maps: 57f0acd0e7224dbc3772bc554a5257060a7bb93c
   react-native-quick-base64: b22d82ec7dbba1987d269f81abc5d1a98d47ea9e
   react-native-safe-area-context: bf9d9d58f0f6726d4a6257088044c2595017579d
@@ -1534,10 +1540,10 @@ SPEC CHECKSUMS:
   RNGestureHandler: dd5543af5c344cb2bdd8de81a8ec85adb5ec4b4b
   RNReanimated: 8adb252a83153bb04b99abf93a09b47d4cac8f92
   RNScreens: 59f615aa0782077560c8eea46c2daec3a716dba9
-  RNSVG: 36ab724902de0406127ef8d63d940c055e2a1442
+  RNSVG: 6d5ed33b6635ed6d6ecb50744dcf127580c39ed5
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: 805bf71192903b20fc14babe48080582fee65a80
 
-PODFILE CHECKSUM: 43ef983da8736bc913db6d0e3d787df79171c03a
+PODFILE CHECKSUM: 4bc81a23b14a69c38ea9795cfccc025aaffa6de3
 
 COCOAPODS: 1.16.2

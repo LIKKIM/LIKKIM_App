@@ -24,6 +24,7 @@ import AddressBookModal from "./../modal/AddressBookModal";
 import SecureDeviceScreenStyles from "../../styles/SecureDeviceScreenStyle";
 import { WebView } from "react-native-webview";
 import { galleryAPI } from "../../env/apiEndpoints";
+import ImageResizer from "react-native-image-resizer";
 const SkeletonImage = ({ source, style, resizeMode }) => {
   const [loaded, setLoaded] = useState(false);
   const skeletonOpacity = useState(new Animated.Value(1))[0];
@@ -989,8 +990,45 @@ const SecureDeviceStatus = (props) => {
 
                     { flex: 1, marginLeft: 8 },
                   ]}
-                  onPress={() => {
+                  onPress={async () => {
                     console.log("Save to Cold Wallet clicked");
+
+                    // 检查 selectedNFT.logoUrl 是否存在并有效
+                    if (selectedNFT?.logoUrl) {
+                      try {
+                        // 使用 fetch 获取图片数据
+                        const response = await fetch(selectedNFT.logoUrl);
+                        const imageBlob = await response.blob();
+
+                        // 将 blob 数据转为图片 URI
+                        const imageUri = URL.createObjectURL(imageBlob);
+
+                        // 使用 react-native-image-resizer 将图片转换为 JPG 格式
+                        ImageResizer.createResizedImage(
+                          imageUri,
+                          800,
+                          800,
+                          "JPEG",
+                          80
+                        ) // 调整图片大小并转换为 JPG
+                          .then((resizedImage) => {
+                            console.log(
+                              "Converted JPG image:",
+                              resizedImage.uri
+                            );
+                            // resizedImage.uri 是转换后的 JPG 图片的 URI
+                            // 可以在这里保存图片或者进行其他操作
+                          })
+                          .catch((err) => {
+                            console.error("Error resizing image:", err);
+                          });
+                      } catch (error) {
+                        console.error(
+                          "Error fetching image or converting to JPG:",
+                          error
+                        );
+                      }
+                    }
                   }}
                 >
                   <Text style={VaultScreenStyle.NFTButtonText}>
