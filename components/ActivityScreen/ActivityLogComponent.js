@@ -61,8 +61,14 @@ const ActivityLogComponent = ({
       ? ActivityLog.filter((tx) => tx.amount > 0)
       : ActivityLog.filter((transaction) => {
           const matchedItems = initialAdditionalCryptos.filter((item) => {
-            const address = item.address ? item.address.trim() : "";
-            const shortName = item.shortName ? item.shortName.trim() : "";
+            const address =
+              item.address && typeof item.address === "string"
+                ? item.address.trim()
+                : "";
+            const shortName =
+              item.shortName && typeof item.shortName === "string"
+                ? item.shortName.trim()
+                : "";
 
             if (item.address.trim() === "Click the Verify Address Button") {
               return (
