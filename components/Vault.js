@@ -490,7 +490,6 @@ function VaultScreen({ route, navigation }) {
 
   useEffect(() => {
     if (modalVisible) {
-      // 重置 tabOpacity 为 1
       Animated.timing(tabOpacity, {
         toValue: 1,
         duration: 200,
@@ -972,31 +971,6 @@ function VaultScreen({ route, navigation }) {
           setReceivedVerificationCode(receivedDataString);
           console.log("Complete PIN data received:", receivedDataString);
         }
-      }
-    );
-  };
-  const monitorWalletCreationResult = (device) => {
-    monitorSubscription = device.monitorCharacteristicForService(
-      serviceUUID,
-      notifyCharacteristicUUID,
-      (error, characteristic) => {
-        if (error) {
-          if (error.message.includes("Operation was cancelled")) {
-            console.log("监听操作被取消，正在重新连接...");
-            reconnectDevice(device); // 主动重连
-          } else if (error.message.includes("Unknown error occurred")) {
-            console.log("未知错误，可能是一个Bug:", error.message);
-            if (error.reason) {
-              console.log("错误原因:", error.reason);
-            }
-            reconnectDevice(device); // 主动重连
-          } else {
-            console.log("监听设备响应时出错:", error.message);
-          }
-          //  return;
-        }
-        // Base64解码接收到的数据
-        const receivedData = Buffer.from(characteristic.value, "base64");
       }
     );
   };
