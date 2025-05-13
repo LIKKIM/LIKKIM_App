@@ -12,6 +12,7 @@ import {
   StatusBar,
   Modal,
   TouchableWithoutFeedback,
+  Vibration,
 } from "react-native";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -364,7 +365,9 @@ function AppContent({
           <TouchableWithoutFeedback
             onPressIn={handlePressIn}
             onPressOut={handlePressOut}
-
+            onPress={() => {
+              Vibration.vibrate();
+            }}
             //     onPress={() => alert("Button Pressed!")}
           >
             <Animated.View
