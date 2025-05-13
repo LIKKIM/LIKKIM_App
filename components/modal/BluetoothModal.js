@@ -1,5 +1,5 @@
 // modal/BluetoothModal.js
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useRef } from "react";
 import {
   View,
   Text,
@@ -7,17 +7,18 @@ import {
   Image,
   FlatList,
   TouchableOpacity,
+  Platform,
 } from "react-native";
 import { BlurView } from "expo-blur";
 import { MaterialIcons as Icon } from "@expo/vector-icons";
 import * as Location from "expo-location";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useTranslation } from "react-i18next";
-import { DarkModeContext } from "../../utils/DeviceContext";
+import { DarkModeContext, DeviceContext } from "../../utils/DeviceContext";
+import checkAndReqPermission from "../../utils/BluetoothPermissions";
+import { BleManager, BleErrorCode } from "react-native-ble-plx";
 const BluetoothModal = ({
   visible,
-  devices,
-  isScanning,
   handleDevicePress,
   onCancel,
   verifiedDevices,
@@ -27,6 +28,68 @@ const BluetoothModal = ({
   const { t } = useTranslation();
   const { isDarkMode } = useContext(DarkModeContext);
   const iconColor = isDarkMode ? "#CCB68C" : "#CFAB95";
+  const [devices, setDevices] = useState([]);
+  const [isScanning, setIsScanning] = useState(false);
+  const bleManagerRef = useRef(new BleManager());
+  const scanTimeoutRef = useRef(null);
+
+  const startScanning = () => {
+    if (Platform.OS === "web" || isScanning) return;
+    checkAndReqPermission(() => {
+      setDevices([]);
+      setIsScanning(true);
+      bleManagerRef.current.startDeviceScan(
+        null,
+        { allowDuplicates: true },
+        (error, device) => {
+          if (error) {
+            console.log("BleManager scanning error:", error);
+          } else if (device.name && device.name.includes("LIKKIM")) {
+            setDevices((prev) => {
+              if (!prev.find((d) => d.id === device.id)) {
+                return [...prev, device];
+              }
+              return prev;
+            });
+          }
+        }
+      );
+      scanTimeoutRef.current = setTimeout(() => {
+        stopScanning();
+      }, 2000);
+    });
+  };
+
+  const stopScanning = () => {
+    if (!isScanning) return;
+    bleManagerRef.current.stopDeviceScan();
+    setIsScanning(false);
+    clearTimeout(scanTimeoutRef.current);
+  };
+
+  useEffect(() => {
+    if (visible) {
+      startScanning();
+    } else {
+      stopScanning();
+    }
+  }, [visible]);
+
+  useEffect(() => {
+    return () => {
+      stopScanning();
+      bleManagerRef.current.destroy();
+    };
+  }, []);
+
+  useEffect(
+    () => () => {
+      // cleanup
+      stopScanning();
+      bleManagerRef.current.destroy();
+    },
+    []
+  );
   const [locationPermissionGranted, setLocationPermissionGranted] =
     useState(false);
   useEffect(() => {
