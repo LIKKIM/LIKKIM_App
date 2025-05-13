@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
   StatusBar,
   Modal,
+  TouchableWithoutFeedback,
 } from "react-native";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -145,7 +146,7 @@ function AppContent({
   const handlePressIn = () => {
     Animated.timing(scale, {
       toValue: 0.8, // Scale down to 0.8
-      duration: 150, // Duration of the scale animation
+      duration: 100, // Duration of the scale animation
       useNativeDriver: true,
     }).start();
   };
@@ -154,7 +155,7 @@ function AppContent({
   const handlePressOut = () => {
     Animated.timing(scale, {
       toValue: 1, // Scale back to normal
-      duration: 150, // Duration of the scale animation
+      duration: 100, // Duration of the scale animation
       useNativeDriver: true,
     }).start();
   };
@@ -360,10 +361,11 @@ function AppContent({
             zIndex: 10, // Make sure the button is above the tab bar
           }}
         >
-          <TouchableOpacity
+          <TouchableWithoutFeedback
             onPressIn={handlePressIn}
             onPressOut={handlePressOut}
-            onPress={() => alert("Button Pressed!")}
+
+            //     onPress={() => alert("Button Pressed!")}
           >
             <Animated.View
               style={{
@@ -373,12 +375,12 @@ function AppContent({
                 backgroundColor: tabBarActiveTintColor,
                 justifyContent: "center",
                 alignItems: "center",
-                transform: [{ scale }], // Apply scaling transformation
+                transform: [{ scale }],
               }}
             >
               <Icon name="bluetooth" size={24} color="#fff" />
             </Animated.View>
-          </TouchableOpacity>
+          </TouchableWithoutFeedback>
         </View>
       )}
 
