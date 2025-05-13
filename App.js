@@ -69,7 +69,6 @@ export default function App() {
   };
 
   useEffect(() => {
-    //by will:给予初次渲染时间：修复自定义header闪烁和自定义翻译延迟加载问题
     setTimeout(() => {
       SplashScreen.hideAsync();
     }, 1300);
@@ -87,7 +86,6 @@ export default function App() {
     });
   }, []);
 
-  // Handle completion of onboarding
   const handleOnboardingDone = () => {
     setIsFirstLaunch(false);
   };
@@ -102,7 +100,6 @@ export default function App() {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      {/* by will:优化状态栏颜色多次变动 */}
       <StatusBar backgroundColor={"#fff"} barStyle="dark-content" />
       <CryptoProvider>
         <NavigationContainer>
@@ -164,27 +161,23 @@ function AppContent({
   const { isAppLaunching, cryptoCards } = useContext(DeviceContext);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
-  // Load dark mode value on mount
   useEffect(() => {
     AsyncStorage.getItem("darkMode")
       .then((value) => {
         if (value !== null) {
           const parsedValue = JSON.parse(value);
           setIsDarkMode(parsedValue);
-          console.log("Loaded darkMode value:", parsedValue);
         }
       })
       .catch((error) => console.error("Failed to read darkMode", error));
   }, []);
 
-  // Refresh dark mode value from AsyncStorage
   const refreshDarkMode = () => {
     AsyncStorage.getItem("darkMode")
       .then((value) => {
         if (value !== null) {
           const parsedValue = JSON.parse(value);
           setIsDarkMode(parsedValue);
-          console.log("Refreshed darkMode:", parsedValue);
         }
       })
       .catch((error) => console.error("Failed to refresh darkMode", error));
@@ -196,7 +189,6 @@ function AppContent({
     useState(false);
   const [isScreenLockLoaded, setIsScreenLockLoaded] = useState(false);
 
-  // Listen for navigation state changes to update wallet modal visibility
   useEffect(() => {
     const unsubscribe = navigation.addListener("state", (e) => {
       const rootRoutes = e.data.state?.routes;
@@ -212,16 +204,12 @@ function AppContent({
     return unsubscribe;
   }, [navigation]);
 
-  // Load screen lock feature flag from AsyncStorage
   useEffect(() => {
     AsyncStorage.getItem("screenLockFeatureEnabled")
       .then((value) => {
         if (value !== null) {
           const parsedValue = JSON.parse(value);
           setScreenLockFeatureEnabled(parsedValue);
-          console.log("Loaded screenLockFeatureEnabled:", parsedValue);
-        } else {
-          console.log("screenLockFeatureEnabled is not set in AsyncStorage");
         }
       })
       .catch((error) =>
