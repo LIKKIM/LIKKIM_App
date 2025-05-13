@@ -11,6 +11,7 @@ i18n
     resources: {
       en: {
         translation: {
+          Gallery: "Gallery",
           "Add Wallet": "Add Wallet",
           Close: "Close",
           "Value:": "Value:",
@@ -186,6 +187,7 @@ i18n
       },
       zh: {
         translation: {
+          Gallery: "画廊",
           "Choose asset type:": "请选择资产类型",
           "Enter amount:": "输入金额：",
           "Add Wallet": "添加钱包",
@@ -236,10 +238,8 @@ i18n
           "Security in your hands": "安全尽在掌握",
           Continue: "继续",
           "Scroll down to view all words": "向下滚动查看所有单词",
-
           "Generating your accounts": "生成你的账户",
           "Encrypting your data": "加密你的数据",
-
           "Let's Go": "开始吧",
           "Use spaces between words": "单词之间用空格分隔",
           Version: "版本",
@@ -281,7 +281,6 @@ i18n
           "Invalid address": "地址无效",
           "Detected Network": "检测到的网络",
           "Enter Amount": "输入金额",
-
           Back: "返回",
           Amount: "金额",
           "Payment Address": "付款地址",
@@ -357,6 +356,7 @@ i18n
       },
       "zh-TW": {
         translation: {
+          Gallery: "畫廊",
           "Choose asset type:": "請選擇資產類型：",
           "Enter amount:": "輸入金額：",
           "Add Wallet": "添加錢包",
@@ -525,6 +525,7 @@ i18n
       },
       fr: {
         translation: {
+          Gallery: "Galerie",
           "Choose asset type:": "Choisissez le type d’actif :",
           "Enter amount:": "Saisissez le montant :",
           "Add Wallet": "Ajouter un portefeuille",
@@ -706,6 +707,7 @@ i18n
       },
       es: {
         translation: {
+          Gallery: "Galería",
           "Choose asset type:": "Selecciona el tipo de activo:",
           "Enter amount:": "Ingresa la cantidad:",
           "Add Wallet": "Agregar billetera",
@@ -887,6 +889,7 @@ i18n
       },
       ar: {
         translation: {
+          Gallery: "معرض",
           "Choose asset type:": "اختر نوع الأصل:",
           "Enter amount:": "أدخل المبلغ:",
           "Add Wallet": "إضافة محفظة",
@@ -1060,6 +1063,7 @@ i18n
       },
       ja: {
         translation: {
+          Gallery: "ギャラリー",
           "Choose asset type:": "資産タイプを選択してください：",
           "Enter amount:": "金額を入力してください：",
           "Add Wallet": "ウォレットを追加",
@@ -1236,6 +1240,7 @@ i18n
       },
       ru: {
         translation: {
+          Gallery: "Галерея",
           "Choose asset type:": "Выберите тип актива:",
           "Enter amount:": "Введите сумму:",
           "Add Wallet": "Добавить кошелек",
@@ -1415,6 +1420,7 @@ i18n
       },
       ko: {
         translation: {
+          Gallery: "갤러리",
           "Choose asset type:": "자산 유형을 선택하세요:",
           "Enter amount:": "금액을 입력하세요:",
           "Add Wallet": "지갑 추가",
@@ -1590,6 +1596,7 @@ i18n
       },
       pt: {
         translation: {
+          Gallery: "Galeria",
           "Choose asset type:": "Escolha o tipo de ativo:",
           "Enter amount:": "Digite o valor:",
           "Add Wallet": "Adicionar carteira",
@@ -1770,6 +1777,7 @@ i18n
       },
       "pt-BR": {
         translation: {
+          Gallery: "Galeria",
           "Choose asset type:": "Escolha o tipo de ativo:",
           "Enter amount:": "Digite o valor:",
           "Add Wallet": "Adicionar carteira",
@@ -1950,6 +1958,7 @@ i18n
       },
       it: {
         translation: {
+          Gallery: "Galleria",
           "Choose asset type:": "Seleziona il tipo di asset:",
           "Enter amount:": "Inserisci l'importo:",
           "Add Wallet": "Aggiungi portafoglio",
@@ -2130,6 +2139,7 @@ i18n
       },
       de: {
         translation: {
+          Gallery: "Galerie",
           "Choose asset type:": "Wählen Sie den Asset-Typ aus:",
           "Enter amount:": "Betrag eingeben:",
           "Add Wallet": "Wallet hinzufügen",
@@ -2313,6 +2323,7 @@ i18n
       },
       hi: {
         translation: {
+          Gallery: "गैलरी",
           "Choose asset type:": "एसेट प्रकार चुनें:",
           "Enter amount:": "राशि दर्ज करें:",
           "Add Wallet": "वॉलेट जोड़ें",
@@ -2489,6 +2500,7 @@ i18n
       },
       mn: {
         translation: {
+          Gallery: "Галерей",
           "Choose asset type:": "Хөрөнгийн төрлийг сонгоно уу:",
           "Enter amount:": "Дүнг оруулна уу:",
           "Add Wallet": "Түрийвч нэмэх",
@@ -2667,6 +2679,7 @@ i18n
       },
       th: {
         translation: {
+          Gallery: "แกลเลอรี",
           "Choose asset type:": "เลือกประเภทสินทรัพย์:",
           "Enter amount:": "กรอกจำนวนเงิน:",
           "Add Wallet": "เพิ่มกระเป๋าเงิน",
@@ -2841,6 +2854,7 @@ i18n
       },
       uk: {
         translation: {
+          Gallery: "Галерея",
           "Choose asset type:": "Виберіть тип активу:",
           "Enter amount:": "Введіть суму:",
           "Add Wallet": "Додати гаманець",
@@ -3019,6 +3033,7 @@ i18n
       },
       vi: {
         translation: {
+          Gallery: "Galeria",
           "Choose asset type:": "Chọn loại tài sản:",
           "Enter amount:": "Nhập số tiền:",
           "Add Wallet": "Thêm ví",
@@ -3195,6 +3210,7 @@ i18n
       },
       id: {
         translation: {
+          Gallery: "Galeri",
           "Choose asset type:": "Pilih jenis aset:",
           "Enter amount:": "Masukkan jumlah:",
           "Add Wallet": "Tambah Dompet",
@@ -3371,6 +3387,7 @@ i18n
       },
       tl: {
         translation: {
+          Gallery: "Galeriya",
           "Choose asset type:": "Piliin ang uri ng asset:",
           "Enter amount:": "Ilagay ang halaga:",
           "Add Wallet": "Magdagdag ng Wallet",
@@ -3549,6 +3566,7 @@ i18n
       },
       bn: {
         translation: {
+          Gallery: "গ্যালারি",
           "Choose asset type:": "সম্পদ ধরন নির্বাচন করুন:",
           "Enter amount:": "পরিমাণ লিখুন:",
           "Add Wallet": "ওয়ালেট যোগ করুন",
