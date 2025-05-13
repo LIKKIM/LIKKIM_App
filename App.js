@@ -40,6 +40,17 @@ import { CryptoProvider, DeviceContext } from "./utils/DeviceContext";
 import i18n from "./config/i18n";
 import * as SplashScreen from "expo-splash-screen";
 import { bluetoothConfig } from "./env/bluetoothConfig";
+import {
+  Svg,
+  Path,
+  Circle,
+  Rect,
+  G,
+  Defs,
+  LinearGradient,
+  Stop,
+} from "react-native-svg";
+
 const serviceUUID = bluetoothConfig.serviceUUID;
 const writeCharacteristicUUID = bluetoothConfig.writeCharacteristicUUID;
 const notifyCharacteristicUUID = bluetoothConfig.notifyCharacteristicUUID;
@@ -612,6 +623,23 @@ function AppContent({
             zIndex: 10, // Make sure the button is above the tab bar
           }}
         >
+          <Svg
+            width={156}
+            height={45}
+            viewBox="0 0 156 45"
+            preserveAspectRatio="none"
+            style={{
+              left: "50%",
+              transform: [{ translateX: -78 }], // Adjust to center the button horizontally
+              position: "absolute",
+              bottom: -15,
+            }}
+          >
+            <Path
+              d="M155.999998,0 C155.960048,5.2271426e-05 155.920029,0 155.879998,0 C138.607292,0 123.607522,9.73159464 116.064456,24.011016 L116.072109,24.0008284 C108.100611,36.6193737 94.0290043,45 77.9999979,45 C61.9756639,45 47.9075891,36.6242589 39.9348591,24.0118622 C32.3924733,9.73159464 17.3927034,0 0.119997873,0 L0,0.001 L155.999998,0 Z"
+              fill={bottomBackgroundColor}
+            />
+          </Svg>
           <TouchableWithoutFeedback
             onPressIn={handlePressIn}
             onPressOut={handlePressOut}
