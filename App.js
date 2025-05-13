@@ -4,7 +4,14 @@ if (typeof global.TextEncoder === "undefined") global.TextEncoder = TextEncoder;
 if (typeof global.TextDecoder === "undefined") global.TextDecoder = TextDecoder;
 import "intl-pluralrules";
 import React, { useContext, useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, StatusBar, Modal } from "react-native";
+import {
+  Animated,
+  View,
+  Text,
+  TouchableOpacity,
+  StatusBar,
+  Modal,
+} from "react-native";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -41,6 +48,25 @@ export default function App() {
   const [isFirstLaunch, setIsFirstLaunch] = useState(null);
   const [headerDropdownVisible, setHeaderDropdownVisible] = useState(false);
   const [selectedCardName, setSelectedCardName] = useState("");
+  const [scale] = useState(new Animated.Value(1)); // Animated scale value
+
+  // Handle press in animation (scale down)
+  const handlePressIn = () => {
+    Animated.timing(scale, {
+      toValue: 0.8, // Scale down to 0.8
+      duration: 150, // Duration of the scale animation
+      useNativeDriver: true,
+    }).start();
+  };
+
+  // Handle press out animation (scale back to 1)
+  const handlePressOut = () => {
+    Animated.timing(scale, {
+      toValue: 1, // Scale back to normal
+      duration: 150, // Duration of the scale animation
+      useNativeDriver: true,
+    }).start();
+  };
 
   useEffect(() => {
     //by will:给予初次渲染时间：修复自定义header闪烁和自定义翻译延迟加载问题
@@ -345,20 +371,24 @@ function AppContent({
             zIndex: 10, // Make sure the button is above the tab bar
           }}
         >
-          <TouchableOpacity>
-            {/* Correctly closing the TouchableOpacity */}
-            <View
+          <TouchableOpacity
+            onPressIn={handlePressIn}
+            onPressOut={handlePressOut}
+            onPress={() => alert("Button Pressed!")}
+          >
+            <Animated.View
               style={{
                 width: 60,
                 height: 60,
                 borderRadius: 30,
-                backgroundColor: tabBarActiveTintColor,
+                backgroundColor: "#4CAF50", // Button color
                 justifyContent: "center",
                 alignItems: "center",
+                transform: [{ scale }], // Apply scaling transformation
               }}
             >
               <Icon name="bluetooth" size={24} color="#fff" />
-            </View>
+            </Animated.View>
           </TouchableOpacity>
         </View>
       )}
