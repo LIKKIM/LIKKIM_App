@@ -1,8 +1,6 @@
 PODS:
   - boost (1.83.0)
   - DoubleConversion (1.1.6)
-  - EASClient (0.11.2):
-    - ExpoModulesCore
   - EXApplication (5.8.4):
     - ExpoModulesCore
   - EXConstants (15.4.6):
@@ -16,7 +14,7 @@ PODS:
     - ExpoModulesCore
   - EXNotifications (0.27.8):
     - ExpoModulesCore
-  - Expo (50.0.17):
+  - Expo (50.0.21):
     - ExpoModulesCore
   - expo-dev-client (3.3.12):
     - EXManifests
@@ -99,25 +97,13 @@ PODS:
     - ExpoModulesCore
   - ExpoLocalization (14.8.4):
     - ExpoModulesCore
-  - ExpoModulesCore (1.11.13):
+  - ExpoModulesCore (1.11.14):
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
     - React-NativeModulesApple
     - React-RCTAppDelegate
     - ReactCommon/turbomodule/core
-  - EXStructuredHeaders (3.7.2)
-  - EXUpdates (0.24.13):
-    - EASClient
-    - EXManifests
-    - ExpoModulesCore
-    - EXStructuredHeaders
-    - EXUpdatesInterface
-    - glog
-    - RCT-Folly (= 2022.05.16.00)
-    - ReachabilitySwift
-    - React-Core
-    - sqlite3 (~> 3.42.0)
   - EXUpdatesInterface (0.15.3)
   - FBLazyVector (0.73.6)
   - FBReactNativeSpec (0.73.6):
@@ -161,7 +147,6 @@ PODS:
     - FBLazyVector (= 0.73.6)
     - RCTRequired (= 0.73.6)
     - React-Core (= 0.73.6)
-  - ReachabilitySwift (5.2.4)
   - React (0.73.6):
     - React-Core (= 0.73.6)
     - React-Core/DevSupport (= 0.73.6)
@@ -1006,12 +991,12 @@ PODS:
   - React-Mapbuffer (0.73.6):
     - glog
     - React-debug
-  - react-native-ble-plx (3.1.2):
+  - react-native-ble-plx (3.5.0):
     - glog
     - MultiplatformBleAdapter (= 0.2.0)
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
-  - react-native-get-random-values (1.11.0):
+  - react-native-get-random-values (1.8.0):
     - React-Core
   - react-native-maps (1.10.0):
     - React-Core
@@ -1192,9 +1177,9 @@ PODS:
     - React-jsi (= 0.73.6)
     - React-logger (= 0.73.6)
     - React-perflogger (= 0.73.6)
-  - RNCAsyncStorage (1.23.1):
+  - RNCAsyncStorage (1.21.0):
     - React-Core
-  - RNGestureHandler (2.20.0):
+  - RNGestureHandler (2.14.1):
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
@@ -1207,22 +1192,14 @@ PODS:
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
-  - RNSVG (15.4.0):
-    - React-Core
-  - RNVectorIcons (10.1.0):
-    - glog
-    - RCT-Folly (= 2022.05.16.00)
+  - RNSVG (14.1.0):
     - React-Core
   - SocketRocket (0.6.1)
-  - sqlite3 (3.42.0):
-    - sqlite3/common (= 3.42.0)
-  - sqlite3/common (3.42.0)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
   - boost (from `../node_modules/react-native/third-party-podspecs/boost.podspec`)
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
-  - EASClient (from `../node_modules/expo-eas-client/ios`)
   - EXApplication (from `../node_modules/expo-application/ios`)
   - EXConstants (from `../node_modules/expo-constants/ios`)
   - EXFont (from `../node_modules/expo-font/ios`)
@@ -1243,8 +1220,6 @@ DEPENDENCIES:
   - ExpoLocalAuthentication (from `../node_modules/expo-local-authentication/ios`)
   - ExpoLocalization (from `../node_modules/expo-localization/ios`)
   - ExpoModulesCore (from `../node_modules/expo-modules-core`)
-  - EXStructuredHeaders (from `../node_modules/expo-structured-headers/ios`)
-  - EXUpdates (from `../node_modules/expo-updates/ios`)
   - EXUpdatesInterface (from `../node_modules/expo-updates-interface/ios`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../node_modules/react-native/React/FBReactNativeSpec`)
@@ -1305,7 +1280,6 @@ DEPENDENCIES:
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSVG (from `../node_modules/react-native-svg`)
-  - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -1313,17 +1287,13 @@ SPEC REPOS:
     - fmt
     - libevent
     - MultiplatformBleAdapter
-    - ReachabilitySwift
     - SocketRocket
-    - sqlite3
 
 EXTERNAL SOURCES:
   boost:
     :podspec: "../node_modules/react-native/third-party-podspecs/boost.podspec"
   DoubleConversion:
     :podspec: "../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec"
-  EASClient:
-    :path: "../node_modules/expo-eas-client/ios"
   EXApplication:
     :path: "../node_modules/expo-application/ios"
   EXConstants:
@@ -1364,10 +1334,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo-localization/ios"
   ExpoModulesCore:
     :path: "../node_modules/expo-modules-core"
-  EXStructuredHeaders:
-    :path: "../node_modules/expo-structured-headers/ios"
-  EXUpdates:
-    :path: "../node_modules/expo-updates/ios"
   EXUpdatesInterface:
     :path: "../node_modules/expo-updates-interface/ios"
   FBLazyVector:
@@ -1483,15 +1449,12 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-screens"
   RNSVG:
     :path: "../node_modules/react-native-svg"
-  RNVectorIcons:
-    :path: "../node_modules/react-native-vector-icons"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
   boost: d3f49c53809116a5d38da093a8aa78bf551aed09
   DoubleConversion: fea03f2699887d960129cc54bba7e52542b6f953
-  EASClient: 45d2459af3eb8a0283b50d3de38af7ac9930d747
   EXApplication: d62cd534090692cbf538ea15f69f829b517a40b1
   EXConstants: c82ef9280044accc91fb6082047afdc9a408f61a
   EXFont: 64e653a110eee050ad80dfcd676c4bada0a1ff92
@@ -1499,7 +1462,7 @@ SPEC CHECKSUMS:
   EXLocation: a8037ebc0dc56b2fc5aa20eef8cb52fb6e29c002
   EXManifests: 429136cffa3ae82d1ba3b60b7243fb186615562e
   EXNotifications: 9fd42ca3c5998ae93a2ac869ed9a47467c433219
-  Expo: cc2468201ddaca83b501f78e5cef2b0e1e64ca48
+  Expo: 1b33cb8ab60cff9abf805ed6020af3d1846e457c
   expo-dev-client: 775a683302570193a7ba71032d0b1b82f6ad1454
   expo-dev-launcher: 4b9190f0879290b57ed89cc5c24592d4ce981f85
   expo-dev-menu: efe7323e7f918e437a02f20063eb2b55c13dfe99
@@ -1511,9 +1474,7 @@ SPEC CHECKSUMS:
   ExpoLinearGradient: 501f9bbd83f3ec1d0e0425862b9ef4693605fc1c
   ExpoLocalAuthentication: 5967317248e27c53f77c61ff5608d74329b4c41d
   ExpoLocalization: 7423aa1abcc59209dc2ce2b9bb63776a18023a98
-  ExpoModulesCore: 929ac3f781388c7bc6847606540d88f9b3a24899
-  EXStructuredHeaders: 5b0f47259db047dc1fdfa84752e292c2bfa68ecd
-  EXUpdates: 511911f7e24cf7c16670d1c06e25767abc628fe5
+  ExpoModulesCore: 43ebd65adf2c0e6ffb0de24a41f8f7de12829331
   EXUpdatesInterface: 3e444e2093e25b7ca0999a7d8c16e8392dee70c3
   FBLazyVector: f64d1e2ea739b4d8f7e4740cde18089cd97fe864
   FBReactNativeSpec: 9f2b8b243131565335437dba74923a8d3015e780
@@ -1525,7 +1486,6 @@ SPEC CHECKSUMS:
   RCT-Folly: cd21f1661364f975ae76b3308167ad66b09f53f5
   RCTRequired: ca1d7414aba0b27efcfa2ccd37637edb1ab77d96
   RCTTypeSafety: 678e344fb976ff98343ca61dc62e151f3a042292
-  ReachabilitySwift: 32793e867593cfc1177f5d16491e3a197d2fccda
   React: e296bcebb489deaad87326067204eb74145934ab
   React-callinvoker: d0b7015973fa6ccb592bb0363f6bc2164238ab8c
   React-Codegen: a89833d9b3ccafeb8cc7b2e87800aad8903b8990
@@ -1544,8 +1504,8 @@ SPEC CHECKSUMS:
   React-jsinspector: 85583ef014ce53d731a98c66a0e24496f7a83066
   React-logger: 55764cd993880c6f887505854581c9faf68feff2
   React-Mapbuffer: 15dfcfeb4428d8799cce75e7fe85b18b706029e0
-  react-native-ble-plx: 86e55ae20d01b7a1a04fa7a7f43cc299db835eed
-  react-native-get-random-values: d16467cf726c618e9c7a8c3c39c31faa2244bbba
+  react-native-ble-plx: 819e78cc6d833f2b361b282bbc42be5c652c7878
+  react-native-get-random-values: 0fd2b6a3129988d701d10e30f0622d5f039531bc
   react-native-maps: 57f0acd0e7224dbc3772bc554a5257060a7bb93c
   react-native-quick-base64: b22d82ec7dbba1987d269f81abc5d1a98d47ea9e
   react-native-safe-area-context: bf9d9d58f0f6726d4a6257088044c2595017579d
@@ -1570,14 +1530,12 @@ SPEC CHECKSUMS:
   React-runtimescheduler: a01dfb7ca980edebcc7d2d289ca900dea5d7e28b
   React-utils: 288c9cb9a73bb150c273c84df7c2f8546f28e23f
   ReactCommon: 2e5492a3e3a8e72d635c266405e49d12627e5bf0
-  RNCAsyncStorage: aa75595c1aefa18f868452091fa0c411a516ce11
-  RNGestureHandler: 63810549a2f349953d72811dce838c9669657eee
+  RNCAsyncStorage: a03b770a50541a761447cea9c24536047832124d
+  RNGestureHandler: dd5543af5c344cb2bdd8de81a8ec85adb5ec4b4b
   RNReanimated: 8adb252a83153bb04b99abf93a09b47d4cac8f92
   RNScreens: 59f615aa0782077560c8eea46c2daec3a716dba9
-  RNSVG: eb0fc6e565276cafcffb3e25841a9ed16777519b
-  RNVectorIcons: 0b5569bc6d955e496b3fa9bc6718c390c7f37f51
+  RNSVG: 6d5ed33b6635ed6d6ecb50744dcf127580c39ed5
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
-  sqlite3: f163dbbb7aa3339ad8fc622782c2d9d7b72f7e9c
   Yoga: 805bf71192903b20fc14babe48080582fee65a80
 
 PODFILE CHECKSUM: 43ef983da8736bc913db6d0e3d787df79171c03a
