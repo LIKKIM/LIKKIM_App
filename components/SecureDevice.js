@@ -1179,7 +1179,6 @@ function SecureDeviceScreen({ onDarkModeChange }) {
         onCancel={handleCancel}
         verifiedDevices={verifiedDevices}
         SecureDeviceScreenStyle={SecureDeviceScreenStyle}
-        t={t}
         onDisconnectPress={handleDisconnectPress}
       />
 

@@ -22,9 +22,9 @@ const BluetoothModal = ({
   onCancel,
   verifiedDevices,
   SecureDeviceScreenStyle,
-  t,
   onDisconnectPress,
 }) => {
+  const { t } = useTranslation();
   const [locationPermissionGranted, setLocationPermissionGranted] =
     useState(false);
 
