@@ -36,9 +36,13 @@ const ActivityLogComponent = ({
     ActivityLog.filter((tx) => tx.amount > 0).forEach((tx) => {
       const matchedItems = initialAdditionalCryptos.filter((item) => {
         const address =
-          item.address && item.address.trim ? item.address.trim() : "";
+          item.address && typeof item.address === "string"
+            ? item.address.trim()
+            : "";
         const shortName =
-          item.shortName && item.shortName.trim ? item.shortName.trim() : "";
+          item.shortName && typeof item.shortName === "string"
+            ? item.shortName.trim()
+            : "";
 
         if (address === "Click the Verify Address Button") {
           return shortName.toLowerCase() === tx.symbol.trim().toLowerCase();
