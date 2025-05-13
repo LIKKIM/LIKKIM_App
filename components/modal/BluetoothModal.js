@@ -28,7 +28,7 @@ const BluetoothModal = ({
   const [locationPermissionGranted, setLocationPermissionGranted] =
     useState(false);
 
-  useEffect(() => {
+  /*   useEffect(() => {
     const requestLocationPermission = async () => {
       const { status } = await Location.requestForegroundPermissionsAsync();
       if (status === "granted") {
@@ -39,7 +39,7 @@ const BluetoothModal = ({
     };
 
     requestLocationPermission();
-  }, []);
+  }, []); */
 
   const getDeviceLocation = async () => {
     if (!locationPermissionGranted) {
