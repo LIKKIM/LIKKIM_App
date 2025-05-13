@@ -239,7 +239,7 @@ const SecureDeviceStatus = (props) => {
 
       setNftData(json);
     } catch (error) {
-      console.error("Error fetching NFT data", error);
+      console.log("Error fetching NFT data", error);
     }
   };
 
@@ -284,11 +284,15 @@ const SecureDeviceStatus = (props) => {
     }
   };
 
-  useEffect(() => {
+  /*   useEffect(() => {
     if (cryptoCards && cryptoCards.length > 0) {
       fetchNFTData();
     }
-  }, [cryptoCards]);
+  }, [cryptoCards]); */
+
+  useEffect(() => {
+    fetchNFTData();
+  }, []);
 
   const formatBytes = (bytes) => {
     if (!bytes) return "Unknown size";
