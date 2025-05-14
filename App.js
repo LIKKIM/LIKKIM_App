@@ -31,6 +31,7 @@ import ActivityScreen from "./components/Activity";
 import SecureDeviceScreen from "./components/SecureDevice";
 import OnboardingScreen from "./utils/OnboardingScreen";
 import ScreenLock from "./utils/ScreenLock";
+import { parseDeviceCode } from "./utils/parseDeviceCode";
 import checkAndReqPermission from "./utils/BluetoothPermissions";
 import DeviceDisplay from "./components/SecureDeviceScreen/DeviceDisplay";
 import SupportPage from "./components/SecureDeviceScreen/SupportPage";
@@ -38,6 +39,8 @@ import SecurityCodeModal from "./components/modal/SecurityCodeModal";
 import BluetoothModal from "./components/modal/BluetoothModal";
 import CheckStatusModal from "./components/modal/CheckStatusModal";
 import { CryptoProvider, DeviceContext } from "./utils/DeviceContext";
+import { prefixToShortName } from "./config/chainPrefixes";
+
 import i18n from "./config/i18n";
 import * as SplashScreen from "expo-splash-screen";
 import { bluetoothConfig } from "./env/bluetoothConfig";
@@ -230,7 +233,19 @@ function AppContent({
       console.log("Attempt to scan while already scanning");
     }
   };
+  function hexStringToUint32Array(hexString) {
+    return new Uint32Array([
+      parseInt(hexString.slice(0, 8), 16),
+      parseInt(hexString.slice(8, 16), 16),
+    ]);
+  }
 
+  function uint32ArrayToHexString(uint32Array) {
+    return (
+      uint32Array[0].toString(16).toUpperCase().padStart(8, "0") +
+      uint32Array[1].toString(16).toUpperCase().padStart(8, "0")
+    );
+  }
   const handleBluetoothPairing = async () => {
     if (Platform.OS === "android") {
       const granted = await PermissionsAndroid.request(
