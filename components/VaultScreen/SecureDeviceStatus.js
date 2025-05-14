@@ -192,30 +192,46 @@ const SecureDeviceStatus = (props) => {
 
         console.log("Converted JPG image:", resizedImage.uri);
 
-        // 使用 fetch 获取调整后的图片并转为 Base64
+        // 使用 fetch 获取调整后的图片并转为 HEX
         const resizedImageResponse = await fetch(resizedImage.uri);
         const resizedImageBlob = await resizedImageResponse.blob();
 
-        // 将 Blob 数据转为 Base64 字符串
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          const base64String = reader.result;
+        // 使用 FileReader 将 Blob 转换为 ArrayBuffer
+        const arrayBuffer = await blobToArrayBuffer(resizedImageBlob);
 
-          // 创建 Data URL
-          const dataUrl = `data:image/jpeg;base64,${
-            base64String.split(",")[1]
-          }`;
+        // 将 ArrayBuffer 转为 HEX
+        const hexString = arrayBufferToHex(arrayBuffer);
 
-          console.log("Generated Data:", dataUrl);
+        console.log("Converted HEX string:", hexString);
 
-          // 保存 Data URL 到状态
-          setDataUrl(dataUrl);
-        };
-        reader.readAsDataURL(resizedImageBlob); // 将 Blob 转为 Base64 字符串
+        // 保存 HEX 到状态
+        setDataUrl(hexString); // 或其他相应的状态处理
       } catch (error) {
         console.error("Error fetching image or converting to JPG:", error);
       }
     }
+  };
+
+  // 使用 FileReader 将 Blob 转换为 ArrayBuffer
+  const blobToArrayBuffer = (blob) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        resolve(reader.result); // 读取成功后返回 ArrayBuffer
+      };
+      reader.onerror = reject; // 错误处理
+      reader.readAsArrayBuffer(blob); // 将 Blob 读为 ArrayBuffer
+    });
+  };
+
+  // ArrayBuffer 转换为 HEX 字符串的函数
+  const arrayBufferToHex = (buffer) => {
+    const uint8Array = new Uint8Array(buffer);
+    let hexString = "";
+    uint8Array.forEach((byte) => {
+      hexString += byte.toString(16).padStart(2, "0");
+    });
+    return hexString;
   };
 
   // 处理 "Next" 按钮，打开预览 Modal
