@@ -82,7 +82,7 @@ const SupportPage = () => {
   // Opens email client for support feedback
   const handleEmailPress = () => {
     const email = "lukkeyswiss@gmail.com";
-    const subject = encodeURIComponent("LIKKIM feedback");
+    const subject = encodeURIComponent("LUKKEY feedback");
     const body = encodeURIComponent("Hi support team");
     const url = `mailto:${email}?subject=${subject}&body=${body}`;
     Linking.openURL(url).catch((err) =>
