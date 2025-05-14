@@ -166,13 +166,6 @@ function AppContent({
   const [verificationStatus, setVerificationStatus] = useState(null);
   const [receivedAddresses, setReceivedAddresses] = useState({});
   const [selectedDevice, setSelectedDevice] = useState(null);
-  const theme = isDarkMode ? darkTheme : lightTheme;
-  const tabBarActiveTintColor = isDarkMode ? "#CCB68C" : "#CFAB95";
-  const tabBarInactiveTintColor = isDarkMode ? "#ffffff50" : "#676776";
-  const headerTitleColor = isDarkMode ? "#ffffff" : "#333333";
-  const tabBarBackgroundColor = isDarkMode ? "#22201F" : "#fff";
-  const bottomBackgroundColor = isDarkMode ? "#0E0D0D" : "#EDEBEF";
-  const iconColor = isDarkMode ? "#ffffff" : "#000000";
   const [CheckStatusModalVisible, setCheckStatusModalVisible] = useState(false);
   const [receivedVerificationCode, setReceivedVerificationCode] = useState("");
   useEffect(() => {
@@ -415,7 +408,13 @@ function AppContent({
       })
       .catch((error) => console.error("Failed to refresh darkMode", error));
   };
-
+  const theme = isDarkMode ? darkTheme : lightTheme;
+  const tabBarActiveTintColor = isDarkMode ? "#CCB68C" : "#CFAB95";
+  const tabBarInactiveTintColor = isDarkMode ? "#ffffff50" : "#676776";
+  const headerTitleColor = isDarkMode ? "#ffffff" : "#333333";
+  const tabBarBackgroundColor = isDarkMode ? "#22201F" : "#fff";
+  const bottomBackgroundColor = isDarkMode ? "#0E0D0D" : "#EDEBEF";
+  const iconColor = isDarkMode ? "#ffffff" : "#000000";
   const navigation = useNavigation();
   const [walletModalVisible, setWalletModalVisible] = useState(false);
   const [screenLockFeatureEnabled, setScreenLockFeatureEnabled] =
