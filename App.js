@@ -162,6 +162,8 @@ function AppContent({
     useState(false);
   const [pinCode, setPinCode] = useState("");
   const [verificationStatus, setVerificationStatus] = useState(null);
+  const [receivedAddresses, setReceivedAddresses] = useState({});
+  const [selectedDevice, setSelectedDevice] = useState(null);
   useEffect(() => {
     if (Platform.OS !== "web") {
       bleManagerRef.current = new BleManager({
