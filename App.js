@@ -740,7 +740,7 @@ function AppContent({
               left: "50%",
               transform: [{ translateX: -78 }], // Adjust to center the button horizontally
               position: "absolute",
-              bottom: -15,
+              bottom: -14,
             }}
           >
             <Path
