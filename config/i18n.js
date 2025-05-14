@@ -31,7 +31,7 @@ i18n
           Language: "Language",
           "Dark Mode": "Dark Mode",
           Bluetooth: "Bluetooth",
-          "Pair with Bluetooth": "Pair with Bluetooth",
+          "Manage Paired Devices": "Manage Paired Devices",
           "LOOKING FOR DEVICES": "LOOKING FOR DEVICES",
           "Scanning...": "Scanning...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
@@ -208,7 +208,7 @@ i18n
           Language: "语言",
           "Dark Mode": "黑暗模式",
           Bluetooth: "蓝牙",
-          "Pair with Bluetooth": "与蓝牙配对",
+          "Manage Paired Devices": "管理已配对设备",
           "LOOKING FOR DEVICES": "寻找设备",
           "Scanning...": "扫描中...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
@@ -377,7 +377,7 @@ i18n
           Language: "語言",
           "Dark Mode": "黑暗模式",
           Bluetooth: "藍牙",
-          "Pair with Bluetooth": "與藍牙配對",
+          "Manage Paired Devices": "管理已配對設備",
           "LOOKING FOR DEVICES": "尋找裝置",
           "Scanning...": "掃描中...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
@@ -547,7 +547,7 @@ i18n
           Language: "Langue",
           "Dark Mode": "Mode sombre",
           Bluetooth: "Bluetooth",
-          "Pair with Bluetooth": "Appairer avec Bluetooth",
+          "Manage Paired Devices": "Gérer les appareils appairés",
           "LOOKING FOR DEVICES": "RECHERCHE D’APPAREILS",
           "Scanning...": "Analyse en cours...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
@@ -729,7 +729,7 @@ i18n
           Language: "Idioma",
           "Dark Mode": "Modo oscuro",
           Bluetooth: "Bluetooth",
-          "Pair with Bluetooth": "Emparejar con Bluetooth",
+          "Manage Paired Devices": "Gestionar dispositivos emparejados",
           "LOOKING FOR DEVICES": "BUSCANDO DISPOSITIVOS",
           "Scanning...": "Escaneando...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
@@ -910,7 +910,7 @@ i18n
           Language: "اللغة",
           "Dark Mode": "الوضع الداكن",
           Bluetooth: "بلوتوث",
-          "Pair with Bluetooth": "إقران مع البلوتوث",
+          "Manage Paired Devices": "إدارة الأجهزة المقترنة",
           "LOOKING FOR DEVICES": "جارٍ البحث عن الأجهزة",
           "Scanning...": "جارٍ المسح...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
@@ -1085,7 +1085,7 @@ i18n
           Language: "言語",
           "Dark Mode": "ダークモード",
           Bluetooth: "Bluetooth",
-          "Pair with Bluetooth": "Bluetoothとペアリング",
+          "Manage Paired Devices": "ペアリングされたデバイスの管理",
           "LOOKING FOR DEVICES": "デバイスを検索中",
           "Scanning...": "スキャン中…",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
@@ -1262,7 +1262,7 @@ i18n
           Language: "Язык",
           "Dark Mode": "Темный режим",
           Bluetooth: "Bluetooth",
-          "Pair with Bluetooth": "Соединение по Bluetooth",
+          "Manage Paired Devices": "Управление спаренными устройствами",
           "LOOKING FOR DEVICES": "ПОИСК УСТРОЙСТВ",
           "Scanning...": "Сканирование...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
@@ -1442,7 +1442,7 @@ i18n
           Language: "언어",
           "Dark Mode": "다크 모드",
           Bluetooth: "블루투스",
-          "Pair with Bluetooth": "블루투스 연결",
+          "Manage Paired Devices": "연결된 장치 관리",
           "LOOKING FOR DEVICES": "장치 검색 중",
           "Scanning...": "스캔 중...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
@@ -1618,7 +1618,7 @@ i18n
           Language: "Idioma",
           "Dark Mode": "Modo escuro",
           Bluetooth: "Bluetooth",
-          "Pair with Bluetooth": "Emparelhar com Bluetooth",
+          "Manage Paired Devices": "Gerenciar dispositivos emparelhados",
           "LOOKING FOR DEVICES": "PROCURANDO DISPOSITIVOS",
           "Scanning...": "Escaneando...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
@@ -1799,7 +1799,7 @@ i18n
           Language: "Idioma",
           "Dark Mode": "Modo escuro",
           Bluetooth: "Bluetooth",
-          "Pair with Bluetooth": "Emparelhar com Bluetooth",
+          "Manage Paired Devices": "Gerenciar dispositivos emparelhados",
           "LOOKING FOR DEVICES": "PROCURANDO DISPOSITIVOS",
           "Scanning...": "Escaneando...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
@@ -1980,7 +1980,7 @@ i18n
           Language: "Lingua",
           "Dark Mode": "Modalità scura",
           Bluetooth: "Bluetooth",
-          "Pair with Bluetooth": "Abbina con Bluetooth",
+          "Manage Paired Devices": "Gestire i dispositivi accoppiati",
           "LOOKING FOR DEVICES": "RICERCA DISPOSITIVI",
           "Scanning...": "Scansione in corso...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
@@ -2161,7 +2161,7 @@ i18n
           Language: "Sprache",
           "Dark Mode": "Dunkelmodus",
           Bluetooth: "Bluetooth",
-          "Pair with Bluetooth": "Per Bluetooth koppeln",
+          "Manage Paired Devices": "Verwaltung der gekoppelten Geräte",
           "LOOKING FOR DEVICES": "SUCHE NACH GERÄTEN",
           "Scanning...": "Scanne...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
@@ -2345,7 +2345,7 @@ i18n
           Language: "भाषा",
           "Dark Mode": "डार्क मोड",
           Bluetooth: "ब्लूटूथ",
-          "Pair with Bluetooth": "ब्लूटूथ से पेयर करें",
+          "Manage Paired Devices": "जुड़े उपकरणों का प्रबंधन",
           "LOOKING FOR DEVICES": "उपकरणों की तलाश...",
           "Scanning...": "स्कैनिंग...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
@@ -2522,7 +2522,7 @@ i18n
           Language: "Хэл",
           "Dark Mode": "Бүүдгэр горим",
           Bluetooth: "Bluetooth",
-          "Pair with Bluetooth": "Bluetooth-оор холбох",
+          "Manage Paired Devices": "Холбосон төхөөрөмжүүдийг удирдах",
           "LOOKING FOR DEVICES": "Төхөөрөмж хайж байна",
           "Scanning...": "Скан хийж байна...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
@@ -2701,7 +2701,7 @@ i18n
           Language: "ภาษา",
           "Dark Mode": "โหมดมืด",
           Bluetooth: "บลูทูธ",
-          "Pair with Bluetooth": "จับคู่อุปกรณ์ด้วยบลูทูธ",
+          "Manage Paired Devices": "จัดการอุปกรณ์ที่เชื่อมต่อ",
           "LOOKING FOR DEVICES": "กำลังค้นหาอุปกรณ์",
           "Scanning...": "กำลังสแกน...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
@@ -2876,7 +2876,7 @@ i18n
           Language: "Мова",
           "Dark Mode": "Темний режим",
           Bluetooth: "Bluetooth",
-          "Pair with Bluetooth": "Сполучити через Bluetooth",
+          "Manage Paired Devices": "Керувати спареними пристроями",
           "LOOKING FOR DEVICES": "Пошук пристроїв",
           "Scanning...": "Сканування...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
@@ -3056,7 +3056,7 @@ i18n
           Language: "Ngôn ngữ",
           "Dark Mode": "Chế độ tối",
           Bluetooth: "Bluetooth",
-          "Pair with Bluetooth": "Ghép đôi với Bluetooth",
+          "Manage Paired Devices": "Quản lý thiết bị đã ghép nối",
           "LOOKING FOR DEVICES": "ĐANG TÌM THIẾT BỊ",
           "Scanning...": "Đang quét...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
@@ -3233,7 +3233,7 @@ i18n
           Language: "Bahasa",
           "Dark Mode": "Mode Gelap",
           Bluetooth: "Bluetooth",
-          "Pair with Bluetooth": "Pasangkan dengan Bluetooth",
+          "Manage Paired Devices": "PMengelola perangkat yang dipasangkan",
           "LOOKING FOR DEVICES": "MENCARI PERANGKAT",
           "Scanning...": "Memindai...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
@@ -3410,7 +3410,7 @@ i18n
           Language: "Wika",
           "Dark Mode": "Madilim na Mode",
           Bluetooth: "Bluetooth",
-          "Pair with Bluetooth": "Mag-pair sa Bluetooth",
+          "Manage Paired Devices": "Pamahalaan ang mga nakakabit na aparato",
           "LOOKING FOR DEVICES": "Naghahanap ng Mga Device",
           "Scanning...": "Nagsi-scan...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":
@@ -3589,7 +3589,7 @@ i18n
           Language: "ভাষা",
           "Dark Mode": "ডার্ক মোড",
           Bluetooth: "ব্লুটুথ",
-          "Pair with Bluetooth": "ব্লুটুথের সাথে জোড়া দিন",
+          "Manage Paired Devices": "জোড়া দেওয়া ডিভাইসগুলি পরিচালনা করুন",
           "LOOKING FOR DEVICES": "ডিভাইস খুঁজছে",
           "Scanning...": "স্ক্যান করা হচ্ছে...",
           "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled.":

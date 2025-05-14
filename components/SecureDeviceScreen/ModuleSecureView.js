@@ -198,7 +198,7 @@ const ModuleSecureView = ({
               }}
             >
               <Text style={styles.BluetoothBtnText}>
-                {t("Pair with Bluetooth")}
+                {t("Manage Paired Devices")}
               </Text>
             </TouchableOpacity>
           </View>
