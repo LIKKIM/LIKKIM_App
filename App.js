@@ -734,13 +734,13 @@ function AppContent({
           <Svg
             width={156}
             height={45}
-            viewBox="0 0 156 45"
+            viewBox="0 0 156 44.5"
             preserveAspectRatio="none"
             style={{
               left: "50%",
               transform: [{ translateX: -78 }], // Adjust to center the button horizontally
               position: "absolute",
-              bottom: -14,
+              bottom: -15,
             }}
           >
             <Path
