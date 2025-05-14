@@ -829,7 +829,7 @@ function ActivityScreen() {
               setModalStatus({
                 title: t("Transaction Successful"),
                 subtitle: t(
-                  "Your transaction was successfully broadcasted on the LIKKIM device."
+                  "Your transaction was successfully broadcasted on the LUKKEY device."
                 ),
                 image: require("../assets/gif/Success.gif"),
               });

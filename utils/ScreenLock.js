@@ -90,7 +90,7 @@ const ScreenLock = () => {
             source={require("../assets/Logo@500.png")}
             style={{ width: 50, height: 50, marginBottom: 20 }}
           />
-          <Text style={[styles.title, themeStyles.title]}>{t("LIKKIM")}</Text>
+          <Text style={[styles.title, themeStyles.title]}>{t("LUKKEY")}</Text>
           <Text style={[styles.subTitle, themeStyles.subTitle]}>
             {t("Enter Password to Unlock")}
           </Text>
