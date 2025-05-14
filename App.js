@@ -40,8 +40,6 @@ import BluetoothModal from "./components/modal/BluetoothModal";
 import CheckStatusModal from "./components/modal/CheckStatusModal";
 import { CryptoProvider, DeviceContext } from "./utils/DeviceContext";
 import { prefixToShortName } from "./config/chainPrefixes";
-
-import i18n from "./config/i18n";
 import * as SplashScreen from "expo-splash-screen";
 import { bluetoothConfig } from "./env/bluetoothConfig";
 import { Svg, Path, G } from "react-native-svg";
