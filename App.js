@@ -35,6 +35,7 @@ import { parseDeviceCode } from "./utils/parseDeviceCode";
 import checkAndReqPermission from "./utils/BluetoothPermissions";
 import DeviceDisplay from "./components/SecureDeviceScreen/DeviceDisplay";
 import SupportPage from "./components/SecureDeviceScreen/SupportPage";
+import ConfirmDisconnectModal from "./components/modal/ConfirmDisconnectModal";
 import SecurityCodeModal from "./components/modal/SecurityCodeModal";
 import BluetoothModal from "./components/modal/BluetoothModal";
 import CheckStatusModal from "./components/modal/CheckStatusModal";
@@ -168,6 +169,9 @@ function AppContent({
   const [selectedDevice, setSelectedDevice] = useState(null);
   const [CheckStatusModalVisible, setCheckStatusModalVisible] = useState(false);
   const [receivedVerificationCode, setReceivedVerificationCode] = useState("");
+  const [deviceToDisconnect, setDeviceToDisconnect] = useState(null);
+  const [confirmDisconnectModalVisible, setConfirmDisconnectModalVisible] =
+    useState(false);
   useEffect(() => {
     if (Platform.OS !== "web") {
       bleManagerRef.current = new BleManager({
@@ -383,8 +387,13 @@ function AppContent({
     }).start();
   };
 
-  const { isAppLaunching, cryptoCards, verifiedDevices, setVerifiedDevices } =
-    useContext(DeviceContext);
+  const {
+    isAppLaunching,
+    cryptoCards,
+    verifiedDevices,
+    setVerifiedDevices,
+    setIsVerificationSuccessful,
+  } = useContext(DeviceContext);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
@@ -552,6 +561,23 @@ function AppContent({
     );
   };
 
+  const handleDisconnectPress = (device) => {
+    setModalVisible(false);
+    setDeviceToDisconnect(device);
+    setConfirmDisconnectModalVisible(true);
+  };
+  const confirmDisconnect = async () => {
+    if (deviceToDisconnect) {
+      await handleDisconnectDevice(deviceToDisconnect);
+      setConfirmDisconnectModalVisible(false);
+      setDeviceToDisconnect(null);
+    }
+  };
+
+  const cancelDisconnect = () => {
+    setConfirmDisconnectModalVisible(false);
+    setModalVisible(true);
+  };
   const handleCancel = () => {
     setModalVisible(false);
   };
@@ -610,6 +636,40 @@ function AppContent({
       console.log("Error connecting or sending command to device:", error);
     }
   };
+
+  const handleDisconnectDevice = async (device) => {
+    try {
+      const isConnected = await device.isConnected();
+      if (!isConnected) {
+        console.log(`Device ${device.id} already disconnected`);
+      } else {
+        await device.cancelConnection();
+        console.log(`Device ${device.id} disconnected`);
+      }
+      const updatedVerifiedDevices = verifiedDevices.filter(
+        (id) => id !== device.id
+      );
+      setVerifiedDevices(updatedVerifiedDevices);
+      await AsyncStorage.setItem(
+        "verifiedDevices",
+        JSON.stringify(updatedVerifiedDevices)
+      );
+      console.log(`Device ${device.id} removed from verified devices`);
+      stopMonitoringVerificationCode();
+      setIsVerificationSuccessful(false);
+      console.log("Verification status updated to false");
+    } catch (error) {
+      if (
+        error instanceof BleError &&
+        error.errorCode === BleErrorCode.OperationCancelled
+      ) {
+        console.log(`Disconnection cancelled for device ${device.id}`);
+      } else {
+        console.log("Error disconnecting device:", error);
+      }
+    }
+  };
+
   return (
     <View style={{ flex: 1, backgroundColor: bottomBackgroundColor }}>
       <Tab.Navigator
@@ -772,7 +832,6 @@ function AppContent({
           </TouchableWithoutFeedback>
         </View>
       )}
-
       <StatusBar
         backgroundColor={isDarkMode ? "#21201E" : "#FFFFFF"}
         barStyle={isDarkMode ? "light-content" : "dark-content"}
@@ -809,11 +868,11 @@ function AppContent({
         visible={modalVisible}
         devices={devices}
         isScanning={isScanning}
+        onDisconnectPress={handleDisconnectPress}
         handleDevicePress={handleDevicePress}
         onCancel={handleCancel}
         verifiedDevices={verifiedDevices}
       />
-
       {/* PIN Modal */}
       <SecurityCodeModal
         visible={SecurityCodeModalVisible}
@@ -823,12 +882,16 @@ function AppContent({
         onCancel={() => setSecurityCodeModalVisible(false)}
         status={verificationStatus}
       />
-
       {/* Verification Modal */}
       <CheckStatusModal
         visible={CheckStatusModalVisible && verificationStatus !== null}
         status={verificationStatus}
         onClose={() => setCheckStatusModalVisible(false)}
+      />
+      <ConfirmDisconnectModal
+        visible={confirmDisconnectModalVisible}
+        onConfirm={confirmDisconnect}
+        onCancel={cancelDisconnect}
       />
     </View>
   );
