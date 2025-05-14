@@ -788,10 +788,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
       setIsVerificationSuccessful(false);
       console.log("Verification status updated to false");
     } catch (error) {
-      if (
-        error instanceof BleError &&
-        error.errorCode === BleErrorCode.OperationCancelled
-      ) {
+      if (error.errorCode === "OperationCancelled") {
         console.log(`Disconnection cancelled for device ${device.id}`);
       } else {
         console.log("Error disconnecting device:", error);

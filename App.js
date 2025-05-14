@@ -566,6 +566,36 @@ function AppContent({
     setDeviceToDisconnect(device);
     setConfirmDisconnectModalVisible(true);
   };
+
+  const handleDisconnectDevice = async (device) => {
+    try {
+      const isConnected = await device.isConnected();
+      if (!isConnected) {
+        console.log(`Device ${device.id} already disconnected`);
+      } else {
+        await device.cancelConnection();
+        console.log(`Device ${device.id} disconnected`);
+      }
+      const updatedVerifiedDevices = verifiedDevices.filter(
+        (id) => id !== device.id
+      );
+      setVerifiedDevices(updatedVerifiedDevices);
+      await AsyncStorage.setItem(
+        "verifiedDevices",
+        JSON.stringify(updatedVerifiedDevices)
+      );
+      console.log(`Device ${device.id} removed from verified devices`);
+      stopMonitoringVerificationCode();
+      setIsVerificationSuccessful(false);
+      console.log("Verification status updated to false");
+    } catch (error) {
+      if (error.errorCode === "OperationCancelled") {
+        console.log(`Disconnection cancelled for device ${device.id}`);
+      } else {
+        console.log("Error disconnecting device:", error);
+      }
+    }
+  };
   const confirmDisconnect = async () => {
     if (deviceToDisconnect) {
       await handleDisconnectDevice(deviceToDisconnect);
@@ -578,6 +608,7 @@ function AppContent({
     setConfirmDisconnectModalVisible(false);
     setModalVisible(true);
   };
+
   const handleCancel = () => {
     setModalVisible(false);
   };
@@ -634,39 +665,6 @@ function AppContent({
       setSecurityCodeModalVisible(true);
     } catch (error) {
       console.log("Error connecting or sending command to device:", error);
-    }
-  };
-
-  const handleDisconnectDevice = async (device) => {
-    try {
-      const isConnected = await device.isConnected();
-      if (!isConnected) {
-        console.log(`Device ${device.id} already disconnected`);
-      } else {
-        await device.cancelConnection();
-        console.log(`Device ${device.id} disconnected`);
-      }
-      const updatedVerifiedDevices = verifiedDevices.filter(
-        (id) => id !== device.id
-      );
-      setVerifiedDevices(updatedVerifiedDevices);
-      await AsyncStorage.setItem(
-        "verifiedDevices",
-        JSON.stringify(updatedVerifiedDevices)
-      );
-      console.log(`Device ${device.id} removed from verified devices`);
-      stopMonitoringVerificationCode();
-      setIsVerificationSuccessful(false);
-      console.log("Verification status updated to false");
-    } catch (error) {
-      if (
-        error instanceof BleError &&
-        error.errorCode === BleErrorCode.OperationCancelled
-      ) {
-        console.log(`Disconnection cancelled for device ${device.id}`);
-      } else {
-        console.log("Error disconnecting device:", error);
-      }
     }
   };
 
