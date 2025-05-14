@@ -173,63 +173,25 @@ function AppContent({
   const [confirmDisconnectModalVisible, setConfirmDisconnectModalVisible] =
     useState(false);
   useEffect(() => {
-    const scanDevices = () => {
-      if (Platform.OS !== "web" && !isScanning) {
-        checkAndReqPermission(() => {
-          console.log("Scanning started");
-          setIsScanning(true);
-          const scanOptions = { allowDuplicates: true };
-          const scanFilter = null;
-          bleManagerRef.current.startDeviceScan(
-            scanFilter,
-            scanOptions,
-            (error, device) => {
-              if (error) {
-                console.log("BleManager scanning error:", error);
-                if (error.errorCode === BleErrorCode.BluetoothUnsupported) {
-                  // Bluetooth LE unsupported on device
-                }
-              } else if (device.name && device.name.includes("LIKKIM")) {
-                setDevices((prevDevices) => {
-                  if (!prevDevices.find((d) => d.id === device.id)) {
-                    return [...prevDevices, device];
-                  }
-                  return prevDevices;
-                });
-              }
-            }
-          );
+    if (Platform.OS !== "web") {
+      bleManagerRef.current = new BleManager({
+        restoreStateIdentifier: restoreIdentifier,
+      });
 
-          // 设置定时器停止扫描
-          const timeoutId = setTimeout(() => {
-            console.log("Scanning stopped");
-            bleManagerRef.current.stopDeviceScan();
-            setIsScanning(false);
+      const subscription = bleManagerRef.current.onStateChange((state) => {
+        if (state === "PoweredOn") {
+          setTimeout(() => {
+            scanDevices();
           }, 2000);
+        }
+      }, true);
 
-          // 在组件卸载时清理定时器
-          return () => {
-            clearTimeout(timeoutId);
-            if (bleManagerRef.current) {
-              bleManagerRef.current.stopDeviceScan();
-            }
-          };
-        });
-      } else {
-        console.log("Attempt to scan while already scanning");
-      }
-    };
-
-    scanDevices();
-
-    return () => {
-      console.log("Cleaning up scanning");
-      if (bleManagerRef.current) {
-        bleManagerRef.current.stopDeviceScan();
-      }
-    };
-  }, [isScanning]);
-
+      return () => {
+        subscription.remove();
+        bleManagerRef.current && bleManagerRef.current.destroy();
+      };
+    }
+  }, []);
   const scanDevices = () => {
     if (Platform.OS !== "web" && !isScanning) {
       checkAndReqPermission(() => {
@@ -256,7 +218,6 @@ function AppContent({
             }
           }
         );
-
         setTimeout(() => {
           console.log("Scanning stopped");
           bleManagerRef.current.stopDeviceScan();
@@ -412,16 +373,16 @@ function AppContent({
 
   const handlePressIn = () => {
     Animated.timing(scale, {
-      toValue: 0.8,
-      duration: 100,
+      toValue: 0.8, // Scale down to 0.8
+      duration: 100, // Duration of the scale animation
       useNativeDriver: true,
     }).start();
   };
 
   const handlePressOut = () => {
     Animated.timing(scale, {
-      toValue: 1,
-      duration: 100,
+      toValue: 1, // Scale back to normal
+      duration: 100, // Duration of the scale animation
       useNativeDriver: true,
     }).start();
   };
@@ -833,10 +794,10 @@ function AppContent({
         <View
           style={{
             position: "absolute",
-            bottom: 70,
+            bottom: 70, // Position it above the tab bar
             left: "50%",
-            transform: [{ translateX: -35 }],
-            zIndex: 10,
+            transform: [{ translateX: -35 }], // Adjust to center the button horizontally
+            zIndex: 10, // Make sure the button is above the tab bar
           }}
         >
           <Svg
