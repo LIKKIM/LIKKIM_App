@@ -160,14 +160,20 @@ const getSettingsOptions = ({
             },
           ]
         : []),
-      {
-        title: t("Secure Device Status"),
-        icon: "location-on",
-        onPress: () => {
-          Vibration.vibrate();
-          navigation.navigate("Secure Device Status");
-        },
-      },
+
+      ...(cryptoCards && cryptoCards.length > 0
+        ? [
+            {
+              title: t("Secure Device Status"),
+              icon: "location-on",
+              onPress: () => {
+                Vibration.vibrate();
+                navigation.navigate("Secure Device Status");
+              },
+            },
+          ]
+        : []),
+      ,
       {
         title: t("Firmware Update"),
         icon: "downloading",
