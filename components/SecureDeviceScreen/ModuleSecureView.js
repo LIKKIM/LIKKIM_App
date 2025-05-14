@@ -188,19 +188,21 @@ const ModuleSecureView = ({
         </View>
 
         {/* Bluetooth Pairing Button */}
-        <View style={{ marginTop: 40, alignItems: "center" }}>
-          <TouchableOpacity
-            style={styles.roundButton}
-            onPress={() => {
-              Vibration.vibrate();
-              handleBluetoothPairing();
-            }}
-          >
-            <Text style={styles.BluetoothBtnText}>
-              {t("Pair with Bluetooth")}
-            </Text>
-          </TouchableOpacity>
-        </View>
+        {cryptoCards.length > 0 && (
+          <View style={{ marginTop: 40, alignItems: "center" }}>
+            <TouchableOpacity
+              style={styles.roundButton}
+              onPress={() => {
+                Vibration.vibrate();
+                handleBluetoothPairing();
+              }}
+            >
+              <Text style={styles.BluetoothBtnText}>
+                {t("Pair with Bluetooth")}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
     </ScrollView>
   );
