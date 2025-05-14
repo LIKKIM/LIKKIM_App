@@ -668,6 +668,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
     const [prefix, rest] = verificationCodeValue.split(":");
     if (prefix !== "PIN" || !rest) {
       console.log("Invalid verification format:", verificationCodeValue);
+      setCheckStatusModalVisible(true);
       setVerificationStatus("fail");
       return;
     }
