@@ -22,8 +22,6 @@ import {
 
 // 第三方库
 import { LinearGradient } from "expo-linear-gradient";
-
-import { BlurView } from "expo-blur";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useTranslation } from "react-i18next";
 import { BleManager } from "react-native-ble-plx";
@@ -38,10 +36,7 @@ import { DeviceContext, DarkModeContext } from "../utils/DeviceContext";
 // 自定义组件
 import { prefixToShortName } from "../config/chainPrefixes";
 import { CHAIN_NAMES } from "../config/chainConfig";
-import assetRouteDefs from "../config/assetRouteDefs";
 import EmptyWalletView from "./modal/EmptyWalletView";
-import AddCryptoModal from "./modal/AddCryptoModal";
-import ChainSelectionModal from "./modal/ChainSelectionModal";
 import SecureDeviceStatus from "./VaultScreen/SecureDeviceStatus";
 import TabModal from "./VaultScreen/TabModal";
 import ModalsContainer from "./VaultScreen/ModalsContainer";

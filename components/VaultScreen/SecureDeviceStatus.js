@@ -1,4 +1,7 @@
 // ./VaultScreen/SecureDeviceStatus.js
+/*
+ * gallery save to device page
+ */
 import React, { useEffect, useState } from "react";
 import {
   ScrollView,
@@ -192,20 +195,20 @@ const SecureDeviceStatus = (props) => {
 
         console.log("Converted JPG image:", resizedImage.uri);
 
-        // 使用 fetch 获取调整后的图片并转为 HEX
+        // 使用 fetch 获取调整后的图片
         const resizedImageResponse = await fetch(resizedImage.uri);
         const resizedImageBlob = await resizedImageResponse.blob();
 
         // 使用 FileReader 将 Blob 转换为 ArrayBuffer
         const arrayBuffer = await blobToArrayBuffer(resizedImageBlob);
 
-        // 将 ArrayBuffer 转为 HEX
-        const hexString = arrayBufferToHex(arrayBuffer);
+        // 将 ArrayBuffer 转换为 Uint8Array
+        const uint8Array = new Uint8Array(arrayBuffer);
 
-        console.log("Converted HEX string:", hexString);
+        console.log("Converted Uint8Array:", uint8Array);
 
-        // 保存 HEX 到状态
-        setDataUrl(hexString); // 或其他相应的状态处理
+        // 保存 Uint8Array 到状态
+        setDataUrl(uint8Array); // 保存 Uint8Array
       } catch (error) {
         console.error("Error fetching image or converting to JPG:", error);
       }
@@ -222,16 +225,6 @@ const SecureDeviceStatus = (props) => {
       reader.onerror = reject; // 错误处理
       reader.readAsArrayBuffer(blob); // 将 Blob 读为 ArrayBuffer
     });
-  };
-
-  // ArrayBuffer 转换为 HEX 字符串的函数
-  const arrayBufferToHex = (buffer) => {
-    const uint8Array = new Uint8Array(buffer);
-    let hexString = "";
-    uint8Array.forEach((byte) => {
-      hexString += byte.toString(16).padStart(2, "0");
-    });
-    return hexString;
   };
 
   // 处理 "Next" 按钮，打开预览 Modal
