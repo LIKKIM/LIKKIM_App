@@ -1,4 +1,4 @@
-// showLIKKIMAddressCommand.js
+// displayDeviceAddress.js
 
 import { Buffer } from "buffer";
 import assetRouteDefs from "../config/assetRouteDefs";
@@ -18,7 +18,7 @@ const notifyCharacteristicUUID = bluetoothConfig.notifyCharacteristicUUID;
  * @param {function} t - Translation function.
  * @returns {Promise<object|undefined>} - The subscription object or undefined on error.
  */
-const showLIKKIMAddressCommand = async (
+const displayDeviceAddress = async (
   device,
   coinType,
   setIsVerifyingAddress,
@@ -101,4 +101,4 @@ const showLIKKIMAddressCommand = async (
   }
 };
 
-export default showLIKKIMAddressCommand;
+export default displayDeviceAddress;
