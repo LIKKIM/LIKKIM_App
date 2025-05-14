@@ -20,7 +20,6 @@ i18n
           Cancel: "Cancel",
           "Select Currency": "Select Currency",
           "Set Password": "Set Password",
-          "Only you can unlock your wallet": "Only you can unlock your wallet",
           Password: "Password",
           "Confirm Password": "Confirm Password",
           "Change Password": "Change Password",
@@ -194,7 +193,6 @@ i18n
           Cancel: "取消",
           "Select Currency": "选择货币",
           "Set Password": "设置密码",
-          "Only you can unlock your wallet": "只有你可以解锁你的钱包",
           Password: "密码",
           "Confirm Password": "确认密码",
           "Change Password": "更改密码",
@@ -360,7 +358,6 @@ i18n
           Cancel: "取消",
           "Select Currency": "選擇貨幣",
           "Set Password": "設定密碼",
-          "Only you can unlock your wallet": "只有你可以解鎖你的錢包",
           Password: "密碼",
           "Confirm Password": "確認密碼",
           "Change Password": "更改密碼",
@@ -526,8 +523,6 @@ i18n
           Cancel: "Annuler",
           "Select Currency": "Choisir la devise",
           "Set Password": "Définir le mot de passe",
-          "Only you can unlock your wallet":
-            "Vous seul pouvez déverrouiller votre portefeuille",
           Password: "Mot de passe",
           "Confirm Password": "Confirmer le mot de passe",
           "Change Password": "Modifier le mot de passe",
@@ -705,8 +700,6 @@ i18n
           Cancel: "Cancelar",
           "Select Currency": "Seleccionar moneda",
           "Set Password": "Establecer contraseña",
-          "Only you can unlock your wallet":
-            "Solo tú puedes desbloquear tu billetera",
           Password: "Contraseña",
           "Confirm Password": "Confirmar contraseña",
           "Change Password": "Cambiar contraseña",
@@ -883,7 +876,6 @@ i18n
           Cancel: "إلغاء",
           "Select Currency": "اختر العملة",
           "Set Password": "تعيين كلمة المرور",
-          "Only you can unlock your wallet": "أنت فقط من يمكنه فتح محفظتك",
           Password: "كلمة المرور",
           "Confirm Password": "تأكيد كلمة المرور",
           "Change Password": "تغيير كلمة المرور",
@@ -1054,8 +1046,6 @@ i18n
           Cancel: "キャンセル",
           "Select Currency": "通貨を選択",
           "Set Password": "パスワードを設定",
-          "Only you can unlock your wallet":
-            "あなたのみがウォレットをロック解除できます",
           Password: "パスワード",
           "Confirm Password": "パスワードを確認",
           "Change Password": "パスワードを変更",
@@ -1228,8 +1218,6 @@ i18n
           Cancel: "Отмена",
           "Select Currency": "Выбрать валюту",
           "Set Password": "Установить пароль",
-          "Only you can unlock your wallet":
-            "Только вы можете разблокировать свой кошелек",
           Password: "Пароль",
           "Confirm Password": "Подтвердить пароль",
           "Change Password": "Сменить пароль",
@@ -1403,8 +1391,6 @@ i18n
           Cancel: "취소",
           "Select Currency": "통화 선택",
           "Set Password": "비밀번호 설정",
-          "Only you can unlock your wallet":
-            "지갑은 당신만 잠금 해제할 수 있습니다",
           Password: "비밀번호",
           "Confirm Password": "비밀번호 확인",
           "Change Password": "비밀번호 변경",
@@ -1574,8 +1560,6 @@ i18n
           Cancel: "Cancelar",
           "Select Currency": "Selecionar moeda",
           "Set Password": "Definir senha",
-          "Only you can unlock your wallet":
-            "Somente você pode desbloquear sua carteira",
           Password: "Senha",
           "Confirm Password": "Confirmar senha",
           "Change Password": "Alterar senha",
@@ -1751,8 +1735,6 @@ i18n
           Cancel: "Cancelar",
           "Select Currency": "Selecionar moeda",
           "Set Password": "Definir senha",
-          "Only you can unlock your wallet":
-            "Apenas você pode desbloquear sua carteira",
           Password: "Senha",
           "Confirm Password": "Confirmar senha",
           "Change Password": "Alterar senha",
@@ -1928,8 +1910,6 @@ i18n
           Cancel: "Annulla",
           "Select Currency": "Seleziona valuta",
           "Set Password": "Imposta password",
-          "Only you can unlock your wallet":
-            "Solo tu puoi sbloccare il tuo portafoglio",
           Password: "Password",
           "Confirm Password": "Conferma password",
           "Change Password": "Cambia password",
@@ -2105,8 +2085,6 @@ i18n
           Cancel: "Abbrechen",
           "Select Currency": "Währung auswählen",
           "Set Password": "Passwort festlegen",
-          "Only you can unlock your wallet":
-            "Nur Sie können Ihre Wallet entsperren",
           Password: "Passwort",
           "Confirm Password": "Passwort bestätigen",
           "Change Password": "Passwort ändern",
@@ -2284,8 +2262,6 @@ i18n
           Cancel: "रद्द करें",
           "Select Currency": "मुद्रा चुनें",
           "Set Password": "पासवर्ड सेट करें",
-          "Only you can unlock your wallet":
-            "केवल आप अपना वॉलेट अनलॉक कर सकते हैं",
           Password: "पासवर्ड",
           "Confirm Password": "पासवर्ड की पुष्टि करें",
           "Change Password": "पासवर्ड बदलें",
@@ -2457,8 +2433,6 @@ i18n
           Cancel: "Цуцлах",
           "Select Currency": "Валют сонгох",
           "Set Password": "Нууц үг тогтоох",
-          "Only you can unlock your wallet":
-            "Таны л түрийвчийг тайлах боломжтой",
           Password: "Нууц үг",
           "Confirm Password": "Нууц үгийг баталгаажуулах",
           "Change Password": "Нууц үг өөрчлөх",
@@ -2632,8 +2606,6 @@ i18n
           Cancel: "ยกเลิก",
           "Select Currency": "เลือกสกุลเงิน",
           "Set Password": "ตั้งรหัสผ่าน",
-          "Only you can unlock your wallet":
-            "มีเพียงคุณเท่านั้นที่ปลดล็อกกระเป๋าของคุณได้",
           Password: "รหัสผ่าน",
           "Confirm Password": "ยืนยันรหัสผ่าน",
           "Change Password": "เปลี่ยนรหัสผ่าน",
@@ -2803,8 +2775,6 @@ i18n
           Cancel: "Скасувати",
           "Select Currency": "Вибрати валюту",
           "Set Password": "Встановити пароль",
-          "Only you can unlock your wallet":
-            "Тільки ви можете розблокувати свій гаманець",
           Password: "Пароль",
           "Confirm Password": "Підтвердьте пароль",
           "Change Password": "Змінити пароль",
@@ -2980,8 +2950,6 @@ i18n
           Cancel: "Hủy",
           "Select Currency": "Chọn tiền tệ",
           "Set Password": "Đặt mật khẩu",
-          "Only you can unlock your wallet":
-            "Chỉ bạn có thể mở khóa ví của mình",
           Password: "Mật khẩu",
           "Confirm Password": "Xác nhận mật khẩu",
           "Change Password": "Đổi mật khẩu",
@@ -3154,8 +3122,6 @@ i18n
           Cancel: "Batal",
           "Select Currency": "Pilih Mata Uang",
           "Set Password": "Atur Kata Sandi",
-          "Only you can unlock your wallet":
-            "Hanya Anda yang dapat membuka dompet Anda",
           Password: "Kata Sandi",
           "Confirm Password": "Konfirmasi Kata Sandi",
           "Change Password": "Ubah Kata Sandi",
@@ -3327,8 +3293,6 @@ i18n
           Cancel: "Kanselahin",
           "Select Currency": "Pumili ng Pera",
           "Set Password": "Itakda ang Password",
-          "Only you can unlock your wallet":
-            "Ikaw lang ang makakabukas ng iyong wallet",
           Password: "Password",
           "Confirm Password": "Kumpirmahin ang Password",
           "Change Password": "Palitan ang Password",
@@ -3502,8 +3466,6 @@ i18n
           Cancel: "বাতিল",
           "Select Currency": "মুদ্রা নির্বাচন করুন",
           "Set Password": "পাসওয়ার্ড সেট করুন",
-          "Only you can unlock your wallet":
-            "শুধুমাত্র আপনি আপনার ওয়ালেট আনলক করতে পারেন",
           Password: "পাসওয়ার্ড",
           "Confirm Password": "পাসওয়ার্ড নিশ্চিত করুন",
           "Change Password": "পাসওয়ার্ড পরিবর্তন করুন",
