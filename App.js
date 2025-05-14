@@ -561,6 +561,18 @@ function AppContent({
     );
   };
 
+  const stopMonitoringVerificationCode = () => {
+    if (monitorSubscription) {
+      try {
+        monitorSubscription.remove();
+        monitorSubscription = null;
+        console.log("验证码监听已停止");
+      } catch (error) {
+        console.log("停止监听时发生错误:", error);
+      }
+    }
+  };
+
   const handleDisconnectPress = (device) => {
     setModalVisible(false);
     setDeviceToDisconnect(device);
