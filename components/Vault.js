@@ -317,6 +317,9 @@ function VaultScreen({ route, navigation }) {
  */
 
   useLayoutEffect(() => {
+    if (cryptoCards.length === 0) {
+      setSelectedView("wallet");
+    }
     navigation.setOptions({
       headerTitle: () =>
         !isModalVisible && cryptoCards.length > 0 ? (
