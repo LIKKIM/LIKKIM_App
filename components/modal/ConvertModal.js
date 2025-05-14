@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
-
+import React, { useState, useEffect, useRef, useContext } from "react";
 import {
   Modal,
   View,
@@ -19,8 +18,10 @@ import { MaterialIcons as Icon } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { convertAPI } from "../../env/apiEndpoints";
+import { bluetoothConfig } from "../../env/bluetoothConfig";
+import { DeviceContext, DarkModeContext } from "../../utils/DeviceContext";
+import ActivityScreenStyles from "../../styles/ActivityScreenStyle";
 const ConvertModal = ({
-  isDarkMode,
   visible,
   setConvertModalVisible,
   fromDropdownVisible,
@@ -28,12 +29,11 @@ const ConvertModal = ({
   toDropdownVisible,
   setToDropdownVisible,
   initialAdditionalCryptos,
-  ActivityScreenStyle,
   selectedDevice,
-  serviceUUID,
-  writeCharacteristicUUID,
 }) => {
   const { t } = useTranslation();
+  const { isDarkMode } = useContext(DarkModeContext);
+  const ActivityScreenStyle = ActivityScreenStyles(isDarkMode);
   const router = useNavigation();
   const toChainTagsScrollRef = useRef(null);
   const [confirmModalVisible, setConfirmModalVisible] = useState(false);
@@ -48,7 +48,9 @@ const ConvertModal = ({
   const [selectedToChain, setSelectedToChain] = useState("All");
   const [chainLayouts, setChainLayouts] = useState({});
   const disabledButtonBackgroundColor = isDarkMode ? "#6c6c6c" : "#ccc";
-
+  const serviceUUID = bluetoothConfig.serviceUUID;
+  const writeCharacteristicUUID = bluetoothConfig.writeCharacteristicUUID;
+  const notifyCharacteristicUUID = bluetoothConfig.notifyCharacteristicUUID;
   const filteredFromTokens = initialAdditionalCryptos.filter((chain) =>
     chain.name.toLowerCase().includes(searchFromToken.toLowerCase())
   );
@@ -144,12 +146,11 @@ const ConvertModal = ({
         },
         body: JSON.stringify(requestBody),
       });
-      if (!response.ok) {
-        throw new Error("网络请求失败");
-      }
+
+      if (!response.ok) throw new Error("网络请求失败");
 
       const responseData = await response.json();
-      console.log("Convert API返回：", responseData);
+      //console.log("Convert API返回：", responseData);
 
       if (responseData?.code === "0") {
         console.log("Convert成功");

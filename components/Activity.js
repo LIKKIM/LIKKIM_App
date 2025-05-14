@@ -47,7 +47,6 @@ const notifyCharacteristicUUID = bluetoothConfig.notifyCharacteristicUUID;
 function ActivityScreen() {
   // ---------- 状态和上下文 ----------
   const { t } = useTranslation();
-  const { isDarkMode } = useContext(DarkModeContext);
   const {
     updateCryptoAddress,
     initialAdditionalCryptos,
@@ -66,6 +65,7 @@ function ActivityScreen() {
     updateDevicePubHintKey,
   } = useContext(DeviceContext);
   const [isLoading, setIsLoading] = useState(true);
+  const { isDarkMode } = useContext(DarkModeContext);
   const ActivityScreenStyle = ActivityScreenStyles(isDarkMode);
   const iconColor = isDarkMode ? "#CCB68C" : "#CFAB95";
   const darkColors = ["#21201E", "#0E0D0D"];
@@ -1772,7 +1772,6 @@ function ActivityScreen() {
 
         {/* Convert Modal */}
         <ConvertModal
-          isDarkMode={isDarkMode}
           visible={swapModalVisible}
           setConvertModalVisible={setConvertModalVisible}
           fromDropdownVisible={fromDropdownVisible}
@@ -1780,10 +1779,7 @@ function ActivityScreen() {
           toDropdownVisible={toDropdownVisible}
           setToDropdownVisible={setToDropdownVisible}
           initialAdditionalCryptos={initialAdditionalCryptos}
-          ActivityScreenStyle={ActivityScreenStyle}
           selectedDevice={selectedDevice}
-          serviceUUID={serviceUUID}
-          writeCharacteristicUUID={writeCharacteristicUUID}
         />
       </View>
     </LinearGradient>
