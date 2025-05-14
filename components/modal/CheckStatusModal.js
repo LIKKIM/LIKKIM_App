@@ -1,13 +1,17 @@
 // CheckStatusModal.js
-import React from "react";
+import React, { useContext } from "react";
 import { View, Text, Modal, Image, TouchableOpacity } from "react-native";
 import { BlurView } from "expo-blur";
 import { useTranslation } from "react-i18next";
 import SuccessGif from "../../assets/gif/Success.gif";
 import FailGif from "../../assets/gif/Fail.gif";
 import PendingGif from "../../assets/gif/Pending.gif";
+import { DarkModeContext } from "../../utils/DeviceContext";
+import SecureDeviceScreenStyles from "../../styles/SecureDeviceScreenStyle";
 
-const CheckStatusModal = ({ visible, status, onClose, styles }) => {
+const CheckStatusModal = ({ visible, status, onClose }) => {
+  const { isDarkMode, setIsDarkMode } = useContext(DarkModeContext);
+  const styles = SecureDeviceScreenStyles(isDarkMode);
   const { t } = useTranslation();
   let imageSource;
   let title;

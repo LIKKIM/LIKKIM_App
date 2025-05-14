@@ -36,12 +36,13 @@ import DeviceDisplay from "./components/SecureDeviceScreen/DeviceDisplay";
 import SupportPage from "./components/SecureDeviceScreen/SupportPage";
 import SecurityCodeModal from "./components/modal/SecurityCodeModal";
 import BluetoothModal from "./components/modal/BluetoothModal";
+import CheckStatusModal from "./components/modal/CheckStatusModal";
 import { CryptoProvider, DeviceContext } from "./utils/DeviceContext";
 import i18n from "./config/i18n";
 import * as SplashScreen from "expo-splash-screen";
 import { bluetoothConfig } from "./env/bluetoothConfig";
 import { Svg, Path, G } from "react-native-svg";
-
+import { Buffer } from "buffer";
 const serviceUUID = bluetoothConfig.serviceUUID;
 const writeCharacteristicUUID = bluetoothConfig.writeCharacteristicUUID;
 const notifyCharacteristicUUID = bluetoothConfig.notifyCharacteristicUUID;
@@ -164,6 +165,15 @@ function AppContent({
   const [verificationStatus, setVerificationStatus] = useState(null);
   const [receivedAddresses, setReceivedAddresses] = useState({});
   const [selectedDevice, setSelectedDevice] = useState(null);
+  const theme = isDarkMode ? darkTheme : lightTheme;
+  const tabBarActiveTintColor = isDarkMode ? "#CCB68C" : "#CFAB95";
+  const tabBarInactiveTintColor = isDarkMode ? "#ffffff50" : "#676776";
+  const headerTitleColor = isDarkMode ? "#ffffff" : "#333333";
+  const tabBarBackgroundColor = isDarkMode ? "#22201F" : "#fff";
+  const bottomBackgroundColor = isDarkMode ? "#0E0D0D" : "#EDEBEF";
+  const iconColor = isDarkMode ? "#ffffff" : "#000000";
+  const [CheckStatusModalVisible, setCheckStatusModalVisible] = useState(false);
+  const [receivedVerificationCode, setReceivedVerificationCode] = useState("");
   useEffect(() => {
     if (Platform.OS !== "web") {
       bleManagerRef.current = new BleManager({
@@ -432,13 +442,103 @@ function AppContent({
   if (!isScreenLockLoaded) return null;
   if (screenLockFeatureEnabled && isAppLaunching) return <ScreenLock />;
 
-  const theme = isDarkMode ? darkTheme : lightTheme;
-  const tabBarActiveTintColor = isDarkMode ? "#CCB68C" : "#CFAB95";
-  const tabBarInactiveTintColor = isDarkMode ? "#ffffff50" : "#676776";
-  const headerTitleColor = isDarkMode ? "#ffffff" : "#333333";
-  const tabBarBackgroundColor = isDarkMode ? "#22201F" : "#fff";
-  const bottomBackgroundColor = isDarkMode ? "#0E0D0D" : "#EDEBEF";
-  const iconColor = isDarkMode ? "#ffffff" : "#000000";
+  let monitorSubscription;
+
+  const monitorVerificationCode = (device, sendparseDeviceCodeedValue) => {
+    monitorSubscription = device.monitorCharacteristicForService(
+      serviceUUID,
+      notifyCharacteristicUUID,
+      async (error, characteristic) => {
+        if (error) {
+          console.log("Error monitoring device response:", error.message);
+          return;
+        }
+        const receivedData = Buffer.from(characteristic.value, "base64");
+        const receivedDataString = receivedData.toString("utf8");
+        console.log("Received data string:", receivedDataString);
+
+        // 检查数据是否以已知前缀开头（例如 "bitcoin:"、"ethereum:" 等）
+        const prefix = Object.keys(prefixToShortName).find((key) =>
+          receivedDataString.startsWith(key)
+        );
+        if (prefix) {
+          const newAddress = receivedDataString.replace(prefix, "").trim();
+          const chainShortName = prefixToShortName[prefix];
+          console.log(`Received ${chainShortName} address: `, newAddress);
+          updateCryptoAddress(chainShortName, newAddress);
+
+          // 更新 receivedAddresses 状态，并检查是否全部接收
+          setReceivedAddresses((prev) => {
+            const updated = { ...prev, [chainShortName]: newAddress };
+            // 假设预期地址数量与 prefixToShortName 中的条目数一致
+            const expectedCount = Object.keys(prefixToShortName).length;
+            if (Object.keys(updated).length >= expectedCount) {
+              setVerificationStatus("walletReady");
+            } else {
+              setVerificationStatus("waiting");
+            }
+            return updated;
+          });
+        }
+
+        if (receivedDataString.startsWith("pubkeyData:")) {
+          const pubkeyData = receivedDataString
+            .replace("pubkeyData:", "")
+            .trim();
+          const [queryChainName, publicKey] = pubkeyData.split(",");
+          if (queryChainName && publicKey) {
+            console.log(
+              `Received public key for ${queryChainName}: ${publicKey}`
+            );
+            updateDevicePubHintKey(queryChainName, publicKey);
+          }
+        }
+
+        // Process data containing "ID:"
+        if (receivedDataString.includes("ID:")) {
+          const encryptedHex = receivedDataString.split("ID:")[1];
+          const encryptedData = hexStringToUint32Array(encryptedHex);
+          const key = new Uint32Array([0x1234, 0x1234, 0x1234, 0x1234]);
+          parseDeviceCode(encryptedData, key);
+          const parseDeviceCodeedHex = uint32ArrayToHexString(encryptedData);
+          console.log("parseDeviceCodeed string:", parseDeviceCodeedHex);
+          if (sendparseDeviceCodeedValue) {
+            sendparseDeviceCodeedValue(parseDeviceCodeedHex);
+          }
+        }
+
+        // If data is "VALID", update status and send "validation"
+        if (receivedDataString === "VALID") {
+          try {
+            setVerificationStatus("VALID");
+            console.log("Status set to: VALID");
+            const validationMessage = "validation";
+            const bufferValidationMessage = Buffer.from(
+              validationMessage,
+              "utf-8"
+            );
+            const base64ValidationMessage =
+              bufferValidationMessage.toString("base64");
+            await device.writeCharacteristicWithResponseForService(
+              serviceUUID,
+              writeCharacteristicUUID,
+              base64ValidationMessage
+            );
+            console.log(`Sent 'validation' to device`);
+          } catch (error) {
+            console.log("Error sending 'validation':", error);
+          }
+        }
+
+        // Extract complete PIN data (e.g., PIN:1234,Y or PIN:1234,N)
+        if (receivedDataString.startsWith("PIN:")) {
+          setReceivedVerificationCode(receivedDataString);
+          console.log("Complete PIN data received:", receivedDataString);
+        }
+      }
+    );
+  };
+
   const handleCancel = () => {
     setModalVisible(false);
   };
@@ -476,6 +576,7 @@ function AppContent({
       };
 
       monitorVerificationCode(device, sendparseDeviceCodeedValue);
+
       setTimeout(async () => {
         try {
           const requestString = "request";
@@ -708,6 +809,13 @@ function AppContent({
         onSubmit={handlePinSubmit}
         onCancel={() => setSecurityCodeModalVisible(false)}
         status={verificationStatus}
+      />
+
+      {/* Verification Modal */}
+      <CheckStatusModal
+        visible={CheckStatusModalVisible && verificationStatus !== null}
+        status={verificationStatus}
+        onClose={() => setCheckStatusModalVisible(false)}
       />
     </View>
   );
