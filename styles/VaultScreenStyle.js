@@ -428,7 +428,7 @@ const VaultScreenStyles = (isDarkMode) => {
       fontWeight: "normal",
     },
 
-    // Add wallet image styles
+    // Get Started image styles
     addWalletImage: {
       width: 326,
       height: 206,

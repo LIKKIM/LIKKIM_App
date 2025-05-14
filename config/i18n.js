@@ -12,7 +12,7 @@ i18n
       en: {
         translation: {
           Gallery: "Gallery",
-          "Add Wallet": "Add Wallet",
+          "Get Started": "Get Started",
           Close: "Close",
           "Value:": "Value:",
           "Delete Card": "Delete Card",
@@ -187,7 +187,7 @@ i18n
         translation: {
           Gallery: "画廊",
           "Enter amount:": "输入金额：",
-          "Add Wallet": "添加钱包",
+          "Get Started": "开始使用",
           "Value:": "值:",
           "Delete Card": "删除卡片",
           "Select Language": "选择语言",
@@ -353,7 +353,7 @@ i18n
         translation: {
           Gallery: "畫廊",
           "Enter amount:": "輸入金額：",
-          "Add Wallet": "添加錢包",
+          "Get Started": "開始使用",
           "Value:": "值：",
           "Delete Card": "刪除卡片",
           "Select Language": "選擇語言",
@@ -519,7 +519,7 @@ i18n
         translation: {
           Gallery: "Galerie",
           "Enter amount:": "Saisissez le montant :",
-          "Add Wallet": "Ajouter un portefeuille",
+          "Get Started": "Commencer",
           "Value:": "Valeur :",
           "Delete Card": "Supprimer la carte",
           "Select Language": "Choisir la langue",
@@ -698,7 +698,7 @@ i18n
         translation: {
           Gallery: "Galería",
           "Enter amount:": "Ingresa la cantidad:",
-          "Add Wallet": "Agregar billetera",
+          "Get Started": "Empezar",
           "Value:": "Valor:",
           "Delete Card": "Eliminar tarjeta",
           "Select Language": "Seleccionar idioma",
@@ -876,7 +876,7 @@ i18n
         translation: {
           Gallery: "معرض",
           "Enter amount:": "أدخل المبلغ:",
-          "Add Wallet": "إضافة محفظة",
+          "Get Started": "ابدأ",
           "Value:": "القيمة:",
           "Delete Card": "حذف البطاقة",
           "Select Language": "اختر اللغة",
@@ -1047,7 +1047,7 @@ i18n
         translation: {
           Gallery: "ギャラリー",
           "Enter amount:": "金額を入力してください：",
-          "Add Wallet": "ウォレットを追加",
+          "Get Started": "始める",
           "Value:": "値：",
           "Delete Card": "カードを削除",
           "Select Language": "言語を選択",
@@ -1221,7 +1221,7 @@ i18n
         translation: {
           Gallery: "Галерея",
           "Enter amount:": "Введите сумму:",
-          "Add Wallet": "Добавить кошелек",
+          "Get Started": "Начать",
           "Value:": "Значение:",
           "Delete Card": "Удалить карту",
           "Select Language": "Выбрать язык",
@@ -1396,7 +1396,7 @@ i18n
         translation: {
           Gallery: "갤러리",
           "Enter amount:": "금액을 입력하세요:",
-          "Add Wallet": "지갑 추가",
+          "Get Started": "시작하기",
           "Value:": "값:",
           "Delete Card": "카드 삭제",
           "Select Language": "언어 선택",
@@ -1567,7 +1567,7 @@ i18n
         translation: {
           Gallery: "Galeria",
           "Enter amount:": "Digite o valor:",
-          "Add Wallet": "Adicionar carteira",
+          "Get Started": "Começar",
           "Value:": "Valor:",
           "Delete Card": "Excluir cartão",
           "Select Language": "Selecionar idioma",
@@ -1744,7 +1744,7 @@ i18n
         translation: {
           Gallery: "Galeria",
           "Enter amount:": "Digite o valor:",
-          "Add Wallet": "Adicionar carteira",
+          "Get Started": "Começar",
           "Value:": "Valor:",
           "Delete Card": "Excluir cartão",
           "Select Language": "Selecionar idioma",
@@ -1921,7 +1921,7 @@ i18n
         translation: {
           Gallery: "Galleria",
           "Enter amount:": "Inserisci l'importo:",
-          "Add Wallet": "Aggiungi portafoglio",
+          "Get Started": "Iniziare",
           "Value:": "Valore:",
           "Delete Card": "Elimina carta",
           "Select Language": "Seleziona lingua",
@@ -2098,7 +2098,7 @@ i18n
         translation: {
           Gallery: "Galerie",
           "Enter amount:": "Betrag eingeben:",
-          "Add Wallet": "Wallet hinzufügen",
+          "Get Started": "Loslegen",
           "Value:": "Wert:",
           "Delete Card": "Karte löschen",
           "Select Language": "Sprache auswählen",
@@ -2277,7 +2277,7 @@ i18n
         translation: {
           Gallery: "गैलरी",
           "Enter amount:": "राशि दर्ज करें:",
-          "Add Wallet": "वॉलेट जोड़ें",
+          "Get Started": "शुरू करें",
           "Value:": "मूल्य:",
           "Delete Card": "कार्ड हटाएं",
           "Select Language": "भाषा चुनें",
@@ -2450,7 +2450,7 @@ i18n
         translation: {
           Gallery: "Галерей",
           "Enter amount:": "Дүнг оруулна уу:",
-          "Add Wallet": "Түрийвч нэмэх",
+          "Get Started": "Эхлэх",
           "Value:": "Утга:",
           "Delete Card": "Карт устгах",
           "Select Language": "Хэл сонгох",
@@ -2625,7 +2625,7 @@ i18n
         translation: {
           Gallery: "แกลเลอรี",
           "Enter amount:": "กรอกจำนวนเงิน:",
-          "Add Wallet": "เพิ่มกระเป๋าเงิน",
+          "Get Started": "เริ่มใช้งาน",
           "Value:": "มูลค่า:",
           "Delete Card": "ลบการ์ด",
           "Select Language": "เลือกภาษา",
@@ -2796,7 +2796,7 @@ i18n
         translation: {
           Gallery: "Галерея",
           "Enter amount:": "Введіть суму:",
-          "Add Wallet": "Додати гаманець",
+          "Get Started": "Розпочати",
           "Value:": "Значення:",
           "Delete Card": "Видалити картку",
           "Select Language": "Вибрати мову",
@@ -2972,7 +2972,7 @@ i18n
         translation: {
           Gallery: "Galeria",
           "Enter amount:": "Nhập số tiền:",
-          "Add Wallet": "Thêm ví",
+          "Get Started": "Bắt đầu",
           Close: "Đóng",
           "Value:": "Giá trị:",
           "Delete Card": "Xóa thẻ",
@@ -3146,7 +3146,7 @@ i18n
         translation: {
           Gallery: "Galeri",
           "Enter amount:": "Masukkan jumlah:",
-          "Add Wallet": "Tambah Dompet",
+          "Get Started": "Mulai",
           Close: "Tutup",
           "Value:": "Nilai:",
           "Delete Card": "Hapus Kartu",
@@ -3319,7 +3319,7 @@ i18n
         translation: {
           Gallery: "Galeriya",
           "Enter amount:": "Ilagay ang halaga:",
-          "Add Wallet": "Magdagdag ng Wallet",
+          "Get Started": "Magsimula",
           Close: "Isara",
           "Value:": "Halaga:",
           "Delete Card": "Tanggalin ang Card",
@@ -3494,7 +3494,7 @@ i18n
         translation: {
           Gallery: "গ্যালারি",
           "Enter amount:": "পরিমাণ লিখুন:",
-          "Add Wallet": "ওয়ালেট যোগ করুন",
+          "Get Started": "শুরু করুন",
           Close: "বন্ধ করুন",
           "Value:": "মূল্য:",
           "Delete Card": "কার্ড মুছুন",

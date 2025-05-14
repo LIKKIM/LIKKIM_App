@@ -25,7 +25,7 @@ const EmptyWalletView = ({
           style={VaultScreenStyle.addWalletButton}
         >
           <Text style={VaultScreenStyle.addWalletButtonText}>
-            {t("Add Wallet")}
+            {t("Get Started")}
           </Text>
         </TouchableOpacity>
       </ImageBackground>
