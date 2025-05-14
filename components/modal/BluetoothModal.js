@@ -19,11 +19,9 @@ const BluetoothModal = ({
   visible,
   devices,
   isScanning,
-
   handleDevicePress,
   onCancel,
   verifiedDevices,
-
   onDisconnectPress,
 }) => {
   const { t } = useTranslation();
@@ -143,7 +141,7 @@ const BluetoothModal = ({
                         <Icon
                           name={isVerified ? "mobile-friendly" : "smartphone"}
                           size={24}
-                          color={isVerified ? "#3CDA84" : iconColor}
+                          color={isVerified ? "#3CDA84" : blueToothColor}
                           style={SecureDeviceScreenStyle.deviceIcon}
                         />
                         <Text style={SecureDeviceScreenStyle.modalSubtitle}>
