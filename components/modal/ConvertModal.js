@@ -18,7 +18,7 @@ import { BlurView } from "expo-blur";
 import { MaterialIcons as Icon } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
 import { useNavigation, useRoute } from "@react-navigation/native";
-
+import { convertAPI } from "../../env/apiEndpoints";
 const ConvertModal = ({
   isDarkMode,
   visible,

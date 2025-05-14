@@ -388,6 +388,7 @@ function AppContent({
   };
 
   const {
+    updateCryptoAddress,
     isAppLaunching,
     cryptoCards,
     verifiedDevices,
