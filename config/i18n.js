@@ -43,8 +43,6 @@ i18n
           "Enter the recipient's address:": "Enter the recipient's address:",
           "Enter Address": "Enter Address",
           Submit: "Submit",
-          "Select asset to proceed:": "Select asset to proceed:",
-          "Choose asset type:": "Choose asset type:",
           "Address for": "Address for",
           Assets: "Assets",
           Activity: "Activity",
@@ -188,7 +186,6 @@ i18n
       zh: {
         translation: {
           Gallery: "画廊",
-          "Choose asset type:": "请选择资产类型",
           "Enter amount:": "输入金额：",
           "Add Wallet": "添加钱包",
           "Value:": "值:",
@@ -221,8 +218,6 @@ i18n
           "Enter the recipient's address:": "输入接收者的地址:",
           "Enter Address": "输入地址",
           Submit: "提交",
-          "Select asset to proceed": "请选择资产以继续",
-          "Choose asset type": "请选择资产类型",
           "Address for": "地址",
           Close: "关闭",
           Assets: "资产",
@@ -357,7 +352,6 @@ i18n
       "zh-TW": {
         translation: {
           Gallery: "畫廊",
-          "Choose asset type:": "請選擇資產類型：",
           "Enter amount:": "輸入金額：",
           "Add Wallet": "添加錢包",
           "Value:": "值：",
@@ -390,8 +384,6 @@ i18n
           "Enter the recipient's address:": "輸入接收者的地址：",
           "Enter Address": "輸入地址",
           Submit: "提交",
-          "Select asset to proceed": "請選擇資產以繼續",
-          "Choose asset type": "請選擇資產類型",
           "Address for": "地址",
           Close: "關閉",
           Assets: "資產",
@@ -526,7 +518,6 @@ i18n
       fr: {
         translation: {
           Gallery: "Galerie",
-          "Choose asset type:": "Choisissez le type d’actif :",
           "Enter amount:": "Saisissez le montant :",
           "Add Wallet": "Ajouter un portefeuille",
           "Value:": "Valeur :",
@@ -561,8 +552,6 @@ i18n
             "Entrez l’adresse du destinataire :",
           "Enter Address": "Saisir l’adresse",
           Submit: "Soumettre",
-          "Select asset to proceed": "Sélectionnez un actif pour continuer",
-          "Choose asset type": "Choisissez le type d’actif",
           "Address for": "Adresse pour",
           Close: "Fermer",
           Assets: "Actifs",
@@ -708,7 +697,6 @@ i18n
       es: {
         translation: {
           Gallery: "Galería",
-          "Choose asset type:": "Selecciona el tipo de activo:",
           "Enter amount:": "Ingresa la cantidad:",
           "Add Wallet": "Agregar billetera",
           "Value:": "Valor:",
@@ -743,9 +731,6 @@ i18n
             "Ingresa la dirección del destinatario:",
           "Enter Address": "Ingresa la dirección",
           Submit: "Enviar",
-          "Select asset to proceed:": "Selecciona un activo para continuar:",
-          "Select asset to proceed": "Selecciona un activo para continuar",
-          "Choose asset type": "Selecciona el tipo de activo",
           "Address for": "Dirección para",
           Close: "Cerrar",
           Assets: "Activos",
@@ -890,7 +875,6 @@ i18n
       ar: {
         translation: {
           Gallery: "معرض",
-          "Choose asset type:": "اختر نوع الأصل:",
           "Enter amount:": "أدخل المبلغ:",
           "Add Wallet": "إضافة محفظة",
           "Value:": "القيمة:",
@@ -923,8 +907,6 @@ i18n
           "Enter the recipient's address:": "أدخل عنوان المستلم:",
           "Enter Address": "أدخل العنوان",
           Submit: "إرسال",
-          "Select asset to proceed": "اختر الأصل للمتابعة",
-          "Choose asset type": "اختر نوع الأصل",
           "Address for": "العنوان لـ",
           Close: "إغلاق",
           Assets: "الأصول",
@@ -1064,7 +1046,6 @@ i18n
       ja: {
         translation: {
           Gallery: "ギャラリー",
-          "Choose asset type:": "資産タイプを選択してください：",
           "Enter amount:": "金額を入力してください：",
           "Add Wallet": "ウォレットを追加",
           "Value:": "値：",
@@ -1098,8 +1079,6 @@ i18n
           "Enter the recipient's address:": "受取人のアドレスを入力：",
           "Enter Address": "アドレスを入力",
           Submit: "送信",
-          "Select asset to proceed": "続行する資産を選択",
-          "Choose asset type": "資産タイプを選択",
           "Address for": "宛先アドレス",
           Close: "閉じる",
           Assets: "資産",
@@ -1241,7 +1220,6 @@ i18n
       ru: {
         translation: {
           Gallery: "Галерея",
-          "Choose asset type:": "Выберите тип актива:",
           "Enter amount:": "Введите сумму:",
           "Add Wallet": "Добавить кошелек",
           "Value:": "Значение:",
@@ -1275,10 +1253,6 @@ i18n
           "Enter the recipient's address:": "Введите адрес получателя:",
           "Enter Address": "Введите адрес",
           Submit: "Отправить",
-          "Select asset to proceed": "Выберите актив для продолжения",
-          "Select asset to proceed:": "Выберите актив для продолжения:",
-          "Choose asset type": "Выберите тип актива",
-          "Choose asset type:": "Выберите тип актива:",
           "Address for": "Адрес для",
           Close: "Закрыть",
           Assets: "Активы",
@@ -1421,7 +1395,6 @@ i18n
       ko: {
         translation: {
           Gallery: "갤러리",
-          "Choose asset type:": "자산 유형을 선택하세요:",
           "Enter amount:": "금액을 입력하세요:",
           "Add Wallet": "지갑 추가",
           "Value:": "값:",
@@ -1455,10 +1428,6 @@ i18n
           "Enter the recipient's address:": "수신자 주소를 입력하세요:",
           "Enter Address": "주소 입력",
           Submit: "제출",
-          "Select asset to proceed": "계속할 자산을 선택하세요",
-          "Select asset to proceed:": "계속할 자산을 선택하세요:",
-          "Choose asset type": "자산 유형 선택",
-          "Choose asset type:": "자산 유형 선택:",
           "Address for": "주소",
           Close: "닫기",
           Assets: "자산",
@@ -1597,7 +1566,6 @@ i18n
       pt: {
         translation: {
           Gallery: "Galeria",
-          "Choose asset type:": "Escolha o tipo de ativo:",
           "Enter amount:": "Digite o valor:",
           "Add Wallet": "Adicionar carteira",
           "Value:": "Valor:",
@@ -1632,9 +1600,6 @@ i18n
             "Digite o endereço do destinatário:",
           "Enter Address": "Digite o endereço",
           Submit: "Enviar",
-          "Select asset to proceed:": "Selecione um ativo para continuar:",
-          "Select asset to proceed": "Selecione um ativo para continuar",
-          "Choose asset type": "Escolha o tipo de ativo",
           "Address for": "Endereço para",
           Close: "Fechar",
           Assets: "Ativos",
@@ -1778,7 +1743,6 @@ i18n
       "pt-BR": {
         translation: {
           Gallery: "Galeria",
-          "Choose asset type:": "Escolha o tipo de ativo:",
           "Enter amount:": "Digite o valor:",
           "Add Wallet": "Adicionar carteira",
           "Value:": "Valor:",
@@ -1813,9 +1777,6 @@ i18n
             "Digite o endereço do destinatário:",
           "Enter Address": "Digite o endereço",
           Submit: "Enviar",
-          "Select asset to proceed:": "Selecione um ativo para continuar:",
-          "Select asset to proceed": "Selecione um ativo para continuar",
-          "Choose asset type": "Escolha o tipo de ativo",
           "Address for": "Endereço para",
           Close: "Fechar",
           Assets: "Ativos",
@@ -1959,7 +1920,6 @@ i18n
       it: {
         translation: {
           Gallery: "Galleria",
-          "Choose asset type:": "Seleziona il tipo di asset:",
           "Enter amount:": "Inserisci l'importo:",
           "Add Wallet": "Aggiungi portafoglio",
           "Value:": "Valore:",
@@ -1994,9 +1954,6 @@ i18n
             "Inserisci l'indirizzo del destinatario:",
           "Enter Address": "Inserisci indirizzo",
           Submit: "Invia",
-          "Select asset to proceed:": "Seleziona un asset per continuare:",
-          "Select asset to proceed": "Seleziona un asset per continuare",
-          "Choose asset type": "Seleziona il tipo di asset",
           "Address for": "Indirizzo per",
           Close: "Chiudi",
           Assets: "Asset",
@@ -2140,7 +2097,6 @@ i18n
       de: {
         translation: {
           Gallery: "Galerie",
-          "Choose asset type:": "Wählen Sie den Asset-Typ aus:",
           "Enter amount:": "Betrag eingeben:",
           "Add Wallet": "Wallet hinzufügen",
           "Value:": "Wert:",
@@ -2175,10 +2131,6 @@ i18n
             "Geben Sie die Adresse des Empfängers ein:",
           "Enter Address": "Adresse eingeben",
           Submit: "Absenden",
-          "Select asset to proceed:":
-            "Wählen Sie ein Asset zum Fortfahren aus:",
-          "Select asset to proceed": "Wählen Sie ein Asset zum Fortfahren aus",
-          "Choose asset type": "Asset-Typ auswählen",
           "Address for": "Adresse für",
           Close: "Schließen",
           Assets: "Assets",
@@ -2324,7 +2276,6 @@ i18n
       hi: {
         translation: {
           Gallery: "गैलरी",
-          "Choose asset type:": "एसेट प्रकार चुनें:",
           "Enter amount:": "राशि दर्ज करें:",
           "Add Wallet": "वॉलेट जोड़ें",
           "Value:": "मूल्य:",
@@ -2358,9 +2309,6 @@ i18n
           "Enter the recipient's address:": "प्राप्तकर्ता का पता दर्ज करें:",
           "Enter Address": "पता दर्ज करें",
           Submit: "सबमिट करें",
-          "Select asset to proceed:": "जारी रखने के लिए एसेट चुनें:",
-          "Select asset to proceed": "जारी रखने के लिए एसेट चुनें",
-          "Choose asset type": "एसेट प्रकार चुनें",
           "Address for": "के लिए पता",
           Close: "बंद करें",
           Assets: "संपत्तियाँ",
@@ -2501,7 +2449,6 @@ i18n
       mn: {
         translation: {
           Gallery: "Галерей",
-          "Choose asset type:": "Хөрөнгийн төрлийг сонгоно уу:",
           "Enter amount:": "Дүнг оруулна уу:",
           "Add Wallet": "Түрийвч нэмэх",
           "Value:": "Утга:",
@@ -2536,9 +2483,6 @@ i18n
             "Хүлээн авагчийн хаягийг оруулна уу:",
           "Enter Address": "Хаяг оруулах",
           Submit: "Илгээх",
-          "Select asset to proceed:": "Үргэлжлүүлэх хөрөнгийг сонгоно уу:",
-          "Select asset to proceed": "Үргэлжлүүлэх хөрөнгийг сонгоно уу",
-          "Choose asset type": "Хөрөнгийн төрөл сонгох",
           "Address for": "Хаяг нь",
           Close: "Хаах",
           Assets: "Хөрөнгө",
@@ -2680,7 +2624,6 @@ i18n
       th: {
         translation: {
           Gallery: "แกลเลอรี",
-          "Choose asset type:": "เลือกประเภทสินทรัพย์:",
           "Enter amount:": "กรอกจำนวนเงิน:",
           "Add Wallet": "เพิ่มกระเป๋าเงิน",
           "Value:": "มูลค่า:",
@@ -2714,9 +2657,6 @@ i18n
           "Enter the recipient's address:": "กรอกที่อยู่ผู้รับ:",
           "Enter Address": "กรอกที่อยู่",
           Submit: "ส่ง",
-          "Select asset to proceed:": "เลือกสินทรัพย์เพื่อดำเนินการ:",
-          "Select asset to proceed": "เลือกสินทรัพย์เพื่อดำเนินการ",
-          "Choose asset type": "เลือกประเภทสินทรัพย์",
           "Address for": "ที่อยู่สำหรับ",
           Close: "ปิด",
           Assets: "สินทรัพย์",
@@ -2855,7 +2795,6 @@ i18n
       uk: {
         translation: {
           Gallery: "Галерея",
-          "Choose asset type:": "Виберіть тип активу:",
           "Enter amount:": "Введіть суму:",
           "Add Wallet": "Додати гаманець",
           "Value:": "Значення:",
@@ -2889,8 +2828,6 @@ i18n
           "Enter the recipient's address:": "Введіть адресу отримувача:",
           "Enter Address": "Введіть адресу",
           Submit: "Надіслати",
-          "Select asset to proceed": "Виберіть актив для продовження",
-          "Choose asset type": "Оберіть тип активу",
           "Address for": "Адреса для",
           Close: "Закрити",
           Assets: "Активи",
@@ -3034,7 +2971,6 @@ i18n
       vi: {
         translation: {
           Gallery: "Galeria",
-          "Choose asset type:": "Chọn loại tài sản:",
           "Enter amount:": "Nhập số tiền:",
           "Add Wallet": "Thêm ví",
           Close: "Đóng",
@@ -3068,8 +3004,6 @@ i18n
           "Enter the recipient's address:": "Nhập địa chỉ người nhận:",
           "Enter Address": "Nhập địa chỉ",
           Submit: "Gửi đi",
-          "Select asset to proceed:": "Chọn tài sản để tiếp tục:",
-          "Choose asset type:": "Chọn loại tài sản:",
           "Address for": "Địa chỉ cho",
           Assets: "Tài sản",
           Activity: "Hoạt động",
@@ -3211,7 +3145,6 @@ i18n
       id: {
         translation: {
           Gallery: "Galeri",
-          "Choose asset type:": "Pilih jenis aset:",
           "Enter amount:": "Masukkan jumlah:",
           "Add Wallet": "Tambah Dompet",
           Close: "Tutup",
@@ -3246,9 +3179,6 @@ i18n
           "Enter the recipient's address:": "Masukkan alamat penerima:",
           "Enter Address": "Masukkan Alamat",
           Submit: "Kirim",
-          "Select asset to proceed:": "Pilih aset untuk melanjutkan:",
-          "Select asset to proceed": "Pilih aset untuk melanjutkan",
-          "Choose asset type": "Pilih jenis aset",
           "Address for": "Alamat untuk",
           Assets: "Aset",
           Activity: "Aktivitas",
@@ -3388,7 +3318,6 @@ i18n
       tl: {
         translation: {
           Gallery: "Galeriya",
-          "Choose asset type:": "Piliin ang uri ng asset:",
           "Enter amount:": "Ilagay ang halaga:",
           "Add Wallet": "Magdagdag ng Wallet",
           Close: "Isara",
@@ -3423,9 +3352,6 @@ i18n
           "Enter the recipient's address:": "Ilagay ang address ng tatanggap:",
           "Enter Address": "Ilagay ang Address",
           Submit: "Ipadala",
-          "Select asset to proceed:": "Pumili ng asset para magpatuloy:",
-          "Select asset to proceed": "Pumili ng asset para magpatuloy",
-          "Choose asset type": "Piliin ang uri ng asset",
           "Address for": "Address para sa",
           Assets: "Mga Asset",
           Activity: "Aktibidad",
@@ -3567,7 +3493,6 @@ i18n
       bn: {
         translation: {
           Gallery: "গ্যালারি",
-          "Choose asset type:": "সম্পদ ধরন নির্বাচন করুন:",
           "Enter amount:": "পরিমাণ লিখুন:",
           "Add Wallet": "ওয়ালেট যোগ করুন",
           Close: "বন্ধ করুন",
@@ -3601,9 +3526,6 @@ i18n
           "Enter the recipient's address:": "প্রাপকের ঠিকানা লিখুন:",
           "Enter Address": "ঠিকানা লিখুন",
           Submit: "জমা দিন",
-          "Select asset to proceed:": "চালিয়ে যেতে সম্পদ নির্বাচন করুন:",
-          "Select asset to proceed": "চালিয়ে যেতে সম্পদ নির্বাচন করুন",
-          "Choose asset type": "সম্পদ ধরন নির্বাচন করুন",
           "Address for": "ঠিকানা (জন্য)",
           Assets: "সম্পদ",
           Activity: "কার্যকলাপ",

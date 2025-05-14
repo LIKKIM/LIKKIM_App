@@ -51,15 +51,13 @@ const SelectCryptoModal = ({
               style={ActivityScreenStyle.modalView}
               onStartShouldSetResponder={() => true}
             >
-              <Text style={ActivityScreenStyle.TransactionModalTitle}>
-                {addedCryptos.length === 0
-                  ? t(
-                      "No assets available. Please connect your device to continue."
-                    )
-                  : operationType === "send"
-                  ? t("Select asset to proceed:")
-                  : t("Choose asset type:")}
-              </Text>
+              {addedCryptos.length === 0 ? (
+                <Text style={ActivityScreenStyle.TransactionModalTitle}>
+                  {t(
+                    "No assets available. Please connect your device to continue."
+                  )}
+                </Text>
+              ) : null}
 
               {addedCryptos.length > 0 && (
                 <View style={ActivityScreenStyle.searchContainer}>
