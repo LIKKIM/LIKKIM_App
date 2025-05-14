@@ -750,7 +750,7 @@ function AppContent({
           component={VaultScreen}
           initialParams={{ isDarkMode }}
           options={({ route, navigation }) => {
-            const cryptoCards = route.params?.cryptoCards || [{}];
+            const cryptoCards = route.params?.cryptoCards || [];
             return {
               headerRight: () => (
                 <View style={{ flexDirection: "row", alignItems: "center" }}>
