@@ -45,7 +45,7 @@ const BluetoothModal = ({
 
   const getDeviceLocation = async () => {
     if (!locationPermissionGranted) {
-      console.warn("Location permission not granted");
+      console.log("Location permission not granted");
       return null;
     }
     try {
