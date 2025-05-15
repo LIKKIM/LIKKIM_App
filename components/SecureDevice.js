@@ -733,28 +733,32 @@ function SecureDeviceScreen({ onDarkModeChange }) {
         } catch (error) {
           console.log("Error sending 'address':", error);
         }
-        const pubkeyMessages = [
-          "pubkey:cosmos,m/44'/118'/0'/0/0",
-          //    "pubkey:ripple,m/44'/144'/0'/0/0",
-          //    "pubkey:celestia,m/44'/118'/0'/0/0",
-          //    "pubkey:juno,m/44'/118'/0'/0/0",
-          //    "pubkey:osmosis,m/44'/118'/0'/0/0",
-        ];
 
-        for (const message of pubkeyMessages) {
-          try {
-            const bufferMessage = Buffer.from(message, "utf-8");
-            const base64Message = bufferMessage.toString("base64");
-            await selectedDevice.writeCharacteristicWithResponseForService(
-              serviceUUID,
-              writeCharacteristicUUID,
-              base64Message
-            );
-            console.log(`Sent message: ${message}`);
-          } catch (error) {
-            console.log(`Error sending message "${message}":`, error);
+        setTimeout(async () => {
+          const pubkeyMessages = [
+            "pubkey:cosmos,m/44'/118'/0'/0/0",
+            "pubkey:ripple,m/44'/144'/0'/0/0",
+            "pubkey:celestia,m/44'/118'/0'/0/0",
+            "pubkey:juno,m/44'/118'/0'/0/0",
+            "pubkey:osmosis,m/44'/118'/0'/0/0",
+          ];
+
+          for (const message of pubkeyMessages) {
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+            try {
+              const bufferMessage = Buffer.from(message, "utf-8");
+              const base64Message = bufferMessage.toString("base64");
+              await selectedDevice.writeCharacteristicWithResponseForService(
+                serviceUUID,
+                writeCharacteristicUUID,
+                base64Message
+              );
+              console.log(`Sent message: ${message}`);
+            } catch (error) {
+              console.log(`Error sending message "${message}":`, error);
+            }
           }
-        }
+        }, 500); // 延迟 5 秒发送 pubkeyMessages
       } else if (flag === "N") {
         console.log("Flag N received; no 'address' sent");
         setCheckStatusModalVisible(true);
