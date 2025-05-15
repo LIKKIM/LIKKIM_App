@@ -575,7 +575,7 @@ function VaultScreen({ route, navigation }) {
           setPriceChanges(changes); // 更新状态
         }
       } catch (error) {
-        console.log("Error fetching price changes:", error);
+        //      console.log("Error fetching price changes:", error);
       }
     };
 
