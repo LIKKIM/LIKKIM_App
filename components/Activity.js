@@ -312,7 +312,7 @@ function ActivityScreen() {
       if (mergedTransactions.length > 0) {
         setActivityLog(mergedTransactions);
       } else {
-        console.log("API 返回空数组，保留原有的交易记录");
+        //     console.log("API 返回空数组，保留原有的交易记录");
       }
     }
   };
