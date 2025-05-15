@@ -32,11 +32,12 @@ import { bluetoothConfig } from "../../env/bluetoothConfig";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { BleManager } from "react-native-ble-plx";
 const bleManager = new BleManager();
-const [selectedDevice, setSelectedDevice] = useState(null);
+
 const serviceUUID = bluetoothConfig.serviceUUID;
 const writeCharacteristicUUID = bluetoothConfig.writeCharacteristicUUID;
 const notifyCharacteristicUUID = bluetoothConfig.notifyCharacteristicUUID;
 const SkeletonImage = ({ source, style, resizeMode }) => {
+  const [selectedDevice, setSelectedDevice] = useState(null);
   const [loaded, setLoaded] = useState(false);
   const skeletonOpacity = useState(new Animated.Value(1))[0];
   const imageOpacity = useState(new Animated.Value(0))[0];

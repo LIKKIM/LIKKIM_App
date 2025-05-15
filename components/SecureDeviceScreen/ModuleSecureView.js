@@ -186,6 +186,20 @@ const ModuleSecureView = ({
             </TouchableOpacity>
           ))}
         </View>
+        {/* test Bluetooth Pairing Button */}
+        <View style={{ marginTop: 40, alignItems: "center" }}>
+          <TouchableOpacity
+            style={styles.roundButton}
+            onPress={() => {
+              Vibration.vibrate();
+              handleBluetoothPairing();
+            }}
+          >
+            <Text style={styles.BluetoothBtnText}>
+              {t("Manage Paired Devices")}
+            </Text>
+          </TouchableOpacity>
+        </View>
 
         {/* Bluetooth Pairing Button */}
         {cryptoCards.length > 0 && (
