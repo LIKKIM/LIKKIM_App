@@ -500,11 +500,13 @@ function SecureDeviceScreen({ onDarkModeChange }) {
   const monitorSubscription = useRef(null);
 
   const monitorVerificationCode = (device, sendparseDeviceCodeedValue) => {
-    if (monitorSubscription) {
-      monitorSubscription.remove();
-      monitorSubscription = null;
+    // 正确地移除已有监听
+    if (monitorSubscription.current) {
+      monitorSubscription.current.remove();
+      monitorSubscription.current = null;
     }
-    monitorSubscription = device.monitorCharacteristicForService(
+
+    monitorSubscription.current = device.monitorCharacteristicForService(
       serviceUUID,
       notifyCharacteristicUUID,
       async (error, characteristic) => {
@@ -512,6 +514,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
           console.log("Error monitoring device response:", error.message);
           return;
         }
+
         const receivedData = Buffer.from(characteristic.value, "base64");
         const receivedDataString = receivedData.toString("utf8");
         console.log("Received data string:", receivedDataString);
@@ -586,7 +589,8 @@ function SecureDeviceScreen({ onDarkModeChange }) {
 
         if (receivedDataString.startsWith("PIN:")) {
           setReceivedVerificationCode(receivedDataString);
-          monitorSubscription.remove();
+          monitorSubscription.current?.remove();
+          monitorSubscription.current = null;
           console.log("Complete PIN data received:", receivedDataString);
         }
       }
@@ -594,10 +598,10 @@ function SecureDeviceScreen({ onDarkModeChange }) {
   };
 
   const stopMonitoringVerificationCode = () => {
-    if (monitorSubscription) {
+    if (monitorSubscription.current) {
       try {
-        monitorSubscription.remove();
-        monitorSubscription = null;
+        monitorSubscription.current.remove(); // 使用 monitorSubscription.current
+        monitorSubscription.current = null; // 清除当前订阅
         console.log("Stopped monitoring verification code");
       } catch (error) {
         console.log("Error stopping monitoring:", error);
