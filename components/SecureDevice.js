@@ -374,8 +374,10 @@ function SecureDeviceScreen({ onDarkModeChange }) {
       }, true);
 
       return () => {
-        subscription.remove();
-        bleManagerRef.current && bleManagerRef.current.destroy();
+        subscription.remove(); // 清理订阅
+        if (bleManagerRef.current) {
+          bleManagerRef.current.destroy();
+        }
       };
     }
   }, []);
