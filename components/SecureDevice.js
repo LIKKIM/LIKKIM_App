@@ -537,7 +537,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
               setTimeout(() => {
                 setVerificationStatus("walletReady");
                 console.log("All public keys received, wallet ready.");
-              }, 3000);
+              }, 5000);
             } else {
               setVerificationStatus("waiting");
             }
