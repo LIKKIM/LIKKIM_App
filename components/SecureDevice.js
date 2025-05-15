@@ -536,6 +536,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
             if (Object.keys(updated).length >= expectedCount) {
               setTimeout(() => {
                 setVerificationStatus("walletReady");
+                console.log("All public keys received, wallet ready.");
               }, 3000);
             } else {
               setVerificationStatus("waiting");
@@ -760,7 +761,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
               console.log(`Error sending message "${message}":`, error);
             }
           }
-        }, 500); // 延迟 5 秒发送 pubkeyMessages
+        }, 500);
       } else if (flag === "N") {
         console.log("Flag N received; no 'address' sent");
         setCheckStatusModalVisible(true);
