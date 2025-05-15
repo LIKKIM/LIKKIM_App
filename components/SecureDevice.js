@@ -51,6 +51,12 @@ import checkAndReqPermission from "../utils/BluetoothPermissions"; // Request Bl
 import { parseDeviceCode } from "../utils/parseDeviceCode";
 import { firmwareAPI } from "../env/apiEndpoints";
 import { bluetoothConfig } from "../env/bluetoothConfig";
+// SecureDevice.js
+import {
+  monitorVerificationCode,
+  stopMonitoringVerificationCode,
+} from "../utils/bluetoothUtils";
+
 const serviceUUID = bluetoothConfig.serviceUUID;
 const writeCharacteristicUUID = bluetoothConfig.writeCharacteristicUUID;
 const notifyCharacteristicUUID = bluetoothConfig.notifyCharacteristicUUID;
@@ -481,133 +487,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
     }
   };
 
-  function hexStringToUint32Array(hexString) {
-    return new Uint32Array([
-      parseInt(hexString.slice(0, 8), 16),
-      parseInt(hexString.slice(8, 16), 16),
-    ]);
-  }
-
-  function uint32ArrayToHexString(uint32Array) {
-    return (
-      uint32Array[0].toString(16).toUpperCase().padStart(8, "0") +
-      uint32Array[1].toString(16).toUpperCase().padStart(8, "0")
-    );
-  }
-
   const [receivedAddresses, setReceivedAddresses] = useState({});
-
-  const monitorSubscription = useRef(null);
-
-  const monitorVerificationCode = (device, sendparseDeviceCodeedValue) => {
-    // 正确地移除已有监听
-    if (monitorSubscription.current) {
-      monitorSubscription.current.remove();
-      monitorSubscription.current = null;
-    }
-
-    monitorSubscription.current = device.monitorCharacteristicForService(
-      serviceUUID,
-      notifyCharacteristicUUID,
-      async (error, characteristic) => {
-        if (error) {
-          console.log("Error monitoring device response:", error.message);
-          return;
-        }
-
-        const receivedData = Buffer.from(characteristic.value, "base64");
-        const receivedDataString = receivedData.toString("utf8");
-        console.log("Received data string:", receivedDataString);
-
-        const prefix = Object.keys(prefixToShortName).find((key) =>
-          receivedDataString.startsWith(key)
-        );
-        if (prefix) {
-          const newAddress = receivedDataString.replace(prefix, "").trim();
-          const chainShortName = prefixToShortName[prefix];
-          console.log(`Received ${chainShortName} address: `, newAddress);
-          updateCryptoAddress(chainShortName, newAddress);
-
-          setReceivedAddresses((prev) => {
-            const updated = { ...prev, [chainShortName]: newAddress };
-            const expectedCount = Object.keys(prefixToShortName).length;
-            if (Object.keys(updated).length >= expectedCount) {
-              setVerificationStatus("walletReady");
-            } else {
-              setVerificationStatus("waiting");
-            }
-            return updated;
-          });
-        }
-
-        if (receivedDataString.startsWith("pubkeyData:")) {
-          const pubkeyData = receivedDataString
-            .replace("pubkeyData:", "")
-            .trim();
-          const [queryChainName, publicKey] = pubkeyData.split(",");
-          if (queryChainName && publicKey) {
-            console.log(
-              `Received public key for ${queryChainName}: ${publicKey}`
-            );
-            updateDevicePubHintKey(queryChainName, publicKey);
-          }
-        }
-
-        if (receivedDataString.includes("ID:")) {
-          const encryptedHex = receivedDataString.split("ID:")[1];
-          const encryptedData = hexStringToUint32Array(encryptedHex);
-          const key = new Uint32Array([0x1234, 0x1234, 0x1234, 0x1234]);
-          parseDeviceCode(encryptedData, key);
-          const parseDeviceCodeedHex = uint32ArrayToHexString(encryptedData);
-          console.log("parseDeviceCodeed string:", parseDeviceCodeedHex);
-          if (sendparseDeviceCodeedValue) {
-            sendparseDeviceCodeedValue(parseDeviceCodeedHex);
-          }
-        }
-
-        if (receivedDataString === "VALID") {
-          try {
-            setVerificationStatus("VALID");
-            console.log("Status set to: VALID");
-            const validationMessage = "validation";
-            const bufferValidationMessage = Buffer.from(
-              validationMessage,
-              "utf-8"
-            );
-            const base64ValidationMessage =
-              bufferValidationMessage.toString("base64");
-            await device.writeCharacteristicWithResponseForService(
-              serviceUUID,
-              writeCharacteristicUUID,
-              base64ValidationMessage
-            );
-            console.log(`Sent 'validation' to device`);
-          } catch (error) {
-            console.log("Error sending 'validation':", error);
-          }
-        }
-
-        if (receivedDataString.startsWith("PIN:")) {
-          setReceivedVerificationCode(receivedDataString);
-          monitorSubscription.current?.remove();
-          monitorSubscription.current = null;
-          console.log("Complete PIN data received:", receivedDataString);
-        }
-      }
-    );
-  };
-
-  const stopMonitoringVerificationCode = () => {
-    if (monitorSubscription.current) {
-      try {
-        monitorSubscription.current.remove(); // 使用 monitorSubscription.current
-        monitorSubscription.current = null; // 清除当前订阅
-        console.log("Stopped monitoring verification code");
-      } catch (error) {
-        console.log("Error stopping monitoring:", error);
-      }
-    }
-  };
 
   const handleCancel = () => {
     setModalVisible(false);
@@ -639,7 +519,14 @@ function SecureDeviceScreen({ onDarkModeChange }) {
         }
       };
 
-      monitorVerificationCode(device, sendparseDeviceCodeedValue);
+      monitorVerificationCode(
+        device,
+        sendparseDeviceCodeedValue,
+        setVerificationStatus,
+        setReceivedAddresses,
+        updateCryptoAddress,
+        updateDevicePubHintKey
+      );
       setTimeout(async () => {
         try {
           const requestString = "request";
@@ -715,8 +602,18 @@ function SecureDeviceScreen({ onDarkModeChange }) {
 
       if (flag === "Y") {
         console.log("Flag Y received; sending 'address' to device");
-        // ✅ 开启监听，确保设备返回的地址信息能被接收
-        monitorVerificationCode(selectedDevice);
+        // 开启监听，确保设备返回的地址信息能被接收
+        monitorVerificationCode(
+          selectedDevice,
+          (parseDeviceCodeedValue) => {
+            console.log("Parsed device code:", parseDeviceCodeedValue);
+          },
+          setVerificationStatus,
+          setReceivedAddresses,
+          updateCryptoAddress,
+          updateDevicePubHintKey
+        );
+
         try {
           const addressMessage = "address";
           const bufferAddress = Buffer.from(addressMessage, "utf-8");
@@ -731,29 +628,6 @@ function SecureDeviceScreen({ onDarkModeChange }) {
         } catch (error) {
           console.log("Error sending 'address':", error);
         }
-
-        /*         const pubkeyMessages = [
-          "pubkey:cosmos,m/44'/118'/0'/0/0",
-          "pubkey:ripple,m/44'/144'/0'/0/0",
-          "pubkey:celestia,m/44'/118'/0'/0/0",
-          "pubkey:juno,m/44'/118'/0'/0/0",
-          "pubkey:osmosis,m/44'/118'/0'/0/0",
-        ];
-
-        for (const message of pubkeyMessages) {
-          try {
-            const bufferMessage = Buffer.from(message, "utf-8");
-            const base64Message = bufferMessage.toString("base64");
-            await selectedDevice.writeCharacteristicWithResponseForService(
-              serviceUUID,
-              writeCharacteristicUUID,
-              base64Message
-            );
-            console.log(`Sent message: ${message}`);
-          } catch (error) {
-            console.log(`Error sending message "${message}":`, error);
-          }
-        } */
       } else if (flag === "N") {
         console.log("Flag N received; no 'address' sent");
         setCheckStatusModalVisible(true);
@@ -761,10 +635,6 @@ function SecureDeviceScreen({ onDarkModeChange }) {
     } else {
       console.log("PIN verification failed");
       setVerificationStatus("fail");
-      if (monitorSubscription) {
-        monitorSubscription.remove();
-        console.log("Stopped monitoring verification code");
-      }
       if (selectedDevice) {
         await selectedDevice.cancelConnection();
         console.log("Disconnected device");
