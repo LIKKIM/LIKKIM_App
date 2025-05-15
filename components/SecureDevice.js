@@ -731,13 +731,12 @@ function SecureDeviceScreen({ onDarkModeChange }) {
         } catch (error) {
           console.log("Error sending 'address':", error);
         }
-
-        /*         const pubkeyMessages = [
+        const pubkeyMessages = [
           "pubkey:cosmos,m/44'/118'/0'/0/0",
-          "pubkey:ripple,m/44'/144'/0'/0/0",
-          "pubkey:celestia,m/44'/118'/0'/0/0",
-          "pubkey:juno,m/44'/118'/0'/0/0",
-          "pubkey:osmosis,m/44'/118'/0'/0/0",
+          //    "pubkey:ripple,m/44'/144'/0'/0/0",
+          //    "pubkey:celestia,m/44'/118'/0'/0/0",
+          //    "pubkey:juno,m/44'/118'/0'/0/0",
+          //    "pubkey:osmosis,m/44'/118'/0'/0/0",
         ];
 
         for (const message of pubkeyMessages) {
@@ -753,7 +752,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
           } catch (error) {
             console.log(`Error sending message "${message}":`, error);
           }
-        } */
+        }
       } else if (flag === "N") {
         console.log("Flag N received; no 'address' sent");
         setCheckStatusModalVisible(true);
