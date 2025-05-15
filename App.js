@@ -319,6 +319,8 @@ function AppContent({
 
       if (flag === "Y") {
         console.log("Flag Y received; sending 'address' to device");
+        // ✅ 开启监听，确保设备返回的地址信息能被接收
+        monitorVerificationCode(selectedDevice);
         try {
           const addressMessage = "address";
           const bufferAddress = Buffer.from(addressMessage, "utf-8");
@@ -334,28 +336,31 @@ function AppContent({
           console.log("Error sending 'address':", error);
         }
 
-        const pubkeyMessages = [
-          "pubkey:cosmos,m/44'/118'/0'/0/0",
-          "pubkey:ripple,m/44'/144'/0'/0/0",
-          "pubkey:celestia,m/44'/118'/0'/0/0",
-          "pubkey:juno,m/44'/118'/0'/0/0",
-          "pubkey:osmosis,m/44'/118'/0'/0/0",
-        ];
+        setTimeout(async () => {
+          const pubkeyMessages = [
+            "pubkey:cosmos,m/44'/118'/0'/0/0",
+            "pubkey:ripple,m/44'/144'/0'/0/0",
+            "pubkey:celestia,m/44'/118'/0'/0/0",
+            "pubkey:juno,m/44'/118'/0'/0/0",
+            "pubkey:osmosis,m/44'/118'/0'/0/0",
+          ];
 
-        for (const message of pubkeyMessages) {
-          try {
-            const bufferMessage = Buffer.from(message, "utf-8");
-            const base64Message = bufferMessage.toString("base64");
-            await selectedDevice.writeCharacteristicWithResponseForService(
-              serviceUUID,
-              writeCharacteristicUUID,
-              base64Message
-            );
-            console.log(`Sent message: ${message}`);
-          } catch (error) {
-            console.log(`Error sending message "${message}":`, error);
+          for (const message of pubkeyMessages) {
+            await new Promise((resolve) => setTimeout(resolve, 250));
+            try {
+              const bufferMessage = Buffer.from(message, "utf-8");
+              const base64Message = bufferMessage.toString("base64");
+              await selectedDevice.writeCharacteristicWithResponseForService(
+                serviceUUID,
+                writeCharacteristicUUID,
+                base64Message
+              );
+              console.log(`Sent message: ${message}`);
+            } catch (error) {
+              console.log(`Error sending message "${message}":`, error);
+            }
           }
-        }
+        }, 500);
       } else if (flag === "N") {
         console.log("Flag N received; no 'address' sent");
         setCheckStatusModalVisible(true);
@@ -503,7 +508,10 @@ function AppContent({
             const updated = { ...prev, [chainShortName]: newAddress };
             const expectedCount = Object.keys(prefixToShortName).length;
             if (Object.keys(updated).length >= expectedCount) {
-              setVerificationStatus("walletReady");
+              setTimeout(() => {
+                setVerificationStatus("walletReady");
+                console.log("All public keys received, wallet ready.");
+              }, 5000);
             } else {
               setVerificationStatus("waiting");
             }
