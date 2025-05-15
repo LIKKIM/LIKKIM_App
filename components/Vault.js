@@ -752,19 +752,6 @@ function VaultScreen({ route, navigation }) {
     }
   };
 
-  // 停止监听验证码;
-  const stopMonitoringVerificationCode = () => {
-    if (monitorSubscription) {
-      try {
-        monitorSubscription.remove();
-        monitorSubscription = null;
-        console.log("验证码监听已停止");
-      } catch (error) {
-        console.log("停止监听时发生错误:", error);
-      }
-    }
-  };
-
   const handleSelectChain = async (chain) => {
     try {
       await AsyncStorage.setItem("selectedChain", chain); // 保存用户选择
@@ -846,10 +833,16 @@ function VaultScreen({ route, navigation }) {
   // verificationStatus 用于表示整体状态
   // 例如：setVerificationStatus("waiting") 或 setVerificationStatus("success")
 
-  let monitorSubscription;
+  const monitorSubscription = useRef(null);
 
   const monitorVerificationCode = (device, sendparseDeviceCodeedValue) => {
-    monitorSubscription = device.monitorCharacteristicForService(
+    // 正确地移除已有监听
+    if (monitorSubscription.current) {
+      monitorSubscription.current.remove();
+      monitorSubscription.current = null;
+    }
+
+    monitorSubscription.current = device.monitorCharacteristicForService(
       serviceUUID,
       notifyCharacteristicUUID,
       async (error, characteristic) => {
@@ -857,11 +850,11 @@ function VaultScreen({ route, navigation }) {
           console.log("Error monitoring device response:", error.message);
           return;
         }
+
         const receivedData = Buffer.from(characteristic.value, "base64");
         const receivedDataString = receivedData.toString("utf8");
         console.log("Received data string:", receivedDataString);
 
-        // 检查数据是否以已知前缀开头（例如 "bitcoin:"、"ethereum:" 等）
         const prefix = Object.keys(prefixToShortName).find((key) =>
           receivedDataString.startsWith(key)
         );
@@ -871,10 +864,8 @@ function VaultScreen({ route, navigation }) {
           console.log(`Received ${chainShortName} address: `, newAddress);
           updateCryptoAddress(chainShortName, newAddress);
 
-          // 更新 receivedAddresses 状态，并检查是否全部接收
           setReceivedAddresses((prev) => {
             const updated = { ...prev, [chainShortName]: newAddress };
-            // 假设预期地址数量与 prefixToShortName 中的条目数一致
             const expectedCount = Object.keys(prefixToShortName).length;
             if (Object.keys(updated).length >= expectedCount) {
               setVerificationStatus("walletReady");
@@ -898,7 +889,6 @@ function VaultScreen({ route, navigation }) {
           }
         }
 
-        // Process data containing "ID:"
         if (receivedDataString.includes("ID:")) {
           const encryptedHex = receivedDataString.split("ID:")[1];
           const encryptedData = hexStringToUint32Array(encryptedHex);
@@ -911,7 +901,6 @@ function VaultScreen({ route, navigation }) {
           }
         }
 
-        // If data is "VALID", update status and send "validation"
         if (receivedDataString === "VALID") {
           try {
             setVerificationStatus("VALID");
@@ -934,23 +923,24 @@ function VaultScreen({ route, navigation }) {
           }
         }
 
-        // Extract complete PIN data (e.g., PIN:1234,Y or PIN:1234,N)
         if (receivedDataString.startsWith("PIN:")) {
           setReceivedVerificationCode(receivedDataString);
+          monitorSubscription.current?.remove();
+          monitorSubscription.current = null;
           console.log("Complete PIN data received:", receivedDataString);
         }
       }
     );
   };
 
-  const stopMonitoringWalletAddress = () => {
-    if (monitorSubscription) {
+  const stopMonitoringVerificationCode = () => {
+    if (monitorSubscription.current) {
       try {
-        monitorSubscription.remove();
-        monitorSubscription = null;
-        console.log("钱包地址监听已停止");
+        monitorSubscription.current.remove(); // 使用 monitorSubscription.current
+        monitorSubscription.current = null; // 清除当前订阅
+        console.log("Stopped monitoring verification code");
       } catch (error) {
-        console.log("停止监听时发生错误:", error);
+        console.log("Error stopping monitoring:", error);
       }
     }
   };
