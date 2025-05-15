@@ -534,7 +534,9 @@ function SecureDeviceScreen({ onDarkModeChange }) {
             const updated = { ...prev, [chainShortName]: newAddress };
             const expectedCount = Object.keys(prefixToShortName).length;
             if (Object.keys(updated).length >= expectedCount) {
-              setVerificationStatus("walletReady");
+              setTimeout(() => {
+                setVerificationStatus("walletReady");
+              }, 3000);
             } else {
               setVerificationStatus("waiting");
             }
