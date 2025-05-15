@@ -744,7 +744,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
           ];
 
           for (const message of pubkeyMessages) {
-            await new Promise((resolve) => setTimeout(resolve, 1000));
+            await new Promise((resolve) => setTimeout(resolve, 250));
             try {
               const bufferMessage = Buffer.from(message, "utf-8");
               const base64Message = bufferMessage.toString("base64");
