@@ -1037,7 +1037,7 @@ const SecureDeviceStatus = (props) => {
                     setSendModalVisible(true);
                   }}
                 >
-                  <Text style={VaultScreenStyle.ButtonText}>{t("send")}</Text>
+                  <Text style={VaultScreenStyle.ButtonText}>{t("Send")}</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity

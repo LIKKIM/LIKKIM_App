@@ -1501,7 +1501,7 @@ function ActivityScreen() {
 
   const handleSendPress = () => {
     scanDevices();
-    setOperationType("send");
+    setOperationType("Send");
     setIsAddressValid(false);
     setModalVisible(true);
   };
@@ -1522,7 +1522,7 @@ function ActivityScreen() {
 
     if (operationType === "receive") {
       setAddressModalVisible(true);
-    } else if (operationType === "send") {
+    } else if (operationType === "Send") {
       if (verifiedDevices.length > 0) {
         const device = devices.find((d) => d.id === verifiedDevices[0]);
         if (device) {
