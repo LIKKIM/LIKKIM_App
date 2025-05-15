@@ -497,7 +497,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
 
   const [receivedAddresses, setReceivedAddresses] = useState({});
 
-  let monitorSubscription;
+  const monitorSubscription = useRef(null);
 
   const monitorVerificationCode = (device, sendparseDeviceCodeedValue) => {
     if (monitorSubscription) {
@@ -586,6 +586,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
 
         if (receivedDataString.startsWith("PIN:")) {
           setReceivedVerificationCode(receivedDataString);
+          monitorSubscription.remove();
           console.log("Complete PIN data received:", receivedDataString);
         }
       }
@@ -710,6 +711,8 @@ function SecureDeviceScreen({ onDarkModeChange }) {
 
       if (flag === "Y") {
         console.log("Flag Y received; sending 'address' to device");
+        // ✅ 开启监听，确保设备返回的地址信息能被接收
+        monitorVerificationCode(selectedDevice);
         try {
           const addressMessage = "address";
           const bufferAddress = Buffer.from(addressMessage, "utf-8");
@@ -725,7 +728,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
           console.log("Error sending 'address':", error);
         }
 
-        const pubkeyMessages = [
+        /*         const pubkeyMessages = [
           "pubkey:cosmos,m/44'/118'/0'/0/0",
           "pubkey:ripple,m/44'/144'/0'/0/0",
           "pubkey:celestia,m/44'/118'/0'/0/0",
@@ -746,7 +749,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
           } catch (error) {
             console.log(`Error sending message "${message}":`, error);
           }
-        }
+        } */
       } else if (flag === "N") {
         console.log("Flag N received; no 'address' sent");
         setCheckStatusModalVisible(true);
