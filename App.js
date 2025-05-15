@@ -394,6 +394,7 @@ function AppContent({
     verifiedDevices,
     setVerifiedDevices,
     setIsVerificationSuccessful,
+    updateDevicePubHintKey,
   } = useContext(DeviceContext);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
