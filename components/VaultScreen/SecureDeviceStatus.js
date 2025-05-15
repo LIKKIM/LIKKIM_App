@@ -28,6 +28,10 @@ import SecureDeviceScreenStyles from "../../styles/SecureDeviceScreenStyle";
 import { WebView } from "react-native-webview";
 import { galleryAPI } from "../../env/apiEndpoints";
 import ImageResizer from "react-native-image-resizer";
+import { bluetoothConfig } from "../../env/bluetoothConfig";
+const serviceUUID = bluetoothConfig.serviceUUID;
+const writeCharacteristicUUID = bluetoothConfig.writeCharacteristicUUID;
+const notifyCharacteristicUUID = bluetoothConfig.notifyCharacteristicUUID;
 const SkeletonImage = ({ source, style, resizeMode }) => {
   const [loaded, setLoaded] = useState(false);
   const skeletonOpacity = useState(new Animated.Value(1))[0];
@@ -483,6 +487,41 @@ const SecureDeviceStatus = (props) => {
         </Text>
       </TouchableOpacity>
     );
+  };
+
+  const handleSendPress = async () => {
+    console.log("handleSendPress");
+    // 检查是否选择了设备
+    if (!selectedDevice) {
+      console.log("没有选择设备");
+      return;
+    }
+
+    // 准备要发送的base64编码的消息（这可以是NFT的base64数据或任何其他消息）
+    const message = "someMessageToSend"; // 替换为实际的消息，比如NFT数据或任何字符串
+    const bufferMessage = Buffer.from(message, "utf-8"); // 将消息转换为Buffer
+    const base64Message = bufferMessage.toString("base64"); // 将Buffer转换为base64编码
+
+    console.log("准备发送的base64消息:", base64Message);
+
+    try {
+      // 确保设备已连接，并发现所有服务和特性
+      await selectedDevice.connect();
+      await selectedDevice.discoverAllServicesAndCharacteristics();
+
+      // 将base64消息发送到设备的特性
+      await selectedDevice.writeCharacteristicWithResponseForService(
+        serviceUUID, // 服务UUID
+        writeCharacteristicUUID, // 要写入的特性UUID
+        base64Message // 要发送的base64消息
+      );
+
+      console.log("消息已成功发送到设备");
+
+      // 可选：处理设备的响应（如果有的话）
+    } catch (error) {
+      console.log("发送消息时发生错误:", error);
+    }
   };
 
   return selectedView === "wallet" ? (
@@ -1234,7 +1273,7 @@ const SecureDeviceStatus = (props) => {
                   style={VaultScreenStyle.submitButton}
                   disabled={!recipientAddress}
                   onPress={() => {
-                    console.log("Confirming Transaction...");
+                    onPress = { handleSendPress };
                     setPreviewModalVisible(false);
                   }}
                 >
