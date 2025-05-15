@@ -70,7 +70,7 @@ const ModalsContainer = ({
   importingModalVisible,
   setCreatePendingModalVisible,
   setImportingModalVisible,
-  stopMonitoringWalletAddress,
+  stopMonitoringVerificationCode,
   blueToothStatus,
 }) => {
   return (
@@ -146,7 +146,7 @@ const ModalsContainer = ({
           } else if (importingModalVisible) {
             setImportingModalVisible(false);
           }
-          stopMonitoringWalletAddress();
+          stopMonitoringVerificationCode();
         }}
         VaultScreenStyle={VaultScreenStyle}
         t={t}
