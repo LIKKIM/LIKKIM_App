@@ -304,7 +304,7 @@ const SecureDeviceStatus = (props) => {
       type: "",
     };
 
-    console.log("POST 请求数据：", requestBody);
+    // console.log("POST 请求数据：", requestBody);
 
     try {
       const response = await fetch(galleryAPI.queryNFTBalance, {
@@ -315,7 +315,7 @@ const SecureDeviceStatus = (props) => {
         body: JSON.stringify(requestBody),
       });
       const json = await response.json();
-      console.log("返回数据：", json);
+      // console.log("返回数据：", json);
       if (json.code === "0" && Array.isArray(json.data)) {
         console.log("Total:", json.total);
         json.data.forEach((item, index) => {

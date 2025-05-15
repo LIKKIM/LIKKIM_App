@@ -108,26 +108,30 @@ const getSettingsOptions = ({
             },
           ]
         : []),
-      {
-        title: t("Enable Screen Lock"),
-        icon: "lock-outline",
-        onPress: () => {
-          Vibration.vibrate();
-          toggleScreenLock();
-        },
-        toggle: (
-          <Switch
-            trackColor={{ false: "#767577", true: toggleColor }}
-            thumbColor={isScreenLockEnabled ? "#fff" : "#f4f3f4"}
-            ios_backgroundColor="#3e3e3e"
-            onValueChange={() => {
-              Vibration.vibrate();
-              toggleScreenLock();
-            }}
-            value={isScreenLockEnabled}
-          />
-        ),
-      },
+      ...(cryptoCards && cryptoCards.length > 0
+        ? [
+            {
+              title: t("Enable Screen Lock"),
+              icon: "lock-outline",
+              onPress: () => {
+                Vibration.vibrate();
+                toggleScreenLock();
+              },
+              toggle: (
+                <Switch
+                  trackColor={{ false: "#767577", true: toggleColor }}
+                  thumbColor={isScreenLockEnabled ? "#fff" : "#f4f3f4"}
+                  ios_backgroundColor="#3e3e3e"
+                  onValueChange={() => {
+                    Vibration.vibrate();
+                    toggleScreenLock();
+                  }}
+                  value={isScreenLockEnabled}
+                />
+              ),
+            },
+          ]
+        : []),
       ...(isScreenLockEnabled
         ? [
             {
