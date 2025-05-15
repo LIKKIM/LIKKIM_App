@@ -86,8 +86,7 @@ export async function handlePinSubmit({
     }
 
     if (flag === "Y") {
-      console.log("Flag Y received; sending 'address' to device"); // ✅ 开启监听，确保设备返回的地址信息能被接收
-      monitorVerificationCode(selectedDevice);
+      console.log("Flag Y received; sending 'address' to device");
       try {
         const addressMessage = "address";
         const bufferAddress = Buffer.from(addressMessage, "utf-8");
