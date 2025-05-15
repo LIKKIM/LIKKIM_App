@@ -29,6 +29,10 @@ import { WebView } from "react-native-webview";
 import { galleryAPI } from "../../env/apiEndpoints";
 import ImageResizer from "react-native-image-resizer";
 import { bluetoothConfig } from "../../env/bluetoothConfig";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { BleManager } from "react-native-ble-plx";
+const bleManager = new BleManager();
+const [selectedDevice, setSelectedDevice] = useState(null);
 const serviceUUID = bluetoothConfig.serviceUUID;
 const writeCharacteristicUUID = bluetoothConfig.writeCharacteristicUUID;
 const notifyCharacteristicUUID = bluetoothConfig.notifyCharacteristicUUID;
@@ -36,10 +40,33 @@ const SkeletonImage = ({ source, style, resizeMode }) => {
   const [loaded, setLoaded] = useState(false);
   const skeletonOpacity = useState(new Animated.Value(1))[0];
   const imageOpacity = useState(new Animated.Value(0))[0];
-  // 用于控制闪烁渐变的水平平移动画
   const shimmerTranslate = useState(new Animated.Value(-200))[0];
 
-  // 当组件挂载且图片未加载时启动循环动画
+  useEffect(() => {
+    const getVerifiedDevice = async () => {
+      try {
+        const saved = await AsyncStorage.getItem("verifiedDevices");
+        if (saved) {
+          const verifiedIds = JSON.parse(saved);
+          const deviceId = verifiedIds[0]; // 默认取第一个验证的设备 ID
+
+          // 尝试通过 BleManager 获取该设备对象
+          const connectedDevice = await bleManager.devices([deviceId]);
+          if (connectedDevice && connectedDevice.length > 0) {
+            console.log("读取到的设备对象:", connectedDevice[0]);
+            setSelectedDevice(connectedDevice[0]);
+          } else {
+            console.log("未找到匹配的设备");
+          }
+        }
+      } catch (e) {
+        console.log("读取 verifiedDevices 失败:", e);
+      }
+    };
+
+    getVerifiedDevice();
+  }, []);
+
   useEffect(() => {
     if (!loaded) {
       Animated.loop(
@@ -491,36 +518,53 @@ const SecureDeviceStatus = (props) => {
 
   const handleSendPress = async () => {
     console.log("handleSendPress");
+
     // 检查是否选择了设备
     if (!selectedDevice) {
       console.log("没有选择设备");
       return;
     }
 
-    // 准备要发送的base64编码的消息（这可以是NFT的base64数据或任何其他消息）
-    const message = "someMessageToSend"; // 替换为实际的消息，比如NFT数据或任何字符串
-    const bufferMessage = Buffer.from(message, "utf-8"); // 将消息转换为Buffer
-    const base64Message = bufferMessage.toString("base64"); // 将Buffer转换为base64编码
+    // 获取合约地址和链名称
+    const contractAddress = selectedNFT?.tokenContractAddress;
+    const chainName = selectedNFT?.chain;
 
-    console.log("准备发送的base64消息:", base64Message);
+    if (!contractAddress || !chainName) {
+      console.log("合约地址或链名称为空");
+      return;
+    }
+
+    // 将合约地址和链名称转换为 Base64
+    const base64ContractAddress = Buffer.from(
+      contractAddress,
+      "utf-8"
+    ).toString("base64");
+    const base64ChainName = Buffer.from(chainName, "utf-8").toString("base64");
+
+    console.log("转换后的 Base64 合约地址:", base64ContractAddress);
+    console.log("转换后的 Base64 链名称:", base64ChainName);
+
+    // 准备要发送的消息（合约地址和链名称的 Base64 编码）
+    const message = {
+      contractAddress: base64ContractAddress,
+      chainName: base64ChainName,
+    };
 
     try {
       // 确保设备已连接，并发现所有服务和特性
       await selectedDevice.connect();
       await selectedDevice.discoverAllServicesAndCharacteristics();
 
-      // 将base64消息发送到设备的特性
+      // 将合约地址和链名称的 Base64 编码消息发送到设备
       await selectedDevice.writeCharacteristicWithResponseForService(
         serviceUUID, // 服务UUID
-        writeCharacteristicUUID, // 要写入的特性UUID
-        base64Message // 要发送的base64消息
+        writeCharacteristicUUID, // 写入特性UUID
+        JSON.stringify(message) // 将消息对象转化为 JSON 字符串并发送
       );
 
-      console.log("消息已成功发送到设备");
-
-      // 可选：处理设备的响应（如果有的话）
+      console.log("合约地址和链名称（Base64）已成功发送到设备");
     } catch (error) {
-      console.log("发送消息时发生错误:", error);
+      console.log("发送数据时出错:", error);
     }
   };
 
