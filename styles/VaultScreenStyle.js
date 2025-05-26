@@ -18,10 +18,6 @@ const VaultScreenStyles = (isDarkMode) => {
   const historyItemBorderColor = isDarkMode ? "#ccc" : "#999";
   const inputBackgroundColor = isDarkMode ? "#21201E" : "#e0e0e0";
 
-  const historyContainerBackgroundColor = isDarkMode
-    ? "#22201F90"
-    : "#FFFFFF80";
-
   const { height } = Dimensions.get("window");
   const containerHeight = height < 700 ? height - 280 : height - 360;
   return StyleSheet.create({
