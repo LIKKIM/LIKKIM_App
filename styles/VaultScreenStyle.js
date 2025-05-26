@@ -1,14 +1,7 @@
 // styles/VaultScreenStyle.js
 import { StyleSheet, Dimensions } from "react-native";
 
-/**
- * Returns a stylesheet object for the Wallet Screen.
- *
- * @param {boolean} isDarkMode - Indicates whether dark mode is enabled.
- * @returns {object} - A StyleSheet object for the Wallet Screen.
- */
 const VaultScreenStyles = (isDarkMode) => {
-  // Color definitions based on theme mode
   const textColor = isDarkMode ? "#fff" : "#000";
   const modalBackgroundColor = isDarkMode ? "#3F3D3C" : "#ffffff";
   const BluetoothBtnColor = isDarkMode ? "#CCB68C" : "#CFAB95";
@@ -25,16 +18,13 @@ const VaultScreenStyles = (isDarkMode) => {
   const historyItemBorderColor = isDarkMode ? "#ccc" : "#999";
   const inputBackgroundColor = isDarkMode ? "#21201E" : "#e0e0e0";
 
-  // Background color for the history container with opacity adjustments
   const historyContainerBackgroundColor = isDarkMode
     ? "#22201F90"
     : "#FFFFFF80";
 
-  // Get device height for dynamic layout calculations
   const { height } = Dimensions.get("window");
   const containerHeight = height < 700 ? height - 280 : height - 360;
   return StyleSheet.create({
-    // Animated container for tabs positioned over content
     animatedTabContainer: {
       flexDirection: "column",
       justifyContent: "space-between",
@@ -44,7 +34,6 @@ const VaultScreenStyles = (isDarkMode) => {
       top: 236,
       height: containerHeight,
     },
-    // Content container for the card modal
     cardModalContent: {
       width: 326,
       height: 206,
@@ -52,16 +41,14 @@ const VaultScreenStyles = (isDarkMode) => {
       alignItems: "center",
       position: "relative",
     },
-    // Container for card information with wrapping support
     cardInfoContainer: {
-      flexDirection: "column", // 修改为 column 使得它们上下排列
+      flexDirection: "column",
       width: 156,
       flex: 1,
-      alignItems: "flex-start", // 确保子元素左对齐
+      alignItems: "flex-start",
       marginBottom: 8,
     },
 
-    // Container for the card icon positioned at the top left
     cardIconContainer: {
       position: "absolute",
       top: 28,
@@ -74,7 +61,6 @@ const VaultScreenStyles = (isDarkMode) => {
       backgroundColor: "#ffffff50",
       overflow: "hidden",
     },
-    // Container for the chain icon positioned relative to the card icon
     cardChainIconContainer: {
       position: "absolute",
       top: 54,
@@ -90,7 +76,6 @@ const VaultScreenStyles = (isDarkMode) => {
       overflow: "hidden",
     },
 
-    // Tag styles
     TagChainIcon: {
       width: 14,
       height: 14,
@@ -124,7 +109,6 @@ const VaultScreenStyles = (isDarkMode) => {
       color: textColor,
     },
 
-    // Card styles
     cardName: {
       fontSize: 16,
       fontWeight: "bold",
@@ -147,7 +131,6 @@ const VaultScreenStyles = (isDarkMode) => {
       fontWeight: "bold",
     },
 
-    // Button styles
     disconnectButton: {
       marginLeft: 10,
       paddingVertical: 5,
@@ -178,7 +161,6 @@ const VaultScreenStyles = (isDarkMode) => {
       fontSize: 16,
     },
 
-    // Modal styles
     SecurityCodeModalTitle: {
       color: textColor,
       fontSize: 20,
@@ -198,7 +180,6 @@ const VaultScreenStyles = (isDarkMode) => {
       alignItems: "center",
     },
 
-    // Input field styles
     passwordInput: {
       backgroundColor: inputBackgroundColor,
       paddingHorizontal: 15,
@@ -209,7 +190,6 @@ const VaultScreenStyles = (isDarkMode) => {
       color: textColor,
     },
 
-    // Device item styles
     deviceItemContainer: {
       flexDirection: "row",
       alignItems: "center",
@@ -220,7 +200,6 @@ const VaultScreenStyles = (isDarkMode) => {
       paddingRight: 4,
     },
 
-    // Cancel button style for "Looking For" modal
     cancelButtonLookingFor: {
       borderColor: buttonBackgroundColor,
       borderWidth: 3,
@@ -233,7 +212,6 @@ const VaultScreenStyles = (isDarkMode) => {
       marginTop: 20,
     },
 
-    // Bluetooth modal styles
     bluetoothModalView: {
       margin: 20,
       height: 500,
@@ -268,7 +246,6 @@ const VaultScreenStyles = (isDarkMode) => {
       flexWrap: "wrap",
     },
 
-    // Subtitle text styles
     subtitleText: {
       fontSize: 14,
       color: secondTextColor,
@@ -284,13 +261,11 @@ const VaultScreenStyles = (isDarkMode) => {
       fontSize: 14,
     },
 
-    // Cancel button text style
     cancelButtonText: {
       color: textColor,
       fontSize: 16,
     },
 
-    // Receive modal styles
     receiveModalView: {
       margin: 20,
       height: 600,
@@ -302,7 +277,6 @@ const VaultScreenStyles = (isDarkMode) => {
       alignItems: "center",
     },
 
-    // Tab button styles
     tabButton: {
       padding: 20,
       marginHorizontal: 60,
@@ -323,7 +297,6 @@ const VaultScreenStyles = (isDarkMode) => {
       color: secondTextColor,
     },
 
-    // History item styles
     historyItemText: {
       fontSize: 16,
       color: textColor,
@@ -366,7 +339,6 @@ const VaultScreenStyles = (isDarkMode) => {
       height: "100%",
     },
 
-    // Search box styles
     searchContainer: {
       flexDirection: "row",
       alignItems: "center",
@@ -386,7 +358,6 @@ const VaultScreenStyles = (isDarkMode) => {
       color: textColor,
     },
 
-    // Linear gradient background style
     linearGradient: {
       flex: 1,
       backgroundColor: backgroundColor,
@@ -402,7 +373,6 @@ const VaultScreenStyles = (isDarkMode) => {
       paddingHorizontal: 0,
     },
 
-    // Total Value container styles
     totalBalanceContainer: {
       width: 326,
       height: 80,
@@ -428,7 +398,6 @@ const VaultScreenStyles = (isDarkMode) => {
       fontWeight: "normal",
     },
 
-    // Get Started image styles
     addWalletImage: {
       width: 326,
       height: 206,
@@ -458,7 +427,6 @@ const VaultScreenStyles = (isDarkMode) => {
       fontWeight: "bold",
     },
 
-    // Card container styles
     cardContainer: {
       position: "relative",
       marginBottom: -130,
@@ -532,7 +500,6 @@ const VaultScreenStyles = (isDarkMode) => {
       elevation: 5,
     },
 
-    // General button styles
     Button: {
       backgroundColor: buttonBackgroundColor,
       padding: 10,
@@ -608,7 +575,6 @@ const VaultScreenStyles = (isDarkMode) => {
       marginTop: 20,
     },
 
-    // Centered view style (e.g., for modals)
     centeredView: {
       flex: 1,
       justifyContent: "center",
@@ -624,7 +590,6 @@ const VaultScreenStyles = (isDarkMode) => {
       bottom: 0,
       zIndex: 2,
     },
-    // General modal view style
     modalView: {
       margin: 20,
       width: "90%",
@@ -748,7 +713,6 @@ const VaultScreenStyles = (isDarkMode) => {
       marginTop: 20,
     },
 
-    // Button text style
     ButtonText: {
       color: textColor,
       fontSize: 16,
@@ -765,10 +729,8 @@ const VaultScreenStyles = (isDarkMode) => {
       fontWeight: "bold",
     },
 
-    // Add crypto modal styles
     addCryptoModalView: {
       margin: 20,
-      //  minHeight: 400,
       maxHeight: "86%",
       width: "90%",
       backgroundColor: modalBackgroundColor,
@@ -829,7 +791,6 @@ const VaultScreenStyles = (isDarkMode) => {
       textAlign: "center",
     },
 
-    // Modal header styles
     modalHeader: {
       width: "100%",
       flexDirection: "row",
@@ -874,7 +835,6 @@ const VaultScreenStyles = (isDarkMode) => {
       fontWeight: "bold",
     },
 
-    // Dropdown menu styles
     dropdown: {
       position: "absolute",
       right: 0,
@@ -892,7 +852,6 @@ const VaultScreenStyles = (isDarkMode) => {
       fontSize: 16,
     },
 
-    // Modal icon styles
     modalIconContainer: {
       flexDirection: "row",
       alignItems: "center",
@@ -908,7 +867,6 @@ const VaultScreenStyles = (isDarkMode) => {
       fontSize: 16,
     },
 
-    // Balance view styles
     BalanceView: {
       paddingBottom: 200,
     },
@@ -926,7 +884,6 @@ const VaultScreenStyles = (isDarkMode) => {
       marginBottom: 30,
     },
 
-    // Wallet information styles
     walletInfoText: {
       color: "#676776",
       fontSize: 16,
@@ -939,7 +896,6 @@ const VaultScreenStyles = (isDarkMode) => {
       paddingHorizontal: 20,
     },
 
-    // Security title style
     securityTitle: {
       color: secondTextColor,
       fontSize: 22,
@@ -947,7 +903,6 @@ const VaultScreenStyles = (isDarkMode) => {
       marginBottom: 18,
     },
 
-    // Centered content style
     centeredContent: {
       flex: 1,
       justifyContent: "center",
@@ -955,13 +910,11 @@ const VaultScreenStyles = (isDarkMode) => {
       paddingVertical: 20,
     },
 
-    // Highlight text style
     highlightText: {
       color: "#FF6347",
       textAlign: "left",
     },
 
-    // Multi-line text input styles
     textInput: {
       width: "100%",
       height: 300,
