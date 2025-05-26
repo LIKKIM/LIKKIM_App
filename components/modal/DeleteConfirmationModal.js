@@ -2,11 +2,14 @@
 import React from "react";
 import { View, Text, Modal, Image, TouchableOpacity } from "react-native";
 import { BlurView } from "expo-blur";
-import VaultScreenStyles from "../../styles/VaultScreenStyle";
 
-const DeleteConfirmationModal = ({ visible, onClose, onConfirm, t }) => {
-  const styles = VaultScreenStyles(false); // 默认不传 dark mode，或者根据需要传入
-
+const DeleteConfirmationModal = ({
+  visible,
+  onClose,
+  onConfirm,
+  styles,
+  t,
+}) => {
   return (
     <Modal
       animationType="slide"
@@ -16,17 +19,17 @@ const DeleteConfirmationModal = ({ visible, onClose, onConfirm, t }) => {
     >
       <BlurView intensity={10} style={styles.centeredView}>
         <View style={styles.deleteModalView}>
-          <View
-            style={{
-              alignItems: "center",
-              justifyContent: "center",
-              marginBottom: 30,
-            }}
-          >
-            <Text style={styles.alertModalTitle}>{t("Warning")}</Text>
-            <Text style={styles.modalSubtitle}>
-              {t("deleteDeviceConfirmMessage")}
-            </Text>
+          <Text style={styles.alertModalTitle}>
+            {t("Remove Chain Account")}
+          </Text>
+          <Text style={styles.modalSubtitle}>
+            {t("This chain account will be removed")}
+          </Text>
+          <View style={{ alignItems: "center", justifyContent: "center" }}>
+            <Image
+              source={require("../../assets/gif/Delete.gif")}
+              style={{ width: 200, height: 200, marginBottom: 40 }}
+            />
           </View>
           <TouchableOpacity
             style={styles.removeModalButton}
