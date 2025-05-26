@@ -61,10 +61,9 @@ const SkeletonImage = ({ source, style, resizeMode }) => {
           }
         }
       } catch (e) {
-        console.log("读取 verifiedDevices 失败:", e);
+        // console.log("读取 verifiedDevices 失败:", e);
       }
     };
-
     getVerifiedDevice();
   }, []);
 
