@@ -37,6 +37,7 @@ import SecurityCodeModal from "./modal/SecurityCodeModal";
 import BluetoothModal from "./modal/BluetoothModal";
 import CheckStatusModal from "./modal/CheckStatusModal";
 import NewLockCodeModal from "./modal/NewLockCodeModal";
+import DeleteConfirmationModal from "./modal/DeleteConfirmationModal";
 import * as LocalAuthentication from "expo-local-authentication";
 import AddressBookModal from "./modal/AddressBookModal";
 import LockCodeModal from "./modal/LockCodeModal";
@@ -1001,25 +1002,20 @@ function SecureDeviceScreen({ onDarkModeChange }) {
     cryptoCards,
   });
 
+  const [deleteConfirmationVisible, setDeleteConfirmationVisible] =
+    useState(false);
+
   const handleDeleteWallet = () => {
-    Alert.alert(
-      t("Warning"),
-      t("deleteDeviceConfirmMessage"),
-      [
-        {
-          text: t("Cancel"),
-          style: "cancel",
-        },
-        {
-          text: t("Delete"),
-          style: "destructive",
-          onPress: () => {
-            deleteWallet();
-          },
-        },
-      ],
-      { cancelable: false }
-    );
+    setDeleteConfirmationVisible(true);
+  };
+
+  const closeDeleteConfirmation = () => {
+    setDeleteConfirmationVisible(false);
+  };
+
+  const confirmDeleteWallet = () => {
+    deleteWallet();
+    setDeleteConfirmationVisible(false);
   };
 
   const deleteWallet = async () => {
@@ -1234,6 +1230,13 @@ function SecureDeviceScreen({ onDarkModeChange }) {
         onClose={() => setErrorModalVisible(false)}
         message={modalMessage}
         styles={SecureDeviceScreenStyle}
+        t={t}
+      />
+
+      <DeleteConfirmationModal
+        visible={deleteConfirmationVisible}
+        onClose={closeDeleteConfirmation}
+        onConfirm={confirmDeleteWallet}
         t={t}
       />
 

@@ -98,7 +98,6 @@ const ModalsContainer = ({
           navigation.setParams({ showDeleteConfirmModal: false });
         }}
         onConfirm={handleDeleteCard}
-        styles={VaultScreenStyle}
         t={t}
       />
       {/* Bluetooth Modal */}
