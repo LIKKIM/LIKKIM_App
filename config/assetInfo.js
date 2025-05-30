@@ -32,7 +32,6 @@ export const initialAdditionalCryptos = [
     queryChainName: "arbitrum", // (和上一个相同)
     queryChainShortName: "ARB", // (和上一个相同)
     chainIcon: require("../assets/icon/ARBIcon.png"),
-
     type: "ARBITRUM",
     fee: "0.0",
     EstimatedValue: "0.0",
