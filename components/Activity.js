@@ -262,7 +262,8 @@ function ActivityScreen() {
   const fetchAllActivityLog = async () => {
     if (initialAdditionalCryptos && initialAdditionalCryptos.length > 0) {
       const uniqueCryptos = initialAdditionalCryptos.filter(
-        crypto.address &&
+        (crypto, index, self) =>
+          crypto.address &&
           crypto.address.trim() !== "" &&
           index ===
             self.findIndex(
@@ -329,7 +330,8 @@ function ActivityScreen() {
 
     let anyLoaded = false;
     const uniqueCryptos = initialAdditionalCryptos.filter(
-      crypto.address &&
+      (crypto, index, self) =>
+        crypto.address &&
         crypto.address.trim() !== "" &&
         index ===
           self.findIndex(
