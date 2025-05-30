@@ -31,6 +31,7 @@ import ImageResizer from "react-native-image-resizer";
 import { bluetoothConfig } from "../../env/bluetoothConfig";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { BleManager } from "react-native-ble-plx";
+import * as FileSystem from "expo-file-system";
 const bleManager = new BleManager();
 
 const serviceUUID = bluetoothConfig.serviceUUID;
@@ -215,33 +216,38 @@ const SecureDeviceStatus = (props) => {
         const response = await fetch(selectedNFT.logoUrl);
         const imageBlob = await response.blob();
 
-        // 使用 react-native-image-resizer 将图片转换为 JPG 格式
+        // 使用 react-native-image-resizer 将图片转换为 420x420 的 JPEG 格式
         const resizedImage = await ImageResizer.createResizedImage(
           URL.createObjectURL(imageBlob),
-          800,
-          800,
+          420,
+          420,
           "JPEG",
           80
         );
 
         console.log("Converted JPG image:", resizedImage.uri);
 
-        // 使用 fetch 获取调整后的图片
-        const resizedImageResponse = await fetch(resizedImage.uri);
-        const resizedImageBlob = await resizedImageResponse.blob();
+        // 读取转换后的 JPEG 文件为 base64 编码字符串
+        const fileUri = resizedImage.uri;
+        const fileData = await FileSystem.readAsStringAsync(fileUri, {
+          encoding: FileSystem.EncodingType.Base64,
+        });
 
-        // 使用 FileReader 将 Blob 转换为 ArrayBuffer
-        const arrayBuffer = await blobToArrayBuffer(resizedImageBlob);
+        // 写入 .bin 文件，路径为应用文档目录下的 image.bin
+        const binFileUri = FileSystem.documentDirectory + "image.bin";
+        await FileSystem.writeAsStringAsync(binFileUri, fileData, {
+          encoding: FileSystem.EncodingType.Base64,
+        });
 
-        // 将 ArrayBuffer 转换为 Uint8Array
-        const uint8Array = new Uint8Array(arrayBuffer);
+        console.log("JPEG image saved as .bin file at:", binFileUri);
 
-        console.log("Converted Uint8Array:", uint8Array);
-
-        // 保存 Uint8Array 到状态
-        setDataUrl(uint8Array); // 保存 Uint8Array
+        // 保存 base64 数据到状态（如果需要）
+        setDataUrl(fileData);
       } catch (error) {
-        console.error("Error fetching image or converting to JPG:", error);
+        console.error(
+          "Error fetching image or converting to JPEG .bin:",
+          error
+        );
       }
     }
   };
