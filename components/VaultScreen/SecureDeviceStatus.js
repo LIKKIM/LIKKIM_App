@@ -260,11 +260,13 @@ const SecureDeviceStatus = (props) => {
             encoding: FileSystem.EncodingType.Base64,
           });
 
-          // 发送 bin 文件内容到设备
+          // 发送 bin 文件内容到设备，前面加开头标志 "IMG_BIN_BEGIN"
+          const header = "IMG_BIN_BEGIN";
+          const dataToSend = header + binData;
           await selectedDevice.writeCharacteristicWithResponseForService(
             serviceUUID,
             writeCharacteristicUUID,
-            binData
+            dataToSend
           );
 
           console.log("bin 文件已成功发送到设备");
