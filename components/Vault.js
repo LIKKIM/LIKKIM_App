@@ -222,7 +222,9 @@ function VaultScreen({ route, navigation }) {
     // 查询数字货币余额 查询余额
     const fetchWalletBalance = async () => {
       try {
-        for (let card of cryptoCards) {
+        const updatedCards = [...cryptoCards];
+        for (let i = 0; i < updatedCards.length; i++) {
+          const card = updatedCards[i];
           const postData = {
             chain: card.queryChainName,
             address: card.address,
@@ -241,20 +243,12 @@ function VaultScreen({ route, navigation }) {
             const { name, balance } = data.data;
 
             if (name.toLowerCase() === card.queryChainName.toLowerCase()) {
-              card.balance = balance;
-
-              setCryptoCards((prevCards) => {
-                AsyncStorage.setItem("cryptoCards", JSON.stringify(prevCards));
-                return prevCards.map((prevCard) =>
-                  prevCard.queryChainName.toLowerCase() ===
-                  card.queryChainName.toLowerCase()
-                    ? { ...prevCard, balance: balance }
-                    : prevCard
-                );
-              });
+              updatedCards[i] = { ...card, balance: balance };
             }
           }
         }
+        setCryptoCards(updatedCards);
+        AsyncStorage.setItem("cryptoCards", JSON.stringify(updatedCards));
       } catch (error) {
         console.log("Error fetching wallet balance:", error);
       }
