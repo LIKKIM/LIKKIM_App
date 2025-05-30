@@ -192,6 +192,14 @@ function AppContent({
         if (bleManagerRef.current) {
           bleManagerRef.current.destroy();
         }
+        // 新增取消蓝牙监听订阅
+        if (monitorSubscription.current) {
+          monitorSubscription.current.remove();
+          monitorSubscription.current = null;
+          console.log(
+            "App.js: Cancelled Bluetooth monitor subscription on unmount"
+          );
+        }
       };
     }
   }, []);

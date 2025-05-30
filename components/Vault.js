@@ -475,6 +475,14 @@ function VaultScreen({ route, navigation }) {
       return () => {
         subscription.remove();
         bleManagerRef.current && bleManagerRef.current.destroy();
+        // 新增取消蓝牙监听订阅，防止订阅泄漏
+        if (monitorSubscription.current) {
+          monitorSubscription.current.remove();
+          monitorSubscription.current = null;
+          console.log(
+            "Vault.js: Cancelled Bluetooth monitor subscription on unmount"
+          );
+        }
       };
     }
   }, []);

@@ -578,6 +578,21 @@ function ActivityScreen() {
       return () => {
         subscription.remove();
         bleManagerRef.current && bleManagerRef.current.destroy();
+        // 新增取消蓝牙监听订阅，防止订阅泄漏
+        if (monitorSubscription) {
+          try {
+            monitorSubscription.remove();
+            monitorSubscription = null;
+            console.log(
+              "Activity.js: Cancelled Bluetooth monitor subscription on unmount"
+            );
+          } catch (error) {
+            console.log(
+              "Activity.js: Error cancelling Bluetooth monitor subscription on unmount",
+              error
+            );
+          }
+        }
       };
     }
   }, []);
