@@ -1,28 +1,33 @@
-import React, { useState, useMemo, useContext, useEffect } from "react";
+import React, { useState, useEffect, useMemo, useContext } from "react";
 import {
+  FlatList,
   View,
   Text,
-  FlatList,
+  ScrollView,
   TouchableOpacity,
   Modal,
   Image,
   RefreshControl,
+  ActivityIndicator,
 } from "react-native";
 import { initialAdditionalCryptos } from "../../config/assetInfo"; // 修改为实际路径
+import { CHAIN_NAMES } from "../../config/chainConfig";
 import { DeviceContext, DarkModeContext } from "../../utils/DeviceContext";
-import ChainSelectionModal from "../modal/ChainSelectionModal";
+import ChainSelectionModal from "../modal/ChainSelectionModal"; // 导入 ChainSelectionModal
 import TransactionChainFilterModal from "../modal/TransactionChainFilterModal";
 
 const ActivityLogComponent = ({
   ActivityScreenStyle,
   t,
-  ActivityLog,
+  pageData,
   isLoading,
   cryptoCards,
   refreshing,
   onRefresh,
+  onLoadMore,
+  hasMore,
 }) => {
-  console.log("ActivityLog length:", ActivityLog.length);
+  console.log("pageData length:", pageData.length);
   console.log("cryptoCards length:", cryptoCards.length);
   const [selectedTransaction, setSelectedTransaction] = useState(null);
   const [selectedChain, setSelectedChain] = useState("All");
@@ -30,95 +35,79 @@ const ActivityLogComponent = ({
   const [isChainFilterModalVisible, setChainFilterModalVisible] =
     useState(false);
 
-  // 分页
-  const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 30;
-
-  // 链筛选卡片
+  // 根据 pageData 计算每笔交易对应的链卡片
   const transactionChainCards = useMemo(() => {
     const map = new Map();
-    ActivityLog.filter((tx) => tx.amount > 0).forEach((tx) => {
-      const matchedItems = initialAdditionalCryptos.filter((item) => {
-        const address =
-          typeof item.address === "string" ? item.address.trim() : "";
-        const shortName =
-          typeof item.shortName === "string" ? item.shortName.trim() : "";
-        if (address === "Click the Verify Address Button") {
-          return shortName.toLowerCase() === tx.symbol?.trim().toLowerCase();
-        }
-        return address.toLowerCase() === tx.address?.trim().toLowerCase();
-      });
-      if (matchedItems.length > 0) {
-        const card = matchedItems[0];
-        if (!map.has(card.chainShortName)) {
-          map.set(card.chainShortName, card);
-        }
-      }
-    });
-    return Array.from(map.values());
-  }, [ActivityLog]);
 
-  // 按筛选链过滤
-  const filteredActivityLog = useMemo(
-    () =>
-      selectedChain === "All"
-        ? ActivityLog.filter((tx) => tx.amount > 0)
-        : ActivityLog.filter((transaction) => {
-            const matchedItems = initialAdditionalCryptos.filter((item) => {
-              const address =
-                item.address && typeof item.address === "string"
-                  ? item.address.trim()
-                  : "";
-              const shortName =
-                item.shortName && typeof item.shortName === "string"
-                  ? item.shortName.trim()
-                  : "";
-              if (item.address?.trim() === "Click the Verify Address Button") {
-                return (
-                  shortName.toLowerCase() ===
-                  transaction.symbol?.trim().toLowerCase()
-                );
-              }
+    pageData
+      .filter((tx) => tx.amount > 0)
+      .forEach((tx) => {
+        const matchedItems = initialAdditionalCryptos.filter((item) => {
+          const address =
+            item.address && typeof item.address === "string"
+              ? item.address?.trim()
+              : "";
+          const shortName =
+            item.shortName && typeof item.shortName === "string"
+              ? item.shortName?.trim()
+              : "";
+
+          if (address === "Click the Verify Address Button") {
+            return shortName.toLowerCase() === tx.symbol?.trim().toLowerCase();
+          }
+          return address.toLowerCase() === tx.address?.trim().toLowerCase();
+        });
+
+        if (matchedItems.length > 0) {
+          const card = matchedItems[0];
+          if (!map.has(card.chainShortName)) {
+            map.set(card.chainShortName, card);
+          }
+        }
+      });
+    return Array.from(map.values());
+  }, [pageData]);
+
+  const filteredActivityLog =
+    selectedChain === "All"
+      ? pageData.filter((tx) => tx.amount > 0)
+      : pageData.filter((transaction) => {
+          const matchedItems = initialAdditionalCryptos.filter((item) => {
+            const address =
+              item.address && typeof item.address === "string"
+                ? item.address?.trim()
+                : "";
+            const shortName =
+              item.shortName && typeof item.shortName === "string"
+                ? item.shortName?.trim()
+                : "";
+
+            if (item.address?.trim() === "Click the Verify Address Button") {
               return (
-                address.toLowerCase() ===
-                transaction.address?.trim().toLowerCase()
-              );
-            });
-            if (matchedItems.length > 0) {
-              return (
-                matchedItems[0].chainShortName === selectedChain &&
-                transaction.amount > 0
+                shortName.toLowerCase() ===
+                transaction.symbol?.trim().toLowerCase()
               );
             }
-            return false;
-          }),
-    [ActivityLog, selectedChain]
-  );
 
-  // 当前页数据
-  const pagedActivityLog = useMemo(
-    () => filteredActivityLog.slice(0, currentPage * pageSize),
-    [filteredActivityLog, currentPage, pageSize]
-  );
+            return (
+              address.toLowerCase() ===
+              transaction.address?.trim().toLowerCase()
+            );
+          });
 
-  // 链筛选弹窗是否展示
+          if (matchedItems.length > 0) {
+            return (
+              matchedItems[0].chainShortName === selectedChain &&
+              transaction.amount > 0
+            );
+          }
+          return false;
+        });
+
   const shouldDisplayChainFilterModal = filteredActivityLog.length > 0;
-
-  // 加载更多
-  const loadMore = () => {
-    if (currentPage * pageSize < filteredActivityLog.length) {
-      setCurrentPage((prev) => prev + 1);
-    }
-  };
-
-  // 筛选链或原始数据变化时，重置分页
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [selectedChain, ActivityLog]);
 
   return (
     <View style={ActivityScreenStyle.historyContainer}>
-      {/* 标题和筛选 */}
       <View
         style={{
           flexDirection: "row",
@@ -193,49 +182,25 @@ const ActivityLogComponent = ({
         </TouchableOpacity>
       </View>
 
-      {/* 交易列表 */}
       <FlatList
-        data={pagedActivityLog}
-        keyExtractor={(item, index) => index.toString()}
+        data={pageData}
+        keyExtractor={(_, index) => index.toString()}
+        style={{ flex: 1, width: "100%" }}
         contentContainerStyle={{
           flexGrow: 1,
           justifyContent:
-            ActivityLog.length === 0 || cryptoCards.length === 0 || isLoading
+            !pageData ||
+            pageData.length === 0 ||
+            cryptoCards.length === 0 ||
+            isLoading
               ? "center"
               : "flex-start",
         }}
-        style={{ flex: 1, width: "100%" }}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
-        ListEmptyComponent={
-          isLoading ? (
-            <View
-              style={{
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Text style={ActivityScreenStyle.loadingText}>
-                {t("Loading...")}
-              </Text>
-            </View>
-          ) : (
-            <View
-              style={{
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Text style={ActivityScreenStyle.noHistoryText}>
-                {t("No Histories")}
-              </Text>
-            </View>
-          )
-        }
         renderItem={({ item: transaction, index }) => {
+          // ========== 匹配币种与链图标 ==========
           const matchedItems = initialAdditionalCryptos.filter((item) => {
             if (item.address?.trim() === "Click the Verify Address Button") {
               return (
@@ -248,7 +213,6 @@ const ActivityLogComponent = ({
               transaction.address?.trim().toLowerCase()
             );
           });
-
           const chainIcon =
             matchedItems.length > 0 ? matchedItems[0].chainIcon : null;
           const cryptoItem = matchedItems.find(
@@ -258,25 +222,29 @@ const ActivityLogComponent = ({
           );
           const cryptoIcon = cryptoItem ? cryptoItem.icon : null;
 
+          // ========== 渲染单个item ==========
           return (
             <TouchableOpacity
+              key={index}
               onPress={() => setSelectedTransaction(transaction)}
             >
               <View
-                style={{
-                  borderRadius: 10,
-                  backgroundColor:
-                    transaction.state.toLowerCase() === "success"
-                      ? "rgba(71, 180, 128, 0.05)"
-                      : "rgba(210, 70, 75, 0.05)",
-                  borderLeftWidth: 3,
-                  borderLeftColor:
-                    transaction.state.toLowerCase() === "success"
-                      ? "#47B480"
-                      : "#D2464B",
-                  marginVertical: 4,
-                  padding: 10,
-                }}
+                style={[
+                  {
+                    borderRadius: 10,
+                    backgroundColor:
+                      transaction.state.toLowerCase() === "success"
+                        ? "rgba(71, 180, 128, 0.05)"
+                        : "rgba(210, 70, 75, 0.05)",
+                    borderLeftWidth: 3,
+                    borderLeftColor:
+                      transaction.state.toLowerCase() === "success"
+                        ? "#47B480"
+                        : "#D2464B",
+                    marginVertical: 4,
+                    padding: 10,
+                  },
+                ]}
               >
                 <Text style={ActivityScreenStyle.historyItemText}>
                   {`${new Date(
@@ -393,12 +361,49 @@ const ActivityLogComponent = ({
             </TouchableOpacity>
           );
         }}
-        onEndReached={loadMore}
+        // 空、加载状态完全等价ScrollView
+        ListEmptyComponent={
+          isLoading ? (
+            <View
+              style={{
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Text style={ActivityScreenStyle.loadingText}>
+                {t("Loading...")}
+              </Text>
+            </View>
+          ) : (
+            <View
+              style={{
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Text style={ActivityScreenStyle.noHistoryText}>
+                {t("No Histories")}
+              </Text>
+            </View>
+          )
+        }
+        // 底部加载更多提示
+        ListFooterComponent={
+          isLoading && pageData.length > 0 ? (
+            <View style={{ padding: 16 }}>
+              <ActivityIndicator size="small" />
+            </View>
+          ) : null
+        }
+        onEndReached={() => {
+          if (hasMore && !isLoading) onLoadMore && onLoadMore();
+        }}
         onEndReachedThreshold={0.2}
-        initialNumToRender={pageSize}
       />
 
-      {/* 显示交易详情 Modal */}
+      {/* 显示交易详情的 Modal */}
       <Modal
         visible={!!selectedTransaction}
         transparent={true}
@@ -460,9 +465,9 @@ const ActivityLogComponent = ({
                     { textAlign: "left" },
                   ]}
                 >
-                  <Text
-                    style={{ fontWeight: "bold" }}
-                  >{`Transaction Time: `}</Text>
+                  <Text style={{ fontWeight: "bold" }}>
+                    {`Transaction Time: `}
+                  </Text>
                   {`${new Date(
                     Number(selectedTransaction.transactionTime)
                   ).toLocaleString()}`}
@@ -491,9 +496,9 @@ const ActivityLogComponent = ({
                     { lineHeight: 24, textAlign: "left" },
                   ]}
                 >
-                  <Text
-                    style={{ fontWeight: "bold" }}
-                  >{`Transaction hash: `}</Text>
+                  <Text style={{ fontWeight: "bold" }}>
+                    {`Transaction hash: `}
+                  </Text>
                   {selectedTransaction.txid}
                 </Text>
                 <Text
@@ -532,7 +537,6 @@ const ActivityLogComponent = ({
           </View>
         </View>
       </Modal>
-      {/* 链筛选 Modal */}
       {shouldDisplayChainFilterModal && (
         <TransactionChainFilterModal
           isVisible={isChainFilterModalVisible}

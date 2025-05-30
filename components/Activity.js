@@ -122,11 +122,11 @@ function ActivityScreen() {
   const [addressVerificationMessage, setAddressVerificationMessage] = useState(
     t("Verifying address on your device...")
   );
-
+  const [pageData, setPageData] = useState([]);
+  const [hasMore, setHasMore] = useState(true);
+  const [activityLogPages, setActivityLogPages] = useState({});
   const [selectedFromToken, setSelectedFromToken] = useState("");
-
   const [selectedToToken, setSelectedToToken] = useState("");
-
   const [selectedFeeTab, setSelectedFeeTab] = useState("Recommended");
   const [modalStatus, setModalStatus] = useState({
     title: t("Waiting for approval on your device...."),
@@ -240,7 +240,6 @@ function ActivityScreen() {
   // 新增：获取所有卡片的交易历史记录（包含去重与分页处理）
   const fetchAllActivityLog = async () => {
     if (initialAdditionalCryptos && initialAdditionalCryptos.length > 0) {
-      // 去重：确保每个 { queryChainName, address } 组合只处理一次
       const uniqueCryptos = initialAdditionalCryptos.filter(
         (crypto, index, self) =>
           index ===
@@ -251,70 +250,128 @@ function ActivityScreen() {
           )
       );
 
-      // 对每个唯一卡片发起交易历史查询
+      // 查第一页
       const requests = uniqueCryptos.map(async (crypto) => {
-        let pageNumber = 1;
-        let allTransactions = [];
-        let continueFetching = true;
-        while (continueFetching) {
-          const postData = {
-            chain: crypto.queryChainName, // 使用卡片中的 queryChainName
-            address: crypto.address, // 使用卡片中的 address
-            page: pageNumber,
-            pageSize: 10,
-          };
+        const key = `${crypto.queryChainName}:${crypto.address}`;
+        const postData = {
+          chain: crypto.queryChainName,
+          address: crypto.address,
+          page: 1,
+          pageSize: 10,
+        };
 
-          try {
-            const response = await fetch(accountAPI.queryTransaction, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(postData),
-            });
-            const data = await response.json();
+        try {
+          const response = await fetch(accountAPI.queryTransaction, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(postData),
+          });
+          const data = await response.json();
 
-            if (
-              data &&
-              data.code === "0" &&
-              data.data &&
-              data.data.length > 0
-            ) {
-              // 只保留关心的字段
-              const processedTransactions = data.data.map((tx) => ({
-                state: tx.state,
-                amount: tx.amount,
-                address: tx.address,
-                fromAddress: tx.fromAddress,
-                toAddress: tx.toAddress,
-                symbol: tx.symbol,
-                transactionTime: tx.transactionTime,
-              }));
-              allTransactions = allTransactions.concat(processedTransactions);
-              pageNumber++;
-            } else {
-              continueFetching = false;
-            }
-          } catch (error) {
-            continueFetching = false;
+          if (data && data.code === "0" && Array.isArray(data.data)) {
+            const processedTransactions = data.data.map((tx) => ({
+              ...tx, // 保留所有字段
+              chainKey: key,
+            }));
+            // 标记当前页，是否还有下一页
+            setActivityLogPages((prev) => ({
+              ...prev,
+              [key]: { page: 1, finished: data.data.length < 10 },
+            }));
+            return processedTransactions;
+          } else {
+            setActivityLogPages((prev) => ({
+              ...prev,
+              [key]: { page: 1, finished: true },
+            }));
           }
+        } catch (err) {
+          setActivityLogPages((prev) => ({
+            ...prev,
+            [key]: { page: 1, finished: true },
+          }));
         }
-        return allTransactions;
+        return [];
       });
 
-      // 等待所有请求完成，并合并所有交易记录
       const results = await Promise.all(requests);
-      const mergedTransactions = results.reduce(
-        (acc, transactions) => acc.concat(transactions),
-        []
-      );
-
-      if (mergedTransactions.length > 0) {
-        setActivityLog(mergedTransactions);
-      } else {
-        //     console.log("API 返回空数组，保留原有的交易记录");
-      }
+      // 合并所有交易记录
+      const merged = results.flat();
+      setActivityLog(merged);
     }
+  };
+  const fetchNextActivityLogPage = async () => {
+    if (!initialAdditionalCryptos || initialAdditionalCryptos.length === 0)
+      return;
+
+    let anyLoaded = false;
+    const uniqueCryptos = initialAdditionalCryptos.filter(
+      (crypto, index, self) =>
+        index ===
+        self.findIndex(
+          (c) =>
+            c.queryChainName === crypto.queryChainName &&
+            c.address === crypto.address
+        )
+    );
+
+    const requests = uniqueCryptos.map(async (crypto) => {
+      const key = `${crypto.queryChainName}:${crypto.address}`;
+      const pageState = activityLogPages[key] || { page: 1, finished: false };
+      if (pageState.finished) return []; // 当前币已加载完
+
+      const nextPage = (pageState.page || 1) + 1;
+      const postData = {
+        chain: crypto.queryChainName,
+        address: crypto.address,
+        page: nextPage,
+        pageSize: 10,
+      };
+
+      try {
+        const response = await fetch(accountAPI.queryTransaction, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(postData),
+        });
+        const data = await response.json();
+
+        if (
+          data &&
+          data.code === "0" &&
+          Array.isArray(data.data) &&
+          data.data.length > 0
+        ) {
+          anyLoaded = true;
+          setActivityLogPages((prev) => ({
+            ...prev,
+            [key]: { page: nextPage, finished: data.data.length < 10 },
+          }));
+          return data.data.map((tx) => ({
+            ...tx,
+            chainKey: key,
+          }));
+        } else {
+          setActivityLogPages((prev) => ({
+            ...prev,
+            [key]: { page: nextPage, finished: true },
+          }));
+        }
+      } catch (err) {
+        setActivityLogPages((prev) => ({
+          ...prev,
+          [key]: { page: nextPage, finished: true },
+        }));
+      }
+      return [];
+    });
+
+    const results = await Promise.all(requests);
+    const newLogs = results.flat();
+    if (newLogs.length > 0) {
+      setActivityLog((prev) => [...prev, ...newLogs]);
+    }
+    return anyLoaded;
   };
 
   // 使用 useEffect 在组件挂载或 initialAdditionalCryptos 变化时加载交易历史
@@ -1588,11 +1645,13 @@ function ActivityScreen() {
         <ActivityLogComponent
           ActivityScreenStyle={ActivityScreenStyle}
           t={t}
-          ActivityLog={ActivityLog}
+          pageData={ActivityLog}
           isLoading={isLoading}
           cryptoCards={cryptoCards}
           refreshing={refreshing}
           onRefresh={onRefresh}
+          onLoadMore={fetchNextActivityLogPage}
+          hasMore={hasMore}
         />
 
         {/* 输入地址的 Modal */}
