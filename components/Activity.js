@@ -644,10 +644,15 @@ function ActivityScreen() {
   // verificationStatus 用于表示整体状态
   // 例如：setVerificationStatus("waiting") 或 setVerificationStatus("success")
 
-  let monitorSubscription;
+  const monitorSubscription = useRef(null);
 
   const monitorVerificationCode = (device, sendparseDeviceCodeedValue) => {
-    monitorSubscription = device.monitorCharacteristicForService(
+    if (monitorSubscription.current) {
+      monitorSubscription.current.remove();
+      monitorSubscription.current = null;
+    }
+
+    monitorSubscription.current = device.monitorCharacteristicForService(
       serviceUUID,
       notifyCharacteristicUUID,
       async (error, characteristic) => {
@@ -659,7 +664,6 @@ function ActivityScreen() {
         const receivedDataString = receivedData.toString("utf8");
         console.log("Received data string:", receivedDataString);
 
-        // 检查数据是否以已知前缀开头（例如 "bitcoin:"、"ethereum:" 等）
         const prefix = Object.keys(prefixToShortName).find((key) =>
           receivedDataString.startsWith(key)
         );
@@ -669,10 +673,8 @@ function ActivityScreen() {
           console.log(`Received ${chainShortName} address: `, newAddress);
           updateCryptoAddress(chainShortName, newAddress);
 
-          // 更新 receivedAddresses 状态，并检查是否全部接收
           setReceivedAddresses((prev) => {
             const updated = { ...prev, [chainShortName]: newAddress };
-            // 假设预期地址数量与 prefixToShortName 中的条目数一致
             const expectedCount = Object.keys(prefixToShortName).length;
             if (Object.keys(updated).length >= expectedCount) {
               setVerificationStatus("walletReady");
@@ -696,7 +698,6 @@ function ActivityScreen() {
           }
         }
 
-        // Process data containing "ID:"
         if (receivedDataString.includes("ID:")) {
           const encryptedHex = receivedDataString.split("ID:")[1];
           const encryptedData = hexStringToUint32Array(encryptedHex);
@@ -709,7 +710,6 @@ function ActivityScreen() {
           }
         }
 
-        // If data is "VALID", update status and send "validation"
         if (receivedDataString === "VALID") {
           try {
             setVerificationStatus("VALID");
@@ -732,24 +732,19 @@ function ActivityScreen() {
           }
         }
 
-        // 提取并处理 "signed_data:" 开头的数据
         if (receivedDataString.startsWith("signed_data:")) {
-          // 从 receivedDataString 中提取 chain 和 hex 值
           const signedData = receivedDataString.split("signed_data:")[1];
           const [chain, hex] = signedData.split(",");
-          // 打印 chain 和 hex 以确认它们的值
           console.log("Chain:", chain.trim());
           console.log("Hex:", hex.trim());
-          // 构造 JSON 数据
           const postData = {
-            chain: chain.trim(), // 去掉可能的空格
-            hex: hex.trim(), // 去掉可能的空格
+            chain: chain.trim(),
+            hex: hex.trim(),
           };
 
           console.log("准备发送的 JSON 数据:", postData);
 
           try {
-            // 发送 POST 请求到指定的 URL
             const response = await fetch(accountAPI.broadcastHex, {
               method: "POST",
               headers: {
@@ -758,7 +753,6 @@ function ActivityScreen() {
               body: JSON.stringify(postData),
             });
 
-            // 监听并处理返回结果
             const responseData = await response.json();
             console.log("API 返回的数据:", responseData);
 
@@ -772,7 +766,6 @@ function ActivityScreen() {
           }
         }
 
-        // Extract complete PIN data (e.g., PIN:1234,Y or PIN:1234,N)
         if (receivedDataString.startsWith("PIN:")) {
           setReceivedVerificationCode(receivedDataString);
           console.log("Complete PIN data received:", receivedDataString);
