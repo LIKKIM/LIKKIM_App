@@ -232,6 +232,7 @@ function VaultScreen({ route, navigation }) {
     const fetchWalletBalance = async () => {
       try {
         const updatedCards = [...cryptoCards];
+        let hasChange = false;
         for (let i = 0; i < updatedCards.length; i++) {
           const card = updatedCards[i];
           const postData = {
@@ -251,13 +252,19 @@ function VaultScreen({ route, navigation }) {
           if (data.code === "0" && data.data) {
             const { name, balance } = data.data;
 
-            if (name.toLowerCase() === card.queryChainName.toLowerCase()) {
+            if (
+              name.toLowerCase() === card.queryChainName.toLowerCase() &&
+              card.balance !== balance
+            ) {
               updatedCards[i] = { ...card, balance: balance };
+              hasChange = true;
             }
           }
         }
-        setCryptoCards(updatedCards);
-        AsyncStorage.setItem("cryptoCards", JSON.stringify(updatedCards));
+        if (hasChange) {
+          setCryptoCards(updatedCards);
+          AsyncStorage.setItem("cryptoCards", JSON.stringify(updatedCards));
+        }
       } catch (error) {
         console.log("Error fetching wallet balance:", error);
       }

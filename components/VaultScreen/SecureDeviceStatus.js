@@ -635,7 +635,7 @@ const SecureDeviceStatus = (props) => {
           />
         ) : null)}
 
-      {chainFilteredCards.map((card, index) => {
+      {chainFilteredCards.map((card) => {
         const isBlackText = [""].includes(card.shortName);
         const priceChange =
           props.priceChanges[card.shortName]?.priceChange || "0";
@@ -653,25 +653,29 @@ const SecureDeviceStatus = (props) => {
         return (
           <TouchableHighlight
             underlayColor={"transparent"}
-            key={`${card.shortName}_${index}`}
-            onPress={() => handleCardPress(card.name, card.chain, index)}
+            key={card.address || card.shortName || card.name}
+            onPress={() => handleCardPress(card.name, card.chain)}
             ref={(el) => {
+              const index = chainFilteredCards.indexOf(card);
               cardRefs.current[index] = el;
               initCardPosition(el, index);
             }}
             style={[
               VaultScreenStyle.cardContainer,
-              selectedCardIndex === index && { zIndex: 3 },
+              selectedCardIndex === chainFilteredCards.indexOf(card) && {
+                zIndex: 3,
+              },
             ]}
             disabled={modalVisible}
           >
             <Animated.View
               style={[
                 VaultScreenStyle.card,
-                index === 0
+                chainFilteredCards.indexOf(card) === 0
                   ? VaultScreenStyle.cardFirst
                   : VaultScreenStyle.cardOthers,
-                selectedCardIndex === index && animatedCardStyle(index),
+                selectedCardIndex === chainFilteredCards.indexOf(card) &&
+                  animatedCardStyle(chainFilteredCards.indexOf(card)),
               ]}
             >
               <ImageBackground
