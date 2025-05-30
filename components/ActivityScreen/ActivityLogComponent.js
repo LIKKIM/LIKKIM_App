@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo, useContext } from "react";
 import {
   View,
   Text,
-  ScrollView,
+  FlatList,
   TouchableOpacity,
   Modal,
   Image,
@@ -30,6 +30,10 @@ const ActivityLogComponent = ({
   const { isDarkMode } = useContext(DarkModeContext);
   const [isChainFilterModalVisible, setChainFilterModalVisible] =
     useState(false);
+
+  // 分页状态
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 30;
 
   // 根据 ActivityLog 计算每笔交易对应的链卡片
   const transactionChainCards = useMemo(() => {
@@ -98,7 +102,17 @@ const ActivityLogComponent = ({
           return false;
         });
 
+  // 当前页数据
+  const pagedActivityLog = filteredActivityLog.slice(0, currentPage * pageSize);
+
   const shouldDisplayChainFilterModal = filteredActivityLog.length > 0;
+
+  // 加载更多
+  const loadMore = () => {
+    if (currentPage * pageSize < filteredActivityLog.length) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
 
   return (
     <View style={ActivityScreenStyle.historyContainer}>
@@ -176,7 +190,9 @@ const ActivityLogComponent = ({
         </TouchableOpacity>
       </View>
 
-      <ScrollView
+      <FlatList
+        data={filteredActivityLog}
+        keyExtractor={(item, index) => index.toString()}
         contentContainerStyle={{
           flexGrow: 1,
           justifyContent:
@@ -188,190 +204,194 @@ const ActivityLogComponent = ({
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
-      >
-        {isLoading ? (
-          <View
-            style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-          >
-            <Text style={ActivityScreenStyle.loadingText}>
-              {t("Loading...")}
-            </Text>
-          </View>
-        ) : filteredActivityLog.length === 0 || cryptoCards.length === 0 ? (
-          <View
-            style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-          >
-            <Text style={ActivityScreenStyle.noHistoryText}>
-              {t("No Histories")}
-            </Text>
-          </View>
-        ) : (
-          cryptoCards.length > 0 &&
-          filteredActivityLog.map((transaction, index) => {
-            const matchedItems = initialAdditionalCryptos.filter((item) => {
-              if (item.address?.trim() === "Click the Verify Address Button") {
-                return (
-                  item.shortName?.trim().toLowerCase() ===
-                  transaction.symbol?.trim().toLowerCase()
-                );
-              }
+        ListEmptyComponent={
+          isLoading ? (
+            <View
+              style={{
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Text style={ActivityScreenStyle.loadingText}>
+                {t("Loading...")}
+              </Text>
+            </View>
+          ) : (
+            <View
+              style={{
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Text style={ActivityScreenStyle.noHistoryText}>
+                {t("No Histories")}
+              </Text>
+            </View>
+          )
+        }
+        renderItem={({ item: transaction, index }) => {
+          const matchedItems = initialAdditionalCryptos.filter((item) => {
+            if (item.address?.trim() === "Click the Verify Address Button") {
               return (
-                item.address?.trim().toLowerCase() ===
-                transaction.address?.trim().toLowerCase()
+                item.shortName?.trim().toLowerCase() ===
+                transaction.symbol?.trim().toLowerCase()
               );
-            });
-
-            const chainIcon =
-              matchedItems.length > 0 ? matchedItems[0].chainIcon : null;
-            const cryptoItem = matchedItems.find(
-              (item) =>
-                item.shortName?.trim().toUpperCase() ===
-                transaction.symbol?.trim().toUpperCase()
-            );
-            const cryptoIcon = cryptoItem ? cryptoItem.icon : null;
-
+            }
             return (
-              <TouchableOpacity
-                key={index}
-                onPress={() => setSelectedTransaction(transaction)}
+              item.address?.trim().toLowerCase() ===
+              transaction.address?.trim().toLowerCase()
+            );
+          });
+
+          const chainIcon =
+            matchedItems.length > 0 ? matchedItems[0].chainIcon : null;
+          const cryptoItem = matchedItems.find(
+            (item) =>
+              item.shortName?.trim().toUpperCase() ===
+              transaction.symbol?.trim().toUpperCase()
+          );
+          const cryptoIcon = cryptoItem ? cryptoItem.icon : null;
+
+          return (
+            <TouchableOpacity
+              onPress={() => setSelectedTransaction(transaction)}
+            >
+              <View
+                style={[
+                  {
+                    borderRadius: 10,
+                    backgroundColor:
+                      transaction.state.toLowerCase() === "success"
+                        ? "rgba(71, 180, 128, 0.05)"
+                        : "rgba(210, 70, 75, 0.05)",
+                    borderLeftWidth: 3,
+                    borderLeftColor:
+                      transaction.state.toLowerCase() === "success"
+                        ? "#47B480"
+                        : "#D2464B",
+                    marginVertical: 4,
+                    padding: 10,
+                  },
+                ]}
               >
-                <View
-                  style={[
-                    {
-                      borderRadius: 10,
-                      backgroundColor:
-                        transaction.state.toLowerCase() === "success"
-                          ? "rgba(71, 180, 128, 0.05)"
-                          : "rgba(210, 70, 75, 0.05)",
-                      borderLeftWidth: 3,
-                      borderLeftColor:
-                        transaction.state.toLowerCase() === "success"
-                          ? "#47B480"
-                          : "#D2464B",
-                      marginVertical: 4,
-                      padding: 10,
-                    },
-                  ]}
-                >
-                  <Text style={ActivityScreenStyle.historyItemText}>
-                    {`${new Date(
-                      Number(transaction.transactionTime)
-                    ).toLocaleString()}`}
-                  </Text>
-                  <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    <View
-                      style={{ position: "relative", width: 50, height: 50 }}
-                    >
-                      {["cardIconContainer", "cardChainIconContainer"].map(
-                        (_, i) => (
-                          <View
-                            key={i}
+                <Text style={ActivityScreenStyle.historyItemText}>
+                  {`${new Date(
+                    Number(transaction.transactionTime)
+                  ).toLocaleString()}`}
+                </Text>
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  <View style={{ position: "relative", width: 50, height: 50 }}>
+                    {["cardIconContainer", "cardChainIconContainer"].map(
+                      (_, i) => (
+                        <View
+                          key={i}
+                          style={
+                            i === 0
+                              ? {
+                                  position: "absolute",
+                                  top: 0,
+                                  left: 0,
+                                  width: 42,
+                                  height: 42,
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                  borderRadius: 21,
+                                  backgroundColor: "#ffffff50",
+                                  overflow: "hidden",
+                                }
+                              : {
+                                  position: "absolute",
+                                  top: 26,
+                                  left: 28,
+                                  width: 16,
+                                  height: 16,
+                                  borderWidth: 1,
+                                  borderColor: "#ffffff80",
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                  borderRadius: 15,
+                                  backgroundColor: "#ffffff80",
+                                  overflow: "hidden",
+                                }
+                          }
+                        >
+                          <Image
+                            source={i === 0 ? cryptoIcon : chainIcon}
                             style={
                               i === 0
-                                ? {
-                                    position: "absolute",
-                                    top: 0,
-                                    left: 0,
-                                    width: 42,
-                                    height: 42,
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                    borderRadius: 21,
-                                    backgroundColor: "#ffffff50",
-                                    overflow: "hidden",
-                                  }
-                                : {
-                                    position: "absolute",
-                                    top: 26,
-                                    left: 28,
-                                    width: 16,
-                                    height: 16,
-                                    borderWidth: 1,
-                                    borderColor: "#ffffff80",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                    borderRadius: 15,
-                                    backgroundColor: "#ffffff80",
-                                    overflow: "hidden",
-                                  }
+                                ? { width: 42, height: 42 }
+                                : { width: 14, height: 14 }
                             }
-                          >
-                            <Image
-                              source={i === 0 ? cryptoIcon : chainIcon}
-                              style={
-                                i === 0
-                                  ? { width: 42, height: 42 }
-                                  : { width: 14, height: 14 }
-                              }
-                              resizeMode="contain"
-                            />
-                          </View>
-                        )
-                      )}
+                            resizeMode="contain"
+                          />
+                        </View>
+                      )
+                    )}
+                  </View>
+                  <View
+                    style={{
+                      flex: 1,
+                      marginLeft: 10,
+                      justifyContent: "center",
+                    }}
+                  >
+                    <View
+                      style={{
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Text
+                        style={[
+                          ActivityScreenStyle.historyItemText,
+                          { fontSize: 16, fontWeight: "bold" },
+                        ]}
+                      >
+                        {transaction.address === transaction.fromAddress
+                          ? t("Receive")
+                          : t("Send")}
+                      </Text>
+                      <Text
+                        style={[
+                          ActivityScreenStyle.historyItemText,
+                          { fontSize: 16, fontWeight: "bold" },
+                        ]}
+                      >
+                        {transaction.address === transaction.fromAddress
+                          ? `${transaction.amount}`
+                          : `-${transaction.amount}`}{" "}
+                        {transaction.symbol}
+                      </Text>
                     </View>
                     <View
                       style={{
-                        flex: 1,
-                        marginLeft: 10,
-                        justifyContent: "center",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
                       }}
                     >
-                      <View
-                        style={{
-                          flexDirection: "row",
-                          justifyContent: "space-between",
-                          alignItems: "center",
-                        }}
-                      >
+                      <Text style={ActivityScreenStyle.historyItemText}>
                         <Text
-                          style={[
-                            ActivityScreenStyle.historyItemText,
-                            { fontSize: 16, fontWeight: "bold" },
-                          ]}
+                          style={{
+                            color:
+                              transaction.state.toLowerCase() === "success"
+                                ? "#47B480"
+                                : "#D2464B",
+                          }}
                         >
-                          {transaction.address === transaction.fromAddress
-                            ? t("Receive")
-                            : t("Send")}
+                          {transaction.state}
                         </Text>
-                        <Text
-                          style={[
-                            ActivityScreenStyle.historyItemText,
-                            { fontSize: 16, fontWeight: "bold" },
-                          ]}
-                        >
-                          {transaction.address === transaction.fromAddress
-                            ? `${transaction.amount}`
-                            : `-${transaction.amount}`}{" "}
-                          {transaction.symbol}
-                        </Text>
-                      </View>
-                      <View
-                        style={{
-                          flexDirection: "row",
-                          justifyContent: "space-between",
-                        }}
-                      >
-                        <Text style={ActivityScreenStyle.historyItemText}>
-                          <Text
-                            style={{
-                              color:
-                                transaction.state.toLowerCase() === "success"
-                                  ? "#47B480"
-                                  : "#D2464B",
-                            }}
-                          >
-                            {transaction.state}
-                          </Text>
-                        </Text>
-                      </View>
+                      </Text>
                     </View>
                   </View>
                 </View>
-              </TouchableOpacity>
-            );
-          })
-        )}
-      </ScrollView>
+              </View>
+            </TouchableOpacity>
+          );
+        }}
+      />
 
       {/* 显示交易详情的 Modal */}
       <Modal
