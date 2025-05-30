@@ -45,6 +45,27 @@ const writeCharacteristicUUID = bluetoothConfig.writeCharacteristicUUID;
 const notifyCharacteristicUUID = bluetoothConfig.notifyCharacteristicUUID;
 
 function ActivityScreen() {
+  // 工具函数、清理函数放这里
+  function isValidAmount(amount) {
+    if (amount === null || amount === undefined) return false;
+    if (amount === "0" || amount === "" || amount === "null") return false;
+    if (Number(amount) === 0 || isNaN(Number(amount))) return false;
+    return true;
+  }
+  function isValidState(state) {
+    if (state === 0 || state === "0" || state === null || state === undefined) {
+      return false;
+    }
+    return true;
+  }
+  async function cleanActivityLog(logs) {
+    const filtered = logs.filter(
+      (item) => isValidAmount(item.amount) && isValidState(item.state)
+    );
+    await AsyncStorage.setItem("ActivityLog", JSON.stringify(filtered));
+    setActivityLog(filtered);
+  }
+
   // ---------- 状态和上下文 ----------
   const { t } = useTranslation();
   const {
@@ -298,6 +319,7 @@ function ActivityScreen() {
       // 合并所有交易记录
       const merged = results.flat();
       setActivityLog(merged);
+      cleanActivityLog(merged);
     }
   };
   const fetchNextActivityLogPage = async () => {
@@ -369,7 +391,26 @@ function ActivityScreen() {
     const results = await Promise.all(requests);
     const newLogs = results.flat();
     if (newLogs.length > 0) {
-      setActivityLog((prev) => [...prev, ...newLogs]);
+      const merged = [...ActivityLog, ...newLogs];
+
+      // 过滤函数
+      const filtered = merged.filter(
+        (item) =>
+          item.state !== 0 &&
+          item.state !== "0" &&
+          item.state !== null &&
+          item.state !== undefined &&
+          item.amount !== null &&
+          item.amount !== undefined &&
+          item.amount !== "0" &&
+          item.amount !== "" &&
+          Number(item.amount) !== 0 &&
+          !isNaN(Number(item.amount))
+      );
+
+      // 持久化到AsyncStorage
+      await AsyncStorage.setItem("ActivityLog", JSON.stringify(filtered));
+      setActivityLog(filtered);
     }
     return anyLoaded;
   };
