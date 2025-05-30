@@ -244,7 +244,7 @@ const SecureDeviceStatus = (props) => {
         // 保存 base64 数据到状态（如果需要）
         setDataUrl(fileData);
 
-        // 读取 bin 文件内容并发送给 BLE 设备
+        // 读取 bin 文件内容并拆包发送给 BLE 设备
         if (!selectedDevice) {
           console.log("没有选择设备，无法发送数据");
           return;
@@ -262,14 +262,29 @@ const SecureDeviceStatus = (props) => {
 
           // 发送 bin 文件内容到设备，前面加开头标志 "IMG_BIN_BEGIN"
           const header = "IMG_BIN_BEGIN";
-          const dataToSend = header + binData;
+          const chunkSize = 240; // 每包最大字节数限制
+          const delay = 250; // 发送间隔，单位毫秒
+
+          // 先发送头部标志
           await selectedDevice.writeCharacteristicWithResponseForService(
             serviceUUID,
             writeCharacteristicUUID,
-            dataToSend
+            header
           );
 
-          console.log("bin 文件已成功发送到设备");
+          // 拆分数据并按顺序发送
+          for (let i = 0; i < binData.length; i += chunkSize) {
+            const chunk = binData.substring(i, i + chunkSize);
+            await selectedDevice.writeCharacteristicWithResponseForService(
+              serviceUUID,
+              writeCharacteristicUUID,
+              chunk
+            );
+            // 等待 250 毫秒再发送下一包
+            await new Promise((resolve) => setTimeout(resolve, delay));
+          }
+
+          console.log("bin 文件已拆包成功发送到设备");
         } catch (error) {
           console.log("发送 bin 文件时出错:", error);
         }
