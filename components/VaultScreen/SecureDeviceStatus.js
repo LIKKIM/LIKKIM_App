@@ -1,7 +1,4 @@
 // ./VaultScreen/SecureDeviceStatus.js
-/*
- * gallery save to device page
- */
 import React, { useEffect, useState } from "react";
 import {
   ScrollView,
@@ -28,6 +25,7 @@ import SecureDeviceScreenStyles from "../../styles/SecureDeviceScreenStyle";
 import { WebView } from "react-native-webview";
 import { galleryAPI } from "../../env/apiEndpoints";
 import ImageResizer from "react-native-image-resizer";
+
 import { bluetoothConfig } from "../../env/bluetoothConfig";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { BleManager } from "react-native-ble-plx";
@@ -42,8 +40,8 @@ const SkeletonImage = ({ source, style, resizeMode }) => {
   const [loaded, setLoaded] = useState(false);
   const skeletonOpacity = useState(new Animated.Value(1))[0];
   const imageOpacity = useState(new Animated.Value(0))[0];
+  // 用于控制闪烁渐变的水平平移动画
   const shimmerTranslate = useState(new Animated.Value(-200))[0];
-
   useEffect(() => {
     const getVerifiedDevice = async () => {
       try {
@@ -68,6 +66,7 @@ const SkeletonImage = ({ source, style, resizeMode }) => {
     getVerifiedDevice();
   }, []);
 
+  // 当组件挂载且图片未加载时启动循环动画
   useEffect(() => {
     if (!loaded) {
       Animated.loop(
@@ -215,7 +214,6 @@ const SecureDeviceStatus = (props) => {
         // 使用 fetch 获取图片数据
         const response = await fetch(selectedNFT.logoUrl);
         const imageBlob = await response.blob();
-
         // 使用 react-native-image-resizer 将图片转换为 420x420 的 JPEG 格式
         const resizedImage = await ImageResizer.createResizedImage(
           URL.createObjectURL(imageBlob),
@@ -296,7 +294,6 @@ const SecureDeviceStatus = (props) => {
       }
     }
   };
-
   // 使用 FileReader 将 Blob 转换为 ArrayBuffer
   const blobToArrayBuffer = (blob) => {
     return new Promise((resolve, reject) => {
@@ -308,7 +305,6 @@ const SecureDeviceStatus = (props) => {
       reader.readAsArrayBuffer(blob); // 将 Blob 读为 ArrayBuffer
     });
   };
-
   // 处理 "Next" 按钮，打开预览 Modal
   const handlePreview = () => {
     if (!selectedNFT || !recipientAddress) {
@@ -354,7 +350,7 @@ const SecureDeviceStatus = (props) => {
       type: "",
     };
 
-    // console.log("POST 请求数据：", requestBody);
+    console.log("POST 请求数据：", requestBody);
 
     try {
       const response = await fetch(galleryAPI.queryNFTBalance, {
@@ -365,7 +361,7 @@ const SecureDeviceStatus = (props) => {
         body: JSON.stringify(requestBody),
       });
       const json = await response.json();
-      // console.log("返回数据：", json);
+      console.log("返回数据：", json);
       if (json.code === "0" && Array.isArray(json.data)) {
         console.log("Total:", json.total);
         json.data.forEach((item, index) => {
@@ -686,7 +682,7 @@ const SecureDeviceStatus = (props) => {
           />
         ) : null)}
 
-      {chainFilteredCards.map((card) => {
+      {chainFilteredCards.map((card, index) => {
         const isBlackText = [""].includes(card.shortName);
         const priceChange =
           props.priceChanges[card.shortName]?.priceChange || "0";
@@ -704,29 +700,25 @@ const SecureDeviceStatus = (props) => {
         return (
           <TouchableHighlight
             underlayColor={"transparent"}
-            key={card.address || card.shortName || card.name}
-            onPress={() => handleCardPress(card.name, card.chain)}
+            key={`${card.shortName}_${index}`}
+            onPress={() => handleCardPress(card.name, card.chain, index)}
             ref={(el) => {
-              const index = chainFilteredCards.indexOf(card);
               cardRefs.current[index] = el;
               initCardPosition(el, index);
             }}
             style={[
               VaultScreenStyle.cardContainer,
-              selectedCardIndex === chainFilteredCards.indexOf(card) && {
-                zIndex: 3,
-              },
+              selectedCardIndex === index && { zIndex: 3 },
             ]}
             disabled={modalVisible}
           >
             <Animated.View
               style={[
                 VaultScreenStyle.card,
-                chainFilteredCards.indexOf(card) === 0
+                index === 0
                   ? VaultScreenStyle.cardFirst
                   : VaultScreenStyle.cardOthers,
-                selectedCardIndex === chainFilteredCards.indexOf(card) &&
-                  animatedCardStyle(chainFilteredCards.indexOf(card)),
+                selectedCardIndex === index && animatedCardStyle(index),
               ]}
             >
               <ImageBackground
@@ -1175,7 +1167,7 @@ const SecureDeviceStatus = (props) => {
                     setSendModalVisible(true);
                   }}
                 >
-                  <Text style={VaultScreenStyle.ButtonText}>{t("Send")}</Text>
+                  <Text style={VaultScreenStyle.ButtonText}>{t("send")}</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
