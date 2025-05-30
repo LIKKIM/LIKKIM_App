@@ -243,6 +243,34 @@ const SecureDeviceStatus = (props) => {
 
         // 保存 base64 数据到状态（如果需要）
         setDataUrl(fileData);
+
+        // 读取 bin 文件内容并发送给 BLE 设备
+        if (!selectedDevice) {
+          console.log("没有选择设备，无法发送数据");
+          return;
+        }
+
+        try {
+          // 确保设备已连接，并发现所有服务和特性
+          await selectedDevice.connect();
+          await selectedDevice.discoverAllServicesAndCharacteristics();
+
+          // 读取 bin 文件的 base64 内容
+          const binData = await FileSystem.readAsStringAsync(binFileUri, {
+            encoding: FileSystem.EncodingType.Base64,
+          });
+
+          // 发送 bin 文件内容到设备
+          await selectedDevice.writeCharacteristicWithResponseForService(
+            serviceUUID,
+            writeCharacteristicUUID,
+            binData
+          );
+
+          console.log("bin 文件已成功发送到设备");
+        } catch (error) {
+          console.log("发送 bin 文件时出错:", error);
+        }
       } catch (error) {
         console.error(
           "Error fetching image or converting to JPEG .bin:",
