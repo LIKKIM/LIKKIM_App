@@ -287,10 +287,7 @@ const SecureDeviceStatus = (props) => {
           console.log("发送 bin 文件时出错:", error);
         }
       } catch (error) {
-        console.error(
-          "Error fetching image or converting to JPEG .bin:",
-          error
-        );
+        console.log("Error fetching image or converting to JPEG .bin:", error);
       }
     }
   };
@@ -1167,7 +1164,7 @@ const SecureDeviceStatus = (props) => {
                     setSendModalVisible(true);
                   }}
                 >
-                  <Text style={VaultScreenStyle.ButtonText}>{t("send")}</Text>
+                  <Text style={VaultScreenStyle.ButtonText}>{t("Send")}</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
