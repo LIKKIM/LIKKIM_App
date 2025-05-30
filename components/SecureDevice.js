@@ -6,6 +6,7 @@ import {
   Text,
   Modal,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   ScrollView,
   Platform,
   Switch,
@@ -1001,25 +1002,20 @@ function SecureDeviceScreen({ onDarkModeChange }) {
     cryptoCards,
   });
 
+  const [deleteWalletModalVisible, setDeleteWalletModalVisible] =
+    useState(false);
+
   const handleDeleteWallet = () => {
-    Alert.alert(
-      t("Warning"),
-      t("deleteDeviceConfirmMessage"),
-      [
-        {
-          text: t("Cancel"),
-          style: "cancel",
-        },
-        {
-          text: t("Delete"),
-          style: "destructive",
-          onPress: () => {
-            deleteWallet();
-          },
-        },
-      ],
-      { cancelable: false }
-    );
+    setDeleteWalletModalVisible(true);
+  };
+
+  const confirmDeleteWallet = () => {
+    deleteWallet();
+    setDeleteWalletModalVisible(false);
+  };
+
+  const cancelDeleteWallet = () => {
+    setDeleteWalletModalVisible(false);
   };
 
   const deleteWallet = async () => {
@@ -1070,6 +1066,53 @@ function SecureDeviceScreen({ onDarkModeChange }) {
         cryptoCards={cryptoCards}
         t={t}
       />
+
+      {/* Delete Wallet Confirmation Modal */}
+      <Modal
+        visible={deleteWalletModalVisible}
+        transparent={true}
+        animationType="slide"
+        onRequestClose={cancelDeleteWallet}
+      >
+        <TouchableWithoutFeedback onPress={cancelDeleteWallet}>
+          <BlurView intensity={10} style={SecureDeviceScreenStyle.centeredView}>
+            <View style={SecureDeviceScreenStyle.modalView}>
+              <Text style={SecureDeviceScreenStyle.modalTitle}>
+                {t("Warning")}
+              </Text>
+              <Text style={SecureDeviceScreenStyle.modalSubtitle}>
+                {t("deleteDeviceConfirmMessage")}
+              </Text>
+              <View
+                style={{
+                  flexDirection: "column",
+                  justifyContent: "flex-end",
+                  width: 300,
+                  marginTop: 20,
+                  alignSelf: "center",
+                }}
+              >
+                <TouchableOpacity
+                  style={SecureDeviceScreenStyle.submitButton}
+                  onPress={confirmDeleteWallet}
+                >
+                  <Text style={SecureDeviceScreenStyle.submitButtonText}>
+                    {t("Delete")}
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={SecureDeviceScreenStyle.cancelButton}
+                  onPress={cancelDeleteWallet}
+                >
+                  <Text style={SecureDeviceScreenStyle.cancelButtonText}>
+                    {t("Cancel")}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </BlurView>
+        </TouchableWithoutFeedback>
+      </Modal>
 
       {/* Language Modal */}
       <LanguageModal
@@ -1253,17 +1296,12 @@ function SecureDeviceScreen({ onDarkModeChange }) {
         animationType="slide"
         onRequestClose={() => setErrorModalVisible(false)}
       >
-        <View style={SecureDeviceScreenStyle.modalContainer}>
-          <View style={SecureDeviceScreenStyle.modalContent}>
-            <Text style={SecureDeviceScreenStyle.modalTitle}>{t("Error")}</Text>
-            <Text style={SecureDeviceScreenStyle.modalMessage}>
-              {modalMessage}
-            </Text>
-            <Button
-              title={t("OK")}
-              onPress={() => setErrorModalVisible(false)}
-            />
-          </View>
+        <View style={SecureDeviceScreenStyle.modalView}>
+          <Text style={SecureDeviceScreenStyle.modalTitle}>{t("Error")}</Text>
+          <Text style={SecureDeviceScreenStyle.modalSubtitle}>
+            {modalMessage}
+          </Text>
+          <Button title={t("OK")} onPress={() => setErrorModalVisible(false)} />
         </View>
       </Modal>
     </LinearGradient>
