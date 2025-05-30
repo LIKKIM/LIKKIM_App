@@ -200,9 +200,13 @@ function VaultScreen({ route, navigation }) {
 
           // 更新 cryptoCards 中的 priceUsd
           setCryptoCards((prevCards) => {
-            return prevCards.map((card) => {
-              // 如果 priceChanges 中有相应的币种价格，更新该卡片的 priceUsd
-              if (changes[card.shortName]) {
+            let hasChange = false;
+            const updatedCards = prevCards.map((card) => {
+              if (
+                changes[card.shortName] &&
+                card.priceUsd !== changes[card.shortName].priceChange
+              ) {
+                hasChange = true;
                 return {
                   ...card,
                   priceUsd: changes[card.shortName].priceChange, // 更新价格
@@ -210,6 +214,11 @@ function VaultScreen({ route, navigation }) {
               }
               return card;
             });
+            if (hasChange) {
+              return updatedCards;
+            } else {
+              return prevCards;
+            }
           });
         }
       } catch (error) {
