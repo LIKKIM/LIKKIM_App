@@ -25,7 +25,6 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
     },
     addressModalView: {
       margin: 20,
-
       width: "90%",
       backgroundColor: modalBackgroundColor,
       borderRadius: 20,
@@ -334,7 +333,6 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
     },
     modalView: {
       margin: 20,
-      height: 500,
       width: "90%",
       backgroundColor: modalBackgroundColor,
       borderRadius: 20,

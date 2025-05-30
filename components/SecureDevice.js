@@ -38,6 +38,7 @@ import SecurityCodeModal from "./modal/SecurityCodeModal";
 import BluetoothModal from "./modal/BluetoothModal";
 import CheckStatusModal from "./modal/CheckStatusModal";
 import NewLockCodeModal from "./modal/NewLockCodeModal";
+import DeleteWalletConfirmationModal from "./modal/DeleteWalletConfirmationModal";
 import * as LocalAuthentication from "expo-local-authentication";
 import AddressBookModal from "./modal/AddressBookModal";
 import LockCodeModal from "./modal/LockCodeModal";
@@ -1068,51 +1069,14 @@ function SecureDeviceScreen({ onDarkModeChange }) {
       />
 
       {/* Delete Wallet Confirmation Modal */}
-      <Modal
+      <DeleteWalletConfirmationModal
         visible={deleteWalletModalVisible}
-        transparent={true}
-        animationType="slide"
         onRequestClose={cancelDeleteWallet}
-      >
-        <TouchableWithoutFeedback onPress={cancelDeleteWallet}>
-          <BlurView intensity={10} style={SecureDeviceScreenStyle.centeredView}>
-            <View style={SecureDeviceScreenStyle.modalView}>
-              <Text style={SecureDeviceScreenStyle.modalTitle}>
-                {t("Warning")}
-              </Text>
-              <Text style={SecureDeviceScreenStyle.modalSubtitle}>
-                {t("deleteDeviceConfirmMessage")}
-              </Text>
-              <View
-                style={{
-                  flexDirection: "column",
-                  justifyContent: "flex-end",
-                  width: 300,
-                  marginTop: 20,
-                  alignSelf: "center",
-                }}
-              >
-                <TouchableOpacity
-                  style={SecureDeviceScreenStyle.submitButton}
-                  onPress={confirmDeleteWallet}
-                >
-                  <Text style={SecureDeviceScreenStyle.submitButtonText}>
-                    {t("Delete")}
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={SecureDeviceScreenStyle.cancelButton}
-                  onPress={cancelDeleteWallet}
-                >
-                  <Text style={SecureDeviceScreenStyle.cancelButtonText}>
-                    {t("Cancel")}
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </BlurView>
-        </TouchableWithoutFeedback>
-      </Modal>
+        onConfirm={confirmDeleteWallet}
+        onCancel={cancelDeleteWallet}
+        styles={SecureDeviceScreenStyle}
+        t={t}
+      />
 
       {/* Language Modal */}
       <LanguageModal
