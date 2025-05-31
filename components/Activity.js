@@ -1020,7 +1020,6 @@ function ActivityScreen() {
     amount,
     paymentAddress,
     inputAddress,
-    selectedCrypto,
     selectedQueryChainName,
     contractAddress
   ) => {
@@ -1784,7 +1783,8 @@ function ActivityScreen() {
                 amount,
                 selectedCryptoObj.address,
                 inputAddress,
-                selectedCryptoObj.shortName
+                selectedCryptoObj.queryChainName,
+                selectedCryptoObj.contractAddress
               );
             } catch (error) {
               console.log("确认交易时出错:", error);
