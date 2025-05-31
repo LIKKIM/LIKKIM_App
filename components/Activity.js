@@ -1,12 +1,13 @@
 // Activity.js
 import React, { useContext, useState, useRef, useEffect } from "react";
-import { View, Clipboard, Platform } from "react-native";
+import { View, Clipboard, Platform, AppState } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Buffer } from "buffer";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Constants from "expo-constants";
 import { useTranslation } from "react-i18next";
 import { BleManager } from "react-native-ble-plx";
+import { useIsFocused } from "@react-navigation/native";
 
 // 配置与工具
 import { prefixToShortName } from "../config/chainPrefixes";
@@ -68,6 +69,7 @@ function ActivityScreen() {
 
   // ---------- 状态和上下文 ----------
   const { t } = useTranslation();
+
   const {
     updateCryptoAddress,
     initialAdditionalCryptos,
@@ -85,6 +87,8 @@ function ActivityScreen() {
     setActivityLog,
     updateDevicePubHintKey,
   } = useContext(DeviceContext);
+  const isFocused = useIsFocused(); // 🔹判断是否当前页面
+  const appState = useRef(AppState.currentState); // 🔹保存当前 App 状态
   const [isLoading, setIsLoading] = useState(true);
   const { isDarkMode } = useContext(DarkModeContext);
   const ActivityScreenStyle = ActivityScreenStyles(isDarkMode);
@@ -419,10 +423,28 @@ function ActivityScreen() {
     return anyLoaded;
   };
 
-  // 使用 useEffect 在组件挂载或 initialAdditionalCryptos 变化时加载交易历史
+  // ⏱️ 每 30 秒定时刷新，仅当前页面且 App 前台才执行
   useEffect(() => {
-    fetchAllActivityLog();
-  }, [initialAdditionalCryptos]);
+    const intervalId = setInterval(() => {
+      if (appState.current === "active" && isFocused) {
+        fetchAllActivityLog();
+      }
+    }, 30000);
+
+    const handleAppStateChange = (nextAppState) => {
+      appState.current = nextAppState;
+    };
+
+    const subscription = AppState.addEventListener(
+      "change",
+      handleAppStateChange
+    );
+
+    return () => {
+      clearInterval(intervalId);
+      subscription.remove(); // ✅ 正确移除监听器
+    };
+  }, [isFocused, initialAdditionalCryptos]);
 
   // 在 ActivityScreen 组件的 useEffect 或合适位置添加代码来获取手续费
   const fetchTransactionFee = async () => {
