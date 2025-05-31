@@ -26,3 +26,32 @@ export const families = {
   xrp: decodeList(xrpRaw),
   doge: decodeList(dogeRaw),
 };
+
+export const chainGroups = {
+  ethereum: [
+    "arbitrum",
+    "aurora",
+    "avalanchec",
+    "smartchain",
+    "ethereum",
+    "classic",
+    "fantom",
+    "gnosis",
+    "cronos",
+    "iotexevm",
+    "linea",
+    "okc",
+    "optimisim",
+    "polygon",
+    "zksync",
+    "ronin",
+    "celo",
+  ],
+  bitcoin: ["bitcoin", "bitcoincash", "litecoin"],
+  tron: ["tron"],
+  aptos: ["aptos"],
+  cosmos: ["cosmos", "celestia", "cryptoorg", "juno", "osmosis"],
+  solana: ["solana"],
+  sui: ["sui"],
+  ripple: ["ripple"],
+};

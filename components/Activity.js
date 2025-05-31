@@ -12,10 +12,9 @@ import { useIsFocused } from "@react-navigation/native";
 // 配置与工具
 import { prefixToShortName } from "../config/chainPrefixes";
 import assetOps from "../config/assetOps";
-
 import { detectNetwork } from "../config/networkUtils";
 import checkAndReqPermission from "../utils/BluetoothPermissions";
-import { families } from "../config/mappingRegistry";
+import { chainGroups, families } from "../config/mappingRegistry";
 
 // 上下文和样式
 import { DeviceContext, DarkModeContext } from "../utils/DeviceContext";
