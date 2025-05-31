@@ -1690,7 +1690,7 @@ function ActivityScreen() {
         <ActivityLogComponent
           ActivityScreenStyle={ActivityScreenStyle}
           t={t}
-          pageData={ActivityLog}
+          ActivityLog={ActivityLog}
           isLoading={isLoading}
           cryptoCards={cryptoCards}
           refreshing={refreshing}

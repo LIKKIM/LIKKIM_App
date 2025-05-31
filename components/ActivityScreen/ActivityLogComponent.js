@@ -19,7 +19,7 @@ import TransactionChainFilterModal from "../modal/TransactionChainFilterModal";
 const ActivityLogComponent = ({
   ActivityScreenStyle,
   t,
-  pageData,
+  ActivityLog,
   isLoading,
   cryptoCards,
   refreshing,
@@ -27,7 +27,7 @@ const ActivityLogComponent = ({
   onLoadMore,
   hasMore,
 }) => {
-  console.log("pageData length:", pageData.length);
+  console.log("ActivityLog length:", ActivityLog.length);
   console.log("cryptoCards length:", cryptoCards.length);
   const [selectedTransaction, setSelectedTransaction] = useState(null);
   const [selectedChain, setSelectedChain] = useState("All");
@@ -35,43 +35,41 @@ const ActivityLogComponent = ({
   const [isChainFilterModalVisible, setChainFilterModalVisible] =
     useState(false);
 
-  // 根据 pageData 计算每笔交易对应的链卡片
+  // 根据 ActivityLog 计算每笔交易对应的链卡片
   const transactionChainCards = useMemo(() => {
     const map = new Map();
 
-    pageData
-      .filter((tx) => tx.amount > 0)
-      .forEach((tx) => {
-        const matchedItems = initialAdditionalCryptos.filter((item) => {
-          const address =
-            item.address && typeof item.address === "string"
-              ? item.address?.trim()
-              : "";
-          const shortName =
-            item.shortName && typeof item.shortName === "string"
-              ? item.shortName?.trim()
-              : "";
+    ActivityLog.filter((tx) => tx.amount > 0).forEach((tx) => {
+      const matchedItems = initialAdditionalCryptos.filter((item) => {
+        const address =
+          item.address && typeof item.address === "string"
+            ? item.address?.trim()
+            : "";
+        const shortName =
+          item.shortName && typeof item.shortName === "string"
+            ? item.shortName?.trim()
+            : "";
 
-          if (address === "Click the Verify Address Button") {
-            return shortName.toLowerCase() === tx.symbol?.trim().toLowerCase();
-          }
-          return address.toLowerCase() === tx.address?.trim().toLowerCase();
-        });
-
-        if (matchedItems.length > 0) {
-          const card = matchedItems[0];
-          if (!map.has(card.chainShortName)) {
-            map.set(card.chainShortName, card);
-          }
+        if (address === "Click the Verify Address Button") {
+          return shortName.toLowerCase() === tx.symbol?.trim().toLowerCase();
         }
+        return address.toLowerCase() === tx.address?.trim().toLowerCase();
       });
+
+      if (matchedItems.length > 0) {
+        const card = matchedItems[0];
+        if (!map.has(card.chainShortName)) {
+          map.set(card.chainShortName, card);
+        }
+      }
+    });
     return Array.from(map.values());
-  }, [pageData]);
+  }, [ActivityLog]);
 
   const filteredActivityLog =
     selectedChain === "All"
-      ? pageData.filter((tx) => tx.amount > 0)
-      : pageData.filter((transaction) => {
+      ? ActivityLog.filter((tx) => tx.amount > 0)
+      : ActivityLog.filter((transaction) => {
           const matchedItems = initialAdditionalCryptos.filter((item) => {
             const address =
               item.address && typeof item.address === "string"
@@ -183,14 +181,14 @@ const ActivityLogComponent = ({
       </View>
 
       <FlatList
-        data={pageData}
+        data={ActivityLog}
         keyExtractor={(_, index) => index.toString()}
         style={{ flex: 1, width: "100%" }}
         contentContainerStyle={{
           flexGrow: 1,
           justifyContent:
-            !pageData ||
-            pageData.length === 0 ||
+            !ActivityLog ||
+            ActivityLog.length === 0 ||
             cryptoCards.length === 0 ||
             isLoading
               ? "center"
@@ -391,7 +389,7 @@ const ActivityLogComponent = ({
         }
         // 底部加载更多提示
         ListFooterComponent={
-          isLoading && pageData.length > 0 ? (
+          isLoading && ActivityLog.length > 0 ? (
             <View style={{ padding: 16 }}>
               <ActivityIndicator size="small" />
             </View>
