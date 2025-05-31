@@ -182,7 +182,9 @@ const ActivityLogComponent = ({
       </View>
 
       <FlatList
-        data={ActivityLog}
+        data={[...ActivityLog].sort(
+          (a, b) => Number(b.transactionTime) - Number(a.transactionTime)
+        )}
         keyExtractor={(_, index) => index.toString()}
         style={{ flex: 1, width: "100%" }}
         contentContainerStyle={{
@@ -220,12 +222,6 @@ const ActivityLogComponent = ({
               transaction.symbol?.trim().toUpperCase()
           );
           const cryptoIcon = cryptoItem ? cryptoItem.icon : null;
-          // ✅ 打印信息
-          // console.log("==== Transaction ====");
-          // console.log("symbol:", transaction.symbol);
-          // console.log("address:", transaction.address);
-          // console.log("matchedItems:", matchedItems);
-          // console.log("cryptoItem:", cryptoItem);
 
           // ========== 渲染单个item ==========
           return (
