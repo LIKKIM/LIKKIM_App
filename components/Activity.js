@@ -112,7 +112,6 @@ function ActivityScreen() {
   const [selectedAddress, setSelectedAddress] = useState("");
   const [balance, setBalance] = useState("");
   const [EstimatedValue, setEstimatedValue] = useState("");
-  const [selectedCryptoChain, setSelectedCryptoChain] = useState("");
   const [selectedCryptoName, setSelectedCryptoName] = useState("");
   const [selectedCrypto, setSelectedCrypto] = useState("");
   const [selectedCryptoIcon, setSelectedCryptoIcon] = useState(null);
@@ -450,7 +449,7 @@ function ActivityScreen() {
   const fetchTransactionFee = async () => {
     try {
       const postData = {
-        chain: selectedCryptoChain,
+        chain: selectedQueryChainName,
       };
 
       // 打印发送的 POST 数据
@@ -513,7 +512,7 @@ function ActivityScreen() {
             // 只查询匹配的加密货币和链
             if (
               card.name === selectedCryptoObj.name &&
-              card.chain === selectedCryptoChain
+              card.chain === selectedQueryChainName
             ) {
               console.log("条件满足，准备发送请求...");
 
@@ -583,7 +582,7 @@ function ActivityScreen() {
     hasFetchedBalance, // 确保余额只查询一次
     cryptoCards, // 监听 cryptoCards 变化
     selectedCrypto, // 每次选择的加密货币变化时重新查询余额
-    selectedCryptoChain, // 每次选择的加密货币链变化时重新查询余额
+    selectedQueryChainName, // 每次选择的加密货币链变化时重新查询余额
     setCryptoCards,
   ]);
 
@@ -593,7 +592,8 @@ function ActivityScreen() {
       // 查找选中的加密货币对象
       const selected = initialAdditionalCryptos.find(
         (crypto) =>
-          crypto.chain === selectedCryptoChain && crypto.name === selectedCrypto
+          crypto.chain === selectedQueryChainName &&
+          crypto.name === selectedCrypto
       );
 
       // 打印找到的加密货币对象
@@ -1629,7 +1629,7 @@ function ActivityScreen() {
   };
   const selectCrypto = async (crypto) => {
     setSelectedCrypto(crypto.shortName);
-    setSelectedCryptoChain(crypto.queryChainName);
+
     setSelectedAddress(crypto.address);
     setSelectedCryptoIcon(crypto.icon);
     setBalance(crypto.balance);
@@ -1727,7 +1727,7 @@ function ActivityScreen() {
           handleNextAfterAddress={handleNextAfterAddress}
           setContactFormModalVisible={setContactFormModalVisible}
           selectedCrypto={selectedCrypto}
-          selectedCryptoChain={selectedCryptoChain}
+          selectedCryptoChain={selectedQueryChainName}
           selectedCryptoIcon={selectedCryptoIcon}
         />
         {/* 输入金额的 Modal */}
@@ -1748,7 +1748,7 @@ function ActivityScreen() {
           disabledButtonBackgroundColor={disabledButtonBackgroundColor}
           handleNextAfterAmount={handleNextAfterAmount}
           selectedCrypto={selectedCrypto}
-          selectedCryptoChain={selectedCryptoChain}
+          selectedCryptoChain={selectedQueryChainName}
           selectedCryptoIcon={selectedCryptoIcon}
           currencyUnit={currencyUnit}
           exchangeRates={exchangeRates}
@@ -1796,7 +1796,7 @@ function ActivityScreen() {
           isDarkMode={isDarkMode}
           selectedCryptoIcon={selectedCryptoIcon}
           selectedCrypto={selectedCrypto}
-          selectedCryptoChain={selectedCryptoChain}
+          selectedCryptoChain={selectedQueryChainName}
           amount={amount}
           priceUsd={priceUsd}
           exchangeRates={exchangeRates}
