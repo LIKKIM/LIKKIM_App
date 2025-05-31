@@ -1639,7 +1639,7 @@ function ActivityScreen() {
   };
   const selectCrypto = async (crypto) => {
     setSelectedCrypto(crypto.shortName);
-    setSelectedCryptoChain(crypto.chain);
+    setSelectedCryptoChain(crypto.queryChainName);
     setSelectedAddress(crypto.address);
     setSelectedCryptoIcon(crypto.icon);
     setBalance(crypto.balance);
@@ -1647,7 +1647,7 @@ function ActivityScreen() {
     setFee(crypto.fee);
     setPriceUsd(crypto.priceUsd);
     setQueryChainName(crypto.queryChainName);
-    setChainShortName(crypto.chainShortName);
+    setChainShortName(crypto.queryChainShortName);
     setSelectedCryptoName(crypto.name);
     setIsVerifyingAddress(false);
     setModalVisible(false);
