@@ -29,6 +29,7 @@ const ActivityLogComponent = ({
 }) => {
   console.log("ActivityLog length:", ActivityLog.length);
   console.log("cryptoCards length:", cryptoCards.length);
+
   const [selectedTransaction, setSelectedTransaction] = useState(null);
   const [selectedChain, setSelectedChain] = useState("All");
   const { isDarkMode } = useContext(DarkModeContext);
@@ -50,7 +51,7 @@ const ActivityLogComponent = ({
             ? item.shortName?.trim()
             : "";
 
-        if (address === "Click the Verify Address Button") {
+        if (address === "") {
           return shortName.toLowerCase() === tx.symbol?.trim().toLowerCase();
         }
         return address.toLowerCase() === tx.address?.trim().toLowerCase();
