@@ -186,7 +186,12 @@ const ActivityLogComponent = ({
           (a, b) => Number(b.transactionTime) - Number(a.transactionTime)
         )}
         keyExtractor={(_, index) => index.toString()}
-        style={{ flex: 1, width: "100%" }}
+        style={{
+          flex: 1,
+          width: "100%",
+          borderRadius: 10,
+          marginTop: 10,
+        }}
         contentContainerStyle={{
           flexGrow: 1,
           justifyContent:
