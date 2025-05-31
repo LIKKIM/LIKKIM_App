@@ -1039,16 +1039,12 @@ function ActivityScreen() {
       // ---------------------------
 
       const selectedCryptoUpper = selectedCrypto.toUpperCase();
-      const chainKey = families.evm.find(
-        (crypto) => crypto === selectedCryptoUpper
-      )
-        ? "ethereum"
-        : Object.keys(families).find((key) => {
-            const value = families[key];
-            return Array.isArray(value)
-              ? value.includes(selectedCryptoUpper)
-              : value === selectedCryptoUpper;
-          });
+      const chainKey = Object.keys(evmChainMapping).find((key) => {
+        const value = evmChainMapping[key];
+        return Array.isArray(value)
+          ? value.includes(selectedCryptoUpper)
+          : value === selectedCryptoUpper;
+      });
       if (!chainKey) {
         console.log(`不支持的币种: ${selectedCrypto}`);
         return;
