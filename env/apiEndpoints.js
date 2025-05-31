@@ -37,3 +37,17 @@ export const chartAPI = {
 export const firmwareAPI = {
   lvglExec: "https://file.likkim.com/algo/lvgl_exec.dat",
 };
+
+export const signAPI = {
+  encode_btc: "https://bt.likkim.com/api/sign/encode_btc",
+  encode_evm: "https://bt.likkim.com/api/sign/encode_evm",
+  encode_aptos: "https://bt.likkim.com/api/sign/encode_aptos",
+  encode_cosmos: "https://bt.likkim.com/api/sign/encode_cosmos",
+  encode_solana: "https://bt.likkim.com/api/sign/encode_solana",
+  encode_sui: "https://bt.likkim.com/api/sign/encode_sui",
+  encode_xrp: "https://bt.likkim.com/api/sign/encode_xrp",
+  aptos_broadcast: "https://bt.likkim.com/api/sign/aptos_broadcast",
+  cosmos_broadcast: "https://bt.likkim.com/api/sign/cosmos_broadcast",
+  solana_broadcast: "https://bt.likkim.com/api/sign/solana_broadcast",
+  sui_broadcast: "https://bt.likkim.com/api/sign/sui_broadcast",
+};

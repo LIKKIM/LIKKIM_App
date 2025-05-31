@@ -36,7 +36,7 @@ import ActionButtons from "./ActivityScreen/ActionButtons";
 // 自定义组件
 import displayDeviceAddress from "../utils/displayDeviceAddress";
 import { parseDeviceCode } from "../utils/parseDeviceCode";
-import { accountAPI } from "../env/apiEndpoints";
+import { accountAPI, signAPI } from "../env/apiEndpoints";
 import { bluetoothConfig } from "../env/bluetoothConfig";
 
 // BLE 常量
@@ -1326,7 +1326,34 @@ function ActivityScreen() {
         " 构造待签名hex请求数据:",
         JSON.stringify(requestData, null, 2)
       );
-      const response = await fetch(signAPI.encodeEVM, {
+      // 根据链类型选择对应的签名接口
+      let signApiUrl = null;
+      switch (chainMethod) {
+        case "evm":
+          signApiUrl = signAPI.encode_evm;
+          break;
+        case "btc":
+          signApiUrl = signAPI.encode_btc;
+          break;
+        case "aptos":
+          signApiUrl = signAPI.encode_aptos;
+          break;
+        case "cosmos":
+          signApiUrl = signAPI.encode_cosmos;
+          break;
+        case "solana":
+          signApiUrl = signAPI.encode_solana;
+          break;
+        case "sui":
+          signApiUrl = signAPI.encode_sui;
+          break;
+        case "ripple":
+          signApiUrl = signAPI.encode_xrp;
+          break;
+        default:
+          signApiUrl = signAPI.encode_evm;
+      }
+      const response = await fetch(signApiUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
