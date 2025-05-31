@@ -27,8 +27,8 @@ const ActivityLogComponent = ({
   onLoadMore,
   hasMore,
 }) => {
-  console.log("ActivityLog length:", ActivityLog.length);
-  console.log("cryptoCards length:", cryptoCards.length);
+  // console.log("ActivityLog length:", ActivityLog.length);
+  // console.log("cryptoCards length:", cryptoCards.length);
 
   const [selectedTransaction, setSelectedTransaction] = useState(null);
   const [selectedChain, setSelectedChain] = useState("All");
