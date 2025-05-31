@@ -80,7 +80,7 @@ const ActivityLogComponent = ({
                 ? item.shortName?.trim()
                 : "";
 
-            if (item.address?.trim() === "Click the Verify Address Button") {
+            if (item.address?.trim() === "") {
               return (
                 shortName.toLowerCase() ===
                 transaction.symbol?.trim().toLowerCase()
@@ -200,7 +200,7 @@ const ActivityLogComponent = ({
         renderItem={({ item: transaction, index }) => {
           // ========== 匹配币种与链图标 ==========
           const matchedItems = initialAdditionalCryptos.filter((item) => {
-            if (item.address?.trim() === "Click the Verify Address Button") {
+            if (item.address?.trim() === "") {
               return (
                 item.shortName?.trim().toLowerCase() ===
                 transaction.symbol?.trim().toLowerCase()
@@ -219,6 +219,12 @@ const ActivityLogComponent = ({
               transaction.symbol?.trim().toUpperCase()
           );
           const cryptoIcon = cryptoItem ? cryptoItem.icon : null;
+          // ✅ 打印信息
+          // console.log("==== Transaction ====");
+          // console.log("symbol:", transaction.symbol);
+          // console.log("address:", transaction.address);
+          // console.log("matchedItems:", matchedItems);
+          // console.log("cryptoItem:", cryptoItem);
 
           // ========== 渲染单个item ==========
           return (
