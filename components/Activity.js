@@ -1038,24 +1038,14 @@ function ActivityScreen() {
       // 第1步：确定币种对应的链标识和支付路径 （使用以太坊的签名方法）
       // ---------------------------
 
-      const selectedCryptoUpper = selectedCrypto.toUpperCase();
-      const chainKey = Object.keys(evmChainMapping).find((key) => {
-        const value = evmChainMapping[key];
-        return Array.isArray(value)
-          ? value.includes(selectedCryptoUpper)
-          : value === selectedCryptoUpper;
-      });
-      if (!chainKey) {
-        console.log(`不支持的币种: ${selectedCrypto}`);
-        return;
-      }
-      console.log("选择的链标识:", chainKey);
+      const chainKey = selectedQueryChainName?.toLowerCase();
 
-      const path = assetOps[chainKey];
-      if (!path) {
+      if (!chainKey || !assetOps[chainKey]) {
         console.log(`不支持的路径: ${chainKey}`);
         return;
       }
+
+      const path = assetOps[chainKey];
       console.log("选择的路径:", path);
 
       // ---------------------------
