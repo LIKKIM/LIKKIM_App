@@ -40,7 +40,7 @@ export default {
         "Allow $(PRODUCT_NAME) to communicate with your device via NFC.",
     },
     supportsTablet: false,
-    buildNumber: "16.3.5",
+    buildNumber: "16.3.6",
     bundleIdentifier: "com.likkim.likkim", //❌
     icon: "./assets/icon.png", //❌
   },
