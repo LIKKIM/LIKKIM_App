@@ -114,6 +114,8 @@ const ContactFormModal = ({
                 style={{ maxHeight: 60, marginVertical: 10 }}
                 contentContainerStyle={{ flexGrow: 1 }}
                 nestedScrollEnabled={true}
+                showsVerticalScrollIndicator={true}
+                indicatorStyle={isDarkMode ? "white" : "black"}
               >
                 <Text
                   style={{
