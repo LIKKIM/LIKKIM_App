@@ -115,10 +115,6 @@ const AmountModal = ({
             </Text>
           </View>
 
-          <Text style={ActivityScreenStyle.modalTitle}>
-            {t("Enter Amount:")}
-          </Text>
-
           <View style={{ width: "100%", alignItems: "center" }}>
             <TextInput
               style={[
@@ -218,14 +214,27 @@ const AmountModal = ({
 
           <View
             style={{
-              flexDirection: "column",
+              flexDirection: "row",
               justifyContent: "space-between",
               width: "100%",
             }}
           >
             <TouchableOpacity
               style={[
+                ActivityScreenStyle.cancelButton,
+                { flex: 1, marginRight: 8 },
+              ]}
+              onPress={onRequestClose}
+            >
+              <Text style={ActivityScreenStyle.cancelButtonText}>
+                {t("Back")}
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={[
                 ActivityScreenStyle.optionButton,
+                { flex: 1, marginLight: 8 },
                 {
                   backgroundColor: isAmountValid
                     ? buttonBackgroundColor
@@ -237,14 +246,6 @@ const AmountModal = ({
             >
               <Text style={ActivityScreenStyle.submitButtonText}>
                 {t("Next")}
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={ActivityScreenStyle.cancelButton}
-              onPress={onRequestClose}
-            >
-              <Text style={ActivityScreenStyle.cancelButtonText}>
-                {t("Back")}
               </Text>
             </TouchableOpacity>
           </View>
