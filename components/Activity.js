@@ -161,8 +161,8 @@ function ActivityScreen() {
   // 费用计算
   const feeValue = isNaN(parseFloat(fee)) ? 0 : parseFloat(fee);
   const rapidFeeVal = isNaN(parseFloat(rapidFee)) ? 0 : parseFloat(rapidFee);
-  console.log("parseFloat(fee) 的值是:", feeValue);
-  console.log("parseFloat(rapidFee) 的值是:", rapidFeeVal);
+  //  console.log("parseFloat(fee) 的值是:", feeValue);
+  // console.log("parseFloat(rapidFee) 的值是:", rapidFeeVal);
   const recommendedFee = (feeValue / 1e9).toFixed(9);
   const recommendedValue = (
     (feeValue / 1e9) *
