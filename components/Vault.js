@@ -1165,13 +1165,11 @@ function VaultScreen({ route, navigation }) {
   };
 
   const handleCardPress = (cryptoName, cryptoChain, index) => {
-    console.log("click card...");
-
     const crypto = cryptoCards?.find(
       (card) => card.name === cryptoName && card.chain === cryptoChain
     );
     setSelectedCardChainShortName(crypto.chainShortName);
-    setSelectedAddress(crypto?.address || "Unknown");
+    setSelectedAddress(crypto.address);
     setSelectedCardName(cryptoName);
     setSelectedCardChain(cryptoChain);
 
