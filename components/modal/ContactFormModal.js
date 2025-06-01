@@ -101,13 +101,22 @@ const ContactFormModal = ({
                   value={inputAddress}
                   autoFocus={true}
                 />
-                <Icon
-                  name="portrait"
-                  size={28}
-                  color={isDarkMode ? "#ffffff" : "#000"}
-                  style={{ marginLeft: 6, alignSelf: "center", top: 10 }}
+                <TouchableOpacity
+                  style={{
+                    borderRadius: 14,
+                    overflow: "hidden",
+                    marginLeft: 6,
+                    alignSelf: "center",
+                    top: 10,
+                  }}
                   onPress={handleIconPress}
-                />
+                >
+                  <Icon
+                    name="portrait"
+                    size={28}
+                    color={isDarkMode ? "#ffffff" : "#000"}
+                  />
+                </TouchableOpacity>
               </View>
 
               <ScrollView
