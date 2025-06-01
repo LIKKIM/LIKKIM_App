@@ -43,6 +43,7 @@ import ModalsContainer from "./VaultScreen/ModalsContainer";
 import checkAndReqPermission from "../utils/BluetoothPermissions"; //安卓高版本申请蓝牙权限
 import displayDeviceAddress from "../utils/displayDeviceAddress"; // 显示地址函数 发送数据写法
 import { parseDeviceCode } from "../utils/parseDeviceCode";
+import getBleManager from "../utils/BleManagerSingleton";
 import { accountAPI, metricsAPII } from "../env/apiEndpoints";
 import { bluetoothConfig } from "../env/bluetoothConfig";
 
@@ -279,35 +280,48 @@ function VaultScreen({ route, navigation }) {
   const scanDevices = () => {
     if (Platform.OS !== "web" && !isScanning) {
       checkAndReqPermission(() => {
-        console.log("Scanning started");
-        setIsScanning(true);
+        const bleManager = bleManagerRef.current;
 
-        bleManagerRef.current.startDeviceScan(
-          null,
-          { allowDuplicates: true },
-          (error, device) => {
-            if (error) {
-              console.log("BleManager scanning error:", error);
-              return;
-            }
+        if (!bleManager) {
+          console.warn("BleManager 尚未初始化");
+          return;
+        }
 
-            if (device.name && device.name.includes("LIKKIM")) {
-              setDevices((prevDevices) => {
-                if (!prevDevices.find((d) => d.id === device.id)) {
-                  return [...prevDevices, device]; // 这里 device 是完整的设备对象
-                }
-                return prevDevices;
-              });
-              //  console.log("Scanned device:", device);
-            }
+        bleManager.state().then((state) => {
+          if (state !== "PoweredOn") {
+            console.warn("蓝牙尚未就绪，跳过扫描");
+            return;
           }
-        );
 
-        setTimeout(() => {
-          console.log("Scanning stopped");
-          bleManagerRef.current.stopDeviceScan();
-          setIsScanning(false);
-        }, 2000);
+          console.log("Scanning started");
+          setIsScanning(true);
+
+          bleManager.startDeviceScan(
+            null,
+            { allowDuplicates: true },
+            (error, device) => {
+              if (error) {
+                console.log("BleManager scanning error:", error);
+                return;
+              }
+
+              if (device.name && device.name.includes("LIKKIM")) {
+                setDevices((prevDevices) => {
+                  if (!prevDevices.find((d) => d.id === device.id)) {
+                    return [...prevDevices, device];
+                  }
+                  return prevDevices;
+                });
+              }
+            }
+          );
+
+          setTimeout(() => {
+            console.log("Scanning stopped");
+            bleManager.stopDeviceScan();
+            setIsScanning(false);
+          }, 2000);
+        });
       });
     } else {
       console.log("Attempt to scan while already scanning");
@@ -469,9 +483,7 @@ function VaultScreen({ route, navigation }) {
 
   useEffect(() => {
     if (Platform.OS !== "web") {
-      bleManagerRef.current = new BleManager({
-        restoreStateIdentifier: restoreIdentifier,
-      });
+      bleManagerRef.current = getBleManager();
 
       const subscription = bleManagerRef.current.onStateChange((state) => {
         if (state === "PoweredOn") {
@@ -484,7 +496,6 @@ function VaultScreen({ route, navigation }) {
 
       return () => {
         subscription.remove();
-        bleManagerRef.current && bleManagerRef.current.destroy();
         // 新增取消蓝牙监听订阅，防止订阅泄漏
         if (monitorSubscription.current) {
           monitorSubscription.current.remove();
