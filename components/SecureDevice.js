@@ -1018,7 +1018,9 @@ function SecureDeviceScreen({ onDarkModeChange }) {
     setDeleteWalletModalVisible(true);
   };
 
-  const confirmDeleteWallet = () => {
+  const confirmDeleteWallet = async () => {
+    // 清空 verifiedDevices，持久化由 DeviceContext 负责
+    setVerifiedDevices([]);
     deleteWallet();
     setDeleteWalletModalVisible(false);
   };
