@@ -155,17 +155,17 @@ const BluetoothModal = ({
                           style={SecureDeviceScreenStyle.deviceIcon}
                         />
                         <Text style={SecureDeviceScreenStyle.modalSubtitle}>
-                          {item.name || item.id}{" "}
+                          {item.name || item.id}
+                          {"  "}
                           <View
                             style={{
                               flexDirection: "row",
                               alignItems: "flex-end",
-                              height: 20,
-                              marginLeft: 4,
+                              height: 14,
                             }}
                           >
                             {Array.from({ length: 4 }).map((_, i) => {
-                              const barHeights = [6, 12, 16, 20];
+                              const barHeights = [4, 8, 11, 14];
                               return (
                                 <View
                                   key={i}
