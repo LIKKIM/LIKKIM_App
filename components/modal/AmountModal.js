@@ -222,7 +222,7 @@ const AmountModal = ({
             <TouchableOpacity
               style={[
                 ActivityScreenStyle.cancelButton,
-                { flex: 1, marginRight: 8 },
+                { flex: 1, marginRight: 8, borderRadius: 15 },
               ]}
               onPress={onRequestClose}
             >
@@ -230,11 +230,10 @@ const AmountModal = ({
                 {t("Back")}
               </Text>
             </TouchableOpacity>
-
             <TouchableOpacity
               style={[
                 ActivityScreenStyle.optionButton,
-                { flex: 1, marginLight: 8 },
+                { flex: 1, marginLeft: 8, borderRadius: 15 },
                 {
                   backgroundColor: isAmountValid
                     ? buttonBackgroundColor
