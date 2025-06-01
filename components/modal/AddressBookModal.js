@@ -27,6 +27,9 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
   const [newNetwork, setNewNetwork] = useState("");
   const [newName, setNewName] = useState("");
   const [newAddress, setNewAddress] = useState("");
+  const [newNetworkError, setNewNetworkError] = useState("");
+  const [newNameError, setNewNameError] = useState("");
+  const [newAddressError, setNewAddressError] = useState("");
   const [networkDropdownVisible, setNetworkDropdownVisible] = useState(false);
   const [dropdownVisible, setDropdownVisible] = useState(null);
   const [savedAddresses, setSavedAddresses] = useState([]);
@@ -41,6 +44,9 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
       setNewNetwork("");
       setNewName("");
       setNewAddress("");
+      setNewNetworkError("");
+      setNewNameError("");
+      setNewAddressError("");
       setDropdownVisible(null);
       setNetworkDropdownVisible(false);
     }
@@ -121,40 +127,66 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
   };
 
   const handleSaveAddress = () => {
-    if (newNetwork && newName && newAddress) {
-      let updatedAddresses = [];
-      if (editingId) {
-        updatedAddresses = savedAddresses.map((item) => {
-          if (item.id === editingId) {
-            return {
-              id: editingId,
-              network: newNetwork,
-              name: newName,
-              address: newAddress,
-            };
-          }
-          return item;
-        });
-      } else {
-        const newEntry = {
-          id: Date.now().toString(),
-          network: newNetwork,
-          name: newName,
-          address: newAddress,
-        };
-        updatedAddresses = [...savedAddresses, newEntry];
-      }
+    let hasError = false;
 
-      setSavedAddresses(updatedAddresses);
-      saveAddressesToStorage(updatedAddresses);
-      setNewNetwork("");
-      setNewName("");
-      setNewAddress("");
-      setEditingId(null);
-      setIsAddingAddress(false);
+    if (!newNetwork) {
+      setNewNetworkError(t("Network is required"));
+      hasError = true;
     } else {
-      console.log("Please fill all fields");
+      setNewNetworkError("");
     }
+
+    if (!newName) {
+      setNewNameError(t("Name is required"));
+      hasError = true;
+    } else {
+      setNewNameError("");
+    }
+
+    if (!newAddress) {
+      setNewAddressError(t("Address is required"));
+      hasError = true;
+    } else {
+      setNewAddressError("");
+    }
+
+    if (hasError) {
+      return;
+    }
+
+    let updatedAddresses = [];
+    if (editingId) {
+      updatedAddresses = savedAddresses.map((item) => {
+        if (item.id === editingId) {
+          return {
+            id: editingId,
+            network: newNetwork,
+            name: newName,
+            address: newAddress,
+          };
+        }
+        return item;
+      });
+    } else {
+      const newEntry = {
+        id: Date.now().toString(),
+        network: newNetwork,
+        name: newName,
+        address: newAddress,
+      };
+      updatedAddresses = [...savedAddresses, newEntry];
+    }
+
+    setSavedAddresses(updatedAddresses);
+    saveAddressesToStorage(updatedAddresses);
+    setNewNetwork("");
+    setNewName("");
+    setNewAddress("");
+    setNewNetworkError("");
+    setNewNameError("");
+    setNewAddressError("");
+    setEditingId(null);
+    setIsAddingAddress(false);
   };
 
   const filteredNetworks = networks.filter((network) =>
@@ -179,7 +211,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                 style={[
                   styles.addressModalView,
                   { justifyContent: "space-between" },
-                  isAddingAddress ? { height: 390 } : { height: 480 },
+                  !isAddingAddress && { height: 480 },
                 ]}
               >
                 {!isAddingAddress ? (
@@ -195,6 +227,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                         value={searchAddress}
                       />
                     </View>
+
                     <View style={{ flex: 1 }}>
                       <FlatList
                         data={filteredAddresses}
@@ -416,6 +449,11 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                           color={isDarkMode ? "#ddd" : "#676776"}
                         />
                       </TouchableOpacity>
+                      {newNetworkError ? (
+                        <Text style={{ color: "red", marginBottom: 10 }}>
+                          {newNetworkError}
+                        </Text>
+                      ) : null}
                       {networkDropdownVisible && (
                         <View style={{ width: "100%", marginBottom: 10 }}>
                           <ScrollView
@@ -468,6 +506,11 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                             value={newName}
                             autoFocus={true}
                           />
+                          {newNameError ? (
+                            <Text style={{ color: "red", marginBottom: 10 }}>
+                              {newNameError}
+                            </Text>
+                          ) : null}
                           <TextInput
                             style={styles.addressInput}
                             placeholder="Address Required"
@@ -476,6 +519,16 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                             value={newAddress}
                             multiline
                           />
+                          {newAddressError ? (
+                            <Text
+                              style={{
+                                color: "red",
+                                marginTop: 10,
+                              }}
+                            >
+                              {newAddressError}
+                            </Text>
+                          ) : null}
                         </>
                       )}
                     </View>
