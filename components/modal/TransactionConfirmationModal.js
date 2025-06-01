@@ -113,100 +113,27 @@ const TransactionConfirmationModal = ({
                   {t("Processing Fee")}:
                 </Text>
               </Text>
-              <View
-                style={{
-                  flexDirection: "row",
-                  backgroundColor: isDarkMode ? "#333" : "#eee",
-                  borderRadius: 20,
-                  borderWidth: 1,
-                  borderColor: isDarkMode ? "#333" : "#eee",
-                  padding: 2,
-                  alignSelf: "flex-start",
-                }}
-              >
-                <TouchableOpacity
-                  style={{
-                    paddingVertical: 8,
-                    paddingHorizontal: 20,
-                    borderRadius: 20,
-                    backgroundColor:
-                      selectedFeeTab === "Recommended"
-                        ? isDarkMode
-                          ? "#555"
-                          : "#fff"
-                        : "transparent",
-                    borderColor: isDarkMode ? "#333" : "#eee",
-                    borderWidth: 1,
-                  }}
-                  onPress={() => setSelectedFeeTab("Recommended")}
-                >
-                  <Text
-                    style={{
-                      fontWeight: "bold",
-                      color:
-                        selectedFeeTab === "Recommended"
-                          ? isDarkMode
-                            ? "#fff"
-                            : "#000"
-                          : "#888",
-                    }}
-                  >
-                    {t("Recommended")}
-                  </Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                  style={{
-                    paddingVertical: 8,
-                    paddingHorizontal: 20,
-                    borderRadius: 20,
-                    backgroundColor:
-                      selectedFeeTab === "Rapid"
-                        ? isDarkMode
-                          ? "#555"
-                          : "#fff"
-                        : "transparent",
-                    borderColor: isDarkMode ? "#333" : "#eee",
-                    borderWidth: 1,
-                    marginLeft: 10,
-                  }}
-                  onPress={() => setSelectedFeeTab("Rapid")}
-                >
-                  <Text
-                    style={{
-                      fontWeight: "bold",
-                      color:
-                        selectedFeeTab === "Rapid"
-                          ? isDarkMode
-                            ? "#fff"
-                            : "#000"
-                          : "#888",
-                    }}
-                  >
-                    {t("Rapid")}
-                  </Text>
-                </TouchableOpacity>
+              <View>
+                {selectedFeeTab === "Recommended" ? (
+                  <>
+                    <Text style={ActivityScreenStyle.balanceValue}>
+                      {recommendedFee} {selectedCrypto} (Recommended)
+                    </Text>
+                    <Text style={ActivityScreenStyle.balanceValue}>
+                      ({currencyUnit} {recommendedValue})
+                    </Text>
+                  </>
+                ) : (
+                  <>
+                    <Text style={ActivityScreenStyle.balanceValue}>
+                      {rapidFeeValue} {selectedCrypto} (Rapid)
+                    </Text>
+                    <Text style={ActivityScreenStyle.balanceValue}>
+                      ({currencyUnit} {rapidCurrencyValue})
+                    </Text>
+                  </>
+                )}
               </View>
-
-              {selectedFeeTab === "Recommended" ? (
-                <View style={{ marginTop: 10 }}>
-                  <Text style={ActivityScreenStyle.balanceValue}>
-                    {recommendedFee} {selectedCrypto} (Recommended)
-                  </Text>
-                  <Text style={ActivityScreenStyle.balanceValue}>
-                    ({currencyUnit} {recommendedValue})
-                  </Text>
-                </View>
-              ) : (
-                <View style={{ marginTop: 10 }}>
-                  <Text style={ActivityScreenStyle.balanceValue}>
-                    {rapidFeeValue} {selectedCrypto} (Rapid)
-                  </Text>
-                  <Text style={ActivityScreenStyle.balanceValue}>
-                    ({currencyUnit} {rapidCurrencyValue})
-                  </Text>
-                </View>
-              )}
             </View>
 
             <Text style={ActivityScreenStyle.transactionText}>
