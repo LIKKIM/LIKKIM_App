@@ -42,21 +42,24 @@ const SkeletonImage = ({ source, style, resizeMode }) => {
   const imageOpacity = useState(new Animated.Value(0))[0];
   // 用于控制闪烁渐变的水平平移动画
   const shimmerTranslate = useState(new Animated.Value(-200))[0];
-  useEffect(() => {
+  /*   useEffect(() => {
     const getVerifiedDevice = async () => {
       try {
         const saved = await AsyncStorage.getItem("verifiedDevices");
         if (saved) {
           const verifiedIds = JSON.parse(saved);
           const deviceId = verifiedIds[0]; // 默认取第一个验证的设备 ID
-
-          // 尝试通过 BleManager 获取该设备对象
-          const connectedDevice = await bleManager.devices([deviceId]);
-          if (connectedDevice && connectedDevice.length > 0) {
-            console.log("读取到的设备对象:", connectedDevice[0]);
-            setSelectedDevice(connectedDevice[0]);
-          } else {
-            console.log("未找到匹配的设备");
+          try {
+            // 尝试通过 BleManager 获取该设备对象
+            const connectedDevice = await bleManager.devices([deviceId]);
+            if (connectedDevice && connectedDevice.length > 0) {
+              console.log("读取到的设备对象:", connectedDevice[0]);
+              setSelectedDevice(connectedDevice[0]);
+            } else {
+              console.log("未找到匹配的设备");
+            }
+          } catch (error) {
+            console.log("调用 bleManager.devices 出错:", error);
           }
         }
       } catch (e) {
@@ -64,7 +67,7 @@ const SkeletonImage = ({ source, style, resizeMode }) => {
       }
     };
     getVerifiedDevice();
-  }, []);
+  }, []); */
 
   // 当组件挂载且图片未加载时启动循环动画
   useEffect(() => {
