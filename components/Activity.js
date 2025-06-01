@@ -892,7 +892,6 @@ function ActivityScreen() {
 
         if (receivedDataString.startsWith("PIN:")) {
           setReceivedVerificationCode(receivedDataString);
-          console.log("Complete PIN data received:", receivedDataString);
         }
       }
     );

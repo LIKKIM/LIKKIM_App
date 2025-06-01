@@ -948,7 +948,6 @@ function VaultScreen({ route, navigation }) {
           setReceivedVerificationCode(receivedDataString);
           monitorSubscription.current?.remove();
           monitorSubscription.current = null;
-          console.log("Complete PIN data received:", receivedDataString);
         }
       }
     );
