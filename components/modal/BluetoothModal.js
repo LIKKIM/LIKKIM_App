@@ -30,6 +30,15 @@ const BluetoothModal = ({
   const [locationPermissionGranted, setLocationPermissionGranted] =
     useState(false);
   const blueToothColor = isDarkMode ? "#CCB68C" : "#CFAB95";
+
+  const getSignalBars = (rssi) => {
+    if (rssi >= -60) return 4;
+    if (rssi >= -70) return 3;
+    if (rssi >= -80) return 2;
+    if (rssi >= -90) return 1;
+    return 0;
+  };
+
   /*   useEffect(() => {
     const requestLocationPermission = async () => {
       const { status } = await Location.requestForegroundPermissionsAsync();
@@ -129,6 +138,7 @@ const BluetoothModal = ({
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => {
                   const isVerified = verifiedDevices.includes(item.id);
+                  const signalBars = getSignalBars(item.rssi);
                   return (
                     <TouchableOpacity
                       onPress={() => {
@@ -145,7 +155,32 @@ const BluetoothModal = ({
                           style={SecureDeviceScreenStyle.deviceIcon}
                         />
                         <Text style={SecureDeviceScreenStyle.modalSubtitle}>
-                          {item.name || item.id}
+                          {item.name || item.id}{" "}
+                          <View
+                            style={{
+                              flexDirection: "row",
+                              alignItems: "flex-end",
+                              height: 20,
+                              marginLeft: 4,
+                            }}
+                          >
+                            {Array.from({ length: 4 }).map((_, i) => {
+                              const barHeights = [6, 12, 16, 20];
+                              return (
+                                <View
+                                  key={i}
+                                  style={{
+                                    width: 4,
+                                    height: barHeights[i],
+                                    marginHorizontal: 1,
+                                    backgroundColor:
+                                      i < signalBars ? "#3CDA84" : "#ccc",
+                                    borderRadius: 1,
+                                  }}
+                                />
+                              );
+                            })}
+                          </View>
                         </Text>
                         {isVerified && (
                           <TouchableOpacity
