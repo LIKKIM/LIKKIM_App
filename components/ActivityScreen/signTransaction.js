@@ -1,7 +1,7 @@
 import { Buffer } from "buffer";
 import { accountAPI, signAPI } from "../../env/apiEndpoints";
 import { chainGroups, families } from "../../config/mappingRegistry";
-
+import assetOps from "../../config/assetOps";
 /**
  * 签名函数 signTransaction
  * @param {Object} device - 蓝牙设备对象
