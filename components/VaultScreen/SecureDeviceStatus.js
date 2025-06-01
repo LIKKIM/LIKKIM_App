@@ -49,14 +49,17 @@ const SkeletonImage = ({ source, style, resizeMode }) => {
         if (saved) {
           const verifiedIds = JSON.parse(saved);
           const deviceId = verifiedIds[0]; // 默认取第一个验证的设备 ID
-
-          // 尝试通过 BleManager 获取该设备对象
-          const connectedDevice = await bleManager.devices([deviceId]);
-          if (connectedDevice && connectedDevice.length > 0) {
-            console.log("读取到的设备对象:", connectedDevice[0]);
-            setSelectedDevice(connectedDevice[0]);
-          } else {
-            console.log("未找到匹配的设备");
+          try {
+            // 尝试通过 BleManager 获取该设备对象
+            const connectedDevice = await bleManager.devices([deviceId]);
+            if (connectedDevice && connectedDevice.length > 0) {
+              console.log("读取到的设备对象:", connectedDevice[0]);
+              setSelectedDevice(connectedDevice[0]);
+            } else {
+              console.log("未找到匹配的设备");
+            }
+          } catch (error) {
+            console.log("调用 bleManager.devices 出错:", error);
           }
         }
       } catch (e) {
