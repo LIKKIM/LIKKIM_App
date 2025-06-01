@@ -42,32 +42,21 @@ const SkeletonImage = ({ source, style, resizeMode }) => {
   const imageOpacity = useState(new Animated.Value(0))[0];
   // 用于控制闪烁渐变的水平平移动画
   const shimmerTranslate = useState(new Animated.Value(-200))[0];
-  /*   useEffect(() => {
-    const getVerifiedDevice = async () => {
+  useEffect(() => {
+    const loadVerifiedDevices = async () => {
       try {
-        const saved = await AsyncStorage.getItem("verifiedDevices");
-        if (saved) {
-          const verifiedIds = JSON.parse(saved);
-          const deviceId = verifiedIds[0]; // 默认取第一个验证的设备 ID
-          try {
-            // 尝试通过 BleManager 获取该设备对象
-            const connectedDevice = await bleManager.devices([deviceId]);
-            if (connectedDevice && connectedDevice.length > 0) {
-              console.log("读取到的设备对象:", connectedDevice[0]);
-              setSelectedDevice(connectedDevice[0]);
-            } else {
-              console.log("未找到匹配的设备");
-            }
-          } catch (error) {
-            console.log("调用 bleManager.devices 出错:", error);
-          }
+        // 从 AsyncStorage 加载已验证的设备列表
+        const savedDevices = await AsyncStorage.getItem("verifiedDevices");
+        if (savedDevices !== null) {
+          setVerifiedDevices(JSON.parse(savedDevices));
         }
-      } catch (e) {
-        // console.log("读取 verifiedDevices 失败:", e);
+      } catch (error) {
+        console.log("Error loading verified devices: ", error);
       }
     };
-    getVerifiedDevice();
-  }, []); */
+
+    loadVerifiedDevices();
+  }, []);
 
   // 当组件挂载且图片未加载时启动循环动画
   useEffect(() => {
