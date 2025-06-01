@@ -37,6 +37,7 @@ const writeCharacteristicUUID = bluetoothConfig.writeCharacteristicUUID;
 const notifyCharacteristicUUID = bluetoothConfig.notifyCharacteristicUUID;
 const SkeletonImage = ({ source, style, resizeMode }) => {
   const [selectedDevice, setSelectedDevice] = useState(null);
+  const [verifiedDevices, setVerifiedDevices] = useState([]);
   const [loaded, setLoaded] = useState(false);
   const skeletonOpacity = useState(new Animated.Value(1))[0];
   const imageOpacity = useState(new Animated.Value(0))[0];
