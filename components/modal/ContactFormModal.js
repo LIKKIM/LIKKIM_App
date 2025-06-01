@@ -121,7 +121,7 @@ const ContactFormModal = ({
                       detectedNetwork === "Invalid address"
                         ? "#FF5252"
                         : "#22AA94",
-                    lineHeight: 36,
+                    lineHeight: 26,
                     textAlignVertical: "center",
                   }}
                 >
