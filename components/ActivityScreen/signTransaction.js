@@ -2,6 +2,12 @@ import { Buffer } from "buffer";
 import { accountAPI, signAPI } from "../../env/apiEndpoints";
 import { chainGroups, families } from "../../config/mappingRegistry";
 import assetOps from "../../config/assetOps";
+import { bluetoothConfig } from "../../env/bluetoothConfig";
+
+// BLE 常量
+const serviceUUID = bluetoothConfig.serviceUUID;
+const writeCharacteristicUUID = bluetoothConfig.writeCharacteristicUUID;
+const notifyCharacteristicUUID = bluetoothConfig.notifyCharacteristicUUID;
 /**
  * 签名函数 signTransaction
  * @param {Object} device - 蓝牙设备对象
