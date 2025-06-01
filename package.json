@@ -12,7 +12,7 @@
     "postinstall": "patch-package",
     "getApk": "eas build --profile apk --platform android",
     "getAab": "eas build --profile production --platform android --clear-cache",
-    "getTF": "eas build  --auto-submit --platform ios",
+    "getTF": "eas build --platform ios --profile production --auto-submit",
     "pushPlayStore": "eas build --auto-submit --platform android",
     "updateNative": "expo prebuild",
     "DownloadKeystore": "eas credentials --platform android",
