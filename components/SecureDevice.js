@@ -561,9 +561,9 @@ function SecureDeviceScreen({ onDarkModeChange }) {
             .trim();
           const [queryChainName, publicKey] = pubkeyData.split(",");
           if (queryChainName && publicKey) {
-            console.log(
-              `Received public key for ${queryChainName}: ${publicKey}`
-            );
+            //console.log(
+            //  `Received public key for ${queryChainName}: ${publicKey}`
+            //);
             updateDevicePubHintKey(queryChainName, publicKey);
           }
         }
