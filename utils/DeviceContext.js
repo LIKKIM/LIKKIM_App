@@ -39,6 +39,23 @@ export const CryptoProvider = ({ children }) => {
   // Supported chains for address updates
   const supportedChains = ["ETH", "BTC", "SOL", "TRX"];
 
+  // 新增打印函数，打印 initialAdditionalCryptos 和 cryptoCards 中的 address 字段
+  const printAddresses = () => {
+    console.log("initialAdditionalCryptos addresses:");
+    initialAdditionalCryptosState.forEach((crypto) => {
+      console.log(`${crypto.queryChainShortName}: ${crypto.address}`);
+    });
+
+    console.log("cryptoCards addresses:");
+    cryptoCards.forEach((card) => {
+      console.log(`${card.queryChainShortName}: ${card.address}`);
+    });
+  };
+
+  // 在每次 initialAdditionalCryptosState 或 cryptoCards 变化时调用打印函数
+  React.useEffect(() => {
+    printAddresses();
+  }, [initialAdditionalCryptosState, cryptoCards]);
   // Update cryptoCards state: update if exists, otherwise add new card
   const handleUpdateCryptoCards = (newCrypto) => {
     setCryptoCards((prevCards) => {

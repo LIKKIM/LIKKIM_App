@@ -1205,15 +1205,26 @@ function VaultScreen({ route, navigation }) {
   };
 
   const handleAddCrypto = (cryptos) => {
-    // 将所有选中的卡片添加到 cryptoCards 中
+    // 将所有选中的卡片添加到 cryptoCards 中，并同步 initialAdditionalCryptos 中对应的地址，匹配使用 queryChainShortName
     const newCryptoCards = [
       ...cryptoCards,
-      ...cryptos.filter(
-        (crypto) =>
-          !cryptoCards.find(
-            (card) => card.name === crypto.name && card.chain === crypto.chain
-          )
-      ),
+      ...cryptos
+        .filter(
+          (crypto) =>
+            !cryptoCards.find(
+              (card) => card.name === crypto.name && card.chain === crypto.chain
+            )
+        )
+        .map((crypto) => {
+          // 查找 initialAdditionalCryptos 中对应的地址，使用 queryChainShortName 匹配
+          const matchedCrypto = initialAdditionalCryptos.find(
+            (item) => item.queryChainShortName === crypto.queryChainShortName
+          );
+          return {
+            ...crypto,
+            address: matchedCrypto ? matchedCrypto.address : "",
+          };
+        }),
     ];
     setCryptoCards(newCryptoCards);
     setCryptoCount(newCryptoCards.length);
