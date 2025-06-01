@@ -373,7 +373,7 @@ function VaultScreen({ route, navigation }) {
                 paddingHorizontal: 20,
                 borderRadius: 20,
                 backgroundColor:
-                  selectedView === "nft"
+                  selectedView === "gallery"
                     ? isDarkMode
                       ? "#555"
                       : "#fff"
@@ -381,13 +381,13 @@ function VaultScreen({ route, navigation }) {
                 borderColor: isDarkMode ? "#333" : "#eee",
                 borderWidth: 1,
               }}
-              onPress={() => setSelectedView("nft")}
+              onPress={() => setSelectedView("gallery")}
             >
               <Text
                 style={{
                   fontWeight: "bold",
                   color:
-                    selectedView === "nft"
+                    selectedView === "gallery"
                       ? isDarkMode
                         ? "#fff"
                         : "#000"
