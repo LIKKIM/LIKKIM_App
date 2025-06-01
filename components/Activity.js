@@ -159,22 +159,26 @@ function ActivityScreen() {
   });
 
   // 费用计算
-  const recommendedFee = (parseFloat(fee) / 1e9).toFixed(9);
+  const feeValue = isNaN(parseFloat(fee)) ? 0 : parseFloat(fee);
+  const rapidFeeVal = isNaN(parseFloat(rapidFee)) ? 0 : parseFloat(rapidFee);
+  console.log("parseFloat(fee) 的值是:", feeValue);
+  console.log("parseFloat(rapidFee) 的值是:", rapidFeeVal);
+  const recommendedFee = (feeValue / 1e9).toFixed(9);
   const recommendedValue = (
-    (parseFloat(fee) / 1e9) *
+    (feeValue / 1e9) *
     priceUsd *
     exchangeRates[currencyUnit]
   ).toFixed(2);
-  const rapidFeeValue = (parseFloat(rapidFee) / 1e9).toFixed(9);
+  const rapidFeeValue = (rapidFeeVal / 1e9).toFixed(9);
   const rapidCurrencyValue = (
-    (parseFloat(rapidFee) / 1e9) *
+    (rapidFeeVal / 1e9) *
     priceUsd *
     exchangeRates[currencyUnit]
   ).toFixed(2);
   const isAmountValid =
     amount &&
     parseFloat(amount) > 0 &&
-    parseFloat(amount) <= parseFloat(balance) + parseFloat(fee);
+    parseFloat(amount) <= parseFloat(balance) + feeValue;
   const [refreshing, setRefreshing] = useState(false);
 
   const onRefresh = async () => {
