@@ -37,6 +37,12 @@ const AmountModal = ({
   selectedCryptoName,
   EstimatedValue,
   setCryptoCards,
+  recommendedFee,
+  recommendedValue,
+  rapidFeeValue,
+  rapidCurrencyValue,
+  selectedFeeTab,
+  setSelectedFeeTab,
 }) => {
   useEffect(() => {
     if (visible) {
@@ -101,7 +107,6 @@ const AmountModal = ({
             style={{
               flexDirection: "row",
               alignItems: "center",
-              marginBottom: 10,
             }}
           >
             {selectedCryptoIcon && (
@@ -196,7 +201,6 @@ const AmountModal = ({
                 flexDirection: "column",
                 justifyContent: "space-between",
                 width: "90%",
-                marginBottom: 20,
               }}
             >
               {parseFloat(amount) > parseFloat(balance) && (
@@ -211,42 +215,154 @@ const AmountModal = ({
               )}
             </View>
           </View>
+          <Text
+            style={[
+              ActivityScreenStyle.balanceLabel,
+              { fontWeight: "bold", marginBottom: 8 },
+            ]}
+          >
+            {t("Processing Fee")}:
+          </Text>
 
           <View
             style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
+              flexDirection: "column",
               width: "100%",
             }}
           >
-            <TouchableOpacity
-              style={[
-                ActivityScreenStyle.cancelButton,
-                { flex: 1, marginRight: 8, borderRadius: 15 },
-              ]}
-              onPress={onRequestClose}
+            <View style={ActivityScreenStyle.transactionText}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  backgroundColor: isDarkMode ? "#333" : "#eee",
+                  borderRadius: 20,
+                  borderWidth: 1,
+                  borderColor: isDarkMode ? "#333" : "#eee",
+                  padding: 2,
+                  alignSelf: "flex-start",
+                }}
+              >
+                <TouchableOpacity
+                  style={{
+                    paddingVertical: 8,
+                    paddingHorizontal: 20,
+                    borderRadius: 20,
+                    backgroundColor:
+                      selectedFeeTab === "Recommended"
+                        ? isDarkMode
+                          ? "#555"
+                          : "#fff"
+                        : "transparent",
+                    borderColor: isDarkMode ? "#333" : "#eee",
+                    borderWidth: 1,
+                  }}
+                  onPress={() => setSelectedFeeTab("Recommended")}
+                >
+                  <Text
+                    style={{
+                      fontWeight: "bold",
+                      color:
+                        selectedFeeTab === "Recommended"
+                          ? isDarkMode
+                            ? "#fff"
+                            : "#000"
+                          : "#888",
+                    }}
+                  >
+                    {t("Recommended")}
+                  </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  style={{
+                    paddingVertical: 8,
+                    paddingHorizontal: 20,
+                    borderRadius: 20,
+                    backgroundColor:
+                      selectedFeeTab === "Rapid"
+                        ? isDarkMode
+                          ? "#555"
+                          : "#fff"
+                        : "transparent",
+                    borderColor: isDarkMode ? "#333" : "#eee",
+                    borderWidth: 1,
+                    marginLeft: 10,
+                  }}
+                  onPress={() => setSelectedFeeTab("Rapid")}
+                >
+                  <Text
+                    style={{
+                      fontWeight: "bold",
+                      color:
+                        selectedFeeTab === "Rapid"
+                          ? isDarkMode
+                            ? "#fff"
+                            : "#000"
+                          : "#888",
+                    }}
+                  >
+                    {t("Rapid")}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+
+              {selectedFeeTab === "Recommended" ? (
+                <View style={{ marginTop: 10, marginBottom: 10 }}>
+                  <Text style={ActivityScreenStyle.balanceValue}>
+                    {recommendedFee} {selectedCrypto} (Recommended)
+                  </Text>
+                  <Text style={ActivityScreenStyle.balanceValue}>
+                    ({currencyUnit} {recommendedValue})
+                  </Text>
+                </View>
+              ) : (
+                <View style={{ marginTop: 10, marginBottom: 10 }}>
+                  <Text style={ActivityScreenStyle.balanceValue}>
+                    {rapidFeeValue} {selectedCrypto} (Rapid)
+                  </Text>
+                  <Text style={ActivityScreenStyle.balanceValue}>
+                    ({currencyUnit} {rapidCurrencyValue})
+                  </Text>
+                </View>
+              )}
+            </View>
+
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                width: "100%",
+              }}
             >
-              <Text style={ActivityScreenStyle.cancelButtonText}>
-                {t("Back")}
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[
-                ActivityScreenStyle.optionButton,
-                { flex: 1, marginLeft: 8, borderRadius: 15 },
-                {
-                  backgroundColor: isAmountValid
-                    ? buttonBackgroundColor
-                    : disabledButtonBackgroundColor,
-                },
-              ]}
-              onPress={handleNextAfterAmount}
-              disabled={!isAmountValid}
-            >
-              <Text style={ActivityScreenStyle.submitButtonText}>
-                {t("Next")}
-              </Text>
-            </TouchableOpacity>
+              <TouchableOpacity
+                style={[
+                  ActivityScreenStyle.cancelButton,
+                  { flex: 1, marginRight: 8, borderRadius: 15 },
+                ]}
+                onPress={onRequestClose}
+              >
+                <Text style={ActivityScreenStyle.cancelButtonText}>
+                  {t("Back")}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[
+                  ActivityScreenStyle.optionButton,
+                  { flex: 1, marginLeft: 8, borderRadius: 15 },
+                  {
+                    backgroundColor: isAmountValid
+                      ? buttonBackgroundColor
+                      : disabledButtonBackgroundColor,
+                  },
+                ]}
+                onPress={handleNextAfterAmount}
+                disabled={!isAmountValid}
+              >
+                <Text style={ActivityScreenStyle.submitButtonText}>
+                  {t("Next")}
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </KeyboardAvoidingView>

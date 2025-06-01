@@ -1404,6 +1404,12 @@ function ActivityScreen() {
           selectedCryptoName={selectedCryptoName}
           EstimatedValue={EstimatedValue}
           setCryptoCards={setCryptoCards}
+          recommendedFee={recommendedFee}
+          recommendedValue={recommendedValue}
+          rapidFeeValue={rapidFeeValue}
+          rapidCurrencyValue={rapidCurrencyValue}
+          selectedFeeTab={selectedFeeTab}
+          setSelectedFeeTab={setSelectedFeeTab}
         />
         {/* 交易确认的 Modal */}
         <TransactionConfirmationModal
