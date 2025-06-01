@@ -481,16 +481,16 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                     </View>
                     <View style={styles.AddressBookContainer}>
                       <TouchableOpacity
-                        onPress={handleSaveAddress}
-                        style={styles.saveButton}
-                      >
-                        <Text style={styles.submitButtonText}>{t("Save")}</Text>
-                      </TouchableOpacity>
-                      <TouchableOpacity
                         onPress={() => setIsAddingAddress(false)}
                         style={styles.backButton}
                       >
                         <Text style={styles.cancelButtonText}>{t("Back")}</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={handleSaveAddress}
+                        style={styles.saveButton}
+                      >
+                        <Text style={styles.submitButtonText}>{t("Save")}</Text>
                       </TouchableOpacity>
                     </View>
                   </>
