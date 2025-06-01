@@ -682,7 +682,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
     const verificationCodeValue = receivedVerificationCode.trim();
     const pinCodeValue = pinCode.trim();
 
-    console.log(`User PIN: ${pinCodeValue}`);
+    //  console.log(`User PIN: ${pinCodeValue}`);
     console.log(`Received data: ${verificationCodeValue}`);
 
     const [prefix, rest] = verificationCodeValue.split(":");
