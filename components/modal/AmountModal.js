@@ -102,7 +102,12 @@ const AmountModal = ({
         style={ActivityScreenStyle.centeredView}
       >
         <BlurView intensity={10} style={ActivityScreenStyle.blurBackground} />
-        <View style={ActivityScreenStyle.amountModalView}>
+        <View
+          style={[
+            ActivityScreenStyle.amountModalView,
+            { alignSelf: "center", justifyContent: "center" },
+          ]}
+        >
           <View
             style={{
               flexDirection: "row",
@@ -214,23 +219,7 @@ const AmountModal = ({
                 </Text>
               )}
             </View>
-          </View>
-          <Text
-            style={[
-              ActivityScreenStyle.balanceLabel,
-              { fontWeight: "bold", marginBottom: 8 },
-            ]}
-          >
-            {t("Processing Fee")}:
-          </Text>
-
-          <View
-            style={{
-              flexDirection: "column",
-              width: "100%",
-            }}
-          >
-            <View style={ActivityScreenStyle.transactionText}>
+            <View>
               <View
                 style={{
                   flexDirection: "row",
@@ -305,9 +294,22 @@ const AmountModal = ({
                   </Text>
                 </TouchableOpacity>
               </View>
+            </View>
+            <View
+              style={{
+                flexDirection: "column",
+                justifyContent: "space-between",
+                width: "90%",
+              }}
+            >
+              <Text
+                style={[ActivityScreenStyle.balanceLabel, { marginBottom: 8 }]}
+              >
+                {t("Processing Fee")}:
+              </Text>
 
               {selectedFeeTab === "Recommended" ? (
-                <View style={{ marginTop: 10, marginBottom: 10 }}>
+                <View style={{ marginBottom: 10 }}>
                   <Text style={ActivityScreenStyle.balanceValue}>
                     {recommendedFee} {selectedCrypto} (Recommended)
                   </Text>
@@ -316,7 +318,7 @@ const AmountModal = ({
                   </Text>
                 </View>
               ) : (
-                <View style={{ marginTop: 10, marginBottom: 10 }}>
+                <View style={{ marginBottom: 10 }}>
                   <Text style={ActivityScreenStyle.balanceValue}>
                     {rapidFeeValue} {selectedCrypto} (Rapid)
                   </Text>
@@ -326,7 +328,15 @@ const AmountModal = ({
                 </View>
               )}
             </View>
+          </View>
 
+          <View
+            style={{
+              flexDirection: "column",
+              width: "100%",
+              marginTop: 10,
+            }}
+          >
             <View
               style={{
                 flexDirection: "row",

@@ -141,6 +141,7 @@ const ActivityScreenStyles = (isDarkMode) => {
       borderRadius: 20,
       padding: 35,
       alignItems: "center",
+      justifyContent: "center",
       flex: 0,
     },
     amountSubtitle: {
