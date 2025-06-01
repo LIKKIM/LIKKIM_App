@@ -1430,7 +1430,13 @@ function ActivityScreen() {
                 selectedCryptoObj.address,
                 inputAddress,
                 selectedCryptoObj.queryChainName,
-                selectedCryptoObj.contractAddress
+                selectedCryptoObj.contractAddress,
+                selectedFeeTab,
+                recommendedFee,
+                rapidFeeValue,
+                setModalStatus,
+                t,
+                monitorSignedResult
               );
             } catch (error) {
               console.log("确认交易时出错:", error);
