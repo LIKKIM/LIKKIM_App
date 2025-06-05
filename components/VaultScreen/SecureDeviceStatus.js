@@ -276,6 +276,31 @@ const SecureDeviceStatus = (props) => {
           }
 
           console.log("bin 文件已拆包成功发送到设备");
+
+          // 发送 nft 的 collectionName，带头部标志 "COLLECTION_NAME_BEGIN"
+          if (selectedNFT?.name) {
+            const collectionNameHeader = "COLLECTION_NAME_BEGIN";
+            const collectionName = selectedNFT.name;
+            // 先发送头部标志
+            await selectedDevice.writeCharacteristicWithResponseForService(
+              serviceUUID,
+              writeCharacteristicUUID,
+              collectionNameHeader
+            );
+
+            // 发送 collectionName 内容，拆包发送，分包大小同样为 240
+            const chunkSize = 240;
+            for (let i = 0; i < collectionName.length; i += chunkSize) {
+              const chunk = collectionName.substring(i, i + chunkSize);
+              await selectedDevice.writeCharacteristicWithResponseForService(
+                serviceUUID,
+                writeCharacteristicUUID,
+                chunk
+              );
+              await new Promise((resolve) => setTimeout(resolve, 250));
+            }
+            console.log("collectionName 已拆包成功发送到设备");
+          }
         } catch (error) {
           console.log("发送 bin 文件时出错:", error);
         }
