@@ -547,7 +547,14 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                       {!networkDropdownVisible && (
                         <>
                           <TextInput
-                            style={styles.passwordInput}
+                            style={[
+                              styles.passwordInput,
+                              {
+                                backgroundColor: isDarkMode
+                                  ? "#21201E"
+                                  : "#e0e0e0",
+                              },
+                            ]}
                             placeholder="Name Required"
                             placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
                             onChangeText={setNewName}
@@ -560,7 +567,14 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                             </Text>
                           ) : null}
                           <TextInput
-                            style={styles.addressInput}
+                            style={[
+                              styles.addressInput,
+                              {
+                                backgroundColor: isDarkMode
+                                  ? "#21201E"
+                                  : "#e0e0e0",
+                              },
+                            ]}
                             placeholder="Address Required"
                             placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
                             onChangeText={setNewAddress}
