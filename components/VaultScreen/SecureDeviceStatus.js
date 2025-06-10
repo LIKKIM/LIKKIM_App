@@ -207,33 +207,61 @@ const SecureDeviceStatus = (props) => {
         // 使用 fetch 获取图片数据
         const response = await fetch(selectedNFT.logoUrl);
         const imageBlob = await response.blob();
-        // 使用 react-native-image-resizer 将图片转换为 420x420 的 JPEG 格式
-        const resizedImage = await ImageResizer.createResizedImage(
+
+        // 生成 420x420 和 210x210 两种尺寸的 JPEG 图片
+        const resizedImage420 = await ImageResizer.createResizedImage(
           URL.createObjectURL(imageBlob),
           420,
           420,
           "JPEG",
           80
         );
+        const resizedImage210 = await ImageResizer.createResizedImage(
+          URL.createObjectURL(imageBlob),
+          210,
+          210,
+          "JPEG",
+          80
+        );
 
-        console.log("Converted JPG image:", resizedImage.uri);
+        console.log(
+          "Converted JPG images:",
+          resizedImage420.uri,
+          resizedImage210.uri
+        );
 
         // 读取转换后的 JPEG 文件为 base64 编码字符串
-        const fileUri = resizedImage.uri;
-        const fileData = await FileSystem.readAsStringAsync(fileUri, {
+        const fileData420 = await FileSystem.readAsStringAsync(
+          resizedImage420.uri,
+          {
+            encoding: FileSystem.EncodingType.Base64,
+          }
+        );
+        const fileData210 = await FileSystem.readAsStringAsync(
+          resizedImage210.uri,
+          {
+            encoding: FileSystem.EncodingType.Base64,
+          }
+        );
+
+        // 写入 .bin 文件，路径为应用文档目录下的 image_420.bin 和 image_210.bin
+        const binFileUri420 = FileSystem.documentDirectory + "image_420.bin";
+        const binFileUri210 = FileSystem.documentDirectory + "image_210.bin";
+        await FileSystem.writeAsStringAsync(binFileUri420, fileData420, {
+          encoding: FileSystem.EncodingType.Base64,
+        });
+        await FileSystem.writeAsStringAsync(binFileUri210, fileData210, {
           encoding: FileSystem.EncodingType.Base64,
         });
 
-        // 写入 .bin 文件，路径为应用文档目录下的 image.bin
-        const binFileUri = FileSystem.documentDirectory + "image.bin";
-        await FileSystem.writeAsStringAsync(binFileUri, fileData, {
-          encoding: FileSystem.EncodingType.Base64,
-        });
-
-        console.log("JPEG image saved as .bin file at:", binFileUri);
+        console.log(
+          "JPEG images saved as .bin files at:",
+          binFileUri420,
+          binFileUri210
+        );
 
         // 保存 base64 数据到状态（如果需要）
-        setDataUrl(fileData);
+        setDataUrl(fileData420);
 
         // 读取 bin 文件内容并拆包发送给 BLE 设备
         if (!selectedDevice) {
@@ -247,25 +275,28 @@ const SecureDeviceStatus = (props) => {
           await selectedDevice.discoverAllServicesAndCharacteristics();
 
           // 读取 bin 文件的 base64 内容
-          const binData = await FileSystem.readAsStringAsync(binFileUri, {
+          const binData420 = await FileSystem.readAsStringAsync(binFileUri420, {
+            encoding: FileSystem.EncodingType.Base64,
+          });
+          const binData210 = await FileSystem.readAsStringAsync(binFileUri210, {
             encoding: FileSystem.EncodingType.Base64,
           });
 
-          // 发送 bin 文件内容到设备，前面加开头标志 "IMG_BIN_BEGIN"
-          const header = "IMG_BIN_BEGIN";
+          // 发送 420 尺寸图片数据，前面加开头标志 "IMG_BIN_BEGIN_420"
+          const header420 = "IMG_BIN_BEGIN_420";
           const chunkSize = 240; // 每包最大字节数限制
           const delay = 250; // 发送间隔，单位毫秒
 
-          // 先发送头部标志
+          // 先发送 420 头部标志
           await selectedDevice.writeCharacteristicWithResponseForService(
             serviceUUID,
             writeCharacteristicUUID,
-            header
+            header420
           );
 
-          // 拆分数据并按顺序发送
-          for (let i = 0; i < binData.length; i += chunkSize) {
-            const chunk = binData.substring(i, i + chunkSize);
+          // 拆分 420 数据并按顺序发送
+          for (let i = 0; i < binData420.length; i += chunkSize) {
+            const chunk = binData420.substring(i, i + chunkSize);
             await selectedDevice.writeCharacteristicWithResponseForService(
               serviceUUID,
               writeCharacteristicUUID,
@@ -275,7 +306,31 @@ const SecureDeviceStatus = (props) => {
             await new Promise((resolve) => setTimeout(resolve, delay));
           }
 
-          console.log("bin 文件已拆包成功发送到设备");
+          console.log("420 bin 文件已拆包成功发送到设备");
+
+          // 发送 210 尺寸图片数据，前面加开头标志 "IMG_BIN_BEGIN_210"
+          const header210 = "IMG_BIN_BEGIN_210";
+
+          // 先发送 210 头部标志
+          await selectedDevice.writeCharacteristicWithResponseForService(
+            serviceUUID,
+            writeCharacteristicUUID,
+            header210
+          );
+
+          // 拆分 210 数据并按顺序发送
+          for (let i = 0; i < binData210.length; i += chunkSize) {
+            const chunk = binData210.substring(i, i + chunkSize);
+            await selectedDevice.writeCharacteristicWithResponseForService(
+              serviceUUID,
+              writeCharacteristicUUID,
+              chunk
+            );
+            // 等待 250 毫秒再发送下一包
+            await new Promise((resolve) => setTimeout(resolve, delay));
+          }
+
+          console.log("210 bin 文件已拆包成功发送到设备");
 
           // 发送 nft 的 collectionName，带头部标志 "COLLECTION_NAME_BEGIN"
           if (selectedNFT?.name) {
@@ -289,7 +344,6 @@ const SecureDeviceStatus = (props) => {
             );
 
             // 发送 collectionName 内容，拆包发送，分包大小同样为 240
-            const chunkSize = 240;
             for (let i = 0; i < collectionName.length; i += chunkSize) {
               const chunk = collectionName.substring(i, i + chunkSize);
               await selectedDevice.writeCharacteristicWithResponseForService(
