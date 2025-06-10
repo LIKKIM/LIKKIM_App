@@ -1072,7 +1072,7 @@ const SecureDeviceStatus = (props) => {
                 )}
                 <Text
                   style={VaultScreenStyle.modalTitle}
-                  numberOfLines={2}
+                  numberOfLines={3}
                   ellipsizeMode="tail"
                 >
                   {nft.name || "NFT Card"}
