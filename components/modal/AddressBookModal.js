@@ -373,21 +373,36 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                                 <TouchableOpacity
                                   onPress={() => handleCopy(item.address)}
                                 >
-                                  <Text style={styles.dropdownButtonText}>
+                                  <Text
+                                    style={[
+                                      styles.dropdownButtonText,
+                                      { color: isDarkMode ? "#fff" : "#000" },
+                                    ]}
+                                  >
                                     {t("Copy")}
                                   </Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity
                                   onPress={() => handleDelete(item.id)}
                                 >
-                                  <Text style={styles.dropdownButtonText}>
+                                  <Text
+                                    style={[
+                                      styles.dropdownButtonText,
+                                      { color: isDarkMode ? "#fff" : "#000" },
+                                    ]}
+                                  >
                                     {t("Delete")}
                                   </Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity
                                   onPress={() => handleEdit(item.id)}
                                 >
-                                  <Text style={styles.dropdownButtonText}>
+                                  <Text
+                                    style={[
+                                      styles.dropdownButtonText,
+                                      { color: isDarkMode ? "#fff" : "#000" },
+                                    ]}
+                                  >
                                     {t("Edit")}
                                   </Text>
                                 </TouchableOpacity>
@@ -551,9 +566,10 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                                   }}
                                 />
                                 <Text
-                                  style={{
-                                    color: isDarkMode ? "#fff" : "#000",
-                                  }}
+                                  style={[
+                                    styles.Text,
+                                    { color: isDarkMode ? "#fff" : "#000" },
+                                  ]}
                                 >
                                   {network}
                                 </Text>
