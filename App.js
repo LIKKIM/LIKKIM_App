@@ -173,6 +173,25 @@ function AppContent({
   const [confirmDisconnectModalVisible, setConfirmDisconnectModalVisible] =
     useState(false);
   const monitorSubscription = useRef(null);
+
+  const stopMonitoringVerificationCode = () => {
+    if (monitorSubscription.current) {
+      try {
+        monitorSubscription.current.remove(); // 使用 monitorSubscription.current
+        monitorSubscription.current = null; // 清除当前订阅
+        console.log("Stopped monitoring verification code");
+      } catch (error) {
+        console.log("Error stopping monitoring:", error);
+      }
+    }
+  };
+  useEffect(() => {
+    if (verifiedDevices.length === 0) {
+      stopMonitoringVerificationCode();
+      console.log("No verified devices, stopped BLE monitor.");
+    }
+  }, [verifiedDevices]);
+
   useEffect(() => {
     if (Platform.OS !== "web") {
       bleManagerRef.current = new BleManager({
@@ -448,7 +467,12 @@ function AppContent({
   const [screenLockFeatureEnabled, setScreenLockFeatureEnabled] =
     useState(false);
   const [isScreenLockLoaded, setIsScreenLockLoaded] = useState(false);
-
+  useEffect(() => {
+    if (verifiedDevices.length === 0) {
+      stopMonitoringVerificationCode();
+      console.log("No verified devices, stopped BLE monitor.");
+    }
+  }, [verifiedDevices]);
   useEffect(() => {
     const unsubscribe = navigation.addListener("state", (e) => {
       const rootRoutes = e.data.state?.routes;
@@ -584,18 +608,6 @@ function AppContent({
         }
       }
     );
-  };
-
-  const stopMonitoringVerificationCode = () => {
-    if (monitorSubscription.current) {
-      try {
-        monitorSubscription.current.remove(); // 使用 monitorSubscription.current
-        monitorSubscription.current = null; // 清除当前订阅
-        console.log("Stopped monitoring verification code");
-      } catch (error) {
-        console.log("Error stopping monitoring:", error);
-      }
-    }
   };
 
   const handleDisconnectPress = (device) => {
