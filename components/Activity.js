@@ -1188,30 +1188,31 @@ function ActivityScreen() {
           console.log("Error sending string 'address':", error);
         }
 
-        const pubkeyMessages = [
-          "pubkey:cosmos,m/44'/118'/0'/0/0",
-          "pubkey:ripple,m/44'/144'/0'/0/0",
-          "pubkey:celestia,m/44'/118'/0'/0/0",
-          "pubkey:juno,m/44'/118'/0'/0/0",
-          "pubkey:osmosis,m/44'/118'/0'/0/0",
-        ];
+        setTimeout(async () => {
+          const pubkeyMessages = [
+            "pubkey:cosmos,m/44'/118'/0'/0/0",
+            "pubkey:ripple,m/44'/144'/0'/0/0",
+            "pubkey:celestia,m/44'/118'/0'/0/0",
+            "pubkey:juno,m/44'/118'/0'/0/0",
+            "pubkey:osmosis,m/44'/118'/0'/0/0",
+          ];
 
-        for (const pubkeyMessage of pubkeyMessages) {
-          try {
-            const bufferMessage = Buffer.from(pubkeyMessage, "utf-8");
-            const base64Message = bufferMessage.toString("base64");
-            await selectedDevice.writeCharacteristicWithResponseForService(
-              serviceUUID,
-              writeCharacteristicUUID,
-              base64Message
-            );
-            console.log(
-              `String '${pubkeyMessage}' sent to device successfully`
-            );
-          } catch (error) {
-            console.log(`Error sending string '${pubkeyMessage}':`, error);
+          for (const message of pubkeyMessages) {
+            await new Promise((resolve) => setTimeout(resolve, 250));
+            try {
+              const bufferMessage = Buffer.from(message, "utf-8");
+              const base64Message = bufferMessage.toString("base64");
+              await selectedDevice.writeCharacteristicWithResponseForService(
+                serviceUUID,
+                writeCharacteristicUUID,
+                base64Message
+              );
+              console.log(`Sent message: ${message}`);
+            } catch (error) {
+              console.log(`Error sending message "${message}":`, error);
+            }
           }
-        }
+        }, 750);
       } else if (flag === "N") {
         console.log(
           "Device returned PIN:xxxx,N, no need to send 'address' and pubkey strings"

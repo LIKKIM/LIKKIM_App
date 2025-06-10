@@ -368,7 +368,7 @@ function AppContent({
               console.log(`Error sending message "${message}":`, error);
             }
           }
-        }, 500);
+        }, 750);
       } else if (flag === "N") {
         console.log("Flag N received; no 'address' sent");
         setCheckStatusModalVisible(true);
