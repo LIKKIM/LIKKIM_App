@@ -1058,17 +1058,36 @@ const SecureDeviceStatus = (props) => {
                       justifyContent: "center",
                       alignItems: "center",
                       marginBottom: 8,
+                      overflow: "hidden",
+                      position: "relative",
                     }}
                   >
                     <Image
                       source={require("../../assets/Logo@500.png")}
                       style={{
+                        position: "absolute",
                         width: "50%",
                         height: "50%",
                         opacity: 0.2,
                         resizeMode: "contain",
+                        top: "25%",
+                        left: "25%",
                       }}
                     />
+                    <Text
+                      style={[
+                        VaultScreenStyle.modalSubtitle,
+                        {
+                          color: "#eee",
+                          fontWeight: "bold",
+                          position: "absolute",
+                          fontSize: 12,
+                          textAlign: "center",
+                        },
+                      ]}
+                    >
+                      {t("No Image")}
+                    </Text>
                   </View>
                 )}
                 <Text
@@ -1161,10 +1180,28 @@ const SecureDeviceStatus = (props) => {
                         marginBottom: 8,
                       }}
                     >
+                      <Image
+                        source={require("../../assets/Logo@500.png")}
+                        style={{
+                          position: "absolute",
+                          width: "50%",
+                          height: "50%",
+                          opacity: 0.2,
+                          resizeMode: "contain",
+                          top: "25%",
+                          left: "25%",
+                        }}
+                      />
                       <Text
                         style={[
                           VaultScreenStyle.modalSubtitle,
-                          { color: "#666" },
+                          {
+                            color: "#eee",
+                            fontWeight: "bold",
+                            position: "absolute",
+                            fontSize: 16,
+                            textAlign: "center",
+                          },
                         ]}
                       >
                         {t("No Image")}
