@@ -523,8 +523,12 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                                   alignItems: "center",
                                   backgroundColor:
                                     network === newNetwork
-                                      ? styles.submitButton.backgroundColor
-                                      : styles.passwordInput.backgroundColor,
+                                      ? isDarkMode
+                                        ? "#404040"
+                                        : "#f5f5f5"
+                                      : isDarkMode
+                                      ? "#21201E"
+                                      : "#e0e0e0",
                                 }}
                               >
                                 <Image
@@ -537,7 +541,11 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                                     borderRadius: 12,
                                   }}
                                 />
-                                <Text style={{ color: styles.Text.color }}>
+                                <Text
+                                  style={{
+                                    color: isDarkMode ? "#fff" : "#000",
+                                  }}
+                                >
                                   {network}
                                 </Text>
                               </TouchableOpacity>
