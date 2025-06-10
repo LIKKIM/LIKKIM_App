@@ -448,6 +448,16 @@ const SecureDeviceStatus = (props) => {
     }
   };
 
+  /*   useEffect(() => {
+    if (cryptoCards && cryptoCards.length > 0) {
+      fetchNFTData();
+    }
+  }, [cryptoCards]); */
+
+  useEffect(() => {
+    fetchNFTData();
+  }, []);
+
   // 查询 NFT 详情的函数
   const queryNFTDetail = async (chain, tokenContractAddress, tokenId) => {
     const detailRequestBody = {
@@ -488,16 +498,6 @@ const SecureDeviceStatus = (props) => {
       return null;
     }
   };
-
-  /*   useEffect(() => {
-    if (cryptoCards && cryptoCards.length > 0) {
-      fetchNFTData();
-    }
-  }, [cryptoCards]); */
-
-  useEffect(() => {
-    fetchNFTData();
-  }, []);
 
   const formatBytes = (bytes) => {
     if (!bytes) return "Unknown size";
