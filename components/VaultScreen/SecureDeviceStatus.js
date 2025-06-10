@@ -1172,7 +1172,7 @@ const SecureDeviceStatus = (props) => {
                   )}
                   <ScrollView
                     style={{
-                      height: 120,
+                      height: 170,
                       marginVertical: 20,
                     }}
                     contentContainerStyle={{
@@ -1216,10 +1216,17 @@ const SecureDeviceStatus = (props) => {
                       </Text>
 
                       {/* 协议类型 */}
-                      <Text style={VaultScreenStyle.chainCardText}>
+                      <Text
+                        style={[
+                          VaultScreenStyle.chainCardText,
+                          { marginBottom: 2 },
+                        ]}
+                      >
                         {t("Protocol")}: {selectedNFT.protocolType || t("N/A")}
                       </Text>
-
+                      <Text style={VaultScreenStyle.chainCardText}>
+                        {t("Description")}: {selectedNFT.des || t("N/A")}
+                      </Text>
                       {/* 价格信息，如果存在 */}
                       {selectedNFT.lastPrice && (
                         <Text
