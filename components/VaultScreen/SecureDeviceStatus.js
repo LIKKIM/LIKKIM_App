@@ -284,7 +284,6 @@ const SecureDeviceStatus = (props) => {
 
           // 发送 420 尺寸图片数据，前面加开头标志 "IMG_BIN_BEGIN_420"
           const header420 = "IMG_BIN_BEGIN_420";
-          const chunkSize = 240; // 每包最大字节数限制
           const delay = 250; // 发送间隔，单位毫秒
 
           // 先发送 420 头部标志
@@ -293,6 +292,8 @@ const SecureDeviceStatus = (props) => {
             writeCharacteristicUUID,
             header420
           );
+
+          const chunkSize = 240; // 每包最大字节数限制
 
           // 拆分 420 数据并按顺序发送
           for (let i = 0; i < binData420.length; i += chunkSize) {
