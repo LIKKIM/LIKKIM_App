@@ -216,7 +216,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
               >
                 {!isAddingAddress ? (
                   <>
-                    <Text style={styles.modalTitle}>{t("Address Book")}</Text>
+                    {/*                     <Text style={styles.modalTitle}>{t("Address Book")}</Text> */}
                     <View style={styles.searchContainer}>
                       <Icon name="search" size={20} style={styles.searchIcon} />
                       <TextInput
@@ -227,7 +227,6 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                         value={searchAddress}
                       />
                     </View>
-
                     <View style={{ flex: 1 }}>
                       <FlatList
                         data={filteredAddresses}
@@ -373,20 +372,29 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                         )}
                       />
                     </View>
-                    <TouchableOpacity
-                      onPress={() => setIsAddingAddress(true)}
-                      style={styles.submitButton}
+                    <View
+                      style={[
+                        styles.AddressBookContainer,
+                        { justifyContent: "flex-start" },
+                      ]}
                     >
-                      <Text style={styles.submitButtonText}>
-                        {t("Add Address")}
-                      </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      onPress={onClose}
-                      style={styles.closeButton}
-                    >
-                      <Text style={styles.cancelButtonText}>{t("Close")}</Text>
-                    </TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={onClose}
+                        style={styles.backButton}
+                      >
+                        <Text style={styles.submitButtonText}>
+                          {t("Close")}
+                        </Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={() => setIsAddingAddress(true)}
+                        style={styles.saveButton}
+                      >
+                        <Text style={styles.cancelButtonText}>
+                          {t("Add Address")}
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
                   </>
                 ) : (
                   <>

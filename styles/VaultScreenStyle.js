@@ -515,6 +515,16 @@ const VaultScreenStyles = (isDarkMode) => {
       height: 60,
       alignItems: "center",
     },
+    GallerySendBtn: {
+      borderWidth: 3,
+      borderColor: buttonBackgroundColor,
+      padding: 10,
+      width: "100%",
+      justifyContent: "center",
+      borderRadius: 15,
+      height: 60,
+      alignItems: "center",
+    },
     cancelAddressButton: {
       borderWidth: 3,
       borderColor: buttonBackgroundColor,

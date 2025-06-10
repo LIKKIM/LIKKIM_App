@@ -1300,7 +1300,7 @@ const SecureDeviceStatus = (props) => {
               >
                 <TouchableOpacity
                   style={[
-                    VaultScreenStyle.NFTButton,
+                    VaultScreenStyle.GallerySendBtn,
                     { flex: 1, marginRight: 8 },
                   ]}
                   onPress={() => {
