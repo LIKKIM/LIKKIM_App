@@ -495,7 +495,10 @@ function AppContent({
       notifyCharacteristicUUID,
       async (error, characteristic) => {
         if (error) {
-          console.log("Error monitoring device response:", error.message);
+          console.log(
+            "App.js Error monitoring device response:",
+            error.message
+          );
           return;
         }
 

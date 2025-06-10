@@ -523,7 +523,10 @@ function SecureDeviceScreen({ onDarkModeChange }) {
       notifyCharacteristicUUID,
       async (error, characteristic) => {
         if (error) {
-          console.log("Error monitoring device response:", error.message);
+          console.log(
+            "SecureDevice.js Error monitoring device response:",
+            error.message
+          );
           return;
         }
 

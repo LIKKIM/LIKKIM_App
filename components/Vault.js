@@ -748,7 +748,10 @@ function VaultScreen({ route, navigation }) {
       notifyCharacteristicUUID,
       async (error, characteristic) => {
         if (error) {
-          console.log("Error monitoring device response:", error.message);
+          console.log(
+            "Vault.js Error monitoring device response:",
+            error.message
+          );
           return;
         }
 

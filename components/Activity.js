@@ -707,10 +707,10 @@ function ActivityScreen() {
         subscription.remove();
         bleManagerRef.current && bleManagerRef.current.destroy();
         // 新增取消蓝牙监听订阅，防止订阅泄漏
-        if (monitorSubscription) {
+        if (monitorSubscription.current) {
           try {
-            monitorSubscription.remove();
-            monitorSubscription = null;
+            monitorSubscription.current.remove();
+            monitorSubscription.current = null;
             console.log(
               "Activity.js: Cancelled Bluetooth monitor subscription on unmount"
             );
@@ -785,7 +785,10 @@ function ActivityScreen() {
       notifyCharacteristicUUID,
       async (error, characteristic) => {
         if (error) {
-          console.log("Error monitoring device response:", error.message);
+          console.log(
+            "Activty.js Error monitoring device response:",
+            error.message
+          );
           return;
         }
         const receivedData = Buffer.from(characteristic.value, "base64");
@@ -996,10 +999,10 @@ function ActivityScreen() {
   };
   // 停止监听验证码;
   const stopMonitoringVerificationCode = () => {
-    if (monitorSubscription) {
+    if (monitorSubscription.current) {
       try {
-        monitorSubscription.remove();
-        monitorSubscription = null;
+        monitorSubscription.current.remove();
+        monitorSubscription.current = null;
         console.log("验证码监听已停止");
       } catch (error) {
         console.log("停止监听时发生错误:", error);
@@ -1218,9 +1221,9 @@ function ActivityScreen() {
       console.log("PIN verification failed");
       setVerificationFailModalVisible(true);
 
-      if (monitorSubscription) {
+      if (monitorSubscription.current) {
         try {
-          monitorSubscription.remove();
+          monitorSubscription.current.remove();
           console.log("Stopped monitoring verification code");
         } catch (error) {
           console.log("Error occurred while stopping monitoring:", error);
