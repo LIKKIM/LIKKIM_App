@@ -1,5 +1,5 @@
 // CheckStatusModal.js
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { View, Text, Modal, Image, TouchableOpacity } from "react-native";
 import { BlurView } from "expo-blur";
 import { useTranslation } from "react-i18next";
@@ -13,9 +13,32 @@ const CheckStatusModal = ({ visible, status, onClose }) => {
   const { isDarkMode, setIsDarkMode } = useContext(DarkModeContext);
   const styles = SecureDeviceScreenStyles(isDarkMode);
   const { t } = useTranslation();
+  const [progress, setProgress] = useState(0);
   let imageSource;
   let title;
   let subtitle;
+
+  useEffect(() => {
+    let intervalId;
+    if (status === "waiting") {
+      setProgress(0);
+      intervalId = setInterval(() => {
+        setProgress((prev) => {
+          const next = prev + 0.16;
+          if (next >= 0.8) {
+            clearInterval(intervalId);
+            return 0.8;
+          }
+          return next;
+        });
+      }, 1000);
+    } else {
+      setProgress(0);
+    }
+    return () => {
+      if (intervalId) clearInterval(intervalId);
+    };
+  }, [status]);
 
   if (status === "success") {
     imageSource = SuccessGif;
@@ -54,6 +77,28 @@ const CheckStatusModal = ({ visible, status, onClose }) => {
             style={{ width: 120, height: 120, marginTop: 20 }}
           />
           <Text style={styles.modalTitle}>{title}</Text>
+          {status === "waiting" && (
+            <View
+              style={{
+                height: 10,
+                width: "80%",
+                backgroundColor: "#e0e0e0",
+                borderRadius: 5,
+                marginTop: 10,
+                overflow: "hidden",
+                alignSelf: "center",
+              }}
+            >
+              <View
+                style={{
+                  height: "100%",
+                  width: `${Math.min(Math.max(progress, 0), 1) * 100}%`,
+                  backgroundColor: "#3b82f6",
+                  borderRadius: 5,
+                }}
+              />
+            </View>
+          )}
           <Text style={styles.modalSubtitle}>{subtitle}</Text>
           {status !== "waiting" ? (
             <TouchableOpacity style={styles.submitButton} onPress={onClose}>
