@@ -196,6 +196,7 @@ const SecureDeviceStatus = (props) => {
   const [sendModalVisible, setSendModalVisible] = useState(false);
   const [recipientAddress, setRecipientAddress] = useState("");
   const [previewModalVisible, setPreviewModalVisible] = useState(false);
+  const [galleryRefreshing, setGalleryRefreshing] = useState(false);
   const styles = SecureDeviceScreenStyles(isDarkMode);
   const [dataUrl, setDataUrl] = useState(null);
 
@@ -448,15 +449,15 @@ const SecureDeviceStatus = (props) => {
     }
   };
 
-  /*   useEffect(() => {
+  useEffect(() => {
     if (cryptoCards && cryptoCards.length > 0) {
       fetchNFTData();
     }
-  }, [cryptoCards]); */
+  }, [cryptoCards]);
 
-  useEffect(() => {
+  /*   useEffect(() => {
     fetchNFTData();
-  }, []);
+  }, []); */
 
   // 查询 NFT 详情的函数
   const queryNFTDetail = async (chain, tokenContractAddress, tokenId) => {
@@ -980,7 +981,13 @@ const SecureDeviceStatus = (props) => {
           borderRadius: 8,
         }}
         refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          <RefreshControl
+            refreshing={galleryRefreshing}
+            onRefresh={() => {
+              setGalleryRefreshing(true);
+              fetchNFTData().finally(() => setGalleryRefreshing(false));
+            }}
+          />
         }
       >
         {nftData && nftData.code === "0" && Array.isArray(nftData.data) ? (
