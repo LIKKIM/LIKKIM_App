@@ -212,13 +212,26 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                   styles.addressModalView,
                   { justifyContent: "space-between" },
                   !isAddingAddress && { height: 480 },
+                  { backgroundColor: isDarkMode ? "#3F3D3C" : "#ffffff" },
                 ]}
               >
                 {!isAddingAddress ? (
                   <>
                     {/*                     <Text style={styles.modalTitle}>{t("Address Book")}</Text> */}
-                    <View style={styles.searchContainer}>
-                      <Icon name="search" size={20} style={styles.searchIcon} />
+                    <View
+                      style={[
+                        styles.searchContainer,
+                        { backgroundColor: isDarkMode ? "#21201E" : "#E5E1E9" },
+                      ]}
+                    >
+                      <Icon
+                        name="search"
+                        size={20}
+                        style={[
+                          styles.searchIcon,
+                          { color: isDarkMode ? "#fff" : "#000" },
+                        ]}
+                      />
                       <TextInput
                         style={styles.searchInput}
                         placeholder={t("Search Address")}
@@ -383,17 +396,42 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                     >
                       <TouchableOpacity
                         onPress={onClose}
-                        style={styles.backButton}
+                        style={[
+                          styles.backButton,
+
+                          {
+                            borderColor: isDarkMode ? "#CCB68C" : "#E5E1E9",
+                          },
+                        ]}
                       >
-                        <Text style={styles.submitButtonText}>
+                        <Text
+                          style={[
+                            styles.submitButtonText,
+                            {
+                              color: isDarkMode ? "#fff" : "#000",
+                            },
+                          ]}
+                        >
                           {t("Close")}
                         </Text>
                       </TouchableOpacity>
                       <TouchableOpacity
                         onPress={() => setIsAddingAddress(true)}
-                        style={styles.saveButton}
+                        style={[
+                          styles.saveButton,
+                          {
+                            backgroundColor: isDarkMode ? "#CCB68C" : "#E5E1E9",
+                          },
+                        ]}
                       >
-                        <Text style={styles.cancelButtonText}>
+                        <Text
+                          style={[
+                            styles.cancelButtonText,
+                            {
+                              color: isDarkMode ? "#fff" : "#000",
+                            },
+                          ]}
+                        >
                           {t("Add Address")}
                         </Text>
                       </TouchableOpacity>
@@ -552,7 +590,12 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                       </TouchableOpacity>
                       <TouchableOpacity
                         onPress={handleSaveAddress}
-                        style={styles.saveButton}
+                        style={[
+                          styles.saveButton,
+                          {
+                            backgroundColor: isDarkMode ? "#CCB68C" : "#E5E1E9",
+                          },
+                        ]}
                       >
                         <Text style={styles.submitButtonText}>{t("Save")}</Text>
                       </TouchableOpacity>
