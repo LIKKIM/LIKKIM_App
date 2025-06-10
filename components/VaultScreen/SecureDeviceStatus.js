@@ -1093,15 +1093,6 @@ const SecureDeviceStatus = (props) => {
                         { marginBottom: 4 },
                       ]}
                     >
-                      {t("Price")}: {nft.lastPrice}{" "}
-                      {nft.lastPriceUnit || t("N/A")}
-                    </Text>
-                    <Text
-                      style={[
-                        VaultScreenStyle.chainCardText,
-                        { marginBottom: 4 },
-                      ]}
-                    >
                       {t("Chain")}: {nft.chain || t("N/A")}
                     </Text>
                   </View>
