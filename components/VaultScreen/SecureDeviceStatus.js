@@ -1060,14 +1060,15 @@ const SecureDeviceStatus = (props) => {
                       marginBottom: 8,
                     }}
                   >
-                    <Text
-                      style={[
-                        VaultScreenStyle.modalSubtitle,
-                        { color: "#666" },
-                      ]}
-                    >
-                      {t("No Image")}
-                    </Text>
+                    <Image
+                      source={require("../../assets/Logo@500.png")}
+                      style={{
+                        width: "50%",
+                        height: "50%",
+                        opacity: 0.2,
+                        resizeMode: "contain",
+                      }}
+                    />
                   </View>
                 )}
                 <Text
