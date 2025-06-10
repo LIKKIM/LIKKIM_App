@@ -470,7 +470,6 @@ function AppContent({
   useEffect(() => {
     if (verifiedDevices.length === 0) {
       stopMonitoringVerificationCode();
-      console.log("No verified devices, stopped BLE monitor.");
     }
   }, [verifiedDevices]);
   useEffect(() => {
