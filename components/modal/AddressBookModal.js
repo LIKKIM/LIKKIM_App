@@ -277,6 +277,9 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                                       width: 24,
                                       height: 24,
                                       marginRight: 5,
+                                      backgroundColor:
+                                        "rgba(255, 255, 255, 0.2)",
+                                      borderRadius: 12,
                                     }}
                                   />
                                   <Text
