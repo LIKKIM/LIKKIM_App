@@ -1209,6 +1209,7 @@ const SecureDeviceStatus = (props) => {
                     </View>
                   )}
                   <ScrollView
+                    showsVerticalScrollIndicator={true}
                     style={{
                       height: 170,
                       marginVertical: 20,
@@ -1227,7 +1228,7 @@ const SecureDeviceStatus = (props) => {
                       <Text
                         style={[
                           VaultScreenStyle.modalTitle,
-                          { marginBottom: 4 },
+                          { marginBottom: 6 },
                         ]}
                       >
                         {selectedNFT.name || t("NFT Card")}
@@ -1237,7 +1238,7 @@ const SecureDeviceStatus = (props) => {
                       <Text
                         style={[
                           VaultScreenStyle.chainCardText,
-                          { marginBottom: 2 },
+                          { marginBottom: 4 },
                         ]}
                       >
                         {t("Contract")}: {selectedNFT.tokenContractAddress}
@@ -1247,7 +1248,7 @@ const SecureDeviceStatus = (props) => {
                       <Text
                         style={[
                           VaultScreenStyle.chainCardText,
-                          { marginBottom: 2 },
+                          { marginBottom: 4 },
                         ]}
                       >
                         {t("Token ID")}: {selectedNFT.tokenId}
@@ -1257,7 +1258,7 @@ const SecureDeviceStatus = (props) => {
                       <Text
                         style={[
                           VaultScreenStyle.chainCardText,
-                          { marginBottom: 2 },
+                          { marginBottom: 4 },
                         ]}
                       >
                         {t("Protocol")}: {selectedNFT.protocolType || t("N/A")}
@@ -1354,7 +1355,7 @@ const SecureDeviceStatus = (props) => {
                   <Text
                     style={[VaultScreenStyle.modalTitle, { marginBottom: 10 }]}
                   >
-                    {t("Send NFT")}
+                    {t("Send")}
                   </Text>
                 </View>
 
@@ -1429,7 +1430,7 @@ const SecureDeviceStatus = (props) => {
 
                 {/* 关闭按钮 */}
                 <TouchableOpacity
-                  style={[VaultScreenStyle.Button]}
+                  style={[VaultScreenStyle.cancelButton]}
                   onPress={() => setSendModalVisible(false)}
                 >
                   <Text style={VaultScreenStyle.ButtonText}>{t("Close")}</Text>
