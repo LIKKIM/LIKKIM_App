@@ -979,6 +979,9 @@ const SecureDeviceStatus = (props) => {
           width: "100%",
           borderRadius: 8,
         }}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
       >
         {nftData && nftData.code === "0" && Array.isArray(nftData.data) ? (
           nftData.data.map((nft, index) => (
