@@ -398,7 +398,6 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                         onPress={onClose}
                         style={[
                           styles.backButton,
-
                           {
                             borderColor: isDarkMode ? "#CCB68C" : "#E5E1E9",
                           },
@@ -584,9 +583,23 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                     <View style={styles.AddressBookContainer}>
                       <TouchableOpacity
                         onPress={() => setIsAddingAddress(false)}
-                        style={styles.backButton}
+                        style={[
+                          styles.backButton,
+                          {
+                            borderColor: isDarkMode ? "#CCB68C" : "#E5E1E9",
+                          },
+                        ]}
                       >
-                        <Text style={styles.cancelButtonText}>{t("Back")}</Text>
+                        <Text
+                          style={[
+                            styles.cancelButtonText,
+                            {
+                              color: isDarkMode ? "#fff" : "#000",
+                            },
+                          ]}
+                        >
+                          {t("Back")}
+                        </Text>
                       </TouchableOpacity>
                       <TouchableOpacity
                         onPress={handleSaveAddress}
@@ -597,7 +610,16 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                           },
                         ]}
                       >
-                        <Text style={styles.submitButtonText}>{t("Save")}</Text>
+                        <Text
+                          style={[
+                            styles.submitButtonText,
+                            {
+                              color: isDarkMode ? "#fff" : "#000",
+                            },
+                          ]}
+                        >
+                          {t("Save")}
+                        </Text>
                       </TouchableOpacity>
                     </View>
                   </>
