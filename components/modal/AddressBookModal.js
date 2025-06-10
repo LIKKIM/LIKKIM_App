@@ -360,7 +360,16 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                               </TouchableOpacity>
                             </TouchableOpacity>
                             {dropdownVisible === item.id && (
-                              <View style={styles.dropdown}>
+                              <View
+                                style={[
+                                  styles.dropdown,
+                                  {
+                                    backgroundColor: isDarkMode
+                                      ? "#3F3D3C"
+                                      : "#ffffff",
+                                  },
+                                ]}
+                              >
                                 <TouchableOpacity
                                   onPress={() => handleCopy(item.address)}
                                 >
@@ -524,7 +533,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                                   backgroundColor:
                                     network === newNetwork
                                       ? isDarkMode
-                                        ? "#404040"
+                                        ? "#3F3D3C"
                                         : "#f5f5f5"
                                       : isDarkMode
                                       ? "#21201E"
