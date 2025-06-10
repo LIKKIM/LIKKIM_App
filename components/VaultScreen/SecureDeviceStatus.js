@@ -1008,7 +1008,10 @@ const SecureDeviceStatus = (props) => {
             refreshing={galleryRefreshing}
             onRefresh={() => {
               setGalleryRefreshing(true);
-              fetchNFTData().finally(() => setGalleryRefreshing(false));
+              Promise.race([
+                fetchNFTData(),
+                new Promise((resolve) => setTimeout(resolve, 3000)),
+              ]).finally(() => setGalleryRefreshing(false));
             }}
           />
         }
