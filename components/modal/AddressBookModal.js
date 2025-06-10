@@ -446,6 +446,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                             flexDirection: "row",
                             justifyContent: "space-between",
                             alignItems: "center",
+                            backgroundColor: isDarkMode ? "#21201E" : "#e0e0e0",
                           },
                         ]}
                         onPress={() =>
