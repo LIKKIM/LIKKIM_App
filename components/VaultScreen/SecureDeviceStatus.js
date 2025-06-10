@@ -411,6 +411,23 @@ const SecureDeviceStatus = (props) => {
   };
 
   // 请求 NFT 数据的函数
+  useEffect(() => {
+    const loadNftData = async () => {
+      try {
+        const savedNftData = await AsyncStorage.getItem("nftData");
+        if (savedNftData !== null) {
+          setNftData(JSON.parse(savedNftData));
+        } else {
+          fetchNFTData();
+        }
+      } catch (e) {
+        console.error("Error loading nftData from AsyncStorage", e);
+        fetchNFTData();
+      }
+    };
+    loadNftData();
+  }, []);
+
   const fetchNFTData = async () => {
     const requestBody = {
       chain: "okc",
@@ -444,6 +461,12 @@ const SecureDeviceStatus = (props) => {
       }
 
       setNftData(json);
+      // 持久化 nftData
+      try {
+        await AsyncStorage.setItem("nftData", JSON.stringify(json));
+      } catch (e) {
+        console.error("Error saving nftData to AsyncStorage", e);
+      }
     } catch (error) {
       console.log("Error fetching NFT data", error);
     }
@@ -455,7 +478,7 @@ const SecureDeviceStatus = (props) => {
     }
   }, [cryptoCards]);
 
-  /*   useEffect(() => {
+  /*  useEffect(() => {
     fetchNFTData();
   }, []); */
 
