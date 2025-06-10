@@ -587,6 +587,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                                 backgroundColor: isDarkMode
                                   ? "#21201E"
                                   : "#e0e0e0",
+                                color: isDarkMode ? "#fff" : "#000",
                               },
                             ]}
                             placeholder="Name Required"
@@ -607,6 +608,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                                 backgroundColor: isDarkMode
                                   ? "#21201E"
                                   : "#e0e0e0",
+                                color: isDarkMode ? "#fff" : "#000",
                               },
                             ]}
                             placeholder="Address Required"
