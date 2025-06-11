@@ -170,6 +170,18 @@ function VaultScreen({ route, navigation }) {
 
   // 定义下拉刷新执行的函数
 
+  useEffect(() => {
+    setTimeout(() => {
+      cardRefs.current.forEach((ref, idx) => {
+        if (ref && typeof ref.measure === "function") {
+          ref.measure((fx, fy, width, height, px, py) => {
+            cardStartPositions.current[idx] = py;
+          });
+        }
+      });
+    }, 200);
+  }, [chainFilteredCards.length]);
+
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
 
