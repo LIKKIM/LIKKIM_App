@@ -507,7 +507,6 @@ i18n
           "Save to Device": "儲存到裝置",
         },
       },
-
       fr: {
         translation: {
           Gallery: "Galerie",
