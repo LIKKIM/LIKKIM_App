@@ -1005,12 +1005,12 @@ function VaultScreen({ route, navigation }) {
       Animated.spring(animation, {
         toValue: 1,
         useNativeDriver: true,
-        stiffness: 250, // 增加刚度
-        damping: 25, // 增加阻尼
-        mass: 1, // 质量
+        stiffness: 180,
+        damping: 20,
+        mass: 1,
         overshootClamping: false, // 允许超出目标值
-        restDisplacementThreshold: 0.01,
-        restSpeedThreshold: 0.01,
+        restDisplacementThreshold: 0.0005,
+        restSpeedThreshold: 0.0005,
       }).start(() => {
         setModalVisible(true);
         setTimeout(() => {
@@ -1033,14 +1033,13 @@ function VaultScreen({ route, navigation }) {
       cardStartPositions.current[selectedCardIndex] = 0;
       Animated.spring(animation, {
         toValue: 0,
-        duration: 200,
         useNativeDriver: true,
-        stiffness: 250, // 增加刚度
-        damping: 25, // 增加阻尼
+        stiffness: 250,
+        damping: 30, // 增加阻尼
         mass: 1, // 质量
-        overshootClamping: false,
-        restDisplacementThreshold: 0.01,
-        restSpeedThreshold: 0.01,
+        overshootClamping: true,
+        restDisplacementThreshold: 0.0005,
+        restSpeedThreshold: 0.0005,
       }).start(() => {
         setModalVisible(false);
         setCardInfoVisible(false);
