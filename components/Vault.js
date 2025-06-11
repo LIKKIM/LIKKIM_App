@@ -170,6 +170,7 @@ function VaultScreen({ route, navigation }) {
 
   // 定义下拉刷新执行的函数
 
+  // 计算 cardStartPositions导致卡片移动卡顿
   useEffect(() => {
     setTimeout(() => {
       cardRefs.current.forEach((ref, idx) => {
