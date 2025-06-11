@@ -19,11 +19,9 @@ const DeleteConfirmationModal = ({
     >
       <BlurView intensity={10} style={styles.centeredView}>
         <View style={styles.deleteModalView}>
-          <Text style={styles.alertModalTitle}>
-            {t("Remove Chain Account")}
-          </Text>
+          <Text style={styles.alertModalTitle}>{t("Remove Asset Card")}</Text>
           <Text style={styles.modalSubtitle}>
-            {t("This chain account will be removed")}
+            {t("This asset card will be removed")}
           </Text>
           <View style={{ alignItems: "center", justifyContent: "center" }}>
             <Image

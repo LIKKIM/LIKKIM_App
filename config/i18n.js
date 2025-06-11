@@ -50,9 +50,8 @@ i18n
           Balance: "Balance",
           "No assets available. Please connect your device to continue.":
             "No assets available. Please connect your device to continue.",
-          "This chain account will be removed":
-            "This chain account will be removed",
-          "Remove Chain Account": "Remove Chain Account",
+          "Remove Asset Card": "Remove Asset Card",
+          "This asset card will be removed": "This asset card will be removed",
           Remove: "Remove",
           "Security in your hands": "Security in your hands",
           Continue: "Continue",
@@ -224,8 +223,8 @@ i18n
           Balance: "余额",
           "No assets available. Please connect your device to continue.":
             "没有可用的加密货币。请先添加钱包。",
-          "This chain account will be removed": "此链账户将被移除",
-          "Remove Chain Account": "移除链账户",
+          "Remove Asset Card": "移除链账户",
+          "This asset card will be removed": "此链账户将被移除",
           Remove: "移除",
           "Security in your hands": "安全尽在掌握",
           Continue: "继续",
@@ -388,8 +387,8 @@ i18n
           Balance: "餘額",
           "No assets available. Please connect your device to continue.":
             "沒有可用的加密貨幣。請先添加錢包。",
-          "This chain account will be removed": "此鏈帳戶將被移除",
-          "Remove Chain Account": "移除鏈帳戶",
+          "This asset card will be removed": "此鏈帳戶將被移除",
+          "Remove Asset Card": "移除鏈帳戶",
           Remove: "移除",
           "Security in your hands": "安全盡在掌握",
           Continue: "繼續",
@@ -553,9 +552,9 @@ i18n
           Balance: "Solde",
           "No assets available. Please connect your device to continue.":
             "Aucun actif disponible. Veuillez connecter votre appareil pour continuer.",
-          "This chain account will be removed":
+          "This asset card will be removed":
             "Ce compte de chaîne sera supprimé",
-          "Remove Chain Account": "Supprimer le compte de chaîne",
+          "Remove Asset Card": "Supprimer le compte de chaîne",
           Remove: "Supprimer",
           "Security in your hands": "La sécurité entre vos mains",
           Continue: "Continuer",
@@ -729,9 +728,9 @@ i18n
           Balance: "Saldo",
           "No assets available. Please connect your device to continue.":
             "No hay activos disponibles. Conecta tu dispositivo para continuar.",
-          "This chain account will be removed":
+          "This asset card will be removed":
             "Esta cuenta de cadena será eliminada",
-          "Remove Chain Account": "Eliminar cuenta de cadena",
+          "Remove Asset Card": "Eliminar cuenta de cadena",
           Remove: "Eliminar",
           "Security in your hands": "Seguridad en tus manos",
           Continue: "Continuar",
@@ -903,8 +902,8 @@ i18n
           Balance: "الرصيد",
           "No assets available. Please connect your device to continue.":
             "لا توجد أصول متاحة. يرجى توصيل جهازك للمتابعة.",
-          "This chain account will be removed": "سيتم إزالة حساب السلسلة هذا",
-          "Remove Chain Account": "إزالة حساب السلسلة",
+          "This asset card will be removed": "سيتم إزالة حساب السلسلة هذا",
+          "Remove Asset Card": "إزالة حساب السلسلة",
           Remove: "إزالة",
           "Security in your hands": "الأمان بين يديك",
           Continue: "متابعة",
@@ -1072,9 +1071,9 @@ i18n
           Balance: "残高",
           "No assets available. Please connect your device to continue.":
             "利用可能な資産がありません。続行するにはデバイスを接続してください。",
-          "This chain account will be removed":
+          "This asset card will be removed":
             "このチェーンアカウントは削除されます",
-          "Remove Chain Account": "チェーンアカウントを削除",
+          "Remove Asset Card": "チェーンアカウントを削除",
           Remove: "削除",
           "Security in your hands": "あなたの手にあるセキュリティ",
           Continue: "続行",
@@ -1243,9 +1242,9 @@ i18n
           Balance: "Баланс",
           "No assets available. Please connect your device to continue.":
             "Нет доступных активов. Пожалуйста, подключите устройство для продолжения.",
-          "This chain account will be removed":
+          "This asset card will be removed":
             "Этот аккаунт цепочки будет удален",
-          "Remove Chain Account": "Удалить аккаунт цепочки",
+          "Remove Asset Card": "Удалить аккаунт цепочки",
           Remove: "Удалить",
           "Security in your hands": "Безопасность в ваших руках",
           Continue: "Продолжить",
@@ -1415,8 +1414,8 @@ i18n
           Balance: "잔액",
           "No assets available. Please connect your device to continue.":
             "사용 가능한 자산이 없습니다. 계속하려면 장치를 연결하세요.",
-          "This chain account will be removed": "이 체인 계정이 제거됩니다",
-          "Remove Chain Account": "체인 계정 제거",
+          "This asset card will be removed": "이 체인 계정이 제거됩니다",
+          "Remove Asset Card": "체인 계정 제거",
           Remove: "제거",
           "Security in your hands": "안전은 당신의 손에",
           Continue: "계속",
@@ -1584,9 +1583,9 @@ i18n
           Balance: "Saldo",
           "No assets available. Please connect your device to continue.":
             "Não há ativos disponíveis. Conecte seu dispositivo para continuar.",
-          "This chain account will be removed":
+          "This asset card will be removed":
             "Esta conta da cadeia será removida",
-          "Remove Chain Account": "Remover conta da cadeia",
+          "Remove Asset Card": "Remover conta da cadeia",
           Remove: "Remover",
           "Security in your hands": "Segurança em suas mãos",
           Continue: "Continuar",
@@ -1758,9 +1757,9 @@ i18n
           Balance: "Saldo",
           "No assets available. Please connect your device to continue.":
             "Não há ativos disponíveis. Conecte seu dispositivo para continuar.",
-          "This chain account will be removed":
+          "This asset card will be removed":
             "Esta conta de cadeia será removida",
-          "Remove Chain Account": "Remover conta de cadeia",
+          "Remove Asset Card": "Remover conta de cadeia",
           Remove: "Remover",
           "Security in your hands": "Segurança em suas mãos",
           Continue: "Continuar",
@@ -1932,9 +1931,9 @@ i18n
           Balance: "Saldo",
           "No assets available. Please connect your device to continue.":
             "Nessun asset disponibile. Connetti il dispositivo per continuare.",
-          "This chain account will be removed":
+          "This asset card will be removed":
             "Questo account della catena sarà rimosso",
-          "Remove Chain Account": "Rimuovi account della catena",
+          "Remove Asset Card": "Rimuovi account della catena",
           Remove: "Rimuovi",
           "Security in your hands": "Sicurezza nelle tue mani",
           Continue: "Continua",
@@ -2106,9 +2105,8 @@ i18n
           Balance: "Kontostand",
           "No assets available. Please connect your device to continue.":
             "Keine Assets verfügbar. Bitte verbinden Sie Ihr Gerät, um fortzufahren.",
-          "This chain account will be removed":
-            "Dieses Chain-Konto wird entfernt",
-          "Remove Chain Account": "Chain-Konto entfernen",
+          "This asset card will be removed": "Dieses Chain-Konto wird entfernt",
+          "Remove Asset Card": "Chain-Konto entfernen",
           Remove: "Entfernen",
           "Security in your hands": "Sicherheit in Ihren Händen",
           Continue: "Fortfahren",
@@ -2281,8 +2279,8 @@ i18n
           Balance: "शेष राशि",
           "No assets available. Please connect your device to continue.":
             "कोई एसेट उपलब्ध नहीं। जारी रखने के लिए कृपया अपना उपकरण कनेक्ट करें।",
-          "This chain account will be removed": "यह चेन खाता हटा दिया जाएगा",
-          "Remove Chain Account": "चेन खाता हटाएं",
+          "This asset card will be removed": "यह चेन खाता हटा दिया जाएगा",
+          "Remove Asset Card": "चेन खाता हटाएं",
           Remove: "हटाएं",
           "Security in your hands": "आपके हाथों में सुरक्षा",
           Continue: "जारी रखें",
@@ -2452,8 +2450,8 @@ i18n
           Balance: "Тэнцэл",
           "No assets available. Please connect your device to continue.":
             "Хөрөнгө байхгүй байна. Төхөөрөмжөө холбож үргэлжлүүлнэ үү.",
-          "This chain account will be removed": "Энэ гинжийн данс устгагдана",
-          "Remove Chain Account": "Гинжийн данс устгах",
+          "This asset card will be removed": "Энэ гинжийн данс устгагдана",
+          "Remove Asset Card": "Гинжийн данс устгах",
           Remove: "Устгах",
           "Security in your hands": "Аюулгүй байдал таны гарт",
           Continue: "Үргэлжлүүлэх",
@@ -2623,8 +2621,8 @@ i18n
           Balance: "ยอดคงเหลือ",
           "No assets available. Please connect your device to continue.":
             "ไม่มีสินทรัพย์ โปรดเชื่อมต่ออุปกรณ์เพื่อดำเนินการต่อ",
-          "This chain account will be removed": "บัญชีเชนนี้จะถูกลบ",
-          "Remove Chain Account": "ลบบัญชีเชน",
+          "This asset card will be removed": "บัญชีเชนนี้จะถูกลบ",
+          "Remove Asset Card": "ลบบัญชีเชน",
           Remove: "ลบ",
           "Security in your hands": "ความปลอดภัยในมือคุณ",
           Continue: "ดำเนินการต่อ",
@@ -2791,9 +2789,9 @@ i18n
           Balance: "Баланс",
           "No assets available. Please connect your device to continue.":
             "Немає доступних активів. Підключіть пристрій для продовження.",
-          "This chain account will be removed":
+          "This asset card will be removed":
             "Цей обліковий запис ланцюжка буде видалено",
-          "Remove Chain Account": "Видалити обліковий запис ланцюжка",
+          "Remove Asset Card": "Видалити обліковий запис ланцюжка",
           Remove: "Видалити",
           "Security in your hands": "Безпека у ваших руках",
           Continue: "Продовжити",
@@ -2963,8 +2961,8 @@ i18n
           Balance: "Số dư",
           "No assets available. Please connect your device to continue.":
             "Không có tài sản khả dụng. Vui lòng kết nối thiết bị để tiếp tục.",
-          "This chain account will be removed": "Tài khoản chuỗi này sẽ bị xóa",
-          "Remove Chain Account": "Xóa tài khoản chuỗi",
+          "This asset card will be removed": "Tài khoản chuỗi này sẽ bị xóa",
+          "Remove Asset Card": "Xóa tài khoản chuỗi",
           Remove: "Xóa",
           "Security in your hands": "Bảo mật trong tầm tay bạn",
           Continue: "Tiếp tục",
@@ -3135,8 +3133,8 @@ i18n
           Balance: "Saldo",
           "No assets available. Please connect your device to continue.":
             "Tidak ada aset tersedia. Hubungkan perangkat Anda untuk melanjutkan.",
-          "This chain account will be removed": "Akun rantai ini akan dihapus",
-          "Remove Chain Account": "Hapus Akun Rantai",
+          "This asset card will be removed": "Akun rantai ini akan dihapus",
+          "Remove Asset Card": "Hapus Akun Rantai",
           Remove: "Hapus",
           "Security in your hands": "Keamanan di tangan Anda",
           Continue: "Lanjut",
@@ -3305,9 +3303,9 @@ i18n
           Balance: "Balanse",
           "No assets available. Please connect your device to continue.":
             "Walang magagamit na asset. Ikonekta ang iyong device para magpatuloy.",
-          "This chain account will be removed":
+          "This asset card will be removed":
             "Ang chain account na ito ay tatanggalin",
-          "Remove Chain Account": "Tanggalin ang Chain Account",
+          "Remove Asset Card": "Tanggalin ang Chain Account",
           Remove: "Tanggalin",
           "Security in your hands": "Seguridad sa iyong mga kamay",
           Continue: "Magpatuloy",
@@ -3476,9 +3474,8 @@ i18n
           Balance: "ব্যালান্স",
           "No assets available. Please connect your device to continue.":
             "কোনও সম্পদ উপলব্ধ নেই। চালিয়ে যেতে আপনার ডিভাইস সংযুক্ত করুন।",
-          "This chain account will be removed":
-            "এই চেইন অ্যাকাউন্ট মুছে ফেলা হবে",
-          "Remove Chain Account": "চেইন অ্যাকাউন্ট মুছুন",
+          "This asset card will be removed": "এই চেইন অ্যাকাউন্ট মুছে ফেলা হবে",
+          "Remove Asset Card": "চেইন অ্যাকাউন্ট মুছুন",
           Remove: "মুছুন",
           "Security in your hands": "নিরাপত্তা আপনার হাতে",
           Continue: "চালিয়ে যান",
