@@ -224,7 +224,7 @@ i18n
           "No assets available. Please connect your device to continue.":
             "没有可用的加密货币。请先添加钱包。",
           "Remove Asset Card": "移除链账户",
-          "This asset card will be removed": "此链账户将被移除",
+          "This asset card will be removed": "该资产卡将被移除",
           Remove: "移除",
           "Security in your hands": "安全尽在掌握",
           Continue: "继续",
