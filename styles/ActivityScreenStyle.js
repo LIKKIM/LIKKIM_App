@@ -158,8 +158,14 @@ const ActivityScreenStyles = (isDarkMode) => {
     balanceModalSubtitle: {
       marginTop: 6,
       color: textColor,
-      fontSize: 16,
+      fontSize: 14,
       marginBottom: 16,
+    },
+    AssetsModalSubtitle: {
+      marginTop: 6,
+      color: textColor,
+      fontSize: 16,
+      fontSize: 16,
     },
     balanceLabel: {
       marginTop: 6,

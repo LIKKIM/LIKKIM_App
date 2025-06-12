@@ -166,25 +166,15 @@ const AmountModal = ({
                   alignItems: "center",
                 }}
               >
-                <Text style={ActivityScreenStyle.balanceModalSubtitle}>
+                <Text style={ActivityScreenStyle.AssetsModalSubtitle}>
                   {t("Balance")}: {balance} {selectedCrypto}
                 </Text>
-              </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  width: "90%",
-                  marginBottom: 8,
-                }}
-              >
-                <Text style={ActivityScreenStyle.balanceLabel}>
-                  {t("Balance in")}
-                </Text>
-                <Text style={ActivityScreenStyle.balanceValue}>
-                  {currencyUnit}: {convertedBalance}
+
+                <Text style={ActivityScreenStyle.balanceModalSubtitle}>
+                  {t("Balance in")} {currencyUnit}: {convertedBalance}
                 </Text>
               </View>
+
               <View
                 style={{
                   flexDirection: "row",
