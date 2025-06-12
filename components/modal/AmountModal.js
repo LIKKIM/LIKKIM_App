@@ -201,7 +201,7 @@ const AmountModal = ({
               {parseFloat(amount) > parseFloat(balance) && (
                 <Text
                   style={[
-                    ActivityScreenStyle.balanceValue,
+                    ActivityScreenStyle.AssetsValue,
                     { color: "#FF5252", marginBottom: 10 },
                   ]}
                 >

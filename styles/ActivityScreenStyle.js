@@ -172,8 +172,7 @@ const ActivityScreenStyles = (isDarkMode) => {
       color: textColor,
       fontSize: 12,
     },
-    balanceValue: {
-      marginTop: 6,
+    AssetsValue: {
       color: textColor,
       fontSize: 12,
     },
