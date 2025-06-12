@@ -202,7 +202,7 @@ const AmountModal = ({
                 <Text
                   style={[
                     ActivityScreenStyle.balanceValue,
-                    { color: "#FF5252", marginTop: 5 },
+                    { color: "#FF5252", marginBottom: 10 },
                   ]}
                 >
                   {t("Not enough value")}
