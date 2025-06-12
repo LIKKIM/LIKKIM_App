@@ -25,7 +25,7 @@ const ActivityScreenStyles = (isDarkMode) => {
       color: textColor,
     },
     searchInput: {
-      width: "100%",
+      flex: 1,
       padding: 10,
       borderRadius: 10,
       color: textColor,
