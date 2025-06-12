@@ -1488,20 +1488,32 @@ const SecureDeviceStatus = (props) => {
                   />
                 )}
                 <View style={{ flexDirection: "column", flex: 1 }}>
-                  <Text style={{ flexWrap: "wrap" }}>
+                  <Text
+                    style={[
+                      { flexWrap: "wrap" },
+                      { color: isDarkMode ? "#fff" : "#000" },
+                    ]}
+                  >
                     {selectedNFT?.name || "NFT Name"}
                   </Text>
-                  <Text style={{ flexWrap: "wrap" }}>
+                  <Text
+                    style={[
+                      { flexWrap: "wrap" },
+                      { color: isDarkMode ? "#fff" : "#000" },
+                    ]}
+                  >
                     {t("Token ID")}: {selectedNFT?.tokenId || "N/A"}
                   </Text>
                 </View>
               </View>
 
-              <Text style={VaultScreenStyle.label}>
+              <Text style={[{ color: isDarkMode ? "#fff" : "#000" }]}>
                 {props.t("Recipient Address")}
               </Text>
 
-              <Text>{recipientAddress || props.t("No Address Selected")}</Text>
+              <Text style={[{ color: isDarkMode ? "#fff" : "#000" }]}>
+                {recipientAddress || props.t("No Address Selected")}
+              </Text>
               <View>
                 <TouchableOpacity
                   style={VaultScreenStyle.submitButton}
