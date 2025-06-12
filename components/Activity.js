@@ -217,7 +217,7 @@ function ActivityScreen() {
           return;
         }
 
-        if (device.name && device.name.includes("LIKKIM")) {
+        if (device.name && device.name.includes("LUKKEY")) {
           // 存储新设备到设备列表
           setDevices((prevDevices) => {
             if (!prevDevices.find((d) => d.id === device.id)) {

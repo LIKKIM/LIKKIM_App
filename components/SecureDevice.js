@@ -460,7 +460,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
               if (error.errorCode === BleErrorCode.BluetoothUnsupported) {
                 // Bluetooth LE unsupported on device
               }
-            } else if (device.name && device.name.includes("LIKKIM")) {
+            } else if (device.name && device.name.includes("LUKKEY")) {
               setDevices((prevDevices) => {
                 if (!prevDevices.find((d) => d.id === device.id)) {
                   return [...prevDevices, device];

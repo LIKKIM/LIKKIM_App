@@ -212,7 +212,7 @@ function VaultScreen({ route, navigation }) {
               return;
             }
 
-            if (device.name && device.name.includes("LIKKIM")) {
+            if (device.name && device.name.includes("LUKKEY")) {
               setDevices((prevDevices) => {
                 if (!prevDevices.find((d) => d.id === device.id)) {
                   return [...prevDevices, device]; // 这里 device 是完整的设备对象
