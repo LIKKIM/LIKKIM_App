@@ -20,8 +20,8 @@ const EmptyWalletView = ({
         imageStyle={VaultScreenStyle.addWalletImageBorder}
       >
         <TouchableOpacity
-          onPress={handleContinue}
-          //  onPress={handleWalletTest} //      {/*  test btn  */}
+          //   onPress={handleContinue}
+          onPress={handleWalletTest} //      {/*  测试按钮test btn  */}
           style={VaultScreenStyle.addWalletButton}
         >
           <Text style={VaultScreenStyle.addWalletButtonText}>
