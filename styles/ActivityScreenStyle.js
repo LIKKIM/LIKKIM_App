@@ -321,7 +321,7 @@ const ActivityScreenStyles = (isDarkMode) => {
       fontWeight: "bold",
     },
     historyContainer: {
-      marginTop: 22,
+      marginTop: 15,
       padding: 10,
       paddingTop: 10,
       backgroundColor: historyContainerBackgroundColor,
