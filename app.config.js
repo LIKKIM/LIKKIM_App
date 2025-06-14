@@ -38,6 +38,34 @@ export default {
       ],
       NFCReaderUsageDescription:
         "Allow $(PRODUCT_NAME) to communicate with your device via NFC.",
+      NSAppTransportSecurity: {
+        NSExceptionDomains: {
+          "bt.likkim.com": {
+            NSIncludesSubdomains: true,
+            NSExceptionAllowsInsecureHTTPLoads: false,
+            NSExceptionRequiresForwardSecrecy: true,
+            NSRequiresCertificateTransparency: false,
+          },
+          "swap.likkim.com": {
+            NSIncludesSubdomains: true,
+            NSExceptionAllowsInsecureHTTPLoads: false,
+            NSExceptionRequiresForwardSecrecy: true,
+            NSRequiresCertificateTransparency: false,
+          },
+          "df.likkim.com": {
+            NSIncludesSubdomains: true,
+            NSExceptionAllowsInsecureHTTPLoads: false,
+            NSExceptionRequiresForwardSecrecy: true,
+            NSRequiresCertificateTransparency: false,
+          },
+          "file.likkim.com": {
+            NSIncludesSubdomains: true,
+            NSExceptionAllowsInsecureHTTPLoads: false,
+            NSExceptionRequiresForwardSecrecy: true,
+            NSRequiresCertificateTransparency: false,
+          },
+        },
+      },
     },
     supportsTablet: false,
     buildNumber: "16.3.12",
