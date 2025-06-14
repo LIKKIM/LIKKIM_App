@@ -68,7 +68,7 @@ export default {
       },
     },
     supportsTablet: false,
-    buildNumber: "16.3.12",
+    buildNumber: "16.3.13",
     bundleIdentifier: "com.likkim.likkim", //❌
     icon: "./assets/icon.png", //❌
   },
