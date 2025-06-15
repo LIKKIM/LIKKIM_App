@@ -68,8 +68,8 @@ export default {
       },
     },
     supportsTablet: false,
-    buildNumber: "16.3.13",
-    bundleIdentifier: "com.likkim.likkim", //❌
+    buildNumber: "1.0.0",
+    bundleIdentifier: "com.secnet.vaultapp", //❌
     icon: "./assets/icon.png", //❌
   },
   android: {
