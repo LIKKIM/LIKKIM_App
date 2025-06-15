@@ -2441,8 +2441,8 @@ i18n
           Balance: "Тэнцэл",
           "No assets available. Please connect your device to continue.":
             "Хөрөнгө байхгүй байна. Төхөөрөмжөө холбож үргэлжлүүлнэ үү.",
-          "This asset card will be removed": "Энэ гинжийн данс устгагдана",
-          "Remove Asset Card": "Гинжийн данс устгах",
+          "This asset card will be removed": "Энэ хөрөнгийн карт устгагдана",
+          "Remove Asset Card": "Хөрөнгийн карт устгах",
           Remove: "Устгах",
           "Security in your hands": "Аюулгүй байдал таны гарт",
           Continue: "Үргэлжлүүлэх",
