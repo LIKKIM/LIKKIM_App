@@ -2269,9 +2269,9 @@ i18n
           "Total Value": "कुल मूल्य",
           Balance: "शेष राशि",
           "No assets available. Please connect your device to continue.":
-            "कोई एसेट उपलब्ध नहीं। जारी रखने के लिए कृपया अपना उपकरण कनेक्ट करें।",
-          "This asset card will be removed": "यह चेन खाता हटा दिया जाएगा",
-          "Remove Asset Card": "चेन खाता हटाएं",
+            "कोई एसेट उपलब्ध नहीं। कृपया जारी रखने के लिए अपना उपकरण कनेक्ट करें।",
+          "This asset card will be removed": "यह एसेट कार्ड हटा दिया जाएगा",
+          "Remove Asset Card": "एसेट कार्ड हटाएं",
           Remove: "हटाएं",
           "Security in your hands": "आपके हाथों में सुरक्षा",
           Continue: "जारी रखें",
