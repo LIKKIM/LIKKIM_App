@@ -901,8 +901,8 @@ i18n
           Balance: "الرصيد",
           "No assets available. Please connect your device to continue.":
             "لا توجد أصول متاحة. يرجى توصيل جهازك للمتابعة.",
-          "This asset card will be removed": "سيتم إزالة حساب السلسلة هذا",
-          "Remove Asset Card": "إزالة حساب السلسلة",
+          "This asset card will be removed": "سيتم إزالة بطاقة الأصل هذه",
+          "Remove Asset Card": "إزالة بطاقة الأصل",
           Remove: "إزالة",
           "Security in your hands": "الأمان بين يديك",
           Continue: "متابعة",
@@ -918,7 +918,6 @@ i18n
           "No data available": "لا توجد بيانات",
           "Search Currency": "ابحث عن العملة",
           "Search Asset": "ابحث عن الأصل",
-          "Select Currency": "اختر العملة",
           "Enable Screen Lock": "تمكين قفل الشاشة",
           "Enter new password": "أدخل كلمة مرور جديدة",
           "Confirm new password": "تأكيد كلمة المرور الجديدة",
@@ -1070,9 +1069,8 @@ i18n
           Balance: "残高",
           "No assets available. Please connect your device to continue.":
             "利用可能な資産がありません。続行するにはデバイスを接続してください。",
-          "This asset card will be removed":
-            "このチェーンアカウントは削除されます",
-          "Remove Asset Card": "チェーンアカウントを削除",
+          "This asset card will be removed": "この資産カードは削除されます",
+          "Remove Asset Card": "資産カードを削除",
           Remove: "削除",
           "Security in your hands": "あなたの手にあるセキュリティ",
           Continue: "続行",
@@ -1088,7 +1086,6 @@ i18n
           "No data available": "データがありません",
           "Search Currency": "通貨を検索",
           "Search Asset": "資産を検索",
-          "Select Currency": "通貨を選択",
           "Enable Screen Lock": "画面ロックを有効化",
           "Enter new password": "新しいパスワードを入力",
           "Confirm new password": "新しいパスワードを確認",
