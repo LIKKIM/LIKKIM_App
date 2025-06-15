@@ -1440,7 +1440,7 @@ function ActivityScreen() {
               setModalStatus({
                 title: t("Please enter password on your device"),
                 subtitle: t("Please enter password on your device"),
-                image: require("../assets/gif/Bluetooth.gif"),
+                image: require("../assets/gif/Enter.gif"),
               });
               setConfirmingTransactionModalVisible(true);
 
