@@ -2780,9 +2780,8 @@ i18n
           Balance: "Баланс",
           "No assets available. Please connect your device to continue.":
             "Немає доступних активів. Підключіть пристрій для продовження.",
-          "This asset card will be removed":
-            "Цей обліковий запис ланцюжка буде видалено",
-          "Remove Asset Card": "Видалити обліковий запис ланцюжка",
+          "This asset card will be removed": "Ця картка активу буде видалена",
+          "Remove Asset Card": "Видалити картку активу",
           Remove: "Видалити",
           "Security in your hands": "Безпека у ваших руках",
           Continue: "Продовжити",
@@ -2794,12 +2793,11 @@ i18n
           "Use spaces between words": "Використовуйте пробіли між словами",
           Version: "Версія",
           "Assets can only be sent within the same chain.":
-            "Активи можна надсилати лише в межах однієї ланки.",
+            "Активи можна надсилати лише в межах одного ланцюга.",
           "Firmware Update": "Оновлення прошивки",
           "No data available": "Немає даних",
           "Search Currency": "Пошук валюти",
           "Search Asset": "Пошук активу",
-          "Select Currency": "Виберіть валюту",
           "Enable Screen Lock": "Увімкнути блокування екрану",
           "Enter new password": "Введіть новий пароль",
           "Confirm new password": "Підтвердьте новий пароль",
@@ -2898,8 +2896,8 @@ i18n
           Network: "Мережа",
           Copy: "Копіювати",
           Edit: "Редагувати",
-          Chain: "Ланцюжок",
-          "All Chains": "Всі ланцюжки",
+          Chain: "Ланцюг",
+          "All Chains": "Всі ланцюги",
           "Contact Support via Email":
             "Звернутися до підтримки електронною поштою",
           addressShown: "Адреса успішно відображена на вашому пристрої.",
