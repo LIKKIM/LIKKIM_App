@@ -1436,21 +1436,36 @@ function ActivityScreen() {
               }
 
               setConfirmModalVisible(false);
+              // 先显示“请在设备上输入密码”的状态
+              setModalStatus({
+                title: t("Please enter password on your device"),
+                subtitle: t("Please enter password on your device"),
+                image: require("../assets/gif/Bluetooth.gif"),
+              });
               setConfirmingTransactionModalVisible(true);
-              await signTransaction(
-                device,
-                amount,
-                selectedCryptoObj.address,
-                inputAddress,
-                selectedCryptoObj.queryChainName,
-                selectedCryptoObj.contractAddress,
-                selectedFeeTab,
-                recommendedFee,
-                rapidFeeValue,
-                setModalStatus,
-                t,
-                monitorSignedResult
-              );
+
+              // 2秒后切换到“waiting for approval on your device...”状态并启动签名
+              setTimeout(async () => {
+                setModalStatus({
+                  title: t("Waiting for approval on your device...."),
+                  subtitle: t("Waiting for approval on your device..."),
+                  image: require("../assets/gif/Pending.gif"),
+                });
+                await signTransaction(
+                  device,
+                  amount,
+                  selectedCryptoObj.address,
+                  inputAddress,
+                  selectedCryptoObj.queryChainName,
+                  selectedCryptoObj.contractAddress,
+                  selectedFeeTab,
+                  recommendedFee,
+                  rapidFeeValue,
+                  setModalStatus,
+                  t,
+                  monitorSignedResult
+                );
+              }, 10000);
             } catch (error) {
               console.log("确认交易时出错:", error);
             }
