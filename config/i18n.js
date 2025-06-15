@@ -728,8 +728,8 @@ i18n
           "No assets available. Please connect your device to continue.":
             "No hay activos disponibles. Conecta tu dispositivo para continuar.",
           "This asset card will be removed":
-            "Esta cuenta de cadena será eliminada",
-          "Remove Asset Card": "Eliminar cuenta de cadena",
+            "Esta tarjeta de activo será eliminada",
+          "Remove Asset Card": "Eliminar tarjeta de activo",
           Remove: "Eliminar",
           "Security in your hands": "Seguridad en tus manos",
           Continue: "Continuar",
