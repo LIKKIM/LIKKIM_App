@@ -3286,8 +3286,8 @@ i18n
           "No assets available. Please connect your device to continue.":
             "Walang magagamit na asset. Ikonekta ang iyong device para magpatuloy.",
           "This asset card will be removed":
-            "Ang chain account na ito ay tatanggalin",
-          "Remove Asset Card": "Tanggalin ang Chain Account",
+            "Ang asset card na ito ay tatanggalin",
+          "Remove Asset Card": "Tanggalin ang Asset Card",
           Remove: "Tanggalin",
           "Security in your hands": "Seguridad sa iyong mga kamay",
           Continue: "Magpatuloy",
