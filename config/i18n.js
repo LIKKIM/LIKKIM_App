@@ -3456,8 +3456,8 @@ i18n
           Balance: "ব্যালান্স",
           "No assets available. Please connect your device to continue.":
             "কোনও সম্পদ উপলব্ধ নেই। চালিয়ে যেতে আপনার ডিভাইস সংযুক্ত করুন।",
-          "This asset card will be removed": "এই চেইন অ্যাকাউন্ট মুছে ফেলা হবে",
-          "Remove Asset Card": "চেইন অ্যাকাউন্ট মুছুন",
+          "This asset card will be removed": "এই সম্পদ কার্ডটি মুছে ফেলা হবে",
+          "Remove Asset Card": "সম্পদ কার্ড মুছুন",
           Remove: "মুছুন",
           "Security in your hands": "নিরাপত্তা আপনার হাতে",
           Continue: "চালিয়ে যান",
@@ -3502,7 +3502,7 @@ i18n
             "এখন আপনি ডিভাইস নিরাপদে ব্যবহার করতে পারেন।",
           "Verification failed!": "যাচাইকরণ ব্যর্থ!",
           "The verification code you entered is incorrect. Please try again.":
-            "যা вақит আপনি কোডটি লিখেছেন তা সঠিক নয়। আবার চেষ্টা করুন।",
+            "আপনি কোডটি লিখেছেন তা সঠিক নয়। আবার চেষ্টা করুন।",
           "Invalid address": "অবৈধ ঠিকানা",
           "Detected Network": "নেটওয়ার্ক সনাক্ত হয়েছে",
           "Enter Amount": "পরিমাণ লিখুন",
