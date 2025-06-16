@@ -1,6 +1,7 @@
 // Activity.js
 import React, { useContext, useState, useRef, useEffect } from "react";
-import { View, Clipboard, Platform, AppState } from "react-native";
+import { View, Platform, AppState } from "react-native";
+import Clipboard from "@react-native-clipboard/clipboard";
 import { LinearGradient } from "expo-linear-gradient";
 import { Buffer } from "buffer";
 import AsyncStorage from "@react-native-async-storage/async-storage";
