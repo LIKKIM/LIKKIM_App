@@ -101,8 +101,8 @@ const ShowReceiveInfoModal = ({
                 </Text>
                 <TouchableOpacity
                   onPress={() => {
-                    Clipboard.setString(safeAddress);
-                    Alert.alert("", "Copied to clipboard");
+                    Clipboard.setString(selectedAddress);
+                    Alert.alert("", t("Address copied to clipboard!"));
                   }}
                 >
                   <Icon

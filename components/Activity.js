@@ -1325,10 +1325,6 @@ function ActivityScreen() {
     setAmountModalVisible(false);
     setConfirmModalVisible(true);
   };
-  const copyToClipboard = (address) => {
-    Clipboard.setString(address);
-    alert(t("Address copied to clipboard!"));
-  };
 
   const handleAddressChange = (text) => {
     setInputAddress(text);

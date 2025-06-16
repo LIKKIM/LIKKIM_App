@@ -131,7 +131,7 @@ const AddressInfo = ({ selectedAddress, isDarkMode, VaultScreenStyle, t }) => {
             <TouchableOpacity
               onPress={() => {
                 Clipboard.setString(selectedAddress);
-                Alert.alert("", "Copied to clipboard");
+                Alert.alert("", t("Address copied to clipboard!"));
               }}
             >
               <Icon
