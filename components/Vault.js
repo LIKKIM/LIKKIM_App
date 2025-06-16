@@ -13,12 +13,11 @@ import {
   Easing,
   Platform,
   RefreshControl,
-  Clipboard,
   Dimensions,
   TouchableWithoutFeedback,
   TouchableHighlight,
 } from "react-native";
-
+import Clipboard from "@react-native-clipboard/clipboard";
 // 第三方库
 import { LinearGradient } from "expo-linear-gradient";
 import AsyncStorage from "@react-native-async-storage/async-storage";

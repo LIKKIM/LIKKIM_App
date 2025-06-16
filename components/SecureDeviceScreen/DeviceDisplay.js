@@ -13,11 +13,11 @@ import {
   Image,
   Alert,
   Pressable,
-  Clipboard,
   ScrollView,
   ActivityIndicator,
   Dimensions,
 } from "react-native";
+import Clipboard from "@react-native-clipboard/clipboard";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Location from "expo-location";
 import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";

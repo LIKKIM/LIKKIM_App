@@ -11,10 +11,10 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   Platform,
-  Clipboard,
   TouchableWithoutFeedback,
   Alert,
 } from "react-native";
+import Clipboard from "@react-native-clipboard/clipboard";
 import { BlurView } from "expo-blur";
 import { MaterialIcons as Icon } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
