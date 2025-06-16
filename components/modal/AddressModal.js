@@ -6,8 +6,9 @@ import {
   Text,
   TouchableOpacity,
   Image,
-  Clipboard,
+  Alert,
 } from "react-native";
+import Clipboard from "@react-native-clipboard/clipboard";
 import { BlurView } from "expo-blur";
 import { MaterialIcons as Icon } from "@expo/vector-icons";
 import QRCode from "react-native-qrcode-svg";
@@ -128,7 +129,10 @@ const AddressInfo = ({ selectedAddress, isDarkMode, VaultScreenStyle, t }) => {
               {selectedAddress}
             </Text>
             <TouchableOpacity
-              onPress={() => Clipboard.setString(selectedAddress)}
+              onPress={() => {
+                Clipboard.setString(selectedAddress);
+                Alert.alert("", "Copied to clipboard");
+              }}
             >
               <Icon
                 name="content-copy"

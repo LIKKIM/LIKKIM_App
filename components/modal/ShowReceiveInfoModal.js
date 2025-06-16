@@ -6,8 +6,9 @@ import {
   Text,
   Image,
   TouchableOpacity,
-  Clipboard,
+  Alert,
 } from "react-native";
+import Clipboard from "@react-native-clipboard/clipboard";
 import { BlurView } from "expo-blur";
 import QRCode from "react-native-qrcode-svg";
 import { MaterialIcons as Icon } from "@expo/vector-icons";
@@ -99,7 +100,10 @@ const ShowReceiveInfoModal = ({
                   {safeAddress}
                 </Text>
                 <TouchableOpacity
-                  onPress={() => Clipboard.setString(safeAddress)}
+                  onPress={() => {
+                    Clipboard.setString(safeAddress);
+                    Alert.alert("", "Copied to clipboard");
+                  }}
                 >
                   <Icon
                     name="content-copy"
