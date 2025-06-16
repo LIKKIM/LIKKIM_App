@@ -88,7 +88,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
 
   const handleCopy = (address) => {
     Clipboard.setString(address);
-    Alert.alert("Copied", "Address copied to clipboard.");
+    Alert.alert("", t("Address copied to clipboard"));
     setDropdownVisible(null);
   };
 
