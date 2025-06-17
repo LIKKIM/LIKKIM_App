@@ -69,7 +69,7 @@ export default {
     },
     supportsTablet: false,
     buildNumber: "1.0.0",
-    bundleIdentifier: "com.secnet.vaultapp", //❌
+    bundleIdentifier: "com.secnet.vaultapp",
     icon: "./assets/icon.png", //❌
   },
   android: {
