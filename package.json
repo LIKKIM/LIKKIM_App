@@ -2,7 +2,7 @@
   "name": "app-mobile",
   "version": "1.0.0",
   "scripts": {
-    "start": "npm run start",
+    "start": "expo start --dev-client",
     "buildDev:all": "eas build --profile development --platform all",
     "buildDev": "eas build --profile development",
     "buildIosPro": "eas build --platform ios",
