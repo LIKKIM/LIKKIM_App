@@ -854,6 +854,11 @@ function SecureDeviceScreen({ onDarkModeChange }) {
     toggleDeleteWalletVisibility,
     handleDeleteWallet,
     cryptoCards,
+    selectedDevice,
+    setModalMessage,
+    setErrorModalVisible,
+    serviceUUID,
+    writeCharacteristicUUID,
   });
 
   const [deleteWalletModalVisible, setDeleteWalletModalVisible] =
