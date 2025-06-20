@@ -25,7 +25,7 @@ import SecureDeviceScreenStyles from "../../styles/SecureDeviceScreenStyle";
 import { WebView } from "react-native-webview";
 import { galleryAPI } from "../../env/apiEndpoints";
 import ImageResizer from "react-native-image-resizer";
-
+import { Buffer } from "buffer";
 import { bluetoothConfig } from "../../env/bluetoothConfig";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { BleManager } from "react-native-ble-plx";
@@ -264,15 +264,15 @@ const SecureDeviceStatus = (props) => {
         setDataUrl(fileData420);
 
         // 读取 bin 文件内容并拆包发送给 BLE 设备
-        if (!selectedDevice) {
+        if (!props.device) {
           console.log("没有选择设备，无法发送数据");
           return;
         }
 
         try {
           // 确保设备已连接，并发现所有服务和特性
-          await selectedDevice.connect();
-          await selectedDevice.discoverAllServicesAndCharacteristics();
+          await props.device.connect();
+          await props.device.discoverAllServicesAndCharacteristics();
 
           // 读取 bin 文件的 base64 内容
           const binData420 = await FileSystem.readAsStringAsync(binFileUri420, {
@@ -285,18 +285,27 @@ const SecureDeviceStatus = (props) => {
           // 发送 nft 的 collectionName，带头部标志 "DATA_NFTTEXT"
           if (selectedNFT?.name) {
             const collectionName = selectedNFT.name;
+            // 计算字节长度
+            const collectionNameBytesLength = Buffer.byteLength(
+              collectionName,
+              "utf-8"
+            );
             const collectionNameHeader =
-              "DATA_NFTTEXT" + collectionName.length.toString() + "SIZE";
+              "DATA_NFTTEXT" + collectionNameBytesLength.toString() + "SIZE";
 
-            // 先发送头部标志（包含字节大小）
-            await selectedDevice.writeCharacteristicWithResponseForService(
+            // 先发送头部标志（包含字节大小），并进行Base64编码
+            const collectionNameHeaderBase64 = Buffer.from(
+              collectionNameHeader,
+              "utf-8"
+            ).toString("base64");
+            await props.device.writeCharacteristicWithResponseForService(
               serviceUUID,
               writeCharacteristicUUID,
-              collectionNameHeader
+              collectionNameHeaderBase64
             );
 
             // 订阅通知，监听嵌入式设备的GET请求
-            const subscription = selectedDevice.monitorCharacteristicForService(
+            const subscription = props.device.monitorCharacteristicForService(
               serviceUUID,
               notifyCharacteristicUUID,
               async (error, characteristic) => {
@@ -325,7 +334,7 @@ const SecureDeviceStatus = (props) => {
                     const end = Math.min(start + 200, collectionName.length);
                     const chunk = collectionName.substring(start, end);
                     try {
-                      await selectedDevice.writeCharacteristicWithResponseForService(
+                      await props.device.writeCharacteristicWithResponseForService(
                         serviceUUID,
                         writeCharacteristicUUID,
                         chunk
@@ -352,59 +361,54 @@ const SecureDeviceStatus = (props) => {
             "DATA_NFTIMG" + binData420.length.toString() + "SIZE";
 
           // 先发送 420 头部标志（包含字节大小）
-          await selectedDevice.writeCharacteristicWithResponseForService(
+          await props.device.writeCharacteristicWithResponseForService(
             serviceUUID,
             writeCharacteristicUUID,
             header420
           );
 
           // 订阅通知，监听嵌入式设备的GET请求
-          const subscription420 =
-            selectedDevice.monitorCharacteristicForService(
-              serviceUUID,
-              notifyCharacteristicUUID,
-              async (error, characteristic) => {
-                if (error) {
-                  console.log("监听特性错误:", error);
-                  return;
-                }
-                if (!characteristic?.value) return;
-
-                // 解码收到的Base64数据
-                const receivedData = Buffer.from(
-                  characteristic.value,
-                  "base64"
-                ).toString("utf-8");
-                console.log("收到嵌入式设备请求:", receivedData);
-
-                if (receivedData.startsWith("GET")) {
-                  // 解析包序号
-                  const packetIndex =
-                    parseInt(receivedData.substring(3), 10) - 1;
-                  if (
-                    packetIndex >= 0 &&
-                    packetIndex * 200 < binData420.length
-                  ) {
-                    const start = packetIndex * 200;
-                    const end = Math.min(start + 200, binData420.length);
-                    const chunk = binData420.substring(start, end);
-                    try {
-                      await selectedDevice.writeCharacteristicWithResponseForService(
-                        serviceUUID,
-                        writeCharacteristicUUID,
-                        chunk
-                      );
-                      console.log(`发送 420 图片数据第${packetIndex + 1}包`);
-                    } catch (e) {
-                      console.log("发送 420 图片数据包错误:", e);
-                    }
-                  }
-                } else if (receivedData === "FINISH") {
-                  console.log("嵌入式设备已接收完 420 图片数据");
-                  subscription420.remove();
-                }
+          const subscription420 = props.device.monitorCharacteristicForService(
+            serviceUUID,
+            notifyCharacteristicUUID,
+            async (error, characteristic) => {
+              if (error) {
+                console.log("监听特性错误:", error);
+                return;
               }
-            );
+              if (!characteristic?.value) return;
+
+              // 解码收到的Base64数据
+              const receivedData = Buffer.from(
+                characteristic.value,
+                "base64"
+              ).toString("utf-8");
+              console.log("收到嵌入式设备请求:", receivedData);
+
+              if (receivedData.startsWith("GET")) {
+                // 解析包序号
+                const packetIndex = parseInt(receivedData.substring(3), 10) - 1;
+                if (packetIndex >= 0 && packetIndex * 200 < binData420.length) {
+                  const start = packetIndex * 200;
+                  const end = Math.min(start + 200, binData420.length);
+                  const chunk = binData420.substring(start, end);
+                  try {
+                    await props.device.writeCharacteristicWithResponseForService(
+                      serviceUUID,
+                      writeCharacteristicUUID,
+                      chunk
+                    );
+                    console.log(`发送 420 图片数据第${packetIndex + 1}包`);
+                  } catch (e) {
+                    console.log("发送 420 图片数据包错误:", e);
+                  }
+                }
+              } else if (receivedData === "FINISH") {
+                console.log("嵌入式设备已接收完 420 图片数据");
+                subscription420.remove();
+              }
+            }
+          );
 
           console.log("已订阅 420 图片数据请求通知");
 
@@ -745,11 +749,11 @@ const SecureDeviceStatus = (props) => {
 
     try {
       // 确保设备已连接，并发现所有服务和特性
-      await selectedDevice.connect();
-      await selectedDevice.discoverAllServicesAndCharacteristics();
+      await props.device.connect();
+      await props.device.discoverAllServicesAndCharacteristics();
 
       // 将合约地址和链名称的 Base64 编码消息发送到设备
-      await selectedDevice.writeCharacteristicWithResponseForService(
+      await props.device.writeCharacteristicWithResponseForService(
         serviceUUID, // 服务UUID
         writeCharacteristicUUID, // 写入特性UUID
         JSON.stringify(message) // 将消息对象转化为 JSON 字符串并发送
