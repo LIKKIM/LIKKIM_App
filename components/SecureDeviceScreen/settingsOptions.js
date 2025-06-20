@@ -27,6 +27,11 @@ const getSettingsOptions = ({
   toggleDeleteWalletVisibility,
   handleDeleteWallet,
   cryptoCards,
+  selectedDevice,
+  setModalMessage,
+  setErrorModalVisible,
+  serviceUUID,
+  writeCharacteristicUUID,
 }) => {
   // Helper function to persist the screen lock setting
   const persistScreenLockSetting = (newValue) => {
