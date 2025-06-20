@@ -296,24 +296,59 @@ const SecureDeviceStatus = (props) => {
               collectionNameHeader
             );
 
-            // 发送 collectionName 内容，拆包发送，分包大小同样为 200
-            const delay = 250; // 发送间隔，单位毫秒
-            const chunkSize = 200; // 每包最大字节数限制
-            for (let i = 0; i < collectionName.length; i += chunkSize) {
-              const chunk = collectionName.substring(i, i + chunkSize);
-              await selectedDevice.writeCharacteristicWithResponseForService(
-                serviceUUID,
-                writeCharacteristicUUID,
-                chunk
-              );
-              await new Promise((resolve) => setTimeout(resolve, delay));
-            }
-            console.log("collectionName 已拆包成功发送到设备");
+            // 订阅通知，监听嵌入式设备的GET请求
+            const subscription = selectedDevice.monitorCharacteristicForService(
+              serviceUUID,
+              notifyCharacteristicUUID,
+              async (error, characteristic) => {
+                if (error) {
+                  console.log("监听特性错误:", error);
+                  return;
+                }
+                if (!characteristic?.value) return;
+
+                // 解码收到的Base64数据
+                const receivedData = Buffer.from(
+                  characteristic.value,
+                  "base64"
+                ).toString("utf-8");
+                console.log("收到嵌入式设备请求:", receivedData);
+
+                if (receivedData.startsWith("GET")) {
+                  // 解析包序号
+                  const packetIndex =
+                    parseInt(receivedData.substring(3), 10) - 1;
+                  if (
+                    packetIndex >= 0 &&
+                    packetIndex * 200 < collectionName.length
+                  ) {
+                    const start = packetIndex * 200;
+                    const end = Math.min(start + 200, collectionName.length);
+                    const chunk = collectionName.substring(start, end);
+                    try {
+                      await selectedDevice.writeCharacteristicWithResponseForService(
+                        serviceUUID,
+                        writeCharacteristicUUID,
+                        chunk
+                      );
+                      console.log(
+                        `发送 collectionName 第${packetIndex + 1}包数据`
+                      );
+                    } catch (e) {
+                      console.log("发送 collectionName 数据包错误:", e);
+                    }
+                  }
+                } else if (receivedData === "FINISH") {
+                  console.log("嵌入式设备已接收完 collectionName 数据");
+                  subscription.remove();
+                }
+              }
+            );
+
+            console.log("已订阅 collectionName 数据请求通知");
           }
 
           // 发送 420 尺寸图片数据，前面加开头标志 "DATA_NFTIMG" + 数据字节大小
-          const delay = 250; // 发送间隔，单位毫秒
-          const chunkSize = 200; // 每包最大字节数限制
           const header420 =
             "DATA_NFTIMG" + binData420.length.toString() + "SIZE";
 
@@ -324,43 +359,57 @@ const SecureDeviceStatus = (props) => {
             header420
           );
 
-          // 拆分 420 数据并按顺序发送
-          for (let i = 0; i < binData420.length; i += chunkSize) {
-            const chunk = binData420.substring(i, i + chunkSize);
-            await selectedDevice.writeCharacteristicWithResponseForService(
+          // 订阅通知，监听嵌入式设备的GET请求
+          const subscription420 =
+            selectedDevice.monitorCharacteristicForService(
               serviceUUID,
-              writeCharacteristicUUID,
-              chunk
+              notifyCharacteristicUUID,
+              async (error, characteristic) => {
+                if (error) {
+                  console.log("监听特性错误:", error);
+                  return;
+                }
+                if (!characteristic?.value) return;
+
+                // 解码收到的Base64数据
+                const receivedData = Buffer.from(
+                  characteristic.value,
+                  "base64"
+                ).toString("utf-8");
+                console.log("收到嵌入式设备请求:", receivedData);
+
+                if (receivedData.startsWith("GET")) {
+                  // 解析包序号
+                  const packetIndex =
+                    parseInt(receivedData.substring(3), 10) - 1;
+                  if (
+                    packetIndex >= 0 &&
+                    packetIndex * 200 < binData420.length
+                  ) {
+                    const start = packetIndex * 200;
+                    const end = Math.min(start + 200, binData420.length);
+                    const chunk = binData420.substring(start, end);
+                    try {
+                      await selectedDevice.writeCharacteristicWithResponseForService(
+                        serviceUUID,
+                        writeCharacteristicUUID,
+                        chunk
+                      );
+                      console.log(`发送 420 图片数据第${packetIndex + 1}包`);
+                    } catch (e) {
+                      console.log("发送 420 图片数据包错误:", e);
+                    }
+                  }
+                } else if (receivedData === "FINISH") {
+                  console.log("嵌入式设备已接收完 420 图片数据");
+                  subscription420.remove();
+                }
+              }
             );
-            // 等待 250 毫秒再发送下一包
-            await new Promise((resolve) => setTimeout(resolve, delay));
-          }
 
-          console.log("420 bin 文件已拆包成功发送到设备");
+          console.log("已订阅 420 图片数据请求通知");
 
-          // 发送 210 尺寸图片数据，前面加开头标志 "IMG_BIN_BEGIN_210"
-          const header210 = "IMG_BIN_BEGIN_210";
-
-          // 先发送 210 头部标志
-          // await selectedDevice.writeCharacteristicWithResponseForService(
-          //   serviceUUID,
-          //   writeCharacteristicUUID,
-          //   header210
-          // );
-
-          // 拆分 210 数据并按顺序发送
-          // for (let i = 0; i < binData210.length; i += chunkSize) {
-          //   const chunk = binData210.substring(i, i + chunkSize);
-          //   await selectedDevice.writeCharacteristicWithResponseForService(
-          //     serviceUUID,
-          //     writeCharacteristicUUID,
-          //     chunk
-          //   );
-          //   // 等待 250 毫秒再发送下一包
-          //   await new Promise((resolve) => setTimeout(resolve, delay));
-          // }
-
-          // console.log("210 bin 文件已拆包成功发送到设备");
+          // 210 尺寸图片数据发送保持原注释状态
         } catch (error) {
           console.log("发送 bin 文件时出错:", error);
         }
