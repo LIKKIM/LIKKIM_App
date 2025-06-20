@@ -1259,6 +1259,7 @@ function VaultScreen({ route, navigation }) {
         scrollYOffset={scrollYOffset}
         handleContinue={handleContinue}
         handleWalletTest={handleWalletTest}
+        selectedDevice={selectedDevice}
       />
       <ModalsContainer
         selectedCardChainShortName={selectedCardChainShortName}

@@ -36,7 +36,6 @@ const serviceUUID = bluetoothConfig.serviceUUID;
 const writeCharacteristicUUID = bluetoothConfig.writeCharacteristicUUID;
 const notifyCharacteristicUUID = bluetoothConfig.notifyCharacteristicUUID;
 const SkeletonImage = ({ source, style, resizeMode }) => {
-  const [selectedDevice, setSelectedDevice] = useState(null);
   const [verifiedDevices, setVerifiedDevices] = useState([]);
   const [loaded, setLoaded] = useState(false);
   const skeletonOpacity = useState(new Animated.Value(1))[0];
@@ -714,7 +713,7 @@ const SecureDeviceStatus = (props) => {
     console.log("handleSendPress");
 
     // 检查是否选择了设备
-    if (!selectedDevice) {
+    if (!props.selectedDevice) {
       console.log("没有选择设备");
       return;
     }
