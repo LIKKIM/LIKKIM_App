@@ -357,7 +357,7 @@ const SecureDeviceStatus = (props) => {
               }
             );
 
-            console.log("已订阅 collectionName 数据请求通知");
+            console.log("已订阅 DATA_NFTTEXT 数据请求通知");
           }
 
           // 发送 420 尺寸图片数据，前面加开头标志 "DATA_NFTIMG" + 数据字节大小
@@ -421,7 +421,7 @@ const SecureDeviceStatus = (props) => {
             }
           );
 
-          console.log("已订阅 420 图片数据请求通知");
+          console.log("已订阅 DATA_NFTIMG 图片数据请求通知");
 
           // 210 尺寸图片数据发送保持原注释状态
         } catch (error) {
@@ -764,6 +764,10 @@ const SecureDeviceStatus = (props) => {
       await props.device.discoverAllServicesAndCharacteristics();
 
       // 将合约地址和链名称的 Base64 编码消息发送到设备
+      console.log(
+        "发送给嵌入式设备的数据(JSON字符串):",
+        JSON.stringify(message)
+      );
       await props.device.writeCharacteristicWithResponseForService(
         serviceUUID, // 服务UUID
         writeCharacteristicUUID, // 写入特性UUID
