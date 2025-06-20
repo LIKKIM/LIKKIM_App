@@ -713,7 +713,7 @@ const SecureDeviceStatus = (props) => {
     console.log("handleSendPress");
 
     // 检查是否选择了设备
-    if (!props.selectedDevice) {
+    if (!props.device) {
       console.log("没有选择设备");
       return;
     }
