@@ -37,7 +37,7 @@ const handleFirmwareUpdate = async ({
       const hexChunk = Array.from(chunk)
         .map((byte) => ("0" + (byte & 0xff).toString(16)).slice(-2))
         .join("");
-      const chunkCommand = "DATA_OTA" + "SIZE" + hexChunk;
+      const chunkCommand = "DATA_OTA" + firmwareData.length + "SIZE" + hexChunk;
       const base64ChunkCommand = Buffer.from(chunkCommand, "utf-8").toString(
         "base64"
       );
