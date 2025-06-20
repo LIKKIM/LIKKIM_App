@@ -368,77 +368,152 @@ const SecureDeviceStatus = (props) => {
             );
 
             console.log("已订阅 DATA_NFTTEXT 数据请求通知");
-          }
 
-          // 发送 420 尺寸图片数据，前面加开头标志 "DATA_NFTIMG" + 数据字节大小
-          const header420 =
-            "DATA_NFTIMG" + binData420.length.toString() + "SIZE";
+            // 在 DATA_NFTTEXT 发送完成后，开始发送 DATA_NFTIMG 数据
+            const sendNFTImgData = async () => {
+              // 发送 420 尺寸图片数据，前面加开头标志 "DATA_NFTIMG" + 数据字节大小
+              const header420 =
+                "DATA_NFTIMG" + binData420.length.toString() + "SIZE";
 
-          // 先发送 420 头部标志（包含字节大小），并进行Base64编码
-          const header420Base64 = Buffer.from(header420, "utf-8").toString(
-            "base64"
-          );
-          await props.device.writeCharacteristicWithResponseForService(
-            serviceUUID,
-            writeCharacteristicUUID,
-            header420Base64
-          );
-          console.log("发送 DATA_NFTIMG 头部标志(Base64):", header420Base64);
-
-          // 订阅通知，监听嵌入式设备的GET请求
-          const subscription420 = props.device.monitorCharacteristicForService(
-            serviceUUID,
-            notifyCharacteristicUUID,
-            async (error, characteristic) => {
-              if (error) {
-                console.log("监听特性错误:", error);
-                return;
-              }
-              if (!characteristic?.value) return;
-
-              // 解码收到的Base64数据
-              const receivedData = Buffer.from(
-                characteristic.value,
+              // 先发送 420 头部标志（包含字节大小），并进行Base64编码
+              const header420Base64 = Buffer.from(header420, "utf-8").toString(
                 "base64"
-              ).toString("utf-8");
-              console.log("收到嵌入式设备请求:", receivedData);
+              );
+              await props.device.writeCharacteristicWithResponseForService(
+                serviceUUID,
+                writeCharacteristicUUID,
+                header420Base64
+              );
+              console.log(
+                "发送 DATA_NFTIMG 头部标志(Base64):",
+                header420Base64
+              );
 
-              if (receivedData.startsWith("GET")) {
-                // 解析包序号
-                const packetIndex = parseInt(receivedData.substring(3), 10) - 1;
-                if (packetIndex >= 0 && packetIndex * 200 < binData420.length) {
-                  const start = packetIndex * 200;
-                  const end = Math.min(start + 200, binData420.length);
-                  const chunk = binData420.substring(start, end);
-                  try {
-                    // 对分包数据进行Base64编码后发送
-                    const chunkBase64 = Buffer.from(chunk, "utf-8").toString(
+              // 订阅通知，监听嵌入式设备的GET请求
+              const subscription420 =
+                props.device.monitorCharacteristicForService(
+                  serviceUUID,
+                  notifyCharacteristicUUID,
+                  async (error, characteristic) => {
+                    if (error) {
+                      console.log("监听特性错误:", error);
+                      return;
+                    }
+                    if (!characteristic?.value) return;
+
+                    // 解码收到的Base64数据
+                    const receivedData = Buffer.from(
+                      characteristic.value,
                       "base64"
-                    );
-                    console.log(
-                      `发送 DATA_NFTIMG 数据包(Base64) 第${packetIndex + 1}包:`,
-                      chunkBase64
-                    );
-                    await props.device.writeCharacteristicWithResponseForService(
-                      serviceUUID,
-                      writeCharacteristicUUID,
-                      chunkBase64
-                    );
-                    console.log(`发送 420 图片数据第${packetIndex + 1}包`);
-                  } catch (e) {
-                    console.log("发送 420 图片数据包错误:", e);
+                    ).toString("utf-8");
+                    console.log("收到嵌入式设备请求:", receivedData);
+
+                    if (receivedData.startsWith("GET")) {
+                      // 解析包序号
+                      const packetIndex =
+                        parseInt(receivedData.substring(3), 10) - 1;
+                      if (
+                        packetIndex >= 0 &&
+                        packetIndex * 200 < binData420.length
+                      ) {
+                        const start = packetIndex * 200;
+                        const end = Math.min(start + 200, binData420.length);
+                        const chunk = binData420.substring(start, end);
+                        try {
+                          // 对分包数据进行Base64编码后发送
+                          const chunkBase64 = Buffer.from(
+                            chunk,
+                            "utf-8"
+                          ).toString("base64");
+                          console.log(
+                            `发送 DATA_NFTIMG 数据包(Base64) 第${
+                              packetIndex + 1
+                            }包:`,
+                            chunkBase64
+                          );
+                          await props.device.writeCharacteristicWithResponseForService(
+                            serviceUUID,
+                            writeCharacteristicUUID,
+                            chunkBase64
+                          );
+                          console.log(
+                            `发送 420 图片数据第${packetIndex + 1}包`
+                          );
+                        } catch (e) {
+                          console.log("发送 420 图片数据包错误:", e);
+                        }
+                      }
+                    } else if (receivedData === "FINISH") {
+                      console.log("嵌入式设备已接收完 420 图片数据");
+                      subscription420.remove();
+                    }
+                  }
+                );
+
+              console.log("已订阅 DATA_NFTIMG 图片数据请求通知");
+            };
+
+            // 监听 DATA_NFTTEXT 的通知，收到 FINISH 后触发发送图片数据
+            const originalSubscription =
+              props.device.monitorCharacteristicForService(
+                serviceUUID,
+                notifyCharacteristicUUID,
+                async (error, characteristic) => {
+                  if (error) {
+                    console.log("监听特性错误:", error);
+                    return;
+                  }
+                  if (!characteristic?.value) return;
+
+                  const receivedData = Buffer.from(
+                    characteristic.value,
+                    "base64"
+                  ).toString("utf-8");
+                  console.log("收到嵌入式设备请求:", receivedData);
+
+                  if (receivedData.startsWith("GET")) {
+                    // 解析包序号
+                    const packetIndex =
+                      parseInt(receivedData.substring(3), 10) - 1;
+                    if (
+                      packetIndex >= 0 &&
+                      packetIndex * 200 < collectionName.length
+                    ) {
+                      const start = packetIndex * 200;
+                      const end = Math.min(start + 200, collectionName.length);
+                      const chunk = collectionName.substring(start, end);
+                      try {
+                        const chunkBase64 = Buffer.from(
+                          chunk,
+                          "utf-8"
+                        ).toString("base64");
+                        console.log(
+                          `发送 DATA_NFTTEXT 数据包(Base64) 第${
+                            packetIndex + 1
+                          }包:`,
+                          chunkBase64
+                        );
+                        await props.device.writeCharacteristicWithResponseForService(
+                          serviceUUID,
+                          writeCharacteristicUUID,
+                          chunkBase64
+                        );
+                        console.log(
+                          `发送 collectionName 第${packetIndex + 1}包数据`
+                        );
+                      } catch (e) {
+                        console.log("发送 collectionName 数据包错误:", e);
+                      }
+                    }
+                  } else if (receivedData === "FINISH") {
+                    console.log("嵌入式设备已接收完 collectionName 数据");
+                    originalSubscription.remove();
+                    // 发送图片数据
+                    await sendNFTImgData();
                   }
                 }
-              } else if (receivedData === "FINISH") {
-                console.log("嵌入式设备已接收完 420 图片数据");
-                subscription420.remove();
-              }
-            }
-          );
-
-          console.log("已订阅 DATA_NFTIMG 图片数据请求通知");
-
-          // 210 尺寸图片数据发送保持原注释状态
+              );
+          }
         } catch (error) {
           console.log("发送 bin 文件时出错:", error);
         }
