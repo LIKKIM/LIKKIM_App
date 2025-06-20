@@ -296,9 +296,9 @@ const SecureDeviceStatus = (props) => {
               collectionNameHeader
             );
 
-            // 发送 collectionName 内容，拆包发送，分包大小同样为 240
+            // 发送 collectionName 内容，拆包发送，分包大小同样为 200
             const delay = 250; // 发送间隔，单位毫秒
-            const chunkSize = 240; // 每包最大字节数限制
+            const chunkSize = 200; // 每包最大字节数限制
             for (let i = 0; i < collectionName.length; i += chunkSize) {
               const chunk = collectionName.substring(i, i + chunkSize);
               await selectedDevice.writeCharacteristicWithResponseForService(
@@ -313,7 +313,7 @@ const SecureDeviceStatus = (props) => {
 
           // 发送 420 尺寸图片数据，前面加开头标志 "DATA_NFTIMG" + 数据字节大小
           const delay = 250; // 发送间隔，单位毫秒
-          const chunkSize = 240; // 每包最大字节数限制
+          const chunkSize = 200; // 每包最大字节数限制
           const header420 =
             "DATA_NFTIMG" + binData420.length.toString() + "SIZE";
 
