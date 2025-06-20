@@ -27,7 +27,7 @@ const getSettingsOptions = ({
   toggleDeleteWalletVisibility,
   handleDeleteWallet,
   cryptoCards,
-  selectedDevice,
+  device,
   setModalMessage,
   setErrorModalVisible,
   serviceUUID,
@@ -189,7 +189,7 @@ const getSettingsOptions = ({
         onPress: () => {
           Vibration.vibrate();
           handleFirmwareUpdate({
-            selectedDevice,
+            device,
             t,
             setModalMessage,
             setErrorModalVisible,

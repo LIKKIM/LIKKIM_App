@@ -854,7 +854,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
     toggleDeleteWalletVisibility,
     handleDeleteWallet,
     cryptoCards,
-    selectedDevice,
+    device: devices.find((d) => d.id === verifiedDevices[0]),
     setModalMessage,
     setErrorModalVisible,
     serviceUUID,
