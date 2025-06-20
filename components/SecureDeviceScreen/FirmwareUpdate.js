@@ -30,25 +30,30 @@ const handleFirmwareUpdate = async ({
       .map((byte) => ("0" + (byte & 0xff).toString(16)).slice(-2))
       .join("");
 
-    const commandString = "DATA_OTA" + "SIZE" + hexBlock;
-    console.log("Command String:", commandString);
-
-    const base64Command = Buffer.from(commandString, "utf-8").toString(
-      "base64"
-    );
-    console.log("Base64 Command:", base64Command);
-
-    await selectedDevice.writeCharacteristicWithResponseForService(
-      serviceUUID,
-      writeCharacteristicUUID,
-      base64Command
-    );
-    console.log("Sent XMODEM update command as Base64 text");
+    // 将固件数据拆分为每包200字节的块，逐个发送
+    const chunkSize = 200;
+    for (let offset = 0; offset < firmwareData.length; offset += chunkSize) {
+      const chunk = firmwareData.slice(offset, offset + chunkSize);
+      const hexChunk = Array.from(chunk)
+        .map((byte) => ("0" + (byte & 0xff).toString(16)).slice(-2))
+        .join("");
+      const chunkCommand = "DATA_OTA" + "SIZE" + hexChunk;
+      const base64ChunkCommand = Buffer.from(chunkCommand, "utf-8").toString(
+        "base64"
+      );
+      console.log(`Sending chunk at offset ${offset}, size ${chunk.length}`);
+      await selectedDevice.writeCharacteristicWithResponseForService(
+        serviceUUID,
+        writeCharacteristicUUID,
+        base64ChunkCommand
+      );
+    }
+    console.log("All chunks sent successfully");
 
     Alert.alert(
       t("Firmware Update Test"),
       t(
-        "First 128-byte block sent successfully as a Base64 text command. Please check if the embedded device received the data."
+        "All firmware data sent successfully in 200-byte chunks as Base64 text commands. Please check if the embedded device received the data."
       )
     );
   } catch (error) {
