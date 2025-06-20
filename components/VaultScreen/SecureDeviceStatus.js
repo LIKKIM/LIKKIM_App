@@ -310,12 +310,12 @@ const SecureDeviceStatus = (props) => {
             console.log("collectionName 已拆包成功发送到设备");
           }
 
-          // 发送 420 尺寸图片数据，前面加开头标志 "DATA_NFTIMG"
-          const header420 = "DATA_NFTIMG";
+          // 发送 420 尺寸图片数据，前面加开头标志 "DATA_NFTIMG" + 数据字节大小
           const delay = 250; // 发送间隔，单位毫秒
           const chunkSize = 240; // 每包最大字节数限制
+          const header420 = "DATA_NFTIMG" + binData420.length.toString();
 
-          // 先发送 420 头部标志
+          // 先发送 420 头部标志（包含字节大小）
           await selectedDevice.writeCharacteristicWithResponseForService(
             serviceUUID,
             writeCharacteristicUUID,
