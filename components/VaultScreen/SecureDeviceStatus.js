@@ -340,25 +340,25 @@ const SecureDeviceStatus = (props) => {
           const header210 = "IMG_BIN_BEGIN_210";
 
           // 先发送 210 头部标志
-          await selectedDevice.writeCharacteristicWithResponseForService(
-            serviceUUID,
-            writeCharacteristicUUID,
-            header210
-          );
+          // await selectedDevice.writeCharacteristicWithResponseForService(
+          //   serviceUUID,
+          //   writeCharacteristicUUID,
+          //   header210
+          // );
 
           // 拆分 210 数据并按顺序发送
-          for (let i = 0; i < binData210.length; i += chunkSize) {
-            const chunk = binData210.substring(i, i + chunkSize);
-            await selectedDevice.writeCharacteristicWithResponseForService(
-              serviceUUID,
-              writeCharacteristicUUID,
-              chunk
-            );
-            // 等待 250 毫秒再发送下一包
-            await new Promise((resolve) => setTimeout(resolve, delay));
-          }
+          // for (let i = 0; i < binData210.length; i += chunkSize) {
+          //   const chunk = binData210.substring(i, i + chunkSize);
+          //   await selectedDevice.writeCharacteristicWithResponseForService(
+          //     serviceUUID,
+          //     writeCharacteristicUUID,
+          //     chunk
+          //   );
+          //   // 等待 250 毫秒再发送下一包
+          //   await new Promise((resolve) => setTimeout(resolve, delay));
+          // }
 
-          console.log("210 bin 文件已拆包成功发送到设备");
+          // console.log("210 bin 文件已拆包成功发送到设备");
         } catch (error) {
           console.log("发送 bin 文件时出错:", error);
         }
