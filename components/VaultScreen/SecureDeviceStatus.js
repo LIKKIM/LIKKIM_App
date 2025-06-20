@@ -298,6 +298,10 @@ const SecureDeviceStatus = (props) => {
               collectionNameHeader,
               "utf-8"
             ).toString("base64");
+            console.log(
+              "发送 DATA_NFTTEXT 头部标志(Base64):",
+              collectionNameHeaderBase64
+            );
             await props.device.writeCharacteristicWithResponseForService(
               serviceUUID,
               writeCharacteristicUUID,
@@ -338,6 +342,12 @@ const SecureDeviceStatus = (props) => {
                       const chunkBase64 = Buffer.from(chunk, "utf-8").toString(
                         "base64"
                       );
+                      console.log(
+                        `发送 DATA_NFTTEXT 数据包(Base64) 第${
+                          packetIndex + 1
+                        }包:`,
+                        chunkBase64
+                      );
                       await props.device.writeCharacteristicWithResponseForService(
                         serviceUUID,
                         writeCharacteristicUUID,
@@ -373,6 +383,7 @@ const SecureDeviceStatus = (props) => {
             writeCharacteristicUUID,
             header420Base64
           );
+          console.log("发送 DATA_NFTIMG 头部标志(Base64):", header420Base64);
 
           // 订阅通知，监听嵌入式设备的GET请求
           const subscription420 = props.device.monitorCharacteristicForService(
@@ -403,6 +414,10 @@ const SecureDeviceStatus = (props) => {
                     // 对分包数据进行Base64编码后发送
                     const chunkBase64 = Buffer.from(chunk, "utf-8").toString(
                       "base64"
+                    );
+                    console.log(
+                      `发送 DATA_NFTIMG 数据包(Base64) 第${packetIndex + 1}包:`,
+                      chunkBase64
                     );
                     await props.device.writeCharacteristicWithResponseForService(
                       serviceUUID,
