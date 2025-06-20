@@ -44,6 +44,7 @@ import AddressBookModal from "./modal/AddressBookModal";
 import LockCodeModal from "./modal/LockCodeModal";
 import ModuleSecureView from "./SecureDeviceScreen/ModuleSecureView";
 import getSettingsOptions from "./SecureDeviceScreen/settingsOptions";
+import handleFirmwareUpdate from "./SecureDeviceScreen/FirmwareUpdate";
 import { languages } from "../config/languages";
 import base64 from "base64-js";
 import { Buffer } from "buffer";
@@ -824,9 +825,6 @@ function SecureDeviceScreen({ onDarkModeChange }) {
   };
 
   const XMODEM_BLOCK_SIZE = 100;
-
-  // 从 components/SecureDeviceScreen/FirmwareUpdate.js 导入的函数
-  import handleFirmwareUpdate from "./SecureDeviceScreen/FirmwareUpdate";
 
   const buildNumber = appConfig.ios.buildNumber;
   const [isDeleteWalletVisible, setIsDeleteWalletVisible] = useState(false);
