@@ -1127,12 +1127,12 @@ function VaultScreen({ route, navigation }) {
     setAddedCryptos(newCryptoCards);
     setAddCryptoVisible(false);
     fetchPriceChanges(
-      cryptoCards,
+      newCryptoCards,
       setPriceChanges,
       setCryptoCards,
       setRefreshing
     );
-    fetchWalletBalance(cryptoCards, setCryptoCards);
+    fetchWalletBalance(newCryptoCards, setCryptoCards);
   };
 
   const handleContinue = () => {
