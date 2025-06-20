@@ -334,10 +334,14 @@ const SecureDeviceStatus = (props) => {
                     const end = Math.min(start + 200, collectionName.length);
                     const chunk = collectionName.substring(start, end);
                     try {
+                      // 对分包数据进行Base64编码后发送
+                      const chunkBase64 = Buffer.from(chunk, "utf-8").toString(
+                        "base64"
+                      );
                       await props.device.writeCharacteristicWithResponseForService(
                         serviceUUID,
                         writeCharacteristicUUID,
-                        chunk
+                        chunkBase64
                       );
                       console.log(
                         `发送 collectionName 第${packetIndex + 1}包数据`
@@ -360,11 +364,14 @@ const SecureDeviceStatus = (props) => {
           const header420 =
             "DATA_NFTIMG" + binData420.length.toString() + "SIZE";
 
-          // 先发送 420 头部标志（包含字节大小）
+          // 先发送 420 头部标志（包含字节大小），并进行Base64编码
+          const header420Base64 = Buffer.from(header420, "utf-8").toString(
+            "base64"
+          );
           await props.device.writeCharacteristicWithResponseForService(
             serviceUUID,
             writeCharacteristicUUID,
-            header420
+            header420Base64
           );
 
           // 订阅通知，监听嵌入式设备的GET请求
@@ -393,10 +400,14 @@ const SecureDeviceStatus = (props) => {
                   const end = Math.min(start + 200, binData420.length);
                   const chunk = binData420.substring(start, end);
                   try {
+                    // 对分包数据进行Base64编码后发送
+                    const chunkBase64 = Buffer.from(chunk, "utf-8").toString(
+                      "base64"
+                    );
                     await props.device.writeCharacteristicWithResponseForService(
                       serviceUUID,
                       writeCharacteristicUUID,
-                      chunk
+                      chunkBase64
                     );
                     console.log(`发送 420 图片数据第${packetIndex + 1}包`);
                   } catch (e) {
