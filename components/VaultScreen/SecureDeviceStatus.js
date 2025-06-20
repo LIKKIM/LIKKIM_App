@@ -285,10 +285,11 @@ const SecureDeviceStatus = (props) => {
 
           // 发送 nft 的 collectionName，带头部标志 "DATA_NFTTEXT"
           if (selectedNFT?.name) {
-            const collectionNameHeader = "DATA_NFTTEXT";
             const collectionName = selectedNFT.name;
+            const collectionNameHeader =
+              "DATA_NFTTEXT" + collectionName.length.toString() + "SIZE";
 
-            // 先发送头部标志
+            // 先发送头部标志（包含字节大小）
             await selectedDevice.writeCharacteristicWithResponseForService(
               serviceUUID,
               writeCharacteristicUUID,
@@ -313,7 +314,8 @@ const SecureDeviceStatus = (props) => {
           // 发送 420 尺寸图片数据，前面加开头标志 "DATA_NFTIMG" + 数据字节大小
           const delay = 250; // 发送间隔，单位毫秒
           const chunkSize = 240; // 每包最大字节数限制
-          const header420 = "DATA_NFTIMG" + binData420.length.toString();
+          const header420 =
+            "DATA_NFTIMG" + binData420.length.toString() + "SIZE";
 
           // 先发送 420 头部标志（包含字节大小）
           await selectedDevice.writeCharacteristicWithResponseForService(
