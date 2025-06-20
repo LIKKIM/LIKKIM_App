@@ -30,17 +30,25 @@ const handleFirmwareUpdate = async ({
       .map((byte) => ("0" + (byte & 0xff).toString(16)).slice(-2))
       .join("");
 
-    // 将固件数据拆分为每包200字节的块，逐个发送
+    // 先发送表头，包含固件文件大小
+    const headerCommand = "DATA_OTA" + firmwareData.length + "SIZE";
+    const base64HeaderCommand = Buffer.from(headerCommand, "utf-8").toString(
+      "base64"
+    );
+    await selectedDevice.writeCharacteristicWithResponseForService(
+      serviceUUID,
+      writeCharacteristicUUID,
+      base64HeaderCommand
+    );
+
+    // 然后将固件数据拆分为每包200字节的块，逐个发送数据块内容
     const chunkSize = 200;
     for (let offset = 0; offset < firmwareData.length; offset += chunkSize) {
       const chunk = firmwareData.slice(offset, offset + chunkSize);
       const hexChunk = Array.from(chunk)
         .map((byte) => ("0" + (byte & 0xff).toString(16)).slice(-2))
         .join("");
-      const chunkCommand = "DATA_OTA" + firmwareData.length + "SIZE" + hexChunk;
-      const base64ChunkCommand = Buffer.from(chunkCommand, "utf-8").toString(
-        "base64"
-      );
+      const base64ChunkCommand = Buffer.from(hexChunk, "utf-8").toString();
       console.log(`Sending chunk at offset ${offset}, size ${chunk.length}`);
       await selectedDevice.writeCharacteristicWithResponseForService(
         serviceUUID,
