@@ -855,7 +855,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
         .map((byte) => ("0" + (byte & 0xff).toString(16)).slice(-2))
         .join("");
 
-      const commandString = "XMODEM_UPDATE:" + hexBlock;
+      const commandString = "DATA_OTA" + hexBlock;
       console.log("Command String:", commandString);
 
       const base64Command = Buffer.from(commandString, "utf-8").toString(
