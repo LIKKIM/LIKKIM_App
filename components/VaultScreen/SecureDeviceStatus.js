@@ -763,11 +763,6 @@ const SecureDeviceStatus = (props) => {
       await props.device.connect();
       await props.device.discoverAllServicesAndCharacteristics();
 
-      // 将合约地址和链名称的 Base64 编码消息发送到设备
-      console.log(
-        "发送给嵌入式设备的数据(JSON字符串):",
-        JSON.stringify(message)
-      );
       await props.device.writeCharacteristicWithResponseForService(
         serviceUUID, // 服务UUID
         writeCharacteristicUUID, // 写入特性UUID
