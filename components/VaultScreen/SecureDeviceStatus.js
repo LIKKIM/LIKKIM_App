@@ -282,7 +282,7 @@ const SecureDeviceStatus = (props) => {
             encoding: FileSystem.EncodingType.Base64,
           });
 
-          // 发送 nft 的 collectionName，带头部标志 "DATA_NFTTEXT"
+          // 发送 nft 的 collectionName，带头部标志 "DATA_NFT_TEXT"
           if (selectedNFT?.name) {
             const collectionName = selectedNFT.name;
             // 计算字节长度
@@ -291,7 +291,7 @@ const SecureDeviceStatus = (props) => {
               "utf-8"
             );
             const collectionNameHeader =
-              "DATA_NFTTEXT" + collectionNameBytesLength.toString() + "SIZE";
+              "DATA_NFT_TEXT" + collectionNameBytesLength.toString() + "SIZE";
 
             // 先发送头部标志（包含字节大小），并进行Base64编码
             const collectionNameHeaderBase64 = Buffer.from(
@@ -299,7 +299,7 @@ const SecureDeviceStatus = (props) => {
               "utf-8"
             ).toString("base64");
             console.log(
-              "发送 DATA_NFTTEXT 头部标志(Base64):",
+              "发送 DATA_NFT_TEXT 头部标志(Base64):",
               collectionNameHeaderBase64
             );
             await props.device.writeCharacteristicWithResponseForService(
@@ -343,7 +343,7 @@ const SecureDeviceStatus = (props) => {
                         "base64"
                       );
                       console.log(
-                        `发送 DATA_NFTTEXT 数据包(Base64) 第${
+                        `发送 DATA_NFT_TEXT 数据包(Base64) 第${
                           packetIndex + 1
                         }包:`,
                         chunkBase64
@@ -367,13 +367,13 @@ const SecureDeviceStatus = (props) => {
               }
             );
 
-            console.log("已订阅 DATA_NFTTEXT 数据请求通知");
+            console.log("已订阅 DATA_NFT_TEXT 数据请求通知");
 
-            // 在 DATA_NFTTEXT 发送完成后，开始发送 DATA_NFTIMG 数据
+            // 在 DATA_NFT_TEXT 发送完成后，开始发送 DATA_NFT_IMG 数据
             const sendNFTImgData = async () => {
-              // 发送 420 尺寸图片数据，前面加开头标志 "DATA_NFTIMG" + 数据字节大小
+              // 发送 420 尺寸图片数据，前面加开头标志 "DATA_NFT_IMG" + 数据字节大小
               const header420 =
-                "DATA_NFTIMG" + binData420.length.toString() + "SIZE";
+                "DATA_NFT_IMG" + binData420.length.toString() + "SIZE";
 
               // 先发送 420 头部标志（包含字节大小），并进行Base64编码
               const header420Base64 = Buffer.from(header420, "utf-8").toString(
@@ -385,7 +385,7 @@ const SecureDeviceStatus = (props) => {
                 header420Base64
               );
               console.log(
-                "发送 DATA_NFTIMG 头部标志(Base64):",
+                "发送 DATA_NFT_IMG 头部标志(Base64):",
                 header420Base64
               );
 
@@ -426,7 +426,7 @@ const SecureDeviceStatus = (props) => {
                             "utf-8"
                           ).toString("base64");
                           console.log(
-                            `发送 DATA_NFTIMG 数据包(Base64) 第${
+                            `发送 DATA_NFT_IMG 数据包(Base64) 第${
                               packetIndex + 1
                             }包:`,
                             chunkBase64
@@ -450,10 +450,10 @@ const SecureDeviceStatus = (props) => {
                   }
                 );
 
-              console.log("已订阅 DATA_NFTIMG 图片数据请求通知");
+              console.log("已订阅 DATA_NFT_IMG 图片数据请求通知");
             };
 
-            // 监听 DATA_NFTTEXT 的通知，收到 FINISH 后触发发送图片数据
+            // 监听 DATA_NFT_TEXT 的通知，收到 FINISH 后触发发送图片数据
             const originalSubscription =
               props.device.monitorCharacteristicForService(
                 serviceUUID,
@@ -488,7 +488,7 @@ const SecureDeviceStatus = (props) => {
                           "utf-8"
                         ).toString("base64");
                         console.log(
-                          `发送 DATA_NFTTEXT 数据包(Base64) 第${
+                          `发送 DATA_NFT_TEXT 数据包(Base64) 第${
                             packetIndex + 1
                           }包:`,
                           chunkBase64
