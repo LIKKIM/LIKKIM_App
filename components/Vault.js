@@ -1259,7 +1259,7 @@ function VaultScreen({ route, navigation }) {
         scrollYOffset={scrollYOffset}
         handleContinue={handleContinue}
         handleWalletTest={handleWalletTest}
-        selectedDevice={selectedDevice}
+        device={devices.find((d) => d.id === verifiedDevices[0])}
       />
       <ModalsContainer
         selectedCardChainShortName={selectedCardChainShortName}
