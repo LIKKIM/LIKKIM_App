@@ -283,9 +283,9 @@ const SecureDeviceStatus = (props) => {
             encoding: FileSystem.EncodingType.Base64,
           });
 
-          // 发送 nft 的 collectionName，带头部标志 "COLLECTION_NAME_BEGIN"
+          // 发送 nft 的 collectionName，带头部标志 "DATA_NFTTEXT"
           if (selectedNFT?.name) {
-            const collectionNameHeader = "COLLECTION_NAME_BEGIN";
+            const collectionNameHeader = "DATA_NFTTEXT";
             const collectionName = selectedNFT.name;
 
             // 先发送头部标志
@@ -310,8 +310,8 @@ const SecureDeviceStatus = (props) => {
             console.log("collectionName 已拆包成功发送到设备");
           }
 
-          // 发送 420 尺寸图片数据，前面加开头标志 "IMG_BIN_BEGIN_420"
-          const header420 = "IMG_BIN_BEGIN_420";
+          // 发送 420 尺寸图片数据，前面加开头标志 "DATA_NFTIMG"
+          const header420 = "DATA_NFTIMG";
           const delay = 250; // 发送间隔，单位毫秒
           const chunkSize = 240; // 每包最大字节数限制
 
