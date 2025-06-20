@@ -283,9 +283,37 @@ const SecureDeviceStatus = (props) => {
             encoding: FileSystem.EncodingType.Base64,
           });
 
+          // 发送 nft 的 collectionName，带头部标志 "COLLECTION_NAME_BEGIN"
+          if (selectedNFT?.name) {
+            const collectionNameHeader = "COLLECTION_NAME_BEGIN";
+            const collectionName = selectedNFT.name;
+
+            // 先发送头部标志
+            await selectedDevice.writeCharacteristicWithResponseForService(
+              serviceUUID,
+              writeCharacteristicUUID,
+              collectionNameHeader
+            );
+
+            // 发送 collectionName 内容，拆包发送，分包大小同样为 240
+            const delay = 250; // 发送间隔，单位毫秒
+            const chunkSize = 240; // 每包最大字节数限制
+            for (let i = 0; i < collectionName.length; i += chunkSize) {
+              const chunk = collectionName.substring(i, i + chunkSize);
+              await selectedDevice.writeCharacteristicWithResponseForService(
+                serviceUUID,
+                writeCharacteristicUUID,
+                chunk
+              );
+              await new Promise((resolve) => setTimeout(resolve, delay));
+            }
+            console.log("collectionName 已拆包成功发送到设备");
+          }
+
           // 发送 420 尺寸图片数据，前面加开头标志 "IMG_BIN_BEGIN_420"
           const header420 = "IMG_BIN_BEGIN_420";
           const delay = 250; // 发送间隔，单位毫秒
+          const chunkSize = 240; // 每包最大字节数限制
 
           // 先发送 420 头部标志
           await selectedDevice.writeCharacteristicWithResponseForService(
@@ -293,8 +321,6 @@ const SecureDeviceStatus = (props) => {
             writeCharacteristicUUID,
             header420
           );
-
-          const chunkSize = 240; // 每包最大字节数限制
 
           // 拆分 420 数据并按顺序发送
           for (let i = 0; i < binData420.length; i += chunkSize) {
@@ -333,30 +359,6 @@ const SecureDeviceStatus = (props) => {
           }
 
           console.log("210 bin 文件已拆包成功发送到设备");
-
-          // 发送 nft 的 collectionName，带头部标志 "COLLECTION_NAME_BEGIN"
-          if (selectedNFT?.name) {
-            const collectionNameHeader = "COLLECTION_NAME_BEGIN";
-            const collectionName = selectedNFT.name;
-            // 先发送头部标志
-            await selectedDevice.writeCharacteristicWithResponseForService(
-              serviceUUID,
-              writeCharacteristicUUID,
-              collectionNameHeader
-            );
-
-            // 发送 collectionName 内容，拆包发送，分包大小同样为 240
-            for (let i = 0; i < collectionName.length; i += chunkSize) {
-              const chunk = collectionName.substring(i, i + chunkSize);
-              await selectedDevice.writeCharacteristicWithResponseForService(
-                serviceUUID,
-                writeCharacteristicUUID,
-                chunk
-              );
-              await new Promise((resolve) => setTimeout(resolve, 250));
-            }
-            console.log("collectionName 已拆包成功发送到设备");
-          }
         } catch (error) {
           console.log("发送 bin 文件时出错:", error);
         }
