@@ -183,7 +183,14 @@ const getSettingsOptions = ({
         icon: "downloading",
         onPress: () => {
           Vibration.vibrate();
-          handleFirmwareUpdate();
+          handleFirmwareUpdate({
+            selectedDevice,
+            t,
+            setModalMessage,
+            setErrorModalVisible,
+            serviceUUID,
+            writeCharacteristicUUID,
+          });
         },
       },
     ],
