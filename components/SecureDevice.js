@@ -882,31 +882,6 @@ function SecureDeviceScreen({ onDarkModeChange }) {
     }
   };
 
-  function waitForResponse(device) {
-    return new Promise((resolve, reject) => {
-      const subscription = device.monitorCharacteristicForService(
-        serviceUUID,
-        notifyCharacteristicUUID,
-        (error, characteristic) => {
-          if (error) {
-            subscription.remove();
-            reject(error);
-            return;
-          }
-          const data = Buffer.from(characteristic.value, "base64");
-          if (data.length > 0) {
-            subscription.remove();
-            resolve(data[0]);
-          }
-        }
-      );
-      setTimeout(() => {
-        subscription.remove();
-        reject(new Error("Response timeout"));
-      }, 5000);
-    });
-  }
-
   const buildNumber = appConfig.ios.buildNumber;
   const [isDeleteWalletVisible, setIsDeleteWalletVisible] = useState(false);
   const toggleDeleteWalletVisibility = () => {
