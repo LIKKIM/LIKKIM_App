@@ -577,6 +577,8 @@ const SecureDeviceStatus = (props) => {
     cardInfoVisible,
     handleContinue,
     handleWalletTest,
+    selectCardOffsetOpenAni,
+    selectCardOffsetCloseAni,
   } = props;
 
   const handleGalleryelect = (nft) => {
@@ -800,9 +802,9 @@ const SecureDeviceStatus = (props) => {
               cardRefs.current[index] = el;
               initCardPosition(el, index);
             }}
+           
             style={[
-              VaultScreenStyle.cardContainer,
-              selectedCardIndex === index && { zIndex: 3 },
+              VaultScreenStyle.cardContainer
             ]}
             disabled={modalVisible}
           >
@@ -812,7 +814,8 @@ const SecureDeviceStatus = (props) => {
                 index === 0
                   ? VaultScreenStyle.cardFirst
                   : VaultScreenStyle.cardOthers,
-                selectedCardIndex === index && animatedCardStyle(index),
+                { transform: [{ translateY: selectedCardIndex === index ? selectCardOffsetOpenAni : selectCardOffsetCloseAni }] },
+                // selectedCardIndex === index && animatedCardStyle(index),
               ]}
             >
               <ImageBackground

@@ -45,6 +45,7 @@ import * as SplashScreen from "expo-splash-screen";
 import { bluetoothConfig } from "./env/bluetoothConfig";
 import { Svg, Path, G } from "react-native-svg";
 import { Buffer } from "buffer";
+import FloatingDev from "./utils/dev";
 const serviceUUID = bluetoothConfig.serviceUUID;
 const writeCharacteristicUUID = bluetoothConfig.writeCharacteristicUUID;
 const notifyCharacteristicUUID = bluetoothConfig.notifyCharacteristicUUID;
@@ -52,7 +53,9 @@ const notifyCharacteristicUUID = bluetoothConfig.notifyCharacteristicUUID;
 if (__DEV__) {
   import("./ReactotronConfig").then(() => console.log("Reactotron Configured"));
 }
-
+if(__DEV__){
+  require("./utils/dev_fetch");
+}
 //by will: 阻止自动隐藏 splash screen
 SplashScreen.preventAutoHideAsync();
 
@@ -60,6 +63,7 @@ const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 export default function App() {
+  
   const { t } = useTranslation();
   const [isFirstLaunch, setIsFirstLaunch] = useState(null);
   const [headerDropdownVisible, setHeaderDropdownVisible] = useState(false);
@@ -939,6 +943,9 @@ function AppContent({
         onConfirm={confirmDisconnect}
         onCancel={cancelDisconnect}
       />
+      {
+        __DEV__ && <FloatingDev />
+      }
     </View>
   );
 }

@@ -25,7 +25,7 @@ const TabModal = ({
   scrollViewRef,
   selectedCrypto,
   isDarkMode,
-  fadeAnim,
+  backgroundAnim,
   darkColorsDown,
   lightColorsDown,
 }) => {
@@ -77,9 +77,9 @@ const TabModal = ({
             AsyncStorage.setItem("ActivityLog", JSON.stringify(enhancedData));
           }
         } catch (error) {
-          console.error(
-            `Failed to fetch transaction history: ${error.message}`
-          );
+          // console.error(
+          //   `Failed to fetch transaction history: ${error.message}`
+          // );
           setActivityLog([]);
         }
       }
@@ -227,7 +227,7 @@ const TabModal = ({
   return (
     <>
       <Animated.View
-        style={[VaultScreenStyle.cardModalView, { opacity: fadeAnim }]}
+        style={[VaultScreenStyle.cardModalView, { opacity: backgroundAnim} ]}
       >
         <LinearGradient
           colors={isDarkMode ? darkColorsDown : lightColorsDown}

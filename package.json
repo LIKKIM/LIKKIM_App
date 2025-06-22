@@ -27,6 +27,7 @@
     "@react-navigation/bottom-tabs": "^6.6.1",
     "@react-navigation/native": "^6.1.18",
     "@react-navigation/native-stack": "^6.11.0",
+    "@types/react": "~18.2.45",
     "base64-js": "^1.5.1",
     "expo": "~50.0.20",
     "expo-blur": "~12.9.2",
@@ -73,6 +74,7 @@
     "react-native-webview": "13.6.4",
     "reactotron-react-native": "^5.1.7",
     "text-encoding": "^0.7.0",
+    "typescript": "^5.3.0",
     "uuid": "^9.0.1",
     "zustand": "^5.0.1"
   },
