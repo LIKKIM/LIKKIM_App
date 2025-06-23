@@ -182,6 +182,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
       await handleDisconnectDevice(deviceToDisconnect);
       setConfirmDisconnectModalVisible(false);
       setDeviceToDisconnect(null);
+      scanDevices();
     }
   };
 
@@ -794,6 +795,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
     setPinCode("");
   };
 
+  // 删除设备功能
   const handleDisconnectDevice = async (device) => {
     try {
       const isConnected = await device.isConnected();
