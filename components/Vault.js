@@ -1023,18 +1023,17 @@ function VaultScreen({ route, navigation }) {
   const selectCardOffsetOpenAni = useAnimatedValue(0);
   const selectCardOffsetCloseAni = useAnimatedValue(0);
 
-  //计算弹簧参数
+  //计算弹簧参数，模仿iPhone Wallet点击卡片归位动画
   const computeSpringConfig = (index, total = 30) => {
     const raw = Math.min(index / total, 1);
     const t = 1 - Math.pow(1 - raw, 2);
 
     return {
-      stiffness: 80 - t * 50, // 100 → 50
-      damping: 5 + t * 10, // 10 → 20
-      mass: 1 + t * 2, // 1.5 → 4
+      stiffness: 200 - (1 - t) * 20, // 170 → 200，底部卡片刚性更高，归位更慢
+      damping: 50 + (1 - t) * 30, // 70 → 50，底部卡片阻尼更低，归位更慢
+      mass: 1, // 质量固定为1，保持动画自然
     };
   };
-
   const closeModal = () => {
     setCardInfoVisible(false);
     cardRefs.current[selectedCardIndex]?.setNativeProps({
@@ -1057,6 +1056,8 @@ function VaultScreen({ route, navigation }) {
         stiffness: stiffness,
         damping: damping,
         mass: mass,
+        restSpeedThreshold: 0.01, // 控制动画停止时的速度阈值，越小越平滑
+        restDisplacementThreshold: 0.01, // 控制动画停止时的位移阈值，越小越平滑
         useNativeDriver: true,
       }).start();
     } else {
@@ -1064,6 +1065,8 @@ function VaultScreen({ route, navigation }) {
         toValue: 0,
         bounciness: 3,
         speed: 10,
+        restSpeedThreshold: 0.01,
+        restDisplacementThreshold: 0.01,
         useNativeDriver: true,
       }).start();
     }
