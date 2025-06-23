@@ -958,10 +958,7 @@ const SecureDeviceStatus = (props) => {
               cardRefs.current[index] = el;
               initCardPosition(el, index);
             }}
-           
-            style={[
-              VaultScreenStyle.cardContainer
-            ]}
+            style={[VaultScreenStyle.cardContainer]}
             disabled={modalVisible}
           >
             <Animated.View
@@ -970,7 +967,16 @@ const SecureDeviceStatus = (props) => {
                 index === 0
                   ? VaultScreenStyle.cardFirst
                   : VaultScreenStyle.cardOthers,
-                { transform: [{ translateY: selectedCardIndex === index ? selectCardOffsetOpenAni : selectCardOffsetCloseAni }] },
+                {
+                  transform: [
+                    {
+                      translateY:
+                        selectedCardIndex === index
+                          ? selectCardOffsetOpenAni
+                          : selectCardOffsetCloseAni,
+                    },
+                  ],
+                },
                 // selectedCardIndex === index && animatedCardStyle(index),
               ]}
             >
@@ -1140,6 +1146,11 @@ const SecureDeviceStatus = (props) => {
       {cryptoCards.length > 0 && !modalVisible && (
         <View
           style={{
+            position: "absolute",
+            top: 0,
+            width: 326,
+            left: "50%",
+            transform: [{ translateX: -163 }],
             flexDirection: "row",
             justifyContent: "flex-end",
             alignItems: "flex-start",
