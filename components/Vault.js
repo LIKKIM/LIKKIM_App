@@ -1111,8 +1111,8 @@ function VaultScreen({ route, navigation }) {
     Animated.spring(selectCardOffsetOpenAni, {
       toValue: -py + (Platform.OS === "ios" ? 76 : 56),
       useNativeDriver: true,
-      bounciness: py > 500 ? 2 : 4,
-      speed: py > 500 ? 5 : 10,
+      bounciness: py > 500 ? 4 : 7,
+      speed: py > 500 ? 5 : 8,
     }).start();
 
     Animated.parallel([
