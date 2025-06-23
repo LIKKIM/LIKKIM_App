@@ -379,14 +379,16 @@ function AppContent({
           for (const message of pubkeyMessages) {
             await new Promise((resolve) => setTimeout(resolve, 250));
             try {
-              const bufferMessage = Buffer.from(message, "utf-8");
+              // 在每条指令结尾加上 \n
+              const messageWithNewline = message + "\n";
+              const bufferMessage = Buffer.from(messageWithNewline, "utf-8");
               const base64Message = bufferMessage.toString("base64");
               await selectedDevice.writeCharacteristicWithResponseForService(
                 serviceUUID,
                 writeCharacteristicUUID,
                 base64Message
               );
-              console.log(`Sent message: ${message}`);
+              console.log(`Sent message: ${messageWithNewline}`);
             } catch (error) {
               console.log(`Error sending message "${message}":`, error);
             }

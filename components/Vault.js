@@ -109,10 +109,11 @@ function VaultScreen({ route, navigation }) {
   const iconColor = isDarkMode ? "#ffffff" : "#676776";
   const darkColorsDown = ["#21201E", "#0E0D0D"];
   const lightColorsDown = ["#ffffff", "#EDEBEF"];
-  const [SecurityCodeModalVisible, setSecurityCodeModalVisible] = useState(false);
-  const modalAnim = useAnimatedValue(0);//弹窗淡入淡出动画
-  const backgroundAnim = useAnimatedValue(0);//背景淡入淡出动画
-  const balanceAnim = useAnimatedValue(1);//余额淡出动画
+  const [SecurityCodeModalVisible, setSecurityCodeModalVisible] =
+    useState(false);
+  const modalAnim = useAnimatedValue(0); //弹窗淡入淡出动画
+  const backgroundAnim = useAnimatedValue(0); //背景淡入淡出动画
+  const balanceAnim = useAnimatedValue(1); //余额淡出动画
   const [selectedCardIndex, setSelectedCardIndex] = useState(null);
   const [selectedCryptoIcon, setSelectedCryptoIcon] = useState(null);
   const cardRefs = useRef([]);
@@ -188,18 +189,15 @@ function VaultScreen({ route, navigation }) {
 
   // }, [cryptoCards]);
 
-
-
   useEffect(() => {
     cryptoCards.forEach((_, idx) => {
       //每个卡片固定差距76+(20 margin)
       setCardsOffset((prev) => ({
         ...prev,
-        [idx]: (idx) * 96 + 150,
+        [idx]: idx * 96 + 150,
       }));
     });
   }, [cryptoCards]);
-
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
@@ -240,7 +238,6 @@ function VaultScreen({ route, navigation }) {
             }
           }
         );
-
 
         setTimeout(() => {
           console.log("Scanning stopped");
@@ -1019,8 +1016,6 @@ function VaultScreen({ route, navigation }) {
     navigation.setParams({ showDeleteConfirmModal: false });
   };
 
-
-
   //记录点击前的滚动位置：TODO 后续如果需要自动滚回去，可以使用。
   const [lastScrollYOffset, setLastScrollYOffset] = useState(0);
   //提前测量每个卡片的偏移，避免点击动画重新测量导致延迟
@@ -1028,24 +1023,26 @@ function VaultScreen({ route, navigation }) {
   const selectCardOffsetOpenAni = useAnimatedValue(0);
   const selectCardOffsetCloseAni = useAnimatedValue(0);
 
-
-  //计算弹簧参数
+  //计算弹簧参数，模仿iPhone Wallet点击卡片归位动画
   const computeSpringConfig = (index, total = 30) => {
     const raw = Math.min(index / total, 1);
-    const t = 1 - Math.pow(1 - raw, 2)
+    const t = 1 - Math.pow(1 - raw, 2);
 
     return {
-      stiffness: 80 - t * 50,   // 100 → 50
-      damping: 5 + t * 10,      // 10 → 20
-      mass: 1 + t * 2,       // 1.5 → 4
+      stiffness: 200 - (1 - t) * 20, // 170 → 200，底部卡片刚性更高，归位更慢
+      damping: 50 + (1 - t) * 30, // 70 → 50，底部卡片阻尼更低，归位更慢
+      mass: 1, // 质量固定为1，保持动画自然
     };
   };
-
   const closeModal = () => {
-
     setCardInfoVisible(false);
-    cardRefs.current[selectedCardIndex]?.setNativeProps({ style: { zIndex: 0 } });
-    const { stiffness, damping, mass } = computeSpringConfig(selectedCardIndex, cryptoCards.length);
+    cardRefs.current[selectedCardIndex]?.setNativeProps({
+      style: { zIndex: 0 },
+    });
+    const { stiffness, damping, mass } = computeSpringConfig(
+      selectedCardIndex,
+      cryptoCards.length
+    );
     // console.log(stiffness, damping, mass)
     setModalVisible(false);
     Animated.spring(balanceAnim, {
@@ -1056,9 +1053,11 @@ function VaultScreen({ route, navigation }) {
     if (selectedCardIndex >= 5) {
       Animated.spring(selectCardOffsetOpenAni, {
         toValue: 0,
-        stiffness: stiffness, 
-        damping: damping, 
-        mass: mass, 
+        stiffness: stiffness,
+        damping: damping,
+        mass: mass,
+        restSpeedThreshold: 0.01, // 控制动画停止时的速度阈值，越小越平滑
+        restDisplacementThreshold: 0.01, // 控制动画停止时的位移阈值，越小越平滑
         useNativeDriver: true,
       }).start();
     } else {
@@ -1066,6 +1065,8 @@ function VaultScreen({ route, navigation }) {
         toValue: 0,
         bounciness: 3,
         speed: 10,
+        restSpeedThreshold: 0.01,
+        restDisplacementThreshold: 0.01,
         useNativeDriver: true,
       }).start();
     }
@@ -1077,17 +1078,14 @@ function VaultScreen({ route, navigation }) {
 
     setTimeout(() => {
       setSelectedCardIndex(null);
-    }, 0)
-
+    }, 0);
   };
-
 
   //动画分成了：背景，弹窗，卡片，余额四部分
   const handleCardPress = (cryptoName, cryptoChain, index) => {
-
-    console.log(cardsOffset)
-    if(cardsOffset[index] === undefined){
-      console.log('卡片偏移未测量完成过早点击，需要处理')
+    console.log(cardsOffset);
+    if (cardsOffset[index] === undefined) {
+      console.log("卡片偏移未测量完成过早点击，需要处理");
       return;
     }
 
@@ -1102,22 +1100,21 @@ function VaultScreen({ route, navigation }) {
     setSelectedCardChain(cryptoChain);
     setSelectedCrypto(crypto);
 
-    setModalVisible(true);//打开Modal
-    setSelectedCardIndex(index);//设置选中的卡片索引
-    const py = cardsOffset[index];//获取卡片的偏移
+    setModalVisible(true); //打开Modal
+    setSelectedCardIndex(index); //设置选中的卡片索引
+    const py = cardsOffset[index]; //获取卡片的偏移
     cardStartPositions.current[index] = py; // 记录每个卡片的初始位置
     setCardInfoVisible(true); // 延迟显示卡片信息
     cardRefs.current[index].setNativeProps({ style: { zIndex: 3 } });
 
-
-     //TODO 这里可能需要调整细节
-     Animated.spring(selectCardOffsetOpenAni, {
-      toValue: -py + (Platform.OS === 'ios' ? 76 :56),
+    //TODO 这里可能需要调整细节
+    Animated.spring(selectCardOffsetOpenAni, {
+      toValue: -py + (Platform.OS === "ios" ? 76 : 56),
       useNativeDriver: true,
-      bounciness: py > 500 ? 2 : 4,
-      speed: py > 500 ? 5 : 10,
+      bounciness: py > 500 ? 4 : 7,
+      speed: py > 500 ? 5 : 8,
     }).start();
-   
+
     Animated.parallel([
       Animated.timing(modalAnim, {
         toValue: 1,
@@ -1164,12 +1161,12 @@ function VaultScreen({ route, navigation }) {
     setAddedCryptos(newCryptoCards);
     setAddCryptoVisible(false);
     fetchPriceChanges(
-      cryptoCards,
+      newCryptoCards,
       setPriceChanges,
       setCryptoCards,
       setRefreshing
     );
-    fetchWalletBalance(cryptoCards, setCryptoCards);
+    fetchWalletBalance(newCryptoCards, setCryptoCards);
   };
 
   const handleContinue = () => {
@@ -1222,7 +1219,6 @@ function VaultScreen({ route, navigation }) {
   const animatedCardStyle = (index) => {
     const cardStartPosition = cardStartPositions.current[index] || 0;
 
-
     // const endPosition =
     //   Platform.OS === "android" || isIphoneSE
     //     ? 0
@@ -1231,15 +1227,13 @@ function VaultScreen({ route, navigation }) {
     //TODO TEST
     const translateY = modalAnim.interpolate({
       inputRange: [0, 1],
-      outputRange: [0, - cardStartPosition + (Platform.OS === 'ios' ? 100 : 60)],
+      outputRange: [0, -cardStartPosition + (Platform.OS === "ios" ? 100 : 60)],
     });
 
     return {
       transform: [{ translateY }],
-
     };
   };
-
 
   // const calcCar dOffsetY = (index, event) => {
   //   const { y } = event.nativeEvent.layout;
@@ -1312,6 +1306,7 @@ function VaultScreen({ route, navigation }) {
         scrollYOffset={scrollYOffset}
         handleContinue={handleContinue}
         handleWalletTest={handleWalletTest}
+        device={devices.find((d) => d.id === verifiedDevices[0])}
       />
       <ModalsContainer
         selectedCardChainShortName={selectedCardChainShortName}

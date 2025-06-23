@@ -27,6 +27,11 @@ const getSettingsOptions = ({
   toggleDeleteWalletVisibility,
   handleDeleteWallet,
   cryptoCards,
+  device,
+  setModalMessage,
+  setErrorModalVisible,
+  serviceUUID,
+  writeCharacteristicUUID,
 }) => {
   // Helper function to persist the screen lock setting
   const persistScreenLockSetting = (newValue) => {
@@ -183,7 +188,14 @@ const getSettingsOptions = ({
         icon: "downloading",
         onPress: () => {
           Vibration.vibrate();
-          handleFirmwareUpdate();
+          handleFirmwareUpdate({
+            device,
+            t,
+            setModalMessage,
+            setErrorModalVisible,
+            serviceUUID,
+            writeCharacteristicUUID,
+          });
         },
       },
     ],

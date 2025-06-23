@@ -44,6 +44,7 @@ import AddressBookModal from "./modal/AddressBookModal";
 import LockCodeModal from "./modal/LockCodeModal";
 import ModuleSecureView from "./SecureDeviceScreen/ModuleSecureView";
 import getSettingsOptions from "./SecureDeviceScreen/settingsOptions";
+import handleFirmwareUpdate from "./SecureDeviceScreen/FirmwareUpdate";
 import { languages } from "../config/languages";
 import base64 from "base64-js";
 import { Buffer } from "buffer";
@@ -181,6 +182,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
       await handleDisconnectDevice(deviceToDisconnect);
       setConfirmDisconnectModalVisible(false);
       setDeviceToDisconnect(null);
+      scanDevices();
     }
   };
 
@@ -793,6 +795,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
     setPinCode("");
   };
 
+  // 删除设备功能
   const handleDisconnectDevice = async (device) => {
     try {
       const isConnected = await device.isConnected();
@@ -825,164 +828,6 @@ function SecureDeviceScreen({ onDarkModeChange }) {
 
   const XMODEM_BLOCK_SIZE = 100;
 
-  const handleFirmwareUpdate = async () => {
-    console.log("Firmware Update clicked");
-    if (!selectedDevice) {
-      setModalMessage(t("No device paired. Please pair with device first."));
-      setErrorModalVisible(true);
-
-      return;
-    }
-
-    try {
-      const response = await fetch(firmwareAPI.lvglExec);
-      if (!response.ok) {
-        throw new Error("Download failed");
-      }
-      const arrayBuffer = await response.arrayBuffer();
-      const firmwareData = new Uint8Array(arrayBuffer);
-      console.log("Firmware downloaded, size:", firmwareData.length);
-
-      let firstBlock = firmwareData.slice(0, XMODEM_BLOCK_SIZE);
-      if (firstBlock.length < XMODEM_BLOCK_SIZE) {
-        const padded = new Uint8Array(XMODEM_BLOCK_SIZE);
-        padded.set(firstBlock);
-        padded.fill(0x1a, firstBlock.length);
-        firstBlock = padded;
-      }
-
-      const hexBlock = Array.from(firstBlock)
-        .map((byte) => ("0" + (byte & 0xff).toString(16)).slice(-2))
-        .join("");
-
-      const commandString = "XMODEM_UPDATE:" + hexBlock;
-      console.log("Command String:", commandString);
-
-      const base64Command = Buffer.from(commandString, "utf-8").toString(
-        "base64"
-      );
-      console.log("Base64 Command:", base64Command);
-
-      await selectedDevice.writeCharacteristicWithResponseForService(
-        serviceUUID,
-        writeCharacteristicUUID,
-        base64Command
-      );
-      console.log("Sent XMODEM update command as Base64 text");
-
-      Alert.alert(
-        t("Firmware Update Test"),
-        t(
-          "First 128-byte block sent successfully as a Base64 text command. Please check if the embedded device received the data."
-        )
-      );
-    } catch (error) {
-      console.error("Firmware update error:", error);
-      Alert.alert(t("Firmware Update Error"), error.message);
-    }
-  };
-  // XMODEM 协议传输函数（简化实现）
-  // 1. 将当前数据块转换为 Base64 后发送给设备。
-  // 2. 每个数据块最多尝试发送 10 次，直到收到设备返回的 ACK（0x06）。
-  //    如果收到 NAK（0x15），则重传该数据块；收到其他响应则抛出错误。
-  // 3. 所有数据块发送完毕后，发送 EOT 字节，并同样等待设备返回 ACK，最多重传 10 次。
-
-  async function xmodemTransfer(device, firmwareData) {
-    let blockNumber = 1;
-    for (
-      let offset = 0;
-      offset < firmwareData.length;
-      offset += XMODEM_BLOCK_SIZE
-    ) {
-      let blockData = firmwareData.slice(offset, offset + XMODEM_BLOCK_SIZE);
-      if (blockData.length < XMODEM_BLOCK_SIZE) {
-        const padded = new Uint8Array(XMODEM_BLOCK_SIZE);
-        padded.set(blockData);
-        padded.fill(0x1a, blockData.length);
-        blockData = padded;
-      }
-      const packet = new Uint8Array(3 + XMODEM_BLOCK_SIZE + 1);
-      packet[0] = SOH;
-      packet[1] = blockNumber & 0xff;
-      packet[2] = ~blockNumber & 0xff;
-      packet.set(blockData, 3);
-      let checksum = 0;
-      for (const byte of blockData) {
-        checksum = (checksum + byte) & 0xff;
-      }
-      packet[3 + XMODEM_BLOCK_SIZE] = checksum;
-
-      let success = false;
-      let retries = 0;
-      while (!success && retries < 10) {
-        const base64Packet = Buffer.from(packet).toString("base64");
-        await device.writeCharacteristicWithResponseForService(
-          serviceUUID,
-          writeCharacteristicUUID,
-          base64Packet
-        );
-        console.log(`Sent block ${blockNumber}, retry ${retries}`);
-        const response = await waitForResponse(device);
-        if (response === ACK) {
-          success = true;
-        } else if (response === NAK) {
-          retries++;
-        } else {
-          throw new Error("Unexpected response during XMODEM transfer");
-        }
-      }
-      if (!success) {
-        throw new Error("Failed to transfer block " + blockNumber);
-      }
-      blockNumber = (blockNumber + 1) & 0xff;
-    }
-    let eotSent = false;
-    let eotRetries = 0;
-    while (!eotSent && eotRetries < 10) {
-      const base64EOT = Buffer.from(new Uint8Array([EOT])).toString("base64");
-      await device.writeCharacteristicWithResponseForService(
-        serviceUUID,
-        writeCharacteristicUUID,
-        base64EOT
-      );
-      console.log("Sent EOT");
-      const response = await waitForResponse(device);
-      if (response === ACK) {
-        eotSent = true;
-      } else {
-        eotRetries++;
-      }
-    }
-    if (!eotSent) {
-      throw new Error("Failed to complete XMODEM transfer");
-    }
-  }
-
-  function waitForResponse(device) {
-    return new Promise((resolve, reject) => {
-      const subscription = device.monitorCharacteristicForService(
-        serviceUUID,
-        notifyCharacteristicUUID,
-        (error, characteristic) => {
-          if (error) {
-            subscription.remove();
-            reject(error);
-            return;
-          }
-          const data = Buffer.from(characteristic.value, "base64");
-          if (data.length > 0) {
-            subscription.remove();
-            resolve(data[0]);
-          }
-        }
-      );
-      setTimeout(() => {
-        subscription.remove();
-        reject(new Error("Response timeout"));
-      }, 5000);
-    });
-  }
-
   const buildNumber = appConfig.ios.buildNumber;
   const [isDeleteWalletVisible, setIsDeleteWalletVisible] = useState(false);
   const toggleDeleteWalletVisibility = () => {
@@ -1011,6 +856,11 @@ function SecureDeviceScreen({ onDarkModeChange }) {
     toggleDeleteWalletVisibility,
     handleDeleteWallet,
     cryptoCards,
+    device: devices.find((d) => d.id === verifiedDevices[0]),
+    setModalMessage,
+    setErrorModalVisible,
+    serviceUUID,
+    writeCharacteristicUUID,
   });
 
   const [deleteWalletModalVisible, setDeleteWalletModalVisible] =
