@@ -150,12 +150,12 @@ export default function PriceChartCom({
   // Initialize the date selection and fetch data.
   const selectDate = useState(() => {
     _getData().catch((er) => null);
-    if (
-      parentScrollviewRef.current &&
-      typeof parentScrollviewRef.current.setNativeProps === "function"
-    ) {
-      parentScrollviewRef.current.setNativeProps({ scrollEnabled: false });
-    }
+    // if (
+    //   parentScrollviewRef.current &&
+    //   typeof parentScrollviewRef.current.setNativeProps === "function"
+    // ) {
+    //   parentScrollviewRef.current.setNativeProps({ scrollEnabled: false });
+    // }
     return "30m";
   });
 
