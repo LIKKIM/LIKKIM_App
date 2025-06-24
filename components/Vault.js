@@ -262,6 +262,7 @@ function VaultScreen({ route, navigation }) {
       setSelectedView("wallet");
     }
     navigation.setOptions({
+      headerTitleAlign: "center",
       headerTitle: () =>
         !isModalVisible && cryptoCards.length > 0 ? (
           <View
