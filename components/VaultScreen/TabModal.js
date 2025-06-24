@@ -227,7 +227,7 @@ const TabModal = ({
   return (
     <>
       <Animated.View
-        style={[VaultScreenStyle.cardModalView, { opacity: backgroundAnim} ]}
+        style={[VaultScreenStyle.cardModalView, { opacity: backgroundAnim }]}
       >
         <LinearGradient
           colors={isDarkMode ? darkColorsDown : lightColorsDown}
@@ -235,6 +235,7 @@ const TabModal = ({
         />
       </Animated.View>
 
+      {/* Tab Modal Animated Container */}
       <Animated.View
         style={[
           VaultScreenStyle.animatedTabContainer,
