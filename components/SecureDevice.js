@@ -867,6 +867,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
     useState(false);
 
   const handleDeleteWallet = () => {
+    Vibration.vibrate();
     setDeleteWalletModalVisible(true);
   };
 

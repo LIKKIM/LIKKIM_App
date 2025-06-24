@@ -199,28 +199,6 @@ const getSettingsOptions = ({
         },
       },
     ],
-    walletManagement:
-      cryptoCards && cryptoCards.length > 0
-        ? [
-            {
-              title: t("Device Settings"),
-              icon: "wallet",
-              extraIcon: isDeleteWalletVisible
-                ? "arrow-drop-up"
-                : "arrow-drop-down",
-              onPress: toggleDeleteWalletVisibility,
-            },
-            isDeleteWalletVisible && {
-              title: t("Reset Local Profile"),
-              icon: "delete-outline",
-              onPress: () => {
-                Vibration.vibrate();
-                handleDeleteWallet();
-              },
-              style: { color: "red" },
-            },
-          ].filter(Boolean) // 过滤掉 false 值，防止渲染出 null 项
-        : [],
 
     support: [
       {
