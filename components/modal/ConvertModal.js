@@ -635,7 +635,7 @@ const ConvertModal = ({
                           value={toValue}
                           // onChangeText={setToValue}
                           placeholder={t("0.0")}
-                          // placeholderTextColor="#aaa"
+                          placeholderTextColor="#aaa"
                           keyboardType="numeric"
                         />
                         <Text
