@@ -49,7 +49,7 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
       width: "90%",
       backgroundColor: modalBackgroundColor,
       borderRadius: 20,
-      padding: 35,
+      padding: 30,
       justifyContent: "space-between",
       alignItems: "center",
     },
@@ -452,6 +452,15 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
       alignItems: "center",
       marginBottom: 15,
     },
+    confirmButton: {
+      backgroundColor: buttonBackgroundColor,
+      padding: 10,
+      width: "100%",
+      justifyContent: "center",
+      borderRadius: 30,
+      height: 60,
+      alignItems: "center",
+    },
     saveButton: {
       backgroundColor: buttonBackgroundColor,
       padding: 10,
@@ -461,6 +470,7 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
       height: 60,
       alignItems: "center",
     },
+
     submitButtonText: {
       color: textColor,
       fontSize: 16,

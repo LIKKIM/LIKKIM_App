@@ -214,7 +214,7 @@ const VaultScreenStyles = (isDarkMode) => {
       width: "90%",
       backgroundColor: modalBackgroundColor,
       borderRadius: 20,
-      padding: 35,
+      padding: 30,
       justifyContent: "space-between",
       alignItems: "center",
     },
@@ -356,9 +356,9 @@ const VaultScreenStyles = (isDarkMode) => {
 
     linearGradient: {
       flex: 1,
-      height:Dimensions.get("window").height,
+      height: Dimensions.get("window").height,
       backgroundColor: backgroundColor,
-     
+
       alignItems: "center",
       justifyContent: "center",
     },

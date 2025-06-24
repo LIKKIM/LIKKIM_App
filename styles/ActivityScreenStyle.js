@@ -221,7 +221,7 @@ const ActivityScreenStyles = (isDarkMode) => {
       width: "90%",
       backgroundColor: modalBackgroundColor,
       borderRadius: 20,
-      padding: 35,
+      padding: 30,
       justifyContent: "space-between",
       alignItems: "center",
     },

@@ -53,7 +53,7 @@ const notifyCharacteristicUUID = bluetoothConfig.notifyCharacteristicUUID;
 if (__DEV__) {
   import("./ReactotronConfig").then(() => console.log("Reactotron Configured"));
 }
-if(__DEV__){
+if (__DEV__) {
   require("./utils/dev_fetch");
 }
 //by will: 阻止自动隐藏 splash screen
@@ -63,7 +63,6 @@ const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 export default function App() {
-  
   const { t } = useTranslation();
   const [isFirstLaunch, setIsFirstLaunch] = useState(null);
   const [headerDropdownVisible, setHeaderDropdownVisible] = useState(false);
@@ -924,6 +923,7 @@ function AppContent({
         handleDevicePress={handleDevicePress}
         onCancel={handleCancel}
         verifiedDevices={verifiedDevices}
+        onRefreshPress={scanDevices}
       />
       {/* PIN Modal */}
       <SecurityCodeModal
@@ -945,9 +945,7 @@ function AppContent({
         onConfirm={confirmDisconnect}
         onCancel={cancelDisconnect}
       />
-      {
-        __DEV__ && <FloatingDev />
-      }
+      {__DEV__ && <FloatingDev />}
     </View>
   );
 }

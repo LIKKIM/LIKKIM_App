@@ -15,6 +15,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useTranslation } from "react-i18next";
 import { DarkModeContext } from "../../utils/DeviceContext";
 import SecureDeviceScreenStyles from "../../styles/SecureDeviceScreenStyle";
+
 const BluetoothModal = ({
   visible,
   devices,
@@ -23,6 +24,7 @@ const BluetoothModal = ({
   onCancel,
   verifiedDevices,
   onDisconnectPress,
+  onRefreshPress,
 }) => {
   const { t } = useTranslation();
   const { isDarkMode, setIsDarkMode } = useContext(DarkModeContext);
@@ -216,14 +218,56 @@ const BluetoothModal = ({
               </Text>
             </View>
           )}
-          <TouchableOpacity
-            style={SecureDeviceScreenStyle.cancelButtonLookingFor}
-            onPress={onCancel}
-          >
-            <Text style={SecureDeviceScreenStyle.cancelButtonText}>
-              {t("Cancel")}
-            </Text>
-          </TouchableOpacity>
+
+          {!isScanning ? (
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "flex-end",
+                marginTop: 20,
+              }}
+            >
+              <TouchableOpacity
+                style={[
+                  SecureDeviceScreenStyle.cancelButton,
+                  {
+                    flex: 1,
+                    borderRadius: 15,
+                    marginRight: 10,
+                  },
+                ]}
+                onPress={onCancel}
+              >
+                <Text style={SecureDeviceScreenStyle.cancelButtonText}>
+                  {t("Cancel")}
+                </Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={[
+                  SecureDeviceScreenStyle.confirmButton,
+                  {
+                    flex: 1,
+                    borderRadius: 15,
+                  },
+                ]}
+                onPress={onRefreshPress}
+              >
+                <Text style={SecureDeviceScreenStyle.cancelButtonText}>
+                  {t("Refresh")}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          ) : (
+            <TouchableOpacity
+              style={SecureDeviceScreenStyle.cancelButtonLookingFor}
+              onPress={onCancel}
+            >
+              <Text style={SecureDeviceScreenStyle.cancelButtonText}>
+                {t("Cancel")}
+              </Text>
+            </TouchableOpacity>
+          )}
         </View>
       </BlurView>
     </Modal>
