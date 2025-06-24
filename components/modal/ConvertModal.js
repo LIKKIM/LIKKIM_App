@@ -278,7 +278,21 @@ const ConvertModal = ({
       }
     });
   }, [toDropdownVisible, selectedFromToken, chainLayouts]);
-
+  useEffect(() => {
+    if (visible) {
+      // 清空所有输入和选择
+      setSelectedFromToken(null);
+      setSelectedToToken(null);
+      setFromValue("");
+      setToValue("");
+      setSearchFromToken("");
+      setSearchToToken("");
+      setSelectedChain("All");
+      setSelectedToChain("All");
+      setConvertRate("");
+      setChainLayouts({});
+    }
+  }, [visible]);
   return (
     <>
       {/* Convert Modal */}
