@@ -297,11 +297,11 @@ const ConvertModal = ({
           >
             <BlurView intensity={10} style={ActivityScreenStyle.centeredView}>
               <View
-                style={ActivityScreenStyle.modalView}
+                style={ActivityScreenStyle.ConvertModalView}
                 onStartShouldSetResponder={() => true}
               >
                 {/* From Section */}
-                <View style={{ zIndex: 20 }}>
+                <View style={{ zIndex: 20, marginBottom: 30 }}>
                   <View style={{ alignItems: "flex-start", width: "100%" }}>
                     <Text
                       style={[
@@ -580,25 +580,30 @@ const ConvertModal = ({
                 </View>
 
                 {/* Convert Button */}
-                <TouchableOpacity
-                  style={ActivityScreenStyle.swapButton}
-                  onPress={() => {
-                    // Convert values
-                    const tempValue = fromValue;
-                    setFromValue(toValue);
-                    setToValue(tempValue);
-
-                    // Convert selected tokens
-                    const tempToken = selectedFromToken;
-                    setSelectedFromToken(selectedToToken);
-                    setSelectedToToken(tempToken);
+                <View
+                  style={{
+                    marginBottom: 30,
+                    alignItems: "flex-end",
+                    width: "100%",
                   }}
                 >
-                  <Icon name="swap-vert" size={24} color="#fff" />
-                </TouchableOpacity>
+                  <TouchableOpacity
+                    style={ActivityScreenStyle.swapButton}
+                    onPress={() => {
+                      const tempValue = fromValue;
+                      setFromValue(toValue);
+                      setToValue(tempValue);
 
+                      const tempToken = selectedFromToken;
+                      setSelectedFromToken(selectedToToken);
+                      setSelectedToToken(tempToken);
+                    }}
+                  >
+                    <Icon name="swap-vert" size={24} color="#fff" />
+                  </TouchableOpacity>
+                </View>
                 {/* To Section */}
-                <View style={{ zIndex: 10 }}>
+                <View style={{ zIndex: 10, marginBottom: 20 }}>
                   <View style={{ alignItems: "flex-start", width: "100%" }}>
                     <Text
                       style={[
@@ -908,7 +913,11 @@ const ConvertModal = ({
                     onPress={() => setConvertModalVisible(false)}
                     style={[
                       ActivityScreenStyle.cancelButton,
-                      { flex: 1, marginRight: 10 },
+                      {
+                        flex: 1,
+                        marginRight: 10,
+                        borderRadius: 15,
+                      },
                     ]}
                   >
                     <Text style={ActivityScreenStyle.cancelButtonText}>
@@ -929,6 +938,7 @@ const ConvertModal = ({
                       {
                         flex: 1,
                         marginLeft: 10,
+                        borderRadius: 15,
                         backgroundColor: !(
                           selectedFromToken &&
                           selectedToToken &&
