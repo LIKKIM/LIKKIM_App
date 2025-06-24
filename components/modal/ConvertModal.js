@@ -317,14 +317,6 @@ const ConvertModal = ({
                 {/* From Section */}
                 <View style={{ zIndex: 20, marginBottom: 30 }}>
                   <View style={{ alignItems: "flex-start", width: "100%" }}>
-                    <Text
-                      style={[
-                        ActivityScreenStyle.modalTitle,
-                        { marginBottom: 6 },
-                      ]}
-                    >
-                      {t("From")}
-                    </Text>
                     <View style={ActivityScreenStyle.swapInputContainer}>
                       <View
                         style={{
@@ -338,7 +330,7 @@ const ConvertModal = ({
                           style={[
                             ActivityScreenStyle.swapInput,
                             {
-                              fontSize: 30,
+                              fontSize: 26,
                               fontWeight: "bold",
                               textAlign: "left",
                             },
@@ -363,38 +355,48 @@ const ConvertModal = ({
                           {`${currencySymbol}${displayedFromValue}`}
                         </Text>
                       </View>
-                      <TouchableOpacity
-                        style={ActivityScreenStyle.tokenSelect}
-                        onPress={() => {
-                          setFromDropdownVisible(!fromDropdownVisible);
-                          setToDropdownVisible(false);
-                        }}
-                      >
-                        {/* Display token icon and name */}
-                        {selectedFromToken ? (
-                          <>
-                            <Image
-                              source={
-                                getTokenDetails(selectedFromToken)?.chainIcon
-                              }
-                              style={{
-                                width: 30,
-                                height: 30,
-                                borderRadius: 10,
-                                marginRight: 8,
-                              }}
-                            />
+                      <View>
+                        <Text
+                          style={[
+                            ActivityScreenStyle.modalTitle,
+                            { marginBottom: 6 },
+                          ]}
+                        >
+                          {t("From")}
+                        </Text>
+                        <TouchableOpacity
+                          style={ActivityScreenStyle.tokenSelect}
+                          onPress={() => {
+                            setFromDropdownVisible(!fromDropdownVisible);
+                            setToDropdownVisible(false);
+                          }}
+                        >
+                          {/* Display token icon and name */}
+                          {selectedFromToken ? (
+                            <>
+                              <Image
+                                source={
+                                  getTokenDetails(selectedFromToken)?.chainIcon
+                                }
+                                style={{
+                                  width: 30,
+                                  height: 30,
+                                  borderRadius: 10,
+                                  marginRight: 8,
+                                }}
+                              />
+                              <Text style={ActivityScreenStyle.subtitleText}>
+                                {getTokenDetails(selectedFromToken)?.name}
+                              </Text>
+                            </>
+                          ) : (
                             <Text style={ActivityScreenStyle.subtitleText}>
-                              {getTokenDetails(selectedFromToken)?.name}
+                              {t("Select token")}
                             </Text>
-                          </>
-                        ) : (
-                          <Text style={ActivityScreenStyle.subtitleText}>
-                            {t("Select token")}
-                          </Text>
-                        )}
-                        <Icon name="arrow-drop-down" size={24} color="#ccc" />
-                      </TouchableOpacity>
+                          )}
+                          <Icon name="arrow-drop-down" size={24} color="#ccc" />
+                        </TouchableOpacity>
+                      </View>
                     </View>
                   </View>
 
@@ -620,14 +622,6 @@ const ConvertModal = ({
                 {/* To Section */}
                 <View style={{ zIndex: 10, marginBottom: 20 }}>
                   <View style={{ alignItems: "flex-start", width: "100%" }}>
-                    <Text
-                      style={[
-                        ActivityScreenStyle.modalTitle,
-                        { marginBottom: 6, marginTop: -32 },
-                      ]}
-                    >
-                      {t("To")}
-                    </Text>
                     <View style={ActivityScreenStyle.swapInputContainer}>
                       <View
                         style={{
@@ -642,7 +636,7 @@ const ConvertModal = ({
                           style={[
                             ActivityScreenStyle.swapInput,
                             {
-                              fontSize: 30,
+                              fontSize: 26,
                               fontWeight: "bold",
                               textAlign: "left",
                             },
@@ -667,38 +661,48 @@ const ConvertModal = ({
                           {`${currencySymbol}${displayedToValue}`}
                         </Text>
                       </View>
-                      <TouchableOpacity
-                        style={ActivityScreenStyle.tokenSelect}
-                        onPress={() => {
-                          setToDropdownVisible(!toDropdownVisible);
-                          setFromDropdownVisible(false);
-                        }}
-                      >
-                        {/* Display token icon and name */}
-                        {selectedToToken ? (
-                          <>
-                            <Image
-                              source={
-                                getTokenDetails(selectedToToken)?.chainIcon
-                              }
-                              style={{
-                                width: 30,
-                                height: 30,
-                                borderRadius: 10,
-                                marginRight: 8,
-                              }}
-                            />
+                      <View>
+                        <Text
+                          style={[
+                            ActivityScreenStyle.modalTitle,
+                            { marginBottom: 6 },
+                          ]}
+                        >
+                          {t("To")}
+                        </Text>
+                        <TouchableOpacity
+                          style={ActivityScreenStyle.tokenSelect}
+                          onPress={() => {
+                            setToDropdownVisible(!toDropdownVisible);
+                            setFromDropdownVisible(false);
+                          }}
+                        >
+                          {/* Display token icon and name */}
+                          {selectedToToken ? (
+                            <>
+                              <Image
+                                source={
+                                  getTokenDetails(selectedToToken)?.chainIcon
+                                }
+                                style={{
+                                  width: 30,
+                                  height: 30,
+                                  borderRadius: 10,
+                                  marginRight: 8,
+                                }}
+                              />
+                              <Text style={ActivityScreenStyle.subtitleText}>
+                                {getTokenDetails(selectedToToken)?.name}
+                              </Text>
+                            </>
+                          ) : (
                             <Text style={ActivityScreenStyle.subtitleText}>
-                              {getTokenDetails(selectedToToken)?.name}
+                              {t("Select token")}
                             </Text>
-                          </>
-                        ) : (
-                          <Text style={ActivityScreenStyle.subtitleText}>
-                            {t("Select token")}
-                          </Text>
-                        )}
-                        <Icon name="arrow-drop-down" size={24} color="#ccc" />
-                      </TouchableOpacity>
+                          )}
+                          <Icon name="arrow-drop-down" size={24} color="#ccc" />
+                        </TouchableOpacity>
+                      </View>
                     </View>
                   </View>
 

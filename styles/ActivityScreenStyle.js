@@ -102,9 +102,11 @@ const ActivityScreenStyles = (isDarkMode) => {
     },
     swapInput: {
       width: "100%",
-      height: 40,
+      minHeight: 40,
+      maxHeight: 80,
       paddingHorizontal: 10,
       color: textColor,
+      textAlignVertical: "top",
     },
     tokenSelect: {
       alignSelf: "stretch",
@@ -112,7 +114,6 @@ const ActivityScreenStyles = (isDarkMode) => {
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "space-between",
-      paddingHorizontal: 10,
     },
     tokenSelectText: {
       color: "#fff",
