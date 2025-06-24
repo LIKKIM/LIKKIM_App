@@ -1023,7 +1023,7 @@ const ConvertModal = ({
                   style={ActivityScreenStyle.optionButton}
                   onPress={async () => {
                     setConfirmModalVisible(false);
-                    await handleConfirmConvert(); // 🔥这里才真正去发起交易
+                    await handleConfirmConvert();
                   }}
                 >
                   <Text style={ActivityScreenStyle.submitButtonText}>
