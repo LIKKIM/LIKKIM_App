@@ -348,6 +348,7 @@ const ConvertModal = ({
                           placeholder={t("0.0")}
                           placeholderTextColor="#aaa"
                           keyboardType="numeric"
+                          multiline={true}
                         />
                         <Text
                           style={[
@@ -651,6 +652,7 @@ const ConvertModal = ({
                           placeholder={t("0.0")}
                           placeholderTextColor="#aaa"
                           keyboardType="numeric"
+                          multiline={true}
                         />
                         <Text
                           style={[
