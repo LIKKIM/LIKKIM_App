@@ -896,19 +896,39 @@ const ConvertModal = ({
                     {exchangeRate} {getTokenDetails(selectedToToken)?.symbol}
                   </Text>
                 )}
-                <View>
-                  {/* Confirm Button */}
+                <View
+                  style={{
+                    marginTop: 20,
+                    width: "100%",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <TouchableOpacity
+                    onPress={() => setConvertModalVisible(false)}
+                    style={[
+                      ActivityScreenStyle.cancelButton,
+                      { flex: 1, marginRight: 10 },
+                    ]}
+                  >
+                    <Text style={ActivityScreenStyle.cancelButtonText}>
+                      {t("Close")}
+                    </Text>
+                  </TouchableOpacity>
+
                   <TouchableOpacity
                     disabled={
                       !(selectedFromToken && selectedToToken && fromValue)
                     }
                     onPress={() => {
-                      setConvertModalVisible(false); // ✅先关闭主Modal
-                      setConfirmModalVisible(true); // ✅打开二次确认Modal
+                      setConvertModalVisible(false);
+                      setConfirmModalVisible(true);
                     }}
                     style={[
                       ActivityScreenStyle.swapConfirmButton,
                       {
+                        flex: 1,
+                        marginLeft: 10,
                         backgroundColor: !(
                           selectedFromToken &&
                           selectedToToken &&
@@ -917,21 +937,11 @@ const ConvertModal = ({
                           ? disabledButtonBackgroundColor
                           : ActivityScreenStyle.swapConfirmButton
                               .backgroundColor,
-                        marginBottom: 20,
                       },
                     ]}
                   >
                     <Text style={ActivityScreenStyle.submitButtonText}>
                       {t("Confirm")}
-                    </Text>
-                  </TouchableOpacity>
-                  {/* Close Button */}
-                  <TouchableOpacity
-                    onPress={() => setConvertModalVisible(false)}
-                    style={[ActivityScreenStyle.cancelButton]}
-                  >
-                    <Text style={ActivityScreenStyle.cancelButtonText}>
-                      {t("Close")}
                     </Text>
                   </TouchableOpacity>
                 </View>
