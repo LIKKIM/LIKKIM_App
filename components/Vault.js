@@ -440,13 +440,11 @@ function VaultScreen({ route, navigation }) {
   }, [cryptoCards]);
 
   useEffect(() => {
-    if (modalVisible) {
-      Animated.timing(tabOpacity, {
-        toValue: 1,
-        duration: 400,
-        useNativeDriver: true,
-      }).start();
-    }
+    Animated.timing(tabOpacity, {
+      toValue: modalVisible ? 1 : 0,
+      duration: 600,
+      useNativeDriver: true,
+    }).start();
   }, [modalVisible]);
 
   // useEffect(() => {
