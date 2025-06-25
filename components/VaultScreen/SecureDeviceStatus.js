@@ -1155,6 +1155,7 @@ const SecureDeviceStatus = (props) => {
             justifyContent: "flex-end",
             alignItems: "flex-start",
             marginBottom: 10,
+            zIndex: 10,
           }}
         >
           {renderChainButton()}
@@ -1172,6 +1173,8 @@ const SecureDeviceStatus = (props) => {
         style={{
           width: "100%",
           borderRadius: 8,
+          zIndex: 0,
+          marginTop: 40,
         }}
         refreshControl={
           <RefreshControl
@@ -1312,6 +1315,7 @@ const SecureDeviceStatus = (props) => {
           </View>
         )}
       </ScrollView>
+
       <Modal
         animationType="slide"
         transparent={true}
