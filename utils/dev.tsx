@@ -408,7 +408,7 @@ const styles = StyleSheet.create({
   panel: {
     position: 'absolute',
     width: Dimensions.get('screen').width - 40,
-    bottom: 100,
+    bottom: 400,
     left: 20,
     right: 20,
     minHeight: 200,
