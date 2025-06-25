@@ -45,7 +45,7 @@ const ChainSelectionModal = ({
                 height: 500,
                 width: "90%",
                 borderRadius: 20,
-                padding: 35,
+                padding: 30,
                 alignItems: "center",
                 justifyContent: "space-between",
                 backgroundColor: isDarkMode ? "#21201E" : "#FFFFFF",

@@ -340,7 +340,7 @@ const styles = StyleSheet.create({
     margin: 20,
     backgroundColor: "#3F3D3C",
     borderRadius: 20,
-    padding: 35,
+    padding: 30,
     alignItems: "center",
     maxHeight: "60%",
     width: "80%",
