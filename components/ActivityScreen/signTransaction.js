@@ -180,7 +180,7 @@ const signTransaction = async (
     // 处理返回的结果
     // ---------------------------
     const walletParamsData = await walletParamsResponse.json();
-    console.log("getSignParam 返回的数据:", walletParamsData);
+    console.log("请求预签名数据 Param 的返回数据:", walletParamsData);
     // ✅ 在这里提前定义变量，供下面用
     let gasPrice,
       nonce,

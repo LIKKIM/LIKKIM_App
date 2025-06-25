@@ -239,7 +239,7 @@ const ActivityScreenStyles = (isDarkMode) => {
       borderWidth: 3,
       borderColor: buttonBackgroundColor,
       padding: 10,
-      width: 280,
+      width: "100%",
       justifyContent: "center",
       borderRadius: 30,
       height: 60,
