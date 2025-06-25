@@ -64,7 +64,7 @@ export const fetchPriceChanges = async (
       });
     }
   } catch (error) {
-    console.log("Error fetching price changes:", error);
+    //    console.log("Error fetching price changes:", error);
   } finally {
     setRefreshing(false);
   }
@@ -86,6 +86,8 @@ export const fetchWalletBalance = async (cryptoCards, setCryptoCards) => {
         address: card.address,
       };
 
+      //   console.log("POST to accountAPI.balance with data:", postData);
+
       const response = await fetch(accountAPI.balance, {
         method: "POST",
         headers: {
@@ -94,6 +96,8 @@ export const fetchWalletBalance = async (cryptoCards, setCryptoCards) => {
         body: JSON.stringify(postData),
       });
       const data = await response.json();
+
+      //      console.log("Response from accountAPI.balance:", data);
 
       if (data.code === "0" && data.data) {
         const { name, balance } = data.data;
@@ -106,6 +110,9 @@ export const fetchWalletBalance = async (cryptoCards, setCryptoCards) => {
           hasChange = true;
         }
       }
+
+      // 查询间隔500ms
+      await new Promise((resolve) => setTimeout(resolve, 500));
     }
     if (hasChange) {
       setCryptoCards(updatedCards);
