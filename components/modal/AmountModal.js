@@ -185,7 +185,7 @@ const AmountModal = ({
                 <Text style={ActivityScreenStyle.balanceLabel}>
                   {t("Entered Amount in")}
                 </Text>
-                <Text style={ActivityScreenStyle.balanceValue}>
+                <Text style={ActivityScreenStyle.balanceLabel}>
                   {currencyUnit}: {convertedAmount}
                 </Text>
               </View>
@@ -300,19 +300,19 @@ const AmountModal = ({
 
               {selectedFeeTab === "Recommended" ? (
                 <View style={{ marginBottom: 10 }}>
-                  <Text style={ActivityScreenStyle.balanceValue}>
+                  <Text style={ActivityScreenStyle.balanceLabel}>
                     {recommendedFee} {selectedCrypto} (Recommended)
                   </Text>
-                  <Text style={ActivityScreenStyle.balanceValue}>
+                  <Text style={ActivityScreenStyle.balanceLabel}>
                     ({currencyUnit} {recommendedValue})
                   </Text>
                 </View>
               ) : (
                 <View style={{ marginBottom: 10 }}>
-                  <Text style={ActivityScreenStyle.balanceValue}>
+                  <Text style={ActivityScreenStyle.balanceLabel}>
                     {rapidFeeValue} {selectedCrypto} (Rapid)
                   </Text>
-                  <Text style={ActivityScreenStyle.balanceValue}>
+                  <Text style={ActivityScreenStyle.balanceLabel}>
                     ({currencyUnit} {rapidCurrencyValue})
                   </Text>
                 </View>

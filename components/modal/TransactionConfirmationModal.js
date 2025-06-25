@@ -116,19 +116,19 @@ const TransactionConfirmationModal = ({
               <View>
                 {selectedFeeTab === "Recommended" ? (
                   <>
-                    <Text style={ActivityScreenStyle.balanceValue}>
+                    <Text style={ActivityScreenStyle.balanceLabel}>
                       {recommendedFee} {selectedCrypto} (Recommended)
                     </Text>
-                    <Text style={ActivityScreenStyle.balanceValue}>
+                    <Text style={ActivityScreenStyle.balanceLabel}>
                       ({currencyUnit} {recommendedValue})
                     </Text>
                   </>
                 ) : (
                   <>
-                    <Text style={ActivityScreenStyle.balanceValue}>
+                    <Text style={ActivityScreenStyle.balanceLabel}>
                       {rapidFeeValue} {selectedCrypto} (Rapid)
                     </Text>
-                    <Text style={ActivityScreenStyle.balanceValue}>
+                    <Text style={ActivityScreenStyle.balanceLabel}>
                       ({currencyUnit} {rapidCurrencyValue})
                     </Text>
                   </>
