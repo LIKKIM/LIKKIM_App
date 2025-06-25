@@ -1464,7 +1464,7 @@ function ActivityScreen() {
                   t,
                   monitorSignedResult
                 );
-              }, 10000);
+              }, 2000); // 等2秒进入签名步骤这一步本意是让用户在嵌入式上面输入密码
             } catch (error) {
               console.log("确认交易时出错:", error);
             }
