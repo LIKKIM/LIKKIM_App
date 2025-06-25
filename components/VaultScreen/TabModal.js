@@ -140,6 +140,7 @@ const TabModal = ({
                         <View
                           style={[
                             {
+                              borderRadius: 10,
                               backgroundColor:
                                 transaction.state.toLowerCase() === "success"
                                   ? "rgba(71, 180, 128, 0.05)"
