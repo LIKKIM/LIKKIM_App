@@ -66,11 +66,11 @@ const signTransaction = async (
     // 第2步：构造并发送第一步交易信息给设备
     // ---------------------------
     const senderAddress = paymentAddress;
-    const destinationAddress = inputAddress;
+    const receiveAddress = inputAddress;
     // 交易费用依赖外部变量：selectedFeeTab、recommendedFee、rapidFeeValue
     const transactionFee =
       selectedFeeTab === "Recommended" ? recommendedFee : rapidFeeValue;
-    const firstTradeMsg = `destinationAddress:${senderAddress},${destinationAddress},${transactionFee},${chainKey}`;
+    const firstTradeMsg = `destinationAddress:${senderAddress},${receiveAddress},${transactionFee},${chainKey}`;
     console.log("第一步交易信息发送:", firstTradeMsg);
     const firstTradeBuffer = Buffer.from(firstTradeMsg, "utf-8");
     const firstTradeBase64 = firstTradeBuffer.toString("base64");
