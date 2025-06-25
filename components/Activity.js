@@ -906,7 +906,7 @@ function ActivityScreen() {
   };
   //监听签名结果
   const monitorSignedResult = (device) => {
-    monitorSubscription = device.monitorCharacteristicForService(
+    monitorSubscription.current = device.monitorCharacteristicForService(
       serviceUUID,
       notifyCharacteristicUUID,
       async (error, characteristic) => {
@@ -1462,7 +1462,8 @@ function ActivityScreen() {
                   rapidFeeValue,
                   setModalStatus,
                   t,
-                  monitorSignedResult
+                  monitorSignedResult,
+                  monitorSubscription
                 );
               }, 2000); // 等2秒进入签名步骤这一步本意是让用户在嵌入式上面输入密码
             } catch (error) {

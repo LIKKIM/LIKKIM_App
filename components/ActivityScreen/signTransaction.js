@@ -37,7 +37,8 @@ const signTransaction = async (
   setModalStatus,
   t,
   monitorSignedResult,
-  skipSignedOK = true // 测试环境
+  skipSignedOK = true, // 测试环境
+  monitorSubscription
 ) => {
   try {
     if (!device?.isConnected) {
@@ -95,7 +96,7 @@ const signTransaction = async (
       console.log("等待设备发送 Signed_OK 命令...");
       const signedOkPromise = new Promise((resolve) => {
         let isResolved = false;
-        const subscription = device.monitorCharacteristicForService(
+        monitorSubscription.current = device.monitorCharacteristicForService(
           serviceUUID,
           notifyCharacteristicUUID,
           (error, characteristic) => {
@@ -110,7 +111,7 @@ const signTransaction = async (
             console.log("收到设备响应:", received);
             if (received === "Signed_OK" && !isResolved) {
               isResolved = true;
-              subscription.remove(); // 移除监听
+              monitorSubscription.current?.remove();
               // 更新 modalStatus 状态，表示设备已确认签名
               setModalStatus({
                 title: t("Device Confirmed"),
@@ -180,6 +181,20 @@ const signTransaction = async (
     // ---------------------------
     const walletParamsData = await walletParamsResponse.json();
     console.log("getSignParam 返回的数据:", walletParamsData);
+    // ✅ 在这里提前定义变量，供下面用
+    let gasPrice,
+      nonce,
+      gasLimit,
+      sequence,
+      utxoList,
+      maxGasAmount,
+      typeArg,
+      blockHash,
+      suiObjects,
+      epoch,
+      accountNumber,
+      effectiveFeeAmount,
+      heigh;
 
     if (
       !walletParamsData.data?.gasPrice ||
