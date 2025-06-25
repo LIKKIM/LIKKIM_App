@@ -25,13 +25,32 @@ export type ApiMonitorStats = {
 
 const ICON_SIZE = 50;
 
+import { convertAPI, accountAPI, metricsAPII, galleryAPI, meridianAPI, chartAPI, firmwareAPI, signAPI } from '../env/apiEndpoints';
+
 export const FloatingDev = {
   api: {
     getMonitorApiList: async () => {
       try {
+        const defaultApis = [
+          ...Object.entries(convertAPI).map(([name, url]) => ({ name, url, totalCount: 0 })),
+          ...Object.entries(accountAPI).map(([name, url]) => ({ name, url, totalCount: 0 })),
+          ...Object.entries(metricsAPII).map(([name, url]) => ({ name, url, totalCount: 0 })),
+          ...Object.entries(galleryAPI).map(([name, url]) => ({ name, url, totalCount: 0 })),
+          ...Object.entries(meridianAPI).map(([name, url]) => ({ name, url, totalCount: 0 })),
+          ...Object.entries(chartAPI).map(([name, url]) => ({ name, url, totalCount: 0 })),
+          ...Object.entries(firmwareAPI).map(([name, url]) => ({ name, url, totalCount: 0 })),
+          ...Object.entries(signAPI).map(([name, url]) => ({ name, url, totalCount: 0 })),
+        ];
+
         const currentData = await AsyncStorage.getItem('apiMonitorStats');
-        const apiData = currentData ? JSON.parse(currentData) : [];
-        return apiData;
+        const storedApis = currentData ? JSON.parse(currentData) : [];
+
+        // 合并默认和存储的 API，避免重复
+        const mergedApisMap = new Map();
+        defaultApis.forEach(api => mergedApisMap.set(api.url, api));
+        storedApis.forEach(api => mergedApisMap.set(api.url, api));
+
+        return Array.from(mergedApisMap.values());
       } catch (error) {
         console.error('Failed to get monitor API list:', error);
         return [];
