@@ -147,15 +147,28 @@ const signTransaction = async (
       }
     }
 
+    const postData = {
+      chain: postChain,
+      from: paymentAddress, // ← 建议用 "from" 替换 "address"，如果接口要求一致
+      to: inputAddress,
+      txAmount: String(amount),
+      extJson: {
+        // protocol: "1", // 可选是否注释
+      },
+    };
+
+    // 打印 POST 内容
+    console.log("准备发送 getSignParam 请求:");
+    console.log("URL:", accountAPI.getSignParam);
+    console.log("POST 数据:", JSON.stringify(postData, null, 2));
+
+    // 发起请求
     const walletParamsResponse = await fetch(accountAPI.getSignParam, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        chain: postChain,
-        address: paymentAddress,
-      }),
+      body: JSON.stringify(postData),
     });
 
     if (!walletParamsResponse.ok) {
