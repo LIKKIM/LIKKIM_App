@@ -621,10 +621,7 @@ const VaultScreenStyles = (isDarkMode) => {
       backgroundColor: modalBackgroundColor,
       borderRadius: 20,
       padding: 30,
-      flex: 1,
       justifyContent: "space-between",
-
-      maxHeight: 400,
     },
 
     pendingModalView: {

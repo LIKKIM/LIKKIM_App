@@ -1594,21 +1594,38 @@ const SecureDeviceStatus = (props) => {
                     onPress={handleOpenAddressBook} // 绑定点击事件
                   />
                 </View>
-                <TouchableOpacity
-                  style={[VaultScreenStyle.submitButton]}
-                  disabled={!recipientAddress}
-                  onPress={handlePreview}
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    marginTop: 20,
+                  }}
                 >
-                  <Text style={VaultScreenStyle.ButtonText}>{t("Next")}</Text>
-                </TouchableOpacity>
+                  {/* Close 按钮在左边 */}
+                  <TouchableOpacity
+                    style={[
+                      VaultScreenStyle.cancelButton,
+                      { borderRadius: 15, flex: 1, marginRight: 10 },
+                    ]}
+                    onPress={() => setSendModalVisible(false)}
+                  >
+                    <Text style={VaultScreenStyle.ButtonText}>
+                      {t("Cancel")}
+                    </Text>
+                  </TouchableOpacity>
 
-                {/* 关闭按钮 */}
-                <TouchableOpacity
-                  style={[VaultScreenStyle.cancelButton]}
-                  onPress={() => setSendModalVisible(false)}
-                >
-                  <Text style={VaultScreenStyle.ButtonText}>{t("Close")}</Text>
-                </TouchableOpacity>
+                  {/* Next 按钮在右边 */}
+                  <TouchableOpacity
+                    style={[
+                      VaultScreenStyle.submitButton,
+                      { borderRadius: 15, flex: 1, marginLeft: 10 },
+                    ]}
+                    disabled={!recipientAddress}
+                    onPress={handlePreview}
+                  >
+                    <Text style={VaultScreenStyle.ButtonText}>{t("Next")}</Text>
+                  </TouchableOpacity>
+                </View>
               </View>
             </BlurView>
           </TouchableWithoutFeedback>
@@ -1638,16 +1655,18 @@ const SecureDeviceStatus = (props) => {
                 style={{
                   width: "100%",
                   alignItems: "center",
+                  marginBottom: 20,
                 }}
               >
                 <Text style={VaultScreenStyle.modalTitle}>
-                  {props.t("Preview Transaction")}
+                  {props.t("Waiting for Confirmation")}
                 </Text>
               </View>
               <View
                 style={{
                   flexDirection: "row",
                   alignItems: "flex-start",
+                  marginBottom: 20,
                 }}
               >
                 {selectedNFT?.logoUrl && (
@@ -1682,33 +1701,50 @@ const SecureDeviceStatus = (props) => {
               </View>
 
               <Text style={[{ color: isDarkMode ? "#fff" : "#000" }]}>
-                {props.t("Recipient Address")}
+                {`${props.t("Recipient Address")}:`}
               </Text>
 
               <Text style={[{ color: isDarkMode ? "#fff" : "#000" }]}>
                 {recipientAddress || props.t("No Address Selected")}
               </Text>
               <View>
-                <TouchableOpacity
-                  style={VaultScreenStyle.submitButton}
-                  disabled={!recipientAddress}
-                  onPress={() => {
-                    onPress = { handleSendPress };
-                    setPreviewModalVisible(false);
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    marginTop: 20,
                   }}
                 >
-                  <Text style={VaultScreenStyle.ButtonText}>
-                    {props.t("Send")}
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={VaultScreenStyle.cancelButton}
-                  onPress={() => setPreviewModalVisible(false)}
-                >
-                  <Text style={VaultScreenStyle.ButtonText}>
-                    {props.t("Close")}
-                  </Text>
-                </TouchableOpacity>
+                  {/* Close 按钮在左 */}
+                  <TouchableOpacity
+                    style={[
+                      VaultScreenStyle.cancelButton,
+                      { borderRadius: 15, flex: 1, marginRight: 8 },
+                    ]}
+                    onPress={() => setPreviewModalVisible(false)}
+                  >
+                    <Text style={VaultScreenStyle.ButtonText}>
+                      {props.t("Close")}
+                    </Text>
+                  </TouchableOpacity>
+
+                  {/* Send 按钮在右 */}
+                  <TouchableOpacity
+                    style={[
+                      VaultScreenStyle.submitButton,
+                      { borderRadius: 15, flex: 1, marginLeft: 8 },
+                    ]}
+                    disabled={!recipientAddress}
+                    onPress={() => {
+                      handleSendPress(); // ✅ 直接调用，不需要 `onPress = { ... }`
+                      setPreviewModalVisible(false);
+                    }}
+                  >
+                    <Text style={VaultScreenStyle.ButtonText}>
+                      {props.t("Send")}
+                    </Text>
+                  </TouchableOpacity>
+                </View>
               </View>
             </View>
           </BlurView>
