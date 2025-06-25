@@ -124,7 +124,7 @@ const signTransaction = async (
     await signedOkPromise;
     console.log("设备确认回复: Signed_OK");
     // ---------------------------
-    // 第4步：获取 nonce 和 gasPrice 等参数，真正开启签名流程
+    // 第4步：为了获得下一步请求预签名数据的参数向服务器获取 nonce 和 gasPrice 等参数，真正开启签名流程
     // ---------------------------
     let postChain = selectedQueryChainName;
     for (const [defaultChain, chains] of Object.entries(chainGroups)) {
@@ -227,7 +227,7 @@ const signTransaction = async (
     }
 
     // ---------------------------
-    // 第5步：构造 POST 请求数据并调用签名编码接口
+    // 第5步 向服务器 POST 并获得预签名数据
     // ---------------------------
     const getChainMappingMethod = (chainKey) => {
       if (families.evm.includes(chainKey)) return "evm";
@@ -375,12 +375,12 @@ const signTransaction = async (
     });
 
     const responseData = await response.json();
-    console.log("交易请求返回的数据:", responseData);
+    console.log("交易请求返回的预签名数据:", responseData);
 
     monitorSignedResult(device);
 
     // ---------------------------
-    // 第6步：构造并发送 sign 消息
+    // 第6步：构造并发送预签名数据 sign 数据（发送presign数据）
     // ---------------------------
     if (responseData?.data?.data) {
       const signMessage = `sign:${chainKey},${path},${responseData.data.data}`;
