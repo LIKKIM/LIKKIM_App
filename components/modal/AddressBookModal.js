@@ -211,7 +211,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                 style={[
                   styles.addressModalView,
                   { justifyContent: "space-between" },
-                  !isAddingAddress && { height: 480 },
+                  !isAddingAddress && { height: 380 },
                   { backgroundColor: isDarkMode ? "#3F3D3C" : "#ffffff" },
                 ]}
               >
