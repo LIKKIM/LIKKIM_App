@@ -1013,7 +1013,8 @@ function VaultScreen({ route, navigation }) {
     setModalVisible(false);
     setDeleteConfirmVisible(false);
     setSelectedCardIndex(null);
-    modalAnim.setValue(0); // 重置动画
+    modalAnim.setValue(0);
+    balanceAnim.setValue(1);
     navigation.setParams({ showDeleteConfirmModal: false });
   };
 
