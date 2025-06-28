@@ -1022,6 +1022,8 @@ function VaultScreen({ route, navigation }) {
   const [cardsOffset, setCardsOffset] = useState([]);
   const selectCardOffsetOpenAni = useAnimatedValue(0);
   const selectCardOffsetCloseAni = useAnimatedValue(0);
+  //修复bug：当前一张卡片动画未完全结束，点击下一张卡片，导致动画offset异常
+  const [cardAnimationIsFinished, setCardAnimationIsFinished] = useState(true);
 
   //计算弹簧参数，模仿iPhone Wallet点击卡片归位动画
   const computeSpringConfig = (index, total = 30) => {
@@ -1036,6 +1038,7 @@ function VaultScreen({ route, navigation }) {
   };
   const closeModal = () => {
     setCardInfoVisible(false);
+    setCardAnimationIsFinished(false);
     cardRefs.current[selectedCardIndex]?.setNativeProps({
       style: { zIndex: 0 },
     });
@@ -1074,7 +1077,10 @@ function VaultScreen({ route, navigation }) {
     Animated.spring(modalAnim, {
       toValue: 0,
       useNativeDriver: true,
-    }).start();
+    }).start(() => {
+      //动画完成后恢复状态
+      setCardAnimationIsFinished(true);
+    });
 
     setTimeout(() => {
       setSelectedCardIndex(null);
@@ -1082,12 +1088,16 @@ function VaultScreen({ route, navigation }) {
   };
 
   //动画分成了：背景，弹窗，卡片，余额四部分
-  const handleCardPress = (cryptoName, cryptoChain, index) => {
+  const handleCardPress = async (cryptoName, cryptoChain, index) => {
     console.log(cardsOffset);
     if (cardsOffset[index] === undefined) {
       console.log("卡片偏移未测量完成过早点击，需要处理");
       return;
     }
+
+    const _py = cardsOffset[index];
+    console.log("_py", _py);
+    
 
     const crypto = cryptoCards?.find(
       (card) => card.name === cryptoName && card.chain === cryptoChain
@@ -1099,6 +1109,14 @@ function VaultScreen({ route, navigation }) {
     setSelectedCardName(cryptoName);
     setSelectedCardChain(cryptoChain);
     setSelectedCrypto(crypto);
+
+
+    if (!cardAnimationIsFinished) {
+      console.log("卡片动画未完成，延迟200ms");
+      await new Promise((resolve) => setTimeout(resolve, 200));
+      console.log('延迟200ms后:等待上次动画结束触发下一次点击')
+     
+    }
 
     setModalVisible(true); //打开Modal
     setSelectedCardIndex(index); //设置选中的卡片索引
@@ -1114,6 +1132,8 @@ function VaultScreen({ route, navigation }) {
       bounciness: py > 500 ? 4 : 7,
       speed: py > 500 ? 5 : 8,
     }).start();
+
+   
 
     Animated.parallel([
       Animated.timing(modalAnim, {
