@@ -889,7 +889,11 @@ const SecureDeviceStatus = (props) => {
       scrollEventThrottle={16}
       refreshControl={
         cryptoCards.length > 0 && (
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            progressViewOffset={10}
+          />
         )
       }
     >
@@ -1186,6 +1190,7 @@ const SecureDeviceStatus = (props) => {
                 new Promise((resolve) => setTimeout(resolve, 3000)),
               ]).finally(() => setGalleryRefreshing(false));
             }}
+            progressViewOffset={10}
           />
         }
       >

@@ -170,7 +170,11 @@ export default function PriceChartCom({
   return (
     <ScrollView
       refreshControl={
-        <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
+        <RefreshControl
+          refreshing={isRefreshing}
+          onRefresh={onRefresh}
+          progressViewOffset={10}
+        />
       }
     >
       <View style={{ marginVertical: 10 }}>

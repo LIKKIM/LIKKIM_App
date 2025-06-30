@@ -203,7 +203,11 @@ const ActivityLogComponent = ({
               : "flex-start",
         }}
         refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            progressViewOffset={10}
+          />
         }
         renderItem={({ item: transaction, index }) => {
           // ========== 匹配币种与链图标 ==========
