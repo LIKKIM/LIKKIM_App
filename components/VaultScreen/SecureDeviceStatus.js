@@ -869,6 +869,7 @@ const SecureDeviceStatus = (props) => {
 
   return selectedView === "wallet" ? (
     <ScrollView
+      scrollEnabled={!modalVisible}
       showsVerticalScrollIndicator={false}
       showsHorizontalScrollIndicator={false}
       ref={scrollViewRef}
