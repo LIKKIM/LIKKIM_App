@@ -9,6 +9,7 @@ import {
   Platform,
   Modal,
   Dimensions,
+  RefreshControl,
 } from "react-native";
 import PriceChartCom from "../VaultScreen/PriceChartCom";
 import { LinearGradient } from "expo-linear-gradient";
@@ -32,6 +33,49 @@ const TabModal = ({
   const [ActivityLog, setActivityLog] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedTransaction, setSelectedTransaction] = useState(null);
+  const [historyRefreshing, setHistoryRefreshing] = useState(false);
+  const onHistoryRefresh = async () => {
+    setHistoryRefreshing(true);
+    try {
+      const response = await fetch(accountAPI.queryTransaction, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          chain: selectedCrypto.queryChainName,
+          address: selectedCrypto.address,
+          page: 1,
+          pageSize: 10,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || data.msg !== "success") {
+        setActivityLog([]);
+      } else {
+        const enhancedData = data.data.map((transaction) => ({
+          ...transaction,
+          transactionType:
+            transaction.from === selectedCrypto.address ? "Send" : "Receive",
+          state: transaction.state,
+          amount: transaction.amount,
+          address: transaction.address,
+          fromAddress: transaction.fromAddress,
+          toAddress: transaction.toAddress,
+          symbol: transaction.symbol,
+          transactionTime: transaction.transactionTime,
+        }));
+
+        setActivityLog(enhancedData);
+        AsyncStorage.setItem("ActivityLog", JSON.stringify(enhancedData));
+      }
+    } catch (error) {
+      setActivityLog([]);
+    }
+    setHistoryRefreshing(false);
+  };
 
   useEffect(() => {
     const fetchActivityLog = async () => {
@@ -114,7 +158,31 @@ const TabModal = ({
                 alignItems: "center",
               }}
             >
-              <ScrollView style={VaultScreenStyle.historyList}>
+              <ScrollView
+                style={VaultScreenStyle.historyList}
+                refreshControl={
+                  <RefreshControl
+                    refreshing={historyRefreshing}
+                    onRefresh={onHistoryRefresh}
+                    progressViewOffset={-20}
+                  />
+                }
+              >
+                <View
+                  style={{
+                    position: "absolute",
+                    top: -30,
+                    left: 0,
+                    right: 0,
+                    alignItems: "center",
+                  }}
+                >
+                  <Text style={{ color: isDarkMode ? "#fff" : "#888" }}>
+                    {historyRefreshing
+                      ? t("Refreshing…")
+                      : t("Pull down to refresh")}
+                  </Text>
+                </View>
                 {ActivityLog.length === 0 ? (
                   <View
                     style={{
