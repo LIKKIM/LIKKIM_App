@@ -1089,32 +1089,44 @@ function VaultScreen({ route, navigation }) {
       return;
     }
 
-    const crypto = cryptoCards?.find(
+    // 查到这张卡片的数据
+    const crypto = cryptoCards.find(
       (card) => card.name === cryptoName && card.chain === cryptoChain
     );
+
+    // 先把动画值复位到 0，避免上一次动画遗留的值
+    selectCardOffsetOpenAni.setValue(0);
+
+    // 更新状态
     setSelectedCardChainShortName(crypto.chainShortName);
-    //记录点击前的滚动位置：TODO 后续如果需要自动滚回去，可以使用。
     setLastScrollYOffset(scrollYOffset.current);
     setSelectedAddress(crypto.address);
     setSelectedCardName(cryptoName);
     setSelectedCardChain(cryptoChain);
     setSelectedCrypto(crypto);
 
-    setModalVisible(true); //打开Modal
-    setSelectedCardIndex(index); //设置选中的卡片索引
-    const py = cardsOffset[index]; //获取卡片的偏移
-    cardStartPositions.current[index] = py; // 记录每个卡片的初始位置
-    setCardInfoVisible(true); // 延迟显示卡片信息
-    cardRefs.current[index].setNativeProps({ style: { zIndex: 3 } });
+    // 打开 Modal，并标记当前选中的卡片索引
+    setModalVisible(true);
+    setSelectedCardIndex(index);
 
-    //TODO 这里可能需要调整细节
+    // 记录初始位置
+    const py = cardsOffset[index];
+    cardStartPositions.current[index] = py;
+
+    // 确保这张卡在最上层
+    setCardInfoVisible(true);
+    cardRefs.current[index]?.setNativeProps({ style: { zIndex: 3 } });
+
+    // 弹性动画：从 0 → 目标偏移
+    const baseOffset = Platform.OS === "ios" ? 76 : 56;
     Animated.spring(selectCardOffsetOpenAni, {
-      toValue: -py + (Platform.OS === "ios" ? 76 : 56),
+      toValue: -py + baseOffset,
       useNativeDriver: true,
       bounciness: py > 500 ? 4 : 7,
       speed: py > 500 ? 5 : 8,
     }).start();
 
+    // 其它并行动画
     Animated.parallel([
       Animated.timing(modalAnim, {
         toValue: 1,
@@ -1122,14 +1134,14 @@ function VaultScreen({ route, navigation }) {
         duration: 300,
       }),
       Animated.timing(balanceAnim, {
-        toValue: 0, // 总余额部分完全透明
-        duration: 300,
+        toValue: 0,
         useNativeDriver: true,
+        duration: 300,
       }),
       Animated.timing(backgroundAnim, {
-        toValue: 1, // 弹窗背景完全可见
-        duration: 300,
+        toValue: 1,
         useNativeDriver: true,
+        duration: 300,
       }),
     ]).start();
   };
