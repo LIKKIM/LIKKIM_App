@@ -209,6 +209,21 @@ const ActivityLogComponent = ({
             progressViewOffset={-20}
           />
         }
+        ListHeaderComponent={
+          <View
+            style={{
+              position: "absolute",
+              top: -30,
+              left: 0,
+              right: 0,
+              alignItems: "center",
+            }}
+          >
+            <Text style={{ color: isDarkMode ? "#fff" : "#888" }}>
+              {refreshing ? t("Refreshing…") : t("Pull down to refresh")}
+            </Text>
+          </View>
+        }
         renderItem={({ item: transaction, index }) => {
           // ========== 匹配币种与链图标 ==========
           const matchedItems = initialAdditionalCryptos.filter((item) => {
