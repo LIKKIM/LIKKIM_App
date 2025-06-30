@@ -892,11 +892,24 @@ const SecureDeviceStatus = (props) => {
           <RefreshControl
             refreshing={refreshing}
             onRefresh={onRefresh}
-            progressViewOffset={10}
+            progressViewOffset={-20}
           />
         )
       }
     >
+      <View
+        style={{
+          position: "absolute",
+          top: -30,
+          left: 0,
+          right: 0,
+          alignItems: "center",
+        }}
+      >
+        <Text style={{ color: isDarkMode ? "#fff" : "#888" }}>
+          {refreshing ? t("Refreshing…") : t("Pull down to refresh")}
+        </Text>
+      </View>
       <Animated.View
         style={[
           VaultScreenStyle.totalBalanceContainer,
@@ -1190,10 +1203,23 @@ const SecureDeviceStatus = (props) => {
                 new Promise((resolve) => setTimeout(resolve, 3000)),
               ]).finally(() => setGalleryRefreshing(false));
             }}
-            progressViewOffset={10}
+            progressViewOffset={-20}
           />
         }
       >
+        <View
+          style={{
+            position: "absolute",
+            top: -30,
+            left: 0,
+            right: 0,
+            alignItems: "center",
+          }}
+        >
+          <Text style={{ color: isDarkMode ? "#fff" : "#888" }}>
+            {refreshing ? t("Refreshing…") : t("Pull down to refresh")}
+          </Text>
+        </View>
         {nftData && nftData.code === "0" && Array.isArray(nftData.data) ? (
           nftData.data.map((nft, index) => (
             <TouchableOpacity
