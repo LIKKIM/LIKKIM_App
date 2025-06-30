@@ -12,7 +12,6 @@ import {
   Animated,
   Easing,
   Platform,
-  RefreshControl,
   Dimensions,
   TouchableWithoutFeedback,
   TouchableHighlight,
@@ -201,7 +200,6 @@ function VaultScreen({ route, navigation }) {
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
-
     fetchPriceChanges(
       cryptoCards,
       setPriceChanges,
