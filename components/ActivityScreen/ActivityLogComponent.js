@@ -206,7 +206,7 @@ const ActivityLogComponent = ({
           <RefreshControl
             refreshing={refreshing}
             onRefresh={onRefresh}
-            progressViewOffset={10}
+            progressViewOffset={-20}
           />
         }
         renderItem={({ item: transaction, index }) => {
