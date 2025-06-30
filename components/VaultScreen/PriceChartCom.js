@@ -27,7 +27,7 @@ export default function PriceChartCom({
   const VaultScreenStyle = VaultScreenStyles(isDarkMode);
   const screenWidth = Dimensions.get("window").width;
 
-  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
   const load = useState(true);
   const [hasData, setHasData] = useState(true);
   const _selectPointData = useState();
@@ -143,8 +143,8 @@ export default function PriceChartCom({
   };
 
   const onRefresh = () => {
-    setIsRefreshing(true);
-    _getData().then(() => setIsRefreshing(false));
+    setRefreshing(true);
+    _getData().then(() => setRefreshing(false));
   };
 
   // Initialize the date selection and fetch data.
@@ -171,12 +171,25 @@ export default function PriceChartCom({
     <ScrollView
       refreshControl={
         <RefreshControl
-          refreshing={isRefreshing}
+          refreshing={refreshing}
           onRefresh={onRefresh}
-          progressViewOffset={10}
+          progressViewOffset={-20}
         />
       }
     >
+      <View
+        style={{
+          position: "absolute",
+          top: -30,
+          left: 0,
+          right: 0,
+          alignItems: "center",
+        }}
+      >
+        <Text style={{ color: isDarkMode ? "#fff" : "#888" }}>
+          {refreshing ? t("Refreshing…") : t("Pull down to refresh")}
+        </Text>
+      </View>
       <View style={{ marginVertical: 10 }}>
         <View style={{ height: 298 }}>
           {!hasData && !load[0] && (
