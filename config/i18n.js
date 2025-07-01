@@ -11,6 +11,8 @@ i18n
     resources: {
       en: {
         translation: {
+          "Refreshing…": "Refreshing…",
+          "Pull down to refresh": "Pull down to refresh",
           Gallery: "Gallery",
           "Get Started": "Get Started",
           Close: "Close",
@@ -182,6 +184,8 @@ i18n
       },
       zh: {
         translation: {
+          "Refreshing…": "正在刷新…",
+          "Pull down to refresh": "下拉刷新",
           Gallery: "画廊",
           "Enter amount:": "输入金额：",
           "Get Started": "开始使用",
@@ -346,6 +350,8 @@ i18n
       },
       "zh-TW": {
         translation: {
+          "Refreshing…": "正在重新整理…",
+          "Pull down to refresh": "下拉以重新整理",
           Gallery: "畫廊",
           "Enter amount:": "輸入金額：",
           "Get Started": "開始使用",
@@ -509,6 +515,8 @@ i18n
       },
       fr: {
         translation: {
+          "Refreshing…": "Actualisation…",
+          "Pull down to refresh": "Faites glisser vers le bas pour actualiser",
           Gallery: "Galerie",
           "Enter amount:": "Saisissez le montant :",
           "Get Started": "Commencer",
@@ -685,6 +693,8 @@ i18n
       },
       es: {
         translation: {
+          "Refreshing…": "Actualizando…",
+          "Pull down to refresh": "Desliza hacia abajo para actualizar",
           Gallery: "Galería",
           "Enter amount:": "Ingresa la cantidad:",
           "Get Started": "Empezar",
@@ -860,6 +870,8 @@ i18n
       },
       ar: {
         translation: {
+          "Refreshing…": "جارٍ التحديث…",
+          "Pull down to refresh": "اسحب للأسفل للتحديث",
           Gallery: "معرض",
           "Enter amount:": "أدخل المبلغ:",
           "Get Started": "ابدأ",
@@ -1028,6 +1040,8 @@ i18n
       },
       ja: {
         translation: {
+          "Refreshing…": "更新中…",
+          "Pull down to refresh": "下に引いて更新",
           Gallery: "ギャラリー",
           "Enter amount:": "金額を入力してください：",
           "Get Started": "始める",
@@ -1197,6 +1211,10 @@ i18n
       },
       ru: {
         translation: {
+          "Refreshing…": "새로고침 중…",
+          "Pull down to refresh": "아래로 당겨서 새로고침",
+          "Refreshing…": "Обновление…",
+          "Pull down to refresh": "Потяните вниз для обновления",
           Gallery: "Галерея",
           "Enter amount:": "Введите сумму:",
           "Get Started": "Начать",
@@ -1368,6 +1386,8 @@ i18n
       },
       ko: {
         translation: {
+          "Refreshing…": "새로고침 중…",
+          "Pull down to refresh": "아래로 당겨서 새로고침",
           Gallery: "갤러리",
           "Enter amount:": "금액 입력:",
           "Get Started": "시작하기",
@@ -1535,6 +1555,8 @@ i18n
       },
       pt: {
         translation: {
+          "Refreshing…": "Atualizando…",
+          "Pull down to refresh": "Puxe para atualizar",
           Gallery: "Galeria",
           "Enter amount:": "Digite o valor:",
           "Get Started": "Começar",
@@ -1709,6 +1731,8 @@ i18n
       },
       "pt-BR": {
         translation: {
+          "Refreshing…": "Atualizando…",
+          "Pull down to refresh": "Puxe para atualizar",
           Gallery: "Galeria",
           "Enter amount:": "Digite o valor:",
           "Get Started": "Começar",
@@ -1883,6 +1907,8 @@ i18n
       },
       it: {
         translation: {
+          "Refreshing…": "Aggiornamento…",
+          "Pull down to refresh": "Scorri verso il basso per aggiornare",
           Gallery: "Galleria",
           "Enter amount:": "Inserisci l'importo:",
           "Get Started": "Inizia",
@@ -2054,6 +2080,8 @@ i18n
       },
       de: {
         translation: {
+          "Refreshing…": "Aktualisierung…",
+          "Pull down to refresh": "Zum Aktualisieren nach unten ziehen",
           Gallery: "Galerie",
           "Enter amount:": "Betrag eingeben:",
           "Get Started": "Loslegen",
@@ -2229,6 +2257,8 @@ i18n
       },
       hi: {
         translation: {
+          "Refreshing…": "ताज़ा कर रहा है…",
+          "Pull down to refresh": "रिफ्रेश करने के लिए नीचे खींचें",
           Gallery: "गैलरी",
           "Enter amount:": "राशि दर्ज करें:",
           "Get Started": "शुरू करें",
@@ -2399,6 +2429,8 @@ i18n
       },
       mn: {
         translation: {
+          "Refreshing…": "Шинэчилж байна…",
+          "Pull down to refresh": "Шинэчлэхийн тулд доош татна уу",
           Gallery: "Галерей",
           "Enter amount:": "Дүнг оруулна уу:",
           "Get Started": "Эхлэх",
@@ -2571,6 +2603,8 @@ i18n
       },
       th: {
         translation: {
+          "Refreshing…": "กำลังรีเฟรช…",
+          "Pull down to refresh": "ดึงลงเพื่อรีเฟรช",
           Gallery: "แกลเลอรี",
           "Enter amount:": "กรอกจำนวนเงิน:",
           "Get Started": "เริ่มใช้งาน",
@@ -2739,6 +2773,8 @@ i18n
       },
       uk: {
         translation: {
+          "Refreshing…": "Оновлення…",
+          "Pull down to refresh": "Потягніть вниз, щоб оновити",
           Gallery: "Галерея",
           "Enter amount:": "Введіть суму:",
           "Get Started": "Розпочати",
@@ -2910,6 +2946,8 @@ i18n
       },
       vi: {
         translation: {
+          "Refreshing…": "Đang làm mới…",
+          "Pull down to refresh": "Kéo xuống để làm mới",
           Gallery: "Thư viện",
           "Enter amount:": "Nhập số tiền:",
           "Get Started": "Bắt đầu",
@@ -3075,6 +3113,8 @@ i18n
       },
       id: {
         translation: {
+          "Refreshing…": "Menyegarkan…",
+          "Pull down to refresh": "Tarik ke bawah untuk menyegarkan",
           Gallery: "Galeri",
           "Enter amount:": "Masukkan jumlah:",
           "Get Started": "Mulai",
@@ -3244,6 +3284,8 @@ i18n
       },
       tl: {
         translation: {
+          "Refreshing…": "Nagre-refresh…",
+          "Pull down to refresh": "Hilahin pababa para i-refresh",
           Gallery: "Galeriya",
           "Enter amount:": "Ilagay ang halaga:",
           "Get Started": "Magsimula",
@@ -3416,6 +3458,8 @@ i18n
       },
       bn: {
         translation: {
+          "Refreshing…": "রিফ্রেশ হচ্ছে…",
+          "Pull down to refresh": "রিফ্রেশ করতে নিচে টানুন",
           Gallery: "গ্যালারি",
           "Enter amount:": "পরিমাণ লিখুন:",
           "Get Started": "শুরু করুন",
