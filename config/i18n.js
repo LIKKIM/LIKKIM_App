@@ -11,6 +11,7 @@ i18n
     resources: {
       en: {
         translation: {
+          Refresh: "Refresh",
           "Refreshing…": "Refreshing…",
           "Pull down to refresh": "Pull down to refresh",
           Gallery: "Gallery",
@@ -184,6 +185,7 @@ i18n
       },
       zh: {
         translation: {
+          Refresh: "刷新",
           "Refreshing…": "正在刷新…",
           "Pull down to refresh": "下拉刷新",
           Gallery: "画廊",
@@ -350,6 +352,7 @@ i18n
       },
       "zh-TW": {
         translation: {
+          Refresh: "刷新",
           "Refreshing…": "正在重新整理…",
           "Pull down to refresh": "下拉以重新整理",
           Gallery: "畫廊",
@@ -515,6 +518,7 @@ i18n
       },
       fr: {
         translation: {
+          Refresh: "Rafraîchir",
           "Refreshing…": "Actualisation…",
           "Pull down to refresh": "Faites glisser vers le bas pour actualiser",
           Gallery: "Galerie",
@@ -693,6 +697,7 @@ i18n
       },
       es: {
         translation: {
+          Refresh: "Actualizar",
           "Refreshing…": "Actualizando…",
           "Pull down to refresh": "Desliza hacia abajo para actualizar",
           Gallery: "Galería",
@@ -870,6 +875,7 @@ i18n
       },
       ar: {
         translation: {
+          Refresh: "تحديث",
           "Refreshing…": "جارٍ التحديث…",
           "Pull down to refresh": "اسحب للأسفل للتحديث",
           Gallery: "معرض",
@@ -1040,6 +1046,7 @@ i18n
       },
       ja: {
         translation: {
+          Refresh: "更新",
           "Refreshing…": "更新中…",
           "Pull down to refresh": "下に引いて更新",
           Gallery: "ギャラリー",
@@ -1211,8 +1218,7 @@ i18n
       },
       ru: {
         translation: {
-          "Refreshing…": "새로고침 중…",
-          "Pull down to refresh": "아래로 당겨서 새로고침",
+          Refresh: "Обновить",
           "Refreshing…": "Обновление…",
           "Pull down to refresh": "Потяните вниз для обновления",
           Gallery: "Галерея",
@@ -1386,6 +1392,7 @@ i18n
       },
       ko: {
         translation: {
+          Refresh: "새로고침",
           "Refreshing…": "새로고침 중…",
           "Pull down to refresh": "아래로 당겨서 새로고침",
           Gallery: "갤러리",
@@ -1555,6 +1562,7 @@ i18n
       },
       pt: {
         translation: {
+          Refresh: "Atualizar",
           "Refreshing…": "Atualizando…",
           "Pull down to refresh": "Puxe para atualizar",
           Gallery: "Galeria",
@@ -1731,6 +1739,7 @@ i18n
       },
       "pt-BR": {
         translation: {
+          Refresh: "Atualizar",
           "Refreshing…": "Atualizando…",
           "Pull down to refresh": "Puxe para atualizar",
           Gallery: "Galeria",
@@ -1907,6 +1916,7 @@ i18n
       },
       it: {
         translation: {
+          Refresh: "Aggiorna",
           "Refreshing…": "Aggiornamento…",
           "Pull down to refresh": "Scorri verso il basso per aggiornare",
           Gallery: "Galleria",
@@ -2080,6 +2090,7 @@ i18n
       },
       de: {
         translation: {
+          Refresh: "Aktualisieren",
           "Refreshing…": "Aktualisierung…",
           "Pull down to refresh": "Zum Aktualisieren nach unten ziehen",
           Gallery: "Galerie",
@@ -2257,6 +2268,7 @@ i18n
       },
       hi: {
         translation: {
+          Refresh: "रिफ्रेश करें",
           "Refreshing…": "ताज़ा कर रहा है…",
           "Pull down to refresh": "रिफ्रेश करने के लिए नीचे खींचें",
           Gallery: "गैलरी",
@@ -2429,6 +2441,7 @@ i18n
       },
       mn: {
         translation: {
+          Refresh: "Сэргээх",
           "Refreshing…": "Шинэчилж байна…",
           "Pull down to refresh": "Шинэчлэхийн тулд доош татна уу",
           Gallery: "Галерей",
@@ -2603,6 +2616,7 @@ i18n
       },
       th: {
         translation: {
+          Refresh: "รีเฟรช",
           "Refreshing…": "กำลังรีเฟรช…",
           "Pull down to refresh": "ดึงลงเพื่อรีเฟรช",
           Gallery: "แกลเลอรี",
@@ -2773,6 +2787,7 @@ i18n
       },
       uk: {
         translation: {
+          Refresh: "Оновити",
           "Refreshing…": "Оновлення…",
           "Pull down to refresh": "Потягніть вниз, щоб оновити",
           Gallery: "Галерея",
@@ -2946,6 +2961,7 @@ i18n
       },
       vi: {
         translation: {
+          Refresh: "Làm mới",
           "Refreshing…": "Đang làm mới…",
           "Pull down to refresh": "Kéo xuống để làm mới",
           Gallery: "Thư viện",
@@ -3113,6 +3129,7 @@ i18n
       },
       id: {
         translation: {
+          Refresh: "Muat ulang",
           "Refreshing…": "Menyegarkan…",
           "Pull down to refresh": "Tarik ke bawah untuk menyegarkan",
           Gallery: "Galeri",
@@ -3284,6 +3301,7 @@ i18n
       },
       tl: {
         translation: {
+          Refresh: "I-refresh",
           "Refreshing…": "Nagre-refresh…",
           "Pull down to refresh": "Hilahin pababa para i-refresh",
           Gallery: "Galeriya",
@@ -3458,6 +3476,7 @@ i18n
       },
       bn: {
         translation: {
+          Refresh: "রিফ্রেশ করুন",
           "Refreshing…": "রিফ্রেশ হচ্ছে…",
           "Pull down to refresh": "রিফ্রেশ করতে নিচে টানুন",
           Gallery: "গ্যালারি",
