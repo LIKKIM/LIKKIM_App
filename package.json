@@ -30,6 +30,7 @@
     "@types/react": "~18.2.45",
     "base64-js": "^1.5.1",
     "expo": "~50.0.20",
+    "expo-av": "~13.10.6",
     "expo-blur": "~12.9.2",
     "expo-dev-client": "~3.3.12",
     "expo-haptics": "~12.8.1",
