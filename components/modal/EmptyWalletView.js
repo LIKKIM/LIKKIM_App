@@ -18,11 +18,15 @@ const EmptyWalletView = ({
   return (
     <View style={VaultScreenStyle.centeredContent}>
       {isDarkMode ? (
-        <ImageBackground
-          source={require("../../assets/AddWallet.png")}
-          style={VaultScreenStyle.addWalletImage}
-          imageStyle={VaultScreenStyle.addWalletImageBorder}
-        >
+        <View style={VaultScreenStyle.addWalletImage}>
+          <Video
+            source={require("../../assets/LightBg.mp4")}
+            style={StyleSheet.absoluteFill}
+            resizeMode="cover"
+            shouldPlay
+            isLooping
+            muted
+          />
           <TouchableOpacity
             //   onPress={handleContinue}
             onPress={handleWalletTest} //      {/*  测试按钮test btn  */}
@@ -32,7 +36,7 @@ const EmptyWalletView = ({
               {t("Get Started")}
             </Text>
           </TouchableOpacity>
-        </ImageBackground>
+        </View>
       ) : (
         <View style={VaultScreenStyle.addWalletImage}>
           <Video
