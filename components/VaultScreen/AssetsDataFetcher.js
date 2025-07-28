@@ -79,31 +79,33 @@ export const fetchWalletBalance = async (cryptoCards, setCryptoCards) => {
   try {
     const updatedCards = [...cryptoCards];
     let hasChange = false;
+
     for (let i = 0; i < updatedCards.length; i++) {
       const card = updatedCards[i];
+
+      // 跳过无效数据
+      if (!card?.queryChainName || !card?.address) {
+        continue;
+      }
+
       const postData = {
         chain: card.queryChainName,
         address: card.address,
       };
 
-      //   console.log("POST to accountAPI.balance with data:", postData);
-
       const response = await fetch(accountAPI.balance, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(postData),
       });
-      const data = await response.json();
 
-      //      console.log("Response from accountAPI.balance:", data);
+      const data = await response.json();
 
       if (data.code === "0" && data.data) {
         const { name, balance } = data.data;
 
         if (
-          name.toLowerCase() === card.queryChainName.toLowerCase() &&
+          name?.toLowerCase?.() === card.queryChainName?.toLowerCase?.() &&
           card.balance !== balance
         ) {
           updatedCards[i] = { ...card, balance: balance };
@@ -114,6 +116,7 @@ export const fetchWalletBalance = async (cryptoCards, setCryptoCards) => {
       // 查询间隔500ms
       await new Promise((resolve) => setTimeout(resolve, 500));
     }
+
     if (hasChange) {
       setCryptoCards(updatedCards);
       AsyncStorage.setItem("cryptoCards", JSON.stringify(updatedCards));
