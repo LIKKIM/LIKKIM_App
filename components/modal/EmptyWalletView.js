@@ -20,7 +20,7 @@ const EmptyWalletView = ({
       {isDarkMode ? (
         <View style={VaultScreenStyle.addWalletImage}>
           <Video
-            source={require("../../assets/LightBg.mp4")}
+            source={require("../../assets/darkBg.mp4")}
             style={StyleSheet.absoluteFill}
             resizeMode="cover"
             shouldPlay
