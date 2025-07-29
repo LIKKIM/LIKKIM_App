@@ -681,7 +681,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
       console.log("Error connecting or sending command to device:", error);
     }
   };
-  const handlePinSubmit = () => {
+  const onPinSubmit = () => {
     handlePinSubmit({
       receivedVerificationCode,
       pinCode,
@@ -971,7 +971,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
         visible={SecurityCodeModalVisible}
         pinCode={pinCode}
         setPinCode={setPinCode}
-        onSubmit={handlePinSubmit}
+        onSubmit={onPinSubmit}
         onCancel={() => setSecurityCodeModalVisible(false)}
         styles={SecureDeviceScreenStyle}
         isDarkMode={isDarkMode}
