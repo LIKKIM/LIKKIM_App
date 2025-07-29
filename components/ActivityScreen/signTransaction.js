@@ -37,7 +37,7 @@ const signTransaction = async (
   setModalStatus,
   t,
   monitorSignedResult,
-  skipSignedOK = true, // 测试环境
+  skipSignedOK = false, // 测试环境
   monitorSubscription
 ) => {
   try {
