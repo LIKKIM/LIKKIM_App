@@ -16,8 +16,6 @@ import {
   Button,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { MaterialIcons as Icon } from "@expo/vector-icons";
-import { BlurView } from "expo-blur";
 import { BleManager, BleErrorCode } from "react-native-ble-plx";
 import Constants from "expo-constants";
 import { useNavigation, useRoute } from "@react-navigation/native";
@@ -522,6 +520,13 @@ function SecureDeviceScreen({ onDarkModeChange }) {
         const receivedDataString = receivedData.toString("utf8");
         console.log("Received data string:", receivedDataString);
 
+        // 该代码块用于处理嵌入式设备发送来的不同区块链地址
+        // 通过prefixToShortName映射，查找receivedDataString中以哪个区块链前缀开头
+        // 如果找到对应前缀，则提取地址部分，并根据映射获取区块链简称
+        // 调用updateCryptoAddress更新对应区块链的地址
+        // 同时更新receivedAddresses状态，统计已接收的地址数量
+        // 如果接收到的地址数量达到预期（即所有区块链地址均已接收），则设置验证状态为"walletReady"
+        // 否则，设置状态为"waiting"，表示仍在等待更多地址
         const prefix = Object.keys(prefixToShortName).find((key) =>
           receivedDataString.startsWith(key)
         );
