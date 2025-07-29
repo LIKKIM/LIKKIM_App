@@ -118,14 +118,33 @@ export async function handlePinSubmit({
         console.log("Error sending 'address':", error);
       }
 
-      const pubkeyMessages = [
-        "pubkey:cosmos,m/44'/118'/0'/0/0",
-        "pubkey:ripple,m/44'/144'/0'/0/0",
-        "pubkey:celestia,m/44'/118'/0'/0/0",
-        "pubkey:juno,m/44'/118'/0'/0/0",
-        "pubkey:osmosis,m/44'/118'/0'/0/0",
-      ];
+      setTimeout(async () => {
+        const pubkeyMessages = [
+          "pubkey:cosmos,m/44'/118'/0'/0/0",
+          "pubkey:ripple,m/44'/144'/0'/0/0",
+          "pubkey:celestia,m/44'/118'/0'/0/0",
+          "pubkey:juno,m/44'/118'/0'/0/0",
+          "pubkey:osmosis,m/44'/118'/0'/0/0",
+        ];
 
+        for (const message of pubkeyMessages) {
+          await new Promise((resolve) => setTimeout(resolve, 250));
+          try {
+            // 在每条指令结尾加上 \n
+            const messageWithNewline = message + "\n";
+            const bufferMessage = Buffer.from(messageWithNewline, "utf-8");
+            const base64Message = bufferMessage.toString("base64");
+            await selectedDevice.writeCharacteristicWithResponseForService(
+              serviceUUID,
+              writeCharacteristicUUID,
+              base64Message
+            );
+            console.log(`Sent message: ${messageWithNewline}`);
+          } catch (error) {
+            console.log(`Error sending message "${message}":`, error);
+          }
+        }
+      }, 750);
       for (const message of pubkeyMessages) {
         await new Promise((resolve) => setTimeout(resolve, 250));
         try {

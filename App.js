@@ -306,8 +306,8 @@ function AppContent({
 
     const [prefix, rest] = verificationCodeValue.split(":");
     if (prefix !== "PIN" || !rest) {
-      console.log("Invalid verification format:", verificationCodeValue);
       setCheckStatusModalVisible(true);
+      console.log("Invalid verification format:", verificationCodeValue);
       setVerificationStatus("fail");
       return;
     }
@@ -322,14 +322,31 @@ function AppContent({
     console.log(`Extracted PIN: ${receivedPin}`);
     console.log(`Flag: ${flag}`);
 
+    // 新增：无论是否相等，立即发送 pinCodeValue 与 receivedPin 给嵌入式设备
+    try {
+      const pinData = `pinCodeValue:${pinCodeValue},receivedPin:${receivedPin}`;
+      const bufferPinData = Buffer.from(pinData, "utf-8");
+      const base64PinData = bufferPinData.toString("base64");
+      await selectedDevice.writeCharacteristicWithResponseForService(
+        serviceUUID,
+        writeCharacteristicUUID,
+        base64PinData
+      );
+      console.log("Sent pinCodeValue and receivedPin to device:", pinData);
+    } catch (error) {
+      console.log("Error sending pin data:", error);
+    }
+
     if (pinCodeValue === receivedPin) {
       console.log("PIN verified successfully");
       setVerificationStatus("success");
       setVerifiedDevices([selectedDevice.id]);
+
       await AsyncStorage.setItem(
         "verifiedDevices",
         JSON.stringify([selectedDevice.id])
       );
+
       setIsVerificationSuccessful(true);
       console.log("Device verified and saved");
 
@@ -355,6 +372,7 @@ function AppContent({
           const addressMessage = "address";
           const bufferAddress = Buffer.from(addressMessage, "utf-8");
           const base64Address = bufferAddress.toString("base64");
+
           await selectedDevice.writeCharacteristicWithResponseForService(
             serviceUUID,
             writeCharacteristicUUID,
@@ -393,6 +411,24 @@ function AppContent({
             }
           }
         }, 750);
+
+        for (const message of pubkeyMessages) {
+          await new Promise((resolve) => setTimeout(resolve, 250));
+          try {
+            // 在每条指令结尾加上 \n
+            const messageWithNewline = message + "\n";
+            const bufferMessage = Buffer.from(messageWithNewline, "utf-8");
+            const base64Message = bufferMessage.toString("base64");
+            await selectedDevice.writeCharacteristicWithResponseForService(
+              serviceUUID,
+              writeCharacteristicUUID,
+              base64Message
+            );
+            console.log(`Sent message: ${messageWithNewline}`);
+          } catch (error) {
+            console.log(`Error sending message "${message}":`, error);
+          }
+        }
       } else if (flag === "N") {
         console.log("Flag N received; no 'address' sent");
         setCheckStatusModalVisible(true);
@@ -400,15 +436,18 @@ function AppContent({
     } else {
       console.log("PIN verification failed");
       setVerificationStatus("fail");
+
       if (monitorSubscription) {
         monitorSubscription.remove();
         console.log("Stopped monitoring verification code");
       }
+
       if (selectedDevice) {
         await selectedDevice.cancelConnection();
         console.log("Disconnected device");
       }
     }
+
     setPinCode("");
   };
 
