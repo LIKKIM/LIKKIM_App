@@ -63,6 +63,8 @@ if (Platform.OS === "android") {
   PermissionsAndroid = require("react-native").PermissionsAndroid;
 }
 
+import { handlePinSubmit } from "../utils/handlePinSubmit";
+
 function SecureDeviceScreen({ onDarkModeChange }) {
   const { t } = useTranslation();
   const navigation = useNavigation();
@@ -679,122 +681,21 @@ function SecureDeviceScreen({ onDarkModeChange }) {
       console.log("Error connecting or sending command to device:", error);
     }
   };
-  // SecureDevice.js handlePinSubmit
-  const handlePinSubmit = async () => {
-    setSecurityCodeModalVisible(false);
-    setCheckStatusModalVisible(false);
-    const verificationCodeValue = receivedVerificationCode.trim();
-    const pinCodeValue = pinCode.trim();
-
-    //  console.log(`User PIN: ${pinCodeValue}`);
-    console.log(`Received data: ${verificationCodeValue}`);
-
-    const [prefix, rest] = verificationCodeValue.split(":");
-    if (prefix !== "PIN" || !rest) {
-      console.log("Invalid verification format:", verificationCodeValue);
-      setCheckStatusModalVisible(true);
-      setVerificationStatus("fail");
-      return;
-    }
-
-    const [receivedPin, flag] = rest.split(",");
-    if (!receivedPin || (flag !== "Y" && flag !== "N")) {
-      console.log("Invalid verification format:", verificationCodeValue);
-      setVerificationStatus("fail");
-      return;
-    }
-
-    console.log(`Extracted PIN: ${receivedPin}`);
-    console.log(`Flag: ${flag}`);
-
-    if (pinCodeValue === receivedPin) {
-      console.log("PIN verified successfully");
-      setVerificationStatus("success");
-      setVerifiedDevices([selectedDevice.id]);
-      await AsyncStorage.setItem(
-        "verifiedDevices",
-        JSON.stringify([selectedDevice.id])
-      );
-      setIsVerificationSuccessful(true);
-      console.log("Device verified and saved");
-
-      try {
-        const confirmationMessage = "PIN_OK";
-        const bufferConfirmation = Buffer.from(confirmationMessage, "utf-8");
-        const base64Confirmation = bufferConfirmation.toString("base64");
-        await selectedDevice.writeCharacteristicWithResponseForService(
-          serviceUUID,
-          writeCharacteristicUUID,
-          base64Confirmation
-        );
-        console.log("Sent confirmation message:", confirmationMessage);
-      } catch (error) {
-        console.log("Error sending confirmation message:", error);
-      }
-
-      if (flag === "Y") {
-        console.log("Flag Y received; sending 'address' to device");
-        // ✅ 开启监听，确保设备返回的地址信息能被接收
-        monitorVerificationCode(selectedDevice);
-        try {
-          const addressMessage = "address";
-          const bufferAddress = Buffer.from(addressMessage, "utf-8");
-          const base64Address = bufferAddress.toString("base64");
-          await selectedDevice.writeCharacteristicWithResponseForService(
-            serviceUUID,
-            writeCharacteristicUUID,
-            base64Address
-          );
-          console.log("Sent 'address' to device");
-          setCheckStatusModalVisible(true);
-        } catch (error) {
-          console.log("Error sending 'address':", error);
-        }
-
-        setTimeout(async () => {
-          const pubkeyMessages = [
-            "pubkey:cosmos,m/44'/118'/0'/0/0",
-            "pubkey:ripple,m/44'/144'/0'/0/0",
-            "pubkey:celestia,m/44'/118'/0'/0/0",
-            "pubkey:juno,m/44'/118'/0'/0/0",
-            "pubkey:osmosis,m/44'/118'/0'/0/0",
-          ];
-
-          for (const message of pubkeyMessages) {
-            await new Promise((resolve) => setTimeout(resolve, 250));
-            try {
-              // 在每条指令结尾加上 \n
-              const messageWithNewline = message + "\n";
-              const bufferMessage = Buffer.from(messageWithNewline, "utf-8");
-              const base64Message = bufferMessage.toString("base64");
-              await selectedDevice.writeCharacteristicWithResponseForService(
-                serviceUUID,
-                writeCharacteristicUUID,
-                base64Message
-              );
-              console.log(`Sent message: ${messageWithNewline}`);
-            } catch (error) {
-              console.log(`Error sending message "${message}":`, error);
-            }
-          }
-        }, 750);
-      } else if (flag === "N") {
-        console.log("Flag N received; no 'address' sent");
-        setCheckStatusModalVisible(true);
-      }
-    } else {
-      console.log("PIN verification failed");
-      setVerificationStatus("fail");
-      if (monitorSubscription) {
-        monitorSubscription.remove();
-        console.log("Stopped monitoring verification code");
-      }
-      if (selectedDevice) {
-        await selectedDevice.cancelConnection();
-        console.log("Disconnected device");
-      }
-    }
-    setPinCode("");
+  const handlePinSubmit = () => {
+    handlePinSubmit({
+      receivedVerificationCode,
+      pinCode,
+      setSecurityCodeModalVisible,
+      setCheckStatusModalVisible,
+      setVerificationStatus,
+      selectedDevice,
+      setVerifiedDevices,
+      setIsVerificationSuccessful,
+      serviceUUID,
+      writeCharacteristicUUID,
+      monitorSubscription: monitorSubscription.current,
+      setPinCode,
+    });
   };
 
   // 删除设备功能
