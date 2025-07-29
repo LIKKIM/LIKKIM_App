@@ -43,6 +43,7 @@ export async function handlePinSubmit({
 
   const [prefix, rest] = verificationCodeValue.split(":");
   if (prefix !== "PIN" || !rest) {
+    setCheckStatusModalVisible(true);
     console.log("Invalid verification format:", verificationCodeValue);
     setVerificationStatus("fail");
     return;
