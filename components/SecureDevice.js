@@ -566,11 +566,6 @@ function SecureDeviceScreen({ onDarkModeChange }) {
               } else {
                 console.log("No missing public keys.");
               }
-
-              setTimeout(() => {
-                setVerificationStatus("walletReady");
-                console.log("Timeout reached: setting status to walletReady");
-              }, 15000);
             }
             return updated;
           });
