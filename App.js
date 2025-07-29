@@ -45,6 +45,7 @@ import { bluetoothConfig } from "./env/bluetoothConfig";
 import { Svg, Path, G } from "react-native-svg";
 import { Buffer } from "buffer";
 import FloatingDev from "./utils/dev";
+import { hexStringToUint32Array, uint32ArrayToHexString } from "./env/hexUtils";
 const serviceUUID = bluetoothConfig.serviceUUID;
 const writeCharacteristicUUID = bluetoothConfig.writeCharacteristicUUID;
 const notifyCharacteristicUUID = bluetoothConfig.notifyCharacteristicUUID;
@@ -262,19 +263,7 @@ function AppContent({
       console.log("Attempt to scan while already scanning");
     }
   };
-  function hexStringToUint32Array(hexString) {
-    return new Uint32Array([
-      parseInt(hexString.slice(0, 8), 16),
-      parseInt(hexString.slice(8, 16), 16),
-    ]);
-  }
 
-  function uint32ArrayToHexString(uint32Array) {
-    return (
-      uint32Array[0].toString(16).toUpperCase().padStart(8, "0") +
-      uint32Array[1].toString(16).toUpperCase().padStart(8, "0")
-    );
-  }
   const handleBluetoothPairing = async () => {
     if (Platform.OS === "android") {
       const granted = await PermissionsAndroid.request(
