@@ -3,6 +3,21 @@
  * Author: Helvetiq Labs Team
  * Module: SecureDeviceScreen/ModuleSecureView.js
  * License: MIT
+ *
+ * ModuleSecureView - React component for secure device settings view.
+ *
+ * Props:
+ * - handleDeleteWallet: Function to reset the APP wallet.
+ * - handleBluetoothPairing: Function to manage Bluetooth pairing.
+ * - isDeleteWalletVisible: Boolean to toggle visibility of delete wallet option.
+ * - setIsDeleteWalletVisible: Function to toggle isDeleteWalletVisible state.
+ * - isSupportExpanded: Boolean to toggle support section visibility.
+ * - setIsSupportExpanded: Function to toggle isSupportExpanded state.
+ * - styles: StyleSheet object for styling.
+ * - settingsOptions: Object containing settings options.
+ * - iconColor: Color used for icons.
+ * - cryptoCards: Array of crypto card data.
+ * - t: Translation function.
  */
 
 import React from "react";
