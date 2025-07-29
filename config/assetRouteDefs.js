@@ -35,6 +35,7 @@ const assetRouteDefs = {
   Juno: "verify:juno",
   Osmosis: "verify:osmosis",
   Gnosis: "verify:gnosis",
+  DOGE: "verify:dogecoin",
 };
 
 export default assetRouteDefs;
