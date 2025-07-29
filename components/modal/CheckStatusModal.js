@@ -100,6 +100,15 @@ const CheckStatusModal = ({ visible, status, missingChains = [], onClose }) => {
             </View>
           )}
           <Text style={styles.modalSubtitle}>{subtitle}</Text>
+
+          {status !== "waiting" ? (
+            <TouchableOpacity style={styles.submitButton} onPress={onClose}>
+              <Text style={styles.submitButtonText}>{t("Close")}</Text>
+            </TouchableOpacity>
+          ) : (
+            <View style={{ height: 60 }} />
+          )}
+
           {missingChains.length > 0 && (
             <View
               style={{
@@ -118,14 +127,6 @@ const CheckStatusModal = ({ visible, status, missingChains = [], onClose }) => {
                 </Text>
               ))}
             </View>
-          )}
-
-          {status !== "waiting" ? (
-            <TouchableOpacity style={styles.submitButton} onPress={onClose}>
-              <Text style={styles.submitButtonText}>{t("Close")}</Text>
-            </TouchableOpacity>
-          ) : (
-            <View style={{ height: 60 }} />
           )}
         </View>
       </BlurView>
