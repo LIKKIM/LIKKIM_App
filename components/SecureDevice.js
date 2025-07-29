@@ -54,6 +54,8 @@ import checkAndReqPermission from "../utils/BluetoothPermissions"; // Request Bl
 import { parseDeviceCode } from "../utils/parseDeviceCode";
 import { firmwareAPI } from "../env/apiEndpoints";
 import { bluetoothConfig } from "../env/bluetoothConfig";
+import { handlePinSubmit } from "../utils/handlePinSubmit";
+
 const serviceUUID = bluetoothConfig.serviceUUID;
 const writeCharacteristicUUID = bluetoothConfig.writeCharacteristicUUID;
 const notifyCharacteristicUUID = bluetoothConfig.notifyCharacteristicUUID;
@@ -62,8 +64,6 @@ let PermissionsAndroid;
 if (Platform.OS === "android") {
   PermissionsAndroid = require("react-native").PermissionsAndroid;
 }
-
-import { handlePinSubmit } from "../utils/handlePinSubmit";
 
 function SecureDeviceScreen({ onDarkModeChange }) {
   const { t } = useTranslation();
