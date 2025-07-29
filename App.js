@@ -354,69 +354,57 @@ function AppContent({
       }
 
       if (flag === "Y") {
-        console.log("Flag Y received; sending 'address' to device");
+        console.log(
+          "Flag Y received; sending 'GET<chainName>' commands and pubkeyMessages to device"
+        );
         // ✅ 开启监听，确保设备返回的地址信息能被接收
         monitorVerificationCode(selectedDevice);
         try {
-          const addressMessage = "address";
-          const bufferAddress = Buffer.from(addressMessage, "utf-8");
-          const base64Address = bufferAddress.toString("base64");
-
-          await selectedDevice.writeCharacteristicWithResponseForService(
-            serviceUUID,
-            writeCharacteristicUUID,
-            base64Address
-          );
-          console.log("Sent 'address' to device");
-          setCheckStatusModalVisible(true);
-        } catch (error) {
-          console.log("Error sending 'address':", error);
-        }
-
-        setTimeout(async () => {
-          const pubkeyMessages = [
-            "pubkey:cosmos,m/44'/118'/0'/0/0",
-            "pubkey:ripple,m/44'/144'/0'/0/0",
-            "pubkey:celestia,m/44'/118'/0'/0/0",
-            "pubkey:juno,m/44'/118'/0'/0/0",
-            "pubkey:osmosis,m/44'/118'/0'/0/0",
-          ];
-
-          for (const message of pubkeyMessages) {
-            await new Promise((resolve) => setTimeout(resolve, 250));
-            try {
-              // 在每条指令结尾加上 \n
-              const messageWithNewline = message + "\n";
-              const bufferMessage = Buffer.from(messageWithNewline, "utf-8");
-              const base64Message = bufferMessage.toString("base64");
-              await selectedDevice.writeCharacteristicWithResponseForService(
-                serviceUUID,
-                writeCharacteristicUUID,
-                base64Message
-              );
-              console.log(`Sent message: ${messageWithNewline}`);
-            } catch (error) {
-              console.log(`Error sending message "${message}":`, error);
-            }
-          }
-        }, 750);
-
-        for (const message of pubkeyMessages) {
-          await new Promise((resolve) => setTimeout(resolve, 250));
-          try {
-            // 在每条指令结尾加上 \n
-            const messageWithNewline = message + "\n";
-            const bufferMessage = Buffer.from(messageWithNewline, "utf-8");
-            const base64Message = bufferMessage.toString("base64");
+          // 依次发送 GET + 区块链名字 的命令
+          for (const prefix of Object.keys(prefixToShortName)) {
+            const chainName = prefix.replace(":", "");
+            const getMessage = `GET${chainName}`;
+            const bufferGetMessage = Buffer.from(getMessage, "utf-8");
+            const base64GetMessage = bufferGetMessage.toString("base64");
             await selectedDevice.writeCharacteristicWithResponseForService(
               serviceUUID,
               writeCharacteristicUUID,
-              base64Message
+              base64GetMessage
             );
-            console.log(`Sent message: ${messageWithNewline}`);
-          } catch (error) {
-            console.log(`Error sending message "${message}":`, error);
+            console.log(`Sent message: ${getMessage}`);
+            // 等待250ms再发送下一个命令，避免拥堵
+            await new Promise((resolve) => setTimeout(resolve, 250));
           }
+          setTimeout(async () => {
+            const pubkeyMessages = [
+              "pubkey:cosmos,m/44'/118'/0'/0/0",
+              "pubkey:ripple,m/44'/144'/0'/0/0",
+              "pubkey:celestia,m/44'/118'/0'/0/0",
+              "pubkey:juno,m/44'/118'/0'/0/0",
+              "pubkey:osmosis,m/44'/118'/0'/0/0",
+            ];
+
+            for (const message of pubkeyMessages) {
+              await new Promise((resolve) => setTimeout(resolve, 250));
+              try {
+                // 在每条指令结尾加上 \n
+                const messageWithNewline = message + "\n";
+                const bufferMessage = Buffer.from(messageWithNewline, "utf-8");
+                const base64Message = bufferMessage.toString("base64");
+                await selectedDevice.writeCharacteristicWithResponseForService(
+                  serviceUUID,
+                  writeCharacteristicUUID,
+                  base64Message
+                );
+                console.log(`Sent message: ${messageWithNewline}`);
+              } catch (error) {
+                console.log(`Error sending message "${message}":`, error);
+              }
+            }
+          }, 750);
+          setCheckStatusModalVisible(true);
+        } catch (error) {
+          console.log("Error sending 'GET<chainName>' commands:", error);
         }
       } else if (flag === "N") {
         console.log("Flag N received; no 'address' sent");
