@@ -363,7 +363,7 @@ function AppContent({
           // 依次发送 GET + 区块链名字 的命令
           for (const prefix of Object.keys(prefixToShortName)) {
             const chainName = prefix.replace(":", "");
-            const getMessage = `GET_${chainName}`;
+            const getMessage = `address:${chainName}`;
             const bufferGetMessage = Buffer.from(getMessage, "utf-8");
             const base64GetMessage = bufferGetMessage.toString("base64");
             await selectedDevice.writeCharacteristicWithResponseForService(
