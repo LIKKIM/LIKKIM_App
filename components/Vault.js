@@ -471,8 +471,12 @@ function VaultScreen({ route, navigation }) {
         const storedCards = await AsyncStorage.getItem("cryptoCards");
         //  console.log(storedCards);
         if (storedCards !== null) {
-          setCryptoCards(JSON.parse(storedCards));
-          setAddedCryptos(JSON.parse(storedCards)); // 加载时同步 addedCryptos
+          const parsedCards = JSON.parse(storedCards);
+          setCryptoCards(parsedCards);
+          setAddedCryptos(parsedCards); // 加载时同步 addedCryptos
+          if (parsedCards.length > 0) {
+            fetchWalletBalance(parsedCards, setCryptoCards);
+          }
         }
       } catch (error) {
         console.log("Error loading crypto cards:", error);
