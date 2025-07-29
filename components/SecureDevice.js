@@ -679,7 +679,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
       console.log("Error connecting or sending command to device:", error);
     }
   };
-  // SecureDeviceScreen.js handlePinSubmit
+  // SecureDevice.js handlePinSubmit
   const handlePinSubmit = async () => {
     setSecurityCodeModalVisible(false);
     setCheckStatusModalVisible(false);
