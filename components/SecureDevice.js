@@ -105,7 +105,6 @@ function SecureDeviceScreen({ onDarkModeChange }) {
   const [isCurrentPasswordHidden, setIsCurrentPasswordHidden] = useState(true);
   const restoreIdentifier = Constants.installationId;
   const toggleColor = isDarkMode ? "#CCB68C" : "#CFAB95";
-  const blueToothColor = isDarkMode ? "#CCB68C" : "#CFAB95";
   const iconColor = isDarkMode ? "#ffffff" : "#676776";
   const darkColors = ["#21201E", "#0E0D0D"];
   const lightColors = ["#FFFFFF", "#EDEBEF"];
@@ -137,10 +136,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
   const [modalMessage, setModalMessage] = useState("");
   const [addressBookModalVisible, setAddressBookModalVisible] = useState(false);
   const [CheckStatusModalVisible, setCheckStatusModalVisible] = useState(false);
-  const [addresses, setAddresses] = useState([
-    { id: "1", name: "Home", address: "0x1234..." },
-    { id: "2", name: "Office", address: "0x5678..." },
-  ]);
+  const [addresses, setAddresses] = useState([]);
 
   const handleAddAddress = () => {
     console.log("Add Address button clicked");
