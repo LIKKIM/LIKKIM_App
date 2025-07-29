@@ -481,18 +481,6 @@ function SecureDeviceScreen({ onDarkModeChange }) {
     }
   };
 
-  const reconnectDevice = async (device) => {
-    try {
-      console.log(`Attempting to reconnect device: ${device.id}`);
-      await device.cancelConnection();
-      await device.connect();
-      await device.discoverAllServicesAndCharacteristics();
-      console.log("Device reconnected");
-    } catch (error) {
-      console.log("Device reconnection failed:", error);
-    }
-  };
-
   function hexStringToUint32Array(hexString) {
     return new Uint32Array([
       parseInt(hexString.slice(0, 8), 16),
