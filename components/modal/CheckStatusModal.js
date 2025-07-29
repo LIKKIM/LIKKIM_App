@@ -9,7 +9,7 @@ import PendingGif from "../../assets/gif/Pending.gif";
 import { DarkModeContext } from "../../utils/DeviceContext";
 import SecureDeviceScreenStyles from "../../styles/SecureDeviceScreenStyle";
 
-const CheckStatusModal = ({ visible, status, onClose }) => {
+const CheckStatusModal = ({ visible, status, missingChains = [], onClose }) => {
   const { isDarkMode, setIsDarkMode } = useContext(DarkModeContext);
   const styles = SecureDeviceScreenStyles(isDarkMode);
   const { t } = useTranslation();
@@ -100,6 +100,26 @@ const CheckStatusModal = ({ visible, status, onClose }) => {
             </View>
           )}
           <Text style={styles.modalSubtitle}>{subtitle}</Text>
+          {missingChains.length > 0 && (
+            <View
+              style={{
+                marginTop: 10,
+                paddingHorizontal: 10,
+                backgroundColor: isDarkMode ? "#333" : "#eee",
+                borderRadius: 5,
+              }}
+            >
+              <Text style={{ fontWeight: "bold", marginBottom: 5 }}>
+                {t("Missing addresses for chains:")}
+              </Text>
+              {missingChains.map((chain) => (
+                <Text key={chain} style={{ marginLeft: 10 }}>
+                  {chain}
+                </Text>
+              ))}
+            </View>
+          )}
+
           {status !== "waiting" ? (
             <TouchableOpacity style={styles.submitButton} onPress={onClose}>
               <Text style={styles.submitButtonText}>{t("Close")}</Text>

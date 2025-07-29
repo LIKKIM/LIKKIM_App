@@ -168,6 +168,7 @@ function AppContent({
     useState(false);
   const [pinCode, setPinCode] = useState("");
   const [verificationStatus, setVerificationStatus] = useState(null);
+  const [missingChainsForModal, setMissingChainsForModal] = useState([]);
   const [receivedAddresses, setReceivedAddresses] = useState({});
   const [selectedDevice, setSelectedDevice] = useState(null);
   const [CheckStatusModalVisible, setCheckStatusModalVisible] = useState(false);
@@ -592,6 +593,24 @@ function AppContent({
               }, 5000);
             } else {
               setVerificationStatus("waiting");
+              // 新增打印缺失的区块链地址
+              const missingChains = Object.values(prefixToShortName).filter(
+                (shortName) => !updated.hasOwnProperty(shortName)
+              );
+              if (missingChains.length > 0) {
+                console.log(
+                  "Missing addresses for chains:",
+                  missingChains.join(", ")
+                );
+                setTimeout(() => {
+                  setVerificationStatus("walletReady");
+                  setMissingChainsForModal(missingChains);
+                  setCheckStatusModalVisible(true);
+                  console.log(
+                    "Timeout reached, setting walletReady despite missing addresses."
+                  );
+                }, 15000);
+              }
             }
             return updated;
           });
@@ -977,6 +996,7 @@ function AppContent({
       <CheckStatusModal
         visible={CheckStatusModalVisible && verificationStatus !== null}
         status={verificationStatus}
+        missingChains={missingChainsForModal}
         onClose={() => setCheckStatusModalVisible(false)}
       />
       <ConfirmDisconnectModal
