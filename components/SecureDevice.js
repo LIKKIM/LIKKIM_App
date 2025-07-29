@@ -53,6 +53,12 @@ import { parseDeviceCode } from "../utils/parseDeviceCode";
 import { firmwareAPI } from "../env/apiEndpoints";
 import { bluetoothConfig } from "../env/bluetoothConfig";
 
+/**
+ * deleteWallet and confirmDeleteWallet are the core functions for the wallet deletion feature.
+ * - deleteWallet: Handles the actual removal of wallet data from storage and UI updates.
+ * - confirmDeleteWallet: Confirms the user's intent and triggers the deletion process.
+ */
+
 const serviceUUID = bluetoothConfig.serviceUUID;
 const writeCharacteristicUUID = bluetoothConfig.writeCharacteristicUUID;
 const notifyCharacteristicUUID = bluetoothConfig.notifyCharacteristicUUID;
@@ -904,13 +910,8 @@ function SecureDeviceScreen({ onDarkModeChange }) {
   };
 
   const confirmDeleteWallet = async () => {
-    // 清空 verifiedDevices，持久化由 DeviceContext 负责
     setVerifiedDevices([]);
     deleteWallet();
-    setDeleteWalletModalVisible(false);
-  };
-
-  const cancelDeleteWallet = () => {
     setDeleteWalletModalVisible(false);
   };
 
@@ -934,6 +935,10 @@ function SecureDeviceScreen({ onDarkModeChange }) {
         t("An error occurred while deleting your wallet.")
       );
     }
+  };
+
+  const cancelDeleteWallet = () => {
+    setDeleteWalletModalVisible(false);
   };
 
   const [password, setPassword] = useState("");
