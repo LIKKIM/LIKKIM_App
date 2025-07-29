@@ -551,6 +551,9 @@ function SecureDeviceScreen({ onDarkModeChange }) {
           });
         }
 
+        /**
+         * 监听部分区块链的公钥
+         */
         if (receivedDataString.startsWith("pubkeyData:")) {
           const pubkeyData = receivedDataString
             .replace("pubkeyData:", "")
