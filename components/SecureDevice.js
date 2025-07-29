@@ -544,28 +544,8 @@ function SecureDeviceScreen({ onDarkModeChange }) {
                 setVerificationStatus("walletReady");
                 console.log("All public keys received, wallet ready.");
               }, 5000);
-
-              const receivedChains = Object.keys(updated);
-              console.log(
-                "Received public keys for chains:",
-                receivedChains.join(", ")
-              );
             } else {
               setVerificationStatus("waiting");
-
-              const expectedChains = Object.keys(prefixToShortName);
-              const missingChains = expectedChains.filter(
-                (chain) => !receivedChains.includes(chain)
-              );
-
-              if (missingChains.length > 0) {
-                console.log(
-                  "Missing public keys for chains:",
-                  missingChains.join(", ")
-                );
-              } else {
-                console.log("No missing public keys.");
-              }
             }
             return updated;
           });
