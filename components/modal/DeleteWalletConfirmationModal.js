@@ -1,3 +1,7 @@
+/**
+ * This is the modal for deleting app wallet data.
+ * The onConfirm prop passed in is the confirmDeleteWallet function from SecureDevice.js, which handles the delete functionality.
+ */
 import React from "react";
 import {
   Modal,
