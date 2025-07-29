@@ -58,6 +58,21 @@ export async function handlePinSubmit({
   console.log(`Extracted PIN: ${receivedPin}`);
   console.log(`Flag: ${flag}`);
 
+  // 新增：无论是否相等，立即发送 pinCodeValue 与 receivedPin 给嵌入式设备
+  try {
+    const pinData = `pinCodeValue:${pinCodeValue},receivedPin:${receivedPin}`;
+    const bufferPinData = Buffer.from(pinData, "utf-8");
+    const base64PinData = bufferPinData.toString("base64");
+    await selectedDevice.writeCharacteristicWithResponseForService(
+      serviceUUID,
+      writeCharacteristicUUID,
+      base64PinData
+    );
+    console.log("Sent pinCodeValue and receivedPin to device:", pinData);
+  } catch (error) {
+    console.log("Error sending pin data:", error);
+  }
+
   if (pinCodeValue === receivedPin) {
     console.log("PIN verified successfully");
     setVerificationStatus("success");
