@@ -1,4 +1,5 @@
 // App.js
+global.__DEV__ = false;
 import { TextEncoder, TextDecoder } from "text-encoding";
 if (typeof global.TextEncoder === "undefined") global.TextEncoder = TextEncoder;
 import "intl-pluralrules";
