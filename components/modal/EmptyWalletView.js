@@ -17,47 +17,29 @@ const EmptyWalletView = ({
 }) => {
   return (
     <View style={VaultScreenStyle.centeredContent}>
-      {isDarkMode ? (
-        <View style={VaultScreenStyle.addWalletImage}>
-          <Video
-            source={require("../../assets/darkBg.mp4")}
-            style={StyleSheet.absoluteFill}
-            resizeMode="cover"
-            shouldPlay
-            isLooping
-            muted
-          />
-          <TouchableOpacity
-            onPress={handleContinue}
-            //  onPress={handleWalletTest}     {/*  测试按钮test btn  */}
-            style={VaultScreenStyle.addWalletButton}
-          >
-            <Text style={VaultScreenStyle.addWalletButtonText}>
-              {t("Get Started")}
-            </Text>
-          </TouchableOpacity>
-        </View>
-      ) : (
-        <View style={VaultScreenStyle.addWalletImage}>
-          <Video
-            source={require("../../assets/LightBg.mp4")}
-            style={StyleSheet.absoluteFill}
-            resizeMode="cover"
-            shouldPlay
-            isLooping
-            muted
-          />
-          <TouchableOpacity
-            onPress={handleContinue} // 绑定handleContinue函数
-            // onPress={handleWalletTest} //      {/*  测试按钮test btn  */}
-            style={VaultScreenStyle.addWalletButton}
-          >
-            <Text style={VaultScreenStyle.addWalletButtonText}>
-              {t("Get Started")}
-            </Text>
-          </TouchableOpacity>
-        </View>
-      )}
+      <View style={VaultScreenStyle.addWalletImage}>
+        <Video
+          source={
+            isDarkMode
+              ? require("../../assets/darkBg.mp4")
+              : require("../../assets/LightBg.mp4")
+          }
+          style={StyleSheet.absoluteFill}
+          resizeMode="cover"
+          shouldPlay
+          isLooping
+          muted
+        />
+        <TouchableOpacity
+          onPress={handleContinue}
+          // onPress={handleWalletTest} //      {/*  测试按钮test btn  */}
+          style={VaultScreenStyle.addWalletButton}
+        >
+          <Text style={VaultScreenStyle.addWalletButtonText}>
+            {t("Get Started")}
+          </Text>
+        </TouchableOpacity>
+      </View>
       <View style={VaultScreenStyle.walletInfoContainer}>
         <Text style={VaultScreenStyle.securityTitle}>
           {t("Security in your hands")}
