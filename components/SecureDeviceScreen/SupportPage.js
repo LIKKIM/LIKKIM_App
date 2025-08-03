@@ -68,7 +68,7 @@ const SupportPage = () => {
       icon: isDarkMode
         ? require("../../assets/icon/Facebook.png")
         : require("../../assets/icon/FacebookDark.png"),
-      url: "https://www.facebook.com/profile.php?id=61570753106156",
+      url: "https://www.facebook.com/profile.php?id=61578769227902",
     },
     {
       name: "YouTube",
