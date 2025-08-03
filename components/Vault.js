@@ -1186,7 +1186,7 @@ function VaultScreen({ route, navigation }) {
   };
 
   const handleContinue = () => {
-    setRecoveryPhraseModalVisible(false);
+    console.log("检查是否有已验证设备，数量:", verifiedDevices.length);
 
     if (verifiedDevices.length > 0) {
       // 发送创建钱包命令时，确保传递的是设备对象
