@@ -40,7 +40,9 @@ yarn-error.*
 /android/app/release/
 
 
-/ios
+/ios/LukkeyVault
+/ios/LukkeyVault.xcodeproj
+/ios/xcshareddata
 !ios/Podfile
 !ios/Podfile.properties.json
 !ios/.xcode.env
