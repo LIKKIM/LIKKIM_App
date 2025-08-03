@@ -75,7 +75,7 @@ const SupportPage = () => {
       icon: isDarkMode
         ? require("../../assets/icon/Youtube.png")
         : require("../../assets/icon/YoutubeDark.png"),
-      url: "https://www.youtube.com/@LukkeyAG",
+      url: "https://www.youtube.com/@LukkeySwiss",
     },
   ];
 
