@@ -40,7 +40,7 @@ const SupportPage = () => {
       icon: isDarkMode
         ? require("../../assets/icon/Twitter.png")
         : require("../../assets/icon/TwitterDark.png"),
-      url: "https://x.com/LIKKIMwallet",
+      url: "https://x.com/LukkeyAG",
     },
     /*   {
       name: "Telegram",
