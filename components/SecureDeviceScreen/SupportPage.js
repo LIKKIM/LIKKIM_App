@@ -42,13 +42,13 @@ const SupportPage = () => {
         : require("../../assets/icon/TwitterDark.png"),
       url: "https://x.com/LIKKIMwallet",
     },
-    {
+    /*   {
       name: "Telegram",
       icon: isDarkMode
         ? require("../../assets/icon/Telegram.png")
         : require("../../assets/icon/TelegramDark.png"),
       url: "https://t.me/+q9j351SAY8hlMDJl",
-    },
+    }, */
     {
       name: "Discord",
       icon: isDarkMode
