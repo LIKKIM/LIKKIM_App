@@ -84,6 +84,13 @@ const SupportPage = () => {
         : require("../../assets/icon/InstagramDark.png"),
       url: "https://www.instagram.com/lukkey_swiss/",
     },
+    {
+      name: "Tiktok",
+      icon: isDarkMode
+        ? require("../../assets/icon/Tiktok.png")
+        : require("../../assets/icon/TiktokDark.png"),
+      url: "https://www.tiktok.com/@lukkeyag",
+    },
   ];
 
   // Opens email client for support feedback
