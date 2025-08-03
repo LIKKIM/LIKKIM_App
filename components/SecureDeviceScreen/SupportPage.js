@@ -85,9 +85,19 @@ const SupportPage = () => {
     const subject = encodeURIComponent("LUKKEY feedback");
     const body = encodeURIComponent("Hi support team");
     const url = `mailto:${email}?subject=${subject}&body=${body}`;
-    Linking.openURL(url).catch((err) =>
-      console.error("An error occurred", err)
-    );
+    Linking.canOpenURL(url)
+      .then((supported) => {
+        if (!supported) {
+          console.logo("Can't handle email link: " + url);
+          alert("Email client is not available on this device.");
+        } else {
+          return Linking.openURL(url);
+        }
+      })
+      .catch((err) => {
+        console.logo("An error occurred", err);
+        alert("Failed to open email client.");
+      });
   };
 
   return (
