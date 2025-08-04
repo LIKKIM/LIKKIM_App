@@ -16,7 +16,8 @@
     "pushPlayStore": "eas build --auto-submit --platform android",
     "updateNative": "expo prebuild",
     "DownloadKeystore": "eas credentials --platform android",
-    "expoGo": "expo start"
+    "expoGo": "expo start",
+    "installlegacy": "npm install --legacy-peer-deps"
   },
   "dependencies": {
     "@babel/plugin-proposal-export-namespace-from": "^7.18.9",
