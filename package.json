@@ -45,7 +45,6 @@
     "expo-status-bar": "~1.11.1",
     "i18n-js": "^4.4.3",
     "i18next": "^23.11.5",
-    "i18next-react-native-language-detector": "^1.0.2",
     "intl-pluralrules": "^2.0.1",
     "metro-cache": "^0.80.9",
     "nativewind": "^2.0.11",
