@@ -288,6 +288,7 @@ const signTransaction = async (
     let requestData = null;
 
     // 查找当前链的 publicKey
+    // 如果 initialAdditionalCryptos 中有多个 queryChainName 相同的币种，getPublicKeyByChain 只会返回第一个匹配项的 publicKey（即 find 方法的行为）。如需特殊处理可改为返回全部或指定条件的 publicKey
     const getPublicKeyByChain = (chainKey) => {
       const crypto = initialAdditionalCryptos.find(
         (item) => item.queryChainName?.toLowerCase() === chainKey
