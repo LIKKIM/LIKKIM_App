@@ -1,40 +1,48 @@
 import React from "react";
-import { View, ImageBackground, TouchableOpacity, Text } from "react-native";
+import {
+  View,
+  ImageBackground,
+  TouchableOpacity,
+  Text,
+  StyleSheet,
+} from "react-native";
+import { Video } from "expo-av";
 
 const EmptyWalletView = ({
   isDarkMode,
-  WalletScreenStyle,
-  setAddWalletModalVisible,
+  VaultScreenStyle,
+  handleContinue,
+  handleWalletTest,
   t,
 }) => {
   return (
-    <View style={WalletScreenStyle.centeredContent}>
-      <ImageBackground
-        source={
-          isDarkMode
-            ? require("../../assets/AddWallet.png")
-            : require("../../assets/Card22.png")
-        }
-        style={WalletScreenStyle.addWalletImage}
-        imageStyle={WalletScreenStyle.addWalletImageBorder}
-      >
+    <View style={VaultScreenStyle.centeredContent}>
+      <View style={VaultScreenStyle.addWalletImage}>
+        <Video
+          source={
+            isDarkMode
+              ? require("../../assets/darkBg.mp4")
+              : require("../../assets/LightBg.mp4")
+          }
+          style={StyleSheet.absoluteFill}
+          resizeMode="cover"
+          shouldPlay
+          isLooping
+          muted
+        />
         <TouchableOpacity
-          onPress={() => setAddWalletModalVisible(true)}
-          style={WalletScreenStyle.addWalletButton}
+          onPress={handleContinue}
+          // onPress={handleWalletTest} //      {/*  测试按钮test btn  */}
+          style={VaultScreenStyle.addWalletButton}
         >
-          <Text style={WalletScreenStyle.addWalletButtonText}>
-            {t("Add Wallet")}
+          <Text style={VaultScreenStyle.addWalletButtonText}>
+            {t("Get Started")}
           </Text>
         </TouchableOpacity>
-      </ImageBackground>
-      <View style={WalletScreenStyle.walletInfoContainer}>
-        <Text style={WalletScreenStyle.securityTitle}>
+      </View>
+      <View style={VaultScreenStyle.walletInfoContainer}>
+        <Text style={VaultScreenStyle.securityTitle}>
           {t("Security in your hands")}
-        </Text>
-        <Text style={WalletScreenStyle.walletInfoText}>
-          {t(
-            "LIKKIM supports 30 blockchains and over 10,000 cryptocurrencies."
-          )}
         </Text>
       </View>
     </View>

@@ -16,7 +16,7 @@ const TransactionConfirmationModal = ({
   onConfirm,
   onCancel,
   t,
-  TransactionsScreenStyle,
+  ActivityScreenStyle,
   isDarkMode,
   selectedCryptoIcon,
   selectedCrypto,
@@ -42,10 +42,10 @@ const TransactionConfirmationModal = ({
       visible={visible}
       onRequestClose={onRequestClose}
     >
-      <BlurView intensity={10} style={TransactionsScreenStyle.centeredView}>
-        <View style={TransactionsScreenStyle.confirmModalView}>
-          <Text style={TransactionsScreenStyle.modalTitle}>
-            {t("Transaction Confirmation")}
+      <BlurView intensity={10} style={ActivityScreenStyle.centeredView}>
+        <View style={ActivityScreenStyle.confirmModalView}>
+          <Text style={ActivityScreenStyle.modalTitle}>
+            {t("Waiting for Confirmation")}
           </Text>
 
           <View
@@ -66,7 +66,7 @@ const TransactionConfirmationModal = ({
                 }}
               />
             )}
-            <Text style={TransactionsScreenStyle.modalTitle}>
+            <Text style={ActivityScreenStyle.modalTitle}>
               {`${selectedCrypto} (${selectedCryptoChain})`}
             </Text>
           </View>
@@ -75,14 +75,14 @@ const TransactionConfirmationModal = ({
             style={{ maxHeight: 320 }}
             contentContainerStyle={{ paddingHorizontal: 0 }}
           >
-            <Text style={TransactionsScreenStyle.transactionText}>
+            <Text style={ActivityScreenStyle.transactionText}>
               <Text style={{ fontWeight: "bold", marginBottom: 8 }}>
                 {t("Amount")}:
               </Text>
               {` ${amount} ${selectedCrypto}`}
             </Text>
 
-            <Text style={TransactionsScreenStyle.transactionText}>
+            <Text style={ActivityScreenStyle.transactionText}>
               <Text style={{ fontWeight: "bold", marginBottom: 8 }}>
                 {t("Amount in Currency")}:
               </Text>
@@ -93,123 +93,50 @@ const TransactionConfirmationModal = ({
               ).toFixed(2)} ${currencyUnit}`}
             </Text>
 
-            <Text style={TransactionsScreenStyle.transactionText}>
+            <Text style={ActivityScreenStyle.transactionText}>
               <Text style={{ fontWeight: "bold", marginBottom: 8 }}>
                 {t("Payment Address")}:
               </Text>
               {` ${selectedAddress}`}
             </Text>
 
-            <Text style={TransactionsScreenStyle.transactionText}>
+            <Text style={ActivityScreenStyle.transactionText}>
               <Text style={{ fontWeight: "bold", marginBottom: 8 }}>
                 {t("Recipient Address")}:
               </Text>
               {` ${inputAddress}`}
             </Text>
 
-            <View style={TransactionsScreenStyle.transactionText}>
-              <Text style={TransactionsScreenStyle.transactionText}>
+            <View style={ActivityScreenStyle.transactionText}>
+              <Text style={ActivityScreenStyle.transactionText}>
                 <Text style={{ fontWeight: "bold", marginBottom: 8 }}>
-                  {t("Transaction Fee")}:
+                  {t("Processing Fee")}:
                 </Text>
               </Text>
-              <View
-                style={{
-                  flexDirection: "row",
-                  backgroundColor: isDarkMode ? "#333" : "#eee",
-                  borderRadius: 20,
-                  borderWidth: 1,
-                  borderColor: isDarkMode ? "#333" : "#eee",
-                  padding: 2,
-                  alignSelf: "flex-start",
-                }}
-              >
-                <TouchableOpacity
-                  style={{
-                    paddingVertical: 8,
-                    paddingHorizontal: 20,
-                    borderRadius: 20,
-                    backgroundColor:
-                      selectedFeeTab === "Recommended"
-                        ? isDarkMode
-                          ? "#555"
-                          : "#fff"
-                        : "transparent",
-                    borderColor: isDarkMode ? "#333" : "#eee",
-                    borderWidth: 1,
-                  }}
-                  onPress={() => setSelectedFeeTab("Recommended")}
-                >
-                  <Text
-                    style={{
-                      fontWeight: "bold",
-                      color:
-                        selectedFeeTab === "Recommended"
-                          ? isDarkMode
-                            ? "#fff"
-                            : "#000"
-                          : "#888",
-                    }}
-                  >
-                    {t("Recommended")}
-                  </Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                  style={{
-                    paddingVertical: 8,
-                    paddingHorizontal: 20,
-                    borderRadius: 20,
-                    backgroundColor:
-                      selectedFeeTab === "Rapid"
-                        ? isDarkMode
-                          ? "#555"
-                          : "#fff"
-                        : "transparent",
-                    borderColor: isDarkMode ? "#333" : "#eee",
-                    borderWidth: 1,
-                    marginLeft: 10,
-                  }}
-                  onPress={() => setSelectedFeeTab("Rapid")}
-                >
-                  <Text
-                    style={{
-                      fontWeight: "bold",
-                      color:
-                        selectedFeeTab === "Rapid"
-                          ? isDarkMode
-                            ? "#fff"
-                            : "#000"
-                          : "#888",
-                    }}
-                  >
-                    {t("Rapid")}
-                  </Text>
-                </TouchableOpacity>
+              <View>
+                {selectedFeeTab === "Recommended" ? (
+                  <>
+                    <Text style={ActivityScreenStyle.balanceLabel}>
+                      {recommendedFee} {selectedCrypto} (Recommended)
+                    </Text>
+                    <Text style={ActivityScreenStyle.balanceLabel}>
+                      ({currencyUnit} {recommendedValue})
+                    </Text>
+                  </>
+                ) : (
+                  <>
+                    <Text style={ActivityScreenStyle.balanceLabel}>
+                      {rapidFeeValue} {selectedCrypto} (Rapid)
+                    </Text>
+                    <Text style={ActivityScreenStyle.balanceLabel}>
+                      ({currencyUnit} {rapidCurrencyValue})
+                    </Text>
+                  </>
+                )}
               </View>
-
-              {selectedFeeTab === "Recommended" ? (
-                <View style={{ marginTop: 10 }}>
-                  <Text style={TransactionsScreenStyle.balanceValue}>
-                    {recommendedFee} {selectedCrypto} (Recommended)
-                  </Text>
-                  <Text style={TransactionsScreenStyle.balanceValue}>
-                    ({currencyUnit} {recommendedValue})
-                  </Text>
-                </View>
-              ) : (
-                <View style={{ marginTop: 10 }}>
-                  <Text style={TransactionsScreenStyle.balanceValue}>
-                    {rapidFeeValue} {selectedCrypto} (Rapid)
-                  </Text>
-                  <Text style={TransactionsScreenStyle.balanceValue}>
-                    ({currencyUnit} {rapidCurrencyValue})
-                  </Text>
-                </View>
-              )}
             </View>
 
-            <Text style={TransactionsScreenStyle.transactionText}>
+            <Text style={ActivityScreenStyle.transactionText}>
               <Text style={{ fontWeight: "bold", marginBottom: 8 }}>
                 {t("Detected Network")}:
               </Text>
@@ -220,19 +147,19 @@ const TransactionConfirmationModal = ({
 
           <View style={{ marginTop: 20, width: "100%" }}>
             <TouchableOpacity
-              style={TransactionsScreenStyle.optionButton}
+              style={ActivityScreenStyle.optionButton}
               onPress={onConfirm}
             >
-              <Text style={TransactionsScreenStyle.submitButtonText}>
+              <Text style={ActivityScreenStyle.submitButtonText}>
                 {t("Confirm")}
               </Text>
             </TouchableOpacity>
 
             <TouchableOpacity
-              style={TransactionsScreenStyle.cancelButton}
+              style={ActivityScreenStyle.cancelButton}
               onPress={onCancel}
             >
-              <Text style={TransactionsScreenStyle.cancelButtonText}>
+              <Text style={ActivityScreenStyle.cancelButtonText}>
                 {t("Cancel")}
               </Text>
             </TouchableOpacity>

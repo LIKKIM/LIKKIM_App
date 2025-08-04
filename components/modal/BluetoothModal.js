@@ -1,5 +1,5 @@
 // modal/BluetoothModal.js
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   View,
   Text,
@@ -9,26 +9,39 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { BlurView } from "expo-blur";
-import Icon from "react-native-vector-icons/MaterialIcons";
+import { MaterialIcons as Icon } from "@expo/vector-icons";
 import * as Location from "expo-location";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useTranslation } from "react-i18next";
+import { DarkModeContext } from "../../utils/DeviceContext";
+import SecureDeviceScreenStyles from "../../styles/SecureDeviceScreenStyle";
 
 const BluetoothModal = ({
   visible,
   devices,
   isScanning,
-  iconColor,
   handleDevicePress,
   onCancel,
   verifiedDevices,
-  MyColdWalletScreenStyle,
-  t,
   onDisconnectPress,
+  onRefreshPress,
 }) => {
+  const { t } = useTranslation();
+  const { isDarkMode, setIsDarkMode } = useContext(DarkModeContext);
+  const SecureDeviceScreenStyle = SecureDeviceScreenStyles(isDarkMode);
   const [locationPermissionGranted, setLocationPermissionGranted] =
     useState(false);
+  const blueToothColor = isDarkMode ? "#CCB68C" : "#CFAB95";
 
-  useEffect(() => {
+  const getSignalBars = (rssi) => {
+    if (rssi >= -60) return 4;
+    if (rssi >= -70) return 3;
+    if (rssi >= -80) return 2;
+    if (rssi >= -90) return 1;
+    return 0;
+  };
+
+  /*   useEffect(() => {
     const requestLocationPermission = async () => {
       const { status } = await Location.requestForegroundPermissionsAsync();
       if (status === "granted") {
@@ -39,11 +52,11 @@ const BluetoothModal = ({
     };
 
     requestLocationPermission();
-  }, []);
+  }, []); */
 
   const getDeviceLocation = async () => {
     if (!locationPermissionGranted) {
-      console.warn("Location permission not granted");
+      console.log("Location permission not granted");
       return null;
     }
     try {
@@ -105,18 +118,18 @@ const BluetoothModal = ({
       visible={visible}
       onRequestClose={onCancel}
     >
-      <BlurView intensity={10} style={MyColdWalletScreenStyle.centeredView}>
-        <View style={MyColdWalletScreenStyle.bluetoothModalView}>
-          <Text style={MyColdWalletScreenStyle.bluetoothModalTitle}>
+      <BlurView intensity={10} style={SecureDeviceScreenStyle.centeredView}>
+        <View style={SecureDeviceScreenStyle.bluetoothModalView}>
+          <Text style={SecureDeviceScreenStyle.bluetoothModalTitle}>
             {t("LOOKING FOR DEVICES")}
           </Text>
           {isScanning ? (
             <View style={{ alignItems: "center" }}>
               <Image
                 source={require("../../assets/gif/Bluetooth.gif")}
-                style={MyColdWalletScreenStyle.bluetoothImg}
+                style={SecureDeviceScreenStyle.bluetoothImg}
               />
-              <Text style={MyColdWalletScreenStyle.scanModalSubtitle}>
+              <Text style={SecureDeviceScreenStyle.scanModalSubtitle}>
                 {t("Scanning...")}
               </Text>
             </View>
@@ -127,6 +140,7 @@ const BluetoothModal = ({
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => {
                   const isVerified = verifiedDevices.includes(item.id);
+                  const signalBars = getSignalBars(item.rssi);
                   return (
                     <TouchableOpacity
                       onPress={() => {
@@ -135,24 +149,49 @@ const BluetoothModal = ({
                         }
                       }}
                     >
-                      <View style={MyColdWalletScreenStyle.deviceItemContainer}>
+                      <View style={SecureDeviceScreenStyle.deviceItemContainer}>
                         <Icon
                           name={isVerified ? "mobile-friendly" : "smartphone"}
                           size={24}
-                          color={isVerified ? "#3CDA84" : iconColor}
-                          style={MyColdWalletScreenStyle.deviceIcon}
+                          color={isVerified ? "#3CDA84" : blueToothColor}
+                          style={SecureDeviceScreenStyle.deviceIcon}
                         />
-                        <Text style={MyColdWalletScreenStyle.modalSubtitle}>
+                        <Text style={SecureDeviceScreenStyle.modalSubtitle}>
                           {item.name || item.id}
+                          {"  "}
+                          <View
+                            style={{
+                              flexDirection: "row",
+                              alignItems: "flex-end",
+                              height: 14,
+                            }}
+                          >
+                            {Array.from({ length: 4 }).map((_, i) => {
+                              const barHeights = [4, 8, 11, 14];
+                              return (
+                                <View
+                                  key={i}
+                                  style={{
+                                    width: 4,
+                                    height: barHeights[i],
+                                    marginHorizontal: 1,
+                                    backgroundColor:
+                                      i < signalBars ? "#3CDA84" : "#ccc",
+                                    borderRadius: 1,
+                                  }}
+                                />
+                              );
+                            })}
+                          </View>
                         </Text>
                         {isVerified && (
                           <TouchableOpacity
-                            style={MyColdWalletScreenStyle.disconnectButton}
+                            style={SecureDeviceScreenStyle.disconnectButton}
                             onPress={() => onDisconnectPress(item)}
                           >
                             <Text
                               style={
-                                MyColdWalletScreenStyle.disconnectButtonText
+                                SecureDeviceScreenStyle.disconnectButtonText
                               }
                             >
                               {t("Disconnect")}
@@ -172,21 +211,63 @@ const BluetoothModal = ({
                 source={require("../../assets/gif/Search.gif")}
                 style={{ width: 180, height: 180, margin: 30 }}
               />
-              <Text style={MyColdWalletScreenStyle.modalSubtitle}>
+              <Text style={SecureDeviceScreenStyle.modalSubtitle}>
                 {t(
                   "Please make sure your Cold Wallet is unlocked and Bluetooth is enabled."
                 )}
               </Text>
             </View>
           )}
-          <TouchableOpacity
-            style={MyColdWalletScreenStyle.cancelButtonLookingFor}
-            onPress={onCancel}
-          >
-            <Text style={MyColdWalletScreenStyle.cancelButtonText}>
-              {t("Cancel")}
-            </Text>
-          </TouchableOpacity>
+
+          {!isScanning ? (
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "flex-end",
+                marginTop: 20,
+              }}
+            >
+              <TouchableOpacity
+                style={[
+                  SecureDeviceScreenStyle.cancelButton,
+                  {
+                    flex: 1,
+                    borderRadius: 15,
+                    marginRight: 10,
+                  },
+                ]}
+                onPress={onCancel}
+              >
+                <Text style={SecureDeviceScreenStyle.cancelButtonText}>
+                  {t("Cancel")}
+                </Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={[
+                  SecureDeviceScreenStyle.confirmButton,
+                  {
+                    flex: 1,
+                    borderRadius: 15,
+                  },
+                ]}
+                onPress={onRefreshPress}
+              >
+                <Text style={SecureDeviceScreenStyle.cancelButtonText}>
+                  {t("Refresh")}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          ) : (
+            <TouchableOpacity
+              style={SecureDeviceScreenStyle.cancelButtonLookingFor}
+              onPress={onCancel}
+            >
+              <Text style={SecureDeviceScreenStyle.cancelButtonText}>
+                {t("Cancel")}
+              </Text>
+            </TouchableOpacity>
+          )}
         </View>
       </BlurView>
     </Modal>

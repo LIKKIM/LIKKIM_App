@@ -11,12 +11,12 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   Platform,
-  Clipboard,
   TouchableWithoutFeedback,
   Alert,
 } from "react-native";
+import Clipboard from "@react-native-clipboard/clipboard";
 import { BlurView } from "expo-blur";
-import Icon from "react-native-vector-icons/MaterialIcons";
+import { MaterialIcons as Icon } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useTranslation } from "react-i18next";
 import { networkImages, networks } from "../../config/networkConfig";
@@ -27,6 +27,9 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
   const [newNetwork, setNewNetwork] = useState("");
   const [newName, setNewName] = useState("");
   const [newAddress, setNewAddress] = useState("");
+  const [newNetworkError, setNewNetworkError] = useState("");
+  const [newNameError, setNewNameError] = useState("");
+  const [newAddressError, setNewAddressError] = useState("");
   const [networkDropdownVisible, setNetworkDropdownVisible] = useState(false);
   const [dropdownVisible, setDropdownVisible] = useState(null);
   const [savedAddresses, setSavedAddresses] = useState([]);
@@ -41,6 +44,9 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
       setNewNetwork("");
       setNewName("");
       setNewAddress("");
+      setNewNetworkError("");
+      setNewNameError("");
+      setNewAddressError("");
       setDropdownVisible(null);
       setNetworkDropdownVisible(false);
     }
@@ -82,7 +88,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
 
   const handleCopy = (address) => {
     Clipboard.setString(address);
-    Alert.alert("Copied", "Address copied to clipboard.");
+    Alert.alert("", t("Address copied to clipboard"));
     setDropdownVisible(null);
   };
 
@@ -121,40 +127,66 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
   };
 
   const handleSaveAddress = () => {
-    if (newNetwork && newName && newAddress) {
-      let updatedAddresses = [];
-      if (editingId) {
-        updatedAddresses = savedAddresses.map((item) => {
-          if (item.id === editingId) {
-            return {
-              id: editingId,
-              network: newNetwork,
-              name: newName,
-              address: newAddress,
-            };
-          }
-          return item;
-        });
-      } else {
-        const newEntry = {
-          id: Date.now().toString(),
-          network: newNetwork,
-          name: newName,
-          address: newAddress,
-        };
-        updatedAddresses = [...savedAddresses, newEntry];
-      }
+    let hasError = false;
 
-      setSavedAddresses(updatedAddresses);
-      saveAddressesToStorage(updatedAddresses);
-      setNewNetwork("");
-      setNewName("");
-      setNewAddress("");
-      setEditingId(null);
-      setIsAddingAddress(false);
+    if (!newNetwork) {
+      setNewNetworkError(t("Network is required"));
+      hasError = true;
     } else {
-      console.log("Please fill all fields");
+      setNewNetworkError("");
     }
+
+    if (!newName) {
+      setNewNameError(t("Name is required"));
+      hasError = true;
+    } else {
+      setNewNameError("");
+    }
+
+    if (!newAddress) {
+      setNewAddressError(t("Address is required"));
+      hasError = true;
+    } else {
+      setNewAddressError("");
+    }
+
+    if (hasError) {
+      return;
+    }
+
+    let updatedAddresses = [];
+    if (editingId) {
+      updatedAddresses = savedAddresses.map((item) => {
+        if (item.id === editingId) {
+          return {
+            id: editingId,
+            network: newNetwork,
+            name: newName,
+            address: newAddress,
+          };
+        }
+        return item;
+      });
+    } else {
+      const newEntry = {
+        id: Date.now().toString(),
+        network: newNetwork,
+        name: newName,
+        address: newAddress,
+      };
+      updatedAddresses = [...savedAddresses, newEntry];
+    }
+
+    setSavedAddresses(updatedAddresses);
+    saveAddressesToStorage(updatedAddresses);
+    setNewNetwork("");
+    setNewName("");
+    setNewAddress("");
+    setNewNetworkError("");
+    setNewNameError("");
+    setNewAddressError("");
+    setEditingId(null);
+    setIsAddingAddress(false);
   };
 
   const filteredNetworks = networks.filter((network) =>
@@ -179,14 +211,27 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                 style={[
                   styles.addressModalView,
                   { justifyContent: "space-between" },
-                  isAddingAddress ? { height: 390 } : { height: 480 },
+                  !isAddingAddress && { height: 380 },
+                  { backgroundColor: isDarkMode ? "#3F3D3C" : "#ffffff" },
                 ]}
               >
                 {!isAddingAddress ? (
                   <>
-                    <Text style={styles.modalTitle}>{t("Address Book")}</Text>
-                    <View style={styles.searchContainer}>
-                      <Icon name="search" size={20} style={styles.searchIcon} />
+                    {/*                     <Text style={styles.modalTitle}>{t("Address Book")}</Text> */}
+                    <View
+                      style={[
+                        styles.searchContainer,
+                        { backgroundColor: isDarkMode ? "#21201E" : "#E5E1E9" },
+                      ]}
+                    >
+                      <Icon
+                        name="search"
+                        size={20}
+                        style={[
+                          styles.searchIcon,
+                          { color: isDarkMode ? "#fff" : "#000" },
+                        ]}
+                      />
                       <TextInput
                         style={styles.searchInput}
                         placeholder={t("Search Address")}
@@ -245,6 +290,9 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                                       width: 24,
                                       height: 24,
                                       marginRight: 5,
+                                      backgroundColor:
+                                        "rgba(255, 255, 255, 0.2)",
+                                      borderRadius: 12,
                                     }}
                                   />
                                   <Text
@@ -312,25 +360,49 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                               </TouchableOpacity>
                             </TouchableOpacity>
                             {dropdownVisible === item.id && (
-                              <View style={styles.dropdown}>
+                              <View
+                                style={[
+                                  styles.dropdown,
+                                  {
+                                    backgroundColor: isDarkMode
+                                      ? "#3F3D3C"
+                                      : "#ffffff",
+                                  },
+                                ]}
+                              >
                                 <TouchableOpacity
                                   onPress={() => handleCopy(item.address)}
                                 >
-                                  <Text style={styles.dropdownButtonText}>
+                                  <Text
+                                    style={[
+                                      styles.dropdownButtonText,
+                                      { color: isDarkMode ? "#fff" : "#000" },
+                                    ]}
+                                  >
                                     {t("Copy")}
                                   </Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity
                                   onPress={() => handleDelete(item.id)}
                                 >
-                                  <Text style={styles.dropdownButtonText}>
+                                  <Text
+                                    style={[
+                                      styles.dropdownButtonText,
+                                      { color: isDarkMode ? "#fff" : "#000" },
+                                    ]}
+                                  >
                                     {t("Delete")}
                                   </Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity
                                   onPress={() => handleEdit(item.id)}
                                 >
-                                  <Text style={styles.dropdownButtonText}>
+                                  <Text
+                                    style={[
+                                      styles.dropdownButtonText,
+                                      { color: isDarkMode ? "#fff" : "#000" },
+                                    ]}
+                                  >
                                     {t("Edit")}
                                   </Text>
                                 </TouchableOpacity>
@@ -340,20 +412,53 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                         )}
                       />
                     </View>
-                    <TouchableOpacity
-                      onPress={() => setIsAddingAddress(true)}
-                      style={styles.submitButton}
+                    <View
+                      style={[
+                        styles.AddressBookContainer,
+                        { justifyContent: "flex-start" },
+                      ]}
                     >
-                      <Text style={styles.submitButtonText}>
-                        {t("Add Address")}
-                      </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      onPress={onClose}
-                      style={styles.closeButton}
-                    >
-                      <Text style={styles.cancelButtonText}>{t("Close")}</Text>
-                    </TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={onClose}
+                        style={[
+                          styles.backButton,
+                          {
+                            borderColor: isDarkMode ? "#CCB68C" : "#E5E1E9",
+                          },
+                        ]}
+                      >
+                        <Text
+                          style={[
+                            styles.submitButtonText,
+                            {
+                              color: isDarkMode ? "#fff" : "#000",
+                            },
+                          ]}
+                        >
+                          {t("Close")}
+                        </Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={() => setIsAddingAddress(true)}
+                        style={[
+                          styles.saveButton,
+                          {
+                            backgroundColor: isDarkMode ? "#CCB68C" : "#E5E1E9",
+                          },
+                        ]}
+                      >
+                        <Text
+                          style={[
+                            styles.cancelButtonText,
+                            {
+                              color: isDarkMode ? "#fff" : "#000",
+                            },
+                          ]}
+                        >
+                          {t("Add Address")}
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
                   </>
                 ) : (
                   <>
@@ -365,6 +470,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                             flexDirection: "row",
                             justifyContent: "space-between",
                             alignItems: "center",
+                            backgroundColor: isDarkMode ? "#21201E" : "#e0e0e0",
                           },
                         ]}
                         onPress={() =>
@@ -416,6 +522,11 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                           color={isDarkMode ? "#ddd" : "#676776"}
                         />
                       </TouchableOpacity>
+                      {newNetworkError ? (
+                        <Text style={{ color: "red", marginBottom: 10 }}>
+                          {newNetworkError}
+                        </Text>
+                      ) : null}
                       {networkDropdownVisible && (
                         <View style={{ width: "100%", marginBottom: 10 }}>
                           <ScrollView
@@ -436,8 +547,12 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                                   alignItems: "center",
                                   backgroundColor:
                                     network === newNetwork
-                                      ? styles.submitButton.backgroundColor
-                                      : styles.passwordInput.backgroundColor,
+                                      ? isDarkMode
+                                        ? "#3F3D3C"
+                                        : "#f5f5f5"
+                                      : isDarkMode
+                                      ? "#21201E"
+                                      : "#e0e0e0",
                                 }}
                               >
                                 <Image
@@ -450,7 +565,12 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                                     borderRadius: 12,
                                   }}
                                 />
-                                <Text style={{ color: styles.Text.color }}>
+                                <Text
+                                  style={[
+                                    styles.Text,
+                                    { color: isDarkMode ? "#fff" : "#000" },
+                                  ]}
+                                >
                                   {network}
                                 </Text>
                               </TouchableOpacity>
@@ -461,36 +581,95 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                       {!networkDropdownVisible && (
                         <>
                           <TextInput
-                            style={styles.passwordInput}
+                            style={[
+                              styles.passwordInput,
+                              {
+                                backgroundColor: isDarkMode
+                                  ? "#21201E"
+                                  : "#e0e0e0",
+                                color: isDarkMode ? "#fff" : "#000",
+                              },
+                            ]}
                             placeholder="Name Required"
                             placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
                             onChangeText={setNewName}
                             value={newName}
                             autoFocus={true}
                           />
+                          {newNameError ? (
+                            <Text style={{ color: "red", marginBottom: 10 }}>
+                              {newNameError}
+                            </Text>
+                          ) : null}
                           <TextInput
-                            style={styles.addressInput}
+                            style={[
+                              styles.addressInput,
+                              {
+                                backgroundColor: isDarkMode
+                                  ? "#21201E"
+                                  : "#e0e0e0",
+                                color: isDarkMode ? "#fff" : "#000",
+                              },
+                            ]}
                             placeholder="Address Required"
                             placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
                             onChangeText={setNewAddress}
                             value={newAddress}
                             multiline
                           />
+                          {newAddressError ? (
+                            <Text
+                              style={{
+                                color: "red",
+                                marginTop: 10,
+                              }}
+                            >
+                              {newAddressError}
+                            </Text>
+                          ) : null}
                         </>
                       )}
                     </View>
                     <View style={styles.AddressBookContainer}>
                       <TouchableOpacity
-                        onPress={handleSaveAddress}
-                        style={styles.saveButton}
+                        onPress={() => setIsAddingAddress(false)}
+                        style={[
+                          styles.backButton,
+                          {
+                            borderColor: isDarkMode ? "#CCB68C" : "#E5E1E9",
+                          },
+                        ]}
                       >
-                        <Text style={styles.submitButtonText}>{t("Save")}</Text>
+                        <Text
+                          style={[
+                            styles.cancelButtonText,
+                            {
+                              color: isDarkMode ? "#fff" : "#000",
+                            },
+                          ]}
+                        >
+                          {t("Back")}
+                        </Text>
                       </TouchableOpacity>
                       <TouchableOpacity
-                        onPress={() => setIsAddingAddress(false)}
-                        style={styles.backButton}
+                        onPress={handleSaveAddress}
+                        style={[
+                          styles.saveButton,
+                          {
+                            backgroundColor: isDarkMode ? "#CCB68C" : "#E5E1E9",
+                          },
+                        ]}
                       >
-                        <Text style={styles.cancelButtonText}>{t("Back")}</Text>
+                        <Text
+                          style={[
+                            styles.submitButtonText,
+                            {
+                              color: isDarkMode ? "#fff" : "#000",
+                            },
+                          ]}
+                        >
+                          {t("Save")}
+                        </Text>
                       </TouchableOpacity>
                     </View>
                   </>

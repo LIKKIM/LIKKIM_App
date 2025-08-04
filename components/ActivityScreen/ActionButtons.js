@@ -1,0 +1,54 @@
+// ActionButtons.js
+import React from "react";
+import { View, Text, TouchableOpacity } from "react-native";
+import { MaterialIcons as Icon } from "@expo/vector-icons";
+
+const ActionButtons = ({
+  ActivityScreenStyle,
+  t,
+  iconColor,
+  handleSendPress,
+  handleReceivePress,
+  handleConvertPress,
+}) => {
+  return (
+    <View
+      style={{
+        width: "100%", // Full width for responsiveness
+        height: 110,
+        flexDirection: "row",
+        justifyContent: "space-between", // Evenly spaced buttons
+        gap: 10, // Space between buttons
+      }}
+    >
+      {/* Send button */}
+      <TouchableOpacity
+        style={[ActivityScreenStyle.roundButton, { flex: 1 }]} // Equal width for each button
+        onPress={handleSendPress}
+      >
+        <Icon name="arrow-outward" size={24} color={iconColor} />
+        <Text style={ActivityScreenStyle.mainButtonText}>{t("Send")}</Text>
+      </TouchableOpacity>
+
+      {/* Receive button */}
+      <TouchableOpacity
+        style={[ActivityScreenStyle.roundButton, { flex: 1 }]} // Equal width for each button
+        onPress={handleReceivePress}
+      >
+        <Icon name="vertical-align-bottom" size={24} color={iconColor} />
+        <Text style={ActivityScreenStyle.mainButtonText}>{t("Receive")}</Text>
+      </TouchableOpacity>
+
+      {/* Convert button */}
+      <TouchableOpacity
+        style={[ActivityScreenStyle.roundButton, { flex: 1 }]} // Equal width for each button
+        onPress={handleConvertPress}
+      >
+        <Icon name="swap-horiz" size={24} color={iconColor} />
+        <Text style={ActivityScreenStyle.mainButtonText}>{t("Convert")}</Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
+
+export default ActionButtons;

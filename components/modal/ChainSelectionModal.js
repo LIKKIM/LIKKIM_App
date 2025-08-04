@@ -45,28 +45,16 @@ const ChainSelectionModal = ({
                 height: 500,
                 width: "90%",
                 borderRadius: 20,
-                padding: 35,
+                padding: 30,
                 alignItems: "center",
                 justifyContent: "space-between",
                 backgroundColor: isDarkMode ? "#21201E" : "#FFFFFF",
               }}
               onStartShouldSetResponder={() => true}
             >
-              <Text
-                style={{
-                  fontSize: 16,
-                  textAlign: "center",
-                  marginBottom: 20,
-                  lineHeight: 30,
-                  color: isDarkMode ? "#FFFFFF" : "#000000",
-                }}
-              >
-                {t("Select Chain")}
-              </Text>
-
               <ScrollView
                 contentContainerStyle={{ alignItems: "center" }}
-                style={{ maxHeight: 400, width: 320, paddingHorizontal: 20 }}
+                style={{ maxHeight: 500, width: 320, paddingHorizontal: 20 }}
               >
                 <TouchableOpacity
                   onPress={() => handleSelectChain("All")}
@@ -90,7 +78,7 @@ const ChainSelectionModal = ({
                   }}
                 >
                   <Image
-                    source={require("../../assets/WalletScreenLogo.png")}
+                    source={require("../../assets/VaultScreenLogo.png")}
                     style={{
                       width: 24,
                       height: 24,

@@ -2,7 +2,7 @@
 import React from "react";
 import { Modal, View, Text, TextInput, TouchableOpacity } from "react-native";
 import { BlurView } from "expo-blur";
-import Icon from "react-native-vector-icons/MaterialIcons";
+import { MaterialIcons as Icon } from "@expo/vector-icons";
 
 const DisableLockScreenModal = ({
   visible,
@@ -24,7 +24,7 @@ const DisableLockScreenModal = ({
   >
     <BlurView intensity={10} style={styles.centeredView}>
       <View style={styles.disableLockModalView}>
-        <Text style={styles.passwordModalTitle}>
+        <Text style={styles.LockCodeModalTitle}>
           {t("Disable Lock Screen")}
         </Text>
         <View style={{ marginVertical: 10, width: "100%" }}>

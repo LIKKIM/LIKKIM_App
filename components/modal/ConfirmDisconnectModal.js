@@ -1,15 +1,14 @@
 // modal/ConfirmDisconnectModal.js
-import React from "react";
+import React, { useContext } from "react";
 import { View, Text, TouchableOpacity, Modal } from "react-native";
 import { BlurView } from "expo-blur";
-
-const ConfirmDisconnectModal = ({
-  visible,
-  onConfirm,
-  onCancel,
-  styles,
-  t,
-}) => {
+import { useTranslation } from "react-i18next";
+import { DarkModeContext } from "../../utils/DeviceContext";
+import SecureDeviceScreenStyles from "../../styles/SecureDeviceScreenStyle";
+const ConfirmDisconnectModal = ({ visible, onConfirm, onCancel }) => {
+  const { isDarkMode, setIsDarkMode } = useContext(DarkModeContext);
+  const styles = SecureDeviceScreenStyles(isDarkMode);
+  const { t } = useTranslation();
   return (
     <Modal
       animationType="slide"

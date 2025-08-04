@@ -1,0 +1,193 @@
+import React, { useContext, useLayoutEffect } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Linking,
+  Image,
+} from "react-native";
+import { useTranslation } from "react-i18next";
+import { useNavigation } from "@react-navigation/native";
+import { LinearGradient } from "expo-linear-gradient";
+import { DarkModeContext } from "../../utils/DeviceContext";
+
+const SupportPage = () => {
+  const { isDarkMode } = useContext(DarkModeContext);
+  const navigation = useNavigation();
+  const { t } = useTranslation();
+
+  const darkColors = ["#21201E", "#0E0D0D"];
+  const lightColors = ["#FFFFFF", "#EDEBEF"];
+  const borderColor = isDarkMode ? "#3C3C3C" : "#EDEBEF";
+  const BluetoothBtnColor = isDarkMode ? "#CCB68C" : "#CFAB95";
+
+  // Configure header options dynamically based on dark mode
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerStyle: {
+        backgroundColor: isDarkMode ? "#21201E" : "#FFFFFF",
+      },
+      headerTintColor: isDarkMode ? "#FFFFFF" : "#000000",
+      headerBackTitle: t("Back"),
+    });
+  }, [isDarkMode, navigation, t]);
+
+  // Social media links with corresponding icons and URLs
+  const socialMediaLinks = [
+    {
+      name: "Twitter",
+      icon: isDarkMode
+        ? require("../../assets/icon/Twitter.png")
+        : require("../../assets/icon/TwitterDark.png"),
+      url: "https://x.com/LukkeyAG",
+    },
+    /*   {
+      name: "Telegram",
+      icon: isDarkMode
+        ? require("../../assets/icon/Telegram.png")
+        : require("../../assets/icon/TelegramDark.png"),
+      url: "https://t.me/+q9j351SAY8hlMDJl",
+    }, */
+    {
+      name: "Discord",
+      icon: isDarkMode
+        ? require("../../assets/icon/Discord.png")
+        : require("../../assets/icon/DiscordDark.png"),
+      url: "https://discord.gg/59hKBX2daq",
+    },
+    {
+      name: "Reddit",
+      icon: isDarkMode
+        ? require("../../assets/icon/Reddit.png")
+        : require("../../assets/icon/RedditDark.png"),
+      url: "https://www.reddit.com/user/Ok_Bass_6829/",
+    },
+    {
+      name: "Facebook",
+      icon: isDarkMode
+        ? require("../../assets/icon/Facebook.png")
+        : require("../../assets/icon/FacebookDark.png"),
+      url: "https://www.facebook.com/profile.php?id=61578769227902",
+    },
+    {
+      name: "YouTube",
+      icon: isDarkMode
+        ? require("../../assets/icon/Youtube.png")
+        : require("../../assets/icon/YoutubeDark.png"),
+      url: "https://www.youtube.com/@LukkeySwiss",
+    },
+    {
+      name: "Instagram",
+      icon: isDarkMode
+        ? require("../../assets/icon/Instagram.png")
+        : require("../../assets/icon/InstagramDark.png"),
+      url: "https://www.instagram.com/lukkey_swiss/",
+    },
+    {
+      name: "Tiktok",
+      icon: isDarkMode
+        ? require("../../assets/icon/Tiktok.png")
+        : require("../../assets/icon/TiktokDark.png"),
+      url: "https://www.tiktok.com/@lukkeyag",
+    },
+  ];
+
+  // Opens email client for support feedback
+  const handleEmailPress = () => {
+    const email = "info@likkim.com";
+    const subject = encodeURIComponent("LUKKEY feedback");
+    const body = encodeURIComponent("Hi support team");
+    const url = `mailto:${email}?subject=${subject}&body=${body}`;
+    Linking.canOpenURL(url)
+      .then((supported) => {
+        if (!supported) {
+          console.logo("Can't handle email link: " + url);
+          alert("Email client is not available on this device.");
+        } else {
+          return Linking.openURL(url);
+        }
+      })
+      .catch((err) => {
+        console.logo("An error occurred", err);
+        alert("Failed to open email client.");
+      });
+  };
+
+  return (
+    <LinearGradient
+      style={styles.container}
+      colors={isDarkMode ? darkColors : lightColors}
+    >
+      {socialMediaLinks.map((link, index) => (
+        <TouchableOpacity
+          key={index}
+          style={[styles.settingsItem, { borderBottomColor: borderColor }]}
+          onPress={() => Linking.openURL(link.url)}
+        >
+          <Image
+            source={link.icon}
+            style={{ width: 20, height: 20 }}
+            resizeMode="contain"
+          />
+          <Text
+            style={[
+              styles.linkText,
+              { color: isDarkMode ? "#FFFFFF" : "#000000" },
+            ]}
+          >
+            {link.name}
+          </Text>
+        </TouchableOpacity>
+      ))}
+      <TouchableOpacity
+        style={[styles.emailButton, { backgroundColor: BluetoothBtnColor }]}
+        onPress={handleEmailPress}
+      >
+        <Text style={styles.emailButtonText}>
+          {t("Contact Support via Email")}
+        </Text>
+      </TouchableOpacity>
+    </LinearGradient>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    paddingTop: 10,
+    paddingLeft: 20,
+    paddingRight: 20,
+  },
+  settingsItem: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingVertical: 15,
+    borderBottomWidth: 1,
+    width: "100%",
+  },
+  linkText: {
+    marginLeft: 20,
+    fontSize: 18,
+  },
+  emailButton: {
+    marginTop: 30,
+    borderRadius: 30,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    width: "100%",
+    height: 60,
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 20,
+  },
+  emailButtonText: {
+    color: "white",
+    fontSize: 16,
+    textAlign: "center",
+  },
+});
+
+export default SupportPage;
