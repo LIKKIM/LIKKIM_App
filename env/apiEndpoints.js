@@ -14,8 +14,8 @@ export const accountAPI = {
   encodeEvm: "https://bt.likkim.com/api/sign/encode_evm",
 };
 export const metricsAPII = {
-  exchangeRate: "https://df.likkim.com/api/market/exchange-rate",
-  indexTickers: "https://df.likkim.com/api/market/index-tickers",
+  exchangeRate: "market.lukkey.ch/api/market/exchange-rate",
+  indexTickers: "market.lukkey.ch/api/market/index-tickers",
 };
 export const galleryAPI = {
   queryNFTBalance: "https://bt.likkim.com/api/nfts/query-address-balance-fills",
@@ -31,7 +31,7 @@ export const meridianAPI = {
   queryBlockList: "https://bt.likkim.com/meridian/address/queryBlockList",
 };
 export const chartAPI = {
-  indexCandles: "https://df.likkim.com/api/market/index-candles",
+  indexCandles: "market.lukkey.ch/api/market/index-candles",
 };
 
 export const firmwareAPI = {
