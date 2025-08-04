@@ -3,6 +3,7 @@ import { accountAPI, signAPI } from "../../env/apiEndpoints";
 import { chainGroups, families } from "../../config/mappingRegistry";
 import assetOps from "../../config/assetOps";
 import { bluetoothConfig } from "../../env/bluetoothConfig";
+import { initialAdditionalCryptos } from "../../config/assetInfo";
 
 // BLE 常量
 const serviceUUID = bluetoothConfig.serviceUUID;
@@ -286,6 +287,14 @@ const signTransaction = async (
     const chainMethod = getChainMappingMethod(chainKey);
     let requestData = null;
 
+    // 查找当前链的 publicKey
+    const getPublicKeyByChain = (chainKey) => {
+      const crypto = initialAdditionalCryptos.find(
+        (item) => item.queryChainName?.toLowerCase() === chainKey
+      );
+      return crypto?.publicKey || "";
+    };
+
     if (chainMethod === "evm") {
       // evm:  构造待签名hex请求数据（例如 Ethereum）
       requestData = {
@@ -341,8 +350,7 @@ const signTransaction = async (
         gasLimit: maxGasAmount,
         memo: "", //这个是备注
         timeoutHeight: heigh,
-        publicKey:
-          "xpub6FmpQ9cxRXYYUNic6AtESRfMq2dfBm4hcAMgrLxm95NbmfC6ZFXmvRarzmfASdpwXjqR9BxsMLEWxNhVXjkxbQDkxMhpj4256ySt3wEuxdQ",
+        publicKey: getPublicKeyByChain(chainKey),
       };
     } else if (chainMethod === "solana") {
       // solana:  构造待签名hex请求数据（Solana 链）
@@ -372,8 +380,7 @@ const signTransaction = async (
         amount: Number(amount),
         fee: gasPrice,
         sequence: sequence,
-        publicKey:
-          "xpub6Cev2GgWsGScABSqE3orVzNVbkNMm3AZ7PPopEjZjjZamQKN289XRFUzFau31vhpyMEdzJXywosaKXQHTqDjgjEPjK7Hxp5zGSvhQTDAwjW",
+        publicKey: getPublicKeyByChain(chainKey),
       };
     }
     console.log(
