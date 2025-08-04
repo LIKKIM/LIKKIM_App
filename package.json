@@ -2,6 +2,8 @@
   "name": "app-mobile",
   "version": "1.0.0",
   "scripts": {
+    "Step1_installlegacy": "npm install --legacy-peer-deps",
+    "Step2_updateNative": "expo prebuild",
     "start": "expo start --dev-client",
     "buildDev:all": "eas build --profile development --platform all",
     "buildDev": "eas build --profile development",
@@ -14,10 +16,8 @@
     "getAab": "eas build --profile production --platform android --clear-cache",
     "getTF": "eas build --platform ios --profile production --auto-submit",
     "pushPlayStore": "eas build --auto-submit --platform android",
-    "updateNative": "expo prebuild",
     "DownloadKeystore": "eas credentials --platform android",
-    "expoGo": "expo start",
-    "installlegacy": "npm install --legacy-peer-deps"
+    "expoGo": "expo start"
   },
   "dependencies": {
     "@babel/plugin-proposal-export-namespace-from": "^7.18.9",
