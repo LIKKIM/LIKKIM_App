@@ -40,25 +40,25 @@ export default {
         "Allow $(PRODUCT_NAME) to communicate with your device via NFC.",
       NSAppTransportSecurity: {
         NSExceptionDomains: {
-          "bt.likkim.com": {
+          "market.lukkey.ch": {
             NSIncludesSubdomains: true,
             NSExceptionAllowsInsecureHTTPLoads: false,
             NSExceptionRequiresForwardSecrecy: true,
             NSRequiresCertificateTransparency: false,
           },
-          "swap.likkim.com": {
+          "convert.lukkey.ch": {
             NSIncludesSubdomains: true,
             NSExceptionAllowsInsecureHTTPLoads: false,
             NSExceptionRequiresForwardSecrecy: true,
             NSRequiresCertificateTransparency: false,
           },
-          "df.likkim.com": {
+          "chain.lukkey.ch": {
             NSIncludesSubdomains: true,
             NSExceptionAllowsInsecureHTTPLoads: false,
             NSExceptionRequiresForwardSecrecy: true,
             NSRequiresCertificateTransparency: false,
           },
-          "file.likkim.com": {
+          "file.lukkey.ch": {
             NSIncludesSubdomains: true,
             NSExceptionAllowsInsecureHTTPLoads: false,
             NSExceptionRequiresForwardSecrecy: true,

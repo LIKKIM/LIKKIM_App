@@ -95,7 +95,7 @@ const SupportPage = () => {
 
   // Opens email client for support feedback
   const handleEmailPress = () => {
-    const email = "info@likkim.com";
+    const email = "info@lukkey.ch";
     const subject = encodeURIComponent("LUKKEY feedback");
     const body = encodeURIComponent("Hi support team");
     const url = `mailto:${email}?subject=${subject}&body=${body}`;

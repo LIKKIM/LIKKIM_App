@@ -24,8 +24,8 @@ export const galleryAPI = {
 };
 
 export const externalLinks = {
-  privacyPolicy: "https://likkim.com/privacy-policy",
-  aboutPage: "https://www.likkim.com",
+  privacyPolicy: "https://lukkey.ch/privacy-policy",
+  aboutPage: "https://www.lukkey.ch",
 };
 
 export const meridianAPI = {
@@ -36,7 +36,7 @@ export const chartAPI = {
 };
 
 export const firmwareAPI = {
-  lvglExec: "https://file.likkim.com/algo/lvgl_exec.dat",
+  lvglExec: "https://file.lukkey.ch/algo/lvgl_exec.dat",
 };
 
 export const signAPI = {
