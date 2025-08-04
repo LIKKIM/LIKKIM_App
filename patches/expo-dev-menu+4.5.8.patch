@@ -1,0 +1,68 @@
+diff --git a/node_modules/expo-dev-menu/ios/DevMenuViewController.swift b/node_modules/expo-dev-menu/ios/DevMenuViewController.swift
+index c5e7494..9fdb148 100644
+--- a/node_modules/expo-dev-menu/ios/DevMenuViewController.swift
++++ b/node_modules/expo-dev-menu/ios/DevMenuViewController.swift
+@@ -35,7 +35,8 @@ class DevMenuViewController: UIViewController {
+ 
+   override func viewWillLayoutSubviews() {
+     super.viewWillLayoutSubviews()
+-    reactRootView?.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height)
++    reactRootView?.frame = CGRect(
++      x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height)
+   }
+ 
+   override func viewWillAppear(_ animated: Bool) {
+@@ -45,9 +46,7 @@ class DevMenuViewController: UIViewController {
+   }
+ 
+   override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+-    get {
+-      return UIInterfaceOrientationMask.all
+-    }
++    return UIInterfaceOrientationMask.all
+   }
+ 
+   @available(iOS 12.0, *)
+@@ -61,7 +60,11 @@ class DevMenuViewController: UIViewController {
+   // MARK: private
+ 
+   private func initialProps() -> [String: Any] {
+-    let isSimulator = TARGET_IPHONE_SIMULATOR > 0
++    #if targetEnvironment(simulator)
++      let isSimulator = true
++    #else
++      let isSimulator = false
++    #endif
+ 
+     return [
+       "showOnboardingView": manager.shouldShowOnboarding(),
+@@ -70,7 +73,7 @@ class DevMenuViewController: UIViewController {
+       "menuPreferences": DevMenuPreferences.serialize(),
+       "uuid": UUID.init().uuidString,
+       "isDevice": !isSimulator,
+-      "registeredCallbacks": manager.registeredCallbacks.map { $0.name }
++      "registeredCallbacks": manager.registeredCallbacks.map { $0.name },
+     ]
+   }
+ 
+@@ -78,7 +81,9 @@ class DevMenuViewController: UIViewController {
+   // in our case, the bridge has usually already loaded. so we need to prod the view.
+   private func forceRootViewToRenderHack() {
+     if !hasCalledJSLoadedNotification, let bridge = manager.appInstance.bridge {
+-      let notification = Notification(name: DevMenuViewController.JavaScriptDidLoadNotification, object: nil, userInfo: ["bridge": bridge])
++      let notification = Notification(
++        name: DevMenuViewController.JavaScriptDidLoadNotification, object: nil,
++        userInfo: ["bridge": bridge])
+ 
+       reactRootView?.javaScriptDidLoad(notification)
+       hasCalledJSLoadedNotification = true
+@@ -95,7 +100,8 @@ class DevMenuViewController: UIViewController {
+         reactRootView = nil
+       }
+       hasCalledJSLoadedNotification = false
+-      reactRootView = DevMenuRootView(bridge: bridge, moduleName: "main", initialProperties: initialProps())
++      reactRootView = DevMenuRootView(
++        bridge: bridge, moduleName: "main", initialProperties: initialProps())
+       reactRootView?.frame = view.bounds
+       reactRootView?.backgroundColor = UIColor.clear
+ 
