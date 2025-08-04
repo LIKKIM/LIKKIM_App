@@ -1,10 +1,9 @@
-/**
- * LIKKIM Dynamic Config
- */
+const mapKeys = require("./env/mapKeys");
+
 export default {
-  owner: "likkimteam",
-  name: "LIKKIM",
-  slug: "likkim",
+  owner: "likkimteam", // ✅ 新 Expo 账号（避免使用曾被封账号）   owner: "secureteam", //❌
+  name: "Lukkey Vault", // ✅
+  slug: "likkim", //  新 slug，用于 OTA、缓存等路径  slug: "securewallet",
   version: "1.0.0",
   orientation: "portrait",
   icon: "./assets/icon.png",
@@ -38,22 +37,50 @@ export default {
         "remote-notification",
       ],
       NFCReaderUsageDescription:
-        "Allow $(PRODUCT_NAME) to read NFC tags to support secure transactions.",
+        "Allow $(PRODUCT_NAME) to communicate with your device via NFC.",
+      NSAppTransportSecurity: {
+        NSExceptionDomains: {
+          "bt.likkim.com": {
+            NSIncludesSubdomains: true,
+            NSExceptionAllowsInsecureHTTPLoads: false,
+            NSExceptionRequiresForwardSecrecy: true,
+            NSRequiresCertificateTransparency: false,
+          },
+          "swap.likkim.com": {
+            NSIncludesSubdomains: true,
+            NSExceptionAllowsInsecureHTTPLoads: false,
+            NSExceptionRequiresForwardSecrecy: true,
+            NSRequiresCertificateTransparency: false,
+          },
+          "df.likkim.com": {
+            NSIncludesSubdomains: true,
+            NSExceptionAllowsInsecureHTTPLoads: false,
+            NSExceptionRequiresForwardSecrecy: true,
+            NSRequiresCertificateTransparency: false,
+          },
+          "file.likkim.com": {
+            NSIncludesSubdomains: true,
+            NSExceptionAllowsInsecureHTTPLoads: false,
+            NSExceptionRequiresForwardSecrecy: true,
+            NSRequiresCertificateTransparency: false,
+          },
+        },
+      },
     },
     supportsTablet: false,
-    buildNumber: "16.3.3",
-    bundleIdentifier: "com.likkim.likkim",
-    icon: "./assets/icon.png",
+    buildNumber: "1.0.17",
+    bundleIdentifier: "com.secnet.vaultapp",
+    icon: "./assets/icon.png", //❌
   },
   android: {
     runtimeVersion: "1.0.0",
     config: {
       googleMaps: {
-        apiKey: "AIzaSyAaLPaHuHj_vT7cHsA99HZeuAH_Z1p3Xbg",
+        apiKey: mapKeys.GOOGLE_MAPS_API_KEY,
       },
     },
     versionCode: 5,
-    package: "com.likkim.wallet",
+    package: "com.likkim.wallet", //❌
   },
   web: {
     favicon: "./assets/favicon.png",
@@ -84,10 +111,7 @@ export default {
   ],
   extra: {
     eas: {
-      projectId: "fdfad2e7-7bed-4bcd-ae6d-ca6c74643d63",
+      projectId: "fdfad2e7-7bed-4bcd-ae6d-ca6c74643d63", //❌
     },
-  },
-  updates: {
-    url: "https://u.expo.dev/fdfad2e7-7bed-4bcd-ae6d-ca6c74643d63",
   },
 };

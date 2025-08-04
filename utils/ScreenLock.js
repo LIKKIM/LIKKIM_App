@@ -10,14 +10,14 @@ import {
   Image,
   Platform,
 } from "react-native";
-import { CryptoContext, DarkModeContext } from "../utils/CryptoContext";
+import { DeviceContext, DarkModeContext } from "../utils/DeviceContext";
 import { useTranslation } from "react-i18next";
-import Icon from "react-native-vector-icons/MaterialIcons";
+import { MaterialIcons as Icon } from "@expo/vector-icons";
 import * as LocalAuthentication from "expo-local-authentication";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const ScreenLock = () => {
-  const { screenLockPassword, setIsAppLaunching } = useContext(CryptoContext);
+  const { screenLockPassword, setIsAppLaunching } = useContext(DeviceContext);
   const { isDarkMode } = useContext(DarkModeContext);
   const { t } = useTranslation();
 
@@ -90,7 +90,7 @@ const ScreenLock = () => {
             source={require("../assets/Logo@500.png")}
             style={{ width: 50, height: 50, marginBottom: 20 }}
           />
-          <Text style={[styles.title, themeStyles.title]}>{t("LIKKIM")}</Text>
+          <Text style={[styles.title, themeStyles.title]}>{t("LUKKEY")}</Text>
           <Text style={[styles.subTitle, themeStyles.subTitle]}>
             {t("Enter Password to Unlock")}
           </Text>
@@ -159,7 +159,7 @@ const ScreenLock = () => {
               </Text>
               <Text style={[styles.modalText, themeStyles.modalText]}>
                 {t(
-                  "Please uninstall then reinstall the app on your phone to delete LIKKIM app data, including accounts and settings."
+                  "To reset the app and remove stored data, please uninstall and reinstall it on your phone."
                 )}
               </Text>
               <TouchableOpacity
@@ -266,7 +266,7 @@ const styles = StyleSheet.create({
   modalView: {
     backgroundColor: "#fff",
     borderRadius: 20,
-    padding: 35,
+    padding: 30,
     alignItems: "center",
     width: "80%",
   },

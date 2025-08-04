@@ -8,8 +8,8 @@ import { Buffer } from "buffer";
  * The parameter object should include:
  * - receivedVerificationCode: The complete verification data string.
  * - pinCode: The user-entered PIN string.
- * - setPinModalVisible: Function to control the visibility of the PIN modal.
- * - setVerificationModalVisible: Function to control the visibility of the verification modal.
+ * - setSecurityCodeModalVisible: Function to control the visibility of the PIN modal.
+ * - setCheckStatusModalVisible: Function to control the visibility of the verification modal.
  * - setVerificationStatus: Function to update the verification status.
  * - selectedDevice: The currently connected device object.
  * - setVerifiedDevices: Function to update the list of verified devices.
@@ -22,8 +22,8 @@ import { Buffer } from "buffer";
 export async function handlePinSubmit({
   receivedVerificationCode,
   pinCode,
-  setPinModalVisible,
-  setVerificationModalVisible,
+  setSecurityCodeModalVisible,
+  setCheckStatusModalVisible,
   setVerificationStatus,
   selectedDevice,
   setVerifiedDevices,
@@ -33,16 +33,17 @@ export async function handlePinSubmit({
   monitorSubscription,
   setPinCode,
 }) {
-  setPinModalVisible(false);
-  setVerificationModalVisible(false);
+  setSecurityCodeModalVisible(false);
+  setCheckStatusModalVisible(false);
   const verificationCodeValue = receivedVerificationCode.trim();
   const pinCodeValue = pinCode.trim();
 
-  console.log(`User PIN: ${pinCodeValue}`);
+  //  console.log(`User PIN: ${pinCodeValue}`);
   console.log(`Received data: ${verificationCodeValue}`);
 
   const [prefix, rest] = verificationCodeValue.split(":");
   if (prefix !== "PIN" || !rest) {
+    setCheckStatusModalVisible(true);
     console.log("Invalid verification format:", verificationCodeValue);
     setVerificationStatus("fail");
     return;
@@ -57,6 +58,21 @@ export async function handlePinSubmit({
 
   console.log(`Extracted PIN: ${receivedPin}`);
   console.log(`Flag: ${flag}`);
+
+  // 新增：无论是否相等，立即发送 pinCodeValue 与 receivedPin 给嵌入式设备
+  try {
+    const pinData = `pinCodeValue:${pinCodeValue},receivedPin:${receivedPin}`;
+    const bufferPinData = Buffer.from(pinData, "utf-8");
+    const base64PinData = bufferPinData.toString("base64");
+    await selectedDevice.writeCharacteristicWithResponseForService(
+      serviceUUID,
+      writeCharacteristicUUID,
+      base64PinData
+    );
+    console.log("Sent pinCodeValue and receivedPin to device:", pinData);
+  } catch (error) {
+    console.log("Error sending pin data:", error);
+  }
 
   if (pinCodeValue === receivedPin) {
     console.log("PIN verified successfully");
@@ -98,37 +114,58 @@ export async function handlePinSubmit({
           base64Address
         );
         console.log("Sent 'address' to device");
-        setVerificationModalVisible(true);
+        setCheckStatusModalVisible(true);
       } catch (error) {
         console.log("Error sending 'address':", error);
       }
 
-      const pubkeyMessages = [
-        "pubkey:cosmos,m/44'/118'/0'/0/0",
-        "pubkey:ripple,m/44'/144'/0'/0/0",
-        "pubkey:celestia,m/44'/118'/0'/0/0",
-        "pubkey:juno,m/44'/118'/0'/0/0",
-        "pubkey:osmosis,m/44'/118'/0'/0/0",
-      ];
+      setTimeout(async () => {
+        const pubkeyMessages = [
+          "pubkey:cosmos,m/44'/118'/0'/0/0",
+          "pubkey:ripple,m/44'/144'/0'/0/0",
+          "pubkey:celestia,m/44'/118'/0'/0/0",
+          "pubkey:juno,m/44'/118'/0'/0/0",
+          "pubkey:osmosis,m/44'/118'/0'/0/0",
+        ];
 
+        for (const message of pubkeyMessages) {
+          await new Promise((resolve) => setTimeout(resolve, 250));
+          try {
+            // 在每条指令结尾加上 \n
+            const messageWithNewline = message + "\n";
+            const bufferMessage = Buffer.from(messageWithNewline, "utf-8");
+            const base64Message = bufferMessage.toString("base64");
+            await selectedDevice.writeCharacteristicWithResponseForService(
+              serviceUUID,
+              writeCharacteristicUUID,
+              base64Message
+            );
+            console.log(`Sent message: ${messageWithNewline}`);
+          } catch (error) {
+            console.log(`Error sending message "${message}":`, error);
+          }
+        }
+      }, 750);
       for (const message of pubkeyMessages) {
+        await new Promise((resolve) => setTimeout(resolve, 250));
         try {
-          const bufferMessage = Buffer.from(message, "utf-8");
+          // 在每条指令结尾加上 \n
+          const messageWithNewline = message + "\n";
+          const bufferMessage = Buffer.from(messageWithNewline, "utf-8");
           const base64Message = bufferMessage.toString("base64");
-
           await selectedDevice.writeCharacteristicWithResponseForService(
             serviceUUID,
             writeCharacteristicUUID,
             base64Message
           );
-          console.log(`Sent message: ${message}`);
+          console.log(`Sent message: ${messageWithNewline}`);
         } catch (error) {
           console.log(`Error sending message "${message}":`, error);
         }
       }
     } else if (flag === "N") {
       console.log("Flag N received; no 'address' sent");
-      setVerificationModalVisible(true);
+      setCheckStatusModalVisible(true);
     }
   } else {
     console.log("PIN verification failed");
