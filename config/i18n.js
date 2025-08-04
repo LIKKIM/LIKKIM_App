@@ -1,6 +1,16 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
-import LanguageDetector from "i18next-react-native-language-detector";
+import * as Localization from "expo-localization";
+
+const LanguageDetector = {
+  type: "languageDetector",
+  async: true,
+  detect: (callback) => {
+    callback(Localization.locale.split("-")[0]);
+  },
+  init: () => {},
+  cacheUserLanguage: () => {},
+};
 //en zh zh-TW fr es ar ja ru ko pt pt-BR it de hi mn th uk vi id tl bn
 i18n
   .use(LanguageDetector)
