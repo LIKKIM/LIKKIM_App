@@ -7,6 +7,7 @@
     "Step3_podinstall": "cd ios && pod install && cd ..",
     "Step4_ios": "expo run:ios",
     "android": "expo run:android",
+    "Step5_buildDev": "eas build --profile development",
     "start": "expo start --dev-client",
     "buildDev:all": "eas build --profile development --platform all",
     "buildDev": "eas build --profile development",
