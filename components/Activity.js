@@ -469,7 +469,7 @@ function ActivityScreen() {
       });
 
       if (!response.ok) {
-        console.error("❌ HTTP Error:", response.status, response.statusText);
+        console.log("❌ HTTP Error:", response.status, response.statusText);
         return;
       }
 
