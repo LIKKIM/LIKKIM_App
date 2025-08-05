@@ -31,8 +31,7 @@ const EmptyWalletView = ({
           muted
         />
         <TouchableOpacity
-          onPress={handleContinue}
-          // onPress={handleWalletTest} //      {/*  测试按钮test btn  */}
+          onPress={global.__DEV__ ? handleWalletTest : handleContinue}
           style={VaultScreenStyle.addWalletButton}
         >
           <Text style={VaultScreenStyle.addWalletButtonText}>
