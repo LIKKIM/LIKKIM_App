@@ -86,7 +86,7 @@ function VaultScreen({ route, navigation }) {
   }
   const VaultScreenStyle = VaultScreenStyles(isDarkMode);
   const { t } = useTranslation();
-  const [activeTab, setActiveTab] = useState("History");
+  const [activeTab, setActiveTab] = useState("Prices");
   const [modalVisible, setModalVisible] = useState(false);
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [addressModalVisible, setAddressModalVisible] = useState(false);
