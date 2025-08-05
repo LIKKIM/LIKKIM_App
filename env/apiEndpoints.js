@@ -14,8 +14,8 @@ export const accountAPI = {
   encodeEvm: "https://chain.lukkey.ch/api/sign/encode_evm",
 };
 export const metricsAPII = {
-  exchangeRate: "market.lukkey.ch/api/market/exchange-rate",
-  indexTickers: "market.lukkey.ch/api/market/index-tickers",
+  exchangeRate: "https://market.lukkey.ch/api/market/exchange-rate",
+  indexTickers: "https://market.lukkey.ch/api/market/index-tickers",
 };
 export const galleryAPI = {
   queryNFTBalance:
