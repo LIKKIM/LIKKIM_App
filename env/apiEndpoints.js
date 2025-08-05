@@ -32,7 +32,7 @@ export const meridianAPI = {
   queryBlockList: "https://chain.lukkey.ch/meridian/address/queryBlockList",
 };
 export const chartAPI = {
-  indexCandles: "market.lukkey.ch/api/market/index-candles",
+  indexCandles: "https://market.lukkey.ch/api/market/index-candles",
 };
 
 export const firmwareAPI = {
