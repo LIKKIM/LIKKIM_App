@@ -1,5 +1,5 @@
 // App.js
-global.__DEV__ = false;
+global.__DEV__ = process.env.NODE_ENV === "development";
 import { TextEncoder, TextDecoder } from "text-encoding";
 if (typeof global.TextEncoder === "undefined") global.TextEncoder = TextEncoder;
 import "intl-pluralrules";

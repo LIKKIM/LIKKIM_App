@@ -48,7 +48,7 @@ global.fetch = async (input, init) => {
 
     return responseCloneForReturn; // 返回 clone 避免主 app fetch 获取已消费 response
   } catch (error) {
-    console.error('Global:fetch error', error);
+    console.log('Global:fetch error', error);
     throw error;
   }
 };
