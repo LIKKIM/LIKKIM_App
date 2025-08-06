@@ -776,6 +776,7 @@ function ActivityScreen() {
   const monitorSubscription = useRef(null);
 
   const monitorVerificationCode = (device, sendparseDeviceCodeedValue) => {
+    // 正确地移除已有监听
     if (monitorSubscription.current) {
       monitorSubscription.current.remove();
       monitorSubscription.current = null;
@@ -792,6 +793,7 @@ function ActivityScreen() {
           );
           return;
         }
+
         const receivedData = Buffer.from(characteristic.value, "base64");
         const receivedDataString = receivedData.toString("utf8");
         console.log("Received data string:", receivedDataString);
@@ -809,9 +811,30 @@ function ActivityScreen() {
             const updated = { ...prev, [chainShortName]: newAddress };
             const expectedCount = Object.keys(prefixToShortName).length;
             if (Object.keys(updated).length >= expectedCount) {
-              setVerificationStatus("walletReady");
+              setTimeout(() => {
+                setVerificationStatus("walletReady");
+                console.log("All public keys received, wallet ready.");
+              }, 5000);
             } else {
               setVerificationStatus("waiting");
+              // 新增打印缺失的区块链地址
+              const missingChains = Object.values(prefixToShortName).filter(
+                (shortName) => !updated.hasOwnProperty(shortName)
+              );
+              if (missingChains.length > 0) {
+                console.log(
+                  "Missing addresses for chains:",
+                  missingChains.join(", ")
+                );
+                setTimeout(() => {
+                  setVerificationStatus("walletReady");
+                  setMissingChainsForModal(missingChains);
+                  setCheckStatusModalVisible(true);
+                  console.log(
+                    "Timeout reached, setting walletReady despite missing addresses."
+                  );
+                }, 15000);
+              }
             }
             return updated;
           });
@@ -900,6 +923,8 @@ function ActivityScreen() {
 
         if (receivedDataString.startsWith("PIN:")) {
           setReceivedVerificationCode(receivedDataString);
+          monitorSubscription.current?.remove();
+          monitorSubscription.current = null;
         }
       }
     );
