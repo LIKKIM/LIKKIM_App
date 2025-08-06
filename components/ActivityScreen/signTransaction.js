@@ -73,7 +73,9 @@ const signTransaction = async (
     // 交易费用依赖外部变量：selectedFeeTab、recommendedFee、rapidFeeValue
     const transactionFee =
       selectedFeeTab === "Recommended" ? recommendedFee : rapidFeeValue;
-    const firstTradeMsg = `destinationAddress:${senderAddress},${receiveAddress},${transactionFee},${chainKey}`;
+    const firstTradeMsg = `destinationAddress:${senderAddress},${receiveAddress},${amount},${chainKey}`;
+    // 交易金额也传给嵌入式设备
+    console.log("交易金额:", amount);
     console.log("第一步交易信息发送:", firstTradeMsg);
     const firstTradeBuffer = Buffer.from(firstTradeMsg, "utf-8");
     const firstTradeBase64 = firstTradeBuffer.toString("base64");
