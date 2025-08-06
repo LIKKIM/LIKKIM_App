@@ -40,7 +40,7 @@ import { parseDeviceCode } from "../utils/parseDeviceCode";
 import { accountAPI, signAPI } from "../env/apiEndpoints";
 import signTransaction from "./ActivityScreen/signTransaction";
 import { bluetoothConfig } from "../env/bluetoothConfig";
-
+const FILE_NAME = "Activity.js";
 // BLE 常量
 const serviceUUID = bluetoothConfig.serviceUUID;
 const writeCharacteristicUUID = bluetoothConfig.writeCharacteristicUUID;
@@ -788,7 +788,7 @@ function ActivityScreen() {
       async (error, characteristic) => {
         if (error) {
           console.log(
-            "Activty.js Error monitoring device response:",
+            `${FILE_NAME} Error monitoring device response:`,
             error.message
           );
           return;
