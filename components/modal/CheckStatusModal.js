@@ -9,7 +9,13 @@ import PendingGif from "../../assets/gif/Pending.gif";
 import { DarkModeContext } from "../../utils/DeviceContext";
 import SecureDeviceScreenStyles from "../../styles/SecureDeviceScreenStyle";
 
-const CheckStatusModal = ({ visible, status, missingChains = [], onClose }) => {
+const CheckStatusModal = ({
+  visible,
+  status,
+  missingChains = [],
+  onClose,
+  progress: externalProgress, // 新增
+}) => {
   const { isDarkMode, setIsDarkMode } = useContext(DarkModeContext);
   const styles = SecureDeviceScreenStyles(isDarkMode);
   const { t } = useTranslation();
@@ -19,6 +25,10 @@ const CheckStatusModal = ({ visible, status, missingChains = [], onClose }) => {
   let subtitle;
 
   useEffect(() => {
+    if (typeof externalProgress === "number") {
+      setProgress(externalProgress);
+      return;
+    }
     let intervalId;
     if (status === "waiting") {
       setProgress(0);
@@ -38,7 +48,7 @@ const CheckStatusModal = ({ visible, status, missingChains = [], onClose }) => {
     return () => {
       if (intervalId) clearInterval(intervalId);
     };
-  }, [status]);
+  }, [status, externalProgress]);
 
   if (status === "success") {
     imageSource = SuccessGif;
@@ -98,6 +108,11 @@ const CheckStatusModal = ({ visible, status, missingChains = [], onClose }) => {
                 }}
               />
             </View>
+          )}
+          {status === "waiting" && typeof externalProgress === "number" && (
+            <Text style={{ textAlign: "center", marginTop: 4, color: "#888" }}>
+              {t("Synchronized")} {Math.round(progress * 100)}%
+            </Text>
           )}
           <Text style={styles.modalSubtitle}>{subtitle}</Text>
 

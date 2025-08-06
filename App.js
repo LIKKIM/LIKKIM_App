@@ -1028,6 +1028,12 @@ function AppContent({
         status={verificationStatus}
         missingChains={missingChainsForModal}
         onClose={() => setCheckStatusModalVisible(false)}
+        progress={
+          verificationStatus === "waiting"
+            ? Object.keys(receivedAddresses).length /
+              Object.keys(prefixToShortName).length
+            : undefined
+        }
       />
       <ConfirmDisconnectModal
         visible={confirmDisconnectModalVisible}
