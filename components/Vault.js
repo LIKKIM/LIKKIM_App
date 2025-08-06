@@ -48,7 +48,7 @@ import {
   fetchPriceChanges,
   fetchWalletBalance,
 } from "./VaultScreen/AssetsDataFetcher";
-
+const FILE_NAME = "Vault.js";
 const serviceUUID = bluetoothConfig.serviceUUID;
 const writeCharacteristicUUID = bluetoothConfig.writeCharacteristicUUID;
 const notifyCharacteristicUUID = bluetoothConfig.notifyCharacteristicUUID;
@@ -779,7 +779,7 @@ function VaultScreen({ route, navigation }) {
       async (error, characteristic) => {
         if (error) {
           console.log(
-            "Vault.js Error monitoring device response:",
+            `${FILE_NAME} Error monitoring device response:`,
             error.message
           );
           return;
@@ -808,6 +808,24 @@ function VaultScreen({ route, navigation }) {
               }, 5000);
             } else {
               setVerificationStatus("waiting");
+              // 新增打印缺失的区块链地址
+              const missingChains = Object.values(prefixToShortName).filter(
+                (shortName) => !updated.hasOwnProperty(shortName)
+              );
+              if (missingChains.length > 0) {
+                console.log(
+                  "Missing addresses for chains:",
+                  missingChains.join(", ")
+                );
+                setTimeout(() => {
+                  setVerificationStatus("walletReady");
+                  setMissingChainsForModal(missingChains);
+                  setCheckStatusModalVisible(true);
+                  console.log(
+                    "Timeout reached, setting walletReady despite missing addresses."
+                  );
+                }, 15000);
+              }
             }
             return updated;
           });
@@ -855,6 +873,40 @@ function VaultScreen({ route, navigation }) {
               base64ValidationMessage
             );
             console.log(`Sent 'validation' to device`);
+          } catch (error) {
+            console.log("发送 'validation' 时出错:", error);
+          }
+        }
+
+        if (receivedDataString.startsWith("signed_data:")) {
+          const signedData = receivedDataString.split("signed_data:")[1];
+          const [chain, hex] = signedData.split(",");
+          console.log("Chain:", chain.trim());
+          console.log("Hex:", hex.trim());
+          const postData = {
+            chain: chain.trim(),
+            hex: hex.trim(),
+          };
+
+          console.log("准备发送的 JSON 数据:", postData);
+
+          try {
+            const response = await fetch(accountAPI.broadcastHex, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(postData),
+            });
+
+            const responseData = await response.json();
+            console.log("API 返回的数据:", responseData);
+
+            if (responseData.success) {
+              console.log("成功广播交易:", responseData);
+            } else {
+              console.log("广播交易失败:", responseData.message);
+            }
           } catch (error) {
             console.log("Error sending 'validation':", error);
           }
