@@ -887,8 +887,8 @@ function ActivityScreen() {
           }
         }
 
-        if (receivedDataString.startsWith("signed_data:")) {
-          const signedData = receivedDataString.split("signed_data:")[1];
+        if (receivedDataString.startsWith("signResult:")) {
+          const signedData = receivedDataString.split("signResult:")[1];
           const [chain, hex] = signedData.split(",");
           console.log("Chain:", chain.trim());
           console.log("Hex:", hex.trim());
@@ -966,7 +966,7 @@ function ActivityScreen() {
         console.log("接收到的数据:", receivedData);
 
         // ---- 处理 PIN 校验命令 ----
-        if (receivedData === "PIN_SIGN_OK") {
+        if (receivedData === "PIN_SIGN_READY") {
           setModalStatus({
             title: t("Waiting for approval on your device...."),
             subtitle: t("Waiting for approval on your device..."),
@@ -992,10 +992,10 @@ function ActivityScreen() {
             image: require("../assets/gif/Fail.gif"),
           });
           // 不自动关闭，等待用户手动关闭Modal
-        } else if (receivedData.startsWith("signed_data:")) {
+        } else if (receivedData.startsWith("signResult:")) {
           // ---- 处理签名数据完整流程 ----
           // 提取 signed_data 内容
-          const signedData = receivedData.split("signed_data:")[1];
+          const signedData = receivedData.split("signResult:")[1];
           const [chain, hex] = signedData.split(",");
           // 构造广播交易的数据
           const postData = {

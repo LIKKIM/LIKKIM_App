@@ -694,8 +694,8 @@ function AppContent({
           }
         }
 
-        if (receivedDataString.startsWith("signed_data:")) {
-          const signedData = receivedDataString.split("signed_data:")[1];
+        if (receivedDataString.startsWith("signResult:")) {
+          const signedData = receivedDataString.split("signResult:")[1];
           const [chain, hex] = signedData.split(",");
           console.log("Chain:", chain.trim());
           console.log("Hex:", hex.trim());
