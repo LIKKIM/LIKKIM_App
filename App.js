@@ -47,6 +47,7 @@ import { Svg, Path, G } from "react-native-svg";
 import { Buffer } from "buffer";
 import FloatingDev from "./utils/dev";
 import { hexStringToUint32Array, uint32ArrayToHexString } from "./env/hexUtils";
+const FILE_NAME = "App.js";
 const serviceUUID = bluetoothConfig.serviceUUID;
 const writeCharacteristicUUID = bluetoothConfig.writeCharacteristicUUID;
 const notifyCharacteristicUUID = bluetoothConfig.notifyCharacteristicUUID;
@@ -594,7 +595,7 @@ function AppContent({
       async (error, characteristic) => {
         if (error) {
           console.log(
-            "Activty.js Error monitoring device response:",
+            `${FILE_NAME} Error monitoring device response:`,
             error.message
           );
           return;
