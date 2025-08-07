@@ -817,14 +817,6 @@ function VaultScreen({ route, navigation }) {
                   "Missing addresses for chains:",
                   missingChains.join(", ")
                 );
-                setTimeout(() => {
-                  setVerificationStatus("walletReady");
-                  setMissingChainsForModal(missingChains);
-                  setCheckStatusModalVisible(true);
-                  console.log(
-                    "Timeout reached, setting walletReady despite missing addresses."
-                  );
-                }, 15000);
               }
             }
             return updated;
