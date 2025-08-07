@@ -286,6 +286,8 @@ function AppContent({
     setModalVisible(true);
     scanDevices();
   };
+
+  // 核心标准
   const handlePinSubmit = async () => {
     setSecurityCodeModalVisible(false);
     setCheckStatusModalVisible(false);
