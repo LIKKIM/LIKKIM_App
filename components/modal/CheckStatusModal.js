@@ -123,26 +123,6 @@ const CheckStatusModal = ({
           ) : (
             <View style={{ height: 60 }} />
           )}
-
-          {missingChains.length > 0 && (
-            <View
-              style={{
-                marginTop: 10,
-                paddingHorizontal: 10,
-                backgroundColor: isDarkMode ? "#333" : "#eee",
-                borderRadius: 5,
-              }}
-            >
-              <Text style={{ fontWeight: "bold", marginBottom: 5 }}>
-                {t("Missing addresses for chains:")}
-              </Text>
-              {missingChains.map((chain) => (
-                <Text key={chain} style={{ marginLeft: 10 }}>
-                  {chain}
-                </Text>
-              ))}
-            </View>
-          )}
         </View>
       </BlurView>
     </Modal>
