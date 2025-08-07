@@ -881,40 +881,6 @@ function ActivityScreen() {
           }
         }
 
-        if (receivedDataString.startsWith("signResult:")) {
-          const signedData = receivedDataString.split("signResult:")[1];
-          const [chain, hex] = signedData.split(",");
-          console.log("Chain:", chain.trim());
-          console.log("Hex:", hex.trim());
-          const postData = {
-            chain: chain.trim(),
-            hex: hex.trim(),
-          };
-
-          console.log("准备发送的 JSON 数据:", postData);
-
-          try {
-            const response = await fetch(accountAPI.broadcastHex, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(postData),
-            });
-
-            const responseData = await response.json();
-            console.log("API 返回的数据:", responseData);
-
-            if (responseData.success) {
-              console.log("成功广播交易:", responseData);
-            } else {
-              console.log("广播交易失败:", responseData.message);
-            }
-          } catch (error) {
-            console.log("Error sending 'validation':", error);
-          }
-        }
-
         if (receivedDataString.startsWith("PIN:")) {
           setReceivedVerificationCode(receivedDataString);
           monitorSubscription.current?.remove();
@@ -995,6 +961,7 @@ function ActivityScreen() {
           const postData = {
             chain: chain.trim(), // 去掉可能的空格
             hex: hex.trim(), // 在签名前加上 0x，并去掉空格
+            address: selectedAddress,
           };
           // 打印对象
           console.log("准备发送的 POST 数据:", postData);
