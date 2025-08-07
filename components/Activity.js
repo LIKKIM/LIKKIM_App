@@ -964,7 +964,10 @@ function ActivityScreen() {
             address: selectedAddress,
           };
           // 打印对象
-          console.log("准备发送的 POST 数据:", postData);
+          console.log(
+            "准备发送的 POST 数据:",
+            JSON.stringify(postData, null, 2)
+          );
           // 输出: 准备发送的 POST 数据: { chain: "ethereum", hex: "F86C..." }
 
           // 调用广播交易的 API
