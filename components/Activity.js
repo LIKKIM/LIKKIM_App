@@ -455,6 +455,7 @@ function ActivityScreen() {
     try {
       const postData = {
         chain: selectedQueryChainName,
+        type: "",
       };
 
       // 打印发送的 POST 数据
