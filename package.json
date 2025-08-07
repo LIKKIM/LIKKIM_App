@@ -2,7 +2,7 @@
   "name": "app-mobile",
   "version": "1.0.0",
   "scripts": {
-    "Step1_installlegacy": "npm install --legacy-peer-deps",
+    "Step1_installlegacy": "yarn install",
     "Step2_updateNative": "expo prebuild",
     "Step3_podinstall": "cd ios && pod install && cd ..",
     "Step4_ios": "expo run:ios",
