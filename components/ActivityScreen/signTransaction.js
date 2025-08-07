@@ -38,7 +38,6 @@ const signTransaction = async (
   setModalStatus,
   t,
   monitorSignedResult,
-  skipSignedOK = false, // 测试环境
   monitorSubscription
 ) => {
   try {
@@ -95,51 +94,40 @@ const signTransaction = async (
     // 第3步：持续监听嵌入式设备的 "Signed_OK" 命令
     // ---------------------------
 
-    if (!skipSignedOK) {
-      console.log("等待设备发送 Signed_OK 命令...");
-      const signedOkPromise = new Promise((resolve) => {
-        let isResolved = false;
-        monitorSubscription.current = device.monitorCharacteristicForService(
-          serviceUUID,
-          notifyCharacteristicUUID,
-          (error, characteristic) => {
-            if (error) {
-              console.log("监听 Signed_OK 时出错:", error.message);
-              return;
-            }
-            // 对接收到的字符串进行 trim 处理
-            const received = Buffer.from(characteristic.value, "base64")
-              .toString("utf8")
-              .trim();
-            console.log("收到设备响应:", received);
-            if (received === "Signed_OK" && !isResolved) {
-              isResolved = true;
-              monitorSubscription.current?.remove();
-              // 更新 modalStatus 状态，表示设备已确认签名
-              setModalStatus({
-                title: t("Device Confirmed"),
-                subtitle: t(
-                  "The device has confirmed the transaction signature."
-                ),
-                image: require("../../assets/gif/Pending.gif"),
-              });
-              resolve(); // resolve 这个 Promise
-            }
+    console.log("等待设备发送 Signed_OK 命令...");
+    const signedOkPromise = new Promise((resolve) => {
+      let isResolved = false;
+      monitorSubscription.current = device.monitorCharacteristicForService(
+        serviceUUID,
+        notifyCharacteristicUUID,
+        (error, characteristic) => {
+          if (error) {
+            console.log("监听 Signed_OK 时出错:", error.message);
+            return;
           }
-        );
-      });
-      await signedOkPromise;
-      console.log("设备确认回复: Signed_OK");
-    } else {
-      // 跳过第三步，直接假装收到 Signed_OK
-      console.log("【测试模式】已跳过设备 Signed_OK 检查，直接进入下一步");
-      setModalStatus({
-        title: t("Device Confirmed"),
-        subtitle: t("The device has confirmed the transaction signature."),
-        image: require("../../assets/gif/Pending.gif"),
-      });
-      await new Promise((res) => setTimeout(res, 300)); // 可选：模拟一下等待
-    }
+          // 对接收到的字符串进行 trim 处理
+          const received = Buffer.from(characteristic.value, "base64")
+            .toString("utf8")
+            .trim();
+          console.log("收到设备响应:", received);
+          if (received === "Signed_OK" && !isResolved) {
+            isResolved = true;
+            monitorSubscription.current?.remove();
+            // 更新 modalStatus 状态，表示设备已确认签名
+            setModalStatus({
+              title: t("Device Confirmed"),
+              subtitle: t(
+                "The device has confirmed the transaction signature."
+              ),
+              image: require("../../assets/gif/Pending.gif"),
+            });
+            resolve(); // resolve 这个 Promise
+          }
+        }
+      );
+    });
+    await signedOkPromise;
+    console.log("设备确认回复: Signed_OK");
     // ---------------------------
     // 第4步：为了获得下一步请求预签名数据的参数向服务器获取 nonce 和 gasPrice 等参数，真正开启签名流程
     // ---------------------------
