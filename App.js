@@ -358,6 +358,9 @@ function AppContent({
       if (flag === "Y") {
         monitorVerificationCode(selectedDevice);
 
+        setCheckStatusModalVisible(true);
+        setVerificationStatus("waiting");
+
         // 1. 依次批量发所有 address:<chainName> 命令
         for (const prefix of Object.keys(prefixToShortName)) {
           const chainName = prefix.replace(":", "");
