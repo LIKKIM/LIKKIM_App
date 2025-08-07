@@ -169,7 +169,6 @@ function AppContent({
   const [SecurityCodeModalVisible, setSecurityCodeModalVisible] =
     useState(false);
   const [pinCode, setPinCode] = useState("");
-  const [verificationStatus, setVerificationStatus] = useState(null);
   const [missingChainsForModal, setMissingChainsForModal] = useState([]);
   const [receivedAddresses, setReceivedAddresses] = useState({});
   const [selectedDevice, setSelectedDevice] = useState(null);
@@ -179,6 +178,10 @@ function AppContent({
   const [confirmDisconnectModalVisible, setConfirmDisconnectModalVisible] =
     useState(false);
   const monitorSubscription = useRef(null);
+
+  // 用DeviceContext的verificationStatus和setVerificationStatus
+  const { verificationStatus, setVerificationStatus } =
+    useContext(DeviceContext);
 
   const stopMonitoringVerificationCode = () => {
     if (monitorSubscription.current) {

@@ -16,6 +16,7 @@ const NEW_EXCHANGE_RATE_API_URL = metricsAPII.exchangeRate;
 
 export const CryptoProvider = ({ children }) => {
   // State definitions
+  const [verificationStatus, setVerificationStatus] = useState(null);
   const [isScreenLockEnabled, setIsScreenLockEnabled] = useState(false);
   const [screenLockPassword, setScreenLockPassword] = useState("");
   const [cryptoCount, setCryptoCount] = useState(0);
@@ -372,6 +373,8 @@ export const CryptoProvider = ({ children }) => {
   return (
     <DeviceContext.Provider
       value={{
+        verificationStatus,
+        setVerificationStatus,
         updateCryptoData,
         cryptoCount,
         setCryptoCount,

@@ -128,7 +128,8 @@ function VaultScreen({ route, navigation }) {
   const [isScanning, setIsScanning] = useState(false);
   const [devices, setDevices] = useState([]);
   const [selectedDevice, setSelectedDevice] = useState(null);
-  const [verificationStatus, setVerificationStatus] = useState(null);
+  const { verificationStatus, setVerificationStatus } =
+    useContext(DeviceContext);
   const [blueToothStatus, setBlueToothStatus] = useState(null);
   const [createPendingModalVisible, setCreatePendingModalVisible] =
     useState(false);
@@ -532,6 +533,13 @@ function VaultScreen({ route, navigation }) {
       stopMonitoringVerificationCode();
     }
   }, [SecurityCodeModalVisible]);
+
+  // 新增：监听 verificationStatus，walletReady 时自动刷新余额
+  useEffect(() => {
+    if (verificationStatus === "walletReady") {
+      fetchWalletBalance(cryptoCards, setCryptoCards);
+    }
+  }, [verificationStatus]);
 
   useEffect(() => {
     if (route.params?.showAddModal) {
