@@ -479,13 +479,13 @@ function ActivityScreen() {
       console.log("✅ Received response data:", JSON.stringify(data, null, 2));
 
       if (data && data.data) {
-        const { rapidGasPrice, recommendedGasPrice } = data.data;
+        const { rapidFee, recommendedFee } = data.data;
 
-        setFee(recommendedGasPrice);
-        console.log("✅ Fee set to:", recommendedGasPrice);
+        setFee(recommendedFee);
+        console.log("✅ Fee set to:", recommendedFee);
 
-        setRapidFee(rapidGasPrice);
-        console.log("✅ Rapid fee set to:", rapidGasPrice);
+        setRapidFee(rapidFee);
+        console.log("✅ Rapid fee set to:", rapidFee);
       }
     } catch (error) {
       console.log("❌ Failed to fetch processing Fee:", error);
