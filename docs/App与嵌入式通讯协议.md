@@ -43,11 +43,12 @@
 | ------------ | ---------------- | ------------------------------------------------------------ | --------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
 | 1️⃣           | 📱→🔐 App→Device | `destinationAddress:<付款地址>,<收款地址>,<手续费>,<链标识>` | 下发交易主要参数（第一步）        | 例如：`destinationAddress:0x123abc...,0x456def...,100000,ethereum` 所有字段直接拼接，无空格；utf-8 编码后 base64 发送 |
 | 2️⃣（待开发） | 🔐→📱 Device→App | `PIN_SIGN_READY/PIN_SIGN_FAIL/PIN_SIGN_CANCEL`               | 用户密码验证结果                  | 明文，表示用户在设备端 PIN 校验的结果：OK 通过，FAIL 错误，CANCEL 主动取消                                            |
-| 3️⃣           | 🔐→📱 Device→App | `Signed_OK`                                                  | 设备确认交易参数                  | 明文`Signed_OK`，表示设备已收到并处理参数                                                                             |
+| 3️⃣           | 🔐→📱 Device→App | `Signed_OK / Signed_REJECT`                                  | 设备确认交易参数                  | 明文：`Signed_OK` 表示设备已收到并同意处理交易；`Signed_REJECT` 表示用户在设备端拒绝该交易，App 应立即终止签名流程数  |
 | 4️⃣           | 📱→🌐 App→Server | POST 请求：`{chain, from, to, txAmount, ...}`                | 获取 nonce、gasPrice 等预签名参数 | App 向后端 API 发 POST 请求，获取当前链的参数                                                                         |
 | 5️⃣           | 📱→🌐 App→Server | POST 请求：encode 接口请求体                                 | 获取 presign 数据（hex/json）     | 返回链对应预签名数据，用于冷钱包签名                                                                                  |
 | 6️⃣           | 📱→🔐 App→Device | `sign:<链标识>,<BIP44路径>,<presign数据>`                    | 下发预签名数据                    | 例如：`sign:ethereum,m/44'/60'/0'/0/0,0xabc...` utf-8 编码后 base64 发送                                              |
 | 7️⃣           | 🔐→📱 Device→App | `signResult:<签名数据>` 或 `signResult:ERROR`                | 返回最终签名结果或错误            | 明文，如`signResult:0xf86b...`为签名数据，如失败返回 ERROR                                                            |
+| 8️⃣           | 📱→🔐 App→Device | `BCAST_OK` 或 `BCAST_FAIL`                                   | 通知设备广播结果                  | utf-8→base64 编码发送，`BCAST_OK` 表示广播成功；`BCAST_FAIL` 表示广播失败                                             |
 
 ---
 
