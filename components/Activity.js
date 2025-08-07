@@ -164,15 +164,16 @@ function ActivityScreen() {
   const rapidFeeVal = isNaN(parseFloat(rapidFee)) ? 0 : parseFloat(rapidFee);
   //  console.log("parseFloat(fee) 的值是:", feeValue);
   // console.log("parseFloat(rapidFee) 的值是:", rapidFeeVal);
-  const recommendedFee = (feeValue / 1e9).toFixed(9);
+  // 直接显示主币单位，不再除以1e9
+  const recommendedFee = fee; // 已经是主币单位字符串
   const recommendedValue = (
-    (feeValue / 1e9) *
+    feeValue *
     priceUsd *
     exchangeRates[currencyUnit]
   ).toFixed(2);
-  const rapidFeeValue = (rapidFeeVal / 1e9).toFixed(9);
+  const rapidFeeValue = rapidFee; // 已经是主币单位字符串
   const rapidCurrencyValue = (
-    (rapidFeeVal / 1e9) *
+    rapidFeeVal *
     priceUsd *
     exchangeRates[currencyUnit]
   ).toFixed(2);
