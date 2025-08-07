@@ -626,7 +626,7 @@ function AppContent({
               setTimeout(() => {
                 setVerificationStatus("walletReady");
                 console.log("All public keys received, wallet ready.");
-              }, 5000);
+              }, 2000);
             } else {
               setVerificationStatus("waiting");
               // 新增打印缺失的区块链地址
@@ -638,14 +638,6 @@ function AppContent({
                   "Missing addresses for chains:",
                   missingChains.join(", ")
                 );
-                setTimeout(() => {
-                  setVerificationStatus("walletReady");
-                  setMissingChainsForModal(missingChains);
-                  setCheckStatusModalVisible(true);
-                  console.log(
-                    "Timeout reached, setting walletReady despite missing addresses."
-                  );
-                }, 15000);
               }
             }
             return updated;
