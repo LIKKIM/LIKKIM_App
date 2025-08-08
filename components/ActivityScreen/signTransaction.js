@@ -154,7 +154,7 @@ const signTransaction = async (
       chain: postChain,
       from: paymentAddress, // ← 建议用 "from" 替换 "address"，如果接口要求一致
       to: inputAddress,
-      txAmount: String(amount),
+      txAmount: `${amount}`,
       extJson: {
         // protocol: "1", // 可选是否注释
       },
