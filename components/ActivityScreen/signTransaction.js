@@ -1,7 +1,7 @@
 /**
  * 当前支持的区块链签名类型共9种：
  * 1. EVM（主币测试通过）
- * 2. BTC (同方法Dogecoin)
+ * 2. BTC (与Dogecoin同方法)
  * 3. TRON
  * 4. Aptos
  * 5. Cosmos
