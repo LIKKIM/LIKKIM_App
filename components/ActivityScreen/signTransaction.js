@@ -205,8 +205,9 @@ const signTransaction = async (
     }
 
     if (postChain === "ethereum") {
-      const { gasPrice, nonce } = walletParamsData.data;
+      const { gasPrice, nonce: ethNonce } = walletParamsData.data;
       gasPriceValue = gasPrice.normal;
+      nonce = ethNonce;
       console.log("Ethereum 返回的数据:", { gasPrice: gasPriceValue, nonce });
     } else if (postChain === "bitcoin") {
       const { gasPrice, nonce, utxoList } = walletParamsData.data;
@@ -385,10 +386,7 @@ const signTransaction = async (
         publicKey: getPublicKeyByChain(chainKey),
       };
     }
-    console.log(
-      " 构造待签名hex请求数据:",
-      JSON.stringify(requestData, null, 2)
-    );
+    console.log("requestData:", requestData);
     // 根据链类型选择对应的签名接口
     let signApiUrl = null;
     switch (chainMethod) {
