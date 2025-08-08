@@ -1,14 +1,13 @@
 /**
  * 当前支持的区块链签名类型共9种：
  * 1. EVM（主币测试通过）
- * 2. BTC
+ * 2. BTC (同方法Dogecoin)
  * 3. TRON
  * 4. Aptos
  * 5. Cosmos
  * 6. Solana
  * 7. Sui
  * 8. Ripple
- * 9. Dogecoin（服务器签名数据构建还在开发中）
  */
 import { Buffer } from "buffer";
 import { accountAPI, signAPI } from "../../env/apiEndpoints";
@@ -293,7 +292,7 @@ const signTransaction = async (
       if (families.sol.includes(chainKey)) return "solana";
       if (families.sui.includes(chainKey)) return "sui";
       if (families.xrp.includes(chainKey)) return "ripple";
-      if (families.doge.includes(chainKey)) return "doge";
+      if (families.doge.includes(chainKey)) return "btc";
       return null;
     };
 
