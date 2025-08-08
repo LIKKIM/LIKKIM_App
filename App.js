@@ -1020,7 +1020,10 @@ function AppContent({
         pinCode={pinCode}
         setPinCode={setPinCode}
         onSubmit={handlePinSubmit}
-        onCancel={() => setSecurityCodeModalVisible(false)}
+        onCancel={() => {
+          setSecurityCodeModalVisible(false);
+          setVerificationStatus(null);
+        }}
         status={verificationStatus}
       />
       {/* Verification Modal */}
