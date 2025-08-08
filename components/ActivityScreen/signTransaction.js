@@ -423,8 +423,11 @@ const signTransaction = async (
       case "ripple":
         signApiUrl = signAPI.encode_xrp;
         break;
-      default:
-        signApiUrl = signAPI.encode_evm;
+    }
+
+    if (!signApiUrl) {
+      console.log("不支持的chainMethod:", chainMethod);
+      return;
     }
     const response = await fetch(signApiUrl, {
       method: "POST",
