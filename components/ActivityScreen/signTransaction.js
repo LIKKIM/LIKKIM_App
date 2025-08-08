@@ -151,8 +151,14 @@ const signTransaction = async (
 
     // 打印 POST 内容
     console.log("准备发送 getSignParam 请求:");
-    console.log("URL:", accountAPI.getSignParam);
-    console.log("POST 数据:", JSON.stringify(postData, null, 2));
+    console.log("POST 请求详情：", {
+      url: accountAPI.getSignParam,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: postData,
+    });
 
     // 发起请求
     const walletParamsResponse = await fetch(accountAPI.getSignParam, {
@@ -162,6 +168,8 @@ const signTransaction = async (
       },
       body: JSON.stringify(postData),
     });
+    // 打印 fetch 返回的 Response 对象
+    console.log("walletParamsResponse:", walletParamsResponse);
 
     if (!walletParamsResponse.ok) {
       console.log("获取 nonce 和 gasPrice 失败:", walletParamsResponse.status);
@@ -185,7 +193,8 @@ const signTransaction = async (
       epoch,
       accountNumber,
       effectiveFeeAmount,
-      heigh;
+      heigh,
+      gasPriceValue; // 提前声明 gasPriceValue
 
     if (
       !walletParamsData.data?.gasPrice ||
@@ -197,7 +206,8 @@ const signTransaction = async (
 
     if (postChain === "ethereum") {
       const { gasPrice, nonce } = walletParamsData.data;
-      console.log("Ethereum 返回的数据:", { gasPrice, nonce });
+      gasPriceValue = gasPrice.normal;
+      console.log("Ethereum 返回的数据:", { gasPrice: gasPriceValue, nonce });
     } else if (postChain === "bitcoin") {
       const { gasPrice, nonce, utxoList } = walletParamsData.data;
 
@@ -288,11 +298,12 @@ const signTransaction = async (
 
     if (chainMethod === "evm") {
       // evm:  构造待签名hex请求数据（例如 Ethereum）
+      // gasPriceValue 需在 ethereum 分支提前定义
       requestData = {
         chainKey: chainKey,
-        nonce: nonce,
+        nonce: Number(nonce),
         gasLimit: 53000,
-        gasPrice: gasPrice,
+        gasPrice: Number(gasPriceValue),
         value: Number(amount),
         to: inputAddress,
         contractAddress: "",
