@@ -1,5 +1,5 @@
 /**
- * 当前支持的区块链签名类型共8种：
+ * 当前支持的区块链签名类型共9种：
  * 1. EVM（主币测试通过）
  * 2. BTC
  * 3. TRON
@@ -8,6 +8,7 @@
  * 6. Solana
  * 7. Sui
  * 8. Ripple
+ * 9. Dogecoin（服务器签名数据构建还在开发中）
  */
 import { Buffer } from "buffer";
 import { accountAPI, signAPI } from "../../env/apiEndpoints";
