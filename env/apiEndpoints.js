@@ -11,7 +11,6 @@ export const accountAPI = {
   balance: "https://chain.lukkey.ch/api/wallet/balance",
   broadcastHex: "https://chain.lukkey.ch/api/wallet/broadcastHex",
   getSignParam: "https://chain.lukkey.ch/api/wallet/getSignParam",
-  encodeEvm: "https://chain.lukkey.ch/api/sign/encode_evm",
 };
 export const metricsAPII = {
   exchangeRate: "https://market.lukkey.ch/api/market/exchange-rate",
