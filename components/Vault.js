@@ -85,6 +85,7 @@ function VaultScreen({ route, navigation }) {
   if (contextDarkMode !== undefined) {
     isDarkMode = contextDarkMode;
   }
+  const [CheckStatusModalVisible, setCheckStatusModalVisible] = useState(false);
   const VaultScreenStyle = VaultScreenStyles(isDarkMode);
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState("Prices");
