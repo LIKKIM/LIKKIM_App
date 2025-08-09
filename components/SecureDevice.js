@@ -725,25 +725,87 @@ function SecureDeviceScreen({ onDarkModeChange }) {
       }
 
       if (flag === "Y") {
-        console.log("Flag Y received; sending 'address' to device");
-        // ✅ 开启监听，确保设备返回的地址信息能被接收
         monitorVerificationCode(selectedDevice);
-        try {
-          const addressMessage = "address";
-          const bufferAddress = Buffer.from(addressMessage, "utf-8");
-          const base64Address = bufferAddress.toString("base64");
 
+        setCheckStatusModalVisible(true);
+        setVerificationStatus("waiting");
+
+        // 1. 依次批量发所有 address:<chainName> 命令
+        for (const prefix of Object.keys(prefixToShortName)) {
+          const chainName = prefix.replace(":", "");
+          const getMessage = `address:${chainName}`;
+          const bufferGetMessage = Buffer.from(getMessage, "utf-8");
+          const base64GetMessage = bufferGetMessage.toString("base64");
           await selectedDevice.writeCharacteristicWithResponseForService(
             serviceUUID,
             writeCharacteristicUUID,
-            base64Address
+            base64GetMessage
           );
-          console.log("Sent 'address' to device");
-          setCheckStatusModalVisible(true);
-        } catch (error) {
-          console.log("Error sending 'address':", error);
+          await new Promise((resolve) => setTimeout(resolve, 250));
         }
 
+        // 2. 统一延迟2秒检查所有缺失的链地址，然后自动补发一次
+        setTimeout(async () => {
+          // 自动补发最多3次（用本地缓存记补发次数）
+          const retryCountKey = "bluetoothMissingChainRetryCount";
+          let retryCountObj = {};
+          try {
+            const retryStr = await AsyncStorage.getItem(retryCountKey);
+            if (retryStr) retryCountObj = JSON.parse(retryStr);
+          } catch (e) {}
+          if (!retryCountObj) retryCountObj = {};
+
+          // 检查所有链的地址收集情况
+          const addresses = receivedAddresses || {};
+          const missingChains = Object.values(prefixToShortName).filter(
+            (shortName) => !addresses[shortName]
+          );
+
+          if (missingChains.length > 0) {
+            console.log(
+              "🚨 统一补发缺失链 address 请求:",
+              missingChains.join(", ")
+            );
+            for (let i = 0; i < missingChains.length; i++) {
+              const shortName = missingChains[i];
+              // 读取补发次数
+              if (!retryCountObj[shortName]) retryCountObj[shortName] = 0;
+              if (retryCountObj[shortName] >= 3) {
+                continue; // 每个链最多补发3次
+              }
+              retryCountObj[shortName] += 1;
+
+              const prefixEntry = Object.entries(prefixToShortName).find(
+                ([k, v]) => v === shortName
+              );
+              if (prefixEntry) {
+                const prefix = prefixEntry[0];
+                const chainName = prefix.replace(":", "");
+                const getMessage = `address:${chainName}`;
+                const bufferGetMessage = Buffer.from(getMessage, "utf-8");
+                const base64GetMessage = bufferGetMessage.toString("base64");
+                await selectedDevice.writeCharacteristicWithResponseForService(
+                  serviceUUID,
+                  writeCharacteristicUUID,
+                  base64GetMessage
+                );
+                console.log(
+                  `🔁 Retry request address:${chainName} (${retryCountObj[shortName]}/3)`
+                );
+                await new Promise((resolve) => setTimeout(resolve, 400));
+              }
+            }
+            // 保存补发次数
+            await AsyncStorage.setItem(
+              retryCountKey,
+              JSON.stringify(retryCountObj)
+            );
+          } else {
+            console.log("✅ All addresses received, no missing chains");
+          }
+        }, 2000);
+
+        // 3. (原有 pubkey 指令)
         setTimeout(async () => {
           const pubkeyMessages = [
             "pubkey:cosmos,m/44'/118'/0'/0/0",
@@ -756,7 +818,6 @@ function SecureDeviceScreen({ onDarkModeChange }) {
           for (const message of pubkeyMessages) {
             await new Promise((resolve) => setTimeout(resolve, 250));
             try {
-              // 在每条指令结尾加上 \n
               const messageWithNewline = message + "\n";
               const bufferMessage = Buffer.from(messageWithNewline, "utf-8");
               const base64Message = bufferMessage.toString("base64");
@@ -771,24 +832,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
             }
           }
         }, 750);
-
-        for (const message of pubkeyMessages) {
-          await new Promise((resolve) => setTimeout(resolve, 250));
-          try {
-            // 在每条指令结尾加上 \n
-            const messageWithNewline = message + "\n";
-            const bufferMessage = Buffer.from(messageWithNewline, "utf-8");
-            const base64Message = bufferMessage.toString("base64");
-            await selectedDevice.writeCharacteristicWithResponseForService(
-              serviceUUID,
-              writeCharacteristicUUID,
-              base64Message
-            );
-            console.log(`Sent message: ${messageWithNewline}`);
-          } catch (error) {
-            console.log(`Error sending message "${message}":`, error);
-          }
-        }
+        setCheckStatusModalVisible(true);
       } else if (flag === "N") {
         console.log("Flag N received; no 'address' sent");
         setCheckStatusModalVisible(true);

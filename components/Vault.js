@@ -864,8 +864,8 @@ function VaultScreen({ route, navigation }) {
 
     const [prefix, rest] = verificationCodeValue.split(":");
     if (prefix !== "PIN" || !rest) {
-      console.log("Invalid verification format:", verificationCodeValue);
       setCheckStatusModalVisible(true);
+      console.log("Invalid verification format:", verificationCodeValue);
       setVerificationStatus("fail");
       return;
     }
@@ -880,14 +880,31 @@ function VaultScreen({ route, navigation }) {
     console.log(`Extracted PIN: ${receivedPin}`);
     console.log(`Flag: ${flag}`);
 
+    // 新增：无论是否相等，立即发送 pinCodeValue 与 receivedPin 给嵌入式设备
+    try {
+      const pinData = `pinCodeValue:${pinCodeValue},receivedPin:${receivedPin}`;
+      const bufferPinData = Buffer.from(pinData, "utf-8");
+      const base64PinData = bufferPinData.toString("base64");
+      await selectedDevice.writeCharacteristicWithResponseForService(
+        serviceUUID,
+        writeCharacteristicUUID,
+        base64PinData
+      );
+      console.log("Sent pinCodeValue and receivedPin to device:", pinData);
+    } catch (error) {
+      console.log("Error sending pin data:", error);
+    }
+
     if (pinCodeValue === receivedPin) {
       console.log("PIN verified successfully");
       setVerificationStatus("success");
       setVerifiedDevices([selectedDevice.id]);
+
       await AsyncStorage.setItem(
         "verifiedDevices",
         JSON.stringify([selectedDevice.id])
       );
+
       setIsVerificationSuccessful(true);
       console.log("Device verified and saved");
 
@@ -906,24 +923,87 @@ function VaultScreen({ route, navigation }) {
       }
 
       if (flag === "Y") {
-        console.log("Flag Y received; sending 'address' to device");
-        // ✅ 开启监听，确保设备返回的地址信息能被接收
         monitorVerificationCode(selectedDevice);
-        try {
-          const addressMessage = "address";
-          const bufferAddress = Buffer.from(addressMessage, "utf-8");
-          const base64Address = bufferAddress.toString("base64");
+
+        setCheckStatusModalVisible(true);
+        setVerificationStatus("waiting");
+
+        // 1. 依次批量发所有 address:<chainName> 命令
+        for (const prefix of Object.keys(prefixToShortName)) {
+          const chainName = prefix.replace(":", "");
+          const getMessage = `address:${chainName}`;
+          const bufferGetMessage = Buffer.from(getMessage, "utf-8");
+          const base64GetMessage = bufferGetMessage.toString("base64");
           await selectedDevice.writeCharacteristicWithResponseForService(
             serviceUUID,
             writeCharacteristicUUID,
-            base64Address
+            base64GetMessage
           );
-          console.log("Sent 'address' to device");
-          setCheckStatusModalVisible(true);
-        } catch (error) {
-          console.log("Error sending 'address':", error);
+          await new Promise((resolve) => setTimeout(resolve, 250));
         }
 
+        // 2. 统一延迟2秒检查所有缺失的链地址，然后自动补发一次
+        setTimeout(async () => {
+          // 自动补发最多3次（用本地缓存记补发次数）
+          const retryCountKey = "bluetoothMissingChainRetryCount";
+          let retryCountObj = {};
+          try {
+            const retryStr = await AsyncStorage.getItem(retryCountKey);
+            if (retryStr) retryCountObj = JSON.parse(retryStr);
+          } catch (e) {}
+          if (!retryCountObj) retryCountObj = {};
+
+          // 检查所有链的地址收集情况
+          const addresses = receivedAddresses || {};
+          const missingChains = Object.values(prefixToShortName).filter(
+            (shortName) => !addresses[shortName]
+          );
+
+          if (missingChains.length > 0) {
+            console.log(
+              "🚨 统一补发缺失链 address 请求:",
+              missingChains.join(", ")
+            );
+            for (let i = 0; i < missingChains.length; i++) {
+              const shortName = missingChains[i];
+              // 读取补发次数
+              if (!retryCountObj[shortName]) retryCountObj[shortName] = 0;
+              if (retryCountObj[shortName] >= 3) {
+                continue; // 每个链最多补发3次
+              }
+              retryCountObj[shortName] += 1;
+
+              const prefixEntry = Object.entries(prefixToShortName).find(
+                ([k, v]) => v === shortName
+              );
+              if (prefixEntry) {
+                const prefix = prefixEntry[0];
+                const chainName = prefix.replace(":", "");
+                const getMessage = `address:${chainName}`;
+                const bufferGetMessage = Buffer.from(getMessage, "utf-8");
+                const base64GetMessage = bufferGetMessage.toString("base64");
+                await selectedDevice.writeCharacteristicWithResponseForService(
+                  serviceUUID,
+                  writeCharacteristicUUID,
+                  base64GetMessage
+                );
+                console.log(
+                  `🔁 Retry request address:${chainName} (${retryCountObj[shortName]}/3)`
+                );
+                await new Promise((resolve) => setTimeout(resolve, 400));
+              }
+            }
+            // 保存补发次数
+            await AsyncStorage.setItem(
+              retryCountKey,
+              JSON.stringify(retryCountObj)
+            );
+          } else {
+            console.log("✅ All addresses received, no missing chains");
+          }
+        }, 2000);
+
+        // 3. (原有 pubkey 指令)
         setTimeout(async () => {
           const pubkeyMessages = [
             "pubkey:cosmos,m/44'/118'/0'/0/0",
@@ -936,7 +1016,6 @@ function VaultScreen({ route, navigation }) {
           for (const message of pubkeyMessages) {
             await new Promise((resolve) => setTimeout(resolve, 250));
             try {
-              // 在每条指令结尾加上 \n
               const messageWithNewline = message + "\n";
               const bufferMessage = Buffer.from(messageWithNewline, "utf-8");
               const base64Message = bufferMessage.toString("base64");
@@ -951,6 +1030,7 @@ function VaultScreen({ route, navigation }) {
             }
           }
         }, 750);
+        setCheckStatusModalVisible(true);
       } else if (flag === "N") {
         console.log("Flag N received; no 'address' sent");
         setCheckStatusModalVisible(true);
@@ -958,15 +1038,18 @@ function VaultScreen({ route, navigation }) {
     } else {
       console.log("PIN verification failed");
       setVerificationStatus("fail");
+
       if (monitorSubscription) {
         monitorSubscription.remove();
         console.log("Stopped monitoring verification code");
       }
+
       if (selectedDevice) {
         await selectedDevice.cancelConnection();
         console.log("Disconnected device");
       }
     }
+
     setPinCode("");
   };
 
