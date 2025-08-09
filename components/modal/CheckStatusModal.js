@@ -14,6 +14,7 @@ const CheckStatusModal = ({
   status,
   missingChains = [],
   onClose,
+  setVerificationStatus,
   progress: externalProgress, // 新增
 }) => {
   const { isDarkMode, setIsDarkMode } = useContext(DarkModeContext);
@@ -117,7 +118,13 @@ const CheckStatusModal = ({
           <Text style={styles.modalSubtitle}>{subtitle}</Text>
 
           {status !== "waiting" ? (
-            <TouchableOpacity style={styles.submitButton} onPress={onClose}>
+            <TouchableOpacity
+              style={styles.submitButton}
+              onPress={() => {
+                if (setVerificationStatus) setVerificationStatus(null);
+                if (onClose) onClose();
+              }}
+            >
               <Text style={styles.submitButtonText}>{t("Close")}</Text>
             </TouchableOpacity>
           ) : (
