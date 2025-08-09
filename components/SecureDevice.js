@@ -142,7 +142,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
   const [addressBookModalVisible, setAddressBookModalVisible] = useState(false);
   const [CheckStatusModalVisible, setCheckStatusModalVisible] = useState(false);
   const [addresses, setAddresses] = useState([]);
-
+  const [missingChainsForModal, setMissingChainsForModal] = useState([]);
   const handleAddAddress = () => {
     console.log("Add Address button clicked");
   };
@@ -1137,10 +1137,15 @@ function SecureDeviceScreen({ onDarkModeChange }) {
       <CheckStatusModal
         visible={CheckStatusModalVisible && verificationStatus !== null}
         status={verificationStatus}
+        missingChains={missingChainsForModal}
         onClose={() => setCheckStatusModalVisible(false)}
-        styles={SecureDeviceScreenStyle}
+        progress={
+          verificationStatus === "waiting"
+            ? Object.keys(receivedAddresses).length /
+              Object.keys(prefixToShortName).length
+            : undefined
+        }
       />
-
       {/* Confirm Disconnect Modal */}
       <ConfirmDisconnectModal
         visible={confirmDisconnectModalVisible}
