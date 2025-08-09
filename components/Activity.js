@@ -100,7 +100,7 @@ function ActivityScreen() {
   const lightColors = ["#FFFFFF", "#EDEBEF"];
   const buttonBackgroundColor = isDarkMode ? "#CCB68C" : "#CFAB95";
   const disabledButtonBackgroundColor = isDarkMode ? "#6c6c6c" : "#ccc";
-
+  const [missingChainsForModal, setMissingChainsForModal] = useState([]);
   // 交易/设备/界面状态
   const [receivedVerificationCode, setReceivedVerificationCode] = useState("");
   const [swapModalVisible, setConvertModalVisible] = useState(false);
