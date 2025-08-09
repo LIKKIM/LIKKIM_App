@@ -95,7 +95,8 @@ function SecureDeviceScreen({ onDarkModeChange }) {
     useState(false);
   const [selectedCurrency, setSelectedCurrency] = useState(currencyUnit);
   const [selectedLanguage, setSelectedLanguage] = useState(i18n.language);
-  const [modalVisible, setModalVisible] = useState(false);
+  /** 已切换为 bleVisible，原 modalVisible 变量已移除 */
+  const [bleVisible, setBleVisible] = useState(false);
   const [languageModalVisible, setLanguageModalVisible] = useState(false);
   const [devices, setDevices] = useState([]);
   const isScanningRef = useRef(false);
@@ -189,7 +190,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
 
   const cancelDisconnect = () => {
     setConfirmDisconnectModalVisible(false);
-    setModalVisible(true);
+    setBleVisible(true);
   };
 
   const closeEnterLockCodeModal = () => {
@@ -637,14 +638,14 @@ function SecureDeviceScreen({ onDarkModeChange }) {
   };
 
   const handleCancel = () => {
-    setModalVisible(false);
+    setBleVisible(false);
   };
 
   const handleDevicePress = async (device) => {
     setReceivedAddresses({});
     setVerificationStatus(null);
     setSelectedDevice(device);
-    setModalVisible(false);
+    setBleVisible(false);
     try {
       await device.connect();
       await device.discoverAllServicesAndCharacteristics();
@@ -1099,7 +1100,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
 
       {/* Bluetooth Modal */}
       <BluetoothModal
-        visible={modalVisible}
+        visible={bleVisible}
         devices={devices}
         isScanning={isScanning}
         onDisconnectPress={handleDisconnectPress}
