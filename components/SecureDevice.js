@@ -933,8 +933,6 @@ function SecureDeviceScreen({ onDarkModeChange }) {
         setCryptoCards([]);
         setVerifiedDevices([]);
         Alert.alert(t("Success"), t("Deleted successfully."));
-        // Restart BLE scanning after wallet deletion
-        scanDevices();
         navigation.goBack();
       } else {
         Alert.alert(t("No Wallet"), t("No wallet available to delete."));
