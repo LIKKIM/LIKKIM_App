@@ -40,6 +40,7 @@ import { parseDeviceCode } from "../utils/parseDeviceCode";
 import { accountAPI, signAPI } from "../env/apiEndpoints";
 import signTransaction from "./ActivityScreen/signTransaction";
 import { bluetoothConfig } from "../env/bluetoothConfig";
+import { createHandleDevicePress } from "../utils/handleDevicePress";
 const FILE_NAME = "Activity.js";
 // BLE 常量
 const serviceUUID = bluetoothConfig.serviceUUID;
@@ -1081,54 +1082,20 @@ function ActivityScreen() {
   const handleConvertPress = () => {
     setConvertModalVisible(true);
   };
-  const handleDevicePress = async (device) => {
-    setReceivedAddresses({});
-    setVerificationStatus(null);
-    setSelectedDevice(device);
-    setBleVisible(false);
-    try {
-      await device.connect();
-      await device.discoverAllServicesAndCharacteristics();
-      console.log("Device connected and services discovered");
 
-      const sendparseDeviceCodeedValue = async (parseDeviceCodeedValue) => {
-        try {
-          const message = `ID:${parseDeviceCodeedValue}`;
-          const bufferMessage = Buffer.from(message, "utf-8");
-          const base64Message = bufferMessage.toString("base64");
-          await device.writeCharacteristicWithResponseForService(
-            serviceUUID,
-            writeCharacteristicUUID,
-            base64Message
-          );
-          console.log(`Sent parseDeviceCodeed value: ${message}`);
-        } catch (error) {
-          console.log("Error sending parseDeviceCodeed value:", error);
-        }
-      };
+  // 新增：使用工厂函数生成 handleDevicePress
+  const handleDevicePress = createHandleDevicePress({
+    setReceivedAddresses,
+    setVerificationStatus,
+    setSelectedDevice,
+    setBleVisible,
+    monitorVerificationCode,
+    setSecurityCodeModalVisible,
+    serviceUUID,
+    writeCharacteristicUUID,
+    Buffer,
+  });
 
-      monitorVerificationCode(device, sendparseDeviceCodeedValue);
-
-      setTimeout(async () => {
-        try {
-          const requestString = "request";
-          const bufferRequestString = Buffer.from(requestString, "utf-8");
-          const base64requestString = bufferRequestString.toString("base64");
-          await device.writeCharacteristicWithResponseForService(
-            serviceUUID,
-            writeCharacteristicUUID,
-            base64requestString
-          );
-          console.log("Sent 'request'");
-        } catch (error) {
-          console.log("Error sending 'request':", error);
-        }
-      }, 200);
-      setSecurityCodeModalVisible(true);
-    } catch (error) {
-      console.log("Error connecting or sending command to device:", error);
-    }
-  };
   // 处理断开连接的逻辑
   const handleDisconnectDevice = async (device) => {
     try {

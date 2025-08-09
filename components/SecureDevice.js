@@ -52,6 +52,7 @@ import checkAndReqPermission from "../utils/BluetoothPermissions"; // Request Bl
 import { parseDeviceCode } from "../utils/parseDeviceCode";
 import { firmwareAPI } from "../env/apiEndpoints";
 import { bluetoothConfig } from "../env/bluetoothConfig";
+import { createHandleDevicePress } from "../utils/handleDevicePress";
 
 /**
  * deleteWallet and confirmDeleteWallet are the core functions for the wallet deletion feature.
@@ -174,7 +175,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
   };
 
   const handleDisconnectPress = (device) => {
-    setModalVisible(false);
+    setBleVisible(false);
     setDeviceToDisconnect(device);
     setConfirmDisconnectModalVisible(true);
   };
@@ -413,7 +414,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
         return;
       }
     }
-    setModalVisible(true);
+    setBleVisible(true);
     scanDevices();
   };
 
@@ -641,53 +642,19 @@ function SecureDeviceScreen({ onDarkModeChange }) {
     setBleVisible(false);
   };
 
-  const handleDevicePress = async (device) => {
-    setReceivedAddresses({});
-    setVerificationStatus(null);
-    setSelectedDevice(device);
-    setBleVisible(false);
-    try {
-      await device.connect();
-      await device.discoverAllServicesAndCharacteristics();
-      console.log("Device connected and services discovered");
+  // 新增：使用工厂函数生成 handleDevicePress
+  const handleDevicePress = createHandleDevicePress({
+    setReceivedAddresses,
+    setVerificationStatus,
+    setSelectedDevice,
+    setBleVisible,
+    monitorVerificationCode,
+    setSecurityCodeModalVisible,
+    serviceUUID,
+    writeCharacteristicUUID,
+    Buffer,
+  });
 
-      const sendparseDeviceCodeedValue = async (parseDeviceCodeedValue) => {
-        try {
-          const message = `ID:${parseDeviceCodeedValue}`;
-          const bufferMessage = Buffer.from(message, "utf-8");
-          const base64Message = bufferMessage.toString("base64");
-          await device.writeCharacteristicWithResponseForService(
-            serviceUUID,
-            writeCharacteristicUUID,
-            base64Message
-          );
-          console.log(`Sent parseDeviceCodeed value: ${message}`);
-        } catch (error) {
-          console.log("Error sending parseDeviceCodeed value:", error);
-        }
-      };
-
-      monitorVerificationCode(device, sendparseDeviceCodeedValue);
-      setTimeout(async () => {
-        try {
-          const requestString = "request";
-          const bufferRequestString = Buffer.from(requestString, "utf-8");
-          const base64requestString = bufferRequestString.toString("base64");
-          await device.writeCharacteristicWithResponseForService(
-            serviceUUID,
-            writeCharacteristicUUID,
-            base64requestString
-          );
-          console.log("Sent 'request'");
-        } catch (error) {
-          console.log("Error sending 'request':", error);
-        }
-      }, 200);
-      setSecurityCodeModalVisible(true);
-    } catch (error) {
-      console.log("Error connecting or sending command to device:", error);
-    }
-  };
   const handlePinSubmit = async () => {
     setSecurityCodeModalVisible(false);
     setCheckStatusModalVisible(false);
