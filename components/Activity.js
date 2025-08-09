@@ -1082,64 +1082,51 @@ function ActivityScreen() {
     setConvertModalVisible(true);
   };
   const handleDevicePress = async (device) => {
-    // 检查是否传递了有效的设备对象
-    if (typeof device !== "object" || typeof device.connect !== "function") {
-      console.log("无效的设备对象，无法连接设备:", device);
-      return;
-    }
-
+    setReceivedAddresses({});
+    setVerificationStatus(null);
     setSelectedDevice(device);
     setBleVisible(false);
     try {
-      // 异步连接设备和发现服务
       await device.connect();
       await device.discoverAllServicesAndCharacteristics();
-      console.log("设备已连接并发现所有服务和特性");
+      console.log("Device connected and services discovered");
 
-      // 解密后的值发送给设备
       const sendparseDeviceCodeedValue = async (parseDeviceCodeedValue) => {
         try {
           const message = `ID:${parseDeviceCodeedValue}`;
           const bufferMessage = Buffer.from(message, "utf-8");
           const base64Message = bufferMessage.toString("base64");
-
           await device.writeCharacteristicWithResponseForService(
             serviceUUID,
             writeCharacteristicUUID,
             base64Message
           );
-          console.log(`解密后的值已发送: ${message}`);
+          console.log(`Sent parseDeviceCodeed value: ${message}`);
         } catch (error) {
-          console.log("发送解密值时出错:", error);
+          console.log("Error sending parseDeviceCodeed value:", error);
         }
       };
 
-      // 先启动监听器
       monitorVerificationCode(device, sendparseDeviceCodeedValue);
 
-      // 确保监听器已完全启动后再发送 'request'
       setTimeout(async () => {
         try {
-          //在这里可以发送ping
           const requestString = "request";
           const bufferRequestString = Buffer.from(requestString, "utf-8");
           const base64requestString = bufferRequestString.toString("base64");
-
           await device.writeCharacteristicWithResponseForService(
             serviceUUID,
             writeCharacteristicUUID,
             base64requestString
           );
-          console.log("字符串 'request' 已发送");
+          console.log("Sent 'request'");
         } catch (error) {
-          console.log("发送 'request' 时出错:", error);
+          console.log("Error sending 'request':", error);
         }
-      }, 200); // 延迟 200ms 确保监听器启动（根据设备响应调整）
-
-      // 显示 PIN 码弹窗
+      }, 200);
       setSecurityCodeModalVisible(true);
     } catch (error) {
-      console.log("设备连接或命令发送错误:", error);
+      console.log("Error connecting or sending command to device:", error);
     }
   };
   // 处理断开连接的逻辑
