@@ -48,6 +48,7 @@ const writeCharacteristicUUID = bluetoothConfig.writeCharacteristicUUID;
 const notifyCharacteristicUUID = bluetoothConfig.notifyCharacteristicUUID;
 
 function ActivityScreen() {
+  const [CheckStatusModalVisible, setCheckStatusModalVisible] = useState(false);
   // 工具函数、清理函数放这里
   function isValidAmount(amount) {
     if (amount === null || amount === undefined) return false;
@@ -1439,7 +1440,6 @@ function ActivityScreen() {
           onLoadMore={fetchNextActivityLogPage}
           hasMore={hasMore}
         />
-
         {/* 输入地址的 Modal */}
         <ContactFormModal
           visible={ContactFormModalVisible}
@@ -1612,7 +1612,6 @@ function ActivityScreen() {
           t={t}
           onDisconnectPress={handleDisconnectDevice}
         />
-
         {/* PIN Modal */}
         <SecurityCodeModal
           visible={SecurityCodeModalVisible}
@@ -1628,21 +1627,19 @@ function ActivityScreen() {
           t={t}
           status={verificationStatus}
         />
-
         {/* Verification Modal */}
         <CheckStatusModal
-          visible={
-            verificationSuccessModalVisible || verificationFailModalVisible
+          visible={CheckStatusModalVisible && verificationStatus !== null}
+          status={verificationStatus}
+          missingChains={missingChainsForModal}
+          onClose={() => setCheckStatusModalVisible(false)}
+          progress={
+            verificationStatus === "waiting"
+              ? Object.keys(receivedAddresses).length /
+                Object.keys(prefixToShortName).length
+              : undefined
           }
-          status={verificationSuccessModalVisible ? "success" : "fail"}
-          onClose={() => {
-            setVerificationSuccessModalVisible(false);
-            setVerificationFailModalVisible(false);
-          }}
-          styles={ActivityScreenStyle}
-          t={t}
         />
-
         {/* Pending Transaction Modal */}
         <ActivityProgressModal
           visible={confirmingTransactionModalVisible}
@@ -1651,7 +1648,6 @@ function ActivityScreen() {
           ActivityScreenStyle={ActivityScreenStyle}
           t={t}
         />
-
         {/* Convert Modal */}
         <ConvertModal
           visible={swapModalVisible}
