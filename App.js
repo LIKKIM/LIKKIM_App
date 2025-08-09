@@ -47,6 +47,7 @@ import { Svg, Path, G } from "react-native-svg";
 import { Buffer } from "buffer";
 import FloatingDev from "./utils/dev";
 import { hexStringToUint32Array, uint32ArrayToHexString } from "./env/hexUtils";
+import { createHandleDevicePress } from "./utils/handleDevicePress";
 const FILE_NAME = "App.js";
 const serviceUUID = bluetoothConfig.serviceUUID;
 const writeCharacteristicUUID = bluetoothConfig.writeCharacteristicUUID;
@@ -761,54 +762,19 @@ function AppContent({
       isModalVisible: true,
     });
   };
-  const handleDevicePress = async (device) => {
-    setReceivedAddresses({});
-    setVerificationStatus(null);
-    setSelectedDevice(device);
-    setBleVisible(false);
-    try {
-      await device.connect();
-      await device.discoverAllServicesAndCharacteristics();
-      console.log("Device connected and services discovered");
 
-      const sendparseDeviceCodeedValue = async (parseDeviceCodeedValue) => {
-        try {
-          const message = `ID:${parseDeviceCodeedValue}`;
-          const bufferMessage = Buffer.from(message, "utf-8");
-          const base64Message = bufferMessage.toString("base64");
-          await device.writeCharacteristicWithResponseForService(
-            serviceUUID,
-            writeCharacteristicUUID,
-            base64Message
-          );
-          console.log(`Sent parseDeviceCodeed value: ${message}`);
-        } catch (error) {
-          console.log("Error sending parseDeviceCodeed value:", error);
-        }
-      };
-
-      monitorVerificationCode(device, sendparseDeviceCodeedValue);
-
-      setTimeout(async () => {
-        try {
-          const requestString = "request";
-          const bufferRequestString = Buffer.from(requestString, "utf-8");
-          const base64requestString = bufferRequestString.toString("base64");
-          await device.writeCharacteristicWithResponseForService(
-            serviceUUID,
-            writeCharacteristicUUID,
-            base64requestString
-          );
-          console.log("Sent 'request'");
-        } catch (error) {
-          console.log("Error sending 'request':", error);
-        }
-      }, 200);
-      setSecurityCodeModalVisible(true);
-    } catch (error) {
-      console.log("Error connecting or sending command to device:", error);
-    }
-  };
+  // 新增：使用工厂函数生成 handleDevicePress
+  const handleDevicePress = createHandleDevicePress({
+    setReceivedAddresses,
+    setVerificationStatus,
+    setSelectedDevice,
+    setBleVisible,
+    monitorVerificationCode,
+    setSecurityCodeModalVisible,
+    serviceUUID,
+    writeCharacteristicUUID,
+    Buffer,
+  });
 
   return (
     <View style={{ flex: 1, backgroundColor: bottomBackgroundColor }}>
