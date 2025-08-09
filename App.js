@@ -165,7 +165,7 @@ function AppContent({
   const bleManagerRef = useRef(null);
   const restoreIdentifier = Constants.installationId;
   const [devices, setDevices] = useState([]);
-  const [modalVisible, setModalVisible] = useState(false);
+  const [bleVisible, setBleVisible] = useState(false);
   const [SecurityCodeModalVisible, setSecurityCodeModalVisible] =
     useState(false);
   const [pinCode, setPinCode] = useState("");
@@ -286,7 +286,7 @@ function AppContent({
         return;
       }
     }
-    setModalVisible(true);
+    setBleVisible(true);
     scanDevices();
   };
 
@@ -704,7 +704,7 @@ function AppContent({
   };
 
   const handleDisconnectPress = (device) => {
-    setModalVisible(false);
+    setBleVisible(false);
     setDeviceToDisconnect(device);
     setConfirmDisconnectModalVisible(true);
   };
@@ -748,11 +748,11 @@ function AppContent({
 
   const cancelDisconnect = () => {
     setConfirmDisconnectModalVisible(false);
-    setModalVisible(true);
+    setBleVisible(true);
   };
 
   const handleCancel = () => {
-    setModalVisible(false);
+    setBleVisible(false);
   };
   const handleConfirmDelete = () => {
     setHeaderDropdownVisible(false);
@@ -765,7 +765,7 @@ function AppContent({
     setReceivedAddresses({});
     setVerificationStatus(null);
     setSelectedDevice(device);
-    setModalVisible(false);
+    setBleVisible(false);
     try {
       await device.connect();
       await device.discoverAllServicesAndCharacteristics();
@@ -1005,7 +1005,7 @@ function AppContent({
       )}
       {/* Bluetooth Modal */}
       <BluetoothModal
-        visible={modalVisible}
+        visible={bleVisible}
         devices={devices}
         isScanning={isScanning}
         onDisconnectPress={handleDisconnectPress}
