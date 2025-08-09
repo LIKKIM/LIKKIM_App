@@ -1127,40 +1127,49 @@ function ActivityScreen() {
   // 提交验证码
   const handlePinSubmit = async () => {
     setSecurityCodeModalVisible(false);
-
-    const pinCodeValue = pinCode.trim();
+    setCheckStatusModalVisible(false);
     const verificationCodeValue = receivedVerificationCode.trim();
+    const pinCodeValue = pinCode.trim();
 
-    console.log(`User-entered PIN: ${pinCodeValue}`);
-    console.log(`Received verification code: ${verificationCodeValue}`);
+    //  console.log(`User PIN: ${pinCodeValue}`);
+    console.log(`Received data: ${verificationCodeValue}`);
 
     const [prefix, rest] = verificationCodeValue.split(":");
     if (prefix !== "PIN" || !rest) {
-      console.log(
-        "Received verification code format is incorrect:",
-        verificationCodeValue
-      );
-      setVerificationFailModalVisible(true);
+      setCheckStatusModalVisible(true);
+      console.log("Invalid verification format:", verificationCodeValue);
+      setVerificationStatus("fail");
       return;
     }
 
     const [receivedPin, flag] = rest.split(",");
     if (!receivedPin || (flag !== "Y" && flag !== "N")) {
-      console.log(
-        "Received verification code format is incorrect:",
-        verificationCodeValue
-      );
-      setVerificationFailModalVisible(true);
+      console.log("Invalid verification format:", verificationCodeValue);
+      setVerificationStatus("fail");
       return;
     }
 
-    console.log(`Extracted PIN value: ${receivedPin}`);
-    console.log(`Extracted flag: ${flag}`);
+    console.log(`Extracted PIN: ${receivedPin}`);
+    console.log(`Flag: ${flag}`);
+
+    // 新增：无论是否相等，立即发送 pinCodeValue 与 receivedPin 给嵌入式设备
+    try {
+      const pinData = `pinCodeValue:${pinCodeValue},receivedPin:${receivedPin}`;
+      const bufferPinData = Buffer.from(pinData, "utf-8");
+      const base64PinData = bufferPinData.toString("base64");
+      await selectedDevice.writeCharacteristicWithResponseForService(
+        serviceUUID,
+        writeCharacteristicUUID,
+        base64PinData
+      );
+      console.log("Sent pinCodeValue and receivedPin to device:", pinData);
+    } catch (error) {
+      console.log("Error sending pin data:", error);
+    }
 
     if (pinCodeValue === receivedPin) {
-      console.log("PIN verification succeeded");
-      setVerificationSuccessModalVisible(true);
-
+      console.log("PIN verified successfully");
+      setVerificationStatus("success");
       setVerifiedDevices([selectedDevice.id]);
 
       await AsyncStorage.setItem(
@@ -1169,7 +1178,7 @@ function ActivityScreen() {
       );
 
       setIsVerificationSuccessful(true);
-      console.log("Device verified and stored successfully");
+      console.log("Device verified and saved");
 
       try {
         const confirmationMessage = "PIN_OK";
@@ -1184,22 +1193,89 @@ function ActivityScreen() {
       } catch (error) {
         console.log("Error sending confirmation message:", error);
       }
-      if (flag === "Y") {
-        try {
-          const addressMessage = "address";
-          const bufferAddress = Buffer.from(addressMessage, "utf-8");
-          const base64Address = bufferAddress.toString("base64");
 
+      if (flag === "Y") {
+        monitorVerificationCode(selectedDevice);
+
+        setCheckStatusModalVisible(true);
+        setVerificationStatus("waiting");
+
+        // 1. 依次批量发所有 address:<chainName> 命令
+        for (const prefix of Object.keys(prefixToShortName)) {
+          const chainName = prefix.replace(":", "");
+          const getMessage = `address:${chainName}`;
+          const bufferGetMessage = Buffer.from(getMessage, "utf-8");
+          const base64GetMessage = bufferGetMessage.toString("base64");
           await selectedDevice.writeCharacteristicWithResponseForService(
             serviceUUID,
             writeCharacteristicUUID,
-            base64Address
+            base64GetMessage
           );
-          console.log("String 'address' sent to device successfully");
-        } catch (error) {
-          console.log("Error sending string 'address':", error);
+          await new Promise((resolve) => setTimeout(resolve, 250));
         }
 
+        // 2. 统一延迟2秒检查所有缺失的链地址，然后自动补发一次
+        setTimeout(async () => {
+          // 自动补发最多3次（用本地缓存记补发次数）
+          const retryCountKey = "bluetoothMissingChainRetryCount";
+          let retryCountObj = {};
+          try {
+            const retryStr = await AsyncStorage.getItem(retryCountKey);
+            if (retryStr) retryCountObj = JSON.parse(retryStr);
+          } catch (e) {}
+          if (!retryCountObj) retryCountObj = {};
+
+          // 检查所有链的地址收集情况
+          const addresses = receivedAddresses || {};
+          const missingChains = Object.values(prefixToShortName).filter(
+            (shortName) => !addresses[shortName]
+          );
+
+          if (missingChains.length > 0) {
+            console.log(
+              "🚨 统一补发缺失链 address 请求:",
+              missingChains.join(", ")
+            );
+            for (let i = 0; i < missingChains.length; i++) {
+              const shortName = missingChains[i];
+              // 读取补发次数
+              if (!retryCountObj[shortName]) retryCountObj[shortName] = 0;
+              if (retryCountObj[shortName] >= 3) {
+                continue; // 每个链最多补发3次
+              }
+              retryCountObj[shortName] += 1;
+
+              const prefixEntry = Object.entries(prefixToShortName).find(
+                ([k, v]) => v === shortName
+              );
+              if (prefixEntry) {
+                const prefix = prefixEntry[0];
+                const chainName = prefix.replace(":", "");
+                const getMessage = `address:${chainName}`;
+                const bufferGetMessage = Buffer.from(getMessage, "utf-8");
+                const base64GetMessage = bufferGetMessage.toString("base64");
+                await selectedDevice.writeCharacteristicWithResponseForService(
+                  serviceUUID,
+                  writeCharacteristicUUID,
+                  base64GetMessage
+                );
+                console.log(
+                  `🔁 Retry request address:${chainName} (${retryCountObj[shortName]}/3)`
+                );
+                await new Promise((resolve) => setTimeout(resolve, 400));
+              }
+            }
+            // 保存补发次数
+            await AsyncStorage.setItem(
+              retryCountKey,
+              JSON.stringify(retryCountObj)
+            );
+          } else {
+            console.log("✅ All addresses received, no missing chains");
+          }
+        }, 2000);
+
+        // 3. (原有 pubkey 指令)
         setTimeout(async () => {
           const pubkeyMessages = [
             "pubkey:cosmos,m/44'/118'/0'/0/0",
@@ -1212,7 +1288,6 @@ function ActivityScreen() {
           for (const message of pubkeyMessages) {
             await new Promise((resolve) => setTimeout(resolve, 250));
             try {
-              // 在每条指令结尾加上 \n
               const messageWithNewline = message + "\n";
               const bufferMessage = Buffer.from(messageWithNewline, "utf-8");
               const base64Message = bufferMessage.toString("base64");
@@ -1227,31 +1302,23 @@ function ActivityScreen() {
             }
           }
         }, 750);
+        setCheckStatusModalVisible(true);
       } else if (flag === "N") {
-        console.log(
-          "Device returned PIN:xxxx,N, no need to send 'address' and pubkey strings"
-        );
+        console.log("Flag N received; no 'address' sent");
+        setCheckStatusModalVisible(true);
       }
     } else {
       console.log("PIN verification failed");
-      setVerificationFailModalVisible(true);
+      setVerificationStatus("fail");
 
-      if (monitorSubscription.current) {
-        try {
-          monitorSubscription.current.remove();
-          console.log("Stopped monitoring verification code");
-        } catch (error) {
-          console.log("Error occurred while stopping monitoring:", error);
-        }
+      if (monitorSubscription) {
+        monitorSubscription.remove();
+        console.log("Stopped monitoring verification code");
       }
 
       if (selectedDevice) {
-        try {
-          await selectedDevice.cancelConnection();
-          console.log("Disconnected from device");
-        } catch (error) {
-          console.log("Error occurred while disconnecting:", error);
-        }
+        await selectedDevice.cancelConnection();
+        console.log("Disconnected device");
       }
     }
 
