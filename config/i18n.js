@@ -21,6 +21,18 @@ i18n
     resources: {
       en: {
         translation: {
+          "Verification successful!": "Verification successful!",
+          "You can now safely use the device.":
+            "You can now safely use the device.",
+          "Wallet ready!": "Wallet ready!",
+          "The wallet has been fully set up and is ready to use.":
+            "The wallet has been fully set up and is ready to use.",
+          "Verification failed!": "Verification failed!",
+          "The verification code you entered is incorrect. Please try again.":
+            "The verification code you entered is incorrect. Please try again.",
+          "Creating wallet...": "Creating wallet...",
+          "Receiving all addresses from the device. Wallet is being created, please wait...":
+            "Receiving all addresses from the device. Wallet is being created, please wait...",
           Refresh: "Refresh",
           "Refreshing…": "Refreshing…",
           "Pull down to refresh": "Pull down to refresh",
@@ -195,6 +207,17 @@ i18n
       },
       zh: {
         translation: {
+          "Verification successful!": "验证成功！",
+          "You can now safely use the device.": "您现在可以安全地使用该设备。",
+          "Wallet ready!": "钱包已准备好！",
+          "The wallet has been fully set up and is ready to use.":
+            "钱包已完全设置好，可以使用了。",
+          "Verification failed!": "验证失败！",
+          "The verification code you entered is incorrect. Please try again.":
+            "您输入的验证码不正确，请重试。",
+          "Creating wallet...": "正在创建钱包...",
+          "Receiving all addresses from the device. Wallet is being created, please wait...":
+            "正在从设备获取所有地址。钱包正在创建中，请稍候...",
           Refresh: "刷新",
           "Refreshing…": "正在刷新…",
           "Pull down to refresh": "下拉刷新",
@@ -362,6 +385,17 @@ i18n
       },
       "zh-TW": {
         translation: {
+          "Verification successful!": "驗證成功！",
+          "You can now safely use the device.": "您現在可以安全地使用該設備。",
+          "Wallet ready!": "錢包已準備好！",
+          "The wallet has been fully set up and is ready to use.":
+            "錢包已完全設定好，可以使用了。",
+          "Verification failed!": "驗證失敗！",
+          "The verification code you entered is incorrect. Please try again.":
+            "您輸入的驗證碼不正確，請重試。",
+          "Creating wallet...": "正在創建錢包...",
+          "Receiving all addresses from the device. Wallet is being created, please wait...":
+            "正在從設備接收所有地址。錢包正在創建中，請稍候...",
           Refresh: "刷新",
           "Refreshing…": "正在重新整理…",
           "Pull down to refresh": "下拉以重新整理",
@@ -528,6 +562,18 @@ i18n
       },
       fr: {
         translation: {
+          "Verification successful!": "Vérification réussie !",
+          "You can now safely use the device.":
+            "Vous pouvez maintenant utiliser l'appareil en toute sécurité.",
+          "Wallet ready!": "Portefeuille prêt !",
+          "The wallet has been fully set up and is ready to use.":
+            "Le portefeuille est entièrement configuré et prêt à l'emploi.",
+          "Verification failed!": "Échec de la vérification !",
+          "The verification code you entered is incorrect. Please try again.":
+            "Le code de vérification que vous avez entré est incorrect. Veuillez réessayer.",
+          "Creating wallet...": "Création du portefeuille...",
+          "Receiving all addresses from the device. Wallet is being created, please wait...":
+            "Réception de toutes les adresses depuis l'appareil. Portefeuille en cours de création, veuillez patienter...",
           Refresh: "Rafraîchir",
           "Refreshing…": "Actualisation…",
           "Pull down to refresh": "Faites glisser vers le bas pour actualiser",
@@ -707,6 +753,18 @@ i18n
       },
       es: {
         translation: {
+          "Verification successful!": "¡Verificación exitosa!",
+          "You can now safely use the device.":
+            "Ahora puede usar el dispositivo de forma segura.",
+          "Wallet ready!": "¡Billetera lista!",
+          "The wallet has been fully set up and is ready to use.":
+            "La billetera está completamente configurada y lista para usar.",
+          "Verification failed!": "¡Verificación fallida!",
+          "The verification code you entered is incorrect. Please try again.":
+            "El código de verificación que ingresó es incorrecto. Inténtelo de nuevo.",
+          "Creating wallet...": "Creando billetera...",
+          "Receiving all addresses from the device. Wallet is being created, please wait...":
+            "Recibiendo todas las direcciones del dispositivo. La billetera se está creando, por favor espere...",
           Refresh: "Actualizar",
           "Refreshing…": "Actualizando…",
           "Pull down to refresh": "Desliza hacia abajo para actualizar",
@@ -885,6 +943,18 @@ i18n
       },
       ar: {
         translation: {
+          "Verification successful!": "تم التحقق بنجاح!",
+          "You can now safely use the device.":
+            "يمكنك الآن استخدام الجهاز بأمان.",
+          "Wallet ready!": "المحفظة جاهزة!",
+          "The wallet has been fully set up and is ready to use.":
+            "تم إعداد المحفظة بالكامل وهي جاهزة للاستخدام.",
+          "Verification failed!": "فشل التحقق!",
+          "The verification code you entered is incorrect. Please try again.":
+            "رمز التحقق الذي أدخلته غير صحيح. حاول مرة أخرى.",
+          "Creating wallet...": "جارٍ إنشاء المحفظة...",
+          "Receiving all addresses from the device. Wallet is being created, please wait...":
+            "جارٍ استلام جميع العناوين من الجهاز. يتم إنشاء المحفظة، يرجى الانتظار...",
           Refresh: "تحديث",
           "Refreshing…": "جارٍ التحديث…",
           "Pull down to refresh": "اسحب للأسفل للتحديث",
@@ -1056,6 +1126,18 @@ i18n
       },
       ja: {
         translation: {
+          "Verification successful!": "検証に成功しました！",
+          "You can now safely use the device.":
+            "これで安全にデバイスを使用できます。",
+          "Wallet ready!": "ウォレットの準備ができました！",
+          "The wallet has been fully set up and is ready to use.":
+            "ウォレットの設定が完了し、使用可能です。",
+          "Verification failed!": "検証に失敗しました！",
+          "The verification code you entered is incorrect. Please try again.":
+            "入力した確認コードが正しくありません。もう一度お試しください。",
+          "Creating wallet...": "ウォレットを作成中...",
+          "Receiving all addresses from the device. Wallet is being created, please wait...":
+            "デバイスからすべてのアドレスを受信中です。ウォレットを作成していますので、お待ちください...",
           Refresh: "更新",
           "Refreshing…": "更新中…",
           "Pull down to refresh": "下に引いて更新",
@@ -1228,6 +1310,18 @@ i18n
       },
       ru: {
         translation: {
+          "Verification successful!": "Проверка прошла успешно!",
+          "You can now safely use the device.":
+            "Теперь вы можете безопасно использовать устройство.",
+          "Wallet ready!": "Кошелек готов!",
+          "The wallet has been fully set up and is ready to use.":
+            "Кошелек полностью настроен и готов к использованию.",
+          "Verification failed!": "Проверка не удалась!",
+          "The verification code you entered is incorrect. Please try again.":
+            "Введенный вами код подтверждения неверен. Попробуйте еще раз.",
+          "Creating wallet...": "Создание кошелька...",
+          "Receiving all addresses from the device. Wallet is being created, please wait...":
+            "Получение всех адресов с устройства. Кошелек создается, пожалуйста, подождите...",
           Refresh: "Обновить",
           "Refreshing…": "Обновление…",
           "Pull down to refresh": "Потяните вниз для обновления",
@@ -1402,6 +1496,18 @@ i18n
       },
       ko: {
         translation: {
+          "Verification successful!": "검증에 성공했습니다!",
+          "You can now safely use the device.":
+            "이제 기기를 안전하게 사용할 수 있습니다.",
+          "Wallet ready!": "지갑 준비 완료!",
+          "The wallet has been fully set up and is ready to use.":
+            "지갑이 완전히 설정되어 사용 준비가 되었습니다.",
+          "Verification failed!": "검증 실패!",
+          "The verification code you entered is incorrect. Please try again.":
+            "입력한 인증 코드가 올바르지 않습니다. 다시 시도해주세요.",
+          "Creating wallet...": "지갑 생성 중...",
+          "Receiving all addresses from the device. Wallet is being created, please wait...":
+            "장치에서 모든 주소를 가져오는 중입니다. 지갑이 생성되고 있으니 잠시만 기다려주세요...",
           Refresh: "새로고침",
           "Refreshing…": "새로고침 중…",
           "Pull down to refresh": "아래로 당겨서 새로고침",
@@ -1572,6 +1678,18 @@ i18n
       },
       pt: {
         translation: {
+          "Verification successful!": "Verificação bem-sucedida!",
+          "You can now safely use the device.":
+            "Agora pode usar o dispositivo com segurança.",
+          "Wallet ready!": "Carteira pronta!",
+          "The wallet has been fully set up and is ready to use.":
+            "A carteira foi totalmente configurada e está pronta para usar.",
+          "Verification failed!": "Falha na verificação!",
+          "The verification code you entered is incorrect. Please try again.":
+            "O código de verificação que inseriu está incorreto. Por favor, tente novamente.",
+          "Creating wallet...": "A criar carteira...",
+          "Receiving all addresses from the device. Wallet is being created, please wait...":
+            "A receber todos os endereços do dispositivo. A carteira está a ser criada, por favor aguarde...",
           Refresh: "Atualizar",
           "Refreshing…": "Atualizando…",
           "Pull down to refresh": "Puxe para atualizar",
@@ -1749,6 +1867,18 @@ i18n
       },
       "pt-BR": {
         translation: {
+          "Verification successful!": "Verificação bem-sucedida!",
+          "You can now safely use the device.":
+            "Agora você pode usar o dispositivo com segurança.",
+          "Wallet ready!": "Carteira pronta!",
+          "The wallet has been fully set up and is ready to use.":
+            "A carteira foi totalmente configurada e está pronta para uso.",
+          "Verification failed!": "Falha na verificação!",
+          "The verification code you entered is incorrect. Please try again.":
+            "O código de verificação que você inseriu está incorreto. Por favor, tente novamente.",
+          "Creating wallet...": "Criando carteira...",
+          "Receiving all addresses from the device. Wallet is being created, please wait...":
+            "Recebendo todos os endereços do dispositivo. A carteira está sendo criada, por favor aguarde...",
           Refresh: "Atualizar",
           "Refreshing…": "Atualizando…",
           "Pull down to refresh": "Puxe para atualizar",
@@ -1926,6 +2056,18 @@ i18n
       },
       it: {
         translation: {
+          "Verification successful!": "Verifica riuscita!",
+          "You can now safely use the device.":
+            "Ora puoi utilizzare il dispositivo in sicurezza.",
+          "Wallet ready!": "Portafoglio pronto!",
+          "The wallet has been fully set up and is ready to use.":
+            "Il portafoglio è stato completamente configurato ed è pronto all'uso.",
+          "Verification failed!": "Verifica non riuscita!",
+          "The verification code you entered is incorrect. Please try again.":
+            "Il codice di verifica inserito non è corretto. Riprova.",
+          "Creating wallet...": "Creazione del portafoglio...",
+          "Receiving all addresses from the device. Wallet is being created, please wait...":
+            "Ricezione di tutti gli indirizzi dal dispositivo. Creazione del portafoglio in corso, attendere...",
           Refresh: "Aggiorna",
           "Refreshing…": "Aggiornamento…",
           "Pull down to refresh": "Scorri verso il basso per aggiornare",
@@ -2100,6 +2242,18 @@ i18n
       },
       de: {
         translation: {
+          "Verification successful!": "Verifizierung erfolgreich!",
+          "You can now safely use the device.":
+            "Sie können das Gerät jetzt sicher verwenden.",
+          "Wallet ready!": "Wallet bereit!",
+          "The wallet has been fully set up and is ready to use.":
+            "Das Wallet ist vollständig eingerichtet und einsatzbereit.",
+          "Verification failed!": "Verifizierung fehlgeschlagen!",
+          "The verification code you entered is incorrect. Please try again.":
+            "Der eingegebene Bestätigungscode ist falsch. Bitte versuchen Sie es erneut.",
+          "Creating wallet...": "Wallet wird erstellt...",
+          "Receiving all addresses from the device. Wallet is being created, please wait...":
+            "Alle Adressen werden vom Gerät abgerufen. Wallet wird erstellt, bitte warten...",
           Refresh: "Aktualisieren",
           "Refreshing…": "Aktualisierung…",
           "Pull down to refresh": "Zum Aktualisieren nach unten ziehen",
@@ -2278,6 +2432,18 @@ i18n
       },
       hi: {
         translation: {
+          "Verification successful!": "सत्यापन सफल हुआ!",
+          "You can now safely use the device.":
+            "अब आप सुरक्षित रूप से डिवाइस का उपयोग कर सकते हैं।",
+          "Wallet ready!": "वॉलेट तैयार है!",
+          "The wallet has been fully set up and is ready to use.":
+            "वॉलेट पूरी तरह सेट हो चुका है और उपयोग के लिए तैयार है।",
+          "Verification failed!": "सत्यापन विफल हुआ!",
+          "The verification code you entered is incorrect. Please try again.":
+            "आपके द्वारा दर्ज किया गया सत्यापन कोड गलत है। कृपया पुनः प्रयास करें।",
+          "Creating wallet...": "वॉलेट बनाया जा रहा है...",
+          "Receiving all addresses from the device. Wallet is being created, please wait...":
+            "डिवाइस से सभी पते प्राप्त किए जा रहे हैं। वॉलेट बनाया जा रहा है, कृपया प्रतीक्षा करें...",
           Refresh: "रिफ्रेश करें",
           "Refreshing…": "ताज़ा कर रहा है…",
           "Pull down to refresh": "रिफ्रेश करने के लिए नीचे खींचें",
@@ -2451,6 +2617,18 @@ i18n
       },
       mn: {
         translation: {
+          "Verification successful!": "Баталгаажуулалт амжилттай!",
+          "You can now safely use the device.":
+            "Та одоо төхөөрөмжийг аюулгүй ашиглаж болно.",
+          "Wallet ready!": "Хэтэвч бэлэн боллоо!",
+          "The wallet has been fully set up and is ready to use.":
+            "Хэтэвч бүрэн тохируулагдаж ашиглахад бэлэн боллоо.",
+          "Verification failed!": "Баталгаажуулалт амжилтгүй боллоо!",
+          "The verification code you entered is incorrect. Please try again.":
+            "Таны оруулсан баталгаажуулах код буруу байна. Дахин оролдоно уу.",
+          "Creating wallet...": "Хэтэвч үүсгэж байна...",
+          "Receiving all addresses from the device. Wallet is being created, please wait...":
+            "Төхөөрөмжөөс бүх хаягийг авч байна. Хэтэвч үүсгэж байгаа тул түр хүлээнэ үү...",
           Refresh: "Сэргээх",
           "Refreshing…": "Шинэчилж байна…",
           "Pull down to refresh": "Шинэчлэхийн тулд доош татна уу",
@@ -2626,6 +2804,18 @@ i18n
       },
       th: {
         translation: {
+          "Verification successful!": "ยืนยันตัวตนสำเร็จ!",
+          "You can now safely use the device.":
+            "ตอนนี้คุณสามารถใช้อุปกรณ์ได้อย่างปลอดภัยแล้ว",
+          "Wallet ready!": "กระเป๋าเงินพร้อมแล้ว!",
+          "The wallet has been fully set up and is ready to use.":
+            "กระเป๋าเงินถูกตั้งค่าเรียบร้อยและพร้อมใช้งานแล้ว",
+          "Verification failed!": "การยืนยันล้มเหลว!",
+          "The verification code you entered is incorrect. Please try again.":
+            "รหัสยืนยันที่คุณป้อนไม่ถูกต้อง กรุณาลองอีกครั้ง",
+          "Creating wallet...": "กำลังสร้างกระเป๋าเงิน...",
+          "Receiving all addresses from the device. Wallet is being created, please wait...":
+            "กำลังรับที่อยู่ทั้งหมดจากอุปกรณ์ กำลังสร้างกระเป๋าเงิน กรุณารอสักครู่...",
           Refresh: "รีเฟรช",
           "Refreshing…": "กำลังรีเฟรช…",
           "Pull down to refresh": "ดึงลงเพื่อรีเฟรช",
@@ -2797,6 +2987,18 @@ i18n
       },
       uk: {
         translation: {
+          "Verification successful!": "Перевірка пройшла успішно!",
+          "You can now safely use the device.":
+            "Тепер ви можете безпечно користуватися пристроєм.",
+          "Wallet ready!": "Гаманець готовий!",
+          "The wallet has been fully set up and is ready to use.":
+            "Гаманець повністю налаштований і готовий до використання.",
+          "Verification failed!": "Перевірка не вдалася!",
+          "The verification code you entered is incorrect. Please try again.":
+            "Введений вами код перевірки неправильний. Спробуйте ще раз.",
+          "Creating wallet...": "Створення гаманця...",
+          "Receiving all addresses from the device. Wallet is being created, please wait...":
+            "Отримання всіх адрес з пристрою. Гаманець створюється, будь ласка, зачекайте...",
           Refresh: "Оновити",
           "Refreshing…": "Оновлення…",
           "Pull down to refresh": "Потягніть вниз, щоб оновити",
@@ -2971,6 +3173,30 @@ i18n
       },
       vi: {
         translation: {
+          "Verification successful!": "Verifikasi berhasil!",
+          "You can now safely use the device.":
+            "Sekarang Anda dapat menggunakan perangkat dengan aman.",
+          "Wallet ready!": "Dompet siap!",
+          "The wallet has been fully set up and is ready to use.":
+            "Dompet telah sepenuhnya disiapkan dan siap digunakan.",
+          "Verification failed!": "Verifikasi gagal!",
+          "The verification code you entered is incorrect. Please try again.":
+            "Kode verifikasi yang Anda masukkan salah. Silakan coba lagi.",
+          "Creating wallet...": "Sedang membuat dompet...",
+          "Receiving all addresses from the device. Wallet is being created, please wait...":
+            "Menerima semua alamat dari perangkat. Dompet sedang dibuat, mohon tunggu...",
+          "Verification successful!": "Xác minh thành công!",
+          "You can now safely use the device.":
+            "Bây giờ bạn có thể sử dụng thiết bị một cách an toàn.",
+          "Wallet ready!": "Ví đã sẵn sàng!",
+          "The wallet has been fully set up and is ready to use.":
+            "Ví đã được thiết lập hoàn chỉnh và sẵn sàng sử dụng.",
+          "Verification failed!": "Xác minh thất bại!",
+          "The verification code you entered is incorrect. Please try again.":
+            "Mã xác minh bạn đã nhập không chính xác. Vui lòng thử lại.",
+          "Creating wallet...": "Đang tạo ví...",
+          "Receiving all addresses from the device. Wallet is being created, please wait...":
+            "Đang nhận tất cả địa chỉ từ thiết bị. Ví đang được tạo, vui lòng đợi...",
           Refresh: "Làm mới",
           "Refreshing…": "Đang làm mới…",
           "Pull down to refresh": "Kéo xuống để làm mới",
@@ -3139,6 +3365,18 @@ i18n
       },
       id: {
         translation: {
+          "Verification successful!": "Verifikasi berhasil!",
+          "You can now safely use the device.":
+            "Sekarang Anda dapat menggunakan perangkat dengan aman.",
+          "Wallet ready!": "Dompet siap!",
+          "The wallet has been fully set up and is ready to use.":
+            "Dompet telah sepenuhnya disiapkan dan siap digunakan.",
+          "Verification failed!": "Verifikasi gagal!",
+          "The verification code you entered is incorrect. Please try again.":
+            "Kode verifikasi yang Anda masukkan salah. Silakan coba lagi.",
+          "Creating wallet...": "Sedang membuat dompet...",
+          "Receiving all addresses from the device. Wallet is being created, please wait...":
+            "Menerima semua alamat dari perangkat. Dompet sedang dibuat, mohon tunggu...",
           Refresh: "Muat ulang",
           "Refreshing…": "Menyegarkan…",
           "Pull down to refresh": "Tarik ke bawah untuk menyegarkan",
@@ -3311,6 +3549,18 @@ i18n
       },
       tl: {
         translation: {
+          "Verification successful!": "Matagumpay ang beripikasyon!",
+          "You can now safely use the device.":
+            "Maaari mo nang ligtas na gamitin ang device.",
+          "Wallet ready!": "Handa na ang pitaka!",
+          "The wallet has been fully set up and is ready to use.":
+            "Kumpleto na ang pagkaka-set up ng pitaka at handa nang gamitin.",
+          "Verification failed!": "Nabigo ang beripikasyon!",
+          "The verification code you entered is incorrect. Please try again.":
+            "Mali ang verification code na iyong inilagay. Pakisubukang muli.",
+          "Creating wallet...": "Gumagawa ng pitaka...",
+          "Receiving all addresses from the device. Wallet is being created, please wait...":
+            "Kinukuha ang lahat ng address mula sa device. Ginagawa ang pitaka, mangyaring maghintay...",
           Refresh: "I-refresh",
           "Refreshing…": "Nagre-refresh…",
           "Pull down to refresh": "Hilahin pababa para i-refresh",
@@ -3486,6 +3736,18 @@ i18n
       },
       bn: {
         translation: {
+          "Verification successful!": "যাচাইকরণ সফল হয়েছে!",
+          "You can now safely use the device.":
+            "আপনি এখন নিরাপদে ডিভাইসটি ব্যবহার করতে পারেন।",
+          "Wallet ready!": "ওয়ালেট প্রস্তুত!",
+          "The wallet has been fully set up and is ready to use.":
+            "ওয়ালেট সম্পূর্ণভাবে সেটআপ করা হয়েছে এবং ব্যবহারের জন্য প্রস্তুত।",
+          "Verification failed!": "যাচাইকরণ ব্যর্থ হয়েছে!",
+          "The verification code you entered is incorrect. Please try again.":
+            "আপনি যে যাচাইকরণ কোডটি প্রবেশ করেছেন তা সঠিক নয়। অনুগ্রহ করে আবার চেষ্টা করুন।",
+          "Creating wallet...": "ওয়ালেট তৈরি করা হচ্ছে...",
+          "Receiving all addresses from the device. Wallet is being created, please wait...":
+            "ডিভাইস থেকে সমস্ত ঠিকানা গ্রহণ করা হচ্ছে। ওয়ালেট তৈরি হচ্ছে, অনুগ্রহ করে অপেক্ষা করুন...",
           Refresh: "রিফ্রেশ করুন",
           "Refreshing…": "রিফ্রেশ হচ্ছে…",
           "Pull down to refresh": "রিফ্রেশ করতে নিচে টানুন",
