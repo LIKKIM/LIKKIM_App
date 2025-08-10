@@ -1,11 +1,12 @@
 // DeviceContext.js
 
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect, useRef } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import i18n from "../config/i18n";
 import { initialAdditionalCryptos } from "../config/assetInfo";
 import currencies from "../config/currencies";
 import { metricsAPII } from "../env/apiEndpoints";
+import { BleManager } from "react-native-ble-plx";
 
 // Create contexts
 export const DeviceContext = createContext();
@@ -15,6 +16,11 @@ export const DarkModeContext = createContext();
 const NEW_EXCHANGE_RATE_API_URL = metricsAPII.exchangeRate;
 
 export const CryptoProvider = ({ children }) => {
+  // 全局唯一BleManager实例
+  const bleManagerRef = useRef(null);
+  if (bleManagerRef.current === null) {
+    bleManagerRef.current = new BleManager();
+  }
   // State definitions
   const [verificationStatus, setVerificationStatus] = useState(null);
   const [isScreenLockEnabled, setIsScreenLockEnabled] = useState(false);
@@ -373,6 +379,7 @@ export const CryptoProvider = ({ children }) => {
   return (
     <DeviceContext.Provider
       value={{
+        bleManagerRef, // 全局唯一BleManager实例
         verificationStatus,
         setVerificationStatus,
         updateCryptoData,

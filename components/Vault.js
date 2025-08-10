@@ -214,7 +214,7 @@ function VaultScreen({ route, navigation }) {
     fetchWalletBalance(cryptoCards, setCryptoCards);
   }, [cryptoCards]);
 
-  const bleManagerRef = useRef(null);
+  const { bleManagerRef } = useContext(DeviceContext);
 
   const scanDevices = () => {
     if (Platform.OS !== "web" && !isScanning) {
@@ -409,10 +409,6 @@ function VaultScreen({ route, navigation }) {
 
   useEffect(() => {
     if (Platform.OS !== "web") {
-      bleManagerRef.current = new BleManager({
-        restoreStateIdentifier: restoreIdentifier,
-      });
-
       const subscription = bleManagerRef.current.onStateChange((state) => {
         if (state === "PoweredOn") {
           // 添加短暂延迟以确保蓝牙模块完全准备好
@@ -424,7 +420,6 @@ function VaultScreen({ route, navigation }) {
 
       return () => {
         subscription.remove();
-        bleManagerRef.current && bleManagerRef.current.destroy();
         // 新增取消蓝牙监听订阅，防止订阅泄漏
         if (monitorSubscription.current) {
           monitorSubscription.current.remove();

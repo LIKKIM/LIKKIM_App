@@ -365,14 +365,10 @@ function SecureDeviceScreen({ onDarkModeChange }) {
       currency.shortName.toLowerCase().includes(searchCurrency.toLowerCase())
   );
 
-  const bleManagerRef = useRef(null);
+  const { bleManagerRef } = useContext(DeviceContext);
 
   useEffect(() => {
     if (Platform.OS !== "web") {
-      bleManagerRef.current = new BleManager({
-        restoreStateIdentifier: restoreIdentifier,
-      });
-
       const subscription = bleManagerRef.current.onStateChange((state) => {
         if (state === "PoweredOn") {
           setTimeout(() => {
@@ -383,9 +379,6 @@ function SecureDeviceScreen({ onDarkModeChange }) {
 
       return () => {
         subscription.remove(); // 清理订阅
-        if (bleManagerRef.current) {
-          bleManagerRef.current.destroy();
-        }
         // 新增取消蓝牙监听订阅，防止订阅泄漏
         if (monitorSubscription.current) {
           monitorSubscription.current.remove();

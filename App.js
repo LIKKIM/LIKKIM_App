@@ -164,7 +164,7 @@ function AppContent({
 }) {
   const [scale] = useState(new Animated.Value(1)); // Animated scale value
   const [isScanning, setIsScanning] = useState(false);
-  const bleManagerRef = useRef(null);
+  const { bleManagerRef } = useContext(DeviceContext);
   const restoreIdentifier = Constants.installationId;
   const [devices, setDevices] = useState([]);
   const [bleVisible, setBleVisible] = useState(false);
@@ -205,10 +205,6 @@ function AppContent({
 
   useEffect(() => {
     if (Platform.OS !== "web") {
-      bleManagerRef.current = new BleManager({
-        restoreStateIdentifier: restoreIdentifier,
-      });
-
       const subscription = bleManagerRef.current.onStateChange((state) => {
         if (state === "PoweredOn") {
           setTimeout(() => {
@@ -219,9 +215,6 @@ function AppContent({
 
       return () => {
         subscription.remove(); // 清理订阅
-        if (bleManagerRef.current) {
-          bleManagerRef.current.destroy();
-        }
         // 新增取消蓝牙监听订阅
         if (monitorSubscription.current) {
           monitorSubscription.current.remove();

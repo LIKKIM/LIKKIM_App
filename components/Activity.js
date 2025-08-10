@@ -193,7 +193,7 @@ function ActivityScreen() {
   };
 
   // ---------- 扫描设备 ----------
-  const bleManagerRef = useRef(null);
+  const { bleManagerRef } = useContext(DeviceContext);
 
   const scanDevices = () => {
     if (Platform.OS !== "web" && !isScanning) {
@@ -695,10 +695,6 @@ function ActivityScreen() {
   // Update Bluetooth modal visibility management
   useEffect(() => {
     if (Platform.OS !== "web") {
-      bleManagerRef.current = new BleManager({
-        restoreStateIdentifier: restoreIdentifier,
-      });
-
       const subscription = bleManagerRef.current.onStateChange((state) => {
         if (state === "PoweredOn") {
           // 添加短暂延迟以确保蓝牙模块完全准备好
@@ -711,7 +707,6 @@ function ActivityScreen() {
 
       return () => {
         subscription.remove();
-        bleManagerRef.current && bleManagerRef.current.destroy();
         // 新增取消蓝牙监听订阅，防止订阅泄漏
         if (monitorSubscription.current) {
           try {
