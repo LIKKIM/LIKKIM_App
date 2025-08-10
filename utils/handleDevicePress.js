@@ -18,6 +18,40 @@ export function createHandleDevicePress({
     setVerificationStatus(null);
     setSelectedDevice(device);
     setBleVisible(false);
+
+    // 权限校验
+    let permissionsGranted = true;
+    if (typeof require !== "undefined") {
+      try {
+        const { Platform, PermissionsAndroid } = require("react-native");
+        if (Platform.OS === "android" && Platform.Version >= 23) {
+          const permissions = await PermissionsAndroid.requestMultiple([
+            PermissionsAndroid.PERMISSIONS.BLUETOOTH_CONNECT,
+            PermissionsAndroid.PERMISSIONS.BLUETOOTH_SCAN,
+            PermissionsAndroid.PERMISSIONS.BLUETOOTH_ADVERTISE,
+            PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+          ]);
+          for (let permission in permissions) {
+            if (
+              permissions[permission] !== PermissionsAndroid.RESULTS.GRANTED
+            ) {
+              console.log(`${permission} permission not granted`);
+              permissionsGranted = false;
+            }
+          }
+        }
+      } catch (e) {
+        console.log("Permission check error:", e);
+        permissionsGranted = false;
+      }
+    }
+    if (!permissionsGranted) {
+      console.log(
+        "Bluetooth or location permission not granted, aborting connection."
+      );
+      return;
+    }
+
     // 连接和服务发现单独捕获异常
     try {
       try {

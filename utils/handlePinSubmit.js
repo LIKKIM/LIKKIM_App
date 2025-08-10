@@ -179,7 +179,7 @@ export function createHandlePinSubmit({
                 console.log(
                   `🔁 Retry request address:${chainName} (${retryCountObj[shortName]}/3)`
                 );
-                await new Promise((resolve) => setTimeout(resolve, 400));
+                await new Promise((resolve) => setTimeout(resolve, 250));
               }
             }
             // 保存补发次数
@@ -190,7 +190,7 @@ export function createHandlePinSubmit({
           } else {
             console.log("✅ All addresses received, no missing chains");
           }
-        }, 500);
+        }, 250);
 
         // 3. (原有 pubkey 指令)
         setTimeout(async () => {
@@ -230,7 +230,7 @@ export function createHandlePinSubmit({
               );
             }
           }, 3000);
-        }, 100);
+        }, 250);
         setCheckStatusModalVisible(true);
       } else if (flag === "N") {
         console.log("Flag N received; no 'address' sent");
