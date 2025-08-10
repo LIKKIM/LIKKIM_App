@@ -223,11 +223,6 @@ export function createHandlePinSubmit({
             if (selectedDevice && selectedDevice.cancelConnection) {
               await selectedDevice.cancelConnection();
               console.log("Disconnected device after pubkey batch");
-            } else if (selectedDevice && selectedDevice.disconnect) {
-              await selectedDevice.disconnect();
-              console.log(
-                "Disconnected device after pubkey batch (disconnect fallback)"
-              );
             }
           }, 2000);
         }, 100);
