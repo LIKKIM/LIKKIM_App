@@ -18,10 +18,16 @@ export function createHandleDevicePress({
     setVerificationStatus(null);
     setSelectedDevice(device);
     setBleVisible(false);
+    // 连接和服务发现单独捕获异常
     try {
-      await device.connect();
-      await device.discoverAllServicesAndCharacteristics();
-      console.log("Device connected and services discovered");
+      try {
+        await device.connect();
+        await device.discoverAllServicesAndCharacteristics();
+        console.log("Device connected and services discovered");
+      } catch (error) {
+        console.log("Error connecting or discovering services:", error);
+        return;
+      }
 
       const sendparseDeviceCodeedValue = async (parseDeviceCodeedValue) => {
         try {
