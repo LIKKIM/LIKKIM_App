@@ -223,6 +223,13 @@ export function createHandlePinSubmit({
       } else if (flag === "N") {
         console.log("Flag N received; no 'address' sent");
         setCheckStatusModalVisible(true);
+        // flag === "N" 时也要断开连接
+        if (selectedDevice && selectedDevice.cancelConnection) {
+          await selectedDevice.cancelConnection();
+          console.log(
+            "Disconnected device after successful verification (flag N)"
+          );
+        }
       }
     } else {
       console.log("PIN verification failed");
