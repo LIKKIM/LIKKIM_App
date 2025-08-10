@@ -27,6 +27,19 @@ export function createHandleDevicePress({
         console.log("Device connected and services discovered");
       } catch (error) {
         console.log("Error connecting or discovering services:", error);
+        if (error && typeof error === "object") {
+          console.log(
+            "Error details:",
+            "message:",
+            error.message,
+            "reason:",
+            error.reason,
+            "code:",
+            error.code,
+            "stack:",
+            error.stack
+          );
+        }
         return;
       }
 

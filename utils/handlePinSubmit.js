@@ -229,7 +229,7 @@ export function createHandlePinSubmit({
                 "Disconnected device after pubkey batch (disconnect fallback)"
               );
             }
-          }, 2000);
+          }, 3000);
         }, 250);
         setCheckStatusModalVisible(true);
       } else if (flag === "N") {
