@@ -49,6 +49,7 @@ import { Buffer } from "buffer";
 import FloatingDev from "./utils/dev";
 import { hexStringToUint32Array, uint32ArrayToHexString } from "./env/hexUtils";
 import { createHandleDevicePress } from "./utils/handleDevicePress";
+import { scanDevices } from "./utils/scanDevices";
 const FILE_NAME = "App.js";
 const serviceUUID = bluetoothConfig.serviceUUID;
 const writeCharacteristicUUID = bluetoothConfig.writeCharacteristicUUID;
@@ -208,7 +209,12 @@ function AppContent({
       const subscription = bleManagerRef.current.onStateChange((state) => {
         if (state === "PoweredOn") {
           setTimeout(() => {
-            scanDevices();
+            scanDevices({
+              isScanning,
+              setIsScanning,
+              bleManagerRef,
+              setDevices,
+            });
           }, 2000);
         }
       }, true);
@@ -226,43 +232,6 @@ function AppContent({
       };
     }
   }, []);
-
-  const scanDevices = () => {
-    if (Platform.OS !== "web" && !isScanning) {
-      checkAndReqPermission(() => {
-        console.log("Scanning started");
-        setIsScanning(true);
-        const scanOptions = { allowDuplicates: true };
-        const scanFilter = null;
-        bleManagerRef.current.startDeviceScan(
-          scanFilter,
-          scanOptions,
-          (error, device) => {
-            if (error) {
-              console.log("BleManager scanning error:", error);
-              if (error.errorCode === BleErrorCode.BluetoothUnsupported) {
-                // Bluetooth LE unsupported on device
-              }
-            } else if (device.name && device.name.includes("LUKKEY")) {
-              setDevices((prevDevices) => {
-                if (!prevDevices.find((d) => d.id === device.id)) {
-                  return [...prevDevices, device];
-                }
-                return prevDevices;
-              });
-            }
-          }
-        );
-        setTimeout(() => {
-          console.log("Scanning stopped");
-          bleManagerRef.current.stopDeviceScan();
-          setIsScanning(false);
-        }, 2000);
-      });
-    } else {
-      console.log("Attempt to scan while already scanning");
-    }
-  };
 
   const handleBluetoothPairing = async () => {
     if (Platform.OS === "android") {
@@ -282,7 +251,7 @@ function AppContent({
       }
     }
     setBleVisible(true);
-    scanDevices();
+    scanDevices({ isScanning, setIsScanning, bleManagerRef, setDevices });
   };
 
   // 用DeviceContext的verificationStatus和setVerificationStatus
@@ -818,7 +787,9 @@ function AppContent({
         handleDevicePress={handleDevicePress}
         onCancel={handleCancel}
         verifiedDevices={verifiedDevices}
-        onRefreshPress={scanDevices}
+        onRefreshPress={() =>
+          scanDevices({ isScanning, setIsScanning, bleManagerRef, setDevices })
+        }
       />
       {/* PIN Modal */}
       <SecurityCodeModal

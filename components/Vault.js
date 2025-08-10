@@ -50,6 +50,7 @@ import {
   fetchWalletBalance,
 } from "./VaultScreen/AssetsDataFetcher";
 import { createHandleDevicePress } from "../utils/handleDevicePress";
+import { scanDevices } from "../utils/scanDevices";
 const FILE_NAME = "Vault.js";
 const serviceUUID = bluetoothConfig.serviceUUID;
 const writeCharacteristicUUID = bluetoothConfig.writeCharacteristicUUID;
@@ -137,7 +138,6 @@ function VaultScreen({ route, navigation }) {
   const [blueToothStatus, setBlueToothStatus] = useState(null);
   const [createPendingModalVisible, setCreatePendingModalVisible] =
     useState(false);
-  useState(false);
   const [addressVerificationMessage, setAddressVerificationMessage] = useState(
     t("Verifying address on your device...")
   );
@@ -216,49 +216,12 @@ function VaultScreen({ route, navigation }) {
 
   const { bleManagerRef } = useContext(DeviceContext);
 
-  const scanDevices = () => {
-    if (Platform.OS !== "web" && !isScanning) {
-      checkAndReqPermission(() => {
-        console.log("Scanning started");
-        setIsScanning(true);
-        const scanOptions = { allowDuplicates: true };
-        const scanFilter = null;
-        bleManagerRef.current.startDeviceScan(
-          scanFilter,
-          scanOptions,
-          (error, device) => {
-            if (error) {
-              console.log("BleManager scanning error:", error);
-              if (error.errorCode === BleErrorCode.BluetoothUnsupported) {
-                // Bluetooth LE unsupported on device
-              }
-            } else if (device.name && device.name.includes("LUKKEY")) {
-              setDevices((prevDevices) => {
-                if (!prevDevices.find((d) => d.id === device.id)) {
-                  return [...prevDevices, device];
-                }
-                return prevDevices;
-              });
-            }
-          }
-        );
-        setTimeout(() => {
-          console.log("Scanning stopped");
-          bleManagerRef.current.stopDeviceScan();
-          setIsScanning(false);
-        }, 2000);
-      });
-    } else {
-      console.log("Attempt to scan while already scanning");
-    }
-  };
-
   const [bleVisible, setBleVisible] = useState(false);
 
   // 自动蓝牙扫描：bleVisible 变为 true 时自动扫描设备
   useEffect(() => {
     if (bleVisible) {
-      scanDevices();
+      scanDevices({ isScanning, setIsScanning, bleManagerRef, setDevices });
     }
   }, [bleVisible]);
 

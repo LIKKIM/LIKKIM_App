@@ -42,6 +42,7 @@ import { accountAPI, signAPI } from "../env/apiEndpoints";
 import signTransaction from "./ActivityScreen/signTransaction";
 import { bluetoothConfig } from "../env/bluetoothConfig";
 import { createHandleDevicePress } from "../utils/handleDevicePress";
+import { scanDevices } from "../utils/scanDevices";
 const FILE_NAME = "Activity.js";
 // BLE 常量
 const serviceUUID = bluetoothConfig.serviceUUID;
@@ -195,42 +196,6 @@ function ActivityScreen() {
   // ---------- 扫描设备 ----------
   const { bleManagerRef } = useContext(DeviceContext);
 
-  const scanDevices = () => {
-    if (Platform.OS !== "web" && !isScanning) {
-      checkAndReqPermission(() => {
-        console.log("Scanning started");
-        setIsScanning(true);
-        const scanOptions = { allowDuplicates: true };
-        const scanFilter = null;
-        bleManagerRef.current.startDeviceScan(
-          scanFilter,
-          scanOptions,
-          (error, device) => {
-            if (error) {
-              console.log("BleManager scanning error:", error);
-              if (error.errorCode === BleErrorCode.BluetoothUnsupported) {
-                // Bluetooth LE unsupported on device
-              }
-            } else if (device.name && device.name.includes("LUKKEY")) {
-              setDevices((prevDevices) => {
-                if (!prevDevices.find((d) => d.id === device.id)) {
-                  return [...prevDevices, device];
-                }
-                return prevDevices;
-              });
-            }
-          }
-        );
-        setTimeout(() => {
-          console.log("Scanning stopped");
-          bleManagerRef.current.stopDeviceScan();
-          setIsScanning(false);
-        }, 2000);
-      });
-    } else {
-      console.log("Attempt to scan while already scanning");
-    }
-  };
   // Clear values when opening the modal
   useEffect(() => {
     if (swapModalVisible) {
@@ -1151,13 +1116,13 @@ function ActivityScreen() {
   };
 
   const handleReceivePress = () => {
-    scanDevices();
+    scanDevices({ isScanning, setIsScanning, bleManagerRef, setDevices });
     setOperationType("receive");
     setModalVisible(true);
   };
 
   const handleSendPress = () => {
-    scanDevices();
+    scanDevices({ isScanning, setIsScanning, bleManagerRef, setDevices });
     setOperationType("Send");
     setIsAddressValid(false);
     setModalVisible(true);

@@ -54,6 +54,7 @@ import { parseDeviceCode } from "../utils/parseDeviceCode";
 import { firmwareAPI } from "../env/apiEndpoints";
 import { bluetoothConfig } from "../env/bluetoothConfig";
 import { createHandleDevicePress } from "../utils/handleDevicePress";
+import { scanDevices } from "../utils/scanDevices";
 
 /**
  * deleteWallet and confirmDeleteWallet are the core functions for the wallet deletion feature.
@@ -186,7 +187,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
       await handleDisconnectDevice(deviceToDisconnect);
       setConfirmDisconnectModalVisible(false);
       setDeviceToDisconnect(null);
-      scanDevices();
+      scanDevices({ isScanning, setIsScanning, bleManagerRef, setDevices });
     }
   };
 
@@ -387,7 +388,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
       }
     }
     setBleVisible(true);
-    scanDevices();
+    scanDevices({ isScanning, setIsScanning, bleManagerRef, setDevices });
   };
 
   const handleCurrencyChange = async (currency) => {
@@ -420,43 +421,6 @@ function SecureDeviceScreen({ onDarkModeChange }) {
       headerTitle: t("General"),
     });
   }, [t, navigation]);
-
-  const scanDevices = () => {
-    if (Platform.OS !== "web" && !isScanning) {
-      checkAndReqPermission(() => {
-        console.log("Scanning started");
-        setIsScanning(true);
-        const scanOptions = { allowDuplicates: true };
-        const scanFilter = null;
-        bleManagerRef.current.startDeviceScan(
-          scanFilter,
-          scanOptions,
-          (error, device) => {
-            if (error) {
-              console.log("BleManager scanning error:", error);
-              if (error.errorCode === BleErrorCode.BluetoothUnsupported) {
-                // Bluetooth LE unsupported on device
-              }
-            } else if (device.name && device.name.includes("LUKKEY")) {
-              setDevices((prevDevices) => {
-                if (!prevDevices.find((d) => d.id === device.id)) {
-                  return [...prevDevices, device];
-                }
-                return prevDevices;
-              });
-            }
-          }
-        );
-        setTimeout(() => {
-          console.log("Scanning stopped");
-          bleManagerRef.current.stopDeviceScan();
-          setIsScanning(false);
-        }, 2000);
-      });
-    } else {
-      console.log("Attempt to scan while already scanning");
-    }
-  };
 
   function hexStringToUint32Array(hexString) {
     return new Uint32Array([
