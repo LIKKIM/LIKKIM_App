@@ -614,12 +614,62 @@ function SecureDeviceScreen({ onDarkModeChange }) {
 
   const deleteWallet = async () => {
     try {
-      const cryptoCardsData = await AsyncStorage.getItem("cryptoCards");
-      const cryptoCards = JSON.parse(cryptoCardsData);
-      if (cryptoCards && cryptoCards.length > 0) {
-        await AsyncStorage.removeItem("cryptoCards");
+      // 打印删除前的state和AsyncStorage
+      const [asCryptoCards, asAddedCryptos, asInitialAdditionalCryptos] =
+        await Promise.all([
+          AsyncStorage.getItem("cryptoCards"),
+          AsyncStorage.getItem("addedCryptos"),
+          AsyncStorage.getItem("initialAdditionalCryptos"),
+        ]);
+      console.log("==== 删除前 ====");
+      console.log("state.cryptoCards:", cryptoCards);
+      if (typeof addedCryptos !== "undefined")
+        console.log("state.addedCryptos:", addedCryptos);
+      if (typeof initialAdditionalCryptos !== "undefined")
+        console.log(
+          "state.initialAdditionalCryptos:",
+          initialAdditionalCryptos
+        );
+      console.log("AS.cryptoCards:", asCryptoCards);
+      console.log("AS.addedCryptos:", asAddedCryptos);
+      console.log("AS.initialAdditionalCryptos:", asInitialAdditionalCryptos);
+
+      const cryptoCardsData = asCryptoCards;
+      const parsedCryptoCards = JSON.parse(cryptoCardsData);
+      if (parsedCryptoCards && parsedCryptoCards.length > 0) {
+        await AsyncStorage.multiRemove([
+          "cryptoCards",
+          "addedCryptos",
+          "initialAdditionalCryptos",
+        ]);
         setCryptoCards([]);
         setVerifiedDevices([]);
+        if (typeof setAddedCryptos === "function") setAddedCryptos([]);
+        if (typeof setInitialAdditionalCryptos === "function")
+          setInitialAdditionalCryptos([]);
+        // 打印删除后的state和AsyncStorage
+        const [asCryptoCards2, asAddedCryptos2, asInitialAdditionalCryptos2] =
+          await Promise.all([
+            AsyncStorage.getItem("cryptoCards"),
+            AsyncStorage.getItem("addedCryptos"),
+            AsyncStorage.getItem("initialAdditionalCryptos"),
+          ]);
+        console.log("==== 删除后 ====");
+        console.log("state.cryptoCards:", cryptoCards);
+        if (typeof addedCryptos !== "undefined")
+          console.log("state.addedCryptos:", addedCryptos);
+        if (typeof initialAdditionalCryptos !== "undefined")
+          console.log(
+            "state.initialAdditionalCryptos:",
+            initialAdditionalCryptos
+          );
+        console.log("AS.cryptoCards:", asCryptoCards2);
+        console.log("AS.addedCryptos:", asAddedCryptos2);
+        console.log(
+          "AS.initialAdditionalCryptos:",
+          asInitialAdditionalCryptos2
+        );
+
         Alert.alert(t("Success"), t("Deleted successfully."));
         navigation.goBack();
       } else {
