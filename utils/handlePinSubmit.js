@@ -190,7 +190,7 @@ export function createHandlePinSubmit({
           } else {
             console.log("✅ All addresses received, no missing chains");
           }
-        }, 2000);
+        }, 500);
 
         // 3. (原有 pubkey 指令)
         setTimeout(async () => {
