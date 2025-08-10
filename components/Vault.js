@@ -608,13 +608,21 @@ function VaultScreen({ route, navigation }) {
     return finalBalance;
   };
 
+  // 用 useRef 包裹 monitorVerificationCode，防止闭包丢失
+  const monitorVerificationCodeRef = useRef(monitorVerificationCode);
+  useEffect(() => {
+    monitorVerificationCodeRef.current = monitorVerificationCode;
+  }, [monitorVerificationCode]);
+
   // 新增：使用工厂函数生成 handleDevicePress
   const handleDevicePress = createHandleDevicePress({
     setReceivedAddresses: () => {},
     setVerificationStatus: () => {},
     setSelectedDevice,
     setBleVisible,
-    monitorVerificationCode,
+    // 用 ref 保证 monitorVerificationCode 永远不为 undefined
+    monitorVerificationCode: (...args) =>
+      monitorVerificationCodeRef.current?.(...args),
     setSecurityCodeModalVisible,
     serviceUUID,
     writeCharacteristicUUID,
