@@ -32,6 +32,7 @@ import SecureDeviceScreen from "./components/SecureDevice";
 import OnboardingScreen from "./utils/OnboardingScreen";
 import ScreenLock from "./utils/ScreenLock";
 import { parseDeviceCode } from "./utils/parseDeviceCode";
+import { createHandlePinSubmit } from "./utils/handlePinSubmit";
 import checkAndReqPermission from "./utils/BluetoothPermissions";
 import DeviceDisplay from "./components/SecureDeviceScreen/DeviceDisplay";
 import SupportPage from "./components/SecureDeviceScreen/SupportPage";
@@ -291,206 +292,174 @@ function AppContent({
     scanDevices();
   };
 
-  // 核心标准
-  const handlePinSubmit = async () => {
-    setSecurityCodeModalVisible(false);
-    setCheckStatusModalVisible(false);
-    const verificationCodeValue = receivedVerificationCode.trim();
-    const pinCodeValue = pinCode.trim();
+  // 用DeviceContext的verificationStatus和setVerificationStatus
+  const {
+    updateCryptoAddress,
+    isAppLaunching,
+    cryptoCards,
+    verifiedDevices,
+    setVerifiedDevices,
+    setIsVerificationSuccessful,
+    updateDevicePubHintKey,
+  } = useContext(DeviceContext);
 
-    //  console.log(`User PIN: ${pinCodeValue}`);
-    console.log(`Received data: ${verificationCodeValue}`);
-
-    const [prefix, rest] = verificationCodeValue.split(":");
-    if (prefix !== "PIN" || !rest) {
-      setCheckStatusModalVisible(true);
-      console.log("Invalid verification format:", verificationCodeValue);
-      setVerificationStatus("fail");
-      return;
+  // monitorVerificationCode 必须在 handlePinSubmit 之前声明
+  const monitorVerificationCode = (device, sendparseDeviceCodeedValue) => {
+    // 正确地移除已有监听
+    if (monitorSubscription.current) {
+      monitorSubscription.current.remove();
+      monitorSubscription.current = null;
     }
 
-    const [receivedPin, flag] = rest.split(",");
-    if (!receivedPin || (flag !== "Y" && flag !== "N")) {
-      console.log("Invalid verification format:", verificationCodeValue);
-      setVerificationStatus("fail");
-      return;
-    }
-
-    console.log(`Extracted PIN: ${receivedPin}`);
-    console.log(`Flag: ${flag}`);
-
-    // 新增：无论是否相等，立即发送 pinCodeValue 与 receivedPin 给嵌入式设备
-    try {
-      const pinData = `pinCodeValue:${pinCodeValue},receivedPin:${receivedPin}`;
-      const bufferPinData = Buffer.from(pinData, "utf-8");
-      const base64PinData = bufferPinData.toString("base64");
-      await selectedDevice.writeCharacteristicWithResponseForService(
-        serviceUUID,
-        writeCharacteristicUUID,
-        base64PinData
-      );
-      console.log("Sent pinCodeValue and receivedPin to device:", pinData);
-    } catch (error) {
-      console.log("Error sending pin data:", error);
-    }
-
-    if (pinCodeValue === receivedPin) {
-      console.log("PIN verified successfully");
-      setVerificationStatus("success");
-      setVerifiedDevices([selectedDevice.id]);
-
-      await AsyncStorage.setItem(
-        "verifiedDevices",
-        JSON.stringify([selectedDevice.id])
-      );
-
-      setIsVerificationSuccessful(true);
-      console.log("Device verified and saved");
-
-      try {
-        const confirmationMessage = "PIN_OK";
-        const bufferConfirmation = Buffer.from(confirmationMessage, "utf-8");
-        const base64Confirmation = bufferConfirmation.toString("base64");
-        await selectedDevice.writeCharacteristicWithResponseForService(
-          serviceUUID,
-          writeCharacteristicUUID,
-          base64Confirmation
-        );
-        console.log("Sent confirmation message:", confirmationMessage);
-      } catch (error) {
-        console.log("Error sending confirmation message:", error);
-      }
-
-      if (flag === "Y") {
-        monitorVerificationCode(selectedDevice);
-
-        setCheckStatusModalVisible(true);
-        setVerificationStatus("waiting");
-
-        // 1. 依次批量发所有 address:<chainName> 命令
-        for (const prefix of Object.keys(prefixToShortName)) {
-          const chainName = prefix.replace(":", "");
-          const getMessage = `address:${chainName}`;
-          const bufferGetMessage = Buffer.from(getMessage, "utf-8");
-          const base64GetMessage = bufferGetMessage.toString("base64");
-          await selectedDevice.writeCharacteristicWithResponseForService(
-            serviceUUID,
-            writeCharacteristicUUID,
-            base64GetMessage
+    monitorSubscription.current = device.monitorCharacteristicForService(
+      serviceUUID,
+      notifyCharacteristicUUID,
+      async (error, characteristic) => {
+        if (error) {
+          console.log(
+            `${FILE_NAME} Error monitoring device response:`,
+            error.message
           );
-          await new Promise((resolve) => setTimeout(resolve, 250));
+          return;
         }
 
-        // 2. 统一延迟2秒检查所有缺失的链地址，然后自动补发一次
-        setTimeout(async () => {
-          // 自动补发最多3次（用本地缓存记补发次数）
-          const retryCountKey = "bluetoothMissingChainRetryCount";
-          let retryCountObj = {};
-          try {
-            const retryStr = await AsyncStorage.getItem(retryCountKey);
-            if (retryStr) retryCountObj = JSON.parse(retryStr);
-          } catch (e) {}
-          if (!retryCountObj) retryCountObj = {};
+        const receivedData = Buffer.from(characteristic.value, "base64");
+        const receivedDataString = receivedData.toString("utf8");
+        console.log("Received data string:", receivedDataString);
 
-          // 检查所有链的地址收集情况
-          const addresses = receivedAddresses || {};
-          const missingChains = Object.values(prefixToShortName).filter(
-            (shortName) => !addresses[shortName]
-          );
+        const prefix = Object.keys(prefixToShortName).find((key) =>
+          receivedDataString.startsWith(key)
+        );
+        if (prefix) {
+          const newAddress = receivedDataString.replace(prefix, "").trim();
+          const chainShortName = prefixToShortName[prefix];
+          console.log(`Received ${chainShortName} address: `, newAddress);
+          updateCryptoAddress(chainShortName, newAddress);
 
-          if (missingChains.length > 0) {
-            console.log(
-              "🚨 统一补发缺失链 address 请求:",
-              missingChains.join(", ")
-            );
-            for (let i = 0; i < missingChains.length; i++) {
-              const shortName = missingChains[i];
-              // 读取补发次数
-              if (!retryCountObj[shortName]) retryCountObj[shortName] = 0;
-              if (retryCountObj[shortName] >= 3) {
-                continue; // 每个链最多补发3次
-              }
-              retryCountObj[shortName] += 1;
-
-              const prefixEntry = Object.entries(prefixToShortName).find(
-                ([k, v]) => v === shortName
+          setReceivedAddresses((prev) => {
+            const updated = { ...prev, [chainShortName]: newAddress };
+            const expectedCount = Object.keys(prefixToShortName).length;
+            if (Object.keys(updated).length >= expectedCount) {
+              setTimeout(() => {
+                setVerificationStatus("walletReady");
+                console.log("All public keys received, wallet ready.");
+              }, 2000);
+            } else {
+              setVerificationStatus("waiting");
+              // 新增打印缺失的区块链地址
+              const missingChains = Object.values(prefixToShortName).filter(
+                (shortName) => !updated.hasOwnProperty(shortName)
               );
-              if (prefixEntry) {
-                const prefix = prefixEntry[0];
-                const chainName = prefix.replace(":", "");
-                const getMessage = `address:${chainName}`;
-                const bufferGetMessage = Buffer.from(getMessage, "utf-8");
-                const base64GetMessage = bufferGetMessage.toString("base64");
-                await selectedDevice.writeCharacteristicWithResponseForService(
-                  serviceUUID,
-                  writeCharacteristicUUID,
-                  base64GetMessage
-                );
+              if (missingChains.length > 0) {
                 console.log(
-                  `🔁 Retry request address:${chainName} (${retryCountObj[shortName]}/3)`
+                  "Missing addresses for chains:",
+                  missingChains.join(", ")
                 );
-                await new Promise((resolve) => setTimeout(resolve, 400));
               }
             }
-            // 保存补发次数
-            await AsyncStorage.setItem(
-              retryCountKey,
-              JSON.stringify(retryCountObj)
+            return updated;
+          });
+        }
+
+        if (receivedDataString.startsWith("pubkeyData:")) {
+          const pubkeyData = receivedDataString
+            .replace("pubkeyData:", "")
+            .trim();
+          const [queryChainName, publicKey] = pubkeyData.split(",");
+          if (queryChainName && publicKey) {
+            updateDevicePubHintKey(queryChainName, publicKey);
+          }
+        }
+
+        if (receivedDataString.includes("ID:")) {
+          const encryptedHex = receivedDataString.split("ID:")[1];
+          const encryptedData = hexStringToUint32Array(encryptedHex);
+          const key = new Uint32Array([0x1234, 0x1234, 0x1234, 0x1234]);
+          parseDeviceCode(encryptedData, key);
+          const parseDeviceCodeedHex = uint32ArrayToHexString(encryptedData);
+          console.log("parseDeviceCodeed string:", parseDeviceCodeedHex);
+          if (sendparseDeviceCodeedValue) {
+            sendparseDeviceCodeedValue(parseDeviceCodeedHex);
+          }
+        }
+
+        if (receivedDataString === "VALID") {
+          try {
+            setVerificationStatus("VALID");
+            console.log("Status set to: VALID");
+            const validationMessage = "validation";
+            const bufferValidationMessage = Buffer.from(
+              validationMessage,
+              "utf-8"
             );
-          } else {
-            console.log("✅ All addresses received, no missing chains");
+            const base64ValidationMessage =
+              bufferValidationMessage.toString("base64");
+            await device.writeCharacteristicWithResponseForService(
+              serviceUUID,
+              writeCharacteristicUUID,
+              base64ValidationMessage
+            );
+            console.log(`Sent 'validation' to device`);
+          } catch (error) {
+            console.log("发送 'validation' 时出错:", error);
           }
-        }, 2000);
+        }
 
-        // 3. (原有 pubkey 指令)
-        setTimeout(async () => {
-          const pubkeyMessages = [
-            "pubkey:cosmos,m/44'/118'/0'/0/0",
-            "pubkey:ripple,m/44'/144'/0'/0/0",
-            "pubkey:celestia,m/44'/118'/0'/0/0",
-            "pubkey:juno,m/44'/118'/0'/0/0",
-            "pubkey:osmosis,m/44'/118'/0'/0/0",
-          ];
-
-          for (const message of pubkeyMessages) {
-            await new Promise((resolve) => setTimeout(resolve, 250));
-            try {
-              const messageWithNewline = message + "\n";
-              const bufferMessage = Buffer.from(messageWithNewline, "utf-8");
-              const base64Message = bufferMessage.toString("base64");
-              await selectedDevice.writeCharacteristicWithResponseForService(
-                serviceUUID,
-                writeCharacteristicUUID,
-                base64Message
-              );
-              console.log(`Sent message: ${messageWithNewline}`);
-            } catch (error) {
-              console.log(`Error sending message "${message}":`, error);
-            }
-          }
-        }, 750);
-        setCheckStatusModalVisible(true);
-      } else if (flag === "N") {
-        console.log("Flag N received; no 'address' sent");
-        setCheckStatusModalVisible(true);
+        if (receivedDataString.startsWith("PIN:")) {
+          setReceivedVerificationCode(receivedDataString);
+          monitorSubscription.current?.remove();
+          monitorSubscription.current = null;
+        }
       }
-    } else {
-      console.log("PIN verification failed");
-      setVerificationStatus("fail");
-
-      if (monitorSubscription) {
-        monitorSubscription.remove();
-        console.log("Stopped monitoring verification code");
-      }
-
-      if (selectedDevice) {
-        await selectedDevice.cancelConnection();
-        console.log("Disconnected device");
-      }
-    }
-
-    setPinCode("");
+    );
   };
+
+  // handlePinSubmit 已迁移至 utils/handlePinSubmit.js
+  const handlePinSubmit = React.useMemo(
+    () =>
+      createHandlePinSubmit({
+        setSecurityCodeModalVisible,
+        setCheckStatusModalVisible,
+        setVerificationStatus,
+        setVerifiedDevices,
+        setIsVerificationSuccessful,
+        setPinCode,
+        setReceivedAddresses,
+        prefixToShortName,
+        monitorVerificationCode,
+        serviceUUID,
+        writeCharacteristicUUID,
+      }),
+    [
+      setSecurityCodeModalVisible,
+      setCheckStatusModalVisible,
+      setVerificationStatus,
+      setVerifiedDevices,
+      setIsVerificationSuccessful,
+      setPinCode,
+      setReceivedAddresses,
+      prefixToShortName,
+      monitorVerificationCode,
+      serviceUUID,
+      writeCharacteristicUUID,
+    ]
+  );
+
+  // 包装一层，收集依赖参数，适配 SecurityCodeModal 的无参 onSubmit
+  const handlePinSubmitProxy = React.useCallback(() => {
+    handlePinSubmit({
+      receivedVerificationCode,
+      pinCode,
+      selectedDevice,
+      receivedAddresses,
+    });
+  }, [
+    handlePinSubmit,
+    receivedVerificationCode,
+    pinCode,
+    selectedDevice,
+    receivedAddresses,
+  ]);
 
   const handlePressIn = () => {
     Animated.timing(scale, {
@@ -508,15 +477,6 @@ function AppContent({
     }).start();
   };
 
-  const {
-    updateCryptoAddress,
-    isAppLaunching,
-    cryptoCards,
-    verifiedDevices,
-    setVerifiedDevices,
-    setIsVerificationSuccessful,
-    updateDevicePubHintKey,
-  } = useContext(DeviceContext);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
@@ -590,119 +550,6 @@ function AppContent({
 
   if (!isScreenLockLoaded) return null;
   if (screenLockFeatureEnabled && isAppLaunching) return <ScreenLock />;
-
-  const monitorVerificationCode = (device, sendparseDeviceCodeedValue) => {
-    // 正确地移除已有监听
-    if (monitorSubscription.current) {
-      monitorSubscription.current.remove();
-      monitorSubscription.current = null;
-    }
-
-    monitorSubscription.current = device.monitorCharacteristicForService(
-      serviceUUID,
-      notifyCharacteristicUUID,
-      async (error, characteristic) => {
-        if (error) {
-          console.log(
-            `${FILE_NAME} Error monitoring device response:`,
-            error.message
-          );
-          return;
-        }
-
-        const receivedData = Buffer.from(characteristic.value, "base64");
-        const receivedDataString = receivedData.toString("utf8");
-        console.log("Received data string:", receivedDataString);
-
-        const prefix = Object.keys(prefixToShortName).find((key) =>
-          receivedDataString.startsWith(key)
-        );
-        if (prefix) {
-          const newAddress = receivedDataString.replace(prefix, "").trim();
-          const chainShortName = prefixToShortName[prefix];
-          console.log(`Received ${chainShortName} address: `, newAddress);
-          updateCryptoAddress(chainShortName, newAddress);
-
-          setReceivedAddresses((prev) => {
-            const updated = { ...prev, [chainShortName]: newAddress };
-            const expectedCount = Object.keys(prefixToShortName).length;
-            if (Object.keys(updated).length >= expectedCount) {
-              setTimeout(() => {
-                setVerificationStatus("walletReady");
-                console.log("All public keys received, wallet ready.");
-              }, 2000);
-            } else {
-              setVerificationStatus("waiting");
-              // 新增打印缺失的区块链地址
-              const missingChains = Object.values(prefixToShortName).filter(
-                (shortName) => !updated.hasOwnProperty(shortName)
-              );
-              if (missingChains.length > 0) {
-                console.log(
-                  "Missing addresses for chains:",
-                  missingChains.join(", ")
-                );
-              }
-            }
-            return updated;
-          });
-        }
-
-        if (receivedDataString.startsWith("pubkeyData:")) {
-          const pubkeyData = receivedDataString
-            .replace("pubkeyData:", "")
-            .trim();
-          const [queryChainName, publicKey] = pubkeyData.split(",");
-          if (queryChainName && publicKey) {
-            //console.log(
-            //  `Received public key for ${queryChainName}: ${publicKey}`
-            //);
-            updateDevicePubHintKey(queryChainName, publicKey);
-          }
-        }
-
-        if (receivedDataString.includes("ID:")) {
-          const encryptedHex = receivedDataString.split("ID:")[1];
-          const encryptedData = hexStringToUint32Array(encryptedHex);
-          const key = new Uint32Array([0x1234, 0x1234, 0x1234, 0x1234]);
-          parseDeviceCode(encryptedData, key);
-          const parseDeviceCodeedHex = uint32ArrayToHexString(encryptedData);
-          console.log("parseDeviceCodeed string:", parseDeviceCodeedHex);
-          if (sendparseDeviceCodeedValue) {
-            sendparseDeviceCodeedValue(parseDeviceCodeedHex);
-          }
-        }
-
-        if (receivedDataString === "VALID") {
-          try {
-            setVerificationStatus("VALID");
-            console.log("Status set to: VALID");
-            const validationMessage = "validation";
-            const bufferValidationMessage = Buffer.from(
-              validationMessage,
-              "utf-8"
-            );
-            const base64ValidationMessage =
-              bufferValidationMessage.toString("base64");
-            await device.writeCharacteristicWithResponseForService(
-              serviceUUID,
-              writeCharacteristicUUID,
-              base64ValidationMessage
-            );
-            console.log(`Sent 'validation' to device`);
-          } catch (error) {
-            console.log("发送 'validation' 时出错:", error);
-          }
-        }
-
-        if (receivedDataString.startsWith("PIN:")) {
-          setReceivedVerificationCode(receivedDataString);
-          monitorSubscription.current?.remove();
-          monitorSubscription.current = null;
-        }
-      }
-    );
-  };
 
   const handleDisconnectPress = (device) => {
     setBleVisible(false);
@@ -985,7 +832,7 @@ function AppContent({
         visible={SecurityCodeModalVisible}
         pinCode={pinCode}
         setPinCode={setPinCode}
-        onSubmit={handlePinSubmit}
+        onSubmit={handlePinSubmitProxy}
         onCancel={() => {
           setSecurityCodeModalVisible(false);
           setVerificationStatus(null);
