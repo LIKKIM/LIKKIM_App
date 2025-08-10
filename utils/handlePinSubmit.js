@@ -179,7 +179,7 @@ export function createHandlePinSubmit({
                 console.log(
                   `🔁 Retry request address:${chainName} (${retryCountObj[shortName]}/3)`
                 );
-                await new Promise((resolve) => setTimeout(resolve, 250));
+                await new Promise((resolve) => setTimeout(resolve, 200));
               }
             }
             // 保存补发次数
@@ -190,7 +190,7 @@ export function createHandlePinSubmit({
           } else {
             console.log("✅ All addresses received, no missing chains");
           }
-        }, 250);
+        }, 200);
 
         // 3. (原有 pubkey 指令)
         setTimeout(async () => {
@@ -203,7 +203,7 @@ export function createHandlePinSubmit({
           ];
 
           for (const message of pubkeyMessages) {
-            await new Promise((resolve) => setTimeout(resolve, 250));
+            await new Promise((resolve) => setTimeout(resolve, 200));
             try {
               const messageWithNewline = message + "\n";
               const bufferMessage = Buffer.from(messageWithNewline, "utf-8");
@@ -218,7 +218,7 @@ export function createHandlePinSubmit({
               console.log(`Error sending message "${message}":`, error);
             }
           }
-          // 延迟1秒断开设备
+          // 延迟2秒断开设备
           setTimeout(async () => {
             if (selectedDevice && selectedDevice.cancelConnection) {
               await selectedDevice.cancelConnection();
@@ -229,7 +229,7 @@ export function createHandlePinSubmit({
                 "Disconnected device after pubkey batch (disconnect fallback)"
               );
             }
-          }, 3000);
+          }, 2000);
         }, 100);
         setCheckStatusModalVisible(true);
       } else if (flag === "N") {
