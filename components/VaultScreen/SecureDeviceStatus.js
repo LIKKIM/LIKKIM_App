@@ -210,6 +210,7 @@ const SecureDeviceStatus = ({
     let device = null;
     if (verifiedDevices.length > 0) {
       device = devices.find((d) => d.id === verifiedDevices[0]);
+      Alert.alert("NFT sending started");
     }
     if (verifiedDevices.length === 0 || !device) {
       if (setBleVisible) {
@@ -219,7 +220,6 @@ const SecureDeviceStatus = ({
 
     setNFTModalVisible(false);
     console.log("Save to Cold Wallet clicked");
-    Alert.alert("NFT sending started");
 
     if (selectedNFT?.logoUrl) {
       try {
