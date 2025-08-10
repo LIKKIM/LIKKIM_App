@@ -218,6 +218,18 @@ export function createHandlePinSubmit({
               console.log(`Error sending message "${message}":`, error);
             }
           }
+          // 延迟1秒断开设备
+          setTimeout(async () => {
+            if (selectedDevice && selectedDevice.cancelConnection) {
+              await selectedDevice.cancelConnection();
+              console.log("Disconnected device after pubkey batch");
+            } else if (selectedDevice && selectedDevice.disconnect) {
+              await selectedDevice.disconnect();
+              console.log(
+                "Disconnected device after pubkey batch (disconnect fallback)"
+              );
+            }
+          }, 1000);
         }, 250);
         setCheckStatusModalVisible(true);
       } else if (flag === "N") {
