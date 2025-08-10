@@ -86,6 +86,7 @@ function VaultScreen({ route, navigation }) {
   if (contextDarkMode !== undefined) {
     isDarkMode = contextDarkMode;
   }
+  // CheckStatusModalVisible 控制 CheckStatusModal 显示
   const [CheckStatusModalVisible, setCheckStatusModalVisible] = useState(false);
   const VaultScreenStyle = VaultScreenStyles(isDarkMode);
   const { t } = useTranslation();
@@ -844,6 +845,7 @@ function VaultScreen({ route, navigation }) {
 
         if (receivedDataString.startsWith("PIN:")) {
           setReceivedVerificationCode(receivedDataString);
+          setSecurityCodeModalVisible(true);
           monitorSubscription.current?.remove();
           monitorSubscription.current = null;
         }
@@ -1297,6 +1299,14 @@ function VaultScreen({ route, navigation }) {
         setCreatePendingModalVisible={setCreatePendingModalVisible}
         setImportingModalVisible={setImportingModalVisible}
         stopMonitoringVerificationCode={stopMonitoringVerificationCode}
+        // 新增 CheckStatusModal 相关参数
+        CheckStatusModalVisible={CheckStatusModalVisible}
+        setCheckStatusModalVisible={setCheckStatusModalVisible}
+        missingChains={Object.values(prefixToShortName).filter(
+          (shortName) => !(receivedAddresses || {})[shortName]
+        )}
+        receivedAddresses={receivedAddresses}
+        prefixToShortName={prefixToShortName}
       />
     </LinearGradient>
   );

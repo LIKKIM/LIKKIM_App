@@ -72,6 +72,12 @@ const ModalsContainer = ({
   setImportingModalVisible,
   stopMonitoringVerificationCode,
   blueToothStatus,
+  // 新增 CheckStatusModal 相关参数
+  CheckStatusModalVisible,
+  setCheckStatusModalVisible,
+  missingChains,
+  receivedAddresses,
+  prefixToShortName,
 }) => {
   return (
     <>
@@ -127,16 +133,24 @@ const ModalsContainer = ({
         styles={VaultScreenStyle}
         isDarkMode={isDarkMode}
         t={t}
-        status={blueToothStatus}
+        status={verificationStatus}
       />
       {/* 验证结果 Modal */}
       <CheckStatusModal
-        visible={verificationStatus !== null}
+        visible={CheckStatusModalVisible && verificationStatus !== null}
         status={verificationStatus}
-        onClose={() => setVerificationStatus(null)}
+        missingChains={missingChains}
+        onClose={() => setCheckStatusModalVisible(false)}
+        progress={
+          verificationStatus === "waiting" && prefixToShortName
+            ? Object.keys(receivedAddresses || {}).length /
+              Object.keys(prefixToShortName).length
+            : undefined
+        }
         styles={VaultScreenStyle}
         t={t}
       />
+
       {/* 通用 Pending Modal */}
       <PendingModal
         visible={createPendingModalVisible || importingModalVisible}
