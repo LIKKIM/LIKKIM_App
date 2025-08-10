@@ -16,6 +16,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   TextInput,
+  Alert,
 } from "react-native";
 import { BlurView } from "expo-blur";
 import { LinearGradient } from "expo-linear-gradient";
@@ -218,6 +219,7 @@ const SecureDeviceStatus = ({
 
     setNFTModalVisible(false);
     console.log("Save to Cold Wallet clicked");
+    Alert.alert("NFT sending started");
 
     if (selectedNFT?.logoUrl) {
       try {
