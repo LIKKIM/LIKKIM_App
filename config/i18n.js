@@ -21,6 +21,7 @@ i18n
     resources: {
       en: {
         translation: {
+          Synchronized: "Synchronized",
           "Verification successful!": "Verification successful!",
           "You can now safely use the device.":
             "You can now safely use the device.",
@@ -207,6 +208,7 @@ i18n
       },
       zh: {
         translation: {
+          Synchronized: "已同步",
           "Verification successful!": "验证成功！",
           "You can now safely use the device.": "您现在可以安全地使用该设备。",
           "Wallet ready!": "钱包已准备好！",
@@ -385,6 +387,7 @@ i18n
       },
       "zh-TW": {
         translation: {
+          Synchronized: "已同步",
           "Verification successful!": "驗證成功！",
           "You can now safely use the device.": "您現在可以安全地使用該設備。",
           "Wallet ready!": "錢包已準備好！",
@@ -562,6 +565,7 @@ i18n
       },
       fr: {
         translation: {
+          Synchronized: "Synchronisé",
           "Verification successful!": "Vérification réussie !",
           "You can now safely use the device.":
             "Vous pouvez maintenant utiliser l'appareil en toute sécurité.",
@@ -753,6 +757,7 @@ i18n
       },
       es: {
         translation: {
+          Synchronized: "Sincronizado",
           "Verification successful!": "¡Verificación exitosa!",
           "You can now safely use the device.":
             "Ahora puede usar el dispositivo de forma segura.",
@@ -943,6 +948,7 @@ i18n
       },
       ar: {
         translation: {
+          Synchronized: "متزامن",
           "Verification successful!": "تم التحقق بنجاح!",
           "You can now safely use the device.":
             "يمكنك الآن استخدام الجهاز بأمان.",
@@ -1126,6 +1132,7 @@ i18n
       },
       ja: {
         translation: {
+          Synchronized: "同期済み",
           "Verification successful!": "検証に成功しました！",
           "You can now safely use the device.":
             "これで安全にデバイスを使用できます。",
@@ -1310,6 +1317,7 @@ i18n
       },
       ru: {
         translation: {
+          Synchronized: "Синхронизировано",
           "Verification successful!": "Проверка прошла успешно!",
           "You can now safely use the device.":
             "Теперь вы можете безопасно использовать устройство.",
@@ -1496,6 +1504,7 @@ i18n
       },
       ko: {
         translation: {
+          Synchronized: "동기화됨",
           "Verification successful!": "검증에 성공했습니다!",
           "You can now safely use the device.":
             "이제 기기를 안전하게 사용할 수 있습니다.",
@@ -1678,6 +1687,7 @@ i18n
       },
       pt: {
         translation: {
+          Synchronized: "Sincronizado",
           "Verification successful!": "Verificação bem-sucedida!",
           "You can now safely use the device.":
             "Agora pode usar o dispositivo com segurança.",
@@ -1867,6 +1877,7 @@ i18n
       },
       "pt-BR": {
         translation: {
+          Synchronized: "Sincronizado",
           "Verification successful!": "Verificação bem-sucedida!",
           "You can now safely use the device.":
             "Agora você pode usar o dispositivo com segurança.",
@@ -2056,6 +2067,7 @@ i18n
       },
       it: {
         translation: {
+          Synchronized: "Sincronizzato",
           "Verification successful!": "Verifica riuscita!",
           "You can now safely use the device.":
             "Ora puoi utilizzare il dispositivo in sicurezza.",
@@ -2242,6 +2254,7 @@ i18n
       },
       de: {
         translation: {
+          Synchronized: "Synchronisiert",
           "Verification successful!": "Verifizierung erfolgreich!",
           "You can now safely use the device.":
             "Sie können das Gerät jetzt sicher verwenden.",
@@ -2432,6 +2445,7 @@ i18n
       },
       hi: {
         translation: {
+          Synchronized: "सिंक्रनाइज़ किया गया",
           "Verification successful!": "सत्यापन सफल हुआ!",
           "You can now safely use the device.":
             "अब आप सुरक्षित रूप से डिवाइस का उपयोग कर सकते हैं।",
@@ -2617,6 +2631,7 @@ i18n
       },
       mn: {
         translation: {
+          Synchronized: "Синхрончлогдсон",
           "Verification successful!": "Баталгаажуулалт амжилттай!",
           "You can now safely use the device.":
             "Та одоо төхөөрөмжийг аюулгүй ашиглаж болно.",
@@ -2804,6 +2819,7 @@ i18n
       },
       th: {
         translation: {
+          Synchronized: "ซิงโครไนซ์แล้ว",
           "Verification successful!": "ยืนยันตัวตนสำเร็จ!",
           "You can now safely use the device.":
             "ตอนนี้คุณสามารถใช้อุปกรณ์ได้อย่างปลอดภัยแล้ว",
@@ -2987,6 +3003,7 @@ i18n
       },
       uk: {
         translation: {
+          Synchronized: "Синхронізовано",
           "Verification successful!": "Перевірка пройшла успішно!",
           "You can now safely use the device.":
             "Тепер ви можете безпечно користуватися пристроєм.",
@@ -3173,6 +3190,7 @@ i18n
       },
       vi: {
         translation: {
+          Synchronized: "Đã đồng bộ",
           "Verification successful!": "Verifikasi berhasil!",
           "You can now safely use the device.":
             "Sekarang Anda dapat menggunakan perangkat dengan aman.",
@@ -3365,6 +3383,7 @@ i18n
       },
       id: {
         translation: {
+          Synchronized: "Tersinkronisasi",
           "Verification successful!": "Verifikasi berhasil!",
           "You can now safely use the device.":
             "Sekarang Anda dapat menggunakan perangkat dengan aman.",
@@ -3549,6 +3568,7 @@ i18n
       },
       tl: {
         translation: {
+          Synchronized: "Nakasabay",
           "Verification successful!": "Matagumpay ang beripikasyon!",
           "You can now safely use the device.":
             "Maaari mo nang ligtas na gamitin ang device.",
@@ -3736,6 +3756,7 @@ i18n
       },
       bn: {
         translation: {
+          Synchronized: "সিঙ্ক্রোনাইজড",
           "Verification successful!": "যাচাইকরণ সফল হয়েছে!",
           "You can now safely use the device.":
             "আপনি এখন নিরাপদে ডিভাইসটি ব্যবহার করতে পারেন।",
