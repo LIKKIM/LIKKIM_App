@@ -10,15 +10,10 @@ import {
   Text,
   TouchableOpacity,
   Animated,
-  Easing,
   Platform,
   Dimensions,
-  TouchableWithoutFeedback,
-  TouchableHighlight,
-  InteractionManager,
   useAnimatedValue,
 } from "react-native";
-import Clipboard from "@react-native-clipboard/clipboard";
 // 第三方库
 import { LinearGradient } from "expo-linear-gradient";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -65,7 +60,6 @@ function VaultScreen({ route, navigation }) {
     initialAdditionalCryptos,
     setInitialAdditionalCryptos,
     updateCryptoAddress,
-
     additionalCryptos,
     cryptoCount,
     setCryptoCount,
@@ -104,8 +98,6 @@ function VaultScreen({ route, navigation }) {
   const [selectedCardName, setSelectedCardName] = useState(null); // 已选中的卡片名称
   const [selectedCardChain, setSelectedCardChain] = useState(null); // 已选中的卡片链信息
   const [addIconModalVisible, setAddIconModalVisible] = useState(false);
-  const [recoveryPhraseModalVisible, setRecoveryPhraseModalVisible] =
-    useState(false);
   const [isVerifyingAddress, setIsVerifyingAddress] = useState(false);
   const [deleteConfirmVisible, setDeleteConfirmVisible] = useState(false);
   const [priceChanges, setPriceChanges] = useState({});
@@ -170,30 +162,6 @@ function VaultScreen({ route, navigation }) {
       crypto.shortName.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  /*   useEffect(() => {
-    console.log("initialAdditionalCryptosState:", initialAdditionalCryptos);
-  }, [initialAdditionalCryptos]); */
-
-  // 定义下拉刷新执行的函数
-
-  //计算 cardStartPositions导致卡片移动卡顿
-  //TODO 测量卡片位置需要时间，Splas要延迟关闭:不再使用该方案，会造成UI block
-  // useEffect(() => {
-  //   cardRefs.current.forEach((ref, idx) => {
-  //     if (ref && typeof ref.measure === "function") {
-
-  //       ref.measure((fx, fy, width, height, px, py) => {
-  //         setCardsOffset((prev) => ({
-  //           ...prev,
-  //           [idx]: py,
-  //         }));
-  //         cardStartPositions.current[idx] = py;
-  //       });
-  //     }
-  //   });
-
-  // }, [cryptoCards]);
-
   useEffect(() => {
     cryptoCards.forEach((_, idx) => {
       //每个卡片固定差距76+(20 margin)
@@ -225,11 +193,6 @@ function VaultScreen({ route, navigation }) {
       scanDevices({ isScanning, setIsScanning, bleManagerRef, setDevices });
     }
   }, [bleVisible]);
-
-  /*   useEffect(() => {
-    console.log("Updated cryptoCards:", cryptoCards);
-  }, [cryptoCards]);
- */
 
   useLayoutEffect(() => {
     if (cryptoCards.length === 0) {
@@ -378,8 +341,6 @@ function VaultScreen({ route, navigation }) {
     }
   }, [bleVisible, selectedDevice]);
 
-  // 已移除蓝牙 onStateChange 监听，统一由 App.js 管理
-
   useEffect(() => {
     // 当 cryptoCards 状态变化时，更新 route.params
     // console.warn('selectedCardName' + selectedCardName)
@@ -393,25 +354,6 @@ function VaultScreen({ route, navigation }) {
       useNativeDriver: true,
     }).start();
   }, [modalVisible]);
-
-  // useEffect(() => {
-  // 根据条件触发动画
-  // if (cryptoCards.length > 0 && !modalVisible) {
-  //   Animated.timing(opacityAnim, {
-  //     toValue: 1,
-  //     duration: 200,
-  //     easing: Easing.ease,
-  //     useNativeDriver: true,
-  //   }).start();
-  // } else {
-  //   Animated.timing(opacityAnim, {
-  //     toValue: 0,
-  //     duration: 200,
-  //     easing: Easing.ease,
-  //     useNativeDriver: true,
-  //   }).start();
-  // }
-  // }, [cryptoCards.length, modalVisible, balanceAnim]);
 
   useEffect(() => {
     const loadCryptoCards = async () => {
@@ -512,28 +454,6 @@ function VaultScreen({ route, navigation }) {
       showAddModal: addCryptoVisible,
     });
   }, [modalVisible, addCryptoVisible]);
-
-  // useEffect(() => {
-  //   Animated.timing(backgroundAnim, {
-  //     toValue: modalVisible ? 1 : 0,
-  //     duration: 300,
-  //     easing: Easing.ease,
-  //     useNativeDriver: true,
-  //   }).start();
-  // }, [modalVisible, backgroundAnim]);
-
-  // useEffect(() => {
-  //   console.log("选中的 chainShortName 已更新:", selectedCardChainShortName);
-  // }, [selectedCardChainShortName]);
-
-  // useEffect(() => {
-  // if (modalVisible) {
-  // scrollViewRef.current.scrollTo({ y: 0, animated: true });
-  // setTimeout(() => {
-  //   scrollYOffset.current = 0;
-  // }, 300); // 确保在滚动完成后再设置偏移量
-  // }
-  // }, [modalVisible]);
 
   // 使用最新的价格来计算最终余额
   const getConvertedBalance = (cardBalance, cardShortName) => {
@@ -646,34 +566,6 @@ function VaultScreen({ route, navigation }) {
     setIsVerifyingAddress(false);
     setAddressModalVisible(true);
   };
-
-  const reconnectDevice = async (device) => {
-    try {
-      console.log(`正在尝试重新连接设备: ${device.id}`);
-      await device.cancelConnection(); // 首先断开连接
-      await device.connect(); // 尝试重新连接
-      await device.discoverAllServicesAndCharacteristics(); // 重新发现服务和特性
-      console.log("设备重新连接成功");
-    } catch (error) {
-      console.log("设备重新连接失败:", error);
-    }
-  };
-
-  function hexStringToUint32Array(hexString) {
-    // 将16进制字符串拆分为两个32位无符号整数
-    return new Uint32Array([
-      parseInt(hexString.slice(0, 8), 16),
-      parseInt(hexString.slice(8, 16), 16),
-    ]);
-  }
-
-  function uint32ArrayToHexString(uint32Array) {
-    // 将两个32位无符号整数转换回16进制字符串
-    return (
-      uint32Array[0].toString(16).toUpperCase().padStart(8, "0") +
-      uint32Array[1].toString(16).toUpperCase().padStart(8, "0")
-    );
-  }
 
   // 假设在组件中定义了状态：
   const [receivedAddresses, setReceivedAddresses] = useState({});
@@ -991,11 +883,6 @@ function VaultScreen({ route, navigation }) {
   const animatedCardStyle = (index) => {
     const cardStartPosition = cardStartPositions.current[index] || 0;
 
-    // const endPosition =
-    //   Platform.OS === "android" || isIphoneSE
-    //     ? 0
-    //     : 0 - (scrollYOffset.current || 0);
-    //     console.log('endPosition', endPosition)
     //TODO TEST
     const translateY = modalAnim.interpolate({
       inputRange: [0, 1],
@@ -1006,14 +893,6 @@ function VaultScreen({ route, navigation }) {
       transform: [{ translateY }],
     };
   };
-
-  // const calcCar dOffsetY = (index, event) => {
-  //   const { y } = event.nativeEvent.layout;
-  //   setCardsOffset((prev) => {
-  //     prev[index] = y;
-  //     return [...prev];
-  //   });
-  // };
 
   //fix card 初始化紀錄位置
   const initCardPosition = (_ref, _index) =>
