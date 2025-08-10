@@ -1226,6 +1226,7 @@ function VaultScreen({ route, navigation }) {
         handleContinue={handleContinue}
         handleWalletTest={handleWalletTest}
         device={devices.find((d) => d.id === verifiedDevices[0])}
+        onOpenBluetoothModal={() => setBleVisible(true)}
       />
       <ModalsContainer
         selectedCardChainShortName={selectedCardChainShortName}
