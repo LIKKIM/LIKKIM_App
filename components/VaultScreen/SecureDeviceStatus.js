@@ -200,6 +200,7 @@ const SecureDeviceStatus = (props) => {
   const [dataUrl, setDataUrl] = useState(null);
 
   const handleSaveToDevice = async () => {
+    setNFTModalVisible(false);
     console.log("Save to Cold Wallet clicked");
 
     if (selectedNFT?.logoUrl) {
