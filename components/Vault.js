@@ -255,6 +255,13 @@ function VaultScreen({ route, navigation }) {
 
   const [bleVisible, setBleVisible] = useState(false);
 
+  // 自动蓝牙扫描：bleVisible 变为 true 时自动扫描设备
+  useEffect(() => {
+    if (bleVisible) {
+      scanDevices();
+    }
+  }, [bleVisible]);
+
   /*   useEffect(() => {
     console.log("Updated cryptoCards:", cryptoCards);
   }, [cryptoCards]);
