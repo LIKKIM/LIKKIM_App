@@ -367,29 +367,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
 
   const { bleManagerRef } = useContext(DeviceContext);
 
-  useEffect(() => {
-    if (Platform.OS !== "web") {
-      const subscription = bleManagerRef.current.onStateChange((state) => {
-        if (state === "PoweredOn") {
-          setTimeout(() => {
-            scanDevices();
-          }, 2000);
-        }
-      }, true);
-
-      return () => {
-        subscription.remove(); // 清理订阅
-        // 新增取消蓝牙监听订阅，防止订阅泄漏
-        if (monitorSubscription.current) {
-          monitorSubscription.current.remove();
-          monitorSubscription.current = null;
-          console.log(
-            "SecureDevice.js: Cancelled Bluetooth monitor subscription on unmount"
-          );
-        }
-      };
-    }
-  }, []);
+  // 已移除蓝牙 onStateChange 监听，统一由 App.js 管理
 
   const handleBluetoothPairing = async () => {
     if (Platform.OS === "android") {

@@ -683,38 +683,7 @@ function ActivityScreen() {
   }, [bleVisible, selectedDevice]);
 
   // Update Bluetooth modal visibility management
-  useEffect(() => {
-    if (Platform.OS !== "web") {
-      const subscription = bleManagerRef.current.onStateChange((state) => {
-        if (state === "PoweredOn") {
-          // 添加短暂延迟以确保蓝牙模块完全准备好
-
-          setTimeout(() => {
-            scanDevices();
-          }, 2000); // 1秒延迟
-        }
-      }, true);
-
-      return () => {
-        subscription.remove();
-        // 新增取消蓝牙监听订阅，防止订阅泄漏
-        if (monitorSubscription.current) {
-          try {
-            monitorSubscription.current.remove();
-            monitorSubscription.current = null;
-            console.log(
-              "Activity.js: Cancelled Bluetooth monitor subscription on unmount"
-            );
-          } catch (error) {
-            console.log(
-              "Activity.js: Error cancelling Bluetooth monitor subscription on unmount",
-              error
-            );
-          }
-        }
-      };
-    }
-  }, []);
+  // 已移除蓝牙 onStateChange 监听，统一由 App.js 管理
   useEffect(() => {
     // 从 AsyncStorage 加载 addedCryptos 数据
     const loadAddedCryptos = async () => {

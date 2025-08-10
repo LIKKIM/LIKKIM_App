@@ -407,30 +407,7 @@ function VaultScreen({ route, navigation }) {
     }
   }, [bleVisible, selectedDevice]);
 
-  useEffect(() => {
-    if (Platform.OS !== "web") {
-      const subscription = bleManagerRef.current.onStateChange((state) => {
-        if (state === "PoweredOn") {
-          // 添加短暂延迟以确保蓝牙模块完全准备好
-          setTimeout(() => {
-            scanDevices();
-          }, 2000); // 1秒延迟
-        }
-      }, true);
-
-      return () => {
-        subscription.remove();
-        // 新增取消蓝牙监听订阅，防止订阅泄漏
-        if (monitorSubscription.current) {
-          monitorSubscription.current.remove();
-          monitorSubscription.current = null;
-          console.log(
-            "Vault.js: Cancelled Bluetooth monitor subscription on unmount"
-          );
-        }
-      };
-    }
-  }, []);
+  // 已移除蓝牙 onStateChange 监听，统一由 App.js 管理
 
   useEffect(() => {
     // 当 cryptoCards 状态变化时，更新 route.params
