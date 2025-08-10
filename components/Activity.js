@@ -197,50 +197,40 @@ function ActivityScreen() {
 
   const scanDevices = () => {
     if (Platform.OS !== "web" && !isScanning) {
-      if (Platform.OS === "android") {
-        // 在安卓平台上检查和请求权限
-        checkAndReqPermission(startScanning);
-      } else {
-        // 对于非安卓平台，直接开始扫描
-        startScanning();
-      }
+      checkAndReqPermission(() => {
+        console.log("Scanning started");
+        setIsScanning(true);
+        const scanOptions = { allowDuplicates: true };
+        const scanFilter = null;
+        bleManagerRef.current.startDeviceScan(
+          scanFilter,
+          scanOptions,
+          (error, device) => {
+            if (error) {
+              console.log("BleManager scanning error:", error);
+              if (error.errorCode === BleErrorCode.BluetoothUnsupported) {
+                // Bluetooth LE unsupported on device
+              }
+            } else if (device.name && device.name.includes("LUKKEY")) {
+              setDevices((prevDevices) => {
+                if (!prevDevices.find((d) => d.id === device.id)) {
+                  return [...prevDevices, device];
+                }
+                return prevDevices;
+              });
+            }
+          }
+        );
+        setTimeout(() => {
+          console.log("Scanning stopped");
+          bleManagerRef.current.stopDeviceScan();
+          setIsScanning(false);
+        }, 2000);
+      });
     } else {
       console.log("Attempt to scan while already scanning");
     }
   };
-
-  const startScanning = () => {
-    console.log("扫描设备 Scanning started");
-    setIsScanning(true);
-
-    bleManagerRef.current.startDeviceScan(
-      null,
-      { allowDuplicates: true },
-      async (error, device) => {
-        if (error) {
-          console.log("BleManager scanning error:", error);
-          return;
-        }
-
-        if (device.name && device.name.includes("LUKKEY")) {
-          // 存储新设备到设备列表
-          setDevices((prevDevices) => {
-            if (!prevDevices.find((d) => d.id === device.id)) {
-              return [...prevDevices, device];
-            }
-            return prevDevices;
-          });
-        }
-      }
-    );
-
-    setTimeout(() => {
-      console.log("Scanning stopped");
-      bleManagerRef.current.stopDeviceScan();
-      setIsScanning(false);
-    }, 2000);
-  };
-
   // Clear values when opening the modal
   useEffect(() => {
     if (swapModalVisible) {

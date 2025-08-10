@@ -221,27 +221,27 @@ function VaultScreen({ route, navigation }) {
       checkAndReqPermission(() => {
         console.log("Scanning started");
         setIsScanning(true);
+        const scanOptions = { allowDuplicates: true };
+        const scanFilter = null;
         bleManagerRef.current.startDeviceScan(
-          null,
-          { allowDuplicates: true },
+          scanFilter,
+          scanOptions,
           (error, device) => {
             if (error) {
               console.log("BleManager scanning error:", error);
-              return;
-            }
-
-            if (device.name && device.name.includes("LUKKEY")) {
+              if (error.errorCode === BleErrorCode.BluetoothUnsupported) {
+                // Bluetooth LE unsupported on device
+              }
+            } else if (device.name && device.name.includes("LUKKEY")) {
               setDevices((prevDevices) => {
                 if (!prevDevices.find((d) => d.id === device.id)) {
-                  return [...prevDevices, device]; // 这里 device 是完整的设备对象
+                  return [...prevDevices, device];
                 }
                 return prevDevices;
               });
-              //  console.log("Scanned device:", device);
             }
           }
         );
-
         setTimeout(() => {
           console.log("Scanning stopped");
           bleManagerRef.current.stopDeviceScan();
