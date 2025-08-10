@@ -218,7 +218,7 @@ export function createHandlePinSubmit({
               console.log(`Error sending message "${message}":`, error);
             }
           }
-        }, 750);
+        }, 250);
         setCheckStatusModalVisible(true);
       } else if (flag === "N") {
         console.log("Flag N received; no 'address' sent");
