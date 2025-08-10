@@ -187,7 +187,12 @@ const styles = StyleSheet.create({
   },
 });
 
-const SecureDeviceStatus = (props) => {
+const SecureDeviceStatus = ({
+  setBleVisible,
+  devices = [],
+  verifiedDevices = [],
+  ...props
+}) => {
   const [isAddressBookVisible, setAddressBookVisible] = useState(false);
   const [nftData, setNftData] = useState(null);
   const [NFTmodalVisible, setNFTModalVisible] = useState(false); // 正确的命名
@@ -200,6 +205,17 @@ const SecureDeviceStatus = (props) => {
   const [dataUrl, setDataUrl] = useState(null);
 
   const handleSaveToDevice = async () => {
+    // 检查设备验证状态，必要时弹出蓝牙弹窗
+    let device = null;
+    if (verifiedDevices.length > 0) {
+      device = devices.find((d) => d.id === verifiedDevices[0]);
+    }
+    if (verifiedDevices.length === 0 || !device) {
+      if (setBleVisible) {
+        setBleVisible(true);
+      }
+    }
+
     setNFTModalVisible(false);
     console.log("Save to Cold Wallet clicked");
 
