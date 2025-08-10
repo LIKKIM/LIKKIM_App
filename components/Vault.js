@@ -853,7 +853,7 @@ function VaultScreen({ route, navigation }) {
       }
     }
   };
-  // VaultScreen.js handlePinSubmit
+  // Vault.js handlePinSubmit
   const handlePinSubmit = async () => {
     setSecurityCodeModalVisible(false);
     setCheckStatusModalVisible(false);
