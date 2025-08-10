@@ -21,6 +21,7 @@ export function createHandleDevicePress({
     // 连接和服务发现单独捕获异常
     try {
       try {
+        console.log("handleDevicePress: device name =", device.name);
         await device.connect();
         await device.discoverAllServicesAndCharacteristics();
         console.log("Device connected and services discovered");
