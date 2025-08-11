@@ -114,7 +114,7 @@ const VaultScreenStyles = (isDarkMode) => {
       color: colors.textColor,
     },
     selectedChainTagText: {
-      color: textColor,
+      color: colors.textColor,
     },
 
     cardName: {
