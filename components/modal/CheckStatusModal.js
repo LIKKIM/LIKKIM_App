@@ -71,6 +71,12 @@ const CheckStatusModal = ({
     subtitle = t(
       "Receiving all addresses from the device. Wallet is being created, please wait..."
     );
+  } else if (status === "noWalletInHardware") {
+    imageSource = FailGif;
+    title = t("No wallet found in LUKKEY hardware");
+    subtitle = t(
+      "Please create or import a wallet in your LUKKEY hardware device."
+    );
   }
 
   return (
