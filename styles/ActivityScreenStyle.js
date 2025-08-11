@@ -10,7 +10,6 @@ import {
   RADIUS_10,
   RADIUS_20,
   RADIUS_30,
-  RADIUS_50,
 } from "./constants";
 const ActivityScreenStyles = (isDarkMode) => {
   const backgroundColor = isDarkMode ? "#121212" : "#f5f5f5";

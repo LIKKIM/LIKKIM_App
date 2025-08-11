@@ -11,11 +11,9 @@ import {
   RADIUS_10,
   RADIUS_12,
   RADIUS_16,
-  RADIUS_18,
   RADIUS_20,
-  RADIUS_21,
+  RADIUS_20,
   RADIUS_30,
-  RADIUS_50,
 } from "./constants";
 
 // ---- tokens & helpers -------------------------------------------------------
@@ -104,7 +102,7 @@ const VaultScreenStyles = (isDarkMode) => {
     card: {
       width: 326,
       height: 206,
-      borderRadius: RADIUS_18,
+      borderRadius: RADIUS_20,
       overflow: "hidden",
       justifyContent: "center",
       alignItems: "center",
@@ -163,7 +161,7 @@ const VaultScreenStyles = (isDarkMode) => {
       height: 42,
       alignItems: "center",
       justifyContent: "center",
-      borderRadius: RADIUS_21,
+      borderRadius: RADIUS_20,
       backgroundColor: "#ffffff50",
       overflow: "hidden",
     },

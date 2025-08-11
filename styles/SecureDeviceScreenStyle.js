@@ -10,7 +10,6 @@ import {
   RADIUS_10,
   RADIUS_20,
   RADIUS_30,
-  RADIUS_50,
 } from "./constants";
 const SecureDeviceScreenStyles = (isDarkMode) => {
   const textColor = isDarkMode ? "#fff" : "#000";
