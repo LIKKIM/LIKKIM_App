@@ -25,7 +25,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { BlurView } from "expo-blur";
 import { useTranslation } from "react-i18next";
-import styles, { darkTheme, lightTheme } from "./styles";
+import styles, { darkTheme, lightTheme } from "./styles/styles";
 import VaultScreen from "./components/Vault";
 import ActivityScreen from "./components/Activity";
 import SecureDeviceScreen from "./components/SecureDevice";
