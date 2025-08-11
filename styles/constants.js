@@ -10,8 +10,8 @@ export const FONT_SIZE_20 = 20;
 export const FONT_SIZE_22 = 22;
 export const FONT_SIZE_24 = 24;
 export const FONT_SIZE_25 = 25;
+
 export const FONT_SIZE_36 = 36;
-export const FONT_SIZE_40 = 40;
 
 // 圆角
 export const RADIUS_5 = 5;

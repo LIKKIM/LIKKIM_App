@@ -8,7 +8,6 @@ import {
   FONT_SIZE_24,
   FONT_SIZE_25,
   FONT_SIZE_36,
-  FONT_SIZE_40,
   RADIUS_5,
   RADIUS_6,
   RADIUS_10,
