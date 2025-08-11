@@ -2,11 +2,11 @@
 import { StyleSheet } from "react-native";
 import {
   FONT_SIZE_12,
-  FONT_SIZE_14,
+  FONT_SIZE_15,
   FONT_SIZE_16,
   FONT_SIZE_20,
-  FONT_SIZE_24,
-  FONT_SIZE_36,
+  FONT_SIZE_22,
+  FONT_SIZE_34,
   RADIUS_5,
   RADIUS_10,
   RADIUS_20,
@@ -150,7 +150,7 @@ const ActivityScreenStyles = (isDarkMode) => {
     },
     amountSubtitle: {
       color: secondTextColor,
-      fontSize: FONT_SIZE_14,
+      fontSize: FONT_SIZE_15,
       marginBottom: 20,
     },
     addressText: {

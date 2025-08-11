@@ -2,10 +2,10 @@
 import { StyleSheet } from "react-native";
 import {
   FONT_SIZE_12,
-  FONT_SIZE_14,
+  FONT_SIZE_15,
   FONT_SIZE_16,
   FONT_SIZE_20,
-  FONT_SIZE_24,
+  FONT_SIZE_22,
   RADIUS_5,
   RADIUS_10,
   RADIUS_14,
@@ -23,7 +23,7 @@ export const lightTheme = StyleSheet.create({
   },
   titleText: {
     color: lightColors.textColor,
-    fontSize: FONT_SIZE_24,
+    fontSize: FONT_SIZE_22,
     fontWeight: "bold",
     marginBottom: 20,
   },
@@ -62,7 +62,7 @@ export const darkTheme = StyleSheet.create({
   },
   titleText: {
     color: darkColors.textColor,
-    fontSize: FONT_SIZE_24,
+    fontSize: FONT_SIZE_22,
     fontWeight: "bold",
     marginBottom: 20,
   },
@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
   },
   titleText: {
     color: darkColors.textColor,
-    fontSize: FONT_SIZE_24,
+    fontSize: FONT_SIZE_22,
     fontWeight: "bold",
     marginBottom: 20,
   },
@@ -213,7 +213,7 @@ const styles = StyleSheet.create({
   },
   modalSubtitle: {
     color: darkColors.secondBtnTextColor,
-    fontSize: FONT_SIZE_14,
+    fontSize: FONT_SIZE_15,
     marginBottom: 320,
     textAlign: "center",
   },
