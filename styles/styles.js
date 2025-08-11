@@ -1,6 +1,21 @@
 import { StyleSheet } from "react-native";
+import {
+  FONT_SIZE_12,
+  FONT_SIZE_15,
+  FONT_SIZE_16,
+  FONT_SIZE_20,
+  FONT_SIZE_22,
+  FONT_SIZE_28,
+  FONT_SIZE_34,
+  RADIUS_8,
+  RADIUS_10,
+  RADIUS_12,
+  RADIUS_16,
+  RADIUS_20,
+  RADIUS_30,
+} from "./constants";
 export const lightTheme = StyleSheet.create({
-  settingsText: { marginLeft: 10, fontSize: 16, color: "#21201E" },
+  settingsText: { marginLeft: 10, fontSize: FONT_SIZE_16, color: "#21201E" },
   titleText: {
     color: "#21201E",
     fontSize: 24,
@@ -20,10 +35,10 @@ export const lightTheme = StyleSheet.create({
     padding: 10,
     zIndex: 1,
   },
-  dropdownButtonText: { color: "#000", fontSize: 16 },
+  dropdownButtonText: { color: "#000", fontSize: FONT_SIZE_16 },
 });
 export const darkTheme = StyleSheet.create({
-  settingsText: { marginLeft: 10, fontSize: 16, color: "#fff" },
+  settingsText: { marginLeft: 10, fontSize: FONT_SIZE_16, color: "#fff" },
   titleText: {
     color: "#fff",
     fontSize: 24,
@@ -43,7 +58,7 @@ export const darkTheme = StyleSheet.create({
     padding: 10,
     zIndex: 1,
   },
-  dropdownButtonText: { color: "#fff", fontSize: 16 },
+  dropdownButtonText: { color: "#fff", fontSize: FONT_SIZE_16 },
 });
 const styles = StyleSheet.create({
   dropdownButton: { padding: 10 },
@@ -65,7 +80,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: "#404040",
   },
-  settingsText: { marginLeft: 10, fontSize: 16, color: "#fff" },
+  settingsText: { marginLeft: 10, fontSize: FONT_SIZE_16, color: "#fff" },
   container: {
     flex: 1,
     backgroundColor: "#121212",
@@ -93,7 +108,7 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     backgroundColor: "rgba(108, 108, 244, 0.1)",
   },
-  cardText: { color: "white", fontSize: 16, fontWeight: "bold" },
+  cardText: { color: "white", fontSize: FONT_SIZE_16, fontWeight: "bold" },
   roundButton: {
     backgroundColor: "#3F3D3C",
     borderRadius: 30,
@@ -105,7 +120,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginBottom: 20,
   },
-  buttonText: { color: "#e0e0e0", fontSize: 16, fontWeight: "bold" },
+  buttonText: { color: "#e0e0e0", fontSize: FONT_SIZE_16, fontWeight: "bold" },
   titleText: {
     color: "white",
     fontSize: 24,
@@ -135,7 +150,7 @@ const styles = StyleSheet.create({
   },
   modalTitle: {
     color: "#ffffff",
-    fontSize: 16,
+    fontSize: FONT_SIZE_16,
     fontWeight: "bold",
     marginBottom: 15,
   },
@@ -153,13 +168,13 @@ const styles = StyleSheet.create({
   },
   languageModalText: {
     color: "#ffffff",
-    fontSize: 16,
+    fontSize: FONT_SIZE_16,
     marginBottom: 10,
     textAlign: "center",
   },
   LockCodeModalText: {
     color: "#ffffff",
-    fontSize: 16,
+    fontSize: FONT_SIZE_16,
     marginBottom: 10,
     textAlign: "left",
   },
@@ -188,12 +203,16 @@ const styles = StyleSheet.create({
     position: "absolute",
     left: 20,
     top: 20,
-    fontSize: 16,
+    fontSize: FONT_SIZE_16,
     color: "#ffffff",
   },
-  noHistoryText: { fontSize: 16, color: "#ffffff", textAlign: "center" },
+  noHistoryText: {
+    fontSize: FONT_SIZE_16,
+    color: "#ffffff",
+    textAlign: "center",
+  },
   historyItem: { padding: 10, borderBottomWidth: 1, borderBottomColor: "#ccc" },
-  historyItemText: { fontSize: 16, color: "#000" },
+  historyItemText: { fontSize: FONT_SIZE_16, color: "#000" },
   modalText: { color: "#ffffff", textAlign: "center", marginBottom: 120 },
   optionButtonText: { color: "#ffffff" },
   optionButton: {
