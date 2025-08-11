@@ -101,7 +101,7 @@ const VaultScreenStyles = (isDarkMode) => {
     card: {
       width: 326,
       height: 206,
-      borderRadius: RADIUS_20,
+      borderRadius: 18,
       overflow: "hidden",
       justifyContent: "center",
       alignItems: "center",
