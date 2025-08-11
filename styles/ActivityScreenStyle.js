@@ -68,7 +68,9 @@ const ActivityScreenStyles = (isDarkMode) => {
       paddingHorizontal: 15,
     },
     selectedChainTag: {
-      backgroundColor: isDarkMode ? "#CCB68C" : "#ccc",
+      backgroundColor: isDarkMode
+        ? darkColors.buttonBackgroundColor
+        : lightColors.borderColor,
     },
     chainTagText: {
       color: textColor,
@@ -84,12 +86,12 @@ const ActivityScreenStyles = (isDarkMode) => {
       flex: 1,
       justifyContent: "center",
       alignItems: "center",
-      backgroundColor: "rgba(0, 0, 0, 0.8)",
+      backgroundColor: TRANSPARENT_BLACK_80,
     },
     swapSection: {
       width: 300,
       padding: 20,
-      backgroundColor: "#1c1c1e",
+      backgroundColor: SWAP_SECTION_BG_DARK,
       borderRadius: 10,
       marginVertical: 10,
     },
@@ -119,7 +121,7 @@ const ActivityScreenStyles = (isDarkMode) => {
       justifyContent: "space-between",
     },
     tokenSelectText: {
-      color: "#fff",
+      color: PURE_WHITE,
       marginRight: 5,
     },
     swapButton: {
@@ -317,11 +319,11 @@ const ActivityScreenStyles = (isDarkMode) => {
       marginLeft: 10,
       paddingVertical: 5,
       paddingHorizontal: 10,
-      backgroundColor: "#CCB68C",
+      backgroundColor: darkColors.buttonBackgroundColor,
       borderRadius: 5,
     },
     disconnectButtonText: {
-      color: "#FFFFFF",
+      color: PURE_WHITE,
       fontWeight: "bold",
     },
     historyContainer: {

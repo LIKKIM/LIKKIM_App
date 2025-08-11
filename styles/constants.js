@@ -35,8 +35,11 @@ export const RADIUS_50 = 50;
 export const WHITE_50 = "#ffffff50";
 export const WHITE_80 = "#ffffff80";
 export const PURE_WHITE = "#FFF";
+
 export const HIGHLIGHT_COLOR = "#FF6347";
 export const TRANSPARENT_BLACK_20 = "rgba(0, 0, 0, 0.2)";
+export const TRANSPARENT_BLACK_80 = "rgba(0, 0, 0, 0.8)";
+export const SWAP_SECTION_BG_DARK = "#1c1c1e";
 export const TRANSPARENT_BLUE_10 = "rgba(108, 108, 244, 0.1)";
 
 // 颜色（明暗主题）
