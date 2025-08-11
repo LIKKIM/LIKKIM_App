@@ -1,5 +1,19 @@
 // styles/SecureDeviceScreenStyle.js
 import { StyleSheet } from "react-native";
+import {
+  FONT_SIZE_12,
+  FONT_SIZE_14,
+  FONT_SIZE_16,
+  FONT_SIZE_20,
+  FONT_SIZE_24,
+  FONT_SIZE_36,
+  FONT_SIZE_40,
+  RADIUS_5,
+  RADIUS_10,
+  RADIUS_20,
+  RADIUS_30,
+  RADIUS_50,
+} from "./constants";
 
 const SecureDeviceScreenStyles = (isDarkMode) => {
   const textColor = isDarkMode ? "#fff" : "#000";
@@ -18,7 +32,7 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
       backgroundColor: inputBackgroundColor,
       padding: 15,
       paddingTop: 15,
-      borderRadius: 10,
+      borderRadius: RADIUS_10,
       height: 120,
       width: "100%",
       color: textColor,
@@ -55,7 +69,7 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
     },
     BluetoothBtnText: {
       color: "#fff",
-      fontSize: 16,
+      fontSize: FONT_SIZE_16,
     },
     buttonContainer: {
       flexDirection: "column",

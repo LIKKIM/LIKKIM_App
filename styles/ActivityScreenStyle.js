@@ -1,5 +1,19 @@
 // styles/ActivityScreenStyle.js
 import { StyleSheet } from "react-native";
+import {
+  FONT_SIZE_12,
+  FONT_SIZE_14,
+  FONT_SIZE_16,
+  FONT_SIZE_20,
+  FONT_SIZE_24,
+  FONT_SIZE_36,
+  FONT_SIZE_40,
+  RADIUS_5,
+  RADIUS_10,
+  RADIUS_20,
+  RADIUS_30,
+  RADIUS_50,
+} from "./constants";
 
 const ActivityScreenStyles = (isDarkMode) => {
   const backgroundColor = isDarkMode ? "#121212" : "#f5f5f5";
@@ -27,7 +41,7 @@ const ActivityScreenStyles = (isDarkMode) => {
     searchInput: {
       flex: 1,
       padding: 10,
-      borderRadius: 10,
+      borderRadius: RADIUS_10,
       color: textColor,
     },
     searchContainer: {
@@ -139,7 +153,7 @@ const ActivityScreenStyles = (isDarkMode) => {
       margin: 20,
       width: "90%",
       backgroundColor: modalBackgroundColor,
-      borderRadius: 20,
+      borderRadius: RADIUS_20,
       padding: 30,
       alignItems: "center",
       justifyContent: "center",
@@ -147,7 +161,7 @@ const ActivityScreenStyles = (isDarkMode) => {
     },
     amountSubtitle: {
       color: secondTextColor,
-      fontSize: 14,
+      fontSize: FONT_SIZE_14,
       marginBottom: 20,
     },
     addressText: {
@@ -165,7 +179,7 @@ const ActivityScreenStyles = (isDarkMode) => {
     AssetsModalSubtitle: {
       marginTop: 6,
       color: textColor,
-      fontSize: 16,
+      fontSize: FONT_SIZE_16,
       fontSize: 16,
     },
     balanceLabel: {
