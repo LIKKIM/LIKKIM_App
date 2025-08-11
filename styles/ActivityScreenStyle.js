@@ -18,7 +18,7 @@ import {
 } from "./constants";
 
 const ActivityScreenStyles = (isDarkMode) => {
-  const textColor = isDarkMode ? "#fff" : "#000";
+  const textColor = isDarkMode ? darkColors.textColor : lightColors.textColor;
   const colors = isDarkMode ? darkColors : lightColors;
 
   return StyleSheet.create({
@@ -37,7 +37,9 @@ const ActivityScreenStyles = (isDarkMode) => {
       alignItems: "center",
       borderRadius: 10,
       width: "100%",
-      backgroundColor: isDarkMode ? "#21201E" : "#E5E1E9",
+      backgroundColor: isDarkMode
+        ? darkColors.dropdownBackgroundColor
+        : lightColors.buttonBackgroundColor,
       marginBottom: 20,
     },
     fromDropdown: {
@@ -70,10 +72,10 @@ const ActivityScreenStyles = (isDarkMode) => {
       backgroundColor: isDarkMode ? "#CCB68C" : "#ccc",
     },
     chainTagText: {
-      color: isDarkMode ? "#fff" : "#000",
+      color: textColor,
     },
     selectedChainTagText: {
-      color: isDarkMode ? "#000" : "#fff",
+      color: isDarkMode ? lightColors.textColor : darkColors.textColor,
     },
     container: {
       flex: 1,
