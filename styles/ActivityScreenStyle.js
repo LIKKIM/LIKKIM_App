@@ -2,28 +2,41 @@
 import { StyleSheet } from "react-native";
 import {
   FONT_SIZE_12,
-  FONT_SIZE_15,
+  FONT_SIZE_14,
   FONT_SIZE_16,
   FONT_SIZE_20,
-  FONT_SIZE_22,
-  FONT_SIZE_34,
+  FONT_SIZE_24,
+  FONT_SIZE_36,
+  FONT_SIZE_40,
   RADIUS_5,
   RADIUS_10,
   RADIUS_20,
   RADIUS_30,
   RADIUS_50,
-  lightColors,
-  darkColors,
 } from "./constants";
 
 const ActivityScreenStyles = (isDarkMode) => {
-  const textColor = isDarkMode ? darkColors.textColor : lightColors.textColor;
-  const colors = isDarkMode ? darkColors : lightColors;
+  const backgroundColor = isDarkMode ? "#121212" : "#f5f5f5";
+  const btnBorderColor = isDarkMode ? "#CCB68C" : "#CFAB95";
+  const btnColor = isDarkMode ? "#CCB68C" : "#CFAB95";
+  const buttonBackgroundColor = isDarkMode ? "#CCB68C" : "#E5E1E9";
+  const historyContainerBackgroundColor = isDarkMode
+    ? "#22201F90"
+    : "#FFFFFF80";
+  const historyItemBorderColor = isDarkMode ? "#ccc" : "#999";
+  const inputBackgroundColor = isDarkMode ? "#21201E" : "#e0e0e0";
+  const modalBackgroundColor = isDarkMode ? "#3F3D3C" : "#fff";
+  const secondBtnTextColor = isDarkMode ? "#ddd" : "#e0e0e0";
+  const secondTextColor = isDarkMode ? "#ddd" : "#676776";
+  const textBtnColor = isDarkMode ? "#fff" : "#fff";
+  const textColor = isDarkMode ? "#fff" : "#000";
+  const titleColor = isDarkMode ? "#fff" : "#000";
+  const dropdownBackgroundColor = isDarkMode ? "#21201E" : "#eee";
 
   return StyleSheet.create({
     searchIcon: {
       paddingLeft: 10,
-      color: colors.textColor,
+      color: textColor,
     },
     searchInput: {
       flex: 1,
@@ -36,9 +49,7 @@ const ActivityScreenStyles = (isDarkMode) => {
       alignItems: "center",
       borderRadius: 10,
       width: "100%",
-      backgroundColor: isDarkMode
-        ? darkColors.dropdownBackgroundColor
-        : lightColors.buttonBackgroundColor,
+      backgroundColor: isDarkMode ? "#21201E" : "#E5E1E9",
       marginBottom: 20,
     },
     fromDropdown: {
@@ -68,15 +79,13 @@ const ActivityScreenStyles = (isDarkMode) => {
       paddingHorizontal: 15,
     },
     selectedChainTag: {
-      backgroundColor: isDarkMode
-        ? darkColors.buttonBackgroundColor
-        : lightColors.borderColor,
+      backgroundColor: isDarkMode ? "#CCB68C" : "#ccc",
     },
     chainTagText: {
-      color: textColor,
+      color: isDarkMode ? "#fff" : "#000",
     },
     selectedChainTagText: {
-      color: isDarkMode ? lightColors.textColor : darkColors.textColor,
+      color: isDarkMode ? "#000" : "#fff",
     },
     container: {
       flex: 1,
@@ -86,12 +95,12 @@ const ActivityScreenStyles = (isDarkMode) => {
       flex: 1,
       justifyContent: "center",
       alignItems: "center",
-      backgroundColor: TRANSPARENT_BLACK_80,
+      backgroundColor: "rgba(0, 0, 0, 0.8)",
     },
     swapSection: {
       width: 300,
       padding: 20,
-      backgroundColor: SWAP_SECTION_BG_DARK,
+      backgroundColor: "#1c1c1e",
       borderRadius: 10,
       marginVertical: 10,
     },
@@ -121,7 +130,7 @@ const ActivityScreenStyles = (isDarkMode) => {
       justifyContent: "space-between",
     },
     tokenSelectText: {
-      color: PURE_WHITE,
+      color: "#fff",
       marginRight: 5,
     },
     swapButton: {
@@ -151,8 +160,8 @@ const ActivityScreenStyles = (isDarkMode) => {
       flex: 0,
     },
     amountSubtitle: {
-      color: colors.secondTextColor,
-      fontSize: FONT_SIZE_15,
+      color: secondTextColor,
+      fontSize: FONT_SIZE_14,
       marginBottom: 20,
     },
     addressText: {
@@ -319,11 +328,11 @@ const ActivityScreenStyles = (isDarkMode) => {
       marginLeft: 10,
       paddingVertical: 5,
       paddingHorizontal: 10,
-      backgroundColor: darkColors.buttonBackgroundColor,
+      backgroundColor: "#CCB68C",
       borderRadius: 5,
     },
     disconnectButtonText: {
-      color: PURE_WHITE,
+      color: "#FFFFFF",
       fontWeight: "bold",
     },
     historyContainer: {

@@ -2,46 +2,45 @@
 import { StyleSheet } from "react-native";
 import {
   FONT_SIZE_12,
-  FONT_SIZE_15,
+  FONT_SIZE_14,
   FONT_SIZE_16,
   FONT_SIZE_20,
-  FONT_SIZE_22,
-  FONT_SIZE_34,
+  FONT_SIZE_24,
+  FONT_SIZE_36,
+  FONT_SIZE_40,
   RADIUS_5,
   RADIUS_10,
   RADIUS_20,
   RADIUS_30,
   RADIUS_50,
-  FOCUSED_BORDER_COLOR_DARK,
-  FOCUSED_BORDER_COLOR_LIGHT,
-  PURE_WHITE,
-  ERROR_COLOR,
-  BLACK,
-  TRANSPARENT_BLACK_20,
-  lightColors,
-  darkColors,
 } from "./constants";
 
 const SecureDeviceScreenStyles = (isDarkMode) => {
-  const colors = isDarkMode ? darkColors : lightColors;
-  const focusedBorderColor = isDarkMode
-    ? FOCUSED_BORDER_COLOR_DARK
-    : FOCUSED_BORDER_COLOR_LIGHT;
+  const textColor = isDarkMode ? "#fff" : "#000";
+  const backgroundColor = isDarkMode ? "#121212" : "#f5f5f5";
+  const modalBackgroundColor = isDarkMode ? "#3F3D3C" : "#ffffff";
+  const currencyModalBgColor = isDarkMode ? "#3F3D3C" : "#f7f7f7";
+  const buttonBackgroundColor = isDarkMode ? "#CCB68C" : "#E5E1E9";
+  const borderColor = isDarkMode ? "#404040" : "#ccc";
+  const BluetoothBtnColor = isDarkMode ? "#CCB68C" : "#CFAB95";
+  const secondTextColor = isDarkMode ? "#ddd" : "#676776";
+  const inputBackgroundColor = isDarkMode ? "#21201E" : "#e0e0e0";
+  const focusedBorderColor = isDarkMode ? "#CCB68C" : "#007AFF";
 
   return StyleSheet.create({
     addressInput: {
-      backgroundColor: colors.inputBackgroundColor,
+      backgroundColor: inputBackgroundColor,
       padding: 15,
       paddingTop: 15,
       borderRadius: RADIUS_10,
       height: 120,
       width: "100%",
-      color: colors.textColor,
+      color: textColor,
     },
     addressModalView: {
       margin: 20,
       width: "90%",
-      backgroundColor: colors.modalBackgroundColor,
+      backgroundColor: modalBackgroundColor,
       borderRadius: 20,
       padding: 30,
       justifyContent: "space-between",
@@ -53,7 +52,7 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
       marginBottom: 30,
     },
     bluetoothModalTitle: {
-      color: colors.textColor,
+      color: textColor,
       fontSize: 20,
       fontWeight: "bold",
       marginBottom: 10,
@@ -110,14 +109,14 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
       marginTop: 20,
     },
     cancelButtonText: {
-      color: colors.secondTextColor,
+      color: secondTextColor,
       fontSize: 16,
     },
     centeredView: {
       flex: 1,
       justifyContent: "center",
       alignItems: "center",
-      backgroundColor: TRANSPARENT_BLACK_20,
+      backgroundColor: "rgba(0, 0, 0, 0.2)",
     },
     changeLockCodeModalView: {
       position: "absolute",
@@ -167,7 +166,7 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
       margin: 20,
       height: 420,
       width: "90%",
-      backgroundColor: colors.modalBackgroundColor,
+      backgroundColor: currencyModalBgColor,
       borderRadius: 20,
       padding: 30,
       alignItems: "center",
@@ -196,11 +195,11 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
       marginLeft: 10,
       paddingVertical: 5,
       paddingHorizontal: 10,
-      backgroundColor: darkColors.buttonBackgroundColor,
+      backgroundColor: "#CCB68C",
       borderRadius: 5,
     },
     disconnectButtonText: {
-      color: PURE_WHITE,
+      color: "#FFFFFF",
       fontWeight: "bold",
     },
     disconnectModalView: {
@@ -214,7 +213,7 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
       justifyContent: "space-between",
     },
     disconnectSubtitle: {
-      color: colors.secondTextColor,
+      color: secondTextColor,
       fontSize: 14,
       textAlign: "center",
       marginTop: 20,
@@ -228,7 +227,7 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
       paddingVertical: 8,
       paddingHorizontal: 16,
       zIndex: 101,
-      shadowColor: BLACK,
+      shadowColor: "#000",
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 0.25,
       shadowRadius: 3.84,
@@ -264,7 +263,7 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
       alignItems: "center",
     },
     errorText: {
-      color: ERROR_COLOR,
+      color: "#FF5252",
       fontSize: 14,
       marginBottom: 10,
       width: 280,
@@ -401,7 +400,7 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
       alignItems: "center",
     },
     roundButton: {
-      backgroundColor: colors.BluetoothBtnColor,
+      backgroundColor: BluetoothBtnColor,
       borderRadius: 30,
       paddingVertical: 10,
       paddingHorizontal: 20,
@@ -421,9 +420,7 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
       alignItems: "center",
       borderRadius: 10,
       width: "100%",
-      backgroundColor: isDarkMode
-        ? darkColors.dropdownBackgroundColor
-        : lightColors.buttonBackgroundColor,
+      backgroundColor: isDarkMode ? "#21201E" : "#E5E1E9",
       marginBottom: 20,
     },
     searchIcon: {
@@ -454,13 +451,13 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
       alignItems: "center",
       paddingVertical: 15,
       borderBottomWidth: 1,
-      borderBottomColor: colors.borderColor,
+      borderBottomColor: borderColor,
     },
     scrollView: {
       width: "100%",
     },
     submitButton: {
-      backgroundColor: colors.buttonBackgroundColor,
+      backgroundColor: buttonBackgroundColor,
       padding: 10,
       width: "100%",
       justifyContent: "center",

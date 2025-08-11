@@ -2,12 +2,13 @@
 import { StyleSheet, Dimensions } from "react-native";
 import {
   FONT_SIZE_12,
-  FONT_SIZE_15,
+  FONT_SIZE_14,
   FONT_SIZE_16,
   FONT_SIZE_20,
-  FONT_SIZE_22,
-  FONT_SIZE_28,
-  FONT_SIZE_34,
+  FONT_SIZE_24,
+  FONT_SIZE_25,
+  FONT_SIZE_36,
+  FONT_SIZE_40,
   RADIUS_5,
   RADIUS_6,
   RADIUS_10,
@@ -20,15 +21,24 @@ import {
   RADIUS_21,
   RADIUS_30,
   RADIUS_50,
-  WHITE_50,
-  WHITE_80,
-  PURE_WHITE,
-  lightColors,
-  darkColors,
 } from "./constants";
 
 const VaultScreenStyles = (isDarkMode) => {
-  const colors = isDarkMode ? darkColors : lightColors;
+  const textColor = isDarkMode ? "#fff" : "#000";
+  const modalBackgroundColor = isDarkMode ? "#3F3D3C" : "#ffffff";
+  const BluetoothBtnColor = isDarkMode ? "#CCB68C" : "#CFAB95";
+  const secondTextColor = isDarkMode ? "#ddd" : "#676776";
+  const secondCardTextColor = isDarkMode ? "#fff" : "#fff";
+  const backgroundColor = isDarkMode ? "#121212" : "#f5f5f5";
+  const tagColor = isDarkMode ? "#CFAB9540" : "#CFAB9540";
+  const buttonBackgroundColor = isDarkMode ? "#CCB68C" : "#E5E1E9";
+  const shadowColor = isDarkMode ? "#0E0D0D" : "#0E0D0D";
+  const cardBackgroundColor = isDarkMode ? "#3F3D3C" : "#E5E1E9";
+  const currencyUnitColor = isDarkMode ? "#ddd" : "#666";
+  const addCryptoButtonBackgroundColor = isDarkMode ? "#21201E" : "#F8F6FE";
+  const borderColor = isDarkMode ? "#555" : "#ccc";
+  const historyItemBorderColor = isDarkMode ? "#ccc" : "#999";
+  const inputBackgroundColor = isDarkMode ? "#21201E" : "#e0e0e0";
 
   const { height } = Dimensions.get("window");
   const containerHeight = height < 700 ? height - 280 : height - 360;
@@ -66,7 +76,7 @@ const VaultScreenStyles = (isDarkMode) => {
       alignItems: "center",
       justifyContent: "center",
       borderRadius: 21,
-      backgroundColor: WHITE_50,
+      backgroundColor: "#ffffff50",
       overflow: "hidden",
     },
     cardChainIconContainer: {
@@ -76,18 +86,18 @@ const VaultScreenStyles = (isDarkMode) => {
       width: 16,
       height: 16,
       borderWidth: 1,
-      borderColor: WHITE_80,
+      borderColor: "#ffffff80",
       alignItems: "center",
       justifyContent: "center",
       borderRadius: 15,
-      backgroundColor: WHITE_80,
+      backgroundColor: "#ffffff80",
       overflow: "hidden",
     },
 
     TagChainIcon: {
       width: 14,
       height: 14,
-      backgroundColor: darkColors.tagColor,
+      backgroundColor: "#CFAB9540",
       marginRight: 8,
       resizeMode: "contain",
       borderRadius: RADIUS_10,
@@ -104,17 +114,17 @@ const VaultScreenStyles = (isDarkMode) => {
       paddingHorizontal: 10,
       marginRight: 8,
       borderRadius: 6,
-      backgroundColor: colors.addCryptoButtonBackgroundColor,
+      backgroundColor: addCryptoButtonBackgroundColor,
     },
     selectedChainTag: {
       backgroundColor: buttonBackgroundColor,
     },
     chainTagText: {
       fontSize: 14,
-      color: colors.textColor,
+      color: textColor,
     },
     selectedChainTagText: {
-      color: colors.textColor,
+      color: textColor,
     },
 
     cardName: {
@@ -143,11 +153,11 @@ const VaultScreenStyles = (isDarkMode) => {
       marginLeft: 10,
       paddingVertical: 5,
       paddingHorizontal: 10,
-      backgroundColor: darkColors.buttonBackgroundColor,
+      backgroundColor: "#CCB68C",
       borderRadius: 5,
     },
     disconnectButtonText: {
-      color: PURE_WHITE,
+      color: "#FFFFFF",
       fontWeight: "bold",
     },
     submitButton: {
@@ -248,7 +258,7 @@ const VaultScreenStyles = (isDarkMode) => {
 
     sendNftText: {
       fontSize: 14,
-      color: colors.secondTextColor,
+      color: secondTextColor,
       textAlign: "center",
       marginBottom: 20,
       flexWrap: "wrap",
