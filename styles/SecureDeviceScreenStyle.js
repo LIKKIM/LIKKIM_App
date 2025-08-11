@@ -18,7 +18,9 @@ import {
 
 const SecureDeviceScreenStyles = (isDarkMode) => {
   const colors = isDarkMode ? darkColors : lightColors;
-  const focusedBorderColor = isDarkMode ? "#CCB68C" : "#007AFF";
+  const focusedBorderColor = isDarkMode
+    ? FOCUSED_BORDER_COLOR_DARK
+    : FOCUSED_BORDER_COLOR_LIGHT;
 
   return StyleSheet.create({
     addressInput: {
@@ -109,7 +111,7 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
       flex: 1,
       justifyContent: "center",
       alignItems: "center",
-      backgroundColor: "rgba(0, 0, 0, 0.2)",
+      backgroundColor: TRANSPARENT_BLACK_20,
     },
     changeLockCodeModalView: {
       position: "absolute",
@@ -188,11 +190,11 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
       marginLeft: 10,
       paddingVertical: 5,
       paddingHorizontal: 10,
-      backgroundColor: "#CCB68C",
+      backgroundColor: darkColors.buttonBackgroundColor,
       borderRadius: 5,
     },
     disconnectButtonText: {
-      color: "#FFFFFF",
+      color: PURE_WHITE,
       fontWeight: "bold",
     },
     disconnectModalView: {
@@ -220,7 +222,7 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
       paddingVertical: 8,
       paddingHorizontal: 16,
       zIndex: 101,
-      shadowColor: "#000",
+      shadowColor: BLACK,
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 0.25,
       shadowRadius: 3.84,
@@ -256,7 +258,7 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
       alignItems: "center",
     },
     errorText: {
-      color: "#FF5252",
+      color: ERROR_COLOR,
       fontSize: 14,
       marginBottom: 10,
       width: 280,
@@ -413,7 +415,9 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
       alignItems: "center",
       borderRadius: 10,
       width: "100%",
-      backgroundColor: isDarkMode ? "#21201E" : "#E5E1E9",
+      backgroundColor: isDarkMode
+        ? darkColors.dropdownBackgroundColor
+        : lightColors.buttonBackgroundColor,
       marginBottom: 20,
     },
     searchIcon: {
