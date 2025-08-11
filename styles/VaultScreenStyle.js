@@ -7,7 +7,6 @@ import {
   FONT_SIZE_22,
   FONT_SIZE_24,
   FONT_SIZE_25,
-  FONT_SIZE_36,
   FONT_SIZE_34,
   RADIUS_5,
   RADIUS_6,
@@ -263,7 +262,7 @@ const VaultScreenStyles = (isDarkMode) => {
       textAlign: "left",
     },
     totalBalanceAmount: {
-      fontSize: FONT_SIZE_36,
+      fontSize: FONT_SIZE_34,
       fontWeight: "bold",
       color: c.text,
       textAlign: "left",
