@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: "rgba(108, 108, 244, 0.1)",
+    backgroundColor: TRANSPARENT_BLUE_10,
   },
   cardText: {
     color: darkColors.textColor,
@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.2)",
+    backgroundColor: TRANSPARENT_BLACK_20,
   },
   modalView: {
     margin: 20,
