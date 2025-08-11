@@ -18,7 +18,7 @@ export const lightTheme = StyleSheet.create({
   settingsText: { marginLeft: 10, fontSize: FONT_SIZE_16, color: "#21201E" },
   titleText: {
     color: "#21201E",
-    fontSize: 24,
+    fontSize: FONT_SIZE_28,
     fontWeight: "bold",
     marginBottom: 20,
   },
@@ -41,7 +41,7 @@ export const darkTheme = StyleSheet.create({
   settingsText: { marginLeft: 10, fontSize: FONT_SIZE_16, color: "#fff" },
   titleText: {
     color: "#fff",
-    fontSize: 24,
+    fontSize: FONT_SIZE_28,
     fontWeight: "bold",
     marginBottom: 20,
   },
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
   buttonText: { color: "#e0e0e0", fontSize: FONT_SIZE_16, fontWeight: "bold" },
   titleText: {
     color: "white",
-    fontSize: 24,
+    fontSize: FONT_SIZE_28,
     fontWeight: "bold",
     marginBottom: 20,
   },
