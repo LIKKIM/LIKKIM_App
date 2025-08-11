@@ -39,8 +39,13 @@ export const PURE_WHITE = "#FFF";
 export const HIGHLIGHT_COLOR = "#FF6347";
 export const TRANSPARENT_BLACK_20 = "rgba(0, 0, 0, 0.2)";
 export const TRANSPARENT_BLACK_80 = "rgba(0, 0, 0, 0.8)";
+
 export const SWAP_SECTION_BG_DARK = "#1c1c1e";
 export const TRANSPARENT_BLUE_10 = "rgba(108, 108, 244, 0.1)";
+export const FOCUSED_BORDER_COLOR_DARK = "#CCB68C";
+export const FOCUSED_BORDER_COLOR_LIGHT = "#007AFF";
+export const ERROR_COLOR = "#FF5252";
+export const BLACK = "#000";
 
 // 颜色（明暗主题）
 export const lightColors = {
