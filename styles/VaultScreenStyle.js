@@ -1,7 +1,7 @@
 import { StyleSheet, Dimensions } from "react-native";
 import {
   FONT_SIZE_12,
-  FONT_SIZE_14,
+  FONT_SIZE_15,
   FONT_SIZE_16,
   FONT_SIZE_20,
   FONT_SIZE_22,
@@ -66,7 +66,7 @@ const titleBase = {
 };
 
 const textCenterMuted = (colors) => ({
-  fontSize: FONT_SIZE_14,
+  fontSize: FONT_SIZE_15,
   color: colors.mutedText,
   textAlign: "center",
 });
@@ -194,8 +194,8 @@ const VaultScreenStyles = (isDarkMode) => {
     },
 
     // card texts
-    cardShortName: { color: c.cardText, fontSize: FONT_SIZE_14 },
-    balanceShortName: { color: c.cardText, fontSize: FONT_SIZE_14 },
+    cardShortName: { color: c.cardText, fontSize: FONT_SIZE_15 },
+    balanceShortName: { color: c.cardText, fontSize: FONT_SIZE_15 },
     priceChangeView: {
       position: "absolute",
       display: "flex",
@@ -204,7 +204,7 @@ const VaultScreenStyles = (isDarkMode) => {
       top: 56,
       right: 20,
       color: c.cardText,
-      fontSize: FONT_SIZE_14,
+      fontSize: FONT_SIZE_15,
     },
     cardBalance: {
       position: "absolute",
@@ -220,7 +220,7 @@ const VaultScreenStyles = (isDarkMode) => {
       fontWeight: "bold",
       marginBottom: 8,
     },
-    balanceShortNameCenter: { color: c.cardText, fontSize: FONT_SIZE_14 },
+    balanceShortNameCenter: { color: c.cardText, fontSize: FONT_SIZE_15 },
 
     // chain tags
     chainScrollView: { marginBottom: 10, height: 34, paddingHorizontal: 10 },
@@ -234,7 +234,7 @@ const VaultScreenStyles = (isDarkMode) => {
       backgroundColor: isDarkMode ? "#21201E" : "#F8F6FE",
     },
     selectedChainTag: { backgroundColor: c.btnBg },
-    chainTagText: { fontSize: FONT_SIZE_14, color: c.text },
+    chainTagText: { fontSize: FONT_SIZE_15, color: c.text },
     selectedChainTagText: { color: c.text },
     chainContainer: {
       backgroundColor: c.tagBg,
@@ -483,7 +483,7 @@ const VaultScreenStyles = (isDarkMode) => {
     bluetoothModalTitle: { ...titleBase, color: c.text, marginBottom: 10 },
     SecurityCodeModalTitle: { ...titleBase, color: c.text, marginBottom: 15 },
     modalSubtitle: { ...textCenterMuted(c) },
-    scanModalSubtitle: { color: c.mutedText, fontSize: FONT_SIZE_14 },
+    scanModalSubtitle: { color: c.mutedText, fontSize: FONT_SIZE_15 },
     alertModalTitle: {
       color: c.text,
       fontSize: FONT_SIZE_16,
@@ -494,7 +494,7 @@ const VaultScreenStyles = (isDarkMode) => {
     alertModalSubtitle: {
       width: "100%",
       color: c.mutedText,
-      fontSize: FONT_SIZE_14,
+      fontSize: FONT_SIZE_15,
       marginBottom: 10,
       lineHeight: 20,
     },
@@ -544,7 +544,7 @@ const VaultScreenStyles = (isDarkMode) => {
     addressText: {
       color: c.mutedText,
       flexWrap: "nowrap",
-      fontSize: FONT_SIZE_14,
+      fontSize: FONT_SIZE_15,
     },
 
     // lists / tabs

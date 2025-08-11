@@ -2,8 +2,10 @@
  * 通用样式常量，供全局样式文件复用
  */
 export const FONT_SIZE_12 = 12;
-export const FONT_SIZE_14 = 14;
+export const FONT_SIZE_13 = 13;
+export const FONT_SIZE_15 = 15;
 export const FONT_SIZE_16 = 16;
+export const FONT_SIZE_17 = 17;
 export const FONT_SIZE_20 = 20;
 export const FONT_SIZE_22 = 22;
 export const FONT_SIZE_28 = 28;

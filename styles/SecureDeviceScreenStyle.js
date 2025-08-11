@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import {
   FONT_SIZE_12,
-  FONT_SIZE_14,
+  FONT_SIZE_15,
   FONT_SIZE_16,
   FONT_SIZE_20,
   FONT_SIZE_22,
@@ -189,7 +189,7 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
     },
     disconnectSubtitle: {
       color: secondTextColor,
-      fontSize: FONT_SIZE_14,
+      fontSize: FONT_SIZE_15,
       textAlign: "center",
       marginTop: 20,
     },
@@ -210,7 +210,7 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
     },
     dropdownButtonText: {
       color: textColor,
-      fontSize: FONT_SIZE_14,
+      fontSize: FONT_SIZE_15,
       paddingVertical: 5,
     },
     enableLockModalView: {
@@ -239,7 +239,7 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
     },
     errorText: {
       color: "#FF5252",
-      fontSize: FONT_SIZE_14,
+      fontSize: FONT_SIZE_15,
       marginBottom: 10,
       width: 280,
     },
@@ -292,7 +292,7 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
     listContainer: { flexDirection: "row", alignItems: "center", flex: 1 },
     modalSubtitle: {
       color: secondTextColor,
-      fontSize: FONT_SIZE_14,
+      fontSize: FONT_SIZE_15,
       textAlign: "center",
     },
     modalTitle: {
@@ -368,7 +368,7 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
     },
     scanModalSubtitle: {
       color: secondTextColor,
-      fontSize: FONT_SIZE_14,
+      fontSize: FONT_SIZE_15,
       textAlign: "center",
     },
     searchContainer: {

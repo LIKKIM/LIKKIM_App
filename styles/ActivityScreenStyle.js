@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import {
   FONT_SIZE_12,
-  FONT_SIZE_14,
+  FONT_SIZE_15,
   FONT_SIZE_16,
   FONT_SIZE_20,
   FONT_SIZE_22,
@@ -139,18 +139,18 @@ const ActivityScreenStyles = (isDarkMode) => {
     },
     amountSubtitle: {
       color: secondTextColor,
-      fontSize: FONT_SIZE_14,
+      fontSize: FONT_SIZE_15,
       marginBottom: 20,
     },
     addressText: {
       color: secondTextColor,
       flexWrap: "nowrap",
-      fontSize: FONT_SIZE_14,
+      fontSize: FONT_SIZE_15,
     },
     balanceModalSubtitle: {
       marginTop: 6,
       color: textColor,
-      fontSize: FONT_SIZE_14,
+      fontSize: FONT_SIZE_15,
       marginBottom: 16,
     },
     AssetsModalSubtitle: {
@@ -163,7 +163,7 @@ const ActivityScreenStyles = (isDarkMode) => {
     AssetsValue: { color: textColor, fontSize: 12 },
     balanceSubtitle: {
       color: secondTextColor,
-      fontSize: FONT_SIZE_14,
+      fontSize: FONT_SIZE_15,
       marginBottom: 6,
     },
     bgContainer: {
@@ -334,7 +334,7 @@ const ActivityScreenStyles = (isDarkMode) => {
     },
     mainButtonText: {
       color: titleColor,
-      fontSize: FONT_SIZE_14,
+      fontSize: FONT_SIZE_15,
       fontWeight: "bold",
       marginVertical: 10,
     },
@@ -350,7 +350,7 @@ const ActivityScreenStyles = (isDarkMode) => {
     },
     modalSubtitle: {
       color: secondTextColor,
-      fontSize: FONT_SIZE_14,
+      fontSize: FONT_SIZE_15,
       textAlign: "center",
     },
     modalText: { color: secondTextColor, textAlign: "center" },
@@ -469,7 +469,7 @@ const ActivityScreenStyles = (isDarkMode) => {
       alignItems: "center",
       justifyContent: "center",
     },
-    scanModalSubtitle: { color: secondTextColor, fontSize: FONT_SIZE_14 },
+    scanModalSubtitle: { color: secondTextColor, fontSize: FONT_SIZE_15 },
     subButtonText: { color: secondBtnTextColor, fontSize: 12 },
     submitButton: {
       backgroundColor: btnColor,
@@ -483,7 +483,7 @@ const ActivityScreenStyles = (isDarkMode) => {
     },
     submitButtonText: { color: textBtnColor, fontSize: 16 },
     subtitleText: {
-      fontSize: FONT_SIZE_14,
+      fontSize: FONT_SIZE_15,
       color: secondTextColor,
       textAlign: "center",
       flexWrap: "wrap",
