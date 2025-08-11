@@ -12,6 +12,12 @@ import {
   RADIUS_20,
   RADIUS_30,
   RADIUS_50,
+  FOCUSED_BORDER_COLOR_DARK,
+  FOCUSED_BORDER_COLOR_LIGHT,
+  PURE_WHITE,
+  ERROR_COLOR,
+  BLACK,
+  TRANSPARENT_BLACK_20,
   lightColors,
   darkColors,
 } from "./constants";

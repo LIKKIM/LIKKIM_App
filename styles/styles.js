@@ -11,6 +11,8 @@ import {
   RADIUS_14,
   RADIUS_20,
   RADIUS_30,
+  TRANSPARENT_BLUE_10,
+  TRANSPARENT_BLACK_20,
   lightColors,
   darkColors,
 } from "./constants";

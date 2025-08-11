@@ -20,6 +20,9 @@ import {
   RADIUS_21,
   RADIUS_30,
   RADIUS_50,
+  WHITE_50,
+  WHITE_80,
+  PURE_WHITE,
   lightColors,
   darkColors,
 } from "./constants";
