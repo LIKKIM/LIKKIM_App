@@ -10,8 +10,6 @@ import {
   RADIUS_8,
   RADIUS_10,
   RADIUS_12,
-  RADIUS_14,
-  RADIUS_15,
   RADIUS_16,
   RADIUS_18,
   RADIUS_20,
@@ -179,7 +177,7 @@ const VaultScreenStyles = (isDarkMode) => {
       borderColor: "#ffffff80",
       alignItems: "center",
       justifyContent: "center",
-      borderRadius: RADIUS_15,
+      borderRadius: RADIUS_16,
       backgroundColor: "#ffffff80",
       overflow: "hidden",
     },
@@ -353,13 +351,13 @@ const VaultScreenStyles = (isDarkMode) => {
     NFTButton: {
       ...buttonBase,
       backgroundColor: c.btnBg,
-      borderRadius: RADIUS_15,
+      borderRadius: RADIUS_16,
     },
     GallerySendBtn: {
       ...buttonBase,
       borderWidth: 3,
       borderColor: c.btnBg,
-      borderRadius: RADIUS_15,
+      borderRadius: RADIUS_16,
     },
     cancelAddressButton: {
       ...buttonBase,
