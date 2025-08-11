@@ -46,7 +46,7 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
     bluetoothImg: { width: 150, height: 150, marginBottom: 30 },
     bluetoothModalTitle: {
       color: textColor,
-      fontSize: 20,
+      fontSize: FONT_SIZE_20,
       fontWeight: "bold",
       marginBottom: 10,
     },
@@ -72,7 +72,7 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
       width: "100%",
       gap: 10,
     },
-    buttonText: { color: textColor, fontSize: 16 },
+    buttonText: { color: textColor, fontSize: FONT_SIZE_16 },
     cancelButton: {
       borderColor: buttonBackgroundColor,
       borderWidth: 3,
@@ -94,7 +94,7 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
       alignItems: "center",
       marginTop: 20,
     },
-    cancelButtonText: { color: secondTextColor, fontSize: 16 },
+    cancelButtonText: { color: secondTextColor, fontSize: FONT_SIZE_16 },
     centeredView: {
       flex: 1,
       justifyContent: "center",
@@ -190,7 +190,7 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
     },
     disconnectSubtitle: {
       color: secondTextColor,
-      fontSize: 14,
+      fontSize: FONT_SIZE_14,
       textAlign: "center",
       marginTop: 20,
     },
@@ -209,7 +209,11 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
       shadowRadius: 3.84,
       elevation: 5,
     },
-    dropdownButtonText: { color: textColor, fontSize: 14, paddingVertical: 5 },
+    dropdownButtonText: {
+      color: textColor,
+      fontSize: FONT_SIZE_14,
+      paddingVertical: 5,
+    },
     enableLockModalView: {
       position: "absolute",
       top: 60,
@@ -234,7 +238,12 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
       padding: 30,
       alignItems: "center",
     },
-    errorText: { color: "#FF5252", fontSize: 14, marginBottom: 10, width: 280 },
+    errorText: {
+      color: "#FF5252",
+      fontSize: FONT_SIZE_14,
+      marginBottom: 10,
+      width: 280,
+    },
     eyeIcon: {
       position: "absolute",
       right: 15,
@@ -268,7 +277,7 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
     currencyModalText: { color: textColor, fontSize: 16, textAlign: "center" },
     languageModalTitle: {
       color: textColor,
-      fontSize: 20,
+      fontSize: FONT_SIZE_20,
       fontWeight: "bold",
       marginBottom: 30,
     },
@@ -284,7 +293,7 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
     listContainer: { flexDirection: "row", alignItems: "center", flex: 1 },
     modalSubtitle: {
       color: secondTextColor,
-      fontSize: 14,
+      fontSize: FONT_SIZE_14,
       textAlign: "center",
     },
     modalTitle: {
@@ -325,13 +334,13 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
     },
     LockCodeModalTitle: {
       color: textColor,
-      fontSize: 20,
+      fontSize: FONT_SIZE_20,
       fontWeight: "bold",
       marginBottom: 10,
     },
     SecurityCodeModalTitle: {
       color: textColor,
-      fontSize: 20,
+      fontSize: FONT_SIZE_20,
       fontWeight: "bold",
       marginBottom: 15,
     },
@@ -360,7 +369,7 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
     },
     scanModalSubtitle: {
       color: secondTextColor,
-      fontSize: 14,
+      fontSize: FONT_SIZE_14,
       textAlign: "center",
     },
     searchContainer: {
@@ -422,8 +431,8 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
       height: 60,
       alignItems: "center",
     },
-    submitButtonText: { color: textColor, fontSize: 16 },
-    Text: { color: textColor, fontSize: 16 },
+    submitButtonText: { color: textColor, fontSize: FONT_SIZE_16 },
+    Text: { color: textColor, fontSize: FONT_SIZE_16 },
   });
 };
 export default SecureDeviceScreenStyles;
