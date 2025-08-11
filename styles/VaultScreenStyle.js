@@ -2,13 +2,12 @@
 import { StyleSheet, Dimensions } from "react-native";
 import {
   FONT_SIZE_12,
-  FONT_SIZE_14,
+  FONT_SIZE_15,
   FONT_SIZE_16,
   FONT_SIZE_20,
-  FONT_SIZE_24,
-  FONT_SIZE_25,
-  FONT_SIZE_36,
-  FONT_SIZE_40,
+  FONT_SIZE_22,
+  FONT_SIZE_28,
+  FONT_SIZE_34,
   RADIUS_5,
   RADIUS_6,
   RADIUS_10,
@@ -21,24 +20,12 @@ import {
   RADIUS_21,
   RADIUS_30,
   RADIUS_50,
+  lightColors,
+  darkColors,
 } from "./constants";
 
 const VaultScreenStyles = (isDarkMode) => {
-  const textColor = isDarkMode ? "#fff" : "#000";
-  const modalBackgroundColor = isDarkMode ? "#3F3D3C" : "#ffffff";
-  const BluetoothBtnColor = isDarkMode ? "#CCB68C" : "#CFAB95";
-  const secondTextColor = isDarkMode ? "#ddd" : "#676776";
-  const secondCardTextColor = isDarkMode ? "#fff" : "#fff";
-  const backgroundColor = isDarkMode ? "#121212" : "#f5f5f5";
-  const tagColor = isDarkMode ? "#CFAB9540" : "#CFAB9540";
-  const buttonBackgroundColor = isDarkMode ? "#CCB68C" : "#E5E1E9";
-  const shadowColor = isDarkMode ? "#0E0D0D" : "#0E0D0D";
-  const cardBackgroundColor = isDarkMode ? "#3F3D3C" : "#E5E1E9";
-  const currencyUnitColor = isDarkMode ? "#ddd" : "#666";
-  const addCryptoButtonBackgroundColor = isDarkMode ? "#21201E" : "#F8F6FE";
-  const borderColor = isDarkMode ? "#555" : "#ccc";
-  const historyItemBorderColor = isDarkMode ? "#ccc" : "#999";
-  const inputBackgroundColor = isDarkMode ? "#21201E" : "#e0e0e0";
+  const colors = isDarkMode ? darkColors : lightColors;
 
   const { height } = Dimensions.get("window");
   const containerHeight = height < 700 ? height - 280 : height - 360;

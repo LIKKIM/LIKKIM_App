@@ -2,36 +2,23 @@
 import { StyleSheet } from "react-native";
 import {
   FONT_SIZE_12,
-  FONT_SIZE_14,
+  FONT_SIZE_15,
   FONT_SIZE_16,
   FONT_SIZE_20,
-  FONT_SIZE_24,
-  FONT_SIZE_36,
-  FONT_SIZE_40,
+  FONT_SIZE_22,
+  FONT_SIZE_34,
   RADIUS_5,
   RADIUS_10,
   RADIUS_20,
   RADIUS_30,
   RADIUS_50,
+  lightColors,
+  darkColors,
 } from "./constants";
 
 const ActivityScreenStyles = (isDarkMode) => {
-  const backgroundColor = isDarkMode ? "#121212" : "#f5f5f5";
-  const btnBorderColor = isDarkMode ? "#CCB68C" : "#CFAB95";
-  const btnColor = isDarkMode ? "#CCB68C" : "#CFAB95";
-  const buttonBackgroundColor = isDarkMode ? "#CCB68C" : "#E5E1E9";
-  const historyContainerBackgroundColor = isDarkMode
-    ? "#22201F90"
-    : "#FFFFFF80";
-  const historyItemBorderColor = isDarkMode ? "#ccc" : "#999";
-  const inputBackgroundColor = isDarkMode ? "#21201E" : "#e0e0e0";
-  const modalBackgroundColor = isDarkMode ? "#3F3D3C" : "#fff";
-  const secondBtnTextColor = isDarkMode ? "#ddd" : "#e0e0e0";
-  const secondTextColor = isDarkMode ? "#ddd" : "#676776";
-  const textBtnColor = isDarkMode ? "#fff" : "#fff";
-  const textColor = isDarkMode ? "#fff" : "#000";
-  const titleColor = isDarkMode ? "#fff" : "#000";
-  const dropdownBackgroundColor = isDarkMode ? "#21201E" : "#eee";
+  const textColor = isDarkMode ? darkColors.textColor : lightColors.textColor;
+  const colors = isDarkMode ? darkColors : lightColors;
 
   return StyleSheet.create({
     searchIcon: {
@@ -49,7 +36,9 @@ const ActivityScreenStyles = (isDarkMode) => {
       alignItems: "center",
       borderRadius: 10,
       width: "100%",
-      backgroundColor: isDarkMode ? "#21201E" : "#E5E1E9",
+      backgroundColor: isDarkMode
+        ? darkColors.dropdownBackgroundColor
+        : lightColors.buttonBackgroundColor,
       marginBottom: 20,
     },
     fromDropdown: {
@@ -82,10 +71,10 @@ const ActivityScreenStyles = (isDarkMode) => {
       backgroundColor: isDarkMode ? "#CCB68C" : "#ccc",
     },
     chainTagText: {
-      color: isDarkMode ? "#fff" : "#000",
+      color: textColor,
     },
     selectedChainTagText: {
-      color: isDarkMode ? "#000" : "#fff",
+      color: isDarkMode ? lightColors.textColor : darkColors.textColor,
     },
     container: {
       flex: 1,
@@ -161,7 +150,7 @@ const ActivityScreenStyles = (isDarkMode) => {
     },
     amountSubtitle: {
       color: secondTextColor,
-      fontSize: FONT_SIZE_14,
+      fontSize: FONT_SIZE_15,
       marginBottom: 20,
     },
     addressText: {

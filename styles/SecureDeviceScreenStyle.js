@@ -2,45 +2,38 @@
 import { StyleSheet } from "react-native";
 import {
   FONT_SIZE_12,
-  FONT_SIZE_14,
+  FONT_SIZE_15,
   FONT_SIZE_16,
   FONT_SIZE_20,
-  FONT_SIZE_24,
-  FONT_SIZE_36,
-  FONT_SIZE_40,
+  FONT_SIZE_22,
+  FONT_SIZE_34,
   RADIUS_5,
   RADIUS_10,
   RADIUS_20,
   RADIUS_30,
   RADIUS_50,
+  lightColors,
+  darkColors,
 } from "./constants";
 
 const SecureDeviceScreenStyles = (isDarkMode) => {
-  const textColor = isDarkMode ? "#fff" : "#000";
-  const backgroundColor = isDarkMode ? "#121212" : "#f5f5f5";
-  const modalBackgroundColor = isDarkMode ? "#3F3D3C" : "#ffffff";
-  const currencyModalBgColor = isDarkMode ? "#3F3D3C" : "#f7f7f7";
-  const buttonBackgroundColor = isDarkMode ? "#CCB68C" : "#E5E1E9";
-  const borderColor = isDarkMode ? "#404040" : "#ccc";
-  const BluetoothBtnColor = isDarkMode ? "#CCB68C" : "#CFAB95";
-  const secondTextColor = isDarkMode ? "#ddd" : "#676776";
-  const inputBackgroundColor = isDarkMode ? "#21201E" : "#e0e0e0";
+  const colors = isDarkMode ? darkColors : lightColors;
   const focusedBorderColor = isDarkMode ? "#CCB68C" : "#007AFF";
 
   return StyleSheet.create({
     addressInput: {
-      backgroundColor: inputBackgroundColor,
+      backgroundColor: colors.inputBackgroundColor,
       padding: 15,
       paddingTop: 15,
       borderRadius: RADIUS_10,
       height: 120,
       width: "100%",
-      color: textColor,
+      color: colors.textColor,
     },
     addressModalView: {
       margin: 20,
       width: "90%",
-      backgroundColor: modalBackgroundColor,
+      backgroundColor: colors.modalBackgroundColor,
       borderRadius: 20,
       padding: 30,
       justifyContent: "space-between",
@@ -109,7 +102,7 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
       marginTop: 20,
     },
     cancelButtonText: {
-      color: secondTextColor,
+      color: colors.secondTextColor,
       fontSize: 16,
     },
     centeredView: {
@@ -166,7 +159,7 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
       margin: 20,
       height: 420,
       width: "90%",
-      backgroundColor: currencyModalBgColor,
+      backgroundColor: colors.modalBackgroundColor,
       borderRadius: 20,
       padding: 30,
       alignItems: "center",
@@ -400,7 +393,7 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
       alignItems: "center",
     },
     roundButton: {
-      backgroundColor: BluetoothBtnColor,
+      backgroundColor: colors.BluetoothBtnColor,
       borderRadius: 30,
       paddingVertical: 10,
       paddingHorizontal: 20,
@@ -451,13 +444,13 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
       alignItems: "center",
       paddingVertical: 15,
       borderBottomWidth: 1,
-      borderBottomColor: borderColor,
+      borderBottomColor: colors.borderColor,
     },
     scrollView: {
       width: "100%",
     },
     submitButton: {
-      backgroundColor: buttonBackgroundColor,
+      backgroundColor: colors.buttonBackgroundColor,
       padding: 10,
       width: "100%",
       justifyContent: "center",
