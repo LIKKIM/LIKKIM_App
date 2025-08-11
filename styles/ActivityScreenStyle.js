@@ -23,7 +23,7 @@ const ActivityScreenStyles = (isDarkMode) => {
   return StyleSheet.create({
     searchIcon: {
       paddingLeft: 10,
-      color: textColor,
+      color: colors.textColor,
     },
     searchInput: {
       flex: 1,
@@ -151,7 +151,7 @@ const ActivityScreenStyles = (isDarkMode) => {
       flex: 0,
     },
     amountSubtitle: {
-      color: secondTextColor,
+      color: colors.secondTextColor,
       fontSize: FONT_SIZE_15,
       marginBottom: 20,
     },

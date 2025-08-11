@@ -53,7 +53,7 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
       marginBottom: 30,
     },
     bluetoothModalTitle: {
-      color: textColor,
+      color: colors.textColor,
       fontSize: 20,
       fontWeight: "bold",
       marginBottom: 10,
@@ -214,7 +214,7 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
       justifyContent: "space-between",
     },
     disconnectSubtitle: {
-      color: secondTextColor,
+      color: colors.secondTextColor,
       fontSize: 14,
       textAlign: "center",
       marginTop: 20,
