@@ -270,7 +270,7 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
     languageList: { maxHeight: 290, width: 280 },
     languageModalText: {
       color: textColor,
-      fontSize: 16,
+      fontSize: FONT_SIZE_16,
       marginBottom: 10,
       textAlign: "center",
     },
@@ -298,7 +298,7 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
     },
     modalTitle: {
       color: textColor,
-      fontSize: 16,
+      fontSize: FONT_SIZE_16,
       fontWeight: "bold",
       marginBottom: 15,
     },
@@ -328,7 +328,7 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
     },
     LockCodeModalText: {
       color: textColor,
-      fontSize: 16,
+      fontSize: FONT_SIZE_16,
       marginBottom: 10,
       textAlign: "left",
     },
