@@ -104,14 +104,14 @@ const VaultScreenStyles = (isDarkMode) => {
       paddingHorizontal: 10,
       marginRight: 8,
       borderRadius: 6,
-      backgroundColor: addCryptoButtonBackgroundColor,
+      backgroundColor: colors.addCryptoButtonBackgroundColor,
     },
     selectedChainTag: {
       backgroundColor: buttonBackgroundColor,
     },
     chainTagText: {
       fontSize: 14,
-      color: textColor,
+      color: colors.textColor,
     },
     selectedChainTagText: {
       color: textColor,
@@ -248,7 +248,7 @@ const VaultScreenStyles = (isDarkMode) => {
 
     sendNftText: {
       fontSize: 14,
-      color: secondTextColor,
+      color: colors.secondTextColor,
       textAlign: "center",
       marginBottom: 20,
       flexWrap: "wrap",
