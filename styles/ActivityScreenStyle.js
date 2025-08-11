@@ -13,25 +13,13 @@ import {
   RADIUS_20,
   RADIUS_30,
   RADIUS_50,
+  lightColors,
+  darkColors,
 } from "./constants";
 
 const ActivityScreenStyles = (isDarkMode) => {
-  const backgroundColor = isDarkMode ? "#121212" : "#f5f5f5";
-  const btnBorderColor = isDarkMode ? "#CCB68C" : "#CFAB95";
-  const btnColor = isDarkMode ? "#CCB68C" : "#CFAB95";
-  const buttonBackgroundColor = isDarkMode ? "#CCB68C" : "#E5E1E9";
-  const historyContainerBackgroundColor = isDarkMode
-    ? "#22201F90"
-    : "#FFFFFF80";
-  const historyItemBorderColor = isDarkMode ? "#ccc" : "#999";
-  const inputBackgroundColor = isDarkMode ? "#21201E" : "#e0e0e0";
-  const modalBackgroundColor = isDarkMode ? "#3F3D3C" : "#fff";
-  const secondBtnTextColor = isDarkMode ? "#ddd" : "#e0e0e0";
-  const secondTextColor = isDarkMode ? "#ddd" : "#676776";
-  const textBtnColor = isDarkMode ? "#fff" : "#fff";
   const textColor = isDarkMode ? "#fff" : "#000";
-  const titleColor = isDarkMode ? "#fff" : "#000";
-  const dropdownBackgroundColor = isDarkMode ? "#21201E" : "#eee";
+  const colors = isDarkMode ? darkColors : lightColors;
 
   return StyleSheet.create({
     searchIcon: {
