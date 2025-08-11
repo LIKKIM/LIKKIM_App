@@ -1,4 +1,3 @@
-// styles/ActivityScreenStyle.js
 import { StyleSheet } from "react-native";
 import {
   FONT_SIZE_12,
@@ -14,7 +13,6 @@ import {
   RADIUS_30,
   RADIUS_50,
 } from "./constants";
-
 const ActivityScreenStyles = (isDarkMode) => {
   const backgroundColor = isDarkMode ? "#121212" : "#f5f5f5";
   const btnBorderColor = isDarkMode ? "#CCB68C" : "#CFAB95";
@@ -32,12 +30,8 @@ const ActivityScreenStyles = (isDarkMode) => {
   const textColor = isDarkMode ? "#fff" : "#000";
   const titleColor = isDarkMode ? "#fff" : "#000";
   const dropdownBackgroundColor = isDarkMode ? "#21201E" : "#eee";
-
   return StyleSheet.create({
-    searchIcon: {
-      paddingLeft: 10,
-      color: textColor,
-    },
+    searchIcon: { paddingLeft: 10, color: textColor },
     searchInput: {
       flex: 1,
       padding: 10,
@@ -74,23 +68,11 @@ const ActivityScreenStyles = (isDarkMode) => {
       zIndex: 999,
       overflow: "hidden",
     },
-    chainTag: {
-      paddingVertical: 10,
-      paddingHorizontal: 15,
-    },
-    selectedChainTag: {
-      backgroundColor: isDarkMode ? "#CCB68C" : "#ccc",
-    },
-    chainTagText: {
-      color: isDarkMode ? "#fff" : "#000",
-    },
-    selectedChainTagText: {
-      color: isDarkMode ? "#000" : "#fff",
-    },
-    container: {
-      flex: 1,
-      alignItems: "center",
-    },
+    chainTag: { paddingVertical: 10, paddingHorizontal: 15 },
+    selectedChainTag: { backgroundColor: isDarkMode ? "#CCB68C" : "#ccc" },
+    chainTagText: { color: isDarkMode ? "#fff" : "#000" },
+    selectedChainTagText: { color: isDarkMode ? "#000" : "#fff" },
+    container: { flex: 1, alignItems: "center" },
     modalContainer: {
       flex: 1,
       justifyContent: "center",
@@ -129,10 +111,7 @@ const ActivityScreenStyles = (isDarkMode) => {
       alignItems: "center",
       justifyContent: "space-between",
     },
-    tokenSelectText: {
-      color: "#fff",
-      marginRight: 5,
-    },
+    tokenSelectText: { color: "#fff", marginRight: 5 },
     swapButton: {
       backgroundColor: btnColor,
       padding: 6,
@@ -164,12 +143,7 @@ const ActivityScreenStyles = (isDarkMode) => {
       fontSize: FONT_SIZE_14,
       marginBottom: 20,
     },
-    addressText: {
-      color: secondTextColor,
-      flexWrap: "nowrap",
-      fontSize: 14,
-    },
-
+    addressText: { color: secondTextColor, flexWrap: "nowrap", fontSize: 14 },
     balanceModalSubtitle: {
       marginTop: 6,
       color: textColor,
@@ -182,20 +156,9 @@ const ActivityScreenStyles = (isDarkMode) => {
       fontSize: FONT_SIZE_16,
       fontSize: 16,
     },
-    balanceLabel: {
-      marginTop: 6,
-      color: textColor,
-      fontSize: 12,
-    },
-    AssetsValue: {
-      color: textColor,
-      fontSize: 12,
-    },
-    balanceSubtitle: {
-      color: secondTextColor,
-      fontSize: 14,
-      marginBottom: 6,
-    },
+    balanceLabel: { marginTop: 6, color: textColor, fontSize: 12 },
+    AssetsValue: { color: textColor, fontSize: 12 },
+    balanceSubtitle: { color: secondTextColor, fontSize: 14, marginBottom: 6 },
     bgContainer: {
       flex: 1,
       backgroundColor,
@@ -218,11 +181,7 @@ const ActivityScreenStyles = (isDarkMode) => {
       right: 0,
       borderRadius: 10,
     },
-    bluetoothImg: {
-      width: 150,
-      height: 150,
-      marginBottom: 30,
-    },
+    bluetoothImg: { width: 150, height: 150, marginBottom: 30 },
     bluetoothModalTitle: {
       color: textColor,
       fontSize: 20,
@@ -239,10 +198,7 @@ const ActivityScreenStyles = (isDarkMode) => {
       justifyContent: "space-between",
       alignItems: "center",
     },
-    BluetoothBtnText: {
-      color: "#fff",
-      fontSize: 16,
-    },
+    BluetoothBtnText: { color: "#fff", fontSize: 16 },
     buttonText: {
       color: textBtnColor,
       fontSize: 16,
@@ -281,10 +237,7 @@ const ActivityScreenStyles = (isDarkMode) => {
       alignItems: "center",
       marginTop: 20,
     },
-    cancelButtonText: {
-      color: secondTextColor,
-      fontSize: 16,
-    },
+    cancelButtonText: { color: secondTextColor, fontSize: 16 },
     cancelAddressButton: {
       borderWidth: 3,
       borderColor: buttonBackgroundColor,
@@ -331,10 +284,7 @@ const ActivityScreenStyles = (isDarkMode) => {
       backgroundColor: "#CCB68C",
       borderRadius: 5,
     },
-    disconnectButtonText: {
-      color: "#FFFFFF",
-      fontWeight: "bold",
-    },
+    disconnectButtonText: { color: "#FFFFFF", fontWeight: "bold" },
     historyContainer: {
       marginTop: 15,
       padding: 10,
@@ -346,22 +296,9 @@ const ActivityScreenStyles = (isDarkMode) => {
       width: "96%",
       height: "76%",
     },
-    historyItem: {
-      padding: 10,
-      marginBottom: 10,
-      /*       borderBottomWidth: 1,
-      borderBottomColor: historyItemBorderColor, */
-    },
-    historyItemText: {
-      fontSize: 16,
-      color: textColor,
-      marginBottom: 10,
-    },
-    historyTitle: {
-      fontSize: 16,
-      color: textColor,
-      fontWeight: "bold",
-    },
+    historyItem: { padding: 10, marginBottom: 10 },
+    historyItemText: { fontSize: 16, color: textColor, marginBottom: 10 },
+    historyTitle: { fontSize: 16, color: textColor, fontWeight: "bold" },
     input: {
       backgroundColor: inputBackgroundColor,
       padding: 10,
@@ -391,25 +328,14 @@ const ActivityScreenStyles = (isDarkMode) => {
       fontSize: 12,
       textAlign: "center",
     },
-    modalReceiveTitle: {
-      color: titleColor,
-      fontSize: 16,
-      fontWeight: "bold",
-    },
+    modalReceiveTitle: { color: titleColor, fontSize: 16, fontWeight: "bold" },
     modalSubtitle: {
       color: secondTextColor,
       fontSize: 14,
       textAlign: "center",
     },
-    modalText: {
-      color: secondTextColor,
-      textAlign: "center",
-    },
-    modalTitle: {
-      color: titleColor,
-      fontSize: 16,
-      fontWeight: "bold",
-    },
+    modalText: { color: secondTextColor, textAlign: "center" },
+    modalTitle: { color: titleColor, fontSize: 16, fontWeight: "bold" },
     modalView: {
       margin: 20,
       height: 500,
@@ -452,7 +378,6 @@ const ActivityScreenStyles = (isDarkMode) => {
       borderRadius: 30,
       height: 60,
       alignItems: "center",
-      //marginTop: 20,
     },
     optionButton: {
       backgroundColor: btnColor,
@@ -464,9 +389,7 @@ const ActivityScreenStyles = (isDarkMode) => {
       alignItems: "center",
       marginBottom: 16,
     },
-    optionButtonText: {
-      color: textBtnColor,
-    },
+    optionButtonText: { color: textBtnColor },
     passwordInput: {
       backgroundColor: inputBackgroundColor,
       paddingHorizontal: 15,
@@ -523,14 +446,8 @@ const ActivityScreenStyles = (isDarkMode) => {
       alignItems: "center",
       justifyContent: "center",
     },
-    scanModalSubtitle: {
-      color: secondTextColor,
-      fontSize: 14,
-    },
-    subButtonText: {
-      color: secondBtnTextColor,
-      fontSize: 12,
-    },
+    scanModalSubtitle: { color: secondTextColor, fontSize: 14 },
+    subButtonText: { color: secondBtnTextColor, fontSize: 12 },
     submitButton: {
       backgroundColor: btnColor,
       padding: 10,
@@ -541,10 +458,7 @@ const ActivityScreenStyles = (isDarkMode) => {
       alignItems: "center",
       marginBottom: 20,
     },
-    submitButtonText: {
-      color: textBtnColor,
-      fontSize: 16,
-    },
+    submitButtonText: { color: textBtnColor, fontSize: 16 },
     subtitleText: {
       fontSize: 14,
       color: secondTextColor,
@@ -558,11 +472,7 @@ const ActivityScreenStyles = (isDarkMode) => {
       marginBottom: 20,
       lineHeight: 30,
     },
-    transactionText: {
-      color: secondTextColor,
-      fontSize: 16,
-      marginBottom: 10,
-    },
+    transactionText: { color: secondTextColor, fontSize: 16, marginBottom: 10 },
     verifyAddressButton: {
       backgroundColor: btnColor,
       padding: 10,
@@ -575,5 +485,4 @@ const ActivityScreenStyles = (isDarkMode) => {
     },
   });
 };
-
 export default ActivityScreenStyles;
