@@ -4,6 +4,7 @@ import {
   FONT_SIZE_14,
   FONT_SIZE_16,
   FONT_SIZE_20,
+  FONT_SIZE_22,
   FONT_SIZE_24,
   FONT_SIZE_25,
   FONT_SIZE_36,
@@ -667,7 +668,7 @@ const VaultScreenStyles = (isDarkMode) => {
     // misc text / inputs
     securityTitle: {
       color: c.mutedText,
-      fontSize: 22, // 若你有 FONT_SIZE_22，可替换为常量
+      fontSize: FONT_SIZE_22, // 若你有 FONT_SIZE_22，可替换为常量
       textAlign: "center",
       marginBottom: 18,
     },
