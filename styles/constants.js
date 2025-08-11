@@ -6,13 +6,17 @@
 export const FONT_SIZE_11 = 11;
 export const FONT_SIZE_12 = 12;
 export const FONT_SIZE_13 = 13;
+export const FONT_SIZE_14 = 14;
 export const FONT_SIZE_15 = 15;
 export const FONT_SIZE_16 = 16;
 export const FONT_SIZE_17 = 17;
 export const FONT_SIZE_20 = 20;
 export const FONT_SIZE_22 = 22;
+export const FONT_SIZE_25 = 25;
 export const FONT_SIZE_28 = 28;
 export const FONT_SIZE_34 = 34;
+export const FONT_SIZE_36 = 36;
+export const FONT_SIZE_40 = 40;
 
 // 圆角
 export const RADIUS_5 = 5;
@@ -27,6 +31,13 @@ export const RADIUS_20 = 20;
 export const RADIUS_21 = 21;
 export const RADIUS_30 = 30;
 export const RADIUS_50 = 50;
+
+export const WHITE_50 = "#ffffff50";
+export const WHITE_80 = "#ffffff80";
+export const PURE_WHITE = "#FFF";
+export const HIGHLIGHT_COLOR = "#FF6347";
+export const TRANSPARENT_BLACK_20 = "rgba(0, 0, 0, 0.2)";
+export const TRANSPARENT_BLUE_10 = "rgba(108, 108, 244, 0.1)";
 
 // 颜色（明暗主题）
 export const lightColors = {
