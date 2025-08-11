@@ -11,8 +11,7 @@ export const FONT_SIZE_22 = 22;
 export const FONT_SIZE_28 = 28;
 export const FONT_SIZE_34 = 34;
 
-export const RADIUS_5 = 5;
-export const RADIUS_6 = 6;
+export const RADIUS_8 = 8;
 export const RADIUS_10 = 10;
 export const RADIUS_12 = 12;
 export const RADIUS_14 = 14;

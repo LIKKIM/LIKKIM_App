@@ -6,7 +6,7 @@ import {
   FONT_SIZE_20,
   FONT_SIZE_22,
   FONT_SIZE_34,
-  RADIUS_5,
+  RADIUS_8,
   RADIUS_10,
   RADIUS_20,
   RADIUS_30,
