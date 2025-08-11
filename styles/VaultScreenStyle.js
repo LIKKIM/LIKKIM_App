@@ -1,4 +1,3 @@
-// styles/VaultScreenStyle.js
 import { StyleSheet, Dimensions } from "react-native";
 import {
   FONT_SIZE_12,
@@ -22,7 +21,6 @@ import {
   RADIUS_30,
   RADIUS_50,
 } from "./constants";
-
 const VaultScreenStyles = (isDarkMode) => {
   const textColor = isDarkMode ? "#fff" : "#000";
   const modalBackgroundColor = isDarkMode ? "#3F3D3C" : "#ffffff";
@@ -39,7 +37,6 @@ const VaultScreenStyles = (isDarkMode) => {
   const borderColor = isDarkMode ? "#555" : "#ccc";
   const historyItemBorderColor = isDarkMode ? "#ccc" : "#999";
   const inputBackgroundColor = isDarkMode ? "#21201E" : "#e0e0e0";
-
   const { height } = Dimensions.get("window");
   const containerHeight = height < 700 ? height - 280 : height - 360;
   return StyleSheet.create({
@@ -66,7 +63,6 @@ const VaultScreenStyles = (isDarkMode) => {
       alignItems: "flex-start",
       marginBottom: 8,
     },
-
     cardIconContainer: {
       position: "absolute",
       top: 28,
@@ -93,7 +89,6 @@ const VaultScreenStyles = (isDarkMode) => {
       backgroundColor: "#ffffff80",
       overflow: "hidden",
     },
-
     TagChainIcon: {
       width: 14,
       height: 14,
@@ -102,11 +97,7 @@ const VaultScreenStyles = (isDarkMode) => {
       resizeMode: "contain",
       borderRadius: RADIUS_10,
     },
-    chainScrollView: {
-      marginBottom: 10,
-      height: 34,
-      paddingHorizontal: 10,
-    },
+    chainScrollView: { marginBottom: 10, height: 34, paddingHorizontal: 10 },
     chainTag: {
       flexDirection: "row",
       alignItems: "center",
@@ -116,21 +107,10 @@ const VaultScreenStyles = (isDarkMode) => {
       borderRadius: 6,
       backgroundColor: addCryptoButtonBackgroundColor,
     },
-    selectedChainTag: {
-      backgroundColor: buttonBackgroundColor,
-    },
-    chainTagText: {
-      fontSize: 14,
-      color: textColor,
-    },
-    selectedChainTagText: {
-      color: textColor,
-    },
-
-    cardName: {
-      fontSize: FONT_SIZE_16,
-      fontWeight: "bold",
-    },
+    selectedChainTag: { backgroundColor: buttonBackgroundColor },
+    chainTagText: { fontSize: 14, color: textColor },
+    selectedChainTagText: { color: textColor },
+    cardName: { fontSize: FONT_SIZE_16, fontWeight: "bold" },
     chainContainer: {
       backgroundColor: tagColor,
       alignSelf: "flex-start",
@@ -139,16 +119,8 @@ const VaultScreenStyles = (isDarkMode) => {
       borderRadius: 6,
       marginTop: 3,
     },
-    chainText: {
-      fontSize: 12,
-      fontWeight: "bold",
-    },
-    chainCardText: {
-      color: textColor,
-      fontSize: 12,
-      fontWeight: "bold",
-    },
-
+    chainText: { fontSize: 12, fontWeight: "bold" },
+    chainCardText: { color: textColor, fontSize: 12, fontWeight: "bold" },
     disconnectButton: {
       marginLeft: 10,
       paddingVertical: 5,
@@ -156,10 +128,7 @@ const VaultScreenStyles = (isDarkMode) => {
       backgroundColor: "#CCB68C",
       borderRadius: 5,
     },
-    disconnectButtonText: {
-      color: "#FFFFFF",
-      fontWeight: "bold",
-    },
+    disconnectButtonText: { color: "#FFFFFF", fontWeight: "bold" },
     submitButton: {
       backgroundColor: buttonBackgroundColor,
       padding: 10,
@@ -170,15 +139,8 @@ const VaultScreenStyles = (isDarkMode) => {
       justifyContent: "center",
       marginTop: 20,
     },
-    submitButtonText: {
-      color: textColor,
-      fontSize: 16,
-    },
-    mainButtonText: {
-      color: "#FFF",
-      fontSize: 16,
-    },
-
+    submitButtonText: { color: textColor, fontSize: 16 },
+    mainButtonText: { color: "#FFF", fontSize: 16 },
     SecurityCodeModalTitle: {
       color: textColor,
       fontSize: 20,
@@ -197,7 +159,6 @@ const VaultScreenStyles = (isDarkMode) => {
       justifyContent: "space-between",
       alignItems: "center",
     },
-
     passwordInput: {
       backgroundColor: inputBackgroundColor,
       paddingHorizontal: 15,
@@ -207,17 +168,13 @@ const VaultScreenStyles = (isDarkMode) => {
       width: "100%",
       color: textColor,
     },
-
     deviceItemContainer: {
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "center",
       marginTop: 20,
     },
-    deviceIcon: {
-      paddingRight: 4,
-    },
-
+    deviceIcon: { paddingRight: 4 },
     cancelButtonLookingFor: {
       borderColor: buttonBackgroundColor,
       borderWidth: 3,
@@ -229,7 +186,6 @@ const VaultScreenStyles = (isDarkMode) => {
       alignItems: "center",
       marginTop: 20,
     },
-
     bluetoothModalView: {
       margin: 20,
       height: 500,
@@ -240,22 +196,14 @@ const VaultScreenStyles = (isDarkMode) => {
       justifyContent: "space-between",
       alignItems: "center",
     },
-    bluetoothImg: {
-      width: 150,
-      height: 150,
-      marginBottom: 30,
-    },
-    BluetoothBtnText: {
-      color: "#fff",
-      fontSize: 16,
-    },
+    bluetoothImg: { width: 150, height: 150, marginBottom: 30 },
+    BluetoothBtnText: { color: "#fff", fontSize: 16 },
     bluetoothModalTitle: {
       color: textColor,
       fontSize: 20,
       fontWeight: "bold",
       marginBottom: 10,
     },
-
     sendNftText: {
       fontSize: 14,
       color: secondTextColor,
@@ -263,7 +211,6 @@ const VaultScreenStyles = (isDarkMode) => {
       marginBottom: 20,
       flexWrap: "wrap",
     },
-
     subtitleText: {
       fontSize: 14,
       color: secondTextColor,
@@ -272,18 +219,8 @@ const VaultScreenStyles = (isDarkMode) => {
       flexWrap: "wrap",
       width: 326,
     },
-    addressText: {
-      color: secondTextColor,
-      flexWrap: "nowrap",
-
-      fontSize: 14,
-    },
-
-    cancelButtonText: {
-      color: textColor,
-      fontSize: 16,
-    },
-
+    addressText: { color: secondTextColor, flexWrap: "nowrap", fontSize: 14 },
+    cancelButtonText: { color: textColor, fontSize: 16 },
     receiveModalView: {
       margin: 20,
       height: 600,
@@ -294,36 +231,17 @@ const VaultScreenStyles = (isDarkMode) => {
       justifyContent: "space-between",
       alignItems: "center",
     },
-
-    tabButton: {
-      padding: 20,
-      marginHorizontal: 60,
-      zIndex: 11,
-    },
+    tabButton: { padding: 20, marginHorizontal: 60, zIndex: 11 },
     activeTabButton: {
       padding: 20,
       borderBottomWidth: 2,
       borderBottomColor: "#CCB68C",
       marginHorizontal: 60,
     },
-    activeTabButtonText: {
-      fontSize: 16,
-      color: textColor,
-    },
-    tabButtonText: {
-      fontSize: 16,
-      color: secondTextColor,
-    },
-
-    historyItemText: {
-      fontSize: 16,
-      color: textColor,
-      marginBottom: 10,
-    },
-    historyList: {
-      width: 326,
-      marginBottom: 20,
-    },
+    activeTabButtonText: { fontSize: 16, color: textColor },
+    tabButtonText: { fontSize: 16, color: secondTextColor },
+    historyItemText: { fontSize: 16, color: textColor, marginBottom: 10 },
+    historyList: { width: 326, marginBottom: 20 },
     historyItem: {
       paddingVertical: 10,
       borderBottomWidth: 1,
@@ -351,12 +269,7 @@ const VaultScreenStyles = (isDarkMode) => {
       justifyContent: "center",
       height: 300,
     },
-    priceContainer: {
-      width: "100%",
-      paddingHorizontal: 20,
-      height: "100%",
-    },
-
+    priceContainer: { width: "100%", paddingHorizontal: 20, height: "100%" },
     searchContainer: {
       flexDirection: "row",
       alignItems: "center",
@@ -365,39 +278,18 @@ const VaultScreenStyles = (isDarkMode) => {
       backgroundColor: isDarkMode ? "#21201E" : "#E5E1E9",
       marginBottom: 20,
     },
-    searchInput: {
-      flex: 1,
-      padding: 10,
-      borderRadius: 10,
-      color: textColor,
-    },
-    searchIcon: {
-      paddingLeft: 10,
-      color: textColor,
-    },
-
+    searchInput: { flex: 1, padding: 10, borderRadius: 10, color: textColor },
+    searchIcon: { paddingLeft: 10, color: textColor },
     linearGradient: {
       flex: 1,
       height: Dimensions.get("window").height,
       backgroundColor: backgroundColor,
-
       alignItems: "center",
       justifyContent: "center",
     },
-    scrollViewContent: {
-      justifyContent: "start",
-      alignItems: "center",
-    },
-    scrollView: {
-      width: "100%",
-      paddingHorizontal: 0,
-    },
-
-    totalBalanceContainer: {
-      width: 326,
-      height: 80,
-      marginBottom: 20,
-    },
+    scrollViewContent: { justifyContent: "start", alignItems: "center" },
+    scrollView: { width: "100%", paddingHorizontal: 0 },
+    totalBalanceContainer: { width: 326, height: 80, marginBottom: 20 },
     totalBalanceText: {
       fontSize: 16,
       marginVertical: 10,
@@ -417,7 +309,6 @@ const VaultScreenStyles = (isDarkMode) => {
       color: currencyUnitColor,
       fontWeight: "normal",
     },
-
     addWalletImage: {
       width: 326,
       height: 206,
@@ -432,37 +323,18 @@ const VaultScreenStyles = (isDarkMode) => {
       shadowRadius: 20,
       elevation: 10,
     },
-    addWalletImageBorder: {
-      borderRadius: 20,
-    },
+    addWalletImageBorder: { borderRadius: 20 },
     addWalletButton: {
       width: "100%",
       height: "100%",
       justifyContent: "center",
       alignItems: "center",
     },
-    addWalletButtonText: {
-      color: "#fff",
-      fontSize: 20,
-      fontWeight: "bold",
-    },
-
-    cardContainer: {
-      position: "relative",
-      marginBottom: -130,
-    },
-    cardIcon: {
-      width: 42,
-      height: 42,
-    },
-    chainIcon: {
-      width: 14,
-      height: 14,
-    },
-    cardShortName: {
-      color: secondCardTextColor,
-      fontSize: 14,
-    },
+    addWalletButtonText: { color: "#fff", fontSize: 20, fontWeight: "bold" },
+    cardContainer: { position: "relative", marginBottom: -130 },
+    cardIcon: { width: 42, height: 42 },
+    chainIcon: { width: 14, height: 14 },
+    cardShortName: { color: secondCardTextColor, fontSize: 14 },
     cardBalance: {
       position: "absolute",
       top: 25,
@@ -471,10 +343,7 @@ const VaultScreenStyles = (isDarkMode) => {
       fontSize: 16,
       fontWeight: "bold",
     },
-    balanceShortName: {
-      color: secondCardTextColor,
-      fontSize: 14,
-    },
+    balanceShortName: { color: secondCardTextColor, fontSize: 14 },
     priceChangeView: {
       position: "absolute",
       display: "flex",
@@ -491,10 +360,7 @@ const VaultScreenStyles = (isDarkMode) => {
       fontWeight: "bold",
       marginBottom: 8,
     },
-    balanceShortNameCenter: {
-      color: secondCardTextColor,
-      fontSize: 14,
-    },
+    balanceShortNameCenter: { color: secondCardTextColor, fontSize: 14 },
     card: {
       width: 326,
       height: 206,
@@ -519,7 +385,6 @@ const VaultScreenStyles = (isDarkMode) => {
       shadowRadius: 30,
       elevation: 5,
     },
-
     Button: {
       backgroundColor: buttonBackgroundColor,
       padding: 10,
@@ -604,7 +469,6 @@ const VaultScreenStyles = (isDarkMode) => {
       alignItems: "center",
       marginTop: 20,
     },
-
     centeredView: {
       flex: 1,
       justifyContent: "center",
@@ -628,7 +492,6 @@ const VaultScreenStyles = (isDarkMode) => {
       padding: 30,
       alignItems: "center",
     },
-
     NFTmodalView: {
       width: "90%",
       backgroundColor: modalBackgroundColor,
@@ -637,7 +500,6 @@ const VaultScreenStyles = (isDarkMode) => {
       aspectRatio: 9 / 16,
       justifyContent: "space-between",
     },
-
     ContactFormModal: {
       width: "90%",
       backgroundColor: modalBackgroundColor,
@@ -645,7 +507,6 @@ const VaultScreenStyles = (isDarkMode) => {
       padding: 30,
       justifyContent: "space-between",
     },
-
     pendingModalView: {
       margin: 20,
       width: "90%",
@@ -672,7 +533,6 @@ const VaultScreenStyles = (isDarkMode) => {
       padding: 30,
       alignItems: "center",
     },
-
     modalButton: {
       backgroundColor: BluetoothBtnColor,
       padding: 10,
@@ -703,14 +563,8 @@ const VaultScreenStyles = (isDarkMode) => {
       alignItems: "center",
       marginTop: 20,
     },
-    confirmText: {
-      color: "#ffffff",
-      fontSize: 16,
-    },
-    disabledText: {
-      color: "#ccc",
-      fontSize: 16,
-    },
+    confirmText: { color: "#ffffff", fontSize: 16 },
+    disabledText: { color: "#ccc", fontSize: 16 },
     QRImg: {
       width: 25,
       height: 25,
@@ -739,23 +593,14 @@ const VaultScreenStyles = (isDarkMode) => {
       alignItems: "center",
       marginTop: 20,
     },
-
-    ButtonText: {
-      color: textColor,
-      fontSize: 16,
-    },
-    NFTButtonText: {
-      color: textColor,
-      fontSize: 16,
-      textAlign: "center",
-    },
+    ButtonText: { color: textColor, fontSize: 16 },
+    NFTButtonText: { color: textColor, fontSize: 16, textAlign: "center" },
     processButtonText: {
       color: secondTextColor,
       fontSize: 16,
       marginBottom: 45,
       fontWeight: "bold",
     },
-
     addCryptoModalView: {
       margin: 20,
       maxHeight: "86%",
@@ -765,10 +610,7 @@ const VaultScreenStyles = (isDarkMode) => {
       padding: 30,
       alignItems: "center",
     },
-    addCryptoScrollView: {
-      width: "100%",
-      height: 380,
-    },
+    addCryptoScrollView: { width: "100%", height: 380 },
     addCryptoButton: {
       width: "100%",
       padding: 6,
@@ -785,10 +627,7 @@ const VaultScreenStyles = (isDarkMode) => {
       justifyContent: "center",
       alignItems: "center",
     },
-    addCardIcon: {
-      width: 30,
-      height: 30,
-    },
+    addCardIcon: { width: 30, height: 30 },
     overlay: {
       ...StyleSheet.absoluteFillObject,
       backgroundColor: "rgba(108, 108, 244, 0.1)",
@@ -806,10 +645,7 @@ const VaultScreenStyles = (isDarkMode) => {
       textShadowOffset: { width: 1, height: 1 },
       textShadowRadius: 3,
     },
-    iconAndTextContainer: {
-      flexDirection: "row",
-      alignItems: "center",
-    },
+    iconAndTextContainer: { flexDirection: "row", alignItems: "center" },
     addCryptoText: {
       marginTop: 6,
       marginRight: 4,
@@ -817,31 +653,20 @@ const VaultScreenStyles = (isDarkMode) => {
       fontWeight: "bold",
       textAlign: "center",
     },
-
     modalHeader: {
       width: "100%",
       flexDirection: "row",
       justifyContent: "flex-end",
       alignItems: "center",
     },
-    modalTitle: {
-      color: textColor,
-      fontSize: 16,
-      fontWeight: "bold",
-    },
-    NFTtext: {
-      color: textColor,
-      fontSize: 16,
-    },
+    modalTitle: { color: textColor, fontSize: 16, fontWeight: "bold" },
+    NFTtext: { color: textColor, fontSize: 16 },
     modalSubtitle: {
       color: secondTextColor,
       fontSize: 14,
       textAlign: "center",
     },
-    scanModalSubtitle: {
-      color: secondTextColor,
-      fontSize: 14,
-    },
+    scanModalSubtitle: { color: secondTextColor, fontSize: 14 },
     alertModalTitle: {
       color: textColor,
       fontSize: 16,
@@ -861,7 +686,6 @@ const VaultScreenStyles = (isDarkMode) => {
       fontSize: 16,
       fontWeight: "bold",
     },
-
     dropdown: {
       position: "absolute",
       right: 0,
@@ -871,32 +695,12 @@ const VaultScreenStyles = (isDarkMode) => {
       padding: 10,
       zIndex: 3,
     },
-    dropdownButton: {
-      padding: 10,
-    },
-    dropdownButtonText: {
-      color: textColor,
-      fontSize: 16,
-    },
-
-    modalIconContainer: {
-      flexDirection: "row",
-      alignItems: "center",
-    },
-    modalIcon: {
-      width: 24,
-      height: 24,
-      marginRight: 8,
-    },
-    modalCryptoName: {
-      color: textColor,
-      textAlign: "center",
-      fontSize: 16,
-    },
-
-    BalanceView: {
-      paddingBottom: 200,
-    },
+    dropdownButton: { padding: 10 },
+    dropdownButtonText: { color: textColor, fontSize: 16 },
+    modalIconContainer: { flexDirection: "row", alignItems: "center" },
+    modalIcon: { width: 24, height: 24, marginRight: 8 },
+    modalCryptoName: { color: textColor, textAlign: "center", fontSize: 16 },
+    BalanceView: { paddingBottom: 200 },
     modalBalanceLabel: {
       color: textColor,
       textAlign: "center",
@@ -910,7 +714,6 @@ const VaultScreenStyles = (isDarkMode) => {
       fontSize: 40,
       marginBottom: 30,
     },
-
     walletInfoText: {
       color: "#676776",
       fontSize: 16,
@@ -922,26 +725,19 @@ const VaultScreenStyles = (isDarkMode) => {
       justifyContent: "center",
       paddingHorizontal: 20,
     },
-
     securityTitle: {
       color: secondTextColor,
       fontSize: 22,
       textAlign: "center",
       marginBottom: 18,
     },
-
     centeredContent: {
       flex: 1,
       justifyContent: "center",
       alignItems: "center",
       paddingVertical: 20,
     },
-
-    highlightText: {
-      color: "#FF6347",
-      textAlign: "left",
-    },
-
+    highlightText: { color: "#FF6347", textAlign: "left" },
     textInput: {
       width: "100%",
       height: 300,
@@ -965,5 +761,4 @@ const VaultScreenStyles = (isDarkMode) => {
     },
   });
 };
-
 export default VaultScreenStyles;
