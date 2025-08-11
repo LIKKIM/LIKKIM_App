@@ -289,16 +289,17 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
       alignItems: "center",
     },
     listContainer: { flexDirection: "row", alignItems: "center", flex: 1 },
-    modalSubtitle: {
-      color: secondTextColor,
-      fontSize: FONT_SIZE_15,
-      textAlign: "center",
-    },
+
     modalTitle: {
       color: textColor,
       fontSize: FONT_SIZE_16,
       fontWeight: "bold",
       marginBottom: 15,
+    },
+    modalSubtitle: {
+      color: secondTextColor,
+      fontSize: FONT_SIZE_15,
+      textAlign: "center",
     },
     modalView: {
       margin: 20,

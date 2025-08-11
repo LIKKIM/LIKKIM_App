@@ -1379,145 +1379,144 @@ const SecureDeviceStatus = ({
               style={VaultScreenStyle.NFTmodalView}
               onStartShouldSetResponder={(e) => e.stopPropagation()}
             >
-              {selectedNFT ? (
-                <View>
-                  {selectedNFT.logoUrl ? (
-                    <SkeletonImage
-                      source={{ uri: selectedNFT.logoUrl }}
-                      style={{
-                        width: "100%",
-
-                        aspectRatio: 1,
-                        borderRadius: 8,
-                        marginBottom: 8,
-                      }}
-                      resizeMode="cover"
-                    />
-                  ) : (
-                    <View
-                      style={{
-                        width: "100%",
-                        aspectRatio: 1,
-                        borderRadius: 8,
-                        backgroundColor: "#ccc",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        marginBottom: 8,
-                      }}
-                    >
-                      <Image
-                        source={require("../../assets/Logo@500.png")}
+              <View>
+                {selectedNFT ? (
+                  <View>
+                    {selectedNFT.logoUrl ? (
+                      <SkeletonImage
+                        source={{ uri: selectedNFT.logoUrl }}
                         style={{
-                          position: "absolute",
-                          width: "50%",
-                          height: "50%",
-                          opacity: 0.2,
-                          resizeMode: "contain",
-                          top: "25%",
-                          left: "25%",
+                          width: "100%",
+
+                          aspectRatio: 1,
+                          borderRadius: 8,
+                          marginBottom: 8,
                         }}
+                        resizeMode="cover"
                       />
-                      <Text
-                        style={[
-                          VaultScreenStyle.modalSubtitle,
-                          {
-                            color: "#eee",
-                            fontWeight: "bold",
-                            position: "absolute",
-                            fontSize: 16,
-                            textAlign: "center",
-                          },
-                        ]}
+                    ) : (
+                      <View
+                        style={{
+                          width: "100%",
+                          aspectRatio: 1,
+                          borderRadius: 8,
+                          backgroundColor: "#ccc",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          marginBottom: 8,
+                        }}
                       >
-                        {t("No Image")}
-                      </Text>
-                    </View>
-                  )}
-                  <ScrollView
-                    showsVerticalScrollIndicator={true}
-                    style={{
-                      height: 170,
-                      marginVertical: 20,
-                    }}
-                    contentContainerStyle={{
-                      flexGrow: 1,
-                    }}
-                  >
-                    <View
-                      style={{
-                        flex: 1,
-                        justifyContent: "space-between",
+                        <Image
+                          source={require("../../assets/Logo@500.png")}
+                          style={{
+                            position: "absolute",
+                            width: "50%",
+                            height: "50%",
+                            opacity: 0.2,
+                            resizeMode: "contain",
+                            top: "25%",
+                            left: "25%",
+                          }}
+                        />
+                        <Text
+                          style={[
+                            VaultScreenStyle.modalSubtitle,
+                            {
+                              color: "#eee",
+                              fontWeight: "bold",
+                              position: "absolute",
+                              fontSize: 16,
+                              textAlign: "center",
+                            },
+                          ]}
+                        >
+                          {t("No Image")}
+                        </Text>
+                      </View>
+                    )}
+
+                    <ScrollView
+                      showsVerticalScrollIndicator={true}
+                      style={{ flexGrow: 0, height: 170, marginVertical: 20 }}
+                      contentContainerStyle={{
+                        flexGrow: 1,
                       }}
                     >
-                      {/* NFT 名称 */}
-                      <Text
-                        style={[
-                          VaultScreenStyle.modalTitle,
-                          { marginBottom: 6 },
-                        ]}
+                      <View
+                        style={{
+                          flex: 1,
+                          justifyContent: "space-between",
+                        }}
                       >
-                        {selectedNFT.name || t("NFT Card")}
-                      </Text>
-
-                      {/* 合约地址 */}
-                      <Text
-                        style={[
-                          VaultScreenStyle.chainCardText,
-                          { marginBottom: 4 },
-                        ]}
-                      >
-                        {t("Contract")}: {selectedNFT.tokenContractAddress}
-                      </Text>
-
-                      {/* Token ID */}
-                      <Text
-                        style={[
-                          VaultScreenStyle.chainCardText,
-                          { marginBottom: 4 },
-                        ]}
-                      >
-                        {t("Token ID")}: {selectedNFT.tokenId}
-                      </Text>
-
-                      {/* 协议类型 */}
-                      <Text
-                        style={[
-                          VaultScreenStyle.chainCardText,
-                          { marginBottom: 4 },
-                        ]}
-                      >
-                        {t("Protocol")}: {selectedNFT.protocolType || t("N/A")}
-                      </Text>
-                      <Text style={VaultScreenStyle.chainCardText}>
-                        {t("Description")}: {selectedNFT.des || t("N/A")}
-                      </Text>
-                      {/* 价格信息，如果存在 */}
-                      {selectedNFT.lastPrice && (
+                        {/* NFT 名称 */}
                         <Text
                           style={[
                             VaultScreenStyle.modalTitle,
-                            { marginTop: 8 },
+                            { marginBottom: 6 },
                           ]}
                         >
-                          {t("Price")}: {selectedNFT.lastPrice}{" "}
-                          {selectedNFT.lastPriceUnit || t("N/A")}
+                          {selectedNFT.name || t("NFT Card")}
                         </Text>
-                      )}
-                    </View>
-                  </ScrollView>
-                </View>
-              ) : (
-                <Text
-                  style={[
-                    VaultScreenStyle.modalSubtitle,
-                    { textAlign: "center" },
-                  ]}
-                >
-                  {t("No NFT Data")}
-                </Text>
-              )}
 
-              {/* Add Send and 收藏到冷钱包 buttons */}
+                        {/* 合约地址 */}
+                        <Text
+                          style={[
+                            VaultScreenStyle.chainCardText,
+                            { marginBottom: 4 },
+                          ]}
+                        >
+                          {t("Contract")}: {selectedNFT.tokenContractAddress}
+                        </Text>
+
+                        {/* Token ID */}
+                        <Text
+                          style={[
+                            VaultScreenStyle.chainCardText,
+                            { marginBottom: 4 },
+                          ]}
+                        >
+                          {t("Token ID")}: {selectedNFT.tokenId}
+                        </Text>
+
+                        {/* 协议类型 */}
+                        <Text
+                          style={[
+                            VaultScreenStyle.chainCardText,
+                            { marginBottom: 4 },
+                          ]}
+                        >
+                          {t("Protocol")}:{" "}
+                          {selectedNFT.protocolType || t("N/A")}
+                        </Text>
+                        <Text style={VaultScreenStyle.chainCardText}>
+                          {t("Description")}: {selectedNFT.des || t("N/A")}
+                        </Text>
+                        {/* 价格信息，如果存在 */}
+                        {selectedNFT.lastPrice && (
+                          <Text
+                            style={[
+                              VaultScreenStyle.modalTitle,
+                              { marginTop: 8 },
+                            ]}
+                          >
+                            {t("Price")}: {selectedNFT.lastPrice}{" "}
+                            {selectedNFT.lastPriceUnit || t("N/A")}
+                          </Text>
+                        )}
+                      </View>
+                    </ScrollView>
+                  </View>
+                ) : (
+                  <Text
+                    style={[
+                      VaultScreenStyle.modalSubtitle,
+                      { textAlign: "center" },
+                    ]}
+                  >
+                    {t("No NFT Data")}
+                  </Text>
+                )}
+              </View>
               <View
                 style={{
                   flexDirection: "row",
@@ -1602,7 +1601,8 @@ const SecureDeviceStatus = ({
                     />
                   )}
                   <ScrollView
-                    style={{ flexDirection: "column", flex: 1, height: 60 }}
+                    style={{ flex: 1, height: 60 }}
+                    contentContainerStyle={{ alignItems: "flex-start" }}
                   >
                     <Text
                       style={[
@@ -1612,7 +1612,7 @@ const SecureDeviceStatus = ({
                     >
                       {selectedNFT?.name || "NFT Name"}
                     </Text>
-                    <Text style={VaultScreenStyle.NFTtext}>
+                    <Text style={VaultScreenStyle.modalSubtitle}>
                       {t("Token ID")}: {selectedNFT?.tokenId || "N/A"}
                     </Text>
                   </ScrollView>
