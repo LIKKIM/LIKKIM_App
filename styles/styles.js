@@ -1,30 +1,16 @@
-// styles.js
 import { StyleSheet } from "react-native";
-
 export const lightTheme = StyleSheet.create({
-  settingsText: {
-    marginLeft: 10,
-    fontSize: 16,
-    color: "#21201E",
-  },
+  settingsText: { marginLeft: 10, fontSize: 16, color: "#21201E" },
   titleText: {
     color: "#21201E",
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 20,
   },
-  container: {
-    backgroundColor: "#ddd",
-  },
-  headerStyle: {
-    backgroundColor: "#fff",
-  },
-  headerRight: {
-    backgroundColor: "#ddd",
-  },
-  addIconButton: {
-    backgroundColor: "#fff",
-  },
+  container: { backgroundColor: "#ddd" },
+  headerStyle: { backgroundColor: "#fff" },
+  headerRight: { backgroundColor: "#ddd" },
+  addIconButton: { backgroundColor: "#fff" },
   dropdown: {
     position: "absolute",
     right: 20,
@@ -34,36 +20,20 @@ export const lightTheme = StyleSheet.create({
     padding: 10,
     zIndex: 1,
   },
-  dropdownButtonText: {
-    color: "#000",
-    fontSize: 16,
-  },
+  dropdownButtonText: { color: "#000", fontSize: 16 },
 });
-
 export const darkTheme = StyleSheet.create({
-  settingsText: {
-    marginLeft: 10,
-    fontSize: 16,
-    color: "#fff",
-  },
+  settingsText: { marginLeft: 10, fontSize: 16, color: "#fff" },
   titleText: {
     color: "#fff",
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 20,
   },
-  container: {
-    backgroundColor: "#121212",
-  },
-  headerStyle: {
-    backgroundColor: "#21201E",
-  },
-  headerRight: {
-    backgroundColor: "#21201E",
-  },
-  addIconButton: {
-    backgroundColor: "#21201E",
-  },
+  container: { backgroundColor: "#121212" },
+  headerStyle: { backgroundColor: "#21201E" },
+  headerRight: { backgroundColor: "#21201E" },
+  addIconButton: { backgroundColor: "#21201E" },
   dropdown: {
     position: "absolute",
     right: 20,
@@ -73,16 +43,10 @@ export const darkTheme = StyleSheet.create({
     padding: 10,
     zIndex: 1,
   },
-  dropdownButtonText: {
-    color: "#fff",
-    fontSize: 16,
-  },
+  dropdownButtonText: { color: "#fff", fontSize: 16 },
 });
-
 const styles = StyleSheet.create({
-  dropdownButton: {
-    padding: 10,
-  },
+  dropdownButton: { padding: 10 },
   addIconButtonCommon: {
     marginRight: 16,
     borderRadius: 14,
@@ -91,12 +55,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  scrollView: {
-    width: "100%",
-  },
-  contentContainer: {
-    flexGrow: 1,
-  },
+  scrollView: { width: "100%" },
+  contentContainer: { flexGrow: 1 },
   settingsItem: {
     flexDirection: "row",
     justifyContent: "flex-start",
@@ -105,11 +65,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: "#404040",
   },
-  settingsText: {
-    marginLeft: 10,
-    fontSize: 16,
-    color: "#fff",
-  },
+  settingsText: { marginLeft: 10, fontSize: 16, color: "#fff" },
   container: {
     flex: 1,
     backgroundColor: "#121212",
@@ -117,10 +73,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 20,
   },
-  safeArea: {
-    flex: 1,
-    backgroundColor: "#121212",
-  },
+  safeArea: { flex: 1, backgroundColor: "#121212" },
   card: {
     width: 300,
     height: 170,
@@ -140,11 +93,7 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     backgroundColor: "rgba(108, 108, 244, 0.1)",
   },
-  cardText: {
-    color: "white",
-    fontSize: 16,
-    fontWeight: "bold",
-  },
+  cardText: { color: "white", fontSize: 16, fontWeight: "bold" },
   roundButton: {
     backgroundColor: "#3F3D3C",
     borderRadius: 30,
@@ -156,21 +105,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginBottom: 20,
   },
-  buttonText: {
-    color: "#e0e0e0",
-    fontSize: 16,
-    fontWeight: "bold",
-  },
+  buttonText: { color: "#e0e0e0", fontSize: 16, fontWeight: "bold" },
   titleText: {
     color: "white",
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 20,
   },
-  subButtonText: {
-    color: "#e0e0e0",
-    fontSize: 12,
-  },
+  subButtonText: { color: "#e0e0e0", fontSize: 12 },
   centeredView: {
     flex: 1,
     justifyContent: "center",
@@ -221,10 +163,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     textAlign: "left",
   },
-  languageList: {
-    maxHeight: 320,
-    width: 280,
-  },
+  languageList: { maxHeight: 320, width: 280 },
   languageCancelButton: {
     backgroundColor: "#CCB68C",
     padding: 10,
@@ -252,28 +191,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#ffffff",
   },
-  noHistoryText: {
-    fontSize: 16,
-    color: "#ffffff",
-    textAlign: "center",
-  },
-  historyItem: {
-    padding: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: "#ccc",
-  },
-  historyItemText: {
-    fontSize: 16,
-    color: "#000",
-  },
-  modalText: {
-    color: "#ffffff",
-    textAlign: "center",
-    marginBottom: 120,
-  },
-  optionButtonText: {
-    color: "#ffffff",
-  },
+  noHistoryText: { fontSize: 16, color: "#ffffff", textAlign: "center" },
+  historyItem: { padding: 10, borderBottomWidth: 1, borderBottomColor: "#ccc" },
+  historyItemText: { fontSize: 16, color: "#000" },
+  modalText: { color: "#ffffff", textAlign: "center", marginBottom: 120 },
+  optionButtonText: { color: "#ffffff" },
   optionButton: {
     backgroundColor: "#CCB68C",
     padding: 10,
@@ -314,12 +236,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 60,
   },
-  submitButtonText: {
-    color: "#ffffff",
-  },
-  cancelButtonText: {
-    color: "#ffffff",
-  },
+  submitButtonText: { color: "#ffffff" },
+  cancelButtonText: { color: "#ffffff" },
 });
-
 export default styles;
