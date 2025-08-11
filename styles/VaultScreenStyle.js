@@ -6,7 +6,7 @@ import {
   FONT_SIZE_20,
   FONT_SIZE_22,
   FONT_SIZE_24,
-  FONT_SIZE_25,
+  FONT_SIZE_28,
   FONT_SIZE_34,
   RADIUS_5,
   RADIUS_6,
@@ -217,7 +217,7 @@ const VaultScreenStyles = (isDarkMode) => {
     },
     cardBalanceCenter: {
       color: "#fff",
-      fontSize: FONT_SIZE_25,
+      fontSize: FONT_SIZE_28,
       fontWeight: "bold",
       marginBottom: 8,
     },
