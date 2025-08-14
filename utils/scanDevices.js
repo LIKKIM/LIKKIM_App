@@ -34,10 +34,25 @@ export function scanDevices({
             }
           } else if (device.name && device.name.includes("LUKKEY")) {
             setDevices((prevDevices) => {
-              if (!prevDevices.find((d) => d.id === device.id)) {
+              const existingIndex = prevDevices.findIndex(
+                (d) => d.id === device.id
+              );
+              if (existingIndex === -1) {
+                // 新设备，直接添加
                 return [...prevDevices, device];
+              } else {
+                // 已存在，若名称有变化则更新
+                const existingDevice = prevDevices[existingIndex];
+                if (existingDevice.name !== device.name) {
+                  const updatedDevices = [...prevDevices];
+                  updatedDevices[existingIndex] = {
+                    ...existingDevice,
+                    ...device,
+                  };
+                  return updatedDevices;
+                }
+                return prevDevices;
               }
-              return prevDevices;
             });
           }
         }
