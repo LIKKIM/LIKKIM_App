@@ -118,7 +118,7 @@ const BluetoothModal = ({
       visible={visible}
       onRequestClose={onCancel}
     >
-      <BlurView intensity={10} style={SecureDeviceScreenStyle.centeredView}>
+      <BlurView intensity={0} style={SecureDeviceScreenStyle.centeredView}>
         <View style={SecureDeviceScreenStyle.bluetoothModalView}>
           <Text style={SecureDeviceScreenStyle.bluetoothModalTitle}>
             {t("LOOKING FOR DEVICES")}
