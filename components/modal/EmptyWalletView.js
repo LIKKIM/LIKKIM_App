@@ -52,8 +52,8 @@ const EmptyWalletView = ({
 
     Animated.sequence([
       Animated.timing(scaleAnim, {
-        toValue: 0.95, // 缩小幅度小一点
-        duration: 200, // 慢一点
+        toValue: 0.97, // 缩小幅度小一点
+        duration: 100, // 慢一点
         useNativeDriver: true,
       }),
     ]).start();
@@ -83,7 +83,7 @@ const EmptyWalletView = ({
 
     Animated.sequence([
       Animated.timing(scaleAnim, {
-        toValue: 1.05,
+        toValue: 1.03,
         duration: 100,
         useNativeDriver: true,
       }),
