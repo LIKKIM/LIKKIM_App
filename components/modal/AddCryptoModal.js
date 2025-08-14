@@ -48,7 +48,7 @@ const AddCryptoModal = ({
         }),
         Animated.timing(intensityAnim, {
           toValue: 20,
-          duration: 300,
+          duration: 200,
           useNativeDriver: false,
         }),
       ]).start();
@@ -87,12 +87,24 @@ const AddCryptoModal = ({
     }
   };
 
+  // 关闭动画并回调
+  const handleClose = () => {
+    Animated.timing(intensityAnim, {
+      toValue: 0,
+      duration: 400,
+      useNativeDriver: false,
+    }).start(() => {
+      setShowModal(false);
+      if (onClose) onClose();
+    });
+  };
+
   return (
     <Modal
       animationType="slide"
       transparent={true}
       visible={showModal}
-      onRequestClose={onClose}
+      onRequestClose={handleClose}
     >
       <AnimatedBlurView
         intensity={intensityAnim}
@@ -309,7 +321,7 @@ const AddCryptoModal = ({
 
           <TouchableOpacity
             style={VaultScreenStyle.cancelButton}
-            onPress={onClose}
+            onPress={handleClose}
           >
             <Text style={VaultScreenStyle.cancelButtonText}>{t("Close")}</Text>
           </TouchableOpacity>
