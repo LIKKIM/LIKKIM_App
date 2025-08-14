@@ -1,5 +1,6 @@
 // ReceiveAddressModal.js
 import React from "react";
+import { useTranslation } from "react-i18next";
 import {
   Modal,
   View,
@@ -33,7 +34,6 @@ const ReceiveAddressModal = ({
   visible,
   onClose,
   styleObj,
-  t,
   cryptoIcon,
   cryptoName,
   address,
@@ -42,42 +42,45 @@ const ReceiveAddressModal = ({
   handleVerify,
   isDarkMode,
   chainShortName,
-}) => (
-  <Modal
-    animationType="slide"
-    transparent
-    visible={visible}
-    onRequestClose={onClose}
-  >
-    <BlurView intensity={10} style={styleObj.centeredView}>
-      <View style={styleObj.receiveModalView}>
-        <Header
-          cryptoIcon={cryptoIcon}
-          cryptoName={cryptoName}
-          styleObj={styleObj}
-          t={t}
-        />
-        <AddressInfo
-          address={address}
-          isDarkMode={isDarkMode}
-          styleObj={styleObj}
-          t={t}
-        />
-        <QRCodeView address={address} />
-        {isVerifying && (
-          <VerifyingStatus message={verifyMsg} styleObj={styleObj} />
-        )}
-        <ActionButtons
-          handleVerify={handleVerify}
-          onClose={onClose}
-          styleObj={styleObj}
-          t={t}
-          chainShortName={chainShortName}
-        />
-      </View>
-    </BlurView>
-  </Modal>
-);
+}) => {
+  const { t } = useTranslation();
+  return (
+    <Modal
+      animationType="slide"
+      transparent
+      visible={visible}
+      onRequestClose={onClose}
+    >
+      <BlurView intensity={10} style={styleObj.centeredView}>
+        <View style={styleObj.receiveModalView}>
+          <Header
+            cryptoIcon={cryptoIcon}
+            cryptoName={cryptoName}
+            styleObj={styleObj}
+            t={t}
+          />
+          <AddressInfo
+            address={address}
+            isDarkMode={isDarkMode}
+            styleObj={styleObj}
+            t={t}
+          />
+          <QRCodeView address={address} />
+          {isVerifying && (
+            <VerifyingStatus message={verifyMsg} styleObj={styleObj} />
+          )}
+          <ActionButtons
+            handleVerify={handleVerify}
+            onClose={onClose}
+            styleObj={styleObj}
+            t={t}
+            chainShortName={chainShortName}
+          />
+        </View>
+      </BlurView>
+    </Modal>
+  );
+};
 
 const Header = ({ cryptoIcon, cryptoName, styleObj, t }) => (
   <View style={{ flexDirection: "row", alignItems: "center" }}>
