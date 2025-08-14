@@ -139,6 +139,19 @@ const BluetoothModal = ({
                 data={devices}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => {
+                  // 打印关键蓝牙信息
+                  const isConnectableColor = item.isConnectable
+                    ? "\x1b[32m" // 绿色
+                    : "\x1b[31m"; // 红色
+                  console.log(
+                    `\n设备信息:\n` +
+                      `id: ${item.id}\n` +
+                      `name: ${item.name}\n` +
+                      `localName: ${item.localName}\n` +
+                      `${isConnectableColor}isConnectable: ${item.isConnectable}\x1b[0m\n` +
+                      `RSSI: ${item.rssi}\n` +
+                      `MTU: ${item.mtu}\n`
+                  );
                   const isVerified = verifiedDevices.includes(item.id);
                   const signalBars = getSignalBars(item.rssi);
                   return (
