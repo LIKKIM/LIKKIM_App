@@ -52,7 +52,7 @@ const BluetoothModal = ({
           useNativeDriver: false,
         }),
         Animated.timing(intensityAnim, {
-          toValue: 35,
+          toValue: 20,
           duration: 200,
           useNativeDriver: false,
         }),
