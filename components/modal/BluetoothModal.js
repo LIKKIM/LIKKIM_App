@@ -1,5 +1,5 @@
 // modal/BluetoothModal.js
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useRef } from "react";
 import {
   View,
   Text,
@@ -7,6 +7,7 @@ import {
   Image,
   FlatList,
   TouchableOpacity,
+  Animated,
 } from "react-native";
 import { BlurView } from "expo-blur";
 import { MaterialIcons as Icon } from "@expo/vector-icons";
@@ -15,6 +16,9 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useTranslation } from "react-i18next";
 import { DarkModeContext } from "../../utils/DeviceContext";
 import SecureDeviceScreenStyles from "../../styles/SecureDeviceScreenStyle";
+
+// 用 Animated 创建支持动画的 BlurView
+const AnimatedBlurView = Animated.createAnimatedComponent(BlurView);
 
 const BluetoothModal = ({
   visible,
@@ -27,11 +31,35 @@ const BluetoothModal = ({
   onRefreshPress,
 }) => {
   const { t } = useTranslation();
-  const { isDarkMode, setIsDarkMode } = useContext(DarkModeContext);
+  const { isDarkMode } = useContext(DarkModeContext);
   const SecureDeviceScreenStyle = SecureDeviceScreenStyles(isDarkMode);
   const [locationPermissionGranted, setLocationPermissionGranted] =
     useState(false);
   const blueToothColor = isDarkMode ? "#CCB68C" : "#CFAB95";
+
+  // ====== Blur intensity 动画：0 -> 20，200ms ======
+  const intensityAnim = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    if (visible) {
+      intensityAnim.setValue(0); // 每次打开重置
+      Animated.sequence([
+        Animated.timing(intensityAnim, {
+          toValue: 0,
+          duration: 400,
+          useNativeDriver: false,
+        }),
+        Animated.timing(intensityAnim, {
+          toValue: 35,
+          duration: 200,
+          useNativeDriver: false,
+        }),
+      ]).start();
+    } else {
+      intensityAnim.setValue(0);
+    }
+  }, [visible, intensityAnim]);
+  // ===============================================
 
   const getSignalBars = (rssi) => {
     if (rssi >= -60) return 4;
@@ -41,7 +69,8 @@ const BluetoothModal = ({
     return 0;
   };
 
-  /*   useEffect(() => {
+  /* 如果需要定位权限，请取消注释
+  useEffect(() => {
     const requestLocationPermission = async () => {
       const { status } = await Location.requestForegroundPermissionsAsync();
       if (status === "granted") {
@@ -50,9 +79,9 @@ const BluetoothModal = ({
         console.warn("Location permission denied");
       }
     };
-
     requestLocationPermission();
-  }, []); */
+  }, []);
+  */
 
   const getDeviceLocation = async () => {
     if (!locationPermissionGranted) {
@@ -118,11 +147,15 @@ const BluetoothModal = ({
       visible={visible}
       onRequestClose={onCancel}
     >
-      <BlurView intensity={0} style={SecureDeviceScreenStyle.centeredView}>
+      <AnimatedBlurView
+        intensity={intensityAnim}
+        style={SecureDeviceScreenStyle.centeredView}
+      >
         <View style={SecureDeviceScreenStyle.bluetoothModalView}>
           <Text style={SecureDeviceScreenStyle.bluetoothModalTitle}>
             {t("LOOKING FOR DEVICES")}
           </Text>
+
           {isScanning ? (
             <View style={{ alignItems: "center" }}>
               <Image
@@ -139,10 +172,10 @@ const BluetoothModal = ({
                 data={devices}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => {
-                  // 打印关键蓝牙信息
+                  // 打印关键蓝牙信息（控制台彩色输出）
                   const isConnectableColor = item.isConnectable
-                    ? "\x1b[32m" // 绿色
-                    : "\x1b[31m"; // 红色
+                    ? "\x1b[32m"
+                    : "\x1b[31m";
                   console.log(
                     `\n设备信息:\n` +
                       `id: ${item.id}\n` +
@@ -152,8 +185,10 @@ const BluetoothModal = ({
                       `RSSI: ${item.rssi}\n` +
                       `MTU: ${item.mtu}\n`
                   );
+
                   const isVerified = verifiedDevices.includes(item.id);
                   const signalBars = getSignalBars(item.rssi);
+
                   return (
                     <TouchableOpacity
                       onPress={() => {
@@ -169,6 +204,7 @@ const BluetoothModal = ({
                           color={isVerified ? "#3CDA84" : blueToothColor}
                           style={SecureDeviceScreenStyle.deviceIcon}
                         />
+
                         <Text style={SecureDeviceScreenStyle.modalSubtitle}>
                           {item.name || item.id}
                           {"  "}
@@ -197,6 +233,7 @@ const BluetoothModal = ({
                             })}
                           </View>
                         </Text>
+
                         {isVerified && (
                           <TouchableOpacity
                             style={SecureDeviceScreenStyle.disconnectButton}
@@ -218,6 +255,7 @@ const BluetoothModal = ({
               />
             )
           )}
+
           {!isScanning && devices.length === 0 && (
             <View style={{ alignItems: "center" }}>
               <Image
@@ -282,7 +320,7 @@ const BluetoothModal = ({
             </TouchableOpacity>
           )}
         </View>
-      </BlurView>
+      </AnimatedBlurView>
     </Modal>
   );
 };
