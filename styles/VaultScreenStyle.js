@@ -18,12 +18,14 @@ import {
 // ---- tokens & helpers -------------------------------------------------------
 const makeTokens = (isDarkMode) => ({
   text: isDarkMode ? "#fff" : "#000",
+  textBtnColor: isDarkMode ? "#fff" : "#fff",
+
   mutedText: isDarkMode ? "#ddd" : "#676776",
   cardText: "#fff",
   bg: isDarkMode ? "#121212" : "#f5f5f5",
   modalBg: isDarkMode ? "#3F3D3C" : "#ffffff",
   btnBg: isDarkMode ? "#CCB68C" : "#E5E1E9",
-  bluetoothBtn: isDarkMode ? "#CCB68C" : "#CFAB95",
+  btnColor: isDarkMode ? "#CCB68C" : "#CFAB95",
   tagBg: "#CFAB9540",
   shadow: "#0E0D0D",
   cardBg: isDarkMode ? "#3F3D3C" : "#E5E1E9",
@@ -336,7 +338,7 @@ const VaultScreenStyles = (isDarkMode) => {
       borderRadius: 16,
       height: 60,
       alignItems: "center",
-      backgroundColor: c.btnBg,
+      backgroundColor: c.btnColor,
     },
     alertModalButton: {
       ...buttonBase,
@@ -346,12 +348,12 @@ const VaultScreenStyles = (isDarkMode) => {
     disabledButton: { ...buttonBase, backgroundColor: c.btnBg, marginTop: 20 },
     modalButton: {
       ...buttonBase,
-      backgroundColor: c.bluetoothBtn,
+      backgroundColor: c.btnColor,
       marginBottom: 20,
     },
     addModalButton: {
       ...buttonBase,
-      backgroundColor: c.bluetoothBtn,
+      backgroundColor: c.btnColor,
       marginTop: 20,
     },
     NFTButton: {
@@ -417,9 +419,9 @@ const VaultScreenStyles = (isDarkMode) => {
     disconnectButtonText: { color: "#FFFFFF", fontWeight: "bold" },
 
     // button texts
-    submitButtonText: { color: c.text, fontSize: FONT_SIZE_16 },
+    submitButtonText: { color: c.textBtnColor, fontSize: FONT_SIZE_16 },
     mainButtonText: { color: "#FFF", fontSize: FONT_SIZE_16 },
-    cancelButtonText: { color: c.text, fontSize: FONT_SIZE_16 },
+    cancelButtonText: { color: c.mutedText, fontSize: FONT_SIZE_16 },
     ButtonText: { color: c.text, fontSize: FONT_SIZE_16 },
     NFTButtonText: {
       color: c.text,
@@ -428,7 +430,7 @@ const VaultScreenStyles = (isDarkMode) => {
     },
     confirmText: { color: "#ffffff", fontSize: FONT_SIZE_16 },
     disabledText: { color: "#ccc", fontSize: FONT_SIZE_16 },
-    BluetoothBtnText: { color: "#fff", fontSize: FONT_SIZE_16 },
+    btnColorText: { color: "#fff", fontSize: FONT_SIZE_16 },
 
     // modals (shared panels)
     cardModalView: {
