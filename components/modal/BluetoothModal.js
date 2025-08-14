@@ -17,7 +17,6 @@ import { useTranslation } from "react-i18next";
 import { DarkModeContext } from "../../utils/DeviceContext";
 import SecureDeviceScreenStyles from "../../styles/SecureDeviceScreenStyle";
 
-// 用 Animated 创建支持动画的 BlurView
 const AnimatedBlurView = Animated.createAnimatedComponent(BlurView);
 
 const BluetoothModal = ({
@@ -35,14 +34,17 @@ const BluetoothModal = ({
   const SecureDeviceScreenStyle = SecureDeviceScreenStyles(isDarkMode);
   const [locationPermissionGranted, setLocationPermissionGranted] =
     useState(false);
+
   const blueToothColor = isDarkMode ? "#CCB68C" : "#CFAB95";
 
-  // ====== Blur intensity 动画：0 -> 20，200ms ======
+  // 内部状态控制真正的 Modal 显示
+  const [showModal, setShowModal] = useState(visible);
   const intensityAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     if (visible) {
-      intensityAnim.setValue(0); // 每次打开重置
+      // 显示 Modal 并执行进入动画
+      setShowModal(true);
       Animated.sequence([
         Animated.timing(intensityAnim, {
           toValue: 0,
@@ -55,11 +57,18 @@ const BluetoothModal = ({
           useNativeDriver: false,
         }),
       ]).start();
-    } else {
-      intensityAnim.setValue(0);
+    } else if (showModal) {
+      // 执行退出动画
+      Animated.timing(intensityAnim, {
+        toValue: 0,
+        duration: 400,
+        useNativeDriver: false,
+      }).start(() => {
+        // 动画结束后隐藏 Modal
+        setShowModal(false);
+      });
     }
-  }, [visible, intensityAnim]);
-  // ===============================================
+  }, [visible]);
 
   const getSignalBars = (rssi) => {
     if (rssi >= -60) return 4;
@@ -68,7 +77,6 @@ const BluetoothModal = ({
     if (rssi >= -90) return 1;
     return 0;
   };
-
   /* 如果需要定位权限，请取消注释
   useEffect(() => {
     const requestLocationPermission = async () => {
@@ -140,11 +148,13 @@ const BluetoothModal = ({
     }
   };
 
+  if (!showModal) return null; // 动画完成后才移除 Modal
+
   return (
     <Modal
       animationType="slide"
       transparent
-      visible={visible}
+      visible={showModal}
       onRequestClose={onCancel}
     >
       <AnimatedBlurView
@@ -172,7 +182,6 @@ const BluetoothModal = ({
                 data={devices}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => {
-                  // 打印关键蓝牙信息（控制台彩色输出）
                   const isConnectableColor = item.isConnectable
                     ? "\x1b[32m"
                     : "\x1b[31m";
@@ -204,7 +213,6 @@ const BluetoothModal = ({
                           color={isVerified ? "#3CDA84" : blueToothColor}
                           style={SecureDeviceScreenStyle.deviceIcon}
                         />
-
                         <Text style={SecureDeviceScreenStyle.modalSubtitle}>
                           {item.name || item.id}
                           {"  "}
@@ -233,7 +241,6 @@ const BluetoothModal = ({
                             })}
                           </View>
                         </Text>
-
                         {isVerified && (
                           <TouchableOpacity
                             style={SecureDeviceScreenStyle.disconnectButton}
@@ -281,11 +288,7 @@ const BluetoothModal = ({
               <TouchableOpacity
                 style={[
                   SecureDeviceScreenStyle.cancelButton,
-                  {
-                    flex: 1,
-                    borderRadius: 15,
-                    marginRight: 10,
-                  },
+                  { flex: 1, borderRadius: 15, marginRight: 10 },
                 ]}
                 onPress={onCancel}
               >
@@ -297,10 +300,7 @@ const BluetoothModal = ({
               <TouchableOpacity
                 style={[
                   SecureDeviceScreenStyle.confirmButton,
-                  {
-                    flex: 1,
-                    borderRadius: 15,
-                  },
+                  { flex: 1, borderRadius: 15 },
                 ]}
                 onPress={onRefreshPress}
               >
