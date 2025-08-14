@@ -100,7 +100,7 @@ const AddressInfo = ({ address, isDarkMode, styleObj, t }) => {
   const hasValidAddress = safeAddress !== "";
 
   return (
-    <>
+    <View>
       {hasValidAddress && (
         <Text style={styleObj.subtitleText}>
           {t("Assets can only be sent within the same chain.")}
@@ -164,7 +164,7 @@ const AddressInfo = ({ address, isDarkMode, styleObj, t }) => {
           </Text>
         )}
       </View>
-    </>
+    </View>
   );
 };
 
