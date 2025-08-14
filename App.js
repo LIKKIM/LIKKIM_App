@@ -431,6 +431,11 @@ function AppContent({
         duration: 200,
         useNativeDriver: true,
       }),
+    ]).start();
+  };
+
+  const handlePressOut = (onComplete) => {
+    Animated.sequence([
       Animated.timing(scale, {
         toValue: 1.1,
         duration: 100,
@@ -441,7 +446,10 @@ function AppContent({
         duration: 100,
         useNativeDriver: true,
       }),
-    ]).start();
+    ]).start(() => {
+      // 动画结束后回调
+      onComplete && onComplete();
+    });
   };
 
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -729,11 +737,12 @@ function AppContent({
           </Svg>
           <TouchableWithoutFeedback
             onPressIn={handlePressIn}
-            onPress={() => {
-              Vibration.vibrate();
-              handleBluetoothPairing();
+            onPressOut={() => {
+              handlePressOut(() => {
+                Vibration.vibrate();
+                handleBluetoothPairing();
+              });
             }}
-            //     onPress={() => alert("Button Pressed!")}
           >
             <Animated.View
               style={{
