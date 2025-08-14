@@ -30,20 +30,23 @@ const EmptyWalletView = ({
     ]).start();
   };
 
-  const handlePressOut = () => {
+  const handlePressOut = (onDone) => {
     Animated.sequence([
       Animated.timing(scaleAnim, {
-        toValue: 1.05, // 放大幅度减小
-        duration: 100, // 回弹慢一点
+        toValue: 1.05,
+        duration: 100,
         useNativeDriver: true,
       }),
       Animated.timing(scaleAnim, {
         toValue: 1,
-        duration: 100, // 回归原位更柔和
+        duration: 100,
         useNativeDriver: true,
       }),
-    ]).start();
+    ]).start(() => {
+      onDone && onDone(); // 动画结束后再执行
+    });
   };
+
   return (
     <View style={VaultScreenStyle.centeredContent}>
       <Animated.View
@@ -66,12 +69,13 @@ const EmptyWalletView = ({
         />
         <TouchableOpacity
           onPressOut={() => {
-            handlePressOut(); // 先执行动画
-            if (global.__DEV__) {
-              handleWalletTest && handleWalletTest();
-            } else {
-              handleContinue && handleContinue();
-            }
+            handlePressOut(() => {
+              if (global.__DEV__) {
+                handleWalletTest && handleWalletTest();
+              } else {
+                handleContinue && handleContinue();
+              }
+            });
           }}
           onPressIn={handlePressIn}
           style={VaultScreenStyle.addWalletButton}
