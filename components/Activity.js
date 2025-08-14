@@ -1256,7 +1256,6 @@ function ActivityScreen() {
           visible={addressModalVisible}
           onRequestClose={() => setAddressModalVisible(false)}
           ActivityScreenStyle={ActivityScreenStyle}
-          t={t}
           selectedCryptoIcon={selectedCryptoIcon}
           selectedCrypto={selectedCrypto}
           selectedAddress={selectedAddress}

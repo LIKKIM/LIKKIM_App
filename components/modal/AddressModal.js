@@ -26,7 +26,6 @@ const AddressModal = (props) => {
       visible={visible}
       onClose={onClose}
       styleObj={VaultScreenStyle}
-      t={t}
       cryptoIcon={selectedCryptoIcon}
       cryptoName={selectedCrypto}
       address={selectedAddress}

@@ -93,7 +93,6 @@ const ModalsContainer = ({
         addressVerificationMessage={addressVerificationMessage}
         handleVerifyAddress={handleVerifyAddress}
         VaultScreenStyle={VaultScreenStyle}
-        t={t}
         isDarkMode={isDarkMode}
       />
       {/* Delete Confirmation Modal */}

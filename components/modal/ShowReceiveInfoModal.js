@@ -10,7 +10,6 @@ const ShowReceiveInfoModal = (props) => {
     visible,
     onRequestClose,
     ActivityScreenStyle,
-    t,
     selectedCryptoIcon,
     selectedCrypto,
     selectedAddress,
@@ -26,7 +25,6 @@ const ShowReceiveInfoModal = (props) => {
       visible={visible}
       onClose={onRequestClose}
       styleObj={ActivityScreenStyle}
-      t={t}
       cryptoIcon={selectedCryptoIcon}
       cryptoName={selectedCrypto}
       address={selectedAddress}
