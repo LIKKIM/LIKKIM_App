@@ -425,19 +425,23 @@ function AppContent({
   ]);
 
   const handlePressIn = () => {
-    Animated.timing(scale, {
-      toValue: 0.8, // Scale down to 0.8
-      duration: 100, // Duration of the scale animation
-      useNativeDriver: true,
-    }).start();
-  };
-
-  const handlePressOut = () => {
-    Animated.timing(scale, {
-      toValue: 1, // Scale back to normal
-      duration: 100, // Duration of the scale animation
-      useNativeDriver: true,
-    }).start();
+    Animated.sequence([
+      Animated.timing(scale, {
+        toValue: 0.9,
+        duration: 200,
+        useNativeDriver: true,
+      }),
+      Animated.timing(scale, {
+        toValue: 1.1,
+        duration: 100,
+        useNativeDriver: true,
+      }),
+      Animated.timing(scale, {
+        toValue: 1,
+        duration: 100,
+        useNativeDriver: true,
+      }),
+    ]).start();
   };
 
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -725,7 +729,6 @@ function AppContent({
           </Svg>
           <TouchableWithoutFeedback
             onPressIn={handlePressIn}
-            onPressOut={handlePressOut}
             onPress={() => {
               Vibration.vibrate();
               handleBluetoothPairing();
