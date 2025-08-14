@@ -18,9 +18,38 @@ const EmptyWalletView = ({
 }) => {
   // 动画值
   const scaleAnim = useRef(new Animated.Value(1)).current;
+  // 视频ref
+  const videoRef = useRef(null);
+  // 速率过渡定时器
+  const rateTimerRef = useRef(null);
 
   // 点击动画：0.9 -> 1.1 -> 1
+  // 平滑递增速率到2.0
   const handlePressIn = () => {
+    if (rateTimerRef.current) {
+      clearInterval(rateTimerRef.current);
+      rateTimerRef.current = null;
+    }
+    let currentRate = 1.0;
+    const targetRate = 1.6;
+    const step = 0.2;
+    const interval = 50;
+    // 先设置到当前速率
+    if (videoRef.current && videoRef.current.setStatusAsync) {
+      videoRef.current.setStatusAsync({ rate: currentRate });
+    }
+    rateTimerRef.current = setInterval(() => {
+      currentRate += step;
+      if (currentRate >= targetRate) {
+        currentRate = targetRate;
+        clearInterval(rateTimerRef.current);
+        rateTimerRef.current = null;
+      }
+      if (videoRef.current && videoRef.current.setStatusAsync) {
+        videoRef.current.setStatusAsync({ rate: currentRate });
+      }
+    }, interval);
+
     Animated.sequence([
       Animated.timing(scaleAnim, {
         toValue: 0.95, // 缩小幅度小一点
@@ -30,7 +59,28 @@ const EmptyWalletView = ({
     ]).start();
   };
 
+  // 平滑递减速率到1.0
   const handlePressOut = (onDone) => {
+    if (rateTimerRef.current) {
+      clearInterval(rateTimerRef.current);
+      rateTimerRef.current = null;
+    }
+    let currentRate = 2.0;
+    const targetRate = 1.0;
+    const step = 0.2;
+    const interval = 50;
+    rateTimerRef.current = setInterval(() => {
+      currentRate -= step;
+      if (currentRate <= targetRate) {
+        currentRate = targetRate;
+        clearInterval(rateTimerRef.current);
+        rateTimerRef.current = null;
+      }
+      if (videoRef.current && videoRef.current.setStatusAsync) {
+        videoRef.current.setStatusAsync({ rate: currentRate });
+      }
+    }, interval);
+
     Animated.sequence([
       Animated.timing(scaleAnim, {
         toValue: 1.05,
@@ -56,6 +106,7 @@ const EmptyWalletView = ({
         ]}
       >
         <Video
+          ref={videoRef}
           source={
             isDarkMode
               ? require("../../assets/darkBg.mp4")
