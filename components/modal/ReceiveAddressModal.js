@@ -211,19 +211,19 @@ const ActionButtons = ({
 }) => (
   <View
     style={{
-      flexDirection: "column",
-      width: "100%",
+      flexDirection: "row",
       justifyContent: "space-between",
+      gap: 8,
     }}
   >
+    <TouchableOpacity style={styleObj.cancelAddressBtn} onPress={onClose}>
+      <Text style={styleObj.cancelButtonText}>{t("Close")}</Text>
+    </TouchableOpacity>
     <TouchableOpacity
       onPress={() => handleVerify(chainShortName)}
-      style={styleObj.verifyAddressButton}
+      style={styleObj.verifyAddressBtn}
     >
       <Text style={styleObj.submitButtonText}>{t("Verify Address")}</Text>
-    </TouchableOpacity>
-    <TouchableOpacity style={styleObj.cancelAddressButton} onPress={onClose}>
-      <Text style={styleObj.cancelButtonText}>{t("Close")}</Text>
     </TouchableOpacity>
   </View>
 );

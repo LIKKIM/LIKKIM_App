@@ -329,6 +329,15 @@ const VaultScreenStyles = (isDarkMode) => {
       backgroundColor: c.btnBg,
       marginTop: 20,
     },
+    verifyAddressBtn: {
+      flex: 1,
+      padding: 10,
+      justifyContent: "center",
+      borderRadius: 16,
+      height: 60,
+      alignItems: "center",
+      backgroundColor: c.btnBg,
+    },
     alertModalButton: {
       ...buttonBase,
       backgroundColor: c.btnBg,
@@ -360,6 +369,16 @@ const VaultScreenStyles = (isDarkMode) => {
       ...buttonBase,
       borderWidth: 3,
       borderColor: c.btnBg,
+    },
+    cancelAddressBtn: {
+      borderColor: c.btnBg,
+      flex: 1,
+      borderWidth: 3,
+      padding: 10,
+      justifyContent: "center",
+      borderRadius: 16,
+      height: 60,
+      alignItems: "center",
     },
     cancelButtonCryptoCard: {
       ...buttonBase,
