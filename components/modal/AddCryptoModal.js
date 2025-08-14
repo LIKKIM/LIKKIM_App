@@ -1,5 +1,5 @@
 // AddCryptoModal.js
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   View,
   Text,
@@ -9,6 +9,7 @@ import {
   ImageBackground,
   TextInput,
   ScrollView,
+  Animated,
 } from "react-native";
 import { BlurView } from "expo-blur";
 import { MaterialIcons as Icon } from "@expo/vector-icons";
@@ -28,6 +29,8 @@ const AddCryptoModal = ({
 }) => {
   const [selectedChain, setSelectedChain] = useState("All");
   const [selectedCryptos, setSelectedCryptos] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const intensityAnim = useRef(new Animated.Value(0)).current;
 
   const filteredByChain =
     selectedChain === "All"
@@ -36,6 +39,19 @@ const AddCryptoModal = ({
 
   useEffect(() => {
     if (visible) {
+      setShowModal(true);
+      Animated.sequence([
+        Animated.timing(intensityAnim, {
+          toValue: 0,
+          duration: 400,
+          useNativeDriver: false,
+        }),
+        Animated.timing(intensityAnim, {
+          toValue: 20,
+          duration: 300,
+          useNativeDriver: false,
+        }),
+      ]).start();
       const addedCryptos = cryptoCards.map(
         (crypto) => `${crypto.name}-${crypto.chain}`
       );
@@ -43,6 +59,14 @@ const AddCryptoModal = ({
         addedCryptos.includes(`${crypto.name}-${crypto.chain}`)
       );
       setSelectedCryptos(initiallySelected);
+    } else if (showModal) {
+      Animated.timing(intensityAnim, {
+        toValue: 0,
+        duration: 400,
+        useNativeDriver: false,
+      }).start(() => {
+        setShowModal(false);
+      });
     }
   }, [visible, cryptoCards, filteredCryptos]);
 
@@ -67,10 +91,13 @@ const AddCryptoModal = ({
     <Modal
       animationType="slide"
       transparent={true}
-      visible={visible}
+      visible={showModal}
       onRequestClose={onClose}
     >
-      <BlurView intensity={10} style={VaultScreenStyle.centeredView}>
+      <AnimatedBlurView
+        intensity={intensityAnim}
+        style={VaultScreenStyle.centeredView}
+      >
         <View style={VaultScreenStyle.addCryptoModalView}>
           <View style={VaultScreenStyle.searchContainer}>
             <Icon name="search" size={20} style={VaultScreenStyle.searchIcon} />
@@ -287,9 +314,12 @@ const AddCryptoModal = ({
             <Text style={VaultScreenStyle.cancelButtonText}>{t("Close")}</Text>
           </TouchableOpacity>
         </View>
-      </BlurView>
+      </AnimatedBlurView>
     </Modal>
   );
 };
+
+// Animated BlurView 封装
+const AnimatedBlurView = Animated.createAnimatedComponent(BlurView);
 
 export default AddCryptoModal;
