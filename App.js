@@ -251,6 +251,7 @@ function AppContent({
       }
     }
     setBleVisible(true);
+    setDevices([]);
     scanDevices({ isScanning, setIsScanning, bleManagerRef, setDevices });
   };
 
@@ -787,9 +788,10 @@ function AppContent({
         handleDevicePress={handleDevicePress}
         onCancel={handleCancel}
         verifiedDevices={verifiedDevices}
-        onRefreshPress={() =>
-          scanDevices({ isScanning, setIsScanning, bleManagerRef, setDevices })
-        }
+        onRefreshPress={() => {
+          setDevices([]);
+          scanDevices({ isScanning, setIsScanning, bleManagerRef, setDevices });
+        }}
       />
       {/* PIN Modal */}
       <SecurityCodeModal
