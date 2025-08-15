@@ -42,6 +42,11 @@ import {
   modalPanelBase,
   titleBase,
   textCenterMuted,
+  containerBase,
+  cardBase,
+  iconBase,
+  borderButtonBase,
+  modalHeaderBase,
 } from "./baseStyles";
 // base blocks
 
