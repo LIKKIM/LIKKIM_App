@@ -1290,10 +1290,9 @@ const DeviceStatus = ({
                       animatePressIn(scaleAnimsRef.current[index])
                     }
                     onPressOut={() =>
-                      animatePressOut(scaleAnimsRef.current[index], () =>
-                        handleGalleryelect(nft)
-                      )
+                      animatePressOut(scaleAnimsRef.current[index])
                     }
+                    onPress={() => handleGalleryelect(nft)}
                     activeOpacity={1}
                     style={{ width: "100%" }}
                   >
