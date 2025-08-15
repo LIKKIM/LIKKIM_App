@@ -119,16 +119,15 @@ const EmptyWalletView = ({
           muted
         />
         <TouchableOpacity
-          onPressOut={() => {
-            handlePressOut(() => {
-              if (global.__DEV__) {
-                handleWalletTest && handleWalletTest();
-              } else {
-                handleContinue && handleContinue();
-              }
-            });
-          }}
           onPressIn={handlePressIn}
+          onPressOut={() => handlePressOut()}
+          onPress={() => {
+            if (global.__DEV__) {
+              handleWalletTest && handleWalletTest();
+            } else {
+              handleContinue && handleContinue();
+            }
+          }}
           style={VaultScreenStyle.addWalletButton}
           activeOpacity={0.8}
         >
