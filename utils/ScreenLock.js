@@ -15,7 +15,7 @@ import { useTranslation } from "react-i18next";
 import { MaterialIcons as Icon } from "@expo/vector-icons";
 import * as LocalAuthentication from "expo-local-authentication";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import { BlurView } from "expo-blur";
 const ScreenLock = () => {
   const { screenLockPassword, setIsAppLaunching } = useContext(DeviceContext);
   const { isDarkMode } = useContext(DarkModeContext);
@@ -153,7 +153,10 @@ const ScreenLock = () => {
           onRequestClose={handleCloseModal}
         >
           <View style={styles.modalBackground}>
-            <View style={[styles.modalView, themeStyles.modalView]}>
+            <BlurView
+              intensity={10}
+              style={[styles.modalView, themeStyles.modalView]}
+            >
               <Text style={[styles.modalTitle, themeStyles.modalTitle]}>
                 {t("I lost my password")}
               </Text>
@@ -168,7 +171,7 @@ const ScreenLock = () => {
               >
                 <Text style={themeStyles.buttonText}>{t("OK")}</Text>
               </TouchableOpacity>
-            </View>
+            </BlurView>
           </View>
         </Modal>
 
@@ -179,7 +182,7 @@ const ScreenLock = () => {
           visible={errorModalVisible}
           onRequestClose={handleCloseErrorModal}
         >
-          <View style={styles.modalBackground}>
+          <BlurView intensity={10} style={styles.modalBackground}>
             <View style={[styles.modalView, themeStyles.modalView]}>
               <Text style={[styles.modalTitle, themeStyles.modalTitle]}>
                 {t("Incorrect Password")}
@@ -194,7 +197,7 @@ const ScreenLock = () => {
                 <Text style={themeStyles.buttonText}>{t("OK")}</Text>
               </TouchableOpacity>
             </View>
-          </View>
+          </BlurView>
         </Modal>
       </View>
     </KeyboardAvoidingView>
