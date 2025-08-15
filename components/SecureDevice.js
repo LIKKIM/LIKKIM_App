@@ -315,6 +315,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
       console.log("存入的正确密码:", password);
       await AsyncStorage.setItem("appLockPassword", password);
       await AsyncStorage.setItem("screenLockPassword", password); // 修复：保证 DeviceContext 能同步到正确的密码
+      await changeScreenLockPassword(password); // 保证 context 里的密码同步
       await AsyncStorage.setItem(
         "screenLockFeatureEnabled",
         JSON.stringify(true)
