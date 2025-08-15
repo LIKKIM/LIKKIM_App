@@ -28,11 +28,11 @@ const ActionButtons = ({
     }).start();
   };
 
-  // 弹起动画（弹性效果）
-  const animatePressOut = (animatedValue) => {
+  // 弹起动画（弹性效果），动画结束后可选回调
+  const animatePressOut = (animatedValue, callback) => {
     Animated.sequence([
       Animated.timing(animatedValue, {
-        toValue: 1.05,
+        toValue: 1.03,
         duration: 100,
         useNativeDriver: true,
       }),
@@ -41,7 +41,9 @@ const ActionButtons = ({
         duration: 100,
         useNativeDriver: true,
       }),
-    ]).start();
+    ]).start(() => {
+      if (typeof callback === "function") callback();
+    });
   };
 
   return (
@@ -58,9 +60,8 @@ const ActionButtons = ({
       <Animated.View style={{ flex: 1, transform: [{ scale: sendScale }] }}>
         <TouchableOpacity
           style={[ActivityScreenStyle.roundButton, { flex: 1 }]}
-          onPress={handleSendPress}
           onPressIn={() => animatePressIn(sendScale)}
-          onPressOut={() => animatePressOut(sendScale)}
+          onPressOut={() => animatePressOut(sendScale, handleSendPress)}
           activeOpacity={1}
         >
           <Icon name="arrow-outward" size={24} color={iconColor} />
@@ -72,9 +73,8 @@ const ActionButtons = ({
       <Animated.View style={{ flex: 1, transform: [{ scale: receiveScale }] }}>
         <TouchableOpacity
           style={[ActivityScreenStyle.roundButton, { flex: 1 }]}
-          onPress={handleReceivePress}
           onPressIn={() => animatePressIn(receiveScale)}
-          onPressOut={() => animatePressOut(receiveScale)}
+          onPressOut={() => animatePressOut(receiveScale, handleReceivePress)}
           activeOpacity={1}
         >
           <Icon name="vertical-align-bottom" size={24} color={iconColor} />
@@ -83,10 +83,11 @@ const ActionButtons = ({
       </Animated.View>
 
       {/* Convert button */}
-        <Icon name="swap-horiz" size={24} color={iconColor} />
-        <Text style={ActivityScreenStyle.mainButtonText}>{t("Convert")}</Text>
-      </TouchableOpacity>
-          onPressOut={() => animatePressOut(convertScale)}
+      <Animated.View style={{ flex: 1, transform: [{ scale: convertScale }] }}>
+        <TouchableOpacity
+          style={[ActivityScreenStyle.roundButton, { flex: 1 }]}
+          onPressIn={() => animatePressIn(convertScale)}
+          onPressOut={() => animatePressOut(convertScale, handleConvertPress)}
           activeOpacity={1}
         >
           <Icon name="swap-horiz" size={24} color={iconColor} />

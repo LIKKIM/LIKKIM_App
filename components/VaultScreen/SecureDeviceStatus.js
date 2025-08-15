@@ -194,6 +194,50 @@ const SecureDeviceStatus = ({
   verifiedDevices = [],
   ...props
 }) => {
+  // NFT卡片动画相关
+  const scaleAnimsRef = React.useRef([]);
+  // 动画参数
+  const PRESS_IN_SCALE = 0.95;
+  const ANIMATION_DURATION = 200;
+  // 动画函数
+  const animatePressIn = (animatedValue) => {
+    Animated.timing(animatedValue, {
+      toValue: PRESS_IN_SCALE,
+      duration: ANIMATION_DURATION,
+      useNativeDriver: true,
+    }).start();
+  };
+  const animatePressOut = (animatedValue, callback) => {
+    Animated.sequence([
+      Animated.timing(animatedValue, {
+        toValue: 1.05,
+        duration: 100,
+        useNativeDriver: true,
+      }),
+      Animated.timing(animatedValue, {
+        toValue: 1,
+        duration: 100,
+        useNativeDriver: true,
+      }),
+    ]).start(() => {
+      if (typeof callback === "function") callback();
+    });
+  };
+  // NFT数据变化时同步动画数组长度
+  useEffect(() => {
+    if (nftData && nftData.code === "0" && Array.isArray(nftData.data)) {
+      if (!scaleAnimsRef.current) scaleAnimsRef.current = [];
+      const targetLen = nftData.data.length;
+      // 扩展
+      for (let i = scaleAnimsRef.current.length; i < targetLen; i++) {
+        scaleAnimsRef.current[i] = new Animated.Value(1);
+      }
+      // 截断
+      if (scaleAnimsRef.current.length > targetLen) {
+        scaleAnimsRef.current.length = targetLen;
+      }
+    }
+  }, [nftData]);
   const [isAddressBookVisible, setAddressBookVisible] = useState(false);
   const [nftData, setNftData] = useState(null);
   const [NFTmodalVisible, setNFTModalVisible] = useState(false); // 正确的命名
@@ -1241,109 +1285,133 @@ const SecureDeviceStatus = ({
           </Text>
         </View>
         {nftData && nftData.code === "0" && Array.isArray(nftData.data) ? (
-          nftData.data.map((nft, index) => (
-            <TouchableOpacity
-              key={index}
-              onPress={() => handleGalleryelect(nft)}
-              style={{ width: "50%", padding: 4 }}
-            >
-              <View
-                style={{
-                  backgroundColor: isDarkMode ? "#333" : "#fff",
-                  borderRadius: 8,
-                  padding: 10,
-                  aspectRatio: 2 / 3,
-                  position: "relative",
-                  shadowColor: "#000",
-                  shadowOffset: { width: 0, height: 2 },
-                  shadowOpacity: 0.05,
-                  shadowRadius: 4,
-                  elevation: 2,
-                }}
-              >
-                {nft.logoUrl ? (
-                  <SkeletonImage
-                    source={{ uri: nft.logoUrl }}
-                    style={{
-                      width: "100%",
-                      aspectRatio: 1,
-                      borderRadius: 8,
-                      marginBottom: 8,
-                    }}
-                    resizeMode="cover"
-                  />
-                ) : (
-                  <View
-                    style={{
-                      width: "100%",
-                      aspectRatio: 1,
-                      borderRadius: 8,
-                      backgroundColor: "#ccc",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      marginBottom: 8,
-                      overflow: "hidden",
-                      position: "relative",
-                    }}
-                  >
-                    <Image
-                      source={require("../../assets/Logo@500.png")}
-                      style={{
-                        position: "absolute",
-                        width: "50%",
-                        height: "50%",
-                        opacity: 0.2,
-                        resizeMode: "contain",
-                        top: "25%",
-                        left: "25%",
-                      }}
-                    />
-                    <Text
-                      style={[
-                        VaultScreenStyle.modalSubtitle,
-                        {
-                          color: "#eee",
-                          fontWeight: "bold",
-                          position: "absolute",
-                          fontSize: 12,
-                          textAlign: "center",
-                        },
-                      ]}
-                    >
-                      {t("No Image")}
-                    </Text>
-                  </View>
-                )}
-                <Text
-                  style={VaultScreenStyle.modalTitle}
-                  numberOfLines={3}
-                  ellipsizeMode="tail"
-                >
-                  {nft.name || "NFT Card"}
-                </Text>
-
-                <View
+          nftData.data.map((nft, index) =>
+            // 防御性兜底，确保每个 index 都有 Animated.Value
+            (() => {
+              if (!scaleAnimsRef.current[index]) {
+                scaleAnimsRef.current[index] = new Animated.Value(1);
+              }
+              return (
+                <Animated.View
+                  key={index}
                   style={{
-                    position: "absolute",
-                    bottom: 10,
-                    left: 10,
-                    right: 10,
+                    width: "50%",
+                    padding: 4,
+                    transform: [{ scale: scaleAnimsRef.current[index] }],
                   }}
                 >
-                  <View style={{ flexDirection: "column" }}>
-                    <Text
-                      style={[
-                        VaultScreenStyle.chainCardText,
-                        { marginBottom: 4 },
-                      ]}
+                  <TouchableOpacity
+                    onPressIn={() =>
+                      animatePressIn(scaleAnimsRef.current[index])
+                    }
+                    onPressOut={() =>
+                      animatePressOut(scaleAnimsRef.current[index], () =>
+                        handleGalleryelect(nft)
+                      )
+                    }
+                    activeOpacity={1}
+                    style={{ width: "100%" }}
+                  >
+                    <View
+                      style={{
+                        backgroundColor: isDarkMode ? "#333" : "#fff",
+                        borderRadius: 8,
+                        padding: 10,
+                        aspectRatio: 2 / 3,
+                        position: "relative",
+                        shadowColor: "#000",
+                        shadowOffset: { width: 0, height: 2 },
+                        shadowOpacity: 0.05,
+                        shadowRadius: 4,
+                        elevation: 2,
+                      }}
                     >
-                      {t("Chain")}: {nft.chain || t("N/A")}
-                    </Text>
-                  </View>
-                </View>
-              </View>
-            </TouchableOpacity>
-          ))
+                      {nft.logoUrl ? (
+                        <SkeletonImage
+                          source={{ uri: nft.logoUrl }}
+                          style={{
+                            width: "100%",
+                            aspectRatio: 1,
+                            borderRadius: 8,
+                            marginBottom: 8,
+                          }}
+                          resizeMode="cover"
+                        />
+                      ) : (
+                        <View
+                          style={{
+                            width: "100%",
+                            aspectRatio: 1,
+                            borderRadius: 8,
+                            backgroundColor: "#ccc",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            marginBottom: 8,
+                            overflow: "hidden",
+                            position: "relative",
+                          }}
+                        >
+                          <Image
+                            source={require("../../assets/Logo@500.png")}
+                            style={{
+                              position: "absolute",
+                              width: "50%",
+                              height: "50%",
+                              opacity: 0.2,
+                              resizeMode: "contain",
+                              top: "25%",
+                              left: "25%",
+                            }}
+                          />
+                          <Text
+                            style={[
+                              VaultScreenStyle.modalSubtitle,
+                              {
+                                color: "#eee",
+                                fontWeight: "bold",
+                                position: "absolute",
+                                fontSize: 12,
+                                textAlign: "center",
+                              },
+                            ]}
+                          >
+                            {t("No Image")}
+                          </Text>
+                        </View>
+                      )}
+                      <Text
+                        style={VaultScreenStyle.modalTitle}
+                        numberOfLines={3}
+                        ellipsizeMode="tail"
+                      >
+                        {nft.name || "NFT Card"}
+                      </Text>
+
+                      <View
+                        style={{
+                          position: "absolute",
+                          bottom: 10,
+                          left: 10,
+                          right: 10,
+                        }}
+                      >
+                        <View style={{ flexDirection: "column" }}>
+                          <Text
+                            style={[
+                              VaultScreenStyle.chainCardText,
+                              { marginBottom: 4 },
+                            ]}
+                          >
+                            {t("Chain")}: {nft.chain || t("N/A")}
+                          </Text>
+                        </View>
+                      </View>
+                    </View>
+                  </TouchableOpacity>
+                </Animated.View>
+              );
+            })()
+          )
         ) : (
           <View
             style={{
