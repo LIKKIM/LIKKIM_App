@@ -1,5 +1,5 @@
 // ContactFormModal.js
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Modal,
   View,
@@ -10,11 +10,14 @@ import {
   KeyboardAvoidingView,
   Platform,
   Image,
+  Animated,
 } from "react-native";
 import { BlurView } from "expo-blur";
 import { MaterialIcons as Icon } from "@expo/vector-icons";
 import AddressBookModal from "./AddressBookModal";
 import SecureDeviceScreenStyles from "../../styles/SecureDeviceScreenStyle";
+
+const AnimatedBlurView = Animated.createAnimatedComponent(BlurView);
 
 const ContactFormModal = ({
   visible,
@@ -37,6 +40,35 @@ const ContactFormModal = ({
   const [isAddressBookVisible, setAddressBookVisible] = useState(false);
   const styles = SecureDeviceScreenStyles(isDarkMode);
 
+  const [showModal, setShowModal] = useState(visible && !isAddressBookVisible);
+  const intensityAnim = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    if (visible && !isAddressBookVisible) {
+      setShowModal(true);
+      Animated.sequence([
+        Animated.timing(intensityAnim, {
+          toValue: 0,
+          duration: 400,
+          useNativeDriver: false,
+        }),
+        Animated.timing(intensityAnim, {
+          toValue: 20,
+          duration: 200,
+          useNativeDriver: false,
+        }),
+      ]).start();
+    } else if (showModal) {
+      Animated.timing(intensityAnim, {
+        toValue: 0,
+        duration: 400,
+        useNativeDriver: false,
+      }).start(() => {
+        setShowModal(false);
+      });
+    }
+  }, [visible, isAddressBookVisible]);
+
   const handleIconPress = () => {
     setAddressBookVisible(true);
     setContactFormModalVisible(false);
@@ -48,19 +80,33 @@ const ContactFormModal = ({
     setAddressBookVisible(false);
   };
 
+  if (!showModal)
+    return (
+      <AddressBookModal
+        visible={isAddressBookVisible}
+        onClose={() => setAddressBookVisible(false)}
+        onSelect={handleAddressSelect}
+        styles={styles}
+        isDarkMode={isDarkMode}
+      />
+    );
+
   return (
     <>
       <Modal
         animationType="slide"
         transparent={true}
-        visible={visible && !isAddressBookVisible}
+        visible={showModal}
         onRequestClose={onRequestClose}
       >
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
           style={ActivityScreenStyle.centeredView}
         >
-          <BlurView intensity={10} style={ActivityScreenStyle.blurBackground} />
+          <AnimatedBlurView
+            intensity={intensityAnim}
+            style={ActivityScreenStyle.blurBackground}
+          />
           <View style={ActivityScreenStyle.cardContainer}>
             <View
               style={{

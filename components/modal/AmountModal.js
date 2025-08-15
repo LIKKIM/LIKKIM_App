@@ -1,5 +1,5 @@
 //  modal/AmountModal.js
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   Modal,
   View,
@@ -9,9 +9,12 @@ import {
   Image,
   KeyboardAvoidingView,
   Platform,
+  Animated,
 } from "react-native";
 import { BlurView } from "expo-blur";
 import { metricsAPII } from "../../env/apiEndpoints";
+const AnimatedBlurView = Animated.createAnimatedComponent(BlurView);
+
 const AmountModal = ({
   visible,
   onRequestClose,
@@ -44,6 +47,35 @@ const AmountModal = ({
   selectedFeeTab,
   setSelectedFeeTab,
 }) => {
+  const [showModal, setShowModal] = useState(visible);
+  const intensityAnim = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    if (visible) {
+      setShowModal(true);
+      Animated.sequence([
+        Animated.timing(intensityAnim, {
+          toValue: 0,
+          duration: 400,
+          useNativeDriver: false,
+        }),
+        Animated.timing(intensityAnim, {
+          toValue: 20,
+          duration: 200,
+          useNativeDriver: false,
+        }),
+      ]).start();
+    } else if (showModal) {
+      Animated.timing(intensityAnim, {
+        toValue: 0,
+        duration: 400,
+        useNativeDriver: false,
+      }).start(() => {
+        setShowModal(false);
+      });
+    }
+  }, [visible]);
+
   useEffect(() => {
     if (visible) {
       fetchPriceChanges();
@@ -90,18 +122,23 @@ const AmountModal = ({
       ? (parseFloat(amount) * priceUsd * exchangeRates[currencyUnit]).toFixed(2)
       : "0.00";
 
+  if (!showModal) return null;
+
   return (
     <Modal
       animationType="slide"
       transparent
-      visible={visible}
+      visible={showModal}
       onRequestClose={onRequestClose}
     >
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={ActivityScreenStyle.centeredView}
       >
-        <BlurView intensity={10} style={ActivityScreenStyle.blurBackground} />
+        <AnimatedBlurView
+          intensity={intensityAnim}
+          style={ActivityScreenStyle.blurBackground}
+        />
         <View
           style={[
             ActivityScreenStyle.amountModalView,
