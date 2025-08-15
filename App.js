@@ -23,10 +23,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { MaterialIcons as Icon } from "@expo/vector-icons";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { BlurView } from "expo-blur";
 import { useTranslation } from "react-i18next";
 import styles, { darkTheme, lightTheme } from "./styles/styles";
-import AnimatedBlurModal from "./styles/AnimatedBlurModal";
 import VaultScreen from "./components/Vault";
 import ActivityScreen from "./components/Activity";
 import SecureDeviceScreen from "./components/SecureDevice";
@@ -51,6 +49,7 @@ import FloatingDev from "./utils/dev";
 import { hexStringToUint32Array, uint32ArrayToHexString } from "./env/hexUtils";
 import { createHandleDevicePress } from "./utils/handleDevicePress";
 import { scanDevices } from "./utils/scanDevices";
+import { BlurView } from "expo-blur";
 const FILE_NAME = "App.js";
 const serviceUUID = bluetoothConfig.serviceUUID;
 const writeCharacteristicUUID = bluetoothConfig.writeCharacteristicUUID;
@@ -777,7 +776,7 @@ function AppContent({
             activeOpacity={1}
             onPressOut={() => setHeaderDropdownVisible(false)}
           >
-            <BlurView intensity={10} style={styles.centeredView}>
+            <BlurView style={styles.centeredView}>
               <View style={theme.dropdown}>
                 <TouchableOpacity
                   onPress={handleConfirmDelete}
