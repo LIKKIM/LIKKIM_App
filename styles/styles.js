@@ -14,7 +14,6 @@ import {
   RADIUS_20,
   RADIUS_30,
 } from "./constants";
-import { Animated } from "react-native";
 import { buttonBase, modalPanelBase } from "./baseStyles";
 
 // tokens
@@ -422,37 +421,3 @@ export const screenLockDarkStyles = RNStyleSheet.create({
     backgroundColor: "#CCB68C",
   },
 });
-
-// 新增动画函数，封装Modal动画逻辑
-
-/**
- * 封装Modal显示隐藏动画
- * @param {Animated.Value} intensityAnim - Animated.Value实例
- * @param {boolean} visible - Modal是否显示
- * @param {function} setShowModal - 控制Modal显示状态的setState函数
- */
-export const runModalAnimation = (intensityAnim, visible, setShowModal) => {
-  if (visible) {
-    setShowModal(true);
-    Animated.sequence([
-      Animated.timing(intensityAnim, {
-        toValue: 0,
-        duration: 400,
-        useNativeDriver: false,
-      }),
-      Animated.timing(intensityAnim, {
-        toValue: 20,
-        duration: 200,
-        useNativeDriver: false,
-      }),
-    ]).start();
-  } else {
-    Animated.timing(intensityAnim, {
-      toValue: 0,
-      duration: 400,
-      useNativeDriver: false,
-    }).start(() => {
-      setShowModal(false);
-    });
-  }
-};
