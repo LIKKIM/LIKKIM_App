@@ -352,7 +352,12 @@ function SecureDeviceScreen({ onDarkModeChange }) {
         toggleScreenLock(false);
         setIsAppLaunching(false);
         setEnterLockCodeModalVisible(false);
+        console.log(
+          "【DEBUG】setModalMessage: ",
+          t("Screen lock disabled successfully")
+        );
         setModalMessage(t("Screen lock disabled successfully"));
+        console.log("【DEBUG】setSuccessModalVisible: true");
         setSuccessModalVisible(true);
       } catch (err) {
         console.error("❌ Failed to disable screen lock:", err);
@@ -360,8 +365,11 @@ function SecureDeviceScreen({ onDarkModeChange }) {
         setErrorModalVisible(true);
       }
     } else {
+      console.log("【DEBUG】进入 else 分支，准备关闭 modal");
       setEnterLockCodeModalVisible(false);
+      console.log("【DEBUG】已关闭 modal，准备弹出错误弹窗");
       setModalMessage(t("Incorrect password"));
+      console.log("【DEBUG】setErrorModalVisible: true");
       setErrorModalVisible(true);
     }
   };
