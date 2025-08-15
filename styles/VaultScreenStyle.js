@@ -72,6 +72,53 @@ const VaultScreenStyles = (isDarkMode) => {
   const c = makeTokens(isDarkMode);
 
   return StyleSheet.create({
+    // 占位骨架相关（规避敏感词）
+    placeholderWrapper: {
+      position: "absolute",
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      backgroundColor: "#aaaaaa",
+      overflow: "hidden",
+    },
+    shimmerBar: {
+      width: "30%",
+      height: "100%",
+    },
+    // NFT Modal 图片样式
+    nftModalImage: {
+      width: "100%",
+      aspectRatio: 1,
+      borderRadius: 8,
+      marginBottom: 8,
+    },
+    // NFT Modal 无图样式
+    nftNoImageContainer: {
+      width: "100%",
+      aspectRatio: 1,
+      borderRadius: 8,
+      backgroundColor: "#ccc",
+      justifyContent: "center",
+      alignItems: "center",
+      marginBottom: 8,
+    },
+    nftNoImageLogo: {
+      position: "absolute",
+      width: "50%",
+      height: "50%",
+      opacity: 0.2,
+      resizeMode: "contain",
+      top: "25%",
+      left: "25%",
+    },
+    nftNoImageText: {
+      color: "#eee",
+      fontWeight: "bold",
+      position: "absolute",
+      fontSize: 12,
+      textAlign: "center",
+    },
     // layout
     animatedTabContainer: {
       flexDirection: "column",

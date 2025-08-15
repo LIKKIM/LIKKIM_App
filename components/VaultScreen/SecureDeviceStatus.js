@@ -36,7 +36,7 @@ const bleManager = new BleManager();
 const serviceUUID = bluetoothConfig.serviceUUID;
 const writeCharacteristicUUID = bluetoothConfig.writeCharacteristicUUID;
 const notifyCharacteristicUUID = bluetoothConfig.notifyCharacteristicUUID;
-const SkeletonImage = ({ source, style, resizeMode }) => {
+const SkeletonImage = ({ source, style, resizeMode, VaultScreenStyle }) => {
   const [verifiedDevices, setVerifiedDevices] = useState([]);
   const [loaded, setLoaded] = useState(false);
   const skeletonOpacity = useState(new Animated.Value(1))[0];
@@ -94,14 +94,14 @@ const SkeletonImage = ({ source, style, resizeMode }) => {
       {!loaded && (
         <Animated.View
           style={[
-            styles.skeletonWrapper,
+            VaultScreenStyle.placeholderWrapper,
             { opacity: skeletonOpacity, borderRadius: style.borderRadius || 0 },
           ]}
         >
           {/* 闪烁效果：利用 Animated.View 搭配 LinearGradient 实现从左到右的流动渐变 */}
           <Animated.View
             style={[
-              styles.shimmer,
+              VaultScreenStyle.shimmerBar,
               { transform: [{ translateX: shimmerTranslate }] },
             ]}
           >
@@ -172,21 +172,7 @@ const SkeletonImage = ({ source, style, resizeMode }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  skeletonWrapper: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: "#aaaaaa",
-    overflow: "hidden",
-  },
-  shimmer: {
-    width: "30%",
-    height: "100%",
-  },
-});
+/* 样式已迁移到 VaultScreenStyle.js */
 
 const SecureDeviceStatus = ({
   setBleVisible,
@@ -1317,6 +1303,7 @@ const SecureDeviceStatus = ({
                           source={{ uri: nft.logoUrl }}
                           style={VaultScreenStyle.galleryImage}
                           resizeMode="cover"
+                          VaultScreenStyle={VaultScreenStyle}
                         />
                       ) : (
                         <View style={VaultScreenStyle.galleryNoImageContainer}>
@@ -1409,30 +1396,15 @@ const SecureDeviceStatus = ({
                     {selectedNFT.logoUrl ? (
                       <SkeletonImage
                         source={{ uri: selectedNFT.logoUrl }}
-                        style={{
-                          width: "100%",
-
-                          aspectRatio: 1,
-                          borderRadius: 8,
-                          marginBottom: 8,
-                        }}
+                        style={VaultScreenStyle.nftModalImage}
                         resizeMode="cover"
+                        VaultScreenStyle={VaultScreenStyle}
                       />
                     ) : (
-                      <View
-                        style={{
-                          width: "100%",
-                          aspectRatio: 1,
-                          borderRadius: 8,
-                          backgroundColor: "#ccc",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          marginBottom: 8,
-                        }}
-                      >
+                      <View style={VaultScreenStyle.nftNoImageContainer}>
                         <Image
                           source={require("../../assets/Logo@500.png")}
-                          style={VaultScreenStyle.galleryNoImageLogo}
+                          style={VaultScreenStyle.nftNoImageLogo}
                         />
                         <Text
                           style={[
