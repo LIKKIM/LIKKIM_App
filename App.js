@@ -777,12 +777,12 @@ function AppContent({
             onPressOut={() => setHeaderDropdownVisible(false)}
           >
             <BlurView intensity={10} style={styles.centeredView}>
-              <View style={theme.dropdown}>
+              <View style={styles.dropdown}>
                 <TouchableOpacity
                   onPress={handleConfirmDelete}
                   style={styles.dropdownButton}
                 >
-                  <Text style={theme.dropdownButtonText}>
+                  <Text style={styles.dropdownButtonText}>
                     {t("Delete Card")}
                   </Text>
                 </TouchableOpacity>
