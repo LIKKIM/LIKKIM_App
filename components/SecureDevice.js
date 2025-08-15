@@ -90,6 +90,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
     setCryptoCards,
     updateDevicePubHintKey,
     cryptoCards,
+    setIsAppLaunching,
   } = useContext(DeviceContext);
   const { isDarkMode, setIsDarkMode } = useContext(DarkModeContext);
   const SecureDeviceScreenStyle = SecureDeviceScreenStyles(isDarkMode);
@@ -312,6 +313,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
 
     try {
       await AsyncStorage.setItem("appLockPassword", password);
+      await AsyncStorage.setItem("screenLockPassword", password); // 修复：保证 DeviceContext 能同步到正确的密码
       await AsyncStorage.setItem(
         "screenLockFeatureEnabled",
         JSON.stringify(true)
@@ -346,6 +348,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
           JSON.stringify(false)
         );
         toggleScreenLock(false);
+        setIsAppLaunching(false);
         setEnterLockCodeModalVisible(false);
         setModalMessage(t("Screen lock disabled successfully"));
         setSuccessModalVisible(true);

@@ -1,6 +1,13 @@
 // EnterLockCodeModal.js
-import React from "react";
-import { Modal, View, Text, TextInput, TouchableOpacity } from "react-native";
+import React, { useState, useRef, useEffect } from "react";
+import {
+  Modal,
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Animated,
+} from "react-native";
 import { BlurView } from "expo-blur";
 import { MaterialIcons as Icon } from "@expo/vector-icons";
 
