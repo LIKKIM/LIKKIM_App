@@ -72,3 +72,12 @@ export const borderButtonBase = {
   borderRadius: RADIUS_16,
   padding: 10,
 };
+
+// 通用卡片阴影样式
+export const cardShadow = {
+  shadowColor: "#000",
+  shadowOffset: { width: 0, height: 2 },
+  shadowOpacity: 0.05,
+  shadowRadius: 4,
+  elevation: 2,
+};

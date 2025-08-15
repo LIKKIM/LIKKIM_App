@@ -47,6 +47,7 @@ import {
   iconBase,
   borderButtonBase,
   modalHeaderBase,
+  cardShadow,
 } from "./baseStyles";
 // base blocks
 
@@ -131,20 +132,16 @@ const VaultScreenStyles = (isDarkMode) => {
       padding: 4,
     },
     galleryCard: {
-      borderRadius: RADIUS_20,
-      justifyContent: "center",
-      alignItems: "center",
-      marginBottom: 20,
+      ...cardShadow,
       borderRadius: RADIUS_8,
       backgroundColor: c.modalBg,
       padding: 10,
       aspectRatio: 2 / 3,
       position: "relative",
-      shadowColor: "#000",
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.05,
-      shadowRadius: 4,
-      elevation: 2,
+      borderRadius: RADIUS_20,
+      justifyContent: "center",
+      alignItems: "center",
+      marginBottom: 20,
     },
     galleryImage: {
       width: "100%",
