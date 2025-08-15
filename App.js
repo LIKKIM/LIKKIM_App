@@ -26,6 +26,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { BlurView } from "expo-blur";
 import { useTranslation } from "react-i18next";
 import styles, { darkTheme, lightTheme } from "./styles/styles";
+import AnimatedBlurModal from "./styles/AnimatedBlurModal";
 import VaultScreen from "./components/Vault";
 import ActivityScreen from "./components/Activity";
 import SecureDeviceScreen from "./components/SecureDevice";
