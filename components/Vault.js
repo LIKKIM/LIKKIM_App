@@ -32,7 +32,7 @@ import { prefixToShortName } from "../config/chainPrefixes";
 import { CHAIN_NAMES } from "../config/chainConfig";
 import { createHandlePinSubmit } from "../utils/handlePinSubmit";
 import EmptyWalletView from "./modal/EmptyWalletView";
-import SecureDeviceStatus from "./VaultScreen/SecureDeviceStatus";
+import DeviceStatus from "./VaultScreen/DeviceStatus";
 import TabModal from "./VaultScreen/TabModal";
 import ModalsContainer from "./VaultScreen/ModalsContainer";
 import checkAndReqPermission from "../utils/BluetoothPermissions"; //安卓高版本申请蓝牙权限
@@ -924,7 +924,7 @@ function VaultScreen({ route, navigation }) {
       colors={isDarkMode ? ["#21201E", "#0E0D0D"] : ["#FFFFFF", "#EDEBEF"]}
       style={VaultScreenStyle.linearGradient}
     >
-      <SecureDeviceStatus
+      <DeviceStatus
         selectCardOffsetOpenAni={selectCardOffsetOpenAni}
         selectCardOffsetCloseAni={selectCardOffsetCloseAni}
         selectedView={selectedView}

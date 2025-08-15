@@ -1,4 +1,4 @@
-// ./VaultScreen/SecureDeviceStatus.js
+// ./VaultScreen/DeviceStatus.js
 import React, { useEffect, useState } from "react";
 import {
   ScrollView,
@@ -174,7 +174,7 @@ const SkeletonImage = ({ source, style, resizeMode, VaultScreenStyle }) => {
 
 /* 样式已迁移到 VaultScreenStyle.js */
 
-const SecureDeviceStatus = ({
+const DeviceStatus = ({
   setBleVisible,
   devices = [],
   verifiedDevices = [],
@@ -1782,4 +1782,4 @@ const SecureDeviceStatus = ({
   );
 };
 
-export default SecureDeviceStatus;
+export default DeviceStatus;
