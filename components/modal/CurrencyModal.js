@@ -1,5 +1,5 @@
 // modal/CurrencyModal.js
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   View,
   Text,
@@ -11,10 +11,13 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   Platform,
+  Animated,
 } from "react-native";
 import { BlurView } from "expo-blur";
 import { MaterialIcons as Icon } from "@expo/vector-icons";
 import CountryFlag from "react-native-country-flag";
+
+const AnimatedBlurView = Animated.createAnimatedComponent(BlurView);
 
 const CurrencyModal = ({
   visible,
@@ -28,6 +31,37 @@ const CurrencyModal = ({
   t,
 }) => {
   const [isSearchFocused, setIsSearchFocused] = useState(false);
+
+  // 动画相关
+  const [showModal, setShowModal] = useState(visible);
+  const intensityAnim = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    if (visible) {
+      setShowModal(true);
+      Animated.sequence([
+        Animated.timing(intensityAnim, {
+          toValue: 0,
+          duration: 400,
+          useNativeDriver: false,
+        }),
+        Animated.timing(intensityAnim, {
+          toValue: 20,
+          duration: 200,
+          useNativeDriver: false,
+        }),
+      ]).start();
+    } else if (showModal) {
+      Animated.timing(intensityAnim, {
+        toValue: 0,
+        duration: 400,
+        useNativeDriver: false,
+      }).start(() => {
+        setShowModal(false);
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [visible]);
 
   const handleOuterPress = () => {
     if (isSearchFocused) {
@@ -83,11 +117,13 @@ const CurrencyModal = ({
       currency.shortName.toLowerCase().includes(searchCurrency.toLowerCase())
   );
 
+  if (!showModal) return null;
+
   return (
     <Modal
       animationType="slide"
       transparent
-      visible={visible}
+      visible={showModal}
       onRequestClose={onClose}
     >
       <TouchableWithoutFeedback onPress={handleOuterPress}>
@@ -96,7 +132,10 @@ const CurrencyModal = ({
             behavior={Platform.OS === "ios" ? "padding" : "height"}
             style={{ flex: 1 }}
           >
-            <BlurView intensity={10} style={styles.centeredView}>
+            <AnimatedBlurView
+              intensity={intensityAnim}
+              style={styles.centeredView}
+            >
               <View
                 style={styles.currencyModalView}
                 onStartShouldSetResponder={() => true}
@@ -146,7 +185,7 @@ const CurrencyModal = ({
                   ))}
                 </ScrollView>
               </View>
-            </BlurView>
+            </AnimatedBlurView>
           </KeyboardAvoidingView>
         </View>
       </TouchableWithoutFeedback>
