@@ -139,7 +139,7 @@ const VaultScreenStyles = (isDarkMode) => {
       aspectRatio: 2 / 3,
       position: "relative",
       borderRadius: RADIUS_20,
-      justifyContent: "center",
+      justifyContent: "space-between",
       alignItems: "center",
       marginBottom: 20,
     },

@@ -1297,46 +1297,50 @@ const DeviceStatus = ({
                     style={{ width: "100%" }}
                   >
                     <View style={VaultScreenStyle.galleryCard}>
-                      {nft.logoUrl ? (
-                        <SkeletonImage
-                          source={{ uri: nft.logoUrl }}
-                          style={VaultScreenStyle.galleryImage}
-                          resizeMode="cover"
-                          VaultScreenStyle={VaultScreenStyle}
-                        />
-                      ) : (
-                        <View style={VaultScreenStyle.galleryNoImageContainer}>
-                          <Image
-                            source={require("../../assets/Logo@500.png")}
-                            style={{
-                              position: "absolute",
-                              width: "50%",
-                              height: "50%",
-                              opacity: 0.2,
-                              resizeMode: "contain",
-                              top: "25%",
-                              left: "25%",
-                            }}
+                      <View>
+                        {nft.logoUrl ? (
+                          <SkeletonImage
+                            source={{ uri: nft.logoUrl }}
+                            style={VaultScreenStyle.galleryImage}
+                            resizeMode="cover"
+                            VaultScreenStyle={VaultScreenStyle}
                           />
-                          <Text
-                            style={[
-                              VaultScreenStyle.modalSubtitle,
-                              VaultScreenStyle.galleryNoImageText,
-                            ]}
+                        ) : (
+                          <View
+                            style={VaultScreenStyle.galleryNoImageContainer}
                           >
-                            {t("No Image")}
-                          </Text>
-                        </View>
-                      )}
-                      <Text
-                        style={VaultScreenStyle.galleryCardTitle}
-                        numberOfLines={3}
-                        ellipsizeMode="tail"
-                      >
-                        {nft.name || "NFT Card"}
-                      </Text>
+                            <Image
+                              source={require("../../assets/Logo@500.png")}
+                              style={{
+                                position: "absolute",
+                                width: "50%",
+                                height: "50%",
+                                opacity: 0.2,
+                                resizeMode: "contain",
+                                top: "25%",
+                                left: "25%",
+                              }}
+                            />
+                            <Text
+                              style={[
+                                VaultScreenStyle.modalSubtitle,
+                                VaultScreenStyle.galleryNoImageText,
+                              ]}
+                            >
+                              {t("No Image")}
+                            </Text>
+                          </View>
+                        )}
+                      </View>
 
                       <View style={VaultScreenStyle.galleryCardBottom}>
+                        <Text
+                          style={VaultScreenStyle.galleryCardTitle}
+                          numberOfLines={3}
+                          ellipsizeMode="tail"
+                        >
+                          {nft.name || "NFT Card"}
+                        </Text>
                         <View style={VaultScreenStyle.galleryCardBottomCol}>
                           <Text
                             style={[
