@@ -38,23 +38,8 @@ const makeTokens = (isDarkMode) => ({
 const { height, width } = Dimensions.get("window");
 const containerHeight = height < 700 ? height - 280 : height - 360;
 
+import { buttonBase, modalPanelBase } from "./baseStyles";
 // base blocks
-const buttonBase = {
-  padding: 10,
-  width: "100%",
-  justifyContent: "center",
-  borderRadius: RADIUS_30,
-  height: 60,
-  alignItems: "center",
-};
-
-const modalPanelBase = {
-  width: "90%",
-  backgroundColor: undefined, // set from tokens
-  borderRadius: RADIUS_20,
-  padding: 30,
-  alignItems: "center",
-};
 
 const titleBase = {
   fontSize: FONT_SIZE_20,

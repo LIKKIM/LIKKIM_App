@@ -15,6 +15,8 @@ import {
   RADIUS_30,
 } from "./constants";
 
+import { buttonBase, modalPanelBase } from "./baseStyles";
+
 // tokens
 const makeTokens = (isDarkMode) => ({
   text: isDarkMode ? "#fff" : "#21201E",
@@ -48,24 +50,6 @@ const makeTokens = (isDarkMode) => ({
   submitBtnText: "#ffffff",
   cancelBtnText: "#ffffff",
 });
-
-// 基础样式块
-const buttonBase = {
-  padding: 10,
-  width: "90%",
-  justifyContent: "center",
-  borderRadius: RADIUS_30,
-  height: 60,
-  alignItems: "center",
-};
-
-const modalPanelBase = {
-  margin: 20,
-  width: "90%",
-  borderRadius: RADIUS_20,
-  padding: 30,
-  alignItems: "center",
-};
 
 const stylesFactory = (isDarkMode) => {
   const c = makeTokens(isDarkMode);

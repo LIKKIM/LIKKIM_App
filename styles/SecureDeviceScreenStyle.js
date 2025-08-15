@@ -12,6 +12,8 @@ import {
   RADIUS_30,
 } from "./constants";
 
+import { buttonBase, modalPanelBase } from "./baseStyles";
+
 // tokens
 const makeTokens = (isDarkMode) => ({
   text: isDarkMode ? "#fff" : "#000",
@@ -29,24 +31,6 @@ const makeTokens = (isDarkMode) => ({
   dropdownBg: isDarkMode ? "#3F3D3C" : "#fff",
   dropdownText: isDarkMode ? "#fff" : "#000",
 });
-
-// 基础样式块
-const buttonBase = {
-  padding: 10,
-  width: "100%",
-  justifyContent: "center",
-  borderRadius: RADIUS_30,
-  height: 60,
-  alignItems: "center",
-};
-
-const modalPanelBase = {
-  margin: 20,
-  width: "90%",
-  borderRadius: RADIUS_20,
-  padding: 30,
-  alignItems: "center",
-};
 
 const SecureDeviceScreenStyles = (isDarkMode) => {
   const c = makeTokens(isDarkMode);
