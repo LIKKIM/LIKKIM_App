@@ -32,19 +32,14 @@ const makeTokens = (isDarkMode) => ({
   roundBtnBg: isDarkMode ? "#3F3D3C" : "#3F3D3C",
   buttonText: isDarkMode ? "#e0e0e0" : "#e0e0e0",
   modalBg: isDarkMode ? "#3F3D3C" : "#fff",
-  modalTitle: "#ffffff",
   modalSubtitle: "#e0e0e0",
   languageModalBg: isDarkMode ? "#3F3D3C" : "#fff",
-  languageModalText: "#ffffff",
   historyBg: isDarkMode ? "#21201E" : "#E5E1E9",
-  historyTitle: "#ffffff",
-  noHistoryText: "#ffffff",
   historyItemBorder: "#ccc",
   historyItemText: "#000",
   inputBg: isDarkMode ? "#21201E" : "#E5E1E9",
   lightTheme: "#CCB68C",
-  submitBtnText: "#ffffff",
-  cancelBtnText: "#ffffff",
+  white: "#ffffff",
 });
 
 const stylesFactory = (isDarkMode) => {
@@ -140,8 +135,8 @@ const stylesFactory = (isDarkMode) => {
       alignItems: "center",
     },
     modalView: { ...modalPanelBase, backgroundColor: c.modalBg, height: 500 },
-    modalTitle: {
-      color: c.modalTitle,
+    white: {
+      color: c.white,
       fontSize: FONT_SIZE_16,
       fontWeight: "bold",
       marginBottom: 15,
@@ -153,19 +148,19 @@ const stylesFactory = (isDarkMode) => {
       textAlign: "center",
     },
     languageModalTitle: {
-      color: c.languageModalText,
+      color: c.white,
       fontSize: FONT_SIZE_20,
       fontWeight: "bold",
       marginBottom: 30,
     },
-    languageModalText: {
-      color: c.languageModalText,
+    white: {
+      color: c.white,
       fontSize: FONT_SIZE_16,
       marginBottom: 10,
       textAlign: "center",
     },
     LockCodeModalText: {
-      color: c.languageModalText,
+      color: c.white,
       fontSize: FONT_SIZE_16,
       marginBottom: 10,
       textAlign: "left",
@@ -191,16 +186,16 @@ const stylesFactory = (isDarkMode) => {
       borderRadius: RADIUS_10,
       height: 360,
     },
-    historyTitle: {
+    white: {
       position: "absolute",
       left: 20,
       top: 20,
       fontSize: FONT_SIZE_16,
-      color: c.historyTitle,
+      color: c.white,
     },
-    noHistoryText: {
+    white: {
       fontSize: FONT_SIZE_16,
-      color: c.noHistoryText,
+      color: c.white,
       textAlign: "center",
     },
     historyItem: {
@@ -209,13 +204,13 @@ const stylesFactory = (isDarkMode) => {
       borderBottomColor: c.historyItemBorder,
     },
     historyItemText: { fontSize: FONT_SIZE_16, color: c.historyItemText },
-    modalText: { color: c.modalTitle, textAlign: "center", marginBottom: 120 },
+    modalText: { color: c.white, textAlign: "center", marginBottom: 120 },
     optionButton: {
       ...buttonBase,
       backgroundColor: c.lightTheme,
       marginBottom: 10,
     },
-    optionButtonText: { color: c.modalTitle },
+    optionButtonText: { color: c.white },
     input: {
       backgroundColor: c.inputBg,
       padding: 10,
@@ -237,8 +232,8 @@ const stylesFactory = (isDarkMode) => {
       position: "absolute",
       bottom: 60,
     },
-    submitButtonText: { color: c.submitBtnText },
-    cancelButtonText: { color: c.cancelBtnText },
+    submitButtonText: { color: c.white },
+    cancelButtonText: { color: c.white },
   });
 };
 
@@ -316,7 +311,7 @@ export const screenLockStyles = RNStyleSheet.create({
     alignItems: "center",
     width: "80%",
   },
-  modalTitle: {
+  white: {
     fontSize: 20,
     fontWeight: "bold",
     marginBottom: 15,
@@ -366,7 +361,7 @@ export const screenLockLightStyles = RNStyleSheet.create({
   modalView: {
     backgroundColor: "#fff",
   },
-  modalTitle: {
+  white: {
     color: "#333",
   },
   modalText: {
@@ -408,7 +403,7 @@ export const screenLockDarkStyles = RNStyleSheet.create({
   modalView: {
     backgroundColor: "#21201E",
   },
-  modalTitle: {
+  white: {
     color: "#f5f5f5",
   },
   modalText: {
