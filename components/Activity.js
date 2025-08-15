@@ -30,7 +30,7 @@ import BluetoothModal from "./modal/BluetoothModal";
 import AmountModal from "./modal/AmountModal";
 import SelectCryptoModal from "./modal/SelectCryptoModal";
 import ConvertModal from "./modal/ConvertModal";
-import ShowReceiveInfoModal from "./modal/ShowReceiveInfoModal";
+import ReceiveAddressModal from "./modal/ReceiveAddressModal";
 import SecurityCodeModal from "./modal/SecurityCodeModal";
 import ActivityLogComponent from "./ActivityScreen/ActivityLogComponent";
 import ActionButtons from "./ActivityScreen/ActionButtons";
@@ -1252,16 +1252,16 @@ function ActivityScreen() {
           isDarkMode={isDarkMode}
         />
         {/* 显示选择的加密货币地址的模态窗口 */}
-        <ShowReceiveInfoModal
+        <ReceiveAddressModal
           visible={addressModalVisible}
-          onRequestClose={() => setAddressModalVisible(false)}
-          ActivityScreenStyle={ActivityScreenStyle}
-          selectedCryptoIcon={selectedCryptoIcon}
-          selectedCrypto={selectedCrypto}
-          selectedAddress={selectedAddress}
-          isVerifyingAddress={isVerifyingAddress}
-          addressVerificationMessage={addressVerificationMessage}
-          handleVerifyAddress={handleVerifyAddress}
+          onClose={() => setAddressModalVisible(false)}
+          styleObj={ActivityScreenStyle}
+          cryptoIcon={selectedCryptoIcon}
+          cryptoName={selectedCrypto}
+          address={selectedAddress}
+          isVerifying={isVerifyingAddress}
+          verifyMsg={addressVerificationMessage}
+          handleVerify={handleVerifyAddress}
           isDarkMode={isDarkMode}
           chainShortName={chainShortName}
         />

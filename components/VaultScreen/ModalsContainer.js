@@ -1,6 +1,6 @@
 // ModalsContainer.js
 import React from "react";
-import AddressModal from "../modal/AddressModal";
+import ReceiveAddressModal from "../modal/ReceiveAddressModal";
 import DeleteConfirmationModal from "../modal/DeleteConfirmationModal";
 import BluetoothModal from "../modal/BluetoothModal";
 import SecurityCodeModal from "../modal/SecurityCodeModal";
@@ -82,18 +82,18 @@ const ModalsContainer = ({
   return (
     <>
       {/* 显示选择的加密货币地址的模态窗口 */}
-      <AddressModal
+      <ReceiveAddressModal
         visible={addressModalVisible}
         onClose={() => setAddressModalVisible(false)}
-        selectedCryptoIcon={selectedCryptoIcon}
-        selectedCrypto={selectedCrypto}
-        selectedAddress={selectedAddress}
-        selectedCardChainShortName={selectedCardChainShortName}
-        isVerifyingAddress={isVerifyingAddress}
-        addressVerificationMessage={addressVerificationMessage}
-        handleVerifyAddress={handleVerifyAddress}
-        VaultScreenStyle={VaultScreenStyle}
+        styleObj={VaultScreenStyle}
+        cryptoIcon={selectedCryptoIcon}
+        cryptoName={selectedCrypto}
+        address={selectedAddress}
+        isVerifying={isVerifyingAddress}
+        verifyMsg={addressVerificationMessage}
+        handleVerify={handleVerifyAddress}
         isDarkMode={isDarkMode}
+        chainShortName={selectedCardChainShortName}
       />
       {/* Delete Confirmation Modal */}
       <DeleteConfirmationModal
