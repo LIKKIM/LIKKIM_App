@@ -1311,7 +1311,6 @@ const SecureDeviceStatus = ({
                     activeOpacity={1}
                     style={{ width: "100%" }}
                   >
-                      style={{
                     <View style={VaultScreenStyle.galleryCard}>
                       {nft.logoUrl ? (
                         <SkeletonImage
