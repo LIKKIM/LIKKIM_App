@@ -14,7 +14,7 @@ import {
   RADIUS_20,
   RADIUS_30,
 } from "./constants";
-
+import { Animated } from "react-native";
 import { buttonBase, modalPanelBase } from "./baseStyles";
 
 // tokens
@@ -424,7 +424,6 @@ export const screenLockDarkStyles = RNStyleSheet.create({
 });
 
 // 新增动画函数，封装Modal动画逻辑
-import { Animated } from "react-native";
 
 /**
  * 封装Modal显示隐藏动画
