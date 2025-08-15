@@ -83,7 +83,7 @@ const EmptyWalletView = ({
 
     Animated.sequence([
       Animated.timing(scaleAnim, {
-        toValue: 1.0,
+        toValue: 1.03,
         duration: 100,
         useNativeDriver: true,
       }),
