@@ -1592,7 +1592,7 @@ const DeviceStatus = ({
                     >
                       {selectedNFT?.name || "NFT Name"}
                     </Text>
-                    <Text style={VaultScreenStyle.modalSubtitle}>
+                    <Text style={VaultScreenStyle.modalSubtitleLeft}>
                       {t("Token ID")}: {selectedNFT?.tokenId || "N/A"}
                     </Text>
                   </ScrollView>

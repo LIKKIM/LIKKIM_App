@@ -576,6 +576,10 @@ const VaultScreenStyles = (isDarkMode) => {
     bluetoothModalTitle: { ...titleBase, color: c.text, marginBottom: 10 },
     SecurityCodeModalTitle: { ...titleBase, color: c.text, marginBottom: 15 },
     modalSubtitle: { ...textCenterMuted(c) },
+    modalSubtitleLeft: {
+      ...textCenterMuted(c),
+      textAlign: "left",
+    },
     scanModalSubtitle: { color: c.mutedText, fontSize: FONT_SIZE_15 },
     alertModalTitle: {
       color: c.text,
