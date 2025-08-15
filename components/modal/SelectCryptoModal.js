@@ -1,5 +1,5 @@
 // SelectCryptoModal.js
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   Modal,
   ScrollView,
@@ -11,9 +11,12 @@ import {
   KeyboardAvoidingView,
   Platform,
   TouchableWithoutFeedback,
+  Animated,
 } from "react-native";
 import { BlurView } from "expo-blur";
 import { MaterialIcons as Icon } from "@expo/vector-icons";
+
+const AnimatedBlurView = Animated.createAnimatedComponent(BlurView);
 
 const SelectCryptoModal = ({
   visible,
@@ -27,6 +30,34 @@ const SelectCryptoModal = ({
   isDarkMode,
 }) => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [showModal, setShowModal] = useState(visible);
+  const intensityAnim = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    if (visible) {
+      setShowModal(true);
+      Animated.sequence([
+        Animated.timing(intensityAnim, {
+          toValue: 0,
+          duration: 400,
+          useNativeDriver: false,
+        }),
+        Animated.timing(intensityAnim, {
+          toValue: 20,
+          duration: 200,
+          useNativeDriver: false,
+        }),
+      ]).start();
+    } else if (showModal) {
+      Animated.timing(intensityAnim, {
+        toValue: 0,
+        duration: 400,
+        useNativeDriver: false,
+      }).start(() => {
+        setShowModal(false);
+      });
+    }
+  }, [visible]);
 
   const filteredCryptos = addedCryptos.filter((crypto) =>
     `${crypto.shortName} ${crypto.chain}`
@@ -34,11 +65,13 @@ const SelectCryptoModal = ({
       .includes(searchQuery.toLowerCase())
   );
 
+  if (!showModal) return null;
+
   return (
     <Modal
       animationType="slide"
       transparent={true}
-      visible={visible}
+      visible={showModal}
       onRequestClose={onRequestClose}
     >
       <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
@@ -46,7 +79,10 @@ const SelectCryptoModal = ({
           behavior={Platform.OS === "ios" ? "padding" : "height"}
           style={{ flex: 1 }}
         >
-          <BlurView intensity={10} style={ActivityScreenStyle.centeredView}>
+          <AnimatedBlurView
+            intensity={intensityAnim}
+            style={ActivityScreenStyle.centeredView}
+          >
             <View
               style={ActivityScreenStyle.modalView}
               onStartShouldSetResponder={() => true}
@@ -136,7 +172,7 @@ const SelectCryptoModal = ({
                 </Text>
               </TouchableOpacity>
             </View>
-          </BlurView>
+          </AnimatedBlurView>
         </KeyboardAvoidingView>
       </TouchableWithoutFeedback>
     </Modal>
