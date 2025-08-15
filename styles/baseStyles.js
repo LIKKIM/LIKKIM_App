@@ -31,3 +31,44 @@ export const textCenterMuted = (colors) => ({
   color: colors.mutedText,
   textAlign: "center",
 });
+
+// 卡片基础样式
+export const cardBase = {
+  borderRadius: RADIUS_20,
+  overflow: "hidden",
+  justifyContent: "center",
+  alignItems: "center",
+  marginBottom: 20,
+};
+
+// 图标基础样式
+export const iconBase = {
+  resizeMode: "contain",
+  alignItems: "center",
+  justifyContent: "center",
+};
+
+// 容器基础样式
+export const containerBase = {
+  flex: 1,
+  alignItems: "center",
+  justifyContent: "center",
+};
+
+// 弹窗头部基础样式
+export const modalHeaderBase = {
+  width: "100%",
+  flexDirection: "row",
+  justifyContent: "flex-end",
+  alignItems: "center",
+};
+
+// 带边框按钮基础样式
+export const borderButtonBase = {
+  borderWidth: 3,
+  justifyContent: "center",
+  alignItems: "center",
+  height: 60,
+  borderRadius: RADIUS_16,
+  padding: 10,
+};

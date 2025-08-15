@@ -117,9 +117,7 @@ const VaultScreenStyles = (isDarkMode) => {
     scrollView: { width: "100%", paddingHorizontal: 0 },
     scrollViewContent: { justifyContent: "start", alignItems: "center" },
     centeredView: {
-      flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
+      ...containerBase,
     },
 
     // Gallery Card (no sensitive words)
@@ -128,8 +126,9 @@ const VaultScreenStyles = (isDarkMode) => {
       padding: 4,
     },
     galleryCard: {
-      backgroundColor: c.modalBg,
+      ...cardBase,
       borderRadius: RADIUS_8,
+      backgroundColor: c.modalBg,
       padding: 10,
       aspectRatio: 2 / 3,
       position: "relative",
@@ -189,14 +188,10 @@ const VaultScreenStyles = (isDarkMode) => {
     // cards
     cardContainer: { position: "relative", marginBottom: -130 },
     card: {
+      ...cardBase,
       width: 326,
       height: 206,
-      borderRadius: RADIUS_20,
-      overflow: "hidden",
-      justifyContent: "center",
-      alignItems: "center",
       backgroundColor: c.cardBg,
-      marginBottom: 20,
     },
     cardFirst: {
       shadowOffset: { width: 0, height: 0 },
@@ -240,8 +235,8 @@ const VaultScreenStyles = (isDarkMode) => {
     },
 
     // icons on card
-    cardIcon: { width: 42, height: 42 },
-    chainIcon: { width: 14, height: 14 },
+    cardIcon: { ...iconBase, width: 42, height: 42 },
+    chainIcon: { ...iconBase, width: 14, height: 14 },
     cardIconContainer: {
       position: "absolute",
       top: 28,
@@ -461,14 +456,9 @@ const VaultScreenStyles = (isDarkMode) => {
       borderColor: c.btnBg,
     },
     cancelAddressBtn: {
+      ...borderButtonBase,
       borderColor: c.btnBg,
       flex: 1,
-      borderWidth: 3,
-      padding: 10,
-      justifyContent: "center",
-      borderRadius: 16,
-      height: 60,
-      alignItems: "center",
     },
     cancelButtonCryptoCard: {
       ...buttonBase,
@@ -577,10 +567,7 @@ const VaultScreenStyles = (isDarkMode) => {
 
     // modal headers & text
     modalHeader: {
-      width: "100%",
-      flexDirection: "row",
-      justifyContent: "flex-end",
-      alignItems: "center",
+      ...modalHeaderBase,
     },
     modalTitle: { color: c.text, fontSize: FONT_SIZE_16, fontWeight: "bold" },
     bluetoothModalTitle: { ...titleBase, color: c.text, marginBottom: 10 },
