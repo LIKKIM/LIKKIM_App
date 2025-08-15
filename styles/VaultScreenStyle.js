@@ -131,7 +131,10 @@ const VaultScreenStyles = (isDarkMode) => {
       padding: 4,
     },
     galleryCard: {
-      ...cardBase,
+      borderRadius: RADIUS_20,
+      justifyContent: "center",
+      alignItems: "center",
+      marginBottom: 20,
       borderRadius: RADIUS_8,
       backgroundColor: c.modalBg,
       padding: 10,
