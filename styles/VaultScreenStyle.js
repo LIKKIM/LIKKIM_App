@@ -75,7 +75,6 @@ const VaultScreenStyles = (isDarkMode) => {
       width: "100%",
       aspectRatio: 1,
       borderRadius: 8,
-      marginBottom: 8,
     },
     // NFT Modal 无图样式
     nftNoImageContainer: {
@@ -85,7 +84,6 @@ const VaultScreenStyles = (isDarkMode) => {
       backgroundColor: "#ccc",
       justifyContent: "center",
       alignItems: "center",
-      marginBottom: 8,
     },
     nftNoImageLogo: {
       position: "absolute",
@@ -147,7 +145,6 @@ const VaultScreenStyles = (isDarkMode) => {
       width: "100%",
       aspectRatio: 1,
       borderRadius: 8,
-      marginBottom: 8,
     },
     galleryNoImageContainer: {
       width: "100%",
@@ -156,7 +153,6 @@ const VaultScreenStyles = (isDarkMode) => {
       backgroundColor: "#ccc",
       justifyContent: "center",
       alignItems: "center",
-      marginBottom: 8,
       overflow: "hidden",
       position: "relative",
     },
@@ -182,11 +178,13 @@ const VaultScreenStyles = (isDarkMode) => {
       fontWeight: "bold",
     },
     galleryCardBottom: {
-      position: "absolute",
-      bottom: 10,
-      left: 10,
-      right: 10,
+      flex: 1, // 占满剩余高度
+      width: "100%",
+      justifyContent: "space-between", // 上下撑开
+      alignItems: "flex-start", // 左对齐
+      paddingVertical: 10,
     },
+
     galleryCardBottomCol: {
       flexDirection: "column",
     },
