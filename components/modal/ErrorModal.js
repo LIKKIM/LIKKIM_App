@@ -21,7 +21,7 @@ const ErrorModal = ({ visible, onClose, message, styles, t }) => {
       Animated.sequence([
         Animated.timing(intensityAnim, {
           toValue: 0,
-          duration: 400,
+          duration: 800,
           useNativeDriver: false,
         }),
         Animated.timing(intensityAnim, {

@@ -336,9 +336,9 @@ function SecureDeviceScreen({ onDarkModeChange }) {
   };
 
   const handleConfirmPassword = async () => {
-    console.log("⛔ 当前输入：", currentPassword);
+    /*     console.log("⛔ 当前输入：", currentPassword);
     console.log("✅ 正确密码：", screenLockPassword);
-
+ */
     if (currentPassword === screenLockPassword) {
       try {
         await AsyncStorage.setItem(
