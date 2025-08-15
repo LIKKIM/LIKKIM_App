@@ -1,17 +1,8 @@
 // modal/LockCodeModal.js
-import React, { useState, useEffect, useRef } from "react";
-import {
-  Modal,
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  Animated,
-} from "react-native";
+import React from "react";
+import { Modal, View, Text, TextInput, TouchableOpacity } from "react-native";
 import { BlurView } from "expo-blur";
 import { MaterialIcons as Icon } from "@expo/vector-icons";
-
-const AnimatedBlurView = Animated.createAnimatedComponent(BlurView);
 
 function LockCodeModal({
   visible,
@@ -34,45 +25,14 @@ function LockCodeModal({
   isConfirmPasswordHidden,
   setIsConfirmPasswordHidden,
 }) {
-  const [showModal, setShowModal] = useState(visible);
-  const intensityAnim = useRef(new Animated.Value(0)).current;
-
-  useEffect(() => {
-    if (visible) {
-      setShowModal(true);
-      Animated.sequence([
-        Animated.timing(intensityAnim, {
-          toValue: 0,
-          duration: 400,
-          useNativeDriver: false,
-        }),
-        Animated.timing(intensityAnim, {
-          toValue: 20,
-          duration: 200,
-          useNativeDriver: false,
-        }),
-      ]).start();
-    } else if (showModal) {
-      Animated.timing(intensityAnim, {
-        toValue: 0,
-        duration: 400,
-        useNativeDriver: false,
-      }).start(() => {
-        setShowModal(false);
-      });
-    }
-  }, [visible]);
-
-  if (!showModal) return null;
-
   return (
     <Modal
       animationType="slide"
       transparent
-      visible={showModal}
+      visible={visible}
       onRequestClose={onClose}
     >
-      <AnimatedBlurView intensity={intensityAnim} style={styles.centeredView}>
+      <BlurView intensity={10} style={styles.centeredView}>
         <View style={styles.enableLockModalView}>
           <Text style={styles.LockCodeModalTitle}>
             {t("Enable Screen Lock")}
@@ -144,7 +104,7 @@ function LockCodeModal({
             </TouchableOpacity>
           </View>
         </View>
-      </AnimatedBlurView>
+      </BlurView>
     </Modal>
   );
 }

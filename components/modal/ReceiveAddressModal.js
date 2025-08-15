@@ -1,5 +1,5 @@
 // ReceiveAddressModal.js
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import {
   Modal,
@@ -8,7 +8,6 @@ import {
   TouchableOpacity,
   Image,
   Alert,
-  Animated,
 } from "react-native";
 import Clipboard from "@react-native-clipboard/clipboard";
 import { BlurView } from "expo-blur";
@@ -31,8 +30,6 @@ import QRCode from "react-native-qrcode-svg";
  *  - isDarkMode
  *  - chainShortName
  */
-const AnimatedBlurView = Animated.createAnimatedComponent(BlurView);
-
 const ReceiveAddressModal = ({
   visible,
   onClose,
@@ -47,46 +44,14 @@ const ReceiveAddressModal = ({
   chainShortName,
 }) => {
   const { t } = useTranslation();
-
-  const [showModal, setShowModal] = useState(visible);
-  const intensityAnim = useRef(new Animated.Value(0)).current;
-
-  useEffect(() => {
-    if (visible) {
-      setShowModal(true);
-      Animated.sequence([
-        Animated.timing(intensityAnim, {
-          toValue: 0,
-          duration: 400,
-          useNativeDriver: false,
-        }),
-        Animated.timing(intensityAnim, {
-          toValue: 20,
-          duration: 200,
-          useNativeDriver: false,
-        }),
-      ]).start();
-    } else if (showModal) {
-      Animated.timing(intensityAnim, {
-        toValue: 0,
-        duration: 400,
-        useNativeDriver: false,
-      }).start(() => {
-        setShowModal(false);
-      });
-    }
-  }, [visible]);
-
-  if (!showModal) return null;
-
   return (
     <Modal
       animationType="slide"
       transparent
-      visible={showModal}
+      visible={visible}
       onRequestClose={onClose}
     >
-      <AnimatedBlurView intensity={intensityAnim} style={styleObj.centeredView}>
+      <BlurView intensity={10} style={styleObj.centeredView}>
         <View style={styleObj.receiveModalView}>
           <Header
             cryptoIcon={cryptoIcon}
@@ -112,7 +77,7 @@ const ReceiveAddressModal = ({
             chainShortName={chainShortName}
           />
         </View>
-      </AnimatedBlurView>
+      </BlurView>
     </Modal>
   );
 };
