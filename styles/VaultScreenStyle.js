@@ -22,7 +22,6 @@ const makeTokens = (isDarkMode) => ({
   mutedText: isDarkMode ? "#ddd" : "#676776",
   cardText: "#fff",
   bg: isDarkMode ? "#121212" : "#f5f5f5",
-
   modalBg: isDarkMode ? "#3F3D3C" : "#ffffff",
   btnBg: isDarkMode ? "#CCB68C" : "#E5E1E9",
   btnColor: isDarkMode ? "#CCB68C" : "#CFAB95",
