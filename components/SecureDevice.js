@@ -73,8 +73,6 @@ if (Platform.OS === "android") {
 }
 
 function SecureDeviceScreen({ onDarkModeChange }) {
-  // DEBUG: 每次渲染都打印 errorModalVisible
-  // 只打印，不重复声明
   const { t } = useTranslation();
   const navigation = useNavigation();
   const {
@@ -92,7 +90,6 @@ function SecureDeviceScreen({ onDarkModeChange }) {
     setCryptoCards,
     updateDevicePubHintKey,
     cryptoCards,
-    setIsAppLaunching,
   } = useContext(DeviceContext);
   const { isDarkMode, setIsDarkMode } = useContext(DarkModeContext);
   const SecureDeviceScreenStyle = SecureDeviceScreenStyles(isDarkMode);
@@ -143,7 +140,6 @@ function SecureDeviceScreen({ onDarkModeChange }) {
   const [deviceToDisconnect, setDeviceToDisconnect] = useState(null);
   const [successModalVisible, setSuccessModalVisible] = useState(false);
   const [errorModalVisible, setErrorModalVisible] = useState(false);
-  console.log("【DEBUG】errorModalVisible: ", errorModalVisible);
   const [verificationStatus, setVerificationStatus] = useState(null);
   const [modalMessage, setModalMessage] = useState("");
   const [addressBookModalVisible, setAddressBookModalVisible] = useState(false);
@@ -315,10 +311,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
     }
 
     try {
-      console.log("存入的正确密码:", password);
       await AsyncStorage.setItem("appLockPassword", password);
-      await AsyncStorage.setItem("screenLockPassword", password); // 修复：保证 DeviceContext 能同步到正确的密码
-      await changeScreenLockPassword(password); // 保证 context 里的密码同步
       await AsyncStorage.setItem(
         "screenLockFeatureEnabled",
         JSON.stringify(true)
@@ -353,14 +346,8 @@ function SecureDeviceScreen({ onDarkModeChange }) {
           JSON.stringify(false)
         );
         toggleScreenLock(false);
-        setIsAppLaunching(false);
         setEnterLockCodeModalVisible(false);
-        console.log(
-          "【DEBUG】setModalMessage: ",
-          t("Screen lock disabled successfully")
-        );
         setModalMessage(t("Screen lock disabled successfully"));
-        console.log("【DEBUG】setSuccessModalVisible: true");
         setSuccessModalVisible(true);
       } catch (err) {
         console.error("❌ Failed to disable screen lock:", err);
@@ -368,11 +355,8 @@ function SecureDeviceScreen({ onDarkModeChange }) {
         setErrorModalVisible(true);
       }
     } else {
-      console.log("【DEBUG】进入 else 分支，准备关闭 modal");
       setEnterLockCodeModalVisible(false);
-      console.log("【DEBUG】已关闭 modal，准备弹出错误弹窗");
       setModalMessage(t("Incorrect password"));
-      console.log("【DEBUG】setErrorModalVisible: true");
       setErrorModalVisible(true);
     }
   };
@@ -922,6 +906,20 @@ function SecureDeviceScreen({ onDarkModeChange }) {
         isDarkMode={isDarkMode}
         onAddAddress={handleAddAddress}
       />
+      <Modal
+        visible={errorModalVisible}
+        transparent={true}
+        animationType="slide"
+        onRequestClose={() => setErrorModalVisible(false)}
+      >
+        <View style={SecureDeviceScreenStyle.modalView}>
+          <Text style={SecureDeviceScreenStyle.modalTitle}>{t("Error")}</Text>
+          <Text style={SecureDeviceScreenStyle.modalSubtitle}>
+            {modalMessage}
+          </Text>
+          <Button title={t("OK")} onPress={() => setErrorModalVisible(false)} />
+        </View>
+      </Modal>
     </LinearGradient>
   );
 }

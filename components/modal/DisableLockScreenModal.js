@@ -1,17 +1,8 @@
-// modal/DisableLockScreenModal.js
-import React, { useEffect, useState, useRef } from "react";
-import {
-  Modal,
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  Animated,
-} from "react-native";
+import React from "react";
+import { Modal, View, Text, TextInput, TouchableOpacity } from "react-native";
+
 import { BlurView } from "expo-blur";
 import { MaterialIcons as Icon } from "@expo/vector-icons";
-
-const AnimatedBlurView = Animated.createAnimatedComponent(BlurView);
 
 const DisableLockScreenModal = ({
   visible,
@@ -24,92 +15,58 @@ const DisableLockScreenModal = ({
   t,
   isDarkMode,
   styles,
-}) => {
-  const [showModal, setShowModal] = useState(visible);
-  const intensityAnim = useRef(new Animated.Value(0)).current;
+}) => (
+  <Modal
+    animationType="slide"
+    transparent={true}
+    visible={visible}
+    onRequestClose={onRequestClose}
+  >
+    <BlurView intensity={10} style={styles.centeredView}>
+      <View style={styles.disableLockModalView}>
+        <Text style={styles.LockCodeModalTitle}>
+          {t("Disable Lock Screen")}
+        </Text>
+        <View style={{ marginVertical: 10, width: "100%" }}>
+          <View style={styles.passwordInputContainer}>
+            <TextInput
+              style={styles.passwordInput}
+              placeholder={t("Enter your password")}
+              placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
+              secureTextEntry={isCurrentPasswordHidden}
+              onChangeText={setCurrentPassword}
+              value={currentPassword}
+              autoFocus={true}
+            />
 
-  useEffect(() => {
-    if (visible) {
-      setShowModal(true);
-      Animated.sequence([
-        Animated.timing(intensityAnim, {
-          toValue: 0,
-          duration: 400,
-          useNativeDriver: false,
-        }),
-        Animated.timing(intensityAnim, {
-          toValue: 20,
-          duration: 200,
-          useNativeDriver: false,
-        }),
-      ]).start();
-    } else if (showModal) {
-      Animated.timing(intensityAnim, {
-        toValue: 0,
-        duration: 400,
-        useNativeDriver: false,
-      }).start(() => {
-        setShowModal(false);
-      });
-    }
-  }, [visible]);
-
-  if (!showModal) return null;
-
-  return (
-    <Modal
-      animationType="slide"
-      transparent={true}
-      visible={showModal}
-      onRequestClose={onRequestClose}
-    >
-      <AnimatedBlurView intensity={intensityAnim} style={styles.centeredView}>
-        <View style={styles.disableLockModalView}>
-          <Text style={styles.LockCodeModalTitle}>
-            {t("Disable Lock Screen")}
-          </Text>
-          <View style={{ marginVertical: 10, width: "100%" }}>
-            <View style={styles.passwordInputContainer}>
-              <TextInput
-                style={styles.passwordInput}
-                placeholder={t("Enter your password")}
-                placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
-                secureTextEntry={isCurrentPasswordHidden}
-                onChangeText={setCurrentPassword}
-                value={currentPassword}
-                autoFocus={true}
-              />
-              <TouchableOpacity
-                onPress={() =>
-                  setIsCurrentPasswordHidden(!isCurrentPasswordHidden)
-                }
-                style={styles.eyeIcon}
-              >
-                <Icon
-                  name={
-                    isCurrentPasswordHidden ? "visibility-off" : "visibility"
-                  }
-                  size={24}
-                  color={isDarkMode ? "#ccc" : "#666"}
-                />
-              </TouchableOpacity>
-            </View>
-          </View>
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.submitButton} onPress={onSubmit}>
-              <Text style={styles.submitButtonText}>{t("Submit")}</Text>
-            </TouchableOpacity>
             <TouchableOpacity
-              style={styles.cancelButton}
-              onPress={onRequestClose}
+              onPress={() =>
+                setIsCurrentPasswordHidden(!isCurrentPasswordHidden)
+              }
+              style={styles.eyeIcon}
             >
-              <Text style={styles.cancelButtonText}>{t("Cancel")}</Text>
+              <Icon
+                name={isCurrentPasswordHidden ? "visibility-off" : "visibility"}
+                size={24}
+                color={isDarkMode ? "#ccc" : "#666"}
+              />
             </TouchableOpacity>
           </View>
         </View>
-      </AnimatedBlurView>
-    </Modal>
-  );
-};
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.submitButton} onPress={onSubmit}>
+            <Text style={styles.submitButtonText}>{t("Submit")}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.cancelButton}
+            onPress={onRequestClose}
+          >
+            <Text style={styles.cancelButtonText}>{t("Cancel")}</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </BlurView>
+  </Modal>
+);
 
 export default DisableLockScreenModal;
