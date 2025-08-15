@@ -86,7 +86,7 @@ const CheckStatusModal = ({
       visible={visible}
       onRequestClose={onClose}
     >
-      <BlurView intensity={10} style={styles.centeredView}>
+      <BlurView intensity={20} style={styles.centeredView}>
         <View style={styles.SecurityCodeModalView}>
           <Image
             key={status}

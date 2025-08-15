@@ -32,7 +32,7 @@ function LockCodeModal({
       visible={visible}
       onRequestClose={onClose}
     >
-      <BlurView intensity={10} style={styles.centeredView}>
+      <BlurView intensity={20} style={styles.centeredView}>
         <View style={styles.enableLockModalView}>
           <Text style={styles.LockCodeModalTitle}>
             {t("Enable Screen Lock")}

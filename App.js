@@ -25,7 +25,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { BlurView } from "expo-blur";
 import { useTranslation } from "react-i18next";
-import styles, { darkTheme, lightTheme } from "./styles/styles";
+import stylesFactory, { darkTheme, lightTheme } from "./styles/styles";
 import VaultScreen from "./components/Vault";
 import ActivityScreen from "./components/Activity";
 import SecureDeviceScreen from "./components/SecureDevice";
@@ -173,7 +173,7 @@ function AppContent({
     useState(false);
   const [pinCode, setPinCode] = useState("");
   const [missingChainsForModal, setMissingChainsForModal] = useState([]);
-  const [receivedAddresses, setReceivedAddresses] = useState({});
+  const [receivedAddresses, setReceivedAddresses] = useState(0);
   const [selectedDevice, setSelectedDevice] = useState(null);
   const [CheckStatusModalVisible, setCheckStatusModalVisible] = useState(false);
   const [receivedVerificationCode, setReceivedVerificationCode] = useState("");
@@ -453,6 +453,8 @@ function AppContent({
   };
 
   const [isDarkMode, setIsDarkMode] = useState(false);
+  // 修正样式对象获取
+  const styles = isDarkMode ? darkTheme : lightTheme;
 
   useEffect(() => {
     AsyncStorage.getItem("darkMode")
@@ -475,7 +477,7 @@ function AppContent({
       })
       .catch((error) => console.error("Failed to refresh darkMode", error));
   };
-  const theme = isDarkMode ? darkTheme : lightTheme;
+
   const tabBarActiveTintColor = isDarkMode ? "#CCB68C" : "#CFAB95";
   const tabBarInactiveTintColor = isDarkMode ? "#ffffff50" : "#676776";
   const headerTitleColor = isDarkMode ? "#ffffff" : "#333333";
@@ -652,11 +654,11 @@ function AppContent({
           },
           tabBarLabelStyle: { fontSize: 12 },
           headerStyle: {
-            backgroundColor: theme.headerStyle.backgroundColor,
-            borderBottomColor: theme.headerStyle.borderBottomColor,
+            backgroundColor: styles.headerStyle.backgroundColor,
+            borderBottomColor: styles.headerStyle.borderBottomColor,
             borderBottomWidth: 0,
           },
-          headerTintColor: theme.headerTintColor,
+          headerTintColor: styles.headerTintColor,
           headerTitleStyle: { fontWeight: "bold", color: headerTitleColor },
           headerTitle: t(route.name),
           headerShadowVisible: false,
@@ -776,7 +778,7 @@ function AppContent({
             activeOpacity={1}
             onPressOut={() => setHeaderDropdownVisible(false)}
           >
-            <BlurView intensity={10} style={styles.centeredView}>
+            <BlurView intensity={20} style={styles.centeredView}>
               <View style={styles.dropdown}>
                 <TouchableOpacity
                   onPress={handleConfirmDelete}

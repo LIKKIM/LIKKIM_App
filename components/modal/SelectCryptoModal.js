@@ -46,7 +46,7 @@ const SelectCryptoModal = ({
           behavior={Platform.OS === "ios" ? "padding" : "height"}
           style={{ flex: 1 }}
         >
-          <BlurView intensity={10} style={ActivityScreenStyle.centeredView}>
+          <BlurView intensity={20} style={ActivityScreenStyle.centeredView}>
             <View
               style={ActivityScreenStyle.modalView}
               onStartShouldSetResponder={() => true}

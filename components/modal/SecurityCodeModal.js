@@ -31,7 +31,7 @@ const SecurityCodeModal = ({
       visible={visible}
       onRequestClose={onCancel}
     >
-      <BlurView intensity={10} style={styles.centeredView}>
+      <BlurView intensity={20} style={styles.centeredView}>
         <View style={styles.SecurityCodeModalView}>
           <View style={{ alignItems: "center" }}>
             <View style={{ flexDirection: "row", alignItems: "center" }}>

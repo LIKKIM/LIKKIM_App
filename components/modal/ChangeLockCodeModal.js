@@ -33,7 +33,7 @@ const ChangeLockCodeModal = ({
       visible={visible}
       onRequestClose={onClose}
     >
-      <BlurView intensity={10} style={styles.centeredView}>
+      <BlurView intensity={20} style={styles.centeredView}>
         <View style={styles.changeLockCodeModalView}>
           <Text style={styles.LockCodeModalTitle}>{t("Change Password")}</Text>
           <View style={{ marginVertical: 10, width: "100%" }}>

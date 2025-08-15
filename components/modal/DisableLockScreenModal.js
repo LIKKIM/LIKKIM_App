@@ -22,7 +22,7 @@ const DisableLockScreenModal = ({
     visible={visible}
     onRequestClose={onRequestClose}
   >
-    <BlurView intensity={10} style={styles.centeredView}>
+    <BlurView intensity={20} style={styles.centeredView}>
       <View style={styles.disableLockModalView}>
         <Text style={styles.LockCodeModalTitle}>
           {t("Disable Lock Screen")}

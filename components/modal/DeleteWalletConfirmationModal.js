@@ -28,7 +28,7 @@ function DeleteWalletConfirmationModal({
       onRequestClose={onCancel}
     >
       <TouchableWithoutFeedback onPress={onCancel}>
-        <BlurView intensity={10} style={styles.centeredView}>
+        <BlurView intensity={20} style={styles.centeredView}>
           <View style={styles.modalView}>
             <Text style={styles.modalTitle}>{t("Warning")}</Text>
             <Text style={styles.modalSubtitle}>

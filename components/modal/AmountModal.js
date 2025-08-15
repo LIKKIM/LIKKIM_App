@@ -101,7 +101,7 @@ const AmountModal = ({
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={ActivityScreenStyle.centeredView}
       >
-        <BlurView intensity={10} style={ActivityScreenStyle.blurBackground} />
+        <BlurView intensity={20} style={ActivityScreenStyle.blurBackground} />
         <View
           style={[
             ActivityScreenStyle.amountModalView,

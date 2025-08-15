@@ -309,7 +309,7 @@ const ConvertModal = ({
           <TouchableWithoutFeedback
             onPress={() => setConvertModalVisible(false)}
           >
-            <BlurView intensity={10} style={ActivityScreenStyle.centeredView}>
+            <BlurView intensity={20} style={ActivityScreenStyle.centeredView}>
               <View
                 style={ActivityScreenStyle.ConvertModalView}
                 onStartShouldSetResponder={() => true}
@@ -987,7 +987,7 @@ const ConvertModal = ({
           visible={confirmModalVisible}
           onRequestClose={() => setConfirmModalVisible(false)}
         >
-          <BlurView intensity={10} style={ActivityScreenStyle.centeredView}>
+          <BlurView intensity={20} style={ActivityScreenStyle.centeredView}>
             <View style={ActivityScreenStyle.confirmModalView}>
               <Text style={ActivityScreenStyle.modalTitle}>
                 {t("Waiting for Confirmation")}

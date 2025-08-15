@@ -1384,7 +1384,7 @@ const DeviceStatus = ({
         onRequestClose={toggleModal}
       >
         <TouchableWithoutFeedback onPress={toggleModal}>
-          <BlurView intensity={10} style={VaultScreenStyle.centeredView}>
+          <BlurView intensity={20} style={VaultScreenStyle.centeredView}>
             <View
               style={VaultScreenStyle.NFTmodalView}
               onStartShouldSetResponder={(e) => e.stopPropagation()}
@@ -1546,7 +1546,7 @@ const DeviceStatus = ({
           style={{ flex: 1 }}
         >
           <TouchableWithoutFeedback onPress={() => setSendModalVisible(false)}>
-            <BlurView intensity={10} style={VaultScreenStyle.centeredView}>
+            <BlurView intensity={20} style={VaultScreenStyle.centeredView}>
               <View
                 style={VaultScreenStyle.ContactFormModal}
                 onStartShouldSetResponder={(e) => e.stopPropagation()}
@@ -1672,7 +1672,7 @@ const DeviceStatus = ({
         onRequestClose={() => setPreviewModalVisible(false)}
       >
         <TouchableWithoutFeedback onPress={() => setPreviewModalVisible(false)}>
-          <BlurView intensity={10} style={VaultScreenStyle.centeredView}>
+          <BlurView intensity={20} style={VaultScreenStyle.centeredView}>
             <View
               style={VaultScreenStyle.ContactFormModal}
               onStartShouldSetResponder={(e) => e.stopPropagation()}
