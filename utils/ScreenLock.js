@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import {
   View,
   Text,
@@ -20,6 +20,9 @@ import { MaterialIcons as Icon } from "@expo/vector-icons";
 import * as LocalAuthentication from "expo-local-authentication";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { BlurView } from "expo-blur";
+import { Animated } from "react-native";
+const AnimatedBlurView = Animated.createAnimatedComponent(BlurView);
+
 const ScreenLock = () => {
   const { screenLockPassword, setIsAppLaunching } = useContext(DeviceContext);
   const { isDarkMode } = useContext(DarkModeContext);
@@ -30,6 +33,58 @@ const ScreenLock = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [errorModalVisible, setErrorModalVisible] = useState(false);
   const [faceIDEnabled, setFaceIDEnabled] = useState(false);
+
+  // 动画相关
+  const lostModalIntensityAnim = useRef(new Animated.Value(0)).current;
+  const errorModalIntensityAnim = useRef(new Animated.Value(0)).current;
+
+  // Lost Password Modal 动画
+  useEffect(() => {
+    if (modalVisible) {
+      Animated.sequence([
+        Animated.timing(lostModalIntensityAnim, {
+          toValue: 0,
+          duration: 400,
+          useNativeDriver: false,
+        }),
+        Animated.timing(lostModalIntensityAnim, {
+          toValue: 20,
+          duration: 200,
+          useNativeDriver: false,
+        }),
+      ]).start();
+    } else {
+      Animated.timing(lostModalIntensityAnim, {
+        toValue: 0,
+        duration: 400,
+        useNativeDriver: false,
+      }).start();
+    }
+  }, [modalVisible]);
+
+  // Error Modal 动画
+  useEffect(() => {
+    if (errorModalVisible) {
+      Animated.sequence([
+        Animated.timing(errorModalIntensityAnim, {
+          toValue: 0,
+          duration: 400,
+          useNativeDriver: false,
+        }),
+        Animated.timing(errorModalIntensityAnim, {
+          toValue: 20,
+          duration: 200,
+          useNativeDriver: false,
+        }),
+      ]).start();
+    } else {
+      Animated.timing(errorModalIntensityAnim, {
+        toValue: 0,
+        duration: 400,
+        useNativeDriver: false,
+      }).start();
+    }
+  }, [errorModalVisible]);
 
   // Check Face ID status on mount
   useEffect(() => {
@@ -162,7 +217,10 @@ const ScreenLock = () => {
           visible={modalVisible}
           onRequestClose={handleCloseModal}
         >
-          <BlurView intensity={10} style={screenLockStyles.modalBackground}>
+          <AnimatedBlurView
+            intensity={lostModalIntensityAnim}
+            style={screenLockStyles.modalBackground}
+          >
             <View style={[screenLockStyles.modalView, themeStyles.modalView]}>
               <Text
                 style={[screenLockStyles.modalTitle, themeStyles.modalTitle]}
@@ -181,7 +239,7 @@ const ScreenLock = () => {
                 <Text style={themeStyles.buttonText}>{t("OK")}</Text>
               </TouchableOpacity>
             </View>
-          </BlurView>
+          </AnimatedBlurView>
         </Modal>
 
         {/* Incorrect Password Modal */}
@@ -191,7 +249,10 @@ const ScreenLock = () => {
           visible={errorModalVisible}
           onRequestClose={handleCloseErrorModal}
         >
-          <BlurView intensity={10} style={screenLockStyles.modalBackground}>
+          <AnimatedBlurView
+            intensity={errorModalIntensityAnim}
+            style={screenLockStyles.modalBackground}
+          >
             <View style={[screenLockStyles.modalView, themeStyles.modalView]}>
               <Text
                 style={[screenLockStyles.modalTitle, themeStyles.modalTitle]}
@@ -208,7 +269,7 @@ const ScreenLock = () => {
                 <Text style={themeStyles.buttonText}>{t("OK")}</Text>
               </TouchableOpacity>
             </View>
-          </BlurView>
+          </AnimatedBlurView>
         </Modal>
       </View>
     </KeyboardAvoidingView>
