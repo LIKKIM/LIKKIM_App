@@ -73,6 +73,8 @@ if (Platform.OS === "android") {
 }
 
 function SecureDeviceScreen({ onDarkModeChange }) {
+  // DEBUG: 每次渲染都打印 errorModalVisible
+  // 只打印，不重复声明
   const { t } = useTranslation();
   const navigation = useNavigation();
   const {
@@ -141,6 +143,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
   const [deviceToDisconnect, setDeviceToDisconnect] = useState(null);
   const [successModalVisible, setSuccessModalVisible] = useState(false);
   const [errorModalVisible, setErrorModalVisible] = useState(false);
+  console.log("【DEBUG】errorModalVisible: ", errorModalVisible);
   const [verificationStatus, setVerificationStatus] = useState(null);
   const [modalMessage, setModalMessage] = useState("");
   const [addressBookModalVisible, setAddressBookModalVisible] = useState(false);
@@ -919,20 +922,6 @@ function SecureDeviceScreen({ onDarkModeChange }) {
         isDarkMode={isDarkMode}
         onAddAddress={handleAddAddress}
       />
-      <Modal
-        visible={errorModalVisible}
-        transparent={true}
-        animationType="slide"
-        onRequestClose={() => setErrorModalVisible(false)}
-      >
-        <View style={SecureDeviceScreenStyle.modalView}>
-          <Text style={SecureDeviceScreenStyle.modalTitle}>{t("Error")}</Text>
-          <Text style={SecureDeviceScreenStyle.modalSubtitle}>
-            {modalMessage}
-          </Text>
-          <Button title={t("OK")} onPress={() => setErrorModalVisible(false)} />
-        </View>
-      </Modal>
     </LinearGradient>
   );
 }

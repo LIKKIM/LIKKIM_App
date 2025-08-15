@@ -3,6 +3,13 @@ import { View, Text, TouchableOpacity, Image, Modal } from "react-native";
 import { BlurView } from "expo-blur";
 
 const ErrorModal = ({ visible, onClose, message, styles, t }) => {
+  console.log("【DEBUG】ErrorModal props:", {
+    visible,
+    onClose,
+    message,
+    styles,
+    t,
+  });
   return (
     <Modal
       animationType="slide"
