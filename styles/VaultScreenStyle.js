@@ -188,6 +188,15 @@ const VaultScreenStyles = (isDarkMode) => {
     galleryCardBottomCol: {
       flexDirection: "column",
     },
+
+    // NFT 发送弹窗底部图片
+    nftCardBottom: {
+      width: 40,
+      height: 40,
+      borderRadius: 8,
+      resizeMode: "contain",
+      marginRight: 8,
+    },
     // cards
     cardContainer: { position: "relative", marginBottom: -130 },
     card: {
@@ -580,6 +589,7 @@ const VaultScreenStyles = (isDarkMode) => {
       ...textCenterMuted(c),
       textAlign: "left",
     },
+
     scanModalSubtitle: { color: c.mutedText, fontSize: FONT_SIZE_15 },
     alertModalTitle: {
       color: c.text,
