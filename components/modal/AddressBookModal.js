@@ -1,5 +1,5 @@
 // AddressBookModal.js
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Modal,
   View,
@@ -16,10 +16,13 @@ import {
 } from "react-native";
 import Clipboard from "@react-native-clipboard/clipboard";
 import { BlurView } from "expo-blur";
+import { Animated } from "react-native";
 import { MaterialIcons as Icon } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useTranslation } from "react-i18next";
 import { networkImages, networks } from "../../config/networkConfig";
+
+const AnimatedBlurView = Animated.createAnimatedComponent(BlurView);
 
 function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
   const [searchAddress, setSearchAddress] = useState("");
@@ -37,6 +40,9 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
   const [searchNetwork, setSearchNetwork] = useState("");
   const [editingId, setEditingId] = useState(null);
 
+  // 动画相关
+  const intensityAnim = useRef(new Animated.Value(0)).current;
+
   useEffect(() => {
     if (visible) {
       setSearchAddress("");
@@ -49,6 +55,27 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
       setNewAddressError("");
       setDropdownVisible(null);
       setNetworkDropdownVisible(false);
+
+      // 进入动画
+      Animated.sequence([
+        Animated.timing(intensityAnim, {
+          toValue: 0,
+          duration: 400,
+          useNativeDriver: false,
+        }),
+        Animated.timing(intensityAnim, {
+          toValue: 20,
+          duration: 200,
+          useNativeDriver: false,
+        }),
+      ]).start();
+    } else {
+      // 退出动画
+      Animated.timing(intensityAnim, {
+        toValue: 0,
+        duration: 400,
+        useNativeDriver: false,
+      }).start();
     }
   }, [visible]);
 
@@ -205,7 +232,10 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
         style={{ flex: 1 }}
       >
         <TouchableWithoutFeedback onPress={onClose}>
-          <BlurView intensity={10} style={styles.centeredView}>
+          <AnimatedBlurView
+            intensity={intensityAnim}
+            style={styles.centeredView}
+          >
             <TouchableWithoutFeedback onPress={() => setDropdownVisible(null)}>
               <View
                 style={[
@@ -676,7 +706,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                 )}
               </View>
             </TouchableWithoutFeedback>
-          </BlurView>
+          </AnimatedBlurView>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
     </Modal>
