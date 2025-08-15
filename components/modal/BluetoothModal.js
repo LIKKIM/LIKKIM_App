@@ -16,7 +16,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useTranslation } from "react-i18next";
 import { DarkModeContext } from "../../utils/DeviceContext";
 import SecureDeviceScreenStyles from "../../styles/SecureDeviceScreenStyle";
-
+import { runModalAnimation } from "../../styles/styles";
 const AnimatedBlurView = Animated.createAnimatedComponent(BlurView);
 
 const BluetoothModal = ({
@@ -42,32 +42,7 @@ const BluetoothModal = ({
   const intensityAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    if (visible) {
-      // 显示 Modal 并执行进入动画
-      setShowModal(true);
-      Animated.sequence([
-        Animated.timing(intensityAnim, {
-          toValue: 0,
-          duration: 400,
-          useNativeDriver: false,
-        }),
-        Animated.timing(intensityAnim, {
-          toValue: 20,
-          duration: 200,
-          useNativeDriver: false,
-        }),
-      ]).start();
-    } else if (showModal) {
-      // 执行退出动画
-      Animated.timing(intensityAnim, {
-        toValue: 0,
-        duration: 400,
-        useNativeDriver: false,
-      }).start(() => {
-        // 动画结束后隐藏 Modal
-        setShowModal(false);
-      });
-    }
+    runModalAnimation(intensityAnim, visible, setShowModal);
   }, [visible]);
 
   const getSignalBars = (rssi) => {
