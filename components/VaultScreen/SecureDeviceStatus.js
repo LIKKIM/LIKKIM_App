@@ -1294,11 +1294,10 @@ const SecureDeviceStatus = ({
               return (
                 <Animated.View
                   key={index}
-                  style={{
-                    width: "50%",
-                    padding: 4,
-                    transform: [{ scale: scaleAnimsRef.current[index] }],
-                  }}
+                  style={[
+                    VaultScreenStyle.galleryItem,
+                    { transform: [{ scale: scaleAnimsRef.current[index] }] },
+                  ]}
                 >
                   <TouchableOpacity
                     onPressIn={() =>
@@ -1312,45 +1311,16 @@ const SecureDeviceStatus = ({
                     activeOpacity={1}
                     style={{ width: "100%" }}
                   >
-                    <View
                       style={{
-                        backgroundColor: isDarkMode ? "#333" : "#fff",
-                        borderRadius: 8,
-                        padding: 10,
-                        aspectRatio: 2 / 3,
-                        position: "relative",
-                        shadowColor: "#000",
-                        shadowOffset: { width: 0, height: 2 },
-                        shadowOpacity: 0.05,
-                        shadowRadius: 4,
-                        elevation: 2,
-                      }}
-                    >
+                    <View style={VaultScreenStyle.galleryCard}>
                       {nft.logoUrl ? (
                         <SkeletonImage
                           source={{ uri: nft.logoUrl }}
-                          style={{
-                            width: "100%",
-                            aspectRatio: 1,
-                            borderRadius: 8,
-                            marginBottom: 8,
-                          }}
+                          style={VaultScreenStyle.galleryImage}
                           resizeMode="cover"
                         />
                       ) : (
-                        <View
-                          style={{
-                            width: "100%",
-                            aspectRatio: 1,
-                            borderRadius: 8,
-                            backgroundColor: "#ccc",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            marginBottom: 8,
-                            overflow: "hidden",
-                            position: "relative",
-                          }}
-                        >
+                        <View style={VaultScreenStyle.galleryNoImageContainer}>
                           <Image
                             source={require("../../assets/Logo@500.png")}
                             style={{
@@ -1366,13 +1336,7 @@ const SecureDeviceStatus = ({
                           <Text
                             style={[
                               VaultScreenStyle.modalSubtitle,
-                              {
-                                color: "#eee",
-                                fontWeight: "bold",
-                                position: "absolute",
-                                fontSize: 12,
-                                textAlign: "center",
-                              },
+                              VaultScreenStyle.galleryNoImageText,
                             ]}
                           >
                             {t("No Image")}
@@ -1380,22 +1344,15 @@ const SecureDeviceStatus = ({
                         </View>
                       )}
                       <Text
-                        style={VaultScreenStyle.modalTitle}
+                        style={VaultScreenStyle.galleryCardTitle}
                         numberOfLines={3}
                         ellipsizeMode="tail"
                       >
                         {nft.name || "NFT Card"}
                       </Text>
 
-                      <View
-                        style={{
-                          position: "absolute",
-                          bottom: 10,
-                          left: 10,
-                          right: 10,
-                        }}
-                      >
-                        <View style={{ flexDirection: "column" }}>
+                      <View style={VaultScreenStyle.galleryCardBottom}>
+                        <View style={VaultScreenStyle.galleryCardBottomCol}>
                           <Text
                             style={[
                               VaultScreenStyle.chainCardText,
@@ -1476,26 +1433,12 @@ const SecureDeviceStatus = ({
                       >
                         <Image
                           source={require("../../assets/Logo@500.png")}
-                          style={{
-                            position: "absolute",
-                            width: "50%",
-                            height: "50%",
-                            opacity: 0.2,
-                            resizeMode: "contain",
-                            top: "25%",
-                            left: "25%",
-                          }}
+                          style={VaultScreenStyle.galleryNoImageLogo}
                         />
                         <Text
                           style={[
                             VaultScreenStyle.modalSubtitle,
-                            {
-                              color: "#eee",
-                              fontWeight: "bold",
-                              position: "absolute",
-                              fontSize: 16,
-                              textAlign: "center",
-                            },
+                            VaultScreenStyle.nftNoImageText,
                           ]}
                         >
                           {t("No Image")}
@@ -1660,12 +1603,7 @@ const SecureDeviceStatus = ({
                   {selectedNFT?.logoUrl && (
                     <Image
                       source={{ uri: selectedNFT.logoUrl }}
-                      style={{
-                        width: 40,
-                        height: 40,
-                        borderRadius: 4,
-                        marginRight: 8,
-                      }}
+                      style={VaultScreenStyle.nftCardBottom}
                     />
                   )}
                   <ScrollView

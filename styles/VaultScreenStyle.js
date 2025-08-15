@@ -19,10 +19,10 @@ import {
 const makeTokens = (isDarkMode) => ({
   text: isDarkMode ? "#fff" : "#000",
   textBtnColor: isDarkMode ? "#fff" : "#fff",
-
   mutedText: isDarkMode ? "#ddd" : "#676776",
   cardText: "#fff",
   bg: isDarkMode ? "#121212" : "#f5f5f5",
+
   modalBg: isDarkMode ? "#3F3D3C" : "#ffffff",
   btnBg: isDarkMode ? "#CCB68C" : "#E5E1E9",
   btnColor: isDarkMode ? "#CCB68C" : "#CFAB95",
@@ -97,6 +97,70 @@ const VaultScreenStyles = (isDarkMode) => {
       alignItems: "center",
     },
 
+    // Gallery Card (no sensitive words)
+    galleryItem: {
+      width: "50%",
+      padding: 4,
+    },
+    galleryCard: {
+      backgroundColor: c.modalBg,
+      borderRadius: RADIUS_8,
+      padding: 10,
+      aspectRatio: 2 / 3,
+      position: "relative",
+      shadowColor: "#000",
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.05,
+      shadowRadius: 4,
+      elevation: 2,
+    },
+    galleryImage: {
+      width: "100%",
+      aspectRatio: 1,
+      borderRadius: 8,
+      marginBottom: 8,
+    },
+    galleryNoImageContainer: {
+      width: "100%",
+      aspectRatio: 1,
+      borderRadius: 8,
+      backgroundColor: "#ccc",
+      justifyContent: "center",
+      alignItems: "center",
+      marginBottom: 8,
+      overflow: "hidden",
+      position: "relative",
+    },
+    galleryNoImageLogo: {
+      position: "absolute",
+      width: "50%",
+      height: "50%",
+      opacity: 0.2,
+      resizeMode: "contain",
+      top: "25%",
+      left: "25%",
+    },
+    galleryNoImageText: {
+      color: "#eee",
+      fontWeight: "bold",
+      position: "absolute",
+      fontSize: 12,
+      textAlign: "center",
+    },
+    galleryCardTitle: {
+      color: c.text,
+      fontSize: FONT_SIZE_16,
+      fontWeight: "bold",
+    },
+    galleryCardBottom: {
+      position: "absolute",
+      bottom: 10,
+      left: 10,
+      right: 10,
+    },
+    galleryCardBottomCol: {
+      flexDirection: "column",
+    },
     // cards
     cardContainer: { position: "relative", marginBottom: -130 },
     card: {
