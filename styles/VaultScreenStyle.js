@@ -37,19 +37,13 @@ const makeTokens = (isDarkMode) => ({
 const { height, width } = Dimensions.get("window");
 const containerHeight = height < 700 ? height - 280 : height - 360;
 
-import { buttonBase, modalPanelBase } from "./baseStyles";
+import {
+  buttonBase,
+  modalPanelBase,
+  titleBase,
+  textCenterMuted,
+} from "./baseStyles";
 // base blocks
-
-const titleBase = {
-  fontSize: FONT_SIZE_20,
-  fontWeight: "bold",
-};
-
-const textCenterMuted = (colors) => ({
-  fontSize: FONT_SIZE_15,
-  color: colors.mutedText,
-  textAlign: "center",
-});
 
 // ---- styles -----------------------------------------------------------------
 const VaultScreenStyles = (isDarkMode) => {
