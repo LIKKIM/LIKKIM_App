@@ -26,6 +26,7 @@ const AnimatedBlurView = Animated.createAnimatedComponent(BlurView);
 
 function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
   const [searchAddress, setSearchAddress] = useState("");
+  const [showModal, setShowModal] = useState(false);
   const [isAddingAddress, setIsAddingAddress] = useState(false);
   const [newNetwork, setNewNetwork] = useState("");
   const [newName, setNewName] = useState("");
@@ -43,8 +44,10 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
   // 动画相关
   const intensityAnim = useRef(new Animated.Value(0)).current;
 
+  // 控制 Modal 挂载和动画
   useEffect(() => {
     if (visible) {
+      setShowModal(true);
       setSearchAddress("");
       setIsAddingAddress(false);
       setNewNetwork("");
@@ -69,13 +72,15 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
           useNativeDriver: false,
         }),
       ]).start();
-    } else {
+    } else if (showModal) {
       // 退出动画
       Animated.timing(intensityAnim, {
         toValue: 0,
         duration: 400,
         useNativeDriver: false,
-      }).start();
+      }).start(() => {
+        setShowModal(false);
+      });
     }
   }, [visible]);
 
@@ -224,7 +229,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
     <Modal
       animationType="slide"
       transparent
-      visible={visible}
+      visible={showModal}
       onRequestClose={onClose}
     >
       <KeyboardAvoidingView
