@@ -17,10 +17,8 @@ import {
 
 // ---- tokens & helpers -------------------------------------------------------
 const makeTokens = (isDarkMode) => ({
-  text: isDarkMode ? "#fff" : "#000",
-  textBtnColor: isDarkMode ? "#fff" : "#fff",
+  white: "#fff",
   mutedText: isDarkMode ? "#ddd" : "#676776",
-  cardText: "#fff",
   bg: isDarkMode ? "#121212" : "#f5f5f5",
   modalBg: isDarkMode ? "#3F3D3C" : "#ffffff",
   btnBg: isDarkMode ? "#CCB68C" : "#E5E1E9",
@@ -28,6 +26,7 @@ const makeTokens = (isDarkMode) => ({
   tagBg: "#CFAB9540",
   shadow: "#0E0D0D",
   cardBg: isDarkMode ? "#3F3D3C" : "#E5E1E9",
+  text: isDarkMode ? "#fff" : "#000",
   currencyUnit: isDarkMode ? "#ddd" : "#666",
   border: isDarkMode ? "#555" : "#ccc",
   historyBorder: isDarkMode ? "#ccc" : "#999",
@@ -285,8 +284,8 @@ const VaultScreenStyles = (isDarkMode) => {
     },
 
     // card texts
-    cardShortName: { color: c.cardText, fontSize: FONT_SIZE_15 },
-    balanceShortName: { color: c.cardText, fontSize: FONT_SIZE_15 },
+    cardShortName: { color: c.white, fontSize: FONT_SIZE_15 },
+    balanceShortName: { color: c.white, fontSize: FONT_SIZE_15 },
     priceChangeView: {
       position: "absolute",
       display: "flex",
@@ -294,7 +293,7 @@ const VaultScreenStyles = (isDarkMode) => {
       gap: 10,
       top: 56,
       right: 20,
-      color: c.cardText,
+      color: c.white,
       fontSize: FONT_SIZE_15,
     },
     cardBalance: {
@@ -311,7 +310,7 @@ const VaultScreenStyles = (isDarkMode) => {
       fontWeight: "bold",
       marginBottom: 8,
     },
-    balanceShortNameCenter: { color: c.cardText, fontSize: FONT_SIZE_15 },
+    balanceShortNameCenter: { color: c.white, fontSize: FONT_SIZE_15 },
 
     // chain tags
     chainScrollView: { marginBottom: 10, height: 34, paddingHorizontal: 10 },
@@ -509,7 +508,7 @@ const VaultScreenStyles = (isDarkMode) => {
     disconnectButtonText: { color: "#FFFFFF", fontWeight: "bold" },
 
     // button texts
-    submitButtonText: { color: c.textBtnColor, fontSize: FONT_SIZE_16 },
+    submitButtonText: { color: c.white, fontSize: FONT_SIZE_16 },
     mainButtonText: { color: "#FFF", fontSize: FONT_SIZE_16 },
     cancelButtonText: { color: c.mutedText, fontSize: FONT_SIZE_16 },
     ButtonText: { color: c.text, fontSize: FONT_SIZE_16 },

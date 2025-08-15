@@ -17,9 +17,7 @@ import { buttonBase, modalPanelBase } from "./baseStyles";
 // tokens
 const makeTokens = (isDarkMode) => ({
   text: isDarkMode ? "#fff" : "#000",
-  mutedText: isDarkMode ? "#ddd" : "#676776",
   bg: isDarkMode ? "#121212" : "#f5f5f5",
-  btnBorder: isDarkMode ? "#CCB68C" : "#CFAB95",
   btnColor: isDarkMode ? "#CCB68C" : "#CFAB95",
   buttonBg: isDarkMode ? "#CCB68C" : "#E5E1E9",
   historyContainerBg: isDarkMode ? "#22201F90" : "#FFFFFF80",
@@ -33,7 +31,6 @@ const makeTokens = (isDarkMode) => ({
   dropdownBg: isDarkMode ? "#21201E" : "#eee",
   selectedChainTagBg: isDarkMode ? "#CCB68C" : "#ccc",
   selectedChainTagText: isDarkMode ? "#000" : "#fff",
-  chainTagText: isDarkMode ? "#fff" : "#000",
 });
 
 const ActivityScreenStyles = (isDarkMode) => {
@@ -78,7 +75,7 @@ const ActivityScreenStyles = (isDarkMode) => {
     },
     chainTag: { paddingVertical: 10, paddingHorizontal: 15 },
     selectedChainTag: { backgroundColor: c.selectedChainTagBg },
-    chainTagText: { color: c.chainTagText },
+    title: { color: c.title },
     selectedChainTagText: { color: c.selectedChainTagText },
     container: { flex: 1, alignItems: "center" },
     modalContainer: {
