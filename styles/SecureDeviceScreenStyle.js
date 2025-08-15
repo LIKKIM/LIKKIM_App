@@ -25,7 +25,7 @@ const makeTokens = (isDarkMode) => ({
   bluetoothBtn: isDarkMode ? "#CCB68C" : "#CFAB95",
   mutedText: isDarkMode ? "#ddd" : "#676776",
   inputBg: isDarkMode ? "#21201E" : "#e0e0e0",
-  focusedBorder: isDarkMode ? "#CCB68C" : "#007AFF",
+  focusedBorder: isDarkMode ? "#CCB68C" : "#CFAB95",
   secondText: isDarkMode ? "#ddd" : "#676776",
   cancelBtnText: isDarkMode ? "#ddd" : "#676776",
   dropdownBg: isDarkMode ? "#3F3D3C" : "#fff",

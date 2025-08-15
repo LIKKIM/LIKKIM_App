@@ -249,3 +249,176 @@ const stylesFactory = (isDarkMode) => {
 export const lightTheme = stylesFactory(false);
 export const darkTheme = stylesFactory(true);
 export default stylesFactory;
+
+// ====== 以下为ScreenLock专用样式 ======
+import { StyleSheet as RNStyleSheet } from "react-native";
+export const screenLockStyles = RNStyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 20,
+  },
+  header: {
+    alignItems: "center",
+    marginBottom: 20,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+  },
+  subTitle: {
+    fontSize: 16,
+    marginTop: 10,
+  },
+  input: {
+    width: "100%",
+    height: 50,
+    borderRadius: 8,
+    paddingHorizontal: 15,
+    paddingRight: 50,
+    marginBottom: 20,
+    fontSize: 18,
+  },
+  passwordInputContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    width: "100%",
+    position: "relative",
+  },
+  eyeIcon: {
+    position: "absolute",
+    right: 15,
+    top: 25,
+    transform: [{ translateY: -12 }],
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  button: {
+    width: "100%",
+    height: 50,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 25,
+  },
+  lostPasswordContainer: {
+    marginTop: 30,
+    alignItems: "center",
+  },
+  lostPasswordText: {
+    fontSize: 16,
+  },
+  modalBackground: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modalView: {
+    backgroundColor: "#fff",
+    borderRadius: 20,
+    padding: 30,
+    alignItems: "center",
+    width: "80%",
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginBottom: 15,
+  },
+  modalText: {
+    fontSize: 16,
+    textAlign: "center",
+    marginBottom: 20,
+  },
+  closeButton: {
+    width: "100%",
+    height: 50,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 25,
+  },
+});
+
+export const screenLockLightStyles = RNStyleSheet.create({
+  container: {
+    backgroundColor: "#fff",
+  },
+  title: {
+    color: "#333",
+  },
+  subTitle: {
+    color: "#999",
+  },
+  input: {
+    color: "#000",
+    backgroundColor: "#f1f1f1",
+  },
+  placeholder: {
+    color: "#999",
+  },
+  button: {
+    backgroundColor: "#CFAB95",
+  },
+  buttonText: {
+    color: "#fff",
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  lostPasswordText: {
+    color: "#CFAB95",
+  },
+  modalView: {
+    backgroundColor: "#fff",
+  },
+  modalTitle: {
+    color: "#333",
+  },
+  modalText: {
+    color: "#666",
+  },
+  closeButton: {
+    backgroundColor: "#CFAB95",
+  },
+});
+
+export const screenLockDarkStyles = RNStyleSheet.create({
+  container: {
+    backgroundColor: "#21201E",
+  },
+  title: {
+    color: "#f5f5f5",
+  },
+  subTitle: {
+    color: "#ccc",
+  },
+  input: {
+    color: "#fff",
+    backgroundColor: "#121212",
+  },
+  placeholder: {
+    color: "#999",
+  },
+  button: {
+    backgroundColor: "#CCB68C",
+  },
+  buttonText: {
+    color: "#fff",
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  lostPasswordText: {
+    color: "#CCB68C",
+  },
+  modalView: {
+    backgroundColor: "#21201E",
+  },
+  modalTitle: {
+    color: "#f5f5f5",
+  },
+  modalText: {
+    color: "#ccc",
+  },
+  closeButton: {
+    backgroundColor: "#CCB68C",
+  },
+});

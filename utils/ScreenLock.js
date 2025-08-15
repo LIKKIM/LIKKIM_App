@@ -4,12 +4,16 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  StyleSheet,
   KeyboardAvoidingView,
   Modal,
   Image,
   Platform,
 } from "react-native";
+import {
+  screenLockStyles,
+  screenLockLightStyles,
+  screenLockDarkStyles,
+} from "../styles/styles";
 import { DeviceContext, DarkModeContext } from "../utils/DeviceContext";
 import { useTranslation } from "react-i18next";
 import { MaterialIcons as Icon } from "@expo/vector-icons";
@@ -20,7 +24,6 @@ const ScreenLock = () => {
   const { screenLockPassword, setIsAppLaunching } = useContext(DeviceContext);
   const { isDarkMode } = useContext(DarkModeContext);
   const { t } = useTranslation();
-
   const [inputPassword, setInputPassword] = useState("");
   const [isPasswordHidden, setIsPasswordHidden] = useState(true);
   const [isFocused, setIsFocused] = useState(false);
@@ -62,7 +65,7 @@ const ScreenLock = () => {
   const handleCloseModal = () => setModalVisible(false);
   const handleCloseErrorModal = () => setErrorModalVisible(false);
 
-  const themeStyles = isDarkMode ? darkStyles : lightStyles;
+  const themeStyles = isDarkMode ? screenLockDarkStyles : screenLockLightStyles;
 
   // Automatically trigger Face ID on iOS/macOS if enabled
   useEffect(() => {
@@ -84,21 +87,23 @@ const ScreenLock = () => {
       style={{ flex: 1 }}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
-      <View style={[styles.container, themeStyles.container]}>
-        <View style={styles.header}>
+      <View style={[screenLockStyles.container, themeStyles.container]}>
+        <View style={screenLockStyles.header}>
           <Image
             source={require("../assets/Logo@500.png")}
             style={{ width: 50, height: 50, marginBottom: 20 }}
           />
-          <Text style={[styles.title, themeStyles.title]}>{t("LUKKEY")}</Text>
-          <Text style={[styles.subTitle, themeStyles.subTitle]}>
+          <Text style={[screenLockStyles.title, themeStyles.title]}>
+            {t("LUKKEY")}
+          </Text>
+          <Text style={[screenLockStyles.subTitle, themeStyles.subTitle]}>
             {t("Enter Password to Unlock")}
           </Text>
         </View>
 
-        <View style={styles.passwordInputContainer}>
+        <View style={screenLockStyles.passwordInputContainer}>
           <TextInput
-            style={[styles.input, themeStyles.input]}
+            style={[screenLockStyles.input, themeStyles.input]}
             secureTextEntry={isPasswordHidden}
             value={inputPassword}
             onChangeText={setInputPassword}
@@ -113,7 +118,7 @@ const ScreenLock = () => {
                 ? () => setIsPasswordHidden(!isPasswordHidden)
                 : handleFaceIDIconPress
             }
-            style={styles.eyeIcon}
+            style={screenLockStyles.eyeIcon}
           >
             <Icon
               name={
@@ -130,7 +135,7 @@ const ScreenLock = () => {
         </View>
 
         <TouchableOpacity
-          style={[styles.button, themeStyles.button]}
+          style={[screenLockStyles.button, themeStyles.button]}
           onPress={handleUnlock}
         >
           <Text style={themeStyles.buttonText}>{t("Unlock")}</Text>
@@ -138,9 +143,14 @@ const ScreenLock = () => {
 
         <TouchableOpacity
           onPress={handleLostPassword}
-          style={styles.lostPasswordContainer}
+          style={screenLockStyles.lostPasswordContainer}
         >
-          <Text style={[styles.lostPasswordText, themeStyles.lostPasswordText]}>
+          <Text
+            style={[
+              screenLockStyles.lostPasswordText,
+              themeStyles.lostPasswordText,
+            ]}
+          >
             {t("I lost my password")}
           </Text>
         </TouchableOpacity>
@@ -152,27 +162,26 @@ const ScreenLock = () => {
           visible={modalVisible}
           onRequestClose={handleCloseModal}
         >
-          <View style={styles.modalBackground}>
-            <BlurView
-              intensity={10}
-              style={[styles.modalView, themeStyles.modalView]}
-            >
-              <Text style={[styles.modalTitle, themeStyles.modalTitle]}>
+          <BlurView intensity={10} style={screenLockStyles.modalBackground}>
+            <View style={[screenLockStyles.modalView, themeStyles.modalView]}>
+              <Text
+                style={[screenLockStyles.modalTitle, themeStyles.modalTitle]}
+              >
                 {t("I lost my password")}
               </Text>
-              <Text style={[styles.modalText, themeStyles.modalText]}>
+              <Text style={[screenLockStyles.modalText, themeStyles.modalText]}>
                 {t(
                   "To reset the app and remove stored data, please uninstall and reinstall it on your phone."
                 )}
               </Text>
               <TouchableOpacity
-                style={[styles.closeButton, themeStyles.closeButton]}
+                style={[screenLockStyles.closeButton, themeStyles.closeButton]}
                 onPress={handleCloseModal}
               >
                 <Text style={themeStyles.buttonText}>{t("OK")}</Text>
               </TouchableOpacity>
-            </BlurView>
-          </View>
+            </View>
+          </BlurView>
         </Modal>
 
         {/* Incorrect Password Modal */}
@@ -182,16 +191,18 @@ const ScreenLock = () => {
           visible={errorModalVisible}
           onRequestClose={handleCloseErrorModal}
         >
-          <BlurView intensity={10} style={styles.modalBackground}>
-            <View style={[styles.modalView, themeStyles.modalView]}>
-              <Text style={[styles.modalTitle, themeStyles.modalTitle]}>
+          <BlurView intensity={10} style={screenLockStyles.modalBackground}>
+            <View style={[screenLockStyles.modalView, themeStyles.modalView]}>
+              <Text
+                style={[screenLockStyles.modalTitle, themeStyles.modalTitle]}
+              >
                 {t("Incorrect Password")}
               </Text>
-              <Text style={[styles.modalText, themeStyles.modalText]}>
+              <Text style={[screenLockStyles.modalText, themeStyles.modalText]}>
                 {t("Please try again.")}
               </Text>
               <TouchableOpacity
-                style={[styles.closeButton, themeStyles.closeButton]}
+                style={[screenLockStyles.closeButton, themeStyles.closeButton]}
                 onPress={handleCloseErrorModal}
               >
                 <Text style={themeStyles.buttonText}>{t("OK")}</Text>
@@ -203,176 +214,5 @@ const ScreenLock = () => {
     </KeyboardAvoidingView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 20,
-  },
-  header: {
-    alignItems: "center",
-    marginBottom: 20,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-  },
-  subTitle: {
-    fontSize: 16,
-    marginTop: 10,
-  },
-  input: {
-    width: "100%",
-    height: 50,
-    borderRadius: 8,
-    paddingHorizontal: 15,
-    paddingRight: 50,
-    marginBottom: 20,
-    fontSize: 18,
-  },
-  passwordInputContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    width: "100%",
-    position: "relative",
-  },
-  eyeIcon: {
-    position: "absolute",
-    right: 15,
-    top: 25,
-    transform: [{ translateY: -12 }],
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  button: {
-    width: "100%",
-    height: 50,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 25,
-  },
-  lostPasswordContainer: {
-    marginTop: 30,
-    alignItems: "center",
-  },
-  lostPasswordText: {
-    fontSize: 16,
-  },
-  modalBackground: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  modalView: {
-    backgroundColor: "#fff",
-    borderRadius: 20,
-    padding: 30,
-    alignItems: "center",
-    width: "80%",
-  },
-  modalTitle: {
-    fontSize: 20,
-    fontWeight: "bold",
-    marginBottom: 15,
-  },
-  modalText: {
-    fontSize: 16,
-    textAlign: "center",
-    marginBottom: 20,
-  },
-  closeButton: {
-    width: "100%",
-    height: 50,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 25,
-  },
-});
-
-const lightStyles = StyleSheet.create({
-  container: {
-    backgroundColor: "#fff",
-  },
-  title: {
-    color: "#333",
-  },
-  subTitle: {
-    color: "#999",
-  },
-  input: {
-    color: "#000",
-    backgroundColor: "#f1f1f1",
-  },
-  placeholder: {
-    color: "#999",
-  },
-  button: {
-    backgroundColor: "#CFAB95",
-  },
-  buttonText: {
-    color: "#fff",
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  lostPasswordText: {
-    color: "#CFAB95",
-  },
-  modalView: {
-    backgroundColor: "#fff",
-  },
-  modalTitle: {
-    color: "#333",
-  },
-  modalText: {
-    color: "#666",
-  },
-  closeButton: {
-    backgroundColor: "#CFAB95",
-  },
-});
-
-const darkStyles = StyleSheet.create({
-  container: {
-    backgroundColor: "#21201E",
-  },
-  title: {
-    color: "#f5f5f5",
-  },
-  subTitle: {
-    color: "#ccc",
-  },
-  input: {
-    color: "#fff",
-    backgroundColor: "#121212",
-  },
-  placeholder: {
-    color: "#999",
-  },
-  button: {
-    backgroundColor: "#CCB68C",
-  },
-  buttonText: {
-    color: "#fff",
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  lostPasswordText: {
-    color: "#CCB68C",
-  },
-  modalView: {
-    backgroundColor: "#21201E",
-  },
-  modalTitle: {
-    color: "#f5f5f5",
-  },
-  modalText: {
-    color: "#ccc",
-  },
-  closeButton: {
-    backgroundColor: "#CCB68C",
-  },
-});
 
 export default ScreenLock;
