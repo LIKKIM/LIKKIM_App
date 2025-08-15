@@ -142,7 +142,6 @@ const stylesFactory = (isDarkMode) => {
       flex: 1,
       justifyContent: "center",
       alignItems: "center",
-      backgroundColor: "rgba(0, 0, 0, 0.2)",
     },
     modalView: { ...modalPanelBase, backgroundColor: c.modalBg, height: 500 },
     modalTitle: {
