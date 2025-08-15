@@ -28,6 +28,7 @@ const BLUR_DURATION_OUT = 400; // 退出动画时长
 export default function AnimatedBlurModal({
   visible,
   onRequestClose,
+  blurStyle,
   children,
   intensityIn = BLUR_INTENSITY_IN,
   intensityOut = BLUR_INTENSITY_OUT,
