@@ -20,24 +20,18 @@ import { buttonBase, modalPanelBase } from "./baseStyles";
 // tokens
 const makeTokens = (isDarkMode) => ({
   text: isDarkMode ? "#fff" : "#21201E",
+  mainBg: isDarkMode ? "#21201E" : "#fff",
+  modalBg: isDarkMode ? "#3F3D3C" : "#fff",
+  inputBg: isDarkMode ? "#21201E" : "#E5E1E9",
+  roundBtnBg: "#3F3D3C",
+  subtitleText: "#e0e0e0",
   mutedText: isDarkMode ? "#ddd" : "#676776",
   bg: isDarkMode ? "#121212" : "#ddd",
   headerRightBg: isDarkMode ? "#21201E" : "#ddd",
-  headerBg: isDarkMode ? "#21201E" : "#fff",
-  addIconBtnBg: isDarkMode ? "#21201E" : "#fff",
-  dropdownText: isDarkMode ? "#fff" : "#000",
-  cardBg: isDarkMode ? "#3F3D3C" : "#fff",
   cardText: isDarkMode ? "#fff" : "#000",
   overlay: "rgba(108, 108, 244, 0.1)",
-  roundBtnBg: isDarkMode ? "#3F3D3C" : "#3F3D3C",
-  buttonText: isDarkMode ? "#e0e0e0" : "#e0e0e0",
-  modalBg: isDarkMode ? "#3F3D3C" : "#fff",
-  modalSubtitle: "#e0e0e0",
-  languageModalBg: isDarkMode ? "#3F3D3C" : "#fff",
-  historyBg: isDarkMode ? "#21201E" : "#E5E1E9",
   historyItemBorder: "#ccc",
   historyItemText: "#000",
-  inputBg: isDarkMode ? "#21201E" : "#E5E1E9",
   lightTheme: "#CCB68C",
   white: "#ffffff",
 });
@@ -59,9 +53,9 @@ const stylesFactory = (isDarkMode) => {
       justifyContent: "center",
       padding: 20,
     },
-    headerStyle: { backgroundColor: c.headerBg },
+    headerStyle: { backgroundColor: c.mainBg },
     headerRight: { backgroundColor: c.headerRightBg },
-    addIconButton: { backgroundColor: c.addIconBtnBg },
+    addIconButton: { backgroundColor: c.mainBg },
     addIconButtonCommon: {
       marginRight: 16,
       borderRadius: RADIUS_16,
@@ -74,13 +68,13 @@ const stylesFactory = (isDarkMode) => {
       position: "absolute",
       right: 20,
       top: 60,
-      backgroundColor: c.cardBg,
+      backgroundColor: c.modalBg,
       borderRadius: RADIUS_8,
       padding: 10,
       zIndex: 1,
     },
     dropdownButton: { padding: 10 },
-    dropdownButtonText: { color: c.dropdownText, fontSize: FONT_SIZE_16 },
+    dropdownButtonText: { color: c.cardText, fontSize: FONT_SIZE_16 },
     scrollView: { width: "100%" },
     contentContainer: { flexGrow: 1 },
     settingsItem: {
@@ -99,7 +93,7 @@ const stylesFactory = (isDarkMode) => {
       overflow: "hidden",
       justifyContent: "center",
       alignItems: "center",
-      backgroundColor: c.cardBg,
+      backgroundColor: c.modalBg,
       marginBottom: 20,
       shadowColor: "#000",
       shadowOffset: { width: 0, height: 2 },
@@ -123,12 +117,12 @@ const stylesFactory = (isDarkMode) => {
       justifyContent: "center",
       marginBottom: 20,
     },
-    buttonText: {
-      color: c.buttonText,
+    subtitleText: {
+      color: c.subtitleText,
       fontSize: FONT_SIZE_16,
       fontWeight: "bold",
     },
-    subButtonText: { color: c.buttonText, fontSize: 12 },
+    subButtonText: { color: c.subtitleText, fontSize: 12 },
     centeredView: {
       flex: 1,
       justifyContent: "center",
@@ -141,8 +135,8 @@ const stylesFactory = (isDarkMode) => {
       fontWeight: "bold",
       marginBottom: 15,
     },
-    modalSubtitle: {
-      color: c.modalSubtitle,
+    subtitleText: {
+      color: c.subtitleText,
       fontSize: FONT_SIZE_16,
       marginBottom: 320,
       textAlign: "center",
@@ -180,7 +174,7 @@ const stylesFactory = (isDarkMode) => {
     historyContainer: {
       marginTop: 20,
       padding: 20,
-      backgroundColor: c.historyBg,
+      backgroundColor: c.inputBg,
       alignItems: "center",
       justifyContent: "center",
       borderRadius: RADIUS_10,
@@ -350,7 +344,7 @@ export const screenLockLightStyles = RNStyleSheet.create({
   button: {
     backgroundColor: "#CFAB95",
   },
-  buttonText: {
+  subtitleText: {
     color: "#fff",
     fontSize: 18,
     fontWeight: "bold",
@@ -392,7 +386,7 @@ export const screenLockDarkStyles = RNStyleSheet.create({
   button: {
     backgroundColor: "#CCB68C",
   },
-  buttonText: {
+  subtitleText: {
     color: "#fff",
     fontSize: 18,
     fontWeight: "bold",
