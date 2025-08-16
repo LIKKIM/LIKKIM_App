@@ -9,6 +9,7 @@ import {
   View,
   Text,
   Image,
+  TouchableOpacity,
   BlurView,
 } from "react-native";
 import { BlurView as ExpoBlurView } from "expo-blur";
@@ -66,6 +67,8 @@ const PreviewSendModal = ({
                 flexDirection: "row",
                 alignItems: "flex-start",
                 marginBottom: 20,
+                width: "100%",
+                alignSelf: "flex-start",
               }}
             >
               {selectedNFT?.logoUrl && (
@@ -98,20 +101,23 @@ const PreviewSendModal = ({
                 </Text>
               </View>
             </View>
+            <View style={{ alignItems: "flex-start", alignSelf: "flex-start" }}>
+              <Text style={[{ color: isDarkMode ? "#fff" : "#000" }]}>
+                {`${t("Recipient Address")}:`}
+              </Text>
 
-            <Text style={[{ color: isDarkMode ? "#fff" : "#000" }]}>
-              {`${t("Recipient Address")}:`}
-            </Text>
+              <Text style={[{ color: isDarkMode ? "#fff" : "#000" }]}>
+                {recipientAddress || t("No Address Selected")}
+              </Text>
+            </View>
 
-            <Text style={[{ color: isDarkMode ? "#fff" : "#000" }]}>
-              {recipientAddress || t("No Address Selected")}
-            </Text>
             <View>
               <View
                 style={{
                   flexDirection: "row",
                   justifyContent: "space-between",
                   marginTop: 20,
+                  width: "100%",
                 }}
               >
                 {/* Close 按钮在左 */}

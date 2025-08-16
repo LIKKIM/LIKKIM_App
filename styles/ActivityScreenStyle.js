@@ -97,7 +97,7 @@ const ActivityScreenStyles = (isDarkMode) => {
       justifyContent: "space-between",
       alignItems: "center",
       borderWidth: 2,
-      borderColor: c.btnBorder,
+      borderColor: c.btnColor,
       borderRadius: 10,
       padding: 10,
     },
@@ -419,7 +419,7 @@ const ActivityScreenStyles = (isDarkMode) => {
     },
     roundButton: {
       borderWidth: 2,
-      borderColor: c.btnBorder,
+      borderColor: c.btnColor,
       paddingVertical: 10,
       paddingHorizontal: 10,
       borderRadius: 20,
