@@ -1352,7 +1352,7 @@ const DeviceStatus = ({
           </View>
         )}
       </ScrollView>
-      // NFT详情弹窗
+      {/* NFT详情Modal */}
       <Modal
         animationType="slide"
         transparent={true}
@@ -1511,7 +1511,7 @@ const DeviceStatus = ({
           </BlurView>
         </TouchableWithoutFeedback>
       </Modal>{" "}
-      // 发送NFT弹窗
+      {/*  发送NFTModal */}
       <Modal
         animationType="slide"
         transparent={true}
@@ -1635,7 +1635,7 @@ const DeviceStatus = ({
           </TouchableWithoutFeedback>
         </KeyboardAvoidingView>
       </Modal>{" "}
-      // 地址簿弹窗
+      {/*   地址簿Modal */}
       <AddressBookModal
         visible={isAddressBookVisible}
         onClose={() => setAddressBookVisible(false)}
@@ -1643,7 +1643,7 @@ const DeviceStatus = ({
         styles={styles}
         isDarkMode={isDarkMode}
       />
-      // 发送预览弹窗
+      {/*   发送预览Modal */}
       <Modal
         animationType="slide"
         transparent={true}
