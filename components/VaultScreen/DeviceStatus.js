@@ -1486,7 +1486,7 @@ const DeviceStatus = ({
             </BlurView>
           </TouchableWithoutFeedback>
         </KeyboardAvoidingView>
-      </Modal>{" "}
+      </Modal>
       {/*   地址簿Modal */}
       <AddressBookModal
         visible={isAddressBookVisible}
