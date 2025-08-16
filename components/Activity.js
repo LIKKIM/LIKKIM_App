@@ -5,7 +5,6 @@
 2. useTranslation —— 国际化翻译钩子。
 3. useIsFocused —— 判断页面是否聚焦的导航钩子。
 4. isValidAmount（本文件定义）, isValidState（本文件定义）—— 校验金额和状态的自定义函数。
-5. cleanActivityLog（本文件定义）—— 清理和持久化交易日志的自定义异步函数。
 6. fetchAllActivityLog（本文件定义）, fetchNextActivityLogPage（本文件定义）—— 获取/分页获取所有交易历史的自定义异步函数。
 7. fetchTransactionFee（本文件定义）—— 获取链上手续费的自定义异步函数。
 8. handleSendPress（本文件定义）, handleReceivePress（本文件定义）, handleConvertPress（本文件定义）—— 处理发送、接收、兑换按钮点击的自定义函数。
@@ -81,6 +80,7 @@ import {
 } from "../utils/activityLog";
 import { fetchTransactionFee } from "../utils/fetchTransactionFee";
 import { handleDisconnectDevice } from "../utils/handleDisconnectDevice";
+import { handleVerifyAddress } from "../utils/handleVerifyAddress";
 const FILE_NAME = "Activity.js";
 // BLE 常量
 const serviceUUID = bluetoothConfig.serviceUUID;
@@ -537,7 +537,6 @@ function ActivityScreen() {
 
   const monitorSubscription = useRef(null);
 
-  // ...
   const monitorVerificationCode = createMonitorVerificationCode({
     serviceUUID,
     notifyCharacteristicUUID,
@@ -586,7 +585,6 @@ function ActivityScreen() {
           "base64"
         ).toString("utf8");
         console.log("接收到的数据:", receivedData);
-
         // ---- 处理 PIN 校验命令 ----
         if (receivedData === "PIN_SIGN_READY") {
           setModalStatus({
@@ -640,7 +638,6 @@ function ActivityScreen() {
             });
 
             const responseData = await response.json();
-
             // 根据返回的 code 字段判断广播是否成功
             if (response.ok && responseData.code === "0") {
               console.log("交易广播成功:", responseData);
@@ -757,8 +754,6 @@ function ActivityScreen() {
     Buffer,
   });
 
-  // 处理断开连接的逻辑
-
   // handlePinSubmit 已迁移至 utils/handlePinSubmit.js
   const handlePinSubmit = React.useMemo(
     () =>
@@ -806,29 +801,6 @@ function ActivityScreen() {
     receivedAddresses,
   ]);
 
-  const handleVerifyAddress = (chainShortName) => {
-    console.log("传入的链短名称是:", chainShortName);
-
-    if (verifiedDevices.length > 0) {
-      const device = devices.find((d) => d.id === verifiedDevices[0]);
-      if (device) {
-        displayDeviceAddress(
-          device,
-          chainShortName,
-          setIsVerifyingAddress,
-          setAddressVerificationMessage,
-          t
-        );
-      } else {
-        setAddressModalVisible(false);
-        setBleVisible(true);
-      }
-    } else {
-      setAddressModalVisible(false);
-      setBleVisible(true);
-    }
-  };
-
   const handleReceivePress = () => {
     scanDevices({ isScanning, setIsScanning, bleManagerRef, setDevices });
     setOperationType("receive");
@@ -843,7 +815,6 @@ function ActivityScreen() {
   };
   const selectCrypto = async (crypto) => {
     setSelectedCrypto(crypto.shortName);
-
     setSelectedAddress(crypto.address);
     setSelectedCryptoIcon(crypto.icon);
     setBalance(crypto.balance);
@@ -1080,7 +1051,19 @@ function ActivityScreen() {
           address={selectedAddress}
           isVerifying={isVerifyingAddress}
           verifyMsg={addressVerificationMessage}
-          handleVerify={handleVerifyAddress}
+          handleVerify={(chainShortName) =>
+            handleVerifyAddress({
+              chainShortName,
+              verifiedDevices,
+              devices,
+              setAddressModalVisible,
+              setBleVisible,
+              displayDeviceAddress,
+              setIsVerifyingAddress,
+              setAddressVerificationMessage,
+              t,
+            })
+          }
           isDarkMode={isDarkMode}
           chainShortName={chainShortName}
         />
