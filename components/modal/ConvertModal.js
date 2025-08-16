@@ -386,6 +386,7 @@ const ConvertModal = ({
                                   marginRight: 8,
                                 }}
                               />
+
                               <Text style={ActivityScreenStyle.subtitleText}>
                                 {getTokenDetails(selectedFromToken)?.name}
                               </Text>
@@ -485,12 +486,11 @@ const ConvertModal = ({
                                   )?.chainIcon
                                 }
                                 style={{
-                                  width: 14,
-                                  height: 14,
-                                  backgroundColor: "#CFAB9540",
+                                  width: 24,
+                                  height: 24,
                                   marginRight: 8,
-                                  resizeMode: "contain",
-                                  borderRadius: 10,
+                                  backgroundColor: "rgba(255, 255, 255, 0.2)",
+                                  borderRadius: 12,
                                 }}
                               />
                               <Text style={[ActivityScreenStyle.chainTagText]}>
@@ -574,10 +574,11 @@ const ConvertModal = ({
                                 <Image
                                   source={chain.chainIcon}
                                   style={{
-                                    width: 30,
-                                    height: 30,
-                                    borderRadius: 15,
-                                    marginRight: 10,
+                                    width: 24,
+                                    height: 24,
+                                    marginRight: 8,
+                                    backgroundColor: "rgba(255, 255, 255, 0.2)",
+                                    borderRadius: 12,
                                   }}
                                 />
                                 <Text
