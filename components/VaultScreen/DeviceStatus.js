@@ -574,17 +574,6 @@ const DeviceStatus = ({
       }
     }
   };
-  // 使用 FileReader 将 Blob 转换为 ArrayBuffer
-  const blobToArrayBuffer = (blob) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        resolve(reader.result); // 读取成功后返回 ArrayBuffer
-      };
-      reader.onerror = reject; // 错误处理
-      reader.readAsArrayBuffer(blob); // 将 Blob 读为 ArrayBuffer
-    });
-  };
   // 处理 "Next" 按钮，打开预览 Modal
   const handlePreview = () => {
     if (!selectedNFT || !recipientAddress) {
