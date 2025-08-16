@@ -80,6 +80,7 @@ import {
   fetchNextActivityLogPage,
 } from "../utils/activityLog";
 import { fetchTransactionFee } from "../utils/fetchTransactionFee";
+import { handleDisconnectDevice } from "../utils/handleDisconnectDevice";
 const FILE_NAME = "Activity.js";
 // BLE 常量
 const serviceUUID = bluetoothConfig.serviceUUID;
@@ -773,32 +774,6 @@ function ActivityScreen() {
   });
 
   // 处理断开连接的逻辑
-  const handleDisconnectDevice = async (device) => {
-    try {
-      // 停止监听验证码，避免因断开连接导致的错误
-      // stopMonitoringVerificationCode();
-
-      await device.cancelConnection(); // 断开设备连接
-      console.log(`设备 ${device.id} 已断开连接`);
-
-      // 移除已验证设备的ID
-      const updatedVerifiedDevices = verifiedDevices.filter(
-        (id) => id !== device.id
-      );
-      setVerifiedDevices(updatedVerifiedDevices);
-      await AsyncStorage.setItem(
-        "verifiedDevices",
-        JSON.stringify(updatedVerifiedDevices)
-      );
-      console.log(`设备 ${device.id} 已从已验证设备中移除`);
-
-      // 更新全局状态，表示设备已不再验证成功
-      setIsVerificationSuccessful(false);
-      console.log("验证状态已更新为 false。");
-    } catch (error) {
-      console.log("断开设备连接失败:", error);
-    }
-  };
 
   // handlePinSubmit 已迁移至 utils/handlePinSubmit.js
   const handlePinSubmit = React.useMemo(
@@ -1139,7 +1114,14 @@ function ActivityScreen() {
           verifiedDevices={"0"}
           SecureDeviceScreenStyle={ActivityScreenStyle}
           t={t}
-          onDisconnectPress={handleDisconnectDevice}
+          onDisconnectPress={async (device) => {
+            await handleDisconnectDevice({
+              device,
+              verifiedDevices,
+              setVerifiedDevices,
+              setIsVerificationSuccessful,
+            });
+          }}
         />
         {/* PIN Modal */}
         <SecurityCodeModal
