@@ -35,6 +35,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { BleManager } from "react-native-ble-plx";
 import * as FileSystem from "expo-file-system";
 import { queryNFTDetail } from "../../utils/queryNFTDetail";
+import { handleSaveToDevice } from "../../utils/handleSaveToDevice";
 const bleManager = new BleManager();
 
 const serviceUUID = bluetoothConfig.serviceUUID;
@@ -239,342 +240,6 @@ const DeviceStatus = ({
   const styles = SecureDeviceScreenStyles(isDarkMode);
   const [dataUrl, setDataUrl] = useState(null);
 
-  const handleSaveToDevice = async () => {
-    // 检查设备验证状态，必要时弹出蓝牙弹窗
-    let device = null;
-    if (verifiedDevices.length > 0) {
-      device = devices.find((d) => d.id === verifiedDevices[0]);
-      Alert.alert("NFT sending started");
-    }
-    if (verifiedDevices.length === 0 || !device) {
-      if (setBleVisible) {
-        setBleVisible(true);
-      }
-    }
-
-    setNFTModalVisible(false);
-    console.log("Save to Cold Wallet clicked");
-
-    if (selectedNFT?.logoUrl) {
-      try {
-        // 使用 fetch 获取图片数据
-        const response = await fetch(selectedNFT.logoUrl);
-        const imageBlob = await response.blob();
-
-        // 生成 420x420 和 210x210 两种尺寸的 JPEG 图片
-        const resizedImage420 = await ImageResizer.createResizedImage(
-          URL.createObjectURL(imageBlob),
-          420,
-          420,
-          "JPEG",
-          80
-        );
-        const resizedImage210 = await ImageResizer.createResizedImage(
-          URL.createObjectURL(imageBlob),
-          210,
-          210,
-          "JPEG",
-          80
-        );
-
-        console.log(
-          "Converted JPG images:",
-          resizedImage420.uri,
-          resizedImage210.uri
-        );
-
-        // 读取转换后的 JPEG 文件为 base64 编码字符串
-        const fileData420 = await FileSystem.readAsStringAsync(
-          resizedImage420.uri,
-          {
-            encoding: FileSystem.EncodingType.Base64,
-          }
-        );
-        const fileData210 = await FileSystem.readAsStringAsync(
-          resizedImage210.uri,
-          {
-            encoding: FileSystem.EncodingType.Base64,
-          }
-        );
-
-        // 写入 .bin 文件，路径为应用文档目录下的 image_420.bin 和 image_210.bin
-        const binFileUri420 = FileSystem.documentDirectory + "image_420.bin";
-        const binFileUri210 = FileSystem.documentDirectory + "image_210.bin";
-        await FileSystem.writeAsStringAsync(binFileUri420, fileData420, {
-          encoding: FileSystem.EncodingType.Base64,
-        });
-        await FileSystem.writeAsStringAsync(binFileUri210, fileData210, {
-          encoding: FileSystem.EncodingType.Base64,
-        });
-
-        console.log(
-          "JPEG images saved as .bin files at:",
-          binFileUri420,
-          binFileUri210
-        );
-
-        // 保存 base64 数据到状态（如果需要）
-        setDataUrl(fileData420);
-
-        // 读取 bin 文件内容并拆包发送给 BLE 设备
-        if (!props.device) {
-          console.log("没有选择设备，无法发送数据");
-          return;
-        }
-
-        try {
-          // 确保设备已连接，并发现所有服务和特性
-          await props.device.connect();
-          await props.device.discoverAllServicesAndCharacteristics();
-
-          // 读取 bin 文件的 base64 内容
-          const binData420 = await FileSystem.readAsStringAsync(binFileUri420, {
-            encoding: FileSystem.EncodingType.Base64,
-          });
-          const binData210 = await FileSystem.readAsStringAsync(binFileUri210, {
-            encoding: FileSystem.EncodingType.Base64,
-          });
-
-          // 发送 nft 的 collectionName，带头部标志 "DATA_NFT_TEXT"
-          if (selectedNFT?.name) {
-            const collectionName = selectedNFT.name;
-            // 计算字节长度
-            const collectionNameBytesLength = Buffer.byteLength(
-              collectionName,
-              "utf-8"
-            );
-            const collectionNameHeader =
-              "DATA_NFT_TEXT" + collectionNameBytesLength.toString() + "SIZE";
-
-            // 先发送头部标志（包含字节大小），并进行Base64编码
-            const collectionNameHeaderBase64 = Buffer.from(
-              collectionNameHeader,
-              "utf-8"
-            ).toString("base64");
-            console.log(
-              "发送 DATA_NFT_TEXT 头部标志(Base64):",
-              collectionNameHeaderBase64
-            );
-            await props.device.writeCharacteristicWithResponseForService(
-              serviceUUID,
-              writeCharacteristicUUID,
-              collectionNameHeaderBase64
-            );
-
-            // 订阅通知，监听嵌入式设备的GET请求
-            const subscription = props.device.monitorCharacteristicForService(
-              serviceUUID,
-              notifyCharacteristicUUID,
-              async (error, characteristic) => {
-                if (error) {
-                  console.log("监听特性错误:", error);
-                  return;
-                }
-                if (!characteristic?.value) return;
-
-                // 解码收到的Base64数据
-                const receivedData = Buffer.from(
-                  characteristic.value,
-                  "base64"
-                ).toString("utf-8");
-                console.log("收到嵌入式设备请求:", receivedData);
-
-                if (receivedData.startsWith("GET")) {
-                  // 解析包序号
-                  const packetIndex =
-                    parseInt(receivedData.substring(3), 10) - 1;
-                  if (
-                    packetIndex >= 0 &&
-                    packetIndex * 200 < collectionName.length
-                  ) {
-                    const start = packetIndex * 200;
-                    const end = Math.min(start + 200, collectionName.length);
-                    const chunk = collectionName.substring(start, end);
-                    try {
-                      // 对分包数据进行Base64编码后发送
-                      const chunkBase64 = Buffer.from(chunk, "utf-8").toString(
-                        "base64"
-                      );
-                      console.log(
-                        `发送 DATA_NFT_TEXT 数据包(Base64) 第${
-                          packetIndex + 1
-                        }包:`,
-                        chunkBase64
-                      );
-                      await props.device.writeCharacteristicWithResponseForService(
-                        serviceUUID,
-                        writeCharacteristicUUID,
-                        chunkBase64
-                      );
-                      console.log(
-                        `发送 collectionName 第${packetIndex + 1}包数据`
-                      );
-                    } catch (e) {
-                      console.log("发送 collectionName 数据包错误:", e);
-                    }
-                  }
-                } else if (receivedData === "FINISH") {
-                  console.log("嵌入式设备已接收完 collectionName 数据");
-                  subscription.remove();
-                }
-              }
-            );
-
-            console.log("已订阅 DATA_NFT_TEXT 数据请求通知");
-
-            // 在 DATA_NFT_TEXT 发送完成后，开始发送 DATA_NFT_IMG 数据
-            const sendNFTImgData = async () => {
-              // 发送 420 尺寸图片数据，前面加开头标志 "DATA_NFT_IMG" + 数据字节大小
-              const header420 =
-                "DATA_NFT_IMG" + binData420.length.toString() + "SIZE";
-
-              // 先发送 420 头部标志（包含字节大小），并进行Base64编码
-              const header420Base64 = Buffer.from(header420, "utf-8").toString(
-                "base64"
-              );
-              await props.device.writeCharacteristicWithResponseForService(
-                serviceUUID,
-                writeCharacteristicUUID,
-                header420Base64
-              );
-              console.log(
-                "发送 DATA_NFT_IMG 头部标志(Base64):",
-                header420Base64
-              );
-
-              // 订阅通知，监听嵌入式设备的GET请求
-              const subscription420 =
-                props.device.monitorCharacteristicForService(
-                  serviceUUID,
-                  notifyCharacteristicUUID,
-                  async (error, characteristic) => {
-                    if (error) {
-                      console.log("监听特性错误:", error);
-                      return;
-                    }
-                    if (!characteristic?.value) return;
-
-                    // 解码收到的Base64数据
-                    const receivedData = Buffer.from(
-                      characteristic.value,
-                      "base64"
-                    ).toString("utf-8");
-                    console.log("收到嵌入式设备请求:", receivedData);
-
-                    if (receivedData.startsWith("GET")) {
-                      // 解析包序号
-                      const packetIndex =
-                        parseInt(receivedData.substring(3), 10) - 1;
-                      if (
-                        packetIndex >= 0 &&
-                        packetIndex * 200 < binData420.length
-                      ) {
-                        const start = packetIndex * 200;
-                        const end = Math.min(start + 200, binData420.length);
-                        const chunk = binData420.substring(start, end);
-                        try {
-                          // 对分包数据进行Base64编码后发送
-                          const chunkBase64 = Buffer.from(
-                            chunk,
-                            "utf-8"
-                          ).toString("base64");
-                          console.log(
-                            `发送 DATA_NFT_IMG 数据包(Base64) 第${
-                              packetIndex + 1
-                            }包:`,
-                            chunkBase64
-                          );
-                          await props.device.writeCharacteristicWithResponseForService(
-                            serviceUUID,
-                            writeCharacteristicUUID,
-                            chunkBase64
-                          );
-                          console.log(
-                            `发送 420 图片数据第${packetIndex + 1}包`
-                          );
-                        } catch (e) {
-                          console.log("发送 420 图片数据包错误:", e);
-                        }
-                      }
-                    } else if (receivedData === "FINISH") {
-                      console.log("嵌入式设备已接收完 420 图片数据");
-                      subscription420.remove();
-                    }
-                  }
-                );
-
-              console.log("已订阅 DATA_NFT_IMG 图片数据请求通知");
-            };
-
-            // 监听 DATA_NFT_TEXT 的通知，收到 FINISH 后触发发送图片数据
-            const originalSubscription =
-              props.device.monitorCharacteristicForService(
-                serviceUUID,
-                notifyCharacteristicUUID,
-                async (error, characteristic) => {
-                  if (error) {
-                    console.log("监听特性错误:", error);
-                    return;
-                  }
-                  if (!characteristic?.value) return;
-
-                  const receivedData = Buffer.from(
-                    characteristic.value,
-                    "base64"
-                  ).toString("utf-8");
-                  console.log("收到嵌入式设备请求:", receivedData);
-
-                  if (receivedData.startsWith("GET")) {
-                    // 解析包序号
-                    const packetIndex =
-                      parseInt(receivedData.substring(3), 10) - 1;
-                    if (
-                      packetIndex >= 0 &&
-                      packetIndex * 200 < collectionName.length
-                    ) {
-                      const start = packetIndex * 200;
-                      const end = Math.min(start + 200, collectionName.length);
-                      const chunk = collectionName.substring(start, end);
-                      try {
-                        const chunkBase64 = Buffer.from(
-                          chunk,
-                          "utf-8"
-                        ).toString("base64");
-                        console.log(
-                          `发送 DATA_NFT_TEXT 数据包(Base64) 第${
-                            packetIndex + 1
-                          }包:`,
-                          chunkBase64
-                        );
-                        await props.device.writeCharacteristicWithResponseForService(
-                          serviceUUID,
-                          writeCharacteristicUUID,
-                          chunkBase64
-                        );
-                        console.log(
-                          `发送 collectionName 第${packetIndex + 1}包数据`
-                        );
-                      } catch (e) {
-                        console.log("发送 collectionName 数据包错误:", e);
-                      }
-                    }
-                  } else if (receivedData === "FINISH") {
-                    console.log("嵌入式设备已接收完 collectionName 数据");
-                    originalSubscription.remove();
-                    // 发送图片数据
-                    await sendNFTImgData();
-                  }
-                }
-              );
-          }
-        } catch (error) {
-          console.log("发送 bin 文件时出错:", error);
-        }
-      } catch (error) {
-        console.log("Error fetching image or converting to JPEG .bin:", error);
-      }
-    }
-  };
   // 处理 "Next" 按钮，打开预览 Modal
   const handlePreview = () => {
     if (!selectedNFT || !recipientAddress) {
@@ -1310,7 +975,22 @@ const DeviceStatus = ({
         selectedNFT={selectedNFT}
         VaultScreenStyle={VaultScreenStyle}
         t={t}
-        handleSaveToDevice={handleSaveToDevice}
+        handleSaveToDevice={async () => {
+          await handleSaveToDevice({
+            selectedNFT,
+            devices,
+            verifiedDevices,
+            setBleVisible,
+            device: props.device,
+            Alert,
+            ImageResizer,
+            FileSystem,
+            Buffer,
+            serviceUUID,
+            writeCharacteristicUUID,
+            notifyCharacteristicUUID,
+          });
+        }}
         setRecipientAddress={setRecipientAddress}
         setSendModalVisible={setSendModalVisible}
       />
