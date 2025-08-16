@@ -23,7 +23,7 @@ import { BlurView as ExpoBlurView } from "expo-blur";
  * @param {object} props.VaultScreenStyle - 样式对象
  * @param {function} props.t - 国际化函数
  * @param {string} props.recipientAddress - 当前收件人地址
- * @param {function} props.handleSendPress - 发送回调
+ * @param {function} props.handleSendDigital - 发送回调
  * @param {boolean} props.isDarkMode - 暗黑模式
  */
 const PreviewSendModal = ({
@@ -33,7 +33,7 @@ const PreviewSendModal = ({
   VaultScreenStyle,
   t,
   recipientAddress,
-  handleSendPress,
+  handleSendDigital,
   isDarkMode,
 }) => {
   return (
@@ -139,7 +139,7 @@ const PreviewSendModal = ({
                   ]}
                   disabled={!recipientAddress}
                   onPress={() => {
-                    handleSendPress();
+                    handleSendDigital();
                     onClose();
                   }}
                 >

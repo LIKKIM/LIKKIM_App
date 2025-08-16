@@ -36,6 +36,7 @@ import { BleManager } from "react-native-ble-plx";
 import * as FileSystem from "expo-file-system";
 import { queryNFTDetail } from "../../utils/queryNFTDetail";
 import { handleSaveToDevice } from "../../utils/handleSaveToDevice";
+import { handleSendDigital } from "../../utils/handleSendDigital";
 const bleManager = new BleManager();
 
 const serviceUUID = bluetoothConfig.serviceUUID;
@@ -468,57 +469,6 @@ const DeviceStatus = ({
         </Text>
       </TouchableOpacity>
     );
-  };
-
-  const handleSendPress = async () => {
-    console.log("handleSendPress");
-
-    // 检查是否选择了设备
-    if (!props.device) {
-      console.log("没有选择设备");
-      return;
-    }
-
-    // 获取合约地址和链名称
-    const contractAddress = selectedNFT?.tokenContractAddress;
-    const chainName = selectedNFT?.chain;
-
-    if (!contractAddress || !chainName) {
-      console.log("合约地址或链名称为空");
-      return;
-    }
-
-    // 将合约地址和链名称转换为 Base64
-    const base64ContractAddress = Buffer.from(
-      contractAddress,
-      "utf-8"
-    ).toString("base64");
-    const base64ChainName = Buffer.from(chainName, "utf-8").toString("base64");
-
-    console.log("转换后的 Base64 合约地址:", base64ContractAddress);
-    console.log("转换后的 Base64 链名称:", base64ChainName);
-
-    // 准备要发送的消息（合约地址和链名称的 Base64 编码）
-    const message = {
-      contractAddress: base64ContractAddress,
-      chainName: base64ChainName,
-    };
-
-    try {
-      // 确保设备已连接，并发现所有服务和特性
-      await props.device.connect();
-      await props.device.discoverAllServicesAndCharacteristics();
-
-      await props.device.writeCharacteristicWithResponseForService(
-        serviceUUID, // 服务UUID
-        writeCharacteristicUUID, // 写入特性UUID
-        JSON.stringify(message) // 将消息对象转化为 JSON 字符串并发送
-      );
-
-      console.log("合约地址和链名称（Base64）已成功发送到设备");
-    } catch (error) {
-      console.log("发送数据时出错:", error);
-    }
   };
 
   return selectedView === "wallet" ? (
@@ -1024,7 +974,16 @@ const DeviceStatus = ({
         VaultScreenStyle={VaultScreenStyle}
         t={t}
         recipientAddress={recipientAddress}
-        handleSendPress={handleSendPress}
+        handleSendDigital={async () => {
+          await handleSendDigital({
+            selectedNFT,
+            device: props.device,
+            Buffer,
+            serviceUUID,
+            writeCharacteristicUUID,
+            Alert,
+          });
+        }}
         isDarkMode={isDarkMode}
       />
     </View>
