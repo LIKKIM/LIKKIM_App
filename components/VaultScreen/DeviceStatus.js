@@ -24,6 +24,7 @@ import { MaterialIcons as Icon } from "@expo/vector-icons";
 import AddressBookModal from "./../modal/AddressBookModal";
 import NFTDetailModal from "../modal/NFTDetailModal";
 import SendItemModal from "../modal/SendItemModal";
+import PreviewSendModal from "../modal/PreviewSendModal";
 import SecureDeviceScreenStyles from "../../styles/SecureDeviceScreenStyle";
 import { WebView } from "react-native-webview";
 import { galleryAPI } from "../../env/apiEndpoints";
@@ -1387,118 +1388,16 @@ const DeviceStatus = ({
         isDarkMode={isDarkMode}
       />
       {/*   发送预览Modal */}
-      <Modal
-        animationType="slide"
-        transparent={true}
+      <PreviewSendModal
         visible={previewModalVisible}
-        onRequestClose={() => setPreviewModalVisible(false)}
-      >
-        <TouchableWithoutFeedback onPress={() => setPreviewModalVisible(false)}>
-          <BlurView intensity={20} style={VaultScreenStyle.centeredView}>
-            <View
-              style={VaultScreenStyle.ContactFormModal}
-              onStartShouldSetResponder={(e) => e.stopPropagation()}
-            >
-              {/* 标题栏 */}
-              <View
-                style={{
-                  width: "100%",
-                  alignItems: "center",
-                  marginBottom: 20,
-                }}
-              >
-                <Text style={VaultScreenStyle.modalTitle}>
-                  {props.t("Waiting for Confirmation")}
-                </Text>
-              </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "flex-start",
-                  marginBottom: 20,
-                }}
-              >
-                {selectedNFT?.logoUrl && (
-                  <Image
-                    source={{ uri: selectedNFT.logoUrl }}
-                    style={{
-                      width: 40,
-                      height: 40,
-                      borderRadius: 4,
-                      marginRight: 8,
-                    }}
-                  />
-                )}
-                <View style={{ flexDirection: "column", flex: 1 }}>
-                  <Text
-                    style={[
-                      { flexWrap: "wrap" },
-                      { color: isDarkMode ? "#fff" : "#000" },
-                    ]}
-                  >
-                    {selectedNFT?.name || "NFT Name"}
-                  </Text>
-                  <Text
-                    style={[
-                      { flexWrap: "wrap" },
-                      { color: isDarkMode ? "#fff" : "#000" },
-                    ]}
-                  >
-                    {t("Token ID")}: {selectedNFT?.tokenId || "N/A"}
-                  </Text>
-                </View>
-              </View>
-
-              <Text style={[{ color: isDarkMode ? "#fff" : "#000" }]}>
-                {`${props.t("Recipient Address")}:`}
-              </Text>
-
-              <Text style={[{ color: isDarkMode ? "#fff" : "#000" }]}>
-                {recipientAddress || props.t("No Address Selected")}
-              </Text>
-              <View>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    marginTop: 20,
-                  }}
-                >
-                  {/* Close 按钮在左 */}
-                  <TouchableOpacity
-                    style={[
-                      VaultScreenStyle.cancelButton,
-                      { borderRadius: 15, flex: 1, marginRight: 8 },
-                    ]}
-                    onPress={() => setPreviewModalVisible(false)}
-                  >
-                    <Text style={VaultScreenStyle.ButtonText}>
-                      {props.t("Close")}
-                    </Text>
-                  </TouchableOpacity>
-
-                  {/* Send 按钮在右 */}
-                  <TouchableOpacity
-                    style={[
-                      VaultScreenStyle.submitButton,
-                      { borderRadius: 15, flex: 1, marginLeft: 8 },
-                    ]}
-                    disabled={!recipientAddress}
-                    onPress={() => {
-                      handleSendPress(); // ✅ 直接调用，不需要 `onPress = { ... }`
-                      setPreviewModalVisible(false);
-                    }}
-                  >
-                    <Text style={VaultScreenStyle.ButtonText}>
-                      {props.t("Send")}
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
-            </View>
-          </BlurView>
-        </TouchableWithoutFeedback>
-      </Modal>
+        onClose={() => setPreviewModalVisible(false)}
+        selectedNFT={selectedNFT}
+        VaultScreenStyle={VaultScreenStyle}
+        t={t}
+        recipientAddress={recipientAddress}
+        handleSendPress={handleSendPress}
+        isDarkMode={isDarkMode}
+      />
     </View>
   );
 };
