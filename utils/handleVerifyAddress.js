@@ -1,5 +1,5 @@
 /**
- * 处理地址验证逻辑
+ * 处理地址验证逻辑（通用）
  * @param {Object} params
  * @param {string} params.chainShortName - 链短名称
  * @param {Array} params.verifiedDevices - 已验证设备ID数组
@@ -40,4 +40,18 @@ export function handleVerifyAddress({
     setAddressModalVisible(false);
     setBleVisible(true);
   }
+}
+
+/**
+ * Vault 专用 handleVerifyAddress，参数名兼容 selectedCardChainShortName
+ * @param {Object} params
+ * @param {string} params.selectedCardChainShortName - 链短名称
+ * 其余参数同 handleVerifyAddress
+ */
+export function handleVerifyAddressForVault(params) {
+  // 兼容参数名
+  return handleVerifyAddress({
+    ...params,
+    chainShortName: params.selectedCardChainShortName,
+  });
 }

@@ -48,7 +48,7 @@ import { createHandleDevicePress } from "../utils/handleDevicePress";
 import { scanDevices } from "../utils/scanDevices";
 import createMonitorVerificationCode from "../utils/monitorVerificationCode";
 import { handleDisconnectDeviceForVault } from "../utils/handleDisconnectDeviceForVault";
-import { handleVerifyAddressForVault } from "../utils/handleVerifyAddressForVault";
+import { handleVerifyAddressForVault } from "../utils/handleVerifyAddress";
 const FILE_NAME = "Vault.js";
 const serviceUUID = bluetoothConfig.serviceUUID;
 const writeCharacteristicUUID = bluetoothConfig.writeCharacteristicUUID;
