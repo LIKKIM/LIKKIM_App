@@ -22,6 +22,7 @@ import { BlurView } from "expo-blur";
 import { LinearGradient } from "expo-linear-gradient";
 import { MaterialIcons as Icon } from "@expo/vector-icons";
 import AddressBookModal from "./../modal/AddressBookModal";
+import NFTDetailModal from "../modal/NFTDetailModal";
 import SecureDeviceScreenStyles from "../../styles/SecureDeviceScreenStyle";
 import { WebView } from "react-native-webview";
 import { galleryAPI } from "../../env/apiEndpoints";
@@ -1352,165 +1353,16 @@ const DeviceStatus = ({
           </View>
         )}
       </ScrollView>
-      {/* NFT详情Modal */}
-      <Modal
-        animationType="slide"
-        transparent={true}
+      <NFTDetailModal
         visible={NFTmodalVisible}
-        onRequestClose={toggleModal}
-      >
-        <TouchableWithoutFeedback onPress={toggleModal}>
-          <BlurView intensity={20} style={VaultScreenStyle.centeredView}>
-            <View
-              style={VaultScreenStyle.NFTmodalView}
-              onStartShouldSetResponder={(e) => e.stopPropagation()}
-            >
-              <View>
-                {selectedNFT ? (
-                  <View>
-                    {selectedNFT.logoUrl ? (
-                      <SkeletonImage
-                        source={{ uri: selectedNFT.logoUrl }}
-                        style={VaultScreenStyle.nftModalImage}
-                        resizeMode="cover"
-                        VaultScreenStyle={VaultScreenStyle}
-                      />
-                    ) : (
-                      <View style={VaultScreenStyle.nftNoImageContainer}>
-                        <Image
-                          source={require("../../assets/Logo@500.png")}
-                          style={VaultScreenStyle.nftNoImageLogo}
-                        />
-                        <Text
-                          style={[
-                            VaultScreenStyle.modalSubtitle,
-                            VaultScreenStyle.nftNoImageText,
-                          ]}
-                        >
-                          {t("No Image")}
-                        </Text>
-                      </View>
-                    )}
-
-                    <ScrollView
-                      showsVerticalScrollIndicator={true}
-                      style={{ flexGrow: 0, height: 170, marginVertical: 20 }}
-                      contentContainerStyle={{
-                        flexGrow: 1,
-                      }}
-                    >
-                      <View
-                        style={{
-                          flex: 1,
-                          justifyContent: "space-between",
-                        }}
-                      >
-                        {/* NFT 名称 */}
-                        <Text
-                          style={[
-                            VaultScreenStyle.modalTitle,
-                            { marginBottom: 6 },
-                          ]}
-                        >
-                          {selectedNFT.name || t("NFT Card")}
-                        </Text>
-
-                        {/* 合约地址 */}
-                        <Text
-                          style={[
-                            VaultScreenStyle.chainCardText,
-                            { marginBottom: 4 },
-                          ]}
-                        >
-                          {t("Contract")}: {selectedNFT.tokenContractAddress}
-                        </Text>
-
-                        {/* Token ID */}
-                        <Text
-                          style={[
-                            VaultScreenStyle.chainCardText,
-                            { marginBottom: 4 },
-                          ]}
-                        >
-                          {t("Token ID")}: {selectedNFT.tokenId}
-                        </Text>
-
-                        {/* 协议类型 */}
-                        <Text
-                          style={[
-                            VaultScreenStyle.chainCardText,
-                            { marginBottom: 4 },
-                          ]}
-                        >
-                          {t("Protocol")}:{" "}
-                          {selectedNFT.protocolType || t("N/A")}
-                        </Text>
-                        <Text style={VaultScreenStyle.chainCardText}>
-                          {t("Description")}: {selectedNFT.des || t("N/A")}
-                        </Text>
-                        {/* 价格信息，如果存在 */}
-                        {selectedNFT.lastPrice && (
-                          <Text
-                            style={[
-                              VaultScreenStyle.modalTitle,
-                              { marginTop: 8 },
-                            ]}
-                          >
-                            {t("Price")}: {selectedNFT.lastPrice}{" "}
-                            {selectedNFT.lastPriceUnit || t("N/A")}
-                          </Text>
-                        )}
-                      </View>
-                    </ScrollView>
-                  </View>
-                ) : (
-                  <Text
-                    style={[
-                      VaultScreenStyle.modalSubtitle,
-                      { textAlign: "center" },
-                    ]}
-                  >
-                    {t("No NFT Data")}
-                  </Text>
-                )}
-              </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <TouchableOpacity
-                  style={[
-                    VaultScreenStyle.GallerySendBtn,
-                    { flex: 1, marginRight: 8 },
-                  ]}
-                  onPress={() => {
-                    setNFTModalVisible(false);
-                    setRecipientAddress("");
-                    setSendModalVisible(true);
-                  }}
-                >
-                  <Text style={VaultScreenStyle.ButtonText}>{t("Send")}</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                  style={[
-                    VaultScreenStyle.NFTButton,
-
-                    { flex: 1, marginLeft: 8 },
-                  ]}
-                  onPress={handleSaveToDevice}
-                >
-                  <Text style={VaultScreenStyle.NFTButtonText}>
-                    {t("Save to Device")}
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </BlurView>
-        </TouchableWithoutFeedback>
-      </Modal>{" "}
+        onClose={toggleModal}
+        selectedNFT={selectedNFT}
+        VaultScreenStyle={VaultScreenStyle}
+        t={t}
+        handleSaveToDevice={handleSaveToDevice}
+        setRecipientAddress={setRecipientAddress}
+        setSendModalVisible={setSendModalVisible}
+      />
       {/*  发送NFTModal */}
       <Modal
         animationType="slide"
