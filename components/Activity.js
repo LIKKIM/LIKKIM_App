@@ -79,6 +79,7 @@ import {
   fetchAllActivityLog,
   fetchNextActivityLogPage,
 } from "../utils/activityLog";
+import { fetchTransactionFee } from "../utils/fetchTransactionFee";
 const FILE_NAME = "Activity.js";
 // BLE 常量
 const serviceUUID = bluetoothConfig.serviceUUID;
@@ -297,50 +298,15 @@ function ActivityScreen() {
   }, [isFocused, initialAdditionalCryptos]);
 
   // 在 ActivityScreen 组件的 useEffect 或合适位置添加代码来获取手续费
-  const fetchTransactionFee = async () => {
-    try {
-      const postData = {
-        chain: selectedQueryChainName,
-        type: "",
-      };
-
-      // 打印发送的 POST 数据
-      console.log("🚀 Sending POST data:", JSON.stringify(postData, null, 2));
-
-      const response = await fetch(accountAPI.blockchainFee, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(postData),
-      });
-
-      if (!response.ok) {
-        console.log("❌ HTTP Error:", response.status, response.statusText);
-        return;
-      }
-
-      const data = await response.json();
-
-      console.log("✅ Received response data:", JSON.stringify(data, null, 2));
-
-      if (data && data.data) {
-        const { rapidFee, recommendedFee } = data.data;
-
-        setFee(recommendedFee);
-        console.log("✅ Fee set to:", recommendedFee);
-
-        setRapidFee(rapidFee);
-        console.log("✅ Rapid fee set to:", rapidFee);
-      }
-    } catch (error) {
-      console.log("❌ Failed to fetch processing Fee:", error);
-    }
-  };
 
   useEffect(() => {
     if (amountModalVisible) {
-      fetchTransactionFee();
+      fetchTransactionFee({
+        selectedQueryChainName,
+        setFee,
+        setRapidFee,
+        accountAPI,
+      });
     }
   }, [amountModalVisible]);
 
