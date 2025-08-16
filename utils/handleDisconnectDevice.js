@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 /**
- * 断开设备连接并更新状态
+ * 断开设备连接并更新状态（通用）
  * @param {Object} params
  * @param {Object} params.device - 设备对象，需有 cancelConnection 方法和 id 属性
  * @param {Array} params.verifiedDevices - 当前已验证设备ID数组
@@ -16,10 +16,7 @@ export async function handleDisconnectDevice({
   setIsVerificationSuccessful,
 }) {
   try {
-    // 停止监听验证码，避免因断开连接导致的错误
-    // stopMonitoringVerificationCode(); // 如需外部处理可传入
-
-    await device.cancelConnection(); // 断开设备连接
+    await device.cancelConnection();
     console.log(`设备 ${device.id} 已断开连接`);
 
     // 移除已验证设备的ID
@@ -39,4 +36,18 @@ export async function handleDisconnectDevice({
   } catch (error) {
     console.log("断开设备连接失败:", error);
   }
+}
+
+/**
+ * Vault 专用 handleDisconnectDevice，参数名兼容
+ * @param {Object} params
+ * @param {Object} params.device - 设备对象
+ * @param {Array} params.verifiedDevices
+ * @param {Function} params.setVerifiedDevices
+ * @param {Function} params.setIsVerificationSuccessful
+ * @returns {Promise<void>}
+ */
+export async function handleDisconnectDeviceForVault(params) {
+  // 兼容参数名，直接复用
+  return handleDisconnectDevice(params);
 }
