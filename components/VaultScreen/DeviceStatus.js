@@ -1,4 +1,22 @@
-// ./VaultScreen/DeviceStatus.js
+/*
+本文件用到的主要函数和钩子说明：
+
+1. useState, useEffect, useRef（React钩子）—— 用于状态管理、生命周期、副作用、引用等。
+2. animatePressIn, animatePressOut —— 卡片按压动画处理函数。
+3. handlePreview —— 处理NFT发送预览的自定义函数。
+4. handleOpenAddressBook, handleAddressSelect —— 地址簿相关的自定义函数。
+5. toggleModal —— 控制NFT详情弹窗显示的自定义函数。
+6. fetchNFTData —— 获取NFT数据的自定义异步函数。
+7. formatBytes, formatBalance —— 格式化字节数和余额的自定义函数。
+8. renderChainButton —— 渲染链选择按钮的自定义函数。
+9. onPress, onPressIn, onPressOut, onClose, onSelect, onRefresh —— 事件处理函数，传递给各组件和Modal。
+10. handleSendDigital, handleSaveToDevice —— 发送NFT和保存NFT到设备的自定义异步函数。
+11. fetch, Buffer, AsyncStorage, ImageResizer, FileSystem, Alert —— 网络请求、二进制、存储、图片处理、文件系统、弹窗等工具函数。
+12. queryNFTDetail —— 查询NFT详情的工具函数。
+
+如需了解具体实现，请查阅对应函数定义和调用处。
+*/
+
 import React, { useEffect, useState } from "react";
 import {
   ScrollView,

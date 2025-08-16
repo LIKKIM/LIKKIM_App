@@ -1,4 +1,33 @@
-// Activity.js
+/*
+本文件用到的主要函数和钩子说明：
+
+1. useState, useEffect, useContext, useRef, useMemo, useCallback（React钩子）—— 用于状态管理、生命周期、副作用、引用、记忆化等。
+2. useTranslation —— 国际化翻译钩子。
+3. useIsFocused —— 判断页面是否聚焦的导航钩子。
+4. isValidAmount, isValidState —— 校验金额和状态的自定义函数。
+5. cleanActivityLog —— 清理和持久化交易日志的自定义异步函数。
+6. fetchAllActivityLog, fetchNextActivityLogPage —— 获取/分页获取所有交易历史的自定义异步函数。
+7. fetchTransactionFee —— 获取链上手续费的自定义异步函数。
+8. handleSendPress, handleReceivePress, handleConvertPress —— 处理发送、接收、兑换按钮点击的自定义函数。
+9. handleDevicePress, handleDisconnectDevice —— 设备点击与断开连接处理函数。
+10. handlePinSubmit, handlePinSubmitProxy —— PIN码提交及包装函数。
+11. handleVerifyAddress —— 地址验证处理函数。
+12. selectCrypto —— 选择加密货币的处理函数。
+13. handleNextAfterAddress, handleNextAfterAmount —— 步骤切换处理函数。
+14. handleAddressChange —— 地址输入变更处理函数。
+15. monitorVerificationCode, monitorSignedResult —— 监听验证码/签名结果的自定义函数。
+16. stopMonitoringVerificationCode, stopMonitoringTransactionResponse —— 停止监听的自定义函数。
+17. signTransaction —— 交易签名处理函数。
+18. Clipboard, Buffer, AsyncStorage, fetch —— 剪贴板、二进制、存储、网络请求等工具函数。
+19. detectNetwork —— 检测地址网络类型的工具函数。
+20. scanDevices —— 扫描蓝牙设备的工具函数。
+21. displayDeviceAddress —— 显示设备地址的工具函数。
+22. createHandlePinSubmit, createHandleDevicePress, createMonitorVerificationCode —— 工厂函数，用于生成特定功能的处理器。
+23. onPress, onRequestClose, onConfirm, onCancel, onRefresh, onLoadMore, onChangeText —— 事件处理函数，传递给各组件和Modal。
+
+如需了解具体实现，请查阅对应函数定义和调用处。
+*/
+
 import React, { useContext, useState, useRef, useEffect } from "react";
 import { View, Platform, AppState } from "react-native";
 import Clipboard from "@react-native-clipboard/clipboard";

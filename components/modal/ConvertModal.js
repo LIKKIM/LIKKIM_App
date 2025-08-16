@@ -1,3 +1,23 @@
+/*
+本文件用到的主要函数和钩子说明：
+
+1. useState, useEffect, useRef, useContext（React钩子）—— 用于状态管理、生命周期、副作用、引用等。
+2. useTranslation —— 国际化翻译钩子。
+3. useNavigation, useRoute —— React Navigation 导航相关钩子。
+4. getTokenDetails —— 获取代币详细信息的自定义函数。
+5. handleConfirmConvert —— 处理“确认兑换”逻辑的自定义异步函数。
+6. calcRealPrice —— 实时获取兑换汇率的自定义异步函数。
+7. setXXX（如 setFromValue、setToValue 等）—— 用于更新对应状态。
+8. onPress、onChangeText、onRequestClose、onConfirm、onCancel —— 事件处理函数。
+9. fetch —— 用于网络请求。
+10. Buffer —— 用于处理二进制数据和Base64编码。
+11. console.log —— 控制台日志输出。
+12. InteractionManager.runAfterInteractions —— 优化UI交互的异步操作。
+13. ConfirmConvertModal —— 兑换确认弹窗组件，onConfirm/onCancel为回调函数。
+
+如需了解具体实现，请查阅对应函数定义和调用处。
+*/
+
 import React, { useState, useEffect, useRef, useContext } from "react";
 import ConfirmConvertModal from "./ConfirmConvertModal";
 import {
