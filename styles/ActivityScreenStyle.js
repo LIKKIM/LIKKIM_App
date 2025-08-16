@@ -28,7 +28,7 @@ const makeTokens = (isDarkMode) => ({
   secondText: isDarkMode ? "#ddd" : "#676776",
   textBtn: "#fff",
   title: isDarkMode ? "#fff" : "#000",
-  dropdownBg: isDarkMode ? "#21201E" : "#eee",
+
   selectedChainTagBg: isDarkMode ? "#CCB68C" : "#ccc",
   selectedChainTagText: isDarkMode ? "#000" : "#fff",
 });
@@ -37,6 +37,7 @@ const ActivityScreenStyles = (isDarkMode) => {
   const c = makeTokens(isDarkMode);
   return StyleSheet.create({
     // ConvertModal 独有样式
+    chainTagText: { fontSize: FONT_SIZE_15, color: c.text },
     convertModalFlex1: { flex: 1 },
     convertModalSection: { zIndex: 20, marginBottom: 30 },
     convertModalAlignStart: { alignItems: "flex-start", width: "100%" },
@@ -69,7 +70,7 @@ const ActivityScreenStyles = (isDarkMode) => {
       top: 100,
       width: "100%",
       maxHeight: 300,
-      backgroundColor: c.dropdownBg,
+      backgroundColor: c.inputBg,
       borderRadius: 10,
       padding: 10,
       zIndex: 999,
@@ -80,7 +81,7 @@ const ActivityScreenStyles = (isDarkMode) => {
       top: 70,
       width: "100%",
       maxHeight: 300,
-      backgroundColor: c.dropdownBg,
+      backgroundColor: c.inputBg,
       borderRadius: 10,
       padding: 10,
       zIndex: 999,
