@@ -55,6 +55,40 @@ const VaultScreenStyles = (isDarkMode) => {
   const c = makeTokens(isDarkMode);
 
   return StyleSheet.create({
+    // DeviceStatus.js 样式提取
+    refreshTipView: {
+      position: "absolute",
+      top: -30,
+      left: 0,
+      right: 0,
+      alignItems: "center",
+    },
+    refreshTipText: {
+      color: "#888",
+    },
+    chainAllIcon: {
+      width: 24,
+      height: 24,
+      marginRight: 8,
+      backgroundColor: "rgba(0, 0, 0, 0.05)",
+      borderRadius: 12,
+    },
+    chainSelectedIcon: {
+      width: 24,
+      height: 24,
+      marginRight: 8,
+      backgroundColor: "rgba(255, 255, 255, 0.2)",
+      borderRadius: 12,
+    },
+    galleryNoImageLogo: {
+      position: "absolute",
+      width: "50%",
+      height: "50%",
+      opacity: 0.2,
+      resizeMode: "contain",
+      top: "25%",
+      left: "25%",
+    },
     // 占位骨架相关（规避敏感词）
     placeholderWrapper: {
       position: "absolute",

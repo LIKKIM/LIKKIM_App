@@ -816,13 +816,7 @@ const DeviceStatus = ({
         {selectedChain === "All" ? (
           <Image
             source={require("../../assets/VaultScreenLogo.png")}
-            style={{
-              width: 24,
-              height: 24,
-              marginRight: 8,
-              backgroundColor: "rgba(0, 0, 0, 0.05)",
-              borderRadius: 12,
-            }}
+            style={VaultScreenStyle.chainAllIcon}
           />
         ) : (
           cryptoCards.length > 0 &&
@@ -844,13 +838,7 @@ const DeviceStatus = ({
                 <Image
                   key={`${card.chainShortName}-${index}`}
                   source={card.chainIcon}
-                  style={{
-                    width: 24,
-                    height: 24,
-                    marginRight: 8,
-                    backgroundColor: "rgba(255, 255, 255, 0.2)",
-                    borderRadius: 12,
-                  }}
+                  style={VaultScreenStyle.chainSelectedIcon}
                 />
               ));
           })()
@@ -947,16 +935,8 @@ const DeviceStatus = ({
         )
       }
     >
-      <View
-        style={{
-          position: "absolute",
-          top: -30,
-          left: 0,
-          right: 0,
-          alignItems: "center",
-        }}
-      >
-        <Text style={{ color: isDarkMode ? "#fff" : "#888" }}>
+      <View style={VaultScreenStyle.refreshTipView}>
+        <Text style={VaultScreenStyle.refreshTipText}>
           {refreshing ? t("Refreshing…") : t("Pull down to refresh")}
         </Text>
       </View>
@@ -1311,15 +1291,7 @@ const DeviceStatus = ({
                           >
                             <Image
                               source={require("../../assets/Logo@500.png")}
-                              style={{
-                                position: "absolute",
-                                width: "50%",
-                                height: "50%",
-                                opacity: 0.2,
-                                resizeMode: "contain",
-                                top: "25%",
-                                left: "25%",
-                              }}
+                              style={VaultScreenStyle.galleryNoImageLogo}
                             />
                             <Text
                               style={[
@@ -1380,7 +1352,7 @@ const DeviceStatus = ({
           </View>
         )}
       </ScrollView>
-
+      // NFT详情弹窗
       <Modal
         animationType="slide"
         transparent={true}
@@ -1538,7 +1510,8 @@ const DeviceStatus = ({
             </View>
           </BlurView>
         </TouchableWithoutFeedback>
-      </Modal>
+      </Modal>{" "}
+      // 发送NFT弹窗
       <Modal
         animationType="slide"
         transparent={true}
@@ -1661,7 +1634,8 @@ const DeviceStatus = ({
             </BlurView>
           </TouchableWithoutFeedback>
         </KeyboardAvoidingView>
-      </Modal>
+      </Modal>{" "}
+      // 地址簿弹窗
       <AddressBookModal
         visible={isAddressBookVisible}
         onClose={() => setAddressBookVisible(false)}
@@ -1669,6 +1643,7 @@ const DeviceStatus = ({
         styles={styles}
         isDarkMode={isDarkMode}
       />
+      // 发送预览弹窗
       <Modal
         animationType="slide"
         transparent={true}
