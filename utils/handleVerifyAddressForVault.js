@@ -1,7 +1,7 @@
 /**
- * 处理地址验证逻辑
+ * Vault 专用处理地址验证逻辑
  * @param {Object} params
- * @param {string} params.chainShortName - 链短名称
+ * @param {string} params.selectedCardChainShortName - 链短名称
  * @param {Array} params.verifiedDevices - 已验证设备ID数组
  * @param {Array} params.devices - 设备对象数组
  * @param {Function} params.setAddressModalVisible - 控制地址Modal显示
@@ -11,8 +11,8 @@
  * @param {Function} params.setAddressVerificationMessage - 设置验证消息
  * @param {Function} params.t - 国际化翻译函数
  */
-export function handleVerifyAddress({
-  chainShortName,
+export function handleVerifyAddressForVault({
+  selectedCardChainShortName,
   verifiedDevices,
   devices,
   setAddressModalVisible,
@@ -27,7 +27,7 @@ export function handleVerifyAddress({
     if (device) {
       displayDeviceAddress(
         device,
-        chainShortName,
+        selectedCardChainShortName,
         setIsVerifyingAddress,
         setAddressVerificationMessage,
         t

@@ -47,6 +47,8 @@ import {
 import { createHandleDevicePress } from "../utils/handleDevicePress";
 import { scanDevices } from "../utils/scanDevices";
 import createMonitorVerificationCode from "../utils/monitorVerificationCode";
+import { handleDisconnectDeviceForVault } from "../utils/handleDisconnectDeviceForVault";
+import { handleVerifyAddressForVault } from "../utils/handleVerifyAddressForVault";
 const FILE_NAME = "Vault.js";
 const serviceUUID = bluetoothConfig.serviceUUID;
 const writeCharacteristicUUID = bluetoothConfig.writeCharacteristicUUID;
@@ -459,16 +461,12 @@ function VaultScreen({ route, navigation }) {
   const getConvertedBalance = (cardBalance, cardShortName) => {
     const rate = exchangeRates[currencyUnit];
     const cryptoToUsdRate = exchangeRates[cardShortName] || 1;
-
     const marketPrice = priceChanges[cardShortName]?.priceChange || 1;
-
     if (!rate) {
       return cardBalance;
     }
-
     const usdBalance = cardBalance * cryptoToUsdRate * marketPrice;
     const finalBalance = (usdBalance * rate).toFixed(2);
-
     return finalBalance;
   };
 
@@ -495,29 +493,6 @@ function VaultScreen({ route, navigation }) {
   });
 
   // 处理断开连接的逻辑
-  const handleDisconnectDevice = async (device) => {
-    try {
-      await device.cancelConnection();
-      console.log(`设备 ${device.id} 已断开连接`);
-
-      // Remove verified device ID
-      const updatedVerifiedDevices = verifiedDevices.filter(
-        (id) => id !== device.id
-      );
-      setVerifiedDevices(updatedVerifiedDevices);
-      await AsyncStorage.setItem(
-        "verifiedDevices",
-        JSON.stringify(updatedVerifiedDevices)
-      );
-      console.log(`设备 ${device.id} 已从已验证设备中移除`);
-
-      // 更新全局状态，表示设备已不再验证成功
-      setIsVerificationSuccessful(false);
-      console.log("验证状态已更新为 false。");
-    } catch (error) {
-      console.log("断开设备连接失败:", error);
-    }
-  };
 
   const handleSelectChain = async (chain) => {
     try {
@@ -533,29 +508,6 @@ function VaultScreen({ route, navigation }) {
     }
     setSelectedChain(chain); // 更新选中的链
     setChainSelectionModalVisible(false); // 关闭modal
-  };
-
-  const handleVerifyAddress = (selectedCardChainShortName) => {
-    console.log("传入的链短名称是:", selectedCardChainShortName);
-
-    if (verifiedDevices.length > 0) {
-      const device = devices.find((d) => d.id === verifiedDevices[0]);
-      if (device) {
-        displayDeviceAddress(
-          device,
-          selectedCardChainShortName,
-          setIsVerifyingAddress,
-          setAddressVerificationMessage,
-          t
-        );
-      } else {
-        setAddressModalVisible(false);
-        setBleVisible(true);
-      }
-    } else {
-      setAddressModalVisible(false);
-      setBleVisible(true);
-    }
   };
 
   // 点击 QR 代码图片时显示地址模态窗口
@@ -841,7 +793,6 @@ function VaultScreen({ route, navigation }) {
       const device = devices.find((d) => d.id === verifiedDevices[0]);
       if (device) {
         // 调用监听钱包地址的函数
-
         setCreatePendingModalVisible(true);
       } else {
         // console.log("未找到与该ID匹配的设备对象");
@@ -972,7 +923,19 @@ function VaultScreen({ route, navigation }) {
         selectedAddress={selectedAddress}
         isVerifyingAddress={isVerifyingAddress}
         addressVerificationMessage={addressVerificationMessage}
-        handleVerifyAddress={handleVerifyAddress}
+        handleVerifyAddress={(selectedCardChainShortName) =>
+          handleVerifyAddressForVault({
+            selectedCardChainShortName,
+            verifiedDevices,
+            devices,
+            setAddressModalVisible,
+            setBleVisible,
+            displayDeviceAddress,
+            setIsVerifyingAddress,
+            setAddressVerificationMessage,
+            t,
+          })
+        }
         VaultScreenStyle={VaultScreenStyle}
         t={t}
         isDarkMode={isDarkMode}
@@ -1006,7 +969,14 @@ function VaultScreen({ route, navigation }) {
         selectedDevice={selectedDevice}
         setSelectedDevice={setSelectedDevice}
         verifiedDevices={verifiedDevices}
-        handleDisconnectDevice={handleDisconnectDevice}
+        handleDisconnectDevice={async (device) => {
+          await handleDisconnectDeviceForVault({
+            device,
+            verifiedDevices,
+            setVerifiedDevices,
+            setIsVerificationSuccessful,
+          });
+        }}
         SecurityCodeModalVisible={SecurityCodeModalVisible}
         pinCode={pinCode}
         setPinCode={setPinCode}
