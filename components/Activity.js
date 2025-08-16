@@ -4,26 +4,27 @@
 1. useState, useEffect, useContext, useRef, useMemo, useCallback（React钩子）—— 用于状态管理、生命周期、副作用、引用、记忆化等。
 2. useTranslation —— 国际化翻译钩子。
 3. useIsFocused —— 判断页面是否聚焦的导航钩子。
-4. isValidAmount, isValidState —— 校验金额和状态的自定义函数。
-5. cleanActivityLog —— 清理和持久化交易日志的自定义异步函数。
-6. fetchAllActivityLog, fetchNextActivityLogPage —— 获取/分页获取所有交易历史的自定义异步函数。
-7. fetchTransactionFee —— 获取链上手续费的自定义异步函数。
-8. handleSendPress, handleReceivePress, handleConvertPress —— 处理发送、接收、兑换按钮点击的自定义函数。
-9. handleDevicePress, handleDisconnectDevice —— 设备点击与断开连接处理函数。
-10. handlePinSubmit, handlePinSubmitProxy —— PIN码提交及包装函数。
-11. handleVerifyAddress —— 地址验证处理函数。
-12. selectCrypto —— 选择加密货币的处理函数。
-13. handleNextAfterAddress, handleNextAfterAmount —— 步骤切换处理函数。
-14. handleAddressChange —— 地址输入变更处理函数。
-15. monitorVerificationCode, monitorSignedResult —— 监听验证码/签名结果的自定义函数。
-16. stopMonitoringVerificationCode, stopMonitoringTransactionResponse —— 停止监听的自定义函数。
+4. isValidAmount（本文件定义）, isValidState（本文件定义）—— 校验金额和状态的自定义函数。
+5. cleanActivityLog（本文件定义）—— 清理和持久化交易日志的自定义异步函数。
+6. fetchAllActivityLog（本文件定义）, fetchNextActivityLogPage（本文件定义）—— 获取/分页获取所有交易历史的自定义异步函数。
+7. fetchTransactionFee（本文件定义）—— 获取链上手续费的自定义异步函数。
+8. handleSendPress（本文件定义）, handleReceivePress（本文件定义）, handleConvertPress（本文件定义）—— 处理发送、接收、兑换按钮点击的自定义函数。
+9. handleDevicePress（本文件定义）, handleDisconnectDevice（本文件定义）—— 设备点击与断开连接处理函数。
+10. handlePinSubmit, handlePinSubmitProxy（本文件定义）—— PIN码提交及包装函数。
+11. handleVerifyAddress（本文件定义）—— 地址验证处理函数。
+12. selectCrypto（本文件定义）—— 选择加密货币的处理函数。
+13. handleNextAfterAddress（本文件定义）, handleNextAfterAmount（本文件定义）—— 步骤切换处理函数。
+14. handleAddressChange（本文件定义）—— 地址输入变更处理函数。
+15. monitorVerificationCode, monitorSignedResult（本文件定义）—— 监听验证码/签名结果的自定义函数。
+16. stopMonitoringVerificationCode（本文件定义）, stopMonitoringTransactionResponse（本文件定义）—— 停止监听的自定义函数。
 17. signTransaction —— 交易签名处理函数。
 18. Clipboard, Buffer, AsyncStorage, fetch —— 剪贴板、二进制、存储、网络请求等工具函数。
 19. detectNetwork —— 检测地址网络类型的工具函数。
 20. scanDevices —— 扫描蓝牙设备的工具函数。
 21. displayDeviceAddress —— 显示设备地址的工具函数。
 22. createHandlePinSubmit, createHandleDevicePress, createMonitorVerificationCode —— 工厂函数，用于生成特定功能的处理器。
-23. onPress, onRequestClose, onConfirm, onCancel, onRefresh, onLoadMore, onChangeText —— 事件处理函数，传递给各组件和Modal。
+23. onPress, onRequestClose, onConfirm, onCancel, onRefresh（本文件定义）, onLoadMore, onChangeText —— 事件处理函数，传递给各组件和Modal。
+24. reconnectDevice（本文件定义）, hexStringToUint32Array（本文件定义）, uint32ArrayToHexString（本文件定义）—— 设备重连与16进制转换工具函数。
 
 如需了解具体实现，请查阅对应函数定义和调用处。
 */
@@ -74,6 +75,10 @@ import { createHandleDevicePress } from "../utils/handleDevicePress";
 // 公共工厂函数
 import createMonitorVerificationCode from "../utils/monitorVerificationCode";
 import { scanDevices } from "../utils/scanDevices";
+import {
+  fetchAllActivityLog,
+  fetchNextActivityLogPage,
+} from "../utils/activityLog";
 const FILE_NAME = "Activity.js";
 // BLE 常量
 const serviceUUID = bluetoothConfig.serviceUUID;
@@ -220,7 +225,12 @@ function ActivityScreen() {
 
   const onRefresh = async () => {
     setRefreshing(true);
-    await fetchAllActivityLog(); // 调用获取交易历史的函数
+    await fetchAllActivityLog({
+      initialAdditionalCryptos,
+      setActivityLog,
+      setActivityLogPages,
+      accountAPI,
+    });
     setRefreshing(false);
   };
 
@@ -257,171 +267,17 @@ function ActivityScreen() {
   }, []);
 
   // 新增：获取所有卡片的交易历史记录（包含去重与分页处理）
-  const fetchAllActivityLog = async () => {
-    if (initialAdditionalCryptos && initialAdditionalCryptos.length > 0) {
-      const uniqueCryptos = initialAdditionalCryptos.filter(
-        (crypto, index, self) =>
-          crypto.address &&
-          crypto.address.trim() !== "" &&
-          index ===
-            self.findIndex(
-              (c) =>
-                c.queryChainName === crypto.queryChainName &&
-                c.address === crypto.address
-            )
-      );
-
-      // 查第一页
-      const requests = uniqueCryptos.map(async (crypto) => {
-        const key = `${crypto.queryChainName}:${crypto.address}`;
-        const postData = {
-          chain: crypto.queryChainName,
-          address: crypto.address,
-          page: 1,
-          pageSize: 10,
-        };
-
-        try {
-          const response = await fetch(accountAPI.queryTransaction, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(postData),
-          });
-          const data = await response.json();
-
-          if (data && data.code === "0" && Array.isArray(data.data)) {
-            const processedTransactions = data.data.map((tx) => ({
-              ...tx, // 保留所有字段
-              chainKey: key,
-            }));
-            // 标记当前页，是否还有下一页
-            setActivityLogPages((prev) => ({
-              ...prev,
-              [key]: { page: 1, finished: data.data.length < 10 },
-            }));
-            return processedTransactions;
-          } else {
-            setActivityLogPages((prev) => ({
-              ...prev,
-              [key]: { page: 1, finished: true },
-            }));
-          }
-        } catch (err) {
-          setActivityLogPages((prev) => ({
-            ...prev,
-            [key]: { page: 1, finished: true },
-          }));
-        }
-        return [];
-      });
-
-      const results = await Promise.all(requests);
-      // 合并所有交易记录
-      const merged = results.flat();
-      setActivityLog(merged);
-      cleanActivityLog(merged);
-    }
-  };
-  const fetchNextActivityLogPage = async () => {
-    if (!initialAdditionalCryptos || initialAdditionalCryptos.length === 0)
-      return;
-
-    let anyLoaded = false;
-    const uniqueCryptos = initialAdditionalCryptos.filter(
-      (crypto, index, self) =>
-        crypto.address &&
-        crypto.address.trim() !== "" &&
-        index ===
-          self.findIndex(
-            (c) =>
-              c.queryChainName === crypto.queryChainName &&
-              c.address === crypto.address
-          )
-    );
-
-    const requests = uniqueCryptos.map(async (crypto) => {
-      const key = `${crypto.queryChainName}:${crypto.address}`;
-      const pageState = activityLogPages[key] || { page: 1, finished: false };
-      if (pageState.finished) return []; // 当前币已加载完
-
-      const nextPage = (pageState.page || 1) + 1;
-      const postData = {
-        chain: crypto.queryChainName,
-        address: crypto.address,
-        page: nextPage,
-        pageSize: 10,
-      };
-
-      try {
-        const response = await fetch(accountAPI.queryTransaction, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(postData),
-        });
-        const data = await response.json();
-
-        if (
-          data &&
-          data.code === "0" &&
-          Array.isArray(data.data) &&
-          data.data.length > 0
-        ) {
-          anyLoaded = true;
-          setActivityLogPages((prev) => ({
-            ...prev,
-            [key]: { page: nextPage, finished: data.data.length < 10 },
-          }));
-          return data.data.map((tx) => ({
-            ...tx,
-            chainKey: key,
-          }));
-        } else {
-          setActivityLogPages((prev) => ({
-            ...prev,
-            [key]: { page: nextPage, finished: true },
-          }));
-        }
-      } catch (err) {
-        setActivityLogPages((prev) => ({
-          ...prev,
-          [key]: { page: nextPage, finished: true },
-        }));
-      }
-      return [];
-    });
-
-    const results = await Promise.all(requests);
-    const newLogs = results.flat();
-    if (newLogs.length > 0) {
-      const merged = [...ActivityLog, ...newLogs];
-
-      // 过滤函数
-      const filtered = merged.filter(
-        (item) =>
-          item.state !== 0 &&
-          item.state !== "0" &&
-          item.state !== null &&
-          item.state !== undefined &&
-          item.amount !== null &&
-          item.amount !== undefined &&
-          item.amount !== "0" &&
-          item.amount !== "" &&
-          Number(item.amount) !== 0 &&
-          !isNaN(Number(item.amount))
-      );
-
-      // 持久化到AsyncStorage
-      await AsyncStorage.setItem("ActivityLog", JSON.stringify(filtered));
-      setActivityLog(filtered);
-    }
-    return anyLoaded;
-  };
 
   // ⏱️ 每 30 秒定时刷新，仅当前页面且 App 前台才执行
   useEffect(() => {
     const intervalId = setInterval(() => {
       if (appState.current === "active" && isFocused) {
-        fetchAllActivityLog();
+        fetchAllActivityLog({
+          initialAdditionalCryptos,
+          setActivityLog,
+          setActivityLogPages,
+          accountAPI,
+        });
       }
     }, 30000);
 
@@ -1136,7 +992,16 @@ function ActivityScreen() {
           cryptoCards={cryptoCards}
           refreshing={refreshing}
           onRefresh={onRefresh}
-          onLoadMore={fetchNextActivityLogPage}
+          onLoadMore={async () => {
+            await fetchNextActivityLogPage({
+              initialAdditionalCryptos,
+              activityLogPages,
+              ActivityLog,
+              setActivityLog,
+              setActivityLogPages,
+              accountAPI,
+            });
+          }}
           hasMore={hasMore}
         />
         {/* 输入地址的 Modal */}
