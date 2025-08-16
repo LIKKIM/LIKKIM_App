@@ -24,7 +24,7 @@
 21. displayDeviceAddress —— 显示设备地址的工具函数。
 22. createHandlePinSubmit, createHandleDevicePress, createMonitorVerificationCode —— 工厂函数，用于生成特定功能的处理器。
 23. onPress, onRequestClose, onConfirm, onCancel, onRefresh（本文件定义）, onLoadMore, onChangeText —— 事件处理函数，传递给各组件和Modal。
-24. reconnectDevice（本文件定义）, hexStringToUint32Array（本文件定义）, uint32ArrayToHexString（本文件定义）—— 设备重连与16进制转换工具函数。
+24. reconnectDevice（本文件定义）—— 设备重连工具函数。
 
 如需了解具体实现，请查阅对应函数定义和调用处。
 */
@@ -529,22 +529,6 @@ function ActivityScreen() {
       console.log("设备重新连接失败:", error);
     }
   };
-
-  function hexStringToUint32Array(hexString) {
-    // 将16进制字符串拆分为两个32位无符号整数
-    return new Uint32Array([
-      parseInt(hexString.slice(0, 8), 16),
-      parseInt(hexString.slice(8, 16), 16),
-    ]);
-  }
-
-  function uint32ArrayToHexString(uint32Array) {
-    // 将两个32位无符号整数转换回16进制字符串
-    return (
-      uint32Array[0].toString(16).toUpperCase().padStart(8, "0") +
-      uint32Array[1].toString(16).toUpperCase().padStart(8, "0")
-    );
-  }
 
   // 假设在组件中定义了状态：
   const [receivedAddresses, setReceivedAddresses] = useState({});
