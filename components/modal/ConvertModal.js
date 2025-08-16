@@ -304,7 +304,7 @@ const ConvertModal = ({
       >
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
-          style={{ flex: 1 }}
+          style={ActivityScreenStyle.convertModalFlex1}
         >
           <TouchableWithoutFeedback
             onPress={() => setConvertModalVisible(false)}
@@ -315,8 +315,8 @@ const ConvertModal = ({
                 onStartShouldSetResponder={() => true}
               >
                 {/* From Section */}
-                <View style={{ zIndex: 20, marginBottom: 30 }}>
-                  <View style={{ alignItems: "flex-start", width: "100%" }}>
+                <View style={ActivityScreenStyle.convertModalSection}>
+                  <View style={ActivityScreenStyle.convertModalAlignStart}>
                     <View style={ActivityScreenStyle.swapInputContainer}>
                       <View
                         style={{
@@ -620,8 +620,8 @@ const ConvertModal = ({
                   </TouchableOpacity>
                 </View>
                 {/* To Section */}
-                <View style={{ zIndex: 10, marginBottom: 20 }}>
-                  <View style={{ alignItems: "flex-start", width: "100%" }}>
+                <View style={ActivityScreenStyle.convertModalSection2}>
+                  <View style={ActivityScreenStyle.convertModalAlignStart}>
                     <View style={ActivityScreenStyle.swapInputContainer}>
                       <View
                         style={{
@@ -723,7 +723,9 @@ const ConvertModal = ({
                         placeholderTextColor="#aaa"
                         onChangeText={(text) => setSearchToToken(text)}
                       />
-                      <View style={{ marginBottom: 6 }}>
+                      <View
+                        style={ActivityScreenStyle.convertModalMarginBottom6}
+                      >
                         <ScrollView
                           ref={toChainTagsScrollRef}
                           horizontal
@@ -921,14 +923,7 @@ const ConvertModal = ({
                     {exchangeRate} {getTokenDetails(selectedToToken)?.symbol}
                   </Text>
                 )}
-                <View
-                  style={{
-                    marginTop: 20,
-                    width: "100%",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                  }}
-                >
+                <View style={ActivityScreenStyle.convertModalButtonRow}>
                   <TouchableOpacity
                     onPress={() => setConvertModalVisible(false)}
                     style={[
@@ -994,13 +989,13 @@ const ConvertModal = ({
               </Text>
 
               {/* 基本信息 */}
-              <View style={{ marginTop: 20 }}>
+              <View style={ActivityScreenStyle.convertModalMarginTop20}>
                 {/* 网络信息 */}
                 <View
                   style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    marginBottom: 10,
+                    marginBottom: 30,
+                    alignItems: "flex-end",
+                    width: "100%",
                   }}
                 >
                   <Image
@@ -1058,7 +1053,7 @@ const ConvertModal = ({
               </View>
 
               {/* 确认/取消按钮 */}
-              <View style={{ marginTop: 20, width: "100%" }}>
+              <View style={ActivityScreenStyle.convertModalButtonRow}>
                 <TouchableOpacity
                   style={ActivityScreenStyle.optionButton}
                   onPress={async () => {

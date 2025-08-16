@@ -36,6 +36,19 @@ const makeTokens = (isDarkMode) => ({
 const ActivityScreenStyles = (isDarkMode) => {
   const c = makeTokens(isDarkMode);
   return StyleSheet.create({
+    // ConvertModal 独有样式
+    convertModalFlex1: { flex: 1 },
+    convertModalSection: { zIndex: 20, marginBottom: 30 },
+    convertModalAlignStart: { alignItems: "flex-start", width: "100%" },
+    convertModalSection2: { zIndex: 10, marginBottom: 20 },
+    convertModalMarginBottom6: { marginBottom: 6 },
+    convertModalMarginTop20: { marginTop: 20 },
+    convertModalButtonRow: {
+      marginTop: 20,
+      width: "100%",
+      flexDirection: "row",
+      justifyContent: "space-between",
+    },
     searchIcon: { paddingLeft: 10, color: c.text },
     searchInput: {
       flex: 1,
