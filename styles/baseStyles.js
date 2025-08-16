@@ -73,11 +73,38 @@ export const borderButtonBase = {
   padding: 10,
 };
 
-// 通用卡片阴影样式
 export const cardShadow = {
   shadowColor: "#000",
   shadowOffset: { width: 0, height: 2 },
   shadowOpacity: 0.05,
   shadowRadius: 4,
   elevation: 2,
+};
+
+// 通用图片占位（NFT/Gallery无图等）
+export const noImageContainer = {
+  width: "100%",
+  aspectRatio: 1,
+  borderRadius: 8,
+  backgroundColor: "#ccc",
+  justifyContent: "center",
+  alignItems: "center",
+  overflow: "hidden",
+  position: "relative",
+};
+export const noImageLogo = {
+  position: "absolute",
+  width: "50%",
+  height: "50%",
+  opacity: 0.2,
+  resizeMode: "contain",
+  top: "25%",
+  left: "25%",
+};
+export const noImageText = {
+  color: "#eee",
+  fontWeight: "bold",
+  position: "absolute",
+  fontSize: 12,
+  textAlign: "center",
 };

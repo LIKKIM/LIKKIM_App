@@ -47,8 +47,10 @@ import {
   borderButtonBase,
   modalHeaderBase,
   cardShadow,
+  noImageContainer,
+  noImageLogo,
+  noImageText,
 } from "./baseStyles";
-// base blocks
 
 // ---- styles -----------------------------------------------------------------
 const VaultScreenStyles = (isDarkMode) => {
@@ -81,13 +83,7 @@ const VaultScreenStyles = (isDarkMode) => {
       borderRadius: 12,
     },
     galleryNoImageLogo: {
-      position: "absolute",
-      width: "50%",
-      height: "50%",
-      opacity: 0.2,
-      resizeMode: "contain",
-      top: "25%",
-      left: "25%",
+      ...noImageLogo,
     },
     // 占位骨架相关（规避敏感词）
     placeholderWrapper: {
@@ -111,28 +107,13 @@ const VaultScreenStyles = (isDarkMode) => {
     },
     // NFT Modal 无图样式
     nftNoImageContainer: {
-      width: "100%",
-      aspectRatio: 1,
-      borderRadius: 8,
-      backgroundColor: "#ccc",
-      justifyContent: "center",
-      alignItems: "center",
+      ...noImageContainer,
     },
     nftNoImageLogo: {
-      position: "absolute",
-      width: "50%",
-      height: "50%",
-      opacity: 0.2,
-      resizeMode: "contain",
-      top: "25%",
-      left: "25%",
+      ...noImageLogo,
     },
     nftNoImageText: {
-      color: "#eee",
-      fontWeight: "bold",
-      position: "absolute",
-      fontSize: 12,
-      textAlign: "center",
+      ...noImageText,
     },
     // layout
     animatedTabContainer: {
@@ -154,7 +135,7 @@ const VaultScreenStyles = (isDarkMode) => {
     scrollView: { width: "100%", paddingHorizontal: 0 },
     scrollViewContent: { justifyContent: "start", alignItems: "center" },
     centeredView: {
-      ...containerBase,
+      ...containerBase, // 公共容器样式
     },
 
     // Gallery Card (no sensitive words)
@@ -163,7 +144,7 @@ const VaultScreenStyles = (isDarkMode) => {
       padding: 4,
     },
     galleryCard: {
-      ...cardShadow,
+      ...cardShadow, // 公共卡片阴影
       borderRadius: RADIUS_8,
       backgroundColor: c.modalBg,
       padding: 10,
@@ -180,30 +161,13 @@ const VaultScreenStyles = (isDarkMode) => {
       borderRadius: 8,
     },
     galleryNoImageContainer: {
-      width: "100%",
-      aspectRatio: 1,
-      borderRadius: 8,
-      backgroundColor: "#ccc",
-      justifyContent: "center",
-      alignItems: "center",
-      overflow: "hidden",
-      position: "relative",
+      ...noImageContainer,
     },
     galleryNoImageLogo: {
-      position: "absolute",
-      width: "50%",
-      height: "50%",
-      opacity: 0.2,
-      resizeMode: "contain",
-      top: "25%",
-      left: "25%",
+      ...noImageLogo,
     },
     galleryNoImageText: {
-      color: "#eee",
-      fontWeight: "bold",
-      position: "absolute",
-      fontSize: 12,
-      textAlign: "center",
+      ...noImageText,
     },
     galleryCardTitle: {
       color: c.text,
@@ -233,7 +197,7 @@ const VaultScreenStyles = (isDarkMode) => {
     // cards
     cardContainer: { position: "relative", marginBottom: -130 },
     card: {
-      ...cardBase,
+      ...cardBase, // 公共卡片基础
       width: 326,
       height: 206,
       backgroundColor: c.cardBg,
@@ -280,7 +244,7 @@ const VaultScreenStyles = (isDarkMode) => {
     },
 
     // icons on card
-    cardIcon: { ...iconBase, width: 42, height: 42 },
+    cardIcon: { ...iconBase, width: 42, height: 42 }, // 公共图标基础
     chainIcon: { ...iconBase, width: 14, height: 14 },
     cardIconContainer: {
       position: "absolute",
