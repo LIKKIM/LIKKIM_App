@@ -73,13 +73,11 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
         }),
       ]).start();
     } else if (showModal) {
-      // 退出动画
+      setShowModal(false);
       Animated.timing(intensityAnim, {
         toValue: 0,
         duration: 400,
         useNativeDriver: false,
-      }).start(() => {
-        setShowModal(false);
       });
     }
   }, [visible]);

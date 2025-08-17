@@ -60,12 +60,11 @@ const AddCryptoModal = ({
       );
       setSelectedCryptos(initiallySelected);
     } else if (showModal) {
+      setShowModal(false);
       Animated.timing(intensityAnim, {
         toValue: 0,
         duration: 400,
         useNativeDriver: false,
-      }).start(() => {
-        setShowModal(false);
       });
     }
   }, [visible, cryptoCards, filteredCryptos]);
@@ -89,12 +88,12 @@ const AddCryptoModal = ({
 
   // 关闭动画并回调
   const handleClose = () => {
+    setShowModal(false);
     Animated.timing(intensityAnim, {
       toValue: 0,
       duration: 400,
       useNativeDriver: false,
     }).start(() => {
-      setShowModal(false);
       if (onClose) onClose();
     });
   };

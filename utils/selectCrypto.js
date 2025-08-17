@@ -2,10 +2,7 @@
  * 工厂函数：生成 selectCrypto 处理函数
  * 依赖全部通过参数传递，适用于 React 组件外部调用
  *
- * 注意：为避免 React Native Modal 遮挡/动画冲突，setBleVisible(true) 延迟 400ms 执行
- * 如需调整延迟时间，请修改 BLE_MODAL_DELAY_MS
  */
-const BLE_MODAL_DELAY_MS = 400;
 
 const createSelectCrypto = ({
   setSelectedCrypto,
@@ -55,11 +52,11 @@ const createSelectCrypto = ({
           setInputAddress("");
           setContactFormModalVisible(true);
         } else {
-          setTimeout(() => setBleVisible(true), BLE_MODAL_DELAY_MS);
+          setBleVisible(true);
           setModalVisible(false);
         }
       } else {
-        setTimeout(() => setBleVisible(true), BLE_MODAL_DELAY_MS);
+        setBleVisible(true);
         setModalVisible(false);
       }
     }

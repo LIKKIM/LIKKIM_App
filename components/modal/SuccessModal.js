@@ -35,12 +35,11 @@ const SuccessModal = ({ visible, onClose, message, styles }) => {
         }),
       ]).start();
     } else if (showModal) {
+      setShowModal(false);
       Animated.timing(intensityAnim, {
         toValue: 0,
         duration: 400,
         useNativeDriver: false,
-      }).start(() => {
-        setShowModal(false);
       });
     }
   }, [visible]);

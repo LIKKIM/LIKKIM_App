@@ -47,12 +47,11 @@ const ChangeLockCodeModal = ({
       setCurrentPassword("");
       setIsCurrentPasswordHidden(true);
     } else if (showModal) {
+      setShowModal(false);
       Animated.timing(intensityAnim, {
         toValue: 0,
         duration: 400,
         useNativeDriver: false,
-      }).start(() => {
-        setShowModal(false);
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
