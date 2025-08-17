@@ -311,7 +311,8 @@ function SecureDeviceScreen({ onDarkModeChange }) {
     }
 
     try {
-      await AsyncStorage.setItem("appLockPassword", password);
+      // 保存到 DeviceContext 及 AsyncStorage
+      await changeScreenLockPassword(password);
       await AsyncStorage.setItem(
         "screenLockFeatureEnabled",
         JSON.stringify(true)
