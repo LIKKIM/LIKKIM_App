@@ -2,15 +2,18 @@
  * This is the modal for deleting app wallet data.
  * The onConfirm prop passed in is the confirmDeleteWallet function from SecureDevice.js, which handles the delete functionality.
  */
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Modal,
   TouchableWithoutFeedback,
   View,
   Text,
   TouchableOpacity,
+  Animated,
 } from "react-native";
 import { BlurView } from "expo-blur";
+
+const AnimatedBlurView = Animated.createAnimatedComponent(BlurView);
 
 function DeleteWalletConfirmationModal({
   visible,
@@ -20,15 +23,47 @@ function DeleteWalletConfirmationModal({
   styles,
   t,
 }) {
+  // 动画相关
+  const [showModal, setShowModal] = useState(visible);
+  const intensityAnim = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    if (visible) {
+      setShowModal(true);
+      Animated.sequence([
+        Animated.timing(intensityAnim, {
+          toValue: 0,
+          duration: 400,
+          useNativeDriver: false,
+        }),
+        Animated.timing(intensityAnim, {
+          toValue: 20,
+          duration: 200,
+          useNativeDriver: false,
+        }),
+      ]).start();
+    } else if (showModal) {
+      Animated.timing(intensityAnim, {
+        toValue: 0,
+        duration: 400,
+        useNativeDriver: false,
+      }).start(() => {
+        setShowModal(false);
+      });
+    }
+  }, [visible]);
+
+  if (!showModal) return null;
+
   return (
     <Modal
-      visible={visible}
+      visible={showModal}
       transparent={true}
       animationType="slide"
       onRequestClose={onCancel}
     >
       <TouchableWithoutFeedback onPress={onCancel}>
-        <BlurView intensity={20} style={styles.centeredView}>
+        <AnimatedBlurView intensity={intensityAnim} style={styles.centeredView}>
           <View style={styles.modalView}>
             <Text style={styles.modalTitle}>{t("Warning")}</Text>
             <Text style={styles.modalSubtitle}>
@@ -51,7 +86,7 @@ function DeleteWalletConfirmationModal({
               </TouchableOpacity>
             </View>
           </View>
-        </BlurView>
+        </AnimatedBlurView>
       </TouchableWithoutFeedback>
     </Modal>
   );
