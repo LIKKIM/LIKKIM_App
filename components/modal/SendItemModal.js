@@ -2,7 +2,7 @@
  * 发送ItemModal
  * 发送 Item 弹窗组件
  */
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import {
   Modal,
   KeyboardAvoidingView,
@@ -14,9 +14,12 @@ import {
   ScrollView,
   TextInput,
   TouchableOpacity,
+  Animated,
 } from "react-native";
 import { BlurView } from "expo-blur";
 import { MaterialIcons as Icon } from "@expo/vector-icons";
+
+const AnimatedBlurView = Animated.createAnimatedComponent(BlurView);
 
 /**
  * SendItemModal 组件
@@ -46,12 +49,45 @@ const SendItemModal = ({
   handleOpenAddressBook,
   isDarkMode,
 }) => {
+  // 动画和 Modal 显隐控制
+  const [showModal, setShowModal] = useState(visible);
+  const intensityAnim = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    if (visible) {
+      setShowModal(true);
+      Animated.sequence([
+        Animated.timing(intensityAnim, {
+          toValue: 0,
+          duration: 800,
+          useNativeDriver: false,
+        }),
+        Animated.timing(intensityAnim, {
+          toValue: 20,
+          duration: 200,
+          useNativeDriver: false,
+        }),
+      ]).start();
+    } else if (showModal) {
+      Animated.timing(intensityAnim, {
+        toValue: 0,
+        duration: 400,
+        useNativeDriver: false,
+      }).start(() => {
+        setShowModal(false);
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [visible]);
+
+  if (!showModal) return null;
+
   return (
     // 发送ItemModal
     <Modal
       animationType="slide"
       transparent={true}
-      visible={visible}
+      visible={showModal}
       onRequestClose={onClose}
     >
       <KeyboardAvoidingView
@@ -59,7 +95,10 @@ const SendItemModal = ({
         style={{ flex: 1 }}
       >
         <TouchableWithoutFeedback onPress={onClose}>
-          <BlurView intensity={20} style={VaultScreenStyle.centeredView}>
+          <AnimatedBlurView
+            intensity={intensityAnim}
+            style={VaultScreenStyle.centeredView}
+          >
             <View
               style={VaultScreenStyle.ContactFormModal}
               onStartShouldSetResponder={(e) => e.stopPropagation()}
@@ -162,7 +201,7 @@ const SendItemModal = ({
                 </TouchableOpacity>
               </View>
             </View>
-          </BlurView>
+          </AnimatedBlurView>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
     </Modal>
