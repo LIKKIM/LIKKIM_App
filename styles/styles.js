@@ -341,6 +341,10 @@ export const screenLockLightStyles = RNStyleSheet.create({
   button: {
     backgroundColor: "#CFAB95",
   },
+  buttonText: {
+    color: "#fff",
+    fontSize: 18,
+  },
   subtitleText: {
     color: "#fff",
     fontSize: 18,
