@@ -81,6 +81,7 @@ import {
 import { fetchTransactionFee } from "../utils/fetchTransactionFee";
 import { handleDisconnectDevice } from "../utils/handleDisconnectDevice";
 import { handleVerifyAddress } from "../utils/handleVerifyAddress";
+import createSelectCrypto from "../utils/selectCrypto";
 const FILE_NAME = "Activity.js";
 // BLE 常量
 const serviceUUID = bluetoothConfig.serviceUUID;
@@ -813,39 +814,51 @@ function ActivityScreen() {
     setIsAddressValid(false);
     setModalVisible(true);
   };
-  const selectCrypto = async (crypto) => {
-    setSelectedCrypto(crypto.shortName);
-    setSelectedAddress(crypto.address);
-    setSelectedCryptoIcon(crypto.icon);
-    setBalance(crypto.balance);
-    setEstimatedValue(crypto.EstimatedValue);
-    setFee(crypto.fee);
-    setPriceUsd(crypto.priceUsd);
-    setQueryChainName(crypto.queryChainName);
-    setChainShortName(crypto.queryChainShortName);
-    setSelectedCryptoName(crypto.name);
-    setIsVerifyingAddress(false);
-    setModalVisible(false);
 
-    if (operationType === "receive") {
-      setAddressModalVisible(true);
-    } else if (operationType === "Send") {
-      if (verifiedDevices.length > 0) {
-        const device = devices.find((d) => d.id === verifiedDevices[0]);
-        if (device) {
-          setAddressModalVisible(false);
-          setInputAddress("");
-          setContactFormModalVisible(true);
-        } else {
-          setBleVisible(true);
-          setModalVisible(false);
-        }
-      } else {
-        setBleVisible(true);
-        setModalVisible(false);
-      }
-    }
-  };
+  const selectCrypto = React.useCallback(
+    createSelectCrypto({
+      setSelectedCrypto,
+      setSelectedAddress,
+      setSelectedCryptoIcon,
+      setBalance,
+      setEstimatedValue,
+      setFee,
+      setPriceUsd,
+      setQueryChainName,
+      setChainShortName,
+      setSelectedCryptoName,
+      setIsVerifyingAddress,
+      setModalVisible,
+      setAddressModalVisible,
+      setInputAddress,
+      setContactFormModalVisible,
+      setBleVisible,
+      operationType,
+      verifiedDevices,
+      devices,
+    }),
+    [
+      setSelectedCrypto,
+      setSelectedAddress,
+      setSelectedCryptoIcon,
+      setBalance,
+      setEstimatedValue,
+      setFee,
+      setPriceUsd,
+      setQueryChainName,
+      setChainShortName,
+      setSelectedCryptoName,
+      setIsVerifyingAddress,
+      setModalVisible,
+      setAddressModalVisible,
+      setInputAddress,
+      setContactFormModalVisible,
+      setBleVisible,
+      operationType,
+      verifiedDevices,
+      devices,
+    ]
+  );
 
   const handleNextAfterAddress = () => {
     setAmount("");
