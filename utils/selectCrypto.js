@@ -1,7 +1,12 @@
 /**
  * 工厂函数：生成 selectCrypto 处理函数
  * 依赖全部通过参数传递，适用于 React 组件外部调用
+ *
+ * 注意：为避免 React Native Modal 遮挡/动画冲突，setBleVisible(true) 延迟 400ms 执行
+ * 如需调整延迟时间，请修改 BLE_MODAL_DELAY_MS
  */
+const BLE_MODAL_DELAY_MS = 400;
+
 const createSelectCrypto = ({
   setSelectedCrypto,
   setSelectedAddress,
@@ -35,6 +40,9 @@ const createSelectCrypto = ({
     setChainShortName(crypto.queryChainShortName);
     setSelectedCryptoName(crypto.name);
     setIsVerifyingAddress(false);
+    console.log(
+      "selectCrypto: setModalVisible(false) before opening BluetoothModal"
+    );
     setModalVisible(false);
 
     if (operationType === "receive") {
@@ -47,11 +55,11 @@ const createSelectCrypto = ({
           setInputAddress("");
           setContactFormModalVisible(true);
         } else {
-          setBleVisible(true);
+          setTimeout(() => setBleVisible(true), BLE_MODAL_DELAY_MS);
           setModalVisible(false);
         }
       } else {
-        setBleVisible(true);
+        setTimeout(() => setBleVisible(true), BLE_MODAL_DELAY_MS);
         setModalVisible(false);
       }
     }
