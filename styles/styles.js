@@ -319,6 +319,13 @@ export const screenLockStyles = RNStyleSheet.create({
     alignItems: "center",
     borderRadius: 25,
   },
+  // 新增
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 10,
+  },
 });
 
 export const screenLockLightStyles = RNStyleSheet.create({
@@ -327,6 +334,20 @@ export const screenLockLightStyles = RNStyleSheet.create({
   },
   title: {
     color: "#333",
+  },
+  // 新增
+  modalTitle: {
+    color: "#333",
+    fontSize: 20,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 10,
+  },
+  modalText: {
+    color: "#666",
+    fontSize: 16,
+    textAlign: "center",
+    marginBottom: 20,
   },
   subTitle: {
     color: "#999",
@@ -341,10 +362,7 @@ export const screenLockLightStyles = RNStyleSheet.create({
   button: {
     backgroundColor: "#CFAB95",
   },
-  buttonText: {
-    color: "#fff",
-    fontSize: 18,
-  },
+
   subtitleText: {
     color: "#fff",
     fontSize: 18,
@@ -373,6 +391,20 @@ export const screenLockDarkStyles = RNStyleSheet.create({
   },
   title: {
     color: "#f5f5f5",
+  },
+  // 新增
+  modalTitle: {
+    color: "#f5f5f5",
+    fontSize: 20,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 10,
+  },
+  modalText: {
+    color: "#ccc",
+    fontSize: 16,
+    textAlign: "center",
+    marginBottom: 20,
   },
   subTitle: {
     color: "#ccc",
