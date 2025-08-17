@@ -232,7 +232,8 @@ const getSettingsOptions = ({
         icon: "update",
         version: appConfig.ios.buildNumber,
         onPress: () => {
-          Vibration.vibrate();
+          // 取消点击Version时的震动
+          // Vibration.vibrate();
         },
       },
     ],
