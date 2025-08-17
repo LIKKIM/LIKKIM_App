@@ -31,7 +31,7 @@ const ChainSelectionModal = ({
       <TouchableWithoutFeedback onPress={onClose}>
         <View style={{ flex: 1 }}>
           <BlurView
-            intensity={10}
+            intensity={20}
             style={{
               flex: 1,
               justifyContent: "center",
