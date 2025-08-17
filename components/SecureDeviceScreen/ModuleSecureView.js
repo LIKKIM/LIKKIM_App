@@ -117,9 +117,12 @@ const ModuleSecureView = ({
                       name="delete-outline"
                       size={24}
                       color={iconColor}
-                      style={[styles.Icon, { marginLeft: 20 }]}
+                      style={[
+                        styles.Icon,
+                        { marginLeft: 20, color: "#FF3B30" },
+                      ]}
                     />
-                    <Text style={[styles.Text, { flex: 1 }]}>
+                    <Text style={[styles.Text, { flex: 1, color: "#FF3B30" }]}>
                       {t("Reset Local Profile")}
                     </Text>
                   </View>
