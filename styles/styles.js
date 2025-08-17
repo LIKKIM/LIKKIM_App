@@ -336,6 +336,12 @@ export const screenLockLightStyles = RNStyleSheet.create({
     color: "#333",
   },
   // 新增
+  buttonText: {
+    color: "#fff",
+    fontSize: 18,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
   modalTitle: {
     color: "#333",
     fontSize: 20,
@@ -393,6 +399,12 @@ export const screenLockDarkStyles = RNStyleSheet.create({
     color: "#f5f5f5",
   },
   // 新增
+  buttonText: {
+    color: "#ffffff",
+    fontSize: 18,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
   modalTitle: {
     color: "#f5f5f5",
     fontSize: 20,
