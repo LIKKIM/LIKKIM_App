@@ -370,7 +370,8 @@ function ActivityScreen() {
           for (let card of cryptoCards) {
             // 只查询匹配的加密货币和链
             if (
-              card.name === selectedCryptoObj.name &&
+              card.queryChainShortName?.toLowerCase() ===
+                selectedCryptoObj.queryChainShortName?.toLowerCase() &&
               card.queryChainName?.toLowerCase() ===
                 selectedQueryChainName?.toLowerCase()
             ) {
