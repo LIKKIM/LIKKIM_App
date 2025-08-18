@@ -1,5 +1,5 @@
 // TabModal.js
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   View,
   Text,
@@ -293,6 +293,27 @@ const TabModal = ({
     }
   };
 
+  // 缩放动画state
+  const scaleAnim = useRef(new Animated.Value(1)).current;
+
+  const handlePressIn = () => {
+    Animated.spring(scaleAnim, {
+      toValue: 0.95,
+      useNativeDriver: true,
+      speed: 30,
+      bounciness: 0,
+    }).start();
+  };
+
+  const handlePressOut = () => {
+    Animated.spring(scaleAnim, {
+      toValue: 1,
+      useNativeDriver: true,
+      speed: 30,
+      bounciness: 0,
+    }).start();
+  };
+
   return (
     <>
       <Animated.View
@@ -359,12 +380,17 @@ const TabModal = ({
           </TouchableOpacity>
         </View>
         <View style={{ flex: 1 }}>{renderTabContent()}</View>
-        <TouchableOpacity
-          style={VaultScreenStyle.cancelButtonCryptoCard}
-          onPress={closeModal}
-        >
-          <Text style={VaultScreenStyle.cancelButtonText}>{t("Close")}</Text>
-        </TouchableOpacity>
+        <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
+          <TouchableOpacity
+            style={VaultScreenStyle.cancelButtonCryptoCard}
+            onPress={closeModal}
+            onPressIn={handlePressIn}
+            onPressOut={handlePressOut}
+            activeOpacity={1}
+          >
+            <Text style={VaultScreenStyle.cancelButtonText}>{t("Close")}</Text>
+          </TouchableOpacity>
+        </Animated.View>
       </Animated.View>
 
       {/* Transaction Modal */}

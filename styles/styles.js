@@ -64,7 +64,7 @@ const stylesFactory = (isDarkMode) => {
     dropdown: {
       position: "absolute",
       right: 20,
-      top: 60,
+      top: 100,
       backgroundColor: c.modalBg,
       borderRadius: RADIUS_8,
       padding: 10,
