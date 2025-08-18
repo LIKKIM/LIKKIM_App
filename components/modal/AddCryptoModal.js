@@ -284,7 +284,10 @@ const AddCryptoModal = ({
                   </Text>
                   <View style={VaultScreenStyle.chainContainer}>
                     <Text style={VaultScreenStyle.chainCardText}>
-                      {crypto.chain}
+                      {crypto.queryChainName
+                        ? crypto.queryChainName.charAt(0).toUpperCase() +
+                          crypto.queryChainName.slice(1)
+                        : ""}
                     </Text>
                   </View>
                 </View>
