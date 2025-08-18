@@ -61,7 +61,7 @@ const SelectCryptoModal = ({
   }, [visible]);
 
   const filteredCryptos = addedCryptos.filter((crypto) =>
-    `${crypto.shortName} ${crypto.chain}`
+    `${crypto.queryChainShortName} ${crypto.queryChainName}`
       .toLowerCase()
       .includes(searchQuery.toLowerCase())
   );
