@@ -8,16 +8,17 @@
 
 - 交易发起：用户通过界面提交交易请求。
 - 交易签名（signTransaction.js 和 components/Activity.js 中相关函数）：处理交易的签名逻辑，确保交易的合法性和安全性。主要函数包括，按流程顺序说明：
-  1. `selectCrypto`（utils/selectCrypto.js）：处理用户选择加密货币的逻辑，更新相关状态并根据操作类型控制模态框显示，支持交易流程中的币种选择和设备连接管理。
-  2. `signTransaction`（signTransaction.js）：主签名函数，负责连接设备、发送交易信息、监听设备响应、获取预签名参数、构造签名请求并发送签名数据。
-  3. `getChainMappingMethod`（signTransaction.js）：根据链名称映射对应的签名方法。
-  4. `getPublicKeyByChain`（signTransaction.js）：根据链名称获取对应的公钥。
-  5. `monitorVerificationCode`（components/Activity.js）：监听验证码的函数。
-  6. `monitorSignedResult`（components/Activity.js）：监听 LUKKEY 嵌入式设备的签名结果并广播交易的函数。
-  7. `stopMonitoringVerificationCode`（components/Activity.js）：停止监听验证码的函数。
-  8. `stopMonitoringTransactionResponse`（components/Activity.js）：停止监听交易反馈的函数。
-- 交易广播：将签名后的交易发送到区块链网络。
+  1. `selectCrypto`（utils/selectCrypto.js）：处理用户选择加密货币的逻辑，更新相关状态并根据操作类型控制模态框显示，支持交易流程中的币种选择和设备连接管理。此为交易流程的第一步。
+  2. `signTransaction`（signTransaction.js）：主签名函数，负责连接设备、发送交易信息、监听设备响应、获取预签名参数、构造签名请求并发送签名数据。此为交易流程的第二步。
+  3. `monitorSignedResult`（components/Activity.js）：监听 LUKKEY 嵌入式设备的签名结果并广播交易的函数。该函数通过监听设备的蓝牙特征值变化，处理签名结果数据，并调用广播接口完成交易广播。此为交易流程的第三步。
+  4. 其他相关函数：
+     - `getChainMappingMethod`（signTransaction.js）：根据链名称映射对应的签名方法。
+     - `getPublicKeyByChain`（signTransaction.js）：根据链名称获取对应的公钥。
+     - `monitorVerificationCode`（components/Activity.js）：监听验证码的函数。
+     - `stopMonitoringVerificationCode`（components/Activity.js）：停止监听验证码的函数。
+     - `stopMonitoringTransactionResponse`（components/Activity.js）：停止监听交易反馈的函数。
 - 交易确认：监听交易状态，更新交易记录和界面显示。
+- 交易广播：将签名后的交易发送到区块链网络。
 
 本目录中的组件协同支持上述流程的实现，确保交易操作的完整性和用户体验。
 
