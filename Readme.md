@@ -7,6 +7,20 @@
 
 ---
 
+## 相关文档说明
+
+本项目根目录下包含多个子目录，每个重要子目录下均有对应的 README.md 文件，详细说明该目录的功能和结构。主要文档位置及说明如下：
+
+- `components/README.md`：组件目录说明，包含所有 React Native 组件的总体介绍。
+- `components/ActivityScreen/README.md`：交易页面相关组件说明，详细描述交易流程及相关函数。
+- `components/SecureDeviceScreen/README.md`：通用页面相关组件说明，介绍设备连接和状态管理。
+- `components/VaultScreen/README.md`：资产页面相关组件说明，涵盖资产展示和管理功能。
+- `utils/README.md`：工具函数目录说明，介绍项目中各类辅助函数及其职责。
+
+请根据需要查阅对应文档，获取更详细的模块信息。
+
+---
+
 ## 技术栈
 
 - React Native（基于 Expo）
