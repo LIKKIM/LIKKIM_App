@@ -157,7 +157,12 @@ const SelectCryptoModal = ({
                           />
                         )}
                         <Text style={ActivityScreenStyle.optionButtonText}>
-                          {crypto.shortName} ({crypto.chain})
+                          {crypto.shortName} (
+                          {crypto.queryChainName
+                            ? crypto.queryChainName.charAt(0).toUpperCase() +
+                              crypto.queryChainName.slice(1)
+                            : ""}
+                          )
                         </Text>
                       </View>
                     </TouchableOpacity>
