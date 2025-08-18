@@ -413,12 +413,6 @@ function SecureDeviceScreen({ onDarkModeChange }) {
     }
   };
 
-  const filteredCurrencies = currencies.filter(
-    (currency) =>
-      currency.name.toLowerCase().includes(searchCurrency.toLowerCase()) ||
-      currency.shortName.toLowerCase().includes(searchCurrency.toLowerCase())
-  );
-
   const { bleManagerRef } = useContext(DeviceContext);
 
   // 已移除蓝牙 onStateChange 监听，统一由 App.js 管理
