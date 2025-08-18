@@ -34,23 +34,37 @@
 - Xcode (macOS, for iOS)
 - CocoaPods (for native dependencies)
 
-### Installation
+### Setup & Run
 
-```bash
-yarn install
-npx expo prebuild
-cd ios && pod install && cd ..
-```
+1. **Step1_installlegacy:** Run the following command to install all dependencies:
 
-### Running the App
+   ```bash
+   yarn install
+   ```
 
-```bash
-# iOS
-npm run ios
+2. **Step2_updateNative:** Generate native iOS and Android projects:
 
-# Android
-npm run android
-```
+   ```bash
+   expo prebuild
+   ```
+
+3. **Step3_podinstall:** For iOS, install CocoaPods dependencies:
+
+   ```bash
+   cd ios && pod install && cd ..
+   ```
+
+4. **Step4.1_ios:** Run the app on iOS simulator or device:
+
+   ```bash
+   expo run:ios
+   ```
+
+5. **Step4.2_android:** Run the app on Android emulator or device:
+
+   ```bash
+   expo run:android
+   ```
 
 ---
 
