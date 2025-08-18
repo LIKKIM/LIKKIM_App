@@ -370,8 +370,7 @@ function ActivityScreen() {
           for (let card of cryptoCards) {
             // 只查询匹配的加密货币和链
             if (
-              card.queryChainShortName?.toLowerCase() ===
-                selectedCryptoObj.queryChainShortName?.toLowerCase() &&
+              card.name === selectedCryptoObj.name &&
               card.queryChainName?.toLowerCase() ===
                 selectedQueryChainName?.toLowerCase()
             ) {
@@ -426,7 +425,7 @@ function ActivityScreen() {
               break; // 只查询匹配的卡片，查询完毕后跳出循环
             } else {
               console.log(
-                `卡片名称和链名称不匹配，跳过查询: ${card.queryChainShortName} - ${card.queryChainName}`
+                `卡片名称和链名称不匹配，跳过查询: ${card.name} - ${card.queryChainName}`
               );
             }
           }
