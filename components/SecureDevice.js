@@ -646,11 +646,7 @@ function SecureDeviceScreen({ onDarkModeChange }) {
 
   const confirmDeleteWallet = async () => {
     setVerifiedDevices([]);
-    deleteWallet();
     setDeleteWalletModalVisible(false);
-  };
-
-  const deleteWallet = async () => {
     try {
       // 打印删除前的state和AsyncStorage
       const [asCryptoCards, asAddedCryptos, asInitialAdditionalCryptos] =
