@@ -205,7 +205,9 @@ function VaultScreen({ route, navigation }) {
   const filteredCryptos = additionalCryptos.filter(
     (crypto) =>
       crypto.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      crypto.shortName.toLowerCase().includes(searchQuery.toLowerCase())
+      crypto.queryChainShortName
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase())
   );
 
   useEffect(() => {

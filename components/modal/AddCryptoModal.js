@@ -239,7 +239,7 @@ const AddCryptoModal = ({
                       />
                     </View>
                     <Text style={VaultScreenStyle.addCryptoImageText}>
-                      {crypto.shortName}
+                      {crypto.queryChainShortName}
                     </Text>
                   </View>
                 </ImageBackground>
