@@ -662,7 +662,10 @@ const DeviceStatus = ({
                               { color: isBlackText ? "#333" : "#eee" },
                             ]}
                           >
-                            {card.chain}
+                            {card.queryChainName
+                              ? card.queryChainName.charAt(0).toUpperCase() +
+                                card.queryChainName.slice(1)
+                              : ""}
                           </Text>
                         </View>
                       )

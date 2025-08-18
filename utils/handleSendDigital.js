@@ -23,7 +23,7 @@ export const handleSendDigital = async ({
   }
 
   const contractAddress = selectedNFT?.tokenContractAddress;
-  const chainName = selectedNFT?.chain;
+  const chainName = selectedNFT?.queryChainName;
 
   if (!contractAddress || !chainName) {
     console.log("合约地址或链名称为空");
