@@ -1,76 +1,107 @@
 # Secure Hardware Interface Companion App
 
-**This project** is a cross-platform mobile application designed as a visual interface companion to a secure external hardware module. It provides users with access to view device-generated data, confirm external prompts, and operate through Bluetooth-based interaction.
+**项目简介**  
+本项目是一个跨平台的移动应用，作为安全外部硬件模块的可视化界面伴侣。用户可以通过该应用查看设备生成的数据，确认外部提示，并通过蓝牙进行交互操作。
 
-> **Note:** This repository contains only UI and device communication logic. No cryptographic operations or financial workflows are implemented within this codebase.
-
----
-
-## Key Capabilities
-
-- View addresses or data from the external secure device
-- Initiate device-assisted actions
-- Retrieve and display public data (e.g., history, status) via API
-- Connect and communicate with hardware modules via BLE
-- Support for iOS and Android native environments
+> **注意：** 本仓库仅包含 UI 和设备通信逻辑，不包含任何加密操作或金融工作流。
 
 ---
 
-## Technology Stack
+## 技术栈
 
-- React Native (with Expo)
-- BLE (Bluetooth Low Energy) support
-- iOS and Android native integration
+- React Native（基于 Expo）
+- 蓝牙低功耗（BLE）支持
+- iOS 和 Android 原生集成
 
 ---
 
-## Setup Instructions
+## 技术栈
 
-### Prerequisites
+- React Native（基于 Expo）
+- 蓝牙低功耗（BLE）支持
+- iOS 和 Android 原生集成
+
+---
+
+## 项目结构
+
+- `android/`：Android 原生项目代码和配置
+- `ios/`：iOS 原生项目代码和配置
+- `assets/`：应用使用的图片、视频、图标等静态资源
+- `components/`：React Native 组件代码
+- `config/`：项目配置文件，如资产信息、链配置、语言等
+- `docs/`：项目相关文档
+- `patches/`：第三方依赖的补丁文件
+- `store/`：状态管理相关代码
+- `styles/`：样式文件
+- `utils/`：工具函数和辅助代码
+- 根目录下的配置文件如 `app.config.js`、`babel.config.js`、`metro.config.js`、`package.json` 等，分别负责项目配置、构建和依赖管理
+
+---
+
+## 安装与运行
+
+### 环境准备
 
 - Node.js
-- npm or yarn
+- npm 或 yarn
 - Expo CLI
-- Xcode (macOS, for iOS)
-- CocoaPods (for native dependencies)
+- Xcode（macOS，iOS 开发必备）
+- CocoaPods（iOS 原生依赖管理）
 
-### Setup & Run
+### 安装步骤
 
-1. **Step1_installlegacy:** Run the following command to install all dependencies:
+1. **Step1_installlegacy:** 安装所有依赖
 
    ```bash
    yarn install
    ```
 
-2. **Step2_updateNative:** Generate native iOS and Android projects:
+2. **Step2_updateNative:** 生成 iOS 和 Android 原生项目
 
    ```bash
    expo prebuild
    ```
 
-3. **Step3_podinstall:** For iOS, install CocoaPods dependencies:
+3. **Step3_podinstall:** iOS 平台安装 CocoaPods 依赖
 
    ```bash
    cd ios && pod install && cd ..
    ```
 
-4. **Step4.1_ios:** Run the app on iOS simulator or device:
+4. **Step4.1_ios:** 在 iOS 模拟器或真机上运行应用
 
    ```bash
    expo run:ios
    ```
 
-5. **Step4.2_android:** Run the app on Android emulator or device:
+5. **Step4.2_android:** 在 Android 模拟器或真机上运行应用
 
    ```bash
    expo run:android
    ```
 
+### 常见问题及解决方案
+
+- 清理缓存并重启
+
+  ```bash
+  npx react-native start --reset-cache
+  ```
+
+- 重新安装 iOS 原生依赖
+
+  ```bash
+  cd ios && pod install && cd ..
+  ```
+
 ---
 
-## iOS BLE Configuration
+## 配置说明
 
-To enable BLE background support on iOS, update `ios/Info.plist`:
+### iOS BLE 配置
+
+为支持 iOS 后台蓝牙功能，请在 `ios/Info.plist` 中添加：
 
 ```xml
 <key>UIBackgroundModes</key>
@@ -79,43 +110,33 @@ To enable BLE background support on iOS, update `ios/Info.plist`:
 </array>
 ```
 
-Also activate: `Background Modes > Uses Bluetooth LE accessories` in Xcode.
+并在 Xcode 中启用 `Background Modes > Uses Bluetooth LE accessories`。
 
 ---
 
-## Security Notes
+## 使用指南
 
-- The app **does not process or expose sensitive data**
-- All secure operations occur externally on dedicated hardware
-- The mobile client only facilitates display and communication
-- Credentials, authorization, or financial data are **not stored or transmitted**
+本应用主要功能包括：
 
----
-
-## Maintenance Tips
-
-### Clear Cache and Rebuild
-
-```bash
-npx react-native start --reset-cache
-```
-
-### Reinstall iOS Native Modules
-
-```bash
-cd ios && pod install && cd ..
-```
+- 通过蓝牙连接安全硬件设备
+- 查看设备生成的地址和数据
+- 确认设备发出的操作提示
+- 显示设备相关的历史和状态信息
 
 ---
 
-## License & Usage
+## 项目结构
 
-This codebase is open for community use and UI integration purposes only. It excludes device internals, firmware logic, or cryptographic designs to maintain secure boundaries.
-
----
-
-## Disclaimer
-
-This software is a part of a secure interaction system. No financial transactions, private data handling, or blockchain operations are performed in this application. For questions or collaborations, please contact the maintainers through verified channels.
+- `android/`：Android 原生项目代码和配置
+- `ios/`：iOS 原生项目代码和配置
+- `assets/`：应用使用的图片、视频、图标等静态资源
+- `components/`：React Native 组件代码
+- `config/`：项目配置文件，如资产信息、链配置、语言等
+- `docs/`：项目相关文档
+- `patches/`：第三方依赖的补丁文件
+- `store/`：状态管理相关代码
+- `styles/`：样式文件
+- `utils/`：工具函数和辅助代码
+- 根目录下的配置文件如 `app.config.js`、`babel.config.js`、`metro.config.js`、`package.json` 等，分别负责项目配置、构建和依赖管理
 
 ---
