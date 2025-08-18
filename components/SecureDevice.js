@@ -879,20 +879,6 @@ function SecureDeviceScreen({ onDarkModeChange }) {
         isDarkMode={isDarkMode}
         onAddAddress={handleAddAddress}
       />
-      <Modal
-        visible={errorModalVisible}
-        transparent={true}
-        animationType="slide"
-        onRequestClose={() => setErrorModalVisible(false)}
-      >
-        <View style={SecureDeviceScreenStyle.modalView}>
-          <Text style={SecureDeviceScreenStyle.modalTitle}>{t("Error")}</Text>
-          <Text style={SecureDeviceScreenStyle.modalSubtitle}>
-            {modalMessage}
-          </Text>
-          <Button title={t("OK")} onPress={() => setErrorModalVisible(false)} />
-        </View>
-      </Modal>
     </LinearGradient>
   );
 }
