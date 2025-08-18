@@ -157,7 +157,11 @@ const ChainSelectionModal = ({
                               : "#000000",
                         }}
                       >
-                        {card.chain} {t("Chain")}
+                        {card.queryChainName
+                          ? card.queryChainName.charAt(0).toUpperCase() +
+                            card.queryChainName.slice(1)
+                          : ""}{" "}
+                        {t("Chain")}
                       </Text>
                     </TouchableOpacity>
                   ))}
