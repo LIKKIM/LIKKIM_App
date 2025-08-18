@@ -1,4 +1,14 @@
 /**
+ * 本文件本地定义函数及功能说明：
+ * 1. signTransaction
+ *    - 负责与蓝牙设备交互，完成多链资产的交易签名流程，包括设备通信、参数获取、预签名数据处理和最终签名数据发送。
+ * 2. getChainMappingMethod
+ *    - 根据链名（chainKey）判断当前链属于哪种签名方法（如 evm、btc、tron 等），用于后续请求和数据构造分支。
+ * 3. getPublicKeyByChain
+ *    - 根据链名（chainKey）从 initialAdditionalCryptos 配置中查找并返回对应的公钥，用于部分链的签名数据构造。
+ */
+
+/**
  * 当前支持的区块链签名类型共9种：
  * 1. EVM（主币测试通过）
  * 2. BTC (与Dogecoin同方法)
