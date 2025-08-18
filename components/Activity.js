@@ -451,8 +451,9 @@ function ActivityScreen() {
       // 查找选中的加密货币对象
       const selected = initialAdditionalCryptos.find(
         (crypto) =>
-          crypto.chain === selectedQueryChainName &&
-          crypto.name === selectedCrypto
+          crypto.queryChainName.toLowerCase() ===
+            selectedQueryChainName.toLowerCase() &&
+          crypto.shortName.toLowerCase() === selectedCrypto.toLowerCase()
       );
 
       // 打印找到的加密货币对象
