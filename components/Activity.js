@@ -1,32 +1,71 @@
-/*
-本文件用到的主要函数和钩子说明：
-
-1. useState, useEffect, useContext, useRef, useMemo, useCallback（React钩子）—— 用于状态管理、生命周期、副作用、引用、记忆化等。
-2. useTranslation —— 国际化翻译钩子。
-3. useIsFocused —— 判断页面是否聚焦的导航钩子。
-4. isValidAmount（本文件定义）, isValidState（本文件定义）—— 校验金额和状态的自定义函数。
-6. fetchAllActivityLog（本文件定义）, fetchNextActivityLogPage（本文件定义）—— 获取/分页获取所有交易历史的自定义异步函数。
-7. fetchTransactionFee（本文件定义）—— 获取链上手续费的自定义异步函数。
-8. handleSendPress（本文件定义）, handleReceivePress（本文件定义）, handleConvertPress（本文件定义）—— 处理发送、接收、兑换按钮点击的自定义函数。
-9. handleDevicePress（本文件定义）, handleDisconnectDevice（本文件定义）—— 设备点击与断开连接处理函数。
-10. handlePinSubmit, handlePinSubmitProxy（本文件定义）—— PIN码提交及包装函数。
-11. handleVerifyAddress（本文件定义）—— 地址验证处理函数。
-12. selectCrypto（本文件定义）—— 选择加密货币的处理函数。
-13. handleNextAfterAddress（本文件定义）, handleNextAfterAmount（本文件定义）—— 步骤切换处理函数。
-14. handleAddressChange（本文件定义）—— 地址输入变更处理函数。
-15. monitorVerificationCode, monitorSignedResult（本文件定义）—— 监听验证码/签名结果的自定义函数。
-16. stopMonitoringVerificationCode（本文件定义）, stopMonitoringTransactionResponse（本文件定义）—— 停止监听的自定义函数。
-17. signTransaction —— 交易签名处理函数。
-18. Clipboard, Buffer, AsyncStorage, fetch —— 剪贴板、二进制、存储、网络请求等工具函数。
-19. detectNetwork —— 检测地址网络类型的工具函数。
-20. scanDevices —— 扫描蓝牙设备的工具函数。
-21. displayDeviceAddress —— 显示设备地址的工具函数。
-22. createHandlePinSubmit, createHandleDevicePress, createMonitorVerificationCode —— 工厂函数，用于生成特定功能的处理器。
-23. onPress, onRequestClose, onConfirm, onCancel, onRefresh（本文件定义）, onLoadMore, onChangeText —— 事件处理函数，传递给各组件和Modal。
-24. reconnectDevice（本文件定义）—— 设备重连工具函数。
-
-如需了解具体实现，请查阅对应函数定义和调用处。
-*/
+/**
+ * 本文件用到的主要函数和钩子说明（补全版）：
+ *
+ * 【React钩子】
+ * useState, useEffect, useContext, useRef, useMemo, useCallback —— 用于状态管理、生命周期、副作用、引用、记忆化等。
+ * useTranslation —— 国际化翻译钩子。
+ * useIsFocused —— 判断页面是否聚焦的导航钩子。
+ *
+ * 【自定义校验函数】
+ * isValidAmount —— 校验金额有效性。
+ * isValidState —— 校验状态有效性。
+ *
+ * 【交易历史相关异步函数】
+ * fetchAllActivityLog —— 获取所有交易历史。
+ * fetchNextActivityLogPage —— 分页获取交易历史。
+ * fetchTransactionFee —— 获取链上手续费。
+ *
+ * 【按钮点击处理函数】
+ * handleSendPress —— 处理发送按钮点击。
+ * handleReceivePress —— 处理接收按钮点击。
+ * handleConvertPress —— 处理兑换按钮点击。
+ *
+ * 【设备管理相关函数】
+ * handleDevicePress —— 设备点击处理。
+ * handleDisconnectDevice —— 断开设备连接。
+ * reconnectDevice —— 设备重连。
+ *
+ * 【PIN码处理函数】
+ * handlePinSubmit —— PIN码提交处理。
+ * handlePinSubmitProxy —— PIN码提交代理。
+ *
+ * 【地址验证相关】
+ * handleVerifyAddress —— 地址验证处理。
+ *
+ * 【加密货币选择相关】
+ * selectCrypto —— 选择加密货币处理。
+ *
+ * 【步骤切换处理函数】
+ * handleNextAfterAddress —— 地址输入后下一步处理。
+ * handleNextAfterAmount —— 金额输入后下一步处理。
+ *
+ * 【地址输入处理】
+ * handleAddressChange —— 地址输入变更处理。
+ *
+ * 【监听相关函数】
+ * monitorVerificationCode —— 监听验证码。
+ * monitorSignedResult —— 监听签名结果。
+ * stopMonitoringVerificationCode —— 停止监听验证码。
+ * stopMonitoringTransactionResponse —— 停止监听交易反馈。
+ *
+ * 【工具函数】
+ * signTransaction —— 交易签名处理。
+ * Clipboard, Buffer, AsyncStorage, fetch —— 剪贴板、二进制、存储、网络请求等工具。
+ * detectNetwork —— 检测地址网络类型。
+ * scanDevices —— 扫描蓝牙设备。
+ * displayDeviceAddress —— 显示设备地址。
+ * createHandlePinSubmit, createHandleDevicePress, createMonitorVerificationCode —— 工厂函数生成处理器。
+ *
+ * 【事件处理函数】
+ * onPress, onRequestClose, onConfirm, onCancel, onRefresh, onLoadMore, onChangeText —— 传递给组件和Modal的事件处理。
+ *
+ * 【其他自定义函数】
+ * cleanActivityLog —— 清理交易历史日志。
+ * onRefresh —— 刷新交易历史。
+ * reconnectDevice —— 设备重连。
+ *
+ * 如需了解具体实现，请查阅对应函数定义和调用处。
+ */
 
 import React, { useContext, useState, useRef, useEffect } from "react";
 import { View, Platform, AppState } from "react-native";

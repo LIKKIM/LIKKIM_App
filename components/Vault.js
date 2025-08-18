@@ -1,3 +1,47 @@
+/**
+ * 本文件中定义的主要函数及其功能说明（自动生成，按功能分类）：
+ *
+ * 【页面与状态管理】
+ * VaultScreen：主组件，负责钱包页面的业务逻辑和UI渲染。
+ * onRefresh：刷新价格和余额数据。
+ * calculateTotalBalance：计算总余额。
+ * handleAddCrypto：添加加密货币卡片。
+ * handleDeleteCard：删除指定卡片。
+ * handleContinue：继续操作，检查已验证设备。
+ * handleLetsGo：显示添加加密货币模态框。
+ * handleWalletTest：显示添加加密货币模态框（测试用）。
+ * handleSelectChain：选择链并保存。
+ * handleQRCodePress：点击二维码显示地址模态框。
+ * closeModal：关闭模态框。
+ * handleCardPress：处理卡片点击动画。
+ *
+ * 【蓝牙与设备管理】
+ * handleDevicePress：设备点击处理。
+ * handleDisconnectDeviceForVault：断开设备连接。
+ * stopMonitoringVerificationCode：停止监听验证码。
+ *
+ * 【PIN码处理】
+ * handlePinSubmit：PIN码提交处理。
+ * handlePinSubmitProxy：PIN码提交代理。
+ *
+ * 【地址验证相关】
+ * handleVerifyAddressForVault：地址验证处理。
+ *
+ * 【工具函数】
+ * fetchPriceChanges：获取价格变动。
+ * fetchWalletBalance：获取钱包余额。
+ * scanDevices：扫描蓝牙设备。
+ * displayDeviceAddress：显示设备地址。
+ * createHandlePinSubmit, createHandleDevicePress, createMonitorVerificationCode —— 工厂函数生成处理器。
+ *
+ * 【动画相关】
+ * computeSpringConfig：计算弹簧动画参数。
+ *
+ * 【其他自定义函数】
+ * stopMonitoringVerificationCode —— 停止监听验证码。
+ *
+ * 如需了解具体实现，请查阅对应函数定义和调用处。
+ */
 import React, {
   useState,
   useEffect,
