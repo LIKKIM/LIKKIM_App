@@ -15,6 +15,7 @@
   - `monitorVerificationCode`（components/Activity.js）：监听验证码的函数。
   - `stopMonitoringVerificationCode`（components/Activity.js）：停止监听验证码的函数。
   - `stopMonitoringTransactionResponse`（components/Activity.js）：停止监听交易反馈的函数。
+  - `selectCrypto`（utils/selectCrypto.js）：处理用户选择加密货币的逻辑，更新相关状态并根据操作类型控制模态框显示，支持交易流程中的币种选择和设备连接管理。
 - 交易广播：将签名后的交易发送到区块链网络。
 - 交易确认：监听交易状态，更新交易记录和界面显示。
 
