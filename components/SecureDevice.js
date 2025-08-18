@@ -34,8 +34,7 @@
  *
  * 【钱包管理】
  * handleDeleteWallet：触发删除钱包流程，弹出确认模态框。
- * confirmDeleteWallet：确认删除钱包，调用删除逻辑并关闭模态框。
- * deleteWallet：执行钱包删除操作，清空相关本地存储和状态。
+ * confirmDeleteWallet：确认删除钱包，调用删除逻辑并关闭模态框，清空相关本地存储和状态。
  * cancelDeleteWallet：取消删除钱包操作，关闭模态框。
  * toggleDeleteWalletVisibility：切换删除钱包确认模态框的显示状态。
  *
@@ -94,6 +93,7 @@ import LockCodeModal from "./modal/LockCodeModal";
 import ModuleSecureView from "./SecureDeviceScreen/ModuleSecureView";
 import getSettingsOptions from "./SecureDeviceScreen/settingsOptions";
 import handleFirmwareUpdate from "./SecureDeviceScreen/FirmwareUpdate";
+import { confirmDeleteWallet } from "../utils/confirmDeleteWallet";
 import { languages } from "../config/languages";
 import base64 from "base64-js";
 import { Buffer } from "buffer";
@@ -644,80 +644,6 @@ function SecureDeviceScreen({ onDarkModeChange }) {
     setDeleteWalletModalVisible(true);
   };
 
-  const confirmDeleteWallet = async () => {
-    setVerifiedDevices([]);
-    setDeleteWalletModalVisible(false);
-    try {
-      // 打印删除前的state和AsyncStorage
-      const [asCryptoCards, asAddedCryptos, asInitialAdditionalCryptos] =
-        await Promise.all([
-          AsyncStorage.getItem("cryptoCards"),
-          AsyncStorage.getItem("addedCryptos"),
-          AsyncStorage.getItem("initialAdditionalCryptos"),
-        ]);
-      console.log("==== 删除前 ====");
-      console.log("state.cryptoCards:", cryptoCards);
-      if (typeof addedCryptos !== "undefined")
-        console.log("state.addedCryptos:", addedCryptos);
-      if (typeof initialAdditionalCryptos !== "undefined")
-        console.log(
-          "state.initialAdditionalCryptos:",
-          initialAdditionalCryptos
-        );
-      console.log("AS.cryptoCards:", asCryptoCards);
-      console.log("AS.addedCryptos:", asAddedCryptos);
-      console.log("AS.initialAdditionalCryptos:", asInitialAdditionalCryptos);
-
-      const cryptoCardsData = asCryptoCards;
-      const parsedCryptoCards = JSON.parse(cryptoCardsData);
-      if (parsedCryptoCards && parsedCryptoCards.length > 0) {
-        await AsyncStorage.multiRemove([
-          "cryptoCards",
-          "addedCryptos",
-          "initialAdditionalCryptos",
-        ]);
-        setCryptoCards([]);
-        setVerifiedDevices([]);
-        if (typeof setAddedCryptos === "function") setAddedCryptos([]);
-        if (typeof setInitialAdditionalCryptos === "function")
-          setInitialAdditionalCryptos([]);
-        // 打印删除后的state和AsyncStorage
-        const [asCryptoCards2, asAddedCryptos2, asInitialAdditionalCryptos2] =
-          await Promise.all([
-            AsyncStorage.getItem("cryptoCards"),
-            AsyncStorage.getItem("addedCryptos"),
-            AsyncStorage.getItem("initialAdditionalCryptos"),
-          ]);
-        console.log("==== 删除后 ====");
-        console.log("state.cryptoCards:", cryptoCards);
-        if (typeof addedCryptos !== "undefined")
-          console.log("state.addedCryptos:", addedCryptos);
-        if (typeof initialAdditionalCryptos !== "undefined")
-          console.log(
-            "state.initialAdditionalCryptos:",
-            initialAdditionalCryptos
-          );
-        console.log("AS.cryptoCards:", asCryptoCards2);
-        console.log("AS.addedCryptos:", asAddedCryptos2);
-        console.log(
-          "AS.initialAdditionalCryptos:",
-          asInitialAdditionalCryptos2
-        );
-
-        Alert.alert(t("Success"), t("Deleted successfully."));
-        navigation.goBack();
-      } else {
-        Alert.alert(t("No Wallet"), t("No wallet available to delete."));
-      }
-    } catch (error) {
-      console.log("Error deleting wallet:", error);
-      Alert.alert(
-        t("Error"),
-        t("An error occurred while deleting your wallet.")
-      );
-    }
-  };
-
   const cancelDeleteWallet = () => {
     setDeleteWalletModalVisible(false);
   };
@@ -753,7 +679,26 @@ function SecureDeviceScreen({ onDarkModeChange }) {
       <DeleteWalletConfirmationModal
         visible={deleteWalletModalVisible}
         onRequestClose={cancelDeleteWallet}
-        onConfirm={confirmDeleteWallet}
+        onConfirm={() =>
+          confirmDeleteWallet({
+            setVerifiedDevices,
+            setDeleteWalletModalVisible,
+            cryptoCards,
+            setCryptoCards,
+            setAddedCryptos:
+              typeof setAddedCryptos !== "undefined"
+                ? setAddedCryptos
+                : undefined,
+            setInitialAdditionalCryptos:
+              typeof setInitialAdditionalCryptos !== "undefined"
+                ? setInitialAdditionalCryptos
+                : undefined,
+            navigation,
+            t,
+            Alert,
+            AsyncStorage,
+          })
+        }
         onCancel={cancelDeleteWallet}
         styles={SecureDeviceScreenStyle}
         t={t}
