@@ -1,39 +1,54 @@
 // SecureDevice.js
 /**
- * 本文件中定义的主要函数及其功能说明（自动生成）：
+ * 本文件中定义的主要函数及其功能说明（按功能分类自动生成）：
  *
+ * 【页面与主题相关】
  * SecureDeviceScreen：主组件，负责安全设备页面的所有业务逻辑和UI渲染。
- * handleAddAddress：处理添加地址按钮点击事件（目前仅打印日志）。
- * handleAddressSelect：处理地址选择事件（目前仅打印日志）。
- * toggleFaceID：切换FaceID功能，进行本地认证并保存状态。
+ * handleDarkModeChange：切换深色模式，保存到本地并调用回调。
+ * handleLanguageChange：切换语言，保存到本地并更新i18n。
+ * handleCurrencyChange：切换法币单位，保存到本地并更新上下文。
+ *
+ * 【蓝牙与设备管理】
+ * handleBluetoothPairing：处理蓝牙配对，申请权限并扫描设备。
+ * handleDevicePress：处理设备点击，发起设备校验流程。
  * handleDisconnectPress：处理断开设备按钮点击，弹出确认断开模态框。
  * confirmDisconnect：确认断开设备，调用断开逻辑并刷新设备列表。
  * cancelDisconnect：取消断开设备操作，关闭确认断开模态框。
- * closeEnterLockCodeModal：关闭输入锁屏密码模态框并重置相关状态。
+ * handleDisconnectDevice：断开蓝牙设备连接并更新本地状态。
+ * stopMonitoringVerificationCode：停止监听设备验证码。
+ * handleCancel：关闭蓝牙设备列表模态框。
+ *
+ * 【锁屏与密码管理】
+ * handleScreenLockToggle：切换屏幕锁功能，弹出相应模态框。
  * openLockCodeModal：打开设置锁屏密码模态框并重置相关状态。
  * openEnterLockCodeModal：打开输入锁屏密码模态框并重置相关状态。
  * openChangeLockCodeModal：打开修改锁屏密码模态框并重置相关状态。
  * openNewLockCodeModal：打开新密码设置模态框并重置相关状态。
- * handleScreenLockToggle：切换屏幕锁功能，弹出相应模态框。
+ * handleSetPassword：设置锁屏密码，校验并保存到本地和上下文。
  * handleChangePassword：处理新密码设置，校验并保存新密码。
  * handleNextForChangePassword：校验当前密码，进入新密码设置流程。
- * handleSetPassword：设置锁屏密码，校验并保存到本地和上下文。
  * closeLockCodeModal：关闭设置锁屏密码模态框并重置相关状态。
+ * closeEnterLockCodeModal：关闭输入锁屏密码模态框并重置相关状态。
  * handleConfirmPassword：校验输入的锁屏密码，决定是否关闭屏幕锁。
- * handleBluetoothPairing：处理蓝牙配对，申请权限并扫描设备。
- * handleCurrencyChange：切换法币单位，保存到本地并更新上下文。
- * handleLanguageChange：切换语言，保存到本地并更新i18n。
- * handleDarkModeChange：切换深色模式，保存到本地并调用回调。
- * stopMonitoringVerificationCode：停止监听设备验证码。
- * handleCancel：关闭蓝牙设备列表模态框。
- * handleDevicePress：处理设备点击，发起设备校验流程。
- * handlePinSubmitProxy：PIN码提交代理，收集依赖参数后调用PIN校验。
- * handleDisconnectDevice：断开蓝牙设备连接并更新本地状态。
- * toggleDeleteWalletVisibility：切换删除钱包确认模态框的显示状态。
+ * toggleFaceID：切换FaceID功能，进行本地认证并保存状态。
+ *
+ * 【钱包管理】
  * handleDeleteWallet：触发删除钱包流程，弹出确认模态框。
  * confirmDeleteWallet：确认删除钱包，调用删除逻辑并关闭模态框。
  * deleteWallet：执行钱包删除操作，清空相关本地存储和状态。
  * cancelDeleteWallet：取消删除钱包操作，关闭模态框。
+ * toggleDeleteWalletVisibility：切换删除钱包确认模态框的显示状态。
+ *
+ * 【PIN/验证码相关】
+ * handlePinSubmitProxy：PIN码提交代理，收集依赖参数后调用PIN校验。
+ *
+ * 【地址簿相关】
+ * handleAddAddress：处理添加地址按钮点击事件（目前仅打印日志）。
+ * handleAddressSelect：处理地址选择事件（目前仅打印日志）。
+ *
+ * 【工具函数】
+ * hexStringToUint32Array：将16进制字符串转为Uint32数组。
+ * uint32ArrayToHexString：将Uint32数组转为16进制字符串。
  */
 import React, { useState, useEffect, useRef, useContext } from "react";
 import {
