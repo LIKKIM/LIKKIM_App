@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   Animated,
 } from "react-native";
+
 import { BlurView } from "expo-blur";
 import { MaterialIcons as Icon } from "@expo/vector-icons";
 import * as Location from "expo-location";
@@ -18,7 +19,7 @@ import { DarkModeContext } from "../../utils/DeviceContext";
 import SecureDeviceScreenStyles from "../../styles/SecureDeviceScreenStyle";
 
 const AnimatedBlurView = Animated.createAnimatedComponent(BlurView);
-
+const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);
 const BluetoothModal = ({
   visible,
   devices,
@@ -147,6 +148,45 @@ const BluetoothModal = ({
 
   if (!showModal) return null; // 动画完成后才移除 Modal
 
+  const AnimatedTouchableWithScale = (props) => {
+    const scaleAnim = React.useRef(new Animated.Value(1)).current;
+
+    const onPressIn = () => {
+      Animated.spring(scaleAnim, {
+        toValue: 0.95,
+        useNativeDriver: true,
+        speed: 50,
+        bounciness: 0,
+      }).start();
+    };
+
+    const onPressOut = () => {
+      Animated.spring(scaleAnim, {
+        toValue: 1,
+        useNativeDriver: true,
+        speed: 50,
+        bounciness: 0,
+      }).start();
+    };
+
+    return (
+      <AnimatedTouchable
+        {...props}
+        onPressIn={(e) => {
+          onPressIn();
+          if (props.onPressIn) props.onPressIn(e);
+        }}
+        onPressOut={(e) => {
+          onPressOut();
+          if (props.onPressOut) props.onPressOut(e);
+        }}
+        style={[props.style, { transform: [{ scale: scaleAnim }] }]}
+      >
+        {props.children}
+      </AnimatedTouchable>
+    );
+  };
+
   return (
     <Modal
       animationType="slide"
@@ -196,7 +236,7 @@ const BluetoothModal = ({
                   const signalBars = getSignalBars(item.rssi);
 
                   return (
-                    <TouchableOpacity
+                    <AnimatedTouchableWithScale
                       onPress={() => {
                         if (!isVerified) {
                           handleDeviceWithLocationPress(item);
@@ -239,7 +279,7 @@ const BluetoothModal = ({
                           </View>
                         </Text>
                         {isVerified && (
-                          <TouchableOpacity
+                          <AnimatedTouchableWithScale
                             style={SecureDeviceScreenStyle.disconnectButton}
                             onPress={() => onDisconnectPress(item)}
                           >
@@ -250,10 +290,10 @@ const BluetoothModal = ({
                             >
                               {t("Disconnect")}
                             </Text>
-                          </TouchableOpacity>
+                          </AnimatedTouchableWithScale>
                         )}
                       </View>
-                    </TouchableOpacity>
+                    </AnimatedTouchableWithScale>
                   );
                 }}
               />
@@ -282,7 +322,7 @@ const BluetoothModal = ({
                 marginTop: 20,
               }}
             >
-              <TouchableOpacity
+              <AnimatedTouchableWithScale
                 style={[
                   SecureDeviceScreenStyle.cancelButton,
                   { flex: 1, borderRadius: 15, marginRight: 10 },
@@ -292,9 +332,9 @@ const BluetoothModal = ({
                 <Text style={SecureDeviceScreenStyle.cancelButtonText}>
                   {t("Cancel")}
                 </Text>
-              </TouchableOpacity>
+              </AnimatedTouchableWithScale>
 
-              <TouchableOpacity
+              <AnimatedTouchableWithScale
                 style={[
                   SecureDeviceScreenStyle.confirmButton,
                   { flex: 1, borderRadius: 15 },
@@ -304,17 +344,17 @@ const BluetoothModal = ({
                 <Text style={SecureDeviceScreenStyle.cancelButtonText}>
                   {t("Refresh")}
                 </Text>
-              </TouchableOpacity>
+              </AnimatedTouchableWithScale>
             </View>
           ) : (
-            <TouchableOpacity
+            <AnimatedTouchableWithScale
               style={SecureDeviceScreenStyle.cancelButtonLookingFor}
               onPress={onCancel}
             >
               <Text style={SecureDeviceScreenStyle.cancelButtonText}>
                 {t("Cancel")}
               </Text>
-            </TouchableOpacity>
+            </AnimatedTouchableWithScale>
           )}
         </View>
       </AnimatedBlurView>
