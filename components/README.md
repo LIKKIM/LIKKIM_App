@@ -1,19 +1,19 @@
-# Components 目录说明
+# Components Directory Description
 
-本目录包含项目中所有的 React Native 组件代码。组件是构建应用界面的基本单元，负责实现具体的 UI 和交互逻辑。
+This directory contains all React Native component code in the project. Components are the basic units for building the application interface, responsible for implementing specific UI and interaction logic.
 
-## 目录结构及主要内容
+## Directory Structure and Main Contents
 
-- `Activity.js`：资产页面相关的组件，实现活动展示和交互功能。
-- `SecureDevice.js`：通用页面相关组件，处理设备连接和状态显示。
-- `Vault.js`：资产页面相关组件，管理用户资产的展示和操作。
-- `ActivityScreen/`：交易页面相关的多个组件集合。
-- `modal/`：通用模态框组件，用于弹出提示、确认等交互。
-- `SecureDeviceScreen/`：通用页面相关组件集合。
-- `VaultScreen/`：资产页面相关组件集合。
+- `Activity.js`: Components related to the asset page, implementing activity display and interaction features.
+- `SecureDevice.js`: Components related to the general page, handling device connection and status display.
+- `Vault.js`: Components related to the asset page, managing the display and operation of user assets.
+- `ActivityScreen/`: A collection of multiple components related to the transaction page.
+- `modal/`: General modal components used for pop-up prompts, confirmations, and other interactions.
+- `SecureDeviceScreen/`: A collection of components related to the general page.
+- `VaultScreen/`: A collection of components related to the asset page.
 
-## 组件职责
+## Component Responsibilities
 
-- 负责 UI 的渲染和用户交互响应
-- 通过 props 和状态管理与应用逻辑层通信
-- 保持组件的高内聚和低耦合，便于复用和维护
+- Responsible for rendering UI and responding to user interactions
+- Communicate with the application logic layer through props and state management
+- Maintain high cohesion and low coupling of components for reusability and maintainability
