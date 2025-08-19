@@ -60,6 +60,10 @@ const BluetoothModal = ({
     if (visible) {
       // 显示 Modal 并执行进入动画
       setShowModal(true);
+      // 新增：打开模态框时刷新扫描
+      if (onRefreshPress) {
+        onRefreshPress();
+      }
       Animated.sequence([
         Animated.timing(intensityAnim, {
           toValue: 0,
