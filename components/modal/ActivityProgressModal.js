@@ -1,6 +1,13 @@
 // ActivityProgressModal.js
-import React from "react";
-import { View, Text, Modal, Image, TouchableOpacity } from "react-native";
+import React, { useRef } from "react";
+import {
+  View,
+  Text,
+  Modal,
+  Image,
+  TouchableOpacity,
+  Animated,
+} from "react-native";
 
 const ActivityProgressModal = ({
   visible,
@@ -9,6 +16,27 @@ const ActivityProgressModal = ({
   ActivityScreenStyle,
   t,
 }) => {
+  // 缩放动画
+  const scaleAnim = useRef(new Animated.Value(1)).current;
+
+  const handlePressIn = () => {
+    Animated.spring(scaleAnim, {
+      toValue: 0.95,
+      useNativeDriver: true,
+      speed: 50,
+      bounciness: 0,
+    }).start();
+  };
+
+  const handlePressOut = () => {
+    Animated.spring(scaleAnim, {
+      toValue: 1,
+      useNativeDriver: true,
+      speed: 50,
+      bounciness: 0,
+    }).start();
+  };
+
   return (
     <Modal
       visible={visible}
@@ -30,14 +58,19 @@ const ActivityProgressModal = ({
           >
             {modalStatus.subtitle}
           </Text>
-          <TouchableOpacity
-            style={ActivityScreenStyle.submitButton}
-            onPress={onClose}
-          >
-            <Text style={ActivityScreenStyle.submitButtonText}>
-              {t("Close")}
-            </Text>
-          </TouchableOpacity>
+          <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
+            <TouchableOpacity
+              style={ActivityScreenStyle.submitButton}
+              onPress={onClose}
+              onPressIn={handlePressIn}
+              onPressOut={handlePressOut}
+              activeOpacity={0.8}
+            >
+              <Text style={ActivityScreenStyle.submitButtonText}>
+                {t("Close")}
+              </Text>
+            </TouchableOpacity>
+          </Animated.View>
         </View>
       </View>
     </Modal>
