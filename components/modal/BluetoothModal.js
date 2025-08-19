@@ -1,4 +1,18 @@
 // modal/BluetoothModal.js
+/*
+ * 本文件用到的所有函数及功能说明（自动生成）：
+ * getSignalBars：根据蓝牙信号强度 rssi 返回信号格数（0-4格）。
+ * getDeviceLocation：获取当前设备的地理位置（需定位权限）。
+ * saveConnectedDevice：将已连接的设备信息（含地理位置）保存到本地存储。
+ * handleDeviceWithLocationPress：处理设备点击，调用 handleDevicePress 并尝试保存地理位置。
+ * AnimatedTouchableWithScale：带缩放动画的 Touchable 组件，用于交互反馈。
+ * useEffect（visible 变化）：监听 visible 变化，控制 Modal 显示与动画。
+ * handleDevicePress（props）：设备点击时的回调，由父组件传入。
+ * onCancel（props）：取消操作的回调，由父组件传入。
+ * onDisconnectPress（props）：断开设备的回调，由父组件传入。
+ * onRefreshPress（props）：刷新设备列表的回调，由父组件传入。
+ */
+
 import React, { useEffect, useState, useContext, useRef } from "react";
 import {
   View,
