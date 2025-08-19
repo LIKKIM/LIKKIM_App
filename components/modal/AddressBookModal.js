@@ -25,7 +25,13 @@ import { networkImages, networks } from "../../config/networkConfig";
 const AnimatedBlurView = Animated.createAnimatedComponent(BlurView);
 
 // 新增 AnimatedTouchableOpacity 组件，封装点击缩放效果
-const AnimatedTouchableOpacity = ({ children, style, onPress, ...rest }) => {
+const AnimatedTouchableOpacity = ({
+  children,
+  style,
+  onPress,
+  activeOpacity = 0.2,
+  ...rest
+}) => {
   const scaleAnim = React.useRef(new Animated.Value(1)).current;
 
   const onPressIn = () => {
@@ -49,7 +55,7 @@ const AnimatedTouchableOpacity = ({ children, style, onPress, ...rest }) => {
   return (
     <Animated.View style={[{ transform: [{ scale: scaleAnim }] }, style]}>
       <TouchableOpacity
-        activeOpacity={0.8}
+        activeOpacity={activeOpacity}
         onPress={onPress}
         onPressIn={onPressIn}
         onPressOut={onPressOut}
