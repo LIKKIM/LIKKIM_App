@@ -35,6 +35,70 @@ const makeTokens = (isDarkMode) => ({
 const SecureDeviceScreenStyles = (isDarkMode) => {
   const c = makeTokens(isDarkMode);
   return StyleSheet.create({
+    // AddressBookModal.js 迁移的样式
+    abmFlex1: { flex: 1 },
+    abmMarginBottom20: { marginBottom: 20 },
+    abmRelativeMarginBottom8: { position: "relative", marginBottom: 8 },
+    abmMarginLeft10: { marginLeft: 10 },
+    abmMarginBottom10: { marginBottom: 10 },
+    abmWidth100: { width: "100%" },
+    abmRedText: { color: "red" },
+    abmMaxHeight200Radius10: { maxHeight: 200, borderRadius: 10 },
+    abmImage24: {
+      width: 24,
+      height: 24,
+      marginRight: 10,
+      backgroundColor: "rgba(255, 255, 255, 0.2)",
+      borderRadius: 12,
+    },
+    abmFlatlistTouchable: {
+      width: "100%",
+      padding: 10,
+      alignItems: "center",
+      flexDirection: "row",
+      borderRadius: 10,
+      justifyContent: "space-between",
+    },
+    abmFlatlistColumn: {
+      flexDirection: "column",
+      flexShrink: 1,
+    },
+    abmFlatlistRow: {
+      flexDirection: "row",
+      marginBottom: 4,
+      alignItems: "center",
+    },
+    abmFlatlistNetworkText: {
+      fontSize: 16,
+    },
+    abmFlatlistNetworkImage: {
+      width: 24,
+      height: 24,
+      marginRight: 5,
+      backgroundColor: "rgba(255, 255, 255, 0.2)",
+      borderRadius: 12,
+    },
+    abmFlatlistNetworkName: {
+      fontSize: 14,
+    },
+    abmFlatlistNameRow: {
+      flexDirection: "row",
+      marginBottom: 8,
+      alignItems: "center",
+    },
+    abmFlatlistNameText: {
+      fontSize: 16,
+    },
+    abmFlatlistNameValue: {
+      fontSize: 14,
+    },
+    abmFlatlistAddressText: {
+      fontSize: 16,
+      flexShrink: 1,
+    },
+    abmFlatlistAddressValue: {
+      fontSize: 14,
+    },
     addressInput: {
       backgroundColor: c.inputBg,
       padding: 15,

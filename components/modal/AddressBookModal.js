@@ -276,7 +276,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
     >
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={{ flex: 1 }}
+        style={styles.abmFlex1}
       >
         <TouchableWithoutFeedback onPress={onClose}>
           <AnimatedBlurView
@@ -317,109 +317,79 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                         value={searchAddress}
                       />
                     </View>
-                    <View style={{ flex: 1 }}>
+                    <View style={styles.abmFlex1}>
                       <FlatList
                         data={filteredAddresses}
                         keyExtractor={(item) => item.id}
-                        style={{ marginBottom: 20 }}
+                        style={styles.abmMarginBottom20}
                         renderItem={({ item }) => (
-                          <View
-                            style={{ position: "relative", marginBottom: 8 }}
-                          >
+                          <View style={styles.abmRelativeMarginBottom8}>
                             <TouchableOpacity
                               onPress={() => onSelect(item)}
-                              style={{
-                                width: "100%",
-                                backgroundColor: isDarkMode
-                                  ? "#21201E80"
-                                  : "#E5E1E980",
-                                padding: 10,
-                                alignItems: "center",
-                                flexDirection: "row",
-                                borderRadius: 10,
-                                justifyContent: "space-between",
-                              }}
+                              style={[
+                                styles.abmFlatlistTouchable,
+                                {
+                                  backgroundColor: isDarkMode
+                                    ? "#21201E80"
+                                    : "#E5E1E980",
+                                },
+                              ]}
                             >
-                              <View
-                                style={{
-                                  flexDirection: "column",
-                                  flexShrink: 1,
-                                }}
-                              >
-                                <View
-                                  style={{
-                                    flexDirection: "row",
-                                    marginBottom: 4,
-                                    alignItems: "center",
-                                  }}
-                                >
+                              <View style={styles.abmFlatlistColumn}>
+                                <View style={styles.abmFlatlistRow}>
                                   <Text
-                                    style={{
-                                      color: isDarkMode ? "#fff" : "#000",
-                                      fontSize: 16,
-                                    }}
+                                    style={[
+                                      styles.abmFlatlistNetworkText,
+                                      { color: isDarkMode ? "#fff" : "#000" },
+                                    ]}
                                   >
                                     {t("Network")}:&nbsp;
                                   </Text>
                                   <Image
                                     source={networkImages[item.network]}
-                                    style={{
-                                      width: 24,
-                                      height: 24,
-                                      marginRight: 5,
-                                      backgroundColor:
-                                        "rgba(255, 255, 255, 0.2)",
-                                      borderRadius: 12,
-                                    }}
+                                    style={styles.abmFlatlistNetworkImage}
                                   />
                                   <Text
-                                    style={{
-                                      color: isDarkMode ? "#ccc" : "#333",
-                                      fontSize: 14,
-                                    }}
+                                    style={[
+                                      styles.abmFlatlistNetworkName,
+                                      { color: isDarkMode ? "#ccc" : "#333" },
+                                    ]}
                                   >
                                     {item.network}
                                   </Text>
                                 </View>
-                                <View
-                                  style={{
-                                    flexDirection: "row",
-                                    marginBottom: 8,
-                                    alignItems: "center",
-                                  }}
-                                >
+                                <View style={styles.abmFlatlistNameRow}>
                                   <Text
-                                    style={{
-                                      color: isDarkMode ? "#fff" : "#000",
-                                      fontSize: 16,
-                                    }}
+                                    style={[
+                                      styles.abmFlatlistNameText,
+                                      { color: isDarkMode ? "#fff" : "#000" },
+                                    ]}
                                   >
                                     {t("Name")}:&nbsp;
                                   </Text>
                                   <Text
-                                    style={{
-                                      color: isDarkMode ? "#ccc" : "#333",
-                                      fontSize: 14,
-                                    }}
+                                    style={[
+                                      styles.abmFlatlistNameValue,
+                                      { color: isDarkMode ? "#ccc" : "#333" },
+                                    ]}
                                   >
                                     {item.name}
                                   </Text>
                                 </View>
                                 <Text
-                                  style={{
-                                    color: isDarkMode ? "#fff" : "#000",
-                                    fontSize: 16,
-                                    flexShrink: 1,
-                                  }}
+                                  style={[
+                                    styles.abmFlatlistAddressText,
+                                    { color: isDarkMode ? "#fff" : "#000" },
+                                  ]}
                                   numberOfLines={1}
                                   ellipsizeMode="middle"
                                 >
                                   {t("Address")}:&nbsp;
                                   <Text
-                                    style={{
-                                      color: isDarkMode ? "#ccc" : "#333",
-                                      fontSize: 14,
-                                    }}
+                                    style={[
+                                      styles.abmFlatlistAddressValue,
+                                      { color: isDarkMode ? "#ccc" : "#333" },
+                                    ]}
                                   >
                                     {item.address}
                                   </Text>
@@ -427,7 +397,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                               </View>
                               <TouchableOpacity
                                 onPress={() => toggleDropdown(item.id)}
-                                style={{ marginLeft: 10 }}
+                                style={styles.abmMarginLeft10}
                               >
                                 <Icon
                                   name="more-vert"
@@ -539,7 +509,9 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                   </>
                 ) : (
                   <>
-                    <View style={{ marginBottom: 10, width: "100%" }}>
+                    <View
+                      style={[styles.abmMarginBottom10, styles.abmWidth100]}
+                    >
                       <Pressable
                         style={[
                           styles.passwordInput,
@@ -565,13 +537,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                             filteredNetworks.includes(newNetwork) && (
                               <Image
                                 source={networkImages[newNetwork]}
-                                style={{
-                                  width: 24,
-                                  height: 24,
-                                  marginRight: 10,
-                                  backgroundColor: "rgba(255, 255, 255, 0.2)",
-                                  borderRadius: 12,
-                                }}
+                                style={styles.abmImage24}
                               />
                             )}
                           <TextInput
@@ -600,14 +566,18 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                         />
                       </Pressable>
                       {newNetworkError ? (
-                        <Text style={{ color: "red", marginBottom: 10 }}>
+                        <Text
+                          style={[styles.abmRedText, styles.abmMarginBottom10]}
+                        >
                           {newNetworkError}
                         </Text>
                       ) : null}
                       {networkDropdownVisible && (
-                        <View style={{ width: "100%", marginBottom: 10 }}>
+                        <View
+                          style={[styles.abmWidth100, styles.abmMarginBottom10]}
+                        >
                           <ScrollView
-                            style={{ maxHeight: 200, borderRadius: 10 }}
+                            style={styles.abmMaxHeight200Radius10}
                             showsVerticalScrollIndicator
                             showsHorizontalScrollIndicator={false}
                           >
@@ -674,7 +644,12 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                             autoFocus={true}
                           />
                           {newNameError ? (
-                            <Text style={{ color: "red", marginBottom: 10 }}>
+                            <Text
+                              style={[
+                                styles.abmRedText,
+                                styles.abmMarginBottom10,
+                              ]}
+                            >
                               {newNameError}
                             </Text>
                           ) : null}
