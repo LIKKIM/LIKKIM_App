@@ -16,13 +16,50 @@ import {
 } from "react-native";
 import Clipboard from "@react-native-clipboard/clipboard";
 import { BlurView } from "expo-blur";
-import { Animated } from "react-native";
+import { Animated, Easing } from "react-native";
 import { MaterialIcons as Icon } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useTranslation } from "react-i18next";
 import { networkImages, networks } from "../../config/networkConfig";
 
 const AnimatedBlurView = Animated.createAnimatedComponent(BlurView);
+
+// 新增 AnimatedTouchableOpacity 组件，封装点击缩放效果
+const AnimatedTouchableOpacity = ({ children, style, onPress, ...rest }) => {
+  const scaleAnim = React.useRef(new Animated.Value(1)).current;
+
+  const onPressIn = () => {
+    Animated.spring(scaleAnim, {
+      toValue: 0.95,
+      useNativeDriver: true,
+      speed: 50,
+      bounciness: 0,
+    }).start();
+  };
+
+  const onPressOut = () => {
+    Animated.spring(scaleAnim, {
+      toValue: 1,
+      useNativeDriver: true,
+      speed: 50,
+      bounciness: 0,
+    }).start();
+  };
+
+  return (
+    <Animated.View style={[{ transform: [{ scale: scaleAnim }] }, style]}>
+      <TouchableOpacity
+        activeOpacity={0.8}
+        onPress={onPress}
+        onPressIn={onPressIn}
+        onPressOut={onPressOut}
+        {...rest}
+      >
+        {children}
+      </TouchableOpacity>
+    </Animated.View>
+  );
+};
 
 function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
   const [searchAddress, setSearchAddress] = useState("");
@@ -282,7 +319,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                           <View
                             style={{ position: "relative", marginBottom: 8 }}
                           >
-                            <TouchableOpacity
+                            <AnimatedTouchableOpacity
                               onPress={() => onSelect(item)}
                               style={{
                                 width: 280,
@@ -381,7 +418,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                                   </Text>
                                 </Text>
                               </View>
-                              <TouchableOpacity
+                              <AnimatedTouchableOpacity
                                 onPress={() => toggleDropdown(item.id)}
                                 style={{ marginLeft: 10 }}
                               >
@@ -390,8 +427,8 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                                   size={24}
                                   color={isDarkMode ? "#fff" : "#000"}
                                 />
-                              </TouchableOpacity>
-                            </TouchableOpacity>
+                              </AnimatedTouchableOpacity>
+                            </AnimatedTouchableOpacity>
                             {dropdownVisible === item.id && (
                               <View
                                 style={[
@@ -403,7 +440,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                                   },
                                 ]}
                               >
-                                <TouchableOpacity
+                                <AnimatedTouchableOpacity
                                   onPress={() => handleCopy(item.address)}
                                 >
                                   <Text
@@ -414,8 +451,8 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                                   >
                                     {t("Copy")}
                                   </Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity
+                                </AnimatedTouchableOpacity>
+                                <AnimatedTouchableOpacity
                                   onPress={() => handleDelete(item.id)}
                                 >
                                   <Text
@@ -426,8 +463,8 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                                   >
                                     {t("Delete")}
                                   </Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity
+                                </AnimatedTouchableOpacity>
+                                <AnimatedTouchableOpacity
                                   onPress={() => handleEdit(item.id)}
                                 >
                                   <Text
@@ -438,7 +475,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                                   >
                                     {t("Edit")}
                                   </Text>
-                                </TouchableOpacity>
+                                </AnimatedTouchableOpacity>
                               </View>
                             )}
                           </View>
@@ -451,7 +488,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                         { justifyContent: "flex-start" },
                       ]}
                     >
-                      <TouchableOpacity
+                      <AnimatedTouchableOpacity
                         onPress={onClose}
                         style={[
                           styles.backButton,
@@ -470,8 +507,8 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                         >
                           {t("Close")}
                         </Text>
-                      </TouchableOpacity>
-                      <TouchableOpacity
+                      </AnimatedTouchableOpacity>
+                      <AnimatedTouchableOpacity
                         onPress={() => setIsAddingAddress(true)}
                         style={[
                           styles.saveButton,
@@ -490,13 +527,13 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                         >
                           {t("Add Address")}
                         </Text>
-                      </TouchableOpacity>
+                      </AnimatedTouchableOpacity>
                     </View>
                   </>
                 ) : (
                   <>
                     <View style={{ marginBottom: 10, width: "100%" }}>
-                      <TouchableOpacity
+                      <AnimatedTouchableOpacity
                         style={[
                           styles.passwordInput,
                           {
@@ -554,7 +591,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                           size={24}
                           color={isDarkMode ? "#ddd" : "#676776"}
                         />
-                      </TouchableOpacity>
+                      </AnimatedTouchableOpacity>
                       {newNetworkError ? (
                         <Text style={{ color: "red", marginBottom: 10 }}>
                           {newNetworkError}
@@ -568,7 +605,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                             showsHorizontalScrollIndicator={false}
                           >
                             {filteredNetworks.map((network) => (
-                              <TouchableOpacity
+                              <AnimatedTouchableOpacity
                                 key={network}
                                 onPress={() => {
                                   setNewNetwork(network);
@@ -606,7 +643,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                                 >
                                   {network}
                                 </Text>
-                              </TouchableOpacity>
+                              </AnimatedTouchableOpacity>
                             ))}
                           </ScrollView>
                         </View>
@@ -664,7 +701,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                       )}
                     </View>
                     <View style={styles.AddressBookContainer}>
-                      <TouchableOpacity
+                      <AnimatedTouchableOpacity
                         onPress={() => setIsAddingAddress(false)}
                         style={[
                           styles.backButton,
@@ -683,8 +720,8 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                         >
                           {t("Back")}
                         </Text>
-                      </TouchableOpacity>
-                      <TouchableOpacity
+                      </AnimatedTouchableOpacity>
+                      <AnimatedTouchableOpacity
                         onPress={handleSaveAddress}
                         style={[
                           styles.saveButton,
@@ -703,7 +740,7 @@ function AddressBookModal({ visible, onClose, onSelect, styles, isDarkMode }) {
                         >
                           {t("Save")}
                         </Text>
-                      </TouchableOpacity>
+                      </AnimatedTouchableOpacity>
                     </View>
                   </>
                 )}
