@@ -386,7 +386,7 @@ const ActivityScreenStyles = (isDarkMode) => {
       padding: 10,
       width: "100%",
       justifyContent: "center",
-      borderRadius: 30,
+      borderRadius: 15,
       height: 60,
       alignItems: "center",
       marginBottom: 16,

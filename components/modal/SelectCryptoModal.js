@@ -133,7 +133,10 @@ const SelectCryptoModal = ({
               ) : (
                 <ScrollView
                   contentContainerStyle={{ alignItems: "center" }}
-                  style={{ maxHeight: 400, width: 320, paddingHorizontal: 20 }}
+                  style={{
+                    maxHeight: 400,
+                    width: "100%",
+                  }}
                 >
                   {filteredCryptos.map((crypto) => (
                     <TouchableOpacity

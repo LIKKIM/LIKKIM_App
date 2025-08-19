@@ -95,7 +95,7 @@ const ChainSelectionModal = ({
             >
               <ScrollView
                 contentContainerStyle={{ alignItems: "center" }}
-                style={{ maxHeight: 500, width: 320, paddingHorizontal: 20 }}
+                style={{ maxHeight: 500, width: "100%" }}
               >
                 <AnimatedTouchableWithScale
                   onPress={() => handleSelectChain("All")}
