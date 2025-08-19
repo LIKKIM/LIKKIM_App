@@ -4,7 +4,7 @@ import {
   View,
   Text,
   TextInput,
-  TouchableOpacity,
+  TouchableOpacity as RNTouchableOpacity,
   Modal,
   TouchableWithoutFeedback,
   Animated,
@@ -13,6 +13,49 @@ import { BlurView } from "expo-blur";
 import { MaterialIcons as Icon } from "@expo/vector-icons";
 
 const AnimatedBlurView = Animated.createAnimatedComponent(BlurView);
+
+// 新增 AnimatedTouchableOpacity 组件，封装点击缩放效果
+const AnimatedTouchableOpacity = ({
+  children,
+  style,
+  onPress,
+  activeOpacity = 0.2,
+  ...rest
+}) => {
+  const scaleAnim = React.useRef(new Animated.Value(1)).current;
+
+  const onPressIn = () => {
+    Animated.spring(scaleAnim, {
+      toValue: 0.95,
+      useNativeDriver: true,
+      speed: 50,
+      bounciness: 0,
+    }).start();
+  };
+
+  const onPressOut = () => {
+    Animated.spring(scaleAnim, {
+      toValue: 1,
+      useNativeDriver: true,
+      speed: 50,
+      bounciness: 0,
+    }).start();
+  };
+
+  return (
+    <Animated.View style={[{ transform: [{ scale: scaleAnim }] }, style]}>
+      <RNTouchableOpacity
+        activeOpacity={activeOpacity}
+        onPress={onPress}
+        onPressIn={onPressIn}
+        onPressOut={onPressOut}
+        {...rest}
+      >
+        {children}
+      </RNTouchableOpacity>
+    </Animated.View>
+  );
+};
 
 const ChangeLockCodeModal = ({
   visible,
@@ -87,7 +130,7 @@ const ChangeLockCodeModal = ({
                   value={currentPassword}
                   autoFocus={true}
                 />
-                <TouchableOpacity
+                <AnimatedTouchableOpacity
                   onPress={() =>
                     setIsCurrentPasswordHidden(!isCurrentPasswordHidden)
                   }
@@ -100,19 +143,22 @@ const ChangeLockCodeModal = ({
                     size={24}
                     color={isDarkMode ? "#ccc" : "#666"}
                   />
-                </TouchableOpacity>
+                </AnimatedTouchableOpacity>
               </View>
             </View>
             <View style={styles.buttonContainer}>
-              <TouchableOpacity
+              <AnimatedTouchableOpacity
                 style={styles.submitButton}
                 onPress={handleNextForChangePassword}
               >
                 <Text style={styles.submitButtonText}>{t("Next")}</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.cancelButton} onPress={onClose}>
+              </AnimatedTouchableOpacity>
+              <AnimatedTouchableOpacity
+                style={styles.cancelButton}
+                onPress={onClose}
+              >
                 <Text style={styles.cancelButtonText}>{t("Cancel")}</Text>
-              </TouchableOpacity>
+              </AnimatedTouchableOpacity>
             </View>
           </View>
         </AnimatedBlurView>
