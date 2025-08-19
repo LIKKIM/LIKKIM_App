@@ -106,8 +106,7 @@ import { firmwareAPI } from "../env/apiEndpoints";
 import { bluetoothConfig } from "../env/bluetoothConfig";
 import { createHandleDevicePress } from "../utils/handleDevicePress";
 import { scanDevices } from "../utils/scanDevices";
-import createMonitorVerificationCode from "../utils/monitorVerificationCode";
-
+import { handleBluetoothPairing as handleBluetoothPairingUtil } from "../utils/handleBluetoothPairing";
 /**
  * deleteWallet and confirmDeleteWallet are the core functions for the wallet deletion feature.
  * - deleteWallet: Handles the actual removal of wallet data from storage and UI updates.
@@ -417,7 +416,17 @@ function SecureDeviceScreen({ onDarkModeChange }) {
 
   // 已移除蓝牙 onStateChange 监听，统一由 App.js 管理
 
-  const handleBluetoothPairing = async () => {
+  const handleBluetoothPairing = () =>
+  handleBluetoothPairingUtil({
+    t,
+    scanDevices,
+    isScanning,
+    setIsScanning,
+    bleManagerRef,
+    setDevices,
+    setBleVisible,
+  });
+    if (Platform.OS === "android async") { {
     if (Platform.OS === "android") {
       const granted = await PermissionsAndroid.request(
         PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,

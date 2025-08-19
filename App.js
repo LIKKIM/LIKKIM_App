@@ -50,6 +50,7 @@ import FloatingDev from "./utils/dev";
 import { hexStringToUint32Array, uint32ArrayToHexString } from "./env/hexUtils";
 import { createHandleDevicePress } from "./utils/handleDevicePress";
 import { scanDevices } from "./utils/scanDevices";
+import { handleBluetoothPairing as handleBluetoothPairingUtil } from "./utils/handleBluetoothPairing";
 const FILE_NAME = "App.js";
 const serviceUUID = bluetoothConfig.serviceUUID;
 const writeCharacteristicUUID = bluetoothConfig.writeCharacteristicUUID;
@@ -233,27 +234,16 @@ function AppContent({
     }
   }, []);
 
-  const handleBluetoothPairing = async () => {
-    if (Platform.OS === "android") {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-        {
-          title: t("Location Permission"),
-          message: t("We need access to your location to use Bluetooth."),
-          buttonNeutral: t("Ask Me Later"),
-          buttonNegative: t("Cancel"),
-          buttonPositive: t("OK"),
-        }
-      );
-      if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
-        console.log("Location permission denied");
-        return;
-      }
-    }
-
-    scanDevices({ isScanning, setIsScanning, bleManagerRef, setDevices });
-    setBleVisible(true);
-  };
+  const handleBluetoothPairing = () =>
+    handleBluetoothPairingUtil({
+      t,
+      scanDevices,
+      isScanning,
+      setIsScanning,
+      bleManagerRef,
+      setDevices,
+      setBleVisible,
+    });
 
   // 用DeviceContext的verificationStatus和setVerificationStatus
   const {
