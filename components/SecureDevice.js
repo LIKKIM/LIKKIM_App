@@ -417,35 +417,15 @@ function SecureDeviceScreen({ onDarkModeChange }) {
   // 已移除蓝牙 onStateChange 监听，统一由 App.js 管理
 
   const handleBluetoothPairing = () =>
-  handleBluetoothPairingUtil({
-    t,
-    scanDevices,
-    isScanning,
-    setIsScanning,
-    bleManagerRef,
-    setDevices,
-    setBleVisible,
-  });
-    if (Platform.OS === "android async") { {
-    if (Platform.OS === "android") {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-        {
-          title: t("Location Permission"),
-          message: t("We need access to your location to use Bluetooth."),
-          buttonNeutral: t("Ask Me Later"),
-          buttonNegative: t("Cancel"),
-          buttonPositive: t("OK"),
-        }
-      );
-      if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
-        console.log("Location permission denied");
-        return;
-      }
-    }
-    scanDevices({ isScanning, setIsScanning, bleManagerRef, setDevices });
-    setBleVisible(true);
-  };
+    handleBluetoothPairingUtil({
+      t,
+      scanDevices,
+      isScanning,
+      setIsScanning,
+      bleManagerRef,
+      setDevices,
+      setBleVisible,
+    });
 
   const handleCurrencyChange = async (currency) => {
     console.log("Selected currency:", currency);
