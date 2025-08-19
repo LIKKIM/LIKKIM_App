@@ -107,6 +107,7 @@ import { bluetoothConfig } from "../env/bluetoothConfig";
 import { createHandleDevicePress } from "../utils/handleDevicePress";
 import { scanDevices } from "../utils/scanDevices";
 import { handleBluetoothPairing as handleBluetoothPairingUtil } from "../utils/handleBluetoothPairing";
+import createMonitorVerificationCode from "../utils/monitorVerificationCode";
 /**
  * deleteWallet and confirmDeleteWallet are the core functions for the wallet deletion feature.
  * - deleteWallet: Handles the actual removal of wallet data from storage and UI updates.
