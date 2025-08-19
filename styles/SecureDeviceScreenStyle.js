@@ -325,6 +325,7 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
       width: "100%",
       backgroundColor: c.inputBg,
       marginBottom: 20,
+      height: 50,
     },
     searchIcon: { paddingLeft: 10, color: c.text },
     searchInput: { flex: 1, padding: 10, borderRadius: 10, color: c.text },
