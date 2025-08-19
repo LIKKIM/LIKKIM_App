@@ -1,5 +1,5 @@
 // modal/ChainSelectionModal.js
-import React from "react";
+import React, { useRef } from "react";
 import {
   Modal,
   View,
@@ -8,9 +8,12 @@ import {
   Image,
   ScrollView,
   TouchableWithoutFeedback,
+  Animated,
 } from "react-native";
 import { BlurView } from "expo-blur";
 import { useTranslation } from "react-i18next";
+
+const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);
 
 const ChainSelectionModal = ({
   isVisible,
@@ -21,6 +24,45 @@ const ChainSelectionModal = ({
   isDarkMode,
   t,
 }) => {
+  const AnimatedTouchableWithScale = (props) => {
+    const scaleAnim = useRef(new Animated.Value(1)).current;
+
+    const onPressIn = () => {
+      Animated.spring(scaleAnim, {
+        toValue: 0.95,
+        useNativeDriver: true,
+        speed: 50,
+        bounciness: 0,
+      }).start();
+    };
+
+    const onPressOut = () => {
+      Animated.spring(scaleAnim, {
+        toValue: 1,
+        useNativeDriver: true,
+        speed: 50,
+        bounciness: 0,
+      }).start();
+    };
+
+    return (
+      <AnimatedTouchable
+        {...props}
+        onPressIn={(e) => {
+          onPressIn();
+          if (props.onPressIn) props.onPressIn(e);
+        }}
+        onPressOut={(e) => {
+          onPressOut();
+          if (props.onPressOut) props.onPressOut(e);
+        }}
+        style={[props.style, { transform: [{ scale: scaleAnim }] }]}
+      >
+        {props.children}
+      </AnimatedTouchable>
+    );
+  };
+
   return (
     <Modal
       visible={isVisible}
@@ -55,13 +97,13 @@ const ChainSelectionModal = ({
                 contentContainerStyle={{ alignItems: "center" }}
                 style={{ maxHeight: 500, width: 320, paddingHorizontal: 20 }}
               >
-                <TouchableOpacity
+                <AnimatedTouchableWithScale
                   onPress={() => handleSelectChain("All")}
                   style={{
                     padding: 10,
                     width: "100%",
                     justifyContent: "center",
-                    borderRadius: 30,
+                    borderRadius: 15,
                     height: 60,
                     alignItems: "center",
                     marginBottom: 16,
@@ -100,7 +142,7 @@ const ChainSelectionModal = ({
                   >
                     {t("All Chains")}
                   </Text>
-                </TouchableOpacity>
+                </AnimatedTouchableWithScale>
 
                 {[
                   ...new Map(
@@ -111,7 +153,7 @@ const ChainSelectionModal = ({
                     a.chainShortName.localeCompare(b.chainShortName)
                   )
                   .map((card, index) => (
-                    <TouchableOpacity
+                    <AnimatedTouchableWithScale
                       key={`${card.chainShortName}-${index}`}
                       onPress={() => handleSelectChain(card.chainShortName)}
                       style={{
@@ -119,7 +161,7 @@ const ChainSelectionModal = ({
                         width: "100%",
                         justifyContent: "center",
                         alignItems: "center",
-                        borderRadius: 30,
+                        borderRadius: 15,
                         height: 60,
                         flexDirection: "row",
                         marginBottom: 16,
@@ -163,7 +205,7 @@ const ChainSelectionModal = ({
                           : ""}{" "}
                         {t("Chain")}
                       </Text>
-                    </TouchableOpacity>
+                    </AnimatedTouchableWithScale>
                   ))}
               </ScrollView>
             </View>
