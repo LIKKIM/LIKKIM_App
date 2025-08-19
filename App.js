@@ -250,9 +250,9 @@ function AppContent({
         return;
       }
     }
-    setBleVisible(true);
-    setDevices([]);
+
     scanDevices({ isScanning, setIsScanning, bleManagerRef, setDevices });
+    setBleVisible(true);
   };
 
   // 用DeviceContext的verificationStatus和setVerificationStatus

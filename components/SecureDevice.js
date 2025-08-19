@@ -434,8 +434,8 @@ function SecureDeviceScreen({ onDarkModeChange }) {
         return;
       }
     }
-    setBleVisible(true);
     scanDevices({ isScanning, setIsScanning, bleManagerRef, setDevices });
+    setBleVisible(true);
   };
 
   const handleCurrencyChange = async (currency) => {
