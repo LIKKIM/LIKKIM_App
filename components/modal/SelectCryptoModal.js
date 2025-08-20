@@ -140,7 +140,7 @@ const SelectCryptoModal = ({
                 >
                   {filteredCryptos.map((crypto) => (
                     <TouchableOpacity
-                      key={`${crypto.shortName}_${crypto.chain}`}
+                      key={`${crypto.queryChainShortName}_${crypto.queryChainName}`}
                       style={ActivityScreenStyle.optionButton}
                       onPress={() => selectCrypto(crypto)}
                     >
