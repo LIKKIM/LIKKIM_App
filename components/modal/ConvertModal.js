@@ -350,11 +350,7 @@ const ConvertModal = ({
                         <TextInput
                           style={[
                             ActivityScreenStyle.swapInput,
-                            {
-                              fontSize: 26,
-                              fontWeight: "bold",
-                              textAlign: "left",
-                            },
+                            ActivityScreenStyle.convertModalTextInput,
                           ]}
                           value={fromValue}
                           onChangeText={setFromValue}
@@ -366,11 +362,7 @@ const ConvertModal = ({
                         <Text
                           style={[
                             ActivityScreenStyle.subtitleText,
-                            {
-                              textAlign: "left",
-                              width: "100%",
-                              marginLeft: 12,
-                            },
+                            ActivityScreenStyle.convertModalSubtitleText,
                           ]}
                         >
                           {`${currencySymbol}${displayedFromValue}`}
@@ -380,7 +372,7 @@ const ConvertModal = ({
                         <Text
                           style={[
                             ActivityScreenStyle.modalTitle,
-                            { marginBottom: 6 },
+                            ActivityScreenStyle.convertModalModalTitle,
                           ]}
                         >
                           {t("From")}
@@ -399,12 +391,9 @@ const ConvertModal = ({
                                 source={
                                   getTokenDetails(selectedFromToken)?.chainIcon
                                 }
-                                style={{
-                                  width: 30,
-                                  height: 30,
-                                  borderRadius: 10,
-                                  marginRight: 8,
-                                }}
+                                style={
+                                  ActivityScreenStyle.convertModalTokenIcon
+                                }
                               />
 
                               <Text style={ActivityScreenStyle.subtitleText}>
@@ -505,13 +494,9 @@ const ConvertModal = ({
                                     (category) => category.chain === chain
                                   )?.chainIcon
                                 }
-                                style={{
-                                  width: 24,
-                                  height: 24,
-                                  marginRight: 8,
-                                  backgroundColor: "rgba(255, 255, 255, 0.2)",
-                                  borderRadius: 12,
-                                }}
+                                style={
+                                  ActivityScreenStyle.convertModalTokenIconSmall
+                                }
                               />
                               <Text style={[ActivityScreenStyle.chainTagText]}>
                                 {chain}
@@ -619,13 +604,7 @@ const ConvertModal = ({
                 </View>
 
                 {/* Convert Button */}
-                <View
-                  style={{
-                    marginBottom: 30,
-                    alignItems: "flex-end",
-                    width: "100%",
-                  }}
-                >
+                <View style={ActivityScreenStyle.convertModalButtonSwap}>
                   <TouchableOpacity
                     style={ActivityScreenStyle.swapButton}
                     onPress={() => {
@@ -850,14 +829,9 @@ const ConvertModal = ({
                                       (category) => category.chain === chain
                                     )?.chainIcon
                                   }
-                                  style={{
-                                    width: 14,
-                                    height: 14,
-                                    backgroundColor: "#CFAB9540",
-                                    marginRight: 8,
-                                    resizeMode: "contain",
-                                    borderRadius: 10,
-                                  }}
+                                  style={
+                                    ActivityScreenStyle.convertModalTokenIconTo
+                                  }
                                 />
                                 <Text
                                   style={[ActivityScreenStyle.chainTagText]}
@@ -907,12 +881,9 @@ const ConvertModal = ({
                             >
                               <Image
                                 source={chain.chainIcon}
-                                style={{
-                                  width: 30,
-                                  height: 30,
-                                  borderRadius: 15,
-                                  marginRight: 10,
-                                }}
+                                style={
+                                  ActivityScreenStyle.convertModalTokenIconToLarge
+                                }
                               />
                               <Text
                                 style={[

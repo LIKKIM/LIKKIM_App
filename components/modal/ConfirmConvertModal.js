@@ -155,20 +155,34 @@ const ConfirmConvertModal = ({
             {/* 确认/取消按钮 */}
             <View style={ActivityScreenStyle.convertModalButtonRow}>
               <TouchableOpacity
-                style={ActivityScreenStyle.optionButton}
-                onPress={onConfirm}
-              >
-                <Text style={ActivityScreenStyle.submitButtonText}>
-                  {t("Confirm")}
-                </Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                style={ActivityScreenStyle.cancelButton}
+                style={[
+                  ActivityScreenStyle.cancelButton,
+                  {
+                    flex: 1,
+                    marginRight: 10,
+                    borderRadius: 15,
+                  },
+                ]}
                 onPress={onCancel}
               >
                 <Text style={ActivityScreenStyle.cancelButtonText}>
                   {t("Cancel")}
+                </Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={[
+                  ActivityScreenStyle.swapConfirmButton,
+                  {
+                    flex: 1,
+                    marginLeft: 10,
+                    borderRadius: 15,
+                  },
+                ]}
+                onPress={onConfirm}
+              >
+                <Text style={ActivityScreenStyle.submitButtonText}>
+                  {t("Confirm")}
                 </Text>
               </TouchableOpacity>
             </View>

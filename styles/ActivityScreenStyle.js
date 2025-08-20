@@ -38,6 +38,104 @@ const ActivityScreenStyles = (isDarkMode) => {
   return StyleSheet.create({
     // ConvertModal 独有样式
     chainTagText: { fontSize: FONT_SIZE_15, color: c.text },
+
+    // ConvertModal 迁移的内联样式
+    convertModalTokenIcon: {
+      width: 30,
+      height: 30,
+      borderRadius: 10,
+      marginRight: 8,
+    },
+    convertModalTokenIconSmall: {
+      width: 24,
+      height: 24,
+      marginRight: 8,
+      backgroundColor: "rgba(255, 255, 255, 0.2)",
+      borderRadius: 12,
+    },
+    convertModalTokenIconTo: {
+      width: 14,
+      height: 14,
+      backgroundColor: "#CFAB9540",
+      marginRight: 8,
+      resizeMode: "contain",
+      borderRadius: 10,
+    },
+    convertModalTokenIconToLarge: {
+      width: 30,
+      height: 30,
+      borderRadius: 15,
+      marginRight: 10,
+    },
+    convertModalScrollViewHorizontal: {
+      height: 34,
+      paddingHorizontal: 10,
+    },
+    convertModalTouchableChainTag: {
+      flexDirection: "row",
+      alignItems: "center",
+      paddingVertical: 5,
+      paddingHorizontal: 10,
+      marginRight: 8,
+      borderRadius: 6,
+    },
+    convertModalTouchableChainTagAllDark: {
+      backgroundColor: "#3F3D3C",
+    },
+    convertModalTouchableChainTagAllLight: {
+      backgroundColor: "#e0e0e0",
+    },
+    convertModalTouchableChainTagAllDarkSelected: {
+      backgroundColor: "#E5E1E9",
+    },
+    convertModalTouchableChainTagAllLightSelected: {
+      backgroundColor: "#E5E1E9",
+    },
+    convertModalTouchableChainTagToAllDark: {
+      backgroundColor: "#6B5F5B",
+    },
+    convertModalTouchableChainTagToAllLight: {
+      backgroundColor: "#DADADA",
+    },
+    convertModalTouchableChainTagToAllDarkUnselected: {
+      backgroundColor: "#3F3D3C",
+    },
+    convertModalTouchableChainTagToAllLightUnselected: {
+      backgroundColor: "#F0F0F0",
+    },
+    convertModalTouchableChainTagToDisabled: {
+      opacity: 0.4,
+    },
+    convertModalTextInput: {
+      fontSize: 26,
+      fontWeight: "bold",
+      textAlign: "left",
+    },
+    convertModalSubtitleText: {
+      textAlign: "left",
+      width: "100%",
+      marginLeft: 12,
+    },
+    convertModalModalTitle: {
+      marginBottom: 6,
+    },
+    convertModalButtonSwap: {
+      marginBottom: 30,
+      alignItems: "flex-end",
+      width: "100%",
+    },
+
+    convertModalButtonRowLeft: {
+      flex: 1,
+      marginLeft: 10,
+      borderRadius: 15,
+    },
+    convertModalExchangeRateText: {
+      textAlign: "center",
+      color: c.text,
+      fontSize: 14,
+      width: "100%",
+    },
     convertModalFlex1: { flex: 1 },
     convertModalSection: { zIndex: 20, marginBottom: 30 },
     convertModalAlignStart: { alignItems: "flex-start", width: "100%" },
