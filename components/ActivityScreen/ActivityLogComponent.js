@@ -174,9 +174,14 @@ const ActivityLogComponent = ({
           >
             {selectedChain === "All"
               ? t("All Chains")
-              : transactionChainCards.find(
-                  (card) => card.chainShortName === selectedChain
-                )?.queryChainName}
+              : (() => {
+                  const name = transactionChainCards.find(
+                    (card) => card.chainShortName === selectedChain
+                  )?.queryChainName;
+                  return name
+                    ? name.charAt(0).toUpperCase() + name.slice(1)
+                    : "";
+                })()}
           </Text>
         </TouchableOpacity>
       </View>
