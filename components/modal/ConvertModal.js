@@ -89,7 +89,7 @@ const ConvertModal = ({
     : ActivityScreenStyle.swapConfirmButton.backgroundColor;
 
   const chainCategories = initialAdditionalCryptos.map((crypto) => ({
-    name: crypto.chain,
+    name: crypto.queryChainName,
     chainIcon: crypto.chainIcon,
     ...crypto,
   }));

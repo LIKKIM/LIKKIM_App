@@ -35,7 +35,9 @@ const AddCryptoModal = ({
   const filteredByChain =
     selectedChain === "All"
       ? filteredCryptos
-      : filteredCryptos.filter((crypto) => crypto.chain === selectedChain);
+      : filteredCryptos.filter(
+          (crypto) => crypto.queryChainName === selectedChain
+        );
 
   useEffect(() => {
     if (visible) {
@@ -53,10 +55,10 @@ const AddCryptoModal = ({
         }),
       ]).start();
       const addedCryptos = cryptoCards.map(
-        (crypto) => `${crypto.name}-${crypto.chain}`
+        (crypto) => `${crypto.name}-${crypto.queryChainName}`
       );
       const initiallySelected = filteredCryptos.filter((crypto) =>
-        addedCryptos.includes(`${crypto.name}-${crypto.chain}`)
+        addedCryptos.includes(`${crypto.name}-${crypto.queryChainName}`)
       );
       setSelectedCryptos(initiallySelected);
     } else if (showModal) {
@@ -70,15 +72,16 @@ const AddCryptoModal = ({
   }, [visible, cryptoCards, filteredCryptos]);
 
   const toggleSelectCrypto = (crypto) => {
-    const cryptoIdentifier = `${crypto.name}-${crypto.chain}`;
+    const cryptoIdentifier = `${crypto.name}-${crypto.queryChainName}`;
     if (
       selectedCryptos.some(
-        (selected) => `${selected.name}-${selected.chain}` === cryptoIdentifier
+        (selected) =>
+          `${selected.name}-${selected.queryChainName}` === cryptoIdentifier
       )
     ) {
       setSelectedCryptos(
         selectedCryptos.filter(
-          (c) => `${c.name}-${c.chain}` !== cryptoIdentifier
+          (c) => `${c.name}-${c.queryChainName}` !== cryptoIdentifier
         )
       );
     } else {
@@ -144,47 +147,48 @@ const AddCryptoModal = ({
                 {t("All")}
               </Text>
             </TouchableOpacity>
-            {[...new Set(chainCategories.map((chain) => chain.chain))].map(
-              (chain) => (
-                <TouchableOpacity
-                  key={chain}
-                  style={[
-                    VaultScreenStyle.chainTag,
-                    selectedChain === chain &&
-                      VaultScreenStyle.selectedChainTag,
-                  ]}
-                  onPress={() => setSelectedChain(chain)}
-                >
-                  {chainCategories.some(
-                    (category) => category.chain === chain
-                  ) && (
-                    <>
-                      {chainCategories.filter(
-                        (category) => category.chain === chain
-                      )[0].chainIcon && (
-                        <Image
-                          source={
-                            chainCategories.filter(
-                              (category) => category.chain === chain
-                            )[0].chainIcon
-                          }
-                          style={VaultScreenStyle.TagChainIcon}
-                        />
-                      )}
-                      <Text
-                        style={[
-                          VaultScreenStyle.chainTagText,
-                          selectedChain === chain &&
-                            VaultScreenStyle.selectedChainTagText,
-                        ]}
-                      >
-                        {chain}
-                      </Text>
-                    </>
-                  )}
-                </TouchableOpacity>
-              )
-            )}
+            {[
+              ...new Set(chainCategories.map((chain) => chain.queryChainName)),
+            ].map((queryChainName) => (
+              <TouchableOpacity
+                key={queryChainName}
+                style={[
+                  VaultScreenStyle.chainTag,
+                  selectedChain === queryChainName &&
+                    VaultScreenStyle.selectedChainTag,
+                ]}
+                onPress={() => setSelectedChain(queryChainName)}
+              >
+                {chainCategories.some(
+                  (category) => category.queryChainName === queryChainName
+                ) && (
+                  <>
+                    {chainCategories.filter(
+                      (category) => category.queryChainName === queryChainName
+                    )[0].chainIcon && (
+                      <Image
+                        source={
+                          chainCategories.filter(
+                            (category) =>
+                              category.queryChainName === queryChainName
+                          )[0].chainIcon
+                        }
+                        style={VaultScreenStyle.TagChainIcon}
+                      />
+                    )}
+                    <Text
+                      style={[
+                        VaultScreenStyle.chainTagText,
+                        selectedChain === queryChainName &&
+                          VaultScreenStyle.selectedChainTagText,
+                      ]}
+                    >
+                      {queryChainName}
+                    </Text>
+                  </>
+                )}
+              </TouchableOpacity>
+            ))}
           </ScrollView>
 
           <ScrollView
@@ -194,7 +198,7 @@ const AddCryptoModal = ({
           >
             {filteredByChain.map((crypto) => (
               <TouchableOpacity
-                key={`${crypto.name}-${crypto.chain}`}
+                key={`${crypto.name}-${crypto.queryChainName}`}
                 style={[
                   VaultScreenStyle.addCryptoButton,
                   {
@@ -204,7 +208,7 @@ const AddCryptoModal = ({
                       : cryptoCards.some(
                           (card) =>
                             card.name === crypto.name &&
-                            card.chain === crypto.chain
+                            card.queryChainName === crypto.queryChainName
                         )
                       ? "#CFAB95"
                       : "transparent",
@@ -246,7 +250,8 @@ const AddCryptoModal = ({
 
                 {cryptoCards.some(
                   (card) =>
-                    card.name === crypto.name && card.chain === crypto.chain
+                    card.name === crypto.name &&
+                    card.queryChainName === crypto.queryChainName
                 ) && (
                   <View
                     style={{

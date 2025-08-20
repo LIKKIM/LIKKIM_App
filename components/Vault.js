@@ -182,7 +182,7 @@ function VaultScreen({ route, navigation }) {
   );
   const [refreshing, setRefreshing] = useState(false);
   const chainCategories = initialAdditionalCryptos.map((crypto) => ({
-    name: crypto.chain,
+    name: crypto.queryChainName,
     chainIcon: crypto.chainIcon,
     ...crypto,
   }));
