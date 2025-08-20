@@ -482,8 +482,12 @@ const DeviceStatus = ({
         <Text style={{ color: isDarkMode ? "#FFFFFF" : "#000000" }}>
           {selectedChain === "All"
             ? t("All Chains")
-            : cryptoCards.find((card) => card.chainShortName === selectedChain)
-                ?.chain}
+            : (() => {
+                const name = cryptoCards.find(
+                  (card) => card.chainShortName === selectedChain
+                )?.queryChainName;
+                return name ? name.charAt(0).toUpperCase() + name.slice(1) : "";
+              })()}
         </Text>
       </TouchableOpacity>
     );
@@ -910,7 +914,7 @@ const DeviceStatus = ({
                               { marginBottom: 4 },
                             ]}
                           >
-                            {t("Chain")}: {nft.chain || t("N/A")}
+                            {t("Chain")}: {nft.queryChainName || t("N/A")}
                           </Text>
                         </View>
                       </View>
