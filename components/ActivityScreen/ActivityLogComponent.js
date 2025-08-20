@@ -176,7 +176,7 @@ const ActivityLogComponent = ({
               ? t("All Chains")
               : transactionChainCards.find(
                   (card) => card.chainShortName === selectedChain
-                )?.chain}
+                )?.queryChainName}
           </Text>
         </TouchableOpacity>
       </View>
