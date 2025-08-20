@@ -585,7 +585,9 @@ const DeviceStatus = ({
           <TouchableHighlight
             underlayColor={"transparent"}
             key={`${card.shortName}_${index}`}
-            onPress={() => handleCardPress(card.name, card.chain, index)}
+            onPress={() =>
+              handleCardPress(card.name, card.queryChainName, index)
+            }
             ref={(el) => {
               cardRefs.current[index] = el;
               initCardPosition(el, index);

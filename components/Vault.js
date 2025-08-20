@@ -650,7 +650,10 @@ function VaultScreen({ route, navigation }) {
     // 删除指定链和名称的卡片
     const updatedCards = cryptoCards.filter(
       (card) =>
-        !(card.name === selectedCardName && card.chain === selectedCardChain)
+        !(
+          card.name === selectedCardName &&
+          card.queryChainName === selectedCardChain
+        )
     );
 
     console.log("thisthis", selectedCardName);
@@ -741,7 +744,7 @@ function VaultScreen({ route, navigation }) {
 
     // 查到这张卡片的数据
     const crypto = cryptoCards.find(
-      (card) => card.name === cryptoName && card.chain === cryptoChain
+      (card) => card.name === cryptoName && card.queryChainName === cryptoChain
     );
 
     // 先把动画值复位到 0，避免上一次动画遗留的值
@@ -804,7 +807,9 @@ function VaultScreen({ route, navigation }) {
         .filter(
           (crypto) =>
             !cryptoCards.find(
-              (card) => card.name === crypto.name && card.chain === crypto.chain
+              (card) =>
+                card.name === crypto.name &&
+                card.queryChainName === crypto.queryChainName
             )
         )
         .map((crypto) => {
