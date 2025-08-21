@@ -20,6 +20,7 @@
     "getTF": "eas build --platform ios --profile production --auto-submit",
     "pushPlayStore": "eas build --auto-submit --platform android",
     "DownloadKeystore": "eas credentials --platform android",
+    "registerDevice": "eas device:create",
     "expoGo": "expo start"
   },
   "dependencies": {
