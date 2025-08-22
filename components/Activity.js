@@ -451,7 +451,7 @@ function ActivityScreen() {
   useEffect(() => {
     if (amountModalVisible) {
       // 查找选中的加密货币对象
-      const selected = initialAdditionalCryptos.find(
+      const selected = cryptoCards.find(
         (crypto) =>
           crypto.queryChainName.toLowerCase() ===
             selectedQueryChainName.toLowerCase() &&
