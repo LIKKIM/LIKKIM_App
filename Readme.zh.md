@@ -29,14 +29,6 @@
 
 ---
 
-## 技术栈
-
-- React Native（基于 Expo）
-- 蓝牙低功耗（BLE）支持
-- iOS 和 Android 原生集成
-
----
-
 ## 项目结构
 
 - `android/`：Android 原生项目代码和配置
@@ -57,9 +49,13 @@
 
 ### 环境准备
 
-- Node.js
+- 请先安装 [Node.js](https://nodejs.org/)，建议版本为 v23.10.0 或更高
+- 请先通过命令行安装 Expo CLI，运行：
+  ```bash
+  npm install -g expo-cli
+  ```
+- Xcode 版本需大于 Version 16.4 (16F6)
 - npm 或 yarn
-- Expo CLI
 - Xcode（macOS，iOS 开发必备）
 - CocoaPods（iOS 原生依赖管理）
 
