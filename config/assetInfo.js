@@ -6,7 +6,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/ARBIcon.png"), // 数子货币的icon (服务器获取)
     cardImage: require("../assets/CardBg/Card15.png"), // 卡片的背景图片 (服务器获取)
     chainIcon: require("../assets/icon/ARBIcon.png"), // 数子货币所在的区块链的icon (服务器获取)
-    chain: "Arbitrum", // 数子货币所在的区块链的名称 （需要以后删掉因为和queryChainName是完全重复的）(服务器获取)
+
     chainShortName: "ARB", // 数子货币所在的区块链的名称缩写 （需要以后删掉因为和queryChainShortName完全重复的） (服务器获取)
     queryChainName: "arbitrum", // 数子货币所在的区块链的名称 (服务器获取)
     queryChainShortName: "ARB", // 数子货币所在的区块链的名称缩写 (服务器获取)
@@ -27,7 +27,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/DAIIcon.png"),
     cardImage: require("../assets/CardBg/Card55.png"),
     address: "",
-    chain: "Arbitrum", // (和上一个相同)
+
     chainShortName: "ARB", // (和上一个相同)
     queryChainName: "arbitrum", // (和上一个相同)
     queryChainShortName: "ARB", // (和上一个相同)
@@ -47,7 +47,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/USDTIcon.png"),
     cardImage: require("../assets/CardBg/Card101.png"),
     address: "",
-    chain: "Arbitrum",
+
     chainShortName: "ARB",
     chainIcon: require("../assets/icon/ARBIcon.png"),
     queryChainShortName: "ARB",
@@ -67,7 +67,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/USDCIcon.png"),
     cardImage: require("../assets/CardBg/Card107.png"),
     address: "",
-    chain: "Arbitrum",
+
     chainShortName: "ARB",
     queryChainShortName: "ARB",
     chainIcon: require("../assets/icon/ARBIcon.png"),
@@ -87,7 +87,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/AURORAIcon.png"),
     cardImage: require("../assets/CardBg/Card10.png"),
     address: "",
-    chain: "Aurora",
+
     chainShortName: "AURORA",
     queryChainShortName: "AURORA",
     chainIcon: require("../assets/icon/AURORAIcon.png"),
@@ -107,7 +107,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/AVAXIcon.png"),
     cardImage: require("../assets/CardBg/Card21.png"),
     address: "",
-    chain: "Avalanche",
+
     chainShortName: "AVAX",
     queryChainShortName: "AVAX",
     chainIcon: require("../assets/icon/AVAXIcon.png"),
@@ -127,7 +127,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/USDCIcon.png"),
     cardImage: require("../assets/CardBg/Card107.png"),
     address: "",
-    chain: "Avalanche",
+
     chainShortName: "AVAX",
     queryChainShortName: "AVAX",
     chainIcon: require("../assets/icon/AVAXIcon.png"),
@@ -147,7 +147,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/USDTIcon.png"),
     cardImage: require("../assets/CardBg/Card101.png"),
     address: "",
-    chain: "Avalanche",
+
     chainShortName: "AVAX",
     queryChainShortName: "AVAX",
     chainIcon: require("../assets/icon/AVAXIcon.png"),
@@ -167,7 +167,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/DAIIcon.png"),
     cardImage: require("../assets/CardBg/Card55.png"),
     address: "",
-    chain: "Avalanche",
+
     chainShortName: "AVAX",
     queryChainShortName: "AVAX",
     chainIcon: require("../assets/icon/AVAXIcon.png"),
@@ -187,7 +187,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/BTCIcon.png"),
     cardImage: require("../assets/CardBg/Card22.png"),
     address: "",
-    chain: "Bitcoin",
+
     chainShortName: "BTC",
     queryChainShortName: "BTC",
     chainIcon: require("../assets/icon/BTCIcon.png"),
@@ -207,7 +207,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/BitcoinCashIcon.png"),
     cardImage: require("../assets/CardBg/Card8.png"),
     address: "",
-    chain: "BCH",
+
     chainShortName: "BCH",
     queryChainShortName: "BCH",
     chainIcon: require("../assets/icon/BCHIcon.png"),
@@ -227,7 +227,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/BNBIcon.png"),
     cardImage: require("../assets/CardBg/Card41.png"),
     address: "",
-    chain: "Binance Smart Chain",
+
     chainShortName: "BSC",
     queryChainShortName: "BSC",
     chainIcon: require("../assets/icon/BNBIcon.png"),
@@ -247,7 +247,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/DAIIcon.png"),
     cardImage: require("../assets/CardBg/Card55.png"),
     address: "",
-    chain: "Binance Smart Chain",
+
     chainShortName: "BSC",
     queryChainShortName: "BSC",
     chainIcon: require("../assets/icon/BNBIcon.png"),
@@ -267,7 +267,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/USDTIcon.png"),
     cardImage: require("../assets/CardBg/Card101.png"),
     address: "",
-    chain: "Binance Smart Chain",
+
     chainShortName: "BSC",
     queryChainShortName: "BSC",
     chainIcon: require("../assets/icon/BNBIcon.png"),
@@ -287,7 +287,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/USDCIcon.png"),
     cardImage: require("../assets/CardBg/Card107.png"),
     address: "",
-    chain: "Binance Smart Chain",
+
     chainShortName: "BSC",
     queryChainShortName: "BSC",
     chainIcon: require("../assets/icon/BNBIcon.png"),
@@ -307,7 +307,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/CELOIcon.png"),
     cardImage: require("../assets/CardBg/Card111.png"),
     address: "",
-    chain: "Celo",
+
     chainShortName: "CELO",
     queryChainShortName: "CELO",
     chainIcon: require("../assets/icon/CELOIcon.png"),
@@ -327,7 +327,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/ETHIcon.png"),
     cardImage: require("../assets/CardBg/Card35.png"),
     address: "",
-    chain: "Ethereum",
+
     chainShortName: "ETH",
     queryChainShortName: "ETH",
     chainIcon: require("../assets/icon/ETHIcon.png"),
@@ -347,7 +347,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/DAIIcon.png"),
     cardImage: require("../assets/CardBg/Card55.png"),
     address: "",
-    chain: "Ethereum",
+
     chainShortName: "ETH",
     queryChainShortName: "ETH",
     chainIcon: require("../assets/icon/ETHIcon.png"),
@@ -367,7 +367,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/USDTIcon.png"),
     cardImage: require("../assets/CardBg/Card101.png"),
     address: "",
-    chain: "Ethereum",
+
     chainShortName: "ETH",
     queryChainShortName: "ETH",
     chainIcon: require("../assets/icon/ETHIcon.png"),
@@ -387,7 +387,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/USDCIcon.png"),
     cardImage: require("../assets/CardBg/Card107.png"),
     address: "",
-    chain: "Ethereum",
+
     chainShortName: "ETH",
     queryChainShortName: "ETH",
     chainIcon: require("../assets/icon/ETHIcon.png"),
@@ -407,7 +407,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/PolygonIcon.png"),
     cardImage: require("../assets/CardBg/Card18.png"),
     address: "",
-    chain: "Ethereum",
+
     chainShortName: "ETH",
     queryChainShortName: "ETH",
     chainIcon: require("../assets/icon/ETHIcon.png"),
@@ -427,7 +427,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/USDCIcon.png"),
     cardImage: require("../assets/CardBg/Card107.png"),
     address: "",
-    chain: "Polygon",
+
     chainShortName: "POL",
     queryChainShortName: "POL",
     chainIcon: require("../assets/icon/PolygonIcon.png"),
@@ -447,7 +447,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/DAIIcon.png"),
     cardImage: require("../assets/CardBg/Card55.png"),
     address: "",
-    chain: "Polygon",
+
     chainShortName: "POL",
     queryChainShortName: "POL",
     chainIcon: require("../assets/icon/PolygonIcon.png"),
@@ -467,7 +467,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/USDTIcon.png"),
     cardImage: require("../assets/CardBg/Card101.png"),
     address: "",
-    chain: "Polygon",
+
     chainShortName: "POL",
     queryChainShortName: "POL",
     chainIcon: require("../assets/icon/PolygonIcon.png"),
@@ -487,7 +487,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/BNBIcon.png"),
     cardImage: require("../assets/CardBg/Card41.png"),
     address: "",
-    chain: "Ethereum",
+
     chainShortName: "ETH",
     queryChainShortName: "ETH",
     chainIcon: require("../assets/icon/ETHIcon.png"),
@@ -507,7 +507,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/ETCIcon.png"),
     cardImage: require("../assets/CardBg/Card62.png"),
     address: "",
-    chain: "ETC",
+
     chainShortName: "ETC",
     queryChainShortName: "ETC",
     chainIcon: require("../assets/icon/ETCIcon.png"),
@@ -527,7 +527,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/FTMIcon.png"),
     cardImage: require("../assets/CardBg/Card45.png"),
     address: "",
-    chain: "Fantom",
+
     chainShortName: "FTM",
     queryChainShortName: "FTM",
     chainIcon: require("../assets/icon/FTMIcon.png"),
@@ -547,7 +547,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/USDCIcon.png"),
     cardImage: require("../assets/CardBg/Card107.png"),
     address: "",
-    chain: "Fantom",
+
     chainShortName: "FTM",
     queryChainShortName: "FTM",
     chainIcon: require("../assets/icon/FTMIcon.png"),
@@ -567,7 +567,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/DAIIcon.png"),
     cardImage: require("../assets/CardBg/Card55.png"),
     address: "",
-    chain: "Fantom",
+
     chainShortName: "FTM",
     queryChainShortName: "FTM",
     chainIcon: require("../assets/icon/FTMIcon.png"),
@@ -587,7 +587,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/HTIcon.png"),
     cardImage: require("../assets/CardBg/Card56.png"),
     address: "",
-    chain: "Huobi ECO Chain",
+
     chainShortName: "HTX",
     queryChainShortName: "HTX",
     chainIcon: require("../assets/icon/HTIcon.png"),
@@ -607,7 +607,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/IOTXIcon.png"),
     cardImage: require("../assets/CardBg/Card78.png"),
     address: "",
-    chain: "IoTeX Mainnet",
+
     chainShortName: "IOTX",
     queryChainShortName: "IOTX",
     chainIcon: require("../assets/icon/IOTXIcon.png"),
@@ -627,7 +627,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/LTCIcon.png"),
     cardImage: require("../assets/CardBg/Card100.png"),
     address: "",
-    chain: "Litecoin",
+
     chainShortName: "LTC",
     queryChainShortName: "LTC",
     chainIcon: require("../assets/icon/LTCIcon.png"),
@@ -647,7 +647,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/OKTIcon.png"),
     cardImage: require("../assets/CardBg/Card106.png"),
     address: "",
-    chain: "OKX Chain",
+
     chainShortName: "OKT",
     queryChainShortName: "OKT",
     chainIcon: require("../assets/icon/OKTIcon.png"),
@@ -667,7 +667,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/USDCIcon.png"),
     cardImage: require("../assets/CardBg/Card107.png"),
     address: "",
-    chain: "OKX Chain",
+
     chainShortName: "OKT",
     queryChainShortName: "OKT",
     chainIcon: require("../assets/icon/OKTIcon.png"),
@@ -687,7 +687,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/USDTIcon.png"),
     cardImage: require("../assets/CardBg/Card101.png"),
     address: "",
-    chain: "OKX Chain",
+
     chainShortName: "OKT",
     queryChainShortName: "OKT",
     chainIcon: require("../assets/icon/OKTIcon.png"),
@@ -707,7 +707,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/OPIcon.png"),
     cardImage: require("../assets/CardBg/Card81.png"),
     address: "",
-    chain: "Optimism",
+
     chainShortName: "OP",
     queryChainShortName: "OP",
     chainIcon: require("../assets/icon/OPIcon.png"),
@@ -727,7 +727,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/USDCIcon.png"),
     cardImage: require("../assets/CardBg/Card107.png"),
     address: "",
-    chain: "Optimism",
+
     chainShortName: "OP",
     queryChainShortName: "OP",
     chainIcon: require("../assets/icon/OPIcon.png"),
@@ -747,7 +747,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/USDTIcon.png"),
     cardImage: require("../assets/CardBg/Card101.png"),
     address: "",
-    chain: "Optimism",
+
     chainShortName: "OP",
     queryChainShortName: "OP",
     chainIcon: require("../assets/icon/OPIcon.png"),
@@ -767,7 +767,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/DAIIcon.png"),
     cardImage: require("../assets/CardBg/Card55.png"),
     address: "",
-    chain: "Optimism",
+
     chainShortName: "OP",
     queryChainShortName: "OP",
     chainIcon: require("../assets/icon/OPIcon.png"),
@@ -788,7 +788,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/PolygonIcon.png"),
     cardImage: require("../assets/CardBg/Card18.png"),
     address: "",
-    chain: "Polygon",
+
     chainShortName: "POL",
     queryChainShortName: "POL",
     chainIcon: require("../assets/icon/PolygonIcon.png"),
@@ -808,7 +808,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/XRPIcon.png"),
     cardImage: require("../assets/CardBg/Card84.png"),
     address: "",
-    chain: "Ripple",
+
     chainShortName: "XRP",
     queryChainShortName: "XRP",
     chainIcon: require("../assets/icon/XRPIcon.png"),
@@ -828,7 +828,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/SOLIcon.png"),
     cardImage: require("../assets/CardBg/Card2.png"),
     address: "",
-    chain: "Solana",
+
     chainShortName: "SOL",
     queryChainShortName: "SOL",
     chainIcon: require("../assets/icon/SOLIcon.png"),
@@ -848,7 +848,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/USDTIcon.png"),
     cardImage: require("../assets/CardBg/Card101.png"),
     address: "",
-    chain: "Solana",
+
     chainShortName: "SOL",
     queryChainShortName: "SOL",
     chainIcon: require("../assets/icon/SOLIcon.png"),
@@ -868,7 +868,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/USDCIcon.png"),
     cardImage: require("../assets/CardBg/Card107.png"),
     address: "",
-    chain: "Solana",
+
     chainShortName: "SOL",
     queryChainShortName: "SOL",
     chainIcon: require("../assets/icon/SOLIcon.png"),
@@ -888,7 +888,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/TRXIcon.png"),
     cardImage: require("../assets/CardBg/Card97.png"),
     address: "",
-    chain: "Tron",
+
     chainShortName: "TRX",
     queryChainShortName: "TRX",
     chainIcon: require("../assets/icon/TRXIcon.png"),
@@ -908,7 +908,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/USDCIcon.png"),
     cardImage: require("../assets/CardBg/Card107.png"),
     address: "",
-    chain: "Tron",
+
     chainShortName: "TRX",
     queryChainShortName: "TRX",
     chainIcon: require("../assets/icon/TRXIcon.png"),
@@ -929,7 +929,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/USDTIcon.png"),
     cardImage: require("../assets/CardBg/Card101.png"),
     address: "",
-    chain: "Tron",
+
     chainShortName: "TRX",
     queryChainShortName: "TRX",
     chainIcon: require("../assets/icon/TRXIcon.png"),
@@ -950,7 +950,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/ZKSIcon.png"),
     cardImage: require("../assets/CardBg/Card94.png"),
     address: "",
-    chain: "ZKSYNC",
+
     chainShortName: "ZKSYNC",
     queryChainShortName: "ZKSYNC",
     chainIcon: require("../assets/icon/ZKSIcon.png"),
@@ -972,7 +972,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/ATOMIcon.png"),
     cardImage: require("../assets/CardBg/Card38.png"),
     address: "",
-    chain: "Cosmos",
+
     chainShortName: "ATOM",
     queryChainShortName: "ATOM",
     chainIcon: require("../assets/icon/ATOMIcon.png"),
@@ -992,7 +992,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/TIAIcon.png"),
     cardImage: require("../assets/CardBg/Card51.png"),
     address: "",
-    chain: "Celestia",
+
     chainShortName: "CEL",
     queryChainShortName: "CEL",
     chainIcon: require("../assets/icon/TIAIcon.png"),
@@ -1012,7 +1012,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/CROIcon.png"),
     cardImage: require("../assets/CardBg/Card11.png"),
     address: "",
-    chain: "Crypto.org",
+
     chainShortName: "CRO",
     queryChainShortName: "CRO",
     chainIcon: require("../assets/icon/CROIcon.png"),
@@ -1032,7 +1032,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/USDTIcon.png"),
     cardImage: require("../assets/CardBg/Card101.png"),
     address: "",
-    chain: "Crypto.org",
+
     chainShortName: "CRO",
     queryChainShortName: "CRO",
     chainIcon: require("../assets/icon/CROIcon.png"),
@@ -1053,7 +1053,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/JUNOIcon.png"),
     cardImage: require("../assets/CardBg/Card91.png"),
     address: "",
-    chain: "Juno",
+
     chainShortName: "JUNO",
     queryChainShortName: "JUNO",
     chainIcon: require("../assets/icon/JUNOIcon.png"),
@@ -1073,7 +1073,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/OSMOIcon.png"),
     cardImage: require("../assets/CardBg/Card104.png"),
     address: "",
-    chain: "Osmosis",
+
     chainShortName: "OSMO",
     queryChainShortName: "OSMO",
     chainIcon: require("../assets/icon/OSMOIcon.png"),
@@ -1093,7 +1093,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/GNOIcon.png"),
     cardImage: require("../assets/CardBg/Card36.png"),
     address: "",
-    chain: "Gnosis",
+
     chainShortName: "GNO",
     queryChainShortName: "GNO",
     chainIcon: require("../assets/icon/GNOIcon.png"),
@@ -1113,7 +1113,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/LINEAIcon.png"),
     cardImage: require("../assets/CardBg/Card6.png"),
     address: "",
-    chain: "Linea",
+
     chainShortName: "LINEA",
     queryChainShortName: "LINEA",
     chainIcon: require("../assets/icon/LINEAIcon.png"),
@@ -1133,7 +1133,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/RONIcon.png"),
     cardImage: require("../assets/CardBg/Card83.png"),
     address: "",
-    chain: "Ronin",
+
     chainShortName: "RON",
     queryChainShortName: "RON",
     chainIcon: require("../assets/icon/RONIcon.png"),
@@ -1153,7 +1153,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/APTIcon.png"),
     cardImage: require("../assets/CardBg/Card14.png"),
     address: "",
-    chain: "Aptos",
+
     chainShortName: "APT",
     queryChainShortName: "APT",
     chainIcon: require("../assets/icon/APTIcon.png"),
@@ -1173,7 +1173,7 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/SUIIcon.png"),
     cardImage: require("../assets/CardBg/Card108.png"),
     address: "",
-    chain: "SUI",
+
     chainShortName: "SUI",
     queryChainShortName: "SUI",
     chainIcon: require("../assets/icon/SUIIcon.png"),

@@ -183,7 +183,8 @@ const AddCryptoModal = ({
                           VaultScreenStyle.selectedChainTagText,
                       ]}
                     >
-                      {queryChainName}
+                      {queryChainName.charAt(0).toUpperCase() +
+                        queryChainName.slice(1)}
                     </Text>
                   </>
                 )}

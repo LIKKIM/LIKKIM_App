@@ -209,7 +209,7 @@ const ConvertModal = ({
     if (!toDropdownVisible || !selectedFromToken) return;
 
     InteractionManager.runAfterInteractions(() => {
-      const chainName = selectedFromToken.chain;
+      const chainName = selectedFromToken.queryChainName;
       const layout = chainLayouts[chainName];
 
       if (toChainTagsScrollRef.current && layout) {
@@ -425,7 +425,10 @@ const ConvertModal = ({
                                 }
                               />
                               <Text style={[ActivityScreenStyle.chainTagText]}>
-                                {chain}
+                                {chain
+                                  ? chain.charAt(0).toUpperCase() +
+                                    chain.slice(1)
+                                  : ""}
                               </Text>
                             </TouchableOpacity>
                           ))}
@@ -710,7 +713,9 @@ const ConvertModal = ({
                           {/* 其他链按钮处理 */}
                           {[
                             ...new Set(
-                              chainCategories.map((chain) => chain.chain)
+                              chainCategories.map(
+                                (chain) => chain.queryChainName
+                              )
                             ),
                           ].map((chain) => {
                             const fromTokenDetails =
@@ -767,7 +772,10 @@ const ConvertModal = ({
                                 <Text
                                   style={[ActivityScreenStyle.chainTagText]}
                                 >
-                                  {chain}
+                                  {chain
+                                    ? chain.charAt(0).toUpperCase() +
+                                      chain.slice(1)
+                                    : ""}
                                 </Text>
                               </TouchableOpacity>
                             );
