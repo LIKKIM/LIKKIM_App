@@ -82,7 +82,7 @@ This module contains all modal-related React Native components, styles, and test
 - **SecurityCodeModal.js**  
   PIN code input modal supporting PIN input, submit and cancel operations, with status display and dark mode support.
 
-- **SelectCryptoModal.js**  
+- **SelectAssetModal.js**  
   Crypto asset selection modal supporting asset search, asset list display, selection, and cancel operations, with dark mode and animation effects.
 
 - **SendItemModal.js**  

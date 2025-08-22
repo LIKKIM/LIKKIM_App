@@ -96,7 +96,7 @@ import ActivityProgressModal from "./modal/ActivityProgressModal";
 import CheckStatusModal from "./modal/CheckStatusModal";
 import BluetoothModal from "./modal/BluetoothModal";
 import AmountModal from "./modal/AmountModal";
-import SelectCryptoModal from "./modal/SelectCryptoModal";
+import SelectAssetModal from "./modal/SelectAssetModal";
 import ConvertModal from "./modal/ConvertModal";
 import ReceiveAddressModal from "./modal/ReceiveAddressModal";
 import SecurityCodeModal from "./modal/SecurityCodeModal";
@@ -1086,7 +1086,7 @@ function ActivityScreen() {
           inputAddress={inputAddress}
         />
         {/* 选择接收的加密货币模态窗口 */}
-        <SelectCryptoModal
+        <SelectAssetModal
           visible={modalVisible}
           onRequestClose={() => setModalVisible(false)}
           addedCryptos={addedCryptos}

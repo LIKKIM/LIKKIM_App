@@ -1,4 +1,4 @@
-// SelectCryptoModal.js
+// SelectAssetModal.js
 import React, { useState, useRef, useEffect } from "react";
 import {
   Modal,
@@ -18,7 +18,7 @@ import { MaterialIcons as Icon } from "@expo/vector-icons";
 
 const AnimatedBlurView = Animated.createAnimatedComponent(BlurView);
 
-const SelectCryptoModal = ({
+const SelectAssetModal = ({
   visible,
   onRequestClose,
   addedCryptos,
@@ -188,4 +188,4 @@ const SelectCryptoModal = ({
   );
 };
 
-export default SelectCryptoModal;
+export default SelectAssetModal;

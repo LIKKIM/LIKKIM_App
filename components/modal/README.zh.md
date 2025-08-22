@@ -82,7 +82,7 @@
 - **SecurityCodeModal.js**  
   PIN 码输入模态框，支持 PIN 码输入、提交和取消操作，带有状态显示和暗黑模式支持。
 
-- **SelectCryptoModal.js**  
+- **SelectAssetModal.js**  
   加密资产选择模态框，支持资产搜索、显示资产列表、选择资产和取消操作，带有暗黑模式和动画效果。
 
 - **SendItemModal.js**  
