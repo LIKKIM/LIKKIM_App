@@ -99,7 +99,9 @@ const ConvertModal = ({
   const getTokenDetails = (token) => {
     if (!token) return null;
     return initialAdditionalCryptos.find(
-      (item) => item.shortName === token.shortName && item.chain === token.chain
+      (item) =>
+        item.shortName === token.shortName &&
+        item.queryChainName === token.queryChainName
     );
   };
 
@@ -113,7 +115,7 @@ const ConvertModal = ({
   const visibleToTokens = initialAdditionalCryptos
     .filter((token) => {
       if (!selectedFromToken) return true;
-      return token.chain === selectedFromToken.chain;
+      return token.queryChainName === selectedFromToken.queryChainName;
     })
     .filter((token) => {
       return (token.name + token.shortName)
@@ -387,7 +389,9 @@ const ConvertModal = ({
 
                           {[
                             ...new Set(
-                              chainCategories.map((chain) => chain.chain)
+                              chainCategories.map(
+                                (chain) => chain.queryChainName
+                              )
                             ),
                           ].map((chain) => (
                             <TouchableOpacity
@@ -412,7 +416,8 @@ const ConvertModal = ({
                               <Image
                                 source={
                                   chainCategories.find(
-                                    (category) => category.chain === chain
+                                    (category) =>
+                                      category.queryChainName === chain
                                   )?.chainIcon
                                 }
                                 style={
@@ -432,7 +437,7 @@ const ConvertModal = ({
                           .filter(
                             (token) =>
                               selectedChain === "All" ||
-                              token.chain === selectedChain
+                              token.queryChainName === selectedChain
                           ) // 重点筛选逻辑
                           .map((chain, index) => (
                             <TouchableOpacity
@@ -445,7 +450,7 @@ const ConvertModal = ({
                               onPress={() => {
                                 setSelectedFromToken({
                                   shortName: chain.shortName,
-                                  chain: chain.chain, // 🔥这里把chain也记下来
+                                  queryChainName: chain.queryChainName, // 🔥这里把queryChainName也记下来
                                 });
                                 setFromDropdownVisible(false);
 
@@ -464,14 +469,16 @@ const ConvertModal = ({
                                   accountAddress: selectedFrom?.address,
                                 });
 
-                                const chainName = selectedFrom?.chain;
+                                const chainName = selectedFrom?.queryChainName;
                                 if (!chainName) return;
 
                                 setSelectedToChain(chainName);
 
                                 const chainList = [
                                   ...new Set(
-                                    chainCategories.map((item) => item.chain)
+                                    chainCategories.map(
+                                      (item) => item.queryChainName
+                                    )
                                   ),
                                 ];
                                 const index = chainList.indexOf(chainName);
@@ -661,7 +668,8 @@ const ConvertModal = ({
                           {(() => {
                             const fromTokenDetails =
                               getTokenDetails(selectedFromToken);
-                            const fromTokenChain = fromTokenDetails?.chain;
+                            const fromTokenChain =
+                              fromTokenDetails?.queryChainName;
                             const isAllDisabled = !!selectedFromToken; // 有selectedFromToken就禁用All
 
                             return (
@@ -707,7 +715,8 @@ const ConvertModal = ({
                           ].map((chain) => {
                             const fromTokenDetails =
                               getTokenDetails(selectedFromToken);
-                            const fromTokenChain = fromTokenDetails?.chain;
+                            const fromTokenChain =
+                              fromTokenDetails?.queryChainName;
                             const isDisabled =
                               selectedFromToken && fromTokenChain !== chain; // 🔥这里判断
 
@@ -747,7 +756,8 @@ const ConvertModal = ({
                                 <Image
                                   source={
                                     chainCategories.find(
-                                      (category) => category.chain === chain
+                                      (category) =>
+                                        category.queryChainName === chain
                                     )?.chainIcon
                                   }
                                   style={
@@ -777,7 +787,7 @@ const ConvertModal = ({
                             onPress={() => {
                               setSelectedToToken({
                                 shortName: chain.shortName,
-                                chain: chain.chain, // 🔥同样记下来chain
+                                queryChainName: chain.queryChainName, // 🔥同样记下来queryChainName
                               });
                               setToDropdownVisible(false);
 

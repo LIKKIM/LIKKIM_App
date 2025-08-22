@@ -97,6 +97,7 @@ const ConfirmConvertModal = ({
               {/* 网络信息 */}
               <View
                 style={{
+                  flexDirection: "row",
                   marginBottom: 30,
                   alignItems: "flex-start",
                   width: "100%",
@@ -113,7 +114,7 @@ const ConfirmConvertModal = ({
                   }}
                 />
                 <Text style={ActivityScreenStyle.transactionText}>
-                  {getTokenDetails(selectedFromToken)?.chain}
+                  {getTokenDetails(selectedFromToken)?.queryChainName}
                 </Text>
               </View>
 
