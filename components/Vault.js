@@ -101,6 +101,9 @@ const notifyCharacteristicUUID = bluetoothConfig.notifyCharacteristicUUID;
 function VaultScreen({ route, navigation }) {
   // 使用状态
   const [receivedVerificationCode, setReceivedVerificationCode] = useState("");
+  // 新增：主色和副色状态
+  const [mainColor, setMainColor] = useState("#ffffff");
+  const [secondaryColor, setSecondaryColor] = useState("#cccccc");
   const {
     exchangeRates,
     initialAdditionalCryptos,
@@ -734,6 +737,15 @@ function VaultScreen({ route, navigation }) {
     }, 0);
   };
 
+  // 新增：色值回调
+  const handleColorExtracted = (main, secondary, card, index) => {
+    // 只在当前选中卡片时更新色值
+    if (index === selectedCardIndex) {
+      setMainColor(main);
+      setSecondaryColor(secondary);
+    }
+  };
+
   //动画分成了：背景，弹窗，卡片，余额四部分
   const handleCardPress = (cryptoName, cryptoChain, index) => {
     console.log(cardsOffset);
@@ -918,6 +930,8 @@ function VaultScreen({ route, navigation }) {
       backgroundAnim={backgroundAnim}
       darkColorsDown={darkColorsDown}
       lightColorsDown={lightColorsDown}
+      mainColor={mainColor} // 新增：传递主色
+      secondaryColor={secondaryColor} // 新增：传递副色
     />
   );
 
@@ -964,6 +978,7 @@ function VaultScreen({ route, navigation }) {
         setBleVisible={setBleVisible}
         devices={devices}
         verifiedDevices={verifiedDevices}
+        onColorExtracted={handleColorExtracted}
       />
       <ModalsContainer
         selectedCardChainShortName={selectedCardChainShortName}

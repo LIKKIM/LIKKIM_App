@@ -604,6 +604,7 @@ const DeviceStatus = ({
             percentageChange={percentageChange}
             getConvertedBalance={props.getConvertedBalance}
             handleQRCodePress={props.handleQRCodePress}
+            onColorExtracted={props.onColorExtracted}
           />
         );
       })}

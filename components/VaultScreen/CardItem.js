@@ -53,6 +53,7 @@ const CardItem = ({
   percentageChange,
   getConvertedBalance,
   handleQRCodePress,
+  onColorExtracted, // 新增：色值回调
 }) => {
   // 典型色 state
   const [mainColor, setMainColor] = useState("#ffffff");
@@ -77,20 +78,30 @@ const CardItem = ({
       })
         .then((colors) => {
           // 兼容不同平台返回
+          let main = "#ffffff";
+          let secondary = "#cccccc";
           if (colors.platform === "android" || colors.platform === "ios") {
-            setMainColor(colors.primary || "#ffffff");
-            setSecondaryColor(colors.secondary || "#cccccc");
+            main = colors.primary || "#ffffff";
+            secondary = colors.secondary || "#cccccc";
           } else if (colors.platform === "web") {
-            setMainColor(colors.lightVibrant || "#ffffff");
-            setSecondaryColor(colors.darkVibrant || "#cccccc");
+            main = colors.lightVibrant || "#ffffff";
+            secondary = colors.darkVibrant || "#cccccc";
+          }
+          setMainColor(main);
+          setSecondaryColor(secondary);
+          if (onColorExtracted && selectedCardIndex === index) {
+            onColorExtracted(main, secondary, card, index);
           }
         })
         .catch(() => {
           setMainColor("#ffffff");
           setSecondaryColor("#cccccc");
+          if (onColorExtracted && selectedCardIndex === index) {
+            onColorExtracted("#ffffff", "#cccccc", card, index);
+          }
         });
     }
-  }, [card.cardImage]);
+  }, [card.cardImage, selectedCardIndex]);
 
   return (
     <TouchableHighlight

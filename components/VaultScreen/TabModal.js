@@ -29,6 +29,8 @@ const TabModal = ({
   backgroundAnim,
   darkColorsDown,
   lightColorsDown,
+  mainColor, // 新增
+  secondaryColor, // 新增
 }) => {
   const [ActivityLog, setActivityLog] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -78,6 +80,10 @@ const TabModal = ({
   };
 
   useEffect(() => {
+    // 打印色值
+    if (mainColor && secondaryColor) {
+      console.log("TabModal接收到的主色:", mainColor, "副色:", secondaryColor);
+    }
     const fetchActivityLog = async () => {
       if (selectedCrypto && activeTab === "History") {
         try {
@@ -319,6 +325,47 @@ const TabModal = ({
       <Animated.View
         style={[VaultScreenStyle.cardModalView, { opacity: backgroundAnim }]}
       >
+        {/* 色值球 */}
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center",
+            marginTop: 24,
+            marginBottom: 12,
+            zIndex: 3,
+          }}
+        >
+          <View
+            style={{
+              width: 60,
+              height: 60,
+              borderRadius: 30,
+              backgroundColor: mainColor,
+              opacity: 0.7,
+              marginRight: 24,
+              shadowColor: mainColor,
+              shadowOffset: { width: 0, height: 0 },
+              shadowOpacity: 0.6,
+              shadowRadius: 20,
+              elevation: 8,
+            }}
+          />
+          <View
+            style={{
+              width: 60,
+              height: 60,
+              borderRadius: 30,
+              backgroundColor: secondaryColor,
+              opacity: 0.7,
+              shadowColor: secondaryColor,
+              shadowOffset: { width: 0, height: 0 },
+              shadowOpacity: 0.6,
+              shadowRadius: 20,
+              elevation: 8,
+            }}
+          />
+        </View>
         <LinearGradient
           colors={isDarkMode ? darkColorsDown : lightColorsDown}
           style={[VaultScreenStyle.cardModalView]}
