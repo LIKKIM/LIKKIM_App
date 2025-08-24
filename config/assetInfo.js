@@ -6,7 +6,6 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/ARBIcon.png"), // 数子货币的icon (服务器获取)
     cardImage: require("../assets/CardBg/Card15.png"), // 卡片的背景图片 (服务器获取)
     chainIcon: require("../assets/icon/ARBIcon.png"), // 数子货币所在的区块链的icon (服务器获取)
-
     chainShortName: "ARB", // 数子货币所在的区块链的名称缩写 （需要以后删掉因为和queryChainShortName完全重复的） (服务器获取)
     queryChainName: "arbitrum", // 数子货币所在的区块链的名称 (服务器获取)
     queryChainShortName: "ARB", // 数子货币所在的区块链的名称缩写 (服务器获取)
@@ -27,7 +26,6 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/DAIIcon.png"),
     cardImage: require("../assets/CardBg/Card55.png"),
     address: "",
-
     chainShortName: "ARB", // (和上一个相同)
     queryChainName: "arbitrum", // (和上一个相同)
     queryChainShortName: "ARB", // (和上一个相同)
@@ -47,7 +45,6 @@ export const initialAdditionalCryptos = [
     icon: require("../assets/icon/USDTIcon.png"),
     cardImage: require("../assets/CardBg/Card101.png"),
     address: "",
-
     chainShortName: "ARB",
     chainIcon: require("../assets/icon/ARBIcon.png"),
     queryChainShortName: "ARB",

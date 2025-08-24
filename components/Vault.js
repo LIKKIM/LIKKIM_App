@@ -121,7 +121,6 @@ function VaultScreen({ route, navigation }) {
     setVerifiedDevices,
     cryptoCards,
     setCryptoCards,
-    handleUpdateCryptoCards,
     updateDevicePubHintKey,
   } = useContext(DeviceContext);
   // First, use dark mode from route params
