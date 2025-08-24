@@ -1,4 +1,26 @@
-// DeviceContext.js
+/**
+ * DeviceContext.js
+ * 本文件函数说明（定义与使用）：
+ *
+ * updateCryptoAddress：根据链名更新加密货币地址，支持链和非支持链分别处理，涉及本地存储和内存状态同步。
+ * updateDevicePubHintKey：根据链名更新加密货币的公钥，并持久化到本地存储。
+ * updateCryptoData：更新支持链的加密货币数据（如余额、地址等），并同步到本地存储。
+ * fetchAndStoreConvertRates：从远程API获取最新汇率数据，并存储到本地。
+ * toggleScreenLock：切换屏幕锁定功能的开关状态，并同步到本地存储。
+ * changeScreenLockPassword：更改屏幕锁定密码，并保存到本地存储。
+ * useEffect（加载交易历史）：组件挂载时从本地存储加载交易历史到内存。
+ * useEffect（保存交易历史）：交易历史变更时自动保存到本地存储。
+ * useEffect（保存addedCryptos）：addedCryptos变更时自动保存到本地存储。
+ * useEffect（加载用户设置）：组件挂载时加载深色模式、货币单位、语言、已添加币种、验证状态、设备、屏幕锁等用户设置。
+ * useEffect（保存用户设置）：相关设置变更时自动保存到本地存储。
+ * useEffect（获取汇率）：组件挂载时自动获取最新汇率。
+ *
+ * 外部依赖函数/对象说明：
+ * AsyncStorage：用于本地数据的持久化存储和读取。
+ * i18n：用于多语言切换。
+ * BleManager：蓝牙设备管理实例。
+ * fetch：用于网络请求，获取远程数据。
+ */
 
 import React, { createContext, useState, useEffect, useRef } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
