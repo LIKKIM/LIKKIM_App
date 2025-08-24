@@ -59,6 +59,128 @@ const CardItem = ({
   const [mainColor, setMainColor] = useState("#ffffff");
   const [secondaryColor, setSecondaryColor] = useState("#cccccc");
 
+  const clamp01 = (v) => Math.min(1, Math.max(0, v));
+
+  // 把明度拉到安全区间（过暗提亮，过亮压暗）
+  function normalizeLightness(
+    hex,
+    { minL = 0.45, maxL = 0.85, targetL = 0.58 } = {}
+  ) {
+    const { h, s, l } = hexToHsl(hex);
+    let nl = l;
+    if (l < minL) nl = targetL;
+    else if (l > maxL) nl = targetL;
+    return hslToHex(h, s, nl);
+  }
+
+  // 颜色太灰时，给一点最小饱和度
+  function ensureSaturation(hex, minS = 0.25) {
+    const hsl = hexToHsl(hex);
+    if (hsl.s < minS) hsl.s = minS;
+    return hslToHex(hsl.h, hsl.s, hsl.l);
+  }
+
+  // 简单的 HEX -> HSL -> HEX 转换
+  function hexToHsl(hex) {
+    hex = hex.replace("#", "");
+    if (hex.length === 3) {
+      hex = hex
+        .split("")
+        .map((c) => c + c)
+        .join("");
+    }
+    const bigint = parseInt(hex, 16);
+    const r = (bigint >> 16) & 255;
+    const g = (bigint >> 8) & 255;
+    const b = bigint & 255;
+
+    const rPerc = r / 255;
+    const gPerc = g / 255;
+    const bPerc = b / 255;
+
+    const max = Math.max(rPerc, gPerc, bPerc);
+    const min = Math.min(rPerc, gPerc, bPerc);
+    let h,
+      s,
+      l = (max + min) / 2;
+
+    if (max === min) {
+      h = s = 0; // 灰色
+    } else {
+      const d = max - min;
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      switch (max) {
+        case rPerc:
+          h = (gPerc - bPerc) / d + (gPerc < bPerc ? 6 : 0);
+          break;
+        case gPerc:
+          h = (bPerc - rPerc) / d + 2;
+          break;
+        case bPerc:
+          h = (rPerc - gPerc) / d + 4;
+          break;
+      }
+      h *= 60;
+    }
+    return { h, s, l };
+  }
+
+  function hslToHex(h, s, l) {
+    s = Math.max(0, Math.min(1, s));
+    l = Math.max(0, Math.min(1, l));
+    h = ((h % 360) + 360) % 360;
+
+    const c = (1 - Math.abs(2 * l - 1)) * s;
+    const x = c * (1 - Math.abs(((h / 60) % 2) - 1));
+    const m = l - c / 2;
+    let r = 0,
+      g = 0,
+      b = 0;
+
+    if (h < 60) {
+      r = c;
+      g = x;
+    } else if (h < 120) {
+      r = x;
+      g = c;
+    } else if (h < 180) {
+      g = c;
+      b = x;
+    } else if (h < 240) {
+      g = x;
+      b = c;
+    } else if (h < 300) {
+      r = x;
+      b = c;
+    } else {
+      r = c;
+      b = x;
+    }
+
+    const toHex = (v) => {
+      const n = Math.round((v + m) * 255);
+      return n.toString(16).padStart(2, "0");
+    };
+    return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+  }
+
+  function generateSecondaryFromMain(mainHex, shift = 120) {
+    const { h, s, l } = hexToHsl(mainHex);
+    return hslToHex(h + shift, s, l);
+  }
+
+  // 若 secondary 与 main 明度太接近，拉开一点
+  function separateLightness(mainHex, secondaryHex, minDeltaL = 0.12) {
+    const m = hexToHsl(mainHex);
+    const s = hexToHsl(secondaryHex);
+    if (Math.abs(m.l - s.l) < minDeltaL) {
+      // 根据主色的明度，选择提亮或压暗副色
+      s.l =
+        m.l > 0.5 ? Math.max(0, m.l - minDeltaL) : Math.min(1, m.l + minDeltaL);
+    }
+    return hslToHex(s.h, s.s, s.l);
+  }
+
   useEffect(() => {
     let imageUri = null;
     if (card.cardImage) {
@@ -77,22 +199,41 @@ const CardItem = ({
         key: imageUri,
       })
         .then((colors) => {
-          // 兼容不同平台返回
           let main = "#ffffff";
           let secondary = "#cccccc";
+
           if (colors.platform === "android" || colors.platform === "ios") {
-            main = colors.primary || "#ffffff";
-            secondary = colors.secondary || "#cccccc";
+            // iOS/Android：用 background 更接近整体基调，若没有则回退 primary
+            main = colors.background || colors.primary || "#ffffff";
           } else if (colors.platform === "web") {
-            main = colors.lightVibrant || "#ffffff";
-            secondary = colors.darkVibrant || "#cccccc";
+            // Web：lightVibrant 没有就回 dominant
+            main = colors.lightVibrant || colors.dominant || "#ffffff";
           }
+
+          // 关键：暗就提亮、亮就压暗；太灰就加点饱和度
+          main = normalizeLightness(main, {
+            minL: 0.45,
+            maxL: 0.85,
+            targetL: 0.58,
+          });
+          main = ensureSaturation(main, 0.25);
+          secondary = generateSecondaryFromMain(main, 15);
+          secondary = ensureSaturation(secondary, 0.25);
+          secondary = normalizeLightness(secondary, {
+            minL: 0.35,
+            maxL: 0.9,
+            targetL: 0.5,
+          });
+          secondary = separateLightness(main, secondary, 0.12);
+
           setMainColor(main);
           setSecondaryColor(secondary);
+
           if (onColorExtracted && selectedCardIndex === index) {
             onColorExtracted(main, secondary, card, index);
           }
         })
+
         .catch(() => {
           setMainColor("#ffffff");
           setSecondaryColor("#cccccc");
