@@ -148,7 +148,53 @@ const TabModal = ({
     setIsModalVisible(false);
     setSelectedTransaction(null);
   };
-  const { height } = Dimensions.get("window");
+  const { height, width } = Dimensions.get("window");
+
+  // 用于色值球动画
+  const leftAnim = useRef(new Animated.Value(width * 0.3)).current; // 初始30%
+  const rightAnim = useRef(new Animated.Value(width * 0.0)).current; // 初始0%
+
+  // left动画递归
+  useEffect(() => {
+    let isMounted = true;
+    function animateLeft() {
+      if (!isMounted) return;
+      // 随机目标: left边距-10%~50%
+      const target = width * (-0.1 + 0.6 * Math.random());
+      Animated.timing(leftAnim, {
+        toValue: target,
+        duration: 4000 + Math.random() * 2000, // 4-6秒
+        useNativeDriver: false,
+      }).start(() => {
+        setTimeout(animateLeft, 0);
+      });
+    }
+    animateLeft();
+    return () => {
+      isMounted = false;
+    };
+  }, [width, leftAnim]);
+
+  // right动画递归
+  useEffect(() => {
+    let isMounted = true;
+    function animateRight() {
+      if (!isMounted) return;
+      // 随机目标: right边距-10%~50%
+      const target = width * (-0.1 + 0.6 * Math.random());
+      Animated.timing(rightAnim, {
+        toValue: target,
+        duration: 4000 + Math.random() * 2000, // 4-6秒
+        useNativeDriver: false,
+      }).start(() => {
+        setTimeout(animateRight, 0);
+      });
+    }
+    animateRight();
+    return () => {
+      isMounted = false;
+    };
+  }, [width, rightAnim]);
 
   const renderTabContent = () => {
     switch (activeTab) {
@@ -338,25 +384,24 @@ const TabModal = ({
             position: "relative",
           }}
         >
-          <View
+          <Animated.View
             style={{
               position: "absolute",
               bottom: 0,
-              left: "30%",
+              left: leftAnim,
               width: "40%",
               height: "20%",
               borderRadius: 100,
               backgroundColor: mainColor,
               opacity: 0.3,
-
               marginBottom: "-10%",
             }}
           />
-          <View
+          <Animated.View
             style={{
               position: "absolute",
               bottom: 0,
-              right: "0%",
+              right: rightAnim,
               width: "80%",
               height: "30%",
               borderRadius: 100,
