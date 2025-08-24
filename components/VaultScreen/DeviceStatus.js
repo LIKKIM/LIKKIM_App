@@ -55,6 +55,7 @@ import * as FileSystem from "expo-file-system";
 import { queryNFTDetail } from "../../utils/queryNFTDetail";
 import { handleSaveToDevice } from "../../utils/handleSaveToDevice";
 import { handleSendDigital } from "../../utils/handleSendDigital";
+import CardItem from "./CardItem";
 const bleManager = new BleManager();
 
 const serviceUUID = bluetoothConfig.serviceUUID;
@@ -586,190 +587,28 @@ const DeviceStatus = ({
             : "#F44336";
 
         return (
-          <TouchableHighlight
-            underlayColor={"transparent"}
+          <CardItem
             key={`${card.shortName}_${index}`}
-            onPress={() =>
-              handleCardPress(card.name, card.queryChainName, index)
-            }
-            ref={(el) => {
-              cardRefs.current[index] = el;
-              initCardPosition(el, index);
-            }}
-            style={[VaultScreenStyle.cardContainer]}
-            disabled={modalVisible}
-          >
-            <Animated.View
-              style={[
-                VaultScreenStyle.card,
-                index === 0
-                  ? VaultScreenStyle.cardFirst
-                  : VaultScreenStyle.cardOthers,
-                {
-                  transform: [
-                    {
-                      translateY:
-                        selectedCardIndex === index
-                          ? selectCardOffsetOpenAni
-                          : selectCardOffsetCloseAni,
-                    },
-                  ],
-                },
-                // selectedCardIndex === index && animatedCardStyle(index),
-              ]}
-            >
-              <ImageBackground
-                source={card.cardImage}
-                style={{ width: "100%", height: "100%" }}
-                imageStyle={{ borderRadius: 16 }}
-              >
-                {["cardIconContainer", "cardChainIconContainer"].map(
-                  (styleKey, i) => (
-                    <View key={i} style={VaultScreenStyle[styleKey]}>
-                      <Image
-                        source={i === 0 ? card.icon : card.chainIcon}
-                        style={
-                          i === 0
-                            ? VaultScreenStyle.cardIcon
-                            : VaultScreenStyle.chainIcon
-                        }
-                      />
-                    </View>
-                  )
-                )}
-                <View style={{ position: "absolute", top: 25, left: 65 }}>
-                  <View style={VaultScreenStyle.cardInfoContainer}>
-                    {["cardName", "chainText"].map((textStyle, i) =>
-                      i === 0 ? (
-                        <Text
-                          key={i}
-                          style={[
-                            VaultScreenStyle[textStyle],
-                            {
-                              color: isBlackText ? "#333" : "#eee",
-                              marginRight: 4,
-                              marginBottom: 4,
-                            },
-                          ]}
-                        >
-                          {card.name}
-                        </Text>
-                      ) : (
-                        <View
-                          key={i}
-                          style={[
-                            VaultScreenStyle.chainContainer,
-                            { marginTop: 4 },
-                          ]}
-                        >
-                          <Text
-                            style={[
-                              VaultScreenStyle.chainCardText,
-                              { color: isBlackText ? "#333" : "#eee" },
-                            ]}
-                          >
-                            {card.queryChainName
-                              ? card.queryChainName.charAt(0).toUpperCase() +
-                                card.queryChainName.slice(1)
-                              : ""}
-                          </Text>
-                        </View>
-                      )
-                    )}
-                  </View>
-
-                  <Image
-                    source={require("../../assets/CardBg/Logo.png")}
-                    style={{
-                      left: 50,
-                      top: -60,
-                      opacity: 0.2,
-                      width: 280,
-                      height: 280,
-                      transform: [{ rotate: "-10deg" }],
-                    }}
-                  />
-                  <Text
-                    style={[
-                      VaultScreenStyle.cardShortName,
-                      isBlackText && { color: "#121518" },
-                    ]}
-                  >
-                    {card.shortName}
-                  </Text>
-                </View>
-                {!modalVisible ? (
-                  <>
-                    <Text
-                      style={[
-                        VaultScreenStyle.cardBalance,
-                        isBlackText && { color: "#121518" },
-                      ]}
-                    >
-                      {`${formatBalance(card.balance)}  ${card.shortName}`}
-                    </Text>
-                    <View style={VaultScreenStyle.priceChangeView}>
-                      <Text style={{ color: textColor, fontWeight: "bold" }}>
-                        {percentageChange > 0 ? "+" : ""}
-                        {percentageChange}%
-                      </Text>
-                      <Text
-                        style={[
-                          VaultScreenStyle.balanceShortNameCenter,
-                          isBlackText && { color: "#121518" },
-                        ]}
-                      >
-                        {`${Number(
-                          props.getConvertedBalance(
-                            card.balance,
-                            card.shortName
-                          )
-                        ).toFixed(2)} ${currencyUnit}`}
-                      </Text>
-                    </View>
-                  </>
-                ) : (
-                  cardInfoVisible && (
-                    <View style={VaultScreenStyle.cardModalContent}>
-                      <TouchableOpacity
-                        opacity={1}
-                        onPress={() => props.handleQRCodePress(card)}
-                        style={{ position: "absolute", right: 0, top: 0 }}
-                      >
-                        <Image
-                          source={require("../../assets/icon/QR.png")}
-                          style={[
-                            VaultScreenStyle.QRImg,
-                            isBlackText && { tintColor: "#121518" },
-                          ]}
-                        />
-                      </TouchableOpacity>
-                      {["cardBalanceCenter", "balanceShortNameCenter"].map(
-                        (styleKey, i) => (
-                          <Text
-                            key={i}
-                            style={[
-                              VaultScreenStyle[styleKey],
-                              isBlackText && { color: "#121518" },
-                            ]}
-                          >
-                            {`${
-                              i === 0
-                                ? formatBalance(card.balance)
-                                : props.getConvertedBalance(
-                                    card.balance,
-                                    card.shortName
-                                  )
-                            } ${i === 0 ? card.shortName : currencyUnit}`}
-                          </Text>
-                        )
-                      )}
-                    </View>
-                  )
-                )}
-              </ImageBackground>
-            </Animated.View>
-          </TouchableHighlight>
+            card={card}
+            index={index}
+            modalVisible={modalVisible}
+            selectedCardIndex={selectedCardIndex}
+            selectCardOffsetOpenAni={selectCardOffsetOpenAni}
+            selectCardOffsetCloseAni={selectCardOffsetCloseAni}
+            VaultScreenStyle={VaultScreenStyle}
+            isBlackText={isBlackText}
+            animatedCardStyle={animatedCardStyle}
+            cardRefs={cardRefs}
+            initCardPosition={initCardPosition}
+            handleCardPress={handleCardPress}
+            cardInfoVisible={cardInfoVisible}
+            formatBalance={formatBalance}
+            currencyUnit={currencyUnit}
+            textColor={textColor}
+            percentageChange={percentageChange}
+            getConvertedBalance={props.getConvertedBalance}
+            handleQRCodePress={props.handleQRCodePress}
+          />
         );
       })}
 
