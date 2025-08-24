@@ -142,12 +142,12 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
     cancelButton: {
       ...buttonBase,
       borderColor: c.buttonBg,
-      borderWidth: 3,
+      borderWidth: 2,
     },
     cancelButtonLookingFor: {
       ...buttonBase,
       borderColor: c.buttonBg,
-      borderWidth: 3,
+      borderWidth: 2,
       marginTop: 20,
     },
     cancelButtonText: { color: c.cancelBtnText, fontSize: FONT_SIZE_16 },
@@ -167,12 +167,12 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
     closeButton: {
       ...buttonBase,
       borderColor: c.buttonBg,
-      borderWidth: 3,
+      borderWidth: 2,
     },
     backButton: {
       flex: 1,
       borderColor: c.buttonBg,
-      borderWidth: 3,
+      borderWidth: 2,
       padding: 10,
       justifyContent: "center",
       borderRadius: 15,
@@ -283,7 +283,7 @@ const SecureDeviceScreenStyles = (isDarkMode) => {
     languageCancelButton: {
       ...buttonBase,
       borderColor: c.buttonBg,
-      borderWidth: 3,
+      borderWidth: 2,
       width: "90%",
       position: "absolute",
       bottom: 30,

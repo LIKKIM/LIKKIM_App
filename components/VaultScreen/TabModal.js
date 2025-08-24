@@ -153,18 +153,25 @@ const TabModal = ({
   // 用于色值球动画
   const leftAnim = useRef(new Animated.Value(width * 0.3)).current; // 初始30%
   const rightAnim = useRef(new Animated.Value(width * 0.0)).current; // 初始0%
+  // 新增：上下动画
+  const leftBottomAnim = useRef(new Animated.Value(0)).current;
+  const rightBottomAnim = useRef(new Animated.Value(0)).current;
 
   // 互斥动画递归
   useEffect(() => {
     let isMounted = true;
     const minDistance = 100; // 最小距离，单位px，可根据需要调整
 
-    // left球在左半区（-20%~50%），right球在右半区（10%~60%）
+    // left球在左半区（-20%~50%），right球在右半区（-10%~30%）
     function getRandomLeft() {
       return width * (-0.2 + 0.7 * Math.random());
     }
     function getRandomRight() {
-      return width * (0.1 + 0.5 * Math.random());
+      return width * (-0.1 + 0.4 * Math.random());
+    }
+    // 新增：上下动画目标
+    function getRandomBottom() {
+      return height * (0 + 0.05 * Math.random());
     }
 
     function animateLeft() {
@@ -218,12 +225,38 @@ const TabModal = ({
       });
     }
 
+    // 新增：上下动画递归
+    function animateLeftBottom() {
+      if (!isMounted) return;
+      const target = getRandomBottom();
+      Animated.timing(leftBottomAnim, {
+        toValue: target,
+        duration: 4000 + Math.random() * 2000,
+        useNativeDriver: false,
+      }).start(() => {
+        setTimeout(animateLeftBottom, 0);
+      });
+    }
+    function animateRightBottom() {
+      if (!isMounted) return;
+      const target = getRandomBottom();
+      Animated.timing(rightBottomAnim, {
+        toValue: target,
+        duration: 4000 + Math.random() * 2000,
+        useNativeDriver: false,
+      }).start(() => {
+        setTimeout(animateRightBottom, 0);
+      });
+    }
+
     animateLeft();
     animateRight();
+    animateLeftBottom();
+    animateRightBottom();
     return () => {
       isMounted = false;
     };
-  }, [width, leftAnim, rightAnim]);
+  }, [width, height, leftAnim, rightAnim, leftBottomAnim, rightBottomAnim]);
 
   const renderTabContent = () => {
     switch (activeTab) {
@@ -416,27 +449,27 @@ const TabModal = ({
           <Animated.View
             style={{
               position: "absolute",
-              bottom: 0,
+              bottom: leftBottomAnim,
               left: leftAnim,
-              width: "30%",
+              width: "40%",
               height: "20%",
               borderRadius: 100,
               backgroundColor: mainColor,
-              opacity: 0.3,
-              marginBottom: "-10%",
+              opacity: 0.4,
+              marginBottom: "-12%",
             }}
           />
           <Animated.View
             style={{
               position: "absolute",
-              bottom: 0,
+              bottom: rightBottomAnim,
               right: rightAnim,
-              width: "60%",
+              width: "80%",
               height: "30%",
               borderRadius: 100,
               backgroundColor: secondaryColor,
               opacity: 0.1,
-              marginBottom: "-5%",
+              marginBottom: "-8%",
             }}
           />
           <BlurView
@@ -519,7 +552,7 @@ const TabModal = ({
         <View style={{ flex: 1 }}>{renderTabContent()}</View>
         <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
           <TouchableOpacity
-            style={VaultScreenStyle.cancelButtonCryptoCard}
+            style={VaultScreenStyle.cancelButtonCardItem}
             onPress={closeModal}
             onPressIn={handlePressIn}
             onPressOut={handlePressOut}
@@ -665,7 +698,7 @@ const TabModal = ({
             <TouchableOpacity
               onPress={closeTransactionModal}
               style={{
-                borderWidth: 3,
+                borderWidth: 2,
                 borderColor: isDarkMode ? "#CCB68C" : "#CFAB95",
                 padding: 10,
                 width: 280,
