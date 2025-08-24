@@ -334,8 +334,6 @@ const TabModal = ({
             flexDirection: "row",
             justifyContent: "center",
             alignItems: "center",
-            marginTop: 24,
-            marginBottom: 12,
             zIndex: 3,
             position: "relative",
           }}
@@ -344,35 +342,28 @@ const TabModal = ({
             style={{
               position: "absolute",
               bottom: 0,
-              left: "25%",
-              width: "30%",
-              height: "25%",
-              borderRadius: 30,
+              left: "30%",
+              width: "40%",
+              height: "20%",
+              borderRadius: 100,
               backgroundColor: mainColor,
-              opacity: 0.7,
-              marginRight: 24,
-              //    shadowColor: mainColor,
-              //    shadowOffset: { width: 0, height: 0 },
-              //    shadowOpacity: 0.6,
-              //    shadowRadius: 20,
-              //    elevation: 8,
+              opacity: 0.3,
+
+              marginBottom: "-10%",
             }}
           />
           <View
             style={{
               position: "absolute",
               bottom: 0,
-              right: "25%",
-              width: "30%",
-              height: "25%",
-              borderRadius: 30,
+              right: "0%",
+              width: "80%",
+              height: "30%",
+              borderRadius: 100,
               backgroundColor: secondaryColor,
-              opacity: 0.7,
-              //      shadowColor: secondaryColor,
-              //      shadowOffset: { width: 0, height: 0 },
-              //      shadowOpacity: 0.6,
-              //      shadowRadius: 20,
-              //      elevation: 8,
+              opacity: 0.2,
+              marginRight: "-5%",
+              marginBottom: "-5%",
             }}
           />
           <BlurView
@@ -384,9 +375,9 @@ const TabModal = ({
               right: 0,
               borderRadius: 30,
               zIndex: 3,
-              opacity: 0.7,
+              opacity: 1,
             }}
-            intensity={10}
+            intensity={100}
             tint={isDarkMode ? "dark" : "light"}
             pointerEvents="none"
           />
