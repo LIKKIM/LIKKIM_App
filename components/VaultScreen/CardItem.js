@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   TouchableHighlight,
   Animated,
@@ -8,6 +8,7 @@ import {
   Text,
   TouchableOpacity,
 } from "react-native";
+import { getColors as getImageColors } from "react-native-image-colors";
 
 /**
  * 卡片组件，负责渲染单个资产卡片
@@ -53,6 +54,44 @@ const CardItem = ({
   getConvertedBalance,
   handleQRCodePress,
 }) => {
+  // 典型色 state
+  const [mainColor, setMainColor] = useState("#ffffff");
+  const [secondaryColor, setSecondaryColor] = useState("#cccccc");
+
+  useEffect(() => {
+    let imageUri = null;
+    if (card.cardImage) {
+      if (typeof card.cardImage === "number") {
+        // require 本地图片
+        const resolved = Image.resolveAssetSource(card.cardImage);
+        imageUri = resolved?.uri;
+      } else if (card.cardImage.uri) {
+        imageUri = card.cardImage.uri;
+      }
+    }
+    if (imageUri) {
+      getImageColors(imageUri, {
+        fallback: "#ffffff",
+        cache: true,
+        key: imageUri,
+      })
+        .then((colors) => {
+          // 兼容不同平台返回
+          if (colors.platform === "android" || colors.platform === "ios") {
+            setMainColor(colors.primary || "#ffffff");
+            setSecondaryColor(colors.secondary || "#cccccc");
+          } else if (colors.platform === "web") {
+            setMainColor(colors.lightVibrant || "#ffffff");
+            setSecondaryColor(colors.darkVibrant || "#cccccc");
+          }
+        })
+        .catch(() => {
+          setMainColor("#ffffff");
+          setSecondaryColor("#cccccc");
+        });
+    }
+  }, [card.cardImage]);
+
   return (
     <TouchableHighlight
       underlayColor={"transparent"}
@@ -89,6 +128,38 @@ const CardItem = ({
           style={{ width: "100%", height: "100%" }}
           imageStyle={{ borderRadius: 16 }}
         >
+          {/* 显示主色和副色 */}
+          <View
+            style={{
+              position: "absolute",
+              top: 10,
+              right: 10,
+              flexDirection: "row",
+              zIndex: 10,
+            }}
+          >
+            <View
+              style={{
+                width: 24,
+                height: 24,
+                borderRadius: 12,
+                backgroundColor: mainColor,
+                marginRight: 8,
+                borderWidth: 1,
+                borderColor: "#fff",
+              }}
+            />
+            <View
+              style={{
+                width: 24,
+                height: 24,
+                borderRadius: 12,
+                backgroundColor: secondaryColor,
+                borderWidth: 1,
+                borderColor: "#fff",
+              }}
+            />
+          </View>
           {["cardIconContainer", "cardChainIconContainer"].map(
             (styleKey, i) => (
               <View key={i} style={VaultScreenStyle[styleKey]}>

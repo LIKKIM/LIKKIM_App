@@ -21,7 +21,9 @@
     "pushPlayStore": "eas build --auto-submit --platform android",
     "DownloadKeystore": "eas credentials --platform android",
     "registerDevice": "eas device:create",
-    "expoGo": "expo start"
+    "expoGo": "expo start",
+    "android": "expo run:android",
+    "ios": "expo run:ios"
   },
   "dependencies": {
     "@babel/plugin-proposal-export-namespace-from": "^7.18.9",
@@ -65,6 +67,7 @@
     "react-native-draggable-flatlist": "^4.0.1",
     "react-native-gesture-handler": "~2.14.0",
     "react-native-get-random-values": "~1.8.0",
+    "react-native-image-colors": "^2.5.0",
     "react-native-image-resizer": "^1.4.5",
     "react-native-locale-detector": "^1.0.1",
     "react-native-maps": "1.10.0",
