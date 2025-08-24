@@ -13,6 +13,7 @@ import {
 } from "react-native";
 import PriceChartCom from "../VaultScreen/PriceChartCom";
 import { LinearGradient } from "expo-linear-gradient";
+import { BlurView } from "expo-blur";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { accountAPI } from "../../env/apiEndpoints";
 
@@ -328,44 +329,69 @@ const TabModal = ({
         {/* 色值球 */}
         <View
           style={{
+            width: "100%",
+            height: "100%",
             flexDirection: "row",
             justifyContent: "center",
             alignItems: "center",
             marginTop: 24,
             marginBottom: 12,
             zIndex: 3,
+            position: "relative",
           }}
         >
           <View
             style={{
-              width: 60,
-              height: 60,
+              position: "absolute",
+              bottom: 0,
+              left: "25%",
+              width: "30%",
+              height: "25%",
               borderRadius: 30,
               backgroundColor: mainColor,
               opacity: 0.7,
               marginRight: 24,
-              shadowColor: mainColor,
-              shadowOffset: { width: 0, height: 0 },
-              shadowOpacity: 0.6,
-              shadowRadius: 20,
-              elevation: 8,
+              //    shadowColor: mainColor,
+              //    shadowOffset: { width: 0, height: 0 },
+              //    shadowOpacity: 0.6,
+              //    shadowRadius: 20,
+              //    elevation: 8,
             }}
           />
           <View
             style={{
-              width: 60,
-              height: 60,
+              position: "absolute",
+              bottom: 0,
+              right: "25%",
+              width: "30%",
+              height: "25%",
               borderRadius: 30,
               backgroundColor: secondaryColor,
               opacity: 0.7,
-              shadowColor: secondaryColor,
-              shadowOffset: { width: 0, height: 0 },
-              shadowOpacity: 0.6,
-              shadowRadius: 20,
-              elevation: 8,
+              //      shadowColor: secondaryColor,
+              //      shadowOffset: { width: 0, height: 0 },
+              //      shadowOpacity: 0.6,
+              //      shadowRadius: 20,
+              //      elevation: 8,
             }}
           />
+          <BlurView
+            style={{
+              position: "absolute",
+              bottom: 0,
+              top: 0,
+              left: 0,
+              right: 0,
+              borderRadius: 30,
+              zIndex: 3,
+              opacity: 0.7,
+            }}
+            intensity={10}
+            tint={isDarkMode ? "dark" : "light"}
+            pointerEvents="none"
+          />
         </View>
+
         <LinearGradient
           colors={isDarkMode ? darkColorsDown : lightColorsDown}
           style={[VaultScreenStyle.cardModalView]}
