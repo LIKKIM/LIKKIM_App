@@ -73,9 +73,9 @@ const CheckStatusModal = ({
     );
   } else if (status === "noWalletInHardware") {
     imageSource = FailGif;
-    title = t("No wallet found in LUKKEY hardware");
+    title = t("No asset account found in LUKKEY hardware");
     subtitle = t(
-      "Please create or import a wallet in your LUKKEY hardware device."
+      "Please create or import an asset account in your LUKKEY hardware device."
     );
   }
 

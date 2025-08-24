@@ -21,6 +21,10 @@ i18n
     resources: {
       en: {
         translation: {
+          "No asset account found in LUKKEY hardware":
+            "No asset account found in LUKKEY hardware",
+          "Please create or import an asset account in your LUKKEY hardware device.":
+            "Please create or import an asset account in your LUKKEY hardware device.",
           Synchronized: "Synchronized",
           "Verification successful!": "Verification successful!",
           "You can now safely use the device.":
@@ -208,6 +212,10 @@ i18n
       },
       zh: {
         translation: {
+          "No asset account found in LUKKEY hardware":
+            "在 LUKKEY 硬件中未找到资产账户",
+          "Please create or import an asset account in your LUKKEY hardware device.":
+            "请在您的 LUKKEY 硬件设备中创建或导入资产账户。",
           Synchronized: "已同步",
           "Verification successful!": "验证成功！",
           "You can now safely use the device.": "您现在可以安全地使用该设备。",
@@ -387,6 +395,10 @@ i18n
       },
       "zh-TW": {
         translation: {
+          "No asset account found in LUKKEY hardware":
+            "在 LUKKEY 硬體中未找到資產帳戶",
+          "Please create or import an asset account in your LUKKEY hardware device.":
+            "請在您的 LUKKEY 硬體裝置中建立或匯入資產帳戶。",
           Synchronized: "已同步",
           "Verification successful!": "驗證成功！",
           "You can now safely use the device.": "您現在可以安全地使用該設備。",
@@ -565,6 +577,10 @@ i18n
       },
       fr: {
         translation: {
+          "No asset account found in LUKKEY hardware":
+            "Aucun compte d’actif trouvé dans le matériel LUKKEY",
+          "Please create or import an asset account in your LUKKEY hardware device.":
+            "Veuillez créer ou importer un compte d’actif dans votre appareil matériel LUKKEY.",
           Synchronized: "Synchronisé",
           "Verification successful!": "Vérification réussie !",
           "You can now safely use the device.":
@@ -757,6 +773,10 @@ i18n
       },
       es: {
         translation: {
+          "No asset account found in LUKKEY hardware":
+            "No se encontró ninguna cuenta de activo en el hardware de LUKKEY",
+          "Please create or import an asset account in your LUKKEY hardware device.":
+            "Por favor, crea o importa una cuenta de activo en tu dispositivo de hardware LUKKEY.",
           Synchronized: "Sincronizado",
           "Verification successful!": "¡Verificación exitosa!",
           "You can now safely use the device.":
@@ -948,6 +968,10 @@ i18n
       },
       ar: {
         translation: {
+          "No asset account found in LUKKEY hardware":
+            "لم يتم العثور على حساب أصول في جهاز LUKKEY",
+          "Please create or import an asset account in your LUKKEY hardware device.":
+            "يرجى إنشاء أو استيراد حساب أصول في جهاز LUKKEY الخاص بك.",
           Synchronized: "متزامن",
           "Verification successful!": "تم التحقق بنجاح!",
           "You can now safely use the device.":
@@ -1132,6 +1156,10 @@ i18n
       },
       ja: {
         translation: {
+          "No asset account found in LUKKEY hardware":
+            "LUKKEY ハードウェアに資産アカウントが見つかりません",
+          "Please create or import an asset account in your LUKKEY hardware device.":
+            "LUKKEY ハードウェアデバイスに資産アカウントを作成またはインポートしてください。",
           Synchronized: "同期済み",
           "Verification successful!": "検証に成功しました！",
           "You can now safely use the device.":
@@ -1317,6 +1345,14 @@ i18n
       },
       ru: {
         translation: {
+          "No asset account found in LUKKEY hardware":
+            "В оборудовании LUKKEY не найден аккаунт актива",
+          "Please create or import an asset account in your LUKKEY hardware device.":
+            "Пожалуйста, создайте или импортируйте аккаунт актива в ваше устройство LUKKEY.",
+          "No asset account found in LUKKEY hardware":
+            "В оборудовании LUKKEY не найден аккаунт актива",
+          "Please create or import an asset account in your LUKKEY hardware device.":
+            "Пожалуйста, создайте или импортируйте аккаунт актива в ваше устройство LUKKEY.",
           Synchronized: "Синхронизировано",
           "Verification successful!": "Проверка прошла успешно!",
           "You can now safely use the device.":
@@ -1504,6 +1540,10 @@ i18n
       },
       ko: {
         translation: {
+          "No asset account found in LUKKEY hardware":
+            "LUKKEY 하드웨어에서 자산 계정을 찾을 수 없습니다",
+          "Please create or import an asset account in your LUKKEY hardware device.":
+            "LUKKEY 하드웨어 장치에서 자산 계정을 생성하거나 가져오세요.",
           Synchronized: "동기화됨",
           "Verification successful!": "검증에 성공했습니다!",
           "You can now safely use the device.":
@@ -1687,6 +1727,10 @@ i18n
       },
       pt: {
         translation: {
+          "No asset account found in LUKKEY hardware":
+            "Nenhuma conta de ativo encontrada no hardware LUKKEY",
+          "Please create or import an asset account in your LUKKEY hardware device.":
+            "Por favor, crie ou importe uma conta de ativo no seu dispositivo de hardware LUKKEY.",
           Synchronized: "Sincronizado",
           "Verification successful!": "Verificação bem-sucedida!",
           "You can now safely use the device.":
@@ -1877,6 +1921,10 @@ i18n
       },
       "pt-BR": {
         translation: {
+          "No asset account found in LUKKEY hardware":
+            "Nenhuma conta de ativo encontrada no hardware LUKKEY",
+          "Please create or import an asset account in your LUKKEY hardware device.":
+            "Por favor, crie ou importe uma conta de ativo no seu dispositivo de hardware LUKKEY.",
           Synchronized: "Sincronizado",
           "Verification successful!": "Verificação bem-sucedida!",
           "You can now safely use the device.":
@@ -2067,6 +2115,10 @@ i18n
       },
       it: {
         translation: {
+          "No asset account found in LUKKEY hardware":
+            "Nessun account di asset trovato nell’hardware LUKKEY",
+          "Please create or import an asset account in your LUKKEY hardware device.":
+            "Crea o importa un account di asset nel tuo dispositivo hardware LUKKEY.",
           Synchronized: "Sincronizzato",
           "Verification successful!": "Verifica riuscita!",
           "You can now safely use the device.":
@@ -2254,6 +2306,10 @@ i18n
       },
       de: {
         translation: {
+          "No asset account found in LUKKEY hardware":
+            "Kein Asset-Konto in der LUKKEY-Hardware gefunden",
+          "Please create or import an asset account in your LUKKEY hardware device.":
+            "Bitte erstellen oder importieren Sie ein Asset-Konto in Ihrem LUKKEY-Hardwaregerät.",
           Synchronized: "Synchronisiert",
           "Verification successful!": "Verifizierung erfolgreich!",
           "You can now safely use the device.":
@@ -2445,6 +2501,10 @@ i18n
       },
       hi: {
         translation: {
+          "No asset account found in LUKKEY hardware":
+            "LUKKEY हार्डवेयर में कोई एसेट खाता नहीं मिला",
+          "Please create or import an asset account in your LUKKEY hardware device.":
+            "कृपया अपने LUKKEY हार्डवेयर डिवाइस में एसेट खाता बनाएँ या आयात करें।",
           Synchronized: "सिंक्रनाइज़ किया गया",
           "Verification successful!": "सत्यापन सफल हुआ!",
           "You can now safely use the device.":
@@ -2631,6 +2691,10 @@ i18n
       },
       mn: {
         translation: {
+          "No asset account found in LUKKEY hardware":
+            "LUKKEY төхөөрөмж дээр хөрөнгийн бүртгэл олдсонгүй",
+          "Please create or import an asset account in your LUKKEY hardware device.":
+            "Өөрийн LUKKEY төхөөрөмж дээр хөрөнгийн бүртгэл үүсгэх эсвэл импортлоно уу.",
           Synchronized: "Синхрончлогдсон",
           "Verification successful!": "Баталгаажуулалт амжилттай!",
           "You can now safely use the device.":
@@ -2819,6 +2883,14 @@ i18n
       },
       th: {
         translation: {
+          "No asset account found in LUKKEY hardware":
+            "ไม่พบบัญชีสินทรัพย์ในฮาร์ดแวร์ LUKKEY",
+          "Please create or import an asset account in your LUKKEY hardware device.":
+            "โปรดสร้างหรือเพิ่มบัญชีสินทรัพย์ในอุปกรณ์ฮาร์ดแวร์ LUKKEY ของคุณ",
+          "No asset account found in LUKKEY hardware":
+            "ไม่พบบัญชีสินทรัพย์ในฮาร์ดแวร์ LUKKEY",
+          "Please create or import an asset account in your LUKKEY hardware device.":
+            "โปรดสร้างหรือเพิ่มบัญชีสินทรัพย์ในอุปกรณ์ฮาร์ดแวร์ LUKKEY ของคุณ",
           Synchronized: "ซิงโครไนซ์แล้ว",
           "Verification successful!": "ยืนยันตัวตนสำเร็จ!",
           "You can now safely use the device.":
@@ -3003,6 +3075,10 @@ i18n
       },
       uk: {
         translation: {
+          "No asset account found in LUKKEY hardware":
+            "У пристрої LUKKEY не знайдено обліковий запис активів",
+          "Please create or import an asset account in your LUKKEY hardware device.":
+            "Будь ласка, створіть або імпортуйте обліковий запис активів у ваш пристрій LUKKEY.",
           Synchronized: "Синхронізовано",
           "Verification successful!": "Перевірка пройшла успішно!",
           "You can now safely use the device.":
@@ -3190,6 +3266,10 @@ i18n
       },
       vi: {
         translation: {
+          "No asset account found in LUKKEY hardware":
+            "Không tìm thấy tài khoản tài sản trong phần cứng LUKKEY",
+          "Please create or import an asset account in your LUKKEY hardware device.":
+            "Vui lòng tạo hoặc nhập tài khoản tài sản trong thiết bị phần cứng LUKKEY của bạn.",
           Synchronized: "Đã đồng bộ",
           "Verification successful!": "Verifikasi berhasil!",
           "You can now safely use the device.":
@@ -3383,6 +3463,10 @@ i18n
       },
       id: {
         translation: {
+          "No asset account found in LUKKEY hardware":
+            "Tidak ada akun aset ditemukan di perangkat keras LUKKEY",
+          "Please create or import an asset account in your LUKKEY hardware device.":
+            "Silakan buat atau impor akun aset di perangkat keras LUKKEY Anda.",
           Synchronized: "Tersinkronisasi",
           "Verification successful!": "Verifikasi berhasil!",
           "You can now safely use the device.":
@@ -3568,6 +3652,10 @@ i18n
       },
       tl: {
         translation: {
+          "No asset account found in LUKKEY hardware":
+            "Walang nakitang asset account sa LUKKEY hardware",
+          "Please create or import an asset account in your LUKKEY hardware device.":
+            "Mangyaring gumawa o mag-import ng asset account sa iyong LUKKEY hardware device.",
           Synchronized: "Nakasabay",
           "Verification successful!": "Matagumpay ang beripikasyon!",
           "You can now safely use the device.":
@@ -3756,6 +3844,10 @@ i18n
       },
       bn: {
         translation: {
+          "No asset account found in LUKKEY hardware":
+            "LUKKEY হার্ডওয়্যারে কোনো সম্পদ অ্যাকাউন্ট পাওয়া যায়নি",
+          "Please create or import an asset account in your LUKKEY hardware device.":
+            "অনুগ্রহ করে আপনার LUKKEY হার্ডওয়্যার ডিভাইসে একটি সম্পদ অ্যাকাউন্ট তৈরি করুন বা ইমপোর্ট করুন।",
           Synchronized: "সিঙ্ক্রোনাইজড",
           "Verification successful!": "যাচাইকরণ সফল হয়েছে!",
           "You can now safely use the device.":
