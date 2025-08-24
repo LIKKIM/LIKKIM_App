@@ -281,7 +281,7 @@ const CardItem = ({
           imageStyle={{ borderRadius: 16 }}
         >
           {/* 显示主色和副色 */}
-          <View
+          {/*       <View
             style={{
               position: "absolute",
               top: 10,
@@ -311,7 +311,7 @@ const CardItem = ({
                 borderColor: "#fff",
               }}
             />
-          </View>
+          </View> */}
           {["cardIconContainer", "cardChainIconContainer"].map(
             (styleKey, i) => (
               <View key={i} style={VaultScreenStyle[styleKey]}>
