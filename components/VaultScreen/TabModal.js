@@ -159,11 +159,12 @@ const TabModal = ({
     let isMounted = true;
     const minDistance = 100; // 最小距离，单位px，可根据需要调整
 
+    // left球在左半区（-20%~50%），right球在右半区（10%~60%）
     function getRandomLeft() {
-      return width * (-0.1 + 0.6 * Math.random());
+      return width * (-0.2 + 0.7 * Math.random());
     }
     function getRandomRight() {
-      return width * (-0.1 + 0.6 * Math.random());
+      return width * (0.1 + 0.5 * Math.random());
     }
 
     function animateLeft() {
@@ -417,7 +418,7 @@ const TabModal = ({
               position: "absolute",
               bottom: 0,
               left: leftAnim,
-              width: "40%",
+              width: "30%",
               height: "20%",
               borderRadius: 100,
               backgroundColor: mainColor,
@@ -430,7 +431,7 @@ const TabModal = ({
               position: "absolute",
               bottom: 0,
               right: rightAnim,
-              width: "80%",
+              width: "60%",
               height: "30%",
               borderRadius: 100,
               backgroundColor: secondaryColor,
