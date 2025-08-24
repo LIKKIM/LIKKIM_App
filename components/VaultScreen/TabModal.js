@@ -154,47 +154,75 @@ const TabModal = ({
   const leftAnim = useRef(new Animated.Value(width * 0.3)).current; // 初始30%
   const rightAnim = useRef(new Animated.Value(width * 0.0)).current; // 初始0%
 
-  // left动画递归
+  // 互斥动画递归
   useEffect(() => {
     let isMounted = true;
+    const minDistance = 100; // 最小距离，单位px，可根据需要调整
+
+    function getRandomLeft() {
+      return width * (-0.1 + 0.6 * Math.random());
+    }
+    function getRandomRight() {
+      return width * (-0.1 + 0.6 * Math.random());
+    }
+
     function animateLeft() {
       if (!isMounted) return;
-      // 随机目标: left边距-10%~50%
-      const target = width * (-0.1 + 0.6 * Math.random());
+      let target;
+      let tryCount = 0;
+      do {
+        target = getRandomLeft();
+        tryCount++;
+        // rightAnim._value 可能未定义，需用rightAnim.__getValue()
+        const rightValue = rightAnim.__getValue
+          ? rightAnim.__getValue()
+          : rightAnim._value;
+        if (
+          typeof rightValue === "number" &&
+          width - target - rightValue > minDistance
+        )
+          break;
+      } while (tryCount < 10);
       Animated.timing(leftAnim, {
         toValue: target,
-        duration: 4000 + Math.random() * 2000, // 4-6秒
+        duration: 4000 + Math.random() * 2000,
         useNativeDriver: false,
       }).start(() => {
         setTimeout(animateLeft, 0);
       });
     }
-    animateLeft();
-    return () => {
-      isMounted = false;
-    };
-  }, [width, leftAnim]);
 
-  // right动画递归
-  useEffect(() => {
-    let isMounted = true;
     function animateRight() {
       if (!isMounted) return;
-      // 随机目标: right边距-10%~50%
-      const target = width * (-0.1 + 0.6 * Math.random());
+      let target;
+      let tryCount = 0;
+      do {
+        target = getRandomRight();
+        const leftValue = leftAnim.__getValue
+          ? leftAnim.__getValue()
+          : leftAnim._value;
+        tryCount++;
+        if (
+          typeof leftValue === "number" &&
+          width - leftValue - target > minDistance
+        )
+          break;
+      } while (tryCount < 10);
       Animated.timing(rightAnim, {
         toValue: target,
-        duration: 4000 + Math.random() * 2000, // 4-6秒
+        duration: 4000 + Math.random() * 2000,
         useNativeDriver: false,
       }).start(() => {
         setTimeout(animateRight, 0);
       });
     }
+
+    animateLeft();
     animateRight();
     return () => {
       isMounted = false;
     };
-  }, [width, rightAnim]);
+  }, [width, leftAnim, rightAnim]);
 
   const renderTabContent = () => {
     switch (activeTab) {
@@ -406,8 +434,7 @@ const TabModal = ({
               height: "30%",
               borderRadius: 100,
               backgroundColor: secondaryColor,
-              opacity: 0.2,
-              marginRight: "-5%",
+              opacity: 0.1,
               marginBottom: "-5%",
             }}
           />
