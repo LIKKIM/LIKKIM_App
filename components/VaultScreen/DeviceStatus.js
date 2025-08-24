@@ -458,18 +458,18 @@ const DeviceStatus = ({
             return cryptoCards
               .filter((card) => {
                 if (
-                  selectedChain === card.chainShortName &&
+                  selectedChain === card.queryChainShortName &&
                   card.chainIcon &&
-                  !uniqueChainIcons.has(card.chainShortName)
+                  !uniqueChainIcons.has(card.queryChainShortName)
                 ) {
-                  uniqueChainIcons.add(card.chainShortName);
+                  uniqueChainIcons.add(card.queryChainShortName);
                   return true;
                 }
                 return false;
               })
               .map((card, index) => (
                 <Image
-                  key={`${card.chainShortName}-${index}`}
+                  key={`${card.queryChainShortName}-${index}`}
                   source={card.chainIcon}
                   style={VaultScreenStyle.chainSelectedIcon}
                 />
@@ -481,7 +481,7 @@ const DeviceStatus = ({
             ? t("All Chains")
             : (() => {
                 const name = cryptoCards.find(
-                  (card) => card.chainShortName === selectedChain
+                  (card) => card.queryChainShortName === selectedChain
                 )?.queryChainName;
                 return name ? name.charAt(0).toUpperCase() + name.slice(1) : "";
               })()}
