@@ -18,7 +18,7 @@ import {
 // ---- tokens & helpers -------------------------------------------------------
 const makeTokens = (isDarkMode) => ({
   white: "#fff",
-  mutedText: isDarkMode ? "#ddd" : "#676776",
+  mutedText: isDarkMode ? "#ddd" : "#999",
   bg: isDarkMode ? "#121212" : "#f5f5f5",
   modalBg: isDarkMode ? "#3F3D3C" : "#ffffff",
   btnBg: isDarkMode ? "#CCB68C" : "#E5E1E9",
@@ -29,7 +29,6 @@ const makeTokens = (isDarkMode) => ({
   text: isDarkMode ? "#fff" : "#000",
   currencyUnit: isDarkMode ? "#ddd" : "#666",
   border: isDarkMode ? "#555" : "#ccc",
-  historyBorder: isDarkMode ? "#ccc" : "#999",
   inputBg: isDarkMode ? "#21201E" : "#e0e0e0",
 });
 
@@ -367,7 +366,7 @@ const VaultScreenStyles = (isDarkMode) => {
     historyItem: {
       paddingVertical: 10,
       borderBottomWidth: 1,
-      borderBottomColor: c.historyBorder,
+      borderBottomColor: c.mutedText,
     },
     historyItemText: {
       fontSize: FONT_SIZE_16,
@@ -480,7 +479,7 @@ const VaultScreenStyles = (isDarkMode) => {
     cancelButtonCardItem: {
       ...buttonBase,
       borderWidth: 2,
-      borderColor: c.historyBorder,
+      borderColor: c.mutedText,
       width: 326,
       position: "relative",
       bottom: 0,
