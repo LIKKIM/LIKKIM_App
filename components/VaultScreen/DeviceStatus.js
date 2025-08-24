@@ -362,10 +362,6 @@ const DeviceStatus = ({
     }
   }, [cryptoCards]);
 
-  /*  useEffect(() => {
-    fetchNFTData();
-  }, []); */
-
   const formatBytes = (bytes) => {
     if (!bytes) return "Unknown size";
     const kb = bytes / 1024;
