@@ -122,7 +122,8 @@ const VaultScreenStyles = (isDarkMode) => {
       position: "absolute",
       zIndex: 10,
       top: 236,
-      height: containerHeight,
+      flex: 1,
+      // height: containerHeight,
     },
     linearGradient: {
       flex: 1,
