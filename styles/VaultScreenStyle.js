@@ -380,10 +380,10 @@ const VaultScreenStyles = (isDarkMode) => {
       textAlign: "center",
     },
     historyTitle: {
-      height: 60,
+      height: 40,
       textAlign: "left",
       textAlignVertical: "center",
-      lineHeight: 60,
+      lineHeight: 40,
       width: 326,
       fontSize: FONT_SIZE_16,
       color: c.text,

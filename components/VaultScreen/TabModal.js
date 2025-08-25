@@ -268,7 +268,7 @@ const TabModal = ({
             </Text>
             <View
               style={{
-                height: 280,
+                height: 292,
                 justifyContent: "center",
                 alignItems: "center",
               }}
@@ -301,7 +301,7 @@ const TabModal = ({
                 {ActivityLog.length === 0 ? (
                   <View
                     style={{
-                      height: 280,
+                      height: 292,
                       justifyContent: "center",
                       alignItems: "center",
                     }}
@@ -703,7 +703,7 @@ const TabModal = ({
                 borderWidth: 2,
                 borderColor: isDarkMode ? "#CCB68C" : "#CFAB95",
                 padding: 10,
-                width: 280,
+                width: 292,
                 justifyContent: "center",
                 borderRadius: 30,
                 height: 60,
