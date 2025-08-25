@@ -218,12 +218,8 @@ const signTransaction = async (
       heigh,
       gasPriceValue; // 提前声明 gasPriceValue
 
-    
     if (postChain === "bitcoin") {
-      if (
-        !walletParamsData.data?.feeRate ||
-        !walletParamsData.data?.utxoList
-      ) {
+      if (!walletParamsData.data?.feeRate || !walletParamsData.data?.utxoList) {
         console.log("接口返回数据不完整:", walletParamsData);
         return;
       }
@@ -237,19 +233,20 @@ const signTransaction = async (
       }
     }
 
-
     if (postChain === "ethereum") {
       const { gasPrice, nonce: ethNonce } = walletParamsData.data;
       gasPriceValue = gasPrice.normal;
       nonce = ethNonce;
       console.log("Ethereum 返回的数据:", { gasPrice: gasPriceValue, nonce });
     } else if (postChain === "bitcoin") {
-      const { feeRate: btcFeeRate, utxoList: btcUtxoList } = walletParamsData.data;
+      const { feeRate: btcFeeRate, utxoList: btcUtxoList } =
+        walletParamsData.data;
       feeRate = btcFeeRate;
       utxoList = btcUtxoList;
       console.log("bitcoin 返回的数据:", { feeRate, utxoList });
     } else if (postChain === "aptos") {
-      const { gasPrice, nonce, sequence, maxGasAmount, typeArg } = walletParamsData.data;
+      const { gasPrice, nonce, sequence, maxGasAmount, typeArg } =
+        walletParamsData.data;
       console.log("Aptos 返回的数据:", {
         gasPrice,
         nonce,
@@ -342,7 +339,7 @@ const signTransaction = async (
       };
     } else if (chainMethod === "btc") {
       // btc:  构造待签名hex请求数据（比特币）
-      const normalizedUtxoList = utxoList.map(utxo => ({
+      const normalizedUtxoList = utxoList.map((utxo) => ({
         ...utxo,
         amount: Number(utxo.amount),
       }));
@@ -467,20 +464,42 @@ const signTransaction = async (
     // ---------------------------
     // 第6步：构造并发送预签名数据 sign 数据（发送presign数据）
     // ---------------------------
+    // 辅助函数：分包发送base64字符串，每包不超过20字节
+    async function sendInChunks(
+      device,
+      serviceUUID,
+      writeCharacteristicUUID,
+      base64Str,
+      chunkSize = 20
+    ) {
+      let offset = 0;
+      while (offset < base64Str.length) {
+        const chunk = base64Str.slice(offset, offset + chunkSize);
+        await device.writeCharacteristicWithResponseForService(
+          serviceUUID,
+          writeCharacteristicUUID,
+          chunk
+        );
+        offset += chunkSize;
+      }
+    }
+
     if (responseData?.data?.data) {
       const signMessage = `sign:${chainKey},${path},${responseData.data.data}`;
       console.log("构造的 sign 消息:", signMessage);
       const signBuffer = Buffer.from(signMessage, "utf-8");
       const signBase64 = signBuffer.toString("base64");
       try {
-        await device.writeCharacteristicWithResponseForService(
+        await sendInChunks(
+          device,
           serviceUUID,
           writeCharacteristicUUID,
-          signBase64
+          signBase64,
+          20
         );
-        console.log("sign消息已成功发送给设备");
+        console.log("sign消息已分包成功发送给设备");
       } catch (error) {
-        console.log("发送sign消息时发生错误:", error);
+        console.log("分包发送sign消息时发生错误:", error);
       }
     } else {
       console.log("返回的数据不包含sign消息的data_从服务器获得");
