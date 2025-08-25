@@ -435,60 +435,62 @@ const TabModal = ({
         style={[VaultScreenStyle.cardModalView, { opacity: backgroundAnim }]}
       >
         {/* 色值球 */}
-        <View
-          style={{
-            width: "100%",
-            height: "100%",
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-            zIndex: 3,
-            position: "relative",
-          }}
-        >
-          <Animated.View
-            style={{
-              position: "absolute",
-              bottom: leftBottomAnim,
-              left: leftAnim,
-              width: "40%",
-              height: "20%",
-              borderRadius: 100,
-              backgroundColor: mainColor,
-              opacity: 0.4,
-              marginBottom: "-12%",
-            }}
-          />
-          <Animated.View
-            style={{
-              position: "absolute",
-              bottom: rightBottomAnim,
-              right: rightAnim,
-              width: "80%",
-              height: "30%",
-              borderRadius: 100,
-              backgroundColor: secondaryColor,
-              opacity: 0.1,
-              marginBottom: "-8%",
-            }}
-          />
-          <BlurView
-            style={{
-              position: "absolute",
-              bottom: 0,
-              top: 0,
-              left: 0,
-              right: 0,
-              borderRadius: 30,
-              zIndex: 3,
-              opacity: 1,
-            }}
-            intensity={100}
-            tint={isDarkMode ? "dark" : "light"}
-            pointerEvents="none"
-          />
-        </View>
 
+        {Platform.OS === "ios" && (
+          <View
+            style={{
+              width: "100%",
+              height: "100%",
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center",
+              zIndex: 3,
+              position: "relative",
+            }}
+          >
+            <Animated.View
+              style={{
+                position: "absolute",
+                bottom: leftBottomAnim,
+                left: leftAnim,
+                width: "40%",
+                height: "20%",
+                borderRadius: 100,
+                backgroundColor: mainColor,
+                opacity: 0.4,
+                marginBottom: "-12%",
+              }}
+            />
+            <Animated.View
+              style={{
+                position: "absolute",
+                bottom: rightBottomAnim,
+                right: rightAnim,
+                width: "80%",
+                height: "30%",
+                borderRadius: 100,
+                backgroundColor: secondaryColor,
+                opacity: 0.1,
+                marginBottom: "-8%",
+              }}
+            />
+            <BlurView
+              style={{
+                position: "absolute",
+                bottom: 0,
+                top: 0,
+                left: 0,
+                right: 0,
+                borderRadius: 30,
+                zIndex: 3,
+                opacity: 1,
+              }}
+              intensity={100}
+              tint={isDarkMode ? "dark" : "light"}
+              pointerEvents="none"
+            />
+          </View>
+        )}
         <LinearGradient
           colors={isDarkMode ? darkColorsDown : lightColorsDown}
           style={[VaultScreenStyle.cardModalView]}
