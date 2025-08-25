@@ -204,6 +204,7 @@ const signTransaction = async (
     // ✅ 在这里提前定义变量，供下面用
     let gasPrice,
       nonce,
+      feeRate,
       gasLimit,
       sequence,
       utxoList,
@@ -217,13 +218,25 @@ const signTransaction = async (
       heigh,
       gasPriceValue; // 提前声明 gasPriceValue
 
-    if (
-      !walletParamsData.data?.gasPrice ||
-      walletParamsData.data?.nonce == null
-    ) {
-      console.log("接口返回数据不完整:", walletParamsData);
-      return;
+    
+    if (postChain === "bitcoin") {
+      if (
+        !walletParamsData.data?.feeRate ||
+        !walletParamsData.data?.utxoList
+      ) {
+        console.log("接口返回数据不完整:", walletParamsData);
+        return;
+      }
+    } else {
+      if (
+        !walletParamsData.data?.gasPrice ||
+        walletParamsData.data?.nonce == null
+      ) {
+        console.log("接口返回数据不完整:", walletParamsData);
+        return;
+      }
     }
+
 
     if (postChain === "ethereum") {
       const { gasPrice, nonce: ethNonce } = walletParamsData.data;
@@ -231,16 +244,12 @@ const signTransaction = async (
       nonce = ethNonce;
       console.log("Ethereum 返回的数据:", { gasPrice: gasPriceValue, nonce });
     } else if (postChain === "bitcoin") {
-      const { gasPrice, nonce, utxoList } = walletParamsData.data;
-
-      console.log("bitcoin 返回的数据:", {
-        gasPrice,
-        nonce,
-        utxoList,
-      });
+      const { feeRate: btcFeeRate, utxoList: btcUtxoList } = walletParamsData.data;
+      feeRate = btcFeeRate;
+      utxoList = btcUtxoList;
+      console.log("bitcoin 返回的数据:", { feeRate, utxoList });
     } else if (postChain === "aptos") {
-      const { gasPrice, nonce, sequence, maxGasAmount, typeArg } =
-        walletParamsData.data;
+      const { gasPrice, nonce, sequence, maxGasAmount, typeArg } = walletParamsData.data;
       console.log("Aptos 返回的数据:", {
         gasPrice,
         nonce,
@@ -333,10 +342,14 @@ const signTransaction = async (
       };
     } else if (chainMethod === "btc") {
       // btc:  构造待签名hex请求数据（比特币）
+      const normalizedUtxoList = utxoList.map(utxo => ({
+        ...utxo,
+        amount: Number(utxo.amount),
+      }));
       requestData = {
         chainKey: "bitcoin",
-        inputs: utxoList,
-        feeRate: gasPrice,
+        inputs: normalizedUtxoList,
+        feeRate: Number(feeRate),
         receiveAddress: inputAddress,
         receiveAmount: Number(amount),
         changeAddress: paymentAddress,
