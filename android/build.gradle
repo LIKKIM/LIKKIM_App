@@ -21,6 +21,22 @@ buildscript {
     }
 }
 
+// 兼容性锁定，确保 react-native-image-colors 依赖的 glide 版本一致
+subprojects {
+    afterEvaluate { project ->
+        if (project.name == 'react-native-image-colors') {
+            project.configurations.all {
+                resolutionStrategy.eachDependency { details ->
+                    if (details.requested.group == 'com.github.bumptech.glide' && details.requested.name == 'glide') {
+                        details.useVersion '4.15.1' // 如需调整版本请查阅 react-native-image-colors 文档
+                    }
+                }
+            }
+        }
+    }
+}
+// 如需锁定 expo-modules-core 相关依赖，可在此处添加类似配置
+
 apply plugin: "com.facebook.react.rootproject"
 
 allprojects {
