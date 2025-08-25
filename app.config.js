@@ -80,7 +80,7 @@ export default {
       },
     },
     versionCode: 5,
-    package: "com.likkim.wallet", //❌
+    package: "com.secnet.vaultapp", //✅
   },
   web: {
     favicon: "./assets/favicon.png",

@@ -86,7 +86,7 @@ android {
 
     namespace 'com.likkim.wallet'
     defaultConfig {
-        applicationId 'com.likkim.wallet'
+        applicationId 'com.secnet.vaultapp'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 5
