@@ -8,7 +8,8 @@ import {
   Text,
   TouchableOpacity,
 } from "react-native";
-import { getColors as getImageColors } from "react-native-image-colors";
+const imageColors = require("react-native-image-colors").default;
+const getImageColors = imageColors.getColors;
 
 /**
  * 卡片组件，负责渲染单个资产卡片
