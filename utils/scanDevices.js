@@ -33,6 +33,20 @@ export function scanDevices({
               // Bluetooth LE unsupported on device
             }
           } else if (device.name && device.name.includes("LUKKEY")) {
+            // 打印受蓝牙广播包字节限制的关键信息
+            console.log(
+              "[扫描到设备]",
+              "name:",
+              device.name,
+              "rssi:",
+              device.rssi,
+              "manufacturerData:",
+              device.manufacturerData,
+              "serviceUUIDs:",
+              device.serviceUUIDs,
+              "serviceData:",
+              device.serviceData
+            );
             setDevices((prevDevices) => {
               const existingIndex = prevDevices.findIndex(
                 (d) => d.id === device.id
