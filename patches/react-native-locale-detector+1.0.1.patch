@@ -7,7 +7,7 @@ index 1f9f4e0..b8b158c 100755
  
  android {
 -    compileSdkVersion 23
-+    compileSdkVersion 30
++    compileSdkVersion 34
      buildToolsVersion "23.0.1"
  
      defaultConfig {
