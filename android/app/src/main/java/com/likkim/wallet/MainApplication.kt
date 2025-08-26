@@ -1,4 +1,4 @@
-package com.likkim.wallet
+package com.secnet.vaultapp
 
 import android.app.Application
 import android.content.res.Configuration

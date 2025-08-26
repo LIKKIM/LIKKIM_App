@@ -35,7 +35,7 @@
         <action android:name="android.intent.action.VIEW"/>
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.BROWSABLE"/>
-        <data android:scheme="com.likkim.wallet"/>
+        <data android:scheme="com.secnet.vaultapp"/>
         <data android:scheme="exp+likkim"/>
       </intent-filter>
     </activity>

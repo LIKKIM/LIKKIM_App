@@ -425,7 +425,7 @@ index 0000000..c730620
 +++ b/node_modules/react-native-locale-detector/android/build/intermediates/lint_model_metadata/release/lint-model-metadata.properties
 @@ -0,0 +1,2 @@
 +mavenArtifactId=react-native-locale-detector
-+mavenGroupId=LIKKIM
++mavenGroupId=com.secnet.vaultapp
 \ No newline at end of file
 diff --git a/node_modules/react-native-locale-detector/android/build/intermediates/local_aar_for_lint/release/out.aar b/node_modules/react-native-locale-detector/android/build/intermediates/local_aar_for_lint/release/out.aar
 new file mode 100644

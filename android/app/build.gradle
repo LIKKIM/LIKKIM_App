@@ -84,7 +84,7 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace 'com.likkim.wallet'
+    namespace 'com.secnet.vaultapp'
     defaultConfig {
         applicationId 'com.secnet.vaultapp'
         minSdkVersion rootProject.ext.minSdkVersion
