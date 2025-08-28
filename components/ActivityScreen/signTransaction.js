@@ -497,6 +497,14 @@ const signTransaction = async (
     // 第6步：构造并发送预签名数据 sign 数据（发送presign数据）
     // ---------------------------
     // 辅助函数：分包发送base64字符串，每包不超过200字节
+    /**
+     * 分包发送base64字符串，每包200字节，只有最后一包结尾加"\r\n"
+     * 嵌入式端收到后将所有包内容拼接，遇到"\r\n"即为数据结束
+     * 例：
+     *   - 第1包：前200字节
+     *   - 第2包：第201-400字节
+     *   - 第3包：第401-结尾 + "\r\n"
+     */
     async function sendInChunks(
       device,
       serviceUUID,
@@ -505,8 +513,13 @@ const signTransaction = async (
       chunkSize = 200
     ) {
       let offset = 0;
-      while (offset < base64Str.length) {
-        const chunk = base64Str.slice(offset, offset + chunkSize);
+      const totalLen = base64Str.length;
+      while (offset < totalLen) {
+        const isLast = offset + chunkSize >= totalLen;
+        let chunk = base64Str.slice(offset, offset + chunkSize);
+        if (isLast) {
+          chunk += "\r\n";
+        }
         await device.writeCharacteristicWithResponseForService(
           serviceUUID,
           writeCharacteristicUUID,
