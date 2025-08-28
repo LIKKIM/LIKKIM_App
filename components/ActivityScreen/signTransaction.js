@@ -218,9 +218,11 @@ const signTransaction = async (
       heigh,
       gasPriceValue; // 提前声明 gasPriceValue
 
-
     if (postChain === "ethereum") {
-      if (!walletParamsData.data?.gasPrice || walletParamsData.data?.nonce == null) {
+      if (
+        !walletParamsData.data?.gasPrice ||
+        walletParamsData.data?.nonce == null
+      ) {
         return console.log("接口返回数据不完整:", walletParamsData);
       }
       const { gasPrice, nonce: ethNonce } = walletParamsData.data;
@@ -231,24 +233,26 @@ const signTransaction = async (
       if (!walletParamsData.data?.feeRate || !walletParamsData.data?.utxoList) {
         return console.log("接口返回数据不完整:", walletParamsData);
       }
-      const { feeRate: btcFeeRate, utxoList: btcUtxoList } = walletParamsData.data;
+      const { feeRate: btcFeeRate, utxoList: btcUtxoList } =
+        walletParamsData.data;
       feeRate = btcFeeRate;
       utxoList = btcUtxoList;
       console.log("bitcoin 返回的数据:", { feeRate, utxoList });
     } else if (postChain === "aptos") {
-      if (!walletParamsData.data?.gasPrice 
-        || !walletParamsData.data?.sequence
-        || !walletParamsData.data?.maxGasAmount
-        || !walletParamsData.data?.typeArg
+      if (
+        !walletParamsData.data?.gasPrice ||
+        !walletParamsData.data?.sequence ||
+        !walletParamsData.data?.maxGasAmount ||
+        !walletParamsData.data?.typeArg
       ) {
         return console.log("接口返回数据不完整:", walletParamsData);
       }
 
-      gasPrice =  walletParamsData.data.gasPrice;
+      gasPrice = walletParamsData.data.gasPrice;
       sequence = walletParamsData.data.sequence;
       maxGasAmount = walletParamsData.data.maxGasAmount;
       typeArg = walletParamsData.data.typeArg;
-      
+
       console.log("Aptos 返回的数据:", {
         gasPrice,
         nonce,
@@ -257,7 +261,10 @@ const signTransaction = async (
         typeArg,
       });
     } else if (postChain === "cosmos") {
-      if (!walletParamsData.data?.gasPrice || walletParamsData.data?.nonce == null) {
+      if (
+        !walletParamsData.data?.gasPrice ||
+        walletParamsData.data?.nonce == null
+      ) {
         return console.log("接口返回数据不完整:", walletParamsData);
       }
       const {
@@ -286,10 +293,14 @@ const signTransaction = async (
       blockHash = solBlockHash;
       console.log("solana 返回的数据:", { blockHash });
     } else if (postChain === "sui") {
-      if (!walletParamsData.data?.gasPrice || walletParamsData.data?.nonce == null) {
+      if (
+        !walletParamsData.data?.gasPrice ||
+        walletParamsData.data?.nonce == null
+      ) {
         return console.log("接口返回数据不完整:", walletParamsData);
       }
-      const { gasPrice, nonce, maxGasAmount, suiObjects, epoch } = walletParamsData.data;
+      const { gasPrice, nonce, maxGasAmount, suiObjects, epoch } =
+        walletParamsData.data;
       console.log("提取的 sui 数据:", {
         gasPrice,
         nonce,
@@ -298,13 +309,19 @@ const signTransaction = async (
         epoch,
       });
     } else if (postChain === "ripple") {
-      if (!walletParamsData.data?.gasPrice || walletParamsData.data?.nonce == null) {
+      if (
+        !walletParamsData.data?.gasPrice ||
+        walletParamsData.data?.nonce == null
+      ) {
         return console.log("接口返回数据不完整:", walletParamsData);
       }
       const { gasPrice, nonce } = walletParamsData.data;
       console.log("ripple 返回的数据:", { gasPrice, nonce });
     } else {
-      if (!walletParamsData.data?.gasPrice || walletParamsData.data?.nonce == null) {
+      if (
+        !walletParamsData.data?.gasPrice ||
+        walletParamsData.data?.nonce == null
+      ) {
         return console.log("接口返回数据不完整:", walletParamsData);
       }
       const { gasPrice, nonce, sequence } = walletParamsData.data;
@@ -479,13 +496,13 @@ const signTransaction = async (
     // ---------------------------
     // 第6步：构造并发送预签名数据 sign 数据（发送presign数据）
     // ---------------------------
-    // 辅助函数：分包发送base64字符串，每包不超过20字节
+    // 辅助函数：分包发送base64字符串，每包不超过200字节
     async function sendInChunks(
       device,
       serviceUUID,
       writeCharacteristicUUID,
       base64Str,
-      chunkSize = 20
+      chunkSize = 200
     ) {
       let offset = 0;
       while (offset < base64Str.length) {
@@ -510,7 +527,7 @@ const signTransaction = async (
           serviceUUID,
           writeCharacteristicUUID,
           signBase64,
-          20
+          200
         );
         console.log("sign消息已分包成功发送给设备");
       } catch (error) {
