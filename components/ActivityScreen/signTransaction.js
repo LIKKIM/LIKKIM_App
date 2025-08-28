@@ -236,10 +236,19 @@ const signTransaction = async (
       utxoList = btcUtxoList;
       console.log("bitcoin 返回的数据:", { feeRate, utxoList });
     } else if (postChain === "aptos") {
-      if (!walletParamsData.data?.gasPrice || walletParamsData.data?.nonce == null) {
+      if (!walletParamsData.data?.gasPrice 
+        || !walletParamsData.data?.sequence
+        || !walletParamsData.data?.maxGasAmount
+        || !walletParamsData.data?.typeArg
+      ) {
         return console.log("接口返回数据不完整:", walletParamsData);
       }
-      const { gasPrice, nonce, sequence, maxGasAmount, typeArg } = walletParamsData.data;
+
+      gasPrice =  walletParamsData.data.gasPrice;
+      sequence = walletParamsData.data.sequence;
+      maxGasAmount = walletParamsData.data.maxGasAmount;
+      typeArg = walletParamsData.data.typeArg;
+      
       console.log("Aptos 返回的数据:", {
         gasPrice,
         nonce,
