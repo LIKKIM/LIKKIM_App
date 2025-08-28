@@ -68,7 +68,7 @@ export default {
       },
     },
     supportsTablet: false,
-    buildNumber: "1.0.38",
+    buildNumber: "1.0.39",
     bundleIdentifier: "com.secnet.vaultapp",
     icon: "./assets/icon.png", //❌
   },
