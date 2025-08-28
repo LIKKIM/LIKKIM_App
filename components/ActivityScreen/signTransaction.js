@@ -218,35 +218,28 @@ const signTransaction = async (
       heigh,
       gasPriceValue; // 提前声明 gasPriceValue
 
-    if (postChain === "bitcoin") {
-      if (!walletParamsData.data?.feeRate || !walletParamsData.data?.utxoList) {
-        console.log("接口返回数据不完整:", walletParamsData);
-        return;
-      }
-    } else {
-      if (
-        !walletParamsData.data?.gasPrice ||
-        walletParamsData.data?.nonce == null
-      ) {
-        console.log("接口返回数据不完整:", walletParamsData);
-        return;
-      }
-    }
 
     if (postChain === "ethereum") {
+      if (!walletParamsData.data?.gasPrice || walletParamsData.data?.nonce == null) {
+        return console.log("接口返回数据不完整:", walletParamsData);
+      }
       const { gasPrice, nonce: ethNonce } = walletParamsData.data;
       gasPriceValue = gasPrice.normal;
       nonce = ethNonce;
       console.log("Ethereum 返回的数据:", { gasPrice: gasPriceValue, nonce });
     } else if (postChain === "bitcoin") {
-      const { feeRate: btcFeeRate, utxoList: btcUtxoList } =
-        walletParamsData.data;
+      if (!walletParamsData.data?.feeRate || !walletParamsData.data?.utxoList) {
+        return console.log("接口返回数据不完整:", walletParamsData);
+      }
+      const { feeRate: btcFeeRate, utxoList: btcUtxoList } = walletParamsData.data;
       feeRate = btcFeeRate;
       utxoList = btcUtxoList;
       console.log("bitcoin 返回的数据:", { feeRate, utxoList });
     } else if (postChain === "aptos") {
-      const { gasPrice, nonce, sequence, maxGasAmount, typeArg } =
-        walletParamsData.data;
+      if (!walletParamsData.data?.gasPrice || walletParamsData.data?.nonce == null) {
+        return console.log("接口返回数据不完整:", walletParamsData);
+      }
+      const { gasPrice, nonce, sequence, maxGasAmount, typeArg } = walletParamsData.data;
       console.log("Aptos 返回的数据:", {
         gasPrice,
         nonce,
@@ -255,6 +248,9 @@ const signTransaction = async (
         typeArg,
       });
     } else if (postChain === "cosmos") {
+      if (!walletParamsData.data?.gasPrice || walletParamsData.data?.nonce == null) {
+        return console.log("接口返回数据不完整:", walletParamsData);
+      }
       const {
         gasPrice,
         nonce,
@@ -273,14 +269,18 @@ const signTransaction = async (
         accountNumber,
         feeAmount: effectiveFeeAmount,
       });
-    }
-    if (postChain === "solana") {
-      const { gasPrice, nonce, blockHash } = walletParamsData.data;
-      console.log("solana 返回的数据:", { gasPrice, nonce, blockHash });
+    } else if (postChain === "solana") {
+      if (walletParamsData.data?.blockHash == null) {
+        return console.log("接口返回数据不完整:", walletParamsData);
+      }
+      const { blockHash: solBlockHash } = walletParamsData.data;
+      blockHash = solBlockHash;
+      console.log("solana 返回的数据:", { blockHash });
     } else if (postChain === "sui") {
-      const { gasPrice, nonce, maxGasAmount, suiObjects, epoch } =
-        walletParamsData.data;
-
+      if (!walletParamsData.data?.gasPrice || walletParamsData.data?.nonce == null) {
+        return console.log("接口返回数据不完整:", walletParamsData);
+      }
+      const { gasPrice, nonce, maxGasAmount, suiObjects, epoch } = walletParamsData.data;
       console.log("提取的 sui 数据:", {
         gasPrice,
         nonce,
@@ -289,9 +289,15 @@ const signTransaction = async (
         epoch,
       });
     } else if (postChain === "ripple") {
+      if (!walletParamsData.data?.gasPrice || walletParamsData.data?.nonce == null) {
+        return console.log("接口返回数据不完整:", walletParamsData);
+      }
       const { gasPrice, nonce } = walletParamsData.data;
       console.log("ripple 返回的数据:", { gasPrice, nonce });
     } else {
+      if (!walletParamsData.data?.gasPrice || walletParamsData.data?.nonce == null) {
+        return console.log("接口返回数据不完整:", walletParamsData);
+      }
       const { gasPrice, nonce, sequence } = walletParamsData.data;
       console.log("其他链返回的数据:", { gasPrice, nonce, sequence });
     }
