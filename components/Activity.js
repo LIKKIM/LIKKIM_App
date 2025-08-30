@@ -687,7 +687,9 @@ function ActivityScreen() {
               console.log("交易广播成功:", responseData);
               // 向嵌入式返回 BCAST_OK
               try {
-                const msg = Buffer.from("BCAST_OK", "utf-8").toString("base64");
+                const msg = Buffer.from("BCAST_OK\r\n", "utf-8").toString(
+                  "base64"
+                );
                 await device.writeCharacteristicWithResponseForService(
                   serviceUUID,
                   writeCharacteristicUUID,
@@ -708,7 +710,7 @@ function ActivityScreen() {
               console.log("交易广播失败:", responseData);
               // 向嵌入式返回 BCAST_FAIL
               try {
-                const msg = Buffer.from("BCAST_FAIL", "utf-8").toString(
+                const msg = Buffer.from("BCAST_FAIL\r\n", "utf-8").toString(
                   "base64"
                 );
                 await device.writeCharacteristicWithResponseForService(
@@ -732,7 +734,9 @@ function ActivityScreen() {
             console.log("交易广播时出错:", broadcastError.message);
             // 向嵌入式返回 BCAST_FAIL
             try {
-              const msg = Buffer.from("BCAST_FAIL", "utf-8").toString("base64");
+              const msg = Buffer.from("BCAST_FAIL\r\n", "utf-8").toString(
+                "base64"
+              );
               await device.writeCharacteristicWithResponseForService(
                 serviceUUID,
                 writeCharacteristicUUID,

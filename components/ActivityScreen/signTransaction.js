@@ -93,7 +93,7 @@ const signTransaction = async (
     // 交易费用依赖外部变量：selectedFeeTab、recommendedFee、rapidFeeValue
     const transactionFee =
       selectedFeeTab === "Recommended" ? recommendedFee : rapidFeeValue;
-    const firstTradeMsg = `destinationAddress:${senderAddress},${receiveAddress},${amount},${chainKey}`;
+    const firstTradeMsg = `destinationAddress:${senderAddress},${receiveAddress},${amount},${chainKey}\r\n`;
     // 交易金额也传给嵌入式设备
     console.log("交易金额:", amount);
     console.log("第一步交易信息发送:", firstTradeMsg);
@@ -515,11 +515,7 @@ const signTransaction = async (
       let offset = 0;
       const totalLen = base64Str.length;
       while (offset < totalLen) {
-        const isLast = offset + chunkSize >= totalLen;
         let chunk = base64Str.slice(offset, offset + chunkSize);
-        if (isLast) {
-          chunk += "\r\n";
-        }
         await device.writeCharacteristicWithResponseForService(
           serviceUUID,
           writeCharacteristicUUID,
@@ -530,7 +526,7 @@ const signTransaction = async (
     }
 
     if (responseData?.data?.data) {
-      const signMessage = `sign:${chainKey},${path},${responseData.data.data}`;
+      const signMessage = `sign:${chainKey},${path},${responseData.data.data}\r\n`;
       console.log("构造的 sign 消息:", signMessage);
       const signBuffer = Buffer.from(signMessage, "utf-8");
       const signBase64 = signBuffer.toString("base64");
