@@ -83,7 +83,7 @@ const ActionButtons = ({
       </Animated.View>
 
       {/* Convert button */}
-      <Animated.View style={{ flex: 1, transform: [{ scale: convertScale }] }}>
+      {/*       <Animated.View style={{ flex: 1, transform: [{ scale: convertScale }] }}>
         <TouchableOpacity
           style={[ActivityScreenStyle.roundButton, { flex: 1 }]}
           onPressIn={() => animatePressIn(convertScale)}
@@ -93,7 +93,7 @@ const ActionButtons = ({
           <Icon name="swap-horiz" size={24} color={iconColor} />
           <Text style={ActivityScreenStyle.mainButtonText}>{t("Convert")}</Text>
         </TouchableOpacity>
-      </Animated.View>
+      </Animated.View> */}
     </View>
   );
 };
