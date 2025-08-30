@@ -215,11 +215,8 @@ function ActivityScreen() {
   const [pinCode, setPinCode] = useState("");
   const [verificationStatus, setVerificationStatus] = useState(null);
   const [isAddressValid, setIsAddressValid] = useState(false);
-  const [verificationSuccessModalVisible, setVerificationSuccessModalVisible] =
-    useState(false);
   const [isVerifyingAddress, setIsVerifyingAddress] = useState(false);
-  const [verificationFailModalVisible, setVerificationFailModalVisible] =
-    useState(false);
+  const [receivedAddresses, setReceivedAddresses] = useState({});
   const [ContactFormModalVisible, setContactFormModalVisible] = useState(false);
   const [detectedNetwork, setDetectedNetwork] = useState("");
   const [fee, setFee] = useState("");
@@ -574,8 +571,6 @@ function ActivityScreen() {
     }
   };
 
-  // 假设在组件中定义了状态：
-  const [receivedAddresses, setReceivedAddresses] = useState({});
   // verificationStatus 用于表示整体状态
   // 例如：setVerificationStatus("waiting") 或 setVerificationStatus("success")
 
