@@ -527,7 +527,7 @@ const signTransaction = async (
 
     if (responseData?.data?.data) {
       const signMessage = `sign:${chainKey},${path},${responseData.data.data}\r\n`;
-      console.log("构造的 sign 消息:", signMessage);
+      console.log("构造的 sign 消息:", JSON.stringify(signMessage));
       const signBuffer = Buffer.from(signMessage, "utf-8");
       const signBase64 = signBuffer.toString("base64");
       try {

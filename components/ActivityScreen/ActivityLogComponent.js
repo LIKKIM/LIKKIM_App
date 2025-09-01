@@ -1,3 +1,20 @@
+/**
+ * ActivityLogComponent 组件
+ *
+ * 该组件用于显示用户的活动日志列表，包括交易记录。
+ * - 支持按链进行筛选，展示对应链的交易。
+ * - 支持下拉刷新和加载更多功能。
+ * - 点击交易项可查看交易详情的弹窗。
+ *
+ * 主要函数和状态：
+ * - selectedTransaction: 当前选中的交易，用于显示详情弹窗。
+ * - selectedChain: 当前选中的链，用于筛选交易。
+ * - transactionChainCards: 计算并缓存每笔交易对应的链卡片信息。
+ * - filteredActivityLog: 根据选中的链筛选交易记录。
+ * - shouldDisplayChainFilterModal: 判断是否显示链筛选弹窗。
+ *
+ * 组件内部还使用了多个 React Native 组件如 FlatList、Modal、TouchableOpacity 等来实现列表和交互功能。
+ */
 import React, { useState, useEffect, useMemo, useContext } from "react";
 import {
   FlatList,
