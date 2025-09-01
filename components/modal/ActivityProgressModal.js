@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Animated,
 } from "react-native";
+import { BlurView } from "expo-blur";
 
 const ActivityProgressModal = ({
   visible,
@@ -44,7 +45,7 @@ const ActivityProgressModal = ({
       transparent={true}
       animationType="slide"
     >
-      <View style={ActivityScreenStyle.centeredView}>
+      <BlurView intensity={20} style={ActivityScreenStyle.centeredView}>
         <View style={ActivityScreenStyle.pendingModalView}>
           <Text style={ActivityScreenStyle.modalTitle}>
             {modalStatus.title}
@@ -74,7 +75,7 @@ const ActivityProgressModal = ({
             </TouchableOpacity>
           </Animated.View>
         </View>
-      </View>
+      </BlurView>
     </Modal>
   );
 };
