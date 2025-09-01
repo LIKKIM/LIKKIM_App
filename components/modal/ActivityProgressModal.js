@@ -58,7 +58,9 @@ const ActivityProgressModal = ({
           >
             {modalStatus.subtitle}
           </Text>
-          <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
+          <Animated.View
+            style={{ width: "100%", transform: [{ scale: scaleAnim }] }}
+          >
             <TouchableOpacity
               style={ActivityScreenStyle.submitButton}
               onPress={onClose}
