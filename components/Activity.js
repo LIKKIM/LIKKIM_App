@@ -905,9 +905,10 @@ function ActivityScreen() {
   const handleNextAfterAddress = () => {
     setAmount("");
     setContactFormModalVisible(false);
-    setAmountModalVisible(true);
+    setTimeout(() => {
+      setAmountModalVisible(true);
+    }, 400); // 等待关闭动画完成
   };
-
   const handleNextAfterAmount = () => {
     setAmountModalVisible(false);
     setConfirmModalVisible(true);
