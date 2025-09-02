@@ -514,15 +514,21 @@ const signTransaction = async (
     ) {
       let offset = 0;
       const totalLen = base64Str.length;
+      let chunkIndex = 0;
       while (offset < totalLen) {
         let chunk = base64Str.slice(offset, offset + chunkSize);
+        console.log(
+          `发送分包[${chunkIndex}] offset=${offset}, 长度=${chunk.length}, 总长度=${totalLen}`
+        );
         await device.writeCharacteristicWithResponseForService(
           serviceUUID,
           writeCharacteristicUUID,
           chunk
         );
         offset += chunkSize;
+        chunkIndex++;
       }
+      console.log(`分包发送完成, 总包数: ${chunkIndex}`);
     }
 
     if (responseData?.data?.data) {
