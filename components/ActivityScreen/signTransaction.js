@@ -527,6 +527,8 @@ const signTransaction = async (
           writeCharacteristicUUID,
           chunk
         );
+        // 合理的时间间隔，建议20ms
+        await new Promise((resolve) => setTimeout(resolve, 20));
         offset += chunkSize;
         chunkIndex++;
       }
