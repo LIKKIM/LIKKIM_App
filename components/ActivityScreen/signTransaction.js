@@ -518,7 +518,9 @@ const signTransaction = async (
       while (offset < totalLen) {
         let chunk = base64Str.slice(offset, offset + chunkSize);
         console.log(
-          `发送分包[${chunkIndex}] offset=${offset}, 长度=${chunk.length}, 总长度=${totalLen}`
+          `发送分包[${chunkIndex}] offset=${offset}, 长度=${
+            chunk.length
+          }, 总长度=${totalLen}, 内容: ${JSON.stringify(chunk)}`
         );
         await device.writeCharacteristicWithResponseForService(
           serviceUUID,
