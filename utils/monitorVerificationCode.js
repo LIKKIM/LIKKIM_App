@@ -1,5 +1,6 @@
 /**
  * 工厂函数：生成 monitorVerificationCode
+ * 这是蓝牙配对流程中的关键监听函数，负责监听设备发送的验证码和状态更新
  * @param {Object} deps - 依赖项
  * @param {string} deps.serviceUUID
  * @param {string} deps.notifyCharacteristicUUID
