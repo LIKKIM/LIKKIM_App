@@ -13,7 +13,7 @@
  *  3. 处理公钥数据更新设备公钥提示，格式如 "pubkeyData:ETH,abcdef123456"
  *  4. 解析加密ID并发送解析结果，接收格式如 "ID:1234ABCD"，解析后发送回设备确认
  *  5. 处理验证状态，发送验证消息。当接收到 "VALID" 时，发送 "validation" 消息给设备
- *  6. 监听PIN码，接收格式如 "PIN:123456"。
+ *  6. 监听PIN码，PIN:<随机验证码>,<Y/N>` 例："PIN:6375,Y"。
  *
  * @param {Object} deps - 依赖项
  * @param {string} deps.serviceUUID

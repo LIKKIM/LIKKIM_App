@@ -243,6 +243,20 @@ export function createHandlePinSubmit({
       console.log("PIN verification failed");
       setVerificationStatus("fail");
 
+      try {
+        const failMessage = "PIN_FAIL";
+        const bufferFail = Buffer.from(failMessage, "utf-8");
+        const base64Fail = bufferFail.toString("base64");
+        await selectedDevice.writeCharacteristicWithResponseForService(
+          serviceUUID,
+          writeCharacteristicUUID,
+          base64Fail
+        );
+        console.log("Sent failure message:", failMessage);
+      } catch (error) {
+        console.log("Error sending failure message:", error);
+      }
+
       if (selectedDevice && selectedDevice.cancelConnection) {
         await selectedDevice.cancelConnection();
         console.log("Disconnected device");
