@@ -5,22 +5,6 @@
  * 蓝牙配对流程整体说明：
  * 该流程结合 utils/monitorVerificationCode.js 中的监听和处理逻辑，完成嵌入式设备的蓝牙配对和通讯。
  *
- * 具体流程：
- * 1. 请求蓝牙和定位权限，确保设备可连接。
- * 2. 调用 device.connect() 连接设备。
- * 3. 调用 device.discoverAllServicesAndCharacteristics() 发现设备服务和特征。
- * 4. 通过 monitorVerificationCode 监听 notifyCharacteristicUUID，接收设备发送的区块链地址、公钥、加密ID、验证状态等数据。
- *    - 监听设备通知，接收并解析数据。例如接收到的字符串可能是 "BTC1A2B3C4D5E6F" 表示比特币地址。
- *    - 根据数据前缀识别区块链地址并更新，如 "BTC" 是比特币，"ETH" 是以太坊，更新对应地址状态。
- *    - 处理公钥数据更新设备公钥提示，格式如 "pubkeyData:ETH,abcdef123456"。
- *    - 解析加密ID并发送解析结果，接收格式如 "ID:1234ABCD"，解析后发送回设备确认。
- *    - 处理验证状态，发送验证消息。当接收到 "VALID" 时，发送 "validation" 消息给设备。
- *    - 监听PIN码，接收格式如 "PIN:123456"。
- *      该值需与用户输入的验证码进行比对，确认匹配后完成配对流程。
- * 5. 发送请求字符串："request" 发送给设备，触发设备返回数据。
- * 6. 监听到设备发送的加密ID后，解析并发送解析结果回设备。
- * 7. 接收设备发送的 "VALID" 状态后，发送 "validation" 消息确认。
- * 8. 接收设备发送的 PIN 码，完成配对流程。
  */
 export function createHandleDevicePress({
   setReceivedAddresses,
