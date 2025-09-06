@@ -189,30 +189,42 @@ const ContactFormModal = ({
                 </Text>
               </ScrollView>
             </View>
-            <TouchableOpacity
-              style={[
-                ActivityScreenStyle.optionButton,
-                {
-                  backgroundColor: isAddressValid
-                    ? buttonBackgroundColor
-                    : disabledButtonBackgroundColor,
-                },
-              ]}
-              onPress={handleNextAfterAddress}
-              disabled={!isAddressValid}
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                width: "100%",
+              }}
             >
-              <Text style={ActivityScreenStyle.submitButtonText}>
-                {t("Next")}
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={ActivityScreenStyle.cancelButton}
-              onPress={() => setContactFormModalVisible(false)}
-            >
-              <Text style={ActivityScreenStyle.cancelButtonText}>
-                {t("Cancel")}
-              </Text>
-            </TouchableOpacity>
+              <TouchableOpacity
+                style={[
+                  ActivityScreenStyle.cancelButton,
+                  { flex: 1, marginRight: 8, borderRadius: 15 },
+                ]}
+                onPress={() => setContactFormModalVisible(false)}
+              >
+                <Text style={ActivityScreenStyle.cancelButtonText}>
+                  {t("Cancel")}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[
+                  ActivityScreenStyle.optionButton,
+                  { flex: 1, marginLeft: 8, borderRadius: 15 },
+                  {
+                    backgroundColor: isAddressValid
+                      ? buttonBackgroundColor
+                      : disabledButtonBackgroundColor,
+                  },
+                ]}
+                onPress={handleNextAfterAddress}
+                disabled={!isAddressValid}
+              >
+                <Text style={ActivityScreenStyle.submitButtonText}>
+                  {t("Next")}
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </KeyboardAvoidingView>
       </Modal>

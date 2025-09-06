@@ -145,22 +145,34 @@ const TransactionConfirmationModal = ({
             </Text>
           </ScrollView>
 
-          <View style={{ marginTop: 20, width: "100%" }}>
+          <View
+            style={{
+              marginTop: 20,
+              flexDirection: "row",
+              justifyContent: "space-between",
+              width: "100%",
+            }}
+          >
             <TouchableOpacity
-              style={ActivityScreenStyle.optionButton}
-              onPress={onConfirm}
-            >
-              <Text style={ActivityScreenStyle.submitButtonText}>
-                {t("Confirm")}
-              </Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={ActivityScreenStyle.cancelButton}
+              style={[
+                ActivityScreenStyle.cancelButton,
+                { flex: 1, marginLeft: 8, borderRadius: 15 },
+              ]}
               onPress={onCancel}
             >
               <Text style={ActivityScreenStyle.cancelButtonText}>
                 {t("Cancel")}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[
+                ActivityScreenStyle.optionButton,
+                { flex: 1, marginLeft: 8, marginBottom: 0, borderRadius: 15 },
+              ]}
+              onPress={onConfirm}
+            >
+              <Text style={ActivityScreenStyle.submitButtonText}>
+                {t("Confirm")}
               </Text>
             </TouchableOpacity>
           </View>
