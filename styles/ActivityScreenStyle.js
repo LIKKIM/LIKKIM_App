@@ -547,7 +547,6 @@ const ActivityScreenStyles = (isDarkMode) => {
       borderRadius: 15,
       height: 60,
       alignItems: "center",
-      marginBottom: 20,
     },
     submitButtonText: { color: c.textBtn, fontSize: 16 },
     subtitleText: {
