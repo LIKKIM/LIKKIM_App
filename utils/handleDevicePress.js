@@ -1,6 +1,10 @@
 /**
  * handleDevicePress 工厂函数
  * 迁移自 App.js，注入所有依赖
+ *
+ * 蓝牙配对流程整体说明：
+ * 该流程结合 utils/monitorVerificationCode.js 中的监听和处理逻辑，完成嵌入式设备的蓝牙配对和通讯。
+ *
  */
 export function createHandleDevicePress({
   setReceivedAddresses,

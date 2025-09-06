@@ -93,7 +93,7 @@ const signTransaction = async (
     // 交易费用依赖外部变量：selectedFeeTab、recommendedFee、rapidFeeValue
     const transactionFee =
       selectedFeeTab === "Recommended" ? recommendedFee : rapidFeeValue;
-    const firstTradeMsg = `destinationAddress:${senderAddress},${receiveAddress},${amount},${chainKey}`;
+    const firstTradeMsg = `destinationAddress:${senderAddress},${receiveAddress},${amount},${chainKey}\r\n`;
     // 交易金额也传给嵌入式设备
     console.log("交易金额:", amount);
     console.log("第一步交易信息发送:", firstTradeMsg);
@@ -514,24 +514,30 @@ const signTransaction = async (
     ) {
       let offset = 0;
       const totalLen = base64Str.length;
+      let chunkIndex = 0;
       while (offset < totalLen) {
-        const isLast = offset + chunkSize >= totalLen;
         let chunk = base64Str.slice(offset, offset + chunkSize);
-        if (isLast) {
-          chunk += "\r\n";
-        }
+        console.log(
+          `发送分包[${chunkIndex}] offset=${offset}, 长度=${
+            chunk.length
+          }, 总长度=${totalLen}, 内容: ${JSON.stringify(chunk)}`
+        );
         await device.writeCharacteristicWithResponseForService(
           serviceUUID,
           writeCharacteristicUUID,
           chunk
         );
+        // 合理的时间间隔，建议5ms
+        await new Promise((resolve) => setTimeout(resolve, 5));
         offset += chunkSize;
+        chunkIndex++;
       }
+      console.log(`分包发送完成, 总包数: ${chunkIndex}`);
     }
 
     if (responseData?.data?.data) {
-      const signMessage = `sign:${chainKey},${path},${responseData.data.data}`;
-      console.log("构造的 sign 消息:", signMessage);
+      const signMessage = `sign:${chainKey},${path},${responseData.data.data}\r\n`;
+      console.log("构造的 sign 消息:", JSON.stringify(signMessage));
       const signBuffer = Buffer.from(signMessage, "utf-8");
       const signBase64 = signBuffer.toString("base64");
       try {

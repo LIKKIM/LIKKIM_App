@@ -215,11 +215,8 @@ function ActivityScreen() {
   const [pinCode, setPinCode] = useState("");
   const [verificationStatus, setVerificationStatus] = useState(null);
   const [isAddressValid, setIsAddressValid] = useState(false);
-  const [verificationSuccessModalVisible, setVerificationSuccessModalVisible] =
-    useState(false);
   const [isVerifyingAddress, setIsVerifyingAddress] = useState(false);
-  const [verificationFailModalVisible, setVerificationFailModalVisible] =
-    useState(false);
+  const [receivedAddresses, setReceivedAddresses] = useState({});
   const [ContactFormModalVisible, setContactFormModalVisible] = useState(false);
   const [detectedNetwork, setDetectedNetwork] = useState("");
   const [fee, setFee] = useState("");
@@ -574,8 +571,6 @@ function ActivityScreen() {
     }
   };
 
-  // 假设在组件中定义了状态：
-  const [receivedAddresses, setReceivedAddresses] = useState({});
   // verificationStatus 用于表示整体状态
   // 例如：setVerificationStatus("waiting") 或 setVerificationStatus("success")
 
@@ -687,7 +682,9 @@ function ActivityScreen() {
               console.log("交易广播成功:", responseData);
               // 向嵌入式返回 BCAST_OK
               try {
-                const msg = Buffer.from("BCAST_OK", "utf-8").toString("base64");
+                const msg = Buffer.from("BCAST_OK\r\n", "utf-8").toString(
+                  "base64"
+                );
                 await device.writeCharacteristicWithResponseForService(
                   serviceUUID,
                   writeCharacteristicUUID,
@@ -708,7 +705,7 @@ function ActivityScreen() {
               console.log("交易广播失败:", responseData);
               // 向嵌入式返回 BCAST_FAIL
               try {
-                const msg = Buffer.from("BCAST_FAIL", "utf-8").toString(
+                const msg = Buffer.from("BCAST_FAIL\r\n", "utf-8").toString(
                   "base64"
                 );
                 await device.writeCharacteristicWithResponseForService(
@@ -732,7 +729,9 @@ function ActivityScreen() {
             console.log("交易广播时出错:", broadcastError.message);
             // 向嵌入式返回 BCAST_FAIL
             try {
-              const msg = Buffer.from("BCAST_FAIL", "utf-8").toString("base64");
+              const msg = Buffer.from("BCAST_FAIL\r\n", "utf-8").toString(
+                "base64"
+              );
               await device.writeCharacteristicWithResponseForService(
                 serviceUUID,
                 writeCharacteristicUUID,
@@ -906,9 +905,10 @@ function ActivityScreen() {
   const handleNextAfterAddress = () => {
     setAmount("");
     setContactFormModalVisible(false);
-    setAmountModalVisible(true);
+    setTimeout(() => {
+      setAmountModalVisible(true);
+    }, 400); // 等待关闭动画完成
   };
-
   const handleNextAfterAmount = () => {
     setAmountModalVisible(false);
     setConfirmModalVisible(true);

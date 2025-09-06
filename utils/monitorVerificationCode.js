@@ -1,5 +1,20 @@
 /**
  * 工厂函数：生成 monitorVerificationCode
+ * 这是蓝牙配对流程中的关键监听函数，负责监听设备发送的验证码和状态更新
+ *
+ * 通讯方向与内容：
+ *  - 设备通过 notifyCharacteristicUUID 通知发送数据，内容包括区块链地址、公钥、加密ID、验证状态等
+ *  - 应用端监听这些通知，解析数据并更新状态
+ *  - 应用端根据状态发送相应命令，如发送解析后的设备码、请求字符串、验证消息等
+ *
+ * 通讯步骤：
+ *  1. 监听设备通知，接收并解析数据。例如接收到的字符串可能是 "BTC1A2B3C4D5E6F" 表示比特币地址
+ *  2. 根据数据前缀识别区块链地址并更新，如 "BTC" 是比特币，"ETH" 是以太坊，更新对应地址状态
+ *  3. 处理公钥数据更新设备公钥提示，格式如 "pubkeyData:ETH,abcdef123456"
+ *  4. 解析加密ID并发送解析结果，接收格式如 "ID:1234ABCD"，解析后发送回设备确认
+ *  5. 处理验证状态，发送验证消息。当接收到 "VALID" 时，发送 "validation" 消息给设备
+ *  6. 监听PIN码，PIN:<随机验证码>,<Y/N>` 例："PIN:6375,Y"。
+ *
  * @param {Object} deps - 依赖项
  * @param {string} deps.serviceUUID
  * @param {string} deps.notifyCharacteristicUUID

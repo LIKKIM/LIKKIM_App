@@ -50,9 +50,9 @@ export async function confirmDeleteWallet({
           ? "function"
           : setInitialAdditionalCryptos
       );
-    console.log("AS.cryptoCards:", asCryptoCards);
+    /*     console.log("AS.cryptoCards:", asCryptoCards);
     console.log("AS.addedCryptos:", asAddedCryptos);
-    console.log("AS.initialAdditionalCryptos:", asInitialAdditionalCryptos);
+    console.log("AS.initialAdditionalCryptos:", asInitialAdditionalCryptos); */
 
     const cryptoCardsData = asCryptoCards;
     const parsedCryptoCards = JSON.parse(cryptoCardsData);
