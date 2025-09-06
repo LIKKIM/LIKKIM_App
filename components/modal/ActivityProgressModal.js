@@ -7,6 +7,7 @@ import {
   Image,
   TouchableOpacity,
   Animated,
+  Clipboard,
 } from "react-native";
 import { BlurView } from "expo-blur";
 
@@ -55,10 +56,32 @@ const ActivityProgressModal = ({
             style={{ width: 120, height: 120 }}
           />
           <Text
-            style={[ActivityScreenStyle.modalSubtitle, { marginBottom: 20 }]}
+            style={[ActivityScreenStyle.modalSubtitle, { marginBottom: 10 }]}
           >
             {modalStatus.subtitle}
           </Text>
+          {modalStatus.txHash && (
+            <TouchableOpacity
+              onPress={async () => {
+                await Clipboard.setString(modalStatus.txHash);
+                // 可以添加一个提示，告诉用户已复制
+                alert(t("Transaction hash copied to clipboard"));
+              }}
+            >
+              <Text
+                style={[
+                  ActivityScreenStyle.modalSubtitle,
+                  { marginBottom: 20, fontSize: 12, color: "#666" },
+                ]}
+              >
+                {t("Transaction Hash")}: {modalStatus.txHash}
+                {"\n"}
+                <Text style={{ color: "#007AFF", fontSize: 10 }}>
+                  {t("(Tap to copy)")}
+                </Text>
+              </Text>
+            </TouchableOpacity>
+          )}
           <Animated.View
             style={{ width: "100%", transform: [{ scale: scaleAnim }] }}
           >

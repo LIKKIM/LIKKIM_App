@@ -502,7 +502,6 @@ const ActivityScreenStyles = (isDarkMode) => {
     pendingModalView: {
       ...modalPanelBase,
       backgroundColor: c.modalBg,
-      height: 340,
       justifyContent: "space-between",
     },
     SecurityCodeModalTitle: {

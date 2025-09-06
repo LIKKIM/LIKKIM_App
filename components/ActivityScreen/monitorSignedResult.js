@@ -132,12 +132,15 @@ const createMonitorSignedResult = ({
               } catch (err) {
                 console.log("发送 BCAST_OK 时出错:", err);
               }
+              // 从响应中获取交易哈希
+              const txHash = responseData.data;
               setModalStatus({
                 title: t("Transaction Successful"),
                 subtitle: t(
                   "Your transaction was successfully broadcasted on the LUKKEY device."
                 ),
                 image: require("../../assets/gif/Success.gif"),
+                txHash: txHash, // 添加交易哈希到 modalStatus
               });
             } else {
               console.log("交易广播失败:", responseData);
