@@ -515,28 +515,41 @@ const signTransaction = async (
       let offset = 0;
       const totalLen = base64Str.length;
       let chunkIndex = 0;
+      const totalChunks = Math.ceil(totalLen / chunkSize);
+
       while (offset < totalLen) {
+        const isLastChunk = chunkIndex === totalChunks - 1;
         let chunk = base64Str.slice(offset, offset + chunkSize);
+
+        // 只在最后一个包添加 \r\n
+        if (isLastChunk) {
+          chunk = chunk + "\r\n";
+        }
+
         console.log(
-          `发送分包[${chunkIndex}] offset=${offset}, 长度=${
+          `发送分包[${chunkIndex}/${totalChunks}] offset=${offset}, 长度=${
             chunk.length
-          }, 总长度=${totalLen}, 内容: ${JSON.stringify(chunk)}`
+          }, 总长度=${totalLen}, 是否最后一包=${isLastChunk}, 内容: ${JSON.stringify(
+            chunk
+          )}`
         );
+
         await device.writeCharacteristicWithResponseForService(
           serviceUUID,
           writeCharacteristicUUID,
           chunk
         );
+
         // 合理的时间间隔，建议5ms
         await new Promise((resolve) => setTimeout(resolve, 5));
         offset += chunkSize;
         chunkIndex++;
       }
-      console.log(`分包发送完成, 总包数: ${chunkIndex}`);
+      console.log(`分包发送完成, 总包数: ${totalChunks}`);
     }
 
     if (responseData?.data?.data) {
-      const signMessage = `sign:${chainKey},${path},${responseData.data.data}\r\n`;
+      const signMessage = `sign:${chainKey},${path},${responseData.data.data}`;
       console.log("构造的 sign 消息:", JSON.stringify(signMessage));
       const signBuffer = Buffer.from(signMessage, "utf-8");
       const signBase64 = signBuffer.toString("base64");
