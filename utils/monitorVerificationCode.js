@@ -31,6 +31,7 @@
 function createMonitorVerificationCode({
   serviceUUID,
   notifyCharacteristicUUID,
+  writeCharacteristicUUID,
   prefixToShortName,
   updateCryptoAddress,
   setReceivedAddresses,
@@ -133,7 +134,7 @@ function createMonitorVerificationCode({
               bufferValidationMessage.toString("base64");
             await device.writeCharacteristicWithResponseForService(
               serviceUUID,
-              deps.writeCharacteristicUUID, // 兼容性：如果有 writeCharacteristicUUID
+              writeCharacteristicUUID,
               base64ValidationMessage
             );
             console.log(`Sent 'validation' to device`);
