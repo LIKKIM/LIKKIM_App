@@ -8,8 +8,10 @@ import {
   TouchableOpacity,
   Animated,
   Clipboard,
+  Alert,
 } from "react-native";
 import { BlurView } from "expo-blur";
+import { MaterialIcons } from "@expo/vector-icons";
 
 const ActivityProgressModal = ({
   visible,
@@ -61,26 +63,46 @@ const ActivityProgressModal = ({
             {modalStatus.subtitle}
           </Text>
           {modalStatus.txHash && (
-            <TouchableOpacity
-              onPress={async () => {
-                await Clipboard.setString(modalStatus.txHash);
-                // 可以添加一个提示，告诉用户已复制
-                alert(t("Transaction hash copied to clipboard"));
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                marginBottom: 20,
               }}
             >
-              <Text
-                style={[
-                  ActivityScreenStyle.modalSubtitle,
-                  { marginBottom: 20, fontSize: 12, color: "#666" },
-                ]}
-              >
-                {t("Transaction Hash")}: {modalStatus.txHash}
-                {"\n"}
-                <Text style={{ color: "#007AFF", fontSize: 10 }}>
-                  {t("(Tap to copy)")}
+              <View style={{ flex: 1 }}>
+                <Text
+                  style={[
+                    ActivityScreenStyle.modalSubtitle,
+                    { fontSize: 12, color: "#666", textAlign: "left" },
+                  ]}
+                >
+                  {t("Transaction Hash")}:
                 </Text>
-              </Text>
-            </TouchableOpacity>
+                <Text
+                  style={[
+                    ActivityScreenStyle.modalSubtitle,
+                    {
+                      fontSize: 12,
+                      color: "#666",
+                      textAlign: "left",
+                      marginTop: 4,
+                    },
+                  ]}
+                >
+                  {modalStatus.txHash}
+                </Text>
+              </View>
+              <TouchableOpacity
+                onPress={async () => {
+                  await Clipboard.setString(modalStatus.txHash);
+                  Alert.alert("", t("Transaction hash copied to clipboard"));
+                }}
+                style={{ padding: 8 }}
+              >
+                <MaterialIcons name="content-copy" size={20} color="#666" />
+              </TouchableOpacity>
+            </View>
           )}
           <Animated.View
             style={{ width: "100%", transform: [{ scale: scaleAnim }] }}
